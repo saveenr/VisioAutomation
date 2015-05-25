@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FB28507D-C378-42B4-9050-2FBED2CD68FE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VisioAutomation.UI</RootNamespace>
+    <AssemblyName>VisioAutomation.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Msagl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=640c57aa40e7ae7d, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioAutomation2010.1.6.0\lib\net40\Microsoft.Msagl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Visio, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="VisioAutomation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioAutomation2010.1.6.0\lib\net40\VisioAutomation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicFillControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BasicFillControl.Designer.cs">
+      <DependentUpon>BasicFillControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPickerUtil.cs" />
+    <Compile Include="ColorPicker_Hook.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="ColorPicker_WinUtil.cs" />
+    <Compile Include="ColorUtil.cs" />
+    <Compile Include="DirectionRelative.cs" />
+    <Compile Include="FilenamePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FilenamePicker.Designer.cs">
+      <DependentUpon>FilenamePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FillControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FillControl.Designer.cs">
+      <DependentUpon>FillControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FillPattern.cs" />
+    <Compile Include="FormBasicFillTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBasicFillTools.Designer.cs">
+      <DependentUpon>FormBasicFillTools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TransparencyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TransparencyControl.Designer.cs">
+      <DependentUpon>TransparencyControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinFormUtil.cs">
+    </Compile>
+    <Compile Include="PopUp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ColorSelectorLarge.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColorSelectorLarge.Designer.cs">
+      <DependentUpon>ColorSelectorLarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorSelectorSmall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColorSelectorSmall.Designer.cs">
+      <DependentUpon>ColorSelectorSmall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ColorSelectorMedium.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColorSelectorMedium.Designer.cs">
+      <DependentUpon>ColorSelectorMedium.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Slider.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Slider.Designer.cs">
+      <DependentUpon>Slider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnumerableUtil.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicFillControl.resx">
+      <DependentUpon>BasicFillControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColorSelectorLarge.resx">
+      <DependentUpon>ColorSelectorLarge.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColorSelectorMedium.resx">
+      <DependentUpon>ColorSelectorMedium.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FillControl.resx">
+      <DependentUpon>FillControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBasicFillTools.resx">
+      <DependentUpon>FormBasicFillTools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Slider.resx">
+      <DependentUpon>Slider.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColorSelectorSmall.resx">
+      <DependentUpon>ColorSelectorSmall.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransparencyControl.resx">
+      <DependentUpon>TransparencyControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FilenamePicker.resx">
+      <DependentUpon>FilenamePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="Resources\eyedropper.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CommonControls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
