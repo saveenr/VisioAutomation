@@ -8,8 +8,8 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public UserDefinedCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionUser);
-            this.Value = sec.AddCell(ShapeSheet.SRCConstants.User_Value, nameof(ShapeSheet.SRCConstants.User_Value));
-            this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.User_Prompt, nameof(ShapeSheet.SRCConstants.User_Prompt));
+            this.Value = sec.AddCell(ShapeSheet.SRCConstants.User_Value, "User");
+            this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.User_Prompt, "Prompt");
         }
 
         public VisioAutomation.Shapes.UserDefinedCells.UserDefinedCell GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<string>> row)

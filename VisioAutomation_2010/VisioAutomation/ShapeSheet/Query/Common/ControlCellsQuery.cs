@@ -14,14 +14,14 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public ControlCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionControls);
-            this.CanGlue = sec.AddCell(ShapeSheet.SRCConstants.Controls_CanGlue, nameof(ShapeSheet.SRCConstants.Controls_CanGlue));
-            this.Tip = sec.AddCell(ShapeSheet.SRCConstants.Controls_Tip, nameof(ShapeSheet.SRCConstants.Controls_Tip));
-            this.X = sec.AddCell(ShapeSheet.SRCConstants.Controls_X, nameof(ShapeSheet.SRCConstants.Controls_X));
-            this.Y = sec.AddCell(ShapeSheet.SRCConstants.Controls_Y, nameof(ShapeSheet.SRCConstants.Controls_Y));
-            this.YBehavior = sec.AddCell(ShapeSheet.SRCConstants.Controls_YCon, nameof(ShapeSheet.SRCConstants.Controls_YCon));
-            this.XBehavior = sec.AddCell(ShapeSheet.SRCConstants.Controls_XCon, nameof(ShapeSheet.SRCConstants.Controls_XCon));
-            this.XDynamics = sec.AddCell(ShapeSheet.SRCConstants.Controls_XDyn, nameof(ShapeSheet.SRCConstants.Controls_XDyn));
-            this.YDynamics = sec.AddCell(ShapeSheet.SRCConstants.Controls_YDyn, nameof(ShapeSheet.SRCConstants.Controls_YDyn));
+            this.CanGlue = sec.AddCell(ShapeSheet.SRCConstants.Controls_CanGlue, "Controls_CanGlue");
+            this.Tip = sec.AddCell(ShapeSheet.SRCConstants.Controls_Tip, "Controls_Tip");
+            this.X = sec.AddCell(ShapeSheet.SRCConstants.Controls_X, "Controls_X");
+            this.Y = sec.AddCell(ShapeSheet.SRCConstants.Controls_Y, "Controls_Y");
+            this.YBehavior = sec.AddCell(ShapeSheet.SRCConstants.Controls_YCon, "Controls_YCon");
+            this.XBehavior = sec.AddCell(ShapeSheet.SRCConstants.Controls_XCon, "Controls_XCon");
+            this.XDynamics = sec.AddCell(ShapeSheet.SRCConstants.Controls_XDyn, "Controls_XDyn");
+            this.YDynamics = sec.AddCell(ShapeSheet.SRCConstants.Controls_YDyn, "Controls_YDyn");
         }
 
         public VisioAutomation.Shapes.Controls.ControlCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)

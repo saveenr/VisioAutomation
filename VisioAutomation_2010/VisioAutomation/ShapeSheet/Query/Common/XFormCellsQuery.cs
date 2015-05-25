@@ -12,13 +12,13 @@ namespace VisioAutomation.ShapeSheet.Query.Common
 
         public XFormCellsQuery()
         {
-            this.PinX = this.AddCell(ShapeSheet.SRCConstants.PinX, nameof(ShapeSheet.SRCConstants.PinX));
-            this.PinY = this.AddCell(ShapeSheet.SRCConstants.PinY, nameof(ShapeSheet.SRCConstants.PinY));
-            this.LocPinX = this.AddCell(ShapeSheet.SRCConstants.LocPinX, nameof(ShapeSheet.SRCConstants.LocPinX));
-            this.LocPinY = this.AddCell(ShapeSheet.SRCConstants.LocPinY, nameof(ShapeSheet.SRCConstants.LocPinY));
-            this.Width = this.AddCell(ShapeSheet.SRCConstants.Width, nameof(ShapeSheet.SRCConstants.Width));
-            this.Height = this.AddCell(ShapeSheet.SRCConstants.Height, nameof(ShapeSheet.SRCConstants.Height));
-            this.Angle = this.AddCell(ShapeSheet.SRCConstants.Angle, nameof(ShapeSheet.SRCConstants.Angle));
+            this.PinX = this.AddCell(ShapeSheet.SRCConstants.PinX, "PinX");
+            this.PinY = this.AddCell(ShapeSheet.SRCConstants.PinY, "PinY");
+            this.LocPinX = this.AddCell(ShapeSheet.SRCConstants.LocPinX, "LocPinX");
+            this.LocPinY = this.AddCell(ShapeSheet.SRCConstants.LocPinY, "LocPinY");
+            this.Width = this.AddCell(ShapeSheet.SRCConstants.Width, "Width");
+            this.Height = this.AddCell(ShapeSheet.SRCConstants.Height, "Height");
+            this.Angle = this.AddCell(ShapeSheet.SRCConstants.Angle, "Angle");
         }
 
         public VisioAutomation.Shapes.XFormCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)

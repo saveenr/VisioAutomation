@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (name == null)
             {
-                throw new System.ArgumentException(nameof(name));
+                throw new System.ArgumentException("name");
             }
 
             var col = this.CellColumns.Add(src, name);

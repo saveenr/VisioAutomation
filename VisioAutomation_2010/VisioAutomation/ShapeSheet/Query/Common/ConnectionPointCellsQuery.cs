@@ -11,13 +11,11 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public ConnectionPointCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionConnectionPts);
-            this.DirX = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirX, nameof(ShapeSheet.SRCConstants.Connections_DirX));
-            this.DirY = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirY, nameof(ShapeSheet.SRCConstants.Connections_DirY));
-            this.Type = sec.AddCell(ShapeSheet.SRCConstants.Connections_Type, nameof(ShapeSheet.SRCConstants.Connections_Type));
-            this.X = sec.AddCell(ShapeSheet.SRCConstants.Connections_X, nameof(ShapeSheet.SRCConstants.Connections_X));
-            this.Y = sec.AddCell(ShapeSheet.SRCConstants.Connections_Y, nameof(ShapeSheet.SRCConstants.Connections_Y));
-
-
+            this.DirX = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirX, "Connections_DirX");
+            this.DirY = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirY, "Connections_DirY");
+            this.Type = sec.AddCell(ShapeSheet.SRCConstants.Connections_Type, "Connections_Type");
+            this.X = sec.AddCell(ShapeSheet.SRCConstants.Connections_X, "Connections_X");
+            this.Y = sec.AddCell(ShapeSheet.SRCConstants.Connections_Y, "Connections_Y");
         }
 
         public VisioAutomation.Shapes.Connections.ConnectionPointCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
