@@ -22,8 +22,6 @@ namespace VisioPowerShell.Commands.Get
             {
                 // return selected shapes
 
-                this.WriteVerbose("NUll");
-
                 if (this.Recursive)
                 {
                     this.WriteVerbose("Returning selected shapes (nested)");
