@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Format
 {
-    [Cmdlet(SMA.VerbsCommon.Format, "VisioText")]
+    [Cmdlet(VerbsCommon.Format, "VisioText")]
     public class Format_VisioText : VisioCmdlet
     {
 
@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands.Format
         public string  Font { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Togglecase { get; set; }
+        public SwitchParameter Togglecase { get; set; }
 
         protected override void ProcessRecord()
         {

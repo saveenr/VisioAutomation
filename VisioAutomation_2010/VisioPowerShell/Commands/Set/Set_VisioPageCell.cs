@@ -6,17 +6,17 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Set
 {
-    [Cmdlet(SMA.VerbsCommon.Set, "VisioPageCell")]
+    [Cmdlet(VerbsCommon.Set, "VisioPageCell")]
     public class Set_VisioPageCell: VisioCmdlet
     {
         [Parameter(Mandatory = true,Position=0)] 
         public Hashtable Hashtable  { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter BlastGuards { get; set; }
+        public SwitchParameter BlastGuards { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter TestCircular { get; set; }
+        public SwitchParameter TestCircular { get; set; }
 
         [Parameter(Mandatory = false)]
         public IVisio.Page[] Pages { get; set; }

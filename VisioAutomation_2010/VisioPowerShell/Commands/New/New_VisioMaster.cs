@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(SMA.VerbsCommon.New, "VisioMaster")]
+    [Cmdlet(VerbsCommon.New, "VisioMaster")]
     public class New_VisioMaster : VisioCmdlet
     {
         [Parameter(Mandatory = false)]

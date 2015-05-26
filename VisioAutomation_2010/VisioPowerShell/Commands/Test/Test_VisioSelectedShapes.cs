@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Test
 {
-    [Cmdlet(SMA.VerbsDiagnostic.Test, "VisioSelectedShapes")]
+    [Cmdlet(VerbsDiagnostic.Test, "VisioSelectedShapes")]
     public class Test_VisioSelectedShapes: VisioCmdlet
     {
         // checks to see if we have any selected shapes

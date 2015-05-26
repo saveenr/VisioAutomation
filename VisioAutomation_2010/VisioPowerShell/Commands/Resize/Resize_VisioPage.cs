@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Resize
 {
-    [Cmdlet(SMA.VerbsCommon.Resize, "VisioPage")]
+    [Cmdlet(VerbsCommon.Resize, "VisioPage")]
     public class Resize_VisioPage : VisioCmdlet
     {
         [Parameter(Mandatory = false)] public double Width = -1;
@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.Resize
         [Parameter(Mandatory = false)] public double Height = -1;
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter FitContents;
+        public SwitchParameter FitContents;
 
         [Parameter(Mandatory = false)]
         public double BorderWidth { get; set; }

@@ -8,7 +8,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(SMA.VerbsCommon.Get, "VisioPageCell")]
+    [Cmdlet(VerbsCommon.Get, "VisioPageCell")]
     public class Get_VisioPageCell : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position = 0)]
@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands.Get
         public IVisio.Page Page { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter GetResults;
+        public SwitchParameter GetResults;
 
         [Parameter(Mandatory = false)]
         public Model.ResultType ResultType = Model.ResultType.String;
@@ -44,13 +44,13 @@ namespace VisioPowerShell.Commands.Get
         {
             if (Cells == null)
             {
-                throw new ArgumentNullException("Cells");
+                throw new ArgumentNullException(nameof(Cells));
             }
 
             if (Cells.Count< 1)
             {
                 string msg = "Must provide at least one cell name";
-                throw new ArgumentException(msg,"Cells");
+                throw new ArgumentException(msg,nameof(Cells));
             }
         }
     }

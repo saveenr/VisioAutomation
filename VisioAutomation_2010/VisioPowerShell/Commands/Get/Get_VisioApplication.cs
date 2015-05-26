@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(SMA.VerbsCommon.Get, "VisioApplication")]
+    [Cmdlet(VerbsCommon.Get, "VisioApplication")]
     public class Get_VisioApplication : VisioCmdlet
     {
         protected override void ProcessRecord()

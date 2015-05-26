@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(SMA.VerbsCommon.Get, "VisioMaster")]
+    [Cmdlet(VerbsCommon.Get, "VisioMaster")]
     public class Get_VisioMaster : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]
@@ -23,13 +23,13 @@ namespace VisioPowerShell.Commands.Get
                 // master name is specified
                 if (doc_specified)
                 {
-                    ((SMA.Cmdlet) this).WriteVerbose("Get master from specified document");
+                    ((Cmdlet) this).WriteVerbose("Get master from specified document");
                     var masters = this.client.Master.GetMastersByName(this.Name, this.Document);
                     this.WriteObject(masters,true);
                 }
                 else
                 {
-                    ((SMA.Cmdlet) this).WriteVerbose("Get master from active document");
+                    ((Cmdlet) this).WriteVerbose("Get master from active document");
                     var masters = this.client.Master.GetMastersByName(this.Name);
                     this.WriteObject(masters,true);
                 }
@@ -39,13 +39,13 @@ namespace VisioPowerShell.Commands.Get
                 // master name is not specified
                 if (doc_specified)
                 {
-                    ((SMA.Cmdlet) this).WriteVerbose("Get all masters from specified document");
+                    ((Cmdlet) this).WriteVerbose("Get all masters from specified document");
                     var masters = this.client.Master.Get(this.Document);
                     this.WriteObject(masters, false);                    
                 }
                 else
                 {
-                    ((SMA.Cmdlet) this).WriteVerbose("Get all masters from active document");
+                    ((Cmdlet) this).WriteVerbose("Get all masters from active document");
                     var masters = this.client.Master.Get();
                     this.WriteObject(masters, false);                   
                 }

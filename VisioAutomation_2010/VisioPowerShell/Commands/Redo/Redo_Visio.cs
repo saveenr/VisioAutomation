@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Redo
 {
-    [Cmdlet(SMA.VerbsCommon.Redo, "Visio")]
+    [Cmdlet(VerbsCommon.Redo, "Visio")]
     public class Redo_Visio : VisioCmdlet
     {
         protected override void ProcessRecord()

@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Set
 {
-    [Cmdlet(SMA.VerbsCommon.Set, "VisioPageLayout")]
+    [Cmdlet(VerbsCommon.Set, "VisioPageLayout")]
     public class Set_VisioPageLayout : VisioCmdlet
     {
         [Parameter(Mandatory = false)] 

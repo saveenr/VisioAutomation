@@ -12,11 +12,6 @@ namespace VisioPowerShell
         private static CellSRCDictionary shape_cellmap;
         private static CellSRCDictionary page_cellmap;
 
-        public CellSRCDictionary() :
-            base()
-        {
-        }
-
         public static CellSRCDictionary GetCellMapForShapes()
         {
             if (CellSRCDictionary.shape_cellmap == null)

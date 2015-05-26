@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(SMA.VerbsCommon.New, "VisioOrgChart")]
+    [Cmdlet(VerbsCommon.New, "VisioOrgChart")]
     public class New_VisioOrgChart : VisioCmdlet
     {
         protected override void ProcessRecord()

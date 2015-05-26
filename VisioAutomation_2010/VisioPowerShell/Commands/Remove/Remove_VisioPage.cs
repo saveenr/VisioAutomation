@@ -4,14 +4,14 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Remove
 {
-    [Cmdlet(SMA.VerbsCommon.Remove, "VisioPage")]
+    [Cmdlet(VerbsCommon.Remove, "VisioPage")]
     public class Remove_VisioPage : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position=0, ValueFromPipeline = true)]
         public IVisio.Page[] Pages;
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Renumber;
+        public SwitchParameter Renumber;
 
         protected override void ProcessRecord()
         {

@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Format
 {
-    [Cmdlet(SMA.VerbsCommon.Format, "VisioShape")]
+    [Cmdlet(VerbsCommon.Format, "VisioShape")]
     public class Format_VisioShape : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
@@ -15,10 +15,10 @@ namespace VisioPowerShell.Commands.Format
         public double NudgeY { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter DistributeHorizontal { get; set; }
+        public SwitchParameter DistributeHorizontal { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter DistributeVertical { get; set; }
+        public SwitchParameter DistributeVertical { get; set; }
 
         [Parameter(Mandatory = false)]
         public Model.VerticalAlignment AlignVertical = Model.VerticalAlignment.None;

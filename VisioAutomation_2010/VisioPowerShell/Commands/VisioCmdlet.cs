@@ -56,7 +56,7 @@ namespace VisioPowerShell.Commands
             if (!File.Exists(file))
             {
                 this.WriteVerbose("Filename: {0}",file);
-                this.WriteVerbose("Abs Filename: {0}", System.IO.Path.GetFullPath(file));
+                this.WriteVerbose("Abs Filename: {0}", Path.GetFullPath(file));
                 var exc = new FileNotFoundException(file);
                 var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
                 this.WriteError(er);

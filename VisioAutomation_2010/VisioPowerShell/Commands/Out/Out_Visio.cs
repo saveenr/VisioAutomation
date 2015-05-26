@@ -7,7 +7,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Out
 {
-    [Cmdlet(SMA.VerbsData.Out, "Visio")]
+    [Cmdlet(VerbsData.Out, "Visio")]
     public class Out_Visio : VisioCmdlet
     {
         [Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]

@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Remove
 {
-    [Cmdlet(SMA.VerbsCommon.Remove, "VisioCustomProperty")]
+    [Cmdlet(VerbsCommon.Remove, "VisioCustomProperty")]
     public class Remove_VisioCustomProperty : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

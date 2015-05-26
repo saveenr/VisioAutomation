@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Undo
 {
-    [Cmdlet(SMA.VerbsCommon.Undo, "Visio")]
+    [Cmdlet(VerbsCommon.Undo, "Visio")]
     public class Undo_Visio : VisioCmdlet
     {
         protected override void ProcessRecord()

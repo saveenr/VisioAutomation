@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(SMA.VerbsCommon.New, "VisioConnection")]
+    [Cmdlet(VerbsCommon.New, "VisioConnection")]
     public class New_VisioConnection : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

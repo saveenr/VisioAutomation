@@ -6,17 +6,17 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Set
 {
-    [Cmdlet(SMA.VerbsCommon.Set, "VisioShapeCell")]
+    [Cmdlet(VerbsCommon.Set, "VisioShapeCell")]
     public class Set_VisioShapeCell : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position = 0)]
         public Hashtable Hashtable { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter BlastGuards { get; set; }
+        public SwitchParameter BlastGuards { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter TestCircular { get; set; }
+        public SwitchParameter TestCircular { get; set; }
 
         [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }

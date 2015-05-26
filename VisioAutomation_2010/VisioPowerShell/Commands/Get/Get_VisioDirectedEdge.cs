@@ -5,17 +5,17 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
+    [Cmdlet(VerbsCommon.Get, "VisioDirectedEdge")]
     public class Get_VisioDirectedEdge : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter GetShapeObjects { get; set; }
+        public SwitchParameter GetShapeObjects { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Raw { get; set; }
+        public SwitchParameter Raw { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter TreatUndirectedAsBidirectional { get; set; }
+        public SwitchParameter TreatUndirectedAsBidirectional { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -42,14 +42,9 @@ namespace VisioPowerShell.Commands.Get
             }
             else
             {
-                if (this.TreatUndirectedAsBidirectional)
-                {
-                    flag = VACONNECT.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional;
-                }
-                else
-                {
-                    flag = VACONNECT.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
-                }
+                flag = this.TreatUndirectedAsBidirectional ? 
+                    VACONNECT.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional 
+                    : VACONNECT.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
             }
             return flag;
         }

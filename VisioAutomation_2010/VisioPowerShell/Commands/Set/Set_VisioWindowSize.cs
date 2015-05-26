@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Set
 {
-    [Cmdlet(SMA.VerbsCommon.Set, "VisioWindowSize")]
+    [Cmdlet(VerbsCommon.Set, "VisioWindowSize")]
     public class Set_VisioWindowSize : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

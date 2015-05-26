@@ -5,7 +5,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Export
 {
-    [Cmdlet(SMA.VerbsData.Export, "VisioSelectionAsXHTML")]
+    [Cmdlet(VerbsData.Export, "VisioSelectionAsXHTML")]
     public class Export_VisioSelectionAsXHTML : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands.Export
         public string Filename;
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Overwrite;
+        public SwitchParameter Overwrite;
 
         protected override void ProcessRecord()
         {
@@ -26,7 +26,7 @@ namespace VisioPowerShell.Commands.Export
                 }
                 else
                 {
-                    string msg = string.Format("File \"{0}\" already exists", this.Filename);
+                    string msg = $"File \"{this.Filename}\" already exists";
                     var exc = new ArgumentException(msg);
                     throw exc;
                 }

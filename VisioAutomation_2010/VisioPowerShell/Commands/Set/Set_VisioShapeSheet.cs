@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Set
 {
-    [Cmdlet(SMA.VerbsCommon.Set, "VisioShapeSheet")]
+    [Cmdlet(VerbsCommon.Set, "VisioShapeSheet")]
     public class Set_VisioShapeSheet : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -14,13 +14,13 @@ namespace VisioPowerShell.Commands.Set
         public string[] Value { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter BlastGuards;
+        public SwitchParameter BlastGuards;
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter TestCircular;
+        public SwitchParameter TestCircular;
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter SetResults;
+        public SwitchParameter SetResults;
 
         [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;

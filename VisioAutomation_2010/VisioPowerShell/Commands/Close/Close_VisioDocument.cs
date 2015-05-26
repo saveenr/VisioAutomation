@@ -5,14 +5,14 @@ using VA=VisioAutomation;
 
 namespace VisioPowerShell.Commands.Close
 {
-    [Cmdlet(SMA.VerbsCommon.Close, "VisioDocument")]
+    [Cmdlet(VerbsCommon.Close, "VisioDocument")]
     public class Close_VisioDocument : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
         public IVisio.Document[] Documents;
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Force;
+        public SwitchParameter Force;
 
         protected override void ProcessRecord()
         {

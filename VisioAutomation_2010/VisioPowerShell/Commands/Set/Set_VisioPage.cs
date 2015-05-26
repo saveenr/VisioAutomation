@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Set
 {
-    [Cmdlet(SMA.VerbsCommon.Set, "VisioPage")]
+    [Cmdlet(VerbsCommon.Set, "VisioPage")]
     public class Set_VisioPage : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Name")]

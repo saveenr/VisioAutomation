@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(SMA.VerbsCommon.New, "VisioAreaChart")]
+    [Cmdlet(VerbsCommon.New, "VisioAreaChart")]
     public class New_VisioAreaChart : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

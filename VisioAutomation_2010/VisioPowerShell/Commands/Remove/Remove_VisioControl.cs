@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Remove
 {
-    [Cmdlet(SMA.VerbsCommon.Remove, "VisioControl")]
+    [Cmdlet(VerbsCommon.Remove, "VisioControl")]
     public class Remove_VisioControl : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Test
 {
-    [Cmdlet(SMA.VerbsDiagnostic.Test, "VisioDocument")]
+    [Cmdlet(VerbsDiagnostic.Test, "VisioDocument")]
     public class Test_VisioDocument: VisioCmdlet
     {
         // checks to see if we hae an active drawing open

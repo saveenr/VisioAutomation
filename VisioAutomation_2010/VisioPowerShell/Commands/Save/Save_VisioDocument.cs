@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Save
 {
-    [Cmdlet(SMA.VerbsData.Save, "VisioDocument")]
+    [Cmdlet(VerbsData.Save, "VisioDocument")]
     public class Save_VisioDocument : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]

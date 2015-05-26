@@ -5,7 +5,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(SMA.VerbsCommon.New, "VisioShape")]
+    [Cmdlet(VerbsCommon.New, "VisioShape")]
     public class New_VisioShape : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -14,11 +14,11 @@ namespace VisioPowerShell.Commands.New
         [Parameter(Position = 1, Mandatory = true)]
         public double [] Points { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public string[] Names { get; set; }
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter NoSelect=false;
+        public SwitchParameter NoSelect=false;
 
         protected override void ProcessRecord()
         {
@@ -50,7 +50,7 @@ namespace VisioPowerShell.Commands.New
             if (!this.NoSelect)
             {
                 // Select the Shapes
-                ((SMA.Cmdlet) this).WriteVerbose("Selecting");
+                ((Cmdlet) this).WriteVerbose("Selecting");
                 this.client.Selection.Select(shape_objects);
             }
 

@@ -3,11 +3,11 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Close
 {
-    [Cmdlet(SMA.VerbsCommon.Close, "VisioApplication")]
+    [Cmdlet(VerbsCommon.Close, "VisioApplication")]
     public class Close_VisioApplication : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]
-        public SMA.SwitchParameter Force { get; set; }
+        public SwitchParameter Force { get; set; }
         
         protected override void ProcessRecord()
         {

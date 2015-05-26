@@ -6,7 +6,7 @@ using GRID = VisioAutomation.Models.Grid;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(SMA.VerbsCommon.New, "VisioGridLayout")]
+    [Cmdlet(VerbsCommon.New, "VisioGridLayout")]
     public class New_VisioGridLayout : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

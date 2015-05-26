@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Export
 {
-    [Cmdlet(SMA.VerbsData.Export, "VisioPage")]
+    [Cmdlet(VerbsData.Export, "VisioPage")]
     public class Export_VisioPage : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)] 
@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.Export
         public string Filename;
 
         [Parameter(Position = 1, Mandatory = false)]
-        public SMA.SwitchParameter AllPages;
+        public SwitchParameter AllPages;
 
         protected override void ProcessRecord()
         {

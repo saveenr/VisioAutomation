@@ -5,7 +5,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(SMA.VerbsCommon.Get, "VisioShapeCell")]
+    [Cmdlet(VerbsCommon.Get, "VisioShapeCell")]
     public class Get_VisioShapeCell : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position = 0)]
@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.Get
         public IVisio.Shape[] Shapes { get; set; }
 
         [Parameter(Mandatory = false)] 
-        public SMA.SwitchParameter GetResults;
+        public SwitchParameter GetResults;
 
         [Parameter(Mandatory = false)] 
         public Model.ResultType ResultType = Model.ResultType.String;

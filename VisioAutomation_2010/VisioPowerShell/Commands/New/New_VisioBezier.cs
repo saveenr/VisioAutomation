@@ -5,7 +5,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(SMA.VerbsCommon.New, "VisioBezier")]
+    [Cmdlet(VerbsCommon.New, "VisioBezier")]
     public class New_VisioBezier : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

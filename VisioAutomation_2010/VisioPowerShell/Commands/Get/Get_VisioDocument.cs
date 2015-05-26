@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(SMA.VerbsCommon.Get, "VisioDocument")]
+    [Cmdlet(VerbsCommon.Get, "VisioDocument")]
     public class Get_VisioDocument : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]
@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.Get
         public string Name = null;
 
         [Parameter(Mandatory = false)]
-        public SMA.SwitchParameter ActiveDocument;
+        public SwitchParameter ActiveDocument;
 
         protected override void ProcessRecord()
         {
