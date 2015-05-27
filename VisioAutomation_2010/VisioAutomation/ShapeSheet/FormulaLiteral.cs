@@ -19,16 +19,10 @@ namespace VisioAutomation.ShapeSheet
             this.formula_string = s;
         }
 
-        public string Value
-        {
-            get { return this.formula_string; }
-        }
+        public string Value => this.formula_string;
 
-        public bool HasValue
-        {
-            get { return this.formula_string != null; }
-        }
-            
+        public bool HasValue => this.formula_string != null;
+
         public static implicit operator FormulaLiteral(string value)
         {
             return new FormulaLiteral(value);

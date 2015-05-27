@@ -31,18 +31,12 @@ namespace VisioAutomation.ShapeSheet
 
         public override string ToString()
         {
-            return string.Format("({0},{1},{2})", this.Section, this.Row, this.Cell);
+            return $"({this.Section},{this.Row},{this.Cell})";
         }
 
-        public SRC ForRow(short row)
-        {
-            return new SRC(this.Section, row, this.Cell);
-        }
+        public SRC ForRow(short row) => new SRC(this.Section, row, this.Cell);
 
-        public SRC ForSectionAndRow(short section, short row)
-        {
-            return new SRC(section, row, this.Cell);
-        }
+        public SRC ForSectionAndRow(short section, short row) => new SRC(section, row, this.Cell);
 
         public bool AreEqual(SRC other)
         {

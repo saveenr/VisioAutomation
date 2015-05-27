@@ -34,25 +34,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public CellColumn this[int index]
-        {
-            get { return this.items[index]; }
-        }
+        public CellColumn this[int index] => this.items[index];
 
-        public CellColumn this[string name]
-        {
-            get { return this.dic_columns[name]; }
-        }
+        public CellColumn this[string name] => this.dic_columns[name];
 
-        public bool Contains(string name)
-        {
-            return this.dic_columns.ContainsKey(name);
-        }
+        public bool Contains(string name) => this.dic_columns.ContainsKey(name);
 
-        internal CellColumn Add(SRC src)
-        {
-            return this.Add(src, null);
-        }
+        internal CellColumn Add(SRC src) => this.Add(src, null);
 
         internal CellColumn Add(SRC src, string name)
         {
@@ -131,9 +119,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return name;
         }
 
-        public int Count
-        {
-            get { return this.items.Count; }
-        }
+        public int Count => this.items.Count;
     }
 }

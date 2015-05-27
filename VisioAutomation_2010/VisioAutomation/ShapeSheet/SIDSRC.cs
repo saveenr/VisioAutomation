@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet
         
         public override string ToString()
         {
-            return string.Format("({0},{1},{2},{3})", this.ID, this.Section, this.Row, this.Cell);
+            return $"({this.ID},{this.Section},{this.Row},{this.Cell})";
         }
 
         public static short [] ToStream(IList<SIDSRC> sidsrcs)
@@ -57,12 +57,6 @@ namespace VisioAutomation.ShapeSheet
             return s;
         }
 
-        public SRC SRC
-        {
-            get
-            {
-                return new SRC(this.Section,this.Row,this.Cell);
-            }
-        }
+        public SRC SRC => new SRC(this.Section,this.Row,this.Cell);
     }
 }

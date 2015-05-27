@@ -24,10 +24,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public SectionColumn this[int index]
-        {
-            get { return this.items[index]; }
-        }
+        public SectionColumn this[int index] => this.items[index];
 
         internal SectionColumn Add(Microsoft.Office.Interop.Visio.VisSectionIndices section)
         {
@@ -44,9 +41,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return section_query;
         }
 
-        public int Count
-        {
-            get { return this.items.Count; }
-        }
+        public int Count => this.items.Count;
     }
 }

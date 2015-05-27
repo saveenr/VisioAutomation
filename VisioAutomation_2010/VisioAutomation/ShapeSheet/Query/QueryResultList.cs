@@ -23,19 +23,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public QueryResult<T> this[int index]
-        {
-            get { return this.Items[index]; }
-        }
+        public QueryResult<T> this[int index] => this.Items[index];
 
         internal void Add(QueryResult<T> item)
         {
             this.Items.Add(item);
         }
 
-        public int Count
-        {
-            get { return this.Items.Count; }
-        }
+        public int Count => this.Items.Count;
     }
 }
