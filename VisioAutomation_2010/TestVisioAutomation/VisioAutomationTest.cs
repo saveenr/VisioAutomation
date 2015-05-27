@@ -99,6 +99,7 @@ namespace TestVisioAutomation
             var pages = doc.Pages;
 
             var target_pages = new List<IVisio.Page>(pages.Count);
+
             foreach (IVisio.Page p in pages)
             {
                 target_pages.Add(p);
@@ -169,18 +170,18 @@ namespace TestVisioAutomation
             return System.IO.Path.Combine(this.TestResultsOutFolder, path);
         }
 
-        private static string tr_out_folder;
+        private static string test_result_out_folder;
 
         protected string TestResultsOutFolder
         {
             get
             {
-                if (VisioAutomationTest.tr_out_folder == null)
+                if (VisioAutomationTest.test_result_out_folder == null)
                 {
                     var asm = System.Reflection.Assembly.GetExecutingAssembly();
-                    VisioAutomationTest.tr_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
+                    VisioAutomationTest.test_result_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
                 }
-                return VisioAutomationTest.tr_out_folder;
+                return VisioAutomationTest.test_result_out_folder;
             }
         }
 

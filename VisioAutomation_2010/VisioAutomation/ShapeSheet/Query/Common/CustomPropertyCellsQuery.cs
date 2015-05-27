@@ -1,3 +1,5 @@
+using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
     class CustomPropertyCellsQuery : CellQuery
@@ -18,16 +20,16 @@ namespace VisioAutomation.ShapeSheet.Query.Common
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionProp);
 
 
-            this.SortKey = sec.AddCell(ShapeSheet.SRCConstants.Prop_SortKey, nameof(ShapeSheet.SRCConstants.Prop_SortKey));
-            this.Ask = sec.AddCell(ShapeSheet.SRCConstants.Prop_Ask, nameof(ShapeSheet.SRCConstants.Prop_Ask));
-            this.Calendar = sec.AddCell(ShapeSheet.SRCConstants.Prop_Calendar, nameof(ShapeSheet.SRCConstants.Prop_Calendar));
-            this.Format = sec.AddCell(ShapeSheet.SRCConstants.Prop_Format, nameof(ShapeSheet.SRCConstants.Prop_Format));
-            this.Invis = sec.AddCell(ShapeSheet.SRCConstants.Prop_Invisible, nameof(ShapeSheet.SRCConstants.Prop_Invisible));
-            this.Label = sec.AddCell(ShapeSheet.SRCConstants.Prop_Label, nameof(ShapeSheet.SRCConstants.Prop_Label));
-            this.LangID = sec.AddCell(ShapeSheet.SRCConstants.Prop_LangID, nameof(ShapeSheet.SRCConstants.Prop_LangID));
-            this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.Prop_Prompt, nameof(ShapeSheet.SRCConstants.Prop_Prompt));
-            this.Type = sec.AddCell(ShapeSheet.SRCConstants.Prop_Type, nameof(ShapeSheet.SRCConstants.Prop_Type));
-            this.Value = sec.AddCell(ShapeSheet.SRCConstants.Prop_Value, nameof(ShapeSheet.SRCConstants.Prop_Value));
+            this.SortKey = sec.AddCell(SRCCON.Prop_SortKey, nameof(SRCCON.Prop_SortKey));
+            this.Ask = sec.AddCell(SRCCON.Prop_Ask, nameof(SRCCON.Prop_Ask));
+            this.Calendar = sec.AddCell(SRCCON.Prop_Calendar, nameof(SRCCON.Prop_Calendar));
+            this.Format = sec.AddCell(SRCCON.Prop_Format, nameof(SRCCON.Prop_Format));
+            this.Invis = sec.AddCell(SRCCON.Prop_Invisible, nameof(SRCCON.Prop_Invisible));
+            this.Label = sec.AddCell(SRCCON.Prop_Label, nameof(SRCCON.Prop_Label));
+            this.LangID = sec.AddCell(SRCCON.Prop_LangID, nameof(SRCCON.Prop_LangID));
+            this.Prompt = sec.AddCell(SRCCON.Prop_Prompt, nameof(SRCCON.Prop_Prompt));
+            this.Type = sec.AddCell(SRCCON.Prop_Type, nameof(SRCCON.Prop_Type));
+            this.Value = sec.AddCell(SRCCON.Prop_Value, nameof(SRCCON.Prop_Value));
 
         }
 

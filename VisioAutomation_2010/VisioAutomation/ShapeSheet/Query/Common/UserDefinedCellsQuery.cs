@@ -1,3 +1,5 @@
+using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
     class UserDefinedCellsQuery : CellQuery
@@ -8,8 +10,8 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public UserDefinedCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionUser);
-            this.Value = sec.AddCell(ShapeSheet.SRCConstants.User_Value, nameof(ShapeSheet.SRCConstants.User_Value));
-            this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.User_Prompt, nameof(ShapeSheet.SRCConstants.User_Prompt));
+            this.Value = sec.AddCell(SRCCON.User_Value, nameof(SRCCON.User_Value));
+            this.Prompt = sec.AddCell(SRCCON.User_Prompt, nameof(SRCCON.User_Prompt));
         }
 
         public VisioAutomation.Shapes.UserDefinedCells.UserDefinedCell GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<string>> row)

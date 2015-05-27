@@ -4,12 +4,13 @@ using System.Linq;
 
 namespace TestVisioAutomation
 {
-    public class VisioPSContext : PowerShellSession
+    public class VisioPSContext : PowerShellTestsSession
     {
         public VisioPSContext() : base()
         {
             
         }
+
         public IVisio.ShapeClass New_Visio_Container(string cont_master_name, string cont_doc)
         {
             var xdoc = this.Open_Visio_Document(cont_doc);

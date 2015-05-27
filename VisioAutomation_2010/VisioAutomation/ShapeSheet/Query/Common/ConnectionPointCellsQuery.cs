@@ -1,3 +1,5 @@
+using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
     class ConnectionPointCellsQuery : CellQuery
@@ -12,15 +14,11 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionConnectionPts);
 
-
-
-
-
-            this.DirX = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirX, nameof(ShapeSheet.SRCConstants.Connections_DirX));
-            this.DirY = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirY, nameof(ShapeSheet.SRCConstants.Connections_DirY));
-            this.Type = sec.AddCell(ShapeSheet.SRCConstants.Connections_Type, nameof(ShapeSheet.SRCConstants.Connections_Type));
-            this.X = sec.AddCell(ShapeSheet.SRCConstants.Connections_X, nameof(ShapeSheet.SRCConstants.Connections_X));
-            this.Y = sec.AddCell(ShapeSheet.SRCConstants.Connections_Y, nameof(ShapeSheet.SRCConstants.Connections_Y));
+            this.DirX = sec.AddCell(SRCCON.Connections_DirX, nameof(SRCCON.Connections_DirX));
+            this.DirY = sec.AddCell(SRCCON.Connections_DirY, nameof(SRCCON.Connections_DirY));
+            this.Type = sec.AddCell(SRCCON.Connections_Type, nameof(SRCCON.Connections_Type));
+            this.X = sec.AddCell(SRCCON.Connections_X, nameof(SRCCON.Connections_X));
+            this.Y = sec.AddCell(SRCCON.Connections_Y, nameof(SRCCON.Connections_Y));
 
         }
 

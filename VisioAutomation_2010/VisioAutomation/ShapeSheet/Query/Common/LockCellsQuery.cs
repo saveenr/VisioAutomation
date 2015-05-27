@@ -1,3 +1,5 @@
+using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
     class LockCellsQuery : CellQuery
@@ -30,26 +32,26 @@ namespace VisioAutomation.ShapeSheet.Query.Common
 
 
 
-            this.LockAspect = this.AddCell(ShapeSheet.SRCConstants.LockAspect, nameof(ShapeSheet.SRCConstants.LockAspect));
-            this.LockBegin = this.AddCell(ShapeSheet.SRCConstants.LockBegin, nameof(ShapeSheet.SRCConstants.LockBegin));
-            this.LockCalcWH = this.AddCell(ShapeSheet.SRCConstants.LockCalcWH, nameof(ShapeSheet.SRCConstants.LockCalcWH));
-            this.LockCrop = this.AddCell(ShapeSheet.SRCConstants.LockCrop, nameof(ShapeSheet.SRCConstants.LockCrop));
-            this.LockCustProp = this.AddCell(ShapeSheet.SRCConstants.LockCustProp, nameof(ShapeSheet.SRCConstants.LockCustProp));
-            this.LockDelete = this.AddCell(ShapeSheet.SRCConstants.LockDelete, nameof(ShapeSheet.SRCConstants.LockDelete));
-            this.LockEnd = this.AddCell(ShapeSheet.SRCConstants.LockEnd, nameof(ShapeSheet.SRCConstants.LockEnd));
-            this.LockFormat = this.AddCell(ShapeSheet.SRCConstants.LockFormat, nameof(ShapeSheet.SRCConstants.LockFormat));
-            this.LockFromGroupFormat = this.AddCell(ShapeSheet.SRCConstants.LockFromGroupFormat, nameof(ShapeSheet.SRCConstants.LockFromGroupFormat));
-            this.LockGroup = this.AddCell(ShapeSheet.SRCConstants.LockGroup, nameof(ShapeSheet.SRCConstants.LockGroup));
-            this.LockHeight = this.AddCell(ShapeSheet.SRCConstants.LockHeight, nameof(ShapeSheet.SRCConstants.LockHeight));
-            this.LockMoveX = this.AddCell(ShapeSheet.SRCConstants.LockMoveX, nameof(ShapeSheet.SRCConstants.LockMoveX));
-            this.LockMoveY = this.AddCell(ShapeSheet.SRCConstants.LockMoveY, nameof(ShapeSheet.SRCConstants.LockMoveY));
-            this.LockRotate = this.AddCell(ShapeSheet.SRCConstants.LockRotate, nameof(ShapeSheet.SRCConstants.LockRotate));
-            this.LockSelect = this.AddCell(ShapeSheet.SRCConstants.LockSelect, nameof(ShapeSheet.SRCConstants.LockSelect));
-            this.LockTextEdit = this.AddCell(ShapeSheet.SRCConstants.LockTextEdit, nameof(ShapeSheet.SRCConstants.LockTextEdit));
-            this.LockThemeColors = this.AddCell(ShapeSheet.SRCConstants.LockThemeColors, nameof(ShapeSheet.SRCConstants.LockThemeColors));
-            this.LockThemeEffects = this.AddCell(ShapeSheet.SRCConstants.LockThemeEffects, nameof(ShapeSheet.SRCConstants.LockThemeEffects));
-            this.LockVtxEdit = this.AddCell(ShapeSheet.SRCConstants.LockVtxEdit, nameof(ShapeSheet.SRCConstants.LockVtxEdit));
-            this.LockWidth = this.AddCell(ShapeSheet.SRCConstants.LockWidth, nameof(ShapeSheet.SRCConstants.LockWidth));
+            this.LockAspect = this.AddCell(SRCCON.LockAspect, nameof(SRCCON.LockAspect));
+            this.LockBegin = this.AddCell(SRCCON.LockBegin, nameof(SRCCON.LockBegin));
+            this.LockCalcWH = this.AddCell(SRCCON.LockCalcWH, nameof(SRCCON.LockCalcWH));
+            this.LockCrop = this.AddCell(SRCCON.LockCrop, nameof(SRCCON.LockCrop));
+            this.LockCustProp = this.AddCell(SRCCON.LockCustProp, nameof(SRCCON.LockCustProp));
+            this.LockDelete = this.AddCell(SRCCON.LockDelete, nameof(SRCCON.LockDelete));
+            this.LockEnd = this.AddCell(SRCCON.LockEnd, nameof(SRCCON.LockEnd));
+            this.LockFormat = this.AddCell(SRCCON.LockFormat, nameof(SRCCON.LockFormat));
+            this.LockFromGroupFormat = this.AddCell(SRCCON.LockFromGroupFormat, nameof(SRCCON.LockFromGroupFormat));
+            this.LockGroup = this.AddCell(SRCCON.LockGroup, nameof(SRCCON.LockGroup));
+            this.LockHeight = this.AddCell(SRCCON.LockHeight, nameof(SRCCON.LockHeight));
+            this.LockMoveX = this.AddCell(SRCCON.LockMoveX, nameof(SRCCON.LockMoveX));
+            this.LockMoveY = this.AddCell(SRCCON.LockMoveY, nameof(SRCCON.LockMoveY));
+            this.LockRotate = this.AddCell(SRCCON.LockRotate, nameof(SRCCON.LockRotate));
+            this.LockSelect = this.AddCell(SRCCON.LockSelect, nameof(SRCCON.LockSelect));
+            this.LockTextEdit = this.AddCell(SRCCON.LockTextEdit, nameof(SRCCON.LockTextEdit));
+            this.LockThemeColors = this.AddCell(SRCCON.LockThemeColors, nameof(SRCCON.LockThemeColors));
+            this.LockThemeEffects = this.AddCell(SRCCON.LockThemeEffects, nameof(SRCCON.LockThemeEffects));
+            this.LockVtxEdit = this.AddCell(SRCCON.LockVtxEdit, nameof(SRCCON.LockVtxEdit));
+            this.LockWidth = this.AddCell(SRCCON.LockWidth, nameof(SRCCON.LockWidth));
 
 
         }

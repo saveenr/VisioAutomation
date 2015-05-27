@@ -1,13 +1,13 @@
 namespace TestVisioAutomation
 {
-    public class PowerShellSession
+    public class PowerShellTestsSession
     {
         protected System.Management.Automation.PowerShell PowerShell;
         protected System.Management.Automation.Runspaces.InitialSessionState SessionState;
         protected System.Management.Automation.Runspaces.Runspace RunSpace;
         protected System.Management.Automation.RunspaceInvoke Invoker;
 
-        public PowerShellSession()
+        public PowerShellTestsSession()
         {
             this.SessionState = System.Management.Automation.Runspaces.InitialSessionState.CreateDefault();
 
