@@ -129,7 +129,7 @@ namespace VisioAutomation.Drawing
             var c = ColorRGB.TryParseWebColor(webcolor);
             if (!c.HasValue)
             {
-                string s = string.Format("Failed to parse color string \"{0}\"", webcolor);
+                string s = $"Failed to parse color string \"{webcolor}\"";
                 throw new AutomationException(s);
             }
 

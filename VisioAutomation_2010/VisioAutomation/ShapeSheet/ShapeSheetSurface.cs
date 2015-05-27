@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet
 
             if (remainder != 0)
             {
-                string msg = string.Format("stream must have a multiple of {0} elements", chunksize);
+                string msg = $"stream must have a multiple of {chunksize} elements";
                 throw new AutomationException(msg);
             }
 
@@ -114,10 +114,7 @@ namespace VisioAutomation.ShapeSheet
 
             if (formulas_obj_array.Length != numitems)
             {
-                string msg = string.Format(
-                    "Expected {0} items from GetFormulas but only received {1}",
-                    numitems,
-                    formulas_obj_array.Length);
+                string msg = $"Expected {numitems} items from GetFormulas but only received {formulas_obj_array.Length}";
                 throw new AutomationException(msg);
             }
 
@@ -206,10 +203,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (results_sa.Length != numitems)
             {
-                string msg = string.Format(
-                    "Expected {0} items from GetResults but only received {1}",
-                    numitems,
-                    results_sa.Length);
+                string msg = $"Expected {numitems} items from GetResults but only received {results_sa.Length}";
                 throw new AutomationException(msg);
             }
 
@@ -235,7 +229,7 @@ namespace VisioAutomation.ShapeSheet
             }
             else
             {
-                string msg = string.Format("Internal error: Unsupported Result Type: {0}", type.Name);
+                string msg = $"Internal error: Unsupported Result Type: {type.Name}";
                 throw new AutomationException(msg);
             }
             return flags;
@@ -260,7 +254,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (!ShapeSheetSurface.IsValidResultType(result_type))
             {
-                string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
+                string msg = $"Unsupported Result Type: {result_type.Name}";
                 throw new AutomationException(msg);
             }
         }

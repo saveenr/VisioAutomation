@@ -54,7 +54,7 @@
                 return s;
             }
 
-            string result = string.Format("\"{0}\"", s.Replace(Convert.quote, Convert.quotequote));
+            string result = $"\"{s.Replace(Convert.quote, Convert.quotequote)}\"";
             return result;
         }
 

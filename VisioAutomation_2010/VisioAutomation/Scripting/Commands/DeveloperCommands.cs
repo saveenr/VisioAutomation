@@ -58,16 +58,18 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     sb.Length = 0;
                     var method_params = command.MethodInfo.GetParameters();
-                    TextCommandsUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", ReflectionUtil.GetNiceTypeName(param.ParameterType), param.Name)));
+                    TextCommandsUtil.Join(sb, ", ", method_params.Select(param =>
+                        $"{ReflectionUtil.GetNiceTypeName(param.ParameterType)} {param.Name}"));
 
                     if (command.MethodInfo.ReturnType != typeof(void))
                     {
-                        string line = string.Format("{0}({1}) -> {2}", command.MethodInfo.Name, sb, ReflectionUtil.GetNiceTypeName(command.MethodInfo.ReturnType));
+                        string line =
+                            $"{command.MethodInfo.Name}({sb}) -> {ReflectionUtil.GetNiceTypeName(command.MethodInfo.ReturnType)}";
                         lines.Add(line);
                     }
                     else
                     {
-                        string line = string.Format("{0}({1})", command.MethodInfo.Name, sb);
+                        string line = $"{command.MethodInfo.Name}({sb})";
                         lines.Add(line);
                     }
                 }
@@ -126,11 +128,11 @@ namespace VisioAutomation.Scripting.Commands
                     formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)
                     {
-                        formpage.Name = string.Format("{0}", enum_.Name);
+                        formpage.Name = $"{enum_.Name}";
                     }
                     else
                     {
-                        formpage.Name = string.Format("{0} ({1})", enum_.Name, chunkcount + 1);
+                        formpage.Name = $"{enum_.Name} ({chunkcount + 1})";
                     }
 
                     //docbuilder.BodyParaSpacingAfter = 2.0;

@@ -27,7 +27,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
                 if (cell_propname == null)
                 {
-                    string msg = string.Format("Could not retrieve cell for custom property \"{0}\"", full_prop_name);
+                    string msg = $"Could not retrieve cell for custom property \"{full_prop_name}\"";
                     throw new AutomationException(msg);
                 }
 
@@ -220,7 +220,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             string errmsg;
             if (!CustomPropertyHelper.IsValidName(name, out errmsg))
             {
-                string msg = string.Format("Invalid Property Name: \"{0}\". {1}", name,errmsg);
+                string msg = $"Invalid Property Name: \"{name}\". {errmsg}";
                 throw new AutomationException(msg);
             }
         }
@@ -247,7 +247,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         private static string GetRowName(string name)
         {
-            return string.Format("Prop.{0}", name);
+            return $"Prop.{name}";
         }
 
         public static void Delete(IVisio.Shape shape, string name)

@@ -303,7 +303,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (stream_builder.ChunksWrittenCount != total)
             {
-                string msg = string.Format("Expected {0} Checks to be written. Actual = {1}", total, stream_builder.ChunksWrittenCount);
+                string msg = $"Expected {total} Checks to be written. Actual = {stream_builder.ChunksWrittenCount}";
                 throw new AutomationException(msg);
             }
 
@@ -351,7 +351,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (stream_builder.ChunksWrittenCount != total)
             {
-                string msg = string.Format("Expected {0} Chunks to be written. Actual = {1}", total, stream_builder.ChunksWrittenCount);
+                string msg = $"Expected {total} Chunks to be written. Actual = {stream_builder.ChunksWrittenCount}";
                 throw new AutomationException(msg);
             }
 
@@ -396,7 +396,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (shapeids.Count != this.PerShapeSectionInfo.Count)
             {
-                string msg = string.Format("Expected {0} PerShape structs. Actual = {1}", shapeids.Count, this.PerShapeSectionInfo.Count);
+                string msg = $"Expected {shapeids.Count} PerShape structs. Actual = {this.PerShapeSectionInfo.Count}";
                 throw new AutomationException(msg);
             }
         }

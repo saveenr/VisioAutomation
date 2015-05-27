@@ -73,7 +73,7 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var src in srcs)
             {
-                string colname = string.Format("Col{0}", ci);
+                string colname = $"Col{ci}";
                 query.AddCell(src, colname);
                 ci++;
             }
@@ -97,7 +97,7 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var src in srcs)
             {
-                string colname = string.Format("Col{0}", ci);
+                string colname = $"Col{ci}";
                 query.AddCell(src, colname);
                 ci++;
             }
@@ -122,7 +122,7 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var cell in cells)
             {
-                string name = string.Format("Cell{0}", ci);
+                string name = $"Cell{ci}";
                 sec.AddCell((short)cell, name);
                 ci++;
             }
@@ -147,7 +147,7 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var cell in cells)
             {
-                string name = string.Format("Cell{0}", ci);
+                string name = $"Cell{ci}";
                 sec.AddCell((short)cell, name);
                 ci++;
             }
@@ -192,7 +192,8 @@ namespace VisioAutomation.Scripting.Commands
 
             if (formulas.Count != srcs.Count)
             {
-                string msg = string.Format("SetFormula: Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count,formulas.Count);
+                string msg =
+                    $"SetFormula: Must have the same number of srcs ({srcs.Count}) and formulas ({formulas.Count})";
                 throw new System.ArgumentException(msg, nameof(formulas));
             }
 
@@ -257,7 +258,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (results.Count != srcs.Count)
             {
-                string msg = string.Format("Must have the same number of srcs ({0}) and results ({1})", srcs.Count, results.Count);
+                string msg = $"Must have the same number of srcs ({srcs.Count}) and results ({results.Count})";
                 throw new System.ArgumentException(msg,nameof(results));
             }
 

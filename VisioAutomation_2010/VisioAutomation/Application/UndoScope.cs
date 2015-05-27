@@ -43,7 +43,7 @@ namespace VisioAutomation.Application
         /// <returns></returns>
         public override string ToString()
         {
-            string s = string.Format("UndoScope(Name=\"{0}\",ScopeID={1})", this.Name, this.ScopeID);
+            string s = $"UndoScope(Name=\"{this.Name}\",ScopeID={this.ScopeID})";
             return s;
         }
     }
