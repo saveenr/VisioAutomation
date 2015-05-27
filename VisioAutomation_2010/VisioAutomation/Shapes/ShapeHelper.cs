@@ -15,7 +15,7 @@ namespace VisioAutomation.Shapes
         {
             if (shapes == null)
             {
-                throw new System.ArgumentNullException("shapes");
+                throw new System.ArgumentNullException(nameof(shapes));
             }
 
             var result = new List<IVisio.Shape>();
@@ -43,7 +43,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape== null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var shapes = new[] {shape};

@@ -42,7 +42,7 @@ namespace VisioAutomation.Scripting
             {
                 return r.Bottom;
             }
-            throw new System.ArgumentOutOfRangeException("pos");
+            throw new System.ArgumentOutOfRangeException(nameof(pos));
         }
 
         internal static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, RelativePosition pos)
@@ -65,7 +65,7 @@ namespace VisioAutomation.Scripting
         {
             if (spacing < 0.0)
             {
-                throw new System.ArgumentOutOfRangeException("spacing");
+                throw new System.ArgumentOutOfRangeException(nameof(spacing));
             }
 
             if (shapeids.Count < 2)
@@ -191,7 +191,7 @@ namespace VisioAutomation.Scripting
                     }
                 default:
                     {
-                        throw new System.ArgumentOutOfRangeException("corner", "Unsupported corner");
+                        throw new System.ArgumentOutOfRangeException(nameof(corner), "Unsupported corner");
                     }
             }
         }

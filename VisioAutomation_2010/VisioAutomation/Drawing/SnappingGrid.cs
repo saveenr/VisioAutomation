@@ -58,7 +58,7 @@
         {
             if (frac <= 0)
             {
-                throw new System.ArgumentOutOfRangeException("frac", "must be greater than or equal to 0.0");
+                throw new System.ArgumentOutOfRangeException(nameof(frac), "must be greater than or equal to 0.0");
             }
             double retval = System.Math.Round((val / frac), rounding) * frac;
             return retval;

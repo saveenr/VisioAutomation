@@ -216,7 +216,7 @@ namespace VisioAutomation.Scripting.Commands
             
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             if (name.Length == 0)
@@ -240,12 +240,12 @@ namespace VisioAutomation.Scripting.Commands
             
             if (filename == null)
             {
-                throw new System.ArgumentNullException("filename");
+                throw new System.ArgumentNullException(nameof(filename));
             }
 
             if (filename.Length == 0)
             {
-                throw new System.ArgumentException("filename cannot be empty", "filename");
+                throw new System.ArgumentException("filename cannot be empty", nameof(filename));
             }
 
             string abs_filename = System.IO.Path.GetFullPath(filename);
@@ -256,7 +256,7 @@ namespace VisioAutomation.Scripting.Commands
             if (!System.IO.File.Exists(abs_filename))
             {
                 string msg = string.Format("File \"{0}\"does not exist", abs_filename);
-                throw new System.ArgumentException(msg, "filename");
+                throw new System.ArgumentException(msg, nameof(filename));
             }
 
             var application = this.Client.Application.Get();

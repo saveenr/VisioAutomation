@@ -13,12 +13,12 @@ namespace VisioAutomation.Application
         {
             if (anchor_window == null)
             {
-                throw new System.ArgumentNullException("anchor_window");
+                throw new System.ArgumentNullException(nameof(anchor_window));
             }
 
             if (the_form == null)
             {
-                throw new System.ArgumentNullException("the_form");
+                throw new System.ArgumentNullException(nameof(the_form));
             }
 
             // Show the form as a modeless dialog.
@@ -61,7 +61,7 @@ namespace VisioAutomation.Application
         {
             if (parent_window == null)
             {
-                throw new System.ArgumentNullException("parent_window");
+                throw new System.ArgumentNullException(nameof(parent_window));
             }
 
             var parents_windows = parent_window.Windows;

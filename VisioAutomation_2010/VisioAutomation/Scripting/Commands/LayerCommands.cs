@@ -20,12 +20,12 @@ namespace VisioAutomation.Scripting.Commands
 
             if (layername == null)
             {
-                throw new System.ArgumentNullException("layername");
+                throw new System.ArgumentNullException(nameof(layername));
             }
 
             if (layername.Length < 1)
             {
-                throw new System.ArgumentException("Layer name cannot be empty", "layername");
+                throw new System.ArgumentException("Layer name cannot be empty", nameof(layername));
             }
 
             var application = this.Client.Application.Get();

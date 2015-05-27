@@ -61,7 +61,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             if (name.Length < 1)
@@ -92,12 +92,12 @@ namespace VisioAutomation.Scripting.Commands
 
             if (master == null)
             {
-                throw new System.ArgumentNullException("master");
+                throw new System.ArgumentNullException(nameof(master));
             }
 
             if (doc == null)
             {
-                throw new System.ArgumentNullException("doc");
+                throw new System.ArgumentNullException(nameof(doc));
             }
 
             var application = this.Client.Application.Get();
@@ -172,12 +172,12 @@ namespace VisioAutomation.Scripting.Commands
 
             if (masters == null)
             {
-                throw new System.ArgumentNullException("points");
+                throw new System.ArgumentNullException(nameof(points));
             }
 
             if (points == null)
             {
-                throw new System.ArgumentNullException("points");
+                throw new System.ArgumentNullException(nameof(points));
             }
 
             var application = this.Client.Application.Get();

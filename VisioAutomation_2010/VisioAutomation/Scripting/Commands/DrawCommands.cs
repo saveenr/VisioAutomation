@@ -56,17 +56,17 @@ namespace VisioAutomation.Scripting.Commands
 
             if (datatable == null)
             {
-                throw new System.ArgumentNullException("datatable");
+                throw new System.ArgumentNullException(nameof(datatable));
             }
 
             if (widths == null)
             {
-                throw new System.ArgumentNullException("widths");
+                throw new System.ArgumentNullException(nameof(widths));
             }
 
             if (heights == null)
             {
-                throw new System.ArgumentNullException("heights");
+                throw new System.ArgumentNullException(nameof(heights));
             }
 
             if (datatable.Rows.Count < 1)
@@ -354,7 +354,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (n < 1)
             {
-                throw new System.ArgumentOutOfRangeException("n");
+                throw new System.ArgumentOutOfRangeException(nameof(n));
             }
             if (!this.Client.Selection.HasShapes())
             {

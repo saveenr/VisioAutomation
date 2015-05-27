@@ -10,12 +10,12 @@
         {
             if (cols <= 0)
             {
-                throw new System.ArgumentOutOfRangeException("cols");
+                throw new System.ArgumentOutOfRangeException(nameof(cols));
             }
 
             if (rows <= 0)
             {
-                throw new System.ArgumentOutOfRangeException("rows");
+                throw new System.ArgumentOutOfRangeException(nameof(rows));
             }
 
             this.Width = cols;
@@ -33,22 +33,22 @@
         {
             if (col < 0)
             {
-                throw new System.ArgumentOutOfRangeException("col");
+                throw new System.ArgumentOutOfRangeException(nameof(col));
             }
 
             if (col >= this.Width)
             {
-                throw new System.ArgumentOutOfRangeException("col");
+                throw new System.ArgumentOutOfRangeException(nameof(col));
             }
 
             if (row < 0)
             {
-                throw new System.ArgumentOutOfRangeException("row");
+                throw new System.ArgumentOutOfRangeException(nameof(row));
             }
 
             if (row >= this.Height)
             {
-                throw new System.ArgumentOutOfRangeException("row");
+                throw new System.ArgumentOutOfRangeException(nameof(row));
             }
 
             int pos = (row *this.Width) + col;
@@ -59,22 +59,22 @@
         {
             if (col < 0)
             {
-                throw new System.ArgumentOutOfRangeException("col");
+                throw new System.ArgumentOutOfRangeException(nameof(col));
             }
 
             if (col >= this.Width)
             {
-                throw new System.ArgumentOutOfRangeException("col");
+                throw new System.ArgumentOutOfRangeException(nameof(col));
             }
 
             if (row < 0)
             {
-                throw new System.ArgumentOutOfRangeException("row");
+                throw new System.ArgumentOutOfRangeException(nameof(row));
             }
 
             if (row >= this.Height)
             {
-                throw new System.ArgumentOutOfRangeException("row");
+                throw new System.ArgumentOutOfRangeException(nameof(row));
             }
 
             int pos = (row *this.Width) + col;

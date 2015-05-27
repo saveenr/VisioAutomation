@@ -174,12 +174,12 @@ namespace VisioAutomation.Scripting.Commands
 
             if (srcs == null)
             {
-                throw new System.ArgumentNullException("srcs");
+                throw new System.ArgumentNullException(nameof(srcs));
             }
 
             if (formulas == null)
             {
-                throw new System.ArgumentNullException("formulas");
+                throw new System.ArgumentNullException(nameof(formulas));
             }
 
             if (formulas.Any( f => f == null))
@@ -193,7 +193,7 @@ namespace VisioAutomation.Scripting.Commands
             if (formulas.Count != srcs.Count)
             {
                 string msg = string.Format("SetFormula: Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count,formulas.Count);
-                throw new System.ArgumentException(msg, "formulas");
+                throw new System.ArgumentException(msg, nameof(formulas));
             }
 
 
@@ -239,18 +239,18 @@ namespace VisioAutomation.Scripting.Commands
 
             if (srcs == null)
             {
-                throw new System.ArgumentNullException("srcs");
+                throw new System.ArgumentNullException(nameof(srcs));
             }
 
             if (results == null)
             {
-                throw new System.ArgumentNullException("results");
+                throw new System.ArgumentNullException(nameof(results));
             }
 
             if (results.Any(f => f == null))
             {
                 this.Client.WriteVerbose("SetResult: One of the Input Results is a NULL value");
-                throw new System.ArgumentException("results contains a null value","results");
+                throw new System.ArgumentException("results contains a null value",nameof(results));
             }
 
             this.Client.WriteVerbose("SetResult: src count= {0} and result count = {1}", srcs.Count, results.Count);
@@ -258,7 +258,7 @@ namespace VisioAutomation.Scripting.Commands
             if (results.Count != srcs.Count)
             {
                 string msg = string.Format("Must have the same number of srcs ({0}) and results ({1})", srcs.Count, results.Count);
-                throw new System.ArgumentException(msg,"results");
+                throw new System.ArgumentException(msg,nameof(results));
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();

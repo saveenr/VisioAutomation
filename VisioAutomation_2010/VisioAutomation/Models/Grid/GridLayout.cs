@@ -133,7 +133,7 @@ namespace VisioAutomation.Models.Grid
         {
             if (page == null)
             {
-                throw new ArgumentNullException("page");
+                throw new ArgumentNullException(nameof(page));
             }
 
             var nodes_to_draw = this.Nodes.Where(n => n.Draw).ToList();

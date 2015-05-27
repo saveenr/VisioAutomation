@@ -66,7 +66,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (pages == null)
             {
-                throw new System.ArgumentNullException("pages");
+                throw new System.ArgumentNullException(nameof(pages));
             }
 
             foreach (var page in pages)
@@ -82,7 +82,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (names == null)
             {
-                throw new System.ArgumentNullException("names");
+                throw new System.ArgumentNullException(nameof(names));
             }
 
             foreach (var name in names)
@@ -123,12 +123,12 @@ namespace VisioAutomation.Scripting.Commands
 
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name cannot be empty","name");
+                throw new System.ArgumentException("name cannot be empty",nameof(name));
             }
 
             var page = this.Get();
@@ -169,7 +169,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (background_page_name == null)
             {
-                throw new System.ArgumentNullException("background_page_name");
+                throw new System.ArgumentNullException(nameof(background_page_name));
             }
 
             var app = this.Client.Application.Get();
@@ -235,7 +235,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (dest_doc==null)
             {
-                throw new System.ArgumentNullException("dest_doc");
+                throw new System.ArgumentNullException(nameof(dest_doc));
             }
 
             var application = this.Client.Application.Get();
@@ -271,7 +271,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             var page_sheet = page.PageSheet;
@@ -293,7 +293,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (orientation != Pages.PrintPageOrientation.Landscape && orientation != Pages.PrintPageOrientation.Portrait)
             {
-                throw new System.ArgumentOutOfRangeException("orientation", "must be either Portrait or Landscape");
+                throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
 
             var old_orientation = PageCommands.GetOrientation(active_page);
@@ -430,7 +430,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (pages == null)
             {
-                throw new System.ArgumentNullException("pages");
+                throw new System.ArgumentNullException(nameof(pages));
             }
 
             var app = pages.Application;
@@ -465,17 +465,17 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (max < min)
             {
-                throw new System.ArgumentOutOfRangeException("max");
+                throw new System.ArgumentOutOfRangeException(nameof(max));
             }
 
             if (cur < min)
             {
-                throw new System.ArgumentOutOfRangeException("cur");
+                throw new System.ArgumentOutOfRangeException(nameof(cur));
             }
 
             if (cur > max)
             {
-                throw new System.ArgumentOutOfRangeException("cur");
+                throw new System.ArgumentOutOfRangeException(nameof(cur));
             }
 
             if (direction == PageDirection.Next)
@@ -496,7 +496,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException("direction");
+                throw new System.ArgumentOutOfRangeException(nameof(direction));
             }
         }
 

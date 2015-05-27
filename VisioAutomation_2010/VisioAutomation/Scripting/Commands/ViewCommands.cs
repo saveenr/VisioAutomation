@@ -36,12 +36,12 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (padding_scale < 0.0)
             {
-                throw new System.ArgumentOutOfRangeException("padding_scale");
+                throw new System.ArgumentOutOfRangeException(nameof(padding_scale));
             }
 
             if (padding_scale > 1.0)
             {
-                throw new System.ArgumentOutOfRangeException("padding_scale");
+                throw new System.ArgumentOutOfRangeException(nameof(padding_scale));
             }
 
             var app = window.Application;
@@ -106,7 +106,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException("zoom");
+                throw new System.ArgumentOutOfRangeException(nameof(zoom));
             }            
         }
     }

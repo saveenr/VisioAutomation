@@ -41,7 +41,7 @@
         {
             if (s == null)
             {
-                throw new System.ArgumentNullException("s");
+                throw new System.ArgumentNullException(nameof(s));
             }
 
             if (s.Length == 0)
@@ -62,7 +62,7 @@
         {
             if (formula == null)
             {
-                throw new System.ArgumentNullException("formula");
+                throw new System.ArgumentNullException(nameof(formula));
             }
 
             // Initialize the converted formula from the value passed in.

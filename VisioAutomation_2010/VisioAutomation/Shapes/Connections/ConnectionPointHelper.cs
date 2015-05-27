@@ -10,7 +10,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (!cp.X.Formula.HasValue)
@@ -38,12 +38,12 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (index < 0)
             {
-                throw new System.ArgumentOutOfRangeException("index");
+                throw new System.ArgumentOutOfRangeException(nameof(index));
             }
 
             var row = (IVisio.VisRowIndices)index;
@@ -54,7 +54,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             return shape.RowCount[ (short) IVisio.VisSectionIndices.visSectionConnectionPts];
@@ -64,7 +64,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             int n = ConnectionPointHelper.GetCount(shape);

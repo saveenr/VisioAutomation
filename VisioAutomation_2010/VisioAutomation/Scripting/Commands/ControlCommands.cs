@@ -19,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (ctrl == null)
             {
-                throw new System.ArgumentNullException("ctrl");
+                throw new System.ArgumentNullException(nameof(ctrl));
             }
 
             var shapes = this.GetTargetShapes(target_shapes);

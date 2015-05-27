@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             var shapes = this.GetTargetShapes(target_shapes);
@@ -65,12 +65,12 @@ namespace VisioAutomation.Scripting.Commands
             
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name cannot be empty", "name");
+                throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
             var shapes = this.GetTargetShapes(target_shapes);
@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
             
             if (customprop == null)
             {
-                throw new System.ArgumentNullException("customprop");
+                throw new System.ArgumentNullException(nameof(customprop));
             }
 
             var shapes = this.GetTargetShapes(target_shapes);
@@ -122,7 +122,7 @@ namespace VisioAutomation.Scripting.Commands
             
             if (shapes == null)
             {
-                throw new System.ArgumentNullException("shapes");
+                throw new System.ArgumentNullException(nameof(shapes));
             }
 
             foreach (var shape in shapes)

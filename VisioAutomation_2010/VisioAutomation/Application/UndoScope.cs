@@ -14,13 +14,13 @@ namespace VisioAutomation.Application
         {
             if (app == null)
             {
-                throw new System.ArgumentNullException("app");
+                throw new System.ArgumentNullException(nameof(app));
             }
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                string msg = string.Format("{0} cannot be null or empty", "name");
-                throw new System.ArgumentException(msg,"name");
+                string msg = $"{"name"} cannot be null or empty";
+                throw new System.ArgumentException(msg,nameof(name));
             }
 
             this.Application = app;

@@ -50,12 +50,12 @@
         {
             if (s.Width < 0)
             {
-                throw new System.ArgumentOutOfRangeException("s", "width must be non-negative");
+                throw new System.ArgumentOutOfRangeException(nameof(s), "width must be non-negative");
             }
 
             if (s.Height < 0)
             {
-                throw new System.ArgumentOutOfRangeException("s", "height must be non-negative");
+                throw new System.ArgumentOutOfRangeException(nameof(s), "height must be non-negative");
             }
 
             this.Left = lowerleft.X;
@@ -68,12 +68,12 @@
         {
             if (w < 0)
             {
-                throw new System.ArgumentOutOfRangeException("w", "width must be non-negative");
+                throw new System.ArgumentOutOfRangeException(nameof(w), "width must be non-negative");
             }
 
             if (h < 0)
             {
-                throw new System.ArgumentOutOfRangeException("h", "height must be non-negative");
+                throw new System.ArgumentOutOfRangeException(nameof(h), "height must be non-negative");
             }
 
             var xradius = w/2.0;

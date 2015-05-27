@@ -117,12 +117,12 @@ namespace TestVisioAutomation
         {
             if (window == null)
             {
-                throw new System.ArgumentNullException("window");
+                throw new System.ArgumentNullException(nameof(window));
             }
 
             if (shapes == null)
             {
-                throw new System.ArgumentNullException("shapes");
+                throw new System.ArgumentNullException(nameof(shapes));
             }
 
             var selectargs = IVisio.VisSelectArgs.visSelect;
@@ -136,7 +136,7 @@ namespace TestVisioAutomation
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             var page_sheet = page.PageSheet;
@@ -151,7 +151,7 @@ namespace TestVisioAutomation
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();

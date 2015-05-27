@@ -422,7 +422,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             if (space < 0.0)
             {
-                throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
+                throw new System.ArgumentOutOfRangeException(nameof(space), "must be non-negative");
             }
 
             var application = this.Client.Application.Get();

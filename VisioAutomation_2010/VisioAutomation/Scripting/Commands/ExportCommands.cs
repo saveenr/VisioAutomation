@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (filename == null)
             {
-                throw new System.ArgumentNullException("filename");
+                throw new System.ArgumentNullException(nameof(filename));
             }
 
             if (!this.Client.Selection.HasShapes())
@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (filename == null)
             {
-                throw new System.ArgumentNullException("filename");
+                throw new System.ArgumentNullException(nameof(filename));
             }
 
             if (!this.Client.Selection.HasShapes())
@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (filename == null)
             {
-                throw new System.ArgumentNullException("filename");
+                throw new System.ArgumentNullException(nameof(filename));
             }
 
             var application = this.Client.Application.Get();
@@ -118,7 +118,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (filename == null)
             {
-                throw new System.ArgumentNullException("filename");
+                throw new System.ArgumentNullException(nameof(filename));
             }
 
             if (!this.Client.Selection.HasShapes())

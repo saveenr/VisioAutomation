@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             var shapes = this.GetTargetShapes(target_shapes);
@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name cannot be empty", "name");
+                throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
             var application = this.Client.Application.Get();

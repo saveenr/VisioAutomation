@@ -10,11 +10,11 @@
         {
             if (width < 0.0)
             {
-                throw new System.ArgumentOutOfRangeException("width");
+                throw new System.ArgumentOutOfRangeException(nameof(width));
             }
             if (height < 0.0)
             {
-                throw new System.ArgumentOutOfRangeException("height");
+                throw new System.ArgumentOutOfRangeException(nameof(height));
             }
             this.Width = width;
             this.Height = height;

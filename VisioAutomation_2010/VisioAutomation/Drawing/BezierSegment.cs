@@ -24,13 +24,13 @@ namespace VisioAutomation.Drawing
         {
             if (points == null)
             {
-                throw new System.ArgumentNullException("points");
+                throw new System.ArgumentNullException(nameof(points));
             }
 
             if (points.Count != 4)
             {
                 string msg = string.Format("A {0} must have exactly 4 points", typeof (BezierSegment));
-                throw new System.ArgumentException(msg, "points");
+                throw new System.ArgumentException(msg, nameof(points));
             }
 
             this.Start = points[0];
@@ -43,7 +43,7 @@ namespace VisioAutomation.Drawing
         {
             if (segments == null)
             {
-                throw new System.ArgumentNullException("segments");
+                throw new System.ArgumentNullException(nameof(segments));
             }
 
             var points = new List<Point>(segments.Count * 4);
@@ -69,7 +69,7 @@ namespace VisioAutomation.Drawing
         {
             if (endangle < startangle)
             {
-                throw new System.ArgumentOutOfRangeException("endangle", "endangle must be >= startangle");
+                throw new System.ArgumentOutOfRangeException(nameof(endangle), "endangle must be >= startangle");
             }
 
             double min_angle = 0;
@@ -104,7 +104,7 @@ namespace VisioAutomation.Drawing
 
             if (start_angle > end_angle)
             {
-                throw new System.ArgumentException("end_angle must be < than start angle", "end_angle");
+                throw new System.ArgumentException("end_angle must be < than start angle", nameof(end_angle));
             }
 
             // the original purpose of this method is to break apart arcs > 90 degrees into smaller sub-arcs of 90 or less
@@ -139,7 +139,7 @@ namespace VisioAutomation.Drawing
 
             if (total_angle > right_angle)
             {
-                throw new System.ArgumentOutOfRangeException("end_angle",
+                throw new System.ArgumentOutOfRangeException(nameof(end_angle),
                                                              "angle formed by start and end must <= right angle (pi/2)");
             }
 
