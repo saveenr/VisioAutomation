@@ -22,22 +22,22 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public TextBlockCellsQuery() :
             base()
         {
-            this.BottomMargin = this.AddCell(ShapeSheet.SRCConstants.BottomMargin, "BottomMargin");
-            this.LeftMargin = this.AddCell(ShapeSheet.SRCConstants.LeftMargin, "LeftMargin");
-            this.RightMargin = this.AddCell(ShapeSheet.SRCConstants.RightMargin, "RightMargin");
-            this.TopMargin = this.AddCell(ShapeSheet.SRCConstants.TopMargin, "TopMargin");
-            this.DefaultTabStop = this.AddCell(ShapeSheet.SRCConstants.DefaultTabStop, "DefaultTabStop");
-            this.TextBkgnd = this.AddCell(ShapeSheet.SRCConstants.TextBkgnd, "TextBkgnd");
-            this.TextBkgndTrans = this.AddCell(ShapeSheet.SRCConstants.TextBkgndTrans, "TextBkgndTrans");
-            this.TextDirection = this.AddCell(ShapeSheet.SRCConstants.TextDirection, "TextDirection");
-            this.VerticalAlign = this.AddCell(ShapeSheet.SRCConstants.VerticalAlign, "VerticalAlign");
-            this.TxtPinX = this.AddCell(ShapeSheet.SRCConstants.TxtPinX, "TxtPinX");
-            this.TxtPinY = this.AddCell(ShapeSheet.SRCConstants.TxtPinY, "TxtPinY");
-            this.TxtLocPinX = this.AddCell(ShapeSheet.SRCConstants.TxtLocPinX, "TxtLocPinX");
-            this.TxtLocPinY = this.AddCell(ShapeSheet.SRCConstants.TxtLocPinY, "TxtLocPinY");
-            this.TxtWidth = this.AddCell(ShapeSheet.SRCConstants.TxtWidth, "TxtWidth");
-            this.TxtHeight = this.AddCell(ShapeSheet.SRCConstants.TxtHeight, "TxtHeight");
-            this.TxtAngle = this.AddCell(ShapeSheet.SRCConstants.TxtAngle, "TxtAngle");
+            this.BottomMargin = this.AddCell(ShapeSheet.SRCConstants.BottomMargin, nameof(ShapeSheet.SRCConstants.BottomMargin));
+            this.LeftMargin = this.AddCell(ShapeSheet.SRCConstants.LeftMargin, nameof(ShapeSheet.SRCConstants.LeftMargin));
+            this.RightMargin = this.AddCell(ShapeSheet.SRCConstants.RightMargin, nameof(ShapeSheet.SRCConstants.RightMargin));
+            this.TopMargin = this.AddCell(ShapeSheet.SRCConstants.TopMargin, nameof(ShapeSheet.SRCConstants.TopMargin));
+            this.DefaultTabStop = this.AddCell(ShapeSheet.SRCConstants.DefaultTabStop, nameof(ShapeSheet.SRCConstants.DefaultTabStop));
+            this.TextBkgnd = this.AddCell(ShapeSheet.SRCConstants.TextBkgnd, nameof(ShapeSheet.SRCConstants.TextBkgnd));
+            this.TextBkgndTrans = this.AddCell(ShapeSheet.SRCConstants.TextBkgndTrans, nameof(ShapeSheet.SRCConstants.TextBkgndTrans));
+            this.TextDirection = this.AddCell(ShapeSheet.SRCConstants.TextDirection, nameof(ShapeSheet.SRCConstants.TextDirection));
+            this.VerticalAlign = this.AddCell(ShapeSheet.SRCConstants.VerticalAlign, nameof(ShapeSheet.SRCConstants.VerticalAlign));
+            this.TxtPinX = this.AddCell(ShapeSheet.SRCConstants.TxtPinX, nameof(ShapeSheet.SRCConstants.TxtPinX));
+            this.TxtPinY = this.AddCell(ShapeSheet.SRCConstants.TxtPinY, nameof(ShapeSheet.SRCConstants.TxtPinY));
+            this.TxtLocPinX = this.AddCell(ShapeSheet.SRCConstants.TxtLocPinX, nameof(ShapeSheet.SRCConstants.TxtLocPinX));
+            this.TxtLocPinY = this.AddCell(ShapeSheet.SRCConstants.TxtLocPinY, nameof(ShapeSheet.SRCConstants.TxtLocPinY));
+            this.TxtWidth = this.AddCell(ShapeSheet.SRCConstants.TxtWidth, nameof(ShapeSheet.SRCConstants.TxtWidth));
+            this.TxtHeight = this.AddCell(ShapeSheet.SRCConstants.TxtHeight, nameof(ShapeSheet.SRCConstants.TxtHeight));
+            this.TxtAngle = this.AddCell(ShapeSheet.SRCConstants.TxtAngle, nameof(ShapeSheet.SRCConstants.TxtAngle));
 
         }
 

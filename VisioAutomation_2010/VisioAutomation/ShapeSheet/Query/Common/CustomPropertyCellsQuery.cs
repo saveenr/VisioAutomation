@@ -17,16 +17,17 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionProp);
 
-            this.SortKey = sec.AddCell(ShapeSheet.SRCConstants.Prop_SortKey, "Prop_SortKey");
-            this.Ask = sec.AddCell(ShapeSheet.SRCConstants.Prop_Ask, "Prop_Ask");
-            this.Calendar = sec.AddCell(ShapeSheet.SRCConstants.Prop_Calendar, "Prop_Calendar");
-            this.Format = sec.AddCell(ShapeSheet.SRCConstants.Prop_Format, "Prop_Format");
-            this.Invis = sec.AddCell(ShapeSheet.SRCConstants.Prop_Invisible, "Prop_Invisible");
-            this.Label = sec.AddCell(ShapeSheet.SRCConstants.Prop_Label, "Prop_Label");
-            this.LangID = sec.AddCell(ShapeSheet.SRCConstants.Prop_LangID, "Prop_LangID");
-            this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.Prop_Prompt, "Prop_Prompt");
-            this.Type = sec.AddCell(ShapeSheet.SRCConstants.Prop_Type, "Prop_Type");
-            this.Value = sec.AddCell(ShapeSheet.SRCConstants.Prop_Value, "Prop_Value");
+
+            this.SortKey = sec.AddCell(ShapeSheet.SRCConstants.Prop_SortKey, nameof(ShapeSheet.SRCConstants.Prop_SortKey));
+            this.Ask = sec.AddCell(ShapeSheet.SRCConstants.Prop_Ask, nameof(ShapeSheet.SRCConstants.Prop_Ask));
+            this.Calendar = sec.AddCell(ShapeSheet.SRCConstants.Prop_Calendar, nameof(ShapeSheet.SRCConstants.Prop_Calendar));
+            this.Format = sec.AddCell(ShapeSheet.SRCConstants.Prop_Format, nameof(ShapeSheet.SRCConstants.Prop_Format));
+            this.Invis = sec.AddCell(ShapeSheet.SRCConstants.Prop_Invisible, nameof(ShapeSheet.SRCConstants.Prop_Invisible));
+            this.Label = sec.AddCell(ShapeSheet.SRCConstants.Prop_Label, nameof(ShapeSheet.SRCConstants.Prop_Label));
+            this.LangID = sec.AddCell(ShapeSheet.SRCConstants.Prop_LangID, nameof(ShapeSheet.SRCConstants.Prop_LangID));
+            this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.Prop_Prompt, nameof(ShapeSheet.SRCConstants.Prop_Prompt));
+            this.Type = sec.AddCell(ShapeSheet.SRCConstants.Prop_Type, nameof(ShapeSheet.SRCConstants.Prop_Type));
+            this.Value = sec.AddCell(ShapeSheet.SRCConstants.Prop_Value, nameof(ShapeSheet.SRCConstants.Prop_Value));
 
         }
 
