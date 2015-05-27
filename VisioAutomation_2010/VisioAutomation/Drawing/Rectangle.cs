@@ -95,45 +95,21 @@ namespace VisioAutomation.Drawing
             return s;
         }
 
-        public Point LowerLeft
-        {
-            get { return new Point(this.Left, this.Bottom); }
-        }
+        public Point LowerLeft => new Point(this.Left, this.Bottom);
 
-        public Point LowerRight
-        {
-            get { return new Point(this.Right, this.Bottom); }
-        }
+        public Point LowerRight => new Point(this.Right, this.Bottom);
 
-        public Point UpperLeft
-        {
-            get { return new Point(this.Left, this.Top); }
-        }
+        public Point UpperLeft => new Point(this.Left, this.Top);
 
-        public Point UpperRight
-        {
-            get { return new Point(this.Right, this.Top); }
-        }
+        public Point UpperRight => new Point(this.Right, this.Top);
 
-        public Size Size
-        {
-            get { return new Size(this.Width, this.Height); }
-        }
+        public Size Size => new Size(this.Width, this.Height);
 
-        public double Width
-        {
-            get { return this.Right - this.Left; }
-        }
+        public double Width => this.Right - this.Left;
 
-        public double Height
-        {
-            get { return this.Top - this.Bottom; }
-        }
+        public double Height => this.Top - this.Bottom;
 
-        public Point Center
-        {
-            get { return new Point((this.Left + this.Right)/2.0, (this.Bottom + this.Top)/2.0); }
-        }
+        public Point Center => new Point((this.Left + this.Right)/2.0, (this.Bottom + this.Top)/2.0);
 
         public static Rectangle operator +(Rectangle r, Point p)
         {

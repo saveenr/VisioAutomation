@@ -34,7 +34,7 @@ namespace VisioAutomation.Drawing
             double dx = radius.Width * 4.0 * (System.Math.Sqrt(2) - 1) / 3;
             double dy = radius.Height * 4.0 * (System.Math.Sqrt(2) - 1) / 3;
 
-            var curve_ControlPoints = new []
+            var curve_control_points = new []
                                       {
                                           pt1,
                                           pt1.Add(dx, 0),
@@ -53,7 +53,7 @@ namespace VisioAutomation.Drawing
                 .Select(p => p + center).ToArray();
             var curve_Degree = 3;
             
-            var curve = new BezierCurve(curve_ControlPoints, curve_Degree);
+            var curve = new BezierCurve(curve_control_points, curve_Degree);
             return curve;
         }
     }

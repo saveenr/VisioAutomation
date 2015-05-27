@@ -9,15 +9,15 @@ namespace VisioAutomation.Drawing
         // SAT http://msdn.microsoft.com/en-us/library/ms425560(office.12).aspx
         // LUM http://office.microsoft.com/en-us/visio-help/HV080400509.aspx
 
-        private readonly byte _h;
-        private readonly byte _s;
-        private readonly byte _l;
+        public byte H { get; }
+        public byte S { get; }
+        public byte L { get; }
 
         public ColorHSL(byte h, byte s, byte l)
         {
-            this._h = h;
-            this._s = s;
-            this._l = l;
+            this.H = h;
+            this.S = s;
+            this.L = l;
         }
 
         private void CheckValidVisioHSL()
@@ -41,24 +41,9 @@ namespace VisioAutomation.Drawing
         {
         }
 
-        public byte H
-        {
-            get { return this._h; }
-        }
-
-        public byte S
-        {
-            get { return this._s; }
-        }
-
-        public byte L
-        {
-            get { return this._l; }
-        }
-
         public override string ToString()
         {
-            var s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "HSL({0},{1},{2})",this._h, this._s, this._l);
+            var s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "HSL({0},{1},{2})",this.H, this.S, this.L);
             return s;
         }
 
@@ -79,7 +64,7 @@ namespace VisioAutomation.Drawing
 
         private bool Equals(ColorHSL other)
         {
-            return (this._h == other._h && this._s == other._s && this._l == other._l);
+            return (this.H == other.H && this.S == other.S && this.L == other.L);
         }
 
         public override int GetHashCode()
@@ -93,7 +78,7 @@ namespace VisioAutomation.Drawing
         /// <returns></returns>
         private int ToHSLBytes()
         {
-            return (this._h << 16) | (this._s << 8) | (this._l);
+            return (this.H << 16) | (this.S << 8) | (this.L);
         }
 
         public string ToFormula()

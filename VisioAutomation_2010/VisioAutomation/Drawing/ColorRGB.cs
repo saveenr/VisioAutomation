@@ -39,20 +39,11 @@ namespace VisioAutomation.Drawing
             this._b = color.B;
         }
 
-        public byte R
-        {
-            get { return this._r; }
-        }
+        public byte R => this._r;
 
-        public byte G
-        {
-            get { return this._g; }
-        }
+        public byte G => this._g;
 
-        public byte B
-        {
-            get { return this._b; }
-        }
+        public byte B => this._b;
 
         public override string ToString()
         {
@@ -238,14 +229,14 @@ namespace VisioAutomation.Drawing
         private static string ToWebColorString(byte r, byte g, byte b)
         {
             const string format_string = "#{0:x2}{1:x2}{2:x2}";
-            CultureInfo invariant_culture = CultureInfo.InvariantCulture;
-            string color_string = string.Format(invariant_culture, format_string, r, g, b);
+            var invariant_culture = CultureInfo.InvariantCulture;
+            string color_string = string.Format(invariant_culture, "#{0:x2}{1:x2}{2:x2}", r, g, b);
             return color_string;
         }
 
         public string ToFormula()
         {
-            string formula = string.Format("RGB({0},{1},{2})", this.R, this.G, this.B);
+            string formula = $"RGB({this.R},{this.G},{this.B})";
             return formula;
         }        
     }

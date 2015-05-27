@@ -34,15 +34,8 @@ namespace VisioAutomation.Drawing
             return s;
         }
 
-        public double TotalWidth
-        {
-            get { return this.Right + this.Left; }
-        }
+        public double TotalWidth => this.Right + this.Left;
 
-        public double TotalHeight
-        {
-            get { return this.Top + this.Bottom; }
-        }
-
+        public double TotalHeight => this.Top + this.Bottom;
     }
 }

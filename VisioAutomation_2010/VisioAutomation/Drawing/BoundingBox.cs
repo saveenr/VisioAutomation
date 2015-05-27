@@ -93,9 +93,6 @@ namespace VisioAutomation.Drawing
             }
         }
 
-        public bool HasValue
-        {
-            get { return this.initialized; }
-        }
+        public bool HasValue => this.initialized;
     }
 }
