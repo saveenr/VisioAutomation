@@ -1,8 +1,7 @@
 using System;
 using System.Management.Automation;
 using VAS = VisioAutomation.Scripting;
-using SMA = System.Management.Automation;
-using SXL= System.Xml.Linq;
+using SXL = System.Xml.Linq;
 
 namespace VisioPowerShell.Commands.Import
 {

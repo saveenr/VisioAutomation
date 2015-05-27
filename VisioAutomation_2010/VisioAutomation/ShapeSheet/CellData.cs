@@ -1,5 +1,3 @@
-using VA = VisioAutomation;
-
 namespace VisioAutomation.ShapeSheet
 {
     public struct CellData<TResult>

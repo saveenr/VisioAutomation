@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using VAQUERY=VisioAutomation.ShapeSheet.Query;
-using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes

@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Management.Automation;
-using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {

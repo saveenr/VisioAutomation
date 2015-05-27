@@ -1,5 +1,4 @@
-﻿using VACONNECT=VisioAutomation.Shapes.Connections;
-using VA=VisioAutomation;
+﻿using VACONNECT = VisioAutomation.Shapes.Connections;
 
 namespace VisioAutomation.Models.DirectedGraph
 {

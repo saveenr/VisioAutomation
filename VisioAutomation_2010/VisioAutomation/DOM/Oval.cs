@@ -1,7 +1,4 @@
-﻿using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
-
-namespace VisioAutomation.DOM
+﻿namespace VisioAutomation.DOM
 {
     public class Oval : BaseShape
     {

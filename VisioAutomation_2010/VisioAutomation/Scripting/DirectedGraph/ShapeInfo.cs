@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
-using VA = VisioAutomation;
-using SXL=System.Xml.Linq;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.DirectedGraph
 {

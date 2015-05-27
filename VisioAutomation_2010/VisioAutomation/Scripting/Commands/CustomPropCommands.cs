@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
+using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {

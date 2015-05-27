@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using CTRLS=VisioAutomation.Shapes.Controls;
+using CTRLS = VisioAutomation.Shapes.Controls;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {

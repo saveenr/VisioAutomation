@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using SRCCON=VisioAutomation.ShapeSheet.SRCConstants;
+using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting
 {

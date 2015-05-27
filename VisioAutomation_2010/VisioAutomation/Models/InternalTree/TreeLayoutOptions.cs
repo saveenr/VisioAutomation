@@ -1,5 +1,3 @@
-using VA = VisioAutomation;
-
 namespace VisioAutomation.Models.InternalTree
 {
     internal class TreeLayoutOptions

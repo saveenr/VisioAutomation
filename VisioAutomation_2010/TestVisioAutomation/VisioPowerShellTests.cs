@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SMA=System.Management.Automation;
-using IVisio=Microsoft.Office.Interop.Visio;
+using SMA = System.Management.Automation;
 
 namespace TestVisioAutomation
 {

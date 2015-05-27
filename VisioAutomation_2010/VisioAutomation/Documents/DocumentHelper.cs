@@ -1,6 +1,5 @@
 ﻿using VisioAutomation.Extensions;
-using IVisio=Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Documents
 {

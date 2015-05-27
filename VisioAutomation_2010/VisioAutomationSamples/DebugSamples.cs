@@ -1,7 +1,4 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
-
-namespace VisioAutomationSamples
+﻿namespace VisioAutomationSamples
 {
     //public static class DebugSamples
     //{

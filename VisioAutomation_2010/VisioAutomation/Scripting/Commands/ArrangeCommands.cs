@@ -1,8 +1,6 @@
 using System.Linq;
-using VisioAutomation.Application;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
 using System.Collections.Generic;
 
 namespace VisioAutomation.Scripting.Commands

@@ -3,7 +3,6 @@ using System.Data;
 using System.Linq;
 using System.Management.Automation;
 using System.Xml;
-using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Out
 {

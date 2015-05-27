@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Management.Automation;
-using VACONNECT=VisioAutomation.Shapes.Connections;
-using SMA = System.Management.Automation;
+using VACONNECT = VisioAutomation.Shapes.Connections;
 
 namespace VisioPowerShell.Commands.Get
 {

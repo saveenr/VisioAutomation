@@ -1,5 +1,4 @@
-using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 
 namespace VisioAutomation.Models.DirectedGraph
 {

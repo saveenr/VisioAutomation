@@ -1,7 +1,6 @@
 ﻿using System.Management.Automation;
-using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.Close
 {

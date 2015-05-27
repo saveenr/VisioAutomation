@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VADRAW=VisioAutomation.Drawing;
-using VASS=VisioAutomation.ShapeSheet;
-using VA=VisioAutomation;
+using VADRAW = VisioAutomation.Drawing;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace TestVisioAutomation
 {

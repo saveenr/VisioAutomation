@@ -1,7 +1,6 @@
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VA=VisioAutomation;
 
 namespace TestVisioAutomation
 {

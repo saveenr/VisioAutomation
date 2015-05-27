@@ -1,6 +1,5 @@
-using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
+using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomationSamples
 {

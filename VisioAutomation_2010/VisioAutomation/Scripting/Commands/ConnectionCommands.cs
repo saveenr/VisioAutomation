@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using VACONNECT=VisioAutomation.Shapes.Connections;
+using VACONNECT = VisioAutomation.Shapes.Connections;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {

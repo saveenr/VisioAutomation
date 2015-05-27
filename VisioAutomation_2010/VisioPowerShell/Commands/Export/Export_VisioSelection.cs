@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Management.Automation;
-using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Export
 {

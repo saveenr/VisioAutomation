@@ -1,4 +1,3 @@
-using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Scripting.Commands

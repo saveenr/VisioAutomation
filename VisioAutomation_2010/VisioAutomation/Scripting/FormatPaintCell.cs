@@ -1,6 +1,4 @@
-﻿using VA=VisioAutomation;
-
-namespace VisioAutomation.Scripting
+﻿namespace VisioAutomation.Scripting
 {
     public class FormatPaintCell
     {

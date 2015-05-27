@@ -1,6 +1,4 @@
-﻿using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
-using CONTMODEL = VisioAutomation.Models.ContainerLayout;
+﻿using CONTMODEL = VisioAutomation.Models.ContainerLayout;
 
 namespace VisioAutomationSamples
 {

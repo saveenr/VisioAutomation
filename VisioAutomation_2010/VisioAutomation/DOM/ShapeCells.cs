@@ -1,6 +1,3 @@
-using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
-
 namespace VisioAutomation.DOM
 {
     public class ShapeCells

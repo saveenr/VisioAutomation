@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 using CONS = VisioAutomation.Shapes.Connections;
 
 namespace VisioAutomation.Scripting.Commands

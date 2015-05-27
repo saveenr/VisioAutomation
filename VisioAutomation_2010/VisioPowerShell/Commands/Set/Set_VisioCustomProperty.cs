@@ -1,8 +1,7 @@
 using System;
 using System.Collections;
 using System.Management.Automation;
-using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
-using SMA = System.Management.Automation;
+using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Set

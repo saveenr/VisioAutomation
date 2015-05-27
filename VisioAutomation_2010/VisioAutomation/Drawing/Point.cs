@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VA=VisioAutomation;
 
 namespace VisioAutomation.Drawing
 {

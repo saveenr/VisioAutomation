@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.Extensions;
-using VA=VisioAutomation;
-using VAQUERY = VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Layout
 {

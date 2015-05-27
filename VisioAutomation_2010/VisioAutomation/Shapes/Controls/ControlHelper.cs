@@ -1,7 +1,5 @@
 using System;
-using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VACONTROL = VisioAutomation.Shapes.Controls;
 
 namespace VisioAutomation.Shapes.Controls
 {

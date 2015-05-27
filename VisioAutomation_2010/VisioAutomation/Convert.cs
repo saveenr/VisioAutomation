@@ -1,6 +1,4 @@
-﻿using VA=VisioAutomation;
-
-namespace VisioAutomation
+﻿namespace VisioAutomation
 {
     public static class Convert
     {

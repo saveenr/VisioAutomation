@@ -1,6 +1,5 @@
 using System.Runtime.InteropServices;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace TestVisioAutomation
 {

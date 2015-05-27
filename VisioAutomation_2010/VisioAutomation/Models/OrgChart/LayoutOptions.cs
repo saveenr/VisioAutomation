@@ -1,5 +1,3 @@
-using VA=VisioAutomation;
-
 namespace VisioAutomation.Models.OrgChart
 {
     public class LayoutOptions

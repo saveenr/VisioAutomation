@@ -1,5 +1,3 @@
-using VA=VisioAutomation;
-
 namespace VisioAutomation.Models.DirectedGraph
 {
     class VisioRenderer

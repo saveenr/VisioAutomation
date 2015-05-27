@@ -1,5 +1,4 @@
 ﻿using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using OCMODEL = VisioAutomation.Models.OrgChart;
 

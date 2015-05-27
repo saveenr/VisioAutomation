@@ -1,6 +1,5 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VA =VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {

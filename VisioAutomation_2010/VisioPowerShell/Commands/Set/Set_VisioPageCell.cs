@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Set
 {

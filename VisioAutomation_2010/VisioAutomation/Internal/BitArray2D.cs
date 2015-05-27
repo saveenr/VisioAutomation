@@ -1,6 +1,4 @@
-﻿using VA = VisioAutomation;
-
-namespace VisioAutomation.Internal
+﻿namespace VisioAutomation.Internal
 {
     internal class BitArray2D
     {

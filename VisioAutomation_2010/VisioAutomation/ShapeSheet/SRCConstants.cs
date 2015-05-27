@@ -1,9 +1,8 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SEC = Microsoft.Office.Interop.Visio.VisSectionIndices;
 using ROW = Microsoft.Office.Interop.Visio.VisRowIndices;
 using CEL = Microsoft.Office.Interop.Visio.VisCellIndices;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet
 {

@@ -4,7 +4,6 @@ using VisioAutomation.Extensions;
 
 using IVisio = Microsoft.Office.Interop.Visio;
 using SXL = System.Xml.Linq;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {

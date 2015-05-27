@@ -1,5 +1,4 @@
 ﻿using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 using DGMODEL = VisioAutomation.Models.DirectedGraph;
 using VisioAutomation.Extensions;
 

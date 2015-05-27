@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Drawing
 {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.Get

@@ -3,8 +3,6 @@ using System.Linq;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using SXL = System.Xml.Linq;
-using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 using DGMODEL = VisioAutomation.Models.DirectedGraph;
 
 namespace VisioAutomation.Scripting.DirectedGraph

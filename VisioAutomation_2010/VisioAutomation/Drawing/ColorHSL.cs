@@ -1,6 +1,4 @@
-﻿using VA=VisioAutomation;
-
-namespace VisioAutomation.Drawing
+﻿namespace VisioAutomation.Drawing
 {
     public struct ColorHSL
     {

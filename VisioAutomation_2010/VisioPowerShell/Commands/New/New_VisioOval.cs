@@ -1,6 +1,5 @@
 using System.Management.Automation;
-using SMA = System.Management.Automation;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 namespace VisioPowerShell.Commands.New
 {
     [Cmdlet(VerbsCommon.New, "VisioOval")]

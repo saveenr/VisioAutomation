@@ -1,7 +1,4 @@
-﻿using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
-
-namespace VisioAutomation.ShapeSheet.Query
+﻿namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionColumnList : System.Collections.Generic.IEnumerable<SectionColumn>
     {

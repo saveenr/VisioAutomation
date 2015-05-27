@@ -1,7 +1,4 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
-
-namespace VisioAutomation.Extensions
+﻿namespace VisioAutomation.Extensions
 {
     public static class CellDataMethods
     {

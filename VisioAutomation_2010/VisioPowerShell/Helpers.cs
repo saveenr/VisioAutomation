@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell
 {

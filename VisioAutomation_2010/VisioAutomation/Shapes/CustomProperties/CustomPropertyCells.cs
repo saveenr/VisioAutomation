@@ -1,7 +1,4 @@
-﻿using VA=VisioAutomation;
-using VisioAutomation.Extensions;
-using System.Collections.Generic;
-using VAQUERY=VisioAutomation.ShapeSheet.Query;
+﻿using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties

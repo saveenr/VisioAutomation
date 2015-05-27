@@ -1,4 +1,3 @@
-using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.DirectedGraph

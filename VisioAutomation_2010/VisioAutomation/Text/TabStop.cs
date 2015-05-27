@@ -1,7 +1,4 @@
-﻿using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
-
-namespace VisioAutomation.Text
+﻿namespace VisioAutomation.Text
 {
     public struct TabStop
     {

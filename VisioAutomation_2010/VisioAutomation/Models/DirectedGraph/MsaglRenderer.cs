@@ -5,7 +5,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using MG = Microsoft.Msagl;
 using VA = VisioAutomation;
-using DGMODEL = VisioAutomation.Models.DirectedGraph;
 
 namespace VisioAutomation.Models.DirectedGraph
 {

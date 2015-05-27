@@ -1,6 +1,4 @@
-﻿using VA=VisioAutomation;
-
-namespace VisioAutomation.Models.DirectedGraph
+﻿namespace VisioAutomation.Models.DirectedGraph
 {
     public class MsaglLayoutOptions : LayoutOptions
     {

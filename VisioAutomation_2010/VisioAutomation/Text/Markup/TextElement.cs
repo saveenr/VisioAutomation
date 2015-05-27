@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Text.Markup
 {

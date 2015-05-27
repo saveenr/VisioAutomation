@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 
 namespace VisioAutomation.DOM

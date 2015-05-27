@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
-using VisioAutomation.Extensions;
-using VAQUERY=VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {

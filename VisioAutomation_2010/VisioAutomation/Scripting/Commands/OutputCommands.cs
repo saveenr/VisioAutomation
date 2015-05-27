@@ -1,6 +1,3 @@
-using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
-
 namespace VisioAutomation.Scripting.Commands
 {
     public class OutputCommands : CommandSet
