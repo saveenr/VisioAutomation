@@ -43,15 +43,9 @@ namespace VisioPowerShell
 
         public Dictionary<string, T>.KeyCollection CellNames => this.dic.Keys;
 
-        public bool IsValidCellName(string name)
-        {
-            return this.regex_cellname.IsMatch(name);
-        }
+        public bool IsValidCellName(string name) => this.regex_cellname.IsMatch(name);
 
-        public bool IsValidCellNameWildCard(string name)
-        {
-            return this.regex_cellname_wildcard.IsMatch(name);
-        }
+        public bool IsValidCellNameWildCard(string name) => this.regex_cellname_wildcard.IsMatch(name);
 
 
         public void CheckCellName(string name)
@@ -130,10 +124,6 @@ namespace VisioPowerShell
             }
         }
 
-        public bool ContainsCell(string name)
-        {
-            return this.dic.ContainsKey(name);
-        }
-
+        public bool ContainsCell(string name) => this.dic.ContainsKey(name);
     }
 }

@@ -39,38 +39,37 @@ namespace VisioPowerShell
 
         public static DataTable QueryToDataTable(VisioAutomation.ShapeSheet.Query.CellQuery cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            if (getresults)
-            {
-                if (ResultType == Model.ResultType.String)
-                {
-                    var output = cellQuery.GetResults<string>(surface, shapeids);
-                    return Helpers.querytable_to_datatable(cellQuery, output);
-                }
-                else if (ResultType == Model.ResultType.Boolean)
-                {
-                    var output = cellQuery.GetResults<bool>(surface, shapeids);
-                    return Helpers.querytable_to_datatable(cellQuery, output);
-                }
-                else if (ResultType == Model.ResultType.Double)
-                {
-                    var output = cellQuery.GetResults<double>(surface, shapeids);
-                    return Helpers.querytable_to_datatable(cellQuery, output);
-                }
-                else if (ResultType == Model.ResultType.Integer)
-                {
-                    var output = cellQuery.GetResults<int>(surface, shapeids);
-                    return Helpers.querytable_to_datatable(cellQuery, output);
-                }
-                else
-                {
-                    throw new VisioAutomation.Scripting.VisioApplicationException("Unsupported Result type");
-                }
-            }
-            else
+            if (!getresults)
             {
                 var output = cellQuery.GetFormulas(surface, shapeids);
                 return Helpers.querytable_to_datatable(cellQuery, output);
             }
+
+            switch (ResultType)
+            {
+                case Model.ResultType.String:
+                {
+                    var output = cellQuery.GetResults<string>(surface, shapeids);
+                    return Helpers.querytable_to_datatable(cellQuery, output);
+                }
+                case Model.ResultType.Boolean:
+                {
+                    var output = cellQuery.GetResults<bool>(surface, shapeids);
+                    return Helpers.querytable_to_datatable(cellQuery, output);
+                }
+                case Model.ResultType.Double:
+                {
+                    var output = cellQuery.GetResults<double>(surface, shapeids);
+                    return Helpers.querytable_to_datatable(cellQuery, output);
+                }
+                case Model.ResultType.Integer:
+                {
+                    var output = cellQuery.GetResults<int>(surface, shapeids);
+                    return Helpers.querytable_to_datatable(cellQuery, output);
+                }
+            }
+
+            throw new VisioAutomation.Scripting.VisioApplicationException("Unsupported Result type");
         }
     }
 }
