@@ -5,9 +5,9 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct SRC
     {
-        public short Section { get; private set; }
-        public short Row { get; private set; }
-        public short Cell { get; private set; }
+        public short Section { get; }
+        public short Row { get; }
+        public short Cell { get; }
 
         public SRC(
             IVisio.VisSectionIndices section,

@@ -2,9 +2,9 @@
 {
     internal class BitArray2D
     {
-        public System.Collections.BitArray BitArray { get; private set; }
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        public System.Collections.BitArray BitArray { get; }
+        public int Width { get; }
+        public int Height { get; }
 
         public BitArray2D(int cols, int rows)
         {

@@ -2,11 +2,11 @@
 {
     internal class StreamBuilder
     {
-        public short[] Stream { get; private set; }
+        public short[] Stream { get; }
         public int ChunksWrittenCount { get; private set; }
-        public int ChunkSize { get; private set; }
+        public int ChunkSize { get; }
         public int ShortsWrittenCount { get; private set; }
-        public int Capacity { get; private set; }
+        public int Capacity { get; }
 
         public StreamBuilder(int chunksize, int capacity)
         {

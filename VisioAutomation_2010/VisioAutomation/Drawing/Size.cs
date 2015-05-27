@@ -2,8 +2,8 @@
 {
     public struct Size
     {
-        public double Width { get; private set; }
-        public double Height { get; private set; }
+        public double Width { get; }
+        public double Height { get; }
 
         public Size(double width, double height)
             : this()

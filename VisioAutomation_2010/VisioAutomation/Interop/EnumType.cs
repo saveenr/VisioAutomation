@@ -5,9 +5,9 @@ namespace VisioAutomation.Interop
 {
     public class EnumType
     {
-        public System.Type Type { get; private set; }
+        public System.Type Type { get; }
         public string Name { get; private set; }
-        public List<EnumValue> Values { get; private set; }
+        public List<EnumValue> Values { get; }
         public Dictionary<string,int> NameToValue { get; private set; }
         
         public EnumType(System.Type t)

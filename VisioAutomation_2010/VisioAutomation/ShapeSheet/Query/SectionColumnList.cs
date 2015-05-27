@@ -2,7 +2,7 @@
 {
     public class SectionColumnList : System.Collections.Generic.IEnumerable<SectionColumn>
     {
-        private System.Collections.Generic.IList<SectionColumn> items { get; set; }
+        private System.Collections.Generic.IList<SectionColumn> items { get; }
         private readonly System.Collections.Generic.Dictionary<Microsoft.Office.Interop.Visio.VisSectionIndices,SectionColumn> hs_section; 
 
         internal SectionColumnList(int capacity)

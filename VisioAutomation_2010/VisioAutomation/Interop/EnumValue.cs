@@ -2,8 +2,8 @@ namespace VisioAutomation.Interop
 {
     public class EnumValue
     {
-        public string Name { get; private set; }
-        public int Value { get; private set; }
+        public string Name { get; }
+        public int Value { get; }
 
         public EnumValue(string name, int value)
         {

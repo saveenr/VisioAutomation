@@ -11,8 +11,8 @@ namespace VisioAutomation.Internal
 
         public class MasterRef
         {
-            public string StencilName { get; private set; }
-            public string MasterName { get; private set; }
+            public string StencilName { get; }
+            public string MasterName { get; }
             public IVisio.Master VisioMaster { get; set; }
 
             public MasterRef(string mastername, string stencilname)

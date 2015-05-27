@@ -5,7 +5,7 @@ namespace VisioAutomation.DOM
 {
     public class Page : Node
     {
-        public ShapeList Shapes { get; private set; }
+        public ShapeList Shapes { get; }
         public Drawing.Size? Size;
         public bool ResizeToFit;
         public Drawing.Size? ResizeToFitMargin;
@@ -13,7 +13,7 @@ namespace VisioAutomation.DOM
         public string Name;
         public Pages.PageLayout.Layout Layout;
         public IVisio.Page VisioPage;
-        public Application.PerfSettings PerfSettings { get; private set; }
+        public Application.PerfSettings PerfSettings { get; }
 
         public Page()
         {

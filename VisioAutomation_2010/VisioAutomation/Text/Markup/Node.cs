@@ -5,7 +5,7 @@ namespace VisioAutomation.Text.Markup
     public class Node 
     {
         public NodeList<Node> Children { get;  set; }
-        public NodeType NodeType { get; private set; }
+        public NodeType NodeType { get; }
 
         internal Node(NodeType nt)
         {

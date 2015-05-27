@@ -2,7 +2,7 @@
 {
     public class FormatPaintCell
     {
-        public FormatCategory Category { get; private set; }
+        public FormatCategory Category { get; }
         public ShapeSheet.SRC SRC { get; private set; }
         public string Name;
 

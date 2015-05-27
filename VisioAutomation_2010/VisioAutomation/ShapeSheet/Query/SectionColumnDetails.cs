@@ -7,7 +7,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         public SectionColumn section_column { get; private set; }
         public short ShapeID { get; private set; }
-        public int RowCount  { get; private set; }
+        public int RowCount  { get; }
 
         internal SectionColumnDetails(SectionColumn sq, short shapeid, int numrows)
         {

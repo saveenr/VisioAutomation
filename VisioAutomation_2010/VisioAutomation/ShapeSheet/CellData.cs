@@ -2,8 +2,8 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct CellData<TResult>
     {
-        public FormulaLiteral Formula { get; private set; }
-        public TResult Result { get; private set; }
+        public FormulaLiteral Formula { get; }
+        public TResult Result { get; }
 
         public CellData(FormulaLiteral formula, TResult result)
             : this()

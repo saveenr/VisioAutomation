@@ -7,7 +7,7 @@ namespace VisioAutomation.Scripting
 {
     public class FormatPaintCache
     {
-        public List<FormatPaintCell> Cells { get; private set; }
+        public List<FormatPaintCell> Cells { get; }
 
         public FormatPaintCache()
         {

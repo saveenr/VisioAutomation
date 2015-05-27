@@ -6,8 +6,8 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         public string Name { get; private set; }
         public IVisio.VisSectionIndices SectionIndex { get; private set; }
-        public CellColumnList CellColumns { get; private set; }
-        public int Ordinal { get; private set; }
+        public CellColumnList CellColumns { get; }
+        public int Ordinal { get; }
 
         internal SectionColumn(int ordinal, IVisio.VisSectionIndices section)
         {

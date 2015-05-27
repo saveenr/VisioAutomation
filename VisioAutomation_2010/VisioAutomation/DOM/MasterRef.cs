@@ -7,7 +7,7 @@ namespace VisioAutomation.DOM
     public class MasterRef
     {
         public string MasterName { get; private set; }
-        public string StencilName { get; private set; }
+        public string StencilName { get; }
         public IVisio.Master VisioMaster { get; internal set; }
 
         public MasterRef(IVisio.Master master)

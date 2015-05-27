@@ -6,8 +6,8 @@ namespace VisioAutomation.Application
     {
         private readonly IVisio.Application Application;
 
-        public int ScopeID { get; private set; }
-        public string Name { get; private set; }
+        public int ScopeID { get; }
+        public string Name { get; }
         public bool Commit { get; set; }
 
         public UndoScope(IVisio.Application app, string name)

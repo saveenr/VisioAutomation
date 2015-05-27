@@ -4,9 +4,9 @@ namespace VisioAutomation.Shapes.Connections
 {
     public struct ConnectorEdge
     {
-        public IVisio.Shape Connector { get; private set; }
-        public IVisio.Shape From { get; private set; }
-        public IVisio.Shape To { get; private set; }
+        public IVisio.Shape Connector { get; }
+        public IVisio.Shape From { get; }
+        public IVisio.Shape To { get; }
 
         public ConnectorEdge(IVisio.Shape connectingshape, IVisio.Shape fromshape, IVisio.Shape toshape) : this()
         {

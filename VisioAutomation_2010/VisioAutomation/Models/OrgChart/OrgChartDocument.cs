@@ -6,7 +6,7 @@ namespace VisioAutomation.Models.OrgChart
 {
     public class OrgChartDocument
     {
-        public List<Node> OrgCharts { get; private set; }
+        public List<Node> OrgCharts { get; }
 
         public LayoutOptions LayoutOptions;
 

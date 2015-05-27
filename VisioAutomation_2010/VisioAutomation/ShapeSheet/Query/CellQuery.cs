@@ -5,8 +5,8 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellQuery
     {
-        public CellColumnList CellColumns { get; private set; }
-        public SectionColumnList SectionColumns { get; private set; }
+        public CellColumnList CellColumns { get; }
+        public SectionColumnList SectionColumns { get; }
 
         private List<List<SectionColumnDetails>> PerShapeSectionInfo; 
         private bool IsFrozen;

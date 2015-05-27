@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellColumnList : IEnumerable<CellColumn>
     {
-        private IList<CellColumn> items { get; set; }
+        private IList<CellColumn> items { get; }
         private readonly Dictionary<string, CellColumn> dic_columns;
         private HashSet<SRC> hs_src;
         private HashSet<short> hs_cellindex;

@@ -1,4 +1,4 @@
-using IVisio=Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Application
 {
@@ -7,11 +7,11 @@ namespace VisioAutomation.Application
         public bool? EnableAutoConnect;
         public bool? LiveDynamics;
         public short? ScreenUpdating;
-        public short? DeferRecalc;        
+        public short? DeferRecalc;
 
         public PerfSettings()
         {
-            
+
         }
 
         public void Load(IVisio.Application app)
@@ -27,9 +27,9 @@ namespace VisioAutomation.Application
         {
             var app_settings = app.Settings;
             if (this.ScreenUpdating.HasValue) { app.ScreenUpdating = this.ScreenUpdating.Value; }
-            if (this.DeferRecalc.HasValue) {app.DeferRecalc = this.DeferRecalc.Value;}
-            if (this.EnableAutoConnect.HasValue) {app_settings.EnableAutoConnect = this.EnableAutoConnect.Value;}
-            if (this.LiveDynamics.HasValue) {app.LiveDynamics = this.LiveDynamics.Value;}
+            if (this.DeferRecalc.HasValue) { app.DeferRecalc = this.DeferRecalc.Value; }
+            if (this.EnableAutoConnect.HasValue) { app_settings.EnableAutoConnect = this.EnableAutoConnect.Value; }
+            if (this.LiveDynamics.HasValue) { app.LiveDynamics = this.LiveDynamics.Value; }
         }
 
     }

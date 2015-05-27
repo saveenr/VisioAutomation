@@ -6,7 +6,7 @@ namespace VisioAutomation.Shapes.Geometry
 {
     public class GeometrySection : IEnumerable<GeometryRow>
     {
-        private List<GeometryRow> Rows { get; set; }
+        private List<GeometryRow> Rows { get; }
         public ShapeSheet.FormulaLiteral NoFill { get; set; }
         public ShapeSheet.FormulaLiteral NoLine { get; set; }
         public ShapeSheet.FormulaLiteral NoShow { get; set; }

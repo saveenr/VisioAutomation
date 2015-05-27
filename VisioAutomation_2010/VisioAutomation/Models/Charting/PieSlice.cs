@@ -8,10 +8,10 @@ namespace VisioAutomation.Models.Charting
     public class PieSlice
     {
         public double InnerRadius { get; private set; }
-        public double Radius { get; private set; }
-        public Drawing.Point Center { get; private set; }
-        public double SectorStartAngle { get; private set; }
-        public double SectorEndAngle { get; private set; }
+        public double Radius { get; }
+        public Drawing.Point Center { get; }
+        public double SectorStartAngle { get; }
+        public double SectorEndAngle { get; }
 
         public double Angle
         {

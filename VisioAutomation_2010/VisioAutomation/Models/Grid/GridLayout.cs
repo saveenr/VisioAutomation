@@ -7,15 +7,15 @@ namespace VisioAutomation.Models.Grid
 {
     public class GridLayout
     {
-        public int ColumnCount { get; private set; }
-        public int RowCount { get; private set; }
+        public int ColumnCount { get; }
+        public int RowCount { get; }
         public Drawing.Point Origin { get;  set; }
         public Drawing.Size CellSpacing { get; set; }
         public RowDirection RowDirection { get; set; }
         public ColumnDirection ColumnDirection { get; set; }
 
-        public IList<Column> Columns { get; private set; }
-        public IList<Row> Rows { get; private set; }
+        public IList<Column> Columns { get; }
+        public IList<Row> Rows { get; }
 
         private readonly Node[,] _nodes;
 

@@ -7,7 +7,7 @@ namespace VisioAutomation.DOM
     {
         private List<T> items;
 
-        public Node Parent { get; private set; }
+        public Node Parent { get; }
 
         internal NodeList(Node parent)
         {

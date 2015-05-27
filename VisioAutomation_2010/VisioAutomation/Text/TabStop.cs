@@ -2,8 +2,8 @@
 {
     public struct TabStop
     {
-        public double Position { get; private set; }
-        public TabStopAlignment Alignment { get; private set; }
+        public double Position { get; }
+        public TabStopAlignment Alignment { get; }
 
         public TabStop(double pos, TabStopAlignment align) : this()
         {

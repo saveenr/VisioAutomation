@@ -2,7 +2,7 @@
 {
     public class SnappingGrid
     {
-        public Size SnapSize { get; private set; }
+        public Size SnapSize { get; }
         
         public SnappingGrid(double w, double h)
         {

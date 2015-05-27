@@ -5,10 +5,10 @@ namespace VisioAutomation.Drawing
 {
     public struct BezierSegment
     {
-        public Point Start { get; private set; }
-        public Point Handle1 { get; private set; }
-        public Point Handle2 { get; private set; }
-        public Point End { get; private set; }
+        public Point Start { get; }
+        public Point Handle1 { get; }
+        public Point Handle2 { get; }
+        public Point End { get; }
 
         public BezierSegment(Point start, Point handle1, Point handle2, Point end)
             : this()

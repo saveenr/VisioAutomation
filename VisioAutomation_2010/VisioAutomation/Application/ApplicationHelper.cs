@@ -17,22 +17,25 @@ namespace VisioAutomation.Application
         public static string GetContentLocation(Microsoft.Office.Interop.Visio.Application app)
         {
             var ver = ApplicationHelper.GetVersion(app);
+            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
+            string app_Lang = app.Language.ToString(invariant_culture);
+            var str_visio_content = "Visio Content";
 
             if (ver.Major == 14)
             {
-                string path = System.IO.Path.Combine(app.Path, "Visio Content");
-                path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                string path = System.IO.Path.Combine(app.Path, str_visio_content);
+                path = System.IO.Path.Combine(path, app_Lang);
                 return path;
             }
 
             if (ver.Major >= 15)
             {
-                string path = System.IO.Path.Combine(app.Path, "Visio Content");
-                path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                string path = System.IO.Path.Combine(app.Path, str_visio_content);
+                path = System.IO.Path.Combine(path, app_Lang);
                 return path;
             }
 
-            string msg = string.Format("VisioAutomation does not support Visio version {0}", ver.Major);
+            string msg = $"VisioAutomation does not support Visio version {ver.Major}";
             throw new System.ArgumentException(msg);
         }
 
@@ -47,7 +50,7 @@ namespace VisioAutomation.Application
             string ver = app.Version;
             string ver_normalized = ver.Replace(",", ".");
 
-            string path = string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", ver_normalized);
+            string path = $@"Software\Microsoft\Office\{ver_normalized}\Visio\Application";
 
             string logfilename = null;
             using (var key_visio_application = hkcu.OpenSubKey(path))

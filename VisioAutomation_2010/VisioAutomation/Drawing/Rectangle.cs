@@ -2,10 +2,10 @@
 {
     public struct Rectangle
     {
-        public double Left { get; private set; }
-        public double Bottom { get; private set; }
-        public double Right { get; private set; }
-        public double Top { get; private set; }
+        public double Left { get; }
+        public double Bottom { get; }
+        public double Right { get; }
+        public double Top { get; }
 
         public Rectangle(double left, double bottom, double right, double top)
             : this()
