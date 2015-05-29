@@ -36,10 +36,7 @@ namespace VisioAutomation.Models.InternalTree
 
         public TreeLayoutOptions Options { get; set; }
 
-        public Node<T> Root
-        {
-            get { return this.root; }
-        }
+        public Node<T> Root => this.root;
 
         public TreeLayout()
         {
@@ -47,31 +44,30 @@ namespace VisioAutomation.Models.InternalTree
             this.root = new Node<T>(-1, null, this.Options.DefaultNodeSize);
         }
 
-        public IEnumerable<Node<T>> Nodes
-        {
-            get { return this.Root.EnumRecursive().Skip(1); // return all the nodes (except the special root)
-            }
-        }
+        public IEnumerable<Node<T>> Nodes => this.Root.EnumRecursive().Skip(1); // return all the nodes (except the special root)
 
         private void set_level_height(Node<T> node, int level)
         {
-            this.max_level_height[level] = System.Math.Max(DictionaryUtil.GetValue(this.max_level_height, level, 0),
-                                                      node.Size.Height);
+            var value = DictionaryUtil.GetValue(this.max_level_height, level, 0);
+            this.max_level_height[level] = System.Math.Max(value, node.Size.Height);
         }
 
         private void set_level_width(Node<T> node, int level)
         {
-            this.max_level_width[level] = System.Math.Max(DictionaryUtil.GetValue(this.max_level_width, level, 0), node.Size.Width);
+            var value = DictionaryUtil.GetValue(this.max_level_width, level, 0);
+            this.max_level_width[level] = System.Math.Max(value, node.Size.Width);
         }
 
         private void set_neighbors(Node<T> node, int level)
         {
             node.left_neighbor = DictionaryUtil.GetValue(this.previous_level_node, level, null);
+
             if (node.left_neighbor != null)
             {
                 node.left_neighbor = this.previous_level_node[level];
                 node.left_neighbor.right_neighbor = node;
             }
+
             this.previous_level_node[level] = node;
         }
 
@@ -106,62 +102,62 @@ namespace VisioAutomation.Models.InternalTree
              * accrue from positioning nodes rather than subtrees.
              *----------------------------------------------------*/
 
-            var firstChild = node.FirstChild;
-            var firstChildLeftNeighbor = firstChild.left_neighbor;
+            var first_child = node.FirstChild;
+            var first_child_left_neighbor = first_child.left_neighbor;
             int j = 1;
             for (int k = this.Options.MaximumDepth - level;
-                 firstChild != null && firstChildLeftNeighbor != null && j <= k;)
+                 first_child != null && first_child_left_neighbor != null && j <= k;)
             {
-                double modifierSumRight = 0;
-                double modifierSumLeft = 0;
-                var rightAncestor = firstChild;
-                var leftAncestor = firstChildLeftNeighbor;
+                double modifier_sum_right = 0;
+                double modifier_sum_left = 0;
+                var right_ancestor = first_child;
+                var left_ancestor = first_child_left_neighbor;
                 for (int l = 0; l < j; l++)
                 {
-                    rightAncestor = rightAncestor.Parent;
-                    leftAncestor = leftAncestor.Parent;
-                    modifierSumRight += rightAncestor.modifier;
-                    modifierSumLeft += leftAncestor.modifier;
+                    right_ancestor = right_ancestor.Parent;
+                    left_ancestor = left_ancestor.Parent;
+                    modifier_sum_right += right_ancestor.modifier;
+                    modifier_sum_left += left_ancestor.modifier;
                 }
 
-                double totalGap = (firstChildLeftNeighbor.prelim_x + modifierSumLeft +
-                                   this.GetNodeSize(firstChildLeftNeighbor) + this.Options.SubtreeSeparation) -
-                                  (firstChild.prelim_x + modifierSumRight);
-                if (totalGap > 0)
+                double total_gap = (first_child_left_neighbor.prelim_x + modifier_sum_left +
+                                   this.GetNodeSize(first_child_left_neighbor) + this.Options.SubtreeSeparation) -
+                                  (first_child.prelim_x + modifier_sum_right);
+                if (total_gap > 0)
                 {
-                    var subtreeAux = node;
-                    int numSubtrees = 0;
-                    for (; subtreeAux != null && subtreeAux != leftAncestor; subtreeAux = subtreeAux.LeftSibling)
+                    var subtree_aux = node;
+                    int num_subtrees = 0;
+                    for (; subtree_aux != null && subtree_aux != left_ancestor; subtree_aux = subtree_aux.LeftSibling)
                     {
-                        numSubtrees++;
+                        num_subtrees++;
                     }
 
-                    if (subtreeAux != null)
+                    if (subtree_aux != null)
                     {
-                        var subtreeMoveAux = node;
-                        double singleGap = totalGap/numSubtrees;
-                        for (; subtreeMoveAux != leftAncestor; subtreeMoveAux = subtreeMoveAux.LeftSibling)
+                        var subtree_move_aux = node;
+                        double single_gap = total_gap/num_subtrees;
+                        for (; subtree_move_aux != left_ancestor; subtree_move_aux = subtree_move_aux.LeftSibling)
                         {
-                            subtreeMoveAux.prelim_x += totalGap;
-                            subtreeMoveAux.modifier += totalGap;
-                            totalGap -= singleGap;
+                            subtree_move_aux.prelim_x += total_gap;
+                            subtree_move_aux.modifier += total_gap;
+                            total_gap -= single_gap;
                         }
                     }
                 }
                 j++;
 
-                if (firstChild.ChildCount == 0)
+                if (first_child.ChildCount == 0)
                 {
-                    firstChild = TreeLayout<T>.get_leftmost(node, 0, j);
+                    first_child = TreeLayout<T>.get_leftmost(node, 0, j);
                 }
                 else
                 {
-                    firstChild = firstChild.FirstChild;
+                    first_child = first_child.FirstChild;
                 }
 
-                if (firstChild != null)
+                if (first_child != null)
                 {
-                    firstChildLeftNeighbor = firstChild.left_neighbor;
+                    first_child_left_neighbor = first_child.left_neighbor;
                 }
             }
         }
@@ -521,11 +517,12 @@ namespace VisioAutomation.Models.InternalTree
             var lineseg = this.GetConnectionLine(connection);
             Drawing.Point m0, m1;
 
-            Drawing.Point parent_attach_point = lineseg.Start;
-            Drawing.Point child_attach_point = lineseg.End;
-            Drawing.Point dif = lineseg.End - lineseg.Start;
-            double a = (this.Options.LevelSeparation/2.0);
-            double b = (this.Options.LevelSeparation/2.0);
+            var parent_attach_point = lineseg.Start;
+            var child_attach_point = lineseg.End;
+            var dif = lineseg.End - lineseg.Start;
+            var a = (this.Options.LevelSeparation/2.0);
+            var b = (this.Options.LevelSeparation/2.0);
+
             if (TreeLayout<T>.IsVertical(this.Options.Direction))
             {
                 if (this.Options.Direction == LayoutDirection.Up)
@@ -552,8 +549,8 @@ namespace VisioAutomation.Models.InternalTree
         {
             var lineseg = this.GetConnectionLine(connection);
 
-            Drawing.Point parent_attach_point = lineseg.Start;
-            Drawing.Point child_attach_point = lineseg.End;
+            var parent_attach_point = lineseg.Start;
+            var child_attach_point = lineseg.End;
 
             double scale = this.Options.LevelSeparation/2.0;
             var dif = child_attach_point.Subtract(parent_attach_point).Multiply(scale);
@@ -563,8 +560,8 @@ namespace VisioAutomation.Models.InternalTree
                                           ? new Drawing.Point(0, dif.Y)
                                           : new Drawing.Point(dif.X, 0);
 
-            Drawing.Point h1 = parent_attach_point.Add(handle_displacement);
-            Drawing.Point h2 = child_attach_point.Add(handle_displacement * (-1));
+            var h1 = parent_attach_point.Add(handle_displacement);
+            var h2 = child_attach_point.Add(handle_displacement * (-1));
 
             return new[] {parent_attach_point, h1, h2, child_attach_point};
         }

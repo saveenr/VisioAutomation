@@ -19,10 +19,7 @@ namespace VisioAutomation.Models.InternalTree
 
         public Drawing.Size Size { get; set; }
 
-        public Drawing.Rectangle Rect
-        {
-            get { return new Drawing.Rectangle(this.Position, this.Size); }
-        }
+        public Drawing.Rectangle Rect => new Drawing.Rectangle(this.Position, this.Size);
 
         internal void init(int id, Node<T> parent, Drawing.Size size, T data)
         {
@@ -88,15 +85,9 @@ namespace VisioAutomation.Models.InternalTree
             }
         }
 
-        public Node<T> FirstChild
-        {
-            get { return this.GetChildAt(0); }
-        }
+        public Node<T> FirstChild => this.GetChildAt(0);
 
-        public Node<T> LastChild
-        {
-            get { return this.GetChildAt(this.ChildCount - 1); }
-        }
+        public Node<T> LastChild => this.GetChildAt(this.ChildCount - 1);
 
         private void add_child(Node<T> nn)
         {
