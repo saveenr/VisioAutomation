@@ -26,41 +26,41 @@ namespace VisioPowerShell
             return this.srcmap[name];
         }
 
-        public void UpdateValueMap(Hashtable ht)
+        public void UpdateValueMap(Hashtable hashtable)
         {
-            if (ht == null)
+            if (hashtable == null)
             {
-                throw new System.ArgumentNullException(nameof(ht));
+                throw new System.ArgumentNullException(nameof(hashtable));
             }
 
             // Validate that all the keys are strings
-            foreach (object key_o in ht.Keys)
+            foreach (object key_o in hashtable.Keys)
             {
                 if (!(key_o is string))
                 {
                     string message =
                         $"Only string values can be keys in the hashtable. Encountered a key of type {key_o.GetType().FullName}";
-                    throw new System.ArgumentOutOfRangeException(nameof(ht), message);
+                    throw new System.ArgumentOutOfRangeException(nameof(hashtable), message);
                 }
             }
 
 
             // We are certain all the keys are strings
-            foreach (object key_o in ht.Keys)
+            foreach (object key_o in hashtable.Keys)
             {
                 string cellname = (string) key_o;
 
                 if (!this.srcmap.ContainsCell(cellname))
                 {
                     string message = $"Cell \"{cellname}\" is not supported";
-                    throw new System.ArgumentOutOfRangeException(nameof(ht), message);                    
+                    throw new System.ArgumentOutOfRangeException(nameof(hashtable), message);                    
                 }
-                var cell_value_o = ht[key_o];
+                var cell_value_o = hashtable[key_o];
 
                 if (cell_value_o == null)
                 {
                     string message = $"Cell {cellname} has a null value. Use a non-null value";
-                    throw new System.ArgumentOutOfRangeException(nameof(ht), message);
+                    throw new System.ArgumentOutOfRangeException(nameof(hashtable), message);
                 }
 
                 var cell_value_string = CellValueDictionary.get_value_string(cell_value_o, cellname);

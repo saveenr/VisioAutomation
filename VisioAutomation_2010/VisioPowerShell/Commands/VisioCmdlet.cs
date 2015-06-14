@@ -65,11 +65,12 @@ namespace VisioPowerShell.Commands
             return true;
         }
 
-        protected void DumpValues(CellValueDictionary valuemap)
+        protected void DumpValues(CellValueDictionary cellvalues)
         {
-            foreach (var cellname in valuemap.CellNames)
+            this.WriteVerbose($"CellValues contains {cellvalues.CellNames.Count} items");
+            foreach (var cellname in cellvalues.CellNames)
             {
-                string cell_value = valuemap[cellname];
+                string cell_value = cellvalues[cellname];
                 this.WriteVerbose("{0} = {1}", cellname, cell_value);
             }
         }

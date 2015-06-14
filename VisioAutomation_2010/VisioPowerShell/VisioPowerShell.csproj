@@ -168,7 +168,7 @@
     <Compile Include="Commands\VisioCmdlet.cs" />
     <Compile Include="Commands\Set\Set_VisioPageLayout.cs" />
     <Compile Include="Commands\Set\Set_VisioCustomProperty.cs" />
-    <Compile Include="Commands\Set\Set_VisioText.cs" />
+    <Compile Include="Commands\Set\Set_VisioShapeText.cs" />
     <Compile Include="Commands\Close\Close_VisioApplication.cs" />
     <Compile Include="Commands\Undo\Undo_Visio.cs" />
     <Compile Include="Commands\Remove\Remove_VisioGroup.cs" />
