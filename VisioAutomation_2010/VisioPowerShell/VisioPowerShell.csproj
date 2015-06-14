@@ -156,7 +156,7 @@
     <Compile Include="Commands\Get\Get_VisioPage.cs" />
     <Compile Include="Commands\Get\Get_VisioCustomProperty.cs" />
     <Compile Include="Commands\Get\Get_VisioShape.cs" />
-    <Compile Include="Commands\Get\Get_VisioText.cs" />
+    <Compile Include="Commands\Get\Get_VisioShapeText.cs" />
     <Compile Include="Commands\Get\Get_VisioApplication.cs" />
     <Compile Include="Commands\New\New_VisioGroup.cs" />
     <Compile Include="Commands\New\New_VisioPage.cs" />
