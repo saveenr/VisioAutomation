@@ -1,7 +1,8 @@
-# Module manifest for module 'Visio PowerShell Module (VisioPS)'
+# Manifest for "Visio" PowerShell module (VisioPS)
 #
 # HISTORY
 # -------
+# 2015/10/19 Updated module manifest
 # 2014/05/23 Added additional metadata
 # 2014/05/14 Renamed module from "VisioPS" to "Visio"
 # 2013/08/06 Moved VisioPS.dll moved to RootModule
@@ -28,10 +29,10 @@ Author = 'Saveen Reddy'
 CompanyName = ''
 
 # Copyright statement for this module
-Copyright = '(c) 2014 Saveen Reddy'
+Copyright = '(c) 20145 Saveen Reddy'
 
 # Description of the functionality provided by this module
-Description = 'Automate Microsoft Visio 2010 or Visio 2013'
+Description = 'Visio PowerShell for Visio 2010'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '2.0'
