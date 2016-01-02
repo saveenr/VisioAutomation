@@ -1,7 +1,15 @@
-﻿# Installs this module for the User
-# This is for when you want to quickly check that normal installed usage works
-# but don't want to go through the full process of generating the installer, etc.
-# NOTE: If another PS Session has the module loaded the binaries cannot be replaced
+﻿# WHAT THIS SCRIPT DOES
+# *Manually* installs the Visio PowerShell for the user copying files instead of using an MSI install
+#
+# WHY IS THIS USEFUL
+# Sometimes you may want to check that the installed version works without wanting to
+# go through the process of generating the installer and executing the MSI. This manual
+# install methof is much faster
+#
+# NOTE
+# - If another PowerShell session has the Visio PS module loaded, then the VisioPS binaries cannot 
+#   be replaced by this script because those binaries are locked. In this case, those PS sessions
+#   must be terminated before the script will work
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
