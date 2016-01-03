@@ -2,8 +2,6 @@
 
 namespace VisioAutomation.DOM
 {
-    using System;
-
     public class MasterRef
     {
         public string MasterName { get; private set; }
@@ -14,7 +12,7 @@ namespace VisioAutomation.DOM
         {
             if (master == null)
             {
-                throw new ArgumentNullException(nameof(master));
+                throw new System.ArgumentNullException(nameof(master));
             }
 
             this.VisioMaster = master;
@@ -26,13 +24,15 @@ namespace VisioAutomation.DOM
         {
             if (mastername == null)
             {
-                throw new ArgumentNullException(nameof(mastername));
+                throw new System.ArgumentNullException(nameof(mastername));
             }
-
 
             if (MasterRef.EndwithVSSorVSSX(mastername))
             {
                 throw new AutomationException("Master name ends with .VSS or .VSSX");
+
+                // Passing in the stencil name for the master name is a very common error.
+                // so we make sure to check for it
             }
 
             if (this.StencilName != null)
@@ -40,6 +40,10 @@ namespace VisioAutomation.DOM
                 if (!MasterRef.EndwithVSSorVSSX(stencilname))
                 {                    
                     throw new AutomationException("Stencil name does not end with .VSS");
+
+                    // Passing in the master name for the stencil name is a very common error.
+                    // so we make sure to check for it
+
                 }
             }
             else
@@ -55,7 +59,12 @@ namespace VisioAutomation.DOM
 
         private static bool EndwithVSSorVSSX(string s)
         {
-            return s.EndsWith(".vss", StringComparison.InvariantCultureIgnoreCase) || s.EndsWith(".vssx", StringComparison.InvariantCultureIgnoreCase);
+            return EndsWithCaseInsensitive(s,".vss") || EndsWithCaseInsensitive(s,".vssx");
+        }
+
+        private static bool EndsWithCaseInsensitive( string s, string pat)
+        {
+            return s.EndsWith(pat, System.StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }
