@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioPieChart")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioPieChart)]
     public class New_VisioPieChart : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

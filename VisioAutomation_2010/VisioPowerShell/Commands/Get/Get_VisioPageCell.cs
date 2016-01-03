@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioPageCell")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioPageCell)]
     public class Get_VisioPageCell : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position = 0)]

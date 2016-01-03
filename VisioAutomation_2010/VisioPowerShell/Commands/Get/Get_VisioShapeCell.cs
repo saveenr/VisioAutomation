@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioShapeCell")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioShapeCell)]
     public class Get_VisioShapeCell : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position = 0)]

@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Set
 {
-    [Cmdlet(VerbsCommon.Set, "VisioCustomProperty")]
+    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Nouns.VisioCustomProperty)]
     public class Set_VisioCustomProperty : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]

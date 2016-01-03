@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioRectangle")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioRectangle)]
     public class New_VisioRectangle : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

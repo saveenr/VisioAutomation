@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Resize
 {
-    [Cmdlet(VerbsCommon.Resize, "VisioPage")]
+    [Cmdlet(VerbsCommon.Resize, VisioPowerShell.Nouns.VisioPage)]
     public class Resize_VisioPage : VisioCmdlet
     {
         [Parameter(Mandatory = false)] public double Width = -1;

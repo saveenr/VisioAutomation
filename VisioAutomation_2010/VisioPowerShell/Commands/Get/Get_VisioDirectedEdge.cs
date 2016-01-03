@@ -4,7 +4,7 @@ using VACONNECT = VisioAutomation.Shapes.Connections;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioDirectedEdge")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioDirectedEdge)]
     public class Get_VisioDirectedEdge : VisioCmdlet
     {
         [Parameter(Mandatory = false)]

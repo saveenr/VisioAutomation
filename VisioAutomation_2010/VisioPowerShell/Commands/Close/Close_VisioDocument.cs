@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.Close
 {
-    [Cmdlet(VerbsCommon.Close, "VisioDocument")]
+    [Cmdlet(VerbsCommon.Close, VisioPowerShell.Nouns.VisioDocument)]
     public class Close_VisioDocument : VisioCmdlet
     {
         [Parameter(Mandatory = false)]

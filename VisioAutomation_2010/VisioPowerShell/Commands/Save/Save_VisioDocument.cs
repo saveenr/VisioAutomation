@@ -2,7 +2,7 @@
 
 namespace VisioPowerShell.Commands.Save
 {
-    [Cmdlet(VerbsData.Save, "VisioDocument")]
+    [Cmdlet(VerbsData.Save, VisioPowerShell.Nouns.VisioDocument)]
     public class Save_VisioDocument : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]

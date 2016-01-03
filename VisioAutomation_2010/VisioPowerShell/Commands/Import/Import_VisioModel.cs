@@ -5,7 +5,7 @@ using SXL = System.Xml.Linq;
 
 namespace VisioPowerShell.Commands.Import
 {
-    [Cmdlet(VerbsData.Import, "VisioModel")]
+    [Cmdlet(VerbsData.Import, VisioPowerShell.Nouns.VisioModel)]
     public class Import_VisioModel : VisioCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]

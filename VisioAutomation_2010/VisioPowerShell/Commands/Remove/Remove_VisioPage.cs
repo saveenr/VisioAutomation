@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Remove
 {
-    [Cmdlet(VerbsCommon.Remove, "VisioPage")]
+    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Nouns.VisioPage)]
     public class Remove_VisioPage : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position=0, ValueFromPipeline = true)]

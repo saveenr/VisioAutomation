@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioPage")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioPage)]
     public class Get_VisioPage : VisioCmdlet
     {
         [Parameter(Position=0, Mandatory = false)]

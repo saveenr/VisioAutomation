@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioCustomProperty")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioCustomProperty)]
     public class Get_VisioCustomProperty : VisioCmdlet
     {
         [Parameter(Mandatory = false)]

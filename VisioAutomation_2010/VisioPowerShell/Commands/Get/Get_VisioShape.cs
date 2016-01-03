@@ -4,7 +4,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioShape")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioShape)]
     public class Get_VisioShape : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]

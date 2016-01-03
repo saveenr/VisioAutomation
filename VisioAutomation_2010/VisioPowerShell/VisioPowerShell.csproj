@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Nouns.cs" />
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
     <Compile Include="Commands\Close\Close_VisioMaster.cs" />
     <Compile Include="Commands\Format\Format_VisioText.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="Commands\Set\Set_VisioShapeCell.cs" />
     <Compile Include="Commands\Remove\Remove_VisioPage.cs" />
     <Compile Include="Commands\Test\Test_VisioApplication.cs" />
-    <Compile Include="Commands\Get\Get_VisioSession.cs" />
+    <Compile Include="Commands\Get\Get_VisioClient.cs" />
     <Compile Include="Commands\New\New_VisioNURBS.cs" />
     <Compile Include="Commands\New\New_VisioGridLayout.cs" />
     <Compile Include="Commands\New\New_VisioMaster.cs" />

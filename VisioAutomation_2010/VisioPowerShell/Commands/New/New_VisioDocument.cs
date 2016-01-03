@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioDocument")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioDocument)]
     public class New_VisioDocument : VisioCmdlet
     {
         protected override void ProcessRecord()
