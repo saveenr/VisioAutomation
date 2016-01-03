@@ -227,7 +227,6 @@ namespace VisioAutomation.Drawing
 
         private static string ToWebColorString(byte r, byte g, byte b)
         {
-            const string format_string = "#{0:x2}{1:x2}{2:x2}";
             var invariant_culture = CultureInfo.InvariantCulture;
             string color_string = string.Format(invariant_culture, "#{0:x2}{1:x2}{2:x2}", r, g, b);
             return color_string;
