@@ -12,25 +12,11 @@ namespace VisioAutomation.DOM
 	        public bool NewWindow { get; set; }
 	        public bool Default { get; set; }
 	        public bool Invisible { get; set; }
-	 
-	 
+	 	 
 	        public Hyperlink(string name, string address)
 	        {
 	            this.Name = name;
 	            this.Address = address;
-	        }
-	 
-	        public Hyperlink(string name, string address, bool subAddress)
-	        {
-	            this.Name = name;
-	            if (subAddress)
-	            {
-	                this.SubAddress = address;
-	            }
-	            else
-	            {
-	                this.Address = address;
-	            }
 	        }
 	    }
 
