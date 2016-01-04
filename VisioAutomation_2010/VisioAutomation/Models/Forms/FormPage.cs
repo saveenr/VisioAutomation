@@ -27,16 +27,16 @@ namespace VisioAutomation.Models.Forms
 
         }
 
-        internal IVisio.Page Draw(FormRenderingContext ctx)
+        internal IVisio.Page Draw(FormRenderingContext context)
         {
-            var r = new InteractiveRenderer(ctx.Document);
+            var r = new InteractiveRenderer(context.Document);
             var page_cells = new Pages.PageCells();
             this.VisioPage = r.CreatePage(this);
-            ctx.Page = this.VisioPage;
+            context.Page = this.VisioPage;
 
             var titleblock = new TextBlock(new Drawing.Size(7.5, 0.5), this.Title);
 
-            int _fontid = ctx.GetFontID(this.DefaultFont);
+            int _fontid = context.GetFontID(this.DefaultFont);
             titleblock.TextBlockCells.VerticalAlign = 0;
             titleblock.ParagraphCells.HorizontalAlign = 0;
             titleblock.FormatCells.LineWeight = 0;
