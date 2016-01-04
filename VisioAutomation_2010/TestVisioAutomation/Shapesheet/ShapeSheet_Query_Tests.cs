@@ -434,17 +434,17 @@ namespace TestVisioAutomation.Shapesheet
                 }
                 else
                 {
-                    VA.ShapeSheet.Query.SectionColumn sec;
+                    VA.ShapeSheet.Query.SectionColumn sec_col;
                     if (!section_to_secquery.ContainsKey(src.Section))
                     {
-                        sec = query.AddSection((IVisio.VisSectionIndices)src.Section);
-                        section_to_secquery[src.Section] = sec;
+                        sec_col = query.AddSection((IVisio.VisSectionIndices)src.Section);
+                        section_to_secquery[src.Section] = sec_col;
                     }
                     else
                     {
-                        sec = section_to_secquery[src.Section];
+                        sec_col = section_to_secquery[src.Section];
                     }
-                    sec.AddCell(src.Cell, name);
+                    sec_col.AddCell(src.Cell, name);
                 }
             }
 
