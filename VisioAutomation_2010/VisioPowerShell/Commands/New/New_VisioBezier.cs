@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioBezier")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioBezier)]
     public class New_VisioBezier : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
