@@ -10,6 +10,5 @@
             this.Start = start;
             this.End = end;
         }
-
     }
 }

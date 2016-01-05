@@ -2,12 +2,12 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioApplication")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioApplication)]
     public class New_VisioApplication : VisioCmdlet
     {
         protected override void ProcessRecord()
         {
-            var app = this.client.Application.New();
+            var app = this.Client.Application.New();
 
             // Currently we do not send the application back to the pipeline this.WriteObject(app); 
             // The reasins is that in the past we have seen that doing then can later cause the Visio 

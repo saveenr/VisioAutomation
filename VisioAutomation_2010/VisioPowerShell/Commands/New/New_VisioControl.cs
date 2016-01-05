@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioControl")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioControl)]
     public class New_VisioControl : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
@@ -46,7 +46,7 @@ namespace VisioPowerShell.Commands.New
                 ctrl.CanGlue = VA.Convert.BoolToFormula(this.CanGlue);
                 ctrl.Tip = this.Tip;
 
-                this.client.Control.Add(this.Shapes, ctrl);
+                this.Client.Control.Add(this.Shapes, ctrl);
         }
     }
 }

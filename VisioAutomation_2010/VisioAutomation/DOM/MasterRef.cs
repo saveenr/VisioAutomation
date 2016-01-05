@@ -2,8 +2,6 @@
 
 namespace VisioAutomation.DOM
 {
-    using System;
-
     public class MasterRef
     {
         public string MasterName { get; private set; }
@@ -14,7 +12,7 @@ namespace VisioAutomation.DOM
         {
             if (master == null)
             {
-                throw new ArgumentNullException(nameof(master));
+                throw new System.ArgumentNullException(nameof(master));
             }
 
             this.VisioMaster = master;
@@ -26,36 +24,41 @@ namespace VisioAutomation.DOM
         {
             if (mastername == null)
             {
-                throw new ArgumentNullException(nameof(mastername));
+                throw new System.ArgumentNullException(nameof(mastername));
             }
 
-
-            if (MasterRef.EndwithVSSorVSSX(mastername))
+            if (MasterRef.HasStencilExtension(mastername))
             {
                 throw new AutomationException("Master name ends with .VSS or .VSSX");
+
+                // Passing in the stencil name for the master name is a very common error.
+                // so we make sure to check for it
             }
 
-            if (this.StencilName != null)
-            {
-                if (!MasterRef.EndwithVSSorVSSX(stencilname))
-                {                    
+            if (this.StencilName != null && (!MasterRef.HasStencilExtension(stencilname)))
+            {                    
                     throw new AutomationException("Stencil name does not end with .VSS");
-                }
+
+                    // Passing in the master name for the stencil name is a very common error.
+                    // so we make sure to check for it
             }
-            else
-            {
-                // Stencil names are allowed to be null. In this case 
-                // it means look for the stencil in the active document
-            }
+
+            // NOTE: Stencil names are allowed to be null. In this case 
+            // it means look for the stencil in the active document
 
             this.VisioMaster = null;
             this.MasterName = mastername;
             this.StencilName = stencilname;
         }
 
-        private static bool EndwithVSSorVSSX(string s)
+        private static bool HasStencilExtension(string s)
         {
-            return s.EndsWith(".vss", StringComparison.InvariantCultureIgnoreCase) || s.EndsWith(".vssx", StringComparison.InvariantCultureIgnoreCase);
+            return EndsWithCaseInsensitive(s,".vss") || EndsWithCaseInsensitive(s,".vssx");
+        }
+
+        private static bool EndsWithCaseInsensitive(string s, string pat)
+        {
+            return s.EndsWith(pat, System.StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

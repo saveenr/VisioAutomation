@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioShapeText")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioShapeText)]
     public class Get_VisioShapeText : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.Get
 
         protected override void ProcessRecord()
         {
-            var t = this.client.Text.Get(this.Shapes);
+            var t = this.Client.Text.Get(this.Shapes);
             this.WriteObject(t);
         }
     }

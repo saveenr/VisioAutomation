@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.Close
 {
-    [Cmdlet(VerbsCommon.Close, "VisioDocument")]
+    [Cmdlet(VerbsCommon.Close, VisioPowerShell.Nouns.VisioDocument)]
     public class Close_VisioDocument : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands.Close
         {
             if (this.Documents== null)
             {
-                var app = this.client.Application.Get();
+                var app = this.Client.Application.Get();
                 var doc = app.ActiveDocument;
                 if (doc != null)
                 {
@@ -28,7 +28,7 @@ namespace VisioPowerShell.Commands.Close
             {
                 foreach (var doc in this.Documents)
                 {
-                    this.client.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
+                    this.Client.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
                     VA.Documents.DocumentHelper.Close(doc, this.Force);
                 }
             }

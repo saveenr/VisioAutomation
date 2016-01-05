@@ -131,9 +131,9 @@ namespace VisioAutomation.Drawing
 
         public IVisio.Shape DrawOval(Point center, double radius)
         {
-            var A = center.Add(-radius, -radius);
-            var B = center.Add(radius, radius);
-            var rect = new Rectangle(A, B);
+            var lower_left = center.Add(-radius, -radius);
+            var upper_right = center.Add(radius, radius);
+            var rect = new Rectangle(lower_left, upper_right);
 
             return this.DrawOval(rect);
         }
@@ -340,4 +340,3 @@ namespace VisioAutomation.Drawing
 
     }
 }
-

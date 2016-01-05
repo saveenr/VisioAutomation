@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioShape")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioShape)]
     public class New_VisioShape : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -24,9 +24,9 @@ namespace VisioPowerShell.Commands.New
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
             var points = VisioAutomation.Drawing.Point.FromDoubles(this.Points).ToList();
-            var shape_ids = this.client.Master.Drop(this.Masters, points);
+            var shape_ids = this.Client.Master.Drop(this.Masters, points);
 
-            var page = this.client.Page.Get();
+            var page = this.Client.Page.Get();
             var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
 
           // If Names is not empty... assign it to the shape
@@ -44,13 +44,13 @@ namespace VisioPowerShell.Commands.New
                  }
              }
 
-            this.client.Selection.None();
+            this.Client.Selection.None();
 
             if (!this.NoSelect)
             {
                 // Select the Shapes
                 ((Cmdlet) this).WriteVerbose("Selecting");
-                this.client.Selection.Select(shape_objects);
+                this.Client.Selection.Select(shape_objects);
             }
 
 

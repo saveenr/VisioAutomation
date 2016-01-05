@@ -2,7 +2,7 @@ using System.Management.Automation;
 using VA = VisioAutomation;
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioOval")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioOval)]
     public class New_VisioOval : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands.New
         protected override void ProcessRecord()
         {
             var rect = this.GetRectangle();
-            var shape = this.client.Draw.Oval(rect.Left, rect.Bottom, rect.Right, rect.Top);
+            var shape = this.Client.Draw.Oval(rect.Left, rect.Bottom, rect.Right, rect.Top);
             this.WriteObject(shape);
         }
 

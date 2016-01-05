@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioBezier")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioBezier)]
     public class New_VisioBezier : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands.New
         protected override void ProcessRecord()
         {
             var points = VA.Drawing.Point.FromDoubles(this.Doubles).ToList();
-            var shape = this.client.Draw.Bezier(points);
+            var shape = this.Client.Draw.Bezier(points);
             this.WriteObject(shape);
         }
     }

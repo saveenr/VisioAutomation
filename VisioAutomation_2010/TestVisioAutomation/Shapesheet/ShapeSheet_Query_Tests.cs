@@ -388,6 +388,18 @@ namespace TestVisioAutomation.Shapesheet
             page1.Delete(0);
         }
 
+        public bool section_is_skippable( VA.ShapeSheet.SRC src)
+        {
+            bool can_skip = (src.Section == (short)IVisio.VisSectionIndices.visSectionFirst)
+                         || (src.Section == (short)IVisio.VisSectionIndices.visSectionFirstComponent)
+                         || (src.Section == (short)IVisio.VisSectionIndices.visSectionLast)
+                         || (src.Section == (short)IVisio.VisSectionIndices.visSectionInval)
+                         || (src.Section == (short)IVisio.VisSectionIndices.visSectionNone)
+                         || (src.Section == (short)IVisio.VisSectionIndices.visSectionFirst)
+                         || (src.Section == (short)IVisio.VisSectionIndices.visSectionLastComponent);
+            return can_skip;
+        }
+
         [TestMethod]
         public void ShapeSheet_Query_Demo_AllCellsAndSections()
         {
@@ -410,34 +422,29 @@ namespace TestVisioAutomation.Shapesheet
                 var name = kv.Key;
                 var src = kv.Value;
 
+                // Ignore Sections we don't care about
+                if (section_is_skippable(src))
+                {
+                    continue;
+                }
+
                 if (src.Section == (short) IVisio.VisSectionIndices.visSectionObject)
                 {
                     query.AddCell(src, name);
                 }
-                else if ((src.Section == (short) IVisio.VisSectionIndices.visSectionFirst)
-                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionFirstComponent)
-                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionLast)
-                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionInval)
-                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionNone)
-                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionFirst)
-                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionLastComponent)
-                    )
-                {
-                    //skip
-                }
                 else
                 {
-                    VA.ShapeSheet.Query.SectionColumn sec;
+                    VA.ShapeSheet.Query.SectionColumn sec_col;
                     if (!section_to_secquery.ContainsKey(src.Section))
                     {
-                        sec = query.AddSection((IVisio.VisSectionIndices)src.Section);
-                        section_to_secquery[src.Section] = sec;
+                        sec_col = query.AddSection((IVisio.VisSectionIndices)src.Section);
+                        section_to_secquery[src.Section] = sec_col;
                     }
                     else
                     {
-                        sec = section_to_secquery[src.Section];
+                        sec_col = section_to_secquery[src.Section];
                     }
-                    sec.AddCell(src.Cell, name);
+                    sec_col.AddCell(src.Cell, name);
                 }
             }
 

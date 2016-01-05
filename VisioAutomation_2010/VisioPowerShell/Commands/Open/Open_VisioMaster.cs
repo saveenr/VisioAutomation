@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Open
 {
-    [Cmdlet(VerbsCommon.Open, "VisioMaster")]
+    [Cmdlet(VerbsCommon.Open, VisioPowerShell.Nouns.VisioMaster)]
     public class Open_VisioMaster : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands.Open
 
         protected override void ProcessRecord()
         {
-            this.client.Master.OpenForEdit(this.Master);
+            this.Client.Master.OpenForEdit(this.Master);
         }
     }
 }

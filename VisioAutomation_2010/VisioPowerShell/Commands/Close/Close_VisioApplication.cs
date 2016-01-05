@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Close
 {
-    [Cmdlet(VerbsCommon.Close, "VisioApplication")]
+    [Cmdlet(VerbsCommon.Close, VisioPowerShell.Nouns.VisioApplication)]
     public class Close_VisioApplication : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]
@@ -10,7 +10,7 @@ namespace VisioPowerShell.Commands.Close
         
         protected override void ProcessRecord()
         {
-            this.client.Application.Close(this.Force);
+            this.Client.Application.Close(this.Force);
         }
     }
 }

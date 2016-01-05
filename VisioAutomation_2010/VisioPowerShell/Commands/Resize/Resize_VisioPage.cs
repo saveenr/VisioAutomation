@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Resize
 {
-    [Cmdlet(VerbsCommon.Resize, "VisioPage")]
+    [Cmdlet(VerbsCommon.Resize, VisioPowerShell.Nouns.VisioPage)]
     public class Resize_VisioPage : VisioCmdlet
     {
         [Parameter(Mandatory = false)] public double Width = -1;
@@ -23,12 +23,12 @@ namespace VisioPowerShell.Commands.Resize
             if (this.FitContents)
             {
                 var bordersize = new VisioAutomation.Drawing.Size(this.BorderWidth, this.BorderWidth);
-                this.client.Page.ResizeToFitContents(bordersize, true);                
+                this.Client.Page.ResizeToFitContents(bordersize, true);                
             }
 
             if (this.Width > 0 || this.Height > 0)
             {
-                var page = this.client.Application.Get().ActivePage;
+                var page = this.Client.Application.Get().ActivePage;
                 var pagecells = VisioAutomation.Pages.PageCells.GetCells(page.PageSheet);
 
                 var newpagecells = new VisioAutomation.Pages.PageCells();

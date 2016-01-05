@@ -420,8 +420,10 @@ namespace VisioAutomation.Models.DirectedGraph
             // SET TEXT
             if (!string.IsNullOrEmpty(layout_shape.Label))
             {
+                const char vertical_bar = '|';
+
                 // if the shape contains vertical bars these are treated as line breaks
-                if (layout_shape.Label.IndexOf('|') >= 0)
+                if (layout_shape.Label.IndexOf(vertical_bar) >= 0)
                 {
                     // there is at least one line break so this means we have to
                     // construct multiple text regions
@@ -430,7 +432,7 @@ namespace VisioAutomation.Models.DirectedGraph
                     shape_node.Text = new Text.Markup.TextElement();
 
                     // Split apart the string
-                    var tokens = layout_shape.Label.Split('|').Select(tok => tok.Trim()).ToArray();
+                    var tokens = layout_shape.Label.Split(vertical_bar).Select(tok => tok.Trim()).ToArray();
                     // Add an text element for each piece
                     foreach (string token in tokens)
                     {
@@ -439,7 +441,7 @@ namespace VisioAutomation.Models.DirectedGraph
                 }
                 else
                 {
-                    // No line braeaks. Just use a simple TextElement with the label string
+                    // No line breaks. Just use a simple TextElement with the label string
                     shape_node.Text = new Text.Markup.TextElement(layout_shape.Label);
                 }
             }

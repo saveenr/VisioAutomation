@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Remove
 {
-    [Cmdlet(VerbsCommon.Remove, "VisioCustomProperty")]
+    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Nouns.VisioCustomProperty)]
     public class Remove_VisioCustomProperty : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.Remove
 
         protected override void ProcessRecord()
         {
-            this.client.CustomProp.Delete(this.Shapes, this.Name);
+            this.Client.CustomProp.Delete(this.Shapes, this.Name);
         }
     }
 }

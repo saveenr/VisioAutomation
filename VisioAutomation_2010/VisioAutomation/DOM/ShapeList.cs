@@ -47,45 +47,45 @@ namespace VisioAutomation.DOM
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var ctx = new RenderContext(page);
+            var context = new RenderContext(page);
 
-            this.PrepareForDrawing(ctx);
-            this.PerformDrawing(ctx);
-            this.UpdateCells(ctx);
+            this.PrepareForDrawing(context);
+            this.PerformDrawing(context);
+            this.UpdateCells(context);
             this.SetText();
-            this.SetCustomProperties(ctx);
-            this.AddHyperlinks(ctx);
+            this.SetCustomProperties(context);
+            this.AddHyperlinks(context);
         }
 
-        private void AddHyperlinks(RenderContext ctx)
+        private void AddHyperlinks(RenderContext context)
         {
             var shapes_with_hyperlinks = this.shapes.Where(s => s.Hyperlinks != null);
             foreach (var shape in shapes_with_hyperlinks)
             {
-                var vshape = ctx.GetShape(shape.VisioShapeID);
+                var vshape = context.GetShape(shape.VisioShapeID);
                 foreach (var hyperlink in shape.Hyperlinks)
                 {
-	                    var h = vshape.Hyperlinks.Add();
-                h.Name = hyperlink.Name; // Name of Hyperlink
-                h.Description = hyperlink.Description;
-                h.Address = hyperlink.Address; // Address of Hyperlink
-                h.SubAddress = hyperlink.SubAddress;
-                h.ExtraInfo = hyperlink.ExtraInfo;
-                h.Frame = hyperlink.Frame;
-                //h.SortKey = hyperlink.SortKey;
-                //h.NewWindow = hyperlink.NewWindow;
-                //h.IsDefaultLink = hyperlink.Default;
-                //h.Invisible = hyperlink.Invisible;
+	                var h = vshape.Hyperlinks.Add();
+                    h.Name = hyperlink.Name; // Name of Hyperlink
+                    h.Description = hyperlink.Description;
+                    h.Address = hyperlink.Address; // Address of Hyperlink
+                    h.SubAddress = hyperlink.SubAddress;
+                    h.ExtraInfo = hyperlink.ExtraInfo;
+                    h.Frame = hyperlink.Frame;
+                    //h.SortKey = hyperlink.SortKey;
+                    //h.NewWindow = hyperlink.NewWindow;
+                    //h.IsDefaultLink = hyperlink.Default;
+                    //h.Invisible = hyperlink.Invisible;
                 }
             }
         }
 
-        private void SetCustomProperties(RenderContext ctx)
+        private void SetCustomProperties(RenderContext context)
         {
             var shapes_with_custom_props = this.shapes.Where(s => s.CustomProperties != null);
             foreach (var shape in shapes_with_custom_props)
             {
-                var vshape = ctx.GetShape(shape.VisioShapeID);
+                var vshape = context.GetShape(shape.VisioShapeID);
                 foreach (var kv in shape.CustomProperties)
                 {
                     string cp_name = kv.Key;
@@ -109,9 +109,9 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void UpdateCells(RenderContext ctx)
+        private void UpdateCells(RenderContext context)
         {
-            this.UpdateCellsWithDropSizes(ctx);
+            this.UpdateCellsWithDropSizes(context);
 
             var update = new ShapeSheet.Update();
             var shapes_with_cells = this.shapes.Where(s => s.Cells != null);
@@ -121,45 +121,45 @@ namespace VisioAutomation.DOM
                 short id = shape.VisioShapeID;
                 fmt.Apply(update, id);
             }
-            update.Execute(ctx.VisioPage);
+            update.Execute(context.VisioPage);
         }
 
-        private void PerformDrawing(RenderContext ctx)
+        private void PerformDrawing(RenderContext context)
         {
             // Draw shapes
             var non_connectors = this.shapes.Where(s => !(s is Connector)).ToList();
             var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
             var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
 
-            this.drop_masters(ctx, non_connector_dropshapes);
-            this._draw_non_masters(ctx, non_connector_nondropshapes);
+            this.drop_masters(context, non_connector_dropshapes);
+            this._draw_non_masters(context, non_connector_nondropshapes);
 
             // verify that all non-connectors have an associated shape id
             this.check_valid_shape_ids();
 
             // Draw Connectors
-            this._draw_connectors(ctx);
+            this._draw_connectors(context);
 
             // Make sure we have Visio shape objects for all DOM objects
             foreach (var shape in this.shapes)
             {
                 if (shape.VisioShape == null)
                 {
-                    shape.VisioShape = ctx.GetShape(shape.VisioShapeID);
+                    shape.VisioShape = context.GetShape(shape.VisioShapeID);
                 }
             }
         }
 
-        private void PrepareForDrawing(RenderContext ctx)
+        private void PrepareForDrawing(RenderContext context)
         {
             // Resolve all the masters
-            this.ResolveMasters(ctx);
+            this.ResolveMasters(context);
 
             // Resolve all the Character Font Name Cells
-            this.ResolveFonts(ctx);
+            this.ResolveFonts(context);
         }
 
-        private void ResolveFonts(RenderContext ctx)
+        private void ResolveFonts(RenderContext context)
         {
             var unique_names = new HashSet<string>();
             foreach (var shape in this.shapes)
@@ -173,7 +173,7 @@ namespace VisioAutomation.DOM
                 }
             }
 
-            var doc = ctx.VisioPage.Document;
+            var doc = context.VisioPage.Document;
             var fonts = doc.Fonts;
 
             var name_to_id = new Dictionary<string, int>(unique_names.Count);
@@ -217,7 +217,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void ResolveMasters(RenderContext ctx)
+        private void ResolveMasters(RenderContext context)
         {
             // Find all the shapes that use masters and for which
             // a Visio master object has not been identifies yet
@@ -232,7 +232,7 @@ namespace VisioAutomation.DOM
                 loader.Add(shape_node.Master.MasterName,shape_node.Master.StencilName);
             }
 
-            var application = ctx.VisioPage.Application;
+            var application = context.VisioPage.Application;
             var docs = application.Documents;
             loader.Resolve(docs);
 
@@ -274,13 +274,13 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void drop_masters(RenderContext ctx, List<Shape> shape_nodes)
+        private void drop_masters(RenderContext context, List<Shape> shape_nodes)
         {
             var masters = shape_nodes.Select(m => m.Master.VisioMaster).ToList();
 
             var points = new List<Drawing.Point>(masters.Count);
             points.AddRange(shape_nodes.Select(s => s.DropPosition));
-            var shapeids = ctx.VisioPage.DropManyU(masters, points);
+            var shapeids = context.VisioPage.DropManyU(masters, points);
             
             for (int i = 0; i < shape_nodes.Count; i++)
             {
@@ -290,28 +290,28 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void _draw_non_masters(RenderContext ctx, List<BaseShape> non_masters)
+        private void _draw_non_masters(RenderContext context, List<BaseShape> non_masters)
         {
             foreach (var shape in non_masters)
             {
                 if (shape is Line)
                 {
                     var line = (Line) shape;
-                    var line_shape = ctx.VisioPage.DrawLine(line.P0, line.P1);
+                    var line_shape = context.VisioPage.DrawLine(line.P0, line.P1);
                     line.VisioShapeID = line_shape.ID16;
                     line.VisioShape = line_shape;
                 }
                 else if (shape is Rectangle)
                 {
                     var rect = (Rectangle) shape;
-                    var rect_shape = ctx.VisioPage.DrawRectangle(rect.P0.X, rect.P0.Y, rect.P1.X, rect.P1.Y);
+                    var rect_shape = context.VisioPage.DrawRectangle(rect.P0.X, rect.P0.Y, rect.P1.X, rect.P1.Y);
                     rect.VisioShapeID = rect_shape.ID16;
                     rect.VisioShape = rect_shape;
                 }
                 else if (shape is Oval)
                 {
                     var oval = (Oval)shape;
-                    var oval_shape = ctx.VisioPage.DrawOval(oval.P0.X, oval.P0.Y, oval.P1.X, oval.P1.Y);
+                    var oval_shape = context.VisioPage.DrawOval(oval.P0.X, oval.P0.Y, oval.P1.X, oval.P1.Y);
                     oval.VisioShapeID = oval_shape.ID16;
                     oval.VisioShape = oval_shape;
                 }
@@ -320,7 +320,7 @@ namespace VisioAutomation.DOM
                     var ps = (Arc)shape;
                     var vad_arcslice = new Models.Charting.PieSlice(ps.Center, ps.StartAngle,
                                                               ps.EndAngle, ps.InnerRadius, ps.OuterRadius);
-                    var ps_shape = vad_arcslice.Render(ctx.VisioPage);
+                    var ps_shape = vad_arcslice.Render(context.VisioPage);
                     ps.VisioShapeID = ps_shape.ID16;
                     ps.VisioShape = ps_shape;
                 }
@@ -329,21 +329,21 @@ namespace VisioAutomation.DOM
                     var ps = (PieSlice)shape;
 
                     var vad_ps = new Models.Charting.PieSlice(ps.Center, ps.Start, ps.End, ps.Radius);
-                    var ps_shape = vad_ps.Render(ctx.VisioPage);
+                    var ps_shape = vad_ps.Render(context.VisioPage);
                     ps.VisioShapeID = ps_shape.ID16;
                     ps.VisioShape = ps_shape;
                 }
                 else if (shape is BezierCurve)
                 {
                     var bez = (BezierCurve) shape;
-                    var bez_shape = ctx.VisioPage.DrawBezier(bez.ControlPoints);
+                    var bez_shape = context.VisioPage.DrawBezier(bez.ControlPoints);
                     bez.VisioShapeID = bez_shape.ID16;
                     bez.VisioShape = bez_shape;
                 }
                 else if (shape is PolyLine)
                 {
                     var pl = (PolyLine) shape;
-                    var pl_shape = ctx.VisioPage.DrawPolyline(pl.Points);
+                    var pl_shape = context.VisioPage.DrawPolyline(pl.Points);
                     pl.VisioShapeID = pl_shape.ID16;
                     pl.VisioShape = pl_shape;
                 }
@@ -360,7 +360,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void _draw_connectors(RenderContext ctx)
+        private void _draw_connectors(RenderContext context)
         {
             var connector_nodes = this.shapes.Where(s => s is Connector).Cast<Connector>().ToList();
 
@@ -376,8 +376,8 @@ namespace VisioAutomation.DOM
             var points = Enumerable.Range(0, connector_nodes.Count)
                 .Select(i => origin + new Drawing.Point(1.10, 0))
                 .ToList();
-            var connector_shapeids = ctx.VisioPage.DropManyU(masters, points);
-            var page_shapes = ctx.VisioPage.Shapes;
+            var connector_shapeids = context.VisioPage.DropManyU(masters, points);
+            var page_shapes = context.VisioPage.Shapes;
 
             // Perform the connection
             for (int i = 0; i < connector_shapeids.Length; i++)
@@ -386,8 +386,8 @@ namespace VisioAutomation.DOM
                 var vis_connector = page_shapes.ItemFromID[connector_shapeid];
                 var dyncon_shape = connector_nodes[i];
 
-                var from_shape = ctx.GetShape(dyncon_shape.From.VisioShapeID);
-                var to_shape = ctx.GetShape(dyncon_shape.To.VisioShapeID);
+                var from_shape = context.GetShape(dyncon_shape.From.VisioShapeID);
+                var to_shape = context.GetShape(dyncon_shape.To.VisioShapeID);
 
                 VACONNECT.ConnectorHelper.ConnectShapes(from_shape, to_shape, vis_connector);
                 dyncon_shape.VisioShape = vis_connector;

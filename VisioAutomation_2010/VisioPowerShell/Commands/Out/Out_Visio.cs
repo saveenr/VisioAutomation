@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace VisioPowerShell.Commands.Out
 {
-    [Cmdlet(VerbsData.Out, "Visio")]
+    [Cmdlet(VerbsData.Out, VisioPowerShell.Nouns.Visio)]
     public class Out_Visio : VisioCmdlet
     {
         [Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
@@ -46,35 +46,35 @@ namespace VisioPowerShell.Commands.Out
         {
             if (this.OrgChart != null)
             {
-                this.client.Draw.OrgChart(this.OrgChart);
+                this.Client.Draw.OrgChart(this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
-                this.client.Draw.Grid(this.GridLayout);
+                this.Client.Draw.Grid(this.GridLayout);
             }
             else if (this.DirectedGraphs != null)
             {
-                this.client.Draw.DirectedGraph(this.DirectedGraphs);
+                this.Client.Draw.DirectedGraph(this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {
                 var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
                 var spacing = new VisioAutomation.Drawing.Size(this.CellSpacing, this.CellSpacing);
-                var shapes = this.client.Draw.Table(this.DataTable, widths, heights, spacing);
+                var shapes = this.Client.Draw.Table(this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
             else if (this.PieChart != null)
             {
-                this.client.Draw.PieChart(this.PieChart);
+                this.Client.Draw.PieChart(this.PieChart);
             }
             else if (this.BarChart != null)
             {
-                this.client.Draw.BarChart(this.BarChart);
+                this.Client.Draw.BarChart(this.BarChart);
             }
             else if (this.AreaChart != null)
             {
-                this.client.Draw.AreaChart(this.AreaChart);
+                this.Client.Draw.AreaChart(this.AreaChart);
             }
             else if (this.XmlDocument != null)
             {
@@ -82,7 +82,7 @@ namespace VisioPowerShell.Commands.Out
                 var tree_drawing = new VisioAutomation.Models.Tree.Drawing();
                 this.build_from_xml_doc(this.XmlDocument, tree_drawing);
 
-                tree_drawing.Render(this.client.Page.Get());
+                tree_drawing.Render(this.Client.Page.Get());
             }
             else
             {

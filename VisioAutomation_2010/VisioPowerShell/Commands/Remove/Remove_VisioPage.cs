@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Remove
 {
-    [Cmdlet(VerbsCommon.Remove, "VisioPage")]
+    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Nouns.VisioPage)]
     public class Remove_VisioPage : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position=0, ValueFromPipeline = true)]
@@ -18,15 +18,15 @@ namespace VisioPowerShell.Commands.Remove
             {
                 this.WriteVerbose("No Page objects ");
                 this.WriteVerbose("Removing the Active Page");
-                var page = this.client.Application.Get().ActivePage;
-                this.client.Page.Delete(new[] { page }, this.Renumber);
+                var page = this.Client.Application.Get().ActivePage;
+                this.Client.Page.Delete(new[] { page }, this.Renumber);
                 return;
             }
 
             if (this.Pages != null)
             {
                 this.WriteVerbose("Removing the Page Objects");
-                this.client.Page.Delete(this.Pages, this.Renumber);                
+                this.Client.Page.Delete(this.Pages, this.Renumber);                
             }
         }
     }

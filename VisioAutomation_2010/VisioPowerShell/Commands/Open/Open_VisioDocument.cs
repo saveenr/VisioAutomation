@@ -3,7 +3,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Open
 {
-    [Cmdlet(VerbsCommon.Open, "VisioDocument")]
+    [Cmdlet(VerbsCommon.Open, VisioPowerShell.Nouns.VisioDocument)]
     public class Open_VisioDocument : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -12,20 +12,20 @@ namespace VisioPowerShell.Commands.Open
 
         protected override void ProcessRecord()
         {
-            if (this.client.Application.HasApplication == false)
+            if (this.Client.Application.HasApplication == false)
             {
                 // no app - let's create one
-                this.client.Application.New();
+                this.Client.Application.New();
             }
 
             if (this.filename_is_stencil(this.Filename))
             {
-                var doc = this.client.Document.OpenStencil(this.Filename);
+                var doc = this.Client.Document.OpenStencil(this.Filename);
                 this.WriteObject(doc);                
             }
             else
             {
-                var doc = this.client.Document.Open(this.Filename);
+                var doc = this.Client.Document.Open(this.Filename);
                 this.WriteObject(doc);                
             }
         }

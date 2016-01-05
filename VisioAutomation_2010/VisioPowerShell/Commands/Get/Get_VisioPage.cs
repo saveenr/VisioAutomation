@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioPage")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioPage)]
     public class Get_VisioPage : VisioCmdlet
     {
         [Parameter(Position=0, Mandatory = false)]
@@ -12,16 +12,16 @@ namespace VisioPowerShell.Commands.Get
 
         protected override void ProcessRecord()
         {
-            var application = this.client.Application.Get();
+            var application = this.Client.Application.Get();
 
             if (this.ActivePage)
             {
-                var page = this.client.Page.Get();
+                var page = this.Client.Page.Get();
                 this.WriteObject(page);
                 return;
             }
 
-            var pages = this.client.Page.GetPagesByName(this.Name);
+            var pages = this.Client.Page.GetPagesByName(this.Name);
             this.WriteObject(pages, true);
         }
     }

@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Copy
 {
-    [Cmdlet(VerbsCommon.Copy, "VisioShape")]
+    [Cmdlet(VerbsCommon.Copy, VisioPowerShell.Nouns.VisioShape)]
     public class Copy_VisioShape : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.Copy
 
         protected override void ProcessRecord()
         {
-            this.client.Selection.Duplicate(this.Shapes);
+            this.Client.Selection.Duplicate(this.Shapes);
         }
     }
 }

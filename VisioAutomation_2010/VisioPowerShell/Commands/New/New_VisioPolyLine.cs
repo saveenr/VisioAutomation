@@ -3,7 +3,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioPolyLine")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioPolyLine)]
     public class New_VisioPolyLine : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands.New
         protected override void ProcessRecord()
         {
             var points = VisioAutomation.Drawing.Point.FromDoubles(this.Doubles).ToList();
-            var shape = this.client.Draw.PolyLine(points);
+            var shape = this.Client.Draw.PolyLine(points);
             this.WriteObject(shape);
         }
     }

@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioRectangle")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioRectangle)]
     public class New_VisioRectangle : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands.New
         protected override void ProcessRecord()
         {
             var rect = this.GetRectangle();
-            var shape = this.client.Draw.Rectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+            var shape = this.Client.Draw.Rectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
             this.WriteObject(shape);
         }
 

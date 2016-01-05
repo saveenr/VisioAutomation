@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioMaster")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioMaster)]
     public class Get_VisioMaster : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]
@@ -23,13 +23,13 @@ namespace VisioPowerShell.Commands.Get
                 if (doc_specified)
                 {
                     ((Cmdlet) this).WriteVerbose("Get master from specified document");
-                    var masters = this.client.Master.GetMastersByName(this.Name, this.Document);
+                    var masters = this.Client.Master.GetMastersByName(this.Name, this.Document);
                     this.WriteObject(masters,true);
                 }
                 else
                 {
                     ((Cmdlet) this).WriteVerbose("Get master from active document");
-                    var masters = this.client.Master.GetMastersByName(this.Name);
+                    var masters = this.Client.Master.GetMastersByName(this.Name);
                     this.WriteObject(masters,true);
                 }
             }
@@ -39,13 +39,13 @@ namespace VisioPowerShell.Commands.Get
                 if (doc_specified)
                 {
                     ((Cmdlet) this).WriteVerbose("Get all masters from specified document");
-                    var masters = this.client.Master.Get(this.Document);
+                    var masters = this.Client.Master.Get(this.Document);
                     this.WriteObject(masters, false);                    
                 }
                 else
                 {
                     ((Cmdlet) this).WriteVerbose("Get all masters from active document");
-                    var masters = this.client.Master.Get();
+                    var masters = this.Client.Master.Get();
                     this.WriteObject(masters, false);                   
                 }
             }

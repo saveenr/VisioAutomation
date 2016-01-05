@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Format
 {
-    [Cmdlet(VerbsCommon.Format, "VisioShape")]
+    [Cmdlet(VerbsCommon.Format, VisioPowerShell.Nouns.VisioShape)]
     public class Format_VisioShape : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
@@ -32,27 +32,27 @@ namespace VisioPowerShell.Commands.Format
         {
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                this.client.Arrange.Nudge(this.Shapes, this.NudgeX, this.NudgeY);                
+                this.Client.Arrange.Nudge(this.Shapes, this.NudgeX, this.NudgeY);                
             }
 
             if (this.DistributeHorizontal)
             {
-                this.client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.XAxis);
+                this.Client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
+                this.Client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
             }
 
             if (this.AlignVertical != Model.VerticalAlignment.None)
             {
-                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)this.AlignVertical);
+                this.Client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)this.AlignVertical);
             }
 
             if (this.AlignHorizontal != Model.HorizontalAlignment.None)
             {
-                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)this.AlignHorizontal);
+                this.Client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)this.AlignHorizontal);
             }
 
         }

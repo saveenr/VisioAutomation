@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioMaster")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioMaster)]
     public class New_VisioMaster : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.New
 
         protected override void ProcessRecord()
         {
-            var master = this.client.Master.New(this.Document, this.Name);
+            var master = this.Client.Master.New(this.Document, this.Name);
             this.WriteObject(master);
         }
     }

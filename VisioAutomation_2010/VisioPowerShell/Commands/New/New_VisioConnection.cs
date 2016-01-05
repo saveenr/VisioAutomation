@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, "VisioConnection")]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioConnection)]
     public class New_VisioConnection : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands.New
 
         protected override void ProcessRecord()
         {
-            var connectors = this.client.Connection.Connect(this.From, this.To, this.Master);
+            var connectors = this.Client.Connection.Connect(this.From, this.To, this.Master);
             this.WriteObject(connectors, false);
         }
     }

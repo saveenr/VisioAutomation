@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioCustomProperty")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioCustomProperty)]
     public class Get_VisioCustomProperty : VisioCmdlet
     {
         [Parameter(Mandatory = false)]
@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.Get
 
         protected override void ProcessRecord()
         {
-            var dic = this.client.CustomProp.Get(this.Shapes);
+            var dic = this.Client.CustomProp.Get(this.Shapes);
 
             if (this.GetCells)
             {

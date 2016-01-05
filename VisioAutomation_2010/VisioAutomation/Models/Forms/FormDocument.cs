@@ -23,11 +23,11 @@ namespace VisioAutomation.Models.Forms
             var docs = app.Documents;
             var doc = docs.Add("");
 
-            var ctx = new FormRenderingContext();
-            ctx.Application = app;
-            ctx.Document = doc;
-            ctx.Pages = doc.Pages;
-            ctx.Fonts = doc.Fonts;
+            var context = new FormRenderingContext();
+            context.Application = app;
+            context.Document = doc;
+            context.Pages = doc.Pages;
+            context.Fonts = doc.Fonts;
 
             this.VisioDocument = doc;
 
@@ -39,7 +39,7 @@ namespace VisioAutomation.Models.Forms
             var pages = doc.Pages;
             foreach (var formpage in this.Pages)
             {
-                var page = formpage.Draw(ctx);
+                var page = formpage.Draw(context);
             }
 
             if (pages.Count > 0)

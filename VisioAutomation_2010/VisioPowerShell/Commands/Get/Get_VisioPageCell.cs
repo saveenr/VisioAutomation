@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.Get
 {
-    [Cmdlet(VerbsCommon.Get, "VisioPageCell")]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioPageCell)]
     public class Get_VisioPageCell : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position = 0)]
@@ -30,7 +30,7 @@ namespace VisioPowerShell.Commands.Get
                 this.Cells = cellmap.GetNames().ToArray();
             }
             Get_VisioPageCell.EnsureEnoughCellNames(this.Cells);
-            var target_page = this.Page ?? this.client.Page.Get();
+            var target_page = this.Page ?? this.Client.Page.Get();
             this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));
             var query = cellmap.CreateQueryFromCellNames(this.Cells);
             var surface = new VA.ShapeSheet.ShapeSheetSurface(target_page);

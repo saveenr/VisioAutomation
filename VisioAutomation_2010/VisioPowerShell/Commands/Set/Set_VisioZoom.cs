@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Set
 {
-    [Cmdlet(VerbsCommon.Set, "VisioZoom")]
+    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Nouns.VisioZoom)]
     public class Set_VisioZoom : VisioCmdlet
     {
         [Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 
@@ -15,11 +15,11 @@ namespace VisioPowerShell.Commands.Set
         {
             if (this.Percent > 0)
             {
-                this.client.View.ZoomToPercentage(this.Percent);
+                this.Client.View.ZoomToPercentage(this.Percent);
             }
             else
             {
-                this.client.View.Zoom(this.Level);       
+                this.Client.View.Zoom(this.Level);       
             }
         }
     }
