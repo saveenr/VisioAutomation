@@ -2,8 +2,8 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioPieChartModel)]
-    public class New_VisioPieChartModel : VisioCmdlet
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioModelPieChart)]
+    public class New_VisioModelPieChart : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }

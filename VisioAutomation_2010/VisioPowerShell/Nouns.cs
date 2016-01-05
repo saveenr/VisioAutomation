@@ -5,12 +5,12 @@ namespace VisioPowerShell
         public const string Visio = "Visio";
         public const string VisioApplication = "VisioApplication";
 
-        public const string VisioAreaChartModel = "VisioAreaChart";
-        public const string VisioBarChartModel = "VisioBarChart";
-        public const string VisioDirectedGraphModel = "VisioDirectedGraph";
-        public const string VisioGridLayoutModel = "VisioGridLayout";
-        public const string VisioOrgChartModel = "VisioOrgChart";
-        public const string VisioPieChartModel = "VisioPieChart";
+        public const string VisioModelAreaChart = "VisioModelAreaChart";
+        public const string VisioModelBarChart = "VisioModelBarChart";
+        public const string VisioModelDirectedGraph = "VisioModelDirectedGraph";
+        public const string VisioModelGridLayout = "VisioModelGridLayout";
+        public const string VisioModelOrgChart = "VisioModelOrgChart";
+        public const string VisioModelPieChart = "VisioModelPieChart";
 
         public const string VisioBezier = "VisioBezier";
         public const string VisioClient = "VisioClient";
