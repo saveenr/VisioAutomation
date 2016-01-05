@@ -3,8 +3,8 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioAreaChart)]
-    public class New_VisioAreaChart : VisioCmdlet
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioModelBarChart)]
+    public class New_VisioModelBarChart : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }
@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands.New
         [Parameter(Position = 3, Mandatory = true)]
         public double Y1 { get; set; }
 
-        [Parameter(Position = 4, Mandatory = true)]
+        [Parameter(Mandatory = true)]
         public double[] Values;
 
         [Parameter(Mandatory = false)]
@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands.New
         protected override void ProcessRecord()
         {
             var rect = this.GetRectangle();
-            var chart = new VA.Models.Charting.AreaChart(rect);
+            var chart = new VA.Models.Charting.BarChart(rect);
             chart.DataPoints = new VA.Models.Charting.DataPointList(this.Values, this.Labels);
             this.WriteObject(chart);
         }
