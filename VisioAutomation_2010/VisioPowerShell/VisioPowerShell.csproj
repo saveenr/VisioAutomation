@@ -102,10 +102,10 @@
     <Compile Include="CellSRCDictionary.cs" />
     <Compile Include="Commands\Get\Get_VisioPageCell.cs" />
     <Compile Include="Commands\Get\Get_VisioShapeCell.cs" />
-    <Compile Include="Commands\New\New_VisioAreaChart.cs" />
-    <Compile Include="Commands\New\New_VisioBarChart.cs" />
-    <Compile Include="Commands\New\New_VisioDirectedGraph.cs" />
-    <Compile Include="Commands\New\New_VisioOrgChart.cs" />
+    <Compile Include="Commands\New\New_VisioAreaChartModel.cs" />
+    <Compile Include="Commands\New\New_VisioBarChartModel.cs" />
+    <Compile Include="Commands\New\New_VisioDirectedGraphModel.cs" />
+    <Compile Include="Commands\New\New_VisioOrgChartModel.cs" />
     <Compile Include="CellValueDictionary.cs" />
     <Compile Include="Commands\Set\Set_VisioDocument.cs" />
     <Compile Include="Commands\Set\Set_VisioPage.cs" />
@@ -115,7 +115,7 @@
     <Compile Include="Commands\Test\Test_VisioApplication.cs" />
     <Compile Include="Commands\Get\Get_VisioClient.cs" />
     <Compile Include="Commands\New\New_VisioNURBS.cs" />
-    <Compile Include="Commands\New\New_VisioGridLayout.cs" />
+    <Compile Include="Commands\New\New_VisioGridLayoutModel.cs" />
     <Compile Include="Commands\New\New_VisioMaster.cs" />
     <Compile Include="Commands\Remove\Remove_VisioUserDefinedCell.cs" />
     <Compile Include="Model\VisioPsContext.cs" />
@@ -132,7 +132,7 @@
     <Compile Include="Commands\Select\Select_VisioShape.cs" />
     <Compile Include="Commands\Set\Set_VisioShapeSheet.cs" />
     <Compile Include="Commands\New\New_VisioBezier.cs" />
-    <Compile Include="Commands\New\New_VisioPieChart.cs" />
+    <Compile Include="Commands\New\New_VisioPieChartModel.cs" />
     <Compile Include="Commands\New\New_VisioPolyLine.cs" />
     <Compile Include="Commands\Export\Export_VisioPage.cs" />
     <Compile Include="Commands\Get\Get_VisioConnectionPoint.cs" />

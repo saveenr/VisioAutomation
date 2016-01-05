@@ -4,8 +4,14 @@ namespace VisioPowerShell
     {
         public const string Visio = "Visio";
         public const string VisioApplication = "VisioApplication";
-        public const string VisioAreaChart = "VisioAreaChart";
-        public const string VisioBarChart = "VisioBarChart";
+
+        public const string VisioAreaChartModel = "VisioAreaChart";
+        public const string VisioBarChartModel = "VisioBarChart";
+        public const string VisioDirectedGraphModel = "VisioDirectedGraph";
+        public const string VisioGridLayoutModel = "VisioGridLayout";
+        public const string VisioOrgChartModel = "VisioOrgChart";
+        public const string VisioPieChartModel = "VisioPieChart";
+
         public const string VisioBezier = "VisioBezier";
         public const string VisioClient = "VisioClient";
         public const string VisioConnection = "VisioConnection";
@@ -14,21 +20,17 @@ namespace VisioPowerShell
         public const string VisioControl = "VisioControl";
         public const string VisioCustomProperty = "VisioCustomProperty";
         public const string VisioDirectedEdge = "VisioDirectedEdge";
-        public const string VisioDirectedGraph = "VisioDirectedGraph";
         public const string VisioDocument = "VisioDocument";
-        public const string VisioGridLayout = "VisioGridLayout";
         public const string VisioGroup = "VisioGroup";
         public const string VisioLayer = "VisioLayer";
         public const string VisioLine = "VisioLine";
         public const string VisioMaster = "VisioMaster";
         public const string VisioModel = "VisioModel";
         public const string VisioNURBS = "VisioNURBS";
-        public const string VisioOrgChart = "VisioOrgChart";
         public const string VisioOval = "VisioOval";
         public const string VisioPage = "VisioPage";
         public const string VisioPageCell = "VisioPageCell";
         public const string VisioPageLayout = "VisioPageLayout";
-        public const string VisioPieChart = "VisioPieChart";
         public const string VisioPolyLine = "VisioPolyLine";
         public const string VisioRectangle = "VisioRectangle";
         public const string VisioSelectedShapes = "VisioSelectedShapes";
