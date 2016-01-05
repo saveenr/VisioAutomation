@@ -21,12 +21,12 @@ namespace VisioPowerShell.Commands.Format
         {
             if (this.Font != null)
             {
-                this.client.Text.SetFont(this.Shapes, this.Font);                
+                this.Client.Text.SetFont(this.Shapes, this.Font);                
             }
 
             if (this.Togglecase)
             {
-                this.client.Text.ToogleCase(this.Shapes);
+                this.Client.Text.ToogleCase(this.Shapes);
             }
         }
     }

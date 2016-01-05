@@ -90,11 +90,11 @@ namespace TestVisioAutomation
             return app;
         }
 
-        public System.Data.DataTable Get_Visio_Page_Cell( string [] Cells, bool GetResults, string ResultType)
+        public System.Data.DataTable Get_Visio_Page_Cell( string [] cells, bool getresults, string resulttype)
         {
             var cmd = new VisioPowerShell.Commands.Get.Get_VisioPageCell();
-            cmd.Cells = Cells;
-            cmd.GetResults = GetResults;
+            cmd.Cells = cells;
+            cmd.GetResults = getresults;
             cmd.ResultType = VisioPowerShell.Model.ResultType.Double;
             var results = cmd.Invoke <System.Data.DataTable>();
             var dt = results.First();

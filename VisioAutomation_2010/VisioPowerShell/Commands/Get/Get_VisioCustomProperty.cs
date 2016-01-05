@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.Get
 
         protected override void ProcessRecord()
         {
-            var dic = this.client.CustomProp.Get(this.Shapes);
+            var dic = this.Client.CustomProp.Get(this.Shapes);
 
             if (this.GetCells)
             {

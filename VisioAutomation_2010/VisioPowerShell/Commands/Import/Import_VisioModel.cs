@@ -28,14 +28,14 @@ namespace VisioPowerShell.Commands.Import
             {
                 this.WriteVerbose("Loading as a Directed Graph");
                 var dg_model = VAS.DirectedGraph.DirectedGraphBuilder.LoadFromXML(
-                    this.client,
+                    this.Client,
                     xmldoc);
                 this.WriteObject(dg_model);               
             }
             else if (root.Name == "orgchart")
             {
                 this.WriteVerbose("Loading as an Org Chart");
-                var oc = VAS.OrgChart.OrgChartBuilder.LoadFromXML(this.client, xmldoc);
+                var oc = VAS.OrgChart.OrgChartBuilder.LoadFromXML(this.Client, xmldoc);
                 this.WriteObject(oc);
             }
             else

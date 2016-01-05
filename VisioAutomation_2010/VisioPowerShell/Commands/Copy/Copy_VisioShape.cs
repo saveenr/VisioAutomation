@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.Copy
 
         protected override void ProcessRecord()
         {
-            this.client.Selection.Duplicate(this.Shapes);
+            this.Client.Selection.Duplicate(this.Shapes);
         }
     }
 }

@@ -35,11 +35,11 @@ namespace VisioPowerShell.Commands.Export
 
             if (ext == ".html" || ext == ".xhtml" || ext == ".htm")
             {
-                this.client.Export.SelectionToSVGXHTML(this.Filename);                
+                this.Client.Export.SelectionToSVGXHTML(this.Filename);                
             }
             else
             {
-                this.client.Export.SelectionToFile(this.Filename);
+                this.Client.Export.SelectionToFile(this.Filename);
             }
         }
     }

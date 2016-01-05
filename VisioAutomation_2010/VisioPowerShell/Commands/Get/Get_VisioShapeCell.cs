@@ -28,11 +28,11 @@ namespace VisioPowerShell.Commands.Get
             }
 
             Get_VisioPageCell.EnsureEnoughCellNames(this.Cells);
-            var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
+            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
             var v = string.Join(",", cellmap.GetNames());
             this.WriteVerbose($"Valid Names: {v}");
             var query = cellmap.CreateQueryFromCellNames(this.Cells);
-            var surface = this.client.ShapeSheet.GetShapeSheetSurface();
+            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
             var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
             this.WriteObject(dt);

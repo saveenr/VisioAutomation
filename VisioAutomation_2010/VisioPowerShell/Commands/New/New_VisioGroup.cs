@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.New
     {
         protected override void ProcessRecord()
         {
-            var group = this.client.Arrange.Group();
+            var group = this.Client.Arrange.Group();
             this.WriteObject(group);
         }
     }

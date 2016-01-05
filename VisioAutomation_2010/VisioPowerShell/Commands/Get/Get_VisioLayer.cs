@@ -12,12 +12,12 @@ namespace VisioPowerShell.Commands.Get
         {
             if (this.Name!=null || this.Name=="*")
             {
-                var layer = this.client.Layer.Get(this.Name);
+                var layer = this.Client.Layer.Get(this.Name);
                 this.WriteObject(layer);
             }
             else
             {
-                var layers = this.client.Layer.Get();
+                var layers = this.Client.Layer.Get();
                 this.WriteObject(layers,false);
             }
         }

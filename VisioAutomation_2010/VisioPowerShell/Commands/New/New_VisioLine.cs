@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands.New
 
         protected override void ProcessRecord()
         {
-            var line = this.client.Draw.Line(this.X0, this.Y0, this.X1, this.Y1);
+            var line = this.Client.Draw.Line(this.X0, this.Y0, this.X1, this.Y1);
             this.WriteObject(line);
         }
     }

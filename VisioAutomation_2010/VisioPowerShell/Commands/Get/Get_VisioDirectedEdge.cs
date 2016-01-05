@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands.Get
         protected override void ProcessRecord()
         {
             var flag = this.get_DirectedEdgeHandling();
-            var edges = this.client.Connection.GetDirectedEdges(flag);
+            var edges = this.Client.Connection.GetDirectedEdges(flag);
 
             if (this.GetShapeObjects)
             {

@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.New
     {
         protected override void ProcessRecord()
         {
-            var app = this.client.Application.New();
+            var app = this.Client.Application.New();
 
             // Currently we do not send the application back to the pipeline this.WriteObject(app); 
             // The reasins is that in the past we have seen that doing then can later cause the Visio 

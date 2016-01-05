@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.Undo
     {
         protected override void ProcessRecord()
         {
-            this.client.Application.Undo();
+            this.Client.Application.Undo();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands.New
 
         protected override void ProcessRecord()
         {
-            var connectors = this.client.Connection.Connect(this.From, this.To, this.Master);
+            var connectors = this.Client.Connection.Connect(this.From, this.To, this.Master);
             this.WriteObject(connectors, false);
         }
     }

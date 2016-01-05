@@ -17,12 +17,12 @@ namespace VisioPowerShell.Commands.New
 
         protected override void ProcessRecord()
         {
-            var page = this.client.Page.New(null, false);
-            New_VisioPage.set_page_size(this.client, this.Width, this.Height);
+            var page = this.Client.Page.New(null, false);
+            New_VisioPage.set_page_size(this.Client, this.Width, this.Height);
             
             if (this.Name != null)
             {
-                this.client.Page.SetName(this.Name);
+                this.Client.Page.SetName(this.Name);
             }
 
             this.WriteObject(page);

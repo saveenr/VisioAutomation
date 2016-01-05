@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands.Open
 
         protected override void ProcessRecord()
         {
-            this.client.Master.OpenForEdit(this.Master);
+            this.Client.Master.OpenForEdit(this.Master);
         }
     }
 }

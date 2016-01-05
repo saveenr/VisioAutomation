@@ -16,12 +16,12 @@ namespace VisioPowerShell.Commands.New
         {
             if (this.Master != null)
             {
-                var shape = this.client.Master.DropContainer(this.Master);
+                var shape = this.Client.Master.DropContainer(this.Master);
                 this.WriteObject(shape);
             }
             else if (this.MasterName != null)
             {
-                var shape = this.client.Master.DropContainer(this.Master);
+                var shape = this.Client.Master.DropContainer(this.Master);
                 this.WriteObject(shape);
             }
             else

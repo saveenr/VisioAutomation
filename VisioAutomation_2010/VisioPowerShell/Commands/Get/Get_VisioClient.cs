@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands.Get
     {
         protected override void ProcessRecord()
         {
-            this.WriteObject(this.client);
+            this.WriteObject(this.Client);
         }
     }
 }

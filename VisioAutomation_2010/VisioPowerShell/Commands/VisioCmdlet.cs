@@ -22,7 +22,7 @@ namespace VisioPowerShell.Commands
         // AttachedApplication != null && it is an unusable instance. For example
         //                     it might have been manually deleted
 
-        public VisioAutomation.Scripting.Client client
+        public VisioAutomation.Scripting.Client Client
         {
             get
             {
@@ -53,16 +53,14 @@ namespace VisioPowerShell.Commands
         
         protected bool CheckFileExists(string file)
         {
-            if (!File.Exists(file))
-            {
-                this.WriteVerbose("Filename: {0}",file);
-                this.WriteVerbose("Abs Filename: {0}", Path.GetFullPath(file));
-                var exc = new FileNotFoundException(file);
-                var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
-                this.WriteError(er);
-                return false;
-            }
-            return true;
+            if (File.Exists(file)) return true;
+
+            this.WriteVerbose("Filename: {0}",file);
+            this.WriteVerbose("Abs Filename: {0}", Path.GetFullPath(file));
+            var exc = new FileNotFoundException(file);
+            var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
+            this.WriteError(er);
+            return false;
         }
 
         protected void DumpValues(CellValueDictionary cellvalues)

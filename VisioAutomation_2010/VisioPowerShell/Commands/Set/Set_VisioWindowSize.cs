@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands.Set
         
         protected override void ProcessRecord()
         {
-            var w = this.client.Application.Window;
+            var w = this.Client.Application.Window;
             w.SetSize(this.Width, this.Height);
         }
     }

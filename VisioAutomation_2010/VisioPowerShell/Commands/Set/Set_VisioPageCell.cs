@@ -26,7 +26,7 @@ namespace VisioPowerShell.Commands.Set
             update.BlastGuards = this.BlastGuards;
             update.TestCircular= this.TestCircular;
 
-            var target_pages = this.Pages ?? new[] { this.client.Page.Get() };
+            var target_pages = this.Pages ?? new[] { this.Client.Page.Get() };
 
             var cellmap = CellSRCDictionary.GetCellMapForPages();
             var valuemap = new CellValueDictionary(cellmap, this.Hashtable);
@@ -48,8 +48,8 @@ namespace VisioPowerShell.Commands.Set
                 this.WriteVerbose("Number of Shapes : {0}", 1);
                 this.WriteVerbose("Number of Total Updates: {0}", update.Count());
 
-                var application = this.client.Application.Get();
-                using (var undoscope = this.client.Application.NewUndoScope("SetPageCells"))
+                var application = this.Client.Application.Get();
+                using (var undoscope = this.Client.Application.NewUndoScope("SetPageCells"))
                 {
                     this.WriteVerbose("Start Update");
                     update.Execute(pagesheet);

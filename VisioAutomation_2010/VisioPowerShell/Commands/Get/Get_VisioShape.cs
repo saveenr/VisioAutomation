@@ -25,19 +25,19 @@ namespace VisioPowerShell.Commands.Get
                 if (this.Recursive)
                 {
                     this.WriteVerbose("Returning selected shapes (nested)");
-                    var shapes = this.client.Selection.GetShapesRecursive();
+                    var shapes = this.Client.Selection.GetShapesRecursive();
                     this.WriteObject(shapes, false);
                 }
                 if (this.SubSelected)
                 {
                     this.WriteVerbose("Returning selected shapes (subselecte)");
-                    var shapes = this.client.Selection.GetSubSelectedShapes();
+                    var shapes = this.Client.Selection.GetSubSelectedShapes();
                     this.WriteObject(shapes, false);
                 }
                 else
                 {
                     this.WriteVerbose("Returning selected shapes ");
-                    var shapes = this.client.Selection.GetShapes();
+                    var shapes = this.Client.Selection.GetShapes();
                     this.WriteObject(shapes, false);
                 }                
             }
@@ -45,7 +45,7 @@ namespace VisioPowerShell.Commands.Get
             {
                 if (this.NameOrID.Contains("*"))
                 {
-                    var shapes = this.client.Draw.GetAllShapes();
+                    var shapes = this.Client.Draw.GetAllShapes();
                     this.WriteObject(shapes, false);
                 }
                 else
@@ -61,13 +61,13 @@ namespace VisioPowerShell.Commands.Get
                     if (all_ints)
                     {
                         var ints = this.NameOrID.Where(i => i is int).Cast<int>().ToArray();
-                        var shapes = this.client.Page.GetShapesByID(ints);
+                        var shapes = this.Client.Page.GetShapesByID(ints);
                         this.WriteObject(shapes, false);
                     }
                     else if (all_strings)
                     {
                         var strings = this.NameOrID.Where(i => i is string).Cast<string>().ToArray();
-                        var shapes = this.client.Page.GetShapesByName(strings);
+                        var shapes = this.Client.Page.GetShapesByName(strings);
                         this.WriteObject(shapes, false);
                     }
                     else

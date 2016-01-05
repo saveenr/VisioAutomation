@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.Get
 
         protected override void ProcessRecord()
         {
-            var application = this.client.Application.Get();
+            var application = this.Client.Application.Get();
 
             if (this.ActiveDocument)
             {
@@ -23,7 +23,7 @@ namespace VisioPowerShell.Commands.Get
                 return;
             }
 
-            var docs = this.client.Document.GetDocumentsByName(this.Name);
+            var docs = this.Client.Document.GetDocumentsByName(this.Name);
             this.WriteObject(docs, true);
         }
     }

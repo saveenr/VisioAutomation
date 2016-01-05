@@ -29,7 +29,7 @@ namespace VisioPowerShell.Commands.Set
             var cellmap = CellSRCDictionary.GetCellMapForShapes();
             var valuemap = new CellValueDictionary(cellmap, this.Hashtable);
 
-            var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
+            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
 
             this.DumpValues(valuemap);
 
@@ -45,14 +45,14 @@ namespace VisioPowerShell.Commands.Set
                 }
             }
 
-            var surface = this.client.ShapeSheet.GetShapeSheetSurface();
+            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
             this.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.WriteVerbose("TestCircular: {0}", this.TestCircular);
             this.WriteVerbose("Number of Shapes : {0}", target_shapes.Count);
             this.WriteVerbose("Number of Total Updates: {0}", update.Count());
 
-            using (var undoscope = this.client.Application.NewUndoScope( "SetShapeCells"))
+            using (var undoscope = this.Client.Application.NewUndoScope( "SetShapeCells"))
             {
                 this.WriteVerbose("Start Update");
                 update.Execute(surface);

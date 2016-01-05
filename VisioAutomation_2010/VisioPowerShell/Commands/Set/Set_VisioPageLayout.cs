@@ -15,12 +15,12 @@ namespace VisioPowerShell.Commands.Set
         {
             if (this.Orientation != Model.PageOrientation.None)
             {
-                this.client.Page.SetOrientation((VisioAutomation.Pages.PrintPageOrientation) this.Orientation);
+                this.Client.Page.SetOrientation((VisioAutomation.Pages.PrintPageOrientation) this.Orientation);
             }
 
             if (this.BackgroundPage != null)
             {
-                this.client.Page.SetBackgroundPage(this.BackgroundPage);
+                this.Client.Page.SetBackgroundPage(this.BackgroundPage);
             }
         }
     }

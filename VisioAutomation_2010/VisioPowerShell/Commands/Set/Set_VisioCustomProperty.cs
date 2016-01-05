@@ -111,7 +111,7 @@ namespace VisioPowerShell.Commands.Set
                 cp.Invisible = this.Invisible;
             }
 
-            this.client.CustomProp.Set(this.Shapes, this.Name, cp);
+            this.Client.CustomProp.Set(this.Shapes, this.Name, cp);
         }
 
         private void SetFromHashTable()
@@ -133,7 +133,7 @@ namespace VisioPowerShell.Commands.Set
 
                 object value = this.HashTable[key];
                 var cp = VACUSTPROP.CustomPropertyCells.FromValue(value);
-                this.client.CustomProp.Set(this.Shapes, key_string, cp);
+                this.Client.CustomProp.Set(this.Shapes, key_string, cp);
             }
         }
     }

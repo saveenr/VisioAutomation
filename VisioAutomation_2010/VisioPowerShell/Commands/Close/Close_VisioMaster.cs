@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.Close
     {
         protected override void ProcessRecord()
         {
-            this.client.Master.CloseMasterEditing();
+            this.Client.Master.CloseMasterEditing();
         }
     }
 }
