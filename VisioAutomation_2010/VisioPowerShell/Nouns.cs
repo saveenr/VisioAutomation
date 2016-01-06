@@ -8,7 +8,7 @@ namespace VisioPowerShell
         public const string VisioModelAreaChart = "VisioModelAreaChart";
         public const string VisioModelBarChart = "VisioModelBarChart";
         public const string VisioModelDirectedGraph = "VisioModelDirectedGraph";
-        public const string VisioModelGridLayout = "VisioModelGridLayout";
+        public const string VisioModelGrid = "VisioModelGridLayout";
         public const string VisioModelOrgChart = "VisioModelOrgChart";
         public const string VisioModelPieChart = "VisioModelPieChart";
 

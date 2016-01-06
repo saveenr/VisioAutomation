@@ -5,8 +5,8 @@ using GRID = VisioAutomation.Models.Grid;
 
 namespace VisioPowerShell.Commands.New
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioModelGridLayout)]
-    public class New_VisioGridModelLayout : VisioCmdlet
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioModelGrid)]
+    public class New_VisioModelGrid : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
         public IVisio.Master Master { get; set; }

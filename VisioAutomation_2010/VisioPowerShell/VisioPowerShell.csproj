@@ -115,7 +115,7 @@
     <Compile Include="Commands\Test\Test_VisioApplication.cs" />
     <Compile Include="Commands\Get\Get_VisioClient.cs" />
     <Compile Include="Commands\New\New_VisioNURBS.cs" />
-    <Compile Include="Commands\New\New_VisioGridModelLayout.cs" />
+    <Compile Include="Commands\New\New_VisioModelGrid.cs" />
     <Compile Include="Commands\New\New_VisioMaster.cs" />
     <Compile Include="Commands\Remove\Remove_VisioUserDefinedCell.cs" />
     <Compile Include="Model\VisioPsContext.cs" />
