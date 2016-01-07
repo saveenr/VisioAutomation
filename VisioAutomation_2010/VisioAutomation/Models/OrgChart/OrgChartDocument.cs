@@ -29,7 +29,7 @@ namespace VisioAutomation.Models.OrgChart
 
             if (orgchartdrawing == null)
             {
-                throw new System.ArgumentNullException("orgchartdrawing");
+                throw new System.ArgumentNullException(nameof(orgchartdrawing));
             }
 
             if (app == null)

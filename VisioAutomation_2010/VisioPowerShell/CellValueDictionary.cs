@@ -12,7 +12,7 @@ namespace VisioPowerShell
         {
             if (srcmap == null)
             {
-                throw new System.ArgumentNullException("srcmapx");
+                throw new System.ArgumentNullException(nameof(srcmap));
             }
 
             this.srcmap = srcmap;

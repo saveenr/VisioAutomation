@@ -52,7 +52,7 @@ namespace VisioAutomationSamples
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             var page_sheet = page.PageSheet;
@@ -67,7 +67,7 @@ namespace VisioAutomationSamples
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             var query = new VA.ShapeSheet.Query.CellQuery();
