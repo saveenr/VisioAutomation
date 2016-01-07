@@ -104,12 +104,9 @@ namespace VisioPowerShell
 
         private static Regex GetRegexForWildCardPattern(string cellname)
         {
-            string pat = "^" + Regex.Escape(cellname)
-                .Replace(@"\*", ".*").
-                Replace(@"\?", ".") + "$";
+            string pat = "^" + Regex.Escape(cellname).Replace(@"\*", ".*").Replace(@"\?", ".") + "$";
 
-            var regex = new Regex(pat,
-                RegexOptions.IgnoreCase);
+            var regex = new Regex(pat, RegexOptions.IgnoreCase);
             return regex;
         }
 
