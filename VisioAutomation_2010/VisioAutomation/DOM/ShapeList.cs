@@ -10,16 +10,16 @@ namespace VisioAutomation.DOM
 {
     public class ShapeList : Node, IEnumerable<BaseShape>
     {
-        private readonly NodeList<BaseShape> shapes;
+        private readonly NodeList<BaseShape> _shapes;
 
         public ShapeList()
         {
-            this.shapes = new NodeList<BaseShape>(this);
+            this._shapes = new NodeList<BaseShape>(this);
         }
 
         public IEnumerator<BaseShape> GetEnumerator()
         {
-            foreach (var i in this.shapes)
+            foreach (var i in this._shapes)
             {
                 yield return i;
             }
@@ -27,12 +27,12 @@ namespace VisioAutomation.DOM
 
         public void Add( BaseShape shape )
         {
-            this.shapes.Add(shape);
+            this._shapes.Add(shape);
         }
 
         public int Count
         {
-            get { return this.shapes.Count; }
+            get { return this._shapes.Count; }
         }
 
         IEnumerator IEnumerable.GetEnumerator()    
@@ -59,7 +59,7 @@ namespace VisioAutomation.DOM
 
         private void AddHyperlinks(RenderContext context)
         {
-            var shapes_with_hyperlinks = this.shapes.Where(s => s.Hyperlinks != null);
+            var shapes_with_hyperlinks = this._shapes.Where(s => s.Hyperlinks != null);
             foreach (var shape in shapes_with_hyperlinks)
             {
                 var vshape = context.GetShape(shape.VisioShapeID);
@@ -82,7 +82,7 @@ namespace VisioAutomation.DOM
 
         private void SetCustomProperties(RenderContext context)
         {
-            var shapes_with_custom_props = this.shapes.Where(s => s.CustomProperties != null);
+            var shapes_with_custom_props = this._shapes.Where(s => s.CustomProperties != null);
             foreach (var shape in shapes_with_custom_props)
             {
                 var vshape = context.GetShape(shape.VisioShapeID);
@@ -97,7 +97,7 @@ namespace VisioAutomation.DOM
 
         private void SetText()
         {
-            var shapes_with_text = this.shapes.Where(s => s.Text != null);
+            var shapes_with_text = this._shapes.Where(s => s.Text != null);
             foreach (var shape in shapes_with_text)
             {
                 shape.Text.SetText(shape.VisioShape);
@@ -114,7 +114,7 @@ namespace VisioAutomation.DOM
             this.UpdateCellsWithDropSizes(context);
 
             var update = new ShapeSheet.Update();
-            var shapes_with_cells = this.shapes.Where(s => s.Cells != null);
+            var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {
                 var fmt = shape.Cells;
@@ -127,7 +127,7 @@ namespace VisioAutomation.DOM
         private void PerformDrawing(RenderContext context)
         {
             // Draw shapes
-            var non_connectors = this.shapes.Where(s => !(s is Connector)).ToList();
+            var non_connectors = this._shapes.Where(s => !(s is Connector)).ToList();
             var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
             var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
 
@@ -141,7 +141,7 @@ namespace VisioAutomation.DOM
             this._draw_connectors(context);
 
             // Make sure we have Visio shape objects for all DOM objects
-            foreach (var shape in this.shapes)
+            foreach (var shape in this._shapes)
             {
                 if (shape.VisioShape == null)
                 {
@@ -162,7 +162,7 @@ namespace VisioAutomation.DOM
         private void ResolveFonts(RenderContext context)
         {
             var unique_names = new HashSet<string>();
-            foreach (var shape in this.shapes)
+            foreach (var shape in this._shapes)
             {
                 if (shape.CharFontName != null)
                 {
@@ -184,7 +184,7 @@ namespace VisioAutomation.DOM
                 name_to_id[name] = font.ID;
             }
 
-            foreach (var shape in this.shapes)
+            foreach (var shape in this._shapes)
             {
                 if (shape.CharFontName != null)
                 {
@@ -200,7 +200,7 @@ namespace VisioAutomation.DOM
 
         private void check_valid_shape_ids()
         {
-            foreach (var shape in this.shapes)
+            foreach (var shape in this._shapes)
             {
                 if (shape is Connector)
                 {
@@ -221,7 +221,7 @@ namespace VisioAutomation.DOM
         {
             // Find all the shapes that use masters and for which
             // a Visio master object has not been identifies yet
-            var shape_nodes = this.shapes
+            var shape_nodes = this._shapes
                 .Where(shape => shape is Shape)
                 .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
@@ -243,7 +243,7 @@ namespace VisioAutomation.DOM
             }
 
             // Ensure that all shapes to drop are assigned a visio master object
-            foreach (var shape in this.shapes.Where(s=>s is Shape).Cast<Shape>())
+            foreach (var shape in this._shapes.Where(s=>s is Shape).Cast<Shape>())
             {
                 if (shape.Master.VisioMaster == null)
                 {
@@ -254,7 +254,7 @@ namespace VisioAutomation.DOM
 
         private void UpdateCellsWithDropSizes(RenderContext context)
         {
-            var masters = this.shapes
+            var masters = this._shapes
                 .Where(shape => shape is Shape).Cast<Shape>();
 
             foreach (var master in masters)
@@ -362,7 +362,7 @@ namespace VisioAutomation.DOM
 
         private void _draw_connectors(RenderContext context)
         {
-            var connector_nodes = this.shapes.Where(s => s is Connector).Cast<Connector>().ToList();
+            var connector_nodes = this._shapes.Where(s => s is Connector).Cast<Connector>().ToList();
 
             // if no dynamic connectors then do nothing
             if (connector_nodes.Count < 1)

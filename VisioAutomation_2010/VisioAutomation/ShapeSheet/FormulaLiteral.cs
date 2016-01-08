@@ -10,16 +10,16 @@
     /// </summary>
     public struct FormulaLiteral
     {
-        private readonly string formula_string;
+        private readonly string _formula_string;
 
         private FormulaLiteral(string s)
         {
-            this.formula_string = s;
+            this._formula_string = s;
         }
 
-        public string Value => this.formula_string;
+        public string Value => this._formula_string;
 
-        public bool HasValue => this.formula_string != null;
+        public bool HasValue => this._formula_string != null;
 
         public static implicit operator FormulaLiteral(string value)
         {

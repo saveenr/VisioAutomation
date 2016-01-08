@@ -4,11 +4,11 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellColumnList : IEnumerable<CellColumn>
     {
-        private IList<CellColumn> items { get; }
-        private readonly Dictionary<string, CellColumn> dic_columns;
-        private HashSet<SRC> hs_src;
-        private HashSet<short> hs_cellindex;
-        private CellColumnType coltype;
+        private readonly IList<CellColumn> _items;
+        private readonly Dictionary<string, CellColumn> _dic_columns;
+        private HashSet<SRC> _src_set;
+        private HashSet<short> _cellindex_set;
+        private CellColumnType _coltype;
 
         internal CellColumnList() :
             this(0)
@@ -17,14 +17,14 @@ namespace VisioAutomation.ShapeSheet.Query
 
         internal CellColumnList(int capacity)
         {
-            this.items = new List<CellColumn>(capacity);
-            this.dic_columns = new Dictionary<string, CellColumn>(capacity);
-            this.coltype = CellColumnType.Unknown;
+            this._items = new List<CellColumn>(capacity);
+            this._dic_columns = new Dictionary<string, CellColumn>(capacity);
+            this._coltype = CellColumnType.Unknown;
         }
 
         public IEnumerator<CellColumn> GetEnumerator()
         {
-            return (this.items).GetEnumerator();
+            return (this._items).GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -32,46 +32,46 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public CellColumn this[int index] => this.items[index];
+        public CellColumn this[int index] => this._items[index];
 
-        public CellColumn this[string name] => this.dic_columns[name];
+        public CellColumn this[string name] => this._dic_columns[name];
 
-        public bool Contains(string name) => this.dic_columns.ContainsKey(name);
+        public bool Contains(string name) => this._dic_columns.ContainsKey(name);
 
         internal CellColumn Add(SRC src) => this.Add(src, null);
 
         internal CellColumn Add(SRC src, string name)
         {
-            if (this.coltype == CellColumnType.CellIndex)
+            if (this._coltype == CellColumnType.CellIndex)
             {
                 throw new AutomationException("Can't add an SRC if Columns contains CellIndexes");
             }
-            this.coltype = CellColumnType.SRC;
+            this._coltype = CellColumnType.SRC;
 
             name = this.fixup_name(name);
 
-            if (this.dic_columns.ContainsKey(name))
+            if (this._dic_columns.ContainsKey(name))
             {
                 throw new AutomationException("Duplicate Column Name");
             }
 
-            if (this.hs_src == null)
+            if (this._src_set == null)
             {
-                this.hs_src = new HashSet<SRC>();
+                this._src_set = new HashSet<SRC>();
             }
 
-            if (this.hs_src.Contains(src))
+            if (this._src_set.Contains(src))
             {
                 string msg = "Duplicate SRC";
                 throw new AutomationException(msg);
             }
 
-            int ordinal = this.items.Count;
+            int ordinal = this._items.Count;
             var col = new CellColumn(ordinal, src, name);
-            this.items.Add(col);
+            this._items.Add(col);
 
-            this.dic_columns[name] = col;
-            this.hs_src.Add(src);
+            this._dic_columns[name] = col;
+            this._src_set.Add(src);
             return col;
         }
 
@@ -82,29 +82,29 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellColumn Add(short cell, string name)
         {
-            if (this.coltype == CellColumnType.SRC)
+            if (this._coltype == CellColumnType.SRC)
             {
                 throw new AutomationException("Can't add a CellIndex if Columns contains SRCs");
             }
 
-            this.coltype = CellColumnType.CellIndex;
+            this._coltype = CellColumnType.CellIndex;
 
-            if (this.hs_cellindex == null)
+            if (this._cellindex_set == null)
             {
-                this.hs_cellindex = new HashSet<short>();
+                this._cellindex_set = new HashSet<short>();
             }
 
-            if (this.hs_cellindex.Contains(cell))
+            if (this._cellindex_set.Contains(cell))
             {
                 string msg = "Duplicate Cell Index";
                 throw new AutomationException(msg);
             }
 
             name = this.fixup_name(name);
-            int ordinal = this.items.Count;
+            int ordinal = this._items.Count;
             var col = new CellColumn(ordinal, cell, name);
-            this.items.Add(col);
-            this.hs_cellindex.Add(cell);
+            this._items.Add(col);
+            this._cellindex_set.Add(cell);
             return col;
         }
 
@@ -112,11 +112,11 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (string.IsNullOrEmpty(name))
             {
-                name = $"Col{this.items.Count}";
+                name = $"Col{this._items.Count}";
             }
             return name;
         }
 
-        public int Count => this.items.Count;
+        public int Count => this._items.Count;
     }
 }

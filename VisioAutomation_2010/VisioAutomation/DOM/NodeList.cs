@@ -5,14 +5,14 @@ namespace VisioAutomation.DOM
 {
     public class NodeList<T> : IEnumerable<T> where T : Node
     {
-        private List<T> items;
+        private List<T> _items;
 
         public Node Parent { get; }
 
         internal NodeList(Node parent)
         {
             this.Parent = parent;
-            this.items = null;
+            this._items = null;
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -30,12 +30,12 @@ namespace VisioAutomation.DOM
 
         private IEnumerable<T> GetItems()
         {
-            if (this.items == null)
+            if (this._items == null)
             {
                 yield break;
             }
 
-            foreach (T n in this.items)
+            foreach (T n in this._items)
             {
                 yield return n;
             }
@@ -63,9 +63,9 @@ namespace VisioAutomation.DOM
                 throw new System.ArgumentException("Node is already a child of a node");
             }
 
-            this.items = this.items ?? new List<T>();
+            this._items = this._items ?? new List<T>();
             node_to_add.Parent = this.Parent;
-            this.items.Add(node_to_add);
+            this._items.Add(node_to_add);
 
             return node_to_add;
         }
@@ -91,18 +91,18 @@ namespace VisioAutomation.DOM
         {
             get
             {
-                if (this.items == null)
+                if (this._items == null)
                 {
                     return 0;
                 }
 
-                return this.items.Count;
+                return this._items.Count;
             }
         }
 
         public T this[int index]
         {
-            get { return this.items[index]; }
+            get { return this._items[index]; }
         }
     }
 }

@@ -5,28 +5,29 @@ namespace VisioAutomation.DOM
     public class Document
     {
         public PageList Pages;
-        private readonly string vst_template_file ;
-        private readonly IVisio.VisMeasurementSystem measurementSystem;
         public IVisio.Document VisioDocument;
+
+        private readonly string _vst_template_file ;
+        private readonly IVisio.VisMeasurementSystem _measurement_system;
 
         public Document()
         {
             this.Pages = new PageList();
-            this.measurementSystem = IVisio.VisMeasurementSystem.visMSDefault;
+            this._measurement_system = IVisio.VisMeasurementSystem.visMSDefault;
         }
 
         public Document(string template, IVisio.VisMeasurementSystem ms) :
             this()
         {
-            this.vst_template_file = template;
-            this.measurementSystem = ms;
+            this._vst_template_file = template;
+            this._measurement_system = ms;
         }
 
         public IVisio.Document Render(IVisio.Application app)
         {
             var appdocs = app.Documents;
             IVisio.Document doc = null;
-            if (this.vst_template_file == null)
+            if (this._vst_template_file == null)
             {
                 doc = appdocs.Add("");
             }
@@ -34,7 +35,7 @@ namespace VisioAutomation.DOM
             {
                 const int flags = 0; // (int)IVisio.VisOpenSaveArgs.visAddDocked;
                 const int langid = 0;
-                doc = appdocs.AddEx(this.vst_template_file, this.measurementSystem, flags, langid);
+                doc = appdocs.AddEx(this._vst_template_file, this._measurement_system, flags, langid);
             }
             this.VisioDocument = doc;
             var docpages = doc.Pages;

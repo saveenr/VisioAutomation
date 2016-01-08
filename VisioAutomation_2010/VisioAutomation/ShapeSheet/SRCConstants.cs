@@ -19,8 +19,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Actions_ReadOnly => new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionReadOnly);
         public static SRC Actions_SortKey => new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionSortKey);
         public static SRC Actions_TagName => new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionTagName);
-        public static SRC Actions_FlyoutChild => new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionFlyoutChild);
-// new for visio 2010
+        public static SRC Actions_FlyoutChild => new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionFlyoutChild); // new for visio 2010
 
         // Alignment
         public static SRC AlignBottom => new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignBottom);
@@ -231,8 +230,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ResizePage => new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOResizePage);
         public static SRC RouteStyle => new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLORouteStyle);
 
-        public static SRC AvoidPageBreaks => new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOAvoidPageBreaks);
-// new in Visio 2010
+        public static SRC AvoidPageBreaks => new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOAvoidPageBreaks); // new in Visio 2010
 
         // print properties
         public static SRC PageLeftMargin => new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesLeftMargin);
@@ -265,8 +263,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ShdwScaleFactor => new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwScaleFactor);
         public static SRC ShdwType => new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwType);
         public static SRC UIVisibility => new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageUIVisibility);
-        public static SRC DrawingResizeType => new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageDrawResizeType);
-// new in Visio 2010
+        public static SRC DrawingResizeType => new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageDrawResizeType); // new in Visio 2010
 
         // paragraph
         public static SRC Para_Bullet => new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletIndex);
@@ -429,10 +426,8 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ShapeRouteStyle => new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORouteStyle);
         public static SRC ShapeSplit => new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplit);
         public static SRC ShapeSplittable => new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplittable);
-        public static SRC DisplayLevel => new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLODisplayLevel);
-// new in Visio 2010
-        public static SRC Relationships => new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORelationships);
-// new in Visio 2010
+        public static SRC DisplayLevel => new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLODisplayLevel); // new in Visio 2010
+        public static SRC Relationships => new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORelationships); // new in Visio 2010
 
         public static Dictionary<string, SRC> GetSRCDictionary()
         {

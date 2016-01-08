@@ -2,18 +2,18 @@
 {
     public class SectionColumnList : System.Collections.Generic.IEnumerable<SectionColumn>
     {
-        private System.Collections.Generic.IList<SectionColumn> items { get; }
-        private readonly System.Collections.Generic.Dictionary<Microsoft.Office.Interop.Visio.VisSectionIndices,SectionColumn> hs_section; 
+        private System.Collections.Generic.IList<SectionColumn> Items { get; }
+        private readonly System.Collections.Generic.Dictionary<Microsoft.Office.Interop.Visio.VisSectionIndices,SectionColumn> _section_set; 
 
         internal SectionColumnList(int capacity)
         {
-            this.items = new System.Collections.Generic.List<SectionColumn>(capacity);
-            this.hs_section = new System.Collections.Generic.Dictionary<Microsoft.Office.Interop.Visio.VisSectionIndices, SectionColumn>(capacity);
+            this.Items = new System.Collections.Generic.List<SectionColumn>(capacity);
+            this._section_set = new System.Collections.Generic.Dictionary<Microsoft.Office.Interop.Visio.VisSectionIndices, SectionColumn>(capacity);
         }
 
         public System.Collections.Generic.IEnumerator<SectionColumn> GetEnumerator()
         {
-            return (this.items).GetEnumerator();
+            return (this.Items).GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -21,23 +21,23 @@
             return this.GetEnumerator();
         }
 
-        public SectionColumn this[int index] => this.items[index];
+        public SectionColumn this[int index] => this.Items[index];
 
         internal SectionColumn Add(Microsoft.Office.Interop.Visio.VisSectionIndices section)
         {
-            if (this.hs_section.ContainsKey(section))
+            if (this._section_set.ContainsKey(section))
             {
                 string msg = "Duplicate Section";
                 throw new AutomationException(msg);
             }
 
-            int ordinal = this.items.Count;
+            int ordinal = this.Items.Count;
             var section_query = new SectionColumn(ordinal, section);
-            this.items.Add(section_query);
-            this.hs_section[section] = section_query;
+            this.Items.Add(section_query);
+            this._section_set[section] = section_query;
             return section_query;
         }
 
-        public int Count => this.items.Count;
+        public int Count => this.Items.Count;
     }
 }

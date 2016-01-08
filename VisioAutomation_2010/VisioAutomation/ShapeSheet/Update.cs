@@ -7,26 +7,26 @@ namespace VisioAutomation.ShapeSheet
 {
     public class Update : IEnumerable<Update.UpdateRecord>
     {
-        private readonly List<UpdateRecord> updates;
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        private UpdateRecord? first_update;
+        private UpdateRecord? _first_update;
+        private readonly List<UpdateRecord> _updates;
 
         public void Clear()
         {
-            this.updates.Clear();
-            this.first_update = null;
+            this._updates.Clear();
+            this._first_update = null;
         }
 
         public Update()
         {
-            this.updates = new List<UpdateRecord>();
+            this._updates = new List<UpdateRecord>();
         }
 
         public Update(int capacity)
         {
-            this.updates = new List<UpdateRecord>(capacity);
+            this._updates = new List<UpdateRecord>(capacity);
         }
 
         protected IVisio.VisGetSetArgs ResultFlags
@@ -74,28 +74,28 @@ namespace VisioAutomation.ShapeSheet
         private void _add_update(UpdateRecord update)
         {
             // This block ensures that only homogeneous updates are constructed
-            if (!this.first_update.HasValue)
+            if (!this._first_update.HasValue)
             {
-                this.first_update = update;
+                this._first_update = update;
             }
             else
             {
                 // first validate the stream types
-                if (this.first_update.Value.StreamType != update.StreamType)
+                if (this._first_update.Value.StreamType != update.StreamType)
                 {
                     throw new AutomationException("Cannot contain both SRC and SIDSRC updates");
                 }
 
                 // Now ensure that we aren't mixing formulas and results
                 // Keep in mind that we can mix differnt types of results (strings and numerics)
-                if (this.first_update.Value.UpdateType == UpdateType.Formula && update.UpdateType != UpdateType.Formula)
+                if (this._first_update.Value.UpdateType == UpdateType.Formula && update.UpdateType != UpdateType.Formula)
                 {
                     if (update.UpdateType != UpdateType.Formula)
                     {
                         throw new AutomationException("Cannot contain both Formula and Result updates");
                     }
                 }
-                else if (this.first_update.Value.UpdateType == UpdateType.ResultNumeric || this.first_update.Value.UpdateType == UpdateType.ResultString)
+                else if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric || this._first_update.Value.UpdateType == UpdateType.ResultString)
                 {
                     if (update.UpdateType == UpdateType.Formula)
                     {
@@ -105,9 +105,10 @@ namespace VisioAutomation.ShapeSheet
             }
 
             // Now that it is safe, add the record
-            this.updates.Add(update);
+            this._updates.Add(update);
 
         }
+
         protected void _SetFormula(StreamType st,SIDSRC streamitem, FormulaLiteral formula)
         {
             this.CheckFormulaIsNotNull(formula.Value);
@@ -137,7 +138,7 @@ namespace VisioAutomation.ShapeSheet
 
         public IEnumerator<UpdateRecord> GetEnumerator()
         {
-            foreach (var i in this.updates)
+            foreach (var i in this._updates)
             {
                 yield return i;
             }
@@ -240,28 +241,28 @@ namespace VisioAutomation.ShapeSheet
         private void _Execute(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
-            if (this.updates.Count < 1)
+            if (this._updates.Count < 1)
             {
                 return;
             }
 
             if (surface.Target.Shape != null)
             {
-                if (this.first_update.Value.StreamType == StreamType.SIDSRC)
+                if (this._first_update.Value.StreamType == StreamType.SIDSRC)
                 {
                     throw new AutomationException("Contains a SIDSRC updates. Need SRC updates");
                 }
             }
             else if (surface.Target.Master != null)
             {
-                if (this.first_update.Value.StreamType == StreamType.SIDSRC)
+                if (this._first_update.Value.StreamType == StreamType.SIDSRC)
                 {
                     throw new AutomationException("Contains a SIDSRC updates. Need SRC updates");
                 }
             }
             else if (surface.Target.Page != null)
             {
-                if (this.first_update.Value.StreamType == StreamType.SRC)
+                if (this._first_update.Value.StreamType == StreamType.SRC)
                 {
                     throw new AutomationException("Contains a SRC updates. Need SIDSRC updates");
                 }
@@ -269,15 +270,15 @@ namespace VisioAutomation.ShapeSheet
 
             var stream = this.build_stream();
 
-            if (this.first_update.Value.UpdateType == UpdateType.ResultNumeric || this.first_update.Value.UpdateType==UpdateType.ResultString)
+            if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric || this._first_update.Value.UpdateType==UpdateType.ResultString)
             {
                 // Set Results
 
                 // Create the unitcodes and results arrays
-                var unitcodes = new object[this.updates.Count];
-                var results = new object[this.updates.Count];
+                var unitcodes = new object[this._updates.Count];
+                var results = new object[this._updates.Count];
                 int i = 0;
-                foreach (var update in this.updates)
+                foreach (var update in this._updates)
                 {
                     unitcodes[i] = update.UnitCode;
                     if (update.UpdateType == UpdateType.ResultNumeric)
@@ -297,10 +298,10 @@ namespace VisioAutomation.ShapeSheet
                 
                 var flags = this.ResultFlags;
 
-                if (this.first_update.Value.UpdateType == UpdateType.ResultNumeric)
+                if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric)
                 {
                 }
-                else if (this.first_update.Value.UpdateType == UpdateType.ResultString)
+                else if (this._first_update.Value.UpdateType == UpdateType.ResultString)
                 {
                     flags |= IVisio.VisGetSetArgs.visGetStrings;
                 }
@@ -312,9 +313,9 @@ namespace VisioAutomation.ShapeSheet
                 // Set Formulas
 
                 // Create the formulas array
-                var formulas = new object[this.updates.Count];
+                var formulas = new object[this._updates.Count];
                 int i = 0;
-                foreach (var rec in this.updates)
+                foreach (var rec in this._updates)
                 {
                     formulas[i] = rec.Formula;
                     i++;
@@ -328,18 +329,18 @@ namespace VisioAutomation.ShapeSheet
         
         private short [] build_stream()
         {
-            var st = this.first_update.Value.StreamType;
+            var st = this._first_update.Value.StreamType;
 
             if (st==StreamType.SRC)
             {
-                var streamb = new List<SRC>(this.updates.Count);
-                streamb.AddRange( this.updates.Select(i=>i.SIDSRC.SRC));
+                var streamb = new List<SRC>(this._updates.Count);
+                streamb.AddRange( this._updates.Select(i=>i.SIDSRC.SRC));
                 return SRC.ToStream(streamb);
             }
             else
             {
-                var streamb = new List<SIDSRC>(this.updates.Count);
-                streamb.AddRange(this.updates.Select(i => i.SIDSRC));
+                var streamb = new List<SIDSRC>(this._updates.Count);
+                streamb.AddRange(this._updates.Select(i => i.SIDSRC));
                 return SIDSRC.ToStream(streamb);
             }
             

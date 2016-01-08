@@ -5,7 +5,8 @@
         public static string GetSectionName(Microsoft.Office.Interop.Visio.VisSectionIndices value)
         {
             string s = value.ToString();
-            return s.Substring(10); // Get Rid of the visSection prefix
+            const int start_index = 10;
+            return s.Substring(start_index); // Get Rid of the visSection prefix
         }
 
         public static string GetSectionName(int value, string defaultname)
