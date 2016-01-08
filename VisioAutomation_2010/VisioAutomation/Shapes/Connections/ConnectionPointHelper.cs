@@ -6,21 +6,23 @@ namespace VisioAutomation.Shapes.Connections
     {
         public static int Add(
             IVisio.Shape shape,
-            ConnectionPointCells cp)
+            ConnectionPointCells connection_point_cells)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            if (!cp.X.Formula.HasValue)
+            if (!connection_point_cells.X.Formula.HasValue)
             {
-                throw new System.ArgumentException("Must provide an X Formula");
+                string msg = "Must provide an X Formula";
+                throw new System.ArgumentException(msg, nameof(connection_point_cells));
             }
 
-            if (!cp.Y.Formula.HasValue)
+            if (!connection_point_cells.Y.Formula.HasValue)
             {
-                throw new System.ArgumentException("Must provide an Y Formula");
+                string msg = "Must provide an Y Formula";
+                throw new System.ArgumentException(msg, nameof(connection_point_cells));
             }
 
             var n = shape.AddRow((short)IVisio.VisSectionIndices.visSectionConnectionPts,
@@ -28,7 +30,7 @@ namespace VisioAutomation.Shapes.Connections
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
             var update = new ShapeSheet.Update();
-            update.SetFormulas(cp,n);
+            update.SetFormulas(connection_point_cells,n);
             update.Execute(shape);
 
             return n;
