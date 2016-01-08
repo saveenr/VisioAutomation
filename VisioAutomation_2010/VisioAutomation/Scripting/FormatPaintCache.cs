@@ -109,11 +109,10 @@ namespace VisioAutomation.Scripting
             // Now store the values
             for (int col = 0; col < query.CellColumns.Count; col++)
             {
-                var cellrec = desired_cells[col];
-
                 var result = dataset[col].Result;
                 var formula = dataset[col].Formula;
 
+                var cellrec = desired_cells[col];
                 cellrec.Result = result;
                 cellrec.Formula = formula.Value;
             }
@@ -136,8 +135,7 @@ namespace VisioAutomation.Scripting
 
                     if (applyformulas)
                     {
-                        update.SetFormula(sidsrc, cellrec.Formula);
-                        
+                        update.SetFormula(sidsrc, cellrec.Formula);    
                     }
                     else
                     {
