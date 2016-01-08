@@ -16,32 +16,28 @@ namespace VisioAutomation.Scripting
 
         private static double GetPositionOnShape(Shapes.XFormCells xform, RelativePosition pos)
         {
-            if (pos == RelativePosition.PinY)
+            switch (pos)
             {
-                return xform.PinY.Result;
-            }
-            if (pos == RelativePosition.PinX)
-            {
-                return xform.PinX.Result;
+                case RelativePosition.PinY:
+                    return xform.PinY.Result;
+                case RelativePosition.PinX:
+                    return xform.PinX.Result;
             }
 
             var r = ArrangeHelper.GetRectangle(xform);
-            if (pos == RelativePosition.Left)
+
+            switch (pos)
             {
-                return r.Left;
+                case RelativePosition.Left:
+                    return r.Left;
+                case RelativePosition.Right:
+                    return r.Right;
+                case RelativePosition.Top:
+                    return r.Top;
+                case RelativePosition.Bottom:
+                    return r.Bottom;
             }
-            if (pos == RelativePosition.Right)
-            {
-                return r.Right;
-            }
-            if (pos == RelativePosition.Top)
-            {
-                return r.Top;
-            }
-            if (pos == RelativePosition.Right)
-            {
-                return r.Bottom;
-            }
+
             throw new System.ArgumentOutOfRangeException(nameof(pos));
         }
 
