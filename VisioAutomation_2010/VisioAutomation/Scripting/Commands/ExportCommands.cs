@@ -16,24 +16,24 @@ namespace VisioAutomation.Scripting.Commands
 
         public void PageToFile(string filename)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            if (!this.Client.Selection.HasShapes())
+            if (!this._client.Selection.HasShapes())
             {
-                this.Client.WriteVerbose("No selected shapes. Not exporting.");
+                this._client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var old_selection = this.Client.Selection.GetShapes();
+            var old_selection = this._client.Selection.GetShapes();
 
-            this.Client.Selection.None();
-            var application = this.Client.Application.Get();
+            this._client.Selection.None();
+            var application = this._client.Application.Get();
             var active_page = application.ActivePage;
             active_page.Export(filename);
             var active_window = application.ActiveWindow;
@@ -42,35 +42,35 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectionToFile(string filename)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            if (!this.Client.Selection.HasShapes())
+            if (!this._client.Selection.HasShapes())
             {
-                this.Client.WriteVerbose("No selected shapes. Not exporting.");
+                this._client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var selection = this.Client.Selection.Get();
+            var selection = this._client.Selection.Get();
             selection.Export(filename);
         }
 
         public void PagesToFiles(string filename)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var old_page = application.ActivePage;
             var active_document = application.ActiveDocument;
             var active_window = application.ActiveWindow;
@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!System.IO.Directory.Exists(pbase))
             {
-                this.Client.WriteError(" Folder {0} does not exist", pbase);
+                this._client.WriteError(" Folder {0} does not exist", pbase);
                 return;
             }
             var ext = System.IO.Path.GetExtension(filename);
@@ -96,10 +96,10 @@ namespace VisioAutomation.Scripting.Commands
                 }
                 string page_filname = $"{fbase}_{page_index}_{page.Name}{bkgnd}{ext}";
 
-                this.Client.WriteUser("file {0}", page_filname);
+                this._client.WriteUser("file {0}", page_filname);
                 page_filname = System.IO.Path.Combine(pbase, page_filname);
                 active_window.Page = page;
-                this.Client.Selection.None();
+                this._client.Selection.None();
                 page.Export(page_filname);
             }
             active_window.Page = old_page;
@@ -107,28 +107,28 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectionToSVGXHTML(string filename)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            if (!this.Client.Selection.HasShapes())
+            if (!this._client.Selection.HasShapes())
             {
-                this.Client.WriteVerbose("No selected shapes. Not exporting.");
+                this._client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var selection = this.Client.Selection.Get();
-            this.SelectionToSVGXHTML(selection, filename, s => this.Client.WriteVerbose(s));
+            var selection = this._client.Selection.Get();
+            this.SelectionToSVGXHTML(selection, filename, s => this._client.WriteVerbose(s));
         }
 
         private void SelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";

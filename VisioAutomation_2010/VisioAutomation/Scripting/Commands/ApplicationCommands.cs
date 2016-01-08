@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
         internal ApplicationCommands(Client client, IVisio.Application application) :
             base(client)
         {
-            this.Window = new ApplicationWindowCommands(this.Client);
+            this.Window = new ApplicationWindowCommands(this._client);
             this.VisioApplication = application;
         }
 
@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
             get
             {
                 bool b = this.VisioApplication != null;
-                this.Client.WriteVerbose("HasApplication: {0}", b);
+                this._client.WriteVerbose("HasApplication: {0}", b);
                 return b;
             }
         }
@@ -39,7 +39,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void AssertApplicationAvailable()
         {
-            var has_app = this.Client.Application.HasApplication;
+            var has_app = this._client.Application.HasApplication;
             if (!has_app)
             {
                 throw new VisioApplicationException("No Visio Application available");
@@ -48,11 +48,11 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Close(bool force)
         {
-            var app = this.Client.Application.Get();
+            var app = this._client.Application.Get();
 
             if (app == null)
             {
-                this.Client.WriteWarning("There is no Visio Application to stop");
+                this._client.WriteWarning("There is no Visio Application to stop");
                 return;
             }
 
@@ -73,22 +73,22 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application New()
         {
-            this.Client.WriteVerbose("Creating a new Instance of Visio");
+            this._client.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
-            this.Client.WriteVerbose("Attaching that instance to current scripting client");
+            this._client.WriteVerbose("Attaching that instance to current scripting client");
             this.VisioApplication = app;
             return app;
         }
 
         public void Undo()
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
             this.VisioApplication.Undo();
         }
 
         public void Redo()
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
             this.VisioApplication.Redo();
         }
 
@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (this.VisioApplication == null)
             {
-                this.Client.WriteVerbose("Client's Application object is null");
+                this._client.WriteVerbose("Client's Application object is null");
                 return false;
             }
 
@@ -106,12 +106,12 @@ namespace VisioAutomation.Scripting.Commands
                 //  if No COMException was thrown when reading ProductName property. This application instance is treated as valid
 
                 var app_version = this.VisioApplication.ProductName;
-                this.Client.WriteVerbose("Application validated");
+                this._client.WriteVerbose("Application validated");
                 return true;
             }
             catch (System.Runtime.InteropServices.COMException)
             {
-                this.Client.WriteVerbose("COMException thrown during validation. Treating as invalid application");
+                this._client.WriteVerbose("COMException thrown during validation. Treating as invalid application");
                 // If a COMException is thrown, this indicates that the
                 // application object is invalid
                 return false;
@@ -126,8 +126,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (ApplicationCommands.visio_app_version == null)
                 {
-                    this.Client.Application.AssertApplicationAvailable();
-                    var application = this.Client.Application.Get();
+                    this._client.Application.AssertApplicationAvailable();
+                    var application = this._client.Application.Get();
                     ApplicationCommands.visio_app_version = Application.ApplicationHelper.GetVersion(application);
                 }
                 return ApplicationCommands.visio_app_version;

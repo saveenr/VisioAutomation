@@ -20,32 +20,32 @@ namespace VisioAutomation.Scripting.Commands
         /// <returns></returns>
         public IList<VACONNECT.ConnectorEdge> GetTransitiveClosure(VACONNECT.ConnectorEdgeHandling flag)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var app = this.Client.Application.Get();
+            var app = this._client.Application.Get();
             return VACONNECT.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
         public IList<VACONNECT.ConnectorEdge> GetDirectedEdges(VACONNECT.ConnectorEdgeHandling flag)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var directed_edges = VACONNECT.PathAnalysis.GetDirectedEdges(application.ActivePage, flag);
             return directed_edges;
         }
 
         public IList<IVisio.Shape> Connect(IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master master)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_page = application.ActivePage;
 
-            using (var undoscope = this.Client.Application.NewUndoScope(ConnectionCommands.undoname_connectShapes))
+            using (var undoscope = this._client.Application.NewUndoScope(ConnectionCommands.undoname_connectShapes))
             {
                 if (master == null)
                 {

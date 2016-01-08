@@ -15,10 +15,10 @@ namespace VisioAutomation.Scripting.Commands
         
         public IVisio.Selection Get()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             return selection;
@@ -26,19 +26,19 @@ namespace VisioAutomation.Scripting.Commands
 
         public void All()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
-            var active_window = this.Client.View.GetActiveWindow();
+            var active_window = this._client.View.GetActiveWindow();
             active_window.SelectAll();
         }
 
         public void Invert()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             if (shapes.Count < 1)
@@ -74,10 +74,10 @@ namespace VisioAutomation.Scripting.Commands
 
         public void None()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             active_window.DeselectAll();
@@ -85,45 +85,45 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Select(IVisio.Shape shape)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_window = application.ActiveWindow;
             active_window.Select(shape, (short) IVisio.VisSelectArgs.visSelect);
         }
 
         public void Select(IEnumerable<IVisio.Shape> shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (shapes == null)
             {
                 throw new System.ArgumentNullException(nameof(shapes));
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_window = application.ActiveWindow;
             active_window.Select(shapes, IVisio.VisSelectArgs.visSelect);
         }
 
         public void Select(IEnumerable<int> shapeids)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (shapeids == null)
             {
                 throw new System.ArgumentNullException(nameof(shapeids));
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_window = application.ActiveWindow;
             var page = application.ActivePage;
             var page_shapes = page.Shapes;
@@ -133,25 +133,25 @@ namespace VisioAutomation.Scripting.Commands
         
         public void SubSelect(IList<IVisio.Shape> shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (shapes == null)
             {
                 throw new System.ArgumentNullException(nameof(shapes));
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_window = application.ActiveWindow;
             active_window.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
         }
 
         public void SelectByMaster(IVisio.Master master)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             // Get a selection of connectors, by master: 
             var selection = page.CreateSelection(
@@ -162,8 +162,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectByLayer(string layername)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (layername == null)
             {
@@ -175,8 +175,8 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("Layer name cannot be empty", nameof(layername));
             }
 
-            var layer = this.Client.Layer.Get(layername);
-            var application = this.Client.Application.Get();
+            var layer = this._client.Layer.Get(layername);
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
 
             // Get a selection of connectors, by layer: 
@@ -188,25 +188,25 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> GetShapes()
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
-            var selection = this.Client.Selection.Get();
+            var selection = this._client.Selection.Get();
             return Selection.SelectionHelper.GetSelectedShapes(selection);
         }
 
         public IList<IVisio.Shape> GetShapesRecursive()
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
-            var selection = this.Client.Selection.Get();
+            var selection = this._client.Selection.Get();
             return Selection.SelectionHelper.GetSelectedShapesRecursive(selection);
         }
 
         public int Count()
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             int count = selection.Count;
@@ -215,12 +215,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> GetSubSelectedShapes()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
             var shapes = new List<IVisio.Shape>(0);
-            var sel = this.Client.Selection.Get();
+            var sel = this._client.Selection.Get();
             var original_itermode = sel.IterationMode;
 
             // normal selection
@@ -244,10 +244,10 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            if (!this.Client.Selection.HasShapes())
+            if (!this._client.Selection.HasShapes())
             {
                 return;
             }
@@ -258,10 +258,10 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Copy()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            if (!this.Client.Selection.HasShapes())
+            if (!this._client.Selection.HasShapes())
             {
                 return;
             }
@@ -274,20 +274,20 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Duplicate( IList<IVisio.Shape> target_shapes )
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             int n = this.GetTargetSelection(target_shapes);
 
-            this.Client.WriteVerbose("Number of shapes to duplicate: {0}", n);
+            this._client.WriteVerbose("Number of shapes to duplicate: {0}", n);
 
             if (n<1)
             {
-                this.Client.WriteVerbose("Zero shapes to duplicate. No duplication operation performed");
+                this._client.WriteVerbose("Zero shapes to duplicate. No duplication operation performed");
                 return;
             }
 
-            var view = this.Client.View;
+            var view = this._client.View;
             var active_window = view.GetActiveWindow();
             var selection = active_window.Selection;
             selection.Duplicate();
@@ -295,26 +295,26 @@ namespace VisioAutomation.Scripting.Commands
 
         public bool HasShapes()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             return this.HasShapes(1);
         }
 
         public bool HasShapes(int min_items)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (min_items <= 0)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(min_items));
             }
 
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             int num_selected = selection.Count;

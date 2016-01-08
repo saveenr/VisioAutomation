@@ -89,6 +89,7 @@
     <Compile Include="Models\DirectedGraph\NodeUserData.cs" />
     <Compile Include="Scripting\ArrangeHelper.cs" />
     <Compile Include="Scripting\Client.cs" />
+    <Compile Include="Scripting\Command.cs" />
     <Compile Include="Scripting\CommandSet.cs" />
     <Compile Include="Scripting\Commands\ApplicationCommands.cs" />
     <Compile Include="Scripting\Commands\ApplicationWindowCommands.cs" />

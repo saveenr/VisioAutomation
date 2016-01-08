@@ -18,20 +18,20 @@ namespace VisioAutomation.Scripting.Commands
 
         public Drawing.DrawingSurface GetDrawingSurface()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var surf_Application = this.Client.Application.Get();
+            var surf_Application = this._client.Application.Get();
             var surf_Window = surf_Application.ActiveWindow;
             var surf_Window_subtype = surf_Window.SubType;
 
             // TODO: Revisit the logic here
             // TODO: And what about a selected shape as a surface?
 
-            this.Client.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
+            this._client.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
             if (surf_Window_subtype == 64)
             {
-                this.Client.WriteVerbose("Window = Master Editing");
+                this._client.WriteVerbose("Window = Master Editing");
                 var surf_Master = (IVisio.Master)surf_Window.Master;
                 var surface = new Drawing.DrawingSurface(surf_Master);
                 return surface;
@@ -39,7 +39,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                this.Client.WriteVerbose("Window = Page ");
+                this._client.WriteVerbose("Window = Page ");
                 var surf_Page = surf_Application.ActivePage;
                 var surface = new Drawing.DrawingSurface(surf_Page);
                 return surface;
@@ -51,8 +51,8 @@ namespace VisioAutomation.Scripting.Commands
                                           IList<double> heights,
                                           Drawing.Size cellspacing)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (datatable == null)
             {
@@ -77,11 +77,11 @@ namespace VisioAutomation.Scripting.Commands
 
             string master = "Rectangle";
             string stencil = "basic_u.vss";
-            var stencildoc = this.Client.Document.OpenStencil(stencil);
+            var stencildoc = this._client.Document.OpenStencil(stencil);
             var stencildoc_masters = stencildoc.Masters;
             var masterobj = stencildoc_masters.ItemU[master];
 
-            var app = this.Client.Application.Get();
+            var app = this._client.Application.Get();
             var application = app;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages;
@@ -89,7 +89,7 @@ namespace VisioAutomation.Scripting.Commands
             var page = pages.Add();
             page.Background = 0; // ensure this is a foreground page
 
-            var pagesize = this.Client.Page.GetSize();
+            var pagesize = this._client.Page.GetSize();
 
             var layout = new GRIDLAYOUT.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new Drawing.Size(1, 1), masterobj);
             layout.Origin = new Drawing.Point(0, pagesize.Height);
@@ -110,7 +110,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Table"))
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Table"))
             {
                 layout.Render(page);
                 page.ResizeToFitContents();
@@ -124,15 +124,15 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Grid(GRIDLAYOUT.GridLayout layout)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             //Create a new page to hold the grid
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             layout.PerformLayout();
 
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Grid"))
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Grid"))
             {
                 layout.Render(page);
             }
@@ -147,11 +147,11 @@ namespace VisioAutomation.Scripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw NURBS Curve"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw NURBS Curve"))
             {
 
                 var page = application.ActivePage;
@@ -163,8 +163,8 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
             var surface = this.GetDrawingSurface();
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Rectangle"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Rectangle"))
             {
                 var shape = surface.DrawRectangle(x0, y0, x1, y1);
                 return shape;
@@ -174,8 +174,8 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
             var surface = this.GetDrawingSurface();
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Line"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Line"))
             {
                 var shape = surface.DrawLine(x0, y0, x1, y1);
                 return shape;
@@ -186,8 +186,8 @@ namespace VisioAutomation.Scripting.Commands
         {
             var surface = this.GetDrawingSurface();
             var rect = new Drawing.Rectangle(x0, y0, x1, y1);
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Oval"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Oval"))
             {
                 var shape = surface.DrawOval(rect);
                 return shape;
@@ -197,8 +197,8 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Oval(Drawing.Point center, double radius)
         {
             var surface = this.GetDrawingSurface();
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Oval"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Oval"))
             {
                 var shape = surface.DrawOval(center, radius);
                 return shape;
@@ -208,8 +208,8 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Bezier(IEnumerable<Drawing.Point> points)
         {
             var surface = this.GetDrawingSurface();
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Bezier"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Bezier"))
             {
                 var shape = surface.DrawBezier(points.ToList());
                 return shape;
@@ -219,8 +219,8 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape PolyLine(IList<Drawing.Point> points)
         {
             var surface = this.GetDrawingSurface();
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw PolyLine"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw PolyLine"))
             {
                 var shape = surface.DrawPolyLine(points);
                 return shape;
@@ -232,11 +232,11 @@ namespace VisioAutomation.Scripting.Commands
                                   double start_angle,
                                   double end_angle)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Pie Slice"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
                 var slice = new Models.Charting.PieSlice(center, radius, start_angle, end_angle);
@@ -250,11 +250,11 @@ namespace VisioAutomation.Scripting.Commands
                           double start_angle,
                           double end_angle)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Draw Pie Slice"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
                 var slice = new Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
@@ -265,30 +265,30 @@ namespace VisioAutomation.Scripting.Commands
 
         public void PieChart(Models.Charting.PieChart chart)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             chart.Render(page);
         }
 
         public void BarChart(Models.Charting.BarChart chart)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             chart.Render(page);
         }
 
         public void AreaChart(Models.Charting.AreaChart chart)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             chart.Render(page);
         }
@@ -297,26 +297,26 @@ namespace VisioAutomation.Scripting.Commands
         public void OrgChart(ORGCHARTLAYOUT.OrgChartDocument orgChartDocument)
         {
 
-            this.Client.WriteVerbose("Start OrgChart Rendering");
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.WriteVerbose("Start OrgChart Rendering");
+            this._client.Application.AssertApplicationAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             orgChartDocument.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();
-            this.Client.WriteVerbose("Finished OrgChart Rendering");
+            this._client.WriteVerbose("Finished OrgChart Rendering");
         }
 
         public void DirectedGraph(IList<DGMODEL.Drawing> directedgraphs)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
-            this.Client.WriteVerbose("Start rendering directed graph");
-            var app = this.Client.Application.Get();
+            this._client.WriteVerbose("Start rendering directed graph");
+            var app = this._client.Application.Get();
 
 
-            this.Client.WriteVerbose("Creating a New Document For the Directed Graphs");
-            var doc = this.Client.Document.New(null);
+            this._client.WriteVerbose("Creating a New Document For the Directed Graphs");
+            var doc = this._client.Document.New(null);
 
             int num_pages_created = 0;
             var doc_pages = doc.Pages;
@@ -334,29 +334,29 @@ namespace VisioAutomation.Scripting.Commands
                 // otherwise, create a new page.
                 var page = num_pages_created == 0 ? app.ActivePage : doc_pages.Add();
 
-                this.Client.WriteVerbose("Rendering page: {0}", i + 1);
+                this._client.WriteVerbose("Rendering page: {0}", i + 1);
                 dg.Render(page, options);
-                this.Client.Page.ResizeToFitContents(new Drawing.Size(1.0, 1.0), true);
-                this.Client.View.Zoom(Zoom.ToPage);
-                this.Client.WriteVerbose("Finished rendering page");
+                this._client.Page.ResizeToFitContents(new Drawing.Size(1.0, 1.0), true);
+                this._client.View.Zoom(Zoom.ToPage);
+                this._client.WriteVerbose("Finished rendering page");
 
                 num_pages_created++;
             }
 
-            this.Client.WriteVerbose("Finished rendering all pages");
-            this.Client.WriteVerbose("Finished rendering directed graph.");
+            this._client.WriteVerbose("Finished rendering all pages");
+            this._client.WriteVerbose("Finished rendering directed graph.");
         }
 
         public void Duplicate(int n)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (n < 1)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(n));
             }
-            if (!this.Client.Selection.HasShapes())
+            if (!this._client.Selection.HasShapes())
             {
                 return;
             }
@@ -365,8 +365,8 @@ namespace VisioAutomation.Scripting.Commands
             // this dupicates exactly 1 shape N - times what it
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope($"Duplicate Shape {n} Times"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope($"Duplicate Shape {n} Times"))
             {
                 var active_window = application.ActiveWindow;
                 var selection = active_window.Selection;
@@ -444,7 +444,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public List<IVisio.Shape> GetAllShapes()
         {
-            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
+            var surface = this._client.ShapeSheet.GetShapeSheetSurface();
             return surface.GetAllShapes();
         }
     }

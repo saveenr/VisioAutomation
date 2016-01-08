@@ -15,8 +15,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Layer Get(string layername)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (layername == null)
             {
@@ -28,12 +28,12 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("Layer name cannot be empty", nameof(layername));
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             IVisio.Layer layer = null;
             try
             {
-                this.Client.WriteVerbose("Trying to find Layer named \"{0}\"",layername);
+                this._client.WriteVerbose("Trying to find Layer named \"{0}\"",layername);
                 var layers = page.Layers;
                 layer = layers.ItemU[layername];
             }
@@ -47,10 +47,10 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Layer> Get()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             return page.Layers.AsEnumerable().ToList();
         }

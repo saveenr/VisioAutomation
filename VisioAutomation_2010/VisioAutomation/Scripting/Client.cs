@@ -6,7 +6,6 @@ namespace VisioAutomation.Scripting
 {
     public class Client
     {
-
         private Context _context;
 
         public Commands.ApplicationCommands Application { get; private set; }
@@ -39,8 +38,9 @@ namespace VisioAutomation.Scripting
         {
             if (context == null)
             {
-                throw new System.ArgumentNullException();
+                throw new System.ArgumentNullException(nameof(context));
             }
+
             this._context = context;
 
             this.Application = new Commands.ApplicationCommands(this,app);

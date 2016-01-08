@@ -15,8 +15,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, IList<CONS.ConnectionPointCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
 
@@ -40,8 +40,8 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             CONS.ConnectionPointType type)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -54,8 +54,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var indices = new List<int>(shapes.Count);
 
-            var app = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Add Connection Point"))
+            var app = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Add Connection Point"))
             {
                 var cp = new CONS.ConnectionPointCells();
                 cp.X = fx;
@@ -80,15 +80,15 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             CONS.ConnectionPointType type)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
             return this.Add(null, fx, fy, type);
         }
 
         public void Delete(List<IVisio.Shape> target_shapes0, int index)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes0);
             if (shapes.Count < 1)
@@ -98,8 +98,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var target_shapes = shapes.Where(shape => CONS.ConnectionPointHelper.GetCount(shape) > index);
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Delete Connection Point"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Delete Connection Point"))
             {
                 foreach (var shape in target_shapes)
                 {

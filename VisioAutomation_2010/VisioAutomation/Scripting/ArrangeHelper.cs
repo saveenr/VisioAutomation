@@ -151,14 +151,19 @@ namespace VisioAutomation.Scripting
             var new_pin_position = ArrangeHelper.GetPinPositionForCorner(input_xfrm, new_lower_left, corner);
 
             var output_xfrm = new Shapes.XFormCells();
+
+            // Modify the PinX only if necessary
             if (new_pin_position.X != input_xfrm.PinX.Result)
             {
                 output_xfrm.PinX = new_pin_position.X;
             }
+
+            // Modify the PinY only if necessary
             if (new_pin_position.Y != input_xfrm.PinY.Result)
             {
                 output_xfrm.PinY = new_pin_position.Y;
             }
+
             return output_xfrm;
         }
 

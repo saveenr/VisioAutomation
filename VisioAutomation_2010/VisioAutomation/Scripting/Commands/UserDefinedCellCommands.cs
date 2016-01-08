@@ -15,8 +15,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>>();
 
@@ -26,7 +26,7 @@ namespace VisioAutomation.Scripting.Commands
                 return prop_dic;
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             var list_user_props = VA_UDC.UserDefinedCellsHelper.Get(page, shapes);
 
@@ -42,8 +42,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             if (name == null)
             {
@@ -56,7 +56,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<bool>();
             }
 
-            var all_shapes = this.Client.Selection.GetShapes();
+            var all_shapes = this._client.Selection.GetShapes();
             var results = all_shapes.Select(s => VA_UDC.UserDefinedCellsHelper.Contains(s, name)).ToList();
 
             return results;
@@ -64,8 +64,8 @@ namespace VisioAutomation.Scripting.Commands
        
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -83,8 +83,8 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Delete User-Defined Cell"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Delete User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {
@@ -95,8 +95,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(IList<IVisio.Shape> target_shapes, VA_UDC.UserDefinedCell userdefinedcell)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -104,8 +104,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Set User-Defined Cell"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Set User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {

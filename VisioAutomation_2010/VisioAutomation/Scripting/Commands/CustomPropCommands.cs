@@ -15,8 +15,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, Dictionary<string,VACUSTPROP.CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VACUSTPROP.CustomPropertyCells>>();
             var shapes = this.GetTargetShapes(target_shapes);
@@ -25,7 +25,7 @@ namespace VisioAutomation.Scripting.Commands
                 return prop_dic;
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
 
             var list_custom_props = VACUSTPROP.CustomPropertyHelper.Get(page, shapes);
@@ -53,15 +53,15 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<bool>();
             }
 
-            var results = this.Client.Selection.GetShapes().Select(s => VACUSTPROP.CustomPropertyHelper.Contains(s, name)).ToList();
+            var results = this._client.Selection.GetShapes().Select(s => VACUSTPROP.CustomPropertyHelper.Contains(s, name)).ToList();
 
             return results;
         }
 
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
             if (name == null)
             {
@@ -79,8 +79,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Delete Custom Property"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Delete Custom Property"))
             {
                 foreach (var shape in shapes)
                 {
@@ -91,8 +91,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(IList<IVisio.Shape> target_shapes, string name, VACUSTPROP.CustomPropertyCells customprop)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
             if (customprop == null)
             {
@@ -105,8 +105,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Set Custom Property"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Set Custom Property"))
             {
                 foreach (var shape in shapes)
                 {
@@ -117,8 +117,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IEnumerable<IVisio.Shape> EnumerateAndSelect(IEnumerable<IVisio.Shape> shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
             if (shapes == null)
             {
@@ -127,8 +127,8 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (var shape in shapes)
             {
-                this.Client.Selection.None();
-                this.Client.Selection.Select(shape);
+                this._client.Selection.None();
+                this._client.Selection.Select(shape);
                 yield return shape;
             }
         }

@@ -15,8 +15,8 @@ namespace VisioAutomation.Scripting.Commands
 
        public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts)
        {
-           this.Client.Application.AssertApplicationAvailable();
-           this.Client.Document.AssertDocumentAvailable();
+           this._client.Application.AssertApplicationAvailable();
+           this._client.Document.AssertDocumentAvailable();
 
            if (texts == null || texts.Count < 1)
            {
@@ -30,8 +30,8 @@ namespace VisioAutomation.Scripting.Commands
                return;
            }
 
-           var application = this.Client.Application.Get();
-           using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Text"))
+           var application = this._client.Application.Get();
+           using (var undoscope = this._client.Application.NewUndoScope("Set Shape Text"))
            {
                int numtexts = texts.Count;
 
@@ -51,8 +51,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<string> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -66,8 +66,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ToogleCase(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
             var shapes = this.GetTargetShapes(target_shapes);
 
@@ -76,8 +76,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Toggle Shape Text Case"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Toggle Shape Text Case"))
             {
                 var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -122,28 +122,28 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetFont(IList<IVisio.Shape> target_shapes, string fontname)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
             }
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
             IVisio.VisGetSetArgs flags=0;
             var srcs = new[] {ShapeSheet.SRCConstants.CharFont};
             var formulas = new[] { font.ID.ToString() };
-            this.Client.ShapeSheet.SetFormula(target_shapes, srcs, formulas, flags);
+            this._client.ShapeSheet.SetFormula(target_shapes, srcs, formulas, flags);
         }
 
         public IList<Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -151,17 +151,17 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<Text.TextFormat>(0);
             }
 
-            var selection = this.Client.Selection.Get();
+            var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var formats = Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
         }
 
         public void MoveTextToBottom(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -182,7 +182,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var shapeids = shapes.Select(s=>s.ID);
             foreach (int shapeid in shapeids)
             {
@@ -196,8 +196,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetTextWrapping(IList<IVisio.Shape> target_shapes,bool wrap)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
@@ -206,8 +206,8 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("SetTextWrapping"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("SetTextWrapping"))
             {
                 var active_page = application.ActivePage;
                 TextCommandsUtil.set_text_wrapping(active_page, shapeids, wrap);
@@ -216,8 +216,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void FitShapeToText(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
@@ -225,11 +225,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var active_page = application.ActivePage;
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            using (var undoscope = this.Client.Application.NewUndoScope("FitShapeToText"))
+            using (var undoscope = this._client.Application.NewUndoScope("FitShapeToText"))
             {
                 // Calculate the new sizes for each shape
                 var new_sizes = new List<Drawing.Size>(shapeids.Count);

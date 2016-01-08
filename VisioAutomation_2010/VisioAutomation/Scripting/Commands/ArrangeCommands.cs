@@ -69,8 +69,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.AlignmentHorizontal halign)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -80,14 +80,14 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = ArrangeCommands._map_halign_to_uicmd(halign);
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             application.DoCmd((short)cmd);
         }
 
         public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.AlignmentVertical valign)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -97,14 +97,14 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = ArrangeCommands._map_valign_to_uicmd(valign);
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             application.DoCmd((short)cmd); 
         }
 
         public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.Axis axis)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -114,8 +114,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = ArrangeCommands._map_axis_to_uicmd(axis);
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Distribute Shapes"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Distribute Shapes"))
             {
                 application.DoCmd((short)cmd);
             }
@@ -128,8 +128,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -137,10 +137,10 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Nudge Shapes"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Nudge Shapes"))
             {
-                var selection = this.Client.Selection.Get();
+                var selection = this._client.Selection.Get();
                 var unitcode = IVisio.VisUnitCodes.visInches;
 
                 // Move method: http://msdn.microsoft.com/en-us/library/ms367549.aspx   
@@ -150,8 +150,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapSize(IList<IVisio.Shape> target_shapes, double w, double h)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
             
             var shapes = this.GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
@@ -162,8 +162,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Snape Shape Sizes"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Snape Shape Sizes"))
             {
                 var active_page = application.ActivePage;
                 var snapsize = new Drawing.Size(w, h);
@@ -214,8 +214,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Send(IList<IVisio.Shape> target_shapes, Selection.ShapeSendDirection dir)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -223,14 +223,14 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Client.Selection.Get();
+            var selection = this._client.Selection.Get();
             Selection.SelectionHelper.SendShapes(selection, dir);
         }
 
         public void Align(IList<IVisio.Shape> target_shapes, Drawing.AlignmentHorizontal align)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
@@ -238,11 +238,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Align Shapes"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Align Shapes"))
             {
                 const bool glue_to_guide = false;
-                var selection = this.Client.Selection.Get();
+                var selection = this._client.Selection.Get();
                 var halign = ArrangeCommands._map_isd_halign_to_visio_halign(align);
                 var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
                 selection.Align(halign, valign, glue_to_guide);
@@ -251,8 +251,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, Drawing.AlignmentVertical align)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
@@ -260,11 +260,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Align Shapes"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Align Shapes"))
             {
                 bool glue_to_guide = false;
-                var selection = this.Client.Selection.Get();
+                var selection = this._client.Selection.Get();
                 var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
 
                 var valign = ArrangeCommands._map_isd_valign_to_visio_valign(align);
@@ -275,8 +275,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<Shapes.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
@@ -285,7 +285,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var page = application.ActivePage;
             var data = Shapes.XFormCells.GetCells(page, shapeids);
             return data;
@@ -293,11 +293,11 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Group()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             // No shapes provided, use the active selection
-            if (!this.Client.Selection.HasShapes())
+            if (!this._client.Selection.HasShapes())
             {
                 throw new VisioOperationException("No Selected Shapes to Group");
             }
@@ -305,19 +305,19 @@ namespace VisioAutomation.Scripting.Commands
             // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
             // but it doesn't return the group
 
-            var selection = this.Client.Selection.Get();
+            var selection = this._client.Selection.Get();
             var g = selection.Group();
             return g;
         }
 
         public void Ungroup(IList<IVisio.Shape> target_shapes)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
             if (target_shapes == null)
             {
-                if (this.Client.Selection.HasShapes())
+                if (this._client.Selection.HasShapes())
                 {
-                    var application = this.Client.Application.Get();
+                    var application = this._client.Application.Get();
                     application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
                 }
             }
@@ -332,8 +332,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetLock(IList<IVisio.Shape> target_shapes, Shapes.LockCells lockcells)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -341,7 +341,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             } 
 
-            var selection = this.Client.Selection.Get();
+            var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
             var update = new ShapeSheet.Update();
 
@@ -350,8 +350,8 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormulas((short)shapeid, lockcells);
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Lock Properties"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Lock Properties"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
@@ -360,8 +360,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -383,8 +383,8 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Size"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Size"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
@@ -416,7 +416,7 @@ namespace VisioAutomation.Scripting.Commands
         {
 
 
-            if (!this.Client.Selection.HasShapes(2))
+            if (!this._client.Selection.HasShapes(2))
             {
                 return;
             }
@@ -425,8 +425,8 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(space), "must be non-negative");
             }
 
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("Stack"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Stack"))
             {
                 if (axis == Drawing.Axis.YAxis)
                 {
@@ -442,14 +442,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(Drawing.Axis axis, double d)
         {
-            if (!this.Client.Document.HasActiveDocument)
+            if (!this._client.Document.HasActiveDocument)
             {
                 return;
             }
-            var application = this.Client.Application.Get();
-            var selection = this.Client.Selection.Get();
+            var application = this._client.Application.Get();
+            var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
-            using (var undoscope = this.Client.Application.NewUndoScope("Distribute"))
+            using (var undoscope = this._client.Application.NewUndoScope("Distribute"))
             {
                 ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
             }
@@ -457,8 +457,8 @@ namespace VisioAutomation.Scripting.Commands
         
         public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, SnapCornerPosition corner)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
@@ -467,8 +467,8 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("SnapCorner"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("SnapCorner"))
             {
                 var active_page = application.ActivePage;
                 ArrangeHelper.SnapCorner(active_page, shapeids, new Drawing.Size(w, h), corner);
@@ -477,8 +477,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapSize(IList<IVisio.Shape> target_shapes, Drawing.Size snapsize, Drawing.Size minsize)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
@@ -487,8 +487,8 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var application = this.Client.Application.Get();
-            using (var undoscope = this.Client.Application.NewUndoScope("SnapSize"))
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("SnapSize"))
             {
                 var active_page = application.ActivePage;
                 ArrangeHelper.SnapSize(active_page, shapeids, snapsize, minsize);

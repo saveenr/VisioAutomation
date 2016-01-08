@@ -17,12 +17,12 @@ namespace VisioAutomation.Scripting.Commands
         {
             get
             {
-                var app = this.Client.Application.Get();
+                var app = this._client.Application.Get();
 
                 // if there's no active document, then there can't be an active document
                 if (app.ActiveDocument == null)
                 {
-                    this.Client.WriteVerbose("HasActiveDocument: No Active Window");
+                    this._client.WriteVerbose("HasActiveDocument: No Active Window");
                     return false;
                 }
 
@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
                 // If there's no active window there can't be an active document
                 if (active_window == null)
                 {
-                    this.Client.WriteVerbose("HasActiveDocument: No Active Document");
+                    this._client.WriteVerbose("HasActiveDocument: No Active Document");
                     return false;
                 }
 
@@ -41,17 +41,17 @@ namespace VisioAutomation.Scripting.Commands
                 var vis_master = (int)IVisio.VisWinTypes.visMasterWin;
                 // var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
 
-                this.Client.WriteVerbose("The Active Window: Type={0} & SybType={1}", active_window_type, active_window.SubType);
+                this._client.WriteVerbose("The Active Window: Type={0} & SybType={1}", active_window_type, active_window.SubType);
                 if (!(active_window_type == vis_drawing || active_window_type == vis_master))
                 {
-                    this.Client.WriteVerbose("The Active Window Type must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
+                    this._client.WriteVerbose("The Active Window Type must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
                     return false;
                 }
 
                 //  verify there is an active page
                 if (app.ActivePage == null)
                 {
-                    this.Client.WriteVerbose("HasActiveDocument: Active Page is null");
+                    this._client.WriteVerbose("HasActiveDocument: Active Page is null");
 
                     if (active_window.SubType == 64)
                     {
@@ -60,12 +60,12 @@ namespace VisioAutomation.Scripting.Commands
                     }
                     else
                     {
-                        this.Client.WriteVerbose("HasActiveDocument: Active Page is null");
+                        this._client.WriteVerbose("HasActiveDocument: Active Page is null");
                         return false;
                     }
                 }
 
-                this.Client.WriteVerbose("HasActiveDocument: Verified a drawing is available for use");
+                this._client.WriteVerbose("HasActiveDocument: Verified a drawing is available for use");
 
                 return true;
             }
@@ -73,7 +73,7 @@ namespace VisioAutomation.Scripting.Commands
 
         internal void AssertDocumentAvailable()
         {
-            if (!this.Client.Document.HasActiveDocument)
+            if (!this._client.Document.HasActiveDocument)
             {
                 throw new VisioOperationException("No Drawing available");
             }
@@ -82,9 +82,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Activate(string name)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var documents = application.Documents;
             var doc = documents[name];
 
@@ -93,26 +93,26 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Activate(IVisio.Document doc)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
             Documents.DocumentHelper.Activate(doc);
         }
 
         public void Close(bool force)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var doc = application.ActiveDocument;
 
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
-                this.Client.WriteVerbose("Not a Drawing Window", doc.Name);
+                this._client.WriteVerbose("Not a Drawing Window", doc.Name);
                 throw new AutomationException("Not a Drawing Window");
             }
 
-            this.Client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-            this.Client.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+            this._client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+            this._client.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
 
             if (force)
             {
@@ -129,8 +129,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseAllWithoutSaving()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            var application = this.Client.Application.Get();
+            this._client.Application.AssertApplicationAvailable();
+            var application = this._client.Application.Get();
             var documents = application.Documents;
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
@@ -138,8 +138,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var doc in docs)
                 {
-                    this.Client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-                    this.Client.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+                    this._client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+                    this._client.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
                     doc.Close();
                 }
             }
@@ -152,10 +152,10 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(string template)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
-            this.Client.WriteVerbose("Creating Empty Drawing");
-            var application = this.Client.Application.Get();
+            this._client.WriteVerbose("Creating Empty Drawing");
+            var application = this._client.Application.Get();
             var documents = application.Documents;
             
             if (template == null)
@@ -177,20 +177,20 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Save()
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var doc = application.ActiveDocument;
             doc.Save();
         }
 
         public void SaveAs(string filename)
         {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var doc = application.ActiveDocument;
             doc.SaveAs(filename);
         }
@@ -202,17 +202,17 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(double w, double h,string template)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
             var doc = this.New(template);
             var pagesize = new Drawing.Size(w, h);
-            this.Client.Page.SetSize(pagesize);
+            this._client.Page.SetSize(pagesize);
             return doc;
         }
 
         public IVisio.Document OpenStencil(string name)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
             
             if (name == null)
             {
@@ -224,19 +224,19 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name");
             }
 
-            this.Client.WriteVerbose( "Loading stencil \"{0}\"", name);
+            this._client.WriteVerbose( "Loading stencil \"{0}\"", name);
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var documents = application.Documents;
             var doc = documents.OpenStencil(name);
 
-            this.Client.WriteVerbose( "Finished loading stencil \"{0}\"", name);
+            this._client.WriteVerbose( "Finished loading stencil \"{0}\"", name);
             return doc;
         }
 
         public IVisio.Document Open(string filename)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
             
             if (filename == null)
             {
@@ -250,8 +250,8 @@ namespace VisioAutomation.Scripting.Commands
 
             string abs_filename = System.IO.Path.GetFullPath(filename);
 
-            this.Client.WriteVerbose( "Input filename: {0}", filename);
-            this.Client.WriteVerbose( "Absolute filename: {0}", abs_filename);
+            this._client.WriteVerbose( "Input filename: {0}", filename);
+            this._client.WriteVerbose( "Absolute filename: {0}", abs_filename);
 
             if (!System.IO.File.Exists(abs_filename))
             {
@@ -259,7 +259,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException(msg, nameof(filename));
             }
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var documents = application.Documents;
             var doc = documents.Add(filename);
             return doc;
@@ -268,9 +268,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Get(string name)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var documents = application.Documents;
             var doc = documents[name];
             return doc;
@@ -278,7 +278,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public List<IVisio.Document> GetDocumentsByName(string name)
         {
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var documents = application.Documents;
             if (name == null || name == "*")
             {

@@ -32,7 +32,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawScriptingDocumentation()
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
             var formdoc = new Models.Forms.FormDocument();
             formdoc.Subject = "VisioAutomation.Scripting Documenation";
@@ -92,14 +92,14 @@ namespace VisioAutomation.Scripting.Commands
 
             //hide_ui_stuff(docbuilder.VisioDocument);
 
-            var app = this.Client.Application.Get();
+            var app = this._client.Application.Get();
             var doc = formdoc.Render(app);
             return doc;
         }
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
             
             var formdoc = new Models.Forms.FormDocument();
 
@@ -159,7 +159,7 @@ namespace VisioAutomation.Scripting.Commands
             //hide_ui_stuff(docbuilder.VisioDocument);
 
 
-            var application = this.Client.Application.Get();
+            var application = this._client.Application.Get();
             var doc = formdoc.Render(application);
             return doc;
         }
@@ -220,13 +220,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespaces(IList<Type> types)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
             string def_linecolor = "rgb(140,140,140)";
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
 
-            var doc = this.Client.Document.New(8.5,11,null);
+            var doc = this._client.Document.New(8.5,11,null);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
             int fontid = font.ID16;
@@ -372,14 +372,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses(IList<Type> types_)
         {
-            this.Client.Application.AssertApplicationAvailable();
+            this._client.Application.AssertApplicationAvailable();
 
             string segoeui_fontname = "Segoe UI";
             string segoeuilight_fontname = "Segoe UI Light";
             string def_linecolor = "rgb(180,180,180)";
             string def_shape_fill = "rgb(245,245,245)";
 
-            var doc = this.Client.Document.New(8.5, 11,null);
+            var doc = this._client.Document.New(8.5, 11,null);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
             var font_segoelight = fonts[segoeuilight_fontname];
