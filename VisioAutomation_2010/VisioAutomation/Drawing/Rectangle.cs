@@ -26,26 +26,12 @@
             this.Top = top;
         }
 
-        public Rectangle(Point lowerleft, Point upperright)
-            : this()
+        public Rectangle(Point bottomleft, Point topright)
+            : this(bottomleft.X, bottomleft.Y, topright.X, topright.Y)
         {
-            if (upperright.X < lowerleft.X)
-            {
-                throw new System.ArgumentException("left must be <=right");
-            }
-
-            if (upperright.Y < lowerleft.Y)
-            {
-                throw new System.ArgumentException("bottom must be <= top");
-            }
-
-            this.Left = lowerleft.X;
-            this.Bottom = lowerleft.Y;
-            this.Right = upperright.X;
-            this.Top = upperright.Y;
         }
 
-        public Rectangle(Point lowerleft, Size s)
+        public Rectangle(Point bottomleft, Size s)
             : this()
         {
             if (s.Width < 0)
@@ -58,10 +44,10 @@
                 throw new System.ArgumentOutOfRangeException(nameof(s), "height must be non-negative");
             }
 
-            this.Left = lowerleft.X;
-            this.Bottom = lowerleft.Y;
-            this.Right = lowerleft.X + s.Width;
-            this.Top = lowerleft.Y + s.Height;
+            this.Left = bottomleft.X;
+            this.Bottom = bottomleft.Y;
+            this.Right = bottomleft.X + s.Width;
+            this.Top = bottomleft.Y + s.Height;
         }
 
         public static Rectangle FromCenterPoint(double x, double y, double w, double h)
