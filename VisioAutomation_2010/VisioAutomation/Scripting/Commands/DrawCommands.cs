@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using GRIDLAYOUT = VisioAutomation.Models.Grid;
-using ORGCHARTLAYOUT = VisioAutomation.Models.OrgChart;
-using DGMODEL = VisioAutomation.Models.DirectedGraph;
+using VAGRID = VisioAutomation.Models.Grid;
+using VAORGCHART = VisioAutomation.Models.OrgChart;
+using VAGRAPH = VisioAutomation.Models.DirectedGraph;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -91,10 +91,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var pagesize = this._client.Page.GetSize();
 
-            var layout = new GRIDLAYOUT.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new Drawing.Size(1, 1), masterobj);
+            var layout = new VAGRID.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new Drawing.Size(1, 1), masterobj);
             layout.Origin = new Drawing.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;
-            layout.RowDirection = GRIDLAYOUT.RowDirection.TopToBottom;
+            layout.RowDirection = VAGRID.RowDirection.TopToBottom;
             layout.PerformLayout();
 
             foreach (var i in Enumerable.Range(0, datatable.Rows.Count))
@@ -122,7 +122,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Grid(GRIDLAYOUT.GridLayout layout)
+        public void Grid(VAGRID.GridLayout layout)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -294,7 +294,7 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public void OrgChart(ORGCHARTLAYOUT.OrgChartDocument orgChartDocument)
+        public void OrgChart(VAORGCHART.OrgChartDocument orgChartDocument)
         {
 
             this._client.WriteVerbose("Start OrgChart Rendering");
@@ -307,7 +307,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DirectedGraph(IList<DGMODEL.Drawing> directedgraphs)
+        public void DirectedGraph(IList<VAGRAPH.Drawing> directedgraphs)
         {
             this._client.Application.AssertApplicationAvailable();
 
@@ -326,7 +326,7 @@ namespace VisioAutomation.Scripting.Commands
                 var dg = directedgraphs[i];
 
                 
-                var options = new DGMODEL.MsaglLayoutOptions();
+                var options = new VAGRAPH.MsaglLayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 // if this is the first page to drawe

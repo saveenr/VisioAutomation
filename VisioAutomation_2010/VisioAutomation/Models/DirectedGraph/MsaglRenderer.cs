@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using MG = Microsoft.Msagl;
+using MSAGL = Microsoft.Msagl;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.Models.DirectedGraph
@@ -76,18 +76,18 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private MG.Core.Layout.GeometryGraph CreateMGGraph(Drawing layout_diagram)
+        private MSAGL.Core.Layout.GeometryGraph CreateMGGraph(Drawing layout_diagram)
         {
-            var mg_graph = new MG.Core.Layout.GeometryGraph();
+            var mg_graph = new MSAGL.Core.Layout.GeometryGraph();
 
             // Create the nodes in MSAGL
             foreach (var layout_shape in layout_diagram.Shapes)
             {
                 var nodesize = this.ToMGCoordinates(layout_shape.Size ?? this.LayoutOptions.DefaultShapeSize);
                 var node_user_data = new NodeUserData(layout_shape.ID, layout_shape);
-                var center = new MG.Core.Geometry.Point();
-                var rectangle = MG.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height, center);
-                var mg_node = new MG.Core.Layout.Node( rectangle, node_user_data);
+                var center = new MSAGL.Core.Geometry.Point();
+                var rectangle = MSAGL.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height, center);
+                var mg_node = new MSAGL.Core.Layout.Node( rectangle, node_user_data);
                 mg_graph.Nodes.Add(mg_node);
             }
 
@@ -95,7 +95,7 @@ namespace VisioAutomation.Models.DirectedGraph
             
             var mg_coordinates = this.ToMGCoordinates(this.DefaultBezierConnectorLabelBoxSize);
 
-            var map_id_to_ud = new Dictionary<string, MG.Core.Layout.Node>();
+            var map_id_to_ud = new Dictionary<string, MSAGL.Core.Layout.Node>();
             foreach (var n in mg_graph.Nodes)
             {
                 var ud = (NodeUserData) n.UserData;
@@ -121,17 +121,17 @@ namespace VisioAutomation.Models.DirectedGraph
                 var from_node = map_id_to_ud[layout_connector.From.ID];
                 var to_node = map_id_to_ud[layout_connector.To.ID];
 
-                var new_edge = new MG.Core.Layout.Edge(from_node, to_node);
+                var new_edge = new MSAGL.Core.Layout.Edge(from_node, to_node);
                 // TODO: MSAGL
                 //new_edge.ArrowheadAtTarget = false;
                 new_edge.UserData = new NodeUserData(layout_connector.ID,layout_connector);
                 mg_graph.Edges.Add(new_edge);
 
-                new_edge.Label = new MG.Core.Layout.Label(mg_coordinates.Width, mg_coordinates.Height, new_edge);
+                new_edge.Label = new MSAGL.Core.Layout.Label(mg_coordinates.Width, mg_coordinates.Height, new_edge);
             }
 
-            var geomGraphComponents = MG.Core.Layout.GraphConnectedComponents.CreateComponents(mg_graph.Nodes, mg_graph.Edges);
-            var settings = new MG.Layout.Layered.SugiyamaLayoutSettings();
+            var geomGraphComponents = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(mg_graph.Nodes, mg_graph.Edges);
+            var settings = new MSAGL.Layout.Layered.SugiyamaLayoutSettings();
 
             foreach (var subgraph in geomGraphComponents)
             {
@@ -141,7 +141,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
 
             // Pack the graphs using Golden Aspect Ratio
-            MG.Layout.MDS.MdsGraphLayout.PackGraphs(geomGraphComponents, settings);
+            MSAGL.Layout.MDS.MdsGraphLayout.PackGraphs(geomGraphComponents, settings);
 
             //Update the graphs bounding box
             mg_graph.UpdateBoundingBox();
@@ -261,7 +261,7 @@ namespace VisioAutomation.Models.DirectedGraph
             return page_node;
         }
 
-        private void CreateDOMShapes(DOM.ShapeList domshapeslist, MG.Core.Layout.GeometryGraph mg_graph, IVisio.Application app)
+        private void CreateDOMShapes(DOM.ShapeList domshapeslist, MSAGL.Core.Layout.GeometryGraph mg_graph, IVisio.Application app)
         {
             var node_centerpoints = mg_graph.Nodes
                     .Select(n => this.ToDocumentCoordinates(Internal.MsaglUtil.ToVAPoint(n.Center)))
@@ -324,7 +324,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private void CreateBezierEdges(DOM.ShapeList domshapes, MG.Core.Layout.GeometryGraph mg_graph)
+        private void CreateBezierEdges(DOM.ShapeList domshapes, MSAGL.Core.Layout.GeometryGraph mg_graph)
         {
             // DRAW EDGES WITH BEZIERS 
             foreach (var mg_edge in mg_graph.Edges)
@@ -367,7 +367,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private void CreateDynamicConnectorEdges(DOM.ShapeList shape_nodes, MG.Core.Layout.GeometryGraph mg_graph)
+        private void CreateDynamicConnectorEdges(DOM.ShapeList shape_nodes, MSAGL.Core.Layout.GeometryGraph mg_graph)
         {
             // CREATE EDGES
             foreach (var edge in mg_graph.Edges)
@@ -482,7 +482,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private DOM.BezierCurve draw_edge_bezier(MG.Core.Layout.Edge edge)
+        private DOM.BezierCurve draw_edge_bezier(MSAGL.Core.Layout.Edge edge)
         {
             var final_bez_points =
                 Internal.MsaglUtil.ToVAPoints(edge).Select(p => this.ToDocumentCoordinates(p)).ToList();

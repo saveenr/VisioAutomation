@@ -5,10 +5,6 @@ namespace VisioAutomation.Documents
 {
     public static class DocumentHelper
     {
-        /// <summary>
-        /// Closes all the documents even if there are unsaved changes
-        /// </summary>
-        /// <param name="docs"> the Documents object</param>
         public static void ForceCloseAll(IVisio.Documents docs)
         {
             if (docs == null)
