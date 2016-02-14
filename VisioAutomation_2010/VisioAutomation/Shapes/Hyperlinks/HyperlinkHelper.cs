@@ -39,6 +39,15 @@ namespace VisioAutomation.Shapes.Hyperlinks
             var hlinks_collection = shape.Hyperlinks;
             var hlinks_object = hlinks_collection.Add();
             hlinks_object.Address = hyperlink.Address.Formula.Value;
+            hlinks_object.Description = hyperlink.Description.Formula.Value;
+            hlinks_object.ExtraInfo = hyperlink.ExtraInfo.Formula.Value;
+            hlinks_object.Frame= hyperlink.Frame.Formula.Value;
+            hlinks_object.SubAddress= hyperlink.SubAddress.Formula.Value;
+            hlinks_object.ExtraInfo= hyperlink.ExtraInfo.Formula.Value;
+
+            //hlinks_object.NewWindow = hyperlink.NewWindow.Formula.Value;
+            //hlinks_object.IsDefaultLink = hyperlink.Default.Formula.Value;
+            // hlinks_object.XXX = hyperlink.Invisible.Formula.Value;
 
             return hlinks_object.Row;
         }

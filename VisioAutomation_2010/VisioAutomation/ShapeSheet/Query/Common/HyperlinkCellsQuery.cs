@@ -6,14 +6,15 @@ namespace VisioAutomation.ShapeSheet.Query.Common
     {
 
         public Query.CellColumn Address { get; set; }
-        public Query.CellColumn Default { get; set; }
         public Query.CellColumn Description { get; set; }
         public Query.CellColumn ExtraInfo { get; set; }
         public Query.CellColumn Frame { get; set; }
-        public Query.CellColumn Invisible { get; set; }
-        public Query.CellColumn NewWindow { get; set; }
         public Query.CellColumn SortKey { get; set; }
         public Query.CellColumn SubAddress { get; set; }
+
+        public Query.CellColumn NewWindow { get; set; }
+        public Query.CellColumn Default { get; set; }
+        public Query.CellColumn Invisible { get; set; }
 
         public HyperlinkCellsQuery()
         {
@@ -37,14 +38,15 @@ namespace VisioAutomation.ShapeSheet.Query.Common
             // cells.X = Extensions.CellDataMethods.ToInt(row[this.X]);
 
             cells.Address = row[this.Address].Formula;
-            cells.Default= row[this.Default].Formula;
             cells.Description= row[this.Description].Formula;
             cells.ExtraInfo= row[this.ExtraInfo].Formula;
             cells.Frame= row[this.Frame].Formula;
-            cells.Invisible= row[this.Invisible].Formula;
-            cells.NewWindow = row[this.NewWindow].Formula;
             cells.SortKey= row[this.SortKey].Formula;
             cells.SubAddress= row[this.SubAddress].Formula;
+
+            cells.NewWindow = Extensions.CellDataMethods.ToBool(row[this.NewWindow]);
+            cells.Default = Extensions.CellDataMethods.ToBool(row[this.Default].Formula);
+            cells.Invisible = Extensions.CellDataMethods.ToBool(row[this.Invisible].Formula);
 
             return cells;
         }
