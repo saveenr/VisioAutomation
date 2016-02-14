@@ -96,6 +96,7 @@
     <Compile Include="Scripting\Commands\ArrangeCommands.cs" />
     <Compile Include="Scripting\Commands\ConnectionCommands.cs" />
     <Compile Include="Scripting\Commands\ConnectionPointCommands.cs" />
+    <Compile Include="Scripting\Commands\HyperlinkCommands.cs" />
     <Compile Include="Scripting\Commands\ControlCommands.cs" />
     <Compile Include="Scripting\Commands\CustomPropCommands.cs" />
     <Compile Include="Scripting\Commands\DeveloperCommands.cs" />
