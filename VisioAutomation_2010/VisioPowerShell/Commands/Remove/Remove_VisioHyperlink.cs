@@ -7,14 +7,14 @@ namespace VisioPowerShell.Commands.Remove
     public class Remove_VisioHyperlink : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
-        public int HyperlinkIndex { get; set; }
+        public int Index { get; set; }
 
         [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {
-            this.Client.Hyperlink.Delete(this.Shapes,this.HyperlinkIndex);
+            this.Client.Hyperlink.Delete(this.Shapes,this.Index);
         }
     }
 }
