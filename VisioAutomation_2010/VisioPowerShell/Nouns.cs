@@ -18,6 +18,7 @@ namespace VisioPowerShell
         public const string VisioConnectionPoint = "VisioConnectionPoint";
         public const string VisioContainer = "VisioContainer";
         public const string VisioControl = "VisioControl";
+        public const string VisioHyperlink = "VisioHyperlink";
         public const string VisioCustomProperty = "VisioCustomProperty";
         public const string VisioDirectedEdge = "VisioDirectedEdge";
         public const string VisioDocument = "VisioDocument";
