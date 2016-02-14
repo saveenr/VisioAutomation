@@ -5,23 +5,6 @@ namespace VisioAutomation.Shapes.Hyperlinks
 {
     public static class HyperlinkHelper
     {
-        public static int Add(IVisio.Shape shape, string address)
-        {
-            if (shape == null)
-            {
-                throw new ArgumentNullException(nameof(shape));
-            }
-
-            if (address == null)
-            {
-                throw new ArgumentNullException(nameof(address));
-            }
-
-            var hlink = new HyperlinkCells();
-            hlink.Address = address;
-
-            return HyperlinkHelper.Add(shape, hlink);
-        }
 
         public static int Add(
             IVisio.Shape shape,

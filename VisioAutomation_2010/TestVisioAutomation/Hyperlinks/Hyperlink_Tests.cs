@@ -17,11 +17,16 @@ namespace TestVisioAutomation.Hyperlinks
             Assert.AreEqual(0, VAHLINK.HyperlinkHelper.GetCount(s1));
 
             // Add the first hyperlink
-            int h1 = VAHLINK.HyperlinkHelper.Add(s1,"http://microsoft.com");
+
+            var h1 = new VAHLINK.HyperlinkCells();
+            h1.Address = "http://microsoft.com";
+            int h1_row = VAHLINK.HyperlinkHelper.Add(s1,h1);
             Assert.AreEqual(1, VAHLINK.HyperlinkHelper.GetCount(s1));
 
             // Add the second control
-            int h2 = VAHLINK.HyperlinkHelper.Add(s1,"http://google.com");
+            var h2 = new VAHLINK.HyperlinkCells();
+            h2.Address = "http://google.com";
+            int h2_row = VAHLINK.HyperlinkHelper.Add(s1,h2);
             Assert.AreEqual(2, VAHLINK.HyperlinkHelper.GetCount(s1));
             
             // retrieve the control information
