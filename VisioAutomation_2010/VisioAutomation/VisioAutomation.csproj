@@ -137,6 +137,7 @@
     <Compile Include="ShapeSheet\Query\Common\ConnectionPointCellsQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\ControlCellsQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\CustomPropertyCellsQuery.cs" />
+    <Compile Include="ShapeSheet\Query\Common\HyperlinkCellsQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\LockCellsQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\PageCellsQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\ParagraphFormatCellsQuery.cs" />
@@ -150,6 +151,8 @@
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Models\DirectedGraph\VisioRenderer.cs" />
+    <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
+    <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />

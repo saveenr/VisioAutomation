@@ -147,15 +147,15 @@ namespace VisioAutomation.ShapeSheet
         public static SRC SelectMode => new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupSelectMode);
 
         // Hyperlinks
-        public static SRC Hyperlink_Address => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkAddress);
-        public static SRC Hyperlink_Default => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkDefault);
-        public static SRC Hyperlink_Description => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkDescription);
-        public static SRC Hyperlink_ExtraInfo => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkExtraInfo);
-        public static SRC Hyperlink_Frame => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkFrame);
-        public static SRC Hyperlink_Invisible => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkInvisible);
-        public static SRC Hyperlink_NewWindow => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkNewWin);
-        public static SRC Hyperlink_SortKey => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkSortKey);
-        public static SRC Hyperlink_SubAddress => new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkSubAddress);
+        public static SRC Hyperlink_Address => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkAddress);
+        public static SRC Hyperlink_Default => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkDefault);
+        public static SRC Hyperlink_Description => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkDescription);
+        public static SRC Hyperlink_ExtraInfo => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkExtraInfo);
+        public static SRC Hyperlink_Frame => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkFrame);
+        public static SRC Hyperlink_Invisible => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkInvisible);
+        public static SRC Hyperlink_NewWindow => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkNewWin);
+        public static SRC Hyperlink_SortKey => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkSortKey);
+        public static SRC Hyperlink_SubAddress => new SRC(SEC.visSectionHyperlink, ROW.visRowHyperlink, CEL.visHLinkSubAddress);
 
         // Image Properties
         public static SRC Blur => new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageBlur);

@@ -1,0 +1,89 @@
+using System;
+using IVisio = Microsoft.Office.Interop.Visio;
+
+namespace VisioAutomation.Shapes.Hyperlinks
+{
+    public static class HyperlinkHelper
+    {
+        public static int Add(IVisio.Shape shape, string address)
+        {
+            if (shape == null)
+            {
+                throw new ArgumentNullException(nameof(shape));
+            }
+
+            var hlink = new HyperlinkCells();
+            hlink.Address = address;
+
+            return HyperlinkHelper.Add(shape, hlink);
+        }
+
+        public static int Add(
+            IVisio.Shape shape,
+            HyperlinkCells hyperlink)
+        {
+            if (shape == null)
+            {
+                throw new ArgumentNullException(nameof(shape));
+            }
+
+            /*
+            TODO: Why doesn't this work?
+            short row = shape.AddRow((short)IVisio.VisSectionIndices.visSectionHyperlink,
+                                     (short)IVisio.VisRowIndices.visRowLast,
+                                     (short)IVisio.VisRowTags.visTagDefault);
+
+            HyperlinkHelper.Set(shape, row, hyperlink);
+
+    */
+            var hlinks_collection = shape.Hyperlinks;
+            var hlinks_object = hlinks_collection.Add();
+            hlinks_object.Address = hyperlink.Address.Formula.Value;
+
+            return hlinks_object.Row;
+        }
+
+        public static int Set(
+            IVisio.Shape shape,
+            short row,
+            HyperlinkCells hyperlink)
+        {
+            if (shape == null)
+            {
+                throw new ArgumentNullException(nameof(shape));
+            }
+
+            var update = new ShapeSheet.Update();
+            update.SetFormulas(hyperlink, row);
+            update.Execute(shape);
+
+            return row;
+        }
+
+        public static void Delete(IVisio.Shape shape, int index)
+        {
+            if (shape == null)
+            {
+                throw new ArgumentNullException(nameof(shape));
+            }
+
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            var row = (IVisio.VisRowIndices)index;
+            shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionHyperlink, (short)row);
+        }
+
+        public static int GetCount(IVisio.Shape shape)
+        {
+            if (shape == null)
+            {
+                throw new ArgumentNullException(nameof(shape));
+            }
+
+            return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionHyperlink];
+        }
+    }
+}
