@@ -25,7 +25,6 @@ namespace VisioAutomation.Shapes.Hyperlinks
                 throw new ArgumentException("Address is null",nameof(hyperlink));
             }
 
-
             /*
             TODO: Why doesn't this work?
             short row = shape.AddRow((short)IVisio.VisSectionIndices.visSectionHyperlink,
