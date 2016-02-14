@@ -12,6 +12,11 @@ namespace VisioAutomation.Shapes.Hyperlinks
                 throw new ArgumentNullException(nameof(shape));
             }
 
+            if (address == null)
+            {
+                throw new ArgumentNullException(nameof(address));
+            }
+
             var hlink = new HyperlinkCells();
             hlink.Address = address;
 
@@ -26,6 +31,17 @@ namespace VisioAutomation.Shapes.Hyperlinks
             {
                 throw new ArgumentNullException(nameof(shape));
             }
+
+            if (hyperlink == null)
+            {
+                throw new ArgumentNullException(nameof(hyperlink));
+            }
+
+            if (hyperlink.Address.Formula.Value == null)
+            {
+                throw new ArgumentException("Address is null",nameof(hyperlink));
+            }
+
 
             /*
             TODO: Why doesn't this work?
