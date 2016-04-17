@@ -1,18 +1,18 @@
 using System.Collections.Generic;
-using VACONTROL = VisioAutomation.Shapes.Controls;
+using VAHLINK = VisioAutomation.Shapes.Hyperlinks;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class ControlCommands : CommandSet
+    public class HyperlinkCommands : CommandSet
     {
-        internal ControlCommands(Client client) :
+        internal HyperlinkCommands(Client client) :
             base(client)
         {
 
         }
 
-        public IList<int> Add(IList<IVisio.Shape> target_shapes, VACONTROL.ControlCells ctrl)
+        public IList<int> Add(IList<IVisio.Shape> target_shapes, VAHLINK.HyperlinkCells ctrl)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -28,19 +28,18 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<int>(0);
             }
 
+            var hyperlink_indices = new List<int>();
 
-            var control_indices = new List<int>();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Add Control"))
             {
                 foreach (var shape in shapes)
                 {
-                    int ci = VACONTROL.ControlHelper.Add(shape, ctrl);
-                    control_indices.Add(ci);
+                    int hi = VAHLINK.HyperlinkHelper.Add(shape, ctrl);
+                    hyperlink_indices.Add(hi);
                 }
             }
 
-            return control_indices;
+            return hyperlink_indices;
         }
 
         public void Delete(IList<IVisio.Shape> target_shapes, int n)
@@ -54,17 +53,16 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Delete Control"))
             {
                 foreach (var shape in shapes)
                 {
-                    VACONTROL.ControlHelper.Delete(shape, n);
+                    VAHLINK.HyperlinkHelper.Delete(shape, n);
                 }
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>> Get(IList<IVisio.Shape> target_shapes)
+        public Dictionary<IVisio.Shape, IList<VAHLINK.HyperlinkCells>> Get(IList<IVisio.Shape> target_shapes)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -72,14 +70,14 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
-                return new Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>>(0);
+                return new Dictionary<IVisio.Shape, IList<VAHLINK.HyperlinkCells>>(0);
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>>();
+            var dic = new Dictionary<IVisio.Shape, IList<VAHLINK.HyperlinkCells>>();
             foreach (var shape in shapes)
             {
-                var controls = VACONTROL.ControlCells.GetCells(shape);
-                dic[shape] = controls;
+                var hyperlinks = VAHLINK.HyperlinkCells.GetCells(shape);
+                dic[shape] = hyperlinks;
             }
             return dic;
         }

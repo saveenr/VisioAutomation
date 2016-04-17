@@ -87,6 +87,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Get\Get_VisioHyperlink.cs" />
+    <Compile Include="Commands\New\New_VisioHyperlink.cs" />
+    <Compile Include="Commands\Remove\Remove_VisioHyperlink.cs" />
     <Compile Include="Nouns.cs" />
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
     <Compile Include="Commands\Close\Close_VisioMaster.cs" />

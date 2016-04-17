@@ -3,8 +3,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Remove
 {
-    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Nouns.VisioControl)]
-    public class Remove_VisioControl : VisioCmdlet
+    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Nouns.VisioHyperlink)]
+    public class Remove_VisioHyperlink : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
         public int Index { get; set; }
@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.Remove
 
         protected override void ProcessRecord()
         {
-            this.Client.Control.Delete(this.Shapes,this.Index);
+            this.Client.Hyperlink.Delete(this.Shapes,this.Index);
         }
     }
 }

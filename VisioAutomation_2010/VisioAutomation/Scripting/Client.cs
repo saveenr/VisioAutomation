@@ -13,6 +13,7 @@ namespace VisioAutomation.Scripting
         public Commands.FormatCommands Format { get; private set; }
         public Commands.LayerCommands Layer { get; private set; }
         public Commands.ControlCommands Control { get; private set; }
+        public Commands.HyperlinkCommands Hyperlink { get; private set; }
         public Commands.CustomPropCommands CustomProp { get; private set; }
         public Commands.ExportCommands Export { get; private set; }
         public Commands.ConnectionCommands Connection { get; private set; }
@@ -48,6 +49,7 @@ namespace VisioAutomation.Scripting
             this.Format = new Commands.FormatCommands(this);
             this.Layer = new Commands.LayerCommands(this);
             this.Control = new Commands.ControlCommands(this);
+            this.Hyperlink = new Commands.HyperlinkCommands(this);
             this.CustomProp = new Commands.CustomPropCommands(this);
             this.Export = new Commands.ExportCommands(this);
             this.Connection = new Commands.ConnectionCommands(this);

@@ -2,6 +2,7 @@
 #
 # HISTORY
 # -------
+# 2016/02/14 Added Hyperlink commands
 # 2015/10/19 Updated module manifest
 # 2014/05/23 Added additional metadata
 # 2014/05/14 Renamed module from "VisioPS" to "Visio"
@@ -17,7 +18,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '1.2.214'
+ModuleVersion = '1.3.0'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
@@ -29,7 +30,7 @@ Author = 'Saveen Reddy'
 CompanyName = ''
 
 # Copyright statement for this module
-Copyright = '(c) 20145 Saveen Reddy'
+Copyright = '(c) 2016 Saveen Reddy'
 
 # Description of the functionality provided by this module
 Description = 'Visio PowerShell for Visio 2010'
@@ -98,4 +99,3 @@ ModuleList = @()
 # DefaultCommandPrefix = ''
 
 }
-
