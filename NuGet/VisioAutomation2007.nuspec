@@ -1,18 +1,17 @@
 <package >
   <metadata>
     <id>VisioAutomation2007</id>
-    <version>4.0.9</version>
+    <version>4.0.10</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
-    <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
-    <projectUrl>http://visioautomation.codeplex.com</projectUrl>
-    <iconUrl>http://viziblr.com/storage/visioautomation/visioautomation-128x128.png</iconUrl>
+    <licenseUrl>https://github.com/saveenr/VisioAutomation/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/saveenr/VisioAutomation</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>VisioAutomation helps developers to control Visio from .NET languages. 
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
-    <releaseNotes>Internal improvement to text formatting</releaseNotes>
-    <copyright>Copyright 2012</copyright>
+    <releaseNotes>NuGet Package metadata updated</releaseNotes>
+    <copyright>Copyright 2016 Saveen Reddy</copyright>
     <tags>Visio</tags>
     <dependencies>
     </dependencies>
