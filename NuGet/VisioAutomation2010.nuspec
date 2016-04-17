@@ -1,7 +1,7 @@
 <package>
   <metadata>
     <id>VisioAutomation2010</id>
-    <version>1.6.0</version>
+    <version>1.7.0</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
@@ -12,9 +12,9 @@
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
     <releaseNotes>
-       - VisioAutomation.Scripting client now integrated into assembly
+       - Added support for managing Hyperlinks on shapes
     </releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2016</copyright>
     <tags>Visio</tags>
     <dependencies>
     </dependencies>
