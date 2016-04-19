@@ -49,7 +49,7 @@ namespace TestVisioAutomation.Connections
             this.connect(shapes[0], shapes[1], false, false);
             this.connect(shapes[1], shapes[2], false, false);
 
-            var cons = page1.Connects.AsEnumerable().ToList();
+            var cons = page1.Connects.ToEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
             page1.Delete(0);
         }

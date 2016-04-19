@@ -364,7 +364,7 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var list = new List<IVisio.Shape>();
-            list.AddRange(shapes.AsEnumerable());
+            list.AddRange(shapes.ToEnumerable());
 
             return list;
         }

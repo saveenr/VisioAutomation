@@ -42,7 +42,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             var doc = application.ActiveDocument;
             var doc_masters = doc.Masters;
-            var masters = doc_masters.AsEnumerable().ToList();
+            var masters = doc_masters.ToEnumerable().ToList();
             return masters;
         }
 
@@ -50,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
             var doc_masters = doc.Masters;
-            var masters = doc_masters.AsEnumerable().ToList();
+            var masters = doc_masters.ToEnumerable().ToList();
             return masters;
         }
 
@@ -119,13 +119,13 @@ namespace VisioAutomation.Scripting.Commands
             if (name == null || name == "*")
             {
                 // return all masters
-                var masters = doc.Masters.AsEnumerable().ToList();
+                var masters = doc.Masters.ToEnumerable().ToList();
                 return masters;
             }
             else
             {
                 // return masters matching the name
-                var masters2 = doc.Masters.AsEnumerable();
+                var masters2 = doc.Masters.ToEnumerable();
                 var masters3 = TextUtil.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, TextUtil.FilterAction.Include).ToList();
                 return masters3;
             }

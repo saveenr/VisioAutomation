@@ -127,7 +127,7 @@ namespace VisioAutomation.Shapes.Connections
             }
 
             var page_connects = page.Connects;
-            var connects = page_connects.AsEnumerable();
+            var connects = page_connects.ToEnumerable();
 
             var edges = new List<ConnectorEdge>();
 

@@ -44,7 +44,7 @@ namespace VisioAutomation.Extensions
             return new Drawing.Point(xprime, yprime);
         }
 
-        public static IEnumerable<IVisio.Shape> AsEnumerable(this IVisio.Shapes shapes)
+        public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Shapes shapes)
         {
             int count = shapes.Count;
             for (int i = 0; i < count; i++)

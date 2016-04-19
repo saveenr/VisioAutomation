@@ -100,7 +100,7 @@ namespace TestVisioAutomation.Scripting
 
             // Verify
             int total_shapes_expected = cols*rows;
-            var shapes = page.Shapes.AsEnumerable().ToList();
+            var shapes = page.Shapes.ToEnumerable().ToList();
             int total_shapes_actual = shapes.Count;
             Assert.AreEqual(total_shapes_expected,total_shapes_actual);
 

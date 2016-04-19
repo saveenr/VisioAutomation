@@ -52,7 +52,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this._client.Application.Get();
             var page = application.ActivePage;
-            return page.Layers.AsEnumerable().ToList();
+            return page.Layers.ToEnumerable().ToList();
         }
     }
 }

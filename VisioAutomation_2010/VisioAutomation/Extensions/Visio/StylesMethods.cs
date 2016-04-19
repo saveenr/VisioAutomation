@@ -5,7 +5,7 @@ namespace VisioAutomation.Extensions
 {
     public static class StylesMethods
     {
-        public static IEnumerable<IVisio.Style> AsEnumerable(this IVisio.Styles styles)
+        public static IEnumerable<IVisio.Style> ToEnumerable(this IVisio.Styles styles)
         {
             int count = styles.Count;
             for (int i = 0; i < count; i++)

@@ -50,7 +50,7 @@ namespace TestVisioAutomation.Extensions
 
             var selection = active_window.Selection;
             var expected = selection.Cast<IVisio.Shape>().ToList();
-            var actual = selection.AsEnumerable().ToList();
+            var actual = selection.ToEnumerable().ToList();
 
             Assert.AreEqual(expected.Count, actual.Count);
             Assert.AreEqual(selection[1].ID16, actual[0].ID16);

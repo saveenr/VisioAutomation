@@ -410,7 +410,7 @@ namespace VisioAutomation.Scripting.Commands
                 var selection = win.Selection;
                 selection.Duplicate();
                 var selection1 = win.Selection;
-                duplicated_shapes.AddRange(selection1.AsEnumerable());
+                duplicated_shapes.AddRange(selection1.ToEnumerable());
             }
 
             if (leftover > 0)
@@ -421,7 +421,7 @@ namespace VisioAutomation.Scripting.Commands
                 var selection = win.Selection;
                 selection.Duplicate();
                 var selection1 = win.Selection;
-                duplicated_shapes.AddRange(selection1.AsEnumerable());
+                duplicated_shapes.AddRange(selection1.ToEnumerable());
             }
 
             win.DeselectAll();

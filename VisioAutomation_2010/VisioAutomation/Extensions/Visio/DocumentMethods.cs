@@ -10,7 +10,7 @@ namespace VisioAutomation.Extensions
             Documents.DocumentHelper.Close(doc, force_close);
         }
 
-        public static IEnumerable<IVisio.Document> AsEnumerable(this IVisio.Documents docs)
+        public static IEnumerable<IVisio.Document> ToEnumerable(this IVisio.Documents docs)
         {
             short count = docs.Count;
             for (int i = 0; i < count; i++)

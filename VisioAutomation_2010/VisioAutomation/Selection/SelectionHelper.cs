@@ -14,7 +14,7 @@ namespace VisioAutomation.Selection
                 return new List<IVisio.Shape>(0);
             }
             
-            var sel_shapes = selection.AsEnumerable();
+            var sel_shapes = selection.ToEnumerable();
             var shapes = sel_shapes.ToList();
             return shapes;
         }
@@ -27,7 +27,7 @@ namespace VisioAutomation.Selection
             }
 
             var shapes = new List<IVisio.Shape>();
-            var sel_shapes = selection.AsEnumerable();
+            var sel_shapes = selection.ToEnumerable();
             foreach (var shape in Shapes.ShapeHelper.GetNestedShapes(sel_shapes))
             {
                 if (shape.Type != (short)IVisio.VisShapeTypes.visTypeGroup)

@@ -100,7 +100,7 @@ namespace VisioAutomation.Extensions
             return shapeids;
         }
 
-        public static IEnumerable<IVisio.Page> AsEnumerable(this IVisio.Pages pages)
+        public static IEnumerable<IVisio.Page> ToEnumerable(this IVisio.Pages pages)
         {
             short count = pages.Count;
             for (int i = 0; i < count; i++)

@@ -5,7 +5,7 @@ namespace VisioAutomation.Extensions
 {
     public static class ConnectsMethods
     {
-        public static IEnumerable<IVisio.Connect> AsEnumerable(this IVisio.Connects connects)
+        public static IEnumerable<IVisio.Connect> ToEnumerable(this IVisio.Connects connects)
         {
             int count = connects.Count;
             for (int i = 0; i < count; i++)

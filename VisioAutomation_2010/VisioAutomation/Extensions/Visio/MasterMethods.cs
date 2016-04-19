@@ -14,7 +14,7 @@ namespace VisioAutomation.Extensions
             return r;
         }
 
-        public static IEnumerable<IVisio.Master> AsEnumerable(this IVisio.Masters masters)
+        public static IEnumerable<IVisio.Master> ToEnumerable(this IVisio.Masters masters)
         {
             short count = masters.Count;
             for (int i = 0; i < count; i++)

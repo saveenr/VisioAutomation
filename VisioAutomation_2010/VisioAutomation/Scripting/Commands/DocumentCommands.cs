@@ -132,7 +132,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             var application = this._client.Application.Get();
             var documents = application.Documents;
-            var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
+            var docs = documents.ToEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
             using (var alert = new Application.AlertResponseScope(application, Application.AlertResponseCode.No))
             {
@@ -283,12 +283,12 @@ namespace VisioAutomation.Scripting.Commands
             if (name == null || name == "*")
             {
                 // return all documents
-                var docs1 = documents.AsEnumerable().ToList();
+                var docs1 = documents.ToEnumerable().ToList();
                 return docs1;
             }
 
             // get the named document
-            var docs2 = TextUtil.FilterObjectsByNames(documents.AsEnumerable(), new[] {name}, d => d.Name, true, TextUtil.FilterAction.Include).ToList();
+            var docs2 = TextUtil.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, TextUtil.FilterAction.Include).ToList();
             return docs2;
         }
     }

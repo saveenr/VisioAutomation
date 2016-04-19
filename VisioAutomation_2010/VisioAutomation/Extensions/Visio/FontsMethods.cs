@@ -5,7 +5,7 @@ namespace VisioAutomation.Extensions
 {
     public static class FontsMethods
     {
-        public static IEnumerable<IVisio.Font> AsEnumerable(this IVisio.Fonts fonts)
+        public static IEnumerable<IVisio.Font> ToEnumerable(this IVisio.Fonts fonts)
         {
             short count = fonts.Count;
             for (int i = 0; i < count; i++)

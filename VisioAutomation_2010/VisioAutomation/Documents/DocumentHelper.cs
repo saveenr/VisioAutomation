@@ -61,7 +61,7 @@ namespace VisioAutomation.Documents
             // go through each window and check if it is assigned
             // to the target document
             var appwindows = app.Windows;
-            var allwindows = appwindows.AsEnumerable();
+            var allwindows = appwindows.ToEnumerable();
             foreach (var curwin in allwindows)
             {
                 if (curwin.Document == doc)

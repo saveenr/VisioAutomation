@@ -28,29 +28,29 @@ namespace TestVisioAutomation.Extensions
             var app = page1.Application;
 
             // -------------------------------
-            var a1 = page1.Shapes.AsEnumerable().ToList();
+            var a1 = page1.Shapes.ToEnumerable().ToList();
             Assert.AreEqual(0, a1.Count);
 
-            var a2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
+            var a2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.ToEnumerable());
             Assert.AreEqual(0, a2.Count);
 
             // -------------------------------
 
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
-            var b1 = page1.Shapes.AsEnumerable().ToList();
+            var b1 = page1.Shapes.ToEnumerable().ToList();
             Assert.AreEqual(1, b1.Count);
 
-            var b2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
+            var b2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.ToEnumerable());
             Assert.AreEqual(1, b2.Count);
 
             // -------------------------------
 
             var s2 = page1.DrawRectangle(1, 0, 2, 1);
             var s3 = page1.DrawRectangle(2, 0, 3, 1);
-            var c1 = page1.Shapes.AsEnumerable().ToList();
+            var c1 = page1.Shapes.ToEnumerable().ToList();
             Assert.AreEqual(3, c1.Count);
 
-            var c2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
+            var c2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.ToEnumerable());
             Assert.AreEqual(3, c2.Count);
 
             // -------------------------------
@@ -60,10 +60,10 @@ namespace TestVisioAutomation.Extensions
             selection.DeselectAll();
             var g1 = VisioAutomationTest.SelectAndGroup(active_window, new[] { s2, s3 });
 
-            var d1 = page1.Shapes.AsEnumerable().ToList();
+            var d1 = page1.Shapes.ToEnumerable().ToList();
             Assert.AreEqual(2, d1.Count);
 
-            var d2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
+            var d2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.ToEnumerable());
             Assert.AreEqual(4, d2.Count);
 
             page1.Delete(0);
@@ -82,7 +82,7 @@ namespace TestVisioAutomation.Extensions
             page3.NameU = "P3";
             var pages = doc1.Pages;
             var expected = doc1.Pages.Cast<IVisio.Page>().ToList();
-            var actual = doc1.Pages.AsEnumerable().ToList();
+            var actual = doc1.Pages.ToEnumerable().ToList();
 
             Assert.AreEqual(expected.Count, actual.Count);
             Assert.AreEqual(pages[1].NameU, actual[0].NameU);
@@ -99,7 +99,7 @@ namespace TestVisioAutomation.Extensions
             var fonts = doc1.Fonts;
 
             var expects = fonts.Cast<IVisio.Font>().ToList();
-            var actual = fonts.AsEnumerable().ToList();
+            var actual = fonts.ToEnumerable().ToList();
 
             Assert.AreEqual(expects.Count, actual.Count);
             for (int i = 0; i < fonts.Count; i++)
@@ -120,7 +120,7 @@ namespace TestVisioAutomation.Extensions
 
             var masters = stencil.Masters;
 
-            var actual = masters.AsEnumerable().ToList();
+            var actual = masters.ToEnumerable().ToList();
             for (int i = 0; i < masters.Count; i++)
             {
                 Assert.AreEqual(masters[i + 1].NameU, actual[i].NameU);
@@ -134,7 +134,7 @@ namespace TestVisioAutomation.Extensions
             var doc1 = this.GetNewDoc();
             var app = doc1.Application;
             var windows = app.Windows;
-            var actual = windows.AsEnumerable().ToList();
+            var actual = windows.ToEnumerable().ToList();
             for (int i = 0; i < windows.Count; i++)
             {
                 var ex = windows[(short)(i + 1)];
@@ -156,7 +156,7 @@ namespace TestVisioAutomation.Extensions
             doc2.Title = "D2";
             doc3.Title = "D3";
 
-            var actual = documents.AsEnumerable().ToList();
+            var actual = documents.ToEnumerable().ToList();
             for (int i = 0; i < documents.Count; i++)
             {
                 Assert.AreEqual(documents[i + 1].Title, actual[i].Title);
@@ -177,7 +177,7 @@ namespace TestVisioAutomation.Extensions
             layers.Add("BAR");
             layers.Add("BEER");
 
-            var actual = layers.AsEnumerable().ToList();
+            var actual = layers.ToEnumerable().ToList();
             for (int i = 0; i < layers.Count; i++)
             {
                 var ex = layers[i+1];
@@ -191,7 +191,7 @@ namespace TestVisioAutomation.Extensions
         {
             var doc1 = this.GetNewDoc();
             var colors = doc1.Colors;
-            var actual = colors.AsEnumerable().ToList();
+            var actual = colors.ToEnumerable().ToList();
             for (int i = 0; i < colors.Count; i++)
             {
                 var expected_color = colors[i];

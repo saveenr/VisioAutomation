@@ -530,7 +530,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = page.Shapes;
 
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
-            cached_shapes_list.AddRange(shapes.AsEnumerable());
+            cached_shapes_list.AddRange(shapes.ToEnumerable());
             
             if (shapenames.Contains("*"))
             {
@@ -551,13 +551,13 @@ namespace VisioAutomation.Scripting.Commands
             if (Name == null || Name == "*")
             {
                 // return all pages
-                var pages = active_document.Pages.AsEnumerable().ToList();
+                var pages = active_document.Pages.ToEnumerable().ToList();
                 return pages;
             }
             else
             {
                 // return the named page
-                var pages = active_document.Pages.AsEnumerable();
+                var pages = active_document.Pages.ToEnumerable();
                 var pages2= TextUtil.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, TextUtil.FilterAction.Include).ToList();
                 return pages2;
             }

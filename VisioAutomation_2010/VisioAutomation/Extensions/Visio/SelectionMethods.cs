@@ -5,7 +5,7 @@ namespace VisioAutomation.Extensions
 {
     public static class SelectionMethods
     {
-        public static IEnumerable<IVisio.Shape> AsEnumerable(this IVisio.Selection selection)
+        public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Selection selection)
         {
             short count16 = selection.Count16;
             for (short i = 0; i < count16; i++)

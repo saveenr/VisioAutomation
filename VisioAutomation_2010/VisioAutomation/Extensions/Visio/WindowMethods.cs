@@ -60,7 +60,7 @@ namespace VisioAutomation.Extensions
             window.SetViewRect(rect.Left, rect.Top, rect.Width, rect.Height);
         }
 
-        public static IEnumerable<IVisio.Window> AsEnumerable(this IVisio.Windows windows)
+        public static IEnumerable<IVisio.Window> ToEnumerable(this IVisio.Windows windows)
         {
             short count = windows.Count;
             for (int i = 0; i < count; i++)

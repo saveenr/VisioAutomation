@@ -63,9 +63,9 @@ namespace VisioAutomation.Scripting.Commands
 
             var page = (IVisio.Page) window.Page;
             var shapes = page.Shapes;
-            var all_shapes = shapes.AsEnumerable();
+            var all_shapes = shapes.ToEnumerable();
             var selection = window.Selection;
-            var selected_set = new HashSet<IVisio.Shape>(selection.AsEnumerable());
+            var selected_set = new HashSet<IVisio.Shape>(selection.ToEnumerable());
             var shapes_to_select = all_shapes.Where(shape => !selected_set.Contains(shape)).ToList();
 
             window.DeselectAll();
@@ -228,14 +228,14 @@ namespace VisioAutomation.Scripting.Commands
 
             if (sel.Count > 0)
             {
-                shapes.AddRange(sel.AsEnumerable());
+                shapes.AddRange(sel.ToEnumerable());
             }
 
             // sub selection
             sel.IterationMode = ((short)IVisio.VisSelectMode.visSelModeOnlySub) + ((short)IVisio.VisSelectMode.visSelModeSkipSuper);
             if (sel.Count > 0)
             {
-                shapes.AddRange(sel.AsEnumerable());
+                shapes.AddRange(sel.ToEnumerable());
             }
 
             sel.IterationMode = original_itermode;

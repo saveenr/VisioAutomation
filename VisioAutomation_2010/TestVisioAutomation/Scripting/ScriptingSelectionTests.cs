@@ -24,12 +24,12 @@ namespace TestVisioAutomation.Scripting
 
             var active_window = app.ActiveWindow;
             var selection = active_window.Selection;
-            var x1 = selection.AsEnumerable().ToDictionary(s => s);
+            var x1 = selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(1, x1.Count);
             Assert.IsTrue(x1.ContainsKey(s4));
 
             client.Selection.Invert();
-            var x2 = active_window.Selection.AsEnumerable().ToDictionary(s => s);
+            var x2 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(3, x2.Count);
             Assert.IsTrue(x2.ContainsKey(s1));
             Assert.IsTrue(x2.ContainsKey(s2));
@@ -38,12 +38,12 @@ namespace TestVisioAutomation.Scripting
 
             active_window.SelectAll();
             //app.ActiveWindows.Selection.SelectAll() selects 3 items
-            var x3 = active_window.Selection.AsEnumerable().ToDictionary(s => s);
+            var x3 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(4, x3.Count);
 
             active_window.DeselectAll();
             //app.ActiveWindows.Selection.DeselectAll() keeps all 4 selection
-            var x4 = active_window.Selection.AsEnumerable().ToDictionary(s => s);
+            var x4 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(0, x4.Count);
 
             client.Document.Close(true);

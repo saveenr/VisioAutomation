@@ -168,7 +168,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
             var prop_names = new List<string>(custom_prop_row_count);
             var prop_section = shape.Section[(short)IVisio.VisSectionIndices.visSectionProp];
-            var query_names = prop_section.AsEnumerable().Select(row => row.NameU);
+            var query_names = prop_section.ToEnumerable().Select(row => row.NameU);
             prop_names.AddRange(query_names);
 
             if (custom_prop_row_count != prop_names.Count)

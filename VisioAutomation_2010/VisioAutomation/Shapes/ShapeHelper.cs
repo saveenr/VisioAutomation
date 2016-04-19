@@ -27,7 +27,7 @@ namespace VisioAutomation.Shapes
                 var subshapes = s.Shapes;
                 if (subshapes.Count > 0)
                 {
-                    foreach (var child in subshapes.AsEnumerable())
+                    foreach (var child in subshapes.ToEnumerable())
                     {
                         stack.Push(child);
                     }
