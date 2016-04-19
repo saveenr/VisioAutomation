@@ -155,6 +155,8 @@
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
+    <Compile Include="Shapes\StyleHelper.cs" />
+    <Compile Include="Shapes\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
     <Compile Include="TextUtil.cs" />
