@@ -3,6 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
 {
+
     public static class ShapeMethods
     {
         public static IVisio.Shape DrawLine(this IVisio.Shape shape, Drawing.Point p1, Drawing.Point p2)

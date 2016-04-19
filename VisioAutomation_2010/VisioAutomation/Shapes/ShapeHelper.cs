@@ -2,8 +2,12 @@ using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
+
+
+
 namespace VisioAutomation.Shapes
 {
+
     public static class ShapeHelper
     {
         public static IVisio.Shape DrawLine(IVisio.Shape shape, Drawing.Point p1, Drawing.Point p2)
