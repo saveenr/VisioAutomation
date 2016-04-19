@@ -86,6 +86,10 @@
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
+    <Compile Include="Colors\ColorsHelper.cs" />
+    <Compile Include="Shapes\Connections\ConnectionHelper.cs" />
+    <Compile Include="Fonts\FontHelper.cs" />
+    <Compile Include="Extensions\Visio\LayersHelper.cs" />
     <Compile Include="Models\DirectedGraph\NodeUserData.cs" />
     <Compile Include="Scripting\ArrangeHelper.cs" />
     <Compile Include="Scripting\Client.cs" />

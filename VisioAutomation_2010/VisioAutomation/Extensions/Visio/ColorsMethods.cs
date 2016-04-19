@@ -7,11 +7,11 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Color> ToEnumerable(this IVisio.Colors colors)
         {
-            int count = colors.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return colors[i];
-            }
+            return VisioAutomation.Colors.ColorsHelper.ToEnumerable(colors);
         }
     }
+}
+
+namespace VisioAutomation.Colors
+{
 }
