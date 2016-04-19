@@ -14,7 +14,6 @@ namespace VisioAutomation.Drawing
             this.Y = y;
         }
 
-
         public override string ToString()
         {
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
@@ -87,11 +86,6 @@ namespace VisioAutomation.Drawing
             return pa.Multiply(pb.X, pb.Y);
         }
 
-        public Point Multiply(double s)
-        {
-            return this.Multiply(s, s);
-        }
-
         public Point Multiply(double sx, double sy)
         {
             var new_point = new Point(this.X*sx, this.Y*sy);
@@ -108,11 +102,6 @@ namespace VisioAutomation.Drawing
         {
             var new_point = new Point(this.X/sx, this.Y/sy);
             return new_point;
-        }
-
-        public Point Divide(double s)
-        {
-            return this.Divide(s, s);
         }
 
         public static IEnumerable<Point> FromDoubles(IEnumerable<double> doubles)

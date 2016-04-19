@@ -553,7 +553,7 @@ namespace VisioAutomation.Models.InternalTree
             var child_attach_point = lineseg.End;
 
             double scale = this.Options.LevelSeparation/2.0;
-            var dif = child_attach_point.Subtract(parent_attach_point).Multiply(scale);
+            var dif = child_attach_point.Subtract(parent_attach_point).Multiply(scale, scale);
 
 
             var handle_displacement = TreeLayout<T>.IsVertical(this.Options.Direction)

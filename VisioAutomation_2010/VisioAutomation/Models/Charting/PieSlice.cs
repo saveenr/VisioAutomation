@@ -249,7 +249,7 @@ namespace VisioAutomation.Models.Charting
             var arc_bez = new List<Drawing.Point>(merged_points.Count);
             foreach (var p in merged_points)
             {
-                var np = p.Multiply(radius) + this.Center;
+                var np = p.Multiply(radius,radius) + this.Center;
                 arc_bez.Add(np);
             }
             return arc_bez;

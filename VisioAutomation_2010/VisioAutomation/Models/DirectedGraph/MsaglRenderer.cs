@@ -40,7 +40,7 @@ namespace VisioAutomation.Models.DirectedGraph
 
         private VA.Drawing.Point ToDocumentCoordinates(VA.Drawing.Point point)
         {
-            var np = point.Add(-this.mg_bb.Left, -this.mg_bb.Bottom).Multiply(this.ScaleToDocument);
+            var np = point.Add(-this.mg_bb.Left, -this.mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
             return np;
         }
 
