@@ -12,11 +12,7 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Document> ToEnumerable(this IVisio.Documents docs)
         {
-            short count = docs.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return docs[i + 1];
-            }
+            return Documents.DocumentHelper.ToEnumerable(docs);
         }
 
         public static IVisio.Document OpenStencil(this IVisio.Documents docs, string filename)

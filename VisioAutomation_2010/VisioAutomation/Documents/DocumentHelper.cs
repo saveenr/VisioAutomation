@@ -1,4 +1,5 @@
-﻿using VisioAutomation.Extensions;
+﻿using System.Collections.Generic;
+using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Documents
@@ -96,6 +97,15 @@ namespace VisioAutomation.Documents
             else
             {
                 doc.Close();
+            }
+        }
+
+        public static IEnumerable<IVisio.Document> ToEnumerable(IVisio.Documents docs)
+        {
+            short count = docs.Count;
+            for (int i = 0; i < count; i++)
+            {
+                yield return docs[i + 1];
             }
         }
     }
