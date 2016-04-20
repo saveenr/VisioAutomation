@@ -212,7 +212,7 @@ namespace VisioAutomation.Scripting.Commands
 
 
 
-        public void Send(IList<IVisio.Shape> target_shapes, Selection.ShapeSendDirection dir)
+        public void Send(IList<IVisio.Shape> target_shapes, Selections.ShapeSendDirection dir)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -224,7 +224,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this._client.Selection.Get();
-            Selection.SelectionHelper.SendShapes(selection, dir);
+            Selections.SelectionHelper.SendShapes(selection, dir);
         }
 
         public void Align(IList<IVisio.Shape> target_shapes, Drawing.AlignmentHorizontal align)

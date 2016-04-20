@@ -191,7 +191,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
 
             var selection = this._client.Selection.Get();
-            return Selection.SelectionHelper.GetSelectedShapes(selection);
+            return Selections.SelectionHelper.GetSelectedShapes(selection);
         }
 
         public IList<IVisio.Shape> GetShapesRecursive()
@@ -199,7 +199,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
 
             var selection = this._client.Selection.Get();
-            return Selection.SelectionHelper.GetSelectedShapesRecursive(selection);
+            return Selections.SelectionHelper.GetSelectedShapesRecursive(selection);
         }
 
         public int Count()

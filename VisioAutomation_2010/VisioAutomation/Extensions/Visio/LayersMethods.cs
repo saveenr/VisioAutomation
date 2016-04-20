@@ -7,7 +7,7 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Layer> ToEnumerable(this IVisio.Layers layers)
         {
-            return VisioAutomation.Layers.LayersHelper.ToEnumerable(layers);
+            return VisioAutomation.Layers.LayerHelper.ToEnumerable(layers);
         }
     }
 }

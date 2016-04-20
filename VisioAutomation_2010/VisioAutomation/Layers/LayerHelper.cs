@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Layers
 {
-    public static class LayersHelper
+    public static class LayerHelper
     {
         public static IEnumerable<Layer> ToEnumerable(Microsoft.Office.Interop.Visio.Layers layers)
         {
@@ -15,3 +15,4 @@ namespace VisioAutomation.Layers
         }
     }
 }
+

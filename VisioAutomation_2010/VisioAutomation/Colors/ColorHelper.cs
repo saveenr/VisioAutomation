@@ -3,7 +3,7 @@ using Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Colors
 {
-    public static class ColorsHelper
+    public static class ColorHelper
     {
         public static IEnumerable<Color> ToEnumerable(Microsoft.Office.Interop.Visio.Colors colors)
         {

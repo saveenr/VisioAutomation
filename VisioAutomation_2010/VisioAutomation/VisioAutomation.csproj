@@ -86,10 +86,12 @@
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
-    <Compile Include="Colors\ColorsHelper.cs" />
+    <Compile Include="Colors\ColorHelper.cs" />
+    <Compile Include="Masters\MasterHelper.cs" />
+    <Compile Include="ShapeSheet\SectionHelper.cs" />
     <Compile Include="Shapes\Connections\ConnectionHelper.cs" />
     <Compile Include="Fonts\FontHelper.cs" />
-    <Compile Include="Extensions\Visio\LayersHelper.cs" />
+    <Compile Include="Layers\LayerHelper.cs" />
     <Compile Include="Models\DirectedGraph\NodeUserData.cs" />
     <Compile Include="Scripting\ArrangeHelper.cs" />
     <Compile Include="Scripting\Client.cs" />
@@ -160,7 +162,7 @@
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
     <Compile Include="Shapes\StyleHelper.cs" />
-    <Compile Include="Shapes\WindowHelper.cs" />
+    <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
     <Compile Include="TextUtil.cs" />
@@ -239,7 +241,7 @@
     <Compile Include="Pages\PageLayout\LayoutStyle.cs" />
     <Compile Include="Pages\PageLayout\RadialLayout.cs" />
     <Compile Include="Pages\PageLayout\VerticalAlignment.cs" />
-    <Compile Include="Selection\ShapeSendDirection.cs" />
+    <Compile Include="Selections\ShapeSendDirection.cs" />
     <Compile Include="Pages\PrintPageOrientation.cs" />
     <Compile Include="Shapes\Geometry\GeometrySection.cs" />
     <Compile Include="Shapes\Geometry\GeometryRow.cs" />
@@ -355,7 +357,7 @@
     <Compile Include="Shapes\Connections\ConnectorEdge.cs" />
     <Compile Include="Shapes\Controls\ControlCells.cs" />
     <Compile Include="Pages\PageHelper.cs" />
-    <Compile Include="Selection\SelectionHelper.cs" />
+    <Compile Include="Selections\SelectionHelper.cs" />
     <Compile Include="Extensions\Visio\ShapeMethods.cs" />
     <Compile Include="Shapes\Connections\PathAnalysis.cs" />
     <Compile Include="Application\AlertResponseScope.cs" />
