@@ -1,8 +1,11 @@
-﻿namespace VisioAutomation.ShapeSheet
+﻿using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
+
+namespace VisioAutomation.ShapeSheet
 {
     internal static class ShapeSheetHelper
     {
-        public static string GetSectionName(Microsoft.Office.Interop.Visio.VisSectionIndices value)
+        public static string GetSectionName(IVisio.VisSectionIndices value)
         {
             string s = value.ToString();
             const int start_index = 10;
@@ -11,12 +14,25 @@
 
         public static string GetSectionName(int value, string defaultname)
         {
-            if (System.Enum.IsDefined(typeof(Microsoft.Office.Interop.Visio.VisSectionIndices), value))
+            if (System.Enum.IsDefined(typeof(IVisio.VisSectionIndices), value))
             {
                 var a = (Microsoft.Office.Interop.Visio.VisSectionIndices)value;
                 return ShapeSheetHelper.GetSectionName(a);
             }
             return defaultname;
+        }
+
+        public static IEnumerable<IVisio.Row> ToEnumerable(IVisio.Section section)
+        {
+            // Section object: http://msdn.microsoft.com/en-us/library/ms408988(v=office.12).aspx
+
+            int row_count = section.Count;
+
+            for (int i = 0; i < row_count; i++)
+            {
+                var row = section[(short)i];
+                yield return row;
+            }
         }
     }
 }

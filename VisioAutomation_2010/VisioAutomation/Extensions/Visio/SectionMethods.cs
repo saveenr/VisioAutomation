@@ -7,7 +7,7 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Row> ToEnumerable(this IVisio.Section section)
         {
-            return VisioAutomation.Section.SectionHelper.ToEnumerable(section);
+            return VisioAutomation.ShapeSheet.ShapeSheetHelper.ToEnumerable(section);
         }
     }
 }
