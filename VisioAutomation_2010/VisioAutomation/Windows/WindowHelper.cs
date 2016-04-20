@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
+using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Windows
 {
     public static class WindowHelper
     {
         public static void Select(
-            Microsoft.Office.Interop.Visio.Window window,
-            IEnumerable<Shape> shapes,
-            Microsoft.Office.Interop.Visio.VisSelectArgs selectargs)
+            IVisio.Window window,
+            IEnumerable<IVisio.Shape> shapes,
+            IVisio.VisSelectArgs selectargs)
         {
             if (shapes == null)
             {
@@ -21,7 +21,7 @@ namespace VisioAutomation.Windows
             }
         }
 
-        public static Drawing.Rectangle GetViewRect(Microsoft.Office.Interop.Visio.Window window)
+        public static Drawing.Rectangle GetViewRect(IVisio.Window window)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ff765846.aspx
             double left, top, height, width;
@@ -35,7 +35,7 @@ namespace VisioAutomation.Windows
             return r;
         }
 
-        public static System.Drawing.Rectangle GetWindowRect(Microsoft.Office.Interop.Visio.Window window)
+        public static System.Drawing.Rectangle GetWindowRect(IVisio.Window window)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ms367542(v=office.14).aspx
             int left, top, height, width;
@@ -60,7 +60,7 @@ namespace VisioAutomation.Windows
             window.SetViewRect(rect.Left, rect.Top, rect.Width, rect.Height);
         }
 
-        public static IEnumerable<Window> ToEnumerable(Microsoft.Office.Interop.Visio.Windows windows)
+        public static IEnumerable<IVisio.Window> ToEnumerable(IVisio.Windows windows)
         {
             short count = windows.Count;
             for (int i = 0; i < count; i++)
