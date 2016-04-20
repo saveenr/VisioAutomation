@@ -266,7 +266,7 @@
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />
-    <Compile Include="Drawing\ColorHSL.cs" />
+    <Compile Include="Colors\ColorHSL.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
     <Compile Include="DOM\MasterRef.cs" />
     <Compile Include="DOM\Shape.cs" />
@@ -319,7 +319,7 @@
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
     <Compile Include="Internal\BitArray2D.cs" />
-    <Compile Include="Drawing\ColorRGB.cs" />
+    <Compile Include="Colors\ColorRGB.cs" />
     <Compile Include="Drawing\SnappingGrid.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />

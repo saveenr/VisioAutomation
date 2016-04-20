@@ -1,3 +1,4 @@
+using VisioAutomation.Colors;
 using VA=VisioAutomation;
 
 namespace VisioAutomationSamples
@@ -20,7 +21,7 @@ namespace VisioAutomationSamples
             }
             if (color.HasValue)
             {
-                var c = new VA.Drawing.ColorRGB(color.Value);
+                var c = new ColorRGB(color.Value);
                 el.CharacterCells.Color = c.ToFormula();
             }
             if (halign.HasValue)

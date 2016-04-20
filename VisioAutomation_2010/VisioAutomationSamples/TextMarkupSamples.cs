@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Colors;
+using VA = VisioAutomation;
 
 namespace VisioAutomationSamples
 {
@@ -13,7 +14,7 @@ namespace VisioAutomationSamples
             var tnr = page.Document.Fonts["Times New Roman"];
 
             var e1 = new VA.Text.Markup.TextElement();
-            var color_red = new VA.Drawing.ColorRGB(0xff0000);
+            var color_red = new ColorRGB(0xff0000);
             e1.CharacterCells.Color = color_red.ToFormula();
             e1.CharacterCells.Font = tnr.ID;
             e1.CharacterCells.Font = "20pt";
@@ -30,7 +31,7 @@ namespace VisioAutomationSamples
             var tnr = page.Document.Fonts["Times New Roman"];
 
             var e1 = new VA.Text.Markup.TextElement();
-            var color_red = new VA.Drawing.ColorRGB(0xff0000);
+            var color_red = new ColorRGB(0xff0000);
             e1.CharacterCells.Color = color_red.ToFormula();
             e1.CharacterCells.Font = tnr.ID;
             e1.CharacterCells.Font = "20pt";

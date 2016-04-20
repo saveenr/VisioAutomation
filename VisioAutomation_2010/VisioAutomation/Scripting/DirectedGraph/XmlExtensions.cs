@@ -1,13 +1,14 @@
+using VisioAutomation.Colors;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.DirectedGraph
 {
     public static class XmlExtensions
     {
-        public static Drawing.ColorRGB AttributeAsColor(this SXL.XElement el, string name,
-                                                     Drawing.ColorRGB def)
+        public static ColorRGB AttributeAsColor(this SXL.XElement el, string name,
+                                                     ColorRGB def)
         {
-            return XmlUtil.GetAttributeValue(el, name, def, Drawing.ColorRGB.ParseWebColor);
+            return XmlUtil.GetAttributeValue(el, name, def, ColorRGB.ParseWebColor);
         }
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)

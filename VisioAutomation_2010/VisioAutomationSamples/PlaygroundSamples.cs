@@ -3,6 +3,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
+using VisioAutomation.Colors;
 using GRIDMODEL = VisioAutomation.Models.Grid;
 
 namespace VisioAutomationSamples
@@ -55,7 +56,7 @@ namespace VisioAutomationSamples
             var shapes = centers.Select(p => PlaygroundSamples.draw_leaf(page, p)).ToList();
             var angles_as_formulas = angles.Select(a => a.ToString(CultureInfo.InvariantCulture)).ToList();
 
-            var color_formulas = colors.Select(x => new VA.Drawing.ColorRGB(x).ToFormula()).ToList();
+            var color_formulas = colors.Select(x => new ColorRGB(x).ToFormula()).ToList();
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
@@ -117,8 +118,8 @@ namespace VisioAutomationSamples
 
             layout.Render(page);
 
-            var color1 = new VA.Drawing.ColorRGB(0xffdddd);
-            var color2 = new VA.Drawing.ColorRGB(0x00ffff);
+            var color1 = new ColorRGB(0xffdddd);
+            var color2 = new ColorRGB(0x00ffff);
 
             var format = new VA.Shapes.FormatCells();
 
