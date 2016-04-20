@@ -160,7 +160,7 @@
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
-    <Compile Include="Shapes\StyleHelper.cs" />
+    <Compile Include="Styles\StyleHelper.cs" />
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
