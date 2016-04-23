@@ -318,7 +318,7 @@
     <Compile Include="Internal\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
-    <Compile Include="Internal\BitArray2D.cs" />
+    <Compile Include="Shapes\Connections\BitArray2D.cs" />
     <Compile Include="Colors\ColorRGB.cs" />
     <Compile Include="Drawing\SnappingGrid.cs" />
     <Compile Include="Drawing\Point.cs" />
