@@ -315,7 +315,7 @@
     <Compile Include="ShapeSheet\Update.cs" />
     <Compile Include="ShapeSheet\FormulaLiteral.cs" />
     <Compile Include="Internal\TreeOps.cs" />
-    <Compile Include="Internal\ArcSegment.cs" />
+    <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
     <Compile Include="Shapes\Connections\BitArray2D.cs" />

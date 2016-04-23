@@ -98,7 +98,7 @@ namespace VisioAutomation.Drawing
             return bez_arr;
         }
 
-        private static IEnumerable<Internal.ArcSegment> subdivide_arc_nicely(double start_angle, double end_angle)
+        private static IEnumerable<ArcSegment> subdivide_arc_nicely(double start_angle, double end_angle)
         {
             // TODO: Should calculate number of subarcs without resorting to an enumeration
 
@@ -113,7 +113,7 @@ namespace VisioAutomation.Drawing
 
             double right_angle = System.Math.PI/2;
 
-            var cur = new Internal.ArcSegment(start_angle, end_angle);
+            var cur = new ArcSegment(start_angle, end_angle);
             while (true)
             {
                 double temp = System.Math.Floor(cur.begin/right_angle);
@@ -121,8 +121,8 @@ namespace VisioAutomation.Drawing
 
                 if ((cur.begin < cut_angle) && (cut_angle < cur.end))
                 {
-                    yield return (new Internal.ArcSegment(cur.begin, cut_angle));
-                    cur = new Internal.ArcSegment(cut_angle, cur.end);
+                    yield return (new ArcSegment(cur.begin, cut_angle));
+                    cur = new ArcSegment(cut_angle, cur.end);
                 }
                 else
                 {
