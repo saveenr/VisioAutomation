@@ -186,7 +186,7 @@
     <Compile Include="Models\DirectedGraph\LayoutDirection.cs" />
     <Compile Include="Models\DirectedGraph\ShapeList.cs" />
     <Compile Include="Models\DirectedGraph\IDList.cs" />
-    <Compile Include="Models\DirectedGraph\MSAGLLayoutOptions.cs" />
+    <Compile Include="Models\DirectedGraph\MsaglLayoutOptions.cs" />
     <Compile Include="Models\BoxLayout\AlignmentHorizontal.cs" />
     <Compile Include="Models\BoxLayout\AlignmentVertical.cs" />
     <Compile Include="Models\BoxLayout\BoxLayout.cs" />
