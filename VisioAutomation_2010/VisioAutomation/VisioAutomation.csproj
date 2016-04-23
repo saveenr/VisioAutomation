@@ -206,7 +206,7 @@
     <Compile Include="Models\DirectedGraph\Shape.cs" />
     <Compile Include="Models\Charting\PieChart.cs" />
     <Compile Include="Models\Tree\ConnectorType.cs" />
-    <Compile Include="Internal\MasterLoader.cs" />
+    <Compile Include="Masters\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Shapes\FormatCells.cs" />
     <Compile Include="Models\Charting\PieSlice.cs" />

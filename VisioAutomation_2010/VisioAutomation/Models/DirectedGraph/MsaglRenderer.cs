@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.Masters;
 using MSAGL = Microsoft.Msagl;
 using VA = VisioAutomation;
 
@@ -206,7 +207,7 @@ namespace VisioAutomation.Models.DirectedGraph
             var master_to_size = new Dictionary<IVisio.Master, VA.Drawing.Size>();
 
             // Load and cache all the masters
-            var loader = new Internal.MasterLoader();
+            var loader = new MasterLoader();
             foreach (var layout_shape in layout_diagram.Shapes)
             {
                 loader.Add(layout_shape.MasterName,layout_shape.StencilName);                

@@ -5,6 +5,7 @@ using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Collections;
+using VisioAutomation.Masters;
 
 namespace VisioAutomation.DOM
 {
@@ -226,7 +227,7 @@ namespace VisioAutomation.DOM
                 .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
 
-            var loader = new Internal.MasterLoader();
+            var loader = new MasterLoader();
             foreach (var shape_node in shape_nodes)
             {
                 loader.Add(shape_node.Master.MasterName,shape_node.Master.StencilName);
