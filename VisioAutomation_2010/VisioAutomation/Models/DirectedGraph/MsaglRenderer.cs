@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using isioAutomation.Models.DirectedGraph;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VisioAutomation.Masters;
@@ -265,7 +266,7 @@ namespace VisioAutomation.Models.DirectedGraph
         private void CreateDOMShapes(DOM.ShapeList domshapeslist, MSAGL.Core.Layout.GeometryGraph mg_graph, IVisio.Application app)
         {
             var node_centerpoints = mg_graph.Nodes
-                    .Select(n => this.ToDocumentCoordinates(Internal.MsaglUtil.ToVAPoint(n.Center)))
+                    .Select(n => this.ToDocumentCoordinates(MsaglUtil.ToVAPoint(n.Center)))
                     .ToArray();
 
             // Load up all the stencil docs
@@ -358,7 +359,7 @@ namespace VisioAutomation.Models.DirectedGraph
                 {
                     // this is a bezier connector
                     // draw a manual box instead
-                    var label_bb = this.ToDocumentCoordinates(Internal.MsaglUtil.ToVARectangle(mg_edge.Label.BoundingBox));
+                    var label_bb = this.ToDocumentCoordinates(MsaglUtil.ToVARectangle(mg_edge.Label.BoundingBox));
                     var vshape = new DOM.Rectangle(label_bb);
                     domshapes.Add(vshape);
 
@@ -486,7 +487,7 @@ namespace VisioAutomation.Models.DirectedGraph
         private DOM.BezierCurve draw_edge_bezier(MSAGL.Core.Layout.Edge edge)
         {
             var final_bez_points =
-                Internal.MsaglUtil.ToVAPoints(edge).Select(p => this.ToDocumentCoordinates(p)).ToList();
+                MsaglUtil.ToVAPoints(edge).Select(p => this.ToDocumentCoordinates(p)).ToList();
 
             var bez_shape = new DOM.BezierCurve(final_bez_points);
             return bez_shape;
