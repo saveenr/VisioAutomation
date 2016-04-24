@@ -27,7 +27,6 @@ namespace TestVisioAutomation.Scripting
             
             // Cleanup
             client.Document.Close(true);
-            var application = client.Application.Get();
         }
 
         [TestMethod]
