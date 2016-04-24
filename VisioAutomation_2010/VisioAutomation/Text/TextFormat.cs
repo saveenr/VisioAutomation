@@ -261,23 +261,23 @@ namespace VisioAutomation.Text
             var paracells = ParagraphCells.GetCells(page, shapeids);
             var textblockcells = TextBlockCells.GetCells(page, shapeids);
             var page_shapes = page.Shapes;
-            var l = new List<TextFormat>(shapeids.Count);
+            var formats = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)
             {
-                var t = new TextFormat();
-                t.CharacterFormats = charcells[i];
-                t.ParagraphFormats = paracells[i];
-                t.TextBlock = textblockcells[i];
-                l.Add(t);
+                var format = new TextFormat();
+                format.CharacterFormats = charcells[i];
+                format.ParagraphFormats = paracells[i];
+                format.TextBlock = textblockcells[i];
+                formats.Add(format);
 
                 var shape = page_shapes.ItemFromID[shapeids[i]];
-                t.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-                t.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+                format.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+                format.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
 
-                t.TabStops = TextFormat.GetTabStops(shape);
+                format.TabStops = TextFormat.GetTabStops(shape);
             }
 
-            return l;
+            return formats;
         }
     }
 }
