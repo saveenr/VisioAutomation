@@ -20,17 +20,22 @@
 
         private void CheckValidVisioHSL()
         {
-            if (this.H > 255)
+            CheckValidVisioHSL(this.H,this.S,this.L);
+        }
+
+        private static void CheckValidVisioHSL(byte h, byte s, byte l)
+        {
+            if (h > 255)
             {
-                throw new System.ArgumentOutOfRangeException("h", "h must be <=255");
+                throw new System.ArgumentOutOfRangeException(nameof(h), "Visio Hue value must be <=255");
             }
-            if (this.S > 240)
+            if (s > 240)
             {
-                throw new System.ArgumentOutOfRangeException("s", "s must be <=240");
+                throw new System.ArgumentOutOfRangeException(nameof(s), "Visio saturation value must be <=240");
             }
-            if (this.L > 240)
+            if (l > 240)
             {
-                throw new System.ArgumentOutOfRangeException("l", "l must be <=240");
+                throw new System.ArgumentOutOfRangeException(nameof(l), "Visio lumincance value must be <=240");
             }
         }
 
@@ -70,10 +75,6 @@
             return this.ToHSLBytes();
         }
 
-        /// <summary>
-        /// Returns an int containing RGB values.
-        /// </summary>
-        /// <returns></returns>
         private int ToHSLBytes()
         {
             return (this.H << 16) | (this.S << 8) | (this.L);
