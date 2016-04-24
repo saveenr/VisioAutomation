@@ -111,7 +111,8 @@ namespace TestVisioAutomation.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VA.Drawing.Size(4, 4), false);
+            var pagesize = new VA.Drawing.Size(4, 4);
+            client.Page.New(pagesize, false);
 
             var shape_rect = client.Draw.Rectangle(1, 1, 3, 3);
             var shape_line = client.Draw.Line(0.5, 0.5, 3.5, 3.5);
@@ -176,10 +177,10 @@ namespace TestVisioAutomation.Scripting
             double radius = 1.0;
             
             var chart = new VisioAutomation.Models.Charting.PieChart(center, radius);
-            chart.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(1.0));
-            chart.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(2.0));
-            chart.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(3.0));
-            chart.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(4.0));
+            chart.DataPoints.Add(1.0);
+            chart.DataPoints.Add(2.0);
+            chart.DataPoints.Add(3.0);
+            chart.DataPoints.Add(4.0);
 
             // Create the Page
             var client = this.GetScriptingClient();
@@ -544,6 +545,5 @@ namespace TestVisioAutomation.Scripting
             // cleanup
             client.Document.Close(true);
         }
-
     }
 }
