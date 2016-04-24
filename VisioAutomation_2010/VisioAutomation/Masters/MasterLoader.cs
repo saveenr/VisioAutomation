@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -70,7 +71,7 @@ namespace VisioAutomation.Masters
                 var stencil_doc = docs.OpenStencil(stencil);
                 if (stencil_doc == null)
                 {
-                    string msg = $"Failed to open stencil \"{stencil}\"";
+                    string msg = String.Format("Failed to open stencil \"{0}\"", stencil);
                     throw new AutomationException(msg);
                 }
 
@@ -92,7 +93,8 @@ namespace VisioAutomation.Masters
                         if (master_object == null)
                         {
                             string msg =
-                                $"No such master \"{master_ref.MasterName}\" in stencil \"{master_ref.StencilName}\"";
+                                String.Format("No such master \"{0}\" in stencil \"{1}\"", master_ref.MasterName,
+                                    master_ref.StencilName);
                             throw new AutomationException(msg);
                         }
                         master_ref.VisioMaster = master_object;                        
@@ -108,7 +110,8 @@ namespace VisioAutomation.Masters
                         if (master_object == null)
                         {
                             string msg =
-                                $"No such master \"{master_ref.MasterName}\" in Active Document \"{stencildoc.Name}\"";
+                                String.Format("No such master \"{0}\" in Active Document \"{1}\"", master_ref.MasterName,
+                                    stencildoc.Name);
                             throw new AutomationException(msg);
                         }
                         master_ref.VisioMaster = master_object;

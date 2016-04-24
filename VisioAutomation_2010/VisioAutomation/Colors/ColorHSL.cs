@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.Colors
+﻿using System;
+
+namespace VisioAutomation.Colors
 {
     public struct ColorHSL
     {
@@ -83,7 +85,7 @@
         public string ToFormula()
         {
             this.CheckValidVisioHSL();
-            string formula = $"HSL({this.H},{this.S},{this.L})";
+            string formula = String.Format("HSL({0},{1},{2})", this.H, this.S, this.L);
             return formula;
         }
     }

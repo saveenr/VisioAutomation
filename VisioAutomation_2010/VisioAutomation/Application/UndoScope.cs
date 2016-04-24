@@ -1,3 +1,4 @@
+using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Application
@@ -19,7 +20,7 @@ namespace VisioAutomation.Application
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                string msg = $"{"name"} cannot be null or empty";
+                string msg = String.Format("{0} cannot be null or empty", "name");
                 throw new System.ArgumentException(msg,nameof(name));
             }
 
@@ -43,7 +44,7 @@ namespace VisioAutomation.Application
         /// <returns></returns>
         public override string ToString()
         {
-            string s = $"UndoScope(Name=\"{this.Name}\",ScopeID={this.ScopeID})";
+            string s = String.Format("UndoScope(Name=\"{0}\",ScopeID={1})", this.Name, this.ScopeID);
             return s;
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -186,7 +187,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             if (section == null)
             {
-                string msg = $"Could not find the user-defined section for shape {shape.NameU}";
+                string msg = String.Format("Could not find the user-defined section for shape {0}", shape.NameU);
                 throw new AutomationException(msg);
             }
 
@@ -258,7 +259,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             if (!UserDefinedCellsHelper.IsValidName(name))
             {
-                string msg = $"Invalid Name for User-Defined Cell: \"{name}\"";
+                string msg = String.Format("Invalid Name for User-Defined Cell: \"{0}\"", name);
                 throw new AutomationException(msg);
             }
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -366,7 +367,7 @@ namespace VisioAutomation.Scripting.Commands
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
             var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope($"Duplicate Shape {n} Times"))
+            using (var undoscope = this._client.Application.NewUndoScope(String.Format("Duplicate Shape {0} Times", n)))
             {
                 var active_window = application.ActiveWindow;
                 var selection = active_window.Selection;
@@ -429,7 +430,8 @@ namespace VisioAutomation.Scripting.Commands
 
             if (duplicated_shapes.Count != n)
             {
-                string msg = $"internal error: failed to create {n} shapes, instead created {duplicated_shapes.Count}";
+                string msg = String.Format("internal error: failed to create {0} shapes, instead created {1}", n,
+                    duplicated_shapes.Count);
                 throw new VisioOperationException(msg);
             }
 

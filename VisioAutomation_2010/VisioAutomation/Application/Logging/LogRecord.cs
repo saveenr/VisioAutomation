@@ -1,3 +1,5 @@
+using System;
+
 namespace VisioAutomation.Application.Logging
 {
     public class LogRecord
@@ -9,7 +11,7 @@ namespace VisioAutomation.Application.Logging
 
         public override string ToString()
         {
-            return $"{this.Type}:{this.SubType}";
+            return String.Format("{0}:{1}", this.Type, this.SubType);
         }
     }
 }

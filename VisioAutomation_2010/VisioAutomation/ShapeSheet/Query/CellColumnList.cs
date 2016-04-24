@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -112,7 +113,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (string.IsNullOrEmpty(name))
             {
-                name = $"Col{this._items.Count}";
+                name = String.Format("Col{0}", this._items.Count);
             }
             return name;
         }

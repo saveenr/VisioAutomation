@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -255,7 +256,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!System.IO.File.Exists(abs_filename))
             {
-                string msg = $"File \"{abs_filename}\"does not exist";
+                string msg = String.Format("File \"{0}\"does not exist", abs_filename);
                 throw new System.ArgumentException(msg, nameof(filename));
             }
 

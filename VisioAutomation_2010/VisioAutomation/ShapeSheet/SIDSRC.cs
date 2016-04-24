@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -38,7 +39,7 @@ namespace VisioAutomation.ShapeSheet
         
         public override string ToString()
         {
-            return $"({this.ID},{this.Section},{this.Row},{this.Cell})";
+            return String.Format("({0},{1},{2},{3})", this.ID, this.Section, this.Row, this.Cell);
         }
 
         public static short [] ToStream(IList<SIDSRC> sidsrcs)

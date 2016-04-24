@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -30,7 +31,7 @@ namespace VisioPowerShell.Commands.Get
             Get_VisioPageCell.EnsureEnoughCellNames(this.Cells);
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
             var v = string.Join(",", cellmap.GetNames());
-            this.WriteVerbose($"Valid Names: {v}");
+            this.WriteVerbose(String.Format("Valid Names: {0}", v));
             var query = cellmap.CreateQueryFromCellNames(this.Cells);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();

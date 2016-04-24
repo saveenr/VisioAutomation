@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties
@@ -55,7 +56,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             var current_culture = System.Globalization.CultureInfo.CurrentCulture;
             string formatted_dt = value.ToString(current_culture);
-            this.Value = $"DATETIME(\"{formatted_dt}\")";
+            this.Value = String.Format("DATETIME(\"{0}\")", formatted_dt);
             this.Type = 5;
         }
 
@@ -165,7 +166,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             }
             else
             {
-                string msg = $"Unsupported type for value \"{value}\" \"{value.GetType()}\"";
+                string msg = String.Format("Unsupported type for value \"{0}\" \"{1}\"", value, value.GetType());
                 throw new System.ArgumentOutOfRangeException(msg);
             }
         }

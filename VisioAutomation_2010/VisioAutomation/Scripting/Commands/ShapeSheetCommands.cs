@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VAQUERY = VisioAutomation.ShapeSheet.Query;
@@ -73,7 +74,7 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var src in srcs)
             {
-                string colname = $"Col{ci}";
+                string colname = String.Format("Col{0}", ci);
                 query.AddCell(src, colname);
                 ci++;
             }
@@ -97,7 +98,7 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var src in srcs)
             {
-                string colname = $"Col{ci}";
+                string colname = String.Format("Col{0}", ci);
                 query.AddCell(src, colname);
                 ci++;
             }
@@ -122,7 +123,7 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var cell in cells)
             {
-                string name = $"Cell{ci}";
+                string name = String.Format("Cell{0}", ci);
                 sec.AddCell((short)cell, name);
                 ci++;
             }
@@ -147,7 +148,7 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var cell in cells)
             {
-                string name = $"Cell{ci}";
+                string name = String.Format("Cell{0}", ci);
                 sec.AddCell((short)cell, name);
                 ci++;
             }
@@ -193,7 +194,8 @@ namespace VisioAutomation.Scripting.Commands
             if (formulas.Count != srcs.Count)
             {
                 string msg =
-                    $"SetFormula: Must have the same number of srcs ({srcs.Count}) and formulas ({formulas.Count})";
+                    String.Format("SetFormula: Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count,
+                        formulas.Count);
                 throw new System.ArgumentException(msg, nameof(formulas));
             }
 
@@ -258,7 +260,8 @@ namespace VisioAutomation.Scripting.Commands
 
             if (results.Count != srcs.Count)
             {
-                string msg = $"Must have the same number of srcs ({srcs.Count}) and results ({results.Count})";
+                string msg = String.Format("Must have the same number of srcs ({0}) and results ({1})", srcs.Count,
+                    results.Count);
                 throw new System.ArgumentException(msg,nameof(results));
             }
 

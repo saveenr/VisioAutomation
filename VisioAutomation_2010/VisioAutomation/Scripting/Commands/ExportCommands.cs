@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -92,7 +93,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     bkgnd = "(Background)";
                 }
-                string page_filname = $"{fbase}_{page_index}_{page.Name}{bkgnd}{ext}";
+                string page_filname = String.Format("{0}_{1}_{2}{3}{4}", fbase, page_index, page.Name, bkgnd, ext);
 
                 this._client.WriteUser("file {0}", page_filname);
                 page_filname = System.IO.Path.Combine(pbase, page_filname);
@@ -136,7 +137,7 @@ namespace VisioAutomation.Scripting.Commands
             var load_svg_timer = new System.Diagnostics.Stopwatch();
             var svg_doc = SXL.XDocument.Load(svg_filename);
             load_svg_timer.Stop();
-            verboselog($"Finished SVG Loading ({load_svg_timer.Elapsed.TotalSeconds} seconds)");
+            verboselog(String.Format("Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds));
 
             // Delete temp SVG
             if (System.IO.File.Exists(svg_filename))
@@ -148,7 +149,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (System.IO.File.Exists(filename))
             {
-                verboselog($"Deleting \"{filename}\"");
+                verboselog(String.Format("Deleting \"{0}\"", filename));
                 System.IO.File.Delete(filename);
             }
 
@@ -163,7 +164,7 @@ namespace VisioAutomation.Scripting.Commands
             body.Add(svg_node);
 
             xhtml_doc.Save(filename);
-            verboselog($"Done writing XHTML file \"{filename}\"");
+            verboselog(String.Format("Done writing XHTML file \"{0}\"", filename));
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -33,13 +34,13 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Layer layer = null;
             try
             {
-                this._client.WriteVerbose("Trying to find Layer named \"{0}\"",layername);
+                this._client.WriteVerbose("Trying to find layer named \"{0}\"",layername);
                 var layers = page.Layers;
                 layer = layers.ItemU[layername];
             }
             catch (System.Runtime.InteropServices.COMException)
             {
-                string msg = $"No such layer \"{layername}\"";
+                string msg = String.Format("No layer with name \"{0}\"", layername);
                 throw new VisioOperationException(msg);
             }
             return layer;

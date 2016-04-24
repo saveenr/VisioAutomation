@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -79,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             catch (System.Runtime.InteropServices.COMException)
             {
-                string msg = $"No such master \"{name}\"";
+                string msg = String.Format("No such master \"{0}\"", name);
                 throw new VisioOperationException(msg);
             }
             return master;
@@ -107,7 +108,7 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Master masterobj = this.TryGetMaster(masters, master);
             if (masterobj == null)
             {
-                string msg = $"No such master \"{master}\" in \"{doc}\"";
+                string msg = String.Format("No such master \"{0}\" in \"{1}\"", master, doc);
                 throw new VisioOperationException(msg);
             }
 

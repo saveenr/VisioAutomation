@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -106,7 +107,8 @@ namespace VisioAutomation.Models.ContainerLayout
             if (!this.IsLayedOut)
             {
                 string msg =
-                    $"{typeof (ContainerLayout).Name} usage error. Call PerformLayout() before calling Render().";
+                    String.Format("{0} usage error. Call PerformLayout() before calling Render().",
+                        typeof (ContainerLayout).Name);
                 throw new AutomationException(msg);
             }
             // create a new drawing

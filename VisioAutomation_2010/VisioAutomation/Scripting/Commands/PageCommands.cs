@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -179,7 +180,7 @@ namespace VisioAutomation.Scripting.Commands
             var names = new HashSet<string>(pages.GetNamesU());
             if (!names.Contains(background_page_name))
             {
-                string msg = $"Could not find page with name \"{background_page_name}\"";
+                string msg = String.Format("Could not find page with name \"{0}\"", background_page_name);
                 throw new VisioOperationException(msg);
             }
 
@@ -190,7 +191,7 @@ namespace VisioAutomation.Scripting.Commands
             // Check that the intended background is indeed a background page
             if (bgpage.Background == 0)
             {
-                string msg = $"Page \"{bgpage.Name}\" is not a background page";
+                string msg = String.Format("Page \"{0}\" is not a background page", bgpage.Name);
                 throw new VisioOperationException(msg);
             }
 

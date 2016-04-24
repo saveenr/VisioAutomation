@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -35,7 +36,7 @@ namespace VisioAutomation.Application
                 return path;
             }
 
-            string msg = $"VisioAutomation does not support Visio version {ver.Major}";
+            string msg = String.Format("VisioAutomation does not support Visio version {0}", ver.Major);
             throw new System.ArgumentException(msg);
         }
 

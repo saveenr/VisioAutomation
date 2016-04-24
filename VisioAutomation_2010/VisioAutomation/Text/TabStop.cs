@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.Text
+﻿using System;
+
+namespace VisioAutomation.Text
 {
     public struct TabStop
     {
@@ -13,7 +15,7 @@
 
         public override string ToString()
         {
-            string s = $"(Position={this.Position},Alignment={this.Alignment})";
+            string s = String.Format("(Position={0},Alignment={1})", this.Position, this.Alignment);
             return s;
         }
     }

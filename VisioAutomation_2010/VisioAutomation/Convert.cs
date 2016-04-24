@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation
+﻿using System;
+
+namespace VisioAutomation
 {
     public static class Convert
     {
@@ -54,7 +56,7 @@
                 return s;
             }
 
-            string result = $"\"{s.Replace(Convert.quote, Convert.quotequote)}\"";
+            string result = String.Format("\"{0}\"", s.Replace(Convert.quote, Convert.quotequote));
             return result;
         }
 

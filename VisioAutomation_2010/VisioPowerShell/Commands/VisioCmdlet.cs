@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using SMA = System.Management.Automation;
 
@@ -65,7 +66,7 @@ namespace VisioPowerShell.Commands
 
         protected void DumpValues(CellValueDictionary cellvalues)
         {
-            this.WriteVerbose($"CellValues contains {cellvalues.CellNames.Count} items");
+            this.WriteVerbose(String.Format("CellValues contains {0} items", cellvalues.CellNames.Count));
             foreach (var cellname in cellvalues.CellNames)
             {
                 string cell_value = cellvalues[cellname];

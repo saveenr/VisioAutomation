@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -30,7 +31,7 @@ namespace VisioAutomation.ShapeSheet
 
         public override string ToString()
         {
-            return $"({this.Section},{this.Row},{this.Cell})";
+            return String.Format("({0},{1},{2})", this.Section, this.Row, this.Cell);
         }
 
         public SRC ForRow(short row) => new SRC(this.Section, row, this.Cell);

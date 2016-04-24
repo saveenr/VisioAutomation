@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 
@@ -21,7 +22,7 @@ namespace VisioAutomation.Scripting
 
             if (!cmdsettype.IsAssignableFrom(mytype))
             {
-                string msg = $"{mytype.Name} must derive from {cmdsettype.Name}";
+                string msg = String.Format("{0} must derive from {1}", mytype.Name, cmdsettype.Name);
             }
 
             var methods = mytype.GetMethods().Where(m => m.IsPublic && !m.IsStatic);

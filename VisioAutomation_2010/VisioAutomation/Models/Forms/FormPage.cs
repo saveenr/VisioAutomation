@@ -1,3 +1,4 @@
+using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Forms
@@ -71,7 +72,7 @@ namespace VisioAutomation.Models.Forms
 
         private static string get_pt_string(double size)
         {
-            return $"{size}pt";
+            return String.Format("{0}pt", size);
         }
     }
 }

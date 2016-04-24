@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace VisioAutomation.Colors
 {
@@ -105,7 +106,7 @@ namespace VisioAutomation.Colors
             var c = ColorRGB.TryParseWebColor(webcolor);
             if (!c.HasValue)
             {
-                string s = $"Failed to parse color string \"{webcolor}\"";
+                string s = string.Format("Failed to parse color string \"{0}\"", webcolor);
                 throw new AutomationException(s);
             }
 
@@ -189,7 +190,7 @@ namespace VisioAutomation.Colors
 
         public string ToFormula()
         {
-            string formula = $"RGB({this.R},{this.G},{this.B})";
+            string formula = String.Format("RGB({0},{1},{2})", this.R, this.G, this.B);
             return formula;
         }        
     }

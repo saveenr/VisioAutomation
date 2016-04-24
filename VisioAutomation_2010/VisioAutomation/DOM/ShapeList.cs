@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
@@ -355,7 +356,7 @@ namespace VisioAutomation.DOM
 
                 else
                 {
-                    string msg = $"Internal Error: Unhandled DOM node type: {shape.GetType()}";
+                    string msg = String.Format("Internal Error: Unhandled DOM node type: {0}", shape.GetType());
                     throw new AutomationException(msg);
                 }
             }

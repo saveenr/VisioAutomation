@@ -1,3 +1,4 @@
+using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Connections
@@ -33,11 +34,11 @@ namespace VisioAutomation.Shapes.Connections
             if (this.Connector != null)
             {
                 var connector_name = this.Connector.NameU;
-                return $"({connector_name}:{from_name}->{to_name})";                
+                return String.Format("({0}:{1}->{2})", connector_name, from_name, to_name);                
             }
             else
             {
-                return $"({from_name}->{to_name})";
+                return String.Format("({0}->{1})", from_name, to_name);
             }
         }
     }

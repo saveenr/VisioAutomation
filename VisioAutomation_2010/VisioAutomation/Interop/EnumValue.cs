@@ -1,3 +1,5 @@
+using System;
+
 namespace VisioAutomation.Interop
 {
     public class EnumValue
@@ -13,7 +15,7 @@ namespace VisioAutomation.Interop
 
         public override string ToString()
         {
-            return $"{this.Name},{this.Value}";
+            return String.Format("{0},{1}", this.Name, this.Value);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace VisioAutomation.Drawing
@@ -29,7 +30,7 @@ namespace VisioAutomation.Drawing
 
             if (points.Count != 4)
             {
-                string msg = $"A {typeof (BezierSegment)} must have exactly 4 points";
+                string msg = String.Format("A {0} must have exactly 4 points", typeof (BezierSegment));
                 throw new System.ArgumentException(msg, nameof(points));
             }
 

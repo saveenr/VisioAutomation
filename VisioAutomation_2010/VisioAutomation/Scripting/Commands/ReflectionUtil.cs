@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -201,7 +202,7 @@ namespace VisioAutomation.Scripting.Commands
             if (type.IsArray)
             {
                 var at = type.GetElementType();
-                return $"{ReflectionUtil.GetNiceTypeName(at, options)}[]";
+                return String.Format("{0}[]", ReflectionUtil.GetNiceTypeName(at, options));
             }
 
             if (type.IsGenericType)

@@ -1,3 +1,5 @@
+using System;
+
 namespace VisioAutomation.ShapeSheet
 {
     public struct CellData<TResult>
@@ -15,7 +17,7 @@ namespace VisioAutomation.ShapeSheet
         public override string ToString()
         {
             var fs = (this.Formula.HasValue) ? this.Formula.Value : "null";
-            return $"(\"{fs}\",{this.Result})";
+            return String.Format("(\"{0}\",{1})", fs, this.Result);
         }
 
         public static implicit operator CellData<TResult>(FormulaLiteral formula)
