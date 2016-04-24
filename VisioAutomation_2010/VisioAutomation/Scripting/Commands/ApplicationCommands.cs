@@ -61,7 +61,13 @@ namespace VisioAutomation.Scripting.Commands
                 // If you want to force the thing to close
                 // it will require closing all documents and then quiting
                 var documents = app.Documents;
-                Documents.DocumentHelper.ForceCloseAll(documents);
+
+                while (documents.Count > 0)
+                {
+                    var active_document = app.ActiveDocument;
+                    active_document.Close(true);
+                }
+
                 app.Quit(true);
             }
             else

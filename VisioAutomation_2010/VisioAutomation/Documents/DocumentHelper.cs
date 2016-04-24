@@ -6,22 +6,6 @@ namespace VisioAutomation.Documents
 {
     public static class DocumentHelper
     {
-        public static void ForceCloseAll(IVisio.Documents docs)
-        {
-            if (docs == null)
-            {
-                throw new System.ArgumentNullException(nameof(docs));
-            }
-
-            var application = docs.Application;
-
-            while (docs.Count > 0)
-            {
-                var active_document = application.ActiveDocument;
-                active_document.Close(true);
-            }
-        }
-
         public static IVisio.Document OpenStencil(IVisio.Documents docs, string filename)
         {
             var stencil = DocumentHelper.TryOpenStencil(docs, filename);
