@@ -50,31 +50,16 @@ namespace VisioAutomation.Colors
             return s;
         }
 
-        /// <summary>
-        /// a convenient explicit cast to System.Drawing.Color 
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
         public static explicit operator System.Drawing.Color(ColorRGB color)
         {
             return System.Drawing.Color.FromArgb(color._r, color._g, color._b);
         }
 
-        /// <summary>
-        /// a convenient explicit cast to an int
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
         public static explicit operator int(ColorRGB color)
         {
             return color.ToRGB();
         }
 
-        /// <summary>
-        /// a convenient explicit cast an int to a ColorRGB24Bit
-        /// </summary>
-        /// <param name="rgbint"></param>
-        /// <returns></returns>
         public static explicit operator ColorRGB(int rgbint)
         {
             return new ColorRGB(rgbint);
@@ -110,20 +95,11 @@ namespace VisioAutomation.Colors
             return this.ToRGB();
         }
 
-        /// <summary>
-        /// Returns an int containing RGB values.
-        /// </summary>
-        /// <returns></returns>
         public int ToRGB()
         {
             return (this._r << 16) | (this._g << 8) | (this._b);
         }
 
-        /// <summary>
-        /// Parses a web color string of form "#ffffff"
-        /// </summary>
-        /// <param name="webcolor"></param>
-        /// <returns></returns>
         public static ColorRGB ParseWebColor(string webcolor)
         {
             var c = ColorRGB.TryParseWebColor(webcolor);
@@ -136,26 +112,6 @@ namespace VisioAutomation.Colors
             return c.Value;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <example>
-        /// Sample usage:
-        ///
-        /// System.Drawing.Color c;
-        /// bool result = TryParseRGBWebColorString("#ffffff", ref c);
-        /// if (result)
-        /// {
-        ///    //it was correctly parsed
-        /// }
-        /// else
-        /// {
-        ///    //it was not correctly parsed
-        /// }
-        ///
-        /// </example>
-        /// <param name="webcolor"></param>
-        ///<returns></returns>
         public static ColorRGB? TryParseWebColor(string webcolor)
         {
             // fail if string is null
@@ -169,7 +125,6 @@ namespace VisioAutomation.Colors
             {
                 return null;
             }
-
 
             // clean any leading or trailing whitespace
             webcolor = webcolor.Trim();
