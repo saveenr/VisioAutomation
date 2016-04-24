@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace VisioAutomation
 {
-    public static class TextUtil
+    internal static class TextUtil
     {
         public static System.Text.RegularExpressions.Regex GetRegexForWildcardPattern(string wildcardpat, bool ignorecase)
         {
@@ -30,8 +30,7 @@ namespace VisioAutomation
         {
             return (s.Contains("*") || s.Contains("?"));
         }
-
-
+        
         public static IEnumerable<string> IncludeByName(IEnumerable<string> items, IList<string> patterns, bool ignorecase)
         {
             return TextUtil.FilterObjectsByNames(items, patterns, System.IO.Path.GetFileName, ignorecase, FilterAction.Include);

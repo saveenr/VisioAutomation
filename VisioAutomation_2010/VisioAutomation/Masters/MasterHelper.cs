@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Master
+namespace VisioAutomation.Masters
 {
     public static class MasterHelper
     {
