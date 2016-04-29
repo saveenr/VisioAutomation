@@ -6,8 +6,7 @@ namespace VisioAutomation.Pages.PageLayout
     {
         public CompactTreeDirection Direction { get; set; }
 
-        public CompactTreeLayout() :
-            base()
+        public CompactTreeLayout()
         {
             this.LayoutStyle = LayoutStyle.CompactTree;
             this.ConnectorStyle = ConnectorStyle.OrganizationChart;

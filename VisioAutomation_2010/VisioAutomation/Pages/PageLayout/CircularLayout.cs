@@ -4,8 +4,7 @@ namespace VisioAutomation.Pages.PageLayout
 {
     public class CircularLayout : Layout
     {
-        public CircularLayout() :
-            base()
+        public CircularLayout()
         {
             this.LayoutStyle = LayoutStyle.Circular;
             this.ConnectorStyle = ConnectorStyle.CenterToCenter;

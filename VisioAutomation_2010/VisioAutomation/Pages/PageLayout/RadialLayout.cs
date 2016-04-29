@@ -4,8 +4,7 @@ namespace VisioAutomation.Pages.PageLayout
 {
     public class RadialLayout : Layout
     {
-        public RadialLayout() :
-            base()
+        public RadialLayout()
         {
             this.LayoutStyle = LayoutStyle.Radial;
             this.ConnectorStyle = ConnectorStyle.RightAngle;

@@ -36,7 +36,8 @@ namespace VisioAutomation.Models.Charting
                 var slices = PieSlice.GetSlicesFromValues(this.Center, this.Radius, values);
                 foreach (var slice in slices)
                 {
-                    shapes.Add(slice.Render(page));
+                    var rendered_shape = slice.Render(page);
+                    shapes.Add(rendered_shape);
                 }
             }
             else
@@ -44,7 +45,8 @@ namespace VisioAutomation.Models.Charting
                 var slices = PieSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, values);
                 foreach (var slice in slices)
                 {
-                    shapes.Add(slice.Render(page));
+                    var rendered_shape = slice.Render(page);
+                    shapes.Add(rendered_shape);
                 }
             }
 

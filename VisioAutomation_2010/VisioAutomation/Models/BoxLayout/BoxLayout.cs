@@ -4,19 +4,13 @@ namespace VisioAutomation.Models.BoxLayout
 {
     public class BoxLayout
     {
-        private Container _root;
-
-        public Container Root
-        {
-            get { return this._root; }
-            set { this._root = value; }
-        }
+        public Container Root { get; set; }
 
         public IEnumerable<Node> Nodes
         {
             get
             {
-                Node rootn = this._root;
+                Node rootn = this.Root;
                 return Internal.TreeOps.PreOrder(rootn, n => n.GetChildren());
             }
         }
@@ -28,14 +22,14 @@ namespace VisioAutomation.Models.BoxLayout
                 throw new AutomationException("Root must contain at least one child");
             }
 
-            this._root.CalculateSize();
+            this.Root.CalculateSize();
             this.Place(new Drawing.Point(0, 0));
-            this._root.ReservedRectangle = this._root.Rectangle;
+            this.Root.ReservedRectangle = this.Root.Rectangle;
         }
 
         private void Place(Drawing.Point origin)
         {
-            this._root._place(origin);
+            this.Root._place(origin);
         }
     }
 }

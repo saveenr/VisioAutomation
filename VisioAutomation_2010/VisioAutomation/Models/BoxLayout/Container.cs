@@ -6,6 +6,7 @@ namespace VisioAutomation.Models.BoxLayout
     public class Container : Node, IEnumerable<Node>
     {
         private List<Node> m_children;
+
         public double PaddingTop { get; set; }
         public double PaddingLeft { get; set; }
         public double PaddingRight{ get; set; }
@@ -87,7 +88,8 @@ namespace VisioAutomation.Models.BoxLayout
 
         public int Count
         {
-            get {
+            get
+            {
                 return this.m_children == null ? 0 : this.m_children.Count;
             }
         }

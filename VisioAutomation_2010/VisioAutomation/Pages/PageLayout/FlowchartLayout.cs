@@ -6,8 +6,7 @@ namespace VisioAutomation.Pages.PageLayout
     {
         public Direction Direction { get; set; }
 
-        public FlowchartLayout() :
-            base()
+        public FlowchartLayout()
         {
             this.LayoutStyle = LayoutStyle.Flowchart;
             this.ConnectorStyle = ConnectorStyle.Flowchart;

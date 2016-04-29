@@ -8,8 +8,7 @@ namespace VisioAutomation.Pages.PageLayout
         public HorizontalAlignment HorizontalAlignment { get; set; }
         public VerticalAlignment VerticalAlignment { get; set; }
 
-        public HierarchyLayout() :
-            base()
+        public HierarchyLayout()
         {
             this.LayoutStyle = LayoutStyle.Hierarchy;
             this.ConnectorStyle = ConnectorStyle.OrganizationChart;
