@@ -52,7 +52,7 @@ namespace VisioAutomation.Models.Charting
 
             if (radius < 0.0)
             {
-                throw new System.ArgumentException("must be non-negative", "outer_radius");
+                throw new System.ArgumentException("must be non-negative", nameof(radius));
             }
 
             if (inner_radius > radius)

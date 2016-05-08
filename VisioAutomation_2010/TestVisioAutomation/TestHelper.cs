@@ -12,7 +12,7 @@ namespace TestVisioAutomation
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("name is null or empty","name");
+                throw new ArgumentException("name is null or empty", nameof(name));
             }
 
             this.OutputPath = TestHelper.GetOutputPathEx(name);

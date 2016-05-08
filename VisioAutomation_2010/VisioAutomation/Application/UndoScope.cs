@@ -20,7 +20,7 @@ namespace VisioAutomation.Application
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                string msg = String.Format("{0} cannot be null or empty", "name");
+                string msg = string.Format("{0} cannot be null or empty", nameof(UndoScope));
                 throw new System.ArgumentException(msg,nameof(name));
             }
 
@@ -44,7 +44,7 @@ namespace VisioAutomation.Application
         /// <returns></returns>
         public override string ToString()
         {
-            string s = String.Format("UndoScope(Name=\"{0}\",ScopeID={1})", this.Name, this.ScopeID);
+            string s = String.Format("{0}({1}=\"{2}\",{3}={4})", nameof(UndoScope), nameof(this.Name), this.Name, nameof(this.ScopeID), this.ScopeID);
             return s;
         }
     }

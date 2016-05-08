@@ -77,7 +77,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (connector_master == null && force_manual )
             {
-                throw new System.ArgumentNullException("if the connector object is null then force manual must be false");                
+                throw new System.ArgumentException("if the connector object is null then force manual must be false");                
             }
             // no_connector + force_manual -> INVALID
             // no_connector + not_force_manual -> AutoConect
@@ -127,7 +127,6 @@ namespace VisioAutomation.Shapes.Connections
                 var to_shape = toshapes[i];
                 var connector = con_shapes[i];
 
-                // Connect from Shape 1 to Shape2
                 ConnectorHelper.ConnectShapes(from_shape, to_shape, connector, true);
 
                 connectors.Add(connector);
