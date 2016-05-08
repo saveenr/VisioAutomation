@@ -1,8 +1,8 @@
 ﻿using VA = VisioAutomation;
-using IVisio=Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.DirectedGraph
-{   
+{
     public class Drawing
     {
         public ShapeList Shapes;
@@ -31,9 +31,9 @@ namespace VisioAutomation.Models.DirectedGraph
         }
 
         public Connector AddConnection(
-            string id, 
-            Shape from, 
-            Shape to, 
+            string id,
+            Shape from,
+            Shape to,
             string label,
              Shapes.Connections.ConnectorType type)
         {
@@ -46,17 +46,17 @@ namespace VisioAutomation.Models.DirectedGraph
             return new_connector;
         }
 
-	        public Connector AddConnection(string id, Shape from, Shape to, string label, string stencil_name, string master_name)
-   {
-       var new_connector = new Connector(from, to);
-       new_connector.ID = id;
-       new_connector.Label = label;
-       new_connector.StencilName = stencil_name;
-       new_connector.MasterName = master_name;
+        public Connector AddConnection(string id, Shape from, Shape to, string label, string stencil_name, string master_name)
+        {
+            var new_connector = new Connector(from, to);
+            new_connector.ID = id;
+            new_connector.Label = label;
+            new_connector.StencilName = stencil_name;
+            new_connector.MasterName = master_name;
 
-       this.Connectors.Add(id, new_connector);
-       return new_connector;
-   }
+            this.Connectors.Add(id, new_connector);
+            return new_connector;
+        }
 
         public Connector AddConnection(string id, Shape from, Shape to, string label,
             VA.Shapes.Connections.ConnectorType type, int beginArrow, int endArrow, string hyperlink)
@@ -83,8 +83,9 @@ namespace VisioAutomation.Models.DirectedGraph
             }
 
             this.Connectors.Add(id, new_connector);
-    return new_connector;
+            return new_connector;
         }
+
         public void Render(IVisio.Page page, VisioLayoutOptions options)
         {
             var vr = new VisioRenderer();
