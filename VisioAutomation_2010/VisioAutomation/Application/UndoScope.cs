@@ -39,7 +39,7 @@ namespace VisioAutomation.Application
         }
 
         /// <summary>
-        /// A human-readable description of the scop
+        /// A human-readable description of the scope
         /// </summary>
         /// <returns></returns>
         public override string ToString()
