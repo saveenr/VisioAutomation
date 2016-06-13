@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Masters
 {
     public static class MasterHelper
     {
-        public static Drawing.Rectangle GetBoundingBox(Microsoft.Office.Interop.Visio.Master master, Microsoft.Office.Interop.Visio.VisBoundingBoxArgs args)
+        public static Drawing.Rectangle GetBoundingBox(IVisio.Master master, IVisio.VisBoundingBoxArgs args)
         {
             // MSDN: http://msdn.microsoft.com/library/default.asp?url=/library/en-us/vissdk11/html/vimthBoundingBox_HV81900422.asp
             double bbx0, bby0, bbx1, bby1;
@@ -13,7 +14,7 @@ namespace VisioAutomation.Masters
             return r;
         }
 
-        public static IEnumerable<Microsoft.Office.Interop.Visio.Master> ToEnumerable(Microsoft.Office.Interop.Visio.Masters masters)
+        public static IEnumerable<IVisio.Master> ToEnumerable(IVisio.Masters masters)
         {
             short count = masters.Count;
             for (int i = 0; i < count; i++)
@@ -22,7 +23,7 @@ namespace VisioAutomation.Masters
             }
         }
 
-        public static string[] GetNamesU(Microsoft.Office.Interop.Visio.Masters masters)
+        public static string[] GetNamesU(IVisio.Masters masters)
         {
             System.Array names_sa;
             masters.GetNamesU(out names_sa);

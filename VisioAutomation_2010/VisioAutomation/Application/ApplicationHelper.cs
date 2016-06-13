@@ -15,7 +15,7 @@ namespace VisioAutomation.Application
             return version;
         }
 
-        public static string GetContentLocation(Microsoft.Office.Interop.Visio.Application app)
+        public static string GetContentLocation(IVisio.Application app)
         {
             var ver = ApplicationHelper.GetVersion(app);
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
@@ -40,7 +40,7 @@ namespace VisioAutomation.Application
             throw new System.ArgumentException(msg);
         }
 
-        public static string GetXMLErrorLogFilename(Microsoft.Office.Interop.Visio.Application app)
+        public static string GetXMLErrorLogFilename(IVisio.Application app)
         {
             // the location of the xml error log file is specific to the user
             // we need to retrieve it from the registry

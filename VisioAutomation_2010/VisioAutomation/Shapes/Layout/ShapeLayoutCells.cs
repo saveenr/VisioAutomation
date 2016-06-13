@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Layout
 {
@@ -49,13 +50,13 @@ namespace VisioAutomation.Shapes.Layout
         }
 
 
-        public static IList<ShapeLayoutCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
             return ShapeSheet.CellGroups.CellGroup._GetCells<ShapeLayoutCells, double>(page, shapeids, query, query.GetCells);
         }
 
-        public static ShapeLayoutCells GetCells(Microsoft.Office.Interop.Visio.Shape shape)
+        public static ShapeLayoutCells GetCells(IVisio.Shape shape)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
             return ShapeSheet.CellGroups.CellGroup._GetCells<ShapeLayoutCells, double>(shape, query, query.GetCells);

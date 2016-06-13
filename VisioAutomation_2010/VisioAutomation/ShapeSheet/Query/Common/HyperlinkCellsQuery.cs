@@ -1,4 +1,4 @@
-using System.Windows.Forms;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
 
         public HyperlinkCellsQuery()
         {
-            var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionHyperlink);
+            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionHyperlink);
 
             this.Address = sec.AddCell(SRCConstants.Hyperlink_Address , nameof(SRCConstants.Hyperlink_Address));
             this.Default = sec.AddCell(SRCConstants.Hyperlink_Default, nameof(SRCConstants.Hyperlink_Default));
