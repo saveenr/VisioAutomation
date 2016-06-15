@@ -37,25 +37,25 @@ namespace VisioAutomation.Text.Markup
             update.SetFormulaIgnoreNull(SRCCON.Para_BulletStr.ForRow(row), this.BulletString);
         }
 
-        public void ApplyFormulasTo(ParagraphCells other)
+        public void ApplyFormulasTo(ParagraphCells target)
         {
-            if (this.IndentFirst.HasValue) { other.IndentFirst = this.IndentFirst; }
-            if (this.IndentLeft.HasValue) { other.IndentLeft = this.IndentLeft; }
-            if (this.IndentRight.HasValue) { other.IndentRight = this.IndentRight; }
+            if (this.IndentFirst.HasValue) { target.IndentFirst = this.IndentFirst; }
+            if (this.IndentLeft.HasValue) { target.IndentLeft = this.IndentLeft; }
+            if (this.IndentRight.HasValue) { target.IndentRight = this.IndentRight; }
 
-            if (this.SpacingAfter.HasValue) { other.SpacingAfter = this.SpacingAfter; }
-            if (this.SpacingBefore.HasValue) { other.SpacingBefore = this.SpacingBefore; }
-            if (this.SpacingBefore.HasValue) { other.SpacingBefore = this.SpacingBefore; }
+            if (this.SpacingAfter.HasValue) { target.SpacingAfter = this.SpacingAfter; }
+            if (this.SpacingBefore.HasValue) { target.SpacingBefore = this.SpacingBefore; }
+            if (this.SpacingBefore.HasValue) { target.SpacingBefore = this.SpacingBefore; }
 
-            if (this.Bullet.HasValue) { other.Bullet = this.Bullet; }
-            if (this.BulletFont.HasValue) { other.BulletFont = this.BulletFont; }
-            if (this.BulletFontSize.HasValue) { other.BulletFontSize = this.BulletFontSize; }
+            if (this.Bullet.HasValue) { target.Bullet = this.Bullet; }
+            if (this.BulletFont.HasValue) { target.BulletFont = this.BulletFont; }
+            if (this.BulletFontSize.HasValue) { target.BulletFontSize = this.BulletFontSize; }
 
-            if (this.BulletString.HasValue) { other.BulletString = this.BulletString; }
-            if (this.Flags.HasValue) { other.Flags = this.Flags; }
-            if (this.HorizontalAlign.HasValue) { other.HorizontalAlign = this.HorizontalAlign; }
-            if (this.LocBulletFont.HasValue) { other.LocBulletFont = this.LocBulletFont; }
-            if (this.TextPosAfterBullet.HasValue) { other.TextPosAfterBullet = this.TextPosAfterBullet; }
+            if (this.BulletString.HasValue) { target.BulletString = this.BulletString; }
+            if (this.Flags.HasValue) { target.Flags = this.Flags; }
+            if (this.HorizontalAlign.HasValue) { target.HorizontalAlign = this.HorizontalAlign; }
+            if (this.LocBulletFont.HasValue) { target.LocBulletFont = this.LocBulletFont; }
+            if (this.TextPosAfterBullet.HasValue) { target.TextPosAfterBullet = this.TextPosAfterBullet; }
         }
     }
 }
