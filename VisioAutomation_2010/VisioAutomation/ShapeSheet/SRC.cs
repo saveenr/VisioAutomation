@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet
 
         public override string ToString()
         {
-            return String.Format("({0},{1},{2})", this.Section, this.Row, this.Cell);
+            return string.Format("({0},{1},{2})", this.Section, this.Row, this.Cell);
         }
 
         public SRC ForRow(short row) => new SRC(this.Section, row, this.Cell);

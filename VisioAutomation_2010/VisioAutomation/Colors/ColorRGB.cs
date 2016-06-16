@@ -190,7 +190,7 @@ namespace VisioAutomation.Colors
 
         public string ToFormula()
         {
-            string formula = String.Format("RGB({0},{1},{2})", this.R, this.G, this.B);
+            string formula = string.Format("RGB({0},{1},{2})", this.R, this.G, this.B);
             return formula;
         }        
     }

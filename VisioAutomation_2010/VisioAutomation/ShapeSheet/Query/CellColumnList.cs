@@ -113,7 +113,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (string.IsNullOrEmpty(name))
             {
-                name = String.Format("Col{0}", this._items.Count);
+                name = string.Format("Col{0}", this._items.Count);
             }
             return name;
         }

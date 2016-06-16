@@ -36,7 +36,7 @@ namespace VisioAutomation.Application
                 return path;
             }
 
-            string msg = String.Format("VisioAutomation does not support Visio version {0}", ver.Major, invariant_culture);
+            string msg = string.Format(invariant_culture,"VisioAutomation does not support Visio version {0}", ver.Major);
             throw new System.ArgumentException(msg);
         }
 
