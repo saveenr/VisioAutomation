@@ -84,7 +84,6 @@ namespace VisioAutomation.Application
 
         public static void Quit(IVisio.Application app, bool force_close)
         {
-            short old = app.AlertResponse;
             if (force_close)
             {
                 const short new_alert_response = 7;
