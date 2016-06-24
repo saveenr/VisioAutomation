@@ -20,7 +20,7 @@ namespace VisioAutomation.Application.Logging
 
             var state = LogState.Start;
 
-            List<string> lines = XmlErrorLog.GetLinesSharedRead(filename);
+            var lines = XmlErrorLog.GetLines(filename);
             lines.Reverse();
 
             var q = new Stack<string>( lines);
@@ -53,10 +53,11 @@ namespace VisioAutomation.Application.Logging
                         continue;
                     }
 
-                    if (line.StartsWith("Source:"))
+                    string text_source = "Source:";
+                    if (line.StartsWith(text_source))
                     {
                         var cur_session = this.GetMostRecentSession();
-                        cur_session.Source = line.Substring("Source:".Length).Trim();
+                        cur_session.Source = line.Substring(text_source.Length).Trim();
                     }
                     else if (line.EndsWith("Begin Session"))
                     {
@@ -93,21 +94,29 @@ namespace VisioAutomation.Application.Logging
                     {
                         state = LogState.InFileSession;
                     }
-                    else if (line.StartsWith("Context:"))
-                    {
-                        var session = this.GetMostRecentSession();
-                        var rec = session.Records[session.Records.Count - 1];
-                        rec.Context = line.Substring("Context:".Length);
-                    }
-                    else if (line.StartsWith("Description:"))
-                    {
-                        var session = this.GetMostRecentSession();
-                        var rec = session.Records[session.Records.Count - 1];
-                        rec.Description = line.Substring("Description:".Length);
-                    }
                     else
                     {
-                        throw new ArgumentException();
+                        string text_context = "Context:";
+                        if (line.StartsWith(text_context))
+                        {
+                            var session = this.GetMostRecentSession();
+                            var rec = session.Records[session.Records.Count - 1];
+                            rec.Context = line.Substring(text_context.Length);
+                        }
+                        else
+                        {
+                            string text_description = "Description:";
+                            if (line.StartsWith(text_description))
+                            {
+                                var session = this.GetMostRecentSession();
+                                var rec = session.Records[session.Records.Count - 1];
+                                rec.Description = line.Substring(text_description.Length);
+                            }
+                            else
+                            {
+                                throw new ArgumentException();
+                            }
+                        }
                     }
                 }
                 else
@@ -158,7 +167,7 @@ namespace VisioAutomation.Application.Logging
             return this.FileSessions[this.FileSessions.Count - 1];
         }
 
-        private static List<string> GetLinesSharedRead(string filename)
+        private static List<string> GetLines(string filename)
         {
             var lines = new List<string>();
             using (
