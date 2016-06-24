@@ -105,17 +105,17 @@ namespace VisioAutomation.Application.Logging
                         }
                         else
                         {
-                            string text_description = "Description:";
-                            if (line.StartsWith(text_description))
-                            {
-                                var session = this.GetMostRecentSession();
-                                var rec = session.Records[session.Records.Count - 1];
-                                rec.Description = line.Substring(text_description.Length);
-                            }
-                            else
+
+                            string description = GetStringAfterStartsWith(line, "Description:");
+
+                            if (description == null)
                             {
                                 throw new ArgumentException();
                             }
+
+                            var session = this.GetMostRecentSession();
+                            var rec = session.Records[session.Records.Count - 1];
+                            rec.Description = description;
                         }
                     }
                 }
@@ -124,6 +124,16 @@ namespace VisioAutomation.Application.Logging
                     throw new ArgumentException();                    
                 }
             }
+        }
+
+        private static string GetStringAfterStartsWith(string line, string text_context)
+        {
+            if (line.StartsWith(text_context))
+            {
+                string result = line.Substring(text_context.Length);
+                return result;
+            }
+            return null;
         }
 
         private LogState StartRecord(string line, LogState state)

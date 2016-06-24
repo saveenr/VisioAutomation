@@ -5,7 +5,7 @@ namespace TestVisioAutomation.ImportExport
 {
 
     [TestClass]
-    public class XmlErrorLog_Tests2 : VisioAutomationTest
+    public class XmlErrorLog_Tests : VisioAutomationTest
     {
         [TestMethod]
         [DeploymentItem(@"datafiles\VSDX_Log_Visio_2013.txt", "datafiles")]
@@ -19,11 +19,7 @@ namespace TestVisioAutomation.ImportExport
 
 
         }
-    }
 
-    [TestClass]
-    public class XmlErrorLog_Tests : VisioAutomationTest
-    {
         [TestMethod]
         [DeploymentItem(@"datafiles\XMLErrorLog_Visio_2010_1.txt", "datafiles")]
         public void XmlErrorLog_Load_Visio2010_1()
