@@ -53,11 +53,12 @@ namespace VisioAutomation.Application.Logging
                         continue;
                     }
 
-                    string text_source = "Source:";
-                    if (line.StartsWith(text_source))
+                    string source = GetStringAfterStartsWith(line, "Source:");
+
+                    if (source != null)
                     {
                         var cur_session = this.GetMostRecentSession();
-                        cur_session.Source = line.Substring(text_source.Length).Trim();
+                        cur_session.Source = source.Trim();
                     }
                     else if (line.EndsWith("Begin Session"))
                     {
@@ -96,26 +97,26 @@ namespace VisioAutomation.Application.Logging
                     }
                     else
                     {
-                        string text_context = "Context:";
-                        if (line.StartsWith(text_context))
+                        string context = GetStringAfterStartsWith(line, "Context:");
+                        string description = GetStringAfterStartsWith(line, "Description:");
+
+                        if (context!=null)
                         {
+                            // Store a Context Record 
                             var session = this.GetMostRecentSession();
                             var rec = session.Records[session.Records.Count - 1];
-                            rec.Context = line.Substring(text_context.Length);
+                            rec.Context = context;
                         }
-                        else
+                        else if (description!=null)
                         {
-
-                            string description = GetStringAfterStartsWith(line, "Description:");
-
-                            if (description == null)
-                            {
-                                throw new ArgumentException();
-                            }
-
+                            // Store a Description Record 
                             var session = this.GetMostRecentSession();
                             var rec = session.Records[session.Records.Count - 1];
                             rec.Description = description;
+                        }
+                        else
+                        {
+                            throw new ArgumentException();
                         }
                     }
                 }
