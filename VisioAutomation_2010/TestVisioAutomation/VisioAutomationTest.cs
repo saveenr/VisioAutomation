@@ -21,7 +21,7 @@ namespace TestVisioAutomation
 
         public IVisio.Page GetNewPage()
         {
-            return this.GetNewPage("");
+            return this.GetNewPage(string.Empty);
         }
 
         public IVisio.Page GetNewPage(string suffix)
@@ -58,7 +58,7 @@ namespace TestVisioAutomation
         {
             var app = this.GetVisioApplication();
             var documents = app.Documents;
-            var doc = documents.Add("");
+            var doc = documents.Add(string.Empty);
 
             var frame = new StackFrame(1);
             var method = frame.GetMethod();

@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                return "";
+                return string.Empty;
             }
         }
         

@@ -146,7 +146,7 @@ namespace VisioAutomation.Application.Logging
                 throw new ArgumentException();
             }
             rec.Type = line.Substring(1, n - 1);
-            rec.SubType = line.Substring(n + 2).Replace(":", "");
+            rec.SubType = line.Substring(n + 2).Replace(":", string.Empty);
 
             var session = this.FileSessions[this.FileSessions.Count - 1];
             session.Records.Add(rec);

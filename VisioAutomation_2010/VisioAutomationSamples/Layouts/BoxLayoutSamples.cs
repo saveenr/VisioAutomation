@@ -36,7 +36,7 @@ namespace VisioAutomationSamples
         public static void FontCompare()
         {
             var visapp = new IVisio.Application();
-            var doc = visapp.Documents.Add("");
+            var doc = visapp.Documents.Add(string.Empty);
 
             var fontnames = new[] {"Arial", "Calibri"};
 
