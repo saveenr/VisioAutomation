@@ -97,7 +97,7 @@
     <Compile Include="Layouts\BoxLayout2Samples.cs" />
     <Compile Include="FormsSamples.cs" />
     <Compile Include="LinqUtil.cs" />
-    <Compile Include="TreeLayoutSamples.cs" />
+    <Compile Include="Layouts\TreeLayoutSamples.cs" />
     <Compile Include="extensions.cs" />
     <Compile Include="Layouts\GridLayoutSamples.cs" />
     <Compile Include="ConnectorSamples.cs" />
