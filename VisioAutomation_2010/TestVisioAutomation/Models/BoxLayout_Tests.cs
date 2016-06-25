@@ -45,8 +45,8 @@ namespace TestVisioAutomation.Models
             layout.PerformLayout();
             double delta = 0.00000001;
 
-            AssertVA.AreEqual(0, 0, 10, 5, n1.Rectangle, delta);
-            AssertVA.AreEqual(0, 0, 10, 5, root.Rectangle, delta);          
+            AssertUtil.AreEqual(0, 0, 10, 5, n1.Rectangle, delta);
+            AssertUtil.AreEqual(0, 0, 10, 5, root.Rectangle, delta);          
         }
 
         [TestMethod]
@@ -64,7 +64,7 @@ namespace TestVisioAutomation.Models
 
             layout.PerformLayout();
             double delta = 0.00000001;
-            AssertVA.AreEqual(1.0, 1.0, 11, 6, n1.Rectangle, delta);
+            AssertUtil.AreEqual(1.0, 1.0, 11, 6, n1.Rectangle, delta);
         }
     }
 }

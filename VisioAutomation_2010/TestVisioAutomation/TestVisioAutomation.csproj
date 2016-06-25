@@ -93,7 +93,7 @@
   <ItemGroup>
     <Compile Include="Connections\ConnectivityMap.cs" />
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
-    <Compile Include="AssertVA.cs" />
+    <Compile Include="AssertUtil.cs" />
     <Compile Include="Hyperlinks\Hyperlink_Tests.cs" />
     <Compile Include="PowerShellTestsSession.cs" />
     <Compile Include="VisioPSContext.cs" />
