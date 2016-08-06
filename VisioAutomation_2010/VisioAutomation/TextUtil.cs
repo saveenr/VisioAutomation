@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace VisioAutomation
 {
-    internal static class TextUtil
+    public static class TextUtil
     {
         public static System.Text.RegularExpressions.Regex GetRegexForWildcardPattern(string wildcardpat, bool ignorecase)
         {
