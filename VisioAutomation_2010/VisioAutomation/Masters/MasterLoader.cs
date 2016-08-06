@@ -6,7 +6,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Masters
 {
-    internal class MasterLoader
+    public class MasterLoader
     {
         private readonly Dictionary<string, MasterRef> master_ref_dic;
 

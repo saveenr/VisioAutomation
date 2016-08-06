@@ -4,7 +4,7 @@
     /// Assists in performing a depth-first traversal of nodes for some Node type T. 
     /// T need not be of any specific type.
     /// </summary>
-    internal struct WalkEvent<T>
+    public struct WalkEvent<T>
     {
         public enum WalkEventType
         {

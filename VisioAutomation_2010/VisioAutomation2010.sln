@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPowerShell", "VisioPow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Scripting", "VisioAutomation.Scripting\VisioAutomation.Scripting.csproj", "{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Models", "VisioAutomation.Models\VisioAutomation.Models.csproj", "{29CB2B65-8E8D-4B2C-935C-453B2B371143}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,22 @@ Global
 		{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}.Release|Win32.Build.0 = Release|Any CPU
 		{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}.Release|x86.ActiveCfg = Release|Any CPU
 		{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}.Release|x86.Build.0 = Release|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Debug|Win32.Build.0 = Debug|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Debug|x86.Build.0 = Debug|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Release|Win32.ActiveCfg = Release|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Release|Win32.Build.0 = Release|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Release|x86.ActiveCfg = Release|Any CPU
+		{29CB2B65-8E8D-4B2C-935C-453B2B371143}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

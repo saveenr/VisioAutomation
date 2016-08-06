@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace VisioAutomation.Internal
 {
-    internal static class TreeOps
+    public static class TreeOps
     {
         // Delegates
         public delegate IEnumerable<T> EnumerateChildren<T>(T item);
