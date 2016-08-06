@@ -1,3 +1,5 @@
+using IVisio = Microsoft.Office.Interop.Visio;
+
 namespace VisioAutomation.Models.DirectedGraph
 {
     class VisioRenderer
@@ -6,7 +8,7 @@ namespace VisioAutomation.Models.DirectedGraph
         {
         }
 
-        public void Render(Microsoft.Office.Interop.Visio.Page page, Drawing drawing, VisioLayoutOptions options)
+        public void Render(IVisio.Page page, Drawing drawing, VisioLayoutOptions options)
         {
             // This is Visio-based render - it does NOT use MSAGL
             if (page == null)

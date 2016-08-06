@@ -58,7 +58,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
         public override string ToString()
         {
-            string s = String.Format("(Name={0},Value={1},Prompt={2})", this.Name, this.Value, this.Prompt);
+            string s = string.Format("(Name={0},Value={1},Prompt={2})", this.Name, this.Value, this.Prompt);
             return s;
         }
 

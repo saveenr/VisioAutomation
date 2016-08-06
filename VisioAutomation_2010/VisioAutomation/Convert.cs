@@ -56,7 +56,7 @@ namespace VisioAutomation
                 return s;
             }
 
-            string result = String.Format("\"{0}\"", s.Replace(Convert.quote, Convert.quotequote));
+            string result = string.Format("\"{0}\"", s.Replace(Convert.quote, Convert.quotequote));
             return result;
         }
 

@@ -11,7 +11,7 @@ namespace TestVisioAutomation.CustomProperties
         public void CustomProps_Names()
         {
             Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName(null));
-            Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName(""));
+            Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName(string.Empty));
             Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName(" foo "));
             Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName("foo "));
             Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName("foo\t"));

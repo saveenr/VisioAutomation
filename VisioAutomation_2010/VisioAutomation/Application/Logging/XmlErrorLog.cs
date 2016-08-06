@@ -14,13 +14,13 @@ namespace VisioAutomation.Application.Logging
 
             if (!System.IO.File.Exists(filename))
             {
-                string msg = String.Format("File \"{0}\"does not exist", filename);
+                string msg = string.Format("File \"{0}\"does not exist", filename);
                 throw new ArgumentException(msg);
             }
 
             var state = LogState.Start;
 
-            List<string> lines = XmlErrorLog.GetLinesSharedRead(filename);
+            var lines = XmlErrorLog.GetLines(filename);
             lines.Reverse();
 
             var q = new Stack<string>( lines);
@@ -53,10 +53,12 @@ namespace VisioAutomation.Application.Logging
                         continue;
                     }
 
-                    if (line.StartsWith("Source:"))
+                    string source = GetStringAfterStartsWith(line, "Source:");
+
+                    if (source != null)
                     {
                         var cur_session = this.GetMostRecentSession();
-                        cur_session.Source = line.Substring("Source:".Length).Trim();
+                        cur_session.Source = source.Trim();
                     }
                     else if (line.EndsWith("Begin Session"))
                     {
@@ -93,21 +95,29 @@ namespace VisioAutomation.Application.Logging
                     {
                         state = LogState.InFileSession;
                     }
-                    else if (line.StartsWith("Context:"))
-                    {
-                        var session = this.GetMostRecentSession();
-                        var rec = session.Records[session.Records.Count - 1];
-                        rec.Context = line.Substring("Context:".Length);
-                    }
-                    else if (line.StartsWith("Description:"))
-                    {
-                        var session = this.GetMostRecentSession();
-                        var rec = session.Records[session.Records.Count - 1];
-                        rec.Description = line.Substring("Description:".Length);
-                    }
                     else
                     {
-                        throw new ArgumentException();
+                        string context = GetStringAfterStartsWith(line, "Context:");
+                        string description = GetStringAfterStartsWith(line, "Description:");
+
+                        if (context!=null)
+                        {
+                            // Store a Context Record 
+                            var session = this.GetMostRecentSession();
+                            var rec = session.Records[session.Records.Count - 1];
+                            rec.Context = context;
+                        }
+                        else if (description!=null)
+                        {
+                            // Store a Description Record 
+                            var session = this.GetMostRecentSession();
+                            var rec = session.Records[session.Records.Count - 1];
+                            rec.Description = description;
+                        }
+                        else
+                        {
+                            throw new ArgumentException();
+                        }
                     }
                 }
                 else
@@ -115,6 +125,16 @@ namespace VisioAutomation.Application.Logging
                     throw new ArgumentException();                    
                 }
             }
+        }
+
+        private static string GetStringAfterStartsWith(string line, string text_context)
+        {
+            if (line.StartsWith(text_context))
+            {
+                string result = line.Substring(text_context.Length);
+                return result;
+            }
+            return null;
         }
 
         private LogState StartRecord(string line, LogState state)
@@ -126,7 +146,7 @@ namespace VisioAutomation.Application.Logging
                 throw new ArgumentException();
             }
             rec.Type = line.Substring(1, n - 1);
-            rec.SubType = line.Substring(n + 2).Replace(":", "");
+            rec.SubType = line.Substring(n + 2).Replace(":", string.Empty);
 
             var session = this.FileSessions[this.FileSessions.Count - 1];
             session.Records.Add(rec);
@@ -158,7 +178,7 @@ namespace VisioAutomation.Application.Logging
             return this.FileSessions[this.FileSessions.Count - 1];
         }
 
-        private static List<string> GetLinesSharedRead(string filename)
+        private static List<string> GetLines(string filename)
         {
             var lines = new List<string>();
             using (

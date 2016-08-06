@@ -6,7 +6,7 @@ namespace VisioAutomation.Scripting
     {
         public override void WriteDebug(string s)
         {
-            string msg = String.Format("DEBUG: {0}", s);
+            string msg = string.Format("DEBUG: {0}", s);
             this.DefaultWriteString(msg);
         }
 
@@ -17,19 +17,19 @@ namespace VisioAutomation.Scripting
 
         public override void WriteError(string s)
         {
-            string msg = String.Format("ERROR: {0}", s);
+            string msg = string.Format("ERROR: {0}", s);
             this.DefaultWriteString(msg);
         }
 
         public override void WriteVerbose(string s)
         {
-            string msg = String.Format("VERBOSE: {0}", s);
+            string msg = string.Format("VERBOSE: {0}", s);
             this.DefaultWriteString(msg);
         }
 
         public override void WriteWarning(string s)
         {
-            string msg = String.Format("WARNING: {0}", s);
+            string msg = string.Format("WARNING: {0}", s);
             this.DefaultWriteString(msg);
         }
 

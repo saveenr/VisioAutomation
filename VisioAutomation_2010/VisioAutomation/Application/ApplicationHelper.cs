@@ -15,7 +15,7 @@ namespace VisioAutomation.Application
             return version;
         }
 
-        public static string GetContentLocation(Microsoft.Office.Interop.Visio.Application app)
+        public static string GetContentLocation(IVisio.Application app)
         {
             var ver = ApplicationHelper.GetVersion(app);
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
@@ -36,11 +36,11 @@ namespace VisioAutomation.Application
                 return path;
             }
 
-            string msg = String.Format("VisioAutomation does not support Visio version {0}", ver.Major);
+            string msg = string.Format(invariant_culture,"VisioAutomation does not support Visio version {0}", ver.Major);
             throw new System.ArgumentException(msg);
         }
 
-        public static string GetXMLErrorLogFilename(Microsoft.Office.Interop.Visio.Application app)
+        public static string GetXMLErrorLogFilename(IVisio.Application app)
         {
             // the location of the xml error log file is specific to the user
             // we need to retrieve it from the registry
@@ -84,7 +84,6 @@ namespace VisioAutomation.Application
 
         public static void Quit(IVisio.Application app, bool force_close)
         {
-            short old = app.AlertResponse;
             if (force_close)
             {
                 const short new_alert_response = 7;

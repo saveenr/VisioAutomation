@@ -1,4 +1,5 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
@@ -17,7 +18,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
 
         public CustomPropertyCellsQuery()
         {
-            var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionProp);
+            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
 
 
             this.SortKey = sec.AddCell(SRCCON.Prop_SortKey, nameof(SRCCON.Prop_SortKey));

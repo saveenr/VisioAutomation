@@ -15,7 +15,7 @@ namespace VisioAutomation.Interop
 
         public override string ToString()
         {
-            return String.Format("{0},{1}", this.Name, this.Value);
+            return string.Format("{0},{1}", this.Name, this.Value);
         }
     }
 }

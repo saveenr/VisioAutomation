@@ -29,7 +29,7 @@ namespace VisioAutomation.DOM
             IVisio.Document doc = null;
             if (this._vst_template_file == null)
             {
-                doc = appdocs.Add("");
+                doc = appdocs.Add(string.Empty);
             }
             else
             {

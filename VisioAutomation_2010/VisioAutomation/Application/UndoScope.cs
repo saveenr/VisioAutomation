@@ -44,7 +44,7 @@ namespace VisioAutomation.Application
         /// <returns></returns>
         public override string ToString()
         {
-            string s = String.Format("{0}({1}=\"{2}\",{3}={4})", nameof(UndoScope), nameof(this.Name), this.Name, nameof(this.ScopeID), this.ScopeID);
+            string s = string.Format("{0}({1}=\"{2}\",{3}={4})", nameof(UndoScope), nameof(this.Name), this.Name, nameof(this.ScopeID), this.ScopeID);
             return s;
         }
     }

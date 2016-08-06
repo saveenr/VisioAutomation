@@ -45,7 +45,7 @@ namespace VisioAutomation.Windows
         }
 
         public static void SetWindowRect(
-            Microsoft.Office.Interop.Visio.Window window,
+            IVisio.Window window,
             System.Drawing.Rectangle rect)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ff769098.aspx
@@ -53,7 +53,7 @@ namespace VisioAutomation.Windows
         }
 
         public static void SetViewRect(
-            Microsoft.Office.Interop.Visio.Window window,
+            IVisio.Window window,
             Drawing.Rectangle rect)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ms367542(v=office.14).aspx

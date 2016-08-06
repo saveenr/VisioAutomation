@@ -34,11 +34,11 @@ namespace VisioAutomation.Shapes.Connections
             if (this.Connector != null)
             {
                 var connector_name = this.Connector.NameU;
-                return String.Format("({0}:{1}->{2})", connector_name, from_name, to_name);                
+                return string.Format("({0}:{1}->{2})", connector_name, from_name, to_name);                
             }
             else
             {
-                return String.Format("({0}->{1})", from_name, to_name);
+                return string.Format("({0}->{1})", from_name, to_name);
             }
         }
     }

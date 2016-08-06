@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                return "";
+                return string.Empty;
             }
         }
         
@@ -202,7 +202,7 @@ namespace VisioAutomation.Scripting.Commands
             if (type.IsArray)
             {
                 var at = type.GetElementType();
-                return String.Format("{0}[]", ReflectionUtil.GetNiceTypeName(at, options));
+                return string.Format("{0}[]", ReflectionUtil.GetNiceTypeName(at, options));
             }
 
             if (type.IsGenericType)

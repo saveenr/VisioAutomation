@@ -107,8 +107,8 @@ namespace VisioAutomation.Models.ContainerLayout
             if (!this.IsLayedOut)
             {
                 string msg =
-                    String.Format("{0} usage error. Call PerformLayout() before calling Render().",
-                        typeof (ContainerLayout).Name);
+                    string.Format("{0} usage error. {1}() before calling {2}().",
+                        nameof(ContainerLayout), nameof(PerformLayout), nameof(Render));
                 throw new AutomationException(msg);
             }
             // create a new drawing

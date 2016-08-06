@@ -376,7 +376,7 @@ namespace VisioAutomation.ShapeSheet
             public readonly UpdateType UpdateType;
             public readonly StreamType StreamType;
 
-            internal UpdateRecord(StreamType st, SIDSRC sidsrc, string formula)
+            internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, string formula)
             {
                 this.SIDSRC = sidsrc;
                 this.Formula = formula;
@@ -384,10 +384,10 @@ namespace VisioAutomation.ShapeSheet
                 this.ResultString = null;
                 this.UnitCode = IVisio.VisUnitCodes.visNumber;
                 this.UpdateType = UpdateType.Formula;
-                this.StreamType = st;
+                this.StreamType = streamtype;
             }
 
-            internal UpdateRecord(StreamType st, SIDSRC sidsrc, double result, IVisio.VisUnitCodes unit_code)
+            internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, double result, IVisio.VisUnitCodes unit_code)
             {
                 this.SIDSRC = sidsrc;
                 this.Formula = null;
@@ -395,10 +395,10 @@ namespace VisioAutomation.ShapeSheet
                 this.ResultNumeric = result;
                 this.ResultString = null;
                 this.UpdateType = UpdateType.ResultNumeric;
-                this.StreamType = st;
+                this.StreamType = streamtype;
             }
 
-            internal UpdateRecord(StreamType st, SIDSRC sidsrc, string result, IVisio.VisUnitCodes unit_code)
+            internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, string result, IVisio.VisUnitCodes unit_code)
             {
                 this.SIDSRC = sidsrc;
                 this.Formula = null;
@@ -406,7 +406,7 @@ namespace VisioAutomation.ShapeSheet
                 this.ResultNumeric = 0.0;
                 this.ResultString = result;
                 this.UpdateType = UpdateType.ResultString;
-                this.StreamType = st;
+                this.StreamType = streamtype;
             }
 
         }

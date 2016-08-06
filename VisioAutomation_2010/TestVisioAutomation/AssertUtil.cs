@@ -4,7 +4,7 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace TestVisioAutomation
 {
-    public static class AssertVA
+    public static class AssertUtil
     {
         public static void AreEqual(VADRAW.Point point, VADRAW.Point actual_point, double delta)
         {
@@ -34,7 +34,7 @@ namespace TestVisioAutomation
 
         public static void AssertSnap(double ex, double ey, VADRAW.SnappingGrid g1, double ix, double iy, double delta)
         {
-            AssertVA.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
+            AssertUtil.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
         }
 
         public static void AreEqual<T>(string formula, T result, VASS.CellData<T> actual_celldata)

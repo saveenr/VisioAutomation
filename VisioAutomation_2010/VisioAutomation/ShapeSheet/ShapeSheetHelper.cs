@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (System.Enum.IsDefined(typeof(IVisio.VisSectionIndices), value))
             {
-                var a = (Microsoft.Office.Interop.Visio.VisSectionIndices)value;
+                var a = (IVisio.VisSectionIndices)value;
                 return ShapeSheetHelper.GetSectionName(a);
             }
             return defaultname;

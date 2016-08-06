@@ -54,30 +54,30 @@ namespace VisioAutomation.Text.Markup
             update.SetFormulaIgnoreNull(SRCCON.CharUseVertical.ForRow(row), this.UseVertical);
         }
 
-        public void ApplyFormulasTo(CharacterCells other)
+        public void ApplyFormulasTo(CharacterCells target)
         {
-            if (this.AsianFont.HasValue) { other.AsianFont = this.AsianFont; }
-            if (this.Case.HasValue) { other.Case = this.Case; }
-            if (this.Color.HasValue) { other.Color = this.Color; }
-            if (this.ComplexScriptFont.HasValue) { other.ComplexScriptFont = this.ComplexScriptFont; }
-            if (this.ComplexScriptSize.HasValue) { other.ComplexScriptSize = this.ComplexScriptSize; }
-            if (this.DoubleStrikeThrough.HasValue) { other.DoubleStrikeThrough = this.DoubleStrikeThrough; }
-            if (this.DoubleUnderline.HasValue) { other.DoubleUnderline = this.DoubleUnderline; }
-            if (this.Font.HasValue) { other.Font = this.Font; }
-            if (this.LangID.HasValue) { other.LangID = this.LangID; }
-            if (this.Locale.HasValue) { other.Locale = this.Locale; }
-            if (this.LocalizeFont.HasValue) { other.LocalizeFont = this.LocalizeFont; }
-            if (this.Overline.HasValue) { other.Overline = this.Overline; }
-            if (this.Perpendicular.HasValue) { other.Perpendicular = this.Perpendicular; }
-            if (this.Pos.HasValue) { other.Pos = this.Pos; }
-            if (this.RTLText.HasValue) { other.RTLText = this.RTLText; }
-            if (this.FontScale.HasValue) { other.FontScale = this.FontScale; }
-            if (this.Size.HasValue) { other.Size = this.Size; }
-            if (this.Letterspace.HasValue) { other.Letterspace = this.Letterspace; }
-            if (this.Strikethru.HasValue) { other.Strikethru = this.Strikethru; }
-            if (this.Style.HasValue) { other.Style = this.Style; }
-            if (this.Transparency.HasValue) { other.Transparency = this.Transparency; }
-            if (this.UseVertical.HasValue) { other.UseVertical = this.UseVertical; }
+            if (this.AsianFont.HasValue) { target.AsianFont = this.AsianFont; }
+            if (this.Case.HasValue) { target.Case = this.Case; }
+            if (this.Color.HasValue) { target.Color = this.Color; }
+            if (this.ComplexScriptFont.HasValue) { target.ComplexScriptFont = this.ComplexScriptFont; }
+            if (this.ComplexScriptSize.HasValue) { target.ComplexScriptSize = this.ComplexScriptSize; }
+            if (this.DoubleStrikeThrough.HasValue) { target.DoubleStrikeThrough = this.DoubleStrikeThrough; }
+            if (this.DoubleUnderline.HasValue) { target.DoubleUnderline = this.DoubleUnderline; }
+            if (this.Font.HasValue) { target.Font = this.Font; }
+            if (this.LangID.HasValue) { target.LangID = this.LangID; }
+            if (this.Locale.HasValue) { target.Locale = this.Locale; }
+            if (this.LocalizeFont.HasValue) { target.LocalizeFont = this.LocalizeFont; }
+            if (this.Overline.HasValue) { target.Overline = this.Overline; }
+            if (this.Perpendicular.HasValue) { target.Perpendicular = this.Perpendicular; }
+            if (this.Pos.HasValue) { target.Pos = this.Pos; }
+            if (this.RTLText.HasValue) { target.RTLText = this.RTLText; }
+            if (this.FontScale.HasValue) { target.FontScale = this.FontScale; }
+            if (this.Size.HasValue) { target.Size = this.Size; }
+            if (this.Letterspace.HasValue) { target.Letterspace = this.Letterspace; }
+            if (this.Strikethru.HasValue) { target.Strikethru = this.Strikethru; }
+            if (this.Style.HasValue) { target.Style = this.Style; }
+            if (this.Transparency.HasValue) { target.Transparency = this.Transparency; }
+            if (this.UseVertical.HasValue) { target.UseVertical = this.UseVertical; }
         }
     }
 }
