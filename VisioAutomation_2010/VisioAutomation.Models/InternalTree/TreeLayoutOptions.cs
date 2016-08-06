@@ -1,8 +1,10 @@
+using VisioAutomation.Drawing;
+
 namespace VisioAutomation.Models.InternalTree
 {
     internal class TreeLayoutOptions
     {
-        public Drawing.Point TopAdjustment; // How to adjust the apex 
+        public Drawing.Point TopAdjustment = new Point(0,0); // How to adjust the apex 
 
         public TreeLayoutOptions()
         {
