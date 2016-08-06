@@ -1,0 +1,46 @@
+Open VDX Processing Log
+
+Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Saveen_ASGARD9 2015-01-10 20_09_08\Out\datafiles\vdx_with_warnings_1.vdx
+
+Sat Jan 10 20:09:12 2015 Begin Session
+
+[Warning] DataType: 
+Context: Line 29 --- <VisioDocument><Pages><Page><Shapes><Shape> ID='2'
+Description: This file contains a duplicate of an element that can exist only once. Visio has ignored the duplicate element.
+
+[Warning] DataType: 
+Context: Line 29 --- <VisioDocument><Pages><Page><Shapes><Shape> ID='3'
+Description: This file contains a duplicate of an element that can exist only once. Visio has ignored the duplicate element.
+
+[Warning] DataType: 
+Context: Line 29 --- <VisioDocument><Pages><Page><Connects><Connect>
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has ignored the element that contains the attribute.
+
+[Warning] DataType: 
+Context: Line 29 --- <VisioDocument><Pages><Page><Connects><Connect>
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has ignored the element that contains the attribute.
+
+
+
+Sat Jan 10 20:09:12 2015 End Session
+
+
+Open VDX Processing Log
+
+Source: C:\Users\Saveen\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_MultiPageDocument2015-10-1--20-09-10.vdx
+
+Sat Jan 10 20:09:10 2015 Begin Session
+
+[Warning] DataType: 
+Context: Line 101 --- <VisioDocument><Pages><Page><Connects><Connect>
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has ignored the element that contains the attribute.
+
+[Warning] DataType: 
+Context: Line 101 --- <VisioDocument><Pages><Page><Connects><Connect>
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has ignored the element that contains the attribute.
+
+
+
+Sat Jan 10 20:09:10 2015 End Session
+
+
