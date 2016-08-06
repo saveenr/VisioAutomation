@@ -170,10 +170,10 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Query\CellColumn.cs" />
-    <Compile Include="Internal\WalkEvent.cs" />
+    <Compile Include="Utilities\WalkEvent.cs" />
     <Compile Include="ShapeSheet\Update.cs" />
     <Compile Include="ShapeSheet\FormulaLiteral.cs" />
-    <Compile Include="Internal\TreeOps.cs" />
+    <Compile Include="Utilities\TreeOps.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />

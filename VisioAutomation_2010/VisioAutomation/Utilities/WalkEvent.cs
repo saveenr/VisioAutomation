@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Internal
+﻿namespace VisioAutomation.Utilities
 {
     /// <summary>
     /// Assists in performing a depth-first traversal of nodes for some Node type T. 
