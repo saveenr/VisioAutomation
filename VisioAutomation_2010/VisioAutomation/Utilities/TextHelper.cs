@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation
+namespace VisioAutomation.Utilities
 {
-    public static class TextUtil
+    public static class TextHelper
     {
         public static System.Text.RegularExpressions.Regex GetRegexForWildcardPattern(string wildcardpat, bool ignorecase)
         {
@@ -33,12 +33,12 @@ namespace VisioAutomation
         
         public static IEnumerable<string> IncludeByName(IEnumerable<string> items, IList<string> patterns, bool ignorecase)
         {
-            return TextUtil.FilterObjectsByNames(items, patterns, System.IO.Path.GetFileName, ignorecase, FilterAction.Include);
+            return TextHelper.FilterObjectsByNames(items, patterns, System.IO.Path.GetFileName, ignorecase, FilterAction.Include);
         }
 
         public static IEnumerable<string> ExcludeByName(IEnumerable<string> items, IList<string> pattens, bool ignorecase)
         {
-            return TextUtil.FilterObjectsByNames(items, pattens, System.IO.Path.GetFileName, ignorecase, FilterAction.Exclude);
+            return TextHelper.FilterObjectsByNames(items, pattens, System.IO.Path.GetFileName, ignorecase, FilterAction.Exclude);
         }
 
         public enum FilterAction
@@ -67,10 +67,10 @@ namespace VisioAutomation
 
                 foreach (var pattern in patterns)
                 {
-                    if (TextUtil.ContainsWildcard(pattern))
+                    if (TextHelper.ContainsWildcard(pattern))
                     {
                         // If it contains a wildcard transform it into a regex
-                        var regex = TextUtil.GetRegexForWildcardPattern(pattern, ignorecase);
+                        var regex = TextHelper.GetRegexForWildcardPattern(pattern, ignorecase);
                         regexes.Add(regex);
                     }
                     else

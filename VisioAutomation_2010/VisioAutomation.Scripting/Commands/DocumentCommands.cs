@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -289,7 +290,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // get the named document
-            var docs2 = TextUtil.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, TextUtil.FilterAction.Include).ToList();
+            var docs2 = TextHelper.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, TextHelper.FilterAction.Include).ToList();
             return docs2;
         }
     }

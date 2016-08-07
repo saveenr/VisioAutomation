@@ -25,7 +25,7 @@ namespace VisioAutomation.Models.Tree
         
         public IEnumerable<Node> Nodes
         {
-            get { return Utilities.TreeOps.PreOrder(this.Root, n => n.Children); }
+            get { return GenTreeOps.Algorithms.PreOrder(this.Root, n => n.Children); }
         }
     }
 }

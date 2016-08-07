@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -540,7 +541,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // otherwise we start checking for each name
-            var shapes_list = TextUtil.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, TextUtil.FilterAction.Include).ToList();
+            var shapes_list = TextHelper.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, TextHelper.FilterAction.Include).ToList();
 
             return shapes_list;
         }
@@ -559,7 +560,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 // return the named page
                 var pages = active_document.Pages.ToEnumerable();
-                var pages2= TextUtil.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, TextUtil.FilterAction.Include).ToList();
+                var pages2= TextHelper.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, TextHelper.FilterAction.Include).ToList();
                 return pages2;
             }
         }

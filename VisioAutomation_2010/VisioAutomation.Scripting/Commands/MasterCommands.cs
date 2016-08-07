@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -127,7 +128,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 // return masters matching the name
                 var masters2 = doc.Masters.ToEnumerable();
-                var masters3 = TextUtil.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, TextUtil.FilterAction.Include).ToList();
+                var masters3 = TextHelper.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, TextHelper.FilterAction.Include).ToList();
                 return masters3;
             }
         }

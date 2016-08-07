@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.Utilities
+namespace GenTreeOps
 {
-    public static class TreeOps
+    public static class Algorithms
     {
         // Delegates
         public delegate IEnumerable<T> EnumerateChildren<T>(T item);
@@ -30,7 +30,7 @@ namespace VisioAutomation.Utilities
         // - whether it has exited from a node (i.e. it is finished with that container and its children)
         // - caller can control which children get entered via the enum_children method
         /// </summary>
-        public static IEnumerable<WalkEvent<T>> Walk<T>(T node, EnumerateChildren<T> enum_children)
+        public static IEnumerable<GenTreeOps.WalkEvent<T>> Walk<T>(T node, EnumerateChildren<T> enum_children)
         {
             var stack = new Stack<WalkState<T>>();
 
@@ -50,7 +50,7 @@ namespace VisioAutomation.Utilities
                     cur_item.Entered = true;
                     stack.Push(cur_item);
 
-                    foreach (var child in TreeOps.efficient_reverse(enum_children(cur_item.Node)))
+                    foreach (var child in Algorithms.efficient_reverse(enum_children(cur_item.Node)))
                     {
                         stack.Push(new WalkState<T>(child));
                     }
@@ -65,7 +65,7 @@ namespace VisioAutomation.Utilities
 
         public static IEnumerable<T> PreOrder<T>(T root, EnumerateChildren<T> enum_children)
         {
-            return TreeOps.Walk(root, enum_children).Where(ev => ev.HasEnteredNode).Select(ev => ev.Node);
+            return Algorithms.Walk(root, enum_children).Where(ev => ev.HasEnteredNode).Select(ev => ev.Node);
         }
 
         internal static IEnumerable<T> efficient_reverse<T>(IEnumerable<T> items)
@@ -96,7 +96,7 @@ namespace VisioAutomation.Utilities
             var stack = new Stack<TDest>();
             var dest_nodes = new List<TDest>();
 
-            var walkevents = TreeOps.Walk<TSrc>(src_root_node, input_node => enum_src_children(input_node));
+            var walkevents = Algorithms.Walk<TSrc>(src_root_node, input_node => enum_src_children(input_node));
             foreach (var ev in walkevents)
             {
                 if (ev.HasEnteredNode)

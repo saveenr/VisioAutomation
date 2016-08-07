@@ -57,9 +57,9 @@ namespace VisioAutomation.Models.Text
             }
         }
 
-        internal IEnumerable<Utilities.WalkEvent<Node>> Walk()
+        internal IEnumerable<GenTreeOps.WalkEvent<Node>> Walk()
         {
-            return Utilities.TreeOps.Walk<Node>(this, this.get_children_for_walk);
+            return GenTreeOps.Algorithms.Walk<Node>(this, this.get_children_for_walk);
         }
 
         IEnumerable<Node> get_children_for_walk(Node n)
@@ -75,7 +75,7 @@ namespace VisioAutomation.Models.Text
         
         private IEnumerable<Node> WalkNodes()
         {
-            return Utilities.TreeOps.PreOrder<Node>(this,n=>n.Children);
+            return GenTreeOps.Algorithms.PreOrder<Node>(this,n=>n.Children);
         }
 
         public void Add(Node n)

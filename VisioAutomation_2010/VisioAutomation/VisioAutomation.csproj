@@ -103,7 +103,7 @@
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
-    <Compile Include="TextUtil.cs" />
+    <Compile Include="Utilities\TextHelper.cs" />
     <Compile Include="Drawing\Margin.cs" />
     <Compile Include="Shapes\Connections\ConnectionPointType.cs" />
     <Compile Include="Shapes\Connections\ConnectionPointHelper.cs" />
@@ -166,10 +166,8 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Query\CellColumn.cs" />
-    <Compile Include="Utilities\WalkEvent.cs" />
     <Compile Include="ShapeSheet\Update.cs" />
     <Compile Include="ShapeSheet\FormulaLiteral.cs" />
-    <Compile Include="Utilities\TreeOps.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />

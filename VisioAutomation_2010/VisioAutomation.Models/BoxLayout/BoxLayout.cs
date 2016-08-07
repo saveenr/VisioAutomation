@@ -11,7 +11,7 @@ namespace VisioAutomation.Models.BoxLayout
             get
             {
                 Node rootn = this.Root;
-                return Utilities.TreeOps.PreOrder(rootn, n => n.GetChildren());
+                return GenTreeOps.Algorithms.PreOrder(rootn, n => n.GetChildren());
             }
         }
 

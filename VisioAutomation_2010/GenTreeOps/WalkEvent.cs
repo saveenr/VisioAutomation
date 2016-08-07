@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Utilities
+﻿namespace GenTreeOps
 {
     /// <summary>
     /// Assists in performing a depth-first traversal of nodes for some Node type T. 
@@ -10,7 +10,7 @@
         {
             Enter,
             Exit
-        };
+        }
  
         public readonly WalkEventType Type;
         public readonly T Node;

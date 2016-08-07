@@ -572,12 +572,12 @@ namespace VisioAutomation.Models.InternalTree
             System.Func<TA, T> func_get_data,
             System.Func<TA, Drawing.Size> func_get_size)
         {
-            var walkevents = Utilities.TreeOps.Walk<TA>(root, n => enum_children(n));
+            var walkevents = GenTreeOps.Algorithms.Walk<TA>(root, n => enum_children(n));
             return TreeLayout<T>.CreateLayoutTree(walkevents, func_get_data, func_get_size);
         }
 
         private static Node<T> CreateLayoutTree<TA>(
-            IEnumerable<Utilities.WalkEvent<TA>> walkevents,
+            IEnumerable<GenTreeOps.WalkEvent<TA>> walkevents,
             System.Func<TA, T> func_get_data,
             System.Func<TA, Drawing.Size> func_get_size)
         {
@@ -585,7 +585,7 @@ namespace VisioAutomation.Models.InternalTree
             Node<T> layout_root = null;
             foreach (var walkevent in walkevents)
             {
-                if (walkevent.Type == Utilities.WalkEvent<TA>.WalkEventType.Enter)
+                if (walkevent.Type == GenTreeOps.WalkEvent<TA>.WalkEventType.Enter)
                 {
                     Node<T> parent = null;
                     if (stack.Count > 0)
@@ -608,7 +608,7 @@ namespace VisioAutomation.Models.InternalTree
                         layout_root = layout_node;
                     }
                 }
-                else if (walkevent.Type == Utilities.WalkEvent<TA>.WalkEventType.Exit)
+                else if (walkevent.Type == GenTreeOps.WalkEvent<TA>.WalkEventType.Exit)
                 {
                     var layout_node = stack.Pop();
                 }

@@ -142,6 +142,10 @@
     <Compile Include="Tree\TreeLayout.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GenTreeOps\GenTreeOps.csproj">
+      <Project>{5307871d-4e45-4d8c-8b10-e8ef67394ff3}</Project>
+      <Name>GenTreeOps</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
       <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>
       <Name>VisioAutomation</Name>
