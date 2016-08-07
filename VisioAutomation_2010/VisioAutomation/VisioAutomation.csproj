@@ -152,10 +152,6 @@
     <Compile Include="ShapeSheet\Query\StreamBuilder.cs" />
     <Compile Include="ShapeSheet\Query\SectionColumnList.cs" />
     <Compile Include="Text\CharStyle.cs" />
-    <Compile Include="Text\Markup\CharacterCells.cs" />
-    <Compile Include="Text\Markup\ParagraphCells.cs" />
-    <Compile Include="Text\Markup\CustomField.cs" />
-    <Compile Include="Text\Markup\FieldBase.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
@@ -199,15 +195,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ShapeSheet\CellData.cs" />
-    <Compile Include="Text\Markup\Field.cs" />
-    <Compile Include="Text\Markup\FieldConstants.cs" />
-    <Compile Include="Text\Markup\MarkupRegions.cs" />
-    <Compile Include="Text\Markup\Node.cs" />
-    <Compile Include="Text\Markup\NodeList.cs" />
-    <Compile Include="Text\Markup\NodeType.cs" />
-    <Compile Include="Text\Markup\TextElement.cs" />
-    <Compile Include="Text\Markup\Literal.cs" />
-    <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="Shapes\Connections\ConnectorHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
