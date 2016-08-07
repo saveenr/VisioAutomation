@@ -78,7 +78,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private MSAGL.Core.Layout.GeometryGraph CreateMGGraph(Drawing layout_diagram)
+        private MSAGL.Core.Layout.GeometryGraph CreateMsaglGraph(Drawing layout_diagram)
         {
             var mg_graph = new MSAGL.Core.Layout.GeometryGraph();
 
@@ -236,7 +236,7 @@ namespace VisioAutomation.Models.DirectedGraph
             var page_node = new DOM.Page();
             MsaglRenderer.ResolveMasters(layout_diagram, vis);
 
-            var mg_graph = this.CreateMGGraph(layout_diagram);
+            var mg_graph = this.CreateMsaglGraph(layout_diagram);
 
             this.CreateDOMShapes(page_node.Shapes, mg_graph, vis);
 
