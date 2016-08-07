@@ -127,11 +127,11 @@
     <Compile Include="Text\ParagraphFormatting.cs" />
     <Compile Include="Text\TextElement.cs" />
     <Compile Include="Text\TextRegion.cs" />
-    <Compile Include="Documents\OrgChart\LayoutDirection.cs" />
-    <Compile Include="Documents\OrgChart\LayoutOptions.cs" />
-    <Compile Include="Documents\OrgChart\Node.cs" />
-    <Compile Include="Documents\OrgChart\NodeList.cs" />
-    <Compile Include="Documents\OrgChart\OrgChartDocument.cs" />
+    <Compile Include="Documents\OrgCharts\LayoutDirection.cs" />
+    <Compile Include="Documents\OrgCharts\LayoutOptions.cs" />
+    <Compile Include="Documents\OrgCharts\Node.cs" />
+    <Compile Include="Documents\OrgCharts\NodeList.cs" />
+    <Compile Include="Documents\OrgCharts\OrgChartDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Layouts\Tree\ConnectorType.cs" />
     <Compile Include="Layouts\Tree\Drawing.cs" />

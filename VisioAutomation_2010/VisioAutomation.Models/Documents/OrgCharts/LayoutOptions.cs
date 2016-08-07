@@ -1,4 +1,4 @@
-namespace VisioAutomation.Models.OrgChart
+namespace VisioAutomation.Models.Documents.OrgCharts
 {
     public class LayoutOptions
     {

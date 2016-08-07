@@ -1,6 +1,6 @@
 ﻿using VA = VisioAutomation;
 using VisioAutomation.Extensions;
-using OCMODEL = VisioAutomation.Models.OrgChart;
+using OCMODEL = VisioAutomation.Models.Documents.OrgCharts;
 
 namespace VisioAutomationSamples
 {

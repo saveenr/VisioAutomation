@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.OrgChart
+namespace VisioAutomation.Models.Documents.OrgCharts
 {
     public class Node
     {

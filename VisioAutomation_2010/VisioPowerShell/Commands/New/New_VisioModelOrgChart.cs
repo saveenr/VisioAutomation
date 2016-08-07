@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands.New
     {
         protected override void ProcessRecord()
         {
-            var orgchart = new VA.Models.OrgChart.OrgChartDocument();
+            var orgchart = new VA.Models.Documents.OrgCharts.OrgChartDocument();
             this.WriteObject(orgchart);
         }
     }

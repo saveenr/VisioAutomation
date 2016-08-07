@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.Forms
+namespace VisioAutomation.Models.Documents.Forms
 {
     public class TextBlock
     {

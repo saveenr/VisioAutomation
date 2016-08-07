@@ -2,7 +2,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 
-namespace VisioAutomation.Models.OrgChart
+namespace VisioAutomation.Models.Documents.OrgCharts
 {
     public class OrgChartDocument
     {

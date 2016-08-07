@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
 
-            var formdoc = new Models.Forms.FormDocument();
+            var formdoc = new Models.Documents.Forms.FormDocument();
             formdoc.Subject = "VisioAutomation.Scripting Documenation";
             formdoc.Title = "VisioAutomation.Scripting Documenation";
             formdoc.Creator = "";
@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextCommandsUtil.Join(helpstr,"\r\n",lines);
 
-                var formpage = new Models.Forms.FormPage();
+                var formpage = new Models.Documents.Forms.FormPage();
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
@@ -102,7 +102,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
             
-            var formdoc = new Models.Forms.FormDocument();
+            var formdoc = new Models.Documents.Forms.FormDocument();
 
             var helpstr = new System.Text.StringBuilder();
             int chunksize = 70;
@@ -122,7 +122,7 @@ namespace VisioAutomation.Scripting.Commands
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
                     }
 
-                    var formpage = new Models.Forms.FormPage();
+                    var formpage = new Models.Documents.Forms.FormPage();
                     formpage.Size = new Drawing.Size(8.5, 11);
                     formpage.Margin = new Drawing.Margin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
