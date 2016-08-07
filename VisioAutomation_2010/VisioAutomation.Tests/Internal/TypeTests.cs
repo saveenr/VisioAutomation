@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Internal
             bool caught = false;
             try
             {
-                var ba = new VisioAutomation.Shapes.Connections.BitArray2D(0, 1);
+                var ba = new VisioAutomation.DocumentAnalysis.BitArray2D(0, 1);
             }
             catch (System.ArgumentOutOfRangeException)
             {
@@ -48,7 +48,7 @@ namespace VisioAutomation_Tests.Internal
             caught = false;
             try
             {
-                var ba = new VisioAutomation.Shapes.Connections.BitArray2D(1, 0);
+                var ba = new VisioAutomation.DocumentAnalysis.BitArray2D(1, 0);
             }
             catch (System.ArgumentOutOfRangeException)
             {
@@ -61,7 +61,7 @@ namespace VisioAutomation_Tests.Internal
             }
 
             // Create a 1x1 BitArray
-            var ba2 = new VisioAutomation.Shapes.Connections.BitArray2D(1, 1);
+            var ba2 = new VisioAutomation.DocumentAnalysis.BitArray2D(1, 1);
             Assert.AreEqual(false, ba2[0, 0]);
             ba2[0, 0] = true;
             Assert.AreEqual(true, ba2[0, 0]);

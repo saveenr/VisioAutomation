@@ -38,11 +38,11 @@ namespace VisioAutomationSamples
             s3.AutoConnect(s4, dir, null);
             s5.AutoConnect(s6, dir, null);
 
-            var normal_edges = VisioAutomation.Shapes.Connections.PathAnalysis.GetDirectedEdges(page, VACONNECT.ConnectorEdgeHandling.Raw);
-            var edge_handling_0 = VACONNECT.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
-            var edge_handling_1 = VACONNECT.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional;
-            var tc_edges_0 = VisioAutomation.Shapes.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_0);
-            var tc_edges_1 = VisioAutomation.Shapes.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_1);
+            var normal_edges = VisioAutomation.DocumentAnalysis.PathAnalysis.GetDirectedEdges(page, VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.Raw);
+            var edge_handling_0 = VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
+            var edge_handling_1 = VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional;
+            var tc_edges_0 = VisioAutomation.DocumentAnalysis.PathAnalysis.GetTransitiveClosure(page, edge_handling_0);
+            var tc_edges_1 = VisioAutomation.DocumentAnalysis.PathAnalysis.GetTransitiveClosure(page, edge_handling_1);
 
             var legend0 = page.DrawRectangle(5, 0, 6.5, 6);
             var sb0 = new System.Text.StringBuilder();

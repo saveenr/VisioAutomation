@@ -1,4 +1,4 @@
-namespace VisioAutomation.Shapes.Connections
+namespace VisioAutomation.DocumentAnalysis
 {
     public enum ConnectorEdgeHandling
     {

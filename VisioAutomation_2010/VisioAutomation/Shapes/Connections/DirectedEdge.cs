@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Shapes.Connections
+﻿namespace VisioAutomation.DocumentAnalysis
 {
     public struct DirectedEdge<TNode, TData>
     {

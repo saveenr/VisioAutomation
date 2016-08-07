@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VACONNECT = VisioAutomation.Shapes.Connections;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -18,22 +19,22 @@ namespace VisioAutomation.Scripting.Commands
         /// </summary>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public IList<VACONNECT.ConnectorEdge> GetTransitiveClosure(VACONNECT.ConnectorEdgeHandling flag)
+        public IList<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosure(VA.DocumentAnalysis.ConnectorEdgeHandling flag)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
             var app = this._client.Application.Get();
-            return VACONNECT.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
+            return VA.DocumentAnalysis.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
-        public IList<VACONNECT.ConnectorEdge> GetDirectedEdges(VACONNECT.ConnectorEdgeHandling flag)
+        public IList<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdges(VA.DocumentAnalysis.ConnectorEdgeHandling flag)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
             var application = this._client.Application.Get();
-            var directed_edges = VACONNECT.PathAnalysis.GetDirectedEdges(application.ActivePage, flag);
+            var directed_edges = VA.DocumentAnalysis.PathAnalysis.GetDirectedEdges(application.ActivePage, flag);
             return directed_edges;
         }
 

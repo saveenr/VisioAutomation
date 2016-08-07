@@ -3,7 +3,7 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.Connections
+namespace VisioAutomation.DocumentAnalysis
 {
     public static class PathAnalysis
     {
@@ -159,7 +159,7 @@ namespace VisioAutomation.Shapes.Connections
             return edges;
         }
 
-        internal static void PerformWarshall(VisioAutomation.Shapes.Connections.BitArray2D adj_matrix)
+        internal static void PerformWarshall(VisioAutomation.DocumentAnalysis.BitArray2D adj_matrix)
         {
             if (adj_matrix == null)
             {
@@ -230,7 +230,7 @@ namespace VisioAutomation.Shapes.Connections
             }
 
             int num_vertices = object_to_id.Count;
-            var adj_matrix = new VisioAutomation.Shapes.Connections.BitArray2D(num_vertices, num_vertices);
+            var adj_matrix = new VisioAutomation.DocumentAnalysis.BitArray2D(num_vertices, num_vertices);
             foreach (var iedge in internal_edges)
             {
                 adj_matrix[iedge.From, iedge.To] = true;

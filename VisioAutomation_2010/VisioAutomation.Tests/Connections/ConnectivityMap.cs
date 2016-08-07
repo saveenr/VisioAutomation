@@ -7,7 +7,7 @@ namespace VisioAutomation_Tests.Connections
     {
         private readonly Dictionary<string, List<string>> dic;
 
-        public ConnectivityMap(IList<VACONNECT.ConnectorEdge> edges)
+        public ConnectivityMap(IList<VisioAutomation.DocumentAnalysis.ConnectorEdge> edges)
         {
             this.dic = new Dictionary<string, List<string>>();
             foreach (var e in edges)

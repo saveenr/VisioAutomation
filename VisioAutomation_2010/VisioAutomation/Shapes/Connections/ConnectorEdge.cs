@@ -1,7 +1,7 @@
 using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.Connections
+namespace VisioAutomation.DocumentAnalysis
 {
     public struct ConnectorEdge
     {
