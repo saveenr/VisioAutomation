@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.DirectedGraph
+namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class Node
     {

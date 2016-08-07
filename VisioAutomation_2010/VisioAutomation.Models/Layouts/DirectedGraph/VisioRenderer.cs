@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.DirectedGraph
+namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class VisioRenderer
     {

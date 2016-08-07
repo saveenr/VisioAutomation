@@ -5,7 +5,7 @@ using VisioAutomation.Colors;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using SXL = System.Xml.Linq;
-using VAGRAPH = VisioAutomation.Models.DirectedGraph;
+using VAGRAPH = VisioAutomation.Models.Layouts.DirectedGraph;
 
 namespace VisioAutomation.Scripting.DirectedGraph
 {
@@ -55,7 +55,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
         private class PageData
         {
-            public Models.DirectedGraph.MsaglLayoutOptions LayoutOptions;
+            public Models.Layouts.DirectedGraph.MsaglLayoutOptions LayoutOptions;
             public VAGRAPH.Drawing DirectedGraph;
             public List<ShapeInfo> ShapeInfos;
             public List<ConnectorInfo> ConnectorInfos;
@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 var pagedata = new PageData();
                 pagedatas.Add(pagedata);
                 pagedata.Errors = new List<BuilderError>();
-                pagedata.LayoutOptions = new Models.DirectedGraph.MsaglLayoutOptions();
+                pagedata.LayoutOptions = new Models.Layouts.DirectedGraph.MsaglLayoutOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
                 DirectedGraphBuilder.GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
 
@@ -193,7 +193,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             return directedgraphs;
         }
 
-        private static void GetRenderOptionsFromXml(SXL.XElement el, Models.DirectedGraph.MsaglLayoutOptions options)
+        private static void GetRenderOptionsFromXml(SXL.XElement el, Models.Layouts.DirectedGraph.MsaglLayoutOptions options)
         {
             options.UseDynamicConnectors = XmlUtil.GetAttributeValue(el, "usedynamicconnectors", bool.Parse);
             options.ScalingFactor = XmlUtil.GetAttributeValue(el, "scalingfactor", double.Parse);

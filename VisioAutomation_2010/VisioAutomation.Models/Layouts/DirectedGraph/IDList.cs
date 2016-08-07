@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 
-namespace VisioAutomation.Models.DirectedGraph
+namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class IDList<T> : IEnumerable<T> where T : class
     {

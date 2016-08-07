@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using isioAutomation.Models.DirectedGraph;
+using VisioAutomation.Models.Layouts.DirectedGraph;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VisioAutomation.Masters;
 using MSAGL = Microsoft.Msagl;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Models.DirectedGraph
+namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class MsaglRenderer
     {

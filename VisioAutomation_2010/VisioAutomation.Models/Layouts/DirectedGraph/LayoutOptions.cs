@@ -1,6 +1,6 @@
 ﻿using VA=VisioAutomation;
 
-namespace VisioAutomation.Models.DirectedGraph
+namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class LayoutOptions
     {

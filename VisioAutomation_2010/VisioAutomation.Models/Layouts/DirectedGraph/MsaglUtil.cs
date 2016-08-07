@@ -4,7 +4,7 @@ using System.Linq;
 using VisioAutomation.Drawing;
 using MG = Microsoft.Msagl;
 
-namespace isioAutomation.Models.DirectedGraph
+namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     static class MsaglUtil
     {

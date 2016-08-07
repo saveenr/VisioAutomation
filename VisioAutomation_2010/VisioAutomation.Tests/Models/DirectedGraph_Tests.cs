@@ -4,7 +4,7 @@ using VACONNECT = VisioAutomation.Shapes.Connections;
 using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using DG = VisioAutomation.Models.DirectedGraph;
+using DG = VisioAutomation.Models.Layouts.DirectedGraph;
 
 namespace VisioAutomation_Tests.Models.Layouts
 {

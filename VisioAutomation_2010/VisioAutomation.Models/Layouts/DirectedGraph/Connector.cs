@@ -1,6 +1,6 @@
 ﻿using VACONNECT = VisioAutomation.Shapes.Connections;
 
-namespace VisioAutomation.Models.DirectedGraph
+namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class Connector : Node
     {

@@ -1,5 +1,5 @@
 ﻿using VA = VisioAutomation;
-using DGMODEL = VisioAutomation.Models.DirectedGraph;
+using DGMODEL = VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomationSamples
