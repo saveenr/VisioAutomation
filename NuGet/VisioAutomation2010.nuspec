@@ -22,6 +22,7 @@ It simplifies common tasks and makes it easier to build Visio add-ins and automa
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="..\VisioAutomation_2010\VisioAutomation\bin\debug\*.dll" target="lib\net40" />
+    <file src="..\VisioAutomation_2010\VisioAutomation.Scripting\bin\debug\VisioAutomation*.dll" target="lib\net40" />
+    <file src="..\VisioAutomation_2010\VisioAutomation.Scripting\bin\debug\Microsoft.Msagl.dll" target="lib\net40" />
   </files>
 </package>
