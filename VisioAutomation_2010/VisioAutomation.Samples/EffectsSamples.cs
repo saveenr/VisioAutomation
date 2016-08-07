@@ -3,7 +3,7 @@ using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using VisioAutomation.Colors;
-using GRIDMODEL = VisioAutomation.Models.Grid;
+using GRIDMODEL = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioAutomationSamples
 {

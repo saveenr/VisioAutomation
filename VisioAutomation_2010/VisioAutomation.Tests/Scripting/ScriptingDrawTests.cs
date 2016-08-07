@@ -92,7 +92,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Draw the grid
             var page = client.Page.Get();
-            var grid = new VisioAutomation.Models.Grid.GridLayout(cols, rows, cellsize, master);
+            var grid = new VisioAutomation.Models.Layouts.Grid.GridLayout(cols, rows, cellsize, master);
             grid.Origin = origin;
             grid.Render(page);
 

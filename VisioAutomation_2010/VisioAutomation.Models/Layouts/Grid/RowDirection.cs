@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Models.Grid
+﻿namespace VisioAutomation.Models.Layouts.Grid
 {
     public enum RowDirection
     {

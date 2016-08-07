@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VisioAutomation.Models.Grid
+namespace VisioAutomation.Models.Layouts.Grid
 {
     public class Column
     {

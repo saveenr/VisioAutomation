@@ -1,7 +1,7 @@
 ﻿using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using GRID = VisioAutomation.Models.Grid;
+using GRID = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioPowerShell.Commands.New
 {

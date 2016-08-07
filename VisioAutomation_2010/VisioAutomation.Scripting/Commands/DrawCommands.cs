@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VAGRID = VisioAutomation.Models.Grid;
+using VAGRID = VisioAutomation.Models.Layouts.Grid;
 using VAORGCHART = VisioAutomation.Models.OrgChart;
 using VAGRAPH = VisioAutomation.Models.Layouts.DirectedGraph;
 

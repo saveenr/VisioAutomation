@@ -1,7 +1,7 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 
-namespace VisioAutomation.Models.Grid
+namespace VisioAutomation.Models.Layouts.Grid
 {
     public class Node
     {

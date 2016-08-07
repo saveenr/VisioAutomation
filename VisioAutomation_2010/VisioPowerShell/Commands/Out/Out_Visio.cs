@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands.Out
         public VisioAutomation.Models.OrgChart.OrgChartDocument OrgChart { get; set; }
 
         [Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Grid.GridLayout GridLayout { get; set; }
+        public VisioAutomation.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
 
         [Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public List<VisioAutomation.Models.Layouts.DirectedGraph.Drawing> DirectedGraphs { get; set; }
