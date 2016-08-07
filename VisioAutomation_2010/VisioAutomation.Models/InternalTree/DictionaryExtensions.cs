@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Models.InternalTree
 {
-    static class DictionaryUtil
+    static class DictionaryExtensions
     {
         /// <summary>
         /// If the key is in the dictionary, returns the value associated with the key.
@@ -14,7 +14,7 @@ namespace VisioAutomation.Models.InternalTree
         /// <param name="key"></param>
         /// <param name="defval"></param>
         /// <returns></returns>
-        public static V GetValue<K, V>(Dictionary<K, V> dic, K key, V defval)
+        public static V GetValueOrDefaultEx<K, V>(this Dictionary<K, V> dic, K key, V defval)
         {
             V the_item;
             bool contains = dic.TryGetValue(key, out the_item);

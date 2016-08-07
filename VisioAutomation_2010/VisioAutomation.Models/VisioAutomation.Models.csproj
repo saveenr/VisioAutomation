@@ -109,7 +109,7 @@
     <Compile Include="Grid\Node.cs" />
     <Compile Include="Grid\Row.cs" />
     <Compile Include="Grid\RowDirection.cs" />
-    <Compile Include="InternalTree\DictionaryUtil.cs" />
+    <Compile Include="InternalTree\DictionaryExtensions.cs" />
     <Compile Include="InternalTree\LayoutDirection.cs" />
     <Compile Include="InternalTree\Node.cs" />
     <Compile Include="InternalTree\TreeLayout.cs" />

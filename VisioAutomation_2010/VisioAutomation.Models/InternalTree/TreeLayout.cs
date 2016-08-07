@@ -48,19 +48,19 @@ namespace VisioAutomation.Models.InternalTree
 
         private void set_level_height(Node<T> node, int level)
         {
-            var value = DictionaryUtil.GetValue(this.max_level_height, level, 0);
+            var value = this.max_level_height.GetValueOrDefaultEx( level, 0);
             this.max_level_height[level] = System.Math.Max(value, node.Size.Height);
         }
 
         private void set_level_width(Node<T> node, int level)
         {
-            var value = DictionaryUtil.GetValue(this.max_level_width, level, 0);
+            var value = this.max_level_width.GetValueOrDefaultEx(level, 0);
             this.max_level_width[level] = System.Math.Max(value, node.Size.Width);
         }
 
         private void set_neighbors(Node<T> node, int level)
         {
-            node.left_neighbor = DictionaryUtil.GetValue(this.previous_level_node, level, null);
+            node.left_neighbor = this.previous_level_node.GetValueOrDefaultEx(level, null);
 
             if (node.left_neighbor != null)
             {
