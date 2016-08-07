@@ -40,12 +40,12 @@ namespace VisioAutomationSamples
             update.SetFormulas(progress.ID16, progress_fmt);
             update.Execute(page_a);
 
-            var markup1 = new VA.Text.Markup.TextElement();
-            markup1.AddField(VA.Text.Markup.FieldConstants.PageName);
+            var markup1 = new VisioAutomation.Models.Text.TextElement();
+            markup1.AddField(VisioAutomation.Models.Text.FieldConstants.PageName);
             markup1.AddText(" (");
-            markup1.AddField(VA.Text.Markup.FieldConstants.PageNumber);
+            markup1.AddField(VisioAutomation.Models.Text.FieldConstants.PageNumber);
             markup1.AddText(" of ");
-            markup1.AddField(VA.Text.Markup.FieldConstants.NumberOfPages);
+            markup1.AddField(VisioAutomation.Models.Text.FieldConstants.NumberOfPages);
             markup1.AddText(") ");
             markup1.SetText(group);
         }

@@ -13,7 +13,7 @@ namespace VisioAutomationSamples
             var s1 = page.DrawRectangle(0, 0, 8.5, 11);
             var tnr = page.Document.Fonts["Times New Roman"];
 
-            var e1 = new VA.Text.Markup.TextElement();
+            var e1 = new VisioAutomation.Models.Text.TextElement();
             var color_red = new ColorRGB(0xff0000);
             e1.CharacterCells.Color = color_red.ToFormula();
             e1.CharacterCells.Font = tnr.ID;
@@ -30,7 +30,7 @@ namespace VisioAutomationSamples
             var s1 = page.DrawRectangle(0, 0, 8.5, 11);
             var tnr = page.Document.Fonts["Times New Roman"];
 
-            var e1 = new VA.Text.Markup.TextElement();
+            var e1 = new VisioAutomation.Models.Text.TextElement();
             var color_red = new ColorRGB(0xff0000);
             e1.CharacterCells.Color = color_red.ToFormula();
             e1.CharacterCells.Font = tnr.ID;
@@ -48,7 +48,7 @@ namespace VisioAutomationSamples
 
             // Create the Shapes that will hold the text
             var s1 = page.DrawRectangle(0, 0, 8.5, 11);
-            var e1 = new VA.Text.Markup.TextElement();
+            var e1 = new VisioAutomation.Models.Text.TextElement();
             e1.AddText("When, from behind that craggy steep\n");
             e1.AddText("till then the horizon’s bound\n");
             var e2 = e1.AddElementEx("a huge peak, black and huge\n", null, null, null, VA.Drawing.AlignmentHorizontal.Left, VA.Text.CharStyle.Italic);
@@ -64,11 +64,11 @@ namespace VisioAutomationSamples
 
             // Create the Shapes that will hold the text
             var s1 = page.DrawRectangle(0, 0, 8.5, 11);
-            var e1 = new VA.Text.Markup.TextElement();
+            var e1 = new VisioAutomation.Models.Text.TextElement();
             e1.AddText("This shape is ");
-            e1.AddField(VA.Text.Markup.FieldConstants.Width);
+            e1.AddField(VisioAutomation.Models.Text.FieldConstants.Width);
             e1.AddText("inches wide by ");
-            e1.AddField(VA.Text.Markup.FieldConstants.Height);
+            e1.AddField(VisioAutomation.Models.Text.FieldConstants.Height);
             e1.AddText("inches tall.");
             e1.SetText(s1);
         }
@@ -80,7 +80,7 @@ namespace VisioAutomationSamples
             // Create the Shapes that will hold the text
             var s1 = page.DrawRectangle(0, 0, 8.5, 11);
 
-            var e1 = new VA.Text.Markup.TextElement();
+            var e1 = new VisioAutomation.Models.Text.TextElement();
             e1.ParagraphCells.HorizontalAlign = 0;
             var e2 = e1.AddElement("Hello Worldline1\nline2\nline3\n");
             e2.ParagraphCells.IndentFirst = "0.5pt";

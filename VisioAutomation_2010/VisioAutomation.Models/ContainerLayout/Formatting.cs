@@ -3,16 +3,16 @@
     public class Formatting
     {
         public Shapes.FormatCells FormatCells;
-        public Text.CharacterCells CharacterCells;
-        public Text.ParagraphCells ParagraphCells;
-        public Text.TextBlockCells TextBlockCells;
+        public VisioAutomation.Text.CharacterCells CharacterCells;
+        public VisioAutomation.Text.ParagraphCells ParagraphCells;
+        public VisioAutomation.Text.TextBlockCells TextBlockCells;
 
         public Formatting()
         {
             this.FormatCells = new Shapes.FormatCells();
-            this.CharacterCells = new Text.CharacterCells();
-            this.ParagraphCells = new Text.ParagraphCells();
-            this.TextBlockCells = new Text.TextBlockCells();
+            this.CharacterCells = new VisioAutomation.Text.CharacterCells();
+            this.ParagraphCells = new VisioAutomation.Text.ParagraphCells();
+            this.TextBlockCells = new VisioAutomation.Text.TextBlockCells();
         }
 
         public void Apply(ShapeSheet.Update update, short shapeid_label, short shapeid_box)

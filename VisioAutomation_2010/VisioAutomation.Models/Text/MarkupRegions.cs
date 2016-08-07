@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Text.Markup
+namespace VisioAutomation.Models.Text
 {
     class MarkupRegions
     {

@@ -1,4 +1,4 @@
-namespace VisioAutomation.Text.Markup
+namespace VisioAutomation.Models.Text
 {
     public enum NodeType
     {

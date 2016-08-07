@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace VisioAutomation.Text.Markup
+namespace VisioAutomation.Models.Text
 {
     public class NodeList<T> : IEnumerable<T> where T : Node
     {

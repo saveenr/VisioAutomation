@@ -1,6 +1,6 @@
 ﻿using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioAutomation.Text.Markup
+namespace VisioAutomation.Models.Text
 {
     public class ParagraphCells 
     {

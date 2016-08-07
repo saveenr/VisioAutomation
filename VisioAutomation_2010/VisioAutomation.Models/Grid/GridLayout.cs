@@ -155,7 +155,7 @@ namespace VisioAutomation.Models.Grid
 
                 if (!string.IsNullOrEmpty(node.Text))
                 {
-                    shape_node.Text = new Text.Markup.TextElement( node.Text );
+                    shape_node.Text = new VisioAutomation.Models.Text.TextElement( node.Text );
                 }
 
                 shape_nodes.Add(shape_node);

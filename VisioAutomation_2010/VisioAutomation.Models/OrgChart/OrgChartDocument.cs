@@ -149,7 +149,7 @@ namespace VisioAutomation.Models.OrgChart
                 {
                     var orgnode = (Node)treenodes[i].Data;
                     var shape = (DOM.BaseShape)orgnode.DOMNode;
-                    shape.Text = new Text.Markup.TextElement(orgnode.Text);
+                    shape.Text = new VisioAutomation.Models.Text.TextElement(orgnode.Text);
                 }
 
                 var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);

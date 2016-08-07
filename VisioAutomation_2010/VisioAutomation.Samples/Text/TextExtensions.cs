@@ -5,7 +5,7 @@ namespace VisioAutomationSamples
 {
     public static class TextExtensions
     {
-        public static VA.Text.Markup.TextElement AddElementEx(this VA.Text.Markup.TextElement p, string text,
+        public static VisioAutomation.Models.Text.TextElement AddElementEx(this VisioAutomation.Models.Text.TextElement p, string text,
                                                               int? font, double? size, int? color,
                                                               VA.Drawing.AlignmentHorizontal? halign,
                                                               VA.Text.CharStyle? cs)

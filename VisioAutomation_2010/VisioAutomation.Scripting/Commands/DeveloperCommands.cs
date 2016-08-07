@@ -256,7 +256,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
 
                 var node = new VATREE.Node(ns);
-                node.Text = new Text.Markup.TextElement(label);
+                node.Text = new VisioAutomation.Models.Text.TextElement(label);
                 node.Size = new Drawing.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
             }
@@ -421,7 +421,7 @@ namespace VisioAutomation.Scripting.Commands
                 node.Size = new Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
-                var markup = new Text.Markup.TextElement();
+                var markup = new VisioAutomation.Models.Text.TextElement();
                 var m1 = markup.AddElement(label+"\n");
                 m1.CharacterCells.Font = fontid_segoe;
                 m1.CharacterCells.Size = "12.0pt";

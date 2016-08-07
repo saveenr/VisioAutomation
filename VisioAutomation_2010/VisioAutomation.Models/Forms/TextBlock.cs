@@ -6,10 +6,10 @@ namespace VisioAutomation.Models.Forms
     {
         public Drawing.Size Size;
         public string Font = "SegoeUI";
-        public Text.TextBlockCells TextBlockCells;
-        public Text.ParagraphCells ParagraphCells;
+        public VisioAutomation.Text.TextBlockCells TextBlockCells;
+        public VisioAutomation.Text.ParagraphCells ParagraphCells;
         public Shapes.FormatCells FormatCells;
-        public Text.CharacterCells CharacterCells;
+        public VisioAutomation.Text.CharacterCells CharacterCells;
         public string Text;
         public IVisio.Shape VisioShape;
         public int VisioShapeID;
@@ -19,10 +19,10 @@ namespace VisioAutomation.Models.Forms
         {
             this.Text = text;
             this.Size = size;
-            this.TextBlockCells = new Text.TextBlockCells();
-            this.ParagraphCells = new Text.ParagraphCells();
+            this.TextBlockCells = new VisioAutomation.Text.TextBlockCells();
+            this.ParagraphCells = new VisioAutomation.Text.ParagraphCells();
             this.FormatCells = new Shapes.FormatCells();
-            this.CharacterCells = new Text.CharacterCells();
+            this.CharacterCells = new VisioAutomation.Text.CharacterCells();
         }
 
         public void ApplyFormus(ShapeSheet.Update update)

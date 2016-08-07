@@ -1,6 +1,6 @@
 ﻿using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Text.Markup
+namespace VisioAutomation.Models.Text
 {
     public static class FieldConstants
     {

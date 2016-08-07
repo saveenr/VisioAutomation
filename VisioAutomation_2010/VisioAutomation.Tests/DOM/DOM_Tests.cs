@@ -64,7 +64,7 @@ namespace TestVisioAutomation.DOM
             // Create the doc
             var page_node = new VA.DOM.Page();
             var vrect1 = new VisioAutomation.DOM.Rectangle(1, 1, 9, 9);
-            vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
+            vrect1.Text = new VisioAutomation.Models.Text.TextElement("HELLO WORLD");
             vrect1.Cells.FillForegnd = "rgb(255,0,0)";
             page_node.Shapes.Add(vrect1);
 
@@ -109,7 +109,7 @@ namespace TestVisioAutomation.DOM
             // Create the doc
             var shape_nodes = new VA.DOM.ShapeList();
             var vrect1 = new VisioAutomation.DOM.Rectangle(1, 1, 9, 9);
-            vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
+            vrect1.Text = new VisioAutomation.Models.Text.TextElement("HELLO WORLD");
 
             vrect1.CustomProperties = new Dictionary<string, VA.Shapes.CustomProperties.CustomPropertyCells>();
 

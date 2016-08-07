@@ -2,7 +2,7 @@
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Text.Markup
+namespace VisioAutomation.Models.Text
 {
     public class TextElement : Node
     {
