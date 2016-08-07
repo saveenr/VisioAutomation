@@ -6,21 +6,21 @@ namespace VisioAutomation.Models.Text
 {
     public class TextElement : Node
     {
-        public CharacterCells CharacterCells { get; set; }
-        public ParagraphCells ParagraphCells { get; set; }
+        public CharacterFormatting CharacterFormatting { get; set; }
+        public ParagraphFormatting ParagraphFormatting { get; set; }
 
         public TextElement() :
             base(NodeType.Element)
         {
-            this.CharacterCells = new CharacterCells();
-            this.ParagraphCells = new ParagraphCells();
+            this.CharacterFormatting = new CharacterFormatting();
+            this.ParagraphFormatting = new ParagraphFormatting();
         }
 
         public TextElement(string text) :
             base(NodeType.Element)
         {
-            this.CharacterCells = new CharacterCells();
-            this.ParagraphCells = new ParagraphCells();
+            this.CharacterFormatting = new CharacterFormatting();
+            this.ParagraphFormatting = new ParagraphFormatting();
             this.AddText(text);
         }
 
@@ -164,7 +164,7 @@ namespace VisioAutomation.Models.Text
             {
 
                 // Apply character formatting
-                var charcells = region.Element.CharacterCells;
+                var charcells = region.Element.CharacterFormatting;
                 if (charcells != null)
                 {
                     var chars = shape.Characters;
@@ -184,7 +184,7 @@ namespace VisioAutomation.Models.Text
                 }
 
                 // Apply paragraph formatting
-                var paracells = region.Element.ParagraphCells;
+                var paracells = region.Element.ParagraphFormatting;
                 if (paracells != null)
                 {
                     var chars = shape.Characters;

@@ -14,28 +14,28 @@ namespace VisioAutomationSamples
 
             if (font != null)
             {
-                el.CharacterCells.Font = font.Value;
+                el.CharacterFormatting.Font = font.Value;
             }
 
             if (size.HasValue)
             {
-                el.CharacterCells.Size = string.Format("{0}pt",size.Value);
+                el.CharacterFormatting.Size = string.Format("{0}pt",size.Value);
             }
 
             if (color.HasValue)
             {
                 var c = new ColorRGB(color.Value);
-                el.CharacterCells.Color = c.ToFormula();
+                el.CharacterFormatting.Color = c.ToFormula();
             }
 
             if (halign.HasValue)
             {
-                el.ParagraphCells.HorizontalAlign = (int) halign.Value;
+                el.ParagraphFormatting.HorizontalAlign = (int) halign.Value;
             }
 
             if (cs.HasValue)
             {
-                el.CharacterCells.Style = (int) cs;
+                el.CharacterFormatting.Style = (int) cs;
             }
 
             return el;

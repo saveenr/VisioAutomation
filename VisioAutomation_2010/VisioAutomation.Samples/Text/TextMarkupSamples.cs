@@ -15,9 +15,9 @@ namespace VisioAutomationSamples
 
             var e1 = new VisioAutomation.Models.Text.TextElement();
             var color_red = new ColorRGB(0xff0000);
-            e1.CharacterCells.Color = color_red.ToFormula();
-            e1.CharacterCells.Font = tnr.ID;
-            e1.CharacterCells.Font = "20pt";
+            e1.CharacterFormatting.Color = color_red.ToFormula();
+            e1.CharacterFormatting.Font = tnr.ID;
+            e1.CharacterFormatting.Font = "20pt";
             e1.AddText("Hello World");
             e1.SetText(s1);
         }
@@ -32,9 +32,9 @@ namespace VisioAutomationSamples
 
             var e1 = new VisioAutomation.Models.Text.TextElement();
             var color_red = new ColorRGB(0xff0000);
-            e1.CharacterCells.Color = color_red.ToFormula();
-            e1.CharacterCells.Font = tnr.ID;
-            e1.CharacterCells.Font = "20pt";
+            e1.CharacterFormatting.Color = color_red.ToFormula();
+            e1.CharacterFormatting.Font = tnr.ID;
+            e1.CharacterFormatting.Font = "20pt";
             e1.AddText("Hello ");
 
             var e2 = e1.AddElementEx("World", null, null, null, null, VA.Text.CharStyle.Italic); 
@@ -81,13 +81,13 @@ namespace VisioAutomationSamples
             var s1 = page.DrawRectangle(0, 0, 8.5, 11);
 
             var e1 = new VisioAutomation.Models.Text.TextElement();
-            e1.ParagraphCells.HorizontalAlign = 0;
+            e1.ParagraphFormatting.HorizontalAlign = 0;
             var e2 = e1.AddElement("Hello Worldline1\nline2\nline3\n");
-            e2.ParagraphCells.IndentFirst = "0.5pt";
-            e2.ParagraphCells.IndentLeft= "0.25pt";
+            e2.ParagraphFormatting.IndentFirst = "0.5pt";
+            e2.ParagraphFormatting.IndentLeft= "0.25pt";
             var e3 = e1.AddElement("Goodbye\nline1\nline2\nline3");
-            e3.ParagraphCells.IndentFirst = "1.0pt";
-            e3.ParagraphCells.IndentLeft= "0.75pt";
+            e3.ParagraphFormatting.IndentFirst = "1.0pt";
+            e3.ParagraphFormatting.IndentLeft= "0.75pt";
 
             e1.SetText(s1);
         }

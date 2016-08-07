@@ -423,12 +423,12 @@ namespace VisioAutomation.Scripting.Commands
 
                 var markup = new VisioAutomation.Models.Text.TextElement();
                 var m1 = markup.AddElement(label+"\n");
-                m1.CharacterCells.Font = fontid_segoe;
-                m1.CharacterCells.Size = "12.0pt";
-                m1.CharacterCells.Style = "1"; // Bold
+                m1.CharacterFormatting.Font = fontid_segoe;
+                m1.CharacterFormatting.Size = "12.0pt";
+                m1.CharacterFormatting.Style = "1"; // Bold
                 var m2 = markup.AddElement();
-                m2.CharacterCells.Font = fontid_segoe;
-                m2.CharacterCells.Size = "8.0pt";
+                m2.CharacterFormatting.Font = fontid_segoe;
+                m2.CharacterFormatting.Size = "8.0pt";
                 m2.AddText(string.Join("\n", types_in_namespace));
 
                 node.Text = markup;

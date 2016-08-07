@@ -247,7 +247,7 @@ namespace VisioAutomationSamples
                         if (i < chunk.Count)
                         {
                             n1.Text = new VisioAutomation.Models.Text.TextElement(chunk[i]);
-                            n1.Text.CharacterCells.Color = colors[j];
+                            n1.Text.CharacterFormatting.Color = colors[j];
 
                         }
                         n1.CharFontName = fontnames[j];

@@ -114,7 +114,7 @@
     <Compile Include="InternalTree\Node.cs" />
     <Compile Include="InternalTree\TreeLayout.cs" />
     <Compile Include="InternalTree\TreeLayoutOptions.cs" />
-    <Compile Include="Text\CharacterCells.cs" />
+    <Compile Include="Text\CharacterFormatting.cs" />
     <Compile Include="Text\CustomField.cs" />
     <Compile Include="Text\Field.cs" />
     <Compile Include="Text\FieldBase.cs" />
@@ -124,7 +124,7 @@
     <Compile Include="Text\Node.cs" />
     <Compile Include="Text\NodeList.cs" />
     <Compile Include="Text\NodeType.cs" />
-    <Compile Include="Text\ParagraphCells.cs" />
+    <Compile Include="Text\ParagraphFormatting.cs" />
     <Compile Include="Text\TextElement.cs" />
     <Compile Include="Text\TextRegion.cs" />
     <Compile Include="OrgChart\LayoutDirection.cs" />

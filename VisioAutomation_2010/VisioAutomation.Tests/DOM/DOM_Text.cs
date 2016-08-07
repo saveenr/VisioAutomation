@@ -36,7 +36,7 @@ namespace TestVisioAutomation.DOM
         public void MarkupCharacterBold()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{Bold}");
-            m.CharacterCells.Style = (int)VisioAutomation.Text.CharStyle.Bold;
+            m.CharacterFormatting.Style = (int)VisioAutomation.Text.CharStyle.Bold;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -52,7 +52,7 @@ namespace TestVisioAutomation.DOM
         public void MarkupCharacterItalic()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{Italic}");
-            m.CharacterCells.Style = (int)VisioAutomation.Text.CharStyle.Italic;
+            m.CharacterFormatting.Style = (int)VisioAutomation.Text.CharStyle.Italic;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -71,7 +71,7 @@ namespace TestVisioAutomation.DOM
 
             var impact = page1.Document.Fonts["Arial"];
             var m = new VisioAutomation.Models.Text.TextElement("Normal Text in Impact Font");
-            m.CharacterCells.Font = impact.ID;
+            m.CharacterFormatting.Font = impact.ID;
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -96,19 +96,19 @@ namespace TestVisioAutomation.DOM
             var georgia = fonts["Georgia"];
 
             var t1 = new VisioAutomation.Models.Text.TextElement("{Normal}");
-            t1.CharacterCells.Font = segoeui.ID;
+            t1.CharacterFormatting.Font = segoeui.ID;
 
             var t2 = t1.AddElement("{Italic}");
-            t2.CharacterCells.Style = (int)VisioAutomation.Text.CharStyle.Italic;
-            t2.CharacterCells.Font = impact.ID;
+            t2.CharacterFormatting.Style = (int)VisioAutomation.Text.CharStyle.Italic;
+            t2.CharacterFormatting.Font = impact.ID;
 
             var t3 = t2.AddElement("{Bold}");
-            t3.CharacterCells.Style = (int)VisioAutomation.Text.CharStyle.Bold;
-            t3.CharacterCells.Font = couriernew.ID;
+            t3.CharacterFormatting.Style = (int)VisioAutomation.Text.CharStyle.Bold;
+            t3.CharacterFormatting.Font = couriernew.ID;
 
             var t4 = t2.AddElement("{Bold Italic}");
-            t4.CharacterCells.Style = (int)(VisioAutomation.Text.CharStyle.Bold | VisioAutomation.Text.CharStyle.Italic);
-            t4.CharacterCells.Font = georgia.ID;
+            t4.CharacterFormatting.Style = (int)(VisioAutomation.Text.CharStyle.Bold | VisioAutomation.Text.CharStyle.Italic);
+            t4.CharacterFormatting.Font = georgia.ID;
 
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             t1.SetText(s0);
@@ -163,7 +163,7 @@ namespace TestVisioAutomation.DOM
         public void MarkupParagraphLeft()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{LeftHAlign}");
-            m.ParagraphCells.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Left;
+            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Left;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -180,7 +180,7 @@ namespace TestVisioAutomation.DOM
         public void MarkupParagraphCenter()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{CenterHAlign}");
-            m.ParagraphCells.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Center;
+            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Center;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -197,7 +197,7 @@ namespace TestVisioAutomation.DOM
         public void MarkupParagraphRight()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{RightHAlign}");
-            m.ParagraphCells.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Right;
+            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Right;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);

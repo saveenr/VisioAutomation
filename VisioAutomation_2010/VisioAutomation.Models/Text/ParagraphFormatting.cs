@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Models.Text
 {
-    public class ParagraphCells 
+    public class ParagraphFormatting 
     {
         public ShapeSheet.FormulaLiteral Bullet { get; set; }
         public ShapeSheet.FormulaLiteral BulletFont { get; set; }
@@ -37,7 +37,7 @@ namespace VisioAutomation.Models.Text
             update.SetFormulaIgnoreNull(SRCCON.Para_BulletStr.ForRow(row), this.BulletString);
         }
 
-        public void ApplyFormulasTo(ParagraphCells target)
+        public void ApplyFormulasTo(ParagraphFormatting target)
         {
             if (this.IndentFirst.HasValue) { target.IndentFirst = this.IndentFirst; }
             if (this.IndentLeft.HasValue) { target.IndentLeft = this.IndentLeft; }

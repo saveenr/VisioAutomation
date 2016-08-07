@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Models.Text
 {
-    public class CharacterCells
+    public class CharacterFormatting
     {
         public ShapeSheet.FormulaLiteral AsianFont { get; set; }
         public ShapeSheet.FormulaLiteral Case { get; set; }
@@ -54,7 +54,7 @@ namespace VisioAutomation.Models.Text
             update.SetFormulaIgnoreNull(SRCCON.CharUseVertical.ForRow(row), this.UseVertical);
         }
 
-        public void ApplyFormulasTo(CharacterCells target)
+        public void ApplyFormulasTo(CharacterFormatting target)
         {
             if (this.AsianFont.HasValue) { target.AsianFont = this.AsianFont; }
             if (this.Case.HasValue) { target.Case = this.Case; }
