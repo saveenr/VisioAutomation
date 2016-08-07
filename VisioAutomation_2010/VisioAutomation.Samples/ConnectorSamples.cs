@@ -32,7 +32,7 @@ namespace VisioAutomationSamples
             var r1 = page.DrawRectangle(0, 1, 2, 2);
             var r2 = page.DrawRectangle(7, 7, 8, 8);
 
-            VACONNECT.ConnectorHelper.ConnectShapes(connector, r1, r2);
+            VACONNECT.ConnectionHelper.ConnectShapes(connector, r1, r2);
 
             var con_layer = page.Layers["Connector"];
 

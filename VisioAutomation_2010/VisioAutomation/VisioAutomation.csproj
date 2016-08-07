@@ -76,7 +76,6 @@
     <Compile Include="Application\Logging\LogState.cs" />
     <Compile Include="Colors\ColorHelper.cs" />
     <Compile Include="Masters\MasterHelper.cs" />
-    <Compile Include="Shapes\Connections\ConnectionHelper.cs" />
     <Compile Include="Fonts\FontHelper.cs" />
     <Compile Include="Layers\LayerHelper.cs" />
     <Compile Include="ShapeSheet\Query\CellColumnType.cs" />
@@ -191,7 +190,7 @@
     </Compile>
     <Compile Include="ShapeSheet\CellData.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
-    <Compile Include="Shapes\Connections\ConnectorHelper.cs" />
+    <Compile Include="Shapes\Connections\ConnectionHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Shapes\Controls\ControlCells.cs" />

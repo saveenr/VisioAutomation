@@ -391,7 +391,7 @@ namespace VisioAutomation.DOM
                 var from_shape = context.GetShape(dyncon_shape.From.VisioShapeID);
                 var to_shape = context.GetShape(dyncon_shape.To.VisioShapeID);
 
-                VACONNECT.ConnectorHelper.ConnectShapes(from_shape, to_shape, vis_connector);
+                VACONNECT.ConnectionHelper.ConnectShapes(from_shape, to_shape, vis_connector);
                 dyncon_shape.VisioShape = vis_connector;
                 dyncon_shape.VisioShapeID = connector_shapeids[i];
             }

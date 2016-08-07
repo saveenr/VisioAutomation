@@ -7,7 +7,7 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Connect> ToEnumerable(this IVisio.Connects connects)
         {
-            return VisioAutomation.Connections.ConnectionHelper.ToEnumerable(connects);
+            return VisioAutomation.Shapes.Connections.ConnectionHelper.ToEnumerable(connects);
         }
     }
 }

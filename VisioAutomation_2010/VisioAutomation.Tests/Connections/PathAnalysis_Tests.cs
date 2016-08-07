@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Connections
 
             var drop_point = new VADRAW.Point(-2, -2);
             var c1 = page.Drop(dcm, drop_point);
-            VACONNECT.ConnectorHelper.ConnectShapes(a, b, c1);
+            VACONNECT.ConnectionHelper.ConnectShapes(a, b, c1);
 
             //a.AutoConnect(b, connect_dir_none, null);
 
