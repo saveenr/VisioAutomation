@@ -64,7 +64,7 @@
     <Compile Include="Layouts\Container\LayoutOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\Connector.cs" />
     <Compile Include="Layouts\DirectedGraph\ConnectorList.cs" />
-    <Compile Include="Layouts\DirectedGraph\Drawing.cs" />
+    <Compile Include="Layouts\DirectedGraph\DirectedGraphLayout.cs" />
     <Compile Include="Layouts\DirectedGraph\IDList.cs" />
     <Compile Include="Layouts\DirectedGraph\LayoutDirection.cs" />
     <Compile Include="Layouts\DirectedGraph\LayoutOptions.cs" />

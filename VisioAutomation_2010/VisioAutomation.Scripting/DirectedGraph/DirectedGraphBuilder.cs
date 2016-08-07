@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             }
         }
 
-        public static IList<VAGRAPH.Drawing> LoadFromXML(Client client, string filename)
+        public static IList<VAGRAPH.DirectedGraphLayout> LoadFromXML(Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
             return DirectedGraphBuilder.LoadFromXML(client, xmldoc);
@@ -56,7 +56,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         private class PageData
         {
             public Models.Layouts.DirectedGraph.MsaglLayoutOptions LayoutOptions;
-            public VAGRAPH.Drawing DirectedGraph;
+            public VAGRAPH.DirectedGraphLayout DirectedGraph;
             public List<ShapeInfo> ShapeInfos;
             public List<ConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
@@ -82,7 +82,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 var renderoptions_el = page_el.Element("renderoptions");
                 DirectedGraphBuilder.GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
 
-                pagedata.DirectedGraph = new VAGRAPH.Drawing();
+                pagedata.DirectedGraph = new VAGRAPH.DirectedGraphLayout();
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             return pagedatas;
         }
 
-        public static IList<VAGRAPH.Drawing> LoadFromXML(Client client, SXL.XDocument xmldoc)
+        public static IList<VAGRAPH.DirectedGraphLayout> LoadFromXML(Client client, SXL.XDocument xmldoc)
         {
             var pagedatas = DirectedGraphBuilder.LoadPageDataFromXML(client, xmldoc);
 

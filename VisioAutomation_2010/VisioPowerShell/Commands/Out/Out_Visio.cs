@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands.Out
         public VisioAutomation.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
 
         [Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public List<VisioAutomation.Models.Layouts.DirectedGraph.Drawing> DirectedGraphs { get; set; }
+        public List<VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
 
         [Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public DataTable DataTable { get; set; }

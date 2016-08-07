@@ -51,7 +51,7 @@ namespace VisioAutomation_Tests.Models.Layouts
         [TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
-            var d = new DG.Drawing();
+            var d = new DG.DirectedGraphLayout();
 
             var n0 = d.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -84,9 +84,9 @@ namespace VisioAutomation_Tests.Models.Layouts
             doc.Close();
         }
 
-        private DG.Drawing create_sample_graph()
+        private DG.DirectedGraphLayout create_sample_graph()
         {
-            var d = new DG.Drawing();
+            var d = new DG.DirectedGraphLayout();
 
             var basic_stencil = "basic_u.vss";
             var n0 = d.AddShape("n0", "Node 0", basic_stencil, "Rectangle");

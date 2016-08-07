@@ -3,12 +3,12 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
-    public class Drawing
+    public class DirectedGraphLayout
     {
         public ShapeList Shapes;
         public ConnectorList Connectors;
 
-        public Drawing()
+        public DirectedGraphLayout()
         {
             this.Shapes = new ShapeList();
             this.Connectors = new ConnectorList();

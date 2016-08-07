@@ -57,7 +57,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             return s.Multiply(this.ScaleToMsagl, this.ScaleToMsagl);
         }
 
-        private void validate_connectors(Drawing layout_diagram)
+        private void validate_connectors(DirectedGraphLayout layout_diagram)
         {
             foreach (var layout_connector in layout_diagram.Connectors)
             {
@@ -78,7 +78,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        private MSAGL.Core.Layout.GeometryGraph CreateMsaglGraph(Drawing layout_diagram)
+        private MSAGL.Core.Layout.GeometryGraph CreateMsaglGraph(DirectedGraphLayout layout_diagram)
         {
             var mg_graph = new MSAGL.Core.Layout.GeometryGraph();
 
@@ -161,7 +161,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         }
 
         public void  Render(
-            Drawing layout_diagram, 
+            DirectedGraphLayout layout_diagram, 
             IVisio.Page page)
         {        
             // Create A DOM and render it to the page
@@ -199,7 +199,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        private static void ResolveMasters(Drawing layout_diagram, IVisio.Application app)
+        private static void ResolveMasters(DirectedGraphLayout layout_diagram, IVisio.Application app)
         {
             // for masters that are identified by their name and stencil, go find the actual master objects by
             // loading the specified stenciles
@@ -231,7 +231,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        public DOM.Page CreateDOMPage(Drawing layout_diagram, IVisio.Application vis)
+        public DOM.Page CreateDOMPage(DirectedGraphLayout layout_diagram, IVisio.Application vis)
         {
             var page_node = new DOM.Page();
             MsaglRenderer.ResolveMasters(layout_diagram, vis);
@@ -539,7 +539,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        public static void Render(IVisio.Page page, Drawing drawing, MsaglLayoutOptions options)
+        public static void Render(IVisio.Page page, DirectedGraphLayout directedGraphLayout, MsaglLayoutOptions options)
         {
             if (page == null)
             {
@@ -553,7 +553,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             var renderer = new MsaglRenderer();
             renderer.LayoutOptions = options;
-            renderer.Render(drawing,page);
+            renderer.Render(directedGraphLayout,page);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);
         }
     }

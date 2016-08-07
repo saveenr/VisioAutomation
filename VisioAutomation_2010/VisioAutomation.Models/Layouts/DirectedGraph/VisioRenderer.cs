@@ -8,7 +8,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         {
         }
 
-        public void Render(IVisio.Page page, Drawing drawing, VisioLayoutOptions options)
+        public void Render(IVisio.Page page, DirectedGraphLayout directedGraphLayout, VisioLayoutOptions options)
         {
             // This is Visio-based render - it does NOT use MSAGL
             if (page == null)
@@ -24,7 +24,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var page_node = new DOM.Page();
             double x = 0;
             double y = 1;
-            foreach (var shape in drawing.Shapes)
+            foreach (var shape in directedGraphLayout.Shapes)
             {
                 var shape_nodes = page_node.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
                 shape.DOMNode = shape_nodes;
@@ -32,7 +32,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 x += 1.0;
             }
 
-            foreach (var connector in drawing.Connectors)
+            foreach (var connector in directedGraphLayout.Connectors)
             {
                 var connector_node = page_node.Shapes.Connect("Dynamic Connector", "connec_u.vss", connector.From.DOMNode, connector.To.DOMNode);
                 connector.DOMNode = connector_node;

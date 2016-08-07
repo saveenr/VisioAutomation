@@ -308,7 +308,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DirectedGraph(IList<VAGRAPH.Drawing> directedgraphs)
+        public void DirectedGraph(IList<VAGRAPH.DirectedGraphLayout> directedgraphs)
         {
             this._client.Application.AssertApplicationAvailable();
 
