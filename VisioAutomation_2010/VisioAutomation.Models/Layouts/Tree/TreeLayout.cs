@@ -2,7 +2,7 @@ using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Models.Tree
+namespace VisioAutomation.Models.Layouts.Tree
 {
     public class TreeLayout
     {

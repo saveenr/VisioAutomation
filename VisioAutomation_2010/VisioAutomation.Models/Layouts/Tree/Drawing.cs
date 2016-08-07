@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.Tree
+namespace VisioAutomation.Models.Layouts.Tree
 {
     public class Drawing
     {

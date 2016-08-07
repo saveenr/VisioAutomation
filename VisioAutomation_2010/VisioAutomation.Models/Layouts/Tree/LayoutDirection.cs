@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Models.Tree
+﻿namespace VisioAutomation.Models.Layouts.Tree
 {
     public enum LayoutDirection
     {

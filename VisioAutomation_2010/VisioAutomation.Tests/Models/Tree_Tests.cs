@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
-using TREEMODEL = VisioAutomation.Models.Tree;
+using TREEMODEL = VisioAutomation.Models.Layouts.Tree;
 
 namespace VisioAutomation_Tests.Models.TreeLayout
 {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VATREE = VisioAutomation.Models.Tree;
+using VATREE = VisioAutomation.Models.Layouts.Tree;
 
 namespace VisioAutomation.Scripting.Commands
 {

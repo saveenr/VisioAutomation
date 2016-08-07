@@ -79,7 +79,7 @@ namespace VisioPowerShell.Commands.Out
             else if (this.XmlDocument != null)
             {
                 this.WriteVerbose("XmlDocument");
-                var tree_drawing = new VisioAutomation.Models.Tree.Drawing();
+                var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
                 this.build_from_xml_doc(this.XmlDocument, tree_drawing);
 
                 tree_drawing.Render(this.Client.Page.Get());
@@ -90,22 +90,22 @@ namespace VisioPowerShell.Commands.Out
             }
         }
 
-        private void build_from_xml_doc(XmlDocument xmlDocument, VisioAutomation.Models.Tree.Drawing tree_drawing)
+        private void build_from_xml_doc(XmlDocument xmlDocument, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
         {
-            var n = new VisioAutomation.Models.Tree.Node();
+            var n = new VisioAutomation.Models.Layouts.Tree.Node();
             tree_drawing.Root = n;
             n.Text = new VisioAutomation.Models.Text.TextElement(xmlDocument.Name);
             this.build_from_xml_element(xmlDocument.DocumentElement,n);
 
         }
 
-        private void build_from_xml_element(XmlElement x, VisioAutomation.Models.Tree.Node parent)
+        private void build_from_xml_element(XmlElement x, VisioAutomation.Models.Layouts.Tree.Node parent)
         {
             foreach (XmlNode xchild in x.ChildNodes)
             {
                 if (xchild is XmlElement)
                 {
-                    var nchild = new VisioAutomation.Models.Tree.Node();
+                    var nchild = new VisioAutomation.Models.Layouts.Tree.Node();
                     nchild.Text = new VisioAutomation.Models.Text.TextElement(xchild.Name);
 
                     parent.Children.Add(nchild);

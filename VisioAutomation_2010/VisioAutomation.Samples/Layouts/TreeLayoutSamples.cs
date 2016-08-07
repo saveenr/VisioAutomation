@@ -1,5 +1,5 @@
 ﻿using VA = VisioAutomation;
-using TREEMODEL = VisioAutomation.Models.Tree;
+using TREEMODEL = VisioAutomation.Models.Layouts.Tree;
 
 namespace VisioAutomationSamples
 {

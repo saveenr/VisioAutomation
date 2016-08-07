@@ -1,7 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Models.Tree
+namespace VisioAutomation.Models.Layouts.Tree
 {
     public class Node
     {
