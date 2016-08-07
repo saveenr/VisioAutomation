@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VADRAW = VisioAutomation.Drawing;
 using VASS = VisioAutomation.ShapeSheet;
 
-namespace TestVisioAutomation
+namespace VisioAutomation_Tests
 {
     public static class AssertUtil
     {

@@ -2,7 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TestVisioAutomation
+namespace VisioAutomation_Tests
 {
     public class VisioPSContext : PowerShellTestsSession
     {

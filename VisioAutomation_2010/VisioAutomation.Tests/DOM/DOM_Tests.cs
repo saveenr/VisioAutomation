@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
-namespace TestVisioAutomation.DOM
+namespace VisioAutomation_Tests.DOM
 {
     [TestClass]
     public class DOM_Tests : VisioAutomationTest

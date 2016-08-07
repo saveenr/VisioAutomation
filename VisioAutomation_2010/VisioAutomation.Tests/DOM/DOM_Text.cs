@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestVisioAutomation.DOM
+namespace VisioAutomation_Tests.DOM
 {
     [TestClass]
     public class DOM_Text : VisioAutomationTest

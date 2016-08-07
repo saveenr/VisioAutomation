@@ -9,7 +9,7 @@ using SXL = System.Xml.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VAUSERCELL = VisioAutomation.Shapes.UserDefinedCells;
 
-namespace TestVisioAutomation.Scripting
+namespace VisioAutomation_Tests.Scripting
 {
     [TestClass]
     public class ScriptingDrawTests : VisioAutomationTest

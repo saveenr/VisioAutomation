@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation.Scripting
+namespace VisioAutomation_Tests.Scripting
 {
     [TestClass]
     public class ScriptingCustomPropTests : VisioAutomationTest

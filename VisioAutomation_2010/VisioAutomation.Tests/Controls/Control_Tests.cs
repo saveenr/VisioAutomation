@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VACTRL = VisioAutomation.Shapes.Controls;
 
-namespace TestVisioAutomation.Controls
+namespace VisioAutomation_Tests.Controls
 {
     [TestClass]
     public class Control_Tests : VisioAutomationTest

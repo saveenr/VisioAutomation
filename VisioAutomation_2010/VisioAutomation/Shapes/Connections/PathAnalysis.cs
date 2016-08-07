@@ -185,7 +185,7 @@ namespace VisioAutomation.Shapes.Connections
             }
         }
 
-        internal static IEnumerable<DirectedEdge<A, object>> GetClosureFromEdges<A, B>(
+        public static IEnumerable<DirectedEdge<A, object>> GetClosureFromEdges<A, B>(
             IEnumerable<DirectedEdge<A, B>> edges)
         {
             if (edges == null)

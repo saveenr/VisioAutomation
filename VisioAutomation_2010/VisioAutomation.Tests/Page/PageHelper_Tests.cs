@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation.Page
+namespace VisioAutomation_Tests.Page
 {
     [TestClass]
     public class PageHelper_Tests : VisioAutomationTest

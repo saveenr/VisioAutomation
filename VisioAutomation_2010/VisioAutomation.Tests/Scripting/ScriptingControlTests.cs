@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VACONTROL = VisioAutomation.Shapes.Controls;
 using VAHYPERLINK = VisioAutomation.Shapes.Hyperlinks;
 
-namespace TestVisioAutomation.Scripting
+namespace VisioAutomation_Tests.Scripting
 {
     [TestClass]
     public class ScriptingControlTests : VisioAutomationTest

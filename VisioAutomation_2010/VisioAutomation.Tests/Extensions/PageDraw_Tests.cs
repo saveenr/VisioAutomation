@@ -6,7 +6,7 @@ using VACHART=VisioAutomation.Models.Charting;
 using IVisio= Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace TestVisioAutomation.Extensions
+namespace VisioAutomation_Tests.Extensions
 {
     [TestClass]
     public class PageDrawTests : VisioAutomationTest

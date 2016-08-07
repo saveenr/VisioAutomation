@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using CONMODEL = VisioAutomation.Models.ContainerLayout;
 
-namespace TestVisioAutomation.Models
+namespace VisioAutomation_Tests.Models
 {
     [TestClass]
     public class CointainerLayout_Tests : VisioAutomationTest

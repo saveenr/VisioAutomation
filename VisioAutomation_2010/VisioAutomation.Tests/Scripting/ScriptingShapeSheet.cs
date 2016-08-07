@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
-namespace TestVisioAutomation.Scripting
+namespace VisioAutomation_Tests.Scripting
 {
     [TestClass]
     public class ScriptingShapeSheetTests : VisioAutomationTest

@@ -1,4 +1,4 @@
-﻿namespace TestVisioAutomation
+﻿namespace VisioAutomation_Tests
 {
     public static class TestGlobals
     {

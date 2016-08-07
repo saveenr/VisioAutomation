@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation.Internal
+namespace VisioAutomation_Tests.Internal
 {
     [TestClass]
     public class Internal_Tests

@@ -6,7 +6,7 @@ using VASS=VisioAutomation.ShapeSheet;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace TestVisioAutomation.Connections
+namespace VisioAutomation_Tests.Connections
 {
     [TestClass]
     public class PathAnalysis_Tests : VisioAutomationTest

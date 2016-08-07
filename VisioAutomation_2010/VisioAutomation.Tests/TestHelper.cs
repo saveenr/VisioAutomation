@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace TestVisioAutomation
+namespace VisioAutomation_Tests
 {
     public class TestHelper
     {

@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Shapes.Connections
 {
-    internal class BitArray2D
+    public class BitArray2D
     {
         public System.Collections.BitArray BitArray { get; }
         public int Width { get; }

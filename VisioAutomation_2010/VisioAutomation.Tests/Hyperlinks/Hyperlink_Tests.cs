@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VAHLINK = VisioAutomation.Shapes.Hyperlinks;
 
-namespace TestVisioAutomation.Hyperlinks
+namespace VisioAutomation_Tests.Hyperlinks
 {
     [TestClass]
     public class Hyperlink_Tests : VisioAutomationTest

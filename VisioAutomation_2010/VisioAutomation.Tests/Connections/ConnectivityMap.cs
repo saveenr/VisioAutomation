@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 
-namespace TestVisioAutomation.Connections
+namespace VisioAutomation_Tests.Connections
 {
     public class ConnectivityMap
     {
