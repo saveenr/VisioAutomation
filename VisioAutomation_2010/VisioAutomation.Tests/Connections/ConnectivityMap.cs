@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VACONNECT = VisioAutomation.Shapes.Connections;
 
 namespace VisioAutomation_Tests.Connections
 {
