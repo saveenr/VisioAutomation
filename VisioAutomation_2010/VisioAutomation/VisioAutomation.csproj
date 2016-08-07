@@ -263,10 +263,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="binaries\MSAGL\LICENSE.txt" />
-    <Content Include="binaries\MSAGL\Microsoft.Msagl.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
