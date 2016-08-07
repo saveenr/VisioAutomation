@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.DocumentAnalysis
 {
-    public static class ConnectionPathAnalyzer
+    public static class ConnectionAnalyzer
     {
         public static IList<ConnectorEdge> GetTransitiveClosure(
             IVisio.Page page,
@@ -16,10 +16,10 @@ namespace VisioAutomation.DocumentAnalysis
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var directed_edges = ConnectionPathAnalyzer.GetDirectedEdges(page, flag)
+            var directed_edges = ConnectionAnalyzer.GetDirectedEdges(page, flag)
                 .Select(e => new DirectedEdge<IVisio.Shape, IVisio.Shape>(e.From, e.To, e.Connector));
 
-            var closure = ConnectionPathAnalyzer.GetClosureFromEdges(directed_edges)
+            var closure = ConnectionAnalyzer.GetClosureFromEdges(directed_edges)
                 .Select(x => new ConnectorEdge(null, x.From, x.To)).ToList();
 
             return closure;
@@ -40,7 +40,7 @@ namespace VisioAutomation.DocumentAnalysis
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var edges = ConnectionPathAnalyzer.GetDirectedEdgesRaw(page);
+            var edges = ConnectionAnalyzer.GetDirectedEdgesRaw(page);
 
             if (flag == ConnectorEdgeHandling.Raw)
             {
@@ -238,7 +238,7 @@ namespace VisioAutomation.DocumentAnalysis
 
             var warshall_result = adj_matrix.Clone();
 
-            ConnectionPathAnalyzer.PerformWarshall(warshall_result);
+            ConnectionAnalyzer.PerformWarshall(warshall_result);
 
             for (int row = 0; row < adj_matrix.Width; row++)
             {
