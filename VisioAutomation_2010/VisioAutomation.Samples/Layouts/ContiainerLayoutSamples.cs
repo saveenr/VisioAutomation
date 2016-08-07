@@ -1,4 +1,4 @@
-﻿using CONTMODEL = VisioAutomation.Models.ContainerLayout;
+﻿using CONTMODEL = VisioAutomation.Models.Layouts.Container;
 
 namespace VisioAutomationSamples
 {

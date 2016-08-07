@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.ContainerLayout
+namespace VisioAutomation.Models.Layouts.Container
 {
     public class Container
     {

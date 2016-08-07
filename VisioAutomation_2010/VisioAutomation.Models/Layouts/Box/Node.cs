@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Models.BoxLayout
+namespace VisioAutomation.Models.Layouts.Box
 {
     public abstract class Node
     {

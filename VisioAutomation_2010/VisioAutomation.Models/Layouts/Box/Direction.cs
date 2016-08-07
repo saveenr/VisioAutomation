@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Models.BoxLayout
+﻿namespace VisioAutomation.Models.Layouts.Box
 {
     public enum Direction
     {

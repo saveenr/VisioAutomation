@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace VisioAutomation.Models.BoxLayout
+namespace VisioAutomation.Models.Layouts.Box
 {
     public class Container : Node, IEnumerable<Node>
     {

@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Models.ContainerLayout
+﻿namespace VisioAutomation.Models.Layouts.Container
 {
     public class Formatting
     {

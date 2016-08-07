@@ -163,7 +163,7 @@ namespace VisioAutomation_Tests.DOM
         public void MarkupParagraphLeft()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{LeftHAlign}");
-            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Left;
+            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Left;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -172,7 +172,7 @@ namespace VisioAutomation_Tests.DOM
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual((int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Left, parafmt[0].HorizontalAlign.Result);
+            Assert.AreEqual((int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Left, parafmt[0].HorizontalAlign.Result);
 
             page1.Delete(0);
         }
@@ -180,7 +180,7 @@ namespace VisioAutomation_Tests.DOM
         public void MarkupParagraphCenter()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{CenterHAlign}");
-            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Center;
+            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Center;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -189,7 +189,7 @@ namespace VisioAutomation_Tests.DOM
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual((int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Center, parafmt[0].HorizontalAlign.Result);
+            Assert.AreEqual((int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Center, parafmt[0].HorizontalAlign.Result);
 
             page1.Delete(0);
         }
@@ -197,7 +197,7 @@ namespace VisioAutomation_Tests.DOM
         public void MarkupParagraphRight()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{RightHAlign}");
-            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Right;
+            m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Right;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -206,7 +206,7 @@ namespace VisioAutomation_Tests.DOM
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual((int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Right, parafmt[0].HorizontalAlign.Result);
+            Assert.AreEqual((int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Right, parafmt[0].HorizontalAlign.Result);
 
             page1.Delete(0);
         }
