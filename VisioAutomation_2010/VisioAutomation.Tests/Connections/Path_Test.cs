@@ -17,7 +17,7 @@ namespace VisioAutomation_Tests.Connections
                 {
                     new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v0", null)
                 };
-            var output = VisioAutomation.DocumentAnalysis.PathAnalysis.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.DocumentAnalysis.ConnectionPathAnalyzer.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(0,output.Count);
         }
 
@@ -30,7 +30,7 @@ namespace VisioAutomation_Tests.Connections
             var input = new List<VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>>();
             input.Add(new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v0", null));
             input.Add(new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v1", "v1", null));
-            var output = VisioAutomation.DocumentAnalysis.PathAnalysis.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.DocumentAnalysis.ConnectionPathAnalyzer.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(0, output.Count);
         }
 
@@ -43,7 +43,7 @@ namespace VisioAutomation_Tests.Connections
                 {
                     new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v1", null)
                 };
-            var output = VisioAutomation.DocumentAnalysis.PathAnalysis.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.DocumentAnalysis.ConnectionPathAnalyzer.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(1, output.Count);
             Assert.AreEqual("v0",output[0].From);
             Assert.AreEqual("v1", output[0].To);
@@ -58,7 +58,7 @@ namespace VisioAutomation_Tests.Connections
                     new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v1", null),
                     new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v1", "v2", null)
                 };
-            var output = VisioAutomation.DocumentAnalysis.PathAnalysis.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.DocumentAnalysis.ConnectionPathAnalyzer.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(3, output.Count);
             Assert.AreEqual("v0", output[0].From);
             Assert.AreEqual("v1", output[0].To);
@@ -80,7 +80,7 @@ namespace VisioAutomation_Tests.Connections
                     new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v1", "v2", null),
                     new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v2", "v0", null)
                 };
-            var output = VisioAutomation.DocumentAnalysis.PathAnalysis.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.DocumentAnalysis.ConnectionPathAnalyzer.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(6, output.Count);
             Assert.AreEqual("v0", output[0].From);
             Assert.AreEqual("v1", output[0].To);

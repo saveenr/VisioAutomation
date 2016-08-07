@@ -40,11 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitArray2D.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ConnectorEdge.cs" />
     <Compile Include="ConnectorEdgeHandling.cs" />
     <Compile Include="DirectedEdge.cs" />
-    <Compile Include="PathAnalysis.cs" />
+    <Compile Include="ConnectionPathAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

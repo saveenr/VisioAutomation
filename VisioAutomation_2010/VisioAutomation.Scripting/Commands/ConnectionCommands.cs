@@ -25,7 +25,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var app = this._client.Application.Get();
-            return VA.DocumentAnalysis.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
+            return VA.DocumentAnalysis.ConnectionPathAnalyzer.GetTransitiveClosure(app.ActivePage, flag);
         }
 
         public IList<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdges(VA.DocumentAnalysis.ConnectorEdgeHandling flag)
@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var application = this._client.Application.Get();
-            var directed_edges = VA.DocumentAnalysis.PathAnalysis.GetDirectedEdges(application.ActivePage, flag);
+            var directed_edges = VA.DocumentAnalysis.ConnectionPathAnalyzer.GetDirectedEdges(application.ActivePage, flag);
             return directed_edges;
         }
 
