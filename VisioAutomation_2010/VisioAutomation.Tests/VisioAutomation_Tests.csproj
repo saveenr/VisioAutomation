@@ -88,10 +88,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connections\ConnectivityMap.cs" />
-    <Compile Include="Connections\PathAnalysis_Tests.cs" />
+    <Compile Include="DocumentAnalysis\ConnectivityMap.cs" />
+    <Compile Include="DocumentAnalysis\PathAnalysis_Tests.cs" />
     <Compile Include="AssertUtil.cs" />
-    <Compile Include="Hyperlinks\Hyperlink_Tests.cs" />
+    <Compile Include="Core\Hyperlinks\Hyperlink_Tests.cs" />
     <Compile Include="PowerShellTestsSession.cs" />
     <Compile Include="Scripting\ScriptingHyperlinkTests.cs" />
     <Compile Include="SMA_Extensions.cs" />
@@ -99,15 +99,15 @@
     <Compile Include="Scripting\ScriptingShapeText_Tests.cs" />
     <Compile Include="VisioPowerShellTests.cs" />
     <Compile Include="DiagnosticDebugContext.cs" />
-    <Compile Include="DOM\DOM_Text.cs" />
+    <Compile Include="Models\DOM\DOM_Text.cs" />
     <Compile Include="TestGlobals.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="Internal\BezierTests.cs" />
-    <Compile Include="Internal\TypeTests.cs" />
+    <Compile Include="Core\Internal\BezierTests.cs" />
+    <Compile Include="Core\Internal\TypeTests.cs" />
     <Compile Include="Models\CointainerLayout_Tests.cs" />
     <Compile Include="Models\Chart_Tests.cs" />
     <Compile Include="Models\ResizePageTests.cs" />
-    <Compile Include="ImportExport\XmlErrorLog_Tests.cs" />
+    <Compile Include="Core\ImportExport\XmlErrorLog_Tests.cs" />
     <Compile Include="Scripting\ScriptingDevTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
     <Compile Include="Scripting\ScriptingShapeSheetTests.cs" />
@@ -115,8 +115,8 @@
     <Compile Include="TestExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Models\BoxLayout_Tests.cs" />
-    <Compile Include="Shapes\Geometry_Tests.cs" />
-    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Core\Shapes\Geometry_Tests.cs" />
+    <Compile Include="Core\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Models\DrawingHelper.cs" />
     <Compile Include="Models\PieSliceTests.cs" />
     <Compile Include="Scripting\ScriptingApplicationTests.cs" />
@@ -129,13 +129,13 @@
     <Compile Include="Models\DirectedGraph_Tests.cs" />
     <Compile Include="Models\Tree_Tests.cs" />
     <Compile Include="Models\OrgChart_Tests.cs" />
-    <Compile Include="DOM\DOM_Tests.cs" />
-    <Compile Include="Text\TextFormat_Tests.cs" />
-    <Compile Include="CustomProperties\CustomPropertiesTest.cs" />
-    <Compile Include="Extensions\Selection_Tests.cs" />
-    <Compile Include="Internal\Internal_Tests.cs" />
-    <Compile Include="Connections\Path_Test.cs" />
-    <Compile Include="UserDefinedCells\UserDefinedCells_Tests.cs" />
+    <Compile Include="Models\DOM\DOM_Tests.cs" />
+    <Compile Include="Core\Text\TextFormat_Tests.cs" />
+    <Compile Include="Core\CustomProperties\CustomPropertiesTest.cs" />
+    <Compile Include="Core\Extensions\Selection_Tests.cs" />
+    <Compile Include="Core\Internal\Internal_Tests.cs" />
+    <Compile Include="DocumentAnalysis\Path_Test.cs" />
+    <Compile Include="Core\UserDefinedCells\UserDefinedCells_Tests.cs" />
     <Compile Include="Scripting\ScriptingArrangeTests.cs" />
     <Compile Include="Scripting\ScriptingConnectionPointTests.cs" />
     <Compile Include="Scripting\ScriptingConnectTests.cs" />
@@ -145,21 +145,21 @@
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
     <Compile Include="Scripting\ScriptingClientTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
-    <Compile Include="Shapesheet\ShapeSheet_Update_Tests.cs" />
-    <Compile Include="Extensions\Application_Tests.cs" />
-    <Compile Include="Shapesheet\ShapeSheet_Query_Tests.cs" />
-    <Compile Include="Extensions\Document_Tests.cs" />
+    <Compile Include="Core\Shapesheet\ShapeSheet_Update_Tests.cs" />
+    <Compile Include="Core\Extensions\Application_Tests.cs" />
+    <Compile Include="Core\Shapesheet\ShapeSheet_Query_Tests.cs" />
+    <Compile Include="Core\Extensions\Document_Tests.cs" />
     <Compile Include="VisioAutomationTest.cs" />
-    <Compile Include="Extensions\PageDrawTests.cs" />
-    <Compile Include="Extensions\Pages_Tests.cs" />
-    <Compile Include="Text\TextUtil_Tests.cs" />
-    <Compile Include="Connections\ConnectionPoint_Tests.cs" />
-    <Compile Include="Controls\Control_Tests.cs" />
-    <Compile Include="Page\PageHelper_Tests.cs" />
+    <Compile Include="Core\Extensions\PageDrawTests.cs" />
+    <Compile Include="Core\Extensions\Pages_Tests.cs" />
+    <Compile Include="Core\Text\TextUtil_Tests.cs" />
+    <Compile Include="DocumentAnalysis\ConnectionPoint_Tests.cs" />
+    <Compile Include="Core\Controls\Control_Tests.cs" />
+    <Compile Include="Core\Page\PageHelper_Tests.cs" />
     <Compile Include="Models\Convert_Tests.cs" />
-    <Compile Include="Shapes\ShapeHelper_Tests.cs" />
+    <Compile Include="Core\Shapes\ShapeHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\CustomProps_Test.cs" />
+    <Compile Include="Core\Extensions\CustomProps_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">
