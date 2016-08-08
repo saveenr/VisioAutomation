@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SMA = System.Management.Automation;
 
 namespace VisioAutomation_Tests.PowerShell
 {
@@ -113,15 +112,6 @@ namespace VisioAutomation_Tests.PowerShell
           VisioPowerShellTests.Close_Visio_Application();
       }
 
-    }
-
-    public static class SMA_Extensions
-    {
-        public static void AddParameter(this SMA.Runspaces.Command cmd, string name, object value)
-        {
-            var parameter= new SMA.Runspaces.CommandParameter(name, value);
-            cmd.Parameters.Add(parameter);            
-        }    
     }
 }
 	 
