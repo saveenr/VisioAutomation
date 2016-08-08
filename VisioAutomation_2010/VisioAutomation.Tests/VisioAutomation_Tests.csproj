@@ -191,16 +191,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sampleflowchart1.txt" />
-    <None Include="Resources\sampleflowchart2.txt" />
-    <None Include="Resources\sampleflowchart3.txt" />
-    <None Include="Resources\sampleflowchart4.txt" />
-    <None Include="Resources\template_router.vdx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\sampleorgchart1.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
@@ -224,12 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\template_router _vdx.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\vdx_with_errors_1_vdx.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="datafiles\VSDX_Log_Visio_2013.txt">
