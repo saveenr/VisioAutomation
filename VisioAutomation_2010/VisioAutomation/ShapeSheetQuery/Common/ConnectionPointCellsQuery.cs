@@ -1,15 +1,15 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ConnectionPointCellsQuery : CellQuery
     {
-        public Query.CellColumn DirX { get; set; }
-        public Query.CellColumn DirY { get; set; }
-        public Query.CellColumn Type { get; set; }
-        public Query.CellColumn X { get; set; }
-        public Query.CellColumn Y { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn DirX { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn DirY { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Type { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn X { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Y { get; set; }
 
         public ConnectionPointCellsQuery()
         {

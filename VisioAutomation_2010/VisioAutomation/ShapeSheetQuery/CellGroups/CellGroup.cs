@@ -1,11 +1,11 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.CellGroups
+namespace VisioAutomation.ShapeSheetQuery.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
     {
-        private static void check_query(Query.CellQuery query)
+        private static void check_query(VisioAutomation.ShapeSheetQuery.CellQuery query)
         {
             if (query.CellColumns.Count < 1)
             {
@@ -20,12 +20,12 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected static IList<T> _GetCells<T, RT>(
             IVisio.Page page, IList<int> shapeids,
-            Query.CellQuery query,
+            VisioAutomation.ShapeSheetQuery.CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
             CellGroup.check_query(query);
 
-            var surface = new ShapeSheetSurface(page);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
             var data_for_shapes = query.GetCellData<RT>( surface, shapeids);
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
@@ -38,7 +38,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected static T _GetCells<T, RT>(
             IVisio.Shape shape,
-            Query.CellQuery query,
+            VisioAutomation.ShapeSheetQuery.CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
             CellGroup.check_query(query);

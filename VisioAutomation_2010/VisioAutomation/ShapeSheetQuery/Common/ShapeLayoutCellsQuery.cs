@@ -1,27 +1,27 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ShapeLayoutCellsQuery : CellQuery
     {
-        public Query.CellColumn ConFixedCode { get; set; }
-        public Query.CellColumn ConLineJumpCode { get; set; }
-        public Query.CellColumn ConLineJumpDirX { get; set; }
-        public Query.CellColumn ConLineJumpDirY { get; set; }
-        public Query.CellColumn ConLineJumpStyle { get; set; }
-        public Query.CellColumn ConLineRouteExt { get; set; }
-        public Query.CellColumn ShapeFixedCode { get; set; }
-        public Query.CellColumn ShapePermeablePlace { get; set; }
-        public Query.CellColumn ShapePermeableX { get; set; }
-        public Query.CellColumn ShapePermeableY { get; set; }
-        public Query.CellColumn ShapePlaceFlip { get; set; }
-        public Query.CellColumn ShapePlaceStyle { get; set; }
-        public Query.CellColumn ShapePlowCode { get; set; }
-        public Query.CellColumn ShapeRouteStyle { get; set; }
-        public Query.CellColumn ShapeSplit { get; set; }
-        public Query.CellColumn ShapeSplittable { get; set; }
-        public Query.CellColumn DisplayLevel { get; set; }
-        public Query.CellColumn Relationships { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ConFixedCode { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ConLineJumpCode { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ConLineJumpDirX { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ConLineJumpDirY { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ConLineJumpStyle { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ConLineRouteExt { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeFixedCode { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapePermeablePlace { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapePermeableX { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapePermeableY { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapePlaceFlip { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapePlaceStyle { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapePlowCode { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeRouteStyle { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeSplit { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeSplittable { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn DisplayLevel { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Relationships { get; set; }
 
         public ShapeLayoutCellsQuery() :
             base()

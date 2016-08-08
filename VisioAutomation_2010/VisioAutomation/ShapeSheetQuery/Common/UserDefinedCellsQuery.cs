@@ -1,12 +1,12 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class UserDefinedCellsQuery : CellQuery
     {
-        public Query.CellColumn Value { get; set; }
-        public Query.CellColumn Prompt { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Value { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Prompt { get; set; }
 
         public UserDefinedCellsQuery()
         {

@@ -55,7 +55,7 @@ namespace VisioAutomation.DocumentAnalysis
             var src_beginarrow = ShapeSheet.SRCConstants.BeginArrow;
             var src_endarrow = ShapeSheet.SRCConstants.EndArrow;
 
-            var query = new ShapeSheet.Query.CellQuery();
+            var query = new ShapeSheetQuery.CellQuery();
             var col_beginarrow = query.AddCell(src_beginarrow, "BeginArrow");
             var col_endarrow = query.AddCell(src_endarrow, "EndArrow");
 

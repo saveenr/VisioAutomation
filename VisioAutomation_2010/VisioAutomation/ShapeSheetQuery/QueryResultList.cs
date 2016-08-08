@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheetQuery
 {
     public class QueryResultList<T> : IEnumerable<QueryResult<T>>
     {

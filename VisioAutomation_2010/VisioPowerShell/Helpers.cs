@@ -5,7 +5,7 @@ namespace VisioPowerShell
 {
     static class Helpers
     {
-        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheet.Query.CellQuery cellQuery, VisioAutomation.ShapeSheet.Query.QueryResultList<T> query_output)
+        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheetQuery.CellQuery cellQuery, VisioAutomation.ShapeSheetQuery.QueryResultList<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
@@ -37,7 +37,7 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheet.Query.CellQuery cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
+        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheetQuery.CellQuery cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
             if (!getresults)
             {

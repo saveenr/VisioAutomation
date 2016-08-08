@@ -1,34 +1,34 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ShapeFormatCellsQuery : CellQuery
     {
-        public Query.CellColumn FillBkgnd { get; set; }
-        public Query.CellColumn FillBkgndTrans { get; set; }
-        public Query.CellColumn FillForegnd { get; set; }
-        public Query.CellColumn FillForegndTrans { get; set; }
-        public Query.CellColumn FillPattern { get; set; }
-        public Query.CellColumn ShapeShdwObliqueAngle { get; set; }
-        public Query.CellColumn ShapeShdwOffsetX { get; set; }
-        public Query.CellColumn ShapeShdwOffsetY { get; set; }
-        public Query.CellColumn ShapeShdwScaleFactor { get; set; }
-        public Query.CellColumn ShapeShdwType { get; set; }
-        public Query.CellColumn ShdwBkgnd { get; set; }
-        public Query.CellColumn ShdwBkgndTrans { get; set; }
-        public Query.CellColumn ShdwForegnd { get; set; }
-        public Query.CellColumn ShdwForegndTrans { get; set; }
-        public Query.CellColumn ShdwPattern { get; set; }
-        public Query.CellColumn BeginArrow { get; set; }
-        public Query.CellColumn BeginArrowSize { get; set; }
-        public Query.CellColumn EndArrow { get; set; }
-        public Query.CellColumn EndArrowSize { get; set; }
-        public Query.CellColumn LineColor { get; set; }
-        public Query.CellColumn LineCap { get; set; }
-        public Query.CellColumn LineColorTrans { get; set; }
-        public Query.CellColumn LinePattern { get; set; }
-        public Query.CellColumn LineWeight { get; set; }
-        public Query.CellColumn Rounding { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn FillBkgnd { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn FillBkgndTrans { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn FillForegnd { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn FillForegndTrans { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn FillPattern { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwObliqueAngle { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwOffsetX { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwOffsetY { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwScaleFactor { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwType { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwBkgnd { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwBkgndTrans { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwForegnd { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwForegndTrans { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwPattern { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn BeginArrow { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn BeginArrowSize { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn EndArrow { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn EndArrowSize { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LineColor { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LineCap { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LineColorTrans { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LinePattern { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LineWeight { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Rounding { get; set; }
 
         public ShapeFormatCellsQuery()
         {

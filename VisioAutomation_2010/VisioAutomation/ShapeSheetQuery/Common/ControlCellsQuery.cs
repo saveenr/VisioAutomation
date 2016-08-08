@@ -1,18 +1,18 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ControlCellsQuery : CellQuery
     {
-        public Query.CellColumn CanGlue { get; set; }
-        public Query.CellColumn Tip { get; set; }
-        public Query.CellColumn X { get; set; }
-        public Query.CellColumn Y { get; set; }
-        public Query.CellColumn YBehavior { get; set; }
-        public Query.CellColumn XBehavior { get; set; }
-        public Query.CellColumn XDynamics { get; set; }
-        public Query.CellColumn YDynamics { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn CanGlue { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Tip { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn X { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Y { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn YBehavior { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn XBehavior { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn XDynamics { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn YDynamics { get; set; }
 
         public ControlCellsQuery()
         {

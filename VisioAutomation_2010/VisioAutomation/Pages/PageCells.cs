@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PageCells : ShapeSheet.CellGroups.CellGroup
+    public class PageCells : ShapeSheetQuery.CellGroups.CellGroup
     {
         public ShapeSheet.CellData<double> PageLeftMargin { get; set; }
         public ShapeSheet.CellData<double> CenterX { get; set; }
@@ -150,10 +150,10 @@ namespace VisioAutomation.Pages
         public static PageCells GetCells(IVisio.Shape shape)
         {
             var query = PageCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroup._GetCells<PageCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroup._GetCells<PageCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Query.Common.PageCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.PageCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.Common.PageCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.PageCellsQuery>();
 
 
     }

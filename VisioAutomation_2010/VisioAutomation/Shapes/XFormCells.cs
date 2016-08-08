@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : ShapeSheet.CellGroups.CellGroup
+    public class XFormCells : ShapeSheetQuery.CellGroups.CellGroup
     {
         public ShapeSheet.CellData<double> PinX { get; set; }
         public ShapeSheet.CellData<double> PinY { get; set; }
@@ -30,16 +30,16 @@ namespace VisioAutomation.Shapes
         public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = XFormCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroup._GetCells<XFormCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroup._GetCells<XFormCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static XFormCells GetCells(IVisio.Shape shape)
         {
             var query = XFormCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroup._GetCells<XFormCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroup._GetCells<XFormCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Query.Common.XFormCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.XFormCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.Common.XFormCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.XFormCellsQuery>();
 
     }
 }

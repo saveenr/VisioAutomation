@@ -1,29 +1,30 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
+
 {
     class LockCellsQuery : CellQuery
     {
-        public Query.CellColumn LockAspect { get; set; }
-        public Query.CellColumn LockBegin { get; set; }
-        public Query.CellColumn LockCalcWH { get; set; }
-        public Query.CellColumn LockCrop { get; set; }
-        public Query.CellColumn LockCustProp { get; set; }
-        public Query.CellColumn LockDelete { get; set; }
-        public Query.CellColumn LockEnd { get; set; }
-        public Query.CellColumn LockFormat { get; set; }
-        public Query.CellColumn LockFromGroupFormat { get; set; }
-        public Query.CellColumn LockGroup { get; set; }
-        public Query.CellColumn LockHeight { get; set; }
-        public Query.CellColumn LockMoveX { get; set; }
-        public Query.CellColumn LockMoveY { get; set; }
-        public Query.CellColumn LockRotate { get; set; }
-        public Query.CellColumn LockSelect { get; set; }
-        public Query.CellColumn LockTextEdit { get; set; }
-        public Query.CellColumn LockThemeColors { get; set; }
-        public Query.CellColumn LockThemeEffects { get; set; }
-        public Query.CellColumn LockVtxEdit { get; set; }
-        public Query.CellColumn LockWidth { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockAspect { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockBegin { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockCalcWH { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockCrop { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockCustProp { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockDelete { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockEnd { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockFormat { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockFromGroupFormat { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockGroup { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockHeight { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockMoveX { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockMoveY { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockRotate { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockSelect { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockTextEdit { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockThemeColors { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockThemeEffects { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockVtxEdit { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LockWidth { get; set; }
 
         public LockCellsQuery()
         {

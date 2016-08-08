@@ -1,8 +1,8 @@
-using VAQUERY = VisioAutomation.ShapeSheet.Query;
+using VAQUERY = VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.CellGroups
+namespace VisioAutomation.ShapeSheetQuery.CellGroups
 {
     public abstract class CellGroupMultiRow : BaseCellGroup
     {
@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             CellGroupMultiRow.check_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
-            var surface = new ShapeSheetSurface(page);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
             var data_for_shapes = query.GetCellData<RT>(surface, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
@@ -56,7 +56,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return sec_objects;
         }
 
-        private static List<T> SectionToObjectList<T, RT>(VAQUERY.SectionResult<CellData<RT>> sec, RowToObject<T, RT> row_to_object)
+        private static List<T> SectionToObjectList<T, RT>(VAQUERY.SectionResult<VisioAutomation.ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
         {
             int num_rows = sec.Count;
             var sec_objects = new List<T>(num_rows);

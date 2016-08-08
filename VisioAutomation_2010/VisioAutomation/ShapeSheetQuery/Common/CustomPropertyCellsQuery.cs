@@ -1,20 +1,20 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
 {
-    class CustomPropertyCellsQuery : CellQuery
+    public class CustomPropertyCellsQuery : VisioAutomation.ShapeSheetQuery.CellQuery
     {
-        public Query.CellColumn SortKey { get; set; }
-        public Query.CellColumn Ask { get; set; }
-        public Query.CellColumn Calendar { get; set; }
-        public Query.CellColumn Format { get; set; }
-        public Query.CellColumn Invis { get; set; }
-        public Query.CellColumn Label { get; set; }
-        public Query.CellColumn LangID { get; set; }
-        public Query.CellColumn Prompt { get; set; }
-        public Query.CellColumn Value { get; set; }
-        public Query.CellColumn Type { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn SortKey { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Ask { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Calendar { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Format { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Invis { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Label { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LangID { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Prompt { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Value { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Type { get; set; }
 
         public CustomPropertyCellsQuery()
         {

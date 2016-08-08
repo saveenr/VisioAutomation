@@ -1,16 +1,16 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class XFormCellsQuery : CellQuery
     {
-        public Query.CellColumn Width { get; set; }
-        public Query.CellColumn Height { get; set; }
-        public Query.CellColumn PinX { get; set; }
-        public Query.CellColumn PinY { get; set; }
-        public Query.CellColumn LocPinX { get; set; }
-        public Query.CellColumn LocPinY { get; set; }
-        public Query.CellColumn Angle { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Width { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Height { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn PinX { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn PinY { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LocPinX { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LocPinY { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Angle { get; set; }
 
         public XFormCellsQuery()
         {

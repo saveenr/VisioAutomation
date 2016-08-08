@@ -1,24 +1,24 @@
 using SRCCON=VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Query.Common
+namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ParagraphFormatCellsQuery : CellQuery
     {
-        public Query.CellColumn Bullet { get; set; }
-        public Query.CellColumn BulletFont { get; set; }
-        public Query.CellColumn BulletFontSize { get; set; }
-        public Query.CellColumn BulletString { get; set; } // NOTE: This is never used
-        public Query.CellColumn Flags { get; set; }
-        public Query.CellColumn HorzAlign { get; set; }
-        public Query.CellColumn IndentFirst { get; set; }
-        public Query.CellColumn IndentLeft { get; set; }
-        public Query.CellColumn IndentRight { get; set; }
-        public Query.CellColumn LocalizeBulletFont { get; set; }
-        public Query.CellColumn SpaceAfter { get; set; }
-        public Query.CellColumn SpaceBefore { get; set; }
-        public Query.CellColumn SpaceLine { get; set; }
-        public Query.CellColumn TextPosAfterBullet { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn Bullet { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn BulletFont { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn BulletFontSize { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn BulletString { get; set; } // NOTE: This is never used
+        public VisioAutomation.ShapeSheetQuery.CellColumn Flags { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn HorzAlign { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn IndentFirst { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn IndentLeft { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn IndentRight { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn LocalizeBulletFont { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn SpaceAfter { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn SpaceBefore { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn SpaceLine { get; set; }
+        public VisioAutomation.ShapeSheetQuery.CellColumn TextPosAfterBullet { get; set; }
 
         public ParagraphFormatCellsQuery()
         {

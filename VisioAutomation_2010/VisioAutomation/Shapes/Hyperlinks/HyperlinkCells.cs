@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Hyperlinks
 {
-    public class HyperlinkCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class HyperlinkCells : ShapeSheetQuery.CellGroups.CellGroupMultiRow
     {
         public ShapeSheet.CellData<string> Address { get; set; }
         public ShapeSheet.CellData<string> Description { get; set; }
@@ -38,15 +38,15 @@ namespace VisioAutomation.Shapes.Hyperlinks
         public static IList<List<HyperlinkCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = HyperlinkCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<HyperlinkCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<HyperlinkCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<HyperlinkCells> GetCells(IVisio.Shape shape)
         {
             var query = HyperlinkCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<HyperlinkCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<HyperlinkCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Query.Common.HyperlinkCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.HyperlinkCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.Common.HyperlinkCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.HyperlinkCellsQuery>();
     }
 }

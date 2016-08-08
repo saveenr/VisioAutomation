@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : ShapeSheet.CellGroups.CellGroup
+    public class LockCells : ShapeSheetQuery.CellGroups.CellGroup
     {
         public ShapeSheet.CellData<bool> LockAspect { get; set; }
         public ShapeSheet.CellData<bool> LockBegin { get; set; }
@@ -57,16 +57,16 @@ namespace VisioAutomation.Shapes
         public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = LockCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroup._GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroup._GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static LockCells GetCells(IVisio.Shape shape)
         {
             var query = LockCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroup._GetCells<LockCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroup._GetCells<LockCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Query.Common.LockCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.LockCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.Common.LockCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.LockCellsQuery>();
 
 
     }

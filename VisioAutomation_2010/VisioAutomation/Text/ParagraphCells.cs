@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class ParagraphCells : ShapeSheetQuery.CellGroups.CellGroupMultiRow
     {
         public ShapeSheet.CellData<double> IndentFirst { get; set; }
         public ShapeSheet.CellData<double> IndentRight { get; set; }
@@ -44,15 +44,15 @@ namespace VisioAutomation.Text
         public static IList<List<ParagraphCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ParagraphCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ParagraphCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<ParagraphCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ParagraphCells> GetCells(IVisio.Shape shape)
         {
             var query = ParagraphCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ParagraphCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<ParagraphCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Query.Common.ParagraphFormatCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.ParagraphFormatCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.Common.ParagraphFormatCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.ParagraphFormatCellsQuery>();
     }
 } 
