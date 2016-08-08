@@ -5,7 +5,7 @@ using VA=VisioAutomation;
 namespace VisioAutomation_Tests.Core.Extensions
 {
     [TestClass]
-    public class Document_Tests : VisioAutomationTest
+    public class DocumentTests : VisioAutomationTest
     {
         [TestMethod]
         public void Document_Activation()

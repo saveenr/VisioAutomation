@@ -5,7 +5,7 @@ namespace VisioAutomation_Tests.Core.Application
 {
 
     [TestClass]
-    public class XmlErrorLog_Tests : VisioAutomationTest
+    public class XmlErrorLogTests : VisioAutomationTest
     {
         [TestMethod]
         [DeploymentItem(@"datafiles\VSDX_Log_Visio_2013.txt", "datafiles")]

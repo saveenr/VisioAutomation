@@ -4,7 +4,7 @@ using VAHLINK = VisioAutomation.Shapes.Hyperlinks;
 namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]
-    public class Hyperlink_Tests : VisioAutomationTest
+    public class HyperlinkTests : VisioAutomationTest
     {
         [TestMethod]
         public void Hyperlinks_AddRemove()

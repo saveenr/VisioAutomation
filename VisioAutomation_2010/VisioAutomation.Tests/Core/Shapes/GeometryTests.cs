@@ -4,7 +4,7 @@ using VAGEOM = VisioAutomation.Shapes.Geometry;
 namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]
-    public class Geometry_Tests : VisioAutomationTest
+    public class GeometryTests : VisioAutomationTest
     {
         [TestMethod]
         public void Geometry_AddGeometrySection()

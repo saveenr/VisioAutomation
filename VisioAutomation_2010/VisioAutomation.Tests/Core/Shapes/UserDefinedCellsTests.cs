@@ -8,7 +8,7 @@ using VA = VisioAutomation;
 namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]
-    public class UserDefinedCells_Tests : VisioAutomationTest
+    public class UserDefinedCellsTests : VisioAutomationTest
     {
         [TestMethod]
         public void UserDefinedCells_GetSet()

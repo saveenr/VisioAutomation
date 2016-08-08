@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 namespace VisioAutomation_Tests.Core.Page
 {
     [TestClass]
-    public class PageHelper_Tests : VisioAutomationTest
+    public class PageHelperTests : VisioAutomationTest
     {
         [TestMethod]
         public void Page_Query()

@@ -4,7 +4,7 @@ using VACTRL = VisioAutomation.Shapes.Controls;
 namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]
-    public class Control_Tests : VisioAutomationTest
+    public class ControlTests : VisioAutomationTest
     {
         [TestMethod]
         public void Controls_AddRemove()

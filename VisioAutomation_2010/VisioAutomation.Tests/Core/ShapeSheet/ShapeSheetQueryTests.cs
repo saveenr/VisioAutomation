@@ -10,7 +10,7 @@ using VA = VisioAutomation;
 namespace VisioAutomation_Tests.Core.ShapeSheet
 {
     [TestClass]
-    public class ShapeSheet_Query_Tests : VisioAutomationTest
+    public class ShapeSheetQueryTests : VisioAutomationTest
     {
         public static VA.ShapeSheet.SRC cell_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
         public static VA.ShapeSheet.SRC cell_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;

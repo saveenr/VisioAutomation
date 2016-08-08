@@ -91,7 +91,7 @@
     <Compile Include="DocumentAnalysis\ConnectivityMap.cs" />
     <Compile Include="DocumentAnalysis\PathAnalysis_Tests.cs" />
     <Compile Include="Framework\AssertUtil.cs" />
-    <Compile Include="Core\Shapes\Hyperlink_Tests.cs" />
+    <Compile Include="Core\Shapes\HyperlinkTests.cs" />
     <Compile Include="Framework\PowerShellTestsSession.cs" />
     <Compile Include="Scripting\ScriptingHyperlinkTests.cs" />
     <Compile Include="Framework\SMA_Extensions.cs" />
@@ -107,7 +107,7 @@
     <Compile Include="Models\CointainerLayout_Tests.cs" />
     <Compile Include="Models\Chart_Tests.cs" />
     <Compile Include="Models\ResizePageTests.cs" />
-    <Compile Include="Core\Application\XmlErrorLog_Tests.cs" />
+    <Compile Include="Core\Application\XmlErrorLogTests.cs" />
     <Compile Include="Scripting\ScriptingDevTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
     <Compile Include="Scripting\ScriptingShapeSheetTests.cs" />
@@ -115,7 +115,7 @@
     <Compile Include="Framework\TestExtensions.cs" />
     <Compile Include="Framework\VisioApplicationSafeReference.cs" />
     <Compile Include="Models\BoxLayout_Tests.cs" />
-    <Compile Include="Core\Shapes\Geometry_Tests.cs" />
+    <Compile Include="Core\Shapes\GeometryTests.cs" />
     <Compile Include="Core\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Models\DrawingHelper.cs" />
     <Compile Include="Models\PieSliceTests.cs" />
@@ -130,12 +130,12 @@
     <Compile Include="Models\Tree_Tests.cs" />
     <Compile Include="Models\OrgChart_Tests.cs" />
     <Compile Include="Models\DOM\DOM_Tests.cs" />
-    <Compile Include="Core\Text\TextFormat_Tests.cs" />
+    <Compile Include="Core\Text\TextFormatTests.cs" />
     <Compile Include="Core\Shapes\CustomPropertiesTest.cs" />
     <Compile Include="Core\Extensions\Selection_Tests.cs" />
     <Compile Include="Core\Internal_Tests.cs" />
     <Compile Include="DocumentAnalysis\Path_Test.cs" />
-    <Compile Include="Core\Shapes\UserDefinedCells_Tests.cs" />
+    <Compile Include="Core\Shapes\UserDefinedCellsTests.cs" />
     <Compile Include="Scripting\ScriptingArrangeTests.cs" />
     <Compile Include="Scripting\ScriptingConnectionPointTests.cs" />
     <Compile Include="Scripting\ScriptingConnectTests.cs" />
@@ -145,21 +145,21 @@
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
     <Compile Include="Scripting\ScriptingClientTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
-    <Compile Include="Core\ShapeSheet\ShapeSheet_Update_Tests.cs" />
-    <Compile Include="Core\Extensions\Application_Tests.cs" />
-    <Compile Include="Core\ShapeSheet\ShapeSheet_Query_Tests.cs" />
-    <Compile Include="Core\Extensions\Document_Tests.cs" />
+    <Compile Include="Core\ShapeSheet\ShapeSheetUpdateTests.cs" />
+    <Compile Include="Core\Extensions\ApplicationTests.cs" />
+    <Compile Include="Core\ShapeSheet\ShapeSheetQueryTests.cs" />
+    <Compile Include="Core\Extensions\DocumentTests.cs" />
     <Compile Include="Framework\VisioAutomationTest.cs" />
     <Compile Include="Core\Extensions\PageDrawTests.cs" />
     <Compile Include="Core\Extensions\Pages_Tests.cs" />
-    <Compile Include="Core\Text\TextUtil_Tests.cs" />
+    <Compile Include="Core\Text\TextUtilTests.cs" />
     <Compile Include="DocumentAnalysis\ConnectionPoint_Tests.cs" />
-    <Compile Include="Core\Shapes\Control_Tests.cs" />
-    <Compile Include="Core\PageHelper_Tests.cs" />
+    <Compile Include="Core\Shapes\ControlTests.cs" />
+    <Compile Include="Core\PageHelperTests.cs" />
     <Compile Include="Models\Convert_Tests.cs" />
-    <Compile Include="Core\Shapes\ShapeHelper_Tests.cs" />
+    <Compile Include="Core\Shapes\ShapeHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\Extensions\CustomProps_Test.cs" />
+    <Compile Include="Core\Extensions\CustomPropsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">

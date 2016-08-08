@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 namespace VisioAutomation_Tests.Core.Extensions
 {
     [TestClass]
-    public class CustomProps_Test : VisioAutomationTest
+    public class CustomPropsTest : VisioAutomationTest
     {
 
         [TestMethod]

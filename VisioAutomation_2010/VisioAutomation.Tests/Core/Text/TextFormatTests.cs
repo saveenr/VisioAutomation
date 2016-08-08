@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VisioAutomation_Tests.Core.Text
 {
     [TestClass]
-    public class TextFormat_Tests : VisioAutomationTest
+    public class TextFormatTests : VisioAutomationTest
     {
         [TestMethod]
         public void Text_TabStops_Set()

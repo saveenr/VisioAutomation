@@ -4,7 +4,7 @@ using VisioAutomation.Utilities;
 namespace VisioAutomation_Tests.Core.Text
 {
     [TestClass]
-    public class TextUtil_Tests : VisioAutomationTest
+    public class TextUtilTests : VisioAutomationTest
     {
         public bool Match(string pat, string text)
         {

@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]
-    public class ShapeHelper_Tests : VisioAutomationTest
+    public class ShapeHelperTests : VisioAutomationTest
     {
         [TestMethod]
         public void ShapeHelper_Test_GetNestedShapes_SingleShapeNoSubShapes()
