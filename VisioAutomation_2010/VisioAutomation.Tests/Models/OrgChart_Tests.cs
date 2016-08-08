@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VAORGCHART = VisioAutomation.Models.OrgChart;
 
-namespace VisioAutomation_Tests.Models
+namespace VisioAutomation_Tests.Models.OrgChart
 {
     [TestClass]
     public class OrgChart_Tests : VisioAutomationTest

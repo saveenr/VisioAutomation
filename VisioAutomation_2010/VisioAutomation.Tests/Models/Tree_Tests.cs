@@ -3,7 +3,7 @@ using VisioAutomation.Extensions;
 using VA = VisioAutomation;
 using TREEMODEL = VisioAutomation.Models.Tree;
 
-namespace VisioAutomation_Tests.Models
+namespace VisioAutomation_Tests.Models.TreeLayout
 {
     [TestClass]
     public class Tree_Tests : VisioAutomationTest

@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SMA = System.Management.Automation;
 
-namespace VisioAutomation_Tests
+namespace VisioAutomation_Tests.PowerShell
 {
     [TestClass]
     public class VisioPowerShellTests

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation_Tests.Connections
+namespace VisioAutomation_Tests
 {
     public class ConnectivityMap
     {

@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests.Shapes
+namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]
     public class ShapeHelper_Tests : VisioAutomationTest

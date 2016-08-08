@@ -1,8 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Utilities;
-using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests.Text
+namespace VisioAutomation_Tests.Core.Text
 {
     [TestClass]
     public class TextUtil_Tests : VisioAutomationTest

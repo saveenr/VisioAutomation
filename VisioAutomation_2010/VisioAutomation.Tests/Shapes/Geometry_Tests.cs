@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VAGEOM = VisioAutomation.Shapes.Geometry;
 
-namespace VisioAutomation_Tests.Shapes
+namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]
     public class Geometry_Tests : VisioAutomationTest

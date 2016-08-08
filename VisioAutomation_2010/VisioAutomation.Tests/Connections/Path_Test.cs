@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 
-namespace VisioAutomation_Tests.Connections
+namespace VisioAutomation_Tests.DocumentAnalysis
 {
     [TestClass]
     public class Path_Test

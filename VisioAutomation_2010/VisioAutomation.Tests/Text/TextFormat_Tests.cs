@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests.Text
+namespace VisioAutomation_Tests.Core.Text
 {
     [TestClass]
     public class TextFormat_Tests : VisioAutomationTest

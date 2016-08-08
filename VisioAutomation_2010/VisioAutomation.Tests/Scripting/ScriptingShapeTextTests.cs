@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests
+namespace VisioAutomation_Tests.Scripting
 {
     [TestClass]
     public class ScriptingShapeText_Tests : VisioAutomationTest

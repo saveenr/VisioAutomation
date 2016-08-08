@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests.Models
+namespace VisioAutomation_Tests.Models.Charting
 {
     [TestClass]
     public class PieSliceTests : VisioAutomationTest

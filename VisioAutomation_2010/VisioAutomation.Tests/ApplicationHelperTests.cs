@@ -2,7 +2,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests
+namespace VisioAutomation_Tests.Core
 {
     [TestClass]
     public class ApplicationHelperTests : VisioAutomationTest

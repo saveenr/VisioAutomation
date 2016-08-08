@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests.Internal
+namespace VisioAutomation_Tests.Core.Internal
 {
     [TestClass]
     public class BezierTests : VisioAutomationTest
