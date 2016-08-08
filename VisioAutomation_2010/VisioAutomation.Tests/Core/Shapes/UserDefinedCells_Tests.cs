@@ -5,7 +5,7 @@ using VAUSERCELL = VisioAutomation.Shapes.UserDefinedCells;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests.Core.UserDefinedCells
+namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]
     public class UserDefinedCells_Tests : VisioAutomationTest

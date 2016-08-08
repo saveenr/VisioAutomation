@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests.Core.ImportExport
+namespace VisioAutomation_Tests.Core.Application
 {
 
     [TestClass]
