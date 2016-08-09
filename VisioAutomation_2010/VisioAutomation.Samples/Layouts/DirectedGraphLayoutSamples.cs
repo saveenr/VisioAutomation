@@ -1,5 +1,5 @@
 ﻿using VA = VisioAutomation;
-using DGMODEL = VisioAutomation.Models.DirectedGraph;
+using DGMODEL = VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomationSamples
@@ -27,7 +27,7 @@ namespace VisioAutomationSamples
             page1.ResizeToFitContents(padding);
         }
 
-        private static DGMODEL.Drawing get_dg_drawing()
+        private static DGMODEL.DirectedGraphLayout get_dg_drawing()
         {
 
             var ver = VA.Application.ApplicationHelper.GetVersion(SampleEnvironment.Application);
@@ -35,7 +35,7 @@ namespace VisioAutomationSamples
             string server_stencil = (ver.Major >= 15) ? "server_u.vssx" : "server_u.vss";
             string basflo_stencil = (ver.Major >= 15) ? "basflo_u.vssx" : "basflo_u.vss";
 
-            var directed_graph_drawing = new DGMODEL.Drawing();
+            var directed_graph_drawing = new DGMODEL.DirectedGraphLayout();
 
             // Create a Node 0
             var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", basflo_stencil, "Decision");

@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands.New
     {
         protected override void ProcessRecord()
         {
-            var dg_model = new VA.Models.DirectedGraph.Drawing();
+            var dg_model = new VA.Models.Layouts.DirectedGraph.DirectedGraphLayout();
             this.WriteObject(dg_model);
         }
     }

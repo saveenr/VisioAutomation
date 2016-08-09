@@ -64,9 +64,9 @@ namespace VisioAutomationSamples
             var segoe_ui_font_id = segoe_ui_font.ID;
             var segoe_ui__light_font_id = segoe_ui__light_font.ID;
 
-            var renderer = new VA.Models.Forms.InteractiveRenderer(doc);
+            var renderer = new VA.Models.Documents.Forms.InteractiveRenderer(doc);
 
-            var formpage = new VA.Models.Forms.FormPage();
+            var formpage = new VA.Models.Documents.Forms.FormPage();
             var page = renderer.CreatePage(formpage);
 
             double max_body_width = 30.0;

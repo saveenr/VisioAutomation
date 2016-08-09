@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using CONMODEL = VisioAutomation.Models.ContainerLayout;
+using CONMODEL = VisioAutomation.Models.Layouts.Container;
 
 namespace VisioAutomation_Tests.Models.Layouts
 {

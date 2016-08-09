@@ -43,7 +43,7 @@
     <Compile Include="ConnectorEdge.cs" />
     <Compile Include="ConnectorEdgeHandling.cs" />
     <Compile Include="DirectedEdge.cs" />
-    <Compile Include="ConnectionPathAnalyzer.cs" />
+    <Compile Include="ConnectionAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

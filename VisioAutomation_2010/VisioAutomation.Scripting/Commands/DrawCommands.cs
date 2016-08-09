@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VAGRID = VisioAutomation.Models.Grid;
-using VAORGCHART = VisioAutomation.Models.OrgChart;
-using VAGRAPH = VisioAutomation.Models.DirectedGraph;
+using VAGRID = VisioAutomation.Models.Layouts.Grid;
+using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
+using VAGRAPH = VisioAutomation.Models.Layouts.DirectedGraph;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -308,7 +308,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DirectedGraph(IList<VAGRAPH.Drawing> directedgraphs)
+        public void DirectedGraph(IList<VAGRAPH.DirectedGraphLayout> directedgraphs)
         {
             this._client.Application.AssertApplicationAvailable();
 

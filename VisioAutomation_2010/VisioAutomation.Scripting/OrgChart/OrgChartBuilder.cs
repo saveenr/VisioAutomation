@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VAORGCHART = VisioAutomation.Models.OrgChart;
+using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.OrgChart

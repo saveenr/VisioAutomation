@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Msagl">
-      <HintPath>..\VisioAutomation\binaries\MSAGL\Microsoft.Msagl.dll</HintPath>
+    <Reference Include="Microsoft.Msagl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=640c57aa40e7ae7d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Automatic.Graph.Layout.0.7.0-beta\lib\net40\Microsoft.Msagl.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoxLayout\AlignmentHorizontal.cs" />
-    <Compile Include="BoxLayout\AlignmentVertical.cs" />
-    <Compile Include="BoxLayout\Box.cs" />
-    <Compile Include="BoxLayout\BoxLayout.cs" />
-    <Compile Include="BoxLayout\Container.cs" />
-    <Compile Include="BoxLayout\Direction.cs" />
-    <Compile Include="BoxLayout\Node.cs" />
+    <Compile Include="Layouts\Box\AlignmentHorizontal.cs" />
+    <Compile Include="Layouts\Box\AlignmentVertical.cs" />
+    <Compile Include="Layouts\Box\Box.cs" />
+    <Compile Include="Layouts\Box\BoxLayout.cs" />
+    <Compile Include="Layouts\Box\Container.cs" />
+    <Compile Include="Layouts\Box\Direction.cs" />
+    <Compile Include="Layouts\Box\Node.cs" />
     <Compile Include="Charting\AreaChart.cs" />
     <Compile Include="Charting\BarChart.cs" />
     <Compile Include="Charting\ChartUtil.cs" />
@@ -56,27 +57,26 @@
     <Compile Include="Charting\DataPointList.cs" />
     <Compile Include="Charting\PieChart.cs" />
     <Compile Include="Charting\PieSlice.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="ContainerLayout\Container.cs" />
-    <Compile Include="ContainerLayout\ContainerItem.cs" />
-    <Compile Include="ContainerLayout\ContainerLayout.cs" />
-    <Compile Include="ContainerLayout\Formatting.cs" />
-    <Compile Include="ContainerLayout\LayoutOptions.cs" />
-    <Compile Include="DirectedGraph\Connector.cs" />
-    <Compile Include="DirectedGraph\ConnectorList.cs" />
-    <Compile Include="DirectedGraph\Drawing.cs" />
-    <Compile Include="DirectedGraph\IDList.cs" />
-    <Compile Include="DirectedGraph\LayoutDirection.cs" />
-    <Compile Include="DirectedGraph\LayoutOptions.cs" />
-    <Compile Include="DirectedGraph\MSAGLLayoutOptions.cs" />
-    <Compile Include="DirectedGraph\MsaglRenderer.cs" />
-    <Compile Include="DirectedGraph\MsaglUtil.cs" />
-    <Compile Include="DirectedGraph\Node.cs" />
-    <Compile Include="DirectedGraph\NodeUserData.cs" />
-    <Compile Include="DirectedGraph\Shape.cs" />
-    <Compile Include="DirectedGraph\ShapeList.cs" />
-    <Compile Include="DirectedGraph\VisioLayoutOptions.cs" />
-    <Compile Include="DirectedGraph\VisioRenderer.cs" />
+    <Compile Include="Layouts\Container\Container.cs" />
+    <Compile Include="Layouts\Container\ContainerItem.cs" />
+    <Compile Include="Layouts\Container\ContainerLayout.cs" />
+    <Compile Include="Layouts\Container\Formatting.cs" />
+    <Compile Include="Layouts\Container\LayoutOptions.cs" />
+    <Compile Include="Layouts\DirectedGraph\Connector.cs" />
+    <Compile Include="Layouts\DirectedGraph\ConnectorList.cs" />
+    <Compile Include="Layouts\DirectedGraph\DirectedGraphLayout.cs" />
+    <Compile Include="Layouts\DirectedGraph\IDList.cs" />
+    <Compile Include="Layouts\DirectedGraph\LayoutDirection.cs" />
+    <Compile Include="Layouts\DirectedGraph\LayoutOptions.cs" />
+    <Compile Include="Layouts\DirectedGraph\MSAGLLayoutOptions.cs" />
+    <Compile Include="Layouts\DirectedGraph\MsaglRenderer.cs" />
+    <Compile Include="Layouts\DirectedGraph\MsaglUtil.cs" />
+    <Compile Include="Layouts\DirectedGraph\Node.cs" />
+    <Compile Include="Layouts\DirectedGraph\NodeUserData.cs" />
+    <Compile Include="Layouts\DirectedGraph\Shape.cs" />
+    <Compile Include="Layouts\DirectedGraph\ShapeList.cs" />
+    <Compile Include="Layouts\DirectedGraph\VisioLayoutOptions.cs" />
+    <Compile Include="Layouts\DirectedGraph\VisioRenderer.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="DOM\BaseShape.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
@@ -98,22 +98,22 @@
     <Compile Include="DOM\Shape.cs" />
     <Compile Include="DOM\ShapeCells.cs" />
     <Compile Include="DOM\ShapeList.cs" />
-    <Compile Include="Forms\FormDocument.cs" />
-    <Compile Include="Forms\FormPage.cs" />
-    <Compile Include="Forms\FormRenderingContext.cs" />
-    <Compile Include="Forms\InteractiveRenderer.cs" />
-    <Compile Include="Forms\TextBlock.cs" />
-    <Compile Include="Grid\Column.cs" />
-    <Compile Include="Grid\ColumnDirection.cs" />
-    <Compile Include="Grid\GridLayout.cs" />
-    <Compile Include="Grid\Node.cs" />
-    <Compile Include="Grid\Row.cs" />
-    <Compile Include="Grid\RowDirection.cs" />
-    <Compile Include="InternalTree\DictionaryExtensions.cs" />
-    <Compile Include="InternalTree\LayoutDirection.cs" />
-    <Compile Include="InternalTree\Node.cs" />
-    <Compile Include="InternalTree\TreeLayout.cs" />
-    <Compile Include="InternalTree\TreeLayoutOptions.cs" />
+    <Compile Include="Documents\Forms\FormDocument.cs" />
+    <Compile Include="Documents\Forms\FormPage.cs" />
+    <Compile Include="Documents\Forms\FormRenderingContext.cs" />
+    <Compile Include="Documents\Forms\InteractiveRenderer.cs" />
+    <Compile Include="Documents\Forms\TextBlock.cs" />
+    <Compile Include="Layouts\Grid\Column.cs" />
+    <Compile Include="Layouts\Grid\ColumnDirection.cs" />
+    <Compile Include="Layouts\Grid\GridLayout.cs" />
+    <Compile Include="Layouts\Grid\Node.cs" />
+    <Compile Include="Layouts\Grid\Row.cs" />
+    <Compile Include="Layouts\Grid\RowDirection.cs" />
+    <Compile Include="Layouts\InternalTree\DictionaryExtensions.cs" />
+    <Compile Include="Layouts\InternalTree\LayoutDirection.cs" />
+    <Compile Include="Layouts\InternalTree\Node.cs" />
+    <Compile Include="Layouts\InternalTree\TreeLayout.cs" />
+    <Compile Include="Layouts\InternalTree\TreeLayoutOptions.cs" />
     <Compile Include="Text\CharacterFormatting.cs" />
     <Compile Include="Text\CustomField.cs" />
     <Compile Include="Text\Field.cs" />
@@ -127,19 +127,19 @@
     <Compile Include="Text\ParagraphFormatting.cs" />
     <Compile Include="Text\TextElement.cs" />
     <Compile Include="Text\TextRegion.cs" />
-    <Compile Include="OrgChart\LayoutDirection.cs" />
-    <Compile Include="OrgChart\LayoutOptions.cs" />
-    <Compile Include="OrgChart\Node.cs" />
-    <Compile Include="OrgChart\NodeList.cs" />
-    <Compile Include="OrgChart\OrgChartDocument.cs" />
+    <Compile Include="Documents\OrgCharts\LayoutDirection.cs" />
+    <Compile Include="Documents\OrgCharts\LayoutOptions.cs" />
+    <Compile Include="Documents\OrgCharts\Node.cs" />
+    <Compile Include="Documents\OrgCharts\NodeList.cs" />
+    <Compile Include="Documents\OrgCharts\OrgChartDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tree\ConnectorType.cs" />
-    <Compile Include="Tree\Drawing.cs" />
-    <Compile Include="Tree\LayoutDirection.cs" />
-    <Compile Include="Tree\LayoutOptions.cs" />
-    <Compile Include="Tree\Node.cs" />
-    <Compile Include="Tree\NodeList.cs" />
-    <Compile Include="Tree\TreeLayout.cs" />
+    <Compile Include="Layouts\Tree\ConnectorType.cs" />
+    <Compile Include="Layouts\Tree\Drawing.cs" />
+    <Compile Include="Layouts\Tree\LayoutDirection.cs" />
+    <Compile Include="Layouts\Tree\LayoutOptions.cs" />
+    <Compile Include="Layouts\Tree\Node.cs" />
+    <Compile Include="Layouts\Tree\NodeList.cs" />
+    <Compile Include="Layouts\Tree\TreeLayout.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenTreeOps\GenTreeOps.csproj">
@@ -161,6 +161,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
