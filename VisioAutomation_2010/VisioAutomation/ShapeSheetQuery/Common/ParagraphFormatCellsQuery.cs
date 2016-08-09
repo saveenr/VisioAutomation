@@ -5,20 +5,20 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ParagraphFormatCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn Bullet { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn BulletFont { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn BulletFontSize { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn BulletString { get; set; } // NOTE: This is never used
-        public VisioAutomation.ShapeSheetQuery.CellColumn Flags { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn HorzAlign { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn IndentFirst { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn IndentLeft { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn IndentRight { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LocalizeBulletFont { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn SpaceAfter { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn SpaceBefore { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn SpaceLine { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TextPosAfterBullet { get; set; }
+        public CellColumn Bullet { get; set; }
+        public CellColumn BulletFont { get; set; }
+        public CellColumn BulletFontSize { get; set; }
+        public CellColumn BulletString { get; set; } // NOTE: This is never used
+        public CellColumn Flags { get; set; }
+        public CellColumn HorzAlign { get; set; }
+        public CellColumn IndentFirst { get; set; }
+        public CellColumn IndentLeft { get; set; }
+        public CellColumn IndentRight { get; set; }
+        public CellColumn LocalizeBulletFont { get; set; }
+        public CellColumn SpaceAfter { get; set; }
+        public CellColumn SpaceBefore { get; set; }
+        public CellColumn SpaceLine { get; set; }
+        public CellColumn TextPosAfterBullet { get; set; }
 
         public ParagraphFormatCellsQuery()
         {
@@ -39,9 +39,9 @@ namespace VisioAutomation.ShapeSheetQuery.Common
             this.TextPosAfterBullet = sec.AddCell(SRCCON.Para_TextPosAfterBullet, nameof(SRCCON.Para_TextPosAfterBullet));
         }
 
-        public VisioAutomation.Text.ParagraphCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Text.ParagraphCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Text.ParagraphCells();
+            var cells = new Text.ParagraphCells();
             cells.IndentFirst = row[this.IndentFirst];
             cells.IndentLeft = row[this.IndentLeft];
             cells.IndentRight = row[this.IndentRight];

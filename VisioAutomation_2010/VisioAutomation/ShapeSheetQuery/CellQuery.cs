@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery
@@ -32,7 +31,7 @@ namespace VisioAutomation.ShapeSheetQuery
             this._is_frozen = true;            
         }
 
-        public CellColumn AddCell(VisioAutomation.ShapeSheet.SRC src, string name)
+        public CellColumn AddCell(ShapeSheet.SRC src, string name)
         {
             if (name == null)
             {
@@ -52,7 +51,7 @@ namespace VisioAutomation.ShapeSheetQuery
         public QueryResult<string> GetFormulas(IVisio.Shape shape)
         {
             this.Freeze();
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            var surface = new ShapeSheet.ShapeSheetSurface(shape);
             var srcstream = this.BuildSRCStream(surface);
             var values = surface.GetFormulasU_SRC(srcstream);
             var r = new QueryResult<string>(shape.ID);
@@ -66,7 +65,7 @@ namespace VisioAutomation.ShapeSheetQuery
         {
             this.Freeze();
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            var surface = new ShapeSheet.ShapeSheetSurface(shape);
 
             var srcstream = this.BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
@@ -116,35 +115,35 @@ namespace VisioAutomation.ShapeSheetQuery
             return unitcodes;
         }
 
-        public QueryResult<VisioAutomation.ShapeSheet.CellData<T>> GetCellData<T>(IVisio.Shape shape)
+        public QueryResult<ShapeSheet.CellData<T>> GetCellData<T>(IVisio.Shape shape)
         {
             this.Freeze();
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            var surface = new ShapeSheet.ShapeSheetSurface(shape);
 
             var srcstream = this.BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
             var formulas = surface.GetFormulasU_SRC(srcstream);
             var results = surface.GetResults_SRC<T>(srcstream, unitcodes);
 
-            var combineddata = new VisioAutomation.ShapeSheet.CellData<T>[results.Length];
+            var combineddata = new ShapeSheet.CellData<T>[results.Length];
             for (int i = 0; i < results.Length; i++)
             {
-                combineddata[i] = new VisioAutomation.ShapeSheet.CellData<T>(formulas[i], results[i]);
+                combineddata[i] = new ShapeSheet.CellData<T>(formulas[i], results[i]);
             }
 
-            var r = new QueryResult<VisioAutomation.ShapeSheet.CellData<T>>(shape.ID16);
-            this.FillValuesForShape<VisioAutomation.ShapeSheet.CellData<T>>(combineddata, r, 0, 0);
+            var r = new QueryResult<ShapeSheet.CellData<T>>(shape.ID16);
+            this.FillValuesForShape<ShapeSheet.CellData<T>>(combineddata, r, 0, 0);
             return r;
         }
 
         public QueryResultList<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
         {
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            var surface = new ShapeSheet.ShapeSheetSurface(page);
             return this.GetFormulas(surface, shapeids);
         }
 
-        public QueryResultList<string> GetFormulas(VisioAutomation.ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryResultList<string> GetFormulas(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
@@ -156,11 +155,11 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public QueryResultList<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            var surface = new ShapeSheet.ShapeSheetSurface(page);
             return this.GetResults<T>(surface, shapeids);
         }
 
-        public QueryResultList<T> GetResults<T>(VisioAutomation.ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryResultList<T> GetResults<T>(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
@@ -170,13 +169,13 @@ namespace VisioAutomation.ShapeSheetQuery
             return list;
         }
 
-        public QueryResultList<VisioAutomation.ShapeSheet.CellData<T>> GetCellData<T>(IVisio.Page page, IList<int> shapeids)
+        public QueryResultList<ShapeSheet.CellData<T>> GetCellData<T>(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            var surface = new ShapeSheet.ShapeSheetSurface(page);
             return this.GetCellData<T>(surface, shapeids);
         }
 
-        public QueryResultList<VisioAutomation.ShapeSheet.CellData<T>> GetCellData<T>(VisioAutomation.ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryResultList<ShapeSheet.CellData<T>> GetCellData<T>(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
 
@@ -186,10 +185,10 @@ namespace VisioAutomation.ShapeSheetQuery
             string[] formulas  = surface.GetFormulasU_SIDSRC(srcstream);
 
             // Merge the results and formulas
-            var combined_data = new VisioAutomation.ShapeSheet.CellData<T>[results.Length];
+            var combined_data = new ShapeSheet.CellData<T>[results.Length];
             for (int i = 0; i < results.Length; i++)
             {
-                combined_data[i] = new VisioAutomation.ShapeSheet.CellData<T>(formulas[i], results[i]);
+                combined_data[i] = new ShapeSheet.CellData<T>(formulas[i], results[i]);
             }
 
             var r = this.FillValuesForMultipleShapes(shapeids, combined_data);
@@ -253,7 +252,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return start + cellcount;
         }
 
-        private short[] BuildSRCStream(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
+        private short[] BuildSRCStream(ShapeSheet.ShapeSheetSurface surface)
         {
             if (surface.Target.Shape == null)
             {
@@ -312,7 +311,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return stream_builder.Stream;
         }
 
-        private short[] BuildSIDSRCStream(VisioAutomation.ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
+        private short[] BuildSIDSRCStream(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.CalculatePerShapeInfo(surface, shapeids);
 
@@ -362,7 +361,7 @@ namespace VisioAutomation.ShapeSheetQuery
         }
 
 
-        private void CalculatePerShapeInfo(VisioAutomation.ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
+        private void CalculatePerShapeInfo(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
         {
             this._per_shape_section_info = new List<List<SectionColumnDetails>>();
 
@@ -390,7 +389,7 @@ namespace VisioAutomation.ShapeSheetQuery
                 var section_infos = new List<SectionColumnDetails>(this.SectionColumns.Count);
                 foreach (var sec in this.SectionColumns)
                 {
-                    int num_rows = CellQuery.GetNumRowsForSection(shape, sec);
+                    int num_rows = GetNumRowsForSection(shape, sec);
                     var section_info = new SectionColumnDetails(sec, shapeid, num_rows);
                     section_infos.Add(section_info);
                 }

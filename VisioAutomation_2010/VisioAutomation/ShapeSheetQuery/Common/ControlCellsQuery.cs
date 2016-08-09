@@ -5,14 +5,14 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ControlCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn CanGlue { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Tip { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn X { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Y { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn YBehavior { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn XBehavior { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn XDynamics { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn YDynamics { get; set; }
+        public CellColumn CanGlue { get; set; }
+        public CellColumn Tip { get; set; }
+        public CellColumn X { get; set; }
+        public CellColumn Y { get; set; }
+        public CellColumn YBehavior { get; set; }
+        public CellColumn XBehavior { get; set; }
+        public CellColumn XDynamics { get; set; }
+        public CellColumn YDynamics { get; set; }
 
         public ControlCellsQuery()
         {
@@ -29,9 +29,9 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public VisioAutomation.Shapes.Controls.ControlCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.Controls.ControlCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Shapes.Controls.ControlCells();
+            var cells = new Shapes.Controls.ControlCells();
             cells.CanGlue = Extensions.CellDataMethods.ToInt(row[this.CanGlue]);
             cells.Tip = Extensions.CellDataMethods.ToInt(row[this.Tip]);
             cells.X = row[this.X];

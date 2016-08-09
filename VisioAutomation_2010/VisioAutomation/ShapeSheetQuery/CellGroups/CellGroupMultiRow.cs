@@ -1,4 +1,3 @@
-using VAQUERY = VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 
@@ -6,7 +5,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
 {
     public abstract class CellGroupMultiRow : BaseCellGroup
     {
-        private static void check_query(VAQUERY.CellQuery query)
+        private static void check_query(CellQuery query)
         {
             if (query.CellColumns.Count != 0)
             {
@@ -23,13 +22,13 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
         public static IList<List<T>> _GetCells<T, RT>(
             IVisio.Page page,
             IList<int> shapeids,
-            VAQUERY.CellQuery query,
+            CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
             CellGroupMultiRow.check_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            var surface = new ShapeSheet.ShapeSheetSurface(page);
             var data_for_shapes = query.GetCellData<RT>(surface, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
@@ -44,7 +43,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
 
         public static IList<T> _GetCells<T, RT>(
             IVisio.Shape shape,
-            VAQUERY.CellQuery query,
+            CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
             CellGroupMultiRow.check_query(query);
@@ -56,7 +55,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             return sec_objects;
         }
 
-        private static List<T> SectionToObjectList<T, RT>(VAQUERY.SectionResult<VisioAutomation.ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
+        private static List<T> SectionToObjectList<T, RT>(SectionResult<ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
         {
             int num_rows = sec.Count;
             var sec_objects = new List<T>(num_rows);

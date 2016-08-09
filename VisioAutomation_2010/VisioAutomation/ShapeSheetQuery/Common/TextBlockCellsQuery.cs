@@ -4,22 +4,22 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class TextBlockCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn BottomMargin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LeftMargin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn RightMargin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TopMargin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DefaultTabStop { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TextBkgnd { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TextBkgndTrans { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TextDirection { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn VerticalAlign { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TxtWidth { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TxtHeight { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TxtPinX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TxtPinY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TxtLocPinX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TxtLocPinY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn TxtAngle { get; set; }
+        public CellColumn BottomMargin { get; set; }
+        public CellColumn LeftMargin { get; set; }
+        public CellColumn RightMargin { get; set; }
+        public CellColumn TopMargin { get; set; }
+        public CellColumn DefaultTabStop { get; set; }
+        public CellColumn TextBkgnd { get; set; }
+        public CellColumn TextBkgndTrans { get; set; }
+        public CellColumn TextDirection { get; set; }
+        public CellColumn VerticalAlign { get; set; }
+        public CellColumn TxtWidth { get; set; }
+        public CellColumn TxtHeight { get; set; }
+        public CellColumn TxtPinX { get; set; }
+        public CellColumn TxtPinY { get; set; }
+        public CellColumn TxtLocPinX { get; set; }
+        public CellColumn TxtLocPinY { get; set; }
+        public CellColumn TxtAngle { get; set; }
 
         public TextBlockCellsQuery() :
             base()
@@ -43,9 +43,9 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public VisioAutomation.Text.TextBlockCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Text.TextBlockCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Text.TextBlockCells();
+            var cells = new Text.TextBlockCells();
             cells.BottomMargin = row[this.BottomMargin];
             cells.LeftMargin = row[this.LeftMargin];
             cells.RightMargin = row[this.RightMargin];

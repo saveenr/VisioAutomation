@@ -5,11 +5,11 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ConnectionPointCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn DirX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DirY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Type { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn X { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Y { get; set; }
+        public CellColumn DirX { get; set; }
+        public CellColumn DirY { get; set; }
+        public CellColumn Type { get; set; }
+        public CellColumn X { get; set; }
+        public CellColumn Y { get; set; }
 
         public ConnectionPointCellsQuery()
         {
@@ -23,9 +23,9 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public VisioAutomation.Shapes.Connections.ConnectionPointCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.Connections.ConnectionPointCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Shapes.Connections.ConnectionPointCells();
+            var cells = new Shapes.Connections.ConnectionPointCells();
             cells.X = row[this.X];
             cells.Y = row[this.Y];
             cells.DirX = Extensions.CellDataMethods.ToInt(row[this.DirX]);

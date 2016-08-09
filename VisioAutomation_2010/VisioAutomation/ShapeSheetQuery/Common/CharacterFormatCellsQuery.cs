@@ -5,28 +5,28 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class CharacterFormatCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn Font { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Style { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Color { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Size { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Trans { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn AsianFont { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Case { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ComplexScriptFont { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ComplexScriptSize { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DoubleStrikethrough { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DoubleUnderline { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LangID { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Locale { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LocalizeFont { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Overline { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Perpendicular { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Pos { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn RTLText { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn FontScale { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Letterspace { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Strikethru { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn UseVertical { get; set; }
+        public CellColumn Font { get; set; }
+        public CellColumn Style { get; set; }
+        public CellColumn Color { get; set; }
+        public CellColumn Size { get; set; }
+        public CellColumn Trans { get; set; }
+        public CellColumn AsianFont { get; set; }
+        public CellColumn Case { get; set; }
+        public CellColumn ComplexScriptFont { get; set; }
+        public CellColumn ComplexScriptSize { get; set; }
+        public CellColumn DoubleStrikethrough { get; set; }
+        public CellColumn DoubleUnderline { get; set; }
+        public CellColumn LangID { get; set; }
+        public CellColumn Locale { get; set; }
+        public CellColumn LocalizeFont { get; set; }
+        public CellColumn Overline { get; set; }
+        public CellColumn Perpendicular { get; set; }
+        public CellColumn Pos { get; set; }
+        public CellColumn RTLText { get; set; }
+        public CellColumn FontScale { get; set; }
+        public CellColumn Letterspace { get; set; }
+        public CellColumn Strikethru { get; set; }
+        public CellColumn UseVertical { get; set; }
 
         public CharacterFormatCellsQuery()
         {
@@ -57,9 +57,9 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public VisioAutomation.Text.CharacterCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Text.CharacterCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Text.CharacterCells();
+            var cells = new Text.CharacterCells();
             cells.Color = Extensions.CellDataMethods.ToInt(row[this.Color]);
             cells.Transparency = row[this.Trans];
             cells.Font = Extensions.CellDataMethods.ToInt(row[this.Font]);

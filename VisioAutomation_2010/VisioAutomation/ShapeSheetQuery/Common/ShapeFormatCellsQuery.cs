@@ -4,31 +4,31 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class ShapeFormatCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn FillBkgnd { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn FillBkgndTrans { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn FillForegnd { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn FillForegndTrans { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn FillPattern { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwObliqueAngle { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwOffsetX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwOffsetY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwScaleFactor { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShapeShdwType { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwBkgnd { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwBkgndTrans { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwForegnd { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwForegndTrans { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwPattern { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn BeginArrow { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn BeginArrowSize { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn EndArrow { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn EndArrowSize { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineColor { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineCap { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineColorTrans { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LinePattern { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineWeight { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Rounding { get; set; }
+        public CellColumn FillBkgnd { get; set; }
+        public CellColumn FillBkgndTrans { get; set; }
+        public CellColumn FillForegnd { get; set; }
+        public CellColumn FillForegndTrans { get; set; }
+        public CellColumn FillPattern { get; set; }
+        public CellColumn ShapeShdwObliqueAngle { get; set; }
+        public CellColumn ShapeShdwOffsetX { get; set; }
+        public CellColumn ShapeShdwOffsetY { get; set; }
+        public CellColumn ShapeShdwScaleFactor { get; set; }
+        public CellColumn ShapeShdwType { get; set; }
+        public CellColumn ShdwBkgnd { get; set; }
+        public CellColumn ShdwBkgndTrans { get; set; }
+        public CellColumn ShdwForegnd { get; set; }
+        public CellColumn ShdwForegndTrans { get; set; }
+        public CellColumn ShdwPattern { get; set; }
+        public CellColumn BeginArrow { get; set; }
+        public CellColumn BeginArrowSize { get; set; }
+        public CellColumn EndArrow { get; set; }
+        public CellColumn EndArrowSize { get; set; }
+        public CellColumn LineColor { get; set; }
+        public CellColumn LineCap { get; set; }
+        public CellColumn LineColorTrans { get; set; }
+        public CellColumn LinePattern { get; set; }
+        public CellColumn LineWeight { get; set; }
+        public CellColumn Rounding { get; set; }
 
         public ShapeFormatCellsQuery()
         {
@@ -62,7 +62,7 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public VisioAutomation.Shapes.FormatCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.FormatCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
             var cells = new Shapes.FormatCells();
             cells.FillBkgnd = Extensions.CellDataMethods.ToInt(row[this.FillBkgnd]);

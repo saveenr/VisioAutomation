@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheetQuery
 {
@@ -7,7 +6,7 @@ namespace VisioAutomation.ShapeSheetQuery
     {
         private readonly IList<CellColumn> _items;
         private readonly Dictionary<string, CellColumn> _dic_columns;
-        private HashSet<VisioAutomation.ShapeSheet.SRC> _src_set;
+        private HashSet<ShapeSheet.SRC> _src_set;
         private HashSet<short> _cellindex_set;
         private CellColumnType _coltype;
 
@@ -39,9 +38,9 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public bool Contains(string name) => this._dic_columns.ContainsKey(name);
 
-        internal CellColumn Add(VisioAutomation.ShapeSheet.SRC src) => this.Add(src, null);
+        internal CellColumn Add(ShapeSheet.SRC src) => this.Add(src, null);
 
-        internal CellColumn Add(VisioAutomation.ShapeSheet.SRC src, string name)
+        internal CellColumn Add(ShapeSheet.SRC src, string name)
         {
             if (this._coltype == CellColumnType.CellIndex)
             {
@@ -58,7 +57,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
             if (this._src_set == null)
             {
-                this._src_set = new HashSet<VisioAutomation.ShapeSheet.SRC>();
+                this._src_set = new HashSet<ShapeSheet.SRC>();
             }
 
             if (this._src_set.Contains(src))

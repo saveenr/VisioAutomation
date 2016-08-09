@@ -5,26 +5,26 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class LockCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockAspect { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockBegin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockCalcWH { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockCrop { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockCustProp { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockDelete { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockEnd { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockFormat { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockFromGroupFormat { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockGroup { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockHeight { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockMoveX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockMoveY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockRotate { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockSelect { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockTextEdit { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockThemeColors { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockThemeEffects { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockVtxEdit { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LockWidth { get; set; }
+        public CellColumn LockAspect { get; set; }
+        public CellColumn LockBegin { get; set; }
+        public CellColumn LockCalcWH { get; set; }
+        public CellColumn LockCrop { get; set; }
+        public CellColumn LockCustProp { get; set; }
+        public CellColumn LockDelete { get; set; }
+        public CellColumn LockEnd { get; set; }
+        public CellColumn LockFormat { get; set; }
+        public CellColumn LockFromGroupFormat { get; set; }
+        public CellColumn LockGroup { get; set; }
+        public CellColumn LockHeight { get; set; }
+        public CellColumn LockMoveX { get; set; }
+        public CellColumn LockMoveY { get; set; }
+        public CellColumn LockRotate { get; set; }
+        public CellColumn LockSelect { get; set; }
+        public CellColumn LockTextEdit { get; set; }
+        public CellColumn LockThemeColors { get; set; }
+        public CellColumn LockThemeEffects { get; set; }
+        public CellColumn LockVtxEdit { get; set; }
+        public CellColumn LockWidth { get; set; }
 
         public LockCellsQuery()
         {
@@ -57,9 +57,9 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public VisioAutomation.Shapes.LockCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.LockCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Shapes.LockCells();
+            var cells = new Shapes.LockCells();
             cells.LockAspect = Extensions.CellDataMethods.ToBool(row[this.LockAspect]);
             cells.LockBegin = Extensions.CellDataMethods.ToBool(row[this.LockBegin]);
             cells.LockCalcWH = Extensions.CellDataMethods.ToBool(row[this.LockCalcWH]);

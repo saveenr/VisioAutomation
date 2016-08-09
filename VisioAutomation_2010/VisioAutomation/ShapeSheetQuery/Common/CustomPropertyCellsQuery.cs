@@ -3,18 +3,18 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery.Common
 {
-    public class CustomPropertyCellsQuery : VisioAutomation.ShapeSheetQuery.CellQuery
+    public class CustomPropertyCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn SortKey { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Ask { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Calendar { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Format { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Invis { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Label { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LangID { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Prompt { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Value { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Type { get; set; }
+        public CellColumn SortKey { get; set; }
+        public CellColumn Ask { get; set; }
+        public CellColumn Calendar { get; set; }
+        public CellColumn Format { get; set; }
+        public CellColumn Invis { get; set; }
+        public CellColumn Label { get; set; }
+        public CellColumn LangID { get; set; }
+        public CellColumn Prompt { get; set; }
+        public CellColumn Value { get; set; }
+        public CellColumn Type { get; set; }
 
         public CustomPropertyCellsQuery()
         {
@@ -34,9 +34,9 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public VisioAutomation.Shapes.CustomProperties.CustomPropertyCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.CustomProperties.CustomPropertyCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Shapes.CustomProperties.CustomPropertyCells();
+            var cells = new Shapes.CustomProperties.CustomPropertyCells();
             cells.Value = row[this.Value];
             cells.Calendar = Extensions.CellDataMethods.ToInt(row[this.Calendar]);
             cells.Format = row[this.Format];

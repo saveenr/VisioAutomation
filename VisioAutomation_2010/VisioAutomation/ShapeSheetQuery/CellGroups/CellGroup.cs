@@ -5,7 +5,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
     {
-        private static void check_query(VisioAutomation.ShapeSheetQuery.CellQuery query)
+        private static void check_query(CellQuery query)
         {
             if (query.CellColumns.Count < 1)
             {
@@ -20,12 +20,12 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
 
         protected static IList<T> _GetCells<T, RT>(
             IVisio.Page page, IList<int> shapeids,
-            VisioAutomation.ShapeSheetQuery.CellQuery query,
+            CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
-            CellGroup.check_query(query);
+            check_query(query);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            var surface = new ShapeSheet.ShapeSheetSurface(page);
             var data_for_shapes = query.GetCellData<RT>( surface, shapeids);
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
@@ -38,10 +38,10 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
 
         protected static T _GetCells<T, RT>(
             IVisio.Shape shape,
-            VisioAutomation.ShapeSheetQuery.CellQuery query,
+            CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
-            CellGroup.check_query(query);
+            check_query(query);
 
             var data_for_shape = query.GetCellData<RT>(shape);
             var cells = row_to_object(data_for_shape.Cells);

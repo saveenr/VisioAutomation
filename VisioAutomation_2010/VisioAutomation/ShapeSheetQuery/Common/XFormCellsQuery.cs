@@ -4,13 +4,13 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class XFormCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn Width { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Height { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PinX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PinY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LocPinX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LocPinY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn Angle { get; set; }
+        public CellColumn Width { get; set; }
+        public CellColumn Height { get; set; }
+        public CellColumn PinX { get; set; }
+        public CellColumn PinY { get; set; }
+        public CellColumn LocPinX { get; set; }
+        public CellColumn LocPinY { get; set; }
+        public CellColumn Angle { get; set; }
 
         public XFormCellsQuery()
         {
@@ -23,9 +23,9 @@ namespace VisioAutomation.ShapeSheetQuery.Common
             this.Angle = this.AddCell(SRCCON.Angle, nameof(SRCCON.Angle));
         }
 
-        public VisioAutomation.Shapes.XFormCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.XFormCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Shapes.XFormCells
+            var cells = new Shapes.XFormCells
             {
                 PinX = row[this.PinX],
                 PinY = row[this.PinY],

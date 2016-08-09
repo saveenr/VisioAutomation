@@ -4,73 +4,73 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 {
     class PageCellsQuery : CellQuery
     {
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageLeftMargin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn CenterX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn CenterY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn OnPage { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageBottomMargin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageRightMargin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PagesX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PagesY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageTopMargin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PaperKind { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PrintGrid { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PrintPageOrientation { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ScaleX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ScaleY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PaperSource { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DrawingScale { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DrawingScaleType { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DrawingSizeType { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn InhibitSnap { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageHeight { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageScale { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageWidth { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwObliqueAngle { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwOffsetX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwOffsetY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwScaleFactor { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ShdwType { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn UIVisibility { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn XGridDensity { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn XGridOrigin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn XGridSpacing { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn XRulerDensity { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn XRulerOrigin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn YGridDensity { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn YGridOrigin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn YGridSpacing { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn YRulerDensity { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn YRulerOrigin { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn AvenueSizeX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn AvenueSizeY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn BlockSizeX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn BlockSizeY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn CtrlAsInput { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DynamicsOff { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn EnableGrid { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineAdjustFrom { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineAdjustTo { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineJumpCode { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineJumpFactorX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineJumpFactorY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineJumpStyle { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineRouteExt { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineToLineX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineToLineY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineToNodeX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn LineToNodeY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageLineJumpDirX { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageLineJumpDirY { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PageShapeSplit { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PlaceDepth { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PlaceFlip { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PlaceStyle { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn PlowCode { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn ResizePage { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn RouteStyle { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn AvoidPageBreaks { get; set; }
-        public VisioAutomation.ShapeSheetQuery.CellColumn DrawingResizeType { get; set; }
+        public CellColumn PageLeftMargin { get; set; }
+        public CellColumn CenterX { get; set; }
+        public CellColumn CenterY { get; set; }
+        public CellColumn OnPage { get; set; }
+        public CellColumn PageBottomMargin { get; set; }
+        public CellColumn PageRightMargin { get; set; }
+        public CellColumn PagesX { get; set; }
+        public CellColumn PagesY { get; set; }
+        public CellColumn PageTopMargin { get; set; }
+        public CellColumn PaperKind { get; set; }
+        public CellColumn PrintGrid { get; set; }
+        public CellColumn PrintPageOrientation { get; set; }
+        public CellColumn ScaleX { get; set; }
+        public CellColumn ScaleY { get; set; }
+        public CellColumn PaperSource { get; set; }
+        public CellColumn DrawingScale { get; set; }
+        public CellColumn DrawingScaleType { get; set; }
+        public CellColumn DrawingSizeType { get; set; }
+        public CellColumn InhibitSnap { get; set; }
+        public CellColumn PageHeight { get; set; }
+        public CellColumn PageScale { get; set; }
+        public CellColumn PageWidth { get; set; }
+        public CellColumn ShdwObliqueAngle { get; set; }
+        public CellColumn ShdwOffsetX { get; set; }
+        public CellColumn ShdwOffsetY { get; set; }
+        public CellColumn ShdwScaleFactor { get; set; }
+        public CellColumn ShdwType { get; set; }
+        public CellColumn UIVisibility { get; set; }
+        public CellColumn XGridDensity { get; set; }
+        public CellColumn XGridOrigin { get; set; }
+        public CellColumn XGridSpacing { get; set; }
+        public CellColumn XRulerDensity { get; set; }
+        public CellColumn XRulerOrigin { get; set; }
+        public CellColumn YGridDensity { get; set; }
+        public CellColumn YGridOrigin { get; set; }
+        public CellColumn YGridSpacing { get; set; }
+        public CellColumn YRulerDensity { get; set; }
+        public CellColumn YRulerOrigin { get; set; }
+        public CellColumn AvenueSizeX { get; set; }
+        public CellColumn AvenueSizeY { get; set; }
+        public CellColumn BlockSizeX { get; set; }
+        public CellColumn BlockSizeY { get; set; }
+        public CellColumn CtrlAsInput { get; set; }
+        public CellColumn DynamicsOff { get; set; }
+        public CellColumn EnableGrid { get; set; }
+        public CellColumn LineAdjustFrom { get; set; }
+        public CellColumn LineAdjustTo { get; set; }
+        public CellColumn LineJumpCode { get; set; }
+        public CellColumn LineJumpFactorX { get; set; }
+        public CellColumn LineJumpFactorY { get; set; }
+        public CellColumn LineJumpStyle { get; set; }
+        public CellColumn LineRouteExt { get; set; }
+        public CellColumn LineToLineX { get; set; }
+        public CellColumn LineToLineY { get; set; }
+        public CellColumn LineToNodeX { get; set; }
+        public CellColumn LineToNodeY { get; set; }
+        public CellColumn PageLineJumpDirX { get; set; }
+        public CellColumn PageLineJumpDirY { get; set; }
+        public CellColumn PageShapeSplit { get; set; }
+        public CellColumn PlaceDepth { get; set; }
+        public CellColumn PlaceFlip { get; set; }
+        public CellColumn PlaceStyle { get; set; }
+        public CellColumn PlowCode { get; set; }
+        public CellColumn ResizePage { get; set; }
+        public CellColumn RouteStyle { get; set; }
+        public CellColumn AvoidPageBreaks { get; set; }
+        public CellColumn DrawingResizeType { get; set; }
 
         public PageCellsQuery()
         {
@@ -144,10 +144,10 @@ namespace VisioAutomation.ShapeSheetQuery.Common
         }
 
 
-        public VisioAutomation.Pages.PageCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Pages.PageCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
 
-            var cells = new VisioAutomation.Pages.PageCells();
+            var cells = new Pages.PageCells();
             cells.PageLeftMargin = row[this.PageLeftMargin];
             cells.CenterX = row[this.CenterX];
             cells.CenterY = row[this.CenterY];
