@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheetQuery
     public class CellColumn
     {
         public string Name { get; private set; }
-        public VisioAutomation.ShapeSheet.SRC SRC { get; protected set; }
+        public ShapeSheet.SRC SRC { get; protected set; }
         public IVisio.VisUnitCodes UnitCode { get; set; }
         public int Ordinal { get; }
             
@@ -26,10 +26,10 @@ namespace VisioAutomation.ShapeSheetQuery
         {
             const short sec = -1;
             const short row = -1;
-            this.SRC = new VisioAutomation.ShapeSheet.SRC(sec, row, cell);
+            this.SRC = new ShapeSheet.SRC(sec, row, cell);
         }
 
-        internal CellColumn(int ordinal, VisioAutomation.ShapeSheet.SRC src, string name) :
+        internal CellColumn(int ordinal, ShapeSheet.SRC src, string name) :
             this(ordinal, name)
         {
             this.SRC = src;

@@ -31,7 +31,6 @@ namespace VisioAutomation.Models.Documents.Forms
         internal IVisio.Page Draw(FormRenderingContext context)
         {
             var r = new InteractiveRenderer(context.Document);
-            var page_cells = new Pages.PageCells();
             this.VisioPage = r.CreatePage(this);
             context.Page = this.VisioPage;
 
