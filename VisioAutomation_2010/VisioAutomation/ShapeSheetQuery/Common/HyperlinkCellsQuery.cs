@@ -34,8 +34,6 @@ namespace VisioAutomation.ShapeSheetQuery.Common
         {
             var cells = new Shapes.Hyperlinks.HyperlinkCells();
 
-            // cells.X = Extensions.CellDataMethods.ToInt(row[this.X]);
-
             cells.Address = row[this.Address].Formula;
             cells.Description= row[this.Description].Formula;
             cells.ExtraInfo= row[this.ExtraInfo].Formula;
