@@ -34,19 +34,19 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public Shapes.CustomProperties.CustomPropertyCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
+        public Shapes.CustomProperties.CustomPropertyCells GetCells(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Shapes.CustomProperties.CustomPropertyCells();
-            cells.Value = row.Cells[this.Value];
-            cells.Calendar = Extensions.CellDataMethods.ToInt(row.Cells[this.Calendar]);
-            cells.Format = row.Cells[this.Format];
-            cells.Invisible = Extensions.CellDataMethods.ToInt(row.Cells[this.Invis]);
-            cells.Label = row.Cells[this.Label];
-            cells.LangId = Extensions.CellDataMethods.ToInt(row.Cells[this.LangID]);
-            cells.Prompt = row.Cells[this.Prompt];
-            cells.SortKey = Extensions.CellDataMethods.ToInt(row.Cells[this.SortKey]);
-            cells.Type = Extensions.CellDataMethods.ToInt(row.Cells[this.Type]);
-            cells.Ask = Extensions.CellDataMethods.ToBool(row.Cells[this.Ask]);
+            cells.Value = row[this.Value];
+            cells.Calendar = Extensions.CellDataMethods.ToInt(row[this.Calendar]);
+            cells.Format = row[this.Format];
+            cells.Invisible = Extensions.CellDataMethods.ToInt(row[this.Invis]);
+            cells.Label = row[this.Label];
+            cells.LangId = Extensions.CellDataMethods.ToInt(row[this.LangID]);
+            cells.Prompt = row[this.Prompt];
+            cells.SortKey = Extensions.CellDataMethods.ToInt(row[this.SortKey]);
+            cells.Type = Extensions.CellDataMethods.ToInt(row[this.Type]);
+            cells.Ask = Extensions.CellDataMethods.ToBool(row[this.Ask]);
             return cells;
         }
     }

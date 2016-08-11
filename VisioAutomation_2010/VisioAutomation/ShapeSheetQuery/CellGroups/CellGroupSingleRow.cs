@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheetQuery.CellGroups
 {
-    public abstract class CellGroup : BaseCellGroup
+    public abstract class CellGroupSingleRow : BaseCellGroup
     {
         private static void check_query(CellQuery query)
         {
@@ -31,8 +31,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
             {
-                var srr = new SectionResultRow<CellData<RT>>(data_for_shape.Cells);
-                var cells = row_to_object(srr);
+                var cells = row_to_object(data_for_shape.Cells);
                 list.Add(cells);
             }
             return list;
@@ -46,8 +45,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             check_query(query);
 
             QueryResult<CellData<RT>> data_for_shape = query.GetCellData<RT>(shape);
-            var srr = new SectionResultRow<CellData<RT>>(data_for_shape.Cells);
-            var cells = row_to_object(srr);
+            var cells = row_to_object(data_for_shape.Cells);
             return cells;
         }
     }

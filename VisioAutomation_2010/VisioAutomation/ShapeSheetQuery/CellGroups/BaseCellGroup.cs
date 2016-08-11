@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
 {
     public abstract class BaseCellGroup
     {
-        public delegate T RowToObject<T,RT>(SectionResultRow<ShapeSheet.CellData<RT>> data);
+        public delegate T RowToObject<T,RT>(ShapeSheet.CellData<RT>[] data);
 
         public struct SRCFormulaPair
         {

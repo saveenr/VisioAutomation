@@ -189,7 +189,7 @@ namespace VisioAutomation.ShapeSheet
             this._SetFormulaIgnoreNull(StreamType.SIDSRC, sidsrc, formula);
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheetQuery.CellGroups.CellGroup cg)
+        public void SetFormulas(VisioAutomation.ShapeSheetQuery.CellGroups.CellGroupSingleRow cg)
         {
             foreach (var pair in cg.Pairs)
             {
@@ -197,7 +197,7 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.CellGroups.CellGroup cg)
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.CellGroups.CellGroupSingleRow cg)
         {
             foreach (var pair in cg.Pairs)
             {

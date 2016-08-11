@@ -3,7 +3,7 @@ using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Layout
 {
-    public class ShapeLayoutCells : ShapeSheetQuery.CellGroups.CellGroup
+    public class ShapeLayoutCells : ShapeSheetQuery.CellGroups.CellGroupSingleRow
     {
         public ShapeSheet.CellData<int> ConFixedCode { get; set; }
         public ShapeSheet.CellData<int> ConLineJumpCode { get; set; }
@@ -53,13 +53,13 @@ namespace VisioAutomation.Shapes.Layout
         public static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroup._GetCells<ShapeLayoutCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroupSingleRow._GetCells<ShapeLayoutCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static ShapeLayoutCells GetCells(IVisio.Shape shape)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroup._GetCells<ShapeLayoutCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.CellGroups.CellGroupSingleRow._GetCells<ShapeLayoutCells, double>(shape, query, query.GetCells);
         }
 
         private static System.Lazy<ShapeSheetQuery.Common.ShapeLayoutCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.ShapeLayoutCellsQuery>();

@@ -138,7 +138,7 @@
     <Compile Include="Shapes\Geometry\GeometrySection.cs" />
     <Compile Include="Shapes\Geometry\GeometryRow.cs" />
     <Compile Include="Shapes\Geometry\GeometryHelper.cs" />
-    <Compile Include="ShapeSheetQuery\CellGroups\CellGroup.cs" />
+    <Compile Include="ShapeSheetQuery\CellGroups\CellGroupSingleRow.cs" />
     <Compile Include="ShapeSheetQuery\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="ShapeSheetQuery\CellGroups\BaseCellGroup.cs" />
     <Compile Include="ShapeSheetQuery\QueryResultList.cs" />
