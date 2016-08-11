@@ -32,21 +32,21 @@ namespace VisioPowerShell.Commands.Get
                 
         }
 
-        private VA.DocumentAnalysis.ConnectorEdgeHandling get_DirectedEdgeHandling()
+        private VA.DocumentAnalysis.ConnectorHandling get_DirectedEdgeHandling()
         {
-            var flag = new VA.DocumentAnalysis.ConnectorEdgeHandling();
-            flag.ADR =  VA.DocumentAnalysis.ArrowDirectionHandling.NoArrows_Exclude;
+            var flag = new VA.DocumentAnalysis.ConnectorHandling();
+            flag.ADR =  VA.DocumentAnalysis.NoArrowsHandling.Exclude;
 
             if (this.Raw)
             {
-                flag.AR = VA.DocumentAnalysis.ArrowHandling.Raw;
+                flag.AR = VA.DocumentAnalysis.ArrowHandling.UseConnectionOrder;
             }
             else
             {
-                flag.AR = VA.DocumentAnalysis.ArrowHandling.NonRow;
+                flag.AR = VA.DocumentAnalysis.ArrowHandling.UseConnectorArrows;
                 flag.ADR = this.TreatUndirectedAsBidirectional ?
-                    VA.DocumentAnalysis.ArrowDirectionHandling.NoArrows_Bidirectional 
-                    : VA.DocumentAnalysis.ArrowDirectionHandling.NoArrows_Exclude;
+                    VA.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional 
+                    : VA.DocumentAnalysis.NoArrowsHandling.Exclude;
             }
             return flag;
         }

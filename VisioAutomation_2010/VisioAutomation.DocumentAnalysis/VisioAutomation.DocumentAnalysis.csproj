@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="BitArray2D.cs" />
     <Compile Include="ConnectorEdge.cs" />
-    <Compile Include="ConnectorEdgeHandling.cs" />
+    <Compile Include="ConnectorHandling.cs" />
     <Compile Include="DirectedEdge.cs" />
     <Compile Include="ConnectionAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

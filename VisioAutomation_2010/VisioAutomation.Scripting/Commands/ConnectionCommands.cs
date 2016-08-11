@@ -19,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
         /// </summary>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public IList<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosure(VA.DocumentAnalysis.ConnectorEdgeHandling flag)
+        public IList<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosure(VA.DocumentAnalysis.ConnectorHandling flag)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
             return VA.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(app.ActivePage, flag);
         }
 
-        public IList<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdges(VA.DocumentAnalysis.ConnectorEdgeHandling flag)
+        public IList<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdges(VA.DocumentAnalysis.ConnectorHandling flag)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

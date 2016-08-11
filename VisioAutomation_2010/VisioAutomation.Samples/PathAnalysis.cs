@@ -38,16 +38,16 @@ namespace VisioAutomationSamples
             s3.AutoConnect(s4, dir, null);
             s5.AutoConnect(s6, dir, null);
 
-            var ceh = new VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling();
-            ceh.AR = VisioAutomation.DocumentAnalysis.ArrowHandling.Raw;
+            var ceh = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
+            ceh.AR = VisioAutomation.DocumentAnalysis.ArrowHandling.UseConnectionOrder;
 
             var normal_edges = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page, ceh);
 
-            var edge_handling_0 = new VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling();
-            edge_handling_0.ADR =  VisioAutomation.DocumentAnalysis.ArrowDirectionHandling.NoArrows_Exclude;
+            var edge_handling_0 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
+            edge_handling_0.ADR =  VisioAutomation.DocumentAnalysis.NoArrowsHandling.Exclude;
 
-            var edge_handling_1 = new VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling();
-            edge_handling_1.ADR=VisioAutomation.DocumentAnalysis.ArrowDirectionHandling.NoArrows_Bidirectional;
+            var edge_handling_1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
+            edge_handling_1.ADR=VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional;
 
             var tc_edges_0 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page, edge_handling_0);
             var tc_edges_1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page, edge_handling_1);
