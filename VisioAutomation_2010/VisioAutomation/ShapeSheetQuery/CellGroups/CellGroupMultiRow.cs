@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             foreach (var data_for_shape in data_for_shapes)
             {
                 var sec = data_for_shape.Sections[0];
-                var sec_objects = CellGroupMultiRow.SectionToObjectList(sec, row_to_object);
+                var sec_objects = CellGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
                 list.Add(sec_objects);
             }
 
@@ -50,18 +50,19 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
 
             var data_for_shape = query.GetCellData<RT>(shape);
             var sec = data_for_shape.Sections[0];
-            var sec_objects = CellGroupMultiRow.SectionToObjectList(sec, row_to_object);
+            var sec_objects = CellGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
             
             return sec_objects;
         }
 
-        private static List<T> SectionToObjectList<T, RT>(SectionResult<ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
+        private static List<T> SectionRowsToObjects<T, RT>(SectionResult<ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
         {
             int num_rows = sec.Rows.Count;
             var sec_objects = new List<T>(num_rows);
             foreach (var row in sec.Rows)
             {
-                var obj = row_to_object(row.Cells);
+                var srr = new SectionResultRow<ShapeSheet.CellData<RT>>(row.Cells);
+                var obj = row_to_object(srr);
                 sec_objects.Add(obj);
             }
             return sec_objects;

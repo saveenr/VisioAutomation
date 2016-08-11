@@ -43,25 +43,25 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public Text.TextBlockCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Text.TextBlockCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Text.TextBlockCells();
-            cells.BottomMargin = row[this.BottomMargin];
-            cells.LeftMargin = row[this.LeftMargin];
-            cells.RightMargin = row[this.RightMargin];
-            cells.TopMargin = row[this.TopMargin];
-            cells.DefaultTabStop = row[this.DefaultTabStop];
-            cells.TextBkgnd = Extensions.CellDataMethods.ToInt(row[this.TextBkgnd]);
-            cells.TextBkgndTrans = row[this.TextBkgndTrans];
-            cells.TextDirection = Extensions.CellDataMethods.ToInt(row[this.TextDirection]);
-            cells.VerticalAlign = Extensions.CellDataMethods.ToInt(row[this.VerticalAlign]);
-            cells.TxtPinX = row[this.TxtPinX];
-            cells.TxtPinY = row[this.TxtPinY];
-            cells.TxtLocPinX = row[this.TxtLocPinX];
-            cells.TxtLocPinY = row[this.TxtLocPinY];
-            cells.TxtWidth = row[this.TxtWidth];
-            cells.TxtHeight = row[this.TxtHeight];
-            cells.TxtAngle = row[this.TxtAngle];
+            cells.BottomMargin = row.Cells[this.BottomMargin];
+            cells.LeftMargin = row.Cells[this.LeftMargin];
+            cells.RightMargin = row.Cells[this.RightMargin];
+            cells.TopMargin = row.Cells[this.TopMargin];
+            cells.DefaultTabStop = row.Cells[this.DefaultTabStop];
+            cells.TextBkgnd = Extensions.CellDataMethods.ToInt(row.Cells[this.TextBkgnd]);
+            cells.TextBkgndTrans = row.Cells[this.TextBkgndTrans];
+            cells.TextDirection = Extensions.CellDataMethods.ToInt(row.Cells[this.TextDirection]);
+            cells.VerticalAlign = Extensions.CellDataMethods.ToInt(row.Cells[this.VerticalAlign]);
+            cells.TxtPinX = row.Cells[this.TxtPinX];
+            cells.TxtPinY = row.Cells[this.TxtPinY];
+            cells.TxtLocPinX = row.Cells[this.TxtLocPinX];
+            cells.TxtLocPinY = row.Cells[this.TxtLocPinY];
+            cells.TxtWidth = row.Cells[this.TxtWidth];
+            cells.TxtHeight = row.Cells[this.TxtHeight];
+            cells.TxtAngle = row.Cells[this.TxtAngle];
             return cells;
         }
     }

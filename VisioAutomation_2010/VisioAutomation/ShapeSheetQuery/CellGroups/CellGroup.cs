@@ -1,5 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheetQuery.CellGroups
 {
@@ -30,7 +31,8 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
             {
-                var cells = row_to_object(data_for_shape.Cells);
+                var srr = new SectionResultRow<CellData<RT>>(data_for_shape.Cells);
+                var cells = row_to_object(srr);
                 list.Add(cells);
             }
             return list;
@@ -43,8 +45,9 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
         {
             check_query(query);
 
-            var data_for_shape = query.GetCellData<RT>(shape);
-            var cells = row_to_object(data_for_shape.Cells);
+            QueryResult<CellData<RT>> data_for_shape = query.GetCellData<RT>(shape);
+            var srr = new SectionResultRow<CellData<RT>>(data_for_shape.Cells);
+            var cells = row_to_object(srr);
             return cells;
         }
     }

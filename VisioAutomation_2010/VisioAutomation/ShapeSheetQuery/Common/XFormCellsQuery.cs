@@ -23,17 +23,17 @@ namespace VisioAutomation.ShapeSheetQuery.Common
             this.Angle = this.AddCell(SRCCON.Angle, nameof(SRCCON.Angle));
         }
 
-        public Shapes.XFormCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.XFormCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Shapes.XFormCells
             {
-                PinX = row[this.PinX],
-                PinY = row[this.PinY],
-                LocPinX = row[this.LocPinX],
-                LocPinY = row[this.LocPinY],
-                Width = row[this.Width],
-                Height = row[this.Height],
-                Angle = row[this.Angle]
+                PinX = row.Cells[this.PinX],
+                PinY = row.Cells[this.PinY],
+                LocPinX = row.Cells[this.LocPinX],
+                LocPinY = row.Cells[this.LocPinY],
+                Width = row.Cells[this.Width],
+                Height = row.Cells[this.Height],
+                Angle = row.Cells[this.Angle]
             };
             return cells;
         }

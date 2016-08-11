@@ -48,27 +48,27 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public Shapes.Layout.ShapeLayoutCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.Layout.ShapeLayoutCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Shapes.Layout.ShapeLayoutCells();
-            cells.ConFixedCode = Extensions.CellDataMethods.ToInt(row[this.ConFixedCode]);
-            cells.ConLineJumpCode = Extensions.CellDataMethods.ToInt(row[this.ConLineJumpCode]);
-            cells.ConLineJumpDirX = Extensions.CellDataMethods.ToInt(row[this.ConLineJumpDirX]);
-            cells.ConLineJumpDirY = Extensions.CellDataMethods.ToInt(row[this.ConLineJumpDirY]);
-            cells.ConLineJumpStyle = Extensions.CellDataMethods.ToInt(row[this.ConLineJumpStyle]);
-            cells.ConLineRouteExt = Extensions.CellDataMethods.ToInt(row[this.ConLineRouteExt]);
-            cells.ShapeFixedCode = Extensions.CellDataMethods.ToInt(row[this.ShapeFixedCode]);
-            cells.ShapePermeablePlace = Extensions.CellDataMethods.ToInt(row[this.ShapePermeablePlace]);
-            cells.ShapePermeableX = Extensions.CellDataMethods.ToInt(row[this.ShapePermeableX]);
-            cells.ShapePermeableY = Extensions.CellDataMethods.ToInt(row[this.ShapePermeableY]);
-            cells.ShapePlaceFlip = Extensions.CellDataMethods.ToInt(row[this.ShapePlaceFlip]);
-            cells.ShapePlaceStyle = Extensions.CellDataMethods.ToInt(row[this.ShapePlaceStyle]);
-            cells.ShapePlowCode = Extensions.CellDataMethods.ToInt(row[this.ShapePlowCode]);
-            cells.ShapeRouteStyle = Extensions.CellDataMethods.ToInt(row[this.ShapeRouteStyle]);
-            cells.ShapeSplit = Extensions.CellDataMethods.ToInt(row[this.ShapeSplit]);
-            cells.ShapeSplittable = Extensions.CellDataMethods.ToInt(row[this.ShapeSplittable]);
-            cells.DisplayLevel = Extensions.CellDataMethods.ToInt(row[this.DisplayLevel]);
-            cells.Relationships = Extensions.CellDataMethods.ToInt(row[this.Relationships]);
+            cells.ConFixedCode = Extensions.CellDataMethods.ToInt(row.Cells[this.ConFixedCode]);
+            cells.ConLineJumpCode = Extensions.CellDataMethods.ToInt(row.Cells[this.ConLineJumpCode]);
+            cells.ConLineJumpDirX = Extensions.CellDataMethods.ToInt(row.Cells[this.ConLineJumpDirX]);
+            cells.ConLineJumpDirY = Extensions.CellDataMethods.ToInt(row.Cells[this.ConLineJumpDirY]);
+            cells.ConLineJumpStyle = Extensions.CellDataMethods.ToInt(row.Cells[this.ConLineJumpStyle]);
+            cells.ConLineRouteExt = Extensions.CellDataMethods.ToInt(row.Cells[this.ConLineRouteExt]);
+            cells.ShapeFixedCode = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapeFixedCode]);
+            cells.ShapePermeablePlace = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapePermeablePlace]);
+            cells.ShapePermeableX = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapePermeableX]);
+            cells.ShapePermeableY = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapePermeableY]);
+            cells.ShapePlaceFlip = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapePlaceFlip]);
+            cells.ShapePlaceStyle = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapePlaceStyle]);
+            cells.ShapePlowCode = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapePlowCode]);
+            cells.ShapeRouteStyle = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapeRouteStyle]);
+            cells.ShapeSplit = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapeSplit]);
+            cells.ShapeSplittable = Extensions.CellDataMethods.ToInt(row.Cells[this.ShapeSplittable]);
+            cells.DisplayLevel = Extensions.CellDataMethods.ToInt(row.Cells[this.DisplayLevel]);
+            cells.Relationships = Extensions.CellDataMethods.ToInt(row.Cells[this.Relationships]);
             return cells;
         }
     }

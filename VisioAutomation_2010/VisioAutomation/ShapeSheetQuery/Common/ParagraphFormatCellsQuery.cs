@@ -39,22 +39,22 @@ namespace VisioAutomation.ShapeSheetQuery.Common
             this.TextPosAfterBullet = sec.AddCell(SRCCON.Para_TextPosAfterBullet, nameof(SRCCON.Para_TextPosAfterBullet));
         }
 
-        public Text.ParagraphCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Text.ParagraphCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Text.ParagraphCells();
-            cells.IndentFirst = row[this.IndentFirst];
-            cells.IndentLeft = row[this.IndentLeft];
-            cells.IndentRight = row[this.IndentRight];
-            cells.SpacingAfter = row[this.SpaceAfter];
-            cells.SpacingBefore = row[this.SpaceBefore];
-            cells.SpacingLine = row[this.SpaceLine];
-            cells.HorizontalAlign = Extensions.CellDataMethods.ToInt(row[this.HorzAlign]);
-            cells.Bullet = Extensions.CellDataMethods.ToInt(row[this.Bullet]);
-            cells.BulletFont = Extensions.CellDataMethods.ToInt(row[this.BulletFont]);
-            cells.BulletFontSize = Extensions.CellDataMethods.ToInt(row[this.BulletFontSize]);
-            cells.LocBulletFont = Extensions.CellDataMethods.ToInt(row[this.LocalizeBulletFont]);
-            cells.TextPosAfterBullet = row[this.TextPosAfterBullet];
-            cells.Flags = Extensions.CellDataMethods.ToInt(row[this.Flags]);
+            cells.IndentFirst = row.Cells[this.IndentFirst];
+            cells.IndentLeft = row.Cells[this.IndentLeft];
+            cells.IndentRight = row.Cells[this.IndentRight];
+            cells.SpacingAfter = row.Cells[this.SpaceAfter];
+            cells.SpacingBefore = row.Cells[this.SpaceBefore];
+            cells.SpacingLine = row.Cells[this.SpaceLine];
+            cells.HorizontalAlign = Extensions.CellDataMethods.ToInt(row.Cells[this.HorzAlign]);
+            cells.Bullet = Extensions.CellDataMethods.ToInt(row.Cells[this.Bullet]);
+            cells.BulletFont = Extensions.CellDataMethods.ToInt(row.Cells[this.BulletFont]);
+            cells.BulletFontSize = Extensions.CellDataMethods.ToInt(row.Cells[this.BulletFontSize]);
+            cells.LocBulletFont = Extensions.CellDataMethods.ToInt(row.Cells[this.LocalizeBulletFont]);
+            cells.TextPosAfterBullet = row.Cells[this.TextPosAfterBullet];
+            cells.Flags = Extensions.CellDataMethods.ToInt(row.Cells[this.Flags]);
             cells.BulletString = ""; // TODO: Figure out some way of getting this
 
             return cells;

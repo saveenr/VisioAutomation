@@ -57,29 +57,29 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public Shapes.LockCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.LockCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Shapes.LockCells();
-            cells.LockAspect = Extensions.CellDataMethods.ToBool(row[this.LockAspect]);
-            cells.LockBegin = Extensions.CellDataMethods.ToBool(row[this.LockBegin]);
-            cells.LockCalcWH = Extensions.CellDataMethods.ToBool(row[this.LockCalcWH]);
-            cells.LockCrop = Extensions.CellDataMethods.ToBool(row[this.LockCrop]);
-            cells.LockCustProp = Extensions.CellDataMethods.ToBool(row[this.LockCustProp]);
-            cells.LockDelete = Extensions.CellDataMethods.ToBool(row[this.LockDelete]);
-            cells.LockEnd = Extensions.CellDataMethods.ToBool(row[this.LockEnd]);
-            cells.LockFormat = Extensions.CellDataMethods.ToBool(row[this.LockFormat]);
-            cells.LockFromGroupFormat = Extensions.CellDataMethods.ToBool(row[this.LockFromGroupFormat]);
-            cells.LockGroup = Extensions.CellDataMethods.ToBool(row[this.LockGroup]);
-            cells.LockHeight = Extensions.CellDataMethods.ToBool(row[this.LockHeight]);
-            cells.LockMoveX = Extensions.CellDataMethods.ToBool(row[this.LockMoveX]);
-            cells.LockMoveY = Extensions.CellDataMethods.ToBool(row[this.LockMoveY]);
-            cells.LockRotate = Extensions.CellDataMethods.ToBool(row[this.LockRotate]);
-            cells.LockSelect = Extensions.CellDataMethods.ToBool(row[this.LockSelect]);
-            cells.LockTextEdit = Extensions.CellDataMethods.ToBool(row[this.LockTextEdit]);
-            cells.LockThemeColors = Extensions.CellDataMethods.ToBool(row[this.LockThemeColors]);
-            cells.LockThemeEffects = Extensions.CellDataMethods.ToBool(row[this.LockThemeEffects]);
-            cells.LockVtxEdit = Extensions.CellDataMethods.ToBool(row[this.LockVtxEdit]);
-            cells.LockWidth = Extensions.CellDataMethods.ToBool(row[this.LockWidth]);
+            cells.LockAspect = Extensions.CellDataMethods.ToBool(row.Cells[this.LockAspect]);
+            cells.LockBegin = Extensions.CellDataMethods.ToBool(row.Cells[this.LockBegin]);
+            cells.LockCalcWH = Extensions.CellDataMethods.ToBool(row.Cells[this.LockCalcWH]);
+            cells.LockCrop = Extensions.CellDataMethods.ToBool(row.Cells[this.LockCrop]);
+            cells.LockCustProp = Extensions.CellDataMethods.ToBool(row.Cells[this.LockCustProp]);
+            cells.LockDelete = Extensions.CellDataMethods.ToBool(row.Cells[this.LockDelete]);
+            cells.LockEnd = Extensions.CellDataMethods.ToBool(row.Cells[this.LockEnd]);
+            cells.LockFormat = Extensions.CellDataMethods.ToBool(row.Cells[this.LockFormat]);
+            cells.LockFromGroupFormat = Extensions.CellDataMethods.ToBool(row.Cells[this.LockFromGroupFormat]);
+            cells.LockGroup = Extensions.CellDataMethods.ToBool(row.Cells[this.LockGroup]);
+            cells.LockHeight = Extensions.CellDataMethods.ToBool(row.Cells[this.LockHeight]);
+            cells.LockMoveX = Extensions.CellDataMethods.ToBool(row.Cells[this.LockMoveX]);
+            cells.LockMoveY = Extensions.CellDataMethods.ToBool(row.Cells[this.LockMoveY]);
+            cells.LockRotate = Extensions.CellDataMethods.ToBool(row.Cells[this.LockRotate]);
+            cells.LockSelect = Extensions.CellDataMethods.ToBool(row.Cells[this.LockSelect]);
+            cells.LockTextEdit = Extensions.CellDataMethods.ToBool(row.Cells[this.LockTextEdit]);
+            cells.LockThemeColors = Extensions.CellDataMethods.ToBool(row.Cells[this.LockThemeColors]);
+            cells.LockThemeEffects = Extensions.CellDataMethods.ToBool(row.Cells[this.LockThemeEffects]);
+            cells.LockVtxEdit = Extensions.CellDataMethods.ToBool(row.Cells[this.LockVtxEdit]);
+            cells.LockWidth = Extensions.CellDataMethods.ToBool(row.Cells[this.LockWidth]);
             return cells;
         }
     }

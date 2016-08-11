@@ -23,14 +23,14 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public Shapes.Connections.ConnectionPointCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.Connections.ConnectionPointCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Shapes.Connections.ConnectionPointCells();
-            cells.X = row[this.X];
-            cells.Y = row[this.Y];
-            cells.DirX = Extensions.CellDataMethods.ToInt(row[this.DirX]);
-            cells.DirY = Extensions.CellDataMethods.ToInt(row[this.DirY]);
-            cells.Type = Extensions.CellDataMethods.ToInt(row[this.Type]);
+            cells.X = row.Cells[this.X];
+            cells.Y = row.Cells[this.Y];
+            cells.DirX = Extensions.CellDataMethods.ToInt(row.Cells[this.DirX]);
+            cells.DirY = Extensions.CellDataMethods.ToInt(row.Cells[this.DirY]);
+            cells.Type = Extensions.CellDataMethods.ToInt(row.Cells[this.Type]);
 
             return cells;
         }

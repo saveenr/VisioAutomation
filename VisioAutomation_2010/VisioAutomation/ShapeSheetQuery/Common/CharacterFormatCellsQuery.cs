@@ -57,32 +57,32 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public Text.CharacterCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Text.CharacterCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Text.CharacterCells();
-            cells.Color = Extensions.CellDataMethods.ToInt(row[this.Color]);
-            cells.Transparency = row[this.Trans];
-            cells.Font = Extensions.CellDataMethods.ToInt(row[this.Font]);
-            cells.Size = row[this.Size];
-            cells.Style = Extensions.CellDataMethods.ToInt(row[this.Style]);
-            cells.AsianFont = Extensions.CellDataMethods.ToInt(row[this.AsianFont]);
-            cells.AsianFont = Extensions.CellDataMethods.ToInt(row[this.AsianFont]);
-            cells.Case = Extensions.CellDataMethods.ToInt(row[this.Case]);
-            cells.ComplexScriptFont = Extensions.CellDataMethods.ToInt(row[this.ComplexScriptFont]);
-            cells.ComplexScriptSize = row[this.ComplexScriptSize];
-            cells.DoubleStrikeThrough = Extensions.CellDataMethods.ToBool(row[this.DoubleStrikethrough]);
-            cells.DoubleUnderline = Extensions.CellDataMethods.ToBool(row[this.DoubleUnderline]);
-            cells.FontScale = row[this.FontScale];
-            cells.LangID = Extensions.CellDataMethods.ToInt(row[this.LangID]);
-            cells.Letterspace = row[this.Letterspace];
-            cells.Locale = Extensions.CellDataMethods.ToInt(row[this.Locale]);
-            cells.LocalizeFont = Extensions.CellDataMethods.ToInt(row[this.LocalizeFont]);
-            cells.Overline = Extensions.CellDataMethods.ToBool(row[this.Overline]);
-            cells.Perpendicular = Extensions.CellDataMethods.ToBool(row[this.Perpendicular]);
-            cells.Pos = Extensions.CellDataMethods.ToInt(row[this.Pos]);
-            cells.RTLText = Extensions.CellDataMethods.ToInt(row[this.RTLText]);
-            cells.Strikethru = Extensions.CellDataMethods.ToBool(row[this.Strikethru]);
-            cells.UseVertical = Extensions.CellDataMethods.ToInt(row[this.UseVertical]);
+            cells.Color = Extensions.CellDataMethods.ToInt(row.Cells[this.Color]);
+            cells.Transparency = row.Cells[this.Trans];
+            cells.Font = Extensions.CellDataMethods.ToInt(row.Cells[this.Font]);
+            cells.Size = row.Cells[this.Size];
+            cells.Style = Extensions.CellDataMethods.ToInt(row.Cells[this.Style]);
+            cells.AsianFont = Extensions.CellDataMethods.ToInt(row.Cells[this.AsianFont]);
+            cells.AsianFont = Extensions.CellDataMethods.ToInt(row.Cells[this.AsianFont]);
+            cells.Case = Extensions.CellDataMethods.ToInt(row.Cells[this.Case]);
+            cells.ComplexScriptFont = Extensions.CellDataMethods.ToInt(row.Cells[this.ComplexScriptFont]);
+            cells.ComplexScriptSize = row.Cells[this.ComplexScriptSize];
+            cells.DoubleStrikeThrough = Extensions.CellDataMethods.ToBool(row.Cells[this.DoubleStrikethrough]);
+            cells.DoubleUnderline = Extensions.CellDataMethods.ToBool(row.Cells[this.DoubleUnderline]);
+            cells.FontScale = row.Cells[this.FontScale];
+            cells.LangID = Extensions.CellDataMethods.ToInt(row.Cells[this.LangID]);
+            cells.Letterspace = row.Cells[this.Letterspace];
+            cells.Locale = Extensions.CellDataMethods.ToInt(row.Cells[this.Locale]);
+            cells.LocalizeFont = Extensions.CellDataMethods.ToInt(row.Cells[this.LocalizeFont]);
+            cells.Overline = Extensions.CellDataMethods.ToBool(row.Cells[this.Overline]);
+            cells.Perpendicular = Extensions.CellDataMethods.ToBool(row.Cells[this.Perpendicular]);
+            cells.Pos = Extensions.CellDataMethods.ToInt(row.Cells[this.Pos]);
+            cells.RTLText = Extensions.CellDataMethods.ToInt(row.Cells[this.RTLText]);
+            cells.Strikethru = Extensions.CellDataMethods.ToBool(row.Cells[this.Strikethru]);
+            cells.UseVertical = Extensions.CellDataMethods.ToInt(row.Cells[this.UseVertical]);
 
             return cells;
         }

@@ -29,17 +29,17 @@ namespace VisioAutomation.ShapeSheetQuery.Common
 
         }
 
-        public Shapes.Controls.ControlCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.Controls.ControlCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Shapes.Controls.ControlCells();
-            cells.CanGlue = Extensions.CellDataMethods.ToInt(row[this.CanGlue]);
-            cells.Tip = Extensions.CellDataMethods.ToInt(row[this.Tip]);
-            cells.X = row[this.X];
-            cells.Y = row[this.Y];
-            cells.YBehavior = Extensions.CellDataMethods.ToInt(row[this.YBehavior]);
-            cells.XBehavior = Extensions.CellDataMethods.ToInt(row[this.XBehavior]);
-            cells.XDynamics = Extensions.CellDataMethods.ToInt(row[this.XDynamics]);
-            cells.YDynamics = Extensions.CellDataMethods.ToInt(row[this.YDynamics]);
+            cells.CanGlue = Extensions.CellDataMethods.ToInt(row.Cells[this.CanGlue]);
+            cells.Tip = Extensions.CellDataMethods.ToInt(row.Cells[this.Tip]);
+            cells.X = row.Cells[this.X];
+            cells.Y = row.Cells[this.Y];
+            cells.YBehavior = Extensions.CellDataMethods.ToInt(row.Cells[this.YBehavior]);
+            cells.XBehavior = Extensions.CellDataMethods.ToInt(row.Cells[this.XBehavior]);
+            cells.XDynamics = Extensions.CellDataMethods.ToInt(row.Cells[this.XDynamics]);
+            cells.YDynamics = Extensions.CellDataMethods.ToInt(row.Cells[this.YDynamics]);
             return cells;
         }
     }

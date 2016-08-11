@@ -15,11 +15,11 @@ namespace VisioAutomation.ShapeSheetQuery.Common
             this.Prompt = sec.AddCell(SRCCON.User_Prompt, nameof(SRCCON.User_Prompt));
         }
 
-        public Shapes.UserDefinedCells.UserDefinedCell GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<string>> row)
+        public Shapes.UserDefinedCells.UserDefinedCell GetCells(SectionResultRow<ShapeSheet.CellData<string>> row)
         {
             var cells = new Shapes.UserDefinedCells.UserDefinedCell();
-            cells.Value = row[this.Value];
-            cells.Prompt = row[this.Prompt];
+            cells.Value = row.Cells[this.Value];
+            cells.Prompt = row.Cells[this.Prompt];
             return cells;
         }
     }

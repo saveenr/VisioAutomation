@@ -30,20 +30,20 @@ namespace VisioAutomation.ShapeSheetQuery.Common
             this.SubAddress= sec.AddCell(ShapeSheet.SRCConstants.Hyperlink_SubAddress, nameof(ShapeSheet.SRCConstants.Hyperlink_SubAddress));
         }
 
-        public Shapes.Hyperlinks.HyperlinkCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
+        public Shapes.Hyperlinks.HyperlinkCells GetCells(SectionResultRow<ShapeSheet.CellData<double>> row)
         {
             var cells = new Shapes.Hyperlinks.HyperlinkCells();
 
-            cells.Address = row[this.Address].Formula;
-            cells.Description= row[this.Description].Formula;
-            cells.ExtraInfo= row[this.ExtraInfo].Formula;
-            cells.Frame= row[this.Frame].Formula;
-            cells.SortKey= row[this.SortKey].Formula;
-            cells.SubAddress= row[this.SubAddress].Formula;
+            cells.Address = row.Cells[this.Address].Formula;
+            cells.Description= row.Cells[this.Description].Formula;
+            cells.ExtraInfo= row.Cells[this.ExtraInfo].Formula;
+            cells.Frame= row.Cells[this.Frame].Formula;
+            cells.SortKey= row.Cells[this.SortKey].Formula;
+            cells.SubAddress= row.Cells[this.SubAddress].Formula;
 
-            cells.NewWindow = Extensions.CellDataMethods.ToBool(row[this.NewWindow]);
-            cells.Default = Extensions.CellDataMethods.ToBool(row[this.Default].Formula);
-            cells.Invisible = Extensions.CellDataMethods.ToBool(row[this.Invisible].Formula);
+            cells.NewWindow = Extensions.CellDataMethods.ToBool(row.Cells[this.NewWindow]);
+            cells.Default = Extensions.CellDataMethods.ToBool(row.Cells[this.Default].Formula);
+            cells.Invisible = Extensions.CellDataMethods.ToBool(row.Cells[this.Invisible].Formula);
 
             return cells;
         }
