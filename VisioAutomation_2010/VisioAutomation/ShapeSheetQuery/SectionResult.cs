@@ -2,14 +2,9 @@
 
 namespace VisioAutomation.ShapeSheetQuery
 {
-    public class SectionResultRow<T> 
+    public struct SectionResultRow<T> 
     {
         public readonly T[] Cells;
-
-        internal SectionResultRow(int capacity)
-        {
-            this.Cells = new T[capacity];
-        }
 
         internal SectionResultRow(T[] c)
         {
