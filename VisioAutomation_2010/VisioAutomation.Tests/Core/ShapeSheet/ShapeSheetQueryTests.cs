@@ -185,17 +185,17 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 shapeids);
 
             Assert.AreEqual(4, data.Count);
-            Assert.AreEqual(1, data[0].Sections[prop_sec].Count);
-            Assert.AreEqual(2, data[1].Sections[prop_sec].Count);
-            Assert.AreEqual(0, data[2].Sections[prop_sec].Count);
-            Assert.AreEqual(3, data[3].Sections[prop_sec].Count);
+            Assert.AreEqual(1, data[0].Sections[prop_sec].Rows.Count);
+            Assert.AreEqual(2, data[1].Sections[prop_sec].Rows.Count);
+            Assert.AreEqual(0, data[2].Sections[prop_sec].Rows.Count);
+            Assert.AreEqual(3, data[3].Sections[prop_sec].Rows.Count);
 
-            AssertUtil.AreEqual("\"1\"", 1.0, data[0].Sections[prop_sec][0][0]);
-            AssertUtil.AreEqual("\"2\"", 2.0, data[1].Sections[prop_sec][0][0]);
-            AssertUtil.AreEqual("\"3\"", 3.0, data[1].Sections[prop_sec][1][0]);
-            AssertUtil.AreEqual("\"4\"", 4.0, data[3].Sections[prop_sec][0][0]);
-            AssertUtil.AreEqual("\"5\"", 5.0, data[3].Sections[prop_sec][1][0]);
-            AssertUtil.AreEqual("\"6\"", 6.0, data[3].Sections[prop_sec][2][0]);
+            AssertUtil.AreEqual("\"1\"", 1.0, data[0].Sections[prop_sec].Rows[0][0]);
+            AssertUtil.AreEqual("\"2\"", 2.0, data[1].Sections[prop_sec].Rows[0][0]);
+            AssertUtil.AreEqual("\"3\"", 3.0, data[1].Sections[prop_sec].Rows[1][0]);
+            AssertUtil.AreEqual("\"4\"", 4.0, data[3].Sections[prop_sec].Rows[0][0]);
+            AssertUtil.AreEqual("\"5\"", 5.0, data[3].Sections[prop_sec].Rows[1][0]);
+            AssertUtil.AreEqual("\"6\"", 6.0, data[3].Sections[prop_sec].Rows[2][0]);
 
             page1.Delete(0);
         }

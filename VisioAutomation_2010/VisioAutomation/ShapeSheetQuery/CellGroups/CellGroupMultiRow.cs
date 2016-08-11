@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
 
         private static List<T> SectionToObjectList<T, RT>(SectionResult<ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
         {
-            int num_rows = sec.Count;
+            int num_rows = sec.Rows.Count;
             var sec_objects = new List<T>(num_rows);
             foreach (var row in sec)
             {
