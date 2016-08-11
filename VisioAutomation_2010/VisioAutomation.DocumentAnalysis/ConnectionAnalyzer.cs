@@ -42,7 +42,7 @@ namespace VisioAutomation.DocumentAnalysis
 
             var edges = ConnectionAnalyzer.GetDirectedEdgesRaw(page);
 
-            if (flag.AR == ArrowHandling.UseConnectionOrder)
+            if (flag.DirectionSource == DirectionSource.UseConnectionOrder)
             {
                 return edges;
             }
@@ -72,7 +72,7 @@ namespace VisioAutomation.DocumentAnalysis
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
                     // the line has no arrows
-                    if (flag.ADR == NoArrowsHandling.TreatAsBidirectional)
+                    if (flag.NoArrowsHandling == NoArrowsHandling.TreatAsBidirectional)
                     {
                         // in this case treat the connector as pointing in both directions
                         var de1 = new ConnectorEdge(e.Connector, e.To, e.From);
@@ -80,7 +80,7 @@ namespace VisioAutomation.DocumentAnalysis
                         directed_edges.Add(de1);
                         directed_edges.Add(de2);
                     }
-                    else if (flag.ADR == NoArrowsHandling.Exclude)
+                    else if (flag.NoArrowsHandling == NoArrowsHandling.Exclude)
                     {
                         // in this case ignore the connector completely
                     }

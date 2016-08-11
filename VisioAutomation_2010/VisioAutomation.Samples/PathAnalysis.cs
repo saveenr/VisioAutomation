@@ -38,19 +38,19 @@ namespace VisioAutomationSamples
             s3.AutoConnect(s4, dir, null);
             s5.AutoConnect(s6, dir, null);
 
-            var ceh = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ceh.AR = VisioAutomation.DocumentAnalysis.ArrowHandling.UseConnectionOrder;
+            var ch = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
+            ch.DirectionSource = VisioAutomation.DocumentAnalysis.DirectionSource.UseConnectionOrder;
 
-            var normal_edges = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page, ceh);
+            var normal_edges = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page, ch);
 
-            var edge_handling_0 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            edge_handling_0.ADR =  VisioAutomation.DocumentAnalysis.NoArrowsHandling.Exclude;
+            var ch0 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
+            ch0.NoArrowsHandling =  VisioAutomation.DocumentAnalysis.NoArrowsHandling.Exclude;
 
-            var edge_handling_1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            edge_handling_1.ADR=VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional;
+            var ch1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
+            ch1.NoArrowsHandling=VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional;
 
-            var tc_edges_0 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page, edge_handling_0);
-            var tc_edges_1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page, edge_handling_1);
+            var tc_edges_0 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page, ch0);
+            var tc_edges_1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page, ch1);
 
             var legend0 = page.DrawRectangle(5, 0, 6.5, 6);
             var sb0 = new System.Text.StringBuilder();

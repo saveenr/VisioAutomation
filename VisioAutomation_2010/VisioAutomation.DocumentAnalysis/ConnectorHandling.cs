@@ -2,11 +2,11 @@ namespace VisioAutomation.DocumentAnalysis
 {
     public class ConnectorHandling
     {
-        public ArrowHandling AR = ArrowHandling.UseConnectorArrows;
-        public NoArrowsHandling ADR = NoArrowsHandling.TreatAsBidirectional;
+        public DirectionSource DirectionSource = DirectionSource.UseConnectorArrows;
+        public NoArrowsHandling NoArrowsHandling = NoArrowsHandling.TreatAsBidirectional;
     }
 
-    public enum ArrowHandling
+    public enum DirectionSource
     {
         UseConnectionOrder,
         UseConnectorArrows
