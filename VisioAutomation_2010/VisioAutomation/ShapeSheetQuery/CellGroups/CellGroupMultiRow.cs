@@ -61,7 +61,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             var sec_objects = new List<T>(num_rows);
             foreach (var row in sec.Rows)
             {
-                var obj = row_to_object(row);
+                var obj = row_to_object(row.Cells);
                 sec_objects.Add(obj);
             }
             return sec_objects;
