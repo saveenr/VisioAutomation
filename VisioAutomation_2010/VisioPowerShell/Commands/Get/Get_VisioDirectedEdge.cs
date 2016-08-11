@@ -34,7 +34,7 @@ namespace VisioPowerShell.Commands.Get
 
         private VA.DocumentAnalysis.ConnectorEdgeHandling get_DirectedEdgeHandling()
         {
-            var flag = VA.DocumentAnalysis.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
+            var flag = VA.DocumentAnalysis.ConnectorEdgeHandling.NoArrows_Exclude;
 
             if (this.Raw)
             {
@@ -43,8 +43,8 @@ namespace VisioPowerShell.Commands.Get
             else
             {
                 flag = this.TreatUndirectedAsBidirectional ?
-                    VA.DocumentAnalysis.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional 
-                    : VA.DocumentAnalysis.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
+                    VA.DocumentAnalysis.ConnectorEdgeHandling.NoArrows_Bidirectional 
+                    : VA.DocumentAnalysis.ConnectorEdgeHandling.NoArrows_Exclude;
             }
             return flag;
         }

@@ -2,8 +2,8 @@ namespace VisioAutomation.DocumentAnalysis
 {
     public enum ConnectorEdgeHandling
     {
-        Arrow_ExcludeConnectorsWithoutArrows,
-        Arrow_TreatConnectorsWithoutArrowsAsBidirectional,
+        NoArrows_Exclude,
+        NoArrows_Bidirectional,
         Raw,
     }
 }
