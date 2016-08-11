@@ -244,7 +244,7 @@ namespace VisioAutomation.ShapeSheetQuery
                             T value = array[index];
                             row_values[c] = value;
                         }
-                        section_result.Add(row_values);
+                        section_result.Rows.Add(row_values);
                         cellcount += num_cols;
                     }
                 }
