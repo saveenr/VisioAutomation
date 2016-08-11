@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.DocumentAnalysis;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -39,13 +40,21 @@ namespace VisioAutomation_Tests.Scripting
             IVisio.VisGetSetArgs flags = 0;
             client.ShapeSheet.SetFormula(null,new[] { VA.ShapeSheet.SRCConstants.EndArrow }, new [] {"13"}, flags);
 
-            var undirected_edges0 = client.Connection.GetDirectedEdges(VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.Raw);
+            var h7 = new VA.DocumentAnalysis.ConnectorEdgeHandling();
+            h7.Value = ConnectorEdgeHandlingEnum.Raw;
+            var undirected_edges0 = client.Connection.GetDirectedEdges(h7);
             Assert.AreEqual(2, undirected_edges0.Count);
 
-            var directed_edges0 = client.Connection.GetDirectedEdges(VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.NoArrows_Exclude);
+            var h0 = new VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling();
+            h0.Value = VisioAutomation.DocumentAnalysis.ConnectorEdgeHandlingEnum.NoArrows_Exclude;
+
+            var h1 = new VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling();
+            h1.Value = VisioAutomation.DocumentAnalysis.ConnectorEdgeHandlingEnum.NoArrows_Bidirectional;
+
+            var directed_edges0 = client.Connection.GetDirectedEdges(h0);
             Assert.AreEqual(2, directed_edges0.Count);
 
-            var directed_edges1 = client.Connection.GetDirectedEdges(VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.NoArrows_Bidirectional);
+            var directed_edges1 = client.Connection.GetDirectedEdges(h1);
             Assert.AreEqual(2, directed_edges1.Count);
 
             client.Document.Close(true);
@@ -75,14 +84,22 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.Get("Dynamic Connector", connec_stencil);
             var undirected_connectors = client.Connection.Connect(new [] { s1,s2},new [] { s2,s3}, master);
 
-            var directed_edges0 = client.Connection.GetDirectedEdges(VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.NoArrows_Exclude);
+            var h1 = new VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling();
+            h1.Value = VisioAutomation.DocumentAnalysis.ConnectorEdgeHandlingEnum.NoArrows_Exclude;
+
+            var directed_edges0 = client.Connection.GetDirectedEdges(h1);
             Assert.AreEqual(0, directed_edges0.Count);
 
-            var directed_edges1 =
-                client.Connection.GetDirectedEdges(VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.NoArrows_Bidirectional);
+            var h7 = new VA.DocumentAnalysis.ConnectorEdgeHandling();
+            h7.Value = ConnectorEdgeHandlingEnum.NoArrows_Bidirectional;
+
+            var directed_edges1 = client.Connection.GetDirectedEdges(h7);
             Assert.AreEqual(4, directed_edges1.Count);
 
-            var undirected_edges0 = client.Connection.GetDirectedEdges(VisioAutomation.DocumentAnalysis.ConnectorEdgeHandling.Raw);
+            var h8 = new VA.DocumentAnalysis.ConnectorEdgeHandling();
+            h8.Value = ConnectorEdgeHandlingEnum.Raw;
+
+            var undirected_edges0 = client.Connection.GetDirectedEdges(h8);
             Assert.AreEqual(2, undirected_edges0.Count);
 
             client.Document.Close(true);
