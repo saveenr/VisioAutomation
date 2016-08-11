@@ -22,15 +22,5 @@ namespace VisioAutomation.ShapeSheetQuery
         {
             return this.GetEnumerator();
         }
-
-        public T this[int index]
-        {
-            get { return this.Cells[index]; }
-        }
-
-        public int Count
-        {
-            get { return this.Cells.Length; }
-        }
     }
 }

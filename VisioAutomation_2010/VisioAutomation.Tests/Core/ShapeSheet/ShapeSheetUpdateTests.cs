@@ -41,12 +41,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
 
-            AssertUtil.AreEqual("0.5 in", 0.5, rf[0][col_pinx], rr[0][col_pinx]);
-            AssertUtil.AreEqual("0.5 in", 0.5, rf[0][col_piny], rr[0][col_piny]);
-            AssertUtil.AreEqual("1.5 in", 1.5, rf[1][col_pinx], rr[1][col_pinx]);
-            AssertUtil.AreEqual("1.5 in", 1.5, rf[1][col_piny], rr[1][col_piny]);
-            AssertUtil.AreEqual("2.5 in", 2.5, rf[2][col_pinx], rr[2][col_pinx]);
-            AssertUtil.AreEqual("2.5 in", 2.5, rf[2][col_piny], rr[2][col_piny]);
+            AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_pinx], rr[0].Cells[col_pinx]);
+            AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_piny], rr[0].Cells[col_piny]);
+            AssertUtil.AreEqual("1.5 in", 1.5, rf[1].Cells[col_pinx], rr[1].Cells[col_pinx]);
+            AssertUtil.AreEqual("1.5 in", 1.5, rf[1].Cells[col_piny], rr[1].Cells[col_piny]);
+            AssertUtil.AreEqual("2.5 in", 2.5, rf[2].Cells[col_pinx], rr[2].Cells[col_pinx]);
+            AssertUtil.AreEqual("2.5 in", 2.5, rf[2].Cells[col_piny], rr[2].Cells[col_piny]);
 
             page1.Delete(0);
         }
@@ -70,7 +70,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var data = query.GetCellData<double>(shape1);
 
             // Verify
-            AssertUtil.AreEqual("7", 7, data[col_linepat]);
+            AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
             page1.Delete(0);
         }
 
@@ -93,7 +93,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var data = query.GetCellData<double>(shape1);
 
             // Verify
-            AssertUtil.AreEqual("7", 7, data[col_linepat]);
+            AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
             page1.Delete(0);
         }
 
@@ -127,12 +127,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
 
-            AssertUtil.AreEqual("0.5 in", 0.5, rf[0][col_pinx], rr[0][col_pinx]);
-            AssertUtil.AreEqual("0.5 in", 0.5, rf[0][col_piny], rr[0][col_piny]);
-            AssertUtil.AreEqual("1.5 in", 1.5, rf[1][col_pinx], rr[1][col_pinx]);
-            AssertUtil.AreEqual("1.5 in", 1.5, rf[1][col_piny], rr[1][col_piny]);
-            AssertUtil.AreEqual("2.5 in", 2.5, rf[2][col_pinx], rr[2][col_pinx]);
-            AssertUtil.AreEqual("2.5 in", 2.5, rf[2][col_piny], rr[2][col_piny]);
+            AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_pinx], rr[0].Cells[col_pinx]);
+            AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_piny], rr[0].Cells[col_piny]);
+            AssertUtil.AreEqual("1.5 in", 1.5, rf[1].Cells[col_pinx], rr[1].Cells[col_pinx]);
+            AssertUtil.AreEqual("1.5 in", 1.5, rf[1].Cells[col_piny], rr[1].Cells[col_piny]);
+            AssertUtil.AreEqual("2.5 in", 2.5, rf[2].Cells[col_pinx], rr[2].Cells[col_pinx]);
+            AssertUtil.AreEqual("2.5 in", 2.5, rf[2].Cells[col_piny], rr[2].Cells[col_piny]);
 
             page1.Delete(0);
         }
@@ -207,8 +207,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var data = query.GetCellData<double>(shape1);
 
             // Verify
-            AssertUtil.AreEqual("7", 7, data[col_linepat]);
-            AssertUtil.AreEqual("2 in", 2, data[col_pinx]);
+            AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
+            AssertUtil.AreEqual("2 in", 2, data.Cells[col_pinx]);
             
             page1.Delete(0);
         }

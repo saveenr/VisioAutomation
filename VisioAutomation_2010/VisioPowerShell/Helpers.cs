@@ -27,7 +27,7 @@ namespace VisioPowerShell
 
                 for (int i = 0; i < colcount; i++)
                 {
-                    rowbuf[i+1] = query_output[r][i];
+                    rowbuf[i+1] = query_output[r].Cells[i];
                 }
 
                 // load it into the table

@@ -88,8 +88,8 @@ namespace VisioAutomation_Tests
             var col_h = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Height,"Height");
 
             var table = query.GetResults<double>(shape);
-            double w = table[col_w];
-            double h = table[col_h];
+            double w = table.Cells[col_w];
+            double h = table.Cells[col_h];
             var size = new VisioAutomation.Drawing.Size(w, h);
             return size;
         }
@@ -159,8 +159,8 @@ namespace VisioAutomation_Tests
             var col_height = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
             var col_width = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
             var results = query.GetResults<double>(page.PageSheet);
-            double height = results[col_height];
-            double width = results[col_width];
+            double height = results.Cells[col_height];
+            double width = results.Cells[col_width];
             var s = new VisioAutomation.Drawing.Size(width, height);
             return s;
         }

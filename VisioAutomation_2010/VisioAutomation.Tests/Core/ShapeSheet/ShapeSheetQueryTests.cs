@@ -70,26 +70,26 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("RGB(255,0,0)", formulas[0][col_fg]);
-            Assert.AreEqual("RGB(0,0,255)", formulas[0][col_bg]);
-            Assert.AreEqual("40", formulas[0][col_filpat]);
+            Assert.AreEqual("RGB(255,0,0)", formulas[0].Cells[col_fg]);
+            Assert.AreEqual("RGB(0,0,255)", formulas[0].Cells[col_bg]);
+            Assert.AreEqual("40", formulas[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as floats
             var float_results = query.GetResults<double>(page1,shapeids);
             Assert.IsNotNull(float_results);
-            Assert.AreEqual(40.0, float_results[0][col_filpat]);
+            Assert.AreEqual(40.0, float_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1,shapeids);
-            Assert.AreEqual(40, int_results[0][col_filpat]);
+            Assert.AreEqual(40, int_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as strings
 
             var string_results = query.GetResults<string>(page1,shapeids);
 
-            Assert.AreEqual("RGB(255, 0, 0)", string_results[0][col_fg]);
-            Assert.AreEqual("RGB(0, 0, 255)", string_results[0][col_bg]);
-            Assert.AreEqual("40", string_results[0][col_filpat]);
+            Assert.AreEqual("RGB(255, 0, 0)", string_results[0].Cells[col_fg]);
+            Assert.AreEqual("RGB(0, 0, 255)", string_results[0].Cells[col_bg]);
+            Assert.AreEqual("40", string_results[0].Cells[col_filpat]);
 
             page1.Delete(0);
             doc1.Close(true);
@@ -129,29 +129,29 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("2", formulas[0][col_fg]);
-            Assert.AreEqual("3", formulas[0][col_bg]);
-            Assert.AreEqual("40", formulas[0][col_filpat]);
+            Assert.AreEqual("2", formulas[0].Cells[col_fg]);
+            Assert.AreEqual("3", formulas[0].Cells[col_bg]);
+            Assert.AreEqual("40", formulas[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as floats
 
             var float_results = query.GetResults<double>(page1,shapeids);
-            Assert.AreEqual(2.0, float_results[0][col_fg]);
-            Assert.AreEqual(3.0, float_results[0][col_bg]);
-            Assert.AreEqual(40.0, float_results[0][col_filpat]);
+            Assert.AreEqual(2.0, float_results[0].Cells[col_fg]);
+            Assert.AreEqual(3.0, float_results[0].Cells[col_bg]);
+            Assert.AreEqual(40.0, float_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1,shapeids);
 
-            Assert.AreEqual(2, int_results[0][col_fg]);
-            Assert.AreEqual(3, int_results[0][col_bg]);
-            Assert.AreEqual(40, int_results[0][col_filpat]);
+            Assert.AreEqual(2, int_results[0].Cells[col_fg]);
+            Assert.AreEqual(3, int_results[0].Cells[col_bg]);
+            Assert.AreEqual(40, int_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as strings
             var string_results = query.GetResults<string>(page1,shapeids);
-            Assert.AreEqual("2", string_results[0][col_fg]);
-            Assert.AreEqual("3", string_results[0][col_bg]);
-            Assert.AreEqual("40", string_results[0][col_filpat]);
+            Assert.AreEqual("2", string_results[0].Cells[col_fg]);
+            Assert.AreEqual("3", string_results[0].Cells[col_bg]);
+            Assert.AreEqual("40", string_results[0].Cells[col_filpat]);
 
             page1.Delete(0);
         }
@@ -241,8 +241,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 for (int col = 0; col < query.CellColumns.Count; col++)
                 {
-                    Assert.AreEqual(expected_formulas[row,col], rf[row][col]);
-                    Assert.AreEqual(expected_results[row,col], rr[row][col]);
+                    Assert.AreEqual(expected_formulas[row,col], rf[row].Cells[col]);
+                    Assert.AreEqual(expected_results[row,col], rr[row].Cells[col]);
                 }
             }
 
@@ -293,8 +293,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 for (int col = 0; col < query.CellColumns.Count; col++)
                 {
-                    Assert.AreEqual(expected_formulas[row, col], rf[row][col]);
-                    Assert.AreEqual(expected_results[row, col], rr[row][col]);
+                    Assert.AreEqual(expected_formulas[row, col], rf[row].Cells[col]);
+                    Assert.AreEqual(expected_results[row, col], rr[row].Cells[col]);
                 }
             }
 

@@ -109,8 +109,8 @@ namespace VisioAutomation.Scripting
             // Now store the values
             for (int col = 0; col < query.CellColumns.Count; col++)
             {
-                var result = dataset[col].Result;
-                var formula = dataset[col].Formula;
+                var result = dataset.Cells[col].Result;
+                var formula = dataset.Cells[col].Formula;
 
                 var cellrec = desired_cells[col];
                 cellrec.Result = result;
