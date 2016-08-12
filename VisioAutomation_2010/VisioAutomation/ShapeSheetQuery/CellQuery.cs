@@ -226,7 +226,7 @@ namespace VisioAutomation.ShapeSheetQuery
             if (this._per_shape_section_info.Count > 0)
             {
                 result.Sections = new List<SectionResult<T>>();
-                List<SectionColumnDetails> sections = this._per_shape_section_info[shape_index];
+                var sections = this._per_shape_section_info[shape_index];
 
                 foreach (var section in sections)
                 {
@@ -241,8 +241,7 @@ namespace VisioAutomation.ShapeSheetQuery
                         for (int c = 0; c < num_cols; c++)
                         {
                             int index = start + cellcount + c;
-                            T value = array[index];
-                            row_values[c] = value;
+                            row_values[c] = array[index];
                         }
                         section_result.Rows.Add( new SectionResultRow<T>(row_values));
                         cellcount += num_cols;
