@@ -42,11 +42,11 @@ namespace VisioAutomation.ShapeSheetQuery
 
         internal CellColumn Add(ShapeSheet.SRC src, string name)
         {
-            if (this._coltype == CellColumnType.CellIndex)
+            if (this._coltype == CellColumnType.CellOnly)
             {
                 throw new AutomationException("Can't add an SRC if Columns contains CellIndexes");
             }
-            this._coltype = CellColumnType.SRC;
+            this._coltype = CellColumnType.SectionRowCell;
 
             name = this.fixup_name(name);
 
@@ -82,12 +82,12 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public CellColumn Add(short cell, string name)
         {
-            if (this._coltype == CellColumnType.SRC)
+            if (this._coltype == CellColumnType.SectionRowCell)
             {
                 throw new AutomationException("Can't add a CellIndex if Columns contains SRCs");
             }
 
-            this._coltype = CellColumnType.CellIndex;
+            this._coltype = CellColumnType.CellOnly;
 
             if (this._cellindex_set == null)
             {

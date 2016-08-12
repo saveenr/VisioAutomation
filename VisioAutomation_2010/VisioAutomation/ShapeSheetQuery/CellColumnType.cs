@@ -3,7 +3,7 @@
     internal enum CellColumnType
     {
         Unknown,
-        SRC,
-        CellIndex
+        SectionRowCell,
+        CellOnly
     }
 }
