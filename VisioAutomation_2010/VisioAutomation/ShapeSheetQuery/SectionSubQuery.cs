@@ -2,14 +2,14 @@
 
 namespace VisioAutomation.ShapeSheetQuery
 {
-    public class SectionColumn
+    public class SectionSubQuery
     {
         public string Name { get; private set; }
         public IVisio.VisSectionIndices SectionIndex { get; private set; }
         public CellColumnList CellColumns { get; }
         public int Ordinal { get; }
 
-        internal SectionColumn(int ordinal, IVisio.VisSectionIndices section)
+        internal SectionSubQuery(int ordinal, IVisio.VisSectionIndices section)
         {
             this.Name = VisioAutomation.ShapeSheet.ShapeSheetHelper.GetSectionName(section);
             this.Ordinal = ordinal;
@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return col;
         }
 
-        static public implicit operator int(SectionColumn col)
+        static public implicit operator int(SectionSubQuery col)
         {
             return col.Ordinal;
         }

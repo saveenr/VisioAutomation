@@ -13,12 +13,12 @@ namespace VisioAutomation.ShapeSheetQuery
     }
 
 
-    public class SectionResult<T>
+    public class SectionSubQueryResult<T>
     {
-        public SectionColumn Column { get; internal set; }
+        public SectionSubQuery Column { get; internal set; }
         public readonly List<SectionResultRow<T>> Rows;
 
-        internal SectionResult(int capacity)
+        internal SectionSubQueryResult(int capacity)
         {
             this.Rows = new List<SectionResultRow<T>>(capacity);
         }

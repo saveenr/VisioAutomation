@@ -143,9 +143,9 @@
     <Compile Include="ShapeSheetQuery\QueryGroups\QueryGroupBase.cs" />
     <Compile Include="ShapeSheetQuery\QueryResultList.cs" />
     <Compile Include="ShapeSheetQuery\QueryResult.cs" />
-    <Compile Include="ShapeSheetQuery\SectionColumnDetails.cs" />
-    <Compile Include="ShapeSheetQuery\SectionColumn.cs" />
-    <Compile Include="ShapeSheetQuery\SectionResult.cs" />
+    <Compile Include="ShapeSheetQuery\SectionSubQueryDetails.cs" />
+    <Compile Include="ShapeSheetQuery\SectionSubQuery.cs" />
+    <Compile Include="ShapeSheetQuery\SectionSubQueryResult.cs" />
     <Compile Include="ShapeSheetQuery\CellColumnList.cs" />
     <Compile Include="ShapeSheetQuery\StreamBuilder.cs" />
     <Compile Include="ShapeSheetQuery\SectionColumnList.cs" />
