@@ -190,7 +190,7 @@ namespace VisioAutomation.ShapeSheet
             }
             else
             {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
+                throw new System.ArgumentException("Unhandled Target");
             }
 
             var results = ShapeSheetSurface.get_results_array<TResult>(results_sa, numitems);
@@ -284,7 +284,7 @@ namespace VisioAutomation.ShapeSheet
             }
             else
             {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
+                throw new System.ArgumentException("Unhandled Target");
             }
 
             return c;
@@ -307,7 +307,7 @@ namespace VisioAutomation.ShapeSheet
             }
             else
             {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
+                throw new System.ArgumentException("Unhandled Target");
             }
 
             return c;
