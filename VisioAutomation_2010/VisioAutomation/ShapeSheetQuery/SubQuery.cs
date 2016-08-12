@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return col;
         }
 
-        static public implicit operator int(SubQuery col)
+        public static implicit operator int(SubQuery col)
         {
             return col.Ordinal;
         }
