@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using VisioAutomation.ShapeSheetQuery.Results;
 
 namespace VisioPowerShell
 {
     static class Helpers
     {
-        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheetQuery.Query cellQuery, VisioAutomation.ShapeSheetQuery.QueryResultList<T> query_output)
+        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheetQuery.Query cellQuery, ListResult<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();

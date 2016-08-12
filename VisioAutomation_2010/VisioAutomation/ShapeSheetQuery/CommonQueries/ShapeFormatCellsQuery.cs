@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheetQuery.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries

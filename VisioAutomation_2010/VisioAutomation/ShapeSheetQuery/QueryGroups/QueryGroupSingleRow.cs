@@ -1,6 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheetQuery.Results;
 
 namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
@@ -44,7 +45,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         {
             check_query(query);
 
-            QueryResult<CellData<RT>> data_for_shape = query.GetCellData<RT>(shape);
+            Result<CellData<RT>> data_for_shape = query.GetCellData<RT>(shape);
             var cells = row_to_object(data_for_shape.Cells);
             return cells;
         }

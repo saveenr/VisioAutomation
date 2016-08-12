@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.ShapeSheetQuery
+﻿namespace VisioAutomation.ShapeSheetQuery.Utilities
 {
     internal class StreamBuilder
     {

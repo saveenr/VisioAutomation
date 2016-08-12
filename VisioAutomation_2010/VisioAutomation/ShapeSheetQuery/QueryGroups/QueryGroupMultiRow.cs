@@ -1,5 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheetQuery.Results;
 
 namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {

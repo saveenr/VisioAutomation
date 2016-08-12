@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.ShapeSheetQuery.Columns;
+using VisioAutomation.ShapeSheetQuery.Results;
+using VisioAutomation.ShapeSheetQuery.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery
@@ -48,20 +51,20 @@ namespace VisioAutomation.ShapeSheetQuery
             return col;
         }
 
-        public QueryResult<string> GetFormulas(IVisio.Shape shape)
+        public Result<string> GetFormulas(IVisio.Shape shape)
         {
             this.Freeze();
             var surface = new ShapeSheet.ShapeSheetSurface(shape);
             var srcstream = this.BuildSRCStream(surface);
             var values = surface.GetFormulasU_SRC(srcstream);
-            var r = new QueryResult<string>(shape.ID);
+            var r = new Result<string>(shape.ID);
             this.FillValuesForShape<string>(values, r, 0,0);
 
             return r;
         }
 
 
-        public QueryResult<T> GetResults<T>(IVisio.Shape shape)
+        public Result<T> GetResults<T>(IVisio.Shape shape)
         {
             this.Freeze();
 
@@ -70,7 +73,7 @@ namespace VisioAutomation.ShapeSheetQuery
             var srcstream = this.BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
             var values = surface.GetResults_SRC<T>(srcstream,unitcodes);
-            var r = new QueryResult<T>(shape.ID);
+            var r = new Result<T>(shape.ID);
             this.FillValuesForShape<T>(values, r, 0,0);
             return r;
         }
@@ -115,7 +118,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return unitcodes;
         }
 
-        public QueryResult<ShapeSheet.CellData<T>> GetCellData<T>(IVisio.Shape shape)
+        public Result<ShapeSheet.CellData<T>> GetCellData<T>(IVisio.Shape shape)
         {
             this.Freeze();
 
@@ -132,18 +135,18 @@ namespace VisioAutomation.ShapeSheetQuery
                 combineddata[i] = new ShapeSheet.CellData<T>(formulas[i], results[i]);
             }
 
-            var r = new QueryResult<ShapeSheet.CellData<T>>(shape.ID16);
+            var r = new Result<ShapeSheet.CellData<T>>(shape.ID16);
             this.FillValuesForShape<ShapeSheet.CellData<T>>(combineddata, r, 0, 0);
             return r;
         }
 
-        public QueryResultList<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
+        public ListResult<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
         {
             var surface = new ShapeSheet.ShapeSheetSurface(page);
             return this.GetFormulas(surface, shapeids);
         }
 
-        public QueryResultList<string> GetFormulas(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
+        public ListResult<string> GetFormulas(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
@@ -153,13 +156,13 @@ namespace VisioAutomation.ShapeSheetQuery
         }
 
 
-        public QueryResultList<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
+        public ListResult<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new ShapeSheet.ShapeSheetSurface(page);
             return this.GetResults<T>(surface, shapeids);
         }
 
-        public QueryResultList<T> GetResults<T>(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
+        public ListResult<T> GetResults<T>(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
@@ -169,13 +172,13 @@ namespace VisioAutomation.ShapeSheetQuery
             return list;
         }
 
-        public QueryResultList<ShapeSheet.CellData<T>> GetCellData<T>(IVisio.Page page, IList<int> shapeids)
+        public ListResult<ShapeSheet.CellData<T>> GetCellData<T>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new ShapeSheet.ShapeSheetSurface(page);
             return this.GetCellData<T>(surface, shapeids);
         }
 
-        public QueryResultList<ShapeSheet.CellData<T>> GetCellData<T>(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
+        public ListResult<ShapeSheet.CellData<T>> GetCellData<T>(ShapeSheet.ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
 
@@ -195,14 +198,14 @@ namespace VisioAutomation.ShapeSheetQuery
             return r;
         }
 
-        private QueryResultList<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values)
+        private ListResult<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values)
         {
-            var list = new QueryResultList<T>();
+            var list = new ListResult<T>();
             int cellcount = 0;
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var data = new QueryResult<T>(shapeid);
+                var data = new Result<T>(shapeid);
                 cellcount = this.FillValuesForShape<T>(values, data, cellcount, shape_index);
                 list.Add(data);
             }
@@ -210,7 +213,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return list;
         }
 
-        private int FillValuesForShape<T>(T[] array, QueryResult<T> result, int start, int shape_index)
+        private int FillValuesForShape<T>(T[] array, Result<T> result, int start, int shape_index)
         {
             // First Copy the Cell Values over
             int cellcount = 0;
@@ -244,7 +247,7 @@ namespace VisioAutomation.ShapeSheetQuery
                             int index = start + cellcount + c;
                             row_values[c] = array[index];
                         }
-                        var sec_res_row = new SectionResultRow<T>(row_values);
+                        var sec_res_row = new SectionSubQueryResultRow<T>(row_values);
                         section_result.Rows.Add( sec_res_row );
                         cellcount += num_cols;
                     }

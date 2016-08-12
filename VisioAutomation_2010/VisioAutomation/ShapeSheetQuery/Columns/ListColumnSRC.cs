@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheetQuery
+namespace VisioAutomation.ShapeSheetQuery.Columns
 {
     public class ListColumnSRC : ListColumnBase<ColumnSRC>
     {

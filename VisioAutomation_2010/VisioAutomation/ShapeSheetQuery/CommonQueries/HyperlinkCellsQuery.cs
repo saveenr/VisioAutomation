@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheetQuery.Columns;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
