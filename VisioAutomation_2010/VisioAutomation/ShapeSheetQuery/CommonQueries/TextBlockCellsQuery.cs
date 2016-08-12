@@ -2,7 +2,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
-    class TextBlockCellsQuery : CellQuery
+    class TextBlockCellsQuery : Query
     {
         public ColumnSRC BottomMargin { get; set; }
         public ColumnSRC LeftMargin { get; set; }

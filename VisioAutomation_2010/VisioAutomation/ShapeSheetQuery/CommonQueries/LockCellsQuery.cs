@@ -3,7 +3,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 
 {
-    class LockCellsQuery : CellQuery
+    class LockCellsQuery : Query
     {
         public ColumnSRC LockAspect { get; set; }
         public ColumnSRC LockBegin { get; set; }

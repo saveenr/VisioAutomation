@@ -2,7 +2,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
-    class ShapeLayoutCellsQuery : CellQuery
+    class ShapeLayoutCellsQuery : Query
     {
         public ColumnSRC ConFixedCode { get; set; }
         public ColumnSRC ConLineJumpCode { get; set; }

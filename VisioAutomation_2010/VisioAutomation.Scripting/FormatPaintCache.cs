@@ -95,7 +95,7 @@ namespace VisioAutomation.Scripting
         public void CopyFormat(IVisio.Shape shape, FormatCategory category)
         {
             // Build the Query
-            var query = new ShapeSheetQuery.CellQuery();
+            var query = new ShapeSheetQuery.Query();
             var desired_cells = this.Cells.Where(cell => cell.MatchesCategory(category)).ToList();
 
             foreach (var cell in desired_cells)

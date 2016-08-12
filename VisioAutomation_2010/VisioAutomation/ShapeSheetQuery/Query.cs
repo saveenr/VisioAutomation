@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery
 {
-    public class CellQuery
+    public class Query
     {
         public ListColumnSRC Cells { get; }
         public ListSectionSubQuery SectionSubQueries { get; }
@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheetQuery
         private List<List<SectionSubQueryDetails>> _per_shape_section_info; 
         private bool _is_frozen;
 
-        public CellQuery()
+        public Query()
         {
             this.Cells = new ListColumnSRC(0);
             this.SectionSubQueries = new ListSectionSubQuery(0);

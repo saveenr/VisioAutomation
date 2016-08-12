@@ -2,7 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
-    class HyperlinkCellsQuery : CellQuery
+    class HyperlinkCellsQuery : Query
     {
 
         public ColumnCellIndex Address { get; set; }

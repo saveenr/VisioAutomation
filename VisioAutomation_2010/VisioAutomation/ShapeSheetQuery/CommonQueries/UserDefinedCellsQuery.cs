@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
-    class UserDefinedCellsQuery : CellQuery
+    class UserDefinedCellsQuery : Query
     {
         public ColumnCellIndex Value { get; set; }
         public ColumnCellIndex Prompt { get; set; }

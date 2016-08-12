@@ -75,7 +75,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = active_window.Selection;
             var shape = selection[1];
 
-            var query = new ShapeSheetQuery.CellQuery();
+            var query = new ShapeSheetQuery.Query();
             var width_col = query.AddCell(ShapeSheet.SRCConstants.Width, "Width");
             var height_col = query.AddCell(ShapeSheet.SRCConstants.Height, "Height");
             var queryresults = query.GetResults<double>(shape);

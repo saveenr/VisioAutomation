@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
-    class ParagraphFormatCellsQuery : CellQuery
+    class ParagraphFormatCellsQuery : Query
     {
         public ColumnCellIndex Bullet { get; set; }
         public ColumnCellIndex BulletFont { get; set; }

@@ -193,7 +193,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ShapeSheet\CellData.cs" />
-    <Compile Include="ShapeSheetQuery\CellQuery.cs" />
+    <Compile Include="ShapeSheetQuery\Query.cs" />
     <Compile Include="Shapes\Connections\ConnectionHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />

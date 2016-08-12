@@ -32,7 +32,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(page1);
 
             // Verify that the formulas were set
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_pinx = query.AddCell(ShapeSheetUpdateTests.src_pinx, "PinX");
             var col_piny = query.AddCell(ShapeSheetUpdateTests.src_piny, "PinY");
 
@@ -63,7 +63,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat,"LinePattern");
 
             // Retrieve the values
@@ -86,7 +86,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat, "LinePattern");
 
             // Retrieve the values
@@ -118,7 +118,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(page1);
 
             // Verify that the formulas were set
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_pinx = query.AddCell(ShapeSheetUpdateTests.src_pinx,"PinX");
             var col_piny = query.AddCell(ShapeSheetUpdateTests.src_piny, "PinY");
 
@@ -199,7 +199,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat, "LinePattern");
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 

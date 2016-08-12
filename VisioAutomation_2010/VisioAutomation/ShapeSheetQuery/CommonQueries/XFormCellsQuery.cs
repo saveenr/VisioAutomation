@@ -2,7 +2,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
-    class XFormCellsQuery : CellQuery
+    class XFormCellsQuery : Query
     {
         public ColumnSRC Width { get; set; }
         public ColumnSRC Height { get; set; }

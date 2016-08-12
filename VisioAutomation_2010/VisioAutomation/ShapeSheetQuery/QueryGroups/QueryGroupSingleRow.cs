@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
     public abstract class QueryGroupSingleRow : QueryGroupBase
     {
-        private static void check_query(CellQuery query)
+        private static void check_query(Query query)
         {
             if (query.Cells.Count < 1)
             {
@@ -21,7 +21,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 
         protected static IList<T> _GetCells<T, RT>(
             IVisio.Page page, IList<int> shapeids,
-            CellQuery query,
+            Query query,
             RowToObject<T, RT> row_to_object)
         {
             check_query(query);
@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 
         protected static T _GetCells<T, RT>(
             IVisio.Shape shape,
-            CellQuery query,
+            Query query,
             RowToObject<T, RT> row_to_object)
         {
             check_query(query);

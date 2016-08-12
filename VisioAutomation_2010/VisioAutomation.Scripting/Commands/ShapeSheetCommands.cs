@@ -69,7 +69,7 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var query = new VAQUERY.CellQuery();
+            var query = new VAQUERY.Query();
 
             int ci = 0;
             foreach (var src in srcs)
@@ -93,7 +93,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
 
-            var query = new VAQUERY.CellQuery();
+            var query = new VAQUERY.Query();
 
             int ci = 0;
             foreach (var src in srcs)
@@ -117,7 +117,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var query = new VAQUERY.CellQuery();
+            var query = new VAQUERY.Query();
             var sec = query.AddSection(section);
 
             int ci = 0;
@@ -142,7 +142,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
 
-            var query = new VAQUERY.CellQuery();
+            var query = new VAQUERY.Query();
             var sec = query.AddSection(section);
 
             int ci = 0;

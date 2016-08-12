@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
-    class ConnectionPointCellsQuery : CellQuery
+    class ConnectionPointCellsQuery : Query
     {
         public ColumnCellIndex DirX { get; set; }
         public ColumnCellIndex DirY { get; set; }

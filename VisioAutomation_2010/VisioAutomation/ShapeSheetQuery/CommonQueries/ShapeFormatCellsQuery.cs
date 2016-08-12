@@ -2,7 +2,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
-    class ShapeFormatCellsQuery : CellQuery
+    class ShapeFormatCellsQuery : Query
     {
         public ColumnSRC FillBkgnd { get; set; }
         public ColumnSRC FillBkgndTrans { get; set; }
