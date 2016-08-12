@@ -1,9 +1,9 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheetQuery.CellGroups
+namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
-    public abstract class CellGroupMultiRow : BaseCellGroup
+    public abstract class CellQueryGroupMultiRow : QueryGroupBase
     {
         private static void check_query(CellQuery query)
         {
@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
-            CellGroupMultiRow.check_query(query);
+            CellQueryGroupMultiRow.check_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
             var surface = new ShapeSheet.ShapeSheetSurface(page);
@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             foreach (var data_for_shape in data_for_shapes)
             {
                 var sec = data_for_shape.Sections[0];
-                var sec_objects = CellGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
+                var sec_objects = CellQueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
                 list.Add(sec_objects);
             }
 
@@ -46,11 +46,11 @@ namespace VisioAutomation.ShapeSheetQuery.CellGroups
             CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
-            CellGroupMultiRow.check_query(query);
+            CellQueryGroupMultiRow.check_query(query);
 
             var data_for_shape = query.GetCellData<RT>(shape);
             var sec = data_for_shape.Sections[0];
-            var sec_objects = CellGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
+            var sec_objects = CellQueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
             
             return sec_objects;
         }

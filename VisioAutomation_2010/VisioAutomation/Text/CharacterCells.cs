@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterCells : ShapeSheetQuery.CellGroups.CellGroupMultiRow
+    public class CharacterCells : ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow
     {
         public ShapeSheet.CellData<int> Color { get; set; }
         public ShapeSheet.CellData<int> Font { get; set; }
@@ -61,13 +61,13 @@ namespace VisioAutomation.Text
         public static IList<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = CharacterCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<CharacterCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<CharacterCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<CharacterCells> GetCells(IVisio.Shape shape)
         {
             var query = CharacterCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<CharacterCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<CharacterCells, double>(shape, query, query.GetCells);
         }
 
         private static System.Lazy<ShapeSheetQuery.Common.CharacterFormatCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.CharacterFormatCellsQuery>();

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheetQuery.CellGroups
+namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
-    public abstract class BaseCellGroup
+    public abstract class QueryGroupBase
     {
         public delegate T RowToObject<T,RT>(ShapeSheet.CellData<RT>[] data);
 

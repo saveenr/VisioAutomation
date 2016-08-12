@@ -2,9 +2,9 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
 
-namespace VisioAutomation.ShapeSheetQuery.CellGroups
+namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
-    public abstract class CellGroupSingleRow : BaseCellGroup
+    public abstract class QueryGroupSingleRow : QueryGroupBase
     {
         private static void check_query(CellQuery query)
         {

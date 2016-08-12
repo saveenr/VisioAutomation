@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : ShapeSheetQuery.CellGroups.CellGroupSingleRow
+    public class XFormCells : ShapeSheetQuery.QueryGroups.QueryGroupSingleRow
     {
         public ShapeSheet.CellData<double> PinX { get; set; }
         public ShapeSheet.CellData<double> PinY { get; set; }
@@ -30,13 +30,13 @@ namespace VisioAutomation.Shapes
         public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = XFormCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupSingleRow._GetCells<XFormCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.QueryGroupSingleRow._GetCells<XFormCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static XFormCells GetCells(IVisio.Shape shape)
         {
             var query = XFormCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupSingleRow._GetCells<XFormCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.QueryGroupSingleRow._GetCells<XFormCells, double>(shape, query, query.GetCells);
         }
 
         private static System.Lazy<ShapeSheetQuery.Common.XFormCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.XFormCellsQuery>();
