@@ -45,7 +45,8 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         {
             check_query(query);
 
-            Result<CellData<RT>> data_for_shape = query.GetCellData<RT>(shape);
+            var ss1 = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            Result<CellData<RT>> data_for_shape = query.GetCellData<RT>(ss1);
             var cells = row_to_object(data_for_shape.Cells);
             return cells;
         }

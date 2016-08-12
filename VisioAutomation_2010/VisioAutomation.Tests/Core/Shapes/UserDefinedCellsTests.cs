@@ -101,7 +101,8 @@ namespace VisioAutomation_Tests.Core.Shapes
             var Value = sec.AddCell(VisioAutomation.ShapeSheet.SRCConstants.User_Value,"Value");
             var Prompt = sec.AddCell(VisioAutomation.ShapeSheet.SRCConstants.User_Prompt,"Prompt");
 
-            var formulas = queryex.GetFormulas(page1, shapes.Select(s => s.ID).ToList());
+            var ss1 = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var formulas = queryex.GetFormulas(ss1, shapes.Select(s => s.ID).ToList());
 
 
             page1.Delete(0);

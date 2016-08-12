@@ -67,7 +67,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] {s1_id};
 
-            var formulas = query.GetFormulas(page1, shapeids);
+            var ss1 = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var formulas = query.GetFormulas(ss1, shapeids);
 
             // now verify that the formulas were actually set
             Assert.AreEqual("RGB(255,0,0)", formulas[0].Cells[col_fg]);
@@ -75,17 +76,17 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual("40", formulas[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as floats
-            var float_results = query.GetResults<double>(page1,shapeids);
+            var float_results = query.GetResults<double>(ss1,shapeids);
             Assert.IsNotNull(float_results);
             Assert.AreEqual(40.0, float_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as ints
-            var int_results = query.GetResults<int>(page1,shapeids);
+            var int_results = query.GetResults<int>(ss1,shapeids);
             Assert.AreEqual(40, int_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as strings
 
-            var string_results = query.GetResults<string>(page1,shapeids);
+            var string_results = query.GetResults<string>(ss1,shapeids);
 
             Assert.AreEqual("RGB(255, 0, 0)", string_results[0].Cells[col_fg]);
             Assert.AreEqual("RGB(0, 0, 255)", string_results[0].Cells[col_bg]);
@@ -126,7 +127,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] {s1_id};
 
-            var formulas = query.GetFormulas(page1, shapeids);
+            var ss1 = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var formulas = query.GetFormulas(ss1, shapeids);
 
             // now verify that the formulas were actually set
             Assert.AreEqual("2", formulas[0].Cells[col_fg]);
@@ -134,21 +136,20 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual("40", formulas[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as floats
-
-            var float_results = query.GetResults<double>(page1,shapeids);
+            var float_results = query.GetResults<double>(ss1,shapeids);
             Assert.AreEqual(2.0, float_results[0].Cells[col_fg]);
             Assert.AreEqual(3.0, float_results[0].Cells[col_bg]);
             Assert.AreEqual(40.0, float_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as ints
-            var int_results = query.GetResults<int>(page1,shapeids);
+            var int_results = query.GetResults<int>(ss1,shapeids);
 
             Assert.AreEqual(2, int_results[0].Cells[col_fg]);
             Assert.AreEqual(3, int_results[0].Cells[col_bg]);
             Assert.AreEqual(40, int_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as strings
-            var string_results = query.GetResults<string>(page1,shapeids);
+            var string_results = query.GetResults<string>(ss1,shapeids);
             Assert.AreEqual("2", string_results[0].Cells[col_fg]);
             Assert.AreEqual("3", string_results[0].Cells[col_bg]);
             Assert.AreEqual("40", string_results[0].Cells[col_filpat]);
@@ -180,8 +181,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
+            var ss1 = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
+
             var data = query.GetCellData<double>(
-                page1,
+                ss1,
                 shapeids);
 
             Assert.AreEqual(4, data.Count);
@@ -219,8 +222,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
 
-            var rf = query.GetFormulas(page1, shapeids);
-            var rr = query.GetResults<double>(page1, shapeids);
+            var ss1 = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var rf = query.GetFormulas(ss1, shapeids);
+            var rr = query.GetResults<double>(ss1, shapeids);
 
             var expected_formulas = new[,]
                                       {
@@ -271,8 +275,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
 
-            var rf = query.GetFormulas(page1, shapeids);
-            var rr = query.GetResults<double>(page1, shapeids);
+            var ss1 = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var rf = query.GetFormulas(ss1, shapeids);
+            var rr = query.GetResults<double>(ss1, shapeids);
 
             var expected_formulas = new[,]
                                       {
@@ -448,8 +453,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 }
             }
 
-            var formulas1 = query.GetFormulas(s1);
-            var formulas2 = query.GetFormulas(page1,new [] {s1.ID,s2.ID});
+            var page_surface = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var shape_surface = new VA.ShapeSheet.ShapeSheetSurface(s1);
+            var formulas1 = query.GetFormulas(shape_surface);
+            var formulas2 = query.GetFormulas(page_surface,new [] {s1.ID,s2.ID});
 
             doc1.Close(true);
         }

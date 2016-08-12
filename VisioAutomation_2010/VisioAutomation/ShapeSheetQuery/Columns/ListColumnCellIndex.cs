@@ -4,7 +4,6 @@ namespace VisioAutomation.ShapeSheetQuery.Columns
 {
     public class ListColumnCellIndex : ListColumnBase<ColumnCellIndex>
     {
-        private readonly Dictionary<string, ColumnCellIndex> _dic_columns;
         private HashSet<short> _cellindex_set;
 
         internal ListColumnCellIndex() :

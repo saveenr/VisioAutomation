@@ -372,5 +372,27 @@ namespace VisioAutomation.ShapeSheet
             return list;
         }
 
+        public short ID16
+        {
+            get
+            {
+                if (this.Target.Shape != null)
+                {
+                    return this.Target.Shape.ID16;
+                }
+                else if (this.Target.Page != null)
+                {
+                    return this.Target.Page.ID16;
+                }
+                else if (this.Target.Master != null)
+                {
+                    return this.Target.Master.ID16;
+                }
+                else
+                {
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
+                }
+            }
+        }
     }
 }

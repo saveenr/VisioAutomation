@@ -49,7 +49,8 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         {
             CellQueryGroupMultiRow.check_query(query);
 
-            var data_for_shape = query.GetCellData<RT>(shape);
+            var ss1 = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            var data_for_shape = query.GetCellData<RT>(ss1);
             var sec = data_for_shape.Sections[0];
             var sec_objects = CellQueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
             
