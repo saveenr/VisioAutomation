@@ -1,5 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheetQuery.Results;
 
 namespace VisioAutomation.ShapeSheetQuery.QueryGroups
@@ -29,7 +30,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             CellQueryGroupMultiRow.check_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
-            var surface = new QuerySurface(page);
+            var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetCellData<RT>(surface, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
@@ -49,7 +50,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         {
             CellQueryGroupMultiRow.check_query(query);
 
-            var ss1 = new QuerySurface(shape);
+            var ss1 = new ShapeSheetSurface(shape);
             var data_for_shape = query.GetCellData<RT>(ss1);
             var sec = data_for_shape.Sections[0];
             var sec_objects = CellQueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);

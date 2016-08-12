@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheetQuery;
 using VACONT = VisioAutomation.Shapes.Controls;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
@@ -68,7 +69,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] {s1_id};
 
-            var ss1 = new QuerySurface(page1);
+            var ss1 = new ShapeSheetSurface(page1);
             var formulas = query.GetFormulas(ss1, shapeids);
 
             // now verify that the formulas were actually set
@@ -128,7 +129,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] {s1_id};
 
-            var ss1 = new QuerySurface(page1);
+            var ss1 = new ShapeSheetSurface(page1);
             var formulas = query.GetFormulas(ss1, shapeids);
 
             // now verify that the formulas were actually set
@@ -182,7 +183,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var ss1 = new QuerySurface(page1);
+            var ss1 = new ShapeSheetSurface(page1);
 
             var data = query.GetCellData<double>(
                 ss1,
@@ -223,7 +224,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
 
-            var ss1 = new QuerySurface(page1);
+            var ss1 = new ShapeSheetSurface(page1);
             var rf = query.GetFormulas(ss1, shapeids);
             var rr = query.GetResults<double>(ss1, shapeids);
 
@@ -276,7 +277,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
 
-            var ss1 = new QuerySurface(page1);
+            var ss1 = new ShapeSheetSurface(page1);
             var rf = query.GetFormulas(ss1, shapeids);
             var rr = query.GetResults<double>(ss1, shapeids);
 
@@ -454,8 +455,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 }
             }
 
-            var page_surface = new QuerySurface(page1);
-            var shape_surface = new QuerySurface(s1);
+            var page_surface = new ShapeSheetSurface(page1);
+            var shape_surface = new ShapeSheetSurface(s1);
             var formulas1 = query.GetFormulas(shape_surface);
             var formulas2 = query.GetFormulas(page_surface,new [] {s1.ID,s2.ID});
 

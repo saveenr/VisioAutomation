@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -80,7 +81,7 @@ namespace VisioAutomation.Scripting.Commands
             var width_col = query.AddCell(ShapeSheet.SRCConstants.Width, "Width");
             var height_col = query.AddCell(ShapeSheet.SRCConstants.Height, "Height");
 
-            var ss = new QuerySurface(shape);
+            var ss = new ShapeSheetSurface(shape);
 
             var queryresults = query.GetResults<double>(ss);
 

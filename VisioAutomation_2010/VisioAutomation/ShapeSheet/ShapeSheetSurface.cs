@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheetQuery
+namespace VisioAutomation.ShapeSheet
 {
-    public struct QuerySurface
+    public struct ShapeSheetSurface
     {
         public SurfaceTarget Target { get; private set; }
 
-        public QuerySurface(SurfaceTarget target)
+        public ShapeSheetSurface(SurfaceTarget target)
         {
             this.Target = target;
         }
 
-        public QuerySurface(IVisio.Page page)
+        public ShapeSheetSurface(IVisio.Page page)
         {
             this.Target = new SurfaceTarget(page);
         }
 
-        public QuerySurface(IVisio.Master master)
+        public ShapeSheetSurface(IVisio.Master master)
         {
             this.Target = new SurfaceTarget(master);
         }
 
-        public QuerySurface(IVisio.Shape shape)
+        public ShapeSheetSurface(IVisio.Shape shape)
         {
             this.Target = new SurfaceTarget(shape);
         }
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public string[] GetFormulasU_SIDSRC(short[] stream)
         {
-            int numitems = QuerySurface.check_stream_size(stream, 4);
+            int numitems = ShapeSheetSurface.check_stream_size(stream, 4);
             if (numitems < 1)
             {
                 return new string[0];
@@ -72,13 +72,13 @@ namespace VisioAutomation.ShapeSheetQuery
                 throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
-            var formulas = QuerySurface.get_formulas_array(formulas_sa, numitems);
+            var formulas = ShapeSheetSurface.get_formulas_array(formulas_sa, numitems);
             return formulas;
         }
 
         public string[] GetFormulasU_SRC(short[] stream)
         {
-            int numitems = QuerySurface.check_stream_size(stream, 3);
+            int numitems = ShapeSheetSurface.check_stream_size(stream, 3);
             if (numitems < 1)
             {
                 return new string[0];
@@ -103,7 +103,7 @@ namespace VisioAutomation.ShapeSheetQuery
                 throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
-            var formulas = QuerySurface.get_formulas_array(formulas_sa, numitems);
+            var formulas = ShapeSheetSurface.get_formulas_array(formulas_sa, numitems);
             return formulas;
         }
 
@@ -125,17 +125,17 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public TResult[] GetResults_SIDSRC<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            QuerySurface.EnforceValidResultType(typeof(TResult));
+            ShapeSheetSurface.EnforceValidResultType(typeof(TResult));
 
-            int numitems = QuerySurface.check_stream_size(stream, 4);
+            int numitems = ShapeSheetSurface.check_stream_size(stream, 4);
             if (numitems < 1)
             {
                 return new TResult[0];
             }
 
             var result_type = typeof(TResult);
-            var unitcodes_obj_array = QuerySurface.get_unit_code_obj_array(unitcodes);
-            var flags = QuerySurface.get_VisGetSetArgs(result_type);
+            var unitcodes_obj_array = ShapeSheetSurface.get_unit_code_obj_array(unitcodes);
+            var flags = ShapeSheetSurface.get_VisGetSetArgs(result_type);
 
             System.Array results_sa = null;
 
@@ -156,23 +156,23 @@ namespace VisioAutomation.ShapeSheetQuery
                 throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
-            var results = QuerySurface.get_results_array<TResult>(results_sa, numitems);
+            var results = ShapeSheetSurface.get_results_array<TResult>(results_sa, numitems);
             return results;
         }
 
         public TResult[] GetResults_SRC<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            QuerySurface.EnforceValidResultType(typeof(TResult));
+            ShapeSheetSurface.EnforceValidResultType(typeof(TResult));
 
-            int numitems = QuerySurface.check_stream_size(stream, 3);
+            int numitems = ShapeSheetSurface.check_stream_size(stream, 3);
             if (numitems < 1)
             {
                 return new TResult[0];
             }
 
             var result_type = typeof(TResult);
-            var unitcodes_obj_array = QuerySurface.get_unit_code_obj_array(unitcodes);
-            var flags = QuerySurface.get_VisGetSetArgs(result_type);
+            var unitcodes_obj_array = ShapeSheetSurface.get_unit_code_obj_array(unitcodes);
+            var flags = ShapeSheetSurface.get_VisGetSetArgs(result_type);
 
             System.Array results_sa = null;
 
@@ -193,7 +193,7 @@ namespace VisioAutomation.ShapeSheetQuery
                 throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
-            var results = QuerySurface.get_results_array<TResult>(results_sa, numitems);
+            var results = ShapeSheetSurface.get_results_array<TResult>(results_sa, numitems);
             return results;
         }
 
@@ -253,7 +253,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
         internal static void EnforceValidResultType(System.Type result_type)
         {
-            if (!QuerySurface.IsValidResultType(result_type))
+            if (!ShapeSheetSurface.IsValidResultType(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
                 throw new AutomationException(msg);

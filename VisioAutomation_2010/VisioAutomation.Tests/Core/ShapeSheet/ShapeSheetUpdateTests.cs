@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -39,7 +40,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var ss1 = new QuerySurface(page1);
+            var ss1 = new ShapeSheetSurface(page1);
             var rf = query.GetFormulas(ss1, shapeids);
             var rr = query.GetResults<double>(ss1, shapeids);
 
@@ -69,7 +70,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat,"LinePattern");
 
             // Retrieve the values
-            var ss1 = new QuerySurface(shape1);
+            var ss1 = new ShapeSheetSurface(shape1);
             var data = query.GetCellData<double>(ss1);
 
             // Verify
@@ -93,7 +94,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat, "LinePattern");
 
             // Retrieve the values
-            var ss1 = new QuerySurface(shape1);
+            var ss1 = new ShapeSheetSurface(shape1);
             var data = query.GetCellData<double>(ss1);
 
             // Verify
@@ -128,7 +129,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var ss1 = new QuerySurface(page1);
+            var ss1 = new ShapeSheetSurface(page1);
             var rf = query.GetFormulas(ss1, shapeids);
             var rr = query.GetResults<double>(ss1, shapeids);
 
@@ -209,7 +210,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             // Retrieve the values
-            var ss1 = new QuerySurface(shape1);
+            var ss1 = new ShapeSheetSurface(shape1);
             var data = query.GetCellData<double>(ss1);
 
             // Verify

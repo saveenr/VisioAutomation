@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheetQuery.Results;
 using VAQUERY = VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -53,10 +54,10 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public VAQUERY.QuerySurface GetShapeSheetSurface()
+        public ShapeSheetSurface GetShapeSheetSurface()
         {
             var ds = this._client.Draw.GetDrawingSurface();
-            var ss = new VAQUERY.QuerySurface(ds.Target);
+            var ss = new ShapeSheetSurface(ds.Target);
             return ss;
         }
 

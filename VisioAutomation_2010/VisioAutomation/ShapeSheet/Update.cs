@@ -224,22 +224,22 @@ namespace VisioAutomation.ShapeSheet
         
         public void Execute(IVisio.Page page)
         {
-            var surface = new QuerySurface(page);
+            var surface = new ShapeSheetSurface(page);
             this._Execute(surface);
         }
 
         public void Execute(IVisio.Shape shape)
         {
-            var surface = new QuerySurface(shape);
+            var surface = new ShapeSheetSurface(shape);
             this._Execute(surface);
         }
 
-        public void Execute(QuerySurface surface)
+        public void Execute(ShapeSheetSurface surface)
         {
             this._Execute(surface);
         }
 
-        private void _Execute(QuerySurface surface)
+        private void _Execute(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
             if (this._updates.Count < 1)

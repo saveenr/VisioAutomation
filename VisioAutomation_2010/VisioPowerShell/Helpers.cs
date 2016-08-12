@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheetQuery;
 using VisioAutomation.ShapeSheetQuery.Results;
 
@@ -39,7 +40,7 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheetQuery.Query cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, QuerySurface surface)
+        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheetQuery.Query cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, ShapeSheetSurface surface)
         {
             if (!getresults)
             {
