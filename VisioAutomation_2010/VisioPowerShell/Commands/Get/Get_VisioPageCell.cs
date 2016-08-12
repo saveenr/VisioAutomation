@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
+using VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -33,7 +34,7 @@ namespace VisioPowerShell.Commands.Get
             var target_page = this.Page ?? this.Client.Page.Get();
             this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));
             var query = cellmap.CreateQueryFromCellNames(this.Cells);
-            var surface = new VA.ShapeSheet.ShapeSheetSurface(target_page);
+            var surface = new QuerySurface(target_page);
             var target_shapeids = new[] { surface.Target.Page.PageSheet.ID };
             var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
             this.WriteObject(dt);

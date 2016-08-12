@@ -96,7 +96,7 @@
     <Compile Include="ShapeSheetQuery\Columns\ColumnCellIndex.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnCellIndex.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
-    <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
+    <Compile Include="ShapeSheetQuery\QuerySurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />

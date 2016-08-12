@@ -2,6 +2,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections;
 using System.Linq;
+using VisioAutomation.ShapeSheetQuery;
 
 namespace VisioAutomation.ShapeSheet
 {
@@ -223,22 +224,22 @@ namespace VisioAutomation.ShapeSheet
         
         public void Execute(IVisio.Page page)
         {
-            var surface = new ShapeSheetSurface(page);
+            var surface = new QuerySurface(page);
             this._Execute(surface);
         }
 
         public void Execute(IVisio.Shape shape)
         {
-            var surface = new ShapeSheetSurface(shape);
+            var surface = new QuerySurface(shape);
             this._Execute(surface);
         }
 
-        public void Execute(ShapeSheetSurface surface)
+        public void Execute(QuerySurface surface)
         {
             this._Execute(surface);
         }
 
-        private void _Execute(ShapeSheetSurface surface)
+        private void _Execute(QuerySurface surface)
         {
             // Do nothing if there aren't any updates
             if (this._updates.Count < 1)

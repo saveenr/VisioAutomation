@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             CellQueryGroupMultiRow.check_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
-            var surface = new ShapeSheet.ShapeSheetSurface(page);
+            var surface = new QuerySurface(page);
             var data_for_shapes = query.GetCellData<RT>(surface, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
@@ -49,7 +49,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         {
             CellQueryGroupMultiRow.check_query(query);
 
-            var ss1 = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            var ss1 = new QuerySurface(shape);
             var data_for_shape = query.GetCellData<RT>(ss1);
             var sec = data_for_shape.Sections[0];
             var sec_objects = CellQueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);

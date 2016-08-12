@@ -1,5 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.ShapeSheetQuery;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VAUSERCELL = VisioAutomation.Shapes.UserDefinedCells;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -101,7 +102,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var Value = sec.AddCell(VisioAutomation.ShapeSheet.SRCConstants.User_Value,"Value");
             var Prompt = sec.AddCell(VisioAutomation.ShapeSheet.SRCConstants.User_Prompt,"Prompt");
 
-            var ss1 = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var ss1 = new QuerySurface(page1);
             var formulas = queryex.GetFormulas(ss1, shapes.Select(s => s.ID).ToList());
 
 

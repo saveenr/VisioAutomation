@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -171,7 +172,7 @@ namespace VisioAutomation.Pages
             var col_height = query.AddCell(ShapeSheet.SRCConstants.PageHeight,"PageHeight");
             var col_width = query.AddCell(ShapeSheet.SRCConstants.PageWidth,"PageWidth");
 
-            var page_surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page.PageSheet);
+            var page_surface = new QuerySurface(page.PageSheet);
             var results = query.GetResults<double>(page_surface);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];

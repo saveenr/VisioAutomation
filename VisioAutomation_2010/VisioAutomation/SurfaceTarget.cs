@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation
@@ -43,5 +45,87 @@ namespace VisioAutomation
             this.Master = null;
             this.Shape = shape;
         }
+
+        public IVisio.Shapes Shapes
+        {
+            get
+            {
+
+                IVisio.Shapes shapes;
+
+                if (this.Master != null)
+                {
+
+                    shapes = this.Master.Shapes;
+                }
+                else if (this.Page != null)
+                {
+                    shapes = this.Page.Shapes;
+                }
+                else if (this.Shape != null)
+                {
+                    shapes = this.Shape.Shapes;
+                }
+                else
+                {
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
+                }
+                return shapes;
+            }
+
+        }
+
+
+        public List<IVisio.Shape> GetAllShapes()
+        {
+            IVisio.Shapes shapes;
+
+            if (this.Master != null)
+            {
+
+                shapes = this.Master.Shapes;
+            }
+            else if (this.Page != null)
+            {
+                shapes = this.Page.Shapes;
+            }
+            else if (this.Shape != null)
+            {
+                shapes = this.Shape.Shapes;
+            }
+            else
+            {
+                throw new System.ArgumentException("Unhandled Drawing Surface");
+            }
+
+            var list = new List<IVisio.Shape>();
+            list.AddRange(shapes.ToEnumerable());
+
+            return list;
+        }
+
+        public short ID16
+        {
+            get
+            {
+                if (this.Shape != null)
+                {
+                    return this.Shape.ID16;
+                }
+                else if (this.Page != null)
+                {
+                    return this.Page.ID16;
+                }
+                else if (this.Master != null)
+                {
+                    return this.Master.ID16;
+                }
+                else
+                {
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
+                }
+            }
+        }
+
     }
 }

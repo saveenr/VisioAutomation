@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.ShapeSheetQuery;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -104,7 +105,7 @@ namespace VisioAutomation.Scripting
             }
 
             // Retrieve the values for the cells
-            var ss1 = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            var ss1 = new QuerySurface(shape);
             var dataset = query.GetCellData<string>(ss1);
 
             // Now store the values

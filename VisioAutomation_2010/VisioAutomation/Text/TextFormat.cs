@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Linq;
+using VisioAutomation.ShapeSheetQuery;
 
 namespace VisioAutomation.Text
 {
@@ -101,7 +102,7 @@ namespace VisioAutomation.Text
                 srcs.Add(src_tabother);
             }
 
-            var surface = new ShapeSheet.ShapeSheetSurface(shape);
+            var surface = new QuerySurface(shape);
 
 
             var stream = ShapeSheet.SRC.ToStream(srcs);

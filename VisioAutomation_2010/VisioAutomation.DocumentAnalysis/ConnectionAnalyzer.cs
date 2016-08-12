@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.DocumentAnalysis
@@ -59,7 +60,7 @@ namespace VisioAutomation.DocumentAnalysis
             var col_beginarrow = query.AddCell(src_beginarrow, "BeginArrow");
             var col_endarrow = query.AddCell(src_endarrow, "EndArrow");
 
-            var ss1= new ShapeSheet.ShapeSheetSurface(page);
+            var ss1= new QuerySurface(page);
             var arrow_table = query.GetResults<int>(ss1, connnector_ids);
             
             IList<ConnectorEdge> directed_edges = new List<ConnectorEdge>();

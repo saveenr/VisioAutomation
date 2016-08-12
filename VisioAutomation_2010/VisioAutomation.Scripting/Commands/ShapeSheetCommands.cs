@@ -53,10 +53,10 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public ShapeSheet.ShapeSheetSurface GetShapeSheetSurface()
+        public VAQUERY.QuerySurface GetShapeSheetSurface()
         {
             var ds = this._client.Draw.GetDrawingSurface();
-            var ss = new ShapeSheet.ShapeSheetSurface(ds.Target);
+            var ss = new VAQUERY.QuerySurface(ds.Target);
             return ss;
         }
 
