@@ -225,13 +225,14 @@ namespace VisioAutomation.ShapeSheetQuery
             // Now copy the Section values over
             if (this._per_shape_section_info.Count > 0)
             {
-                result.Sections = new List<SectionResult<T>>();
                 var sections = this._per_shape_section_info[shape_index];
 
+                result.Sections = new List<SectionResult<T>>(sections.Count);
                 foreach (var section in sections)
                 {
                     var section_result = new SectionResult<T>(section.RowCount);
                     section_result.Column = section.SectionColumn;
+
                     result.Sections.Add(section_result);
 
                     foreach (int row_index in section.RowIndexes)
@@ -243,7 +244,8 @@ namespace VisioAutomation.ShapeSheetQuery
                             int index = start + cellcount + c;
                             row_values[c] = array[index];
                         }
-                        section_result.Rows.Add( new SectionResultRow<T>(row_values));
+                        var sec_res_row = new SectionResultRow<T>(row_values);
+                        section_result.Rows.Add( sec_res_row );
                         cellcount += num_cols;
                     }
                 }
