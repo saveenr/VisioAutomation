@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheetQuery
 {
-    public class ListSectionSubQuery : IEnumerable<SectionSubQuery>
+    public class ListSubQuery : IEnumerable<SubQuery>
     {
-        private IList<SectionSubQuery> Items { get; }
-        private readonly Dictionary<IVisio.VisSectionIndices,SectionSubQuery> _section_set; 
+        private IList<SubQuery> Items { get; }
+        private readonly Dictionary<IVisio.VisSectionIndices,SubQuery> _section_set; 
 
-        internal ListSectionSubQuery(int capacity)
+        internal ListSubQuery(int capacity)
         {
-            this.Items = new List<SectionSubQuery>(capacity);
-            this._section_set = new Dictionary<IVisio.VisSectionIndices, SectionSubQuery>(capacity);
+            this.Items = new List<SubQuery>(capacity);
+            this._section_set = new Dictionary<IVisio.VisSectionIndices, SubQuery>(capacity);
         }
 
-        public IEnumerator<SectionSubQuery> GetEnumerator()
+        public IEnumerator<SubQuery> GetEnumerator()
         {
             return this.Items.GetEnumerator();
         }
@@ -24,9 +24,9 @@ namespace VisioAutomation.ShapeSheetQuery
             return this.GetEnumerator();
         }
 
-        public SectionSubQuery this[int index] => this.Items[index];
+        public SubQuery this[int index] => this.Items[index];
 
-        internal SectionSubQuery Add(IVisio.VisSectionIndices section)
+        internal SubQuery Add(IVisio.VisSectionIndices section)
         {
             if (this._section_set.ContainsKey(section))
             {
@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheetQuery
             }
 
             int ordinal = this.Items.Count;
-            var section_query = new SectionSubQuery(ordinal, section);
+            var section_query = new SubQuery(ordinal, section);
             this.Items.Add(section_query);
             this._section_set[section] = section_query;
             return section_query;

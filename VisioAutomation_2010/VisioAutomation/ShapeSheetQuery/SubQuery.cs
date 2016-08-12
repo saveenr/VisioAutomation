@@ -3,14 +3,14 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheetQuery
 {
-    public class SectionSubQuery
+    public class SubQuery
     {
         public string Name { get; private set; }
         public IVisio.VisSectionIndices SectionIndex { get; private set; }
         public ListColumnCellIndex Columns { get; }
         public int Ordinal { get; }
 
-        internal SectionSubQuery(int ordinal, IVisio.VisSectionIndices section)
+        internal SubQuery(int ordinal, IVisio.VisSectionIndices section)
         {
             this.Name = VisioAutomation.ShapeSheet.ShapeSheetHelper.GetSectionName(section);
             this.Ordinal = ordinal;
@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return col;
         }
 
-        static public implicit operator int(SectionSubQuery col)
+        static public implicit operator int(SubQuery col)
         {
             return col.Ordinal;
         }

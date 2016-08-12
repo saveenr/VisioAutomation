@@ -146,12 +146,12 @@
     <Compile Include="ShapeSheetQuery\QueryGroups\QueryGroupBase.cs" />
     <Compile Include="ShapeSheetQuery\Results\ListResult.cs" />
     <Compile Include="ShapeSheetQuery\Results\Result.cs" />
-    <Compile Include="ShapeSheetQuery\SectionSubQueryDetails.cs" />
-    <Compile Include="ShapeSheetQuery\SectionSubQuery.cs" />
+    <Compile Include="ShapeSheetQuery\SubQueryDetails.cs" />
+    <Compile Include="ShapeSheetQuery\SubQuery.cs" />
     <Compile Include="ShapeSheetQuery\Results\SectionSubQueryResult.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnSRC.cs" />
     <Compile Include="ShapeSheetQuery\Utilities\StreamBuilder.cs" />
-    <Compile Include="ShapeSheetQuery\ListSectionSubQuery.cs" />
+    <Compile Include="ShapeSheetQuery\ListSubQuery.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />

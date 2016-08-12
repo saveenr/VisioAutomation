@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
                 throw new AutomationException("Query should not contain any Columns");
             }
 
-            if (query.SectionSubQueries.Count != 1)
+            if (query.SubQueries.Count != 1)
             {
                 throw new AutomationException("Query should not contain contain exaxtly 1 section");
             }

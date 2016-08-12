@@ -3,15 +3,15 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheetQuery
 {
-    internal class SectionSubQueryDetails
+    internal class SubQueryDetails
     {
-        public SectionSubQuery SectionSubQuery { get; private set; }
+        public SubQuery SubQuery { get; private set; }
         public short ShapeID { get; private set; }
         public int RowCount  { get; }
 
-        internal SectionSubQueryDetails(SectionSubQuery sec_sq, short shapeid, int numrows)
+        internal SubQueryDetails(SubQuery sec_sq, short shapeid, int numrows)
         {
-            this.SectionSubQuery = sec_sq;
+            this.SubQuery = sec_sq;
             this.ShapeID = shapeid;
             this.RowCount = numrows;
         }

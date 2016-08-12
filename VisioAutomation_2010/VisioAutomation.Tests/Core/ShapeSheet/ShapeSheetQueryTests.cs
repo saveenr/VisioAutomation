@@ -415,7 +415,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var query = new VA.ShapeSheetQuery.Query();
 
             var name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
-            var section_to_secquery = new Dictionary<short,VA.ShapeSheetQuery.SectionSubQuery>();
+            var section_to_secquery = new Dictionary<short,VA.ShapeSheetQuery.SubQuery>();
 
             foreach (var kv in name_to_src)
             {
@@ -434,7 +434,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 }
                 else
                 {
-                    VA.ShapeSheetQuery.SectionSubQuery sec_col;
+                    VA.ShapeSheetQuery.SubQuery sec_col;
                     if (!section_to_secquery.ContainsKey(src.Section))
                     {
                         sec_col = query.AddSection((IVisio.VisSectionIndices)src.Section);
