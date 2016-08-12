@@ -7,7 +7,6 @@ namespace VisioAutomation.ShapeSheetQuery
         private readonly IList<CellColumn> _items;
         private readonly Dictionary<string, CellColumn> _dic_columns;
         private HashSet<ShapeSheet.SRC> _src_set;
-        private CellColumnType _coltype;
 
         internal CellColumnList() :
             this(0)
@@ -18,7 +17,6 @@ namespace VisioAutomation.ShapeSheetQuery
         {
             this._items = new List<CellColumn>(capacity);
             this._dic_columns = new Dictionary<string, CellColumn>(capacity);
-            this._coltype = CellColumnType.Unknown;
         }
 
         public IEnumerator<CellColumn> GetEnumerator()
@@ -41,12 +39,6 @@ namespace VisioAutomation.ShapeSheetQuery
 
         internal CellColumn Add(ShapeSheet.SRC src, string name)
         {
-            if (this._coltype == CellColumnType.CellOnly)
-            {
-                throw new AutomationException("Can't add an SRC if Columns contains CellIndexes");
-            }
-            this._coltype = CellColumnType.SectionRowCell;
-
             name = this.fixup_name(name);
 
             if (this._dic_columns.ContainsKey(name))
@@ -92,7 +84,6 @@ namespace VisioAutomation.ShapeSheetQuery
         private readonly Dictionary<string, SubQueryCellColumn> _dic_columns;
         private HashSet<ShapeSheet.SRC> _src_set;
         private HashSet<short> _cellindex_set;
-        private CellColumnType _coltype;
 
         internal SubQueryCellColumnList() :
             this(0)
@@ -103,7 +94,6 @@ namespace VisioAutomation.ShapeSheetQuery
         {
             this._items = new List<SubQueryCellColumn>(capacity);
             this._dic_columns = new Dictionary<string, SubQueryCellColumn>(capacity);
-            this._coltype = CellColumnType.Unknown;
         }
 
         public IEnumerator<SubQueryCellColumn> GetEnumerator()
@@ -122,52 +112,8 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public bool Contains(string name) => this._dic_columns.ContainsKey(name);
 
-        internal SubQueryCellColumn Add(ShapeSheet.SRC src) => this.Add(src, null);
-
-        internal SubQueryCellColumn Add(ShapeSheet.SRC src, string name)
-        {
-            if (this._coltype == CellColumnType.CellOnly)
-            {
-                throw new AutomationException("Can't add an SRC if Columns contains CellIndexes");
-            }
-            this._coltype = CellColumnType.SectionRowCell;
-
-            name = this.fixup_name(name);
-
-            if (this._dic_columns.ContainsKey(name))
-            {
-                throw new AutomationException("Duplicate Column Name");
-            }
-
-            if (this._src_set == null)
-            {
-                this._src_set = new HashSet<ShapeSheet.SRC>();
-            }
-
-            if (this._src_set.Contains(src))
-            {
-                string msg = "Duplicate SRC";
-                throw new AutomationException(msg);
-            }
-
-            int ordinal = this._items.Count;
-            var col = new SubQueryCellColumn(ordinal, src.Cell, name);
-            this._items.Add(col);
-
-            this._dic_columns[name] = col;
-            this._src_set.Add(src);
-            return col;
-        }
-
         public SubQueryCellColumn Add(short cell, string name)
         {
-            if (this._coltype == CellColumnType.SectionRowCell)
-            {
-                throw new AutomationException("Can't add a CellIndex if Columns contains SRCs");
-            }
-
-            this._coltype = CellColumnType.CellOnly;
-
             if (this._cellindex_set == null)
             {
                 this._cellindex_set = new HashSet<short>();
