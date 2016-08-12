@@ -66,7 +66,7 @@ namespace VisioAutomation.Shapes
             return ShapeSheetQuery.QueryGroups.QueryGroupSingleRow._GetCells<LockCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.Common.LockCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.LockCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.CommonQueries.LockCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.LockCellsQuery>();
 
 
     }

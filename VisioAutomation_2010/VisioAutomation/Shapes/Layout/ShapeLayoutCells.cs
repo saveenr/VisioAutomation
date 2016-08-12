@@ -62,7 +62,7 @@ namespace VisioAutomation.Shapes.Layout
             return ShapeSheetQuery.QueryGroups.QueryGroupSingleRow._GetCells<ShapeLayoutCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.Common.ShapeLayoutCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.ShapeLayoutCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.CommonQueries.ShapeLayoutCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.ShapeLayoutCellsQuery>();
 
 
 

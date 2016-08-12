@@ -74,7 +74,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<UserDefinedCell, string>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.Common.UserDefinedCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.UserDefinedCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.CommonQueries.UserDefinedCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.UserDefinedCellsQuery>();
 
 
     }

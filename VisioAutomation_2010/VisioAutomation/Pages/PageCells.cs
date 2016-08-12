@@ -153,7 +153,7 @@ namespace VisioAutomation.Pages
             return ShapeSheetQuery.QueryGroups.QueryGroupSingleRow._GetCells<PageCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.Common.PageCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.PageCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.CommonQueries.PageCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.PageCellsQuery>();
 
 
     }

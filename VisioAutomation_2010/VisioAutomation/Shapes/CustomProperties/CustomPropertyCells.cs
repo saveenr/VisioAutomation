@@ -136,7 +136,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<CustomPropertyCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<VisioAutomation.ShapeSheetQuery.Common.CustomPropertyCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.CustomPropertyCellsQuery>();
+        private static System.Lazy<VisioAutomation.ShapeSheetQuery.CommonQueries.CustomPropertyCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.CustomPropertyCellsQuery>();
 
         public static CustomPropertyCells FromValue(object value)
         {

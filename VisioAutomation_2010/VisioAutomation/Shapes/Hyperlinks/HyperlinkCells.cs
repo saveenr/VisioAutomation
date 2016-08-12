@@ -47,6 +47,6 @@ namespace VisioAutomation.Shapes.Hyperlinks
             return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<HyperlinkCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.Common.HyperlinkCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.HyperlinkCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.CommonQueries.HyperlinkCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.HyperlinkCellsQuery>();
     }
 }

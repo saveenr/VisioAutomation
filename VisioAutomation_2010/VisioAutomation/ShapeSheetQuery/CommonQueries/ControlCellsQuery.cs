@@ -1,7 +1,7 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheetQuery.Common
+namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class ControlCellsQuery : CellQuery
     {

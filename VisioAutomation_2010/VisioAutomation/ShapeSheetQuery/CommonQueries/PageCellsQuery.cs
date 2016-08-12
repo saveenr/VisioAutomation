@@ -1,6 +1,6 @@
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioAutomation.ShapeSheetQuery.Common
+namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class PageCellsQuery : CellQuery
     {
