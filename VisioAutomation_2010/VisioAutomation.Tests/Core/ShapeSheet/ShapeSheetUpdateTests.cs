@@ -32,14 +32,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(page1);
 
             // Verify that the formulas were set
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_pinx = query.AddCell(ShapeSheetUpdateTests.src_pinx, "PinX");
             var col_piny = query.AddCell(ShapeSheetUpdateTests.src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var rf = query.GetFormulas(page1, shapeids);
-            var rr = query.GetResults<double>(page1, shapeids);
+            var ss1 = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var rf = query.GetFormulas(ss1, shapeids);
+            var rr = query.GetResults<double>(ss1, shapeids);
 
             AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_pinx], rr[0].Cells[col_pinx]);
             AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_piny], rr[0].Cells[col_piny]);
@@ -63,11 +64,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat,"LinePattern");
 
             // Retrieve the values
-            var data = query.GetCellData<double>(shape1);
+            var ss1 = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
+            var data = query.GetCellData<double>(ss1);
 
             // Verify
             AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
@@ -86,11 +88,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat, "LinePattern");
 
             // Retrieve the values
-            var data = query.GetCellData<double>(shape1);
+            var ss1 = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
+            var data = query.GetCellData<double>(ss1);
 
             // Verify
             AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
@@ -118,14 +121,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(page1);
 
             // Verify that the formulas were set
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_pinx = query.AddCell(ShapeSheetUpdateTests.src_pinx,"PinX");
             var col_piny = query.AddCell(ShapeSheetUpdateTests.src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var rf = query.GetFormulas(page1, shapeids);
-            var rr = query.GetResults<double>(page1, shapeids);
+            var ss1 = new VA.ShapeSheet.ShapeSheetSurface(page1);
+            var rf = query.GetFormulas(ss1, shapeids);
+            var rr = query.GetResults<double>(ss1, shapeids);
 
             AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_pinx], rr[0].Cells[col_pinx]);
             AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_piny], rr[0].Cells[col_piny]);
@@ -199,12 +203,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheetQuery.CellQuery();
+            var query = new VA.ShapeSheetQuery.Query();
             var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat, "LinePattern");
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             // Retrieve the values
-            var data = query.GetCellData<double>(shape1);
+            var ss1 = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
+            var data = query.GetCellData<double>(ss1);
 
             // Verify
             AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);

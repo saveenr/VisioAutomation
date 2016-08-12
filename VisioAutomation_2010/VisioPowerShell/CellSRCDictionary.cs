@@ -171,7 +171,7 @@ namespace VisioPowerShell
             return CellSRCDictionary.page_cellmap;
         }
 
-        public CellQuery CreateQueryFromCellNames(IList<string> Cells)
+        public Query CreateQueryFromCellNames(IList<string> Cells)
         {
             var invalid_names = Cells.Where(cellname => !this.ContainsCell(cellname)).ToList();
             if (invalid_names.Count > 0)
@@ -180,11 +180,11 @@ namespace VisioPowerShell
                 throw new ArgumentException(msg);
             }
 
-            var query = new CellQuery();
+            var query = new Query();
 
             foreach (string resolved_cellname in this.ResolveNames(Cells))
             {
-                if (!query.CellColumns.Contains(resolved_cellname))
+                if (!query.Cells.Contains(resolved_cellname))
                 {
                     var resolved_src = this[resolved_cellname];
                     query.AddCell(resolved_src, resolved_cellname);

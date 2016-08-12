@@ -183,7 +183,9 @@ namespace VisioAutomation_Tests.Models.DOM
             var page = page_node.Render(doc);
 
             Assert.AreEqual(0, page.Shapes.Count);
-            Assert.AreEqual(new VA.Drawing.Size(5, 5), VisioAutomationTest.GetPageSize(page));
+            var actual_page_size = VisioAutomationTest.GetPageSize(page);
+            var expected_page_size = new VA.Drawing.Size(5, 5);
+            Assert.AreEqual(expected_page_size, actual_page_size);
 
             page.Delete(0);
             doc.Close(true);

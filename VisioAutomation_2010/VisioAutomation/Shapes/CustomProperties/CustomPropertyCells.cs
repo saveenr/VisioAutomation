@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties
 {
-    public class CustomPropertyCells : ShapeSheetQuery.CellGroups.CellGroupMultiRow
+    public class CustomPropertyCells : ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow
     {
         public ShapeSheet.CellData<bool> Ask { get; set; }
         public ShapeSheet.CellData<int> Calendar { get; set; }
@@ -127,16 +127,16 @@ namespace VisioAutomation.Shapes.CustomProperties
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = CustomPropertyCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<CustomPropertyCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<CustomPropertyCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<CustomPropertyCells> GetCells(IVisio.Shape shape)
         {
             var query = CustomPropertyCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<CustomPropertyCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<CustomPropertyCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<VisioAutomation.ShapeSheetQuery.Common.CustomPropertyCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.CustomPropertyCellsQuery>();
+        private static System.Lazy<VisioAutomation.ShapeSheetQuery.CommonQueries.CustomPropertyCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.CustomPropertyCellsQuery>();
 
         public static CustomPropertyCells FromValue(object value)
         {

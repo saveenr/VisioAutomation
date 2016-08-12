@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Connections
 {
-    public class ConnectionPointCells : ShapeSheetQuery.CellGroups.CellGroupMultiRow
+    public class ConnectionPointCells : ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow
     {
         public ShapeSheet.CellData<double> X { get; set; }
         public ShapeSheet.CellData<double> Y { get; set; }
@@ -26,16 +26,16 @@ namespace VisioAutomation.Shapes.Connections
         public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ConnectionPointCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<ConnectionPointCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = ConnectionPointCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<ConnectionPointCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.Common.ConnectionPointCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.ConnectionPointCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.CommonQueries.ConnectionPointCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.ConnectionPointCellsQuery>();
 
 
     }

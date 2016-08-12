@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.UserDefinedCells
 {
-    public class UserDefinedCell : ShapeSheetQuery.CellGroups.CellGroupMultiRow
+    public class UserDefinedCell : ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow
     {
         public string Name { get; set; }
         public ShapeSheet.CellData<string> Value { get; set; }
@@ -65,16 +65,16 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         public static IList<List<UserDefinedCell>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = UserDefinedCell.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<UserDefinedCell, string>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<UserDefinedCell, string>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<UserDefinedCell> GetCells(IVisio.Shape shape)
         {
             var query = UserDefinedCell.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupMultiRow._GetCells<UserDefinedCell, string>(shape, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<UserDefinedCell, string>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.Common.UserDefinedCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.UserDefinedCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.CommonQueries.UserDefinedCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.UserDefinedCellsQuery>();
 
 
     }

@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class TextBlockCells : ShapeSheetQuery.CellGroups.CellGroupSingleRow
+    public class TextBlockCells : ShapeSheetQuery.QueryGroups.QueryGroupSingleRow
     {
         public ShapeSheet.CellData<double> BottomMargin { get; set; }
         public ShapeSheet.CellData<double> LeftMargin { get; set; }
@@ -48,15 +48,15 @@ namespace VisioAutomation.Text
         public static IList<TextBlockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupSingleRow._GetCells<TextBlockCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.QueryGroupSingleRow._GetCells<TextBlockCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static TextBlockCells GetCells(IVisio.Shape shape)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return ShapeSheetQuery.CellGroups.CellGroupSingleRow._GetCells<TextBlockCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.QueryGroupSingleRow._GetCells<TextBlockCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.Common.TextBlockCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.Common.TextBlockCellsQuery>();
+        private static System.Lazy<ShapeSheetQuery.CommonQueries.TextBlockCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.TextBlockCellsQuery>();
     }
 }

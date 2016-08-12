@@ -1,23 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using VisioAutomation.ShapeSheetQuery.Results;
 
 namespace VisioPowerShell
 {
     static class Helpers
     {
-        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheetQuery.CellQuery cellQuery, VisioAutomation.ShapeSheetQuery.QueryResultList<T> query_output)
+        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheetQuery.Query cellQuery, ListResult<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
             dt.Columns.Add("ShapeID", typeof(int));
-            foreach (var col in cellQuery.CellColumns)
+            foreach (var col in cellQuery.Cells)
             {
                 dt.Columns.Add(col.Name, typeof(T));
             }
 
             // Then populate the rows of the datatable
             dt.BeginLoadData();
-            int colcount = cellQuery.CellColumns.Count;
+            int colcount = cellQuery.Cells.Count;
             var rowbuf = new object[colcount+1];
             for (int r = 0; r < query_output.Count; r++)
             {
@@ -37,7 +38,7 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheetQuery.CellQuery cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
+        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheetQuery.Query cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
             if (!getresults)
             {

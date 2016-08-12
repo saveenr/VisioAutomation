@@ -108,10 +108,12 @@ namespace VisioAutomation.Scripting.Commands
             var active_page = application.ActivePage;
 
 
-            var query = new ShapeSheetQuery.CellQuery();
+            var query = new ShapeSheetQuery.Query();
             var col_height = query.AddCell(ShapeSheet.SRCConstants.PageHeight, "PageHeight");
             var col_width = query.AddCell(ShapeSheet.SRCConstants.PageWidth, "PageWidth");
-            var results = query.GetResults<double>(active_page.PageSheet);
+            var page_surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page.PageSheet);
+
+            var results = query.GetResults<double>(page_surface);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];
             var s = new Drawing.Size(width, height);
