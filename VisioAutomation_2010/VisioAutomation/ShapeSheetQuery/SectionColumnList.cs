@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public IEnumerator<SectionColumn> GetEnumerator()
         {
-            return (this.Items).GetEnumerator();
+            return this.Items.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()

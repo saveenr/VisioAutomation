@@ -16,9 +16,6 @@ namespace VisioAutomation.ShapeSheetQuery
             this.RowCount = numrows;
         }
 
-        public IEnumerable<int> RowIndexes
-        {
-            get { return Enumerable.Range(0, this.RowCount); }
-        }
+        public IEnumerable<int> RowIndexes => Enumerable.Range(0, this.RowCount);
     }
 }
