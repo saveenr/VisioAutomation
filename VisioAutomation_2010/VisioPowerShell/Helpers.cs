@@ -10,14 +10,14 @@ namespace VisioPowerShell
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
             dt.Columns.Add("ShapeID", typeof(int));
-            foreach (var col in cellQuery.CellColumns)
+            foreach (var col in cellQuery.Cells)
             {
                 dt.Columns.Add(col.Name, typeof(T));
             }
 
             // Then populate the rows of the datatable
             dt.BeginLoadData();
-            int colcount = cellQuery.CellColumns.Count;
+            int colcount = cellQuery.Cells.Count;
             var rowbuf = new object[colcount+1];
             for (int r = 0; r < query_output.Count; r++)
             {

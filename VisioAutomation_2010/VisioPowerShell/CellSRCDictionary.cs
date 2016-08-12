@@ -184,7 +184,7 @@ namespace VisioPowerShell
 
             foreach (string resolved_cellname in this.ResolveNames(Cells))
             {
-                if (!query.CellColumns.Contains(resolved_cellname))
+                if (!query.Cells.Contains(resolved_cellname))
                 {
                     var resolved_src = this[resolved_cellname];
                     query.AddCell(resolved_src, resolved_cellname);

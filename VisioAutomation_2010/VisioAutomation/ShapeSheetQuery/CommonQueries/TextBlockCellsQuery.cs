@@ -4,22 +4,22 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class TextBlockCellsQuery : CellQuery
     {
-        public CellColumn BottomMargin { get; set; }
-        public CellColumn LeftMargin { get; set; }
-        public CellColumn RightMargin { get; set; }
-        public CellColumn TopMargin { get; set; }
-        public CellColumn DefaultTabStop { get; set; }
-        public CellColumn TextBkgnd { get; set; }
-        public CellColumn TextBkgndTrans { get; set; }
-        public CellColumn TextDirection { get; set; }
-        public CellColumn VerticalAlign { get; set; }
-        public CellColumn TxtWidth { get; set; }
-        public CellColumn TxtHeight { get; set; }
-        public CellColumn TxtPinX { get; set; }
-        public CellColumn TxtPinY { get; set; }
-        public CellColumn TxtLocPinX { get; set; }
-        public CellColumn TxtLocPinY { get; set; }
-        public CellColumn TxtAngle { get; set; }
+        public ColumnSRC BottomMargin { get; set; }
+        public ColumnSRC LeftMargin { get; set; }
+        public ColumnSRC RightMargin { get; set; }
+        public ColumnSRC TopMargin { get; set; }
+        public ColumnSRC DefaultTabStop { get; set; }
+        public ColumnSRC TextBkgnd { get; set; }
+        public ColumnSRC TextBkgndTrans { get; set; }
+        public ColumnSRC TextDirection { get; set; }
+        public ColumnSRC VerticalAlign { get; set; }
+        public ColumnSRC TxtWidth { get; set; }
+        public ColumnSRC TxtHeight { get; set; }
+        public ColumnSRC TxtPinX { get; set; }
+        public ColumnSRC TxtPinY { get; set; }
+        public ColumnSRC TxtLocPinX { get; set; }
+        public ColumnSRC TxtLocPinY { get; set; }
+        public ColumnSRC TxtAngle { get; set; }
 
         public TextBlockCellsQuery() :
             base()

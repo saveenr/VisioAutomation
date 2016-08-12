@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheetQuery
     {
         public string Name { get; private set; }
         public IVisio.VisSectionIndices SectionIndex { get; private set; }
-        public SubQueryCellColumnList CellColumns { get; }
+        public ListColumnCellIndex Columns { get; }
         public int Ordinal { get; }
 
         internal SectionSubQuery(int ordinal, IVisio.VisSectionIndices section)
@@ -14,18 +14,18 @@ namespace VisioAutomation.ShapeSheetQuery
             this.Name = VisioAutomation.ShapeSheet.ShapeSheetHelper.GetSectionName(section);
             this.Ordinal = ordinal;
             this.SectionIndex = section;
-            this.CellColumns = new SubQueryCellColumnList();
+            this.Columns = new ListColumnCellIndex();
         }
 
-        public SubQueryCellColumn AddCell(VisioAutomation.ShapeSheet.SRC src, string name)
+        public ColumnCellIndex AddCell(VisioAutomation.ShapeSheet.SRC src, string name)
         {
-            var col = this.CellColumns.Add(src.Cell, name);
+            var col = this.Columns.Add(src.Cell, name);
             return col;
         }
 
-        public SubQueryCellColumn AddCell(short cell, string name)
+        public ColumnCellIndex AddCell(short cell, string name)
         {
-            var col = this.CellColumns.Add(cell, name);
+            var col = this.Columns.Add(cell, name);
             return col;
         }
 

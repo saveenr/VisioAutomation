@@ -8,12 +8,12 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
     {
         private static void check_query(CellQuery query)
         {
-            if (query.CellColumns.Count < 1)
+            if (query.Cells.Count < 1)
             {
                 throw new AutomationException("Query must contain at least 1 Column");
             }
 
-            if (query.SectionColumns.Count != 0)
+            if (query.SectionSubQueries.Count != 0)
             {
                 throw new AutomationException("Query should not contain contain any sections");
             }

@@ -5,11 +5,11 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class ConnectionPointCellsQuery : CellQuery
     {
-        public SubQueryCellColumn DirX { get; set; }
-        public SubQueryCellColumn DirY { get; set; }
-        public SubQueryCellColumn Type { get; set; }
-        public SubQueryCellColumn X { get; set; }
-        public SubQueryCellColumn Y { get; set; }
+        public ColumnCellIndex DirX { get; set; }
+        public ColumnCellIndex DirY { get; set; }
+        public ColumnCellIndex Type { get; set; }
+        public ColumnCellIndex X { get; set; }
+        public ColumnCellIndex Y { get; set; }
 
         public ConnectionPointCellsQuery()
         {

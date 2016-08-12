@@ -79,6 +79,7 @@
     <Compile Include="Fonts\FontHelper.cs" />
     <Compile Include="Layers\LayerHelper.cs" />
     <Compile Include="ShapeSheetQuery\CellColumnType.cs" />
+    <Compile Include="ShapeSheetQuery\ListColumnBase.cs" />
     <Compile Include="ShapeSheetQuery\CommonQueries\CharacterFormatCellsQuery.cs" />
     <Compile Include="ShapeSheetQuery\CommonQueries\ConnectionPointCellsQuery.cs" />
     <Compile Include="ShapeSheetQuery\CommonQueries\ControlCellsQuery.cs" />
@@ -92,6 +93,9 @@
     <Compile Include="ShapeSheetQuery\CommonQueries\TextBlockCellsQuery.cs" />
     <Compile Include="ShapeSheetQuery\CommonQueries\UserDefinedCellsQuery.cs" />
     <Compile Include="ShapeSheetQuery\CommonQueries\XFormCellsQuery.cs" />
+    <Compile Include="ShapeSheetQuery\ColumnBase.cs" />
+    <Compile Include="ShapeSheetQuery\ColumnCellIndex.cs" />
+    <Compile Include="ShapeSheetQuery\ListColumnCellIndex.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
@@ -146,9 +150,9 @@
     <Compile Include="ShapeSheetQuery\SectionSubQueryDetails.cs" />
     <Compile Include="ShapeSheetQuery\SectionSubQuery.cs" />
     <Compile Include="ShapeSheetQuery\SectionSubQueryResult.cs" />
-    <Compile Include="ShapeSheetQuery\CellColumnList.cs" />
+    <Compile Include="ShapeSheetQuery\ListColumnSRC.cs" />
     <Compile Include="ShapeSheetQuery\StreamBuilder.cs" />
-    <Compile Include="ShapeSheetQuery\SectionColumnList.cs" />
+    <Compile Include="ShapeSheetQuery\ListSectionSubQuery.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
@@ -163,7 +167,7 @@
     <Compile Include="Shapes\XFormCells.cs" />
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
-    <Compile Include="ShapeSheetQuery\CellColumn.cs" />
+    <Compile Include="ShapeSheetQuery\ColumnSRC.cs" />
     <Compile Include="ShapeSheet\Update.cs" />
     <Compile Include="ShapeSheet\FormulaLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />

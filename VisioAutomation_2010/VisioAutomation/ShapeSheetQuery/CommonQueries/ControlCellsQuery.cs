@@ -5,14 +5,14 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class ControlCellsQuery : CellQuery
     {
-        public SubQueryCellColumn CanGlue { get; set; }
-        public SubQueryCellColumn Tip { get; set; }
-        public SubQueryCellColumn X { get; set; }
-        public SubQueryCellColumn Y { get; set; }
-        public SubQueryCellColumn YBehavior { get; set; }
-        public SubQueryCellColumn XBehavior { get; set; }
-        public SubQueryCellColumn XDynamics { get; set; }
-        public SubQueryCellColumn YDynamics { get; set; }
+        public ColumnCellIndex CanGlue { get; set; }
+        public ColumnCellIndex Tip { get; set; }
+        public ColumnCellIndex X { get; set; }
+        public ColumnCellIndex Y { get; set; }
+        public ColumnCellIndex YBehavior { get; set; }
+        public ColumnCellIndex XBehavior { get; set; }
+        public ColumnCellIndex XDynamics { get; set; }
+        public ColumnCellIndex YDynamics { get; set; }
 
         public ControlCellsQuery()
         {

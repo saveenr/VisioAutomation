@@ -107,7 +107,7 @@ namespace VisioAutomation.Scripting
             var dataset = query.GetCellData<string>(shape);
 
             // Now store the values
-            for (int col = 0; col < query.CellColumns.Count; col++)
+            for (int col = 0; col < query.Cells.Count; col++)
             {
                 var result = dataset.Cells[col].Result;
                 var formula = dataset.Cells[col].Formula;

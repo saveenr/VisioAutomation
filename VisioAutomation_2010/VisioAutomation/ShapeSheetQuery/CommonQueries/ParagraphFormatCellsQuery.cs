@@ -5,20 +5,20 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class ParagraphFormatCellsQuery : CellQuery
     {
-        public SubQueryCellColumn Bullet { get; set; }
-        public SubQueryCellColumn BulletFont { get; set; }
-        public SubQueryCellColumn BulletFontSize { get; set; }
-        public SubQueryCellColumn BulletString { get; set; } // NOTE: This is never used
-        public SubQueryCellColumn Flags { get; set; }
-        public SubQueryCellColumn HorzAlign { get; set; }
-        public SubQueryCellColumn IndentFirst { get; set; }
-        public SubQueryCellColumn IndentLeft { get; set; }
-        public SubQueryCellColumn IndentRight { get; set; }
-        public SubQueryCellColumn LocalizeBulletFont { get; set; }
-        public SubQueryCellColumn SpaceAfter { get; set; }
-        public SubQueryCellColumn SpaceBefore { get; set; }
-        public SubQueryCellColumn SpaceLine { get; set; }
-        public SubQueryCellColumn TextPosAfterBullet { get; set; }
+        public ColumnCellIndex Bullet { get; set; }
+        public ColumnCellIndex BulletFont { get; set; }
+        public ColumnCellIndex BulletFontSize { get; set; }
+        public ColumnCellIndex BulletString { get; set; } // NOTE: This is never used
+        public ColumnCellIndex Flags { get; set; }
+        public ColumnCellIndex HorzAlign { get; set; }
+        public ColumnCellIndex IndentFirst { get; set; }
+        public ColumnCellIndex IndentLeft { get; set; }
+        public ColumnCellIndex IndentRight { get; set; }
+        public ColumnCellIndex LocalizeBulletFont { get; set; }
+        public ColumnCellIndex SpaceAfter { get; set; }
+        public ColumnCellIndex SpaceBefore { get; set; }
+        public ColumnCellIndex SpaceLine { get; set; }
+        public ColumnCellIndex TextPosAfterBullet { get; set; }
 
         public ParagraphFormatCellsQuery()
         {

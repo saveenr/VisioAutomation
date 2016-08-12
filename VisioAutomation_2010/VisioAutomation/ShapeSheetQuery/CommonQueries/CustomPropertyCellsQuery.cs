@@ -5,16 +5,16 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     public class CustomPropertyCellsQuery : CellQuery
     {
-        public SubQueryCellColumn SortKey { get; set; }
-        public SubQueryCellColumn Ask { get; set; }
-        public SubQueryCellColumn Calendar { get; set; }
-        public SubQueryCellColumn Format { get; set; }
-        public SubQueryCellColumn Invis { get; set; }
-        public SubQueryCellColumn Label { get; set; }
-        public SubQueryCellColumn LangID { get; set; }
-        public SubQueryCellColumn Prompt { get; set; }
-        public SubQueryCellColumn Value { get; set; }
-        public SubQueryCellColumn Type { get; set; }
+        public ColumnCellIndex SortKey { get; set; }
+        public ColumnCellIndex Ask { get; set; }
+        public ColumnCellIndex Calendar { get; set; }
+        public ColumnCellIndex Format { get; set; }
+        public ColumnCellIndex Invis { get; set; }
+        public ColumnCellIndex Label { get; set; }
+        public ColumnCellIndex LangID { get; set; }
+        public ColumnCellIndex Prompt { get; set; }
+        public ColumnCellIndex Value { get; set; }
+        public ColumnCellIndex Type { get; set; }
 
         public CustomPropertyCellsQuery()
         {

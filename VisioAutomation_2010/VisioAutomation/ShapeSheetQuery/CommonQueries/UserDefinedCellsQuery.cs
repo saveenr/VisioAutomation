@@ -5,8 +5,8 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class UserDefinedCellsQuery : CellQuery
     {
-        public SubQueryCellColumn Value { get; set; }
-        public SubQueryCellColumn Prompt { get; set; }
+        public ColumnCellIndex Value { get; set; }
+        public ColumnCellIndex Prompt { get; set; }
 
         public UserDefinedCellsQuery()
         {

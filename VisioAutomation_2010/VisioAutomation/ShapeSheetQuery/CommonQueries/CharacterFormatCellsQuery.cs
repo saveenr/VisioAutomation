@@ -5,28 +5,28 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class CharacterFormatCellsQuery : CellQuery
     {
-        public SubQueryCellColumn Font { get; set; }
-        public SubQueryCellColumn Style { get; set; }
-        public SubQueryCellColumn Color { get; set; }
-        public SubQueryCellColumn Size { get; set; }
-        public SubQueryCellColumn Trans { get; set; }
-        public SubQueryCellColumn AsianFont { get; set; }
-        public SubQueryCellColumn Case { get; set; }
-        public SubQueryCellColumn ComplexScriptFont { get; set; }
-        public SubQueryCellColumn ComplexScriptSize { get; set; }
-        public SubQueryCellColumn DoubleStrikethrough { get; set; }
-        public SubQueryCellColumn DoubleUnderline { get; set; }
-        public SubQueryCellColumn LangID { get; set; }
-        public SubQueryCellColumn Locale { get; set; }
-        public SubQueryCellColumn LocalizeFont { get; set; }
-        public SubQueryCellColumn Overline { get; set; }
-        public SubQueryCellColumn Perpendicular { get; set; }
-        public SubQueryCellColumn Pos { get; set; }
-        public SubQueryCellColumn RTLText { get; set; }
-        public SubQueryCellColumn FontScale { get; set; }
-        public SubQueryCellColumn Letterspace { get; set; }
-        public SubQueryCellColumn Strikethru { get; set; }
-        public SubQueryCellColumn UseVertical { get; set; }
+        public ColumnCellIndex Font { get; set; }
+        public ColumnCellIndex Style { get; set; }
+        public ColumnCellIndex Color { get; set; }
+        public ColumnCellIndex Size { get; set; }
+        public ColumnCellIndex Trans { get; set; }
+        public ColumnCellIndex AsianFont { get; set; }
+        public ColumnCellIndex Case { get; set; }
+        public ColumnCellIndex ComplexScriptFont { get; set; }
+        public ColumnCellIndex ComplexScriptSize { get; set; }
+        public ColumnCellIndex DoubleStrikethrough { get; set; }
+        public ColumnCellIndex DoubleUnderline { get; set; }
+        public ColumnCellIndex LangID { get; set; }
+        public ColumnCellIndex Locale { get; set; }
+        public ColumnCellIndex LocalizeFont { get; set; }
+        public ColumnCellIndex Overline { get; set; }
+        public ColumnCellIndex Perpendicular { get; set; }
+        public ColumnCellIndex Pos { get; set; }
+        public ColumnCellIndex RTLText { get; set; }
+        public ColumnCellIndex FontScale { get; set; }
+        public ColumnCellIndex Letterspace { get; set; }
+        public ColumnCellIndex Strikethru { get; set; }
+        public ColumnCellIndex UseVertical { get; set; }
 
         public CharacterFormatCellsQuery()
         {

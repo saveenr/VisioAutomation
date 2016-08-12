@@ -239,7 +239,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             for (int row = 0; row < rr.Count; row++)
             {
-                for (int col = 0; col < query.CellColumns.Count; col++)
+                for (int col = 0; col < query.Cells.Count; col++)
                 {
                     Assert.AreEqual(expected_formulas[row,col], rf[row].Cells[col]);
                     Assert.AreEqual(expected_results[row,col], rr[row].Cells[col]);
@@ -291,7 +291,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             for (int row = 0; row < rr.Count; row++)
             {
-                for (int col = 0; col < query.CellColumns.Count; col++)
+                for (int col = 0; col < query.Cells.Count; col++)
                 {
                     Assert.AreEqual(expected_formulas[row, col], rf[row].Cells[col]);
                     Assert.AreEqual(expected_results[row, col], rr[row].Cells[col]);

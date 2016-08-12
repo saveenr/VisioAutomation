@@ -4,31 +4,31 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class ShapeFormatCellsQuery : CellQuery
     {
-        public CellColumn FillBkgnd { get; set; }
-        public CellColumn FillBkgndTrans { get; set; }
-        public CellColumn FillForegnd { get; set; }
-        public CellColumn FillForegndTrans { get; set; }
-        public CellColumn FillPattern { get; set; }
-        public CellColumn ShapeShdwObliqueAngle { get; set; }
-        public CellColumn ShapeShdwOffsetX { get; set; }
-        public CellColumn ShapeShdwOffsetY { get; set; }
-        public CellColumn ShapeShdwScaleFactor { get; set; }
-        public CellColumn ShapeShdwType { get; set; }
-        public CellColumn ShdwBkgnd { get; set; }
-        public CellColumn ShdwBkgndTrans { get; set; }
-        public CellColumn ShdwForegnd { get; set; }
-        public CellColumn ShdwForegndTrans { get; set; }
-        public CellColumn ShdwPattern { get; set; }
-        public CellColumn BeginArrow { get; set; }
-        public CellColumn BeginArrowSize { get; set; }
-        public CellColumn EndArrow { get; set; }
-        public CellColumn EndArrowSize { get; set; }
-        public CellColumn LineColor { get; set; }
-        public CellColumn LineCap { get; set; }
-        public CellColumn LineColorTrans { get; set; }
-        public CellColumn LinePattern { get; set; }
-        public CellColumn LineWeight { get; set; }
-        public CellColumn Rounding { get; set; }
+        public ColumnSRC FillBkgnd { get; set; }
+        public ColumnSRC FillBkgndTrans { get; set; }
+        public ColumnSRC FillForegnd { get; set; }
+        public ColumnSRC FillForegndTrans { get; set; }
+        public ColumnSRC FillPattern { get; set; }
+        public ColumnSRC ShapeShdwObliqueAngle { get; set; }
+        public ColumnSRC ShapeShdwOffsetX { get; set; }
+        public ColumnSRC ShapeShdwOffsetY { get; set; }
+        public ColumnSRC ShapeShdwScaleFactor { get; set; }
+        public ColumnSRC ShapeShdwType { get; set; }
+        public ColumnSRC ShdwBkgnd { get; set; }
+        public ColumnSRC ShdwBkgndTrans { get; set; }
+        public ColumnSRC ShdwForegnd { get; set; }
+        public ColumnSRC ShdwForegndTrans { get; set; }
+        public ColumnSRC ShdwPattern { get; set; }
+        public ColumnSRC BeginArrow { get; set; }
+        public ColumnSRC BeginArrowSize { get; set; }
+        public ColumnSRC EndArrow { get; set; }
+        public ColumnSRC EndArrowSize { get; set; }
+        public ColumnSRC LineColor { get; set; }
+        public ColumnSRC LineCap { get; set; }
+        public ColumnSRC LineColorTrans { get; set; }
+        public ColumnSRC LinePattern { get; set; }
+        public ColumnSRC LineWeight { get; set; }
+        public ColumnSRC Rounding { get; set; }
 
         public ShapeFormatCellsQuery()
         {
