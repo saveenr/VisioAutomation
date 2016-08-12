@@ -296,7 +296,7 @@ namespace VisioAutomation.ShapeSheetQuery
                     {
                         foreach (var col in section.SectionSubQuery.CellColumns)
                         {
-                            stream_builder.Add((short)section.SectionSubQuery.SectionIndex, (short)rowindex, col.SRC.Cell);
+                            stream_builder.Add((short)section.SectionSubQuery.SectionIndex, (short)rowindex, col.CellIndex);
                         }
                     }
                 }
@@ -344,7 +344,7 @@ namespace VisioAutomation.ShapeSheetQuery
                                     (short)shapeid,
                                     (short)section.SectionSubQuery.SectionIndex,
                                     (short)rowindex,
-                                    col.SRC.Cell);
+                                    col.CellIndex);
                             }
                         }
                     }

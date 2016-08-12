@@ -7,7 +7,6 @@ namespace VisioAutomation.ShapeSheetQuery
         private readonly IList<CellColumn> _items;
         private readonly Dictionary<string, CellColumn> _dic_columns;
         private HashSet<ShapeSheet.SRC> _src_set;
-        private HashSet<short> _cellindex_set;
         private CellColumnType _coltype;
 
         internal CellColumnList() :
@@ -75,12 +74,92 @@ namespace VisioAutomation.ShapeSheetQuery
             return col;
         }
 
-        public CellColumn Add(short cell)
+        private string fixup_name(string name)
         {
-            return this.Add(cell, null);
+            if (string.IsNullOrEmpty(name))
+            {
+                name = string.Format("Col{0}", this._items.Count);
+            }
+            return name;
         }
 
-        public CellColumn Add(short cell, string name)
+        public int Count => this._items.Count;
+    }
+
+    public class SubQueryCellColumnList : IEnumerable<SubQueryCellColumn>
+    {
+        private readonly IList<SubQueryCellColumn> _items;
+        private readonly Dictionary<string, SubQueryCellColumn> _dic_columns;
+        private HashSet<ShapeSheet.SRC> _src_set;
+        private HashSet<short> _cellindex_set;
+        private CellColumnType _coltype;
+
+        internal SubQueryCellColumnList() :
+            this(0)
+        {
+        }
+
+        internal SubQueryCellColumnList(int capacity)
+        {
+            this._items = new List<SubQueryCellColumn>(capacity);
+            this._dic_columns = new Dictionary<string, SubQueryCellColumn>(capacity);
+            this._coltype = CellColumnType.Unknown;
+        }
+
+        public IEnumerator<SubQueryCellColumn> GetEnumerator()
+        {
+            return (this._items).GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        public SubQueryCellColumn this[int index] => this._items[index];
+
+        public SubQueryCellColumn this[string name] => this._dic_columns[name];
+
+        public bool Contains(string name) => this._dic_columns.ContainsKey(name);
+
+        internal SubQueryCellColumn Add(ShapeSheet.SRC src) => this.Add(src, null);
+
+        internal SubQueryCellColumn Add(ShapeSheet.SRC src, string name)
+        {
+            if (this._coltype == CellColumnType.CellOnly)
+            {
+                throw new AutomationException("Can't add an SRC if Columns contains CellIndexes");
+            }
+            this._coltype = CellColumnType.SectionRowCell;
+
+            name = this.fixup_name(name);
+
+            if (this._dic_columns.ContainsKey(name))
+            {
+                throw new AutomationException("Duplicate Column Name");
+            }
+
+            if (this._src_set == null)
+            {
+                this._src_set = new HashSet<ShapeSheet.SRC>();
+            }
+
+            if (this._src_set.Contains(src))
+            {
+                string msg = "Duplicate SRC";
+                throw new AutomationException(msg);
+            }
+
+            int ordinal = this._items.Count;
+            var col = new SubQueryCellColumn(ordinal, src.Cell, name);
+            this._items.Add(col);
+
+            this._dic_columns[name] = col;
+            this._src_set.Add(src);
+            return col;
+        }
+
+        public SubQueryCellColumn Add(short cell, string name)
         {
             if (this._coltype == CellColumnType.SectionRowCell)
             {
@@ -102,7 +181,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
             name = this.fixup_name(name);
             int ordinal = this._items.Count;
-            var col = new CellColumn(ordinal, cell, name);
+            var col = new SubQueryCellColumn(ordinal, cell, name);
             this._items.Add(col);
             this._cellindex_set.Add(cell);
             return col;
@@ -119,4 +198,5 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public int Count => this._items.Count;
     }
+
 }
