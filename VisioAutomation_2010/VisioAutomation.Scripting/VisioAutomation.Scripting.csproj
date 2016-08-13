@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utilities\StringBuilderExtensions.cs" />
     <Compile Include="Utilities\ArrangeHelper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Commands\Command.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Commands\MasterCommands.cs" />
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\PageCommands.cs" />
-    <Compile Include="Commands\ReflectionUtil.cs" />
+    <Compile Include="Utilities\ReflectionUtil.cs" />
     <Compile Include="Commands\SelectionCommands.cs" />
     <Compile Include="Commands\ShapeSheetCommands.cs" />
     <Compile Include="Commands\TextCommands.cs" />
