@@ -1,4 +1,5 @@
-﻿using VACONNECT = VisioAutomation.Shapes.Connections;
+﻿using VisioAutomation.Shapes.Connectors;
+using VACONNECT = VisioAutomation.Shapes.Connections;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
@@ -7,7 +8,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         public Shape From { get; set; }
         public Shape To { get; set; }
 
-        public VACONNECT.ConnectorType ConnectorType { get; set; }
+        public ConnectorType ConnectorType { get; set; }
 	 
         public System.Collections.Generic.List<DOM.Hyperlink> Hyperlinks { get; set; }
         public string StencilName { get; set; }
@@ -15,7 +16,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         public Connector(Shape from, Shape to)
         {
-            this.ConnectorType = VACONNECT.ConnectorType.Curved;
+            this.ConnectorType = ConnectorType.Curved;
             this.From = from;
             this.To = to;
         }

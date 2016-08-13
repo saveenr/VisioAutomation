@@ -5,6 +5,7 @@ using VisioAutomation.Models.Layouts.DirectedGraph;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VisioAutomation.Masters;
+using VisioAutomation.Shapes.Connectors;
 using MSAGL = Microsoft.Msagl;
 using VA = VisioAutomation;
 
@@ -493,19 +494,19 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             return bez_shape;
         }
 
-        private IVisio.VisCellVals ConnectorTypeToCellVal_Appearance(Shapes.Connections.ConnectorType ct)
+        private IVisio.VisCellVals ConnectorTypeToCellVal_Appearance(ConnectorType ct)
         {
             switch (ct)
             {
-                case (Shapes.Connections.ConnectorType.Curved):
+                case (ConnectorType.Curved):
                     {
                         return IVisio.VisCellVals.visLORouteExtNURBS;
                     }
-                case (Shapes.Connections.ConnectorType.Straight):
+                case (ConnectorType.Straight):
                     {
                         return IVisio.VisCellVals.visLORouteExtStraight;
                     }
-                case (Shapes.Connections.ConnectorType.RightAngle):
+                case (ConnectorType.RightAngle):
                     {
                         return IVisio.VisCellVals.visLORouteExtStraight;
                     }
@@ -516,19 +517,19 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        private IVisio.VisCellVals ConnectorTypeToCellVal_Style(Shapes.Connections.ConnectorType ct)
+        private IVisio.VisCellVals ConnectorTypeToCellVal_Style(ConnectorType ct)
         {
             switch (ct)
             {
-                case (Shapes.Connections.ConnectorType.Curved):
+                case (ConnectorType.Curved):
                     {
                         return IVisio.VisCellVals.visLORouteRightAngle;
                     }
-                case (Shapes.Connections.ConnectorType.Straight):
+                case (ConnectorType.Straight):
                     {
                         return IVisio.VisCellVals.visLORouteCenterToCenter;
                     }
-                case (Shapes.Connections.ConnectorType.RightAngle):
+                case (ConnectorType.RightAngle):
                     {
                         return IVisio.VisCellVals.visLORouteFlowchartNS;
                     }

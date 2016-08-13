@@ -7,6 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Collections;
 using VisioAutomation.Masters;
+using VisioAutomation.Shapes.Connectors;
 
 namespace VisioAutomation.DOM
 {
@@ -391,7 +392,7 @@ namespace VisioAutomation.DOM
                 var from_shape = context.GetShape(dyncon_shape.From.VisioShapeID);
                 var to_shape = context.GetShape(dyncon_shape.To.VisioShapeID);
 
-                VACONNECT.ConnectionHelper.ConnectShapes(from_shape, to_shape, vis_connector);
+                ConnectorHelper.ConnectShapes(from_shape, to_shape, vis_connector);
                 dyncon_shape.VisioShape = vis_connector;
                 dyncon_shape.VisioShapeID = connector_shapeids[i];
             }

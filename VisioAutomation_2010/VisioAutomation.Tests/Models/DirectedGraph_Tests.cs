@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Shapes.Connectors;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -96,12 +97,12 @@ namespace VisioAutomation_Tests.Models.Layouts
             var n3 = d.AddShape("n3", "Node 3", basic_stencil, "Rectangle");
             var n4 = d.AddShape("n4", "Node 4\nUnconnected", basic_stencil, "Rectangle");
 
-            var c0 = d.AddConnection("c0", n0, n1, "0 -> 1", VACONNECT.ConnectorType.Curved);
-            var c1 = d.AddConnection("c1", n1, n2, "1 -> 2", VACONNECT.ConnectorType.RightAngle);
-            var c2 = d.AddConnection("c2", n1, n0, "0 -> 1", VACONNECT.ConnectorType.Curved);
-            var c3 = d.AddConnection("c3", n0, n2, "0 -> 2", VACONNECT.ConnectorType.Straight);
-            var c4 = d.AddConnection("c4", n2, n3, "2 -> 3", VACONNECT.ConnectorType.Curved);
-            var c5 = d.AddConnection("c5", n3, n0, "3 -> 0", VACONNECT.ConnectorType.Curved);
+            var c0 = d.AddConnection("c0", n0, n1, "0 -> 1", ConnectorType.Curved);
+            var c1 = d.AddConnection("c1", n1, n2, "1 -> 2", ConnectorType.RightAngle);
+            var c2 = d.AddConnection("c2", n1, n0, "0 -> 1", ConnectorType.Curved);
+            var c3 = d.AddConnection("c3", n0, n2, "0 -> 2", ConnectorType.Straight);
+            var c4 = d.AddConnection("c4", n2, n3, "2 -> 3", ConnectorType.Curved);
+            var c5 = d.AddConnection("c5", n3, n0, "3 -> 0", ConnectorType.Curved);
 
             return d;
         }

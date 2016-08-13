@@ -106,8 +106,8 @@
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Utilities\TextHelper.cs" />
     <Compile Include="Drawing\Margin.cs" />
-    <Compile Include="Shapes\Connections\ConnectionPointType.cs" />
-    <Compile Include="Shapes\Connections\ConnectionPointHelper.cs" />
+    <Compile Include="Shapes\ConnectionPoints\ConnectionPointType.cs" />
+    <Compile Include="Shapes\ConnectionPoints\ConnectionPointHelper.cs" />
     <Compile Include="Shapes\Controls\ControlHelper.cs" />
     <Compile Include="Masters\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
@@ -159,7 +159,7 @@
     <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />
     <Compile Include="Colors\ColorHSL.cs" />
-    <Compile Include="Shapes\Connections\ConnectorType.cs" />
+    <Compile Include="Shapes\Connectors\ConnectorType.cs" />
     <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Text\CharacterCells.cs" />
@@ -182,7 +182,7 @@
     <Compile Include="Extensions\Visio\LayersMethods.cs" />
     <Compile Include="ShapeSheet\SRCConstants.cs" />
     <Compile Include="ShapeSheet\SRC.cs" />
-    <Compile Include="Shapes\Connections\ConnectionPointCells.cs" />
+    <Compile Include="Shapes\ConnectionPoints\ConnectionPointCells.cs" />
     <Compile Include="Extensions\Visio\SectionMethods.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellHelper.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCell.cs" />
@@ -193,7 +193,7 @@
     </Compile>
     <Compile Include="ShapeSheet\CellData.cs" />
     <Compile Include="ShapeSheetQuery\Query.cs" />
-    <Compile Include="Shapes\Connections\ConnectionHelper.cs" />
+    <Compile Include="Shapes\Connectors\ConnectorHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Shapes\Controls\ControlCells.cs" />
