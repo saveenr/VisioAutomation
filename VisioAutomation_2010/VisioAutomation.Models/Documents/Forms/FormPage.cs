@@ -1,4 +1,3 @@
-using System;
 using VisioAutomation.Drawing.Layout;
 using IVisio = Microsoft.Office.Interop.Visio;
 

@@ -1,4 +1,3 @@
-using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Application

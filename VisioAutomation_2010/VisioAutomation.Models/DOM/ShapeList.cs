@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Collections;
-using VisioAutomation.Masters;
-using VisioAutomation.Models;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
 

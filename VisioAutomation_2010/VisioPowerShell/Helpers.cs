@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheetQuery;
 using VisioAutomation.ShapeSheetQuery.Results;
 
 namespace VisioPowerShell

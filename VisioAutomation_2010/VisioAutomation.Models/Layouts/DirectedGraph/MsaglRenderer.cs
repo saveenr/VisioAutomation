@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Models.Layouts.DirectedGraph;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.Masters;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
 using MSAGL = Microsoft.Msagl;
