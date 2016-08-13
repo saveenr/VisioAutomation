@@ -4,7 +4,6 @@ using VisioAutomation.Extensions;
 using VisioAutomation.Shapes.Connectors;
 using VADRAW=VisioAutomation.Drawing;
 using VASS=VisioAutomation.ShapeSheet;
-using VACONNECT = VisioAutomation.Shapes.Connections;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation_Tests.DocumentAnalysis

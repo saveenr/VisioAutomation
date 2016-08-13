@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes.ConnectionPoints;
 using VisioAutomation.ShapeSheetQuery.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -24,9 +25,9 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 
         }
 
-        public Shapes.Connections.ConnectionPointCells GetCells(ShapeSheet.CellData<double>[] row)
+        public ConnectionPointCells GetCells(ShapeSheet.CellData<double>[] row)
         {
-            var cells = new Shapes.Connections.ConnectionPointCells();
+            var cells = new ConnectionPointCells();
             cells.X = row[this.X];
             cells.Y = row[this.Y];
             cells.DirX = Extensions.CellDataMethods.ToInt(row[this.DirX]);

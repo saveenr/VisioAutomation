@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VACXN = VisioAutomation.Shapes.Connections;
+using VisioAutomation.Shapes.ConnectionPoints;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -25,7 +25,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s3);
 
             var indices0 = client.ConnectionPoint.Add("0", "Width*0.67",
-                                                 VACXN.ConnectionPointType.Outward);
+                                                 ConnectionPointType.Outward);
             Assert.AreEqual(3, indices0.Count);
             Assert.AreEqual(0, indices0[0]);
             Assert.AreEqual(0, indices0[1]);

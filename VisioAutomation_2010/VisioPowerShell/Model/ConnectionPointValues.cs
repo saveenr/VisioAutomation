@@ -1,4 +1,4 @@
-using VACONNECT=VisioAutomation.Shapes.Connections;
+using VisioAutomation.Shapes.ConnectionPoints;
 
 namespace VisioPowerShell.Model
 {
@@ -11,7 +11,7 @@ namespace VisioPowerShell.Model
         public readonly string DirX;
         public readonly string DirY;
 
-        internal ConnectionPointValues(int shapeid, VACONNECT.ConnectionPointCells point)
+        internal ConnectionPointValues(int shapeid, ConnectionPointCells point)
         {
             this.ShapeID = shapeid;
             this.Type = point.Type.Formula.Value;

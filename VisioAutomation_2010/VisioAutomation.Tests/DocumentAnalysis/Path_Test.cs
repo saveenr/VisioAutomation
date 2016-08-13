@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VACONNECT = VisioAutomation.Shapes.Connections;
 
 namespace VisioAutomation_Tests.DocumentAnalysis
 {

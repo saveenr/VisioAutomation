@@ -1,5 +1,4 @@
 ﻿using VisioAutomation.Shapes.Connectors;
-using VACONNECT = VisioAutomation.Shapes.Connections;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
