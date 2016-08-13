@@ -206,7 +206,7 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow cg, short row)
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow cg, short row)
         {
             foreach (var pair in cg.Pairs)
             {
@@ -214,7 +214,7 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow cg, short row)
+        public void SetFormulas(VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow cg, short row)
         {
             foreach (var pair in cg.Pairs)
             {

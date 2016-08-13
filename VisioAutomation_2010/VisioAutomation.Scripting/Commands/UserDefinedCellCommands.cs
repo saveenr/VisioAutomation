@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this._client.Application.Get();
             var page = application.ActivePage;
-            var list_user_props = VA_UDC.UserDefinedCellsHelper.Get(page, shapes);
+            var list_user_props = VA_UDC.UserDefinedCellHelper.Get(page, shapes);
 
             for (int i = 0; i < shapes.Count; i++)
             {
@@ -57,7 +57,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var all_shapes = this._client.Selection.GetShapes();
-            var results = all_shapes.Select(s => VA_UDC.UserDefinedCellsHelper.Contains(s, name)).ToList();
+            var results = all_shapes.Select(s => VA_UDC.UserDefinedCellHelper.Contains(s, name)).ToList();
 
             return results;
         }
@@ -88,7 +88,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    VA_UDC.UserDefinedCellsHelper.Delete(shape, name);
+                    VA_UDC.UserDefinedCellHelper.Delete(shape, name);
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    VA_UDC.UserDefinedCellsHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Formula.Value, userdefinedcell.Prompt.Formula.Value);
+                    VA_UDC.UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Formula.Value, userdefinedcell.Prompt.Formula.Value);
                 }
             }
         }

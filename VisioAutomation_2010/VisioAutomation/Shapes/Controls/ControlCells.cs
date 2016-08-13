@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Controls
 {
-    public class ControlCells : ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow
+    public class ControlCells : ShapeSheetQuery.QueryGroups.QueryGroupMultiRow
     {
         public ShapeSheet.CellData<int> CanGlue { get; set; }
         public ShapeSheet.CellData<int> Tip { get; set; }
@@ -33,13 +33,13 @@ namespace VisioAutomation.Shapes.Controls
         public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ControlCells.lazy_query.Value;
-            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<ControlCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.QueryGroupMultiRow._GetCells<ControlCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = ControlCells.lazy_query.Value;
-            return ShapeSheetQuery.QueryGroups.CellQueryGroupMultiRow._GetCells<ControlCells, double>(shape, query, query.GetCells);
+            return ShapeSheetQuery.QueryGroups.QueryGroupMultiRow._GetCells<ControlCells, double>(shape, query, query.GetCells);
         }
 
         private static System.Lazy<ShapeSheetQuery.CommonQueries.ControlCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.ControlCellsQuery>();
