@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheetQuery.Outputs
 {
     public class SubQueryOutput<T>
     {
-        public SubQuery Column { get; internal set; }
+        public SubQuery SubQuery { get; internal set; }
         public readonly List<SubQueryOutputRow<T>> Rows;
 
         internal SubQueryOutput(int capacity)

@@ -217,7 +217,7 @@ namespace VisioAutomation.ShapeSheetQuery
                 foreach (var section in sections)
                 {
                     var section_result = new SubQueryOutput<T>(section.RowCount);
-                    section_result.Column = section.SubQuery;
+                    section_result.SubQuery = section.SubQuery;
 
                     output.Sections.Add(section_result);
 
