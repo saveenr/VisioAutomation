@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheetQuery.Results
+namespace VisioAutomation.ShapeSheetQuery.Outputs
 {
-    public class ListResult<T> : IEnumerable<Result<T>>
+    public class ListOutput<T> : IEnumerable<Output<T>>
     {
-        private readonly List<Result<T>> _items;
+        private readonly List<Output<T>> _items;
 
-        internal ListResult()
+        internal ListOutput()
         {
-            this._items = new List<Result<T>>();
+            this._items = new List<Output<T>>();
         }
 
-        public IEnumerator<Result<T>> GetEnumerator()
+        public IEnumerator<Output<T>> GetEnumerator()
         {
             return this._items.GetEnumerator();
         }
@@ -21,9 +21,9 @@ namespace VisioAutomation.ShapeSheetQuery.Results
             return this.GetEnumerator();
         }
 
-        public Result<T> this[int index] => this._items[index];
+        public Output<T> this[int index] => this._items[index];
 
-        internal void Add(Result<T> item)
+        internal void Add(Output<T> item)
         {
             this._items.Add(item);
         }

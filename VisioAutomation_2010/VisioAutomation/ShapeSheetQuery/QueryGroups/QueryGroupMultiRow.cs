@@ -1,7 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheetQuery.Results;
+using VisioAutomation.ShapeSheetQuery.Outputs;
 
 namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
@@ -58,7 +58,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             return sec_objects;
         }
 
-        private static List<T> SectionRowsToObjects<T, RT>(SubQueryResult<ShapeSheet.CellData<RT>> sec, CellsToObject<T, RT> cell_data_to_object)
+        private static List<T> SectionRowsToObjects<T, RT>(SubQueryOutput<ShapeSheet.CellData<RT>> sec, CellsToObject<T, RT> cell_data_to_object)
         {
             int num_rows = sec.Rows.Count;
             var sec_objects = new List<T>(num_rows);

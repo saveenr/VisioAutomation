@@ -1,7 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheetQuery.Results;
+using VisioAutomation.ShapeSheetQuery.Outputs;
 
 namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             verify_cell_only_query(query);
 
             var ss1 = new ShapeSheetSurface(shape);
-            Result<CellData<RT>> data_for_shape = query.GetCellData<RT>(ss1);
+            Output<CellData<RT>> data_for_shape = query.GetCellData<RT>(ss1);
             var cells = cell_data_to_object(data_for_shape.Cells);
             return cells;
         }

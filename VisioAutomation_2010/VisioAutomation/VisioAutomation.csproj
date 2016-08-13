@@ -109,7 +109,7 @@
     <Compile Include="ShapeSheetQuery\Columns\ColumnBase.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ColumnSubQuery.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnSubQuery.cs" />
-    <Compile Include="ShapeSheetQuery\Results\SubQueryResultRow.cs" />
+    <Compile Include="ShapeSheetQuery\Outputs\SubQueryOutputRow.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
@@ -156,11 +156,11 @@
     <Compile Include="ShapeSheetQuery\QueryGroups\QueryGroupSingleRow.cs" />
     <Compile Include="ShapeSheetQuery\QueryGroups\QueryGroupMultiRow.cs" />
     <Compile Include="ShapeSheetQuery\QueryGroups\QueryGroupBase.cs" />
-    <Compile Include="ShapeSheetQuery\Results\ListResult.cs" />
-    <Compile Include="ShapeSheetQuery\Results\Result.cs" />
+    <Compile Include="ShapeSheetQuery\Outputs\ListOutput.cs" />
+    <Compile Include="ShapeSheetQuery\Outputs\Output.cs" />
     <Compile Include="ShapeSheetQuery\SubQueryDetails.cs" />
     <Compile Include="ShapeSheetQuery\SubQuery.cs" />
-    <Compile Include="ShapeSheetQuery\Results\SubQueryResult.cs" />
+    <Compile Include="ShapeSheetQuery\Outputs\SubQueryOutput.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnQuery.cs" />
     <Compile Include="ShapeSheetQuery\Utilities\StreamBuilder.cs" />
     <Compile Include="ShapeSheetQuery\ListSubQuery.cs" />

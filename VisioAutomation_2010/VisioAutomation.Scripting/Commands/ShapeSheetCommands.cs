@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheetQuery.Results;
+using VisioAutomation.ShapeSheetQuery.Outputs;
 using VAQUERY = VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -61,7 +61,7 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public ListResult<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
+        public ListOutput<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -84,7 +84,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public ListResult<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
+        public ListOutput<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -109,7 +109,7 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public ListResult<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public ListOutput<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public ListResult<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public ListOutput<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
