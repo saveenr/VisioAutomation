@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Utilities
 {
-    public class MasterLoader
+    class MasterLoader
     {
         private readonly Dictionary<string, MasterRef> master_ref_dic;
 
