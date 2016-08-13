@@ -26,7 +26,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             info.Stencil = shape_el.Attribute("stencil").Value;
             info.Master = shape_el.Attribute("master").Value;
             info.Element = shape_el;
-            info.URL = XmlUtil.GetAttributeValue(shape_el, "url", null);
+            info.URL = shape_el.GetAttributeValue("url", null);
 
             info.custprops = new Dictionary<string, VACUSTPROP.CustomPropertyCells>();
             foreach (var customprop_el in shape_el.Elements("customprop"))

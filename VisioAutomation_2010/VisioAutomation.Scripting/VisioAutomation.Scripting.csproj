@@ -73,7 +73,7 @@
     <Compile Include="DirectedGraph\ConnectorInfo.cs" />
     <Compile Include="DirectedGraph\DirectedGraphBuilder.cs" />
     <Compile Include="DirectedGraph\ShapeInfo.cs" />
-    <Compile Include="DirectedGraph\XmlExtensions.cs" />
+    <Compile Include="Utilities\XmlExtensions.cs" />
     <Compile Include="FormatPaint\FormatCategory.cs" />
     <Compile Include="FormatPaint\FormatPaintCache.cs" />
     <Compile Include="FormatPaint\FormatPaintCell.cs" />
@@ -87,7 +87,6 @@
     <Compile Include="Utilities\TextCommandsUtil.cs" />
     <Compile Include="Exceptions\VisioApplicationException.cs" />
     <Compile Include="Exceptions\VisioOperationException.cs" />
-    <Compile Include="Utilities\XmlUtil.cs" />
     <Compile Include="View\Zoom.cs" />
   </ItemGroup>
   <ItemGroup>
