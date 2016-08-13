@@ -94,7 +94,7 @@ namespace VisioAutomation.Scripting.Commands
                     {
                         continue;
                     }
-                    shape.Text = TextCommandsUtil.toggle_case(t);
+                    shape.Text = TextHelper.toggle_case(t);
                 }
 
                 // Now restore all the formatting - based on any initial formatting from the text
@@ -211,7 +211,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("SetTextWrapping"))
             {
                 var active_page = application.ActivePage;
-                TextCommandsUtil.set_text_wrapping(active_page, shapeids, wrap);
+                TextHelper.set_text_wrapping(active_page, shapeids, wrap);
             }
         }
 

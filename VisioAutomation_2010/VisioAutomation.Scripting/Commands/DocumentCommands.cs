@@ -290,7 +290,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // get the named document
-            var docs2 = TextHelper.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, TextHelper.FilterAction.Include).ToList();
+            var docs2 = WildcardHelper.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, WildcardHelper.FilterAction.Include).ToList();
             return docs2;
         }
     }

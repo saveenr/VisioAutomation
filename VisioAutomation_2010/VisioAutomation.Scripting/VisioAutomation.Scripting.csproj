@@ -62,7 +62,7 @@
     <Compile Include="Commands\MasterCommands.cs" />
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\PageCommands.cs" />
-    <Compile Include="Utilities\ReflectionUtil.cs" />
+    <Compile Include="Utilities\ReflectionHelper.cs" />
     <Compile Include="Commands\SelectionCommands.cs" />
     <Compile Include="Commands\ShapeSheetCommands.cs" />
     <Compile Include="Commands\TextCommands.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="DirectedGraph\ConnectorInfo.cs" />
     <Compile Include="DirectedGraph\DirectedGraphBuilder.cs" />
     <Compile Include="DirectedGraph\ShapeInfo.cs" />
-    <Compile Include="Utilities\XmlExtensions.cs" />
+    <Compile Include="Utilities\XmlLinqExtensions.cs" />
     <Compile Include="FormatPaint\FormatCategory.cs" />
     <Compile Include="FormatPaint\FormatPaintCache.cs" />
     <Compile Include="FormatPaint\FormatPaintCell.cs" />
@@ -84,13 +84,10 @@
     <Compile Include="ShapeSheetUpdate.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Utilities\SnappingGrid.cs" />
-    <Compile Include="Utilities\TextCommandsUtil.cs" />
+    <Compile Include="Utilities\TextHelper.cs" />
     <Compile Include="Exceptions\VisioApplicationException.cs" />
     <Compile Include="Exceptions\VisioOperationException.cs" />
     <Compile Include="View\Zoom.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Documents\DirectGraphSchema.vsd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">

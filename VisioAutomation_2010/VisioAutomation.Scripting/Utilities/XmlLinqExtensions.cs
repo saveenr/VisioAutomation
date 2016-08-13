@@ -3,7 +3,7 @@ using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.Utilities
 {
-    static class XmlExtensions
+    static class XmlLinqExtensions
     {
         public static ColorRGB AttributeAsColor(this SXL.XElement el, string name,
             ColorRGB def)
@@ -13,7 +13,7 @@ namespace VisioAutomation.Scripting.Utilities
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)
         {
-            return el.GetAttributeValue(name, def, s => XmlExtensions.PointsToInches(double.Parse(s)));
+            return el.GetAttributeValue(name, def, s => XmlLinqExtensions.PointsToInches(double.Parse(s)));
         }
 
         private static double PointsToInches(double points)

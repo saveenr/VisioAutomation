@@ -119,7 +119,7 @@
     <Compile Include="Styles\StyleHelper.cs" />
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
-    <Compile Include="Utilities\TextHelper.cs" />
+    <Compile Include="Utilities\WildcardHelper.cs" />
     <Compile Include="Drawing\Layout\Margin.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointType.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointHelper.cs" />

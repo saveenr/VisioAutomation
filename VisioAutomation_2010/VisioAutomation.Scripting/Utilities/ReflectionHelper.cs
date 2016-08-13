@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace VisioAutomation.Scripting.Utilities
 {
-    internal class ReflectionUtil
+    internal class ReflectionHelper
     {
         public static string GetTypeCategoryDisplayString(TypeCategory type)
         {
@@ -38,8 +38,8 @@ namespace VisioAutomation.Scripting.Utilities
         
         public static string GetTypeCategoryDisplayString(System.Type type)
         {
-            var cat = ReflectionUtil.GetTypeCategory(type);
-            return ReflectionUtil.GetTypeCategoryDisplayString(cat);
+            var cat = ReflectionHelper.GetTypeCategory(type);
+            return ReflectionHelper.GetTypeCategoryDisplayString(cat);
         }
 
         private static bool TypeIsStruct(System.Type type)
@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting.Utilities
         {
             if (type.IsClass)
             {
-                if (ReflectionUtil.TypeIsStaticClass(type))
+                if (ReflectionHelper.TypeIsStaticClass(type))
                 {
                     return TypeCategory.StaticClass;
                 }
@@ -85,7 +85,7 @@ namespace VisioAutomation.Scripting.Utilities
             {
                 return TypeCategory.Interface;
             }
-            else if (ReflectionUtil.TypeIsStruct(type))
+            else if (ReflectionHelper.TypeIsStruct(type))
             {
                 return TypeCategory.Struct;
             }
@@ -176,8 +176,8 @@ namespace VisioAutomation.Scripting.Utilities
         public static string GetNiceTypeName(System.Type type)
         {
             var options = new NamingOptions();
-            options.NameOverrideFunc = ReflectionUtil.GetCSharpTypeAlias;
-            return ReflectionUtil.GetNiceTypeName(type, options);
+            options.NameOverrideFunc = ReflectionHelper.GetCSharpTypeAlias;
+            return ReflectionHelper.GetNiceTypeName(type, options);
         }
 
         public static string GetNiceTypeName(System.Type type, NamingOptions options)
@@ -191,16 +191,16 @@ namespace VisioAutomation.Scripting.Utilities
                 }
             }
 
-            if (ReflectionUtil.IsNullableType(type))
+            if (ReflectionHelper.IsNullableType(type))
             {
                 var actualtype = type.GetGenericArguments()[0];
-                return ReflectionUtil.GetNiceTypeName(actualtype, options) + "?";
+                return ReflectionHelper.GetNiceTypeName(actualtype, options) + "?";
             }
 
             if (type.IsArray)
             {
                 var at = type.GetElementType();
-                return string.Format("{0}[]", ReflectionUtil.GetNiceTypeName(at, options));
+                return string.Format("{0}[]", ReflectionHelper.GetNiceTypeName(at, options));
             }
 
             if (type.IsGenericType)
@@ -210,7 +210,7 @@ namespace VisioAutomation.Scripting.Utilities
 
                 sb.Append(tokens[0]);
                 var gas = type.GetGenericArguments();
-                var ga_names = gas.Select(i => ReflectionUtil.GetNiceTypeName(i, options));
+                var ga_names = gas.Select(i => ReflectionHelper.GetNiceTypeName(i, options));
 
                 sb.Append("<");
                 sb.AppendJoin(", ", ga_names);

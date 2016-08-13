@@ -61,14 +61,14 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     sb.Length = 0;
                     var method_params = command.MethodInfo.GetParameters();
-                    TextCommandsUtil.Join(sb, ", ", method_params.Select(param =>
-                        string.Format("{0} {1}", ReflectionUtil.GetNiceTypeName(param.ParameterType), param.Name)));
+                    TextHelper.Join(sb, ", ", method_params.Select(param =>
+                        string.Format("{0} {1}", ReflectionHelper.GetNiceTypeName(param.ParameterType), param.Name)));
 
                     if (command.MethodInfo.ReturnType != typeof(void))
                     {
                         string line =
                             string.Format("{0}({1}) -> {2}", command.MethodInfo.Name, sb,
-                                ReflectionUtil.GetNiceTypeName(command.MethodInfo.ReturnType));
+                                ReflectionHelper.GetNiceTypeName(command.MethodInfo.ReturnType));
                         lines.Add(line);
                     }
                     else
@@ -81,7 +81,7 @@ namespace VisioAutomation.Scripting.Commands
                 lines.Sort();
                 
                 helpstr.Length = 0;
-                TextCommandsUtil.Join(helpstr,"\r\n",lines);
+                TextHelper.Join(helpstr,"\r\n",lines);
 
                 var formpage = new Models.Documents.Forms.FormPage();
                 formpage.Title = cmdset_prop.Name + " commands";
@@ -357,14 +357,14 @@ namespace VisioAutomation.Scripting.Commands
         private class TypeInfo
         {
             public readonly Type Type;
-            public ReflectionUtil.TypeCategory TypeCategory ;
+            public ReflectionHelper.TypeCategory TypeCategory ;
             public readonly string Label;
 
             public TypeInfo(Type type)
             {
                 this.Type = type;
-                this.TypeCategory = ReflectionUtil.GetTypeCategory(type);
-                this.Label = ReflectionUtil.GetTypeCategoryDisplayString(type) + " " + ReflectionUtil.GetNiceTypeName(type);
+                this.TypeCategory = ReflectionHelper.GetTypeCategory(type);
+                this.Label = ReflectionHelper.GetTypeCategoryDisplayString(type) + " " + ReflectionHelper.GetNiceTypeName(type);
 
             }
         }

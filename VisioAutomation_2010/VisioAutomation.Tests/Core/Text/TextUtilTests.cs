@@ -8,7 +8,7 @@ namespace VisioAutomation_Tests.Core.Text
     {
         public bool Match(string pat, string text)
         {
-            var regex = TextHelper.GetRegexForWildcardPattern(pat,true);
+            var regex = WildcardHelper.GetRegexForWildcardPattern(pat,true);
             return regex.IsMatch(text);
         }
 

@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Utilities
 {
-    internal static class TextCommandsUtil
+    internal static class TextHelper
     {
         internal static string toggle_case(string input_string)
         {
@@ -24,7 +23,7 @@ namespace VisioAutomation.Scripting.Utilities
             }
             else if (input_string == t_lower)
             {
-                var cultureInfo = Thread.CurrentThread.CurrentCulture;
+                var cultureInfo = System.Globalization.CultureInfo.CurrentCulture;
                 var textInfo = cultureInfo.TextInfo;
                 var t_case = textInfo.ToTitleCase(input_string);
 

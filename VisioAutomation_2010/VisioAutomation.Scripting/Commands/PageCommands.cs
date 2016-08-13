@@ -545,7 +545,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // otherwise we start checking for each name
-            var shapes_list = TextHelper.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, TextHelper.FilterAction.Include).ToList();
+            var shapes_list = WildcardHelper.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, WildcardHelper.FilterAction.Include).ToList();
 
             return shapes_list;
         }
@@ -564,7 +564,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 // return the named page
                 var pages = active_document.Pages.ToEnumerable();
-                var pages2= TextHelper.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, TextHelper.FilterAction.Include).ToList();
+                var pages2= WildcardHelper.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, WildcardHelper.FilterAction.Include).ToList();
                 return pages2;
             }
         }
