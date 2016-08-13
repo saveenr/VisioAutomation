@@ -8,6 +8,7 @@ using VisioAutomation.Extensions;
 using System.Collections;
 using VisioAutomation.Masters;
 using VisioAutomation.Models;
+using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
 
 namespace VisioAutomation.DOM

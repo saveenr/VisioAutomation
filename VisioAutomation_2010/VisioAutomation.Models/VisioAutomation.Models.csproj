@@ -114,7 +114,7 @@
     <Compile Include="Layouts\InternalTree\Node.cs" />
     <Compile Include="Layouts\InternalTree\TreeLayout.cs" />
     <Compile Include="Layouts\InternalTree\TreeLayoutOptions.cs" />
-    <Compile Include="MasterLoader.cs" />
+    <Compile Include="Utilities\MasterLoader.cs" />
     <Compile Include="Text\CharacterFormatting.cs" />
     <Compile Include="Text\CustomField.cs" />
     <Compile Include="Text\Field.cs" />
