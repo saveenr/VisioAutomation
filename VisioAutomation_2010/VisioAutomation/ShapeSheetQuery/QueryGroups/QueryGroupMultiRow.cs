@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             IVisio.Page page,
             IList<int> shapeids,
             Query query,
-            CellsToObject<T, TResult> cell_data_to_object)
+            System.Func<ShapeSheet.CellData<TResult>[], T> cell_data_to_object)
         {
             QueryGroupMultiRow.verify_single_section_query(query);
 
@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         public static IList<T> _GetCells<T, TResult>(
             IVisio.Shape shape,
             Query query,
-            CellsToObject<T, TResult> cell_data_to_object)
+            System.Func<ShapeSheet.CellData<TResult>[], T> cell_data_to_object)
         {
             QueryGroupMultiRow.verify_single_section_query(query);
 
@@ -58,7 +58,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             return sec_objects;
         }
 
-        private static List<T> SectionRowsToObjects<T, TResult>(SubQueryOutput<ShapeSheet.CellData<TResult>> sec, CellsToObject<T, TResult> cells_to_object)
+        private static List<T> SectionRowsToObjects<T, TResult>(SubQueryOutput<ShapeSheet.CellData<TResult>> sec, System.Func<ShapeSheet.CellData<TResult>[],T> cells_to_object)
         {
             int num_rows = sec.Rows.Count;
             var sec_objects = new List<T>(num_rows);
