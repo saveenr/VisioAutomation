@@ -4,9 +4,9 @@ namespace VisioAutomation.ShapeSheetQuery.Outputs
     {
         public readonly T[] Cells;
 
-        internal SubQueryOutputRow(T[] c)
+        internal SubQueryOutputRow(T[] cells)
         {
-            this.Cells = c;
+            this.Cells = cells;
         }
     }
 }
