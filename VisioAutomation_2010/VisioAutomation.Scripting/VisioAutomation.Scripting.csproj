@@ -82,6 +82,7 @@
     <Compile Include="RelativePosition.cs" />
     <Compile Include="ShapeSheetUpdate.cs" />
     <Compile Include="SnapCornerPosition.cs" />
+    <Compile Include="SnappingGrid.cs" />
     <Compile Include="TextCommandsUtil.cs" />
     <Compile Include="VisioApplicationException.cs" />
     <Compile Include="VisioOperationException.cs" />

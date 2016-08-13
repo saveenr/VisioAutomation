@@ -129,7 +129,7 @@ namespace VisioAutomation.Scripting
         public static void SnapCorner(IVisio.Page page, IList<int> shapeids, Drawing.Size snapsize, SnapCornerPosition corner)
         {
             // First caculate the new transforms
-            var snap_grid = new Drawing.SnappingGrid(snapsize);
+            var snap_grid = new SnappingGrid(snapsize);
             var input_xfrms = Shapes.XFormCells.GetCells(page, shapeids);
             var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
 
@@ -202,7 +202,7 @@ namespace VisioAutomation.Scripting
             var input_xfrms = Shapes.XFormCells.GetCells(page, shapeids);
             var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
 
-            var grid = new Drawing.SnappingGrid(snapsize);
+            var grid = new SnappingGrid(snapsize);
             foreach (var input_xfrm in input_xfrms)
             {
                 // First snap the size to the grid

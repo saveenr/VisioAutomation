@@ -177,7 +177,7 @@ namespace VisioAutomation.Scripting.Commands
             var input_xfrms = Shapes.XFormCells.GetCells(page, shapeids);
             var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
 
-            var grid = new Drawing.SnappingGrid(snapsize);
+            var grid = new SnappingGrid(snapsize);
             foreach (var input_xfrm in input_xfrms)
             {
                 var inut_size = new Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result);

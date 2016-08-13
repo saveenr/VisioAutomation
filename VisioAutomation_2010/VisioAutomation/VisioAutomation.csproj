@@ -173,7 +173,6 @@
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
     <Compile Include="Colors\ColorRGB.cs" />
-    <Compile Include="Drawing\SnappingGrid.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="ShapeSheet\SIDSRC.cs" />

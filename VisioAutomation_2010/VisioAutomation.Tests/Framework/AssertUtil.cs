@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Scripting;
 using VADRAW = VisioAutomation.Drawing;
 using VASS = VisioAutomation.ShapeSheet;
 
@@ -32,7 +33,7 @@ namespace VisioAutomation_Tests
             Assert.AreEqual(height, actual_size.Height, delta);
         }
 
-        public static void AssertSnap(double ex, double ey, VADRAW.SnappingGrid g1, double ix, double iy, double delta)
+        public static void AssertSnap(double ex, double ey, SnappingGrid g1, double ix, double iy, double delta)
         {
             AssertUtil.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
         }

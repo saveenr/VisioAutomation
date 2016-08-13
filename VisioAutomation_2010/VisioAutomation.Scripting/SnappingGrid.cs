@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.Drawing
+﻿using VisioAutomation.Drawing;
+
+namespace VisioAutomation.Scripting
 {
     public class SnappingGrid
     {
