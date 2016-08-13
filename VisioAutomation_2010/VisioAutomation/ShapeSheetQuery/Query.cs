@@ -144,30 +144,30 @@ namespace VisioAutomation.ShapeSheetQuery
             return list;
         }
 
-        public ListOutput<T> GetResults<T>(ShapeSheetSurface surface, IList<int> shapeids)
+        public ListOutput<TResult> GetResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
-            var values = surface.GetResults_SIDSRC<T>(srcstream, unitcodes);
+            var values = surface.GetResults_SIDSRC<TResult>(srcstream, unitcodes);
             var list = this.GetOutputsForShapes(shapeids, values);
             return list;
         }
 
-        public ListOutput<ShapeSheet.CellData<T>> GetFormulasAndResults<T>(ShapeSheetSurface surface, IList<int> shapeids)
+        public ListOutput<ShapeSheet.CellData<TResult>> GetFormulasAndResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
 
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
-            T[] results = surface.GetResults_SIDSRC<T>(srcstream, unitcodes);
+            TResult[] results = surface.GetResults_SIDSRC<TResult>(srcstream, unitcodes);
             string[] formulas  = surface.GetFormulasU_SIDSRC(srcstream);
 
             // Merge the results and formulas
-            var combined_data = new ShapeSheet.CellData<T>[results.Length];
+            var combined_data = new ShapeSheet.CellData<TResult>[results.Length];
             for (int i = 0; i < results.Length; i++)
             {
-                combined_data[i] = new ShapeSheet.CellData<T>(formulas[i], results[i]);
+                combined_data[i] = new ShapeSheet.CellData<TResult>(formulas[i], results[i]);
             }
 
             var r = this.GetOutputsForShapes(shapeids, combined_data);
