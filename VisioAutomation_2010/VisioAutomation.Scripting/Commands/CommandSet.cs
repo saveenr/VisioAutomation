@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Scripting.Commands
 {
     public class CommandSet
     {

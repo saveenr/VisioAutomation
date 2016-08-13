@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Scripting.Layout;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Scripting.Utilities
 {
     internal static class ArrangeHelper
     {

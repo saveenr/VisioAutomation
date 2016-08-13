@@ -1,4 +1,4 @@
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Scripting.Commands
 {
     public class Command
     {

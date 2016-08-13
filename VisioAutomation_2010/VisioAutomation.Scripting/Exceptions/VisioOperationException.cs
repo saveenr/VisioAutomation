@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Scripting
+﻿namespace VisioAutomation.Scripting.Exceptions
 {
     [System.Serializable]
     public class VisioOperationException : System.Exception

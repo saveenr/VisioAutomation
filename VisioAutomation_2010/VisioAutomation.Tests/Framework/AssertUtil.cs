@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Scripting;
+using VisioAutomation.Scripting.Utilities;
 using VADRAW = VisioAutomation.Drawing;
 using VASS = VisioAutomation.ShapeSheet;
 

@@ -1,4 +1,5 @@
 using VisioAutomation.Extensions;
+using VisioAutomation.Scripting.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 

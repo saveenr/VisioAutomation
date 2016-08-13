@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Colors;
+using VisioAutomation.Scripting.Utilities;
 using VisioAutomation.Shapes.Connectors;
-using VACONNECT = VisioAutomation.Shapes.Connections;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using SXL = System.Xml.Linq;
 using VAGRAPH = VisioAutomation.Models.Layouts.DirectedGraph;

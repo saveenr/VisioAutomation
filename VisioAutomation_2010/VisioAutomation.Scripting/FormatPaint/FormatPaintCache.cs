@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Scripting.FormatPaint
 {
     public class FormatPaintCache
     {
