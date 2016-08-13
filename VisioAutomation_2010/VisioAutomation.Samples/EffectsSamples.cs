@@ -2,7 +2,6 @@ using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using VisioAutomation.Colors;
 using GRIDMODEL = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioAutomationSamples
@@ -13,8 +12,8 @@ namespace VisioAutomationSamples
         {
             int num_cols = 1;
             int num_rows = 10;
-            var color1 = new ColorRGB(0xff000);
-            var color2 = new ColorRGB(0x000ff);
+            var color1 = new VisioAutomation.Colors.ColorRGB(0xff000);
+            var color2 = new VisioAutomation.Colors.ColorRGB(0x000ff);
 
             var page_size = new VA.Drawing.Size(num_rows/2.0, num_rows);
             var upperleft = new VA.Drawing.Point(0, page_size.Height);
