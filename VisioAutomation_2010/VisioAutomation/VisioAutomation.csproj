@@ -95,6 +95,7 @@
     <Compile Include="ShapeSheetQuery\Columns\ColumnBase.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ColumnCellIndex.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnCellIndex.cs" />
+    <Compile Include="ShapeSheetQuery\Results\SubQueryResultRow.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
@@ -148,7 +149,7 @@
     <Compile Include="ShapeSheetQuery\Results\Result.cs" />
     <Compile Include="ShapeSheetQuery\SubQueryDetails.cs" />
     <Compile Include="ShapeSheetQuery\SubQuery.cs" />
-    <Compile Include="ShapeSheetQuery\Results\SectionSubQueryResult.cs" />
+    <Compile Include="ShapeSheetQuery\Results\SubQueryResult.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnSRC.cs" />
     <Compile Include="ShapeSheetQuery\Utilities\StreamBuilder.cs" />
     <Compile Include="ShapeSheetQuery\ListSubQuery.cs" />
