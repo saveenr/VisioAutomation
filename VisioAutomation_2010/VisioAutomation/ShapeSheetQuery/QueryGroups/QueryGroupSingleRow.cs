@@ -28,7 +28,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             verify_cell_only_query(query);
 
             var surface = new ShapeSheetSurface(page);
-            var data_for_shapes = query.GetCellData<RT>( surface, shapeids);
+            var data_for_shapes = query.GetFormulasAndResults<RT>( surface, shapeids);
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
             {
@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             verify_cell_only_query(query);
 
             var ss1 = new ShapeSheetSurface(shape);
-            Output<CellData<RT>> data_for_shape = query.GetCellData<RT>(ss1);
+            Output<CellData<RT>> data_for_shape = query.GetFormulasAndResults<RT>(ss1);
             var cells = cell_data_to_object(data_for_shape.Cells);
             return cells;
         }

@@ -70,7 +70,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Retrieve the values
             var ss1 = new ShapeSheetSurface(shape1);
-            var data = query.GetCellData<double>(ss1);
+            var data = query.GetFormulasAndResults<double>(ss1);
 
             // Verify
             AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
@@ -94,7 +94,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Retrieve the values
             var ss1 = new ShapeSheetSurface(shape1);
-            var data = query.GetCellData<double>(ss1);
+            var data = query.GetFormulasAndResults<double>(ss1);
 
             // Verify
             AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
@@ -210,7 +210,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Retrieve the values
             var ss1 = new ShapeSheetSurface(shape1);
-            var data = query.GetCellData<double>(ss1);
+            var data = query.GetFormulasAndResults<double>(ss1);
 
             // Verify
             AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);

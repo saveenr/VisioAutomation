@@ -184,7 +184,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var ss1 = new ShapeSheetSurface(page1);
 
-            var data = query.GetCellData<double>(
+            var data = query.GetFormulasAndResults<double>(
                 ss1,
                 shapeids);
 

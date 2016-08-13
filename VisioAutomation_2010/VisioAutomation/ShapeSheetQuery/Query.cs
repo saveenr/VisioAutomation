@@ -58,7 +58,7 @@ namespace VisioAutomation.ShapeSheetQuery
             var srcstream = this.BuildSRCStream(surface);
             var values = surface.GetFormulasU_SRC(srcstream);
             var r = new Output<string>(surface.Target.ID16);
-            this.FillValuesForSingleShape<string>(0, values, 0, r);
+            this.FillOutputForSingleShape<string>(0, values, 0, r);
 
             return r;
         }
@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheetQuery
             var unitcodes = this.BuildUnitCodeArray(1);
             var values = surface.GetResults_SRC<T>(srcstream, unitcodes);
             var r = new Output<T>(surface.Target.ID16);
-            this.FillValuesForSingleShape<T>(0, values, 0, r);
+            this.FillOutputForSingleShape<T>(0, values, 0, r);
             return r;
         }
 
@@ -114,7 +114,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return unitcodes;
         }
 
-        public Output<ShapeSheet.CellData<T>> GetCellData<T>(ShapeSheetSurface surface)
+        public Output<ShapeSheet.CellData<T>> GetFormulasAndResults<T>(ShapeSheetSurface surface)
         {
             this.Freeze();
 
@@ -130,7 +130,7 @@ namespace VisioAutomation.ShapeSheetQuery
             }
 
             var r = new Output<ShapeSheet.CellData<T>>(surface.Target.ID16);
-            this.FillValuesForSingleShape<ShapeSheet.CellData<T>>(0, combineddata, 0, r);
+            this.FillOutputForSingleShape<ShapeSheet.CellData<T>>(0, combineddata, 0, r);
             return r;
         }
 
@@ -140,7 +140,7 @@ namespace VisioAutomation.ShapeSheetQuery
             this.Freeze();
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
             var values = surface.GetFormulasU_SIDSRC(srcstream);
-            var list = this.FillValuesForMultipleShapes(shapeids, values);
+            var list = this.GetOutputsForShapes(shapeids, values);
             return list;
         }
 
@@ -150,11 +150,11 @@ namespace VisioAutomation.ShapeSheetQuery
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
             var values = surface.GetResults_SIDSRC<T>(srcstream, unitcodes);
-            var list = this.FillValuesForMultipleShapes(shapeids, values);
+            var list = this.GetOutputsForShapes(shapeids, values);
             return list;
         }
 
-        public ListOutput<ShapeSheet.CellData<T>> GetCellData<T>(ShapeSheetSurface surface, IList<int> shapeids)
+        public ListOutput<ShapeSheet.CellData<T>> GetFormulasAndResults<T>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
 
@@ -170,36 +170,43 @@ namespace VisioAutomation.ShapeSheetQuery
                 combined_data[i] = new ShapeSheet.CellData<T>(formulas[i], results[i]);
             }
 
-            var r = this.FillValuesForMultipleShapes(shapeids, combined_data);
+            var r = this.GetOutputsForShapes(shapeids, combined_data);
             return r;
         }
 
-        private ListOutput<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values)
+        private ListOutput<T> GetOutputsForShapes<T>(IList<int> shapeids, T[] values)
         {
-            var list = new ListOutput<T>();
+            var output_for_all_shapes = new ListOutput<T>();
+
             int cellcount = 0;
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var data = new Output<T>(shapeid);
-                cellcount = this.FillValuesForSingleShape<T>(shape_index, values, cellcount, data);
-                list.Add(data);
+                var output_for_shape = new Output<T>(shapeid);
+                cellcount = this.FillOutputForSingleShape<T>(shape_index, values, cellcount, output_for_shape);
+                output_for_all_shapes.Add(output_for_shape);
             }
             
-            return list;
+            return output_for_all_shapes;
         }
 
-        private int FillValuesForSingleShape<T>(int shape_index, T[] values, int start_at_cell, Output<T> output)
+        private int FillOutputForSingleShape<T>(int shape_index, T[] values, int start_at_cell, Output<T> output)
         {
-            // First Copy the Cell Values over
+            // Keep a count of how many cells this method is using
             int cellcount = 0;
-            var cellarray = new T[this.Cells.Count];
+
+            // First Copy the Query Cell Values into the output
+            output.Cells = new T[this.Cells.Count];
             for (cellcount = 0; cellcount < this.Cells.Count; cellcount++)
             {
-                cellarray[cellcount] = values[start_at_cell+cellcount];
+                output.Cells[cellcount] = values[start_at_cell+cellcount];
             }
 
-            output.Cells = cellarray;
+            // Verify that we have used as many cells as we expect
+            if (cellcount != this.Cells.Count)
+            {
+                throw new VisioAutomation.AutomationException("Internal Error: Mismatch in number of expected cells");                    
+            }
 
             // Now copy the Section values over
             if (this._per_shape_section_info.Count > 0)

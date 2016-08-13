@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 
             var list = new List<List<T>>(shapeids.Count);
             var surface = new ShapeSheetSurface(page);
-            var data_for_shapes = query.GetCellData<RT>(surface, shapeids);
+            var data_for_shapes = query.GetFormulasAndResults<RT>(surface, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
             {
@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             QueryGroupMultiRow.verify_single_section_query(query);
 
             var ss1 = new ShapeSheetSurface(shape);
-            var data_for_shape = query.GetCellData<RT>(ss1);
+            var data_for_shape = query.GetFormulasAndResults<RT>(ss1);
             var sec = data_for_shape.Sections[0];
             var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, cell_data_to_object);
             
