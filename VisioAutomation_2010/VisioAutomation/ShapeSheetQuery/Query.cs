@@ -58,7 +58,7 @@ namespace VisioAutomation.ShapeSheetQuery
             var srcstream = this.BuildSRCStream(surface);
             var values = surface.GetFormulasU_SRC(srcstream);
             var r = new Output<string>(surface.Target.ID16);
-            this.FillValuesForSingleShape<string>(0, 0, values, r);
+            this.FillValuesForSingleShape<string>(0, values, 0, r);
 
             return r;
         }
@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheetQuery
             var unitcodes = this.BuildUnitCodeArray(1);
             var values = surface.GetResults_SRC<T>(srcstream, unitcodes);
             var r = new Output<T>(surface.Target.ID16);
-            this.FillValuesForSingleShape<T>(0, 0, values, r);
+            this.FillValuesForSingleShape<T>(0, values, 0, r);
             return r;
         }
 
@@ -130,7 +130,7 @@ namespace VisioAutomation.ShapeSheetQuery
             }
 
             var r = new Output<ShapeSheet.CellData<T>>(surface.Target.ID16);
-            this.FillValuesForSingleShape<ShapeSheet.CellData<T>>(0, 0, combineddata, r);
+            this.FillValuesForSingleShape<ShapeSheet.CellData<T>>(0, combineddata, 0, r);
             return r;
         }
 
@@ -182,14 +182,14 @@ namespace VisioAutomation.ShapeSheetQuery
             {
                 var shapeid = shapeids[shape_index];
                 var data = new Output<T>(shapeid);
-                cellcount = this.FillValuesForSingleShape<T>(shape_index, cellcount, values, data);
+                cellcount = this.FillValuesForSingleShape<T>(shape_index, values, cellcount, data);
                 list.Add(data);
             }
             
             return list;
         }
 
-        private int FillValuesForSingleShape<T>(int shape_index, int start_at_cell, T[] values, Output<T> output)
+        private int FillValuesForSingleShape<T>(int shape_index, T[] values, int start_at_cell, Output<T> output)
         {
             // First Copy the Cell Values over
             int cellcount = 0;
