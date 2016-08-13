@@ -6,15 +6,15 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
     class HyperlinkCellsQuery : Query
     {
 
-        public ColumnCellIndex Address { get; set; }
-        public ColumnCellIndex Description { get; set; }
-        public ColumnCellIndex ExtraInfo { get; set; }
-        public ColumnCellIndex Frame { get; set; }
-        public ColumnCellIndex SortKey { get; set; }
-        public ColumnCellIndex SubAddress { get; set; }
-        public ColumnCellIndex NewWindow { get; set; }
-        public ColumnCellIndex Default { get; set; }
-        public ColumnCellIndex Invisible { get; set; }
+        public ColumnSubQuery Address { get; set; }
+        public ColumnSubQuery Description { get; set; }
+        public ColumnSubQuery ExtraInfo { get; set; }
+        public ColumnSubQuery Frame { get; set; }
+        public ColumnSubQuery SortKey { get; set; }
+        public ColumnSubQuery SubAddress { get; set; }
+        public ColumnSubQuery NewWindow { get; set; }
+        public ColumnSubQuery Default { get; set; }
+        public ColumnSubQuery Invisible { get; set; }
 
         public HyperlinkCellsQuery()
         {

@@ -5,13 +5,13 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class XFormCellsQuery : Query
     {
-        public ColumnSRC Width { get; set; }
-        public ColumnSRC Height { get; set; }
-        public ColumnSRC PinX { get; set; }
-        public ColumnSRC PinY { get; set; }
-        public ColumnSRC LocPinX { get; set; }
-        public ColumnSRC LocPinY { get; set; }
-        public ColumnSRC Angle { get; set; }
+        public ColumnQuery Width { get; set; }
+        public ColumnQuery Height { get; set; }
+        public ColumnQuery PinX { get; set; }
+        public ColumnQuery PinY { get; set; }
+        public ColumnQuery LocPinX { get; set; }
+        public ColumnQuery LocPinY { get; set; }
+        public ColumnQuery Angle { get; set; }
 
         public XFormCellsQuery()
         {

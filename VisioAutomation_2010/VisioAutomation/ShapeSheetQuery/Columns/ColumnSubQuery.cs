@@ -1,10 +1,10 @@
 ﻿namespace VisioAutomation.ShapeSheetQuery.Columns
 {
-    public class ColumnCellIndex : ColumnBase
+    public class ColumnSubQuery : ColumnBase
     {
         public short CellIndex;
 
-        internal ColumnCellIndex(int ordinal, short cell, string name) :
+        internal ColumnSubQuery(int ordinal, short cell, string name) :
             base(ordinal, name)
         {
             this.CellIndex = cell;

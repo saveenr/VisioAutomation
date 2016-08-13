@@ -6,26 +6,26 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class LockCellsQuery : Query
     {
-        public ColumnSRC LockAspect { get; set; }
-        public ColumnSRC LockBegin { get; set; }
-        public ColumnSRC LockCalcWH { get; set; }
-        public ColumnSRC LockCrop { get; set; }
-        public ColumnSRC LockCustProp { get; set; }
-        public ColumnSRC LockDelete { get; set; }
-        public ColumnSRC LockEnd { get; set; }
-        public ColumnSRC LockFormat { get; set; }
-        public ColumnSRC LockFromGroupFormat { get; set; }
-        public ColumnSRC LockGroup { get; set; }
-        public ColumnSRC LockHeight { get; set; }
-        public ColumnSRC LockMoveX { get; set; }
-        public ColumnSRC LockMoveY { get; set; }
-        public ColumnSRC LockRotate { get; set; }
-        public ColumnSRC LockSelect { get; set; }
-        public ColumnSRC LockTextEdit { get; set; }
-        public ColumnSRC LockThemeColors { get; set; }
-        public ColumnSRC LockThemeEffects { get; set; }
-        public ColumnSRC LockVtxEdit { get; set; }
-        public ColumnSRC LockWidth { get; set; }
+        public ColumnQuery LockAspect { get; set; }
+        public ColumnQuery LockBegin { get; set; }
+        public ColumnQuery LockCalcWH { get; set; }
+        public ColumnQuery LockCrop { get; set; }
+        public ColumnQuery LockCustProp { get; set; }
+        public ColumnQuery LockDelete { get; set; }
+        public ColumnQuery LockEnd { get; set; }
+        public ColumnQuery LockFormat { get; set; }
+        public ColumnQuery LockFromGroupFormat { get; set; }
+        public ColumnQuery LockGroup { get; set; }
+        public ColumnQuery LockHeight { get; set; }
+        public ColumnQuery LockMoveX { get; set; }
+        public ColumnQuery LockMoveY { get; set; }
+        public ColumnQuery LockRotate { get; set; }
+        public ColumnQuery LockSelect { get; set; }
+        public ColumnQuery LockTextEdit { get; set; }
+        public ColumnQuery LockThemeColors { get; set; }
+        public ColumnQuery LockThemeEffects { get; set; }
+        public ColumnQuery LockVtxEdit { get; set; }
+        public ColumnQuery LockWidth { get; set; }
 
         public LockCellsQuery()
         {

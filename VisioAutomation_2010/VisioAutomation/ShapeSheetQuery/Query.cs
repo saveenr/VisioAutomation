@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheetQuery
 {
     public class Query
     {
-        public ListColumnSRC Cells { get; }
+        public ListColumnQuery Cells { get; }
         public ListSubQuery SubQueries { get; }
 
         private List<List<SubQueryDetails>> _per_shape_section_info; 
@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
         public Query()
         {
-            this.Cells = new ListColumnSRC(0);
+            this.Cells = new ListColumnQuery(0);
             this.SubQueries = new ListSubQuery(0);
             this._per_shape_section_info = new List<List<SubQueryDetails>>(0);
         }
@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheetQuery
             this._is_frozen = true;            
         }
 
-        public ColumnSRC AddCell(ShapeSheet.SRC src, string name)
+        public ColumnQuery AddCell(ShapeSheet.SRC src, string name)
         {
             if (name == null)
             {

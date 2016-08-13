@@ -6,20 +6,20 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class ParagraphFormatCellsQuery : Query
     {
-        public ColumnCellIndex Bullet { get; set; }
-        public ColumnCellIndex BulletFont { get; set; }
-        public ColumnCellIndex BulletFontSize { get; set; }
-        public ColumnCellIndex BulletString { get; set; } // NOTE: This is never used
-        public ColumnCellIndex Flags { get; set; }
-        public ColumnCellIndex HorzAlign { get; set; }
-        public ColumnCellIndex IndentFirst { get; set; }
-        public ColumnCellIndex IndentLeft { get; set; }
-        public ColumnCellIndex IndentRight { get; set; }
-        public ColumnCellIndex LocalizeBulletFont { get; set; }
-        public ColumnCellIndex SpaceAfter { get; set; }
-        public ColumnCellIndex SpaceBefore { get; set; }
-        public ColumnCellIndex SpaceLine { get; set; }
-        public ColumnCellIndex TextPosAfterBullet { get; set; }
+        public ColumnSubQuery Bullet { get; set; }
+        public ColumnSubQuery BulletFont { get; set; }
+        public ColumnSubQuery BulletFontSize { get; set; }
+        public ColumnSubQuery BulletString { get; set; } // NOTE: This is never used
+        public ColumnSubQuery Flags { get; set; }
+        public ColumnSubQuery HorzAlign { get; set; }
+        public ColumnSubQuery IndentFirst { get; set; }
+        public ColumnSubQuery IndentLeft { get; set; }
+        public ColumnSubQuery IndentRight { get; set; }
+        public ColumnSubQuery LocalizeBulletFont { get; set; }
+        public ColumnSubQuery SpaceAfter { get; set; }
+        public ColumnSubQuery SpaceBefore { get; set; }
+        public ColumnSubQuery SpaceLine { get; set; }
+        public ColumnSubQuery TextPosAfterBullet { get; set; }
 
         public ParagraphFormatCellsQuery()
         {

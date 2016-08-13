@@ -5,31 +5,31 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class ShapeFormatCellsQuery : Query
     {
-        public ColumnSRC FillBkgnd { get; set; }
-        public ColumnSRC FillBkgndTrans { get; set; }
-        public ColumnSRC FillForegnd { get; set; }
-        public ColumnSRC FillForegndTrans { get; set; }
-        public ColumnSRC FillPattern { get; set; }
-        public ColumnSRC ShapeShdwObliqueAngle { get; set; }
-        public ColumnSRC ShapeShdwOffsetX { get; set; }
-        public ColumnSRC ShapeShdwOffsetY { get; set; }
-        public ColumnSRC ShapeShdwScaleFactor { get; set; }
-        public ColumnSRC ShapeShdwType { get; set; }
-        public ColumnSRC ShdwBkgnd { get; set; }
-        public ColumnSRC ShdwBkgndTrans { get; set; }
-        public ColumnSRC ShdwForegnd { get; set; }
-        public ColumnSRC ShdwForegndTrans { get; set; }
-        public ColumnSRC ShdwPattern { get; set; }
-        public ColumnSRC BeginArrow { get; set; }
-        public ColumnSRC BeginArrowSize { get; set; }
-        public ColumnSRC EndArrow { get; set; }
-        public ColumnSRC EndArrowSize { get; set; }
-        public ColumnSRC LineColor { get; set; }
-        public ColumnSRC LineCap { get; set; }
-        public ColumnSRC LineColorTrans { get; set; }
-        public ColumnSRC LinePattern { get; set; }
-        public ColumnSRC LineWeight { get; set; }
-        public ColumnSRC Rounding { get; set; }
+        public ColumnQuery FillBkgnd { get; set; }
+        public ColumnQuery FillBkgndTrans { get; set; }
+        public ColumnQuery FillForegnd { get; set; }
+        public ColumnQuery FillForegndTrans { get; set; }
+        public ColumnQuery FillPattern { get; set; }
+        public ColumnQuery ShapeShdwObliqueAngle { get; set; }
+        public ColumnQuery ShapeShdwOffsetX { get; set; }
+        public ColumnQuery ShapeShdwOffsetY { get; set; }
+        public ColumnQuery ShapeShdwScaleFactor { get; set; }
+        public ColumnQuery ShapeShdwType { get; set; }
+        public ColumnQuery ShdwBkgnd { get; set; }
+        public ColumnQuery ShdwBkgndTrans { get; set; }
+        public ColumnQuery ShdwForegnd { get; set; }
+        public ColumnQuery ShdwForegndTrans { get; set; }
+        public ColumnQuery ShdwPattern { get; set; }
+        public ColumnQuery BeginArrow { get; set; }
+        public ColumnQuery BeginArrowSize { get; set; }
+        public ColumnQuery EndArrow { get; set; }
+        public ColumnQuery EndArrowSize { get; set; }
+        public ColumnQuery LineColor { get; set; }
+        public ColumnQuery LineCap { get; set; }
+        public ColumnQuery LineColorTrans { get; set; }
+        public ColumnQuery LinePattern { get; set; }
+        public ColumnQuery LineWeight { get; set; }
+        public ColumnQuery Rounding { get; set; }
 
         public ShapeFormatCellsQuery()
         {

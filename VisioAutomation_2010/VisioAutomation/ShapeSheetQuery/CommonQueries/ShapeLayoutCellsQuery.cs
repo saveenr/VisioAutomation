@@ -5,24 +5,24 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 {
     class ShapeLayoutCellsQuery : Query
     {
-        public ColumnSRC ConFixedCode { get; set; }
-        public ColumnSRC ConLineJumpCode { get; set; }
-        public ColumnSRC ConLineJumpDirX { get; set; }
-        public ColumnSRC ConLineJumpDirY { get; set; }
-        public ColumnSRC ConLineJumpStyle { get; set; }
-        public ColumnSRC ConLineRouteExt { get; set; }
-        public ColumnSRC ShapeFixedCode { get; set; }
-        public ColumnSRC ShapePermeablePlace { get; set; }
-        public ColumnSRC ShapePermeableX { get; set; }
-        public ColumnSRC ShapePermeableY { get; set; }
-        public ColumnSRC ShapePlaceFlip { get; set; }
-        public ColumnSRC ShapePlaceStyle { get; set; }
-        public ColumnSRC ShapePlowCode { get; set; }
-        public ColumnSRC ShapeRouteStyle { get; set; }
-        public ColumnSRC ShapeSplit { get; set; }
-        public ColumnSRC ShapeSplittable { get; set; }
-        public ColumnSRC DisplayLevel { get; set; }
-        public ColumnSRC Relationships { get; set; }
+        public ColumnQuery ConFixedCode { get; set; }
+        public ColumnQuery ConLineJumpCode { get; set; }
+        public ColumnQuery ConLineJumpDirX { get; set; }
+        public ColumnQuery ConLineJumpDirY { get; set; }
+        public ColumnQuery ConLineJumpStyle { get; set; }
+        public ColumnQuery ConLineRouteExt { get; set; }
+        public ColumnQuery ShapeFixedCode { get; set; }
+        public ColumnQuery ShapePermeablePlace { get; set; }
+        public ColumnQuery ShapePermeableX { get; set; }
+        public ColumnQuery ShapePermeableY { get; set; }
+        public ColumnQuery ShapePlaceFlip { get; set; }
+        public ColumnQuery ShapePlaceStyle { get; set; }
+        public ColumnQuery ShapePlowCode { get; set; }
+        public ColumnQuery ShapeRouteStyle { get; set; }
+        public ColumnQuery ShapeSplit { get; set; }
+        public ColumnQuery ShapeSplittable { get; set; }
+        public ColumnQuery DisplayLevel { get; set; }
+        public ColumnQuery Relationships { get; set; }
 
         public ShapeLayoutCellsQuery() :
             base()

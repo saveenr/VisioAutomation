@@ -107,8 +107,8 @@
     <Compile Include="ShapeSheetQuery\CommonQueries\UserDefinedCellsQuery.cs" />
     <Compile Include="ShapeSheetQuery\CommonQueries\XFormCellsQuery.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ColumnBase.cs" />
-    <Compile Include="ShapeSheetQuery\Columns\ColumnCellIndex.cs" />
-    <Compile Include="ShapeSheetQuery\Columns\ListColumnCellIndex.cs" />
+    <Compile Include="ShapeSheetQuery\Columns\ColumnSubQuery.cs" />
+    <Compile Include="ShapeSheetQuery\Columns\ListColumnSubQuery.cs" />
     <Compile Include="ShapeSheetQuery\Results\SubQueryResultRow.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
@@ -161,7 +161,7 @@
     <Compile Include="ShapeSheetQuery\SubQueryDetails.cs" />
     <Compile Include="ShapeSheetQuery\SubQuery.cs" />
     <Compile Include="ShapeSheetQuery\Results\SubQueryResult.cs" />
-    <Compile Include="ShapeSheetQuery\Columns\ListColumnSRC.cs" />
+    <Compile Include="ShapeSheetQuery\Columns\ListColumnQuery.cs" />
     <Compile Include="ShapeSheetQuery\Utilities\StreamBuilder.cs" />
     <Compile Include="ShapeSheetQuery\ListSubQuery.cs" />
     <Compile Include="Text\CharStyle.cs" />
@@ -178,7 +178,7 @@
     <Compile Include="Shapes\XFormCells.cs" />
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
-    <Compile Include="ShapeSheetQuery\Columns\ColumnSRC.cs" />
+    <Compile Include="ShapeSheetQuery\Columns\ColumnQuery.cs" />
     <Compile Include="ShapeSheet\Update.cs" />
     <Compile Include="ShapeSheet\FormulaLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />

@@ -2,22 +2,22 @@
 
 namespace VisioAutomation.ShapeSheetQuery.Columns
 {
-    public class ListColumnSRC : ListColumnBase<ColumnSRC>
+    public class ListColumnQuery : ListColumnBase<ColumnQuery>
     {
         private HashSet<ShapeSheet.SRC> _src_set;
 
-        internal ListColumnSRC() :
+        internal ListColumnQuery() :
             this(0)
         {
         }
 
-        internal ListColumnSRC(int capacity) : base(capacity)
+        internal ListColumnQuery(int capacity) : base(capacity)
         {
         }
 
-        internal ColumnSRC Add(ShapeSheet.SRC src) => this.Add(src, null);
+        internal ColumnQuery Add(ShapeSheet.SRC src) => this.Add(src, null);
 
-        internal ColumnSRC Add(ShapeSheet.SRC src, string name)
+        internal ColumnQuery Add(ShapeSheet.SRC src, string name)
         {
             name = this.fixup_name(name);
 
@@ -38,7 +38,7 @@ namespace VisioAutomation.ShapeSheetQuery.Columns
             }
 
             int ordinal = this._items.Count;
-            var col = new ColumnSRC(ordinal, src, name);
+            var col = new ColumnQuery(ordinal, src, name);
             this._items.Add(col);
 
             this._dic_columns[name] = col;
