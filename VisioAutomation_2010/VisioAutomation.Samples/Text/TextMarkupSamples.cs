@@ -1,4 +1,5 @@
 ﻿using VisioAutomation.Colors;
+using VisioAutomation.Drawing.Layout;
 using VA = VisioAutomation;
 
 namespace VisioAutomationSamples
@@ -51,9 +52,9 @@ namespace VisioAutomationSamples
             var e1 = new VisioAutomation.Models.Text.TextElement();
             e1.AddText("When, from behind that craggy steep\n");
             e1.AddText("till then the horizon’s bound\n");
-            var e2 = e1.AddElementEx("a huge peak, black and huge\n", null, null, null, VA.Drawing.AlignmentHorizontal.Left, VA.Text.CharStyle.Italic);
-            var e3 = e1.AddElementEx("As if with voluntary power instinct\n", segoe_ui.ID, null, null, VA.Drawing.AlignmentHorizontal.Center, VA.Text.CharStyle.Bold);
-            var e4 = e1.AddElementEx("Upreared its head.\n", null, null, null, VA.Drawing.AlignmentHorizontal.Right, VA.Text.CharStyle.Italic);
+            var e2 = e1.AddElementEx("a huge peak, black and huge\n", null, null, null, AlignmentHorizontal.Left, VA.Text.CharStyle.Italic);
+            var e3 = e1.AddElementEx("As if with voluntary power instinct\n", segoe_ui.ID, null, null, AlignmentHorizontal.Center, VA.Text.CharStyle.Bold);
+            var e4 = e1.AddElementEx("Upreared its head.\n", null, null, null, AlignmentHorizontal.Right, VA.Text.CharStyle.Italic);
             e1.AddText("-William Wordsworth, the Prelude");
             e1.SetText(s1);
         }

@@ -105,12 +105,12 @@
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Utilities\TextHelper.cs" />
-    <Compile Include="Drawing\Margin.cs" />
+    <Compile Include="Drawing\Layout\Margin.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointType.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointHelper.cs" />
     <Compile Include="Shapes\Controls\ControlHelper.cs" />
     <Compile Include="Masters\MasterLoader.cs" />
-    <Compile Include="Drawing\BoundingBox.cs" />
+    <Compile Include="Drawing\Layout\BoundingBox.cs" />
     <Compile Include="Shapes\FormatCells.cs" />
     <Compile Include="Extensions\VisioAutomation\CellDataMethods.cs" />
     <Compile Include="Interop\EnumType.cs" />
@@ -119,8 +119,8 @@
     <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Pages\PageCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyHelper.cs" />
-    <Compile Include="Drawing\AlignmentHorizontal.cs" />
-    <Compile Include="Drawing\AlignmentVertical.cs" />
+    <Compile Include="Drawing\Layout\AlignmentHorizontal.cs" />
+    <Compile Include="Drawing\Layout\AlignmentVertical.cs" />
     <Compile Include="Shapes\LockCells.cs" />
     <Compile Include="Application\PerfSettings.cs" />
     <Compile Include="Pages\PageLayout\CircularLayout.cs" />
@@ -157,7 +157,7 @@
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="Application\AlertResponseCode.cs" />
-    <Compile Include="Drawing\Axis.cs" />
+    <Compile Include="Drawing\Layout\Axis.cs" />
     <Compile Include="Colors\ColorHSL.cs" />
     <Compile Include="Shapes\Connectors\ConnectorType.cs" />
     <Compile Include="Application\PerfScope.cs" />

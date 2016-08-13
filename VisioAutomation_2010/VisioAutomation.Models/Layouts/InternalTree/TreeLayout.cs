@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Drawing.Layout;
 
 /*
  * 
@@ -170,7 +171,7 @@ namespace VisioAutomation.Models.InternalTree
             }
             var nodes = this.Nodes.ToList();
 
-            var bb = new Drawing.BoundingBox(nodes.Select(n => n.Rect));
+            var bb = new BoundingBox(nodes.Select(n => n.Rect));
             if (!bb.HasValue)
             {
                 throw new System.InvalidOperationException("Internal Error: Could not compute bounding box");
@@ -306,15 +307,15 @@ namespace VisioAutomation.Models.InternalTree
             }
             switch (this.Options.Alignment)
             {
-                case Drawing.AlignmentVertical.Top:
+                case AlignmentVertical.Top:
                     node.Position = temp_point;
                     break;
 
-                case Drawing.AlignmentVertical.Center:
+                case AlignmentVertical.Center:
                     node.Position = temp_point.Add(0, (maxsizeTmp - nodesizeTmp)/2.0);
                     break;
 
-                case Drawing.AlignmentVertical.Bottom:
+                case AlignmentVertical.Bottom:
                     node.Position = temp_point.Add(0, maxsizeTmp - nodesizeTmp);
                     break;
             }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Drawing.Layout;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting
@@ -57,7 +58,7 @@ namespace VisioAutomation.Scripting
             return sorted_shape_ids;
         }
 
-        public static void DistributeWithSpacing(IVisio.Page page, IList<int> shapeids, Drawing.Axis axis, double spacing)
+        public static void DistributeWithSpacing(IVisio.Page page, IList<int> shapeids, Axis axis, double spacing)
         {
             if (spacing < 0.0)
             {
@@ -70,11 +71,11 @@ namespace VisioAutomation.Scripting
             }
 
             // Calculate the new Xfrms
-            var sortpos = axis == Drawing.Axis.XAxis
+            var sortpos = axis == Axis.XAxis
                 ? RelativePosition.PinX
                 : RelativePosition.PinY;
 
-            var delta = axis == Drawing.Axis.XAxis
+            var delta = axis == Axis.XAxis
                 ? new Drawing.Size(spacing, 0)
                 : new Drawing.Size(0, spacing);
 
@@ -87,7 +88,7 @@ namespace VisioAutomation.Scripting
 
             foreach (var input_xfrm in input_xfrms)
             {
-                var new_pinpos = axis == Drawing.Axis.XAxis
+                var new_pinpos = axis == Axis.XAxis
                     ? new Drawing.Point(cur_pos.X + input_xfrm.LocPinX.Result, input_xfrm.PinY.Result)
                     : new Drawing.Point(input_xfrm.PinX.Result, cur_pos.Y + input_xfrm.LocPinY.Result);
 
@@ -118,7 +119,7 @@ namespace VisioAutomation.Scripting
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<Shapes.XFormCells> xfrms)
         {
-            var bb = new Drawing.BoundingBox(xfrms.Select(ArrangeHelper.GetRectangle));
+            var bb = new BoundingBox(xfrms.Select(ArrangeHelper.GetRectangle));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");

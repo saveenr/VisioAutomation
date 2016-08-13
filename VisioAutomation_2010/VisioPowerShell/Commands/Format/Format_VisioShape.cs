@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Drawing.Layout;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -37,22 +38,22 @@ namespace VisioPowerShell.Commands.Format
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.XAxis);
+                this.Client.Arrange.Distribute(this.Shapes, Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
+                this.Client.Arrange.Distribute(this.Shapes, Axis.YAxis);
             }
 
             if (this.AlignVertical != Model.VerticalAlignment.None)
             {
-                this.Client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)this.AlignVertical);
+                this.Client.Arrange.Align(this.Shapes, (AlignmentVertical)this.AlignVertical);
             }
 
             if (this.AlignHorizontal != Model.HorizontalAlignment.None)
             {
-                this.Client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)this.AlignHorizontal);
+                this.Client.Arrange.Align(this.Shapes, (AlignmentHorizontal)this.AlignHorizontal);
             }
 
         }

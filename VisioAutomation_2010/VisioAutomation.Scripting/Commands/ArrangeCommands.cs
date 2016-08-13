@@ -2,6 +2,7 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using VisioAutomation.Drawing.Layout;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -13,61 +14,61 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        private static IVisio.VisUICmds _map_halign_to_uicmd(Drawing.AlignmentHorizontal v)
+        private static IVisio.VisUICmds _map_halign_to_uicmd(AlignmentHorizontal v)
             {
                 switch (v)
                 {
-                    case Drawing.AlignmentHorizontal.Left: return IVisio.VisUICmds.visCmdDistributeLeft;
-                    case Drawing.AlignmentHorizontal.Center: return IVisio.VisUICmds.visCmdDistributeCenter;
-                    case Drawing.AlignmentHorizontal.Right: return IVisio.VisUICmds.visCmdDistributeRight;
+                    case AlignmentHorizontal.Left: return IVisio.VisUICmds.visCmdDistributeLeft;
+                    case AlignmentHorizontal.Center: return IVisio.VisUICmds.visCmdDistributeCenter;
+                    case AlignmentHorizontal.Right: return IVisio.VisUICmds.visCmdDistributeRight;
                     default: throw new System.ArgumentOutOfRangeException();
                 }
             }
 
-        private static IVisio.VisUICmds _map_valign_to_uicmd(Drawing.AlignmentVertical v)
+        private static IVisio.VisUICmds _map_valign_to_uicmd(AlignmentVertical v)
         {
             switch (v)
             {
-                case Drawing.AlignmentVertical.Top: return IVisio.VisUICmds.visCmdDistributeTop;
-                case Drawing.AlignmentVertical.Center: return IVisio.VisUICmds.visCmdDistributeMiddle;
-                case Drawing.AlignmentVertical.Bottom: return IVisio.VisUICmds.visCmdDistributeBottom;
+                case AlignmentVertical.Top: return IVisio.VisUICmds.visCmdDistributeTop;
+                case AlignmentVertical.Center: return IVisio.VisUICmds.visCmdDistributeMiddle;
+                case AlignmentVertical.Bottom: return IVisio.VisUICmds.visCmdDistributeBottom;
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
 
-        private static IVisio.VisUICmds _map_axis_to_uicmd(Drawing.Axis v)
+        private static IVisio.VisUICmds _map_axis_to_uicmd(Axis v)
         {
             switch (v)
             {
-                case Drawing.Axis.XAxis: return IVisio.VisUICmds.visCmdDistributeHSpace;
-                case Drawing.Axis.YAxis: return IVisio.VisUICmds.visCmdDistributeVSpace;
+                case Axis.XAxis: return IVisio.VisUICmds.visCmdDistributeHSpace;
+                case Axis.YAxis: return IVisio.VisUICmds.visCmdDistributeVSpace;
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
 
-        private static IVisio.VisVerticalAlignTypes _map_isd_valign_to_visio_valign(Drawing.AlignmentVertical v)
+        private static IVisio.VisVerticalAlignTypes _map_isd_valign_to_visio_valign(AlignmentVertical v)
         {
             switch (v)
             {
-                case Drawing.AlignmentVertical.Top: return IVisio.VisVerticalAlignTypes.visVertAlignTop;
-                case Drawing.AlignmentVertical.Center: return IVisio.VisVerticalAlignTypes.visVertAlignMiddle;
-                case Drawing.AlignmentVertical.Bottom: return IVisio.VisVerticalAlignTypes.visVertAlignBottom;
+                case AlignmentVertical.Top: return IVisio.VisVerticalAlignTypes.visVertAlignTop;
+                case AlignmentVertical.Center: return IVisio.VisVerticalAlignTypes.visVertAlignMiddle;
+                case AlignmentVertical.Bottom: return IVisio.VisVerticalAlignTypes.visVertAlignBottom;
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
 
-        private static IVisio.VisHorizontalAlignTypes _map_isd_halign_to_visio_halign(Drawing.AlignmentHorizontal v)
+        private static IVisio.VisHorizontalAlignTypes _map_isd_halign_to_visio_halign(AlignmentHorizontal v)
         {
             switch (v)
             {
-                case Drawing.AlignmentHorizontal.Left: return IVisio.VisHorizontalAlignTypes.visHorzAlignLeft;
-                case Drawing.AlignmentHorizontal.Center: return IVisio.VisHorizontalAlignTypes.visHorzAlignCenter;
-                case Drawing.AlignmentHorizontal.Right: return IVisio.VisHorizontalAlignTypes.visHorzAlignRight;
+                case AlignmentHorizontal.Left: return IVisio.VisHorizontalAlignTypes.visHorzAlignLeft;
+                case AlignmentHorizontal.Center: return IVisio.VisHorizontalAlignTypes.visHorzAlignCenter;
+                case AlignmentHorizontal.Right: return IVisio.VisHorizontalAlignTypes.visHorzAlignRight;
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
 
-        public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.AlignmentHorizontal halign)
+        public void Distribute(IList<IVisio.Shape> target_shapes, AlignmentHorizontal halign)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -84,7 +85,7 @@ namespace VisioAutomation.Scripting.Commands
             application.DoCmd((short)cmd);
         }
 
-        public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.AlignmentVertical valign)
+        public void Distribute(IList<IVisio.Shape> target_shapes, AlignmentVertical valign)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -101,7 +102,7 @@ namespace VisioAutomation.Scripting.Commands
             application.DoCmd((short)cmd); 
         }
 
-        public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.Axis axis)
+        public void Distribute(IList<IVisio.Shape> target_shapes, Axis axis)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -227,7 +228,7 @@ namespace VisioAutomation.Scripting.Commands
             Selections.SelectionHelper.SendShapes(selection, dir);
         }
 
-        public void Align(IList<IVisio.Shape> target_shapes, Drawing.AlignmentHorizontal align)
+        public void Align(IList<IVisio.Shape> target_shapes, AlignmentHorizontal align)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -249,7 +250,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Align(IList<IVisio.Shape> target_shapes, Drawing.AlignmentVertical align)
+        public void Align(IList<IVisio.Shape> target_shapes, AlignmentVertical align)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -401,7 +402,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<Shapes.XFormCells> xfrms)
         {
-            var bb = new Drawing.BoundingBox(xfrms.Select(ArrangeCommands.GetRectangle));
+            var bb = new BoundingBox(xfrms.Select(ArrangeCommands.GetRectangle));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
@@ -412,7 +413,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Stack(Drawing.Axis axis, double space)
+        public void Stack(Axis axis, double space)
         {
 
 
@@ -428,19 +429,19 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Stack"))
             {
-                if (axis == Drawing.Axis.YAxis)
+                if (axis == Axis.YAxis)
                 {
-                    this.Align(null,Drawing.AlignmentHorizontal.Center);
+                    this.Align(null,AlignmentHorizontal.Center);
                 }
                 else
                 {
-                    this.Align(null,Drawing.AlignmentVertical.Center);
+                    this.Align(null,AlignmentVertical.Center);
                 }
                 this.Distribute(axis, space);
             }
         }
 
-        public void Distribute(Drawing.Axis axis, double d)
+        public void Distribute(Axis axis, double d)
         {
             if (!this._client.Document.HasActiveDocument)
             {

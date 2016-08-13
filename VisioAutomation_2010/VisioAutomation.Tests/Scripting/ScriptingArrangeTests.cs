@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Drawing.Layout;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Scripting
@@ -29,7 +30,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            client.Arrange.Distribute(null,VA.Drawing.AlignmentHorizontal.Center);
+            client.Arrange.Distribute(null,AlignmentHorizontal.Center);
 
             var xforms = client.Arrange.GetXForm(null);
             AssertUtil.AreEqual(1.125, 1.25, xforms[0].GetPinPosResult(),0.00001);
