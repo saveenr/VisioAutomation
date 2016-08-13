@@ -7,7 +7,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
     public abstract class QueryGroupMultiRow : QueryGroupBase
     {
-        private static void check_query(Query query)
+        private static void verify_single_section_query(Query query)
         {
             if (query.Cells.Count != 0)
             {
@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 
             if (query.SubQueries.Count != 1)
             {
-                throw new AutomationException("Query should not contain contain exaxtly 1 section");
+                throw new AutomationException("Query should not contain contain exactly 1 section");
             }
         }
 
@@ -27,7 +27,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             Query query,
             RowToObject<T, RT> row_to_object)
         {
-            QueryGroupMultiRow.check_query(query);
+            QueryGroupMultiRow.verify_single_section_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
             var surface = new ShapeSheetSurface(page);
@@ -48,7 +48,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             Query query,
             RowToObject<T, RT> row_to_object)
         {
-            QueryGroupMultiRow.check_query(query);
+            QueryGroupMultiRow.verify_single_section_query(query);
 
             var ss1 = new ShapeSheetSurface(shape);
             var data_for_shape = query.GetCellData<RT>(ss1);
