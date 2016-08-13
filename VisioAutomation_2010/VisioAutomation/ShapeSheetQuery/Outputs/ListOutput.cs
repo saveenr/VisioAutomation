@@ -4,16 +4,16 @@ namespace VisioAutomation.ShapeSheetQuery.Outputs
 {
     public class ListOutput<T> : IEnumerable<Output<T>>
     {
-        private readonly List<Output<T>> _items;
+        private readonly List<Output<T>> _outputs;
 
         internal ListOutput()
         {
-            this._items = new List<Output<T>>();
+            this._outputs = new List<Output<T>>();
         }
 
         public IEnumerator<Output<T>> GetEnumerator()
         {
-            return this._items.GetEnumerator();
+            return this._outputs.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -21,13 +21,13 @@ namespace VisioAutomation.ShapeSheetQuery.Outputs
             return this.GetEnumerator();
         }
 
-        public Output<T> this[int index] => this._items[index];
+        public Output<T> this[int index] => this._outputs[index];
 
         internal void Add(Output<T> item)
         {
-            this._items.Add(item);
+            this._outputs.Add(item);
         }
 
-        public int Count => this._items.Count;
+        public int Count => this._outputs.Count;
     }
 }

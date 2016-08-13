@@ -6,18 +6,6 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
     {
         public delegate T CellsToObject<T,RT>(ShapeSheet.CellData<RT>[] data);
 
-        public struct SRCFormulaPair
-        {
-            public ShapeSheet.SRC SRC;
-            public ShapeSheet.FormulaLiteral Formula;
-
-            public SRCFormulaPair(ShapeSheet.SRC src, ShapeSheet.FormulaLiteral formula)
-            {
-                this.SRC = src;
-                this.Formula = formula;
-            }
-        }
-
         protected SRCFormulaPair newpair(ShapeSheet.SRC src, ShapeSheet.FormulaLiteral formula)
         {
             return new SRCFormulaPair(src, formula);

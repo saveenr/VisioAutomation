@@ -110,6 +110,7 @@
     <Compile Include="ShapeSheetQuery\Columns\ColumnSubQuery.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnSubQuery.cs" />
     <Compile Include="ShapeSheetQuery\Outputs\SubQueryOutputRow.cs" />
+    <Compile Include="ShapeSheetQuery\QueryGroups\SRCFormulaPair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />

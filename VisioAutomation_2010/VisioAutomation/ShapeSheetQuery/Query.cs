@@ -216,21 +216,21 @@ namespace VisioAutomation.ShapeSheetQuery
                 output.Sections = new List<SubQueryOutput<T>>(sections.Count);
                 foreach (var section in sections)
                 {
-                    var section_result = new SubQueryOutput<T>(section.RowCount);
+                    var subquery_output = new SubQueryOutput<T>(section.RowCount);
 
-                    output.Sections.Add(section_result);
+                    output.Sections.Add(subquery_output);
 
                     foreach (int row_index in section.RowIndexes)
                     {
                         var row_values = new T[section.SubQuery.Columns.Count];
                         int num_cols = row_values.Length;
-                        for (int c = 0; c < num_cols; c++)
+                        for (int c = 0; c < row_values.Length; c++)
                         {
                             int index = start_at_cell + cellcount + c;
                             row_values[c] = values[index];
                         }
                         var sec_res_row = new SubQueryOutputRow<T>(row_values);
-                        section_result.Rows.Add( sec_res_row );
+                        subquery_output.Rows.Add( sec_res_row );
                         cellcount += num_cols;
                     }
                 }
