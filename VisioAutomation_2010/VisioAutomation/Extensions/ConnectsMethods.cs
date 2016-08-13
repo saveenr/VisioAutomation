@@ -1,12 +1,12 @@
 using System.Collections.Generic;
+using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Shapes.Connectors;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
 {
     public static class ConnectsMethods
     {
-        public static IEnumerable<IVisio.Connect> ToEnumerable(this IVisio.Connects connects)
+        public static IEnumerable<Connect> ToEnumerable(this Microsoft.Office.Interop.Visio.Connects connects)
         {
             return ConnectorHelper.ToEnumerable(connects);
         }
