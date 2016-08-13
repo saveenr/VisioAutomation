@@ -7,7 +7,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
     public abstract class QueryGroupSingleRow : QueryGroupBase
     {
-        private static void check_query(Query query)
+        private static void verify_cell_only_query(Query query)
         {
             if (query.Cells.Count < 1)
             {
@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             Query query,
             CellsToObject<T, RT> cell_data_to_object)
         {
-            check_query(query);
+            verify_cell_only_query(query);
 
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetCellData<RT>( surface, shapeids);
@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             Query query,
             CellsToObject<T, RT> cell_data_to_object)
         {
-            check_query(query);
+            verify_cell_only_query(query);
 
             var ss1 = new ShapeSheetSurface(shape);
             Result<CellData<RT>> data_for_shape = query.GetCellData<RT>(ss1);
