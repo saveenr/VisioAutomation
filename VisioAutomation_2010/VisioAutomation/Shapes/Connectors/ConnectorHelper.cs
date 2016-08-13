@@ -1,11 +1,11 @@
-using VisioAutomation.Extensions;
-using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Extensions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.Connections
+namespace VisioAutomation.Shapes.Connectors
 {
-    public static class ConnectionHelper
+    public static class ConnectorHelper
     {
         public static IEnumerable<IVisio.Connect> ToEnumerable(IVisio.Connects connects)
         {
@@ -18,7 +18,7 @@ namespace VisioAutomation.Shapes.Connections
 
         public static void ConnectShapes(IVisio.Shape from_shape, IVisio.Shape to_shape, IVisio.Shape connector_shape)
         {
-            ConnectionHelper.ConnectShapes(from_shape, to_shape, connector_shape, true);
+            ConnectorHelper.ConnectShapes(from_shape, to_shape, connector_shape, true);
         }
 
         public static void ConnectShapes(IVisio.Shape from_shape, IVisio.Shape to_shape, IVisio.Shape connector_shape, bool manual_connection)
@@ -78,7 +78,7 @@ namespace VisioAutomation.Shapes.Connections
         public static IList<IVisio.Shape> ConnectShapes( IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes,
             IVisio.Master connector_master)
         {
-            return ConnectionHelper.ConnectShapes(page, fromshapes, toshapes, connector_master, true);
+            return ConnectorHelper.ConnectShapes(page, fromshapes, toshapes, connector_master, true);
         }
 
         public static IList<IVisio.Shape> ConnectShapes(IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master connector_master, bool force_manual)
@@ -135,7 +135,7 @@ namespace VisioAutomation.Shapes.Connections
                 var to_shape = toshapes[i];
                 var connector = con_shapes[i];
 
-                ConnectionHelper.ConnectShapes(from_shape, to_shape, connector, true);
+                ConnectorHelper.ConnectShapes(from_shape, to_shape, connector, true);
 
                 connectors.Add(connector);
             }

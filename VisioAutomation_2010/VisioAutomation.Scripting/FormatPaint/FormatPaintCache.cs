@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheetQuery;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Scripting.FormatPaint
 {
     public class FormatPaintCache
     {

@@ -1,9 +1,10 @@
 using VisioAutomation.Colors;
+using VisioAutomation.Scripting.Utilities;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.DirectedGraph
 {
-    public static class XmlExtensions
+    static class XmlExtensions
     {
         public static ColorRGB AttributeAsColor(this SXL.XElement el, string name,
                                                      ColorRGB def)

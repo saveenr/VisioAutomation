@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Scripting
+﻿namespace VisioAutomation.Scripting.FormatPaint
 {
     public class FormatPaintCell
     {

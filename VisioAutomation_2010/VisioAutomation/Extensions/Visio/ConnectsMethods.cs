@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Shapes.Connectors;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
@@ -7,7 +8,7 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Connect> ToEnumerable(this IVisio.Connects connects)
         {
-            return VisioAutomation.Shapes.Connections.ConnectionHelper.ToEnumerable(connects);
+            return ConnectorHelper.ToEnumerable(connects);
         }
     }
 }

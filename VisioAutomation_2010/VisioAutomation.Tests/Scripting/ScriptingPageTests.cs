@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Scripting.View;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -21,25 +22,25 @@ namespace VisioAutomation_Tests.Scripting
 
             Assert.AreEqual(3,doc.Pages.Count);
             Assert.AreEqual(page3, client.Page.Get());
-            client.Page.GoTo(VisioAutomation.Scripting.PageDirection.First);
+            client.Page.GoTo(PageDirection.First);
             Assert.AreEqual(page1, client.Page.Get());
-            client.Page.GoTo(VisioAutomation.Scripting.PageDirection.Last);
+            client.Page.GoTo(PageDirection.Last);
             Assert.AreEqual(page3, client.Page.Get());
-            client.Page.GoTo(VisioAutomation.Scripting.PageDirection.Previous);
+            client.Page.GoTo(PageDirection.Previous);
             Assert.AreEqual(page2, client.Page.Get());
-            client.Page.GoTo(VisioAutomation.Scripting.PageDirection.Next);
+            client.Page.GoTo(PageDirection.Next);
             Assert.AreEqual(page3, client.Page.Get());
 
             // move to last and try to go to next page
-            client.Page.GoTo(VisioAutomation.Scripting.PageDirection.Last);
+            client.Page.GoTo(PageDirection.Last);
             Assert.AreEqual(page3, client.Page.Get());
-            client.Page.GoTo(VisioAutomation.Scripting.PageDirection.Next);
+            client.Page.GoTo(PageDirection.Next);
             Assert.AreEqual(page3, client.Page.Get());
 
             // move to first and try to go to previous page
-            client.Page.GoTo(VisioAutomation.Scripting.PageDirection.First);
+            client.Page.GoTo(PageDirection.First);
             Assert.AreEqual(page1, client.Page.Get());
-            client.Page.GoTo(VisioAutomation.Scripting.PageDirection.Previous);
+            client.Page.GoTo(PageDirection.Previous);
             Assert.AreEqual(page1, client.Page.Get());
 
             doc.Close(true);

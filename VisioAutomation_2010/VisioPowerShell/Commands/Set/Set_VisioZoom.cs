@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Scripting.View;
 
 namespace VisioPowerShell.Commands.Set
 {
@@ -6,7 +7,7 @@ namespace VisioPowerShell.Commands.Set
     public class Set_VisioZoom : VisioCmdlet
     {
         [Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 
-        public VisioAutomation.Scripting.Zoom Level = VisioAutomation.Scripting.Zoom.In;
+        public Zoom Level = Zoom.In;
 
         [Parameter(ParameterSetName = "percent", Position = 0, Mandatory = true)] 
         public double Percent = 0;

@@ -95,6 +95,7 @@
     <Compile Include="ShapeSheetQuery\Columns\ColumnBase.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ColumnCellIndex.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnCellIndex.cs" />
+    <Compile Include="ShapeSheetQuery\Results\SubQueryResultRow.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
@@ -105,12 +106,11 @@
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Utilities\TextHelper.cs" />
-    <Compile Include="Drawing\Margin.cs" />
-    <Compile Include="Shapes\Connections\ConnectionPointType.cs" />
-    <Compile Include="Shapes\Connections\ConnectionPointHelper.cs" />
+    <Compile Include="Drawing\Layout\Margin.cs" />
+    <Compile Include="Shapes\ConnectionPoints\ConnectionPointType.cs" />
+    <Compile Include="Shapes\ConnectionPoints\ConnectionPointHelper.cs" />
     <Compile Include="Shapes\Controls\ControlHelper.cs" />
-    <Compile Include="Masters\MasterLoader.cs" />
-    <Compile Include="Drawing\BoundingBox.cs" />
+    <Compile Include="Drawing\Layout\BoundingBox.cs" />
     <Compile Include="Shapes\FormatCells.cs" />
     <Compile Include="Extensions\VisioAutomation\CellDataMethods.cs" />
     <Compile Include="Interop\EnumType.cs" />
@@ -119,8 +119,8 @@
     <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Pages\PageCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyHelper.cs" />
-    <Compile Include="Drawing\AlignmentHorizontal.cs" />
-    <Compile Include="Drawing\AlignmentVertical.cs" />
+    <Compile Include="Drawing\Layout\AlignmentHorizontal.cs" />
+    <Compile Include="Drawing\Layout\AlignmentVertical.cs" />
     <Compile Include="Shapes\LockCells.cs" />
     <Compile Include="Application\PerfSettings.cs" />
     <Compile Include="Pages\PageLayout\CircularLayout.cs" />
@@ -148,7 +148,7 @@
     <Compile Include="ShapeSheetQuery\Results\Result.cs" />
     <Compile Include="ShapeSheetQuery\SubQueryDetails.cs" />
     <Compile Include="ShapeSheetQuery\SubQuery.cs" />
-    <Compile Include="ShapeSheetQuery\Results\SectionSubQueryResult.cs" />
+    <Compile Include="ShapeSheetQuery\Results\SubQueryResult.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ListColumnSRC.cs" />
     <Compile Include="ShapeSheetQuery\Utilities\StreamBuilder.cs" />
     <Compile Include="ShapeSheetQuery\ListSubQuery.cs" />
@@ -157,9 +157,9 @@
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="Application\AlertResponseCode.cs" />
-    <Compile Include="Drawing\Axis.cs" />
+    <Compile Include="Drawing\Layout\Axis.cs" />
     <Compile Include="Colors\ColorHSL.cs" />
-    <Compile Include="Shapes\Connections\ConnectorType.cs" />
+    <Compile Include="Shapes\Connectors\ConnectorType.cs" />
     <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Text\CharacterCells.cs" />
@@ -173,7 +173,6 @@
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
     <Compile Include="Colors\ColorRGB.cs" />
-    <Compile Include="Drawing\SnappingGrid.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="ShapeSheet\SIDSRC.cs" />
@@ -182,7 +181,7 @@
     <Compile Include="Extensions\Visio\LayersMethods.cs" />
     <Compile Include="ShapeSheet\SRCConstants.cs" />
     <Compile Include="ShapeSheet\SRC.cs" />
-    <Compile Include="Shapes\Connections\ConnectionPointCells.cs" />
+    <Compile Include="Shapes\ConnectionPoints\ConnectionPointCells.cs" />
     <Compile Include="Extensions\Visio\SectionMethods.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellHelper.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCell.cs" />
@@ -193,7 +192,7 @@
     </Compile>
     <Compile Include="ShapeSheet\CellData.cs" />
     <Compile Include="ShapeSheetQuery\Query.cs" />
-    <Compile Include="Shapes\Connections\ConnectionHelper.cs" />
+    <Compile Include="Shapes\Connectors\ConnectorHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Shapes\Controls\ControlCells.cs" />

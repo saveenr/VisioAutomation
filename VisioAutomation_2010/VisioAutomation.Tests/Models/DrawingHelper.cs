@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Drawing.Layout;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Core
@@ -11,7 +12,7 @@ namespace VisioAutomation_Tests.Core
         {
             var doubles = new[] {0.0, 0.0, 1.0, -2.0};
             var points = VA.Drawing.Point.FromDoubles(doubles);
-            var bb0 = new VA.Drawing.BoundingBox(points);
+            var bb0 = new BoundingBox(points);
             var bb = bb0.Rectangle;
             Assert.AreEqual(0, bb.Left);
             Assert.AreEqual(0, bb.Top);

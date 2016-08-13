@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Scripting.Exceptions;
+using VisioAutomation.Scripting.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VATREE = VisioAutomation.Models.Layouts.Tree;
 
@@ -85,7 +88,7 @@ namespace VisioAutomation.Scripting.Commands
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
                 formpage.Size = new Drawing.Size(8.5, 11);
-                formpage.Margin = new Drawing.Margin(0.5, 0.5, 0.5, 0.5);
+                formpage.Margin = new Margin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
             }
@@ -124,7 +127,7 @@ namespace VisioAutomation.Scripting.Commands
 
                     var formpage = new Models.Documents.Forms.FormPage();
                     formpage.Size = new Drawing.Size(8.5, 11);
-                    formpage.Margin = new Drawing.Margin(0.5, 0.5, 0.5, 0.5);
+                    formpage.Margin = new Margin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)

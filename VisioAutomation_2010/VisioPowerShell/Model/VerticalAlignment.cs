@@ -1,10 +1,12 @@
+using VisioAutomation.Drawing.Layout;
+
 namespace VisioPowerShell.Model
 {
     public enum VerticalAlignment
     {
         None = -1,
-        Bottom = VisioAutomation.Drawing.AlignmentVertical.Bottom,
-        Center = VisioAutomation.Drawing.AlignmentVertical.Center,
-        Top = VisioAutomation.Drawing.AlignmentVertical.Top
+        Bottom = AlignmentVertical.Bottom,
+        Center = AlignmentVertical.Center,
+        Top = AlignmentVertical.Top
     }
 }

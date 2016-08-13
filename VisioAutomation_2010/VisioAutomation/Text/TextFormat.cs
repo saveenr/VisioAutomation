@@ -3,7 +3,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheetQuery;
 
 namespace VisioAutomation.Text
 {

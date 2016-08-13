@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Shapes.Connectors;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -50,12 +51,12 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (master == null)
                 {
-                    var connectors = VACONNECT.ConnectionHelper.ConnectShapes(active_page, fromshapes, toshapes, null, false);
+                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, null, false);
                     return connectors;                    
                 }
                 else
                 {
-                    var connectors = VACONNECT.ConnectionHelper.ConnectShapes(active_page, fromshapes, toshapes, master);
+                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, master);
                     return connectors;
                 }
             }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Scripting.Utilities
 {
     internal static class TextCommandsUtil
     {

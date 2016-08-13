@@ -1,4 +1,5 @@
 using VisioAutomation.Drawing;
+using VisioAutomation.Drawing.Layout;
 
 namespace VisioAutomation.Models.InternalTree
 {
@@ -11,7 +12,7 @@ namespace VisioAutomation.Models.InternalTree
             this.SubtreeSeparation = 1;
             this.SiblingSeparation = 1;
             this.Direction = LayoutDirection.Up;
-            this.Alignment = Drawing.AlignmentVertical.Top;
+            this.Alignment = AlignmentVertical.Top;
             this.MaximumDepth = 100;
             this.LevelSeparation = 1;
             this.DefaultNodeSize = new Drawing.Size(1, 1);
@@ -20,7 +21,7 @@ namespace VisioAutomation.Models.InternalTree
         public Drawing.Size DefaultNodeSize { get; set; }
         public double LevelSeparation { get; set; }
         public int MaximumDepth { get; set; }
-        public Drawing.AlignmentVertical Alignment { get; set; }
+        public AlignmentVertical Alignment { get; set; }
         public LayoutDirection Direction { get; set; }
         public double SiblingSeparation { get; set; }
         public double SubtreeSeparation { get; set; }

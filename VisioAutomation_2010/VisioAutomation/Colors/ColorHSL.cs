@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VisioAutomation.Colors
+﻿namespace VisioAutomation.Colors
 {
     public struct ColorHSL
     {

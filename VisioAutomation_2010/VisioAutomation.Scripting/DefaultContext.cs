@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VisioAutomation.Scripting
+﻿namespace VisioAutomation.Scripting
 {
     public class DefaultContext : Context
     {

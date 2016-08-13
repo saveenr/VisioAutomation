@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VisioAutomation.Text
+﻿namespace VisioAutomation.Text
 {
     public struct TabStop
     {

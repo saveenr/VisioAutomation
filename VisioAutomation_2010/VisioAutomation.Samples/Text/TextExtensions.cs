@@ -1,4 +1,5 @@
 using VisioAutomation.Colors;
+using VisioAutomation.Drawing.Layout;
 using VA=VisioAutomation;
 
 namespace VisioAutomationSamples
@@ -7,7 +8,7 @@ namespace VisioAutomationSamples
     {
         public static VisioAutomation.Models.Text.TextElement AddElementEx(this VisioAutomation.Models.Text.TextElement p, string text,
                                                               int? font, double? size, int? color,
-                                                              VA.Drawing.AlignmentHorizontal? halign,
+                                                              AlignmentHorizontal? halign,
                                                               VA.Text.CharStyle? cs)
         {
             var el = p.AddElement(text);

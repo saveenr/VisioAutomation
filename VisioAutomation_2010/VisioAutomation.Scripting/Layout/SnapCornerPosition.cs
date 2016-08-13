@@ -1,4 +1,4 @@
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Scripting.Layout
 {
     public enum SnapCornerPosition
     {

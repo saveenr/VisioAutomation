@@ -1,5 +1,3 @@
-using System;
-
 namespace VisioAutomation.Application.Logging
 {
     public class LogRecord

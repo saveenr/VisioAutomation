@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Scripting.View;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -17,7 +18,7 @@ namespace VisioPowerShell.Commands.Set
         public int PageNumber = -1;
 
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Flags")]
-        public VA.Scripting.PageDirection Direction { get; set; }
+        public PageDirection Direction { get; set; }
         
         protected override void ProcessRecord()
         {

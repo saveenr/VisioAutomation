@@ -5,7 +5,7 @@ using VisioAutomation.ShapeSheetQuery.Results;
 
 namespace VisioAutomation.ShapeSheetQuery.QueryGroups
 {
-    public abstract class CellQueryGroupMultiRow : QueryGroupBase
+    public abstract class QueryGroupMultiRow : QueryGroupBase
     {
         private static void check_query(Query query)
         {
@@ -27,7 +27,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             Query query,
             RowToObject<T, RT> row_to_object)
         {
-            CellQueryGroupMultiRow.check_query(query);
+            QueryGroupMultiRow.check_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
             var surface = new ShapeSheetSurface(page);
@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             foreach (var data_for_shape in data_for_shapes)
             {
                 var sec = data_for_shape.Sections[0];
-                var sec_objects = CellQueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
+                var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
                 list.Add(sec_objects);
             }
 
@@ -48,17 +48,17 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             Query query,
             RowToObject<T, RT> row_to_object)
         {
-            CellQueryGroupMultiRow.check_query(query);
+            QueryGroupMultiRow.check_query(query);
 
             var ss1 = new ShapeSheetSurface(shape);
             var data_for_shape = query.GetCellData<RT>(ss1);
             var sec = data_for_shape.Sections[0];
-            var sec_objects = CellQueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
+            var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
             
             return sec_objects;
         }
 
-        private static List<T> SectionRowsToObjects<T, RT>(SectionSubQueryResult<ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
+        private static List<T> SectionRowsToObjects<T, RT>(SubQueryResult<ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
         {
             int num_rows = sec.Rows.Count;
             var sec_objects = new List<T>(num_rows);

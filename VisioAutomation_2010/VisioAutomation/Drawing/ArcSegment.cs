@@ -2,8 +2,8 @@
 {
     internal struct ArcSegment
     {
-        readonly public double begin;
-        readonly public double end;
+        public readonly double begin;
+        public readonly double end;
 
         internal ArcSegment(double b, double e)
         {

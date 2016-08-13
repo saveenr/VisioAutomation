@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.Drawing
+namespace VisioAutomation.Drawing.Layout
 {
     public struct BoundingBox
     {

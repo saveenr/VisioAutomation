@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes.Connectors;
 using VADRAW=VisioAutomation.Drawing;
 using VASS=VisioAutomation.ShapeSheet;
 using VACONNECT = VisioAutomation.Shapes.Connections;
@@ -21,7 +22,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
 
             var drop_point = new VADRAW.Point(-2, -2);
             var c1 = page.Drop(dcm, drop_point);
-            VACONNECT.ConnectionHelper.ConnectShapes(a, b, c1);
+            ConnectorHelper.ConnectShapes(a, b, c1);
 
             //a.AutoConnect(b, connect_dir_none, null);
 

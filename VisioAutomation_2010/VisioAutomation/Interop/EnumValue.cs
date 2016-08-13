@@ -1,5 +1,3 @@
-using System;
-
 namespace VisioAutomation.Interop
 {
     public class EnumValue

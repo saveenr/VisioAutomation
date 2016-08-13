@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Shapes.Connectors;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
@@ -27,7 +28,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         public Connector AddConnection(string id, Shape from, Shape to)
         {
-            return this.AddConnection(id, from, to, id, VA.Shapes.Connections.ConnectorType.Default);
+            return this.AddConnection(id, from, to, id, ConnectorType.Default);
         }
 
         public Connector AddConnection(
@@ -35,7 +36,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             Shape from,
             Shape to,
             string label,
-             Shapes.Connections.ConnectorType type)
+             ConnectorType type)
         {
             var new_connector = new Connector(from, to);
             new_connector.ID = id;
@@ -59,7 +60,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         }
 
         public Connector AddConnection(string id, Shape from, Shape to, string label,
-            VA.Shapes.Connections.ConnectorType type, int beginArrow, int endArrow, string hyperlink)
+            ConnectorType type, int beginArrow, int endArrow, string hyperlink)
         {
             var new_connector = new Connector(from, to);
             new_connector.ID = id;
