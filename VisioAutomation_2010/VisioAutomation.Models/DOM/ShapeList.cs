@@ -7,6 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Collections;
 using VisioAutomation.Masters;
+using VisioAutomation.Models;
 using VisioAutomation.Shapes.Connectors;
 
 namespace VisioAutomation.DOM
