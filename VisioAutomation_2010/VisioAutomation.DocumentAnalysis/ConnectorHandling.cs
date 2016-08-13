@@ -5,16 +5,4 @@ namespace VisioAutomation.DocumentAnalysis
         public DirectionSource DirectionSource = DirectionSource.UseConnectorArrows;
         public NoArrowsHandling NoArrowsHandling = NoArrowsHandling.TreatAsBidirectional;
     }
-
-    public enum DirectionSource
-    {
-        UseConnectionOrder,
-        UseConnectorArrows
-    }
-
-    public enum NoArrowsHandling
-    {
-        Exclude,
-        TreatAsBidirectional,
-    }
 }
