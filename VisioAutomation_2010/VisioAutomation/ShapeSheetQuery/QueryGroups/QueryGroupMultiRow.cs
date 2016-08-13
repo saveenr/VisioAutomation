@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             IVisio.Page page,
             IList<int> shapeids,
             Query query,
-            RowToObject<T, RT> row_to_object)
+            CellsToObject<T, RT> cell_data_to_object)
         {
             QueryGroupMultiRow.verify_single_section_query(query);
 
@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             foreach (var data_for_shape in data_for_shapes)
             {
                 var sec = data_for_shape.Sections[0];
-                var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
+                var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, cell_data_to_object);
                 list.Add(sec_objects);
             }
 
@@ -46,25 +46,25 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         public static IList<T> _GetCells<T, RT>(
             IVisio.Shape shape,
             Query query,
-            RowToObject<T, RT> row_to_object)
+            CellsToObject<T, RT> cell_data_to_object)
         {
             QueryGroupMultiRow.verify_single_section_query(query);
 
             var ss1 = new ShapeSheetSurface(shape);
             var data_for_shape = query.GetCellData<RT>(ss1);
             var sec = data_for_shape.Sections[0];
-            var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, row_to_object);
+            var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, cell_data_to_object);
             
             return sec_objects;
         }
 
-        private static List<T> SectionRowsToObjects<T, RT>(SubQueryResult<ShapeSheet.CellData<RT>> sec, RowToObject<T, RT> row_to_object)
+        private static List<T> SectionRowsToObjects<T, RT>(SubQueryResult<ShapeSheet.CellData<RT>> sec, CellsToObject<T, RT> cell_data_to_object)
         {
             int num_rows = sec.Rows.Count;
             var sec_objects = new List<T>(num_rows);
             foreach (var row in sec.Rows)
             {
-                var obj = row_to_object(row.Cells);
+                var obj = cell_data_to_object(row.Cells);
                 sec_objects.Add(obj);
             }
             return sec_objects;

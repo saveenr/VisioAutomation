@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         protected static IList<T> _GetCells<T, RT>(
             IVisio.Page page, IList<int> shapeids,
             Query query,
-            RowToObject<T, RT> row_to_object)
+            CellsToObject<T, RT> cell_data_to_object)
         {
             check_query(query);
 
@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
             {
-                var cells = row_to_object(data_for_shape.Cells);
+                var cells = cell_data_to_object(data_for_shape.Cells);
                 list.Add(cells);
             }
             return list;
@@ -41,13 +41,13 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         protected static T _GetCells<T, RT>(
             IVisio.Shape shape,
             Query query,
-            RowToObject<T, RT> row_to_object)
+            CellsToObject<T, RT> cell_data_to_object)
         {
             check_query(query);
 
             var ss1 = new ShapeSheetSurface(shape);
             Result<CellData<RT>> data_for_shape = query.GetCellData<RT>(ss1);
-            var cells = row_to_object(data_for_shape.Cells);
+            var cells = cell_data_to_object(data_for_shape.Cells);
             return cells;
         }
     }
