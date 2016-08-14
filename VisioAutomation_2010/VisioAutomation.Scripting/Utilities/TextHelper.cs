@@ -45,14 +45,14 @@ namespace VisioAutomation.Scripting.Utilities
             const string formula_wrap = "WIDTH*1";
             const string formula_no_wrap = "TEXTWIDTH(TheText)";
             string formula = wrap ? formula_wrap : formula_no_wrap;
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
             
             foreach (int shapeid in shapeids)
             {
                 update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtWidth, formula);
             }
 
-            update.Execute(page);
+            update.Commit(page);
         }
 
         public static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)

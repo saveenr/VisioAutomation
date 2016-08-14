@@ -23,7 +23,7 @@ namespace VisioPowerShell.Commands.Set
 
         protected override void ProcessRecord()
         {
-            var update = new SRCFormulaWriter();
+            var update = new FormulaWriterSRC();
             update.BlastGuards = this.BlastGuards;
             update.TestCircular= this.TestCircular;
 
@@ -53,7 +53,7 @@ namespace VisioPowerShell.Commands.Set
                 using (var undoscope = this.Client.Application.NewUndoScope("SetPageCells"))
                 {
                     this.WriteVerbose("Start Update");
-                    update.Execute(pagesheet);
+                    update.Commit(pagesheet);
                     this.WriteVerbose("End Update");
                 }
             }

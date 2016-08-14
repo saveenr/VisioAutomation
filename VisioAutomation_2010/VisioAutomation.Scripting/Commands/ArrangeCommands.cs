@@ -205,14 +205,14 @@ namespace VisioAutomation.Scripting.Commands
         private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
         {
 
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var shape_id = shapeids[i];
                 var xfrm = xfrms[i];
                 xfrm.SetFormulas((short)shape_id, update);
             }
-            update.Execute(page);
+            update.Commit(page);
         }
 
 
@@ -348,7 +348,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
 
             foreach (int shapeid in shapeids)
             {
@@ -359,7 +359,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Lock Properties"))
             {
                 var active_page = application.ActivePage;
-                update.Execute(active_page);
+                update.Commit(active_page);
             }
         }
 
@@ -375,7 +375,7 @@ namespace VisioAutomation.Scripting.Commands
             } 
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
             foreach (int shapeid in shapeids)
             {
                 if (w.HasValue && w.Value>=0)
@@ -392,7 +392,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Size"))
             {
                 var active_page = application.ActivePage;
-                update.Execute(active_page);
+                update.Commit(active_page);
             }
         }
 

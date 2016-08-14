@@ -79,9 +79,9 @@ namespace VisioAutomation.DOM
                     this.PageCells.PageWidth = this.Size.Value.Width;
                 }
 
-                var update = new SIDSRCFormulaWriter();
+                var update = new FormulaWriterSIDSRC();
                 this.PageCells.SetFormulas((short)page_sheet.ID, update);
-                update.Execute(page);
+                update.Commit(page);
                 
                 // Then render the shapes
                 this.Shapes.Render(page);

@@ -1,27 +1,29 @@
+using IVisio= Microsoft.Office.Interop.Visio;
+
 namespace VisioAutomation.ShapeSheet.Writers
 {
     public struct ResultValue
     {
-        public readonly double ResultNumeric;
-        public readonly string ResultString;
-        public readonly Microsoft.Office.Interop.Visio.VisUnitCodes UnitCode;
+        public readonly double ValueNumeric;
+        public readonly string ValueString;
+        public readonly IVisio.VisUnitCodes UnitCode;
         public readonly ResultType ResultType;
 
-        internal ResultValue(double result,
-            Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        internal ResultValue(double value,
+            IVisio.VisUnitCodes unit_code)
         {
             this.UnitCode = unit_code;
-            this.ResultNumeric = result;
-            this.ResultString = null;
+            this.ValueNumeric = value;
+            this.ValueString = null;
             this.ResultType = ResultType.ResultNumeric;
         }
 
-        internal ResultValue(string result,
-            Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        internal ResultValue(string value,
+            IVisio.VisUnitCodes unit_code)
         {
             this.UnitCode = unit_code;
-            this.ResultNumeric = 0.0;
-            this.ResultString = result;
+            this.ValueNumeric = 0.0;
+            this.ValueString = value;
             this.ResultType = ResultType.ResultString;
         }
 

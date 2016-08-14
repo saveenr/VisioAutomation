@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 // Now restore all the formatting - based on any initial formatting from the text
 
-                var update = new SIDSRCFormulaWriter();
+                var update = new FormulaWriterSIDSRC();
                 for (int i = 0; i < shapes.Count; i++)
                 {
                     var format = formats[i];
@@ -118,7 +118,7 @@ namespace VisioAutomation.Scripting.Commands
                     }
                 }
 
-                update.Execute(page);
+                update.Commit(page);
             }
         }
 
@@ -171,7 +171,7 @@ namespace VisioAutomation.Scripting.Commands
                 return ;
             }
 
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
             foreach (var shape in shapes)
             {
                 if (0 ==
@@ -193,7 +193,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.VerticalAlign, "0");
             } 
             var active_page = application.ActivePage; 
-            update.Execute(active_page);
+            update.Commit(active_page);
         }
 
         public void SetTextWrapping(IList<IVisio.Shape> target_shapes,bool wrap)
@@ -249,7 +249,7 @@ namespace VisioAutomation.Scripting.Commands
                 var src_width = ShapeSheet.SRCConstants.Width;
                 var src_height = ShapeSheet.SRCConstants.Height;
 
-                var update = new SIDSRCFormulaWriter();
+                var update = new FormulaWriterSIDSRC();
                 for (int i = 0; i < new_sizes.Count; i++)
                 {
                     var shapeid = shapeids[i];
@@ -258,7 +258,7 @@ namespace VisioAutomation.Scripting.Commands
                     update.SetFormula((short)shapeid, src_height, new_size.Height);
                 }
 
-                update.Execute(active_page);
+                update.Commit(active_page);
             }
         }
     }

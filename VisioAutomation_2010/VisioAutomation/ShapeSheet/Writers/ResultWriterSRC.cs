@@ -1,12 +1,12 @@
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class SRCResultWriter : WriterBase<VisioAutomation.ShapeSheet.SRC, ResultValue>
+    public class ResultWriterSRC : WriterBase<VisioAutomation.ShapeSheet.SRC, ResultValue>
     {
-        public SRCResultWriter() : base()
+        public ResultWriterSRC() : base()
         {
         }
 
-        public SRCResultWriter(int capacity) : base(capacity)
+        public ResultWriterSRC(int capacity) : base(capacity)
         {
         }
 
@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.ValueItems.Add(new ResultValue(value, unitcode));
         }
 
-        public override void Commit(ShapeSheetSurface surface)
+        protected override void _commit_to_surface(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
             if (this.ValueItems.Count < 1)
@@ -33,11 +33,9 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             var stream = SRC.ToStream(this.StreamItems);
 
-            object[] unitcodes;
-            object[] results;
-
-            WriterBase<SIDSRC, ResultValue>.build_results(this.ValueItems, out unitcodes, out results);
-            var flags = this.ResultFlags;
+            var unitcodes = WriterHelper.build_results_arrays_unitcode(this.ValueItems);
+            var results = WriterHelper.build_results_arrays_results(this.ValueItems);
+            var flags = this.GetResultFlags();
             if (this.ValueItems[0].ResultType == ResultType.ResultString)
             {
                 flags |= Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetStrings;

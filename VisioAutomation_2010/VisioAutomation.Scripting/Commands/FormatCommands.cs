@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this._client.Application.Get();
-            update.Execute(application.ActivePage);            
+            update.Commit(application.ActivePage);            
         }
 
         public IList<Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
@@ -107,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)
@@ -125,7 +125,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
-            update.Execute(active_page);
+            update.Commit(active_page);
         }
 
         private readonly FormatPaintCache cache = new FormatPaintCache();

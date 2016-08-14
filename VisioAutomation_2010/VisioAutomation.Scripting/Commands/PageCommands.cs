@@ -316,14 +316,14 @@ namespace VisioAutomation.Scripting.Commands
             double new_height = old_size.Width;
             double new_width = old_size.Height;
 
-            var update = new SRCFormulaWriter(3);
+            var update = new FormulaWriterSRC(3);
             update.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_width);
             update.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_height);
             update.SetFormula(ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Page Orientation"))
             {
-                update.Execute(active_page.PageSheet);
+                update.Commit(active_page.PageSheet);
             }
         }
 
@@ -357,7 +357,7 @@ namespace VisioAutomation.Scripting.Commands
                 page = application.ActivePage;
             }
 
-            var update = new SRCFormulaWriter();
+            var update = new FormulaWriterSRC();
 
             update.SetFormula(ShapeSheet.SRCConstants.XGridOrigin, "0.0");
             update.SetFormula(ShapeSheet.SRCConstants.YGridOrigin, "0.0");
@@ -366,7 +366,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = this._client.Application.NewUndoScope("Reset Page Origin"))
             {
-                update.Execute(page.PageSheet);
+                update.Commit(page.PageSheet);
             }
         }
 
@@ -380,10 +380,10 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var active_page = application.ActivePage;
                 var page_sheet = active_page.PageSheet;
-                var update = new SRCFormulaWriter(2);
+                var update = new FormulaWriterSRC(2);
                 update.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_size.Width);
                 update.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_size.Height);
-                update.Execute(page_sheet);
+                update.Commit(page_sheet);
             }
         }
 

@@ -44,10 +44,10 @@ namespace VisioPowerShell.Commands.Resize
                     newpagecells.PageHeight = this.Height;
                 }
 
-                var update = new SRCFormulaWriter();
+                var update = new FormulaWriterSRC();
                 newpagecells.SetFormulas(update);
                 update.BlastGuards = true;
-                update.Execute(page);
+                update.Commit(page);
             }
         }
     }

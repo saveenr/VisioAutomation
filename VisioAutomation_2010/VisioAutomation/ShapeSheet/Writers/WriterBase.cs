@@ -8,8 +8,8 @@ namespace VisioAutomation.ShapeSheet.Writers
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        public List<TStreamType> StreamItems;
-        public List<TValue> ValueItems;
+        public readonly List<TStreamType> StreamItems;
+        public readonly List<TValue> ValueItems;
 
         public void Clear()
         {
@@ -29,97 +29,55 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.ValueItems = new List<TValue>(capacity);
         }
 
-        protected IVisio.VisGetSetArgs ResultFlags
+        protected IVisio.VisGetSetArgs GetResultFlags()
         {
-            get
+            var flags = this.combine_blastguards_and_testcircular_flags();
+            if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
             {
-                var flags = this.get_common_flags();
-                if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
-                {
-                    flags = (IVisio.VisGetSetArgs)((short)flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
-                }
-                return flags;
+                flags = (IVisio.VisGetSetArgs)((short)flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
             }
+            return flags;
         }
 
-        protected IVisio.VisGetSetArgs FormulaFlags
+        protected IVisio.VisGetSetArgs GetFormulaFlags()
         {
-            get
-            {
-                var common_flags = this.get_common_flags();
-                var formula_flags = (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;
-                var combined_flags = (short)common_flags | formula_flags;
-                return (IVisio.VisGetSetArgs)combined_flags;
-            }
+            var common_flags = this.combine_blastguards_and_testcircular_flags();
+            var formula_flags = (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;
+            var combined_flags = (short)common_flags | formula_flags;
+            return (IVisio.VisGetSetArgs)combined_flags;
         }
 
-        private IVisio.VisGetSetArgs get_common_flags()
+        private IVisio.VisGetSetArgs combine_blastguards_and_testcircular_flags()
         {
-            IVisio.VisGetSetArgs f_bg = this.BlastGuards ? IVisio.VisGetSetArgs.visSetBlastGuards : 0;
-            IVisio.VisGetSetArgs f_tc = this.TestCircular ? IVisio.VisGetSetArgs.visSetTestCircular : 0;
+            var f_bg = this.BlastGuards ? IVisio.VisGetSetArgs.visSetBlastGuards : 0;
+            var f_tc = this.TestCircular ? IVisio.VisGetSetArgs.visSetTestCircular : 0;
 
-            var flags = (short)f_bg | (short)f_tc;
+            var flags = ((short)f_bg) | ((short)f_tc);
             return (IVisio.VisGetSetArgs)flags;
         }
 
-        public static object[] build_formulas(IList<FormulaLiteral> formulas2)
-        {
-            var formulas = new object[formulas2.Count];
-            int i = 0;
-            foreach (var rec in formulas2)
-            {
-                formulas[i] = rec.Value;
-                i++;
-            }
-            return formulas;
-        }
+        protected abstract void _commit_to_surface(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
 
-        public static void build_results(IList<ResultValue> formulas2, out object[] unitcodes, out object[] results)
+        public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            unitcodes = new object[formulas2.Count];
-            results = new object[formulas2.Count];
-            int i = 0;
-            foreach (var update in formulas2)
-            {
-                unitcodes[i] = update.UnitCode;
-                if (update.ResultType == ResultType.ResultNumeric)
-                {
-                    results[i] = update.ResultNumeric;
-                }
-                else if (update.ResultType == ResultType.ResultString)
-                {
-                    results[i] = update.ResultString;
-                }
-                else
-                {
-                    throw new AutomationException("Unhandled update type");
-                }
-                i++;
-            }
+            this._commit_to_surface(surface);
         }
-
-        public abstract void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
-
-        public void Execute(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
-        {
-            this.Commit(surface);
-        }
-        public void Execute(IVisio.Shape shape)
+        public void Commit(IVisio.Shape shape)
         {
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
-            this.Commit(surface);                
+            this._commit_to_surface(surface);                
         }
 
-        public void Execute(IVisio.Page shape)
+        public void Commit(IVisio.Page shape)
         {
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
-            this.Commit(surface);
+            this._commit_to_surface(surface);
         }
 
-        public void Execute(IVisio.Master shape)
+        public void Commit(IVisio.Master shape)
         {
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
-            this.Commit(surface);
+            this._commit_to_surface(surface);
         }
 
         public int Count

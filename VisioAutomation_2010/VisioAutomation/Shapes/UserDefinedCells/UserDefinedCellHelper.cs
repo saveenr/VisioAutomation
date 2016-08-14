@@ -74,7 +74,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var update = new SRCFormulaWriter();
+            var update = new FormulaWriterSRC();
 
             if (value.HasValue)
             {
@@ -88,7 +88,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 update.SetFormula(src, prompt.Encode());
             }
 
-            update.Execute(shape);
+            update.Commit(shape);
         }
 
         /// <summary>

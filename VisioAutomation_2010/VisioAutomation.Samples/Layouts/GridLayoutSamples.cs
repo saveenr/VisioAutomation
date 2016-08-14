@@ -46,7 +46,7 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Shapes.FormatCells();
             int i = 0;
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;
@@ -59,7 +59,7 @@ namespace VisioAutomationSamples
                 i++;
             }
 
-            update.Execute(page);
+            update.Commit(page);
 
             var bordersize = new VA.Drawing.Size(1,1);
             page.ResizeToFitContents(bordersize);

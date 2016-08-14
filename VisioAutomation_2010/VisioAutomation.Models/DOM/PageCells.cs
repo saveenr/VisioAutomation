@@ -33,7 +33,7 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral ResizePage { get; set; }
         public ShapeSheet.FormulaLiteral RouteStyle { get; set; }
 
-        public void Apply(SIDSRCFormulaWriter update, short id)
+        public void Apply(FormulaWriterSIDSRC update, short id)
         {
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.AvenueSizeX, this.AvenueSizeX);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.AvenueSizeY, this.AvenueSizeY);

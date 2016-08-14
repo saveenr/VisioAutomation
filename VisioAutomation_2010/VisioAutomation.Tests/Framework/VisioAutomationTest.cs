@@ -145,10 +145,10 @@ namespace VisioAutomation_Tests
 
             var page_sheet = page.PageSheet;
 
-            var update = new SRCFormulaWriter(2);
+            var update = new FormulaWriterSRC(2);
             update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
             update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
-            update.Execute(page_sheet);
+            update.Commit(page_sheet);
         }
 
         public static VisioAutomation.Drawing.Size GetPageSize(IVisio.Page page)

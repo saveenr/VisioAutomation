@@ -153,9 +153,9 @@ namespace VisioAutomation.Pages
 
             // first update all the page cells
             var dest_pagesheet = dest_page.PageSheet;
-            var update = new SRCFormulaWriter();
+            var update = new FormulaWriterSRC();
             pagecells.SetFormulas(update);
-            update.Execute(dest_pagesheet);
+            update.Commit(dest_pagesheet);
 
             // make sure the new page looks like the old page
             dest_page.Background = src_page.Background;
@@ -186,9 +186,9 @@ namespace VisioAutomation.Pages
             var page_cells = new PageCells();
             page_cells.PageHeight = size.Height;
             page_cells.PageWidth = size.Width;
-            var pageupdate = new SRCFormulaWriter();
+            var pageupdate = new FormulaWriterSRC();
             page_cells.SetFormulas(pageupdate);
-            pageupdate.Execute(page.PageSheet);
+            pageupdate.Commit(page.PageSheet);
         }
         
         public static void ResizeToFitContents(IVisio.Page page, Drawing.Size padding)

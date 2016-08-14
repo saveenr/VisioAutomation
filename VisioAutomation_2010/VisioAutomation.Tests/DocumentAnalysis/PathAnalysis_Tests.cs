@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
 
             if (a_arrow || b_arrow)
             {
-                var update = new SIDSRCFormulaWriter();
+                var update = new FormulaWriterSIDSRC();
                 if (a_arrow)
                 {
                     update.SetFormula(c1.ID16, VASS.SRCConstants.BeginArrow, "13");                    
@@ -37,7 +37,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
                 {
                     update.SetFormula(c1.ID16, VASS.SRCConstants.EndArrow, "13");
                 }
-                update.Execute(page);
+                update.Commit(page);
             }
         }
 

@@ -42,7 +42,7 @@ namespace VisioAutomation.Shapes.Geometry
             short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
-            var update = new SRCFormulaWriter();
+            var update = new FormulaWriterSRC();
 
             var src_nofill = ShapeSheet.SRCConstants.Geometry_NoFill.ForSectionAndRow(sec_index, 0);
             var src_noline = ShapeSheet.SRCConstants.Geometry_NoLine.ForSectionAndRow(sec_index, 0);
@@ -62,7 +62,7 @@ namespace VisioAutomation.Shapes.Geometry
                 row_count++;
             }
 
-            update.Execute(shape);
+            update.Commit(shape);
             return 0;
         }
 

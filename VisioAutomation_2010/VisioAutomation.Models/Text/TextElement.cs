@@ -159,7 +159,7 @@ namespace VisioAutomation.Models.Text
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
-            var update = new SRCFormulaWriter();
+            var update = new FormulaWriterSRC();
 
             foreach (var region in regions_to_format)
             {
@@ -181,7 +181,7 @@ namespace VisioAutomation.Models.Text
 
                     update.Clear();
                     charcells.ApplyFormulas(update, rownum);
-                    update.Execute(shape);
+                    update.Commit(shape);
                 }
 
                 // Apply paragraph formatting
@@ -201,7 +201,7 @@ namespace VisioAutomation.Models.Text
 
                     update.Clear();
                     paracells.ApplyFormulas(update, rownum);
-                    update.Execute(shape);
+                    update.Commit(shape);
                 }
             }
 

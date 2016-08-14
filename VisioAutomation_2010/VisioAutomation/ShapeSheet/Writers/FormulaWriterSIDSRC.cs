@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class SIDSRCFormulaWriter : WriterBase<VisioAutomation.ShapeSheet.SIDSRC,FormulaLiteral>
+    public class FormulaWriterSIDSRC : WriterBase<VisioAutomation.ShapeSheet.SIDSRC,FormulaLiteral>
     {
-        public SIDSRCFormulaWriter() : base()
+        public FormulaWriterSIDSRC() : base()
         {
         }
 
-        public SIDSRCFormulaWriter(int capacity) : base(capacity)
+        public FormulaWriterSIDSRC(int capacity) : base(capacity)
         {
         }
 
@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        public override void Commit(ShapeSheetSurface surface)
+        protected override void _commit_to_surface(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
             if (this.ValueItems.Count < 1)
@@ -53,8 +53,8 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
 
             var stream = SIDSRC.ToStream(this.StreamItems);
-            var formulas = WriterBase< VisioAutomation.ShapeSheet.SIDSRC, FormulaLiteral>.build_formulas(this.ValueItems);
-            var flags = this.FormulaFlags;
+            var formulas = WriterHelper.build_formulas_array(this.ValueItems);
+            var flags = this.GetFormulaFlags();
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
     }

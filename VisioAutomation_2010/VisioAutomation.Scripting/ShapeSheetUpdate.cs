@@ -5,8 +5,8 @@ namespace VisioAutomation.Scripting
 {
     public class ShapeSheetUpdate
     {
-        internal readonly SIDSRCFormulaWriter update;
-        internal readonly SIDSRCResultWriter  update2;
+        internal readonly FormulaWriterSIDSRC update;
+        internal readonly ResultWriterSIDSRC  update2;
         public Client Client;
         public IVisio.Page TargetPage;
         public bool BlastGuards;
@@ -16,8 +16,8 @@ namespace VisioAutomation.Scripting
         {
             this.Client = client;
             this.TargetPage = page;
-            this.update = new SIDSRCFormulaWriter();
-            this.update2 = new SIDSRCResultWriter();
+            this.update = new FormulaWriterSIDSRC();
+            this.update2 = new ResultWriterSIDSRC();
         }
 
         public void SetFormula(short id, ShapeSheet.SRC src, string formula)
@@ -52,11 +52,11 @@ namespace VisioAutomation.Scripting
             {
                 this.update.BlastGuards = this.BlastGuards;
                 this.update.TestCircular = this.TestCircular;
-                this.update.Execute(this.TargetPage);
+                this.update.Commit(this.TargetPage);
 
                 this.update2.BlastGuards = this.BlastGuards;
                 this.update2.TestCircular = this.TestCircular;
-                this.update2.Execute(this.TargetPage);
+                this.update2.Commit(this.TargetPage);
 
             }
             this.Client.WriteVerbose("Ending ShapeSheet Update");

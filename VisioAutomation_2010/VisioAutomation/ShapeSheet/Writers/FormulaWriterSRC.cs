@@ -1,12 +1,12 @@
 ﻿namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class SRCFormulaWriter : WriterBase<VisioAutomation.ShapeSheet.SRC, FormulaLiteral>
+    public class FormulaWriterSRC : WriterBase<VisioAutomation.ShapeSheet.SRC, FormulaLiteral>
     {
-        public SRCFormulaWriter() :base()
+        public FormulaWriterSRC() :base()
         {
         }
 
-        public SRCFormulaWriter(int capacity) : base( capacity )
+        public FormulaWriterSRC(int capacity) : base( capacity )
         {
         }
 
@@ -24,7 +24,7 @@
             }
         }
 
-        public override void Commit(ShapeSheetSurface surface)
+        protected override void _commit_to_surface(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
             if (this.ValueItems.Count < 1)
@@ -33,8 +33,8 @@
             }
 
             var stream = SRC.ToStream(this.StreamItems);
-            var formulas = WriterBase<VisioAutomation.ShapeSheet.SRC, FormulaLiteral>.build_formulas(this.ValueItems);
-            var flags = this.FormulaFlags;
+            var formulas = WriterHelper.build_formulas_array(this.ValueItems);
+            var flags = this.GetFormulaFlags();
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 

@@ -109,14 +109,14 @@ namespace VisioAutomation.Scripting.Utilities
         private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
         {
 
-            var update = new SIDSRCFormulaWriter();
+            var update = new FormulaWriterSIDSRC();
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var shape_id = shapeids[i];
                 var xfrm = xfrms[i];
                 xfrm.SetFormulas((short)shape_id, update);
             }
-            update.Execute(page);
+            update.Commit(page);
         }
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<Shapes.XFormCells> xfrms)
