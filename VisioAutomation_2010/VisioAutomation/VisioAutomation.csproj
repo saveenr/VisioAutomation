@@ -117,7 +117,7 @@
     <Compile Include="ShapeSheet\Update\StreamType.cs" />
     <Compile Include="ShapeSheet\Update\UpdateBase.cs" />
     <Compile Include="ShapeSheet\Update\UpdateRecord.cs" />
-    <Compile Include="ShapeSheet\Update\UpdateSIDSRC.cs" />
+    <Compile Include="ShapeSheet\Update\UpdateSIDSRCResult.cs" />
     <Compile Include="ShapeSheet\Update\UpdateType.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />

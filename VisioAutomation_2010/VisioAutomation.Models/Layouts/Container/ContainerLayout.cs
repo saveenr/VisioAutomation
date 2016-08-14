@@ -168,7 +168,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 item.VisioShape.Text = item.Text;
             }
 
-            var update = new UpdateSIDSRC();
+            var update = new UpdateSIDSRCFormula();
 
             // Format the containers and shapes
 
@@ -210,7 +210,7 @@ namespace VisioAutomation.Models.Layouts.Container
 
             var xfrm = new Shapes.XFormCells();
 
-            var update = new UpdateSIDSRC(points.Count*2);
+            var update = new UpdateSIDSRCFormula(points.Count*2);
             for (int i = 0; i < rects.Count(); i++)
             {
                 xfrm.Width = rects[i].Width;

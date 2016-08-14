@@ -128,7 +128,7 @@ namespace VisioAutomation.Scripting.FormatPaint
             var matching_cells = this.Cells.Where(c => c.MatchesCategory(category)).ToArray();
 
             // Apply those matched cells to each shape
-            var update = new UpdateSIDSRC();
+            var update = new UpdateSIDSRCFormula();
             foreach (var shape_id in shapeids)
             {
                 foreach (var cell in matching_cells)

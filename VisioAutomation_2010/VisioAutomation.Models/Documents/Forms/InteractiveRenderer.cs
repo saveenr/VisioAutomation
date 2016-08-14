@@ -95,7 +95,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Finish()
         {
-            var update = new UpdateSIDSRC();
+            var update = new UpdateSIDSRCFormula();
             foreach (var block in this.Blocks)
             {
                 block.FormatCells.SetFormulas((short)block.VisioShapeID,update);

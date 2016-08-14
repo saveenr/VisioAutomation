@@ -17,7 +17,7 @@ namespace VisioAutomation.Models.Layouts.Container
             this.TextBlockCells = new VisioAutomation.Text.TextBlockCells();
         }
 
-        public void Apply(UpdateSIDSRC update, short shapeid_label, short shapeid_box)
+        public void Apply(UpdateSIDSRCFormula update, short shapeid_label, short shapeid_box)
         {
             this.CharacterCells.SetFormulas(shapeid_label, update, 0);
             this.ParagraphCells.SetFormulas(shapeid_label, update, 0);

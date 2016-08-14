@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
 
             if (a_arrow || b_arrow)
             {
-                var update = new UpdateSIDSRC();
+                var update = new UpdateSIDSRCFormula();
                 if (a_arrow)
                 {
                     update.SetFormula(c1.ID16, VASS.SRCConstants.BeginArrow, "13");                    

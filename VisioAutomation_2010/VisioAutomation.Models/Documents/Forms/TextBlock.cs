@@ -26,7 +26,7 @@ namespace VisioAutomation.Models.Documents.Forms
             this.CharacterCells = new VisioAutomation.Text.CharacterCells();
         }
 
-        public void ApplyFormus(UpdateSIDSRC update)
+        public void ApplyFormus(UpdateSIDSRCFormula update)
         {
             short titleshape_id = this.VisioShape.ID16;
             this.TextBlockCells.SetFormulas(titleshape_id, update);

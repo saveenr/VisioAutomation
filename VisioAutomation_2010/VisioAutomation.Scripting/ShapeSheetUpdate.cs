@@ -5,7 +5,8 @@ namespace VisioAutomation.Scripting
 {
     public class ShapeSheetUpdate
     {
-        internal readonly UpdateSIDSRC update;
+        internal readonly UpdateSIDSRCFormula update;
+        internal readonly UpdateSIDSRCResult  update2;
         public Client Client;
         public IVisio.Page TargetPage;
         public bool BlastGuards;
@@ -15,7 +16,8 @@ namespace VisioAutomation.Scripting
         {
             this.Client = client;
             this.TargetPage = page;
-            this.update = new UpdateSIDSRC();
+            this.update = new UpdateSIDSRCFormula();
+            this.update2 = new UpdateSIDSRCResult();
         }
 
         public void SetFormula(short id, ShapeSheet.SRC src, string formula)
@@ -27,19 +29,19 @@ namespace VisioAutomation.Scripting
         public void SetResult(short id, ShapeSheet.SRC src, double result)
         {
             var sidsrc = new ShapeSheet.SIDSRC(id, src);
-            this.update.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
+            this.update2.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
         }
 
         public void SetResult(short id, ShapeSheet.SRC src, int result)
         {
             var sidsrc = new ShapeSheet.SIDSRC(id, src);
-            this.update.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
+            this.update2.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
         }
 
         public void SetResult(short id, ShapeSheet.SRC src, string result)
         {
             var sidsrc = new ShapeSheet.SIDSRC(id, src);
-            this.update.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
+            this.update2.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
         }
 
         public void Update()
@@ -51,6 +53,11 @@ namespace VisioAutomation.Scripting
                 this.update.BlastGuards = this.BlastGuards;
                 this.update.TestCircular = this.TestCircular;
                 this.update.Execute(this.TargetPage);
+
+                this.update2.BlastGuards = this.BlastGuards;
+                this.update2.TestCircular = this.TestCircular;
+                this.update2.Execute(this.TargetPage);
+
             }
             this.Client.WriteVerbose("Ending ShapeSheet Update");
         }

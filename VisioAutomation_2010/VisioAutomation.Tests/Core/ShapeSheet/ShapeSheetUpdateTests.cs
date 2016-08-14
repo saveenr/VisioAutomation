@@ -24,7 +24,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var update = new UpdateSIDSRC();
+            var update = new UpdateSIDSRCFormula();
             update.SetFormula(shape1.ID16, ShapeSheetUpdateTests.src_pinx, 0.5);
             update.SetFormula(shape1.ID16, ShapeSheetUpdateTests.src_piny, 0.5);
             update.SetFormula(shape2.ID16, ShapeSheetUpdateTests.src_pinx, 1.5);
@@ -113,7 +113,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var update = new UpdateSIDSRC();
+            var update = new UpdateSIDSRCResult();
             update.SetResult(shape1.ID16, ShapeSheetUpdateTests.src_pinx, 0.5, IVisio.VisUnitCodes.visNumber);
             update.SetResult(shape1.ID16, ShapeSheetUpdateTests.src_piny, 0.5, IVisio.VisUnitCodes.visNumber);
             update.SetResult(shape2.ID16, ShapeSheetUpdateTests.src_pinx, 1.5, IVisio.VisUnitCodes.visNumber);

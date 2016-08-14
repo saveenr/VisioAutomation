@@ -59,7 +59,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             }
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.UpdateSIDSRC update)
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.UpdateSIDSRCFormula update)
         {
             foreach (var pair in this.Pairs)
             {

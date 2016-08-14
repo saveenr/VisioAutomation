@@ -35,7 +35,7 @@ namespace VisioAutomationSamples
             xform.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
             xform.Height = string.Format("GUARD({0}!Height)", bkname); 
 
-            var update = new UpdateSIDSRC();
+            var update = new UpdateSIDSRCFormula();
             xform.SetFormulas(progress.ID16, update);
             background_fmt.SetFormulas(progress.ID16, update);
             progress_fmt.SetFormulas(progress.ID16, update);

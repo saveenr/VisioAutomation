@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new UpdateSIDSRC();
+            var update = new UpdateSIDSRCFormula();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -107,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new UpdateSIDSRC();
+            var update = new UpdateSIDSRCFormula();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)
