@@ -1,31 +1,32 @@
-using System.Collections;
 using System.Collections.Generic;
-using IVisio= Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public abstract class WriterBase<TStreamType> : IEnumerable<WriterRecord<TStreamType>>
+    public abstract class WriterBase<TStreamType, TValue>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        protected WriterRecord<TStreamType>? _first_update;
-        protected readonly List<WriterRecord<TStreamType>> _updates;
+        public List<TStreamType> StreamItems;
+        public List<TValue> ValueItems;
 
         public void Clear()
         {
-            this._updates.Clear();
-            this._first_update = null;
+            this.StreamItems.Clear();
+            this.ValueItems.Clear();
         }
 
         protected WriterBase()
         {
-            this._updates = new List<WriterRecord<TStreamType>>();
+            this.StreamItems = new List<TStreamType>();
+            this.ValueItems = new List<TValue>();
         }
 
         protected WriterBase(int capacity)
         {
-            this._updates = new List<WriterRecord<TStreamType>>(capacity);
+            this.StreamItems = new List<TStreamType>(capacity);
+            this.ValueItems = new List<TValue>(capacity);
         }
 
         protected IVisio.VisGetSetArgs ResultFlags
@@ -35,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 var flags = this.get_common_flags();
                 if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
                 {
-                    flags = (IVisio.VisGetSetArgs) ((short) flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
+                    flags = (IVisio.VisGetSetArgs)((short)flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
                 }
                 return flags;
             }
@@ -47,8 +48,8 @@ namespace VisioAutomation.ShapeSheet.Writers
             {
                 var common_flags = this.get_common_flags();
                 var formula_flags = (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;
-                var combined_flags = (short) common_flags | formula_flags;
-                return (IVisio.VisGetSetArgs) combined_flags;
+                var combined_flags = (short)common_flags | formula_flags;
+                return (IVisio.VisGetSetArgs)combined_flags;
             }
         }
 
@@ -57,158 +58,74 @@ namespace VisioAutomation.ShapeSheet.Writers
             IVisio.VisGetSetArgs f_bg = this.BlastGuards ? IVisio.VisGetSetArgs.visSetBlastGuards : 0;
             IVisio.VisGetSetArgs f_tc = this.TestCircular ? IVisio.VisGetSetArgs.visSetTestCircular : 0;
 
-            var flags = (short) f_bg | (short) f_tc;
-            return (IVisio.VisGetSetArgs) flags;
+            var flags = (short)f_bg | (short)f_tc;
+            return (IVisio.VisGetSetArgs)flags;
         }
 
-
-        protected void CheckFormulaIsNotNull(string formula)
+        public static object[] build_formulas(IList<FormulaLiteral> formulas2)
         {
-            if (formula == null)
+            var formulas = new object[formulas2.Count];
+            int i = 0;
+            foreach (var rec in formulas2)
             {
-                throw new AutomationException("Null not allowed for formula");
+                formulas[i] = rec.Value;
+                i++;
             }
+            return formulas;
         }
 
-        protected void _add_update(WriterRecord<TStreamType> update)
+        public static void build_results(IList<ResultValue> formulas2, out object[] unitcodes, out object[] results)
         {
-            // This block ensures that only homogeneous updates are constructed
-            if (!this._first_update.HasValue)
+            unitcodes = new object[formulas2.Count];
+            results = new object[formulas2.Count];
+            int i = 0;
+            foreach (var update in formulas2)
             {
-                this._first_update = update;
-            }
-            else
-            {
-                // Ensure that we aren't mixing formulas and results
-                // Keep in mind that we can mix differnt types of results (strings and numerics)
-                if (this._first_update.Value.UpdateType == UpdateType.Formula && update.UpdateType != UpdateType.Formula)
+                unitcodes[i] = update.UnitCode;
+                if (update.ResultType == ResultType.ResultNumeric)
                 {
-                    if (update.UpdateType != UpdateType.Formula)
-                    {
-                        throw new AutomationException("Cannot contain both Formula and Result updates");
-                    }
+                    results[i] = update.ResultNumeric;
                 }
-                else if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric ||
-                         this._first_update.Value.UpdateType == UpdateType.ResultString)
+                else if (update.ResultType == ResultType.ResultString)
                 {
-                    if (update.UpdateType == UpdateType.Formula)
-                    {
-                        throw new AutomationException("Cannot contain both Formula and Result updates");
-                    }
+                    results[i] = update.ResultString;
                 }
-            }
-
-            // Now that it is safe, add the record
-            this._updates.Add(update);
-
-        }
-
-
-
-
-
-
-        public IEnumerator<WriterRecord<TStreamType>> GetEnumerator()
-        {
-            foreach (var i in this._updates)
-            {
-                yield return i;
+                else
+                {
+                    throw new AutomationException("Unhandled update type");
+                }
+                i++;
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            // keeps it hidden.
-            return this.GetEnumerator();
-        }
+        public abstract void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
 
-        public void Execute(IVisio.Page page)
+        public void Execute(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            var surface = new ShapeSheetSurface(page);
-            this._Execute(surface);
+            this.Commit(surface);
         }
-
         public void Execute(IVisio.Shape shape)
         {
-            var surface = new ShapeSheetSurface(shape);
-            this._Execute(surface);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            this.Commit(surface);                
         }
 
-        public void Execute(ShapeSheetSurface surface)
+        public void Execute(IVisio.Page shape)
         {
-            this._Execute(surface);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            this.Commit(surface);
         }
 
-        private void _Execute(ShapeSheetSurface surface)
+        public void Execute(IVisio.Master shape)
         {
-            // TODO: Make sure this goes to SRC (for some reason)
-
-            // Do nothing if there aren't any updates
-            if (this._updates.Count < 1)
-            {
-                return;
-            }
-
-            var stream = this.build_stream();
-
-            if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric ||
-                this._first_update.Value.UpdateType == UpdateType.ResultString)
-            {
-                // Set Results
-
-                // Create the unitcodes and results arrays
-                var unitcodes = new object[this._updates.Count];
-                var results = new object[this._updates.Count];
-                int i = 0;
-                foreach (var update in this._updates)
-                {
-                    unitcodes[i] = update.UnitCode;
-                    if (update.UpdateType == UpdateType.ResultNumeric)
-                    {
-                        results[i] = update.ResultNumeric;
-                    }
-                    else if (update.UpdateType == UpdateType.ResultString)
-                    {
-                        results[i] = update.ResultString;
-                    }
-                    else
-                    {
-                        throw new AutomationException("Unhandled update type");
-                    }
-                    i++;
-                }
-
-                var flags = this.ResultFlags;
-
-                if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric)
-                {
-                }
-                else if (this._first_update.Value.UpdateType == UpdateType.ResultString)
-                {
-                    flags |= IVisio.VisGetSetArgs.visGetStrings;
-                }
-
-                surface.SetResults(stream, unitcodes, results, (short) flags);
-            }
-            else
-            {
-                // Set Formulas
-
-                // Create the formulas array
-                var formulas = new object[this._updates.Count];
-                int i = 0;
-                foreach (var rec in this._updates)
-                {
-                    formulas[i] = rec.Formula;
-                    i++;
-                }
-
-                var flags = this.FormulaFlags;
-
-                int c = surface.SetFormulas(stream, formulas, (short) flags);
-            }
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            this.Commit(surface);
         }
 
-        protected abstract short[] build_stream();
+        public int Count
+        {
+            get { return this.ValueItems.Count; }
+        }
+
     }
 }

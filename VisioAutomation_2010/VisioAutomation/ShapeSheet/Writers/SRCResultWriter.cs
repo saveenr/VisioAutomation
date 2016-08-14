@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class SRCResultWriter : SRCWriter
+    public class SRCResultWriter : WriterBase<VisioAutomation.ShapeSheet.SRC, ResultValue>
     {
         public SRCResultWriter() : base()
         {
@@ -13,24 +13,36 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetResult(SRC streamitem, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
         {
-            this._SetResult(streamitem, value, unitcode);
+            this.StreamItems.Add(streamitem);
+            this.ValueItems.Add( new ResultValue(value,unitcode));
         }
 
         public void SetResult(SRC streamitem, double value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
         {
-            this._SetResult(streamitem, value, unitcode);
+            this.StreamItems.Add(streamitem);
+            this.ValueItems.Add(new ResultValue(value, unitcode));
         }
 
-        protected void _SetResult(SRC streamitem, double value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public override void Commit(ShapeSheetSurface surface)
         {
-            var rec = new WriterRecord<SRC>(streamitem, value, unitcode);
-            this._add_update(rec);
-        }
+            // Do nothing if there aren't any updates
+            if (this.ValueItems.Count < 1)
+            {
+                return;
+            }
 
-        protected void _SetResult(SRC streamitem, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
-        {
-            var rec = new WriterRecord<SRC>(streamitem, value, unitcode);
-            this._add_update(rec);
+            var stream = SRC.ToStream(this.StreamItems);
+
+            object[] unitcodes;
+            object[] results;
+
+            WriterBase<SIDSRC, ResultValue>.build_results(this.ValueItems, out unitcodes, out results);
+            var flags = this.ResultFlags;
+            if (this.ValueItems[0].ResultType == ResultType.ResultString)
+            {
+                flags |= Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetStrings;
+            }
+            surface.SetResults(stream, unitcodes, results, (short)flags);
         }
 
     }

@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class SIDSRCResultWriter : SIDSRCWriter
+    public class SIDSRCResultWriter : WriterBase<VisioAutomation.ShapeSheet.SIDSRC, ResultValue>
     {
 
         public SIDSRCResultWriter() : base()
@@ -12,41 +12,59 @@ namespace VisioAutomation.ShapeSheet.Writers
         public SIDSRCResultWriter(int capacity) : base(capacity)
         {
         }
-
-
+        
         public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
             var streamitem = new SIDSRC(shapeid, src);
-            this._SetResult(streamitem, value, unitcode);
-        }
-
-        public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
-        {
-            this._SetResult(streamitem, value, unitcode);
+            var v = new ResultValue(value,unitcode);
+            this.SetResult(streamitem, v);
         }
 
         public void SetResult(short shapeid, SRC src, string value, IVisio.VisUnitCodes unitcode)
         {
             var streamitem = new SIDSRC(shapeid, src);
-            this._SetResult(streamitem, value, unitcode);
+            var v = new ResultValue(value, unitcode);
+            this.SetResult(streamitem, v);
+        }
+
+        public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        {
+            var v = new ResultValue(value, unitcode);
+            this.SetResult(streamitem, v);
         }
 
         public void SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
         {
-            this._SetResult(streamitem, value, unitcode);
+            var v = new ResultValue(value, unitcode);
+            this.SetResult(streamitem, v);
         }
 
-
-        protected void _SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC streamitem, ResultValue v)
         {
-            var rec = new WriterRecord<SIDSRC>(streamitem, value, unitcode);
-            this._add_update(rec);
+            this.StreamItems.Add(streamitem);
+            this.ValueItems.Add(v);
         }
 
-        protected void _SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
+        public override void Commit(ShapeSheetSurface surface)
         {
-            var rec = new WriterRecord<SIDSRC>(streamitem, value, unitcode);
-            this._add_update(rec);
+            // Do nothing if there aren't any updates
+            if (this.ValueItems.Count < 1)
+            {
+                return;
+            }
+
+            var stream = SIDSRC.ToStream(this.StreamItems);
+
+            object[] unitcodes;
+            object[] results;
+
+            WriterBase<SIDSRC,ResultValue>.build_results(this.ValueItems,out unitcodes, out results);
+            var flags = this.ResultFlags;
+            if (this.ValueItems[0].ResultType == ResultType.ResultString)
+            {
+                flags |= IVisio.VisGetSetArgs.visGetStrings;
+            }
+            surface.SetResults(stream, unitcodes, results, (short)flags);
         }
     }
 }

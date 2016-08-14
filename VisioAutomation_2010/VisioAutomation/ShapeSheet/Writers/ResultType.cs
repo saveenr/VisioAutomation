@@ -1,8 +1,7 @@
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public enum UpdateType
+    public enum ResultType
     {
-        Formula,
         ResultNumeric,
         ResultString
     }

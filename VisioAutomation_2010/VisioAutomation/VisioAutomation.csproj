@@ -114,14 +114,13 @@
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
-    <Compile Include="ShapeSheet\Writers\SIDSRCWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SIDSRCFormulaWriter.cs" />
-    <Compile Include="ShapeSheet\Writers\SRCWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SRCResultWriter.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\WriterRecord.cs" />
     <Compile Include="ShapeSheet\Writers\SIDSRCResultWriter.cs" />
-    <Compile Include="ShapeSheet\Writers\UpdateType.cs" />
+    <Compile Include="ShapeSheet\Writers\ResultType.cs" />
+    <Compile Include="ShapeSheet\Writers\ResultValue.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
