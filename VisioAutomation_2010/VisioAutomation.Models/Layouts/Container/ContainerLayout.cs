@@ -2,6 +2,7 @@
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Update;
 
 namespace VisioAutomation.Models.Layouts.Container
 {
@@ -167,7 +168,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 item.VisioShape.Text = item.Text;
             }
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
 
             // Format the containers and shapes
 
@@ -209,7 +210,7 @@ namespace VisioAutomation.Models.Layouts.Container
 
             var xfrm = new Shapes.XFormCells();
 
-            var update = new ShapeSheet.Update(points.Count*2);
+            var update = new Update(points.Count*2);
             for (int i = 0; i < rects.Count(); i++)
             {
                 xfrm.Width = rects[i].Width;

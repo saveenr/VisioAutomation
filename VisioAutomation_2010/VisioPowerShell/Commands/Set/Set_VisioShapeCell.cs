@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using System.Management.Automation;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Set
@@ -22,7 +23,7 @@ namespace VisioPowerShell.Commands.Set
 
         protected override void ProcessRecord()
         {
-            var update = new VisioAutomation.ShapeSheet.Update();
+            var update = new Update();
             update.BlastGuards = this.BlastGuards;
             update.TestCircular = this.TestCircular;
 

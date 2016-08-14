@@ -114,6 +114,8 @@
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
+    <Compile Include="ShapeSheet\Update\StreamType.cs" />
+    <Compile Include="ShapeSheet\Update\UpdateType.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
@@ -180,7 +182,7 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ColumnQuery.cs" />
-    <Compile Include="ShapeSheet\Update.cs" />
+    <Compile Include="ShapeSheet\Update\Update.cs" />
     <Compile Include="ShapeSheet\FormulaLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />

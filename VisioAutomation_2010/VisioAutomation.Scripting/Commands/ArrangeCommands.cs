@@ -6,6 +6,7 @@ using VisioAutomation.Drawing.Layout;
 using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.Layout;
 using VisioAutomation.Scripting.Utilities;
+using VisioAutomation.ShapeSheet.Update;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -204,7 +205,7 @@ namespace VisioAutomation.Scripting.Commands
         private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
         {
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var shape_id = shapeids[i];
@@ -347,7 +348,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
-            var update = new ShapeSheet.Update();
+            var update = new Update();
 
             foreach (int shapeid in shapeids)
             {
@@ -374,7 +375,7 @@ namespace VisioAutomation.Scripting.Commands
             } 
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             foreach (int shapeid in shapeids)
             {
                 if (w.HasValue && w.Value>=0)

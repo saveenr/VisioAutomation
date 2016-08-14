@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.ShapeSheet.Update
 {
     public class Update : IEnumerable<Update.UpdateRecord>
     {
@@ -414,18 +414,6 @@ namespace VisioAutomation.ShapeSheet
                 this.StreamType = streamtype;
             }
 
-        }
-
-        public enum StreamType
-        {
-            SIDSRC, SRC
-        }
-
-        public enum UpdateType
-        {
-            Formula,
-            ResultNumeric,
-            ResultString
         }
     }
 }

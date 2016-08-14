@@ -1,4 +1,5 @@
-﻿using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+﻿using VisioAutomation.ShapeSheet.Update;
+using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Models.Text
 {
@@ -19,7 +20,7 @@ namespace VisioAutomation.Models.Text
         public ShapeSheet.FormulaLiteral SpacingLine { get; set; }
         public ShapeSheet.FormulaLiteral TextPosAfterBullet { get; set; }
         
-        internal void ApplyFormulas(ShapeSheet.Update update, short row)
+        internal void ApplyFormulas(Update update, short row)
         {
             update.SetFormulaIgnoreNull(SRCCON.Para_IndLeft.ForRow(row), this.IndentLeft);
             update.SetFormulaIgnoreNull(SRCCON.Para_IndFirst.ForRow(row), this.IndentFirst);

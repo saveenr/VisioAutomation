@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Utilities
@@ -44,7 +45,7 @@ namespace VisioAutomation.Scripting.Utilities
             const string formula_wrap = "WIDTH*1";
             const string formula_no_wrap = "TEXTWIDTH(TheText)";
             string formula = wrap ? formula_wrap : formula_no_wrap;
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             
             foreach (int shapeid in shapeids)
             {

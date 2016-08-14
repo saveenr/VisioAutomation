@@ -1,10 +1,11 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.ShapeSheet.Update;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting
 {
     public class ShapeSheetUpdate
     {
-        internal readonly ShapeSheet.Update update;
+        internal readonly Update update;
         public Client Client;
         public IVisio.Page TargetPage;
         public bool BlastGuards;
@@ -14,7 +15,7 @@ namespace VisioAutomation.Scripting
         {
             this.Client = client;
             this.TargetPage = page;
-            this.update = new ShapeSheet.Update();
+            this.update = new Update();
         }
 
         public void SetFormula(short id, ShapeSheet.SRC src, string formula)

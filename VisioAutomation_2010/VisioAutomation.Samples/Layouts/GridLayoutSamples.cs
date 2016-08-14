@@ -1,6 +1,7 @@
 ﻿using VisioAutomation.Colors;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Update;
 
 namespace VisioAutomationSamples
 {
@@ -45,7 +46,7 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Shapes.FormatCells();
             int i = 0;
-            var update = new VA.ShapeSheet.Update();
+            var update = new Update();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;

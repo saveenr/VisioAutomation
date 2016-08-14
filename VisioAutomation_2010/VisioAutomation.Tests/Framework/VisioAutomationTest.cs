@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation_Tests
@@ -144,7 +145,7 @@ namespace VisioAutomation_Tests
 
             var page_sheet = page.PageSheet;
 
-            var update = new VisioAutomation.ShapeSheet.Update(2);
+            var update = new Update(2);
             update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
             update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
             update.Execute(page_sheet);

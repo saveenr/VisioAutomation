@@ -1,3 +1,5 @@
+using VisioAutomation.ShapeSheet.Update;
+
 namespace VisioAutomation.DOM
 {
     public class PageCells
@@ -31,7 +33,7 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral ResizePage { get; set; }
         public ShapeSheet.FormulaLiteral RouteStyle { get; set; }
 
-        public void Apply(ShapeSheet.Update update, short id)
+        public void Apply(Update update, short id)
         {
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.AvenueSizeX, this.AvenueSizeX);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.AvenueSizeY, this.AvenueSizeY);

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Scripting.Utilities;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -99,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 // Now restore all the formatting - based on any initial formatting from the text
 
-                var update = new ShapeSheet.Update();
+                var update = new Update();
                 for (int i = 0; i < shapes.Count; i++)
                 {
                     var format = formats[i];
@@ -170,7 +171,7 @@ namespace VisioAutomation.Scripting.Commands
                 return ;
             }
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             foreach (var shape in shapes)
             {
                 if (0 ==
@@ -248,7 +249,7 @@ namespace VisioAutomation.Scripting.Commands
                 var src_width = ShapeSheet.SRCConstants.Width;
                 var src_height = ShapeSheet.SRCConstants.Height;
 
-                var update = new ShapeSheet.Update();
+                var update = new Update();
                 for (int i = 0; i < new_sizes.Count; i++)
                 {
                     var shapeid = shapeids[i];

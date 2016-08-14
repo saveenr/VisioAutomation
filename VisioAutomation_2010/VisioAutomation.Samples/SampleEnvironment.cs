@@ -1,4 +1,5 @@
 ﻿using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -58,7 +59,7 @@ namespace VisioAutomationSamples
 
             var page_sheet = page.PageSheet;
 
-            var update = new VA.ShapeSheet.Update(2);
+            var update = new Update(2);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, size.Width);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, size.Height);
             update.Execute(page_sheet);

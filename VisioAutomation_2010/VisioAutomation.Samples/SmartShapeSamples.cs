@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.ShapeSheet.Update;
+using VA = VisioAutomation;
 
 namespace VisioAutomationSamples
 {
@@ -34,7 +35,7 @@ namespace VisioAutomationSamples
             xform.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
             xform.Height = string.Format("GUARD({0}!Height)", bkname); 
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new Update();
             update.SetFormulas(progress.ID16, xform);
             update.SetFormulas(progress.ID16, background_fmt);
             update.SetFormulas(progress.ID16, progress_fmt);

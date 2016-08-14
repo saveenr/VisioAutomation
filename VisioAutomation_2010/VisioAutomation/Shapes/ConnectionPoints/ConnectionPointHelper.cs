@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.ConnectionPoints
@@ -29,7 +30,7 @@ namespace VisioAutomation.Shapes.ConnectionPoints
                                  (short)IVisio.VisRowIndices.visRowLast,
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             update.SetFormulas(connection_point_cells,n);
             update.Execute(shape);
 

@@ -1,5 +1,6 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Update;
 
 namespace VisioAutomation.DOM
 {
@@ -78,7 +79,7 @@ namespace VisioAutomation.DOM
                     this.PageCells.PageWidth = this.Size.Value.Width;
                 }
 
-                var update = new ShapeSheet.Update();
+                var update = new Update();
                 update.SetFormulas((short)page_sheet.ID, this.PageCells);
                 update.Execute(page);
                 

@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages.PageLayout
@@ -141,7 +142,7 @@ namespace VisioAutomation.Pages.PageLayout
             var pagecells = new PageCells();
             this.SetPageCells(pagecells);
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             update.SetFormulas(pagecells);
             var pagesheet = page.PageSheet;
             update.Execute(pagesheet);

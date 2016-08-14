@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Update;
 
 namespace VisioAutomation.Shapes.CustomProperties
 {
@@ -31,7 +32,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                     throw new AutomationException(msg);
                 }
 
-                var update = new ShapeSheet.Update();
+                var update = new Update();
                 update.SetFormulas(cp, cell_propname.Row);
                 update.Execute(shape);
 
@@ -54,7 +55,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             update.SetFormulas(cp, row);
             update.Execute(shape);
         }

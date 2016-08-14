@@ -1,4 +1,5 @@
 using System;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Hyperlinks
@@ -60,7 +61,7 @@ namespace VisioAutomation.Shapes.Hyperlinks
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             update.SetFormulas(hyperlink, row);
             update.Execute(shape);
 

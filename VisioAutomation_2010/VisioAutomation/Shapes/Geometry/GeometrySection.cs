@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Geometry
@@ -41,7 +42,7 @@ namespace VisioAutomation.Shapes.Geometry
             short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
 
             var src_nofill = ShapeSheet.SRCConstants.Geometry_NoFill.ForSectionAndRow(sec_index, 0);
             var src_noline = ShapeSheet.SRCConstants.Geometry_NoLine.ForSectionAndRow(sec_index, 0);

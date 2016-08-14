@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -72,7 +73,7 @@ namespace VisioAutomation_Tests.Core
             pagecells.PageLeftMargin = bottomleft_margin.Width;
             pagecells.PageRightMargin = upperright_margin.Width;
 
-            var pageupdate = new VA.ShapeSheet.Update();
+            var pageupdate = new Update();
             pageupdate.SetFormulas(pagecells);
             pageupdate.Execute(page.PageSheet);
 

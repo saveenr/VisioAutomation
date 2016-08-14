@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.ShapeSheet.Update;
 
 namespace VisioPowerShell.Commands.Resize
 {
@@ -43,7 +44,7 @@ namespace VisioPowerShell.Commands.Resize
                     newpagecells.PageHeight = this.Height;
                 }
 
-                var update = new VisioAutomation.ShapeSheet.Update();
+                var update = new Update();
                 update.SetFormulas(newpagecells);
                 update.BlastGuards = true;
                 update.Execute(page);

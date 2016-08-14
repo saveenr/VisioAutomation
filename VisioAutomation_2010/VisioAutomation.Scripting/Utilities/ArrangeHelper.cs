@@ -2,6 +2,7 @@
 using System.Linq;
 using VisioAutomation.Drawing.Layout;
 using VisioAutomation.Scripting.Layout;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Utilities
@@ -108,7 +109,7 @@ namespace VisioAutomation.Scripting.Utilities
         private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
         {
 
-            var update = new ShapeSheet.Update();
+            var update = new Update();
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var shape_id = shapeids[i];
