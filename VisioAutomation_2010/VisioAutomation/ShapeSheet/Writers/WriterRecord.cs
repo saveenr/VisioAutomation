@@ -1,16 +1,16 @@
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public struct WriterRecord<T>
+    public struct WriterRecord<TStreamType>
     {
-        public readonly T StreamItem;
+        public readonly TStreamType StreamItem;
         public readonly string Formula;
         public readonly double ResultNumeric;
         public readonly string ResultString;
         public readonly Microsoft.Office.Interop.Visio.VisUnitCodes UnitCode;
         public readonly UpdateType UpdateType;
 
-        internal WriterRecord(T stream_item, string formula)
+        internal WriterRecord(TStreamType stream_item, string formula)
         {
             this.StreamItem = stream_item;
             this.Formula = formula;
@@ -20,7 +20,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.UpdateType = UpdateType.Formula;
         }
 
-        internal WriterRecord(T stream_item, double result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        internal WriterRecord(TStreamType stream_item, double result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
         {
             this.StreamItem = stream_item;
             this.Formula = null;
@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.UpdateType = UpdateType.ResultNumeric;
         }
 
-        internal WriterRecord(T stream_item, string result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        internal WriterRecord(TStreamType stream_item, string result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
         {
             this.StreamItem = stream_item;
             this.Formula = null;

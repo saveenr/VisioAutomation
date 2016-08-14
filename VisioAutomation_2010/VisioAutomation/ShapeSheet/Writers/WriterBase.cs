@@ -4,13 +4,13 @@ using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public abstract class WriterBase<T> : IEnumerable<WriterRecord<T>>
+    public abstract class WriterBase<TStreamType> : IEnumerable<WriterRecord<TStreamType>>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        protected WriterRecord<T>? _first_update;
-        protected readonly List<WriterRecord<T>> _updates;
+        protected WriterRecord<TStreamType>? _first_update;
+        protected readonly List<WriterRecord<TStreamType>> _updates;
 
         public void Clear()
         {
@@ -20,12 +20,12 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         protected WriterBase()
         {
-            this._updates = new List<WriterRecord<T>>();
+            this._updates = new List<WriterRecord<TStreamType>>();
         }
 
         protected WriterBase(int capacity)
         {
-            this._updates = new List<WriterRecord<T>>(capacity);
+            this._updates = new List<WriterRecord<TStreamType>>(capacity);
         }
 
         protected IVisio.VisGetSetArgs ResultFlags
@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        protected void _add_update(WriterRecord<T> update)
+        protected void _add_update(WriterRecord<TStreamType> update)
         {
             // This block ensures that only homogeneous updates are constructed
             if (!this._first_update.HasValue)
@@ -108,7 +108,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
 
 
-        public IEnumerator<WriterRecord<T>> GetEnumerator()
+        public IEnumerator<WriterRecord<TStreamType>> GetEnumerator()
         {
             foreach (var i in this._updates)
             {
