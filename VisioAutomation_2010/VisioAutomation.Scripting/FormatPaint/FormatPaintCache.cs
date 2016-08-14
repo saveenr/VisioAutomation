@@ -122,30 +122,19 @@ namespace VisioAutomation.Scripting.FormatPaint
 
         public void PasteFormat(IVisio.Page page, IList<int> shapeids, FormatCategory category, bool applyformulas)
         {
-            var update = new ShapeSheet.Update();
 
+            // Find all the cells that are going to be pasted
+            var matching_cells = this.Cells.Where(c => c.MatchesCategory(category)).ToArray();
+
+            // Apply those matched cells to each shape
+            var update = new ShapeSheet.Update();
             foreach (var shape_id in shapeids)
             {
-                foreach (var cellrec in this.Cells)
+                foreach (var cell in matching_cells)
                 {
-                    if (!cellrec.MatchesCategory(category))
-                    {
-                        continue;
-                    }
-
-                    var sidsrc = new ShapeSheet.SIDSRC((short)shape_id, cellrec.SRC);
-
-                    if (applyformulas)
-                    {
-                        update.SetFormula(sidsrc, cellrec.Formula);    
-                    }
-                    else
-                    {
-                        if (cellrec.Result != null)
-                        {
-                            update.SetFormula(sidsrc, cellrec.Result);
-                        }
-                    }
+                    var sidsrc = new ShapeSheet.SIDSRC((short) shape_id, cell.SRC);
+                    var new_formula = applyformulas ? cell.Formula : cell.Result;
+                    update.SetFormulaIgnoreNull(sidsrc, new_formula);
                 }
             }
 

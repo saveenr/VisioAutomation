@@ -183,39 +183,44 @@ namespace VisioAutomation.ShapeSheet
             this._SetFormula(StreamType.SIDSRC, streamitem, formula);
         }
 
+        public void SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
+        {
+            this._SetFormulaIgnoreNull(StreamType.SIDSRC, streamitem, formula);
+        }
+
         public void SetFormulaIgnoreNull(short id, SRC src, FormulaLiteral formula)
         {
             var sidsrc = new SIDSRC(id, src);
             this._SetFormulaIgnoreNull(StreamType.SIDSRC, sidsrc, formula);
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupSingleRow cg)
+        public void SetFormulas(VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupSingleRow query_g)
         {
-            foreach (var pair in cg.Pairs)
+            foreach (var pair in query_g.Pairs)
             {
                 this.SetFormulaIgnoreNull(pair.SRC, pair.Formula);
             }
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupSingleRow cg)
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupSingleRow query_g)
         {
-            foreach (var pair in cg.Pairs)
+            foreach (var pair in query_g.Pairs)
             {
                 this.SetFormulaIgnoreNull(shapeid, pair.SRC, pair.Formula);
             }
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow cg, short row)
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow query_g, short row)
         {
-            foreach (var pair in cg.Pairs)
+            foreach (var pair in query_g.Pairs)
             {
                 this.SetFormulaIgnoreNull(shapeid, pair.SRC.ForRow(row), pair.Formula);            
             }
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow cg, short row)
+        public void SetFormulas(VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow query_g, short row)
         {
-            foreach (var pair in cg.Pairs)
+            foreach (var pair in query_g.Pairs)
             {
                 this.SetFormulaIgnoreNull(pair.SRC.ForRow(row), pair.Formula);
             }
