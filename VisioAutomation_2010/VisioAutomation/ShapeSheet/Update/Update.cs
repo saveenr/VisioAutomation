@@ -377,6 +377,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
     public class Update : UpdateBase
     {
+        public Update() :base()
+        {
+        }
 
+        public Update(int capacity) : base( capacity )
+        {
+        }
     }
 }
