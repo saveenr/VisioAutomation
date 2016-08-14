@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Scripting;
-using VisioAutomation.Scripting.Utilities;
+
+using VA=VisioAutomation;
 using VADRAW = VisioAutomation.Drawing;
 using VASS = VisioAutomation.ShapeSheet;
 
@@ -34,7 +34,7 @@ namespace VisioAutomation_Tests
             Assert.AreEqual(height, actual_size.Height, delta);
         }
 
-        public static void AssertSnap(double ex, double ey, SnappingGrid g1, double ix, double iy, double delta)
+        public static void AssertSnap(double ex, double ey, VA.Scripting.Utilities.SnappingGrid g1, double ix, double iy, double delta)
         {
             AssertUtil.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
         }
@@ -45,7 +45,7 @@ namespace VisioAutomation_Tests
             Assert.AreEqual(result, actual_celldata.Result);
         }
 
-        public static void AreEqual<T>(string formula, T result, string actual_formula, T actual_result)
+        public static void AreEqual<TResult>(string formula, TResult result, string actual_formula, TResult actual_result)
         {
             Assert.AreEqual(formula, actual_formula);
             Assert.AreEqual(result, actual_result);
