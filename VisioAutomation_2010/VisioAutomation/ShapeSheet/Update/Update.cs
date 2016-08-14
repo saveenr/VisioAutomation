@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class Update : IEnumerable<UpdateRecord>
+    public class UpdateBase : IEnumerable<UpdateRecord>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
@@ -19,24 +19,24 @@ namespace VisioAutomation.ShapeSheet.Update
             this._first_update = null;
         }
 
-        public Update()
+        public UpdateBase()
         {
             this._updates = new List<UpdateRecord>();
         }
 
-        public Update(int capacity)
+        public UpdateBase(int capacity)
         {
             this._updates = new List<UpdateRecord>(capacity);
         }
 
         protected IVisio.VisGetSetArgs ResultFlags
         {
-            get 
-            { 
+            get
+            {
                 var flags = this.get_common_flags();
                 if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
                 {
-                    flags = (IVisio.VisGetSetArgs)((short)flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
+                    flags = (IVisio.VisGetSetArgs) ((short) flags | (short) IVisio.VisGetSetArgs.visSetUniversalSyntax);
                 }
                 return flags;
             }
@@ -95,7 +95,8 @@ namespace VisioAutomation.ShapeSheet.Update
                         throw new AutomationException("Cannot contain both Formula and Result updates");
                     }
                 }
-                else if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric || this._first_update.Value.UpdateType == UpdateType.ResultString)
+                else if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric ||
+                         this._first_update.Value.UpdateType == UpdateType.ResultString)
                 {
                     if (update.UpdateType == UpdateType.Formula)
                     {
@@ -109,7 +110,7 @@ namespace VisioAutomation.ShapeSheet.Update
 
         }
 
-        protected void _SetFormula(StreamType st,SIDSRC streamitem, FormulaLiteral formula)
+        protected void _SetFormula(StreamType st, SIDSRC streamitem, FormulaLiteral formula)
         {
             this.CheckFormulaIsNotNull(formula.Value);
             var rec = new UpdateRecord(st, streamitem, formula.Value);
@@ -126,7 +127,7 @@ namespace VisioAutomation.ShapeSheet.Update
 
         protected void _SetResult(StreamType st, SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
-            var rec = new UpdateRecord(st,streamitem, value, unitcode);
+            var rec = new UpdateRecord(st, streamitem, value, unitcode);
             this._add_update(rec);
         }
 
@@ -144,7 +145,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() 
+        IEnumerator IEnumerable.GetEnumerator()
         {
             // keeps it hidden.
             return this.GetEnumerator();
@@ -152,7 +153,7 @@ namespace VisioAutomation.ShapeSheet.Update
 
         public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
-            var streamitem = new SIDSRC(shapeid,src);
+            var streamitem = new SIDSRC(shapeid, src);
             this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
         }
 
@@ -210,11 +211,12 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow query_g, short row)
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow query_g,
+            short row)
         {
             foreach (var pair in query_g.Pairs)
             {
-                this.SetFormulaIgnoreNull(shapeid, pair.SRC.ForRow(row), pair.Formula);            
+                this.SetFormulaIgnoreNull(shapeid, pair.SRC.ForRow(row), pair.Formula);
             }
         }
 
@@ -225,7 +227,7 @@ namespace VisioAutomation.ShapeSheet.Update
                 this.SetFormulaIgnoreNull(pair.SRC.ForRow(row), pair.Formula);
             }
         }
-        
+
         public void Execute(IVisio.Page page)
         {
             var surface = new ShapeSheetSurface(page);
@@ -275,7 +277,8 @@ namespace VisioAutomation.ShapeSheet.Update
 
             var stream = this.build_stream();
 
-            if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric || this._first_update.Value.UpdateType==UpdateType.ResultString)
+            if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric ||
+                this._first_update.Value.UpdateType == UpdateType.ResultString)
             {
                 // Set Results
 
@@ -288,7 +291,7 @@ namespace VisioAutomation.ShapeSheet.Update
                     unitcodes[i] = update.UnitCode;
                     if (update.UpdateType == UpdateType.ResultNumeric)
                     {
-                        results[i] = update.ResultNumeric;                       
+                        results[i] = update.ResultNumeric;
                     }
                     else if (update.UpdateType == UpdateType.ResultString)
                     {
@@ -300,7 +303,7 @@ namespace VisioAutomation.ShapeSheet.Update
                     }
                     i++;
                 }
-                
+
                 var flags = this.ResultFlags;
 
                 if (this._first_update.Value.UpdateType == UpdateType.ResultNumeric)
@@ -311,7 +314,7 @@ namespace VisioAutomation.ShapeSheet.Update
                     flags |= IVisio.VisGetSetArgs.visGetStrings;
                 }
 
-                surface.SetResults(stream, unitcodes, results, (short)flags);                    
+                surface.SetResults(stream, unitcodes, results, (short) flags);
             }
             else
             {
@@ -327,19 +330,19 @@ namespace VisioAutomation.ShapeSheet.Update
                 }
 
                 var flags = this.FormulaFlags;
-                
+
                 int c = surface.SetFormulas(stream, formulas, (short) flags);
             }
         }
-        
-        private short [] build_stream()
+
+        private short[] build_stream()
         {
             var st = this._first_update.Value.StreamType;
 
-            if (st==StreamType.SRC)
+            if (st == StreamType.SRC)
             {
                 var streamb = new List<SRC>(this._updates.Count);
-                streamb.AddRange( this._updates.Select(i=>i.SIDSRC.SRC));
+                streamb.AddRange(this._updates.Select(i => i.SIDSRC.SRC));
                 return SRC.ToStream(streamb);
             }
             else
@@ -348,7 +351,7 @@ namespace VisioAutomation.ShapeSheet.Update
                 streamb.AddRange(this._updates.Select(i => i.SIDSRC));
                 return SIDSRC.ToStream(streamb);
             }
-            
+
         }
 
         public void SetFormula(SRC streamitem, FormulaLiteral formula)
@@ -370,5 +373,10 @@ namespace VisioAutomation.ShapeSheet.Update
         {
             this._SetResult(StreamType.SRC, new SIDSRC(-1, streamitem), value, unitcode);
         }
+    }
+
+    public class Update : UpdateBase
+    {
+
     }
 }
