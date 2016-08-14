@@ -44,7 +44,7 @@ namespace VisioPowerShell.Commands.Resize
                     newpagecells.PageHeight = this.Height;
                 }
 
-                var update = new UpdateSRC();
+                var update = new UpdateSRCFormulas();
                 newpagecells.SetFormulas(update);
                 update.BlastGuards = true;
                 update.Execute(page);

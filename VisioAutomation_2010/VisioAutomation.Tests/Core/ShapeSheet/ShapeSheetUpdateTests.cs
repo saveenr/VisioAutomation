@@ -61,7 +61,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new UpdateSRC();
+            var update = new UpdateSRCResult();
             update.SetResult(ShapeSheetUpdateTests.src_linepat, 7, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
@@ -85,7 +85,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new UpdateSRC();
+            var update = new UpdateSRCResult();
             update.SetResult(ShapeSheetUpdateTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
@@ -146,53 +146,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Update_ConsistencyChecking()
         {
-            this.CheckHomogenousUpdates_FormulasResults();
-            this.CheckHomogenousUpdates_Streams();
             this.CheckHomogenousUpdates_ResultTypes();
         }
-
-        public void CheckHomogenousUpdates_FormulasResults()
-        {
-            var update1 = new UpdateSRC();
-            update1.SetResult(ShapeSheetUpdateTests.src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
-            bool caught1 = false;
-            try
-            {
-                update1.SetFormula(ShapeSheetUpdateTests.src_pinx, "5.0");
-
-            }
-            catch (VA.AutomationException)
-            {
-                caught1 = true;
-            }
-
-            if (!caught1)
-            {
-                Assert.Fail();
-            }
-        }
         
-        public void CheckHomogenousUpdates_Streams()
-        {
-            /*
-            var update1 = new UpdateSRC();
-            update1.SetResult(ShapeSheetUpdateTests.src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
-            bool caught1 = false;
-            try
-            {
-                update1.SetResult(1, ShapeSheetUpdateTests.src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
 
-            }
-            catch (VA.AutomationException)
-            {
-                caught1 = true;
-            }
-
-            if (!caught1)
-            {
-                Assert.Fail();
-            }*/
-        }
 
         public void CheckHomogenousUpdates_ResultTypes()
         {
@@ -200,7 +157,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new UpdateSRC();
+            var update = new UpdateSRCResult();
             update.SetResult(ShapeSheetUpdateTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);

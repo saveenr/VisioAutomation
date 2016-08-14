@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             }
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheet.Update.UpdateSRC update, short row)
+        public void SetFormulas(VisioAutomation.ShapeSheet.Update.UpdateSRCFormulas update, short row)
         {
             foreach (var pair in this.Pairs)
             {

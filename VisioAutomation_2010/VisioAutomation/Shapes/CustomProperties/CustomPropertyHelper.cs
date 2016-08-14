@@ -32,7 +32,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                     throw new AutomationException(msg);
                 }
 
-                var update = new UpdateSRC();
+                var update = new UpdateSRCFormulas();
                 cp.SetFormulas(update, cell_propname.Row);
                 update.Execute(shape);
 
@@ -55,7 +55,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var update = new UpdateSRC();
+            var update = new UpdateSRCFormulas();
             cp.SetFormulas(update, row);
             update.Execute(shape);
         }

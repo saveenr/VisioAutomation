@@ -316,7 +316,7 @@ namespace VisioAutomation.Scripting.Commands
             double new_height = old_size.Width;
             double new_width = old_size.Height;
 
-            var update = new UpdateSRC(3);
+            var update = new UpdateSRCFormulas(3);
             update.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_width);
             update.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_height);
             update.SetFormula(ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
@@ -357,7 +357,7 @@ namespace VisioAutomation.Scripting.Commands
                 page = application.ActivePage;
             }
 
-            var update = new UpdateSRC();
+            var update = new UpdateSRCFormulas();
 
             update.SetFormula(ShapeSheet.SRCConstants.XGridOrigin, "0.0");
             update.SetFormula(ShapeSheet.SRCConstants.YGridOrigin, "0.0");
@@ -380,7 +380,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var active_page = application.ActivePage;
                 var page_sheet = active_page.PageSheet;
-                var update = new UpdateSRC(2);
+                var update = new UpdateSRCFormulas(2);
                 update.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_size.Width);
                 update.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_size.Height);
                 update.Execute(page_sheet);

@@ -18,7 +18,7 @@ namespace VisioAutomation_Tests.Core.Page
             pagecells.PageWidth = pagecells.PageWidth.Result * 2.0;
             pagecells.PageHeight = pagecells.PageHeight.Result * 2.0;
 
-            var update = new UpdateSRC();
+            var update = new UpdateSRCFormulas();
             pagecells.SetFormulas(update);
             update.Execute(page1.PageSheet);
 

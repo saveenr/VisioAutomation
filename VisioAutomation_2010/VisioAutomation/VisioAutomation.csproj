@@ -185,7 +185,7 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheetQuery\Columns\ColumnQuery.cs" />
-    <Compile Include="ShapeSheet\Update\UpdateSRC.cs" />
+    <Compile Include="ShapeSheet\Update\UpdateSRCFormulas.cs" />
     <Compile Include="ShapeSheet\FormulaLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />

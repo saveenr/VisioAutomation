@@ -142,7 +142,7 @@ namespace VisioAutomation.Pages.PageLayout
             var pagecells = new PageCells();
             this.SetPageCells(pagecells);
 
-            var update = new UpdateSRC();
+            var update = new UpdateSRCFormulas();
             pagecells.SetFormulas(update);
             var pagesheet = page.PageSheet;
             update.Execute(pagesheet);

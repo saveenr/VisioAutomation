@@ -30,7 +30,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
             // Update the Page Cells
             var pagesheet = this.page.PageSheet;
-            var pageupdate = new UpdateSRC();
+            var pageupdate = new UpdateSRCFormulas();
 
             var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;

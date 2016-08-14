@@ -159,7 +159,7 @@ namespace VisioAutomation.Models.Text
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
-            var update = new UpdateSRC();
+            var update = new UpdateSRCFormulas();
 
             foreach (var region in regions_to_format)
             {
