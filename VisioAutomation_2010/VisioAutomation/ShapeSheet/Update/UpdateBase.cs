@@ -19,12 +19,12 @@ namespace VisioAutomation.ShapeSheet.Update
             this._first_update = null;
         }
 
-        public UpdateBase()
+        protected UpdateBase()
         {
             this._updates = new List<UpdateRecord>();
         }
 
-        public UpdateBase(int capacity)
+        protected UpdateBase(int capacity)
         {
             this._updates = new List<UpdateRecord>(capacity);
         }
@@ -116,6 +116,7 @@ namespace VisioAutomation.ShapeSheet.Update
             var rec = new UpdateRecord(StreamType.SIDSRC, streamitem, formula.Value);
             this._add_update(rec);
         }
+
         protected void _SetFormula(SRC streamitem, FormulaLiteral formula)
         {
             this.CheckFormulaIsNotNull(formula.Value);
