@@ -110,30 +110,56 @@ namespace VisioAutomation.ShapeSheet.Update
 
         }
 
-        protected void _SetFormula(StreamType st, SIDSRC streamitem, FormulaLiteral formula)
+        protected void _SetFormula(SIDSRC streamitem, FormulaLiteral formula)
         {
             this.CheckFormulaIsNotNull(formula.Value);
-            var rec = new UpdateRecord(st, streamitem, formula.Value);
+            var rec = new UpdateRecord(StreamType.SIDSRC, streamitem, formula.Value);
+            this._add_update(rec);
+        }
+        protected void _SetFormula(SRC streamitem, FormulaLiteral formula)
+        {
+            this.CheckFormulaIsNotNull(formula.Value);
+            var rec = new UpdateRecord(StreamType.SRC, new SIDSRC(-1, streamitem), formula.Value);
             this._add_update(rec);
         }
 
-        protected void _SetFormulaIgnoreNull(StreamType st, SIDSRC streamitem, FormulaLiteral formula)
+        protected void _SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
         {
             if (formula.HasValue)
             {
-                this._SetFormula(st, streamitem, formula);
+                this._SetFormula(streamitem, formula);
             }
         }
 
-        protected void _SetResult(StreamType st, SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        protected void _SetFormulaIgnoreNull(SRC streamitem, FormulaLiteral formula)
         {
-            var rec = new UpdateRecord(st, streamitem, value, unitcode);
+            if (formula.HasValue)
+            {
+                this._SetFormula(streamitem, formula);
+            }
+        }
+
+        protected void _SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        {
+            var rec = new UpdateRecord(StreamType.SIDSRC, streamitem, value, unitcode);
             this._add_update(rec);
         }
 
-        protected void _SetResult(StreamType st, SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
+        protected void _SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
-            var rec = new UpdateRecord(st, streamitem, value, unitcode);
+            var rec = new UpdateRecord(StreamType.SRC, new SIDSRC(-1, streamitem), value, unitcode);
+            this._add_update(rec);
+        }
+
+        protected void _SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
+        {
+            var rec = new UpdateRecord(StreamType.SIDSRC, streamitem, value, unitcode);
+            this._add_update(rec);
+        }
+
+        protected void _SetResult(SRC streamitem, string value, IVisio.VisUnitCodes unitcode)
+        {
+            var rec = new UpdateRecord(StreamType.SRC, new SIDSRC(-1,streamitem), value, unitcode);
             this._add_update(rec);
         }
 
