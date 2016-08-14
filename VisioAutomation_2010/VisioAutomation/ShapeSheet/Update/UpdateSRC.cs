@@ -19,7 +19,7 @@ namespace VisioAutomation.ShapeSheet.Update
 
         public void SetFormulaIgnoreNull(SRC streamitem, FormulaLiteral formula)
         {
-            this._SetFormulaIgnoreNull(new SIDSRC(-1, streamitem), formula);
+            this._SetFormulaIgnoreNull(streamitem, formula);
         }
 
         public void SetResult(SRC streamitem, string value, IVisio.VisUnitCodes unitcode)
