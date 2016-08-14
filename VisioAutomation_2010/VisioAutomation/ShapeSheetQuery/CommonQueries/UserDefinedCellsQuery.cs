@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 
         public UserDefinedCellsQuery()
         {
-            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionUser);
+            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionUser);
             this.Value = sec.AddCell(SRCCON.User_Value, nameof(SRCCON.User_Value));
             this.Prompt = sec.AddCell(SRCCON.User_Prompt, nameof(SRCCON.User_Prompt));
         }

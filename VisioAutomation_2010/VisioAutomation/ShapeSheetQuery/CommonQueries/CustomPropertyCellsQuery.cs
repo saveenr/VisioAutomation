@@ -19,7 +19,7 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 
         public CustomPropertyCellsQuery()
         {
-            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
+            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
 
 
             this.SortKey = sec.AddCell(SRCCON.Prop_SortKey, nameof(SRCCON.Prop_SortKey));

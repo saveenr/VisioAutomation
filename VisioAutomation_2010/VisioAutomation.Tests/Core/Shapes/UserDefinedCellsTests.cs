@@ -99,7 +99,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             VAUSERCELL.UserDefinedCellHelper.Set(s1, "foo", "bar", null);
 
             var queryex = new VisioAutomation.ShapeSheetQuery.Query();
-            var sec = queryex.AddSection(IVisio.VisSectionIndices.visSectionUser);
+            var sec = queryex.AddSubQuery(IVisio.VisSectionIndices.visSectionUser);
             var Value = sec.AddCell(VisioAutomation.ShapeSheet.SRCConstants.User_Value,"Value");
             var Prompt = sec.AddCell(VisioAutomation.ShapeSheet.SRCConstants.User_Prompt,"Prompt");
 

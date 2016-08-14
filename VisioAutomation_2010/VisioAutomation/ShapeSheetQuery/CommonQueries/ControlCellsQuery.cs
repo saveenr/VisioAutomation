@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 
         public ControlCellsQuery()
         {
-            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionControls);
+            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionControls);
 
             this.CanGlue = sec.AddCell(SRCCON.Controls_CanGlue, nameof(SRCCON.Controls_CanGlue));
             this.Tip = sec.AddCell(SRCCON.Controls_Tip, nameof(SRCCON.Controls_Tip));

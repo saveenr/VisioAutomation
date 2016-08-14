@@ -22,10 +22,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         {
             var query = new VA.ShapeSheetQuery.Query();
 
-            var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
+            var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character", sec_char.Name);
 
-            var sec_obj = query.AddSection(IVisio.VisSectionIndices.visSectionObject);
+            var sec_obj = query.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             Assert.AreEqual("Object", sec_obj.Name);
 
         }
@@ -60,7 +60,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_fg = query.AddCell(src_fg, "FillForegnd");
             var col_bg = query.AddCell(src_bg, "FillBkgnd");
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
-            var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
+            var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character",sec_char.Name);
             var col_charcase = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase, "CharCase");
             var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "CharColor");
@@ -177,7 +177,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var query = new VA.ShapeSheetQuery.Query();
 
-            var prop_sec = query.AddSection(IVisio.VisSectionIndices.visSectionProp);
+            var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
             var value_col = prop_sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value,"Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
@@ -443,7 +443,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                     VA.ShapeSheetQuery.SubQuery sec_col;
                     if (!section_to_secquery.ContainsKey(src.Section))
                     {
-                        sec_col = query.AddSection((IVisio.VisSectionIndices)src.Section);
+                        sec_col = query.AddSubQuery((IVisio.VisSectionIndices)src.Section);
                         section_to_secquery[src.Section] = sec_col;
                     }
                     else
@@ -484,12 +484,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Ensure that duplicate sections are caught
 
             var q2 = new VA.ShapeSheetQuery.Query();
-            q2.AddSection(IVisio.VisSectionIndices.visSectionObject);
+            q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
             try
             {
-                q2.AddSection(IVisio.VisSectionIndices.visSectionObject);
+                q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             }
             catch (VA.AutomationException)
             {
@@ -500,7 +500,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that Duplicates in Section Queries Are caught - 
             var q3 = new VA.ShapeSheetQuery.Query();
-            var sec = q3.AddSection(IVisio.VisSectionIndices.visSectionObject);
+            var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             sec.AddCell(VA.ShapeSheet.SRCConstants.PinX.Cell,"PinX");
             bool caught_exc3 = false;
             try

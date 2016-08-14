@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 
         public HyperlinkCellsQuery()
         {
-            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionHyperlink);
+            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionHyperlink);
 
             this.Address = sec.AddCell(ShapeSheet.SRCConstants.Hyperlink_Address , nameof(ShapeSheet.SRCConstants.Hyperlink_Address));
             this.Default = sec.AddCell(ShapeSheet.SRCConstants.Hyperlink_Default, nameof(ShapeSheet.SRCConstants.Hyperlink_Default));

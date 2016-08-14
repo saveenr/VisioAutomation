@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 
         public CharacterFormatCellsQuery()
         {
-            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
+            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
 
             this.Color = sec.AddCell(SRCCON.CharColor, nameof(SRCCON.CharColor));
             this.Trans = sec.AddCell(SRCCON.CharColorTrans, nameof(SRCCON.CharColorTrans));

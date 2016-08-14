@@ -12,14 +12,14 @@ namespace VisioAutomation.ShapeSheetQuery
         public ListColumnQuery Cells { get; }
         public ListSubQuery SubQueries { get; }
 
-        private List<List<SubQueryDetails>> _per_shape_section_info; 
+        private List<List<SubQueryDetails>> _subquery_shape_info; 
         private bool _is_frozen;
 
         public Query()
         {
             this.Cells = new ListColumnQuery(0);
             this.SubQueries = new ListSubQuery(0);
-            this._per_shape_section_info = new List<List<SubQueryDetails>>(0);
+            this._subquery_shape_info = new List<List<SubQueryDetails>>(0);
         }
 
         internal void CheckNotFrozen()
@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheetQuery
             return col;
         }
 
-        public SubQuery AddSection(IVisio.VisSectionIndices section)
+        public SubQuery AddSubQuery(IVisio.VisSectionIndices section)
         {
             var col = this.SubQueries.Add(section);
             return col;
@@ -90,9 +90,9 @@ namespace VisioAutomation.ShapeSheetQuery
                     unitcodes.Add(col.UnitCode);                    
                 }
 
-                if (this._per_shape_section_info.Count>0)
+                if (this._subquery_shape_info.Count>0)
                 {
-                    var per_shape_data = this._per_shape_section_info[i];
+                    var per_shape_data = this._subquery_shape_info[i];
                     foreach (var sec in per_shape_data)
                     {
                         foreach (var row_index in sec.RowIndexes)
@@ -209,9 +209,9 @@ namespace VisioAutomation.ShapeSheetQuery
             }
 
             // Now copy the Section values over
-            if (this._per_shape_section_info.Count > 0)
+            if (this._subquery_shape_info.Count > 0)
             {
-                var sections = this._per_shape_section_info[shape_index];
+                var sections = this._subquery_shape_info[shape_index];
 
                 output.Sections = new List<SubQueryOutput<T>>(sections.Count);
                 foreach (var section in sections)
@@ -246,7 +246,7 @@ namespace VisioAutomation.ShapeSheetQuery
                 throw new AutomationException(msg);
             }
 
-            this._per_shape_section_info = new List<List<SubQueryDetails>>();
+            this._subquery_shape_info = new List<List<SubQueryDetails>>();
 
             if (this.SubQueries.Count>0)
             {
@@ -258,7 +258,7 @@ namespace VisioAutomation.ShapeSheetQuery
                     var section_info = new SubQueryDetails(sec, surface.Target.Shape.ID16, num_rows);
                     section_infos.Add(section_info);
                 }
-                this._per_shape_section_info.Add(section_infos);
+                this._subquery_shape_info.Add(section_infos);
             }
 
             int total = this.GetTotalCellCount(1);
@@ -272,9 +272,9 @@ namespace VisioAutomation.ShapeSheetQuery
             }
 
             // And then the sections if any exist
-            if (this._per_shape_section_info.Count > 0)
+            if (this._subquery_shape_info.Count > 0)
             {
-                var data_for_shape = this._per_shape_section_info[0];
+                var data_for_shape = this._subquery_shape_info[0];
                 foreach (var section in data_for_shape)
                 {
                     foreach (int rowindex in section.RowIndexes)
@@ -316,9 +316,9 @@ namespace VisioAutomation.ShapeSheetQuery
                 }
 
                 // And then the sections if any exist
-                if (this._per_shape_section_info.Count > 0)
+                if (this._subquery_shape_info.Count > 0)
                 {
-                    var data_for_shape = this._per_shape_section_info[i];
+                    var data_for_shape = this._subquery_shape_info[i];
                     foreach (var section in data_for_shape)
                     {
                         foreach (int rowindex in section.RowIndexes)
@@ -349,7 +349,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
         private void CalculatePerShapeInfo(ShapeSheetSurface surface, IList<int> shapeids)
         {
-            this._per_shape_section_info = new List<List<SubQueryDetails>>();
+            this._subquery_shape_info = new List<List<SubQueryDetails>>();
 
             if (this.SubQueries.Count < 1)
             {
@@ -379,13 +379,13 @@ namespace VisioAutomation.ShapeSheetQuery
                     var section_info = new SubQueryDetails(sec, shapeid, num_rows);
                     section_infos.Add(section_info);
                 }
-                this._per_shape_section_info.Add(section_infos);
+                this._subquery_shape_info.Add(section_infos);
             }
 
-            if (shapeids.Count != this._per_shape_section_info.Count)
+            if (shapeids.Count != this._subquery_shape_info.Count)
             {
                 string msg = string.Format("Expected {0} PerShape structs. Actual = {1}", shapeids.Count,
-                    this._per_shape_section_info.Count);
+                    this._subquery_shape_info.Count);
                 throw new AutomationException(msg);
             }
         }
@@ -410,7 +410,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
             // Count the Cells in the Sections
             int total_cells_from_sections = 0;
-            foreach (var data_for_shape in this._per_shape_section_info)
+            foreach (var data_for_shape in this._subquery_shape_info)
             {
                 foreach (var section_data in data_for_shape)
                 {

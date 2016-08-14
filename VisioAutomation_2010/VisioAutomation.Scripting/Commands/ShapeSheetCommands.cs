@@ -119,7 +119,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
             var query = new VAQUERY.Query();
-            var sec = query.AddSection(section);
+            var sec = query.AddSubQuery(section);
 
             int ci = 0;
             foreach (var cell in cells)
@@ -144,7 +144,7 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
 
             var query = new VAQUERY.Query();
-            var sec = query.AddSection(section);
+            var sec = query.AddSubQuery(section);
 
             int ci = 0;
             foreach (var cell in cells)

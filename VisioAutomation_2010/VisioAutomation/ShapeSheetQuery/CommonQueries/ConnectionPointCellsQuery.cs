@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheetQuery.CommonQueries
 
         public ConnectionPointCellsQuery()
         {
-            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionConnectionPts);
+            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionConnectionPts);
 
             this.DirX = sec.AddCell(SRCCON.Connections_DirX, nameof(SRCCON.Connections_DirX));
             this.DirY = sec.AddCell(SRCCON.Connections_DirY, nameof(SRCCON.Connections_DirY));
