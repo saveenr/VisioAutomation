@@ -32,7 +32,7 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (int shapeid in shapeids)
             {
-                update.SetFormulas((short)shapeid, format);
+                format.SetFormulas((short)shapeid, update);
             }
 
             var application = this._client.Application.Get();

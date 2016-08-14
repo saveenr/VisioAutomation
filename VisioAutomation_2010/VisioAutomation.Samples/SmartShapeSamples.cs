@@ -36,9 +36,9 @@ namespace VisioAutomationSamples
             xform.Height = string.Format("GUARD({0}!Height)", bkname); 
 
             var update = new Update();
-            update.SetFormulas(progress.ID16, xform);
-            update.SetFormulas(progress.ID16, background_fmt);
-            update.SetFormulas(progress.ID16, progress_fmt);
+            xform.SetFormulas(progress.ID16, update);
+            background_fmt.SetFormulas(progress.ID16, update);
+            progress_fmt.SetFormulas(progress.ID16, update);
             update.Execute(page_a);
 
             var markup1 = new VisioAutomation.Models.Text.TextElement();

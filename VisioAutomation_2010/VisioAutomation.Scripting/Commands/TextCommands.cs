@@ -108,13 +108,13 @@ namespace VisioAutomation.Scripting.Commands
                     if (format.CharacterFormats.Count>0)
                     {
                         var fmt = format.CharacterFormats[0];
-                        update.SetFormulas((short) shapeids[i], fmt, 0);
+                        fmt.SetFormulas((short) shapeids[i], update, 0);
                     }
 
                     if (format.ParagraphFormats.Count > 0)
                     {
                         var fmt = format.ParagraphFormats[0];
-                        update.SetFormulas((short)shapeids[i], fmt, 0);
+                        fmt.SetFormulas((short)shapeids[i], update, 0);
                     }
                 }
 

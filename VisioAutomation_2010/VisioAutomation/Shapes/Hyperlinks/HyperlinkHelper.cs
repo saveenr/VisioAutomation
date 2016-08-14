@@ -62,7 +62,7 @@ namespace VisioAutomation.Shapes.Hyperlinks
             }
 
             var update = new Update();
-            update.SetFormulas(hyperlink, row);
+            hyperlink.SetFormulas(update, row);
             update.Execute(shape);
 
             return row;

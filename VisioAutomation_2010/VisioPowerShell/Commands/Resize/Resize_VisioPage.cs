@@ -45,7 +45,7 @@ namespace VisioPowerShell.Commands.Resize
                 }
 
                 var update = new Update();
-                update.SetFormulas(newpagecells);
+                newpagecells.SetFormulas(update);
                 update.BlastGuards = true;
                 update.Execute(page);
             }

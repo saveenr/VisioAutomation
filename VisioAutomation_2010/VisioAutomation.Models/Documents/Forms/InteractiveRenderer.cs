@@ -39,7 +39,7 @@ namespace VisioAutomation.Models.Documents.Forms
             pagecells.PageRightMargin = formpage.Margin.Right;
             pagecells.PageTopMargin = formpage.Margin.Top;
             pagecells.PageBottomMargin = formpage.Margin.Bottom;
-            pageupdate.SetFormulas(pagecells);
+            pagecells.SetFormulas(pageupdate);
             pageupdate.Execute(pagesheet);
 
 
@@ -98,10 +98,10 @@ namespace VisioAutomation.Models.Documents.Forms
             var update = new Update();
             foreach (var block in this.Blocks)
             {
-                update.SetFormulas((short)block.VisioShapeID,block.FormatCells);
-                update.SetFormulas((short)block.VisioShapeID,block.TextBlockCells);
-                update.SetFormulas((short)block.VisioShapeID,block.ParagraphCells, 0);
-                update.SetFormulas((short)block.VisioShapeID,block.CharacterCells, 0);
+                block.FormatCells.SetFormulas((short)block.VisioShapeID,update);
+                block.TextBlockCells.SetFormulas((short)block.VisioShapeID,update);
+                block.ParagraphCells.SetFormulas((short)block.VisioShapeID,update, 0);
+                block.CharacterCells.SetFormulas((short)block.VisioShapeID, update, 0);
             }
             update.Execute(this.page);
         }

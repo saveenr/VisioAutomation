@@ -50,5 +50,21 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             var cells = cells_to_object(data_for_shape.Cells);
             return cells;
         }
+
+        public void SetFormulas(VisioAutomation.ShapeSheet.Update.Update update)
+        {
+            foreach (var pair in this.Pairs)
+            {
+                update.SetFormulaIgnoreNull(pair.SRC, pair.Formula);
+            }
+        }
+
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.Update update)
+        {
+            foreach (var pair in this.Pairs)
+            {
+                update.SetFormulaIgnoreNull(shapeid, pair.SRC, pair.Formula);
+            }
+        }
     }
 }

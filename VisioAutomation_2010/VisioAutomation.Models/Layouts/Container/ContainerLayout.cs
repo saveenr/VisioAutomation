@@ -215,7 +215,7 @@ namespace VisioAutomation.Models.Layouts.Container
             {
                 xfrm.Width = rects[i].Width;
                 xfrm.Height = rects[i].Height;
-                update.SetFormulas(shapeids[i], xfrm);
+                xfrm.SetFormulas(shapeids[i], update);
             }
             update.Execute(page);
 

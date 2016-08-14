@@ -31,7 +31,7 @@ namespace VisioAutomation.Shapes.ConnectionPoints
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
             var update = new Update();
-            update.SetFormulas(connection_point_cells,n);
+            connection_point_cells.SetFormulas(update,n);
             update.Execute(shape);
 
             return n;

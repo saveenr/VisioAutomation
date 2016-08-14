@@ -29,10 +29,10 @@ namespace VisioAutomation.Models.Documents.Forms
         public void ApplyFormus(Update update)
         {
             short titleshape_id = this.VisioShape.ID16;
-            update.SetFormulas(titleshape_id, this.TextBlockCells);
-            update.SetFormulas(titleshape_id, this.ParagraphCells, 0);
-            update.SetFormulas(titleshape_id, this.CharacterCells, 0);
-            update.SetFormulas(titleshape_id, this.FormatCells);
+            this.TextBlockCells.SetFormulas(titleshape_id, update);
+            this.ParagraphCells.SetFormulas(titleshape_id, update, 0);
+            this.CharacterCells.SetFormulas(titleshape_id, update, 0);
+            this.FormatCells.SetFormulas(titleshape_id, update);
         }
     }
 }

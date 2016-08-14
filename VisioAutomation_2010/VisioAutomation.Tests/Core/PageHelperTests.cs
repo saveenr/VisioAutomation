@@ -19,7 +19,7 @@ namespace VisioAutomation_Tests.Core.Page
             pagecells.PageHeight = pagecells.PageHeight.Result * 2.0;
 
             var update = new Update();
-            update.SetFormulas(pagecells);
+            pagecells.SetFormulas(update);
             update.Execute(page1.PageSheet);
 
             var pagecells2 = VA.Pages.PageCells.GetCells(page1.PageSheet);

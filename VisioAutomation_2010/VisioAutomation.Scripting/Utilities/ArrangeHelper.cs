@@ -114,7 +114,7 @@ namespace VisioAutomation.Scripting.Utilities
             {
                 var shape_id = shapeids[i];
                 var xfrm = xfrms[i];
-                update.SetFormulas((short)shape_id, xfrm);
+                xfrm.SetFormulas((short)shape_id, update);
             }
             update.Execute(page);
         }

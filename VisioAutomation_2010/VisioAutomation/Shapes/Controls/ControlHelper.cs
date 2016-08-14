@@ -58,7 +58,7 @@ namespace VisioAutomation.Shapes.Controls
             }
 
             var update = new Update();
-            update.SetFormulas(ctrl, row);
+            ctrl.SetFormulas(update, row);
             update.Execute(shape);
 
             return row;

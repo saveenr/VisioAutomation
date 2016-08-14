@@ -210,7 +210,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var shape_id = shapeids[i];
                 var xfrm = xfrms[i];
-                update.SetFormulas((short)shape_id, xfrm);
+                xfrm.SetFormulas((short)shape_id, update);
             }
             update.Execute(page);
         }
@@ -352,7 +352,7 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (int shapeid in shapeids)
             {
-                update.SetFormulas((short)shapeid, lockcells);
+                lockcells.SetFormulas((short)shapeid, update);
             }
 
             var application = this._client.Application.Get();

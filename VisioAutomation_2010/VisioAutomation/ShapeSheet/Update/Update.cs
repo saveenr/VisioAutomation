@@ -195,39 +195,6 @@ namespace VisioAutomation.ShapeSheet.Update
             this._SetFormulaIgnoreNull(StreamType.SIDSRC, sidsrc, formula);
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupSingleRow query_g)
-        {
-            foreach (var pair in query_g.Pairs)
-            {
-                this.SetFormulaIgnoreNull(pair.SRC, pair.Formula);
-            }
-        }
-
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupSingleRow query_g)
-        {
-            foreach (var pair in query_g.Pairs)
-            {
-                this.SetFormulaIgnoreNull(shapeid, pair.SRC, pair.Formula);
-            }
-        }
-
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow query_g,
-            short row)
-        {
-            foreach (var pair in query_g.Pairs)
-            {
-                this.SetFormulaIgnoreNull(shapeid, pair.SRC.ForRow(row), pair.Formula);
-            }
-        }
-
-        public void SetFormulas(VisioAutomation.ShapeSheetQuery.QueryGroups.QueryGroupMultiRow query_g, short row)
-        {
-            foreach (var pair in query_g.Pairs)
-            {
-                this.SetFormulaIgnoreNull(pair.SRC.ForRow(row), pair.Formula);
-            }
-        }
-
         public void Execute(IVisio.Page page)
         {
             var surface = new ShapeSheetSurface(page);

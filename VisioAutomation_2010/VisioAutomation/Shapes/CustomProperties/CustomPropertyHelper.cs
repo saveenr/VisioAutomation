@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 }
 
                 var update = new Update();
-                update.SetFormulas(cp, cell_propname.Row);
+                cp.SetFormulas(update, cell_propname.Row);
                 update.Execute(shape);
 
                 return;
@@ -56,7 +56,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             }
 
             var update = new Update();
-            update.SetFormulas(cp, row);
+            cp.SetFormulas(update, row);
             update.Execute(shape);
         }
 

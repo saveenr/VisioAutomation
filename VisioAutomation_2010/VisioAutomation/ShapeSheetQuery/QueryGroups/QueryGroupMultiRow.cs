@@ -69,5 +69,23 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             }
             return sec_objects;
         }
+
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.Update update,
+            short row)
+        {
+            foreach (var pair in this.Pairs)
+            {
+                update.SetFormulaIgnoreNull(shapeid, pair.SRC.ForRow(row), pair.Formula);
+            }
+        }
+
+        public void SetFormulas(VisioAutomation.ShapeSheet.Update.Update update, short row)
+        {
+            foreach (var pair in this.Pairs)
+            {
+                update.SetFormulaIgnoreNull(pair.SRC.ForRow(row), pair.Formula);
+            }
+        }
+
     }
 }
