@@ -1,8 +1,10 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using System.Collections.Generic;
+using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class UpdateSIDSRC : UpdateBase
+    public class UpdateSIDSRC : UpdateBase<SIDSRC>
     {
         public UpdateSIDSRC() : base()
         {
@@ -56,5 +58,42 @@ namespace VisioAutomation.ShapeSheet.Update
             this._SetFormulaIgnoreNull(sidsrc, formula);
         }
 
+
+
+        protected void _SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
+        {
+            if (formula.HasValue)
+            {
+                this._SetFormula(streamitem, formula);
+            }
+        }
+
+
+
+        protected void _SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        {
+            var rec = new UpdateRecord<SIDSRC>(StreamType.SIDSRC, streamitem, value, unitcode);
+            this._add_update(rec);
+        }
+
+        protected void _SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
+        {
+            var rec = new UpdateRecord<SIDSRC>(StreamType.SIDSRC, streamitem, value, unitcode);
+            this._add_update(rec);
+        }
+
+        protected void _SetFormula(SIDSRC streamitem, FormulaLiteral formula)
+        {
+            this.CheckFormulaIsNotNull(formula.Value);
+            var rec = new UpdateRecord<SIDSRC>(StreamType.SIDSRC, streamitem, formula.Value);
+            this._add_update(rec);
+        }
+
+        protected override short[] build_stream()
+        {
+            var streamb = new List<SIDSRC>(this._updates.Count);
+            streamb.AddRange(this._updates.Select(i => i.StreamItem));
+            return SIDSRC.ToStream(streamb);
+        }
     }
 }

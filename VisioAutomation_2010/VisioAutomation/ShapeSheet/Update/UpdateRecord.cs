@@ -1,9 +1,9 @@
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public struct UpdateRecord
+    public struct UpdateRecord<T>
     {
-        public readonly SIDSRC SIDSRC;
+        public readonly T StreamItem;
         public readonly string Formula;
         public readonly double ResultNumeric;
         public readonly string ResultString;
@@ -11,9 +11,9 @@ namespace VisioAutomation.ShapeSheet.Update
         public readonly UpdateType UpdateType;
         public readonly StreamType StreamType;
 
-        internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, string formula)
+        internal UpdateRecord(StreamType streamtype, T stream_item, string formula)
         {
-            this.SIDSRC = sidsrc;
+            this.StreamItem = stream_item;
             this.Formula = formula;
             this.ResultNumeric = 0.0;
             this.ResultString = null;
@@ -22,9 +22,9 @@ namespace VisioAutomation.ShapeSheet.Update
             this.StreamType = streamtype;
         }
 
-        internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, double result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        internal UpdateRecord(StreamType streamtype, T stream_item, double result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
         {
-            this.SIDSRC = sidsrc;
+            this.StreamItem = stream_item;
             this.Formula = null;
             this.UnitCode = unit_code;
             this.ResultNumeric = result;
@@ -33,9 +33,9 @@ namespace VisioAutomation.ShapeSheet.Update
             this.StreamType = streamtype;
         }
 
-        internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, string result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        internal UpdateRecord(StreamType streamtype, T stream_item, string result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
         {
-            this.SIDSRC = sidsrc;
+            this.StreamItem = stream_item;
             this.Formula = null;
             this.UnitCode = unit_code;
             this.ResultNumeric = 0.0;

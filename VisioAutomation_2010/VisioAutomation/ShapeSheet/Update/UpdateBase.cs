@@ -5,13 +5,13 @@ using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class UpdateBase : IEnumerable<UpdateRecord>
+    public abstract class UpdateBase<T> : IEnumerable<UpdateRecord<T>>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        private UpdateRecord? _first_update;
-        private readonly List<UpdateRecord> _updates;
+        protected UpdateRecord<T>? _first_update;
+        protected readonly List<UpdateRecord<T>> _updates;
 
         public void Clear()
         {
@@ -21,12 +21,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
         protected UpdateBase()
         {
-            this._updates = new List<UpdateRecord>();
+            this._updates = new List<UpdateRecord<T>>();
         }
 
         protected UpdateBase(int capacity)
         {
-            this._updates = new List<UpdateRecord>(capacity);
+            this._updates = new List<UpdateRecord<T>>(capacity);
         }
 
         protected IVisio.VisGetSetArgs ResultFlags
@@ -63,7 +63,7 @@ namespace VisioAutomation.ShapeSheet.Update
         }
 
 
-        private void CheckFormulaIsNotNull(string formula)
+        protected void CheckFormulaIsNotNull(string formula)
         {
             if (formula == null)
             {
@@ -71,7 +71,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        private void _add_update(UpdateRecord update)
+        protected void _add_update(UpdateRecord<T> update)
         {
             // This block ensures that only homogeneous updates are constructed
             if (!this._first_update.HasValue)
@@ -110,61 +110,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
         }
 
-        protected void _SetFormula(SIDSRC streamitem, FormulaLiteral formula)
-        {
-            this.CheckFormulaIsNotNull(formula.Value);
-            var rec = new UpdateRecord(StreamType.SIDSRC, streamitem, formula.Value);
-            this._add_update(rec);
-        }
 
-        protected void _SetFormula(SRC streamitem, FormulaLiteral formula)
-        {
-            this.CheckFormulaIsNotNull(formula.Value);
-            var rec = new UpdateRecord(StreamType.SRC, new SIDSRC(-1, streamitem), formula.Value);
-            this._add_update(rec);
-        }
 
-        protected void _SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
-        {
-            if (formula.HasValue)
-            {
-                this._SetFormula(streamitem, formula);
-            }
-        }
 
-        protected void _SetFormulaIgnoreNull(SRC streamitem, FormulaLiteral formula)
-        {
-            if (formula.HasValue)
-            {
-                this._SetFormula(streamitem, formula);
-            }
-        }
 
-        protected void _SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
-        {
-            var rec = new UpdateRecord(StreamType.SIDSRC, streamitem, value, unitcode);
-            this._add_update(rec);
-        }
 
-        protected void _SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
-        {
-            var rec = new UpdateRecord(StreamType.SRC, new SIDSRC(-1, streamitem), value, unitcode);
-            this._add_update(rec);
-        }
-
-        protected void _SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
-        {
-            var rec = new UpdateRecord(StreamType.SIDSRC, streamitem, value, unitcode);
-            this._add_update(rec);
-        }
-
-        protected void _SetResult(SRC streamitem, string value, IVisio.VisUnitCodes unitcode)
-        {
-            var rec = new UpdateRecord(StreamType.SRC, new SIDSRC(-1,streamitem), value, unitcode);
-            this._add_update(rec);
-        }
-
-        public IEnumerator<UpdateRecord> GetEnumerator()
+        public IEnumerator<UpdateRecord<T>> GetEnumerator()
         {
             foreach (var i in this._updates)
             {
@@ -285,22 +236,6 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        private short[] build_stream()
-        {
-            var st = this._first_update.Value.StreamType;
-
-            if (st == StreamType.SRC)
-            {
-                var streamb = new List<SRC>(this._updates.Count);
-                streamb.AddRange(this._updates.Select(i => i.SIDSRC.SRC));
-                return SRC.ToStream(streamb);
-            }
-            else
-            {
-                var streamb = new List<SIDSRC>(this._updates.Count);
-                streamb.AddRange(this._updates.Select(i => i.SIDSRC));
-                return SIDSRC.ToStream(streamb);
-            }
-        }
+        protected abstract short[] build_stream();
     }
 }
