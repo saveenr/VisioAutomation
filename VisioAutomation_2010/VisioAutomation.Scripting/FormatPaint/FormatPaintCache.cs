@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -128,7 +128,7 @@ namespace VisioAutomation.Scripting.FormatPaint
             var matching_cells = this.Cells.Where(c => c.MatchesCategory(category)).ToArray();
 
             // Apply those matched cells to each shape
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
             foreach (var shape_id in shapeids)
             {
                 foreach (var cell in matching_cells)

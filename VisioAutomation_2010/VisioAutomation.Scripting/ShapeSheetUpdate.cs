@@ -1,12 +1,12 @@
-﻿using VisioAutomation.ShapeSheet.Update;
+﻿using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting
 {
     public class ShapeSheetUpdate
     {
-        internal readonly UpdateSIDSRCFormula update;
-        internal readonly UpdateSIDSRCResult  update2;
+        internal readonly SIDSRCFormulaWriter update;
+        internal readonly SIDSRCResultWriter  update2;
         public Client Client;
         public IVisio.Page TargetPage;
         public bool BlastGuards;
@@ -16,8 +16,8 @@ namespace VisioAutomation.Scripting
         {
             this.Client = client;
             this.TargetPage = page;
-            this.update = new UpdateSIDSRCFormula();
-            this.update2 = new UpdateSIDSRCResult();
+            this.update = new SIDSRCFormulaWriter();
+            this.update2 = new SIDSRCResultWriter();
         }
 
         public void SetFormula(short id, ShapeSheet.SRC src, string formula)

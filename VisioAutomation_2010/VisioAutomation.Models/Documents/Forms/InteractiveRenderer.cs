@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Documents.Forms
@@ -30,7 +30,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
             // Update the Page Cells
             var pagesheet = this.page.PageSheet;
-            var pageupdate = new UpdateSRCFormulas();
+            var pageupdate = new SRCFormulaWriter();
 
             var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;
@@ -95,7 +95,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Finish()
         {
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
             foreach (var block in this.Blocks)
             {
                 block.FormatCells.SetFormulas((short)block.VisioShapeID,update);

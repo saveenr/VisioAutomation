@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using IVisio= Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Update
+namespace VisioAutomation.ShapeSheet.Writers
 {
-    public abstract class UpdateBase<T> : IEnumerable<UpdateRecord<T>>
+    public abstract class WriterBase<T> : IEnumerable<WriterRecord<T>>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        protected UpdateRecord<T>? _first_update;
-        protected readonly List<UpdateRecord<T>> _updates;
+        protected WriterRecord<T>? _first_update;
+        protected readonly List<WriterRecord<T>> _updates;
 
         public void Clear()
         {
@@ -19,14 +18,14 @@ namespace VisioAutomation.ShapeSheet.Update
             this._first_update = null;
         }
 
-        protected UpdateBase()
+        protected WriterBase()
         {
-            this._updates = new List<UpdateRecord<T>>();
+            this._updates = new List<WriterRecord<T>>();
         }
 
-        protected UpdateBase(int capacity)
+        protected WriterBase(int capacity)
         {
-            this._updates = new List<UpdateRecord<T>>(capacity);
+            this._updates = new List<WriterRecord<T>>(capacity);
         }
 
         protected IVisio.VisGetSetArgs ResultFlags
@@ -71,7 +70,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        protected void _add_update(UpdateRecord<T> update)
+        protected void _add_update(WriterRecord<T> update)
         {
             // This block ensures that only homogeneous updates are constructed
             if (!this._first_update.HasValue)
@@ -80,13 +79,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
             else
             {
-                // first validate the stream types
-                if (this._first_update.Value.StreamType != update.StreamType)
-                {
-                    throw new AutomationException("Cannot contain both SRC and SIDSRC updates");
-                }
-
-                // Now ensure that we aren't mixing formulas and results
+                // Ensure that we aren't mixing formulas and results
                 // Keep in mind that we can mix differnt types of results (strings and numerics)
                 if (this._first_update.Value.UpdateType == UpdateType.Formula && update.UpdateType != UpdateType.Formula)
                 {
@@ -115,7 +108,7 @@ namespace VisioAutomation.ShapeSheet.Update
 
 
 
-        public IEnumerator<UpdateRecord<T>> GetEnumerator()
+        public IEnumerator<WriterRecord<T>> GetEnumerator()
         {
             foreach (var i in this._updates)
             {
@@ -148,32 +141,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
         private void _Execute(ShapeSheetSurface surface)
         {
+            // TODO: Make sure this goes to SRC (for some reason)
+
             // Do nothing if there aren't any updates
             if (this._updates.Count < 1)
             {
                 return;
-            }
-
-            if (surface.Target.Shape != null)
-            {
-                if (this._first_update.Value.StreamType == StreamType.SIDSRC)
-                {
-                    throw new AutomationException("Contains a SIDSRC updates. Need SRC updates");
-                }
-            }
-            else if (surface.Target.Master != null)
-            {
-                if (this._first_update.Value.StreamType == StreamType.SIDSRC)
-                {
-                    throw new AutomationException("Contains a SIDSRC updates. Need SRC updates");
-                }
-            }
-            else if (surface.Target.Page != null)
-            {
-                if (this._first_update.Value.StreamType == StreamType.SRC)
-                {
-                    throw new AutomationException("Contains a SRC updates. Need SIDSRC updates");
-                }
             }
 
             var stream = this.build_stream();

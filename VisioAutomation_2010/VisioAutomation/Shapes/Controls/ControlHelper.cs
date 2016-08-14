@@ -1,5 +1,5 @@
 using System;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Controls
@@ -57,7 +57,7 @@ namespace VisioAutomation.Shapes.Controls
                 ctrl.YDynamics = string.Format("Controls.Row_{0}.Y", row + 1);
             }
 
-            var update = new UpdateSRCFormulas();
+            var update = new SRCFormulaWriter();
             ctrl.SetFormulas(update, row);
             update.Execute(shape);
 

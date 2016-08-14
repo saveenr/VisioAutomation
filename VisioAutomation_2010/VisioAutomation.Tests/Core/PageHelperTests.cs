@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Core.Page
@@ -18,7 +18,7 @@ namespace VisioAutomation_Tests.Core.Page
             pagecells.PageWidth = pagecells.PageWidth.Result * 2.0;
             pagecells.PageHeight = pagecells.PageHeight.Result * 2.0;
 
-            var update = new UpdateSRCFormulas();
+            var update = new SRCFormulaWriter();
             pagecells.SetFormulas(update);
             update.Execute(page1.PageSheet);
 

@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -24,7 +24,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
             update.SetFormula(shape1.ID16, ShapeSheetUpdateTests.src_pinx, 0.5);
             update.SetFormula(shape1.ID16, ShapeSheetUpdateTests.src_piny, 0.5);
             update.SetFormula(shape2.ID16, ShapeSheetUpdateTests.src_pinx, 1.5);
@@ -61,7 +61,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new UpdateSRCResult();
+            var update = new SRCResultWriter();
             update.SetResult(ShapeSheetUpdateTests.src_linepat, 7, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
@@ -85,7 +85,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new UpdateSRCResult();
+            var update = new SRCResultWriter();
             update.SetResult(ShapeSheetUpdateTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
@@ -113,7 +113,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var update = new UpdateSIDSRCResult();
+            var update = new SIDSRCResultWriter();
             update.SetResult(shape1.ID16, ShapeSheetUpdateTests.src_pinx, 0.5, IVisio.VisUnitCodes.visNumber);
             update.SetResult(shape1.ID16, ShapeSheetUpdateTests.src_piny, 0.5, IVisio.VisUnitCodes.visNumber);
             update.SetResult(shape2.ID16, ShapeSheetUpdateTests.src_pinx, 1.5, IVisio.VisUnitCodes.visNumber);
@@ -157,7 +157,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new UpdateSRCResult();
+            var update = new SRCResultWriter();
             update.SetResult(ShapeSheetUpdateTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);

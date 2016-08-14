@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using GRIDMODEL = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioAutomationSamples
@@ -60,7 +60,7 @@ namespace VisioAutomationSamples
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
             var format = new VA.Shapes.FormatCells();
             var xfrm = new VA.Shapes.XFormCells();
 
@@ -123,7 +123,7 @@ namespace VisioAutomationSamples
 
             var format = new VA.Shapes.FormatCells();
 
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
 
             string color1_formula = color1.ToFormula();
             string color2_formula = color2.ToFormula();

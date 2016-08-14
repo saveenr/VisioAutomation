@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using VisioAutomation.ShapeSheetQuery.Outputs;
 using VAQUERY = VisioAutomation.ShapeSheetQuery;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -205,7 +205,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s=>s.ID).ToList();
             int num_formulas = formulas.Count;
 
-            var update = new UpdateSIDSRCFormula(shapes.Count*num_formulas);
+            var update = new SIDSRCFormulaWriter(shapes.Count*num_formulas);
             update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
             update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 
@@ -270,7 +270,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             int num_results = results.Count;
-            var update = new UpdateSIDSRCResult(shapes.Count * num_results);
+            var update = new SIDSRCResultWriter(shapes.Count * num_results);
             update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
             update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Models.Layouts.Container
 {
@@ -168,7 +168,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 item.VisioShape.Text = item.Text;
             }
 
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
 
             // Format the containers and shapes
 
@@ -210,7 +210,7 @@ namespace VisioAutomation.Models.Layouts.Container
 
             var xfrm = new Shapes.XFormCells();
 
-            var update = new UpdateSIDSRCFormula(points.Count*2);
+            var update = new SIDSRCFormulaWriter(points.Count*2);
             for (int i = 0; i < rects.Count(); i++)
             {
                 xfrm.Width = rects[i].Width;

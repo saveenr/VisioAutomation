@@ -6,7 +6,7 @@ using VisioAutomation.Extensions;
 using System.Collections;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.DOM
 {
@@ -115,7 +115,7 @@ namespace VisioAutomation.DOM
         {
             this.UpdateCellsWithDropSizes(context);
 
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {

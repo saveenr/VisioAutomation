@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -153,7 +153,7 @@ namespace VisioAutomation.Pages
 
             // first update all the page cells
             var dest_pagesheet = dest_page.PageSheet;
-            var update = new UpdateSRCFormulas();
+            var update = new SRCFormulaWriter();
             pagecells.SetFormulas(update);
             update.Execute(dest_pagesheet);
 
@@ -186,7 +186,7 @@ namespace VisioAutomation.Pages
             var page_cells = new PageCells();
             page_cells.PageHeight = size.Height;
             page_cells.PageWidth = size.Width;
-            var pageupdate = new UpdateSRCFormulas();
+            var pageupdate = new SRCFormulaWriter();
             page_cells.SetFormulas(pageupdate);
             pageupdate.Execute(page.PageSheet);
         }

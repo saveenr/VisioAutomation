@@ -1,6 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Writers;
 using VisioAutomation.ShapeSheetQuery.Outputs;
 
 namespace VisioAutomation.ShapeSheetQuery.QueryGroups
@@ -51,7 +52,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             return cells;
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheet.Update.UpdateSRCFormulas update)
+        public void SetFormulas(SRCFormulaWriter update)
         {
             foreach (var pair in this.Pairs)
             {
@@ -59,7 +60,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             }
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.UpdateSIDSRCFormula update)
+        public void SetFormulas(short shapeid, SIDSRCFormulaWriter update)
         {
             foreach (var pair in this.Pairs)
             {

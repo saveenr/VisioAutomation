@@ -2,7 +2,7 @@
 using System.Linq;
 using VisioAutomation.Scripting.FormatPaint;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -107,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new UpdateSIDSRCFormula();
+            var update = new SIDSRCFormulaWriter();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)

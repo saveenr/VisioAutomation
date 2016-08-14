@@ -1,4 +1,4 @@
-namespace VisioAutomation.ShapeSheet.Update
+namespace VisioAutomation.ShapeSheet.Writers
 {
     public enum UpdateType
     {

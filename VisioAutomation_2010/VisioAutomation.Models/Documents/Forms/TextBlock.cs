@@ -1,4 +1,4 @@
-using VisioAutomation.ShapeSheet.Update;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Documents.Forms
@@ -26,7 +26,7 @@ namespace VisioAutomation.Models.Documents.Forms
             this.CharacterCells = new VisioAutomation.Text.CharacterCells();
         }
 
-        public void ApplyFormus(UpdateSIDSRCFormula update)
+        public void ApplyFormus(SIDSRCFormulaWriter update)
         {
             short titleshape_id = this.VisioShape.ID16;
             this.TextBlockCells.SetFormulas(titleshape_id, update);

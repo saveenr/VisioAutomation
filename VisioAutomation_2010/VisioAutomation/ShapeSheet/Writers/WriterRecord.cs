@@ -1,7 +1,7 @@
 
-namespace VisioAutomation.ShapeSheet.Update
+namespace VisioAutomation.ShapeSheet.Writers
 {
-    public struct UpdateRecord<T>
+    public struct WriterRecord<T>
     {
         public readonly T StreamItem;
         public readonly string Formula;
@@ -9,9 +9,8 @@ namespace VisioAutomation.ShapeSheet.Update
         public readonly string ResultString;
         public readonly Microsoft.Office.Interop.Visio.VisUnitCodes UnitCode;
         public readonly UpdateType UpdateType;
-        public readonly StreamType StreamType;
 
-        internal UpdateRecord(StreamType streamtype, T stream_item, string formula)
+        internal WriterRecord(T stream_item, string formula)
         {
             this.StreamItem = stream_item;
             this.Formula = formula;
@@ -19,10 +18,9 @@ namespace VisioAutomation.ShapeSheet.Update
             this.ResultString = null;
             this.UnitCode = Microsoft.Office.Interop.Visio.VisUnitCodes.visNumber;
             this.UpdateType = UpdateType.Formula;
-            this.StreamType = streamtype;
         }
 
-        internal UpdateRecord(StreamType streamtype, T stream_item, double result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        internal WriterRecord(T stream_item, double result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
         {
             this.StreamItem = stream_item;
             this.Formula = null;
@@ -30,10 +28,9 @@ namespace VisioAutomation.ShapeSheet.Update
             this.ResultNumeric = result;
             this.ResultString = null;
             this.UpdateType = UpdateType.ResultNumeric;
-            this.StreamType = streamtype;
         }
 
-        internal UpdateRecord(StreamType streamtype, T stream_item, string result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        internal WriterRecord(T stream_item, string result, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
         {
             this.StreamItem = stream_item;
             this.Formula = null;
@@ -41,7 +38,6 @@ namespace VisioAutomation.ShapeSheet.Update
             this.ResultNumeric = 0.0;
             this.ResultString = result;
             this.UpdateType = UpdateType.ResultString;
-            this.StreamType = streamtype;
         }
 
     }
