@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class Update : IEnumerable<Update.UpdateRecord>
+    public class Update : IEnumerable<UpdateRecord>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
@@ -369,51 +369,6 @@ namespace VisioAutomation.ShapeSheet.Update
         public void SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             this._SetResult(StreamType.SRC, new SIDSRC(-1, streamitem), value, unitcode);
-        }
-
-        public struct UpdateRecord
-        {
-            public readonly SIDSRC SIDSRC;
-            public readonly string Formula;
-            public readonly double ResultNumeric;
-            public readonly string ResultString;
-            public readonly IVisio.VisUnitCodes UnitCode;
-            public readonly UpdateType UpdateType;
-            public readonly StreamType StreamType;
-
-            internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, string formula)
-            {
-                this.SIDSRC = sidsrc;
-                this.Formula = formula;
-                this.ResultNumeric = 0.0;
-                this.ResultString = null;
-                this.UnitCode = IVisio.VisUnitCodes.visNumber;
-                this.UpdateType = UpdateType.Formula;
-                this.StreamType = streamtype;
-            }
-
-            internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, double result, IVisio.VisUnitCodes unit_code)
-            {
-                this.SIDSRC = sidsrc;
-                this.Formula = null;
-                this.UnitCode = unit_code;
-                this.ResultNumeric = result;
-                this.ResultString = null;
-                this.UpdateType = UpdateType.ResultNumeric;
-                this.StreamType = streamtype;
-            }
-
-            internal UpdateRecord(StreamType streamtype, SIDSRC sidsrc, string result, IVisio.VisUnitCodes unit_code)
-            {
-                this.SIDSRC = sidsrc;
-                this.Formula = null;
-                this.UnitCode = unit_code;
-                this.ResultNumeric = 0.0;
-                this.ResultString = result;
-                this.UpdateType = UpdateType.ResultString;
-                this.StreamType = streamtype;
-            }
-
         }
     }
 }

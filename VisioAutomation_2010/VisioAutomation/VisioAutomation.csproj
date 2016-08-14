@@ -115,6 +115,7 @@
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="ShapeSheet\Update\StreamType.cs" />
+    <Compile Include="ShapeSheet\Update\UpdateRecord.cs" />
     <Compile Include="ShapeSheet\Update\UpdateType.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
