@@ -121,7 +121,7 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral ShapeSplittable { get; set; }
 
 
-        public void Apply(Update update, short id)
+        public void Apply(UpdateSIDSRC update, short id)
         {
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Width, this.Width);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Height, this.Height);

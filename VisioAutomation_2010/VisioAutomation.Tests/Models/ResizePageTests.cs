@@ -73,7 +73,7 @@ namespace VisioAutomation_Tests.Core
             pagecells.PageLeftMargin = bottomleft_margin.Width;
             pagecells.PageRightMargin = upperright_margin.Width;
 
-            var pageupdate = new Update();
+            var pageupdate = new UpdateSRC();
             pagecells.SetFormulas(pageupdate);
             pageupdate.Execute(page.PageSheet);
 

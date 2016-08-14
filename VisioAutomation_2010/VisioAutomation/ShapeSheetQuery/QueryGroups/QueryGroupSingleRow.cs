@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             return cells;
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheet.Update.Update update)
+        public void SetFormulas(VisioAutomation.ShapeSheet.Update.UpdateSRC update)
         {
             foreach (var pair in this.Pairs)
             {
@@ -59,7 +59,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             }
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.Update update)
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.UpdateSIDSRC update)
         {
             foreach (var pair in this.Pairs)
             {

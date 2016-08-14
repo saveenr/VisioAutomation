@@ -109,7 +109,7 @@ namespace VisioAutomation.Scripting.Utilities
         private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
         {
 
-            var update = new Update();
+            var update = new UpdateSIDSRC();
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var shape_id = shapeids[i];

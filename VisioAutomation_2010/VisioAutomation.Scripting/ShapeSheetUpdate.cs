@@ -5,7 +5,7 @@ namespace VisioAutomation.Scripting
 {
     public class ShapeSheetUpdate
     {
-        internal readonly Update update;
+        internal readonly UpdateSIDSRC update;
         public Client Client;
         public IVisio.Page TargetPage;
         public bool BlastGuards;
@@ -15,7 +15,7 @@ namespace VisioAutomation.Scripting
         {
             this.Client = client;
             this.TargetPage = page;
-            this.update = new Update();
+            this.update = new UpdateSIDSRC();
         }
 
         public void SetFormula(short id, ShapeSheet.SRC src, string formula)

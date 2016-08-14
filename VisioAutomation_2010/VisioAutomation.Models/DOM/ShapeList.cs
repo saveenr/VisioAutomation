@@ -115,7 +115,7 @@ namespace VisioAutomation.DOM
         {
             this.UpdateCellsWithDropSizes(context);
 
-            var update = new Update();
+            var update = new UpdateSIDSRC();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {

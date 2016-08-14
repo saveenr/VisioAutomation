@@ -60,7 +60,7 @@ namespace VisioAutomationSamples
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
-            var update = new Update();
+            var update = new UpdateSIDSRC();
             var format = new VA.Shapes.FormatCells();
             var xfrm = new VA.Shapes.XFormCells();
 
@@ -123,7 +123,7 @@ namespace VisioAutomationSamples
 
             var format = new VA.Shapes.FormatCells();
 
-            var update = new Update();
+            var update = new UpdateSIDSRC();
 
             string color1_formula = color1.ToFormula();
             string color2_formula = color2.ToFormula();

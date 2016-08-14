@@ -145,7 +145,7 @@ namespace VisioAutomation_Tests
 
             var page_sheet = page.PageSheet;
 
-            var update = new Update(2);
+            var update = new UpdateSRC(2);
             update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
             update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
             update.Execute(page_sheet);

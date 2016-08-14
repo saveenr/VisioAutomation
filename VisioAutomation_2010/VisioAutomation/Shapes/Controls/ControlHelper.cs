@@ -57,7 +57,7 @@ namespace VisioAutomation.Shapes.Controls
                 ctrl.YDynamics = string.Format("Controls.Row_{0}.Y", row + 1);
             }
 
-            var update = new Update();
+            var update = new UpdateSRC();
             ctrl.SetFormulas(update, row);
             update.Execute(shape);
 

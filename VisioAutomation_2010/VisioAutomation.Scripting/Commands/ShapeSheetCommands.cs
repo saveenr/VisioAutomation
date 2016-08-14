@@ -205,7 +205,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s=>s.ID).ToList();
             int num_formulas = formulas.Count;
 
-            var update = new Update(shapes.Count*num_formulas);
+            var update = new UpdateSIDSRC(shapes.Count*num_formulas);
             update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
             update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 
@@ -270,7 +270,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             int num_results = results.Count;
-            var update = new Update(shapes.Count * num_results);
+            var update = new UpdateSIDSRC(shapes.Count * num_results);
             update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
             update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 

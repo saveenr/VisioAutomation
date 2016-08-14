@@ -74,7 +74,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var update = new Update();
+            var update = new UpdateSRC();
 
             if (value.HasValue)
             {

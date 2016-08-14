@@ -28,7 +28,7 @@ namespace VisioAutomation.Models.Text
         public ShapeSheet.FormulaLiteral Transparency { get; set; }
         public ShapeSheet.FormulaLiteral UseVertical { get; set; }
 
-        internal void ApplyFormulas(Update update, short row)
+        internal void ApplyFormulas(UpdateSRC update, short row)
         {
             update.SetFormulaIgnoreNull(SRCCON.CharColor.ForRow(row), this.Color);
             update.SetFormulaIgnoreNull(SRCCON.CharFont.ForRow(row), this.Font);

@@ -153,7 +153,7 @@ namespace VisioAutomation.Pages
 
             // first update all the page cells
             var dest_pagesheet = dest_page.PageSheet;
-            var update = new Update();
+            var update = new UpdateSRC();
             pagecells.SetFormulas(update);
             update.Execute(dest_pagesheet);
 
@@ -186,7 +186,7 @@ namespace VisioAutomation.Pages
             var page_cells = new PageCells();
             page_cells.PageHeight = size.Height;
             page_cells.PageWidth = size.Width;
-            var pageupdate = new Update();
+            var pageupdate = new UpdateSRC();
             page_cells.SetFormulas(pageupdate);
             pageupdate.Execute(page.PageSheet);
         }

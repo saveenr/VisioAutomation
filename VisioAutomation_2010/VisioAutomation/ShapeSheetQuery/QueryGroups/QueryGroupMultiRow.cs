@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             return sec_objects;
         }
 
-        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.Update update,
+        public void SetFormulas(short shapeid, VisioAutomation.ShapeSheet.Update.UpdateSIDSRC update,
             short row)
         {
             foreach (var pair in this.Pairs)
@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
             }
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheet.Update.Update update, short row)
+        public void SetFormulas(VisioAutomation.ShapeSheet.Update.UpdateSRC update, short row)
         {
             foreach (var pair in this.Pairs)
             {

@@ -151,50 +151,6 @@ namespace VisioAutomation.ShapeSheet.Update
             return this.GetEnumerator();
         }
 
-        public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
-        {
-            var streamitem = new SIDSRC(shapeid, src);
-            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
-        }
-
-        public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
-        {
-            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
-        }
-
-        public void SetResult(short shapeid, SRC src, string value, IVisio.VisUnitCodes unitcode)
-        {
-            var streamitem = new SIDSRC(shapeid, src);
-            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
-        }
-
-        public void SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
-        {
-            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
-        }
-
-        public void SetFormula(SIDSRC streamitem, FormulaLiteral formula)
-        {
-            this._SetFormula(StreamType.SIDSRC, streamitem, formula);
-        }
-
-        public void SetFormula(short shapeid, SRC src, FormulaLiteral formula)
-        {
-            var streamitem = new SIDSRC(shapeid, src);
-            this._SetFormula(StreamType.SIDSRC, streamitem, formula);
-        }
-
-        public void SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
-        {
-            this._SetFormulaIgnoreNull(StreamType.SIDSRC, streamitem, formula);
-        }
-
-        public void SetFormulaIgnoreNull(short id, SRC src, FormulaLiteral formula)
-        {
-            var sidsrc = new SIDSRC(id, src);
-            this._SetFormulaIgnoreNull(StreamType.SIDSRC, sidsrc, formula);
-        }
-
         public void Execute(IVisio.Page page)
         {
             var surface = new ShapeSheetSurface(page);
@@ -321,6 +277,18 @@ namespace VisioAutomation.ShapeSheet.Update
 
         }
 
+    }
+
+    public class UpdateSRC : UpdateBase
+    {
+        public UpdateSRC() :base()
+        {
+        }
+
+        public UpdateSRC(int capacity) : base( capacity )
+        {
+        }
+
         public void SetFormula(SRC streamitem, FormulaLiteral formula)
         {
             this._SetFormula(StreamType.SRC, new SIDSRC(-1, streamitem), formula);
@@ -340,16 +308,62 @@ namespace VisioAutomation.ShapeSheet.Update
         {
             this._SetResult(StreamType.SRC, new SIDSRC(-1, streamitem), value, unitcode);
         }
+
     }
 
-    public class Update : UpdateBase
+    public class UpdateSIDSRC : UpdateBase
     {
-        public Update() :base()
+        public UpdateSIDSRC() : base()
         {
         }
 
-        public Update(int capacity) : base( capacity )
+        public UpdateSIDSRC(int capacity) : base(capacity)
         {
         }
+
+        public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
+        {
+            var streamitem = new SIDSRC(shapeid, src);
+            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
+        }
+
+        public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        {
+            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
+        }
+
+        public void SetResult(short shapeid, SRC src, string value, IVisio.VisUnitCodes unitcode)
+        {
+            var streamitem = new SIDSRC(shapeid, src);
+            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
+        }
+
+        public void SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
+        {
+            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
+        }
+
+        public void SetFormula(SIDSRC streamitem, FormulaLiteral formula)
+        {
+            this._SetFormula(StreamType.SIDSRC, streamitem, formula);
+        }
+
+        public void SetFormula(short shapeid, SRC src, FormulaLiteral formula)
+        {
+            var streamitem = new SIDSRC(shapeid, src);
+            this._SetFormula(StreamType.SIDSRC, streamitem, formula);
+        }
+
+        public void SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
+        {
+            this._SetFormulaIgnoreNull(StreamType.SIDSRC, streamitem, formula);
+        }
+
+        public void SetFormulaIgnoreNull(short id, SRC src, FormulaLiteral formula)
+        {
+            var sidsrc = new SIDSRC(id, src);
+            this._SetFormulaIgnoreNull(StreamType.SIDSRC, sidsrc, formula);
+        }
+
     }
 }

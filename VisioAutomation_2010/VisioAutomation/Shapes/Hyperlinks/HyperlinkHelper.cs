@@ -61,7 +61,7 @@ namespace VisioAutomation.Shapes.Hyperlinks
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var update = new Update();
+            var update = new UpdateSRC();
             hyperlink.SetFormulas(update, row);
             update.Execute(shape);
 

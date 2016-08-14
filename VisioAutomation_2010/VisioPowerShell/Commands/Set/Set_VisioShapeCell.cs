@@ -23,7 +23,7 @@ namespace VisioPowerShell.Commands.Set
 
         protected override void ProcessRecord()
         {
-            var update = new Update();
+            var update = new UpdateSIDSRC();
             update.BlastGuards = this.BlastGuards;
             update.TestCircular = this.TestCircular;
 
