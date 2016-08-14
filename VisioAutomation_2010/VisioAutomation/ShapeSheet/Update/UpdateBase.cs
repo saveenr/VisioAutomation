@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
@@ -28,37 +29,37 @@ namespace VisioAutomation.ShapeSheet.Update
             this._updates = new List<UpdateRecord>(capacity);
         }
 
-        protected Microsoft.Office.Interop.Visio.VisGetSetArgs ResultFlags
+        protected IVisio.VisGetSetArgs ResultFlags
         {
             get
             {
                 var flags = this.get_common_flags();
-                if ((flags & Microsoft.Office.Interop.Visio.VisGetSetArgs.visSetFormulas) > 0)
+                if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
                 {
-                    flags = (Microsoft.Office.Interop.Visio.VisGetSetArgs) ((short) flags | (short) Microsoft.Office.Interop.Visio.VisGetSetArgs.visSetUniversalSyntax);
+                    flags = (IVisio.VisGetSetArgs) ((short) flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
                 }
                 return flags;
             }
         }
 
-        protected Microsoft.Office.Interop.Visio.VisGetSetArgs FormulaFlags
+        protected IVisio.VisGetSetArgs FormulaFlags
         {
             get
             {
                 var common_flags = this.get_common_flags();
-                var formula_flags = (short) Microsoft.Office.Interop.Visio.VisGetSetArgs.visSetUniversalSyntax;
+                var formula_flags = (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;
                 var combined_flags = (short) common_flags | formula_flags;
-                return (Microsoft.Office.Interop.Visio.VisGetSetArgs) combined_flags;
+                return (IVisio.VisGetSetArgs) combined_flags;
             }
         }
 
-        private Microsoft.Office.Interop.Visio.VisGetSetArgs get_common_flags()
+        private IVisio.VisGetSetArgs get_common_flags()
         {
-            Microsoft.Office.Interop.Visio.VisGetSetArgs f_bg = this.BlastGuards ? Microsoft.Office.Interop.Visio.VisGetSetArgs.visSetBlastGuards : 0;
-            Microsoft.Office.Interop.Visio.VisGetSetArgs f_tc = this.TestCircular ? Microsoft.Office.Interop.Visio.VisGetSetArgs.visSetTestCircular : 0;
+            IVisio.VisGetSetArgs f_bg = this.BlastGuards ? IVisio.VisGetSetArgs.visSetBlastGuards : 0;
+            IVisio.VisGetSetArgs f_tc = this.TestCircular ? IVisio.VisGetSetArgs.visSetTestCircular : 0;
 
             var flags = (short) f_bg | (short) f_tc;
-            return (Microsoft.Office.Interop.Visio.VisGetSetArgs) flags;
+            return (IVisio.VisGetSetArgs) flags;
         }
 
 
@@ -124,13 +125,13 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        protected void _SetResult(StreamType st, SIDSRC streamitem, double value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        protected void _SetResult(StreamType st, SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             var rec = new UpdateRecord(st, streamitem, value, unitcode);
             this._add_update(rec);
         }
 
-        protected void _SetResult(StreamType st, SIDSRC streamitem, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        protected void _SetResult(StreamType st, SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
         {
             var rec = new UpdateRecord(st, streamitem, value, unitcode);
             this._add_update(rec);
@@ -150,13 +151,13 @@ namespace VisioAutomation.ShapeSheet.Update
             return this.GetEnumerator();
         }
 
-        public void Execute(Microsoft.Office.Interop.Visio.Page page)
+        public void Execute(IVisio.Page page)
         {
             var surface = new ShapeSheetSurface(page);
             this._Execute(surface);
         }
 
-        public void Execute(Microsoft.Office.Interop.Visio.Shape shape)
+        public void Execute(IVisio.Shape shape)
         {
             var surface = new ShapeSheetSurface(shape);
             this._Execute(surface);
@@ -233,7 +234,7 @@ namespace VisioAutomation.ShapeSheet.Update
                 }
                 else if (this._first_update.Value.UpdateType == UpdateType.ResultString)
                 {
-                    flags |= Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetStrings;
+                    flags |= IVisio.VisGetSetArgs.visGetStrings;
                 }
 
                 surface.SetResults(stream, unitcodes, results, (short) flags);
@@ -273,8 +274,6 @@ namespace VisioAutomation.ShapeSheet.Update
                 streamb.AddRange(this._updates.Select(i => i.SIDSRC));
                 return SIDSRC.ToStream(streamb);
             }
-
         }
-
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.ShapeSheet.Update
+﻿using IVisio = Microsoft.Office.Interop.Visio;
+
+namespace VisioAutomation.ShapeSheet.Update
 {
     public class UpdateSIDSRC : UpdateBase
     {
@@ -10,24 +12,24 @@
         {
         }
 
-        public void SetResult(short shapeid, SRC src, double value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
             var streamitem = new SIDSRC(shapeid, src);
             this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
         }
 
-        public void SetResult(SIDSRC streamitem, double value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
         }
 
-        public void SetResult(short shapeid, SRC src, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public void SetResult(short shapeid, SRC src, string value, IVisio.VisUnitCodes unitcode)
         {
             var streamitem = new SIDSRC(shapeid, src);
             this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
         }
 
-        public void SetResult(SIDSRC streamitem, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
         {
             this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
         }

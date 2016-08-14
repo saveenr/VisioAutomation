@@ -1,3 +1,4 @@
+
 namespace VisioAutomation.ShapeSheet.Update
 {
     public struct UpdateRecord
