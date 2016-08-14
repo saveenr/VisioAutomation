@@ -63,14 +63,14 @@ namespace VisioAutomation.ShapeSheetQuery
             return r;
         }
 
-        public Output<T> GetResults<T>(ShapeSheetSurface surface)
+        public Output<TResult> GetResults<TResult>(ShapeSheetSurface surface)
         {
             this.Freeze();
             var srcstream = this.BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
-            var values = surface.GetResults_SRC<T>(srcstream, unitcodes);
-            var r = new Output<T>(surface.Target.ID16);
-            this.FillOutputForSingleShape<T>(0, values, 0, r);
+            var values = surface.GetResults_SRC<TResult>(srcstream, unitcodes);
+            var r = new Output<TResult>(surface.Target.ID16);
+            this.FillOutputForSingleShape<TResult>(0, values, 0, r);
             return r;
         }
 
@@ -114,23 +114,23 @@ namespace VisioAutomation.ShapeSheetQuery
             return unitcodes;
         }
 
-        public Output<ShapeSheet.CellData<T>> GetFormulasAndResults<T>(ShapeSheetSurface surface)
+        public Output<ShapeSheet.CellData<TResult>> GetFormulasAndResults<TResult>(ShapeSheetSurface surface)
         {
             this.Freeze();
 
             var srcstream = this.BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
             var formulas = surface.GetFormulasU_SRC(srcstream);
-            var results = surface.GetResults_SRC<T>(srcstream, unitcodes);
+            var results = surface.GetResults_SRC<TResult>(srcstream, unitcodes);
 
-            var combineddata = new ShapeSheet.CellData<T>[results.Length];
+            var combineddata = new ShapeSheet.CellData<TResult>[results.Length];
             for (int i = 0; i < results.Length; i++)
             {
-                combineddata[i] = new ShapeSheet.CellData<T>(formulas[i], results[i]);
+                combineddata[i] = new ShapeSheet.CellData<TResult>(formulas[i], results[i]);
             }
 
-            var r = new Output<ShapeSheet.CellData<T>>(surface.Target.ID16);
-            this.FillOutputForSingleShape<ShapeSheet.CellData<T>>(0, combineddata, 0, r);
+            var r = new Output<ShapeSheet.CellData<TResult>>(surface.Target.ID16);
+            this.FillOutputForSingleShape<ShapeSheet.CellData<TResult>>(0, combineddata, 0, r);
             return r;
         }
 
