@@ -5,6 +5,7 @@ using System.Linq;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
 using VisioAutomation.ShapeSheetQuery;
+using VisioAutomation.ShapeSheetQuery.Utilities;
 
 namespace VisioAutomation.Text
 {

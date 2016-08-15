@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Office.Interop.Visio;
 using VisioAutomation.ShapeSheet;
 
-namespace VisioAutomation.ShapeSheetQuery
+namespace VisioAutomation.ShapeSheetQuery.Utilities
 {
     public struct QueryHelpers
     {
