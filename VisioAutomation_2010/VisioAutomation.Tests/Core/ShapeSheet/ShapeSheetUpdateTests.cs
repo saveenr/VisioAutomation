@@ -114,12 +114,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Set the formulas
             var update = new ResultWriterSIDSRC();
-            update.SetResult(shape1.ID16, ShapeSheetUpdateTests.src_pinx, 0.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape1.ID16, ShapeSheetUpdateTests.src_piny, 0.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape2.ID16, ShapeSheetUpdateTests.src_pinx, 1.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape2.ID16, ShapeSheetUpdateTests.src_piny, 1.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape3.ID16, ShapeSheetUpdateTests.src_pinx, 2.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape3.ID16, ShapeSheetUpdateTests.src_piny, 2.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult( new SIDSRC(shape1.ID16, ShapeSheetUpdateTests.src_pinx), 0.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult( new SIDSRC(shape1.ID16, ShapeSheetUpdateTests.src_piny), 0.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult( new SIDSRC(shape2.ID16, ShapeSheetUpdateTests.src_pinx), 1.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult( new SIDSRC(shape2.ID16, ShapeSheetUpdateTests.src_piny), 1.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult( new SIDSRC(shape3.ID16, ShapeSheetUpdateTests.src_pinx), 2.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult( new SIDSRC(shape3.ID16, ShapeSheetUpdateTests.src_piny), 2.5, IVisio.VisUnitCodes.visNumber);
             update.Commit(page1);
 
             // Verify that the formulas were set

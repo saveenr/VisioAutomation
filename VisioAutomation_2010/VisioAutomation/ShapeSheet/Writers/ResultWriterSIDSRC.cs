@@ -13,20 +13,6 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
         }
         
-        public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
-        {
-            var streamitem = new SIDSRC(shapeid, src);
-            var v = new ResultValue(value,unitcode);
-            this.SetResult(streamitem, v);
-        }
-
-        public void SetResult(short shapeid, SRC src, string value, IVisio.VisUnitCodes unitcode)
-        {
-            var streamitem = new SIDSRC(shapeid, src);
-            var v = new ResultValue(value, unitcode);
-            this.SetResult(streamitem, v);
-        }
-
         public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             var v = new ResultValue(value, unitcode);

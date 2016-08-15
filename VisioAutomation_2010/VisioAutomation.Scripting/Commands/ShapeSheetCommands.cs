@@ -278,9 +278,9 @@ namespace VisioAutomation.Scripting.Commands
             {
                 for (int i = 0; i < num_results; i++)
                 {
-                    var src = srcs[i];
                     var result = results[i];
-                    update.SetResult((short)shapeid, src, result, IVisio.VisUnitCodes.visNumber);
+                    var streamitem = new SIDSRC((short) shapeid, srcs[i]);
+                    update.SetResult(streamitem, result, IVisio.VisUnitCodes.visNumber);
                 }
             }
 
