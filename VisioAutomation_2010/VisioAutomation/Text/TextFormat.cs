@@ -4,6 +4,7 @@ using VA = VisioAutomation;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheetQuery;
 
 namespace VisioAutomation.Text
 {
@@ -108,7 +109,7 @@ namespace VisioAutomation.Text
 
             var stream = ShapeSheet.SRC.ToStream(srcs);
             var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNumber).ToList();
-            var results = ShapeSheetSurface2.GetResults_SRC<double>(surface, stream, unitcodes);
+            var results = QueryHelpers.GetResults_SRC<double>(surface, stream, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)

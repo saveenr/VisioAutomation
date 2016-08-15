@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using Microsoft.Office.Interop.Visio;
+using VisioAutomation.ShapeSheet;
 
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.ShapeSheetQuery
 {
-    public struct ShapeSheetSurface2
+    public struct QueryHelpers
     {
         private static int check_stream_size(short[] stream, int chunksize)
         {
