@@ -42,7 +42,7 @@ namespace VisioPowerShell.Commands.Set
                 {
                     string cell_value = valuemap[cellname];
                     var cell_src = valuemap.GetSRC(cellname);
-                    update.SetFormulaIgnoreNull( cell_src , cell_value);
+                    update.SetFormula( cell_src , cell_value);
                 }
                 this.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
                 this.WriteVerbose("TestCircular: {0}", this.TestCircular);

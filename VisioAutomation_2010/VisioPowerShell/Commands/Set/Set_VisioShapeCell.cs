@@ -42,7 +42,7 @@ namespace VisioPowerShell.Commands.Set
                 {
                     string cell_value = valuemap[cellname];
                     var cell_src = valuemap.GetSRC(cellname);
-                    update.SetFormulaIgnoreNull(id,cell_src, cell_value);
+                    update.SetFormula(id,cell_src, cell_value);
                 }
             }
 

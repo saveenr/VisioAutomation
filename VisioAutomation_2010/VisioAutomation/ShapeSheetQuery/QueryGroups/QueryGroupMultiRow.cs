@@ -76,7 +76,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         {
             foreach (var pair in this.Pairs)
             {
-                update.SetFormulaIgnoreNull(shapeid, pair.SRC.ForRow(row), pair.Formula);
+                update.SetFormula(shapeid, pair.SRC.ForRow(row), pair.Formula);
             }
         }
 
@@ -84,7 +84,7 @@ namespace VisioAutomation.ShapeSheetQuery.QueryGroups
         {
             foreach (var pair in this.Pairs)
             {
-                update.SetFormulaIgnoreNull(pair.SRC.ForRow(row), pair.Formula);
+                update.SetFormula(pair.SRC.ForRow(row), pair.Formula);
             }
         }
 

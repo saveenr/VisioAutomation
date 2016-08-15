@@ -135,7 +135,7 @@ namespace VisioAutomation.Scripting.FormatPaint
                 {
                     var sidsrc = new ShapeSheet.SIDSRC((short) shape_id, cell.SRC);
                     var new_formula = applyformulas ? cell.Formula : cell.Result;
-                    update.SetFormulaIgnoreNull(sidsrc, new_formula);
+                    update.SetFormula(sidsrc, new_formula);
                 }
             }
 

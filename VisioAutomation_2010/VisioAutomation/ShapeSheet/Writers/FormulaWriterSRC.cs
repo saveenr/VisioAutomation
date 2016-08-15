@@ -12,15 +12,10 @@
 
         public void SetFormula(SRC streamitem, FormulaLiteral formula)
         {
-            this.StreamItems.Add(streamitem);
-            this.ValueItems.Add(formula);
-        }
-
-        public void SetFormulaIgnoreNull(SRC streamitem, FormulaLiteral formula)
-        {
             if (formula.HasValue)
             {
-                this.SetFormula(streamitem, formula);
+                this.StreamItems.Add(streamitem);
+                this.ValueItems.Add(formula);
             }
         }
 

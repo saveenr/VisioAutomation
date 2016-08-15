@@ -22,20 +22,20 @@ namespace VisioAutomation.Models.Text
         
         internal void ApplyFormulas(FormulaWriterSRC update, short row)
         {
-            update.SetFormulaIgnoreNull(SRCCON.Para_IndLeft.ForRow(row), this.IndentLeft);
-            update.SetFormulaIgnoreNull(SRCCON.Para_IndFirst.ForRow(row), this.IndentFirst);
-            update.SetFormulaIgnoreNull(SRCCON.Para_IndRight.ForRow(row), this.IndentRight);
-            update.SetFormulaIgnoreNull(SRCCON.Para_SpAfter.ForRow(row), this.SpacingAfter);
-            update.SetFormulaIgnoreNull(SRCCON.Para_SpBefore.ForRow(row), this.SpacingBefore);
-            update.SetFormulaIgnoreNull(SRCCON.Para_SpLine.ForRow(row), this.SpacingLine);
-            update.SetFormulaIgnoreNull(SRCCON.Para_HorzAlign.ForRow(row), this.HorizontalAlign);
-            update.SetFormulaIgnoreNull(SRCCON.Para_BulletFont.ForRow(row), this.BulletFont);
-            update.SetFormulaIgnoreNull(SRCCON.Para_Bullet.ForRow(row), this.Bullet);
-            update.SetFormulaIgnoreNull(SRCCON.Para_BulletFontSize.ForRow(row), this.BulletFontSize);
-            update.SetFormulaIgnoreNull(SRCCON.Para_LocalizeBulletFont.ForRow(row), this.LocBulletFont);
-            update.SetFormulaIgnoreNull(SRCCON.Para_TextPosAfterBullet.ForRow(row), this.TextPosAfterBullet);
-            update.SetFormulaIgnoreNull(SRCCON.Para_Flags.ForRow(row), this.Flags);
-            update.SetFormulaIgnoreNull(SRCCON.Para_BulletStr.ForRow(row), this.BulletString);
+            update.SetFormula(SRCCON.Para_IndLeft.ForRow(row), this.IndentLeft);
+            update.SetFormula(SRCCON.Para_IndFirst.ForRow(row), this.IndentFirst);
+            update.SetFormula(SRCCON.Para_IndRight.ForRow(row), this.IndentRight);
+            update.SetFormula(SRCCON.Para_SpAfter.ForRow(row), this.SpacingAfter);
+            update.SetFormula(SRCCON.Para_SpBefore.ForRow(row), this.SpacingBefore);
+            update.SetFormula(SRCCON.Para_SpLine.ForRow(row), this.SpacingLine);
+            update.SetFormula(SRCCON.Para_HorzAlign.ForRow(row), this.HorizontalAlign);
+            update.SetFormula(SRCCON.Para_BulletFont.ForRow(row), this.BulletFont);
+            update.SetFormula(SRCCON.Para_Bullet.ForRow(row), this.Bullet);
+            update.SetFormula(SRCCON.Para_BulletFontSize.ForRow(row), this.BulletFontSize);
+            update.SetFormula(SRCCON.Para_LocalizeBulletFont.ForRow(row), this.LocBulletFont);
+            update.SetFormula(SRCCON.Para_TextPosAfterBullet.ForRow(row), this.TextPosAfterBullet);
+            update.SetFormula(SRCCON.Para_Flags.ForRow(row), this.Flags);
+            update.SetFormula(SRCCON.Para_BulletStr.ForRow(row), this.BulletString);
         }
 
         public void ApplyFormulasTo(ParagraphFormatting target)

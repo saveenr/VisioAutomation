@@ -41,13 +41,13 @@ namespace VisioAutomation.Shapes.Geometry
             var d_src = ShapeSheet.SRCConstants.Geometry_D.ForSectionAndRow(section, row_index);
             var e_src = ShapeSheet.SRCConstants.Geometry_E.ForSectionAndRow(section, row_index);
 
-            update.SetFormulaIgnoreNull(x_src, this.X);
-            update.SetFormulaIgnoreNull(y_src, this.Y);
-            update.SetFormulaIgnoreNull(a_src, this.A);
-            update.SetFormulaIgnoreNull(b_src, this.B);
-            update.SetFormulaIgnoreNull(c_src, this.C);
-            update.SetFormulaIgnoreNull(d_src, this.D);
-            update.SetFormulaIgnoreNull(e_src, this.E);
+            update.SetFormula(x_src, this.X);
+            update.SetFormula(y_src, this.Y);
+            update.SetFormula(a_src, this.A);
+            update.SetFormula(b_src, this.B);
+            update.SetFormula(c_src, this.C);
+            update.SetFormula(d_src, this.D);
+            update.SetFormula(e_src, this.E);
         }
 
         public static GeometryRow CreateLineTo(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y)

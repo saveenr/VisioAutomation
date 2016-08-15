@@ -12,35 +12,23 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
         }
 
-        public void SetFormula(SIDSRC streamitem, FormulaLiteral formula)
-        {
-            this.StreamItems.Add(streamitem);
-            this.ValueItems.Add(formula);
-        }
-
-        public void SetFormula(short shapeid, SRC src, FormulaLiteral formula)
-        {
-            var streamitem = new SIDSRC(shapeid, src);
-            this.StreamItems.Add(streamitem);
-            this.ValueItems.Add(formula);
-        }
-
-        public void SetFormulaIgnoreNull(short id, SRC src, FormulaLiteral formula)
+        public void SetFormula(short id, SRC src, FormulaLiteral formula)
         {
             var sidsrc = new SIDSRC(id, src);
-            this._SetFormulaIgnoreNull(sidsrc, formula);
+            this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        public void SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
+        public void SetFormula(SIDSRC streamitem, FormulaLiteral formula)
         {
-            this._SetFormulaIgnoreNull(streamitem, formula);
+            this.__SetFormulaIgnoreNull(streamitem, formula);
         }
 
-        protected void _SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
+        protected void __SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
         {
             if (formula.HasValue)
             {
-                this.SetFormula(streamitem,formula);
+                this.StreamItems.Add(streamitem);
+                this.ValueItems.Add(formula);
             }
         }
 

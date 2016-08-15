@@ -50,11 +50,11 @@ namespace VisioAutomation.Shapes.Geometry
             var src_nosnap = ShapeSheet.SRCConstants.Geometry_NoSnap.ForSectionAndRow(sec_index, 0);
             var src_noquickdrag = ShapeSheet.SRCConstants.Geometry_NoQuickDrag.ForSectionAndRow(sec_index, 0);
 
-            update.SetFormulaIgnoreNull(src_nofill, this.NoFill);
-            update.SetFormulaIgnoreNull(src_noline, this.NoLine);
-            update.SetFormulaIgnoreNull(src_noshow, this.NoShow);
-            update.SetFormulaIgnoreNull(src_nosnap, this.NoSnap);
-            update.SetFormulaIgnoreNull(src_noquickdrag, this.NoQuickDrag);
+            update.SetFormula(src_nofill, this.NoFill);
+            update.SetFormula(src_noline, this.NoLine);
+            update.SetFormula(src_noshow, this.NoShow);
+            update.SetFormula(src_nosnap, this.NoSnap);
+            update.SetFormula(src_noquickdrag, this.NoQuickDrag);
 
             foreach (var row in this.Rows)
             {
