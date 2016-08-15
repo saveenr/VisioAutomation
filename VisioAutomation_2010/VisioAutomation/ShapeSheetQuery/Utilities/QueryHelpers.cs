@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheetQuery.Utilities
 {
-    public struct QueryHelpers
+    internal struct QueryHelpers
     {
         private static int check_stream_size(short[] stream, int chunksize)
         {
@@ -230,7 +230,7 @@ namespace VisioAutomation.ShapeSheetQuery.Utilities
             return unitcodes_obj_array;
         }
 
-        internal static void EnforceValidResultType(System.Type result_type)
+        private static void EnforceValidResultType(System.Type result_type)
         {
             if (!IsValidResultType(result_type))
             {
@@ -239,7 +239,7 @@ namespace VisioAutomation.ShapeSheetQuery.Utilities
             }
         }
 
-        internal static bool IsValidResultType(System.Type result_type)
+        private static bool IsValidResultType(System.Type result_type)
         {
             return (result_type == typeof(int)
                     || result_type == typeof(double)
