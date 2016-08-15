@@ -12,16 +12,6 @@ namespace VisioAutomation.ShapeSheet
             return s.Substring(start_index); // Get Rid of the visSection prefix
         }
 
-        public static string GetSectionName(int value, string defaultname)
-        {
-            if (System.Enum.IsDefined(typeof(IVisio.VisSectionIndices), value))
-            {
-                var a = (IVisio.VisSectionIndices)value;
-                return ShapeSheetHelper.GetSectionName(a);
-            }
-            return defaultname;
-        }
-
         public static IEnumerable<IVisio.Row> ToEnumerable(IVisio.Section section)
         {
             // Section object: http://msdn.microsoft.com/en-us/library/ms408988(v=office.12).aspx
