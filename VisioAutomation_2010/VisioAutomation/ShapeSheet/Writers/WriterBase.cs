@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.ValueItems = new List<TValue>(capacity);
         }
 
-        protected IVisio.VisGetSetArgs GetResultFlags()
+        protected IVisio.VisGetSetArgs ComputeGetResultFlags()
         {
             var flags = this.combine_blastguards_and_testcircular_flags();
             if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             return flags;
         }
 
-        protected IVisio.VisGetSetArgs GetFormulaFlags()
+        protected IVisio.VisGetSetArgs ComputeGetFormulaFlags()
         {
             var common_flags = this.combine_blastguards_and_testcircular_flags();
             var formula_flags = (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;

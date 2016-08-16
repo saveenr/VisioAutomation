@@ -29,7 +29,7 @@
 
             var stream = SRC.ToStream(this.StreamItems);
             var formulas = WriterHelper.build_formulas_array(this.ValueItems);
-            var flags = this.GetFormulaFlags();
+            var flags = this.ComputeGetFormulaFlags();
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 

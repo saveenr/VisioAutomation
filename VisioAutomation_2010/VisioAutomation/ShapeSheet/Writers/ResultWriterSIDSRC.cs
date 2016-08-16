@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             var unitcodes = WriterHelper.build_results_arrays_unitcode(this.ValueItems);
             var results = WriterHelper.build_results_arrays_results(this.ValueItems);
 
-            var flags = this.GetResultFlags();
+            var flags = this.ComputeGetResultFlags();
             if (this.ValueItems[0].ResultType == ResultType.ResultString)
             {
                 flags |= IVisio.VisGetSetArgs.visGetStrings;
