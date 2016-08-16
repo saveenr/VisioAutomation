@@ -29,13 +29,15 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.ValueItems = new List<TValue>(capacity);
         }
 
-        protected IVisio.VisGetSetArgs ComputeGetResultFlags()
+        protected IVisio.VisGetSetArgs ComputeGetResultFlags(ResultType rt)
         {
             var flags = this.combine_blastguards_and_testcircular_flags();
-            if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
+
+            if (rt == ResultType.ResultString)
             {
-                flags = (IVisio.VisGetSetArgs)((short)flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
+                flags |= Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetStrings;
             }
+
             return flags;
         }
 

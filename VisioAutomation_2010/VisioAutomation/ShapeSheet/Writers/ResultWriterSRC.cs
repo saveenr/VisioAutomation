@@ -35,11 +35,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             var unitcodes = WriterHelper.build_results_arrays_unitcode(this.ValueItems);
             var results = WriterHelper.build_results_arrays_results(this.ValueItems);
-            var flags = this.ComputeGetResultFlags();
-            if (this.ValueItems[0].ResultType == ResultType.ResultString)
-            {
-                flags |= Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetStrings;
-            }
+            var flags = this.ComputeGetResultFlags(this.ValueItems[0].ResultType);
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }
 
