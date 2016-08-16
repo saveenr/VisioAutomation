@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheetQuery.Columns;
 using VisioAutomation.ShapeSheetQuery.Outputs;
@@ -122,15 +123,10 @@ namespace VisioAutomation.ShapeSheetQuery
             var unitcodes = this.BuildUnitCodeArray(1);
             var formulas = QueryHelpers.GetFormulasU_SRC(surface, srcstream);
             var results = QueryHelpers.GetResults_SRC<TResult>(surface, srcstream, unitcodes);
-
-            var combineddata = new ShapeSheet.CellData<TResult>[results.Length];
-            for (int i = 0; i < results.Length; i++)
-            {
-                combineddata[i] = new ShapeSheet.CellData<TResult>(formulas[i], results[i]);
-            }
+            var combined_data = CellData<TResult>.Combine(results, formulas);
 
             var r = new Output<ShapeSheet.CellData<TResult>>(surface.Target.ID16);
-            this.FillOutputForSingleShape<ShapeSheet.CellData<TResult>>(0, combineddata, 0, r);
+            this.FillOutputForSingleShape<ShapeSheet.CellData<TResult>>(0, combined_data, 0, r);
             return r;
         }
 
@@ -160,16 +156,9 @@ namespace VisioAutomation.ShapeSheetQuery
 
             var srcstream = this.BuildSIDSRCStream(surface, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
-            TResult[] results = QueryHelpers.GetResults_SIDSRC<TResult>(surface, srcstream, unitcodes);
-            string[] formulas  = QueryHelpers.GetFormulasU_SIDSRC(surface, srcstream);
-
-            // Merge the results and formulas
-            var combined_data = new ShapeSheet.CellData<TResult>[results.Length];
-            for (int i = 0; i < results.Length; i++)
-            {
-                combined_data[i] = new ShapeSheet.CellData<TResult>(formulas[i], results[i]);
-            }
-
+            var results = QueryHelpers.GetResults_SIDSRC<TResult>(surface, srcstream, unitcodes);
+            var formulas  = QueryHelpers.GetFormulasU_SIDSRC(surface, srcstream);
+            var combined_data = CellData <TResult>.Combine(results, formulas);
             var r = this.GetOutputsForShapes(shapeids, combined_data);
             return r;
         }
@@ -406,21 +395,15 @@ namespace VisioAutomation.ShapeSheetQuery
         private int GetTotalCellCount(int numshapes)
         {
             // Count the cells not in sections
-            int total_cells_not_in_sections = this.Cells.Count * numshapes;
+            int count = this.Cells.Count * numshapes;
 
             // Count the Cells in the Sections
-            int total_cells_from_sections = 0;
             foreach (var data_for_shape in this._subquery_shape_info)
             {
-                foreach (var section_data in data_for_shape)
-                {
-                    int cells_in_section = section_data.RowCount * section_data.SubQuery.Columns.Count;
-                    total_cells_from_sections += cells_in_section;
-                }
+                count += data_for_shape.Sum(s => s.RowCount*s.SubQuery.Columns.Count);
             }
             
-            int total = total_cells_not_in_sections + total_cells_from_sections;
-            return total;
+            return count;
         }
     }
 }
