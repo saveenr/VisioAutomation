@@ -126,7 +126,8 @@ namespace VisioAutomation.Scripting.Commands
             foreach (var cell in cells)
             {
                 string name = string.Format("Cell{0}", ci);
-                sec.AddCell((short)cell, name);
+                var src = new SRC(section,0,cell);
+                sec.AddCell(src, name);
                 ci++;
             }
 
@@ -151,7 +152,8 @@ namespace VisioAutomation.Scripting.Commands
             foreach (var cell in cells)
             {
                 string name = string.Format("Cell{0}", ci);
-                sec.AddCell((short)cell, name);
+                var src = new SRC(section, 0, cell);
+                sec.AddCell(src, name);
                 ci++;
             }
 

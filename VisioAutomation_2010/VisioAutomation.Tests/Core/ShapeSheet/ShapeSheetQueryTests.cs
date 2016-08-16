@@ -450,7 +450,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                     {
                         sec_col = section_to_secquery[src.Section];
                     }
-                    sec_col.AddCell(src.Cell, name);
+                    sec_col.AddCell(src, name);
                 }
             }
 
@@ -501,11 +501,11 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Ensure that Duplicates in Section Queries Are caught - 
             var q3 = new VA.ShapeSheetQuery.Query();
             var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
-            sec.AddCell(VA.ShapeSheet.SRCConstants.PinX.Cell,"PinX");
+            sec.AddCell(VA.ShapeSheet.SRCConstants.PinX,"PinX");
             bool caught_exc3 = false;
             try
             {
-                sec.AddCell(VA.ShapeSheet.SRCConstants.PinX.Cell, "PinX");
+                sec.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             }
             catch (VA.AutomationException)
             {
