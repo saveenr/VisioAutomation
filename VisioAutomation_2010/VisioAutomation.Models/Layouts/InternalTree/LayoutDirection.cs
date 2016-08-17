@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Models.InternalTree
+﻿namespace VisioAutomation.Models.Layouts.InternalTree
 {
     internal enum LayoutDirection
     {

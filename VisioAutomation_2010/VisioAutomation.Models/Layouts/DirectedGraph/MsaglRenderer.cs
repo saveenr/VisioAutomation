@@ -12,8 +12,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class MsaglRenderer
     {
-        private VA.Drawing.Rectangle mg_bb;
-        private VA.Drawing.Rectangle layout_bb;
+        private VA.Drawing.Rectangle _mg_bb;
+        private VA.Drawing.Rectangle _layout_bb;
 
         public DOM.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         public VA.Drawing.Size DefaultBezierConnectorLabelBoxSize { get; set; }
@@ -42,13 +42,13 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         private VA.Drawing.Point ToDocumentCoordinates(VA.Drawing.Point point)
         {
-            var np = point.Add(-this.mg_bb.Left, -this.mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
+            var np = point.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
             return np;
         }
 
         private VA.Drawing.Rectangle ToDocumentCoordinates(VA.Drawing.Rectangle rect)
         {
-            var nr = rect.Add(-this.mg_bb.Left, -this.mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
+            var nr = rect.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
             return nr;
         }
 
@@ -132,10 +132,10 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 new_edge.Label = new MSAGL.Core.Layout.Label(mg_coordinates.Width, mg_coordinates.Height, new_edge);
             }
 
-            var geomGraphComponents = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(mg_graph.Nodes, mg_graph.Edges);
+            var geom_graph_components = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(mg_graph.Nodes, mg_graph.Edges);
             var settings = new MSAGL.Layout.Layered.SugiyamaLayoutSettings();
 
-            foreach (var subgraph in geomGraphComponents)
+            foreach (var subgraph in geom_graph_components)
             {
                 var layout = new Microsoft.Msagl.Layout.Layered.LayeredLayout(subgraph, settings);
                 subgraph.Margins = settings.NodeSeparation / 2;
@@ -143,18 +143,18 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
 
             // Pack the graphs using Golden Aspect Ratio
-            MSAGL.Layout.MDS.MdsGraphLayout.PackGraphs(geomGraphComponents, settings);
+            MSAGL.Layout.MDS.MdsGraphLayout.PackGraphs(geom_graph_components, settings);
 
             //Update the graphs bounding box
             mg_graph.UpdateBoundingBox();
 
-            this.mg_bb = new VA.Drawing.Rectangle(
+            this._mg_bb = new VA.Drawing.Rectangle(
                 mg_graph.BoundingBox.Left, 
                 mg_graph.BoundingBox.Bottom,
                 mg_graph.BoundingBox.Right,
                 mg_graph.BoundingBox.Top);
             
-            this.layout_bb = new VA.Drawing.Rectangle(0, 0, this.mg_bb.Width, this.mg_bb.Height)
+            this._layout_bb = new VA.Drawing.Rectangle(0, 0, this._mg_bb.Width, this._mg_bb.Height)
                 .Multiply(this.ScaleToDocument, this.ScaleToDocument);
 
             return mg_graph;
@@ -258,7 +258,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             page_node.PageCells.AvenueSizeX = 2.0;
             page_node.PageCells.AvenueSizeY = 2.0;
             page_node.PageCells.LineRouteExt = 2;
-            page_node.Size = this.layout_bb.Size;
+            page_node.Size = this._layout_bb.Size;
 
             return page_node;
         }
@@ -377,16 +377,16 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var ud = (NodeUserData)edge.UserData;
                 var layout_connector = ud.Connector;
 
-              VisioAutomation.DOM.Connector vconnector;
+              DOM.Connector vconnector;
               if (layout_connector.MasterName != null && layout_connector.StencilName != null)
               {
-                  vconnector = new VA.DOM.Connector(
+                  vconnector = new DOM.Connector(
                   layout_connector.From.DOMNode,
                   layout_connector.To.DOMNode, layout_connector.MasterName, layout_connector.StencilName);
               }
               else
               {
-                  vconnector = new VA.DOM.Connector(
+                  vconnector = new DOM.Connector(
                   layout_connector.From.DOMNode,
                   layout_connector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
               }

@@ -1,4 +1,5 @@
-﻿using VisioAutomation.Shapes.Connectors;
+﻿using VisioAutomation.Models.DOM;
+using VisioAutomation.Shapes.Connectors;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -60,17 +61,17 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         }
 
         public Connector AddConnection(string id, Shape from, Shape to, string label,
-            ConnectorType type, int beginArrow, int endArrow, string hyperlink)
+            ConnectorType type, int begin_arrow, int end_arrow, string hyperlink)
         {
             var new_connector = new Connector(from, to);
             new_connector.ID = id;
             new_connector.Label = label;
             new_connector.ConnectorType = type;
-            new_connector.Cells = new VA.DOM.ShapeCells();
-            new_connector.Cells.BeginArrow = beginArrow;
-            new_connector.Cells.BeginArrowSize = beginArrow;
-            new_connector.Cells.EndArrow = endArrow;
-            new_connector.Cells.EndArrowSize = endArrow;
+            new_connector.Cells = new ShapeCells();
+            new_connector.Cells.BeginArrow = begin_arrow;
+            new_connector.Cells.BeginArrowSize = begin_arrow;
+            new_connector.Cells.EndArrow = end_arrow;
+            new_connector.Cells.EndArrowSize = end_arrow;
 
             if (!string.IsNullOrEmpty(hyperlink))
             {

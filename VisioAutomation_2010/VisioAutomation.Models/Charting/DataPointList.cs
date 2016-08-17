@@ -4,16 +4,16 @@ namespace VisioAutomation.Models.Charting
 {
     public class DataPointList : IEnumerable<DataPoint>
     {
-        private readonly List<DataPoint> items;
+        private readonly List<DataPoint> _items;
 
         public DataPointList()
         {
-            this.items = new List<DataPoint>();
+            this._items = new List<DataPoint>();
         }
 
         public DataPointList(IList<double> doubles, IList<string> labels)
         {
-            this.items = new List<DataPoint>(doubles.Count);
+            this._items = new List<DataPoint>(doubles.Count);
             for (int i = 0; i < doubles.Count; i++)
             {
                 var dp = new DataPoint(doubles[i]);
@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.Charting
                     dp.Label = labels[i];
                 }
 
-                this.items.Add(dp);
+                this._items.Add(dp);
             }
         }
 
@@ -30,13 +30,13 @@ namespace VisioAutomation.Models.Charting
         {
             get
             {
-                return this.items.Count;
+                return this._items.Count;
             }
         }
 
         public IEnumerator<DataPoint> GetEnumerator()
         {
-            foreach (var i in this.items)
+            foreach (var i in this._items)
             {
                 yield return i;
             }
@@ -49,18 +49,18 @@ namespace VisioAutomation.Models.Charting
 
         public DataPoint this[int index]
         {
-            get { return this.items[index]; }
+            get { return this._items[index]; }
         }
 
         public void Add(double d)
         {
             var dp = new DataPoint(d);
-            this.items.Add(dp);
+            this._items.Add(dp);
         }
 
         public void Add(DataPoint dp)
         {
-            this.items.Add(dp);
+            this._items.Add(dp);
         }
     }
 }

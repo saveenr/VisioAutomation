@@ -1,4 +1,4 @@
-namespace VisioAutomation.DOM
+namespace VisioAutomation.Models.DOM
 {
 	public class Hyperlink
 	{

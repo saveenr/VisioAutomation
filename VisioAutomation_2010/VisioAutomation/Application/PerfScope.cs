@@ -4,24 +4,24 @@ namespace VisioAutomation.Application
 {
     public class PerfScope : System.IDisposable
     {
-        private readonly IVisio.Application app;
-        private readonly PerfSettings old_settings;
+        private readonly IVisio.Application _app;
+        private readonly PerfSettings _old_settings;
 
         public PerfScope(IVisio.Application vis, PerfSettings new_settings)
         {
-            this.app = vis;
+            this._app = vis;
 
             // save the old settings
-            this.old_settings = new PerfSettings();
-            this.old_settings.Load(this.app);
+            this._old_settings = new PerfSettings();
+            this._old_settings.Load(this._app);
 
             // Set the new settings
-            new_settings.Apply(this.app);
+            new_settings.Apply(this._app);
         }
 
         public void Dispose()
         {
-            this.old_settings.Apply(this.app);
+            this._old_settings.Apply(this._app);
         }
     }
 }

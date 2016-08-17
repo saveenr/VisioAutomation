@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using System.Collections;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
 using VisioAutomation.ShapeSheet.Writers;
+using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.DOM
+namespace VisioAutomation.Models.DOM
 {
     public class ShapeList : Node, IEnumerable<BaseShape>
     {
@@ -106,7 +106,7 @@ namespace VisioAutomation.DOM
 
                 if (shape.TabStops != null)
                 {
-                    Text.TextFormat.SetTabStops(shape.VisioShape, shape.TabStops);
+                    VisioAutomation.Text.TextFormat.SetTabStops(shape.VisioShape, shape.TabStops);
                 }
             }
         }

@@ -4,12 +4,12 @@ namespace VisioAutomation.Drawing.Layout
 {
     public struct BoundingBox
     {
-        private bool initialized;
+        private bool _initialized;
 
-        private double min_x;
-        private double min_y;
-        private double max_x;
-        private double max_y;
+        private double _min_x;
+        private double _min_y;
+        private double _max_x;
+        private double _max_y;
 
         public BoundingBox( IEnumerable<Point> points) :
             this()
@@ -31,29 +31,29 @@ namespace VisioAutomation.Drawing.Layout
 
         public void Add(Point p)
         {
-            if (this.initialized)
+            if (this._initialized)
             {
-                if (p.X < this.min_x)
+                if (p.X < this._min_x)
                 {
-                    this.min_x = p.X;
+                    this._min_x = p.X;
                 }
-                else if (p.X > this.max_x)
+                else if (p.X > this._max_x)
                 {
-                    this.max_x = p.X;
+                    this._max_x = p.X;
                 }
                 else
                 {
                      // do nothing
                 }
 
-                if (p.Y < this.min_y)
+                if (p.Y < this._min_y)
                 {
-                    this.min_y = p.Y;
+                    this._min_y = p.Y;
                     
                 }
-                else if (p.Y > this.max_y)
+                else if (p.Y > this._max_y)
                 {
-                    this.max_y = p.Y;
+                    this._max_y = p.Y;
                 }
                 else
                 {
@@ -63,11 +63,11 @@ namespace VisioAutomation.Drawing.Layout
             }
             else
             {
-                this.min_x = p.X;
-                this.max_x = p.X;
-                this.min_y = p.Y;
-                this.max_y = p.Y;
-                this.initialized = true;
+                this._min_x = p.X;
+                this._max_x = p.X;
+                this._min_y = p.Y;
+                this._max_y = p.Y;
+                this._initialized = true;
             }
         }
 
@@ -83,7 +83,7 @@ namespace VisioAutomation.Drawing.Layout
             {
                 if (this.HasValue)
                 {
-                    return new Rectangle(this.min_x,this.min_y,this.max_x,this.max_y);
+                    return new Rectangle(this._min_x,this._min_y,this._max_x,this._max_y);
                 }
                 else
                 {
@@ -92,6 +92,6 @@ namespace VisioAutomation.Drawing.Layout
             }
         }
 
-        public bool HasValue => this.initialized;
+        public bool HasValue => this._initialized;
     }
 }

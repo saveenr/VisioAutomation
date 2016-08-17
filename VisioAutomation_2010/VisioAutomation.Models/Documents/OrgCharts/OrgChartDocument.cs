@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
+using VisioAutomation.Models.Layouts.InternalTree;
 
 namespace VisioAutomation.Models.Documents.OrgCharts
 {
@@ -16,10 +17,10 @@ namespace VisioAutomation.Models.Documents.OrgCharts
             this.LayoutOptions = new LayoutOptions();
         }
 
-        private InternalTree.Node<object> node_to_layout_node(Node n)
+        private Node<object> node_to_layout_node(Node n)
         {
             var nodesize = n.Size.GetValueOrDefault(this.LayoutOptions.DefaultNodeSize);
-            var newnode = new InternalTree.Node<object>(nodesize, n);
+            var newnode = new Node<object>(nodesize, n);
             return newnode;
         }
 
@@ -61,7 +62,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
 
             var doc_node = new DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
 
-            var trees = new List<IList<InternalTree.Node<object>>>();
+            var trees = new List<IList<Node<object>>>();
 
             foreach (var root in orgchartdrawing.OrgCharts)
             {
@@ -75,7 +76,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 trees.Add(treenodes);
 
                 // Perform the layout
-                var layout = new InternalTree.TreeLayout<object>();
+                var layout = new TreeLayout<object>();
 
                 layout.Options.Direction = this.map_direction2(this.LayoutOptions.Direction);
                 layout.Options.LevelSeparation = 1;
@@ -183,28 +184,28 @@ namespace VisioAutomation.Models.Documents.OrgCharts
             }
         }
 
-        private InternalTree.LayoutDirection map_direction2(LayoutDirection input_dir)
+        private Layouts.InternalTree.LayoutDirection map_direction2(LayoutDirection input_dir)
         {
-            InternalTree.LayoutDirection dir;
+            Layouts.InternalTree.LayoutDirection dir;
             if (input_dir == LayoutDirection.Down)
             {
-                dir = InternalTree.LayoutDirection.Down;
+                dir = Layouts.InternalTree.LayoutDirection.Down;
             }
             else if (input_dir == LayoutDirection.Up)
             {
-                dir = InternalTree.LayoutDirection.Up;
+                dir = Layouts.InternalTree.LayoutDirection.Up;
             }
             else if (input_dir == LayoutDirection.Left)
             {
-                dir = InternalTree.LayoutDirection.Left;
+                dir = Layouts.InternalTree.LayoutDirection.Left;
             }
             else if (input_dir == LayoutDirection.Right)
             {
-                dir = InternalTree.LayoutDirection.Right;
+                dir = Layouts.InternalTree.LayoutDirection.Right;
             }
             else
             {
-                dir = InternalTree.LayoutDirection.Down;
+                dir = Layouts.InternalTree.LayoutDirection.Down;
             }
             return dir;
         }

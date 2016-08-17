@@ -15,16 +15,16 @@ namespace VisioAutomation.Models.Charting
             this.Value = value;
         }
 
-        public static List<DataPoint> DoublesToDataPoints(double[] Values, string[] Labels)
+        public static List<DataPoint> DoublesToDataPoints(double[] values, string[] labels)
         {
             var datapoints = new List<DataPoint>();
 
-            for (int i = 0; i < Values.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                var dp = new DataPoint(Values[i]);
-                if (Labels != null && i < Labels.Length)
+                var dp = new DataPoint(values[i]);
+                if (labels != null && i < labels.Length)
                 {
-                    dp.Label = Labels[i];
+                    dp.Label = labels[i];
                 }
 
                 datapoints.Add(dp);

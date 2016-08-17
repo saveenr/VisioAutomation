@@ -4,7 +4,7 @@ namespace VisioAutomation.Models.Layouts.Box
 {
     public abstract class Node
     {
-        internal Node parent;
+        internal Node _parent;
 
         public object Data { get; set; }
         public Drawing.Rectangle Rectangle { get; set; }
@@ -18,7 +18,7 @@ namespace VisioAutomation.Models.Layouts.Box
 
         public Node Parent
         {
-            get { return this.parent; }
+            get { return this._parent; }
         }
     }
 }

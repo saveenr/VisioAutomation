@@ -7,8 +7,8 @@ namespace VisioAutomationSamples
 {
     public partial class FormSampleRunner : Form
     {
-        private readonly List<SampleMethod> samplemethods = new List<SampleMethod>();
-        private readonly Dictionary<string, SampleMethod> dic = new Dictionary<string, SampleMethod>();
+        private readonly List<SampleMethod> _samplemethods = new List<SampleMethod>();
+        private readonly Dictionary<string, SampleMethod> _dic = new Dictionary<string, SampleMethod>();
 
         public FormSampleRunner()
         {
@@ -40,9 +40,9 @@ namespace VisioAutomationSamples
                     item.Name = name;
                     item.Method = m;
 
-                    this.samplemethods.Add(item);
+                    this._samplemethods.Add(item);
 
-                    this.dic[name] = item;
+                    this._dic[name] = item;
                 }
             }
 
@@ -85,7 +85,7 @@ namespace VisioAutomationSamples
 
             this.SaveSelectedNames();
 
-            var selected_methods = selected_names.Select(n => this.dic[n]).ToList();
+            var selected_methods = selected_names.Select(n => this._dic[n]).ToList();
 
             foreach (var selectedMethod in selected_methods)
             {

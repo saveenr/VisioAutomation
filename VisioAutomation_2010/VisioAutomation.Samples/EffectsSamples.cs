@@ -2,6 +2,7 @@ using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using VisioAutomation.Models.DOM;
 using GRIDMODEL = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioAutomationSamples
@@ -39,7 +40,7 @@ namespace VisioAutomationSamples
             {
                 double transparency = trans[i];
 
-                var fmt = new VA.DOM.ShapeCells();
+                var fmt = new ShapeCells();
                 node.Cells = fmt;
 
                 fmt.FillPattern = 25; // Linear pattern left to right

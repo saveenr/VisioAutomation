@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.DOM
+namespace VisioAutomation.Models.DOM
 {
     public class BezierCurve : BaseShape
     {

@@ -1,6 +1,7 @@
 ﻿using VA = VisioAutomation;
 using DGMODEL = VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Extensions;
+using VisioAutomation.Models.DOM;
 using VisioAutomation.Shapes.Connectors;
 
 namespace VisioAutomationSamples
@@ -48,7 +49,7 @@ namespace VisioAutomationSamples
             var n1 = directed_graph_drawing.AddShape("n1", "N1", basflo_stencil, "Decision");
 
             // Format Node 1
-            n1.Cells = new VA.DOM.ShapeCells();
+            n1.Cells = new ShapeCells();
             n1.Cells.FillForegnd = "rgb(255,0,0)";
             n1.Cells.FillBkgnd = "rgb(255,255,0)";
             n1.Cells.FillPattern = 40;
@@ -77,17 +78,17 @@ namespace VisioAutomationSamples
             var c5 = directed_graph_drawing.AddConnection("c5", n3, n0, null, curved);
 
             // Format connector 0 to point "back" 
-            c0.Cells = new VA.DOM.ShapeCells();
+            c0.Cells = new ShapeCells();
             c0.Cells.BeginArrow = 1;
             c0.Cells.LineWeight = 0.10;
 
             // Format connector 1 to point "forward" 
-            c1.Cells = new VA.DOM.ShapeCells();
+            c1.Cells = new ShapeCells();
             c1.Cells.EndArrow = 1;
             c1.Cells.LineWeight = 0.10;
 
             // Format connector 2 to point "back" and "forward"  
-            c2.Cells = new VA.DOM.ShapeCells();
+            c2.Cells = new ShapeCells();
             c2.Cells.EndArrow = 1;
             c2.Cells.BeginArrow = 1;
             c2.Cells.LineWeight = 0.10;

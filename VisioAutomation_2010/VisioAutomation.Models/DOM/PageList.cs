@@ -1,8 +1,8 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.DOM
+namespace VisioAutomation.Models.DOM
 {
     public class PageList : Node, IEnumerable<Page>
     {

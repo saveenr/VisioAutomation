@@ -7,29 +7,29 @@ namespace VisioAutomation.Models.Documents.Forms
 {
     public class InteractiveRenderer
     {
-        private readonly IVisio.Pages VisioPages;
-        private double CurrentLineHeight;
-        private IVisio.Page page;
-        private FormPage FormPage;
+        private readonly IVisio.Pages _visio_pages;
+        private double _current_line_height;
+        private IVisio.Page _page;
+        private FormPage _form_page;
 
         public List<TextBlock> Blocks;
         public Drawing.Point InsertionPoint;
 
         public InteractiveRenderer(IVisio.Document doc)
         {
-            this.VisioPages = doc.Pages;
+            this._visio_pages = doc.Pages;
             this.Blocks = new List<TextBlock>();
         }
 
         public IVisio.Page CreatePage(FormPage formpage)
         {
-            this.FormPage = formpage;
+            this._form_page = formpage;
 
-            this.page = this.VisioPages.Add();
-            this.page.Name = formpage.Name;
+            this._page = this._visio_pages.Add();
+            this._page.Name = formpage.Name;
 
             // Update the Page Cells
-            var pagesheet = this.page.PageSheet;
+            var pagesheet = this._page.PageSheet;
             var pageupdate = new FormulaWriterSRC();
 
             var pagecells = new Pages.PageCells();
@@ -44,7 +44,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
 
             this.Reset();
-            return this.page;
+            return this._page;
         }
 
         public void Reset()
@@ -55,8 +55,8 @@ namespace VisioAutomation.Models.Documents.Forms
 
         private void ResetInsertionPoint()
         {
-            this.InsertionPoint = new Drawing.Point(this.FormPage.Margin.Left,
-                this.FormPage.Size.Height - this.FormPage.Margin.Top);
+            this.InsertionPoint = new Drawing.Point(this._form_page.Margin.Left,
+                this._form_page.Size.Height - this._form_page.Margin.Top);
         }
 
         public TextBlock AddShape(double w, double h, string text)
@@ -77,7 +77,7 @@ namespace VisioAutomation.Models.Documents.Forms
             var rect = new Drawing.Rectangle(ll, tr);
 
             // Draw the Shape
-            var newshape = this.page.DrawRectangle(rect);
+            var newshape = this._page.DrawRectangle(rect);
             block.VisioShape = newshape;
             block.VisioShapeID = newshape.ID;
             block.Rectangle = rect;
@@ -103,25 +103,25 @@ namespace VisioAutomation.Models.Documents.Forms
                 block.ParagraphCells.SetFormulas((short)block.VisioShapeID,update, 0);
                 block.CharacterCells.SetFormulas((short)block.VisioShapeID, update, 0);
             }
-            update.Commit(this.page);
+            update.Commit(this._page);
         }
 
         private void AdjustInsertionPoint(Drawing.Size size)
         {
             this.InsertionPoint = this.InsertionPoint.Add(size.Width, 0);
-            this.CurrentLineHeight = System.Math.Max(this.CurrentLineHeight, size.Height);
+            this._current_line_height = System.Math.Max(this._current_line_height, size.Height);
         }
 
         public void Linefeed()
         {
-            this.InsertionPoint = new Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight);
-            this.CurrentLineHeight = 0;
+            this.InsertionPoint = new Drawing.Point(this._form_page.Margin.Left, this.InsertionPoint.Y - this._current_line_height);
+            this._current_line_height = 0;
         }
 
         public void Linefeed(double advance)
         {
-            this.InsertionPoint = new Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight - advance);
-            this.CurrentLineHeight = 0;
+            this.InsertionPoint = new Drawing.Point(this._form_page.Margin.Left, this.InsertionPoint.Y - this._current_line_height - advance);
+            this._current_line_height = 0;
         }
 
         public void MoveRight(double advance)
@@ -133,13 +133,13 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void CarriageReturn()
         {
-            this.InsertionPoint = new Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y);
+            this.InsertionPoint = new Drawing.Point(this._form_page.Margin.Left, this.InsertionPoint.Y);
         }
 
         public double GetDistanceToBottomMargin()
         {
-            double ip_y = this.InsertionPoint.Y - this.CurrentLineHeight;
-            double bottom_margin_y = this.FormPage.Margin.Bottom;
+            double ip_y = this.InsertionPoint.Y - this._current_line_height;
+            double bottom_margin_y = this._form_page.Margin.Bottom;
             double result = ip_y - bottom_margin_y;
             return result;
         }
@@ -147,7 +147,7 @@ namespace VisioAutomation.Models.Documents.Forms
         public double GetDistanceToRightMargin()
         {
             double ip_x = this.InsertionPoint.X;
-            double right_margin_x = this.FormPage.Size.Width - this.FormPage.Margin.Right;
+            double right_margin_x = this._form_page.Size.Width - this._form_page.Margin.Right;
             double result = ip_x - right_margin_x;
             return result;
         }

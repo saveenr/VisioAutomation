@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using VisioAutomation.Text;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.DOM
+namespace VisioAutomation.Models.DOM
 {
     public class BaseShape : Node
     {
@@ -18,7 +19,7 @@ namespace VisioAutomation.DOM
         // or always assign using ShallowCopy() a ShapeCells() object
         public ShapeCells Cells { get; set; }
         
-        public List<Text.TabStop> TabStops { get; set; }
+        public List<TabStop> TabStops { get; set; }
         public string CharFontName { get; set; }
         
         protected BaseShape()

@@ -7,7 +7,7 @@ namespace VisioAutomation.Models.Utilities
 {
     class MasterLoader
     {
-        private readonly Dictionary<string, MasterRef> master_ref_dic;
+        private readonly Dictionary<string, MasterRef> _master_ref_dic;
 
         public class MasterRef
         {
@@ -25,14 +25,14 @@ namespace VisioAutomation.Models.Utilities
         
         public MasterLoader()
         {
-            this.master_ref_dic = new Dictionary<string, MasterRef>();
+            this._master_ref_dic = new Dictionary<string, MasterRef>();
         }
 
         public void Add(string mastername, string stencilname)
         {
             var item = new MasterRef(mastername,stencilname);
             string key = getkey(mastername, stencilname);
-            this.master_ref_dic[key] = item;
+            this._master_ref_dic[key] = item;
         }
 
         private static string getkey(string mastername, string stencilname)
@@ -43,13 +43,13 @@ namespace VisioAutomation.Models.Utilities
         public MasterRef Get(string mastername, string stencilname)
         {
             string key = getkey(mastername, stencilname);
-            return this.master_ref_dic[key];
+            return this._master_ref_dic[key];
         }
 
         public bool Contains(string mastername, string stencilname)
         {
             string key = getkey(mastername, stencilname);
-            return this.master_ref_dic.ContainsKey(key);
+            return this._master_ref_dic.ContainsKey(key);
         }
 
         public void Resolve(IVisio.Documents docs)
@@ -57,7 +57,7 @@ namespace VisioAutomation.Models.Utilities
             // first get the unique stencils (ignoring case)
             var comparer = System.StringComparer.CurrentCultureIgnoreCase;
             var unique_stencils = new HashSet<string>(comparer);
-            foreach (var master_ref in this.master_ref_dic.Values)
+            foreach (var master_ref in this._master_ref_dic.Values)
             {
                 unique_stencils.Add(master_ref.StencilName);
             }
@@ -78,7 +78,7 @@ namespace VisioAutomation.Models.Utilities
             }
 
             // identify real master objects for all deferred shapes
-            foreach (var master_ref in this.master_ref_dic.Values)
+            foreach (var master_ref in this._master_ref_dic.Values)
             {
                 if (master_ref.VisioMaster == null)
                 {

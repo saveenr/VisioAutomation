@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Models.DOM;
 using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -311,7 +312,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (node.Cells==null)
                 {
-                    node.Cells = new DOM.ShapeCells();                    
+                    node.Cells = new ShapeCells();                    
                 }
                 node.Cells.FillForegnd = def_fillcolor;
                 node.Cells.CharFont = fontid;
@@ -319,7 +320,7 @@ namespace VisioAutomation.Scripting.Commands
                 node.Cells.ParaHorizontalAlign = "0";
             }
 
-            var cxn_cells = new DOM.ShapeCells();
+            var cxn_cells = new ShapeCells();
             cxn_cells.LineColor = def_linecolor;
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
 
@@ -487,7 +488,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (node.Cells == null)
                 {
-                    node.Cells = new DOM.ShapeCells();
+                    node.Cells = new ShapeCells();
                 }
                 node.Cells.FillForegnd = def_shape_fill;
                 //node.ShapeCells.LineWeight = "0";
@@ -497,7 +498,7 @@ namespace VisioAutomation.Scripting.Commands
                 node.Cells.VerticalAlign = "0";
             }
 
-            var cxn_cells = new DOM.ShapeCells();
+            var cxn_cells = new ShapeCells();
             cxn_cells.LineColor = def_linecolor;
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
             tree_layout.Render(doc.Application.ActivePage);

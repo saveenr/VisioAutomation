@@ -25,51 +25,51 @@ using VisioAutomation.Drawing.Layout;
  * 
  * */
 
-namespace VisioAutomation.Models.InternalTree
+namespace VisioAutomation.Models.Layouts.InternalTree
 {
     internal class TreeLayout<T>
     {
-        private Dictionary<int, double> max_level_height;
-        private Dictionary<int, double> max_level_width;
-        private Dictionary<int, Node<T>> previous_level_node;
-        private Drawing.Point root_offset;
-        private readonly Node<T> root;
+        private Dictionary<int, double> _max_level_height;
+        private Dictionary<int, double> _max_level_width;
+        private Dictionary<int, Node<T>> _previous_level_node;
+        private Drawing.Point _root_offset;
+        private readonly Node<T> _root;
 
         public TreeLayoutOptions Options { get; set; }
 
-        public Node<T> Root => this.root;
+        public Node<T> Root => this._root;
 
         public TreeLayout()
         {
             this.Options = new TreeLayoutOptions();
-            this.root = new Node<T>(-1, null, this.Options.DefaultNodeSize);
+            this._root = new Node<T>(-1, null, this.Options.DefaultNodeSize);
         }
 
         public IEnumerable<Node<T>> Nodes => this.Root.EnumRecursive().Skip(1); // return all the nodes (except the special root)
 
         private void set_level_height(Node<T> node, int level)
         {
-            var value = this.max_level_height.GetValueOrDefaultEx( level, 0);
-            this.max_level_height[level] = System.Math.Max(value, node.Size.Height);
+            var value = this._max_level_height.GetValueOrDefaultEx( level, 0);
+            this._max_level_height[level] = System.Math.Max(value, node.Size.Height);
         }
 
         private void set_level_width(Node<T> node, int level)
         {
-            var value = this.max_level_width.GetValueOrDefaultEx(level, 0);
-            this.max_level_width[level] = System.Math.Max(value, node.Size.Width);
+            var value = this._max_level_width.GetValueOrDefaultEx(level, 0);
+            this._max_level_width[level] = System.Math.Max(value, node.Size.Width);
         }
 
         private void set_neighbors(Node<T> node, int level)
         {
-            node.left_neighbor = this.previous_level_node.GetValueOrDefaultEx(level, null);
+            node.left_neighbor = this._previous_level_node.GetValueOrDefaultEx(level, null);
 
             if (node.left_neighbor != null)
             {
-                node.left_neighbor = this.previous_level_node[level];
+                node.left_neighbor = this._previous_level_node[level];
                 node.left_neighbor.right_neighbor = node;
             }
 
-            this.previous_level_node[level] = node;
+            this._previous_level_node[level] = node;
         }
 
         public double GetNodeSize(Node<T> node)
@@ -195,10 +195,10 @@ namespace VisioAutomation.Models.InternalTree
 
             foreach (var child in node.EnumChildren())
             {
-                var leftmostDescendant = TreeLayout<T>.get_leftmost(child, level + 1, maxlevel);
-                if (leftmostDescendant != null)
+                var leftmost_descendant = TreeLayout<T>.get_leftmost(child, level + 1, maxlevel);
+                if (leftmost_descendant != null)
                 {
-                    return leftmostDescendant;
+                    return leftmost_descendant;
                 }
             }
 
@@ -218,8 +218,8 @@ namespace VisioAutomation.Models.InternalTree
             this.set_neighbors(node, level);
             if (node.ChildCount == 0 || level == this.Options.MaximumDepth)
             {
-                var leftSibling = node.LeftSibling;
-                if (leftSibling != null)
+                var left_sibling = node.LeftSibling;
+                if (left_sibling != null)
                 {
                     /*--------------------------------------------
                      * Determine the preliminary x-coordinate
@@ -229,7 +229,7 @@ namespace VisioAutomation.Models.InternalTree
                      * - mean width of left sibling & current node.
                      *--------------------------------------------*/
 
-                    node.prelim_x = leftSibling.prelim_x + this.GetNodeSize(leftSibling) +
+                    node.prelim_x = left_sibling.prelim_x + this.GetNodeSize(left_sibling) +
                                     this.Options.SiblingSeparation;
                 }
                 else
@@ -251,19 +251,19 @@ namespace VisioAutomation.Models.InternalTree
                 /* Calculate the preliminary value between   */
                 /* the children at the far left and right    */
 
-                double midPoint = node.GetChildrenCenter(this) - this.GetNodeSize(node)/2.0;
+                double mid_point = node.GetChildrenCenter(this) - this.GetNodeSize(node)/2.0;
 
                 if (node.LeftSibling != null)
                 {
                     node.prelim_x = node.LeftSibling.prelim_x +
                                     this.GetNodeSize(node.LeftSibling) +
                                     this.Options.SiblingSeparation;
-                    node.modifier = node.prelim_x - midPoint;
+                    node.modifier = node.prelim_x - mid_point;
                     this.apportion(node, level);
                 }
                 else
                 {
-                    node.prelim_x = midPoint;
+                    node.prelim_x = mid_point;
                 }
             }
         }
@@ -282,9 +282,9 @@ namespace VisioAutomation.Models.InternalTree
 
             if (level > this.Options.MaximumDepth) return;
 
-            var temp_point = this.root_offset.Add(node.prelim_x, 0) + p;
-            double maxsizeTmp = 0;
-            double nodesizeTmp = 0;
+            var temp_point = this._root_offset.Add(node.prelim_x, 0) + p;
+            double maxsize_tmp = 0;
+            double nodesize_tmp = 0;
             bool flag = false;
 
             switch (this.Options.Direction)
@@ -292,16 +292,16 @@ namespace VisioAutomation.Models.InternalTree
                 case LayoutDirection.Up:
                 case LayoutDirection.Down:
                     {
-                        maxsizeTmp = this.max_level_height[level];
-                        nodesizeTmp = node.Size.Height;
+                        maxsize_tmp = this._max_level_height[level];
+                        nodesize_tmp = node.Size.Height;
                         break;
                     }
                 case LayoutDirection.Left:
                 case LayoutDirection.Right:
                     {
-                        maxsizeTmp = this.max_level_width[level];
+                        maxsize_tmp = this._max_level_width[level];
                         flag = true;
-                        nodesizeTmp = node.Size.Width;
+                        nodesize_tmp = node.Size.Width;
                         break;
                     }
             }
@@ -312,11 +312,11 @@ namespace VisioAutomation.Models.InternalTree
                     break;
 
                 case AlignmentVertical.Center:
-                    node.Position = temp_point.Add(0, (maxsizeTmp - nodesizeTmp)/2.0);
+                    node.Position = temp_point.Add(0, (maxsize_tmp - nodesize_tmp)/2.0);
                     break;
 
                 case AlignmentVertical.Bottom:
-                    node.Position = temp_point.Add(0, maxsizeTmp - nodesizeTmp);
+                    node.Position = temp_point.Add(0, maxsize_tmp - nodesize_tmp);
                     break;
             }
 
@@ -330,12 +330,12 @@ namespace VisioAutomation.Models.InternalTree
             {
                 case LayoutDirection.Down:
                     {
-                        node.Position = new Drawing.Point(node.Position.X, -node.Position.Y - nodesizeTmp);
+                        node.Position = new Drawing.Point(node.Position.X, -node.Position.Y - nodesize_tmp);
                         break;
                     }
                 case LayoutDirection.Left:
                     {
-                        node.Position = new Drawing.Point(-node.Position.X - nodesizeTmp, node.Position.Y);
+                        node.Position = new Drawing.Point(-node.Position.X - nodesize_tmp, node.Position.Y);
                         break;
                     }
             }
@@ -345,7 +345,7 @@ namespace VisioAutomation.Models.InternalTree
                 /* Apply the flModifier value for this    */
                 /* node to all its offspring.             */
 
-                var np = p.Add(node.modifier, maxsizeTmp + this.Options.LevelSeparation);
+                var np = p.Add(node.modifier, maxsize_tmp + this.Options.LevelSeparation);
                 this.second_walk(node.FirstChild, level + 1, np);
             }
 
@@ -366,21 +366,21 @@ namespace VisioAutomation.Models.InternalTree
              * Returns: TRUE if no errors, otherwise returns FALSE.
              *----------------------------------------------------*/
 
-            this.max_level_height = new Dictionary<int, double>();
-            this.max_level_width = new Dictionary<int, double>();
-            this.previous_level_node = new Dictionary<int, Node<T>>();
+            this._max_level_height = new Dictionary<int, double>();
+            this._max_level_width = new Dictionary<int, double>();
+            this._previous_level_node = new Dictionary<int, Node<T>>();
 
-            this.first_walk(this.root, 0);
+            this.first_walk(this._root, 0);
 
             //adjust the root_offset
             // NOTE: in the original code this was a case statement on Options.Direction that did the same thing for each direction 
-            this.root_offset = this.Options.TopAdjustment + this.root.Position;
+            this._root_offset = this.Options.TopAdjustment + this._root.Position;
 
-            this.second_walk(this.root, 0, new Drawing.Point(0, 0));
+            this.second_walk(this._root, 0, new Drawing.Point(0, 0));
 
-            this.max_level_height = null;
-            this.max_level_width = null;
-            this.previous_level_node = null;
+            this._max_level_height = null;
+            this._max_level_width = null;
+            this._previous_level_node = null;
 
             this.correct_tree_bounding_box();
         }

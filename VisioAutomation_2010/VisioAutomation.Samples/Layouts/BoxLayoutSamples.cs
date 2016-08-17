@@ -3,6 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using VisioAutomation.Models.DOM;
 using BoxL = VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomationSamples
@@ -14,13 +15,13 @@ namespace VisioAutomationSamples
             public IVisio.Shape VisioShape;
             public string Text;
             public bool Render;
-            public VA.DOM.ShapeCells Cells;
+            public ShapeCells Cells;
             public string Font;
 
             public NodeData()
             {
                 this.Render = true;
-                this.Cells = new VA.DOM.ShapeCells();
+                this.Cells = new ShapeCells();
             }
         }
 
@@ -62,14 +63,14 @@ namespace VisioAutomationSamples
             nodedata.Render = false;
             root.Data = nodedata;
 
-            var fontname_cells = new VA.DOM.ShapeCells();
+            var fontname_cells = new ShapeCells();
             fontname_cells.FillPattern = 0;
             fontname_cells.LinePattern = 0;
             fontname_cells.LineWeight = 0.0;
             fontname_cells.ParaHorizontalAlign = 0;
             fontname_cells.CharSize = "36pt";
 
-            var charbox_cells = new VA.DOM.ShapeCells();
+            var charbox_cells = new ShapeCells();
             charbox_cells.FillPattern = 0;
             charbox_cells.LinePattern = 1;
             charbox_cells.LineWeight = 0.0;
@@ -121,7 +122,7 @@ namespace VisioAutomationSamples
 
             var page = doc.Pages.Add();
 
-            var domshapescol = new VA.DOM.ShapeList();
+            var domshapescol = new ShapeList();
 
             foreach (var node in layout.Nodes)
             {
@@ -141,7 +142,7 @@ namespace VisioAutomationSamples
                 var cells = node_data.Cells;
                 if (cells == null)
                 {
-                    cells = new VA.DOM.ShapeCells();
+                    cells = new ShapeCells();
                 }
                 else
                 {
@@ -174,7 +175,7 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var domshapescol = new VA.DOM.ShapeList();
+                var domshapescol = new ShapeList();
 
                 for (int j = 0; j < fontnames.Count(); j++)
                 {
@@ -233,7 +234,7 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var domshapescol = new VA.DOM.ShapeList();
+                var domshapescol = new ShapeList();
 
                 for (int j = 0; j < fontnames.Count(); j++)
                 {

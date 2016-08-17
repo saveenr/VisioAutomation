@@ -1,7 +1,7 @@
 using VisioAutomation.Drawing;
 using VisioAutomation.Drawing.Layout;
 
-namespace VisioAutomation.Models.InternalTree
+namespace VisioAutomation.Models.Layouts.InternalTree
 {
     internal class TreeLayoutOptions
     {

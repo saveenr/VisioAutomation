@@ -7,19 +7,19 @@ namespace VisioAutomation.Interop
     public static class InteropHelper
     {
         private static bool _initialized=false;
-        private static Dictionary<string, EnumType> g_name_to_enum;
-        private static List<System.Type> g_types; 
+        private static Dictionary<string, EnumType> _gNameToEnum;
+        private static List<System.Type> _gTypes; 
 
         public static void init()
         {
             if (!InteropHelper._initialized)
             {
-                InteropHelper.g_types = typeof(IVisio.Application).Assembly.GetExportedTypes()
+                InteropHelper._gTypes = typeof(IVisio.Application).Assembly.GetExportedTypes()
                     .Where(t => t.IsPublic)
                     .Where(t => !t.Name.StartsWith("tag"))
                     .OrderBy(t=>t.Name)
                     .ToList();
-                InteropHelper.g_name_to_enum = InteropHelper.g_types
+                InteropHelper._gNameToEnum = InteropHelper._gTypes
                     .Where(t => t.IsEnum)
                     .Select(i => new EnumType(i))
                     .ToDictionary(i => i.Name, i => i);
@@ -30,19 +30,19 @@ namespace VisioAutomation.Interop
         public static List<EnumType> GetEnums()
         {
             InteropHelper.init();
-            return InteropHelper.g_name_to_enum.Values.ToList();
+            return InteropHelper._gNameToEnum.Values.ToList();
         }
 
         public static EnumType GetEnum(string name)
         {
             InteropHelper.init();
-            return InteropHelper.g_name_to_enum[name];
+            return InteropHelper._gNameToEnum[name];
         }
 
         public static EnumType GetEnum(System.Type t)
         {
             InteropHelper.init();
-            return InteropHelper.g_name_to_enum[t.Name];
+            return InteropHelper._gNameToEnum[t.Name];
         }
     }
 }

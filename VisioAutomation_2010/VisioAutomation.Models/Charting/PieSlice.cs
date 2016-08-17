@@ -109,9 +109,9 @@ namespace VisioAutomation.Models.Charting
             }
             else if (this.Angle >= 2*System.Math.PI)
             {
-                var A = this.Center.Add(-this.Radius, -this.Radius);
-                var B = this.Center.Add(this.Radius, this.Radius);
-                var rect = new Drawing.Rectangle(A, B);
+                var a = this.Center.Add(-this.Radius, -this.Radius);
+                var b = this.Center.Add(this.Radius, this.Radius);
+                var rect = new Drawing.Rectangle(a, b);
                 var shape = page.DrawOval(rect);
                 return shape;
             }
@@ -141,14 +141,14 @@ namespace VisioAutomation.Models.Charting
             else if (total_angle >= System.Math.PI)
             {
                 var outer_radius_point = new Drawing.Point(this.Radius, this.Radius);
-                var C = this.Center - outer_radius_point;
-                var D = this.Center + outer_radius_point;
-                var outer_rect = new Drawing.Rectangle(C, D);
+                var c = this.Center - outer_radius_point;
+                var d = this.Center + outer_radius_point;
+                var outer_rect = new Drawing.Rectangle(c, d);
 
                 var inner_radius_point = new Drawing.Point(this.InnerRadius, this.InnerRadius);
-                var A = this.Center - inner_radius_point - C;
-                var B = this.Center + inner_radius_point - C;
-                var inner_rect = new Drawing.Rectangle(A, B);
+                var a = this.Center - inner_radius_point - c;
+                var b = this.Center + inner_radius_point - c;
+                var inner_rect = new Drawing.Rectangle(a, b);
 
                 var shape = page.DrawOval(outer_rect);
                 shape.DrawOval(inner_rect.Left, inner_rect.Bottom, inner_rect.Right, inner_rect.Top);

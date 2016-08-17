@@ -5,7 +5,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
     public class Node
     {
         private readonly NodeList _children;
-        internal Node parent;
+        internal Node _parent;
 
         public string Text { get; set; }
         public IVisio.Shape VisioShape { get; set; }
@@ -31,7 +31,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
 
         public Node Parent
         {
-            get { return this.parent; }
+            get { return this._parent; }
         }      
     }
 }

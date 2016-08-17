@@ -4,6 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using VisioAutomation.Models.DOM;
 using VABOXMODEL = VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomationSamples
@@ -79,7 +80,7 @@ namespace VisioAutomationSamples
         {
             public string Text;
             public bool Render;
-            public VA.DOM.ShapeCells ShapeCells;
+            public ShapeCells ShapeCells;
         }
 
         public static void BoxLayout_TwoLevelGrouping()
@@ -112,7 +113,7 @@ namespace VisioAutomationSamples
             var page = app.ActivePage;
 
 
-            var domshapescol = new VA.DOM.ShapeList();
+            var domshapescol = new ShapeList();
             //var rect_master = dom.m
             foreach (var item in layout1.Nodes)
             {
@@ -155,7 +156,7 @@ namespace VisioAutomationSamples
             var layout1 = new VABOXMODEL.BoxLayout();
             layout1.Root = new VABOXMODEL.Container(major_group_direction);
 
-            var major_cells = new VA.DOM.ShapeCells();
+            var major_cells = new ShapeCells();
             major_cells.FillForegnd = "rgb(245,245,245)";
             major_cells.CharFont = 0;
             major_cells.CharSize = "12pt";
@@ -164,7 +165,7 @@ namespace VisioAutomationSamples
             major_cells.LineWeight = "0";
             major_cells.LinePattern = "0";
 
-            var minor_cells = new VA.DOM.ShapeCells();
+            var minor_cells = new ShapeCells();
             minor_cells.FillForegnd = "rgb(230,230,230)";
             minor_cells.CharFont = 0;
             minor_cells.CharSize = "10pt";
@@ -173,7 +174,7 @@ namespace VisioAutomationSamples
             minor_cells.LineWeight = "0";
             minor_cells.LinePattern = "0";
 
-            var item_cells = new VA.DOM.ShapeCells();
+            var item_cells = new ShapeCells();
             item_cells.CharFont = 0;
             item_cells.FillPattern = "0";
             item_cells.CharSize = "8pt";

@@ -4,7 +4,7 @@ namespace VisioAutomation.Application
 {
     public class UndoScope : System.IDisposable
     {
-        private readonly IVisio.Application Application;
+        private readonly IVisio.Application _application;
 
         public int ScopeID { get; }
         public string Name { get; }
@@ -23,9 +23,9 @@ namespace VisioAutomation.Application
                 throw new System.ArgumentException(msg,nameof(name));
             }
 
-            this.Application = app;
+            this._application = app;
             this.Name = name;
-            this.ScopeID = this.Application.BeginUndoScope(name);
+            this.ScopeID = this._application.BeginUndoScope(name);
             this.Commit = true;
         }
 
@@ -34,7 +34,7 @@ namespace VisioAutomation.Application
         /// </summary>
         public void Dispose()
         {
-            this.Application.EndUndoScope(this.ScopeID, this.Commit);
+            this._application.EndUndoScope(this.ScopeID, this.Commit);
         }
 
         /// <summary>

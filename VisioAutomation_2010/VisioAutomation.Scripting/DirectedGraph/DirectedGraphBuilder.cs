@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Colors;
+using VisioAutomation.Models.DOM;
 using VisioAutomation.Scripting.Utilities;
 using VisioAutomation.Shapes.Connectors;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
@@ -180,7 +181,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     var def_end_arrow = 2;
                     var dg_connector = pagedata.DirectedGraph.AddConnection(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
 
-                    dg_connector.Cells = new DOM.ShapeCells();
+                    dg_connector.Cells = new ShapeCells();
                     dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
                     dg_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
                     dg_connector.Cells.EndArrow = def_end_arrow;

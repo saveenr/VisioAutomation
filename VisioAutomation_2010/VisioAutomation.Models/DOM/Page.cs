@@ -1,8 +1,8 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
+﻿using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet.Writers;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.DOM
+namespace VisioAutomation.Models.DOM
 {
     public class Page : Node
     {

@@ -1,7 +1,7 @@
 ﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.DOM
+namespace VisioAutomation.Models.DOM
 {
     public class Shape : BaseShape
     {
@@ -18,7 +18,7 @@ namespace VisioAutomation.DOM
 
 	        public Shape(IVisio.Master master, VA.Drawing.Point pos, string name)
    {
-       this.Master = new VA.DOM.MasterRef(master);
+       this.Master = new MasterRef(master);
        this.DropPosition = pos;
        this.VisioShape.NameU = name;
    }
