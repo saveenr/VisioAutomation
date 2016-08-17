@@ -11,15 +11,15 @@ namespace VisioAutomation.ShapeSheet.Writers
         }
 
 
-        public void SetResult(SRC streamitem, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
         {
-            this.StreamItems.Add(streamitem);
+            this.StreamItems.Add(src);
             this.ValueItems.Add( new ResultValue(value,unitcode));
         }
 
-        public void SetResult(SRC streamitem, double value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, double value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
         {
-            this.StreamItems.Add(streamitem);
+            this.StreamItems.Add(src);
             this.ValueItems.Add(new ResultValue(value, unitcode));
         }
 

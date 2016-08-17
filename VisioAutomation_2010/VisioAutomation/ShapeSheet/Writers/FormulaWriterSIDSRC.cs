@@ -18,16 +18,16 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        public void SetFormula(SIDSRC streamitem, FormulaLiteral formula)
+        public void SetFormula(SIDSRC sidsrc, FormulaLiteral formula)
         {
-            this.__SetFormulaIgnoreNull(streamitem, formula);
+            this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        protected void __SetFormulaIgnoreNull(SIDSRC streamitem, FormulaLiteral formula)
+        protected void __SetFormulaIgnoreNull(SIDSRC sidsrc, FormulaLiteral formula)
         {
             if (formula.HasValue)
             {
-                this.StreamItems.Add(streamitem);
+                this.StreamItems.Add(sidsrc);
                 this.ValueItems.Add(formula);
             }
         }
