@@ -1,4 +1,4 @@
-﻿using VisioAutomation.Models.DOM;
+﻿using VisioAutomation.Models.Dom;
 using VisioAutomation.Shapes.Connectors;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;

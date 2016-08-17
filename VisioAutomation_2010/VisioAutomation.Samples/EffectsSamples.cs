@@ -2,7 +2,7 @@ using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using VisioAutomation.Models.DOM;
+using VisioAutomation.Models.Dom;
 using GRIDMODEL = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioAutomationSamples

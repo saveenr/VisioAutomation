@@ -75,7 +75,7 @@ namespace VisioAutomation.Models.Layouts.Tree
             var node_master = basic_masters[this.rect_master_name];
             var connector_master = connectors_masters[this.dc_master_name];
 
-            var page_node = new DOM.Page();
+            var page_node = new Dom.Page();
 
             var page_size = bb.Size.Add(border_width*2, border_width*2.0);
 
@@ -92,7 +92,7 @@ namespace VisioAutomation.Models.Layouts.Tree
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
                 var tree_node = (Node)treenodes[i].Data;
-                DOM.Shape master_node = master_nodes[i];
+                Dom.Shape master_node = master_nodes[i];
                 tree_node.DOMNode = master_node;
 
                 if (tree_node.Cells!=null)
@@ -113,8 +113,8 @@ namespace VisioAutomation.Models.Layouts.Tree
                 {
                     foreach (var child in parent.Children)
                     {
-                        var parent_shape = (DOM.BaseShape)parent.DOMNode;
-                        var child_shape = (DOM.BaseShape)child.DOMNode;
+                        var parent_shape = (Dom.BaseShape)parent.DOMNode;
+                        var child_shape = (Dom.BaseShape)child.DOMNode;
                         var connector = page_node.Shapes.Connect(connector_master, parent_shape, child_shape);
                         connector.Cells = this.LayoutOptions.ConnectorCells;
                     }
@@ -151,7 +151,7 @@ namespace VisioAutomation.Models.Layouts.Tree
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
                 var orgnode = (Node) treenodes[i].Data;
-                var shape = (DOM.BaseShape)orgnode.DOMNode;
+                var shape = (Dom.BaseShape)orgnode.DOMNode;
                 orgnode.VisioShape = shape.VisioShape;
             }
         }

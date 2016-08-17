@@ -138,9 +138,9 @@ namespace VisioAutomation.Models.Layouts.Grid
 
             var nodes_to_draw = this.Nodes.Where(n => n.Draw).ToList();
 
-            var page_node = new DOM.Page();
+            var page_node = new Dom.Page();
 
-            var shape_nodes = new List<DOM.Shape>(nodes_to_draw.Count);
+            var shape_nodes = new List<Dom.Shape>(nodes_to_draw.Count);
             foreach (var node in nodes_to_draw)
             {
                 var shape_node = page_node.Shapes.Drop(node.Master, node.Rectangle.Center);

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Colors;
-using VisioAutomation.Models.DOM;
+using VisioAutomation.Models.Dom;
 using VisioAutomation.Scripting.Utilities;
 using VisioAutomation.Shapes.Connectors;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;

@@ -8,7 +8,7 @@ using VisioAutomation.ShapeSheet.Writers;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.DOM
+namespace VisioAutomation.Models.Dom
 {
     public class ShapeList : Node, IEnumerable<BaseShape>
     {

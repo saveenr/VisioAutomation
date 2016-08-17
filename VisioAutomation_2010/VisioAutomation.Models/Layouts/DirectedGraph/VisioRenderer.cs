@@ -21,7 +21,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 throw new System.ArgumentNullException(nameof(options));
             }
 
-            var page_node = new DOM.Page();
+            var page_node = new Dom.Page();
             double x = 0;
             double y = 1;
             foreach (var shape in directedGraphLayout.Shapes)

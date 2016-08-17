@@ -1,4 +1,4 @@
-﻿using VisioAutomation.Models.DOM;
+﻿using VisioAutomation.Models.Dom;
 using VA = VisioAutomation;
 using TREEMODEL = VisioAutomation.Models.Layouts.Tree;
 

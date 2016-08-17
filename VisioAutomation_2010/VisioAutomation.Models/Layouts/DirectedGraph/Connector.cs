@@ -9,7 +9,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         public ConnectorType ConnectorType { get; set; }
 	 
-        public System.Collections.Generic.List<DOM.Hyperlink> Hyperlinks { get; set; }
+        public System.Collections.Generic.List<Dom.Hyperlink> Hyperlinks { get; set; }
         public string StencilName { get; set; }
         public string MasterName { get; set; }
 

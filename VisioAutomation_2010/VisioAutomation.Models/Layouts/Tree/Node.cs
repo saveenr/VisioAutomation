@@ -20,9 +20,9 @@ namespace VisioAutomation.Models.Layouts.Tree
 
         public VisioAutomation.Models.Text.TextElement Text { get; set;}
         public IVisio.Shape VisioShape { get; set; }
-        public DOM.Node DOMNode { get; set; }
+        public Dom.Node DOMNode { get; set; }
         public VA.Drawing.Size? Size { get; set; }
-        public DOM.ShapeCells Cells { get; set; }
+        public Dom.ShapeCells Cells { get; set; }
 
         public Node()
         {

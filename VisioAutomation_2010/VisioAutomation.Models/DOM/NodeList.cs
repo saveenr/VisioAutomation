@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace VisioAutomation.Models.DOM
+namespace VisioAutomation.Models.Dom
 {
     public class NodeList<T> : IEnumerable<T> where T : Node
     {

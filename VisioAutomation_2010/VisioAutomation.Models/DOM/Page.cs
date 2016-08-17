@@ -2,7 +2,7 @@
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.DOM
+namespace VisioAutomation.Models.Dom
 {
     public class Page : Node
     {

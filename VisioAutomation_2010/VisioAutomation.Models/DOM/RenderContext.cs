@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.DOM
+namespace VisioAutomation.Models.Dom
 {
     internal class RenderContext
     {

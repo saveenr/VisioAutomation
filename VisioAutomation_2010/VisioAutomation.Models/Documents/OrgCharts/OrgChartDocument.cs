@@ -60,7 +60,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
             const string dyncon_master_name = "Dynamic connector";
             const double border_width = 0.5;
 
-            var doc_node = new DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
+            var doc_node = new Dom.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
 
             var trees = new List<IList<Node<object>>>();
 
@@ -91,7 +91,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
 
                 // vis.ActiveWindow.ShowConnectPoints = 0;
 
-                var page_node = new DOM.Page();
+                var page_node = new Dom.Page();
                 doc_node.Pages.Add(page_node);
 
                 // fixup the nodes so that they render on the page
@@ -130,8 +130,8 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                     {
                         foreach (var child in parent.Children)
                         {
-                            var parent_shape = (DOM.BaseShape)parent.DOMNode;
-                            var child_shape = (DOM.BaseShape)child.DOMNode;
+                            var parent_shape = (Dom.BaseShape)parent.DOMNode;
+                            var child_shape = (Dom.BaseShape)child.DOMNode;
                             var connector = page_node.Shapes.Connect(dyncon_master_name, null, parent_shape, child_shape);
                         }
                     }
@@ -149,7 +149,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 foreach (int i in Enumerable.Range(0, treenodes.Count))
                 {
                     var orgnode = (Node)treenodes[i].Data;
-                    var shape = (DOM.BaseShape)orgnode.DOMNode;
+                    var shape = (Dom.BaseShape)orgnode.DOMNode;
                     shape.Text = new VisioAutomation.Models.Text.TextElement(orgnode.Text);
                 }
 
@@ -165,7 +165,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
             {
                 var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
                 var orgnodes_with_urls = orgnodes.Where(n => n.URL != null);
-                var all_urls = orgnodes_with_urls.Select(n => new { orgnode = n, shape = (DOM.BaseShape)n.DOMNode, url = n.URL.Trim() });
+                var all_urls = orgnodes_with_urls.Select(n => new { orgnode = n, shape = (Dom.BaseShape)n.DOMNode, url = n.URL.Trim() });
 
                 foreach (var url in all_urls)
                 {
@@ -178,7 +178,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 foreach (int i in Enumerable.Range(0, treenodes.Count))
                 {
                     var orgnode = (Node)treenodes[i].Data;
-                    var shape = (DOM.BaseShape)orgnode.DOMNode;
+                    var shape = (Dom.BaseShape)orgnode.DOMNode;
                     orgnode.VisioShape = shape.VisioShape;
                 }
             }

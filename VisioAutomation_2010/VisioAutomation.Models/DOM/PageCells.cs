@@ -1,6 +1,6 @@
 using VisioAutomation.ShapeSheet.Writers;
 
-namespace VisioAutomation.Models.DOM
+namespace VisioAutomation.Models.Dom
 {
     public class PageCells
     {

@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using VisioAutomation.Models.DOM;
+using VisioAutomation.Models.Dom;
 using VABOXMODEL = VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomationSamples

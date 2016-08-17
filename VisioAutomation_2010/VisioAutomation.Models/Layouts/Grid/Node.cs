@@ -15,7 +15,7 @@ namespace VisioAutomation.Models.Layouts.Grid
         public object Data { get; set; }
         public bool Draw { get; set; }
 
-        public DOM.ShapeCells Cells { get; set; }
+        public Dom.ShapeCells Cells { get; set; }
 
         public Node()
         {

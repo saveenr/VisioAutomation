@@ -7,7 +7,7 @@ namespace VisioAutomation.Models.Layouts.Tree
         public ConnectorType ConnectorType { get; set; }
         public LayoutDirection Direction { get; set; }
         public VA.Drawing.Size DefaultNodeSize { get; set; }
-        public DOM.ShapeCells ConnectorCells { get; set; }
+        public Dom.ShapeCells ConnectorCells { get; set; }
         
         public LayoutOptions()
         {
