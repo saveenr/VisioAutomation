@@ -68,7 +68,7 @@
     <Compile Include="Layouts\DirectedGraph\IDList.cs" />
     <Compile Include="Layouts\DirectedGraph\LayoutDirection.cs" />
     <Compile Include="Layouts\DirectedGraph\LayoutOptions.cs" />
-    <Compile Include="Layouts\DirectedGraph\MSAGLLayoutOptions.cs" />
+    <Compile Include="Layouts\DirectedGraph\MsaglLayoutOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\MsaglRenderer.cs" />
     <Compile Include="Layouts\DirectedGraph\MsaglUtil.cs" />
     <Compile Include="Layouts\DirectedGraph\Node.cs" />
