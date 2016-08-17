@@ -27,37 +27,19 @@ namespace VisioAutomation.ShapeSheetQuery.Utilities
         public static string[] GetFormulasU_SIDSRC(ShapeSheetSurface surface, short[] stream)
         {
             int numitems = check_stream_size(stream, 4);
-            if (numitems < 1)
-            {
-                return new string[0];
-            }
-
-            System.Array formulas_sa = null;
-
-            if (surface.Target.Master != null)
-            {
-                surface.Target.Master.GetFormulasU(stream, out formulas_sa);
-            }
-            else if (surface.Target.Page != null)
-            {
-                surface.Target.Page.GetFormulasU(stream, out formulas_sa);
-            }
-            else if (surface.Target.Shape != null)
-            {
-                surface.Target.Shape.GetFormulasU(stream, out formulas_sa);
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
-
-            var formulas = get_formulas_array(formulas_sa, numitems);
+            var formulas = _GetFormulasU(surface, stream, numitems);
             return formulas;
         }
 
         public static string[] GetFormulasU_SRC(ShapeSheetSurface surface, short[] stream)
         {
             int numitems = check_stream_size(stream, 3);
+            var formulas = _GetFormulasU(surface, stream, numitems);
+            return formulas;
+        }
+
+        private static string[] _GetFormulasU(ShapeSheetSurface surface, short[] stream, int numitems)
+        {
             if (numitems < 1)
             {
                 return new string[0];
@@ -104,46 +86,23 @@ namespace VisioAutomation.ShapeSheetQuery.Utilities
 
         public static TResult[] GetResults_SIDSRC<TResult>(ShapeSheetSurface surface, short[] stream, IList<VisUnitCodes> unitcodes)
         {
-            EnforceValidResultType(typeof(TResult));
-
             int numitems = check_stream_size(stream, 4);
-            if (numitems < 1)
-            {
-                return new TResult[0];
-            }
-
-            var result_type = typeof(TResult);
-            var unitcodes_obj_array = get_unit_code_obj_array(unitcodes);
-            var flags = get_VisGetSetArgs(result_type);
-
-            System.Array results_sa = null;
-
-            if (surface.Target.Master != null)
-            {
-                surface.Target.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
-            }
-            else if (surface.Target.Page != null)
-            {
-                surface.Target.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
-            }
-            else if (surface.Target.Shape != null)
-            {
-                surface.Target.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
-
-            var results = get_results_array<TResult>(results_sa, numitems);
+            var results = _GetResults<TResult>(surface, stream, unitcodes, numitems);
             return results;
         }
 
         public static TResult[] GetResults_SRC<TResult>(ShapeSheetSurface surface, short[] stream, IList<VisUnitCodes> unitcodes)
         {
+            int numitems = check_stream_size(stream, 3);
+            var results = _GetResults<TResult>(surface, stream, unitcodes, numitems);
+            return results;
+        }
+
+
+        public static TResult[] _GetResults<TResult>(ShapeSheetSurface surface, short[] stream, IList<VisUnitCodes> unitcodes, int numitems)
+        {
             EnforceValidResultType(typeof(TResult));
 
-            int numitems = check_stream_size(stream, 3);
             if (numitems < 1)
             {
                 return new TResult[0];
@@ -175,7 +134,6 @@ namespace VisioAutomation.ShapeSheetQuery.Utilities
             var results = get_results_array<TResult>(results_sa, numitems);
             return results;
         }
-
 
 
         private static TResult[] get_results_array<TResult>(System.Array results_sa, int numitems)
