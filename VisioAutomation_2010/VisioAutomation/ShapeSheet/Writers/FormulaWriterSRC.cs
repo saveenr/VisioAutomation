@@ -10,11 +10,11 @@
         {
         }
 
-        public void SetFormula(SRC streamitem, FormulaLiteral formula)
+        public void SetFormula(SRC src, FormulaLiteral formula)
         {
             if (formula.HasValue)
             {
-                this.StreamItems.Add(streamitem);
+                this.StreamItems.Add(src);
                 this.ValueItems.Add(formula);
             }
         }
