@@ -6,16 +6,16 @@ namespace VisioAutomation.Models.Dom
 {
     public class PageList : Node, IEnumerable<Page>
     {
-        private readonly NodeList<Page> pagenodes;
+        private readonly NodeList<Page> _pagenodes;
 
         public PageList()
         {
-            this.pagenodes = new NodeList<Page>(this);
+            this._pagenodes = new NodeList<Page>(this);
         }
 
         public IEnumerator<Page> GetEnumerator()
         {
-            foreach (var i in this.pagenodes)
+            foreach (var i in this._pagenodes)
             {
                 yield return i;
             }
@@ -28,18 +28,18 @@ namespace VisioAutomation.Models.Dom
 
         public void Add(Page page)
         {
-            this.pagenodes.Add(page);
+            this._pagenodes.Add(page);
         }
 
         public int Count
         {
-            get { return this.pagenodes.Count; }
+            get { return this._pagenodes.Count; }
         }
 
         public IList<IVisio.Page> Render(IVisio.Document doc)
         {
             var pages = new List<IVisio.Page>(this.Count);
-            foreach (var pagenode in this.pagenodes)
+            foreach (var pagenode in this._pagenodes)
             {
                 var page = pagenode.Render(doc);
                 pages.Add(page);
@@ -55,7 +55,7 @@ namespace VisioAutomation.Models.Dom
 
             var app = doc.Application;
             var active_window = app.ActiveWindow;
-            foreach (var pagenode in this.pagenodes)
+            foreach (var pagenode in this._pagenodes)
             {
                 if (count == 0)
                 {
