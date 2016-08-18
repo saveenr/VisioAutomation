@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VA=VisioAutomation;
 
 namespace VisioAutomation_Tests.DOM
 {
@@ -36,7 +37,7 @@ namespace VisioAutomation_Tests.DOM
         public void MarkupCharacterBold()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{Bold}");
-            m.CharacterFormatting.Style = (int)VisioAutomation.Text.CharStyle.Bold;
+            m.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Bold;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -44,7 +45,7 @@ namespace VisioAutomation_Tests.DOM
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.Bold, charfmt[0].Style.Result);
+            Assert.AreEqual((int)VA.Models.Text.CharStyle.Bold, charfmt[0].Style.Result);
 
             page1.Delete(0);
         }
@@ -52,7 +53,7 @@ namespace VisioAutomation_Tests.DOM
         public void MarkupCharacterItalic()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{Italic}");
-            m.CharacterFormatting.Style = (int)VisioAutomation.Text.CharStyle.Italic;
+            m.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Italic;
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -60,7 +61,7 @@ namespace VisioAutomation_Tests.DOM
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.Italic, charfmt[0].Style.Result);
+            Assert.AreEqual((int)VA.Models.Text.CharStyle.Italic, charfmt[0].Style.Result);
 
             page1.Delete(0);
         }
@@ -99,15 +100,15 @@ namespace VisioAutomation_Tests.DOM
             t1.CharacterFormatting.Font = segoeui.ID;
 
             var t2 = t1.AddElement("{Italic}");
-            t2.CharacterFormatting.Style = (int)VisioAutomation.Text.CharStyle.Italic;
+            t2.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Italic;
             t2.CharacterFormatting.Font = impact.ID;
 
             var t3 = t2.AddElement("{Bold}");
-            t3.CharacterFormatting.Style = (int)VisioAutomation.Text.CharStyle.Bold;
+            t3.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Bold;
             t3.CharacterFormatting.Font = couriernew.ID;
 
             var t4 = t2.AddElement("{Bold Italic}");
-            t4.CharacterFormatting.Style = (int)(VisioAutomation.Text.CharStyle.Bold | VisioAutomation.Text.CharStyle.Italic);
+            t4.CharacterFormatting.Style = (int)(VA.Models.Text.CharStyle.Bold | VA.Models.Text.CharStyle.Italic);
             t4.CharacterFormatting.Font = georgia.ID;
 
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
@@ -128,11 +129,11 @@ namespace VisioAutomation_Tests.DOM
 
 
             // check the styles
-            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.None, charfmt[0].Style.Result);
-            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.Italic, charfmt[1].Style.Result);
-            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.Bold, charfmt[2].Style.Result);
-            Assert.AreEqual((int)(VisioAutomation.Text.CharStyle.Italic | VisioAutomation.Text.CharStyle.Bold), charfmt[3].Style.Result);
-            Assert.AreEqual((int)(VisioAutomation.Text.CharStyle.None), charfmt[4].Style.Result);
+            Assert.AreEqual((int)VA.Models.Text.CharStyle.None, charfmt[0].Style.Result);
+            Assert.AreEqual((int)VA.Models.Text.CharStyle.Italic, charfmt[1].Style.Result);
+            Assert.AreEqual((int)VA.Models.Text.CharStyle.Bold, charfmt[2].Style.Result);
+            Assert.AreEqual((int)(VA.Models.Text.CharStyle.Italic | VA.Models.Text.CharStyle.Bold), charfmt[3].Style.Result);
+            Assert.AreEqual((int)(VA.Models.Text.CharStyle.None), charfmt[4].Style.Result);
 
             // check the text run content
             var charruns = textfmt.CharacterTextRuns;

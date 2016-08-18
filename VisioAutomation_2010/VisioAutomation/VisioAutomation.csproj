@@ -174,7 +174,6 @@
     <Compile Include="ShapeSheetQuery\Columns\ListColumnQuery.cs" />
     <Compile Include="ShapeSheetQuery\Utilities\StreamBuilder.cs" />
     <Compile Include="ShapeSheetQuery\ListSubQuery.cs" />
-    <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />

@@ -1,6 +1,6 @@
 ﻿using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Text
+namespace VisioAutomation.Models.Text
 {
     [System.Flags]
     public enum CharStyle

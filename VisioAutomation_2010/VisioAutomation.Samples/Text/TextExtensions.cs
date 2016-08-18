@@ -9,7 +9,7 @@ namespace VisioAutomationSamples
         public static VisioAutomation.Models.Text.TextElement AddElementEx(this VisioAutomation.Models.Text.TextElement p, string text,
                                                               int? font, double? size, int? color,
                                                               AlignmentHorizontal? halign,
-                                                              VA.Text.CharStyle? cs)
+                                                              VA.Models.Text.CharStyle? cs)
         {
             var el = p.AddElement(text);
 
