@@ -1,21 +1,21 @@
 using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
 {
     public static class SelectionMethods
     {
-        public static IEnumerable<Shape> ToEnumerable(this Microsoft.Office.Interop.Visio.Selection selection)
+        public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Selection selection)
         {
             return VisioAutomation.Selections.SelectionHelper.ToEnumerable(selection);
         }
         
-        public static Drawing.Rectangle GetBoundingBox(this Microsoft.Office.Interop.Visio.Selection selection, Microsoft.Office.Interop.Visio.VisBoundingBoxArgs args)
+        public static Drawing.Rectangle GetBoundingBox(this IVisio.Selection selection, IVisio.VisBoundingBoxArgs args)
         {
             return VisioAutomation.Selections.SelectionHelper.GetBoundingBox(selection, args);
         }
 
-        public static int[] GetIDs(this Microsoft.Office.Interop.Visio.Selection selection)
+        public static int[] GetIDs(this IVisio.Selection selection)
         {
             return VisioAutomation.Selections.SelectionHelper.GetIDs(selection);
         }

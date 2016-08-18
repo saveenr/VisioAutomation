@@ -1,42 +1,42 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
 {
 
     public static class ShapeMethods
     {
-        public static Microsoft.Office.Interop.Visio.Shape DrawLine(this Microsoft.Office.Interop.Visio.Shape shape, Drawing.Point p1, Drawing.Point p2)
+        public static IVisio.Shape DrawLine(this IVisio.Shape shape, Drawing.Point p1, Drawing.Point p2)
         {
             return Shapes.ShapeHelper.DrawLine(shape, p1, p2);
         }
 
-        public static Microsoft.Office.Interop.Visio.Shape DrawQuarterArc(this Microsoft.Office.Interop.Visio.Shape shape, Drawing.Point p0, Drawing.Point p1, Microsoft.Office.Interop.Visio.VisArcSweepFlags flags)
+        public static IVisio.Shape DrawQuarterArc(this IVisio.Shape shape, Drawing.Point p0, Drawing.Point p1, IVisio.VisArcSweepFlags flags)
         {
             return Shapes.ShapeHelper.DrawQuarterArc(shape, p0, p1, flags);
         }
 
-        public static Drawing.Rectangle GetBoundingBox(this Microsoft.Office.Interop.Visio.Shape shape, Microsoft.Office.Interop.Visio.VisBoundingBoxArgs args)
+        public static Drawing.Rectangle GetBoundingBox(this IVisio.Shape shape, IVisio.VisBoundingBoxArgs args)
         {
             return Shapes.ShapeHelper.GetBoundingBox(shape, args);
         }
 
-        public static Drawing.Point XYFromPage(this Microsoft.Office.Interop.Visio.Shape shape, Drawing.Point xy)
+        public static Drawing.Point XYFromPage(this IVisio.Shape shape, Drawing.Point xy)
         {
             return Shapes.ShapeHelper.XYFromPage(shape, xy);
         }
 
-        public static Drawing.Point XYToPage(this Microsoft.Office.Interop.Visio.Shape shape, Drawing.Point xy)
+        public static Drawing.Point XYToPage(this IVisio.Shape shape, Drawing.Point xy)
         {
             return Shapes.ShapeHelper.XYToPage(shape, xy);
         }
 
-        public static IEnumerable<Shape> ToEnumerable(this Microsoft.Office.Interop.Visio.Shapes shapes)
+        public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Shapes shapes)
         {
             return Shapes.ShapeHelper.ToEnumerable(shapes);
         }
 
-        public static IList<Shape> GetShapesFromIDs(this Microsoft.Office.Interop.Visio.Shapes shapes, IList<short> shapeids)
+        public static IList<IVisio.Shape> GetShapesFromIDs(this IVisio.Shapes shapes, IList<short> shapeids)
         {
             return Shapes.ShapeHelper.GetShapesFromIDs(shapes, shapeids);
         }

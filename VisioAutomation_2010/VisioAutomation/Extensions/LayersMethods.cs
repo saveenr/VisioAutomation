@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
 {
     public static class LayersMethods
     {
-        public static IEnumerable<Layer> ToEnumerable(this Microsoft.Office.Interop.Visio.Layers layers)
+        public static IEnumerable<IVisio.Layer> ToEnumerable(this IVisio.Layers layers)
         {
             return VisioAutomation.Layers.LayerHelper.ToEnumerable(layers);
         }
