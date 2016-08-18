@@ -2,13 +2,13 @@
 {
     internal struct ArcSegment
     {
-        public readonly double begin;
-        public readonly double end;
+        public readonly double Begin;
+        public readonly double End;
 
         internal ArcSegment(double b, double e)
         {
-            this.begin = b;
-            this.end = e;
+            this.Begin = b;
+            this.End = e;
         }
     }
 }

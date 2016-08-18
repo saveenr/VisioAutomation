@@ -92,7 +92,7 @@ namespace VisioAutomation.Drawing
             }
 
             var bez_arr = BezierSegment.subdivide_arc_nicely(startangle, endangle)
-                .Select(a => BezierSegment.get_bezier_points_for_small_arc(a.begin, a.end))
+                .Select(a => BezierSegment.get_bezier_points_for_small_arc(a.Begin, a.End))
                 .ToArray();
 
             return bez_arr;
@@ -116,13 +116,13 @@ namespace VisioAutomation.Drawing
             var cur = new ArcSegment(start_angle, end_angle);
             while (true)
             {
-                double temp = System.Math.Floor(cur.begin/right_angle);
+                double temp = System.Math.Floor(cur.Begin/right_angle);
                 double cut_angle = (temp + 1)*right_angle;
 
-                if ((cur.begin < cut_angle) && (cut_angle < cur.end))
+                if ((cur.Begin < cut_angle) && (cut_angle < cur.End))
                 {
-                    yield return (new ArcSegment(cur.begin, cut_angle));
-                    cur = new ArcSegment(cut_angle, cur.end);
+                    yield return (new ArcSegment(cur.Begin, cut_angle));
+                    cur = new ArcSegment(cut_angle, cur.End);
                 }
                 else
                 {
