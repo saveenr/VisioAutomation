@@ -35,7 +35,7 @@ namespace VisioPowerShell.Commands.Import
             else if (root.Name == "orgchart")
             {
                 this.WriteVerbose("Loading as an Org Chart");
-                var oc = VAS.OrgChart.OrgChartBuilder.LoadFromXML(this.Client, xmldoc);
+                var oc = VAS.OrgChart.OrgChartBuilder.LoadFromXml(this.Client, xmldoc);
                 this.WriteObject(oc);
             }
             else

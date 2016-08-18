@@ -39,7 +39,7 @@ namespace VisioAutomation.Application
             throw new System.ArgumentException(msg);
         }
 
-        public static string GetXMLErrorLogFilename(IVisio.Application app)
+        public static string GetXmlErrorLogFilename(IVisio.Application app)
         {
             // the location of the xml error log file is specific to the user
             // we need to retrieve it from the registry

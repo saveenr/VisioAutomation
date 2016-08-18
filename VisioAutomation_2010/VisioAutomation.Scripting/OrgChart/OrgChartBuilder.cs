@@ -7,14 +7,13 @@ namespace VisioAutomation.Scripting.OrgChart
 {
     public class OrgChartBuilder
     {
-        public static VAORGCHART.OrgChartDocument LoadFromXML(Client client, string filename)
+        public static VAORGCHART.OrgChartDocument LoadFromXml(Client client, string filename)
         {
             var xdoc = SXL.XDocument.Load(filename);
-            return OrgChartBuilder.LoadFromXML(client, xdoc);
+            return OrgChartBuilder.LoadFromXml(client, xdoc);
         }
 
-        public static VAORGCHART.OrgChartDocument LoadFromXML(Client client,
-                                                             SXL.XDocument xdoc)
+        public static VAORGCHART.OrgChartDocument LoadFromXml(Client client, SXL.XDocument xdoc)
         {
             var root = xdoc.Root;
 
