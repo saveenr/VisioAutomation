@@ -26,12 +26,12 @@ namespace VisioAutomation_Tests.Core.Text
             Assert.AreEqual(0, m0.TabStops.Count);
 
             // clearing tab stops shoudl work even if there are no tab stops
-            VisioAutomation.Text.TextFormat.SetTabStops(s1, no_tab_stops);
+            VisioAutomation.Text.TabStopHelper.SetTabStops(s1, no_tab_stops);
             var m1 = VisioAutomation.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(0, m1.TabStops.Count);
 
             // set the 3 tab stops
-            VisioAutomation.Text.TextFormat.SetTabStops(s1, tabstops);
+            VisioAutomation.Text.TabStopHelper.SetTabStops(s1, tabstops);
 
             // should have exactly the same number we set
             var m2 = VisioAutomation.Text.TextFormat.GetFormat(s1);
@@ -46,7 +46,7 @@ namespace VisioAutomation_Tests.Core.Text
             Assert.AreEqual(VisioAutomation.Text.TabStopAlignment.Decimal, tabstops[3].Alignment);
 
             // clear the tab stops
-            VisioAutomation.Text.TextFormat.SetTabStops(s1, no_tab_stops);
+            VisioAutomation.Text.TabStopHelper.SetTabStops(s1, no_tab_stops);
             var m3 = VisioAutomation.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(0, m3.TabStops.Count);
 

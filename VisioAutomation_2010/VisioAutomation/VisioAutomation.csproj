@@ -126,6 +126,7 @@
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
     <Compile Include="Styles\StyleHelper.cs" />
+    <Compile Include="Text\TabStopHelper.cs" />
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Utilities\WildcardHelper.cs" />

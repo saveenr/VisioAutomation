@@ -106,7 +106,7 @@ namespace VisioAutomation.Models.Dom
 
                 if (shape.TabStops != null)
                 {
-                    VisioAutomation.Text.TextFormat.SetTabStops(shape.VisioShape, shape.TabStops);
+                    VisioAutomation.Text.TabStopHelper.SetTabStops(shape.VisioShape, shape.TabStops);
                 }
             }
         }
