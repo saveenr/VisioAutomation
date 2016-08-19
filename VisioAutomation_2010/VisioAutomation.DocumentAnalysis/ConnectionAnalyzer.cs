@@ -187,16 +187,16 @@ namespace VisioAutomation.DocumentAnalysis
             }
         }
 
-        public static IEnumerable<DirectedEdge<A, object>> GetClosureFromEdges<A, B>(
-            IEnumerable<DirectedEdge<A, B>> edges)
+        public static IEnumerable<DirectedEdge<TNode, object>> GetClosureFromEdges<TNode, TData>(
+            IEnumerable<DirectedEdge<TNode, TData>> edges)
         {
             if (edges == null)
             {
                 throw new System.ArgumentNullException(nameof(edges));
             }
 
-            var object_to_id = new Dictionary<A, int>();
-            var id_to_object = new Dictionary<int, A>();
+            var object_to_id = new Dictionary<TNode, int>();
+            var id_to_object = new Dictionary<int, TNode>();
 
             foreach (var edge in edges)
             {
@@ -248,7 +248,7 @@ namespace VisioAutomation.DocumentAnalysis
                 {
                     if (warshall_result.Get(row, col) && (row!=col))
                     {
-                        var de = new DirectedEdge<A, object>(id_to_object[row], id_to_object[col], null);
+                        var de = new DirectedEdge<TNode, object>(id_to_object[row], id_to_object[col], null);
                         yield return de;
                     }
                 }
