@@ -64,12 +64,6 @@ namespace VisioAutomation.ShapeSheetQuery.Utilities
                 throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
-            var formulas = get_formulas_array(formulas_sa, numitems);
-            return formulas;
-        }
-
-        private static string[] get_formulas_array(System.Array formulas_sa, int numitems)
-        {
             object[] formulas_obj_array = (object[])formulas_sa;
 
             if (formulas_obj_array.Length != numitems)
@@ -131,13 +125,6 @@ namespace VisioAutomation.ShapeSheetQuery.Utilities
                 throw new System.ArgumentException("Unhandled Target");
             }
 
-            var results = get_results_array<TResult>(results_sa, numitems);
-            return results;
-        }
-
-
-        private static TResult[] get_results_array<TResult>(System.Array results_sa, int numitems)
-        {
             if (results_sa.Length != numitems)
             {
                 string msg = string.Format("Expected {0} items from GetResults but only received {1}", numitems,
@@ -145,7 +132,7 @@ namespace VisioAutomation.ShapeSheetQuery.Utilities
                 throw new AutomationException(msg);
             }
 
-            TResult[] results = new TResult[results_sa.Length];
+            var results = new TResult[results_sa.Length];
             results_sa.CopyTo(results, 0);
             return results;
         }
