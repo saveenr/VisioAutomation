@@ -71,7 +71,9 @@ namespace VisioAutomation.ShapeSheetQuery
             var unitcodes = this.BuildUnitCodeArray(1);
             var values = QueryHelpers.GetResults_SRC<TResult>(surface, srcstream, unitcodes);
             var r = new Output<TResult>(surface.Target.ID16);
-            this.FillOutputForSingleShape<TResult>(0, values, 0, r);
+            var shape_index = 0;
+            var start_at_cell = 0;
+            this.FillOutputForSingleShape<TResult>(shape_index, values, start_at_cell, r);
             return r;
         }
 
@@ -84,6 +86,7 @@ namespace VisioAutomation.ShapeSheetQuery
 
             int numcells = this.GetTotalCellCount(numshapes);
             var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
+
             for (int i = 0; i < numshapes; i++)
             {
                 foreach (var col in this.Cells)
@@ -93,15 +96,12 @@ namespace VisioAutomation.ShapeSheetQuery
 
                 if (this._subquery_shape_info.Count>0)
                 {
-                    var per_shape_data = this._subquery_shape_info[i];
-                    foreach (var sec in per_shape_data)
+                    foreach (var subquery_details in this._subquery_shape_info[i])
                     {
-                        foreach (var row_index in sec.RowIndexes)
+                        foreach (var row_index in subquery_details.RowIndexes)
                         {
-                            foreach (var col in sec.SubQuery.Columns)
-                            {
-                                unitcodes.Add(col.UnitCode);
-                            }
+                            var subquery_unitcodes = subquery_details.SubQuery.Columns.Select(col => col.UnitCode);
+                            unitcodes.AddRange(subquery_unitcodes);
                         }
                     }
                 }
@@ -126,7 +126,9 @@ namespace VisioAutomation.ShapeSheetQuery
             var combined_data = CellData<TResult>.Combine(results, formulas);
 
             var r = new Output<ShapeSheet.CellData<TResult>>(surface.Target.ID16);
-            this.FillOutputForSingleShape<ShapeSheet.CellData<TResult>>(0, combined_data, 0, r);
+            var shape_index = 0;
+            var start_at_cell = 0;
+            this.FillOutputForSingleShape<ShapeSheet.CellData<TResult>>(shape_index, combined_data, start_at_cell, r);
             return r;
         }
 
@@ -379,17 +381,17 @@ namespace VisioAutomation.ShapeSheetQuery
             }
         }
 
-        private static short GetNumRowsForSection(IVisio.Shape shape, SubQuery sec)
+        private static short GetNumRowsForSection(IVisio.Shape shape, SubQuery subquery)
         {
             // For visSectionObject we know the result is always going to be 1
             // so avoid making the call tp RowCount[]
-            if (sec.SectionIndex == IVisio.VisSectionIndices.visSectionObject)
+            if (subquery.SectionIndex == IVisio.VisSectionIndices.visSectionObject)
             {
                 return 1;
             }
 
             // For all other cases use RowCount[]
-            return shape.RowCount[(short)sec.SectionIndex];
+            return shape.RowCount[(short)subquery.SectionIndex];
         }
 
         private int GetTotalCellCount(int numshapes)
