@@ -4,6 +4,8 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
 {
     public class ListColumnSubQuery : ListColumnBase<ColumnSubQuery>
     {
+        private HashSet<short> _cellindex_set;
+
         internal ListColumnSubQuery() :
             base(0)
         {
@@ -15,16 +17,22 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
 
         public ColumnSubQuery Add(short cell, string name)
         {
-            name = this.fixup_name(name);
-
-            if (this._dic_columns.ContainsKey(name))
+            if (this._cellindex_set == null)
             {
-                throw new AutomationException("Duplicate Column Name");
+                this._cellindex_set = new HashSet<short>();
             }
 
-            int ordinal = this._columns.Count;
+            if (this._cellindex_set.Contains(cell))
+            {
+                string msg = "Duplicate Cell Index";
+                throw new AutomationException(msg);
+            }
+
+            name = this.fixup_name(name);
+            int ordinal = this._items.Count;
             var col = new ColumnSubQuery(ordinal, cell, name);
-            this._columns.Add(col);
+            this._items.Add(col);
+            this._cellindex_set.Add(cell);
             return col;
         }
     }

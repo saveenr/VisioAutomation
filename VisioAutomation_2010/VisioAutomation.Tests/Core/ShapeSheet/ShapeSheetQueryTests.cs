@@ -461,5 +461,58 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             doc1.Close(true);
         }
+
+        [TestMethod]
+        public void ShapeSheet_Query_TestDuplicates()
+        {
+            // Ensure that duplicate cells are caught
+            var q1 = new VisioAutomation.ShapeSheet.Queries.Query();
+            q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+
+            bool caught_exc1 = false;
+            try
+            {
+                q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+            }
+            catch (VA.AutomationException)
+            {
+                caught_exc1 = true;
+            }
+
+            Assert.IsTrue(caught_exc1);
+
+            // Ensure that duplicate sections are caught
+
+            var q2 = new VisioAutomation.ShapeSheet.Queries.Query();
+            q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+
+            bool caught_exc2 = false;
+            try
+            {
+                q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+            }
+            catch (VA.AutomationException)
+            {
+                caught_exc2 = true;
+            }
+
+            Assert.IsTrue(caught_exc2);
+
+            // Ensure that Duplicates in Section Queries Are caught - 
+            var q3 = new VisioAutomation.ShapeSheet.Queries.Query();
+            var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+            sec.AddCell(VA.ShapeSheet.SRCConstants.PinX,"PinX");
+            bool caught_exc3 = false;
+            try
+            {
+                sec.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+            }
+            catch (VA.AutomationException)
+            {
+                caught_exc3 = true;
+            }
+
+            Assert.IsTrue(caught_exc3);
+        }
     }
 }

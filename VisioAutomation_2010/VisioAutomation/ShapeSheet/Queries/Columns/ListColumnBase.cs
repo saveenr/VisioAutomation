@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Queries.Columns
 {
-    public class ListColumnBase<TColumn> : IEnumerable<TColumn> where TColumn : ColumnBase
+    public class ListColumnBase<T> : IEnumerable<T> where T : ColumnBase
     {
-        protected IList<TColumn> _columns;
-        protected Dictionary<string, TColumn> _dic_columns;
+        protected IList<T> _items;
+        protected Dictionary<string, T> _dic_columns;
 
         internal ListColumnBase() : this(0)
         {
@@ -13,13 +13,13 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
 
         internal ListColumnBase(int capacity)
         {
-            this._columns = new List<TColumn>(capacity);
-            this._dic_columns = new Dictionary<string, TColumn>(capacity);
+            this._items = new List<T>(capacity);
+            this._dic_columns = new Dictionary<string, T>(capacity);
         }
 
-        public IEnumerator<TColumn> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-            return (this._columns).GetEnumerator();
+            return (this._items).GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -27,9 +27,9 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
             return this.GetEnumerator();
         }
 
-        public TColumn this[int index] => this._columns[index];
+        public T this[int index] => this._items[index];
 
-        public TColumn this[string name] => this._dic_columns[name];
+        public T this[string name] => this._dic_columns[name];
 
         public bool Contains(string name) => this._dic_columns.ContainsKey(name);
 
@@ -37,12 +37,12 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
         {
             if (string.IsNullOrEmpty(name))
             {
-                name = string.Format("Col{0}", this._columns.Count);
+                name = string.Format("Col{0}", this._items.Count);
             }
             return name;
         }
 
-        public int Count => this._columns.Count;
+        public int Count => this._items.Count;
 
     }
 }
