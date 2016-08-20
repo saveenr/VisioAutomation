@@ -85,7 +85,7 @@ namespace VisioAutomation_Tests
 
         public static VisioAutomation.Drawing.Size GetSize(IVisio.Shape shape)
         {
-            var query = new VisioAutomation.ShapeSheetQuery.Query();
+            var query = new VisioAutomation.ShapeSheet.Queries.Query();
             var col_w = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Width,"Width");
             var col_h = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Height,"Height");
 
@@ -158,7 +158,7 @@ namespace VisioAutomation_Tests
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var query = new VisioAutomation.ShapeSheetQuery.Query();
+            var query = new VisioAutomation.ShapeSheet.Queries.Query();
             var col_height = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
             var col_width = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
 

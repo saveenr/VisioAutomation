@@ -2,13 +2,13 @@
 using System.Data;
 using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheetQuery.Outputs;
+using VisioAutomation.ShapeSheet.Queries.Outputs;
 
 namespace VisioPowerShell
 {
     static class Helpers
     {
-        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheetQuery.Query cellQuery, ListOutput<T> query_output)
+        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheet.Queries.Query cellQuery, ListOutput<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
@@ -40,7 +40,7 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheetQuery.Query cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, ShapeSheetSurface surface)
+        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheet.Queries.Query cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, ShapeSheetSurface surface)
         {
             if (!getresults)
             {

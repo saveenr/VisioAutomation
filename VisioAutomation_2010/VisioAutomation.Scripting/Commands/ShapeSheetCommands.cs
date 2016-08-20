@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
-using VisioAutomation.ShapeSheetQuery.Outputs;
-using VAQUERY = VisioAutomation.ShapeSheetQuery;
+using VisioAutomation.ShapeSheet.Queries.Outputs;
+using VAQUERY = VisioAutomation.ShapeSheet.Queries;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands

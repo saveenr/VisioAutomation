@@ -169,7 +169,7 @@ namespace VisioAutomation.Pages
 
         private static Drawing.Size GetSize(IVisio.Page page)
         {
-            var query = new ShapeSheetQuery.Query();
+            var query = new ShapeSheet.Queries.Query();
             var col_height = query.AddCell(ShapeSheet.SRCConstants.PageHeight,"PageHeight");
             var col_width = query.AddCell(ShapeSheet.SRCConstants.PageWidth,"PageWidth");
 

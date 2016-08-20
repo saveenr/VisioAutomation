@@ -72,7 +72,7 @@ namespace VisioAutomationSamples
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var query = new VA.ShapeSheetQuery.Query();
+            var query = new VisioAutomation.ShapeSheet.Queries.Query();
             var col_height = query.AddCell(VA.ShapeSheet.SRCConstants.PageHeight,"PageHeight");
             var col_width = query.AddCell(VA.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
 

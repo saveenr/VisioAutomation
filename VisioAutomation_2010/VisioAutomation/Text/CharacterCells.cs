@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheetQuery.QueryGroups;
+using VisioAutomation.ShapeSheet.Queries.QueryGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterCells : ShapeSheetQuery.QueryGroups.QueryGroupMultiRow
+    public class CharacterCells : ShapeSheet.Queries.QueryGroups.QueryGroupMultiRow
     {
         public ShapeSheet.CellData<int> Color { get; set; }
         public ShapeSheet.CellData<int> Font { get; set; }
@@ -62,16 +62,16 @@ namespace VisioAutomation.Text
         public static IList<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = CharacterCells.lazy_query.Value;
-            return ShapeSheetQuery.QueryGroups.QueryGroupMultiRow._GetCells<CharacterCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheet.Queries.QueryGroups.QueryGroupMultiRow._GetCells<CharacterCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<CharacterCells> GetCells(IVisio.Shape shape)
         {
             var query = CharacterCells.lazy_query.Value;
-            return ShapeSheetQuery.QueryGroups.QueryGroupMultiRow._GetCells<CharacterCells, double>(shape, query, query.GetCells);
+            return ShapeSheet.Queries.QueryGroups.QueryGroupMultiRow._GetCells<CharacterCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheetQuery.CommonQueries.CharacterFormatCellsQuery> lazy_query = new System.Lazy<ShapeSheetQuery.CommonQueries.CharacterFormatCellsQuery>();
+        private static System.Lazy<ShapeSheet.Queries.CommonQueries.CharacterFormatCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.CharacterFormatCellsQuery>();
 
 
     }
