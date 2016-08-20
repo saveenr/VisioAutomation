@@ -33,7 +33,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
 
         public bool Contains(string name) => this._dic_columns.ContainsKey(name);
 
-        protected string fixup_name(string name)
+        protected string normalize_name(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -44,5 +44,12 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
 
         public int Count => this._items.Count;
 
+        protected void check_duplicate_column_name(string name)
+        {
+            if (this._dic_columns.ContainsKey(name))
+            {
+                throw new AutomationException("Duplicate Column Name");
+            }
+        }
     }
 }

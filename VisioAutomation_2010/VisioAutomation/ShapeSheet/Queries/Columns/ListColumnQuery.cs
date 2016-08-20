@@ -15,17 +15,23 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
         {
         }
 
-        internal ColumnQuery Add(ShapeSheet.SRC src) => this.Add(src, null);
-
         internal ColumnQuery Add(ShapeSheet.SRC src, string name)
         {
-            name = this.fixup_name(name);
+            check_deplicate_src(src);
+            string norm_name = this.normalize_name(name);
+            check_duplicate_column_name(norm_name);
 
-            if (this._dic_columns.ContainsKey(name))
-            {
-                throw new AutomationException("Duplicate Column Name");
-            }
+            int ordinal = this._items.Count;
+            var col = new ColumnQuery(ordinal, src, norm_name);
+            this._items.Add(col);
 
+            this._dic_columns[norm_name] = col;
+            this._src_set.Add(src);
+            return col;
+        }
+
+        private void check_deplicate_src(SRC src)
+        {
             if (this._src_set == null)
             {
                 this._src_set = new HashSet<ShapeSheet.SRC>();
@@ -33,18 +39,9 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
 
             if (this._src_set.Contains(src))
             {
-                string msg = "Duplicate SRC";
+                string msg = string.Format("Duplicate SRC({0},{1},{2})", src.Section, src.Row, src.Cell);
                 throw new AutomationException(msg);
             }
-
-            int ordinal = this._items.Count;
-            var col = new ColumnQuery(ordinal, src, name);
-            this._items.Add(col);
-
-            this._dic_columns[name] = col;
-            this._src_set.Add(src);
-            return col;
         }
-
     }
 }
