@@ -60,7 +60,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             var values = QueryHelpers.GetFormulasU_SRC(surface, srcstream);
             var shape_index = 0;
             var cursor = 0;
-            var output_for_shape = this.CreateOutputForShape<string>(surface.Target.ID16,shape_index, values, ref cursor);
+            var output_for_shape = this.CreateOutputForShape<string>(surface.Target.ID16, values, shape_index, cursor);
 
             return output_for_shape;
         }
@@ -73,7 +73,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             var values = QueryHelpers.GetResults_SRC<TResult>(surface, srcstream, unitcodes);
             var shape_index = 0;
             var cursor = 0;
-            var output_for_shape = this.CreateOutputForShape<TResult>(surface.Target.ID16,shape_index, values, ref cursor);
+            var output_for_shape = this.CreateOutputForShape<TResult>(surface.Target.ID16, values, shape_index, cursor);
             return output_for_shape;
         }
 
@@ -127,7 +127,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
             var shape_index = 0;
             var cursor = 0;
-            var output_for_shape = this.CreateOutputForShape<ShapeSheet.CellData<TResult>>(surface.Target.ID16, shape_index, combined_data, ref cursor);
+            var output_for_shape = this.CreateOutputForShape<ShapeSheet.CellData<TResult>>(surface.Target.ID16, combined_data, shape_index, cursor);
             return output_for_shape;
         }
 
@@ -172,14 +172,15 @@ namespace VisioAutomation.ShapeSheet.Queries
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var output_for_shape =  this.CreateOutputForShape<T>((short)shapeid, shape_index, values, ref cursor );
+                var output_for_shape =  this.CreateOutputForShape<T>((short)shapeid, values, shape_index, cursor);
                 output_for_all_shapes.Add(output_for_shape);
+                cursor += output_for_shape.TotalCells;
             }
             
             return output_for_all_shapes;
         }
 
-        private Output<T> CreateOutputForShape<T>(short shapeid, int shape_index, T[] values, ref int cursor)
+        private Output<T> CreateOutputForShape<T>(short shapeid, T[] values, int shape_index, int cursor)
         {
             var output = new Output<T>(shapeid);
             // Keep a count of how many cells this method is using
@@ -226,6 +227,7 @@ namespace VisioAutomation.ShapeSheet.Queries
                 }
             }
 
+            output.TotalCells = cellcount;
             cursor += cellcount;
 
             return output;
