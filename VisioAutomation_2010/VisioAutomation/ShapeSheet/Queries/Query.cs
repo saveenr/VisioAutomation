@@ -101,7 +101,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             this.Freeze();
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var values = QueryHelpers.GetFormulasU_SIDSRC(surface, srcstream);
-            var list = this._CreateOutputsForShapes(shapeids, values);
+            var list = this._create_outputs_for_shapes(shapeids, values);
             return list;
         }
 
@@ -111,7 +111,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
             var values = QueryHelpers.GetResults_SIDSRC<TResult>(surface, srcstream, unitcodes);
-            var list = this._CreateOutputsForShapes(shapeids, values);
+            var list = this._create_outputs_for_shapes(shapeids, values);
             return list;
         }
 
@@ -124,11 +124,11 @@ namespace VisioAutomation.ShapeSheet.Queries
             var results = QueryHelpers.GetResults_SIDSRC<TResult>(surface, srcstream, unitcodes);
             var formulas  = QueryHelpers.GetFormulasU_SIDSRC(surface, srcstream);
             var combined_data = CellData <TResult>.Combine(results, formulas);
-            var r = this._CreateOutputsForShapes(shapeids, combined_data);
+            var r = this._create_outputs_for_shapes(shapeids, combined_data);
             return r;
         }
 
-        private ListOutput<T> _CreateOutputsForShapes<T>(IList<int> shapeids, T[] values)
+        private ListOutput<T> _create_outputs_for_shapes<T>(IList<int> shapeids, T[] values)
         {
             var output_for_all_shapes = new ListOutput<T>();
 
