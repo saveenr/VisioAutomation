@@ -431,6 +431,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_Demo_AllCellsAndSections()
         {
+            // Verifies that  "complex" query can be run. This test case constructs
+            // a query that goes against event known cell and section. Importantly, the
+            // sections that support multiple rows are retrieved via subqueries
+            //
+            // NOTE: This test only verifies that the query will succeed. It doesn't
+            // validate the values that are retrieved
+
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
             VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
@@ -442,19 +449,16 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
 
+            // Dictionary of Cell Names to SRCs (excluding invalid sections)
             var name_to_src = GetSRCDictionary();
-            var section_to_secquery = new Dictionary<short,VisioAutomation.ShapeSheet.Queries.SubQuery>();
+            name_to_src = name_to_src.Where( pair => !section_is_skippable(pair.Value)).ToDictionary(pair=>pair.Key,pair=>pair.Value);
+
+            var section_to_subquery = new Dictionary<short,VisioAutomation.ShapeSheet.Queries.SubQuery>();
 
             foreach (var kv in name_to_src)
             {
                 var name = kv.Key;
                 var src = kv.Value;
-
-                // Ignore Sections we don't care about
-                if (section_is_skippable(src))
-                {
-                    continue;
-                }
 
                 if (src.Section == (short) IVisio.VisSectionIndices.visSectionObject)
                 {
@@ -462,17 +466,17 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 }
                 else
                 {
-                    VisioAutomation.ShapeSheet.Queries.SubQuery sec_col;
-                    if (!section_to_secquery.ContainsKey(src.Section))
+                    VisioAutomation.ShapeSheet.Queries.SubQuery subquery;
+                    if (!section_to_subquery.ContainsKey(src.Section))
                     {
-                        sec_col = query.AddSubQuery((IVisio.VisSectionIndices)src.Section);
-                        section_to_secquery[src.Section] = sec_col;
+                        subquery = query.AddSubQuery((IVisio.VisSectionIndices)src.Section);
+                        section_to_subquery[src.Section] = subquery;
                     }
                     else
                     {
-                        sec_col = section_to_secquery[src.Section];
+                        subquery = section_to_subquery[src.Section];
                     }
-                    sec_col.AddCell(src, name);
+                    subquery.AddCell(src, name);
                 }
             }
 
@@ -480,6 +484,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape_surface = new ShapeSheetSurface(s1);
             var formulas1 = query.GetFormulas(shape_surface);
             var formulas2 = query.GetFormulas(page_surface,new [] {s1.ID,s2.ID});
+            var results1 = query.GetResults<double>(shape_surface);
+            var results2 = query.GetResults<double>(page_surface, new[] { s1.ID, s2.ID });
 
             doc1.Close(true);
         }
