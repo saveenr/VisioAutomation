@@ -161,20 +161,22 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             var output = new Output<T>(shapeid);
             // Keep a count of how many cells this method is using
-            int cellcount = 0;
+            int cells_at_top_level = 0;
 
             // First Copy the Query Cell Values into the output
             output.Cells = new T[this.Cells.Count];
-            for (cellcount = 0; cellcount < this.Cells.Count; cellcount++)
+            for (cells_at_top_level = 0; cells_at_top_level < this.Cells.Count; cells_at_top_level++)
             {
-                output.Cells[cellcount] = values[values_cursor+cellcount];
+                output.Cells[cells_at_top_level] = values[values_cursor+cells_at_top_level];
             }
 
             // Verify that we have used as many cells as we expect
-            if (cellcount != this.Cells.Count)
+            if (cells_at_top_level != this.Cells.Count)
             {
                 throw new VisioAutomation.AutomationException("Internal Error: Mismatch in number of expected cells");                    
             }
+
+            int cells_in_subqueries = 0;
 
             // Now copy the Section values over
             if (subqueries != null)
@@ -199,11 +201,12 @@ namespace VisioAutomation.ShapeSheet.Queries
 
                     output.Sections.Add(subquery_output);
 
-                    cellcount += (num_cols * subquery.RowCount);
                 }
+
+                cells_in_subqueries = subqueries.Select(sq => sq.RowCount*sq.SubQuery.Columns.Count).Sum();
             }
 
-            output.TotalCells = cellcount;
+            output.TotalCells = cells_at_top_level + cells_in_subqueries;
 
             return output;
         }
