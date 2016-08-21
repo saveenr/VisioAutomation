@@ -58,10 +58,12 @@ namespace VisioAutomation.ShapeSheet.Queries
             this.Freeze();
             var srcstream = this.BuildSRCStream(surface);
             var values = QueryHelpers.GetFormulasU_SRC(surface, srcstream);
-            var r = new Output<string>(surface.Target.ID16);
-            this.FillOutputForSingleShape<string>(0, values, 0, r);
+            var output_for_shape = new Output<string>(surface.Target.ID16);
+            var shape_index = 0;
+            var start_at_cell = 0;
+            this.FillOutputForSingleShape<string>(shape_index, values, start_at_cell, output_for_shape);
 
-            return r;
+            return output_for_shape;
         }
 
         public Output<TResult> GetResults<TResult>(ShapeSheetSurface surface)
@@ -70,11 +72,11 @@ namespace VisioAutomation.ShapeSheet.Queries
             var srcstream = this.BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
             var values = QueryHelpers.GetResults_SRC<TResult>(surface, srcstream, unitcodes);
-            var r = new Output<TResult>(surface.Target.ID16);
+            var output_for_shape = new Output<TResult>(surface.Target.ID16);
             var shape_index = 0;
             var start_at_cell = 0;
-            this.FillOutputForSingleShape<TResult>(shape_index, values, start_at_cell, r);
-            return r;
+            this.FillOutputForSingleShape<TResult>(shape_index, values, start_at_cell, output_for_shape);
+            return output_for_shape;
         }
 
         private IList<IVisio.VisUnitCodes> BuildUnitCodeArray(int numshapes)
@@ -125,11 +127,11 @@ namespace VisioAutomation.ShapeSheet.Queries
             var results = QueryHelpers.GetResults_SRC<TResult>(surface, srcstream, unitcodes);
             var combined_data = CellData<TResult>.Combine(results, formulas);
 
-            var r = new Output<ShapeSheet.CellData<TResult>>(surface.Target.ID16);
+            var output_for_shape = new Output<ShapeSheet.CellData<TResult>>(surface.Target.ID16);
             var shape_index = 0;
             var start_at_cell = 0;
-            this.FillOutputForSingleShape<ShapeSheet.CellData<TResult>>(shape_index, combined_data, start_at_cell, r);
-            return r;
+            this.FillOutputForSingleShape<ShapeSheet.CellData<TResult>>(shape_index, combined_data, start_at_cell, output_for_shape);
+            return output_for_shape;
         }
 
 

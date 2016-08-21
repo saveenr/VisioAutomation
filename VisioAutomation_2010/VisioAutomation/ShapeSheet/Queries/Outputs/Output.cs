@@ -8,9 +8,9 @@ namespace VisioAutomation.ShapeSheet.Queries.Outputs
         public T[] Cells { get; internal set; }
         public List<SubQueryOutput<T>> Sections { get; internal set; }
 
-        internal Output(int sid)
+        internal Output(int shape_id)
         {
-            this.ShapeID = sid;
+            this.ShapeID = shape_id;
         }
     }
 }
