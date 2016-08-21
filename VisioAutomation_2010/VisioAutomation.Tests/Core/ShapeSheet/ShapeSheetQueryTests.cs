@@ -406,6 +406,28 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             return can_skip;
         }
 
+        public static Dictionary<string, SRC> GetSRCDictionary()
+        {
+            var srcconstants_t = typeof(SRCConstants);
+
+            var binding_flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static;
+
+            // find all the static properties that return SRC types
+            var src_type = typeof(SRC);
+            var props = srcconstants_t.GetProperties(binding_flags)
+                .Where(p => p.PropertyType == src_type);
+
+            var fields_name_to_value = new Dictionary<string, SRC>();
+            foreach (var propinfo in props)
+            {
+                var src = (SRC)propinfo.GetValue(null, null);
+                var name = propinfo.Name;
+                fields_name_to_value[name] = src;
+            }
+
+            return fields_name_to_value;
+        }
+
         [TestMethod]
         public void ShapeSheet_Query_Demo_AllCellsAndSections()
         {
@@ -420,7 +442,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
 
-            var name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
+            var name_to_src = GetSRCDictionary();
             var section_to_secquery = new Dictionary<short,VisioAutomation.ShapeSheet.Queries.SubQuery>();
 
             foreach (var kv in name_to_src)
