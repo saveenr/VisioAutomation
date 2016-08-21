@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
 using VisioAutomation.ShapeSheet.Queries.Utilities;
@@ -77,44 +76,6 @@ namespace VisioAutomation.ShapeSheet.Queries
             var subqueryinfo = this.safe_get_subquery_output_for_shape(shape_index);
             var output_for_shape = this.CreateOutputForShape<TResult>(surface.Target.ID16, values, cursor, subqueryinfo);
             return output_for_shape;
-        }
-
-        private IList<IVisio.VisUnitCodes> BuildUnitCodeArray(int numshapes)
-        {
-            if (numshapes < 1)
-            {
-                throw  new AutomationException("Internal Error: numshapes must be >=1");
-            }
-
-            int numcells = this.GetTotalCellCount(numshapes);
-            var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
-
-            for (int i = 0; i < numshapes; i++)
-            {
-                foreach (var col in this.Cells)
-                {
-                    unitcodes.Add(col.UnitCode);                    
-                }
-
-                if (this._subquery_shape_info.Count>0)
-                {
-                    foreach (var subquery_details in this._subquery_shape_info[i])
-                    {
-                        foreach (var row_index in subquery_details.RowIndexes)
-                        {
-                            var subquery_unitcodes = subquery_details.SubQuery.Columns.Select(col => col.UnitCode);
-                            unitcodes.AddRange(subquery_unitcodes);
-                        }
-                    }
-                }
-            }
-
-            if (numcells != unitcodes.Count)
-            {
-                throw new AutomationException("Internal Error: Number of unit codes must match number of cells");
-            }
-
-            return unitcodes;
         }
 
         public Output<ShapeSheet.CellData<TResult>> GetFormulasAndResults<TResult>(ShapeSheetSurface surface)
@@ -424,6 +385,44 @@ namespace VisioAutomation.ShapeSheet.Queries
             }
             
             return count;
+        }
+
+        private IList<IVisio.VisUnitCodes> BuildUnitCodeArray(int numshapes)
+        {
+            if (numshapes < 1)
+            {
+                throw new AutomationException("Internal Error: numshapes must be >=1");
+            }
+
+            int numcells = this.GetTotalCellCount(numshapes);
+            var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
+
+            for (int i = 0; i < numshapes; i++)
+            {
+                foreach (var col in this.Cells)
+                {
+                    unitcodes.Add(col.UnitCode);
+                }
+
+                if (this._subquery_shape_info.Count > 0)
+                {
+                    foreach (var subquery_details in this._subquery_shape_info[i])
+                    {
+                        foreach (var row_index in subquery_details.RowIndexes)
+                        {
+                            var subquery_unitcodes = subquery_details.SubQuery.Columns.Select(col => col.UnitCode);
+                            unitcodes.AddRange(subquery_unitcodes);
+                        }
+                    }
+                }
+            }
+
+            if (numcells != unitcodes.Count)
+            {
+                throw new AutomationException("Internal Error: Number of unit codes must match number of cells");
+            }
+
+            return unitcodes;
         }
     }
 }
