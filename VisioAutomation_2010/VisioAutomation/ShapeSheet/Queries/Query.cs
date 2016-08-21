@@ -184,26 +184,26 @@ namespace VisioAutomation.ShapeSheet.Queries
                 {
                     var subquery_output = new SubQueryOutput<T>(subquery.RowCount);
 
-                    output.Sections.Add(subquery_output);
-
+                    int num_cols = subquery.SubQuery.Columns.Count;
                     foreach (int row_index in subquery.RowIndexes)
                     {
-                        var row_values = new T[subquery.SubQuery.Columns.Count];
-                        int num_cols = row_values.Length;
-                        for (int c = 0; c < row_values.Length; c++)
+                        var row_values = new T[num_cols];
+                        var source_start = values_cursor + (num_cols * row_index);
+                        for (int col_index = 0; col_index < num_cols; col_index++)
                         {
-                            int index = values_cursor + cellcount + c;
-                            row_values[c] = values[index];
+                            row_values[col_index] = values[source_start + col_index];
                         }
                         var sec_res_row = new SubQueryOutputRow<T>(row_values);
                         subquery_output.Rows.Add(sec_res_row);
-                        cellcount += num_cols;
                     }
+
+                    output.Sections.Add(subquery_output);
+
+                    cellcount += (num_cols * subquery.RowCount);
                 }
             }
 
             output.TotalCells = cellcount;
-            values_cursor += cellcount;
 
             return output;
         }
