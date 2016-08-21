@@ -3,10 +3,6 @@ namespace VisioAutomation
     [System.Serializable]
     public class AutomationException : System.Exception
     {
-        // For guidelines regarding the creation of new exception types, see
-        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
-        // and
-        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         public AutomationException()
         {
         }
@@ -27,4 +23,53 @@ namespace VisioAutomation
         {
         }
     }
+
+    [System.Serializable]
+    public class QueryFrozenException : AutomationException
+    {
+        public QueryFrozenException()
+        {
+        }
+
+        public QueryFrozenException(string message) : base(message)
+        {
+        }
+
+        public QueryFrozenException(string message, System.Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected QueryFrozenException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
+
+    [System.Serializable]
+    public class DuplicateQueryColumnException : AutomationException
+    {
+        public DuplicateQueryColumnException()
+        {
+        }
+
+        public DuplicateQueryColumnException(string message) : base(message)
+        {
+        }
+
+        public DuplicateQueryColumnException(string message, System.Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected DuplicateQueryColumnException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
+
 }

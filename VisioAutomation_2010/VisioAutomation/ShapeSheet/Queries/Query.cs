@@ -26,7 +26,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             if (this._is_frozen)
             {
-                throw new AutomationException("Further Modifications to this Query are not allowed");
+                throw new QueryFrozenException("Further Modifications to this Query are not allowed");
             }
         }
 
@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             if (name == null)
             {
-                throw new System.ArgumentException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             var col = this.Cells.Add(src, name);

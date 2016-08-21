@@ -512,7 +512,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             }
-            catch (VA.AutomationException)
+            catch (VA.DuplicateQueryColumnException)
             {
                 caught_exc1 = true;
             }
@@ -529,7 +529,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             }
-            catch (VA.AutomationException)
+            catch (VA.DuplicateQueryColumnException)
             {
                 caught_exc2 = true;
             }
