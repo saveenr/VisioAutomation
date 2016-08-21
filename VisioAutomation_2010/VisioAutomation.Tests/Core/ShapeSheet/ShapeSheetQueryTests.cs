@@ -468,8 +468,17 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             name_to_src = name_to_src.Where(pair => !section_is_skippable(pair.Value))
                 .ToDictionary(pair => pair.Key, pair => pair.Value);
 
-            var section_to_subquery = new Dictionary<short, VisioAutomation.ShapeSheet.Queries.SubQuery>();
+            // Create a dictionary of the subqueries for each section, this
+            // will be reused as fill in the query
+            var unique_section_ids = name_to_src.Select(pair => pair.Value).Select(src => src.Section).Distinct().ToList();
+            var section_to_subquery = new Dictionary<short, VisioAutomation.ShapeSheet.Queries.SubQuery>(unique_section_ids.Count);
+            foreach (short section_id in unique_section_ids.Where(i=>i!=(short)IVisio.VisSectionIndices.visSectionObject))
+            {
+                    section_to_subquery[section_id] = query.AddSubQuery((IVisio.VisSectionIndices)section_id);
+            }
 
+            // Now for each src add it as a top level cell, or as a cell in 
+            // a subquery depending on its section index
             foreach (var kv in name_to_src)
             {
                 var name = kv.Key;
@@ -481,16 +490,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 }
                 else
                 {
-                    VisioAutomation.ShapeSheet.Queries.SubQuery subquery;
-                    if (!section_to_subquery.ContainsKey(src.Section))
-                    {
-                        subquery = query.AddSubQuery((IVisio.VisSectionIndices) src.Section);
-                        section_to_subquery[src.Section] = subquery;
-                    }
-                    else
-                    {
-                        subquery = section_to_subquery[src.Section];
-                    }
+                    // the subquery will always be in the dictionary
+                    // because the dictionary was populated in a previous
+                    // step
+                    var subquery = section_to_subquery[src.Section];
                     subquery.AddCell(src, name);
                 }
             }
