@@ -7,7 +7,6 @@ namespace VisioAutomation.ShapeSheet.Queries.Outputs
         public int ShapeID { get; private set; }
         public T[] Cells { get; internal set; }
         public List<SubQueryOutput<T>> Sections { get; internal set; }
-        internal int TotalCells;
 
         internal Output(int shape_id)
         {
