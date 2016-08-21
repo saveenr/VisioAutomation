@@ -161,19 +161,12 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             var output = new Output<T>(shapeid);
             // Keep a count of how many cells this method is using
-            int cells_at_top_level = 0;
 
             // First Copy the Query Cell Values into the output
             output.Cells = new T[this.Cells.Count];
-            for (cells_at_top_level = 0; cells_at_top_level < this.Cells.Count; cells_at_top_level++)
+            for (int i = 0; i < this.Cells.Count; i++)
             {
-                output.Cells[cells_at_top_level] = values[values_cursor+cells_at_top_level];
-            }
-
-            // Verify that we have used as many cells as we expect
-            if (cells_at_top_level != this.Cells.Count)
-            {
-                throw new VisioAutomation.AutomationException("Internal Error: Mismatch in number of expected cells");                    
+                output.Cells[i] = values[values_cursor++];
             }
 
             int cells_in_subqueries = 0;
@@ -190,10 +183,9 @@ namespace VisioAutomation.ShapeSheet.Queries
                     foreach (int row_index in subquery.RowIndexes)
                     {
                         var row_values = new T[num_cols];
-                        var source_start = values_cursor + (num_cols * row_index);
                         for (int col_index = 0; col_index < num_cols; col_index++)
                         {
-                            row_values[col_index] = values[source_start + col_index];
+                            row_values[col_index] = values[values_cursor++];
                         }
                         var sec_res_row = new SubQueryOutputRow<T>(row_values);
                         subquery_output.Rows.Add(sec_res_row);
@@ -206,7 +198,7 @@ namespace VisioAutomation.ShapeSheet.Queries
                 cells_in_subqueries = subqueries.Select(sq => sq.RowCount*sq.SubQuery.Columns.Count).Sum();
             }
 
-            output.TotalCells = cells_at_top_level + cells_in_subqueries;
+            output.TotalCells = this.Cells.Count + cells_in_subqueries;
 
             return output;
         }
