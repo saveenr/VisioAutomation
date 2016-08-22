@@ -1,4 +1,5 @@
 using System.Linq;
+using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Application
@@ -58,7 +59,7 @@ namespace VisioAutomation.Application
                 if (key_visio_application == null)
                 {
                     // key doesn't exist - can't continue
-                    throw new AutomationException("Could not find the key visio application key in hkcu");
+                    throw new InternalAssertionException("Could not find the key visio application key in hkcu");
                 }
 
                 var subkeynames = key_visio_application.GetValueNames();

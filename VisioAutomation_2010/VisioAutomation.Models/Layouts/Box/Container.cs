@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
+using VisioAutomation.Exceptions;
 
 namespace VisioAutomation.Models.Layouts.Box
 {

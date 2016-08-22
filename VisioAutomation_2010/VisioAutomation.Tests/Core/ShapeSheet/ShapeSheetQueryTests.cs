@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Queries;
@@ -512,7 +513,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             }
-            catch (VA.DuplicateQueryColumnException)
+            catch (System.ArgumentException)
             {
                 caught_exc1 = true;
             }
@@ -529,7 +530,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             }
-            catch (VA.DuplicateQueryColumnException)
+            catch (System.ArgumentException)
             {
                 caught_exc2 = true;
             }
@@ -545,7 +546,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 sec.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             }
-            catch (VA.AutomationException)
+            catch (System.ArgumentException)
             {
                 caught_exc3 = true;
             }

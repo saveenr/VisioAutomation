@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             if (this._section_set.ContainsKey(section))
             {
                 string msg = "Duplicate Section";
-                throw new DuplicateQueryColumnException(msg);
+                throw new System.ArgumentException(msg);
             }
 
             int ordinal = this.Items.Count;

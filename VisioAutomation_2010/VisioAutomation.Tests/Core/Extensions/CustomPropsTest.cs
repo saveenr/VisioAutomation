@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Exceptions;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -80,7 +81,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             {
                 VACUSTPROP.CustomPropertyHelper.Set(s1, "FOO 1", "BAR1");
             }
-            catch (VA.AutomationException )
+            catch (System.ArgumentException)
             {
                 page1.Delete(0);
                 caught = true;

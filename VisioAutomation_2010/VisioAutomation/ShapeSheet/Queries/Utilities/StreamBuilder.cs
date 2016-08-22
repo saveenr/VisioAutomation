@@ -13,7 +13,7 @@
             if (chunksize != 3 && chunksize != 4)
             {
                 string msg = "chunksize must be 3 or 4";
-                throw new AutomationException(msg);                    
+                throw new System.ArgumentOutOfRangeException(msg);                    
             }
 
             this.Capacity = capacity;
@@ -28,13 +28,13 @@
             if (this.ChunkSize != 4)
             {
                 string msg = "Only ChunkSize 4 supported";
-                throw new AutomationException(msg);
+                throw new System.ArgumentOutOfRangeException(msg);
             }
 
             if (this.ChunksWrittenCount >= this.Capacity)
             {
                 string msg = "Exceeded Capacity";
-                throw new AutomationException(msg);
+                throw new System.ArgumentOutOfRangeException(msg);
             }
 
             this.Stream[this.ShortsWrittenCount++] = id;
@@ -49,13 +49,13 @@
             if (this.ChunkSize != 3)
             {
                 string msg = "Only ChunkSize 3 supported";
-                throw new AutomationException(msg);
+                throw new System.ArgumentOutOfRangeException(msg);
             }
 
             if (this.ChunksWrittenCount >= this.Capacity)
             {
                 string msg = "Exceeded Capacity";
-                throw new AutomationException(msg);
+                throw new System.ArgumentOutOfRangeException(msg);
             }
 
             this.Stream[this.ShortsWrittenCount++] = sec;

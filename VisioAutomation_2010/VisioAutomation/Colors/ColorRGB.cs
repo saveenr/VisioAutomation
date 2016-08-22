@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using VisioAutomation.Exceptions;
 
 namespace VisioAutomation.Colors
 {

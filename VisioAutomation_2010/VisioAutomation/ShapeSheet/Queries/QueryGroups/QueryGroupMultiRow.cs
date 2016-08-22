@@ -1,5 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
 using VisioAutomation.ShapeSheet.Writers;
@@ -12,12 +13,12 @@ namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
         {
             if (query.Cells.Count != 0)
             {
-                throw new AutomationException("Query should not contain any Columns");
+                throw new InternalAssertionException("Query should not contain any Columns");
             }
 
             if (query.SubQueries.Count != 1)
             {
-                throw new AutomationException("Query should not contain contain exactly 1 section");
+                throw new InternalAssertionException("Query should not contain contain exactly 1 section");
             }
         }
 

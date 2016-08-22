@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -114,7 +115,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             var prop_names = UserDefinedCellHelper.GetNames(shape);
             if (prop_names.Count != prop_count)
             {
-                throw new AutomationException("Unexpected number of prop names");
+                throw new InternalAssertionException("Unexpected number of prop names");
             }
 
             var shape_data = UserDefinedCell.GetCells(shape);
@@ -188,7 +189,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             if (section == null)
             {
                 string msg = string.Format("Could not find the user-defined section for shape {0}", shape.NameU);
-                throw new AutomationException(msg);
+                throw new InternalAssertionException(msg);
             }
 
             int row_count = section.Shape.RowCount[UserDefinedCellHelper._userdefinedcell_section];
@@ -225,7 +226,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             if (user_prop_row_count != prop_names.Count)
             {
-                throw new AutomationException("Unexpected number of user-defined-cell names");
+                throw new InternalAssertionException("Unexpected number of user-defined-cell names");
             }
 
             return prop_names;
@@ -260,7 +261,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             if (!UserDefinedCellHelper.IsValidName(name))
             {
                 string msg = string.Format("Invalid Name for User-Defined Cell: \"{0}\"", name);
-                throw new AutomationException(msg);
+                throw new System.ArgumentException(msg);
             }
         }
 

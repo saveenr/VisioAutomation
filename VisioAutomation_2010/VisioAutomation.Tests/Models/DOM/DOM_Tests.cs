@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;
 using VA = VisioAutomation;
@@ -331,7 +332,7 @@ namespace VisioAutomation_Tests.Models.DOM
             {
                 page = page_node.Render(doc);
             }
-            catch (VA.AutomationException)
+            catch (AutomationException)
             {
                 caught = true;
             }
@@ -363,7 +364,7 @@ namespace VisioAutomation_Tests.Models.DOM
             {
                 page = page_node.Render(doc);
             }
-            catch (VA.AutomationException)
+            catch (AutomationException)
             {
                 caught = true;
             }

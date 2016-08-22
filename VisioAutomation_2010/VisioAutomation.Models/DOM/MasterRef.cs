@@ -29,7 +29,7 @@ namespace VisioAutomation.Models.Dom
 
             if (MasterRef.HasStencilExtension(mastername))
             {
-                throw new AutomationException("Master name ends with .VSS or .VSSX");
+                throw new System.ArgumentException("Master name ends with .VSS or .VSSX");
 
                 // Passing in the stencil name for the master name is a very common error.
                 // so we make sure to check for it
@@ -37,7 +37,7 @@ namespace VisioAutomation.Models.Dom
 
             if (this.StencilName != null && (!MasterRef.HasStencilExtension(stencilname)))
             {                    
-                    throw new AutomationException("Stencil name does not end with .VSS");
+                    throw new System.ArgumentException("Stencil name does not end with .VSS");
 
                     // Passing in the master name for the stencil name is a very common error.
                     // so we make sure to check for it

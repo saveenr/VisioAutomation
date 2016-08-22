@@ -48,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
         {
             if (this._dic_columns.ContainsKey(name))
             {
-                throw new AutomationException("Duplicate Column Name");
+                throw new System.ArgumentException("Duplicate Column Name");
             }
         }
     }

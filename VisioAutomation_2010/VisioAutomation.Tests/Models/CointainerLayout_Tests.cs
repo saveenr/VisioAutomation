@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -26,7 +27,7 @@ namespace VisioAutomation_Tests.Models.Layouts
                 IVisio.Page page = layout.Render(doc);
                 page.Delete(0);
             }
-            catch (VA.AutomationException)
+            catch (AutomationException)
             {
                 caught = true;
             }

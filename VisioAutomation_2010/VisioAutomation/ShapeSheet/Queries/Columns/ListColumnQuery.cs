@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
             if (this._src_set.Contains(src))
             {
                 string msg = string.Format("Duplicate SRC({0},{1},{2})", src.Section, src.Row, src.Cell);
-                throw new DuplicateQueryColumnException(msg);
+                throw new System.ArgumentException(msg);
             }
         }
     }

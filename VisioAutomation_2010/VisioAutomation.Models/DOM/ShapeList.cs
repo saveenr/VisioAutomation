@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
@@ -213,7 +214,7 @@ namespace VisioAutomation.Models.Dom
                     if (shape.VisioShapeID < 1)
                     {
                         string msg = "A Shape drawn is missing its VisioShapeID";
-                        throw new AutomationException(msg);
+                        throw new InternalAssertionException(msg);
                     }
                 }
             }
@@ -249,7 +250,7 @@ namespace VisioAutomation.Models.Dom
             {
                 if (shape.Master.VisioMaster == null)
                 {
-                    throw new AutomationException("Missing a master for a shape");
+                    throw new InternalAssertionException("Missing a master for a shape");
                 }
             }
         }
@@ -356,8 +357,8 @@ namespace VisioAutomation.Models.Dom
 
                 else
                 {
-                    string msg = string.Format("Internal Error: Unhandled DOM node type: {0}", shape.GetType());
-                    throw new AutomationException(msg);
+                    string msg = string.Format("Unhandled DOM node type: \"{0}\"", shape.GetType());
+                    throw new InternalAssertionException(msg);
                 }
             }
         }

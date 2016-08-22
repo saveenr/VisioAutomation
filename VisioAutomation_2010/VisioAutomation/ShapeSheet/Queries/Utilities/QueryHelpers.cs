@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Office.Interop.Visio;
+using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Queries.Utilities
@@ -10,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
         {
             if ((chunksize != 3) && (chunksize != 4))
             {
-                throw new AutomationException("Chunksize must be 3 or 4");
+                throw new System.ArgumentOutOfRangeException("Chunksize must be 3 or 4");
             }
 
             int remainder = stream.Length % chunksize;
@@ -18,7 +19,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
             if (remainder != 0)
             {
                 string msg = string.Format("stream must have a multiple of {0} elements", chunksize);
-                throw new AutomationException(msg);
+                throw new System.ArgumentException(msg);
             }
 
             return stream.Length / chunksize;
@@ -70,7 +71,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
             {
                 string msg = string.Format("Expected {0} items from GetFormulas but only received {1}", numitems,
                     formulas_obj_array.Length);
-                throw new AutomationException(msg);
+                throw new InternalAssertionException(msg);
             }
 
             string[] formulas = new string[formulas_obj_array.Length];
@@ -129,7 +130,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
             {
                 string msg = string.Format("Expected {0} items from GetResults but only received {1}", numitems,
                     results_sa.Length);
-                throw new AutomationException(msg);
+                throw new InternalAssertionException(msg);
             }
 
             var results = new TResult[results_sa.Length];
@@ -154,8 +155,8 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
             }
             else
             {
-                string msg = string.Format("Internal error: Unsupported Result Type: {0}", type.Name);
-                throw new AutomationException(msg);
+                string msg = string.Format("Unsupported Result Type: {0}", type.Name);
+                throw new InternalAssertionException(msg);
             }
             return flags;
         }
@@ -180,7 +181,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
             if (!IsValidResultType(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
-                throw new AutomationException(msg);
+                throw new InternalAssertionException(msg);
             }
         }
 

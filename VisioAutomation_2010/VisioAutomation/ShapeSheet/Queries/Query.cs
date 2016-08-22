@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
 using VisioAutomation.ShapeSheet.Queries.Utilities;
@@ -26,7 +27,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             if (this._is_frozen)
             {
-                throw new QueryFrozenException("Further Modifications to this Query are not allowed");
+                throw new AutomationException("Further Modifications to this Query are not allowed");
             }
         }
 
@@ -200,8 +201,8 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             if (surface.Target.Shape == null)
             {
-                string msg = "Shape must be set in surface not page or master";
-                throw new AutomationException(msg);
+                string msg = "Target must be Shape not Page or Master";
+                throw new System.ArgumentException(msg);
             }
 
             this._subquery_shape_info = new List<List<SubQueryDetails>>();
@@ -249,7 +250,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             {
                 string msg = string.Format("Expected {0} Checks to be written. Actual = {1}", total,
                     stream_builder.ChunksWrittenCount);
-                throw new AutomationException(msg);
+                throw new InternalAssertionException(msg);
             }
 
             return stream_builder.Stream;
@@ -298,7 +299,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             {
                 string msg = string.Format("Expected {0} Chunks to be written. Actual = {1}", total,
                     stream_builder.ChunksWrittenCount);
-                throw new AutomationException(msg);
+                throw new InternalAssertionException(msg);
             }
 
             return stream_builder.Stream;
@@ -344,7 +345,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             {
                 string msg = string.Format("Expected {0} PerShape structs. Actual = {1}", shapeids.Count,
                     this._subquery_shape_info.Count);
-                throw new AutomationException(msg);
+                throw new InternalAssertionException(msg);
             }
         }
 
@@ -379,7 +380,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             if (numshapes < 1)
             {
-                throw new AutomationException("Internal Error: numshapes must be >=1");
+                throw new InternalAssertionException("numshapes must be >=1");
             }
 
             int numcells = this._get_total_cell_count(numshapes);
@@ -407,7 +408,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
             if (numcells != unitcodes.Count)
             {
-                throw new AutomationException("Internal Error: Number of unit codes must match number of cells");
+                throw new InternalAssertionException("Number of unit codes must match number of cells");
             }
 
             return unitcodes;

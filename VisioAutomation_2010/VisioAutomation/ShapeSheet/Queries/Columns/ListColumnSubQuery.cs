@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
             if (this._cellindex_set.Contains(cellindex))
             {
                 string msg = string.Format("Duplicate Cell Index: {0}", cellindex);
-                throw new AutomationException(msg);
+                throw new System.ArgumentException(msg);
             }
         }
     }
