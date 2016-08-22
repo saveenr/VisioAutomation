@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet.Writers;
@@ -29,7 +30,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 if (cell_propname == null)
                 {
                     string msg = string.Format("Could not retrieve cell for custom property \"{0}\"", full_prop_name);
-                    throw new AutomationException(msg);
+                    throw new InternalAssertionException(msg);
                 }
 
                 var update = new FormulaWriterSRC();
@@ -100,7 +101,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             
             if (customprops_per_shape.Count!=shapeids.Count)
             {
-                throw new AutomationException("1");
+                throw new InternalAssertionException();
             }
 
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
@@ -111,7 +112,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
                 if (customprops_for_shape.Count != prop_names.Count)
                 {
-                    throw new AutomationException("2");
+                    throw new InternalAssertionException();
                 }
 
                 var dic = new Dictionary<string, CustomPropertyCells>(prop_names.Count);
@@ -145,7 +146,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
             if (section == null)
             {
-                throw new AutomationException("section is null");
+                throw new System.NullReferenceException(nameof(section));
             }
 
             int row_count = section.Shape.RowCount[(short)IVisio.VisSectionIndices.visSectionProp];
@@ -174,7 +175,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
             if (custom_prop_row_count != prop_names.Count)
             {
-                throw new AutomationException("Unexpected number of property names");
+                throw new InternalAssertionException("Unexpected number of property names");
             }
 
             return prop_names;
@@ -222,7 +223,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             if (!CustomPropertyHelper.IsValidName(name, out errmsg))
             {
                 string msg = string.Format("Invalid Property Name: \"{0}\". {1}", name, errmsg);
-                throw new AutomationException(msg);
+                throw new System.ArgumentException(msg);
             }
         }
 

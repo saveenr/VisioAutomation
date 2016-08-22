@@ -21,13 +21,24 @@ namespace VisioAutomation.ShapeSheet.Queries.Outputs
             return this.GetEnumerator();
         }
 
-        public Output<T> this[int index] => this._outputs[index];
-
-        internal void Add(Output<T> item)
+        public Output<T> this[int index]
         {
-            this._outputs.Add(item);
+            get { return this._outputs[index]; }
         }
 
-        public int Count => this._outputs.Count;
+        internal void Add(Output<T> output)
+        {
+            if (output == null)
+            {
+                throw new System.ArgumentNullException(nameof(output));
+                
+            }
+            this._outputs.Add(output);
+        }
+
+        public int Count
+        {
+            get { return this._outputs.Count; }
+        }
     }
 }

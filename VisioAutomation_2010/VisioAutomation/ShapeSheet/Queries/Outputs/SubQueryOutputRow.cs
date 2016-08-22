@@ -6,6 +6,11 @@ namespace VisioAutomation.ShapeSheet.Queries.Outputs
 
         internal SubQueryOutputRow(T[] cells)
         {
+            if (cells == null)
+            {
+                throw new System.ArgumentNullException(nameof(cells));
+            }
+
             this.Cells = cells;
         }
     }

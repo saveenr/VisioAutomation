@@ -88,7 +88,7 @@ namespace VisioAutomation.DocumentAnalysis
                     }
                     else
                     {
-                        throw new AutomationException("Internal error");
+                        throw new System.ArgumentOutOfRangeException(nameof(flag));
                     }
                 }
                 else

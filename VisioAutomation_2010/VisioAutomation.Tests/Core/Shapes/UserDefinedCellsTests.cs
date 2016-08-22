@@ -1,5 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Queries;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
@@ -174,7 +175,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             {
                 VAUSERCELL.UserDefinedCellHelper.Set(s1, "FOO 1", "BAR1", null);
             }
-            catch (VA.AutomationException )
+            catch (System.ArgumentException)
             {
                 // this was expected
                 page1.Delete(0);

@@ -124,13 +124,13 @@ namespace VisioAutomation.Pages
 
             if (dest_page == src_page)
             {
-                throw new AutomationException("Destination Page cannot be Source Page");
+                throw new System.ArgumentException("Destination Page cannot be Source Page");
             }
 
 
             if (src_page != app.ActivePage)
             {
-                throw new AutomationException("Source page must be active page.");
+                throw new System.ArgumentException("Source page must be active page.");
             }
 
             var src_page_shapes = src_page.Shapes;

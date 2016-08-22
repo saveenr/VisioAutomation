@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Queries;
 using VACONT = VisioAutomation.Shapes.Controls;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -406,9 +408,38 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             return can_skip;
         }
 
+        public static Dictionary<string, SRC> GetSRCDictionary()
+        {
+            var srcconstants_t = typeof(SRCConstants);
+
+            var binding_flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static;
+
+            // find all the static properties that return SRC types
+            var src_type = typeof(SRC);
+            var props = srcconstants_t.GetProperties(binding_flags)
+                .Where(p => p.PropertyType == src_type);
+
+            var fields_name_to_value = new Dictionary<string, SRC>();
+            foreach (var propinfo in props)
+            {
+                var src = (SRC)propinfo.GetValue(null, null);
+                var name = propinfo.Name;
+                fields_name_to_value[name] = src;
+            }
+
+            return fields_name_to_value;
+        }
+
         [TestMethod]
         public void ShapeSheet_Query_Demo_AllCellsAndSections()
         {
+            // Verifies that  "complex" query can be run. This test case constructs
+            // a query that goes against event known cell and section. Importantly, the
+            // sections that support multiple rows are retrieved via subqueries
+            //
+            // NOTE: This test only verifies that the query will succeed. It doesn't
+            // validate the values that are retrieved
+
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
             VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
@@ -417,22 +448,42 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s1 = page1.DrawRectangle(0,0,1,1);
             var s2 = page1.DrawRectangle(2,2,3,3);
 
+            var query = create_query_for_all_cells_and_sections();
 
+            var page_surface = new ShapeSheetSurface(page1);
+            var shape_surface = new ShapeSheetSurface(s1);
+            var formulas1 = query.GetFormulas(shape_surface);
+            var formulas2 = query.GetFormulas(page_surface,new [] {s1.ID,s2.ID});
+            var results1 = query.GetResults<double>(shape_surface);
+            var results2 = query.GetResults<double>(page_surface, new[] { s1.ID, s2.ID });
+
+            doc1.Close(true);
+        }
+
+        private Query create_query_for_all_cells_and_sections()
+        {
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
 
-            var name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
-            var section_to_secquery = new Dictionary<short,VisioAutomation.ShapeSheet.Queries.SubQuery>();
+            // Dictionary of Cell Names to SRCs (excluding invalid sections)
+            var name_to_src = GetSRCDictionary();
+            name_to_src = name_to_src.Where(pair => !section_is_skippable(pair.Value))
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
 
+            // Create a dictionary of the subqueries for each section, this
+            // will be reused as fill in the query
+            var unique_section_ids = name_to_src.Select(pair => pair.Value).Select(src => src.Section).Distinct().ToList();
+            var section_to_subquery = new Dictionary<short, VisioAutomation.ShapeSheet.Queries.SubQuery>(unique_section_ids.Count);
+            foreach (short section_id in unique_section_ids.Where(i=>i!=(short)IVisio.VisSectionIndices.visSectionObject))
+            {
+                    section_to_subquery[section_id] = query.AddSubQuery((IVisio.VisSectionIndices)section_id);
+            }
+
+            // Now for each src add it as a top level cell, or as a cell in 
+            // a subquery depending on its section index
             foreach (var kv in name_to_src)
             {
                 var name = kv.Key;
                 var src = kv.Value;
-
-                // Ignore Sections we don't care about
-                if (section_is_skippable(src))
-                {
-                    continue;
-                }
 
                 if (src.Section == (short) IVisio.VisSectionIndices.visSectionObject)
                 {
@@ -440,26 +491,14 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 }
                 else
                 {
-                    VisioAutomation.ShapeSheet.Queries.SubQuery sec_col;
-                    if (!section_to_secquery.ContainsKey(src.Section))
-                    {
-                        sec_col = query.AddSubQuery((IVisio.VisSectionIndices)src.Section);
-                        section_to_secquery[src.Section] = sec_col;
-                    }
-                    else
-                    {
-                        sec_col = section_to_secquery[src.Section];
-                    }
-                    sec_col.AddCell(src, name);
+                    // the subquery will always be in the dictionary
+                    // because the dictionary was populated in a previous
+                    // step
+                    var subquery = section_to_subquery[src.Section];
+                    subquery.AddCell(src, name);
                 }
             }
-
-            var page_surface = new ShapeSheetSurface(page1);
-            var shape_surface = new ShapeSheetSurface(s1);
-            var formulas1 = query.GetFormulas(shape_surface);
-            var formulas2 = query.GetFormulas(page_surface,new [] {s1.ID,s2.ID});
-
-            doc1.Close(true);
+            return query;
         }
 
         [TestMethod]
@@ -474,7 +513,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             }
-            catch (VA.AutomationException)
+            catch (System.ArgumentException)
             {
                 caught_exc1 = true;
             }
@@ -491,7 +530,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             }
-            catch (VA.AutomationException)
+            catch (System.ArgumentException)
             {
                 caught_exc2 = true;
             }
@@ -507,7 +546,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 sec.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             }
-            catch (VA.AutomationException)
+            catch (System.ArgumentException)
             {
                 caught_exc3 = true;
             }

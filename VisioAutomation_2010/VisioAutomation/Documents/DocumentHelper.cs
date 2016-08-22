@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -56,7 +57,7 @@ namespace VisioAutomation.Documents
                     curwin.Activate();
                     if (app.ActiveDocument != doc)
                     {
-                        throw new AutomationException("failed to activate document");
+                        throw new InternalAssertionException("failed to activate document");
                     }
                     return;
                 }

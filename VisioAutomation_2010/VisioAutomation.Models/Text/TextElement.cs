@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 

@@ -44,7 +44,8 @@ namespace VisioAutomation.ShapeSheet.Writers
                 }
                 else
                 {
-                    throw new AutomationException("Unhandled update type");
+                    string msg = string.Format("Unsupported {0}.{1} \"{2}\"", nameof(update),nameof(update.ResultType),update.ResultType);
+                    throw new System.ArgumentOutOfRangeException(msg);
                 }
                 i++;
             }

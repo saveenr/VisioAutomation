@@ -1,3 +1,4 @@
+using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Geometry
@@ -17,7 +18,7 @@ namespace VisioAutomation.Shapes.Geometry
 
             if (actual_sec_index != new_sec_index)
             {
-                throw new AutomationException("Internal Error");
+                throw new InternalAssertionException();
             }
             short row_index = shape.AddRow(new_sec_index, (short)IVisio.VisRowIndices.visRowComponent, (short)IVisio.VisRowTags.visTagComponent);
 

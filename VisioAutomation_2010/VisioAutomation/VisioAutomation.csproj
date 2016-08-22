@@ -89,6 +89,7 @@
     <Compile Include="Extensions\ShapeMethods.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Extensions\WindowMethods.cs" />
+    <Compile Include="Exceptions\InternalAssertionException.cs" />
     <Compile Include="Masters\MasterHelper.cs" />
     <Compile Include="Fonts\FontHelper.cs" />
     <Compile Include="Layers\LayerHelper.cs" />
@@ -222,7 +223,7 @@
     <Compile Include="Application\UndoScope.cs" />
     <Compile Include="Application\ApplicationHelper.cs" />
     <Compile Include="Internal\Interop\NativeMethods.cs" />
-    <Compile Include="AutomationException.cs" />
+    <Compile Include="Exceptions\AutomationException.cs" />
     <Compile Include="Shapes\ShapeHelper.cs" />
     <Compile Include="Text\TextRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

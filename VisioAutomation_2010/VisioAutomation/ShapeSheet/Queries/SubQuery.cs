@@ -24,12 +24,6 @@ namespace VisioAutomation.ShapeSheet.Queries
             return col;
         }
 
-        private ColumnSubQuery __AddCell(short cell, string name)
-        {
-            var col = this.Columns.Add(cell, name);
-            return col;
-        }
-
         public static implicit operator int(SubQuery col)
         {
             return col.Ordinal;

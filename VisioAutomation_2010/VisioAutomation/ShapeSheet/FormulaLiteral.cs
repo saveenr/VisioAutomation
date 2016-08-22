@@ -53,7 +53,7 @@
         {
             if (!this.HasValue)
             {
-                throw new AutomationException("No Value to Encode");
+                throw new System.ArgumentException("No Value to Encode");
             }
             return Convert.StringToFormulaString(this.Value);
         }
