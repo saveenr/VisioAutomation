@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VA=VisioAutomation;
 
 namespace VisioAutomation.Shapes.Geometry
 {
@@ -44,11 +45,11 @@ namespace VisioAutomation.Shapes.Geometry
 
             var update = new FormulaWriterSRC();
 
-            var src_nofill = ShapeSheet.SRCConstants.Geometry_NoFill.ForSectionAndRow(sec_index, 0);
-            var src_noline = ShapeSheet.SRCConstants.Geometry_NoLine.ForSectionAndRow(sec_index, 0);
-            var src_noshow = ShapeSheet.SRCConstants.Geometry_NoShow.ForSectionAndRow(sec_index, 0);
-            var src_nosnap = ShapeSheet.SRCConstants.Geometry_NoSnap.ForSectionAndRow(sec_index, 0);
-            var src_noquickdrag = ShapeSheet.SRCConstants.Geometry_NoQuickDrag.ForSectionAndRow(sec_index, 0);
+            var src_nofill = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoFill.Cell);
+            var src_noline = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoLine.Cell);
+            var src_noshow = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoShow.Cell);
+            var src_nosnap = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoSnap.Cell);
+            var src_noquickdrag = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoQuickDrag.Cell);
 
             update.SetFormula(src_nofill, this.NoFill);
             update.SetFormula(src_noline, this.NoLine);

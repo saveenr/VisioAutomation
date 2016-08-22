@@ -30,33 +30,24 @@ namespace VisioAutomation.ShapeSheet
 
         public override string ToString()
         {
-            return string.Format("({0},{1},{2})", this.Section, this.Row, this.Cell);
+            return string.Format("{0}({1},{2},{3})", nameof(SRC), this.Section, this.Row, this.Cell);
         }
 
-        public SRC ForRow(short row) => new SRC(this.Section, row, this.Cell);
-
-        public SRC ForSectionAndRow(short section, short row) => new SRC(section, row, this.Cell);
-
-        public bool AreEqual(SRC other)
+        public SRC WithRow(short row)
         {
-            return ((this.Section == other.Section) && (this.Row == other.Row) && (this.Cell == other.Cell));
-        }
-
-        internal delegate SRC SRCFromCellIndex(IVisio.VisCellIndices c);
-
-        internal static SRCFromCellIndex GetSRCFactory(IVisio.VisSectionIndices sec, IVisio.VisRowIndices row)
-        {
-            SRCFromCellIndex new_func = cell => new SRC(sec, row, cell);
-            return new_func;
+            // It's common to need to get a SRC that has a different row index.
+            // This method make that very easy
+            return new SRC(this.Section, row, this.Cell);
         }
 
         public static short[] ToStream(IList<SRC> srcs)
         {
-            var s = new short[3 * srcs.Count];
+            const int src_length = 3;
+            var s = new short[src_length * srcs.Count];
             for (int i = 0; i < srcs.Count; i++)
             {
                 var sidsrc = srcs[i];
-                int pos = i * 3;
+                int pos = i * src_length;
                 s[pos + 0] = sidsrc.Section;
                 s[pos + 1] = sidsrc.Row;
                 s[pos + 2] = sidsrc.Cell;
