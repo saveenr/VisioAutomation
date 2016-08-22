@@ -42,14 +42,6 @@ namespace VisioAutomation.ShapeSheet
             return ((this.Section == other.Section) && (this.Row == other.Row) && (this.Cell == other.Cell));
         }
 
-        internal delegate SRC SRCFromCellIndex(IVisio.VisCellIndices c);
-
-        internal static SRCFromCellIndex GetSRCFactory(IVisio.VisSectionIndices sec, IVisio.VisRowIndices row)
-        {
-            SRCFromCellIndex new_func = cell => new SRC(sec, row, cell);
-            return new_func;
-        }
-
         public static short[] ToStream(IList<SRC> srcs)
         {
             var s = new short[3 * srcs.Count];

@@ -56,6 +56,9 @@ namespace VisioAutomation.ShapeSheet
             return s;
         }
 
-        public SRC SRC => new SRC(this.Section,this.Row,this.Cell);
+        public SRC SRC
+        {
+            get { return new SRC(this.Section, this.Row, this.Cell); }
+        }
     }
 }
