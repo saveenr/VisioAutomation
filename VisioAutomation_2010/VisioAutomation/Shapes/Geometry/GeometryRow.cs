@@ -1,5 +1,7 @@
+using System;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VA=VisioAutomation;
 
 namespace VisioAutomation.Shapes.Geometry
 {
@@ -31,15 +33,15 @@ namespace VisioAutomation.Shapes.Geometry
         }
 
 
-        private void Update(short section, short row_index, FormulaWriterSRC update)
+        private void Update(short section_index, short row_index, FormulaWriterSRC update)
         {
-            var x_src = ShapeSheet.SRCConstants.Geometry_X.ForSectionAndRow(section, row_index);
-            var y_src = ShapeSheet.SRCConstants.Geometry_Y.ForSectionAndRow(section, row_index);
-            var a_src = ShapeSheet.SRCConstants.Geometry_A.ForSectionAndRow(section, row_index);
-            var b_src = ShapeSheet.SRCConstants.Geometry_B.ForSectionAndRow(section, row_index);
-            var c_src = ShapeSheet.SRCConstants.Geometry_C.ForSectionAndRow(section, row_index);
-            var d_src = ShapeSheet.SRCConstants.Geometry_D.ForSectionAndRow(section, row_index);
-            var e_src = ShapeSheet.SRCConstants.Geometry_E.ForSectionAndRow(section, row_index);
+            var x_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_X.Cell);
+            var y_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_Y.Cell);
+            var a_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_A.Cell);
+            var b_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_B.Cell);
+            var c_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_C.Cell);
+            var d_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_D.Cell);
+            var e_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_E.Cell);
 
             update.SetFormula(x_src, this.X);
             update.SetFormula(y_src, this.Y);

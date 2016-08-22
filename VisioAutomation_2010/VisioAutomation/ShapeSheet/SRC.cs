@@ -33,19 +33,11 @@ namespace VisioAutomation.ShapeSheet
             return string.Format("{0}({1},{2},{3})", nameof(SRC), this.Section, this.Row, this.Cell);
         }
 
-        public SRC ForRow(short row)
+        public SRC WithRow(short row)
         {
+            // It's common to need to get a SRC that has a different row index.
+            // This method make that very easy
             return new SRC(this.Section, row, this.Cell);
-        }
-
-        public SRC ForSectionAndRow(short section, short row)
-        {
-            return new SRC(section, row, this.Cell);
-        }
-
-        public bool AreEqual(SRC other)
-        {
-            return ((this.Section == other.Section) && (this.Row == other.Row) && (this.Cell == other.Cell));
         }
 
         public static short[] ToStream(IList<SRC> srcs)
