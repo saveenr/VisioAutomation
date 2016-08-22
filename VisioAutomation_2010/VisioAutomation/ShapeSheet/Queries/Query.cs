@@ -138,6 +138,8 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         private Output<T> _create_output_for_shape<T>(short shapeid, T[] values, List<SubQuerySectionDetails> subqueries_details, ref int values_cursor)
         {
+            int old_cursor = values_cursor;
+
             var output = new Output<T>(shapeid);
 
             // First Copy the Query Cell Values into the output
@@ -170,6 +172,13 @@ namespace VisioAutomation.ShapeSheet.Queries
                     output.Sections.Add(subquery_output);
 
                 }
+            }
+
+            int num_cells = this.Cells.Count + ( subqueries_details == null ? 0 : subqueries_details.Select( x=>x.RowCount *x.SubQuery.Columns.Count).Sum());
+            int expected_cursor = old_cursor + num_cells;
+            if (expected_cursor != values_cursor)
+            {
+                throw new InternalAssertionException("Unexpected cursor");
             }
 
             return output;
