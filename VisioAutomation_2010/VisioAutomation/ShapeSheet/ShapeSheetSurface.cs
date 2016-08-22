@@ -28,49 +28,38 @@ namespace VisioAutomation.ShapeSheet
 
         public int SetFormulas(short[] stream, object[] formulas, short flags)
         {
-            int c;
             if (this.Target.Shape != null)
             {
-                c = this.Target.Shape.SetFormulas(stream, formulas, flags);
+                return this.Target.Shape.SetFormulas(stream, formulas, flags);
             }
             else if (this.Target.Master != null)
             {
-                c = this.Target.Master.SetFormulas(stream, formulas, flags);
+                return this.Target.Master.SetFormulas(stream, formulas, flags);
             }
             else if (this.Target.Page != null)
             {
-                c = this.Target.Page.SetFormulas(stream, formulas, flags);
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Target");
+                return this.Target.Page.SetFormulas(stream, formulas, flags);
             }
 
-            return c;
+            throw new System.ArgumentException("Unhandled Target");
         }
 
         public int SetResults(short[] stream, object[] unitcodes, object[] results, short flags)
         {
-            int c;
             if (this.Target.Shape != null)
             {
-                c = this.Target.Shape.SetResults(stream, unitcodes, results, flags);
+                return this.Target.Shape.SetResults(stream, unitcodes, results, flags);
             }
             else if (this.Target.Master != null)
             {
-                c = this.Target.Master.SetResults(stream, unitcodes, results, flags);
+                return this.Target.Master.SetResults(stream, unitcodes, results, flags);
             }
             else if (this.Target.Page != null)
             {
-                c = this.Target.Page.SetResults(stream, unitcodes, results, flags);
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Target");
+                return this.Target.Page.SetResults(stream, unitcodes, results, flags);
             }
 
-            return c;
+            throw new System.ArgumentException("Unhandled Target");
         }
-
     }
 }

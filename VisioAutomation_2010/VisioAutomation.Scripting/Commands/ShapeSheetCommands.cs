@@ -56,9 +56,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public ShapeSheetSurface GetShapeSheetSurface()
         {
-            var ds = this._client.Draw.GetDrawingSurface();
-            var ss = new ShapeSheetSurface(ds.Target);
-            return ss;
+            var drawing_surface = this._client.Draw.GetDrawingSurface();
+            var shapesheet_surface = new ShapeSheetSurface(drawing_surface.Target);
+            return shapesheet_surface;
         }
 
 
