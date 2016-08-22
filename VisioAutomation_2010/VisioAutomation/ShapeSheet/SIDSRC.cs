@@ -38,16 +38,17 @@ namespace VisioAutomation.ShapeSheet
         
         public override string ToString()
         {
-            return string.Format("({0},{1},{2},{3})", this.ID, this.Section, this.Row, this.Cell);
+            return string.Format("{0}({1},{2},{3},{4})", nameof(SIDSRC),this.ID, this.Section, this.Row, this.Cell);
         }
 
         public static short [] ToStream(IList<SIDSRC> sidsrcs)
         {
-            var s = new short[4*sidsrcs.Count];
+            const int sidsrc_length = 4;
+            var s = new short[sidsrc_length*sidsrcs.Count];
             for (int i = 0; i < sidsrcs.Count; i++)
             {
                 var sidsrc = sidsrcs[i];
-                int pos = i*4;
+                int pos = i*sidsrc_length;
                 s[pos + 0] = sidsrc.ID;
                 s[pos + 1] = sidsrc.Section;
                 s[pos + 2] = sidsrc.Row;

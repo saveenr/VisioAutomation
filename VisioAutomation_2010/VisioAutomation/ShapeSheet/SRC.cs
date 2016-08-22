@@ -30,12 +30,18 @@ namespace VisioAutomation.ShapeSheet
 
         public override string ToString()
         {
-            return string.Format("({0},{1},{2})", this.Section, this.Row, this.Cell);
+            return string.Format("{0}({1},{2},{3})", nameof(SRC), this.Section, this.Row, this.Cell);
         }
 
-        public SRC ForRow(short row) => new SRC(this.Section, row, this.Cell);
+        public SRC ForRow(short row)
+        {
+            return new SRC(this.Section, row, this.Cell);
+        }
 
-        public SRC ForSectionAndRow(short section, short row) => new SRC(section, row, this.Cell);
+        public SRC ForSectionAndRow(short section, short row)
+        {
+            return new SRC(section, row, this.Cell);
+        }
 
         public bool AreEqual(SRC other)
         {
@@ -44,11 +50,12 @@ namespace VisioAutomation.ShapeSheet
 
         public static short[] ToStream(IList<SRC> srcs)
         {
-            var s = new short[3 * srcs.Count];
+            const int src_length = 3;
+            var s = new short[src_length * srcs.Count];
             for (int i = 0; i < srcs.Count; i++)
             {
                 var sidsrc = srcs[i];
-                int pos = i * 3;
+                int pos = i * src_length;
                 s[pos + 0] = sidsrc.Section;
                 s[pos + 1] = sidsrc.Row;
                 s[pos + 2] = sidsrc.Cell;
