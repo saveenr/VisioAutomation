@@ -14,26 +14,12 @@ namespace VisioAutomation.ShapeSheet.Queries
         public ListSubQuery SubQueries { get; }
 
         private List<List<SubQuerySectionDetails>> _subquery_shape_info; 
-        private bool _is_frozen;
 
         public Query()
         {
             this.Cells = new ListColumnQuery(0);
             this.SubQueries = new ListSubQuery(0);
             this._subquery_shape_info = new List<List<SubQuerySectionDetails>>(0);
-        }
-
-        internal void CheckNotFrozen()
-        {
-            if (this._is_frozen)
-            {
-                throw new AutomationException("Further Modifications to this Query are not allowed");
-            }
-        }
-
-        private void Freeze()
-        {
-            this._is_frozen = true;            
         }
 
         public ColumnQuery AddCell(ShapeSheet.SRC src, string name)
@@ -55,7 +41,6 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public Output<string> GetFormulas(ShapeSheetSurface surface)
         {
-            this.Freeze();
             var srcstream = this._build_src_stream(surface);
             var values = QueryHelpers.GetFormulasU_SRC(surface, srcstream);
             var shape_index = 0;
@@ -68,7 +53,6 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public Output<TResult> GetResults<TResult>(ShapeSheetSurface surface)
         {
-            this.Freeze();
             var srcstream = this._build_src_stream(surface);
             var unitcodes = this._build_unit_code_array(1);
             var values = QueryHelpers.GetResults_SRC<TResult>(surface, srcstream, unitcodes);
@@ -81,8 +65,6 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public Output<ShapeSheet.CellData<TResult>> GetFormulasAndResults<TResult>(ShapeSheetSurface surface)
         {
-            this.Freeze();
-
             var srcstream = this._build_src_stream(surface);
             var unitcodes = this._build_unit_code_array(1);
             var formulas = QueryHelpers.GetFormulasU_SRC(surface, srcstream);
@@ -99,7 +81,6 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public ListOutput<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
-            this.Freeze();
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var values = QueryHelpers.GetFormulasU_SIDSRC(surface, srcstream);
             var list = this._create_outputs_for_shapes(shapeids, values);
@@ -108,7 +89,6 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public ListOutput<TResult> GetResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
         {
-            this.Freeze();
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
             var values = QueryHelpers.GetResults_SIDSRC<TResult>(surface, srcstream, unitcodes);
@@ -118,8 +98,6 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public ListOutput<ShapeSheet.CellData<TResult>> GetFormulasAndResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
         {
-            this.Freeze();
-
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
             var results = QueryHelpers.GetResults_SIDSRC<TResult>(surface, srcstream, unitcodes);
