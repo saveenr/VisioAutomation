@@ -130,10 +130,7 @@ namespace VisioAutomation.ShapeSheet.Queries
                 var subqueries = this._subquery_shape_info[shape_index];
                 return subqueries;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         private Output<T> _create_output_for_shape<T>(short shapeid, T[] values, List<SubQuerySectionDetails> subqueries_details, ref int values_cursor)
