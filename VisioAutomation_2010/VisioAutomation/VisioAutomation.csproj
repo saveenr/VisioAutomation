@@ -112,6 +112,8 @@
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnSubQuery.cs" />
     <Compile Include="ShapeSheet\Queries\Outputs\SubQueryOutputRow.cs" />
     <Compile Include="ShapeSheet\Queries\QueryGroups\SRCFormulaPair.cs" />
+    <Compile Include="ShapeSheet\Queries\Utilities\StreamBuilderSIDSRC.cs" />
+    <Compile Include="ShapeSheet\Queries\Utilities\StreamBuilderSRC.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
@@ -173,7 +175,7 @@
     <Compile Include="ShapeSheet\Queries\SubQuery.cs" />
     <Compile Include="ShapeSheet\Queries\Outputs\SubQueryOutput.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnQuery.cs" />
-    <Compile Include="ShapeSheet\Queries\Utilities\StreamBuilder.cs" />
+    <Compile Include="ShapeSheet\Queries\Utilities\StreamBuilderBase.cs" />
     <Compile Include="ShapeSheet\Queries\ListSubQuery.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />

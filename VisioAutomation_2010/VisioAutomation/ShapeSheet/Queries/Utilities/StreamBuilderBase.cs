@@ -23,7 +23,7 @@
             this.ShortsWrittenCount = 0;
         }
 
-        public void __Add_SIDSRC(short id, short sec, short row, short cell)
+        protected void __Add_SIDSRC(short id, short sec, short row, short cell)
         {
             if (this.ChunkSize != 4)
             {
@@ -44,7 +44,7 @@
             this.ChunksWrittenCount++;
         }
 
-        public void __Add_SRC(short sec, short row, short cell)
+        protected void __Add_SRC(short sec, short row, short cell)
         {
             if (this.ChunkSize != 3)
             {
@@ -69,43 +69,5 @@
             get { return this.ChunksWrittenCount == this.Capacity; }
         }
 
-    }
-
-    internal class StreamBuilderSRC: StreamBuilderBase
-    {
-
-        public StreamBuilderSRC(int capacity)
-            : base(3, capacity)
-        {
-            
-        }
-
-        public void Add(short sec, short row, short cell)
-        {
-            this.__Add_SRC(sec, row, cell);
-        }
-
-        public void Add(SRC cell)
-        {
-            this.__Add_SRC(cell.Section, cell.Row, cell.Cell);
-        }
-    }
-
-    internal class StreamBuilderSIDSRC : StreamBuilderBase
-    {
-
-        public StreamBuilderSIDSRC(int capacity) : base(4,capacity)
-        {
-        }
-
-        public void Add(short shape_id, short sec, short row, short cell)
-        {
-            this.__Add_SIDSRC(shape_id, sec, row, cell);
-        }
-
-        public void Add(short shape_id, SRC cell)
-        {
-            this.__Add_SIDSRC(shape_id, cell.Section, cell.Row, cell.Cell);
-        }
     }
 }
