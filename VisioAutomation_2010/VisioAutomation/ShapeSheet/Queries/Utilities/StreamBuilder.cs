@@ -1,14 +1,14 @@
 ﻿namespace VisioAutomation.ShapeSheet.Queries.Utilities
 {
-    class StreamBuilder
+    class StreamBuilderBase
     {
         public short[] Stream { get; }
-        public int ChunksWrittenCount { get; private set; }
-        public int ChunkSize { get; }
-        public int ShortsWrittenCount { get; private set; }
+        private int ChunksWrittenCount { get; set; }
+        private int ChunkSize { get; }
+        private int ShortsWrittenCount { get; set; }
         public int Capacity { get; }
 
-        public StreamBuilder(int chunksize, int capacity)
+        public StreamBuilderBase(int chunksize, int capacity)
         {
             if (chunksize != 3 && chunksize != 4)
             {
@@ -23,7 +23,7 @@
             this.ShortsWrittenCount = 0;
         }
 
-        public void Add(short id, short sec, short row, short cell)
+        public void __Add_SIDSRC(short id, short sec, short row, short cell)
         {
             if (this.ChunkSize != 4)
             {
@@ -44,7 +44,7 @@
             this.ChunksWrittenCount++;
         }
 
-        public void Add(short sec, short row, short cell)
+        public void __Add_SRC(short sec, short row, short cell)
         {
             if (this.ChunkSize != 3)
             {
@@ -63,77 +63,49 @@
             this.Stream[this.ShortsWrittenCount++] = cell;
             this.ChunksWrittenCount++;
         }
-    }
 
-    internal class StreamBuilderSRC
-    {
-        private StreamBuilder builder;
-
-        public int Capacity
+        public bool IsFull
         {
-            get { return this.builder.Capacity;  }
+            get { return this.ChunksWrittenCount == this.Capacity; }
         }
 
+    }
+
+    internal class StreamBuilderSRC: StreamBuilderBase
+    {
+
         public StreamBuilderSRC(int capacity)
+            : base(3, capacity)
         {
-            this.builder = new StreamBuilder(3, capacity);
+            
         }
 
         public void Add(short sec, short row, short cell)
         {
-            this.builder.Add(sec, row, cell);
+            this.__Add_SRC(sec, row, cell);
         }
 
         public void Add(SRC cell)
         {
-            this.builder.Add(cell.Section, cell.Row, cell.Cell);
-        }
-
-        public short[] Stream
-        {
-            get { return this.builder.Stream; }
-        }
-
-        public bool IsFull
-        {
-            get { return this.builder.ChunksWrittenCount == this.Capacity; }
+            this.__Add_SRC(cell.Section, cell.Row, cell.Cell);
         }
     }
 
-    internal class StreamBuilderSIDSRC
+    internal class StreamBuilderSIDSRC : StreamBuilderBase
     {
-        private StreamBuilder builder;
 
-        public int Capacity
+        public StreamBuilderSIDSRC(int capacity) : base(4,capacity)
         {
-            get { return this.builder.Capacity; }
-        }
-
-        public StreamBuilderSIDSRC(int capacity)
-        {
-            this.builder = new StreamBuilder(4, capacity);
         }
 
         public void Add(short shape_id, short sec, short row, short cell)
         {
-            this.builder.Add(shape_id, sec, row, cell);
+            this.__Add_SIDSRC(shape_id, sec, row, cell);
         }
 
         public void Add(short shape_id, SRC cell)
         {
-            this.builder.Add(shape_id, cell.Section, cell.Row, cell.Cell);
+            this.__Add_SIDSRC(shape_id, cell.Section, cell.Row, cell.Cell);
         }
-
-        public short[] Stream
-        {
-            get { return this.builder.Stream; }
-        }
-
-        public bool IsFull
-        {
-            get { return this.builder.ChunksWrittenCount == this.Capacity; }
-        }
-
     }
-
 }
