@@ -206,8 +206,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
             int total = this._get_total_cell_count(1);
 
-            const int src_length = 3;
-            var stream_builder = new StreamBuilder(src_length, total);
+            var stream_builder = new StreamBuilderSRC(total);
             
             foreach (var col in this.Cells)
             {
@@ -231,10 +230,9 @@ namespace VisioAutomation.ShapeSheet.Queries
                 }
             }
 
-            if (stream_builder.ChunksWrittenCount != total)
+            if (!stream_builder.IsFull)
             {
-                string msg = string.Format("Expected {0} Checks to be written. Actual = {1}", total,
-                    stream_builder.ChunksWrittenCount);
+                string msg = string.Format("StreamBuilder is not full");
                 throw new InternalAssertionException(msg);
             }
 
@@ -247,8 +245,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
             int total = this._get_total_cell_count(shapeids.Count);
 
-            const int sidsrc_length = 4;
-            var stream_builder = new StreamBuilder(sidsrc_length, total);
+            var stream_builder = new StreamBuilderSIDSRC(total);
 
             for (int i = 0; i < shapeids.Count; i++)
             {
@@ -281,10 +278,9 @@ namespace VisioAutomation.ShapeSheet.Queries
                 }
             }
 
-            if (stream_builder.ChunksWrittenCount != total)
+            if (!stream_builder.IsFull)
             {
-                string msg = string.Format("Expected {0} Chunks to be written. Actual = {1}", total,
-                    stream_builder.ChunksWrittenCount);
+                string msg = string.Format("StreamBuilder is not full");
                 throw new InternalAssertionException(msg);
             }
 
