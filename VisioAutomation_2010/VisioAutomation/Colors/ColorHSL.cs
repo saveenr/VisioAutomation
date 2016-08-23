@@ -46,7 +46,7 @@
 
         public override string ToString()
         {
-            var s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "HSL({0},{1},{2})",this.H, this.S, this.L);
+            var s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}({1},{2},{3})", nameof(ColorHSL), this.H, this.S, this.L);
             return s;
         }
 
@@ -83,7 +83,7 @@
         public string ToFormula()
         {
             this.CheckValidVisioHSL();
-            string formula = string.Format("{0}({1},{2},{3})", nameof(ColorHSL),this.H, this.S, this.L);
+            string formula = string.Format("{0}({1},{2},{3})", "HSL",this.H, this.S, this.L);
             return formula;
         }
     }
