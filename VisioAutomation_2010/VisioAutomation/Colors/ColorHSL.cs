@@ -83,7 +83,7 @@
         public string ToFormula()
         {
             this.CheckValidVisioHSL();
-            string formula = string.Format("HSL({0},{1},{2})", this.H, this.S, this.L);
+            string formula = string.Format("{0}({1},{2},{3})", nameof(ColorHSL),this.H, this.S, this.L);
             return formula;
         }
     }
