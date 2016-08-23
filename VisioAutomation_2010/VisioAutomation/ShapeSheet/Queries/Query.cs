@@ -206,7 +206,8 @@ namespace VisioAutomation.ShapeSheet.Queries
 
             int total = this._get_total_cell_count(1);
 
-            var stream_builder = new StreamBuilder(3, total);
+            const int src_length = 3;
+            var stream_builder = new StreamBuilder(src_length, total);
             
             foreach (var col in this.Cells)
             {
@@ -246,7 +247,8 @@ namespace VisioAutomation.ShapeSheet.Queries
 
             int total = this._get_total_cell_count(shapeids.Count);
 
-            var stream_builder = new StreamBuilder(4, total);
+            const int sidsrc_length = 4;
+            var stream_builder = new StreamBuilder(sidsrc_length, total);
 
             for (int i = 0; i < shapeids.Count; i++)
             {
