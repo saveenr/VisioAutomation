@@ -1,3 +1,4 @@
+using VisioAutomation.Utilities;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 
@@ -21,7 +22,7 @@ namespace VisioAutomationSamples
             VACUSTPROP.CustomPropertyHelper.Delete(s1, "FOO2");
 
             // Set the value of an existing properties
-            string formula = VA.Convert.StringToFormulaString("BAR3updated");
+            string formula = Convert.StringToFormulaString("BAR3updated");
             VACUSTPROP.CustomPropertyHelper.Set(s1, "FOO3", formula);
 
             // retrieve all the properties

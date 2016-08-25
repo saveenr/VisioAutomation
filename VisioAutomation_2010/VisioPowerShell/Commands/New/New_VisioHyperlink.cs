@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Utilities;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -49,9 +50,9 @@ namespace VisioPowerShell.Commands.New
 
             hlink.SubAddress = this.SubAddress;
 
-            hlink.Default = VA.Convert.BoolToFormula(this.Default);
-            hlink.NewWindow = VA.Convert.BoolToFormula(this.NewWindow);
-            hlink.Invisible = VA.Convert.BoolToFormula(this.Invisible);
+            hlink.Default = Convert.BoolToFormula(this.Default);
+            hlink.NewWindow = Convert.BoolToFormula(this.NewWindow);
+            hlink.Invisible = Convert.BoolToFormula(this.Invisible);
 
             this.Client.Hyperlink.Add(this.Shapes, hlink);
         }

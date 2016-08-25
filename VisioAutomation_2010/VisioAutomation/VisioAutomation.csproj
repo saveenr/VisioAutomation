@@ -201,7 +201,7 @@
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="ShapeSheet\SIDSRC.cs" />
     <Compile Include="Drawing\Size.cs" />
-    <Compile Include="Convert.cs" />
+    <Compile Include="Utilities\Convert.cs" />
     <Compile Include="ShapeSheet\SRCConstants.cs" />
     <Compile Include="ShapeSheet\SRC.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointCells.cs" />
