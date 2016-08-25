@@ -2,7 +2,7 @@
 using System.Globalization;
 using VisioAutomation.ShapeSheet;
 
-namespace VisioPowerShell
+namespace VisioPowerShell.ShapeSheet
 {
     public class CellValueDictionary : CellNameDictionary<string>
     {

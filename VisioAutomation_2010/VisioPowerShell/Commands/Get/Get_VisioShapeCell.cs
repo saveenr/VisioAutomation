@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Management.Automation;
+using VisioPowerShell.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Get
