@@ -45,10 +45,10 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(2, undirected_edges0.Count);
 
             var h0 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            h0.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.Exclude;
+            h0.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
             var h1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            h1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional;
+            h1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
             var directed_edges0 = client.Connection.GetDirectedEdges(h0);
             Assert.AreEqual(2, directed_edges0.Count);
@@ -84,13 +84,13 @@ namespace VisioAutomation_Tests.Scripting
             var undirected_connectors = client.Connection.Connect(new [] { s1,s2},new [] { s2,s3}, master);
 
             var h1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            h1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.Exclude;
+            h1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
             var directed_edges0 = client.Connection.GetDirectedEdges(h1);
             Assert.AreEqual(0, directed_edges0.Count);
 
             var h7 = new VA.DocumentAnalysis.ConnectorHandling();
-            h7.NoArrowsHandling = NoArrowsHandling.TreatAsBidirectional;
+            h7.NoArrowsHandling = NoArrowsHandling.TreatEdgeAsBidirectional;
 
             var directed_edges1 = client.Connection.GetDirectedEdges(h7);
             Assert.AreEqual(4, directed_edges1.Count);
