@@ -94,7 +94,6 @@
     <Compile Include="Core\Shapes\HyperlinkTests.cs" />
     <Compile Include="Framework\PowerShellTestsSession.cs" />
     <Compile Include="Scripting\ScriptingHyperlinkTests.cs" />
-    <Compile Include="Framework\SMA_Extensions.cs" />
     <Compile Include="Framework\VisioPSContext.cs" />
     <Compile Include="Scripting\ScriptingShapeText_Tests.cs" />
     <Compile Include="Framework\VisioPowerShellTests.cs" />
@@ -133,7 +132,7 @@
     <Compile Include="Core\Text\TextFormatTests.cs" />
     <Compile Include="Core\Shapes\CustomPropertiesTest.cs" />
     <Compile Include="Core\Extensions\Selection_Tests.cs" />
-    <Compile Include="Core\Internal_Tests.cs" />
+    <Compile Include="Core\InternalTests.cs" />
     <Compile Include="DocumentAnalysis\Path_Test.cs" />
     <Compile Include="Core\Shapes\UserDefinedCellsTests.cs" />
     <Compile Include="Scripting\ScriptingArrangeTests.cs" />

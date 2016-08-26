@@ -2,9 +2,6 @@ using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-
-
-
 namespace VisioAutomation.Shapes
 {
 
@@ -57,8 +54,6 @@ namespace VisioAutomation.Shapes
                 yield return shapes[i + 1];
             }
         }
-
-
 
         /// <summary>
         /// Enumerates all shapes contained by a set of shapes recursively

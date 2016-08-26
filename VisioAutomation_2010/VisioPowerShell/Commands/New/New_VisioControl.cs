@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Utilities;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -43,7 +44,7 @@ namespace VisioPowerShell.Commands.New
                 ctrl.YBehavior = this.YBehavior;
                 ctrl.X = this.X;
                 ctrl.Y = this.Y;
-                ctrl.CanGlue = VA.Convert.BoolToFormula(this.CanGlue);
+                ctrl.CanGlue = Convert.BoolToFormula(this.CanGlue);
                 ctrl.Tip = this.Tip;
 
                 this.Client.Control.Add(this.Shapes, ctrl);

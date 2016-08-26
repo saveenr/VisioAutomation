@@ -1,5 +1,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Convert = VisioAutomation.Utilities.Convert;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Core
@@ -17,11 +18,11 @@ namespace VisioAutomation_Tests.Core
 
         public void TestBoolToShortConversion()
         {
-            Assert.AreEqual(1, VA.Convert.BoolToShort(true));
-            Assert.AreEqual(0, VA.Convert.BoolToShort(false));
-            Assert.AreEqual(true, VA.Convert.ShortToBool(-1));
-            Assert.AreEqual(true, VA.Convert.ShortToBool(1));
-            Assert.AreEqual(false, VA.Convert.ShortToBool(0));
+            Assert.AreEqual(1, Convert.BoolToShort(true));
+            Assert.AreEqual(0, Convert.BoolToShort(false));
+            Assert.AreEqual(true, Convert.ShortToBool(-1));
+            Assert.AreEqual(true, Convert.ShortToBool(1));
+            Assert.AreEqual(false, Convert.ShortToBool(0));
         }
 
         public void Test_StringToFormulaString()
@@ -29,7 +30,7 @@ namespace VisioAutomation_Tests.Core
             bool caught = false;
             try
             {
-                var t = VA.Convert.StringToFormulaString(null);
+                var t = Convert.StringToFormulaString(null);
             }
             catch (ArgumentNullException)
             {
@@ -42,9 +43,9 @@ namespace VisioAutomation_Tests.Core
                 Assert.Fail("Did not throw expected exception");
             }
             
-            Assert.AreEqual("", VA.Convert.StringToFormulaString(string.Empty));
-            Assert.AreEqual("\" \"", VA.Convert.StringToFormulaString(" "));
-            Assert.AreEqual("\" \"\"foo\"\" \"", VA.Convert.StringToFormulaString(" \"foo\" "));
+            Assert.AreEqual("", Convert.StringToFormulaString(string.Empty));
+            Assert.AreEqual("\" \"", Convert.StringToFormulaString(" "));
+            Assert.AreEqual("\" \"\"foo\"\" \"", Convert.StringToFormulaString(" \"foo\" "));
         }
 
         public void Test_FormulaStringToString()
@@ -52,7 +53,7 @@ namespace VisioAutomation_Tests.Core
             bool caught = false;
             try
             {
-                var t = VA.Convert.FormulaStringToString(null);
+                var t = Convert.FormulaStringToString(null);
             }
             catch (ArgumentNullException)
             {
@@ -65,17 +66,17 @@ namespace VisioAutomation_Tests.Core
                 Assert.Fail("Did not throw expected exception");
             }
 
-            Assert.AreEqual("", VA.Convert.FormulaStringToString(string.Empty));
-            Assert.AreEqual(" ", VA.Convert.FormulaStringToString(" "));
-            Assert.AreEqual(" \"foo\" ", VA.Convert.FormulaStringToString(" \"foo\" "));
+            Assert.AreEqual("", Convert.FormulaStringToString(string.Empty));
+            Assert.AreEqual(" ", Convert.FormulaStringToString(" "));
+            Assert.AreEqual(" \"foo\" ", Convert.FormulaStringToString(" \"foo\" "));
 
-            Assert.AreEqual("", VA.Convert.FormulaStringToString("\"\""));
-            Assert.AreEqual(" ", VA.Convert.FormulaStringToString("\" \""));
-            Assert.AreEqual(" \"foo\" ", VA.Convert.FormulaStringToString("\" \"\"foo\"\" \""));
+            Assert.AreEqual("", Convert.FormulaStringToString("\"\""));
+            Assert.AreEqual(" ", Convert.FormulaStringToString("\" \""));
+            Assert.AreEqual(" \"foo\" ", Convert.FormulaStringToString("\" \"\"foo\"\" \""));
 
-            Assert.AreEqual("=", VA.Convert.FormulaStringToString("="));
-            Assert.AreEqual("=1", VA.Convert.FormulaStringToString("=1"));
-            Assert.AreEqual("=\"1\"", VA.Convert.FormulaStringToString("=\"1\""));
+            Assert.AreEqual("=", Convert.FormulaStringToString("="));
+            Assert.AreEqual("=1", Convert.FormulaStringToString("=1"));
+            Assert.AreEqual("=\"1\"", Convert.FormulaStringToString("=\"1\""));
 
         }
     }

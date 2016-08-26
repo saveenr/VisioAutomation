@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 namespace VisioAutomation_Tests.Core.Internal
 {
     [TestClass]
-    public class Internal_Tests
+    public class InternalTests
     {
         [TestMethod]
         public void Internal_ValidateSnappingGrid()

@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.Extensions
+﻿using VisioAutomation.Utilities;
+
+namespace VisioAutomation.Extensions
 {
     public static class CellDataMethods
     {

@@ -87,7 +87,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[1], shapes[2], false, false);
 
             var ch1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional;
+            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
             var edges1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch1);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(3, map1.CountFromNodes());
@@ -100,7 +100,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var ch2 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional;
+            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
             var edges2 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page1, ch2);
             var map2 = new ConnectivityMap(edges2);
@@ -130,7 +130,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[1], shapes[2], false, false);
 
             var ch = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.Exclude;
+            ch.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
             var edges1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch);
             var map1 = new ConnectivityMap(edges1);
@@ -153,7 +153,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[1], shapes[2], true, false);
 
             var ch1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.Exclude;
+            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
             var edges1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch1);
             var map1 = new ConnectivityMap(edges1);
@@ -164,7 +164,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var ch2 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional;
+            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
 
             var edges2 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page1, ch2);
@@ -189,7 +189,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[1], shapes[2], true, true);
 
             var ch1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.Exclude;
+            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
             var edges1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch1);
             var map1 = new ConnectivityMap(edges1);
@@ -203,7 +203,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var ch2 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatAsBidirectional;
+            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
             var edges2 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page1, ch2);
             var map2 = new ConnectivityMap(edges2);
