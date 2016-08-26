@@ -3,10 +3,11 @@
     class StreamBuilderBase
     {
         public short[] Stream { get; }
-        private int ChunksWrittenCount { get; set; }
-        private int ChunkSize { get; }
-        private int ShortsWrittenCount { get; set; }
         public int Capacity { get; }
+
+        private int _chunk_size { get; }
+        private int _chunks_written_count { get; set; }
+        private int _shorts_written_count { get; set; }
 
         public StreamBuilderBase(int chunksize, int capacity)
         {
@@ -18,55 +19,56 @@
 
             this.Capacity = capacity;
             this.Stream = new short[chunksize * capacity];
-            this.ChunksWrittenCount = 0;
-            this.ChunkSize = chunksize;
-            this.ShortsWrittenCount = 0;
+            this._chunks_written_count = 0;
+            this._chunk_size = chunksize;
+            this._shorts_written_count = 0;
         }
 
         protected void __Add_SIDSRC(short id, short sec, short row, short cell)
         {
-            if (this.ChunkSize != 4)
+            if (this._chunk_size != 4)
             {
-                string msg = "Only ChunkSize 4 supported";
+                string msg = "Expected 3 shorts to add to stream";
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
-            if (this.ChunksWrittenCount >= this.Capacity)
-            {
-                string msg = "Exceeded Capacity";
-                throw new System.ArgumentOutOfRangeException(msg);
-            }
+            _check_enough_capacity();
 
-            this.Stream[this.ShortsWrittenCount++] = id;
-            this.Stream[this.ShortsWrittenCount++] = sec;
-            this.Stream[this.ShortsWrittenCount++] = row;
-            this.Stream[this.ShortsWrittenCount++] = cell;
-            this.ChunksWrittenCount++;
+            this.Stream[this._shorts_written_count++] = id;
+            this.Stream[this._shorts_written_count++] = sec;
+            this.Stream[this._shorts_written_count++] = row;
+            this.Stream[this._shorts_written_count++] = cell;
+            this._chunks_written_count++;
         }
 
         protected void __Add_SRC(short sec, short row, short cell)
         {
-            if (this.ChunkSize != 3)
+            if (this._chunk_size != 3)
             {
-                string msg = "Only ChunkSize 3 supported";
+                string msg = "Expected 4 shorts to add to stream";
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
-            if (this.ChunksWrittenCount >= this.Capacity)
+            _check_enough_capacity();
+
+            this.Stream[this._shorts_written_count++] = sec;
+            this.Stream[this._shorts_written_count++] = row;
+            this.Stream[this._shorts_written_count++] = cell;
+            this._chunks_written_count++;
+        }
+
+        private void _check_enough_capacity()
+        {
+            if (this._chunks_written_count >= this.Capacity)
             {
                 string msg = "Exceeded Capacity";
                 throw new System.ArgumentOutOfRangeException(msg);
             }
-
-            this.Stream[this.ShortsWrittenCount++] = sec;
-            this.Stream[this.ShortsWrittenCount++] = row;
-            this.Stream[this.ShortsWrittenCount++] = cell;
-            this.ChunksWrittenCount++;
         }
 
         public bool IsFull
         {
-            get { return this.ChunksWrittenCount == this.Capacity; }
+            get { return this._chunks_written_count == this.Capacity; }
         }
 
     }
