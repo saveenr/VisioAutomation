@@ -20,7 +20,8 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
 
             if (shapes.Count<1)
             {
@@ -44,7 +45,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
+
 
             if (shapes.Count < 1)
             {
@@ -94,8 +97,9 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
-            
-            var shapes = this.GetTargetShapes(targets);
+
+            var shapes = targets.ResolveShapes(this._client);
+
 
             if (shapes.Count < 1)
             {
@@ -144,11 +148,14 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shape = this.GetTargetShape(target_shape);
-            if (shape == null)
+            var targets = new VisioAutomation.Scripting.TargetShapes( new [] { target_shape});
+            var shapes = targets.ResolveShapes(this._client);
+            if (shapes.Count < 1)
             {
                 return;
             }
+
+            var shape = shapes[0];
 
             this.cache.CopyFormat(shape, category);
         }
@@ -163,7 +170,8 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return;

@@ -19,7 +19,8 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VACUSTPROP.CustomPropertyCells>>();
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return prop_dic;
@@ -47,7 +48,9 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
+
             if (shapes.Count < 1)
             {
                 return new List<bool>();
@@ -73,7 +76,8 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return;
@@ -99,7 +103,8 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(customprop));
             }
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return;

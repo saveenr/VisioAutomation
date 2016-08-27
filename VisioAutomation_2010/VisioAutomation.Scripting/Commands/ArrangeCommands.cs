@@ -24,7 +24,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
+            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
             {
                 return;
@@ -52,7 +52,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
+            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
             {
                 return;
@@ -77,7 +77,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
+            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
             {
                 return;
@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
+            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
             {
                 return;
@@ -137,7 +137,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
             
-            var shapes = this.GetTargetShapes2D(targets);
+            var shapes = targets.ResolveShapes2DOnly(this._client);
             if (shapes.Count < 1)
             {
                 return;
@@ -186,7 +186,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
+            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
             {
                 return;
@@ -201,7 +201,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
+            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 2)
             {
                 return;
@@ -236,7 +236,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
+            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 2)
             {
                 return;
@@ -269,7 +269,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
             if (shapes.Count<1)
             {
                 return new List<Shapes.XFormCells>(0);
@@ -326,7 +326,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
             if (shapes.Count < 1)
             {
                 return;
@@ -354,7 +354,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
             if (shapes.Count < 1)
             {
                 return;
@@ -440,7 +440,8 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes2D(targets);
+            var shapes = targets.ResolveShapes2DOnly(this._client);
+
             if (shapes.Count < 1)
             {
                 return;
@@ -460,7 +461,8 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes2D(targets);
+            var shapes = targets.ResolveShapes2DOnly(this._client);
+
             if (shapes.Count < 1)
             {
                 return;

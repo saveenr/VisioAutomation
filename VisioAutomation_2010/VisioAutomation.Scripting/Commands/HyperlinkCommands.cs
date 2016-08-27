@@ -22,7 +22,9 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(ctrl));
             }
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
+
             if (shapes.Count < 1)
             {
                 return new List<int>(0);
@@ -47,7 +49,8 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(targets);
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return;
@@ -66,8 +69,9 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
-            
-            var shapes = this.GetTargetShapes(targets);
+
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<VAHLINK.HyperlinkCells>>(0);
