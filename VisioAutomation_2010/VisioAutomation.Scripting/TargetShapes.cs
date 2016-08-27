@@ -15,10 +15,12 @@ namespace VisioAutomation.Scripting
         }
         public TargetShapes(IList<Shape> shapes)
         {
+            // If shapes == null then it means to use the active selection
+            // else use the specified shapes
             this.Shapes = shapes;
         }
    
-        public int SetSelectionGetSelectedCount(VisioAutomation.Scripting.Client client)
+        internal int SetSelectionGetSelectedCount(VisioAutomation.Scripting.Client client)
         {
             client.Application.AssertApplicationAvailable();
 
@@ -36,7 +38,7 @@ namespace VisioAutomation.Scripting
             return selected_count;
         }
 
-        public IList<IVisio.Shape> ResolveShapes(VisioAutomation.Scripting.Client client)
+        internal IList<IVisio.Shape> ResolveShapes(VisioAutomation.Scripting.Client client)
         {
             client.Application.AssertApplicationAvailable();
 
@@ -52,7 +54,7 @@ namespace VisioAutomation.Scripting
         }
 
 
-        public IList<IVisio.Shape> ResolveShapes2DOnly(VisioAutomation.Scripting.Client _client)
+        internal IList<IVisio.Shape> ResolveShapes2DOnly(VisioAutomation.Scripting.Client _client)
         {
             var shapes = this.ResolveShapes(_client);
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
