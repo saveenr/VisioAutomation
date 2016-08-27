@@ -55,39 +55,31 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes == null)
             {
-                // If no collection of shapes were passed in then use the selection
-                this._client.WriteVerbose("GetTargetShapes: Targeting shapes from active selection");
                 var out_shapes = this._client.Selection.GetShapes();
-                this._client.WriteVerbose("GetTargetShapes: Number of shapes = {0}", out_shapes.Count);
+                this._client.WriteVerbose("GetTargetShapes: Returning {0} shapes from the active selection", out_shapes.Count);
                 return out_shapes;
             }
 
-            this._client.WriteVerbose("GetTargetShapes: Targeting specified shapes ");
-            this._client.WriteVerbose("GetTargetShapes: Number of shapes = {0}", shapes.Count);
+            this._client.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", shapes.Count);
             return shapes;
         }
 
-        protected int GetTargetSelection(IList<IVisio.Shape> shapes)
+        protected int GetTargetSelectionCount(IList<IVisio.Shape> shapes)
         {
             this._client.Application.AssertApplicationAvailable();
 
             if (shapes == null)
             {
-                this._client.WriteVerbose("GetTargetSelection: Targeting shapes from active selection");
                 int n = this._client.Selection.Count();
-                this._client.WriteVerbose("GetTargetSelection: Number of shapes = {0}", n);
+                this._client.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
                 return n;
             }
 
-            this._client.WriteVerbose("GetTargetSelection: Targeting specified shapes");
-            this._client.WriteVerbose("GetTargetSelection: Number of shapes specified = {0}", shapes.Count);
-            this._client.WriteVerbose("GetTargetSelection: Clearing Selection");
+            this._client.WriteVerbose("GetTargetSelectionCount: Reseting selecton to specified {0} shapes", shapes.Count);
             this._client.Selection.None();
-            this._client.WriteVerbose("GetTargetSelection: Setting selection");
             this._client.Selection.Select(shapes);
-            int n2 = this._client.Selection.Count();
-            this._client.WriteVerbose("GetTargetSelection: Selection contains {0} shapes", n2);
-            return n2;
+            int selected_count = this._client.Selection.Count();
+            return selected_count;
         }
 
         protected IVisio.Shape GetTargetShape( IVisio.Shape shape)

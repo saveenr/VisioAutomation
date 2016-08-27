@@ -277,7 +277,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int n = this.GetTargetSelection(target_shapes);
+            int n = this.GetTargetSelectionCount(target_shapes);
 
             this._client.WriteVerbose("Number of shapes to duplicate: {0}", n);
 

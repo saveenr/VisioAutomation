@@ -24,7 +24,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelection(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -52,7 +52,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelection(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -77,7 +77,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelection(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelection(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -186,7 +186,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelection(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -201,7 +201,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelection(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(target_shapes);
             if (shape_count < 2)
             {
                 return;
@@ -236,7 +236,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelection(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(target_shapes);
             if (shape_count < 2)
             {
                 return;
