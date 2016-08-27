@@ -49,6 +49,11 @@ namespace VisioAutomation.Scripting.Commands
             return shapes_2d;
         }
 
+        protected IList<IVisio.Shape> GetTargetShapes2D(TargetShapes targets)
+        {
+            return this.GetTargetShapes2D(targets.Shapes);
+        }
+
         protected IList<IVisio.Shape> GetTargetShapes(IList<IVisio.Shape> shapes)
         {
             this._client.Application.AssertApplicationAvailable();
@@ -62,6 +67,11 @@ namespace VisioAutomation.Scripting.Commands
 
             this._client.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", shapes.Count);
             return shapes;
+        }
+
+        protected IList<IVisio.Shape> GetTargetShapes(TargetShapes targets)
+        {
+            return this.GetTargetShapes(targets.Shapes);
         }
 
         protected int GetTargetSelectionCount(IList<IVisio.Shape> shapes)

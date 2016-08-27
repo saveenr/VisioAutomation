@@ -160,7 +160,16 @@ namespace VisioAutomation.Scripting.Commands
             var formulas = query.GetFormulas(surface, shapeids);
             return formulas;
         }
-        
+
+        public void SetFormula(
+            TargetShapes targets,
+            IList<ShapeSheet.SRC> srcs,
+            IList<string> formulas,
+            IVisio.VisGetSetArgs flags)
+        {
+            this.SetFormula(targets.Shapes,srcs,formulas,flags);
+        }
+
         public void SetFormula(
             IList<IVisio.Shape> target_shapes, 
             IList<ShapeSheet.SRC> srcs, 

@@ -14,7 +14,8 @@ namespace VisioPowerShell.Commands.Remove
 
         protected override void ProcessRecord()
         {
-            this.Client.Hyperlink.Delete(this.Shapes,this.Index);
+            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            this.Client.Hyperlink.Delete(targets,this.Index);
         }
     }
 }

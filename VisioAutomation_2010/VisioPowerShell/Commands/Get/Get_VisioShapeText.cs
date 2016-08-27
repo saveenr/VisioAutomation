@@ -11,7 +11,8 @@ namespace VisioPowerShell.Commands.Get
 
         protected override void ProcessRecord()
         {
-            var t = this.Client.Text.Get(this.Shapes);
+            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var t = this.Client.Text.Get(targets);
             this.WriteObject(t);
         }
     }

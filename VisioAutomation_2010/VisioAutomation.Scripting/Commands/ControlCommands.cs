@@ -12,7 +12,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<int> Add(IList<IVisio.Shape> target_shapes, VACONTROL.ControlCells ctrl)
+        public IList<int> Add(TargetShapes targets, VACONTROL.ControlCells ctrl)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(ctrl));
             }
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return new List<int>(0);
@@ -43,12 +43,12 @@ namespace VisioAutomation.Scripting.Commands
             return control_indices;
         }
 
-        public void Delete(IList<IVisio.Shape> target_shapes, int n)
+        public void Delete(TargetShapes targets, int n)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return;
@@ -64,12 +64,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>> Get(IList<IVisio.Shape> target_shapes)
+        public Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
             
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>>(0);

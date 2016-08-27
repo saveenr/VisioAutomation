@@ -21,7 +21,8 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Selection.None();
 
-            client.ShapeSheet.SetFormula(null, new [] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
+            var targets = new VA.Scripting.TargetShapes();
+            client.ShapeSheet.SetFormula(targets, new [] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
             client.Document.Close(true);
         }
 

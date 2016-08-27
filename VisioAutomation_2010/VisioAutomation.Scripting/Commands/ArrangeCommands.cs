@@ -19,12 +19,12 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void DistributeHorizontal(IList<IVisio.Shape> target_shapes, AlignmentHorizontal halign)
+        public void DistributeHorizontal(TargetShapes targets, AlignmentHorizontal halign)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
             if (shape_count < 1)
             {
                 return;
@@ -47,12 +47,12 @@ namespace VisioAutomation.Scripting.Commands
             application.DoCmd((short)cmd);
         }
 
-        public void DistributeVertical(IList<IVisio.Shape> target_shapes, AlignmentVertical valign)
+        public void DistributeVertical(TargetShapes targets, AlignmentVertical valign)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
             if (shape_count < 1)
             {
                 return;
@@ -72,12 +72,12 @@ namespace VisioAutomation.Scripting.Commands
             application.DoCmd((short)cmd); 
         }
 
-        public void DistributeOnAxis(IList<IVisio.Shape> target_shapes, Axis axis)
+        public void DistributeOnAxis(TargetShapes targets, Axis axis)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
             if (shape_count < 1)
             {
                 return;
@@ -105,7 +105,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Nudge(IList<IVisio.Shape> target_shapes, double dx, double dy)
+        public void Nudge(TargetShapes targets, double dx, double dy)
         {
             if (dx == 0.0 && dy == 0.0)
             {
@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
             if (shape_count < 1)
             {
                 return;
@@ -132,12 +132,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SnapSize(IList<IVisio.Shape> target_shapes, double w, double h)
+        public void SnapSize(TargetShapes targets, double w, double h)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
             
-            var shapes = this.GetTargetShapes2D(target_shapes);
+            var shapes = this.GetTargetShapes2D(targets);
             if (shapes.Count < 1)
             {
                 return;
@@ -181,12 +181,12 @@ namespace VisioAutomation.Scripting.Commands
             ArrangeHelper.update_xfrms(page, shapeids, output_xfrms);
         }
 
-        public void Send(IList<IVisio.Shape> target_shapes, Selections.ShapeSendDirection dir)
+        public void Send(TargetShapes targets, Selections.ShapeSendDirection dir)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
             if (shape_count < 1)
             {
                 return;
@@ -196,12 +196,12 @@ namespace VisioAutomation.Scripting.Commands
             Selections.SelectionHelper.SendShapes(selection, dir);
         }
 
-        public void AlignHorizontal(IList<IVisio.Shape> target_shapes, AlignmentHorizontal align)
+        public void AlignHorizontal(TargetShapes targets, AlignmentHorizontal align)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
             if (shape_count < 2)
             {
                 return;
@@ -231,12 +231,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void AlignVertical(IList<IVisio.Shape> target_shapes, AlignmentVertical align)
+        public void AlignVertical(TargetShapes targets, AlignmentVertical align)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int shape_count = this.GetTargetSelectionCount(target_shapes);
+            int shape_count = this.GetTargetSelectionCount(targets.Shapes);
             if (shape_count < 2)
             {
                 return;
@@ -264,12 +264,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<Shapes.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
+        public IList<Shapes.XFormCells> GetXForm(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count<1)
             {
                 return new List<Shapes.XFormCells>(0);
@@ -301,10 +301,10 @@ namespace VisioAutomation.Scripting.Commands
             return g;
         }
 
-        public void Ungroup(IList<IVisio.Shape> target_shapes)
+        public void Ungroup(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
-            if (target_shapes == null)
+            if (targets.Shapes == null)
             {
                 if (this._client.Selection.HasShapes())
                 {
@@ -314,19 +314,19 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                foreach (var shape in target_shapes)
+                foreach (var shape in targets.Shapes)
                 {
                     shape.Ungroup();
                 }
             }
         }
 
-        public void SetLock(IList<IVisio.Shape> target_shapes, Shapes.LockCells lockcells)
+        public void SetLock(TargetShapes targets, Shapes.LockCells lockcells)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return;
@@ -349,12 +349,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)
+        public void SetSize(TargetShapes targets, double? w, double? h)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return;
@@ -434,12 +434,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
         
-        public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, SnapCornerPosition corner)
+        public void SnapCorner(TargetShapes targets, double w, double h, SnapCornerPosition corner)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes2D(target_shapes);
+            var shapes = this.GetTargetShapes2D(targets);
             if (shapes.Count < 1)
             {
                 return;
@@ -454,12 +454,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SnapSize(IList<IVisio.Shape> target_shapes, Drawing.Size snapsize, Drawing.Size minsize)
+        public void SnapSize(TargetShapes targets, Drawing.Size snapsize, Drawing.Size minsize)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes2D(target_shapes);
+            var shapes = this.GetTargetShapes2D(targets);
             if (shapes.Count < 1)
             {
                 return;

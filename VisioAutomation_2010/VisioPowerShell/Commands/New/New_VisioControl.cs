@@ -47,7 +47,9 @@ namespace VisioPowerShell.Commands.New
                 ctrl.CanGlue = Convert.BoolToFormula(this.CanGlue);
                 ctrl.Tip = this.Tip;
 
-                this.Client.Control.Add(this.Shapes, ctrl);
+            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+
+            this.Client.Control.Add(targets, ctrl);
         }
     }
 }

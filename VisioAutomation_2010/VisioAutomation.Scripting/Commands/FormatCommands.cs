@@ -15,12 +15,12 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, Shapes.FormatCells format)
+        public void Set(TargetShapes targets, Shapes.FormatCells format)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
 
             if (shapes.Count<1)
             {
@@ -39,12 +39,12 @@ namespace VisioAutomation.Scripting.Commands
             update.Commit(application.ActivePage);            
         }
 
-        public IList<Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
+        public IList<Shapes.FormatCells> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
 
             if (shapes.Count < 1)
             {
@@ -90,12 +90,12 @@ namespace VisioAutomation.Scripting.Commands
             this.cached_size_height = queryresults.Cells[height_col];
         }
 
-        public void PasteSize(IList<IVisio.Shape> target_shapes, bool paste_width, bool paste_height)
+        public void PasteSize(TargetShapes targets, bool paste_width, bool paste_height)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
             
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
 
             if (shapes.Count < 1)
             {
@@ -158,18 +158,18 @@ namespace VisioAutomation.Scripting.Commands
             this.cache.Clear();
         }
 
-        public void Paste(IList<IVisio.Shape> target_shapes, FormatCategory category, bool apply_formulas)
+        public void Paste(TargetShapes targets, FormatCategory category, bool apply_formulas)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return;
             }
  
-            var shapeids = target_shapes.Select(s=>s.ID).ToList();
+            var shapeids = shapes.Select(s=>s.ID).ToList();
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
 
