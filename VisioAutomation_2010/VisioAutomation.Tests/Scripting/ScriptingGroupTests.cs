@@ -28,7 +28,9 @@ namespace VisioAutomation_Tests.Scripting
             var s1 = client.Selection.GetShapes();
             Assert.AreEqual(1, s1.Count);
 
-            client.Arrange.Ungroup(null);
+            var targets = new VisioAutomation.Scripting.TargetShapes();
+
+            client.Arrange.Ungroup(targets);
             client.Selection.All();
             var s2 = client.Selection.GetShapes();
             Assert.AreEqual(4, s2.Count);

@@ -30,9 +30,11 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            client.Arrange.DistributeHorizontal(null,AlignmentHorizontal.Center);
+            var targets = new VisioAutomation.Scripting.TargetShapes();
 
-            var xforms = client.Arrange.GetXForm(null);
+            client.Arrange.DistributeHorizontal(targets,AlignmentHorizontal.Center);
+
+            var xforms = client.Arrange.GetXForm(targets);
             AssertUtil.AreEqual(1.125, 1.25, xforms[0].GetPinPosResult(),0.00001);
             AssertUtil.AreEqual(3.1875, 3.25, xforms[1].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual(5.25, 3, xforms[2].GetPinPosResult(), 0.00001);
@@ -55,9 +57,11 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            client.Arrange.Nudge(null,1, -1);
+            var targets = new VisioAutomation.Scripting.TargetShapes();
 
-            var xforms = client.Arrange.GetXForm(null);
+            client.Arrange.Nudge(targets,1, -1);
+
+            var xforms = client.Arrange.GetXForm(targets);
             AssertUtil.AreEqual(2.125, 0.25, xforms[0].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual(3.25, 2.25, xforms[1].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual(6.25, 2, xforms[2].GetPinPosResult(), 0.00001);

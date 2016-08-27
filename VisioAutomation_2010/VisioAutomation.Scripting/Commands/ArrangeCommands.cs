@@ -407,13 +407,14 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Stack"))
             {
+                var targets = new TargetShapes();
                 if (axis == Axis.YAxis)
                 {
-                    this.AlignHorizontal(null,AlignmentHorizontal.Center);
+                    this.AlignHorizontal(targets,AlignmentHorizontal.Center);
                 }
                 else
                 {
-                    this.AlignVertical(null,AlignmentVertical.Center);
+                    this.AlignVertical(targets,AlignmentVertical.Center);
                 }
                 this.DistributeOnAxis(axis, space);
             }

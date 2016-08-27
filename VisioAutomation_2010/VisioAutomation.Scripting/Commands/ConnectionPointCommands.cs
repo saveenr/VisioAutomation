@@ -82,7 +82,8 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
 
-            return this.Add(null, fx, fy, type);
+            var targets = new TargetShapes();
+            return this.Add(targets, fx, fy, type);
         }
 
         public void Delete(TargetShapes targets, int index)

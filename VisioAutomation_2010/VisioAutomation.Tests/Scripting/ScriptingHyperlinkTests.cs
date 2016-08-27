@@ -25,7 +25,10 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var hyperlinks0 = client.Hyperlink.Get(null);
+            var targets = new VisioAutomation.Scripting.TargetShapes();
+
+
+            var hyperlinks0 = client.Hyperlink.Get(targets);
 
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks0[s1].Count);
@@ -34,16 +37,17 @@ namespace VisioAutomation_Tests.Scripting
 
             var hyperlink = new VisioAutomation.Shapes.Hyperlinks.HyperlinkCells();
             hyperlink.Address = "http://www.microsoft.com";
-            client.Hyperlink.Add(null, hyperlink);
+            client.Hyperlink.Add(targets, hyperlink);
 
-            var hyperlinks1 = client.Hyperlink.Get(null);
+
+            var hyperlinks1 = client.Hyperlink.Get(targets);
             Assert.AreEqual(3, hyperlinks1.Count);
             Assert.AreEqual(1, hyperlinks1[s1].Count);
             Assert.AreEqual(1, hyperlinks1[s2].Count);
             Assert.AreEqual(1, hyperlinks1[s3].Count);
 
-            client.Hyperlink.Delete(null, 0);
-            var hyperlinks2 = client.Hyperlink.Get(null);
+            client.Hyperlink.Delete(targets, 0);
+            var hyperlinks2 = client.Hyperlink.Get(targets);
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks2[s1].Count);
             Assert.AreEqual(0, hyperlinks2[s2].Count);

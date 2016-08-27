@@ -24,7 +24,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var controls0 = client.Control.Get(null);
+            var targets = new VisioAutomation.Scripting.TargetShapes();
+
+            var controls0 = client.Control.Get(targets);
             int found_controls = controls0.Count;
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls0[s1].Count);
@@ -34,16 +36,16 @@ namespace VisioAutomation_Tests.Scripting
             var ctrl = new VACONTROL.ControlCells();
             ctrl.X = "Width*0.5";
             ctrl.Y = "0";
-            client.Control.Add(null, ctrl);
+            client.Control.Add(targets, ctrl);
 
-            var controls1 = client.Control.Get(null);
+            var controls1 = client.Control.Get(targets);
             Assert.AreEqual(3, controls1.Count);
             Assert.AreEqual(1, controls1[s1].Count);
             Assert.AreEqual(1, controls1[s2].Count);
             Assert.AreEqual(1, controls1[s3].Count);
 
-            client.Control.Delete(null, 0);
-            var controls2 = client.Control.Get(null);
+            client.Control.Delete(targets, 0);
+            var controls2 = client.Control.Get(targets);
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls2[s1].Count);
             Assert.AreEqual(0, controls2[s2].Count);
