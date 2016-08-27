@@ -9,7 +9,8 @@ namespace VisioAutomation.Scripting.Utilities
 {
     internal static class ArrangeHelper
     {
-        private static Drawing.Rectangle GetRectangle(Shapes.XFormCells xform)
+
+        public static Drawing.Rectangle GetRectangle(Shapes.XFormCells xform)
         {
             var pin = new Drawing.Point(xform.PinX.Result, xform.PinY.Result);
             var locpin = new Drawing.Point(xform.LocPinX.Result, xform.LocPinY.Result);
@@ -106,7 +107,8 @@ namespace VisioAutomation.Scripting.Utilities
             ArrangeHelper.update_xfrms(page, sorted_shape_ids, output_xfrms);
         }
 
-        private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
+ 
+        internal static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
         {
 
             var update = new FormulaWriterSIDSRC();

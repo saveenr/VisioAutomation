@@ -38,22 +38,22 @@ namespace VisioPowerShell.Commands.Format
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Arrange.Distribute(this.Shapes, Axis.XAxis);
+                this.Client.Arrange.DistributeOnAxis(this.Shapes, Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Arrange.Distribute(this.Shapes, Axis.YAxis);
+                this.Client.Arrange.DistributeOnAxis(this.Shapes, Axis.YAxis);
             }
 
             if (this.AlignVertical != Model.VerticalAlignment.None)
             {
-                this.Client.Arrange.Align(this.Shapes, (AlignmentVertical)this.AlignVertical);
+                this.Client.Arrange.AlignVertical(this.Shapes, (AlignmentVertical)this.AlignVertical);
             }
 
             if (this.AlignHorizontal != Model.HorizontalAlignment.None)
             {
-                this.Client.Arrange.Align(this.Shapes, (AlignmentHorizontal)this.AlignHorizontal);
+                this.Client.Arrange.AlignHorizontal(this.Shapes, (AlignmentHorizontal)this.AlignHorizontal);
             }
 
         }
