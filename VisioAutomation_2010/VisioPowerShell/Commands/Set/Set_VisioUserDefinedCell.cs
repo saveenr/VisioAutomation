@@ -20,13 +20,14 @@ namespace VisioPowerShell.Commands.Set
 
         protected override void ProcessRecord()
         {
+            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
             var userprop = new VisioAutomation.Shapes.UserDefinedCells.UserDefinedCell(this.Name, this.Value);
             if (this.Prompt != null)
             {
                 userprop.Prompt = this.Prompt;
             }
 
-            this.Client.UserDefinedCell.Set(this.Shapes, userprop);
+            this.Client.UserDefinedCell.Set(targets, userprop);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void SetName(IList<IVisio.Shape> target_shapes, IList<string> names)
+        public void SetName(TargetShapes  targets, IList<string> names)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return;
@@ -62,12 +62,12 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public ListOutput<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
+        public ListOutput<T> QueryResults<T>(TargetShapes targets, IList<ShapeSheet.SRC> srcs)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -85,12 +85,12 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public ListOutput<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
+        public ListOutput<string> QueryFormulas(TargetShapes targets, IList<ShapeSheet.SRC> srcs)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
@@ -110,12 +110,12 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public ListOutput<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public ListOutput<T> QueryResults<T>(TargetShapes targets, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
@@ -135,12 +135,12 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public ListOutput<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public ListOutput<string> QueryFormulas(TargetShapes targets, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
@@ -161,17 +161,10 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public void SetFormula(
-            TargetShapes targets,
-            IList<ShapeSheet.SRC> srcs,
-            IList<string> formulas,
-            IVisio.VisGetSetArgs flags)
-        {
-            this.SetFormula(targets.Shapes,srcs,formulas,flags);
-        }
+
 
         public void SetFormula(
-            IList<IVisio.Shape> target_shapes, 
+            TargetShapes targets, 
             IList<ShapeSheet.SRC> srcs, 
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
@@ -179,7 +172,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
             
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 this._client.WriteVerbose("SetFormula: Zero Shapes. Not performing Operation");
@@ -238,15 +231,15 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetResult(
-                IList<IVisio.Shape> target_shapes, 
+        public void SetResult<T>(
+                TargetShapes  targets, 
                 IList<ShapeSheet.SRC> srcs,
                 IList<string> results, IVisio.VisGetSetArgs flags)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
             
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 this._client.WriteVerbose("SetResult: Zero Shapes. Not performing Operation");

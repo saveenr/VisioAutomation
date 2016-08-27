@@ -13,14 +13,14 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>> Get(IList<IVisio.Shape> target_shapes)
+        public IDictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>>();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return prop_dic;
@@ -40,7 +40,7 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
+        public IList<bool> Contains(TargetShapes targets, string name)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -50,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return new List<bool>();
@@ -62,12 +62,12 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
        
-        public void Delete(IList<IVisio.Shape> target_shapes, string name)
+        public void Delete(TargetShapes targets, string name)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return;
@@ -93,12 +93,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, VA_UDC.UserDefinedCell userdefinedcell)
+        public void Set(TargetShapes targets, VA_UDC.UserDefinedCell userdefinedcell)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(targets);
             if (shapes.Count < 1)
             {
                 return;

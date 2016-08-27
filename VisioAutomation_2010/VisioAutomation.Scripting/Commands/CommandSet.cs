@@ -43,35 +43,25 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        protected IList<IVisio.Shape> GetTargetShapes2D(IList<IVisio.Shape> shapes)
+        protected IList<IVisio.Shape> GetTargetShapes2D(TargetShapes targets)
         {
-            var shapes_2d = this.GetTargetShapes(shapes).Where(s => s.OneD == 0).ToList();
+            var shapes_2d = this.GetTargetShapes(targets).Where(s => s.OneD == 0).ToList();
             return shapes_2d;
         }
 
-        protected IList<IVisio.Shape> GetTargetShapes2D(TargetShapes targets)
-        {
-            return this.GetTargetShapes2D(targets.Shapes);
-        }
-
-        protected IList<IVisio.Shape> GetTargetShapes(IList<IVisio.Shape> shapes)
+        protected IList<IVisio.Shape> GetTargetShapes(TargetShapes targets )
         {
             this._client.Application.AssertApplicationAvailable();
 
-            if (shapes == null)
+            if (targets.Shapes == null)
             {
                 var out_shapes = this._client.Selection.GetShapes();
                 this._client.WriteVerbose("GetTargetShapes: Returning {0} shapes from the active selection", out_shapes.Count);
                 return out_shapes;
             }
 
-            this._client.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", shapes.Count);
-            return shapes;
-        }
-
-        protected IList<IVisio.Shape> GetTargetShapes(TargetShapes targets)
-        {
-            return this.GetTargetShapes(targets.Shapes);
+            this._client.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", targets.Shapes.Count);
+            return targets.Shapes;
         }
 
         protected int GetTargetSelectionCount(IList<IVisio.Shape> shapes)
