@@ -1,4 +1,6 @@
 using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Scripting.Utilities;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -8,6 +10,21 @@ namespace VisioAutomation.Scripting.Commands
             base(client)
         {
 
+        }
+
+        public void DistributeOnAxis(Axis axis, double d)
+        {
+            if (!this._client.Document.HasActiveDocument)
+            {
+                return;
+            }
+            var application = this._client.Application.Get();
+            var selection = this._client.Selection.Get();
+            var shapeids = selection.GetIDs();
+            using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
+            {
+                ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
+            }
         }
 
         public void DistributeHorizontal(TargetShapes targets, AlignmentHorizontal halign)

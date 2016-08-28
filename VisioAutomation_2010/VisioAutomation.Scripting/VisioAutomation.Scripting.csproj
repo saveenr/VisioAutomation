@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Commands\AlignCommands.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
+    <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="TargetShapes.cs" />
     <Compile Include="Utilities\StringBuilderExtensions.cs" />
     <Compile Include="Utilities\ArrangeHelper.cs" />

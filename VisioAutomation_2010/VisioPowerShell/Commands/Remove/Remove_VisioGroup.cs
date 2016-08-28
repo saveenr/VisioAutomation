@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands.Remove
         protected override void ProcessRecord()
         {
             var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
-            this.Client.Arrange.Ungroup(targets);
+            this.Client.Grouping.Ungroup(targets);
         }
     }
 }

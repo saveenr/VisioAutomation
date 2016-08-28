@@ -18,10 +18,6 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-
-
-
-
         public void Nudge(TargetShapes targets, double dx, double dy)
         {
             if (dx == 0.0 && dy == 0.0)
@@ -132,44 +128,7 @@ namespace VisioAutomation.Scripting.Commands
             return data;
         }
 
-        public IVisio.Shape Group()
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
 
-            // No shapes provided, use the active selection
-            if (!this._client.Selection.HasShapes())
-            {
-                throw new VisioOperationException("No Selected Shapes to Group");
-            }
-
-            // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
-            // but it doesn't return the group
-
-            var selection = this._client.Selection.Get();
-            var g = selection.Group();
-            return g;
-        }
-
-        public void Ungroup(TargetShapes targets)
-        {
-            this._client.Application.AssertApplicationAvailable();
-            if (targets.Shapes == null)
-            {
-                if (this._client.Selection.HasShapes())
-                {
-                    var application = this._client.Application.Get();
-                    application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
-                }
-            }
-            else
-            {
-                foreach (var shape in targets.Shapes)
-                {
-                    shape.Ungroup();
-                }
-            }
-        }
 
         public void SetLock(TargetShapes targets, Shapes.LockCells lockcells)
         {
@@ -266,24 +225,11 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     this._client.Align.AlignVertical(targets,AlignmentVertical.Center);
                 }
-                this.DistributeOnAxis(axis, space);
+                this._client.Distribute.DistributeOnAxis(axis, space);
             }
         }
 
-        public void DistributeOnAxis(Axis axis, double d)
-        {
-            if (!this._client.Document.HasActiveDocument)
-            {
-                return;
-            }
-            var application = this._client.Application.Get();
-            var selection = this._client.Selection.Get();
-            var shapeids = selection.GetIDs();
-            using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
-            {
-                ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
-            }
-        }
+
         
         public void SnapCorner(TargetShapes targets, double w, double h, SnapCornerPosition corner)
         {
