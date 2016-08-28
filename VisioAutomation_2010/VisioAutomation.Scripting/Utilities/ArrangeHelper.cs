@@ -45,15 +45,15 @@ namespace VisioAutomation.Scripting.Utilities
             throw new System.ArgumentOutOfRangeException(nameof(pos));
         }
 
-        internal static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, RelativePosition pos)
+        internal static IList<int> SortShapesByPosition(TargetShapeIDs targets, RelativePosition pos)
         {
             // First get the transforms of the shapes on the given axis
-            var xforms = Shapes.XFormCells.GetCells(page, shapeids);
+            var xforms = Shapes.XFormCells.GetCells(targets.Page, targets.ShapeIDs);
 
             // Then, sort the shapeids pased on the corresponding value in the results
 
-            var sorted_shape_ids = Enumerable.Range(0, shapeids.Count)
-                .Select(i => new { index = i, shapeid = shapeids[i], pos = ArrangeHelper.GetPositionOnShape(xforms[i], pos) })
+            var sorted_shape_ids = Enumerable.Range(0, targets.ShapeIDs.Count)
+                .Select(i => new { index = i, shapeid = targets.ShapeIDs[i], pos = ArrangeHelper.GetPositionOnShape(xforms[i], pos) })
                 .OrderBy(i => i.pos)
                 .Select(i => i.shapeid)
                 .ToList();
@@ -61,14 +61,14 @@ namespace VisioAutomation.Scripting.Utilities
             return sorted_shape_ids;
         }
 
-        public static void DistributeWithSpacing(IVisio.Page page, IList<int> shapeids, Axis axis, double spacing)
+        public static void DistributeWithSpacing(TargetShapeIDs target, Axis axis, double spacing)
         {
             if (spacing < 0.0)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(spacing));
             }
 
-            if (shapeids.Count < 2)
+            if (target.ShapeIDs.Count < 2)
             {
                 return;
             }
@@ -83,8 +83,8 @@ namespace VisioAutomation.Scripting.Utilities
                 : new Drawing.Size(0, spacing);
 
 
-            var sorted_shape_ids = ArrangeHelper.SortShapesByPosition(page, shapeids, sortpos);
-            var input_xfrms = Shapes.XFormCells.GetCells(page, sorted_shape_ids);
+            var sorted_shape_ids = ArrangeHelper.SortShapesByPosition(target, sortpos);
+            var input_xfrms = Shapes.XFormCells.GetCells(target.Page,target.ShapeIDs);
             var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
             var bb = ArrangeHelper.GetBoundingBox(input_xfrms);
             var cur_pos = new Drawing.Point(bb.Left, bb.Bottom);
@@ -104,21 +104,21 @@ namespace VisioAutomation.Scripting.Utilities
             }
 
             // Apply the changes
-            ArrangeHelper.update_xfrms(page, sorted_shape_ids, output_xfrms);
+            ArrangeHelper.update_xfrms(target, output_xfrms);
         }
 
  
-        internal static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
+        internal static void update_xfrms(TargetShapeIDs target, IList<Shapes.XFormCells> xfrms)
         {
 
             var update = new FormulaWriterSIDSRC();
-            for (int i = 0; i < shapeids.Count; i++)
+            for (int i = 0; i < target.ShapeIDs.Count; i++)
             {
-                var shape_id = shapeids[i];
+                var shape_id = target.ShapeIDs[i];
                 var xfrm = xfrms[i];
                 xfrm.SetFormulas((short)shape_id, update);
             }
-            update.Commit(page);
+            update.Commit(target.Page);
         }
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<Shapes.XFormCells> xfrms)
@@ -131,11 +131,11 @@ namespace VisioAutomation.Scripting.Utilities
             return bb.Rectangle;
         }
 
-        public static void SnapCorner(IVisio.Page page, IList<int> shapeids, Drawing.Size snapsize, SnapCornerPosition corner)
+        public static void SnapCorner(TargetShapeIDs target, Drawing.Size snapsize, SnapCornerPosition corner)
         {
             // First caculate the new transforms
             var snap_grid = new SnappingGrid(snapsize);
-            var input_xfrms = Shapes.XFormCells.GetCells(page, shapeids);
+            var input_xfrms = Shapes.XFormCells.GetCells(target.Page,target.ShapeIDs);
             var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
 
             foreach (var input_xfrm in input_xfrms)
@@ -148,7 +148,7 @@ namespace VisioAutomation.Scripting.Utilities
             }
 
             // Now apply them
-            ArrangeHelper.update_xfrms(page, shapeids, output_xfrms);
+            ArrangeHelper.update_xfrms(target, output_xfrms);
         }
 
         private static Shapes.XFormCells _SnapCorner(SnapCornerPosition corner, Drawing.Point new_lower_left, Shapes.XFormCells input_xfrm)
@@ -202,9 +202,9 @@ namespace VisioAutomation.Scripting.Utilities
             }
         }
 
-        public static void SnapSize(IVisio.Page page, IList<int> shapeids, Drawing.Size snapsize, Drawing.Size minsize)
+        public static void SnapSize(TargetShapeIDs target, Drawing.Size snapsize, Drawing.Size minsize)
         {
-            var input_xfrms = Shapes.XFormCells.GetCells(page, shapeids);
+            var input_xfrms = Shapes.XFormCells.GetCells(target.Page, target.ShapeIDs);
             var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
 
             var grid = new SnappingGrid(snapsize);
@@ -240,7 +240,7 @@ namespace VisioAutomation.Scripting.Utilities
             }
 
             // Now apply the updates to the sizes
-            ArrangeHelper.update_xfrms(page, shapeids, output_xfrms);
+            ArrangeHelper.update_xfrms(target, output_xfrms);
         }
     }
 }

@@ -13,6 +13,14 @@ namespace VisioAutomation.Scripting
             // This explicitly means that the current selection is intended to be used
             this.Shapes = null;
         }
+
+        public TargetShapeIDs ToShapeIDs(IVisio.Page page)
+        {
+            var shapeids = this.Shapes.Select(s => s.ID).ToList();
+            var t = new TargetShapeIDs(page,shapeids);
+            return t;
+        }
+
         public TargetShapes(IList<Shape> shapes)
         {
             // If shapes == null then it means to use the active selection
@@ -54,9 +62,9 @@ namespace VisioAutomation.Scripting
         }
 
 
-        internal IList<IVisio.Shape> ResolveShapes2DOnly(VisioAutomation.Scripting.Client _client)
+        internal IList<IVisio.Shape> ResolveShapes2DOnly(VisioAutomation.Scripting.Client client)
         {
-            var shapes = this.ResolveShapes(_client);
+            var shapes = this.ResolveShapes(client);
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
             return shapes_2d;
         }

@@ -44,6 +44,7 @@
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="Commands\SnapCommands.cs" />
+    <Compile Include="TargetShapeIDs.cs" />
     <Compile Include="TargetShapes.cs" />
     <Compile Include="Utilities\StringBuilderExtensions.cs" />
     <Compile Include="Utilities\ArrangeHelper.cs" />

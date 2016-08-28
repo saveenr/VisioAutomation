@@ -27,18 +27,18 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var application = this._client.Application.Get();
+            var target_ids = targets.ToShapeIDs(application.ActivePage);
             using (var undoscope = this._client.Application.NewUndoScope("Snape Shape Sizes"))
             {
-                var active_page = application.ActivePage;
                 var snapsize = new Drawing.Size(w, h);
                 var minsize = new Drawing.Size(w, h);
-                SnapCommands.SnapSize(active_page, shapeids, snapsize, minsize);
+                SnapCommands.SnapSize(target_ids, snapsize, minsize);
             }
         }
 
-        private static void SnapSize(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, Drawing.Size snapsize, Drawing.Size minsize)
+        private static void SnapSize(TargetShapeIDs target, Drawing.Size snapsize, Drawing.Size minsize)
         {
-            var input_xfrms = Shapes.XFormCells.GetCells(page, shapeids);
+            var input_xfrms = Shapes.XFormCells.GetCells(target.Page, target.ShapeIDs);
             var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
 
             var grid = new SnappingGrid(snapsize);
@@ -58,7 +58,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // Now apply them
-            ArrangeHelper.update_xfrms(page, shapeids, output_xfrms);
+            ArrangeHelper.update_xfrms(target, output_xfrms);
         }
 
 
@@ -74,12 +74,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this._client.Application.Get();
+            var target_ids = targets.ToShapeIDs(application.ActivePage);
             using (var undoscope = this._client.Application.NewUndoScope("SnapCorner"))
             {
-                var active_page = application.ActivePage;
-                ArrangeHelper.SnapCorner(active_page, shapeids, new Drawing.Size(w, h), corner);
+                ArrangeHelper.SnapCorner(target_ids, new Drawing.Size(w, h), corner);
             }
         }
 
@@ -95,12 +94,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this._client.Application.Get();
+            var target_ids = targets.ToShapeIDs(application.ActivePage);
             using (var undoscope = this._client.Application.NewUndoScope("SnapSize"))
             {
-                var active_page = application.ActivePage;
-                ArrangeHelper.SnapSize(active_page, shapeids, snapsize, minsize);
+                ArrangeHelper.SnapSize(target_ids, snapsize, minsize);
             }
         }
     }

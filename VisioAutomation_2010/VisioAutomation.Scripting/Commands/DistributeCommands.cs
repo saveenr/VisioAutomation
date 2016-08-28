@@ -12,7 +12,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void DistributeOnAxis(Axis axis, double d)
+        public void DistributeOnAxis(Axis axis, double spacing)
         {
             if (!this._client.Document.HasActiveDocument)
             {
@@ -23,7 +23,8 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = selection.GetIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
-                ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
+                var target = new TargetShapeIDs(application.ActivePage, shapeids);
+                ArrangeHelper.DistributeWithSpacing(target, axis, spacing);
             }
         }
 
