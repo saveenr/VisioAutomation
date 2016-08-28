@@ -191,16 +191,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public static Drawing.Rectangle GetBoundingBox(IEnumerable<Shapes.XFormCells> xfrms)
-        {
-            var bb = new BoundingBox(xfrms.Select(ArrangeHelper.GetRectangle));
-            if (!bb.HasValue)
-            {
-                throw new System.ArgumentException("Could not calculate bounding box");
-            }
-            return bb.Rectangle;
-        }
-
         public void Stack(Axis axis, double space)
         {
             if (!this._client.Selection.HasShapes(2))
