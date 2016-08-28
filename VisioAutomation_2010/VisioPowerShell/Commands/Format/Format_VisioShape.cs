@@ -50,12 +50,12 @@ namespace VisioPowerShell.Commands.Format
 
             if (this.AlignVertical != Model.VerticalAlignment.None)
             {
-                this.Client.Arrange.AlignVertical(targets, (AlignmentVertical)this.AlignVertical);
+                this.Client.Align.AlignVertical(targets, (AlignmentVertical)this.AlignVertical);
             }
 
             if (this.AlignHorizontal != Model.HorizontalAlignment.None)
             {
-                this.Client.Arrange.AlignHorizontal(targets, (AlignmentHorizontal)this.AlignHorizontal);
+                this.Client.Align.AlignHorizontal(targets, (AlignmentHorizontal)this.AlignHorizontal);
             }
 
         }
