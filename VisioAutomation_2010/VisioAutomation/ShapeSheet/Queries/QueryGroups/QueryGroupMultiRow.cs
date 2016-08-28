@@ -72,8 +72,7 @@ namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
             return sec_objects;
         }
 
-        public void SetFormulas(short shapeid, FormulaWriterSIDSRC writer,
-            short row)
+        public void SetFormulas(short shapeid, FormulaWriterSIDSRC writer, short row)
         {
             foreach (var pair in this.Pairs)
             {
@@ -86,7 +85,8 @@ namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
         {
             foreach (var pair in this.Pairs)
             {
-                writer.SetFormula(pair.SRC.CopyWithNewRow(row), pair.Formula);
+                var new_src = pair.SRC.CopyWithNewRow(row);
+                writer.SetFormula(new_src, pair.Formula);
             }
         }
 

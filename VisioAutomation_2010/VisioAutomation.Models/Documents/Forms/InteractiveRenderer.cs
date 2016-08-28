@@ -100,7 +100,7 @@ namespace VisioAutomation.Models.Documents.Forms
             {
                 block.FormatCells.SetFormulas((short)block.VisioShapeID,writer);
                 block.TextBlockCells.SetFormulas((short)block.VisioShapeID,writer);
-                block.ParagraphCells.SetFormulas((short)block.VisioShapeID,writer, 0);
+                block.ParagraphCells.SetFormulas((short)block.VisioShapeID, writer, 0);
                 block.CharacterCells.SetFormulas((short)block.VisioShapeID, writer, 0);
             }
             writer.Commit(this._page);
