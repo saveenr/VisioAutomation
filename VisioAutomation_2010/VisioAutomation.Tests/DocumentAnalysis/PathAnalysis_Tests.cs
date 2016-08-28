@@ -28,16 +28,16 @@ namespace VisioAutomation_Tests.DocumentAnalysis
 
             if (a_arrow || b_arrow)
             {
-                var update = new FormulaWriterSIDSRC();
+                var writer = new FormulaWriterSIDSRC();
                 if (a_arrow)
                 {
-                    update.SetFormula(c1.ID16, VASS.SRCConstants.BeginArrow, "13");                    
+                    writer.SetFormula(c1.ID16, VASS.SRCConstants.BeginArrow, "13");                    
                 }
                 if (b_arrow)
                 {
-                    update.SetFormula(c1.ID16, VASS.SRCConstants.EndArrow, "13");
+                    writer.SetFormula(c1.ID16, VASS.SRCConstants.EndArrow, "13");
                 }
-                update.Commit(page);
+                writer.Commit(page);
             }
         }
 

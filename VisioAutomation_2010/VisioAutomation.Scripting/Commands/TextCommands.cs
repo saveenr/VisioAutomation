@@ -103,7 +103,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 // Now restore all the formatting - based on any initial formatting from the text
 
-                var update = new FormulaWriterSIDSRC();
+                var writer = new FormulaWriterSIDSRC();
                 for (int i = 0; i < shapes.Count; i++)
                 {
                     var format = formats[i];
@@ -111,17 +111,17 @@ namespace VisioAutomation.Scripting.Commands
                     if (format.CharacterFormats.Count>0)
                     {
                         var fmt = format.CharacterFormats[0];
-                        fmt.SetFormulas((short) shapeids[i], update, 0);
+                        fmt.SetFormulas((short) shapeids[i], writer, 0);
                     }
 
                     if (format.ParagraphFormats.Count > 0)
                     {
                         var fmt = format.ParagraphFormats[0];
-                        fmt.SetFormulas((short)shapeids[i], update, 0);
+                        fmt.SetFormulas((short)shapeids[i], writer, 0);
                     }
                 }
 
-                update.Commit(page);
+                writer.Commit(page);
             }
         }
 
@@ -177,7 +177,7 @@ namespace VisioAutomation.Scripting.Commands
                 return ;
             }
 
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             foreach (var shape in shapes)
             {
                 if (0 ==
@@ -194,12 +194,12 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s=>s.ID);
             foreach (int shapeid in shapeids)
             {
-                update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtHeight, "Height*0"); 
-                update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtPinY, "Height*0"); 
-                update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.VerticalAlign, "0");
+                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtHeight, "Height*0"); 
+                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtPinY, "Height*0"); 
+                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.VerticalAlign, "0");
             } 
             var active_page = application.ActivePage; 
-            update.Commit(active_page);
+            writer.Commit(active_page);
         }
 
         public void SetTextWrapping(TargetShapes targets,bool wrap)
@@ -257,16 +257,16 @@ namespace VisioAutomation.Scripting.Commands
                 var src_width = ShapeSheet.SRCConstants.Width;
                 var src_height = ShapeSheet.SRCConstants.Height;
 
-                var update = new FormulaWriterSIDSRC();
+                var writer = new FormulaWriterSIDSRC();
                 for (int i = 0; i < new_sizes.Count; i++)
                 {
                     var shapeid = shapeids[i];
                     var new_size = new_sizes[i];
-                    update.SetFormula((short)shapeid, src_width, new_size.Width);
-                    update.SetFormula((short)shapeid, src_height, new_size.Height);
+                    writer.SetFormula((short)shapeid, src_width, new_size.Width);
+                    writer.SetFormula((short)shapeid, src_height, new_size.Height);
                 }
 
-                update.Commit(active_page);
+                writer.Commit(active_page);
             }
         }
     }

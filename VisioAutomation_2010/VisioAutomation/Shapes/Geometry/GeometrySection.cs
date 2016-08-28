@@ -43,7 +43,7 @@ namespace VisioAutomation.Shapes.Geometry
             short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
-            var update = new FormulaWriterSRC();
+            var writer = new FormulaWriterSRC();
 
             var src_nofill = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoFill.Cell);
             var src_noline = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoLine.Cell);
@@ -51,19 +51,19 @@ namespace VisioAutomation.Shapes.Geometry
             var src_nosnap = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoSnap.Cell);
             var src_noquickdrag = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoQuickDrag.Cell);
 
-            update.SetFormula(src_nofill, this.NoFill);
-            update.SetFormula(src_noline, this.NoLine);
-            update.SetFormula(src_noshow, this.NoShow);
-            update.SetFormula(src_nosnap, this.NoSnap);
-            update.SetFormula(src_noquickdrag, this.NoQuickDrag);
+            writer.SetFormula(src_nofill, this.NoFill);
+            writer.SetFormula(src_noline, this.NoLine);
+            writer.SetFormula(src_noshow, this.NoShow);
+            writer.SetFormula(src_nosnap, this.NoSnap);
+            writer.SetFormula(src_noquickdrag, this.NoQuickDrag);
 
             foreach (var row in this.Rows)
             {
-                row.AddTo(shape, update, row_count, sec_index);
+                row.AddTo(shape, writer, row_count, sec_index);
                 row_count++;
             }
 
-            update.Commit(shape);
+            writer.Commit(shape);
             return 0;
         }
 

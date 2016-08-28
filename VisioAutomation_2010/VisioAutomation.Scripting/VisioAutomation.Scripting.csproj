@@ -87,7 +87,7 @@
     <Compile Include="View\PageDirection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Layout\RelativePosition.cs" />
-    <Compile Include="ShapeSheetUpdate.cs" />
+    <Compile Include="ShapeSheetWriter.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Utilities\SnappingGrid.cs" />
     <Compile Include="Utilities\TextHelper.cs" />

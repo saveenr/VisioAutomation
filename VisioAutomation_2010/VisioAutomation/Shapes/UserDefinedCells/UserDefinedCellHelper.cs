@@ -75,21 +75,21 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var update = new FormulaWriterSRC();
+            var writer = new FormulaWriterSRC();
 
             if (value.HasValue)
             {
                 var src = new ShapeSheet.SRC(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                update.SetFormula(src, value.Encode());
+                writer.SetFormula(src, value.Encode());
             }
 
             if (prompt.HasValue)
             {
                 var src = new ShapeSheet.SRC(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                update.SetFormula(src, prompt.Encode());
+                writer.SetFormula(src, prompt.Encode());
             }
 
-            update.Commit(shape);
+            writer.Commit(shape);
         }
 
         /// <summary>

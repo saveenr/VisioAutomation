@@ -7,14 +7,14 @@ using VA = VisioAutomation;
 namespace VisioAutomation_Tests.Core.ShapeSheet
 {
     [TestClass]
-    public class ShapeSheetUpdateTests : VisioAutomationTest
+    public class ShapeSheetWriterTests : VisioAutomationTest
     {
         private static readonly VA.ShapeSheet.SRC src_pinx = VA.ShapeSheet.SRCConstants.PinX;
         private static readonly VA.ShapeSheet.SRC src_piny = VA.ShapeSheet.SRCConstants.PinY;
         private static readonly VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
 
         [TestMethod]
-        public void ShapeSheet_Update_Formulas_MultipleShapes()
+        public void ShapeSheet_Writer_Formulas_MultipleShapes()
         {
             var page1 = this.GetNewPage();
 
@@ -24,19 +24,19 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var update = new FormulaWriterSIDSRC();
-            update.SetFormula(shape1.ID16, ShapeSheetUpdateTests.src_pinx, 0.5);
-            update.SetFormula(shape1.ID16, ShapeSheetUpdateTests.src_piny, 0.5);
-            update.SetFormula(shape2.ID16, ShapeSheetUpdateTests.src_pinx, 1.5);
-            update.SetFormula(shape2.ID16, ShapeSheetUpdateTests.src_piny, 1.5);
-            update.SetFormula(shape3.ID16, ShapeSheetUpdateTests.src_pinx, 2.5);
-            update.SetFormula(shape3.ID16, ShapeSheetUpdateTests.src_piny, 2.5);
-            update.Commit(page1);
+            var writer = new FormulaWriterSIDSRC();
+            writer.SetFormula(shape1.ID16, ShapeSheetWriterTests.src_pinx, 0.5);
+            writer.SetFormula(shape1.ID16, ShapeSheetWriterTests.src_piny, 0.5);
+            writer.SetFormula(shape2.ID16, ShapeSheetWriterTests.src_pinx, 1.5);
+            writer.SetFormula(shape2.ID16, ShapeSheetWriterTests.src_piny, 1.5);
+            writer.SetFormula(shape3.ID16, ShapeSheetWriterTests.src_pinx, 2.5);
+            writer.SetFormula(shape3.ID16, ShapeSheetWriterTests.src_piny, 2.5);
+            writer.Commit(page1);
 
             // Verify that the formulas were set
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
-            var col_pinx = query.AddCell(ShapeSheetUpdateTests.src_pinx, "PinX");
-            var col_piny = query.AddCell(ShapeSheetUpdateTests.src_piny, "PinY");
+            var col_pinx = query.AddCell(ShapeSheetWriterTests.src_pinx, "PinX");
+            var col_piny = query.AddCell(ShapeSheetWriterTests.src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -55,19 +55,19 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void ShapeSheet_Update_ResultsInt_SingleShape()
+        public void ShapeSheet_Writer_ResultsInt_SingleShape()
         {
             var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new ResultWriterSRC();
-            update.SetResult(ShapeSheetUpdateTests.src_linepat, 7, IVisio.VisUnitCodes.visNumber);
-            update.Commit(shape1);
+            var writer = new ResultWriterSRC();
+            writer.SetResult(ShapeSheetWriterTests.src_linepat, 7, IVisio.VisUnitCodes.visNumber);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
-            var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat,"LinePattern");
+            var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat,"LinePattern");
 
             // Retrieve the values
             var ss1 = new ShapeSheetSurface(shape1);
@@ -79,19 +79,19 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void ShapeSheet_Update_ResultsString_SingleShape()
+        public void ShapeSheet_Writer_ResultsString_SingleShape()
         {
             var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new ResultWriterSRC();
-            update.SetResult(ShapeSheetUpdateTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
-            update.Commit(shape1);
+            var writer = new ResultWriterSRC();
+            writer.SetResult(ShapeSheetWriterTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
-            var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat, "LinePattern");
+            var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
 
             // Retrieve the values
             var ss1 = new ShapeSheetSurface(shape1);
@@ -103,7 +103,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void ShapeSheet_Update_ResultsDouble_MultipleShapes()
+        public void ShapeSheet_Writer_ResultsDouble_MultipleShapes()
         {
             var page1 = this.GetNewPage();
 
@@ -113,19 +113,19 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var update = new ResultWriterSIDSRC();
-            update.SetResult( new SIDSRC(shape1.ID16, ShapeSheetUpdateTests.src_pinx), 0.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult( new SIDSRC(shape1.ID16, ShapeSheetUpdateTests.src_piny), 0.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult( new SIDSRC(shape2.ID16, ShapeSheetUpdateTests.src_pinx), 1.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult( new SIDSRC(shape2.ID16, ShapeSheetUpdateTests.src_piny), 1.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult( new SIDSRC(shape3.ID16, ShapeSheetUpdateTests.src_pinx), 2.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult( new SIDSRC(shape3.ID16, ShapeSheetUpdateTests.src_piny), 2.5, IVisio.VisUnitCodes.visNumber);
-            update.Commit(page1);
+            var writer = new ResultWriterSIDSRC();
+            writer.SetResult( new SIDSRC(shape1.ID16, ShapeSheetWriterTests.src_pinx), 0.5, IVisio.VisUnitCodes.visNumber);
+            writer.SetResult( new SIDSRC(shape1.ID16, ShapeSheetWriterTests.src_piny), 0.5, IVisio.VisUnitCodes.visNumber);
+            writer.SetResult( new SIDSRC(shape2.ID16, ShapeSheetWriterTests.src_pinx), 1.5, IVisio.VisUnitCodes.visNumber);
+            writer.SetResult( new SIDSRC(shape2.ID16, ShapeSheetWriterTests.src_piny), 1.5, IVisio.VisUnitCodes.visNumber);
+            writer.SetResult( new SIDSRC(shape3.ID16, ShapeSheetWriterTests.src_pinx), 2.5, IVisio.VisUnitCodes.visNumber);
+            writer.SetResult( new SIDSRC(shape3.ID16, ShapeSheetWriterTests.src_piny), 2.5, IVisio.VisUnitCodes.visNumber);
+            writer.Commit(page1);
 
             // Verify that the formulas were set
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
-            var col_pinx = query.AddCell(ShapeSheetUpdateTests.src_pinx,"PinX");
-            var col_piny = query.AddCell(ShapeSheetUpdateTests.src_piny, "PinY");
+            var col_pinx = query.AddCell(ShapeSheetWriterTests.src_pinx,"PinX");
+            var col_piny = query.AddCell(ShapeSheetWriterTests.src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -144,27 +144,27 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void ShapeSheet_Update_ConsistencyChecking()
+        public void ShapeSheet_Writer_ConsistencyChecking()
         {
-            this.CheckHomogenousUpdates_ResultTypes();
+            this.Check_Consistent_ResultTypes();
         }
         
 
 
-        public void CheckHomogenousUpdates_ResultTypes()
+        public void Check_Consistent_ResultTypes()
         {
             var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new ResultWriterSRC();
-            update.SetResult(ShapeSheetUpdateTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
-            update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
-            update.Commit(shape1);
+            var writer = new ResultWriterSRC();
+            writer.SetResult(ShapeSheetWriterTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
+            writer.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
-            var col_linepat = query.AddCell(ShapeSheetUpdateTests.src_linepat, "LinePattern");
+            var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             // Retrieve the values

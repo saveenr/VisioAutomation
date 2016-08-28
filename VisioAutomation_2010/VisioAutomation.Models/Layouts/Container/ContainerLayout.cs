@@ -169,22 +169,22 @@ namespace VisioAutomation.Models.Layouts.Container
                 item.VisioShape.Text = item.Text;
             }
 
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
 
             // Format the containers and shapes
 
             foreach (var item in this.Containers)
             {
-                this.LayoutOptions.ContainerFormatting.Apply(update, item.ShapeID,item.ShapeID);
+                this.LayoutOptions.ContainerFormatting.Apply(writer, item.ShapeID,item.ShapeID);
             }
 
             foreach (var item in this.ContainerItems)
             {
-                this.LayoutOptions.ContainerItemFormatting.Apply(update, item.ShapeID, item.ShapeID);
+                this.LayoutOptions.ContainerItemFormatting.Apply(writer, item.ShapeID, item.ShapeID);
             }     
 
-            update.BlastGuards = true;
-            update.Commit(page);
+            writer.BlastGuards = true;
+            writer.Commit(page);
 
             // Set the Container Text
             foreach (var ct in this.Containers)
@@ -211,14 +211,14 @@ namespace VisioAutomation.Models.Layouts.Container
 
             var xfrm = new Shapes.XFormCells();
 
-            var update = new FormulaWriterSIDSRC(points.Count*2);
+            var writer = new FormulaWriterSIDSRC(points.Count*2);
             for (int i = 0; i < rects.Count(); i++)
             {
                 xfrm.Width = rects[i].Width;
                 xfrm.Height = rects[i].Height;
-                xfrm.SetFormulas(shapeids[i], update);
+                xfrm.SetFormulas(shapeids[i], writer);
             }
-            update.Commit(page);
+            writer.Commit(page);
 
             return shapeids;
         }

@@ -28,31 +28,31 @@ namespace VisioAutomation.Models.Text
         public ShapeSheet.FormulaLiteral Transparency { get; set; }
         public ShapeSheet.FormulaLiteral UseVertical { get; set; }
 
-        internal void ApplyFormulas(FormulaWriterSRC update, short row)
+        internal void ApplyFormulas(FormulaWriterSRC writer, short row)
         {
-            update.SetFormula(SRCCON.CharColor.CopyWithNewRow(row), this.Color);
-            update.SetFormula(SRCCON.CharFont.CopyWithNewRow(row), this.Font);
-            update.SetFormula(SRCCON.CharSize.CopyWithNewRow(row), this.Size);
-            update.SetFormula(SRCCON.CharStyle.CopyWithNewRow(row), this.Style);
-            update.SetFormula(SRCCON.CharColorTrans.CopyWithNewRow(row), this.Transparency);
-            update.SetFormula(SRCCON.CharAsianFont.CopyWithNewRow(row), this.AsianFont);
-            update.SetFormula(SRCCON.CharCase.CopyWithNewRow(row), this.Case);
-            update.SetFormula(SRCCON.CharComplexScriptFont.CopyWithNewRow(row), this.ComplexScriptFont);
-            update.SetFormula(SRCCON.CharComplexScriptSize.CopyWithNewRow(row), this.ComplexScriptSize);
-            update.SetFormula(SRCCON.CharDblUnderline.CopyWithNewRow(row), this.DoubleUnderline);
-            update.SetFormula(SRCCON.CharDoubleStrikethrough.CopyWithNewRow(row), this.DoubleStrikeThrough);
-            update.SetFormula(SRCCON.CharLangID.CopyWithNewRow(row), this.LangID);
-            update.SetFormula(SRCCON.CharFontScale.CopyWithNewRow(row), this.FontScale);
-            update.SetFormula(SRCCON.CharLangID.CopyWithNewRow(row), this.LangID);
-            update.SetFormula(SRCCON.CharLetterspace.CopyWithNewRow(row), this.Letterspace);
-            update.SetFormula(SRCCON.CharLocale.CopyWithNewRow(row), this.Locale);
-            update.SetFormula(SRCCON.CharLocalizeFont.CopyWithNewRow(row), this.LocalizeFont);
-            update.SetFormula(SRCCON.CharOverline.CopyWithNewRow(row), this.Overline);
-            update.SetFormula(SRCCON.CharPerpendicular.CopyWithNewRow(row), this.Perpendicular);
-            update.SetFormula(SRCCON.CharPos.CopyWithNewRow(row), this.Pos);
-            update.SetFormula(SRCCON.CharRTLText.CopyWithNewRow(row), this.RTLText);
-            update.SetFormula(SRCCON.CharStrikethru.CopyWithNewRow(row), this.Strikethru);
-            update.SetFormula(SRCCON.CharUseVertical.CopyWithNewRow(row), this.UseVertical);
+            writer.SetFormula(SRCCON.CharColor.CopyWithNewRow(row), this.Color);
+            writer.SetFormula(SRCCON.CharFont.CopyWithNewRow(row), this.Font);
+            writer.SetFormula(SRCCON.CharSize.CopyWithNewRow(row), this.Size);
+            writer.SetFormula(SRCCON.CharStyle.CopyWithNewRow(row), this.Style);
+            writer.SetFormula(SRCCON.CharColorTrans.CopyWithNewRow(row), this.Transparency);
+            writer.SetFormula(SRCCON.CharAsianFont.CopyWithNewRow(row), this.AsianFont);
+            writer.SetFormula(SRCCON.CharCase.CopyWithNewRow(row), this.Case);
+            writer.SetFormula(SRCCON.CharComplexScriptFont.CopyWithNewRow(row), this.ComplexScriptFont);
+            writer.SetFormula(SRCCON.CharComplexScriptSize.CopyWithNewRow(row), this.ComplexScriptSize);
+            writer.SetFormula(SRCCON.CharDblUnderline.CopyWithNewRow(row), this.DoubleUnderline);
+            writer.SetFormula(SRCCON.CharDoubleStrikethrough.CopyWithNewRow(row), this.DoubleStrikeThrough);
+            writer.SetFormula(SRCCON.CharLangID.CopyWithNewRow(row), this.LangID);
+            writer.SetFormula(SRCCON.CharFontScale.CopyWithNewRow(row), this.FontScale);
+            writer.SetFormula(SRCCON.CharLangID.CopyWithNewRow(row), this.LangID);
+            writer.SetFormula(SRCCON.CharLetterspace.CopyWithNewRow(row), this.Letterspace);
+            writer.SetFormula(SRCCON.CharLocale.CopyWithNewRow(row), this.Locale);
+            writer.SetFormula(SRCCON.CharLocalizeFont.CopyWithNewRow(row), this.LocalizeFont);
+            writer.SetFormula(SRCCON.CharOverline.CopyWithNewRow(row), this.Overline);
+            writer.SetFormula(SRCCON.CharPerpendicular.CopyWithNewRow(row), this.Perpendicular);
+            writer.SetFormula(SRCCON.CharPos.CopyWithNewRow(row), this.Pos);
+            writer.SetFormula(SRCCON.CharRTLText.CopyWithNewRow(row), this.RTLText);
+            writer.SetFormula(SRCCON.CharStrikethru.CopyWithNewRow(row), this.Strikethru);
+            writer.SetFormula(SRCCON.CharUseVertical.CopyWithNewRow(row), this.UseVertical);
         }
 
         public void ApplyFormulasTo(CharacterFormatting target)

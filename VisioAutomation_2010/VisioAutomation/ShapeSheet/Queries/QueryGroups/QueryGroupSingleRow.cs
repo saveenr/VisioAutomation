@@ -53,19 +53,19 @@ namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
             return cells;
         }
 
-        public void SetFormulas(FormulaWriterSRC update)
+        public void SetFormulas(FormulaWriterSRC writer)
         {
             foreach (var pair in this.Pairs)
             {
-                update.SetFormula(pair.SRC, pair.Formula);
+                writer.SetFormula(pair.SRC, pair.Formula);
             }
         }
 
-        public void SetFormulas(short shapeid, FormulaWriterSIDSRC update)
+        public void SetFormulas(short shapeid, FormulaWriterSIDSRC writer)
         {
             foreach (var pair in this.Pairs)
             {
-                update.SetFormula(shapeid, pair.SRC, pair.Formula);
+                writer.SetFormula(shapeid, pair.SRC, pair.Formula);
             }
         }
     }

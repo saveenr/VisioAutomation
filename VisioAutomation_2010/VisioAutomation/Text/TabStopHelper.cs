@@ -89,7 +89,7 @@ namespace VisioAutomation.Text
             shape.RowType[tab_section, (short)Microsoft.Office.Interop.Visio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
-            var update = new FormulaWriterSRC();
+            var writer = new FormulaWriterSRC();
             for (int stop_index = 0; stop_index < stops.Count; stop_index++)
             {
                 int i = stop_index * 3;
@@ -101,12 +101,12 @@ namespace VisioAutomation.Text
                 var src_tabalign = new ShapeSheet.SRC(tab_section, row, (short)(i + 2));
                 var src_tabother = new ShapeSheet.SRC(tab_section, row, (short)(i + 3));
 
-                update.SetFormula(src_tabpos, position); // tab position
-                update.SetFormula(src_tabalign, alignment); // tab alignment
-                update.SetFormula(src_tabother, "0"); // tab unknown
+                writer.SetFormula(src_tabpos, position); // tab position
+                writer.SetFormula(src_tabalign, alignment); // tab alignment
+                writer.SetFormula(src_tabother, "0"); // tab unknown
             }
 
-            update.Commit(shape);
+            writer.Commit(shape);
         }
 
         private static Microsoft.Office.Interop.Visio.VisRowTags GetTabTagForStops(int stops)
@@ -173,15 +173,15 @@ namespace VisioAutomation.Text
 
             const string formula = "0";
 
-            var update = new FormulaWriterSRC();
+            var writer = new FormulaWriterSRC();
             for (int i = 1; i < num_existing_tabstops * 3; i++)
             {
                 var src = new ShapeSheet.SRC(tab_section, (short)Microsoft.Office.Interop.Visio.VisRowIndices.visRowTab,
                     (short)i);
-                update.SetFormula(src, formula);
+                writer.SetFormula(src, formula);
             }
 
-            update.Commit(shape);
+            writer.Commit(shape);
         }
 
     }

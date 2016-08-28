@@ -24,9 +24,9 @@ namespace VisioPowerShell.Commands.Set
 
         protected override void ProcessRecord()
         {
-            var update = new FormulaWriterSRC();
-            update.BlastGuards = this.BlastGuards;
-            update.TestCircular= this.TestCircular;
+            var writer = new FormulaWriterSRC();
+            writer.BlastGuards = this.BlastGuards;
+            writer.TestCircular= this.TestCircular;
 
             var target_pages = this.Pages ?? new[] { this.Client.Page.Get() };
 
@@ -43,18 +43,18 @@ namespace VisioPowerShell.Commands.Set
                 {
                     string cell_value = valuemap[cellname];
                     var cell_src = valuemap.GetSRC(cellname);
-                    update.SetFormula( cell_src , cell_value);
+                    writer.SetFormula( cell_src , cell_value);
                 }
                 this.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
                 this.WriteVerbose("TestCircular: {0}", this.TestCircular);
                 this.WriteVerbose("Number of Shapes : {0}", 1);
-                this.WriteVerbose("Number of Total Updates: {0}", update.Count);
+                this.WriteVerbose("Number of Total Updates: {0}", writer.Count);
 
                 var application = this.Client.Application.Get();
                 using (var undoscope = this.Client.Application.NewUndoScope("SetPageCells"))
                 {
                     this.WriteVerbose("Start Update");
-                    update.Commit(pagesheet);
+                    writer.Commit(pagesheet);
                     this.WriteVerbose("End Update");
                 }
             }

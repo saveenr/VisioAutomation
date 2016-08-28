@@ -121,106 +121,106 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.FormulaLiteral ShapeSplittable { get; set; }
 
 
-        public void Apply(FormulaWriterSIDSRC update, short id)
+        public void Apply(FormulaWriterSIDSRC writer, short id)
         {
-            update.SetFormula(id, ShapeSheet.SRCConstants.Width, this.Width);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Height, this.Height);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PinX, this.PinX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PinY, this.PinY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LocPinX, this.LocPinX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LocPinY, this.LocPinY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Angle, this.Angle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.BeginArrow, this.BeginArrow);
-            update.SetFormula(id, ShapeSheet.SRCConstants.BeginArrowSize, this.BeginArrowSize);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Width, this.Width);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Height, this.Height);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PinX, this.PinX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PinY, this.PinY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LocPinX, this.LocPinX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LocPinY, this.LocPinY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Angle, this.Angle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.BeginArrow, this.BeginArrow);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.BeginArrowSize, this.BeginArrowSize);
 
-            update.SetFormula(id, ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd);
-            update.SetFormula(id, ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans);
-            update.SetFormula(id, ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd);
-            update.SetFormula(id, ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans);
-            update.SetFormula(id, ShapeSheet.SRCConstants.FillPattern, this.FillPattern);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.FillPattern, this.FillPattern);
 
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwType, this.ShapeShdwType);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeShdwType, this.ShapeShdwType);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern);
 
-            update.SetFormula(id, ShapeSheet.SRCConstants.CharCase, this.CharCase);
-            update.SetFormula(id, ShapeSheet.SRCConstants.CharFont, this.CharFont);
-            update.SetFormula(id, ShapeSheet.SRCConstants.CharColor, this.CharColor);
-            update.SetFormula(id, ShapeSheet.SRCConstants.CharSize, this.CharSize);
-            update.SetFormula(id, ShapeSheet.SRCConstants.CharLetterspace, this.CharLetterspace);
-            update.SetFormula(id, ShapeSheet.SRCConstants.CharStyle, this.CharStyle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.CharColorTrans, this.CharTransparency);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.CharCase, this.CharCase);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.CharFont, this.CharFont);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.CharColor, this.CharColor);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.CharSize, this.CharSize);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.CharLetterspace, this.CharLetterspace);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.CharStyle, this.CharStyle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.CharColorTrans, this.CharTransparency);
 
-            update.SetFormula(id, ShapeSheet.SRCConstants.EndArrow, this.EndArrow);
-            update.SetFormula(id, ShapeSheet.SRCConstants.EndArrowSize, this.EndArrowSize);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.EndArrow, this.EndArrow);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.EndArrowSize, this.EndArrowSize);
 
             // Line
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineColor, this.LineColor);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineColorTrans, this.LineColorTrans);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LinePattern, this.LinePattern);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineWeight, this.LineWeight);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineColor, this.LineColor);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineColorTrans, this.LineColorTrans);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LinePattern, this.LinePattern);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineWeight, this.LineWeight);
 
             // Text
-            update.SetFormula(id, ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin);
-            update.SetFormula(id, ShapeSheet.SRCConstants.DefaultTabStop, this.DefaultTabstop);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin);
-            update.SetFormula(id, ShapeSheet.SRCConstants.RightMargin, this.RightMargin);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TextDirection, this.TextDirection);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TopMargin, this.TopMargin);
-            update.SetFormula(id, ShapeSheet.SRCConstants.VerticalAlign, this.VerticalAlign);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.DefaultTabStop, this.DefaultTabstop);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.RightMargin, this.RightMargin);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TextDirection, this.TextDirection);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TopMargin, this.TopMargin);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.VerticalAlign, this.VerticalAlign);
 
             // Paragraph
 
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_Bullet, this.ParaBullet);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_BulletFont, this.ParaBulletFont);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_BulletFontSize, this.ParaBulletFontSize);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_BulletStr, this.ParaBulletString);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_Flags, this.ParaFlags);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_HorzAlign, this.ParaHorizontalAlign);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_IndFirst, this.ParaIndentFirst);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_IndLeft, this.ParaIndentLeft);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_IndRight, this.ParaIndentRight);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_LocalizeBulletFont, this.ParaLocBulletFont);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_SpAfter, this.ParaSpacingAfter);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_SpBefore, this.ParaSpacingBefore);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_SpLine, this.ParaSpacingLine);
-            update.SetFormula(id, ShapeSheet.SRCConstants.Para_TextPosAfterBullet, this.ParaTextPosAfterBullet);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_Bullet, this.ParaBullet);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_BulletFont, this.ParaBulletFont);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_BulletFontSize, this.ParaBulletFontSize);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_BulletStr, this.ParaBulletString);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_Flags, this.ParaFlags);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_HorzAlign, this.ParaHorizontalAlign);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_IndFirst, this.ParaIndentFirst);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_IndLeft, this.ParaIndentLeft);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_IndRight, this.ParaIndentRight);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_LocalizeBulletFont, this.ParaLocBulletFont);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_SpAfter, this.ParaSpacingAfter);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_SpBefore, this.ParaSpacingBefore);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_SpLine, this.ParaSpacingLine);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.Para_TextPosAfterBullet, this.ParaTextPosAfterBullet);
 
             // TextXForm
-            update.SetFormula(id, ShapeSheet.SRCConstants.TxtAngle, this.TxtAngle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TxtHeight, this.TxtHeight);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TxtLocPinX, this.TxtLocPinX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TxtLocPinY, this.TxtLocPinY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TxtAngle, this.TxtAngle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TxtHeight, this.TxtHeight);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TxtLocPinX, this.TxtLocPinX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TxtLocPinY, this.TxtLocPinY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth);
 
             // ShapeLayout
-            update.SetFormula(id, ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable);
         }
 
         public ShapeCells ShallowCopy()

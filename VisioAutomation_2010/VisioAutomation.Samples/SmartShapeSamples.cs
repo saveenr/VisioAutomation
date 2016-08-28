@@ -35,11 +35,11 @@ namespace VisioAutomationSamples
             xform.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
             xform.Height = string.Format("GUARD({0}!Height)", bkname); 
 
-            var update = new FormulaWriterSIDSRC();
-            xform.SetFormulas(progress.ID16, update);
-            background_fmt.SetFormulas(progress.ID16, update);
-            progress_fmt.SetFormulas(progress.ID16, update);
-            update.Commit(page_a);
+            var writer = new FormulaWriterSIDSRC();
+            xform.SetFormulas(progress.ID16, writer);
+            background_fmt.SetFormulas(progress.ID16, writer);
+            progress_fmt.SetFormulas(progress.ID16, writer);
+            writer.Commit(page_a);
 
             var markup1 = new VisioAutomation.Models.Text.TextElement();
             markup1.AddField(VisioAutomation.Models.Text.FieldConstants.PageName);

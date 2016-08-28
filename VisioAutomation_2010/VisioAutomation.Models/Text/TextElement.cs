@@ -160,7 +160,7 @@ namespace VisioAutomation.Models.Text
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
-            var update = new FormulaWriterSRC();
+            var writer = new FormulaWriterSRC();
 
             foreach (var region in regions_to_format)
             {
@@ -180,9 +180,9 @@ namespace VisioAutomation.Models.Text
                         throw new AutomationException("Could not create Character row");
                     }
 
-                    update.Clear();
-                    charcells.ApplyFormulas(update, rownum);
-                    update.Commit(shape);
+                    writer.Clear();
+                    charcells.ApplyFormulas(writer, rownum);
+                    writer.Commit(shape);
                 }
 
                 // Apply paragraph formatting
@@ -200,9 +200,9 @@ namespace VisioAutomation.Models.Text
                         throw new AutomationException("Could not create Paragraph row");
                     }
 
-                    update.Clear();
-                    paracells.ApplyFormulas(update, rownum);
-                    update.Commit(shape);
+                    writer.Clear();
+                    paracells.ApplyFormulas(writer, rownum);
+                    writer.Commit(shape);
                 }
             }
 

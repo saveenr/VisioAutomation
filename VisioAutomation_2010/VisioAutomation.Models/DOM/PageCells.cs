@@ -33,35 +33,35 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.FormulaLiteral ResizePage { get; set; }
         public ShapeSheet.FormulaLiteral RouteStyle { get; set; }
 
-        public void Apply(FormulaWriterSIDSRC update, short id)
+        public void Apply(FormulaWriterSIDSRC writer, short id)
         {
-            update.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeX, this.AvenueSizeX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeY, this.AvenueSizeY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.BlockSizeX, this.BlockSizeX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.BlockSizeY, this.BlockSizeY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.CtrlAsInput, this.CtrlAsInput);
-            update.SetFormula(id, ShapeSheet.SRCConstants.DynamicsOff, this.DynamicsOff);
-            update.SetFormula(id, ShapeSheet.SRCConstants.EnableGrid, this.EnableGrid);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineAdjustFrom, this.LineAdjustFrom);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineAdjustTo, this.LineAdjustTo);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineJumpCode, this.LineJumpCode);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineJumpFactorX, this.LineJumpFactorX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineJumpFactorY, this.LineJumpFactorY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineJumpStyle, this.LineJumpStyle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineRouteExt, this.LineRouteExt);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineToLineX, this.LineToLineX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineToLineY, this.LineToLineY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineToNodeX, this.LineToNodeX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.LineToNodeY, this.LineToNodeY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PageLineJumpDirX, this.PageLineJumpDirX);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PageLineJumpDirY, this.PageLineJumpDirY);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PageShapeSplit, this.PageShapeSplit);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PlaceDepth, this.PlaceDepth);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PlaceFlip, this.PlaceFlip);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PlaceStyle, this.PlaceStyle);
-            update.SetFormula(id, ShapeSheet.SRCConstants.PlowCode, this.PlowCode);
-            update.SetFormula(id, ShapeSheet.SRCConstants.ResizePage, this.ResizePage);
-            update.SetFormula(id, ShapeSheet.SRCConstants.RouteStyle, this.RouteStyle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeX, this.AvenueSizeX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeY, this.AvenueSizeY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.BlockSizeX, this.BlockSizeX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.BlockSizeY, this.BlockSizeY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.CtrlAsInput, this.CtrlAsInput);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.DynamicsOff, this.DynamicsOff);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.EnableGrid, this.EnableGrid);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineAdjustFrom, this.LineAdjustFrom);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineAdjustTo, this.LineAdjustTo);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineJumpCode, this.LineJumpCode);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineJumpFactorX, this.LineJumpFactorX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineJumpFactorY, this.LineJumpFactorY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineJumpStyle, this.LineJumpStyle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineRouteExt, this.LineRouteExt);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineToLineX, this.LineToLineX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineToLineY, this.LineToLineY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineToNodeX, this.LineToNodeX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.LineToNodeY, this.LineToNodeY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PageLineJumpDirX, this.PageLineJumpDirX);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PageLineJumpDirY, this.PageLineJumpDirY);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PageShapeSplit, this.PageShapeSplit);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PlaceDepth, this.PlaceDepth);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PlaceFlip, this.PlaceFlip);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PlaceStyle, this.PlaceStyle);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.PlowCode, this.PlowCode);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.ResizePage, this.ResizePage);
+            writer.SetFormula(id, ShapeSheet.SRCConstants.RouteStyle, this.RouteStyle);
         }
     }
 }

@@ -316,14 +316,14 @@ namespace VisioAutomation.Scripting.Commands
             double new_height = old_size.Width;
             double new_width = old_size.Height;
 
-            var update = new FormulaWriterSRC(3);
-            update.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_width);
-            update.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_height);
-            update.SetFormula(ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
+            var writer = new FormulaWriterSRC(3);
+            writer.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_width);
+            writer.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_height);
+            writer.SetFormula(ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Page Orientation"))
             {
-                update.Commit(active_page.PageSheet);
+                writer.Commit(active_page.PageSheet);
             }
         }
 
@@ -357,16 +357,16 @@ namespace VisioAutomation.Scripting.Commands
                 page = application.ActivePage;
             }
 
-            var update = new FormulaWriterSRC();
+            var writer = new FormulaWriterSRC();
 
-            update.SetFormula(ShapeSheet.SRCConstants.XGridOrigin, "0.0");
-            update.SetFormula(ShapeSheet.SRCConstants.YGridOrigin, "0.0");
-            update.SetFormula(ShapeSheet.SRCConstants.XRulerOrigin, "0.0");
-            update.SetFormula(ShapeSheet.SRCConstants.YRulerOrigin, "0.0");
+            writer.SetFormula(ShapeSheet.SRCConstants.XGridOrigin, "0.0");
+            writer.SetFormula(ShapeSheet.SRCConstants.YGridOrigin, "0.0");
+            writer.SetFormula(ShapeSheet.SRCConstants.XRulerOrigin, "0.0");
+            writer.SetFormula(ShapeSheet.SRCConstants.YRulerOrigin, "0.0");
 
             using (var undoscope = this._client.Application.NewUndoScope("Reset Page Origin"))
             {
-                update.Commit(page.PageSheet);
+                writer.Commit(page.PageSheet);
             }
         }
 
@@ -380,10 +380,10 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var active_page = application.ActivePage;
                 var page_sheet = active_page.PageSheet;
-                var update = new FormulaWriterSRC(2);
-                update.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_size.Width);
-                update.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_size.Height);
-                update.Commit(page_sheet);
+                var writer = new FormulaWriterSRC(2);
+                writer.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_size.Width);
+                writer.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_size.Height);
+                writer.Commit(page_sheet);
             }
         }
 

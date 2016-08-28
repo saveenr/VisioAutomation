@@ -144,7 +144,7 @@
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
     <Compile Include="Scripting\ScriptingClientTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
-    <Compile Include="Core\ShapeSheet\ShapeSheetUpdateTests.cs" />
+    <Compile Include="Core\ShapeSheet\ShapeSheetWriterTests.cs" />
     <Compile Include="Core\Extensions\ApplicationTests.cs" />
     <Compile Include="Core\ShapeSheet\ShapeSheetQueryTests.cs" />
     <Compile Include="Core\Extensions\DocumentTests.cs" />

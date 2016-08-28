@@ -28,16 +28,16 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
             {
-                format.SetFormulas((short)shapeid, update);
+                format.SetFormulas((short)shapeid, writer);
             }
 
             var application = this._client.Application.Get();
-            update.Commit(application.ActivePage);            
+            writer.Commit(application.ActivePage);            
         }
 
         public IList<Shapes.FormatCells> Get(TargetShapes targets)
@@ -111,25 +111,25 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)
             {
                 if (paste_width)
                 {
-                    update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Width, this.cached_size_width.Value);
+                    writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Width, this.cached_size_width.Value);
                 }
 
                 if (paste_height)
                 {
-                    update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Height, this.cached_size_height.Value);
+                    writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Height, this.cached_size_height.Value);
                 }
             }
 
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
-            update.Commit(active_page);
+            writer.Commit(active_page);
         }
 
         private readonly FormatPaintCache cache = new FormatPaintCache();

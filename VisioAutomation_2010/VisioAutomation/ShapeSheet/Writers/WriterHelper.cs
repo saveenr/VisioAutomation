@@ -16,35 +16,35 @@ namespace VisioAutomation.ShapeSheet.Writers
             return result;
         }
 
-        public static object[] build_results_arrays_unitcode(IList<ResultValue> formulas2)
+        public static object[] build_results_arrays_unitcode(IList<ResultValue> result_values)
         {
-            var unitcodes = new object[formulas2.Count];
+            var unitcodes = new object[result_values.Count];
             int i = 0;
-            foreach (var update in formulas2)
+            foreach (var result_value in result_values)
             {
-                unitcodes[i] = update.UnitCode;
+                unitcodes[i] = result_value.UnitCode;
                 i++;
             }
             return unitcodes;
         }
 
-        public static object[] build_results_arrays_results(IList<ResultValue> formulas2)
+        public static object[] build_results_arrays_results(IList<ResultValue> result_values)
         {
-            var results = new object[formulas2.Count];
+            var results = new object[result_values.Count];
             int i = 0;
-            foreach (var update in formulas2)
+            foreach (var result_value in result_values)
             {
-                if (update.ResultType == ResultType.ResultNumeric)
+                if (result_value.ResultType == ResultType.ResultNumeric)
                 {
-                    results[i] = update.ValueNumeric;
+                    results[i] = result_value.ValueNumeric;
                 }
-                else if (update.ResultType == ResultType.ResultString)
+                else if (result_value.ResultType == ResultType.ResultString)
                 {
-                    results[i] = update.ValueString;
+                    results[i] = result_value.ValueString;
                 }
                 else
                 {
-                    string msg = string.Format("Unsupported {0}.{1} \"{2}\"", nameof(update),nameof(update.ResultType),update.ResultType);
+                    string msg = string.Format("Unsupported {0}.{1} \"{2}\"", nameof(result_value),nameof(result_value.ResultType),result_value.ResultType);
                     throw new System.ArgumentOutOfRangeException(msg);
                 }
                 i++;

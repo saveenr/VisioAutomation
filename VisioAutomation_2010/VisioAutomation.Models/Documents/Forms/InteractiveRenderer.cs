@@ -30,7 +30,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
             // Update the Page Cells
             var pagesheet = this._page.PageSheet;
-            var pageupdate = new FormulaWriterSRC();
+            var pagewriter = new FormulaWriterSRC();
 
             var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;
@@ -39,8 +39,8 @@ namespace VisioAutomation.Models.Documents.Forms
             pagecells.PageRightMargin = formpage.Margin.Right;
             pagecells.PageTopMargin = formpage.Margin.Top;
             pagecells.PageBottomMargin = formpage.Margin.Bottom;
-            pagecells.SetFormulas(pageupdate);
-            pageupdate.Commit(pagesheet);
+            pagecells.SetFormulas(pagewriter);
+            pagewriter.Commit(pagesheet);
 
 
             this.Reset();
@@ -95,15 +95,15 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Finish()
         {
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             foreach (var block in this.Blocks)
             {
-                block.FormatCells.SetFormulas((short)block.VisioShapeID,update);
-                block.TextBlockCells.SetFormulas((short)block.VisioShapeID,update);
-                block.ParagraphCells.SetFormulas((short)block.VisioShapeID,update, 0);
-                block.CharacterCells.SetFormulas((short)block.VisioShapeID, update, 0);
+                block.FormatCells.SetFormulas((short)block.VisioShapeID,writer);
+                block.TextBlockCells.SetFormulas((short)block.VisioShapeID,writer);
+                block.ParagraphCells.SetFormulas((short)block.VisioShapeID,writer, 0);
+                block.CharacterCells.SetFormulas((short)block.VisioShapeID, writer, 0);
             }
-            update.Commit(this._page);
+            writer.Commit(this._page);
         }
 
         private void AdjustInsertionPoint(Drawing.Size size)

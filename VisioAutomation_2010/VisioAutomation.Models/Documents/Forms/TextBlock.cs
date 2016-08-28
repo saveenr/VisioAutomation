@@ -26,13 +26,13 @@ namespace VisioAutomation.Models.Documents.Forms
             this.CharacterCells = new VisioAutomation.Text.CharacterCells();
         }
 
-        public void ApplyFormus(FormulaWriterSIDSRC update)
+        public void ApplyFormus(FormulaWriterSIDSRC writer)
         {
             short titleshape_id = this.VisioShape.ID16;
-            this.TextBlockCells.SetFormulas(titleshape_id, update);
-            this.ParagraphCells.SetFormulas(titleshape_id, update, 0);
-            this.CharacterCells.SetFormulas(titleshape_id, update, 0);
-            this.FormatCells.SetFormulas(titleshape_id, update);
+            this.TextBlockCells.SetFormulas(titleshape_id, writer);
+            this.ParagraphCells.SetFormulas(titleshape_id, writer, 0);
+            this.CharacterCells.SetFormulas(titleshape_id, writer, 0);
+            this.FormatCells.SetFormulas(titleshape_id, writer);
         }
     }
 }
