@@ -118,35 +118,5 @@ namespace VisioAutomation.Scripting.Commands
                 update.Commit(active_page);
             }
         }
-
-        public void Stack(Axis axis, double space)
-        {
-            if (!this._client.Selection.HasShapes(2))
-            {
-                return;
-            }
-
-            if (space < 0.0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(space), "must be non-negative");
-            }
-
-            var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Stack"))
-            {
-                var targets = new TargetShapes();
-                if (axis == Axis.YAxis)
-                {
-                    this._client.Align.AlignHorizontal(targets,AlignmentHorizontal.Center);
-                }
-                else
-                {
-                    this._client.Align.AlignVertical(targets,AlignmentVertical.Center);
-                }
-                this._client.Distribute.DistributeOnAxis(axis, space);
-            }
-        }
-
-
     }
 }
