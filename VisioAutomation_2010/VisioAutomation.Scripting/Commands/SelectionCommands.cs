@@ -167,7 +167,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (layername == null)
             {
-                throw new System.ArgumentNullException("Layer name cannot be null", "layername");
+                throw new System.ArgumentNullException("Layer name cannot be null", nameof(layername));
             }
 
             if (layername.Length < 1)
@@ -272,12 +272,12 @@ namespace VisioAutomation.Scripting.Commands
             selection.Copy(flags);
         }
 
-        public void Duplicate( IList<IVisio.Shape> target_shapes )
+        public void Duplicate( TargetShapes target_shapes )
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            int n = this.GetTargetSelectionCount(target_shapes);
+            int n = target_shapes.SetSelectionGetSelectedCount(this._client);
 
             this._client.WriteVerbose("Number of shapes to duplicate: {0}", n);
 

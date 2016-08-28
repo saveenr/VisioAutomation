@@ -19,14 +19,15 @@ namespace VisioPowerShell.Commands.Format
 
         protected override void ProcessRecord()
         {
+            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
             if (this.Font != null)
             {
-                this.Client.Text.SetFont(this.Shapes, this.Font);                
+                this.Client.Text.SetFont(targets, this.Font);                
             }
 
             if (this.Togglecase)
             {
-                this.Client.Text.ToogleCase(this.Shapes);
+                this.Client.Text.ToogleCase(targets);
             }
         }
     }

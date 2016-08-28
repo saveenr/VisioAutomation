@@ -14,11 +14,13 @@ namespace VisioAutomation_Tests.Scripting
             client.Draw.Rectangle(0, 0, 1, 1);
             client.Draw.Rectangle(1, 1, 2, 2);
 
-            var formulas = client.ShapeSheet.QueryFormulas(null, new[] {VisioAutomation.ShapeSheet.SRCConstants.PinX});
+            var targets = new VisioAutomation.Scripting.TargetShapes();
+
+            var formulas = client.ShapeSheet.QueryFormulas(targets, new[] {VisioAutomation.ShapeSheet.SRCConstants.PinX});
             Assert.AreEqual("1.5 in", formulas[0].Cells[0]);
 
             client.Selection.All();
-            formulas = client.ShapeSheet.QueryFormulas(null, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
+            formulas = client.ShapeSheet.QueryFormulas(targets, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
             Assert.AreEqual("1.5 in", formulas[0].Cells[0]);
             Assert.AreEqual("0.5 in", formulas[1].Cells[0]);
 
@@ -35,7 +37,8 @@ namespace VisioAutomation_Tests.Scripting
 
                 client.Selection.All();
 
-                formulas = client.ShapeSheet.QueryFormulas(null, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
+
+                formulas = client.ShapeSheet.QueryFormulas(targets, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
                 //Assert.AreEqual("1.5 in", formulas[0][0]);
                 //Assert.AreEqual("0.5 in", formulas[1][0]);
 

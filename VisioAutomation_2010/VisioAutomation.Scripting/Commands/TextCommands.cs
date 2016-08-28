@@ -15,7 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-       public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts)
+       public void Set(TargetShapes targets, IList<string> texts)
        {
            this._client.Application.AssertApplicationAvailable();
            this._client.Document.AssertDocumentAvailable();
@@ -26,8 +26,9 @@ namespace VisioAutomation.Scripting.Commands
                return;
            }
 
-           var shapes = this.GetTargetShapes(target_shapes);
-           if (shapes.Count < 1)
+            var shapes = targets.ResolveShapes(this._client);
+
+            if (shapes.Count < 1)
            {
                return;
            }
@@ -51,12 +52,13 @@ namespace VisioAutomation.Scripting.Commands
            }
        }
 
-        public IList<string> Get(IList<IVisio.Shape> target_shapes)
+        public IList<string> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
-            
-            var shapes = this.GetTargetShapes(target_shapes);
+
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return new List<string>(0);
@@ -66,12 +68,13 @@ namespace VisioAutomation.Scripting.Commands
             return texts;
         }
 
-        public void ToogleCase(IList<IVisio.Shape> target_shapes)
+        public void ToogleCase(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
-            
-            var shapes = this.GetTargetShapes(target_shapes);
+
+            var shapes = targets.ResolveShapes(this._client);
+
 
             if (shapes.Count < 1)
             {
@@ -122,12 +125,13 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetFont(IList<IVisio.Shape> target_shapes, string fontname)
+        public void SetFont(TargetShapes targets, string fontname)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return;
@@ -139,15 +143,16 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.VisGetSetArgs flags=0;
             var srcs = new[] {ShapeSheet.SRCConstants.CharFont};
             var formulas = new[] { font.ID.ToString() };
-            this._client.ShapeSheet.SetFormula(target_shapes, srcs, formulas, flags);
+            this._client.ShapeSheet.SetFormula(targets, srcs, formulas, flags);
         }
 
-        public IList<Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)
+        public IList<Text.TextFormat> GetFormat(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return new List<Text.TextFormat>(0);
@@ -160,12 +165,13 @@ namespace VisioAutomation.Scripting.Commands
             return formats;
         }
 
-        public void MoveTextToBottom(IList<IVisio.Shape> target_shapes)
+        public void MoveTextToBottom(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes(target_shapes);
+            var shapes = targets.ResolveShapes(this._client);
+
             if (shapes.Count < 1)
             {
                 return ;
@@ -196,12 +202,13 @@ namespace VisioAutomation.Scripting.Commands
             update.Commit(active_page);
         }
 
-        public void SetTextWrapping(IList<IVisio.Shape> target_shapes,bool wrap)
+        public void SetTextWrapping(TargetShapes targets,bool wrap)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes2D(target_shapes);
+            var shapes = targets.ResolveShapes2DOnly(this._client);
+
             if (shapes.Count < 1)
             {
                 return;
@@ -216,12 +223,13 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void FitShapeToText(IList<IVisio.Shape> target_shapes)
+        public void FitShapeToText(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = this.GetTargetShapes2D(target_shapes);
+            var shapes = targets.ResolveShapes2DOnly(this._client);
+
             if (shapes.Count < 1)
             {
                 return;

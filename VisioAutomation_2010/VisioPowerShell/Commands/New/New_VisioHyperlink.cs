@@ -54,7 +54,8 @@ namespace VisioPowerShell.Commands.New
             hlink.NewWindow = Convert.BoolToFormula(this.NewWindow);
             hlink.Invisible = Convert.BoolToFormula(this.Invisible);
 
-            this.Client.Hyperlink.Add(this.Shapes, hlink);
+            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            this.Client.Hyperlink.Add(targets, hlink);
         }
     }
 }

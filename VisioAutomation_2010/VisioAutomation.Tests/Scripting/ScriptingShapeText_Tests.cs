@@ -36,8 +36,9 @@ namespace VisioAutomation_Tests.Scripting
             var names = new[] { "TestName", "TestName2" };
             var texts = names.ToArray();
 
-            client.Text.Set(shapes, texts);
-            client.ShapeSheet.SetName(shapes, names);
+            var targets = new VA.Scripting.TargetShapes(shapes);
+            client.Text.Set(targets, texts);
+            client.ShapeSheet.SetName(targets, names);
 
             for (int i = 0; i < page1.Shapes.Count; i++)
             {

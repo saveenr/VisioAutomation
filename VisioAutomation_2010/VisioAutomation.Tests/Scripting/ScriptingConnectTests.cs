@@ -36,8 +36,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.None();
             client.Selection.Select(directed_connectors);
 
+            var targets = new VA.Scripting.TargetShapes();
             IVisio.VisGetSetArgs flags = 0;
-            client.ShapeSheet.SetFormula(null,new[] { VA.ShapeSheet.SRCConstants.EndArrow }, new [] {"13"}, flags);
+            client.ShapeSheet.SetFormula(targets,new[] { VA.ShapeSheet.SRCConstants.EndArrow }, new [] {"13"}, flags);
 
             var ch = new VA.DocumentAnalysis.ConnectorHandling();
             ch.DirectionSource = DirectionSource.UseConnectionOrder;

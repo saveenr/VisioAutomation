@@ -26,6 +26,8 @@ namespace VisioPowerShell.Commands.Set
 
         protected override void ProcessRecord()
         {
+            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+
             short flags = 0;
             
             if (this.BlastGuards)
@@ -40,11 +42,11 @@ namespace VisioPowerShell.Commands.Set
 
             if (!this.SetResults)
             {
-                this.Client.ShapeSheet.SetFormula(this.Shapes, this.Cell, this.Value, (IVisio.VisGetSetArgs)flags);               
+                this.Client.ShapeSheet.SetFormula(targets, this.Cell, this.Value, (IVisio.VisGetSetArgs)flags);               
             }
             else
             {
-                this.Client.ShapeSheet.SetResult(this.Shapes, this.Cell, this.Value, (IVisio.VisGetSetArgs)flags);                               
+                this.Client.ShapeSheet.SetResult<string>(targets, this.Cell, this.Value, (IVisio.VisGetSetArgs)flags);                               
             }
         }
     }

@@ -31,13 +31,14 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, indices0[1]);
             Assert.AreEqual(0, indices0[2]);
 
-            var dic = client.ConnectionPoint.Get(null);
+            var targets = new VisioAutomation.Scripting.TargetShapes();
+            var dic = client.ConnectionPoint.Get(targets);
             Assert.AreEqual(3, dic.Count);
             Assert.AreEqual("Width*0.67", dic[s1][0].Y.Formula);
             Assert.AreEqual("Width*0.67", dic[s2][0].Y.Formula);
             Assert.AreEqual("Width*0.67", dic[s2][0].Y.Formula);
 
-            client.ConnectionPoint.Delete(null,0);
+            client.ConnectionPoint.Delete(targets,0);
             client.Document.Close(true);
         }
     }

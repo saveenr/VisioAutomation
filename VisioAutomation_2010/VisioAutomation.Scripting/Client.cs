@@ -22,6 +22,9 @@ namespace VisioAutomation.Scripting
         public Commands.DrawCommands Draw { get; private set; }
         public Commands.MasterCommands Master { get; private set; }
         public Commands.ArrangeCommands Arrange { get; private set; }
+        public Commands.SnapCommands Snap { get; private set; }
+        public Commands.DistributeCommands Distribute { get; private set; }
+        public Commands.AlignCommands Align { get; private set; }
         public Commands.PageCommands Page { get; private set; }
         public Commands.SelectionCommands Selection { get; private set; }
         public Commands.ShapeSheetCommands ShapeSheet { get; private set; }
@@ -30,6 +33,7 @@ namespace VisioAutomation.Scripting
         public Commands.DocumentCommands Document { get; private set; }
         public Commands.DeveloperCommands Developer { get; private set; }
         public Commands.OutputCommands Output { get; private set; }
+        public Commands.GroupingCommands Grouping { get; private set; }
 
         public Client(IVisio.Application app):
             this(app,new DefaultContext())
@@ -66,6 +70,8 @@ namespace VisioAutomation.Scripting
             this.Document = new Commands.DocumentCommands(this);
             this.Developer = new Commands.DeveloperCommands(this);
             this.Output = new Commands.OutputCommands(this);
+            this.Distribute = new DistributeCommands(this);
+            this.Grouping = new GroupingCommands(this);
         }
 
         public System.Reflection.Assembly GetVisioAutomationAssembly()
