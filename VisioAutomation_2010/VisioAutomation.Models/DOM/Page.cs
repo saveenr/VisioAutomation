@@ -79,9 +79,9 @@ namespace VisioAutomation.Models.Dom
                     this.PageCells.PageWidth = this.Size.Value.Width;
                 }
 
-                var update = new FormulaWriterSIDSRC();
-                this.PageCells.SetFormulas((short)page_sheet.ID, update);
-                update.Commit(page);
+                var writer = new FormulaWriterSIDSRC();
+                this.PageCells.SetFormulas((short)page_sheet.ID, writer);
+                writer.Commit(page);
                 
                 // Then render the shapes
                 this.Shapes.Render(page);

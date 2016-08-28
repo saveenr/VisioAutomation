@@ -26,14 +26,14 @@ namespace VisioAutomation.Shapes.Geometry
             return this.RowTag;
         }
 
-        public void AddTo(IVisio.Shape shape, FormulaWriterSRC update, short row, short section)
+        public void AddTo(IVisio.Shape shape, FormulaWriterSRC writer, short row, short section)
         {
             short row_index = shape.AddRow(section, row, (short) this.GetRowTagType());
-            this.Update(section, row_index, update);
+            this.Update(section, row_index, writer);
         }
 
 
-        private void Update(short section_index, short row_index, FormulaWriterSRC update)
+        private void Update(short section_index, short row_index, FormulaWriterSRC writer)
         {
             var x_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_X.Cell);
             var y_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_Y.Cell);
@@ -43,13 +43,13 @@ namespace VisioAutomation.Shapes.Geometry
             var d_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_D.Cell);
             var e_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_E.Cell);
 
-            update.SetFormula(x_src, this.X);
-            update.SetFormula(y_src, this.Y);
-            update.SetFormula(a_src, this.A);
-            update.SetFormula(b_src, this.B);
-            update.SetFormula(c_src, this.C);
-            update.SetFormula(d_src, this.D);
-            update.SetFormula(e_src, this.E);
+            writer.SetFormula(x_src, this.X);
+            writer.SetFormula(y_src, this.Y);
+            writer.SetFormula(a_src, this.A);
+            writer.SetFormula(b_src, this.B);
+            writer.SetFormula(c_src, this.C);
+            writer.SetFormula(d_src, this.D);
+            writer.SetFormula(e_src, this.E);
         }
 
         public static GeometryRow CreateLineTo(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y)

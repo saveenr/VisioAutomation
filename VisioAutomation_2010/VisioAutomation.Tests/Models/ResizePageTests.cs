@@ -73,9 +73,9 @@ namespace VisioAutomation_Tests.Core
             pagecells.PageLeftMargin = bottomleft_margin.Width;
             pagecells.PageRightMargin = upperright_margin.Width;
 
-            var pageupdate = new FormulaWriterSRC();
-            pagecells.SetFormulas(pageupdate);
-            pageupdate.Commit(page.PageSheet);
+            var page_writer = new FormulaWriterSRC();
+            pagecells.SetFormulas(page_writer);
+            page_writer.Commit(page.PageSheet);
 
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5+shape_size.Height);

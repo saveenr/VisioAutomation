@@ -128,18 +128,18 @@ namespace VisioAutomation.Scripting.FormatPaint
             var matching_cells = this.Cells.Where(c => c.MatchesCategory(category)).ToArray();
 
             // Apply those matched cells to each shape
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             foreach (var shape_id in shapeids)
             {
                 foreach (var cell in matching_cells)
                 {
                     var sidsrc = new ShapeSheet.SIDSRC((short) shape_id, cell.SRC);
                     var new_formula = applyformulas ? cell.Formula : cell.Result;
-                    update.SetFormula(sidsrc, new_formula);
+                    writer.SetFormula(sidsrc, new_formula);
                 }
             }
 
-            update.Commit(page);
+            writer.Commit(page);
         }
 
         public FormatCategory GetAllFormatPaintFlags()

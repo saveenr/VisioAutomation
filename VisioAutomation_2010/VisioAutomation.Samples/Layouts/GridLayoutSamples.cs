@@ -46,7 +46,7 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Shapes.FormatCells();
             int i = 0;
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;
@@ -55,11 +55,11 @@ namespace VisioAutomationSamples
                 fmtcells.FillForegnd = new ColorRGB(color).ToFormula();
                 fmtcells.LinePattern = 0;
                 fmtcells.LineWeight = 0;
-                fmtcells.SetFormulas(shapeid, update);
+                fmtcells.SetFormulas(shapeid, writer);
                 i++;
             }
 
-            update.Commit(page);
+            writer.Commit(page);
 
             var bordersize = new VA.Drawing.Size(1,1);
             page.ResizeToFitContents(bordersize);

@@ -145,10 +145,10 @@ namespace VisioAutomation_Tests
 
             var page_sheet = page.PageSheet;
 
-            var update = new FormulaWriterSRC(2);
-            update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
-            update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
-            update.Commit(page_sheet);
+            var writer = new FormulaWriterSRC(2);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
+            writer.Commit(page_sheet);
         }
 
         public static VisioAutomation.Drawing.Size GetPageSize(IVisio.Page page)

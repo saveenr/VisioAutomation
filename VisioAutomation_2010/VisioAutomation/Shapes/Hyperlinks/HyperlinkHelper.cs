@@ -61,9 +61,9 @@ namespace VisioAutomation.Shapes.Hyperlinks
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var update = new FormulaWriterSRC();
-            hyperlink.SetFormulas(update, row);
-            update.Commit(shape);
+            var writer = new FormulaWriterSRC();
+            hyperlink.SetFormulas(writer, row);
+            writer.Commit(shape);
 
             return row;
         }

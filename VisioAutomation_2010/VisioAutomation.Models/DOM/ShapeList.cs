@@ -116,15 +116,15 @@ namespace VisioAutomation.Models.Dom
         {
             this.UpdateCellsWithDropSizes(context);
 
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {
                 var fmt = shape.Cells;
                 short id = shape.VisioShapeID;
-                fmt.Apply(update, id);
+                fmt.Apply(writer, id);
             }
-            update.Commit(context.VisioPage);
+            writer.Commit(context.VisioPage);
         }
 
         private void PerformDrawing(RenderContext context)

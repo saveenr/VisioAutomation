@@ -215,9 +215,9 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s=>s.ID).ToList();
             int num_formulas = formulas.Count;
 
-            var update = new FormulaWriterSIDSRC(shapes.Count*num_formulas);
-            update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
-            update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
+            var writer = new FormulaWriterSIDSRC(shapes.Count*num_formulas);
+            writer.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
+            writer.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 
             foreach (var shapeid in shapeids)
             {
@@ -225,7 +225,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     var src = srcs[i];
                     var formula = formulas[i];
-                    update.SetFormula((short) shapeid, src, formula);        
+                    writer.SetFormula((short) shapeid, src, formula);        
                 }
 
             }
@@ -233,7 +233,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set ShapeSheet Formulas"))
             {
-                update.Commit(surface);
+                writer.Commit(surface);
             }
         }
 
@@ -281,9 +281,9 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             int num_results = results.Count;
-            var update = new ResultWriterSIDSRC(shapes.Count * num_results);
-            update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
-            update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
+            var writer = new ResultWriterSIDSRC(shapes.Count * num_results);
+            writer.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
+            writer.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 
             foreach (var shapeid in shapeids)
             {
@@ -291,7 +291,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     var result = results[i];
                     var streamitem = new SIDSRC((short) shapeid, srcs[i]);
-                    update.SetResult(streamitem, result, IVisio.VisUnitCodes.visNumber);
+                    writer.SetResult(streamitem, result, IVisio.VisUnitCodes.visNumber);
                 }
             }
 
@@ -299,28 +299,26 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set ShapeSheet Result"))
             {
-                update.Commit(surface);
+                writer.Commit(surface);
             }
         }
         
-        public void Update(ShapeSheetUpdate update, bool blastguards, bool testcircular)
+        public void Commit(ShapeSheetWriter writer, bool blastguards, bool testcircular)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            this._client.WriteVerbose( "Staring ShapeSheet Update");
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
             var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Update ShapeSheet Formulas"))
+            using (var undoscope = this._client.Application.NewUndoScope("Modify ShapeSheet"))
             {
-                var internal_update = update.update;
-                internal_update.BlastGuards = blastguards;
-                internal_update.TestCircular = testcircular;
+                var internal_writer = writer.formula_writer;
+                internal_writer.BlastGuards = blastguards;
+                internal_writer.TestCircular = testcircular;
                 this._client.WriteVerbose( "BlastGuards={0}", blastguards);
                 this._client.WriteVerbose( "TestCircular={0}", testcircular);
-                internal_update.Commit(surface);                
+                internal_writer.Commit(surface);                
             }
-            this._client.WriteVerbose( "Ending ShapeSheet Update");
         }
     }
 }

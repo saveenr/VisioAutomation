@@ -60,7 +60,7 @@ namespace VisioAutomationSamples
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             var format = new VA.Shapes.FormatCells();
             var xfrm = new VA.Shapes.XFormCells();
 
@@ -74,11 +74,11 @@ namespace VisioAutomationSamples
                 format.LinePattern = 0;
                 format.FillForegndTrans = 0.5;
 
-                xfrm.SetFormulas(shapeid, update);
-                format.SetFormulas(shapeid, update);
+                xfrm.SetFormulas(shapeid, writer);
+                format.SetFormulas(shapeid, writer);
             }
 
-            update.Commit(page);
+            writer.Commit(page);
             VA.Pages.PageHelper.ResizeToFitContents(page, new VA.Drawing.Size(1.0, 1.0));
         }
 
@@ -123,7 +123,7 @@ namespace VisioAutomationSamples
 
             var format = new VA.Shapes.FormatCells();
 
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
 
             string color1_formula = color1.ToFormula();
             string color2_formula = color2.ToFormula();
@@ -140,12 +140,12 @@ namespace VisioAutomationSamples
                 format.FillBkgnd = color2_formula;
                 format.LinePattern = 0;
                 format.LineWeight = 0;
-                format.SetFormulas(shapeid, update);
+                format.SetFormulas(shapeid, writer);
 
                 n++;
             }
 
-            update.Commit(page);
+            writer.Commit(page);
 
             var bordersize = new VA.Drawing.Size(1, 1);
             page.ResizeToFitContents(bordersize);

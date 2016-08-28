@@ -71,18 +71,18 @@ namespace VisioAutomation.Scripting.Commands
 
             var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
 
             foreach (int shapeid in shapeids)
             {
-                lockcells.SetFormulas((short)shapeid, update);
+                lockcells.SetFormulas((short)shapeid, writer);
             }
 
             var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Lock Properties"))
             {
                 var active_page = application.ActivePage;
-                update.Commit(active_page);
+                writer.Commit(active_page);
             }
         }
 
@@ -98,16 +98,16 @@ namespace VisioAutomation.Scripting.Commands
             } 
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
-            var update = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriterSIDSRC();
             foreach (int shapeid in shapeids)
             {
                 if (w.HasValue && w.Value>=0)
                 {
-                    update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Width, w.Value);
+                    writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Width, w.Value);
                 }
                 if (h.HasValue && h.Value >= 0)
                 {
-                    update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Height, h.Value);                    
+                    writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Height, h.Value);                    
                 }
             }
 
@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Size"))
             {
                 var active_page = application.ActivePage;
-                update.Commit(active_page);
+                writer.Commit(active_page);
             }
         }
     }
