@@ -22,6 +22,7 @@ namespace VisioAutomation.Scripting
         public Commands.DrawCommands Draw { get; private set; }
         public Commands.MasterCommands Master { get; private set; }
         public Commands.ArrangeCommands Arrange { get; private set; }
+        public Commands.SnapCommands Snap { get; private set; }
         public Commands.DistributeCommands Distribute { get; private set; }
         public Commands.AlignCommands Align { get; private set; }
         public Commands.PageCommands Page { get; private set; }

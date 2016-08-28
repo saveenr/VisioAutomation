@@ -1,3 +1,4 @@
+using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Drawing.Layout;
 using VA = VisioAutomation;
@@ -34,10 +35,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Distribute.DistributeHorizontal(targets,AlignmentHorizontal.Center);
 
-            var xforms = client.Arrange.GetXForm(targets);
-            AssertUtil.AreEqual(1.125, 1.25, xforms[0].GetPinPosResult(),0.00001);
-            AssertUtil.AreEqual(3.1875, 3.25, xforms[1].GetPinPosResult(), 0.00001);
-            AssertUtil.AreEqual(5.25, 3, xforms[2].GetPinPosResult(), 0.00001);
+            VisioAutomation.Shapes.XFormCells.GetCells(client.Page.Get(),new[] {s1.ID, s2.ID, s3.ID });
 
             client.Document.Close(true);
         }
@@ -61,7 +59,8 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Arrange.Nudge(targets,1, -1);
 
-            var xforms = client.Arrange.GetXForm(targets);
+            var xforms = VisioAutomation.Shapes.XFormCells.GetCells(client.Page.Get(), new[] { s1.ID, s2.ID, s3.ID });
+
             AssertUtil.AreEqual(2.125, 0.25, xforms[0].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual(3.25, 2.25, xforms[1].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual(6.25, 2, xforms[2].GetPinPosResult(), 0.00001);
