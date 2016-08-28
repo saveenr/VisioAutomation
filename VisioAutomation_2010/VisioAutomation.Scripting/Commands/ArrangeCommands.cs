@@ -10,9 +10,9 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class ArrangeCommands : CommandSet
+    public class DistributeCommands : CommandSet
     {
-        internal ArrangeCommands(Client client) :
+        internal DistributeCommands(Client client) :
             base(client)
         {
 
@@ -33,11 +33,14 @@ namespace VisioAutomation.Scripting.Commands
 
             switch (halign)
             {
-                case AlignmentHorizontal.Left: cmd=IVisio.VisUICmds.visCmdDistributeLeft;
+                case AlignmentHorizontal.Left:
+                    cmd = IVisio.VisUICmds.visCmdDistributeLeft;
                     break;
-                case AlignmentHorizontal.Center: cmd = IVisio.VisUICmds.visCmdDistributeCenter;
+                case AlignmentHorizontal.Center:
+                    cmd = IVisio.VisUICmds.visCmdDistributeCenter;
                     break;
-                case AlignmentHorizontal.Right: cmd = IVisio.VisUICmds.visCmdDistributeRight;
+                case AlignmentHorizontal.Right:
+                    cmd = IVisio.VisUICmds.visCmdDistributeRight;
                     break;
                 default: throw new System.ArgumentOutOfRangeException();
             }
@@ -60,7 +63,8 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.VisUICmds cmd;
             switch (valign)
             {
-                case AlignmentVertical.Top: cmd=IVisio.VisUICmds.visCmdDistributeTop;
+                case AlignmentVertical.Top:
+                    cmd = IVisio.VisUICmds.visCmdDistributeTop;
                     break;
                 case AlignmentVertical.Center: cmd = IVisio.VisUICmds.visCmdDistributeMiddle; break;
                 case AlignmentVertical.Bottom: cmd = IVisio.VisUICmds.visCmdDistributeBottom; break;
@@ -68,7 +72,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this._client.Application.Get();
-            application.DoCmd((short)cmd); 
+            application.DoCmd((short)cmd);
         }
 
         public void DistributeOnAxis(TargetShapes targets, Axis axis)
@@ -103,6 +107,20 @@ namespace VisioAutomation.Scripting.Commands
                 application.DoCmd((short)cmd);
             }
         }
+    }
+
+
+    public class ArrangeCommands : CommandSet
+    {
+        internal ArrangeCommands(Client client) :
+            base(client)
+        {
+
+        }
+
+
+
+
 
         public void Nudge(TargetShapes targets, double dx, double dy)
         {

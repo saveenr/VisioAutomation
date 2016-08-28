@@ -32,7 +32,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioAutomation.Scripting.TargetShapes();
 
-            client.Arrange.DistributeHorizontal(targets,AlignmentHorizontal.Center);
+            client.Distribute.DistributeHorizontal(targets,AlignmentHorizontal.Center);
 
             var xforms = client.Arrange.GetXForm(targets);
             AssertUtil.AreEqual(1.125, 1.25, xforms[0].GetPinPosResult(),0.00001);

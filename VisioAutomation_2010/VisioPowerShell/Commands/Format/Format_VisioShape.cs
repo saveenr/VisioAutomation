@@ -40,12 +40,12 @@ namespace VisioPowerShell.Commands.Format
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Arrange.DistributeOnAxis(targets, Axis.XAxis);
+                this.Client.Distribute.DistributeOnAxis(targets, Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Arrange.DistributeOnAxis(targets, Axis.YAxis);
+                this.Client.Distribute.DistributeOnAxis(targets, Axis.YAxis);
             }
 
             if (this.AlignVertical != Model.VerticalAlignment.None)
