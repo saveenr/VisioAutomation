@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void SetName(TargetShapes  targets, IList<string> names)
+        public void SetName(TargetShapes targets, IList<string> names)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

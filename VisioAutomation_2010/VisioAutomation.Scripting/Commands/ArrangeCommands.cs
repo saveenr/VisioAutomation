@@ -3,7 +3,6 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.Drawing.Layout;
-using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.Layout;
 using VisioAutomation.Scripting.Utilities;
 using VisioAutomation.ShapeSheet.Writers;

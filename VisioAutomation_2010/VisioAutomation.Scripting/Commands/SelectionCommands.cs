@@ -167,7 +167,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (layername == null)
             {
-                throw new System.ArgumentNullException("Layer name cannot be null", "layername");
+                throw new System.ArgumentNullException("Layer name cannot be null", nameof(layername));
             }
 
             if (layername.Length < 1)
