@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Drawing.Layout;
@@ -8,23 +9,19 @@ namespace VisioAutomation_Tests.Scripting
     [TestClass]
     public class ScriptingArrangeTests : VisioAutomationTest
     {
+        
         [TestMethod]
-        public void Scripting_Arrangement_Scenarios()
-        {
-            this.Scripting_Distribute();
-            this.Scripting_Nudge();
-        }
-
         public void Scripting_Distribute()
         {
             var client = this.GetScriptingClient();
+            var pagesize = new VA.Drawing.Size(4, 4);
 
             client.Document.New();
-            client.Page.New(new VA.Drawing.Size(4, 4), false);
+            client.Page.New(pagesize, false);
 
-            var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
-            var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
-            var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
+            var s1 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(1, 1), new VA.Drawing.Size(0.5,0.5) ));
+            var s2 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), new VA.Drawing.Size(1.0, 1.0)));
+            var s3 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), new VA.Drawing.Size(1.5, 1.5)));
 
             client.Selection.None();
             client.Selection.Select(s1);
@@ -40,6 +37,40 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.Close(true);
         }
 
+        [TestMethod]
+        public void Scripting_Distribute_With_Spacing()
+        {
+            var client = this.GetScriptingClient();
+            var pagesize = new VA.Drawing.Size(4, 4);
+
+            client.Document.New();
+            client.Page.New(pagesize, false);
+
+            var s1 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(1, 1), new VA.Drawing.Size(0.5, 0.5)));
+            var s2 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), new VA.Drawing.Size(1.0, 1.0)));
+            var s3 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), new VA.Drawing.Size(1.5, 1.5)));
+
+            client.Selection.None();
+            client.Selection.Select(s1);
+            client.Selection.Select(s2);
+            client.Selection.Select(s3);
+
+            client.Distribute.DistributeOnAxis(Axis.XAxis , 0.25);
+            client.Distribute.DistributeOnAxis(Axis.YAxis, 1.0);
+
+            var out_xfrms = VisioAutomation.Shapes.XFormCells.GetCells(client.Page.Get(), new[] { s1.ID, s2.ID, s3.ID });
+            var out_positions = out_xfrms.Select(xfrm => new VA.Drawing.Point(xfrm.PinX.Result, xfrm.PinY.Result)).ToArray();
+
+            Assert.AreEqual(1.25, out_positions[0].X);
+            Assert.AreEqual(1.25, out_positions[0].Y);
+            Assert.AreEqual(2.25, out_positions[1].X);
+            Assert.AreEqual(3.00, out_positions[1].Y);
+            Assert.AreEqual(3.75, out_positions[2].X);
+            Assert.AreEqual(5.25, out_positions[2].Y);
+            client.Document.Close(true);
+        }
+
+        [TestMethod]
         public void Scripting_Nudge()
         {
             var client = this.GetScriptingClient();
