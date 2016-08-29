@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using VisioAutomation.Extensions;
 using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.View;
@@ -160,6 +161,11 @@ namespace VisioAutomation.Scripting.Commands
                 var shape = page.DrawNURBS(controlpoints, knots, weights, degree);
                 return shape;
             }
+        }
+
+        public IVisio.Shape Rectangle(VisioAutomation.Drawing.Rectangle r)
+        {
+            return this.Rectangle(r.Left, r.Bottom, r.Right, r.Top);
         }
 
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)

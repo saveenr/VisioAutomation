@@ -20,18 +20,14 @@ namespace VisioAutomation.Scripting.Utilities
 
         private static double GetPositionOnShape(Shapes.XFormCells xform, RelativePosition pos)
         {
+            var r = ArrangeHelper.GetRectangle(xform);
+
             switch (pos)
             {
                 case RelativePosition.PinY:
                     return xform.PinY.Result;
                 case RelativePosition.PinX:
                     return xform.PinX.Result;
-            }
-
-            var r = ArrangeHelper.GetRectangle(xform);
-
-            switch (pos)
-            {
                 case RelativePosition.Left:
                     return r.Left;
                 case RelativePosition.Right:
@@ -83,7 +79,6 @@ namespace VisioAutomation.Scripting.Utilities
                 : new Drawing.Size(0, spacing);
 
 
-            var sorted_shape_ids = ArrangeHelper.SortShapesByPosition(target, sortpos);
             var input_xfrms = Shapes.XFormCells.GetCells(target.Page,target.ShapeIDs);
             var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
             var bb = ArrangeHelper.GetBoundingBox(input_xfrms);
@@ -104,7 +99,9 @@ namespace VisioAutomation.Scripting.Utilities
             }
 
             // Apply the changes
-            ArrangeHelper.update_xfrms(target, output_xfrms);
+            var sorted_shape_ids = ArrangeHelper.SortShapesByPosition(target, sortpos);
+            var new_target = new VisioAutomation.Scripting.TargetShapeIDs(target.Page,sorted_shape_ids);
+            ArrangeHelper.update_xfrms(new_target, output_xfrms);
         }
 
  
