@@ -44,7 +44,7 @@ namespace VisioPowerShell.Commands.New
                  }
              }
 
-            this.Client.Selection.None();
+            this.Client.Selection.SelectNone();
 
             if (!this.NoSelect)
             {

@@ -20,7 +20,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var s3 = client.Draw.Rectangle(1.5, 3.5, 2, 4.0);
 
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(s1);
             client.Selection.Select(s2);
             client.Selection.Select(s3);

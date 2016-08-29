@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var old_selection = this._client.Selection.GetShapes();
 
-            this._client.Selection.None();
+            this._client.Selection.SelectNone();
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
             active_page.Export(filename);
@@ -97,7 +97,7 @@ namespace VisioAutomation.Scripting.Commands
                 this._client.WriteUser("file {0}", page_filname);
                 page_filname = System.IO.Path.Combine(pbase, page_filname);
                 active_window.Page = page;
-                this._client.Selection.None();
+                this._client.Selection.SelectNone();
                 page.Export(page_filname);
             }
             active_window.Page = old_page;

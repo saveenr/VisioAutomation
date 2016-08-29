@@ -23,7 +23,8 @@ namespace VisioAutomation_Tests
         public string GetTestMethodOutputFilename(string ext)
         {
             string abs_path = this.OutputPath;
-            string abs_filename = Path.Combine(abs_path, TestHelper.GetMethodName(2) + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ext);
+            string abs_filename = Path.Combine(abs_path,
+                TestHelper.GetMethodName(2) + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ext);
             return abs_filename;
         }
 
@@ -58,5 +59,12 @@ namespace VisioAutomation_Tests
             return n;
         }
 
+        public void DeleteFileSafe(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace VisioAutomation.Scripting
             }
 
             client.WriteVerbose("GetTargetSelectionCount: Reseting selecton to specified {0} shapes", this.Shapes.Count);
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(this.Shapes);
             int selected_count = client.Selection.Count();
             return selected_count;

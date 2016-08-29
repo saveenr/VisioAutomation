@@ -47,13 +47,13 @@ namespace VisioAutomation_Tests.Scripting
             Assert.IsFalse(client.Selection.HasShapes(2));
 
             client.Draw.Rectangle(2, 2, 3, 3);
-            client.Selection.All();
+            client.Selection.SelectAll();
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsTrue(client.Selection.HasShapes());
             Assert.IsTrue(client.Selection.HasShapes(1));
             Assert.IsTrue(client.Selection.HasShapes(2));
 
-            client.Selection.None();
+            client.Selection.SelectNone();
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsFalse(client.Selection.HasShapes());
 

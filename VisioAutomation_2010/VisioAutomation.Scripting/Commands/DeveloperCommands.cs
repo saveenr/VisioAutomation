@@ -227,11 +227,13 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
 
+            string template = null;
             string def_linecolor = "rgb(140,140,140)";
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
 
-            var doc = this._client.Document.New(8.5,11,null);
+            var page_size = new VisioAutomation.Drawing.Size(8.5,11);
+            var doc = this._client.Document.New(page_size,template);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
             int fontid = font.ID16;
@@ -383,8 +385,10 @@ namespace VisioAutomation.Scripting.Commands
             string segoeuilight_fontname = "Segoe UI Light";
             string def_linecolor = "rgb(180,180,180)";
             string def_shape_fill = "rgb(245,245,245)";
+            string template = null;
 
-            var doc = this._client.Document.New(8.5, 11,null);
+            var page_size = new VisioAutomation.Drawing.Size(8.5,11);
+            var doc = this._client.Document.New(page_size,template);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
             var font_segoelight = fonts[segoeuilight_fontname];

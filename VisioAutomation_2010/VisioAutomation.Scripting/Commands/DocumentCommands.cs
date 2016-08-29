@@ -198,18 +198,16 @@ namespace VisioAutomation.Scripting.Commands
             doc.SaveAs(filename);
         }
 
-        public IVisio.Document New(double w, double h)
+        public IVisio.Document New(VisioAutomation.Drawing.Size size)
         {
-            return this.New(w, h, null);
+            return this.New(size,null);
         }
 
-        public IVisio.Document New(double w, double h,string template)
+        public IVisio.Document New(VisioAutomation.Drawing.Size size,string template)
         {
             this._client.Application.AssertApplicationAvailable();
-
             var doc = this.New(template);
-            var pagesize = new Drawing.Size(w, h);
-            this._client.Page.SetSize(pagesize);
+            this._client.Page.SetSize(size);
             return doc;
         }
 

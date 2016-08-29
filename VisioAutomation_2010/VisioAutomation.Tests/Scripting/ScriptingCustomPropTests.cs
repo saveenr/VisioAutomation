@@ -19,7 +19,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            client.Selection.None();
+            client.Selection.SelectNone();
 
             var targets = new VA.Scripting.TargetShapes();
             client.ShapeSheet.SetFormula(targets, new [] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
@@ -37,7 +37,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(s1);
             client.Selection.Select(s2);
             client.Selection.Select(s3);

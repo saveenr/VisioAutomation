@@ -19,7 +19,7 @@ namespace VisioAutomation_Tests.Scripting
             var formulas = client.ShapeSheet.QueryFormulas(targets, new[] {VisioAutomation.ShapeSheet.SRCConstants.PinX});
             Assert.AreEqual("1.5 in", formulas[0].Cells[0]);
 
-            client.Selection.All();
+            client.Selection.SelectAll();
             formulas = client.ShapeSheet.QueryFormulas(targets, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
             Assert.AreEqual("1.5 in", formulas[0].Cells[0]);
             Assert.AreEqual("0.5 in", formulas[1].Cells[0]);
@@ -35,7 +35,7 @@ namespace VisioAutomation_Tests.Scripting
                 client.Draw.Oval(2, 2, 3, 3);
 
 
-                client.Selection.All();
+                client.Selection.SelectAll();
 
 
                 formulas = client.ShapeSheet.QueryFormulas(targets, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
