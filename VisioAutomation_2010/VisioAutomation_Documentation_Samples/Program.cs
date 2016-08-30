@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation_Documentation_Samples
 {
@@ -10,7 +7,7 @@ namespace VisioAutomation_Documentation_Samples
         static void Main(string[] args)
         {
 
-            var app = new Microsoft.Office.Interop.Visio.ApplicationClass();
+            var app = new IVisio.ApplicationClass();
 
             var doc = app.Documents.Add("");
 

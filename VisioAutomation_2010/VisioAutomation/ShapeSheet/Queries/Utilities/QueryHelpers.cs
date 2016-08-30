@@ -137,20 +137,20 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
             return results;
         }
 
-        private static Microsoft.Office.Interop.Visio.VisGetSetArgs get_VisGetSetArgs(System.Type type)
+        private static IVisio.VisGetSetArgs get_VisGetSetArgs(System.Type type)
         {
-            Microsoft.Office.Interop.Visio.VisGetSetArgs flags;
+            IVisio.VisGetSetArgs flags;
             if (type == typeof(int))
             {
-                flags = Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetTruncatedInts;
+                flags = IVisio.VisGetSetArgs.visGetTruncatedInts;
             }
             else if (type == typeof(double))
             {
-                flags = Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetFloats;
+                flags = IVisio.VisGetSetArgs.visGetFloats;
             }
             else if (type == typeof(string))
             {
-                flags = Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetStrings;
+                flags = IVisio.VisGetSetArgs.visGetStrings;
             }
             else
             {

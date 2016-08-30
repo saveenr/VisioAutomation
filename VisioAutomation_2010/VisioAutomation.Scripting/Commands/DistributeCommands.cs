@@ -1,3 +1,4 @@
+using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Drawing.Layout;
 using VisioAutomation.Scripting.Utilities;
 using VisioAutomation.Extensions;
@@ -39,18 +40,18 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            Microsoft.Office.Interop.Visio.VisUICmds cmd;
+            IVisio.VisUICmds cmd;
 
             switch (halign)
             {
                 case AlignmentHorizontal.Left:
-                    cmd = Microsoft.Office.Interop.Visio.VisUICmds.visCmdDistributeLeft;
+                    cmd = IVisio.VisUICmds.visCmdDistributeLeft;
                     break;
                 case AlignmentHorizontal.Center:
-                    cmd = Microsoft.Office.Interop.Visio.VisUICmds.visCmdDistributeCenter;
+                    cmd = IVisio.VisUICmds.visCmdDistributeCenter;
                     break;
                 case AlignmentHorizontal.Right:
-                    cmd = Microsoft.Office.Interop.Visio.VisUICmds.visCmdDistributeRight;
+                    cmd = IVisio.VisUICmds.visCmdDistributeRight;
                     break;
                 default: throw new System.ArgumentOutOfRangeException();
             }
@@ -70,14 +71,14 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            Microsoft.Office.Interop.Visio.VisUICmds cmd;
+            IVisio.VisUICmds cmd;
             switch (valign)
             {
                 case AlignmentVertical.Top:
-                    cmd = Microsoft.Office.Interop.Visio.VisUICmds.visCmdDistributeTop;
+                    cmd = IVisio.VisUICmds.visCmdDistributeTop;
                     break;
-                case AlignmentVertical.Center: cmd = Microsoft.Office.Interop.Visio.VisUICmds.visCmdDistributeMiddle; break;
-                case AlignmentVertical.Bottom: cmd = Microsoft.Office.Interop.Visio.VisUICmds.visCmdDistributeBottom; break;
+                case AlignmentVertical.Center: cmd = IVisio.VisUICmds.visCmdDistributeMiddle; break;
+                case AlignmentVertical.Bottom: cmd = IVisio.VisUICmds.visCmdDistributeBottom; break;
                 default: throw new System.ArgumentOutOfRangeException();
             }
 
@@ -97,15 +98,15 @@ namespace VisioAutomation.Scripting.Commands
             }
 
 
-            Microsoft.Office.Interop.Visio.VisUICmds cmd;
+            IVisio.VisUICmds cmd;
 
             switch (axis)
             {
                 case Axis.XAxis:
-                    cmd = Microsoft.Office.Interop.Visio.VisUICmds.visCmdDistributeHSpace;
+                    cmd = IVisio.VisUICmds.visCmdDistributeHSpace;
                     break;
                 case Axis.YAxis:
-                    cmd = Microsoft.Office.Interop.Visio.VisUICmds.visCmdDistributeVSpace;
+                    cmd = IVisio.VisUICmds.visCmdDistributeVSpace;
                     break;
                 default:
                     throw new System.ArgumentOutOfRangeException();

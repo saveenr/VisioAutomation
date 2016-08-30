@@ -1,3 +1,5 @@
+using IVisio=Microsoft.Office.Interop.Visio;
+
 namespace VisioAutomation.ShapeSheet.Writers
 {
     public class ResultWriterSRC : WriterBase<VisioAutomation.ShapeSheet.SRC, ResultValue>
@@ -11,13 +13,13 @@ namespace VisioAutomation.ShapeSheet.Writers
         }
 
 
-        public void SetResult(SRC src, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, string value, IVisio.VisUnitCodes unitcode)
         {
             this.StreamItems.Add(src);
             this.ValueItems.Add( new ResultValue(value,unitcode));
         }
 
-        public void SetResult(SRC src, double value, Microsoft.Office.Interop.Visio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
             this.StreamItems.Add(src);
             this.ValueItems.Add(new ResultValue(value, unitcode));

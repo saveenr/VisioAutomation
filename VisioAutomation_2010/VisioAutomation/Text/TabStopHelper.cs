@@ -3,14 +3,15 @@ using System.Linq;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
 using VisioAutomation.ShapeSheet.Queries.Utilities;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
     public static class TabStopHelper
     {
-        private const short tab_section = (short)Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionTab;
+        private const short tab_section = (short)IVisio.VisSectionIndices.visSectionTab;
 
-        public static IList<TabStop> GetTabStops(Microsoft.Office.Interop.Visio.Shape shape)
+        public static IList<TabStop> GetTabStops(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -45,7 +46,7 @@ namespace VisioAutomation.Text
 
 
             var stream = ShapeSheet.SRC.ToStream(srcs);
-            var unitcodes = srcs.Select(i => Microsoft.Office.Interop.Visio.VisUnitCodes.visNumber).ToList();
+            var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNumber).ToList();
             var results = QueryHelpers.GetResults_SRC<double>(surface, stream, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
@@ -60,7 +61,7 @@ namespace VisioAutomation.Text
             return stops_list;
         }
 
-        public static void SetTabStops(Microsoft.Office.Interop.Visio.Shape shape, IList<TabStop> stops)
+        public static void SetTabStops(IVisio.Shape shape, IList<TabStop> stops)
         {
             if (shape == null)
             {
@@ -80,13 +81,13 @@ namespace VisioAutomation.Text
 
             const short row = 0;
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
-            var vis_tab_stop_count = (short)Microsoft.Office.Interop.Visio.VisCellIndices.visTabStopCount;
+            var vis_tab_stop_count = (short)IVisio.VisCellIndices.visTabStopCount;
             var tabstopcountcell = shape.CellsSRC[tab_section, row, vis_tab_stop_count];
             tabstopcountcell.FormulaU = stops.Count.ToString(invariant_culture);
 
             // set the number of tab stobs allowed for the shape
             var tagtab = GetTabTagForStops(stops.Count);
-            shape.RowType[tab_section, (short)Microsoft.Office.Interop.Visio.VisRowIndices.visRowTab] = (short)tagtab;
+            shape.RowType[tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
             var writer = new FormulaWriterSRC();
@@ -109,25 +110,25 @@ namespace VisioAutomation.Text
             writer.Commit(shape);
         }
 
-        private static Microsoft.Office.Interop.Visio.VisRowTags GetTabTagForStops(int stops)
+        private static IVisio.VisRowTags GetTabTagForStops(int stops)
         {
             if (stops < 0)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(stops));
             }
 
-            var tagtab = Microsoft.Office.Interop.Visio.VisRowTags.visTagTab0;
+            var tagtab = IVisio.VisRowTags.visTagTab0;
             if ((0 <= stops) && (stops <= 2))
             {
-                tagtab = Microsoft.Office.Interop.Visio.VisRowTags.visTagTab2;
+                tagtab = IVisio.VisRowTags.visTagTab2;
             }
             else if ((3 <= stops) && (stops <= 10))
             {
-                tagtab = Microsoft.Office.Interop.Visio.VisRowTags.visTagTab10;
+                tagtab = IVisio.VisRowTags.visTagTab10;
             }
             else if ((11 <= stops) && (stops <= 60))
             {
-                tagtab = Microsoft.Office.Interop.Visio.VisRowTags.visTagTab60;
+                tagtab = IVisio.VisRowTags.visTagTab60;
             }
             else
             {
@@ -137,7 +138,7 @@ namespace VisioAutomation.Text
             return tagtab;
         }
 
-        private static int GetTabStopCount(Microsoft.Office.Interop.Visio.Shape shape)
+        private static int GetTabStopCount(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -147,14 +148,14 @@ namespace VisioAutomation.Text
             var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SRCConstants.Tabs_StopCount.Section, ShapeSheet.SRCConstants.Tabs_StopCount.Row, ShapeSheet.SRCConstants.Tabs_StopCount.Cell];
             const short rounding = 0;
 
-            return cell_tabstopcount.ResultInt[(short)Microsoft.Office.Interop.Visio.VisUnitCodes.visNumber, rounding];
+            return cell_tabstopcount.ResultInt[(short)IVisio.VisUnitCodes.visNumber, rounding];
         }
 
         /// <summary>
         /// Remove all tab stops on the shape
         /// </summary>
         /// <param name="shape"></param>
-        private static void ClearTabStops(Microsoft.Office.Interop.Visio.Shape shape)
+        private static void ClearTabStops(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -176,7 +177,7 @@ namespace VisioAutomation.Text
             var writer = new FormulaWriterSRC();
             for (int i = 1; i < num_existing_tabstops * 3; i++)
             {
-                var src = new ShapeSheet.SRC(tab_section, (short)Microsoft.Office.Interop.Visio.VisRowIndices.visRowTab,
+                var src = new ShapeSheet.SRC(tab_section, (short)IVisio.VisRowIndices.visRowTab,
                     (short)i);
                 writer.SetFormula(src, formula);
             }
