@@ -1,5 +1,4 @@
 using System.Linq;
-using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Drawing.Layout;
 using VA = VisioAutomation;

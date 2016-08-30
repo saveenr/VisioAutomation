@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Exceptions;
-using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Queries.Utilities
 {
@@ -79,14 +78,14 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
             return formulas;
         }
 
-        public static TResult[] GetResults_SIDSRC<TResult>(ShapeSheetSurface surface, short[] stream, IList<VisUnitCodes> unitcodes)
+        public static TResult[] GetResults_SIDSRC<TResult>(ShapeSheetSurface surface, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
             int numitems = check_stream_size(stream, 4);
             var results = _GetResults<TResult>(surface, stream, unitcodes, numitems);
             return results;
         }
 
-        public static TResult[] GetResults_SRC<TResult>(ShapeSheetSurface surface, short[] stream, IList<VisUnitCodes> unitcodes)
+        public static TResult[] GetResults_SRC<TResult>(ShapeSheetSurface surface, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
             int numitems = check_stream_size(stream, 3);
             var results = _GetResults<TResult>(surface, stream, unitcodes, numitems);
@@ -94,7 +93,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
         }
 
 
-        public static TResult[] _GetResults<TResult>(ShapeSheetSurface surface, short[] stream, IList<VisUnitCodes> unitcodes, int numitems)
+        public static TResult[] _GetResults<TResult>(ShapeSheetSurface surface, short[] stream, IList<IVisio.VisUnitCodes> unitcodes, int numitems)
         {
             EnforceValidResultType(typeof(TResult));
 
@@ -161,7 +160,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
             return flags;
         }
 
-        private static object[] get_unit_code_obj_array(IList<VisUnitCodes> unitcodes)
+        private static object[] get_unit_code_obj_array(IList<IVisio.VisUnitCodes> unitcodes)
         {
             // Create the unit codes array
             object[] unitcodes_obj_array = null;
