@@ -148,7 +148,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var targets = new VisioAutomation.Scripting.TargetShapes( new [] { target_shape});
+            var targets = new VisioAutomation.Scripting.TargetShapes( target_shape );
             var shapes = targets.ResolveShapes(this._client);
             if (shapes.Count < 1)
             {

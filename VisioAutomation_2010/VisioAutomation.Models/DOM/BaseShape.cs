@@ -11,7 +11,7 @@ namespace VisioAutomation.Models.Dom
         public short VisioShapeID { get; internal set; }
 
         public VisioAutomation.Models.Text.TextElement Text { get; set; }
-        public Dictionary<string, VACUSTPROP.CustomPropertyCells> CustomProperties { get; set; }
+        public VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary CustomProperties { get; set; }
         public List<Hyperlink> Hyperlinks { get; set; }
 
         // Be aware that if multiple nodes share the same Cells reference bad things can happen.

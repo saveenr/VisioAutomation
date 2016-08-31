@@ -13,12 +13,12 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, Dictionary<string,VACUSTPROP.CustomPropertyCells>> Get(TargetShapes targets)
+        public IDictionary<IVisio.Shape, VACUSTPROP.CustomPropertyDictionary> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VACUSTPROP.CustomPropertyCells>>();
+            var prop_dic = new Dictionary<IVisio.Shape, VACUSTPROP.CustomPropertyDictionary>();
             var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Count < 1)
