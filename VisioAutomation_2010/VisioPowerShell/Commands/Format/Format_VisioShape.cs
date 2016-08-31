@@ -20,6 +20,8 @@ namespace VisioPowerShell.Commands.Format
         [Parameter(Mandatory = false)]
         public SwitchParameter DistributeVertical { get; set; }
 
+        [Parameter(Mandatory = false)] public double Distance = -1.0;
+
         [Parameter(Mandatory = false)]
         public Model.VerticalAlignment AlignVertical = Model.VerticalAlignment.None;
 
@@ -40,12 +42,26 @@ namespace VisioPowerShell.Commands.Format
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Distribute.DistributeOnAxis(targets, Axis.XAxis);
+                if (this.Distance < 0)
+                {
+                    this.Client.Distribute.DistributeOnAxis(targets, Axis.XAxis);
+                }
+                else
+                {
+                    this.Client.Distribute.DistributeOnAxis(targets, Axis.XAxis, this.Distance);
+                }
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Distribute.DistributeOnAxis(targets, Axis.YAxis);
+                if (this.Distance < 0)
+                {
+                    this.Client.Distribute.DistributeOnAxis(targets, Axis.YAxis);
+                }
+                else
+                {
+                    this.Client.Distribute.DistributeOnAxis(targets, Axis.YAxis, this.Distance);
+                }
             }
 
             if (this.AlignVertical != Model.VerticalAlignment.None)

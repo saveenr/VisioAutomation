@@ -13,19 +13,52 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void DistributeOnAxis(Axis axis, double spacing)
+        public void DistributeOnAxis(TargetShapes targets, Axis axis, double spacing)
         {
             if (!this._client.Document.HasActiveDocument)
             {
                 return;
             }
-            var application = this._client.Application.Get();
-            var selection = this._client.Selection.Get();
-            var shapeids = selection.GetIDs();
+            var page = this._client.Page.Get();
+            var shapes = targets.ResolveShapes(this._client);
+            var targets2 = new VisioAutomation.Scripting.TargetShapes(shapes);
+            var targetids = targets2.ToShapeIDs(page);
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
-                var target = new TargetShapeIDs(application.ActivePage, shapeids);
-                ArrangeHelper.DistributeWithSpacing(target, axis, spacing);
+                ArrangeHelper.DistributeWithSpacing(targetids, axis, spacing);
+            }
+        }
+
+        public void DistributeOnAxis(TargetShapes targets, Axis axis)
+        {
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
+
+            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
+            if (shape_count < 1)
+            {
+                return;
+            }
+
+
+            IVisio.VisUICmds cmd;
+
+            switch (axis)
+            {
+                case Axis.XAxis:
+                    cmd = IVisio.VisUICmds.visCmdDistributeHSpace;
+                    break;
+                case Axis.YAxis:
+                    cmd = IVisio.VisUICmds.visCmdDistributeVSpace;
+                    break;
+                default:
+                    throw new System.ArgumentOutOfRangeException();
+            }
+
+            var application = this._client.Application.Get();
+            using (var undoscope = this._client.Application.NewUndoScope("Distribute Shapes"))
+            {
+                application.DoCmd((short)cmd);
             }
         }
 
@@ -84,39 +117,6 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this._client.Application.Get();
             application.DoCmd((short)cmd);
-        }
-
-        public void DistributeOnAxis(TargetShapes targets, Axis axis)
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
-            if (shape_count < 1)
-            {
-                return;
-            }
-
-
-            IVisio.VisUICmds cmd;
-
-            switch (axis)
-            {
-                case Axis.XAxis:
-                    cmd = IVisio.VisUICmds.visCmdDistributeHSpace;
-                    break;
-                case Axis.YAxis:
-                    cmd = IVisio.VisUICmds.visCmdDistributeVSpace;
-                    break;
-                default:
-                    throw new System.ArgumentOutOfRangeException();
-            }
-
-            var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Distribute Shapes"))
-            {
-                application.DoCmd((short)cmd);
-            }
         }
     }
 }

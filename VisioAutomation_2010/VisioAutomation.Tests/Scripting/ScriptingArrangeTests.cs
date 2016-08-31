@@ -54,8 +54,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            client.Distribute.DistributeOnAxis(Axis.XAxis , 0.25);
-            client.Distribute.DistributeOnAxis(Axis.YAxis, 1.0);
+            var targets = new VA.Scripting.TargetShapes();
+            client.Distribute.DistributeOnAxis(targets, Axis.XAxis , 0.25);
+            client.Distribute.DistributeOnAxis(targets, Axis.YAxis, 1.0);
 
             var out_xfrms = VisioAutomation.Shapes.XFormCells.GetCells(client.Page.Get(), new[] { s1.ID, s2.ID, s3.ID });
             var out_positions = out_xfrms.Select(xfrm => new VA.Drawing.Point(xfrm.PinX.Result, xfrm.PinY.Result)).ToArray();
