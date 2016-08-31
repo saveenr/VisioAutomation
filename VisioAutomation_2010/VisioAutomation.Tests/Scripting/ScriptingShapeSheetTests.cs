@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using IVisio=Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
@@ -16,11 +18,13 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioAutomation.Scripting.TargetShapes();
 
-            var formulas = client.ShapeSheet.QueryFormulas(targets, new[] {VisioAutomation.ShapeSheet.SRCConstants.PinX});
+            var srcs = new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX };
+
+            var formulas = client.ShapeSheet.QueryFormulas(targets, srcs);
             Assert.AreEqual("1.5 in", formulas[0].Cells[0]);
 
             client.Selection.SelectAll();
-            formulas = client.ShapeSheet.QueryFormulas(targets, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
+            formulas = client.ShapeSheet.QueryFormulas(targets, srcs);
             Assert.AreEqual("1.5 in", formulas[0].Cells[0]);
             Assert.AreEqual("0.5 in", formulas[1].Cells[0]);
 
@@ -30,19 +34,17 @@ namespace VisioAutomation_Tests.Scripting
             try
             {
                 client.Master.OpenForEdit(m);
-                client.Draw.Oval(0, 0, 1, 1);
-                client.Draw.Oval(1, 1, 2, 2);
-                client.Draw.Oval(2, 2, 3, 3);
-
-
+                var s1 = client.Draw.Oval(0, 0, 1, 1);
+                var s2 = client.Draw.Oval(1, 1, 2, 2);
+                var s3 = client.Draw.Oval(2, 2, 3, 3);
+                
                 client.Selection.SelectAll();
 
-
-                formulas = client.ShapeSheet.QueryFormulas(targets, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
-                //Assert.AreEqual("1.5 in", formulas[0][0]);
-                //Assert.AreEqual("0.5 in", formulas[1][0]);
-
-
+                var targets2 = new VisioAutomation.Scripting.TargetShapes(new List<IVisio.Shape> {s1,s2,s3});
+                formulas = client.ShapeSheet.QueryFormulas(targets2, srcs);
+                Assert.AreEqual("0.5 in", formulas[0].Cells[0]);
+                Assert.AreEqual("1.5 in", formulas[1].Cells[0]);
+                Assert.AreEqual("2.5 in", formulas[2].Cells[0]);
             }
             finally
             {
