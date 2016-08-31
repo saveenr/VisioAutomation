@@ -53,10 +53,14 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes.Count < 1)
             {
-                return new List<bool>();
+                return new List<bool>(0);
             }
 
-            var results = this._client.Selection.GetShapes().Select(s => VACUSTPROP.CustomPropertyHelper.Contains(s, name)).ToList();
+            var results = new List<bool>(shapes.Count);
+            foreach (var shape in shapes)
+            {
+                results.Add(VACUSTPROP.CustomPropertyHelper.Contains(shape, name));
+            }
 
             return results;
         }
