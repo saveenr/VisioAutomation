@@ -113,7 +113,7 @@ namespace VisioAutomation_Tests.Models.DOM
             var vrect1 = new Rectangle(1, 1, 9, 9);
             vrect1.Text = new VisioAutomation.Models.Text.TextElement("HELLO WORLD");
 
-            vrect1.CustomProperties = new Dictionary<string, VA.Shapes.CustomProperties.CustomPropertyCells>();
+            vrect1.CustomProperties = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary();
 
             var cp1 = new VA.Shapes.CustomProperties.CustomPropertyCells();
             cp1.Value = "FOOVALUE";

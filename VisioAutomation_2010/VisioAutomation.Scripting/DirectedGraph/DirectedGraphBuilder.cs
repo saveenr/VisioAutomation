@@ -160,7 +160,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 {
                     var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
                     dg_shape.URL = shape_info.URL;
-                    dg_shape.CustomProperties = new Dictionary<string, VACUSTPROP.CustomPropertyCells>();
+                    dg_shape.CustomProperties = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary();
                     foreach (var kv in shape_info.custprops)
                     {
                         dg_shape.CustomProperties[kv.Key] = kv.Value;

@@ -8,6 +8,12 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Shapes.CustomProperties
 {
+    public class CustomPropertyDictionary : Dictionary<string, CustomPropertyCells>
+    {
+        public CustomPropertyDictionary():base(){ }
+        public CustomPropertyDictionary(int capacity):base(capacity){ }
+    }
+
     public static class CustomPropertyHelper
     {
         public static void Set(
@@ -68,10 +74,10 @@ namespace VisioAutomation.Shapes.CustomProperties
         /// If there are no custom properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of custom properties</returns>
-        public static IDictionary<string, CustomPropertyCells> Get(IVisio.Shape shape)
+        public static CustomPropertyDictionary Get(IVisio.Shape shape)
         {
             var prop_names = CustomPropertyHelper.GetNames(shape);
-            var dic = new Dictionary<string, CustomPropertyCells>(prop_names.Count);
+            var dic = new CustomPropertyDictionary(prop_names.Count);
             var cells = CustomPropertyCells.GetCells(shape);
 
             for (int prop_index = 0; prop_index < prop_names.Count(); prop_index++)
@@ -83,7 +89,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return dic;
         }
 
-        public static IList<Dictionary<string, CustomPropertyCells>> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static IList<VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
         {
             if (page == null)
             {
@@ -96,7 +102,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_dic = new List<Dictionary<string, CustomPropertyCells>>(shapeids.Count);
+            var customprops_dic = new List<VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary>(shapeids.Count);
             var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids);
             
             if (customprops_per_shape.Count!=shapeids.Count)
@@ -115,7 +121,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                     throw new InternalAssertionException();
                 }
 
-                var dic = new Dictionary<string, CustomPropertyCells>(prop_names.Count);
+                var dic = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary(prop_names.Count);
                 
                 for (int prop_index=0; prop_index< prop_names.Count(); prop_index++)
                 {

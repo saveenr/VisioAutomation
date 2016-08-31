@@ -56,7 +56,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             var n0 = d.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
             n0.Size = new VA.Drawing.Size(3, 2);
-            n0.CustomProperties = new Dictionary<string, VACUSTPROP.CustomPropertyCells>();
+            n0.CustomProperties = new VA.Shapes.CustomProperties.CustomPropertyDictionary();
             n0.CustomProperties["p1"] = new VACUSTPROP.CustomPropertyCells("v1");
             n0.CustomProperties["p2"] = new VACUSTPROP.CustomPropertyCells("v2");
             n0.CustomProperties["p3"] = new VACUSTPROP.CustomPropertyCells("v3");

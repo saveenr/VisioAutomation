@@ -472,7 +472,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // ADD CUSTOM PROPS
             if (layout_shape.CustomProperties != null)
             {
-                shape_node.CustomProperties = new Dictionary<string, Shapes.CustomProperties.CustomPropertyCells>();
+                shape_node.CustomProperties = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary();
                 foreach (var kv in layout_shape.CustomProperties)
                 {
                     shape_node.CustomProperties[kv.Key] = kv.Value;
