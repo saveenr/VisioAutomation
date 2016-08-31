@@ -389,19 +389,26 @@ namespace VisioAutomation_Tests.Models.Dom
 
             var rect0 = new VisioAutomation.Drawing.Rectangle(3, 4, 7, 8);
             var rect1 = new VisioAutomation.Drawing.Rectangle(8, 1, 9, 5);
-            var dropped_shape0 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, rect0);
-            var drawn_shape0 = page_node.Shapes.DrawRectangle(rect0);
 
-            var dropped_shape1 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, rect1);
-            var drawn_shape1 = page_node.Shapes.DrawRectangle(rect1);
+            // Draw and Drop two rectangles in the same place
+            var s0 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, rect0);
+            var s1 = page_node.Shapes.DrawRectangle(rect0);
 
+            // Draw and Drop two rectangles in the same place
+            var s2 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, rect1);
+            var s3 = page_node.Shapes.DrawRectangle(rect1);
+
+            // Render the page
             var page = page_node.Render(doc);
 
-            var xfrms = VA.Shapes.XFormCells.GetCells(page,
-                                                        new int[] { dropped_shape0.VisioShapeID, 
-                                                            drawn_shape0.VisioShapeID, 
-                                                            dropped_shape1.VisioShapeID, 
-                                                            drawn_shape1.VisioShapeID });
+            // Verify the locations and sizes
+            var shapeids = new int[] {
+                s0.VisioShapeID, 
+                s1.VisioShapeID, 
+                s2.VisioShapeID, 
+                s3.VisioShapeID };
+
+            var xfrms = VA.Shapes.XFormCells.GetCells(page, shapeids);
 
             Assert.AreEqual(xfrms[1].PinX, xfrms[0].PinX);
             Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);
