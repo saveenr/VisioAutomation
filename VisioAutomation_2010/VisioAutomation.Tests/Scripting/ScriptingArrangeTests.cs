@@ -1,5 +1,4 @@
 using System.Linq;
-using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Drawing.Layout;
 using VA = VisioAutomation;
@@ -23,7 +22,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), new VA.Drawing.Size(1.0, 1.0)));
             var s3 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), new VA.Drawing.Size(1.5, 1.5)));
 
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(s1);
             client.Selection.Select(s2);
             client.Selection.Select(s3);
@@ -50,7 +49,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), new VA.Drawing.Size(1.0, 1.0)));
             var s3 = client.Draw.Rectangle(new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), new VA.Drawing.Size(1.5, 1.5)));
 
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(s1);
             client.Selection.Select(s2);
             client.Selection.Select(s3);
@@ -81,7 +80,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(s1);
             client.Selection.Select(s2);
             client.Selection.Select(s3);

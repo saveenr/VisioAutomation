@@ -24,7 +24,7 @@ namespace VisioAutomation.Scripting.Commands
             return selection;
         }
 
-        public void All()
+        public void SelectAll()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -72,7 +72,7 @@ namespace VisioAutomation.Scripting.Commands
             window.Select(shapes_to_select, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void None()
+        public void SelectNone()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

@@ -8,6 +8,11 @@ namespace VisioAutomation_Tests
 {
     public static class AssertUtil
     {
+        public static void FileExists(string filename)
+        {
+            Assert.IsTrue(System.IO.File.Exists(filename));
+        }
+
         public static void AreEqual(VADRAW.Point point, VADRAW.Point actual_point, double delta)
         {
             Assert.AreEqual(point.X, actual_point.X,delta);

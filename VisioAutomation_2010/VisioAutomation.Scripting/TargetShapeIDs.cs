@@ -1,13 +1,14 @@
 using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting
 {
     public class TargetShapeIDs
     {
         public readonly IList<int> ShapeIDs;
-        public readonly Microsoft.Office.Interop.Visio.Page Page;
+        public readonly IVisio.Page Page;
 
-        public TargetShapeIDs(Microsoft.Office.Interop.Visio.Page page, IList<int> shape_ids)
+        public TargetShapeIDs(IVisio.Page page, IList<int> shape_ids)
         {
             this.Page = page;
             this.ShapeIDs = shape_ids;

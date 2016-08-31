@@ -17,13 +17,13 @@ namespace VisioAutomation_Tests.Scripting
             var shape_oval1 = client.Draw.Oval(0.2, 1, 3.8, 2);
             var shape_oval2 = client.Draw.Oval(new VisioAutomation.Drawing.Point(2, 2), 0.5);
 
-            client.Selection.All();
+            client.Selection.SelectAll();
             var s0 = client.Selection.GetShapes();
             Assert.AreEqual(4, s0.Count);
 
             var g = client.Grouping.Group();
-            client.Selection.None();
-            client.Selection.All();
+            client.Selection.SelectNone();
+            client.Selection.SelectAll();
 
             var s1 = client.Selection.GetShapes();
             Assert.AreEqual(1, s1.Count);
@@ -31,7 +31,7 @@ namespace VisioAutomation_Tests.Scripting
             var targets = new VisioAutomation.Scripting.TargetShapes();
 
             client.Grouping.Ungroup(targets);
-            client.Selection.All();
+            client.Selection.SelectAll();
             var s2 = client.Selection.GetShapes();
             Assert.AreEqual(4, s2.Count);
             client.Document.Close(true);

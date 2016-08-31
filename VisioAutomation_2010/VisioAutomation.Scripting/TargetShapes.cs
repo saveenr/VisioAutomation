@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 
@@ -7,7 +6,7 @@ namespace VisioAutomation.Scripting
 {
     public class TargetShapes
     {
-        public readonly IList<Shape> Shapes;
+        public readonly IList<IVisio.Shape> Shapes;
         public TargetShapes()
         {
             // This explicitly means that the current selection is intended to be used
@@ -21,7 +20,7 @@ namespace VisioAutomation.Scripting
             return t;
         }
 
-        public TargetShapes(IList<Shape> shapes)
+        public TargetShapes(IList<IVisio.Shape> shapes)
         {
             // If shapes == null then it means to use the active selection
             // else use the specified shapes
@@ -40,7 +39,7 @@ namespace VisioAutomation.Scripting
             }
 
             client.WriteVerbose("GetTargetSelectionCount: Reseting selecton to specified {0} shapes", this.Shapes.Count);
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(this.Shapes);
             int selected_count = client.Selection.Count();
             return selected_count;

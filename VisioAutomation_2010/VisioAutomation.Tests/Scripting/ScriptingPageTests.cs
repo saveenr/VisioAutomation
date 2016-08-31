@@ -12,7 +12,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var page_size = new VisioAutomation.Drawing.Size(8.5, 11);
             var client = this.GetScriptingClient();
-            var doc = client.Document.New(page_size.Width, page_size.Height);
+            var doc = client.Document.New(page_size);
 
             var page1 = client.Page.Get();
             client.Page.New(page_size, false);
@@ -51,7 +51,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var page_size = new VisioAutomation.Drawing.Size(8.5, 11);
             var client = this.GetScriptingClient();
-            var doc = client.Document.New(page_size.Width, page_size.Height);
+            var doc = client.Document.New(page_size);
             client.Draw.Rectangle(0, 0, 1, 1);
             client.Page.Duplicate();
             doc.Close(true);
@@ -111,6 +111,5 @@ namespace VisioAutomation_Tests.Scripting
  * 
  * */
         }
-
     }
 }

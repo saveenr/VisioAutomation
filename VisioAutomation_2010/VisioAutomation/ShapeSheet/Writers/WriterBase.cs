@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             if (rt == ResultType.ResultString)
             {
-                flags |= Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetStrings;
+                flags |= IVisio.VisGetSetArgs.visGetStrings;
             }
 
             return flags;

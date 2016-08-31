@@ -22,7 +22,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(s1);
             client.Selection.Select(s2);
             client.Selection.Select(s3);
@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Scripting
             var fromshapes = new [] { s1,s2};
             var toshapes = new [] { s2,s3};
             var directed_connectors = client.Connection.Connect(fromshapes,toshapes, master);
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(directed_connectors);
 
             var targets = new VA.Scripting.TargetShapes();
@@ -74,7 +74,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            client.Selection.None();
+            client.Selection.SelectNone();
             client.Selection.Select(s1);
             client.Selection.Select(s2);
             client.Selection.Select(s3);

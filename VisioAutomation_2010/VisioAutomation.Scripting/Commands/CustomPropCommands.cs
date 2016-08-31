@@ -132,7 +132,7 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (var shape in shapes)
             {
-                this._client.Selection.None();
+                this._client.Selection.SelectNone();
                 this._client.Selection.Select(shape);
                 yield return shape;
             }

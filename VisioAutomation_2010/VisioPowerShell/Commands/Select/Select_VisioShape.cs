@@ -29,11 +29,11 @@ namespace VisioPowerShell.Commands.Select
             {
                 if (this.Operation == Model.SelectionOperation.All)
                 {
-                    this.Client.Selection.All();
+                    this.Client.Selection.SelectAll();
                 }
                 else if (this.Operation == Model.SelectionOperation.None)
                 {
-                    this.Client.Selection.None();
+                    this.Client.Selection.SelectNone();
                 }
                 else if (this.Operation == Model.SelectionOperation.Invert)
                 {
