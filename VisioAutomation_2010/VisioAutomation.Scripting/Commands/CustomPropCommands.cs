@@ -50,12 +50,6 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes(this._client);
 
-
-            if (shapes.Count < 1)
-            {
-                return new List<bool>(0);
-            }
-
             var results = new List<bool>(shapes.Count);
             foreach (var shape in shapes)
             {
@@ -114,7 +108,6 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set Custom Property"))
             {
                 foreach (var shape in shapes)
