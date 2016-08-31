@@ -22,11 +22,27 @@ namespace VisioAutomation.Scripting
 
         public TargetShapes(IList<IVisio.Shape> shapes)
         {
+            if (shapes == null)
+            {
+                throw new System.ArgumentNullException(nameof(shapes));
+            }
             // If shapes == null then it means to use the active selection
             // else use the specified shapes
             this.Shapes = shapes;
         }
-   
+
+        public TargetShapes(params IVisio.Shape[] shapes)
+        {
+            if (shapes == null)
+            {
+                throw new System.ArgumentNullException(nameof(shapes));
+            }
+            // If shapes == null then it means to use the active selection
+            // else use the specified shapes
+            this.Shapes = shapes;
+        }
+
+
         internal int SetSelectionGetSelectedCount(VisioAutomation.Scripting.Client client)
         {
             client.Application.AssertApplicationAvailable();

@@ -40,7 +40,7 @@ namespace VisioAutomation_Tests.Scripting
                 
                 client.Selection.SelectAll();
 
-                var targets2 = new VisioAutomation.Scripting.TargetShapes(new List<IVisio.Shape> {s1,s2,s3});
+                var targets2 = new VisioAutomation.Scripting.TargetShapes( s1,s2,s3);
                 formulas = client.ShapeSheet.QueryFormulas(targets2, srcs);
                 Assert.AreEqual("0.5 in", formulas[0].Cells[0]);
                 Assert.AreEqual("1.5 in", formulas[1].Cells[0]);
