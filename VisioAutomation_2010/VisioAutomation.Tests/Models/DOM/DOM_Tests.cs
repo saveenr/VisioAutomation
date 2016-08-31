@@ -7,10 +7,10 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
-namespace VisioAutomation_Tests.Models.DOM
+namespace VisioAutomation_Tests.Models.Dom
 {
     [TestClass]
-    public class DOM_Tests : VisioAutomationTest
+    public class Dom_Tests : VisioAutomationTest
     {
         public string basic_u_vss = "basic_u.vss";
         public string connec_u_vss = "connec_u.vss";
@@ -19,7 +19,7 @@ namespace VisioAutomation_Tests.Models.DOM
         private VisioAutomation.Drawing.Size pagesize;
 
         [TestMethod]
-        public void DOM_EmptyRendering()
+        public void Dom_EmptyRendering()
         {
             // Rendering a DOM should not change the page count
             // Empty DOMs do not add any shapes
@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_RenderPageToDocument()
+        public void Dom_RenderPageToDocument()
         {
             // Rendering a dom page to a document should create a new page
             var app = this.GetVisioApplication();
@@ -46,7 +46,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_RenderDocumentToApplication()
+        public void Dom_RenderDocumentToApplication()
         {
             // Rendering a dom document to an appliction instance should create a new document
             var app = this.GetVisioApplication();
@@ -61,7 +61,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_DrawSimpleShape()
+        public void Dom_DrawSimpleShape()
         {
             // Create the doc
             var page_node = new Page();
@@ -85,7 +85,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_DropShapes()
+        public void Dom_DropShapes()
         {
             // Render it
             var app = this.GetVisioApplication();
@@ -106,7 +106,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_CustomProperties()
+        public void Dom_CustomProperties()
         {
             // Create the doc
             var shape_nodes = new ShapeList();
@@ -143,7 +143,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_DrawOrgChart()
+        public void Dom_DrawOrgChart()
         {
             var app = this.GetVisioApplication();
             var vis_ver = VA.Application.ApplicationHelper.GetVersion(app);
@@ -176,7 +176,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_DrawEmpty()
+        public void Dom_DrawEmpty()
         {
             // Verify that an empty DOM page can be created and rendered
             var doc = this.GetNewDoc();
@@ -194,7 +194,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_DrawLine()
+        public void Dom_DrawLine()
         {
             var doc = this.GetNewDoc();
             var page_node = new Page();
@@ -210,7 +210,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_DrawBezier()
+        public void Dom_DrawBezier()
         {
             var doc = this.GetNewDoc();
             var page_node = new Page();
@@ -227,7 +227,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_DropMaster()
+        public void Dom_DropMaster()
         {
 
             var doc = this.GetNewDoc();
@@ -252,7 +252,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_FormatShape()
+        public void Dom_FormatShape()
         {
             var doc = this.GetNewDoc();
             var page_node = new Page();
@@ -275,7 +275,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_ConnectShapes()
+        public void Dom_ConnectShapes()
         {
             var doc = this.GetNewDoc();
             var page_node = new Page();
@@ -301,7 +301,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_ConnectShapes2()
+        public void Dom_ConnectShapes2()
         {
             // Deferred means that the stencils (and thus masters) are loaded when rendering
             // and are no loaded by the caller before Render() is called
@@ -320,7 +320,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_VerifyThatUnknownMastersAreDetected()
+        public void Dom_VerifyThatUnknownMastersAreDetected()
         {
             var doc = this.GetNewDoc();
             var page_node = new Page();
@@ -350,7 +350,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_VerifyThatUnknownStencilsAreDetected()
+        public void Dom_VerifyThatUnknownStencilsAreDetected()
         {
             string non_existent_stencil = "foobar.vss";
 
@@ -382,7 +382,7 @@ namespace VisioAutomation_Tests.Models.DOM
         }
 
         [TestMethod]
-        public void DOM_DrawAndDrop()
+        public void Dom_DrawAndDrop()
         {
             var doc = this.GetNewDoc();
             var page_node = new Page();

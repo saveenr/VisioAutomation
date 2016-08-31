@@ -1,26 +1,26 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA=VisioAutomation;
 
-namespace VisioAutomation_Tests.DOM
+namespace VisioAutomation_Tests.Dom
 {
     [TestClass]
-    public class DOM_Text : VisioAutomationTest
+    public class Dom_Text : VisioAutomationTest
     {
         [TestMethod]
-        public void Text_Markup_CharacterFormatting()
+        public void DomText_CharacterFormatting()
         {
-            this.MarkupCharacterBold();
-            this.MarkupCharacterComplex();
-            this.MarkupCharacterFont();
-            this.MarkupCharacterItalic();
-            this.MarkupCharacterPlain();
-            this.MarkupParagraphCenter();
-            this.MarkupParagraphDefault();
-            this.MarkupParagraphLeft();
-            this.MarkupParagraphRight();
+            this.DomText_CharacterBold();
+            this.DomText_CharacterComplex();
+            this.DomText_CharacterFont();
+            this.DomText_CharacterItalic();
+            this.DomText_CharacterPlain();
+            this.DomText_ParagraphCenter();
+            this.DomText_ParagraphDefault();
+            this.DomText_ParagraphLeft();
+            this.DomText_ParagraphRight();
         }
 
-        public void MarkupCharacterPlain()
+        public void DomText_CharacterPlain()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{Normal}");
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
@@ -34,7 +34,7 @@ namespace VisioAutomation_Tests.DOM
             page1.Delete(0);
         }
 
-        public void MarkupCharacterBold()
+        public void DomText_CharacterBold()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{Bold}");
             m.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Bold;
@@ -50,7 +50,7 @@ namespace VisioAutomation_Tests.DOM
             page1.Delete(0);
         }
 
-        public void MarkupCharacterItalic()
+        public void DomText_CharacterItalic()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{Italic}");
             m.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Italic;
@@ -66,7 +66,7 @@ namespace VisioAutomation_Tests.DOM
             page1.Delete(0);
         }
 
-        public void MarkupCharacterFont()
+        public void DomText_CharacterFont()
         {
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
 
@@ -85,7 +85,7 @@ namespace VisioAutomation_Tests.DOM
             page1.Delete(0);
         }
 
-        public void MarkupCharacterComplex()
+        public void DomText_CharacterComplex()
         {
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var doc = page1.Document;
@@ -147,7 +147,7 @@ namespace VisioAutomation_Tests.DOM
             page1.Delete(0);
         }
 
-        public void MarkupParagraphDefault()
+        public void DomText_ParagraphDefault()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{DefaultPara}");
             var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
@@ -161,7 +161,7 @@ namespace VisioAutomation_Tests.DOM
             page1.Delete(0);
         }
 
-        public void MarkupParagraphLeft()
+        public void DomText_ParagraphLeft()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{LeftHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Left;
@@ -178,7 +178,7 @@ namespace VisioAutomation_Tests.DOM
             page1.Delete(0);
         }
 
-        public void MarkupParagraphCenter()
+        public void DomText_ParagraphCenter()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{CenterHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Center;
@@ -195,7 +195,7 @@ namespace VisioAutomation_Tests.DOM
             page1.Delete(0);
         }
 
-        public void MarkupParagraphRight()
+        public void DomText_ParagraphRight()
         {
             var m = new VisioAutomation.Models.Text.TextElement("{RightHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)VisioAutomation.Models.Layouts.Box.AlignmentHorizontal.Right;

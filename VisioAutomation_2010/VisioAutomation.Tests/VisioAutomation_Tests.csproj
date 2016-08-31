@@ -98,7 +98,7 @@
     <Compile Include="Scripting\ScriptingShapeText_Tests.cs" />
     <Compile Include="Framework\VisioPowerShellTests.cs" />
     <Compile Include="Framework\DiagnosticDebugContext.cs" />
-    <Compile Include="Models\DOM\DOM_Text.cs" />
+    <Compile Include="Models\Dom\DomText.cs" />
     <Compile Include="Framework\TestGlobals.cs" />
     <Compile Include="Framework\TestHelper.cs" />
     <Compile Include="Core\BezierTests.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Models\DirectedGraph_Tests.cs" />
     <Compile Include="Models\Tree_Tests.cs" />
     <Compile Include="Models\OrgChart_Tests.cs" />
-    <Compile Include="Models\DOM\DOM_Tests.cs" />
+    <Compile Include="Models\Dom\Dom_Tests.cs" />
     <Compile Include="Core\Text\TextFormatTests.cs" />
     <Compile Include="Core\Shapes\CustomPropertiesTest.cs" />
     <Compile Include="Core\Extensions\Selection_Tests.cs" />
