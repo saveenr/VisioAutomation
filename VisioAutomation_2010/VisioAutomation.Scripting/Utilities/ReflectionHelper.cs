@@ -213,7 +213,7 @@ namespace VisioAutomation.Scripting.Utilities
                 var ga_names = gas.Select(i => ReflectionHelper.GetNiceTypeName(i, options));
 
                 sb.Append("<");
-                sb.AppendJoin(", ", ga_names);
+                sb.Append( string.Join(", ",ga_names) );
                 sb.Append(">");
                 return sb.ToString();
             }
