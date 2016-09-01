@@ -291,7 +291,7 @@ namespace VisioAutomation_Tests.Scripting
             this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph1),".vsd");
             client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
@@ -308,7 +308,7 @@ namespace VisioAutomation_Tests.Scripting
             this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph2),".vsd");
             client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
@@ -325,7 +325,7 @@ namespace VisioAutomation_Tests.Scripting
             this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph3),".vsd");
             client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
@@ -342,7 +342,7 @@ namespace VisioAutomation_Tests.Scripting
             this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph4),".vsd");
             client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
