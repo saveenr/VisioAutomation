@@ -3,3 +3,7 @@
 
 Documentation at the wiki: https://github.com/saveenr/VisioAutomation/wiki
 
+## Related Projects
+* Visio PowerShell: https://github.com/saveenr/VisioPowerShell
+
+
