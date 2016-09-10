@@ -34,7 +34,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -46,7 +45,6 @@
     <Compile Include="Commands\SnapCommands.cs" />
     <Compile Include="TargetShapeIDs.cs" />
     <Compile Include="TargetShapes.cs" />
-    <Compile Include="Utilities\StringBuilderExtensions.cs" />
     <Compile Include="Utilities\ArrangeHelper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Commands\Command.cs" />

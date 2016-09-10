@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes.Connectors;
 using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
@@ -24,7 +23,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             var page = visapp.ActivePage;
             directed_graph_drawing.Render(page,options);
 
-            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithBezierConnectors),".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -43,7 +42,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             
             directed_graph_drawing.Render(page1,options);
 
-            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithDynamicConnectors),".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -79,7 +78,7 @@ namespace VisioAutomation_Tests.Models.Layouts
 
             page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 
-            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(RenderDirectedGraphWithCustomProps),".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }

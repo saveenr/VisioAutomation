@@ -23,9 +23,13 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Selection.SelectAll();
 
-            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".html");
-    
-            TestGlobals.TestHelper.DeleteFileSafe(output_filename);
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
+
+            if (File.Exists(output_filename))
+            {
+                File.Delete(output_filename);
+            }
+
             client.Export.SelectionToSVGXHTML(output_filename);
 
             AssertUtil.FileExists(output_filename);

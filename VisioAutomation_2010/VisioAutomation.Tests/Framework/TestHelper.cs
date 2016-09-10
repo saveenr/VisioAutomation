@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 
 namespace VisioAutomation_Tests
 {
     public class TestHelper
     {
-        private readonly string OutputPath;
+        private readonly string _output_path;
 
         public TestHelper(string name)
         {
@@ -15,56 +14,43 @@ namespace VisioAutomation_Tests
                 throw new ArgumentException("name is null or empty", nameof(name));
             }
 
-            this.OutputPath = TestHelper.GetOutputPathEx(name);
+            string mydocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            this._output_path = Path.Combine(mydocs, name);
 
-            this.PrepareOutputPath();
-        }
-
-        public string GetTestMethodOutputFilename(string ext)
-        {
-            string abs_path = this.OutputPath;
-            string abs_filename = Path.Combine(abs_path,
-                TestHelper.GetMethodName(2) + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ext);
-            return abs_filename;
-        }
-
-        public string GetTestMethodOutputFilename()
-        {
-            string abs_path = this.OutputPath;
-            string abs_filename = Path.Combine(abs_path, TestHelper.GetMethodName(2));
-            return abs_filename;
-        }
-
-        private void PrepareOutputPath()
-        {
-            if (!Directory.Exists(this.OutputPath))
+            if (!Directory.Exists(this._output_path))
             {
-                Directory.CreateDirectory(this.OutputPath);
+                Directory.CreateDirectory(this._output_path);
             }
+        }
+
+        public string GetOutputFilename(string method, string ext)
+        {
+            if (ext == null)
+            {
+                throw new System.ArgumentNullException(nameof(ext));
+            }
+
+            if (ext.Length < 1)
+            {
+                throw new System.ArgumentException(nameof(ext));
+            }
+
+            if (ext[0] != '.')
+            {
+                throw new System.ArgumentException(nameof(ext));
+            }
+
+            string abs_path = this._output_path;
+            var datetime_str = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
+            var basename = method + "_" + datetime_str + ext;
+            string abs_filename = Path.Combine(abs_path, basename);
+            return abs_filename;
         }
 
         private static string GetOutputPathEx(string name)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             return Path.Combine(path, name);
-        }
-
-        private static string GetMethodName(int depth)
-        {
-            var stackTrace = new StackTrace();
-            var stackFrame = stackTrace.GetFrame(depth);
-            var methodBase = stackFrame.GetMethod();
-
-            string n = methodBase.DeclaringType.Name + "." + methodBase.Name;
-            return n;
-        }
-
-        public void DeleteFileSafe(string filename)
-        {
-            if (File.Exists(filename))
-            {
-                File.Delete(filename);
-            }
         }
     }
 }
