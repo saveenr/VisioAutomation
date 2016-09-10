@@ -1,5 +1,6 @@
 $scriptpath = $PSScriptRoot
 
+
 $pkgs_folder = Join-Path $scriptpath "packages"
 $pkgs_va_folder = Join-Path $pkgs_folder  "VisioAutomation"
 
@@ -13,7 +14,13 @@ function makedirsafe ($p)
 
 }
 
-makedirsafe $pkgs_folder 
+makedirsafe $pkgs_folder
+
+if (Test-Path $pkgs_va_folder)
+{
+    Remove-Item -Recurse -Force $pkgs_va_folder
+}
+ 
 makedirsafe $pkgs_va_folder 
 
 $url = "http://www.nuget.org/api/v2/package/VisioAutomation2010"
@@ -24,3 +31,5 @@ $wc.DownloadFile($url, $zipfile)
 
 [System.Reflection.Assembly]::LoadWithPartialName('System.IO.Compression.FileSystem')
 [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $pkgs_va_folder)
+Remove-Item $zipfile
+

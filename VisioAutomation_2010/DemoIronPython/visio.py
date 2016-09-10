@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import sys
 import os
 import clr
@@ -10,8 +12,12 @@ print script_path
 visio_asm = clr.AddReference("Microsoft.Office.Interop.Visio")
 import Microsoft.Office.Interop.Visio
 
+
+
+
+
 # Load VisioAutomation
-visauto_path = script_path
+visauto_path = os.path.join('', script_path , "packages", "VisioAutomation", "lib", "net40" )
 visauto_assemblies = [
     "VisioAutomation.dll",
     "VisioAutomation.DocumentAnalysis.dll",
