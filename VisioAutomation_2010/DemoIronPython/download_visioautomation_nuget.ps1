@@ -5,13 +5,14 @@ function makedirsafe ($p)
 {
     if (-not (Test-Path($p)))
     {
-        New-Item $p -type directory
+        $result = New-Item $p -type directory
     }
 
 }
 
-function download_nuget_package( $packagename , $url )
+function download_nuget_package( $packagename  )
 { 
+    $url = "http://www.nuget.org/api/v2/package/" + $packagename
     $scriptpath = $PSScriptRoot
 
     $pkgs_folder = Join-Path $scriptpath "packages"
@@ -32,11 +33,11 @@ function download_nuget_package( $packagename , $url )
     $wc.DownloadFile($url, $zipfile)
 
 
-    [System.Reflection.Assembly]::LoadWithPartialName('System.IO.Compression.FileSystem')
+    $asm = [System.Reflection.Assembly]::LoadWithPartialName('System.IO.Compression.FileSystem')
     [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $pkgs_va_folder)
     Remove-Item $zipfile
 
 }
 
 
-download_nuget_package "VisioAutomation" "http://www.nuget.org/api/v2/package/VisioAutomation2010"
+download_nuget_package "VisioAutomation2010"
