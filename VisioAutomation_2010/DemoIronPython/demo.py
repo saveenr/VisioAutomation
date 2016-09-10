@@ -1,20 +1,57 @@
 # -*- coding: utf-8 -*-
 
 import visio
+import VisioAutomation
 
+# Create a new application and document
 
 visio.client.Application.New()
-visio.client.Document.New(8.5,11)
+pagesize = VisioAutomation.Drawing.Size(8.5,11)
+visio.client.Document.New(pagesize)
+
+# Documents always have at least one page
+# so we can begin drawing now. We'll start
+# with some basic shapes
 
 visio.client.Draw.Rectangle(0,0,1,1)
 visio.client.Draw.Oval(1,1,2,2)
 visio.client.Draw.Line(2,2,3,3  )
 
-    
-# basic drawing
-# droppping a master
-# sleecting and setting text
+# Let's start with a new page
+
+
+visio.client.Page.New(pagesize, False)
+
+# Instead of drawing shapes, in Visio we
+# "drop" shapes from "master shapes" that
+# are in "stencils". We'll load a stencil
+# and then drop a master from that stencil
+
+basic_stencil = visio.client.Document.OpenStencil("Basic_U.VSS")
+master = visio.client.Master.Get("Rectangle", basic_stencil)
+visio.client.Master.Drop(master, 2, 2)
+visio.client.Master.Drop(master, 4, 4)
+visio.client.Master.Drop(master, 6, 6)
+
+# salecting and setting text
+
+visio.client.Selection.SelectAll() 
+targets = VisioAutomation.Scripting.TargetShapes()
+visio.client.Text.Set( targets,  [ "A", "B", "C" ] )
+
 # drawing all the fill patterns on a page
+
+visio.client.Page.New(pagesize, False)
+patterns = [i for i in range(41)] 
+for (i,pattern) in enumerate(patterns): 
+    left = i % 7
+    bottom = i / 7
+    visio.client.Draw.Rectangle( left, bottom, left+1, bottom+1 ) 
+    #vi.Fill.Pattern = pattern 
+bordersize = VisioAutomation.Drawing.Size(1,1)
+zoom_to_page = True
+visio.client.Page.ResizeToFitContents(bordersize,zoom_to_page)
+
 # drawing tabular data
 # drawing hierrchical data
 # using mSAGL
@@ -23,19 +60,8 @@ visio.client.Draw.Line(2,2,3,3  )
 
 """
 
-Draw some simple shapes
->>> vi.Draw.Rectangle( 0, 0, 1,1 ) 
->>> vi.Draw.Oval( 2, 2, 3,3 ) 
->>> vi.Draw.Line( 4, 4, 5,5 )
 
-Drop a master
->>> vi.Drop.Master( "BASIC_U.VSS", "Rectangle", 2, 5 )
 
-Set the text of all the shapes
->>> vi.Select.All() 
->>> vi.Text.PlainText = "Hello World""
-
-Lets draw all the fill patterns on a new page
 >>> vi.Page.New() 
 >>> patterns = range(41) 
 >>> for (i,pattern) in enumerate(patterns): 
