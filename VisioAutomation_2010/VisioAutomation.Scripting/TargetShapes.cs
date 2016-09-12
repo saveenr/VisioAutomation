@@ -7,6 +7,7 @@ namespace VisioAutomation.Scripting
     public class TargetShapes
     {
         public readonly IList<IVisio.Shape> Shapes;
+        
         public TargetShapes()
         {
             // This explicitly means that the current selection is intended to be used
@@ -15,6 +16,11 @@ namespace VisioAutomation.Scripting
 
         public TargetShapeIDs ToShapeIDs(IVisio.Page page)
         {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException(nameof(page));
+            }
+
             var shapeids = this.Shapes.Select(s => s.ID).ToList();
             var t = new TargetShapeIDs(page,shapeids);
             return t;

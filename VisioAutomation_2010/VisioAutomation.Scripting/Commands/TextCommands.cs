@@ -7,7 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class TextCommands: CommandSet
+    public class TextCommands : CommandSet
     {
         internal TextCommands(Client client) :
             base(client)
@@ -15,42 +15,41 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-       public void Set(TargetShapes targets, IList<string> texts)
-       {
-           this._client.Application.AssertApplicationAvailable();
-           this._client.Document.AssertDocumentAvailable();
+        public void Set(TargetShapes targets, IList<string> texts)
+        {
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
 
-           if (texts == null || texts.Count < 1)
-           {
-               // do nothing
-               return;
-           }
+            if (texts == null || texts.Count < 1)
+            {
+                return;
+            }
 
             var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Count < 1)
-           {
-               return;
-           }
+            {
+                return;
+            }
 
-           var application = this._client.Application.Get();
-           using (var undoscope = this._client.Application.NewUndoScope("Set Shape Text"))
-           {
-               int numtexts = texts.Count;
+            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Text"))
+            {
+                // Apply text to each shape
+                // if there are fewer texts than shapes then
+                // start reusing the texts from the beginning
 
-               int up_to = System.Math.Min(numtexts, shapes.Count);
-
-               for (int i = 0; i < up_to; i++)
-               {
-                   var text = texts[i % numtexts];
-                   if (text != null)
-                   {
-                       var shape = shapes[i];
-                       shape.Text = text;
-                   }
-               }
-           }
-       }
+                int count = 0;
+                foreach (var shape in shapes)
+                {
+                    string text = texts[count%texts.Count];
+                    if (text != null)
+                    {
+                        shape.Text = text;
+                    }
+                    count++;
+                }
+            }
+        }
 
         public IList<string> Get(TargetShapes targets)
         {
@@ -108,10 +107,10 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     var format = formats[i];
 
-                    if (format.CharacterFormats.Count>0)
+                    if (format.CharacterFormats.Count > 0)
                     {
                         var fmt = format.CharacterFormats[0];
-                        fmt.SetFormulas((short) shapeids[i], writer, 0);
+                        fmt.SetFormulas((short)shapeids[i], writer, 0);
                     }
 
                     if (format.ParagraphFormats.Count > 0)
@@ -140,8 +139,8 @@ namespace VisioAutomation.Scripting.Commands
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
-            IVisio.VisGetSetArgs flags=0;
-            var srcs = new[] {ShapeSheet.SRCConstants.CharFont};
+            IVisio.VisGetSetArgs flags = 0;
+            var srcs = new[] { ShapeSheet.SRCConstants.CharFont };
             var formulas = new[] { font.ID.ToString() };
             this._client.ShapeSheet.SetFormula(targets, srcs, formulas, flags);
         }
@@ -174,7 +173,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes.Count < 1)
             {
-                return ;
+                return;
             }
 
             var writer = new FormulaWriterSIDSRC();
@@ -182,27 +181,27 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (0 ==
                     shape.RowExists[
-                        (short) IVisio.VisSectionIndices.visSectionObject, (short) IVisio.VisRowIndices.visRowTextXForm,
-                        (short) IVisio.VisExistsFlags.visExistsAnywhere])
+                        (short)IVisio.VisSectionIndices.visSectionObject, (short)IVisio.VisRowIndices.visRowTextXForm,
+                        (short)IVisio.VisExistsFlags.visExistsAnywhere])
                 {
-                    shape.AddRow((short)IVisio.VisSectionIndices.visSectionObject, (short)IVisio.VisRowIndices.visRowTextXForm, (short)IVisio.VisRowTags.visTagDefault); 
-                    
+                    shape.AddRow((short)IVisio.VisSectionIndices.visSectionObject, (short)IVisio.VisRowIndices.visRowTextXForm, (short)IVisio.VisRowTags.visTagDefault);
+
                 }
             }
 
             var application = this._client.Application.Get();
-            var shapeids = shapes.Select(s=>s.ID);
+            var shapeids = shapes.Select(s => s.ID);
             foreach (int shapeid in shapeids)
             {
-                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtHeight, "Height*0"); 
-                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtPinY, "Height*0"); 
+                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtHeight, "Height*0");
+                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtPinY, "Height*0");
                 writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.VerticalAlign, "0");
-            } 
-            var active_page = application.ActivePage; 
+            }
+            var active_page = application.ActivePage;
             writer.Commit(active_page);
         }
 
-        public void SetTextWrapping(TargetShapes targets,bool wrap)
+        public void SetTextWrapping(TargetShapes targets, bool wrap)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
