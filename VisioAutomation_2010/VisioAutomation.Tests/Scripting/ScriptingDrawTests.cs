@@ -401,7 +401,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.Get("Rectangle", basic_stencil);
 
             // Frop the Shapes
-            client.Master.Drop(master, 2, 2);
+            client.Master.Drop(master, new VA.Drawing.Point(2, 2));
 
             // Verify
             var application = client.Application.Get();
@@ -467,7 +467,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.Get("Rectangle", basic_stencil);
 
             // Drop the rectangle
-            client.Master.Drop(master, 2, 2);
+            client.Master.Drop(master, new VA.Drawing.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
             client.Selection.SelectAll();
@@ -520,7 +520,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.Get("Rectangle", basic_stencil);
 
             // Drop the rectangle
-            client.Master.Drop(master, 2, 2);
+            client.Master.Drop(master, new VA.Drawing.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
             client.Selection.SelectAll();
