@@ -162,22 +162,23 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Rectangle(VisioAutomation.Drawing.Rectangle r)
         {
-            return this.Rectangle(r.Left, r.Bottom, r.Right, r.Top);
-        }
-
-        public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
-        {
             var surface = this.GetDrawingSurface();
             using (var undoscope = this._client.Application.NewUndoScope("Draw Rectangle"))
             {
-                var shape = surface.DrawRectangle(x0, y0, x1, y1);
+                var shape = surface.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
                 return shape;
             }
         }
 
+        public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
+        {
+            var rect = new VisioAutomation.Drawing.Rectangle(x0, y0, x1, y1);
+            return this.Rectangle(rect);
+        }
+
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
-            var p0 = new VisioAutomation.Drawing.Point(x0,y0);
+            var p0 = new VisioAutomation.Drawing.Point(x0, y0);
             var p1 = new VisioAutomation.Drawing.Point(x1, y1);
             return this.Line(p0, p1);
         }
