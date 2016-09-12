@@ -35,6 +35,8 @@ namespace VisioAutomation.Scripting
         public Commands.OutputCommands Output { get; private set; }
         public Commands.GroupingCommands Grouping { get; private set; }
 
+        public bool VerboseLogging = true;
+
         public Client(IVisio.Application app):
             this(app,new DefaultContext())
         {
@@ -102,8 +104,11 @@ namespace VisioAutomation.Scripting
 
         public void WriteVerbose(string fmt, params object[] items)
         {
-            string s = string.Format(fmt, items);
-            this._context.WriteVerbose(s);
+            if (this.VerboseLogging)
+            {
+                string s = string.Format(fmt, items);
+                this._context.WriteVerbose(s);
+            }
         }
 
         public void WriteWarning(string fmt, params object[] items)
@@ -130,7 +135,10 @@ namespace VisioAutomation.Scripting
 
         public void WriteVerbose(string s)
         {
-            this._context.WriteVerbose(s);
+            if (this.VerboseLogging)
+            {
+                this._context.WriteVerbose(s);
+            }
         }
 
         public void WriteWarning(string s)
@@ -151,7 +159,7 @@ namespace VisioAutomation.Scripting
                 if (value == null)
                 {
                     string msg = "Context must be non-null";
-                    throw new System.ArgumentException(msg);
+                    throw new System.ArgumentNullException(msg);
                 }
                 this._context = value;
             }
