@@ -78,7 +78,7 @@ visio.client.Page.ResizeToFitContents(bordersize,zoom_to_page)
 #getsetargs = 0
 #print [ int(s.ID16) for s in shapes ]
 #targets2 = VisioAutomation.Scripting.TargetShapes(shapes)
-v#isio.client.ShapeSheet.SetFormula(targets2, cells , formulas, getsetargs)  
+#visio.client.ShapeSheet.SetFormula(targets2, cells , formulas, getsetargs)  
 
 
 # drawing tabular data
