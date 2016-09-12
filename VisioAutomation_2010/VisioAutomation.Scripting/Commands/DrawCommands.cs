@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Exceptions;
-using VisioAutomation.Scripting.View;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VAGRID = VisioAutomation.Models.Layouts.Grid;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
@@ -171,7 +168,6 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
             var surface = this.GetDrawingSurface();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Draw Rectangle"))
             {
                 var shape = surface.DrawRectangle(x0, y0, x1, y1);
@@ -181,20 +177,24 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
+            var p0 = new VisioAutomation.Drawing.Point(x0,y0);
+            var p1 = new VisioAutomation.Drawing.Point(x1, y1);
+            return this.Line(p0, p1);
+        }
+
+        public IVisio.Shape Line(VisioAutomation.Drawing.Point p0, VisioAutomation.Drawing.Point p1)
+        {
             var surface = this.GetDrawingSurface();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Draw Line"))
             {
-                var shape = surface.DrawLine(x0, y0, x1, y1);
+                var shape = surface.DrawLine(p0,p1);
                 return shape;
             }
         }
 
-        public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
+        public IVisio.Shape Oval(VisioAutomation.Drawing.Rectangle rect)
         {
             var surface = this.GetDrawingSurface();
-            var rect = new Drawing.Rectangle(x0, y0, x1, y1);
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Draw Oval"))
             {
                 var shape = surface.DrawOval(rect);
@@ -202,10 +202,15 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
+        {
+            var rect = new Drawing.Rectangle(x0, y0, x1, y1);
+            return this.Oval(rect);
+        }
+
         public IVisio.Shape Oval(Drawing.Point center, double radius)
         {
             var surface = this.GetDrawingSurface();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Draw Oval"))
             {
                 var shape = surface.DrawOval(center, radius);
@@ -216,7 +221,6 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Bezier(IEnumerable<Drawing.Point> points)
         {
             var surface = this.GetDrawingSurface();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Draw Bezier"))
             {
                 var shape = surface.DrawBezier(points.ToList());
@@ -227,7 +231,6 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape PolyLine(IList<Drawing.Point> points)
         {
             var surface = this.GetDrawingSurface();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Draw PolyLine"))
             {
                 var shape = surface.DrawPolyLine(points);
@@ -315,7 +318,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DirectedGraph(IList<VAGRAPH.DirectedGraphLayout> directedgraphs)
+        public void DirectedGraph(IList<VAGRAPH.DirectedGraphLayout> graph)
         {
             this._client.Application.AssertApplicationAvailable();
 
@@ -329,9 +332,9 @@ namespace VisioAutomation.Scripting.Commands
             int num_pages_created = 0;
             var doc_pages = doc.Pages;
 
-            foreach (int i in Enumerable.Range(0, directedgraphs.Count))
+            foreach (int i in Enumerable.Range(0, graph.Count))
             {
-                var dg = directedgraphs[i];
+                var dg = graph[i];
 
                 
                 var options = new VAGRAPH.MsaglLayoutOptions();
@@ -345,7 +348,7 @@ namespace VisioAutomation.Scripting.Commands
                 this._client.WriteVerbose("Rendering page: {0}", i + 1);
                 dg.Render(page, options);
                 this._client.Page.ResizeToFitContents(new Drawing.Size(1.0, 1.0), true);
-                this._client.View.Zoom(Zoom.ToPage);
+                this._client.View.Zoom(VisioAutomation.Scripting.View.Zoom.ToPage);
                 this._client.WriteVerbose("Finished rendering page");
 
                 num_pages_created++;
@@ -439,13 +442,13 @@ namespace VisioAutomation.Scripting.Commands
             {
                 string msg = string.Format("internal error: failed to create {0} shapes, instead created {1}", n,
                     duplicated_shapes.Count);
-                throw new VisioOperationException(msg);
+                throw new VisioAutomation.Scripting.Exceptions.VisioOperationException(msg);
             }
 
             var selection2 = win.Selection;
             if (selection2.Count != n)
             {
-                throw new VisioOperationException("internal error: failed to select the duplicated shapes");
+                throw new VisioAutomation.Scripting.Exceptions.VisioOperationException("internal error: failed to select the duplicated shapes");
             }
 
             return duplicated_shapes;
