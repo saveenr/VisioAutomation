@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting.Commands
                 int count = 0;
                 foreach (var shape in shapes)
                 {
-                    string text = texts[count%shapes.Count];
+                    string text = texts[count%texts.Count];
                     if (text != null)
                     {
                         shape.Text = text;
