@@ -47,4 +47,4 @@ import VisioAutomation.Scripting
 
 context = VisioAutomation.Scripting.DefaultContext()
 client = VisioAutomation.Scripting.Client(None,context)
-client.VerboseLogging = Falses
+client.VerboseLogging = False
