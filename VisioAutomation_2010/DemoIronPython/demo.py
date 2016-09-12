@@ -29,9 +29,19 @@ visio.client.Page.New(pagesize, False)
 
 basic_stencil = visio.client.Document.OpenStencil("Basic_U.VSS")
 master = visio.client.Master.Get("Rectangle", basic_stencil)
-visio.client.Master.Drop(master, 2, 2)
-visio.client.Master.Drop(master, 4, 4)
-visio.client.Master.Drop(master, 6, 6)
+visio.client.Master.Drop(master, VisioAutomation.Drawing.Point(0,0) )
+visio.client.Master.Drop(master, VisioAutomation.Drawing.Point(2,2) )
+visio.client.Master.Drop(master, VisioAutomation.Drawing.Point(6,6) )
+
+# dropping multiple masters (fast)
+
+visio.client.Page.New(pagesize, False)
+points=[]
+points.append(VisioAutomation.Drawing.Point(0,0))
+points.append( VisioAutomation.Drawing.Point(2,2))
+points.append(VisioAutomation.Drawing.Point(6,6))
+masters = [ master ]
+visio.client.Master.Drop(masters,points)
 
 # salecting and setting text
 
@@ -39,18 +49,37 @@ visio.client.Selection.SelectAll()
 targets = VisioAutomation.Scripting.TargetShapes()
 visio.client.Text.Set( targets,  [ "A", "B", "C" ] )
 
-# drawing all the fill patterns on a page
+# drawing a grid the manual way (slow)
 
 visio.client.Page.New(pagesize, False)
-patterns = [i for i in range(41)] 
-for (i,pattern) in enumerate(patterns): 
-    left = i % 7
-    bottom = i / 7
-    visio.client.Draw.Rectangle( left, bottom, left+1, bottom+1 ) 
-    #vi.Fill.Pattern = pattern 
+shapes = []
+n = 5
+for i in xrange(n*n): 
+    left = i % n
+    bottom = i / n
+    shape = visio.client.Draw.Rectangle( left, bottom, left+1, bottom+1 ) 
+    shapes.append(shape)
 bordersize = VisioAutomation.Drawing.Size(1,1)
 zoom_to_page = True
 visio.client.Page.ResizeToFitContents(bordersize,zoom_to_page)
+
+
+# drawing a grid the fast way with a grid layout - makes the overall task simpler
+visio.client.Page.New(pagesize, False)
+basic_stencil = visio.client.Document.OpenStencil("Basic_U.VSS")
+master = visio.client.Master.Get("Rectangle", basic_stencil)
+cellsize = VisioAutomation.Drawing.Size(1,1)
+gridlayout = VisioAutomation.Models.Layouts.Grid.GridLayout(5, 5, cellsize, master)
+visio.client.Page.ResizeToFitContents(bordersize,zoom_to_page)
+
+
+#cells= [VisioAutomation.ShapeSheet.SRCConstants.FillPattern for i in patterns]
+#formulas = [ str(i) for i in patterns ]
+#getsetargs = 0
+#print [ int(s.ID16) for s in shapes ]
+#targets2 = VisioAutomation.Scripting.TargetShapes(shapes)
+v#isio.client.ShapeSheet.SetFormula(targets2, cells , formulas, getsetargs)  
+
 
 # drawing tabular data
 # drawing hierrchical data

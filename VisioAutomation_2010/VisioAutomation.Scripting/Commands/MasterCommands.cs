@@ -157,14 +157,14 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape Drop(IVisio.Master master, double x, double y)
+        public IVisio.Shape Drop(IVisio.Master master, VisioAutomation.Drawing.Point p)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
             var application = this._client.Application.Get();
             var page = application.ActivePage;
-            var shape = page.Drop(master, x, y);
+            var shape = page.Drop(master, p.X, p.Y);
             return shape;
         }
 
