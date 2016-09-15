@@ -40,16 +40,16 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var ss1 = new ShapeSheetSurface(page1);
-            var rf = query.GetFormulas(ss1, shapeids);
-            var rr = query.GetResults<double>(ss1, shapeids);
+            var surface = new ShapeSheetSurface(page1);
+            var data_formulas = query.GetFormulas(surface, shapeids);
+            var data_results = query.GetResults<double>(surface, shapeids);
 
-            AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_pinx], rr[0].Cells[col_pinx]);
-            AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_piny], rr[0].Cells[col_piny]);
-            AssertUtil.AreEqual("1.5 in", 1.5, rf[1].Cells[col_pinx], rr[1].Cells[col_pinx]);
-            AssertUtil.AreEqual("1.5 in", 1.5, rf[1].Cells[col_piny], rr[1].Cells[col_piny]);
-            AssertUtil.AreEqual("2.5 in", 2.5, rf[2].Cells[col_pinx], rr[2].Cells[col_pinx]);
-            AssertUtil.AreEqual("2.5 in", 2.5, rf[2].Cells[col_piny], rr[2].Cells[col_piny]);
+            AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_pinx], data_results[0].Cells[col_pinx]);
+            AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_piny], data_results[0].Cells[col_piny]);
+            AssertUtil.AreEqual("1.5 in", 1.5, data_formulas[1].Cells[col_pinx], data_results[1].Cells[col_pinx]);
+            AssertUtil.AreEqual("1.5 in", 1.5, data_formulas[1].Cells[col_piny], data_results[1].Cells[col_piny]);
+            AssertUtil.AreEqual("2.5 in", 2.5, data_formulas[2].Cells[col_pinx], data_results[2].Cells[col_pinx]);
+            AssertUtil.AreEqual("2.5 in", 2.5, data_formulas[2].Cells[col_piny], data_results[2].Cells[col_piny]);
 
             page1.Delete(0);
         }
@@ -129,16 +129,16 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var ss1 = new ShapeSheetSurface(page1);
-            var rf = query.GetFormulas(ss1, shapeids);
-            var rr = query.GetResults<double>(ss1, shapeids);
+            var surface = new ShapeSheetSurface(page1);
+            var data_formulas = query.GetFormulas(surface, shapeids);
+            var data_results = query.GetResults<double>(surface, shapeids);
 
-            AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_pinx], rr[0].Cells[col_pinx]);
-            AssertUtil.AreEqual("0.5 in", 0.5, rf[0].Cells[col_piny], rr[0].Cells[col_piny]);
-            AssertUtil.AreEqual("1.5 in", 1.5, rf[1].Cells[col_pinx], rr[1].Cells[col_pinx]);
-            AssertUtil.AreEqual("1.5 in", 1.5, rf[1].Cells[col_piny], rr[1].Cells[col_piny]);
-            AssertUtil.AreEqual("2.5 in", 2.5, rf[2].Cells[col_pinx], rr[2].Cells[col_pinx]);
-            AssertUtil.AreEqual("2.5 in", 2.5, rf[2].Cells[col_piny], rr[2].Cells[col_piny]);
+            AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_pinx], data_results[0].Cells[col_pinx]);
+            AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_piny], data_results[0].Cells[col_piny]);
+            AssertUtil.AreEqual("1.5 in", 1.5, data_formulas[1].Cells[col_pinx], data_results[1].Cells[col_pinx]);
+            AssertUtil.AreEqual("1.5 in", 1.5, data_formulas[1].Cells[col_piny], data_results[1].Cells[col_piny]);
+            AssertUtil.AreEqual("2.5 in", 2.5, data_formulas[2].Cells[col_pinx], data_results[2].Cells[col_pinx]);
+            AssertUtil.AreEqual("2.5 in", 2.5, data_formulas[2].Cells[col_piny], data_results[2].Cells[col_piny]);
 
             page1.Delete(0);
         }

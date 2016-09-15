@@ -60,8 +60,8 @@ namespace VisioAutomation.DocumentAnalysis
             var col_beginarrow = query.AddCell(src_beginarrow, "BeginArrow");
             var col_endarrow = query.AddCell(src_endarrow, "EndArrow");
 
-            var ss1= new ShapeSheetSurface(page);
-            var arrow_table = query.GetResults<int>(ss1, connnector_ids);
+            var surface = new ShapeSheetSurface(page);
+            var arrow_table = query.GetResults<int>(surface , connnector_ids);
             
             IList<ConnectorEdge> directed_edges = new List<ConnectorEdge>();
 
