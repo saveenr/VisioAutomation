@@ -184,11 +184,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var ss1 = new ShapeSheetSurface(page1);
-
-            var data = query.GetFormulasAndResults<double>(
-                ss1,
-                shapeids);
+            var surface = new ShapeSheetSurface(page1);
+            var data = query.GetFormulasAndResults<double>(surface,shapeids);
 
             Assert.AreEqual(4, data.Count);
             Assert.AreEqual(1, data[0].Sections[prop_sec].Rows.Count);
