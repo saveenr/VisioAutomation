@@ -106,8 +106,8 @@ namespace VisioAutomation.Scripting.FormatPaint
             }
 
             // Retrieve the values for the cells
-            var ss1 = new ShapeSheetSurface(shape);
-            var dataset = query.GetFormulasAndResults<string>(ss1);
+            var surface = new ShapeSheetSurface(shape);
+            var dataset = query.GetFormulasAndResults<string>(surface);
 
             // Now store the values
             for (int col = 0; col < query.Cells.Count; col++)

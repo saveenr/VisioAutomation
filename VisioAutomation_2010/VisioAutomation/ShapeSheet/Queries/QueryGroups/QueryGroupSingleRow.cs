@@ -1,33 +1,32 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.Exceptions;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Queries.Outputs;
 using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
 {
     public abstract class QueryGroupSingleRow : QueryGroupBase
     {
-        private static void verify_cell_only_query(Query query)
+        private static void verify_singlerow_query(Query query)
         {
             if (query.Cells.Count < 1)
             {
-                throw new InternalAssertionException("Query must contain at least 1 Column");
+                throw new InternalAssertionException("Query must contain at least one cell");
             }
 
             if (query.SubQueries.Count != 0)
             {
-                throw new InternalAssertionException("Query should not contain contain any sections");
+                throw new InternalAssertionException("Query should not contain contain any subqueries");
             }
         }
 
         protected static IList<T> _GetCells<T, TResult>(
-            IVisio.Page page, IList<int> shapeids,
+            IVisio.Page page, 
+            IList<int> shapeids,
             Query query,
             System.Func<ShapeSheet.CellData<TResult>[], T> cells_to_object)
         {
-            verify_cell_only_query(query);
+            verify_singlerow_query(query);
 
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetFormulasAndResults<TResult>( surface, shapeids);
@@ -45,10 +44,10 @@ namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
             Query query,
             System.Func<ShapeSheet.CellData<TResult>[], T> cells_to_object)
         {
-            verify_cell_only_query(query);
+            verify_singlerow_query(query);
 
-            var ss1 = new ShapeSheetSurface(shape);
-            Output<CellData<TResult>> data_for_shape = query.GetFormulasAndResults<TResult>(ss1);
+            var surface = new ShapeSheetSurface(shape);
+            var data_for_shape = query.GetFormulasAndResults<TResult>(surface);
             var cells = cells_to_object(data_for_shape.Cells);
             return cells;
         }
