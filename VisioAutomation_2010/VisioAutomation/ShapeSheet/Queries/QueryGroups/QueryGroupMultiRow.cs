@@ -1,7 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.Exceptions;
-using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
 using VisioAutomation.ShapeSheet.Writers;
 
@@ -9,27 +8,27 @@ namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
 {
     public abstract class QueryGroupMultiRow : QueryGroupBase
     {
-        private static void verify_single_section_query(Query query)
+        private static void verify_multirow_query(Query query)
         {
             if (query.Cells.Count != 0)
             {
-                throw new InternalAssertionException("Query should not contain any Columns");
+                throw new InternalAssertionException("Query should not contain any cells");
             }
 
             if (query.SubQueries.Count != 1)
             {
-                throw new InternalAssertionException("Query should not contain contain exactly 1 section");
+                throw new InternalAssertionException("Query should contain contain exactly 1 subquery");
             }
         }
 
 
-        public static IList<List<T>> _GetCells<T, TResult>(
+        protected static IList<List<T>> _GetCells<T, TResult>(
             IVisio.Page page,
             IList<int> shapeids,
             Query query,
             System.Func<ShapeSheet.CellData<TResult>[], T> cell_data_to_object)
         {
-            QueryGroupMultiRow.verify_single_section_query(query);
+            QueryGroupMultiRow.verify_multirow_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
             var surface = new ShapeSheetSurface(page);
@@ -45,15 +44,15 @@ namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
             return list;
         }
 
-        public static IList<T> _GetCells<T, TResult>(
+        protected static IList<T> _GetCells<T, TResult>(
             IVisio.Shape shape,
             Query query,
             System.Func<ShapeSheet.CellData<TResult>[], T> cell_data_to_object)
         {
-            QueryGroupMultiRow.verify_single_section_query(query);
+            QueryGroupMultiRow.verify_multirow_query(query);
 
-            var ss1 = new ShapeSheetSurface(shape);
-            var data_for_shape = query.GetFormulasAndResults<TResult>(ss1);
+            var surface = new ShapeSheetSurface(shape);
+            var data_for_shape = query.GetFormulasAndResults<TResult>(surface);
             var sec = data_for_shape.Sections[0];
             var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, cell_data_to_object);
             
