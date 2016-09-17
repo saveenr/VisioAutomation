@@ -24,26 +24,26 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         }
 
 
-        protected static IList<List<T>> _GetCells<T, TResult>(
+        protected static List<List<TCellGroup>> _GetCells<TCellGroup, TResult>(
             IVisio.Page page,
             IList<int> shapeids,
             Query query,
-            System.Func<ShapeSheet.CellData<TResult>[], T> cell_data_to_object)
+            System.Func<ShapeSheet.CellData<TResult>[], TCellGroup> cell_data_to_object)
         {
             CellGroupMultiRow.verify_multirow_query(query);
 
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetFormulasAndResults<TResult>(surface, shapeids);
-            var list = new List<List<T>>(shapeids.Count);
+            var list = new List<List<TCellGroup>>(shapeids.Count);
             var objects = data_for_shapes.Select(d => CellGroupMultiRow.SectionRowsToObjects(d.Sections[0], cell_data_to_object));
             list.AddRange(objects);
             return list;
         }
 
-        protected static IList<T> _GetCells<T, TResult>(
+        protected static List<TCellGroup> _GetCells<TCellGroup, TResult>(
             IVisio.Shape shape,
             Query query,
-            System.Func<ShapeSheet.CellData<TResult>[], T> cell_data_to_object)
+            System.Func<ShapeSheet.CellData<TResult>[], TCellGroup> cell_data_to_object)
         {
             CellGroupMultiRow.verify_multirow_query(query);
 
@@ -55,9 +55,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return sec_objects;
         }
 
-        private static List<T> SectionRowsToObjects<T, TResult>(SubQueryOutput<ShapeSheet.CellData<TResult>> sec, System.Func<ShapeSheet.CellData<TResult>[],T> cells_to_object)
+        private static List<TCellGroup> SectionRowsToObjects<TCellGroup, TResult>(SubQueryOutput<ShapeSheet.CellData<TResult>> sec, System.Func<ShapeSheet.CellData<TResult>[],TCellGroup> cells_to_object)
         {
-            var sec_objects = new List<T>(sec.Rows.Count);
+            var sec_objects = new List<TCellGroup>(sec.Rows.Count);
             var objects = sec.Rows.Select(row => cells_to_object(row.Cells));
             sec_objects.AddRange(objects);
             return sec_objects;
