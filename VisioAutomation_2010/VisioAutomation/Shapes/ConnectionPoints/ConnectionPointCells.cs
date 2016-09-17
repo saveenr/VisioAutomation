@@ -24,13 +24,13 @@ namespace VisioAutomation.Shapes.ConnectionPoints
             }
         }
 
-        public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ConnectionPointCells.lazy_query.Value;
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(page, shapeids, query, query.GetCells);
         }
 
-        public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
+        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = ConnectionPointCells.lazy_query.Value;
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(shape, query, query.GetCells);
