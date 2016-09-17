@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.ConnectionPoints
@@ -36,7 +37,7 @@ namespace VisioAutomation.Shapes.ConnectionPoints
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Queries.CommonQueries.ConnectionPointCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.ConnectionPointCellsQuery>();
+        private static System.Lazy<ConnectionPointCellsQuery> lazy_query = new System.Lazy<ConnectionPointCellsQuery>();
 
 
     }

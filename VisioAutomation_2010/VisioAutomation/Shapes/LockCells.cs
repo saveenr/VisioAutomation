@@ -1,6 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 
 namespace VisioAutomation.Shapes
 {
@@ -67,7 +68,7 @@ namespace VisioAutomation.Shapes
             return query.GetCells(shape);
         }
 
-        private static System.Lazy<ShapeSheet.Queries.CommonQueries.LockCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.LockCellsQuery>();
+        private static System.Lazy<LockCellsQuery> lazy_query = new System.Lazy<LockCellsQuery>();
 
 
     }

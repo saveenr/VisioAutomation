@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Hyperlinks
@@ -48,6 +49,6 @@ namespace VisioAutomation.Shapes.Hyperlinks
             return query.GetCells(shape);
         }
 
-        private static System.Lazy<ShapeSheet.Queries.CommonQueries.HyperlinkCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.HyperlinkCellsQuery>();
+        private static System.Lazy<HyperlinkCellsQuery> lazy_query = new System.Lazy<HyperlinkCellsQuery>();
     }
 }

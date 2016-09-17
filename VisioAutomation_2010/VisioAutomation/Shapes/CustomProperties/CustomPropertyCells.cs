@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties
@@ -136,7 +137,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return query.GetCells(shape);
         }
 
-        private static System.Lazy<ShapeSheet.Queries.CommonQueries.CustomPropertyCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.CustomPropertyCellsQuery>();
+        private static System.Lazy<CustomPropertyCellsQuery> lazy_query = new System.Lazy<CustomPropertyCellsQuery>();
 
         public static CustomPropertyCells FromValue(object value)
         {

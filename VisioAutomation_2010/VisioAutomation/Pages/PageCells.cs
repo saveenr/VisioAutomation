@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -154,7 +155,7 @@ namespace VisioAutomation.Pages
             return query.GetCells(shape);
         }
 
-        private static System.Lazy<ShapeSheet.Queries.CommonQueries.PageCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.PageCellsQuery>();
+        private static System.Lazy<PageCellsQuery> lazy_query = new System.Lazy<PageCellsQuery>();
 
     }
 }

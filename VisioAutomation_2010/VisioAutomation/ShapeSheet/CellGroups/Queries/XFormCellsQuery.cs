@@ -2,7 +2,7 @@ using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
+namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
     class XFormCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Shapes.XFormCells,double>
     {

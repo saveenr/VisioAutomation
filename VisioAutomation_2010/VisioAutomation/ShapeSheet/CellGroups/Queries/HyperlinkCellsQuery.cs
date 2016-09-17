@@ -1,7 +1,7 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
+namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
     class HyperlinkCellsQuery : CellGroupMultiRowQuery<Shapes.Hyperlinks.HyperlinkCells, double>
     {
