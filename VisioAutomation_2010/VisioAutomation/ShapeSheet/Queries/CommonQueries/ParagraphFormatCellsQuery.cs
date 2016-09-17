@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 {
-    class ParagraphFormatCellsQuery : Query
+    class ParagraphFormatCellsQuery : CellGroupMultiRowQuery<Text.ParagraphCells, double>
     {
         public ColumnSubQuery Bullet { get; set; }
         public ColumnSubQuery BulletFont { get; set; }
@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 
         public ParagraphFormatCellsQuery()
         {
-            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionParagraph);
+            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionParagraph);
             this.Bullet = sec.AddCell(SRCCON.Para_Bullet, nameof(SRCCON.Para_Bullet));
             this.BulletFont = sec.AddCell(SRCCON.Para_BulletFont, nameof(SRCCON.Para_BulletFont));
             this.BulletFontSize = sec.AddCell(SRCCON.Para_BulletFontSize, nameof(SRCCON.Para_BulletFontSize));
@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
             this.TextPosAfterBullet = sec.AddCell(SRCCON.Para_TextPosAfterBullet, nameof(SRCCON.Para_TextPosAfterBullet));
         }
 
-        public Text.ParagraphCells GetCells(ShapeSheet.CellData<double>[] row)
+        public override Text.ParagraphCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Text.ParagraphCells();
             cells.IndentFirst = row[this.IndentFirst];

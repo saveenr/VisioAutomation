@@ -54,13 +54,13 @@ namespace VisioAutomation.Shapes.Layout
         public static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupSingleRow._GetCells<ShapeLayoutCells, double>(page, shapeids, query, query.GetCells);
+            return query.GetCells(page, shapeids);
         }
 
         public static ShapeLayoutCells GetCells(IVisio.Shape shape)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupSingleRow._GetCells<ShapeLayoutCells, double>(shape, query, query.GetCells);
+            return query.GetCells(shape);
         }
 
         private static System.Lazy<ShapeSheet.Queries.CommonQueries.ShapeLayoutCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.ShapeLayoutCellsQuery>();

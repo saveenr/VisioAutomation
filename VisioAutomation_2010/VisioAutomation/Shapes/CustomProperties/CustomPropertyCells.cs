@@ -127,13 +127,13 @@ namespace VisioAutomation.Shapes.CustomProperties
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = CustomPropertyCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<CustomPropertyCells, double>(page, shapeids, query, query.GetCells);
+            return query.GetCells(page, shapeids);
         }
 
         public static IList<CustomPropertyCells> GetCells(IVisio.Shape shape)
         {
             var query = CustomPropertyCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<CustomPropertyCells, double>(shape, query, query.GetCells);
+            return query.GetCells(shape);
         }
 
         private static System.Lazy<ShapeSheet.Queries.CommonQueries.CustomPropertyCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.CustomPropertyCellsQuery>();

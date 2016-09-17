@@ -3,7 +3,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 {
-    class TextBlockCellsQuery : Query
+    class TextBlockCellsQuery : CellGroupSingleRowQuery<Text.TextBlockCells, double>
     {
         public ColumnQuery BottomMargin { get; set; }
         public ColumnQuery LeftMargin { get; set; }
@@ -22,29 +22,28 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
         public ColumnQuery TxtLocPinY { get; set; }
         public ColumnQuery TxtAngle { get; set; }
 
-        public TextBlockCellsQuery() :
-            base()
+        public TextBlockCellsQuery()
         {
-            this.BottomMargin = this.AddCell(SRCCON.BottomMargin, nameof(SRCCON.BottomMargin));
-            this.LeftMargin = this.AddCell(SRCCON.LeftMargin, nameof(SRCCON.LeftMargin));
-            this.RightMargin = this.AddCell(SRCCON.RightMargin, nameof(SRCCON.RightMargin));
-            this.TopMargin = this.AddCell(SRCCON.TopMargin, nameof(SRCCON.TopMargin));
-            this.DefaultTabStop = this.AddCell(SRCCON.DefaultTabStop, nameof(SRCCON.DefaultTabStop));
-            this.TextBkgnd = this.AddCell(SRCCON.TextBkgnd, nameof(SRCCON.TextBkgnd));
-            this.TextBkgndTrans = this.AddCell(SRCCON.TextBkgndTrans, nameof(SRCCON.TextBkgndTrans));
-            this.TextDirection = this.AddCell(SRCCON.TextDirection, nameof(SRCCON.TextDirection));
-            this.VerticalAlign = this.AddCell(SRCCON.VerticalAlign, nameof(SRCCON.VerticalAlign));
-            this.TxtPinX = this.AddCell(SRCCON.TxtPinX, nameof(SRCCON.TxtPinX));
-            this.TxtPinY = this.AddCell(SRCCON.TxtPinY, nameof(SRCCON.TxtPinY));
-            this.TxtLocPinX = this.AddCell(SRCCON.TxtLocPinX, nameof(SRCCON.TxtLocPinX));
-            this.TxtLocPinY = this.AddCell(SRCCON.TxtLocPinY, nameof(SRCCON.TxtLocPinY));
-            this.TxtWidth = this.AddCell(SRCCON.TxtWidth, nameof(SRCCON.TxtWidth));
-            this.TxtHeight = this.AddCell(SRCCON.TxtHeight, nameof(SRCCON.TxtHeight));
-            this.TxtAngle = this.AddCell(SRCCON.TxtAngle, nameof(SRCCON.TxtAngle));
+            this.BottomMargin = this.query.AddCell(SRCCON.BottomMargin, nameof(SRCCON.BottomMargin));
+            this.LeftMargin = this.query.AddCell(SRCCON.LeftMargin, nameof(SRCCON.LeftMargin));
+            this.RightMargin = this.query.AddCell(SRCCON.RightMargin, nameof(SRCCON.RightMargin));
+            this.TopMargin = this.query.AddCell(SRCCON.TopMargin, nameof(SRCCON.TopMargin));
+            this.DefaultTabStop = this.query.AddCell(SRCCON.DefaultTabStop, nameof(SRCCON.DefaultTabStop));
+            this.TextBkgnd = this.query.AddCell(SRCCON.TextBkgnd, nameof(SRCCON.TextBkgnd));
+            this.TextBkgndTrans = this.query.AddCell(SRCCON.TextBkgndTrans, nameof(SRCCON.TextBkgndTrans));
+            this.TextDirection = this.query.AddCell(SRCCON.TextDirection, nameof(SRCCON.TextDirection));
+            this.VerticalAlign = this.query.AddCell(SRCCON.VerticalAlign, nameof(SRCCON.VerticalAlign));
+            this.TxtPinX = this.query.AddCell(SRCCON.TxtPinX, nameof(SRCCON.TxtPinX));
+            this.TxtPinY = this.query.AddCell(SRCCON.TxtPinY, nameof(SRCCON.TxtPinY));
+            this.TxtLocPinX = this.query.AddCell(SRCCON.TxtLocPinX, nameof(SRCCON.TxtLocPinX));
+            this.TxtLocPinY = this.query.AddCell(SRCCON.TxtLocPinY, nameof(SRCCON.TxtLocPinY));
+            this.TxtWidth = this.query.AddCell(SRCCON.TxtWidth, nameof(SRCCON.TxtWidth));
+            this.TxtHeight = this.query.AddCell(SRCCON.TxtHeight, nameof(SRCCON.TxtHeight));
+            this.TxtAngle = this.query.AddCell(SRCCON.TxtAngle, nameof(SRCCON.TxtAngle));
 
         }
 
-        public Text.TextBlockCells GetCells(ShapeSheet.CellData<double>[] row)
+        public override Text.TextBlockCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Text.TextBlockCells();
             cells.BottomMargin = row[this.BottomMargin];

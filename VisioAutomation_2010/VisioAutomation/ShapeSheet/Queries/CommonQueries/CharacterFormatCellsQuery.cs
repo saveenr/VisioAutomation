@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 {
-    class CharacterFormatCellsQuery : Query
+    class CharacterFormatCellsQuery : CellGroupMultiRowQuery<Text.CharacterCells, double>
     {
         public ColumnSubQuery Font { get; set; }
         public ColumnSubQuery Style { get; set; }
@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 
         public CharacterFormatCellsQuery()
         {
-            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
+            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
 
             this.Color = sec.AddCell(SRCCON.CharColor, nameof(SRCCON.CharColor));
             this.Trans = sec.AddCell(SRCCON.CharColorTrans, nameof(SRCCON.CharColorTrans));
@@ -58,7 +58,7 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 
         }
 
-        public Text.CharacterCells GetCells(ShapeSheet.CellData<double>[] row)
+        public override Text.CharacterCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Text.CharacterCells();
             cells.Color = Extensions.CellDataMethods.ToInt(row[this.Color]);

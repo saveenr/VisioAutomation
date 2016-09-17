@@ -39,13 +39,13 @@ namespace VisioAutomation.Shapes.Hyperlinks
         public static IList<List<HyperlinkCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = HyperlinkCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<HyperlinkCells, double>(page, shapeids, query, query.GetCells);
+            return query.GetCells(page, shapeids);
         }
 
         public static IList<HyperlinkCells> GetCells(IVisio.Shape shape)
         {
             var query = HyperlinkCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<HyperlinkCells, double>(shape, query, query.GetCells);
+            return query.GetCells(shape);
         }
 
         private static System.Lazy<ShapeSheet.Queries.CommonQueries.HyperlinkCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.HyperlinkCellsQuery>();

@@ -3,7 +3,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 {
-    class PageCellsQuery : Query
+    class PageCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Pages.PageCells, double>
     {
         public ColumnQuery PageLeftMargin { get; set; }
         public ColumnQuery CenterX { get; set; }
@@ -75,77 +75,77 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 
         public PageCellsQuery()
         {
-            this.PageLeftMargin = this.AddCell(SRCCON.PageLeftMargin, nameof(SRCCON.PageLeftMargin));
-            this.CenterX = this.AddCell(SRCCON.CenterX, nameof(SRCCON.CenterX));
-            this.CenterY = this.AddCell(SRCCON.CenterY, nameof(SRCCON.CenterY));
-            this.OnPage = this.AddCell(SRCCON.OnPage, nameof(SRCCON.OnPage));
-            this.PageBottomMargin = this.AddCell(SRCCON.PageBottomMargin, nameof(SRCCON.PageBottomMargin));
-            this.PageRightMargin = this.AddCell(SRCCON.PageRightMargin, nameof(SRCCON.PageRightMargin));
-            this.PagesX = this.AddCell(SRCCON.PagesX, nameof(SRCCON.PagesX));
-            this.PagesY = this.AddCell(SRCCON.PagesY, nameof(SRCCON.PagesY));
-            this.PageTopMargin = this.AddCell(SRCCON.PageTopMargin, nameof(SRCCON.PageTopMargin));
-            this.PaperKind = this.AddCell(SRCCON.PaperKind, nameof(SRCCON.PaperKind));
-            this.PrintGrid = this.AddCell(SRCCON.PrintGrid, nameof(SRCCON.PrintGrid));
-            this.PrintPageOrientation = this.AddCell(SRCCON.PrintPageOrientation, nameof(SRCCON.PrintPageOrientation));
-            this.ScaleX = this.AddCell(SRCCON.ScaleX, nameof(SRCCON.ScaleX));
-            this.ScaleY = this.AddCell(SRCCON.ScaleY, nameof(SRCCON.ScaleY));
-            this.PaperSource = this.AddCell(SRCCON.PaperSource, nameof(SRCCON.PaperSource));
-            this.DrawingScale = this.AddCell(SRCCON.DrawingScale, nameof(SRCCON.DrawingScale));
-            this.DrawingScaleType = this.AddCell(SRCCON.DrawingScaleType, nameof(SRCCON.DrawingScaleType));
-            this.DrawingSizeType = this.AddCell(SRCCON.DrawingSizeType, nameof(SRCCON.DrawingSizeType));
-            this.InhibitSnap = this.AddCell(SRCCON.InhibitSnap, nameof(SRCCON.InhibitSnap));
-            this.PageHeight = this.AddCell(SRCCON.PageHeight, nameof(SRCCON.PageHeight));
-            this.PageScale = this.AddCell(SRCCON.PageScale, nameof(SRCCON.PageScale));
-            this.PageWidth = this.AddCell(SRCCON.PageWidth, nameof(SRCCON.PageWidth));
-            this.ShdwObliqueAngle = this.AddCell(SRCCON.ShdwObliqueAngle, nameof(SRCCON.ShdwObliqueAngle));
-            this.ShdwOffsetX = this.AddCell(SRCCON.ShdwOffsetX, nameof(SRCCON.ShdwOffsetX));
-            this.ShdwOffsetY = this.AddCell(SRCCON.ShdwOffsetY, nameof(SRCCON.ShdwOffsetY));
-            this.ShdwScaleFactor = this.AddCell(SRCCON.ShdwScaleFactor, nameof(SRCCON.ShdwScaleFactor));
-            this.ShdwType = this.AddCell(SRCCON.ShdwType, nameof(SRCCON.ShdwType));
-            this.UIVisibility = this.AddCell(SRCCON.UIVisibility, nameof(SRCCON.UIVisibility));
-            this.XGridDensity = this.AddCell(SRCCON.XGridDensity, nameof(SRCCON.XGridDensity));
-            this.XGridOrigin = this.AddCell(SRCCON.XGridOrigin, nameof(SRCCON.XGridOrigin));
-            this.XGridSpacing = this.AddCell(SRCCON.XGridSpacing, nameof(SRCCON.XGridSpacing));
-            this.XRulerDensity = this.AddCell(SRCCON.XRulerDensity, nameof(SRCCON.XRulerDensity));
-            this.XRulerOrigin = this.AddCell(SRCCON.XRulerOrigin, nameof(SRCCON.XRulerOrigin));
-            this.YGridDensity = this.AddCell(SRCCON.YGridDensity, nameof(SRCCON.YGridDensity));
-            this.YGridOrigin = this.AddCell(SRCCON.YGridOrigin, nameof(SRCCON.YGridOrigin));
-            this.YGridSpacing = this.AddCell(SRCCON.YGridSpacing, nameof(SRCCON.YGridSpacing));
-            this.YRulerDensity = this.AddCell(SRCCON.YRulerDensity, nameof(SRCCON.YRulerDensity));
-            this.YRulerOrigin = this.AddCell(SRCCON.YRulerOrigin, nameof(SRCCON.YRulerOrigin));
-            this.AvenueSizeX = this.AddCell(SRCCON.AvenueSizeX, nameof(SRCCON.AvenueSizeX));
-            this.AvenueSizeY = this.AddCell(SRCCON.AvenueSizeY, nameof(SRCCON.AvenueSizeY));
-            this.BlockSizeX = this.AddCell(SRCCON.BlockSizeX, nameof(SRCCON.BlockSizeX));
-            this.BlockSizeY = this.AddCell(SRCCON.BlockSizeY, nameof(SRCCON.BlockSizeY));
-            this.CtrlAsInput = this.AddCell(SRCCON.CtrlAsInput, nameof(SRCCON.CtrlAsInput));
-            this.DynamicsOff = this.AddCell(SRCCON.DynamicsOff, nameof(SRCCON.DynamicsOff));
-            this.EnableGrid = this.AddCell(SRCCON.EnableGrid, nameof(SRCCON.EnableGrid));
-            this.LineAdjustFrom = this.AddCell(SRCCON.LineAdjustFrom, nameof(SRCCON.LineAdjustFrom));
-            this.LineAdjustTo = this.AddCell(SRCCON.LineAdjustTo, nameof(SRCCON.LineAdjustTo));
-            this.LineJumpCode = this.AddCell(SRCCON.LineJumpCode, nameof(SRCCON.LineJumpCode));
-            this.LineJumpFactorX = this.AddCell(SRCCON.LineJumpFactorX, nameof(SRCCON.LineJumpFactorX));
-            this.LineJumpFactorY = this.AddCell(SRCCON.LineJumpFactorY, nameof(SRCCON.LineJumpFactorY));
-            this.LineJumpStyle = this.AddCell(SRCCON.LineJumpStyle, nameof(SRCCON.LineJumpStyle));
-            this.LineRouteExt = this.AddCell(SRCCON.LineRouteExt, nameof(SRCCON.LineRouteExt));
-            this.LineToLineX = this.AddCell(SRCCON.LineToLineX, nameof(SRCCON.LineToLineX));
-            this.LineToLineY = this.AddCell(SRCCON.LineToLineY, nameof(SRCCON.LineToLineY));
-            this.LineToNodeX = this.AddCell(SRCCON.LineToNodeX, nameof(SRCCON.LineToNodeX));
-            this.LineToNodeY = this.AddCell(SRCCON.LineToNodeY, nameof(SRCCON.LineToNodeY));
-            this.PageLineJumpDirX = this.AddCell(SRCCON.PageLineJumpDirX, nameof(SRCCON.PageLineJumpDirX));
-            this.PageLineJumpDirY = this.AddCell(SRCCON.PageLineJumpDirY, nameof(SRCCON.PageLineJumpDirY));
-            this.PageShapeSplit = this.AddCell(SRCCON.PageShapeSplit, nameof(SRCCON.PageShapeSplit));
-            this.PlaceDepth = this.AddCell(SRCCON.PlaceDepth, nameof(SRCCON.PlaceDepth));
-            this.PlaceFlip = this.AddCell(SRCCON.PlaceFlip, nameof(SRCCON.PlaceFlip));
-            this.PlaceStyle = this.AddCell(SRCCON.PlaceStyle, nameof(SRCCON.PlaceStyle));
-            this.PlowCode = this.AddCell(SRCCON.PlowCode, nameof(SRCCON.PlowCode));
-            this.ResizePage = this.AddCell(SRCCON.ResizePage, nameof(SRCCON.ResizePage));
-            this.RouteStyle = this.AddCell(SRCCON.RouteStyle, nameof(SRCCON.RouteStyle));
-            this.AvoidPageBreaks = this.AddCell(SRCCON.AvoidPageBreaks, nameof(SRCCON.AvoidPageBreaks));
-            this.DrawingResizeType = this.AddCell(SRCCON.DrawingResizeType, nameof(SRCCON.DrawingResizeType));
+            this.PageLeftMargin = this.query.AddCell(SRCCON.PageLeftMargin, nameof(SRCCON.PageLeftMargin));
+            this.CenterX = this.query.AddCell(SRCCON.CenterX, nameof(SRCCON.CenterX));
+            this.CenterY = this.query.AddCell(SRCCON.CenterY, nameof(SRCCON.CenterY));
+            this.OnPage = this.query.AddCell(SRCCON.OnPage, nameof(SRCCON.OnPage));
+            this.PageBottomMargin = this.query.AddCell(SRCCON.PageBottomMargin, nameof(SRCCON.PageBottomMargin));
+            this.PageRightMargin = this.query.AddCell(SRCCON.PageRightMargin, nameof(SRCCON.PageRightMargin));
+            this.PagesX = this.query.AddCell(SRCCON.PagesX, nameof(SRCCON.PagesX));
+            this.PagesY = this.query.AddCell(SRCCON.PagesY, nameof(SRCCON.PagesY));
+            this.PageTopMargin = this.query.AddCell(SRCCON.PageTopMargin, nameof(SRCCON.PageTopMargin));
+            this.PaperKind = this.query.AddCell(SRCCON.PaperKind, nameof(SRCCON.PaperKind));
+            this.PrintGrid = this.query.AddCell(SRCCON.PrintGrid, nameof(SRCCON.PrintGrid));
+            this.PrintPageOrientation = this.query.AddCell(SRCCON.PrintPageOrientation, nameof(SRCCON.PrintPageOrientation));
+            this.ScaleX = this.query.AddCell(SRCCON.ScaleX, nameof(SRCCON.ScaleX));
+            this.ScaleY = this.query.AddCell(SRCCON.ScaleY, nameof(SRCCON.ScaleY));
+            this.PaperSource = this.query.AddCell(SRCCON.PaperSource, nameof(SRCCON.PaperSource));
+            this.DrawingScale = this.query.AddCell(SRCCON.DrawingScale, nameof(SRCCON.DrawingScale));
+            this.DrawingScaleType = this.query.AddCell(SRCCON.DrawingScaleType, nameof(SRCCON.DrawingScaleType));
+            this.DrawingSizeType = this.query.AddCell(SRCCON.DrawingSizeType, nameof(SRCCON.DrawingSizeType));
+            this.InhibitSnap = this.query.AddCell(SRCCON.InhibitSnap, nameof(SRCCON.InhibitSnap));
+            this.PageHeight = this.query.AddCell(SRCCON.PageHeight, nameof(SRCCON.PageHeight));
+            this.PageScale = this.query.AddCell(SRCCON.PageScale, nameof(SRCCON.PageScale));
+            this.PageWidth = this.query.AddCell(SRCCON.PageWidth, nameof(SRCCON.PageWidth));
+            this.ShdwObliqueAngle = this.query.AddCell(SRCCON.ShdwObliqueAngle, nameof(SRCCON.ShdwObliqueAngle));
+            this.ShdwOffsetX = this.query.AddCell(SRCCON.ShdwOffsetX, nameof(SRCCON.ShdwOffsetX));
+            this.ShdwOffsetY = this.query.AddCell(SRCCON.ShdwOffsetY, nameof(SRCCON.ShdwOffsetY));
+            this.ShdwScaleFactor = this.query.AddCell(SRCCON.ShdwScaleFactor, nameof(SRCCON.ShdwScaleFactor));
+            this.ShdwType = this.query.AddCell(SRCCON.ShdwType, nameof(SRCCON.ShdwType));
+            this.UIVisibility = this.query.AddCell(SRCCON.UIVisibility, nameof(SRCCON.UIVisibility));
+            this.XGridDensity = this.query.AddCell(SRCCON.XGridDensity, nameof(SRCCON.XGridDensity));
+            this.XGridOrigin = this.query.AddCell(SRCCON.XGridOrigin, nameof(SRCCON.XGridOrigin));
+            this.XGridSpacing = this.query.AddCell(SRCCON.XGridSpacing, nameof(SRCCON.XGridSpacing));
+            this.XRulerDensity = this.query.AddCell(SRCCON.XRulerDensity, nameof(SRCCON.XRulerDensity));
+            this.XRulerOrigin = this.query.AddCell(SRCCON.XRulerOrigin, nameof(SRCCON.XRulerOrigin));
+            this.YGridDensity = this.query.AddCell(SRCCON.YGridDensity, nameof(SRCCON.YGridDensity));
+            this.YGridOrigin = this.query.AddCell(SRCCON.YGridOrigin, nameof(SRCCON.YGridOrigin));
+            this.YGridSpacing = this.query.AddCell(SRCCON.YGridSpacing, nameof(SRCCON.YGridSpacing));
+            this.YRulerDensity = this.query.AddCell(SRCCON.YRulerDensity, nameof(SRCCON.YRulerDensity));
+            this.YRulerOrigin = this.query.AddCell(SRCCON.YRulerOrigin, nameof(SRCCON.YRulerOrigin));
+            this.AvenueSizeX = this.query.AddCell(SRCCON.AvenueSizeX, nameof(SRCCON.AvenueSizeX));
+            this.AvenueSizeY = this.query.AddCell(SRCCON.AvenueSizeY, nameof(SRCCON.AvenueSizeY));
+            this.BlockSizeX = this.query.AddCell(SRCCON.BlockSizeX, nameof(SRCCON.BlockSizeX));
+            this.BlockSizeY = this.query.AddCell(SRCCON.BlockSizeY, nameof(SRCCON.BlockSizeY));
+            this.CtrlAsInput = this.query.AddCell(SRCCON.CtrlAsInput, nameof(SRCCON.CtrlAsInput));
+            this.DynamicsOff = this.query.AddCell(SRCCON.DynamicsOff, nameof(SRCCON.DynamicsOff));
+            this.EnableGrid = this.query.AddCell(SRCCON.EnableGrid, nameof(SRCCON.EnableGrid));
+            this.LineAdjustFrom = this.query.AddCell(SRCCON.LineAdjustFrom, nameof(SRCCON.LineAdjustFrom));
+            this.LineAdjustTo = this.query.AddCell(SRCCON.LineAdjustTo, nameof(SRCCON.LineAdjustTo));
+            this.LineJumpCode = this.query.AddCell(SRCCON.LineJumpCode, nameof(SRCCON.LineJumpCode));
+            this.LineJumpFactorX = this.query.AddCell(SRCCON.LineJumpFactorX, nameof(SRCCON.LineJumpFactorX));
+            this.LineJumpFactorY = this.query.AddCell(SRCCON.LineJumpFactorY, nameof(SRCCON.LineJumpFactorY));
+            this.LineJumpStyle = this.query.AddCell(SRCCON.LineJumpStyle, nameof(SRCCON.LineJumpStyle));
+            this.LineRouteExt = this.query.AddCell(SRCCON.LineRouteExt, nameof(SRCCON.LineRouteExt));
+            this.LineToLineX = this.query.AddCell(SRCCON.LineToLineX, nameof(SRCCON.LineToLineX));
+            this.LineToLineY = this.query.AddCell(SRCCON.LineToLineY, nameof(SRCCON.LineToLineY));
+            this.LineToNodeX = this.query.AddCell(SRCCON.LineToNodeX, nameof(SRCCON.LineToNodeX));
+            this.LineToNodeY = this.query.AddCell(SRCCON.LineToNodeY, nameof(SRCCON.LineToNodeY));
+            this.PageLineJumpDirX = this.query.AddCell(SRCCON.PageLineJumpDirX, nameof(SRCCON.PageLineJumpDirX));
+            this.PageLineJumpDirY = this.query.AddCell(SRCCON.PageLineJumpDirY, nameof(SRCCON.PageLineJumpDirY));
+            this.PageShapeSplit = this.query.AddCell(SRCCON.PageShapeSplit, nameof(SRCCON.PageShapeSplit));
+            this.PlaceDepth = this.query.AddCell(SRCCON.PlaceDepth, nameof(SRCCON.PlaceDepth));
+            this.PlaceFlip = this.query.AddCell(SRCCON.PlaceFlip, nameof(SRCCON.PlaceFlip));
+            this.PlaceStyle = this.query.AddCell(SRCCON.PlaceStyle, nameof(SRCCON.PlaceStyle));
+            this.PlowCode = this.query.AddCell(SRCCON.PlowCode, nameof(SRCCON.PlowCode));
+            this.ResizePage = this.query.AddCell(SRCCON.ResizePage, nameof(SRCCON.ResizePage));
+            this.RouteStyle = this.query.AddCell(SRCCON.RouteStyle, nameof(SRCCON.RouteStyle));
+            this.AvoidPageBreaks = this.query.AddCell(SRCCON.AvoidPageBreaks, nameof(SRCCON.AvoidPageBreaks));
+            this.DrawingResizeType = this.query.AddCell(SRCCON.DrawingResizeType, nameof(SRCCON.DrawingResizeType));
         }
 
 
-        public Pages.PageCells GetCells(ShapeSheet.CellData<double>[] row)
+        public override Pages.PageCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
 
             var cells = new Pages.PageCells();
