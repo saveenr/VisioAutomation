@@ -49,13 +49,13 @@ namespace VisioAutomation.Text
         public static IList<TextBlockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupSingleRow._GetCells<TextBlockCells, double>(page, shapeids, query, query.GetCells);
+            return query.GetCells(page, shapeids);
         }
 
         public static TextBlockCells GetCells(IVisio.Shape shape)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return ShapeSheet.CellGroups.CellGroupSingleRow._GetCells<TextBlockCells, double>(shape, query, query.GetCells);
+            return query.GetCells(shape);
         }
 
         private static System.Lazy<ShapeSheet.Queries.CommonQueries.TextBlockCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.TextBlockCellsQuery>();
