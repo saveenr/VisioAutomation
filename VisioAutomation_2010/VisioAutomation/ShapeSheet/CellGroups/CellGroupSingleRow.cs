@@ -1,5 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet.Queries;
 using VisioAutomation.ShapeSheet.Writers;
@@ -32,11 +33,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetFormulasAndResults<TResult>( surface, shapeids);
             var list = new List<T>(shapeids.Count);
-            foreach (var data_for_shape in data_for_shapes)
-            {
-                var cells = cells_to_object(data_for_shape.Cells);
-                list.Add(cells);
-            }
+            var objects = data_for_shapes.Select(d => cells_to_object(d.Cells));
+            list.AddRange(objects);
             return list;
         }
 
