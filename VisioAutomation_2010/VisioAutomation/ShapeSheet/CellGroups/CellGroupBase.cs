@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
+namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class QueryGroupBase
+    public abstract class CellGroupBase
     {
         protected SRCFormulaPair newpair(ShapeSheet.SRC src, ShapeSheet.FormulaLiteral formula)
         {

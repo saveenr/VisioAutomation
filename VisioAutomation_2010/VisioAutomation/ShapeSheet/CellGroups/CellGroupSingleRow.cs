@@ -1,11 +1,12 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.Exceptions;
+using VisioAutomation.ShapeSheet.Queries;
 using VisioAutomation.ShapeSheet.Writers;
 
-namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
+namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class QueryGroupSingleRow : QueryGroupBase
+    public abstract class CellGroupSingleRow : CellGroupBase
     {
         private static void verify_singlerow_query(Query query)
         {

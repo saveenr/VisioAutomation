@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Queries.QueryGroups;
+using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes
 {
-    public class FormatCells : ShapeSheet.Queries.QueryGroups.QueryGroupSingleRow
+    public class FormatCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
         public ShapeSheet.CellData<int> FillBkgnd { get; set; }
         public ShapeSheet.CellData<double> FillBkgndTrans { get; set; }
@@ -69,13 +69,13 @@ namespace VisioAutomation.Shapes
         public static IList<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = FormatCells.lazy_query.Value;
-            return ShapeSheet.Queries.QueryGroups.QueryGroupSingleRow._GetCells<FormatCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroupSingleRow._GetCells<FormatCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static FormatCells GetCells(IVisio.Shape shape)
         {
             var query = FormatCells.lazy_query.Value;
-            return ShapeSheet.Queries.QueryGroups.QueryGroupSingleRow._GetCells<FormatCells, double>(shape, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroupSingleRow._GetCells<FormatCells, double>(shape, query, query.GetCells);
         }
 
         private static System.Lazy<ShapeSheet.Queries.CommonQueries.ShapeFormatCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.ShapeFormatCellsQuery>();

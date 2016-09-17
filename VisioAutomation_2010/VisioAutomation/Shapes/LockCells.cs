@@ -1,10 +1,10 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Queries.QueryGroups;
+using VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : ShapeSheet.Queries.QueryGroups.QueryGroupSingleRow
+    public class LockCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
         public ShapeSheet.CellData<bool> LockAspect { get; set; }
         public ShapeSheet.CellData<bool> LockBegin { get; set; }
@@ -58,13 +58,13 @@ namespace VisioAutomation.Shapes
         public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = LockCells.lazy_query.Value;
-            return ShapeSheet.Queries.QueryGroups.QueryGroupSingleRow._GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroupSingleRow._GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static LockCells GetCells(IVisio.Shape shape)
         {
             var query = LockCells.lazy_query.Value;
-            return ShapeSheet.Queries.QueryGroups.QueryGroupSingleRow._GetCells<LockCells, double>(shape, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroupSingleRow._GetCells<LockCells, double>(shape, query, query.GetCells);
         }
 
         private static System.Lazy<ShapeSheet.Queries.CommonQueries.LockCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.LockCellsQuery>();
