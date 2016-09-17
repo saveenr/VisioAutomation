@@ -30,6 +30,8 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
             Microsoft.Office.Interop.Visio.Page page,
             IList<int> shapeids)
         {
+            verify_singlerow_query();
+
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = this.query.GetFormulasAndResults<TResult>(surface, shapeids);
             var list = new List<TCellGroup>(shapeids.Count);
