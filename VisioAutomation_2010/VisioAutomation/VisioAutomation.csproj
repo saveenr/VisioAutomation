@@ -94,6 +94,7 @@
     <Compile Include="Fonts\FontHelper.cs" />
     <Compile Include="Layers\LayerHelper.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnBase.cs" />
+    <Compile Include="ShapeSheet\Queries\CommonQueries\CellGroupSingleRowQuery.cs" />
     <Compile Include="ShapeSheet\Queries\CommonQueries\CharacterFormatCellsQuery.cs" />
     <Compile Include="ShapeSheet\Queries\CommonQueries\ConnectionPointCellsQuery.cs" />
     <Compile Include="ShapeSheet\Queries\CommonQueries\ControlCellsQuery.cs" />
