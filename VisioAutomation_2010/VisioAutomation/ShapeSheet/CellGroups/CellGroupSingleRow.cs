@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             verify_singlerow_query(query);
 
             var surface = new ShapeSheetSurface(page);
-            var data_for_shapes = query.GetFormulasAndResults<TResult>( surface, shapeids);
+            var data_for_shapes = query.GetFormulasAndResults<TResult>(surface, shapeids);
             var list = new List<TCellGroup>(shapeids.Count);
             var objects = data_for_shapes.Select(d => cells_to_object(d.Cells));
             list.AddRange(objects);
