@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Queries.QueryGroups;
+using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.ConnectionPoints
 {
-    public class ConnectionPointCells : ShapeSheet.Queries.QueryGroups.QueryGroupMultiRow
+    public class ConnectionPointCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public ShapeSheet.CellData<double> X { get; set; }
         public ShapeSheet.CellData<double> Y { get; set; }
@@ -24,19 +25,19 @@ namespace VisioAutomation.Shapes.ConnectionPoints
             }
         }
 
-        public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ConnectionPointCells.lazy_query.Value;
-            return ShapeSheet.Queries.QueryGroups.QueryGroupMultiRow._GetCells<ConnectionPointCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(page, shapeids, query, query.GetCells);
         }
 
-        public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
+        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = ConnectionPointCells.lazy_query.Value;
-            return ShapeSheet.Queries.QueryGroups.QueryGroupMultiRow._GetCells<ConnectionPointCells, double>(shape, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Queries.CommonQueries.ConnectionPointCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Queries.CommonQueries.ConnectionPointCellsQuery>();
+        private static System.Lazy<ConnectionPointCellsQuery> lazy_query = new System.Lazy<ConnectionPointCellsQuery>();
 
 
     }

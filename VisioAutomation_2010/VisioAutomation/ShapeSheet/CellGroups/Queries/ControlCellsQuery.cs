@@ -2,9 +2,9 @@ using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
+namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ControlCellsQuery : Query
+    class ControlCellsQuery : CellGroupMultiRowQuery<Shapes.Controls.ControlCells, double>
     {
         public ColumnSubQuery CanGlue { get; set; }
         public ColumnSubQuery Tip { get; set; }
@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 
         public ControlCellsQuery()
         {
-            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionControls);
+            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionControls);
 
             this.CanGlue = sec.AddCell(SRCCON.Controls_CanGlue, nameof(SRCCON.Controls_CanGlue));
             this.Tip = sec.AddCell(SRCCON.Controls_Tip, nameof(SRCCON.Controls_Tip));
@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 
         }
 
-        public Shapes.Controls.ControlCells GetCells(ShapeSheet.CellData<double>[] row)
+        public override Shapes.Controls.ControlCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Shapes.Controls.ControlCells();
             cells.CanGlue = Extensions.CellDataMethods.ToInt(row[this.CanGlue]);

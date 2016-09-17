@@ -1,4 +1,4 @@
-namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
+namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public struct SRCFormulaPair
     {

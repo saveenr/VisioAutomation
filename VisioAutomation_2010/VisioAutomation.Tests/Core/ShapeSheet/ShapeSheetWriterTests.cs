@@ -71,10 +71,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Retrieve the values
             var surface = new ShapeSheetSurface(shape1);
-            var data = query.GetFormulasAndResults<double>(surface);
+            var data_formulas = query.GetFormulas(surface);
+            var data_results = query.GetResults<double>(surface);
 
             // Verify
-            AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
+            Assert.AreEqual("7", data_formulas.Cells[col_linepat]);
+            Assert.AreEqual(7, data_results.Cells[col_linepat]);
             page1.Delete(0);
         }
 
@@ -95,10 +97,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Retrieve the values
             var surface = new ShapeSheetSurface(shape1);
-            var data = query.GetFormulasAndResults<double>(surface);
+            var data_formulas = query.GetFormulas(surface);
+            var data_results = query.GetResults<double>(surface);
 
             // Verify
-            AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
+            Assert.AreEqual("7", data_formulas.Cells[col_linepat]);
+            Assert.AreEqual(7, data_results.Cells[col_linepat]);
             page1.Delete(0);
         }
 
@@ -169,11 +173,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Retrieve the values
             var surface = new ShapeSheetSurface(shape1);
-            var data = query.GetFormulasAndResults<double>(surface);
+            var data_formulas = query.GetFormulas(surface);
+            var data_results = query.GetResults<double>(surface);
 
             // Verify
-            AssertUtil.AreEqual("7", 7, data.Cells[col_linepat]);
-            AssertUtil.AreEqual("2 in", 2, data.Cells[col_pinx]);
+            Assert.AreEqual("7", data_formulas.Cells[col_linepat]);
+            Assert.AreEqual(7, data_results.Cells[col_linepat]);
+
+            Assert.AreEqual("2 in", data_formulas.Cells[col_pinx]);
+            Assert.AreEqual(2, data_results.Cells[col_pinx]);
             
             page1.Delete(0);
         }

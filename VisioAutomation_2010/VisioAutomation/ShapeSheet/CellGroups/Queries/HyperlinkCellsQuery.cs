@@ -1,9 +1,9 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
+namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class HyperlinkCellsQuery : Query
+    class HyperlinkCellsQuery : CellGroupMultiRowQuery<Shapes.Hyperlinks.HyperlinkCells, double>
     {
 
         public ColumnSubQuery Address { get; set; }
@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
 
         public HyperlinkCellsQuery()
         {
-            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionHyperlink);
+            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionHyperlink);
 
             this.Address = sec.AddCell(ShapeSheet.SRCConstants.Hyperlink_Address , nameof(ShapeSheet.SRCConstants.Hyperlink_Address));
             this.Default = sec.AddCell(ShapeSheet.SRCConstants.Hyperlink_Default, nameof(ShapeSheet.SRCConstants.Hyperlink_Default));
@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.Queries.CommonQueries
             this.SubAddress= sec.AddCell(ShapeSheet.SRCConstants.Hyperlink_SubAddress, nameof(ShapeSheet.SRCConstants.Hyperlink_SubAddress));
         }
 
-        public Shapes.Hyperlinks.HyperlinkCells GetCells(ShapeSheet.CellData<double>[] row)
+        public override Shapes.Hyperlinks.HyperlinkCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Shapes.Hyperlinks.HyperlinkCells();
 

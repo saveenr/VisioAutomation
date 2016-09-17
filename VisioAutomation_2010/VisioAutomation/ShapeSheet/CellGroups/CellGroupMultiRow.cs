@@ -1,12 +1,14 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Exceptions;
+using VisioAutomation.ShapeSheet.Queries;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
 using VisioAutomation.ShapeSheet.Writers;
 
-namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
+namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class QueryGroupMultiRow : QueryGroupBase
+    public abstract class CellGroupMultiRow : CellGroupBase
     {
         private static void verify_multirow_query(Query query)
         {
@@ -22,52 +24,42 @@ namespace VisioAutomation.ShapeSheet.Queries.QueryGroups
         }
 
 
-        protected static IList<List<T>> _GetCells<T, TResult>(
+        protected static List<List<TCellGroup>> _GetCells<TCellGroup, TResult>(
             IVisio.Page page,
             IList<int> shapeids,
             Query query,
-            System.Func<ShapeSheet.CellData<TResult>[], T> cell_data_to_object)
+            System.Func<ShapeSheet.CellData<TResult>[], TCellGroup> cell_data_to_object)
         {
-            QueryGroupMultiRow.verify_multirow_query(query);
+            CellGroupMultiRow.verify_multirow_query(query);
 
-            var list = new List<List<T>>(shapeids.Count);
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetFormulasAndResults<TResult>(surface, shapeids);
-
-            foreach (var data_for_shape in data_for_shapes)
-            {
-                var sec = data_for_shape.Sections[0];
-                var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, cell_data_to_object);
-                list.Add(sec_objects);
-            }
-
+            var list = new List<List<TCellGroup>>(shapeids.Count);
+            var objects = data_for_shapes.Select(d => CellGroupMultiRow.SectionRowsToObjects(d.Sections[0], cell_data_to_object));
+            list.AddRange(objects);
             return list;
         }
 
-        protected static IList<T> _GetCells<T, TResult>(
+        protected static List<TCellGroup> _GetCells<TCellGroup, TResult>(
             IVisio.Shape shape,
             Query query,
-            System.Func<ShapeSheet.CellData<TResult>[], T> cell_data_to_object)
+            System.Func<ShapeSheet.CellData<TResult>[], TCellGroup> cell_data_to_object)
         {
-            QueryGroupMultiRow.verify_multirow_query(query);
+            CellGroupMultiRow.verify_multirow_query(query);
 
             var surface = new ShapeSheetSurface(shape);
             var data_for_shape = query.GetFormulasAndResults<TResult>(surface);
             var sec = data_for_shape.Sections[0];
-            var sec_objects = QueryGroupMultiRow.SectionRowsToObjects(sec, cell_data_to_object);
+            var sec_objects = CellGroupMultiRow.SectionRowsToObjects(sec, cell_data_to_object);
             
             return sec_objects;
         }
 
-        private static List<T> SectionRowsToObjects<T, TResult>(SubQueryOutput<ShapeSheet.CellData<TResult>> sec, System.Func<ShapeSheet.CellData<TResult>[],T> cells_to_object)
+        private static List<TCellGroup> SectionRowsToObjects<TCellGroup, TResult>(SubQueryOutput<ShapeSheet.CellData<TResult>> sec, System.Func<ShapeSheet.CellData<TResult>[],TCellGroup> cells_to_object)
         {
-            int num_rows = sec.Rows.Count;
-            var sec_objects = new List<T>(num_rows);
-            foreach (var row in sec.Rows)
-            {
-                var obj = cells_to_object(row.Cells);
-                sec_objects.Add(obj);
-            }
+            var sec_objects = new List<TCellGroup>(sec.Rows.Count);
+            var objects = sec.Rows.Select(row => cells_to_object(row.Cells));
+            sec_objects.AddRange(objects);
             return sec_objects;
         }
 

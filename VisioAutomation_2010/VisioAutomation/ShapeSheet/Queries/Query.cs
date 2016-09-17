@@ -127,8 +127,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             if (this._subquery_shape_info.Count > 0)
             {
-                var subqueries = this._subquery_shape_info[shape_index];
-                return subqueries;
+                return this._subquery_shape_info[shape_index];
             }
             return null;
         }
