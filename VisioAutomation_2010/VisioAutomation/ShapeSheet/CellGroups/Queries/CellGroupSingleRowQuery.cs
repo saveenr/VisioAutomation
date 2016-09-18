@@ -21,7 +21,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             }
         }
 
-        public List<TCellGroup> GetCells(IVisio.Page page, IList<int> shapeids)
+        public List<TCellGroup> GetCellGroups(IVisio.Page page, IList<int> shapeids)
         {
             validate_query();
 
@@ -33,7 +33,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             return list;
         }
 
-        public TCellGroup GetCells(IVisio.Shape shape)
+        public TCellGroup GetCellGroup(IVisio.Shape shape)
         {
             validate_query();
             var surface = new ShapeSheetSurface(shape);

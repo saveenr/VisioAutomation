@@ -209,14 +209,13 @@ namespace VisioAutomation.Models.Layouts.Container
             var points = rects.Select(r => r.Center).ToList();
             var shapeids = Pages.PageHelper.DropManyU(page, masters, points);
 
-            var xfrm = new Shapes.XFormCells();
-
+            // Dropping takes care of the PinX and PinY
+            // Now set the Width's and Heights
             var writer = new FormulaWriterSIDSRC(points.Count*2);
             for (int i = 0; i < rects.Count(); i++)
             {
-                xfrm.Width = rects[i].Width;
-                xfrm.Height = rects[i].Height;
-                xfrm.SetFormulas(shapeids[i], writer);
+                writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SRCConstants.Width, rects[i].Width);
+                writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SRCConstants.Height, rects[i].Height);
             }
             writer.Commit(page);
 

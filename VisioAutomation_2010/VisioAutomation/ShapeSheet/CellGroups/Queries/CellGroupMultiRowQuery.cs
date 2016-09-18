@@ -19,31 +19,28 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             }
         }
 
-        public List<List<TCellGroup>> GetCells(
-            Microsoft.Office.Interop.Visio.Page page,
-            IList<int> shapeids)
+        public List<List<TCellGroup>> GetCellGroups(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             this.validate_query();
-
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetFormulasAndResults<TResult>(surface, shapeids);
             var list = new List<List<TCellGroup>>(shapeids.Count);
-            var objects = data_for_shapes.Select(d => this.SectionRowsToObjects(d.Sections[0]));
+            var objects = data_for_shapes.Select(d => this.SubQueryRowsToCellGroups(d.Sections[0]));
             list.AddRange(objects);
             return list;
         }
 
-        public List<TCellGroup> GetCells(Microsoft.Office.Interop.Visio.Shape shape)
+        public List<TCellGroup> GetCellGroups(Microsoft.Office.Interop.Visio.Shape shape)
         {
             this.validate_query();
             var surface = new ShapeSheetSurface(shape);
             var data_for_shape = query.GetFormulasAndResults<TResult>(surface);
             var sec = data_for_shape.Sections[0];
-            var cellgroups = this.SectionRowsToObjects(sec);
+            var cellgroups = this.SubQueryRowsToCellGroups(sec);
             return cellgroups;
         }
 
-        private List<TCellGroup> SectionRowsToObjects(VisioAutomation.ShapeSheet.Queries.Outputs.SubQueryOutput<ShapeSheet.CellData<TResult>> subquery_output)
+        private List<TCellGroup> SubQueryRowsToCellGroups(VisioAutomation.ShapeSheet.Queries.Outputs.SubQueryOutput<ShapeSheet.CellData<TResult>> subquery_output)
         {
             var list_celldata = subquery_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
             var cellgroups = new List<TCellGroup>(subquery_output.Rows.Count);

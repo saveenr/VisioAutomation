@@ -25,8 +25,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public ColumnQuery DisplayLevel { get; set; }
         public ColumnQuery Relationships { get; set; }
 
-        public ShapeLayoutCellsQuery() :
-            base()
+        public ShapeLayoutCellsQuery() 
         {
             this.ConFixedCode = this.query.AddCell(SRCCON.ConFixedCode, nameof(SRCCON.ConFixedCode));
             this.ConLineJumpCode = this.query.AddCell(SRCCON.ConLineJumpCode, nameof(SRCCON.ConLineJumpCode));

@@ -3,7 +3,6 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
-
 {
     class LockCellsQuery : CellGroupSingleRowQuery<Shapes.LockCells, double>
     {
@@ -30,11 +29,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         public LockCellsQuery()
         {
-
-
-
-
-
             this.LockAspect = this.query.AddCell(SRCCON.LockAspect, nameof(SRCCON.LockAspect));
             this.LockBegin = this.query.AddCell(SRCCON.LockBegin, nameof(SRCCON.LockBegin));
             this.LockCalcWH = this.query.AddCell(SRCCON.LockCalcWH, nameof(SRCCON.LockCalcWH));
@@ -55,8 +49,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.LockThemeEffects = this.query.AddCell(SRCCON.LockThemeEffects, nameof(SRCCON.LockThemeEffects));
             this.LockVtxEdit = this.query.AddCell(SRCCON.LockVtxEdit, nameof(SRCCON.LockVtxEdit));
             this.LockWidth = this.query.AddCell(SRCCON.LockWidth, nameof(SRCCON.LockWidth));
-
-
         }
 
         public override Shapes.LockCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)

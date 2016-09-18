@@ -32,35 +32,9 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var snapsize = new Drawing.Size(w, h);
                 var minsize = new Drawing.Size(w, h);
-                SnapCommands.SnapSize(target_ids, snapsize, minsize);
+                ArrangeHelper.SnapSize(target_ids, snapsize, minsize);
             }
         }
-
-        private static void SnapSize(TargetShapeIDs target, Drawing.Size snapsize, Drawing.Size minsize)
-        {
-            var input_xfrms = Shapes.XFormCells.GetCells(target.Page, target.ShapeIDs);
-            var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
-
-            var grid = new SnappingGrid(snapsize);
-            foreach (var input_xfrm in input_xfrms)
-            {
-                var inut_size = new Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result);
-                var snapped_size = grid.Snap(inut_size);
-                double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
-                double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
-                var new_size = new Drawing.Size(max_w, max_h);
-
-                var output_xfrm = new Shapes.XFormCells();
-                output_xfrm.Width = new_size.Width;
-                output_xfrm.Height = new_size.Height;
-
-                output_xfrms.Add(output_xfrm);
-            }
-
-            // Now apply them
-            ArrangeHelper.update_xfrms(target, output_xfrms);
-        }
-
 
         public void SnapCorner(TargetShapes targets, double w, double h, SnapCornerPosition corner)
         {

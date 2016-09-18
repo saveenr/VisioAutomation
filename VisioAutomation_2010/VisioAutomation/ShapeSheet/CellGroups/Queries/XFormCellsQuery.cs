@@ -13,7 +13,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public ColumnQuery LocPinX { get; set; }
         public ColumnQuery LocPinY { get; set; }
         public ColumnQuery Angle { get; set; }
-
         
         public XFormCellsQuery() 
         {
@@ -28,16 +27,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         public override XFormCells CellDataToCellGroup(CellData<double>[] row)
         {
-            var cells = new Shapes.XFormCells
-            {
-                PinX = row[this.PinX],
-                PinY = row[this.PinY],
-                LocPinX = row[this.LocPinX],
-                LocPinY = row[this.LocPinY],
-                Width = row[this.Width],
-                Height = row[this.Height],
-                Angle = row[this.Angle]
-            };
+            var cells = new Shapes.XFormCells();
+            cells.PinX = row[this.PinX];
+            cells.PinY = row[this.PinY];
+            cells.LocPinX = row[this.LocPinX];
+            cells.LocPinY = row[this.LocPinY];
+            cells.Width = row[this.Width];
+            cells.Height = row[this.Height];
+            cells.Angle = row[this.Angle];
             return cells;
         }
     }

@@ -42,10 +42,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.Frame= row[this.Frame].Formula;
             cells.SortKey= row[this.SortKey].Formula;
             cells.SubAddress= row[this.SubAddress].Formula;
-
             cells.NewWindow = row[this.NewWindow].ToBool();
-            cells.Default = CellDataMethods.ToBool(row[this.Default].Formula);
-            cells.Invisible = CellDataMethods.ToBool(row[this.Invisible].Formula);
+            cells.Default = row[this.Default].ToBool();
+            cells.Invisible = row[this.Invisible].ToBool();
 
             return cells;
         }
