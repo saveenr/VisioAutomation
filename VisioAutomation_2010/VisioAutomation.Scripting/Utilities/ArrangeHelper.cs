@@ -107,13 +107,10 @@ namespace VisioAutomation.Scripting.Utilities
  
         internal static void update_xfrms(TargetShapeIDs target, IList<Shapes.XFormCells> xfrms)
         {
-
             var writer = new FormulaWriterSIDSRC();
             for (int i = 0; i < target.ShapeIDs.Count; i++)
             {
-                var shape_id = target.ShapeIDs[i];
-                var xfrm = xfrms[i];
-                xfrm.SetFormulas((short)shape_id, writer);
+                xfrms[i].SetFormulas((short)target.ShapeIDs[i], writer);
             }
             writer.Commit(target.Page);
         }
@@ -217,7 +214,7 @@ namespace VisioAutomation.Scripting.Utilities
                 double new_w = System.Math.Max(snapped_size.Width, minsize.Width);
                 double new_h = System.Math.Max(snapped_size.Height, minsize.Height);
                 var output_size = new Drawing.Size(new_w, new_h);
-                
+
                 // Output the new size for the shape if the size of the shape changed
                 bool different_widths = (old_w != new_w);
                 bool different_heights = (old_h != new_h);
