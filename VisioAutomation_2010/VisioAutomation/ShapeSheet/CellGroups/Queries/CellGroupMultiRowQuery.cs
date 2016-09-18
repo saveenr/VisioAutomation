@@ -19,12 +19,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             }
         }
 
-        public List<List<TCellGroup>> GetCells(
-            Microsoft.Office.Interop.Visio.Page page,
-            IList<int> shapeids)
+        public List<List<TCellGroup>> GetCellGroups(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             this.validate_query();
-
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetFormulasAndResults<TResult>(surface, shapeids);
             var list = new List<List<TCellGroup>>(shapeids.Count);
@@ -33,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             return list;
         }
 
-        public List<TCellGroup> GetCells(Microsoft.Office.Interop.Visio.Shape shape)
+        public List<TCellGroup> GetCellGroups(Microsoft.Office.Interop.Visio.Shape shape)
         {
             this.validate_query();
             var surface = new ShapeSheetSurface(shape);

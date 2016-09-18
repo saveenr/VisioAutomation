@@ -32,13 +32,13 @@ namespace VisioAutomation.Shapes
         public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = XFormCells.lazy_query.Value;
-            return query.GetCells(page, shapeids);
+            return query.GetCellGroups(page, shapeids);
         }
 
         public static XFormCells GetCells(IVisio.Shape shape)
         {
             var query = XFormCells.lazy_query.Value;
-            return query.GetCells(shape);
+            return query.GetCellGroup(shape);
         }
 
         private static System.Lazy<XFormCellsQuery> lazy_query = new System.Lazy<XFormCellsQuery>();

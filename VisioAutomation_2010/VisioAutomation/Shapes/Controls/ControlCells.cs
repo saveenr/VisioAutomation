@@ -35,13 +35,13 @@ namespace VisioAutomation.Shapes.Controls
         public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ControlCells.lazy_query.Value;
-            return query.GetCells(page, shapeids);
+            return query.GetCellGroups(page, shapeids);
         }
 
         public static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = ControlCells.lazy_query.Value;
-            return query.GetCells(shape);
+            return query.GetCellGroups(shape);
         }
 
         private static System.Lazy<ControlCellsQuery> lazy_query = new System.Lazy<ControlCellsQuery>();
