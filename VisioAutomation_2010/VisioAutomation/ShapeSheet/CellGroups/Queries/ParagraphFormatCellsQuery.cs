@@ -1,6 +1,7 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON=VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -49,13 +50,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.SpacingAfter = row[this.SpaceAfter];
             cells.SpacingBefore = row[this.SpaceBefore];
             cells.SpacingLine = row[this.SpaceLine];
-            cells.HorizontalAlign = Extensions.CellDataMethods.ToInt(row[this.HorzAlign]);
-            cells.Bullet = Extensions.CellDataMethods.ToInt(row[this.Bullet]);
-            cells.BulletFont = Extensions.CellDataMethods.ToInt(row[this.BulletFont]);
-            cells.BulletFontSize = Extensions.CellDataMethods.ToInt(row[this.BulletFontSize]);
-            cells.LocBulletFont = Extensions.CellDataMethods.ToInt(row[this.LocalizeBulletFont]);
+            cells.HorizontalAlign = row[this.HorzAlign].ToInt();
+            cells.Bullet = row[this.Bullet].ToInt();
+            cells.BulletFont = row[this.BulletFont].ToInt();
+            cells.BulletFontSize = row[this.BulletFontSize].ToInt();
+            cells.LocBulletFont = row[this.LocalizeBulletFont].ToInt();
             cells.TextPosAfterBullet = row[this.TextPosAfterBullet];
-            cells.Flags = Extensions.CellDataMethods.ToInt(row[this.Flags]);
+            cells.Flags = row[this.Flags].ToInt();
             cells.BulletString = ""; // TODO: Figure out some way of getting this
 
             return cells;

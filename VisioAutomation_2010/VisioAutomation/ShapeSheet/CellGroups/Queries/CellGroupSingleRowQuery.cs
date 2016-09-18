@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -20,9 +21,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             }
         }
 
-        public List<TCellGroup> GetCells(
-            Microsoft.Office.Interop.Visio.Page page,
-            IList<int> shapeids)
+        public List<TCellGroup> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             validate_query();
 
@@ -34,8 +33,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             return list;
         }
 
-        public TCellGroup GetCells(
-            Microsoft.Office.Interop.Visio.Shape shape)
+        public TCellGroup GetCells(IVisio.Shape shape)
         {
             validate_query();
             var surface = new ShapeSheetSurface(shape);

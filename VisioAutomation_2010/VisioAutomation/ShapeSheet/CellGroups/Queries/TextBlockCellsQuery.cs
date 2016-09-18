@@ -1,5 +1,6 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -51,10 +52,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.RightMargin = row[this.RightMargin];
             cells.TopMargin = row[this.TopMargin];
             cells.DefaultTabStop = row[this.DefaultTabStop];
-            cells.TextBkgnd = Extensions.CellDataMethods.ToInt(row[this.TextBkgnd]);
+            cells.TextBkgnd = row[this.TextBkgnd].ToInt();
             cells.TextBkgndTrans = row[this.TextBkgndTrans];
-            cells.TextDirection = Extensions.CellDataMethods.ToInt(row[this.TextDirection]);
-            cells.VerticalAlign = Extensions.CellDataMethods.ToInt(row[this.VerticalAlign]);
+            cells.TextDirection = row[this.TextDirection].ToInt();
+            cells.VerticalAlign = row[this.VerticalAlign].ToInt();
             cells.TxtPinX = row[this.TxtPinX];
             cells.TxtPinY = row[this.TxtPinY];
             cells.TxtLocPinX = row[this.TxtLocPinX];

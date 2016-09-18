@@ -1,5 +1,6 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -52,24 +53,24 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public override Shapes.Layout.ShapeLayoutCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Shapes.Layout.ShapeLayoutCells();
-            cells.ConFixedCode = Extensions.CellDataMethods.ToInt(row[this.ConFixedCode]);
-            cells.ConLineJumpCode = Extensions.CellDataMethods.ToInt(row[this.ConLineJumpCode]);
-            cells.ConLineJumpDirX = Extensions.CellDataMethods.ToInt(row[this.ConLineJumpDirX]);
-            cells.ConLineJumpDirY = Extensions.CellDataMethods.ToInt(row[this.ConLineJumpDirY]);
-            cells.ConLineJumpStyle = Extensions.CellDataMethods.ToInt(row[this.ConLineJumpStyle]);
-            cells.ConLineRouteExt = Extensions.CellDataMethods.ToInt(row[this.ConLineRouteExt]);
-            cells.ShapeFixedCode = Extensions.CellDataMethods.ToInt(row[this.ShapeFixedCode]);
-            cells.ShapePermeablePlace = Extensions.CellDataMethods.ToInt(row[this.ShapePermeablePlace]);
-            cells.ShapePermeableX = Extensions.CellDataMethods.ToInt(row[this.ShapePermeableX]);
-            cells.ShapePermeableY = Extensions.CellDataMethods.ToInt(row[this.ShapePermeableY]);
-            cells.ShapePlaceFlip = Extensions.CellDataMethods.ToInt(row[this.ShapePlaceFlip]);
-            cells.ShapePlaceStyle = Extensions.CellDataMethods.ToInt(row[this.ShapePlaceStyle]);
-            cells.ShapePlowCode = Extensions.CellDataMethods.ToInt(row[this.ShapePlowCode]);
-            cells.ShapeRouteStyle = Extensions.CellDataMethods.ToInt(row[this.ShapeRouteStyle]);
-            cells.ShapeSplit = Extensions.CellDataMethods.ToInt(row[this.ShapeSplit]);
-            cells.ShapeSplittable = Extensions.CellDataMethods.ToInt(row[this.ShapeSplittable]);
-            cells.DisplayLevel = Extensions.CellDataMethods.ToInt(row[this.DisplayLevel]);
-            cells.Relationships = Extensions.CellDataMethods.ToInt(row[this.Relationships]);
+            cells.ConFixedCode = row[this.ConFixedCode].ToInt();
+            cells.ConLineJumpCode = row[this.ConLineJumpCode].ToInt();
+            cells.ConLineJumpDirX = row[this.ConLineJumpDirX].ToInt();
+            cells.ConLineJumpDirY = row[this.ConLineJumpDirY].ToInt();
+            cells.ConLineJumpStyle = row[this.ConLineJumpStyle].ToInt();
+            cells.ConLineRouteExt = row[this.ConLineRouteExt].ToInt();
+            cells.ShapeFixedCode = row[this.ShapeFixedCode].ToInt();
+            cells.ShapePermeablePlace = row[this.ShapePermeablePlace].ToInt();
+            cells.ShapePermeableX = row[this.ShapePermeableX].ToInt();
+            cells.ShapePermeableY = row[this.ShapePermeableY].ToInt();
+            cells.ShapePlaceFlip = row[this.ShapePlaceFlip].ToInt();
+            cells.ShapePlaceStyle = row[this.ShapePlaceStyle].ToInt();
+            cells.ShapePlowCode = row[this.ShapePlowCode].ToInt();
+            cells.ShapeRouteStyle = row[this.ShapeRouteStyle].ToInt();
+            cells.ShapeSplit = row[this.ShapeSplit].ToInt();
+            cells.ShapeSplittable = row[this.ShapeSplittable].ToInt();
+            cells.DisplayLevel = row[this.DisplayLevel].ToInt();
+            cells.Relationships = row[this.Relationships].ToInt();
             return cells;
         }
     }

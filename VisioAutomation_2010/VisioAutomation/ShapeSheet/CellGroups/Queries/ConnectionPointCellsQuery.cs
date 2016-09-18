@@ -1,12 +1,12 @@
 using VisioAutomation.Shapes.ConnectionPoints;
-using VisioAutomation.ShapeSheet.Queries;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ConnectionPointCellsQuery : Query
+    class ConnectionPointCellsQuery : CellGroupMultiRowQuery<ConnectionPointCells, double>
     {
         public ColumnSubQuery DirX { get; set; }
         public ColumnSubQuery DirY { get; set; }
@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         public ConnectionPointCellsQuery()
         {
-            var sec = this.AddSubQuery(IVisio.VisSectionIndices.visSectionConnectionPts);
+            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionConnectionPts);
 
             this.DirX = sec.AddCell(SRCCON.Connections_DirX, nameof(SRCCON.Connections_DirX));
             this.DirY = sec.AddCell(SRCCON.Connections_DirY, nameof(SRCCON.Connections_DirY));
@@ -26,14 +26,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public ConnectionPointCells GetCells(ShapeSheet.CellData<double>[] row)
+        public override ConnectionPointCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new ConnectionPointCells();
             cells.X = row[this.X];
             cells.Y = row[this.Y];
-            cells.DirX = Extensions.CellDataMethods.ToInt(row[this.DirX]);
-            cells.DirY = Extensions.CellDataMethods.ToInt(row[this.DirY]);
-            cells.Type = Extensions.CellDataMethods.ToInt(row[this.Type]);
+            cells.DirX = row[this.DirX].ToInt();
+            cells.DirY = row[this.DirY].ToInt();
+            cells.Type = row[this.Type].ToInt();
 
             return cells;
         }

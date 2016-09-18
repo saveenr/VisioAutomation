@@ -1,6 +1,7 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -39,15 +40,15 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         {
             var cells = new Shapes.CustomProperties.CustomPropertyCells();
             cells.Value = row[this.Value];
-            cells.Calendar = Extensions.CellDataMethods.ToInt(row[this.Calendar]);
+            cells.Calendar = row[this.Calendar].ToInt();
             cells.Format = row[this.Format];
-            cells.Invisible = Extensions.CellDataMethods.ToInt(row[this.Invis]);
+            cells.Invisible = row[this.Invis].ToInt();
             cells.Label = row[this.Label];
-            cells.LangId = Extensions.CellDataMethods.ToInt(row[this.LangID]);
+            cells.LangId = row[this.LangID].ToInt();
             cells.Prompt = row[this.Prompt];
-            cells.SortKey = Extensions.CellDataMethods.ToInt(row[this.SortKey]);
-            cells.Type = Extensions.CellDataMethods.ToInt(row[this.Type]);
-            cells.Ask = Extensions.CellDataMethods.ToBool(row[this.Ask]);
+            cells.SortKey = row[this.SortKey].ToInt();
+            cells.Type = row[this.Type].ToInt();
+            cells.Ask = row[this.Ask].ToBool();
             return cells;
         }
     }
