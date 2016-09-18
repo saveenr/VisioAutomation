@@ -2,6 +2,7 @@ using VisioAutomation.Shapes.ConnectionPoints;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -30,9 +31,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             var cells = new ConnectionPointCells();
             cells.X = row[this.X];
             cells.Y = row[this.Y];
-            cells.DirX = Extensions.CellDataMethods.ToInt(row[this.DirX]);
-            cells.DirY = Extensions.CellDataMethods.ToInt(row[this.DirY]);
-            cells.Type = Extensions.CellDataMethods.ToInt(row[this.Type]);
+            cells.DirX = row[this.DirX].ToInt();
+            cells.DirY = row[this.DirY].ToInt();
+            cells.Type = row[this.Type].ToInt();
 
             return cells;
         }

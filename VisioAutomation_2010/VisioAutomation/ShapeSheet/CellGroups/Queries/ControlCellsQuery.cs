@@ -1,6 +1,7 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -33,14 +34,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public override Shapes.Controls.ControlCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Shapes.Controls.ControlCells();
-            cells.CanGlue = Extensions.CellDataMethods.ToInt(row[this.CanGlue]);
-            cells.Tip = Extensions.CellDataMethods.ToInt(row[this.Tip]);
+            cells.CanGlue = row[this.CanGlue].ToInt();
+            cells.Tip = row[this.Tip].ToInt();
             cells.X = row[this.X];
             cells.Y = row[this.Y];
-            cells.YBehavior = Extensions.CellDataMethods.ToInt(row[this.YBehavior]);
-            cells.XBehavior = Extensions.CellDataMethods.ToInt(row[this.XBehavior]);
-            cells.XDynamics = Extensions.CellDataMethods.ToInt(row[this.XDynamics]);
-            cells.YDynamics = Extensions.CellDataMethods.ToInt(row[this.YDynamics]);
+            cells.YBehavior = row[this.YBehavior].ToInt();
+            cells.XBehavior = row[this.XBehavior].ToInt();
+            cells.XDynamics = row[this.XDynamics].ToInt();
+            cells.YDynamics = row[this.YDynamics].ToInt();
             return cells;
         }
     }

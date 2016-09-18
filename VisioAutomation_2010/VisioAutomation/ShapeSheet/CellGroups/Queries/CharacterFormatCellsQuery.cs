@@ -1,6 +1,7 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -61,29 +62,29 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public override Text.CharacterCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Text.CharacterCells();
-            cells.Color = Extensions.CellDataMethods.ToInt(row[this.Color]);
+            cells.Color = row[this.Color].ToInt();
             cells.Transparency = row[this.Trans];
-            cells.Font = Extensions.CellDataMethods.ToInt(row[this.Font]);
+            cells.Font = row[this.Font].ToInt();
             cells.Size = row[this.Size];
-            cells.Style = Extensions.CellDataMethods.ToInt(row[this.Style]);
-            cells.AsianFont = Extensions.CellDataMethods.ToInt(row[this.AsianFont]);
-            cells.AsianFont = Extensions.CellDataMethods.ToInt(row[this.AsianFont]);
-            cells.Case = Extensions.CellDataMethods.ToInt(row[this.Case]);
-            cells.ComplexScriptFont = Extensions.CellDataMethods.ToInt(row[this.ComplexScriptFont]);
+            cells.Style = row[this.Style].ToInt();
+            cells.AsianFont = row[this.AsianFont].ToInt();
+            cells.AsianFont = row[this.AsianFont].ToInt();
+            cells.Case = row[this.Case].ToInt();
+            cells.ComplexScriptFont = row[this.ComplexScriptFont].ToInt();
             cells.ComplexScriptSize = row[this.ComplexScriptSize];
-            cells.DoubleStrikeThrough = Extensions.CellDataMethods.ToBool(row[this.DoubleStrikethrough]);
-            cells.DoubleUnderline = Extensions.CellDataMethods.ToBool(row[this.DoubleUnderline]);
+            cells.DoubleStrikeThrough = row[this.DoubleStrikethrough].ToBool();
+            cells.DoubleUnderline = row[this.DoubleUnderline].ToBool();
             cells.FontScale = row[this.FontScale];
-            cells.LangID = Extensions.CellDataMethods.ToInt(row[this.LangID]);
+            cells.LangID = row[this.LangID].ToInt();
             cells.Letterspace = row[this.Letterspace];
-            cells.Locale = Extensions.CellDataMethods.ToInt(row[this.Locale]);
-            cells.LocalizeFont = Extensions.CellDataMethods.ToInt(row[this.LocalizeFont]);
-            cells.Overline = Extensions.CellDataMethods.ToBool(row[this.Overline]);
-            cells.Perpendicular = Extensions.CellDataMethods.ToBool(row[this.Perpendicular]);
-            cells.Pos = Extensions.CellDataMethods.ToInt(row[this.Pos]);
-            cells.RTLText = Extensions.CellDataMethods.ToInt(row[this.RTLText]);
-            cells.Strikethru = Extensions.CellDataMethods.ToBool(row[this.Strikethru]);
-            cells.UseVertical = Extensions.CellDataMethods.ToInt(row[this.UseVertical]);
+            cells.Locale = row[this.Locale].ToInt();
+            cells.LocalizeFont = row[this.LocalizeFont].ToInt();
+            cells.Overline = row[this.Overline].ToBool();
+            cells.Perpendicular = row[this.Perpendicular].ToBool();
+            cells.Pos = row[this.Pos].ToInt();
+            cells.RTLText = row[this.RTLText].ToInt();
+            cells.Strikethru = row[this.Strikethru].ToBool();
+            cells.UseVertical = row[this.UseVertical].ToInt();
 
             return cells;
         }

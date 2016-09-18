@@ -1,5 +1,6 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -42,9 +43,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.SortKey= row[this.SortKey].Formula;
             cells.SubAddress= row[this.SubAddress].Formula;
 
-            cells.NewWindow = Extensions.CellDataMethods.ToBool(row[this.NewWindow]);
-            cells.Default = Extensions.CellDataMethods.ToBool(row[this.Default].Formula);
-            cells.Invisible = Extensions.CellDataMethods.ToBool(row[this.Invisible].Formula);
+            cells.NewWindow = row[this.NewWindow].ToBool();
+            cells.Default = CellDataMethods.ToBool(row[this.Default].Formula);
+            cells.Invisible = CellDataMethods.ToBool(row[this.Invisible].Formula);
 
             return cells;
         }

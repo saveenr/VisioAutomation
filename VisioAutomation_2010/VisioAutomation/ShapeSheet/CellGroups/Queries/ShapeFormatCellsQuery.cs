@@ -1,5 +1,6 @@
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
@@ -66,29 +67,29 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public override Shapes.FormatCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
             var cells = new Shapes.FormatCells();
-            cells.FillBkgnd = Extensions.CellDataMethods.ToInt(row[this.FillBkgnd]);
+            cells.FillBkgnd = row[this.FillBkgnd].ToInt();
             cells.FillBkgndTrans = row[this.FillBkgndTrans];
-            cells.FillForegnd = Extensions.CellDataMethods.ToInt(row[this.FillForegnd]);
+            cells.FillForegnd = row[this.FillForegnd].ToInt();
             cells.FillForegndTrans = row[this.FillForegndTrans];
-            cells.FillPattern = Extensions.CellDataMethods.ToInt(row[this.FillPattern]);
+            cells.FillPattern = row[this.FillPattern].ToInt();
             cells.ShapeShdwObliqueAngle = row[this.ShapeShdwObliqueAngle];
             cells.ShapeShdwOffsetX = row[this.ShapeShdwOffsetX];
             cells.ShapeShdwOffsetY = row[this.ShapeShdwOffsetY];
             cells.ShapeShdwScaleFactor = row[this.ShapeShdwScaleFactor];
-            cells.ShapeShdwType = Extensions.CellDataMethods.ToInt(row[this.ShapeShdwType]);
-            cells.ShdwBkgnd = Extensions.CellDataMethods.ToInt(row[this.ShdwBkgnd]);
+            cells.ShapeShdwType = row[this.ShapeShdwType].ToInt();
+            cells.ShdwBkgnd = row[this.ShdwBkgnd].ToInt();
             cells.ShdwBkgndTrans = row[this.ShdwBkgndTrans];
-            cells.ShdwForegnd = Extensions.CellDataMethods.ToInt(row[this.ShdwForegnd]);
+            cells.ShdwForegnd = row[this.ShdwForegnd].ToInt();
             cells.ShdwForegndTrans = row[this.ShdwForegndTrans];
-            cells.ShdwPattern = Extensions.CellDataMethods.ToInt(row[this.ShdwPattern]);
-            cells.BeginArrow = Extensions.CellDataMethods.ToInt(row[this.BeginArrow]);
+            cells.ShdwPattern = row[this.ShdwPattern].ToInt();
+            cells.BeginArrow = row[this.BeginArrow].ToInt();
             cells.BeginArrowSize = row[this.BeginArrowSize];
-            cells.EndArrow = Extensions.CellDataMethods.ToInt(row[this.EndArrow]);
+            cells.EndArrow = row[this.EndArrow].ToInt();
             cells.EndArrowSize = row[this.EndArrowSize];
-            cells.LineCap = Extensions.CellDataMethods.ToInt(row[this.LineCap]);
-            cells.LineColor = Extensions.CellDataMethods.ToInt(row[this.LineColor]);
+            cells.LineCap = row[this.LineCap].ToInt();
+            cells.LineColor = row[this.LineColor].ToInt();
             cells.LineColorTrans = row[this.LineColorTrans];
-            cells.LinePattern = Extensions.CellDataMethods.ToInt(row[this.LinePattern]);
+            cells.LinePattern = row[this.LinePattern].ToInt();
             cells.LineWeight = row[this.LineWeight];
             cells.Rounding = row[this.Rounding];
             return cells;
