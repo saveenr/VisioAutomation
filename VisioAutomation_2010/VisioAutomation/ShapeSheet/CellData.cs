@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet
             return new CellData<TResult>(formula, default(TResult));
         }
 
-        public static CellData<TResult>[] Combine(TResult[] results, string[] formulas)
+        public static CellData<TResult>[] Combine(string[] formulas, TResult[] results)
         {
             int n = results.Length;
 

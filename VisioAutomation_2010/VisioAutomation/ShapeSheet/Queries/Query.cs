@@ -69,7 +69,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             var unitcodes = this._build_unit_code_array(1);
             var formulas = QueryHelpers.GetFormulasU_SRC(surface, srcstream);
             var results = QueryHelpers.GetResults_SRC<TResult>(surface, srcstream, unitcodes);
-            var combined_data = CellData<TResult>.Combine(results, formulas);
+            var combined_data = CellData<TResult>.Combine(formulas, results);
 
             var shape_index = 0;
             var cursor = 0;
@@ -102,7 +102,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             var unitcodes = this._build_unit_code_array(shapeids.Count);
             var results = QueryHelpers.GetResults_SIDSRC<TResult>(surface, srcstream, unitcodes);
             var formulas  = QueryHelpers.GetFormulasU_SIDSRC(surface, srcstream);
-            var combined_data = CellData <TResult>.Combine(results, formulas);
+            var combined_data = CellData <TResult>.Combine(formulas, results);
             var r = this._create_outputs_for_shapes(shapeids, combined_data);
             return r;
         }
