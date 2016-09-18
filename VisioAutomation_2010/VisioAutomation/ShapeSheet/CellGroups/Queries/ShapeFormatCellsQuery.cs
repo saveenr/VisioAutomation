@@ -60,8 +60,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.LinePattern = this.query.AddCell(SRCCON.LinePattern, nameof(SRCCON.LinePattern));
             this.LineWeight = this.query.AddCell(SRCCON.LineWeight, nameof(SRCCON.LineWeight));
             this.Rounding = this.query.AddCell(SRCCON.Rounding, nameof(SRCCON.Rounding));
-
-
         }
 
         public override Shapes.FormatCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)

@@ -148,7 +148,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         public override Pages.PageCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
         {
-
             var cells = new Pages.PageCells();
             cells.PageLeftMargin = row[this.PageLeftMargin];
             cells.CenterX = row[this.CenterX];
@@ -219,6 +218,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.DrawingResizeType = row[this.DrawingResizeType].ToInt();
             return cells;
         }
-
     }
 }
