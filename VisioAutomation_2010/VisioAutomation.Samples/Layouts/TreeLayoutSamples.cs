@@ -1,4 +1,4 @@
-﻿using VisioAutomation.Models.Dom;
+﻿using VADOM = VisioAutomation.Models.Dom;
 using VA = VisioAutomation;
 using TREEMODEL = VisioAutomation.Models.Layouts.Tree;
 
@@ -38,7 +38,7 @@ namespace VisioAutomationSamples
 
             foreach (var tn in t.Nodes)
             {
-                var cells = new ShapeCells();
+                var cells = new VADOM.ShapeCells();
                 tn.Cells = cells;
 
                 cells.ParaHorizontalAlign = 0; // align text to left
@@ -49,7 +49,7 @@ namespace VisioAutomationSamples
                 cells.CharColor = "rgb(255,0,0)";
             }
 
-            // TODO: Complete this sample
+            t.Render(page1);
         }
     }
 
