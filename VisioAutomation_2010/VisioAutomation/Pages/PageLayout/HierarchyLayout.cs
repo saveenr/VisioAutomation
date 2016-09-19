@@ -16,7 +16,7 @@ namespace VisioAutomation.Pages.PageLayout
             this.VerticalAlignment = VerticalAlignment.Middle;
         }
 
-        protected override void SetPageCells(PageCells pagecells)
+        protected override void SetPageCells(PageLayoutFormulas pagecells)
         {
             base.SetPageCells(pagecells);
             pagecells.PlaceStyle = (int) HierarchyLayout.GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);

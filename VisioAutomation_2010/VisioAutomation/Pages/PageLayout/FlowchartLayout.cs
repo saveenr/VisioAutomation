@@ -13,7 +13,7 @@ namespace VisioAutomation.Pages.PageLayout
             this.Direction = Direction.TopToBottom;
         }
 
-        protected override void SetPageCells(PageCells pagecells)
+        protected override void SetPageCells(PageLayoutFormulas pagecells)
         {
             base.SetPageCells(pagecells);
             pagecells.PlaceStyle = (int) FlowchartLayout.GetPlaceStyle(this.Direction);
