@@ -8,6 +8,7 @@ namespace VisioAutomation.Text
         public IList<CharacterCells> CharacterFormats { get; private set; }
         public IList<ParagraphCells> ParagraphFormats { get; private set; }
         public TextBlockCells TextBlock { get; private set; }
+        public TextXFormCells TextXForm { get; private set; }
         public IList<TextRun> CharacterTextRuns { get; private set; }
         public IList<TextRun> ParagraphTextRuns { get; private set; }
         public IList<TabStop> TabStops { get; private set; }
@@ -70,6 +71,7 @@ namespace VisioAutomation.Text
             cells.CharacterFormats = CharacterCells.GetCells(shape);
             cells.ParagraphFormats = ParagraphCells.GetCells(shape);
             cells.TextBlock = TextBlockCells.GetCells(shape);
+            cells.TextXForm = TextXFormCells.GetCells(shape);
             cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
             cells.TabStops = TabStopHelper.GetTabStops(shape);

@@ -15,13 +15,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public ColumnQuery TextBkgndTrans { get; set; }
         public ColumnQuery TextDirection { get; set; }
         public ColumnQuery VerticalAlign { get; set; }
-        public ColumnQuery TxtWidth { get; set; }
-        public ColumnQuery TxtHeight { get; set; }
-        public ColumnQuery TxtPinX { get; set; }
-        public ColumnQuery TxtPinY { get; set; }
-        public ColumnQuery TxtLocPinX { get; set; }
-        public ColumnQuery TxtLocPinY { get; set; }
-        public ColumnQuery TxtAngle { get; set; }
 
         public TextBlockCellsQuery()
         {
@@ -34,13 +27,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.TextBkgndTrans = this.query.AddCell(SRCCON.TextBkgndTrans, nameof(SRCCON.TextBkgndTrans));
             this.TextDirection = this.query.AddCell(SRCCON.TextDirection, nameof(SRCCON.TextDirection));
             this.VerticalAlign = this.query.AddCell(SRCCON.VerticalAlign, nameof(SRCCON.VerticalAlign));
-            this.TxtPinX = this.query.AddCell(SRCCON.TxtPinX, nameof(SRCCON.TxtPinX));
-            this.TxtPinY = this.query.AddCell(SRCCON.TxtPinY, nameof(SRCCON.TxtPinY));
-            this.TxtLocPinX = this.query.AddCell(SRCCON.TxtLocPinX, nameof(SRCCON.TxtLocPinX));
-            this.TxtLocPinY = this.query.AddCell(SRCCON.TxtLocPinY, nameof(SRCCON.TxtLocPinY));
-            this.TxtWidth = this.query.AddCell(SRCCON.TxtWidth, nameof(SRCCON.TxtWidth));
-            this.TxtHeight = this.query.AddCell(SRCCON.TxtHeight, nameof(SRCCON.TxtHeight));
-            this.TxtAngle = this.query.AddCell(SRCCON.TxtAngle, nameof(SRCCON.TxtAngle));
 
         }
 
@@ -56,6 +42,35 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.TextBkgndTrans = row[this.TextBkgndTrans];
             cells.TextDirection = row[this.TextDirection].ToInt();
             cells.VerticalAlign = row[this.VerticalAlign].ToInt();
+            return cells;
+        }
+    }
+
+    class TextXFormCellsQuery : CellGroupSingleRowQuery<Text.TextXFormCells, double>
+    {
+        public ColumnQuery TxtWidth { get; set; }
+        public ColumnQuery TxtHeight { get; set; }
+        public ColumnQuery TxtPinX { get; set; }
+        public ColumnQuery TxtPinY { get; set; }
+        public ColumnQuery TxtLocPinX { get; set; }
+        public ColumnQuery TxtLocPinY { get; set; }
+        public ColumnQuery TxtAngle { get; set; }
+
+        public TextXFormCellsQuery()
+        {
+            this.TxtPinX = this.query.AddCell(SRCCON.TxtPinX, nameof(SRCCON.TxtPinX));
+            this.TxtPinY = this.query.AddCell(SRCCON.TxtPinY, nameof(SRCCON.TxtPinY));
+            this.TxtLocPinX = this.query.AddCell(SRCCON.TxtLocPinX, nameof(SRCCON.TxtLocPinX));
+            this.TxtLocPinY = this.query.AddCell(SRCCON.TxtLocPinY, nameof(SRCCON.TxtLocPinY));
+            this.TxtWidth = this.query.AddCell(SRCCON.TxtWidth, nameof(SRCCON.TxtWidth));
+            this.TxtHeight = this.query.AddCell(SRCCON.TxtHeight, nameof(SRCCON.TxtHeight));
+            this.TxtAngle = this.query.AddCell(SRCCON.TxtAngle, nameof(SRCCON.TxtAngle));
+
+        }
+
+        public override Text.TextXFormCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        {
+            var cells = new Text.TextXFormCells();
             cells.TxtPinX = row[this.TxtPinX];
             cells.TxtPinY = row[this.TxtPinY];
             cells.TxtLocPinX = row[this.TxtLocPinX];
@@ -66,4 +81,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             return cells;
         }
     }
+
 }
