@@ -95,6 +95,7 @@
     <Compile Include="Layers\LayerHelper.cs" />
     <Compile Include="ShapeSheet\CellGroups\Queries\CellGroupMultiRowQuery.cs" />
     <Compile Include="ShapeSheet\CellGroups\Queries\CellGroupQuery.cs" />
+    <Compile Include="ShapeSheet\CellGroups\Queries\TextXFormCellsQuery.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\Queries\CellGroupSingleRowQuery.cs" />
     <Compile Include="ShapeSheet\CellGroups\Queries\CharacterFormatCellsQuery.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
     <Compile Include="Styles\StyleHelper.cs" />
     <Compile Include="Text\TabStopHelper.cs" />
+    <Compile Include="Text\TextXFormCells.cs" />
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Utilities\WildcardHelper.cs" />
