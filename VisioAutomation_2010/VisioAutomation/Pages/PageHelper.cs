@@ -272,11 +272,9 @@ namespace VisioAutomation.Pages
 
         private static void SetSize(IVisio.Page page, Drawing.Size size)
         {
-            var page_cells = new PageCells();
-            page_cells.PageHeight = size.Height;
-            page_cells.PageWidth = size.Width;
             var writer = new FormulaWriterSRC();
-            page_cells.SetFormulas(writer);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
             writer.Commit(page.PageSheet);
         }
         
