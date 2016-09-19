@@ -3,6 +3,15 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages.PageLayout
 {
+    public class PageLayoutFormulas
+    {
+        public VisioAutomation.ShapeSheet.FormulaLiteral AvenueSizeX;
+        public VisioAutomation.ShapeSheet.FormulaLiteral AvenueSizeY;
+        public VisioAutomation.ShapeSheet.FormulaLiteral LineRouteExt;
+        public VisioAutomation.ShapeSheet.FormulaLiteral RouteStyle;
+        public VisioAutomation.ShapeSheet.FormulaLiteral PlaceStyle;
+    }
+
     public abstract class Layout
     {
         public LayoutStyle LayoutStyle { get; set; }
@@ -15,7 +24,7 @@ namespace VisioAutomation.Pages.PageLayout
             this.AvenueSize = new Drawing.Size(0.375, 0.375);
         }
 
-        protected virtual void SetPageCells(PageCells pagecells)
+        protected virtual void SetPageCells(PageLayoutFormulas pagecells)
         {
             pagecells.AvenueSizeX = this.AvenueSize.Width;
             pagecells.AvenueSizeY = this.AvenueSize.Height;
@@ -137,11 +146,16 @@ namespace VisioAutomation.Pages.PageLayout
 
         public void Apply(IVisio.Page page)
         {
-            var pagecells = new PageCells();
+            var pagecells = new PageLayoutFormulas();
             this.SetPageCells(pagecells);
 
             var writer = new FormulaWriterSRC();
-            pagecells.SetFormulas(writer);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeX,pagecells.AvenueSizeX);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeY, pagecells.AvenueSizeY);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.LineRouteExt, pagecells.LineRouteExt);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.RouteStyle, pagecells.RouteStyle);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PlaceStyle, pagecells.PlaceStyle);
+
             var pagesheet = page.PageSheet;
             writer.Commit(pagesheet);
             page.Layout();
