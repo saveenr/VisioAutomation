@@ -45,41 +45,4 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             return cells;
         }
     }
-
-    class TextXFormCellsQuery : CellGroupSingleRowQuery<Text.TextXFormCells, double>
-    {
-        public ColumnQuery TxtWidth { get; set; }
-        public ColumnQuery TxtHeight { get; set; }
-        public ColumnQuery TxtPinX { get; set; }
-        public ColumnQuery TxtPinY { get; set; }
-        public ColumnQuery TxtLocPinX { get; set; }
-        public ColumnQuery TxtLocPinY { get; set; }
-        public ColumnQuery TxtAngle { get; set; }
-
-        public TextXFormCellsQuery()
-        {
-            this.TxtPinX = this.query.AddCell(SRCCON.TxtPinX, nameof(SRCCON.TxtPinX));
-            this.TxtPinY = this.query.AddCell(SRCCON.TxtPinY, nameof(SRCCON.TxtPinY));
-            this.TxtLocPinX = this.query.AddCell(SRCCON.TxtLocPinX, nameof(SRCCON.TxtLocPinX));
-            this.TxtLocPinY = this.query.AddCell(SRCCON.TxtLocPinY, nameof(SRCCON.TxtLocPinY));
-            this.TxtWidth = this.query.AddCell(SRCCON.TxtWidth, nameof(SRCCON.TxtWidth));
-            this.TxtHeight = this.query.AddCell(SRCCON.TxtHeight, nameof(SRCCON.TxtHeight));
-            this.TxtAngle = this.query.AddCell(SRCCON.TxtAngle, nameof(SRCCON.TxtAngle));
-
-        }
-
-        public override Text.TextXFormCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
-        {
-            var cells = new Text.TextXFormCells();
-            cells.TxtPinX = row[this.TxtPinX];
-            cells.TxtPinY = row[this.TxtPinY];
-            cells.TxtLocPinX = row[this.TxtLocPinX];
-            cells.TxtLocPinY = row[this.TxtLocPinY];
-            cells.TxtWidth = row[this.TxtWidth];
-            cells.TxtHeight = row[this.TxtHeight];
-            cells.TxtAngle = row[this.TxtAngle];
-            return cells;
-        }
-    }
-
 }
