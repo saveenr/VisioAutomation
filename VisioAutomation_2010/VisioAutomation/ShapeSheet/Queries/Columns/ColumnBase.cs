@@ -18,6 +18,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Columns
 
             this.Name = name;
             this.Ordinal = ordinal;
+            this.UnitCode = IVisio.VisUnitCodes.visNoCast;
         }
 
         public static implicit operator int(ColumnBase col)
