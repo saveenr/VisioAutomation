@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ParagraphFormatCellsQuery : CellGroupMultiRowQuery<Text.ParagraphCells, double>
+    class ParagraphFormatCellsQuery : CellGroupMultiRowQuery<Text.ParagraphCells>
     {
         public ColumnSubQuery Bullet { get; set; }
         public ColumnSubQuery BulletFont { get; set; }

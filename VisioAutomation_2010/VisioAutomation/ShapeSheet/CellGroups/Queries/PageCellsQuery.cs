@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class PageCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Pages.PageCells, double>
+    class PageCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Pages.PageCells>
     {
         public ColumnQuery PageLeftMargin { get; set; }
         public ColumnQuery CenterX { get; set; }

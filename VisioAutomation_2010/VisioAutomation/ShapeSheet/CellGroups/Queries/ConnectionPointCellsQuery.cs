@@ -6,7 +6,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ConnectionPointCellsQuery : CellGroupMultiRowQuery<ConnectionPointCells, double>
+    class ConnectionPointCellsQuery : CellGroupMultiRowQuery<ConnectionPointCells>
     {
         public ColumnSubQuery DirX { get; set; }
         public ColumnSubQuery DirY { get; set; }

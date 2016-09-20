@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    public class CustomPropertyCellsQuery : CellGroupMultiRowQuery<Shapes.CustomProperties.CustomPropertyCells, double>
+    public class CustomPropertyCellsQuery : CellGroupMultiRowQuery<Shapes.CustomProperties.CustomPropertyCells>
     {
         public ColumnSubQuery SortKey { get; set; }
         public ColumnSubQuery Ask { get; set; }

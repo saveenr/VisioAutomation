@@ -2,7 +2,7 @@ using VisioAutomation.ShapeSheet.Queries;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    public abstract class CellGroupQuery<TCellGroup, TResult>
+    public abstract class CellGroupQuery<TCellGroup>
     {
         protected VisioAutomation.ShapeSheet.Queries.Query query;
 

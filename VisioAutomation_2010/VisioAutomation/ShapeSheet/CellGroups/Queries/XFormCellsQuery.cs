@@ -4,7 +4,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class XFormCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Shapes.XFormCells,double>
+    class XFormCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Shapes.XFormCells>
     {
         public ColumnQuery Width { get; set; }
         public ColumnQuery Height { get; set; }

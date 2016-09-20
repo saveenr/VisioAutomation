@@ -2,7 +2,7 @@ using VisioAutomation.ShapeSheet.Queries.Columns;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class TextXFormCellsQuery : CellGroupSingleRowQuery<Text.TextXFormCells, double>
+    class TextXFormCellsQuery : CellGroupSingleRowQuery<Text.TextXFormCells>
     {
         public ColumnQuery TxtWidth { get; set; }
         public ColumnQuery TxtHeight { get; set; }

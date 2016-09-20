@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ControlCellsQuery : CellGroupMultiRowQuery<Shapes.Controls.ControlCells, double>
+    class ControlCellsQuery : CellGroupMultiRowQuery<Shapes.Controls.ControlCells>
     {
         public ColumnSubQuery CanGlue { get; set; }
         public ColumnSubQuery Tip { get; set; }

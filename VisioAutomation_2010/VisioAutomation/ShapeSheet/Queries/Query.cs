@@ -63,7 +63,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             return output_for_shape;
         }
 
-        public Output<ShapeSheet.CellData> GetFormulasAndResults<TResult>(ShapeSheetSurface surface)
+        public Output<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface)
         {
             var srcstream = this._build_src_stream(surface);
             var unitcodes = this._build_unit_code_array(1);
@@ -96,7 +96,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             return list;
         }
 
-        public ListOutput<ShapeSheet.CellData> GetFormulasAndResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
+        public ListOutput<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);

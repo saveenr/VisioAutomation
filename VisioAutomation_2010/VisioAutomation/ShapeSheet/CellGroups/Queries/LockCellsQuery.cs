@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class LockCellsQuery : CellGroupSingleRowQuery<Shapes.LockCells, double>
+    class LockCellsQuery : CellGroupSingleRowQuery<Shapes.LockCells>
     {
         public ColumnQuery LockAspect { get; set; }
         public ColumnQuery LockBegin { get; set; }

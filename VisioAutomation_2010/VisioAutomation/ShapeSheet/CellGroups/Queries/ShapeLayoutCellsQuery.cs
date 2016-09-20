@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ShapeLayoutCellsQuery : CellGroupSingleRowQuery<Shapes.Layout.ShapeLayoutCells, double>
+    class ShapeLayoutCellsQuery : CellGroupSingleRowQuery<Shapes.Layout.ShapeLayoutCells>
     {
         public ColumnQuery ConFixedCode { get; set; }
         public ColumnQuery ConLineJumpCode { get; set; }

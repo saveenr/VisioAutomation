@@ -4,7 +4,7 @@ using VisioAutomation.Exceptions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    public abstract class CellGroupMultiRowQuery<TCellGroup, TResult> : CellGroupQuery<TCellGroup, TResult>
+    public abstract class CellGroupMultiRowQuery<TCellGroup> : CellGroupQuery<TCellGroup>
     {
         protected override void validate_query()
         {
@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         {
             this.validate_query();
             var surface = new ShapeSheetSurface(page);
-            var data_for_shapes = query.GetFormulasAndResults<TResult>(surface, shapeids);
+            var data_for_shapes = query.GetFormulasAndResults(surface, shapeids);
             var list = new List<List<TCellGroup>>(shapeids.Count);
             var objects = data_for_shapes.Select(d => this.SubQueryRowsToCellGroups(d.Sections[0]));
             list.AddRange(objects);
@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         {
             this.validate_query();
             var surface = new ShapeSheetSurface(shape);
-            var data_for_shape = query.GetFormulasAndResults<TResult>(surface);
+            var data_for_shape = query.GetFormulasAndResults(surface);
             var sec = data_for_shape.Sections[0];
             var cellgroups = this.SubQueryRowsToCellGroups(sec);
             return cellgroups;

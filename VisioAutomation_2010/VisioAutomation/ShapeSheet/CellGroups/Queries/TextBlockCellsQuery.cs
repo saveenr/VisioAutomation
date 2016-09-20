@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class TextBlockCellsQuery : CellGroupSingleRowQuery<Text.TextBlockCells, double>
+    class TextBlockCellsQuery : CellGroupSingleRowQuery<Text.TextBlockCells>
     {
         public ColumnQuery BottomMargin { get; set; }
         public ColumnQuery LeftMargin { get; set; }

@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class HyperlinkCellsQuery : CellGroupMultiRowQuery<Shapes.Hyperlinks.HyperlinkCells, double>
+    class HyperlinkCellsQuery : CellGroupMultiRowQuery<Shapes.Hyperlinks.HyperlinkCells>
     {
 
         public ColumnSubQuery Address { get; set; }

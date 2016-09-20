@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ShapeFormatCellsQuery : CellGroupSingleRowQuery<Shapes.FormatCells, double>
+    class ShapeFormatCellsQuery : CellGroupSingleRowQuery<Shapes.FormatCells>
     {
         public ColumnQuery FillBkgnd { get; set; }
         public ColumnQuery FillBkgndTrans { get; set; }

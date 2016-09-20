@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class CharacterFormatCellsQuery : CellGroupMultiRowQuery<Text.CharacterCells, double>
+    class CharacterFormatCellsQuery : CellGroupMultiRowQuery<Text.CharacterCells>
     {
         public ColumnSubQuery Font { get; set; }
         public ColumnSubQuery Style { get; set; }
