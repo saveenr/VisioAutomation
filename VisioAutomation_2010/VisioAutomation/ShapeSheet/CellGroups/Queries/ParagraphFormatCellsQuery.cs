@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.LocBulletFont = row[this.LocalizeBulletFont].ToInt();
             cells.TextPosAfterBullet = row[this.TextPosAfterBullet];
             cells.Flags = row[this.Flags].ToInt();
-            cells.BulletString = ""; // TODO: Figure out some way of getting this
+            cells.BulletString = row[this.BulletString];
 
             return cells;
         }
