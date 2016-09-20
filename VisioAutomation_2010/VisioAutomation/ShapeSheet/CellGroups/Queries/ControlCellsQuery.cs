@@ -34,14 +34,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public override Shapes.Controls.ControlCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.Controls.ControlCells();
-            cells.CanGlue = row[this.CanGlue].ToInt();
-            cells.Tip = row[this.Tip].ToInt();
+            cells.CanGlue = row[this.CanGlue];
+            cells.Tip = row[this.Tip];
             cells.X = row[this.X];
             cells.Y = row[this.Y];
-            cells.YBehavior = row[this.YBehavior].ToInt();
-            cells.XBehavior = row[this.XBehavior].ToInt();
-            cells.XDynamics = row[this.XDynamics].ToInt();
-            cells.YDynamics = row[this.YDynamics].ToInt();
+            cells.YBehavior = row[this.YBehavior];
+            cells.XBehavior = row[this.XBehavior];
+            cells.XDynamics = row[this.XDynamics];
+            cells.YDynamics = row[this.YDynamics];
             return cells;
         }
     }

@@ -31,9 +31,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             var cells = new ConnectionPointCells();
             cells.X = row[this.X];
             cells.Y = row[this.Y];
-            cells.DirX = row[this.DirX].ToInt();
-            cells.DirY = row[this.DirY].ToInt();
-            cells.Type = row[this.Type].ToInt();
+            cells.DirX = row[this.DirX];
+            cells.DirY = row[this.DirY];
+            cells.Type = row[this.Type];
 
             return cells;
         }

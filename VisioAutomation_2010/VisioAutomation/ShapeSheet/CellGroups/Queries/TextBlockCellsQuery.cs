@@ -38,10 +38,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.RightMargin = row[this.RightMargin];
             cells.TopMargin = row[this.TopMargin];
             cells.DefaultTabStop = row[this.DefaultTabStop];
-            cells.TextBkgnd = row[this.TextBkgnd].ToInt();
+            cells.TextBkgnd = row[this.TextBkgnd];
             cells.TextBkgndTrans = row[this.TextBkgndTrans];
-            cells.TextDirection = row[this.TextDirection].ToInt();
-            cells.VerticalAlign = row[this.VerticalAlign].ToInt();
+            cells.TextDirection = row[this.TextDirection];
+            cells.VerticalAlign = row[this.VerticalAlign];
             return cells;
         }
     }

@@ -50,13 +50,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.SpacingAfter = row[this.SpaceAfter];
             cells.SpacingBefore = row[this.SpaceBefore];
             cells.SpacingLine = row[this.SpaceLine];
-            cells.HorizontalAlign = row[this.HorzAlign].ToInt();
-            cells.Bullet = row[this.Bullet].ToInt();
-            cells.BulletFont = row[this.BulletFont].ToInt();
-            cells.BulletFontSize = row[this.BulletFontSize].ToInt();
-            cells.LocBulletFont = row[this.LocalizeBulletFont].ToInt();
+            cells.HorizontalAlign = row[this.HorzAlign];
+            cells.Bullet = row[this.Bullet];
+            cells.BulletFont = row[this.BulletFont];
+            cells.BulletFontSize = row[this.BulletFontSize];
+            cells.LocBulletFont = row[this.LocalizeBulletFont];
             cells.TextPosAfterBullet = row[this.TextPosAfterBullet];
-            cells.Flags = row[this.Flags].ToInt();
+            cells.Flags = row[this.Flags];
             cells.BulletString = row[this.BulletString];
 
             return cells;

@@ -40,15 +40,15 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         {
             var cells = new Shapes.CustomProperties.CustomPropertyCells();
             cells.Value = row[this.Value];
-            cells.Calendar = row[this.Calendar].ToInt();
+            cells.Calendar = row[this.Calendar];
             cells.Format = row[this.Format];
-            cells.Invisible = row[this.Invis].ToInt();
+            cells.Invisible = row[this.Invis];
             cells.Label = row[this.Label];
-            cells.LangId = row[this.LangID].ToInt();
+            cells.LangId = row[this.LangID];
             cells.Prompt = row[this.Prompt];
-            cells.SortKey = row[this.SortKey].ToInt();
-            cells.Type = row[this.Type].ToInt();
-            cells.Ask = row[this.Ask].ToBool();
+            cells.SortKey = row[this.SortKey];
+            cells.Type = row[this.Type];
+            cells.Ask = row[this.Ask];
             return cells;
         }
     }
