@@ -10,7 +10,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         public ColumnSubQuery Bullet { get; set; }
         public ColumnSubQuery BulletFont { get; set; }
         public ColumnSubQuery BulletFontSize { get; set; }
-        public ColumnSubQuery BulletString { get; set; } // NOTE: This is never used
+        public ColumnSubQuery BulletString { get; set; }
         public ColumnSubQuery Flags { get; set; }
         public ColumnSubQuery HorzAlign { get; set; }
         public ColumnSubQuery IndentFirst { get; set; }
