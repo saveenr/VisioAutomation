@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Windows.Forms.VisualStyles;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
@@ -71,7 +72,13 @@ namespace VisioAutomation.Text
             cells.CharacterFormats = CharacterCells.GetCells(shape);
             cells.ParagraphFormats = ParagraphCells.GetCells(shape);
             cells.TextBlock = TextBlockCells.GetCells(shape);
-            cells.TextXForm = TextXFormCells.GetCells(shape);
+            if (
+                shape.RowExists[
+                    (short) IVisio.VisSectionIndices.visSectionObject, (short) IVisio.VisRowIndices.visRowTextXForm,
+                    (short) 0] != 0)
+            {
+                cells.TextXForm = TextXFormCells.GetCells(shape);
+            }
             cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
             cells.TabStops = TabStopHelper.GetTabStops(shape);
