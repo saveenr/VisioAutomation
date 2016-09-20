@@ -7,20 +7,20 @@ namespace VisioAutomation.Text
 {
     public class ParagraphCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData<double> IndentFirst { get; set; }
-        public ShapeSheet.CellData<double> IndentRight { get; set; }
-        public ShapeSheet.CellData<double> IndentLeft { get; set; }
-        public ShapeSheet.CellData<double> SpacingBefore { get; set; }
-        public ShapeSheet.CellData<double> SpacingAfter { get; set; }
-        public ShapeSheet.CellData<double> SpacingLine { get; set; }
-        public ShapeSheet.CellData<int> HorizontalAlign { get; set; }
-        public ShapeSheet.CellData<int> Bullet { get; set; }
-        public ShapeSheet.CellData<int> BulletFont { get; set; }
-        public ShapeSheet.CellData<int> BulletFontSize { get; set; }
-        public ShapeSheet.CellData<int> LocBulletFont { get; set; }
-        public ShapeSheet.CellData<double> TextPosAfterBullet { get; set; }
-        public ShapeSheet.CellData<int> Flags { get; set; }
-        public ShapeSheet.CellData<string> BulletString { get; set; }
+        public ShapeSheet.CellData IndentFirst { get; set; }
+        public ShapeSheet.CellData IndentRight { get; set; }
+        public ShapeSheet.CellData IndentLeft { get; set; }
+        public ShapeSheet.CellData SpacingBefore { get; set; }
+        public ShapeSheet.CellData SpacingAfter { get; set; }
+        public ShapeSheet.CellData SpacingLine { get; set; }
+        public ShapeSheet.CellData HorizontalAlign { get; set; }
+        public ShapeSheet.CellData Bullet { get; set; }
+        public ShapeSheet.CellData BulletFont { get; set; }
+        public ShapeSheet.CellData BulletFontSize { get; set; }
+        public ShapeSheet.CellData LocBulletFont { get; set; }
+        public ShapeSheet.CellData TextPosAfterBullet { get; set; }
+        public ShapeSheet.CellData Flags { get; set; }
+        public ShapeSheet.CellData BulletString { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {

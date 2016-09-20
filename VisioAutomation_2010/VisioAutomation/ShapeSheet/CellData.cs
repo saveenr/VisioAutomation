@@ -1,11 +1,11 @@
 namespace VisioAutomation.ShapeSheet
 {
-    public struct CellData<TResult>
+    public struct CellData
     {
         public FormulaLiteral Formula { get; }
-        public TResult Result { get; }
+        public string Result { get; }
 
-        public CellData(FormulaLiteral formula, TResult result)
+        public CellData(FormulaLiteral formula, string result)
             : this()
         {
             this.Formula = formula;
@@ -18,32 +18,32 @@ namespace VisioAutomation.ShapeSheet
             return string.Format(System.Globalization.CultureInfo.InvariantCulture,"(\"{0}\",{1})", fs, this.Result);
         }
 
-        public static implicit operator CellData<TResult>(FormulaLiteral formula)
+        public static implicit operator CellData(FormulaLiteral formula)
         {
-            return new CellData<TResult>(formula,default(TResult));
+            return new CellData(formula,default(string));
         }
 
-        public static implicit operator CellData<TResult>(string formula)
+        public static implicit operator CellData(string formula)
         {
-            return new CellData<TResult>( formula, default(TResult));
+            return new CellData( formula, default(string));
         }
 
-        public static implicit operator CellData<TResult>(int formula)
+        public static implicit operator CellData(int formula)
         {
-            return new CellData<TResult>(formula, default(TResult));
+            return new CellData(formula, default(string));
         }
 
-        public static implicit operator CellData<TResult>(double formula)
+        public static implicit operator CellData(double formula)
         {
-            return new CellData<TResult>(formula, default(TResult));
+            return new CellData(formula, default(string));
         }
 
-        public static implicit operator CellData<TResult>(bool formula)
+        public static implicit operator CellData(bool formula)
         {
-            return new CellData<TResult>(formula, default(TResult));
+            return new CellData(formula, default(string));
         }
 
-        public static CellData<TResult>[] Combine(string[] formulas, TResult[] results)
+        public static CellData[] Combine(string[] formulas, string[] results)
         {
             int n = results.Length;
 
@@ -52,10 +52,10 @@ namespace VisioAutomation.ShapeSheet
                 throw new System.ArgumentException("Array Lengths must match");
             }
 
-            var combined_data = new ShapeSheet.CellData<TResult>[n];
+            var combined_data = new ShapeSheet.CellData[n];
             for (int i = 0; i < n; i++)
             {
-                combined_data[i] = new ShapeSheet.CellData<TResult>(formulas[i], results[i]);
+                combined_data[i] = new ShapeSheet.CellData(formulas[i], results[i]);
             }
             return combined_data;
         }

@@ -24,7 +24,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public override Text.TextXFormCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Text.TextXFormCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Text.TextXFormCells();
             cells.TxtPinX = row[this.TxtPinX];

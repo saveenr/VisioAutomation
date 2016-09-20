@@ -7,16 +7,16 @@ namespace VisioAutomation.Shapes.CustomProperties
 {
     public class CustomPropertyCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData<bool> Ask { get; set; }
-        public ShapeSheet.CellData<int> Calendar { get; set; }
-        public ShapeSheet.CellData<double> Format { get; set; }
-        public ShapeSheet.CellData<int> Invisible { get; set; }
-        public ShapeSheet.CellData<double> Label { get; set; }
-        public ShapeSheet.CellData<int> LangId { get; set; }
-        public ShapeSheet.CellData<double> Prompt { get; set; }
-        public ShapeSheet.CellData<int> SortKey { get; set; }
-        public ShapeSheet.CellData<int> Type { get; set; }
-        public ShapeSheet.CellData<double> Value { get; set; }
+        public ShapeSheet.CellData Ask { get; set; }
+        public ShapeSheet.CellData Calendar { get; set; }
+        public ShapeSheet.CellData Format { get; set; }
+        public ShapeSheet.CellData Invisible { get; set; }
+        public ShapeSheet.CellData Label { get; set; }
+        public ShapeSheet.CellData LangId { get; set; }
+        public ShapeSheet.CellData Prompt { get; set; }
+        public ShapeSheet.CellData SortKey { get; set; }
+        public ShapeSheet.CellData Type { get; set; }
+        public ShapeSheet.CellData Value { get; set; }
 
         public CustomPropertyCells()
         {

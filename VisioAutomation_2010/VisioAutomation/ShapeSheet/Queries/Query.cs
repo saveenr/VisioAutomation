@@ -63,18 +63,18 @@ namespace VisioAutomation.ShapeSheet.Queries
             return output_for_shape;
         }
 
-        public Output<ShapeSheet.CellData<TResult>> GetFormulasAndResults<TResult>(ShapeSheetSurface surface)
+        public Output<ShapeSheet.CellData> GetFormulasAndResults<TResult>(ShapeSheetSurface surface)
         {
             var srcstream = this._build_src_stream(surface);
             var unitcodes = this._build_unit_code_array(1);
             var formulas = QueryHelpers.GetFormulasU_SRC(surface, srcstream);
-            var results = QueryHelpers.GetResults_SRC<TResult>(surface, srcstream, unitcodes);
-            var combined_data = CellData<TResult>.Combine(formulas, results);
+            var results = QueryHelpers.GetResults_SRC<string>(surface, srcstream, unitcodes);
+            var combined_data = CellData.Combine(formulas, results);
 
             var shape_index = 0;
             var cursor = 0;
             var subqueryinfo = this._safe_get_subquery_output_for_shape(shape_index);
-            var output_for_shape = this._create_output_for_shape<ShapeSheet.CellData<TResult>>(surface.Target.ID16, combined_data, subqueryinfo, ref cursor);
+            var output_for_shape = this._create_output_for_shape<ShapeSheet.CellData>(surface.Target.ID16, combined_data, subqueryinfo, ref cursor);
             return output_for_shape;
         }
 
@@ -96,13 +96,13 @@ namespace VisioAutomation.ShapeSheet.Queries
             return list;
         }
 
-        public ListOutput<ShapeSheet.CellData<TResult>> GetFormulasAndResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
+        public ListOutput<ShapeSheet.CellData> GetFormulasAndResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
-            var results = QueryHelpers.GetResults_SIDSRC<TResult>(surface, srcstream, unitcodes);
+            var results = QueryHelpers.GetResults_SIDSRC<string>(surface, srcstream, unitcodes);
             var formulas  = QueryHelpers.GetFormulasU_SIDSRC(surface, srcstream);
-            var combined_data = CellData<TResult>.Combine(formulas, results);
+            var combined_data = CellData.Combine(formulas, results);
             var r = this._create_outputs_for_shapes(shapeids, combined_data);
             return r;
         }

@@ -41,7 +41,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.TextPosAfterBullet = sec.AddCell(SRCCON.Para_TextPosAfterBullet, nameof(SRCCON.Para_TextPosAfterBullet));
         }
 
-        public override Text.ParagraphCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Text.ParagraphCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Text.ParagraphCells();
             cells.IndentFirst = row[this.IndentFirst];

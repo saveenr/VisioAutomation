@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             return cellgroups;
         }
 
-        private List<TCellGroup> SubQueryRowsToCellGroups(VisioAutomation.ShapeSheet.Queries.Outputs.SubQueryOutput<ShapeSheet.CellData<TResult>> subquery_output)
+        private List<TCellGroup> SubQueryRowsToCellGroups(VisioAutomation.ShapeSheet.Queries.Outputs.SubQueryOutput<ShapeSheet.CellData> subquery_output)
         {
             var list_celldata = subquery_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
             var cellgroups = new List<TCellGroup>(subquery_output.Rows.Count);

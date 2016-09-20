@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         protected abstract void validate_query();
 
-        public abstract TCellGroup CellDataToCellGroup(ShapeSheet.CellData<TResult>[] row);
+        public abstract TCellGroup CellDataToCellGroup(ShapeSheet.CellData[] row);
 
     }
 }

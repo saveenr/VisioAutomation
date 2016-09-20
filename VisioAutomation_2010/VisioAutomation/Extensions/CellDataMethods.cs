@@ -4,14 +4,14 @@ namespace VisioAutomation.Extensions
 {
     public static class CellDataMethods
     {
-        public static ShapeSheet.CellData<int> ToInt(this ShapeSheet.CellData<double> celldata)
+        public static ShapeSheet.CellData ToInt(this ShapeSheet.CellData celldata)
         {
-            return new ShapeSheet.CellData<int>(celldata.Formula,(int)celldata.Result);
+            return new ShapeSheet.CellData(celldata.Formula,celldata.Result);
         }
 
-        public static ShapeSheet.CellData<bool> ToBool(this ShapeSheet.CellData<double> celldata)
+        public static ShapeSheet.CellData ToBool(this ShapeSheet.CellData celldata)
         {
-            return new ShapeSheet.CellData<bool>(celldata.Formula, Convert.DoubleToBool(celldata.Result));
+            return new ShapeSheet.CellData(celldata.Formula,celldata.Result);
         }
     }
 }

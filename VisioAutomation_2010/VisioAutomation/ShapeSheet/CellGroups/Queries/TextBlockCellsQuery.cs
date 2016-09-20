@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public override Text.TextBlockCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Text.TextBlockCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Text.TextBlockCells();
             cells.BottomMargin = row[this.BottomMargin];

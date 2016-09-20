@@ -44,7 +44,7 @@ namespace VisioAutomation_Tests
             AssertUtil.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
         }
 
-        public static void AreEqual<TResult>(string formula, TResult result, VASS.CellData<TResult> actual_celldata)
+        public static void AreEqual<TResult>(string formula, TResult result, VASS.CellData actual_celldata)
         {
             Assert.AreEqual(formula, actual_celldata.Formula);
             Assert.AreEqual(result, actual_celldata.Result);

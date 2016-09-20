@@ -49,7 +49,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public override Shapes.Layout.ShapeLayoutCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Shapes.Layout.ShapeLayoutCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.Layout.ShapeLayoutCells();
             cells.ConFixedCode = row[this.ConFixedCode].ToInt();

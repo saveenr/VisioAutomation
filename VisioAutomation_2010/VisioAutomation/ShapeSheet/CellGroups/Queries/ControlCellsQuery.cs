@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public override Shapes.Controls.ControlCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Shapes.Controls.ControlCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.Controls.ControlCells();
             cells.CanGlue = row[this.CanGlue].ToInt();

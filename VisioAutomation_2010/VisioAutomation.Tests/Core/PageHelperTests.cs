@@ -12,18 +12,20 @@ namespace VisioAutomation_Tests.Core.Page
         {
             var page1 = this.GetNewPage(new VA.Drawing.Size(4, 3));
             var pagecells = VA.Pages.PageCells.GetCells(page1.PageSheet);
-            Assert.AreEqual(new VA.Drawing.Size(4, 3), new VA.Drawing.Size(pagecells.PageWidth.Result,pagecells.PageHeight.Result));
+            Assert.AreEqual("4.0000 in.", pagecells.PageWidth.Result);
+            Assert.AreEqual("3.0000 in.", pagecells.PageHeight.Result);
 
             // Double each side
-            pagecells.PageWidth = pagecells.PageWidth.Result * 2.0;
-            pagecells.PageHeight = pagecells.PageHeight.Result * 2.0;
+            pagecells.PageWidth = "8.0";
+            pagecells.PageHeight = "6.0";
 
             var writer = new FormulaWriterSRC();
             pagecells.SetFormulas(writer);
             writer.Commit(page1.PageSheet);
 
             var pagecells2 = VA.Pages.PageCells.GetCells(page1.PageSheet);
-            Assert.AreEqual(new VA.Drawing.Size(8, 6), new VA.Drawing.Size(pagecells2.PageWidth.Result, pagecells2.PageHeight.Result));
+            Assert.AreEqual("8.0000 in.", pagecells2.PageWidth.Result);
+            Assert.AreEqual("6.0000 in.", pagecells2.PageHeight.Result);
             page1.Delete(0);
         }
 

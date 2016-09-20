@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.LockWidth = this.query.AddCell(SRCCON.LockWidth, nameof(SRCCON.LockWidth));
         }
 
-        public override Shapes.LockCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Shapes.LockCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.LockCells();
             cells.LockAspect = row[this.LockAspect].ToBool();
