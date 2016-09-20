@@ -18,9 +18,7 @@ namespace VisioAutomation.Shapes.Controls
             return ControlHelper.Add(shape, ctrl);
         }
 
-        public static int Add(
-            IVisio.Shape shape,
-            ControlCells ctrl)
+        public static int Add(IVisio.Shape shape, ControlCells ctrl)
         {
             if (shape == null)
             {
@@ -36,10 +34,7 @@ namespace VisioAutomation.Shapes.Controls
             return row;
         }
 
-        public static int Set(
-            IVisio.Shape shape,
-            short row,
-            ControlCells ctrl)
+        public static int Set( IVisio.Shape shape, short row, ControlCells ctrl)
         {
             if (shape == null)
             {
