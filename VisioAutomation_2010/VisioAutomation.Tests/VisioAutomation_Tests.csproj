@@ -97,7 +97,7 @@
     <Compile Include="Scripting\ScriptingShapeText_Tests.cs" />
     <Compile Include="Framework\VisioPowerShellTests.cs" />
     <Compile Include="Framework\DiagnosticDebugContext.cs" />
-    <Compile Include="Models\Dom\DomText.cs" />
+    <Compile Include="Models\Dom\Dom_Text.cs" />
     <Compile Include="Framework\TestGlobals.cs" />
     <Compile Include="Framework\TestHelper.cs" />
     <Compile Include="Core\BezierTests.cs" />
