@@ -1,8 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using VA=VisioAutomation;
 using VADRAW = VisioAutomation.Drawing;
-using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests
 {
@@ -11,12 +9,6 @@ namespace VisioAutomation_Tests
         public static void FileExists(string filename)
         {
             Assert.IsTrue(System.IO.File.Exists(filename));
-        }
-
-        public static void AreEqual(VADRAW.Point point, VADRAW.Point actual_point, double delta)
-        {
-            Assert.AreEqual(point.X, actual_point.X,delta);
-            Assert.AreEqual(point.Y, actual_point.Y, delta);
         }
 
         public static void AreEqual(double x, double y, VADRAW.Point actual_point, double delta)
@@ -39,9 +31,11 @@ namespace VisioAutomation_Tests
             Assert.AreEqual(height, actual_size.Height, delta);
         }
 
-        public static void AssertSnap(double ex, double ey, VA.Scripting.Utilities.SnappingGrid g1, double ix, double iy, double delta)
+        public static void AssertSnap(double expected_x, double expected_y, VA.Scripting.Utilities.SnappingGrid snapgrid, double input_x, double input_y, double delta)
         {
-            AssertUtil.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
+            var snapped = snapgrid.Snap(input_x, input_y);
+            Assert.AreEqual(expected_x, snapped.X, delta);
+            Assert.AreEqual(expected_y, snapped.Y, delta);
         }
 
         public static void AreEqual<TResult>(string formula, TResult result, string actual_formula, TResult actual_result)

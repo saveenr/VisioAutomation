@@ -81,7 +81,9 @@ namespace VisioAutomation_Tests.Core
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5+shape_size.Height);
             page.ResizeToFitContents(padding_size);
             var xform = VA.Shapes.XFormCells.GetCells(shape);
-            AssertUtil.AreEqual(expected_pinx, expected_piny, xform.GetPinPosResult(), 0.1);
+            var pinpos = xform.GetPinPosResult();
+            Assert.AreEqual(expected_pinx, pinpos.X, 0.1);
+            Assert.AreEqual(expected_piny, pinpos.Y, 0.1);
             page.Delete(0);
         }
     }
