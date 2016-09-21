@@ -72,10 +72,7 @@ namespace VisioAutomation.Text
             cells.CharacterFormats = CharacterCells.GetCells(shape);
             cells.ParagraphFormats = ParagraphCells.GetCells(shape);
             cells.TextBlock = TextBlockCells.GetCells(shape);
-            if (
-                shape.RowExists[
-                    (short) IVisio.VisSectionIndices.visSectionObject, (short) IVisio.VisRowIndices.visRowTextXForm,
-                    (short) 0] != 0)
+            if (HasTextXFormCells(shape))
             {
                 cells.TextXForm = TextXFormCells.GetCells(shape);
             }
@@ -83,6 +80,15 @@ namespace VisioAutomation.Text
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
             cells.TabStops = TabStopHelper.GetTabStops(shape);
             return cells;
+        }
+
+        public static bool HasTextXFormCells(IVisio.Shape shape)
+        {
+            return (
+                shape.RowExists[
+                    (short) IVisio.VisSectionIndices.visSectionObject, 
+                    (short) IVisio.VisRowIndices.visRowTextXForm,
+                    (short) 0] != 0) ;
         }
 
         public static IList<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
