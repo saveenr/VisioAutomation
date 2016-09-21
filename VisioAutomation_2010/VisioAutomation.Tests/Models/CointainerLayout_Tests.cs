@@ -2,10 +2,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 using CONMODEL = VisioAutomation.Models.Layouts.Container;
 
-namespace VisioAutomation_Tests.Models.Layouts
+namespace VisioAutomation_Tests.Models
 {
     [TestClass]
     public class CointainerLayout_Tests : VisioAutomationTest

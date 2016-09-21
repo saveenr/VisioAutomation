@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;

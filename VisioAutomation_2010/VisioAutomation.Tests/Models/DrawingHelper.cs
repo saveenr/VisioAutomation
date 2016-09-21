@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Drawing.Layout;
 using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests.Core
+namespace VisioAutomation_Tests.Models
 {
     [TestClass]
     public class DrawingHelper : VisioAutomationTest

@@ -104,7 +104,6 @@
     <Compile Include="Core\TypeTests.cs" />
     <Compile Include="Models\CointainerLayout_Tests.cs" />
     <Compile Include="Models\Chart_Tests.cs" />
-    <Compile Include="Models\ResizePageTests.cs" />
     <Compile Include="Core\Application\XmlErrorLogTests.cs" />
     <Compile Include="Scripting\ScriptingDevTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
