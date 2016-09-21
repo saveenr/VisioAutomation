@@ -31,7 +31,7 @@ namespace VisioAutomation.Selections
             int[] ids = (int[])ids_sa;
             return ids;
         }
-        public static IList<IVisio.Shape> GetSelectedShapes(IVisio.Selection selection)
+        public static List<IVisio.Shape> GetSelectedShapes(IVisio.Selection selection)
         {
             if (selection.Count < 1)
             {
@@ -43,7 +43,7 @@ namespace VisioAutomation.Selections
             return shapes;
         }
 
-        public static IList<IVisio.Shape> GetSelectedShapesRecursive(IVisio.Selection selection)
+        public static List<IVisio.Shape> GetSelectedShapesRecursive(IVisio.Selection selection)
         {
             if (selection.Count < 1)
             {

@@ -130,7 +130,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             return list;
         }
 
-        public static IList<List<UserDefinedCell>> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static List<List<UserDefinedCell>> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
         {
             if (page == null)
             {
@@ -205,7 +205,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         /// </remarks>
         /// <param name="shape"></param>
         /// <returns></returns>
-        public static IList<string> GetNames(IVisio.Shape shape)
+        public static List<string> GetNames(IVisio.Shape shape)
         {
             if (shape == null)
             {

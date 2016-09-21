@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
         /// </summary>
         /// <param name="shapes">the set of shapes to start the enumeration</param>
         /// <returns>The enumeration</returns>
-        public static IList<IVisio.Shape> GetNestedShapes(IEnumerable<IVisio.Shape> shapes)
+        public static List<IVisio.Shape> GetNestedShapes(IEnumerable<IVisio.Shape> shapes)
         {
             if (shapes == null)
             {
@@ -88,7 +88,7 @@ namespace VisioAutomation.Shapes
             return result;
         }
 
-        public static IList<IVisio.Shape> GetNestedShapes(IVisio.Shape shape)
+        public static List<IVisio.Shape> GetNestedShapes(IVisio.Shape shape)
         {
             if (shape== null)
             {
@@ -100,7 +100,7 @@ namespace VisioAutomation.Shapes
             return ShapeHelper.GetNestedShapes(shapes);
         }
 
-        public static IList<IVisio.Shape> GetShapesFromIDs(IVisio.Shapes shapes, IList<short> shapeids)
+        public static List<IVisio.Shape> GetShapesFromIDs(IVisio.Shapes shapes, IList<short> shapeids)
         {
             var shape_objs = new List<IVisio.Shape>(shapeids.Count);
             foreach (short shapeid in shapeids)

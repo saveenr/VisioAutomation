@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<IVisio.Shape> Table(System.Data.DataTable datatable,
+        public List<IVisio.Shape> Table(System.Data.DataTable datatable,
                                           IList<double> widths,
                                           IList<double> heights,
                                           Drawing.Size cellspacing)
@@ -387,7 +387,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        private static IList<IVisio.Shape> CreateDuplicates(IVisio.Page page,
+        private static List<IVisio.Shape> CreateDuplicates(IVisio.Page page,
                                            IVisio.Shape shape,
                                            int n)
         {

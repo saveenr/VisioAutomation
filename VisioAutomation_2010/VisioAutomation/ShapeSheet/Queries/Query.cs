@@ -356,7 +356,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             return count;
         }
 
-        private IList<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes)
+        private List<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes)
         {
             if (numshapes < 1)
             {

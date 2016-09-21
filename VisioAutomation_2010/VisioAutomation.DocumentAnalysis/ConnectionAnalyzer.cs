@@ -8,7 +8,7 @@ namespace VisioAutomation.DocumentAnalysis
 {
     public static class ConnectionAnalyzer
     {
-        public static IList<ConnectorEdge> GetTransitiveClosure(
+        public static List<ConnectorEdge> GetTransitiveClosure(
             IVisio.Page page,
             ConnectorHandling flag)
         {
@@ -32,7 +32,7 @@ namespace VisioAutomation.DocumentAnalysis
         /// <param name="page"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public static IList<ConnectorEdge> GetDirectedEdges(
+        public static List<ConnectorEdge> GetDirectedEdges(
             IVisio.Page page,
             ConnectorHandling flag)
         {
@@ -63,7 +63,7 @@ namespace VisioAutomation.DocumentAnalysis
             var surface = new ShapeSheetSurface(page);
             var arrow_table = query.GetResults<int>(surface , connnector_ids);
             
-            IList<ConnectorEdge> directed_edges = new List<ConnectorEdge>();
+            var directed_edges = new List<ConnectorEdge>();
 
             int connector_index = 0;
             foreach (var e in edges)
@@ -121,7 +121,7 @@ namespace VisioAutomation.DocumentAnalysis
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        private static IList<ConnectorEdge> GetDirectedEdgesRaw(IVisio.Page page)
+        private static List<ConnectorEdge> GetDirectedEdgesRaw(IVisio.Page page)
         {
             if (page == null)
             {

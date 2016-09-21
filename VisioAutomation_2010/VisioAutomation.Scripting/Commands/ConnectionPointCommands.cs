@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
             return dic;
         }
 
-        public IList<int> Add( TargetShapes targets, 
+        public List<int> Add( TargetShapes targets, 
             string fx,
             string fy,
             ConnectionPointType type)
@@ -77,7 +77,7 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public IList<int> Add(
+        public List<int> Add(
             string fx,
             string fy,
             ConnectionPointType type)

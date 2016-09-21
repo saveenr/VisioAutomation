@@ -56,7 +56,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = LockCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);

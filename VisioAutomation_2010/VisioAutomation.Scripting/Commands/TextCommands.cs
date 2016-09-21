@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<string> Get(TargetShapes targets)
+        public List<string> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

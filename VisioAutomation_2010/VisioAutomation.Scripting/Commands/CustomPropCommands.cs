@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> Contains(TargetShapes targets, string name)
+        public List<bool> Contains(TargetShapes targets, string name)
         {
             if (name == null)
             {

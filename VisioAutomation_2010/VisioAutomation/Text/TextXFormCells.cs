@@ -28,7 +28,7 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static IList<TextXFormCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public static List<TextXFormCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var query = TextXFormCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);

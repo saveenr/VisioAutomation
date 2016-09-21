@@ -52,7 +52,7 @@ namespace VisioAutomation.Shapes.Layout
         }
 
 
-        public static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);

@@ -75,13 +75,13 @@ namespace VisioAutomation.Shapes.Connectors
             }
         }
 
-        public static IList<IVisio.Shape> ConnectShapes( IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes,
+        public static List<IVisio.Shape> ConnectShapes( IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes,
             IVisio.Master connector_master)
         {
             return ConnectorHelper.ConnectShapes(page, fromshapes, toshapes, connector_master, true);
         }
 
-        public static IList<IVisio.Shape> ConnectShapes(IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master connector_master, bool force_manual)
+        public static List<IVisio.Shape> ConnectShapes(IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master connector_master, bool force_manual)
         {
             if (connector_master == null && force_manual )
             {

@@ -37,7 +37,7 @@ namespace VisioAutomation.Scripting.Commands
             master.Close();
         }
 
-        public IList<IVisio.Master> Get()
+        public List<IVisio.Master> Get()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Commands
             return masters;
         }
 
-        public IList<IVisio.Master> Get(IVisio.Document doc)
+        public List<IVisio.Master> Get(IVisio.Document doc)
         {
             this._client.Application.AssertApplicationAvailable();
             var doc_masters = doc.Masters;

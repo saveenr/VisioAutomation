@@ -63,13 +63,13 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             return s;
         }
 
-        public static IList<List<UserDefinedCell>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<UserDefinedCell>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = UserDefinedCell.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static IList<UserDefinedCell> GetCells(IVisio.Shape shape)
+        public static List<UserDefinedCell> GetCells(IVisio.Shape shape)
         {
             var query = UserDefinedCell.lazy_query.Value;
             return query.GetCellGroups(shape);

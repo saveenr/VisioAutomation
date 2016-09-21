@@ -60,13 +60,13 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static IList<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = CharacterCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static IList<CharacterCells> GetCells(IVisio.Shape shape)
+        public static List<CharacterCells> GetCells(IVisio.Shape shape)
         {
             var query = CharacterCells.lazy_query.Value;
             return query.GetCellGroups(shape);

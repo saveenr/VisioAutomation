@@ -333,7 +333,7 @@ namespace VisioAutomation.Scripting.Commands
             return doc;
         }
 
-        public IList<Interop.EnumType> GetInteropEnums()
+        public List<Interop.EnumType> GetInteropEnums()
         {
             return Interop.InteropHelper.GetEnums();
         }

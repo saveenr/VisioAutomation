@@ -11,7 +11,7 @@ namespace VisioAutomation.Text
     {
         private const short tab_section = (short)IVisio.VisSectionIndices.visSectionTab;
 
-        public static IList<TabStop> GetTabStops(IVisio.Shape shape)
+        public static List<TabStop> GetTabStops(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -43,7 +43,6 @@ namespace VisioAutomation.Text
             }
 
             var surface = new ShapeSheetSurface(shape);
-
 
             var stream = ShapeSheet.SRC.ToStream(srcs);
             var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNumber).ToList();
