@@ -6,7 +6,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ConnectionPointCellsQuery : CellGroupMultiRowQuery<ConnectionPointCells, double>
+    class ConnectionPointCellsQuery : CellGroupMultiRowQuery<ConnectionPointCells>
     {
         public ColumnSubQuery DirX { get; set; }
         public ColumnSubQuery DirY { get; set; }
@@ -26,14 +26,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public override ConnectionPointCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override ConnectionPointCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new ConnectionPointCells();
             cells.X = row[this.X];
             cells.Y = row[this.Y];
-            cells.DirX = row[this.DirX].ToInt();
-            cells.DirY = row[this.DirY].ToInt();
-            cells.Type = row[this.Type].ToInt();
+            cells.DirX = row[this.DirX];
+            cells.DirY = row[this.DirY];
+            cells.Type = row[this.Type];
 
             return cells;
         }

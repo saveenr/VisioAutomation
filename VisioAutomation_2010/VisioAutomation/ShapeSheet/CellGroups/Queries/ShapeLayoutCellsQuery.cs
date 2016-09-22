@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ShapeLayoutCellsQuery : CellGroupSingleRowQuery<Shapes.Layout.ShapeLayoutCells, double>
+    class ShapeLayoutCellsQuery : CellGroupSingleRowQuery<Shapes.Layout.ShapeLayoutCells>
     {
         public ColumnQuery ConFixedCode { get; set; }
         public ColumnQuery ConLineJumpCode { get; set; }
@@ -49,27 +49,27 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public override Shapes.Layout.ShapeLayoutCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Shapes.Layout.ShapeLayoutCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.Layout.ShapeLayoutCells();
-            cells.ConFixedCode = row[this.ConFixedCode].ToInt();
-            cells.ConLineJumpCode = row[this.ConLineJumpCode].ToInt();
-            cells.ConLineJumpDirX = row[this.ConLineJumpDirX].ToInt();
-            cells.ConLineJumpDirY = row[this.ConLineJumpDirY].ToInt();
-            cells.ConLineJumpStyle = row[this.ConLineJumpStyle].ToInt();
-            cells.ConLineRouteExt = row[this.ConLineRouteExt].ToInt();
-            cells.ShapeFixedCode = row[this.ShapeFixedCode].ToInt();
-            cells.ShapePermeablePlace = row[this.ShapePermeablePlace].ToInt();
-            cells.ShapePermeableX = row[this.ShapePermeableX].ToInt();
-            cells.ShapePermeableY = row[this.ShapePermeableY].ToInt();
-            cells.ShapePlaceFlip = row[this.ShapePlaceFlip].ToInt();
-            cells.ShapePlaceStyle = row[this.ShapePlaceStyle].ToInt();
-            cells.ShapePlowCode = row[this.ShapePlowCode].ToInt();
-            cells.ShapeRouteStyle = row[this.ShapeRouteStyle].ToInt();
-            cells.ShapeSplit = row[this.ShapeSplit].ToInt();
-            cells.ShapeSplittable = row[this.ShapeSplittable].ToInt();
-            cells.DisplayLevel = row[this.DisplayLevel].ToInt();
-            cells.Relationships = row[this.Relationships].ToInt();
+            cells.ConFixedCode = row[this.ConFixedCode];
+            cells.ConLineJumpCode = row[this.ConLineJumpCode];
+            cells.ConLineJumpDirX = row[this.ConLineJumpDirX];
+            cells.ConLineJumpDirY = row[this.ConLineJumpDirY];
+            cells.ConLineJumpStyle = row[this.ConLineJumpStyle];
+            cells.ConLineRouteExt = row[this.ConLineRouteExt];
+            cells.ShapeFixedCode = row[this.ShapeFixedCode];
+            cells.ShapePermeablePlace = row[this.ShapePermeablePlace];
+            cells.ShapePermeableX = row[this.ShapePermeableX];
+            cells.ShapePermeableY = row[this.ShapePermeableY];
+            cells.ShapePlaceFlip = row[this.ShapePlaceFlip];
+            cells.ShapePlaceStyle = row[this.ShapePlaceStyle];
+            cells.ShapePlowCode = row[this.ShapePlowCode];
+            cells.ShapeRouteStyle = row[this.ShapeRouteStyle];
+            cells.ShapeSplit = row[this.ShapeSplit];
+            cells.ShapeSplittable = row[this.ShapeSplittable];
+            cells.DisplayLevel = row[this.DisplayLevel];
+            cells.Relationships = row[this.Relationships];
             return cells;
         }
     }

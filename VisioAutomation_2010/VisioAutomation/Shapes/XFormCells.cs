@@ -7,13 +7,13 @@ namespace VisioAutomation.Shapes
 {
     public class XFormCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData<double> PinX { get; set; }
-        public ShapeSheet.CellData<double> PinY { get; set; }
-        public ShapeSheet.CellData<double> LocPinX { get; set; }
-        public ShapeSheet.CellData<double> LocPinY { get; set; }
-        public ShapeSheet.CellData<double> Width { get; set; }
-        public ShapeSheet.CellData<double> Height { get; set; }
-        public ShapeSheet.CellData<double> Angle { get; set; }
+        public ShapeSheet.CellData PinX { get; set; }
+        public ShapeSheet.CellData PinY { get; set; }
+        public ShapeSheet.CellData LocPinX { get; set; }
+        public ShapeSheet.CellData LocPinY { get; set; }
+        public ShapeSheet.CellData Width { get; set; }
+        public ShapeSheet.CellData Height { get; set; }
+        public ShapeSheet.CellData Angle { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
@@ -29,7 +29,7 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = XFormCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);

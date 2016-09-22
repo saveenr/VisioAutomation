@@ -83,7 +83,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return dic;
         }
 
-        public static IList<VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static List<VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
         {
             if (page == null)
             {
@@ -154,7 +154,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return row_count;
         }
 
-        public static IList<string> GetNames(IVisio.Shape shape)
+        public static List<string> GetNames(IVisio.Shape shape)
         {
             if (shape == null)
             {

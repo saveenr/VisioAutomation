@@ -7,28 +7,28 @@ namespace VisioAutomation.Text
 {
     public class CharacterCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData<int> Color { get; set; }
-        public ShapeSheet.CellData<int> Font { get; set; }
-        public ShapeSheet.CellData<double> Size { get; set; }
-        public ShapeSheet.CellData<int> Style { get; set; }
-        public ShapeSheet.CellData<double> Transparency { get; set; }
-        public ShapeSheet.CellData<int> AsianFont { get; set; }
-        public ShapeSheet.CellData<int> Case { get; set; }
-        public ShapeSheet.CellData<int> ComplexScriptFont { get; set; }
-        public ShapeSheet.CellData<double> ComplexScriptSize { get; set; }
-        public ShapeSheet.CellData<bool> DoubleStrikeThrough { get; set; }
-        public ShapeSheet.CellData<bool> DoubleUnderline { get; set; }
-        public ShapeSheet.CellData<int> LangID { get; set; }
-        public ShapeSheet.CellData<int> Locale { get; set; }
-        public ShapeSheet.CellData<int> LocalizeFont { get; set; }
-        public ShapeSheet.CellData<bool> Overline { get; set; }
-        public ShapeSheet.CellData<bool> Perpendicular { get; set; }
-        public ShapeSheet.CellData<int> Pos { get; set; }
-        public ShapeSheet.CellData<int> RTLText { get; set; }
-        public ShapeSheet.CellData<double> FontScale { get; set; }
-        public ShapeSheet.CellData<double> Letterspace { get; set; }
-        public ShapeSheet.CellData<bool> Strikethru { get; set; }
-        public ShapeSheet.CellData<int> UseVertical { get; set; }
+        public ShapeSheet.CellData Color { get; set; }
+        public ShapeSheet.CellData Font { get; set; }
+        public ShapeSheet.CellData Size { get; set; }
+        public ShapeSheet.CellData Style { get; set; }
+        public ShapeSheet.CellData Transparency { get; set; }
+        public ShapeSheet.CellData AsianFont { get; set; }
+        public ShapeSheet.CellData Case { get; set; }
+        public ShapeSheet.CellData ComplexScriptFont { get; set; }
+        public ShapeSheet.CellData ComplexScriptSize { get; set; }
+        public ShapeSheet.CellData DoubleStrikeThrough { get; set; }
+        public ShapeSheet.CellData DoubleUnderline { get; set; }
+        public ShapeSheet.CellData LangID { get; set; }
+        public ShapeSheet.CellData Locale { get; set; }
+        public ShapeSheet.CellData LocalizeFont { get; set; }
+        public ShapeSheet.CellData Overline { get; set; }
+        public ShapeSheet.CellData Perpendicular { get; set; }
+        public ShapeSheet.CellData Pos { get; set; }
+        public ShapeSheet.CellData RTLText { get; set; }
+        public ShapeSheet.CellData FontScale { get; set; }
+        public ShapeSheet.CellData Letterspace { get; set; }
+        public ShapeSheet.CellData Strikethru { get; set; }
+        public ShapeSheet.CellData UseVertical { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
@@ -60,13 +60,13 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static IList<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = CharacterCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static IList<CharacterCells> GetCells(IVisio.Shape shape)
+        public static List<CharacterCells> GetCells(IVisio.Shape shape)
         {
             var query = CharacterCells.lazy_query.Value;
             return query.GetCellGroups(shape);

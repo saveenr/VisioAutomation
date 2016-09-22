@@ -4,7 +4,19 @@ namespace VisioAutomation_Tests
     {
         public static VisioAutomation.Drawing.Point GetPinPosResult(this VisioAutomation.Shapes.XFormCells xform)
         {
-            return new VisioAutomation.Drawing.Point(xform.PinX.Result, xform.PinY.Result);
+            return  ToPoint(xform.PinX.Result, xform.PinY.Result);
+        }
+
+        public static VisioAutomation.Drawing.Point ToPoint(string x,string y)
+        {
+            return new VisioAutomation.Drawing.Point(InchesToDouble(x), InchesToDouble(y));
+        }
+
+        public static double InchesToDouble(string s)
+        {
+            string suffix = " in.";
+            string s2 = s.Substring(0, s.Length - suffix.Length);
+            return double.Parse(s2);
         }
 
         public static void AddParameter(this System.Management.Automation.Runspaces.Command cmd, string name, object value)

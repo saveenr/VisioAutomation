@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class TextBlockCellsQuery : CellGroupSingleRowQuery<Text.TextBlockCells, double>
+    class TextBlockCellsQuery : CellGroupSingleRowQuery<Text.TextBlockCells>
     {
         public ColumnQuery BottomMargin { get; set; }
         public ColumnQuery LeftMargin { get; set; }
@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public override Text.TextBlockCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Text.TextBlockCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Text.TextBlockCells();
             cells.BottomMargin = row[this.BottomMargin];
@@ -38,10 +38,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.RightMargin = row[this.RightMargin];
             cells.TopMargin = row[this.TopMargin];
             cells.DefaultTabStop = row[this.DefaultTabStop];
-            cells.TextBkgnd = row[this.TextBkgnd].ToInt();
+            cells.TextBkgnd = row[this.TextBkgnd];
             cells.TextBkgndTrans = row[this.TextBkgndTrans];
-            cells.TextDirection = row[this.TextDirection].ToInt();
-            cells.VerticalAlign = row[this.VerticalAlign].ToInt();
+            cells.TextDirection = row[this.TextDirection];
+            cells.VerticalAlign = row[this.VerticalAlign];
             return cells;
         }
     }

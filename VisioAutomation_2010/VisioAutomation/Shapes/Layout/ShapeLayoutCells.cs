@@ -7,24 +7,24 @@ namespace VisioAutomation.Shapes.Layout
 {
     public class ShapeLayoutCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData<int> ConFixedCode { get; set; }
-        public ShapeSheet.CellData<int> ConLineJumpCode { get; set; }
-        public ShapeSheet.CellData<int> ConLineJumpDirX { get; set; }
-        public ShapeSheet.CellData<int> ConLineJumpDirY { get; set; }
-        public ShapeSheet.CellData<int> ConLineJumpStyle { get; set; }
-        public ShapeSheet.CellData<int> ConLineRouteExt { get; set; }
-        public ShapeSheet.CellData<int> ShapeFixedCode { get; set; }
-        public ShapeSheet.CellData<int> ShapePermeablePlace { get; set; }
-        public ShapeSheet.CellData<int> ShapePermeableX { get; set; }
-        public ShapeSheet.CellData<int> ShapePermeableY { get; set; }
-        public ShapeSheet.CellData<int> ShapePlaceFlip { get; set; }
-        public ShapeSheet.CellData<int> ShapePlaceStyle { get; set; }
-        public ShapeSheet.CellData<int> ShapePlowCode { get; set; }
-        public ShapeSheet.CellData<int> ShapeRouteStyle { get; set; }
-        public ShapeSheet.CellData<int> ShapeSplit { get; set; }
-        public ShapeSheet.CellData<int> ShapeSplittable { get; set; }
-        public ShapeSheet.CellData<int> DisplayLevel { get; set; } // new in visio 2010
-        public ShapeSheet.CellData<int> Relationships { get; set; } // new in visio 2010
+        public ShapeSheet.CellData ConFixedCode { get; set; }
+        public ShapeSheet.CellData ConLineJumpCode { get; set; }
+        public ShapeSheet.CellData ConLineJumpDirX { get; set; }
+        public ShapeSheet.CellData ConLineJumpDirY { get; set; }
+        public ShapeSheet.CellData ConLineJumpStyle { get; set; }
+        public ShapeSheet.CellData ConLineRouteExt { get; set; }
+        public ShapeSheet.CellData ShapeFixedCode { get; set; }
+        public ShapeSheet.CellData ShapePermeablePlace { get; set; }
+        public ShapeSheet.CellData ShapePermeableX { get; set; }
+        public ShapeSheet.CellData ShapePermeableY { get; set; }
+        public ShapeSheet.CellData ShapePlaceFlip { get; set; }
+        public ShapeSheet.CellData ShapePlaceStyle { get; set; }
+        public ShapeSheet.CellData ShapePlowCode { get; set; }
+        public ShapeSheet.CellData ShapeRouteStyle { get; set; }
+        public ShapeSheet.CellData ShapeSplit { get; set; }
+        public ShapeSheet.CellData ShapeSplittable { get; set; }
+        public ShapeSheet.CellData DisplayLevel { get; set; } // new in visio 2010
+        public ShapeSheet.CellData Relationships { get; set; } // new in visio 2010
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
@@ -52,7 +52,7 @@ namespace VisioAutomation.Shapes.Layout
         }
 
 
-        public static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);

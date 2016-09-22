@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class HyperlinkCellsQuery : CellGroupMultiRowQuery<Shapes.Hyperlinks.HyperlinkCells, double>
+    class HyperlinkCellsQuery : CellGroupMultiRowQuery<Shapes.Hyperlinks.HyperlinkCells>
     {
 
         public ColumnSubQuery Address { get; set; }
@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.SubAddress= sec.AddCell(ShapeSheet.SRCConstants.Hyperlink_SubAddress, nameof(ShapeSheet.SRCConstants.Hyperlink_SubAddress));
         }
 
-        public override Shapes.Hyperlinks.HyperlinkCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Shapes.Hyperlinks.HyperlinkCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.Hyperlinks.HyperlinkCells();
 
@@ -42,9 +42,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.Frame= row[this.Frame].Formula;
             cells.SortKey= row[this.SortKey].Formula;
             cells.SubAddress= row[this.SubAddress].Formula;
-            cells.NewWindow = row[this.NewWindow].ToBool();
-            cells.Default = row[this.Default].ToBool();
-            cells.Invisible = row[this.Invisible].ToBool();
+            cells.NewWindow = row[this.NewWindow];
+            cells.Default = row[this.Default];
+            cells.Invisible = row[this.Invisible];
 
             return cells;
         }

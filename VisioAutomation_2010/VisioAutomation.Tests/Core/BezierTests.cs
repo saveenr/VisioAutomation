@@ -18,17 +18,20 @@ namespace VisioAutomation_Tests.Core
             // 0 width slice - 0 degrees
             var s1 = VisioAutomation.Drawing.BezierSegment.FromArc(0.0, 0.0);
             Assert.AreEqual(1, s1.Count());
-            AssertUtil.AreEqual(s1[0].Start, s1[s1.Length - 1].End, this.delta);
+            Assert.AreEqual(s1[0].Start.X, s1[s1.Length - 1].End.X, this.delta);
+            Assert.AreEqual(s1[0].Start.Y, s1[s1.Length - 1].End.Y, this.delta);
 
             // 0 width slice - 45 degrees
             var s1x = VisioAutomation.Drawing.BezierSegment.FromArc(this.piquarter, this.piquarter);
             Assert.AreEqual(1, s1x.Count());
-            AssertUtil.AreEqual(s1x[0].Start, s1x[s1.Length - 1].End, this.delta);
+            Assert.AreEqual(s1x[0].Start.X, s1x[s1.Length - 1].End.X, this.delta);
+            Assert.AreEqual(s1x[0].Start.Y, s1x[s1.Length - 1].End.Y, this.delta);
 
             // a circle
             var s2 = VisioAutomation.Drawing.BezierSegment.FromArc(0.0, this.pi2);
             Assert.AreEqual(4, s2.Count());
-            AssertUtil.AreEqual(s2[0].Start, s2[s2.Length - 1].End, this.delta);
+            Assert.AreEqual(s2[0].Start.X, s2[s2.Length - 1].End.X, this.delta);
+            Assert.AreEqual(s2[0].Start.Y, s2[s2.Length - 1].End.Y, this.delta);
 
             // angles within first quadrant
             var s3 = VisioAutomation.Drawing.BezierSegment.FromArc(this.piquarter - 0.1, this.piquarter + 0.2);

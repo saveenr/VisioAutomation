@@ -39,7 +39,7 @@ namespace VisioAutomation.Drawing
             this.End = points[3];
         }
 
-        public static IList<Point> Merge(IList<BezierSegment> segments, out int degree)
+        public static List<Point> Merge(IList<BezierSegment> segments, out int degree)
         {
             if (segments == null)
             {

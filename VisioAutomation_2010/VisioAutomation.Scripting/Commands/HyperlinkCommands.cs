@@ -12,7 +12,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<int> Add(TargetShapes targets, VAHLINK.HyperlinkCells ctrl)
+        public List<int> Add(TargetShapes targets, VAHLINK.HyperlinkCells ctrl)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

@@ -109,7 +109,7 @@ namespace VisioAutomation.Scripting.Utilities
             throw new System.ArgumentOutOfRangeException(nameof(pos));
         }
 
-        internal static IList<int> SortShapesByPosition(TargetShapeIDs targets, VisioAutomation.Scripting.Layout.RelativePosition pos)
+        internal static List<int> SortShapesByPosition(TargetShapeIDs targets, VisioAutomation.Scripting.Layout.RelativePosition pos)
         {
             // First get the transforms of the shapes on the given axis
             var xforms = XForm.Get(targets);

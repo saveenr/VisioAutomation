@@ -8,8 +8,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
     public class UserDefinedCell : ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public string Name { get; set; }
-        public ShapeSheet.CellData<string> Value { get; set; }
-        public ShapeSheet.CellData<string> Prompt { get; set; }
+        public ShapeSheet.CellData Value { get; set; }
+        public ShapeSheet.CellData Prompt { get; set; }
 
         public UserDefinedCell()
         {
@@ -63,13 +63,13 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             return s;
         }
 
-        public static IList<List<UserDefinedCell>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<UserDefinedCell>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = UserDefinedCell.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static IList<UserDefinedCell> GetCells(IVisio.Shape shape)
+        public static List<UserDefinedCell> GetCells(IVisio.Shape shape)
         {
             var query = UserDefinedCell.lazy_query.Value;
             return query.GetCellGroups(shape);

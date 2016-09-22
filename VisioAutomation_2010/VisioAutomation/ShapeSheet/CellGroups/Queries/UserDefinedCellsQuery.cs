@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class UserDefinedCellsQuery : CellGroupMultiRowQuery<Shapes.UserDefinedCells.UserDefinedCell, string>
+    class UserDefinedCellsQuery : CellGroupMultiRowQuery<Shapes.UserDefinedCells.UserDefinedCell>
     {
         public ColumnSubQuery Value { get; set; }
         public ColumnSubQuery Prompt { get; set; }
@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.Prompt = sec.AddCell(SRCCON.User_Prompt, nameof(SRCCON.User_Prompt));
         }
 
-        public override Shapes.UserDefinedCells.UserDefinedCell CellDataToCellGroup(ShapeSheet.CellData<string>[] row)
+        public override Shapes.UserDefinedCells.UserDefinedCell CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.UserDefinedCells.UserDefinedCell();
             cells.Value = row[this.Value];

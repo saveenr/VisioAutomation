@@ -35,18 +35,31 @@ namespace VisioAutomation_Tests.Core.Connections
             var controlpoints = ConnectionPointCells.GetCells(s1);
             Assert.AreEqual(2, controlpoints.Count);
             var cp_0 = controlpoints[0];
-            AssertUtil.AreEqual("0 in", 0, cp_0.DirX);
-            AssertUtil.AreEqual("0 in", 0, cp_0.DirY);
-            AssertUtil.AreEqual("0", 0, cp_0.Type);
-            AssertUtil.AreEqual("Width*0.25", 1, cp_0.X);
-            AssertUtil.AreEqual("Height*0", 0, cp_0.Y);
+            Assert.AreEqual("0 in", cp_0.DirX.Formula);
+            Assert.AreEqual("0 in", cp_0.DirY.Formula);
+            Assert.AreEqual("0", cp_0.Type.Formula);
+            Assert.AreEqual("Width*0.25", cp_0.X.Formula);
+            Assert.AreEqual("Height*0", cp_0.Y.Formula);
+
+            Assert.AreEqual("0.0000 in.", cp_0.DirX.Result);
+            Assert.AreEqual("0.0000 in.", cp_0.DirY.Result);
+            Assert.AreEqual("0", cp_0.Type.Result);
+            Assert.AreEqual("1.0000 in.", cp_0.X.Result);
+            Assert.AreEqual("0.0000 in.", cp_0.Y.Result);
 
             var cp_1 = controlpoints[1];
-            AssertUtil.AreEqual("0 in", 0, cp_1.DirX);
-            AssertUtil.AreEqual("0 in", 0, cp_1.DirY);
-            AssertUtil.AreEqual("0", 0, cp_1.Type);
-            AssertUtil.AreEqual("Width*0.75", 3, cp_1.X);
-            AssertUtil.AreEqual("Height*0", 0, cp_1.Y);
+            Assert.AreEqual("0 in", cp_1.DirX.Formula);
+            Assert.AreEqual("0 in", cp_1.DirY.Formula);
+            Assert.AreEqual("0", cp_1.Type.Formula);
+            Assert.AreEqual("Width*0.75", cp_1.X.Formula);
+            Assert.AreEqual("Height*0", cp_1.Y.Formula);
+
+            Assert.AreEqual("0.0000 in.", cp_1.DirX.Result);
+            Assert.AreEqual("0.0000 in.", cp_1.DirY.Result);
+            Assert.AreEqual("0", cp_1.Type.Result);
+            Assert.AreEqual("3.0000 in.", cp_1.X.Result);
+            Assert.AreEqual("0.0000 in.", cp_1.Y.Result);
+
 
             ConnectionPointHelper.Delete(s1, 1);
             Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));

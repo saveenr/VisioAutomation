@@ -48,7 +48,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             }
         }
 
-        public static IList<VAGRAPH.DirectedGraphLayout> LoadFromXML(Client client, string filename)
+        public static List<VAGRAPH.DirectedGraphLayout> LoadFromXML(Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
             return DirectedGraphBuilder.LoadFromXML(client, xmldoc);
@@ -134,7 +134,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             return pagedatas;
         }
 
-        public static IList<VAGRAPH.DirectedGraphLayout> LoadFromXML(Client client, SXL.XDocument xmldoc)
+        public static List<VAGRAPH.DirectedGraphLayout> LoadFromXML(Client client, SXL.XDocument xmldoc)
         {
             var pagedatas = DirectedGraphBuilder.LoadPageDataFromXML(client, xmldoc);
 

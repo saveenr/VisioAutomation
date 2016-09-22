@@ -7,26 +7,26 @@ namespace VisioAutomation.Shapes
 {
     public class LockCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData<bool> LockAspect { get; set; }
-        public ShapeSheet.CellData<bool> LockBegin { get; set; }
-        public ShapeSheet.CellData<bool> LockCalcWH { get; set; }
-        public ShapeSheet.CellData<bool> LockCrop { get; set; }
-        public ShapeSheet.CellData<bool> LockCustProp { get; set; }
-        public ShapeSheet.CellData<bool> LockDelete { get; set; }
-        public ShapeSheet.CellData<bool> LockEnd { get; set; }
-        public ShapeSheet.CellData<bool> LockFormat { get; set; }
-        public ShapeSheet.CellData<bool> LockFromGroupFormat { get; set; }
-        public ShapeSheet.CellData<bool> LockGroup { get; set; }
-        public ShapeSheet.CellData<bool> LockHeight { get; set; }
-        public ShapeSheet.CellData<bool> LockMoveX { get; set; }
-        public ShapeSheet.CellData<bool> LockMoveY { get; set; }
-        public ShapeSheet.CellData<bool> LockRotate { get; set; }
-        public ShapeSheet.CellData<bool> LockSelect { get; set; }
-        public ShapeSheet.CellData<bool> LockTextEdit { get; set; }
-        public ShapeSheet.CellData<bool> LockThemeColors { get; set; }
-        public ShapeSheet.CellData<bool> LockThemeEffects { get; set; }
-        public ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
-        public ShapeSheet.CellData<bool> LockWidth { get; set; }
+        public ShapeSheet.CellData LockAspect { get; set; }
+        public ShapeSheet.CellData LockBegin { get; set; }
+        public ShapeSheet.CellData LockCalcWH { get; set; }
+        public ShapeSheet.CellData LockCrop { get; set; }
+        public ShapeSheet.CellData LockCustProp { get; set; }
+        public ShapeSheet.CellData LockDelete { get; set; }
+        public ShapeSheet.CellData LockEnd { get; set; }
+        public ShapeSheet.CellData LockFormat { get; set; }
+        public ShapeSheet.CellData LockFromGroupFormat { get; set; }
+        public ShapeSheet.CellData LockGroup { get; set; }
+        public ShapeSheet.CellData LockHeight { get; set; }
+        public ShapeSheet.CellData LockMoveX { get; set; }
+        public ShapeSheet.CellData LockMoveY { get; set; }
+        public ShapeSheet.CellData LockRotate { get; set; }
+        public ShapeSheet.CellData LockSelect { get; set; }
+        public ShapeSheet.CellData LockTextEdit { get; set; }
+        public ShapeSheet.CellData LockThemeColors { get; set; }
+        public ShapeSheet.CellData LockThemeEffects { get; set; }
+        public ShapeSheet.CellData LockVtxEdit { get; set; }
+        public ShapeSheet.CellData LockWidth { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
@@ -56,7 +56,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = LockCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);

@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class PageCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Pages.PageCells, double>
+    class PageCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Pages.PageCells>
     {
         public ColumnQuery PageLeftMargin { get; set; }
         public ColumnQuery CenterX { get; set; }
@@ -146,28 +146,28 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
         }
 
 
-        public override Pages.PageCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Pages.PageCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Pages.PageCells();
             cells.PageLeftMargin = row[this.PageLeftMargin];
             cells.CenterX = row[this.CenterX];
             cells.CenterY = row[this.CenterY];
-            cells.OnPage = row[this.OnPage].ToInt();
+            cells.OnPage = row[this.OnPage];
             cells.PageBottomMargin = row[this.PageBottomMargin];
             cells.PageRightMargin = row[this.PageRightMargin];
             cells.PagesX = row[this.PagesX];
             cells.PagesY = row[this.PagesY];
             cells.PageTopMargin = row[this.PageTopMargin];
-            cells.PaperKind = row[this.PaperKind].ToInt();
-            cells.PrintGrid = row[this.PrintGrid].ToInt();
-            cells.PrintPageOrientation = row[this.PrintPageOrientation].ToInt();
+            cells.PaperKind = row[this.PaperKind];
+            cells.PrintGrid = row[this.PrintGrid];
+            cells.PrintPageOrientation = row[this.PrintPageOrientation];
             cells.ScaleX = row[this.ScaleX];
             cells.ScaleY = row[this.ScaleY];
-            cells.PaperSource = row[this.PaperSource].ToInt();
+            cells.PaperSource = row[this.PaperSource];
             cells.DrawingScale = row[this.DrawingScale];
-            cells.DrawingScaleType = row[this.DrawingScaleType].ToInt();
-            cells.DrawingSizeType = row[this.DrawingSizeType].ToInt();
-            cells.InhibitSnap = row[this.InhibitSnap].ToInt();
+            cells.DrawingScaleType = row[this.DrawingScaleType];
+            cells.DrawingSizeType = row[this.DrawingSizeType];
+            cells.InhibitSnap = row[this.InhibitSnap];
             cells.PageHeight = row[this.PageHeight];
             cells.PageScale = row[this.PageScale];
             cells.PageWidth = row[this.PageWidth];
@@ -175,7 +175,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.ShdwOffsetX = row[this.ShdwOffsetX];
             cells.ShdwOffsetY = row[this.ShdwOffsetY];
             cells.ShdwScaleFactor = row[this.ShdwScaleFactor];
-            cells.ShdwType = row[this.ShdwType].ToInt();
+            cells.ShdwType = row[this.ShdwType];
             cells.UIVisibility = row[this.UIVisibility];
             cells.XGridDensity = row[this.XGridDensity];
             cells.XGridOrigin = row[this.XGridOrigin];
@@ -191,15 +191,15 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.AvenueSizeY = row[this.AvenueSizeY];
             cells.BlockSizeX = row[this.BlockSizeX];
             cells.BlockSizeY = row[this.BlockSizeY];
-            cells.CtrlAsInput = row[this.CtrlAsInput].ToInt();
-            cells.DynamicsOff = row[this.DynamicsOff].ToInt();
-            cells.EnableGrid = row[this.EnableGrid].ToInt();
-            cells.LineAdjustFrom = row[this.LineAdjustFrom].ToInt();
+            cells.CtrlAsInput = row[this.CtrlAsInput];
+            cells.DynamicsOff = row[this.DynamicsOff];
+            cells.EnableGrid = row[this.EnableGrid];
+            cells.LineAdjustFrom = row[this.LineAdjustFrom];
             cells.LineAdjustTo = row[this.LineAdjustTo];
             cells.LineJumpCode = row[this.LineJumpCode];
             cells.LineJumpFactorX = row[this.LineJumpFactorX];
             cells.LineJumpFactorY = row[this.LineJumpFactorY];
-            cells.LineJumpStyle = row[this.LineJumpStyle].ToInt();
+            cells.LineJumpStyle = row[this.LineJumpStyle];
             cells.LineRouteExt = row[this.LineRouteExt];
             cells.LineToLineX = row[this.LineToLineX];
             cells.LineToLineY = row[this.LineToLineY];
@@ -207,15 +207,15 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.LineToNodeY = row[this.LineToNodeY];
             cells.PageLineJumpDirX = row[this.PageLineJumpDirX];
             cells.PageLineJumpDirY = row[this.PageLineJumpDirY];
-            cells.PageShapeSplit = row[this.PageShapeSplit].ToInt();
-            cells.PlaceDepth = row[this.PlaceDepth].ToInt();
-            cells.PlaceFlip = row[this.PlaceFlip].ToInt();
-            cells.PlaceStyle = row[this.PlaceStyle].ToInt();
-            cells.PlowCode = row[this.PlowCode].ToInt();
-            cells.ResizePage = row[this.ResizePage].ToInt();
-            cells.RouteStyle = row[this.RouteStyle].ToInt();
-            cells.AvoidPageBreaks = row[this.AvoidPageBreaks].ToInt();
-            cells.DrawingResizeType = row[this.DrawingResizeType].ToInt();
+            cells.PageShapeSplit = row[this.PageShapeSplit];
+            cells.PlaceDepth = row[this.PlaceDepth];
+            cells.PlaceFlip = row[this.PlaceFlip];
+            cells.PlaceStyle = row[this.PlaceStyle];
+            cells.PlowCode = row[this.PlowCode];
+            cells.ResizePage = row[this.ResizePage];
+            cells.RouteStyle = row[this.RouteStyle];
+            cells.AvoidPageBreaks = row[this.AvoidPageBreaks];
+            cells.DrawingResizeType = row[this.DrawingResizeType];
             return cells;
         }
     }

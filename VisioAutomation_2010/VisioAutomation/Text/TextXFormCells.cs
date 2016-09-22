@@ -6,13 +6,13 @@ namespace VisioAutomation.Text
 {
     public class TextXFormCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData<double> TxtAngle { get; set; }
-        public ShapeSheet.CellData<double> TxtWidth { get; set; }
-        public ShapeSheet.CellData<double> TxtHeight { get; set; }
-        public ShapeSheet.CellData<double> TxtPinX { get; set; }
-        public ShapeSheet.CellData<double> TxtPinY { get; set; }
-        public ShapeSheet.CellData<double> TxtLocPinX { get; set; }
-        public ShapeSheet.CellData<double> TxtLocPinY { get; set; }
+        public ShapeSheet.CellData TxtAngle { get; set; }
+        public ShapeSheet.CellData TxtWidth { get; set; }
+        public ShapeSheet.CellData TxtHeight { get; set; }
+        public ShapeSheet.CellData TxtPinX { get; set; }
+        public ShapeSheet.CellData TxtPinY { get; set; }
+        public ShapeSheet.CellData TxtLocPinX { get; set; }
+        public ShapeSheet.CellData TxtLocPinY { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
@@ -28,7 +28,7 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static IList<TextXFormCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public static List<TextXFormCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var query = TextXFormCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);

@@ -5,12 +5,12 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class ParagraphFormatCellsQuery : CellGroupMultiRowQuery<Text.ParagraphCells, double>
+    class ParagraphFormatCellsQuery : CellGroupMultiRowQuery<Text.ParagraphCells>
     {
         public ColumnSubQuery Bullet { get; set; }
         public ColumnSubQuery BulletFont { get; set; }
         public ColumnSubQuery BulletFontSize { get; set; }
-        public ColumnSubQuery BulletString { get; set; } // NOTE: This is never used
+        public ColumnSubQuery BulletString { get; set; }
         public ColumnSubQuery Flags { get; set; }
         public ColumnSubQuery HorzAlign { get; set; }
         public ColumnSubQuery IndentFirst { get; set; }
@@ -41,7 +41,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.TextPosAfterBullet = sec.AddCell(SRCCON.Para_TextPosAfterBullet, nameof(SRCCON.Para_TextPosAfterBullet));
         }
 
-        public override Text.ParagraphCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Text.ParagraphCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Text.ParagraphCells();
             cells.IndentFirst = row[this.IndentFirst];
@@ -50,14 +50,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             cells.SpacingAfter = row[this.SpaceAfter];
             cells.SpacingBefore = row[this.SpaceBefore];
             cells.SpacingLine = row[this.SpaceLine];
-            cells.HorizontalAlign = row[this.HorzAlign].ToInt();
-            cells.Bullet = row[this.Bullet].ToInt();
-            cells.BulletFont = row[this.BulletFont].ToInt();
-            cells.BulletFontSize = row[this.BulletFontSize].ToInt();
-            cells.LocBulletFont = row[this.LocalizeBulletFont].ToInt();
+            cells.HorizontalAlign = row[this.HorzAlign];
+            cells.Bullet = row[this.Bullet];
+            cells.BulletFont = row[this.BulletFont];
+            cells.BulletFontSize = row[this.BulletFontSize];
+            cells.LocBulletFont = row[this.LocalizeBulletFont];
             cells.TextPosAfterBullet = row[this.TextPosAfterBullet];
-            cells.Flags = row[this.Flags].ToInt();
-            cells.BulletString = ""; // TODO: Figure out some way of getting this
+            cells.Flags = row[this.Flags];
+            cells.BulletString = row[this.BulletString];
 
             return cells;
         }

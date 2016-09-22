@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting.Commands
             return layer;
         }
 
-        public IList<IVisio.Layer> Get()
+        public List<IVisio.Layer> Get()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

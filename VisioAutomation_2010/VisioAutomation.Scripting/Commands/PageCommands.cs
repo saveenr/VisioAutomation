@@ -507,7 +507,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<IVisio.Shape> GetShapesByID(int[] shapeids)
+        public List<IVisio.Shape> GetShapesByID(int[] shapeids)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -523,12 +523,12 @@ namespace VisioAutomation.Scripting.Commands
             return shapes_list;
         }
 
-        public IList<IVisio.Shape> GetShapesByName(string[] shapenames)
+        public List<IVisio.Shape> GetShapesByName(string[] shapenames)
         {
             return this.GetShapesByName(shapenames, false);
         }
 
-        public IList<IVisio.Shape> GetShapesByName(string[] shapenames, bool ignore_bad_names)
+        public List<IVisio.Shape> GetShapesByName(string[] shapenames, bool ignore_bad_names)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -551,7 +551,7 @@ namespace VisioAutomation.Scripting.Commands
             return shapes_list;
         }
 
-        public IList<IVisio.Page> GetPagesByName(string Name)
+        public List<IVisio.Page> GetPagesByName(string Name)
         {
             var application = this._client.Application.Get();
             var active_document = application.ActiveDocument;

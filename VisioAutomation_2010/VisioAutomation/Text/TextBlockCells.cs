@@ -7,15 +7,15 @@ namespace VisioAutomation.Text
 {
     public class TextBlockCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData<double> BottomMargin { get; set; }
-        public ShapeSheet.CellData<double> LeftMargin { get; set; }
-        public ShapeSheet.CellData<double> RightMargin { get; set; }
-        public ShapeSheet.CellData<double> TopMargin { get; set; }
-        public ShapeSheet.CellData<double> DefaultTabStop { get; set; }
-        public ShapeSheet.CellData<int> TextBkgnd { get; set; }
-        public ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
-        public ShapeSheet.CellData<int> TextDirection { get; set; }
-        public ShapeSheet.CellData<int> VerticalAlign { get; set; }
+        public ShapeSheet.CellData BottomMargin { get; set; }
+        public ShapeSheet.CellData LeftMargin { get; set; }
+        public ShapeSheet.CellData RightMargin { get; set; }
+        public ShapeSheet.CellData TopMargin { get; set; }
+        public ShapeSheet.CellData DefaultTabStop { get; set; }
+        public ShapeSheet.CellData TextBkgnd { get; set; }
+        public ShapeSheet.CellData TextBkgndTrans { get; set; }
+        public ShapeSheet.CellData TextDirection { get; set; }
+        public ShapeSheet.CellData VerticalAlign { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {

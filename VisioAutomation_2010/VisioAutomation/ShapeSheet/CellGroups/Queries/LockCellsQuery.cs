@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class LockCellsQuery : CellGroupSingleRowQuery<Shapes.LockCells, double>
+    class LockCellsQuery : CellGroupSingleRowQuery<Shapes.LockCells>
     {
         public ColumnQuery LockAspect { get; set; }
         public ColumnQuery LockBegin { get; set; }
@@ -51,29 +51,29 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.LockWidth = this.query.AddCell(SRCCON.LockWidth, nameof(SRCCON.LockWidth));
         }
 
-        public override Shapes.LockCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Shapes.LockCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.LockCells();
-            cells.LockAspect = row[this.LockAspect].ToBool();
-            cells.LockBegin = row[this.LockBegin].ToBool();
-            cells.LockCalcWH = row[this.LockCalcWH].ToBool();
-            cells.LockCrop = row[this.LockCrop].ToBool();
-            cells.LockCustProp = row[this.LockCustProp].ToBool();
-            cells.LockDelete = row[this.LockDelete].ToBool();
-            cells.LockEnd = row[this.LockEnd].ToBool();
-            cells.LockFormat = row[this.LockFormat].ToBool();
-            cells.LockFromGroupFormat = row[this.LockFromGroupFormat].ToBool();
-            cells.LockGroup = row[this.LockGroup].ToBool();
-            cells.LockHeight = row[this.LockHeight].ToBool();
-            cells.LockMoveX = row[this.LockMoveX].ToBool();
-            cells.LockMoveY = row[this.LockMoveY].ToBool();
-            cells.LockRotate = row[this.LockRotate].ToBool();
-            cells.LockSelect = row[this.LockSelect].ToBool();
-            cells.LockTextEdit = row[this.LockTextEdit].ToBool();
-            cells.LockThemeColors = row[this.LockThemeColors].ToBool();
-            cells.LockThemeEffects = row[this.LockThemeEffects].ToBool();
-            cells.LockVtxEdit = row[this.LockVtxEdit].ToBool();
-            cells.LockWidth = row[this.LockWidth].ToBool();
+            cells.LockAspect = row[this.LockAspect];
+            cells.LockBegin = row[this.LockBegin];
+            cells.LockCalcWH = row[this.LockCalcWH];
+            cells.LockCrop = row[this.LockCrop];
+            cells.LockCustProp = row[this.LockCustProp];
+            cells.LockDelete = row[this.LockDelete];
+            cells.LockEnd = row[this.LockEnd];
+            cells.LockFormat = row[this.LockFormat];
+            cells.LockFromGroupFormat = row[this.LockFromGroupFormat];
+            cells.LockGroup = row[this.LockGroup];
+            cells.LockHeight = row[this.LockHeight];
+            cells.LockMoveX = row[this.LockMoveX];
+            cells.LockMoveY = row[this.LockMoveY];
+            cells.LockRotate = row[this.LockRotate];
+            cells.LockSelect = row[this.LockSelect];
+            cells.LockTextEdit = row[this.LockTextEdit];
+            cells.LockThemeColors = row[this.LockThemeColors];
+            cells.LockThemeEffects = row[this.LockThemeEffects];
+            cells.LockVtxEdit = row[this.LockVtxEdit];
+            cells.LockWidth = row[this.LockWidth];
             return cells;
         }
     }

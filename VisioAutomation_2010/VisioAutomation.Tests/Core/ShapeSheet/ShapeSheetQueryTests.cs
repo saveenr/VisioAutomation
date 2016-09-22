@@ -185,7 +185,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
             var surface = new ShapeSheetSurface(page1);
-            var data = query.GetFormulasAndResults<double>(surface,shapeids);
+            var data = query.GetFormulasAndResults(surface,shapeids);
 
             Assert.AreEqual(4, data.Count);
             Assert.AreEqual(1, data[0].Sections[prop_sec].Rows.Count);
@@ -193,12 +193,20 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual(0, data[2].Sections[prop_sec].Rows.Count);
             Assert.AreEqual(3, data[3].Sections[prop_sec].Rows.Count);
 
-            AssertUtil.AreEqual("\"1\"", 1.0, data[0].Sections[prop_sec].Rows[0].Cells[0]);
-            AssertUtil.AreEqual("\"2\"", 2.0, data[1].Sections[prop_sec].Rows[0].Cells[0]);
-            AssertUtil.AreEqual("\"3\"", 3.0, data[1].Sections[prop_sec].Rows[1].Cells[0]);
-            AssertUtil.AreEqual("\"4\"", 4.0, data[3].Sections[prop_sec].Rows[0].Cells[0]);
-            AssertUtil.AreEqual("\"5\"", 5.0, data[3].Sections[prop_sec].Rows[1].Cells[0]);
-            AssertUtil.AreEqual("\"6\"", 6.0, data[3].Sections[prop_sec].Rows[2].Cells[0]);
+            Assert.AreEqual("\"1\"", data[0].Sections[prop_sec].Rows[0].Cells[0].Formula);
+            Assert.AreEqual("\"2\"", data[1].Sections[prop_sec].Rows[0].Cells[0].Formula);
+            Assert.AreEqual("\"3\"", data[1].Sections[prop_sec].Rows[1].Cells[0].Formula);
+            Assert.AreEqual("\"4\"", data[3].Sections[prop_sec].Rows[0].Cells[0].Formula);
+            Assert.AreEqual("\"5\"", data[3].Sections[prop_sec].Rows[1].Cells[0].Formula);
+            Assert.AreEqual("\"6\"", data[3].Sections[prop_sec].Rows[2].Cells[0].Formula);
+
+
+            Assert.AreEqual( "1", data[0].Sections[prop_sec].Rows[0].Cells[0].Result);
+            Assert.AreEqual( "2", data[1].Sections[prop_sec].Rows[0].Cells[0].Result);
+            Assert.AreEqual( "3", data[1].Sections[prop_sec].Rows[1].Cells[0].Result);
+            Assert.AreEqual( "4", data[3].Sections[prop_sec].Rows[0].Cells[0].Result);
+            Assert.AreEqual( "5", data[3].Sections[prop_sec].Rows[1].Cells[0].Result);
+            Assert.AreEqual( "6", data[3].Sections[prop_sec].Rows[2].Cells[0].Result);
 
             page1.Delete(0);
         }

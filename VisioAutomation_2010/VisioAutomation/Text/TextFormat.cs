@@ -5,15 +5,15 @@ namespace VisioAutomation.Text
 {
     public class TextFormat
     {
-        public IList<CharacterCells> CharacterFormats { get; private set; }
-        public IList<ParagraphCells> ParagraphFormats { get; private set; }
+        public List<CharacterCells> CharacterFormats { get; private set; }
+        public List<ParagraphCells> ParagraphFormats { get; private set; }
         public TextBlockCells TextBlock { get; private set; }
         public TextXFormCells TextXForm { get; private set; }
-        public IList<TextRun> CharacterTextRuns { get; private set; }
-        public IList<TextRun> ParagraphTextRuns { get; private set; }
-        public IList<TabStop> TabStops { get; private set; }
+        public List<TextRun> CharacterTextRuns { get; private set; }
+        public List<TextRun> ParagraphTextRuns { get; private set; }
+        public List<TabStop> TabStops { get; private set; }
 
-        private static IList<TextRun> GetTextRuns(
+        private static List<TextRun> GetTextRuns(
             IVisio.Shape shape,
             IVisio.VisRunTypes runtype,
             bool collect_text)
@@ -71,14 +71,26 @@ namespace VisioAutomation.Text
             cells.CharacterFormats = CharacterCells.GetCells(shape);
             cells.ParagraphFormats = ParagraphCells.GetCells(shape);
             cells.TextBlock = TextBlockCells.GetCells(shape);
-            cells.TextXForm = TextXFormCells.GetCells(shape);
+            if (HasTextXFormCells(shape))
+            {
+                cells.TextXForm = TextXFormCells.GetCells(shape);
+            }
             cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
             cells.TabStops = TabStopHelper.GetTabStops(shape);
             return cells;
         }
 
-        public static IList<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
+        public static bool HasTextXFormCells(IVisio.Shape shape)
+        {
+            return (
+                shape.RowExists[
+                    (short) IVisio.VisSectionIndices.visSectionObject, 
+                    (short) IVisio.VisRowIndices.visRowTextXForm,
+                    (short) 0] != 0) ;
+        }
+
+        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
         {
             var charcells = CharacterCells.GetCells(page, shapeids);
             var paracells = ParagraphCells.GetCells(page, shapeids);

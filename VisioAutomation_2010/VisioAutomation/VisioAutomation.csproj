@@ -76,7 +76,6 @@
     <Compile Include="Application\Logging\LogState.cs" />
     <Compile Include="Colors\ColorHelper.cs" />
     <Compile Include="Extensions\ApplicationMethods.cs" />
-    <Compile Include="Extensions\CellDataMethods.cs" />
     <Compile Include="Extensions\ColorsMethods.cs" />
     <Compile Include="Extensions\ConnectsMethods.cs" />
     <Compile Include="Extensions\DocumentMethods.cs" />

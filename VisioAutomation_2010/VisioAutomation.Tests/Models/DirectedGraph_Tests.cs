@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using DG = VisioAutomation.Models.Layouts.DirectedGraph;
 
-namespace VisioAutomation_Tests.Models.Layouts
+namespace VisioAutomation_Tests.Models
 {
     [TestClass]
     public class DirectedGraph_Tests : VisioAutomationTest

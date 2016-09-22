@@ -7,14 +7,14 @@ namespace VisioAutomation.Shapes.Controls
 {
     public class ControlCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData<int> CanGlue { get; set; }
-        public ShapeSheet.CellData<int> Tip { get; set; }
-        public ShapeSheet.CellData<double> X { get; set; }
-        public ShapeSheet.CellData<double> Y { get; set; }
-        public ShapeSheet.CellData<int> YBehavior { get; set; }
-        public ShapeSheet.CellData<int> XBehavior { get; set; }
-        public ShapeSheet.CellData<int> XDynamics { get; set; }
-        public ShapeSheet.CellData<int> YDynamics { get; set; }
+        public ShapeSheet.CellData CanGlue { get; set; }
+        public ShapeSheet.CellData Tip { get; set; }
+        public ShapeSheet.CellData X { get; set; }
+        public ShapeSheet.CellData Y { get; set; }
+        public ShapeSheet.CellData YBehavior { get; set; }
+        public ShapeSheet.CellData XBehavior { get; set; }
+        public ShapeSheet.CellData XDynamics { get; set; }
+        public ShapeSheet.CellData YDynamics { get; set; }
 
 
         public override IEnumerable<SRCFormulaPair> Pairs
@@ -32,13 +32,13 @@ namespace VisioAutomation.Shapes.Controls
             }
         }
 
-        public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ControlCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static IList<ControlCells> GetCells(IVisio.Shape shape)
+        public static List<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = ControlCells.lazy_query.Value;
             return query.GetCellGroups(shape);

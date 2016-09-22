@@ -4,8 +4,8 @@ namespace VisioAutomation.Models.Text
 {
     class MarkupRegions
     {
-        public IList<TextRegion> FormatRegions { get; private set; }
-        public IList<TextRegion> FieldRegions { get; private set; }
+        public List<TextRegion> FormatRegions { get; private set; }
+        public List<TextRegion> FieldRegions { get; private set; }
 
         public MarkupRegions()
         {

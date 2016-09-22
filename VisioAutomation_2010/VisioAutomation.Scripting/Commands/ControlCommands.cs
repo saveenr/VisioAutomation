@@ -12,7 +12,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<int> Add(TargetShapes targets, VACONTROL.ControlCells ctrl)
+        public List<int> Add(TargetShapes targets, VACONTROL.ControlCells ctrl)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -56,7 +56,6 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Delete Control"))
             {
                 foreach (var shape in shapes)

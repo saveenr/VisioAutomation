@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<string> Get(TargetShapes targets)
+        public List<string> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -145,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.ShapeSheet.SetFormula(targets, srcs, formulas, flags);
         }
 
-        public IList<Text.TextFormat> GetFormat(TargetShapes targets)
+        public List<Text.TextFormat> GetFormat(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

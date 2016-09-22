@@ -59,7 +59,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Distribute.DistributeOnAxis(targets, Axis.YAxis, 1.0);
 
             var out_xfrms = VisioAutomation.Shapes.XFormCells.GetCells(client.Page.Get(), new[] { s1.ID, s2.ID, s3.ID });
-            var out_positions = out_xfrms.Select(xfrm => new VA.Drawing.Point(xfrm.PinX.Result, xfrm.PinY.Result)).ToArray();
+            var out_positions = out_xfrms.Select(xfrm => TestExtensions.ToPoint(xfrm.PinX.Result, xfrm.PinY.Result)).ToArray();
 
             Assert.AreEqual(1.25, out_positions[0].X);
             Assert.AreEqual(1.25, out_positions[0].Y);

@@ -8,31 +8,31 @@ namespace VisioAutomation.Shapes
 {
     public class FormatCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData<int> FillBkgnd { get; set; }
-        public ShapeSheet.CellData<double> FillBkgndTrans { get; set; }
-        public ShapeSheet.CellData<int> FillForegnd { get; set; }
-        public ShapeSheet.CellData<double> FillForegndTrans { get; set; }
-        public ShapeSheet.CellData<int> FillPattern { get; set; }
-        public ShapeSheet.CellData<double> ShapeShdwObliqueAngle { get; set; }
-        public ShapeSheet.CellData<double> ShapeShdwOffsetX { get; set; }
-        public ShapeSheet.CellData<double> ShapeShdwOffsetY { get; set; }
-        public ShapeSheet.CellData<double> ShapeShdwScaleFactor { get; set; }
-        public ShapeSheet.CellData<int> ShapeShdwType { get; set; }
-        public ShapeSheet.CellData<int> ShdwBkgnd { get; set; }
-        public ShapeSheet.CellData<double> ShdwBkgndTrans { get; set; }
-        public ShapeSheet.CellData<int> ShdwForegnd { get; set; }
-        public ShapeSheet.CellData<double> ShdwForegndTrans { get; set; }
-        public ShapeSheet.CellData<int> ShdwPattern { get; set; }
-        public ShapeSheet.CellData<int> BeginArrow { get; set; }
-        public ShapeSheet.CellData<double> BeginArrowSize { get; set; }
-        public ShapeSheet.CellData<int> EndArrow { get; set; }
-        public ShapeSheet.CellData<double> EndArrowSize { get; set; }
-        public ShapeSheet.CellData<int> LineCap { get; set; }
-        public ShapeSheet.CellData<int> LineColor { get; set; }
-        public ShapeSheet.CellData<double> LineColorTrans { get; set; }
-        public ShapeSheet.CellData<int> LinePattern { get; set; }
-        public ShapeSheet.CellData<double> LineWeight { get; set; }
-        public ShapeSheet.CellData<double> Rounding { get; set; }
+        public ShapeSheet.CellData FillBkgnd { get; set; }
+        public ShapeSheet.CellData FillBkgndTrans { get; set; }
+        public ShapeSheet.CellData FillForegnd { get; set; }
+        public ShapeSheet.CellData FillForegndTrans { get; set; }
+        public ShapeSheet.CellData FillPattern { get; set; }
+        public ShapeSheet.CellData ShapeShdwObliqueAngle { get; set; }
+        public ShapeSheet.CellData ShapeShdwOffsetX { get; set; }
+        public ShapeSheet.CellData ShapeShdwOffsetY { get; set; }
+        public ShapeSheet.CellData ShapeShdwScaleFactor { get; set; }
+        public ShapeSheet.CellData ShapeShdwType { get; set; }
+        public ShapeSheet.CellData ShdwBkgnd { get; set; }
+        public ShapeSheet.CellData ShdwBkgndTrans { get; set; }
+        public ShapeSheet.CellData ShdwForegnd { get; set; }
+        public ShapeSheet.CellData ShdwForegndTrans { get; set; }
+        public ShapeSheet.CellData ShdwPattern { get; set; }
+        public ShapeSheet.CellData BeginArrow { get; set; }
+        public ShapeSheet.CellData BeginArrowSize { get; set; }
+        public ShapeSheet.CellData EndArrow { get; set; }
+        public ShapeSheet.CellData EndArrowSize { get; set; }
+        public ShapeSheet.CellData LineCap { get; set; }
+        public ShapeSheet.CellData LineColor { get; set; }
+        public ShapeSheet.CellData LineColorTrans { get; set; }
+        public ShapeSheet.CellData LinePattern { get; set; }
+        public ShapeSheet.CellData LineWeight { get; set; }
+        public ShapeSheet.CellData Rounding { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
@@ -67,7 +67,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static IList<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = FormatCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);

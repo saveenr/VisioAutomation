@@ -4,7 +4,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    class XFormCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Shapes.XFormCells,double>
+    class XFormCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Shapes.XFormCells>
     {
         public ColumnQuery Width { get; set; }
         public ColumnQuery Height { get; set; }
@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.Angle = this.query.AddCell(SRCCON.Angle, nameof(SRCCON.Angle));
         }
 
-        public override XFormCells CellDataToCellGroup(CellData<double>[] row)
+        public override XFormCells CellDataToCellGroup(CellData[] row)
         {
             var cells = new Shapes.XFormCells();
             cells.PinX = row[this.PinX];

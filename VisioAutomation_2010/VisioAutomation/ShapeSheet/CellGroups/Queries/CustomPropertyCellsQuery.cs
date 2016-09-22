@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 {
-    public class CustomPropertyCellsQuery : CellGroupMultiRowQuery<Shapes.CustomProperties.CustomPropertyCells, double>
+    public class CustomPropertyCellsQuery : CellGroupMultiRowQuery<Shapes.CustomProperties.CustomPropertyCells>
     {
         public ColumnSubQuery SortKey { get; set; }
         public ColumnSubQuery Ask { get; set; }
@@ -36,19 +36,19 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
 
         }
 
-        public override Shapes.CustomProperties.CustomPropertyCells CellDataToCellGroup(ShapeSheet.CellData<double>[] row)
+        public override Shapes.CustomProperties.CustomPropertyCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
             var cells = new Shapes.CustomProperties.CustomPropertyCells();
             cells.Value = row[this.Value];
-            cells.Calendar = row[this.Calendar].ToInt();
+            cells.Calendar = row[this.Calendar];
             cells.Format = row[this.Format];
-            cells.Invisible = row[this.Invis].ToInt();
+            cells.Invisible = row[this.Invis];
             cells.Label = row[this.Label];
-            cells.LangId = row[this.LangID].ToInt();
+            cells.LangId = row[this.LangID];
             cells.Prompt = row[this.Prompt];
-            cells.SortKey = row[this.SortKey].ToInt();
-            cells.Type = row[this.Type].ToInt();
-            cells.Ask = row[this.Ask].ToBool();
+            cells.SortKey = row[this.SortKey];
+            cells.Type = row[this.Type];
+            cells.Ask = row[this.Ask];
             return cells;
         }
     }
