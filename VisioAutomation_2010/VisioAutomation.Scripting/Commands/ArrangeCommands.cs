@@ -3,6 +3,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Shapes.Locking;
 using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Scripting.Commands
@@ -58,7 +59,7 @@ namespace VisioAutomation.Scripting.Commands
             Selections.SelectionHelper.SendShapes(selection, dir);
         }
 
-        public void SetLock(TargetShapes targets, Shapes.LockCells lockcells)
+        public void SetLock(TargetShapes targets, LockCells lockcells)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

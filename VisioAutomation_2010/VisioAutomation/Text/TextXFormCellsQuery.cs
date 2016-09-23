@@ -1,6 +1,8 @@
+using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.Text
 {
     class TextXFormCellsQuery : CellGroupSingleRowQuery<Text.TextXFormCells>
     {

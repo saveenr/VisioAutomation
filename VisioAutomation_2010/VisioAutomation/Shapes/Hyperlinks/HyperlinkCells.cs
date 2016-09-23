@@ -28,12 +28,9 @@ namespace VisioAutomation.Shapes.Hyperlinks
                 yield return this.newpair(ShapeSheet.SRCConstants.Hyperlink_Frame, this.Frame.Formula);
                 yield return this.newpair(ShapeSheet.SRCConstants.Hyperlink_SortKey, this.SortKey.Formula);
                 yield return this.newpair(ShapeSheet.SRCConstants.Hyperlink_SubAddress, this.SubAddress.Formula);
-
-
                 yield return this.newpair(ShapeSheet.SRCConstants.Hyperlink_NewWindow, this.NewWindow.Formula);
                 yield return this.newpair(ShapeSheet.SRCConstants.Hyperlink_Default, this.Default.Formula);
                 yield return this.newpair(ShapeSheet.SRCConstants.Hyperlink_Invisible, this.Invisible.Formula);
-
             }
         }
 
