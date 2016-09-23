@@ -1,9 +1,9 @@
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.Text
 {
     class CharacterFormatCellsQuery : CellGroupMultiRowQuery<Text.CharacterCells>
     {

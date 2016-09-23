@@ -1,8 +1,8 @@
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
-using VisioAutomation.Extensions;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.Shapes.Layout
 {
     class ShapeLayoutCellsQuery : CellGroupSingleRowQuery<Shapes.Layout.ShapeLayoutCells>
     {

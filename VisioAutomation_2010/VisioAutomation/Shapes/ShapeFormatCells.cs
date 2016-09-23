@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes
 {
-    public class FormatCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class ShapeFormatCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
         public ShapeSheet.CellData FillBkgnd { get; set; }
         public ShapeSheet.CellData FillBkgndTrans { get; set; }
@@ -67,15 +67,15 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = FormatCells.lazy_query.Value;
+            var query = ShapeFormatCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static FormatCells GetCells(IVisio.Shape shape)
+        public static ShapeFormatCells GetCells(IVisio.Shape shape)
         {
-            var query = FormatCells.lazy_query.Value;
+            var query = ShapeFormatCells.lazy_query.Value;
             return query.GetCellGroup(shape);
         }
 

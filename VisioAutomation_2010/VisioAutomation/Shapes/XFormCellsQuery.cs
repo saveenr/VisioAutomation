@@ -1,8 +1,9 @@
-using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.Shapes
 {
     class XFormCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Shapes.XFormCells>
     {

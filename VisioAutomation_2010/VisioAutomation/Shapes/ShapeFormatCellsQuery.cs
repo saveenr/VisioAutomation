@@ -1,10 +1,10 @@
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
-using VisioAutomation.Extensions;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.Shapes
 {
-    class ShapeFormatCellsQuery : CellGroupSingleRowQuery<Shapes.FormatCells>
+    class ShapeFormatCellsQuery : CellGroupSingleRowQuery<Shapes.ShapeFormatCells>
     {
         public ColumnQuery FillBkgnd { get; set; }
         public ColumnQuery FillBkgndTrans { get; set; }
@@ -62,9 +62,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.Rounding = this.query.AddCell(SRCCON.Rounding, nameof(SRCCON.Rounding));
         }
 
-        public override Shapes.FormatCells CellDataToCellGroup(ShapeSheet.CellData[] row)
+        public override Shapes.ShapeFormatCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
-            var cells = new Shapes.FormatCells();
+            var cells = new Shapes.ShapeFormatCells();
             cells.FillBkgnd = row[this.FillBkgnd];
             cells.FillBkgndTrans = row[this.FillBkgndTrans];
             cells.FillForegnd = row[this.FillForegnd];

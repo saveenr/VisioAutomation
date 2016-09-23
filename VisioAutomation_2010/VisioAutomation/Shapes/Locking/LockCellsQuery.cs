@@ -1,10 +1,10 @@
+using VisioAutomation.ShapeSheet.CellGroups.Queries;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
-using VisioAutomation.Extensions;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.Shapes.Locking
 {
-    class LockCellsQuery : CellGroupSingleRowQuery<Shapes.LockCells>
+    class LockCellsQuery : CellGroupSingleRowQuery<LockCells>
     {
         public ColumnQuery LockAspect { get; set; }
         public ColumnQuery LockBegin { get; set; }
@@ -51,9 +51,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups.Queries
             this.LockWidth = this.query.AddCell(SRCCON.LockWidth, nameof(SRCCON.LockWidth));
         }
 
-        public override Shapes.LockCells CellDataToCellGroup(ShapeSheet.CellData[] row)
+        public override LockCells CellDataToCellGroup(ShapeSheet.CellData[] row)
         {
-            var cells = new Shapes.LockCells();
+            var cells = new LockCells();
             cells.LockAspect = row[this.LockAspect];
             cells.LockBegin = row[this.LockBegin];
             cells.LockCalcWH = row[this.LockCalcWH];

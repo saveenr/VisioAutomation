@@ -1,9 +1,8 @@
-using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes
+namespace VisioAutomation.Shapes.Locking
 {
     public class LockCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
