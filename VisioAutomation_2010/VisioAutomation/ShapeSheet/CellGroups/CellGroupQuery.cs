@@ -1,6 +1,6 @@
 using VisioAutomation.ShapeSheet.Queries;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupQuery<TCellGroup>
     {

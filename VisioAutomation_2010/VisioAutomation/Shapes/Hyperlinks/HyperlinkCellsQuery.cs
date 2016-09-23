@@ -1,4 +1,4 @@
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using IVisio = Microsoft.Office.Interop.Visio;
 

@@ -1,5 +1,5 @@
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 
 namespace VisioAutomation.Text

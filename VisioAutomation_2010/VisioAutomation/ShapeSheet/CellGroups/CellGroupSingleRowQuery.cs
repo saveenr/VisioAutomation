@@ -3,7 +3,7 @@ using System.Linq;
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupSingleRowQuery<TCellGroup>: CellGroupQuery<TCellGroup>
     {
