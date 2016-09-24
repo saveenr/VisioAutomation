@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Linq;
 using System.Management.Automation;
 using VisioAutomation.ShapeSheet.Writers;
-using VisioPowerShell.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Set
@@ -28,8 +26,8 @@ namespace VisioPowerShell.Commands.Set
             writer.BlastGuards = this.BlastGuards;
             writer.TestCircular = this.TestCircular;
 
-            var cellmap = CellSRCDictionary.GetCellMapForShapes();
-            var valuemap = new CellValueDictionary(cellmap, this.Hashtable);
+            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForShapes();
+            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, this.Hashtable);
 
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
 

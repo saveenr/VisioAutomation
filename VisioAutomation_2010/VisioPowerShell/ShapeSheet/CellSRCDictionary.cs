@@ -4,7 +4,7 @@ using System.Linq;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Queries;
 
-namespace VisioPowerShell.ShapeSheet
+namespace VisioAutomation.Scripting.ShapeSheet
 {
     public class CellSRCDictionary : CellNameDictionary<SRC>
     {
@@ -193,4 +193,6 @@ namespace VisioPowerShell.ShapeSheet
             return query;
         }
     }
+
 }
+

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace VisioPowerShell.ShapeSheet
+
+namespace VisioAutomation.Scripting.ShapeSheet
 {
     public class CellNameDictionary<T>
     {

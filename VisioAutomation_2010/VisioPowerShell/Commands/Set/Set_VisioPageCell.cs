@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Linq;
 using System.Management.Automation;
 using VisioAutomation.ShapeSheet.Writers;
-using VisioPowerShell.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.Set
@@ -30,8 +28,8 @@ namespace VisioPowerShell.Commands.Set
 
             var target_pages = this.Pages ?? new[] { this.Client.Page.Get() };
 
-            var cellmap = CellSRCDictionary.GetCellMapForPages();
-            var valuemap = new CellValueDictionary(cellmap, this.Hashtable);
+            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForPages();
+            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, this.Hashtable);
 
             this.DumpValues(valuemap);
 
