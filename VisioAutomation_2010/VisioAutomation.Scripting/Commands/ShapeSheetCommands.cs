@@ -63,7 +63,7 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public ListOutput<T> QueryResults<T>(TargetShapes targets, IList<ShapeSheet.SRC> srcs)
+        public ListOutput<T> QueryResults<T>(TargetShapes targets, IList<VisioAutomation.ShapeSheet.SRC> srcs)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -87,7 +87,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public ListOutput<string> QueryFormulas(TargetShapes targets, IList<ShapeSheet.SRC> srcs)
+        public ListOutput<string> QueryFormulas(TargetShapes targets, IList<VisioAutomation.ShapeSheet.SRC> srcs)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -170,7 +170,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetFormula(
             TargetShapes targets, 
-            IList<ShapeSheet.SRC> srcs, 
+            IList<VisioAutomation.ShapeSheet.SRC> srcs, 
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
         {
@@ -239,7 +239,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetResult<T>(
                 TargetShapes  targets, 
-                IList<ShapeSheet.SRC> srcs,
+                IList<VisioAutomation.ShapeSheet.SRC> srcs,
                 IList<string> results, IVisio.VisGetSetArgs flags)
         {
             this._client.Application.AssertApplicationAvailable();

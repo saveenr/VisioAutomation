@@ -140,7 +140,7 @@ namespace VisioAutomation.Scripting.Commands
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
             IVisio.VisGetSetArgs flags = 0;
-            var srcs = new[] { ShapeSheet.SRCConstants.CharFont };
+            var srcs = new[] { VisioAutomation.ShapeSheet.SRCConstants.CharFont };
             var formulas = new[] { font.ID.ToString() };
             this._client.ShapeSheet.SetFormula(targets, srcs, formulas, flags);
         }
@@ -193,9 +193,9 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID);
             foreach (int shapeid in shapeids)
             {
-                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtHeight, "Height*0");
-                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.TxtPinY, "Height*0");
-                writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.VerticalAlign, "0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.TxtHeight, "Height*0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.TxtPinY, "Height*0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.VerticalAlign, "0");
             }
             var active_page = application.ActivePage;
             writer.Commit(active_page);
@@ -253,8 +253,8 @@ namespace VisioAutomation.Scripting.Commands
                     new_sizes.Add(max_size);
                 }
 
-                var src_width = ShapeSheet.SRCConstants.Width;
-                var src_height = ShapeSheet.SRCConstants.Height;
+                var src_width = VisioAutomation.ShapeSheet.SRCConstants.Width;
+                var src_height = VisioAutomation.ShapeSheet.SRCConstants.Height;
 
                 var writer = new FormulaWriterSIDSRC();
                 for (int i = 0; i < new_sizes.Count; i++)

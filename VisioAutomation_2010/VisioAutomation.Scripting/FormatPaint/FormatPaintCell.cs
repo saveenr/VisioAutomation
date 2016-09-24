@@ -3,13 +3,13 @@
     public class FormatPaintCell
     {
         public FormatCategory Category { get; }
-        public ShapeSheet.SRC SRC { get; private set; }
+        public VisioAutomation.ShapeSheet.SRC SRC { get; private set; }
         public string Name;
 
         public string Result { get; set; }
         public string Formula { get; set; }
 
-        public FormatPaintCell(ShapeSheet.SRC src, string name, FormatCategory category)
+        public FormatPaintCell(VisioAutomation.ShapeSheet.SRC src, string name, FormatCategory category)
         {
             this.Category = category;
             this.Name = name;

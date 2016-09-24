@@ -104,11 +104,11 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (w.HasValue && w.Value>=0)
                 {
-                    writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Width, w.Value);
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.Width, w.Value);
                 }
                 if (h.HasValue && h.Value >= 0)
                 {
-                    writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Height, h.Value);                    
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.Height, h.Value);                    
                 }
             }
 
