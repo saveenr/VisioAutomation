@@ -16,12 +16,6 @@ namespace VisioAutomation.Scripting.ShapeSheet
             if (CellSRCDictionary.shape_cellmap == null)
             {
                 CellSRCDictionary.shape_cellmap = new CellSRCDictionary();
-
-
-
-
-
-
                 CellSRCDictionary.shape_cellmap[nameof(SRCConstants.Angle)] = SRCConstants.Angle;
                 CellSRCDictionary.shape_cellmap[nameof(SRCConstants.BeginX)] = SRCConstants.BeginX;
                 CellSRCDictionary.shape_cellmap[nameof(SRCConstants.BeginY)] = SRCConstants.BeginY;

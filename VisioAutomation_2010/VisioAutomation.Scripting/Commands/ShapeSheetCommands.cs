@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
@@ -359,21 +360,23 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetShapeCells(TargetShapes targets, System.Collections.Hashtable ht, bool blast_guards, bool test_circular)
+        public void SetShapeCells(TargetShapes targets, System.Collections.Hashtable hashtable, bool blast_guards, bool test_circular)
         {
             var page = this._client.Page.Get();
-            var target_ids = targets.ToShapeIDs(page);
-            this.SetPageCells(target_ids, ht, blast_guards, test_circular);
+            var shapes = targets.ResolveShapes(this._client);
+            var t2 = new VisioAutomation.Scripting.TargetShapes(shapes);
+            var target_ids= t2.ToShapeIDs(page);
+            this.SetShapeCells(target_ids, hashtable, blast_guards, test_circular);
         }
 
-        public void SetShapeCells(TargetShapeIDs targets, System.Collections.Hashtable ht, bool blast_guards, bool test_circular)
+        public void SetShapeCells(TargetShapeIDs targets, System.Collections.Hashtable hashtable, bool blast_guards, bool test_circular)
         {
             var writer = new FormulaWriterSIDSRC();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
             var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForShapes();
-            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, ht);
+            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
             {
