@@ -363,9 +363,8 @@ namespace VisioAutomation.Scripting.Commands
         public void SetShapeCells(TargetShapes targets, System.Collections.Hashtable hashtable, bool blast_guards, bool test_circular)
         {
             var page = this._client.Page.Get();
-            var shapes = targets.ResolveShapes(this._client);
-            var t2 = new VisioAutomation.Scripting.TargetShapes(shapes);
-            var target_ids= t2.ToShapeIDs(page);
+            var resolved_targets = targets.ResolveShapesEx(this._client);
+            var target_ids= resolved_targets.ToShapeIDs(page);
             this.SetShapeCells(target_ids, hashtable, blast_guards, test_circular);
         }
 

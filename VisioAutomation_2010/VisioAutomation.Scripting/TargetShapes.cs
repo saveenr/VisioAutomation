@@ -82,6 +82,12 @@ namespace VisioAutomation.Scripting
             return this.Shapes;
         }
 
+        internal TargetShapes ResolveShapesEx(VisioAutomation.Scripting.Client client)
+        {
+            var shapes = this.ResolveShapes(client);
+            var t = new TargetShapes(shapes);
+            return t;
+        }
 
         internal List<IVisio.Shape> ResolveShapes2DOnly(VisioAutomation.Scripting.Client client)
         {

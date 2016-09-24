@@ -23,9 +23,6 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-
-            var shapeids = shapes.Select(s => s.ID).ToList();
-
             var application = this._client.Application.Get();
             var target_ids = targets.ToShapeIDs(application.ActivePage);
             using (var undoscope = this._client.Application.NewUndoScope("Snape Shape Sizes"))

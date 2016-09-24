@@ -20,8 +20,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
             var page = this._client.Page.Get();
-            var shapes = targets.ResolveShapes(this._client);
-            var targets2 = new VisioAutomation.Scripting.TargetShapes(shapes);
+            var targets2 = targets.ResolveShapesEx(this._client);
             var targetids = targets2.ToShapeIDs(page);
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
