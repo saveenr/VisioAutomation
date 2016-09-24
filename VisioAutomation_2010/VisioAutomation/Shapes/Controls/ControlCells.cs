@@ -43,6 +43,6 @@ namespace VisioAutomation.Shapes.Controls
             return query.GetCellGroups(shape);
         }
 
-        private static System.Lazy<ControlCellsQuery> lazy_query = new System.Lazy<ControlCellsQuery>();
+        private static System.Lazy<ControlCellsReader> lazy_query = new System.Lazy<ControlCellsReader>();
     }
 }

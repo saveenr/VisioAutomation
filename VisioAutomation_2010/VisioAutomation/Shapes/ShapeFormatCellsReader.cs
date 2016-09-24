@@ -4,7 +4,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Shapes
 {
-    class ShapeFormatCellsQuery : CellGroupSingleRowQuery<Shapes.ShapeFormatCells>
+    class ShapeFormatCellsReader : SingleRowReader<Shapes.ShapeFormatCells>
     {
         public ColumnQuery FillBkgnd { get; set; }
         public ColumnQuery FillBkgndTrans { get; set; }
@@ -32,7 +32,7 @@ namespace VisioAutomation.Shapes
         public ColumnQuery LineWeight { get; set; }
         public ColumnQuery Rounding { get; set; }
 
-        public ShapeFormatCellsQuery()
+        public ShapeFormatCellsReader()
         {
             
             this.FillBkgnd = this.query.AddCell(SRCCON.FillBkgnd, nameof(SRCCON.FillBkgnd));

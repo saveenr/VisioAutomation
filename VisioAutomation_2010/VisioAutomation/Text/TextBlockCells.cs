@@ -44,6 +44,6 @@ namespace VisioAutomation.Text
             return query.GetCellGroup(shape);
         }
 
-        private static System.Lazy<TextBlockCellsQuery> lazy_query = new System.Lazy<TextBlockCellsQuery>();
+        private static System.Lazy<TextBlockCellsReader> lazy_query = new System.Lazy<TextBlockCellsReader>();
     }
 }

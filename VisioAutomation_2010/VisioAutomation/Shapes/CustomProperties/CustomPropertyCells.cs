@@ -136,7 +136,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return query.GetCellGroups(shape);
         }
 
-        private static System.Lazy<CustomPropertyCellsQuery> lazy_query = new System.Lazy<CustomPropertyCellsQuery>();
+        private static System.Lazy<CustomPropertyCellsReader> lazy_query = new System.Lazy<CustomPropertyCellsReader>();
 
         public static CustomPropertyCells FromValue(object value)
         {

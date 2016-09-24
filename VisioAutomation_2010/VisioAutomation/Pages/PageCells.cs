@@ -154,7 +154,7 @@ namespace VisioAutomation.Pages
             return query.GetCellGroup(shape);
         }
 
-        private static System.Lazy<PageCellsQuery> lazy_query = new System.Lazy<PageCellsQuery>();
+        private static System.Lazy<PageCellsReader> lazy_query = new System.Lazy<PageCellsReader>();
 
     }
 }

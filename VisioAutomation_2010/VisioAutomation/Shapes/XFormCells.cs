@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes
             return query.GetCellGroup(shape);
         }
 
-        private static System.Lazy<XFormCellsQuery> lazy_query = new System.Lazy<XFormCellsQuery>();
+        private static System.Lazy<XFormCellsReader> lazy_query = new System.Lazy<XFormCellsReader>();
 
     }
 }

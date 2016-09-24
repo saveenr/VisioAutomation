@@ -4,7 +4,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Shapes.Layout
 {
-    class ShapeLayoutCellsQuery : CellGroupSingleRowQuery<Shapes.Layout.ShapeLayoutCells>
+    class ShapeLayoutCellsReader : SingleRowReader<Shapes.Layout.ShapeLayoutCells>
     {
         public ColumnQuery ConFixedCode { get; set; }
         public ColumnQuery ConLineJumpCode { get; set; }
@@ -25,7 +25,7 @@ namespace VisioAutomation.Shapes.Layout
         public ColumnQuery DisplayLevel { get; set; }
         public ColumnQuery Relationships { get; set; }
 
-        public ShapeLayoutCellsQuery() 
+        public ShapeLayoutCellsReader() 
         {
             this.ConFixedCode = this.query.AddCell(SRCCON.ConFixedCode, nameof(SRCCON.ConFixedCode));
             this.ConLineJumpCode = this.query.AddCell(SRCCON.ConLineJumpCode, nameof(SRCCON.ConLineJumpCode));

@@ -54,6 +54,6 @@ namespace VisioAutomation.Text
             return query.GetCellGroups(shape);
         }
 
-        private static System.Lazy<ParagraphFormatCellsQuery> lazy_query = new System.Lazy<ParagraphFormatCellsQuery>();
+        private static System.Lazy<ParagraphFormatCellsReader> lazy_query = new System.Lazy<ParagraphFormatCellsReader>();
     }
 } 

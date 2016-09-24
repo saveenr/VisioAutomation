@@ -71,7 +71,7 @@ namespace VisioAutomation.Text
             return query.GetCellGroups(shape);
         }
 
-        private static System.Lazy<CharacterFormatCellsQuery> lazy_query = new System.Lazy<CharacterFormatCellsQuery>();
+        private static System.Lazy<CharacterFormatCellsReader> lazy_query = new System.Lazy<CharacterFormatCellsReader>();
 
 
     }

@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Queries.Columns;
 
 namespace VisioAutomation.Text
 {
-    class TextXFormCellsQuery : CellGroupSingleRowQuery<Text.TextXFormCells>
+    class TextXFormCellsReader : SingleRowReader<Text.TextXFormCells>
     {
         public ColumnQuery TxtWidth { get; set; }
         public ColumnQuery TxtHeight { get; set; }
@@ -14,7 +14,7 @@ namespace VisioAutomation.Text
         public ColumnQuery TxtLocPinY { get; set; }
         public ColumnQuery TxtAngle { get; set; }
 
-        public TextXFormCellsQuery()
+        public TextXFormCellsReader()
         {
             this.TxtPinX = this.query.AddCell(SRCConstants.TxtPinX, nameof(SRCConstants.TxtPinX));
             this.TxtPinY = this.query.AddCell(SRCConstants.TxtPinY, nameof(SRCConstants.TxtPinY));

@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    class CharacterFormatCellsQuery : CellGroupMultiRowQuery<Text.CharacterCells>
+    class CharacterFormatCellsReader : MultiRowReader<Text.CharacterCells>
     {
         public ColumnSubQuery Font { get; set; }
         public ColumnSubQuery Style { get; set; }
@@ -30,7 +30,7 @@ namespace VisioAutomation.Text
         public ColumnSubQuery Strikethru { get; set; }
         public ColumnSubQuery UseVertical { get; set; }
 
-        public CharacterFormatCellsQuery()
+        public CharacterFormatCellsReader()
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
 

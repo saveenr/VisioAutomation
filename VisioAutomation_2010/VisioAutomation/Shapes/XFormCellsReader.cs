@@ -5,7 +5,7 @@ using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Shapes
 {
-    class XFormCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Shapes.XFormCells>
+    class XFormCellsReader : SingleRowReader<VisioAutomation.Shapes.XFormCells>
     {
         public ColumnQuery Width { get; set; }
         public ColumnQuery Height { get; set; }
@@ -15,7 +15,7 @@ namespace VisioAutomation.Shapes
         public ColumnQuery LocPinY { get; set; }
         public ColumnQuery Angle { get; set; }
         
-        public XFormCellsQuery() 
+        public XFormCellsReader() 
         {
             this.PinX = this.query.AddCell(SRCCON.PinX, nameof(SRCCON.PinX));
             this.PinY = this.query.AddCell(SRCCON.PinY, nameof(SRCCON.PinY));
