@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Queries;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
-    public class CellSRCDictionary : CellNameDictionary<SRC>
+    public class CellSRCDictionary : CellDictionary<SRC>
     {
         private static CellSRCDictionary shape_cellmap;
         private static CellSRCDictionary page_cellmap;

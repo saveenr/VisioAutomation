@@ -1,14 +1,15 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
-    public class CellValueDictionary : CellNameDictionary<string>
+    public class CellValueDictionary : CellDictionary<string>
     {
         private readonly CellSRCDictionary srcmap;
 
-        public CellValueDictionary(CellSRCDictionary srcmap, Hashtable ht)
+        public CellValueDictionary(CellSRCDictionary srcmap, Hashtable hashtable)
         {
             if (srcmap == null)
             {
@@ -17,7 +18,19 @@ namespace VisioAutomation.Scripting.ShapeSheet
 
             this.srcmap = srcmap;
 
-            this.UpdateValueMap(ht);
+            this.UpdateFrom(hashtable);
+        }
+
+        public CellValueDictionary(CellSRCDictionary srcmap, Dictionary<string,object> dictionary)
+        {
+            if (srcmap == null)
+            {
+                throw new System.ArgumentNullException(nameof(srcmap));
+            }
+
+            this.srcmap = srcmap;
+
+            this.UpdateFrom(dictionary);
         }
 
 
@@ -26,73 +39,90 @@ namespace VisioAutomation.Scripting.ShapeSheet
             return this.srcmap[name];
         }
 
-        public void UpdateValueMap(Hashtable hashtable)
+        public void UpdateFrom(Hashtable hashtable)
         {
             if (hashtable == null)
             {
                 throw new System.ArgumentNullException(nameof(hashtable));
             }
 
-            // Validate that all the keys are strings
-            foreach (object key_o in hashtable.Keys)
+            var dic = new Dictionary<string,object>();
+            foreach (object key in hashtable.Keys)
             {
-                if (!(key_o is string))
+                if (!(key is string))
                 {
                     string message =
                         string.Format("Only string values can be keys in the hashtable. Encountered a key of type {0}",
-                            key_o.GetType().FullName);
+                            key.GetType().FullName);
                     throw new System.ArgumentOutOfRangeException(nameof(hashtable), message);
                 }
+
+                string cellname = (string) key;
+                var cell_value_o = hashtable[key];
+                dic[cellname] = cell_value_o;
             }
 
+            this.UpdateFrom(dic);
+        }
+
+        public void UpdateFrom(Dictionary<string,object> from_dic)
+        {
+            if (from_dic == null)
+            {
+                throw new System.ArgumentNullException(nameof(from_dic));
+            }
 
             // We are certain all the keys are strings
-            foreach (object key_o in hashtable.Keys)
+            foreach (var pair in from_dic)
             {
-                string cellname = (string) key_o;
-
-                if (!this.srcmap.ContainsCell(cellname))
-                {
-                    string message = string.Format("Cell \"{0}\" is not supported", cellname);
-                    throw new System.ArgumentOutOfRangeException(nameof(hashtable), message);                    
-                }
-                var cell_value_o = hashtable[key_o];
-
-                if (cell_value_o == null)
-                {
-                    string message = string.Format("Cell {0} has a null value. Use a non-null value", cellname);
-                    throw new System.ArgumentOutOfRangeException(nameof(hashtable), message);
-                }
-
-                var cell_value_string = CellValueDictionary.get_value_string(cell_value_o, cellname);
-
-                this[cellname] = cell_value_string;
+                string cellname = pair.Key;
+                object cell_value_object = pair.Value;
+                var cell_value_string = CellValueDictionary.value_to_string(cell_value_object, cellname);
+                this.UpdateFrom(cellname,cell_value_string);
             }
         }
 
-        private static string get_value_string(object value_o, string cellname)
+        public void UpdateFrom(string cellname,string cellvalue)
+        {
+            if (!this.srcmap.ContainsCell(cellname))
+            {
+                string message = string.Format("Cell \"{0}\" is not supported", cellname);
+                throw new System.ArgumentOutOfRangeException(message);
+            }
+
+            if (cellvalue == null)
+            {
+                string message = string.Format("Cell {0} has a null value. Use a non-null value", cellname);
+                throw new System.ArgumentOutOfRangeException(message);
+            }
+
+            this[cellname] = cellvalue;
+        }
+
+
+        private static string value_to_string(object value_o, string cellname)
         {
             var invariant_culture = CultureInfo.InvariantCulture;
 
-            string value_string;
+            string result;
             if (value_o is string)
             {
-                value_string = (string) value_o;
+                result = (string) value_o;
             }
             else if (value_o is int)
             {
                 int value_int = (int) value_o;
-                value_string = value_int.ToString(invariant_culture);
+                result = value_int.ToString(invariant_culture);
             }
             else if (value_o is float)
             {
                 float value_float = (float) value_o;
-                value_string = value_float.ToString(invariant_culture);
+                result = value_float.ToString(invariant_culture);
             }
             else if (value_o is double)
             {
                 double value_double = (double) value_o;
-                value_string = value_double.ToString(invariant_culture);
+                result = value_double.ToString(invariant_culture);
             }
             else
             {
@@ -100,7 +130,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
                 string message = string.Format(invariant_culture, "Cell {0} has an unsupported type {1} ", cellname, value_type_name);
                 throw new System.ArgumentOutOfRangeException(message);
             }
-            return value_string;
+            return result;
         }
     }
 }

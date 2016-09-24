@@ -43,7 +43,7 @@
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="Commands\SnapCommands.cs" />
-    <Compile Include="ShapeSheet\CellNameDictionary.cs" />
+    <Compile Include="ShapeSheet\CellDictionary.cs" />
     <Compile Include="ShapeSheet\CellSRCDictionary.cs" />
     <Compile Include="ShapeSheet\CellValueDictionary.cs" />
     <Compile Include="TargetShapeIDs.cs" />

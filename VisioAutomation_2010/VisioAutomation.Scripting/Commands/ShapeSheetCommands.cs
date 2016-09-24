@@ -34,7 +34,6 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Text"))
             {
                 int numnames = names.Count;
@@ -230,7 +229,6 @@ namespace VisioAutomation.Scripting.Commands
 
             }
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set ShapeSheet Formulas"))
             {
                 writer.Commit(surface);
@@ -296,7 +294,6 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set ShapeSheet Result"))
             {
                 writer.Commit(surface);
@@ -309,7 +306,6 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Modify ShapeSheet"))
             {
                 var internal_writer = writer.formula_writer;
@@ -366,8 +362,8 @@ namespace VisioAutomation.Scripting.Commands
         public void SetShapeCells(TargetShapes targets, System.Collections.Hashtable ht, bool blast_guards, bool test_circular)
         {
             var page = this._client.Page.Get();
-            var targets2 = targets.ToShapeIDs(page);
-            this.SetPageCells(targets2, ht, blast_guards, test_circular);
+            var target_ids = targets.ToShapeIDs(page);
+            this.SetPageCells(target_ids, ht, blast_guards, test_circular);
         }
 
         public void SetShapeCells(TargetShapeIDs targets, System.Collections.Hashtable ht, bool blast_guards, bool test_circular)

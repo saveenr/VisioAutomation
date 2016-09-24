@@ -32,7 +32,6 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Nudge Shapes"))
             {
                 var selection = this._client.Selection.Get();

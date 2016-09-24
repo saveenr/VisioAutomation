@@ -6,13 +6,16 @@ using System.Text.RegularExpressions;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
-    public class CellNameDictionary<T>
+    public class CellDictionary<T>
     {
+        // this class is keyed by a cell name
+        // and stores the value T
+
         private readonly Dictionary<string, T> dic;
         private readonly Regex regex_cellname;
         private readonly Regex regex_cellname_wildcard;
 
-        public CellNameDictionary()
+        public CellDictionary()
         {
             this.regex_cellname = new Regex("^[a-zA-Z]*$");
             this.regex_cellname_wildcard = new Regex("^[a-zA-Z\\*\\?]*$");
@@ -77,7 +80,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
             {
                 this.CheckCellNameWildcard(cellname);
 
-                var regex = CellNameDictionary<T>.GetRegexForWildCardPattern(cellname);
+                var regex = CellDictionary<T>.GetRegexForWildCardPattern(cellname);
 
                 foreach (string k in this.CellNames)
                 {

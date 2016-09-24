@@ -40,7 +40,6 @@ namespace VisioAutomation.Scripting.Commands
 
             const bool glue_to_guide = false;
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Align Shapes"))
             {
                 var selection = this._client.Selection.Get();
@@ -73,7 +72,6 @@ namespace VisioAutomation.Scripting.Commands
             const bool glue_to_guide = false;
 
             // Perform the alignment
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Align Shapes"))
             {
                 var selection = this._client.Selection.Get();

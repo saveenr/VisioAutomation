@@ -22,8 +22,8 @@ namespace VisioPowerShell.Commands.Set
         protected override void ProcessRecord()
         {
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
-            var t = new VisioAutomation.Scripting.TargetShapes(target_shapes);
-            this.Client.ShapeSheet.SetShapeCells(t, this.Hashtable, this.BlastGuards, this.TestCircular);
+            var targets = new VisioAutomation.Scripting.TargetShapes(target_shapes);
+            this.Client.ShapeSheet.SetShapeCells(targets, this.Hashtable, this.BlastGuards, this.TestCircular);
         }
     }
 }

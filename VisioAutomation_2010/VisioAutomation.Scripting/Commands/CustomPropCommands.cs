@@ -81,7 +81,6 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Delete Custom Property"))
             {
                 foreach (var shape in shapes)
