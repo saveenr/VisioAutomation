@@ -335,10 +335,49 @@ namespace VisioAutomation.Scripting.Commands
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForShapes();
+            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForPages();
             var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, ht);
 
-            //this.DumpValues(valuemap);
+            foreach (var shape_id in targets.ShapeIDs)
+            {
+                foreach (var cellname in valuemap.CellNames)
+                {
+                    string cell_value = valuemap[cellname];
+                    var cell_src = valuemap.GetSRC(cellname);
+                    writer.SetFormula((short)shape_id, cell_src, cell_value);
+                }
+            }
+
+            var surface = this._client.ShapeSheet.GetShapeSheetSurface();
+
+            this._client.WriteVerbose("BlastGuards: {0}", blast_guards);
+            this._client.WriteVerbose("TestCircular: {0}", test_circular);
+            this._client.WriteVerbose("Number of Shapes : {0}", targets.ShapeIDs.Count);
+            this._client.WriteVerbose("Number of Total Updates: {0}", writer.Count);
+
+            using (var undoscope = this._client.Application.NewUndoScope("SetShapeCells"))
+            {
+                this._client.WriteVerbose("Start Update");
+                writer.Commit(surface);
+                this._client.WriteVerbose("End Update");
+            }
+        }
+
+        public void SetShapeCells(TargetShapes targets, System.Collections.Hashtable ht, bool blast_guards, bool test_circular)
+        {
+            var page = this._client.Page.Get();
+            var targets2 = targets.ToShapeIDs(page);
+            this.SetPageCells(targets2, ht, blast_guards, test_circular);
+        }
+
+        public void SetShapeCells(TargetShapeIDs targets, System.Collections.Hashtable ht, bool blast_guards, bool test_circular)
+        {
+            var writer = new FormulaWriterSIDSRC();
+            writer.BlastGuards = blast_guards;
+            writer.TestCircular = test_circular;
+
+            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForShapes();
+            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, ht);
 
             foreach (var shape_id in targets.ShapeIDs)
             {
