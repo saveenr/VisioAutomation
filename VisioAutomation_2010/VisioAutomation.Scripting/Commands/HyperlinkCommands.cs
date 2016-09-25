@@ -22,10 +22,10 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(ctrl));
             }
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return new List<int>(0);
             }
@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = this._client.Application.NewUndoScope("Add Control"))
             {
-                foreach (var shape in shapes)
+                foreach (var shape in shapes.Shapes)
                 {
                     int hi = VAHLINK.HyperlinkHelper.Add(shape, ctrl);
                     hyperlink_indices.Add(hi);
@@ -49,16 +49,16 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Application.NewUndoScope("Delete Control"))
             {
-                foreach (var shape in shapes)
+                foreach (var shape in shapes.Shapes)
                 {
                     VAHLINK.HyperlinkHelper.Delete(shape, n);
                 }
@@ -70,15 +70,15 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<VAHLINK.HyperlinkCells>>(0);
             }
 
             var dic = new Dictionary<IVisio.Shape, IList<VAHLINK.HyperlinkCells>>();
-            foreach (var shape in shapes)
+            foreach (var shape in shapes.Shapes)
             {
                 var hyperlinks = VAHLINK.HyperlinkCells.GetCells(shape);
                 dic[shape] = hyperlinks;

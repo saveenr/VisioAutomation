@@ -28,9 +28,9 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
@@ -39,7 +39,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 int numnames = names.Count;
 
-                int up_to = System.Math.Min(numnames, shapes.Count);
+                int up_to = System.Math.Min(numnames, shapes.Shapes.Count);
 
                 for (int i = 0; i < up_to; i++)
                 {
@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
 
                     if (new_name != null)
                     {
-                        var shape = shapes[i];
+                        var shape = shapes.Shapes[i];
                         shape.Name = new_name;
                     }
                 }
@@ -68,10 +68,10 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var shapeids = shapes.Select(s => s.ID).ToList();
+            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
 
             var query = new VAQUERY.Query();
 
@@ -92,9 +92,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
+            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
 
@@ -118,9 +118,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
+            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
             var query = new VAQUERY.Query();
@@ -144,9 +144,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
+            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
 
@@ -177,9 +177,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 this._client.WriteVerbose("SetFormula: Zero Shapes. Not performing Operation");
                 return;
@@ -212,10 +212,10 @@ namespace VisioAutomation.Scripting.Commands
             }
 
 
-            var shapeids = shapes.Select(s=>s.ID).ToList();
+            var shapeids = shapes.Shapes.Select(s=>s.ID).ToList();
             int num_formulas = formulas.Count;
 
-            var writer = new FormulaWriterSIDSRC(shapes.Count*num_formulas);
+            var writer = new FormulaWriterSIDSRC(shapes.Shapes.Count*num_formulas);
             writer.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
             writer.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 
@@ -244,9 +244,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 this._client.WriteVerbose("SetResult: Zero Shapes. Not performing Operation");
                 return;
@@ -277,10 +277,10 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException(msg,nameof(results));
             }
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
+            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
 
             int num_results = results.Count;
-            var writer = new ResultWriterSIDSRC(shapes.Count * num_results);
+            var writer = new ResultWriterSIDSRC(shapes.Shapes.Count * num_results);
             writer.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
             writer.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 

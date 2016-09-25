@@ -18,16 +18,15 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-
-            if (shapes.Count<1)
+            if (shapes.Shapes.Count<1)
             {
                 return new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
             }
 
             var dic = new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
-            foreach (var shape in shapes)
+            foreach (var shape in shapes.Shapes)
             {
                 var cp = ConnectionPointCells.GetCells(shape);
                 dic[shape] = cp;
@@ -44,9 +43,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return new List<int>(0);
             }
@@ -54,7 +53,7 @@ namespace VisioAutomation.Scripting.Commands
             int dirx = 0;
             int diry = 0;
 
-            var indices = new List<int>(shapes.Count);
+            var indices = new List<int>(shapes.Shapes.Count);
 
             using (var undoscope = this._client.Application.NewUndoScope("Add Connection Point"))
             {
@@ -65,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
                 cp.DirY = diry;
                 cp.Type = (int)type;
 
-                foreach (var shape in shapes)
+                foreach (var shape in shapes.Shapes)
                 {
                     int index = ConnectionPointHelper.Add(shape, cp);
                     indices.Add(index);
@@ -92,14 +91,14 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            var shapes = targets.ResolveShapesEx(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
-            var target_shapes = shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
+            var target_shapes = shapes.Shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
 
             using (var undoscope = this._client.Application.NewUndoScope("Delete Connection Point"))
             {

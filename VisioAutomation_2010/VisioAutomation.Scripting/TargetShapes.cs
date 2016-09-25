@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting
             return selected_count;
         }
 
-        internal IList<IVisio.Shape> ResolveShapes(VisioAutomation.Scripting.Client client)
+        private IList<IVisio.Shape> __ResolveShapes(VisioAutomation.Scripting.Client client)
         {
             client.Application.AssertApplicationAvailable();
 
@@ -84,14 +84,14 @@ namespace VisioAutomation.Scripting
 
         internal TargetShapes ResolveShapesEx(VisioAutomation.Scripting.Client client)
         {
-            var shapes = this.ResolveShapes(client);
+            var shapes = this.__ResolveShapes(client);
             var t = new TargetShapes(shapes);
             return t;
         }
 
         internal List<IVisio.Shape> ResolveShapes2DOnly(VisioAutomation.Scripting.Client client)
         {
-            var shapes = this.ResolveShapes(client);
+            var shapes = this.__ResolveShapes(client);
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
             return shapes_2d;
         }
