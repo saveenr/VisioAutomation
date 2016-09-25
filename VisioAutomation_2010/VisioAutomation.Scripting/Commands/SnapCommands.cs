@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this._client.Application.Get();
             var target_ids = targets.ToShapeIDs(application.ActivePage);
-            using (var undoscope = this._client.Application.NewUndoScope("SnapCorner"))
+            using (var undoscope = this._client.Application.NewUndoScope("Snap Shape Corner"))
             {
                 ArrangeHelper.SnapCorner(target_ids, new Drawing.Size(w, h), corner);
             }
@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this._client.Application.Get();
             var target_ids = targets.ToShapeIDs(application.ActivePage);
-            using (var undoscope = this._client.Application.NewUndoScope("SnapSize"))
+            using (var undoscope = this._client.Application.NewUndoScope("Snap Shape Size"))
             {
                 ArrangeHelper.SnapSize(target_ids, snapsize, minsize);
             }

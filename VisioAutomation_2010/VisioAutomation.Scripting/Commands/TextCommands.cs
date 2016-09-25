@@ -215,7 +215,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
             var active_page = this._client.Page.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("SetTextWrapping"))
+            using (var undoscope = this._client.Application.NewUndoScope("Set Text Wrapping"))
             {
                 TextHelper.set_text_wrapping(active_page, shapeids, wrap);
             }
@@ -237,7 +237,7 @@ namespace VisioAutomation.Scripting.Commands
             var active_page = application.ActivePage;
             var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
 
-            using (var undoscope = this._client.Application.NewUndoScope("FitShapeToText"))
+            using (var undoscope = this._client.Application.NewUndoScope("Fit Shape To Text"))
             {
                 // Calculate the new sizes for each shape
                 var new_sizes = new List<Drawing.Size>(shapeids.Count);

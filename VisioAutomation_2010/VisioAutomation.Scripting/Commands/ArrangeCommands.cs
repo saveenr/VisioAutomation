@@ -32,7 +32,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Nudge Shapes"))
+            using (var undoscope = this._client.Application.NewUndoScope("Nudge"))
             {
                 var selection = this._client.Selection.Get();
                 var unitcode = IVisio.VisUnitCodes.visInches;
@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.Commands
                 lockcells.SetFormulas((short)shapeid, writer);
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Lock Properties"))
+            using (var undoscope = this._client.Application.NewUndoScope("Set Lock Properties"))
             {
                 writer.Commit(page);
             }

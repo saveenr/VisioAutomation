@@ -352,7 +352,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("Number of Shapes : {0}", targets.ShapeIDs.Count);
             this._client.WriteVerbose("Number of Total Updates: {0}", writer.Count);
 
-            using (var undoscope = this._client.Application.NewUndoScope("SetShapeCells"))
+            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Cells"))
             {
                 this._client.WriteVerbose("Start Update");
                 writer.Commit(surface);
@@ -394,7 +394,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("Number of Shapes : {0}", targets.ShapeIDs.Count);
             this._client.WriteVerbose("Number of Total Updates: {0}", writer.Count);
 
-            using (var undoscope = this._client.Application.NewUndoScope("SetShapeCells"))
+            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Cells"))
             {
                 this._client.WriteVerbose("Start Update");
                 writer.Commit(surface);

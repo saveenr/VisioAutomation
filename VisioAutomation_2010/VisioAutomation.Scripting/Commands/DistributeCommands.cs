@@ -55,7 +55,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Distribute Shapes"))
+            using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
                 application.DoCmd((short)cmd);
             }
