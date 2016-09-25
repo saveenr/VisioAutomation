@@ -4,7 +4,7 @@ using VisioAutomation.Exceptions;
 
 namespace VisioAutomation.ShapeSheet.Queries.Utilities
 {
-    internal struct QueryHelpers
+    public struct QueryHelpers
     {
         private static int check_stream_size(short[] stream, int chunksize)
         {

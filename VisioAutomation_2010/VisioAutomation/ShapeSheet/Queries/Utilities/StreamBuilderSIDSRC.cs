@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Queries.Utilities
 {
-    internal class StreamBuilderSIDSRC : StreamBuilderBase
+    public class StreamBuilderSIDSRC : StreamBuilderBase
     {
 
         public StreamBuilderSIDSRC(int capacity) : base(4,capacity)
