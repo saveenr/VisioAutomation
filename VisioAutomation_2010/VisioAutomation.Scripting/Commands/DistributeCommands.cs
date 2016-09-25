@@ -20,12 +20,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
             var page = this._client.Page.Get();
-            var shapes = targets.ResolveShapes(this._client);
-            var targets2 = new VisioAutomation.Scripting.TargetShapes(shapes);
-            var targetids = targets2.ToShapeIDs(page);
+            var targets2 = targets.ResolveShapes(this._client);
+            var targetids = targets2.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
-                ArrangeHelper.DistributeWithSpacing(targetids, axis, spacing);
+                ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
             }
         }
 
@@ -56,7 +55,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Distribute Shapes"))
+            using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
                 application.DoCmd((short)cmd);
             }

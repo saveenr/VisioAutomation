@@ -3,9 +3,9 @@ using System.Linq;
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class CellGroupSingleRowQuery<TCellGroup>: CellGroupQuery<TCellGroup>
+    public abstract class SingleRowReader<TCellGroup>: ReaderBase<TCellGroup>
     {
 
         protected override void validate_query()

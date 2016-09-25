@@ -7,8 +7,6 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ConnectionCommands : CommandSet
     {
-        private const string undoname_connectShapes = "Connect Shapes";
-
         internal ConnectionCommands(Client client) :
             base(client)
         {
@@ -46,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
 
-            using (var undoscope = this._client.Application.NewUndoScope(ConnectionCommands.undoname_connectShapes))
+            using (var undoscope = this._client.Application.NewUndoScope("Connect Shapes"))
             {
                 if (master == null)
                 {

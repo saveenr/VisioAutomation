@@ -32,8 +32,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Nudge Shapes"))
+            using (var undoscope = this._client.Application.NewUndoScope("Nudge"))
             {
                 var selection = this._client.Selection.Get();
                 var unitcode = IVisio.VisUnitCodes.visInches;
@@ -65,25 +64,23 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var shapes = targets.ResolveShapes(this._client);
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
-            } 
+            }
 
-            var selection = this._client.Selection.Get();
-            var shapeids = selection.GetIDs();
+            var page = this._client.Page.Get();
+            var target_shapeids = shapes.ToShapeIDs();
             var writer = new FormulaWriterSIDSRC();
 
-            foreach (int shapeid in shapeids)
+            foreach (int shapeid in target_shapeids.ShapeIDs)
             {
                 lockcells.SetFormulas((short)shapeid, writer);
             }
 
-            var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Lock Properties"))
+            using (var undoscope = this._client.Application.NewUndoScope("Set Lock Properties"))
             {
-                var active_page = application.ActivePage;
-                writer.Commit(active_page);
+                writer.Commit(page);
             }
         }
 
@@ -93,29 +90,28 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var shapes = targets.ResolveShapes(this._client);
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
-            } 
+            }
 
-            var shapeids = shapes.Select(s=>s.ID).ToList();
+            var active_page = this._client.Page.Get();
+            var shapeids = shapes.ToShapeIDs();
             var writer = new FormulaWriterSIDSRC();
-            foreach (int shapeid in shapeids)
+            foreach (int shapeid in shapeids.ShapeIDs)
             {
                 if (w.HasValue && w.Value>=0)
                 {
-                    writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Width, w.Value);
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.Width, w.Value);
                 }
                 if (h.HasValue && h.Value >= 0)
                 {
-                    writer.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Height, h.Value);                    
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.Height, h.Value);                    
                 }
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Size"))
             {
-                var active_page = application.ActivePage;
                 writer.Commit(active_page);
             }
         }

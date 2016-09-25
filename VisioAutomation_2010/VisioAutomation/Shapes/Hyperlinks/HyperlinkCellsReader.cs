@@ -1,10 +1,10 @@
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Hyperlinks
 {
-    class HyperlinkCellsQuery : CellGroupMultiRowQuery<Shapes.Hyperlinks.HyperlinkCells>
+    class HyperlinkCellsReader : MultiRowReader<Shapes.Hyperlinks.HyperlinkCells>
     {
 
         public ColumnSubQuery Address { get; set; }
@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes.Hyperlinks
         public ColumnSubQuery Default { get; set; }
         public ColumnSubQuery Invisible { get; set; }
 
-        public HyperlinkCellsQuery()
+        public HyperlinkCellsReader()
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionHyperlink);
 

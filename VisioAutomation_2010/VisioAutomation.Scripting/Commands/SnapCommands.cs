@@ -18,21 +18,19 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var shapes = targets.ResolveShapes2DOnly(this._client);
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
-
-            var shapeids = shapes.Select(s => s.ID).ToList();
-
             var application = this._client.Application.Get();
-            var target_ids = targets.ToShapeIDs(application.ActivePage);
+            var page = application.ActivePage;
+            var target_ids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Snape Shape Sizes"))
             {
                 var snapsize = new Drawing.Size(w, h);
                 var minsize = new Drawing.Size(w, h);
-                ArrangeHelper.SnapSize(target_ids, snapsize, minsize);
+                ArrangeHelper.SnapSize(page, target_ids, snapsize, minsize);
             }
         }
 
@@ -43,16 +41,17 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes2DOnly(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
             var application = this._client.Application.Get();
-            var target_ids = targets.ToShapeIDs(application.ActivePage);
-            using (var undoscope = this._client.Application.NewUndoScope("SnapCorner"))
+            var page = application.ActivePage;
+            var target_ids = targets.ToShapeIDs();
+            using (var undoscope = this._client.Application.NewUndoScope("Snap Shape Corner"))
             {
-                ArrangeHelper.SnapCorner(target_ids, new Drawing.Size(w, h), corner);
+                ArrangeHelper.SnapCorner(page, target_ids, new Drawing.Size(w, h), corner);
             }
         }
 
@@ -63,16 +62,17 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes2DOnly(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
             var application = this._client.Application.Get();
-            var target_ids = targets.ToShapeIDs(application.ActivePage);
-            using (var undoscope = this._client.Application.NewUndoScope("SnapSize"))
+            var page = application.ActivePage;
+            var target_ids = targets.ToShapeIDs();
+            using (var undoscope = this._client.Application.NewUndoScope("Snap Shape Size"))
             {
-                ArrangeHelper.SnapSize(target_ids, snapsize, minsize);
+                ArrangeHelper.SnapSize(page, target_ids, snapsize, minsize);
             }
         }
     }

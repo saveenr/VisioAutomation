@@ -1,16 +1,16 @@
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.UserDefinedCells
 {
-    class UserDefinedCellsQuery : CellGroupMultiRowQuery<Shapes.UserDefinedCells.UserDefinedCell>
+    class UserDefinedCellsReader : MultiRowReader<Shapes.UserDefinedCells.UserDefinedCell>
     {
         public ColumnSubQuery Value { get; set; }
         public ColumnSubQuery Prompt { get; set; }
 
-        public UserDefinedCellsQuery()
+        public UserDefinedCellsReader()
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionUser);
             this.Value = sec.AddCell(SRCCON.User_Value, nameof(SRCCON.User_Value));

@@ -20,27 +20,27 @@ namespace VisioAutomation.Scripting
             this.result_writer = new ResultWriterSIDSRC();
         }
 
-        public void SetFormula(short id, ShapeSheet.SRC src, string formula)
+        public void SetFormula(short id, VisioAutomation.ShapeSheet.SRC src, string formula)
         {
-            var sidsrc = new ShapeSheet.SIDSRC(id, src);
+            var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC(id, src);
             this.formula_writer.SetFormula(sidsrc, formula);
         }
 
-        public void SetResult(short id, ShapeSheet.SRC src, double result)
+        public void SetResult(short id, VisioAutomation.ShapeSheet.SRC src, double result)
         {
-            var sidsrc = new ShapeSheet.SIDSRC(id, src);
+            var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC(id, src);
             this.result_writer.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
         }
 
-        public void SetResult(short id, ShapeSheet.SRC src, int result)
+        public void SetResult(short id, VisioAutomation.ShapeSheet.SRC src, int result)
         {
-            var sidsrc = new ShapeSheet.SIDSRC(id, src);
+            var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC(id, src);
             this.result_writer.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
         }
 
-        public void SetResult(short id, ShapeSheet.SRC src, string result)
+        public void SetResult(short id, VisioAutomation.ShapeSheet.SRC src, string result)
         {
-            var sidsrc = new ShapeSheet.SIDSRC(id, src);
+            var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC(id, src);
             this.result_writer.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNumber);
         }
 

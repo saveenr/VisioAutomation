@@ -1,10 +1,10 @@
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Text
 {
-    class TextBlockCellsQuery : CellGroupSingleRowQuery<Text.TextBlockCells>
+    class TextBlockCellsReader : SingleRowReader<Text.TextBlockCells>
     {
         public ColumnQuery BottomMargin { get; set; }
         public ColumnQuery LeftMargin { get; set; }
@@ -16,7 +16,7 @@ namespace VisioAutomation.Text
         public ColumnQuery TextDirection { get; set; }
         public ColumnQuery VerticalAlign { get; set; }
 
-        public TextBlockCellsQuery()
+        public TextBlockCellsReader()
         {
             this.BottomMargin = this.query.AddCell(SRCCON.BottomMargin, nameof(SRCCON.BottomMargin));
             this.LeftMargin = this.query.AddCell(SRCCON.LeftMargin, nameof(SRCCON.LeftMargin));

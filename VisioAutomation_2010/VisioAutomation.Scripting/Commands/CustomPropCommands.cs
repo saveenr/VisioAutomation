@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.Commands
             var prop_dic = new Dictionary<IVisio.Shape, VACUSTPROP.CustomPropertyDictionary>();
             var shapes = targets.ResolveShapes(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return prop_dic;
             }
@@ -29,11 +29,11 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             var page = application.ActivePage;
 
-            var list_custom_props = VACUSTPROP.CustomPropertyHelper.Get(page, shapes);
+            var list_custom_props = VACUSTPROP.CustomPropertyHelper.Get(page, shapes.Shapes);
 
-            for (int i = 0; i < shapes.Count; i++)
+            for (int i = 0; i < shapes.Shapes.Count; i++)
             {
-                var shape = shapes[i];
+                var shape = shapes.Shapes[i];
                 var props = list_custom_props[i];
                 prop_dic[shape] = props;
             }
@@ -50,8 +50,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes(this._client);
 
-            var results = new List<bool>(shapes.Count);
-            foreach (var shape in shapes)
+            var results = new List<bool>(shapes.Shapes.Count);
+            foreach (var shape in shapes.Shapes)
             {
                 results.Add(VACUSTPROP.CustomPropertyHelper.Contains(shape, name));
             }
@@ -76,15 +76,14 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Delete Custom Property"))
             {
-                foreach (var shape in shapes)
+                foreach (var shape in shapes.Shapes)
                 {
                     VACUSTPROP.CustomPropertyHelper.Delete(shape, name);
                 }
@@ -103,14 +102,14 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Custom Property"))
             {
-                foreach (var shape in shapes)
+                foreach (var shape in shapes.Shapes)
                 {
                     VACUSTPROP.CustomPropertyHelper.Set(shape, name, customprop);
                 }

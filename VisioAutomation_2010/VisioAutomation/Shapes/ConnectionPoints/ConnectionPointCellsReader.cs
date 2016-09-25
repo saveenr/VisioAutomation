@@ -1,11 +1,11 @@
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.ConnectionPoints
 {
-    class ConnectionPointCellsQuery : CellGroupMultiRowQuery<ConnectionPointCells>
+    class ConnectionPointCellsReader : MultiRowReader<ConnectionPointCells>
     {
         public ColumnSubQuery DirX { get; set; }
         public ColumnSubQuery DirY { get; set; }
@@ -13,7 +13,7 @@ namespace VisioAutomation.Shapes.ConnectionPoints
         public ColumnSubQuery X { get; set; }
         public ColumnSubQuery Y { get; set; }
 
-        public ConnectionPointCellsQuery()
+        public ConnectionPointCellsReader()
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionConnectionPts);
 

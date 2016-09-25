@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 
-namespace VisioAutomation.ShapeSheet.CellGroups.Queries
+namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class CellGroupMultiRowQuery<TCellGroup> : CellGroupQuery<TCellGroup>
+    public abstract class MultiRowReader<TCellGroup> : ReaderBase<TCellGroup>
     {
         protected override void validate_query()
         {

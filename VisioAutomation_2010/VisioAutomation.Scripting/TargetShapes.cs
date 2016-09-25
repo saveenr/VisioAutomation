@@ -14,16 +14,16 @@ namespace VisioAutomation.Scripting
             this.Shapes = null;
         }
 
-        public TargetShapeIDs ToShapeIDs(IVisio.Page page)
+        public TargetShapeIDs ToShapeIDs()
         {
-            if (page == null)
+            if (this.Shapes == null)
             {
-                throw new System.ArgumentNullException(nameof(page));
+                throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
             }
 
             var shapeids = this.Shapes.Select(s => s.ID).ToList();
-            var t = new TargetShapeIDs(page,shapeids);
-            return t;
+            var target_shapeids = new TargetShapeIDs(shapeids);
+            return target_shapeids;
         }
 
         public TargetShapes(IList<IVisio.Shape> shapes)
@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting
             return selected_count;
         }
 
-        internal IList<IVisio.Shape> ResolveShapes(VisioAutomation.Scripting.Client client)
+        private IList<IVisio.Shape> __ResolveShapes(VisioAutomation.Scripting.Client client)
         {
             client.Application.AssertApplicationAvailable();
 
@@ -82,12 +82,19 @@ namespace VisioAutomation.Scripting
             return this.Shapes;
         }
 
-
-        internal List<IVisio.Shape> ResolveShapes2DOnly(VisioAutomation.Scripting.Client client)
+        internal TargetShapes ResolveShapes(VisioAutomation.Scripting.Client client)
         {
-            var shapes = this.ResolveShapes(client);
+            var shapes = this.__ResolveShapes(client);
+            var targets = new TargetShapes(shapes);
+            return targets;
+        }
+
+        internal TargetShapes ResolveShapes2DOnly(VisioAutomation.Scripting.Client client)
+        {
+            var shapes = this.__ResolveShapes(client);
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
-            return shapes_2d;
+            var targets = new TargetShapes(shapes_2d);
+            return targets;
         }
     }
 }

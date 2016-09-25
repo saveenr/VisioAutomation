@@ -1,11 +1,11 @@
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties
 {
-    public class CustomPropertyCellsQuery : CellGroupMultiRowQuery<Shapes.CustomProperties.CustomPropertyCells>
+    public class CustomPropertyCellsReader : MultiRowReader<Shapes.CustomProperties.CustomPropertyCells>
     {
         public ColumnSubQuery SortKey { get; set; }
         public ColumnSubQuery Ask { get; set; }
@@ -18,7 +18,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         public ColumnSubQuery Value { get; set; }
         public ColumnSubQuery Type { get; set; }
 
-        public CustomPropertyCellsQuery()
+        public CustomPropertyCellsReader()
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
 

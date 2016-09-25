@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using VisioAutomation.ShapeSheet;
-using VisioPowerShell.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -26,7 +25,7 @@ namespace VisioPowerShell.Commands.Get
 
         protected override void ProcessRecord()
         {
-            var cellmap = CellSRCDictionary.GetCellMapForPages();
+            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForPages();
             if (this.Cells == null || this.Cells.Length < 1 || this.Cells.Contains("*"))
             {
                 this.Cells = cellmap.GetNames().ToArray();

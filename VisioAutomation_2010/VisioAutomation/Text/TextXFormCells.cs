@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
 
 namespace VisioAutomation.Text
 {
@@ -40,6 +39,6 @@ namespace VisioAutomation.Text
             return query.GetCellGroup(shape);
         }
 
-        private static System.Lazy<TextXFormCellsQuery> lazy_query = new System.Lazy<TextXFormCellsQuery>();
+        private static System.Lazy<TextXFormCellsReader> lazy_query = new System.Lazy<TextXFormCellsReader>();
     }
 }

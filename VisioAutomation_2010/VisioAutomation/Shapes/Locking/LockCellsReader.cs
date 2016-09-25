@@ -1,10 +1,10 @@
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Shapes.Locking
 {
-    class LockCellsQuery : CellGroupSingleRowQuery<LockCells>
+    class LockCellsReader : SingleRowReader<LockCells>
     {
         public ColumnQuery LockAspect { get; set; }
         public ColumnQuery LockBegin { get; set; }
@@ -27,7 +27,7 @@ namespace VisioAutomation.Shapes.Locking
         public ColumnQuery LockVtxEdit { get; set; }
         public ColumnQuery LockWidth { get; set; }
 
-        public LockCellsQuery()
+        public LockCellsReader()
         {
             this.LockAspect = this.query.AddCell(SRCCON.LockAspect, nameof(SRCCON.LockAspect));
             this.LockBegin = this.query.AddCell(SRCCON.LockBegin, nameof(SRCCON.LockBegin));

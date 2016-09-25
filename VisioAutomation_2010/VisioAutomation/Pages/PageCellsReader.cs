@@ -1,10 +1,10 @@
-using VisioAutomation.ShapeSheet.CellGroups.Queries;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Pages
 {
-    class PageCellsQuery : CellGroupSingleRowQuery<VisioAutomation.Pages.PageCells>
+    class PageCellsReader : SingleRowReader<VisioAutomation.Pages.PageCells>
     {
         public ColumnQuery PageLeftMargin { get; set; }
         public ColumnQuery CenterX { get; set; }
@@ -74,7 +74,7 @@ namespace VisioAutomation.Pages
         public ColumnQuery AvoidPageBreaks { get; set; }
         public ColumnQuery DrawingResizeType { get; set; }
 
-        public PageCellsQuery()
+        public PageCellsReader()
         {
             this.PageLeftMargin = this.query.AddCell(SRCCON.PageLeftMargin, nameof(SRCCON.PageLeftMargin));
             this.CenterX = this.query.AddCell(SRCCON.CenterX, nameof(SRCCON.CenterX));
