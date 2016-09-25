@@ -85,15 +85,15 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public ShapeSheetWriter GetWriter(IVisio.Page page)
+        public VisioAutomation.Scripting.ShapeSheet.ShapeSheetWriter GetWriter(IVisio.Page page)
         {
-            var writer = new ShapeSheetWriter(this._client, page);
+            var writer = new VisioAutomation.Scripting.ShapeSheet.ShapeSheetWriter(this._client, page);
             return writer;
         }
 
-        public ShapeSheetReader GetReader(IVisio.Page page)
+        public VisioAutomation.Scripting.ShapeSheet.ShapeSheetReader GetReader(IVisio.Page page)
         {
-            var reader = new ShapeSheetReader(this._client, page);
+            var reader = new VisioAutomation.Scripting.ShapeSheet.ShapeSheetReader(this._client, page);
             return reader;
         }
 
