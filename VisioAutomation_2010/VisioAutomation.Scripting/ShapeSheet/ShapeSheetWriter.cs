@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Office.Interop.Visio;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
@@ -13,7 +13,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         public bool BlastGuards;
         public bool TestCircular;
 
-        public ShapeSheetWriter(Client client, IVisio.Page page)
+        public ShapeSheetWriter(Client client, Microsoft.Office.Interop.Visio.Page page)
         {
             this.Client = client;
             this.Surface= new ShapeSheetSurface(page);
@@ -43,7 +43,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         public VisioAutomation.ShapeSheet.ShapeSheetSurface Surface;
         public List<VisioAutomation.ShapeSheet.SIDSRC> SIDSRCs;
         
-        public ShapeSheetReader(Client client, IVisio.Page page)
+        public ShapeSheetReader(Client client, Microsoft.Office.Interop.Visio.Page page)
         {
             this.Client = client;
             this.Surface = new ShapeSheetSurface(page);
@@ -83,7 +83,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         public string[] GetResults()
         {
             var stream = get_Stream();
-            var unitcodes = new List<IVisio.VisUnitCodes> {IVisio.VisUnitCodes.visNoCast};
+            var unitcodes = new List<VisUnitCodes> {Microsoft.Office.Interop.Visio.VisUnitCodes.visNoCast};
             var formulas = VisioAutomation.ShapeSheet.Queries.Utilities.QueryHelpers.GetResults_SIDSRC<string>(this.Surface, stream, unitcodes);
             return formulas;
         }
