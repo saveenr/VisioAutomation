@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Scripting.Utilities;
 using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.Text;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -139,11 +141,15 @@ namespace VisioAutomation.Scripting.Commands
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
-            IVisio.VisGetSetArgs flags = 0;
-            var srcs = new[] { VisioAutomation.ShapeSheet.SRCConstants.CharFont };
-            var formulas = new[] { font.ID.ToString() };
-            this._client.ShapeSheet.SetFormula(targets, srcs, formulas, flags);
+            var page = this._client.Page.Get();
+
+            var cells = new VisioAutomation.Text.CharacterCells();
+            cells.Font = font.ID;
+
+            this._client.ShapeSheet.__SetCells(targets, cells, page);
         }
+
+
 
         public List<Text.TextFormat> GetFormat(TargetShapes targets)
         {

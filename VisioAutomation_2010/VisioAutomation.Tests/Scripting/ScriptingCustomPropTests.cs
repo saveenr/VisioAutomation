@@ -21,8 +21,16 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Selection.SelectNone();
 
-            var targets = new VA.Scripting.TargetShapes();
-            client.ShapeSheet.SetFormula(targets, new [] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
+            var shapes = new VisioAutomation.Scripting.TargetShapes(s1,s2,s3);
+            var shape_ids = shapes.ToShapeIDs();
+            var page = client.Page.Get();
+            var writer = client.ShapeSheet.GetWriter(page);
+            foreach (var shape_id in shape_ids.ShapeIDs)
+            {
+                writer.SetFormula( (short) shape_id, VA.ShapeSheet.SRCConstants.PinX, "1.0");
+            }
+            writer.Commit();
+            
             client.Document.Close(true);
         }
 

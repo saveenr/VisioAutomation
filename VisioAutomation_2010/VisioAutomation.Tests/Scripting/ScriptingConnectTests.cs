@@ -36,9 +36,16 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectNone();
             client.Selection.Select(directed_connectors);
 
-            var targets = new VA.Scripting.TargetShapes();
-            IVisio.VisGetSetArgs flags = 0;
-            client.ShapeSheet.SetFormula(targets,new[] { VA.ShapeSheet.SRCConstants.EndArrow }, new [] {"13"}, flags);
+
+            var page = client.Page.Get();
+            var writer = client.ShapeSheet.GetWriter(page);
+
+            var shapes = client.Selection.GetShapes();
+            foreach (var shape in shapes)
+            {
+                writer.SetFormula( shape.ID16, VA.ShapeSheet.SRCConstants.EndArrow, "13");
+            }
+            writer.Commit();
 
             var ch = new VA.DocumentAnalysis.ConnectorHandling();
             ch.DirectionSource = DirectionSource.UseConnectionOrder;
