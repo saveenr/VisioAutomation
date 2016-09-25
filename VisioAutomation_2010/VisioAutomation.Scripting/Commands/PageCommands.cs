@@ -569,5 +569,25 @@ namespace VisioAutomation.Scripting.Commands
                 return pages2;
             }
         }
+
+        public List<IVisio.Shape> GetShapes()
+        {
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
+
+            var page = this._client.Page.Get();
+            var shapes = page.Shapes.ToEnumerable().ToList();
+            return shapes;
+        }
+
+        public List<short> GetShapeIDs()
+        {
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
+
+            var page = this._client.Page.Get();
+            var shapes = page.Shapes.ToEnumerable().Select(s=>s.ID16).ToList();
+            return shapes;
+        }
     }
 }

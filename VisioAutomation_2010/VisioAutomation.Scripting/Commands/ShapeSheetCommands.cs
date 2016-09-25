@@ -85,56 +85,6 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public ListOutput<T> QueryResults<T>(TargetShapes targets, IList<VisioAutomation.ShapeSheet.SRC> srcs)
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            var shapes = targets.ResolveShapes(this._client);
-
-            var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
-
-            var query = new VAQUERY.Query();
-
-            int ci = 0;
-            foreach (var src in srcs)
-            {
-                string colname = string.Format("Col{0}", ci);
-                query.AddCell(src, colname);
-                ci++;
-            }
-
-            var results = query.GetResults<T>(surface, shapeids);
-            return results;
-        }
-
-        public ListOutput<string> QueryFormulas(TargetShapes targets, IList<VisioAutomation.ShapeSheet.SRC> srcs)
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            var shapes = targets.ResolveShapes(this._client);
-
-            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
-
-            var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-
-            var query = new VAQUERY.Query();
-
-            int ci = 0;
-            foreach (var src in srcs)
-            {
-                string colname = string.Format("Col{0}", ci);
-                query.AddCell(src, colname);
-                ci++;
-            }
-
-            var formulas = query.GetFormulas(surface, shapeids);
-
-            return formulas;
-        }
-
         public ShapeSheetWriter GetWriter(IVisio.Page page)
         {
             var writer = new ShapeSheetWriter(this._client, page);
