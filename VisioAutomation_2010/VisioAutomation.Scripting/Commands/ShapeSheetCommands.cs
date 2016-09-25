@@ -135,63 +135,16 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public ListOutput<T> QueryResults<T>(TargetShapes targets, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            var shapes = targets.ResolveShapes(this._client);
-
-            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
-
-            var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var query = new VAQUERY.Query();
-            var sec = query.AddSubQuery(section);
-
-            int ci = 0;
-            foreach (var cell in cells)
-            {
-                string name = string.Format("Cell{0}", ci);
-                var src = new SRC(section,0,cell);
-                sec.AddCell(src, name);
-                ci++;
-            }
-
-           var results = query.GetResults<T>(surface, shapeids);
-            return results;
-        }
-
-        public ListOutput<string> QueryFormulas(TargetShapes targets, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            var shapes = targets.ResolveShapes(this._client);
-
-            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
-
-            var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-
-            var query = new VAQUERY.Query();
-            var sec = query.AddSubQuery(section);
-
-            int ci = 0;
-            foreach (var cell in cells)
-            {
-                string name = string.Format("Cell{0}", ci);
-                var src = new SRC(section, 0, cell);
-                sec.AddCell(src, name);
-                ci++;
-            }
-
-            var formulas = query.GetFormulas(surface, shapeids);
-            return formulas;
-        }
-
         public ShapeSheetWriter GetWriter(IVisio.Page page)
         {
-            var w = new ShapeSheetWriter(this._client, page);
-            return w;
+            var writer = new ShapeSheetWriter(this._client, page);
+            return writer;
+        }
+
+        public ShapeSheetReader GetReader(IVisio.Page page)
+        {
+            var reader = new ShapeSheetReader(this._client, page);
+            return reader;
         }
 
         public void SetPageCells(TargetShapes targets, System.Collections.Hashtable hashtable, bool blast_guards,
