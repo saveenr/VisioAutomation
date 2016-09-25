@@ -318,21 +318,21 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetPageCells(TargetShapes targets, System.Collections.Hashtable ht, bool blast_guards,
+        public void SetPageCells(TargetShapes targets, System.Collections.Hashtable hashtable, bool blast_guards,
             bool test_circular)
         {
             var targets2 = targets.ToShapeIDs();
-            this.SetPageCells(targets2,ht,blast_guards,test_circular);
+            this.SetPageCells(targets2,hashtable,blast_guards,test_circular);
         }
 
-        public void SetPageCells(TargetShapeIDs targets,System.Collections.Hashtable ht, bool blast_guards, bool test_circular)
+        public void SetPageCells(TargetShapeIDs targets,System.Collections.Hashtable hashtable, bool blast_guards, bool test_circular)
         {
             var writer = new FormulaWriterSIDSRC();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
             var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForPages();
-            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, ht);
+            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
             {
