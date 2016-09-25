@@ -20,7 +20,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
 
             if (shapes.Shapes.Count<1)
@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
 
 
@@ -98,7 +98,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
 
             if (shapes.Shapes.Count < 1)
@@ -149,7 +149,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var targets = new VisioAutomation.Scripting.TargetShapes( target_shape );
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
             if (shapes.Shapes.Count < 1)
             {
                 return;
@@ -170,7 +170,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
             {

@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var shapes = targets.ResolveShapes2DOnly(this._client);
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
@@ -40,7 +40,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes2DOnly(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
@@ -60,7 +60,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes2DOnly(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }

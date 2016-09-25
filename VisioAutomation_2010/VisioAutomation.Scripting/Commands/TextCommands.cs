@@ -25,7 +25,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
             {
@@ -56,7 +56,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
             {
@@ -72,7 +72,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
 
             if (shapes.Shapes.Count < 1)
@@ -129,7 +129,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
             {
@@ -150,7 +150,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
             {
@@ -169,7 +169,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
             {
@@ -208,16 +208,15 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes2DOnly(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
-            var application = this._client.Application.Get();
+            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
+            var active_page = this._client.Page.Get();
             using (var undoscope = this._client.Application.NewUndoScope("SetTextWrapping"))
             {
-                var active_page = application.ActivePage;
                 TextHelper.set_text_wrapping(active_page, shapeids, wrap);
             }
         }
@@ -229,20 +228,20 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = targets.ResolveShapes2DOnly(this._client);
 
-            if (shapes.Count < 1)
+            if (shapes.Shapes.Count < 1)
             {
                 return;
             }
 
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
-            var shapeids = shapes.Select(s => s.ID).ToList();
+            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
 
             using (var undoscope = this._client.Application.NewUndoScope("FitShapeToText"))
             {
                 // Calculate the new sizes for each shape
                 var new_sizes = new List<Drawing.Size>(shapeids.Count);
-                foreach (var shape in shapes)
+                foreach (var shape in shapes.Shapes)
                 {
                     var text_bounding_box = shape.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightText).Size;
                     var wh_bounding_box = shape.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightWH).Size;

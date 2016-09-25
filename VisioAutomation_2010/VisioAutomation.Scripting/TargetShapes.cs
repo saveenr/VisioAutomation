@@ -22,8 +22,8 @@ namespace VisioAutomation.Scripting
             }
 
             var shapeids = this.Shapes.Select(s => s.ID).ToList();
-            var t = new TargetShapeIDs(page,shapeids);
-            return t;
+            var target_shapeids = new TargetShapeIDs(page,shapeids);
+            return target_shapeids;
         }
 
         public TargetShapes(IList<IVisio.Shape> shapes)
@@ -82,18 +82,19 @@ namespace VisioAutomation.Scripting
             return this.Shapes;
         }
 
-        internal TargetShapes ResolveShapesEx(VisioAutomation.Scripting.Client client)
+        internal TargetShapes ResolveShapes(VisioAutomation.Scripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
-            var t = new TargetShapes(shapes);
-            return t;
+            var targets = new TargetShapes(shapes);
+            return targets;
         }
 
-        internal List<IVisio.Shape> ResolveShapes2DOnly(VisioAutomation.Scripting.Client client)
+        internal TargetShapes ResolveShapes2DOnly(VisioAutomation.Scripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
-            return shapes_2d;
+            var targets = new TargetShapes(shapes_2d);
+            return targets;
         }
     }
 }

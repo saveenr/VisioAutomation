@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(ctrl));
             }
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
 
             if (shapes.Shapes.Count < 1)
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
             {
@@ -70,7 +70,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapesEx(this._client);
+            var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
             {
