@@ -16,6 +16,11 @@ namespace VisioAutomation.Scripting
 
         public TargetShapeIDs ToShapeIDs()
         {
+            if (this.Shapes == null)
+            {
+                throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
+            }
+
             var shapeids = this.Shapes.Select(s => s.ID).ToList();
             var target_shapeids = new TargetShapeIDs(shapeids);
             return target_shapeids;
