@@ -14,15 +14,10 @@ namespace VisioAutomation.Scripting
             this.Shapes = null;
         }
 
-        public TargetShapeIDs ToShapeIDs(IVisio.Page page)
+        public TargetShapeIDs ToShapeIDs()
         {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException(nameof(page));
-            }
-
             var shapeids = this.Shapes.Select(s => s.ID).ToList();
-            var target_shapeids = new TargetShapeIDs(page,shapeids);
+            var target_shapeids = new TargetShapeIDs(shapeids);
             return target_shapeids;
         }
 

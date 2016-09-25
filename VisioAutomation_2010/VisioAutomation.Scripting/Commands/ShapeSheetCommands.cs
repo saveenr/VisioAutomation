@@ -322,7 +322,7 @@ namespace VisioAutomation.Scripting.Commands
             bool test_circular)
         {
             var page = this._client.Page.Get();
-            var targets2 = targets.ToShapeIDs( page );
+            var targets2 = targets.ToShapeIDs();
             this.SetPageCells(targets2,ht,blast_guards,test_circular);
         }
 
@@ -364,7 +364,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             var page = this._client.Page.Get();
             var resolved_targets = targets.ResolveShapes(this._client);
-            var target_ids= resolved_targets.ToShapeIDs(page);
+            var target_ids= resolved_targets.ToShapeIDs();
             this.SetShapeCells(target_ids, hashtable, blast_guards, test_circular);
         }
 

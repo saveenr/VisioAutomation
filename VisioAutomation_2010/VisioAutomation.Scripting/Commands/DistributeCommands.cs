@@ -21,10 +21,10 @@ namespace VisioAutomation.Scripting.Commands
             }
             var page = this._client.Page.Get();
             var targets2 = targets.ResolveShapes(this._client);
-            var targetids = targets2.ToShapeIDs(page);
+            var targetids = targets2.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
-                ArrangeHelper.DistributeWithSpacing(targetids, axis, spacing);
+                ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
             }
         }
 
