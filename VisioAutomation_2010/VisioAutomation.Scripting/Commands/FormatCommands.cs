@@ -20,16 +20,15 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
-
-
-            if (shapes.Shapes.Count<1)
+            targets = targets.ResolveShapes(this._client);
+            
+            if (targets.Shapes.Count<1)
             {
                 return;
             }
 
             var writer = new FormulaWriterSIDSRC();
-            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
+            var shapeids = targets.Shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
             {
@@ -45,16 +44,14 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
-
-
-
-            if (shapes.Shapes.Count < 1)
+            targets = targets.ResolveShapes(this._client);
+            
+            if (targets.Shapes.Count < 1)
             {
                 return new List<Shapes.ShapeFormatCells>(0);
             }
 
-            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
+            var shapeids = targets.Shapes.Select(s => s.ID).ToList();
             var application = this._client.Application.Get();
             var fmts = Shapes.ShapeFormatCells.GetCells(application.ActivePage, shapeids);
             return fmts;
@@ -98,10 +95,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
-
-
-            if (shapes.Shapes.Count < 1)
+            targets = targets.ResolveShapes(this._client);
+            
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
@@ -112,7 +108,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var writer = new FormulaWriterSIDSRC();
-            var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
+            var shapeids = targets.Shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)
             {
@@ -170,14 +166,14 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
  
-            var shapeids = shapes.Shapes.Select(s=>s.ID).ToList();
+            var shapeids = targets.Shapes.Select(s=>s.ID).ToList();
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
 

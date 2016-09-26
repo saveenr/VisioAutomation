@@ -27,9 +27,9 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting.Commands
                 // start reusing the texts from the beginning
 
                 int count = 0;
-                foreach (var shape in shapes.Shapes)
+                foreach (var shape in targets.Shapes)
                 {
                     string text = texts[count%texts.Count];
                     if (text != null)
@@ -58,14 +58,14 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return new List<string>(0);
             }
 
-            var texts = shapes.Shapes.Select(s => s.Text).ToList();
+            var texts = targets.Shapes.Select(s => s.Text).ToList();
             return texts;
         }
 
@@ -74,10 +74,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
-
-
-            if (shapes.Shapes.Count < 1)
+            targets = targets.ResolveShapes(this._client);
+            
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
@@ -85,14 +84,14 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Toggle Shape Text Case"))
             {
-                var shapeids = shapes.Shapes.Select(s => s.ID).ToList();
+                var shapeids = targets.Shapes.Select(s => s.ID).ToList();
 
                 var page = application.ActivePage;
                 // Store all the formatting
                 var formats = Text.TextFormat.GetFormat(page, shapeids);
 
                 // Change the text - this will wipe out all the character and paragraph formatting
-                foreach (var shape in shapes.Shapes)
+                foreach (var shape in targets.Shapes)
                 {
                     string t = shape.Text;
                     if (t.Length < 1)
@@ -105,7 +104,7 @@ namespace VisioAutomation.Scripting.Commands
                 // Now restore all the formatting - based on any initial formatting from the text
 
                 var writer = new FormulaWriterSIDSRC();
-                for (int i = 0; i < shapes.Shapes.Count; i++)
+                for (int i = 0; i < targets.Shapes.Count; i++)
                 {
                     var format = formats[i];
 
@@ -131,12 +130,13 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
+
             var application = this._client.Application.Get();
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
@@ -156,9 +156,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return new List<Text.TextFormat>(0);
             }
@@ -175,15 +175,15 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
 
             var writer = new FormulaWriterSIDSRC();
-            foreach (var shape in shapes.Shapes)
+            foreach (var shape in targets.Shapes)
             {
                 if (0 ==
                     shape.RowExists[
@@ -196,7 +196,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this._client.Application.Get();
-            var shapeids = shapes.Shapes.Select(s => s.ID);
+            var shapeids = targets.Shapes.Select(s => s.ID);
             foreach (int shapeid in shapeids)
             {
                 writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.TxtHeight, "Height*0");

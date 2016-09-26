@@ -19,8 +19,8 @@ namespace VisioAutomation.Scripting.Commands
 
         internal void __SetCells(TargetShapes targets, VisioAutomation.ShapeSheet.CellGroups.CellGroupBase cells, IVisio.Page page)
         {
-            var resolved_targets = targets.ResolveShapes(this._client);
-            var shape_ids = resolved_targets.ToShapeIDs();
+            targets = targets.ResolveShapes(this._client);
+            var shape_ids = targets.ToShapeIDs();
             var writer = new VisioAutomation.ShapeSheet.Writers.FormulaWriterSIDSRC();
 
             foreach (var shape_id in shape_ids.ShapeIDs)
@@ -50,9 +50,9 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
@@ -61,7 +61,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 int numnames = names.Count;
 
-                int up_to = System.Math.Min(numnames, shapes.Shapes.Count);
+                int up_to = System.Math.Min(numnames, targets.Shapes.Count);
 
                 for (int i = 0; i < up_to; i++)
                 {
@@ -69,7 +69,7 @@ namespace VisioAutomation.Scripting.Commands
 
                     if (new_name != null)
                     {
-                        var shape = shapes.Shapes[i];
+                        var shape = targets.Shapes[i];
                         shape.Name = new_name;
                     }
                 }
@@ -140,8 +140,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetShapeCells(TargetShapes targets, System.Collections.Hashtable hashtable, bool blast_guards, bool test_circular)
         {
-            var resolved_targets = targets.ResolveShapes(this._client);
-            var target_ids= resolved_targets.ToShapeIDs();
+            targets = targets.ResolveShapes(this._client);
+            var target_ids= targets.ToShapeIDs();
             this.SetShapeCells(target_ids, hashtable, blast_guards, test_circular);
         }
 
