@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
-using VisioAutomation.ShapeSheet.Queries.Utilities;
+using VisioAutomation.ShapeSheet.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Utilities;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
@@ -25,16 +26,16 @@ namespace VisioAutomation.Scripting.ShapeSheet
 
         public string[] GetFormulas()
         {
-            var stream = VisioAutomation.ShapeSheet.Queries.Utilities.StreamBuilderSIDSRC.CreateStream(this.SIDSRCs);
-            var formulas = VisioAutomation.ShapeSheet.Queries.Utilities.QueryHelpers.GetFormulasU_SIDSRC(this.Surface, stream);
+            var stream = StreamBuilderSIDSRC.CreateStream(this.SIDSRCs);
+            var formulas = QueryHelpers.GetFormulasU_SIDSRC(this.Surface, stream);
             return formulas;
         }
 
         public string[] GetResults()
         {
-            var stream = VisioAutomation.ShapeSheet.Queries.Utilities.StreamBuilderSIDSRC.CreateStream(this.SIDSRCs);
+            var stream = StreamBuilderSIDSRC.CreateStream(this.SIDSRCs);
             var unitcodes = new List<IVisio.VisUnitCodes> { IVisio.VisUnitCodes.visNoCast };
-            var formulas = VisioAutomation.ShapeSheet.Queries.Utilities.QueryHelpers.GetResults_SIDSRC<string>(this.Surface, stream, unitcodes);
+            var formulas = QueryHelpers.GetResults_SIDSRC<string>(this.Surface, stream, unitcodes);
             return formulas;
         }
     }

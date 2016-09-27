@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.ShapeSheet.Queries.Utilities
+﻿namespace VisioAutomation.ShapeSheet.Utilities
 {
     public class StreamBuilderBase
     {

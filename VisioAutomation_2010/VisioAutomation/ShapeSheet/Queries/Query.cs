@@ -3,7 +3,7 @@ using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
-using VisioAutomation.ShapeSheet.Queries.Utilities;
+using VisioAutomation.ShapeSheet.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Queries

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Exceptions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Queries.Utilities
+namespace VisioAutomation.ShapeSheet.Utilities
 {
     public struct QueryHelpers
     {

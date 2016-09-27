@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Queries.Utilities
+namespace VisioAutomation.ShapeSheet.Utilities
 {
     public class StreamBuilderSRC: StreamBuilderBase
     {
@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Queries.Utilities
 
         public static short[] CreateStream(IList<SRC> items)
         {
-            var streambuilder = new VisioAutomation.ShapeSheet.Queries.Utilities.StreamBuilderSRC(items.Count);
+            var streambuilder = new StreamBuilderSRC(items.Count);
 
             foreach (var src in items)
             {
