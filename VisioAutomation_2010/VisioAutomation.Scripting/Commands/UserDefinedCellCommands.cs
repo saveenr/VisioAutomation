@@ -13,7 +13,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>> Get(TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> Contains(TargetShapes targets, string name)
+        public List<bool> Contains(TargetShapes targets, string name)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
