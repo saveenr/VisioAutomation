@@ -97,14 +97,14 @@ namespace VisioAutomation.Scripting.Commands
             return reader;
         }
 
-        public void SetPageCells(TargetShapes targets, System.Collections.Hashtable hashtable, bool blast_guards,
+        public void SetPageCells(TargetShapes targets, Dictionary<string, object> hashtable, bool blast_guards,
             bool test_circular)
         {
             var targets2 = targets.ToShapeIDs();
             this.SetPageCells(targets2,hashtable,blast_guards,test_circular);
         }
 
-        public void SetPageCells(TargetShapeIDs targets,System.Collections.Hashtable hashtable, bool blast_guards, bool test_circular)
+        public void SetPageCells(TargetShapeIDs targets, Dictionary<string, object> hashtable, bool blast_guards, bool test_circular)
         {
             var writer = new FormulaWriterSIDSRC();
             writer.BlastGuards = blast_guards;
@@ -138,14 +138,14 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetShapeCells(TargetShapes targets, System.Collections.Hashtable hashtable, bool blast_guards, bool test_circular)
+        public void SetShapeCells(TargetShapes targets, Dictionary<string, object> hashtable, bool blast_guards, bool test_circular)
         {
             targets = targets.ResolveShapes(this._client);
             var target_ids= targets.ToShapeIDs();
             this.SetShapeCells(target_ids, hashtable, blast_guards, test_circular);
         }
 
-        public void SetShapeCells(TargetShapeIDs targets, System.Collections.Hashtable hashtable, bool blast_guards, bool test_circular)
+        public void SetShapeCells(TargetShapeIDs targets, Dictionary<string, object> hashtable, bool blast_guards, bool test_circular)
         {
             var writer = new FormulaWriterSIDSRC();
             writer.BlastGuards = blast_guards;

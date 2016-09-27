@@ -9,18 +9,6 @@ namespace VisioAutomation.Scripting.ShapeSheet
     {
         private readonly CellSRCDictionary srcmap;
 
-        public CellValueDictionary(CellSRCDictionary srcmap, Hashtable hashtable)
-        {
-            if (srcmap == null)
-            {
-                throw new System.ArgumentNullException(nameof(srcmap));
-            }
-
-            this.srcmap = srcmap;
-
-            this.UpdateFrom(hashtable);
-        }
-
         public CellValueDictionary(CellSRCDictionary srcmap, Dictionary<string,object> dictionary)
         {
             if (srcmap == null)
@@ -37,32 +25,6 @@ namespace VisioAutomation.Scripting.ShapeSheet
         public SRC GetSRC(string name)
         {
             return this.srcmap[name];
-        }
-
-        public void UpdateFrom(Hashtable hashtable)
-        {
-            if (hashtable == null)
-            {
-                throw new System.ArgumentNullException(nameof(hashtable));
-            }
-
-            var dic = new Dictionary<string,object>();
-            foreach (object key in hashtable.Keys)
-            {
-                if (!(key is string))
-                {
-                    string message =
-                        string.Format("Only string values can be keys in the hashtable. Encountered a key of type {0}",
-                            key.GetType().FullName);
-                    throw new System.ArgumentOutOfRangeException(nameof(hashtable), message);
-                }
-
-                string cellname = (string) key;
-                var cell_value_o = hashtable[key];
-                dic[cellname] = cell_value_o;
-            }
-
-            this.UpdateFrom(dic);
         }
 
         public void UpdateFrom(Dictionary<string,object> from_dic)
