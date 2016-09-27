@@ -5,7 +5,7 @@ using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
-    public class CellValueDictionary : CellDictionary<string>
+    public class CellValueDictionary : NameDictionary<string>
     {
         private readonly CellSRCDictionary srcmap;
 
@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
 
         public void UpdateFrom(string cellname,string cellvalue)
         {
-            if (!this.srcmap.ContainsCell(cellname))
+            if (!this.srcmap.ContainsKey(cellname))
             {
                 string message = string.Format("Cell \"{0}\" is not supported", cellname);
                 throw new System.ArgumentOutOfRangeException(message);

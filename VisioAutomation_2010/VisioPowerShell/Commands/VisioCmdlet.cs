@@ -65,8 +65,8 @@ namespace VisioPowerShell.Commands
 
         protected void DumpValues(VisioAutomation.Scripting.ShapeSheet.CellValueDictionary cellvalues)
         {
-            this.WriteVerbose(string.Format("CellValues contains {0} items", cellvalues.CellNames.Count));
-            foreach (var cellname in cellvalues.CellNames)
+            this.WriteVerbose(string.Format("CellValues contains {0} items", cellvalues.Keys.Count));
+            foreach (var cellname in cellvalues.Keys)
             {
                 string cell_value = cellvalues[cellname];
                 this.WriteVerbose("{0} = {1}", cellname, cell_value);

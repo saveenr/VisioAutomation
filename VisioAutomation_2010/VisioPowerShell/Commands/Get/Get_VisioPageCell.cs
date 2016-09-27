@@ -33,7 +33,7 @@ namespace VisioPowerShell.Commands.Get
             Get_VisioPageCell.EnsureEnoughCellNames(this.Cells);
             var target_page = this.Page ?? this.Client.Page.Get();
             this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));
-            var query = cellmap.CreateQueryFromCellNames(this.Cells);
+            var query = cellmap.ToQuery(this.Cells);
             var surface = new ShapeSheetSurface(target_page);
             var target_shapeids = new[] { surface.Target.Page.PageSheet.ID };
             var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);

@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (var shape_id in targets.ShapeIDs)
             {
-                foreach (var cellname in valuemap.CellNames)
+                foreach (var cellname in valuemap.Keys)
                 {
                     string cell_value = valuemap[cellname];
                     var cell_src = valuemap.GetSRC(cellname);
@@ -156,7 +156,7 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (var shape_id in targets.ShapeIDs)
             {
-                foreach (var cellname in valuemap.CellNames)
+                foreach (var cellname in valuemap.Keys)
                 {
                     string cell_value = valuemap[cellname];
                     var cell_src = valuemap.GetSRC(cellname);

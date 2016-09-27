@@ -37,6 +37,7 @@ namespace VisioPowerShell.Commands.Set
         public static Dictionary<string, string> CellHashtableToDictionary(Hashtable ht)
         {
             var dic = new Dictionary<string, string>();
+
             foreach (object key in ht.Keys)
             {
                 if (!(key is string))
