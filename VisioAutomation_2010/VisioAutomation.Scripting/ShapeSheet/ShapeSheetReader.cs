@@ -25,33 +25,14 @@ namespace VisioAutomation.Scripting.ShapeSheet
 
         public string[] GetFormulas()
         {
-            var stream = get_Stream();
+            var stream = VisioAutomation.ShapeSheet.Queries.Utilities.StreamBuilderSIDSRC.CreateStream(this.SIDSRCs);
             var formulas = VisioAutomation.ShapeSheet.Queries.Utilities.QueryHelpers.GetFormulasU_SIDSRC(this.Surface, stream);
-
             return formulas;
-        }
-
-        private short[] get_Stream()
-        {
-            var streambuilder = new VisioAutomation.ShapeSheet.Queries.Utilities.StreamBuilderSIDSRC(this.SIDSRCs.Count);
-
-            foreach (var sidsrc in this.SIDSRCs)
-            {
-                streambuilder.Add(sidsrc.ShapeID, sidsrc.SRC);
-            }
-
-            if (!streambuilder.IsFull)
-            {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
-            }
-
-            var stream = streambuilder.Stream;
-            return stream;
         }
 
         public string[] GetResults()
         {
-            var stream = get_Stream();
+            var stream = VisioAutomation.ShapeSheet.Queries.Utilities.StreamBuilderSIDSRC.CreateStream(this.SIDSRCs);
             var unitcodes = new List<IVisio.VisUnitCodes> { IVisio.VisUnitCodes.visNoCast };
             var formulas = VisioAutomation.ShapeSheet.Queries.Utilities.QueryHelpers.GetResults_SIDSRC<string>(this.Surface, stream, unitcodes);
             return formulas;
