@@ -34,9 +34,9 @@ namespace VisioPowerShell.Commands.Set
             }
         }
 
-        public static Dictionary<string, object> CellHashtableToDictionary(Hashtable ht)
+        public static Dictionary<string, string> CellHashtableToDictionary(Hashtable ht)
         {
-            var dic = new Dictionary<string, object>();
+            var dic = new Dictionary<string, string>();
             foreach (object key in ht.Keys)
             {
                 if (!(key is string))
@@ -49,7 +49,16 @@ namespace VisioPowerShell.Commands.Set
 
                 string cellname = (string) key;
                 var cell_value_o = ht[key];
-                dic[cellname] = cell_value_o;
+
+                if (!(cell_value_o is string))
+                {
+                    string message =
+                        string.Format("Only string values can be values in the hashtable. Encountered a key of type {0}",
+                            key.GetType().FullName);
+                    throw new System.ArgumentOutOfRangeException(message);
+
+                }
+                dic[cellname] = (string) cell_value_o;
             }
             return dic;
         }
