@@ -6,26 +6,23 @@ using System.Text.RegularExpressions;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
-    public class CellDictionary<T>
+    public class NameDictionary<T>
     {
-        // this class is keyed by a cell name
-        // and stores the value T
-
         private readonly Dictionary<string, T> dic;
-        private readonly Regex regex_cellname;
-        private readonly Regex regex_cellname_wildcard;
+        private readonly Regex regex_name;
+        private readonly Regex regex_name_wildcard;
 
-        public CellDictionary()
+        public NameDictionary()
         {
-            this.regex_cellname = new Regex("^[a-zA-Z]*$");
-            this.regex_cellname_wildcard = new Regex("^[a-zA-Z\\*\\?]*$");
+            this.regex_name = new Regex("^[a-zA-Z]*$");
+            this.regex_name_wildcard = new Regex("^[a-zA-Z\\*\\?]*$");
             var compare = StringComparer.InvariantCultureIgnoreCase;
             this.dic = new Dictionary<string, T>(compare);
         }
 
         public List<string> GetNames()
         {
-            return this.CellNames.ToList();
+            return this.Keys.ToList();
         }
 
         public T this[string name]
@@ -33,11 +30,11 @@ namespace VisioAutomation.Scripting.ShapeSheet
             get { return this.dic[name]; }
             set
             {
-                this.CheckCellName(name);
+                this.CheckName(name);
 
                 if (this.dic.ContainsKey(name))
                 {
-                    string msg = string.Format("CellMap already contains a cell called \"{0}\"", name);
+                    string msg = string.Format("Dictionary already contains a key called \"{0}\"", name);
                     throw new ArgumentOutOfRangeException(msg);
                 }
 
@@ -45,44 +42,52 @@ namespace VisioAutomation.Scripting.ShapeSheet
             }
         }
 
-        public Dictionary<string, T>.KeyCollection CellNames => this.dic.Keys;
-
-        public bool IsValidCellName(string name) => this.regex_cellname.IsMatch(name);
-
-        public bool IsValidCellNameWildCard(string name) => this.regex_cellname_wildcard.IsMatch(name);
-
-
-        public void CheckCellName(string name)
+        public Dictionary<string, T>.KeyCollection Keys
         {
-            if (this.IsValidCellName(name))
+            get { return this.dic.Keys; }
+        }
+
+        public bool IsValidName(string name)
+        {
+            return this.regex_name.IsMatch(name);
+        }
+
+        public bool IsValidNameWildCard(string name)
+        {
+            return this.regex_name_wildcard.IsMatch(name);
+        }
+
+        public void CheckName(string name)
+        {
+            if (this.IsValidName(name))
             {
                 return;
             }
 
-            string msg = string.Format("Cell name \"{0}\" is not valid", name);
+            string msg = string.Format("Key name \"{0}\" is not valid", name);
             throw new ArgumentOutOfRangeException(msg);
         }
 
-        public void CheckCellNameWildcard(string name)
+        public void CheckNameWildcard(string name)
         {
-            if (this.IsValidCellNameWildCard(name))
+            if (this.IsValidNameWildCard(name))
             {
                 return;
             }
 
-            string msg = string.Format("Cell name wildcard pattern \"{0}\" is not valid", name);
+            string msg = string.Format("wildcard pattern \"{0}\" is not valid", name);
             throw new ArgumentException(msg, nameof(name));
         }
 
-        public IEnumerable<string> ResolveName(string cellname)
+        public IEnumerable<string> ResolveName(string name)
         {
-            if (cellname.Contains("*") || cellname.Contains("?"))
+            if (name.Contains("*") || name.Contains("?"))
             {
-                this.CheckCellNameWildcard(cellname);
+                this.CheckNameWildcard(name);
 
-                var regex = CellDictionary<T>.GetRegexForWildCardPattern(cellname);
+                var regex = NameDictionary<T>.GetRegexForWildCardPattern(name);
 
-                foreach (string k in this.CellNames)
+                foreach (string k in this.Keys)
                 {
                     if (regex.IsMatch(k))
                     {
@@ -92,11 +97,11 @@ namespace VisioAutomation.Scripting.ShapeSheet
             }
             else
             {
-                this.CheckCellName(cellname);
-                if (this.dic.ContainsKey(cellname))
+                this.CheckName(name);
+                if (this.dic.ContainsKey(name))
                 {
                     // found the exact cell name, yield it
-                    yield return cellname;
+                    yield return name;
                 }
                 else
                 {
@@ -125,6 +130,9 @@ namespace VisioAutomation.Scripting.ShapeSheet
             }
         }
 
-        public bool ContainsCell(string name) => this.dic.ContainsKey(name);
+        public bool ContainsKey(string name)
+        {
+            return this.dic.ContainsKey(name);
+        }
     }
 }

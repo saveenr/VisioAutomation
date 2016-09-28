@@ -23,7 +23,9 @@ namespace VisioPowerShell.Commands.Set
         {
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
             var targets = new VisioAutomation.Scripting.TargetShapes(target_shapes);
-            this.Client.ShapeSheet.SetShapeCells(targets, this.Hashtable, this.BlastGuards, this.TestCircular);
+
+            var dic = Set_VisioPageCell.CellHashtableToDictionary(this.Hashtable);
+            this.Client.ShapeSheet.SetShapeCells(targets, dic, this.BlastGuards, this.TestCircular);
         }
     }
 }

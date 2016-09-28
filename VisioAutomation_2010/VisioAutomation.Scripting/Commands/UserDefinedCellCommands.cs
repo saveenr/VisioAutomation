@@ -13,27 +13,27 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>> Get(TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>>();
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return prop_dic;
             }
 
             var application = this._client.Application.Get();
             var page = application.ActivePage;
-            var list_user_props = VA_UDC.UserDefinedCellHelper.Get(page, shapes.Shapes);
+            var list_user_props = VA_UDC.UserDefinedCellHelper.Get(page, targets.Shapes);
 
-            for (int i = 0; i < shapes.Shapes.Count; i++)
+            for (int i = 0; i < targets.Shapes.Count; i++)
             {
-                var shape = shapes.Shapes[i];
+                var shape = targets.Shapes[i];
                 var props = list_user_props[i];
                 prop_dic[shape] = props;
             }
@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> Contains(TargetShapes targets, string name)
+        public List<bool> Contains(TargetShapes targets, string name)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -51,9 +51,9 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return new List<bool>();
             }
@@ -69,9 +69,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             } 
@@ -88,7 +88,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = this._client.Application.NewUndoScope("Delete User-Defined Cell"))
             {
-                foreach (var shape in shapes.Shapes)
+                foreach (var shape in targets.Shapes)
                 {
                     VA_UDC.UserDefinedCellHelper.Delete(shape, name);
                 }
@@ -100,16 +100,16 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Application.NewUndoScope("Set User-Defined Cell"))
             {
-                foreach (var shape in shapes.Shapes)
+                foreach (var shape in targets.Shapes)
                 {
                     VA_UDC.UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Formula.Value, userdefinedcell.Prompt.Formula.Value);
                 }

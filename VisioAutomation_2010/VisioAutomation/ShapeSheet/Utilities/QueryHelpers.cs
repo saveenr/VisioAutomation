@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Exceptions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Queries.Utilities
+namespace VisioAutomation.ShapeSheet.Utilities
 {
-    internal struct QueryHelpers
+    public struct QueryHelpers
     {
         private static int check_stream_size(short[] stream, int chunksize)
         {

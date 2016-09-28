@@ -1,6 +1,6 @@
-﻿namespace VisioAutomation.ShapeSheet.Queries.Utilities
+﻿namespace VisioAutomation.ShapeSheet.Utilities
 {
-    class StreamBuilderBase
+    public class StreamBuilderBase
     {
         public short[] Stream { get; }
         public int Capacity { get; }

@@ -20,8 +20,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
             var page = this._client.Page.Get();
-            var targets2 = targets.ResolveShapes(this._client);
-            var targetids = targets2.ToShapeIDs();
+            targets = targets.ResolveShapes(this._client);
+            var targetids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
                 ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);

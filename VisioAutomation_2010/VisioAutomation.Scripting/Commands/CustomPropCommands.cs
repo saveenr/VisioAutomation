@@ -19,9 +19,9 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, VACUSTPROP.CustomPropertyDictionary>();
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return prop_dic;
             }
@@ -29,11 +29,11 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             var page = application.ActivePage;
 
-            var list_custom_props = VACUSTPROP.CustomPropertyHelper.Get(page, shapes.Shapes);
+            var list_custom_props = VACUSTPROP.CustomPropertyHelper.Get(page, targets.Shapes);
 
-            for (int i = 0; i < shapes.Shapes.Count; i++)
+            for (int i = 0; i < targets.Shapes.Count; i++)
             {
-                var shape = shapes.Shapes[i];
+                var shape = targets.Shapes[i];
                 var props = list_custom_props[i];
                 prop_dic[shape] = props;
             }
@@ -48,10 +48,10 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            var results = new List<bool>(shapes.Shapes.Count);
-            foreach (var shape in shapes.Shapes)
+            var results = new List<bool>(targets.Shapes.Count);
+            foreach (var shape in targets.Shapes)
             {
                 results.Add(VACUSTPROP.CustomPropertyHelper.Contains(shape, name));
             }
@@ -74,16 +74,16 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Application.NewUndoScope("Delete Custom Property"))
             {
-                foreach (var shape in shapes.Shapes)
+                foreach (var shape in targets.Shapes)
                 {
                     VACUSTPROP.CustomPropertyHelper.Delete(shape, name);
                 }
@@ -100,16 +100,16 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException(nameof(customprop));
             }
 
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Custom Property"))
             {
-                foreach (var shape in shapes.Shapes)
+                foreach (var shape in targets.Shapes)
                 {
                     VACUSTPROP.CustomPropertyHelper.Set(shape, name, customprop);
                 }

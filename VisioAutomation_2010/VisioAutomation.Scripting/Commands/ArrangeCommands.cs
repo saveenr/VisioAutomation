@@ -63,14 +63,14 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
-            if (shapes.Shapes.Count < 1)
+            targets = targets.ResolveShapes(this._client);
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
 
             var page = this._client.Page.Get();
-            var target_shapeids = shapes.ToShapeIDs();
+            var target_shapeids = targets.ToShapeIDs();
             var writer = new FormulaWriterSIDSRC();
 
             foreach (int shapeid in target_shapeids.ShapeIDs)
@@ -89,14 +89,14 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var shapes = targets.ResolveShapes(this._client);
-            if (shapes.Shapes.Count < 1)
+            targets = targets.ResolveShapes(this._client);
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
 
             var active_page = this._client.Page.Get();
-            var shapeids = shapes.ToShapeIDs();
+            var shapeids = targets.ToShapeIDs();
             var writer = new FormulaWriterSIDSRC();
             foreach (int shapeid in shapeids.ShapeIDs)
             {

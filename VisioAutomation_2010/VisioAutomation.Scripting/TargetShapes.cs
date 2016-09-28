@@ -89,7 +89,7 @@ namespace VisioAutomation.Scripting
             return targets;
         }
 
-        internal TargetShapes ResolveShapes2DOnly(VisioAutomation.Scripting.Client client)
+        internal TargetShapes ResolveShapes2D(VisioAutomation.Scripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();

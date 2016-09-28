@@ -32,7 +32,7 @@ visio.client.Selection.SelectAll()
 targets = VisioAutomation.Scripting.TargetShapes()
 visio.client.Text.Set( targets,  [ "Foo", "Bar", "Beer" ] )
 
-dic = System.Collections.Hashtable()
-dic [ "PinX" ] = 1.0
+dic = System.Collections.Generic.Dictionary[System.String,System.String]()
+dic [ "PinX" ] = "1.0"
 dic [ "FillForegnd" ] = "rgb(255,255,0)"
 visio.client.ShapeSheet.SetShapeCells( targets, dic, False, False)

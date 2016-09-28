@@ -6,7 +6,33 @@ using VisioAutomation.ShapeSheet.Queries;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
-    public class CellSRCDictionary : CellDictionary<SRC>
+    public class NamedSRCDictionary : NameDictionary<SRC>
+    {
+        public Query ToQuery(IList<string> Cells)
+        {
+            var invalid_names = Cells.Where(cellname => !this.ContainsKey(cellname)).ToList();
+            if (invalid_names.Count > 0)
+            {
+                string msg = "Invalid cell names: " + string.Join(",", invalid_names);
+                throw new ArgumentException(msg);
+            }
+
+            var query = new Query();
+
+            foreach (string resolved_cellname in this.ResolveNames(Cells))
+            {
+                if (!query.Cells.Contains(resolved_cellname))
+                {
+                    var resolved_src = this[resolved_cellname];
+                    query.AddCell(resolved_src, resolved_cellname);
+                }
+            }
+            return query;
+        }
+    }
+    
+
+    public class CellSRCDictionary : NamedSRCDictionary
     {
         private static CellSRCDictionary shape_cellmap;
         private static CellSRCDictionary page_cellmap;
@@ -164,29 +190,6 @@ namespace VisioAutomation.Scripting.ShapeSheet
             }
             return CellSRCDictionary.page_cellmap;
         }
-
-        public Query CreateQueryFromCellNames(IList<string> Cells)
-        {
-            var invalid_names = Cells.Where(cellname => !this.ContainsCell(cellname)).ToList();
-            if (invalid_names.Count > 0)
-            {
-                string msg = "Invalid cell names: " + string.Join(",", invalid_names);
-                throw new ArgumentException(msg);
-            }
-
-            var query = new Query();
-
-            foreach (string resolved_cellname in this.ResolveNames(Cells))
-            {
-                if (!query.Cells.Contains(resolved_cellname))
-                {
-                    var resolved_src = this[resolved_cellname];
-                    query.AddCell(resolved_src, resolved_cellname);
-                }
-            }
-            return query;
-        }
     }
-
 }
 
