@@ -39,6 +39,5 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("1.5 in", formulas[1]);
             doc.Close(true);
         }
-
     }
 }
