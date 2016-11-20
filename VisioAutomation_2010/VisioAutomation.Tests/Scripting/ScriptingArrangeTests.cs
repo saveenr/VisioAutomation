@@ -7,8 +7,7 @@ namespace VisioAutomation_Tests.Scripting
 {
     [TestClass]
     public class ScriptingArrangeTests : VisioAutomationTest
-    {
-        
+    {     
         [TestMethod]
         public void Scripting_Distribute()
         {
@@ -18,9 +17,13 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.New();
             client.Page.New(pagesize, false);
 
-            var r1 = new VA.Drawing.Rectangle(new VA.Drawing.Point(1, 1), new VA.Drawing.Size(0.5, 0.5));
-            var r2 = new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), new VA.Drawing.Size(1.0, 1.0));
-            var r3 = new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), new VA.Drawing.Size(1.5, 1.5));
+            var size1 = new VA.Drawing.Size(0.5, 0.5);
+            var size2 = new VA.Drawing.Size(1.0, 1.0);
+            var size3 = new VA.Drawing.Size(1.5, 1.5);
+
+            var r1 = new VA.Drawing.Rectangle(new VA.Drawing.Point(1, 1), size1);
+            var r2 = new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), size2);
+            var r3 = new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), size3);
 
             var s1 = client.Draw.Rectangle(r1);
             var s2 = client.Draw.Rectangle(r2);
@@ -50,9 +53,13 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.New();
             client.Page.New(pagesize, false);
 
-            var r1 = new VA.Drawing.Rectangle(new VA.Drawing.Point(1, 1), new VA.Drawing.Size(0.5, 0.5));
-            var r2 = new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), new VA.Drawing.Size(1.0, 1.0));
-            var r3 = new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), new VA.Drawing.Size(1.5, 1.5));
+            var size1 = new VA.Drawing.Size(0.5, 0.5);
+            var size2 = new VA.Drawing.Size(1.0, 1.0);
+            var size3 = new VA.Drawing.Size(1.5, 1.5);
+
+            var r1 = new VA.Drawing.Rectangle(new VA.Drawing.Point(1, 1), size1);
+            var r2 = new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), size2);
+            var r3 = new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), size3);
 
             var s1 = client.Draw.Rectangle(r1);
             var s2 = client.Draw.Rectangle(r2);
@@ -77,19 +84,28 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(3.00, out_positions[1].Y);
             Assert.AreEqual(3.75, out_positions[2].X);
             Assert.AreEqual(5.25, out_positions[2].Y);
+
             client.Document.Close(true);
         }
 
         [TestMethod]
-        public void Scripting_Nudge()
+        public void Scripting_Nudge2()
         {
             var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(new VA.Drawing.Size(4, 4), false);
 
-            var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
-            var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
-            var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
+            var size1 = new VA.Drawing.Size(0.5, 0.5);
+            var size2 = new VA.Drawing.Size(1.0, 1.0);
+            var size3 = new VA.Drawing.Size(1.5, 1.5);
+
+            var r1 = new VA.Drawing.Rectangle(new VA.Drawing.Point(1, 1), size1);
+            var r2 = new VA.Drawing.Rectangle(new VA.Drawing.Point(2, 2), size2);
+            var r3 = new VA.Drawing.Rectangle(new VA.Drawing.Point(4, 4), size3);
+
+            var s1 = client.Draw.Rectangle(r1);
+            var s2 = client.Draw.Rectangle(r2);
+            var s3 = client.Draw.Rectangle(r3);
 
             client.Selection.SelectNone();
             client.Selection.Select(s1);
@@ -98,14 +114,14 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioAutomation.Scripting.TargetShapes();
 
-            client.Arrange.Nudge(targets,1, -1);
+            client.Arrange.Nudge(targets, 0.50, -0.25);
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID };
             var xforms = VisioAutomation.Shapes.XFormCells.GetCells(client.Page.Get(), shapeids);
 
-            AssertUtil.AreEqual(2.125, 0.25, xforms[0].GetPinPosResult(), 0.00001);
-            AssertUtil.AreEqual(3.25, 2.25, xforms[1].GetPinPosResult(), 0.00001);
-            AssertUtil.AreEqual(6.25, 2, xforms[2].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual(1.75, 1, xforms[0].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual(3, 2.25, xforms[1].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual(5.25, 4.5, xforms[2].GetPinPosResult(), 0.00001);
             client.Document.Close(true);
         }
     }
