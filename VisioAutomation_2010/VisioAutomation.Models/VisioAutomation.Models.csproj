@@ -34,6 +34,11 @@
       <HintPath>..\packages\Microsoft.Automatic.Graph.Layout.0.7.0-beta\lib\net40\Microsoft.Msagl.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\packages\Visio2010.PrimaryInteropAssembly.1.0.0.2-preview\lib\Microsoft.Office.Interop.Visio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -148,17 +153,6 @@
       <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>
       <Name>VisioAutomation</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Interop.Visio">
-      <Guid>{00021A98-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>4</VersionMajor>
-      <VersionMinor>14</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
