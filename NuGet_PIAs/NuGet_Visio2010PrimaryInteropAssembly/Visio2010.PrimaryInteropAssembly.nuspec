@@ -2,11 +2,11 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Visio2010.PrimaryInteropAssembly</id>
-    <version>1.0.0.2-preview</version>
-    <authors>saveenr</authors>
+    <version>1.0.0.3</version>
+    <authors>Microsoft</authors>
     <owners>saveenr</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>PIA for Visio 2010</description>
+    <description>Primary Interop Assembly for Visio 2010</description>
     <tags>Microsoft Office Interop Visio PIA</tags>
   </metadata>
 </package>

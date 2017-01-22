@@ -1,0 +1,3 @@
+nuget.exe pack NuGet_Visio2010PrimaryInteropAssembly\Visio2010.PrimaryInteropAssembly.nuspec
+nuget.exe pack NuGet_Visio2013PrimaryInteropAssembly\Visio2013.PrimaryInteropAssembly.nuspec
+
