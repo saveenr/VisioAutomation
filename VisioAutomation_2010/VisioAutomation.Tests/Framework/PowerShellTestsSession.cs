@@ -1,7 +1,10 @@
 namespace VisioAutomation_Tests
 {
-    public class PowerShellTestsSession
+    public class PowerShellTestsSession : System.IDisposable
     {
+        // This class should implement IDisposable because
+        // it contains disposable members
+
         protected System.Management.Automation.PowerShell PowerShell;
         protected System.Management.Automation.Runspaces.InitialSessionState SessionState;
         protected System.Management.Automation.Runspaces.Runspace RunSpace;
@@ -31,14 +34,28 @@ namespace VisioAutomation_Tests
         public void CleanUp()
         {
             // Make sure we cleanup everything
-            this.PowerShell.Dispose();
-            this.Invoker.Dispose();
-            this.RunSpace.Close();
-            this.Invoker = null;
-            this.RunSpace = null;
+            if (this.PowerShell != null)
+            {
+                this.PowerShell.Dispose();
+                this.PowerShell = null;
+            }
+            if (this.Invoker != null)
+            {
+                this.Invoker.Dispose();
+                this.Invoker = null;
+            }
+            if (this.RunSpace != null)
+            {
+                this.RunSpace.Close();
+                this.RunSpace = null;
+            }
+
             this.SessionState = null;
-            this.PowerShell = null;
         }
 
+        public void Dispose()
+        {
+            this.CleanUp();
+        }
     }
 }
