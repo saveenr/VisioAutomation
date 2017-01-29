@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing;
 using MG = Microsoft.Msagl;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
@@ -18,14 +17,14 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             return new VisioAutomation.Drawing.Point(p.X, p.Y);
         }
 
-        public static IList<Point> ToVAPoints(MG.Core.Layout.Edge edge)
+        public static IList<VisioAutomation.Drawing.Point> ToVAPoints(MG.Core.Layout.Edge edge)
         {
 
             if (edge.Curve is MG.Core.Geometry.Curves.Curve)
             {
                 var curve = (MG.Core.Geometry.Curves.Curve)edge.Curve;
 
-                var final_bez_points = new List<Point> { MsaglUtil.ToVAPoint(edge.Curve.Start) };
+                var final_bez_points = new List<VisioAutomation.Drawing.Point> { MsaglUtil.ToVAPoint(edge.Curve.Start) };
 
                 foreach (var cur_seg in curve.Segments)
                 {
@@ -59,7 +58,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
             else if (edge.Curve is MG.Core.Geometry.Curves.LineSegment)
             {
-                var final_bez_points = new List<Point> { MsaglUtil.ToVAPoint(edge.Curve.Start) };
+                var final_bez_points = new List<VisioAutomation.Drawing.Point> { MsaglUtil.ToVAPoint(edge.Curve.Start) };
                 var line_seg = (MG.Core.Geometry.Curves.LineSegment)edge.Curve;
                 final_bez_points.Add(MsaglUtil.ToVAPoint(line_seg.Start));
                 final_bez_points.Add(MsaglUtil.ToVAPoint(line_seg.End));
@@ -68,7 +67,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 
             }
 
-            throw new Exception();
+            throw new System.ArgumentException("Unhandled Curve Type");
         }
     }
 }

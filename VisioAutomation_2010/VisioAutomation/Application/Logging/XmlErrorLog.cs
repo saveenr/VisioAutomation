@@ -43,7 +43,7 @@ namespace VisioAutomation.Application.Logging
                     }
                     else
                     {
-                        throw new Exception();
+                        throw new System.ArgumentException("Unexpected Input in LogState.Start");
                     }
                 }
                 else if (state == LogState.InFileSession)
