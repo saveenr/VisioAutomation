@@ -15,7 +15,6 @@ namespace VisioAutomation.Shapes.Controls
         public ShapeSheet.CellData XDynamics { get; set; }
         public ShapeSheet.CellData YDynamics { get; set; }
 
-
         public override IEnumerable<SRCFormulaPair> Pairs
         {
             get
@@ -43,6 +42,6 @@ namespace VisioAutomation.Shapes.Controls
             return query.GetCellGroups(shape);
         }
 
-        private static System.Lazy<ControlCellsReader> lazy_query = new System.Lazy<ControlCellsReader>();
+        private static readonly System.Lazy<ControlCellsReader> lazy_query = new System.Lazy<ControlCellsReader>();
     }
 }

@@ -36,6 +36,6 @@ namespace VisioAutomation.Shapes.ConnectionPoints
             return query.GetCellGroups(shape);
         }
 
-        private static System.Lazy<ConnectionPointCellsReader> lazy_query = new System.Lazy<ConnectionPointCellsReader>();
+        private static readonly System.Lazy<ConnectionPointCellsReader> lazy_query = new System.Lazy<ConnectionPointCellsReader>();
     }
 }

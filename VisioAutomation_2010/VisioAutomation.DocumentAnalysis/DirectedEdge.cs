@@ -2,9 +2,9 @@
 {
     public struct DirectedEdge<TNode, TData>
     {
-        public TNode From { get; private set; }
-        public TNode To { get; private set; }
-        public TData Data { get; private set; }
+        public readonly TNode From;
+        public readonly TNode To;
+        public readonly TData Data;
 
         public DirectedEdge(TNode from, TNode to, TData data)
             : this()
@@ -13,6 +13,5 @@
             this.To = to;
             this.Data = data;
         }
-
     }
 }
