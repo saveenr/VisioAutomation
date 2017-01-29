@@ -5,6 +5,7 @@ namespace VisioAutomation.Scripting.Utilities
 {
     static class XmlLinqExtensions
     {
+
         public static ColorRGB AttributeAsColor(this SXL.XElement el, string name,
             ColorRGB def)
         {
@@ -13,7 +14,8 @@ namespace VisioAutomation.Scripting.Utilities
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)
         {
-            return el.GetAttributeValue(name, def, s => XmlLinqExtensions.PointsToInches(double.Parse(s)));
+            System.Func<string, double> double_parse = str => double.Parse(str, System.Globalization.CultureInfo.InvariantCulture);
+            return el.GetAttributeValue(name, def, s => XmlLinqExtensions.PointsToInches(double_parse(s)));
         }
 
         private static double PointsToInches(double points)
