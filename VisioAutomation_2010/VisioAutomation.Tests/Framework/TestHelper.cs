@@ -46,11 +46,5 @@ namespace VisioAutomation_Tests
             string abs_filename = Path.Combine(abs_path, basename);
             return abs_filename;
         }
-
-        private static string GetOutputPathEx(string name)
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            return Path.Combine(path, name);
-        }
     }
 }
