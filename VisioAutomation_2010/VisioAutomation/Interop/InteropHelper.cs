@@ -10,7 +10,7 @@ namespace VisioAutomation.Interop
         private static Dictionary<string, EnumType> _gNameToEnum;
         private static List<System.Type> _gTypes; 
 
-        public static void init()
+        private static void initialize()
         {
             if (!InteropHelper._initialized)
             {
@@ -29,19 +29,19 @@ namespace VisioAutomation.Interop
 
         public static List<EnumType> GetEnums()
         {
-            InteropHelper.init();
+            InteropHelper.initialize();
             return InteropHelper._gNameToEnum.Values.ToList();
         }
 
         public static EnumType GetEnum(string name)
         {
-            InteropHelper.init();
+            InteropHelper.initialize();
             return InteropHelper._gNameToEnum[name];
         }
 
         public static EnumType GetEnum(System.Type t)
         {
-            InteropHelper.init();
+            InteropHelper.initialize();
             return InteropHelper._gNameToEnum[t.Name];
         }
     }
