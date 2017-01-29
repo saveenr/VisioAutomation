@@ -74,12 +74,12 @@ namespace VisioAutomation.Scripting.Utilities
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<XFormData> xfrms)
         {
-            var bb = new Drawing.Layout.BoundingBox(xfrms.Select(x => x.GetRectangle()));
+            var bb = Drawing.Layout.BoundingBoxBuilder.FromRectangles(xfrms.Select(x => x.GetRectangle()));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
             }
-            return bb.Rectangle;
+            return bb.Value;
         }
     }
 }

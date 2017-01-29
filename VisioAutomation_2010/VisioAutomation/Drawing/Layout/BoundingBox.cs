@@ -81,39 +81,4 @@ namespace VisioAutomation.Drawing.Layout
             return BoundingBoxBuilder.FromPoints(points);
         }
     }
-
-    public struct BoundingBox
-    {
-        private Rectangle? r;
-
-        public BoundingBox( IEnumerable<Point> points) :
-            this()
-        {
-            r = BoundingBoxBuilder.FromPoints(points);
-        }
-
-        public BoundingBox(IEnumerable<Rectangle> rects) :
-            this()
-        {
-            r = BoundingBoxBuilder.FromRectangles(rects);
-        }
-
-        public Rectangle Rectangle
-        {
-            get
-            {
-                if (this.r.HasValue)
-                {
-
-                    return r.Value;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Bounding Box Has no value");
-                }
-            }
-        }
-
-        public bool HasValue => this.r.HasValue;
-    }
 }
