@@ -1,8 +1,5 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Exceptions;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Queries;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VAUSERCELL = VisioAutomation.Shapes.UserDefinedCells;
 using IVisio = Microsoft.Office.Interop.Visio;

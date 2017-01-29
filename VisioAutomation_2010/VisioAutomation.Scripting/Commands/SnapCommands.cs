@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using VisioAutomation.Scripting.Layout;
 using VisioAutomation.Scripting.Utilities;
 

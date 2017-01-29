@@ -1,4 +1,3 @@
-using System;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;

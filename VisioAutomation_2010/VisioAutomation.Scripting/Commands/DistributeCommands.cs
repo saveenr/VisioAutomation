@@ -1,7 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Drawing.Layout;
 using VisioAutomation.Scripting.Utilities;
-using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Scripting.Commands
 {

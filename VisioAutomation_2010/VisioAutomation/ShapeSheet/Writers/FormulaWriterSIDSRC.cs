@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace VisioAutomation.ShapeSheet.Writers
 {
     public class FormulaWriterSIDSRC : WriterBase<VisioAutomation.ShapeSheet.SIDSRC,FormulaLiteral>
