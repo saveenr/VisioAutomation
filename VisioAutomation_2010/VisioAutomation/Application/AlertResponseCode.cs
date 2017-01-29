@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Application
 {
-    public enum AlertResponseCode : short
+    public enum AlertResponseCode
     {
         OK = 1,
         Cancel = 2,
