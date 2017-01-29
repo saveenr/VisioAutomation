@@ -1,89 +1,111 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace VisioAutomation.Drawing.Layout
 {
+    public static class BoundingBoxBuilder
+    {
+        public static Rectangle? FromPoints(IEnumerable<Point> points)
+        {
+            bool initialized = false;
+
+            double _min_x = 0.0;
+            double _min_y = 0.0;
+            double _max_x = 0.0;
+            double _max_y = 0.0;
+
+            foreach (var p in points)
+            {
+
+                if (initialized)
+                {
+                    if (p.X < _min_x)
+                    {
+                        _min_x = p.X;
+                    }
+                    else if (p.X > _max_x)
+                    {
+                        _max_x = p.X;
+                    }
+                    else
+                    {
+                        // do nothing
+                    }
+
+                    if (p.Y < _min_y)
+                    {
+                        _min_y = p.Y;
+                    }
+                    else if (p.Y > _max_y)
+                    {
+                        _max_y = p.Y;
+                    }
+                    else
+                    {
+                        // do nothing
+                    }
+                }
+                else
+                {
+                    _min_x = p.X;
+                    _max_x = p.X;
+                    _min_y = p.Y;
+                    _max_y = p.Y;
+                    initialized = true;
+                }
+            }
+
+            if (initialized)
+            {
+                return new Rectangle(_min_x, _min_y, _max_x, _max_y);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        private static IEnumerable<Point> rects_to_points(IEnumerable<Rectangle> rects)
+        {
+            foreach (var r in rects)
+            {
+                yield return r.LowerLeft;
+                yield return r.UpperRight;
+            }
+        }
+
+        public static Rectangle? FromRectangles(IEnumerable<Rectangle> rects)
+        {
+            var points = rects_to_points(rects);
+            return BoundingBoxBuilder.FromPoints(points);
+        }
+    }
+
     public struct BoundingBox
     {
-        private bool _initialized;
-
-        private double _min_x;
-        private double _min_y;
-        private double _max_x;
-        private double _max_y;
+        private Rectangle? r;
 
         public BoundingBox( IEnumerable<Point> points) :
             this()
         {
-            foreach (var p in points)
-            {
-                this.Add(p);
-            }
+            r = BoundingBoxBuilder.FromPoints(points);
         }
 
         public BoundingBox(IEnumerable<Rectangle> rects) :
             this()
         {
-            foreach (var r in rects)
-            {
-                this.Add(r);
-            }
-        }
-
-        public void Add(Point p)
-        {
-            if (this._initialized)
-            {
-                if (p.X < this._min_x)
-                {
-                    this._min_x = p.X;
-                }
-                else if (p.X > this._max_x)
-                {
-                    this._max_x = p.X;
-                }
-                else
-                {
-                     // do nothing
-                }
-
-                if (p.Y < this._min_y)
-                {
-                    this._min_y = p.Y;
-                    
-                }
-                else if (p.Y > this._max_y)
-                {
-                    this._max_y = p.Y;
-                }
-                else
-                {
-                    // do nothing
-                }
-                
-            }
-            else
-            {
-                this._min_x = p.X;
-                this._max_x = p.X;
-                this._min_y = p.Y;
-                this._max_y = p.Y;
-                this._initialized = true;
-            }
-        }
-
-        public void Add(Rectangle r)
-        {
-            this.Add(r.LowerLeft);
-            this.Add(r.UpperRight);
+            r = BoundingBoxBuilder.FromRectangles(rects);
         }
 
         public Rectangle Rectangle
         {
             get
             {
-                if (this.HasValue)
+                if (this.r.HasValue)
                 {
-                    return new Rectangle(this._min_x,this._min_y,this._max_x,this._max_y);
+
+                    return r.Value;
                 }
                 else
                 {
@@ -92,6 +114,6 @@ namespace VisioAutomation.Drawing.Layout
             }
         }
 
-        public bool HasValue => this._initialized;
+        public bool HasValue => this.r.HasValue;
     }
 }
