@@ -1,6 +1,5 @@
 ﻿using VAUDCELLS = VisioAutomation.Shapes.UserDefinedCells;
 using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
@@ -244,29 +243,5 @@ namespace VisioAutomationSamples
             }
             return layout1;
         }
-    }
-
-    public static class Util
-    {
-        public static void Render(VABOXMODEL.BoxLayout layout, IVisio.Document doc)
-        {
-            layout.PerformLayout();
-            var page1 = doc.Pages.Add();
-            // and tinker with it
-            // render
-            var nodes = layout.Nodes.ToList();
-            foreach (var node in nodes)
-            {
-                var shape = page1.DrawRectangle(node.Rectangle);
-                node.Data = shape;
-            }
-
-            var root_shape = (IVisio.Shape)layout.Root.Data;
-            root_shape.CellsU["FillForegnd"].FormulaForceU = "rgb(240,240,240)";
-            var margin = new VA.Drawing.Size(0.5, 0.5);
-            page1.ResizeToFitContents(margin);
-
-        }
-    
     }
 }

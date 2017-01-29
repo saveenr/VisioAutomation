@@ -97,6 +97,7 @@
     <Compile Include="Masters\MasterHelper.cs" />
     <Compile Include="Fonts\FontHelper.cs" />
     <Compile Include="Layers\LayerHelper.cs" />
+    <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />

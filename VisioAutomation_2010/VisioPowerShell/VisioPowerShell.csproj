@@ -83,7 +83,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Get\ControlFormulas.cs" />
     <Compile Include="Commands\Get\Get_VisioHyperlink.cs" />
+    <Compile Include="Commands\Get\HyperlinkFormulas.cs" />
     <Compile Include="Commands\New\New_VisioHyperlink.cs" />
     <Compile Include="Commands\Remove\Remove_VisioHyperlink.cs" />
     <Compile Include="Nouns.cs" />

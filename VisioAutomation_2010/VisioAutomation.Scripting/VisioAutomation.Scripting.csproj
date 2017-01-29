@@ -51,6 +51,7 @@
     <Compile Include="ShapeSheet\NameDictionary.cs" />
     <Compile Include="ShapeSheet\CellSRCDictionary.cs" />
     <Compile Include="ShapeSheet\CellValueDictionary.cs" />
+    <Compile Include="ShapeSheet\NamedSRCDictionary.cs" />
     <Compile Include="ShapeSheet\ShapeSheetReader.cs" />
     <Compile Include="ShapeSheet\ShapeSheetWriter.cs" />
     <Compile Include="TargetShapeIDs.cs" />
