@@ -82,7 +82,6 @@ namespace VisioAutomation
 
             if (this.Master != null)
             {
-
                 shapes = this.Master.Shapes;
             }
             else if (this.Page != null)
