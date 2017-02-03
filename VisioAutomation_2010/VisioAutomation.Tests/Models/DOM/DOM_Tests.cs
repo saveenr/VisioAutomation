@@ -170,8 +170,7 @@ namespace VisioAutomation_Tests.Models.Dom
             page_node.Shapes.Connect(this.dynamicconnector, this.connec_u_vss, s1, s3);
 
             var doc = doc_node.Render(app);
-
-            //doc.Close(true);
+            doc.Close(true);
         }
 
         [TestMethod]
