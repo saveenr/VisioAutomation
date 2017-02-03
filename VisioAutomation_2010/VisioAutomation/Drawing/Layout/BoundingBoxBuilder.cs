@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace VisioAutomation.Drawing.Layout
 {
@@ -16,34 +15,12 @@ namespace VisioAutomation.Drawing.Layout
 
             foreach (var p in points)
             {
-
                 if (initialized)
                 {
-                    if (p.X < _min_x)
-                    {
-                        _min_x = p.X;
-                    }
-                    else if (p.X > _max_x)
-                    {
-                        _max_x = p.X;
-                    }
-                    else
-                    {
-                        // do nothing
-                    }
-
-                    if (p.Y < _min_y)
-                    {
-                        _min_y = p.Y;
-                    }
-                    else if (p.Y > _max_y)
-                    {
-                        _max_y = p.Y;
-                    }
-                    else
-                    {
-                        // do nothing
-                    }
+                    _min_x = System.Math.Min(_min_x, p.X);
+                    _max_x = System.Math.Max(_max_x, p.X);
+                    _min_y = System.Math.Min(_min_y, p.Y);
+                    _max_y = System.Math.Max(_max_y, p.Y);
                 }
                 else
                 {
@@ -59,11 +36,8 @@ namespace VisioAutomation.Drawing.Layout
             {
                 return new Rectangle(_min_x, _min_y, _max_x, _max_y);
             }
-            else
-            {
-                return null;
-            }
 
+            return null;
         }
 
         private static IEnumerable<Point> rects_to_points(IEnumerable<Rectangle> rects)
