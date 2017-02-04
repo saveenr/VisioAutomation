@@ -17,13 +17,13 @@ keep the files in here
 
 	E:\ffmpeg
 
+## Git
+
+If you need to donwload git for Windows get it here: https://git-scm.com/download/win
 
 ## Running Gource
 
-
-
 	set path=%path%;C:\Program Files (x86)\Git\bin
-
 
 	gource.exe E:\code\github\VisioAutomation --seconds-per-day 0.005 --title VisioAutomation --hide filenames,usernames --background 5555dd -viewport 1920x1080 -o d:\visioautomation.ppm
 
