@@ -14,9 +14,10 @@ namespace VisioAutomation_Tests
 
         public static double InchesToDouble(string s)
         {
+
             string suffix = " in.";
             string s2 = s.Substring(0, s.Length - suffix.Length);
-            return double.Parse(s2);
+            return double.Parse(s2, System.Globalization.CultureInfo.InvariantCulture);
         }
 
         public static void AddParameter(this System.Management.Automation.Runspaces.Command cmd, string name, object value)

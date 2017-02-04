@@ -63,6 +63,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\packages\Visio2010.PrimaryInteropAssembly.1.0.0.4\lib\net20\Microsoft.Office.Interop.Visio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -78,96 +83,98 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Get\Get_VisioHyperlink.cs" />
-    <Compile Include="Commands\New\New_VisioHyperlink.cs" />
-    <Compile Include="Commands\Remove\Remove_VisioHyperlink.cs" />
+    <Compile Include="Model\ControlFormulas.cs" />
+    <Compile Include="Commands\Get_VisioHyperlink.cs" />
+    <Compile Include="Model\HyperlinkFormulas.cs" />
+    <Compile Include="Commands\New_VisioHyperlink.cs" />
+    <Compile Include="Commands\Remove_VisioHyperlink.cs" />
     <Compile Include="Nouns.cs" />
-    <Compile Include="Commands\Close\Close_VisioDocument.cs" />
-    <Compile Include="Commands\Close\Close_VisioMaster.cs" />
-    <Compile Include="Commands\Format\Format_VisioText.cs" />
-    <Compile Include="Commands\New\New_VisioContainer.cs" />
-    <Compile Include="Commands\Open\Open_VisioMaster.cs" />
+    <Compile Include="Commands\Close_VisioDocument.cs" />
+    <Compile Include="Commands\Close_VisioMaster.cs" />
+    <Compile Include="Commands\Format_VisioText.cs" />
+    <Compile Include="Commands\New_VisioContainer.cs" />
+    <Compile Include="Commands\Open_VisioMaster.cs" />
     <Compile Include="Model\UserDefinedCellvalues.cs" />
     <Compile Include="Model\ConnectionPointValues.cs" />
     <Compile Include="Model\CustomPropertyValues.cs" />
-    <Compile Include="Commands\Out\Out_Visio.cs" />
+    <Compile Include="Commands\Out_Visio.cs" />
     <Compile Include="Model\DirectedEdge.cs" />
-    <Compile Include="Commands\Get\Get_VisioPageCell.cs" />
-    <Compile Include="Commands\Get\Get_VisioShapeCell.cs" />
-    <Compile Include="Commands\New\New_VisioModelAreaChart.cs" />
-    <Compile Include="Commands\New\New_VisioModelBarChart.cs" />
-    <Compile Include="Commands\New\New_VisioModelDirectedGraph.cs" />
-    <Compile Include="Commands\New\New_VisioModelOrgChart.cs" />
-    <Compile Include="Commands\Set\Set_VisioDocument.cs" />
-    <Compile Include="Commands\Set\Set_VisioPage.cs" />
-    <Compile Include="Commands\Set\Set_VisioPageCell.cs" />
-    <Compile Include="Commands\Set\Set_VisioShapeCell.cs" />
-    <Compile Include="Commands\Remove\Remove_VisioPage.cs" />
-    <Compile Include="Commands\Test\Test_VisioApplication.cs" />
-    <Compile Include="Commands\Get\Get_VisioClient.cs" />
-    <Compile Include="Commands\New\New_VisioNURBS.cs" />
-    <Compile Include="Commands\New\New_VisioModelGrid.cs" />
-    <Compile Include="Commands\New\New_VisioMaster.cs" />
-    <Compile Include="Commands\Remove\Remove_VisioUserDefinedCell.cs" />
+    <Compile Include="Commands\Get_VisioPageCell.cs" />
+    <Compile Include="Commands\Get_VisioShapeCell.cs" />
+    <Compile Include="Commands\New_VisioModelAreaChart.cs" />
+    <Compile Include="Commands\New_VisioModelBarChart.cs" />
+    <Compile Include="Commands\New_VisioModelDirectedGraph.cs" />
+    <Compile Include="Commands\New_VisioModelOrgChart.cs" />
+    <Compile Include="Commands\Set_VisioDocument.cs" />
+    <Compile Include="Commands\Set_VisioPage.cs" />
+    <Compile Include="Commands\Set_VisioPageCell.cs" />
+    <Compile Include="Commands\Set_VisioShapeCell.cs" />
+    <Compile Include="Commands\Remove_VisioPage.cs" />
+    <Compile Include="Commands\Test_VisioApplication.cs" />
+    <Compile Include="Commands\Get_VisioClient.cs" />
+    <Compile Include="Commands\New_VisioNURBS.cs" />
+    <Compile Include="Commands\New_VisioModelGrid.cs" />
+    <Compile Include="Commands\New_VisioMaster.cs" />
+    <Compile Include="Commands\Remove_VisioUserDefinedCell.cs" />
     <Compile Include="Model\VisioPsContext.cs" />
     <Compile Include="Model\ResultType.cs" />
-    <Compile Include="Commands\New\New_VisioShape.cs" />
-    <Compile Include="Commands\Copy\Copy_VisioShape.cs" />
-    <Compile Include="Commands\Export\Export_VisioSelection.cs" />
-    <Compile Include="Commands\Redo\Redo_Visio.cs" />
-    <Compile Include="Commands\Save\Save_VisioDocument.cs" />
-    <Compile Include="Commands\Test\Test_VisioDocument.cs" />
-    <Compile Include="Commands\Test\Test_VisioSelectedShapes.cs" />
-    <Compile Include="Commands\Remove\Remove_VisioShape.cs" />
-    <Compile Include="Commands\Get\Get_VisioLayer.cs" />
-    <Compile Include="Commands\Select\Select_VisioShape.cs" />
-    <Compile Include="Commands\Set\Set_VisioShapeSheet.cs" />
-    <Compile Include="Commands\New\New_VisioBezier.cs" />
-    <Compile Include="Commands\New\New_VisioModelPieChart.cs" />
-    <Compile Include="Commands\New\New_VisioPolyLine.cs" />
-    <Compile Include="Commands\Export\Export_VisioPage.cs" />
-    <Compile Include="Commands\Get\Get_VisioConnectionPoint.cs" />
-    <Compile Include="Commands\Get\Get_VisioControl.cs" />
-    <Compile Include="Commands\Get\Get_VisioDocument.cs" />
-    <Compile Include="Commands\Import\Import_VisioModel.cs" />
-    <Compile Include="Commands\Get\Get_VisioMaster.cs" />
-    <Compile Include="Commands\Get\Get_VisioUserDefinedCell.cs" />
+    <Compile Include="Commands\New_VisioShape.cs" />
+    <Compile Include="Commands\Copy_VisioShape.cs" />
+    <Compile Include="Commands\Export_VisioSelection.cs" />
+    <Compile Include="Commands\Redo_Visio.cs" />
+    <Compile Include="Commands\Save_VisioDocument.cs" />
+    <Compile Include="Commands\Test_VisioDocument.cs" />
+    <Compile Include="Commands\Test_VisioSelectedShapes.cs" />
+    <Compile Include="Commands\Remove_VisioShape.cs" />
+    <Compile Include="Commands\Get_VisioLayer.cs" />
+    <Compile Include="Commands\Select_VisioShape.cs" />
+    <Compile Include="Commands\Set_VisioShapeSheet.cs" />
+    <Compile Include="Commands\New_VisioBezier.cs" />
+    <Compile Include="Commands\New_VisioModelPieChart.cs" />
+    <Compile Include="Commands\New_VisioPolyLine.cs" />
+    <Compile Include="Commands\Export_VisioPage.cs" />
+    <Compile Include="Commands\Get_VisioConnectionPoint.cs" />
+    <Compile Include="Commands\Get_VisioControl.cs" />
+    <Compile Include="Commands\Get_VisioDocument.cs" />
+    <Compile Include="Commands\Import_VisioModel.cs" />
+    <Compile Include="Commands\Get_VisioMaster.cs" />
+    <Compile Include="Commands\Get_VisioUserDefinedCell.cs" />
     <Compile Include="Model\HorizontalAlignment.cs" />
-    <Compile Include="Commands\New\New_VisioControl.cs" />
-    <Compile Include="Commands\New\New_VisioDocument.cs" />
+    <Compile Include="Commands\New_VisioControl.cs" />
+    <Compile Include="Commands\New_VisioDocument.cs" />
     <Compile Include="Model\SelectionOperation.cs" />
-    <Compile Include="Commands\Open\Open_VisioDocument.cs" />
+    <Compile Include="Commands\Open_VisioDocument.cs" />
     <Compile Include="Model\PageOrientation.cs" />
-    <Compile Include="Commands\Remove\Remove_VisioControl.cs" />
-    <Compile Include="Commands\Set\Set_VisioUserDefinedCell.cs" />
-    <Compile Include="Commands\New\New_VisioConnection.cs" />
-    <Compile Include="Commands\Remove\Remove_VisioCustomProperty.cs" />
-    <Compile Include="Commands\New\New_VisioLine.cs" />
-    <Compile Include="Commands\New\New_VisioOval.cs" />
-    <Compile Include="Commands\New\New_VisioRectangle.cs" />
-    <Compile Include="Commands\Copy\Copy_VisioPage.cs" />
-    <Compile Include="Commands\Get\Get_VisioDirectedEdge.cs" />
-    <Compile Include="Commands\Get\Get_VisioPage.cs" />
-    <Compile Include="Commands\Get\Get_VisioCustomProperty.cs" />
-    <Compile Include="Commands\Get\Get_VisioShape.cs" />
-    <Compile Include="Commands\Get\Get_VisioShapeText.cs" />
-    <Compile Include="Commands\Get\Get_VisioApplication.cs" />
-    <Compile Include="Commands\New\New_VisioGroup.cs" />
-    <Compile Include="Commands\New\New_VisioPage.cs" />
-    <Compile Include="Commands\New\New_VisioApplication.cs" />
-    <Compile Include="Commands\Format\Format_VisioShape.cs" />
-    <Compile Include="Commands\Resize\Resize_VisioPage.cs" />
-    <Compile Include="Commands\Set\Set_VisioWindowSize.cs" />
+    <Compile Include="Commands\Remove_VisioControl.cs" />
+    <Compile Include="Commands\Set_VisioUserDefinedCell.cs" />
+    <Compile Include="Commands\New_VisioConnection.cs" />
+    <Compile Include="Commands\Remove_VisioCustomProperty.cs" />
+    <Compile Include="Commands\New_VisioLine.cs" />
+    <Compile Include="Commands\New_VisioOval.cs" />
+    <Compile Include="Commands\New_VisioRectangle.cs" />
+    <Compile Include="Commands\Copy_VisioPage.cs" />
+    <Compile Include="Commands\Get_VisioDirectedEdge.cs" />
+    <Compile Include="Commands\Get_VisioPage.cs" />
+    <Compile Include="Commands\Get_VisioCustomProperty.cs" />
+    <Compile Include="Commands\Get_VisioShape.cs" />
+    <Compile Include="Commands\Get_VisioShapeText.cs" />
+    <Compile Include="Commands\Get_VisioApplication.cs" />
+    <Compile Include="Commands\New_VisioGroup.cs" />
+    <Compile Include="Commands\New_VisioPage.cs" />
+    <Compile Include="Commands\New_VisioApplication.cs" />
+    <Compile Include="Commands\Format_VisioShape.cs" />
+    <Compile Include="Commands\Resize_VisioPage.cs" />
+    <Compile Include="Commands\Set_VisioWindowSize.cs" />
     <Compile Include="Model\VerticalAlignment.cs" />
     <Compile Include="Commands\VisioCmdlet.cs" />
-    <Compile Include="Commands\Set\Set_VisioPageLayout.cs" />
-    <Compile Include="Commands\Set\Set_VisioCustomProperty.cs" />
-    <Compile Include="Commands\Set\Set_VisioShapeText.cs" />
-    <Compile Include="Commands\Close\Close_VisioApplication.cs" />
-    <Compile Include="Commands\Undo\Undo_Visio.cs" />
-    <Compile Include="Commands\Remove\Remove_VisioGroup.cs" />
+    <Compile Include="Commands\Set_VisioPageLayout.cs" />
+    <Compile Include="Commands\Set_VisioCustomProperty.cs" />
+    <Compile Include="Commands\Set_VisioShapeText.cs" />
+    <Compile Include="Commands\Close_VisioApplication.cs" />
+    <Compile Include="Commands\Undo_Visio.cs" />
+    <Compile Include="Commands\Remove_VisioGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\Set\Set_VisioZoom.cs" />
+    <Compile Include="Commands\Set_VisioZoom.cs" />
     <Compile Include="Helpers.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +198,7 @@
   <ItemGroup>
     <None Include="Load.ps1" />
     <None Include="Install.ps1" />
+    <None Include="packages.config" />
     <None Include="Visio.Types.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -214,17 +222,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Interop.Visio">
-      <Guid>{00021A98-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>4</VersionMajor>
-      <VersionMinor>14</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

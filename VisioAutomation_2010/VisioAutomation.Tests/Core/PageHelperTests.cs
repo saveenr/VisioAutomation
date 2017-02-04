@@ -12,7 +12,8 @@ namespace VisioAutomation_Tests.Core.Page
         [TestMethod]
         public void Page_Query()
         {
-            var page1 = this.GetNewPage(new VA.Drawing.Size(4, 3));
+            var size = new VA.Drawing.Size(4, 3);
+            var page1 = this.GetNewPage(size);
             var pagecells = VA.Pages.PageCells.GetCells(page1.PageSheet);
             Assert.AreEqual("4.0000 in.", pagecells.PageWidth.Result);
             Assert.AreEqual("3.0000 in.", pagecells.PageHeight.Result);
@@ -34,22 +35,26 @@ namespace VisioAutomation_Tests.Core.Page
         [TestMethod]
         public void Page_Orientation()
         {
-            var page1 = this.GetNewPage(new VA.Drawing.Size(4, 3));
+            var size = new VA.Drawing.Size(4, 3);
+
+            var page1 = this.GetNewPage(size);
 
             var client = this.GetScriptingClient();
 
-            var or1 = client.Page.GetOrientation();
-            Assert.AreEqual(VA.Pages.PrintPageOrientation.Portrait, or1);
+            var orientation_1 = client.Page.GetOrientation();
+            Assert.AreEqual(VA.Pages.PrintPageOrientation.Portrait, orientation_1);
 
             var size1 = client.Page.GetSize();
-            Assert.AreEqual(new VA.Drawing.Size(4, 3), size1);
+            Assert.AreEqual(size, size1);
 
             client.Page.SetOrientation(VA.Pages.PrintPageOrientation.Landscape);
 
-            var or2 = client.Page.GetOrientation();
-            Assert.AreEqual(VA.Pages.PrintPageOrientation.Landscape, or2);
-            var size2 = client.Page.GetSize();
-            Assert.AreEqual(new VA.Drawing.Size(3, 4), size2);
+            var orientation_2 = client.Page.GetOrientation();
+            Assert.AreEqual(VA.Pages.PrintPageOrientation.Landscape, orientation_2);
+
+            var actual_final_size = client.Page.GetSize();
+            var expected_final_size = new VA.Drawing.Size(3, 4);
+            Assert.AreEqual(expected_final_size, actual_final_size);
 
             page1.Delete(0);
         }
@@ -57,7 +62,8 @@ namespace VisioAutomation_Tests.Core.Page
         [TestMethod]
         public void Page_Duplicate()
         {
-            var page1 = this.GetNewPage(new VA.Drawing.Size(4, 3));
+            var page_size = new VA.Drawing.Size(4, 3);
+            var page1 = this.GetNewPage(page_size);
             var s1 = page1.DrawRectangle(1, 1, 3, 3);
 
             var doc = page1.Document;
@@ -72,7 +78,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             VA.Pages.PageHelper.Duplicate(page1, page2);
 
-            Assert.AreEqual(new VA.Drawing.Size(4, 3), VisioAutomationTest.GetPageSize(page2));
+            Assert.AreEqual(page_size, VisioAutomationTest.GetPageSize(page2));
             Assert.AreEqual(1, page2.Shapes.Count);
 
             page2.Delete(0);

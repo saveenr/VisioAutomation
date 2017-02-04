@@ -14,12 +14,12 @@ namespace GenTreeOps
             // it preserves the state in the non-recursive, stack-based traversal of the DOM
 
             internal readonly T Node;
-            internal bool Entered;
+            internal readonly bool Entered;
 
-            public WalkState(T node)
+            public WalkState(T node, bool entered)
             {
                 this.Node = node;
-                this.Entered = false;
+                this.Entered = entered;
             }
         }
 
@@ -35,7 +35,7 @@ namespace GenTreeOps
             var stack = new Stack<WalkState<T>>();
 
             // put the first item on the stack 
-            stack.Push(new WalkState<T>(node));
+            stack.Push(new WalkState<T>(node,false));
 
             // As long as something is on the stack, we are not done
             while (stack.Count > 0)
@@ -47,12 +47,11 @@ namespace GenTreeOps
                     var walkevent = WalkEvent<T>.CreateEnterEvent(cur_item.Node);
                     yield return walkevent;
 
-                    cur_item.Entered = true;
-                    stack.Push(cur_item);
+                    stack.Push(new WalkState<T>(cur_item.Node,true));
 
                     foreach (var child in Algorithms.efficient_reverse(enum_children(cur_item.Node)))
                     {
-                        stack.Push(new WalkState<T>(child));
+                        stack.Push(new WalkState<T>(child,false));
                     }
                 }
                 else

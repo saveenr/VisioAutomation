@@ -17,9 +17,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.New(pagesize, false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
-
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
-
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
             client.Selection.SelectNone();

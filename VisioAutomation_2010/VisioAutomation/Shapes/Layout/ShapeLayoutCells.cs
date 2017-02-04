@@ -63,9 +63,6 @@ namespace VisioAutomation.Shapes.Layout
             return query.GetCellGroup(shape);
         }
 
-        private static System.Lazy<ShapeLayoutCellsReader> lazy_query = new System.Lazy<ShapeLayoutCellsReader>();
-
-
-
+        private static readonly System.Lazy<ShapeLayoutCellsReader> lazy_query = new System.Lazy<ShapeLayoutCellsReader>();
     }
 }

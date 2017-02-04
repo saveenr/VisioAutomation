@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using VisioAutomation.Scripting.Utilities;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using SXL = System.Xml.Linq;

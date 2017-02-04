@@ -67,8 +67,6 @@ namespace VisioAutomation.Shapes.Locking
             return query.GetCellGroup(shape);
         }
 
-        private static System.Lazy<LockCellsReader> lazy_query = new System.Lazy<LockCellsReader>();
-
-
+        private static readonly System.Lazy<LockCellsReader> lazy_query = new System.Lazy<LockCellsReader>();
     }
 }

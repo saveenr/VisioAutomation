@@ -25,10 +25,12 @@ namespace VisioAutomation_Tests.Scripting
             var shape_ids = shapes.ToShapeIDs();
             var page = client.Page.Get();
             var writer = client.ShapeSheet.GetWriter(page);
+
             foreach (var shape_id in shape_ids.ShapeIDs)
             {
                 writer.SetFormula( (short) shape_id, VA.ShapeSheet.SRCConstants.PinX, "1.0");
             }
+
             writer.Commit();
             
             client.Document.Close(true);

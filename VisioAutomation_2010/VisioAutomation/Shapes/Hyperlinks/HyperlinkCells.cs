@@ -45,6 +45,6 @@ namespace VisioAutomation.Shapes.Hyperlinks
             return query.GetCellGroups(shape);
         }
 
-        private static System.Lazy<HyperlinkCellsReader> lazy_query = new System.Lazy<HyperlinkCellsReader>();
+        private static readonly System.Lazy<HyperlinkCellsReader> lazy_query = new System.Lazy<HyperlinkCellsReader>();
     }
 }

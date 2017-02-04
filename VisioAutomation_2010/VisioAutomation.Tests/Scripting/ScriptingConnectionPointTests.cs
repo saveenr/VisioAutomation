@@ -14,9 +14,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.New(new VisioAutomation.Drawing.Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
-
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
-
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
             client.Selection.SelectNone();
@@ -24,8 +22,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var indices0 = client.ConnectionPoint.Add("0", "Width*0.67",
-                                                 ConnectionPointType.Outward);
+            var indices0 = client.ConnectionPoint.Add("0", "Width*0.67", ConnectionPointType.Outward);
             Assert.AreEqual(3, indices0.Count);
             Assert.AreEqual(0, indices0[0]);
             Assert.AreEqual(0, indices0[1]);

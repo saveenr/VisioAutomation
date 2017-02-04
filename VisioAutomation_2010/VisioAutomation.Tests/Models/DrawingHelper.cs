@@ -8,16 +8,41 @@ namespace VisioAutomation_Tests.Models
     public class DrawingHelper : VisioAutomationTest
     {
         [TestMethod]
-        public void Drawing_CreateBoundingBox()
+        public void Drawing_CreateBoundingBox_0Points()
+        {
+            var doubles = new double[] { };
+            var points = VA.Drawing.Point.FromDoubles(doubles);
+            var bb = BoundingBoxBuilder.FromPoints(points);
+
+            Assert.IsFalse(bb.HasValue);
+        }
+
+        [TestMethod]
+        public void Drawing_CreateBoundingBox_1Point()
+        {
+            var doubles = new[] { 1.0, -2.0 };
+            var points = VA.Drawing.Point.FromDoubles(doubles);
+            var bb = BoundingBoxBuilder.FromPoints(points);
+
+            Assert.IsTrue(bb.HasValue);
+            Assert.AreEqual(1.0, bb.Value.Left);
+            Assert.AreEqual(-2.0, bb.Value.Top);
+            Assert.AreEqual(1.0, bb.Value.Right);
+            Assert.AreEqual(-2.0, bb.Value.Bottom);
+        }
+
+        [TestMethod]
+        public void Drawing_CreateBoundingBox_4Points()
         {
             var doubles = new[] {0.0, 0.0, 1.0, -2.0};
             var points = VA.Drawing.Point.FromDoubles(doubles);
-            var bb0 = new BoundingBox(points);
-            var bb = bb0.Rectangle;
-            Assert.AreEqual(0, bb.Left);
-            Assert.AreEqual(0, bb.Top);
-            Assert.AreEqual(1, bb.Right);
-            Assert.AreEqual(-2, bb.Bottom);
+            var bb = BoundingBoxBuilder.FromPoints(points);
+
+            Assert.IsTrue(bb.HasValue);
+            Assert.AreEqual(0, bb.Value.Left);
+            Assert.AreEqual(0, bb.Value.Top);
+            Assert.AreEqual(1, bb.Value.Right);
+            Assert.AreEqual(-2, bb.Value.Bottom);
         }
     }
 }

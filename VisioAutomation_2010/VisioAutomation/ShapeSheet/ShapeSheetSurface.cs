@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct ShapeSheetSurface
     {
-        public SurfaceTarget Target { get; private set; }
+        public readonly SurfaceTarget Target;
 
         public ShapeSheetSurface(SurfaceTarget target)
         {

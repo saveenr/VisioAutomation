@@ -6,87 +6,7 @@ namespace VisioAutomation.Scripting.Utilities
 {
     internal static class ArrangeHelper
     {
-        public struct XForm
-        {
-            public double PinX;
-            public double PinY;
-            public double LocPinX;
-            public double LocPinY;
-            public double Width;
-            public double Height;
-
-            private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColPinX;
-            private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColPinY;
-            private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColLocPinX;
-            private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColLocPinY;
-            private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColWidth;
-            private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColHeight;
-            private static VisioAutomation.ShapeSheet.Queries.Query query;
-
-            public static List<XForm> Get(IVisio.Page page, TargetShapeIDs target)
-            {
-                if (query == null)
-                {
-                    query = new VisioAutomation.ShapeSheet.Queries.Query();
-                    ColPinX = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PinX, "PinX");
-                    ColPinY = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PinY, "PinY");
-                    ColLocPinX = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.LocPinX, "LocPinX");
-                    ColLocPinY = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.LocPinY, "LocPinY");
-                    ColWidth = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Width, "Width");
-                    ColHeight = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Height, "Height");
-                }
-
-                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-                var results = query.GetResults<double>(surface, target.ShapeIDs);
-                if (results.Count != target.ShapeIDs.Count)
-                {
-                    throw new VisioAutomation.Exceptions.InternalAssertionException("Didn't get as many rows back as expected");
-                }
-                var list = new List<XForm>(target.ShapeIDs.Count);
-                foreach (var row in results)
-                {
-                    var xform = new XForm();
-                    xform.PinX = row.Cells[ColPinX];
-                    xform.PinY = row.Cells[ColPinY];
-                    xform.LocPinX = row.Cells[ColLocPinX];
-                    xform.LocPinY = row.Cells[ColLocPinY];
-                    xform.Width = row.Cells[ColWidth];
-                    xform.Height = row.Cells[ColHeight];
-                    list.Add(xform);
-                }
-                return list;
-            }
-
-            public Drawing.Rectangle GetRectangle()
-            {
-                var pin = new Drawing.Point(this.PinX, this.PinY);
-                var locpin = new Drawing.Point(this.LocPinX, this.LocPinY);
-                var size = new Drawing.Size(this.Width, this.Height);
-                return new Drawing.Rectangle(pin - locpin, size);
-            }
-
-            public void SetFormulas(VisioAutomation.ShapeSheet.Writers.FormulaWriterSIDSRC writer, short id)
-            {
-                writer.SetFormula(id, VisioAutomation.ShapeSheet.SRCConstants.PinX, this.PinX);
-                writer.SetFormula(id, VisioAutomation.ShapeSheet.SRCConstants.PinY, this.PinY);
-                writer.SetFormula(id, VisioAutomation.ShapeSheet.SRCConstants.LocPinX, this.LocPinX);
-                writer.SetFormula(id, VisioAutomation.ShapeSheet.SRCConstants.LocPinY, this.LocPinY);
-                writer.SetFormula(id, VisioAutomation.ShapeSheet.SRCConstants.Width, this.Width);
-                writer.SetFormula(id, VisioAutomation.ShapeSheet.SRCConstants.Height, this.Height);
-            }
-
-            public static Drawing.Rectangle GetBoundingBox(IEnumerable<XForm> xfrms)
-            {
-                var bb = new VisioAutomation.Drawing.Layout.BoundingBox(xfrms.Select(x => x.GetRectangle()));
-                if (!bb.HasValue)
-                {
-                    throw new System.ArgumentException("Could not calculate bounding box");
-                }
-                return bb.Rectangle;
-            }
-        }
-
-        private static double GetPositionOnShape(XForm xform, VisioAutomation.Scripting.Layout.RelativePosition pos)
+        private static double GetPositionOnShape(XFormData xform, VisioAutomation.Scripting.Layout.RelativePosition pos)
         {
             var r = xform.GetRectangle();
 
@@ -112,7 +32,7 @@ namespace VisioAutomation.Scripting.Utilities
         internal static List<int> SortShapesByPosition(IVisio.Page page, TargetShapeIDs targets, VisioAutomation.Scripting.Layout.RelativePosition pos)
         {
             // First get the transforms of the shapes on the given axis
-            var xforms = XForm.Get(page, targets);
+            var xforms = XFormData.Get(page, targets);
 
             // Then, sort the shapeids pased on the corresponding value in the results
 
@@ -147,8 +67,8 @@ namespace VisioAutomation.Scripting.Utilities
                 : new Drawing.Size(0, spacing);
 
 
-            var input_xfrms = XForm.Get(page, target);
-            var bb = XForm.GetBoundingBox(input_xfrms);
+            var input_xfrms = XFormData.Get(page, target);
+            var bb = XFormData.GetBoundingBox(input_xfrms);
             var cur_pos = new Drawing.Point(bb.Left, bb.Bottom);
 
             var newpositions = new List<VisioAutomation.Drawing.Point>(target.ShapeIDs.Count);
@@ -194,7 +114,7 @@ namespace VisioAutomation.Scripting.Utilities
         {
             // First caculate the new transforms
             var snap_grid = new SnappingGrid(snapsize);
-            var input_xfrms = XForm.Get(page, target);
+            var input_xfrms = XFormData.Get(page, target);
             var output_xfrms = new List<VisioAutomation.Drawing.Point>(input_xfrms.Count);
 
             foreach (var input_xfrm in input_xfrms)
@@ -211,7 +131,7 @@ namespace VisioAutomation.Scripting.Utilities
         }
 
 
-        private static Drawing.Point GetPinPositionForCorner(XForm input_xfrm, Drawing.Point new_lower_left, VisioAutomation.Scripting.Layout.SnapCornerPosition corner)
+        private static Drawing.Point GetPinPositionForCorner(XFormData input_xfrm, Drawing.Point new_lower_left, VisioAutomation.Scripting.Layout.SnapCornerPosition corner)
         {
             var size = new Drawing.Size(input_xfrm.Width, input_xfrm.Height);
             var locpin = new Drawing.Point(input_xfrm.LocPinX, input_xfrm.LocPinY);
@@ -243,7 +163,7 @@ namespace VisioAutomation.Scripting.Utilities
 
         public static void SnapSize(IVisio.Page page, TargetShapeIDs target, Drawing.Size snapsize, Drawing.Size minsize)
         {
-            var input_xfrms = XForm.Get(page, target);
+            var input_xfrms = XFormData.Get(page, target);
             var sizes = new List<VisioAutomation.Drawing.Size>(input_xfrms.Count);
 
             var grid = new SnappingGrid(snapsize);

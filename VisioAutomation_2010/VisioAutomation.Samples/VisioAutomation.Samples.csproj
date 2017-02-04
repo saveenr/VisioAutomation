@@ -74,6 +74,11 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\packages\Visio2010.PrimaryInteropAssembly.1.0.0.4\lib\net20\Microsoft.Office.Interop.Visio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -85,8 +90,10 @@
     <Compile Include="Layouts\BoxLayoutShared.cs" />
     <Compile Include="Layouts\BoxLayout2Samples.cs" />
     <Compile Include="FormsSamples.cs" />
+    <Compile Include="Layouts\Util.cs" />
     <Compile Include="LinqUtil.cs" />
     <Compile Include="Layouts\TreeLayoutSamples.cs" />
+    <Compile Include="ResolutionInfo.cs" />
     <Compile Include="Text\TextExtensions.cs" />
     <Compile Include="Layouts\GridLayoutSamples.cs" />
     <Compile Include="ConnectorSamples.cs" />
@@ -158,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -167,17 +175,6 @@
     <EmbeddedResource Include="FormSampleRunner.resx">
       <DependentUpon>FormSampleRunner.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Interop.Visio">
-      <Guid>{00021A98-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>4</VersionMajor>
-      <VersionMinor>14</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioPowerShell.Commands;
 
 namespace VisioAutomation_Tests.PowerShell
 {
@@ -10,7 +11,7 @@ namespace VisioAutomation_Tests.PowerShell
         [ClassInitialize]
         public static void PSTestFixtureSetup(TestContext context)
         {
-            var new_visio_application = new VisioPowerShell.Commands.New.New_VisioApplication();
+            var new_visio_application = new New_VisioApplication();
             var visio_app = new_visio_application.Invoke();
         }
 

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using IVisio=Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -39,6 +38,5 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("1.5 in", formulas[1]);
             doc.Close(true);
         }
-
     }
 }

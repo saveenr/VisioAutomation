@@ -41,16 +41,10 @@ namespace VisioAutomation_Tests
             }
 
             string abs_path = this._output_path;
-            var datetime_str = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss");
+            var datetime_str = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss", System.Globalization.CultureInfo.InvariantCulture);
             var basename = method + "_" + datetime_str + ext;
             string abs_filename = Path.Combine(abs_path, basename);
             return abs_filename;
-        }
-
-        private static string GetOutputPathEx(string name)
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            return Path.Combine(path, name);
         }
     }
 }
