@@ -1,6 +1,7 @@
 ﻿using VisioAutomation.Colors;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using VisioAutomation.Models.Layouts.Grid;
 using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomationSamples
@@ -36,10 +37,10 @@ namespace VisioAutomationSamples
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Rectangle"];
 
-            var layout = new VA.Models.Layouts.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
+            var layout = new GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
             layout.Origin = new VA.Drawing.Point(0, 0);
             layout.CellSpacing = new VA.Drawing.Size(0, 0);
-            layout.RowDirection = VA.Models.Layouts.Grid.RowDirection.BottomToTop;
+            layout.RowDirection = RowDirection.BottomToTop;
 
             layout.PerformLayout();
             layout.Render(page);

@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing.Layout;
 using VisioAutomation.Models.Dom;
+using VisioAutomation.Models.Layouts.Tree;
 using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VATREE = VisioAutomation.Models.Layouts.Tree;
+using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -89,7 +89,7 @@ namespace VisioAutomation.Scripting.Commands
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
                 formpage.Size = new Drawing.Size(8.5, 11);
-                formpage.Margin = new Margin(0.5, 0.5, 0.5, 0.5);
+                formpage.Margin = new Models.Margin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
             }
@@ -128,7 +128,7 @@ namespace VisioAutomation.Scripting.Commands
 
                     var formpage = new Models.Documents.Forms.FormPage();
                     formpage.Size = new Drawing.Size(8.5, 11);
-                    formpage.Margin = new Margin(0.5, 0.5, 0.5, 0.5);
+                    formpage.Margin = new Models.Margin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)
@@ -246,10 +246,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new VATREE.Drawing();
-            tree_layout.LayoutOptions.Direction = VATREE.LayoutDirection.Right;
-            tree_layout.LayoutOptions.ConnectorType = VATREE.ConnectorType.CurvedBezier;
-            var ns_node_map = new Dictionary<string, VATREE.Node>(namespaces.Count);
+            var tree_layout = new Models.Layouts.Tree.Drawing();
+            tree_layout.LayoutOptions.Direction = LayoutDirection.Right;
+            tree_layout.LayoutOptions.ConnectorType = ConnectorType.CurvedBezier;
+            var ns_node_map = new Dictionary<string, Node>(namespaces.Count);
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -261,7 +261,7 @@ namespace VisioAutomation.Scripting.Commands
                     label = ns.Substring(index_of_last_sep+1);
                 }
 
-                var node = new VATREE.Node(ns);
+                var node = new Node(ns);
                 node.Text = new VisioAutomation.Models.Text.TextElement(label);
                 node.Size = new Drawing.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
@@ -299,7 +299,7 @@ namespace VisioAutomation.Scripting.Commands
             else
             {
                 // if there are multiple root namespaces, inject an empty placeholder root
-                var root_n = new VATREE.Node();
+                var root_n = new Node();
                 tree_layout.Root = root_n;
 
                 foreach (var root_ns in pathbuilder.Roots)
@@ -405,11 +405,11 @@ namespace VisioAutomation.Scripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new VATREE.Drawing();
-            tree_layout.LayoutOptions.Direction = VATREE.LayoutDirection.Down;
-            tree_layout.LayoutOptions.ConnectorType = VATREE.ConnectorType.PolyLine;
-            var ns_node_map = new Dictionary<string, VATREE.Node>(namespaces.Count);
-            var node_to_nslabel = new Dictionary<VATREE.Node, string>(namespaces.Count);
+            var tree_layout = new Models.Layouts.Tree.Drawing();
+            tree_layout.LayoutOptions.Direction = LayoutDirection.Down;
+            tree_layout.LayoutOptions.ConnectorType = ConnectorType.PolyLine;
+            var ns_node_map = new Dictionary<string, Node>(namespaces.Count);
+            var node_to_nslabel = new Dictionary<Node, string>(namespaces.Count);
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -425,7 +425,7 @@ namespace VisioAutomation.Scripting.Commands
                 var types_in_namespace = types.Where(t => t.Type.Namespace == ns1)
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
-                var node = new VATREE.Node(ns);
+                var node = new Node(ns);
                 node.Size = new Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
@@ -477,7 +477,7 @@ namespace VisioAutomation.Scripting.Commands
             else
             {
                 // if there are multiple root namespaces, inject an empty placeholder root
-                var root_n = new VATREE.Node();
+                var root_n = new Node();
                 tree_layout.Root = root_n;
 
                 foreach (var root_ns in pathbuilder.Roots)

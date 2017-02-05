@@ -1,14 +1,14 @@
 ﻿using VisioAutomation.Extensions;
+using VisioAutomation.Models.Layouts.Box;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using BoxL = VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomationSamples
 {
     public class BoxLayoutShared
     {
         public static void DrawNode(
-            BoxL.Node node,
+            Node node,
             VA.Drawing.Rectangle rect, IVisio.Page page)
         {           
             var shape = page.DrawRectangle(rect);

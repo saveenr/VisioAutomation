@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Models.Layouts.DirectedGraph;
+using VisioAutomation.Models.Layouts.Grid;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VAGRID = VisioAutomation.Models.Layouts.Grid;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
-using VAGRAPH = VisioAutomation.Models.Layouts.DirectedGraph;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -91,10 +91,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var pagesize = this._client.Page.GetSize();
 
-            var layout = new VAGRID.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new Drawing.Size(1, 1), masterobj);
+            var layout = new GridLayout(datatable.Columns.Count, datatable.Rows.Count, new Drawing.Size(1, 1), masterobj);
             layout.Origin = new Drawing.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;
-            layout.RowDirection = VAGRID.RowDirection.TopToBottom;
+            layout.RowDirection = RowDirection.TopToBottom;
             layout.PerformLayout();
 
             foreach (var i in Enumerable.Range(0, datatable.Rows.Count))
@@ -122,7 +122,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Grid(VAGRID.GridLayout layout)
+        public void Grid(GridLayout layout)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -319,7 +319,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DirectedGraph(IList<VAGRAPH.DirectedGraphLayout> graph)
+        public void DirectedGraph(IList<DirectedGraphLayout> graph)
         {
             this._client.Application.AssertApplicationAvailable();
 
@@ -338,7 +338,7 @@ namespace VisioAutomation.Scripting.Commands
                 var dg = graph[i];
 
                 
-                var options = new VAGRAPH.MsaglLayoutOptions();
+                var options = new MsaglLayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 // if this is the first page to drawe

@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using VisioAutomation.Models.Dom;
-using VABOXMODEL = VisioAutomation.Models.Layouts.Box;
+using VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomationSamples
 {
@@ -18,53 +18,53 @@ namespace VisioAutomationSamples
             var doc = documents.Add(string.Empty);
 
             // Create a simple Column
-            var layout1 = new VABOXMODEL.BoxLayout();
-            layout1.Root = new VABOXMODEL.Container( VABOXMODEL.Direction.BottomToTop);
+            var layout1 = new BoxLayout();
+            layout1.Root = new Container( Direction.BottomToTop);
             layout1.Root.AddBox(1,2);
             layout1.Root.AddBox(1,1);
             layout1.Root.AddBox(0.5, 0.5);
 
             // You can set the min height and width of a container
-            var layout2 = new VABOXMODEL.BoxLayout();
-            layout2.Root = new VABOXMODEL.Container(VABOXMODEL.Direction.BottomToTop,3,5);
+            var layout2 = new BoxLayout();
+            layout2.Root = new Container(Direction.BottomToTop,3,5);
             layout2.Root.AddBox(1, 2);
             layout2.Root.AddBox(1, 1);
             layout2.Root.AddBox(0.5, 0.5);
 
             // For vertical containers, you can layout shapes bottom-to-top or top-to-bottom
-            var layout3 = new VABOXMODEL.BoxLayout();
-            layout3.Root = new VABOXMODEL.Container(VABOXMODEL.Direction.TopToBottom,3,5);
+            var layout3 = new BoxLayout();
+            layout3.Root = new Container(Direction.TopToBottom,3,5);
             layout3.Root.AddBox(1, 2);
             layout3.Root.AddBox(1, 1);
             layout3.Root.AddBox(0.5, 0.5);
 
             // Now switch to horizontal containers
-            var layout4 = new VABOXMODEL.BoxLayout();
-            layout4.Root = new VABOXMODEL.Container(VABOXMODEL.Direction.RightToLeft,3,5);
+            var layout4 = new BoxLayout();
+            layout4.Root = new Container(Direction.RightToLeft,3,5);
             layout4.Root.AddBox(1, 2);
             layout4.Root.AddBox(1, 1);
             layout4.Root.AddBox(0.5, 0.5);
 
 
             // For Columns, you can tell the children how to horizontally align
-            var layout5 = new VABOXMODEL.BoxLayout();
-            layout5.Root = new VABOXMODEL.Container(VABOXMODEL.Direction.BottomToTop,3,0);
+            var layout5 = new BoxLayout();
+            layout5.Root = new Container(Direction.BottomToTop,3,0);
             var b51 = layout5.Root.AddBox(1, 2);
             var b52 = layout5.Root.AddBox(1, 1);
             var b53 = layout5.Root.AddBox(0.5, 0.5);
-            b51.HAlignToParent = VABOXMODEL.AlignmentHorizontal.Left;
-            b52.HAlignToParent = VABOXMODEL.AlignmentHorizontal.Center;
-            b53.HAlignToParent = VABOXMODEL.AlignmentHorizontal.Right;
+            b51.HAlignToParent = AlignmentHorizontal.Left;
+            b52.HAlignToParent = AlignmentHorizontal.Center;
+            b53.HAlignToParent = AlignmentHorizontal.Right;
 
             // For Rows , you can tell the children how to vertially align
-            var layout6 = new VABOXMODEL.BoxLayout();
-            layout6.Root = new VABOXMODEL.Container(VABOXMODEL.Direction.LeftToRight,0,5);
+            var layout6 = new BoxLayout();
+            layout6.Root = new Container(Direction.LeftToRight,0,5);
             var b61 = layout6.Root.AddBox(1, 2);
             var b62 = layout6.Root.AddBox(1, 1);
             var b63 = layout6.Root.AddBox(0.5, 0.5);
-            b61.VAlignToParent = VABOXMODEL.AlignmentVertical.Bottom;
-            b62.VAlignToParent = VABOXMODEL.AlignmentVertical.Center;
-            b63.VAlignToParent = VABOXMODEL.AlignmentVertical.Top;
+            b61.VAlignToParent = AlignmentVertical.Bottom;
+            b62.VAlignToParent = AlignmentVertical.Center;
+            b63.VAlignToParent = AlignmentVertical.Top;
 
             Util.Render(layout1, doc);
             Util.Render(layout2, doc);
@@ -143,17 +143,17 @@ namespace VisioAutomationSamples
 
         }
 
-        private static VABOXMODEL.BoxLayout CreateTwoLevelLayout(List<string[]> data)
+        private static BoxLayout CreateTwoLevelLayout(List<string[]> data)
         {
             double itemsep = 0.0;
-            var major_group_direction = VABOXMODEL.Direction.LeftToRight;
-            var minor_group_direction = VABOXMODEL.Direction.TopToBottom;
+            var major_group_direction = Direction.LeftToRight;
+            var minor_group_direction = Direction.TopToBottom;
 
-            var name_to_major_group = new Dictionary<string, VABOXMODEL.Container>();
-            var name_to_minor_group = new Dictionary<string, VABOXMODEL.Container>();
+            var name_to_major_group = new Dictionary<string, Container>();
+            var name_to_minor_group = new Dictionary<string, Container>();
 
-            var layout1 = new VABOXMODEL.BoxLayout();
-            layout1.Root = new VABOXMODEL.Container(major_group_direction);
+            var layout1 = new BoxLayout();
+            layout1.Root = new Container(major_group_direction);
 
             var major_cells = new ShapeCells();
             major_cells.FillForegnd = "rgb(245,245,245)";
@@ -189,7 +189,7 @@ namespace VisioAutomationSamples
                 var minorname = row[1];
                 var itemname = row[2];
 
-                VABOXMODEL.Container majorcnt;
+                Container majorcnt;
                 if (name_to_major_group.ContainsKey(majorname))
                 {
                     majorcnt = name_to_major_group[majorname];
@@ -207,10 +207,10 @@ namespace VisioAutomationSamples
 
                     name_to_major_group[majorname] = majorcnt;
 
-                    VABOXMODEL.Box headerbox = majorcnt.AddBox(2, 0.25);
+                    Box headerbox = majorcnt.AddBox(2, 0.25);
                 }
 
-                VABOXMODEL.Container minorcnt;
+                Container minorcnt;
                 var minorkey = majorname + "___" + minorname;
                 if (name_to_minor_group.ContainsKey(minorkey))
                 {
@@ -227,10 +227,10 @@ namespace VisioAutomationSamples
                     minorcnt.Data = minor_info;
                     name_to_minor_group[minorkey] = minorcnt;
 
-                    VABOXMODEL.Box headerbox = minorcnt.AddBox(2, 0.25);
+                    Box headerbox = minorcnt.AddBox(2, 0.25);
                 }
 
-                VABOXMODEL.Box itembox = minorcnt.AddBox(2, 0.25);
+                Box itembox = minorcnt.AddBox(2, 0.25);
 
                 var item_info = new TwoLevelInfo();
                 item_info.Text = itemname;

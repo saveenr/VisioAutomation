@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Models.Layouts.Grid;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -92,7 +93,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Draw the grid
             var page = client.Page.Get();
-            var grid = new VisioAutomation.Models.Layouts.Grid.GridLayout(cols, rows, cellsize, master);
+            var grid = new GridLayout(cols, rows, cellsize, master);
             grid.Origin = origin;
             grid.Render(page);
 

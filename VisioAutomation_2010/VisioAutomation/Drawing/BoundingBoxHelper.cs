@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.Drawing.Layout
+namespace VisioAutomation.Drawing
 {
-    public static class BoundingBoxBuilder
+    public static class BoundingBoxHelper
     {
         public static Rectangle? FromPoints(IEnumerable<Point> points)
         {
@@ -52,7 +52,7 @@ namespace VisioAutomation.Drawing.Layout
         public static Rectangle? FromRectangles(IEnumerable<Rectangle> rects)
         {
             var points = rects_to_points(rects);
-            return BoundingBoxBuilder.FromPoints(points);
+            return BoundingBoxHelper.FromPoints(points);
         }
     }
 }

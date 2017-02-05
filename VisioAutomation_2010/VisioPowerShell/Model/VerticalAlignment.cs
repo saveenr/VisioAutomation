@@ -1,4 +1,4 @@
-using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Models;
 
 namespace VisioPowerShell.Model
 {

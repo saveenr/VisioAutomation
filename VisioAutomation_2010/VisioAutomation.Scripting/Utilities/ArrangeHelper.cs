@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Utilities
@@ -45,7 +46,7 @@ namespace VisioAutomation.Scripting.Utilities
             return sorted_shape_ids;
         }
 
-        public static void DistributeWithSpacing(IVisio.Page page, TargetShapeIDs target, VisioAutomation.Drawing.Layout.Axis axis, double spacing)
+        public static void DistributeWithSpacing(IVisio.Page page, TargetShapeIDs target, Axis axis, double spacing)
         {
             if (spacing < 0.0)
             {
@@ -58,11 +59,11 @@ namespace VisioAutomation.Scripting.Utilities
             }
 
             // Calculate the new Xfrms
-            var sortpos = axis == VisioAutomation.Drawing.Layout.Axis.XAxis
+            var sortpos = axis == Axis.XAxis
                 ? VisioAutomation.Scripting.Layout.RelativePosition.PinX
                 : VisioAutomation.Scripting.Layout.RelativePosition.PinY;
 
-            var delta = axis == VisioAutomation.Drawing.Layout.Axis.XAxis
+            var delta = axis == Axis.XAxis
                 ? new Drawing.Size(spacing, 0)
                 : new Drawing.Size(0, spacing);
 
@@ -74,7 +75,7 @@ namespace VisioAutomation.Scripting.Utilities
             var newpositions = new List<VisioAutomation.Drawing.Point>(target.ShapeIDs.Count);
             foreach (var input_xfrm in input_xfrms)
             {
-                var new_pinpos = axis == VisioAutomation.Drawing.Layout.Axis.XAxis
+                var new_pinpos = axis == Axis.XAxis
                     ? new Drawing.Point(cur_pos.X + input_xfrm.LocPinX, input_xfrm.PinY)
                     : new Drawing.Point(input_xfrm.PinX, cur_pos.Y + input_xfrm.LocPinY);
 

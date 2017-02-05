@@ -1,3 +1,4 @@
+using VisioAutomation.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -10,7 +11,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void AlignHorizontal(TargetShapes targets, VisioAutomation.Drawing.Layout.AlignmentHorizontal align)
+        public void AlignHorizontal(TargetShapes targets, AlignmentHorizontal align)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -26,13 +27,13 @@ namespace VisioAutomation.Scripting.Commands
 
             switch (align)
             {
-                case VisioAutomation.Drawing.Layout.AlignmentHorizontal.Left:
+                case AlignmentHorizontal.Left:
                     halign = IVisio.VisHorizontalAlignTypes.visHorzAlignLeft;
                     break;
-                case VisioAutomation.Drawing.Layout.AlignmentHorizontal.Center:
+                case AlignmentHorizontal.Center:
                     halign = IVisio.VisHorizontalAlignTypes.visHorzAlignCenter;
                     break;
-                case VisioAutomation.Drawing.Layout.AlignmentHorizontal.Right:
+                case AlignmentHorizontal.Right:
                     halign = IVisio.VisHorizontalAlignTypes.visHorzAlignRight;
                     break;
                 default: throw new System.ArgumentOutOfRangeException();
@@ -47,7 +48,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void AlignVertical(TargetShapes targets, VisioAutomation.Drawing.Layout.AlignmentVertical align)
+        public void AlignVertical(TargetShapes targets, AlignmentVertical align)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -63,9 +64,9 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.VisVerticalAlignTypes valign;
             switch (align)
             {
-                case VisioAutomation.Drawing.Layout.AlignmentVertical.Top: valign = IVisio.VisVerticalAlignTypes.visVertAlignTop; break;
-                case VisioAutomation.Drawing.Layout.AlignmentVertical.Center: valign = IVisio.VisVerticalAlignTypes.visVertAlignMiddle; break;
-                case VisioAutomation.Drawing.Layout.AlignmentVertical.Bottom: valign = IVisio.VisVerticalAlignTypes.visVertAlignBottom; break;
+                case AlignmentVertical.Top: valign = IVisio.VisVerticalAlignTypes.visVertAlignTop; break;
+                case AlignmentVertical.Center: valign = IVisio.VisVerticalAlignTypes.visVertAlignMiddle; break;
+                case AlignmentVertical.Bottom: valign = IVisio.VisVerticalAlignTypes.visVertAlignBottom; break;
                 default: throw new System.ArgumentOutOfRangeException();
             }
 

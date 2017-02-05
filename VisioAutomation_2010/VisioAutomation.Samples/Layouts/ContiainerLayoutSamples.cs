@@ -1,4 +1,4 @@
-﻿using CONTMODEL = VisioAutomation.Models.Layouts.Container;
+﻿using VisioAutomation.Models.Layouts.Container;
 
 namespace VisioAutomationSamples
 {
@@ -6,7 +6,7 @@ namespace VisioAutomationSamples
     {
         public static void SimpleContainer()
         {
-            var m = new CONTMODEL.ContainerLayout();
+            var m = new ContainerLayout();
 
             var c1 = m.AddContainer("Container 1");
             var c2 = m.AddContainer("Container 2");
@@ -20,7 +20,7 @@ namespace VisioAutomationSamples
             c2.Add("2");
             c2.Add("3");
 
-            m.LayoutOptions = new CONTMODEL.LayoutOptions();
+            m.LayoutOptions = new LayoutOptions();
             m.LayoutOptions.ContainerFormatting.ShapeFormatCells.FillForegnd = "rgb(0,176,240)";
             m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.FillForegnd = "rgb(250,250,250)";
             m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LinePattern= "0";

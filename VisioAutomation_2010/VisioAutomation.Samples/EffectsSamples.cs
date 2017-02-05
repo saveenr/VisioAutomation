@@ -3,7 +3,7 @@ using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using VisioAutomation.Models.Dom;
-using GRIDMODEL = VisioAutomation.Models.Layouts.Grid;
+using VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioAutomationSamples
 {
@@ -27,8 +27,8 @@ namespace VisioAutomationSamples
 
             SampleEnvironment.SetPageSize(page,page_size);
 
-            var layout = new GRIDMODEL.GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
-            layout.RowDirection = GRIDMODEL.RowDirection.TopToBottom;
+            var layout = new GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
+            layout.RowDirection = RowDirection.TopToBottom;
             layout.Origin = upperleft;
             layout.CellSpacing = new VA.Drawing.Size(0.1, 0.1);
             layout.PerformLayout();

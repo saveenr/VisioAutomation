@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
+using IVisio = Microsoft.Office.Interop.Visio;
 using MSAGL = Microsoft.Msagl;
 using VA = VisioAutomation;
 

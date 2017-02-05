@@ -1,5 +1,4 @@
 using VisioAutomation.Drawing;
-using VisioAutomation.Drawing.Layout;
 
 namespace VisioAutomation.Models.Layouts.InternalTree
 {

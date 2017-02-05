@@ -1,6 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Models;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Scripting
@@ -36,7 +36,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioAutomation.Scripting.TargetShapes();
 
-            client.Distribute.DistributeHorizontal(targets,AlignmentHorizontal.Center);
+            client.Distribute.DistributeHorizontal(targets, AlignmentHorizontal.Center);
 
             var shapeids = new[] {s1.ID, s2.ID, s3.ID };
             VisioAutomation.Shapes.XFormCells.GetCells(client.Page.Get(),shapeids);

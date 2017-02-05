@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using VisioAutomation.Models.Dom;
-using BoxL = VisioAutomation.Models.Layouts.Box;
+using VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomationSamples
 {
@@ -25,7 +25,7 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static BoxL.Box AddNodeEx(this BoxL.Container p, double w, double h, string s)
+        public static Box AddNodeEx(this Container p, double w, double h, string s)
         {
             var box = p.AddBox(w, h);
             var node_data = new NodeData();
@@ -52,9 +52,9 @@ namespace VisioAutomationSamples
 
         public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)
         {
-            var layout = new BoxL.BoxLayout();
+            var layout = new BoxLayout();
 
-            var root = new BoxL.Container( BoxL.Direction.TopToBottom);
+            var root = new Container( Direction.TopToBottom);
 
             layout.Root = root;
             root.ChildSpacing = 0.5;
@@ -84,7 +84,7 @@ namespace VisioAutomationSamples
                 var fontname_box_data = (NodeData) fontname_box.Data;
                 fontname_box_data.Cells = fontname_cells;
 
-                var font_box = root.AddContainer(BoxL.Direction.TopToBottom);
+                var font_box = root.AddContainer(Direction.TopToBottom);
                 font_box.ChildSpacing = 0.25;
                 var font_vox_data = (NodeData) font_box.Data;
                 if (font_vox_data != null)
@@ -99,7 +99,7 @@ namespace VisioAutomationSamples
 
                 foreach (int row in Enumerable.Range(0, numrows))
                 {
-                    var row_box = font_box.AddContainer(BoxL.Direction.LeftToRight);
+                    var row_box = font_box.AddContainer(Direction.LeftToRight);
                     row_box.ChildSpacing = 0.25;
                     var row_box_data = new NodeData();
                     row_box_data.Render = false;

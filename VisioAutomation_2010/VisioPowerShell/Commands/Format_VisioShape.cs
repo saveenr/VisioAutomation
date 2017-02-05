@@ -1,5 +1,5 @@
 using System.Management.Automation;
-using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands

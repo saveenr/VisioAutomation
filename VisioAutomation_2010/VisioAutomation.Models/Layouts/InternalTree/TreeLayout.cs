@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Drawing;
 
 /*
  * 
@@ -171,7 +171,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             }
             var nodes = this.Nodes.ToList();
 
-            var bb = BoundingBoxBuilder.FromRectangles(nodes.Select(n => n.Rect));
+            var bb = BoundingBoxHelper.FromRectangles(nodes.Select(n => n.Rect));
             if (!bb.HasValue)
             {
                 throw new System.InvalidOperationException("Internal Error: Could not compute bounding box");

@@ -4,7 +4,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Drawing
 {
-
     public struct DrawingSurface
     {
         public readonly SurfaceTarget Target;
@@ -23,7 +22,6 @@ namespace VisioAutomation.Drawing
         {
             this.Target = new SurfaceTarget(master);
         }
-
 
         public DrawingSurface(IVisio.Shape shape)
         {

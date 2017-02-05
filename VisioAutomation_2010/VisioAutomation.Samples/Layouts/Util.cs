@@ -1,11 +1,12 @@
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomationSamples
 {
     public static class Util
     {
-        public static void Render(VisioAutomation.Models.Layouts.Box.BoxLayout layout, Microsoft.Office.Interop.Visio.Document doc)
+        public static void Render(BoxLayout layout, Microsoft.Office.Interop.Visio.Document doc)
         {
             layout.PerformLayout();
             var page1 = doc.Pages.Add();

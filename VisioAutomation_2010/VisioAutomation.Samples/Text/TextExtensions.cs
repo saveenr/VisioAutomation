@@ -1,5 +1,5 @@
 using VisioAutomation.Colors;
-using VisioAutomation.Drawing.Layout;
+using VisioAutomation.Models;
 using VA=VisioAutomation;
 
 namespace VisioAutomationSamples

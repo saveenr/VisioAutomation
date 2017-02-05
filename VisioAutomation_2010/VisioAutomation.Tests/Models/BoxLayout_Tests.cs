@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Exceptions;
-using BoxL = VisioAutomation.Models.Layouts.Box;
+using VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomation_Tests.Models
 {
@@ -10,8 +10,8 @@ namespace VisioAutomation_Tests.Models
         [TestMethod]
         public void BoxLayout_Test_empty()
         {
-            var layout = new BoxL.BoxLayout();
-            layout.Root = new BoxL.Container(BoxL.Direction.BottomToTop);
+            var layout = new BoxLayout();
+            layout.Root = new Container(Direction.BottomToTop);
             Assert.IsNotNull(layout.Root);
 
             bool thrown = false;
@@ -34,8 +34,8 @@ namespace VisioAutomation_Tests.Models
         [TestMethod]
         public void BoxLayout_Test_single_node()
         {
-            var layout = new BoxL.BoxLayout();
-            layout.Root = new BoxL.Container(BoxL.Direction.BottomToTop);
+            var layout = new BoxLayout();
+            layout.Root = new Container(Direction.BottomToTop);
             var root = layout.Root;
             root.PaddingBottom = 0.0;
             root.PaddingLeft= 0.0;
@@ -52,8 +52,8 @@ namespace VisioAutomation_Tests.Models
         [TestMethod]
         public void BoxLayout_Test_single_node_padding()
         {
-            var layout = new BoxL.BoxLayout();
-            layout.Root = new BoxL.Container(BoxL.Direction.BottomToTop);
+            var layout = new BoxLayout();
+            layout.Root = new Container(Direction.BottomToTop);
             var root = layout.Root;
             var n1 = root.AddBox(10, 5);
 

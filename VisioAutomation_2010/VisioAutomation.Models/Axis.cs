@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Drawing.Layout
+﻿namespace VisioAutomation.Models
 {
     public enum Axis
     {

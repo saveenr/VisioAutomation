@@ -1,7 +1,7 @@
 ﻿using VA = VisioAutomation;
-using DGMODEL = VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;
+using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Shapes.Connectors;
 
 namespace VisioAutomationSamples
@@ -12,7 +12,7 @@ namespace VisioAutomationSamples
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
-            var options = new DGMODEL.MsaglLayoutOptions();
+            var options = new MsaglLayoutOptions();
             options.UseDynamicConnectors = false;
             directed_graph_drawing.Render(page1, options);
         }
@@ -22,14 +22,14 @@ namespace VisioAutomationSamples
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
 
-            var visio_options = new DGMODEL.VisioLayoutOptions();
+            var visio_options = new VisioLayoutOptions();
             directed_graph_drawing.Render(page1, visio_options);
 
             var padding = new VA.Drawing.Size(0.5, 0.5);
             page1.ResizeToFitContents(padding);
         }
 
-        private static DGMODEL.DirectedGraphLayout get_dg_drawing()
+        private static DirectedGraphLayout get_dg_drawing()
         {
 
             var ver = VA.Application.ApplicationHelper.GetVersion(SampleEnvironment.Application);
@@ -37,7 +37,7 @@ namespace VisioAutomationSamples
             string server_stencil = (ver.Major >= 15) ? "server_u.vssx" : "server_u.vss";
             string basflo_stencil = (ver.Major >= 15) ? "basflo_u.vssx" : "basflo_u.vss";
 
-            var directed_graph_drawing = new DGMODEL.DirectedGraphLayout();
+            var directed_graph_drawing = new DirectedGraphLayout();
 
             // Create a Node 0
             var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", basflo_stencil, "Decision");

@@ -3,6 +3,10 @@ using System.Data;
 using System.Linq;
 using System.Management.Automation;
 using System.Xml;
+using VisioAutomation.Models.Layouts.DirectedGraph;
+using VisioAutomation.Models.Layouts.Grid;
+using VisioAutomation.Models.Layouts.Tree;
+using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
 namespace VisioPowerShell.Commands
 {
@@ -13,10 +17,10 @@ namespace VisioPowerShell.Commands
         public VisioAutomation.Models.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
 
         [Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
+        public GridLayout GridLayout { get; set; }
 
         [Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public List<VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
+        public List<DirectedGraphLayout> DirectedGraphs { get; set; }
 
         [Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public DataTable DataTable { get; set; }
@@ -79,7 +83,7 @@ namespace VisioPowerShell.Commands
             else if (this.XmlDocument != null)
             {
                 this.WriteVerbose("XmlDocument");
-                var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
+                var tree_drawing = new Drawing();
                 this.build_from_xml_doc(this.XmlDocument, tree_drawing);
 
                 tree_drawing.Render(this.Client.Page.Get());
@@ -90,22 +94,22 @@ namespace VisioPowerShell.Commands
             }
         }
 
-        private void build_from_xml_doc(XmlDocument xmlDocument, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
+        private void build_from_xml_doc(XmlDocument xmlDocument, Drawing tree_drawing)
         {
-            var n = new VisioAutomation.Models.Layouts.Tree.Node();
+            var n = new Node();
             tree_drawing.Root = n;
             n.Text = new VisioAutomation.Models.Text.TextElement(xmlDocument.Name);
             this.build_from_xml_element(xmlDocument.DocumentElement,n);
 
         }
 
-        private void build_from_xml_element(XmlElement x, VisioAutomation.Models.Layouts.Tree.Node parent)
+        private void build_from_xml_element(XmlElement x, Node parent)
         {
             foreach (XmlNode xchild in x.ChildNodes)
             {
                 if (xchild is XmlElement)
                 {
-                    var nchild = new VisioAutomation.Models.Layouts.Tree.Node();
+                    var nchild = new Node();
                     nchild.Text = new VisioAutomation.Models.Text.TextElement(xchild.Name);
 
                     parent.Children.Add(nchild);

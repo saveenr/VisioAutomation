@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Drawing;
 
 namespace VisioAutomation.Scripting.Utilities
 {
@@ -74,7 +75,7 @@ namespace VisioAutomation.Scripting.Utilities
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<XFormData> xfrms)
         {
-            var bb = Drawing.Layout.BoundingBoxBuilder.FromRectangles(xfrms.Select(x => x.GetRectangle()));
+            var bb = BoundingBoxHelper.FromRectangles(xfrms.Select(x => x.GetRectangle()));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
