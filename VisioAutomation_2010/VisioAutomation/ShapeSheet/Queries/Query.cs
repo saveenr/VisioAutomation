@@ -3,7 +3,6 @@ using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
-using VisioAutomation.ShapeSheet.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Queries
@@ -204,13 +203,12 @@ namespace VisioAutomation.ShapeSheet.Queries
             }
 
             int total = this._get_total_cell_count(1);
-
-            var stream_builder = new StreamBuilderSRC(total);
+            var streamitem_list = new List<VisioAutomation.ShapeSheet.SRC>(total);
             
             foreach (var col in this.Cells)
             {
                 var src = col.SRC;
-                stream_builder.Add(src.Section,src.Row,src.Cell);
+                streamitem_list.Add(src);
             }
 
             // And then the sections if any exist
@@ -223,19 +221,20 @@ namespace VisioAutomation.ShapeSheet.Queries
                     {
                         foreach (var col in section.SubQuery.Columns)
                         {
-                            stream_builder.Add((short)section.SubQuery.SectionIndex, (short)rowindex, col.CellIndex);
+                            streamitem_list.Add( new VisioAutomation.ShapeSheet.SRC((short)section.SubQuery.SectionIndex, (short)rowindex, col.CellIndex));
                         }
                     }
                 }
             }
 
-            if (!stream_builder.IsFull)
+            if (streamitem_list.Count != total)
             {
-                string msg = string.Format("StreamBuilder is not full");
+                string msg = string.Format("src list does not match expected size");
                 throw new InternalAssertionException(msg);
             }
 
-            return stream_builder.Stream;
+            var stream = VisioAutomation.ShapeSheet.SRC.ToStream(streamitem_list);
+            return stream;
         }
 
         private short[] _build_sidsrc_stream(ShapeSheetSurface surface, IList<int> shapeids)
@@ -244,7 +243,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
             int total = this._get_total_cell_count(shapeids.Count);
 
-            var stream_builder = new StreamBuilderSIDSRC(total);
+            var streamitem_list = new List<VisioAutomation.ShapeSheet.SIDSRC>(total);
 
             for (int i = 0; i < shapeids.Count; i++)
             {
@@ -253,7 +252,7 @@ namespace VisioAutomation.ShapeSheet.Queries
                 foreach (var col in this.Cells)
                 {
                     var src = col.SRC;
-                    stream_builder.Add((short)shapeid, src.Section, src.Row, src.Cell);
+                    streamitem_list.Add(new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src.Section, src.Row, src.Cell));
                 }
 
                 // And then the sections if any exist
@@ -266,24 +265,19 @@ namespace VisioAutomation.ShapeSheet.Queries
                         {
                             foreach (var col in section.SubQuery.Columns)
                             {
-                                stream_builder.Add(
-                                    (short)shapeid,
+                                streamitem_list.Add(new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid,
                                     (short)section.SubQuery.SectionIndex,
                                     (short)rowindex,
-                                    col.CellIndex);
+                                    col.CellIndex));
                             }
                         }
                     }
                 }
             }
 
-            if (!stream_builder.IsFull)
-            {
-                string msg = string.Format("StreamBuilder is not full");
-                throw new InternalAssertionException(msg);
-            }
+            var stream = VisioAutomation.ShapeSheet.SIDSRC.ToStream(streamitem_list);
 
-            return stream_builder.Stream;
+            return stream;
         }
 
 
