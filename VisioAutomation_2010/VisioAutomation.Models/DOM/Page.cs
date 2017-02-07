@@ -24,7 +24,6 @@ namespace VisioAutomation.Models.Dom
             this.PerfSettings = new Application.PerfSettings();
             this.PerfSettings.DeferRecalc = 0;
             
-            
             // By Enable ScreenUpdating by default
             // If it is disabled it messes up page resizing (there may be a workaround)
             // TODO: Try the DrawTreeMultiNode2 unit test to see how setting it to 1 will affect the rendering
@@ -44,7 +43,6 @@ namespace VisioAutomation.Models.Dom
             var pages = doc.Pages;
             var page = pages.Add();
             this.VisioPage = page;
-
             this.Render(page);
             
             return page;
@@ -57,7 +55,6 @@ namespace VisioAutomation.Models.Dom
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-
             // First handle any page properties
             if (this.Name!=null)
             {
@@ -65,11 +62,8 @@ namespace VisioAutomation.Models.Dom
             }
 
             this.VisioPage = page;
-
             var page_sheet = page.PageSheet;
-
             var app = page.Application;
-
 
             using (var perfscope = new Application.PerfScope(app, this.PerfSettings))
             {
@@ -105,7 +99,6 @@ namespace VisioAutomation.Models.Dom
                     }
                 }
             }
-
         }
     }
 }

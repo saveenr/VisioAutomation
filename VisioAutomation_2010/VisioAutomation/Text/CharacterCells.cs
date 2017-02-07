@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
@@ -29,7 +28,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData Strikethru { get; set; }
         public ShapeSheet.CellData UseVertical { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<VisioAutomation.ShapeSheet.CellGroups.SRCFormulaPair> Pairs
         {
             get
             {
