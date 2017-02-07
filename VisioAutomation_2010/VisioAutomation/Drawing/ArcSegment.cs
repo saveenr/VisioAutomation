@@ -5,10 +5,10 @@
         public readonly double Begin;
         public readonly double End;
 
-        internal ArcSegment(double b, double e)
+        internal ArcSegment(double begin, double end)
         {
-            this.Begin = b;
-            this.End = e;
+            this.Begin = begin;
+            this.End = end;
         }
     }
 }
