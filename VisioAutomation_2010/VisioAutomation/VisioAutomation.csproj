@@ -126,7 +126,6 @@
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
-    <Compile Include="ShapeSheet\Utilities\QueryHelpers.cs" />
     <Compile Include="ShapeSheet\Writers\FormulaWriterSIDSRC.cs" />
     <Compile Include="ShapeSheet\Writers\ResultWriterSRC.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
