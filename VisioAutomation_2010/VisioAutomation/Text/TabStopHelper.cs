@@ -46,7 +46,7 @@ namespace VisioAutomation.Text
 
             var stream = ShapeSheet.SRC.ToStream(srcs);
             var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNumber).ToList();
-            var results = QueryHelpers.GetResults_SRC<double>(surface, stream, unitcodes);
+            var results = surface.GetResults_SRC<double>(stream, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)

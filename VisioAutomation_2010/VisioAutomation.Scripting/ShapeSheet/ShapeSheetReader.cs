@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         public string[] GetFormulas()
         {
             var stream = StreamBuilderSIDSRC.CreateStream(this.SIDSRCs);
-            var formulas = QueryHelpers.GetFormulasU_SIDSRC(this.Surface, stream);
+            var formulas = this.Surface.GetFormulasU_SIDSRC(stream);
             return formulas;
         }
 
@@ -35,7 +35,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         {
             var stream = StreamBuilderSIDSRC.CreateStream(this.SIDSRCs);
             var unitcodes = new List<IVisio.VisUnitCodes> { IVisio.VisUnitCodes.visNoCast };
-            var formulas = QueryHelpers.GetResults_SIDSRC<string>(this.Surface, stream, unitcodes);
+            var formulas = this.Surface.GetResults_SIDSRC<string>(stream, unitcodes);
             return formulas;
         }
     }
