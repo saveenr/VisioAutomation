@@ -33,7 +33,7 @@ namespace VisioAutomation.ShapeSheet
             return string.Format("{0}({1},{2},{3})", nameof(SRC), this.Section, this.Row, this.Cell);
         }
 
-        public SRC CopyWithNewRow(short row)
+        public SRC CloneWithNewRow(short row)
         {
             // It's common to need to get a SRC that has a different row index.
             // This method make that very easy

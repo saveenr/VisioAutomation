@@ -251,8 +251,8 @@ namespace VisioAutomation.ShapeSheet.Queries
                 var shapeid = shapeids[i];
                 foreach (var col in this.Cells)
                 {
-                    var src = col.SRC;
-                    streamitem_list.Add(new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src.Section, src.Row, src.Cell));
+                    var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, col.SRC);
+                    streamitem_list.Add(sidsrc);
                 }
 
                 // And then the sections if any exist
@@ -265,10 +265,12 @@ namespace VisioAutomation.ShapeSheet.Queries
                         {
                             foreach (var col in section.SubQuery.Columns)
                             {
-                                streamitem_list.Add(new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid,
+                                var src = new VisioAutomation.ShapeSheet.SRC(
                                     (short)section.SubQuery.SectionIndex,
                                     (short)rowindex,
-                                    col.CellIndex));
+                                    col.CellIndex);
+                                var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
+                                streamitem_list.Add(sidsrc);
                             }
                         }
                     }
