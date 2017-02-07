@@ -5,7 +5,7 @@ namespace VisioAutomation.Drawing
     public class BezierCurve
     {
         public Point[] ControlPoints { get; private set; }
-        public int Degree { get; set; }
+        public int Degree { get; private set; }
 
         public BezierCurve(Point[] controlpoints, int degree)
         {
