@@ -42,7 +42,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         public Output<string> GetFormulas(ShapeSheetSurface surface)
         {
             var srcstream = this._build_src_stream(surface);
-            var values = surface.GetFormulasU_SRC(srcstream);
+            var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
             var cursor = 0;
             var subqueryinfo = this._safe_get_subquery_output_for_shape(shape_index);
@@ -55,7 +55,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             var srcstream = this._build_src_stream(surface);
             var unitcodes = this._build_unit_code_array(1);
-            var values = surface.GetResults_SRC<TResult>(srcstream, unitcodes);
+            var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var cursor = 0;
             var subqueryinfo = this._safe_get_subquery_output_for_shape(shape_index);
@@ -67,8 +67,8 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             var srcstream = this._build_src_stream(surface);
             var unitcodes = this._build_unit_code_array(1);
-            var formulas = surface.GetFormulasU_SRC(srcstream);
-            var results = surface.GetResults_SRC<string>(srcstream, unitcodes);
+            var formulas = surface.GetFormulasU(srcstream);
+            var results = surface.GetResults<string>(srcstream, unitcodes);
             var combined_data = CellData.Combine(formulas, results);
 
             var shape_index = 0;
@@ -82,7 +82,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         public ListOutput<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
-            var values = surface.GetFormulasU_SIDSRC(srcstream);
+            var values = surface.GetFormulasU(srcstream);
             var list = this._create_outputs_for_shapes(shapeids, values);
             return list;
         }
@@ -91,7 +91,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
-            var values = surface.GetResults_SIDSRC<TResult>(srcstream, unitcodes);
+            var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var list = this._create_outputs_for_shapes(shapeids, values);
             return list;
         }
@@ -100,8 +100,8 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
-            var results = surface.GetResults_SIDSRC<string>(srcstream, unitcodes);
-            var formulas  = surface.GetFormulasU_SIDSRC(srcstream);
+            var results = surface.GetResults<string>(srcstream, unitcodes);
+            var formulas  = surface.GetFormulasU(srcstream);
             var combined_data = CellData.Combine(formulas, results);
             var r = this._create_outputs_for_shapes(shapeids, combined_data);
             return r;
