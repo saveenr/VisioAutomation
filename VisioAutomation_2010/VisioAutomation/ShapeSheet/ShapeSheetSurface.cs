@@ -66,13 +66,10 @@ namespace VisioAutomation.ShapeSheet
 
         public TResult[] GetResults<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-
             if (stream.Length == 0)
             {
                 return new TResult[0];
             }
-
-            var surface = this;
 
             EnforceValidResultType(typeof(TResult));
 
@@ -82,17 +79,17 @@ namespace VisioAutomation.ShapeSheet
 
             System.Array results_sa = null;
 
-            if (surface.Target.Master != null)
+            if (this.Target.Master != null)
             {
-                surface.Target.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
-            else if (surface.Target.Page != null)
+            else if (this.Target.Page != null)
             {
-                surface.Target.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
-            else if (surface.Target.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                surface.Target.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
             else
             {
@@ -111,21 +108,19 @@ namespace VisioAutomation.ShapeSheet
                 return new string[0];
             }
 
-            var surface = this;
-
             System.Array formulas_sa = null;
 
-            if (surface.Target.Master != null)
+            if (this.Target.Master != null)
             {
-                surface.Target.Master.GetFormulasU(stream, out formulas_sa);
+                this.Target.Master.GetFormulasU(stream, out formulas_sa);
             }
-            else if (surface.Target.Page != null)
+            else if (this.Target.Page != null)
             {
-                surface.Target.Page.GetFormulasU(stream, out formulas_sa);
+                this.Target.Page.GetFormulasU(stream, out formulas_sa);
             }
-            else if (surface.Target.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                surface.Target.Shape.GetFormulasU(stream, out formulas_sa);
+                this.Target.Shape.GetFormulasU(stream, out formulas_sa);
             }
             else
             {
