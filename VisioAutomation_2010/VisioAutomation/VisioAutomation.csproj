@@ -128,7 +128,6 @@
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\ResultType.cs" />
     <Compile Include="ShapeSheet\Writers\ResultValue.cs" />
-    <Compile Include="ShapeSheet\Writers\WriterHelper.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />

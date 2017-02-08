@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.ShapeSheet.Writers
+﻿using System.Collections.Generic;
+
+namespace VisioAutomation.ShapeSheet.Writers
 {
     public class FormulaWriter : WriterBase<FormulaLiteral>
     {
@@ -33,38 +35,32 @@
             }
         }
 
-        public override void Commit(ShapeSheetSurface surface)
+        protected override void CommitSIDSRC(ShapeSheetSurface surface)
         {
-            this.CommitSRC(surface);
-            this.CommitSIDSRC(surface);            
-        }
-
-        protected void CommitSIDSRC(ShapeSheetSurface surface)
-        {
-            // Do nothing if there aren't any updates
-            if (this.SIDSRCCount < 1)
-            {
-                return;
-            }
-
             var stream = this.GetSIDSRCStream();
-            var formulas = WriterHelper.build_formulas_array(this.SIDSRC_Values);
+            var formulas = build_formulas_array(this.SIDSRC_Values);
             var flags = this.ComputeGetFormulaFlags();
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        protected void CommitSRC(ShapeSheetSurface surface)
+        protected override void CommitSRC(ShapeSheetSurface surface)
         {
-            // Do nothing if there aren't any updates
-            if (this.SRCCount < 1)
-            {
-                return;
-            }
-
             var stream = this.GetSRCStream();
-            var formulas = WriterHelper.build_formulas_array(this.SRC_Values);
+            var formulas = build_formulas_array(this.SRC_Values);
             var flags = this.ComputeGetFormulaFlags();
             int c = surface.SetFormulas(stream, formulas, (short)flags);
+        }
+
+        private static object[] build_formulas_array(IList<FormulaLiteral> formulas)
+        {
+            var result = new object[formulas.Count];
+            int i = 0;
+            foreach (var rec in formulas)
+            {
+                result[i] = rec.Value;
+                i++;
+            }
+            return result;
         }
     }
 }

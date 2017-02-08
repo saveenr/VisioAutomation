@@ -74,7 +74,21 @@ namespace VisioAutomation.ShapeSheet.Writers
             return (IVisio.VisGetSetArgs)flags;
         }
 
-        public abstract void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
+        public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
+        {
+            if (this.SRCCount > 0)
+            {
+                this.CommitSRC(surface);
+            }
+
+            if (this.SIDSRCCount > 0)
+            {
+                this.CommitSIDSRC(surface);
+            }
+        }
+
+        protected abstract void CommitSRC(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
+        protected abstract void CommitSIDSRC(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
 
         public int Count => this.SRC_Values.Count + this.SIDSRC_Values.Count;
 
