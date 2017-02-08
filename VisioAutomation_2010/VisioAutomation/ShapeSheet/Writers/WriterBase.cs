@@ -71,7 +71,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public int Count
         {
-            get { return this.SRC_ValueItems.Count; }
+            get { return this.SRC_ValueItems.Count + this.SIDSRC_ValueItems.Count; }
         }
 
     }
