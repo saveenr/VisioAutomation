@@ -63,7 +63,9 @@ namespace VisioAutomation.Shapes.Hyperlinks
 
             var writer = new FormulaWriterSRC();
             hyperlink.SetFormulas(writer, row);
-            writer.Commit(shape);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
 
             return row;
         }

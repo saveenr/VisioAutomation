@@ -89,7 +89,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 writer.SetFormula(src, prompt.Encode());
             }
 
-            writer.Commit(shape);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
         }
 
         /// <summary>

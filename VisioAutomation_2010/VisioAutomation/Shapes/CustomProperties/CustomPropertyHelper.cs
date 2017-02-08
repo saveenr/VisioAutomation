@@ -35,7 +35,9 @@ namespace VisioAutomation.Shapes.CustomProperties
 
                 var writer = new FormulaWriterSRC();
                 cp.SetFormulas(writer, cell_propname.Row);
-                writer.Commit(shape);
+
+                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+                writer.Commit(surface);
 
                 return;
 
@@ -58,7 +60,9 @@ namespace VisioAutomation.Shapes.CustomProperties
 
             var writer = new FormulaWriterSRC();
             cp.SetFormulas(writer, row);
-            writer.Commit(shape);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
         }
 
         /// <summary>

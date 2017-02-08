@@ -63,7 +63,9 @@ namespace VisioAutomation.Shapes.Geometry
                 row_count++;
             }
 
-            writer.Commit(shape);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
+
             return 0;
         }
 

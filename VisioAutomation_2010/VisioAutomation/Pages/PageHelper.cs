@@ -168,7 +168,9 @@ namespace VisioAutomation.Pages
             {
                 writer.SetFormula(page_srcs[i],src_formulas.Cells[i]);
             }
-            writer.Commit(dest_page.PageSheet);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(dest_page.PageSheet);
+            writer.Commit(surface);
 
             // make sure the new page looks like the old page
             dest_page.Background = src_page.Background;
@@ -275,7 +277,9 @@ namespace VisioAutomation.Pages
             var writer = new FormulaWriterSRC();
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
-            writer.Commit(page.PageSheet);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page.PageSheet);
+            writer.Commit(surface);
         }
         
         public static void ResizeToFitContents(IVisio.Page page, Drawing.Size padding)

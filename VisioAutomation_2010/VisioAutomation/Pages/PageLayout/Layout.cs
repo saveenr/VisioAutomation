@@ -148,7 +148,9 @@ namespace VisioAutomation.Pages.PageLayout
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PlaceStyle, pagecells.PlaceStyle);
 
             var pagesheet = page.PageSheet;
-            writer.Commit(pagesheet);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(pagesheet);
+            writer.Commit(surface);
             page.Layout();
         }
     }

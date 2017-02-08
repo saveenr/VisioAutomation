@@ -64,23 +64,6 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             this._commit_to_surface(surface);
         }
-        public void Commit(IVisio.Shape shape)
-        {
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
-            this._commit_to_surface(surface);                
-        }
-
-        public void Commit(IVisio.Page page)
-        {
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            this._commit_to_surface(surface);
-        }
-
-        public void Commit(IVisio.Master master)
-        {
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(master);
-            this._commit_to_surface(surface);
-        }
 
         public int Count
         {

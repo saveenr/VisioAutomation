@@ -54,7 +54,9 @@ namespace VisioAutomation.Shapes.Controls
 
             var writer = new FormulaWriterSRC();
             ctrl.SetFormulas(writer, row);
-            writer.Commit(shape);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
 
             return row;
         }

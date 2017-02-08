@@ -32,7 +32,9 @@ namespace VisioAutomation.Shapes.ConnectionPoints
 
             var writer = new FormulaWriterSRC();
             connection_point_cells.SetFormulas(writer,n);
-            writer.Commit(shape);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
 
             return n;
         }

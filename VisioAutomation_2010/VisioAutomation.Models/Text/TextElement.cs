@@ -182,7 +182,9 @@ namespace VisioAutomation.Models.Text
 
                     writer.Clear();
                     charcells.ApplyFormulas(writer, rownum);
-                    writer.Commit(shape);
+
+                    var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+                    writer.Commit(surface);
                 }
 
                 // Apply paragraph formatting
@@ -202,7 +204,9 @@ namespace VisioAutomation.Models.Text
 
                     writer.Clear();
                     paracells.ApplyFormulas(writer, rownum);
-                    writer.Commit(shape);
+
+                    var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+                    writer.Commit(surface);
                 }
             }
 

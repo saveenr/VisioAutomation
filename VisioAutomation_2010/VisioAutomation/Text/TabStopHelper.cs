@@ -105,7 +105,8 @@ namespace VisioAutomation.Text
                 writer.SetFormula(src_tabother, "0"); // tab unknown
             }
 
-            writer.Commit(shape);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
         }
 
         private static IVisio.VisRowTags GetTabTagForStops(int stops)
@@ -180,7 +181,8 @@ namespace VisioAutomation.Text
                 writer.SetFormula(src, formula);
             }
 
-            writer.Commit(shape);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
         }
 
     }
