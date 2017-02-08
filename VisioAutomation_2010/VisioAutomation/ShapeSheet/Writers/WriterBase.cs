@@ -74,27 +74,29 @@ namespace VisioAutomation.ShapeSheet.Writers
             return (IVisio.VisGetSetArgs)flags;
         }
 
-        protected abstract void _commit_to_surface(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
+        public abstract void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
 
-        public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
-        {
-            this._commit_to_surface(surface);
-        }
-
-        public int Count
-        {
-            get { return this.SRC_Values.Count + this.SIDSRC_Values.Count; }
-        }
+        public int Count => this.SRC_Values.Count + this.SIDSRC_Values.Count;
 
         protected short[] GetSIDSRCStream()
         {
             var stream = SIDSRC.ToStream(this.SIDSRCs);
+            if (stream.Length != this.SIDSRCCount*4)
+            {
+                throw new System.ArgumentException();
+            }
+
             return stream;
         }
 
         protected short[] GetSRCStream()
         {
             var stream = SRC.ToStream(this.SRCs);
+            if (stream.Length != this.SRCCount * 3)
+            {
+                throw new System.ArgumentException();
+            }
+
             return stream;
         }
 

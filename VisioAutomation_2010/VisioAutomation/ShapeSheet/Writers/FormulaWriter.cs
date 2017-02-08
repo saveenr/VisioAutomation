@@ -33,7 +33,7 @@
             }
         }
 
-        protected override void _commit_to_surface(ShapeSheetSurface surface)
+        public override void Commit(ShapeSheetSurface surface)
         {
             this.SRC_commit_to_surface(surface);
             this.SIDSRC_commit_to_surface(surface);            
