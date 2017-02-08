@@ -16,13 +16,15 @@ namespace VisioAutomation.ShapeSheet.Writers
         public void SetResult(SRC src, string value, IVisio.VisUnitCodes unitcode)
         {
             this.StreamItems.Add(src);
-            this.ValueItems.Add( new ResultValue(value,unitcode));
+            var value_item = new ResultValue(value,unitcode);
+            this.ValueItems.Add( value_item);
         }
 
         public void SetResult(SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
             this.StreamItems.Add(src);
-            this.ValueItems.Add(new ResultValue(value, unitcode));
+            var value_item = new ResultValue(value, unitcode);
+            this.ValueItems.Add(value_item);
         }
 
         protected override void _commit_to_surface(ShapeSheetSurface surface)
