@@ -6,10 +6,6 @@
         {
         }
 
-        public FormulaWriter(int capacity) : base( capacity )
-        {
-        }
-
         public void SetFormula(SRC src, FormulaLiteral formula)
         {
             if (formula.HasValue)

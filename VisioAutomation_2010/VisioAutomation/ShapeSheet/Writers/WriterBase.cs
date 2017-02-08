@@ -22,7 +22,6 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             this.SIDSRC_StreamItems.Clear();
             this.SIDSRC_ValueItems.Clear();
-
         }
 
         protected WriterBaseEx()
@@ -32,17 +31,6 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             this.SIDSRC_StreamItems = new List<SIDSRC>();
             this.SIDSRC_ValueItems = new List<TValue>();
-
-        }
-
-        protected WriterBaseEx(int capacity)
-        {
-            this.SRC_StreamItems = new List<SRC>(capacity);
-            this.SRC_ValueItems = new List<TValue>(capacity);
-
-            this.SIDSRC_StreamItems = new List<SIDSRC>(capacity);
-            this.SIDSRC_ValueItems = new List<TValue>(capacity);
-
         }
 
         protected IVisio.VisGetSetArgs ComputeGetResultFlags(ResultType rt)

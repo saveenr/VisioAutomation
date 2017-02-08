@@ -8,10 +8,6 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
         }
 
-        public ResultWriter(int capacity) : base(capacity)
-        {
-        }
-
         public void SetResult(SRC src, string value, IVisio.VisUnitCodes unitcode)
         {
             this.SRC_StreamItems.Add(src);
