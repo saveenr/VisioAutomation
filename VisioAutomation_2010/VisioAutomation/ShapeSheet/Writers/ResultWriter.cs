@@ -10,16 +10,15 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetResult(SRC src, string value, IVisio.VisUnitCodes unitcode)
         {
-            this.SRC_StreamItems.Add(src);
-            var value_item = new ResultValue(value,unitcode);
-            this.SRC_ValueItems.Add( value_item);
+            var value_item = new ResultValue(value, unitcode);
+            this.Add(src,value_item);
         }
 
         public void SetResult(SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
-            this.SRC_StreamItems.Add(src);
             var value_item = new ResultValue(value, unitcode);
-            this.SRC_ValueItems.Add(value_item);
+
+            this.Add(src,value_item);
         }
 
         public void SetResult(SIDSRC sidsrc, double value, IVisio.VisUnitCodes unitcode)
@@ -36,8 +35,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetResult(SIDSRC sidsrc, ResultValue v)
         {
-            this.SIDSRC_StreamItems.Add(sidsrc);
-            this.SIDSRC_ValueItems.Add(v);
+            this.Add(sidsrc,v);
         }
 
         protected override void _commit_to_surface(ShapeSheetSurface surface)
@@ -49,16 +47,15 @@ namespace VisioAutomation.ShapeSheet.Writers
         private void SIDSRC_commit_to_surface(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
-            if (this.SIDSRC_ValueItems.Count < 1)
+            if (this.SIDSRCCount < 1)
             {
                 return;
             }
 
-            var stream = SIDSRC.ToStream(this.SIDSRC_StreamItems);
-
-            var unitcodes = WriterHelper.build_results_arrays_unitcode(this.SIDSRC_ValueItems);
-            var results = WriterHelper.build_results_arrays_results(this.SIDSRC_ValueItems);
-            var flags = this.ComputeGetResultFlags(this.SIDSRC_ValueItems[0].ResultType);
+            var stream = this.GetSIDSRCStream();
+            var unitcodes = WriterHelper.build_results_arrays_unitcode(this.SIDSRC_Values);
+            var results = WriterHelper.build_results_arrays_results(this.SIDSRC_Values);
+            var flags = this.ComputeGetResultFlags(this.SIDSRC_Values[0].ResultType);
 
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }
@@ -66,16 +63,15 @@ namespace VisioAutomation.ShapeSheet.Writers
         private void SRC_commit_to_surface(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
-            if (this.SRC_ValueItems.Count < 1)
+            if (this.SRCCount < 1)
             {
                 return;
             }
 
-            var stream = SRC.ToStream(this.SRC_StreamItems);
-
-            var unitcodes = WriterHelper.build_results_arrays_unitcode(this.SRC_ValueItems);
-            var results = WriterHelper.build_results_arrays_results(this.SRC_ValueItems);
-            var flags = this.ComputeGetResultFlags(this.SRC_ValueItems[0].ResultType);
+            var stream = this.GetSRCStream();
+            var unitcodes = WriterHelper.build_results_arrays_unitcode(this.SRC_Values);
+            var results = WriterHelper.build_results_arrays_results(this.SRC_Values);
+            var flags = this.ComputeGetResultFlags(this.SRC_Values[0].ResultType);
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }
     }

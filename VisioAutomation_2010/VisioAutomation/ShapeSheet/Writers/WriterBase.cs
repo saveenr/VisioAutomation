@@ -9,28 +9,40 @@ namespace VisioAutomation.ShapeSheet.Writers
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        public readonly List<SRC> SRC_StreamItems;
-        public readonly List<TValue> SRC_ValueItems;
+        protected readonly List<SRC> SRCs;
+        protected readonly List<TValue> SRC_Values;
 
-        public readonly List<SIDSRC> SIDSRC_StreamItems;
-        public readonly List<TValue> SIDSRC_ValueItems;
+        protected readonly List<SIDSRC> SIDSRCs;
+        protected readonly List<TValue> SIDSRC_Values;
 
         public void Clear()
         {
-            this.SRC_StreamItems.Clear();
-            this.SRC_ValueItems.Clear();
+            this.SRCs.Clear();
+            this.SRC_Values.Clear();
 
-            this.SIDSRC_StreamItems.Clear();
-            this.SIDSRC_ValueItems.Clear();
+            this.SIDSRCs.Clear();
+            this.SIDSRC_Values.Clear();
+        }
+
+        protected void Add(SRC src, TValue value)
+        {
+            this.SRCs.Add(src);
+            this.SRC_Values.Add(value);
+        }
+
+        protected void Add(SIDSRC sidsrc, TValue value)
+        {
+            this.SIDSRCs.Add(sidsrc);
+            this.SIDSRC_Values.Add(value);
         }
 
         protected WriterBase()
         {
-            this.SRC_StreamItems = new List<SRC>();
-            this.SRC_ValueItems = new List<TValue>();
+            this.SRCs = new List<SRC>();
+            this.SRC_Values = new List<TValue>();
 
-            this.SIDSRC_StreamItems = new List<SIDSRC>();
-            this.SIDSRC_ValueItems = new List<TValue>();
+            this.SIDSRCs = new List<SIDSRC>();
+            this.SIDSRC_Values = new List<TValue>();
         }
 
         protected IVisio.VisGetSetArgs ComputeGetResultFlags(ResultType rt)
@@ -71,8 +83,23 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public int Count
         {
-            get { return this.SRC_ValueItems.Count + this.SIDSRC_ValueItems.Count; }
+            get { return this.SRC_Values.Count + this.SIDSRC_Values.Count; }
         }
+
+        protected short[] GetSIDSRCStream()
+        {
+            var stream = SIDSRC.ToStream(this.SIDSRCs);
+            return stream;
+        }
+
+        protected short[] GetSRCStream()
+        {
+            var stream = SRC.ToStream(this.SRCs);
+            return stream;
+        }
+
+        protected int SIDSRCCount => this.SIDSRCs.Count;
+        protected int SRCCount => this.SRCs.Count;
 
     }
 }
