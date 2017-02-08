@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class FormulaWriter : WriterBaseEx<FormulaLiteral>
+    public class FormulaWriter : WriterBase<FormulaLiteral>
     {
         public FormulaWriter() :base()
         {

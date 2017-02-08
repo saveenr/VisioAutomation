@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioAutomation.ShapeSheet.Writers
 {
 
-    public abstract class WriterBaseEx<TValue>
+    public abstract class WriterBase<TValue>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
@@ -24,7 +24,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.SIDSRC_ValueItems.Clear();
         }
 
-        protected WriterBaseEx()
+        protected WriterBase()
         {
             this.SRC_StreamItems = new List<SRC>();
             this.SRC_ValueItems = new List<TValue>();
