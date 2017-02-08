@@ -53,8 +53,8 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
 
             var stream = this.GetSIDSRCStream();
-            var unitcodes = WriterHelper.build_results_arrays_unitcode(this.SIDSRC_Values);
-            var results = WriterHelper.build_results_arrays_results(this.SIDSRC_Values);
+            var unitcodes = WriterHelper.build_unitcode_array(this.SIDSRC_Values);
+            var results = WriterHelper.build_results_array(this.SIDSRC_Values);
             var flags = this.ComputeGetResultFlags(this.SIDSRC_Values[0].ResultType);
 
             surface.SetResults(stream, unitcodes, results, (short)flags);
@@ -69,8 +69,8 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
 
             var stream = this.GetSRCStream();
-            var unitcodes = WriterHelper.build_results_arrays_unitcode(this.SRC_Values);
-            var results = WriterHelper.build_results_arrays_results(this.SRC_Values);
+            var unitcodes = WriterHelper.build_unitcode_array(this.SRC_Values);
+            var results = WriterHelper.build_results_array(this.SRC_Values);
             var flags = this.ComputeGetResultFlags(this.SRC_Values[0].ResultType);
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }

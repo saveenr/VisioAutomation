@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             return result;
         }
 
-        public static object[] build_results_arrays_unitcode(IList<ResultValue> result_values)
+        public static object[] build_unitcode_array(IList<ResultValue> result_values)
         {
             var unitcodes = new object[result_values.Count];
             int i = 0;
@@ -28,7 +28,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             return unitcodes;
         }
 
-        public static object[] build_results_arrays_results(IList<ResultValue> result_values)
+        public static object[] build_results_array(IList<ResultValue> result_values)
         {
             var results = new object[result_values.Count];
             int i = 0;
