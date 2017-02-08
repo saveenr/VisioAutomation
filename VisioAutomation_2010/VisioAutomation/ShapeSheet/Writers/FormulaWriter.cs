@@ -35,11 +35,11 @@
 
         public override void Commit(ShapeSheetSurface surface)
         {
-            this.SRC_commit_to_surface(surface);
-            this.SIDSRC_commit_to_surface(surface);            
+            this.CommitSRC(surface);
+            this.CommitSIDSRC(surface);            
         }
 
-        protected void SIDSRC_commit_to_surface(ShapeSheetSurface surface)
+        protected void CommitSIDSRC(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
             if (this.SIDSRCCount < 1)
@@ -53,7 +53,7 @@
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        protected void SRC_commit_to_surface(ShapeSheetSurface surface)
+        protected void CommitSRC(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
             if (this.SRCCount < 1)

@@ -34,11 +34,11 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public override void Commit(ShapeSheetSurface surface)
         {
-            this.SRC_commit_to_surface(surface);
-            this.SIDSRC_commit_to_surface(surface);
+            this.CommitSRC(surface);
+            this.CommitSIDSRC(surface);
         }
 
-        private void SIDSRC_commit_to_surface(ShapeSheetSurface surface)
+        private void CommitSIDSRC(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
             if (this.SIDSRCCount < 1)
@@ -54,7 +54,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }
 
-        private void SRC_commit_to_surface(ShapeSheetSurface surface)
+        private void CommitSRC(ShapeSheetSurface surface)
         {
             // Do nothing if there aren't any updates
             if (this.SRCCount < 1)
