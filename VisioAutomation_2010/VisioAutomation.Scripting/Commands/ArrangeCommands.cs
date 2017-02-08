@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var page = this._client.Page.Get();
             var target_shapeids = targets.ToShapeIDs();
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriter();
 
             foreach (int shapeid in target_shapeids.ShapeIDs)
             {
@@ -95,7 +95,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = this._client.Page.Get();
             var shapeids = targets.ToShapeIDs();
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriter();
             foreach (int shapeid in shapeids.ShapeIDs)
             {
                 if (w.HasValue && w.Value>=0)

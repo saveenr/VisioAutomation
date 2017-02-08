@@ -44,7 +44,7 @@ namespace VisioPowerShell.Commands
                     newpagecells.PageHeight = this.Height;
                 }
 
-                var writer = new FormulaWriterSRC();
+                var writer = new FormulaWriter();
                 newpagecells.SetFormulas(writer);
                 writer.BlastGuards = true;
 
