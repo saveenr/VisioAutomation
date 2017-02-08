@@ -70,15 +70,15 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._commit_to_surface(surface);                
         }
 
-        public void Commit(IVisio.Page shape)
+        public void Commit(IVisio.Page page)
         {
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
             this._commit_to_surface(surface);
         }
 
-        public void Commit(IVisio.Master shape)
+        public void Commit(IVisio.Master master)
         {
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(master);
             this._commit_to_surface(surface);
         }
 
