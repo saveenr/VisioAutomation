@@ -73,7 +73,7 @@ namespace VisioAutomation.Models.Dom
                     this.PageCells.PageWidth = this.Size.Value.Width;
                 }
 
-                var writer = new FormulaWriterSIDSRC();
+                var writer = new FormulaWriter();
                 this.PageCells.SetFormulas((short)page_sheet.ID, writer);
                 var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
                 writer.Commit(surface);

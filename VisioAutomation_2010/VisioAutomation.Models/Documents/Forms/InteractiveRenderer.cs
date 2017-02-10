@@ -30,7 +30,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
             // Update the Page Cells
             var pagesheet = this._page.PageSheet;
-            var pagewriter = new FormulaWriterSRC();
+            var pagewriter = new FormulaWriter();
 
             var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;
@@ -96,7 +96,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Finish()
         {
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriter();
             foreach (var block in this.Blocks)
             {
                 block.FormatCells.SetFormulas((short)block.VisioShapeID,writer);

@@ -3,30 +3,46 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public abstract class WriterBase<TStreamType, TValue>
+
+    public abstract class WriterBase<TValue>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        public readonly List<TStreamType> StreamItems;
-        public readonly List<TValue> ValueItems;
+        protected readonly List<SRC> SRCs;
+        protected readonly List<TValue> SRC_Values;
+
+        protected readonly List<SIDSRC> SIDSRCs;
+        protected readonly List<TValue> SIDSRC_Values;
 
         public void Clear()
         {
-            this.StreamItems.Clear();
-            this.ValueItems.Clear();
+            this.SRCs.Clear();
+            this.SRC_Values.Clear();
+
+            this.SIDSRCs.Clear();
+            this.SIDSRC_Values.Clear();
+        }
+
+        protected void Add(SRC src, TValue value)
+        {
+            this.SRCs.Add(src);
+            this.SRC_Values.Add(value);
+        }
+
+        protected void Add(SIDSRC sidsrc, TValue value)
+        {
+            this.SIDSRCs.Add(sidsrc);
+            this.SIDSRC_Values.Add(value);
         }
 
         protected WriterBase()
         {
-            this.StreamItems = new List<TStreamType>();
-            this.ValueItems = new List<TValue>();
-        }
+            this.SRCs = new List<SRC>();
+            this.SRC_Values = new List<TValue>();
 
-        protected WriterBase(int capacity)
-        {
-            this.StreamItems = new List<TStreamType>(capacity);
-            this.ValueItems = new List<TValue>(capacity);
+            this.SIDSRCs = new List<SIDSRC>();
+            this.SIDSRC_Values = new List<TValue>();
         }
 
         protected IVisio.VisGetSetArgs ComputeGetResultFlags(ResultType rt)
@@ -58,17 +74,48 @@ namespace VisioAutomation.ShapeSheet.Writers
             return (IVisio.VisGetSetArgs)flags;
         }
 
-        protected abstract void _commit_to_surface(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
-
         public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            this._commit_to_surface(surface);
+            if (this.SRCCount > 0)
+            {
+                this.CommitSRC(surface);
+            }
+
+            if (this.SIDSRCCount > 0)
+            {
+                this.CommitSIDSRC(surface);
+            }
         }
 
-        public int Count
+        protected abstract void CommitSRC(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
+        protected abstract void CommitSIDSRC(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
+
+        public int Count => this.SRC_Values.Count + this.SIDSRC_Values.Count;
+
+        protected short[] GetSIDSRCStream()
         {
-            get { return this.ValueItems.Count; }
+            var stream = SIDSRC.ToStream(this.SIDSRCs);
+            if (stream.Length != this.SIDSRCCount*4)
+            {
+                throw new System.ArgumentException();
+            }
+
+            return stream;
         }
+
+        protected short[] GetSRCStream()
+        {
+            var stream = SRC.ToStream(this.SRCs);
+            if (stream.Length != this.SRCCount * 3)
+            {
+                throw new System.ArgumentException();
+            }
+
+            return stream;
+        }
+
+        protected int SIDSRCCount => this.SIDSRCs.Count;
+        protected int SRCCount => this.SRCs.Count;
 
     }
 }

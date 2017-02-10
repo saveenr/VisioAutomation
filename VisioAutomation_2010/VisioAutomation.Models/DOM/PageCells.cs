@@ -33,7 +33,7 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.FormulaLiteral ResizePage { get; set; }
         public ShapeSheet.FormulaLiteral RouteStyle { get; set; }
 
-        public void Apply(FormulaWriterSIDSRC writer, short id)
+        public void Apply(FormulaWriter writer, short id)
         {
             writer.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeX, this.AvenueSizeX);
             writer.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeY, this.AvenueSizeY);

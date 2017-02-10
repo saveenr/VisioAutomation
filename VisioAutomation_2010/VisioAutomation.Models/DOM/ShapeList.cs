@@ -116,7 +116,7 @@ namespace VisioAutomation.Models.Dom
         {
             this.UpdateCellsWithDropSizes(context);
 
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new FormulaWriter();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {
