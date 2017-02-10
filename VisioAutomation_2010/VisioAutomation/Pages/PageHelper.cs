@@ -163,7 +163,7 @@ namespace VisioAutomation.Pages
 
             // Set the Cells on the Destination
            
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             for (i = 0; i < page_srcs.Count; i++)
             {
                 writer.SetFormula(page_srcs[i],src_formulas.Cells[i]);
@@ -274,7 +274,7 @@ namespace VisioAutomation.Pages
 
         private static void SetSize(IVisio.Page page, Drawing.Size size)
         {
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
 

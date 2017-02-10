@@ -2,7 +2,7 @@
 {
     public class ShapeSheetWriter
     {
-        internal readonly VisioAutomation.ShapeSheet.Writers.FormulaWriter formula_writer;
+        internal readonly VisioAutomation.ShapeSheet.Writers.ShapeSheetWriter writer;
         public Client Client;
         public VisioAutomation.ShapeSheet.ShapeSheetSurface Surface;
         public bool BlastGuards;
@@ -12,22 +12,22 @@
         {
             this.Client = client;
             this.Surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            this.formula_writer = new VisioAutomation.ShapeSheet.Writers.FormulaWriter();
+            this.writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriter();
         }
 
         public void SetFormula(short id, VisioAutomation.ShapeSheet.SRC src, string formula)
         {
             var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC(id, src);
-            this.formula_writer.SetFormula(sidsrc, formula);
+            this.writer.SetFormula(sidsrc, formula);
         }
 
         public void Commit()
         {
             using (var undoscope = this.Client.Application.NewUndoScope("Modify ShapeSheet"))
             {
-                this.formula_writer.BlastGuards = this.BlastGuards;
-                this.formula_writer.TestCircular = this.TestCircular;
-                this.formula_writer.Commit(this.Surface);
+                this.writer.BlastGuards = this.BlastGuards;
+                this.writer.TestCircular = this.TestCircular;
+                this.writer.Commit(this.Surface);
             }
         }
     }

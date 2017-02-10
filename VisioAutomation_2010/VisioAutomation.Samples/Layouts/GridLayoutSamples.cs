@@ -47,7 +47,7 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Shapes.ShapeFormatCells();
             int i = 0;
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;

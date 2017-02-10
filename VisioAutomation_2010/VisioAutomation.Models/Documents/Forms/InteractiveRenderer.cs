@@ -30,7 +30,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
             // Update the Page Cells
             var pagesheet = this._page.PageSheet;
-            var pagewriter = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
 
             var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;
@@ -39,10 +39,10 @@ namespace VisioAutomation.Models.Documents.Forms
             pagecells.PageRightMargin = formpage.Margin.Right;
             pagecells.PageTopMargin = formpage.Margin.Top;
             pagecells.PageBottomMargin = formpage.Margin.Bottom;
-            pagecells.SetFormulas(pagewriter);
+            pagecells.SetFormulas(writer);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(pagesheet);
-            pagewriter.Commit(surface);
+            writer.Commit(surface);
 
             this.Reset();
             return this._page;
@@ -96,7 +96,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Finish()
         {
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             foreach (var block in this.Blocks)
             {
                 block.FormatCells.SetFormulas((short)block.VisioShapeID,writer);
