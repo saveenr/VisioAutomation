@@ -36,64 +36,42 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        protected override void CommitSIDSRC(ShapeSheetSurface surface)
+        protected override void CommitRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var coord_type = CoordType.SIDSRC;
-            var sidsrc_records = this.GetRecords(coord_type);
-            var count = sidsrc_records.Count();
+            var records = this.GetRecords(coord_type);
+            var count = records.Count();
 
             if (count == 0)
             {
                 return;
             }
 
-            var stream = new short[count * 4];
-            var formulas = new object[count];
+            int chunksize = coord_type == CoordType.SIDSRC ? 4 : 3;
 
-            int streampos = 0;
-            int formulapos= 0;
-
-            foreach (var rec in sidsrc_records)
-            {
-                // fill stream
-                var sidsrc = rec.Sidsrc;
-                stream[streampos++] = sidsrc.ShapeID;
-                stream[streampos++] = sidsrc.Section;
-                stream[streampos++] = sidsrc.Row;
-                stream[streampos++] = sidsrc.Cell;
-
-                // fill formulas
-                formulas[formulapos++] = rec.Value.Value;
-            }
-
-            var flags = this.ComputeGetFormulaFlags();
-            int c = surface.SetFormulas(stream, formulas, (short)flags);
-        }
-
-        protected override void CommitSRC(ShapeSheetSurface surface)
-        {
-            var coord_type = CoordType.SRC;
-            var srcrecords = this.GetRecords( coord_type);
-            var count = srcrecords.Count();
-
-            if (count == 0)
-            {
-                return;
-            }
-
-            var stream = new short[count * 3];
+            var stream = new short[count * chunksize];
             var formulas = new object[count];
 
             int streampos = 0;
             int formulapos = 0;
 
-            foreach (var rec in srcrecords)
+            foreach (var rec in records)
             {
                 // fill stream
-                var src = rec.SRC;
-                stream[streampos++] = src.Section;
-                stream[streampos++] = src.Row;
-                stream[streampos++] = src.Cell;
+                if (coord_type == CoordType.SRC)
+                {
+                    var src = rec.SRC;
+                    stream[streampos++] = src.Section;
+                    stream[streampos++] = src.Row;
+                    stream[streampos++] = src.Cell;
+                }
+                else
+                {
+                    var sidsrc = rec.Sidsrc;
+                    stream[streampos++] = sidsrc.ShapeID;
+                    stream[streampos++] = sidsrc.Section;
+                    stream[streampos++] = sidsrc.Row;
+                    stream[streampos++] = sidsrc.Cell;
+                }
 
                 // fill formulas
                 formulas[formulapos++] = rec.Value.Value;

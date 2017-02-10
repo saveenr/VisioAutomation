@@ -235,12 +235,11 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            this.CommitSRC(surface);
-            this.CommitSIDSRC(surface);
+            this.CommitRecordsByType(surface, CoordType.SRC);
+            this.CommitRecordsByType(surface, CoordType.SIDSRC);
         }
 
-        protected abstract void CommitSRC(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
-        protected abstract void CommitSIDSRC(VisioAutomation.ShapeSheet.ShapeSheetSurface surface);
+        protected abstract void CommitRecordsByType(VisioAutomation.ShapeSheet.ShapeSheetSurface surface, CoordType coord_type);
 
         public int Count => this.Records.Count;
 
