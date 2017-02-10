@@ -127,7 +127,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("BlastGuards: {0}", blast_guards);
             this._client.WriteVerbose("TestCircular: {0}", test_circular);
             this._client.WriteVerbose("Number of Shapes : {0}", targets.ShapeIDs.Count);
-            this._client.WriteVerbose("Number of Total Updates: {0}", writer.Count);
+            this._client.WriteVerbose("Number of Total Updates: {0}", writer.FormulaCount);
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Cells"))
             {
@@ -168,7 +168,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("BlastGuards: {0}", blast_guards);
             this._client.WriteVerbose("TestCircular: {0}", test_circular);
             this._client.WriteVerbose("Number of Shapes : {0}", targets.ShapeIDs.Count);
-            this._client.WriteVerbose("Number of Total Updates: {0}", writer.Count);
+            this._client.WriteVerbose("Number of Total Updates: {0}", writer.FormulaCount);
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Cells"))
             {
