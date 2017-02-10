@@ -244,14 +244,9 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public int Count => this.Records.Count;
 
-        protected IEnumerable<WriteRec<TValue>> GetSIDSRCRecords()
+        protected IEnumerable<WriteRec<TValue>> GetRecords(CoordType type)
         {
-            return this.Records.Where(i => i.Type == CoordType.SIDSRC);
-        }
-
-        protected IEnumerable<WriteRec<TValue>> GetSRCRecords()
-        {
-            return this.Records.Where(i => i.Type == CoordType.SRC);
+            return this.Records.Where(i => i.Type == type);
         }
     }
 }

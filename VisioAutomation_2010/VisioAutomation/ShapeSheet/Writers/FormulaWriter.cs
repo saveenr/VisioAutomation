@@ -38,7 +38,8 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         protected override void CommitSIDSRC(ShapeSheetSurface surface)
         {
-            var sidsrc_records = this.GetSIDSRCRecords();
+            var coord_type = CoordType.SIDSRC;
+            var sidsrc_records = this.GetRecords(coord_type);
             var count = sidsrc_records.Count();
 
             if (count == 0)
@@ -71,7 +72,8 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         protected override void CommitSRC(ShapeSheetSurface surface)
         {
-            var srcrecords = this.GetSRCRecords();
+            var coord_type = CoordType.SRC;
+            var srcrecords = this.GetRecords( coord_type);
             var count = srcrecords.Count();
 
             if (count == 0)
