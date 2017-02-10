@@ -40,6 +40,12 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             var sidsrc_records = this.GetSIDSRCRecords();
             var count = sidsrc_records.Count();
+
+            if (count == 0)
+            {
+                return;
+            }
+
             var stream = new short[count * 4];
             var formulas = new object[count];
 
@@ -56,7 +62,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 stream[streampos++] = sidsrc.Cell;
 
                 // fill formulas
-                formulas[formulapos++] = rec.Value;
+                formulas[formulapos++] = rec.Value.Value;
             }
 
             var flags = this.ComputeGetFormulaFlags();
@@ -67,6 +73,12 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             var srcrecords = this.GetSRCRecords();
             var count = srcrecords.Count();
+
+            if (count == 0)
+            {
+                return;
+            }
+
             var stream = new short[count * 3];
             var formulas = new object[count];
 
@@ -82,7 +94,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 stream[streampos++] = src.Cell;
 
                 // fill formulas
-                formulas[formulapos++] = rec.Value;
+                formulas[formulapos++] = rec.Value.Value;
             }
 
             var flags = this.ComputeGetFormulaFlags();
