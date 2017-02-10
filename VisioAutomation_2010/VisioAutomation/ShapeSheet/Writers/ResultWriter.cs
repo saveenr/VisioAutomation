@@ -4,7 +4,7 @@ using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class ResultWriter : XWriterBase<ResultValue>
+    public class ResultWriter : WriterBase<ResultValue>
     {
         public ResultWriter() : base()
         {

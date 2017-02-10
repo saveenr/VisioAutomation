@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class FormulaWriter : XWriterBase<FormulaLiteral>
+    public class FormulaWriter : WriterBase<FormulaLiteral>
     {
         public FormulaWriter() :base()
         {
