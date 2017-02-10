@@ -2,28 +2,29 @@ namespace VisioAutomation.ShapeSheet.Writers
 {
     public struct WriteRecord<TValue>
     {
-        private readonly SIDSRC SIDSRC;
-        public readonly SRC SRC;
+        private readonly SIDSRC _SIDSRC;
+        private readonly SRC _SRC;
+
         public readonly TValue Value;
         public readonly CoordType Type;
 
         public WriteRecord(SIDSRC sidsrc, TValue value)
         {
-            this.SIDSRC = sidsrc;
-            this.SRC = new SRC();
+            this._SIDSRC = sidsrc;
+            this._SRC = new SRC();
             this.Value = value;
             this.Type = CoordType.SIDSRC;
         }
 
         public WriteRecord(SRC src, TValue value)
         {
-            this.SIDSRC = new SIDSRC();
-            this.SRC = src;
+            this._SIDSRC = new SIDSRC();
+            this._SRC = src;
             this.Value = value;
             this.Type = CoordType.SRC;
         }
 
-        public SIDSRC Sidsrc
+        public SIDSRC SIDSRC
         {
             get
             {
@@ -31,11 +32,11 @@ namespace VisioAutomation.ShapeSheet.Writers
                 {
                     throw new System.ArgumentException();
                 }
-                return SIDSRC;
+                return _SIDSRC;
             }
         }
 
-        public SRC Src
+        public SRC SRC
         {
             get
             {
@@ -43,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 {
                     throw new System.ArgumentException();
                 }
-                return SRC;
+                return _SRC;
             }
         }
     }

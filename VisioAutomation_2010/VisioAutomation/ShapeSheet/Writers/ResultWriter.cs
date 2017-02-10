@@ -66,7 +66,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 }
                 else
                 {
-                    var sidsrc = rec.Sidsrc;
+                    var sidsrc = rec.SIDSRC;
                     stream[streampos++] = sidsrc.ShapeID;
                     stream[streampos++] = sidsrc.Section;
                     stream[streampos++] = sidsrc.Row;
