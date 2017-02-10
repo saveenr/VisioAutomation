@@ -60,8 +60,6 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.CommitResultRecordsByType(surface, CoordType.SIDSRC);
         }
 
-        public int FormulaCount => this.FormulaRecords.Count;
-
         public void SetFormula(SRC src, FormulaLiteral formula)
         {
             this.__SetFormulaIgnoreNull(src, formula);
