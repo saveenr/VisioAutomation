@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
@@ -9,43 +8,19 @@ namespace VisioAutomation.ShapeSheet.Writers
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        private readonly List<WriteRecord<FormulaLiteral>> FormulaRecords;
-        private readonly List<WriteRecord<ResultValue>> ResultRecords;
+        private readonly WriteRecords<FormulaLiteral> FormulaRecords;
+        private readonly WriteRecords<ResultValue> ResultRecords;
 
         public ShapeSheetWriter()
         {
-            this.FormulaRecords = new List<WriteRecord<FormulaLiteral>>();
-            this.ResultRecords = new List<WriteRecord<ResultValue>>();
+            this.FormulaRecords = new WriteRecords<FormulaLiteral>();
+            this.ResultRecords = new WriteRecords<ResultValue>();
         }
 
         public void Clear()
         {
             this.FormulaRecords.Clear();
             this.ResultRecords.Clear();
-        }
-
-        private void AddFormulaRecord(SRC src, FormulaLiteral value)
-        {
-            var rec = new WriteRecord<FormulaLiteral>(src, value);
-            this.FormulaRecords.Add(rec);
-        }
-
-        private void AddFormulaRecord(SIDSRC sidsrc, FormulaLiteral value)
-        {
-            var rec = new WriteRecord<FormulaLiteral>(sidsrc, value);
-            this.FormulaRecords.Add(rec);
-        }
-
-        private void AddResultRecord(SRC src, ResultValue value)
-        {
-            var rec = new WriteRecord<ResultValue>(src, value);
-            this.ResultRecords.Add(rec);
-        }
-
-        private void AddResultRecord(SIDSRC sidsrc, ResultValue value)
-        {
-            var rec = new WriteRecord<ResultValue>(sidsrc, value);
-            this.ResultRecords.Add(rec);
         }
 
         protected IVisio.VisGetSetArgs ComputeGetResultFlags(ResultType rt)
@@ -87,16 +62,6 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public int FormulaCount => this.FormulaRecords.Count;
 
-        private IEnumerable<WriteRecord<FormulaLiteral>> GetFormulaRecords(CoordType type)
-        {
-            return this.FormulaRecords.Where(i => i.Type == type);
-        }
-
-        private IEnumerable<WriteRecord<ResultValue>> GetResultRecords(CoordType type)
-        {
-            return this.ResultRecords.Where(i => i.Type == type);
-        }
-
         public void SetFormula(SRC src, FormulaLiteral formula)
         {
             this.__SetFormulaIgnoreNull(src, formula);
@@ -117,7 +82,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (formula.HasValue)
             {
-                this.AddFormulaRecord(src, formula);
+                this.FormulaRecords.Add(src, formula);
             }
         }
 
@@ -125,13 +90,13 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (formula.HasValue)
             {
-                this.AddFormulaRecord(sidsrc,formula);
+                this.FormulaRecords.Add(sidsrc,formula);
             }
         }
 
         private void CommitFormulaRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var records = this.GetFormulaRecords(coord_type);
+            var records = this.FormulaRecords.Enum(coord_type);
             var count = records.Count();
 
             if (count == 0)
@@ -177,30 +142,30 @@ namespace VisioAutomation.ShapeSheet.Writers
         public void SetResult(SRC src, string value, IVisio.VisUnitCodes unitcode)
         {
             var value_item = new ResultValue(value, unitcode);
-            this.AddResultRecord(src, value_item);
+            this.ResultRecords.Add(src, value_item);
         }
 
         public void SetResult(SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
             var value_item = new ResultValue(value, unitcode);
-            this.AddResultRecord(src, value_item);
+            this.ResultRecords.Add(src, value_item);
         }
 
         public void SetResult(SIDSRC sidsrc, double value, IVisio.VisUnitCodes unitcode)
         {
             var v = new ResultValue(value, unitcode);
-            this.AddResultRecord(sidsrc, v);
+            this.ResultRecords.Add(sidsrc, v);
         }
 
         public void SetResult(SIDSRC sidsrc, string value, IVisio.VisUnitCodes unitcode)
         {
             var v = new ResultValue(value, unitcode);
-            this.AddResultRecord(sidsrc, v);
+            this.ResultRecords.Add(sidsrc, v);
         }
 
         private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var records = this.GetResultRecords(coord_type);
+            var records = this.ResultRecords.Enum(coord_type);
             var count = records.Count();
 
             if (count == 0)
