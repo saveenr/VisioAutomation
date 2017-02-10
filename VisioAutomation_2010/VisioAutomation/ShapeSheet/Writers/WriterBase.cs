@@ -4,66 +4,12 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public enum CoordType
-    {
-        SIDSRC,
-        SRC
-    }
-
-    public struct WriteRec<TValue>
-    {
-        private readonly SIDSRC SIDSRC;
-        public readonly SRC SRC;
-        public readonly TValue Value;
-        public readonly CoordType Type;
-
-        public WriteRec(SIDSRC sidsrc, TValue value)
-        {
-            this.SIDSRC = sidsrc;
-            this.SRC = new SRC();
-            this.Value = value;
-            this.Type = CoordType.SIDSRC;
-        }
-
-        public WriteRec(SRC src, TValue value)
-        {
-            this.SIDSRC = new SIDSRC();
-            this.SRC = src;
-            this.Value = value;
-            this.Type = CoordType.SRC;
-        }
-
-        public SIDSRC Sidsrc
-        {
-            get
-            {
-                if (this.Type != CoordType.SIDSRC)
-                {
-                    throw new System.ArgumentException();
-                }
-                return SIDSRC;
-            }
-        }
-
-        public SRC Src
-        {
-            get
-            {
-                if (this.Type != CoordType.SRC)
-                {
-                    throw new System.ArgumentException();
-                }
-                return SRC;
-            }
-        }
-    }
-
     public abstract class WriterBase<TValue>
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        protected readonly List<WriteRec<TValue>> Records;
+        protected readonly List<WriteRecord<TValue>> Records;
 
         public void Clear()
         {
@@ -72,19 +18,19 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         protected void Add(SRC src, TValue value)
         {
-            var rec = new WriteRec<TValue>(src, value);
+            var rec = new WriteRecord<TValue>(src, value);
             this.Records.Add(rec);
         }
 
         protected void Add(SIDSRC sidsrc, TValue value)
         {
-            var rec = new WriteRec<TValue>(sidsrc, value);
+            var rec = new WriteRecord<TValue>(sidsrc, value);
             this.Records.Add(rec);
         }
 
         protected WriterBase()
         {
-            this.Records = new List<WriteRec<TValue>>();
+            this.Records = new List<WriteRecord<TValue>>();
         }
 
         protected IVisio.VisGetSetArgs ComputeGetResultFlags(ResultType rt)
@@ -126,7 +72,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public int Count => this.Records.Count;
 
-        protected IEnumerable<WriteRec<TValue>> GetRecords(CoordType type)
+        protected IEnumerable<WriteRecord<TValue>> GetRecords(CoordType type)
         {
             return this.Records.Where(i => i.Type == type);
         }
