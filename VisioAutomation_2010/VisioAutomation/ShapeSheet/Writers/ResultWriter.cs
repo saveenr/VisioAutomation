@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class ResultWriter : WriterBase<ResultValue>
+    public class ResultWriter : XWriterBase<ResultValue>
     {
         public ResultWriter() : base()
         {
@@ -33,60 +34,62 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.Add(sidsrc, v);
         }
 
-        protected override void CommitSIDSRC(ShapeSheetSurface surface)
+        protected override void CommitRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var stream = this.GetSIDSRCStream();
-            var unitcodes = build_unitcode_array(this.SIDSRC_Values);
-            var results = build_results_array(this.SIDSRC_Values);
-            var flags = this.ComputeGetResultFlags(this.SIDSRC_Values[0].ResultType);
+            var records = this.GetRecords(coord_type);
+            var count = records.Count();
 
-            surface.SetResults(stream, unitcodes, results, (short)flags);
-        }
-
-        protected override void CommitSRC(ShapeSheetSurface surface)
-        {
-            var stream = this.GetSRCStream();
-            var unitcodes = build_unitcode_array(this.SRC_Values);
-            var results = build_results_array(this.SRC_Values);
-            var flags = this.ComputeGetResultFlags(this.SRC_Values[0].ResultType);
-            surface.SetResults(stream, unitcodes, results, (short)flags);
-        }
-
-        private static object[] build_unitcode_array(IList<ResultValue> result_values)
-        {
-            var unitcodes = new object[result_values.Count];
-            int i = 0;
-            foreach (var result_value in result_values)
+            if (count == 0)
             {
-                unitcodes[i] = result_value.UnitCode;
-                i++;
+                return;
             }
-            return unitcodes;
-        }
 
-        private static object[] build_results_array(IList<ResultValue> result_values)
-        {
-            var results = new object[result_values.Count];
-            int i = 0;
-            foreach (var result_value in result_values)
+            int chunksize = coord_type == CoordType.SIDSRC ? 4 : 3;
+
+            var stream = new short[count * chunksize];
+            var results = new object[count];
+            var unitcodes = new object[count];
+
+            int streampos = 0;
+            int resultspos = 0;
+            int unitcodespos = 0;
+
+            foreach (var rec in records)
             {
-                if (result_value.ResultType == ResultType.ResultNumeric)
+                // fill stream
+                if (coord_type == CoordType.SRC)
                 {
-                    results[i] = result_value.ValueNumeric;
-                }
-                else if (result_value.ResultType == ResultType.ResultString)
-                {
-                    results[i] = result_value.ValueString;
+                    var src = rec.SRC;
+                    stream[streampos++] = src.Section;
+                    stream[streampos++] = src.Row;
+                    stream[streampos++] = src.Cell;
                 }
                 else
                 {
-                    string msg = string.Format("Unsupported {0}.{1} \"{2}\"", nameof(result_value), nameof(result_value.ResultType), result_value.ResultType);
-                    throw new System.ArgumentOutOfRangeException(msg);
+                    var sidsrc = rec.Sidsrc;
+                    stream[streampos++] = sidsrc.ShapeID;
+                    stream[streampos++] = sidsrc.Section;
+                    stream[streampos++] = sidsrc.Row;
+                    stream[streampos++] = sidsrc.Cell;
                 }
-                i++;
+
+                // fill results
+                if (rec.Value.ResultType == ResultType.ResultNumeric)
+                {
+                    results[resultspos++] = rec.Value.ValueNumeric;
+                }
+                else if (rec.Value.ResultType == ResultType.ResultString)
+                {
+                    results[resultspos++] = rec.Value.ValueString;
+                }
+
+                // fill unit codes
+                unitcodes[unitcodespos] = rec.Value.UnitCode;
+
             }
 
-            return results;
+            var flags = this.ComputeGetResultFlags(records.First().Value.ResultType);
+            surface.SetResults(stream, unitcodes, results, (short)flags);
         }
     }
 }
