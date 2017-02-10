@@ -99,10 +99,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetFormula(SRC src, FormulaLiteral formula)
         {
-            if (formula.HasValue)
-            {
-                this.AddFormulaRecord(src,formula);
-            }
+            this.__SetFormulaIgnoreNull(src, formula);
         }
 
         public void SetFormula(short id, SRC src, FormulaLiteral formula)
@@ -114,6 +111,14 @@ namespace VisioAutomation.ShapeSheet.Writers
         public void SetFormula(SIDSRC sidsrc, FormulaLiteral formula)
         {
             this.__SetFormulaIgnoreNull(sidsrc, formula);
+        }
+
+        private void __SetFormulaIgnoreNull(SRC src, FormulaLiteral formula)
+        {
+            if (formula.HasValue)
+            {
+                this.AddFormulaRecord(src, formula);
+            }
         }
 
         private void __SetFormulaIgnoreNull(SIDSRC sidsrc, FormulaLiteral formula)
