@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class FormulaWriter : WriterBase<FormulaLiteral>
+    public class FormulaWriter : XWriterBase<FormulaLiteral>
     {
         public FormulaWriter() :base()
         {
@@ -37,30 +38,55 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         protected override void CommitSIDSRC(ShapeSheetSurface surface)
         {
-            var stream = this.GetSIDSRCStream();
-            var formulas = build_formulas_array(this.SIDSRC_Values);
+            var sidsrc_records = this.GetSIDSRCRecords();
+            var count = sidsrc_records.Count();
+            var stream = new short[count * 4];
+            var formulas = new object[count];
+
+            int streampos = 0;
+            int formulapos= 0;
+
+            foreach (var rec in sidsrc_records)
+            {
+                // fill stream
+                var sidsrc = rec.Sidsrc;
+                stream[streampos++] = sidsrc.ShapeID;
+                stream[streampos++] = sidsrc.Section;
+                stream[streampos++] = sidsrc.Row;
+                stream[streampos++] = sidsrc.Cell;
+
+                // fill formulas
+                formulas[formulapos++] = rec.Value;
+            }
+
             var flags = this.ComputeGetFormulaFlags();
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
         protected override void CommitSRC(ShapeSheetSurface surface)
         {
-            var stream = this.GetSRCStream();
-            var formulas = build_formulas_array(this.SRC_Values);
+            var srcrecords = this.GetSRCRecords();
+            var count = srcrecords.Count();
+            var stream = new short[count * 3];
+            var formulas = new object[count];
+
+            int streampos = 0;
+            int formulapos = 0;
+
+            foreach (var rec in srcrecords)
+            {
+                // fill stream
+                var src = rec.SRC;
+                stream[streampos++] = src.Section;
+                stream[streampos++] = src.Row;
+                stream[streampos++] = src.Cell;
+
+                // fill formulas
+                formulas[formulapos++] = rec.Value;
+            }
+
             var flags = this.ComputeGetFormulaFlags();
             int c = surface.SetFormulas(stream, formulas, (short)flags);
-        }
-
-        private static object[] build_formulas_array(IList<FormulaLiteral> formulas)
-        {
-            var result = new object[formulas.Count];
-            int i = 0;
-            foreach (var rec in formulas)
-            {
-                result[i] = rec.Value;
-                i++;
-            }
-            return result;
         }
     }
 }
