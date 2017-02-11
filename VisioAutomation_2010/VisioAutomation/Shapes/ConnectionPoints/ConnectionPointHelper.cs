@@ -30,7 +30,7 @@ namespace VisioAutomation.Shapes.ConnectionPoints
                                  (short)IVisio.VisRowIndices.visRowLast,
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             connection_point_cells.SetFormulas(writer,n);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);

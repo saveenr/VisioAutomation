@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                     throw new InternalAssertionException(msg);
                 }
 
-                var writer = new FormulaWriter();
+                var writer = new ShapeSheetWriter();
                 cp.SetFormulas(writer, cell_propname.Row);
 
                 var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
@@ -58,7 +58,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             cp.SetFormulas(writer, row);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);

@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             targets = targets.ResolveShapes(this._client);
             var shape_ids = targets.ToShapeIDs();
-            var writer = new VisioAutomation.ShapeSheet.Writers.FormulaWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriter();
 
             foreach (var shape_id in shape_ids.ShapeIDs)
             {
@@ -105,7 +105,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetPageCells(TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
         {
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
@@ -127,7 +127,6 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("BlastGuards: {0}", blast_guards);
             this._client.WriteVerbose("TestCircular: {0}", test_circular);
             this._client.WriteVerbose("Number of Shapes : {0}", targets.ShapeIDs.Count);
-            this._client.WriteVerbose("Number of Total Updates: {0}", writer.Count);
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Cells"))
             {
@@ -146,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetShapeCells(TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
         {
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
@@ -168,7 +167,6 @@ namespace VisioAutomation.Scripting.Commands
             this._client.WriteVerbose("BlastGuards: {0}", blast_guards);
             this._client.WriteVerbose("TestCircular: {0}", test_circular);
             this._client.WriteVerbose("Number of Shapes : {0}", targets.ShapeIDs.Count);
-            this._client.WriteVerbose("Number of Total Updates: {0}", writer.Count);
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Cells"))
             {

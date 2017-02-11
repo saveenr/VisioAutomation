@@ -26,7 +26,7 @@ namespace VisioAutomation.Models.Documents.Forms
             this.CharacterCells = new VisioAutomation.Text.CharacterCells();
         }
 
-        public void ApplyFormus(FormulaWriter writer)
+        public void ApplyFormus(ShapeSheetWriter writer)
         {
             short titleshape_id = this.VisioShape.ID16;
             this.TextBlockCells.SetFormulas(titleshape_id, writer);

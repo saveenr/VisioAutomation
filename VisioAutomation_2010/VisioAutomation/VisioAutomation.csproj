@@ -100,6 +100,9 @@
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
+    <Compile Include="ShapeSheet\Writer\CoordType.cs" />
+    <Compile Include="ShapeSheet\Writer\WriteRecord.cs" />
+    <Compile Include="ShapeSheet\Writer\WriteRecords.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
@@ -124,10 +127,8 @@
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
-    <Compile Include="ShapeSheet\Writers\ResultWriter.cs" />
-    <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
-    <Compile Include="ShapeSheet\Writers\ResultType.cs" />
-    <Compile Include="ShapeSheet\Writers\ResultValue.cs" />
+    <Compile Include="ShapeSheet\Writer\ResultType.cs" />
+    <Compile Include="ShapeSheet\Writer\ResultValue.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
@@ -191,7 +192,7 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ColumnQuery.cs" />
-    <Compile Include="ShapeSheet\Writers\FormulaWriter.cs" />
+    <Compile Include="ShapeSheet\Writer\ShapeSheetWriter.cs" />
     <Compile Include="ShapeSheet\FormulaLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />

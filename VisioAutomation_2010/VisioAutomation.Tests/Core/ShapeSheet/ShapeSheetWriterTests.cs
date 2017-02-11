@@ -24,7 +24,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             writer.SetFormula(shape1.ID16, ShapeSheetWriterTests.src_pinx, 0.5);
             writer.SetFormula(shape1.ID16, ShapeSheetWriterTests.src_piny, 0.5);
             writer.SetFormula(shape2.ID16, ShapeSheetWriterTests.src_pinx, 1.5);
@@ -62,7 +62,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ResultWriter();
+            var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, 7, IVisio.VisUnitCodes.visNumber);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
@@ -89,7 +89,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ResultWriter();
+            var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
             writer.Commit(surface);
@@ -119,7 +119,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new VA.ShapeSheet.Writers.ResultWriter();
+            var writer = new VA.ShapeSheet.Writers.ShapeSheetWriter();
             writer.SetResult( new SIDSRC(shape1.ID16, ShapeSheetWriterTests.src_pinx), 0.5, IVisio.VisUnitCodes.visNumber);
             writer.SetResult( new SIDSRC(shape1.ID16, ShapeSheetWriterTests.src_piny), 0.5, IVisio.VisUnitCodes.visNumber);
             writer.SetResult( new SIDSRC(shape2.ID16, ShapeSheetWriterTests.src_pinx), 1.5, IVisio.VisUnitCodes.visNumber);
@@ -165,7 +165,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ResultWriter();
+            var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             writer.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
