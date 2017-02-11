@@ -113,7 +113,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             foreach (var rec in records)
             {
                 // fill stream
-                streampos = this.FillStream(stream, streampos, coord_type, rec);
+                streampos = this.AddStreamRecord(stream, streampos, coord_type, rec);
 
                 // fill formulas
                 formulas[formulapos++] = rec.Value.Value;
@@ -170,17 +170,10 @@ namespace VisioAutomation.ShapeSheet.Writers
             foreach (var rec in records)
             {
                 // fill stream
-                streampos = this.FillStream(stream, streampos, coord_type, rec);
+                streampos = this.AddStreamRecord(stream, streampos, coord_type, rec);
 
                 // fill results
-                if (rec.Value.ResultType == ResultType.ResultNumeric)
-                {
-                    results[resultspos++] = rec.Value.ValueNumeric;
-                }
-                else if (rec.Value.ResultType == ResultType.ResultString)
-                {
-                    results[resultspos++] = rec.Value.ValueString;
-                }
+                results[resultspos++] = GetResultValueAsObject(rec);
 
                 // fill unit codes
                 unitcodes[unitcodespos++] = rec.Value.UnitCode;
@@ -192,7 +185,15 @@ namespace VisioAutomation.ShapeSheet.Writers
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }
 
-        private int FillStream<T>(short[] stream, int streampos, CoordType coord_type, WriteRecord<T> rec)
+        private static object GetResultValueAsObject(WriteRecord<ResultValue> rec)
+        {
+            object obj_res = (rec.Value.ResultType == ResultType.ResultNumeric)
+                ? (object) rec.Value.ValueNumeric
+                : (object) rec.Value.ValueString;
+            return obj_res;
+        }
+
+        private int AddStreamRecord<T>(short[] stream, int streampos, CoordType coord_type, WriteRecord<T> rec)
         {
             if (coord_type == CoordType.SRC)
             {
