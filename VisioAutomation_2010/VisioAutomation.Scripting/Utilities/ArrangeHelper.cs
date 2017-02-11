@@ -91,24 +91,28 @@ namespace VisioAutomation.Scripting.Utilities
 
         private static void ModifyPinPositions(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Drawing.Point> newpositions)
         {
-            var writer = new VisioAutomation.ShapeSheet.Writers.FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             for (int i = 0; i < newpositions.Count; i++)
             {
                 writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SRCConstants.PinX, newpositions[i].X);
                 writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SRCConstants.PinY, newpositions[i].Y);
             }
-            writer.Commit(page);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            writer.Commit(surface);
         }
 
         private static void ModifySizes(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Drawing.Size> newsizes)
         {
-            var writer = new VisioAutomation.ShapeSheet.Writers.FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             for (int i = 0; i < newsizes.Count; i++)
             {
                 writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SRCConstants.Width, newsizes[i].Width);
                 writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SRCConstants.Height, newsizes[i].Height);
             }
-            writer.Commit(page);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            writer.Commit(surface);
         }
 
         public static void SnapCorner(IVisio.Page page, TargetShapeIDs target, Drawing.Size snapsize, VisioAutomation.Scripting.Layout.SnapCornerPosition corner)

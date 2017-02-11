@@ -60,13 +60,13 @@ namespace VisioAutomation.Shapes.CustomProperties
             this.Type = 5;
         }
 
-        public CustomPropertyCells(ShapeSheet.FormulaLiteral value)
+        public CustomPropertyCells(ShapeSheet.ValueLiteral value)
         {
             this.Value = value;
             this.Type = 2;
         }
 
-        private string SmartStringToFormulaString(ShapeSheet.FormulaLiteral formula, bool force_no_quoting)
+        private string SmartStringToFormulaString(ShapeSheet.ValueLiteral formula, bool force_no_quoting)
         {
             if (!formula.HasValue)
             {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.UserDefinedCells
@@ -41,7 +41,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             UserDefinedCellHelper.Set(shape, name, value.Formula.Value, prompt.Formula.Value);
         }
 
-        public static void Set(IVisio.Shape shape, string name, ShapeSheet.FormulaLiteral value, ShapeSheet.FormulaLiteral prompt)
+        public static void Set(IVisio.Shape shape, string name, ShapeSheet.ValueLiteral value, ShapeSheet.ValueLiteral prompt)
         {
             if (shape == null)
             {
@@ -75,7 +75,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var writer = new FormulaWriterSRC();
+            var writer = new ShapeSheetWriter();
 
             if (value.HasValue)
             {
@@ -89,7 +89,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 writer.SetFormula(src, prompt.Encode());
             }
 
-            writer.Commit(shape);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
         }
 
         /// <summary>

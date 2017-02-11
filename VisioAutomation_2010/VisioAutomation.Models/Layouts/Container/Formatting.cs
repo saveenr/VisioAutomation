@@ -1,4 +1,4 @@
-﻿using VisioAutomation.ShapeSheet.Writers;
+﻿using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Models.Layouts.Container
 {
@@ -17,7 +17,7 @@ namespace VisioAutomation.Models.Layouts.Container
             this.TextBlockCells = new VisioAutomation.Text.TextBlockCells();
         }
 
-        public void Apply(FormulaWriterSIDSRC writer, short shapeid_label, short shapeid_box)
+        public void Apply(ShapeSheetWriter writer, short shapeid_label, short shapeid_box)
         {
             this.CharacterCells.SetFormulas(shapeid_label, writer, 0);
             this.ParagraphCells.SetFormulas(shapeid_label, writer, 0);

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
@@ -71,11 +70,11 @@ namespace VisioAutomation.ShapeSheet
                 return new TResult[0];
             }
 
+            EnforceValidStreamSize(stream);
             EnforceValidResultType(typeof(TResult));
 
-            var result_type = typeof(TResult);
-            var unitcodes_obj_array = get_unit_code_obj_array(unitcodes);
-            var flags = get_VisGetSetArgs(result_type);
+            var unitcodes_obj_array = BuildUnitCodes(unitcodes);
+            var flags = TypeToVisGetSetArgs(typeof(TResult));
 
             System.Array results_sa = null;
 
@@ -108,6 +107,8 @@ namespace VisioAutomation.ShapeSheet
                 return new string[0];
             }
 
+            EnforceValidStreamSize(stream);
+
             System.Array formulas_sa = null;
 
             if (this.Target.Master != null)
@@ -134,12 +135,29 @@ namespace VisioAutomation.ShapeSheet
             return formulas;
         }
 
+        private static void EnforceValidStreamSize(short[] stream)
+        {
+            if ((stream.Length%3) == 0)
+            {
+                // OK this is probably an SRC stream - three shorts per item
+            }
+            else if ((stream.Length % 4) == 0)
+            {
+                // OK this is probably an SIDSRC stream - four shorts per item
+            }
+            else
+            {               
+                string msg = string.Format("stream size of {0} must be a multiple of 3 or 4: {0}", stream.Length);
+                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
+            }
+        }
+
         private static void EnforceValidResultType(System.Type result_type)
         {
             if (!IsValidResultType(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
-                throw new InternalAssertionException(msg);
+                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
         }
 
@@ -150,7 +168,7 @@ namespace VisioAutomation.ShapeSheet
                     || result_type == typeof(string));
         }
 
-        private static IVisio.VisGetSetArgs get_VisGetSetArgs(System.Type type)
+        private static IVisio.VisGetSetArgs TypeToVisGetSetArgs(System.Type type)
         {
             IVisio.VisGetSetArgs flags;
             if (type == typeof(int))
@@ -168,14 +186,13 @@ namespace VisioAutomation.ShapeSheet
             else
             {
                 string msg = string.Format("Unsupported Result Type: {0}", type.Name);
-                throw new InternalAssertionException(msg);
+                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
             return flags;
         }
 
-        private static object[] get_unit_code_obj_array(IList<IVisio.VisUnitCodes> unitcodes)
+        private static object[] BuildUnitCodes(IList<IVisio.VisUnitCodes> unitcodes)
         {
-            // Create the unit codes array
             object[] unitcodes_obj_array = null;
             if (unitcodes != null)
             {

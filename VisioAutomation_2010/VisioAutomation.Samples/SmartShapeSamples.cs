@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet.Writers;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 
 namespace VisioAutomationSamples
 {
@@ -35,11 +34,13 @@ namespace VisioAutomationSamples
             xform.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
             xform.Height = string.Format("GUARD({0}!Height)", bkname); 
 
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             xform.SetFormulas(progress.ID16, writer);
             background_fmt.SetFormulas(progress.ID16, writer);
             progress_fmt.SetFormulas(progress.ID16, writer);
-            writer.Commit(page_a);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page_a);
+            writer.Commit(surface);
 
             var markup1 = new VisioAutomation.Models.Text.TextElement();
             markup1.AddField(VisioAutomation.Models.Text.FieldConstants.PageName);

@@ -2,7 +2,7 @@
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Layouts.Container
@@ -169,7 +169,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 item.VisioShape.Text = item.Text;
             }
 
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new ShapeSheetWriter();
 
             // Format the containers and shapes
 
@@ -181,10 +181,11 @@ namespace VisioAutomation.Models.Layouts.Container
             foreach (var item in this.ContainerItems)
             {
                 this.LayoutOptions.ContainerItemFormatting.Apply(writer, item.ShapeID, item.ShapeID);
-            }     
+            }
 
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
             writer.BlastGuards = true;
-            writer.Commit(page);
+            writer.Commit(surface);
 
             // Set the Container Text
             foreach (var ct in this.Containers)
@@ -211,13 +212,15 @@ namespace VisioAutomation.Models.Layouts.Container
 
             // Dropping takes care of the PinX and PinY
             // Now set the Width's and Heights
-            var writer = new FormulaWriterSIDSRC(points.Count*2);
+            var writer = new ShapeSheetWriter();
             for (int i = 0; i < rects.Count(); i++)
             {
                 writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SRCConstants.Width, rects[i].Width);
                 writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SRCConstants.Height, rects[i].Height);
             }
-            writer.Commit(page);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            writer.Commit(surface);
 
             return shapeids;
         }

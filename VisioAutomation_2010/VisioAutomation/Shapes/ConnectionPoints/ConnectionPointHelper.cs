@@ -1,4 +1,4 @@
-using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.ConnectionPoints
@@ -30,9 +30,11 @@ namespace VisioAutomation.Shapes.ConnectionPoints
                                  (short)IVisio.VisRowIndices.visRowLast,
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
-            var writer = new FormulaWriterSRC();
+            var writer = new ShapeSheetWriter();
             connection_point_cells.SetFormulas(writer,n);
-            writer.Commit(shape);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
 
             return n;
         }

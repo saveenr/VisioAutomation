@@ -1,6 +1,5 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Shapes.Locking;
-using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -67,16 +66,18 @@ namespace VisioAutomation.Scripting.Commands
 
             var page = this._client.Page.Get();
             var target_shapeids = targets.ToShapeIDs();
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
 
             foreach (int shapeid in target_shapeids.ShapeIDs)
             {
                 lockcells.SetFormulas((short)shapeid, writer);
             }
 
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+
             using (var undoscope = this._client.Application.NewUndoScope("Set Lock Properties"))
             {
-                writer.Commit(page);
+                writer.Commit(surface);
             }
         }
 
@@ -93,7 +94,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = this._client.Page.Get();
             var shapeids = targets.ToShapeIDs();
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             foreach (int shapeid in shapeids.ShapeIDs)
             {
                 if (w.HasValue && w.Value>=0)
@@ -106,9 +107,11 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page);
+
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Size"))
             {
-                writer.Commit(active_page);
+                writer.Commit(surface);
             }
         }
     }

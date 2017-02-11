@@ -2,7 +2,6 @@
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Grid;
-using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomationSamples
 {
@@ -47,7 +46,7 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Shapes.ShapeFormatCells();
             int i = 0;
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;
@@ -60,7 +59,8 @@ namespace VisioAutomationSamples
                 i++;
             }
 
-            writer.Commit(page);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            writer.Commit(surface);
 
             var bordersize = new VA.Drawing.Size(1,1);
             page.ResizeToFitContents(bordersize);

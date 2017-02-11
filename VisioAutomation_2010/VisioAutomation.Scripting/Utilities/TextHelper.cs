@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Utilities
@@ -45,14 +44,15 @@ namespace VisioAutomation.Scripting.Utilities
             const string formula_wrap = "WIDTH*1";
             const string formula_no_wrap = "TEXTWIDTH(TheText)";
             string formula = wrap ? formula_wrap : formula_no_wrap;
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             
             foreach (int shapeid in shapeids)
             {
                 writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.TxtWidth, formula);
             }
 
-            writer.Commit(page);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            writer.Commit(surface);
         }
 
         public static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)

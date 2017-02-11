@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation_Tests
@@ -89,7 +87,7 @@ namespace VisioAutomation_Tests
             var col_w = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Width,"Width");
             var col_h = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Height,"Height");
 
-            var ss = new ShapeSheetSurface(shape);
+            var ss = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
             var table = query.GetResults<double>(ss);
             double w = table.Cells[col_w];
             double h = table.Cells[col_h];
@@ -145,10 +143,12 @@ namespace VisioAutomation_Tests
 
             var page_sheet = page.PageSheet;
 
-            var writer = new FormulaWriterSRC(2);
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
-            writer.Commit(page_sheet);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page_sheet);
+            writer.Commit(surface);
         }
 
         public static VisioAutomation.Drawing.Size GetPageSize(IVisio.Page page)
@@ -162,7 +162,7 @@ namespace VisioAutomation_Tests
             var col_height = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
             var col_width = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
 
-            var page_surface = new ShapeSheetSurface(page.PageSheet);
+            var page_surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page.PageSheet);
             var results = query.GetResults<double>(page_surface);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];

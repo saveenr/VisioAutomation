@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.ShapeSheet.Writers;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -22,9 +21,11 @@ namespace VisioAutomation_Tests.Core.Page
             pagecells.PageWidth = "8.0";
             pagecells.PageHeight = "6.0";
 
-            var writer = new FormulaWriterSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             pagecells.SetFormulas(writer);
-            writer.Commit(page1.PageSheet);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1.PageSheet);
+            writer.Commit(surface);
 
             var pagecells2 = VA.Pages.PageCells.GetCells(page1.PageSheet);
             Assert.AreEqual("8.0000 in.", pagecells2.PageWidth.Result);
@@ -149,9 +150,11 @@ namespace VisioAutomation_Tests.Core.Page
             pagecells.PageLeftMargin = bottomleft_margin.Width;
             pagecells.PageRightMargin = upperright_margin.Width;
 
-            var page_writer = new FormulaWriterSRC();
+            var page_writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             pagecells.SetFormulas(page_writer);
-            page_writer.Commit(page.PageSheet);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page.PageSheet);
+            page_writer.Commit(surface);
 
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5 + shape_size.Height);

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Documents.Forms
@@ -30,7 +30,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
             // Update the Page Cells
             var pagesheet = this._page.PageSheet;
-            var pagewriter = new FormulaWriterSRC();
+            var writer = new ShapeSheetWriter();
 
             var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;
@@ -39,9 +39,10 @@ namespace VisioAutomation.Models.Documents.Forms
             pagecells.PageRightMargin = formpage.Margin.Right;
             pagecells.PageTopMargin = formpage.Margin.Top;
             pagecells.PageBottomMargin = formpage.Margin.Bottom;
-            pagecells.SetFormulas(pagewriter);
-            pagewriter.Commit(pagesheet);
+            pagecells.SetFormulas(writer);
 
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(pagesheet);
+            writer.Commit(surface);
 
             this.Reset();
             return this._page;
@@ -95,7 +96,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Finish()
         {
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new ShapeSheetWriter();
             foreach (var block in this.Blocks)
             {
                 block.FormatCells.SetFormulas((short)block.VisioShapeID,writer);
@@ -103,7 +104,9 @@ namespace VisioAutomation.Models.Documents.Forms
                 block.ParagraphCells.SetFormulas((short)block.VisioShapeID, writer, 0);
                 block.CharacterCells.SetFormulas((short)block.VisioShapeID, writer, 0);
             }
-            writer.Commit(this._page);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(this._page);
+            writer.Commit(surface);
         }
 
         private void AdjustInsertionPoint(Drawing.Size size)

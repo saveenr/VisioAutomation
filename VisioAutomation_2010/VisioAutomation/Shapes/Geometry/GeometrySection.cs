@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -9,11 +9,11 @@ namespace VisioAutomation.Shapes.Geometry
     public class GeometrySection : IEnumerable<GeometryRow>
     {
         private List<GeometryRow> Rows { get; }
-        public ShapeSheet.FormulaLiteral NoFill { get; set; }
-        public ShapeSheet.FormulaLiteral NoLine { get; set; }
-        public ShapeSheet.FormulaLiteral NoShow { get; set; }
-        public ShapeSheet.FormulaLiteral NoSnap { get; set; }
-        public ShapeSheet.FormulaLiteral NoQuickDrag { get; set; }
+        public ShapeSheet.ValueLiteral NoFill { get; set; }
+        public ShapeSheet.ValueLiteral NoLine { get; set; }
+        public ShapeSheet.ValueLiteral NoShow { get; set; }
+        public ShapeSheet.ValueLiteral NoSnap { get; set; }
+        public ShapeSheet.ValueLiteral NoQuickDrag { get; set; }
 
         public GeometrySection()
         {
@@ -43,7 +43,7 @@ namespace VisioAutomation.Shapes.Geometry
             short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
-            var writer = new FormulaWriterSRC();
+            var writer = new ShapeSheetWriter();
 
             var src_nofill = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoFill.Cell);
             var src_noline = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoLine.Cell);
@@ -63,18 +63,20 @@ namespace VisioAutomation.Shapes.Geometry
                 row_count++;
             }
 
-            writer.Commit(shape);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+            writer.Commit(surface);
+
             return 0;
         }
 
-        public GeometryRow AddMoveTo(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y)
+        public GeometryRow AddMoveTo(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y)
         {
             var row = GeometryRow.CreateMoveTo(x, y);
             this.Rows.Add(row);
             return row;
         }
 
-        public GeometryRow AddLineTo(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y)
+        public GeometryRow AddLineTo(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y)
         {
             var row = GeometryRow.CreateLineTo(x, y);
             this.Rows.Add(row);
@@ -82,7 +84,7 @@ namespace VisioAutomation.Shapes.Geometry
 
         }
 
-        public GeometryRow AddArcTo(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y, ShapeSheet.FormulaLiteral a)
+        public GeometryRow AddArcTo(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y, ShapeSheet.ValueLiteral a)
         {
             var row = GeometryRow.CreateArcTo(x, y, a);
             this.Rows.Add(row);
@@ -90,7 +92,7 @@ namespace VisioAutomation.Shapes.Geometry
 
         }
 
-        public GeometryRow AddEllipticalArcTo(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y, ShapeSheet.FormulaLiteral a, ShapeSheet.FormulaLiteral b, ShapeSheet.FormulaLiteral c, ShapeSheet.FormulaLiteral d)
+        public GeometryRow AddEllipticalArcTo(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y, ShapeSheet.ValueLiteral a, ShapeSheet.ValueLiteral b, ShapeSheet.ValueLiteral c, ShapeSheet.ValueLiteral d)
         {
             var row = GeometryRow.CreateEllipticalArcTo(x, y, a, b, c, d);
             this.Rows.Add(row);
@@ -98,7 +100,7 @@ namespace VisioAutomation.Shapes.Geometry
 
         }
 
-        public GeometryRow AddEllipse(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y, ShapeSheet.FormulaLiteral a, ShapeSheet.FormulaLiteral b, ShapeSheet.FormulaLiteral c, ShapeSheet.FormulaLiteral d)
+        public GeometryRow AddEllipse(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y, ShapeSheet.ValueLiteral a, ShapeSheet.ValueLiteral b, ShapeSheet.ValueLiteral c, ShapeSheet.ValueLiteral d)
         {
             var row = GeometryRow.CreateEllipse(x, y, a, b, c, d);
             this.Rows.Add(row);
@@ -106,7 +108,7 @@ namespace VisioAutomation.Shapes.Geometry
 
         }
 
-        public GeometryRow AddNURBSTo(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y, ShapeSheet.FormulaLiteral a, ShapeSheet.FormulaLiteral b, ShapeSheet.FormulaLiteral c, ShapeSheet.FormulaLiteral d, ShapeSheet.FormulaLiteral e)
+        public GeometryRow AddNURBSTo(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y, ShapeSheet.ValueLiteral a, ShapeSheet.ValueLiteral b, ShapeSheet.ValueLiteral c, ShapeSheet.ValueLiteral d, ShapeSheet.ValueLiteral e)
         {
             var row = GeometryRow.CreateNURBSTo(x, y, a, b, c, d, e);
             this.Rows.Add(row);
@@ -114,7 +116,7 @@ namespace VisioAutomation.Shapes.Geometry
 
         }
 
-        public GeometryRow AddPolylineTo(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y, ShapeSheet.FormulaLiteral a)
+        public GeometryRow AddPolylineTo(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y, ShapeSheet.ValueLiteral a)
         {
             var row = GeometryRow.CreatePolylineTo(x, y, a);
             this.Rows.Add(row);
@@ -122,7 +124,7 @@ namespace VisioAutomation.Shapes.Geometry
 
         }
 
-        public GeometryRow AddInfiniteLine(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y, ShapeSheet.FormulaLiteral a, ShapeSheet.FormulaLiteral b)
+        public GeometryRow AddInfiniteLine(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y, ShapeSheet.ValueLiteral a, ShapeSheet.ValueLiteral b)
         {
             var row = GeometryRow.CreateInfiniteLine(x, y, a, b);
             this.Rows.Add(row);
@@ -130,7 +132,7 @@ namespace VisioAutomation.Shapes.Geometry
 
         }
 
-        public GeometryRow AddSplineStart(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y, ShapeSheet.FormulaLiteral a, ShapeSheet.FormulaLiteral b, ShapeSheet.FormulaLiteral c, ShapeSheet.FormulaLiteral d)
+        public GeometryRow AddSplineStart(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y, ShapeSheet.ValueLiteral a, ShapeSheet.ValueLiteral b, ShapeSheet.ValueLiteral c, ShapeSheet.ValueLiteral d)
         {
             var row = GeometryRow.CreateSplineStart(x, y, a, b, c, d);
             this.Rows.Add(row);
@@ -138,7 +140,7 @@ namespace VisioAutomation.Shapes.Geometry
 
         }
 
-        public GeometryRow AddSplineKnot(ShapeSheet.FormulaLiteral x, ShapeSheet.FormulaLiteral y, ShapeSheet.FormulaLiteral a)
+        public GeometryRow AddSplineKnot(ShapeSheet.ValueLiteral x, ShapeSheet.ValueLiteral y, ShapeSheet.ValueLiteral a)
         {
             var row = GeometryRow.CreateSplineKnot(x, y, a);
             this.Rows.Add(row);

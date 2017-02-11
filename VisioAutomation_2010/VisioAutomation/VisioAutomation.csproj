@@ -100,6 +100,9 @@
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
+    <Compile Include="ShapeSheet\Internal\CoordType.cs" />
+    <Compile Include="ShapeSheet\Internal\WriteRecord.cs" />
+    <Compile Include="ShapeSheet\Internal\WriteRecords.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
@@ -124,13 +127,6 @@
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
-    <Compile Include="ShapeSheet\Writers\FormulaWriterSIDSRC.cs" />
-    <Compile Include="ShapeSheet\Writers\ResultWriterSRC.cs" />
-    <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
-    <Compile Include="ShapeSheet\Writers\ResultWriterSIDSRC.cs" />
-    <Compile Include="ShapeSheet\Writers\ResultType.cs" />
-    <Compile Include="ShapeSheet\Writers\ResultValue.cs" />
-    <Compile Include="ShapeSheet\Writers\WriterHelper.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
@@ -194,8 +190,8 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ColumnQuery.cs" />
-    <Compile Include="ShapeSheet\Writers\FormulaWriterSRC.cs" />
-    <Compile Include="ShapeSheet\FormulaLiteral.cs" />
+    <Compile Include="ShapeSheet\ShapeSheetWriter.cs" />
+    <Compile Include="ShapeSheet\ValueLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
@@ -262,9 +258,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ShapeSheet\Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

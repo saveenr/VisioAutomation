@@ -4,7 +4,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using VisioAutomation.Models.Layouts.Grid;
-using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomationSamples
 {
@@ -60,7 +59,7 @@ namespace VisioAutomationSamples
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             var format = new VA.Shapes.ShapeFormatCells();
             var xfrm = new VA.Shapes.XFormCells();
 
@@ -78,7 +77,9 @@ namespace VisioAutomationSamples
                 format.SetFormulas(shapeid, writer);
             }
 
-            writer.Commit(page);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            writer.Commit(surface);
+
             VA.Pages.PageHelper.ResizeToFitContents(page, new VA.Drawing.Size(1.0, 1.0));
         }
 
@@ -123,7 +124,7 @@ namespace VisioAutomationSamples
 
             var format = new VA.Shapes.ShapeFormatCells();
 
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
 
             string color1_formula = color1.ToFormula();
             string color2_formula = color2.ToFormula();
@@ -145,7 +146,8 @@ namespace VisioAutomationSamples
                 n++;
             }
 
-            writer.Commit(page);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            writer.Commit(surface);
 
             var bordersize = new VA.Drawing.Size(1, 1);
             page.ResizeToFitContents(bordersize);

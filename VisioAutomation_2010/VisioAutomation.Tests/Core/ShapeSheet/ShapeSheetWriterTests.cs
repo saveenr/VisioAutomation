@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -24,14 +23,16 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new ShapeSheetWriter();
             writer.SetFormula(shape1.ID16, ShapeSheetWriterTests.src_pinx, 0.5);
             writer.SetFormula(shape1.ID16, ShapeSheetWriterTests.src_piny, 0.5);
             writer.SetFormula(shape2.ID16, ShapeSheetWriterTests.src_pinx, 1.5);
             writer.SetFormula(shape2.ID16, ShapeSheetWriterTests.src_piny, 1.5);
             writer.SetFormula(shape3.ID16, ShapeSheetWriterTests.src_pinx, 2.5);
             writer.SetFormula(shape3.ID16, ShapeSheetWriterTests.src_piny, 2.5);
-            writer.Commit(page1);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
+            writer.Commit(surface);
 
             // Verify that the formulas were set
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
@@ -40,7 +41,6 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var surface = new ShapeSheetSurface(page1);
             var data_formulas = query.GetFormulas(surface, shapeids);
             var data_results = query.GetResults<double>(surface, shapeids);
 
@@ -61,16 +61,17 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ResultWriterSRC();
+            var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, 7, IVisio.VisUnitCodes.visNumber);
-            writer.Commit(shape1);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
+            writer.Commit(surface);
 
             // Build the query
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat,"LinePattern");
 
             // Retrieve the values
-            var surface = new ShapeSheetSurface(shape1);
             var data_formulas = query.GetFormulas(surface);
             var data_results = query.GetResults<double>(surface);
 
@@ -87,16 +88,16 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ResultWriterSRC();
+            var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
-            writer.Commit(shape1);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
+            writer.Commit(surface);
 
             // Build the query
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
 
             // Retrieve the values
-            var surface = new ShapeSheetSurface(shape1);
             var data_formulas = query.GetFormulas(surface);
             var data_results = query.GetResults<double>(surface);
 
@@ -117,14 +118,17 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new ResultWriterSIDSRC();
+            var writer = new VA.ShapeSheet.ShapeSheetWriter();
             writer.SetResult( new SIDSRC(shape1.ID16, ShapeSheetWriterTests.src_pinx), 0.5, IVisio.VisUnitCodes.visNumber);
             writer.SetResult( new SIDSRC(shape1.ID16, ShapeSheetWriterTests.src_piny), 0.5, IVisio.VisUnitCodes.visNumber);
             writer.SetResult( new SIDSRC(shape2.ID16, ShapeSheetWriterTests.src_pinx), 1.5, IVisio.VisUnitCodes.visNumber);
             writer.SetResult( new SIDSRC(shape2.ID16, ShapeSheetWriterTests.src_piny), 1.5, IVisio.VisUnitCodes.visNumber);
             writer.SetResult( new SIDSRC(shape3.ID16, ShapeSheetWriterTests.src_pinx), 2.5, IVisio.VisUnitCodes.visNumber);
             writer.SetResult( new SIDSRC(shape3.ID16, ShapeSheetWriterTests.src_piny), 2.5, IVisio.VisUnitCodes.visNumber);
-            writer.Commit(page1);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
+
+            writer.Commit(surface);
 
             // Verify that the formulas were set
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
@@ -133,7 +137,6 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var surface = new ShapeSheetSurface(page1);
             var data_formulas = query.GetFormulas(surface, shapeids);
             var data_results = query.GetResults<double>(surface, shapeids);
 
@@ -161,10 +164,11 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ResultWriterSRC();
+            var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             writer.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
-            writer.Commit(shape1);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
+            writer.Commit(surface);
 
             // Build the query
             var query = new VisioAutomation.ShapeSheet.Queries.Query();
@@ -172,7 +176,6 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             // Retrieve the values
-            var surface = new ShapeSheetSurface(shape1);
             var data_formulas = query.GetFormulas(surface);
             var data_results = query.GetResults<double>(surface);
 

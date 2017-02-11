@@ -1,39 +1,39 @@
-using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Models.Dom
 {
     public class PageCells
     {
         // PageLayout
-        public ShapeSheet.FormulaLiteral AvenueSizeX { get; set; }
-        public ShapeSheet.FormulaLiteral AvenueSizeY { get; set; }
-        public ShapeSheet.FormulaLiteral BlockSizeX { get; set; }
-        public ShapeSheet.FormulaLiteral BlockSizeY { get; set; }
-        public ShapeSheet.FormulaLiteral CtrlAsInput { get; set; }
-        public ShapeSheet.FormulaLiteral DynamicsOff { get; set; }
-        public ShapeSheet.FormulaLiteral EnableGrid { get; set; }
-        public ShapeSheet.FormulaLiteral LineAdjustFrom { get; set; }
-        public ShapeSheet.FormulaLiteral LineAdjustTo { get; set; }
-        public ShapeSheet.FormulaLiteral LineJumpCode { get; set; }
-        public ShapeSheet.FormulaLiteral LineJumpFactorX { get; set; }
-        public ShapeSheet.FormulaLiteral LineJumpFactorY { get; set; }
-        public ShapeSheet.FormulaLiteral LineJumpStyle { get; set; }
-        public ShapeSheet.FormulaLiteral LineRouteExt { get; set; }
-        public ShapeSheet.FormulaLiteral LineToLineX { get; set; }
-        public ShapeSheet.FormulaLiteral LineToLineY { get; set; }
-        public ShapeSheet.FormulaLiteral LineToNodeX { get; set; }
-        public ShapeSheet.FormulaLiteral LineToNodeY { get; set; }
-        public ShapeSheet.FormulaLiteral PageLineJumpDirX { get; set; }
-        public ShapeSheet.FormulaLiteral PageLineJumpDirY { get; set; }
-        public ShapeSheet.FormulaLiteral PageShapeSplit { get; set; }
-        public ShapeSheet.FormulaLiteral PlaceDepth { get; set; }
-        public ShapeSheet.FormulaLiteral PlaceFlip { get; set; }
-        public ShapeSheet.FormulaLiteral PlaceStyle { get; set; }
-        public ShapeSheet.FormulaLiteral PlowCode { get; set; }
-        public ShapeSheet.FormulaLiteral ResizePage { get; set; }
-        public ShapeSheet.FormulaLiteral RouteStyle { get; set; }
+        public ShapeSheet.ValueLiteral AvenueSizeX { get; set; }
+        public ShapeSheet.ValueLiteral AvenueSizeY { get; set; }
+        public ShapeSheet.ValueLiteral BlockSizeX { get; set; }
+        public ShapeSheet.ValueLiteral BlockSizeY { get; set; }
+        public ShapeSheet.ValueLiteral CtrlAsInput { get; set; }
+        public ShapeSheet.ValueLiteral DynamicsOff { get; set; }
+        public ShapeSheet.ValueLiteral EnableGrid { get; set; }
+        public ShapeSheet.ValueLiteral LineAdjustFrom { get; set; }
+        public ShapeSheet.ValueLiteral LineAdjustTo { get; set; }
+        public ShapeSheet.ValueLiteral LineJumpCode { get; set; }
+        public ShapeSheet.ValueLiteral LineJumpFactorX { get; set; }
+        public ShapeSheet.ValueLiteral LineJumpFactorY { get; set; }
+        public ShapeSheet.ValueLiteral LineJumpStyle { get; set; }
+        public ShapeSheet.ValueLiteral LineRouteExt { get; set; }
+        public ShapeSheet.ValueLiteral LineToLineX { get; set; }
+        public ShapeSheet.ValueLiteral LineToLineY { get; set; }
+        public ShapeSheet.ValueLiteral LineToNodeX { get; set; }
+        public ShapeSheet.ValueLiteral LineToNodeY { get; set; }
+        public ShapeSheet.ValueLiteral PageLineJumpDirX { get; set; }
+        public ShapeSheet.ValueLiteral PageLineJumpDirY { get; set; }
+        public ShapeSheet.ValueLiteral PageShapeSplit { get; set; }
+        public ShapeSheet.ValueLiteral PlaceDepth { get; set; }
+        public ShapeSheet.ValueLiteral PlaceFlip { get; set; }
+        public ShapeSheet.ValueLiteral PlaceStyle { get; set; }
+        public ShapeSheet.ValueLiteral PlowCode { get; set; }
+        public ShapeSheet.ValueLiteral ResizePage { get; set; }
+        public ShapeSheet.ValueLiteral RouteStyle { get; set; }
 
-        public void Apply(FormulaWriterSIDSRC writer, short id)
+        public void Apply(ShapeSheetWriter writer, short id)
         {
             writer.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeX, this.AvenueSizeX);
             writer.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeY, this.AvenueSizeY);

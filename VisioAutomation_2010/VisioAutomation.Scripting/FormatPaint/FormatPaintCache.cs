@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -128,7 +127,7 @@ namespace VisioAutomation.Scripting.FormatPaint
             var matching_cells = this.Cells.Where(c => c.MatchesCategory(category)).ToArray();
 
             // Apply those matched cells to each shape
-            var writer = new FormulaWriterSIDSRC();
+            var writer = new ShapeSheetWriter();
             foreach (var shape_id in shapeids)
             {
                 foreach (var cell in matching_cells)
@@ -139,7 +138,8 @@ namespace VisioAutomation.Scripting.FormatPaint
                 }
             }
 
-            writer.Commit(page);
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+            writer.Commit(surface);
         }
 
         public FormatCategory GetAllFormatPaintFlags()

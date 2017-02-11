@@ -1,4 +1,4 @@
-using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages.PageLayout
@@ -140,7 +140,7 @@ namespace VisioAutomation.Pages.PageLayout
             var pagecells = new PageLayoutFormulas();
             this.SetPageCells(pagecells);
 
-            var writer = new FormulaWriterSRC();
+            var writer = new ShapeSheetWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeX,pagecells.AvenueSizeX);
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeY, pagecells.AvenueSizeY);
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.LineRouteExt, pagecells.LineRouteExt);
@@ -148,7 +148,9 @@ namespace VisioAutomation.Pages.PageLayout
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PlaceStyle, pagecells.PlaceStyle);
 
             var pagesheet = page.PageSheet;
-            writer.Commit(pagesheet);
+
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(pagesheet);
+            writer.Commit(surface);
             page.Layout();
         }
     }

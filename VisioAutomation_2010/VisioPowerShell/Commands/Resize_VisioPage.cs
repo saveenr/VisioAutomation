@@ -1,5 +1,4 @@
 using System.Management.Automation;
-using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioPowerShell.Commands
 {
@@ -44,10 +43,12 @@ namespace VisioPowerShell.Commands
                     newpagecells.PageHeight = this.Height;
                 }
 
-                var writer = new FormulaWriterSRC();
+                var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
                 newpagecells.SetFormulas(writer);
                 writer.BlastGuards = true;
-                writer.Commit(page);
+
+                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
+                writer.Commit(surface);
             }
         }
     }

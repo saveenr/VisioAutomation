@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
-using VisioAutomation.ShapeSheet.Writers;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Text
@@ -160,7 +160,7 @@ namespace VisioAutomation.Models.Text
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
-            var writer = new FormulaWriterSRC();
+            var writer = new ShapeSheetWriter();
 
             foreach (var region in regions_to_format)
             {
@@ -182,7 +182,9 @@ namespace VisioAutomation.Models.Text
 
                     writer.Clear();
                     charcells.ApplyFormulas(writer, rownum);
-                    writer.Commit(shape);
+
+                    var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+                    writer.Commit(surface);
                 }
 
                 // Apply paragraph formatting
@@ -202,7 +204,9 @@ namespace VisioAutomation.Models.Text
 
                     writer.Clear();
                     paracells.ApplyFormulas(writer, rownum);
-                    writer.Commit(shape);
+
+                    var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
+                    writer.Commit(surface);
                 }
             }
 
