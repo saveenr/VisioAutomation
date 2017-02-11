@@ -239,7 +239,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         private short[] _build_sidsrc_stream(ShapeSheetSurface surface, IList<int> shapeids)
         {
-            this._calcualte_per_shape_info(surface, shapeids);
+            this._calculate_per_shape_info(surface, shapeids);
 
             int total = this._get_total_cell_count(shapeids.Count);
 
@@ -283,7 +283,7 @@ namespace VisioAutomation.ShapeSheet.Queries
         }
 
 
-        private void _calcualte_per_shape_info(ShapeSheetSurface surface, IList<int> shapeids)
+        private void _calculate_per_shape_info(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this._subquery_shape_info = new List<List<SubQuerySectionDetails>>();
 
