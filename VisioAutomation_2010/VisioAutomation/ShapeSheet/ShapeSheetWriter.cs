@@ -92,13 +92,14 @@ namespace VisioAutomation.ShapeSheet
 
         private void CommitFormulaRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var records = this.FormulaRecords.EnumerateByCoordType(coord_type);
-            var count = records.Count();
+            int count = this.FormulaRecords.CountByCoordType(coord_type);
 
             if (count == 0)
             {
                 return;
             }
+
+            var records = this.FormulaRecords.EnumerateByCoordType(coord_type);
 
             int chunksize = coord_type == CoordType.SIDSRC ? 4 : 3;
 
@@ -144,13 +145,15 @@ namespace VisioAutomation.ShapeSheet
 
         private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var records = this.ResultRecords.EnumerateByCoordType(coord_type);
-            var count = records.Count();
+
+            int count = this.ResultRecords.CountByCoordType(coord_type);
 
             if (count == 0)
             {
                 return;
             }
+
+            var records = this.ResultRecords.EnumerateByCoordType(coord_type);
 
             int chunksize = coord_type == CoordType.SIDSRC ? 4 : 3;
 
@@ -176,7 +179,6 @@ namespace VisioAutomation.ShapeSheet
                     throw new System.ArgumentException();
                 }
                 unitcodes[unitcodespos++] = rec.UnitCode;
-
             }
 
             var flags = this.ComputeGetResultFlags();
