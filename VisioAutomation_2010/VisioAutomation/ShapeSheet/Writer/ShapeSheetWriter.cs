@@ -113,21 +113,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             foreach (var rec in records)
             {
                 // fill stream
-                if (coord_type == CoordType.SRC)
-                {
-                    var src = rec.SRC;
-                    stream[streampos++] = src.Section;
-                    stream[streampos++] = src.Row;
-                    stream[streampos++] = src.Cell;
-                }
-                else
-                {
-                    var sidsrc = rec.SIDSRC;
-                    stream[streampos++] = sidsrc.ShapeID;
-                    stream[streampos++] = sidsrc.Section;
-                    stream[streampos++] = sidsrc.Row;
-                    stream[streampos++] = sidsrc.Cell;
-                }
+                streampos = this.FillStream(stream, streampos, coord_type, rec);
 
                 // fill formulas
                 formulas[formulapos++] = rec.Value.Value;
@@ -184,21 +170,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             foreach (var rec in records)
             {
                 // fill stream
-                if (coord_type == CoordType.SRC)
-                {
-                    var src = rec.SRC;
-                    stream[streampos++] = src.Section;
-                    stream[streampos++] = src.Row;
-                    stream[streampos++] = src.Cell;
-                }
-                else
-                {
-                    var sidsrc = rec.SIDSRC;
-                    stream[streampos++] = sidsrc.ShapeID;
-                    stream[streampos++] = sidsrc.Section;
-                    stream[streampos++] = sidsrc.Row;
-                    stream[streampos++] = sidsrc.Cell;
-                }
+                streampos = this.FillStream(stream, streampos, coord_type, rec);
 
                 // fill results
                 if (rec.Value.ResultType == ResultType.ResultNumeric)
@@ -211,12 +183,33 @@ namespace VisioAutomation.ShapeSheet.Writers
                 }
 
                 // fill unit codes
-                unitcodes[unitcodespos] = rec.Value.UnitCode;
+                unitcodes[unitcodespos++] = rec.Value.UnitCode;
 
             }
 
-            var flags = this.ComputeGetResultFlags(records.First().Value.ResultType);
+            var result_type = records.First().Value.ResultType;
+            var flags = this.ComputeGetResultFlags(result_type);
             surface.SetResults(stream, unitcodes, results, (short)flags);
+        }
+
+        private int FillStream<T>(short[] stream, int streampos, CoordType coord_type, WriteRecord<T> rec)
+        {
+            if (coord_type == CoordType.SRC)
+            {
+                var src = rec.SRC;
+                stream[streampos++] = src.Section;
+                stream[streampos++] = src.Row;
+                stream[streampos++] = src.Cell;
+            }
+            else
+            {
+                var sidsrc = rec.SIDSRC;
+                stream[streampos++] = sidsrc.ShapeID;
+                stream[streampos++] = sidsrc.Section;
+                stream[streampos++] = sidsrc.Row;
+                stream[streampos++] = sidsrc.Cell;
+            }
+            return streampos;
         }
     }
 
