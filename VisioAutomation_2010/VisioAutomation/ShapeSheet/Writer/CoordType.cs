@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public enum CoordType
+    internal enum CoordType
     {
         SIDSRC,
         SRC

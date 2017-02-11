@@ -2,14 +2,14 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public struct WriteRecord
+    internal struct WriteRecord
     {
         private readonly SIDSRC _SIDSRC;
         private readonly SRC _SRC;
 
-        public readonly FormulaLiteral Value;
-        public readonly CoordType Type;
-        public readonly IVisio.VisUnitCodes? UnitCode;
+        internal readonly FormulaLiteral Value;
+        internal readonly CoordType Type;
+        internal readonly IVisio.VisUnitCodes? UnitCode;
 
         public WriteRecord(SIDSRC sidsrc, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
         {
