@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupSingleRow : CellGroupBase
     {
-        public void SetFormulas(FormulaWriter writer)
+        public void SetFormulas(ShapeSheetWriter writer)
         {
             foreach (var pair in this.Pairs)
             {
@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public void SetFormulas(short shapeid, FormulaWriter writer)
+        public void SetFormulas(short shapeid, ShapeSheetWriter writer)
         {
             foreach (var pair in this.Pairs)
             {

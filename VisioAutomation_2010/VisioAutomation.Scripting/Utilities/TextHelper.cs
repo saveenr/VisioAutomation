@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting.Utilities
             const string formula_wrap = "WIDTH*1";
             const string formula_no_wrap = "TEXTWIDTH(TheText)";
             string formula = wrap ? formula_wrap : formula_no_wrap;
-            var writer = new FormulaWriter();
+            var writer = new ShapeSheetWriter();
             
             foreach (int shapeid in shapeids)
             {

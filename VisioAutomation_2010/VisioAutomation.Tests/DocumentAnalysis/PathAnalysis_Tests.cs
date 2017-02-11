@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
 
             if (a_arrow || b_arrow)
             {
-                var writer = new FormulaWriter();
+                var writer = new ShapeSheetWriter();
                 if (a_arrow)
                 {
                     writer.SetFormula(c1.ID16, VASS.SRCConstants.BeginArrow, "13");                    
