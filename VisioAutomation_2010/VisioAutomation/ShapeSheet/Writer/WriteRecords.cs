@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    internal class WriteRecords<T>
+    internal class WriteRecords
     {
-        private readonly List<WriteRecord<T>> Records;
+        private readonly List<WriteRecord> Records;
 
         public WriteRecords()
         {
-            this.Records = new List<WriteRecord<T>>();
+            this.Records = new List<WriteRecord>();
         } 
 
         public void Clear()
@@ -17,21 +18,21 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.Records.Clear();
         }
 
-        public void Add(SRC src, T value)
+        public void Add(SRC src, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
         {
-            var rec = new WriteRecord<T>(src, value);
+            var rec = new WriteRecord(src, value, unitcode);
             this.Records.Add(rec);
         }
 
-        public void Add(SIDSRC sidsrc, T value)
+        public void Add(SIDSRC sidsrc, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
         {
-            var rec = new WriteRecord<T>(sidsrc, value);
+            var rec = new WriteRecord(sidsrc, value,unitcode);
             this.Records.Add(rec);
         }
 
         public int Count => this.Records.Count;
 
-        public IEnumerable<WriteRecord<T>> Enum(CoordType type)
+        public IEnumerable<WriteRecord> Enum(CoordType type)
         {
             return this.Records.Where(i => i.Type == type);
         }

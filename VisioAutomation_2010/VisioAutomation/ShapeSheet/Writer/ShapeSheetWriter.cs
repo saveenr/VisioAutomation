@@ -8,13 +8,13 @@ namespace VisioAutomation.ShapeSheet.Writers
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        private readonly WriteRecords<FormulaLiteral> FormulaRecords;
-        private readonly WriteRecords<ResultValue> ResultRecords;
+        private readonly WriteRecords FormulaRecords;
+        private readonly WriteRecords ResultRecords;
 
         public ShapeSheetWriter()
         {
-            this.FormulaRecords = new WriteRecords<FormulaLiteral>();
-            this.ResultRecords = new WriteRecords<ResultValue>();
+            this.FormulaRecords = new WriteRecords();
+            this.ResultRecords = new WriteRecords();
         }
 
         public void Clear()
@@ -23,14 +23,11 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.ResultRecords.Clear();
         }
 
-        protected IVisio.VisGetSetArgs ComputeGetResultFlags(ResultType rt)
+        protected IVisio.VisGetSetArgs ComputeGetResultFlags()
         {
             var flags = this.combine_blastguards_and_testcircular_flags();
 
-            if (rt == ResultType.ResultString)
-            {
-                flags |= IVisio.VisGetSetArgs.visGetStrings;
-            }
+            flags |= IVisio.VisGetSetArgs.visGetStrings;
 
             return flags;
         }
@@ -80,7 +77,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (formula.HasValue)
             {
-                this.FormulaRecords.Add(src, formula);
+                this.FormulaRecords.Add(src, formula,null);
             }
         }
 
@@ -88,7 +85,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (formula.HasValue)
             {
-                this.FormulaRecords.Add(sidsrc,formula);
+                this.FormulaRecords.Add(sidsrc,formula,null);
             }
         }
 
@@ -117,6 +114,11 @@ namespace VisioAutomation.ShapeSheet.Writers
 
                 // fill formulas
                 formulas[formulapos++] = rec.Value.Value;
+
+                if (rec.UnitCode != null)
+                {
+                    throw new System.ArgumentException();
+                }
             }
 
             var flags = this.ComputeGetFormulaFlags();
@@ -125,26 +127,22 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetResult(SRC src, string value, IVisio.VisUnitCodes unitcode)
         {
-            var value_item = new ResultValue(value, unitcode);
-            this.ResultRecords.Add(src, value_item);
+            this.ResultRecords.Add(src, value, unitcode);
         }
 
         public void SetResult(SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
-            var value_item = new ResultValue(value, unitcode);
-            this.ResultRecords.Add(src, value_item);
+            this.ResultRecords.Add(src, value, unitcode);
         }
 
         public void SetResult(SIDSRC sidsrc, double value, IVisio.VisUnitCodes unitcode)
         {
-            var v = new ResultValue(value, unitcode);
-            this.ResultRecords.Add(sidsrc, v);
+            this.ResultRecords.Add(sidsrc, value, unitcode);
         }
 
         public void SetResult(SIDSRC sidsrc, string value, IVisio.VisUnitCodes unitcode)
         {
-            var v = new ResultValue(value, unitcode);
-            this.ResultRecords.Add(sidsrc, v);
+            this.ResultRecords.Add(sidsrc, value, unitcode);
         }
 
         private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
@@ -173,18 +171,22 @@ namespace VisioAutomation.ShapeSheet.Writers
                 streampos = this.AddStreamRecord(stream, streampos, coord_type, rec);
 
                 // fill results
-                results[resultspos++] = rec.Value.ValueString;
+                results[resultspos++] = rec.Value.Value;
 
                 // fill unit codes
-                unitcodes[unitcodespos++] = rec.Value.UnitCode;
+                if (rec.UnitCode == null)
+                {
+                    throw new System.ArgumentException();
+                }
+                unitcodes[unitcodespos++] = rec.UnitCode;
 
             }
 
-            var flags = this.ComputeGetResultFlags(ResultType.ResultString);
+            var flags = this.ComputeGetResultFlags();
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }
 
-        private int AddStreamRecord<T>(short[] stream, int streampos, CoordType coord_type, WriteRecord<T> rec)
+        private int AddStreamRecord(short[] stream, int streampos, CoordType coord_type, WriteRecord rec)
         {
             if (coord_type == CoordType.SRC)
             {

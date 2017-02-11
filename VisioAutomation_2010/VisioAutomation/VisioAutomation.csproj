@@ -127,8 +127,6 @@
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
-    <Compile Include="ShapeSheet\Writer\ResultType.cs" />
-    <Compile Include="ShapeSheet\Writer\ResultValue.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />

@@ -1,27 +1,32 @@
+using IVisio = Microsoft.Office.Interop.Visio;
+
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    public struct WriteRecord<TValue>
+    public struct WriteRecord
     {
         private readonly SIDSRC _SIDSRC;
         private readonly SRC _SRC;
 
-        public readonly TValue Value;
+        public readonly FormulaLiteral Value;
         public readonly CoordType Type;
+        public readonly IVisio.VisUnitCodes? UnitCode;
 
-        public WriteRecord(SIDSRC sidsrc, TValue value)
+        public WriteRecord(SIDSRC sidsrc, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
         {
             this._SIDSRC = sidsrc;
             this._SRC = new SRC();
             this.Value = value;
             this.Type = CoordType.SIDSRC;
+            this.UnitCode = unitcode;
         }
 
-        public WriteRecord(SRC src, TValue value)
+        public WriteRecord(SRC src, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
         {
             this._SIDSRC = new SIDSRC();
             this._SRC = src;
             this.Value = value;
             this.Type = CoordType.SRC;
+            this.UnitCode = unitcode;
         }
 
         public SIDSRC SIDSRC
