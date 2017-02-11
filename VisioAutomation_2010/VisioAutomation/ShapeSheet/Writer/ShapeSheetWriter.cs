@@ -173,24 +173,15 @@ namespace VisioAutomation.ShapeSheet.Writers
                 streampos = this.AddStreamRecord(stream, streampos, coord_type, rec);
 
                 // fill results
-                results[resultspos++] = GetResultValueAsObject(rec);
+                results[resultspos++] = rec.Value.ValueString;
 
                 // fill unit codes
                 unitcodes[unitcodespos++] = rec.Value.UnitCode;
 
             }
 
-            var result_type = records.First().Value.ResultType;
-            var flags = this.ComputeGetResultFlags(result_type);
+            var flags = this.ComputeGetResultFlags(ResultType.ResultString);
             surface.SetResults(stream, unitcodes, results, (short)flags);
-        }
-
-        private static object GetResultValueAsObject(WriteRecord<ResultValue> rec)
-        {
-            object obj_res = (rec.Value.ResultType == ResultType.ResultNumeric)
-                ? (object) rec.Value.ValueNumeric
-                : (object) rec.Value.ValueString;
-            return obj_res;
         }
 
         private int AddStreamRecord<T>(short[] stream, int streampos, CoordType coord_type, WriteRecord<T> rec)
