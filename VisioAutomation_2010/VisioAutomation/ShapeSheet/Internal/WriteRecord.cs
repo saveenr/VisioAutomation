@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheet.Internal
             {
                 if (this.Type != CoordType.SIDSRC)
                 {
-                    throw new System.ArgumentException();
+                    throw new VisioAutomation.Exceptions.InternalAssertionException("Record does not contain a SIDSRC");
                 }
                 return _SIDSRC;
             }
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Internal
             {
                 if (this.Type != CoordType.SRC)
                 {
-                    throw new System.ArgumentException();
+                    throw new VisioAutomation.Exceptions.InternalAssertionException("Record does not contain a SRC");
                 }
                 return _SRC;
             }
