@@ -29,7 +29,6 @@ namespace VisioAutomation.ShapeSheet.Internal
         {
             var rec = new WriteRecord(src, value, unitcode);
             this.Records.Add(rec);
-
             this.CountSRC++;
         }
 
@@ -37,7 +36,6 @@ namespace VisioAutomation.ShapeSheet.Internal
         {
             var rec = new WriteRecord(sidsrc, value, unitcode);
             this.Records.Add(rec);
-
             this.CountSIDSRC++;
         }
 
@@ -47,7 +45,7 @@ namespace VisioAutomation.ShapeSheet.Internal
         {
             if (this.Records.Count != (this.CountSRC + this.CountSIDSRC))
             {
-                throw new System.ArgumentException();
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Mismatch in counting number of records");
             }
 
             return type == CoordType.SIDSRC ? this.CountSIDSRC : this.CountSRC;

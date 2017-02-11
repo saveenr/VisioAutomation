@@ -117,9 +117,9 @@ namespace VisioAutomation.ShapeSheet
                 // fill formulas
                 formulas[formulapos++] = rec.CellValue;
 
-                if (rec.UnitCode != null)
+                if (rec.UnitCode.HasValue)
                 {
-                    throw new System.ArgumentException();
+                    throw new VisioAutomation.Exceptions.InternalAssertionException("Unit code should not be set for formulas");
                 }
             }
 
@@ -174,11 +174,11 @@ namespace VisioAutomation.ShapeSheet
                 results[resultspos++] = rec.CellValue;
 
                 // fill unit codes
-                if (rec.UnitCode == null)
+                if (!rec.UnitCode.HasValue)
                 {
-                    throw new System.ArgumentException();
+                    throw new VisioAutomation.Exceptions.InternalAssertionException("Unit code missing for result");
                 }
-                unitcodes[unitcodespos++] = rec.UnitCode;
+                unitcodes[unitcodespos++] = rec.UnitCode.Value;
             }
 
             var flags = this.ComputeGetResultFlags();
