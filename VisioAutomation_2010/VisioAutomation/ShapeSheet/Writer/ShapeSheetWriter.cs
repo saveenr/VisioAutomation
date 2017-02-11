@@ -125,26 +125,21 @@ namespace VisioAutomation.ShapeSheet.Writers
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void SetResult(SRC src, string value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, FormulaLiteral value, IVisio.VisUnitCodes unitcode)
         {
             this.ResultRecords.Add(src, value, unitcode);
         }
 
-        public void SetResult(SRC src, double value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(short id, SRC src, FormulaLiteral value, IVisio.VisUnitCodes unitcode)
         {
-            this.ResultRecords.Add(src, value, unitcode);
-        }
-
-        public void SetResult(SIDSRC sidsrc, double value, IVisio.VisUnitCodes unitcode)
-        {
+            var sidsrc = new SIDSRC(id, src);
             this.ResultRecords.Add(sidsrc, value, unitcode);
         }
 
-        public void SetResult(SIDSRC sidsrc, string value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC sidsrc, FormulaLiteral value, IVisio.VisUnitCodes unitcode)
         {
             this.ResultRecords.Add(sidsrc, value, unitcode);
         }
-
         private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
             var records = this.ResultRecords.Enum(coord_type);
