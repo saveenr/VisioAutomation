@@ -1,4 +1,4 @@
-namespace VisioAutomation.ShapeSheet.Writers
+namespace VisioAutomation.ShapeSheet.Writer
 {
     internal enum CoordType
     {

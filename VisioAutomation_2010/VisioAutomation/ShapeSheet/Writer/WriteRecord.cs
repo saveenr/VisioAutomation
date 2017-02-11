@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Writers
+namespace VisioAutomation.ShapeSheet.Writer
 {
     internal struct WriteRecord
     {

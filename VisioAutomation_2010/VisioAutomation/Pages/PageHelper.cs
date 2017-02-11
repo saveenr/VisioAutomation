@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -163,7 +162,7 @@ namespace VisioAutomation.Pages
 
             // Set the Cells on the Destination
            
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheet.Writer.ShapeSheetWriter();
             for (i = 0; i < page_srcs.Count; i++)
             {
                 writer.SetFormula(page_srcs[i],src_formulas.Cells[i]);
@@ -274,7 +273,7 @@ namespace VisioAutomation.Pages
 
         private static void SetSize(IVisio.Page page, Drawing.Size size)
         {
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheet.Writer.ShapeSheetWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
 

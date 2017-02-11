@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet.Writers;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
+﻿using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Models.Text
 {
@@ -28,7 +27,7 @@ namespace VisioAutomation.Models.Text
         public ShapeSheet.ValueLiteral Transparency { get; set; }
         public ShapeSheet.ValueLiteral UseVertical { get; set; }
 
-        internal void ApplyFormulas(ShapeSheetWriter writer, short row)
+        internal void ApplyFormulas(VisioAutomation.ShapeSheet.Writer.ShapeSheetWriter writer, short row)
         {
             writer.SetFormula(SRCCON.CharColor.CloneWithNewRow(row), this.Color);
             writer.SetFormula(SRCCON.CharFont.CloneWithNewRow(row), this.Font);

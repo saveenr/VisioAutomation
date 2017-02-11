@@ -1,10 +1,8 @@
-using VisioAutomation.ShapeSheet.Writers;
-
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupMultiRow : CellGroupBase
     {
-        public void SetFormulas(short shapeid, ShapeSheetWriter writer, short row)
+        public void SetFormulas(short shapeid, Writer.ShapeSheetWriter writer, short row)
         {
             foreach (var pair in this.Pairs)
             {
@@ -13,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public void SetFormulas(ShapeSheetWriter writer, short row)
+        public void SetFormulas(Writer.ShapeSheetWriter writer, short row)
         {
             foreach (var pair in this.Pairs)
             {

@@ -1,4 +1,3 @@
-using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages.PageLayout
@@ -140,7 +139,7 @@ namespace VisioAutomation.Pages.PageLayout
             var pagecells = new PageLayoutFormulas();
             this.SetPageCells(pagecells);
 
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheet.Writer.ShapeSheetWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeX,pagecells.AvenueSizeX);
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeY, pagecells.AvenueSizeY);
             writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.LineRouteExt, pagecells.LineRouteExt);
