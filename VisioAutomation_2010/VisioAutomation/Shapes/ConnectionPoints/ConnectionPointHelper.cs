@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.ConnectionPoints
@@ -29,7 +30,7 @@ namespace VisioAutomation.Shapes.ConnectionPoints
                                  (short)IVisio.VisRowIndices.visRowLast,
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
-            var writer = new ShapeSheet.Writer.ShapeSheetWriter();
+            var writer = new ShapeSheetWriter();
             connection_point_cells.SetFormulas(writer,n);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);

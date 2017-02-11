@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
 using VAQUERY = VisioAutomation.ShapeSheet.Queries;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -18,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             targets = targets.ResolveShapes(this._client);
             var shape_ids = targets.ToShapeIDs();
-            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
 
             foreach (var shape_id in shape_ids.ShapeIDs)
             {

@@ -1,4 +1,5 @@
 using System;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Controls
@@ -51,7 +52,7 @@ namespace VisioAutomation.Shapes.Controls
                 ctrl.YDynamics = string.Format("Controls.Row_{0}.Y", row + 1);
             }
 
-            var writer = new ShapeSheet.Writer.ShapeSheetWriter();
+            var writer = new ShapeSheetWriter();
             ctrl.SetFormulas(writer, row);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);

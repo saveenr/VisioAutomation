@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.Models.Layouts.Container
+﻿using VisioAutomation.ShapeSheet;
+
+namespace VisioAutomation.Models.Layouts.Container
 {
     public class Formatting
     {
@@ -15,7 +17,7 @@
             this.TextBlockCells = new VisioAutomation.Text.TextBlockCells();
         }
 
-        public void Apply(VisioAutomation.ShapeSheet.Writer.ShapeSheetWriter writer, short shapeid_label, short shapeid_box)
+        public void Apply(ShapeSheetWriter writer, short shapeid_label, short shapeid_box)
         {
             this.CharacterCells.SetFormulas(shapeid_label, writer, 0);
             this.ParagraphCells.SetFormulas(shapeid_label, writer, 0);

@@ -4,7 +4,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using VisioAutomation.Models.Layouts.Grid;
-using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomationSamples
 {
@@ -60,7 +59,7 @@ namespace VisioAutomationSamples
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             var format = new VA.Shapes.ShapeFormatCells();
             var xfrm = new VA.Shapes.XFormCells();
 
@@ -125,7 +124,7 @@ namespace VisioAutomationSamples
 
             var format = new VA.Shapes.ShapeFormatCells();
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
 
             string color1_formula = color1.ToFormula();
             string color2_formula = color2.ToFormula();

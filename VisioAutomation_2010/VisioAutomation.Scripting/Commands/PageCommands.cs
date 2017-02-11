@@ -4,7 +4,6 @@ using VisioAutomation.Extensions;
 using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.View;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
 using VisioAutomation.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 

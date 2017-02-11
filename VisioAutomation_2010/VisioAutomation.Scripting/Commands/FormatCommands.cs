@@ -2,7 +2,6 @@
 using System.Linq;
 using VisioAutomation.Scripting.FormatPaint;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands

@@ -1,3 +1,5 @@
+using VisioAutomation.ShapeSheet;
+
 namespace VisioAutomation.Models.Dom
 {
     public class PageCells
@@ -31,7 +33,7 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.ValueLiteral ResizePage { get; set; }
         public ShapeSheet.ValueLiteral RouteStyle { get; set; }
 
-        public void Apply(VisioAutomation.ShapeSheet.Writer.ShapeSheetWriter writer, short id)
+        public void Apply(ShapeSheetWriter writer, short id)
         {
             writer.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeX, this.AvenueSizeX);
             writer.SetFormula(id, ShapeSheet.SRCConstants.AvenueSizeY, this.AvenueSizeY);

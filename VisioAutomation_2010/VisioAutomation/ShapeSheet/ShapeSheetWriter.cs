@@ -1,7 +1,8 @@
 ﻿using System.Linq;
+using VisioAutomation.ShapeSheet.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Writer
+namespace VisioAutomation.ShapeSheet
 {
     public class ShapeSheetWriter
     {

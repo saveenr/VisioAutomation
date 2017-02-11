@@ -2,6 +2,7 @@
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Layouts.Container
@@ -168,7 +169,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 item.VisioShape.Text = item.Text;
             }
 
-            var writer = new VisioAutomation.ShapeSheet.Writer.ShapeSheetWriter();
+            var writer = new ShapeSheetWriter();
 
             // Format the containers and shapes
 
@@ -211,7 +212,7 @@ namespace VisioAutomation.Models.Layouts.Container
 
             // Dropping takes care of the PinX and PinY
             // Now set the Width's and Heights
-            var writer = new VisioAutomation.ShapeSheet.Writer.ShapeSheetWriter();
+            var writer = new ShapeSheetWriter();
             for (int i = 0; i < rects.Count(); i++)
             {
                 writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SRCConstants.Width, rects[i].Width);

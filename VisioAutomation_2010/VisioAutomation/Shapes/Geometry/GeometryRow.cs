@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -24,14 +25,14 @@ namespace VisioAutomation.Shapes.Geometry
             return this.RowTag;
         }
 
-        public void AddTo(IVisio.Shape shape, ShapeSheet.Writer.ShapeSheetWriter writer, short row, short section)
+        public void AddTo(IVisio.Shape shape, ShapeSheetWriter writer, short row, short section)
         {
             short row_index = shape.AddRow(section, row, (short) this.GetRowTagType());
             this.Update(section, row_index, writer);
         }
 
 
-        private void Update(short section_index, short row_index, ShapeSheet.Writer.ShapeSheetWriter writer)
+        private void Update(short section_index, short row_index, ShapeSheetWriter writer)
         {
             var x_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_X.Cell);
             var y_src = new VA.ShapeSheet.SRC(section_index, row_index,ShapeSheet.SRCConstants.Geometry_Y.Cell);

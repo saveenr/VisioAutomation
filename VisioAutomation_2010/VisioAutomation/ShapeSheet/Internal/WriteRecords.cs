@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Writer
+namespace VisioAutomation.ShapeSheet.Internal
 {
     internal class WriteRecords
     {

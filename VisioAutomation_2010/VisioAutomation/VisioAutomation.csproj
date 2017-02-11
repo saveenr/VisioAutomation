@@ -100,9 +100,9 @@
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
-    <Compile Include="ShapeSheet\Writer\CoordType.cs" />
-    <Compile Include="ShapeSheet\Writer\WriteRecord.cs" />
-    <Compile Include="ShapeSheet\Writer\WriteRecords.cs" />
+    <Compile Include="ShapeSheet\Internal\CoordType.cs" />
+    <Compile Include="ShapeSheet\Internal\WriteRecord.cs" />
+    <Compile Include="ShapeSheet\Internal\WriteRecords.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
@@ -190,7 +190,7 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ColumnQuery.cs" />
-    <Compile Include="ShapeSheet\Writer\ShapeSheetWriter.cs" />
+    <Compile Include="ShapeSheet\ShapeSheetWriter.cs" />
     <Compile Include="ShapeSheet\ValueLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
@@ -258,7 +258,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ShapeSheet\Writer\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

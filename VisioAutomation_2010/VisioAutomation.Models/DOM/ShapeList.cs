@@ -5,6 +5,7 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.ShapeSheet;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -115,7 +116,7 @@ namespace VisioAutomation.Models.Dom
         {
             this.UpdateCellsWithDropSizes(context);
 
-            var writer = new VisioAutomation.ShapeSheet.Writer.ShapeSheetWriter();
+            var writer = new ShapeSheetWriter();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {
