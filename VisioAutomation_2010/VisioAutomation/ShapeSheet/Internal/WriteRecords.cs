@@ -18,21 +18,21 @@ namespace VisioAutomation.ShapeSheet.Internal
             this.Records.Clear();
         }
 
-        public void Add(SRC src, ValueLiteral value, IVisio.VisUnitCodes? unitcode)
+        public void Add(SRC src, string value, IVisio.VisUnitCodes? unitcode)
         {
             var rec = new WriteRecord(src, value, unitcode);
             this.Records.Add(rec);
         }
 
-        public void Add(SIDSRC sidsrc, ValueLiteral value, IVisio.VisUnitCodes? unitcode)
+        public void Add(SIDSRC sidsrc, string value, IVisio.VisUnitCodes? unitcode)
         {
-            var rec = new WriteRecord(sidsrc, value,unitcode);
+            var rec = new WriteRecord(sidsrc, value, unitcode);
             this.Records.Add(rec);
         }
 
         public int Count => this.Records.Count;
 
-        public IEnumerable<WriteRecord> Enum(CoordType type)
+        public IEnumerable<WriteRecord> EnumerateByCoordType(CoordType type)
         {
             return this.Records.Where(i => i.Type == type);
         }

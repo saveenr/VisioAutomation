@@ -78,7 +78,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (formula.HasValue)
             {
-                this.FormulaRecords.Add(src, formula,null);
+                this.FormulaRecords.Add(src, formula.Value, null);
             }
         }
 
@@ -86,13 +86,13 @@ namespace VisioAutomation.ShapeSheet
         {
             if (formula.HasValue)
             {
-                this.FormulaRecords.Add(sidsrc,formula,null);
+                this.FormulaRecords.Add(sidsrc, formula.Value, null);
             }
         }
 
         private void CommitFormulaRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var records = this.FormulaRecords.Enum(coord_type);
+            var records = this.FormulaRecords.EnumerateByCoordType(coord_type);
             var count = records.Count();
 
             if (count == 0)
@@ -114,7 +114,7 @@ namespace VisioAutomation.ShapeSheet
                 streampos = this.AddStreamRecord(stream, streampos, coord_type, rec);
 
                 // fill formulas
-                formulas[formulapos++] = rec.Value.Value;
+                formulas[formulapos++] = rec.CellValue;
 
                 if (rec.UnitCode != null)
                 {
@@ -126,24 +126,25 @@ namespace VisioAutomation.ShapeSheet
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void SetResult(SRC src, ValueLiteral value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, ValueLiteral result, IVisio.VisUnitCodes unitcode)
         {
-            this.ResultRecords.Add(src, value, unitcode);
+            this.ResultRecords.Add(src, result.Value, unitcode);
         }
 
-        public void SetResult(short id, SRC src, ValueLiteral value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(short id, SRC src, ValueLiteral result, IVisio.VisUnitCodes unitcode)
         {
             var sidsrc = new SIDSRC(id, src);
-            this.ResultRecords.Add(sidsrc, value, unitcode);
+            this.ResultRecords.Add(sidsrc, result.Value, unitcode);
         }
 
-        public void SetResult(SIDSRC sidsrc, ValueLiteral value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC sidsrc, ValueLiteral result, IVisio.VisUnitCodes unitcode)
         {
-            this.ResultRecords.Add(sidsrc, value, unitcode);
+            this.ResultRecords.Add(sidsrc, result.Value, unitcode);
         }
+
         private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var records = this.ResultRecords.Enum(coord_type);
+            var records = this.ResultRecords.EnumerateByCoordType(coord_type);
             var count = records.Count();
 
             if (count == 0)
@@ -167,7 +168,7 @@ namespace VisioAutomation.ShapeSheet
                 streampos = this.AddStreamRecord(stream, streampos, coord_type, rec);
 
                 // fill results
-                results[resultspos++] = rec.Value.Value;
+                results[resultspos++] = rec.CellValue;
 
                 // fill unit codes
                 if (rec.UnitCode == null)
