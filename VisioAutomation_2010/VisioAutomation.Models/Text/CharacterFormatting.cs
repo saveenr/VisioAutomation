@@ -5,28 +5,28 @@ namespace VisioAutomation.Models.Text
 {
     public class CharacterFormatting
     {
-        public ShapeSheet.FormulaLiteral AsianFont { get; set; }
-        public ShapeSheet.FormulaLiteral Case { get; set; }
-        public ShapeSheet.FormulaLiteral Color { get; set; }
-        public ShapeSheet.FormulaLiteral ComplexScriptFont { get; set; }
-        public ShapeSheet.FormulaLiteral ComplexScriptSize { get; set; }
-        public ShapeSheet.FormulaLiteral DoubleStrikeThrough { get; set; }
-        public ShapeSheet.FormulaLiteral DoubleUnderline { get; set; }
-        public ShapeSheet.FormulaLiteral Font { get; set; }
-        public ShapeSheet.FormulaLiteral FontScale { get; set; }
-        public ShapeSheet.FormulaLiteral LangID { get; set; }
-        public ShapeSheet.FormulaLiteral Letterspace { get; set; }
-        public ShapeSheet.FormulaLiteral Locale { get; set; }
-        public ShapeSheet.FormulaLiteral LocalizeFont { get; set; }
-        public ShapeSheet.FormulaLiteral Overline { get; set; }
-        public ShapeSheet.FormulaLiteral Perpendicular { get; set; }
-        public ShapeSheet.FormulaLiteral Pos { get; set; }
-        public ShapeSheet.FormulaLiteral RTLText { get; set; }
-        public ShapeSheet.FormulaLiteral Size { get; set; }
-        public ShapeSheet.FormulaLiteral Strikethru { get; set; }
-        public ShapeSheet.FormulaLiteral Style { get; set; }
-        public ShapeSheet.FormulaLiteral Transparency { get; set; }
-        public ShapeSheet.FormulaLiteral UseVertical { get; set; }
+        public ShapeSheet.ValueLiteral AsianFont { get; set; }
+        public ShapeSheet.ValueLiteral Case { get; set; }
+        public ShapeSheet.ValueLiteral Color { get; set; }
+        public ShapeSheet.ValueLiteral ComplexScriptFont { get; set; }
+        public ShapeSheet.ValueLiteral ComplexScriptSize { get; set; }
+        public ShapeSheet.ValueLiteral DoubleStrikeThrough { get; set; }
+        public ShapeSheet.ValueLiteral DoubleUnderline { get; set; }
+        public ShapeSheet.ValueLiteral Font { get; set; }
+        public ShapeSheet.ValueLiteral FontScale { get; set; }
+        public ShapeSheet.ValueLiteral LangID { get; set; }
+        public ShapeSheet.ValueLiteral Letterspace { get; set; }
+        public ShapeSheet.ValueLiteral Locale { get; set; }
+        public ShapeSheet.ValueLiteral LocalizeFont { get; set; }
+        public ShapeSheet.ValueLiteral Overline { get; set; }
+        public ShapeSheet.ValueLiteral Perpendicular { get; set; }
+        public ShapeSheet.ValueLiteral Pos { get; set; }
+        public ShapeSheet.ValueLiteral RTLText { get; set; }
+        public ShapeSheet.ValueLiteral Size { get; set; }
+        public ShapeSheet.ValueLiteral Strikethru { get; set; }
+        public ShapeSheet.ValueLiteral Style { get; set; }
+        public ShapeSheet.ValueLiteral Transparency { get; set; }
+        public ShapeSheet.ValueLiteral UseVertical { get; set; }
 
         internal void ApplyFormulas(ShapeSheetWriter writer, short row)
         {

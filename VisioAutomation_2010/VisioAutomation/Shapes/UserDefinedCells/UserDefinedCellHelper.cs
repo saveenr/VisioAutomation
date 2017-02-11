@@ -41,7 +41,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             UserDefinedCellHelper.Set(shape, name, value.Formula.Value, prompt.Formula.Value);
         }
 
-        public static void Set(IVisio.Shape shape, string name, ShapeSheet.FormulaLiteral value, ShapeSheet.FormulaLiteral prompt)
+        public static void Set(IVisio.Shape shape, string name, ShapeSheet.ValueLiteral value, ShapeSheet.ValueLiteral prompt)
         {
             if (shape == null)
             {

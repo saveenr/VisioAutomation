@@ -3,9 +3,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     public struct SRCFormulaPair
     {
         public readonly ShapeSheet.SRC SRC;
-        public readonly ShapeSheet.FormulaLiteral Formula;
+        public readonly ShapeSheet.ValueLiteral Formula;
 
-        public SRCFormulaPair(ShapeSheet.SRC src, ShapeSheet.FormulaLiteral formula)
+        public SRCFormulaPair(ShapeSheet.SRC src, ShapeSheet.ValueLiteral formula)
         {
             this.SRC = src;
             this.Formula = formula;

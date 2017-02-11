@@ -191,7 +191,7 @@
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ColumnQuery.cs" />
     <Compile Include="ShapeSheet\Writer\ShapeSheetWriter.cs" />
-    <Compile Include="ShapeSheet\FormulaLiteral.cs" />
+    <Compile Include="ShapeSheet\ValueLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />

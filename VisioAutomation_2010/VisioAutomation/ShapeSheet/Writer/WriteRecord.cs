@@ -7,11 +7,11 @@ namespace VisioAutomation.ShapeSheet.Writers
         private readonly SIDSRC _SIDSRC;
         private readonly SRC _SRC;
 
-        internal readonly FormulaLiteral Value;
+        internal readonly ValueLiteral Value;
         internal readonly CoordType Type;
         internal readonly IVisio.VisUnitCodes? UnitCode;
 
-        public WriteRecord(SIDSRC sidsrc, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
+        public WriteRecord(SIDSRC sidsrc, ValueLiteral value, IVisio.VisUnitCodes? unitcode)
         {
             this._SIDSRC = sidsrc;
             this._SRC = new SRC();
@@ -20,7 +20,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.UnitCode = unitcode;
         }
 
-        public WriteRecord(SRC src, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
+        public WriteRecord(SRC src, ValueLiteral value, IVisio.VisUnitCodes? unitcode)
         {
             this._SIDSRC = new SIDSRC();
             this._SRC = src;

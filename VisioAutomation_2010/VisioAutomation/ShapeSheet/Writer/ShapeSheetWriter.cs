@@ -57,23 +57,23 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.CommitResultRecordsByType(surface, CoordType.SIDSRC);
         }
 
-        public void SetFormula(SRC src, FormulaLiteral formula)
+        public void SetFormula(SRC src, ValueLiteral formula)
         {
             this.__SetFormulaIgnoreNull(src, formula);
         }
 
-        public void SetFormula(short id, SRC src, FormulaLiteral formula)
+        public void SetFormula(short id, SRC src, ValueLiteral formula)
         {
             var sidsrc = new SIDSRC(id, src);
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        public void SetFormula(SIDSRC sidsrc, FormulaLiteral formula)
+        public void SetFormula(SIDSRC sidsrc, ValueLiteral formula)
         {
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        private void __SetFormulaIgnoreNull(SRC src, FormulaLiteral formula)
+        private void __SetFormulaIgnoreNull(SRC src, ValueLiteral formula)
         {
             if (formula.HasValue)
             {
@@ -81,7 +81,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void __SetFormulaIgnoreNull(SIDSRC sidsrc, FormulaLiteral formula)
+        private void __SetFormulaIgnoreNull(SIDSRC sidsrc, ValueLiteral formula)
         {
             if (formula.HasValue)
             {
@@ -125,18 +125,18 @@ namespace VisioAutomation.ShapeSheet.Writers
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void SetResult(SRC src, FormulaLiteral value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, ValueLiteral value, IVisio.VisUnitCodes unitcode)
         {
             this.ResultRecords.Add(src, value, unitcode);
         }
 
-        public void SetResult(short id, SRC src, FormulaLiteral value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(short id, SRC src, ValueLiteral value, IVisio.VisUnitCodes unitcode)
         {
             var sidsrc = new SIDSRC(id, src);
             this.ResultRecords.Add(sidsrc, value, unitcode);
         }
 
-        public void SetResult(SIDSRC sidsrc, FormulaLiteral value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC sidsrc, ValueLiteral value, IVisio.VisUnitCodes unitcode)
         {
             this.ResultRecords.Add(sidsrc, value, unitcode);
         }

@@ -10,45 +10,42 @@ namespace VisioAutomation.ShapeSheet
     /// 
     /// The value stored is always a string. Any input will be converted to a string.
     /// </summary>
-    public struct FormulaLiteral
+    public struct ValueLiteral
     {
-        private readonly string _formula_string;
+        private readonly string _stringval;
 
-        private FormulaLiteral(string s)
+        private ValueLiteral(string s)
         {
-            this._formula_string = s;
+            this._stringval = s;
         }
 
-        public string Value => this._formula_string;
+        public string Value => this._stringval;
 
-        public bool HasValue => this._formula_string != null;
+        public bool HasValue => this._stringval != null;
 
-        public static implicit operator FormulaLiteral(string value)
+        public override string ToString() => this.Value;
+
+        public static implicit operator ValueLiteral(string value)
         {
-            return new FormulaLiteral(value);
+            return new ValueLiteral(value);
         }
 
-        public static implicit operator FormulaLiteral(int value)
-        {
-            var formula = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            return new FormulaLiteral(formula);
-        }
-
-        public static implicit operator FormulaLiteral(double value)
+        public static implicit operator ValueLiteral(int value)
         {
             var formula = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            return new FormulaLiteral(formula);
+            return new ValueLiteral(formula);
         }
 
-        public static implicit operator FormulaLiteral(bool value)
+        public static implicit operator ValueLiteral(double value)
+        {
+            var formula = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            return new ValueLiteral(formula);
+        }
+
+        public static implicit operator ValueLiteral(bool value)
         {
             var formula = value ? "1" : "0";
-            return new FormulaLiteral(formula);
-        }
-
-        public override string ToString()
-        {
-            return this.Value;
+            return new ValueLiteral(formula);
         }
 
         public string Encode()

@@ -18,13 +18,13 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.Records.Clear();
         }
 
-        public void Add(SRC src, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
+        public void Add(SRC src, ValueLiteral value, IVisio.VisUnitCodes? unitcode)
         {
             var rec = new WriteRecord(src, value, unitcode);
             this.Records.Add(rec);
         }
 
-        public void Add(SIDSRC sidsrc, FormulaLiteral value, IVisio.VisUnitCodes? unitcode)
+        public void Add(SIDSRC sidsrc, ValueLiteral value, IVisio.VisUnitCodes? unitcode)
         {
             var rec = new WriteRecord(sidsrc, value,unitcode);
             this.Records.Add(rec);
