@@ -172,7 +172,7 @@
     <Compile Include="ShapeSheet\CellGroups\CellGroupBase.cs" />
     <Compile Include="ShapeSheet\Queries\Outputs\ListOutput.cs" />
     <Compile Include="ShapeSheet\Queries\Outputs\Output.cs" />
-    <Compile Include="ShapeSheet\Queries\SubQuerySectionDetails.cs" />
+    <Compile Include="ShapeSheet\Queries\SectionDetails.cs" />
     <Compile Include="ShapeSheet\Queries\SubQuery.cs" />
     <Compile Include="ShapeSheet\Queries\Outputs\SubQueryOutput.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnQuery.cs" />
