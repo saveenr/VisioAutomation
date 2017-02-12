@@ -39,8 +39,21 @@ namespace VisioAutomation.ShapeSheet.Queries
             return col;
         }
 
+
+        private static void RestrictToShapesOnly(ShapeSheetSurface surface)
+        {
+            if (surface.Target.Shape == null)
+            {
+                string msg = "Target must be Shape not Page or Master";
+                throw new System.ArgumentException(msg);
+            }
+        }
+
         public Output<string> GetFormulas(ShapeSheetSurface surface)
         {
+            RestrictToShapesOnly(surface);
+
+            this._src_calculate_per_shape_info(surface);
             var srcstream = this._build_src_stream(surface);
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
@@ -53,6 +66,9 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public Output<TResult> GetResults<TResult>(ShapeSheetSurface surface)
         {
+            RestrictToShapesOnly(surface);
+
+            this._src_calculate_per_shape_info(surface);
             var srcstream = this._build_src_stream(surface);
             var unitcodes = this._build_unit_code_array(1);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
@@ -65,6 +81,9 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public Output<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface)
         {
+            RestrictToShapesOnly(surface);
+
+            this._src_calculate_per_shape_info(surface);
             var srcstream = this._build_src_stream(surface);
             var unitcodes = this._build_unit_code_array(1);
             var formulas = surface.GetFormulasU(srcstream);
@@ -183,15 +202,40 @@ namespace VisioAutomation.ShapeSheet.Queries
             return output;
         }
 
-        private void _sidsrc_calculate_per_shape_info(ShapeSheetSurface surface, IList<int> shapeids)
+        private void _src_calculate_per_shape_info(ShapeSheetSurface surface)
         {
-            this._ll_sectiondetails = new List<List<SectionDetails>>();
-
             // there aren't any subqueries so return an empty list
             if (this.SubQueries.Count < 1)
             {
+                this._ll_sectiondetails = new List<List<SectionDetails>>(0);
                 return;
             }
+
+            this._ll_sectiondetails = new List<List<SectionDetails>>();
+
+            var shape = surface.Target.Shape;
+
+            var l_sectiondetails = new List<SectionDetails>(this.SubQueries.Count);
+            l_sectiondetails.AddRange(this.SubQueries.Select(subquery => subquery.GetSectionDetailsForShape(shape)));
+            this._ll_sectiondetails.Add(l_sectiondetails);
+
+            if (1 != this._ll_sectiondetails.Count)
+            {
+                string msg = string.Format("mismatch in number of shapes and information collected for shapes");
+                throw new InternalAssertionException(msg);
+            }
+        }
+
+        private void _sidsrc_calculate_per_shape_info(ShapeSheetSurface surface, IList<int> shapeids)
+        {
+            // there aren't any subqueries so return an empty list
+            if (this.SubQueries.Count < 1)
+            {
+                this._ll_sectiondetails = new List<List<SectionDetails>>(0);
+                return;
+            }
+
+            this._ll_sectiondetails = new List<List<SectionDetails>>();
 
             // Get Shape objects for shape ids
             var shapes = new List<IVisio.Shape>(shapeids.Count);
@@ -229,27 +273,6 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         private short[] _build_src_stream(ShapeSheetSurface surface)
         {
-            if (surface.Target.Shape == null)
-            {
-                string msg = "Target must be Shape not Page or Master";
-                throw new System.ArgumentException(msg);
-            }
-
-            this._ll_sectiondetails = new List<List<SectionDetails>>();
-
-            if (this.SubQueries.Count > 0)
-            {
-                var l_sectiondetails = new List<SectionDetails>();
-                foreach (var subquery in this.SubQueries)
-                {
-                    // Figure out which rows to query
-                    int num_rows = surface.Target.Shape.RowCount[(short)subquery.SectionIndex];
-                    var section_details = new SectionDetails(subquery, num_rows);
-                    l_sectiondetails.Add(section_details);
-                }
-                this._ll_sectiondetails.Add(l_sectiondetails);
-            }
-
             int numshapes = 1;
             int numcells = this._get_total_cell_count(numshapes);
             var streamitem_list = new List<VisioAutomation.ShapeSheet.SRC>(numcells);
