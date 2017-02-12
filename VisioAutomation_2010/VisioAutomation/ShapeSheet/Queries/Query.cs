@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
@@ -186,54 +187,31 @@ namespace VisioAutomation.ShapeSheet.Queries
         {
             this._ll_sectiondetails = new List<List<SectionDetails>>();
 
+            // there aren't any subqueries so return an empty list
             if (this.SubQueries.Count < 1)
             {
                 return;
             }
 
-            // For each shapeid fetch the corresponding shape from the page
-            // this is needed because we'll need to get per shape section information
+            // Get Shape objects for shape ids
             var shapes = new List<IVisio.Shape>(shapeids.Count);
-            foreach (int shapeid in shapeids)
-            {
-                var shape = surface.Target.Shapes.ItemFromID16[(short)shapeid];
-                shapes.Add(shape);
-            }
+            shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
-            for (int n = 0; n < shapeids.Count; n++)
+            // For each shape, for each subquery (section) find the number of rows
+            foreach (var shape in shapes)
             {
-                var shape = shapes[n];
-
                 var l_sectiondetails = new List<SectionDetails>(this.SubQueries.Count);
-                foreach (var subquery in this.SubQueries)
-                {
-                    int num_rows = GetNumRowsForSection(subquery, shape);
-                    var sectiondetails = new SectionDetails(subquery, num_rows);
-                    l_sectiondetails.Add(sectiondetails);
-                }
+                l_sectiondetails.AddRange(this.SubQueries.Select( subquery => subquery.GetSectionDetailsForShape(shape)));
                 this._ll_sectiondetails.Add(l_sectiondetails);
             }
 
             if (shapeids.Count != this._ll_sectiondetails.Count)
             {
-                string msg = string.Format("Expected {0} PerShape structs. Actual = {1}", shapeids.Count,
-                    this._ll_sectiondetails.Count);
+                string msg = string.Format("mismatch in number of shapes and information collected for shapes");
                 throw new InternalAssertionException(msg);
             }
         }
 
-        private static short GetNumRowsForSection(SubQuery subquery, IVisio.Shape shape)
-        {
-            // For visSectionObject we know the result is always going to be 1
-            // so avoid making the call tp RowCount[]
-            if (subquery.SectionIndex == IVisio.VisSectionIndices.visSectionObject)
-            {
-                return 1;
-            }
-
-            // For all other cases use RowCount[]
-            return shape.RowCount[(short)subquery.SectionIndex];
-        }
 
         private int _get_total_cell_count(int numshapes)
         {
@@ -248,8 +226,6 @@ namespace VisioAutomation.ShapeSheet.Queries
             
             return count;
         }
-
-
 
         private short[] _build_src_stream(ShapeSheetSurface surface)
         {
