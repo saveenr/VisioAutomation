@@ -179,110 +179,6 @@ namespace VisioAutomation.ShapeSheet.Queries
             return output;
         }
 
-        private short[] _build_src_stream(ShapeSheetSurface surface)
-        {
-            if (surface.Target.Shape == null)
-            {
-                string msg = "Target must be Shape not Page or Master";
-                throw new System.ArgumentException(msg);
-            }
-
-            this._subquery_shape_info = new List<List<SubQuerySectionDetails>>();
-
-            if (this.SubQueries.Count>0)
-            {
-                var section_infos = new List<SubQuerySectionDetails>();
-                foreach (var sec in this.SubQueries)
-                {
-                    // Figure out which rows to query
-                    int num_rows = surface.Target.Shape.RowCount[(short)sec.SectionIndex];
-                    var section_info = new SubQuerySectionDetails(sec, num_rows);
-                    section_infos.Add(section_info);
-                }
-                this._subquery_shape_info.Add(section_infos);
-            }
-
-            int total = this._get_total_cell_count(1);
-            var streamitem_list = new List<VisioAutomation.ShapeSheet.SRC>(total);
-            
-            foreach (var col in this.Cells)
-            {
-                var src = col.SRC;
-                streamitem_list.Add(src);
-            }
-
-            // And then the sections if any exist
-            if (this._subquery_shape_info.Count > 0)
-            {
-                var data_for_shape = this._subquery_shape_info[0];
-                foreach (var section in data_for_shape)
-                {
-                    foreach (int rowindex in section.RowIndexes)
-                    {
-                        foreach (var col in section.SubQuery.Columns)
-                        {
-                            streamitem_list.Add( new VisioAutomation.ShapeSheet.SRC((short)section.SubQuery.SectionIndex, (short)rowindex, col.CellIndex));
-                        }
-                    }
-                }
-            }
-
-            if (streamitem_list.Count != total)
-            {
-                string msg = string.Format("src list does not match expected size");
-                throw new InternalAssertionException(msg);
-            }
-
-            var stream = VisioAutomation.ShapeSheet.SRC.ToStream(streamitem_list);
-            return stream;
-        }
-
-        private short[] _build_sidsrc_stream(ShapeSheetSurface surface, IList<int> shapeids)
-        {
-            this._calculate_per_shape_info(surface, shapeids);
-
-            int total = this._get_total_cell_count(shapeids.Count);
-
-            var streamitem_list = new List<VisioAutomation.ShapeSheet.SIDSRC>(total);
-
-            for (int i = 0; i < shapeids.Count; i++)
-            {
-                // For each shape add the cells to query
-                var shapeid = shapeids[i];
-                foreach (var col in this.Cells)
-                {
-                    var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, col.SRC);
-                    streamitem_list.Add(sidsrc);
-                }
-
-                // And then the sections if any exist
-                if (this._subquery_shape_info.Count > 0)
-                {
-                    var data_for_shape = this._subquery_shape_info[i];
-                    foreach (var section in data_for_shape)
-                    {
-                        foreach (int rowindex in section.RowIndexes)
-                        {
-                            foreach (var col in section.SubQuery.Columns)
-                            {
-                                var src = new VisioAutomation.ShapeSheet.SRC(
-                                    (short)section.SubQuery.SectionIndex,
-                                    (short)rowindex,
-                                    col.CellIndex);
-                                var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
-                                streamitem_list.Add(sidsrc);
-                            }
-                        }
-                    }
-                }
-            }
-
-            var stream = VisioAutomation.ShapeSheet.SIDSRC.ToStream(streamitem_list);
-
-            return stream;
-        }
-
-
         private void _calculate_per_shape_info(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this._subquery_shape_info = new List<List<SubQuerySectionDetails>>();
@@ -352,6 +248,117 @@ namespace VisioAutomation.ShapeSheet.Queries
             return count;
         }
 
+
+
+        private short[] _build_src_stream(ShapeSheetSurface surface)
+        {
+            if (surface.Target.Shape == null)
+            {
+                string msg = "Target must be Shape not Page or Master";
+                throw new System.ArgumentException(msg);
+            }
+
+            this._subquery_shape_info = new List<List<SubQuerySectionDetails>>();
+
+            if (this.SubQueries.Count > 0)
+            {
+                var section_infos = new List<SubQuerySectionDetails>();
+                foreach (var sec in this.SubQueries)
+                {
+                    // Figure out which rows to query
+                    int num_rows = surface.Target.Shape.RowCount[(short)sec.SectionIndex];
+                    var section_info = new SubQuerySectionDetails(sec, num_rows);
+                    section_infos.Add(section_info);
+                }
+                this._subquery_shape_info.Add(section_infos);
+            }
+
+            int numshapes = 1;
+            int numcells = this._get_total_cell_count(numshapes);
+            var streamitem_list = new List<VisioAutomation.ShapeSheet.SRC>(numcells);
+
+            // enum Cells
+            foreach (var col in this.Cells)
+            {
+                var src = col.SRC;
+                streamitem_list.Add(src);
+            }
+
+            // enum SubQueries
+            if (this._subquery_shape_info.Count > 0)
+            {
+                var data_for_shape = this._subquery_shape_info[0];
+                foreach (var section in data_for_shape)
+                {
+                    foreach (int rowindex in section.RowIndexes)
+                    {
+                        foreach (var col in section.SubQuery.Columns)
+                        {
+                            var src = new SRC((short)section.SubQuery.SectionIndex, (short)rowindex, col.CellIndex);
+                            streamitem_list.Add(src);
+                        }
+                    }
+                }
+            }
+
+            if (streamitem_list.Count != numcells)
+            {
+                string msg = string.Format("src list does not match expected size");
+                throw new InternalAssertionException(msg);
+            }
+
+            var stream = VisioAutomation.ShapeSheet.SRC.ToStream(streamitem_list);
+            return stream;
+        }
+
+        private short[] _build_sidsrc_stream(ShapeSheetSurface surface, IList<int> shapeids)
+        {
+            this._calculate_per_shape_info(surface, shapeids);
+
+            int numshapes = shapeids.Count;
+            int numcells = this._get_total_cell_count(numshapes);
+
+            var streamitem_list = new List<VisioAutomation.ShapeSheet.SIDSRC>(numcells);
+
+            for (int i = 0; i < shapeids.Count; i++)
+            {
+                // For each shape add the cells to query
+                var shapeid = shapeids[i];
+
+                // enum Cells
+                foreach (var col in this.Cells)
+                {
+                    var sidsrc = new SIDSRC((short)shapeid, col.SRC);
+                    streamitem_list.Add(sidsrc);
+                }
+
+                // enum SubQueries
+                if (this._subquery_shape_info.Count > 0)
+                {
+                    var data_for_shape = this._subquery_shape_info[i];
+                    foreach (var section in data_for_shape)
+                    {
+                        foreach (int rowindex in section.RowIndexes)
+                        {
+                            foreach (var col in section.SubQuery.Columns)
+                            {
+                                var src = new VisioAutomation.ShapeSheet.SRC(
+                                    (short)section.SubQuery.SectionIndex,
+                                    (short)rowindex,
+                                    col.CellIndex);
+                                var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
+                                streamitem_list.Add(sidsrc);
+                            }
+                        }
+                    }
+                }
+            }
+
+            var stream = VisioAutomation.ShapeSheet.SIDSRC.ToStream(streamitem_list);
+
+            return stream;
+        }
+
         private List<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes)
         {
             if (numshapes < 1)
@@ -371,12 +378,14 @@ namespace VisioAutomation.ShapeSheet.Queries
 
                 if (this._subquery_shape_info.Count > 0)
                 {
-                    foreach (var subquery_details in this._subquery_shape_info[i])
+                    foreach (var data_for_shape in this._subquery_shape_info[i])
                     {
-                        foreach (var row_index in subquery_details.RowIndexes)
+                        foreach (var row_index in data_for_shape.RowIndexes)
                         {
-                            var subquery_unitcodes = subquery_details.SubQuery.Columns.Select(col => col.UnitCode);
-                            unitcodes.AddRange(subquery_unitcodes);
+                            foreach (var col in data_for_shape.SubQuery.Columns)
+                            {
+                                unitcodes.Add(col.UnitCode);
+                            }
                         }
                     }
                 }
