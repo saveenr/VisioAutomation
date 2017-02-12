@@ -284,10 +284,12 @@ namespace VisioAutomation.ShapeSheet.Queries
         internal struct CellInfo
         {
             public SIDSRC SIDSRC;
+            public ColumnBase Column;
 
-            public CellInfo(SIDSRC sidsrc)
+            public CellInfo(SIDSRC sidsrc, ColumnBase col)
             {
                 this.SIDSRC = sidsrc;
+                this.Column = col;
             }
         }
 
@@ -298,7 +300,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             {
                 var sidsrc = new SIDSRC((short)shapeid, col.SRC);
 
-                var q = new CellInfo(sidsrc);
+                var q = new CellInfo(sidsrc,col);
                 yield return q;
             }
 
@@ -317,7 +319,7 @@ namespace VisioAutomation.ShapeSheet.Queries
                                 (short)rowindex,
                                 col.CellIndex);
                             var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
-                            var q = new CellInfo(sidsrc);
+                            var q = new CellInfo(sidsrc,col);
                             yield return q;
                         }
                     }
@@ -354,28 +356,13 @@ namespace VisioAutomation.ShapeSheet.Queries
             }
 
             int numcells = this._get_total_cell_count(numshapes);
+
             var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
-
-            for (int i = 0; i < numshapes; i++)
+            for (int shapeindex = 0; shapeindex < numshapes; shapeindex++)
             {
-                foreach (var col in this.Cells)
-                {
-                    unitcodes.Add(col.UnitCode);
-                }
-
-                if (this._ll_sectiondetails.Count > 0)
-                {
-                    foreach (var data_for_shape in this._ll_sectiondetails[i])
-                    {
-                        foreach (var row_index in data_for_shape.RowIndexes)
-                        {
-                            foreach (var col in data_for_shape.SubQuery.Columns)
-                            {
-                                unitcodes.Add(col.UnitCode);
-                            }
-                        }
-                    }
-                }
+                // shapeindex - we aren't going to use it here so we don't care
+                var infos = this.enum_cellinfo(-1, shapeindex);
+                unitcodes.AddRange( infos.Select(i=>i.Column.UnitCode));
             }
 
             if (numcells != unitcodes.Count)
