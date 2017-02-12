@@ -207,7 +207,7 @@ namespace VisioAutomation.ShapeSheet.Queries
                 var l_sectiondetails = new List<SectionDetails>(this.SubQueries.Count);
                 foreach (var subquery in this.SubQueries)
                 {
-                    int num_rows = _get_num_rows_for_section(shape, subquery);
+                    int num_rows = GetNumRowsForSection(subquery, shape);
                     var sectiondetails = new SectionDetails(subquery, num_rows);
                     l_sectiondetails.Add(sectiondetails);
                 }
@@ -222,7 +222,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             }
         }
 
-        private static short _get_num_rows_for_section(IVisio.Shape shape, SubQuery subquery)
+        private static short GetNumRowsForSection(SubQuery subquery, IVisio.Shape shape)
         {
             // For visSectionObject we know the result is always going to be 1
             // so avoid making the call tp RowCount[]
