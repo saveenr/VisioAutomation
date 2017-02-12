@@ -103,6 +103,7 @@
     <Compile Include="ShapeSheet\Internal\CoordType.cs" />
     <Compile Include="ShapeSheet\Internal\WriteRecord.cs" />
     <Compile Include="ShapeSheet\Internal\WriteRecords.cs" />
+    <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Queries\Columns\ListColumnBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />

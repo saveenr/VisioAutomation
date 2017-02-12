@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using VisioAutomation.Exceptions;
+using VisioAutomation.ShapeSheet.Internal;
 using VisioAutomation.ShapeSheet.Queries.Columns;
 using VisioAutomation.ShapeSheet.Queries.Outputs;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -281,26 +282,35 @@ namespace VisioAutomation.ShapeSheet.Queries
             return stream;
         }
 
-        internal struct CellInfo
+        private short[] _build_sidsrc_stream(IList<int> shapeids)
         {
-            public SIDSRC SIDSRC;
-            public ColumnBase Column;
+            int numshapes = shapeids.Count;
+            int numcells = this._get_total_cell_count(numshapes);
 
-            public CellInfo(SIDSRC sidsrc, ColumnBase col)
+            var streamitem_list = new List<VisioAutomation.ShapeSheet.SIDSRC>(numcells);
+
+            for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
             {
-                this.SIDSRC = sidsrc;
-                this.Column = col;
+                // For each shape add the cells to query
+                var shapeid = shapeids[shapeindex];
+
+                var qs = this.enum_cellinfo(shapeid, shapeindex);
+                streamitem_list.AddRange(qs.Select(i => i.SIDSRC));
             }
+
+            var stream = VisioAutomation.ShapeSheet.SIDSRC.ToStream(streamitem_list);
+
+            return stream;
         }
 
-        private IEnumerable<CellInfo> enum_cellinfo(int shapeid, int shapeindex)
+        private IEnumerable<QueryCellInfo> enum_cellinfo(int shapeid, int shapeindex)
         {
             // enum Cells
             foreach (var col in this.Cells)
             {
                 var sidsrc = new SIDSRC((short)shapeid, col.SRC);
 
-                var q = new CellInfo(sidsrc,col);
+                var q = new QueryCellInfo(sidsrc,col);
                 yield return q;
             }
 
@@ -319,33 +329,12 @@ namespace VisioAutomation.ShapeSheet.Queries
                                 (short)rowindex,
                                 col.CellIndex);
                             var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
-                            var q = new CellInfo(sidsrc,col);
+                            var q = new QueryCellInfo(sidsrc,col);
                             yield return q;
                         }
                     }
                 }
             }
-        }
-
-        private short[] _build_sidsrc_stream(IList<int> shapeids)
-        {
-            int numshapes = shapeids.Count;
-            int numcells = this._get_total_cell_count(numshapes);
-
-            var streamitem_list = new List<VisioAutomation.ShapeSheet.SIDSRC>(numcells);
-
-            for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
-            {
-                // For each shape add the cells to query
-                var shapeid = shapeids[shapeindex];
-
-                var qs = this.enum_cellinfo(shapeid, shapeindex);
-                streamitem_list.AddRange(qs.Select(i=>i.SIDSRC));
-            }
-
-            var stream = VisioAutomation.ShapeSheet.SIDSRC.ToStream(streamitem_list);
-
-            return stream;
         }
 
         private List<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes)
