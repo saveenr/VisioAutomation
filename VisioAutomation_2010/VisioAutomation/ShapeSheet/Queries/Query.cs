@@ -80,6 +80,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public ListOutput<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
+            this._sidsrc_calculate_per_shape_info(surface, shapeids);
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var values = surface.GetFormulasU(srcstream);
             var list = this._create_outputs_for_shapes(shapeids, values);
@@ -88,6 +89,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public ListOutput<TResult> GetResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
         {
+            this._sidsrc_calculate_per_shape_info(surface, shapeids);
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
@@ -97,6 +99,7 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         public ListOutput<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface, IList<int> shapeids)
         {
+            this._sidsrc_calculate_per_shape_info(surface, shapeids);
             var srcstream = this._build_sidsrc_stream(surface, shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
             var results = surface.GetResults<string>(srcstream, unitcodes);
@@ -179,7 +182,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             return output;
         }
 
-        private void _calculate_per_shape_info(ShapeSheetSurface surface, IList<int> shapeids)
+        private void _sidsrc_calculate_per_shape_info(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this._subquery_shape_info = new List<List<SubQuerySectionDetails>>();
 
@@ -311,8 +314,6 @@ namespace VisioAutomation.ShapeSheet.Queries
 
         private short[] _build_sidsrc_stream(ShapeSheetSurface surface, IList<int> shapeids)
         {
-            this._calculate_per_shape_info(surface, shapeids);
-
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
 
