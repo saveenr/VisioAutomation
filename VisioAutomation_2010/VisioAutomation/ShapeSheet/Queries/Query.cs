@@ -188,14 +188,12 @@ namespace VisioAutomation.ShapeSheet.Queries
                 return;
             }
 
-            var pageshapes = surface.Target.Shapes;
-
             // For each shapeid fetch the corresponding shape from the page
             // this is needed because we'll need to get per shape section information
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             foreach (int shapeid in shapeids)
             {
-                var shape = pageshapes.ItemFromID16[(short)shapeid];
+                var shape = surface.Target.Shapes.ItemFromID16[(short)shapeid];
                 shapes.Add(shape);
             }
 
