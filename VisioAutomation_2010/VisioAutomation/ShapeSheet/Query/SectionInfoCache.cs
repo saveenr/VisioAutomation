@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Internal
+namespace VisioAutomation.ShapeSheet.Query
 {
     internal class SectionInfoCache
     {

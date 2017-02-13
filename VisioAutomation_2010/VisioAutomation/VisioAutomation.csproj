@@ -104,7 +104,7 @@
     <Compile Include="ShapeSheet\Internal\WriteRecord.cs" />
     <Compile Include="ShapeSheet\Internal\WriteRecords.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
-    <Compile Include="ShapeSheet\Internal\SectionInfoCache.cs" />
+    <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBaseCollection.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
@@ -171,7 +171,7 @@
     <Compile Include="ShapeSheet\CellGroups\CellGroupBase.cs" />
     <Compile Include="ShapeSheet\Query\QueryOutputCollection.cs" />
     <Compile Include="ShapeSheet\Query\QueryOutput.cs" />
-    <Compile Include="ShapeSheet\Internal\SectionInfo.cs" />
+    <Compile Include="ShapeSheet\Query\SectionInfo.cs" />
     <Compile Include="ShapeSheet\Query\SubQuery.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryOutput.cs" />
     <Compile Include="ShapeSheet\Query\ColumnCellCollection.cs" />

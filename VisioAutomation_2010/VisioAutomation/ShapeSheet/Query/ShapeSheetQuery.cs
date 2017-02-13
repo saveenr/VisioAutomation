@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
-using VisioAutomation.ShapeSheet.Internal;
+//using VisioAutomation.ShapeSheet.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
