@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
-            var cache = this._collect_per_shape_info(shapes);
+            var cache = this.cache_section_info(shapes);
             var srcstream = this._build_src_stream(cache);
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
@@ -68,7 +68,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
-            var cache = this._collect_per_shape_info(shapes);
+            var cache = this.cache_section_info(shapes);
             var srcstream = this._build_src_stream(cache);
             var unitcodes = this._build_unit_code_array(1,cache);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
@@ -85,7 +85,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
-            var cache = this._collect_per_shape_info(shapes);
+            var cache = this.cache_section_info(shapes);
             var srcstream = this._build_src_stream(cache);
             var unitcodes = this._build_unit_code_array(shapes.Count, cache);
             var formulas = surface.GetFormulasU(srcstream);
@@ -105,7 +105,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
-            var cache = this._collect_per_shape_info(shapes);
+            var cache = this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids, cache);
             var values = surface.GetFormulasU(srcstream);
             var list = this._create_outputs_for_shapes(shapeids, values, cache);
@@ -117,7 +117,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
-            var cache = this._collect_per_shape_info(shapes);
+            var cache = this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids, cache);
             var unitcodes = this._build_unit_code_array(shapeids.Count, cache);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
@@ -130,7 +130,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
-            var cache = this._collect_per_shape_info(shapes);
+            var cache = this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids, cache);
             var unitcodes = this._build_unit_code_array(shapeids.Count, cache);
             var results = surface.GetResults<string>(srcstream, unitcodes);
@@ -213,7 +213,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output;
         }
 
-        private SectionInfoCache _collect_per_shape_info(IList<IVisio.Shape> shapes)
+        private SectionInfoCache cache_section_info(IList<IVisio.Shape> shapes)
         {
             // there aren't any subqueries so return an empty list
             if (this.SubQueries.Count < 1)
