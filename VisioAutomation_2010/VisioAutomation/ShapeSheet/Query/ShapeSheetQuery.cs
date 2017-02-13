@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
-//using VisioAutomation.ShapeSheet.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
@@ -58,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shape_index = 0;
             var cursor = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index, cache);
-            var output_for_shape = this._create_output_for_shape<string>(surface.Target.ID16, values, sectioninfo, ref cursor);
+            var output_for_shape = this._create_output_for_shape(surface.Target.ID16, values, sectioninfo, ref cursor);
 
             return output_for_shape;
         }
@@ -76,7 +75,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shape_index = 0;
             var cursor = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index, cache);
-            var output_for_shape = this._create_output_for_shape<TResult>(surface.Target.ID16, values, sectioninfo, ref cursor);
+            var output_for_shape = this._create_output_for_shape(surface.Target.ID16, values, sectioninfo, ref cursor);
             return output_for_shape;
         }
 
@@ -150,7 +149,7 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 var shapeid = shapeids[shape_index];
                 var subqueryinfo = this.GetSectionInfoForShape(shape_index, cache);
-                var output_for_shape =  this._create_output_for_shape<T>((short)shapeid, values, subqueryinfo, ref cursor);
+                var output_for_shape =  this._create_output_for_shape((short)shapeid, values, subqueryinfo, ref cursor);
                 output_for_all_shapes.Add(output_for_shape);
             }
             
