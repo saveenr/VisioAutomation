@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace VisioAutomation.Internal.Interop
+namespace VisioAutomation.Internal
 {
     internal static class NativeMethods
     {
