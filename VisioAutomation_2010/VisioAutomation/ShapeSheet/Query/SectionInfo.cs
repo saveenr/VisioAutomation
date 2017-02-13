@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    internal class SectionDetails
+    internal class SectionInfo
     {
         public SubQuery SubQuery { get; private set; }
         public int RowCount  { get; }
 
-        internal SectionDetails(SubQuery subquery, int numrows)
+        internal SectionInfo(SubQuery subquery, int numrows)
         {
             this.SubQuery = subquery;
             this.RowCount = numrows;
