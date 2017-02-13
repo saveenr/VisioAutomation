@@ -42,8 +42,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return shape.RowCount[(short)this.SectionIndex];
         }
 
-        internal SectionInfo GetSectionInfoForShape(
-            IVisio.Shape shape)
+        internal SectionInfo GetSectionInfoForShape(IVisio.Shape shape)
         {
             int rows = this.GetNumRowsForShape(shape);
             var section_info = new SectionInfo(this,rows);
