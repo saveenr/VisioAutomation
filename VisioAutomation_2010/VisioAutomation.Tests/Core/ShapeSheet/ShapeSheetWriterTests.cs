@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -35,7 +36,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(surface);
 
             // Verify that the formulas were set
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_pinx = query.AddCell(ShapeSheetWriterTests.src_pinx, "PinX");
             var col_piny = query.AddCell(ShapeSheetWriterTests.src_piny, "PinY");
 
@@ -68,7 +69,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(surface);
 
             // Build the query
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat,"LinePattern");
 
             // Retrieve the values
@@ -94,7 +95,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(surface);
 
             // Build the query
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
 
             // Retrieve the values
@@ -131,7 +132,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(surface);
 
             // Verify that the formulas were set
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_pinx = query.AddCell(ShapeSheetWriterTests.src_pinx,"PinX");
             var col_piny = query.AddCell(ShapeSheetWriterTests.src_piny, "PinY");
 
@@ -171,7 +172,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(surface);
 
             // Build the query
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 

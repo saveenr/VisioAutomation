@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.ShapeSheet.Queries
+﻿namespace VisioAutomation.ShapeSheet.Query
 {
     public class ColumnCell : ColumnBase
     {

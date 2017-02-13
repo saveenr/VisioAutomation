@@ -1,6 +1,6 @@
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.Queries;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {

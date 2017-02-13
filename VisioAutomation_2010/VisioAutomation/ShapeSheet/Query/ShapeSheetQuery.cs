@@ -4,16 +4,16 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Queries
+namespace VisioAutomation.ShapeSheet.Query
 {
-    public class Query
+    public class ShapeSheetQuery
     {
         public ColumnCellCollection Cells { get; }
         public SubQueryCollection SubQueries { get; }
 
         private List<List<SectionDetails>> _ll_sectiondetails; 
 
-        public Query()
+        public ShapeSheetQuery()
         {
             this.Cells = new ColumnCellCollection(0);
             this.SubQueries = new SubQueryCollection(0);

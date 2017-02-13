@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Queries;
+using VisioAutomation.ShapeSheet.Query;
 using VACONT = VisioAutomation.Shapes.Controls;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_SectionCells_have_names()
         {
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
 
             var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character", sec_char.Name);
@@ -57,7 +57,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var src_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
             var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
 
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_fg = query.AddCell(src_fg, "FillForegnd");
             var col_bg = query.AddCell(src_bg, "FillBkgnd");
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
@@ -122,7 +122,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // now retrieve the formulas with GetFormulas
 
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_fg = query.AddCell(src_fg, "FillForegnd");
             var col_bg = query.AddCell(src_bg, "FillBkgnd");
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
@@ -176,7 +176,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             VACUSTPROP.CustomPropertyHelper.Set(s4, "S3P2", "5");
             VACUSTPROP.CustomPropertyHelper.Set(s4, "S3P3", "6");
 
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
 
             var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
             var value_col = prop_sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value,"Value");
@@ -225,7 +225,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             Assert.AreEqual(3, page1.Shapes.Count);
 
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
 
@@ -278,7 +278,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             Assert.AreEqual(5, page1.Shapes.Count);
 
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
 
@@ -464,9 +464,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             doc1.Close(true);
         }
 
-        private Query create_query_for_all_cells_and_sections()
+        private ShapeSheetQuery create_query_for_all_cells_and_sections()
         {
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
 
             // Dictionary of Cell Names to SRCs (excluding invalid sections)
             var name_to_src = GetSRCDictionary();
@@ -476,7 +476,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Create a dictionary of the subqueries for each section, this
             // will be reused as fill in the query
             var unique_section_ids = name_to_src.Select(pair => pair.Value).Select(src => src.Section).Distinct().ToList();
-            var section_to_subquery = new Dictionary<short, VisioAutomation.ShapeSheet.Queries.SubQuery>(unique_section_ids.Count);
+            var section_to_subquery = new Dictionary<short, SubQuery>(unique_section_ids.Count);
             foreach (short section_id in unique_section_ids.Where(i=>i!=(short)IVisio.VisSectionIndices.visSectionObject))
             {
                     section_to_subquery[section_id] = query.AddSubQuery((IVisio.VisSectionIndices)section_id);
@@ -509,7 +509,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         public void ShapeSheet_Query_TestDuplicates()
         {
             // Ensure that duplicate cells are caught
-            var q1 = new VisioAutomation.ShapeSheet.Queries.Query();
+            var q1 = new ShapeSheetQuery();
             q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             bool caught_exc1 = false;
@@ -526,7 +526,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that duplicate sections are caught
 
-            var q2 = new VisioAutomation.ShapeSheet.Queries.Query();
+            var q2 = new ShapeSheetQuery();
             q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
@@ -542,7 +542,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.IsTrue(caught_exc2);
 
             // Ensure that Duplicates in Section Queries Are caught - 
-            var q3 = new VisioAutomation.ShapeSheet.Queries.Query();
+            var q3 = new ShapeSheetQuery();
             var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             sec.AddCell(VA.ShapeSheet.SRCConstants.PinX,"PinX");
             bool caught_exc3 = false;

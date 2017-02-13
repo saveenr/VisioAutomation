@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.ShapeSheet.Queries
+namespace VisioAutomation.ShapeSheet.Query
 {
     internal class SectionDetails
     {

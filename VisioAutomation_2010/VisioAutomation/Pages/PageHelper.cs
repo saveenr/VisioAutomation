@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -150,7 +151,7 @@ namespace VisioAutomation.Pages
             }
 
             // Get the Cells from the Source
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             int i = 0;
             foreach (var src in page_srcs)
             {
@@ -259,7 +260,7 @@ namespace VisioAutomation.Pages
 
         private static Drawing.Size GetSize(IVisio.Page page)
         {
-            var query = new ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_height = query.AddCell(ShapeSheet.SRCConstants.PageHeight,"PageHeight");
             var col_width = query.AddCell(ShapeSheet.SRCConstants.PageWidth,"PageWidth");
 

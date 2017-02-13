@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Queries
+namespace VisioAutomation.ShapeSheet.Query
 {
     public class ColumnCellCollection : ColumnCollectionBase<ColumnCell>
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Drawing;
-using VisioAutomation.ShapeSheet.Queries;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Scripting.Utilities
 {
@@ -20,13 +20,13 @@ namespace VisioAutomation.Scripting.Utilities
         private static ColumnCell ColLocPinY;
         private static ColumnCell ColWidth;
         private static ColumnCell ColHeight;
-        private static VisioAutomation.ShapeSheet.Queries.Query query;
+        private static ShapeSheetQuery query;
 
         public static List<XFormData> Get(Microsoft.Office.Interop.Visio.Page page, TargetShapeIDs target)
         {
             if (query == null)
             {
-                query = new VisioAutomation.ShapeSheet.Queries.Query();
+                query = new ShapeSheetQuery();
                 ColPinX = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PinX, "PinX");
                 ColPinY = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PinY, "PinY");
                 ColLocPinX = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.LocPinX, "LocPinX");
