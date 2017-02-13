@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class ColumnCellCollection : ColumnCollectionBase<ColumnCell>
     {
-        private HashSet<ShapeSheet.SRC> _src_set;
+        private HashSet<ShapeSheet.SRC> items;
 
         internal ColumnCellCollection() :
             this(0)
@@ -25,19 +25,19 @@ namespace VisioAutomation.ShapeSheet.Query
             var col = new ColumnCell(ordinal, src, norm_name);
             this._items.Add(col);
 
-            this._dic_columns[norm_name] = col;
-            this._src_set.Add(src);
+            this.map_name_to_item[norm_name] = col;
+            this.items.Add(src);
             return col;
         }
 
         private void check_deplicate_src(SRC src)
         {
-            if (this._src_set == null)
+            if (this.items == null)
             {
-                this._src_set = new HashSet<ShapeSheet.SRC>();
+                this.items = new HashSet<ShapeSheet.SRC>();
             }
 
-            if (this._src_set.Contains(src))
+            if (this.items.Contains(src))
             {
                 string msg = string.Format("Duplicate SRC({0},{1},{2})", src.Section, src.Row, src.Cell);
                 throw new System.ArgumentException(msg);

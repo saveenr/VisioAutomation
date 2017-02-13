@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public Output<string> GetFormulas(ShapeSheetSurface surface)
+        public QueryOutput<string> GetFormulas(ShapeSheetSurface surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -64,7 +64,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public Output<TResult> GetResults<TResult>(ShapeSheetSurface surface)
+        public QueryOutput<TResult> GetResults<TResult>(ShapeSheetSurface surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -81,7 +81,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public Output<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface)
+        public QueryOutput<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -102,7 +102,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public OutputCollection<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryOutputCollection<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
@@ -114,7 +114,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public OutputCollection<TResult> GetResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryOutputCollection<TResult> GetResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
@@ -127,7 +127,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public OutputCollection<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryOutputCollection<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface, IList<int> shapeids)
         {
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
@@ -142,9 +142,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return r;
         }
 
-        private OutputCollection<T> _create_outputs_for_shapes<T>(IList<int> shapeids, T[] values)
+        private QueryOutputCollection<T> _create_outputs_for_shapes<T>(IList<int> shapeids, T[] values)
         {
-            var output_for_all_shapes = new OutputCollection<T>();
+            var output_for_all_shapes = new QueryOutputCollection<T>();
 
             int cursor = 0;
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
@@ -167,11 +167,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return null;
         }
 
-        private Output<T> _create_output_for_shape<T>(short shapeid, T[] values, List<SectionDetails> subqueries_details, ref int values_cursor)
+        private QueryOutput<T> _create_output_for_shape<T>(short shapeid, T[] values, List<SectionDetails> subqueries_details, ref int values_cursor)
         {
             int old_cursor = values_cursor;
 
-            var output = new Output<T>(shapeid);
+            var output = new QueryOutput<T>(shapeid);
 
             // First Copy the Query Cell Values into the output
             output.Cells = new T[this.Cells.Count];

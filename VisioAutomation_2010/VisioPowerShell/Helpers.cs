@@ -8,7 +8,7 @@ namespace VisioPowerShell
 {
     static class Helpers
     {
-        private static DataTable querytable_to_datatable<T>(ShapeSheetQuery cellQuery, OutputCollection<T> query_output)
+        private static DataTable querytable_to_datatable<T>(ShapeSheetQuery cellQuery, QueryOutputCollection<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();

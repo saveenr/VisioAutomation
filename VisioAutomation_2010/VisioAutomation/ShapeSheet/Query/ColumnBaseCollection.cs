@@ -5,7 +5,7 @@ namespace VisioAutomation.ShapeSheet.Query
     public class ColumnCollectionBase<T> : IEnumerable<T> where T : ColumnBase
     {
         protected IList<T> _items;
-        protected Dictionary<string, T> _dic_columns;
+        protected Dictionary<string, T> map_name_to_item;
 
         internal ColumnCollectionBase() : this(0)
         {
@@ -14,7 +14,7 @@ namespace VisioAutomation.ShapeSheet.Query
         internal ColumnCollectionBase(int capacity)
         {
             this._items = new List<T>(capacity);
-            this._dic_columns = new Dictionary<string, T>(capacity);
+            this.map_name_to_item = new Dictionary<string, T>(capacity);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -29,9 +29,9 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public T this[int index] => this._items[index];
 
-        public T this[string name] => this._dic_columns[name];
+        public T this[string name] => this.map_name_to_item[name];
 
-        public bool Contains(string name) => this._dic_columns.ContainsKey(name);
+        public bool Contains(string name) => this.map_name_to_item.ContainsKey(name);
 
         protected string normalize_name(string name)
         {
@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         protected void check_duplicate_column_name(string name)
         {
-            if (this._dic_columns.ContainsKey(name))
+            if (this.map_name_to_item.ContainsKey(name))
             {
                 throw new System.ArgumentException("Duplicate Column Name");
             }

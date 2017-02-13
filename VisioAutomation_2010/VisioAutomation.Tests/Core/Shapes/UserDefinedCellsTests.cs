@@ -97,13 +97,13 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             VAUSERCELL.UserDefinedCellHelper.Set(s1, "foo", "bar", null);
 
-            var queryex = new ShapeSheetQuery();
-            var sec = queryex.AddSubQuery(IVisio.VisSectionIndices.visSectionUser);
+            var query = new ShapeSheetQuery();
+            var sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionUser);
             var Value = sec.AddCell(VisioAutomation.ShapeSheet.SRCConstants.User_Value,"Value");
             var Prompt = sec.AddCell(VisioAutomation.ShapeSheet.SRCConstants.User_Prompt,"Prompt");
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
-            var formulas = queryex.GetFormulas(surface, shapes.Select(s => s.ID).ToList());
+            var formulas = query.GetFormulas(surface, shapes.Select(s => s.ID).ToList());
 
 
             page1.Delete(0);
