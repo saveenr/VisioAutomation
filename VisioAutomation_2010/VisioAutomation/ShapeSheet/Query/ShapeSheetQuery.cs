@@ -97,7 +97,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shape_index = 0;
             var cursor = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index);
-            var output_for_shape = this._create_output_for_shape<ShapeSheet.CellData>(surface.Target.ID16, combined_data, sectioninfo, ref cursor);
+            var output_for_shape = this._create_output_for_shape(surface.Target.ID16, combined_data, sectioninfo, ref cursor);
             return output_for_shape;
         }
 
