@@ -143,9 +143,6 @@
     <Compile Include="Shapes\Controls\ControlHelper.cs" />
     <Compile Include="Drawing\BoundingBoxHelper.cs" />
     <Compile Include="Shapes\ShapeFormatCells.cs" />
-    <Compile Include="Interop\EnumType.cs" />
-    <Compile Include="Interop\EnumValue.cs" />
-    <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Pages\PageCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyHelper.cs" />
     <Compile Include="Shapes\Locking\LockCells.cs" />

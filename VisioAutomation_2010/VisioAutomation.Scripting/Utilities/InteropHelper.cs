@@ -1,23 +1,22 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Interop
+namespace VisioAutomation.Scripting.Utilities
 {
     public static class InteropHelper
     {
-        private static bool _initialized=false;
+        private static bool _initialized = false;
         private static Dictionary<string, EnumType> _gNameToEnum;
-        private static List<System.Type> _gTypes; 
+        private static List<System.Type> _gTypes;
 
         private static void initialize()
         {
             if (!InteropHelper._initialized)
             {
-                InteropHelper._gTypes = typeof(IVisio.Application).Assembly.GetExportedTypes()
+                InteropHelper._gTypes = typeof(Microsoft.Office.Interop.Visio.Application).Assembly.GetExportedTypes()
                     .Where(t => t.IsPublic)
                     .Where(t => !t.Name.StartsWith("tag"))
-                    .OrderBy(t=>t.Name)
+                    .OrderBy(t => t.Name)
                     .ToList();
                 InteropHelper._gNameToEnum = InteropHelper._gTypes
                     .Where(t => t.IsEnum)
