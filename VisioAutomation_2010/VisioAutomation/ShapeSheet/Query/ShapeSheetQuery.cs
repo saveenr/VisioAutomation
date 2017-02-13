@@ -309,15 +309,15 @@ namespace VisioAutomation.ShapeSheet.Query
             // enum SubQueries
             if (this.cache.CountShapes > 0)
             {
-                var data_for_shape = cache.GetSectionInfosForShapeAtIndex(shapeindex);
-                foreach (var section in data_for_shape)
+                var section_infos = cache.GetSectionInfosForShapeAtIndex(shapeindex);
+                foreach (var section_info in section_infos)
                 {
-                    foreach (int rowindex in section.RowIndexes)
+                    foreach (int rowindex in section_info.RowIndexes)
                     {
-                        foreach (var col in section.SubQuery.Columns)
+                        foreach (var col in section_info.SubQuery.Columns)
                         {
                             var src = new VisioAutomation.ShapeSheet.SRC(
-                                (short)section.SubQuery.SectionIndex,
+                                (short)section_info.SubQuery.SectionIndex,
                                 (short)rowindex,
                                 col.CellIndex);
                             var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
