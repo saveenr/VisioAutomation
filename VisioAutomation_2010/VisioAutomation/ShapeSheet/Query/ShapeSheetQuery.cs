@@ -11,13 +11,11 @@ namespace VisioAutomation.ShapeSheet.Query
         public ColumnCellCollection Cells { get; }
         public SubQueryCollection SubQueries { get; }
 
-        private List<List<SectionInfo>> _ll_sectioninfo; 
 
         public ShapeSheetQuery()
         {
             this.Cells = new ColumnCellCollection(0);
             this.SubQueries = new SubQueryCollection(0);
-            this._ll_sectioninfo = new List<List<SectionInfo>>(0);
         }
 
         public ColumnCell AddCell(ShapeSheet.SRC src, string name)
@@ -53,12 +51,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
-            this._collect_per_shape_info(shapes);
-            var srcstream = this._build_src_stream();
+            var ll_sectioninfo = this._collect_per_shape_info(shapes);
+            var srcstream = this._build_src_stream(ll_sectioninfo);
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
             var cursor = 0;
-            var sectioninfo = this.GetSectionInfoForShape(shape_index);
+            var sectioninfo = this.GetSectionInfoForShape(shape_index, ll_sectioninfo);
             var output_for_shape = this._create_output_for_shape<string>(surface.Target.ID16, values, sectioninfo, ref cursor);
 
             return output_for_shape;
@@ -70,13 +68,13 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
-            this._collect_per_shape_info(shapes);
-            var srcstream = this._build_src_stream();
-            var unitcodes = this._build_unit_code_array(1);
+            var ll_sectioninfo = this._collect_per_shape_info(shapes);
+            var srcstream = this._build_src_stream(ll_sectioninfo);
+            var unitcodes = this._build_unit_code_array(1,ll_sectioninfo);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var cursor = 0;
-            var sectioninfo = this.GetSectionInfoForShape(shape_index);
+            var sectioninfo = this.GetSectionInfoForShape(shape_index, ll_sectioninfo);
             var output_for_shape = this._create_output_for_shape<TResult>(surface.Target.ID16, values, sectioninfo, ref cursor);
             return output_for_shape;
         }
@@ -87,16 +85,16 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
-            this._collect_per_shape_info(shapes);
-            var srcstream = this._build_src_stream();
-            var unitcodes = this._build_unit_code_array(shapes.Count);
+            var ll_sectioninfo = this._collect_per_shape_info(shapes);
+            var srcstream = this._build_src_stream(ll_sectioninfo);
+            var unitcodes = this._build_unit_code_array(shapes.Count, ll_sectioninfo);
             var formulas = surface.GetFormulasU(srcstream);
             var results = surface.GetResults<string>(srcstream, unitcodes);
             var combined_data = CellData.Combine(formulas, results);
 
             var shape_index = 0;
             var cursor = 0;
-            var sectioninfo = this.GetSectionInfoForShape(shape_index);
+            var sectioninfo = this.GetSectionInfoForShape(shape_index, ll_sectioninfo);
             var output_for_shape = this._create_output_for_shape(surface.Target.ID16, combined_data, sectioninfo, ref cursor);
             return output_for_shape;
         }
@@ -107,10 +105,10 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
-            this._collect_per_shape_info(shapes);
-            var srcstream = this._build_sidsrc_stream(shapeids);
+            var ll_sectioninfo = this._collect_per_shape_info(shapes);
+            var srcstream = this._build_sidsrc_stream(shapeids, ll_sectioninfo);
             var values = surface.GetFormulasU(srcstream);
-            var list = this._create_outputs_for_shapes(shapeids, values);
+            var list = this._create_outputs_for_shapes(shapeids, values, ll_sectioninfo);
             return list;
         }
 
@@ -119,11 +117,11 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
-            this._collect_per_shape_info(shapes);
-            var srcstream = this._build_sidsrc_stream(shapeids);
-            var unitcodes = this._build_unit_code_array(shapeids.Count);
+            var ll_sectioninfo = this._collect_per_shape_info(shapes);
+            var srcstream = this._build_sidsrc_stream(shapeids, ll_sectioninfo);
+            var unitcodes = this._build_unit_code_array(shapeids.Count, ll_sectioninfo);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var list = this._create_outputs_for_shapes(shapeids, values);
+            var list = this._create_outputs_for_shapes(shapeids, values, ll_sectioninfo);
             return list;
         }
 
@@ -132,17 +130,17 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
-            this._collect_per_shape_info(shapes);
-            var srcstream = this._build_sidsrc_stream(shapeids);
-            var unitcodes = this._build_unit_code_array(shapeids.Count);
+            var ll_sectioninfo = this._collect_per_shape_info(shapes);
+            var srcstream = this._build_sidsrc_stream(shapeids, ll_sectioninfo);
+            var unitcodes = this._build_unit_code_array(shapeids.Count, ll_sectioninfo);
             var results = surface.GetResults<string>(srcstream, unitcodes);
             var formulas  = surface.GetFormulasU(srcstream);
             var combined_data = CellData.Combine(formulas, results);
-            var r = this._create_outputs_for_shapes(shapeids, combined_data);
+            var r = this._create_outputs_for_shapes(shapeids, combined_data, ll_sectioninfo);
             return r;
         }
 
-        private QueryOutputCollection<T> _create_outputs_for_shapes<T>(IList<int> shapeids, T[] values)
+        private QueryOutputCollection<T> _create_outputs_for_shapes<T>(IList<int> shapeids, T[] values, List<List<SectionInfo>> ll_sectioninfo)
         {
             var output_for_all_shapes = new QueryOutputCollection<T>();
 
@@ -150,7 +148,7 @@ namespace VisioAutomation.ShapeSheet.Query
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var subqueryinfo = this.GetSectionInfoForShape(shape_index);
+                var subqueryinfo = this.GetSectionInfoForShape(shape_index, ll_sectioninfo);
                 var output_for_shape =  this._create_output_for_shape<T>((short)shapeid, values, subqueryinfo, ref cursor);
                 output_for_all_shapes.Add(output_for_shape);
             }
@@ -158,11 +156,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_all_shapes;
         }
 
-        private List<SectionInfo> GetSectionInfoForShape(int shape_index)
+        private List<SectionInfo> GetSectionInfoForShape(int shape_index, List<List<SectionInfo>> ll_sectioninfo)
         {
-            if (this._ll_sectioninfo.Count > 0)
+            if (ll_sectioninfo.Count > 0)
             {
-                return this._ll_sectioninfo[shape_index];
+                return ll_sectioninfo[shape_index];
             }
             return null;
         }
@@ -215,16 +213,15 @@ namespace VisioAutomation.ShapeSheet.Query
             return output;
         }
 
-        private void _collect_per_shape_info(IList<IVisio.Shape> shapes)
+        private List<List<SectionInfo>> _collect_per_shape_info(IList<IVisio.Shape> shapes)
         {
             // there aren't any subqueries so return an empty list
             if (this.SubQueries.Count < 1)
             {
-                this._ll_sectioninfo = new List<List<SectionInfo>>(0);
-                return;
+                return new List<List<SectionInfo>>(0);
             }
 
-            this._ll_sectioninfo = new List<List<SectionInfo>>();
+            var ll_sectioninfo = new List<List<SectionInfo>>();
 
 
             // For each shape, for each subquery (section) find the number of rows
@@ -232,24 +229,26 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 var l_sectioninfo = new List<SectionInfo>(this.SubQueries.Count);
                 l_sectioninfo.AddRange(this.SubQueries.Select( subquery => subquery.GetSectionInfoForShape(shape)));
-                this._ll_sectioninfo.Add(l_sectioninfo);
+                ll_sectioninfo.Add(l_sectioninfo);
             }
 
-            if (shapes.Count != this._ll_sectioninfo.Count)
+            if (shapes.Count != ll_sectioninfo.Count)
             {
                 string msg = string.Format("mismatch in number of shapes and information collected for shapes");
                 throw new InternalAssertionException(msg);
             }
+
+            return ll_sectioninfo;
         }
 
 
-        private int _get_total_cell_count(int numshapes)
+        private int _get_total_cell_count(int numshapes, List<List<SectionInfo>> ll_sectioninfo)
         {
             // Count the cells not in sections
             int count = this.Cells.Count * numshapes;
 
             // Count the Cells in the Sections
-            foreach (var data_for_shape in this._ll_sectioninfo)
+            foreach (var data_for_shape in ll_sectioninfo)
             {
                 count += data_for_shape.Sum(s => s.RowCount*s.SubQuery.Columns.Count);
             }
@@ -257,16 +256,16 @@ namespace VisioAutomation.ShapeSheet.Query
             return count;
         }
 
-        private short[] _build_src_stream()
+        private short[] _build_src_stream(List<List<SectionInfo>> ll_sectioninfo)
         {
             int numshapes = 1;
             int shapeindex = 0;
-            int numcells = this._get_total_cell_count(numshapes);
+            int numcells = this._get_total_cell_count(numshapes, ll_sectioninfo);
             var streamitem_list = new List<VisioAutomation.ShapeSheet.SRC>(numcells);
 
             int dummy_shapeid = -1;
 
-            var qs = this.enum_cellinfo(dummy_shapeid, shapeindex);
+            var qs = this.enum_cellinfo(dummy_shapeid, shapeindex, ll_sectioninfo);
             streamitem_list.AddRange(qs.Select(i => i.SIDSRC.SRC));
 
             if (streamitem_list.Count != numcells)
@@ -279,10 +278,10 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private short[] _build_sidsrc_stream(IList<int> shapeids)
+        private short[] _build_sidsrc_stream(IList<int> shapeids, List<List<SectionInfo>> ll_sectioninfo)
         {
             int numshapes = shapeids.Count;
-            int numcells = this._get_total_cell_count(numshapes);
+            int numcells = this._get_total_cell_count(numshapes, ll_sectioninfo);
 
             var streamitem_list = new List<VisioAutomation.ShapeSheet.SIDSRC>(numcells);
 
@@ -291,7 +290,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 // For each shape add the cells to query
                 var shapeid = shapeids[shapeindex];
 
-                var qs = this.enum_cellinfo(shapeid, shapeindex);
+                var qs = this.enum_cellinfo(shapeid, shapeindex, ll_sectioninfo);
                 streamitem_list.AddRange(qs.Select(i => i.SIDSRC));
             }
 
@@ -300,7 +299,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private IEnumerable<QueryCellInfo> enum_cellinfo(int shapeid, int shapeindex)
+        private IEnumerable<QueryCellInfo> enum_cellinfo(int shapeid, int shapeindex, List<List<SectionInfo>> ll_sectioninfo)
         {
             // enum Cells
             foreach (var col in this.Cells)
@@ -312,9 +311,9 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             // enum SubQueries
-            if (this._ll_sectioninfo.Count > 0)
+            if (ll_sectioninfo.Count > 0)
             {
-                var data_for_shape = this._ll_sectioninfo[shapeindex];
+                var data_for_shape = ll_sectioninfo[shapeindex];
                 foreach (var section in data_for_shape)
                 {
                     foreach (int rowindex in section.RowIndexes)
@@ -334,20 +333,20 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private List<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes)
+        private List<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes, List<List<SectionInfo>> ll_sectioninfo)
         {
             if (numshapes < 1)
             {
                 throw new InternalAssertionException("numshapes must be >=1");
             }
 
-            int numcells = this._get_total_cell_count(numshapes);
+            int numcells = this._get_total_cell_count(numshapes, ll_sectioninfo);
 
             var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
             for (int shapeindex = 0; shapeindex < numshapes; shapeindex++)
             {
                 // shapeindex - we aren't going to use it here so we don't care
-                var infos = this.enum_cellinfo(-1, shapeindex);
+                var infos = this.enum_cellinfo(-1, shapeindex, ll_sectioninfo);
                 unitcodes.AddRange( infos.Select(i=>i.Column.UnitCode));
             }
 
