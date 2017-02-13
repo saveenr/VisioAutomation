@@ -230,9 +230,9 @@ namespace VisioAutomation.ShapeSheet.Query
             // For each shape, for each subquery (section) find the number of rows
             foreach (var shape in shapes)
             {
-                var l_sectiondetails = new List<SectionInfo>(this.SubQueries.Count);
-                l_sectiondetails.AddRange(this.SubQueries.Select( subquery => subquery.GetSectionInfoForShape(shape)));
-                this._ll_sectioninfo.Add(l_sectiondetails);
+                var l_sectioninfo = new List<SectionInfo>(this.SubQueries.Count);
+                l_sectioninfo.AddRange(this.SubQueries.Select( subquery => subquery.GetSectionInfoForShape(shape)));
+                this._ll_sectioninfo.Add(l_sectioninfo);
             }
 
             if (shapes.Count != this._ll_sectioninfo.Count)
