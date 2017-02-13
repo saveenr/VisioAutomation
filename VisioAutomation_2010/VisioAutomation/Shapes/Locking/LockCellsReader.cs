@@ -6,26 +6,26 @@ namespace VisioAutomation.Shapes.Locking
 {
     class LockCellsReader : SingleRowReader<LockCells>
     {
-        public ColumnQuery LockAspect { get; set; }
-        public ColumnQuery LockBegin { get; set; }
-        public ColumnQuery LockCalcWH { get; set; }
-        public ColumnQuery LockCrop { get; set; }
-        public ColumnQuery LockCustProp { get; set; }
-        public ColumnQuery LockDelete { get; set; }
-        public ColumnQuery LockEnd { get; set; }
-        public ColumnQuery LockFormat { get; set; }
-        public ColumnQuery LockFromGroupFormat { get; set; }
-        public ColumnQuery LockGroup { get; set; }
-        public ColumnQuery LockHeight { get; set; }
-        public ColumnQuery LockMoveX { get; set; }
-        public ColumnQuery LockMoveY { get; set; }
-        public ColumnQuery LockRotate { get; set; }
-        public ColumnQuery LockSelect { get; set; }
-        public ColumnQuery LockTextEdit { get; set; }
-        public ColumnQuery LockThemeColors { get; set; }
-        public ColumnQuery LockThemeEffects { get; set; }
-        public ColumnQuery LockVtxEdit { get; set; }
-        public ColumnQuery LockWidth { get; set; }
+        public ColumnCell LockAspect { get; set; }
+        public ColumnCell LockBegin { get; set; }
+        public ColumnCell LockCalcWH { get; set; }
+        public ColumnCell LockCrop { get; set; }
+        public ColumnCell LockCustProp { get; set; }
+        public ColumnCell LockDelete { get; set; }
+        public ColumnCell LockEnd { get; set; }
+        public ColumnCell LockFormat { get; set; }
+        public ColumnCell LockFromGroupFormat { get; set; }
+        public ColumnCell LockGroup { get; set; }
+        public ColumnCell LockHeight { get; set; }
+        public ColumnCell LockMoveX { get; set; }
+        public ColumnCell LockMoveY { get; set; }
+        public ColumnCell LockRotate { get; set; }
+        public ColumnCell LockSelect { get; set; }
+        public ColumnCell LockTextEdit { get; set; }
+        public ColumnCell LockThemeColors { get; set; }
+        public ColumnCell LockThemeEffects { get; set; }
+        public ColumnCell LockVtxEdit { get; set; }
+        public ColumnCell LockWidth { get; set; }
 
         public LockCellsReader()
         {

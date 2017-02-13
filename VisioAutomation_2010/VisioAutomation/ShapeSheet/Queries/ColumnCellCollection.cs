@@ -2,27 +2,27 @@
 
 namespace VisioAutomation.ShapeSheet.Queries
 {
-    public class ListColumnQuery : ListColumnBase<ColumnQuery>
+    public class ColumnCellCollection : ColumnCollectionBase<ColumnCell>
     {
         private HashSet<ShapeSheet.SRC> _src_set;
 
-        internal ListColumnQuery() :
+        internal ColumnCellCollection() :
             this(0)
         {
         }
 
-        internal ListColumnQuery(int capacity) : base(capacity)
+        internal ColumnCellCollection(int capacity) : base(capacity)
         {
         }
 
-        internal ColumnQuery Add(ShapeSheet.SRC src, string name)
+        internal ColumnCell Add(ShapeSheet.SRC src, string name)
         {
             check_deplicate_src(src);
             string norm_name = this.normalize_name(name);
             check_duplicate_column_name(norm_name);
 
             int ordinal = this._items.Count;
-            var col = new ColumnQuery(ordinal, src, norm_name);
+            var col = new ColumnCell(ordinal, src, norm_name);
             this._items.Add(col);
 
             this._dic_columns[norm_name] = col;

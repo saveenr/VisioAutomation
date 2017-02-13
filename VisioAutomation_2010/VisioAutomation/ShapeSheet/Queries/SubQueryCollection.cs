@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Queries
 {
-    public class ListSubQuery : IEnumerable<SubQuery>
+    public class SubQueryCollection : IEnumerable<SubQuery>
     {
         private IList<SubQuery> Items { get; }
         private readonly Dictionary<IVisio.VisSectionIndices,SubQuery> _section_set; 
 
-        internal ListSubQuery(int capacity)
+        internal SubQueryCollection(int capacity)
         {
             this.Items = new List<SubQuery>(capacity);
             this._section_set = new Dictionary<IVisio.VisSectionIndices, SubQuery>(capacity);

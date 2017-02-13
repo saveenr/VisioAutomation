@@ -2,11 +2,11 @@
 
 namespace VisioAutomation.ShapeSheet.Queries
 {
-    public class ListOutput<T> : IEnumerable<Output<T>>
+    public class OutputCollection<T> : IEnumerable<Output<T>>
     {
         private readonly List<Output<T>> _outputs;
 
-        internal ListOutput()
+        internal OutputCollection()
         {
             this._outputs = new List<Output<T>>();
         }
