@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Queries.Columns
+namespace VisioAutomation.ShapeSheet.Queries
 {
     public class ListColumnSubQuery : ListColumnBase<ColumnSubQuery>
     {

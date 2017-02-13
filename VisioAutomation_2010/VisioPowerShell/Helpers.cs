@@ -2,7 +2,7 @@
 using System.Data;
 using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Queries.Outputs;
+using VisioAutomation.ShapeSheet.Queries;
 
 namespace VisioPowerShell
 {

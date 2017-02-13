@@ -1,4 +1,4 @@
-namespace VisioAutomation.ShapeSheet.Queries.Outputs
+namespace VisioAutomation.ShapeSheet.Queries
 {
     public struct SubQueryOutputRow<T> 
     {

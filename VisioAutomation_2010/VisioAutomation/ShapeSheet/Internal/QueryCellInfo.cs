@@ -1,4 +1,4 @@
-using VisioAutomation.ShapeSheet.Queries.Columns;
+using VisioAutomation.ShapeSheet.Queries;
 
 namespace VisioAutomation.ShapeSheet.Internal
 {

@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet.Queries.Columns;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Queries
 {

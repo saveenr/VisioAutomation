@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Drawing;
+using VisioAutomation.ShapeSheet.Queries;
 
 namespace VisioAutomation.Scripting.Utilities
 {
@@ -13,12 +14,12 @@ namespace VisioAutomation.Scripting.Utilities
         public double Width;
         public double Height;
 
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColPinX;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColPinY;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColLocPinX;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColLocPinY;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColWidth;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColHeight;
+        private static ColumnQuery ColPinX;
+        private static ColumnQuery ColPinY;
+        private static ColumnQuery ColLocPinX;
+        private static ColumnQuery ColLocPinY;
+        private static ColumnQuery ColWidth;
+        private static ColumnQuery ColHeight;
         private static VisioAutomation.ShapeSheet.Queries.Query query;
 
         public static List<XFormData> Get(Microsoft.Office.Interop.Visio.Page page, TargetShapeIDs target)

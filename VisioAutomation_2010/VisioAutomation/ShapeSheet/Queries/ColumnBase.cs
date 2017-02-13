@@ -1,7 +1,7 @@
 ﻿using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Queries.Columns
+namespace VisioAutomation.ShapeSheet.Queries
 {
     public class ColumnBase
     {
