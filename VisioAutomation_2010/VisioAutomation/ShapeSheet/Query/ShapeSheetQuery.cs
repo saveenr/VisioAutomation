@@ -299,14 +299,14 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private IEnumerable<QueryCellInfo> enum_cellinfo(int shapeid, int shapeindex, SectionInfoCache cache)
+        private IEnumerable<Internal.QueryCellInfo> enum_cellinfo(int shapeid, int shapeindex, SectionInfoCache cache)
         {
             // enum Cells
             foreach (var col in this.Cells)
             {
                 var sidsrc = new SIDSRC((short)shapeid, col.SRC);
 
-                var q = new QueryCellInfo(sidsrc,col);
+                var q = new Internal.QueryCellInfo(sidsrc,col);
                 yield return q;
             }
 
@@ -325,7 +325,7 @@ namespace VisioAutomation.ShapeSheet.Query
                                 (short)rowindex,
                                 col.CellIndex);
                             var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
-                            var q = new QueryCellInfo(sidsrc,col);
+                            var q = new Internal.QueryCellInfo(sidsrc,col);
                             yield return q;
                         }
                     }
