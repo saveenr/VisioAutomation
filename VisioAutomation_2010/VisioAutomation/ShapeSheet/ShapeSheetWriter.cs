@@ -120,7 +120,7 @@ namespace VisioAutomation.ShapeSheet
                 if (rec.UnitCode.HasValue)
                 {
                     throw new VisioAutomation.Exceptions.InternalAssertionException("Unit code should not be set for formulas");
-                }
+                 }
             }
 
             var flags = this.ComputeGetFormulaFlags();
