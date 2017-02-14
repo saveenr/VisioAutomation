@@ -9,13 +9,13 @@ namespace VisioAutomation.Scripting.ShapeSheet
     {
         public Client Client;
         public VisioAutomation.ShapeSheet.ShapeSheetSurface Surface;
-        public SidsrcShapeSheetStreamBuilder SidsrcShapeSheetStreamBuilder;
+        public SIDSRCShapeSheetStreamBuilder SidsrcShapeSheetStreamBuilder;
         
         public ShapeSheetReader(Client client, IVisio.Page page)
         {
             this.Client = client;
             this.Surface = new ShapeSheetSurface(page);
-            this.SidsrcShapeSheetStreamBuilder = new SidsrcShapeSheetStreamBuilder();
+            this.SidsrcShapeSheetStreamBuilder = new SIDSRCShapeSheetStreamBuilder();
         }
 
         public void AddCell(short id, VisioAutomation.ShapeSheet.SRC src)
