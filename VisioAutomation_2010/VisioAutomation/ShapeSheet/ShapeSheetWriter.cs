@@ -156,7 +156,7 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var stream = coord_type == CoordType.SIDSRC ? (Stream) new SIDSRCStream(count) : (Stream) new SRCStream(count);
-            var results = new ShapeSheetArrayBuilder<string>();
+            var results = new ShapeSheetArrayBuilder<string>(count);
             var unitcodes = new UnitCodesBuilder(count);
 
             var records = this.ResultRecords.EnumerateByCoordType(coord_type);
