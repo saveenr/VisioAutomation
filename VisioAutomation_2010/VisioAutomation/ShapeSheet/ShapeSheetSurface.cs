@@ -26,25 +26,25 @@ namespace VisioAutomation.ShapeSheet
             this.Target = new SurfaceTarget(shape);
         }
 
-        public int SetFormulas(Stream stream, Formulas formulas, short flags)
+        public int SetFormulas(Stream stream, FormulasBuilder formulas_builder, short flags)
         {
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetFormulas(stream.ToStreamArray(), formulas.ToObjectArray(), flags);
+                return this.Target.Shape.SetFormulas(stream.ToStreamArray(), formulas_builder.ToObjectArray(), flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetFormulas(stream.ToStreamArray(), formulas.ToObjectArray(), flags);
+                return this.Target.Master.SetFormulas(stream.ToStreamArray(), formulas_builder.ToObjectArray(), flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetFormulas(stream.ToStreamArray(), formulas.ToObjectArray(), flags);
+                return this.Target.Page.SetFormulas(stream.ToStreamArray(), formulas_builder.ToObjectArray(), flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public int SetResults(Stream stream, UnitCodes unitcodes, object[] results, short flags)
+        public int SetResults(Stream stream, UnitCodesBuilder unitcodes, object[] results, short flags)
         {
             if (this.Target.Shape != null)
             {
@@ -62,7 +62,7 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public TResult[] GetResults<TResult>(Stream stream, UnitCodes unitcodes)
+        public TResult[] GetResults<TResult>(Stream stream, UnitCodesBuilder unitcodes)
         {
             if (stream.Count() == 0)
             {

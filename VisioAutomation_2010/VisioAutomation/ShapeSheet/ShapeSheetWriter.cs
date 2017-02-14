@@ -101,13 +101,9 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var stream = coord_type == CoordType.SIDSRC ? (Stream)new SIDSRCStream(count) : (Stream)new SRCStream(count);
-            var formulas = new Formulas(count);
+            var formulas = new FormulasBuilder(count);
 
             var records = this.FormulaRecords.EnumerateByCoordType(coord_type);
-
-
-            int formulapos = 0;
-
             foreach (var rec in records)
             {
                 // fill stream
@@ -162,9 +158,9 @@ namespace VisioAutomation.ShapeSheet
             var stream = coord_type == CoordType.SIDSRC ? (Stream) new SIDSRCStream(count) : (Stream) new SRCStream(count); 
             
             var records = this.ResultRecords.EnumerateByCoordType(coord_type);
-            
+
             var results = new object[count];
-            var unitcodes = new UnitCodes(count);
+            var unitcodes = new UnitCodesBuilder(count);
 
 
             int resultspos = 0;

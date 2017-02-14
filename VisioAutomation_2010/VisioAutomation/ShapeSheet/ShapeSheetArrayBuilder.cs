@@ -1,32 +1,31 @@
 using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public class UnitCodes
+    public class ShapeSheetArrayBuilder<T>
     {
-        protected List<VisUnitCodes> items;
+        protected List<T> items;
         private object[] object_array;
 
-        public UnitCodes()
+        public ShapeSheetArrayBuilder()
         {
-            this.items = new List<VisUnitCodes>();
+            this.items = new List<T>();
         }
 
-        public UnitCodes(int capacity)
+        public ShapeSheetArrayBuilder(int capacity)
         {
-            this.items = new List<VisUnitCodes>(capacity);
+            this.items = new List<T>(capacity);
         }
 
         public int Count => this.items.Count;
 
-        public void Add(Microsoft.Office.Interop.Visio.VisUnitCodes item)
+        public void Add(T item)
         {
             this.items.Add(item);
             this.object_array = null;
         }
 
-        public void AddRange(IEnumerable<VisUnitCodes> items)
+        public void AddRange(IEnumerable<T> items)
         {
             this.items.AddRange(items);
             this.object_array = null;

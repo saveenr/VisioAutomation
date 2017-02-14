@@ -32,7 +32,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
 
         public string[] GetResults()
         {
-            var unitcodes = new UnitCodes(1);
+            var unitcodes = new UnitCodesBuilder(1);
             unitcodes.Add(IVisio.VisUnitCodes.visNoCast);
             var formulas = this.Surface.GetResults<string>( this.SIDSRCStream, unitcodes);
             return formulas;
