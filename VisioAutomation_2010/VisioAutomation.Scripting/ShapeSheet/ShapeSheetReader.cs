@@ -9,7 +9,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
     {
         public Client Client;
         public VisioAutomation.ShapeSheet.ShapeSheetSurface Surface;
-        public VisioAutomation.ShapeSheet.Query.SIDSRCStream SIDSRCStream;
+        public SIDSRCStream SIDSRCStream;
         
         public ShapeSheetReader(Client client, IVisio.Page page)
         {

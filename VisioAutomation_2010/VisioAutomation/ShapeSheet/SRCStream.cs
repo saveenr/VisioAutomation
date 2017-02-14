@@ -1,4 +1,4 @@
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet
 {
     public class SRCStream : StreamBase<SRC>
     {

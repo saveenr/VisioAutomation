@@ -105,9 +105,9 @@
     <Compile Include="ShapeSheet\Internal\WriteRecords.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
-    <Compile Include="ShapeSheet\Query\SIDSRCStream.cs" />
-    <Compile Include="ShapeSheet\Query\SRCStream.cs" />
-    <Compile Include="ShapeSheet\Query\StreamBase.cs" />
+    <Compile Include="ShapeSheet\SIDSRCStream.cs" />
+    <Compile Include="ShapeSheet\SRCStream.cs" />
+    <Compile Include="ShapeSheet\StreamBase.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBaseCollection.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />

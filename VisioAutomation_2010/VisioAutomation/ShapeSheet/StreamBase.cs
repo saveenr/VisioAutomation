@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet
 {
     public abstract class StreamBase
     {

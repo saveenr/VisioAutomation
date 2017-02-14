@@ -1,4 +1,5 @@
-namespace VisioAutomation.ShapeSheet.Query
+
+namespace VisioAutomation.ShapeSheet
 {
     public class SIDSRCStream : StreamBase<SIDSRC>
     {
