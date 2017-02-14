@@ -16,5 +16,10 @@ namespace VisioAutomation.ShapeSheet
         {
             return SRC.ToStream(this.items);
         }
+
+        public override void AddSRC(SRC src)
+        {
+            this.Add(src);
+        }
     }
 }

@@ -46,19 +46,19 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public int SetResults(short[] stream, object[] unitcodes, object[] results, short flags)
+        public int SetResults(StreamBase stream, object[] unitcodes, object[] results, short flags)
         {
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetResults(stream, unitcodes, results, flags);
+                return this.Target.Shape.SetResults(stream.ToStreamArray(), unitcodes, results, flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetResults(stream, unitcodes, results, flags);
+                return this.Target.Master.SetResults(stream.ToStreamArray(), unitcodes, results, flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetResults(stream, unitcodes, results, flags);
+                return this.Target.Page.SetResults(stream.ToStreamArray(), unitcodes, results, flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");

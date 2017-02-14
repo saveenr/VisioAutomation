@@ -17,5 +17,10 @@ namespace VisioAutomation.ShapeSheet
         {
             return SIDSRC.ToStream(this.items);
         }
+
+        public override void AddSIDSRC(SIDSRC sidsrc)
+        {
+            this.Add(sidsrc);
+        }
     }
 }

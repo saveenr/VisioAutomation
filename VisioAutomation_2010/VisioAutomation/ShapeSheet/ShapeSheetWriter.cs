@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.Win32;
 using VisioAutomation.ShapeSheet.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -153,22 +154,27 @@ namespace VisioAutomation.ShapeSheet
                 return;
             }
 
+            var stream = coord_type == CoordType.SIDSRC ? (StreamBase) new SIDSRCStream() : (StreamBase) new SRCStream(); 
+            
             var records = this.ResultRecords.EnumerateByCoordType(coord_type);
-
-            int chunksize = coord_type == CoordType.SIDSRC ? 4 : 3;
-
-            var stream = new short[count * chunksize];
+            
             var results = new object[count];
             var unitcodes = new object[count];
 
-            int streampos = 0;
             int resultspos = 0;
             int unitcodespos = 0;
 
             foreach (var rec in records)
             {
                 // fill stream
-                streampos = this.AddStreamRecord(stream, streampos, coord_type, rec);
+                if (rec.CoordType == CoordType.SIDSRC)
+                {
+                    stream.AddSIDSRC(rec.SIDSRC);
+                }
+                else
+                {
+                    stream.AddSRC(rec.SRC);
+                }
 
                 // fill results
                 results[resultspos++] = rec.CellValue;

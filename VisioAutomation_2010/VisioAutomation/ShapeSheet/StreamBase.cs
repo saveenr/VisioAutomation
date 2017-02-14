@@ -6,6 +6,16 @@ namespace VisioAutomation.ShapeSheet
     {
         public abstract short[] ToStreamArray();
         public abstract int Count();
+
+        public virtual void AddSIDSRC(SIDSRC sidsrc)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual void AddSRC(SRC src)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     public abstract class StreamBase<T> : StreamBase
@@ -59,6 +69,6 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        protected abstract short[] get_stream();
+       protected abstract short[] get_stream();
     }
 }
