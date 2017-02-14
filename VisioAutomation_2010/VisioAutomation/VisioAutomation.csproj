@@ -100,6 +100,7 @@
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
+    <Compile Include="ShapeSheet\Formulas.cs" />
     <Compile Include="ShapeSheet\Internal\CoordType.cs" />
     <Compile Include="ShapeSheet\Internal\WriteRecord.cs" />
     <Compile Include="ShapeSheet\Internal\WriteRecords.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="ShapeSheet\SIDSRCStream.cs" />
     <Compile Include="ShapeSheet\SRCStream.cs" />
     <Compile Include="ShapeSheet\Stream.cs" />
+    <Compile Include="ShapeSheet\UnitCodes.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBaseCollection.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
