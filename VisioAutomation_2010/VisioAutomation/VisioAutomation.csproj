@@ -107,7 +107,7 @@
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
     <Compile Include="ShapeSheet\ShapeSheetArrayBuilder.cs" />
-    <Compile Include="ShapeSheet\SIDSRCStream.cs" />
+    <Compile Include="ShapeSheet\SIDSRCStreamBuilder.cs" />
     <Compile Include="ShapeSheet\SRCStream.cs" />
     <Compile Include="ShapeSheet\StreamBuilder.cs" />
     <Compile Include="ShapeSheet\UnitCodesBuilder.cs" />
