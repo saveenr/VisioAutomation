@@ -28,19 +28,19 @@ namespace VisioAutomation.ShapeSheet
             this.Target = new SurfaceTarget(shape);
         }
 
-        public int SetFormulas(short[] stream, object[] formulas, short flags)
+        public int SetFormulas(StreamBase stream, object[] formulas, short flags)
         {
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetFormulas(stream, formulas, flags);
+                return this.Target.Shape.SetFormulas(stream.ToStreamArray(), formulas, flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetFormulas(stream, formulas, flags);
+                return this.Target.Master.SetFormulas(stream.ToStreamArray(), formulas, flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetFormulas(stream, formulas, flags);
+                return this.Target.Page.SetFormulas(stream.ToStreamArray(), formulas, flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");
@@ -134,23 +134,6 @@ namespace VisioAutomation.ShapeSheet
             string[] formulas = new string[formulas_obj_array.Length];
             formulas_obj_array.CopyTo(formulas, 0);
             return formulas;
-        }
-
-        private static void EnforceValidStreamSize(short[] stream)
-        {
-            if ((stream.Length%3) == 0)
-            {
-                // OK this is probably an SRC stream - three shorts per item
-            }
-            else if ((stream.Length % 4) == 0)
-            {
-                // OK this is probably an SIDSRC stream - four shorts per item
-            }
-            else
-            {               
-                string msg = string.Format("stream size of {0} must be a multiple of 3 or 4: {0}", stream.Length);
-                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
-            }
         }
 
         private static void EnforceValidResultType(System.Type result_type)
