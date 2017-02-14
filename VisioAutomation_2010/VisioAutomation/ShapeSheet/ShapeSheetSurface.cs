@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Query;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
 {
@@ -28,37 +26,37 @@ namespace VisioAutomation.ShapeSheet
             this.Target = new SurfaceTarget(shape);
         }
 
-        public int SetFormulas(Stream stream, object[] formulas, short flags)
+        public int SetFormulas(Stream stream, Formulas formulas, short flags)
         {
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetFormulas(stream.ToStreamArray(), formulas, flags);
+                return this.Target.Shape.SetFormulas(stream.ToStreamArray(), formulas.ToObjectArray(), flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetFormulas(stream.ToStreamArray(), formulas, flags);
+                return this.Target.Master.SetFormulas(stream.ToStreamArray(), formulas.ToObjectArray(), flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetFormulas(stream.ToStreamArray(), formulas, flags);
+                return this.Target.Page.SetFormulas(stream.ToStreamArray(), formulas.ToObjectArray(), flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public int SetResults(Stream stream, object[] unitcodes, object[] results, short flags)
+        public int SetResults(Stream stream, UnitCodes unitcodes, object[] results, short flags)
         {
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetResults(stream.ToStreamArray(), unitcodes, results, flags);
+                return this.Target.Shape.SetResults(stream.ToStreamArray(), unitcodes.ToObjectArray(), results, flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetResults(stream.ToStreamArray(), unitcodes, results, flags);
+                return this.Target.Master.SetResults(stream.ToStreamArray(), unitcodes.ToObjectArray(), results, flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetResults(stream.ToStreamArray(), unitcodes, results, flags);
+                return this.Target.Page.SetResults(stream.ToStreamArray(), unitcodes.ToObjectArray(), results, flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");

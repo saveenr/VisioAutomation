@@ -100,11 +100,11 @@ namespace VisioAutomation.ShapeSheet
                 return;
             }
 
-            var stream = coord_type == CoordType.SIDSRC ? (Stream)new SIDSRCStream() : (Stream)new SRCStream();
+            var stream = coord_type == CoordType.SIDSRC ? (Stream)new SIDSRCStream(count) : (Stream)new SRCStream(count);
+            var formulas = new Formulas(count);
 
             var records = this.FormulaRecords.EnumerateByCoordType(coord_type);
 
-            var formulas = new object[count];
 
             int formulapos = 0;
 
@@ -121,7 +121,7 @@ namespace VisioAutomation.ShapeSheet
                 }
 
                 // fill formulas
-                formulas[formulapos++] = rec.CellValue;
+                formulas.Add(rec.CellValue);
 
                 if (rec.UnitCode.HasValue)
                 {
@@ -159,12 +159,13 @@ namespace VisioAutomation.ShapeSheet
                 return;
             }
 
-            var stream = coord_type == CoordType.SIDSRC ? (Stream) new SIDSRCStream() : (Stream) new SRCStream(); 
+            var stream = coord_type == CoordType.SIDSRC ? (Stream) new SIDSRCStream(count) : (Stream) new SRCStream(count); 
             
             var records = this.ResultRecords.EnumerateByCoordType(coord_type);
             
             var results = new object[count];
-            var unitcodes = new object[count];
+            var unitcodes = new UnitCodes(count);
+
 
             int resultspos = 0;
             int unitcodespos = 0;
@@ -189,32 +190,12 @@ namespace VisioAutomation.ShapeSheet
                 {
                     throw new VisioAutomation.Exceptions.InternalAssertionException("Unit code missing for result");
                 }
-                unitcodes[unitcodespos++] = rec.UnitCode.Value;
+
+                unitcodes.Add(rec.UnitCode.Value);
             }
 
             var flags = this.ComputeGetResultFlags();
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }
-
-        private int AddStreamRecord(short[] stream, int streampos, CoordType coord_type, WriteRecord rec)
-        {
-            if (coord_type == CoordType.SRC)
-            {
-                var src = rec.SRC;
-                stream[streampos++] = src.Section;
-                stream[streampos++] = src.Row;
-                stream[streampos++] = src.Cell;
-            }
-            else
-            {
-                var sidsrc = rec.SIDSRC;
-                stream[streampos++] = sidsrc.ShapeID;
-                stream[streampos++] = sidsrc.Section;
-                stream[streampos++] = sidsrc.Row;
-                stream[streampos++] = sidsrc.Cell;
-            }
-            return streampos;
-        }
     }
-
 }
