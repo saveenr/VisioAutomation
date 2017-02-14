@@ -37,7 +37,7 @@ namespace VisioAutomation.ShapeSheet
             this.object_array = null;
         }
 
-        public object[] ToObjectArray()
+        internal object[] ToObjectArray()
         {
             if (this.object_array != null)
             {
@@ -52,7 +52,5 @@ namespace VisioAutomation.ShapeSheet
 
             return this.object_array;
         }
-
-
     }
 }

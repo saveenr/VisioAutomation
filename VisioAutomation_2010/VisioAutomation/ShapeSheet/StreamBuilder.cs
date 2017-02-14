@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet
 {
     public abstract class StreamBuilder
     {
-        public abstract short[] ToStreamArray();
+        internal abstract short[] ToStreamArray();
         public abstract int Count();
 
         internal virtual void AddSIDSRC(SIDSRC sidsrc)
@@ -56,7 +56,7 @@ namespace VisioAutomation.ShapeSheet
             this.stream = null;
         }
 
-        public override short[] ToStreamArray()
+        internal override short[] ToStreamArray()
         {
             if (this.stream != null)
             {
