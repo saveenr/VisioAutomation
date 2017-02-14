@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
@@ -63,14 +64,14 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public TResult[] GetResults<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
+        public TResult[] GetResults<TResult>(StreamBase stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            if (stream.Length == 0)
+            if (stream.Count() == 0)
             {
                 return new TResult[0];
             }
 
-            EnforceValidStreamSize(stream);
+            //EnforceValidStreamSize(stream);
             EnforceValidResultType(typeof(TResult));
 
             var unitcodes_obj_array = BuildUnitCodes(unitcodes);
@@ -80,15 +81,15 @@ namespace VisioAutomation.ShapeSheet
 
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Master.GetResults(stream.ToStreamArray(), (short)flags, unitcodes_obj_array, out results_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Page.GetResults(stream.ToStreamArray(), (short)flags, unitcodes_obj_array, out results_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Shape.GetResults(stream.ToStreamArray(), (short)flags, unitcodes_obj_array, out results_sa);
             }
             else
             {
@@ -100,28 +101,28 @@ namespace VisioAutomation.ShapeSheet
             return results;
         }
 
-        public string[] GetFormulasU(short[] stream)
+        public string[] GetFormulasU(StreamBase stream)
         {
-            if (stream.Length == 0)
+            if (stream.Count() == 0)
             {
                 return new string[0];
             }
 
-            EnforceValidStreamSize(stream);
+            //EnforceValidStreamSize(stream);
 
             System.Array formulas_sa = null;
 
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetFormulasU(stream, out formulas_sa);
+                this.Target.Master.GetFormulasU(stream.ToStreamArray(), out formulas_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetFormulasU(stream, out formulas_sa);
+                this.Target.Page.GetFormulasU(stream.ToStreamArray(), out formulas_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetFormulasU(stream, out formulas_sa);
+                this.Target.Shape.GetFormulasU(stream.ToStreamArray(), out formulas_sa);
             }
             else
             {

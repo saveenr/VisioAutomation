@@ -52,7 +52,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
             this.cache_section_info(shapes);
-            var srcstream = this._build_src_stream().ToStreamArray();
+            var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
             var cursor = 0;
@@ -69,7 +69,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
             this.cache_section_info(shapes);
-            var srcstream = this._build_src_stream().ToStreamArray();
+            var srcstream = this._build_src_stream();
             var unitcodes = this._build_unit_code_array(1);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
@@ -86,7 +86,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shapes = new List<IVisio.Shape> { surface.Target.Shape };
 
             this.cache_section_info(shapes);
-            var srcstream = this._build_src_stream().ToStreamArray();
+            var srcstream = this._build_src_stream();
             var unitcodes = this._build_unit_code_array(shapes.Count);
             var formulas = surface.GetFormulasU(srcstream);
             var results = surface.GetResults<string>(srcstream, unitcodes);
@@ -106,7 +106,7 @@ namespace VisioAutomation.ShapeSheet.Query
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
             this.cache_section_info(shapes);
-            var srcstream = this._build_sidsrc_stream(shapeids).ToStreamArray();
+            var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
             var list = this._create_outputs_for_shapes(shapeids, values, cache);
             return list;
@@ -118,7 +118,7 @@ namespace VisioAutomation.ShapeSheet.Query
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
             this.cache_section_info(shapes);
-            var srcstream = this._build_sidsrc_stream(shapeids).ToStreamArray();
+            var srcstream = this._build_sidsrc_stream(shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var list = this._create_outputs_for_shapes(shapeids, values, cache);
@@ -131,7 +131,7 @@ namespace VisioAutomation.ShapeSheet.Query
             shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
 
             this.cache_section_info(shapes);
-            var srcstream = this._build_sidsrc_stream(shapeids).ToStreamArray();
+            var srcstream = this._build_sidsrc_stream(shapeids);
             var unitcodes = this._build_unit_code_array(shapeids.Count);
             var results = surface.GetResults<string>(srcstream, unitcodes);
             var formulas  = surface.GetFormulasU(srcstream);
@@ -264,7 +264,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var qs = this.enum_cellinfo(dummy_shapeid, shapeindex);
             stream.AddRange(qs.Select(i => i.SIDSRC.SRC));
 
-            if (stream.Count != numcells)
+            if (stream.Count() != numcells)
             {
                 string msg = string.Format("src list does not match expected size");
                 throw new InternalAssertionException(msg);

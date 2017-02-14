@@ -2,7 +2,13 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public abstract class StreamBase<T>
+    public abstract class StreamBase
+    {
+        public abstract short[] ToStreamArray();
+        public abstract int Count();
+    }
+
+    public abstract class StreamBase<T> : StreamBase
     {
         protected List<T> items;
         private short[] stream;
@@ -12,7 +18,10 @@ namespace VisioAutomation.ShapeSheet.Query
             this.items = new List<T>();
         }
 
-        public int Count => this.items.Count;
+        public override int Count()
+        {
+            return this.items.Count;
+        }
 
         public StreamBase(int capacity)
         {
@@ -37,7 +46,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.stream = null;
         }
         
-        public short[] ToStreamArray()
+        public override short[] ToStreamArray()
         {
             if (this.stream != null)
             {
