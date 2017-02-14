@@ -26,10 +26,10 @@ namespace VisioAutomation.ShapeSheet
             this.Target = new SurfaceTarget(shape);
         }
 
-        public int SetFormulas(Stream stream, FormulasBuilder formulas_builder, short flags)
+        public int SetFormulas(Stream stream, FormulasBuilder formulas, short flags)
         {
             var sid_src_stream = stream.ToStreamArray();
-            var formula_array = formulas_builder.ToObjectArray();
+            var formula_array = formulas.ToObjectArray();
 
             if (this.Target.Shape != null)
             {

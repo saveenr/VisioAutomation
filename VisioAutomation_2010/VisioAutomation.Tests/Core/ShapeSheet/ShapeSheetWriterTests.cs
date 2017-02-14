@@ -120,12 +120,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Set the formulas
             var writer = new VA.ShapeSheet.ShapeSheetWriter();
-            writer.SetResult( new SIDSRC(shape1.ID16, ShapeSheetWriterTests.src_pinx), 0.5, IVisio.VisUnitCodes.visNumber);
-            writer.SetResult( new SIDSRC(shape1.ID16, ShapeSheetWriterTests.src_piny), 0.5, IVisio.VisUnitCodes.visNumber);
-            writer.SetResult( new SIDSRC(shape2.ID16, ShapeSheetWriterTests.src_pinx), 1.5, IVisio.VisUnitCodes.visNumber);
-            writer.SetResult( new SIDSRC(shape2.ID16, ShapeSheetWriterTests.src_piny), 1.5, IVisio.VisUnitCodes.visNumber);
-            writer.SetResult( new SIDSRC(shape3.ID16, ShapeSheetWriterTests.src_pinx), 2.5, IVisio.VisUnitCodes.visNumber);
-            writer.SetResult( new SIDSRC(shape3.ID16, ShapeSheetWriterTests.src_piny), 2.5, IVisio.VisUnitCodes.visNumber);
+            var unitcode = IVisio.VisUnitCodes.visNumber;
+            writer.SetResult( shape1.ID16, src_pinx, 0.5, unitcode);
+            writer.SetResult( shape1.ID16, src_piny, 0.5, unitcode);
+            writer.SetResult( shape2.ID16, src_pinx, 1.5, unitcode);
+            writer.SetResult( shape2.ID16, src_piny, 1.5, unitcode);
+            writer.SetResult( shape3.ID16, src_pinx, 2.5, unitcode);
+            writer.SetResult( shape3.ID16, src_piny, 2.5, unitcode);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
 
