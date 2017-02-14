@@ -28,35 +28,42 @@ namespace VisioAutomation.ShapeSheet
 
         public int SetFormulas(Stream stream, FormulasBuilder formulas_builder, short flags)
         {
+            var sid_src_stream = stream.ToStreamArray();
+            var formula_array = formulas_builder.ToObjectArray();
+
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetFormulas(stream.ToStreamArray(), formulas_builder.ToObjectArray(), flags);
+                return this.Target.Shape.SetFormulas(sid_src_stream, formula_array, flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetFormulas(stream.ToStreamArray(), formulas_builder.ToObjectArray(), flags);
+                return this.Target.Master.SetFormulas(sid_src_stream, formula_array, flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetFormulas(stream.ToStreamArray(), formulas_builder.ToObjectArray(), flags);
+                return this.Target.Page.SetFormulas(sid_src_stream, formula_array, flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public int SetResults(Stream stream, UnitCodesBuilder unitcodes, object[] results, short flags)
+        public int SetResults(Stream stream, UnitCodesBuilder unitcodes, ShapeSheetArrayBuilder<string> results, short flags)
         {
+            var sid_src_stream = stream.ToStreamArray();
+            var units_names_or_codes = unitcodes.ToObjectArray();
+            var object_array = results.ToObjectArray();
+
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetResults(stream.ToStreamArray(), unitcodes.ToObjectArray(), results, flags);
+                return this.Target.Shape.SetResults(sid_src_stream, units_names_or_codes, object_array, flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetResults(stream.ToStreamArray(), unitcodes.ToObjectArray(), results, flags);
+                return this.Target.Master.SetResults(sid_src_stream, units_names_or_codes, object_array, flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetResults(stream.ToStreamArray(), unitcodes.ToObjectArray(), results, flags);
+                return this.Target.Page.SetResults(sid_src_stream, units_names_or_codes, object_array, flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");
@@ -69,24 +76,26 @@ namespace VisioAutomation.ShapeSheet
                 return new TResult[0];
             }
 
-            //EnforceValidStreamSize(stream);
             EnforceValidResultType(typeof(TResult));
 
             var flags = TypeToVisGetSetArgs(typeof(TResult));
 
             System.Array results_sa = null;
 
+            var sid_src_stream = stream.ToStreamArray();
+            var units_names_or_codes = unitcodes.ToObjectArray();
+
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetResults(stream.ToStreamArray(), (short)flags, unitcodes.ToObjectArray(), out results_sa);
+                this.Target.Master.GetResults(sid_src_stream, (short)flags, units_names_or_codes, out results_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetResults(stream.ToStreamArray(), (short)flags, unitcodes.ToObjectArray(), out results_sa);
+                this.Target.Page.GetResults(sid_src_stream, (short)flags, units_names_or_codes, out results_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetResults(stream.ToStreamArray(), (short)flags, unitcodes.ToObjectArray(), out results_sa);
+                this.Target.Shape.GetResults(sid_src_stream, (short)flags, units_names_or_codes, out results_sa);
             }
             else
             {
@@ -105,21 +114,20 @@ namespace VisioAutomation.ShapeSheet
                 return new string[0];
             }
 
-            //EnforceValidStreamSize(stream);
-
+            var sid_src_stream = stream.ToStreamArray();
             System.Array formulas_sa = null;
 
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetFormulasU(stream.ToStreamArray(), out formulas_sa);
+                this.Target.Master.GetFormulasU(sid_src_stream, out formulas_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetFormulasU(stream.ToStreamArray(), out formulas_sa);
+                this.Target.Page.GetFormulasU(sid_src_stream, out formulas_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetFormulasU(stream.ToStreamArray(), out formulas_sa);
+                this.Target.Shape.GetFormulasU(sid_src_stream, out formulas_sa);
             }
             else
             {

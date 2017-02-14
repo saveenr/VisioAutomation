@@ -155,17 +155,11 @@ namespace VisioAutomation.ShapeSheet
                 return;
             }
 
-            var stream = coord_type == CoordType.SIDSRC ? (Stream) new SIDSRCStream(count) : (Stream) new SRCStream(count); 
-            
-            var records = this.ResultRecords.EnumerateByCoordType(coord_type);
-
-            var results = new object[count];
+            var stream = coord_type == CoordType.SIDSRC ? (Stream) new SIDSRCStream(count) : (Stream) new SRCStream(count);
+            var results = new ShapeSheetArrayBuilder<string>();
             var unitcodes = new UnitCodesBuilder(count);
 
-
-            int resultspos = 0;
-            int unitcodespos = 0;
-
+            var records = this.ResultRecords.EnumerateByCoordType(coord_type);
             foreach (var rec in records)
             {
                 // fill stream
@@ -179,7 +173,7 @@ namespace VisioAutomation.ShapeSheet
                 }
 
                 // fill results
-                results[resultspos++] = rec.CellValue;
+                results.Add(rec.CellValue);
 
                 // fill unit codes
                 if (!rec.UnitCode.HasValue)
