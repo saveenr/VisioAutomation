@@ -257,7 +257,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = 1;
             int shapeindex = 0;
             int numcells = this._get_total_cell_count(numshapes);
-            var stream = new SRCStreamBuilder(numcells);
+            var stream = new SrcShapeSheetStreamBuilder(numcells);
 
             int dummy_shapeid = -1;
 
@@ -279,7 +279,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
 
-            var stream = new SIDSRCStreamBuilder(numcells);
+            var stream = new SidsrcShapeSheetStreamBuilder(numcells);
 
             for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
             {

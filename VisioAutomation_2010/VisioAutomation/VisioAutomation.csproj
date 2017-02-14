@@ -112,7 +112,7 @@
     <Compile Include="ShapeSheet\SIDSRCStreamBuilder.cs" />
     <Compile Include="ShapeSheet\SRCStream.cs" />
     <Compile Include="ShapeSheet\SRCStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\StreamBuilder.cs" />
+    <Compile Include="ShapeSheet\ShapeSheetStreamBuilder.cs" />
     <Compile Include="ShapeSheet\UnitCodesBuilder.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBaseCollection.cs" />

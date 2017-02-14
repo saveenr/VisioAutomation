@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public abstract class StreamBuilder
+    public abstract class ShapeSheetStreamBuilder
     {
         public abstract ShapeSheetStream ToStream();
 
@@ -19,11 +19,11 @@ namespace VisioAutomation.ShapeSheet
         }
     }
 
-    public abstract class StreamBuilder<T> : StreamBuilder
+    public abstract class ShapeSheetStreamBuilder<T> : ShapeSheetStreamBuilder
     {
         protected List<T> items;
 
-        public StreamBuilder()
+        public ShapeSheetStreamBuilder()
         {
             this.items = new List<T>();
         }
@@ -33,7 +33,7 @@ namespace VisioAutomation.ShapeSheet
             return this.items.Count;
         }
 
-        public StreamBuilder(int capacity)
+        public ShapeSheetStreamBuilder(int capacity)
         {
             this.items = new List<T>(capacity);
         }

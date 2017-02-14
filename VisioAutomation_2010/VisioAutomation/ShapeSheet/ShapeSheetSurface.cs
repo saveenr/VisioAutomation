@@ -26,7 +26,7 @@ namespace VisioAutomation.ShapeSheet
             this.Target = new SurfaceTarget(shape);
         }
 
-        public int SetFormulas(StreamBuilder stream, FormulasBuilder formulas, short flags)
+        public int SetFormulas(ShapeSheetStreamBuilder stream, FormulasBuilder formulas, short flags)
         {
             var sid_src_stream = stream.ToStream();
             var formula_array = formulas.ToObjectArray();
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public int SetResults(StreamBuilder stream, UnitCodesBuilder unitcodes, ShapeSheetArrayBuilder<string> results, short flags)
+        public int SetResults(ShapeSheetStreamBuilder stream, UnitCodesBuilder unitcodes, ShapeSheetArrayBuilder<string> results, short flags)
         {
             var sid_src_stream = stream.ToStream();
             var units_names_or_codes = unitcodes.ToObjectArray();
