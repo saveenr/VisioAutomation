@@ -327,7 +327,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private List<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes)
+        private UnitCodes _build_unit_code_array(int numshapes)
         {
             if (numshapes < 1)
             {
@@ -336,7 +336,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             int numcells = this._get_total_cell_count(numshapes);
 
-            var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
+            
+            var unitcodes = new UnitCodes(numcells);
             for (int shapeindex = 0; shapeindex < numshapes; shapeindex++)
             {
                 // shapeindex - we aren't going to use it here so we don't care

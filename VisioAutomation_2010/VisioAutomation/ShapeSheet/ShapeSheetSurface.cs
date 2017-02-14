@@ -64,7 +64,7 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public TResult[] GetResults<TResult>(Stream stream, IList<IVisio.VisUnitCodes> unitcodes)
+        public TResult[] GetResults<TResult>(Stream stream, UnitCodes unitcodes)
         {
             if (stream.Count() == 0)
             {
@@ -74,22 +74,21 @@ namespace VisioAutomation.ShapeSheet
             //EnforceValidStreamSize(stream);
             EnforceValidResultType(typeof(TResult));
 
-            var unitcodes_obj_array = BuildUnitCodes(unitcodes);
             var flags = TypeToVisGetSetArgs(typeof(TResult));
 
             System.Array results_sa = null;
 
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetResults(stream.ToStreamArray(), (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Master.GetResults(stream.ToStreamArray(), (short)flags, unitcodes.ToObjectArray(), out results_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetResults(stream.ToStreamArray(), (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Page.GetResults(stream.ToStreamArray(), (short)flags, unitcodes.ToObjectArray(), out results_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetResults(stream.ToStreamArray(), (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Shape.GetResults(stream.ToStreamArray(), (short)flags, unitcodes.ToObjectArray(), out results_sa);
             }
             else
             {
@@ -173,20 +172,6 @@ namespace VisioAutomation.ShapeSheet
                 throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
             return flags;
-        }
-
-        private static object[] BuildUnitCodes(IList<IVisio.VisUnitCodes> unitcodes)
-        {
-            object[] unitcodes_obj_array = null;
-            if (unitcodes != null)
-            {
-                unitcodes_obj_array = new object[unitcodes.Count];
-                for (int i = 0; i < unitcodes.Count; i++)
-                {
-                    unitcodes_obj_array[i] = unitcodes[i];
-                }
-            }
-            return unitcodes_obj_array;
         }
     }
 }
