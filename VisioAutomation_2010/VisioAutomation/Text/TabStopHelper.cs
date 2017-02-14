@@ -42,9 +42,9 @@ namespace VisioAutomation.Text
             var surface = new ShapeSheetSurface(shape);
 
             var unitcodes = new UnitCodesBuilder();
-            unitcodes.AddRange( Enumerable.Range(0, stream.Count()).Select(i => IVisio.VisUnitCodes.visNumber) );
+            unitcodes.AddRange( Enumerable.Range(0, num_stops*3).Select(i => IVisio.VisUnitCodes.visNumber) );
 
-            var results = surface.GetResults<double>(stream, unitcodes);
+            var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)

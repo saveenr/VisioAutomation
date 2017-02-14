@@ -252,7 +252,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return count;
         }
 
-        private SRCStreamBuilder _build_src_stream()
+        private ShapeSheetStream _build_src_stream()
         {
             int numshapes = 1;
             int shapeindex = 0;
@@ -264,16 +264,17 @@ namespace VisioAutomation.ShapeSheet.Query
             var qs = this.enum_cellinfo(dummy_shapeid, shapeindex);
             stream.AddRange(qs.Select(i => i.SIDSRC.SRC));
 
+
             if (stream.Count() != numcells)
             {
                 string msg = string.Format("src list does not match expected size");
                 throw new InternalAssertionException(msg);
             }
 
-            return stream;
+            return stream.ToStream();
         }
 
-        private SIDSRCStreamBuilder _build_sidsrc_stream(IList<int> shapeids)
+        private ShapeSheetStream _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
@@ -290,7 +291,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
 
-            return stream;
+            return stream.ToStream();
         }
 
         private IEnumerable<Internal.QueryCellInfo> enum_cellinfo(int shapeid, int shapeindex)

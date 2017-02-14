@@ -12,9 +12,9 @@ namespace VisioAutomation.ShapeSheet
 
         }
 
-        protected override short[] get_stream()
+        protected override ShapeSheetStream build_stream()
         {
-            return SRC.ToStream(this.items);
+            return new SIDSRCStream(SRC.ToStream(this.items));
         }
 
         internal override void AddSRC(SRC src)
@@ -22,4 +22,33 @@ namespace VisioAutomation.ShapeSheet
             this.Add(src);
         }
     }
+
+    public class ShapeSheetStream
+    {
+        internal short[] short_array;
+
+        internal ShapeSheetStream(short[] a)
+        {
+            this.short_array = a;
+        }
+
+        public bool IsEmpty => this.short_array.Length == 0;
+    }
+
+    public class SRCStream : ShapeSheetStream
+    {
+
+        internal SRCStream(short[] a) : base(a)
+        {
+        }
+    }
+
+    public class SIDSRCStream : ShapeSheetStream
+    {
+
+        internal SIDSRCStream(short[] a) : base(a)
+        {
+        }
+    }
+
 }

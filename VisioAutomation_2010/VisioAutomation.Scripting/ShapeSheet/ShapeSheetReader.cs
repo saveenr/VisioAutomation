@@ -26,7 +26,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
 
         public string[] GetFormulas()
         {
-            var formulas = this.Surface.GetFormulasU(this.SidsrcStreamBuilder);
+            var formulas = this.Surface.GetFormulasU(this.SidsrcStreamBuilder.ToStream());
             return formulas;
         }
 
@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         {
             var unitcodes = new UnitCodesBuilder(1);
             unitcodes.Add(IVisio.VisUnitCodes.visNoCast);
-            var formulas = this.Surface.GetResults<string>( this.SidsrcStreamBuilder, unitcodes);
+            var formulas = this.Surface.GetResults<string>( this.SidsrcStreamBuilder.ToStream(), unitcodes);
             return formulas;
         }
     }
