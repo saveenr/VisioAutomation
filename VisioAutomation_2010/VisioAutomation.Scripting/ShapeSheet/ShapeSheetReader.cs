@@ -9,24 +9,24 @@ namespace VisioAutomation.Scripting.ShapeSheet
     {
         public Client Client;
         public VisioAutomation.ShapeSheet.ShapeSheetSurface Surface;
-        public SIDSRCStream SIDSRCStream;
+        public SIDSRCStreamBuilder SidsrcStreamBuilder;
         
         public ShapeSheetReader(Client client, IVisio.Page page)
         {
             this.Client = client;
             this.Surface = new ShapeSheetSurface(page);
-            this.SIDSRCStream = new SIDSRCStream();
+            this.SidsrcStreamBuilder = new SIDSRCStreamBuilder();
         }
 
         public void AddCell(short id, VisioAutomation.ShapeSheet.SRC src)
         {
             var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC(id, src);
-            this.SIDSRCStream.Add(sidsrc);
+            this.SidsrcStreamBuilder.Add(sidsrc);
         }
 
         public string[] GetFormulas()
         {
-            var formulas = this.Surface.GetFormulasU(this.SIDSRCStream);
+            var formulas = this.Surface.GetFormulasU(this.SidsrcStreamBuilder);
             return formulas;
         }
 
@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         {
             var unitcodes = new UnitCodesBuilder(1);
             unitcodes.Add(IVisio.VisUnitCodes.visNoCast);
-            var formulas = this.Surface.GetResults<string>( this.SIDSRCStream, unitcodes);
+            var formulas = this.Surface.GetResults<string>( this.SidsrcStreamBuilder, unitcodes);
             return formulas;
         }
     }

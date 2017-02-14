@@ -2,28 +2,28 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public abstract class Stream
+    public abstract class StreamBuilder
     {
         public abstract short[] ToStreamArray();
         public abstract int Count();
 
-        public virtual void AddSIDSRC(SIDSRC sidsrc)
+        internal virtual void AddSIDSRC(SIDSRC sidsrc)
         {
             throw new System.NotImplementedException();
         }
 
-        public virtual void AddSRC(SRC src)
+        internal virtual void AddSRC(SRC src)
         {
             throw new System.NotImplementedException();
         }
     }
 
-    public abstract class Stream<T> : Stream
+    public abstract class StreamBuilder<T> : StreamBuilder
     {
         protected List<T> items;
         private short[] stream;
 
-        public Stream()
+        public StreamBuilder()
         {
             this.items = new List<T>();
         }
@@ -33,7 +33,7 @@ namespace VisioAutomation.ShapeSheet
             return this.items.Count;
         }
 
-        public Stream(int capacity)
+        public StreamBuilder(int capacity)
         {
             this.items = new List<T>(capacity);
         }

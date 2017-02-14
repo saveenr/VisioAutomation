@@ -252,12 +252,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return count;
         }
 
-        private SRCStream _build_src_stream()
+        private SRCStreamBuilder _build_src_stream()
         {
             int numshapes = 1;
             int shapeindex = 0;
             int numcells = this._get_total_cell_count(numshapes);
-            var stream = new SRCStream(numcells);
+            var stream = new SRCStreamBuilder(numcells);
 
             int dummy_shapeid = -1;
 
@@ -273,12 +273,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private SIDSRCStream _build_sidsrc_stream(IList<int> shapeids)
+        private SIDSRCStreamBuilder _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
 
-            var stream = new SIDSRCStream(numcells);
+            var stream = new SIDSRCStreamBuilder(numcells);
 
             for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
             {
