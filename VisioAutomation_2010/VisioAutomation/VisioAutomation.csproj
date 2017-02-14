@@ -107,7 +107,7 @@
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
     <Compile Include="ShapeSheet\SIDSRCStream.cs" />
     <Compile Include="ShapeSheet\SRCStream.cs" />
-    <Compile Include="ShapeSheet\StreamBase.cs" />
+    <Compile Include="ShapeSheet\Stream.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBaseCollection.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />

@@ -28,7 +28,7 @@ namespace VisioAutomation.ShapeSheet
             this.Target = new SurfaceTarget(shape);
         }
 
-        public int SetFormulas(StreamBase stream, object[] formulas, short flags)
+        public int SetFormulas(Stream stream, object[] formulas, short flags)
         {
             if (this.Target.Shape != null)
             {
@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public int SetResults(StreamBase stream, object[] unitcodes, object[] results, short flags)
+        public int SetResults(Stream stream, object[] unitcodes, object[] results, short flags)
         {
             if (this.Target.Shape != null)
             {
@@ -64,7 +64,7 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public TResult[] GetResults<TResult>(StreamBase stream, IList<IVisio.VisUnitCodes> unitcodes)
+        public TResult[] GetResults<TResult>(Stream stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
             if (stream.Count() == 0)
             {
@@ -101,7 +101,7 @@ namespace VisioAutomation.ShapeSheet
             return results;
         }
 
-        public string[] GetFormulasU(StreamBase stream)
+        public string[] GetFormulasU(Stream stream)
         {
             if (stream.Count() == 0)
             {
