@@ -1,29 +1,29 @@
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.Queries.Columns;
+using VisioAutomation.ShapeSheet.Query;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Shapes.Layout
 {
     class ShapeLayoutCellsReader : SingleRowReader<Shapes.Layout.ShapeLayoutCells>
     {
-        public ColumnQuery ConFixedCode { get; set; }
-        public ColumnQuery ConLineJumpCode { get; set; }
-        public ColumnQuery ConLineJumpDirX { get; set; }
-        public ColumnQuery ConLineJumpDirY { get; set; }
-        public ColumnQuery ConLineJumpStyle { get; set; }
-        public ColumnQuery ConLineRouteExt { get; set; }
-        public ColumnQuery ShapeFixedCode { get; set; }
-        public ColumnQuery ShapePermeablePlace { get; set; }
-        public ColumnQuery ShapePermeableX { get; set; }
-        public ColumnQuery ShapePermeableY { get; set; }
-        public ColumnQuery ShapePlaceFlip { get; set; }
-        public ColumnQuery ShapePlaceStyle { get; set; }
-        public ColumnQuery ShapePlowCode { get; set; }
-        public ColumnQuery ShapeRouteStyle { get; set; }
-        public ColumnQuery ShapeSplit { get; set; }
-        public ColumnQuery ShapeSplittable { get; set; }
-        public ColumnQuery DisplayLevel { get; set; }
-        public ColumnQuery Relationships { get; set; }
+        public ColumnCell ConFixedCode { get; set; }
+        public ColumnCell ConLineJumpCode { get; set; }
+        public ColumnCell ConLineJumpDirX { get; set; }
+        public ColumnCell ConLineJumpDirY { get; set; }
+        public ColumnCell ConLineJumpStyle { get; set; }
+        public ColumnCell ConLineRouteExt { get; set; }
+        public ColumnCell ShapeFixedCode { get; set; }
+        public ColumnCell ShapePermeablePlace { get; set; }
+        public ColumnCell ShapePermeableX { get; set; }
+        public ColumnCell ShapePermeableY { get; set; }
+        public ColumnCell ShapePlaceFlip { get; set; }
+        public ColumnCell ShapePlaceStyle { get; set; }
+        public ColumnCell ShapePlowCode { get; set; }
+        public ColumnCell ShapeRouteStyle { get; set; }
+        public ColumnCell ShapeSplit { get; set; }
+        public ColumnCell ShapeSplittable { get; set; }
+        public ColumnCell DisplayLevel { get; set; }
+        public ColumnCell Relationships { get; set; }
 
         public ShapeLayoutCellsReader() 
         {

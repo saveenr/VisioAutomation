@@ -1,19 +1,19 @@
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.Queries.Columns;
+using VisioAutomation.ShapeSheet.Query;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Shapes
 {
     class XFormCellsReader : SingleRowReader<VisioAutomation.Shapes.XFormCells>
     {
-        public ColumnQuery Width { get; set; }
-        public ColumnQuery Height { get; set; }
-        public ColumnQuery PinX { get; set; }
-        public ColumnQuery PinY { get; set; }
-        public ColumnQuery LocPinX { get; set; }
-        public ColumnQuery LocPinY { get; set; }
-        public ColumnQuery Angle { get; set; }
+        public ColumnCell Width { get; set; }
+        public ColumnCell Height { get; set; }
+        public ColumnCell PinX { get; set; }
+        public ColumnCell PinY { get; set; }
+        public ColumnCell LocPinX { get; set; }
+        public ColumnCell LocPinY { get; set; }
+        public ColumnCell Angle { get; set; }
         
         public XFormCellsReader() 
         {

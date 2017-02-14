@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Drawing;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Scripting.Utilities
 {
@@ -13,19 +14,19 @@ namespace VisioAutomation.Scripting.Utilities
         public double Width;
         public double Height;
 
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColPinX;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColPinY;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColLocPinX;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColLocPinY;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColWidth;
-        private static VisioAutomation.ShapeSheet.Queries.Columns.ColumnQuery ColHeight;
-        private static VisioAutomation.ShapeSheet.Queries.Query query;
+        private static ColumnCell ColPinX;
+        private static ColumnCell ColPinY;
+        private static ColumnCell ColLocPinX;
+        private static ColumnCell ColLocPinY;
+        private static ColumnCell ColWidth;
+        private static ColumnCell ColHeight;
+        private static ShapeSheetQuery query;
 
         public static List<XFormData> Get(Microsoft.Office.Interop.Visio.Page page, TargetShapeIDs target)
         {
             if (query == null)
             {
-                query = new VisioAutomation.ShapeSheet.Queries.Query();
+                query = new ShapeSheetQuery();
                 ColPinX = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PinX, "PinX");
                 ColPinY = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PinY, "PinY");
                 ColLocPinX = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.LocPinX, "LocPinX");

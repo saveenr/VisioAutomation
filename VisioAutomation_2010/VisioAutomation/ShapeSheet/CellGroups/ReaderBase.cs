@@ -1,14 +1,14 @@
-using VisioAutomation.ShapeSheet.Queries;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class ReaderBase<TCellGroup>
     {
-        protected VisioAutomation.ShapeSheet.Queries.Query query;
+        protected ShapeSheetQuery query;
 
         protected ReaderBase()
         {
-            this.query = new Query();
+            this.query = new ShapeSheetQuery();
         }
 
         protected abstract void validate_query();

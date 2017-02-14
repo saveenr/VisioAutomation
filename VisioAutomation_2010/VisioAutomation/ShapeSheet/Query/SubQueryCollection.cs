@@ -1,22 +1,23 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Queries
+namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ListSubQuery : IEnumerable<SubQuery>
+    public class SubQueryCollection : IEnumerable<SubQuery>
     {
-        private IList<SubQuery> Items { get; }
+        private IList<SubQuery> items { get; }
+
         private readonly Dictionary<IVisio.VisSectionIndices,SubQuery> _section_set; 
 
-        internal ListSubQuery(int capacity)
+        internal SubQueryCollection(int capacity)
         {
-            this.Items = new List<SubQuery>(capacity);
+            this.items = new List<SubQuery>(capacity);
             this._section_set = new Dictionary<IVisio.VisSectionIndices, SubQuery>(capacity);
         }
 
         public IEnumerator<SubQuery> GetEnumerator()
         {
-            return this.Items.GetEnumerator();
+            return this.items.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -24,7 +25,7 @@ namespace VisioAutomation.ShapeSheet.Queries
             return this.GetEnumerator();
         }
 
-        public SubQuery this[int index] => this.Items[index];
+        public SubQuery this[int index] => this.items[index];
 
         internal SubQuery Add(IVisio.VisSectionIndices section)
         {
@@ -34,13 +35,13 @@ namespace VisioAutomation.ShapeSheet.Queries
                 throw new System.ArgumentException(msg);
             }
 
-            int ordinal = this.Items.Count;
+            int ordinal = this.items.Count;
             var section_query = new SubQuery(ordinal, section);
-            this.Items.Add(section_query);
+            this.items.Add(section_query);
             this._section_set[section] = section_query;
             return section_query;
         }
 
-        public int Count => this.Items.Count;
+        public int Count => this.items.Count;
     }
 }

@@ -1,4 +1,4 @@
-namespace VisioAutomation.Interop
+namespace VisioAutomation.Scripting.Utilities
 {
     public class EnumValue
     {

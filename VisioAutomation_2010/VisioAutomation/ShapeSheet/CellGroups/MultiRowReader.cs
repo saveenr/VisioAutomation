@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
@@ -40,7 +41,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TCellGroup> SubQueryRowsToCellGroups(VisioAutomation.ShapeSheet.Queries.Outputs.SubQueryOutput<ShapeSheet.CellData> subquery_output)
+        private List<TCellGroup> SubQueryRowsToCellGroups(SubQueryOutput<ShapeSheet.CellData> subquery_output)
         {
             var list_celldata = subquery_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
             var cellgroups = new List<TCellGroup>(subquery_output.Rows.Count);

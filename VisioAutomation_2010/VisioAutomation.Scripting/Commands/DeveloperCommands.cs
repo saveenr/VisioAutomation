@@ -111,7 +111,7 @@ namespace VisioAutomation.Scripting.Commands
             var helpstr = new System.Text.StringBuilder();
             int chunksize = 70;
 
-            var interop_enums = Interop.InteropHelper.GetEnums();
+            var interop_enums = Utilities.InteropHelper.GetEnums();
 
             foreach (var enum_ in interop_enums)
             {
@@ -333,19 +333,19 @@ namespace VisioAutomation.Scripting.Commands
             return doc;
         }
 
-        public List<Interop.EnumType> GetInteropEnums()
+        public List<Utilities.EnumType> GetInteropEnums()
         {
-            return Interop.InteropHelper.GetEnums();
+            return Utilities.InteropHelper.GetEnums();
         }
 
-        public Interop.EnumType GetInteropEnum(string name)
+        public Utilities.EnumType GetInteropEnum(string name)
         {
-            return Interop.InteropHelper.GetEnum(name);
+            return Utilities.InteropHelper.GetEnum(name);
         }
 
-        public Interop.EnumType GetEnum(Type type)
+        public Utilities.EnumType GetEnum(Type type)
         {
-            return new Interop.EnumType(type);
+            return new Utilities.EnumType(type);
         }
         
         private static IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> source, int chunksize)

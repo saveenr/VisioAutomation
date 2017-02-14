@@ -2,6 +2,7 @@
 using System.Linq;
 using VisioAutomation.Scripting.FormatPaint;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -79,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = active_window.Selection;
             var shape = selection[1];
 
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var width_col = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Width, "Width");
             var height_col = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Height, "Height");
 

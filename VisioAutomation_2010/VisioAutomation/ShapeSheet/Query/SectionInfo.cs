@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.ShapeSheet.Queries
+namespace VisioAutomation.ShapeSheet.Query
 {
-    internal class SubQuerySectionDetails
+    internal class SectionInfo
     {
         public SubQuery SubQuery { get; private set; }
         public int RowCount  { get; }
 
-        internal SubQuerySectionDetails(SubQuery subquery, int numrows)
+        internal SectionInfo(SubQuery subquery, int numrows)
         {
             this.SubQuery = subquery;
             this.RowCount = numrows;

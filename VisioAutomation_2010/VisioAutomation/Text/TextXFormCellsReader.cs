@@ -1,18 +1,18 @@
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.Queries.Columns;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
     class TextXFormCellsReader : SingleRowReader<Text.TextXFormCells>
     {
-        public ColumnQuery TxtWidth { get; set; }
-        public ColumnQuery TxtHeight { get; set; }
-        public ColumnQuery TxtPinX { get; set; }
-        public ColumnQuery TxtPinY { get; set; }
-        public ColumnQuery TxtLocPinX { get; set; }
-        public ColumnQuery TxtLocPinY { get; set; }
-        public ColumnQuery TxtAngle { get; set; }
+        public ColumnCell TxtWidth { get; set; }
+        public ColumnCell TxtHeight { get; set; }
+        public ColumnCell TxtPinX { get; set; }
+        public ColumnCell TxtPinY { get; set; }
+        public ColumnCell TxtLocPinX { get; set; }
+        public ColumnCell TxtLocPinY { get; set; }
+        public ColumnCell TxtAngle { get; set; }
 
         public TextXFormCellsReader()
         {

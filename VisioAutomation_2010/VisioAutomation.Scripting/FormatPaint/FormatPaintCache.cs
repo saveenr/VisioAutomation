@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -96,7 +97,7 @@ namespace VisioAutomation.Scripting.FormatPaint
         public void CopyFormat(IVisio.Shape shape, FormatCategory category)
         {
             // Build the Query
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var desired_cells = this.Cells.Where(cell => cell.MatchesCategory(category)).ToList();
 
             foreach (var cell in desired_cells)

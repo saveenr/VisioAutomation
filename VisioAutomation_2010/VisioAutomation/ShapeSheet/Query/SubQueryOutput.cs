@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Queries.Outputs
+namespace VisioAutomation.ShapeSheet.Query
 {
     public class SubQueryOutput<T>
     {

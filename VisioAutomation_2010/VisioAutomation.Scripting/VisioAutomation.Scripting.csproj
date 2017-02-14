@@ -77,6 +77,9 @@
     <Compile Include="Commands\MasterCommands.cs" />
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\PageCommands.cs" />
+    <Compile Include="Utilities\EnumType.cs" />
+    <Compile Include="Utilities\EnumValue.cs" />
+    <Compile Include="Utilities\InteropHelper.cs" />
     <Compile Include="Utilities\ReflectionHelper.cs" />
     <Compile Include="Commands\SelectionCommands.cs" />
     <Compile Include="Commands\ShapeSheetCommands.cs" />

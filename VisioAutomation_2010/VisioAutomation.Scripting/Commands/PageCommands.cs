@@ -4,6 +4,7 @@ using VisioAutomation.Extensions;
 using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.View;
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using VisioAutomation.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -110,7 +111,7 @@ namespace VisioAutomation.Scripting.Commands
             var active_page = application.ActivePage;
 
 
-            var query = new VisioAutomation.ShapeSheet.Queries.Query();
+            var query = new ShapeSheetQuery();
             var col_height = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
             var col_width = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
             var page_surface = new ShapeSheetSurface(active_page.PageSheet);

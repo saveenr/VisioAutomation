@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Queries;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
     public class NamedSRCDictionary : NameDictionary<SRC>
     {
-        public Query ToQuery(IList<string> Cells)
+        public ShapeSheetQuery ToQuery(IList<string> Cells)
         {
             var invalid_names = Cells.Where(cellname => !this.ContainsKey(cellname)).ToList();
             if (invalid_names.Count > 0)
@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
                 throw new ArgumentException(msg);
             }
 
-            var query = new Query();
+            var query = new ShapeSheetQuery();
 
             foreach (string resolved_cellname in this.ResolveNames(Cells))
             {

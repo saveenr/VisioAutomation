@@ -1,20 +1,20 @@
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.Queries.Columns;
+using VisioAutomation.ShapeSheet.Query;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Text
 {
     class TextBlockCellsReader : SingleRowReader<Text.TextBlockCells>
     {
-        public ColumnQuery BottomMargin { get; set; }
-        public ColumnQuery LeftMargin { get; set; }
-        public ColumnQuery RightMargin { get; set; }
-        public ColumnQuery TopMargin { get; set; }
-        public ColumnQuery DefaultTabStop { get; set; }
-        public ColumnQuery TextBkgnd { get; set; }
-        public ColumnQuery TextBkgndTrans { get; set; }
-        public ColumnQuery TextDirection { get; set; }
-        public ColumnQuery VerticalAlign { get; set; }
+        public ColumnCell BottomMargin { get; set; }
+        public ColumnCell LeftMargin { get; set; }
+        public ColumnCell RightMargin { get; set; }
+        public ColumnCell TopMargin { get; set; }
+        public ColumnCell DefaultTabStop { get; set; }
+        public ColumnCell TextBkgnd { get; set; }
+        public ColumnCell TextBkgndTrans { get; set; }
+        public ColumnCell TextDirection { get; set; }
+        public ColumnCell VerticalAlign { get; set; }
 
         public TextBlockCellsReader()
         {
