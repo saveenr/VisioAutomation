@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             this.cache_section_info(shapes);
             var srcstream = this._build_src_stream();
-            var unitcodes = this._build_unit_code_array(1).ToObjectArray();
+            var unitcodes = this._build_unit_code_array(1);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var cursor = 0;
@@ -87,7 +87,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             this.cache_section_info(shapes);
             var srcstream = this._build_src_stream();
-            var unitcodes = this._build_unit_code_array(shapes.Count).ToObjectArray();
+            var unitcodes = this._build_unit_code_array(shapes.Count);
             var formulas = surface.GetFormulasU(srcstream);
             var results = surface.GetResults<string>(srcstream, unitcodes);
             var combined_data = CellData.Combine(formulas, results);
@@ -119,7 +119,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids);
-            var unitcodes = this._build_unit_code_array(shapeids.Count).ToObjectArray();
+            var unitcodes = this._build_unit_code_array(shapeids.Count);
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var list = this._create_outputs_for_shapes(shapeids, values, cache);
             return list;
@@ -132,7 +132,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids);
-            var unitcodes = this._build_unit_code_array(shapeids.Count).ToObjectArray();
+            var unitcodes = this._build_unit_code_array(shapeids.Count);
             var results = surface.GetResults<string>(srcstream, unitcodes);
             var formulas  = surface.GetFormulasU(srcstream);
             var combined_data = CellData.Combine(formulas, results);
@@ -328,7 +328,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes)
+        private object[] _build_unit_code_array(int numshapes)
         {
             if (numshapes < 1)
             {
@@ -351,7 +351,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new InternalAssertionException("Number of unit codes must match number of cells");
             }
 
-            return unitcodes;
+            return unitcodes.ToObjectArray();
         }
     }
 }
