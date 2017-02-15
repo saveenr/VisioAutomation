@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet
 {
     public abstract class ShapeSheetStreamBuilder
     {
-        public abstract ShapeSheetStream ToStream();
+        public abstract short[] ToStream();
 
         public abstract int Count();
 
@@ -53,13 +53,13 @@ namespace VisioAutomation.ShapeSheet
             this.items.Clear();
         }
 
-        public override ShapeSheetStream ToStream()
+        public override short[] ToStream()
         {
              var stream = this.build_stream();
              return stream;
         }
 
-        protected abstract ShapeSheetStream build_stream();
+        protected abstract short[] build_stream();
     }
 }
 

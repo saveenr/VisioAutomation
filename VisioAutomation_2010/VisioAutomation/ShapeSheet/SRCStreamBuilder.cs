@@ -12,9 +12,9 @@ namespace VisioAutomation.ShapeSheet
 
         }
 
-        protected override ShapeSheetStream build_stream()
+        protected override short[] build_stream()
         {
-            return new SIDSRCStream(SRC.ToStream(this.items));
+            return SRC.ToStream(this.items);
         }
 
         internal override void AddSRC(SRC src)

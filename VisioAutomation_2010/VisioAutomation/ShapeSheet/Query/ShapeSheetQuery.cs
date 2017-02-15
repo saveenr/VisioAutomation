@@ -252,7 +252,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return count;
         }
 
-        private ShapeSheetStream _build_src_stream()
+        private short[] _build_src_stream()
         {
             int numshapes = 1;
             int shapeindex = 0;
@@ -274,7 +274,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream.ToStream();
         }
 
-        private ShapeSheetStream _build_sidsrc_stream(IList<int> shapeids)
+        private short[] _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
