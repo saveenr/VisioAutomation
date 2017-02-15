@@ -144,7 +144,7 @@ namespace VisioAutomation.ShapeSheet
             var stream = stream_builder.ToStream();
 
             var flags = this.ComputeGetFormulaFlags();
-            int c = surface.SetFormulas(stream, formulas_builder, (short)flags);
+            int c = surface.SetFormulas(stream, formulas_builder.ToObjectArray(), (short)flags);
         }
 
         public void SetResult(SRC src, ValueLiteral result, IVisio.VisUnitCodes unitcode)
@@ -202,7 +202,7 @@ namespace VisioAutomation.ShapeSheet
 
             var stream = stream_builder.ToStream();
             var flags = this.ComputeGetResultFlags();
-            surface.SetResults(stream, unitcodes_builder, results_builder, (short)flags);
+            surface.SetResults(stream, unitcodes_builder.ToObjectArray(), results_builder.ToObjectArray(), (short)flags);
         }
     }
 }
