@@ -100,7 +100,7 @@
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
-    <Compile Include="ShapeSheet\FormulasBuilder.cs" />
+    <Compile Include="ShapeSheet\ValuesBuilder.cs" />
     <Compile Include="ShapeSheet\Internal\CoordType.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />

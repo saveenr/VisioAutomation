@@ -9,17 +9,17 @@ namespace VisioAutomation.ShapeSheet
         public bool TestCircular { get; set; }
 
         private SIDSRCStreamBuilder FormulaRecords_SIDSRC;
-        private FormulasBuilder FormulaRecords_SIDSRC_Formulas;
+        private ValuesBuilder FormulaRecords_SIDSRC_Formulas;
 
         private SRCStreamBuilder FormulaRecords_SRC;
-        private FormulasBuilder FormulaRecords_SRC_Formulas;
+        private ValuesBuilder FormulaRecords_SRC_Formulas;
 
         private SRCStreamBuilder ResultRecords_SRC;
-        private FormulasBuilder ResultRecords_SRC_Results;
+        private ValuesBuilder ResultRecords_SRC_Results;
         private UnitCodesBuilder ResultRecords_SRC_UnitCodes;
 
         private SIDSRCStreamBuilder ResultRecords_SIDSRC;
-        private FormulasBuilder ResultRecords_SIDSRC_Results;
+        private ValuesBuilder ResultRecords_SIDSRC_Results;
         private UnitCodesBuilder ResultRecords_SIDSRC_UnitCodes;
 
         public ShapeSheetWriter()
@@ -99,7 +99,7 @@ namespace VisioAutomation.ShapeSheet
             if (this.FormulaRecords_SRC == null)
             {
                 this.FormulaRecords_SRC = new SRCStreamBuilder();
-                this.FormulaRecords_SRC_Formulas = new FormulasBuilder();
+                this.FormulaRecords_SRC_Formulas = new ValuesBuilder();
             }
 
             if (formula.HasValue)
@@ -114,7 +114,7 @@ namespace VisioAutomation.ShapeSheet
             if (this.FormulaRecords_SIDSRC == null)
             {
                 this.FormulaRecords_SIDSRC = new SIDSRCStreamBuilder();
-                this.FormulaRecords_SIDSRC_Formulas = new FormulasBuilder();
+                this.FormulaRecords_SIDSRC_Formulas = new ValuesBuilder();
             }
 
             if (formula.HasValue)
@@ -152,7 +152,7 @@ namespace VisioAutomation.ShapeSheet
             if (this.ResultRecords_SRC == null)
             {
                 this.ResultRecords_SRC = new SRCStreamBuilder();
-                this.ResultRecords_SRC_Results = new FormulasBuilder();
+                this.ResultRecords_SRC_Results = new ValuesBuilder();
                 this.ResultRecords_SRC_UnitCodes = new UnitCodesBuilder();
             }
 
@@ -172,7 +172,7 @@ namespace VisioAutomation.ShapeSheet
             if (this.ResultRecords_SIDSRC == null)
             {
                 this.ResultRecords_SIDSRC = new SIDSRCStreamBuilder();
-                this.ResultRecords_SIDSRC_Results = new FormulasBuilder();
+                this.ResultRecords_SIDSRC_Results = new ValuesBuilder();
                 this.ResultRecords_SIDSRC_UnitCodes = new UnitCodesBuilder();
             }
 
