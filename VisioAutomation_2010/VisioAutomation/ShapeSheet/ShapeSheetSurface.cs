@@ -63,7 +63,7 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public TResult[] GetResults<TResult>(short[] stream, UnitCodesBuilder unitcodes)
+        public TResult[] GetResults<TResult>(short[] stream, object[] unitcodes)
         {
             if (stream.Length == 0)
             {
@@ -76,19 +76,17 @@ namespace VisioAutomation.ShapeSheet
 
             System.Array results_sa = null;
 
-            var units_names_or_codes = unitcodes.ToObjectArray();
-
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetResults(stream, (short)flags, units_names_or_codes, out results_sa);
+                this.Target.Master.GetResults(stream, (short)flags, unitcodes, out results_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetResults(stream, (short)flags, units_names_or_codes, out results_sa);
+                this.Target.Page.GetResults(stream, (short)flags, unitcodes, out results_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetResults(stream, (short)flags, units_names_or_codes, out results_sa);
+                this.Target.Shape.GetResults(stream, (short)flags, unitcodes, out results_sa);
             }
             else
             {

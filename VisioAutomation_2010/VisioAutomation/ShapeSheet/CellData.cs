@@ -2,10 +2,10 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct CellData
     {
-        public ValueLiteral Formula { get; }
+        public CellValueLiteral Formula { get; }
         public string Result { get; }
 
-        public CellData(ValueLiteral formula, string result)
+        public CellData(CellValueLiteral formula, string result)
             : this()
         {
             this.Formula = formula;
@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet
             return string.Format(System.Globalization.CultureInfo.InvariantCulture,"(\"{0}\",{1})", fs, this.Result);
         }
 
-        public static implicit operator CellData(ValueLiteral formula)
+        public static implicit operator CellData(CellValueLiteral formula)
         {
             return new CellData(formula,default(string));
         }

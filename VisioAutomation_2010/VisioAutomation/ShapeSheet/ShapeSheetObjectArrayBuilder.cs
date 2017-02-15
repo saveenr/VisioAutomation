@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public class ShapeSheetArrayBuilder<T>
+    public class ShapeSheetObjectArrayBuilder<T>
     {
         protected List<T> items;
 
-        public ShapeSheetArrayBuilder()
+        public ShapeSheetObjectArrayBuilder()
         {
             this.items = new List<T>();
         }
 
-        public ShapeSheetArrayBuilder(int capacity)
+        public ShapeSheetObjectArrayBuilder(int capacity)
         {
             this.items = new List<T>(capacity);
         }
@@ -33,7 +33,7 @@ namespace VisioAutomation.ShapeSheet
             this.items.Clear();
         }
 
-        internal object[] ToObjectArray()
+        public object[] ToObjectArray()
         {
             var object_array = new object[this.Count];
             for (int i = 0; i < this.Count; i++)

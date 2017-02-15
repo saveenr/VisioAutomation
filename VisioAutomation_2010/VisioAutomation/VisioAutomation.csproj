@@ -100,15 +100,13 @@
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
-    <Compile Include="ShapeSheet\ValuesBuilder.cs" />
     <Compile Include="ShapeSheet\Internal\CoordType.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
-    <Compile Include="ShapeSheet\ShapeSheetArrayBuilder.cs" />
+    <Compile Include="ShapeSheet\ShapeSheetObjectArrayBuilder.cs" />
     <Compile Include="ShapeSheet\SIDSRCStreamBuilder.cs" />
     <Compile Include="ShapeSheet\SRCStreamBuilder.cs" />
     <Compile Include="ShapeSheet\ShapeSheetStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\UnitCodesBuilder.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBaseCollection.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
@@ -194,7 +192,7 @@
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Query\ColumnCell.cs" />
     <Compile Include="ShapeSheet\ShapeSheetWriter.cs" />
-    <Compile Include="ShapeSheet\ValueLiteral.cs" />
+    <Compile Include="ShapeSheet\CellValueLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />

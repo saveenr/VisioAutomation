@@ -7,16 +7,6 @@ namespace VisioAutomation.ShapeSheet
         public abstract short[] ToStream();
 
         public abstract int Count();
-
-        internal virtual void AddSIDSRC(SIDSRC sidsrc)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        internal virtual void AddSRC(SRC src)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
     public abstract class ShapeSheetStreamBuilder<T> : ShapeSheetStreamBuilder

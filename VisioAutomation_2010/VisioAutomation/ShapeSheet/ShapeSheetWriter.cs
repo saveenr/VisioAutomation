@@ -9,18 +9,18 @@ namespace VisioAutomation.ShapeSheet
         public bool TestCircular { get; set; }
 
         private SIDSRCStreamBuilder FormulaRecords_SIDSRC;
-        private ValuesBuilder FormulaRecords_SIDSRC_Formulas;
+        private ShapeSheetObjectArrayBuilder<string> FormulaRecords_SIDSRC_Formulas;
 
         private SRCStreamBuilder FormulaRecords_SRC;
-        private ValuesBuilder FormulaRecords_SRC_Formulas;
+        private ShapeSheetObjectArrayBuilder<string> FormulaRecords_SRC_Formulas;
 
         private SRCStreamBuilder ResultRecords_SRC;
-        private ValuesBuilder ResultRecords_SRC_Results;
-        private UnitCodesBuilder ResultRecords_SRC_UnitCodes;
+        private ShapeSheetObjectArrayBuilder<string> ResultRecords_SRC_Results;
+        private ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes> ResultRecords_SRC_UnitCodes;
 
         private SIDSRCStreamBuilder ResultRecords_SIDSRC;
-        private ValuesBuilder ResultRecords_SIDSRC_Results;
-        private UnitCodesBuilder ResultRecords_SIDSRC_UnitCodes;
+        private ShapeSheetObjectArrayBuilder<string> ResultRecords_SIDSRC_Results;
+        private ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes> ResultRecords_SIDSRC_UnitCodes;
 
         public ShapeSheetWriter()
         {
@@ -78,28 +78,28 @@ namespace VisioAutomation.ShapeSheet
             this.CommitResultRecordsByType(surface, CoordType.SIDSRC);
         }
 
-        public void SetFormula(SRC src, ValueLiteral formula)
+        public void SetFormula(SRC src, CellValueLiteral formula)
         {
             this.__SetFormulaIgnoreNull(src, formula);
         }
 
-        public void SetFormula(short id, SRC src, ValueLiteral formula)
+        public void SetFormula(short id, SRC src, CellValueLiteral formula)
         {
             var sidsrc = new SIDSRC(id, src);
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        public void SetFormula(SIDSRC sidsrc, ValueLiteral formula)
+        public void SetFormula(SIDSRC sidsrc, CellValueLiteral formula)
         {
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        private void __SetFormulaIgnoreNull(SRC src, ValueLiteral formula)
+        private void __SetFormulaIgnoreNull(SRC src, CellValueLiteral formula)
         {
             if (this.FormulaRecords_SRC == null)
             {
                 this.FormulaRecords_SRC = new SRCStreamBuilder();
-                this.FormulaRecords_SRC_Formulas = new ValuesBuilder();
+                this.FormulaRecords_SRC_Formulas = new ShapeSheetObjectArrayBuilder<string>();
             }
 
             if (formula.HasValue)
@@ -109,12 +109,12 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        private void __SetFormulaIgnoreNull(SIDSRC sidsrc, ValueLiteral formula)
+        private void __SetFormulaIgnoreNull(SIDSRC sidsrc, CellValueLiteral formula)
         {
             if (this.FormulaRecords_SIDSRC == null)
             {
                 this.FormulaRecords_SIDSRC = new SIDSRCStreamBuilder();
-                this.FormulaRecords_SIDSRC_Formulas = new ValuesBuilder();
+                this.FormulaRecords_SIDSRC_Formulas = new ShapeSheetObjectArrayBuilder<string>();
             }
 
             if (formula.HasValue)
@@ -147,13 +147,13 @@ namespace VisioAutomation.ShapeSheet
             int c = surface.SetFormulas(stream, formulas_builder.ToObjectArray(), (short)flags);
         }
 
-        public void SetResult(SRC src, ValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
         {
             if (this.ResultRecords_SRC == null)
             {
                 this.ResultRecords_SRC = new SRCStreamBuilder();
-                this.ResultRecords_SRC_Results = new ValuesBuilder();
-                this.ResultRecords_SRC_UnitCodes = new UnitCodesBuilder();
+                this.ResultRecords_SRC_Results = new ShapeSheetObjectArrayBuilder<string>();
+                this.ResultRecords_SRC_UnitCodes = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>();
             }
 
             this.ResultRecords_SRC.Add(src);
@@ -161,19 +161,19 @@ namespace VisioAutomation.ShapeSheet
             this.ResultRecords_SRC_UnitCodes.Add(unitcode);
         }
 
-        public void SetResult(short id, SRC src, ValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(short id, SRC src, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
         {
             var sidsrc = new SIDSRC(id, src);
             this.SetResult(sidsrc, result.Value, unitcode);
         }
 
-        public void SetResult(SIDSRC sidsrc, ValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC sidsrc, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
         {
             if (this.ResultRecords_SIDSRC == null)
             {
                 this.ResultRecords_SIDSRC = new SIDSRCStreamBuilder();
-                this.ResultRecords_SIDSRC_Results = new ValuesBuilder();
-                this.ResultRecords_SIDSRC_UnitCodes = new UnitCodesBuilder();
+                this.ResultRecords_SIDSRC_Results = new ShapeSheetObjectArrayBuilder<string>();
+                this.ResultRecords_SIDSRC_UnitCodes = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>();
             }
 
             this.ResultRecords_SIDSRC.Add(sidsrc);
@@ -202,7 +202,9 @@ namespace VisioAutomation.ShapeSheet
 
             var stream = stream_builder.ToStream();
             var flags = this.ComputeGetResultFlags();
-            surface.SetResults(stream, unitcodes_builder.ToObjectArray(), results_builder.ToObjectArray(), (short)flags);
+            var unitcodes = unitcodes_builder.ToObjectArray();
+            var results = results_builder.ToObjectArray();
+            surface.SetResults(stream, unitcodes, results, (short)flags);
         }
     }
 }
