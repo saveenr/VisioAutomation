@@ -25,7 +25,7 @@ namespace VisioAutomation.Text
 
             const short row = 0;
             
-            var stream = new SRCShapeSheetStreamBuilder(num_stops * 3);
+            var stream = new SRCStreamBuilder(num_stops * 3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
