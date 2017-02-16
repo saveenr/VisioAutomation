@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Scripting.ShapeSheet
