@@ -35,7 +35,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return col;
         }
 
-
         private static void RestrictToShapesOnly(ShapeSheetSurface surface)
         {
             if (surface.Target.Shape == null)
@@ -98,7 +97,6 @@ namespace VisioAutomation.ShapeSheet.Query
             var output_for_shape = this._create_output_for_shape(surface.Target.ID16, combined_data, sectioninfo, ref cursor);
             return output_for_shape;
         }
-
 
         public QueryOutputCollection<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
@@ -244,9 +242,9 @@ namespace VisioAutomation.ShapeSheet.Query
             int count = this.Cells.Count * numshapes;
 
             // Count the Cells in the Sections
-            foreach (var data_for_shape in this.cache.EnumSectionInfoForShapes)
+            foreach (var section_info in this.cache.EnumSectionInfoForShapes)
             {
-                count += data_for_shape.Sum(s => s.RowCount*s.SubQuery.Columns.Count);
+                count += section_info.Sum(s => s.RowCount*s.SubQuery.Columns.Count);
             }
             
             return count;
@@ -254,22 +252,15 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private short[] _build_src_stream()
         {
+            int dummy_shapeid = -1;
             int numshapes = 1;
             int shapeindex = 0;
             int numcells = this._get_total_cell_count(numshapes);
             var stream = new SRCStreamBuilder(numcells);
 
-            int dummy_shapeid = -1;
-
-            var qs = this.enum_cellinfo(dummy_shapeid, shapeindex);
-            stream.AddRange(qs.Select(i => i.SIDSRC.SRC));
-
-
-            if (stream.Count() != numcells)
-            {
-                string msg = string.Format("src list does not match expected size");
-                throw new InternalAssertionException(msg);
-            }
+            var cellinfos = this.enum_cellinfo(dummy_shapeid, shapeindex);
+            var srcs = cellinfos.Select(i => i.SIDSRC.SRC);
+            stream.AddRange(srcs);
 
             return stream.ToStream();
         }
@@ -286,10 +277,10 @@ namespace VisioAutomation.ShapeSheet.Query
                 // For each shape add the cells to query
                 var shapeid = shapeids[shapeindex];
 
-                var qs = this.enum_cellinfo(shapeid, shapeindex);
-                stream.AddRange(qs.Select(i => i.SIDSRC));
+                var cellinfos = this.enum_cellinfo(shapeid, shapeindex);
+                var sidsrcs = cellinfos.Select(i => i.SIDSRC);
+                stream.AddRange(sidsrcs);
             }
-
 
             return stream.ToStream();
         }
@@ -301,8 +292,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 var sidsrc = new SIDSRC((short)shapeid, col.SRC);
 
-                var q = new Internal.QueryCellInfo(sidsrc,col);
-                yield return q;
+                var cellinfo = new Internal.QueryCellInfo(sidsrc,col);
+                yield return cellinfo;
             }
 
             // enum SubQueries
@@ -320,8 +311,8 @@ namespace VisioAutomation.ShapeSheet.Query
                                 (short)rowindex,
                                 col.CellIndex);
                             var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
-                            var q = new Internal.QueryCellInfo(sidsrc,col);
-                            yield return q;
+                            var cellinfo = new Internal.QueryCellInfo(sidsrc,col);
+                            yield return cellinfo;
                         }
                     }
                 }
@@ -336,9 +327,9 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             int numcells = this._get_total_cell_count(numshapes);
-
             
             var unitcodes = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>(numcells);
+
             for (int shapeindex = 0; shapeindex < numshapes; shapeindex++)
             {
                 // shapeindex - we aren't going to use it here so we don't care
