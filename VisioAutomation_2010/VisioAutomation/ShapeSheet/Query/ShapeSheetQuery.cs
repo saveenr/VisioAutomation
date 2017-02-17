@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
@@ -197,7 +196,6 @@ namespace VisioAutomation.ShapeSheet.Query
                     }
 
                     output.Sections.Add(subquery_output);
-
                 }
             }
 
@@ -205,7 +203,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int expected_cursor = old_cursor + num_cells;
             if (expected_cursor != values_cursor)
             {
-                throw new InternalAssertionException("Unexpected cursor");
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");
             }
 
             return output;
@@ -232,7 +230,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (shapes.Count != cache.CountShapes)
             {
                 string msg = string.Format("mismatch in number of shapes and information collected for shapes");
-                throw new InternalAssertionException(msg);
+                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
         }
 
@@ -323,11 +321,11 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (numshapes < 1)
             {
-                throw new InternalAssertionException("numshapes must be >=1");
+                throw new VisioAutomation.Exceptions.InternalAssertionException("numshapes must be >=1");
             }
 
             int numcells = this._get_total_cell_count(numshapes);
-            
+           
             var unitcodes = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>(numcells);
 
             for (int shapeindex = 0; shapeindex < numshapes; shapeindex++)
@@ -335,11 +333,6 @@ namespace VisioAutomation.ShapeSheet.Query
                 // shapeindex - we aren't going to use it here so we don't care
                 var infos = this.enum_cellinfo(-1, shapeindex);
                 unitcodes.AddRange( infos.Select(i=>i.Column.UnitCode));
-            }
-
-            if (numcells != unitcodes.Count)
-            {
-                throw new InternalAssertionException("Number of unit codes must match number of cells");
             }
 
             return unitcodes.ToObjectArray();
