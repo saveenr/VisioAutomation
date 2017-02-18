@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
@@ -34,7 +33,6 @@ namespace VisioAutomation.ShapeSheet.Query
             var col = this.SubQueries.Add(section);
             return col;
         }
-
 
         private static void RestrictToShapesOnly(ShapeSheetSurface surface)
         {
@@ -98,7 +96,6 @@ namespace VisioAutomation.ShapeSheet.Query
             var output_for_shape = this._create_output_for_shape(surface.Target.ID16, combined_data, sectioninfo, ref cursor);
             return output_for_shape;
         }
-
 
         public QueryOutputCollection<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
@@ -199,7 +196,6 @@ namespace VisioAutomation.ShapeSheet.Query
                     }
 
                     output.Sections.Add(subquery_output);
-
                 }
             }
 
@@ -207,7 +203,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int expected_cursor = old_cursor + num_cells;
             if (expected_cursor != values_cursor)
             {
-                throw new InternalAssertionException("Unexpected cursor");
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");
             }
 
             return output;
@@ -215,10 +211,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private void cache_section_info(IList<IVisio.Shape> shapes)
         {
-            // there aren't any subqueries so return an empty list
+            // there aren't any subqueries so return an empty cache
             if (this.SubQueries.Count < 1)
             {
-                this.cache = new SectionInfoCache();
+                this.cache = new SectionInfoCache(0);
             }
 
             this.cache = new SectionInfoCache();
@@ -234,7 +230,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (shapes.Count != cache.CountShapes)
             {
                 string msg = string.Format("mismatch in number of shapes and information collected for shapes");
-                throw new InternalAssertionException(msg);
+                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
         }
 
@@ -244,9 +240,9 @@ namespace VisioAutomation.ShapeSheet.Query
             int count = this.Cells.Count * numshapes;
 
             // Count the Cells in the Sections
-            foreach (var data_for_shape in this.cache.EnumSectionInfoForShapes)
+            foreach (var section_info in this.cache.EnumSectionInfoForShapes)
             {
-                count += data_for_shape.Sum(s => s.RowCount*s.SubQuery.Columns.Count);
+                count += section_info.Sum(s => s.RowCount*s.SubQuery.Columns.Count);
             }
             
             return count;
@@ -254,24 +250,17 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private short[] _build_src_stream()
         {
+            int dummy_shapeid = -1;
             int numshapes = 1;
             int shapeindex = 0;
             int numcells = this._get_total_cell_count(numshapes);
-            var streamitem_list = new List<VisioAutomation.ShapeSheet.SRC>(numcells);
+            var stream = new SRCStreamBuilder(numcells);
 
-            int dummy_shapeid = -1;
+            var cellinfos = this.enum_cellinfo(dummy_shapeid, shapeindex);
+            var srcs = cellinfos.Select(i => i.SIDSRC.SRC);
+            stream.AddRange(srcs);
 
-            var qs = this.enum_cellinfo(dummy_shapeid, shapeindex);
-            streamitem_list.AddRange(qs.Select(i => i.SIDSRC.SRC));
-
-            if (streamitem_list.Count != numcells)
-            {
-                string msg = string.Format("src list does not match expected size");
-                throw new InternalAssertionException(msg);
-            }
-
-            var stream = VisioAutomation.ShapeSheet.SRC.ToStream(streamitem_list);
-            return stream;
+            return stream.ToStream();
         }
 
         private short[] _build_sidsrc_stream(IList<int> shapeids)
@@ -279,20 +268,19 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
 
-            var streamitem_list = new List<VisioAutomation.ShapeSheet.SIDSRC>(numcells);
+            var stream = new SIDSRCStreamBuilder(numcells);
 
             for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
             {
                 // For each shape add the cells to query
                 var shapeid = shapeids[shapeindex];
 
-                var qs = this.enum_cellinfo(shapeid, shapeindex);
-                streamitem_list.AddRange(qs.Select(i => i.SIDSRC));
+                var cellinfos = this.enum_cellinfo(shapeid, shapeindex);
+                var sidsrcs = cellinfos.Select(i => i.SIDSRC);
+                stream.AddRange(sidsrcs);
             }
 
-            var stream = VisioAutomation.ShapeSheet.SIDSRC.ToStream(streamitem_list);
-
-            return stream;
+            return stream.ToStream();
         }
 
         private IEnumerable<Internal.QueryCellInfo> enum_cellinfo(int shapeid, int shapeindex)
@@ -302,8 +290,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 var sidsrc = new SIDSRC((short)shapeid, col.SRC);
 
-                var q = new Internal.QueryCellInfo(sidsrc,col);
-                yield return q;
+                var cellinfo = new Internal.QueryCellInfo(sidsrc,col);
+                yield return cellinfo;
             }
 
             // enum SubQueries
@@ -321,24 +309,25 @@ namespace VisioAutomation.ShapeSheet.Query
                                 (short)rowindex,
                                 col.CellIndex);
                             var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
-                            var q = new Internal.QueryCellInfo(sidsrc,col);
-                            yield return q;
+                            var cellinfo = new Internal.QueryCellInfo(sidsrc,col);
+                            yield return cellinfo;
                         }
                     }
                 }
             }
         }
 
-        private List<IVisio.VisUnitCodes> _build_unit_code_array(int numshapes)
+        private object[] _build_unit_code_array(int numshapes)
         {
             if (numshapes < 1)
             {
-                throw new InternalAssertionException("numshapes must be >=1");
+                throw new VisioAutomation.Exceptions.InternalAssertionException("numshapes must be >=1");
             }
 
             int numcells = this._get_total_cell_count(numshapes);
+           
+            var unitcodes = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>(numcells);
 
-            var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
             for (int shapeindex = 0; shapeindex < numshapes; shapeindex++)
             {
                 // shapeindex - we aren't going to use it here so we don't care
@@ -346,12 +335,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 unitcodes.AddRange( infos.Select(i=>i.Column.UnitCode));
             }
 
-            if (numcells != unitcodes.Count)
-            {
-                throw new InternalAssertionException("Number of unit codes must match number of cells");
-            }
-
-            return unitcodes;
+            return unitcodes.ToObjectArray();
         }
     }
 }

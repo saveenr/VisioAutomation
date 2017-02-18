@@ -24,9 +24,8 @@ namespace VisioAutomation.Text
             }
 
             const short row = 0;
-
-
-            var srcs = new List<ShapeSheet.SRC>(num_stops * 3);
+            
+            var stream = new SRCStreamBuilder(num_stops * 3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
@@ -35,16 +34,18 @@ namespace VisioAutomation.Text
                 var src_tabalign = new ShapeSheet.SRC(tab_section, row, (short)(i + 2));
                 var src_tabother = new ShapeSheet.SRC(tab_section, row, (short)(i + 3));
 
-                srcs.Add(src_tabpos);
-                srcs.Add(src_tabalign);
-                srcs.Add(src_tabother);
+                stream.Add(src_tabpos);
+                stream.Add(src_tabalign);
+                stream.Add(src_tabother);
             }
 
             var surface = new ShapeSheetSurface(shape);
 
-            var stream = ShapeSheet.SRC.ToStream(srcs);
-            var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNumber).ToList();
-            var results = surface.GetResults<double>(stream, unitcodes);
+            var unitcodes_builder = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>();
+            unitcodes_builder.AddRange( Enumerable.Range(0, num_stops*3).Select(i => IVisio.VisUnitCodes.visNumber) );
+            var unitcodes = unitcodes_builder.ToObjectArray();
+
+            var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)

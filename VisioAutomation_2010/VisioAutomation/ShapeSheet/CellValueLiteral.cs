@@ -10,11 +10,11 @@ namespace VisioAutomation.ShapeSheet
     /// 
     /// The value stored is always a string. Any input will be converted to a string.
     /// </summary>
-    public struct ValueLiteral
+    public struct CellValueLiteral
     {
         private readonly string _stringval;
 
-        private ValueLiteral(string s)
+        private CellValueLiteral(string s)
         {
             this._stringval = s;
         }
@@ -25,27 +25,27 @@ namespace VisioAutomation.ShapeSheet
 
         public override string ToString() => this.Value;
 
-        public static implicit operator ValueLiteral(string value)
+        public static implicit operator CellValueLiteral(string value)
         {
-            return new ValueLiteral(value);
+            return new CellValueLiteral(value);
         }
 
-        public static implicit operator ValueLiteral(int value)
-        {
-            var formula = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            return new ValueLiteral(formula);
-        }
-
-        public static implicit operator ValueLiteral(double value)
+        public static implicit operator CellValueLiteral(int value)
         {
             var formula = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            return new ValueLiteral(formula);
+            return new CellValueLiteral(formula);
         }
 
-        public static implicit operator ValueLiteral(bool value)
+        public static implicit operator CellValueLiteral(double value)
+        {
+            var formula = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            return new CellValueLiteral(formula);
+        }
+
+        public static implicit operator CellValueLiteral(bool value)
         {
             var formula = value ? "1" : "0";
-            return new ValueLiteral(formula);
+            return new CellValueLiteral(formula);
         }
 
         public string Encode()
