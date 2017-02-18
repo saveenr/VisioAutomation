@@ -37,10 +37,6 @@ namespace VisioAutomation.Application
             this._application.EndUndoScope(this.ScopeID, this.Commit);
         }
 
-        /// <summary>
-        /// A human-readable description of the scope
-        /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             string s = string.Format("{0}({1}=\"{2}\",{3}={4})", nameof(UndoScope), nameof(this.Name), this.Name, nameof(this.ScopeID), this.ScopeID);
