@@ -41,9 +41,11 @@ namespace VisioAutomation.Extensions
             return VisioAutomation.Pages.PageHelper.DrawPolyline(page, points);
         }
 
-        public static IVisio.Shape DrawNURBS(this IVisio.Page page, IList<Drawing.Point> controlpoints,
-                                             IList<double> knots,
-                                             IList<double> weights, int degree)
+        public static IVisio.Shape DrawNURBS(
+            this IVisio.Page page, 
+            IList<Drawing.Point> controlpoints,
+            IList<double> knots,
+            IList<double> weights, int degree)
         {
             return VisioAutomation.Pages.PageHelper.DrawNURBS(page, controlpoints, knots, weights, degree);
         }
