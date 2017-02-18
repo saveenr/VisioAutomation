@@ -63,10 +63,7 @@ namespace VisioAutomation.Extensions
             IList<IVisio.Master> masters,
             IEnumerable<Drawing.Point> points)
         {
-            // TODO: Put this method in pagehelper class
-            var surface = new Drawing.DrawingSurface(page);
-            short[] shapeids = surface.DropManyU(masters, points);
-            return shapeids;
+            return VisioAutomation.Pages.PageHelper.DropManyU(page, masters, points);
         }
 
    	    public static short[] DropManyU(this IVisio.Page page, IList<IVisio.Master> masters, IEnumerable<Point> points, IList<string> names)
