@@ -215,10 +215,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private void cache_section_info(IList<IVisio.Shape> shapes)
         {
-            // there aren't any subqueries so return an empty list
+            // there aren't any subqueries so return an empty cache
             if (this.SubQueries.Count < 1)
             {
-                this.cache = new SectionInfoCache();
+                this.cache = new SectionInfoCache(0);
             }
 
             this.cache = new SectionInfoCache();
