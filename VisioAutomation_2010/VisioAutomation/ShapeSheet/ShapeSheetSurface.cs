@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using System;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
 {
@@ -93,8 +94,7 @@ namespace VisioAutomation.ShapeSheet
                 throw new System.ArgumentException("Unhandled Target");
             }
 
-            var results = new TResult[results_sa.Length];
-            results_sa.CopyTo(results, 0);
+            var results = system_array_to_typed_array<TResult>(results_sa);
             return results;
         }
 
@@ -124,11 +124,15 @@ namespace VisioAutomation.ShapeSheet
                 throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
-            object[] formulas_obj_array = (object[])formulas_sa;
-
-            string[] formulas = new string[formulas_obj_array.Length];
-            formulas_obj_array.CopyTo(formulas, 0);
+            var formulas = system_array_to_typed_array<string>(formulas_sa);
             return formulas;
+        }
+
+        private static T[] system_array_to_typed_array<T>(Array results_sa)
+        {
+            var results = new T[results_sa.Length];
+            results_sa.CopyTo(results, 0);
+            return results;
         }
 
         private static void EnforceValidResultType(System.Type result_type)

@@ -32,7 +32,7 @@ namespace VisioAutomation.Shapes.Hyperlinks
             this.SubAddress= sec.AddCell(ShapeSheet.SRCConstants.Hyperlink_SubAddress, nameof(ShapeSheet.SRCConstants.Hyperlink_SubAddress));
         }
 
-        public override Shapes.Hyperlinks.HyperlinkCells CellDataToCellGroup(ShapeSheet.CellData[] row)
+        public override Shapes.Hyperlinks.HyperlinkCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Shapes.Hyperlinks.HyperlinkCells();
 

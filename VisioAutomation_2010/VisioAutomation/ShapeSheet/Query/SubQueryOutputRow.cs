@@ -1,20 +1,18 @@
-using System.Collections;
-
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
     public struct SubQueryOutputRow<T>  
     {
-        public readonly T[] Cells;
+        public readonly VisioAutomation.Utilities.ArraySegment<T> Cells;
+        public readonly int RowIndex;
+        public readonly IVisio.VisSectionIndices SectionIndex;
 
-        internal SubQueryOutputRow(T[] cells)
+        internal SubQueryOutputRow(VisioAutomation.Utilities.ArraySegment<T> cells, IVisio.VisSectionIndices sectionindex, int rowindex)
         {
-            if (cells == null)
-            {
-                throw new System.ArgumentNullException(nameof(cells));
-            }
-
             this.Cells = cells;
+            this.SectionIndex = sectionindex;
+            this.RowIndex = rowindex;
         }
     }
 }
