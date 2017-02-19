@@ -178,12 +178,12 @@ namespace VisioAutomation.ShapeSheet.Query
             if (section_infos != null)
             {
                 output.Sections = new List<SubQueryOutput<T>>(section_infos.Count);
-                foreach (var subquery_detail in section_infos)
+                foreach (var section_info in section_infos)
                 {
-                    var subquery_output = new SubQueryOutput<T>(subquery_detail.RowCount);
+                    var subquery_output = new SubQueryOutput<T>(section_info.RowCount);
 
-                    int num_cols = subquery_detail.SubQuery.Columns.Count;
-                    foreach (int row_index in subquery_detail.RowIndexes)
+                    int num_cols = section_info.SubQuery.Columns.Count;
+                    foreach (int row_index in section_info.RowIndexes)
                     {
                         var cellrange = new VisioAutomation.Utilities.ArraySegment<T>(values, values_cursor, num_cols);
                         values_cursor += num_cols;
