@@ -1,7 +1,7 @@
 <package>
   <metadata>
     <id>VisioAutomation2010</id>
-    <version>1.17.0</version>
+    <version>1.18.0</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>https://github.com/saveenr/VisioAutomation/LICENSE.txt</licenseUrl>
@@ -10,7 +10,7 @@
     <description>VisioAutomation helps developers to control Visio from .NET languages. 
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
-    <releaseNotes> Internal optimization 
+    <releaseNotes> Maintenance release 
     </releaseNotes>
     <copyright>Copyright 2017 Saveen Reddy</copyright>
     <tags>Visio</tags>
