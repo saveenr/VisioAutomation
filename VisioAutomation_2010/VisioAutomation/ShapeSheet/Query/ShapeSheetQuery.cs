@@ -190,8 +190,8 @@ namespace VisioAutomation.ShapeSheet.Query
                     int num_cols = section_info.SubQuery.Columns.Count;
                     foreach (int row_index in section_info.RowIndexes)
                     {
-                        var seg2 = seg_builder.GetNextSegment(num_cols);
-                        var sec_res_row = new SubQueryOutputRow<T>(seg2);
+                        var segment = seg_builder.GetNextSegment(num_cols);
+                        var sec_res_row = new SubQueryOutputRow<T>(segment, section_info.SubQuery.SectionIndex, row_index);
                         subquery_output.Rows.Add(sec_res_row);
                     }
 
