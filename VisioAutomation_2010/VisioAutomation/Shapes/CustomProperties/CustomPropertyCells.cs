@@ -90,7 +90,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return formula.Value;
         }
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
         {
             get
             {

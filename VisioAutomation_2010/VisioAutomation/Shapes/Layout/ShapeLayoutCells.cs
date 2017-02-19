@@ -25,7 +25,7 @@ namespace VisioAutomation.Shapes.Layout
         public ShapeSheet.CellData DisplayLevel { get; set; } // new in visio 2010
         public ShapeSheet.CellData Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
         {
             get
             {

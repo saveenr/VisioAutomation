@@ -15,7 +15,7 @@ namespace VisioAutomation.Shapes.Controls
         public ShapeSheet.CellData XDynamics { get; set; }
         public ShapeSheet.CellData YDynamics { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
         {
             get
             {

@@ -47,7 +47,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             this.Prompt = prompt;
         }
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
         {
             get
             {
