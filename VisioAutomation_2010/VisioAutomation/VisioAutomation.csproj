@@ -102,7 +102,7 @@
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
     <Compile Include="ShapeSheet\Internal\CoordType.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
-    <Compile Include="Utilities\ArraySegmentBuilder.cs" />
+    <Compile Include="Utilities\ArraySegmentReader.cs" />
     <Compile Include="Utilities\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryOutputRowCollection.cs" />
