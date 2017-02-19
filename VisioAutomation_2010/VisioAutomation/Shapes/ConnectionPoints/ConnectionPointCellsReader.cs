@@ -25,7 +25,7 @@ namespace VisioAutomation.Shapes.ConnectionPoints
 
         }
 
-        public override ConnectionPointCells CellDataToCellGroup(ShapeSheet.CellData[] row)
+        public override ConnectionPointCells CellDataToCellGroup(CellRange<ShapeSheet.CellData> row)
         {
             var cells = new ConnectionPointCells();
             cells.X = row[this.X];
