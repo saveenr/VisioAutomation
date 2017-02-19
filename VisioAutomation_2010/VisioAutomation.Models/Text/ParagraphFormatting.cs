@@ -5,20 +5,20 @@ namespace VisioAutomation.Models.Text
 {
     public class ParagraphFormatting 
     {
-        public ShapeSheet.ValueLiteral Bullet { get; set; }
-        public ShapeSheet.ValueLiteral BulletFont { get; set; }
-        public ShapeSheet.ValueLiteral BulletFontSize { get; set; }
-        public ShapeSheet.ValueLiteral BulletString { get; set; }
-        public ShapeSheet.ValueLiteral Flags { get; set; }
-        public ShapeSheet.ValueLiteral HorizontalAlign { get; set; }
-        public ShapeSheet.ValueLiteral IndentFirst { get; set; }
-        public ShapeSheet.ValueLiteral IndentLeft { get; set; }
-        public ShapeSheet.ValueLiteral IndentRight { get; set; }
-        public ShapeSheet.ValueLiteral LocBulletFont { get; set; }
-        public ShapeSheet.ValueLiteral SpacingAfter { get; set; }
-        public ShapeSheet.ValueLiteral SpacingBefore { get; set; }
-        public ShapeSheet.ValueLiteral SpacingLine { get; set; }
-        public ShapeSheet.ValueLiteral TextPosAfterBullet { get; set; }
+        public ShapeSheet.CellValueLiteral Bullet { get; set; }
+        public ShapeSheet.CellValueLiteral BulletFont { get; set; }
+        public ShapeSheet.CellValueLiteral BulletFontSize { get; set; }
+        public ShapeSheet.CellValueLiteral BulletString { get; set; }
+        public ShapeSheet.CellValueLiteral Flags { get; set; }
+        public ShapeSheet.CellValueLiteral HorizontalAlign { get; set; }
+        public ShapeSheet.CellValueLiteral IndentFirst { get; set; }
+        public ShapeSheet.CellValueLiteral IndentLeft { get; set; }
+        public ShapeSheet.CellValueLiteral IndentRight { get; set; }
+        public ShapeSheet.CellValueLiteral LocBulletFont { get; set; }
+        public ShapeSheet.CellValueLiteral SpacingAfter { get; set; }
+        public ShapeSheet.CellValueLiteral SpacingBefore { get; set; }
+        public ShapeSheet.CellValueLiteral SpacingLine { get; set; }
+        public ShapeSheet.CellValueLiteral TextPosAfterBullet { get; set; }
         
         internal void ApplyFormulas(ShapeSheetWriter writer, short row)
         {

@@ -21,7 +21,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData Flags { get; set; }
         public ShapeSheet.CellData BulletString { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
         {
             get
             {

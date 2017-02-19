@@ -1,6 +1,9 @@
+using System.Collections;
+
+
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public struct SubQueryOutputRow<T> 
+    public struct SubQueryOutputRow<T>  
     {
         public readonly T[] Cells;
 

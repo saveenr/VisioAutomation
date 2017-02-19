@@ -27,7 +27,7 @@ namespace VisioAutomation.Shapes.Locking
         public ShapeSheet.CellData LockVtxEdit { get; set; }
         public ShapeSheet.CellData LockWidth { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
         {
             get
             {

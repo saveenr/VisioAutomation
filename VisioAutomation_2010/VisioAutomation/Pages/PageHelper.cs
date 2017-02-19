@@ -68,7 +68,6 @@ namespace VisioAutomation.Pages
             return surface.Drop(master, point);
         }
 
-
         public static short[] DropManyU(IVisio.Page page, IList<IVisio.Master> masters, IEnumerable<VisioAutomation.Drawing.Point> points, IList<string> names)
         {
             var surface = new VisioAutomation.Drawing.DrawingSurface(page);

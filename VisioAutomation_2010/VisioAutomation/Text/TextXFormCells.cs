@@ -13,7 +13,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData TxtLocPinX { get; set; }
         public ShapeSheet.CellData TxtLocPinY { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
         {
             get
             {

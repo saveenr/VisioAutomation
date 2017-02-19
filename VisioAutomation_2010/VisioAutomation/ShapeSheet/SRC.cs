@@ -35,25 +35,23 @@ namespace VisioAutomation.ShapeSheet
 
         public SRC CloneWithNewRow(short row)
         {
-            // It's common to need to get a SRC that has a different row index.
-            // This method make that very easy
+            // SRC that has a different row index. Very common scenario
             return new SRC(this.Section, row, this.Cell);
         }
 
         public static short[] ToStream(IList<SRC> srcs)
         {
             const int src_length = 3;
-            var s = new short[src_length * srcs.Count];
+            var src_stream = new short[src_length * srcs.Count];
             for (int i = 0; i < srcs.Count; i++)
             {
                 var sidsrc = srcs[i];
                 int pos = i * src_length;
-                s[pos + 0] = sidsrc.Section;
-                s[pos + 1] = sidsrc.Row;
-                s[pos + 2] = sidsrc.Cell;
+                src_stream[pos + 0] = sidsrc.Section;
+                src_stream[pos + 1] = sidsrc.Row;
+                src_stream[pos + 2] = sidsrc.Cell;
             }
-            return s;
+            return src_stream;
         }
-
     }
 }

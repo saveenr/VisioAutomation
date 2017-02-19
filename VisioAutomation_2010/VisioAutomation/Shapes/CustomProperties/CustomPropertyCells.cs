@@ -60,13 +60,13 @@ namespace VisioAutomation.Shapes.CustomProperties
             this.Type = 5;
         }
 
-        public CustomPropertyCells(ShapeSheet.ValueLiteral value)
+        public CustomPropertyCells(ShapeSheet.CellValueLiteral value)
         {
             this.Value = value;
             this.Type = 2;
         }
 
-        private string SmartStringToFormulaString(ShapeSheet.ValueLiteral formula, bool force_no_quoting)
+        private string SmartStringToFormulaString(ShapeSheet.CellValueLiteral formula, bool force_no_quoting)
         {
             if (!formula.HasValue)
             {
@@ -90,7 +90,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return formula.Value;
         }
 
-        public override IEnumerable<SRCFormulaPair> Pairs
+        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
         {
             get
             {

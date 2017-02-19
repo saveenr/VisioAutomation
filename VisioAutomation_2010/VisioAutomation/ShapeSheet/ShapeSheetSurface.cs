@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
 {
@@ -47,6 +46,7 @@ namespace VisioAutomation.ShapeSheet
 
         public int SetResults(short[] stream, object[] unitcodes, object[] results, short flags)
         {
+
             if (this.Target.Shape != null)
             {
                 return this.Target.Shape.SetResults(stream, unitcodes, results, flags);
@@ -63,32 +63,30 @@ namespace VisioAutomation.ShapeSheet
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public TResult[] GetResults<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
+        public TResult[] GetResults<TResult>(short[] stream, object[] unitcodes)
         {
             if (stream.Length == 0)
             {
                 return new TResult[0];
             }
 
-            EnforceValidStreamSize(stream);
             EnforceValidResultType(typeof(TResult));
 
-            var unitcodes_obj_array = BuildUnitCodes(unitcodes);
             var flags = TypeToVisGetSetArgs(typeof(TResult));
 
             System.Array results_sa = null;
 
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Master.GetResults(stream, (short)flags, unitcodes, out results_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Page.GetResults(stream, (short)flags, unitcodes, out results_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Shape.GetResults(stream, (short)flags, unitcodes, out results_sa);
             }
             else
             {
@@ -102,12 +100,10 @@ namespace VisioAutomation.ShapeSheet
 
         public string[] GetFormulasU(short[] stream)
         {
-            if (stream.Length == 0)
+            if (stream.Length==0)
             {
                 return new string[0];
             }
-
-            EnforceValidStreamSize(stream);
 
             System.Array formulas_sa = null;
 
@@ -133,23 +129,6 @@ namespace VisioAutomation.ShapeSheet
             string[] formulas = new string[formulas_obj_array.Length];
             formulas_obj_array.CopyTo(formulas, 0);
             return formulas;
-        }
-
-        private static void EnforceValidStreamSize(short[] stream)
-        {
-            if ((stream.Length%3) == 0)
-            {
-                // OK this is probably an SRC stream - three shorts per item
-            }
-            else if ((stream.Length % 4) == 0)
-            {
-                // OK this is probably an SIDSRC stream - four shorts per item
-            }
-            else
-            {               
-                string msg = string.Format("stream size of {0} must be a multiple of 3 or 4: {0}", stream.Length);
-                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
-            }
         }
 
         private static void EnforceValidResultType(System.Type result_type)
@@ -189,20 +168,6 @@ namespace VisioAutomation.ShapeSheet
                 throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
             return flags;
-        }
-
-        private static object[] BuildUnitCodes(IList<IVisio.VisUnitCodes> unitcodes)
-        {
-            object[] unitcodes_obj_array = null;
-            if (unitcodes != null)
-            {
-                unitcodes_obj_array = new object[unitcodes.Count];
-                for (int i = 0; i < unitcodes.Count; i++)
-                {
-                    unitcodes_obj_array[i] = unitcodes[i];
-                }
-            }
-            return unitcodes_obj_array;
         }
     }
 }
