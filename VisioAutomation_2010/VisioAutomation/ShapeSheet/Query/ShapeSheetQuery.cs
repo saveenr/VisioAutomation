@@ -207,6 +207,9 @@ namespace VisioAutomation.ShapeSheet.Query
             output.Cells = new VisioAutomation.Utilities.ArraySegment<T>(values, values_cursor, this.Cells.Count);
             values_cursor += this.Cells.Count;
 
+            var seg1 = seg_builder.GetNextSegment(this.Cells.Count);
+            output.Cells = seg1;
+
             // Now copy the Section values over
             if (section_infos != null)
             {
@@ -221,13 +224,16 @@ namespace VisioAutomation.ShapeSheet.Query
                         var cellrange = new VisioAutomation.Utilities.ArraySegment<T>(values, values_cursor, num_cols);
                         values_cursor += num_cols;
 
-                        var sec_res_row = new SubQueryOutputRow<T>(cellrange);
+                        var seg2 = seg_builder.GetNextSegment(num_cols);
+
+                        var sec_res_row = new SubQueryOutputRow<T>(seg2);
                         subquery_output.Rows.Add(sec_res_row);
                     }
 
                     output.Sections.Add(subquery_output);
                 }
             }
+
 
             int expected_cursor = values_cursor_at_start_of_shape + output.TotalCellCount;
             if (expected_cursor != values_cursor)
