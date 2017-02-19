@@ -28,20 +28,19 @@ namespace VisioAutomation.ShapeSheet
 
         public void Clear()
         {
-            if (this.FormulaRecords_SIDSRC != null) { this.FormulaRecords_SIDSRC.Clear(); }
-            if (this.FormulaRecords_SIDSRC_Formulas != null) { this.FormulaRecords_SIDSRC_Formulas.Clear(); }
+            FormulaRecords_SIDSRC?.Clear();
+            FormulaRecords_SIDSRC_Formulas?.Clear();
 
-            if (this.FormulaRecords_SRC != null) { this.FormulaRecords_SRC.Clear(); }
-            if (this.FormulaRecords_SRC_Formulas != null) { this.FormulaRecords_SRC_Formulas.Clear(); }
+            FormulaRecords_SRC?.Clear();
+            FormulaRecords_SRC_Formulas?.Clear();
 
-            if (this.ResultRecords_SRC != null) { this.ResultRecords_SRC.Clear(); }
-            if (this.ResultRecords_SRC_Results != null) { this.ResultRecords_SRC_Results.Clear(); }
-            if (this.ResultRecords_SRC_UnitCodes != null) { this.ResultRecords_SRC_UnitCodes.Clear(); }
+            ResultRecords_SRC?.Clear();
+            ResultRecords_SRC_Results?.Clear();
+            ResultRecords_SRC_UnitCodes?.Clear();
 
-            if (this.ResultRecords_SIDSRC != null) { this.ResultRecords_SIDSRC.Clear(); }
-            if (this.ResultRecords_SIDSRC_Results != null) { this.ResultRecords_SIDSRC_Results.Clear(); }
-            if (this.ResultRecords_SIDSRC_UnitCodes != null) { this.ResultRecords_SIDSRC_UnitCodes.Clear(); }
-
+            ResultRecords_SIDSRC?.Clear();
+            ResultRecords_SIDSRC_Results?.Clear();
+            ResultRecords_SIDSRC_UnitCodes?.Clear();
         }
 
         protected IVisio.VisGetSetArgs ComputeGetResultFlags()
