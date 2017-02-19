@@ -164,10 +164,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private QueryOutput<T> _create_output_for_shape<T>(short shapeid, T[] values, List<SectionInfo> section_infos, ref int values_cursor)
         {
-            int old_cursor = values_cursor;
+            int values_cursor_at_start_of_shape = values_cursor;
 
             var output = new QueryOutput<T>(shapeid);
-            output.CursorStart = old_cursor;
+            //output.CursorStart = old_cursor;
             output.TotalCellCount = this.Cells.Count + (section_infos == null ? 0 : section_infos.Select(x => x.RowCount * x.SubQuery.Columns.Count).Sum());
 
             // First Copy the Query Cell Values into the output
@@ -177,8 +177,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 arr_cells[i] = values[values_cursor++];
             }
-            output.Cells = new CellRange<T>(arr_cells);
 
+            output.Cells = new CellRange<T>(arr_cells,values, values_cursor_at_start_of_shape, this.Cells.Count);
 
             // Now copy the Section values over
             if (section_infos != null)
@@ -191,13 +191,15 @@ namespace VisioAutomation.ShapeSheet.Query
                     int num_cols = subquery_detail.SubQuery.Columns.Count;
                     foreach (int row_index in subquery_detail.RowIndexes)
                     {
+                        int values_cursor_at_start_of_row = values_cursor;
                         var row_values = new T[num_cols];
                         for (int col_index = 0; col_index < num_cols; col_index++)
                         {
                             row_values[col_index] = values[values_cursor++];
                         }
 
-                        var cellrange = new CellRange<T>(row_values);
+                        var cellrange = new CellRange<T>(row_values, values, values_cursor_at_start_of_row, num_cols);
+
                         var sec_res_row = new SubQueryOutputRow<T>(cellrange);
                         subquery_output.Rows.Add(sec_res_row);
                     }
@@ -206,7 +208,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
             }
 
-            int expected_cursor = old_cursor + output.TotalCellCount;
+            int expected_cursor = values_cursor_at_start_of_shape + output.TotalCellCount;
             if (expected_cursor != values_cursor)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");

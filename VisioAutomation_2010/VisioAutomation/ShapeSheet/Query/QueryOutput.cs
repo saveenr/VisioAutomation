@@ -6,20 +6,32 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         private readonly T[] array;
 
-        //private readonly T[] orig_array;
-        //private int StartIndex;
+        private readonly T[] orig_array;
+        private int StartIndex;
+        private int length;
 
-        public CellRange(T[] array)
+        public CellRange(T[] array, T[] orig_array, int startindex, int length)
         {
             this.array = array;
-            //this.orig_array = orig_array;
-            //this.StartIndex = startpos;
+            this.orig_array = orig_array;
+            this.StartIndex = startindex;
+            this.length = length;
         }
 
         public T this[int index]
         {
-            get { return this.array[index]; }
-            //set { /* set the specified index to value here */ }
+            get
+            {
+                if (index >= this.length)
+                {
+                    throw new System.ArgumentOutOfRangeException(nameof(index));
+                }
+
+                T value1 = this.array[index];
+                T value2 = this.orig_array[this.StartIndex + index];
+               
+                return value2;
+            }
         }
     }
     public class QueryOutput<T> 
@@ -28,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public CellRange<T> Cells { get; internal set; }
         public List<SubQueryOutput<T>> Sections { get; internal set; }
 
-        public int CursorStart;
+        //public int CursorStart;
         public int TotalCellCount;
 
         internal QueryOutput(int shape_id)
