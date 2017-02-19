@@ -171,14 +171,8 @@ namespace VisioAutomation.ShapeSheet.Query
             output.TotalCellCount = this.Cells.Count + (section_infos == null ? 0 : section_infos.Select(x => x.RowCount * x.SubQuery.Columns.Count).Sum());
 
             // First Copy the Query Cell Values into the output
-
-            var arr_cells = new T[this.Cells.Count];
-            for (int i = 0; i < this.Cells.Count; i++)
-            {
-                arr_cells[i] = values[values_cursor++];
-            }
-
-            output.Cells = new CellRange<T>(arr_cells,values, values_cursor_at_start_of_shape, this.Cells.Count);
+            output.Cells = new VisioAutomation.Utilities.ArraySegment<T>(values, values_cursor, this.Cells.Count);
+            values_cursor += this.Cells.Count;
 
             // Now copy the Section values over
             if (section_infos != null)
@@ -191,14 +185,8 @@ namespace VisioAutomation.ShapeSheet.Query
                     int num_cols = subquery_detail.SubQuery.Columns.Count;
                     foreach (int row_index in subquery_detail.RowIndexes)
                     {
-                        int values_cursor_at_start_of_row = values_cursor;
-                        var row_values = new T[num_cols];
-                        for (int col_index = 0; col_index < num_cols; col_index++)
-                        {
-                            row_values[col_index] = values[values_cursor++];
-                        }
-
-                        var cellrange = new CellRange<T>(row_values, values, values_cursor_at_start_of_row, num_cols);
+                        var cellrange = new VisioAutomation.Utilities.ArraySegment<T>(values, values_cursor, num_cols);
+                        values_cursor += num_cols;
 
                         var sec_res_row = new SubQueryOutputRow<T>(cellrange);
                         subquery_output.Rows.Add(sec_res_row);

@@ -146,7 +146,7 @@ namespace VisioAutomation.Pages
         }
 
 
-        public override Pages.PageCells CellDataToCellGroup(CellRange<ShapeSheet.CellData> row)
+        public override Pages.PageCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Pages.PageCells();
             cells.PageLeftMargin = row[this.PageLeftMargin];

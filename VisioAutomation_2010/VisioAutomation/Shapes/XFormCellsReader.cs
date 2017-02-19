@@ -26,7 +26,7 @@ namespace VisioAutomation.Shapes
             this.Angle = this.query.AddCell(SRCCON.Angle, nameof(SRCCON.Angle));
         }
 
-        public override XFormCells CellDataToCellGroup(CellRange<ShapeSheet.CellData> row)
+        public override XFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Shapes.XFormCells();
             cells.PinX = row[this.PinX];

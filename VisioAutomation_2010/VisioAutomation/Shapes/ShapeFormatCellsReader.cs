@@ -62,7 +62,7 @@ namespace VisioAutomation.Shapes
             this.Rounding = this.query.AddCell(SRCCON.Rounding, nameof(SRCCON.Rounding));
         }
 
-        public override Shapes.ShapeFormatCells CellDataToCellGroup(CellRange<ShapeSheet.CellData> row)
+        public override Shapes.ShapeFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Shapes.ShapeFormatCells();
             cells.FillBkgnd = row[this.FillBkgnd];

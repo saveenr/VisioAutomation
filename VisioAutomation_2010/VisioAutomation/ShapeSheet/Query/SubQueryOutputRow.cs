@@ -5,9 +5,9 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public struct SubQueryOutputRow<T>  
     {
-        public readonly CellRange<T> Cells;
+        public readonly VisioAutomation.Utilities.ArraySegment<T> Cells;
 
-        internal SubQueryOutputRow(CellRange<T> cells)
+        internal SubQueryOutputRow(VisioAutomation.Utilities.ArraySegment<T> cells)
         {
             this.Cells = cells;
         }
