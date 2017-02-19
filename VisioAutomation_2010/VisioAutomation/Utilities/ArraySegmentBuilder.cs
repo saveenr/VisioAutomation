@@ -1,6 +1,6 @@
 namespace VisioAutomation.Utilities
 {
-    internal class ArraySegmentBuilder<T>
+    public class ArraySegmentBuilder<T>
     {
         private T[] array;
         private int pos;
@@ -8,6 +8,10 @@ namespace VisioAutomation.Utilities
 
         public ArraySegmentBuilder(T[] array)
         {
+            if (array == null)
+            {
+                throw new System.ArgumentNullException(nameof(array));
+            }
             this.array = array;
             this.pos = 0;
             this._count = 0;

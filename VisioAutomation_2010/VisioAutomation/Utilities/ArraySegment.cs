@@ -44,5 +44,7 @@ namespace VisioAutomation.Utilities
         }
 
         public int Count => this._count;
+
+        public int Offset => this._offset;
     }
 }
