@@ -17,10 +17,14 @@ namespace VisioAutomation.Utilities
             this._count = 0;
         }
 
-        public int Count => _count;
+        public int CountConsumed => _count;
 
         public VisioAutomation.Utilities.ArraySegment<T> GetNextSegment(int size)
         {
+            if (this.pos + size > this.array.Length)
+            {
+                throw new System.ArgumentOutOfRangeException(nameof(size));
+            }
             var seg = new VisioAutomation.Utilities.ArraySegment<T>(this.array, this.pos, size);
             this.pos += size;
             this._count += size;

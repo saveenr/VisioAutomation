@@ -167,7 +167,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private QueryOutput<T> _create_output_for_shape<T>(short shapeid, List<SectionInfo> section_infos, VisioAutomation.Utilities.ArraySegmentBuilder<T> seg_builder)
         {
-            int original_seg_size = seg_builder.Count;
+            int original_seg_size = seg_builder.CountConsumed;
 
             var output = new QueryOutput<T>(shapeid);
             output.TotalCellCount = this.Cells.Count + (section_infos == null ? 0 : section_infos.Select(x => x.RowCount * x.SubQuery.Columns.Count).Sum());
@@ -195,7 +195,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
             }
 
-            int final_seg_size = seg_builder.Count;
+            int final_seg_size = seg_builder.CountConsumed;
 
             if ( ( final_seg_size - original_seg_size) != output.TotalCellCount)
             {
