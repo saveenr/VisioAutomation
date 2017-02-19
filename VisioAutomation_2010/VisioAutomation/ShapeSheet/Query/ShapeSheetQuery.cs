@@ -8,20 +8,20 @@ namespace VisioAutomation.Utilities
     {
         private T[] array;
         private int pos;
-        public int Acc;
+        public int Count;
 
         public ArraySegmentBuilder(T[] array)
         {
             this.array = array;
             this.pos = 0;
-            this.Acc = 0;
+            this.Count = 0;
         }
 
         public VisioAutomation.Utilities.ArraySegment<T> GetNextSegment(int size)
         {
             var seg = new VisioAutomation.Utilities.ArraySegment<T>(this.array, this.pos, size);
             this.pos += size;
-            this.Acc += size;
+            this.Count += size;
             return seg;
         }
     }
@@ -192,8 +192,9 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private QueryOutput<T> _create_output_for_shape<T>(short shapeid, T[] values, List<SectionInfo> section_infos, VisioAutomation.Utilities.ArraySegmentBuilder<T> seg_builder)
         {
+            int original_seg_size = seg_builder.Count;
+
             var output = new QueryOutput<T>(shapeid);
-            //output.CursorStart = old_cursor;
             output.TotalCellCount = this.Cells.Count + (section_infos == null ? 0 : section_infos.Select(x => x.RowCount * x.SubQuery.Columns.Count).Sum());
 
             // First Copy the Query Cell Values into the output
@@ -219,11 +220,12 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
             }
 
-            //int expected_cursor = values_cursor_at_start_of_shape + output.TotalCellCount;
-            //if (expected_cursor != values_cursor)
-            //{
-            //    throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");
-            //}
+            int final_seg_size = seg_builder.Count;
+
+            if ( ( final_seg_size - original_seg_size) != output.TotalCellCount)
+            {
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");
+            }
 
             return output;
         }
