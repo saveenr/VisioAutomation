@@ -1,12 +1,12 @@
 namespace VisioAutomation.Utilities
 {
-    public class ArraySegmentBuilder<T>
+    public class ArraySegmentReader<T>
     {
-        private T[] array;
+        private readonly T[] array;
         private int pos;
         private int _count;
 
-        public ArraySegmentBuilder(T[] array)
+        public ArraySegmentReader(T[] array)
         {
             if (array == null)
             {
@@ -17,7 +17,9 @@ namespace VisioAutomation.Utilities
             this._count = 0;
         }
 
-        public int CountConsumed => _count;
+        public int Count => this._count;
+
+        public int Capacity => this.array.Length;
 
         public VisioAutomation.Utilities.ArraySegment<T> GetNextSegment(int size)
         {

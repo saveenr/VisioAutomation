@@ -19,13 +19,12 @@ namespace VisioAutomation.Utilities
         {
             get
             {
-                if (index >= this._length)
+                if ( (index < 0) && (index >= this._length))
                 {
                     throw new System.ArgumentOutOfRangeException(nameof(index));
                 }
 
-                var value = this.Array[this._offset + index];
-               
+                var value = this.Array[this._offset + index];              
                 return value;
             }
         }
