@@ -93,7 +93,6 @@
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Extensions\WindowMethods.cs" />
     <Compile Include="Exceptions\InternalAssertionException.cs" />
-    <Compile Include="Masters\MasterHelper.cs" />
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
