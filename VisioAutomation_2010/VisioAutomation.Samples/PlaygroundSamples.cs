@@ -80,7 +80,7 @@ namespace VisioAutomationSamples
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
             writer.Commit(surface);
 
-            VA.Pages.PageHelper.ResizeToFitContents(page, new VA.Drawing.Size(1.0, 1.0));
+            page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0));
         }
 
         public static void DrawAllGradients()

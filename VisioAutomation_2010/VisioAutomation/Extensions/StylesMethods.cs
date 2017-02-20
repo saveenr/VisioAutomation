@@ -7,12 +7,19 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Style> ToEnumerable(this IVisio.Styles styles)
         {
-            return VisioAutomation.Styles.StyleHelper.ToEnumerable(styles);
+            int count = styles.Count;
+            for (int i = 0; i < count; i++)
+            {
+                yield return styles[i + 1];
+            }
         }
-        
+
         public static string[] GetNamesU(this IVisio.Styles styles)
         {
-            return VisioAutomation.Styles.StyleHelper.GetNamesU(styles);
+            System.Array names_sa;
+            styles.GetNamesU(out names_sa);
+            string[] names = (string[])names_sa;
+            return names;
         }
     }
 }

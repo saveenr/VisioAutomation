@@ -95,8 +95,6 @@
     <Compile Include="Extensions\WindowMethods.cs" />
     <Compile Include="Exceptions\InternalAssertionException.cs" />
     <Compile Include="Masters\MasterHelper.cs" />
-    <Compile Include="Fonts\FontHelper.cs" />
-    <Compile Include="Layers\LayerHelper.cs" />
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
@@ -138,7 +136,6 @@
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
-    <Compile Include="Styles\StyleHelper.cs" />
     <Compile Include="Text\TabStopHelper.cs" />
     <Compile Include="Text\TextXFormCells.cs" />
     <Compile Include="Windows\WindowHelper.cs" />
