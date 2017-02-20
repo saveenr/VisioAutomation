@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VisioAutomation.Exceptions;
+﻿using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 

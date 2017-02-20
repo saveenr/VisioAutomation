@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Drawing;
 using System.Linq;
 
 namespace VisioAutomation.Extensions
@@ -33,7 +32,7 @@ namespace VisioAutomation.Extensions
         public static IVisio.Shape DrawLine(this IVisio.Page page, Drawing.Point p1, Drawing.Point p2)
         {
             var surface = new Drawing.DrawingSurface(page);
-            var shape = surface.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
+            var shape = surface.DrawLine(p1,p2);
             return shape;
         }
 
@@ -122,25 +121,6 @@ namespace VisioAutomation.Extensions
 
             short[] outids = (short[])outids_sa;
             return outids;
-        }
-
-        public static short[] DropManyU(this IVisio.Page page, IList<IVisio.Master> masters, IEnumerable<Point> points, IList<string> names)
-   	    {
-            var surface = new VisioAutomation.Drawing.DrawingSurface(page);
-            short[] shapeids = surface.DropManyU(masters, points);
-
-            if (names != null)
-            {
-                var page_shapes = page.Shapes;
-                //ShapeIDs should come back in the same order... if Names for the masters are passed in, assign the Name. Makes it easier to find later
-                for (int i = 0; i < shapeids.Length; i++)
-                {
-                    var shapeid = shapeids[i];
-                    var cur_shape = page_shapes[shapeid];
-                    cur_shape.Name = names[i];
-                }
-            }
-            return shapeids;
         }
 
         public static IEnumerable<IVisio.Page> ToEnumerable(this IVisio.Pages pages)
