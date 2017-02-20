@@ -15,31 +15,50 @@ namespace VisioAutomation.Extensions
 
         public static Drawing.Rectangle GetViewRect(this IVisio.Window window)
         {
-            return VisioAutomation.Windows.WindowHelper.GetViewRect(window);
+            // MSDN: http://msdn.microsoft.com/en-us/library/office/ff765846.aspx
+            double left, top, height, width;
+            window.GetViewRect(out left, out top, out width, out height);
+            double x0 = left;
+            double x1 = left + width;
+            double y0 = top - height;
+            double y1 = y0 + height;
+
+            var r = new Drawing.Rectangle(x0, y0, x1, y1);
+            return r;
         }
 
         public static System.Drawing.Rectangle GetWindowRect(this IVisio.Window window)
         {
-            return VisioAutomation.Windows.WindowHelper.GetWindowRect(window);
+            // MSDN: http://msdn.microsoft.com/en-us/library/office/ms367542(v=office.14).aspx
+            int left, top, height, width;
+            window.GetWindowRect(out left, out top, out width, out height);
+            var r = new System.Drawing.Rectangle(left, top, width, height);
+            return r;
         }
 
         public static void SetWindowRect(
             this IVisio.Window window, 
             System.Drawing.Rectangle rect)
         {
-            VisioAutomation.Windows.WindowHelper.SetWindowRect(window, rect);
+            // MSDN: http://msdn.microsoft.com/en-us/library/office/ff769098.aspx
+            window.SetWindowRect(rect.Left, rect.Top, rect.Width, rect.Height);
         }
 
         public static void SetViewRect(
             this IVisio.Window window, 
             Drawing.Rectangle rect)
         {
-            VisioAutomation.Windows.WindowHelper.SetViewRect(window,rect);
+            // MSDN: http://msdn.microsoft.com/en-us/library/office/ms367542(v=office.14).aspx
+            window.SetViewRect(rect.Left, rect.Top, rect.Width, rect.Height);
         }
 
         public static IEnumerable<IVisio.Window> ToEnumerable(this IVisio.Windows windows)
         {
-            return VisioAutomation.Windows.WindowHelper.ToEnumerable(windows);
+            short count = windows.Count;
+            for (int i = 0; i < count; i++)
+            {
+                yield return windows[(short)(i + 1)];
+            }
         }
     }
 }
