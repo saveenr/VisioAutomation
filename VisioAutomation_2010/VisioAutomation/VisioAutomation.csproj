@@ -135,7 +135,7 @@
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
-    <Compile Include="Text\TabStopHelper.cs" />
+    <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Text\TextXFormCells.cs" />
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
@@ -162,7 +162,6 @@
     <Compile Include="Pages\PageLayout\LayoutStyle.cs" />
     <Compile Include="Pages\PageLayout\RadialLayout.cs" />
     <Compile Include="Pages\PageLayout\VerticalAlignment.cs" />
-    <Compile Include="Selections\ShapeSendDirection.cs" />
     <Compile Include="Pages\PrintPageOrientation.cs" />
     <Compile Include="Shapes\Geometry\GeometrySection.cs" />
     <Compile Include="Shapes\Geometry\GeometryRow.cs" />

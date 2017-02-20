@@ -37,26 +37,5 @@ namespace VisioAutomation.Selections
             }
             return shapes;
         }
-
-        public static void SendShapes(IVisio.Selection selection, VisioAutomation.Selections.ShapeSendDirection dir)
-        {
-
-            if (dir == ShapeSendDirection.ToBack)
-            {
-                selection.SendToBack();
-            }
-            else if (dir == ShapeSendDirection.Backward)
-            {
-                selection.SendBackward();
-            }
-            else if (dir == ShapeSendDirection.Forward)
-            {
-                selection.BringForward();
-            }
-            else if (dir == ShapeSendDirection.ToFront)
-            {
-                selection.BringToFront();
-            }
-        }
     }
 }

@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public static class TabStopHelper
+    public static class TextHelper
     {
         private const short tab_section = (short)IVisio.VisSectionIndices.visSectionTab;
 

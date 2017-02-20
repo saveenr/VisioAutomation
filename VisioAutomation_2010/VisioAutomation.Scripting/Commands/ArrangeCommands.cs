@@ -1,8 +1,20 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Shapes.Locking;
 
+namespace VisioAutomation.Scripting.Layout
+{
+    public enum ShapeSendDirection
+    {
+        ToFront,
+        Forward,
+        Backward,
+        ToBack
+    }
+}
+
 namespace VisioAutomation.Scripting.Commands
 {
+
     public class ArrangeCommands : CommandSet
     {
         internal ArrangeCommands(Client client) :
@@ -37,8 +49,29 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        private static void SendShapes(IVisio.Selection selection, VisioAutomation.Scripting.Layout.ShapeSendDirection dir)
+        {
 
-        public void Send(TargetShapes targets, Selections.ShapeSendDirection dir)
+            if (dir == VisioAutomation.Scripting.Layout.ShapeSendDirection.ToBack)
+            {
+                selection.SendToBack();
+            }
+            else if (dir == VisioAutomation.Scripting.Layout.ShapeSendDirection.Backward)
+            {
+                selection.SendBackward();
+            }
+            else if (dir == VisioAutomation.Scripting.Layout.ShapeSendDirection.Forward)
+            {
+                selection.BringForward();
+            }
+            else if (dir == VisioAutomation.Scripting.Layout.ShapeSendDirection.ToFront)
+            {
+                selection.BringToFront();
+            }
+        }
+
+
+        public void Send(TargetShapes targets, VisioAutomation.Scripting.Layout.ShapeSendDirection dir)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -50,7 +83,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this._client.Selection.Get();
-            Selections.SelectionHelper.SendShapes(selection, dir);
+            ArrangeCommands.SendShapes(selection, dir);
         }
 
         public void SetLock(TargetShapes targets, LockCells lockcells)
