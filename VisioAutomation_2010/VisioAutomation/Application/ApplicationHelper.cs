@@ -82,17 +82,6 @@ namespace VisioAutomation.Application
 
             return s;
         }
-
-        public static void Quit(IVisio.Application app, bool force_close)
-        {
-            if (force_close)
-            {
-                const short new_alert_response = 7;
-                app.AlertResponse = new_alert_response;
-            }
-
-            app.Quit();
-        }       
         
         public static void BringWindowToTop(IVisio.Application app)
         {

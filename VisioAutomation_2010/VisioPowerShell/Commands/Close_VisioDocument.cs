@@ -1,6 +1,6 @@
 ﻿using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace VisioPowerShell.Commands
 {
@@ -21,7 +21,7 @@ namespace VisioPowerShell.Commands
                 var doc = app.ActiveDocument;
                 if (doc != null)
                 {
-                    VA.Documents.DocumentHelper.Close(doc,this.Force);
+                    doc.Close(this.Force);
                 }
             }
             else
@@ -29,7 +29,7 @@ namespace VisioPowerShell.Commands
                 foreach (var doc in this.Documents)
                 {
                     this.Client.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
-                    VA.Documents.DocumentHelper.Close(doc, this.Force);
+                    doc.Close(this.Force);
                 }
             }
         }

@@ -79,7 +79,6 @@
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
-    <Compile Include="Colors\ColorHelper.cs" />
     <Compile Include="Extensions\ApplicationMethods.cs" />
     <Compile Include="Extensions\ColorsMethods.cs" />
     <Compile Include="Extensions\ConnectsMethods.cs" />
@@ -94,9 +93,6 @@
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Extensions\WindowMethods.cs" />
     <Compile Include="Exceptions\InternalAssertionException.cs" />
-    <Compile Include="Masters\MasterHelper.cs" />
-    <Compile Include="Fonts\FontHelper.cs" />
-    <Compile Include="Layers\LayerHelper.cs" />
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
@@ -138,8 +134,7 @@
     <Compile Include="Shapes\Hyperlinks\HyperlinkCells.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkHelper.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
-    <Compile Include="Styles\StyleHelper.cs" />
-    <Compile Include="Text\TabStopHelper.cs" />
+    <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Text\TextXFormCells.cs" />
     <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
@@ -166,7 +161,6 @@
     <Compile Include="Pages\PageLayout\LayoutStyle.cs" />
     <Compile Include="Pages\PageLayout\RadialLayout.cs" />
     <Compile Include="Pages\PageLayout\VerticalAlignment.cs" />
-    <Compile Include="Selections\ShapeSendDirection.cs" />
     <Compile Include="Pages\PrintPageOrientation.cs" />
     <Compile Include="Shapes\Geometry\GeometrySection.cs" />
     <Compile Include="Shapes\Geometry\GeometryRow.cs" />

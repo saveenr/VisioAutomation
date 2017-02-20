@@ -77,7 +77,7 @@ namespace VisioAutomation.Text
             }
             cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
-            cells.TabStops = TabStopHelper.GetTabStops(shape);
+            cells.TabStops = TextHelper.GetTabStops(shape);
             return cells;
         }
 
@@ -109,7 +109,7 @@ namespace VisioAutomation.Text
                 format.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
                 format.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
 
-                format.TabStops = TabStopHelper.GetTabStops(shape);
+                format.TabStops = TextHelper.GetTabStops(shape);
             }
 
             return formats;
