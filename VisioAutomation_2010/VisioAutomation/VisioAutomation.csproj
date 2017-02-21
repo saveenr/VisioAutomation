@@ -136,7 +136,6 @@
     <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
     <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Text\TextXFormCells.cs" />
-    <Compile Include="Windows\WindowHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Utilities\WildcardHelper.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointType.cs" />

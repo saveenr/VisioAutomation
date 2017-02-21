@@ -10,7 +10,10 @@ namespace VisioAutomation.Extensions
             IEnumerable<IVisio.Shape> shapes,
             IVisio.VisSelectArgs selectargs)
         {
-            VisioAutomation.Windows.WindowHelper.Select(window, shapes, selectargs);
+            foreach (var shape in shapes)
+            {
+                window.Select(shape, (short)selectargs);
+            }
         }
 
         public static Drawing.Rectangle GetViewRect(this IVisio.Window window)
