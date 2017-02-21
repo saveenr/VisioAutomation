@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Colors
+﻿namespace VisioAutomation.Drawing
 {
     public struct ColorHSL
     {

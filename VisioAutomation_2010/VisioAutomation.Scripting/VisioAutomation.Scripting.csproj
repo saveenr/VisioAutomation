@@ -91,6 +91,7 @@
     <Compile Include="DirectedGraph\ConnectorInfo.cs" />
     <Compile Include="DirectedGraph\DirectedGraphBuilder.cs" />
     <Compile Include="DirectedGraph\ShapeInfo.cs" />
+    <Compile Include="Utilities\WildcardHelper.cs" />
     <Compile Include="Utilities\XFormData.cs" />
     <Compile Include="Utilities\XmlLinqExtensions.cs" />
     <Compile Include="FormatPaint\FormatCategory.cs" />

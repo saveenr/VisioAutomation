@@ -31,7 +31,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(2, page1.Shapes.Count);
             Assert.AreEqual(2, shapeids.Length);
 
-            var shapes = page1.Shapes.GetShapesFromIDs(shapeids);
+            var shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page1.Shapes,shapeids);
             var client = this.GetScriptingClient();
             var names = new[] { "TestName", "TestName2" };
             var texts = names.ToArray();

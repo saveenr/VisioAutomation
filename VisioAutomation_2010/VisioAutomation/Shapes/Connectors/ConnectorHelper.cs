@@ -112,12 +112,12 @@ namespace VisioAutomation.Shapes.Connectors
             {
                 var masters = Enumerable.Repeat(connector_master, num_connectors).ToList();
                 short[] con_shapeids = page.DropManyU(masters, points);
-                con_shapes = page.Shapes.GetShapesFromIDs(con_shapeids);                
+                con_shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);                
             }
             else
             {
                 short[] con_shapeids = Pages.PageHelper.DropManyAutoConnectors(page, points);
-                con_shapes = page.Shapes.GetShapesFromIDs(con_shapeids);
+                con_shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);
             }
 
             for (int i = 0; i < num_connectors; i++)

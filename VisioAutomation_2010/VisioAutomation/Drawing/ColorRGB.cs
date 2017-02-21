@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using VisioAutomation.Exceptions;
 
-namespace VisioAutomation.Colors
+namespace VisioAutomation.Drawing
 {
     public struct ColorRGB
     {

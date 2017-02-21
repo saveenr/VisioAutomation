@@ -129,7 +129,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 // return masters matching the name
                 var masters2 = doc.Masters.ToEnumerable();
-                var masters3 = WildcardHelper.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, WildcardHelper.FilterAction.Include).ToList();
+                var masters3 = VisioAutomation.Scripting.Utilities.WildcardHelper.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, VisioAutomation.Scripting.Utilities.WildcardHelper.FilterAction.Include).ToList();
                 return masters3;
             }
         }
