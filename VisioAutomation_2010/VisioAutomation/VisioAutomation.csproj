@@ -140,7 +140,7 @@
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointType.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointHelper.cs" />
     <Compile Include="Shapes\Controls\ControlHelper.cs" />
-    <Compile Include="Drawing\BoundingBoxHelper.cs" />
+    <Compile Include="Drawing\BoundingBoxBuilder.cs" />
     <Compile Include="Shapes\ShapeFormatCells.cs" />
     <Compile Include="Pages\PageCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyHelper.cs" />
