@@ -219,7 +219,7 @@
     <Compile Include="Text\TabStop.cs" />
     <Compile Include="Application\UndoScope.cs" />
     <Compile Include="Application\ApplicationHelper.cs" />
-    <Compile Include="Internal\NativeMethods.cs" />
+    <Compile Include="Utilities\NativeMethods.cs" />
     <Compile Include="Exceptions\AutomationException.cs" />
     <Compile Include="Shapes\ShapeHelper.cs" />
     <Compile Include="Text\TextRun.cs" />

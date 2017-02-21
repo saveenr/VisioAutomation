@@ -1,4 +1,3 @@
-using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Application
@@ -30,12 +29,12 @@ namespace VisioAutomation.Application
             var hwnd_as_intptr = new System.IntPtr(hwnd);
 
             // Set the window properties to make it a visible child window.
-            const int window_prop_index = NativeMethods.GWL_STYLE;
-            const int window_prop_value = NativeMethods.WS_CHILD | NativeMethods.WS_VISIBLE;
-            NativeMethods.SetWindowLong(hwnd_as_intptr, window_prop_index, window_prop_value);
+            const int window_prop_index = VisioAutomation.Utilities.NativeMethods.GWL_STYLE;
+            const int window_prop_value = VisioAutomation.Utilities.NativeMethods.WS_CHILD | VisioAutomation.Utilities.NativeMethods.WS_VISIBLE;
+            VisioAutomation.Utilities.NativeMethods.SetWindowLong(hwnd_as_intptr, window_prop_index, window_prop_value);
 
             // Set the anchor bar window as the parent of the form.
-            NativeMethods.SetParent(hwnd, anchor_window.WindowHandle32);
+            VisioAutomation.Utilities.NativeMethods.SetParent(hwnd, anchor_window.WindowHandle32);
 
             // Force a resize of the anchor bar so it will refresh.
             int left, top, width, height;

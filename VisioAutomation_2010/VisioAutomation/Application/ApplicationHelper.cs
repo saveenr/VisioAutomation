@@ -1,6 +1,5 @@
 using System.Linq;
 using VisioAutomation.Exceptions;
-using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Application
@@ -86,7 +85,7 @@ namespace VisioAutomation.Application
         public static void BringWindowToTop(IVisio.Application app)
         {
             var visio_window_handle = new System.IntPtr(app.WindowHandle32);
-            NativeMethods.BringWindowToTop(visio_window_handle);
+            VisioAutomation.Utilities.NativeMethods.BringWindowToTop(visio_window_handle);
         }
     }
 }
