@@ -177,7 +177,7 @@
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="Application\AlertResponseCode.cs" />
-    <Compile Include="Colors\ColorHSL.cs" />
+    <Compile Include="Drawing\ColorHSL.cs" />
     <Compile Include="Shapes\Connectors\ConnectorType.cs" />
     <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
@@ -191,7 +191,7 @@
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
-    <Compile Include="Colors\ColorRGB.cs" />
+    <Compile Include="Drawing\ColorRGB.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="ShapeSheet\SIDSRC.cs" />
