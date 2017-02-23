@@ -443,13 +443,13 @@ namespace VisioAutomation.Scripting.Commands
             {
                 string msg = string.Format("internal error: failed to create {0} shapes, instead created {1}", n,
                     duplicated_shapes.Count);
-                throw new VisioAutomation.Scripting.Exceptions.VisioOperationException(msg);
+                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
 
             var selection2 = win.Selection;
             if (selection2.Count != n)
             {
-                throw new VisioAutomation.Scripting.Exceptions.VisioOperationException("internal error: failed to select the duplicated shapes");
+                throw new VisioAutomation.Exceptions.VisioOperationException("internal error: failed to select the duplicated shapes");
             }
 
             return duplicated_shapes;

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.View;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
-using VisioAutomation.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -187,7 +185,7 @@ namespace VisioAutomation.Scripting.Commands
             if (!names.Contains(background_page_name))
             {
                 string msg = string.Format("Could not find page with name \"{0}\"", background_page_name);
-                throw new VisioOperationException(msg);
+                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
 
             var bgpage = pages.ItemU[background_page_name];
@@ -198,14 +196,14 @@ namespace VisioAutomation.Scripting.Commands
             if (bgpage.Background == 0)
             {
                 string msg = string.Format("Page \"{0}\" is not a background page", bgpage.Name);
-                throw new VisioOperationException(msg);
+                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
 
             // don't allow the page to be set as a background to itself
             if (fgpage == bgpage)
             {
                 string msg = "Cannot set page as its own background page";
-                throw new VisioOperationException(msg);
+                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Background Page"))
@@ -249,7 +247,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (application.ActiveDocument == dest_doc)
             {
-                throw new VisioOperationException("dest doc is same as active doc");
+                throw new VisioAutomation.Exceptions.VisioOperationException("dest doc is same as active doc");
             }
 
             var src_page = application.ActivePage;
@@ -450,12 +448,12 @@ namespace VisioAutomation.Scripting.Commands
             var active_document = app.ActiveDocument;
             if (pages.Document != active_document)
             {
-                throw new VisioOperationException("Page.Document is not application's ActiveDocument");
+                throw new VisioAutomation.Exceptions.VisioOperationException("Page.Document is not application's ActiveDocument");
             }
 
             if (pages.Count < 2)
             {
-                throw new VisioOperationException("Only 1 page available. Navigation not possible.");
+                throw new VisioAutomation.Exceptions.VisioOperationException("Only 1 page available. Navigation not possible.");
             }
 
             var activepage = app.ActivePage;

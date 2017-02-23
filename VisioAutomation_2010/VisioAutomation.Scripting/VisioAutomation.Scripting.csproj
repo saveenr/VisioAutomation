@@ -104,8 +104,6 @@
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Utilities\SnappingGrid.cs" />
     <Compile Include="Utilities\TextHelper.cs" />
-    <Compile Include="Exceptions\VisioApplicationException.cs" />
-    <Compile Include="Exceptions\VisioOperationException.cs" />
     <Compile Include="View\Zoom.cs" />
   </ItemGroup>
   <ItemGroup>

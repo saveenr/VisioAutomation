@@ -53,7 +53,7 @@ namespace VisioAutomation.Documents
             }
 
             // If we get here, we couldn't find any matching window
-            throw new AutomationException("could not find window for document");
+            throw new VisioOperationException("could not find window for document");
         }
 
     }
