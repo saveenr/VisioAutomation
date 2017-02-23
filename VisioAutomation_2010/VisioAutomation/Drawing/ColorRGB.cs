@@ -107,7 +107,7 @@ namespace VisioAutomation.Drawing
             if (!c.HasValue)
             {
                 string s = string.Format("Failed to parse color string \"{0}\"", webcolor);
-                throw new AutomationException(s);
+                throw new System.FormatException(s);
             }
 
             return c.Value;
