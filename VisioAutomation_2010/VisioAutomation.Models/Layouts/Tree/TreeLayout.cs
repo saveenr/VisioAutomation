@@ -142,7 +142,7 @@ namespace VisioAutomation.Models.Layouts.Tree
             else
             {
                 string msg = "Unsupported Connector Type";
-                throw new AutomationException(msg);
+                throw new System.ArgumentException(msg);
             }
 
             page_node.Size = page_size;

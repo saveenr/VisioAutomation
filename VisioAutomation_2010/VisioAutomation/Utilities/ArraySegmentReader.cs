@@ -1,22 +1,32 @@
 namespace VisioAutomation.Utilities
 {
-    internal class ArraySegmentBuilder<T>
+    public class ArraySegmentReader<T>
     {
-        private T[] array;
+        private readonly T[] array;
         private int pos;
         private int _count;
 
-        public ArraySegmentBuilder(T[] array)
+        public ArraySegmentReader(T[] array)
         {
+            if (array == null)
+            {
+                throw new System.ArgumentNullException(nameof(array));
+            }
             this.array = array;
             this.pos = 0;
             this._count = 0;
         }
 
-        public int Count => _count;
+        public int Count => this._count;
+
+        public int Capacity => this.array.Length;
 
         public VisioAutomation.Utilities.ArraySegment<T> GetNextSegment(int size)
         {
+            if (this.pos + size > this.array.Length)
+            {
+                throw new System.ArgumentOutOfRangeException(nameof(size));
+            }
             var seg = new VisioAutomation.Utilities.ArraySegment<T>(this.array, this.pos, size);
             this.pos += size;
             this._count += size;

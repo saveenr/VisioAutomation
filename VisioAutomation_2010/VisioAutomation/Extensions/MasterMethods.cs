@@ -7,17 +7,25 @@ namespace VisioAutomation.Extensions
     {
         public static Drawing.Rectangle GetBoundingBox(this IVisio.Master master, IVisio.VisBoundingBoxArgs args)
         {
-            return VisioAutomation.Masters.MasterHelper.GetBoundingBox(master, args);
+            var surface = new VisioAutomation.Drawing.DrawingSurface(master);
+            return surface.GetBoundingBox(args);
         }
 
         public static IEnumerable<IVisio.Master> ToEnumerable(this IVisio.Masters masters)
         {
-            return VisioAutomation.Masters.MasterHelper.ToEnumerable(masters);
+            short count = masters.Count;
+            for (int i = 0; i < count; i++)
+            {
+                yield return masters[i + 1];
+            }
         }
 
         public static string[] GetNamesU(this IVisio.Masters masters)
         {
-            return VisioAutomation.Masters.MasterHelper.GetNamesU(masters);
+            System.Array names_sa;
+            masters.GetNamesU(out names_sa);
+            string[] names = (string[])names_sa;
+            return names;
         }
     }
 }

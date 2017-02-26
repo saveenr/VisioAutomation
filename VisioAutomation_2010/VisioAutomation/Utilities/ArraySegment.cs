@@ -6,33 +6,32 @@ namespace VisioAutomation.Utilities
     {
         private readonly T[] Array;
         private readonly int _offset;
-        private readonly int _count;
+        private readonly int _length;
 
-        public ArraySegment(T[] array, int offset, int count)
+        public ArraySegment(T[] array, int offset, int length)
         {
             this.Array = array;
             this._offset = offset;
-            this._count = count;
+            this._length = length;
         }
 
         public T this[int index]
         {
             get
             {
-                if (index >= this._count)
+                if ( (index < 0) && (index >= this._length))
                 {
                     throw new System.ArgumentOutOfRangeException(nameof(index));
                 }
 
-                var value = this.Array[this._offset + index];
-               
+                var value = this.Array[this._offset + index];              
                 return value;
             }
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < this._count; i++)
+            for (int i = 0; i < this._length; i++)
             {
                 yield return this.Array[_offset + i];
             }
@@ -43,6 +42,8 @@ namespace VisioAutomation.Utilities
             return GetEnumerator();
         }
 
-        public int Count => this._count;
+        public int Length => this._length;
+
+        public int Offset => this._offset;
     }
 }

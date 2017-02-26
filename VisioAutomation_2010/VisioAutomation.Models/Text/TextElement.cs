@@ -177,7 +177,7 @@ namespace VisioAutomation.Models.Text
 
                     if (rownum < 0)
                     {
-                        throw new AutomationException("Could not create Character row");
+                        throw new VisioAutomation.Exceptions.VisioOperationException("Could not create Character row");
                     }
 
                     writer.Clear();
@@ -199,7 +199,7 @@ namespace VisioAutomation.Models.Text
 
                     if (rownum < 0)
                     {
-                        throw new AutomationException("Could not create Paragraph row");
+                        throw new VisioAutomation.Exceptions.VisioOperationException("Could not create Paragraph row");
                     }
 
                     writer.Clear();

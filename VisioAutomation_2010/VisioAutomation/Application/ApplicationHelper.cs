@@ -1,6 +1,5 @@
 using System.Linq;
 using VisioAutomation.Exceptions;
-using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Application
@@ -82,22 +81,11 @@ namespace VisioAutomation.Application
 
             return s;
         }
-
-        public static void Quit(IVisio.Application app, bool force_close)
-        {
-            if (force_close)
-            {
-                const short new_alert_response = 7;
-                app.AlertResponse = new_alert_response;
-            }
-
-            app.Quit();
-        }       
         
         public static void BringWindowToTop(IVisio.Application app)
         {
             var visio_window_handle = new System.IntPtr(app.WindowHandle32);
-            NativeMethods.BringWindowToTop(visio_window_handle);
+            VisioAutomation.Utilities.NativeMethods.BringWindowToTop(visio_window_handle);
         }
     }
 }

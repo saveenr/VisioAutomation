@@ -7,15 +7,6 @@ namespace VisioAutomation.Shapes.Connectors
 {
     public static class ConnectorHelper
     {
-        public static IEnumerable<IVisio.Connect> ToEnumerable(IVisio.Connects connects)
-        {
-            int count = connects.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return connects[i + 1];
-            }
-        }
-
         public static void ConnectShapes(IVisio.Shape from_shape, IVisio.Shape to_shape, IVisio.Shape connector_shape)
         {
             ConnectorHelper.ConnectShapes(from_shape, to_shape, connector_shape, true);
@@ -121,12 +112,12 @@ namespace VisioAutomation.Shapes.Connectors
             {
                 var masters = Enumerable.Repeat(connector_master, num_connectors).ToList();
                 short[] con_shapeids = page.DropManyU(masters, points);
-                con_shapes = page.Shapes.GetShapesFromIDs(con_shapeids);                
+                con_shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);                
             }
             else
             {
                 short[] con_shapeids = Pages.PageHelper.DropManyAutoConnectors(page, points);
-                con_shapes = page.Shapes.GetShapesFromIDs(con_shapeids);
+                con_shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);
             }
 
             for (int i = 0; i < num_connectors; i++)

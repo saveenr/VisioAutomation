@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VisioAutomation.Exceptions;
+﻿using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -7,18 +6,8 @@ namespace VisioAutomation.Documents
 {
     public static class DocumentHelper
     {
-        public static IVisio.Document OpenStencil(IVisio.Documents docs, string filename)
-        {
-            var stencil = DocumentHelper.TryOpenStencil(docs, filename);
-            if (stencil == null)
-            {
-                string msg = string.Format("Could not open stencil \"{0}\"", filename);
-                throw new AutomationException(msg);
-            }
-            return stencil;
-        }
 
-        private static IVisio.Document TryOpenStencil(IVisio.Documents docs, string filename)
+        internal static IVisio.Document TryOpenStencil(IVisio.Documents docs, string filename)
         {
             const short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;
             try
@@ -64,34 +53,8 @@ namespace VisioAutomation.Documents
             }
 
             // If we get here, we couldn't find any matching window
-            throw new AutomationException("could not find window for document");
+            throw new VisioOperationException("could not find window for document");
         }
 
-        public static void Close(IVisio.Document doc, bool force_close)
-        {
-            if (force_close)
-            {
-                var new_alert_response = Application.AlertResponseCode.No;
-                var app = doc.Application;
-
-                using (var alertresponse = new Application.AlertResponseScope(app,new_alert_response))
-                {
-                    doc.Close();
-                }
-            }
-            else
-            {
-                doc.Close();
-            }
-        }
-
-        public static IEnumerable<IVisio.Document> ToEnumerable(IVisio.Documents docs)
-        {
-            short count = docs.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return docs[i + 1];
-            }
-        }
     }
 }

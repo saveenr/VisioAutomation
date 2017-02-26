@@ -335,6 +335,5 @@ namespace VisioAutomation.Drawing
             var r = new Rectangle(bbx0, bby0, bbx1, bby1);
             return r;
         }
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using VisioAutomation.Exceptions;
 
-namespace VisioAutomation.Colors
+namespace VisioAutomation.Drawing
 {
     public struct ColorRGB
     {
@@ -107,7 +107,7 @@ namespace VisioAutomation.Colors
             if (!c.HasValue)
             {
                 string s = string.Format("Failed to parse color string \"{0}\"", webcolor);
-                throw new AutomationException(s);
+                throw new System.FormatException(s);
             }
 
             return c.Value;

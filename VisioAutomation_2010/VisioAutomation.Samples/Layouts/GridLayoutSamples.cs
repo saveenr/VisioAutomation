@@ -1,5 +1,4 @@
-﻿using VisioAutomation.Colors;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Grid;
 
@@ -52,7 +51,7 @@ namespace VisioAutomationSamples
                 var shapeid = node.ShapeID;
                 int color_index = i%colors.Length;
                 var color = colors[color_index];
-                fmtcells.FillForegnd = new ColorRGB(color).ToFormula();
+                fmtcells.FillForegnd = new VisioAutomation.Drawing.ColorRGB(color).ToFormula();
                 fmtcells.LinePattern = 0;
                 fmtcells.LineWeight = 0;
                 fmtcells.SetFormulas(shapeid, writer);

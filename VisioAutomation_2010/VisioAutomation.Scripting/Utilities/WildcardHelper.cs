@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.Utilities
+namespace VisioAutomation.Scripting.Utilities
 {
     public static class WildcardHelper
     {

@@ -1,5 +1,4 @@
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -43,7 +42,7 @@ namespace VisioAutomation.Scripting.Commands
             var has_app = this._client.Application.HasApplication;
             if (!has_app)
             {
-                throw new VisioApplicationException("No Visio Application available");
+                throw new System.ArgumentException("No Visio Application available");
             }
         }
 
@@ -145,7 +144,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (this.VisioApplication == null)
             {
-                throw new VisioApplicationException("Cant create UndoScope. There is no visio application attached.");
+                throw new System.ArgumentException("Cant create UndoScope. There is no visio application attached.");
             }
 
             return new VA.Application.UndoScope(this.VisioApplication, name);

@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.Utilities
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<XFormData> xfrms)
         {
-            var bb = BoundingBoxHelper.FromRectangles(xfrms.Select(x => x.GetRectangle()));
+            var bb = BoundingBoxBuilder.FromRectangles(xfrms.Select(x => x.GetRectangle()));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");

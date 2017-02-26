@@ -208,7 +208,7 @@ namespace VisioAutomation.Models.Layouts.Container
             IList<Drawing.Rectangle> rects)
         {
             var points = rects.Select(r => r.Center).ToList();
-            var shapeids = Pages.PageHelper.DropManyU(page, masters, points);
+            var shapeids = page.DropManyU(masters, points);
 
             // Dropping takes care of the PinX and PinY
             // Now set the Width's and Heights

@@ -1,4 +1,3 @@
-using VisioAutomation.Colors;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.Utilities
@@ -6,10 +5,10 @@ namespace VisioAutomation.Scripting.Utilities
     static class XmlLinqExtensions
     {
 
-        public static ColorRGB AttributeAsColor(this SXL.XElement el, string name,
-            ColorRGB def)
+        public static VisioAutomation.Drawing.ColorRGB AttributeAsColor(this SXL.XElement el, string name,
+            VisioAutomation.Drawing.ColorRGB def)
         {
-            return el.GetAttributeValue(name, def, ColorRGB.ParseWebColor);
+            return el.GetAttributeValue(name, def, VisioAutomation.Drawing.ColorRGB.ParseWebColor);
         }
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)

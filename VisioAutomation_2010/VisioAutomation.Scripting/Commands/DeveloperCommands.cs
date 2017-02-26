@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.Tree;
-using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.Scripting.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 using Node = VisioAutomation.Models.Layouts.Tree.Node;
@@ -196,7 +195,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 if (tokens.Length == 0)
                 {
-                    throw new VisioOperationException();
+                    throw new VisioAutomation.Exceptions.VisioOperationException();
                 }
                 else if (tokens.Length == 1)
                 {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using VisioAutomation.Scripting.Exceptions;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
 
@@ -72,7 +71,7 @@ namespace VisioPowerShell
                 }
             }
 
-            throw new VisioApplicationException("Unsupported Result type");
+            throw new System.ArgumentOutOfRangeException("Unsupported Result type");
         }
     }
 }

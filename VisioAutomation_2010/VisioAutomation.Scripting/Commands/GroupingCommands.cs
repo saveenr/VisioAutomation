@@ -1,4 +1,3 @@
-using VisioAutomation.Scripting.Exceptions;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -20,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
             // No shapes provided, use the active selection
             if (!this._client.Selection.HasShapes())
             {
-                throw new VisioOperationException("No Selected Shapes to Group");
+                throw new VisioAutomation.Exceptions.VisioOperationException("No Selected Shapes to Group");
             }
 
             // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
