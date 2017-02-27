@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet
         public static string GetSectionName(IVisio.VisSectionIndices value)
         {
             string s = value.ToString();
-            const int start_index = 10;
+            const int start_index = 10; // Length of string "visSection"
             return s.Substring(start_index); // Get Rid of the visSection prefix
         }
 
