@@ -93,7 +93,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.FormulaRecords_SIDSRC == null)
             {
-                this.FormulaRecords_SIDSRC = new WriterCollection_SIDSRC(false);
+                this.FormulaRecords_SIDSRC = new WriterCollection_SIDSRC();
             }
 
             if (formula.HasValue)
@@ -127,7 +127,7 @@ namespace VisioAutomation.ShapeSheet
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void SetResult(SRC src, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, CellValueLiteral result)
         {
             if (this.ResultRecords_SRC == null)
             {
@@ -136,23 +136,22 @@ namespace VisioAutomation.ShapeSheet
 
             this.ResultRecords_SRC.StreamBuilder.Add(src);
             this.ResultRecords_SRC.ValuesBuilder.Add(result.Value);
-            this.ResultRecords_SRC.UnitCodesBuilder.Add(unitcode);
         }
 
-        public void SetResult(short id, SRC src, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(short id, SRC src, CellValueLiteral result)
         {
             var sidsrc = new SIDSRC(id, src);
-            this.SetResult(sidsrc, result.Value, unitcode);
+            this.SetResult(sidsrc, result.Value);
         }
 
-        public void SetResult(SIDSRC sidsrc, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC sidsrc, CellValueLiteral result)
         {
             if (this.ResultRecords_SIDSRC == null)
             {
-                this.ResultRecords_SIDSRC = new WriterCollection_SIDSRC(true);
+                this.ResultRecords_SIDSRC = new WriterCollection_SIDSRC();
             }
 
-            this.ResultRecords_SIDSRC.Add(sidsrc, result.Value, unitcode);
+            this.ResultRecords_SIDSRC.Add(sidsrc, result.Value);
         }
 
         private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
