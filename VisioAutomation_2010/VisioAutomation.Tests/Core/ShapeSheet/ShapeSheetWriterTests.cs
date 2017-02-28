@@ -83,6 +83,20 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
+        public void ShapeSheet_Writer_Write_nothing()
+        {
+            var page1 = this.GetNewPage();
+            var shape1 = page1.DrawRectangle(0, 0, 1, 1);
+
+            // Setup the modifications to the cell values
+            var writer = new ShapeSheetWriter();
+            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
+            writer.Commit(surface);
+
+            page1.Delete(0);
+        }
+
+        [TestMethod]
         public void ShapeSheet_Writer_ResultsString_SingleShape()
         {
             var page1 = this.GetNewPage();
