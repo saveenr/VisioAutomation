@@ -18,10 +18,7 @@ namespace VisioAutomation.ShapeSheet
             this.items = new List<T>();
         }
 
-        public override int Count()
-        {
-            return this.items.Count;
-        }
+        public override int Count() => this.items.Count;
 
         public ShapeSheetStreamBuilder(int capacity)
         {
