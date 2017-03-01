@@ -41,9 +41,7 @@ namespace VisioAutomation.Text
 
             var surface = new ShapeSheetSurface(shape);
 
-            var unitcodes_builder = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>();
-            unitcodes_builder.AddRange( Enumerable.Range(0, num_stops*3).Select(i => IVisio.VisUnitCodes.visNumber) );
-            var unitcodes = unitcodes_builder.ToObjectArray();
+            object[] unitcodes = null;
 
             var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
 
