@@ -2,14 +2,14 @@
 {
     class WriterCollection_SRC
     {
-        public SRCStreamBuilder StreamBuilder;
+        public VisioAutomation.ShapeSheet.Streams.SRCStreamBuilder StreamBuilder;
         public ShapeSheetObjectArrayBuilder<string> ValuesBuilder;
 
 
         public WriterCollection_SRC()
         {
 
-            this.StreamBuilder = new SRCStreamBuilder();
+            this.StreamBuilder = new VisioAutomation.ShapeSheet.Streams.SRCStreamBuilder();
             this.ValuesBuilder = new ShapeSheetObjectArrayBuilder<string>();
         }
 

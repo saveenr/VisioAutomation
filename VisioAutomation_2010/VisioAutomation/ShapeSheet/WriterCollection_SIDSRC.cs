@@ -1,15 +1,13 @@
-using Microsoft.Office.Interop.Visio;
-
 namespace VisioAutomation.ShapeSheet
 {
     class WriterCollection_SIDSRC
     {
-        private SIDSRCStreamBuilder StreamBuilder;
+        private VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder StreamBuilder;
         private ShapeSheetObjectArrayBuilder<string> ValuesBuilder;
 
         public WriterCollection_SIDSRC()
         {
-            this.StreamBuilder = new SIDSRCStreamBuilder();
+            this.StreamBuilder = new VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder();
             this.ValuesBuilder = new ShapeSheetObjectArrayBuilder<string>();
         }
 
