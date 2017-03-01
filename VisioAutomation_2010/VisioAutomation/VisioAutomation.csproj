@@ -103,8 +103,8 @@
     <Compile Include="ShapeSheet\Streams\FixedSRCStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\FixedStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
-    <Compile Include="ShapeSheet\WriterCollection_SIDSRC.cs" />
-    <Compile Include="ShapeSheet\WriterCollection_SRC.cs" />
+    <Compile Include="ShapeSheet\Internal\WriterCollection_SIDSRC.cs" />
+    <Compile Include="ShapeSheet\Internal\WriterCollection_SRC.cs" />
     <Compile Include="Utilities\ArraySegmentReader.cs" />
     <Compile Include="Utilities\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />

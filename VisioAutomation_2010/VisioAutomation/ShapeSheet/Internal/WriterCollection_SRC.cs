@@ -1,13 +1,15 @@
-namespace VisioAutomation.ShapeSheet
+﻿namespace VisioAutomation.ShapeSheet.Internal
 {
-    class WriterCollection_SIDSRC
+    class WriterCollection_SRC
     {
-        private VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder StreamBuilder;
-        private VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string> ValuesBuilder;
+        public VisioAutomation.ShapeSheet.Streams.SRCStreamBuilder StreamBuilder;
+        public VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string> ValuesBuilder;
 
-        public WriterCollection_SIDSRC()
+
+        public WriterCollection_SRC()
         {
-            this.StreamBuilder = new VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder();
+
+            this.StreamBuilder = new VisioAutomation.ShapeSheet.Streams.SRCStreamBuilder();
             this.ValuesBuilder = new VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string>();
         }
 
@@ -17,18 +19,12 @@ namespace VisioAutomation.ShapeSheet
             this.ValuesBuilder.Clear();
         }
 
-        public void Add(SIDSRC sidsrc, string value)
+
+        public void Add(SRC src, string value)
         {
-            this.StreamBuilder.Add(sidsrc);
+            this.StreamBuilder.Add(src);
             this.ValuesBuilder.Add(value);
         }
-
-        public void Add(SIDSRC sidsrc, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
-        {
-            this.StreamBuilder.Add(sidsrc);
-            this.ValuesBuilder.Add(value);
-        }
-
 
         public short[] BuildStream()
         {
@@ -46,6 +42,5 @@ namespace VisioAutomation.ShapeSheet
         }
 
         public int Count => this.StreamBuilder.Count();
-
     }
 }
