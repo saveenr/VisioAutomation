@@ -109,7 +109,7 @@
     <Compile Include="Utilities\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryOutputRowCollection.cs" />
-    <Compile Include="ShapeSheet\ShapeSheetObjectArrayBuilder.cs" />
+    <Compile Include="ShapeSheet\Internal\ObjectArrayBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SIDSRCStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SRCStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilderBase.cs" />

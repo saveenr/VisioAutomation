@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.ShapeSheet.Internal
 {
-    public class ShapeSheetObjectArrayBuilder<T>
+    internal class ObjectArrayBuilder<T>
     {
         protected List<T> items;
 
-        public ShapeSheetObjectArrayBuilder()
+        public ObjectArrayBuilder()
         {
             this.items = new List<T>();
         }
 
-        public ShapeSheetObjectArrayBuilder(int capacity)
+        public ObjectArrayBuilder(int capacity)
         {
             this.items = new List<T>(capacity);
         }

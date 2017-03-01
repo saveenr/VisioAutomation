@@ -3,12 +3,12 @@ namespace VisioAutomation.ShapeSheet
     class WriterCollection_SIDSRC
     {
         private VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder StreamBuilder;
-        private ShapeSheetObjectArrayBuilder<string> ValuesBuilder;
+        private VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string> ValuesBuilder;
 
         public WriterCollection_SIDSRC()
         {
             this.StreamBuilder = new VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder();
-            this.ValuesBuilder = new ShapeSheetObjectArrayBuilder<string>();
+            this.ValuesBuilder = new VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string>();
         }
 
         public void Clear()
