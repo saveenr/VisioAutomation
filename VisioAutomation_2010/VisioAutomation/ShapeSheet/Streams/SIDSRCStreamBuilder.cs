@@ -1,7 +1,7 @@
 
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.ShapeSheet.Streams
 {
-    public class SIDSRCStreamBuilder : ShapeSheetStreamBuilder<SIDSRC>
+    public class SIDSRCStreamBuilder : StreamBuilder<SIDSRC>
     {
         public SIDSRCStreamBuilder() : base()
         {

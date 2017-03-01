@@ -25,7 +25,7 @@ namespace VisioAutomation.Text
 
             const short row = 0;
             
-            var stream = new SRCStreamBuilder(num_stops * 3);
+            var stream = new VisioAutomation.ShapeSheet.Streams.SRCStreamBuilder(num_stops * 3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
@@ -41,9 +41,7 @@ namespace VisioAutomation.Text
 
             var surface = new ShapeSheetSurface(shape);
 
-            var unitcodes_builder = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>();
-            unitcodes_builder.AddRange( Enumerable.Range(0, num_stops*3).Select(i => IVisio.VisUnitCodes.visNumber) );
-            var unitcodes = unitcodes_builder.ToObjectArray();
+            object[] unitcodes = null;
 
             var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
 

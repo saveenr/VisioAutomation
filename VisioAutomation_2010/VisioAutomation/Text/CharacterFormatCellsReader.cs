@@ -7,28 +7,28 @@ namespace VisioAutomation.Text
 {
     class CharacterFormatCellsReader : MultiRowReader<Text.CharacterCells>
     {
-        public ColumnSubQuery Font { get; set; }
-        public ColumnSubQuery Style { get; set; }
-        public ColumnSubQuery Color { get; set; }
-        public ColumnSubQuery Size { get; set; }
-        public ColumnSubQuery Trans { get; set; }
-        public ColumnSubQuery AsianFont { get; set; }
-        public ColumnSubQuery Case { get; set; }
-        public ColumnSubQuery ComplexScriptFont { get; set; }
-        public ColumnSubQuery ComplexScriptSize { get; set; }
-        public ColumnSubQuery DoubleStrikethrough { get; set; }
-        public ColumnSubQuery DoubleUnderline { get; set; }
-        public ColumnSubQuery LangID { get; set; }
-        public ColumnSubQuery Locale { get; set; }
-        public ColumnSubQuery LocalizeFont { get; set; }
-        public ColumnSubQuery Overline { get; set; }
-        public ColumnSubQuery Perpendicular { get; set; }
-        public ColumnSubQuery Pos { get; set; }
-        public ColumnSubQuery RTLText { get; set; }
-        public ColumnSubQuery FontScale { get; set; }
-        public ColumnSubQuery Letterspace { get; set; }
-        public ColumnSubQuery Strikethru { get; set; }
-        public ColumnSubQuery UseVertical { get; set; }
+        public SubQueryColumn Font { get; set; }
+        public SubQueryColumn Style { get; set; }
+        public SubQueryColumn Color { get; set; }
+        public SubQueryColumn Size { get; set; }
+        public SubQueryColumn Trans { get; set; }
+        public SubQueryColumn AsianFont { get; set; }
+        public SubQueryColumn Case { get; set; }
+        public SubQueryColumn ComplexScriptFont { get; set; }
+        public SubQueryColumn ComplexScriptSize { get; set; }
+        public SubQueryColumn DoubleStrikethrough { get; set; }
+        public SubQueryColumn DoubleUnderline { get; set; }
+        public SubQueryColumn LangID { get; set; }
+        public SubQueryColumn Locale { get; set; }
+        public SubQueryColumn LocalizeFont { get; set; }
+        public SubQueryColumn Overline { get; set; }
+        public SubQueryColumn Perpendicular { get; set; }
+        public SubQueryColumn Pos { get; set; }
+        public SubQueryColumn RTLText { get; set; }
+        public SubQueryColumn FontScale { get; set; }
+        public SubQueryColumn Letterspace { get; set; }
+        public SubQueryColumn Strikethru { get; set; }
+        public SubQueryColumn UseVertical { get; set; }
 
         public CharacterFormatCellsReader()
         {

@@ -2,27 +2,27 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ColumnCellCollection : ColumnCollectionBase<ColumnCell>
+    public class CellColumnCollection : ColumnCollectionBase<CellColumn>
     {
         private HashSet<ShapeSheet.SRC> items;
 
-        internal ColumnCellCollection() :
+        internal CellColumnCollection() :
             this(0)
         {
         }
 
-        internal ColumnCellCollection(int capacity) : base(capacity)
+        internal CellColumnCollection(int capacity) : base(capacity)
         {
         }
 
-        internal ColumnCell Add(ShapeSheet.SRC src, string name)
+        internal CellColumn Add(ShapeSheet.SRC src, string name)
         {
             check_deplicate_src(src);
             string norm_name = this.normalize_name(name);
             check_duplicate_column_name(norm_name);
 
             int ordinal = this._items.Count;
-            var col = new ColumnCell(ordinal, src, norm_name);
+            var col = new CellColumn(ordinal, src, norm_name);
             this._items.Add(col);
 
             this.map_name_to_item[norm_name] = col;

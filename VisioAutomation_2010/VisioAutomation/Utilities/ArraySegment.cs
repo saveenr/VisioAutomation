@@ -17,15 +17,22 @@ namespace VisioAutomation.Utilities
 
         public T this[int index]
         {
-            get
-            {
-                if ( (index < 0) && (index >= this._length))
-                {
-                    throw new System.ArgumentOutOfRangeException(nameof(index));
-                }
+            get { return set_value_at_index(index); }
+        }
 
-                var value = this.Array[this._offset + index];              
-                return value;
+        private T set_value_at_index(int index)
+        {
+            validate_index(index);
+
+            var value = this.Array[this._offset + index];
+            return value;
+        }
+
+        private void validate_index(int index)
+        {
+            if ((index < 0) && (index >= this._length))
+            {
+                throw new System.ArgumentOutOfRangeException(nameof(index));
             }
         }
 

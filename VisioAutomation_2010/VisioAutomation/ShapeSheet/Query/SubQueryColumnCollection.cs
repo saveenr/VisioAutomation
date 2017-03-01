@@ -2,27 +2,27 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ColumnSubQueryCollection : ColumnCollectionBase<ColumnSubQuery>
+    public class SubQueryColumnCollection : ColumnCollectionBase<SubQueryColumn>
     {
         private HashSet<short> _cellindex_set;
 
-        internal ColumnSubQueryCollection() :
+        internal SubQueryColumnCollection() :
             base(0)
         {
         }
 
-        internal ColumnSubQueryCollection(int capacity) : base(capacity)
+        internal SubQueryColumnCollection(int capacity) : base(capacity)
         {
         }
 
-        public ColumnSubQuery Add(short cellindex, string sname)
+        public SubQueryColumn Add(short cellindex, string sname)
         {
             check_duplicate_cellindex(cellindex);
             string norm_name = this.normalize_name(sname);
             check_duplicate_column_name(norm_name);
 
             int ordinal = this._items.Count;
-            var col = new ColumnSubQuery(ordinal, cellindex, norm_name);
+            var col = new SubQueryColumn(ordinal, cellindex, norm_name);
             this._items.Add(col);
             this._cellindex_set.Add(cellindex);
 

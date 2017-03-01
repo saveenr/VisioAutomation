@@ -6,13 +6,13 @@ namespace VisioAutomation.Shapes
 {
     class XFormCellsReader : SingleRowReader<VisioAutomation.Shapes.XFormCells>
     {
-        public ColumnCell Width { get; set; }
-        public ColumnCell Height { get; set; }
-        public ColumnCell PinX { get; set; }
-        public ColumnCell PinY { get; set; }
-        public ColumnCell LocPinX { get; set; }
-        public ColumnCell LocPinY { get; set; }
-        public ColumnCell Angle { get; set; }
+        public CellColumn Width { get; set; }
+        public CellColumn Height { get; set; }
+        public CellColumn PinX { get; set; }
+        public CellColumn PinY { get; set; }
+        public CellColumn LocPinX { get; set; }
+        public CellColumn LocPinY { get; set; }
+        public CellColumn Angle { get; set; }
         
         public XFormCellsReader() 
         {

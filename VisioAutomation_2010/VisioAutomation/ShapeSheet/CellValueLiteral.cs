@@ -3,7 +3,7 @@
 namespace VisioAutomation.ShapeSheet
 {
     /// <summary>
-    /// FormulaLiteral is used in those cases where you want a caller to provide an int, double, bool, or string value to be used as a formula
+    /// CellValueLiteral is used in those cases where you want a caller to provide an int, double, bool, or string value to be used as a formula
     /// In the case of string inputs, no special escaping of strings is performed. The caller must do any escaping.
     /// This struct allows you to have one method that takes multiple types as a parameter (via implicit conversion) and is
     /// similar to the use of XName in SXL.

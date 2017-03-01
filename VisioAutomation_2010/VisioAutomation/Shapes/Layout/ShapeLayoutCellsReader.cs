@@ -6,24 +6,24 @@ namespace VisioAutomation.Shapes.Layout
 {
     class ShapeLayoutCellsReader : SingleRowReader<Shapes.Layout.ShapeLayoutCells>
     {
-        public ColumnCell ConFixedCode { get; set; }
-        public ColumnCell ConLineJumpCode { get; set; }
-        public ColumnCell ConLineJumpDirX { get; set; }
-        public ColumnCell ConLineJumpDirY { get; set; }
-        public ColumnCell ConLineJumpStyle { get; set; }
-        public ColumnCell ConLineRouteExt { get; set; }
-        public ColumnCell ShapeFixedCode { get; set; }
-        public ColumnCell ShapePermeablePlace { get; set; }
-        public ColumnCell ShapePermeableX { get; set; }
-        public ColumnCell ShapePermeableY { get; set; }
-        public ColumnCell ShapePlaceFlip { get; set; }
-        public ColumnCell ShapePlaceStyle { get; set; }
-        public ColumnCell ShapePlowCode { get; set; }
-        public ColumnCell ShapeRouteStyle { get; set; }
-        public ColumnCell ShapeSplit { get; set; }
-        public ColumnCell ShapeSplittable { get; set; }
-        public ColumnCell DisplayLevel { get; set; }
-        public ColumnCell Relationships { get; set; }
+        public CellColumn ConFixedCode { get; set; }
+        public CellColumn ConLineJumpCode { get; set; }
+        public CellColumn ConLineJumpDirX { get; set; }
+        public CellColumn ConLineJumpDirY { get; set; }
+        public CellColumn ConLineJumpStyle { get; set; }
+        public CellColumn ConLineRouteExt { get; set; }
+        public CellColumn ShapeFixedCode { get; set; }
+        public CellColumn ShapePermeablePlace { get; set; }
+        public CellColumn ShapePermeableX { get; set; }
+        public CellColumn ShapePermeableY { get; set; }
+        public CellColumn ShapePlaceFlip { get; set; }
+        public CellColumn ShapePlaceStyle { get; set; }
+        public CellColumn ShapePlowCode { get; set; }
+        public CellColumn ShapeRouteStyle { get; set; }
+        public CellColumn ShapeSplit { get; set; }
+        public CellColumn ShapeSplittable { get; set; }
+        public CellColumn DisplayLevel { get; set; }
+        public CellColumn Relationships { get; set; }
 
         public ShapeLayoutCellsReader() 
         {

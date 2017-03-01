@@ -6,15 +6,15 @@ namespace VisioAutomation.Text
 {
     class TextBlockCellsReader : SingleRowReader<Text.TextBlockCells>
     {
-        public ColumnCell BottomMargin { get; set; }
-        public ColumnCell LeftMargin { get; set; }
-        public ColumnCell RightMargin { get; set; }
-        public ColumnCell TopMargin { get; set; }
-        public ColumnCell DefaultTabStop { get; set; }
-        public ColumnCell TextBkgnd { get; set; }
-        public ColumnCell TextBkgndTrans { get; set; }
-        public ColumnCell TextDirection { get; set; }
-        public ColumnCell VerticalAlign { get; set; }
+        public CellColumn BottomMargin { get; set; }
+        public CellColumn LeftMargin { get; set; }
+        public CellColumn RightMargin { get; set; }
+        public CellColumn TopMargin { get; set; }
+        public CellColumn DefaultTabStop { get; set; }
+        public CellColumn TextBkgnd { get; set; }
+        public CellColumn TextBkgndTrans { get; set; }
+        public CellColumn TextDirection { get; set; }
+        public CellColumn VerticalAlign { get; set; }
 
         public TextBlockCellsReader()
         {

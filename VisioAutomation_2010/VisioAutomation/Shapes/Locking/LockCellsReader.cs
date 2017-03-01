@@ -6,26 +6,26 @@ namespace VisioAutomation.Shapes.Locking
 {
     class LockCellsReader : SingleRowReader<LockCells>
     {
-        public ColumnCell LockAspect { get; set; }
-        public ColumnCell LockBegin { get; set; }
-        public ColumnCell LockCalcWH { get; set; }
-        public ColumnCell LockCrop { get; set; }
-        public ColumnCell LockCustProp { get; set; }
-        public ColumnCell LockDelete { get; set; }
-        public ColumnCell LockEnd { get; set; }
-        public ColumnCell LockFormat { get; set; }
-        public ColumnCell LockFromGroupFormat { get; set; }
-        public ColumnCell LockGroup { get; set; }
-        public ColumnCell LockHeight { get; set; }
-        public ColumnCell LockMoveX { get; set; }
-        public ColumnCell LockMoveY { get; set; }
-        public ColumnCell LockRotate { get; set; }
-        public ColumnCell LockSelect { get; set; }
-        public ColumnCell LockTextEdit { get; set; }
-        public ColumnCell LockThemeColors { get; set; }
-        public ColumnCell LockThemeEffects { get; set; }
-        public ColumnCell LockVtxEdit { get; set; }
-        public ColumnCell LockWidth { get; set; }
+        public CellColumn LockAspect { get; set; }
+        public CellColumn LockBegin { get; set; }
+        public CellColumn LockCalcWH { get; set; }
+        public CellColumn LockCrop { get; set; }
+        public CellColumn LockCustProp { get; set; }
+        public CellColumn LockDelete { get; set; }
+        public CellColumn LockEnd { get; set; }
+        public CellColumn LockFormat { get; set; }
+        public CellColumn LockFromGroupFormat { get; set; }
+        public CellColumn LockGroup { get; set; }
+        public CellColumn LockHeight { get; set; }
+        public CellColumn LockMoveX { get; set; }
+        public CellColumn LockMoveY { get; set; }
+        public CellColumn LockRotate { get; set; }
+        public CellColumn LockSelect { get; set; }
+        public CellColumn LockTextEdit { get; set; }
+        public CellColumn LockThemeColors { get; set; }
+        public CellColumn LockThemeEffects { get; set; }
+        public CellColumn LockVtxEdit { get; set; }
+        public CellColumn LockWidth { get; set; }
 
         public LockCellsReader()
         {

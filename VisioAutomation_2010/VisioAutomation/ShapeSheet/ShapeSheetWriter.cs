@@ -8,19 +8,10 @@ namespace VisioAutomation.ShapeSheet
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        private SIDSRCStreamBuilder FormulaRecords_SIDSRC;
-        private ShapeSheetObjectArrayBuilder<string> FormulaRecords_SIDSRC_Formulas;
-
-        private SRCStreamBuilder FormulaRecords_SRC;
-        private ShapeSheetObjectArrayBuilder<string> FormulaRecords_SRC_Formulas;
-
-        private SRCStreamBuilder ResultRecords_SRC;
-        private ShapeSheetObjectArrayBuilder<string> ResultRecords_SRC_Results;
-        private ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes> ResultRecords_SRC_UnitCodes;
-
-        private SIDSRCStreamBuilder ResultRecords_SIDSRC;
-        private ShapeSheetObjectArrayBuilder<string> ResultRecords_SIDSRC_Results;
-        private ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes> ResultRecords_SIDSRC_UnitCodes;
+        private WriterCollection_SIDSRC FormulaRecords_SIDSRC;
+        private WriterCollection_SRC FormulaRecords_SRC;
+        private WriterCollection_SRC ResultRecords_SRC;
+        private WriterCollection_SIDSRC ResultRecords_SIDSRC;
 
         public ShapeSheetWriter()
         {
@@ -29,18 +20,9 @@ namespace VisioAutomation.ShapeSheet
         public void Clear()
         {
             FormulaRecords_SIDSRC?.Clear();
-            FormulaRecords_SIDSRC_Formulas?.Clear();
-
             FormulaRecords_SRC?.Clear();
-            FormulaRecords_SRC_Formulas?.Clear();
-
             ResultRecords_SRC?.Clear();
-            ResultRecords_SRC_Results?.Clear();
-            ResultRecords_SRC_UnitCodes?.Clear();
-
             ResultRecords_SIDSRC?.Clear();
-            ResultRecords_SIDSRC_Results?.Clear();
-            ResultRecords_SIDSRC_UnitCodes?.Clear();
         }
 
         protected IVisio.VisGetSetArgs ComputeGetResultFlags()
@@ -97,14 +79,13 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.FormulaRecords_SRC == null)
             {
-                this.FormulaRecords_SRC = new SRCStreamBuilder();
-                this.FormulaRecords_SRC_Formulas = new ShapeSheetObjectArrayBuilder<string>();
+                this.FormulaRecords_SRC = new WriterCollection_SRC();
             }
 
             if (formula.HasValue)
             {
-                this.FormulaRecords_SRC.Add(src);
-                this.FormulaRecords_SRC_Formulas.Add(formula.Value);
+                this.FormulaRecords_SRC.StreamBuilder.Add(src);
+                this.FormulaRecords_SRC.ValuesBuilder.Add(formula.Value);
             }
         }
 
@@ -112,97 +93,89 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.FormulaRecords_SIDSRC == null)
             {
-                this.FormulaRecords_SIDSRC = new SIDSRCStreamBuilder();
-                this.FormulaRecords_SIDSRC_Formulas = new ShapeSheetObjectArrayBuilder<string>();
+                this.FormulaRecords_SIDSRC = new WriterCollection_SIDSRC();
             }
 
             if (formula.HasValue)
             {
-                this.FormulaRecords_SIDSRC.Add(sidsrc);
-                this.FormulaRecords_SIDSRC_Formulas.Add(formula.Value);
+                this.FormulaRecords_SIDSRC.Add(sidsrc, formula.Value);
             }
         }
 
         private void CommitFormulaRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var stream_builder = coord_type == CoordType.SIDSRC ? (ShapeSheetStreamBuilder)this.FormulaRecords_SIDSRC : (ShapeSheetStreamBuilder)this.FormulaRecords_SRC;
-            var formulas_builder = coord_type == CoordType.SIDSRC ? this.FormulaRecords_SIDSRC_Formulas : this.FormulaRecords_SRC_Formulas;
-
-            if (formulas_builder == null)
+            if (coord_type == CoordType.SIDSRC && (this.FormulaRecords_SIDSRC == null || this.FormulaRecords_SIDSRC.Count <1))
             {
                 return;
             }
 
-            int count = formulas_builder.Count;
-
-            if (count == 0)
+            if (coord_type == CoordType.SRC && (this.FormulaRecords_SRC == null || this.FormulaRecords_SRC.Count <1))
             {
                 return;
             }
 
-            var stream = stream_builder.ToStream();
+            var stream = coord_type == CoordType.SIDSRC ? this.FormulaRecords_SIDSRC.BuildStream() : this.FormulaRecords_SRC.BuildStream();
+            var formulas = coord_type == CoordType.SIDSRC ? this.FormulaRecords_SIDSRC.BuildValues() : this.FormulaRecords_SRC.BuildValues();
+
+            if (stream.Length == 0)
+            {
+                throw new VisioAutomation.Exceptions.InternalAssertionException();
+            }
 
             var flags = this.ComputeGetFormulaFlags();
-            int c = surface.SetFormulas(stream, formulas_builder.ToObjectArray(), (short)flags);
+
+            int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void SetResult(SRC src, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SRC src, CellValueLiteral result)
         {
             if (this.ResultRecords_SRC == null)
             {
-                this.ResultRecords_SRC = new SRCStreamBuilder();
-                this.ResultRecords_SRC_Results = new ShapeSheetObjectArrayBuilder<string>();
-                this.ResultRecords_SRC_UnitCodes = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>();
+                this.ResultRecords_SRC = new WriterCollection_SRC();
             }
 
-            this.ResultRecords_SRC.Add(src);
-            this.ResultRecords_SRC_Results.Add(result.Value);
-            this.ResultRecords_SRC_UnitCodes.Add(unitcode);
+            this.ResultRecords_SRC.StreamBuilder.Add(src);
+            this.ResultRecords_SRC.ValuesBuilder.Add(result.Value);
         }
 
-        public void SetResult(short id, SRC src, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(short id, SRC src, CellValueLiteral result)
         {
             var sidsrc = new SIDSRC(id, src);
-            this.SetResult(sidsrc, result.Value, unitcode);
+            this.SetResult(sidsrc, result.Value);
         }
 
-        public void SetResult(SIDSRC sidsrc, CellValueLiteral result, IVisio.VisUnitCodes unitcode)
+        public void SetResult(SIDSRC sidsrc, CellValueLiteral result)
         {
             if (this.ResultRecords_SIDSRC == null)
             {
-                this.ResultRecords_SIDSRC = new SIDSRCStreamBuilder();
-                this.ResultRecords_SIDSRC_Results = new ShapeSheetObjectArrayBuilder<string>();
-                this.ResultRecords_SIDSRC_UnitCodes = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>();
+                this.ResultRecords_SIDSRC = new WriterCollection_SIDSRC();
             }
 
-            this.ResultRecords_SIDSRC.Add(sidsrc);
-            this.ResultRecords_SIDSRC_Results.Add(result.Value);
-            this.ResultRecords_SIDSRC_UnitCodes.Add(unitcode);
-
+            this.ResultRecords_SIDSRC.Add(sidsrc, result.Value);
         }
 
         private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            var stream_builder = coord_type == CoordType.SIDSRC ? (ShapeSheetStreamBuilder)this.ResultRecords_SIDSRC: (ShapeSheetStreamBuilder)this.ResultRecords_SRC;
-            var results_builder = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC_Results: this.ResultRecords_SRC_Results;
-            var unitcodes_builder = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC_UnitCodes: this.ResultRecords_SRC_UnitCodes;
-
-            if (results_builder == null)
+            if (coord_type == CoordType.SIDSRC && (this.ResultRecords_SIDSRC == null || this.ResultRecords_SIDSRC.Count < 1))
             {
                 return;
             }
 
-            int count = results_builder.Count;
-
-            if (count == 0)
+            if (coord_type == CoordType.SRC && (this.ResultRecords_SRC == null || this.ResultRecords_SRC.Count <1))
             {
                 return;
             }
 
-            var stream = stream_builder.ToStream();
+            var stream = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC.BuildStream() : this.ResultRecords_SRC.BuildStream();
+            var results = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC.BuildValues(): this.ResultRecords_SRC.BuildValues();
+            var unitcodes = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC.BuildUnitCodes(): this.ResultRecords_SRC.BuildUnitCodes();
+
+            if (stream.Length == 0)
+            {
+                throw new VisioAutomation.Exceptions.InternalAssertionException();
+            }
+
             var flags = this.ComputeGetResultFlags();
-            var unitcodes = unitcodes_builder.ToObjectArray();
-            var results = results_builder.ToObjectArray();
             surface.SetResults(stream, unitcodes, results, (short)flags);
         }
     }

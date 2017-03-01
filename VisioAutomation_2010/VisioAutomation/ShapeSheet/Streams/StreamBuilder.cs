@@ -1,29 +1,19 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.ShapeSheet.Streams
 {
-    public abstract class ShapeSheetStreamBuilder
-    {
-        public abstract short[] ToStream();
-
-        public abstract int Count();
-    }
-
-    public abstract class ShapeSheetStreamBuilder<T> : ShapeSheetStreamBuilder
+    public abstract class StreamBuilder<T> : StreamBuilderBase
     {
         protected List<T> items;
 
-        public ShapeSheetStreamBuilder()
+        public StreamBuilder()
         {
             this.items = new List<T>();
         }
 
-        public override int Count()
-        {
-            return this.items.Count;
-        }
+        public override int Count() => this.items.Count;
 
-        public ShapeSheetStreamBuilder(int capacity)
+        public StreamBuilder(int capacity)
         {
             this.items = new List<T>(capacity);
         }
@@ -45,13 +35,10 @@ namespace VisioAutomation.ShapeSheet
 
         public override short[] ToStream()
         {
-             var stream = this.build_stream();
-             return stream;
+            var stream = this.build_stream();
+            return stream;
         }
 
         protected abstract short[] build_stream();
     }
 }
-
-
-
