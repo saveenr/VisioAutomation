@@ -6,18 +6,18 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class ShapeSheetQuery
     {
-        public ColumnCellCollection Cells { get; }
+        public CellColumnCollection Cells { get; }
         public SubQueryCollection SubQueries { get; }
 
         private SectionInfoCache cache;
 
         public ShapeSheetQuery()
         {
-            this.Cells = new ColumnCellCollection(0);
+            this.Cells = new CellColumnCollection(0);
             this.SubQueries = new SubQueryCollection(0);
         }
 
-        public ColumnCell AddCell(ShapeSheet.SRC src, string name)
+        public CellColumn AddCell(ShapeSheet.SRC src, string name)
         {
             if (name == null)
             {
@@ -181,7 +181,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 output.Sections = new List<SubQueryOutput<T>>(section_infos.Count);
                 foreach (var section_info in section_infos)
                 {
-                    var subquery_output = new SubQueryOutput<T>(section_info.RowCount);
+                    var subquery_output = new SubQueryOutput<T>(section_info.RowCount, section_info.SubQuery.SectionIndex);
 
                     int num_cols = section_info.SubQuery.Columns.Count;
                     foreach (int row_index in section_info.RowIndexes)

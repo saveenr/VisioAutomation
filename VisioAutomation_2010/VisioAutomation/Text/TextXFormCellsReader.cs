@@ -6,13 +6,13 @@ namespace VisioAutomation.Text
 {
     class TextXFormCellsReader : SingleRowReader<Text.TextXFormCells>
     {
-        public ColumnCell TxtWidth { get; set; }
-        public ColumnCell TxtHeight { get; set; }
-        public ColumnCell TxtPinX { get; set; }
-        public ColumnCell TxtPinY { get; set; }
-        public ColumnCell TxtLocPinX { get; set; }
-        public ColumnCell TxtLocPinY { get; set; }
-        public ColumnCell TxtAngle { get; set; }
+        public CellColumn TxtWidth { get; set; }
+        public CellColumn TxtHeight { get; set; }
+        public CellColumn TxtPinX { get; set; }
+        public CellColumn TxtPinY { get; set; }
+        public CellColumn TxtLocPinX { get; set; }
+        public CellColumn TxtLocPinY { get; set; }
+        public CellColumn TxtAngle { get; set; }
 
         public TextXFormCellsReader()
         {

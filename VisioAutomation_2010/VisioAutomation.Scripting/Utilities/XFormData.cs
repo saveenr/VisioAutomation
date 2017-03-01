@@ -14,12 +14,12 @@ namespace VisioAutomation.Scripting.Utilities
         public double Width;
         public double Height;
 
-        private static ColumnCell ColPinX;
-        private static ColumnCell ColPinY;
-        private static ColumnCell ColLocPinX;
-        private static ColumnCell ColLocPinY;
-        private static ColumnCell ColWidth;
-        private static ColumnCell ColHeight;
+        private static CellColumn ColPinX;
+        private static CellColumn ColPinY;
+        private static CellColumn ColLocPinX;
+        private static CellColumn ColLocPinY;
+        private static CellColumn ColWidth;
+        private static CellColumn ColHeight;
         private static ShapeSheetQuery query;
 
         public static List<XFormData> Get(Microsoft.Office.Interop.Visio.Page page, TargetShapeIDs target)

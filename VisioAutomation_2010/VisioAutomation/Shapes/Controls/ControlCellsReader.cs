@@ -7,14 +7,14 @@ namespace VisioAutomation.Shapes.Controls
 {
     class ControlCellsReader : MultiRowReader<Shapes.Controls.ControlCells>
     {
-        public ColumnSubQuery CanGlue { get; set; }
-        public ColumnSubQuery Tip { get; set; }
-        public ColumnSubQuery X { get; set; }
-        public ColumnSubQuery Y { get; set; }
-        public ColumnSubQuery YBehavior { get; set; }
-        public ColumnSubQuery XBehavior { get; set; }
-        public ColumnSubQuery XDynamics { get; set; }
-        public ColumnSubQuery YDynamics { get; set; }
+        public SubQueryColumn CanGlue { get; set; }
+        public SubQueryColumn Tip { get; set; }
+        public SubQueryColumn X { get; set; }
+        public SubQueryColumn Y { get; set; }
+        public SubQueryColumn YBehavior { get; set; }
+        public SubQueryColumn XBehavior { get; set; }
+        public SubQueryColumn XDynamics { get; set; }
+        public SubQueryColumn YDynamics { get; set; }
 
         public ControlCellsReader()
         {

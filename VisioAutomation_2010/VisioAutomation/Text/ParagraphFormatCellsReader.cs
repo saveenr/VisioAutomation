@@ -7,20 +7,20 @@ namespace VisioAutomation.Text
 {
     class ParagraphFormatCellsReader : MultiRowReader<Text.ParagraphCells>
     {
-        public ColumnSubQuery Bullet { get; set; }
-        public ColumnSubQuery BulletFont { get; set; }
-        public ColumnSubQuery BulletFontSize { get; set; }
-        public ColumnSubQuery BulletString { get; set; }
-        public ColumnSubQuery Flags { get; set; }
-        public ColumnSubQuery HorzAlign { get; set; }
-        public ColumnSubQuery IndentFirst { get; set; }
-        public ColumnSubQuery IndentLeft { get; set; }
-        public ColumnSubQuery IndentRight { get; set; }
-        public ColumnSubQuery LocalizeBulletFont { get; set; }
-        public ColumnSubQuery SpaceAfter { get; set; }
-        public ColumnSubQuery SpaceBefore { get; set; }
-        public ColumnSubQuery SpaceLine { get; set; }
-        public ColumnSubQuery TextPosAfterBullet { get; set; }
+        public SubQueryColumn Bullet { get; set; }
+        public SubQueryColumn BulletFont { get; set; }
+        public SubQueryColumn BulletFontSize { get; set; }
+        public SubQueryColumn BulletString { get; set; }
+        public SubQueryColumn Flags { get; set; }
+        public SubQueryColumn HorzAlign { get; set; }
+        public SubQueryColumn IndentFirst { get; set; }
+        public SubQueryColumn IndentLeft { get; set; }
+        public SubQueryColumn IndentRight { get; set; }
+        public SubQueryColumn LocalizeBulletFont { get; set; }
+        public SubQueryColumn SpaceAfter { get; set; }
+        public SubQueryColumn SpaceBefore { get; set; }
+        public SubQueryColumn SpaceLine { get; set; }
+        public SubQueryColumn TextPosAfterBullet { get; set; }
 
         public ParagraphFormatCellsReader()
         {

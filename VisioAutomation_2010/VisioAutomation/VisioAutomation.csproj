@@ -110,7 +110,7 @@
     <Compile Include="ShapeSheet\SRCStreamBuilder.cs" />
     <Compile Include="ShapeSheet\ShapeSheetStreamBuilder.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
-    <Compile Include="ShapeSheet\Query\ColumnBaseCollection.cs" />
+    <Compile Include="ShapeSheet\Query\ColumnCollectionBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
     <Compile Include="Text\CharacterFormatCellsReader.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointCellsReader.cs" />
@@ -126,8 +126,8 @@
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellsReader.cs" />
     <Compile Include="Shapes\XFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBase.cs" />
-    <Compile Include="ShapeSheet\Query\ColumnSubQuery.cs" />
-    <Compile Include="ShapeSheet\Query\ColumnSubQueryCollection.cs" />
+    <Compile Include="ShapeSheet\Query\SubQueryColumn.cs" />
+    <Compile Include="ShapeSheet\Query\SubQueryColumnCollection.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryOutputRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\SRCFormulaPair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
@@ -174,7 +174,7 @@
     <Compile Include="ShapeSheet\Query\SectionInfo.cs" />
     <Compile Include="ShapeSheet\Query\SubQuery.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryOutput.cs" />
-    <Compile Include="ShapeSheet\Query\ColumnCellCollection.cs" />
+    <Compile Include="ShapeSheet\Query\CellColumnCollection.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryCollection.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
@@ -188,7 +188,7 @@
     <Compile Include="Shapes\XFormCells.cs" />
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
-    <Compile Include="ShapeSheet\Query\ColumnCell.cs" />
+    <Compile Include="ShapeSheet\Query\CellColumn.cs" />
     <Compile Include="ShapeSheet\ShapeSheetWriter.cs" />
     <Compile Include="ShapeSheet\CellValueLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
