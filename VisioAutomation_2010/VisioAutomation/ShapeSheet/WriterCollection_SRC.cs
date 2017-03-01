@@ -6,7 +6,7 @@
         public ShapeSheetObjectArrayBuilder<string> ValuesBuilder;
 
 
-        public WriterCollection_SRC(bool include_unit_codes)
+        public WriterCollection_SRC()
         {
 
             this.StreamBuilder = new SRCStreamBuilder();

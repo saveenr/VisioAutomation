@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.FormulaRecords_SRC == null)
             {
-                this.FormulaRecords_SRC = new WriterCollection_SRC(false);
+                this.FormulaRecords_SRC = new WriterCollection_SRC();
             }
 
             if (formula.HasValue)
@@ -131,7 +131,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.ResultRecords_SRC == null)
             {
-                this.ResultRecords_SRC = new WriterCollection_SRC(true);
+                this.ResultRecords_SRC = new WriterCollection_SRC();
             }
 
             this.ResultRecords_SRC.StreamBuilder.Add(src);
