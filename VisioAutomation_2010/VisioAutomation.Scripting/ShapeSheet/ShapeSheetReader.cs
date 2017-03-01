@@ -30,11 +30,9 @@ namespace VisioAutomation.Scripting.ShapeSheet
 
         public string[] GetResults()
         {
-            var builder = new ShapeSheetObjectArrayBuilder<IVisio.VisUnitCodes>(1);
-            builder.Add(IVisio.VisUnitCodes.visNoCast);
-
-            var unitcodes = builder.ToObjectArray();
-            var formulas = this.Surface.GetResults<string>( this.SidsrcStreamBuilder.ToStream(), unitcodes);
+            object [] unitcodes = null;
+            var stream = this.SidsrcStreamBuilder.ToStream();
+            var formulas = this.Surface.GetResults<string>( stream, unitcodes);
             return formulas;
         }
     }

@@ -250,8 +250,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = 1;
             int shapeindex = 0;
             int numcells = this._get_total_cell_count(numshapes);
-            var stream = new VisioAutomation.ShapeSheet.Streams.SRCStreamBuilder(numcells);
-
+            var stream = new VisioAutomation.ShapeSheet.Streams.FixedSRCStreamBuilder(numcells);
             var cellinfos = this.enum_cellinfo(dummy_shapeid, shapeindex);
             var srcs = cellinfos.Select(i => i.SIDSRC.SRC);
             stream.AddRange(srcs);
@@ -264,7 +263,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
 
-            var stream = new VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder(numcells);
+            var stream = new VisioAutomation.ShapeSheet.Streams.FixedSIDSRCStreamBuilder(numcells);
 
             for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
             {
