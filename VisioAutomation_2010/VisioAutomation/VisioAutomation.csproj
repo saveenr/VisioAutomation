@@ -75,6 +75,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Logging\LoggingHelper.cs" />
     <Compile Include="Application\Logging\XmlErrorLog.cs" />
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
