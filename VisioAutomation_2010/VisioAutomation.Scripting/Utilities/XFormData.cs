@@ -35,8 +35,7 @@ namespace VisioAutomation.Scripting.Utilities
                 ColHeight = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Height, "Height");
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            var results = query.GetResults<double>(surface, target.ShapeIDs);
+            var results = query.GetResults<double>(page, target.ShapeIDs);
             if (results.Count != target.ShapeIDs.Count)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Didn't get as many rows back as expected");

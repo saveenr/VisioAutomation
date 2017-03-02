@@ -148,6 +148,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
+        public QueryOutputCollection<ShapeSheet.CellData> GetFormulasAndResults(IVisio.Page page, IList<int> shapeids)
+        {
+            var surface = new ShapeSheetSurface(page);
+            return this.GetFormulasAndResults(surface, shapeids);
+        }
+
         public QueryOutputCollection<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface, IList<int> shapeids)
         {
             var shapes = new List<IVisio.Shape>(shapeids.Count);

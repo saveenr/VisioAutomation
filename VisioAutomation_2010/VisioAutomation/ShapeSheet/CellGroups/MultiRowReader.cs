@@ -23,8 +23,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public List<List<TCellGroup>> GetCellGroups(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             this.validate_query();
-            var surface = new ShapeSheetSurface(page);
-            var data_for_shapes = query.GetFormulasAndResults(surface, shapeids);
+            var data_for_shapes = query.GetFormulasAndResults(page, shapeids);
             var list = new List<List<TCellGroup>>(shapeids.Count);
             var objects = data_for_shapes.Select(d => this.SubQueryRowsToCellGroups(d.Sections[0]));
             list.AddRange(objects);
