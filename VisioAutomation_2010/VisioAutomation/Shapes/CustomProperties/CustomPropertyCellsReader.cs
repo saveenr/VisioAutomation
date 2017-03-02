@@ -1,6 +1,6 @@
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties
@@ -23,16 +23,16 @@ namespace VisioAutomation.Shapes.CustomProperties
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
 
 
-            this.SortKey = sec.AddCell(SRCCON.Prop_SortKey, nameof(SRCCON.Prop_SortKey));
-            this.Ask = sec.AddCell(SRCCON.Prop_Ask, nameof(SRCCON.Prop_Ask));
-            this.Calendar = sec.AddCell(SRCCON.Prop_Calendar, nameof(SRCCON.Prop_Calendar));
-            this.Format = sec.AddCell(SRCCON.Prop_Format, nameof(SRCCON.Prop_Format));
-            this.Invis = sec.AddCell(SRCCON.Prop_Invisible, nameof(SRCCON.Prop_Invisible));
-            this.Label = sec.AddCell(SRCCON.Prop_Label, nameof(SRCCON.Prop_Label));
-            this.LangID = sec.AddCell(SRCCON.Prop_LangID, nameof(SRCCON.Prop_LangID));
-            this.Prompt = sec.AddCell(SRCCON.Prop_Prompt, nameof(SRCCON.Prop_Prompt));
-            this.Type = sec.AddCell(SRCCON.Prop_Type, nameof(SRCCON.Prop_Type));
-            this.Value = sec.AddCell(SRCCON.Prop_Value, nameof(SRCCON.Prop_Value));
+            this.SortKey = sec.AddCell(SrcConstants.Prop_SortKey, nameof(SrcConstants.Prop_SortKey));
+            this.Ask = sec.AddCell(SrcConstants.Prop_Ask, nameof(SrcConstants.Prop_Ask));
+            this.Calendar = sec.AddCell(SrcConstants.Prop_Calendar, nameof(SrcConstants.Prop_Calendar));
+            this.Format = sec.AddCell(SrcConstants.Prop_Format, nameof(SrcConstants.Prop_Format));
+            this.Invis = sec.AddCell(SrcConstants.Prop_Invisible, nameof(SrcConstants.Prop_Invisible));
+            this.Label = sec.AddCell(SrcConstants.Prop_Label, nameof(SrcConstants.Prop_Label));
+            this.LangID = sec.AddCell(SrcConstants.Prop_LangID, nameof(SrcConstants.Prop_LangID));
+            this.Prompt = sec.AddCell(SrcConstants.Prop_Prompt, nameof(SrcConstants.Prop_Prompt));
+            this.Type = sec.AddCell(SrcConstants.Prop_Type, nameof(SrcConstants.Prop_Type));
+            this.Value = sec.AddCell(SrcConstants.Prop_Value, nameof(SrcConstants.Prop_Value));
 
         }
 

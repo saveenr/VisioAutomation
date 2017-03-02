@@ -1,6 +1,6 @@
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Text
 {
@@ -18,15 +18,15 @@ namespace VisioAutomation.Text
 
         public TextBlockCellsReader()
         {
-            this.BottomMargin = this.query.AddCell(SRCCON.BottomMargin, nameof(SRCCON.BottomMargin));
-            this.LeftMargin = this.query.AddCell(SRCCON.LeftMargin, nameof(SRCCON.LeftMargin));
-            this.RightMargin = this.query.AddCell(SRCCON.RightMargin, nameof(SRCCON.RightMargin));
-            this.TopMargin = this.query.AddCell(SRCCON.TopMargin, nameof(SRCCON.TopMargin));
-            this.DefaultTabStop = this.query.AddCell(SRCCON.DefaultTabStop, nameof(SRCCON.DefaultTabStop));
-            this.TextBkgnd = this.query.AddCell(SRCCON.TextBkgnd, nameof(SRCCON.TextBkgnd));
-            this.TextBkgndTrans = this.query.AddCell(SRCCON.TextBkgndTrans, nameof(SRCCON.TextBkgndTrans));
-            this.TextDirection = this.query.AddCell(SRCCON.TextDirection, nameof(SRCCON.TextDirection));
-            this.VerticalAlign = this.query.AddCell(SRCCON.VerticalAlign, nameof(SRCCON.VerticalAlign));
+            this.BottomMargin = this.query.AddCell(SrcConstants.BottomMargin, nameof(SrcConstants.BottomMargin));
+            this.LeftMargin = this.query.AddCell(SrcConstants.LeftMargin, nameof(SrcConstants.LeftMargin));
+            this.RightMargin = this.query.AddCell(SrcConstants.RightMargin, nameof(SrcConstants.RightMargin));
+            this.TopMargin = this.query.AddCell(SrcConstants.TopMargin, nameof(SrcConstants.TopMargin));
+            this.DefaultTabStop = this.query.AddCell(SrcConstants.DefaultTabStop, nameof(SrcConstants.DefaultTabStop));
+            this.TextBkgnd = this.query.AddCell(SrcConstants.TextBkgnd, nameof(SrcConstants.TextBkgnd));
+            this.TextBkgndTrans = this.query.AddCell(SrcConstants.TextBkgndTrans, nameof(SrcConstants.TextBkgndTrans));
+            this.TextDirection = this.query.AddCell(SrcConstants.TextDirection, nameof(SrcConstants.TextDirection));
+            this.VerticalAlign = this.query.AddCell(SrcConstants.VerticalAlign, nameof(SrcConstants.VerticalAlign));
 
         }
 

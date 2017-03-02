@@ -41,7 +41,7 @@ namespace VisioAutomation_Tests.Scripting
             var shapes = client.Selection.GetShapes();
             foreach (var shape in shapes)
             {
-                writer.SetFormula( shape.ID16, VA.ShapeSheet.SRCConstants.EndArrow, "13");
+                writer.SetFormula( shape.ID16, VA.ShapeSheet.SrcConstants.EndArrow, "13");
             }
             writer.Commit();
 

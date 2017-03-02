@@ -4,7 +4,7 @@ using CEL = Microsoft.Office.Interop.Visio.VisCellIndices;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public static class SRCConstants
+    public static class SrcConstants
     {
         // Actions
         public static Src Actions_Action => new Src(SEC.visSectionAction, ROW.visRowAction, CEL.visActionAction);

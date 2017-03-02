@@ -110,8 +110,8 @@ namespace VisioAutomation.Scripting.Commands
 
 
             var query = new ShapeSheetQuery();
-            var col_height = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
-            var col_width = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
+            var col_height = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, "PageHeight");
+            var col_width = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
             var page_surface = new ShapeSheetSurface(active_page.PageSheet);
 
             var results = query.GetResults<double>(page_surface);
@@ -280,7 +280,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var page_sheet = page.PageSheet;
-            var src = VisioAutomation.ShapeSheet.SRCConstants.PrintPageOrientation;
+            var src = VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation;
             var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNumber, 0];
             return (Pages.PrintPageOrientation)value;
@@ -315,9 +315,9 @@ namespace VisioAutomation.Scripting.Commands
             double new_width = old_size.Height;
 
             var writer = new ShapeSheetWriter();
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, new_width);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, new_height);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_width);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page.PageSheet);
 
@@ -359,10 +359,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var writer = new ShapeSheetWriter();
 
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.XGridOrigin, "0.0");
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.YGridOrigin, "0.0");
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.XRulerOrigin, "0.0");
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.YRulerOrigin, "0.0");
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.XGridOrigin, "0.0");
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.YGridOrigin, "0.0");
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.XRulerOrigin, "0.0");
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.YRulerOrigin, "0.0");
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page.PageSheet);
 
@@ -383,8 +383,8 @@ namespace VisioAutomation.Scripting.Commands
                 var active_page = application.ActivePage;
                 var page_sheet = active_page.PageSheet;
                 var writer = new ShapeSheetWriter();
-                writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, new_size.Width);
-                writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, new_size.Height);
+                writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
+                writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
 
                 var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page_sheet);
                 writer.Commit(surface);

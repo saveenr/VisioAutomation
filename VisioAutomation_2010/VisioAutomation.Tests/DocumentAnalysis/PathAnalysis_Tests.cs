@@ -30,11 +30,11 @@ namespace VisioAutomation_Tests.DocumentAnalysis
                 var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
                 if (a_arrow)
                 {
-                    writer.SetFormula(c1.ID16, VASS.SRCConstants.BeginArrow, "13");                    
+                    writer.SetFormula(c1.ID16, VASS.SrcConstants.BeginArrow, "13");                    
                 }
                 if (b_arrow)
                 {
-                    writer.SetFormula(c1.ID16, VASS.SRCConstants.EndArrow, "13");
+                    writer.SetFormula(c1.ID16, VASS.SrcConstants.EndArrow, "13");
                 }
 
                 var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);

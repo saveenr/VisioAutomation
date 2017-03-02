@@ -1,5 +1,4 @@
 ﻿using VisioAutomation.ShapeSheet;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Models.Text
 {
@@ -22,20 +21,20 @@ namespace VisioAutomation.Models.Text
         
         internal void ApplyFormulas(ShapeSheetWriter writer, short row)
         {
-            writer.SetFormula(SRCCON.Para_IndLeft.CloneWithNewRow(row), this.IndentLeft);
-            writer.SetFormula(SRCCON.Para_IndFirst.CloneWithNewRow(row), this.IndentFirst);
-            writer.SetFormula(SRCCON.Para_IndRight.CloneWithNewRow(row), this.IndentRight);
-            writer.SetFormula(SRCCON.Para_SpAfter.CloneWithNewRow(row), this.SpacingAfter);
-            writer.SetFormula(SRCCON.Para_SpBefore.CloneWithNewRow(row), this.SpacingBefore);
-            writer.SetFormula(SRCCON.Para_SpLine.CloneWithNewRow(row), this.SpacingLine);
-            writer.SetFormula(SRCCON.Para_HorzAlign.CloneWithNewRow(row), this.HorizontalAlign);
-            writer.SetFormula(SRCCON.Para_BulletFont.CloneWithNewRow(row), this.BulletFont);
-            writer.SetFormula(SRCCON.Para_Bullet.CloneWithNewRow(row), this.Bullet);
-            writer.SetFormula(SRCCON.Para_BulletFontSize.CloneWithNewRow(row), this.BulletFontSize);
-            writer.SetFormula(SRCCON.Para_LocalizeBulletFont.CloneWithNewRow(row), this.LocBulletFont);
-            writer.SetFormula(SRCCON.Para_TextPosAfterBullet.CloneWithNewRow(row), this.TextPosAfterBullet);
-            writer.SetFormula(SRCCON.Para_Flags.CloneWithNewRow(row), this.Flags);
-            writer.SetFormula(SRCCON.Para_BulletStr.CloneWithNewRow(row), this.BulletString);
+            writer.SetFormula(SrcConstants.Para_IndLeft.CloneWithNewRow(row), this.IndentLeft);
+            writer.SetFormula(SrcConstants.Para_IndFirst.CloneWithNewRow(row), this.IndentFirst);
+            writer.SetFormula(SrcConstants.Para_IndRight.CloneWithNewRow(row), this.IndentRight);
+            writer.SetFormula(SrcConstants.Para_SpAfter.CloneWithNewRow(row), this.SpacingAfter);
+            writer.SetFormula(SrcConstants.Para_SpBefore.CloneWithNewRow(row), this.SpacingBefore);
+            writer.SetFormula(SrcConstants.Para_SpLine.CloneWithNewRow(row), this.SpacingLine);
+            writer.SetFormula(SrcConstants.Para_HorzAlign.CloneWithNewRow(row), this.HorizontalAlign);
+            writer.SetFormula(SrcConstants.Para_BulletFont.CloneWithNewRow(row), this.BulletFont);
+            writer.SetFormula(SrcConstants.Para_Bullet.CloneWithNewRow(row), this.Bullet);
+            writer.SetFormula(SrcConstants.Para_BulletFontSize.CloneWithNewRow(row), this.BulletFontSize);
+            writer.SetFormula(SrcConstants.Para_LocalizeBulletFont.CloneWithNewRow(row), this.LocBulletFont);
+            writer.SetFormula(SrcConstants.Para_TextPosAfterBullet.CloneWithNewRow(row), this.TextPosAfterBullet);
+            writer.SetFormula(SrcConstants.Para_Flags.CloneWithNewRow(row), this.Flags);
+            writer.SetFormula(SrcConstants.Para_BulletStr.CloneWithNewRow(row), this.BulletString);
         }
 
         public void ApplyFormulasTo(ParagraphFormatting target)

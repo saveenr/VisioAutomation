@@ -1,6 +1,6 @@
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Controls
@@ -20,14 +20,14 @@ namespace VisioAutomation.Shapes.Controls
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionControls);
 
-            this.CanGlue = sec.AddCell(SRCCON.Controls_CanGlue, nameof(SRCCON.Controls_CanGlue));
-            this.Tip = sec.AddCell(SRCCON.Controls_Tip, nameof(SRCCON.Controls_Tip));
-            this.X = sec.AddCell(SRCCON.Controls_X, nameof(SRCCON.Controls_X));
-            this.Y = sec.AddCell(SRCCON.Controls_Y, nameof(SRCCON.Controls_Y));
-            this.YBehavior = sec.AddCell(SRCCON.Controls_YCon, nameof(SRCCON.Controls_YCon));
-            this.XBehavior = sec.AddCell(SRCCON.Controls_XCon, nameof(SRCCON.Controls_XCon));
-            this.XDynamics = sec.AddCell(SRCCON.Controls_XDyn, nameof(SRCCON.Controls_XDyn));
-            this.YDynamics = sec.AddCell(SRCCON.Controls_YDyn, nameof(SRCCON.Controls_YDyn));
+            this.CanGlue = sec.AddCell(SrcConstants.Controls_CanGlue, nameof(SrcConstants.Controls_CanGlue));
+            this.Tip = sec.AddCell(SrcConstants.Controls_Tip, nameof(SrcConstants.Controls_Tip));
+            this.X = sec.AddCell(SrcConstants.Controls_X, nameof(SrcConstants.Controls_X));
+            this.Y = sec.AddCell(SrcConstants.Controls_Y, nameof(SrcConstants.Controls_Y));
+            this.YBehavior = sec.AddCell(SrcConstants.Controls_YCon, nameof(SrcConstants.Controls_YCon));
+            this.XBehavior = sec.AddCell(SrcConstants.Controls_XCon, nameof(SrcConstants.Controls_XCon));
+            this.XDynamics = sec.AddCell(SrcConstants.Controls_XDyn, nameof(SrcConstants.Controls_XDyn));
+            this.YDynamics = sec.AddCell(SrcConstants.Controls_YDyn, nameof(SrcConstants.Controls_YDyn));
 
         }
 

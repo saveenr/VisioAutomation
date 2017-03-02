@@ -141,11 +141,11 @@ namespace VisioAutomation.Pages.PageLayout
             this.SetPageCells(pagecells);
 
             var writer = new ShapeSheetWriter();
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeX,pagecells.AvenueSizeX);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeY, pagecells.AvenueSizeY);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.LineRouteExt, pagecells.LineRouteExt);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.RouteStyle, pagecells.RouteStyle);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PlaceStyle, pagecells.PlaceStyle);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.AvenueSizeX,pagecells.AvenueSizeX);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.AvenueSizeY, pagecells.AvenueSizeY);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.LineRouteExt, pagecells.LineRouteExt);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.RouteStyle, pagecells.RouteStyle);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PlaceStyle, pagecells.PlaceStyle);
 
             var pagesheet = page.PageSheet;
 

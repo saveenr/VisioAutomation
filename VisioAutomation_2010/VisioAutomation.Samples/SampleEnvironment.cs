@@ -60,8 +60,8 @@ namespace VisioAutomationSamples
             var page_sheet = page.PageSheet;
 
             var writer = new ShapeSheetWriter();
-            writer.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, size.Width);
-            writer.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, size.Height);
+            writer.SetFormula(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
+            writer.SetFormula(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page_sheet);
             writer.Commit(surface);
@@ -75,8 +75,8 @@ namespace VisioAutomationSamples
             }
 
             var query = new ShapeSheetQuery();
-            var col_height = query.AddCell(VA.ShapeSheet.SRCConstants.PageHeight,"PageHeight");
-            var col_width = query.AddCell(VA.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
+            var col_height = query.AddCell(VA.ShapeSheet.SrcConstants.PageHeight,"PageHeight");
+            var col_width = query.AddCell(VA.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
 
             var ss = new ShapeSheetSurface(page.PageSheet);
             var results = query.GetResults<double>(ss);

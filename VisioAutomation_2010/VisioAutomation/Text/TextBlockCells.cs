@@ -20,15 +20,15 @@ namespace VisioAutomation.Text
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.RightMargin, this.RightMargin.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TopMargin, this.TopMargin.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.DefaultTabStop, this.DefaultTabStop.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TextDirection, this.TextDirection.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.VerticalAlign, this.VerticalAlign.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.BottomMargin, this.BottomMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LeftMargin, this.LeftMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.RightMargin, this.RightMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TopMargin, this.TopMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.DefaultTabStop, this.DefaultTabStop.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBkgnd, this.TextBkgnd.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextDirection, this.TextDirection.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.VerticalAlign, this.VerticalAlign.Formula);
             }
         }
 

@@ -215,8 +215,8 @@ namespace VisioAutomation.Models.Layouts.Container
             var writer = new ShapeSheetWriter();
             for (int i = 0; i < rects.Count(); i++)
             {
-                writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SRCConstants.Width, rects[i].Width);
-                writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SRCConstants.Height, rects[i].Height);
+                writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.Width, rects[i].Width);
+                writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.Height, rects[i].Height);
             }
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);

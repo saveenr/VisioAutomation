@@ -142,7 +142,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SRCConstants.Tabs_StopCount.Section, ShapeSheet.SRCConstants.Tabs_StopCount.Row, ShapeSheet.SRCConstants.Tabs_StopCount.Cell];
+            var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SrcConstants.Tabs_StopCount.Section, ShapeSheet.SrcConstants.Tabs_StopCount.Row, ShapeSheet.SrcConstants.Tabs_StopCount.Cell];
             const short rounding = 0;
 
             return cell_tabstopcount.ResultInt[(short)IVisio.VisUnitCodes.visNumber, rounding];
@@ -166,7 +166,7 @@ namespace VisioAutomation.Text
                 return;
             }
 
-            var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SRCConstants.Tabs_StopCount.Section, ShapeSheet.SRCConstants.Tabs_StopCount.Row, ShapeSheet.SRCConstants.Tabs_StopCount.Cell];
+            var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SrcConstants.Tabs_StopCount.Section, ShapeSheet.SrcConstants.Tabs_StopCount.Row, ShapeSheet.SrcConstants.Tabs_StopCount.Cell];
             cell_tabstopcount.FormulaForce = "0";
 
             const string formula = "0";
