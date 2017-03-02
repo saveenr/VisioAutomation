@@ -202,11 +202,11 @@
     <Compile Include="Drawing\ColorRGB.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
-    <Compile Include="ShapeSheet\SIDSRC.cs" />
+    <Compile Include="ShapeSheet\SidSrc.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Utilities\Convert.cs" />
     <Compile Include="ShapeSheet\SRCConstants.cs" />
-    <Compile Include="ShapeSheet\SRC.cs" />
+    <Compile Include="ShapeSheet\Src.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointCells.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellHelper.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCell.cs" />
