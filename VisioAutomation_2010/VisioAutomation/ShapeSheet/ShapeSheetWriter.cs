@@ -168,8 +168,8 @@ namespace VisioAutomation.ShapeSheet
 
             var stream = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC.BuildStream() : this.ResultRecords_SRC.BuildStream();
             var results = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC.BuildValues(): this.ResultRecords_SRC.BuildValues();
-            var unitcodes = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC.BuildUnitCodes(): this.ResultRecords_SRC.BuildUnitCodes();
-
+            const object[] unitcodes = null;
+            
             if (stream.Length == 0)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException();

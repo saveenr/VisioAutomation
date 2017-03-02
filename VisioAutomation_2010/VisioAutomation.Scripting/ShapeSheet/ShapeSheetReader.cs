@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
 
         public string[] GetResults()
         {
-            object [] unitcodes = null;
+            const object [] unitcodes = null;
             var stream = this.SidsrcStreamBuilder.ToStream();
             var formulas = this.Surface.GetResults<string>( stream, unitcodes);
             return formulas;

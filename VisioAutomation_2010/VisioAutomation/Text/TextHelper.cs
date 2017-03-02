@@ -41,7 +41,7 @@ namespace VisioAutomation.Text
 
             var surface = new ShapeSheetSurface(shape);
 
-            object[] unitcodes = null;
+            const object[] unitcodes = null;
 
             var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
 
