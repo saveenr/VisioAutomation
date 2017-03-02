@@ -36,11 +36,6 @@
             return this.ValuesBuilder.ToObjectArray();
         }
 
-        public object[] BuildUnitCodes()
-        {
-            return null;
-        }
-
         public int Count => this.StreamBuilder.Count();
     }
 }
