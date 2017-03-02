@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellColumnCollection : ColumnCollectionBase<CellColumn>
     {
-        private HashSet<ShapeSheet.SRC> items;
+        private HashSet<ShapeSheet.Src> items;
 
         internal CellColumnCollection() :
             this(0)
@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
         }
 
-        internal CellColumn Add(ShapeSheet.SRC src, string name)
+        internal CellColumn Add(ShapeSheet.Src src, string name)
         {
             check_deplicate_src(src);
             string norm_name = this.normalize_name(name);
@@ -30,11 +30,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return col;
         }
 
-        private void check_deplicate_src(SRC src)
+        private void check_deplicate_src(Src src)
         {
             if (this.items == null)
             {
-                this.items = new HashSet<ShapeSheet.SRC>();
+                this.items = new HashSet<ShapeSheet.Src>();
             }
 
             if (this.items.Contains(src))

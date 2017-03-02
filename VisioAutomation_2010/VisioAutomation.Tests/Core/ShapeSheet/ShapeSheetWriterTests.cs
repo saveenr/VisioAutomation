@@ -9,9 +9,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
     [TestClass]
     public class ShapeSheetWriterTests : VisioAutomationTest
     {
-        private static readonly VA.ShapeSheet.SRC src_pinx = VA.ShapeSheet.SRCConstants.PinX;
-        private static readonly VA.ShapeSheet.SRC src_piny = VA.ShapeSheet.SRCConstants.PinY;
-        private static readonly VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
+        private static readonly VA.ShapeSheet.Src src_pinx = VA.ShapeSheet.SRCConstants.PinX;
+        private static readonly VA.ShapeSheet.Src src_piny = VA.ShapeSheet.SRCConstants.PinY;
+        private static readonly VA.ShapeSheet.Src src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
 
         [TestMethod]
         public void ShapeSheet_Writer_Formulas_MultipleShapes()

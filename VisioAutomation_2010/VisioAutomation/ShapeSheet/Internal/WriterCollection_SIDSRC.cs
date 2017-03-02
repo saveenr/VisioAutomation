@@ -17,13 +17,13 @@ namespace VisioAutomation.ShapeSheet.Internal
             this.ValuesBuilder.Clear();
         }
 
-        public void Add(SIDSRC sidsrc, string value)
+        public void Add(SidSrc sidsrc, string value)
         {
             this.StreamBuilder.Add(sidsrc);
             this.ValuesBuilder.Add(value);
         }
 
-        public void Add(SIDSRC sidsrc, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
+        public void Add(SidSrc sidsrc, string value, Microsoft.Office.Interop.Visio.VisUnitCodes unit_code)
         {
             this.StreamBuilder.Add(sidsrc);
             this.ValuesBuilder.Add(value);

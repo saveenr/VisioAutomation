@@ -14,9 +14,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
     [TestClass]
     public class ShapeSheetQueryTests : VisioAutomationTest
     {
-        public static VA.ShapeSheet.SRC cell_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-        public static VA.ShapeSheet.SRC cell_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
-        public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
+        public static VA.ShapeSheet.Src cell_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
+        public static VA.ShapeSheet.Src cell_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
+        public static VA.ShapeSheet.Src cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
 
         [TestMethod]
         public void ShapeSheet_Query_SectionCells_have_names()
@@ -400,7 +400,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             page1.Delete(0);
         }
 
-        public bool section_is_skippable( VA.ShapeSheet.SRC src)
+        public bool section_is_skippable( VA.ShapeSheet.Src src)
         {
             bool can_skip = (src.Section == (short)IVisio.VisSectionIndices.visSectionFirst)
                          || (src.Section == (short)IVisio.VisSectionIndices.visSectionFirstComponent)
@@ -412,21 +412,21 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             return can_skip;
         }
 
-        public static Dictionary<string, SRC> GetSRCDictionary()
+        public static Dictionary<string, Src> GetSRCDictionary()
         {
             var srcconstants_t = typeof(SRCConstants);
 
             var binding_flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static;
 
             // find all the static properties that return SRC types
-            var src_type = typeof(SRC);
+            var src_type = typeof(Src);
             var props = srcconstants_t.GetProperties(binding_flags)
                 .Where(p => p.PropertyType == src_type);
 
-            var fields_name_to_value = new Dictionary<string, SRC>();
+            var fields_name_to_value = new Dictionary<string, Src>();
             foreach (var propinfo in props)
             {
-                var src = (SRC)propinfo.GetValue(null, null);
+                var src = (Src)propinfo.GetValue(null, null);
                 var name = propinfo.Name;
                 fields_name_to_value[name] = src;
             }

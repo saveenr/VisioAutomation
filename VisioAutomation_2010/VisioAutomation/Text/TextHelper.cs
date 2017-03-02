@@ -30,9 +30,9 @@ namespace VisioAutomation.Text
             {
                 int i = stop_index * 3;
 
-                var src_tabpos = new ShapeSheet.SRC(tab_section, row, (short)(i + 1));
-                var src_tabalign = new ShapeSheet.SRC(tab_section, row, (short)(i + 2));
-                var src_tabother = new ShapeSheet.SRC(tab_section, row, (short)(i + 3));
+                var src_tabpos = new ShapeSheet.Src(tab_section, row, (short)(i + 1));
+                var src_tabalign = new ShapeSheet.Src(tab_section, row, (short)(i + 2));
+                var src_tabother = new ShapeSheet.Src(tab_section, row, (short)(i + 3));
 
                 stream.Add(src_tabpos);
                 stream.Add(src_tabalign);
@@ -94,9 +94,9 @@ namespace VisioAutomation.Text
                 var alignment = ((int)stops[stop_index].Alignment).ToString(invariant_culture);
                 var position = ((int)stops[stop_index].Position).ToString(invariant_culture);
 
-                var src_tabpos = new ShapeSheet.SRC(tab_section, row, (short)(i + 1));
-                var src_tabalign = new ShapeSheet.SRC(tab_section, row, (short)(i + 2));
-                var src_tabother = new ShapeSheet.SRC(tab_section, row, (short)(i + 3));
+                var src_tabpos = new ShapeSheet.Src(tab_section, row, (short)(i + 1));
+                var src_tabalign = new ShapeSheet.Src(tab_section, row, (short)(i + 2));
+                var src_tabother = new ShapeSheet.Src(tab_section, row, (short)(i + 3));
 
                 writer.SetFormula(src_tabpos, position); // tab position
                 writer.SetFormula(src_tabalign, alignment); // tab alignment
@@ -174,7 +174,7 @@ namespace VisioAutomation.Text
             var writer = new ShapeSheetWriter();
             for (int i = 1; i < num_existing_tabstops * 3; i++)
             {
-                var src = new ShapeSheet.SRC(tab_section, (short)IVisio.VisRowIndices.visRowTab,
+                var src = new ShapeSheet.Src(tab_section, (short)IVisio.VisRowIndices.visRowTab,
                     (short)i);
                 writer.SetFormula(src, formula);
             }

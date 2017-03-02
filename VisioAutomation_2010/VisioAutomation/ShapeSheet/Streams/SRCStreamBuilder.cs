@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Streams
 {
-    public class SRCStreamBuilder : StreamBuilder<SRC>
+    public class SRCStreamBuilder : StreamBuilder<Src>
     {
         public SRCStreamBuilder() : base()
         {
@@ -14,7 +14,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         protected override short[] build_stream()
         {
-            return SRC.ToStream(this.items);
+            return Src.ToStream(this.items);
         }
     }
 }

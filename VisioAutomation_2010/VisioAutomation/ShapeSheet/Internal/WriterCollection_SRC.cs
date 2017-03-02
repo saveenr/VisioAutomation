@@ -20,7 +20,7 @@
         }
 
 
-        public void Add(SRC src, string value)
+        public void Add(Src src, string value)
         {
             this.StreamBuilder.Add(src);
             this.ValuesBuilder.Add(value);

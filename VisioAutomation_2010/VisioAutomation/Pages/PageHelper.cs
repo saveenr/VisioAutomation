@@ -8,7 +8,7 @@ namespace VisioAutomation.Pages
 {
     public static class PageHelper
     {
-        private static List<VisioAutomation.ShapeSheet.SRC> page_srcs;
+        private static List<VisioAutomation.ShapeSheet.Src> page_srcs;
 
         public static void Duplicate(
             IVisio.Page src_page,
@@ -89,7 +89,7 @@ namespace VisioAutomation.Pages
         {
             if (page_srcs == null)
             {
-                page_srcs = new List<SRC>();
+                page_srcs = new List<Src>();
 
                 page_srcs.Add(ShapeSheet.SRCConstants.PageLeftMargin);
                 page_srcs.Add(ShapeSheet.SRCConstants.CenterX);

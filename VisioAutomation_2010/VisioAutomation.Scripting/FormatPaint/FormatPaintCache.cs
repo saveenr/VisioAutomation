@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.FormatPaint
             this.Add(SRCCON.Para_TextPosAfterBullet, FormatCategory.Paragraph, "Para_TextPosAfterBullet");
         }
 
-        public void Add(VisioAutomation.ShapeSheet.SRC src, FormatCategory category, string name)
+        public void Add(VisioAutomation.ShapeSheet.Src src, FormatCategory category, string name)
         {
             var format_cell = new FormatPaintCell(src, name, category);
             this.Cells.Add(format_cell);
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.FormatPaint
             {
                 foreach (var cell in matching_cells)
                 {
-                    var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short) shape_id, cell.SRC);
+                    var sidsrc = new VisioAutomation.ShapeSheet.SidSrc((short) shape_id, cell.SRC);
                     var new_formula = applyformulas ? cell.Formula : cell.Result;
                     writer.SetFormula(sidsrc, new_formula);
                 }

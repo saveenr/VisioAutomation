@@ -1,7 +1,7 @@
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
-    public class SIDSRCStreamBuilder : StreamBuilder<SIDSRC>
+    public class SIDSRCStreamBuilder : StreamBuilder<SidSrc>
     {
         public SIDSRCStreamBuilder() : base()
         {
@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         protected override short[] build_stream()
         {
-            return SIDSRC.ToStream(this.items);
+            return SidSrc.ToStream(this.items);
         }
     }
 }

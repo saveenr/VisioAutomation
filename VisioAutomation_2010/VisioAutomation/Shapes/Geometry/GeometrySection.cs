@@ -45,11 +45,11 @@ namespace VisioAutomation.Shapes.Geometry
 
             var writer = new ShapeSheetWriter();
 
-            var src_nofill = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoFill.Cell);
-            var src_noline = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoLine.Cell);
-            var src_noshow = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoShow.Cell);
-            var src_nosnap = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoSnap.Cell);
-            var src_noquickdrag = new VA.ShapeSheet.SRC(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoQuickDrag.Cell);
+            var src_nofill = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoFill.Cell);
+            var src_noline = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoLine.Cell);
+            var src_noshow = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoShow.Cell);
+            var src_nosnap = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoSnap.Cell);
+            var src_noquickdrag = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SRCConstants.Geometry_NoQuickDrag.Cell);
 
             writer.SetFormula(src_nofill, this.NoFill);
             writer.SetFormula(src_noline, this.NoLine);

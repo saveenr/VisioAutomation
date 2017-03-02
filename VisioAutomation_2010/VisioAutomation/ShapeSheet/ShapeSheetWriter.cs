@@ -59,23 +59,23 @@ namespace VisioAutomation.ShapeSheet
             this.CommitResultRecordsByType(surface, CoordType.SIDSRC);
         }
 
-        public void SetFormula(SRC src, CellValueLiteral formula)
+        public void SetFormula(Src src, CellValueLiteral formula)
         {
             this.__SetFormulaIgnoreNull(src, formula);
         }
 
-        public void SetFormula(short id, SRC src, CellValueLiteral formula)
+        public void SetFormula(short id, Src src, CellValueLiteral formula)
         {
-            var sidsrc = new SIDSRC(id, src);
+            var sidsrc = new SidSrc(id, src);
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        public void SetFormula(SIDSRC sidsrc, CellValueLiteral formula)
+        public void SetFormula(SidSrc sidsrc, CellValueLiteral formula)
         {
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        private void __SetFormulaIgnoreNull(SRC src, CellValueLiteral formula)
+        private void __SetFormulaIgnoreNull(Src src, CellValueLiteral formula)
         {
             if (this.FormulaRecords_SRC == null)
             {
@@ -89,7 +89,7 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        private void __SetFormulaIgnoreNull(SIDSRC sidsrc, CellValueLiteral formula)
+        private void __SetFormulaIgnoreNull(SidSrc sidsrc, CellValueLiteral formula)
         {
             if (this.FormulaRecords_SIDSRC == null)
             {
@@ -127,7 +127,7 @@ namespace VisioAutomation.ShapeSheet
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void SetResult(SRC src, CellValueLiteral result)
+        public void SetResult(Src src, CellValueLiteral result)
         {
             if (this.ResultRecords_SRC == null)
             {
@@ -138,13 +138,13 @@ namespace VisioAutomation.ShapeSheet
             this.ResultRecords_SRC.ValuesBuilder.Add(result.Value);
         }
 
-        public void SetResult(short id, SRC src, CellValueLiteral result)
+        public void SetResult(short id, Src src, CellValueLiteral result)
         {
-            var sidsrc = new SIDSRC(id, src);
+            var sidsrc = new SidSrc(id, src);
             this.SetResult(sidsrc, result.Value);
         }
 
-        public void SetResult(SIDSRC sidsrc, CellValueLiteral result)
+        public void SetResult(SidSrc sidsrc, CellValueLiteral result)
         {
             if (this.ResultRecords_SIDSRC == null)
             {

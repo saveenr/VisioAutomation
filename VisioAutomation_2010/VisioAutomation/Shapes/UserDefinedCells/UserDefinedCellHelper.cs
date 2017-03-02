@@ -79,13 +79,13 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             if (value.HasValue)
             {
-                var src = new ShapeSheet.SRC(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
+                var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
                 writer.SetFormula(src, value.Encode());
             }
 
             if (prompt.HasValue)
             {
-                var src = new ShapeSheet.SRC(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
+                var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
                 writer.SetFormula(src, prompt.Encode());
             }
 

@@ -20,7 +20,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         }
 
 
-        public SRC GetSRC(string name)
+        public Src GetSRC(string name)
         {
             return this.srcmap[name];
         }

@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Columns = new SubQueryColumnCollection();
         }
 
-        public SubQueryColumn AddCell(VisioAutomation.ShapeSheet.SRC src, string name)
+        public SubQueryColumn AddCell(VisioAutomation.ShapeSheet.Src src, string name)
         {
             var col = this.Columns.Add(src.Cell, name);
             return col;

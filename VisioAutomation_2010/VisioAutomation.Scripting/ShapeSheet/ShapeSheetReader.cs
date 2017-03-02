@@ -16,9 +16,9 @@ namespace VisioAutomation.Scripting.ShapeSheet
             this.SidsrcStreamBuilder = new VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder();
         }
 
-        public void AddCell(short id, VisioAutomation.ShapeSheet.SRC src)
+        public void AddCell(short id, VisioAutomation.ShapeSheet.Src src)
         {
-            var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC(id, src);
+            var sidsrc = new VisioAutomation.ShapeSheet.SidSrc(id, src);
             this.SidsrcStreamBuilder.Add(sidsrc);
         }
 
