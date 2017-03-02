@@ -11,37 +11,37 @@ namespace VisioAutomation_Tests
             Assert.IsTrue(System.IO.File.Exists(filename));
         }
 
-        public static void AreEqual(double x, double y, VADRAW.Point actual_point, double delta)
+        public static void AreEqual( (double x, double y) expected, VADRAW.Point actual, double delta)
         {
-            Assert.AreEqual(x, actual_point.X, delta);
-            Assert.AreEqual(y, actual_point.Y, delta);
+            Assert.AreEqual(expected.x, actual.X, delta);
+            Assert.AreEqual(expected.y, actual.Y, delta);
         }
 
-        public static void AreEqual(double left, double bottom, double right, double top, VADRAW.Rectangle actual_rect, double delta)
+        public static void AreEqual( (double left, double bottom, double right, double top) expected, VADRAW.Rectangle actual_rect, double delta)
         {
-            Assert.AreEqual(left, actual_rect.Left, delta);
-            Assert.AreEqual(bottom, actual_rect.Bottom, delta);
-            Assert.AreEqual(right, actual_rect.Right, delta);
-            Assert.AreEqual(top, actual_rect.Top, delta);
+            Assert.AreEqual(expected.left, actual_rect.Left, delta);
+            Assert.AreEqual(expected.bottom, actual_rect.Bottom, delta);
+            Assert.AreEqual(expected.right, actual_rect.Right, delta);
+            Assert.AreEqual(expected.top, actual_rect.Top, delta);
         }
 
-        public static void AreEqual(double width, double height, VADRAW.Size actual_size, double delta)
+        public static void AreEqual( (double width, double height) expected, VADRAW.Size actual_size, double delta)
         {
-            Assert.AreEqual(width, actual_size.Width, delta);
-            Assert.AreEqual(height, actual_size.Height, delta);
+            Assert.AreEqual(expected.width, actual_size.Width, delta);
+            Assert.AreEqual(expected.height, actual_size.Height, delta);
         }
 
-        public static void AssertSnap(double expected_x, double expected_y, VA.Scripting.Utilities.SnappingGrid snapgrid, double input_x, double input_y, double delta)
+        public static void AssertSnap((double x, double y) expected, VA.Scripting.Utilities.SnappingGrid snapgrid, (double x, double y) input, double delta)
         {
-            var snapped = snapgrid.Snap(input_x, input_y);
-            Assert.AreEqual(expected_x, snapped.X, delta);
-            Assert.AreEqual(expected_y, snapped.Y, delta);
+            var snapped = snapgrid.Snap(input.x, input.y);
+            Assert.AreEqual(expected.x, snapped.X, delta);
+            Assert.AreEqual(expected.y, snapped.Y, delta);
         }
 
-        public static void AreEqual<TResult>(string formula, TResult result, string actual_formula, TResult actual_result)
+        public static void AreEqual<TResult>( (string formula, TResult result) expected, (string formula, TResult result) actual)
         {
-            Assert.AreEqual(formula, actual_formula);
-            Assert.AreEqual(result, actual_result);
+            Assert.AreEqual(expected.formula, actual.formula);
+            Assert.AreEqual(expected.result, actual.result);
         }
     }
 }

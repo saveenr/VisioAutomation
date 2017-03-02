@@ -119,9 +119,9 @@ namespace VisioAutomation_Tests.Scripting
             var shapeids = new[] { s1.ID, s2.ID, s3.ID };
             var xforms = VisioAutomation.Shapes.XFormCells.GetCells(client.Page.Get(), shapeids);
 
-            AssertUtil.AreEqual(1.75, 1, xforms[0].GetPinPosResult(), 0.00001);
-            AssertUtil.AreEqual(3, 2.25, xforms[1].GetPinPosResult(), 0.00001);
-            AssertUtil.AreEqual(5.25, 4.5, xforms[2].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual( (1.75, 1), xforms[0].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual( (3, 2.25), xforms[1].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual( (5.25, 4.5), xforms[2].GetPinPosResult(), 0.00001);
             client.Document.Close(true);
         }
     }
