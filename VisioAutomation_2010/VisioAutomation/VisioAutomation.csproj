@@ -205,7 +205,7 @@
     <Compile Include="ShapeSheet\SidSrc.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Utilities\Convert.cs" />
-    <Compile Include="ShapeSheet\SRCConstants.cs" />
+    <Compile Include="ShapeSheet\SrcConstants.cs" />
     <Compile Include="ShapeSheet\Src.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointCells.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellHelper.cs" />
