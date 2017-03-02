@@ -89,6 +89,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
+        public QueryOutput<ShapeSheet.CellData> GetFormulasAndResults(IVisio.Shape shape)
+        {
+            var surface = new ShapeSheetSurface(shape);
+            return this.GetFormulasAndResults(surface);
+        }
+
         public QueryOutput<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface)
         {
             RestrictToShapesOnly(surface);

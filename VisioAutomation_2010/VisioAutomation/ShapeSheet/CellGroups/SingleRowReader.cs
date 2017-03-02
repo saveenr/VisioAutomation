@@ -35,8 +35,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public TCellGroup GetCellGroup(IVisio.Shape shape)
         {
             validate_query();
-            var surface = new ShapeSheetSurface(shape);
-            var data_for_shape = this.query.GetFormulasAndResults(surface);
+            var data_for_shape = this.query.GetFormulasAndResults(shape);
             var cells = this.CellDataToCellGroup(data_for_shape.Cells);
             return cells;
         }

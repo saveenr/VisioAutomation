@@ -166,8 +166,7 @@ namespace VisioAutomation.Pages
             var col_height = query.AddCell(ShapeSheet.SrcConstants.PageHeight,"PageHeight");
             var col_width = query.AddCell(ShapeSheet.SrcConstants.PageWidth,"PageWidth");
 
-            var page_surface = new ShapeSheetSurface(page.PageSheet);
-            var results = query.GetResults<double>(page_surface);
+            var results = query.GetResults<double>(page.PageSheet);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];
             var s = new Drawing.Size(width, height);
