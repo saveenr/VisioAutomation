@@ -32,8 +32,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            writer.Commit(surface);
+            writer.Commit(page);
         }
 
         public void SetName(TargetShapes targets, IList<string> names)

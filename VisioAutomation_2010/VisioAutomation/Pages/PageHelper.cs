@@ -61,8 +61,8 @@ namespace VisioAutomation.Pages
                 query.AddCell(src,"Col"+i.ToString());
                 i++;
             }
-            var src_surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(src_page.PageSheet);
-            var src_formulas = query.GetFormulas(src_surface);
+
+            var src_formulas = query.GetFormulas(src_page.PageSheet);
 
             // Set the Cells on the Destination
            
@@ -72,8 +72,7 @@ namespace VisioAutomation.Pages
                 writer.SetFormula(page_srcs[i],src_formulas.Cells[i]);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(dest_page.PageSheet);
-            writer.Commit(surface);
+            writer.Commit(dest_page.PageSheet);
 
             // make sure the new page looks like the old page
             dest_page.Background = src_page.Background;
@@ -167,8 +166,7 @@ namespace VisioAutomation.Pages
             var col_height = query.AddCell(ShapeSheet.SrcConstants.PageHeight,"PageHeight");
             var col_width = query.AddCell(ShapeSheet.SrcConstants.PageWidth,"PageWidth");
 
-            var page_surface = new ShapeSheetSurface(page.PageSheet);
-            var results = query.GetResults<double>(page_surface);
+            var results = query.GetResults<double>(page.PageSheet);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];
             var s = new Drawing.Size(width, height);
@@ -181,8 +179,7 @@ namespace VisioAutomation.Pages
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page.PageSheet);
-            writer.Commit(surface);
+            writer.Commit(page.PageSheet);
         }        
 
         public static short[] DropManyAutoConnectors(

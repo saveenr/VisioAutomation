@@ -118,8 +118,7 @@ namespace VisioAutomation.Scripting.Commands
                     }
                 }
 
-                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-                writer.Commit(surface);
+                writer.Commit(page);
             }
         }
 
@@ -201,9 +200,8 @@ namespace VisioAutomation.Scripting.Commands
                 writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TxtPinY, "Height*0");
                 writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.VerticalAlign, "0");
             }
-            var active_page = application.ActivePage;
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page);
-            writer.Commit(surface);
+
+            writer.Commit(application.ActivePage);
         }
 
         public void SetTextWrapping(TargetShapes targets, bool wrap)
@@ -269,8 +267,7 @@ namespace VisioAutomation.Scripting.Commands
                     writer.SetFormula((short)shapeid, src_height, new_size.Height);
                 }
 
-                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page);
-                writer.Commit(surface);
+                writer.Commit(active_page);
             }
         }
     }

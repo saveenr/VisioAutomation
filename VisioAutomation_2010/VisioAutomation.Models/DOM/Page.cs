@@ -75,8 +75,7 @@ namespace VisioAutomation.Models.Dom
 
                 var writer = new ShapeSheetWriter();
                 this.PageCells.SetFormulas((short)page_sheet.ID, writer);
-                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-                writer.Commit(surface);
+                writer.Commit(page);
                 
                 // Then render the shapes
                 this.Shapes.Render(page);

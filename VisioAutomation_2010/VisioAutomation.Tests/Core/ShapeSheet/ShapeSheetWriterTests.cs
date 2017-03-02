@@ -32,8 +32,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.SetFormula(shape3.ID16, ShapeSheetWriterTests.src_pinx, 2.5);
             writer.SetFormula(shape3.ID16, ShapeSheetWriterTests.src_piny, 2.5);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
-            writer.Commit(surface);
+            writer.Commit(page1);
 
             // Verify that the formulas were set
             var query = new ShapeSheetQuery();
@@ -42,15 +41,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var data_formulas = query.GetFormulas(surface, shapeids);
-            var data_results = query.GetResults<double>(surface, shapeids);
+            var data_formulas = query.GetFormulas(page1, shapeids);
+            var data_results = query.GetResults<double>(page1, shapeids);
 
-            AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_pinx], data_results[0].Cells[col_pinx]);
-            AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_piny], data_results[0].Cells[col_piny]);
-            AssertUtil.AreEqual("1.5 in", 1.5, data_formulas[1].Cells[col_pinx], data_results[1].Cells[col_pinx]);
-            AssertUtil.AreEqual("1.5 in", 1.5, data_formulas[1].Cells[col_piny], data_results[1].Cells[col_piny]);
-            AssertUtil.AreEqual("2.5 in", 2.5, data_formulas[2].Cells[col_pinx], data_results[2].Cells[col_pinx]);
-            AssertUtil.AreEqual("2.5 in", 2.5, data_formulas[2].Cells[col_piny], data_results[2].Cells[col_piny]);
+            AssertUtil.AreEqual(("0.5 in", 0.5), (data_formulas[0].Cells[col_pinx], data_results[0].Cells[col_pinx]));
+            AssertUtil.AreEqual(("0.5 in", 0.5), (data_formulas[0].Cells[col_piny], data_results[0].Cells[col_piny]));
+            AssertUtil.AreEqual(("1.5 in", 1.5), (data_formulas[1].Cells[col_pinx], data_results[1].Cells[col_pinx]));
+            AssertUtil.AreEqual(("1.5 in", 1.5), (data_formulas[1].Cells[col_piny], data_results[1].Cells[col_piny]));
+            AssertUtil.AreEqual(("2.5 in", 2.5), (data_formulas[2].Cells[col_pinx], data_results[2].Cells[col_pinx]));
+            AssertUtil.AreEqual(("2.5 in", 2.5), (data_formulas[2].Cells[col_piny], data_results[2].Cells[col_piny]));
 
             page1.Delete(0);
         }
@@ -65,16 +64,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, 7);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
-            writer.Commit(surface);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new ShapeSheetQuery();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat,"LinePattern");
 
             // Retrieve the values
-            var data_formulas = query.GetFormulas(surface);
-            var data_results = query.GetResults<double>(surface);
+            var data_formulas = query.GetFormulas(shape1);
+            var data_results = query.GetResults<double>(shape1);
 
             // Verify
             Assert.AreEqual("7", data_formulas.Cells[col_linepat]);
@@ -90,8 +88,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Setup the modifications to the cell values
             var writer = new ShapeSheetWriter();
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
-            writer.Commit(surface);
+            writer.Commit(shape1);
 
             page1.Delete(0);
         }
@@ -105,16 +102,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Setup the modifications to the cell values
             var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7");
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
-            writer.Commit(surface);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new ShapeSheetQuery();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
 
             // Retrieve the values
-            var data_formulas = query.GetFormulas(surface);
-            var data_results = query.GetResults<double>(surface);
+            var data_formulas = query.GetFormulas(shape1);
+            var data_results = query.GetResults<double>(shape1);
 
             // Verify
             Assert.AreEqual("7", data_formulas.Cells[col_linepat]);
@@ -141,9 +137,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.SetResult( shape3.ID16, src_pinx, 2.5);
             writer.SetResult( shape3.ID16, src_piny, 2.5);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
-
-            writer.Commit(surface);
+            writer.Commit(page1);
 
             // Verify that the formulas were set
             var query = new ShapeSheetQuery();
@@ -152,15 +146,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var data_formulas = query.GetFormulas(surface, shapeids);
-            var data_results = query.GetResults<double>(surface, shapeids);
+            var data_formulas = query.GetFormulas(page1, shapeids);
+            var data_results = query.GetResults<double>(page1, shapeids);
 
-            AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_pinx], data_results[0].Cells[col_pinx]);
-            AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_piny], data_results[0].Cells[col_piny]);
-            AssertUtil.AreEqual("1.5 in", 1.5, data_formulas[1].Cells[col_pinx], data_results[1].Cells[col_pinx]);
-            AssertUtil.AreEqual("1.5 in", 1.5, data_formulas[1].Cells[col_piny], data_results[1].Cells[col_piny]);
-            AssertUtil.AreEqual("2.5 in", 2.5, data_formulas[2].Cells[col_pinx], data_results[2].Cells[col_pinx]);
-            AssertUtil.AreEqual("2.5 in", 2.5, data_formulas[2].Cells[col_piny], data_results[2].Cells[col_piny]);
+            AssertUtil.AreEqual(("0.5 in", 0.5), (data_formulas[0].Cells[col_pinx], data_results[0].Cells[col_pinx]));
+            AssertUtil.AreEqual(("0.5 in", 0.5), (data_formulas[0].Cells[col_piny], data_results[0].Cells[col_piny]));
+            AssertUtil.AreEqual(("1.5 in", 1.5), (data_formulas[1].Cells[col_pinx], data_results[1].Cells[col_pinx]));
+            AssertUtil.AreEqual(("1.5 in", 1.5), (data_formulas[1].Cells[col_piny], data_results[1].Cells[col_piny]));
+            AssertUtil.AreEqual(("2.5 in", 2.5), (data_formulas[2].Cells[col_pinx], data_results[2].Cells[col_pinx]));
+            AssertUtil.AreEqual(("2.5 in", 2.5), (data_formulas[2].Cells[col_piny], data_results[2].Cells[col_piny]));
 
             page1.Delete(0);
         }
@@ -182,8 +176,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7");
             writer.SetResult(VA.ShapeSheet.SrcConstants.PinX, 2);
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
-            writer.Commit(surface);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new ShapeSheetQuery();
@@ -191,8 +184,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.PinX, "PinX");
 
             // Retrieve the values
-            var data_formulas = query.GetFormulas(surface);
-            var data_results = query.GetResults<double>(surface);
+            var data_formulas = query.GetFormulas(shape1);
+            var data_results = query.GetResults<double>(shape1);
 
             // Verify
             Assert.AreEqual("7", data_formulas.Cells[col_linepat]);

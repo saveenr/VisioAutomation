@@ -25,8 +25,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             validate_query();
 
-            var surface = new ShapeSheetSurface(page);
-            var data_for_shapes = this.query.GetFormulasAndResults(surface, shapeids);
+            var data_for_shapes = this.query.GetFormulasAndResults(page, shapeids);
             var list = new List<TCellGroup>(shapeids.Count);
             var objects = data_for_shapes.Select(d => this.CellDataToCellGroup(d.Cells));
             list.AddRange(objects);
@@ -36,8 +35,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public TCellGroup GetCellGroup(IVisio.Shape shape)
         {
             validate_query();
-            var surface = new ShapeSheetSurface(shape);
-            var data_for_shape = this.query.GetFormulasAndResults(surface);
+            var data_for_shape = this.query.GetFormulasAndResults(shape);
             var cells = this.CellDataToCellGroup(data_for_shape.Cells);
             return cells;
         }

@@ -106,11 +106,9 @@ namespace VisioAutomation.Scripting.Commands
                 lockcells.SetFormulas((short)shapeid, writer);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-
             using (var undoscope = this._client.Application.NewUndoScope("Set Lock Properties"))
             {
-                writer.Commit(surface);
+                writer.Commit(page);
             }
         }
 
@@ -140,11 +138,9 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page);
-
             using (var undoscope = this._client.Application.NewUndoScope("Set Shape Size"))
             {
-                writer.Commit(surface);
+                writer.Commit(active_page);
             }
         }
     }

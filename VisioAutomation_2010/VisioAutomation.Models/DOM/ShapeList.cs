@@ -125,8 +125,7 @@ namespace VisioAutomation.Models.Dom
                 fmt.Apply(writer, id);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(context.VisioPage);
-            writer.Commit(surface);
+            writer.Commit(context.VisioPage);
         }
 
         private void PerformDrawing(RenderContext context)

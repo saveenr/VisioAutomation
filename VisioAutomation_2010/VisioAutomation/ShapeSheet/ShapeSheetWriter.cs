@@ -51,6 +51,18 @@ namespace VisioAutomation.ShapeSheet
             return (IVisio.VisGetSetArgs)flags;
         }
 
+        public void Commit(IVisio.Shape shape)
+        {
+            var surface = new ShapeSheetSurface(shape);
+            this.Commit(surface);
+        }
+
+        public void Commit(IVisio.Page page)
+        {
+            var surface = new ShapeSheetSurface(page);
+            this.Commit(surface);
+        }
+
         public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
             this.CommitFormulaRecordsByType(surface, CoordType.Src);

@@ -183,9 +183,8 @@ namespace VisioAutomation.Models.Layouts.Container
                 this.LayoutOptions.ContainerItemFormatting.Apply(writer, item.ShapeID, item.ShapeID);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
             writer.BlastGuards = true;
-            writer.Commit(surface);
+            writer.Commit(page);
 
             // Set the Container Text
             foreach (var ct in this.Containers)
@@ -219,8 +218,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.Height, rects[i].Height);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            writer.Commit(surface);
+            writer.Commit(page);
 
             return shapeids;
         }
