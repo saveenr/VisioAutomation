@@ -4,11 +4,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupBase
     {
-        protected SRCFormulaPair newpair(ShapeSheet.Src src, ShapeSheet.CellValueLiteral formula)
+        protected SrcFormulaPair newpair(ShapeSheet.Src src, ShapeSheet.CellValueLiteral formula)
         {
-            return new SRCFormulaPair(src, formula);
+            return new SrcFormulaPair(src, formula);
         }
 
-        public abstract IEnumerable<SRCFormulaPair> SRCFormulaPairs { get; }
+        public abstract IEnumerable<SrcFormulaPair> SrcFormulaPairs { get; }
     }
 }

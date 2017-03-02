@@ -74,7 +74,7 @@ namespace VisioAutomation.Pages
         public ShapeSheet.CellData AvoidPageBreaks { get; set; } // new in visio 2010
         public ShapeSheet.CellData DrawingResizeType { get; set; } // new in visio 2010
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {

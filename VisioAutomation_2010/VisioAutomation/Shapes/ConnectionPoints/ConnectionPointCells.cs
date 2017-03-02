@@ -12,7 +12,7 @@ namespace VisioAutomation.Shapes.ConnectionPoints
         public ShapeSheet.CellData DirY { get; set; }
         public ShapeSheet.CellData Type { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {

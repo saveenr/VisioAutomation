@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes
         public ShapeSheet.CellData LineWeight { get; set; }
         public ShapeSheet.CellData Rounding { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {

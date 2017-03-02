@@ -101,7 +101,7 @@ namespace VisioAutomation.Scripting.FormatPaint
 
             foreach (var cell in desired_cells)
             {
-                query.AddCell(cell.SRC, null);
+                query.AddCell(cell.Src, null);
             }
 
             // Retrieve the values for the cells
@@ -132,7 +132,7 @@ namespace VisioAutomation.Scripting.FormatPaint
             {
                 foreach (var cell in matching_cells)
                 {
-                    var sidsrc = new VisioAutomation.ShapeSheet.SidSrc((short) shape_id, cell.SRC);
+                    var sidsrc = new VisioAutomation.ShapeSheet.SidSrc((short) shape_id, cell.Src);
                     var new_formula = applyformulas ? cell.Formula : cell.Result;
                     writer.SetFormula(sidsrc, new_formula);
                 }

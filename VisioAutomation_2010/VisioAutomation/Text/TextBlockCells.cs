@@ -16,7 +16,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData TextDirection { get; set; }
         public ShapeSheet.CellData VerticalAlign { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {

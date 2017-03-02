@@ -3,7 +3,7 @@
     public class FormatPaintCell
     {
         public FormatCategory Category { get; }
-        public VisioAutomation.ShapeSheet.Src SRC { get; private set; }
+        public VisioAutomation.ShapeSheet.Src Src { get; private set; }
         public string Name;
 
         public string Result { get; set; }
@@ -13,7 +13,7 @@
         {
             this.Category = category;
             this.Name = name;
-            this.SRC = src;
+            this.Src = src;
             this.Formula = null;
             this.Result = null;
         }

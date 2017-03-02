@@ -28,7 +28,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData Strikethru { get; set; }
         public ShapeSheet.CellData UseVertical { get; set; }
 
-        public override IEnumerable<VisioAutomation.ShapeSheet.CellGroups.SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair> SrcFormulaPairs
         {
             get
             {

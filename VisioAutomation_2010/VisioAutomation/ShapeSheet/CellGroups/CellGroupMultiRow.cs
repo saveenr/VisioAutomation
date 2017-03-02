@@ -4,18 +4,18 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         public void SetFormulas(short shapeid, ShapeSheetWriter writer, short row)
         {
-            foreach (var pair in this.SRCFormulaPairs)
+            foreach (var pair in this.SrcFormulaPairs)
             {
-                var new_src = pair.SRC.CloneWithNewRow(row);
+                var new_src = pair.Src.CloneWithNewRow(row);
                 writer.SetFormula(shapeid, new_src, pair.Formula);
             }
         }
 
         public void SetFormulas(ShapeSheetWriter writer, short row)
         {
-            foreach (var pair in this.SRCFormulaPairs)
+            foreach (var pair in this.SrcFormulaPairs)
             {
-                var new_src = pair.SRC.CloneWithNewRow(row);
+                var new_src = pair.Src.CloneWithNewRow(row);
                 writer.SetFormula(new_src, pair.Formula);
             }
         }

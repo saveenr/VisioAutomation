@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (this.items.Contains(src))
             {
-                string msg = string.Format("Duplicate SRC({0},{1},{2})", src.Section, src.Row, src.Cell);
+                string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Src),src.Section, src.Row, src.Cell);
                 throw new System.ArgumentException(msg);
             }
         }

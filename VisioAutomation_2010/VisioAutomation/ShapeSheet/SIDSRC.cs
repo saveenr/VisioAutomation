@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet
             return sidsrcstream;
         }
 
-        public Src SRC
+        public Src Src
         {
             get { return new Src(this.Section, this.Row, this.Cell); }
         }

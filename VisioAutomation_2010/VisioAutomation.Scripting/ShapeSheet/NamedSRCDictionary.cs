@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Scripting.ShapeSheet
 {
-    public class NamedSRCDictionary : NameDictionary<Src>
+    public class NamedSrcDictionary : NameDictionary<Src>
     {
         public ShapeSheetQuery ToQuery(IList<string> Cells)
         {

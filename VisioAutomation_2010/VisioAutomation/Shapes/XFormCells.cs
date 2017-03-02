@@ -14,7 +14,7 @@ namespace VisioAutomation.Shapes
         public ShapeSheet.CellData Height { get; set; }
         public ShapeSheet.CellData Angle { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {

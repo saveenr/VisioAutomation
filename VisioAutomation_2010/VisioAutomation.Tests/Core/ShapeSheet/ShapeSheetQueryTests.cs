@@ -412,13 +412,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             return can_skip;
         }
 
-        public static Dictionary<string, Src> GetSRCDictionary()
+        public static Dictionary<string, Src> GetSrcDictionary()
         {
             var srcconstants_t = typeof(SrcConstants);
 
             var binding_flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static;
 
-            // find all the static properties that return SRC types
+            // find all the static properties that return Src types
             var src_type = typeof(Src);
             var props = srcconstants_t.GetProperties(binding_flags)
                 .Where(p => p.PropertyType == src_type);
@@ -468,8 +468,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         {
             var query = new ShapeSheetQuery();
 
-            // Dictionary of Cell Names to SRCs (excluding invalid sections)
-            var name_to_src = GetSRCDictionary();
+            // Dictionary of Cell Names to Srcs (excluding invalid sections)
+            var name_to_src = GetSrcDictionary();
             name_to_src = name_to_src.Where(pair => !section_is_skippable(pair.Value))
                 .ToDictionary(pair => pair.Key, pair => pair.Value);
 

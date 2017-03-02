@@ -258,7 +258,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numcells = this._get_total_cell_count(numshapes);
             var stream = new VisioAutomation.ShapeSheet.Streams.FixedSrcStreamBuilder(numcells);
             var cellinfos = this.enum_cellinfo(dummy_shapeid, shapeindex);
-            var srcs = cellinfos.Select(i => i.SidSrc.SRC);
+            var srcs = cellinfos.Select(i => i.SidSrc.Src);
             stream.AddRange(srcs);
 
             return stream.ToStream();
@@ -289,7 +289,7 @@ namespace VisioAutomation.ShapeSheet.Query
             // enum Cells
             foreach (var col in this.Cells)
             {
-                var sidsrc = new SidSrc((short)shapeid, col.SRC);
+                var sidsrc = new SidSrc((short)shapeid, col.Src);
 
                 var cellinfo = new Internal.QueryCellInfo(sidsrc,col);
                 yield return cellinfo;

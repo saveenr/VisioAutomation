@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes.Hyperlinks
         public ShapeSheet.CellData Default { get; set; }
         public ShapeSheet.CellData Invisible { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {

@@ -1,13 +1,13 @@
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public struct SRCFormulaPair
+    public struct SrcFormulaPair
     {
-        public readonly ShapeSheet.Src SRC;
+        public readonly ShapeSheet.Src Src;
         public readonly ShapeSheet.CellValueLiteral Formula;
 
-        public SRCFormulaPair(ShapeSheet.Src src, ShapeSheet.CellValueLiteral formula)
+        public SrcFormulaPair(ShapeSheet.Src src, ShapeSheet.CellValueLiteral formula)
         {
-            this.SRC = src;
+            this.Src = src;
             this.Formula = formula;
         }
     }

@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheet
 
         public Src CloneWithNewRow(short row)
         {
-            // SRC that has a different row index. Very common scenario
+            // Src that has a different row index. Very common scenario
             return new Src(this.Section, row, this.Cell);
         }
 

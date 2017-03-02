@@ -107,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForPages();
+            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSrcDictionary.GetCellMapForPages();
             var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
                 foreach (var cellname in valuemap.Keys)
                 {
                     string cell_value = valuemap[cellname];
-                    var cell_src = valuemap.GetSRC(cellname);
+                    var cell_src = valuemap.GetSrc(cellname);
                     writer.SetFormula((short)shape_id, cell_src, cell_value);
                 }
             }
@@ -147,7 +147,7 @@ namespace VisioAutomation.Scripting.Commands
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForShapes();
+            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSrcDictionary.GetCellMapForShapes();
             var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
@@ -155,7 +155,7 @@ namespace VisioAutomation.Scripting.Commands
                 foreach (var cellname in valuemap.Keys)
                 {
                     string cell_value = valuemap[cellname];
-                    var cell_src = valuemap.GetSRC(cellname);
+                    var cell_src = valuemap.GetSrc(cellname);
                     writer.SetFormula((short)shape_id, cell_src, cell_value);
                 }
             }
