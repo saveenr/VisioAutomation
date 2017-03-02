@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting
 
         public System.Reflection.Assembly GetVisioAutomationAssembly()
         {
-            var type = typeof(VisioAutomation.ShapeSheet.SRC);
+            var type = typeof(VisioAutomation.ShapeSheet.Src);
             var asm = type.Assembly;
             return asm;
         }

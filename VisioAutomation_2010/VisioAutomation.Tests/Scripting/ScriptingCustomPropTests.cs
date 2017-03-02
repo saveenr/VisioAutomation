@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.Scripting
 
             foreach (var shape_id in shape_ids.ShapeIDs)
             {
-                writer.SetFormula( (short) shape_id, VA.ShapeSheet.SRCConstants.PinX, "1.0");
+                writer.SetFormula( (short) shape_id, VA.ShapeSheet.SrcConstants.PinX, "1.0");
             }
 
             writer.Commit();

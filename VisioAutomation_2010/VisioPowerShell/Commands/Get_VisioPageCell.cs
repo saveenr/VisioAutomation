@@ -24,7 +24,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSRCDictionary.GetCellMapForPages();
+            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSrcDictionary.GetCellMapForPages();
 
             if (this.Cells == null || this.Cells.Length < 1 || this.Cells.Contains("*"))
             {

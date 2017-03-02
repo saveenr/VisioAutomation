@@ -4,12 +4,12 @@ namespace VisioAutomation.ShapeSheet.Internal
 {
     internal struct QueryCellInfo
     {
-        public SIDSRC SIDSRC;
+        public SidSrc SidSrc;
         public ColumnBase Column;
 
-        public QueryCellInfo(SIDSRC sidsrc, ColumnBase col)
+        public QueryCellInfo(SidSrc sidsrc, ColumnBase col)
         {
-            this.SIDSRC = sidsrc;
+            this.SidSrc = sidsrc;
             this.Column = col;
         }
     }

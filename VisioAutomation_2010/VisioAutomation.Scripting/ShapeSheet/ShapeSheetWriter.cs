@@ -15,9 +15,9 @@
             this.writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
         }
 
-        public void SetFormula(short id, VisioAutomation.ShapeSheet.SRC src, string formula)
+        public void SetFormula(short id, VisioAutomation.ShapeSheet.Src src, string formula)
         {
-            var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC(id, src);
+            var sidsrc = new VisioAutomation.ShapeSheet.SidSrc(id, src);
             this.writer.SetFormula(sidsrc, formula);
         }
 

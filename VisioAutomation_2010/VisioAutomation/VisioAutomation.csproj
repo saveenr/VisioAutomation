@@ -75,6 +75,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Logging\LoggingHelper.cs" />
     <Compile Include="Application\Logging\XmlErrorLog.cs" />
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
@@ -99,19 +100,19 @@
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
     <Compile Include="ShapeSheet\Internal\CoordType.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
-    <Compile Include="ShapeSheet\Streams\FixedSIDSRCStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\FixedSRCStreamBuilder.cs" />
+    <Compile Include="ShapeSheet\Streams\FixedSidSrcStreamBuilder.cs" />
+    <Compile Include="ShapeSheet\Streams\FixedSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\FixedStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Internal\WriterCollection_SIDSRC.cs" />
-    <Compile Include="ShapeSheet\Internal\WriterCollection_SRC.cs" />
+    <Compile Include="ShapeSheet\Internal\WriterCollection_SidSrc.cs" />
+    <Compile Include="ShapeSheet\Internal\WriterCollection_Src.cs" />
     <Compile Include="Utilities\ArraySegmentReader.cs" />
     <Compile Include="Utilities\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryOutputRowCollection.cs" />
     <Compile Include="ShapeSheet\Internal\ObjectArrayBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\SIDSRCStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\SRCStreamBuilder.cs" />
+    <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
+    <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilderBase.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnCollectionBase.cs" />
@@ -201,11 +202,11 @@
     <Compile Include="Drawing\ColorRGB.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
-    <Compile Include="ShapeSheet\SIDSRC.cs" />
+    <Compile Include="ShapeSheet\SidSrc.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Utilities\Convert.cs" />
-    <Compile Include="ShapeSheet\SRCConstants.cs" />
-    <Compile Include="ShapeSheet\SRC.cs" />
+    <Compile Include="ShapeSheet\SrcConstants.cs" />
+    <Compile Include="ShapeSheet\Src.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointCells.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellHelper.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCell.cs" />

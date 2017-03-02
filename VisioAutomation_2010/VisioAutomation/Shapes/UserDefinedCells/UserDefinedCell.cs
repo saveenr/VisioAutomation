@@ -47,12 +47,12 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             this.Prompt = prompt;
         }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SRCConstants.User_Value, this.Value.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.User_Prompt, this.Prompt.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.User_Value, this.Value.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.User_Prompt, this.Prompt.Formula);
             }
         }
 

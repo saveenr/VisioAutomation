@@ -1,6 +1,6 @@
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.ConnectionPoints
@@ -17,11 +17,11 @@ namespace VisioAutomation.Shapes.ConnectionPoints
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionConnectionPts);
 
-            this.DirX = sec.AddCell(SRCCON.Connections_DirX, nameof(SRCCON.Connections_DirX));
-            this.DirY = sec.AddCell(SRCCON.Connections_DirY, nameof(SRCCON.Connections_DirY));
-            this.Type = sec.AddCell(SRCCON.Connections_Type, nameof(SRCCON.Connections_Type));
-            this.X = sec.AddCell(SRCCON.Connections_X, nameof(SRCCON.Connections_X));
-            this.Y = sec.AddCell(SRCCON.Connections_Y, nameof(SRCCON.Connections_Y));
+            this.DirX = sec.AddCell(SrcConstants.Connections_DirX, nameof(SrcConstants.Connections_DirX));
+            this.DirY = sec.AddCell(SrcConstants.Connections_DirY, nameof(SrcConstants.Connections_DirY));
+            this.Type = sec.AddCell(SrcConstants.Connections_Type, nameof(SrcConstants.Connections_Type));
+            this.X = sec.AddCell(SrcConstants.Connections_X, nameof(SrcConstants.Connections_X));
+            this.Y = sec.AddCell(SrcConstants.Connections_Y, nameof(SrcConstants.Connections_Y));
 
         }
 

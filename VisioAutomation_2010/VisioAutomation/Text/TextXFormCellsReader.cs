@@ -16,13 +16,13 @@ namespace VisioAutomation.Text
 
         public TextXFormCellsReader()
         {
-            this.TxtPinX = this.query.AddCell(SRCConstants.TxtPinX, nameof(SRCConstants.TxtPinX));
-            this.TxtPinY = this.query.AddCell(SRCConstants.TxtPinY, nameof(SRCConstants.TxtPinY));
-            this.TxtLocPinX = this.query.AddCell(SRCConstants.TxtLocPinX, nameof(SRCConstants.TxtLocPinX));
-            this.TxtLocPinY = this.query.AddCell(SRCConstants.TxtLocPinY, nameof(SRCConstants.TxtLocPinY));
-            this.TxtWidth = this.query.AddCell(SRCConstants.TxtWidth, nameof(SRCConstants.TxtWidth));
-            this.TxtHeight = this.query.AddCell(SRCConstants.TxtHeight, nameof(SRCConstants.TxtHeight));
-            this.TxtAngle = this.query.AddCell(SRCConstants.TxtAngle, nameof(SRCConstants.TxtAngle));
+            this.TxtPinX = this.query.AddCell(SrcConstants.TxtPinX, nameof(SrcConstants.TxtPinX));
+            this.TxtPinY = this.query.AddCell(SrcConstants.TxtPinY, nameof(SrcConstants.TxtPinY));
+            this.TxtLocPinX = this.query.AddCell(SrcConstants.TxtLocPinX, nameof(SrcConstants.TxtLocPinX));
+            this.TxtLocPinY = this.query.AddCell(SrcConstants.TxtLocPinY, nameof(SrcConstants.TxtLocPinY));
+            this.TxtWidth = this.query.AddCell(SrcConstants.TxtWidth, nameof(SrcConstants.TxtWidth));
+            this.TxtHeight = this.query.AddCell(SrcConstants.TxtHeight, nameof(SrcConstants.TxtHeight));
+            this.TxtAngle = this.query.AddCell(SrcConstants.TxtAngle, nameof(SrcConstants.TxtAngle));
 
         }
 

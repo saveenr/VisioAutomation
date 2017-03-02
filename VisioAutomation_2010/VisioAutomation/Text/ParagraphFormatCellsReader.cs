@@ -1,6 +1,6 @@
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
-using SRCCON=VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
@@ -25,20 +25,20 @@ namespace VisioAutomation.Text
         public ParagraphFormatCellsReader()
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionParagraph);
-            this.Bullet = sec.AddCell(SRCCON.Para_Bullet, nameof(SRCCON.Para_Bullet));
-            this.BulletFont = sec.AddCell(SRCCON.Para_BulletFont, nameof(SRCCON.Para_BulletFont));
-            this.BulletFontSize = sec.AddCell(SRCCON.Para_BulletFontSize, nameof(SRCCON.Para_BulletFontSize));
-            this.BulletString = sec.AddCell(SRCCON.Para_BulletStr, nameof(SRCCON.Para_BulletStr));
-            this.Flags = sec.AddCell(SRCCON.Para_Flags, nameof(SRCCON.Para_Flags));
-            this.HorzAlign = sec.AddCell(SRCCON.Para_HorzAlign, nameof(SRCCON.Para_HorzAlign));
-            this.IndentFirst = sec.AddCell(SRCCON.Para_IndFirst, nameof(SRCCON.Para_IndFirst));
-            this.IndentLeft = sec.AddCell(SRCCON.Para_IndLeft, nameof(SRCCON.Para_IndLeft));
-            this.IndentRight = sec.AddCell(SRCCON.Para_IndRight, nameof(SRCCON.Para_IndRight));
-            this.LocalizeBulletFont = sec.AddCell(SRCCON.Para_LocalizeBulletFont, nameof(SRCCON.Para_LocalizeBulletFont));
-            this.SpaceAfter = sec.AddCell(SRCCON.Para_SpAfter, nameof(SRCCON.Para_SpAfter));
-            this.SpaceBefore = sec.AddCell(SRCCON.Para_SpBefore, nameof(SRCCON.Para_SpBefore));
-            this.SpaceLine = sec.AddCell(SRCCON.Para_SpLine, nameof(SRCCON.Para_SpLine));
-            this.TextPosAfterBullet = sec.AddCell(SRCCON.Para_TextPosAfterBullet, nameof(SRCCON.Para_TextPosAfterBullet));
+            this.Bullet = sec.AddCell(SrcConstants.Para_Bullet, nameof(SrcConstants.Para_Bullet));
+            this.BulletFont = sec.AddCell(SrcConstants.Para_BulletFont, nameof(SrcConstants.Para_BulletFont));
+            this.BulletFontSize = sec.AddCell(SrcConstants.Para_BulletFontSize, nameof(SrcConstants.Para_BulletFontSize));
+            this.BulletString = sec.AddCell(SrcConstants.Para_BulletStr, nameof(SrcConstants.Para_BulletStr));
+            this.Flags = sec.AddCell(SrcConstants.Para_Flags, nameof(SrcConstants.Para_Flags));
+            this.HorzAlign = sec.AddCell(SrcConstants.Para_HorzAlign, nameof(SrcConstants.Para_HorzAlign));
+            this.IndentFirst = sec.AddCell(SrcConstants.Para_IndFirst, nameof(SrcConstants.Para_IndFirst));
+            this.IndentLeft = sec.AddCell(SrcConstants.Para_IndLeft, nameof(SrcConstants.Para_IndLeft));
+            this.IndentRight = sec.AddCell(SrcConstants.Para_IndRight, nameof(SrcConstants.Para_IndRight));
+            this.LocalizeBulletFont = sec.AddCell(SrcConstants.Para_LocalizeBulletFont, nameof(SrcConstants.Para_LocalizeBulletFont));
+            this.SpaceAfter = sec.AddCell(SrcConstants.Para_SpAfter, nameof(SrcConstants.Para_SpAfter));
+            this.SpaceBefore = sec.AddCell(SrcConstants.Para_SpBefore, nameof(SrcConstants.Para_SpBefore));
+            this.SpaceLine = sec.AddCell(SrcConstants.Para_SpLine, nameof(SrcConstants.Para_SpLine));
+            this.TextPosAfterBullet = sec.AddCell(SrcConstants.Para_TextPosAfterBullet, nameof(SrcConstants.Para_TextPosAfterBullet));
         }
 
         public override Text.ParagraphCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)

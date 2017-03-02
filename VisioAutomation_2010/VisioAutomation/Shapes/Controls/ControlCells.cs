@@ -15,18 +15,18 @@ namespace VisioAutomation.Shapes.Controls
         public ShapeSheet.CellData XDynamics { get; set; }
         public ShapeSheet.CellData YDynamics { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SRCConstants.Controls_CanGlue, this.CanGlue.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Controls_Tip, this.Tip.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Controls_X, this.X.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Controls_Y, this.Y.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Controls_YCon, this.YBehavior.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Controls_XCon, this.XBehavior.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Controls_XDyn, this.XDynamics.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Controls_YDyn, this.YDynamics.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Controls_CanGlue, this.CanGlue.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Controls_Tip, this.Tip.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Controls_X, this.X.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Controls_Y, this.Y.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Controls_YCon, this.YBehavior.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Controls_XCon, this.XBehavior.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Controls_XDyn, this.XDynamics.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Controls_YDyn, this.YDynamics.Formula);
             }
         }
 

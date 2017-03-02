@@ -13,17 +13,17 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData TxtLocPinX { get; set; }
         public ShapeSheet.CellData TxtLocPinY { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TxtLocPinX, this.TxtLocPinX.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TxtLocPinY, this.TxtLocPinY.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TxtHeight, this.TxtHeight.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.TxtAngle, this.TxtAngle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TxtPinX, this.TxtPinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TxtPinY, this.TxtPinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TxtLocPinX, this.TxtLocPinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TxtLocPinY, this.TxtLocPinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TxtWidth, this.TxtWidth.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TxtHeight, this.TxtHeight.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TxtAngle, this.TxtAngle.Formula);
             }
         }
 

@@ -12,15 +12,15 @@ namespace VisioAutomation.Shapes.ConnectionPoints
         public ShapeSheet.CellData DirY { get; set; }
         public ShapeSheet.CellData Type { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Connections_DirX, this.DirX.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Connections_DirY, this.DirY.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Connections_Type, this.Type.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Connections_X, this.X.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Connections_Y, this.Y.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Connections_DirX, this.DirX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Connections_DirY, this.DirY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Connections_Type, this.Type.Formula);
             }
         }
 

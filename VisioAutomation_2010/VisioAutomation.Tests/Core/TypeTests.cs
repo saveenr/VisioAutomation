@@ -6,10 +6,10 @@ namespace VisioAutomation_Tests.Core.Internal
     public class TypeTests : VisioAutomationTest
     {
         [TestMethod]
-        public void VerifySRCSize()
+        public void VerifySrcSize()
         {
-            // SRCs must be 6 bytes
-            var c1 = new VisioAutomation.ShapeSheet.SRC();
+            // Srcs must be 6 bytes
+            var c1 = new VisioAutomation.ShapeSheet.Src();
             int actual_size = System.Runtime.InteropServices.Marshal.SizeOf(c1);
             Assert.AreEqual(6, actual_size);
 

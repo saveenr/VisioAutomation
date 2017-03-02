@@ -85,8 +85,8 @@ namespace VisioAutomation_Tests
         public static VisioAutomation.Drawing.Size GetSize(IVisio.Shape shape)
         {
             var query = new ShapeSheetQuery();
-            var col_w = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Width,"Width");
-            var col_h = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Height,"Height");
+            var col_w = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Width,"Width");
+            var col_h = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Height,"Height");
 
             var ss = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
             var table = query.GetResults<double>(ss);
@@ -145,8 +145,8 @@ namespace VisioAutomation_Tests
             var page_sheet = page.PageSheet;
 
             var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
+            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page_sheet);
             writer.Commit(surface);
@@ -160,8 +160,8 @@ namespace VisioAutomation_Tests
             }
 
             var query = new ShapeSheetQuery();
-            var col_height = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
-            var col_width = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
+            var col_height = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, "PageHeight");
+            var col_width = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
 
             var page_surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page.PageSheet);
             var results = query.GetResults<double>(page_surface);

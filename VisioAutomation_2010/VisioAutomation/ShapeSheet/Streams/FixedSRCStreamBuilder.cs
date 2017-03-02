@@ -1,8 +1,8 @@
 namespace VisioAutomation.ShapeSheet.Streams
 {
-    public class FixedSRCStreamBuilder : FixedStreamBuilder<SRC>
+    public class FixedSrcStreamBuilder : FixedStreamBuilder<Src>
     {
-        public FixedSRCStreamBuilder(int capacity) : base(capacity)
+        public FixedSrcStreamBuilder(int capacity) : base(capacity)
         {
 
         }
@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             return 3;
         }
 
-        public override void _Add(SRC item)
+        public override void _Add(Src item)
         {
             this._stream[this._pos++] = item.Section;
             this._stream[this._pos++] = item.Row;

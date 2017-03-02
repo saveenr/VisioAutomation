@@ -5,9 +5,9 @@ namespace VisioAutomation.Scripting.ShapeSheet
 {
     public class CellValueDictionary : NameDictionary<string>
     {
-        private readonly CellSRCDictionary srcmap;
+        private readonly CellSrcDictionary srcmap;
 
-        public CellValueDictionary(CellSRCDictionary srcmap, Dictionary<string,string> dictionary)
+        public CellValueDictionary(CellSrcDictionary srcmap, Dictionary<string,string> dictionary)
         {
             if (srcmap == null)
             {
@@ -20,7 +20,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
         }
 
 
-        public SRC GetSRC(string name)
+        public Src GetSrc(string name)
         {
             return this.srcmap[name];
         }

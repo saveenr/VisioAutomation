@@ -3,13 +3,13 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public struct SRC
+    public struct Src
     {
         public short Section { get; }
         public short Row { get; }
         public short Cell { get; }
 
-        public SRC(
+        public Src(
             IVisio.VisSectionIndices section,
             IVisio.VisRowIndices row,
             IVisio.VisCellIndices cell)
@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet
         {
         }
 
-        public SRC(
+        public Src(
             short section,
             short row,
             short cell)
@@ -30,16 +30,16 @@ namespace VisioAutomation.ShapeSheet
 
         public override string ToString()
         {
-            return string.Format("{0}({1},{2},{3})", nameof(SRC), this.Section, this.Row, this.Cell);
+            return string.Format("{0}({1},{2},{3})", nameof(Src), this.Section, this.Row, this.Cell);
         }
 
-        public SRC CloneWithNewRow(short row)
+        public Src CloneWithNewRow(short row)
         {
-            // SRC that has a different row index. Very common scenario
-            return new SRC(this.Section, row, this.Cell);
+            // Src that has a different row index. Very common scenario
+            return new Src(this.Section, row, this.Cell);
         }
 
-        public static short[] ToStream(IList<SRC> srcs)
+        public static short[] ToStream(IList<Src> srcs)
         {
             const int src_length = 3;
             var src_stream = new short[src_length * srcs.Count];

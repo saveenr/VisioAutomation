@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.SubQueries = new SubQueryCollection(0);
         }
 
-        public CellColumn AddCell(ShapeSheet.SRC src, string name)
+        public CellColumn AddCell(ShapeSheet.Src src, string name)
         {
             if (name == null)
             {
@@ -256,9 +256,9 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = 1;
             int shapeindex = 0;
             int numcells = this._get_total_cell_count(numshapes);
-            var stream = new VisioAutomation.ShapeSheet.Streams.FixedSRCStreamBuilder(numcells);
+            var stream = new VisioAutomation.ShapeSheet.Streams.FixedSrcStreamBuilder(numcells);
             var cellinfos = this.enum_cellinfo(dummy_shapeid, shapeindex);
-            var srcs = cellinfos.Select(i => i.SIDSRC.SRC);
+            var srcs = cellinfos.Select(i => i.SidSrc.Src);
             stream.AddRange(srcs);
 
             return stream.ToStream();
@@ -269,7 +269,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
 
-            var stream = new VisioAutomation.ShapeSheet.Streams.FixedSIDSRCStreamBuilder(numcells);
+            var stream = new VisioAutomation.ShapeSheet.Streams.FixedSidSrcStreamBuilder(numcells);
 
             for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
             {
@@ -277,7 +277,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 var shapeid = shapeids[shapeindex];
 
                 var cellinfos = this.enum_cellinfo(shapeid, shapeindex);
-                var sidsrcs = cellinfos.Select(i => i.SIDSRC);
+                var sidsrcs = cellinfos.Select(i => i.SidSrc);
                 stream.AddRange(sidsrcs);
             }
 
@@ -289,7 +289,7 @@ namespace VisioAutomation.ShapeSheet.Query
             // enum Cells
             foreach (var col in this.Cells)
             {
-                var sidsrc = new SIDSRC((short)shapeid, col.SRC);
+                var sidsrc = new SidSrc((short)shapeid, col.Src);
 
                 var cellinfo = new Internal.QueryCellInfo(sidsrc,col);
                 yield return cellinfo;
@@ -305,11 +305,11 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (var col in section_info.SubQuery.Columns)
                         {
-                            var src = new VisioAutomation.ShapeSheet.SRC(
+                            var src = new VisioAutomation.ShapeSheet.Src(
                                 (short)section_info.SubQuery.SectionIndex,
                                 (short)rowindex,
                                 col.CellIndex);
-                            var sidsrc = new VisioAutomation.ShapeSheet.SIDSRC((short)shapeid, src);
+                            var sidsrc = new VisioAutomation.ShapeSheet.SidSrc((short)shapeid, src);
                             var cellinfo = new Internal.QueryCellInfo(sidsrc,col);
                             yield return cellinfo;
                         }

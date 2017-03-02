@@ -9,9 +9,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
     [TestClass]
     public class ShapeSheetWriterTests : VisioAutomationTest
     {
-        private static readonly VA.ShapeSheet.SRC src_pinx = VA.ShapeSheet.SRCConstants.PinX;
-        private static readonly VA.ShapeSheet.SRC src_piny = VA.ShapeSheet.SRCConstants.PinY;
-        private static readonly VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
+        private static readonly VA.ShapeSheet.Src src_pinx = VA.ShapeSheet.SrcConstants.PinX;
+        private static readonly VA.ShapeSheet.Src src_piny = VA.ShapeSheet.SrcConstants.PinY;
+        private static readonly VA.ShapeSheet.Src src_linepat = VA.ShapeSheet.SrcConstants.LinePattern;
 
         [TestMethod]
         public void ShapeSheet_Writer_Formulas_MultipleShapes()
@@ -181,14 +181,14 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Setup the modifications to the cell values
             var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7");
-            writer.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2);
+            writer.SetResult(VA.ShapeSheet.SrcConstants.PinX, 2);
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
             writer.Commit(surface);
 
             // Build the query
             var query = new ShapeSheetQuery();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
-            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+            var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.PinX, "PinX");
 
             // Retrieve the values
             var data_formulas = query.GetFormulas(surface);

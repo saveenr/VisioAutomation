@@ -14,9 +14,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
     [TestClass]
     public class ShapeSheetQueryTests : VisioAutomationTest
     {
-        public static VA.ShapeSheet.SRC cell_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-        public static VA.ShapeSheet.SRC cell_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
-        public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
+        public static VA.ShapeSheet.Src cell_fg = VA.ShapeSheet.SrcConstants.FillForegnd;
+        public static VA.ShapeSheet.Src cell_bg = VA.ShapeSheet.SrcConstants.FillBkgnd;
+        public static VA.ShapeSheet.Src cell_pat = VA.ShapeSheet.SrcConstants.FillPattern;
 
         [TestMethod]
         public void ShapeSheet_Query_SectionCells_have_names()
@@ -53,9 +53,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // now retrieve the formulas with GetFormulas
 
-            var src_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-            var src_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
-            var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
+            var src_fg = VA.ShapeSheet.SrcConstants.FillForegnd;
+            var src_bg = VA.ShapeSheet.SrcConstants.FillBkgnd;
+            var src_filpat = VA.ShapeSheet.SrcConstants.FillPattern;
 
             var query = new ShapeSheetQuery();
             var col_fg = query.AddCell(src_fg, "FillForegnd");
@@ -63,9 +63,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
             var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character",sec_char.Name);
-            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase, "CharCase");
-            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "CharColor");
-            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans, "CharColorTrans");
+            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharCase, "CharCase");
+            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharColor, "CharColor");
+            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharColorTrans, "CharColorTrans");
 
             var shapeids = new[] {s1_id};
 
@@ -116,9 +116,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             bg_cell.ResultIU = 3.0; //green
             pat_cell.ResultIU = 40.0;
 
-            var src_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-            var src_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
-            var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
+            var src_fg = VA.ShapeSheet.SrcConstants.FillForegnd;
+            var src_bg = VA.ShapeSheet.SrcConstants.FillBkgnd;
+            var src_filpat = VA.ShapeSheet.SrcConstants.FillPattern;
 
             // now retrieve the formulas with GetFormulas
 
@@ -179,7 +179,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var query = new ShapeSheetQuery();
 
             var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value,"Value");
+            var value_col = prop_sec.AddCell(VA.ShapeSheet.SrcConstants.Prop_Value,"Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
@@ -226,8 +226,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual(3, page1.Shapes.Count);
 
             var query = new ShapeSheetQuery();
-            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
-            var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
+            var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.PinX, "PinX");
+            var col_piny = query.AddCell(VA.ShapeSheet.SrcConstants.PinY, "PinY");
 
             var surface = new ShapeSheetSurface(page1);
             var data_formulas = query.GetFormulas(surface, shapeids);
@@ -279,8 +279,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual(5, page1.Shapes.Count);
 
             var query = new ShapeSheetQuery();
-            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
-            var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
+            var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.PinX, "PinX");
+            var col_piny = query.AddCell(VA.ShapeSheet.SrcConstants.PinY, "PinY");
 
             var surface = new ShapeSheetSurface(page1);
             var data_formulas = query.GetFormulas(surface, shapeids);
@@ -400,7 +400,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             page1.Delete(0);
         }
 
-        public bool section_is_skippable( VA.ShapeSheet.SRC src)
+        public bool section_is_skippable( VA.ShapeSheet.Src src)
         {
             bool can_skip = (src.Section == (short)IVisio.VisSectionIndices.visSectionFirst)
                          || (src.Section == (short)IVisio.VisSectionIndices.visSectionFirstComponent)
@@ -412,21 +412,21 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             return can_skip;
         }
 
-        public static Dictionary<string, SRC> GetSRCDictionary()
+        public static Dictionary<string, Src> GetSrcDictionary()
         {
-            var srcconstants_t = typeof(SRCConstants);
+            var srcconstants_t = typeof(SrcConstants);
 
             var binding_flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static;
 
-            // find all the static properties that return SRC types
-            var src_type = typeof(SRC);
+            // find all the static properties that return Src types
+            var src_type = typeof(Src);
             var props = srcconstants_t.GetProperties(binding_flags)
                 .Where(p => p.PropertyType == src_type);
 
-            var fields_name_to_value = new Dictionary<string, SRC>();
+            var fields_name_to_value = new Dictionary<string, Src>();
             foreach (var propinfo in props)
             {
-                var src = (SRC)propinfo.GetValue(null, null);
+                var src = (Src)propinfo.GetValue(null, null);
                 var name = propinfo.Name;
                 fields_name_to_value[name] = src;
             }
@@ -468,8 +468,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         {
             var query = new ShapeSheetQuery();
 
-            // Dictionary of Cell Names to SRCs (excluding invalid sections)
-            var name_to_src = GetSRCDictionary();
+            // Dictionary of Cell Names to Srcs (excluding invalid sections)
+            var name_to_src = GetSrcDictionary();
             name_to_src = name_to_src.Where(pair => !section_is_skippable(pair.Value))
                 .ToDictionary(pair => pair.Key, pair => pair.Value);
 
@@ -510,12 +510,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         {
             // Ensure that duplicate cells are caught
             var q1 = new ShapeSheetQuery();
-            q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+            q1.AddCell(VA.ShapeSheet.SrcConstants.PinX, "PinX");
 
             bool caught_exc1 = false;
             try
             {
-                q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+                q1.AddCell(VA.ShapeSheet.SrcConstants.PinX, "PinX");
             }
             catch (System.ArgumentException)
             {
@@ -544,11 +544,11 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Ensure that Duplicates in Section Queries Are caught - 
             var q3 = new ShapeSheetQuery();
             var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
-            sec.AddCell(VA.ShapeSheet.SRCConstants.PinX,"PinX");
+            sec.AddCell(VA.ShapeSheet.SrcConstants.PinX,"PinX");
             bool caught_exc3 = false;
             try
             {
-                sec.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+                sec.AddCell(VA.ShapeSheet.SrcConstants.PinX, "PinX");
             }
             catch (System.ArgumentException)
             {

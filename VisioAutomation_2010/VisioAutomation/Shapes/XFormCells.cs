@@ -14,17 +14,17 @@ namespace VisioAutomation.Shapes
         public ShapeSheet.CellData Height { get; set; }
         public ShapeSheet.CellData Angle { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Width, this.Width.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Height, this.Height.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PinX, this.PinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PinY, this.PinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LocPinX, this.LocPinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LocPinY, this.LocPinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Width, this.Width.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Height, this.Height.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Angle, this.Angle.Formula);
             }
         }
 

@@ -48,7 +48,7 @@ namespace VisioAutomation.Scripting.Utilities
             
             foreach (int shapeid in shapeids)
             {
-                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.TxtWidth, formula);
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TxtWidth, formula);
             }
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);

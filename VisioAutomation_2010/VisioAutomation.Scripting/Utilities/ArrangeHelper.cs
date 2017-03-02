@@ -94,8 +94,8 @@ namespace VisioAutomation.Scripting.Utilities
             var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             for (int i = 0; i < newpositions.Count; i++)
             {
-                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SRCConstants.PinX, newpositions[i].X);
-                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SRCConstants.PinY, newpositions[i].Y);
+                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.PinX, newpositions[i].X);
+                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.PinY, newpositions[i].Y);
             }
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
@@ -107,8 +107,8 @@ namespace VisioAutomation.Scripting.Utilities
             var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
             for (int i = 0; i < newsizes.Count; i++)
             {
-                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SRCConstants.Width, newsizes[i].Width);
-                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SRCConstants.Height, newsizes[i].Height);
+                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.Width, newsizes[i].Width);
+                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.Height, newsizes[i].Height);
             }
 
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);

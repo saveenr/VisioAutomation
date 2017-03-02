@@ -1,6 +1,6 @@
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Shapes.Layout
 {
@@ -27,24 +27,24 @@ namespace VisioAutomation.Shapes.Layout
 
         public ShapeLayoutCellsReader() 
         {
-            this.ConFixedCode = this.query.AddCell(SRCCON.ConFixedCode, nameof(SRCCON.ConFixedCode));
-            this.ConLineJumpCode = this.query.AddCell(SRCCON.ConLineJumpCode, nameof(SRCCON.ConLineJumpCode));
-            this.ConLineJumpDirX = this.query.AddCell(SRCCON.ConLineJumpDirX, nameof(SRCCON.ConLineJumpDirX));
-            this.ConLineJumpDirY = this.query.AddCell(SRCCON.ConLineJumpDirY, nameof(SRCCON.ConLineJumpDirY));
-            this.ConLineJumpStyle = this.query.AddCell(SRCCON.ConLineJumpStyle, nameof(SRCCON.ConLineJumpStyle));
-            this.ConLineRouteExt = this.query.AddCell(SRCCON.ConLineRouteExt, nameof(SRCCON.ConLineRouteExt));
-            this.ShapeFixedCode = this.query.AddCell(SRCCON.ShapeFixedCode, nameof(SRCCON.ShapeFixedCode));
-            this.ShapePermeablePlace = this.query.AddCell(SRCCON.ShapePermeablePlace, nameof(SRCCON.ShapePermeablePlace));
-            this.ShapePermeableX = this.query.AddCell(SRCCON.ShapePermeableX, nameof(SRCCON.ShapePermeableX));
-            this.ShapePermeableY = this.query.AddCell(SRCCON.ShapePermeableY, nameof(SRCCON.ShapePermeableY));
-            this.ShapePlaceFlip = this.query.AddCell(SRCCON.ShapePlaceFlip, nameof(SRCCON.ShapePlaceFlip));
-            this.ShapePlaceStyle = this.query.AddCell(SRCCON.ShapePlaceStyle, nameof(SRCCON.ShapePlaceStyle));
-            this.ShapePlowCode = this.query.AddCell(SRCCON.ShapePlowCode, nameof(SRCCON.ShapePlowCode));
-            this.ShapeRouteStyle = this.query.AddCell(SRCCON.ShapeRouteStyle, nameof(SRCCON.ShapeRouteStyle));
-            this.ShapeSplit = this.query.AddCell(SRCCON.ShapeSplit, nameof(SRCCON.ShapeSplit));
-            this.ShapeSplittable = this.query.AddCell(SRCCON.ShapeSplittable, nameof(SRCCON.ShapeSplittable));
-            this.DisplayLevel = this.query.AddCell(SRCCON.DisplayLevel, nameof(SRCCON.DisplayLevel));
-            this.Relationships = this.query.AddCell(SRCCON.Relationships, nameof(SRCCON.Relationships));
+            this.ConFixedCode = this.query.AddCell(SrcConstants.ConFixedCode, nameof(SrcConstants.ConFixedCode));
+            this.ConLineJumpCode = this.query.AddCell(SrcConstants.ConLineJumpCode, nameof(SrcConstants.ConLineJumpCode));
+            this.ConLineJumpDirX = this.query.AddCell(SrcConstants.ConLineJumpDirX, nameof(SrcConstants.ConLineJumpDirX));
+            this.ConLineJumpDirY = this.query.AddCell(SrcConstants.ConLineJumpDirY, nameof(SrcConstants.ConLineJumpDirY));
+            this.ConLineJumpStyle = this.query.AddCell(SrcConstants.ConLineJumpStyle, nameof(SrcConstants.ConLineJumpStyle));
+            this.ConLineRouteExt = this.query.AddCell(SrcConstants.ConLineRouteExt, nameof(SrcConstants.ConLineRouteExt));
+            this.ShapeFixedCode = this.query.AddCell(SrcConstants.ShapeFixedCode, nameof(SrcConstants.ShapeFixedCode));
+            this.ShapePermeablePlace = this.query.AddCell(SrcConstants.ShapePermeablePlace, nameof(SrcConstants.ShapePermeablePlace));
+            this.ShapePermeableX = this.query.AddCell(SrcConstants.ShapePermeableX, nameof(SrcConstants.ShapePermeableX));
+            this.ShapePermeableY = this.query.AddCell(SrcConstants.ShapePermeableY, nameof(SrcConstants.ShapePermeableY));
+            this.ShapePlaceFlip = this.query.AddCell(SrcConstants.ShapePlaceFlip, nameof(SrcConstants.ShapePlaceFlip));
+            this.ShapePlaceStyle = this.query.AddCell(SrcConstants.ShapePlaceStyle, nameof(SrcConstants.ShapePlaceStyle));
+            this.ShapePlowCode = this.query.AddCell(SrcConstants.ShapePlowCode, nameof(SrcConstants.ShapePlowCode));
+            this.ShapeRouteStyle = this.query.AddCell(SrcConstants.ShapeRouteStyle, nameof(SrcConstants.ShapeRouteStyle));
+            this.ShapeSplit = this.query.AddCell(SrcConstants.ShapeSplit, nameof(SrcConstants.ShapeSplit));
+            this.ShapeSplittable = this.query.AddCell(SrcConstants.ShapeSplittable, nameof(SrcConstants.ShapeSplittable));
+            this.DisplayLevel = this.query.AddCell(SrcConstants.DisplayLevel, nameof(SrcConstants.DisplayLevel));
+            this.Relationships = this.query.AddCell(SrcConstants.Relationships, nameof(SrcConstants.Relationships));
 
 
         }

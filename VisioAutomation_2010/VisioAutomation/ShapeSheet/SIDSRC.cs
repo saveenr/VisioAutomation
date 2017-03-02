@@ -3,14 +3,14 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public struct SIDSRC
+    public struct SidSrc
     {
         public short ShapeID { get; }
         public short Section { get; }
         public short Row { get; }
         public short Cell { get; }
 
-        public SIDSRC(
+        public SidSrc(
             short shape_id,
             IVisio.VisSectionIndices section,
             IVisio.VisRowIndices row,
@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet
         {
         }
 
-        public SIDSRC(
+        public SidSrc(
             short shape_id,
             short section,
             short row,
@@ -30,18 +30,18 @@ namespace VisioAutomation.ShapeSheet
             this.Cell = cell;
         }
 
-        public SIDSRC(
+        public SidSrc(
             short shape_id,
-            SRC src) : this(shape_id,src.Section,src.Row,src.Cell)
+            Src src) : this(shape_id,src.Section,src.Row,src.Cell)
         {
         }  
         
         public override string ToString()
         {
-            return string.Format("{0}({1},{2},{3},{4})", nameof(SIDSRC),this.ShapeID, this.Section, this.Row, this.Cell);
+            return string.Format("{0}({1},{2},{3},{4})", nameof(SidSrc),this.ShapeID, this.Section, this.Row, this.Cell);
         }
 
-        public static short [] ToStream(IList<SIDSRC> sidsrcs)
+        public static short [] ToStream(IList<SidSrc> sidsrcs)
         {
             const int sidsrc_length = 4;
             var sidsrcstream = new short[sidsrc_length*sidsrcs.Count];
@@ -57,9 +57,9 @@ namespace VisioAutomation.ShapeSheet
             return sidsrcstream;
         }
 
-        public SRC SRC
+        public Src Src
         {
-            get { return new SRC(this.Section, this.Row, this.Cell); }
+            get { return new Src(this.Section, this.Row, this.Cell); }
         }
     }
 }

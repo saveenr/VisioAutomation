@@ -23,9 +23,9 @@ namespace VisioAutomation.Application.Logging
             var lines = XmlErrorLog.GetLines(filename);
             lines.Reverse();
 
-            var q = new Stack<string>( lines);
-            
-            while (q.Count>0)
+            var q = new Stack<string>(lines);
+
+            while (q.Count > 0)
             {
                 string rawline = q.Pop();
                 string line = rawline.Trim();
@@ -68,7 +68,8 @@ namespace VisioAutomation.Application.Logging
 
                         // Dates are in this format "Sat Jan 10 20:09:12 2015"
 
-                        cur_session.StartTime = DateTime.ParseExact(cur_session.StartTimeRaw, "ddd MMM dd HH:mm:ss yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        cur_session.StartTime = DateTime.ParseExact(cur_session.StartTimeRaw, "ddd MMM dd HH:mm:ss yyyy",
+                            System.Globalization.CultureInfo.InvariantCulture);
 
                     }
                     else if (line.EndsWith("End Session"))
@@ -100,14 +101,14 @@ namespace VisioAutomation.Application.Logging
                         string context = GetStringAfterStartsWith(line, "Context:");
                         string description = GetStringAfterStartsWith(line, "Description:");
 
-                        if (context!=null)
+                        if (context != null)
                         {
                             // Store a Context Record 
                             var session = this.GetMostRecentSession();
                             var rec = session.Records[session.Records.Count - 1];
                             rec.Context = context;
                         }
-                        else if (description!=null)
+                        else if (description != null)
                         {
                             // Store a Description Record 
                             var session = this.GetMostRecentSession();
@@ -122,7 +123,7 @@ namespace VisioAutomation.Application.Logging
                 }
                 else
                 {
-                    throw new ArgumentException();                    
+                    throw new ArgumentException();
                 }
             }
         }
@@ -154,7 +155,7 @@ namespace VisioAutomation.Application.Logging
             return state;
         }
 
-        private LogState StartNewSession(string line )
+        private LogState StartNewSession(string line)
         {
             var session = new FileSessions();
             session.StartLine = line;
@@ -199,5 +200,6 @@ namespace VisioAutomation.Application.Logging
             }
             return lines;
         }
+
     }
 }

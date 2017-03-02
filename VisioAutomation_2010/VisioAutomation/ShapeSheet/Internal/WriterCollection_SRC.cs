@@ -1,15 +1,15 @@
 ﻿namespace VisioAutomation.ShapeSheet.Internal
 {
-    class WriterCollection_SRC
+    class WriterCollection_Src
     {
-        public VisioAutomation.ShapeSheet.Streams.SRCStreamBuilder StreamBuilder;
+        public VisioAutomation.ShapeSheet.Streams.SrcStreamBuilder StreamBuilder;
         public VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string> ValuesBuilder;
 
 
-        public WriterCollection_SRC()
+        public WriterCollection_Src()
         {
 
-            this.StreamBuilder = new VisioAutomation.ShapeSheet.Streams.SRCStreamBuilder();
+            this.StreamBuilder = new VisioAutomation.ShapeSheet.Streams.SrcStreamBuilder();
             this.ValuesBuilder = new VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string>();
         }
 
@@ -20,7 +20,7 @@
         }
 
 
-        public void Add(SRC src, string value)
+        public void Add(Src src, string value)
         {
             this.StreamBuilder.Add(src);
             this.ValuesBuilder.Add(value);

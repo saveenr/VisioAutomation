@@ -42,8 +42,8 @@ namespace VisioAutomation.Shapes.Connectors
                     throw new System.ArgumentException("connector cannot be null when specifying manual connection");                    
                 }
 
-                var src_beginx = ShapeSheet.SRCConstants.BeginX;
-                var src_endx = ShapeSheet.SRCConstants.EndX;
+                var src_beginx = ShapeSheet.SrcConstants.BeginX;
+                var src_endx = ShapeSheet.SrcConstants.EndX;
                 var connector_beginx = connector_shape.CellsSRC[src_beginx.Section, src_beginx.Row, src_beginx.Cell];
                 var connector_endx = connector_shape.CellsSRC[src_endx.Section, src_endx.Row, src_endx.Cell];
                 var from_cell = from_shape.CellsSRC[1, 1, 0];

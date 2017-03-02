@@ -197,9 +197,9 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = targets.Shapes.Select(s => s.ID);
             foreach (int shapeid in shapeids)
             {
-                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.TxtHeight, "Height*0");
-                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.TxtPinY, "Height*0");
-                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SRCConstants.VerticalAlign, "0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TxtHeight, "Height*0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TxtPinY, "Height*0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.VerticalAlign, "0");
             }
             var active_page = application.ActivePage;
             var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page);
@@ -257,8 +257,8 @@ namespace VisioAutomation.Scripting.Commands
                     new_sizes.Add(max_size);
                 }
 
-                var src_width = VisioAutomation.ShapeSheet.SRCConstants.Width;
-                var src_height = VisioAutomation.ShapeSheet.SRCConstants.Height;
+                var src_width = VisioAutomation.ShapeSheet.SrcConstants.Width;
+                var src_height = VisioAutomation.ShapeSheet.SrcConstants.Height;
 
                 var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
                 for (int i = 0; i < new_sizes.Count; i++)

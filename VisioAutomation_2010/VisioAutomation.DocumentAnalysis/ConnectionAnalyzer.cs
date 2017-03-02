@@ -54,8 +54,8 @@ namespace VisioAutomation.DocumentAnalysis
             var connnector_ids = edges.Select(e => e.Connector.ID).ToList();
 
             // Get the arrows for each connector
-            var src_beginarrow = ShapeSheet.SRCConstants.BeginArrow;
-            var src_endarrow = ShapeSheet.SRCConstants.EndArrow;
+            var src_beginarrow = ShapeSheet.SrcConstants.BeginArrow;
+            var src_endarrow = ShapeSheet.SrcConstants.EndArrow;
 
             var query = new ShapeSheetQuery();
             var col_beginarrow = query.AddCell(src_beginarrow, "BeginArrow");

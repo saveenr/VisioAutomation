@@ -90,7 +90,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return formula.Value;
         }
 
-        public override IEnumerable<SRCFormulaPair> SRCFormulaPairs
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {
@@ -111,16 +111,16 @@ namespace VisioAutomation.Shapes.CustomProperties
                 string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
                 string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Label, str_label);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Value, str_value);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Format, str_format);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Prompt, str_prompt);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Calendar, cp.Calendar.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_LangID, cp.LangId.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
-                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Ask, cp.Ask.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Label, str_label);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Value, str_value);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Format, str_format);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Prompt, str_prompt);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Calendar, cp.Calendar.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_LangID, cp.LangId.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_SortKey, cp.SortKey.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Invisible, cp.Invisible.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Type, cp.Type.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Ask, cp.Ask.Formula);
             }
         }
 
