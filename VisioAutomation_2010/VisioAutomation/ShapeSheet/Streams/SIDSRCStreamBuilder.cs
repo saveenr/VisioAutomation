@@ -1,14 +1,14 @@
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
-    public class SIDSRCStreamBuilder : StreamBuilder<SidSrc>
+    public class SidSrcStreamBuilder : StreamBuilder<SidSrc>
     {
-        public SIDSRCStreamBuilder() : base()
+        public SidSrcStreamBuilder() : base()
         {
 
         }
 
-        public SIDSRCStreamBuilder(int capacity) : base(capacity)
+        public SidSrcStreamBuilder(int capacity) : base(capacity)
         {
 
         }

@@ -7,31 +7,31 @@ namespace VisioAutomation.Scripting.ShapeSheet
     {
         public Client Client;
         public VisioAutomation.ShapeSheet.ShapeSheetSurface Surface;
-        public VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder SidsrcStreamBuilder;
+        public VisioAutomation.ShapeSheet.Streams.SidSrcStreamBuilder SidSrcStreamBuilder;
         
         public ShapeSheetReader(Client client, IVisio.Page page)
         {
             this.Client = client;
             this.Surface = new ShapeSheetSurface(page);
-            this.SidsrcStreamBuilder = new VisioAutomation.ShapeSheet.Streams.SIDSRCStreamBuilder();
+            this.SidSrcStreamBuilder = new VisioAutomation.ShapeSheet.Streams.SidSrcStreamBuilder();
         }
 
         public void AddCell(short id, VisioAutomation.ShapeSheet.Src src)
         {
             var sidsrc = new VisioAutomation.ShapeSheet.SidSrc(id, src);
-            this.SidsrcStreamBuilder.Add(sidsrc);
+            this.SidSrcStreamBuilder.Add(sidsrc);
         }
 
         public string[] GetFormulas()
         {
-            var formulas = this.Surface.GetFormulasU(this.SidsrcStreamBuilder.ToStream());
+            var formulas = this.Surface.GetFormulasU(this.SidSrcStreamBuilder.ToStream());
             return formulas;
         }
 
         public string[] GetResults()
         {
             const object [] unitcodes = null;
-            var stream = this.SidsrcStreamBuilder.ToStream();
+            var stream = this.SidSrcStreamBuilder.ToStream();
             var formulas = this.Surface.GetResults<string>( stream, unitcodes);
             return formulas;
         }

@@ -8,10 +8,10 @@ namespace VisioAutomation.ShapeSheet
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        private WriterCollection_SIDSRC FormulaRecords_SIDSRC;
-        private WriterCollection_SRC FormulaRecords_SRC;
-        private WriterCollection_SRC ResultRecords_SRC;
-        private WriterCollection_SIDSRC ResultRecords_SIDSRC;
+        private WriterCollection_SidSrc FormulaRecords_SIDSRC;
+        private WriterCollection_Src FormulaRecords_SRC;
+        private WriterCollection_Src ResultRecords_SRC;
+        private WriterCollection_SidSrc ResultRecords_SIDSRC;
 
         public ShapeSheetWriter()
         {
@@ -53,10 +53,10 @@ namespace VisioAutomation.ShapeSheet
 
         public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            this.CommitFormulaRecordsByType(surface, CoordType.SRC);
-            this.CommitFormulaRecordsByType(surface, CoordType.SIDSRC);
-            this.CommitResultRecordsByType(surface, CoordType.SRC);
-            this.CommitResultRecordsByType(surface, CoordType.SIDSRC);
+            this.CommitFormulaRecordsByType(surface, CoordType.Src);
+            this.CommitFormulaRecordsByType(surface, CoordType.SidSrc);
+            this.CommitResultRecordsByType(surface, CoordType.Src);
+            this.CommitResultRecordsByType(surface, CoordType.SidSrc);
         }
 
         public void SetFormula(Src src, CellValueLiteral formula)
@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.FormulaRecords_SRC == null)
             {
-                this.FormulaRecords_SRC = new WriterCollection_SRC();
+                this.FormulaRecords_SRC = new WriterCollection_Src();
             }
 
             if (formula.HasValue)
@@ -93,7 +93,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.FormulaRecords_SIDSRC == null)
             {
-                this.FormulaRecords_SIDSRC = new WriterCollection_SIDSRC();
+                this.FormulaRecords_SIDSRC = new WriterCollection_SidSrc();
             }
 
             if (formula.HasValue)
@@ -104,18 +104,18 @@ namespace VisioAutomation.ShapeSheet
 
         private void CommitFormulaRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            if (coord_type == CoordType.SIDSRC && (this.FormulaRecords_SIDSRC == null || this.FormulaRecords_SIDSRC.Count <1))
+            if (coord_type == CoordType.SidSrc && (this.FormulaRecords_SIDSRC == null || this.FormulaRecords_SIDSRC.Count <1))
             {
                 return;
             }
 
-            if (coord_type == CoordType.SRC && (this.FormulaRecords_SRC == null || this.FormulaRecords_SRC.Count <1))
+            if (coord_type == CoordType.Src && (this.FormulaRecords_SRC == null || this.FormulaRecords_SRC.Count <1))
             {
                 return;
             }
 
-            var stream = coord_type == CoordType.SIDSRC ? this.FormulaRecords_SIDSRC.BuildStream() : this.FormulaRecords_SRC.BuildStream();
-            var formulas = coord_type == CoordType.SIDSRC ? this.FormulaRecords_SIDSRC.BuildValues() : this.FormulaRecords_SRC.BuildValues();
+            var stream = coord_type == CoordType.SidSrc ? this.FormulaRecords_SIDSRC.BuildStream() : this.FormulaRecords_SRC.BuildStream();
+            var formulas = coord_type == CoordType.SidSrc ? this.FormulaRecords_SIDSRC.BuildValues() : this.FormulaRecords_SRC.BuildValues();
 
             if (stream.Length == 0)
             {
@@ -131,7 +131,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.ResultRecords_SRC == null)
             {
-                this.ResultRecords_SRC = new WriterCollection_SRC();
+                this.ResultRecords_SRC = new WriterCollection_Src();
             }
 
             this.ResultRecords_SRC.StreamBuilder.Add(src);
@@ -148,7 +148,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.ResultRecords_SIDSRC == null)
             {
-                this.ResultRecords_SIDSRC = new WriterCollection_SIDSRC();
+                this.ResultRecords_SIDSRC = new WriterCollection_SidSrc();
             }
 
             this.ResultRecords_SIDSRC.Add(sidsrc, result.Value);
@@ -156,18 +156,18 @@ namespace VisioAutomation.ShapeSheet
 
         private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
         {
-            if (coord_type == CoordType.SIDSRC && (this.ResultRecords_SIDSRC == null || this.ResultRecords_SIDSRC.Count < 1))
+            if (coord_type == CoordType.SidSrc && (this.ResultRecords_SIDSRC == null || this.ResultRecords_SIDSRC.Count < 1))
             {
                 return;
             }
 
-            if (coord_type == CoordType.SRC && (this.ResultRecords_SRC == null || this.ResultRecords_SRC.Count <1))
+            if (coord_type == CoordType.Src && (this.ResultRecords_SRC == null || this.ResultRecords_SRC.Count <1))
             {
                 return;
             }
 
-            var stream = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC.BuildStream() : this.ResultRecords_SRC.BuildStream();
-            var results = coord_type == CoordType.SIDSRC ? this.ResultRecords_SIDSRC.BuildValues(): this.ResultRecords_SRC.BuildValues();
+            var stream = coord_type == CoordType.SidSrc ? this.ResultRecords_SIDSRC.BuildStream() : this.ResultRecords_SRC.BuildStream();
+            var results = coord_type == CoordType.SidSrc ? this.ResultRecords_SIDSRC.BuildValues(): this.ResultRecords_SRC.BuildValues();
             const object[] unitcodes = null;
             
             if (stream.Length == 0)
