@@ -147,10 +147,7 @@ namespace VisioAutomation.Pages.PageLayout
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.RouteStyle, pagecells.RouteStyle);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PlaceStyle, pagecells.PlaceStyle);
 
-            var pagesheet = page.PageSheet;
-
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(pagesheet);
-            writer.Commit(surface);
+            writer.Commit(page.PageSheet);
             page.Layout();
         }
     }

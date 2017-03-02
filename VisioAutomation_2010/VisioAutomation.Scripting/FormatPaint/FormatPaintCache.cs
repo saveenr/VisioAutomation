@@ -138,8 +138,7 @@ namespace VisioAutomation.Scripting.FormatPaint
                 }
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            writer.Commit(surface);
+            writer.Commit(page);
         }
 
         public FormatCategory GetAllFormatPaintFlags()

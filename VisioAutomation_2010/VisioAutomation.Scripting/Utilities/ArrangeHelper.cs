@@ -98,8 +98,7 @@ namespace VisioAutomation.Scripting.Utilities
                 writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.PinY, newpositions[i].Y);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            writer.Commit(surface);
+            writer.Commit(page);
         }
 
         private static void ModifySizes(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Drawing.Size> newsizes)
@@ -111,8 +110,7 @@ namespace VisioAutomation.Scripting.Utilities
                 writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.Height, newsizes[i].Height);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            writer.Commit(surface);
+            writer.Commit(page);
         }
 
         public static void SnapCorner(IVisio.Page page, TargetShapeIDs target, Drawing.Size snapsize, VisioAutomation.Scripting.Layout.SnapCornerPosition corner)

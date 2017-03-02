@@ -319,11 +319,9 @@ namespace VisioAutomation.Scripting.Commands
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page.PageSheet);
-
             using (var undoscope = this._client.Application.NewUndoScope("Set Page Orientation"))
             {
-                writer.Commit(surface);
+                writer.Commit(active_page.PageSheet);
             }
         }
 
@@ -364,11 +362,9 @@ namespace VisioAutomation.Scripting.Commands
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.XRulerOrigin, "0.0");
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.YRulerOrigin, "0.0");
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page.PageSheet);
-
             using (var undoscope = this._client.Application.NewUndoScope("Reset Page Origin"))
             {
-                writer.Commit(surface);
+                writer.Commit(page.PageSheet);
             }
         }
 
@@ -386,8 +382,7 @@ namespace VisioAutomation.Scripting.Commands
                 writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
                 writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
 
-                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page_sheet);
-                writer.Commit(surface);
+                writer.Commit(page_sheet);
             }
         }
 

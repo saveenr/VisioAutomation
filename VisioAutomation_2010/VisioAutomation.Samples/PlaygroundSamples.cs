@@ -77,8 +77,7 @@ namespace VisioAutomationSamples
                 format.SetFormulas(shapeid, writer);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            writer.Commit(surface);
+            writer.Commit(page);
 
             page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0));
         }
@@ -146,8 +145,7 @@ namespace VisioAutomationSamples
                 n++;
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            writer.Commit(surface);
+            writer.Commit(page);
 
             var bordersize = new VA.Drawing.Size(1, 1);
             page.ResizeToFitContents(bordersize);

@@ -47,8 +47,7 @@ namespace VisioPowerShell.Commands
                 newpagecells.SetFormulas(writer);
                 writer.BlastGuards = true;
 
-                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-                writer.Commit(surface);
+                writer.Commit(page);
             }
         }
     }

@@ -36,11 +36,9 @@ namespace VisioAutomation.Shapes.CustomProperties
                 var writer = new ShapeSheetWriter();
                 cp.SetFormulas(writer, cell_propname.Row);
 
-                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
-                writer.Commit(surface);
+                writer.Commit(shape);
 
                 return;
-
             }
 
             short row = shape.AddNamedRow(
@@ -61,8 +59,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             var writer = new ShapeSheetWriter();
             cp.SetFormulas(writer, row);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape);
-            writer.Commit(surface);
+            writer.Commit(shape);
         }
 
         /// <summary>

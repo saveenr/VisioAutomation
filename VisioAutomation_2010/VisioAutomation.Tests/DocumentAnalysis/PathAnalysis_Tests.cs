@@ -37,8 +37,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
                     writer.SetFormula(c1.ID16, VASS.SrcConstants.EndArrow, "13");
                 }
 
-                var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-                writer.Commit(surface);
+                writer.Commit(page);
             }
         }
 

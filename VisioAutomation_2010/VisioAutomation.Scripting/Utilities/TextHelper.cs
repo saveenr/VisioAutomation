@@ -51,8 +51,7 @@ namespace VisioAutomation.Scripting.Utilities
                 writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TxtWidth, formula);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            writer.Commit(surface);
+            writer.Commit(page);
         }
 
         public static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)

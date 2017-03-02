@@ -109,6 +109,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
+        public QueryOutputCollection<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        {
+            var surface = new ShapeSheetSurface(page);
+            return this.GetFormulas(surface, shapeids);
+        }
+
         public QueryOutputCollection<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
             var shapes = new List<IVisio.Shape>(shapeids.Count);
@@ -120,6 +126,12 @@ namespace VisioAutomation.ShapeSheet.Query
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<string>(values);
             var list = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
             return list;
+        }
+
+        public QueryOutputCollection<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
+        {
+            var surface = new ShapeSheetSurface(page);
+            return this.GetResults<TResult>(surface, shapeids);
         }
 
         public QueryOutputCollection<TResult> GetResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)

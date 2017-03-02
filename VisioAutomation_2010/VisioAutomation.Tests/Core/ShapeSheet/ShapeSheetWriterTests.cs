@@ -32,8 +32,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.SetFormula(shape3.ID16, ShapeSheetWriterTests.src_pinx, 2.5);
             writer.SetFormula(shape3.ID16, ShapeSheetWriterTests.src_piny, 2.5);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
-            writer.Commit(surface);
+            writer.Commit(page1);
 
             // Verify that the formulas were set
             var query = new ShapeSheetQuery();
@@ -42,8 +41,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var data_formulas = query.GetFormulas(surface, shapeids);
-            var data_results = query.GetResults<double>(surface, shapeids);
+            var data_formulas = query.GetFormulas(page1, shapeids);
+            var data_results = query.GetResults<double>(page1, shapeids);
 
             AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_pinx], data_results[0].Cells[col_pinx]);
             AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_piny], data_results[0].Cells[col_piny]);
@@ -89,8 +88,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Setup the modifications to the cell values
             var writer = new ShapeSheetWriter();
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
-            writer.Commit(surface);
+            writer.Commit(shape1);
 
             page1.Delete(0);
         }
@@ -139,9 +137,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.SetResult( shape3.ID16, src_pinx, 2.5);
             writer.SetResult( shape3.ID16, src_piny, 2.5);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page1);
-
-            writer.Commit(surface);
+            writer.Commit(page1);
 
             // Verify that the formulas were set
             var query = new ShapeSheetQuery();
@@ -150,8 +146,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
-            var data_formulas = query.GetFormulas(surface, shapeids);
-            var data_results = query.GetResults<double>(surface, shapeids);
+            var data_formulas = query.GetFormulas(page1, shapeids);
+            var data_results = query.GetResults<double>(page1, shapeids);
 
             AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_pinx], data_results[0].Cells[col_pinx]);
             AssertUtil.AreEqual("0.5 in", 0.5, data_formulas[0].Cells[col_piny], data_results[0].Cells[col_piny]);

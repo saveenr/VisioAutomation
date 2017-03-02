@@ -37,8 +37,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this._client.Application.Get();
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(application.ActivePage);
-            writer.Commit(surface);            
+            writer.Commit(application.ActivePage);            
         }
 
         public IList<Shapes.ShapeFormatCells> Get(TargetShapes targets)
@@ -128,8 +127,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(active_page);
-            writer.Commit(surface);
+            writer.Commit(active_page);
         }
 
         private readonly FormatPaintCache cache = new FormatPaintCache();

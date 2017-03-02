@@ -41,8 +41,7 @@ namespace VisioAutomation.Models.Documents.Forms
             pagecells.PageBottomMargin = formpage.Margin.Bottom;
             pagecells.SetFormulas(writer);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(pagesheet);
-            writer.Commit(surface);
+            writer.Commit(pagesheet);
 
             this.Reset();
             return this._page;
@@ -105,8 +104,7 @@ namespace VisioAutomation.Models.Documents.Forms
                 block.CharacterCells.SetFormulas((short)block.VisioShapeID, writer, 0);
             }
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(this._page);
-            writer.Commit(surface);
+            writer.Commit(this._page);
         }
 
         private void AdjustInsertionPoint(Drawing.Size size)

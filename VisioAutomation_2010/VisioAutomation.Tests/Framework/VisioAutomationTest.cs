@@ -148,8 +148,7 @@ namespace VisioAutomation_Tests
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page_sheet);
-            writer.Commit(surface);
+            writer.Commit(page_sheet);
         }
 
         public static VisioAutomation.Drawing.Size GetPageSize(IVisio.Page page)
