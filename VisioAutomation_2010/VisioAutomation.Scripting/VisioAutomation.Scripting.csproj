@@ -49,9 +49,9 @@
     <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="Commands\SnapCommands.cs" />
     <Compile Include="ShapeSheet\NameDictionary.cs" />
-    <Compile Include="ShapeSheet\CellSrcDictionary_.cs" />
-    <Compile Include="ShapeSheet\CellValueDictionary_.cs" />
-    <Compile Include="ShapeSheet\NamedSRCDictionary_.cs" />
+    <Compile Include="ShapeSheet\CellSrcDictionary.cs" />
+    <Compile Include="ShapeSheet\CellValueDictionary.cs" />
+    <Compile Include="ShapeSheet\NamedSrcDictionary.cs" />
     <Compile Include="ShapeSheet\ShapeSheetReader.cs" />
     <Compile Include="ShapeSheet\ShapeSheetWriter.cs" />
     <Compile Include="TargetShapeIDs.cs" />
