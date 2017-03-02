@@ -65,16 +65,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, 7);
 
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
-            writer.Commit(surface);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new ShapeSheetQuery();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat,"LinePattern");
 
             // Retrieve the values
-            var data_formulas = query.GetFormulas(surface);
-            var data_results = query.GetResults<double>(surface);
+            var data_formulas = query.GetFormulas(shape1);
+            var data_results = query.GetResults<double>(shape1);
 
             // Verify
             Assert.AreEqual("7", data_formulas.Cells[col_linepat]);
@@ -105,16 +104,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Setup the modifications to the cell values
             var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7");
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
-            writer.Commit(surface);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new ShapeSheetQuery();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
 
             // Retrieve the values
-            var data_formulas = query.GetFormulas(surface);
-            var data_results = query.GetResults<double>(surface);
+            var data_formulas = query.GetFormulas(shape1);
+            var data_results = query.GetResults<double>(shape1);
 
             // Verify
             Assert.AreEqual("7", data_formulas.Cells[col_linepat]);
@@ -182,8 +180,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var writer = new ShapeSheetWriter();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7");
             writer.SetResult(VA.ShapeSheet.SrcConstants.PinX, 2);
-            var surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(shape1);
-            writer.Commit(surface);
+            writer.Commit(shape1);
 
             // Build the query
             var query = new ShapeSheetQuery();
@@ -191,8 +188,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.PinX, "PinX");
 
             // Retrieve the values
-            var data_formulas = query.GetFormulas(surface);
-            var data_results = query.GetResults<double>(surface);
+            var data_formulas = query.GetFormulas(shape1);
+            var data_results = query.GetResults<double>(shape1);
 
             // Verify
             Assert.AreEqual("7", data_formulas.Cells[col_linepat]);

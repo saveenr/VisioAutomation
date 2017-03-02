@@ -455,10 +455,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var query = create_query_for_all_cells_and_sections();
 
             var page_surface = new ShapeSheetSurface(page1);
-            var shape_surface = new ShapeSheetSurface(s1);
-            var formulas1 = query.GetFormulas(shape_surface);
+            var formulas1 = query.GetFormulas(s1);
             var formulas2 = query.GetFormulas(page_surface,new [] {s1.ID,s2.ID});
-            var results1 = query.GetResults<double>(shape_surface);
+            var results1 = query.GetResults<double>(s1);
             var results2 = query.GetResults<double>(page_surface, new[] { s1.ID, s2.ID });
 
             doc1.Close(true);

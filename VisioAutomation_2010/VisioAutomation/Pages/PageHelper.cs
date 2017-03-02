@@ -61,8 +61,8 @@ namespace VisioAutomation.Pages
                 query.AddCell(src,"Col"+i.ToString());
                 i++;
             }
-            var src_surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(src_page.PageSheet);
-            var src_formulas = query.GetFormulas(src_surface);
+
+            var src_formulas = query.GetFormulas(src_page.PageSheet);
 
             // Set the Cells on the Destination
            

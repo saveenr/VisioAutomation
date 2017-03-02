@@ -43,6 +43,12 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
+        public QueryOutput<string> GetFormulas(IVisio.Shape shape)
+        {
+            var surface = new ShapeSheetSurface(shape);
+            return GetFormulas(surface);
+        }
+
         public QueryOutput<string> GetFormulas(ShapeSheetSurface surface)
         {
             RestrictToShapesOnly(surface);
@@ -58,6 +64,12 @@ namespace VisioAutomation.ShapeSheet.Query
             var output_for_shape = this._create_output_for_shape(surface.Target.ID16, sectioninfo, seg_builder);
 
             return output_for_shape;
+        }
+
+        public QueryOutput<TResult> GetResults<TResult>(IVisio.Shape shape )
+        {
+            var surface = new ShapeSheetSurface(shape);
+            return GetResults<TResult>(surface);
         }
 
         public QueryOutput<TResult> GetResults<TResult>(ShapeSheetSurface surface)
