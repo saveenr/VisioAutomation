@@ -72,7 +72,7 @@ namespace VisioAutomation.Models.Utilities
                 if (stencil_doc == null)
                 {
                     string msg = string.Format("Failed to open stencil \"{0}\"", stencil);
-                    throw new AutomationException(msg);
+                    throw new VisioOperationException(msg);
                 }
 
                 name_to_stencildoc[stencil] = stencil_doc;
@@ -95,7 +95,7 @@ namespace VisioAutomation.Models.Utilities
                             string msg =
                                 string.Format("No such master \"{0}\" in stencil \"{1}\"", master_ref.MasterName,
                                     master_ref.StencilName);
-                            throw new AutomationException(msg);
+                            throw new System.ArgumentException(msg);
                         }
                         master_ref.VisioMaster = master_object;                        
                     }
@@ -112,7 +112,7 @@ namespace VisioAutomation.Models.Utilities
                             string msg =
                                 string.Format("No such master \"{0}\" in Active Document \"{1}\"", master_ref.MasterName,
                                     stencildoc.Name);
-                            throw new AutomationException(msg);
+                            throw new System.ArgumentException(msg);
                         }
                         master_ref.VisioMaster = master_object;
                     }

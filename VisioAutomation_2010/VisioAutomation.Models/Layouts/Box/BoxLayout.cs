@@ -20,7 +20,7 @@ namespace VisioAutomation.Models.Layouts.Box
         {
             if (this.Root.Count < 1)
             {
-                throw new AutomationException("Root must contain at least one child");
+                throw new System.ArgumentException("Root must contain at least one child");
             }
 
             this.Root.CalculateSize();

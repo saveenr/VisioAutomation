@@ -64,17 +64,17 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             {
                 if (layout_connector.ID == null)
                 {
-                    throw new AutomationException("Connector's ID is null");                    
+                    throw new System.ArgumentException("Connector's ID is null");                    
                 }
 
                 if (layout_connector.From == null)
                 {
-                    throw new AutomationException("Connector's From node is null");
+                    throw new System.ArgumentException("Connector's From node is null");
                 }
 
                 if (layout_connector.To == null)
                 {
-                    throw new AutomationException("Connector's From node is null");
+                    throw new System.ArgumentException("Connector's From node is null");
                 }
             }
         }

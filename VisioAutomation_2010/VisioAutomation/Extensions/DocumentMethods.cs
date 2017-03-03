@@ -38,7 +38,7 @@ namespace VisioAutomation.Extensions
             if (stencil == null)
             {
                 string msg = string.Format("Could not open stencil \"{0}\"", filename);
-                throw new VisioAutomation.Exceptions.AutomationException(msg);
+                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
             return stencil;
         }
