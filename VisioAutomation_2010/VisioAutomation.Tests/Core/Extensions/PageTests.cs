@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 namespace VisioAutomation_Tests.Core.Extensions
 {
     [TestClass]
-    public class Pages_Tests : VisioAutomationTest
+    public class PageTests : VisioAutomationTest
     {
         [TestMethod]
         public void Page_CreatePage()

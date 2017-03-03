@@ -1,8 +1,6 @@
-using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VACHART=VisioAutomation.Models.Charting;
 using IVisio= Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -21,19 +19,16 @@ namespace VisioAutomation_Tests.Core.Extensions
             page1.Delete(0);
         }
 
-
-
-
         [TestMethod]
         public void Page_Draw_Spline()
         {
             var page1 = this.GetNewPage();
             var points = new[]
-                             {
-                                 new VA.Drawing.Point(0, 0), 
-                                 new VA.Drawing.Point(3, 3),
-                                 new VA.Drawing.Point(2, 0)
-                             };
+            {
+                new VA.Drawing.Point(0, 0),
+                new VA.Drawing.Point(3, 3),
+                new VA.Drawing.Point(2, 0)
+            };
 
             var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
             var s0 = page1.DrawSpline(doubles_array, 0, 0);
@@ -50,7 +45,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s0 = page1.DrawRectangle(rect);
             double width = rect.Width;
             double height = rect.Height;
-            double delta = 1.0/8.0;
+            double delta = 1.0 / 8.0;
 
             var o = new VA.Drawing.Point(0, 0);
 
@@ -75,89 +70,6 @@ namespace VisioAutomation_Tests.Core.Extensions
             // delete the framing rectangle
             s0.DeleteSection((short) IVisio.VisSectionIndices.visSectionFirstComponent);
 
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void Page_Draw_PieSlices()
-        {
-            var app = this.GetVisioApplication();
-            var doc = this.GetNewDoc();
-            var page = app.ActivePage;
-
-            int n = 36;
-            double start_angle = 0.0;
-            double radius = 1.0;
-            double cx = 0.0;
-            double cy = 2.0;
-            double angle_step = Math.PI * 2.0 / (n - 1);
-
-            foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
-            {
-                var center = new VA.Drawing.Point(cx, cy);
-                var ps = new VACHART.PieSlice(center, radius, start_angle, end_angle);
-                ps.Render(page);
-                cx += 2.5;
-            }
-
-            var bordersize = new VA.Drawing.Size(1, 1);
-            page.ResizeToFitContents(bordersize);
-
-            doc.Close(true);
-        }
-
-        [TestMethod]
-        public void Page_Draw_DoughnutSlices()
-        {
-            var app = this.GetVisioApplication();
-            var doc = this.GetNewDoc();
-            var page = app.ActivePage;
-
-            int n = 36;
-            double start_angle = 0.0;
-            double radius = 1.0;
-            double cx = 0.0;
-            double cy = 2.0;
-            double angle_step = Math.PI * 2.0 / (n - 1);
-
-            foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
-            {
-                var center = new VA.Drawing.Point(cx, cy);
-                var slice = new VACHART.PieSlice(center, start_angle, end_angle, radius - 0.2, radius);
-                slice.Render(page);
-                cx += 2.5;
-            }
-
-            var bordersize = new VA.Drawing.Size(1, 1);
-            page.ResizeToFitContents(bordersize);
-            doc.Close(true);
-        }
-
-        [TestMethod]
-        public void Page_Drop_ManyU()
-        {
-            var page1 = this.GetNewPage();            
-            var stencil = "basic_u.vss";
-
-            short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;
-            var app = page1.Application;
-            var documents = app.Documents;
-            var stencil_doc = documents.OpenEx(stencil, flags);
-
-            var masters1 = stencil_doc.Masters;
-            var masters = new [] {masters1["Rounded Rectangle"], masters1["Ellipse"]};
-            var points = new [] {new VA.Drawing.Point(1, 2), new VA.Drawing.Point(3, 4)};
-            Assert.AreEqual(0, page1.Shapes.Count);
-            var shapeids = page1.DropManyU(masters, points);
-            Assert.AreEqual(2, page1.Shapes.Count);
-            Assert.AreEqual(2, shapeids.Length );
-
-            var s0 = page1.Shapes[shapeids[0]];
-            var s1 = page1.Shapes[shapeids[1]];
-
-            Assert.AreEqual( masters[0].NameU, s0.Master.NameU );
-            Assert.AreEqual(masters[1].NameU, s1.Master.NameU);
-            
             page1.Delete(0);
         }
     }

@@ -11,6 +11,60 @@ namespace VisioAutomation_Tests.Models
     public class PieSliceTests : VisioAutomationTest
     {
         [TestMethod]
+        public void Page_Draw_PieSlices()
+        {
+            var app = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var page = app.ActivePage;
+
+            int n = 36;
+            double start_angle = 0.0;
+            double radius = 1.0;
+            double cx = 0.0;
+            double cy = 2.0;
+            double angle_step = System.Math.PI * 2.0 / (n - 1);
+
+            foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
+            {
+                var center = new VA.Drawing.Point(cx, cy);
+                var ps = new VA.Models.Charting.PieSlice(center, radius, start_angle, end_angle);
+                ps.Render(page);
+                cx += 2.5;
+            }
+
+            var bordersize = new VA.Drawing.Size(1, 1);
+            page.ResizeToFitContents(bordersize);
+
+            doc.Close(true);
+        }
+
+        [TestMethod]
+        public void Page_Draw_DoughnutSlices()
+        {
+            var app = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var page = app.ActivePage;
+
+            int n = 36;
+            double start_angle = 0.0;
+            double radius = 1.0;
+            double cx = 0.0;
+            double cy = 2.0;
+            double angle_step = System.Math.PI * 2.0 / (n - 1);
+
+            foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
+            {
+                var center = new VA.Drawing.Point(cx, cy);
+                var slice = new VA.Models.Charting.PieSlice(center, start_angle, end_angle, radius - 0.2, radius);
+                slice.Render(page);
+                cx += 2.5;
+            }
+
+            var bordersize = new VA.Drawing.Size(1, 1);
+            page.ResizeToFitContents(bordersize);
+            doc.Close(true);
+        }
+        [TestMethod]
         public void Radial_DrawPieSlices()
         {
             var doc = this.GetNewDoc();

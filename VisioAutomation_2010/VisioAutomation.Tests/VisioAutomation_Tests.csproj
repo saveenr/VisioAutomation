@@ -91,6 +91,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Extensions\PageDropTests.cs" />
+    <Compile Include="Core\ShapeSheet\FixedStreamBuilderTests.cs" />
     <Compile Include="Core\ShapeSheet\ArraySegmentTests.cs" />
     <Compile Include="DocumentAnalysis\ConnectivityMap.cs" />
     <Compile Include="DocumentAnalysis\PathAnalysis_Tests.cs" />
@@ -134,7 +136,7 @@
     <Compile Include="Models\Dom\Dom_Tests.cs" />
     <Compile Include="Core\Text\TextFormatTests.cs" />
     <Compile Include="Core\Shapes\CustomPropertiesTest.cs" />
-    <Compile Include="Core\Extensions\Selection_Tests.cs" />
+    <Compile Include="Core\Extensions\SelectionTests.cs" />
     <Compile Include="Core\InternalTests.cs" />
     <Compile Include="DocumentAnalysis\Path_Test.cs" />
     <Compile Include="Core\Shapes\UserDefinedCellsTests.cs" />
@@ -153,7 +155,7 @@
     <Compile Include="Core\Extensions\DocumentTests.cs" />
     <Compile Include="Framework\VisioAutomationTest.cs" />
     <Compile Include="Core\Extensions\PageDrawTests.cs" />
-    <Compile Include="Core\Extensions\Pages_Tests.cs" />
+    <Compile Include="Core\Extensions\PageTests.cs" />
     <Compile Include="Core\Text\TextUtilTests.cs" />
     <Compile Include="DocumentAnalysis\ConnectionPoint_Tests.cs" />
     <Compile Include="Core\Shapes\ControlTests.cs" />
