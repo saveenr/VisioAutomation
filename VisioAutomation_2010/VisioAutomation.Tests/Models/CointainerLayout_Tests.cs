@@ -26,7 +26,7 @@ namespace VisioAutomation_Tests.Models
                 IVisio.Page page = layout.Render(doc);
                 page.Delete(0);
             }
-            catch (AutomationException)
+            catch (System.ArgumentException)
             {
                 caught = true;
             }

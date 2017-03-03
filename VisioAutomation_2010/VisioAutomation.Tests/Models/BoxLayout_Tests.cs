@@ -20,7 +20,7 @@ namespace VisioAutomation_Tests.Models
                 layout.PerformLayout();
 
             }
-            catch (AutomationException)
+            catch (System.ArgumentException)
             {
                 thrown = true;
             }

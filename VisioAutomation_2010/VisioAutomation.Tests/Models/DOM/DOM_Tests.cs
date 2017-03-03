@@ -330,7 +330,7 @@ namespace VisioAutomation_Tests.Models.Dom
             {
                 page = page_node.Render(doc);
             }
-            catch (AutomationException)
+            catch (System.ArgumentException)
             {
                 caught = true;
             }
