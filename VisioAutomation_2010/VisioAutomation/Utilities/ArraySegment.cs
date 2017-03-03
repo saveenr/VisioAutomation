@@ -17,10 +17,10 @@ namespace VisioAutomation.Utilities
 
         public T this[int index]
         {
-            get { return set_value_at_index(index); }
+            get { return get_value_at_index(index); }
         }
 
-        private T set_value_at_index(int index)
+        private T get_value_at_index(int index)
         {
             validate_index(index);
 
