@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
             var st = window.SubType;
             if (st != 64)
             {
-                throw new AutomationException("The active window is not a master window");
+                throw new System.ArgumentException("The active window is not a master window");
             }
 
             var master = (IVisio.Master)window.Master;
@@ -197,7 +197,7 @@ namespace VisioAutomation.Scripting.Commands
                 document = application.ActiveDocument;
                 if (document == null)
                 {
-                    throw new AutomationException("No Active Document");
+                    throw new System.ArgumentException("No Active Document");
                 }
             }
 

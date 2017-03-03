@@ -110,7 +110,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 string msg =
                     string.Format("{0} usage error. {1}() before calling {2}().",
                         nameof(ContainerLayout), nameof(PerformLayout), nameof(Render));
-                throw new AutomationException(msg);
+                throw new System.ArgumentException(msg);
             }
             // create a new drawing
             var app = doc.Application;

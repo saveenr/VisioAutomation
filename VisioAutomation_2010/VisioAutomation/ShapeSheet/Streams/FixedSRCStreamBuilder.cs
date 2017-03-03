@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             return 3;
         }
 
-        public override void _Add(Src item)
+        protected override void _Add(Src item)
         {
             this._stream[this._pos++] = item.Section;
             this._stream[this._pos++] = item.Row;

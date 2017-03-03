@@ -76,7 +76,7 @@ namespace VisioAutomation.Models.Layouts.Box
         {
             if (n.Parent != null)
             {
-                throw new AutomationException("This item already has a parent");                
+                throw new System.ArgumentException("This item already has a parent");                
             }
 
             if (this.m_children == null)

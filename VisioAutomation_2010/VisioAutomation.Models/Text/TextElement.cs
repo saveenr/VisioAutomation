@@ -109,7 +109,7 @@ namespace VisioAutomation.Models.Text
                     else
                     {
                         string msg = "Unhandled node";
-                        throw new AutomationException(msg);
+                        throw new VisioOperationException(msg);
                     }
                 }
                 else if (walkevent.HasExitedNode)

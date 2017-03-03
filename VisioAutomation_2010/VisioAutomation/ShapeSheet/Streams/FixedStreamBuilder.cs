@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             this._count++;
         }
 
-        public abstract void _Add(T item);
+        protected abstract void _Add(T item);
 
         public void AddRange(IEnumerable<T> items)
         {
