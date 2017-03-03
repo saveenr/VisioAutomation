@@ -2,22 +2,17 @@ namespace VisioAutomation.ShapeSheet.Streams
 {
     public class FixedSidSrcStreamBuilder : FixedStreamBuilder<SidSrc>
     {
-        public FixedSidSrcStreamBuilder(int capacity) : base(capacity)
+        public FixedSidSrcStreamBuilder(int capacity) : base(capacity,4)
         {
 
         }
 
-        public override int get_chunksize()
+        protected override void _Add(Utilities.ArraySegment<short> seg, SidSrc item)
         {
-            return 4;
-        }
-
-        protected override void _Add(SidSrc item)
-        {
-            this._stream[this._pos++] = item.ShapeID;
-            this._stream[this._pos++] = item.Section;
-            this._stream[this._pos++] = item.Row;
-            this._stream[this._pos++] = item.Cell;
+            seg[0] = item.ShapeID;
+            seg[1] = item.Section;
+            seg[2] = item.Row;
+            seg[3] = item.Cell;
         }
     }
 }

@@ -7,16 +7,16 @@ namespace VisioAutomation.ShapeSheet.Streams
         protected short [] _stream;
         private int _capacity = -1;
         private int _count = 0;
-        protected int _pos = 0;
+        private int _pos = 0;
+        protected int _chunksize;
 
-        protected FixedStreamBuilder(int capacity)
+        protected FixedStreamBuilder(int capacity, int chunksize)
         {
             this._capacity = capacity;
-            int num_shorts = capacity * this.get_chunksize();
+            this._chunksize = chunksize;
+            int num_shorts = capacity * this._chunksize;
             this._stream = new short[num_shorts];
         }
-
-        public abstract int get_chunksize();
 
         public override int Count() => this._count;
 
@@ -27,16 +27,13 @@ namespace VisioAutomation.ShapeSheet.Streams
                 throw new System.ArgumentException("Already full");
             }
 
-            int old_pos = this._pos;
-            this._Add(item);
-            if (this._pos != old_pos + this.get_chunksize())
-            {
-                throw new System.ArgumentException();
-            }
+            var seg = new Utilities.ArraySegment<short>(this._stream,this._pos,this._chunksize);
+            this._Add(seg,item);
+            this._pos = this._pos + this._chunksize;
             this._count++;
         }
 
-        protected abstract void _Add(T item);
+        protected abstract void _Add(Utilities.ArraySegment<short> seg, T item);
 
         public void AddRange(IEnumerable<T> items)
         {

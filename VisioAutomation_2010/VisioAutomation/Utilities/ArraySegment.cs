@@ -18,6 +18,11 @@ namespace VisioAutomation.Utilities
         public T this[int index]
         {
             get { return get_value_at_index(index); }
+            set
+            {
+                validate_index(index);
+                this.Array[this._offset + index] = value;
+            }
         }
 
         private T get_value_at_index(int index)
