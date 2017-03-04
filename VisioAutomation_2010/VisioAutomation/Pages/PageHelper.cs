@@ -184,7 +184,7 @@ namespace VisioAutomation.Pages
 
         public static short[] DropManyAutoConnectors(
             IVisio.Page page,
-            IEnumerable<Drawing.Point> points)
+            ICollection<Drawing.Point> points)
         {
 
             if (points == null)
