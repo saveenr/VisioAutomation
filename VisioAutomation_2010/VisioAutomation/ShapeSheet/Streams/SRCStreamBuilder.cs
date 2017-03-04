@@ -12,9 +12,9 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         }
 
-        protected override short[] build_stream()
+        protected override StreamArray build_stream()
         {
-            return Src.ToStream(this._items);
+            return new StreamArray(Src.ToStream(this._items), Internal.CoordType.Src);
         }
     }
 }

@@ -26,7 +26,7 @@
             this.ValuesBuilder.Add(value);
         }
 
-        public short[] BuildStream()
+        public Streams.StreamArray BuildStream()
         {
             return this.StreamBuilder.ToStream();
         }

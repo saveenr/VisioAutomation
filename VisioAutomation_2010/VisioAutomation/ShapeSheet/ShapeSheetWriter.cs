@@ -129,14 +129,14 @@ namespace VisioAutomation.ShapeSheet
             var stream = coord_type == CoordType.SidSrc ? this.FormulaRecords_SidSrc.BuildStream() : this.FormulaRecords_Src.BuildStream();
             var formulas = coord_type == CoordType.SidSrc ? this.FormulaRecords_SidSrc.BuildValues() : this.FormulaRecords_Src.BuildValues();
 
-            if (stream.Length == 0)
+            if (stream.Array.Length == 0)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
             var flags = this.ComputeGetFormulaFlags();
 
-            int c = surface.SetFormulas(stream, formulas, (short)flags);
+            int c = surface.SetFormulas(stream.Array, formulas, (short)flags);
         }
 
         public void SetResult(Src src, CellValueLiteral result)
@@ -182,13 +182,13 @@ namespace VisioAutomation.ShapeSheet
             var results = coord_type == CoordType.SidSrc ? this.ResultRecords_SidSrc.BuildValues(): this.ResultRecords_Src.BuildValues();
             const object[] unitcodes = null;
             
-            if (stream.Length == 0)
+            if (stream.Array.Length == 0)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
             var flags = this.ComputeGetResultFlags();
-            surface.SetResults(stream, unitcodes, results, (short)flags);
+            surface.SetResults(stream.Array, unitcodes, results, (short)flags);
         }
     }
 }

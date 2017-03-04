@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.Internal
         }
 
 
-        public short[] BuildStream()
+        public Streams.StreamArray BuildStream()
         {
             return this.StreamBuilder.ToStream();
         }

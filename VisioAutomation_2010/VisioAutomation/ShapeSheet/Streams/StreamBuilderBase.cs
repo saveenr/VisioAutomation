@@ -33,12 +33,12 @@ namespace VisioAutomation.ShapeSheet.Streams
             this._items.Clear();
         }
 
-        public short[] ToStream()
+        public StreamArray ToStream()
         {
             var stream = this.build_stream();
             return stream;
         }
 
-        protected abstract short[] build_stream();
+        protected abstract StreamArray build_stream();
     }
 }
