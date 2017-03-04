@@ -7,15 +7,17 @@ namespace VisioAutomation.ShapeSheet.Streams
     {
         protected readonly short [] _stream;
         private readonly int _capacity = -1;
-        protected readonly int _chunksize;
+
+        internal readonly CoordType _coordtype;
+        protected int _chunksize => this._coordtype == CoordType.SidSrc ? 4 : 3;
 
         private int _count = 0;
         private int _pos = 0;
 
-        protected FixedStreamBuilderBase(int capacity, int chunksize)
+        internal FixedStreamBuilderBase(int capacity, CoordType coordtype)
         {
+            this._coordtype = coordtype;
             this._capacity = capacity;
-            this._chunksize = chunksize;
             int num_shorts = capacity * this._chunksize;
             this._stream = new short[num_shorts];
         }
@@ -51,7 +53,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             {
                 throw new System.ArgumentException("Not full");
             }
-            return new StreamArray(this._stream, this._chunksize == 4 ? CoordType.SidSrc : CoordType.Src);
+            return new StreamArray(this._stream, this._coordtype);
         }
 
         public void Clear()
