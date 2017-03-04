@@ -196,7 +196,7 @@ namespace VisioAutomation.Pages
 
             var app = page.Application;
             var thing = app.ConnectorToolDataObject;
-            int num_points = points.Count();
+            int num_points = points.Count;
             var masters_obj_array = Enumerable.Repeat(thing, num_points).ToArray();
             var xy_array = Drawing.Point.ToDoubles(points).ToArray();
 
