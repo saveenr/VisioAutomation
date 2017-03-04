@@ -4,11 +4,12 @@ namespace VisioAutomation.ShapeSheet.Streams
 {
     public abstract class FixedStreamBuilder<T> : StreamBuilderBase
     {
-        protected short [] _stream;
-        private int _capacity = -1;
+        protected readonly short [] _stream;
+        private readonly int _capacity = -1;
+        protected readonly int _chunksize;
+
         private int _count = 0;
         private int _pos = 0;
-        protected int _chunksize;
 
         protected FixedStreamBuilder(int capacity, int chunksize)
         {
@@ -28,12 +29,12 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
 
             var seg = new Utilities.ArraySegment<short>(this._stream,this._pos,this._chunksize);
-            this._Add(seg,item);
+            this._fill_segment_with_item(seg,item);
             this._pos = this._pos + this._chunksize;
             this._count++;
         }
 
-        protected abstract void _Add(Utilities.ArraySegment<short> seg, T item);
+        protected abstract void _fill_segment_with_item(Utilities.ArraySegment<short> seg, T item);
 
         public void AddRange(IEnumerable<T> items)
         {
@@ -52,7 +53,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             return this._stream;
         }
 
-        public void Clear()
+        public override void Clear()
         {
             this._count = 0;
             this._pos = 0;

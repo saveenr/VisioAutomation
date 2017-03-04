@@ -4,33 +4,33 @@ namespace VisioAutomation.ShapeSheet.Streams
 {
     public abstract class StreamBuilder<T> : StreamBuilderBase
     {
-        protected List<T> items;
+        protected readonly List<T> _items;
 
-        public StreamBuilder()
+        protected StreamBuilder()
         {
-            this.items = new List<T>();
+            this._items = new List<T>();
         }
 
-        protected override int _GetCount() => this.items.Count;
+        protected override int _GetCount() => this._items.Count;
 
-        public StreamBuilder(int capacity)
+        protected StreamBuilder(int capacity)
         {
-            this.items = new List<T>(capacity);
+            this._items = new List<T>(capacity);
         }
 
         public void Add(T item)
         {
-            this.items.Add(item);
+            this._items.Add(item);
         }
 
         public void AddRange(IEnumerable<T> items)
         {
-            this.items.AddRange(items);
+            this._items.AddRange(items);
         }
 
-        public void Clear()
+        public override void Clear()
         {
-            this.items.Clear();
+            this._items.Clear();
         }
 
         public override short[] ToStream()

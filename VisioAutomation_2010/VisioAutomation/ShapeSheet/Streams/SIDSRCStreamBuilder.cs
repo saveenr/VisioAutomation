@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         protected override short[] build_stream()
         {
-            return SidSrc.ToStream(this.items);
+            return SidSrc.ToStream(this._items);
         }
     }
 }

@@ -7,6 +7,8 @@ namespace VisioAutomation.ShapeSheet.Streams
         public int Count => this._GetCount();
 
         protected abstract int _GetCount();
+
+        public abstract void Clear();
     }
 }
 

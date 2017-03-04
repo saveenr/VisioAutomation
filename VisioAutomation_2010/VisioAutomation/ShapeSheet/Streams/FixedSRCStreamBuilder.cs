@@ -1,6 +1,3 @@
-using System;
-using VisioAutomation.Utilities;
-
 namespace VisioAutomation.ShapeSheet.Streams
 {
     public class FixedSrcStreamBuilder : FixedStreamBuilder<Src>
@@ -10,7 +7,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         }
 
-        protected override void _Add(Utilities.ArraySegment<short> seg, Src item)
+        protected override void _fill_segment_with_item(Utilities.ArraySegment<short> seg, Src item)
         {
             seg[0] = item.Section;
             seg[1] = item.Row;
