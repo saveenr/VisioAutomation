@@ -102,8 +102,7 @@
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
     <Compile Include="ShapeSheet\Streams\FixedSidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\FixedSrcStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\FixedStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
+    <Compile Include="ShapeSheet\Streams\FixedStreamBuilderBase.cs" />
     <Compile Include="ShapeSheet\Internal\WriterCollection_SidSrc.cs" />
     <Compile Include="ShapeSheet\Internal\WriterCollection_Src.cs" />
     <Compile Include="Utilities\ArraySegmentReader.cs" />

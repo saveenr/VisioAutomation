@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
-    public abstract class FixedStreamBuilder<T> : StreamBuilderBase
+    public abstract class FixedStreamBuilderBase<T>
     {
         protected readonly short [] _stream;
         private readonly int _capacity = -1;
@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         private int _count = 0;
         private int _pos = 0;
 
-        protected FixedStreamBuilder(int capacity, int chunksize)
+        protected FixedStreamBuilderBase(int capacity, int chunksize)
         {
             this._capacity = capacity;
             this._chunksize = chunksize;
@@ -19,7 +19,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             this._stream = new short[num_shorts];
         }
 
-        protected override int _GetCount() => this._count;
+        public int Count => this._count;
 
         public void Add(T item)
         {
@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
         }
 
-        public override short[] ToStream()
+        public short[] ToStream()
         {
             if (this._count != this._capacity)
             {
@@ -53,7 +53,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             return this._stream;
         }
 
-        public override void Clear()
+        public void Clear()
         {
             this._count = 0;
             this._pos = 0;
