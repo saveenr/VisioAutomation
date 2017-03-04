@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             this._stream = new short[num_shorts];
         }
 
-        public override int Count() => this._count;
+        protected override int _GetCount() => this._count;
 
         public void Add(T item)
         {

@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             this.items = new List<T>();
         }
 
-        public override int Count() => this.items.Count;
+        protected override int _GetCount() => this.items.Count;
 
         public StreamBuilder(int capacity)
         {

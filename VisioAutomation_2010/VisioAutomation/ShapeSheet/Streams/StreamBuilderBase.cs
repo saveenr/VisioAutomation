@@ -4,7 +4,9 @@ namespace VisioAutomation.ShapeSheet.Streams
     {
         public abstract short[] ToStream();
 
-        public abstract int Count();
+        public int Count => this._GetCount();
+
+        protected abstract int _GetCount();
     }
 }
 

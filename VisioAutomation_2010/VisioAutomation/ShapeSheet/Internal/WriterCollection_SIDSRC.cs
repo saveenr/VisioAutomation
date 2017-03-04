@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Internal
             return this.ValuesBuilder.ToObjectArray();
         }
 
-        public int Count => this.StreamBuilder.Count();
+        public int Count => this.StreamBuilder.Count;
 
     }
 }
