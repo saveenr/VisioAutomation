@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Internal;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
@@ -44,13 +45,13 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
         }
 
-        public short[] ToStream()
+        public VisioAutomation.ShapeSheet.Streams.StreamArray ToStream()
         {
             if (this._count != this._capacity)
             {
                 throw new System.ArgumentException("Not full");
             }
-            return this._stream;
+            return new StreamArray(this._stream, this._chunksize == 4 ? CoordType.SidSrc : CoordType.Src);
         }
 
         public void Clear()

@@ -16,6 +16,11 @@ namespace VisioAutomation.ShapeSheet.Streams
             this.Array = array;
             this.CoordType = coord;
             this.ChunkSize = coord == Internal.CoordType.SidSrc ? 4 : 3;
+
+            if (array.Length % this.ChunkSize != 0)
+            {
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Coordinate type and length of array to not match");
+            }
         }
 
     }

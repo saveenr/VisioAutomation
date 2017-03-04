@@ -136,7 +136,7 @@ namespace VisioAutomation.ShapeSheet
 
             var flags = this.ComputeGetFormulaFlags();
 
-            int c = surface.SetFormulas(stream.Array, formulas, (short)flags);
+            int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
         public void SetResult(Src src, CellValueLiteral result)
@@ -188,7 +188,7 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var flags = this.ComputeGetResultFlags();
-            surface.SetResults(stream.Array, unitcodes, results, (short)flags);
+            surface.SetResults(stream, unitcodes, results, (short)flags);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace VisioAutomation.Text
 
             const object[] unitcodes = null;
 
-            var results = surface.GetResults<double>(stream.ToStream().Array, unitcodes);
+            var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)

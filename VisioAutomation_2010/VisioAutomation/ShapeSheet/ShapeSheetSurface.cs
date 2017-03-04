@@ -27,46 +27,46 @@ namespace VisioAutomation.ShapeSheet
             this.Target = new SurfaceTarget(shape);
         }
 
-        public int SetFormulas(short[] stream, object[] formulas, short flags)
+        public int SetFormulas(Streams.StreamArray stream, object[] formulas, short flags)
         {
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetFormulas(stream, formulas, flags);
+                return this.Target.Shape.SetFormulas(stream.Array, formulas, flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetFormulas(stream, formulas, flags);
+                return this.Target.Master.SetFormulas(stream.Array, formulas, flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetFormulas(stream, formulas, flags);
+                return this.Target.Page.SetFormulas(stream.Array, formulas, flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public int SetResults(short[] stream, object[] unitcodes, object[] results, short flags)
+        public int SetResults(Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
 
             if (this.Target.Shape != null)
             {
-                return this.Target.Shape.SetResults(stream, unitcodes, results, flags);
+                return this.Target.Shape.SetResults(stream.Array, unitcodes, results, flags);
             }
             else if (this.Target.Master != null)
             {
-                return this.Target.Master.SetResults(stream, unitcodes, results, flags);
+                return this.Target.Master.SetResults(stream.Array, unitcodes, results, flags);
             }
             else if (this.Target.Page != null)
             {
-                return this.Target.Page.SetResults(stream, unitcodes, results, flags);
+                return this.Target.Page.SetResults(stream.Array, unitcodes, results, flags);
             }
 
             throw new System.ArgumentException("Unhandled Target");
         }
 
-        public TResult[] GetResults<TResult>(short[] stream, object[] unitcodes)
+        public TResult[] GetResults<TResult>(Streams.StreamArray stream, object[] unitcodes)
         {
-            if (stream.Length == 0)
+            if (stream.Array.Length == 0)
             {
                 return new TResult[0];
             }
@@ -79,15 +79,15 @@ namespace VisioAutomation.ShapeSheet
 
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetResults(stream, (short)flags, unitcodes, out results_sa);
+                this.Target.Master.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetResults(stream, (short)flags, unitcodes, out results_sa);
+                this.Target.Page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetResults(stream, (short)flags, unitcodes, out results_sa);
+                this.Target.Shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
             }
             else
             {
@@ -98,9 +98,9 @@ namespace VisioAutomation.ShapeSheet
             return results;
         }
 
-        public string[] GetFormulasU(short[] stream)
+        public string[] GetFormulasU(Streams.StreamArray stream)
         {
-            if (stream.Length==0)
+            if (stream.Array.Length==0)
             {
                 return new string[0];
             }
@@ -109,15 +109,15 @@ namespace VisioAutomation.ShapeSheet
 
             if (this.Target.Master != null)
             {
-                this.Target.Master.GetFormulasU(stream, out formulas_sa);
+                this.Target.Master.GetFormulasU(stream.Array, out formulas_sa);
             }
             else if (this.Target.Page != null)
             {
-                this.Target.Page.GetFormulasU(stream, out formulas_sa);
+                this.Target.Page.GetFormulasU(stream.Array, out formulas_sa);
             }
             else if (this.Target.Shape != null)
             {
-                this.Target.Shape.GetFormulasU(stream, out formulas_sa);
+                this.Target.Shape.GetFormulasU(stream.Array, out formulas_sa);
             }
             else
             {
