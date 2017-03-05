@@ -1,3 +1,5 @@
+using System.Windows.Forms.VisualStyles;
+
 namespace VisioAutomation.ShapeSheet.Streams
 {
     public struct StreamArray
@@ -5,8 +7,9 @@ namespace VisioAutomation.ShapeSheet.Streams
         public readonly short[] Array;
         public readonly Streams.StreamType StreamType;
         public readonly int ChunkSize;
+        public readonly int Count;
 
-        internal StreamArray(short[] array, Streams.StreamType cell_coord)
+        internal StreamArray(short[] array, Streams.StreamType cell_coord, int count)
         {
             if (array == null)
             {
@@ -21,6 +24,13 @@ namespace VisioAutomation.ShapeSheet.Streams
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Coordinate type and length of array to not match");
             }
+
+            if (count * this.ChunkSize != array.Length)
+            {
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Count does not match the number of short elements in the array");
+            }
+
+            this.Count = count;
         }
 
     }

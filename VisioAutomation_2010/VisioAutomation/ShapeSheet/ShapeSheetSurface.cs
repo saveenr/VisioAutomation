@@ -29,6 +29,14 @@ namespace VisioAutomation.ShapeSheet
 
         public int SetFormulas(Streams.StreamArray stream, object[] formulas, short flags)
         {
+            if (formulas.Length != stream.Count)
+            {
+                string msg =
+                    string.Format("stream contains {0} items ({1} short values) and requires {2} formula values",
+                        stream.Count, stream.Array.Length, stream.Count);
+                throw new ArgumentException(msg);
+            }
+
             if (this.Target.Shape != null)
             {
                 return this.Target.Shape.SetFormulas(stream.Array, formulas, flags);
@@ -47,6 +55,13 @@ namespace VisioAutomation.ShapeSheet
 
         public int SetResults(Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
+            if (results.Length != stream.Count)
+            {
+                string msg =
+                    string.Format("stream contains {0} items ({1} short values) and requires {2} result values",
+                        stream.Count, stream.Array.Length, stream.Count);
+                throw new ArgumentException(msg);
+            }
 
             if (this.Target.Shape != null)
             {

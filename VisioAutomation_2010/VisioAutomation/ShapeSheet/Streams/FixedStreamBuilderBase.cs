@@ -52,7 +52,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             {
                 throw new System.ArgumentException("Not full");
             }
-            return new StreamArray(this._stream, this._streamtype);
+            return new StreamArray(this._stream, this._streamtype, this._capacity);
         }
 
         public void Clear()
