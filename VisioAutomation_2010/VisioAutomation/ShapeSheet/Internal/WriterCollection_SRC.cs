@@ -1,41 +1,58 @@
-﻿namespace VisioAutomation.ShapeSheet.Internal
+﻿using System.Collections.Generic;
+using System.Linq;
+using VisioAutomation.ShapeSheet.Streams;
+
+namespace VisioAutomation.ShapeSheet.Internal
 {
     class WriterCollection_Src
     {
-        public VisioAutomation.ShapeSheet.Streams.SrcStreamBuilder StreamBuilder;
-        public VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string> ValuesBuilder;
-
+        private List<SrcWrite> items;
 
         public WriterCollection_Src()
         {
-
-            this.StreamBuilder = new VisioAutomation.ShapeSheet.Streams.SrcStreamBuilder();
-            this.ValuesBuilder = new VisioAutomation.ShapeSheet.Internal.ObjectArrayBuilder<string>();
+            this.items = new List<SrcWrite>();
         }
 
         public void Clear()
         {
-            this.StreamBuilder.Clear();
-            this.ValuesBuilder.Clear();
+            this.items.Clear();
         }
-
 
         public void Add(Src src, string value)
         {
-            this.StreamBuilder.Add(src);
-            this.ValuesBuilder.Add(value);
+            var item = new SrcWrite(src, value);
+            this.items.Add(item);
         }
 
         public Streams.StreamArray BuildStream()
         {
-            return this.StreamBuilder.ToStream();
+            var streambuilder = new FixedSrcStreamBuilder(this.items.Count);
+            streambuilder.AddRange(this.items.Select(i => i.Src));
+            return streambuilder.ToStream();
         }
 
         public object[] BuildValues()
         {
-            return this.ValuesBuilder.ToObjectArray();
+            var array = new object[this.items.Count];
+            for (int i = 0; i < this.items.Count; i++)
+            {
+                array[i] = this.items[i].Value;
+            }
+            return array;
         }
 
-        public int Count => this.StreamBuilder.Count;
+        public int Count => this.items.Count;
+
+        struct SrcWrite
+        {
+            public Src Src;
+            public string Value;
+
+            public SrcWrite(Src src, string value)
+            {
+                this.Src = src;
+                this.Value = value;
+            }
+        }
     }
 }

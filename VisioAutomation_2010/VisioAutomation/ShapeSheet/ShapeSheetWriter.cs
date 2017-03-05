@@ -96,8 +96,7 @@ namespace VisioAutomation.ShapeSheet
 
             if (formula.HasValue)
             {
-                this.FormulaRecords_Src.StreamBuilder.Add(src);
-                this.FormulaRecords_Src.ValuesBuilder.Add(formula.Value);
+                this.FormulaRecords_Src.Add(src,formula.Value);
             }
         }
 
@@ -146,8 +145,7 @@ namespace VisioAutomation.ShapeSheet
                 this.ResultRecords_Src = new WriterCollection_Src();
             }
 
-            this.ResultRecords_Src.StreamBuilder.Add(src);
-            this.ResultRecords_Src.ValuesBuilder.Add(result.Value);
+            this.ResultRecords_Src.Add(src,result.Value);
         }
 
         public void SetResult(short id, Src src, CellValueLiteral result)
