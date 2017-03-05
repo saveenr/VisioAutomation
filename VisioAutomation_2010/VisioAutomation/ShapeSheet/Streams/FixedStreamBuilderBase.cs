@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Internal;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
