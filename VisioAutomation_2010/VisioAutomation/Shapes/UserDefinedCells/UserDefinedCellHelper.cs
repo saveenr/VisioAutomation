@@ -75,7 +75,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
             if (value.HasValue)
             {

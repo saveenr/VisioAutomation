@@ -66,7 +66,7 @@ namespace VisioAutomation.Pages
 
             // Set the Cells on the Destination
            
-            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             for (i = 0; i < page_srcs.Count; i++)
             {
                 writer.SetFormula(page_srcs[i],src_formulas.Cells[i]);
@@ -175,7 +175,7 @@ namespace VisioAutomation.Pages
 
         internal static void SetSize(IVisio.Page page, Drawing.Size size)
         {
-            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 

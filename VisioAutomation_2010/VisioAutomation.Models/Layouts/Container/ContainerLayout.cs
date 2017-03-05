@@ -169,7 +169,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 item.VisioShape.Text = item.Text;
             }
 
-            var writer = new ShapeSheetWriterSidSrc();
+            var writer = new SidSrcWriter();
 
             // Format the containers and shapes
 
@@ -211,7 +211,7 @@ namespace VisioAutomation.Models.Layouts.Container
 
             // Dropping takes care of the PinX and PinY
             // Now set the Width's and Heights
-            var writer = new ShapeSheetWriterSidSrc();
+            var writer = new SidSrcWriter();
             for (int i = 0; i < rects.Count(); i++)
             {
                 writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.Width, rects[i].Width);

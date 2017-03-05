@@ -61,7 +61,7 @@ namespace VisioAutomation.Shapes.Hyperlinks
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             hyperlink.SetFormulas(writer, row);
 
             writer.Commit(shape);

@@ -160,7 +160,7 @@ namespace VisioAutomation.Models.Text
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
             foreach (var region in regions_to_format)
             {

@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.ShapeSheet.Writers
 {
-    public class ShapeSheetWriterBase
+    public class WriterBase
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }

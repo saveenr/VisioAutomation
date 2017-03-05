@@ -140,7 +140,7 @@ namespace VisioAutomation.Pages.PageLayout
             var pagecells = new PageLayoutFormulas();
             this.SetPageCells(pagecells);
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.AvenueSizeX,pagecells.AvenueSizeX);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.AvenueSizeY, pagecells.AvenueSizeY);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.LineRouteExt, pagecells.LineRouteExt);
