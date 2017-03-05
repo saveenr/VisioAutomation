@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet.Streams;
 
 namespace VisioAutomation.ShapeSheet.Internal
 {
-    class WriterCollection_SidSrc
+    class WriterCollection<T>
     {
-        private List<SidSrcWrite> items;
+        private List<WriteRecord> items;
 
-        public WriterCollection_SidSrc()
+        public WriterCollection()
         {
-            this.items = new List<SidSrcWrite>();
+            this.items = new List<WriteRecord>();
         }
 
         public void Clear()
@@ -18,17 +17,15 @@ namespace VisioAutomation.ShapeSheet.Internal
             this.items.Clear();
         }
 
-        public void Add(SidSrc sidsrc, string value)
+        public void Add(T coord, string value)
         {
-            var item = new SidSrcWrite(sidsrc,value);
+            var item = new WriteRecord(coord, value);
             this.items.Add(item);
         }
 
-        public Streams.StreamArray BuildStream()
+        public IEnumerable<T> EnumCoords()
         {
-            var streambuilder = new FixedSidSrcStreamBuilder(this.items.Count);
-            streambuilder.AddRange(this.items.Select( i=>i.SidSrc));
-            return streambuilder.ToStream();
+            return this.items.Select(i=>i.Coord);
         }
 
         public object[] BuildValues()
@@ -43,14 +40,14 @@ namespace VisioAutomation.ShapeSheet.Internal
 
         public int Count => this.items.Count;
 
-        struct SidSrcWrite
+        struct WriteRecord
         {
-            public SidSrc SidSrc;
+            public T Coord;
             public string Value;
 
-            public SidSrcWrite(SidSrc sidsrc, string value)
+            public WriteRecord(T coord, string value)
             {
-                this.SidSrc = sidsrc;
+                this.Coord = coord;
                 this.Value = value;
             }
         }

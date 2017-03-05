@@ -8,10 +8,10 @@ namespace VisioAutomation.ShapeSheet
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        private WriterCollection_SidSrc FormulaRecords_SidSrc;
-        private WriterCollection_Src FormulaRecords_Src;
-        private WriterCollection_Src ResultRecords_Src;
-        private WriterCollection_SidSrc ResultRecords_SidSrc;
+        private WriterCollection<SidSrc> FormulaRecords_SidSrc;
+        private WriterCollection<Src> FormulaRecords_Src;
+        private WriterCollection<Src> ResultRecords_Src;
+        private WriterCollection<SidSrc> ResultRecords_SidSrc;
 
         public ShapeSheetWriter()
         {
@@ -91,7 +91,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.FormulaRecords_Src == null)
             {
-                this.FormulaRecords_Src = new WriterCollection_Src();
+                this.FormulaRecords_Src = new WriterCollection<Src>();
             }
 
             if (formula.HasValue)
@@ -104,13 +104,27 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.FormulaRecords_SidSrc == null)
             {
-                this.FormulaRecords_SidSrc = new WriterCollection_SidSrc();
+                this.FormulaRecords_SidSrc = new WriterCollection<SidSrc>();
             }
 
             if (formula.HasValue)
             {
                 this.FormulaRecords_SidSrc.Add(sidsrc, formula.Value);
             }
+        }
+
+        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_sidsrc(WriterCollection<SidSrc> wcs)
+        {
+            var builder = new VisioAutomation.ShapeSheet.Streams.FixedSidSrcStreamBuilder(wcs.Count);
+            builder.AddRange(wcs.EnumCoords());
+            return builder.ToStream();
+        }
+
+        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_src(WriterCollection<Src> wcs)
+        {
+            var builder = new VisioAutomation.ShapeSheet.Streams.FixedSrcStreamBuilder(wcs.Count);
+            builder.AddRange(wcs.EnumCoords());
+            return builder.ToStream();
         }
 
         private void CommitFormulaRecordsByType(ShapeSheetSurface surface, Streams.StreamType cell_coord)
@@ -125,7 +139,7 @@ namespace VisioAutomation.ShapeSheet
                 return;
             }
 
-            var stream = cell_coord == Streams.StreamType.SidSrc ? this.FormulaRecords_SidSrc.BuildStream() : this.FormulaRecords_Src.BuildStream();
+            var stream = cell_coord == Streams.StreamType.SidSrc ? this.buildstream_sidsrc(this.FormulaRecords_SidSrc) : this.buildstream_src(this.FormulaRecords_Src);
             var formulas = cell_coord == Streams.StreamType.SidSrc ? this.FormulaRecords_SidSrc.BuildValues() : this.FormulaRecords_Src.BuildValues();
 
             if (stream.Array.Length == 0)
@@ -142,7 +156,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.ResultRecords_Src == null)
             {
-                this.ResultRecords_Src = new WriterCollection_Src();
+                this.ResultRecords_Src = new WriterCollection<Src>();
             }
 
             this.ResultRecords_Src.Add(src,result.Value);
@@ -158,7 +172,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if (this.ResultRecords_SidSrc == null)
             {
-                this.ResultRecords_SidSrc = new WriterCollection_SidSrc();
+                this.ResultRecords_SidSrc = new WriterCollection<SidSrc>();
             }
 
             this.ResultRecords_SidSrc.Add(sidsrc, result.Value);
@@ -176,7 +190,7 @@ namespace VisioAutomation.ShapeSheet
                 return;
             }
 
-            var stream = cell_coord == Streams.StreamType.SidSrc ? this.ResultRecords_SidSrc.BuildStream() : this.ResultRecords_Src.BuildStream();
+            var stream = cell_coord == Streams.StreamType.SidSrc ? this.buildstream_sidsrc(this.ResultRecords_SidSrc) : this.buildstream_src(this.ResultRecords_Src);
             var results = cell_coord == Streams.StreamType.SidSrc ? this.ResultRecords_SidSrc.BuildValues(): this.ResultRecords_Src.BuildValues();
             const object[] unitcodes = null;
             
