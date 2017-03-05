@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             targets = targets.ResolveShapes(this._client);
             var shape_ids = targets.ToShapeIDs();
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc();
 
             foreach (var shape_id in shape_ids.ShapeIDs)
             {
@@ -102,7 +102,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetPageCells(TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
         {
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSidSrc();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
@@ -142,7 +142,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetShapeCells(TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
         {
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSidSrc();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 

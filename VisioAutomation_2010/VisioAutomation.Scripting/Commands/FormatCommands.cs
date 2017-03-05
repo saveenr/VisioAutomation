@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSidSrc();
             var shapeids = targets.Shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -106,7 +106,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSidSrc();
             var shapeids = targets.Shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)

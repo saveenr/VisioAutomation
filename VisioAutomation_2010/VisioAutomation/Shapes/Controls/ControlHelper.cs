@@ -52,7 +52,7 @@ namespace VisioAutomation.Shapes.Controls
                 ctrl.YDynamics = string.Format("Controls.Row_{0}.Y", row + 1);
             }
 
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSrc();
             ctrl.SetFormulas(writer, row);
 
             writer.Commit(shape);

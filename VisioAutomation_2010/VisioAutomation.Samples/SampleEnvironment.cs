@@ -59,7 +59,7 @@ namespace VisioAutomationSamples
 
             var page_sheet = page.PageSheet;
 
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSrc();
             writer.SetFormula(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetFormula(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
 

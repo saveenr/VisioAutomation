@@ -59,7 +59,7 @@ namespace VisioAutomationSamples
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc();
             var format = new VA.Shapes.ShapeFormatCells();
             var xfrm = new VA.Shapes.XFormCells();
 
@@ -123,7 +123,7 @@ namespace VisioAutomationSamples
 
             var format = new VA.Shapes.ShapeFormatCells();
 
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc();
 
             string color1_formula = color1.ToFormula();
             string color2_formula = color2.ToFormula();

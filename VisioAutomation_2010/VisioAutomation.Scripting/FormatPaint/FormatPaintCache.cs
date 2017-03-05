@@ -126,7 +126,7 @@ namespace VisioAutomation.Scripting.FormatPaint
             var matching_cells = this.Cells.Where(c => c.MatchesCategory(category)).ToArray();
 
             // Apply those matched cells to each shape
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSidSrc();
             foreach (var shape_id in shapeids)
             {
                 foreach (var cell in matching_cells)

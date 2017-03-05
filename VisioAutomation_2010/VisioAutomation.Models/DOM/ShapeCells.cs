@@ -121,7 +121,7 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.CellValueLiteral ShapeSplittable { get; set; }
 
 
-        public void Apply(ShapeSheetWriter writer, short id)
+        public void Apply(ShapeSheetWriterSidSrc writer, short id)
         {
             writer.SetFormula(id, ShapeSheet.SrcConstants.Width, this.Width);
             writer.SetFormula(id, ShapeSheet.SrcConstants.Height, this.Height);
