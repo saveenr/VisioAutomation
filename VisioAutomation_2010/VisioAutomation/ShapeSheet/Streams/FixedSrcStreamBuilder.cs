@@ -1,5 +1,3 @@
-using VisioAutomation.ShapeSheet.Internal;
-
 namespace VisioAutomation.ShapeSheet.Streams
 {
     public class FixedSrcStreamBuilder : FixedStreamBuilderBase<Src>
