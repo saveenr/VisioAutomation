@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Internal
 {
-    class WriterCollection<T>
+    internal class WriterCollection<T>
     {
         private List<WriteRecord> items;
 

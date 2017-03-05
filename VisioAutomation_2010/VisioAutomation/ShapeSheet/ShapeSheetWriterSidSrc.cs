@@ -2,23 +2,10 @@
 
 namespace VisioAutomation.ShapeSheet
 {
-    public class ShapeSheetWriterSidSrc
+    public class ShapeSheetWriterBase
     {
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
-
-        private WriterCollection<SidSrc> FormulaRecords;
-        private WriterCollection<SidSrc> ResultRecords;
-
-        public ShapeSheetWriterSidSrc()
-        {
-        }
-
-        public void Clear()
-        {
-            FormulaRecords?.Clear();
-            ResultRecords?.Clear();
-        }
 
         protected Microsoft.Office.Interop.Visio.VisGetSetArgs ComputeGetResultFlags()
         {
@@ -44,6 +31,24 @@ namespace VisioAutomation.ShapeSheet
 
             var flags = ((short)f_bg) | ((short)f_tc);
             return (Microsoft.Office.Interop.Visio.VisGetSetArgs)flags;
+        }
+
+    }
+
+    public class ShapeSheetWriterSidSrc : ShapeSheetWriterBase
+    {
+
+        private WriterCollection<SidSrc> FormulaRecords;
+        private WriterCollection<SidSrc> ResultRecords;
+
+        public ShapeSheetWriterSidSrc()
+        {
+        }
+
+        public void Clear()
+        {
+            FormulaRecords?.Clear();
+            ResultRecords?.Clear();
         }
 
         public void Commit(Microsoft.Office.Interop.Visio.Shape shape)
