@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         protected override StreamArray build_stream()
         {
             var short_array = SidSrc.ToStream(this._items);
-            return new StreamArray(short_array,Internal.CellCoord.SidSrc);
+            return new StreamArray(short_array, Streams.StreamType.SidSrc);
         }
     }
 }

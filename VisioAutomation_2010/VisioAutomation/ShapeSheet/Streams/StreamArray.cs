@@ -3,10 +3,10 @@ namespace VisioAutomation.ShapeSheet.Streams
     public struct StreamArray
     {
         public readonly short[] Array;
-        internal Internal.CellCoord CellCoord;
+        public readonly Streams.StreamType StreamType;
         public readonly int ChunkSize;
 
-        internal StreamArray(short[] array, Internal.CellCoord cell_coord)
+        internal StreamArray(short[] array, Streams.StreamType cell_coord)
         {
             if (array == null)
             {
@@ -14,8 +14,8 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
 
             this.Array = array;
-            this.CellCoord = cell_coord;
-            this.ChunkSize = cell_coord == Internal.CellCoord.SidSrc ? 4 : 3;
+            this.StreamType = cell_coord;
+            this.ChunkSize = cell_coord == Streams.StreamType.SidSrc ? 4 : 3;
 
             if (array.Length % this.ChunkSize != 0)
             {

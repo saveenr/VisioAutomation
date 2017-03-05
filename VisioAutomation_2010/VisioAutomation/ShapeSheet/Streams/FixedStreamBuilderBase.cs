@@ -8,15 +8,15 @@ namespace VisioAutomation.ShapeSheet.Streams
         protected readonly short [] _stream;
         private readonly int _capacity = -1;
 
-        internal readonly CellCoord _coordtype;
-        protected int _chunksize => this._coordtype == CellCoord.SidSrc ? 4 : 3;
+        protected readonly StreamType _streamtype;
+        protected int _chunksize => this._streamtype == StreamType.SidSrc ? 4 : 3;
 
         private int _count = 0;
         private int _pos = 0;
 
-        internal FixedStreamBuilderBase(int capacity, CellCoord coordtype)
+        internal FixedStreamBuilderBase(int capacity, StreamType stream_type)
         {
-            this._coordtype = coordtype;
+            this._streamtype = stream_type;
             this._capacity = capacity;
             int num_shorts = capacity * this._chunksize;
             this._stream = new short[num_shorts];
@@ -53,7 +53,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             {
                 throw new System.ArgumentException("Not full");
             }
-            return new StreamArray(this._stream, this._coordtype);
+            return new StreamArray(this._stream, this._streamtype);
         }
 
         public void Clear()
