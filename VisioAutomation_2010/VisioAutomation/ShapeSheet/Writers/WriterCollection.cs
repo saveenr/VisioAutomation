@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.ShapeSheet.Internal
+namespace VisioAutomation.ShapeSheet.Writers
 {
     internal class WriterCollection<T>
     {

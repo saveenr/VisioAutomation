@@ -1,3 +1,5 @@
+using VisioAutomation.ShapeSheet.Writers;
+
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupMultiRow : CellGroupBase

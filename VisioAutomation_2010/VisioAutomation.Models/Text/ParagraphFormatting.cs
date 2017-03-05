@@ -19,7 +19,7 @@ namespace VisioAutomation.Models.Text
         public ShapeSheet.CellValueLiteral SpacingLine { get; set; }
         public ShapeSheet.CellValueLiteral TextPosAfterBullet { get; set; }
         
-        internal void ApplyFormulas(ShapeSheetWriterSrc writer, short row)
+        internal void ApplyFormulas(VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc writer, short row)
         {
             writer.SetFormula(SrcConstants.Para_IndLeft.CloneWithNewRow(row), this.IndentLeft);
             writer.SetFormula(SrcConstants.Para_IndFirst.CloneWithNewRow(row), this.IndentFirst);

@@ -43,7 +43,7 @@ namespace VisioAutomation.Shapes.Geometry
             short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
-            var writer = new ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
 
             var src_nofill = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.Geometry_NoFill.Cell);
             var src_noline = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.Geometry_NoLine.Cell);

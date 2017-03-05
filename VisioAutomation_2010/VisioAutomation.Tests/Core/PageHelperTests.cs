@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Core.Page
             pagecells.PageWidth = "8.0";
             pagecells.PageHeight = "6.0";
 
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
             pagecells.SetFormulas(writer);
 
             writer.Commit(page1.PageSheet);
@@ -149,7 +149,7 @@ namespace VisioAutomation_Tests.Core.Page
             pagecells.PageLeftMargin = bottomleft_margin.Width;
             pagecells.PageRightMargin = upperright_margin.Width;
 
-            var page_writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSrc();
+            var page_writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
             pagecells.SetFormulas(page_writer);
 
             page_writer.Commit(page.PageSheet);

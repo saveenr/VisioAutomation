@@ -143,7 +143,7 @@ namespace VisioAutomation_Tests
 
             var page_sheet = page.PageSheet;
 
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 

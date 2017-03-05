@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.ShapeSheet
+﻿namespace VisioAutomation.ShapeSheet.Writers
 {
     public class ShapeSheetWriterBase
     {

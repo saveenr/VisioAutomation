@@ -1,6 +1,7 @@
 ﻿using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Grid;
+using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomationSamples
 {
@@ -45,7 +46,7 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Shapes.ShapeFormatCells();
             int i = 0;
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc();
+            var writer = new ShapeSheetWriterSidSrc();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;

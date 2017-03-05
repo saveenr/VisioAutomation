@@ -1,4 +1,5 @@
 using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Models.Dom
 {

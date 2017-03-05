@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -129,7 +130,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new VA.ShapeSheet.ShapeSheetWriterSidSrc();
+            var writer = new ShapeSheetWriterSidSrc();
             writer.SetResult( shape1.ID16, src_pinx, 0.5);
             writer.SetResult( shape1.ID16, src_piny, 0.5);
             writer.SetResult( shape2.ID16, src_pinx, 1.5);

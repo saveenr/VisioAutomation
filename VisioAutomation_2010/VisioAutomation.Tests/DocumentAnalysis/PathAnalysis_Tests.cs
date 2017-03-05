@@ -2,6 +2,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.ShapeSheet.Writers;
 using VADRAW=VisioAutomation.Drawing;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -27,7 +28,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
 
             if (a_arrow || b_arrow)
             {
-                var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc();
+                var writer = new ShapeSheetWriterSidSrc();
                 if (a_arrow)
                 {
                     writer.SetFormula(c1.ID16, VASS.SrcConstants.BeginArrow, "13");                    

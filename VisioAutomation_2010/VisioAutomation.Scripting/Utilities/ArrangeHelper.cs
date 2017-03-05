@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Models;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Utilities
@@ -91,7 +92,7 @@ namespace VisioAutomation.Scripting.Utilities
 
         private static void ModifyPinPositions(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Drawing.Point> newpositions)
         {
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc();
+            var writer = new ShapeSheetWriterSidSrc();
             for (int i = 0; i < newpositions.Count; i++)
             {
                 writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.PinX, newpositions[i].X);
@@ -103,7 +104,7 @@ namespace VisioAutomation.Scripting.Utilities
 
         private static void ModifySizes(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Drawing.Size> newsizes)
         {
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc();
+            var writer = new ShapeSheetWriterSidSrc();
             for (int i = 0; i < newsizes.Count; i++)
             {
                 writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.Width, newsizes[i].Width);

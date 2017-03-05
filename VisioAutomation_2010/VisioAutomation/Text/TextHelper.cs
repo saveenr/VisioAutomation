@@ -85,7 +85,7 @@ namespace VisioAutomation.Text
             shape.RowType[tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
-            var writer = new ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
             for (int stop_index = 0; stop_index < stops.Count; stop_index++)
             {
                 int i = stop_index * 3;
@@ -169,7 +169,7 @@ namespace VisioAutomation.Text
 
             const string formula = "0";
 
-            var writer = new ShapeSheetWriterSrc();
+            var writer = new VisioAutomation.ShapeSheet.Writers.ShapeSheetWriterSrc();
             for (int i = 1; i < num_existing_tabstops * 3; i++)
             {
                 var src = new ShapeSheet.Src(tab_section, (short)IVisio.VisRowIndices.visRowTab,
