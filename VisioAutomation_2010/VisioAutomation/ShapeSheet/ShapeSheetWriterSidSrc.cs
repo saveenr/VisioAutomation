@@ -5,8 +5,8 @@ namespace VisioAutomation.ShapeSheet
     public class ShapeSheetWriterSidSrc : ShapeSheetWriterBase
     {
 
-        private WriterCollection<SidSrc> FormulaRecords;
-        private WriterCollection<SidSrc> ResultRecords;
+        private WriterCollection<SidSrc> _formulaRecords;
+        private WriterCollection<SidSrc> _resultRecords;
 
         public ShapeSheetWriterSidSrc()
         {
@@ -14,8 +14,8 @@ namespace VisioAutomation.ShapeSheet
 
         public void Clear()
         {
-            FormulaRecords?.Clear();
-            ResultRecords?.Clear();
+            _formulaRecords?.Clear();
+            _resultRecords?.Clear();
         }
 
         public void Commit(Microsoft.Office.Interop.Visio.Shape shape)
@@ -49,14 +49,14 @@ namespace VisioAutomation.ShapeSheet
 
         private void __SetFormulaIgnoreNull(SidSrc sidsrc, CellValueLiteral formula)
         {
-            if (this.FormulaRecords == null)
+            if (this._formulaRecords == null)
             {
-                this.FormulaRecords = new WriterCollection<SidSrc>();
+                this._formulaRecords = new WriterCollection<SidSrc>();
             }
 
             if (formula.HasValue)
             {
-                this.FormulaRecords.Add(sidsrc, formula.Value);
+                this._formulaRecords.Add(sidsrc, formula.Value);
             }
         }
 
@@ -69,13 +69,13 @@ namespace VisioAutomation.ShapeSheet
 
         private void CommitFormulas(ShapeSheetSurface surface)
         {
-            if ((this.FormulaRecords == null || this.FormulaRecords.Count < 1))
+            if ((this._formulaRecords == null || this._formulaRecords.Count < 1))
             {
                 return;
             }
 
-            var stream = this.buildstream_sidsrc(this.FormulaRecords);
-            var formulas = this.FormulaRecords.BuildValues();
+            var stream = this.buildstream_sidsrc(this._formulaRecords);
+            var formulas = this._formulaRecords.BuildValues();
 
             if (stream.Array.Length == 0)
             {
@@ -95,23 +95,23 @@ namespace VisioAutomation.ShapeSheet
 
         public void SetResult(SidSrc sidsrc, CellValueLiteral result)
         {
-            if (this.ResultRecords == null)
+            if (this._resultRecords == null)
             {
-                this.ResultRecords = new WriterCollection<SidSrc>();
+                this._resultRecords = new WriterCollection<SidSrc>();
             }
 
-            this.ResultRecords.Add(sidsrc, result.Value);
+            this._resultRecords.Add(sidsrc, result.Value);
         }
 
         private void CommitResults(ShapeSheetSurface surface)
         {
-            if ((this.ResultRecords == null || this.ResultRecords.Count < 1))
+            if ((this._resultRecords == null || this._resultRecords.Count < 1))
             {
                 return;
             }
 
-            var stream = this.buildstream_sidsrc(this.ResultRecords);
-            var results = this.ResultRecords.BuildValues();
+            var stream = this.buildstream_sidsrc(this._resultRecords);
+            var results = this._resultRecords.BuildValues();
             const object[] unitcodes = null;
 
             if (stream.Array.Length == 0)
