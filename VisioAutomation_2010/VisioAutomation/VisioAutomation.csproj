@@ -98,6 +98,8 @@
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
+    <Compile Include="ShapeSheet\ShapeSheetWriterSidSrc.cs" />
+    <Compile Include="ShapeSheet\ShapeSheetWriterSrc.cs" />
     <Compile Include="ShapeSheet\Streams\StreamType.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
     <Compile Include="ShapeSheet\Streams\FixedSidSrcStreamBuilder.cs" />
@@ -192,7 +194,6 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Query\CellColumn.cs" />
-    <Compile Include="ShapeSheet\ShapeSheetWriter.cs" />
     <Compile Include="ShapeSheet\CellValueLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />

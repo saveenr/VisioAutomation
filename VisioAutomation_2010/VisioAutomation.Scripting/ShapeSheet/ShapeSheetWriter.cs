@@ -2,7 +2,7 @@
 {
     public class ShapeSheetWriter
     {
-        internal readonly VisioAutomation.ShapeSheet.ShapeSheetWriter writer;
+        internal readonly VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc writer;
         public Client Client;
         public VisioAutomation.ShapeSheet.ShapeSheetSurface Surface;
         public bool BlastGuards;
@@ -12,7 +12,7 @@
         {
             this.Client = client;
             this.Surface = new VisioAutomation.ShapeSheet.ShapeSheetSurface(page);
-            this.writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            this.writer = new VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc();
         }
 
         public void SetFormula(short id, VisioAutomation.ShapeSheet.Src src, string formula)

@@ -63,7 +63,7 @@ namespace VisioAutomation.Scripting.Utilities
             return new Drawing.Rectangle(pin - locpin, size);
         }
 
-        public void SetFormulas(VisioAutomation.ShapeSheet.ShapeSheetWriter writer, short id)
+        public void SetFormulas(VisioAutomation.ShapeSheet.ShapeSheetWriterSidSrc writer, short id)
         {
             writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.PinX, this.PinX);
             writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.PinY, this.PinY);

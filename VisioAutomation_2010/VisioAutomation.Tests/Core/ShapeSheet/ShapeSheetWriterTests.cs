@@ -24,7 +24,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSidSrc();
             writer.SetFormula(shape1.ID16, ShapeSheetWriterTests.src_pinx, 0.5);
             writer.SetFormula(shape1.ID16, ShapeSheetWriterTests.src_piny, 0.5);
             writer.SetFormula(shape2.ID16, ShapeSheetWriterTests.src_pinx, 1.5);
@@ -61,7 +61,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSrc();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, 7);
 
             writer.Commit(shape1);
@@ -87,7 +87,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSrc();
             writer.Commit(shape1);
 
             page1.Delete(0);
@@ -100,7 +100,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSrc();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7");
             writer.Commit(shape1);
 
@@ -129,7 +129,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new VA.ShapeSheet.ShapeSheetWriter();
+            var writer = new VA.ShapeSheet.ShapeSheetWriterSidSrc();
             writer.SetResult( shape1.ID16, src_pinx, 0.5);
             writer.SetResult( shape1.ID16, src_piny, 0.5);
             writer.SetResult( shape2.ID16, src_pinx, 1.5);
@@ -173,7 +173,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new ShapeSheetWriter();
+            var writer = new ShapeSheetWriterSrc();
             writer.SetResult(ShapeSheetWriterTests.src_linepat, "7");
             writer.SetResult(VA.ShapeSheet.SrcConstants.PinX, 2);
             writer.Commit(shape1);
