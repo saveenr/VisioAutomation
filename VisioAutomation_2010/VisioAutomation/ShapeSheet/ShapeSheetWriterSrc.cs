@@ -31,8 +31,8 @@ namespace VisioAutomation.ShapeSheet
 
         public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            this.CommitFormulaRecordsByType(surface);
-            this.CommitResultRecordsByType(surface);
+            this.CommitFormulas(surface);
+            this.CommitResults(surface);
         }
 
         public void SetFormula(Src src, CellValueLiteral formula)
@@ -60,7 +60,7 @@ namespace VisioAutomation.ShapeSheet
             return builder.ToStream();
         }
 
-        private void CommitFormulaRecordsByType(ShapeSheetSurface surface)
+        private void CommitFormulas(ShapeSheetSurface surface)
         {
             if ((this.FormulaRecords == null || this.FormulaRecords.Count < 1))
             {
@@ -90,7 +90,7 @@ namespace VisioAutomation.ShapeSheet
             this.ResultRecords.Add(src, result.Value);
         }
 
-        private void CommitResultRecordsByType(ShapeSheetSurface surface)
+        private void CommitResults(ShapeSheetSurface surface)
         {
             if (this.ResultRecords == null || this.ResultRecords.Count < 1)
             {

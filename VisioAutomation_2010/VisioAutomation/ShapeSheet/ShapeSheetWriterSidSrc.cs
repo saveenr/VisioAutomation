@@ -2,39 +2,6 @@
 
 namespace VisioAutomation.ShapeSheet
 {
-    public class ShapeSheetWriterBase
-    {
-        public bool BlastGuards { get; set; }
-        public bool TestCircular { get; set; }
-
-        protected Microsoft.Office.Interop.Visio.VisGetSetArgs ComputeGetResultFlags()
-        {
-            var flags = this.combine_blastguards_and_testcircular_flags();
-
-            flags |= Microsoft.Office.Interop.Visio.VisGetSetArgs.visGetStrings;
-
-            return flags;
-        }
-
-        protected Microsoft.Office.Interop.Visio.VisGetSetArgs ComputeGetFormulaFlags()
-        {
-            var common_flags = this.combine_blastguards_and_testcircular_flags();
-            var formula_flags = (short)Microsoft.Office.Interop.Visio.VisGetSetArgs.visSetUniversalSyntax;
-            var combined_flags = (short)common_flags | formula_flags;
-            return (Microsoft.Office.Interop.Visio.VisGetSetArgs)combined_flags;
-        }
-
-        private Microsoft.Office.Interop.Visio.VisGetSetArgs combine_blastguards_and_testcircular_flags()
-        {
-            var f_bg = this.BlastGuards ? Microsoft.Office.Interop.Visio.VisGetSetArgs.visSetBlastGuards : 0;
-            var f_tc = this.TestCircular ? Microsoft.Office.Interop.Visio.VisGetSetArgs.visSetTestCircular : 0;
-
-            var flags = ((short)f_bg) | ((short)f_tc);
-            return (Microsoft.Office.Interop.Visio.VisGetSetArgs)flags;
-        }
-
-    }
-
     public class ShapeSheetWriterSidSrc : ShapeSheetWriterBase
     {
 
@@ -65,8 +32,8 @@ namespace VisioAutomation.ShapeSheet
 
         public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            this.CommitFormulaRecordsByType(surface);
-            this.CommitResultRecordsByType(surface);
+            this.CommitFormulas(surface);
+            this.CommitResults(surface);
         }
 
         public void SetFormula(short id, Src src, CellValueLiteral formula)
@@ -100,7 +67,7 @@ namespace VisioAutomation.ShapeSheet
             return builder.ToStream();
         }
 
-        private void CommitFormulaRecordsByType(ShapeSheetSurface surface)
+        private void CommitFormulas(ShapeSheetSurface surface)
         {
             if ((this.FormulaRecords == null || this.FormulaRecords.Count < 1))
             {
@@ -136,7 +103,7 @@ namespace VisioAutomation.ShapeSheet
             this.ResultRecords.Add(sidsrc, result.Value);
         }
 
-        private void CommitResultRecordsByType(ShapeSheetSurface surface)
+        private void CommitResults(ShapeSheetSurface surface)
         {
             if ((this.ResultRecords == null || this.ResultRecords.Count < 1))
             {
