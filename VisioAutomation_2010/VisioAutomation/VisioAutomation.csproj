@@ -106,7 +106,7 @@
     <Compile Include="ShapeSheet\Streams\FixedSidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\FixedSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\FixedStreamBuilderBase.cs" />
-    <Compile Include="ShapeSheet\Internal\WriterCollection_SidSrc.cs" />
+    <Compile Include="ShapeSheet\Internal\WriterCollection.cs" />
     <Compile Include="ShapeSheet\Streams\StreamArray.cs" />
     <Compile Include="Utilities\ArraySegmentReader.cs" />
     <Compile Include="Utilities\ArraySegment.cs" />
