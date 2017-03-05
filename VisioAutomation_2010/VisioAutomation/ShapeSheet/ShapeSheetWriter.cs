@@ -65,10 +65,10 @@ namespace VisioAutomation.ShapeSheet
 
         public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
-            this.CommitFormulaRecordsByType(surface, CoordType.Src);
-            this.CommitFormulaRecordsByType(surface, CoordType.SidSrc);
-            this.CommitResultRecordsByType(surface, CoordType.Src);
-            this.CommitResultRecordsByType(surface, CoordType.SidSrc);
+            this.CommitFormulaRecordsByType(surface, CellCoord.Src);
+            this.CommitFormulaRecordsByType(surface, CellCoord.SidSrc);
+            this.CommitResultRecordsByType(surface, CellCoord.Src);
+            this.CommitResultRecordsByType(surface, CellCoord.SidSrc);
         }
 
         public void SetFormula(Src src, CellValueLiteral formula)
@@ -114,20 +114,20 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        private void CommitFormulaRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
+        private void CommitFormulaRecordsByType(ShapeSheetSurface surface, CellCoord cell_coord)
         {
-            if (coord_type == CoordType.SidSrc && (this.FormulaRecords_SidSrc == null || this.FormulaRecords_SidSrc.Count <1))
+            if (cell_coord == CellCoord.SidSrc && (this.FormulaRecords_SidSrc == null || this.FormulaRecords_SidSrc.Count <1))
             {
                 return;
             }
 
-            if (coord_type == CoordType.Src && (this.FormulaRecords_Src == null || this.FormulaRecords_Src.Count <1))
+            if (cell_coord == CellCoord.Src && (this.FormulaRecords_Src == null || this.FormulaRecords_Src.Count <1))
             {
                 return;
             }
 
-            var stream = coord_type == CoordType.SidSrc ? this.FormulaRecords_SidSrc.BuildStream() : this.FormulaRecords_Src.BuildStream();
-            var formulas = coord_type == CoordType.SidSrc ? this.FormulaRecords_SidSrc.BuildValues() : this.FormulaRecords_Src.BuildValues();
+            var stream = cell_coord == CellCoord.SidSrc ? this.FormulaRecords_SidSrc.BuildStream() : this.FormulaRecords_Src.BuildStream();
+            var formulas = cell_coord == CellCoord.SidSrc ? this.FormulaRecords_SidSrc.BuildValues() : this.FormulaRecords_Src.BuildValues();
 
             if (stream.Array.Length == 0)
             {
@@ -166,20 +166,20 @@ namespace VisioAutomation.ShapeSheet
             this.ResultRecords_SidSrc.Add(sidsrc, result.Value);
         }
 
-        private void CommitResultRecordsByType(ShapeSheetSurface surface, CoordType coord_type)
+        private void CommitResultRecordsByType(ShapeSheetSurface surface, CellCoord cell_coord)
         {
-            if (coord_type == CoordType.SidSrc && (this.ResultRecords_SidSrc == null || this.ResultRecords_SidSrc.Count < 1))
+            if (cell_coord == CellCoord.SidSrc && (this.ResultRecords_SidSrc == null || this.ResultRecords_SidSrc.Count < 1))
             {
                 return;
             }
 
-            if (coord_type == CoordType.Src && (this.ResultRecords_Src == null || this.ResultRecords_Src.Count <1))
+            if (cell_coord == CellCoord.Src && (this.ResultRecords_Src == null || this.ResultRecords_Src.Count <1))
             {
                 return;
             }
 
-            var stream = coord_type == CoordType.SidSrc ? this.ResultRecords_SidSrc.BuildStream() : this.ResultRecords_Src.BuildStream();
-            var results = coord_type == CoordType.SidSrc ? this.ResultRecords_SidSrc.BuildValues(): this.ResultRecords_Src.BuildValues();
+            var stream = cell_coord == CellCoord.SidSrc ? this.ResultRecords_SidSrc.BuildStream() : this.ResultRecords_Src.BuildStream();
+            var results = cell_coord == CellCoord.SidSrc ? this.ResultRecords_SidSrc.BuildValues(): this.ResultRecords_Src.BuildValues();
             const object[] unitcodes = null;
             
             if (stream.Array.Length == 0)

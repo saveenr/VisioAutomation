@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Internal
 {
-    internal enum CoordType
+    internal enum CellCoord
     {
         SidSrc,
         Src

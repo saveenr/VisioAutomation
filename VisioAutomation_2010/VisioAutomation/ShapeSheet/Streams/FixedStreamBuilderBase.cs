@@ -8,13 +8,13 @@ namespace VisioAutomation.ShapeSheet.Streams
         protected readonly short [] _stream;
         private readonly int _capacity = -1;
 
-        internal readonly CoordType _coordtype;
-        protected int _chunksize => this._coordtype == CoordType.SidSrc ? 4 : 3;
+        internal readonly CellCoord _coordtype;
+        protected int _chunksize => this._coordtype == CellCoord.SidSrc ? 4 : 3;
 
         private int _count = 0;
         private int _pos = 0;
 
-        internal FixedStreamBuilderBase(int capacity, CoordType coordtype)
+        internal FixedStreamBuilderBase(int capacity, CellCoord coordtype)
         {
             this._coordtype = coordtype;
             this._capacity = capacity;
