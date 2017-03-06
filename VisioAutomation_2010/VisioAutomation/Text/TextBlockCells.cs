@@ -11,8 +11,8 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData RightMargin { get; set; }
         public ShapeSheet.CellData TopMargin { get; set; }
         public ShapeSheet.CellData DefaultTabStop { get; set; }
-        public ShapeSheet.CellData TextBkgnd { get; set; }
-        public ShapeSheet.CellData TextBkgndTrans { get; set; }
+        public ShapeSheet.CellData TextBackground { get; set; }
+        public ShapeSheet.CellData TextBackgroundTransparency { get; set; }
         public ShapeSheet.CellData TextDirection { get; set; }
         public ShapeSheet.CellData VerticalAlign { get; set; }
 
@@ -25,8 +25,8 @@ namespace VisioAutomation.Text
                 yield return this.newpair(ShapeSheet.SrcConstants.TextBlockRightMargin, this.RightMargin.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.TextBlockTopMargin, this.TopMargin.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackground, this.TextBkgnd.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBkgndTrans.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackground, this.TextBackground.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBackgroundTransparency.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.TextBlockDirection, this.TextDirection.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign.Formula);
             }

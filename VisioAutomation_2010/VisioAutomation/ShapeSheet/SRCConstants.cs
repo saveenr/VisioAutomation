@@ -76,10 +76,10 @@ namespace VisioAutomation.ShapeSheet
         private static Src ControlCell(CEL c) => new Src(SEC.visSectionControls, ROW.visRowControl, c);
         public static Src ControlCanGlue => ControlCell(CEL.visCtlGlue);
         public static Src ControlTip => ControlCell(CEL.visCtlTip);
-        public static Src ControlXCon => ControlCell(CEL.visCtlXCon);
+        public static Src ControlXBehavior => ControlCell(CEL.visCtlXCon);
         public static Src ControlX => ControlCell(CEL.visCtlX);
         public static Src ControlXDyn => ControlCell(CEL.visCtlXDyn);
-        public static Src ControlYCon => ControlCell(CEL.visCtlYCon);
+        public static Src ControlYBehavior => ControlCell(CEL.visCtlYCon);
         public static Src ControlY => ControlCell(CEL.visCtlY);
         public static Src ControlYDyn => ControlCell(CEL.visCtlYDyn);
 
@@ -291,7 +291,7 @@ namespace VisioAutomation.ShapeSheet
         public static Src ParaBullet => ParaCell(CEL.visBulletIndex);
         public static Src ParaBulletFont => ParaCell(CEL.visBulletFont);
         public static Src ParaBulletFontSize => ParaCell(CEL.visBulletFontSize);
-        public static Src ParaBulletStr => ParaCell(CEL.visBulletString);
+        public static Src ParaBulletString => ParaCell(CEL.visBulletString);
         public static Src ParaFlags => ParaCell(CEL.visFlags);
         public static Src ParaHorizontalAlign => ParaCell(CEL.visHorzAlign);
         public static Src ParaIndentFirst => ParaCell(CEL.visIndentFirst);

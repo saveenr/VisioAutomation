@@ -16,7 +16,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData Bullet { get; set; }
         public ShapeSheet.CellData BulletFont { get; set; }
         public ShapeSheet.CellData BulletFontSize { get; set; }
-        public ShapeSheet.CellData LocBulletFont { get; set; }
+        public ShapeSheet.CellData LocalizeBulletFont { get; set; }
         public ShapeSheet.CellData TextPosAfterBullet { get; set; }
         public ShapeSheet.CellData Flags { get; set; }
         public ShapeSheet.CellData BulletString { get; set; }
@@ -35,10 +35,10 @@ namespace VisioAutomation.Text
                 yield return this.newpair(ShapeSheet.SrcConstants.ParaBulletFont, this.BulletFont.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ParaBullet, this.Bullet.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ParaBulletFontSize, this.BulletFontSize.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ParaLocalizeBulletFont, this.LocBulletFont.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ParaFlags, this.Flags.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ParaBulletStr, this.BulletString.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ParaBulletString, this.BulletString.Formula);
             }
         }
 

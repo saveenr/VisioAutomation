@@ -5,25 +5,25 @@ namespace VisioAutomation.Text
 {
     public class TextXFormCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData TxtAngle { get; set; }
-        public ShapeSheet.CellData TxtWidth { get; set; }
-        public ShapeSheet.CellData TxtHeight { get; set; }
-        public ShapeSheet.CellData TxtPinX { get; set; }
-        public ShapeSheet.CellData TxtPinY { get; set; }
-        public ShapeSheet.CellData TxtLocPinX { get; set; }
-        public ShapeSheet.CellData TxtLocPinY { get; set; }
+        public ShapeSheet.CellData Angle { get; set; }
+        public ShapeSheet.CellData Width { get; set; }
+        public ShapeSheet.CellData Height { get; set; }
+        public ShapeSheet.CellData PinX { get; set; }
+        public ShapeSheet.CellData PinY { get; set; }
+        public ShapeSheet.CellData LocPinX { get; set; }
+        public ShapeSheet.CellData LocPinY { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormPinX, this.TxtPinX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormPinY, this.TxtPinY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormLocPinX, this.TxtLocPinX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormLocPinY, this.TxtLocPinY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormWidth, this.TxtWidth.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormHeight, this.TxtHeight.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormAngle, this.TxtAngle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormPinX, this.PinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormPinY, this.PinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormLocPinX, this.LocPinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormLocPinY, this.LocPinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormWidth, this.Width.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormHeight, this.Height.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormAngle, this.Angle.Formula);
             }
         }
 

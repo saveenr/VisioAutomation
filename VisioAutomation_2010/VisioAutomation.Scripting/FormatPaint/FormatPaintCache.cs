@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting.FormatPaint
             this.Add(SrcConstants.ParaBullet, FormatCategory.Paragraph, "Para_Bullet");
             this.Add(SrcConstants.ParaBulletFont, FormatCategory.Paragraph, "Para_BulletFont");
             this.Add(SrcConstants.ParaBulletFontSize, FormatCategory.Paragraph, "Para_BulletFontSize");
-            this.Add(SrcConstants.ParaBulletStr, FormatCategory.Paragraph, "Para_BulletStr");
+            this.Add(SrcConstants.ParaBulletString, FormatCategory.Paragraph, "Para_BulletStr");
             this.Add(SrcConstants.ParaFlags, FormatCategory.Paragraph, "Para_Flags");
             this.Add(SrcConstants.ParaHorizontalAlign, FormatCategory.Paragraph, "Para_HorzAlign");
             this.Add(SrcConstants.ParaIndentFirst, FormatCategory.Paragraph, "Para_IndFirst");

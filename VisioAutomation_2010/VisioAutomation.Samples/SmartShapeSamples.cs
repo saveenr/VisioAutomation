@@ -15,12 +15,12 @@ namespace VisioAutomationSamples
             var progress = page_a.DrawRectangle(0, 0, 1, 1);
 
             var background_fmt = new VA.Shapes.ShapeFormatCells();
-            background_fmt.FillForegnd= "rgb(240,240,240)";
+            background_fmt.FillForeground= "rgb(240,240,240)";
             background_fmt.LineColor = "rgb(100,100,100)";
 
 
             var progress_fmt = new VA.Shapes.ShapeFormatCells();
-            progress_fmt.FillForegnd = "rgb(100,150,240)";
+            progress_fmt.FillForeground = "rgb(100,150,240)";
             progress_fmt.LineColor = "rgb(100,100,100)";
 
             // group the two shapes together

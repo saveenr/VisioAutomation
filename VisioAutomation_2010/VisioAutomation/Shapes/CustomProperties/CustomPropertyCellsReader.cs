@@ -44,7 +44,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             cells.Format = row[this.Format];
             cells.Invisible = row[this.Invis];
             cells.Label = row[this.Label];
-            cells.LangId = row[this.LangID];
+            cells.LangID = row[this.LangID];
             cells.Prompt = row[this.Prompt];
             cells.SortKey = row[this.SortKey];
             cells.Type = row[this.Type];

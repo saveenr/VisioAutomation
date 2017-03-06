@@ -183,7 +183,7 @@ namespace VisioAutomation.Models.Dom
             writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBullet, this.ParaBullet);
             writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBulletFont, this.ParaBulletFont);
             writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBulletFontSize, this.ParaBulletFontSize);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBulletStr, this.ParaBulletString);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBulletString, this.ParaBulletString);
             writer.SetFormula(id, ShapeSheet.SrcConstants.ParaFlags, this.ParaFlags);
             writer.SetFormula(id, ShapeSheet.SrcConstants.ParaHorizontalAlign, this.ParaHorizontalAlign);
             writer.SetFormula(id, ShapeSheet.SrcConstants.ParaIndentFirst, this.ParaIndentFirst);

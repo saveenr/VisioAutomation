@@ -38,8 +38,8 @@ namespace VisioAutomation.Text
             cells.RightMargin = row[this.RightMargin];
             cells.TopMargin = row[this.TopMargin];
             cells.DefaultTabStop = row[this.DefaultTabStop];
-            cells.TextBkgnd = row[this.TextBkgnd];
-            cells.TextBkgndTrans = row[this.TextBkgndTrans];
+            cells.TextBackground = row[this.TextBkgnd];
+            cells.TextBackgroundTransparency = row[this.TextBkgndTrans];
             cells.TextDirection = row[this.TextDirection];
             cells.VerticalAlign = row[this.VerticalAlign];
             return cells;

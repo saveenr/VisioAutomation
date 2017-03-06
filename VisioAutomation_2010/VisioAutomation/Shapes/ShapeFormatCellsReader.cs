@@ -65,31 +65,31 @@ namespace VisioAutomation.Shapes
         public override Shapes.ShapeFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Shapes.ShapeFormatCells();
-            cells.FillBkgnd = row[this.FillBkgnd];
-            cells.FillBkgndTrans = row[this.FillBkgndTrans];
-            cells.FillForegnd = row[this.FillForegnd];
-            cells.FillForegndTrans = row[this.FillForegndTrans];
+            cells.FillBackground = row[this.FillBkgnd];
+            cells.FillBackgroundTransparency = row[this.FillBkgndTrans];
+            cells.FillForeground = row[this.FillForegnd];
+            cells.FillForegroundTransparency = row[this.FillForegndTrans];
             cells.FillPattern = row[this.FillPattern];
-            cells.ShapeShdwObliqueAngle = row[this.ShapeShdwObliqueAngle];
-            cells.ShapeShdwOffsetX = row[this.ShapeShdwOffsetX];
-            cells.ShapeShdwOffsetY = row[this.ShapeShdwOffsetY];
-            cells.ShapeShdwScaleFactor = row[this.ShapeShdwScaleFactor];
-            cells.ShapeShdwType = row[this.ShapeShdwType];
-            cells.ShdwBkgnd = row[this.ShdwBkgnd];
-            cells.ShdwBkgndTrans = row[this.ShdwBkgndTrans];
-            cells.ShdwForegnd = row[this.ShdwForegnd];
-            cells.ShdwForegndTrans = row[this.ShdwForegndTrans];
-            cells.ShdwPattern = row[this.ShdwPattern];
-            cells.BeginArrow = row[this.BeginArrow];
-            cells.BeginArrowSize = row[this.BeginArrowSize];
-            cells.EndArrow = row[this.EndArrow];
-            cells.EndArrowSize = row[this.EndArrowSize];
+            cells.FillShadowObliqueAngle = row[this.ShapeShdwObliqueAngle];
+            cells.FillShadowOffsetX = row[this.ShapeShdwOffsetX];
+            cells.FillShadowOffsetY = row[this.ShapeShdwOffsetY];
+            cells.FillShadowScaleFactor = row[this.ShapeShdwScaleFactor];
+            cells.FillShadowType = row[this.ShapeShdwType];
+            cells.FillShadowBackground = row[this.ShdwBkgnd];
+            cells.FillShadowBackgroundTransparency = row[this.ShdwBkgndTrans];
+            cells.FillShadowForeground = row[this.ShdwForegnd];
+            cells.FillShadowForegroundTransparency = row[this.ShdwForegndTrans];
+            cells.FillShadowPattern = row[this.ShdwPattern];
+            cells.LineBeginArrow = row[this.BeginArrow];
+            cells.LineBeginArrowSize = row[this.BeginArrowSize];
+            cells.LineEndArrow = row[this.EndArrow];
+            cells.LineEndArrowSize = row[this.EndArrowSize];
             cells.LineCap = row[this.LineCap];
             cells.LineColor = row[this.LineColor];
-            cells.LineColorTrans = row[this.LineColorTrans];
+            cells.LineColorTransparency = row[this.LineColorTrans];
             cells.LinePattern = row[this.LinePattern];
             cells.LineWeight = row[this.LineWeight];
-            cells.Rounding = row[this.Rounding];
+            cells.LineRounding = row[this.Rounding];
             return cells;
         }
 

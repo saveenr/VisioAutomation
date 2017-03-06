@@ -70,7 +70,7 @@ namespace VisioAutomationSamples
                group_title.ParagraphCells.HorizontalAlign = 0;
                group_title.FormatCells.LineWeight = 0;
                group_title.FormatCells.LinePattern = 0;
-               group_title.FormatCells.FillForegnd = "RGB(250,250,250)";
+               group_title.FormatCells.FillForeground = "RGB(250,250,250)";
 
                renderer.Linefeed(0.5);
 
@@ -86,7 +86,7 @@ namespace VisioAutomationSamples
                     //res_title.ParagraphCells.HorizontalAlign = 0;
                     //res_title.FormatCells.LineWeight = 0;
                     //res_title.FormatCells.LinePattern = 0;
-                    res_title.FormatCells.FillForegnd = "RGB(240,240,240)";
+                    res_title.FormatCells.FillForeground = "RGB(240,240,240)";
                     renderer.MoveRight(0.5);
                 }
                 renderer.Linefeed(1);

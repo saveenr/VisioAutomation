@@ -83,7 +83,7 @@ namespace VisioPowerShell.Commands
 
             if (this.LangId >= 0)
             {
-                cp.LangId = this.LangId;
+                cp.LangID = this.LangId;
             }
 
             if (this.SortKey >= 0)

@@ -23,8 +23,8 @@ namespace VisioAutomation.Shapes.Controls
                 yield return this.newpair(ShapeSheet.SrcConstants.ControlTip, this.Tip.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ControlX, this.X.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ControlY, this.Y.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlYCon, this.YBehavior.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlXCon, this.XBehavior.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ControlXDyn, this.XDynamics.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ControlYDyn, this.YDynamics.Formula);
             }

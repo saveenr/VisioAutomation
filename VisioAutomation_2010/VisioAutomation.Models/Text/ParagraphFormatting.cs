@@ -34,7 +34,7 @@ namespace VisioAutomation.Models.Text
             writer.SetFormula(SrcConstants.ParaLocalizeBulletFont.CloneWithNewRow(row), this.LocBulletFont);
             writer.SetFormula(SrcConstants.ParaTextPosAfterBullet.CloneWithNewRow(row), this.TextPosAfterBullet);
             writer.SetFormula(SrcConstants.ParaFlags.CloneWithNewRow(row), this.Flags);
-            writer.SetFormula(SrcConstants.ParaBulletStr.CloneWithNewRow(row), this.BulletString);
+            writer.SetFormula(SrcConstants.ParaBulletString.CloneWithNewRow(row), this.BulletString);
         }
 
         public void ApplyFormulasTo(ParagraphFormatting target)

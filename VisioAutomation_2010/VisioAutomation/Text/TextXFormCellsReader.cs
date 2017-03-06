@@ -29,13 +29,13 @@ namespace VisioAutomation.Text
         public override Text.TextXFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Text.TextXFormCells();
-            cells.TxtPinX = row[this.TxtPinX];
-            cells.TxtPinY = row[this.TxtPinY];
-            cells.TxtLocPinX = row[this.TxtLocPinX];
-            cells.TxtLocPinY = row[this.TxtLocPinY];
-            cells.TxtWidth = row[this.TxtWidth];
-            cells.TxtHeight = row[this.TxtHeight];
-            cells.TxtAngle = row[this.TxtAngle];
+            cells.PinX = row[this.TxtPinX];
+            cells.PinY = row[this.TxtPinY];
+            cells.LocPinX = row[this.TxtLocPinX];
+            cells.LocPinY = row[this.TxtLocPinY];
+            cells.Width = row[this.TxtWidth];
+            cells.Height = row[this.TxtHeight];
+            cells.Angle = row[this.TxtAngle];
             return cells;
         }
     }

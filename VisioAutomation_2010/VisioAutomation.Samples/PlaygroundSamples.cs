@@ -69,10 +69,10 @@ namespace VisioAutomationSamples
                 short shapeid = shapeids[i];
 
                 xfrm.Angle = angles_as_formulas[i];
-                format.FillForegnd = color_formulas[i];
+                format.FillForeground = color_formulas[i];
                 format.LineWeight = 0;
                 format.LinePattern = 0;
-                format.FillForegndTrans = 0.5;
+                format.FillForegroundTransparency = 0.5;
 
                 xfrm.SetFormulas(shapeid, writer);
                 format.SetFormulas(shapeid, writer);
@@ -137,8 +137,8 @@ namespace VisioAutomationSamples
                 int grad_id = n%max_grad_id;
 
                 format.FillPattern = grad_id;
-                format.FillForegnd = color1_formula;
-                format.FillBkgnd = color2_formula;
+                format.FillForeground = color1_formula;
+                format.FillBackground = color2_formula;
                 format.LinePattern = 0;
                 format.LineWeight = 0;
                 format.SetFormulas(shapeid, writer);

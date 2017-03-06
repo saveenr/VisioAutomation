@@ -11,7 +11,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         public ShapeSheet.CellData Format { get; set; }
         public ShapeSheet.CellData Invisible { get; set; }
         public ShapeSheet.CellData Label { get; set; }
-        public ShapeSheet.CellData LangId { get; set; }
+        public ShapeSheet.CellData LangID { get; set; }
         public ShapeSheet.CellData Prompt { get; set; }
         public ShapeSheet.CellData SortKey { get; set; }
         public ShapeSheet.CellData Type { get; set; }
@@ -116,7 +116,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 yield return this.newpair(ShapeSheet.SrcConstants.CustPropFormat, str_format);
                 yield return this.newpair(ShapeSheet.SrcConstants.CustPropPrompt, str_prompt);
                 yield return this.newpair(ShapeSheet.SrcConstants.CustPropCalendar, cp.Calendar.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropLangId, cp.LangId.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropLangId, cp.LangID.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CustPropSortKey, cp.SortKey.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CustPropInvisible, cp.Invisible.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CustPropType, cp.Type.Formula);

@@ -28,7 +28,7 @@ namespace VisioAutomation.Text
             this.Bullet = sec.AddCell(SrcConstants.ParaBullet, nameof(SrcConstants.ParaBullet));
             this.BulletFont = sec.AddCell(SrcConstants.ParaBulletFont, nameof(SrcConstants.ParaBulletFont));
             this.BulletFontSize = sec.AddCell(SrcConstants.ParaBulletFontSize, nameof(SrcConstants.ParaBulletFontSize));
-            this.BulletString = sec.AddCell(SrcConstants.ParaBulletStr, nameof(SrcConstants.ParaBulletStr));
+            this.BulletString = sec.AddCell(SrcConstants.ParaBulletString, nameof(SrcConstants.ParaBulletString));
             this.Flags = sec.AddCell(SrcConstants.ParaFlags, nameof(SrcConstants.ParaFlags));
             this.HorzAlign = sec.AddCell(SrcConstants.ParaHorizontalAlign, nameof(SrcConstants.ParaHorizontalAlign));
             this.IndentFirst = sec.AddCell(SrcConstants.ParaIndentFirst, nameof(SrcConstants.ParaIndentFirst));
@@ -54,7 +54,7 @@ namespace VisioAutomation.Text
             cells.Bullet = row[this.Bullet];
             cells.BulletFont = row[this.BulletFont];
             cells.BulletFontSize = row[this.BulletFontSize];
-            cells.LocBulletFont = row[this.LocalizeBulletFont];
+            cells.LocalizeBulletFont = row[this.LocalizeBulletFont];
             cells.TextPosAfterBullet = row[this.TextPosAfterBullet];
             cells.Flags = row[this.Flags];
             cells.BulletString = row[this.BulletString];

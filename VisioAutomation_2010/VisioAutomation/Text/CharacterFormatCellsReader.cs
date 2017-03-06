@@ -63,7 +63,7 @@ namespace VisioAutomation.Text
         {
             var cells = new Text.CharacterCells();
             cells.Color = row[this.Color];
-            cells.Transparency = row[this.Trans];
+            cells.ColorTransparency = row[this.Trans];
             cells.Font = row[this.Font];
             cells.Size = row[this.Size];
             cells.Style = row[this.Style];
