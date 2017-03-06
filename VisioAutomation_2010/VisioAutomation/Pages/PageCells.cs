@@ -77,7 +77,7 @@ namespace VisioAutomation.Pages
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
-            {
+            { 
                 yield return this.newpair(ShapeSheet.SrcConstants.PrintLeftMargin, this.PrintLeftMargin.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterX, this.PrintCenterX.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterY, this.PrintCenterY.Formula);
