@@ -3,8 +3,8 @@
     public class SidSrcWriter : WriterBase
     {
 
-        private WriterCollection<SidSrc> _formulaRecords;
-        private WriterCollection<SidSrc> _resultRecords;
+        private WriteCache<SidSrc> _formulaRecords;
+        private WriteCache<SidSrc> _resultRecords;
 
         public SidSrcWriter()
         {
@@ -49,7 +49,7 @@
         {
             if (this._formulaRecords == null)
             {
-                this._formulaRecords = new WriterCollection<SidSrc>();
+                this._formulaRecords = new WriteCache<SidSrc>();
             }
 
             if (formula.HasValue)
@@ -58,7 +58,7 @@
             }
         }
 
-        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_sidsrc(WriterCollection<SidSrc> wcs)
+        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_sidsrc(WriteCache<SidSrc> wcs)
         {
             var builder = new VisioAutomation.ShapeSheet.Streams.FixedSidSrcStreamBuilder(wcs.Count);
             builder.AddRange(wcs.EnumCoords());
@@ -95,7 +95,7 @@
         {
             if (this._resultRecords == null)
             {
-                this._resultRecords = new WriterCollection<SidSrc>();
+                this._resultRecords = new WriteCache<SidSrc>();
             }
 
             this._resultRecords.Add(sidsrc, result.Value);

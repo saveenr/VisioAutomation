@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    internal class WriterCollection<T>
+    internal class WriteCache<T>
     {
         private List<WriteRecord> items;
 
-        public WriterCollection()
+        public WriteCache()
         {
             this.items = new List<WriteRecord>();
         }

@@ -2,8 +2,8 @@
 {
     public class SrcWriter : WriterBase
     {
-        private WriterCollection<Src> _formulaRecords;
-        private WriterCollection<Src> _resultRecords;
+        private WriteCache<Src> _formulaRecords;
+        private WriteCache<Src> _resultRecords;
 
         public SrcWriter()
         {
@@ -42,7 +42,7 @@
         {
             if (this._formulaRecords == null)
             {
-                this._formulaRecords = new WriterCollection<Src>();
+                this._formulaRecords = new WriteCache<Src>();
             }
 
             if (formula.HasValue)
@@ -51,7 +51,7 @@
             }
         }
 
-        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_src(WriterCollection<Src> wcs)
+        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_src(WriteCache<Src> wcs)
         {
             var builder = new VisioAutomation.ShapeSheet.Streams.FixedSrcStreamBuilder(wcs.Count);
             builder.AddRange(wcs.EnumCoords());
@@ -82,7 +82,7 @@
         {
             if (this._resultRecords == null)
             {
-                this._resultRecords = new WriterCollection<Src>();
+                this._resultRecords = new WriteCache<Src>();
             }
 
             this._resultRecords.Add(src, result.Value);
