@@ -1,4 +1,3 @@
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.ConnectionPoints

@@ -1,6 +1,5 @@
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes.Geometry
 {

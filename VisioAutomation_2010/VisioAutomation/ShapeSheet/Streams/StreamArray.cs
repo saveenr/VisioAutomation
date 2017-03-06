@@ -1,5 +1,3 @@
-using System.Windows.Forms.VisualStyles;
-
 namespace VisioAutomation.ShapeSheet.Streams
 {
     public struct StreamArray

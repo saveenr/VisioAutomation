@@ -1,44 +1,23 @@
 using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
 {
     public struct SidSrc
     {
         public short ShapeID { get; }
-        public short Section { get; }
-        public short Row { get; }
-        public short Cell { get; }
+        public Src Src { get; }
 
         public SidSrc(
             short shape_id,
-            IVisio.VisSectionIndices section,
-            IVisio.VisRowIndices row,
-            IVisio.VisCellIndices cell) : this(shape_id,(short)section,(short)row,(short)cell)
-        {
-        }
-
-        public SidSrc(
-            short shape_id,
-            short section,
-            short row,
-            short cell) : this()
+            Src src)
         {
             this.ShapeID = shape_id;
-            this.Section = section;
-            this.Row = row;
-            this.Cell = cell;
-        }
-
-        public SidSrc(
-            short shape_id,
-            Src src) : this(shape_id,src.Section,src.Row,src.Cell)
-        {
+            this.Src = src;
         }  
         
         public override string ToString()
         {
-            return string.Format("{0}({1},{2},{3},{4})", nameof(SidSrc),this.ShapeID, this.Section, this.Row, this.Cell);
+            return string.Format("{0}({1},{2},{3},{4})", nameof(SidSrc),this.ShapeID, this.Src.Section, this.Src.Row, this.Src.Cell);
         }
 
         public static short [] ToStream(IList<SidSrc> sidsrcs)
@@ -50,16 +29,11 @@ namespace VisioAutomation.ShapeSheet
                 var sidsrc = sidsrcs[i];
                 int pos = i*sidsrc_length;
                 sidsrcstream[pos + 0] = sidsrc.ShapeID;
-                sidsrcstream[pos + 1] = sidsrc.Section;
-                sidsrcstream[pos + 2] = sidsrc.Row;
-                sidsrcstream[pos + 3] = sidsrc.Cell;
+                sidsrcstream[pos + 1] = sidsrc.Src.Section;
+                sidsrcstream[pos + 2] = sidsrc.Src.Row;
+                sidsrcstream[pos + 3] = sidsrc.Src.Cell;
             }
             return sidsrcstream;
-        }
-
-        public Src Src
-        {
-            get { return new Src(this.Section, this.Row, this.Cell); }
         }
     }
 }
