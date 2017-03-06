@@ -10,7 +10,7 @@ namespace VisioAutomationSamples
             var s0 = page.DrawRectangle(1, 1, 4, 4);
             s0.Text = "Hello World";
 
-            var src = VA.ShapeSheet.SrcConstants.TxtAngle;
+            var src = VA.ShapeSheet.SrcConstants.TextXFormAngle;
             var cell = s0.CellsSRC[src.Section, src.Row, src.Cell];
             cell.Formula = "-Angle";
         }

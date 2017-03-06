@@ -66,7 +66,7 @@ namespace VisioAutomation_Tests.Models.Dom
             var page_node = new Page();
             var vrect1 = new Rectangle(1, 1, 9, 9);
             vrect1.Text = new VisioAutomation.Models.Text.TextElement("HELLO WORLD");
-            vrect1.Cells.FillForegnd = "rgb(255,0,0)";
+            vrect1.Cells.FillForeground = "rgb(255,0,0)";
             page_node.Shapes.Add(vrect1);
 
             // Render it

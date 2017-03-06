@@ -21,15 +21,15 @@ namespace VisioAutomation.Shapes.Hyperlinks
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_Address, this.Address.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_Description, this.Description.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_ExtraInfo, this.ExtraInfo.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_Frame, this.Frame.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_SortKey, this.SortKey.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_SubAddress, this.SubAddress.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_NewWindow, this.NewWindow.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_Default, this.Default.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Hyperlink_Invisible, this.Invisible.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkAddress, this.Address.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkDescription, this.Description.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkFrame, this.Frame.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkSortKey, this.SortKey.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkSubAddress, this.SubAddress.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkNewWindow, this.NewWindow.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkDefault, this.Default.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkInvisible, this.Invisible.Formula);
             }
         }
 

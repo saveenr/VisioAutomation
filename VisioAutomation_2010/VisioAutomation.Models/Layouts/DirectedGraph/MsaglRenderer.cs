@@ -410,8 +410,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     layoutconnector.Cells.ShallowCopy()
                     : new Dom.ShapeCells();
 
-                vconnector.Cells.ConLineRouteExt = con_route_style;
-                vconnector.Cells.ShapeRouteStyle = shape_route_style;
+                vconnector.Cells.ShapeLayoutConLineRouteExt = con_route_style;
+                vconnector.Cells.ShapeLayoutRouteStyle = shape_route_style;
             }
         }
 
@@ -451,8 +451,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // SET SIZE
             if (layout_shape.Size.HasValue)
             {
-                shape_node.Cells.Width = layout_shape.Size.Value.Width;
-                shape_node.Cells.Height = layout_shape.Size.Value.Height;
+                shape_node.Cells.XFormWidth = layout_shape.Size.Value.Width;
+                shape_node.Cells.XFormHeight = layout_shape.Size.Value.Height;
             }
 
             // ADD URL

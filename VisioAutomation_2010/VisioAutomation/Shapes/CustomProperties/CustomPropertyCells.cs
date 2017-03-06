@@ -111,16 +111,16 @@ namespace VisioAutomation.Shapes.CustomProperties
                 string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
                 string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Label, str_label);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Value, str_value);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Format, str_format);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Prompt, str_prompt);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Calendar, cp.Calendar.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_LangID, cp.LangId.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_SortKey, cp.SortKey.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Invisible, cp.Invisible.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Type, cp.Type.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Ask, cp.Ask.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropLabel, str_label);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropValue, str_value);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropFormat, str_format);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropPrompt, str_prompt);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropCalendar, cp.Calendar.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropLangId, cp.LangId.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropSortKey, cp.SortKey.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropInvisible, cp.Invisible.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropType, cp.Type.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustPropAsk, cp.Ask.Formula);
             }
         }
 

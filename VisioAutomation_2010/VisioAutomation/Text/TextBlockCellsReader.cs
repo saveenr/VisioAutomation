@@ -18,15 +18,15 @@ namespace VisioAutomation.Text
 
         public TextBlockCellsReader()
         {
-            this.BottomMargin = this.query.AddCell(SrcConstants.BottomMargin, nameof(SrcConstants.BottomMargin));
-            this.LeftMargin = this.query.AddCell(SrcConstants.LeftMargin, nameof(SrcConstants.LeftMargin));
-            this.RightMargin = this.query.AddCell(SrcConstants.RightMargin, nameof(SrcConstants.RightMargin));
-            this.TopMargin = this.query.AddCell(SrcConstants.TopMargin, nameof(SrcConstants.TopMargin));
-            this.DefaultTabStop = this.query.AddCell(SrcConstants.DefaultTabStop, nameof(SrcConstants.DefaultTabStop));
-            this.TextBkgnd = this.query.AddCell(SrcConstants.TextBkgnd, nameof(SrcConstants.TextBkgnd));
-            this.TextBkgndTrans = this.query.AddCell(SrcConstants.TextBkgndTrans, nameof(SrcConstants.TextBkgndTrans));
-            this.TextDirection = this.query.AddCell(SrcConstants.TextDirection, nameof(SrcConstants.TextDirection));
-            this.VerticalAlign = this.query.AddCell(SrcConstants.VerticalAlign, nameof(SrcConstants.VerticalAlign));
+            this.BottomMargin = this.query.AddCell(SrcConstants.TextBlockBottomMargin, nameof(SrcConstants.TextBlockBottomMargin));
+            this.LeftMargin = this.query.AddCell(SrcConstants.TextBlockLeftMargin, nameof(SrcConstants.TextBlockLeftMargin));
+            this.RightMargin = this.query.AddCell(SrcConstants.TextBlockRightMargin, nameof(SrcConstants.TextBlockRightMargin));
+            this.TopMargin = this.query.AddCell(SrcConstants.TextBlockTopMargin, nameof(SrcConstants.TextBlockTopMargin));
+            this.DefaultTabStop = this.query.AddCell(SrcConstants.TextBlockDefaultTabStop, nameof(SrcConstants.TextBlockDefaultTabStop));
+            this.TextBkgnd = this.query.AddCell(SrcConstants.TextBlockBackground, nameof(SrcConstants.TextBlockBackground));
+            this.TextBkgndTrans = this.query.AddCell(SrcConstants.TextBlockBackgroundTransparency, nameof(SrcConstants.TextBlockBackgroundTransparency));
+            this.TextDirection = this.query.AddCell(SrcConstants.TextBlockDirection, nameof(SrcConstants.TextBlockDirection));
+            this.VerticalAlign = this.query.AddCell(SrcConstants.TextBlockVerticalAlign, nameof(SrcConstants.TextBlockVerticalAlign));
 
         }
 

@@ -20,7 +20,7 @@ namespace VisioAutomation_Tests.Scripting
             var shapes = client.Page.GetShapes();
             var shapeids = shapes.Select(s => s.ID16).ToList();
             
-            var srcs = new[] { VisioAutomation.ShapeSheet.SrcConstants.PinX };
+            var srcs = new[] { VisioAutomation.ShapeSheet.SrcConstants.XFormPinX };
 
             var page = client.Page.Get();
 

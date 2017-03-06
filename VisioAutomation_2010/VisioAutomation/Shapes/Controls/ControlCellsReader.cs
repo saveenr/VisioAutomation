@@ -20,14 +20,14 @@ namespace VisioAutomation.Shapes.Controls
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionControls);
 
-            this.CanGlue = sec.AddCell(SrcConstants.Controls_CanGlue, nameof(SrcConstants.Controls_CanGlue));
-            this.Tip = sec.AddCell(SrcConstants.Controls_Tip, nameof(SrcConstants.Controls_Tip));
-            this.X = sec.AddCell(SrcConstants.Controls_X, nameof(SrcConstants.Controls_X));
-            this.Y = sec.AddCell(SrcConstants.Controls_Y, nameof(SrcConstants.Controls_Y));
-            this.YBehavior = sec.AddCell(SrcConstants.Controls_YCon, nameof(SrcConstants.Controls_YCon));
-            this.XBehavior = sec.AddCell(SrcConstants.Controls_XCon, nameof(SrcConstants.Controls_XCon));
-            this.XDynamics = sec.AddCell(SrcConstants.Controls_XDyn, nameof(SrcConstants.Controls_XDyn));
-            this.YDynamics = sec.AddCell(SrcConstants.Controls_YDyn, nameof(SrcConstants.Controls_YDyn));
+            this.CanGlue = sec.AddCell(SrcConstants.ControlCanGlue, nameof(SrcConstants.ControlCanGlue));
+            this.Tip = sec.AddCell(SrcConstants.ControlTip, nameof(SrcConstants.ControlTip));
+            this.X = sec.AddCell(SrcConstants.ControlX, nameof(SrcConstants.ControlX));
+            this.Y = sec.AddCell(SrcConstants.ControlY, nameof(SrcConstants.ControlY));
+            this.YBehavior = sec.AddCell(SrcConstants.ControlYCon, nameof(SrcConstants.ControlYCon));
+            this.XBehavior = sec.AddCell(SrcConstants.ControlXCon, nameof(SrcConstants.ControlXCon));
+            this.XDynamics = sec.AddCell(SrcConstants.ControlXDyn, nameof(SrcConstants.ControlXDyn));
+            this.YDynamics = sec.AddCell(SrcConstants.ControlYDyn, nameof(SrcConstants.ControlYDyn));
 
         }
 

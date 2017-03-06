@@ -28,12 +28,12 @@ namespace VisioAutomation.Scripting.Utilities
             if (query == null)
             {
                 query = new ShapeSheetQuery();
-                ColPinX = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PinX, "PinX");
-                ColPinY = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PinY, "PinY");
-                ColLocPinX = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.LocPinX, "LocPinX");
-                ColLocPinY = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.LocPinY, "LocPinY");
-                ColWidth = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Width, "Width");
-                ColHeight = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Height, "Height");
+                ColPinX = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+                ColPinY = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, "PinY");
+                ColLocPinX = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, "LocPinX");
+                ColLocPinY = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY, "LocPinY");
+                ColWidth = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, "Width");
+                ColHeight = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, "Height");
             }
 
             var results = query.GetResults<double>(page, target.ShapeIDs);
@@ -66,12 +66,12 @@ namespace VisioAutomation.Scripting.Utilities
 
         public void SetFormulas(SidSrcWriter writer, short id)
         {
-            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.PinX, this.PinX);
-            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.PinY, this.PinY);
-            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.LocPinX, this.LocPinX);
-            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.LocPinY, this.LocPinY);
-            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.Width, this.Width);
-            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.Height, this.Height);
+            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, this.PinX);
+            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, this.PinY);
+            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, this.LocPinX);
+            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY, this.LocPinY);
+            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, this.Width);
+            writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, this.Height);
         }
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<XFormData> xfrms)

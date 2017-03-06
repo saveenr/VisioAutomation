@@ -36,31 +36,31 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.FillBkgnd, this.FillBkgnd.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.FillForegnd, this.FillForegnd.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.FillForegndTrans, this.FillForegndTrans.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillBackground, this.FillBkgnd.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillBackgroundTransparency, this.FillBkgndTrans.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillForeground, this.FillForegnd.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillForegroundTransparency, this.FillForegndTrans.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.FillPattern, this.FillPattern.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeShdwType, this.ShapeShdwType.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwBkgnd, this.ShdwBkgnd.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwBkgndTrans, this.ShdwBkgndTrans.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwForegnd, this.ShdwForegnd.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwForegndTrans, this.ShdwForegndTrans.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwPattern, this.ShdwPattern.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.BeginArrow, this.BeginArrow.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.BeginArrowSize, this.BeginArrowSize.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.EndArrow, this.EndArrow.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.EndArrowSize, this.EndArrowSize.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowObliqueAngle, this.ShapeShdwObliqueAngle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowOffsetX, this.ShapeShdwOffsetX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowOffsetY, this.ShapeShdwOffsetY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowScaleFactor, this.ShapeShdwScaleFactor.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowType, this.ShapeShdwType.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowBackground, this.ShdwBkgnd.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowBackgroundTransparency, this.ShdwBkgndTrans.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowForeground, this.ShdwForegnd.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowForegroundTransparency, this.ShdwForegndTrans.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.FillShadowPattern, this.ShdwPattern.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LineBeginArrow, this.BeginArrow.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LineBeginArrowSize, this.BeginArrowSize.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LineEndArrow, this.EndArrow.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LineEndArrowSize, this.EndArrowSize.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LineCap, this.LineCap.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LineColor, this.LineColor.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineColorTrans, this.LineColorTrans.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LineColorTransparency, this.LineColorTrans.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LinePattern, this.LinePattern.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LineWeight, this.LineWeight.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Rounding, this.Rounding.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LineRounding, this.Rounding.Formula);
             }
         }
 

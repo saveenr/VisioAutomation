@@ -85,8 +85,8 @@ namespace VisioAutomation_Tests
         public static VisioAutomation.Drawing.Size GetSize(IVisio.Shape shape)
         {
             var query = new ShapeSheetQuery();
-            var col_w = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Width,"Width");
-            var col_h = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Height,"Height");
+            var col_w = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth,"Width");
+            var col_h = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight,"Height");
 
             var table = query.GetResults<double>(shape);
             double w = table.Cells[col_w];

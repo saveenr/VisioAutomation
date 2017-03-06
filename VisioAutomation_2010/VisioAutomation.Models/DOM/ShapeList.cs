@@ -266,14 +266,14 @@ namespace VisioAutomation.Models.Dom
             {
                 if (master.DropSize.HasValue)
                 {
-                    if (!master.Cells.Width.HasValue)
+                    if (!master.Cells.XFormWidth.HasValue)
                     {
-                        master.Cells.Width = master.DropSize.Value.Width;
+                        master.Cells.XFormWidth = master.DropSize.Value.Width;
                     }
 
-                    if (!master.Cells.Height.HasValue)
+                    if (!master.Cells.XFormHeight.HasValue)
                     {
-                        master.Cells.Height = master.DropSize.Value.Height;
+                        master.Cells.XFormHeight = master.DropSize.Value.Height;
                     }
                 }
             }

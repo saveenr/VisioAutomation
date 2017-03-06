@@ -6,14 +6,14 @@ namespace VisioAutomation.Pages
 {
     class PageCellsReader : SingleRowReader<VisioAutomation.Pages.PageCells>
     {
-        public CellColumn PageLeftMargin { get; set; }
-        public CellColumn CenterX { get; set; }
-        public CellColumn CenterY { get; set; }
-        public CellColumn OnPage { get; set; }
-        public CellColumn PageBottomMargin { get; set; }
-        public CellColumn PageRightMargin { get; set; }
-        public CellColumn PagesX { get; set; }
-        public CellColumn PagesY { get; set; }
+        public CellColumn PrintLeftMargin { get; set; }
+        public CellColumn PrintCenterX { get; set; }
+        public CellColumn PrintCenterY { get; set; }
+        public CellColumn PrintOnPage { get; set; }
+        public CellColumn PrintPageBottomMargin { get; set; }
+        public CellColumn PrintRightMargin { get; set; }
+        public CellColumn PrintPagesX { get; set; }
+        public CellColumn PrintPagesY { get; set; }
         public CellColumn PageTopMargin { get; set; }
         public CellColumn PaperKind { get; set; }
         public CellColumn PrintGrid { get; set; }
@@ -76,34 +76,34 @@ namespace VisioAutomation.Pages
 
         public PageCellsReader()
         {
-            this.PageLeftMargin = this.query.AddCell(SrcConstants.PageLeftMargin, nameof(SrcConstants.PageLeftMargin));
-            this.CenterX = this.query.AddCell(SrcConstants.CenterX, nameof(SrcConstants.CenterX));
-            this.CenterY = this.query.AddCell(SrcConstants.CenterY, nameof(SrcConstants.CenterY));
-            this.OnPage = this.query.AddCell(SrcConstants.OnPage, nameof(SrcConstants.OnPage));
-            this.PageBottomMargin = this.query.AddCell(SrcConstants.PageBottomMargin, nameof(SrcConstants.PageBottomMargin));
-            this.PageRightMargin = this.query.AddCell(SrcConstants.PageRightMargin, nameof(SrcConstants.PageRightMargin));
-            this.PagesX = this.query.AddCell(SrcConstants.PagesX, nameof(SrcConstants.PagesX));
-            this.PagesY = this.query.AddCell(SrcConstants.PagesY, nameof(SrcConstants.PagesY));
-            this.PageTopMargin = this.query.AddCell(SrcConstants.PageTopMargin, nameof(SrcConstants.PageTopMargin));
-            this.PaperKind = this.query.AddCell(SrcConstants.PaperKind, nameof(SrcConstants.PaperKind));
+            this.PrintLeftMargin = this.query.AddCell(SrcConstants.PrintLeftMargin, nameof(SrcConstants.PrintLeftMargin));
+            this.PrintCenterX = this.query.AddCell(SrcConstants.PrintCenterX, nameof(SrcConstants.PrintCenterX));
+            this.PrintCenterY = this.query.AddCell(SrcConstants.PrintCenterY, nameof(SrcConstants.PrintCenterY));
+            this.PrintOnPage = this.query.AddCell(SrcConstants.PrintOnPage, nameof(SrcConstants.PrintOnPage));
+            this.PrintPageBottomMargin = this.query.AddCell(SrcConstants.PrintBottomMargin, nameof(SrcConstants.PrintBottomMargin));
+            this.PrintRightMargin = this.query.AddCell(SrcConstants.PrintRightMargin, nameof(SrcConstants.PrintRightMargin));
+            this.PrintPagesX = this.query.AddCell(SrcConstants.PrintPagesX, nameof(SrcConstants.PrintPagesX));
+            this.PrintPagesY = this.query.AddCell(SrcConstants.PrintPagesY, nameof(SrcConstants.PrintPagesY));
+            this.PageTopMargin = this.query.AddCell(SrcConstants.PrintTopMargin, nameof(SrcConstants.PrintTopMargin));
+            this.PaperKind = this.query.AddCell(SrcConstants.PrintPaperKind, nameof(SrcConstants.PrintPaperKind));
             this.PrintGrid = this.query.AddCell(SrcConstants.PrintGrid, nameof(SrcConstants.PrintGrid));
             this.PrintPageOrientation = this.query.AddCell(SrcConstants.PrintPageOrientation, nameof(SrcConstants.PrintPageOrientation));
-            this.ScaleX = this.query.AddCell(SrcConstants.ScaleX, nameof(SrcConstants.ScaleX));
-            this.ScaleY = this.query.AddCell(SrcConstants.ScaleY, nameof(SrcConstants.ScaleY));
-            this.PaperSource = this.query.AddCell(SrcConstants.PaperSource, nameof(SrcConstants.PaperSource));
-            this.DrawingScale = this.query.AddCell(SrcConstants.DrawingScale, nameof(SrcConstants.DrawingScale));
-            this.DrawingScaleType = this.query.AddCell(SrcConstants.DrawingScaleType, nameof(SrcConstants.DrawingScaleType));
-            this.DrawingSizeType = this.query.AddCell(SrcConstants.DrawingSizeType, nameof(SrcConstants.DrawingSizeType));
-            this.InhibitSnap = this.query.AddCell(SrcConstants.InhibitSnap, nameof(SrcConstants.InhibitSnap));
+            this.ScaleX = this.query.AddCell(SrcConstants.PrintScaleX, nameof(SrcConstants.PrintScaleX));
+            this.ScaleY = this.query.AddCell(SrcConstants.PrintScaleY, nameof(SrcConstants.PrintScaleY));
+            this.PaperSource = this.query.AddCell(SrcConstants.PrintPaperSource, nameof(SrcConstants.PrintPaperSource));
+            this.DrawingScale = this.query.AddCell(SrcConstants.PageDrawingScale, nameof(SrcConstants.PageDrawingScale));
+            this.DrawingScaleType = this.query.AddCell(SrcConstants.PageDrawingScaleType, nameof(SrcConstants.PageDrawingScaleType));
+            this.DrawingSizeType = this.query.AddCell(SrcConstants.PageDrawingSizeType, nameof(SrcConstants.PageDrawingSizeType));
+            this.InhibitSnap = this.query.AddCell(SrcConstants.PageInhibitSnap, nameof(SrcConstants.PageInhibitSnap));
             this.PageHeight = this.query.AddCell(SrcConstants.PageHeight, nameof(SrcConstants.PageHeight));
             this.PageScale = this.query.AddCell(SrcConstants.PageScale, nameof(SrcConstants.PageScale));
             this.PageWidth = this.query.AddCell(SrcConstants.PageWidth, nameof(SrcConstants.PageWidth));
-            this.ShdwObliqueAngle = this.query.AddCell(SrcConstants.ShdwObliqueAngle, nameof(SrcConstants.ShdwObliqueAngle));
-            this.ShdwOffsetX = this.query.AddCell(SrcConstants.ShdwOffsetX, nameof(SrcConstants.ShdwOffsetX));
-            this.ShdwOffsetY = this.query.AddCell(SrcConstants.ShdwOffsetY, nameof(SrcConstants.ShdwOffsetY));
-            this.ShdwScaleFactor = this.query.AddCell(SrcConstants.ShdwScaleFactor, nameof(SrcConstants.ShdwScaleFactor));
-            this.ShdwType = this.query.AddCell(SrcConstants.ShdwType, nameof(SrcConstants.ShdwType));
-            this.UIVisibility = this.query.AddCell(SrcConstants.UIVisibility, nameof(SrcConstants.UIVisibility));
+            this.ShdwObliqueAngle = this.query.AddCell(SrcConstants.PageShadowObliqueAngle, nameof(SrcConstants.PageShadowObliqueAngle));
+            this.ShdwOffsetX = this.query.AddCell(SrcConstants.PageShadowOffsetX, nameof(SrcConstants.PageShadowOffsetX));
+            this.ShdwOffsetY = this.query.AddCell(SrcConstants.PageShadowOffsetY, nameof(SrcConstants.PageShadowOffsetY));
+            this.ShdwScaleFactor = this.query.AddCell(SrcConstants.PageShadowScaleFactor, nameof(SrcConstants.PageShadowScaleFactor));
+            this.ShdwType = this.query.AddCell(SrcConstants.PageShadowType, nameof(SrcConstants.PageShadowType));
+            this.UIVisibility = this.query.AddCell(SrcConstants.PageUIVisibility, nameof(SrcConstants.PageUIVisibility));
             this.XGridDensity = this.query.AddCell(SrcConstants.XGridDensity, nameof(SrcConstants.XGridDensity));
             this.XGridOrigin = this.query.AddCell(SrcConstants.XGridOrigin, nameof(SrcConstants.XGridOrigin));
             this.XGridSpacing = this.query.AddCell(SrcConstants.XGridSpacing, nameof(SrcConstants.XGridSpacing));
@@ -114,49 +114,51 @@ namespace VisioAutomation.Pages
             this.YGridSpacing = this.query.AddCell(SrcConstants.YGridSpacing, nameof(SrcConstants.YGridSpacing));
             this.YRulerDensity = this.query.AddCell(SrcConstants.YRulerDensity, nameof(SrcConstants.YRulerDensity));
             this.YRulerOrigin = this.query.AddCell(SrcConstants.YRulerOrigin, nameof(SrcConstants.YRulerOrigin));
-            this.AvenueSizeX = this.query.AddCell(SrcConstants.AvenueSizeX, nameof(SrcConstants.AvenueSizeX));
-            this.AvenueSizeY = this.query.AddCell(SrcConstants.AvenueSizeY, nameof(SrcConstants.AvenueSizeY));
-            this.BlockSizeX = this.query.AddCell(SrcConstants.BlockSizeX, nameof(SrcConstants.BlockSizeX));
-            this.BlockSizeY = this.query.AddCell(SrcConstants.BlockSizeY, nameof(SrcConstants.BlockSizeY));
-            this.CtrlAsInput = this.query.AddCell(SrcConstants.CtrlAsInput, nameof(SrcConstants.CtrlAsInput));
-            this.DynamicsOff = this.query.AddCell(SrcConstants.DynamicsOff, nameof(SrcConstants.DynamicsOff));
-            this.EnableGrid = this.query.AddCell(SrcConstants.EnableGrid, nameof(SrcConstants.EnableGrid));
-            this.LineAdjustFrom = this.query.AddCell(SrcConstants.LineAdjustFrom, nameof(SrcConstants.LineAdjustFrom));
-            this.LineAdjustTo = this.query.AddCell(SrcConstants.LineAdjustTo, nameof(SrcConstants.LineAdjustTo));
-            this.LineJumpCode = this.query.AddCell(SrcConstants.LineJumpCode, nameof(SrcConstants.LineJumpCode));
-            this.LineJumpFactorX = this.query.AddCell(SrcConstants.LineJumpFactorX, nameof(SrcConstants.LineJumpFactorX));
-            this.LineJumpFactorY = this.query.AddCell(SrcConstants.LineJumpFactorY, nameof(SrcConstants.LineJumpFactorY));
-            this.LineJumpStyle = this.query.AddCell(SrcConstants.LineJumpStyle, nameof(SrcConstants.LineJumpStyle));
-            this.LineRouteExt = this.query.AddCell(SrcConstants.LineRouteExt, nameof(SrcConstants.LineRouteExt));
-            this.LineToLineX = this.query.AddCell(SrcConstants.LineToLineX, nameof(SrcConstants.LineToLineX));
-            this.LineToLineY = this.query.AddCell(SrcConstants.LineToLineY, nameof(SrcConstants.LineToLineY));
-            this.LineToNodeX = this.query.AddCell(SrcConstants.LineToNodeX, nameof(SrcConstants.LineToNodeX));
-            this.LineToNodeY = this.query.AddCell(SrcConstants.LineToNodeY, nameof(SrcConstants.LineToNodeY));
-            this.PageLineJumpDirX = this.query.AddCell(SrcConstants.PageLineJumpDirX, nameof(SrcConstants.PageLineJumpDirX));
-            this.PageLineJumpDirY = this.query.AddCell(SrcConstants.PageLineJumpDirY, nameof(SrcConstants.PageLineJumpDirY));
-            this.PageShapeSplit = this.query.AddCell(SrcConstants.PageShapeSplit, nameof(SrcConstants.PageShapeSplit));
-            this.PlaceDepth = this.query.AddCell(SrcConstants.PlaceDepth, nameof(SrcConstants.PlaceDepth));
-            this.PlaceFlip = this.query.AddCell(SrcConstants.PlaceFlip, nameof(SrcConstants.PlaceFlip));
-            this.PlaceStyle = this.query.AddCell(SrcConstants.PlaceStyle, nameof(SrcConstants.PlaceStyle));
-            this.PlowCode = this.query.AddCell(SrcConstants.PlowCode, nameof(SrcConstants.PlowCode));
-            this.ResizePage = this.query.AddCell(SrcConstants.ResizePage, nameof(SrcConstants.ResizePage));
-            this.RouteStyle = this.query.AddCell(SrcConstants.RouteStyle, nameof(SrcConstants.RouteStyle));
-            this.AvoidPageBreaks = this.query.AddCell(SrcConstants.AvoidPageBreaks, nameof(SrcConstants.AvoidPageBreaks));
-            this.DrawingResizeType = this.query.AddCell(SrcConstants.DrawingResizeType, nameof(SrcConstants.DrawingResizeType));
+            this.AvenueSizeX = this.query.AddCell(SrcConstants.PageLayoutAvenueSizeX, nameof(SrcConstants.PageLayoutAvenueSizeX));
+            this.AvenueSizeY = this.query.AddCell(SrcConstants.PageLayoutAvenueSizeY, nameof(SrcConstants.PageLayoutAvenueSizeY));
+            this.BlockSizeX = this.query.AddCell(SrcConstants.PageLayoutBlockSizeX, nameof(SrcConstants.PageLayoutBlockSizeX));
+            this.BlockSizeY = this.query.AddCell(SrcConstants.PageLayoutBlockSizeY, nameof(SrcConstants.PageLayoutBlockSizeY));
+            this.CtrlAsInput = this.query.AddCell(SrcConstants.PageLayoutCtrlAsInput, nameof(SrcConstants.PageLayoutCtrlAsInput));
+            this.DynamicsOff = this.query.AddCell(SrcConstants.PageLayoutDynamicsOff, nameof(SrcConstants.PageLayoutDynamicsOff));
+            this.EnableGrid = this.query.AddCell(SrcConstants.PageLayoutEnableGrid, nameof(SrcConstants.PageLayoutEnableGrid));
+            this.LineAdjustFrom = this.query.AddCell(SrcConstants.PageLayoutLineAdjustFrom, nameof(SrcConstants.PageLayoutLineAdjustFrom));
+            this.LineAdjustTo = this.query.AddCell(SrcConstants.PageLayoutLineAdjustTo, nameof(SrcConstants.PageLayoutLineAdjustTo));
+            this.LineJumpCode = this.query.AddCell(SrcConstants.PageLayoutLineJumpCode, nameof(SrcConstants.PageLayoutLineJumpCode));
+            this.LineJumpFactorX = this.query.AddCell(SrcConstants.PageLayoutLineJumpFactorX, nameof(SrcConstants.PageLayoutLineJumpFactorX));
+            this.LineJumpFactorY = this.query.AddCell(SrcConstants.PageLayoutLineJumpFactorY, nameof(SrcConstants.PageLayoutLineJumpFactorY));
+            this.LineJumpStyle = this.query.AddCell(SrcConstants.PageLayoutLineJumpStyle, nameof(SrcConstants.PageLayoutLineJumpStyle));
+            this.LineRouteExt = this.query.AddCell(SrcConstants.PageLayoutLineRouteExt, nameof(SrcConstants.PageLayoutLineRouteExt));
+            this.LineToLineX = this.query.AddCell(SrcConstants.PageLayoutLineToLineX, nameof(SrcConstants.PageLayoutLineToLineX));
+            this.LineToLineY = this.query.AddCell(SrcConstants.PageLayoutLineToLineY, nameof(SrcConstants.PageLayoutLineToLineY));
+            this.LineToNodeX = this.query.AddCell(SrcConstants.PageLayoutLineToNodeX, nameof(SrcConstants.PageLayoutLineToNodeX));
+            this.LineToNodeY = this.query.AddCell(SrcConstants.PageLayoutLineToNodeY, nameof(SrcConstants.PageLayoutLineToNodeY));
+            this.PageLineJumpDirX = this.query.AddCell(SrcConstants.PageLayoutLineJumpDirX, nameof(SrcConstants.PageLayoutLineJumpDirX));
+            this.PageLineJumpDirY = this.query.AddCell(SrcConstants.PageLayoutLineJumpDirY, nameof(SrcConstants.PageLayoutLineJumpDirY));
+            this.PageShapeSplit = this.query.AddCell(SrcConstants.PageLayoutPageShapeSplit, nameof(SrcConstants.PageLayoutPageShapeSplit));
+            this.PlaceDepth = this.query.AddCell(SrcConstants.PageLayoutPlaceDepth, nameof(SrcConstants.PageLayoutPlaceDepth));
+            this.PlaceFlip = this.query.AddCell(SrcConstants.PageLayoutPlaceFlip, nameof(SrcConstants.PageLayoutPlaceFlip));
+            this.PlaceStyle = this.query.AddCell(SrcConstants.PageLayoutPlaceStyle, nameof(SrcConstants.PageLayoutPlaceStyle));
+            this.PlowCode = this.query.AddCell(SrcConstants.PageLayoutPlowCode, nameof(SrcConstants.PageLayoutPlowCode));
+            this.ResizePage = this.query.AddCell(SrcConstants.PageLayoutResizePage, nameof(SrcConstants.PageLayoutResizePage));
+            this.RouteStyle = this.query.AddCell(SrcConstants.PageLayoutRouteStyle, nameof(SrcConstants.PageLayoutRouteStyle));
+            this.AvoidPageBreaks = this.query.AddCell(SrcConstants.PageLayoutAvoidPageBreaks, nameof(SrcConstants.PageLayoutAvoidPageBreaks));
+
+            // Page cells
+            this.DrawingResizeType = this.query.AddCell(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
         }
 
 
         public override Pages.PageCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Pages.PageCells();
-            cells.PageLeftMargin = row[this.PageLeftMargin];
-            cells.CenterX = row[this.CenterX];
-            cells.CenterY = row[this.CenterY];
-            cells.OnPage = row[this.OnPage];
-            cells.PageBottomMargin = row[this.PageBottomMargin];
-            cells.PageRightMargin = row[this.PageRightMargin];
-            cells.PagesX = row[this.PagesX];
-            cells.PagesY = row[this.PagesY];
+            cells.PageLeftMargin = row[this.PrintLeftMargin];
+            cells.CenterX = row[this.PrintCenterX];
+            cells.CenterY = row[this.PrintCenterY];
+            cells.OnPage = row[this.PrintOnPage];
+            cells.PageBottomMargin = row[this.PrintPageBottomMargin];
+            cells.PageRightMargin = row[this.PrintRightMargin];
+            cells.PagesX = row[this.PrintPagesX];
+            cells.PagesY = row[this.PrintPagesY];
             cells.PageTopMargin = row[this.PageTopMargin];
             cells.PaperKind = row[this.PaperKind];
             cells.PrintGrid = row[this.PrintGrid];

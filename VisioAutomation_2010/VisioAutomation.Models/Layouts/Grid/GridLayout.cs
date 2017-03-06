@@ -150,8 +150,8 @@ namespace VisioAutomation.Models.Layouts.Grid
                     shape_node.Cells = node.Cells.ShallowCopy();
                 }
 
-                shape_node.Cells.Width = node.Rectangle.Width;
-                shape_node.Cells.Height = node.Rectangle.Height;
+                shape_node.Cells.XFormWidth = node.Rectangle.Width;
+                shape_node.Cells.XFormHeight = node.Rectangle.Height;
 
                 if (!string.IsNullOrEmpty(node.Text))
                 {

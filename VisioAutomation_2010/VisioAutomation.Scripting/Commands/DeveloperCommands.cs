@@ -315,7 +315,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     node.Cells = new ShapeCells();                    
                 }
-                node.Cells.FillForegnd = def_fillcolor;
+                node.Cells.FillForeground = def_fillcolor;
                 node.Cells.CharFont = fontid;
                 node.Cells.LineColor = def_linecolor;
                 node.Cells.ParaHorizontalAlign = "0";
@@ -493,12 +493,12 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     node.Cells = new ShapeCells();
                 }
-                node.Cells.FillForegnd = def_shape_fill;
+                node.Cells.FillForeground = def_shape_fill;
                 //node.ShapeCells.LineWeight = "0";
                 //node.ShapeCells.LinePattern = "0";
                 node.Cells.LineColor = def_linecolor;
                 node.Cells.ParaHorizontalAlign = "0";
-                node.Cells.VerticalAlign = "0";
+                node.Cells.TextBlockVerticalAlign = "0";
             }
 
             var cxn_cells = new ShapeCells();

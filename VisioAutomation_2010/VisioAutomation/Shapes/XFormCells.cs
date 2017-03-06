@@ -18,13 +18,13 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.PinX, this.PinX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PinY, this.PinY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LocPinX, this.LocPinX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LocPinY, this.LocPinY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Width, this.Width.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Height, this.Height.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Angle, this.Angle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormPinX, this.PinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormPinY, this.PinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormLocPinX, this.LocPinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormLocPinY, this.LocPinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormWidth, this.Width.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormHeight, this.Height.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormAngle, this.Angle.Formula);
             }
         }
 

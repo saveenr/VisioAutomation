@@ -81,8 +81,8 @@ namespace VisioAutomation.Scripting.Commands
             var shape = selection[1];
 
             var query = new ShapeSheetQuery();
-            var width_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Width, "Width");
-            var height_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Height, "Height");
+            var width_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, "Width");
+            var height_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, "Height");
 
             var queryresults = query.GetResults<double>(shape);
 
@@ -114,12 +114,12 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (paste_width)
                 {
-                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.Width, this.cached_size_width.Value);
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, this.cached_size_width.Value);
                 }
 
                 if (paste_height)
                 {
-                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.Height, this.cached_size_height.Value);
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, this.cached_size_height.Value);
                 }
             }
 

@@ -50,8 +50,8 @@ namespace VisioAutomationSamples
 
             // Format Node 1
             n1.Cells = new ShapeCells();
-            n1.Cells.FillForegnd = "rgb(255,0,0)";
-            n1.Cells.FillBkgnd = "rgb(255,255,0)";
+            n1.Cells.FillForeground = "rgb(255,0,0)";
+            n1.Cells.FillBackground = "rgb(255,255,0)";
             n1.Cells.FillPattern = 40;
 
             // Create Node 2
@@ -79,18 +79,18 @@ namespace VisioAutomationSamples
 
             // Format connector 0 to point "back" 
             c0.Cells = new ShapeCells();
-            c0.Cells.BeginArrow = 1;
+            c0.Cells.LineBeginArrow = 1;
             c0.Cells.LineWeight = 0.10;
 
             // Format connector 1 to point "forward" 
             c1.Cells = new ShapeCells();
-            c1.Cells.EndArrow = 1;
+            c1.Cells.LineEndArrow = 1;
             c1.Cells.LineWeight = 0.10;
 
             // Format connector 2 to point "back" and "forward"  
             c2.Cells = new ShapeCells();
-            c2.Cells.EndArrow = 1;
-            c2.Cells.BeginArrow = 1;
+            c2.Cells.LineEndArrow = 1;
+            c2.Cells.LineBeginArrow = 1;
             c2.Cells.LineWeight = 0.10;
             return directed_graph_drawing;
         }

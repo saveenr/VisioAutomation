@@ -12,16 +12,16 @@ namespace VisioAutomation.Shapes.Layout
         public ShapeSheet.CellData ConLineJumpDirY { get; set; }
         public ShapeSheet.CellData ConLineJumpStyle { get; set; }
         public ShapeSheet.CellData ConLineRouteExt { get; set; }
-        public ShapeSheet.CellData ShapeFixedCode { get; set; }
-        public ShapeSheet.CellData ShapePermeablePlace { get; set; }
-        public ShapeSheet.CellData ShapePermeableX { get; set; }
-        public ShapeSheet.CellData ShapePermeableY { get; set; }
-        public ShapeSheet.CellData ShapePlaceFlip { get; set; }
-        public ShapeSheet.CellData ShapePlaceStyle { get; set; }
-        public ShapeSheet.CellData ShapePlowCode { get; set; }
-        public ShapeSheet.CellData ShapeRouteStyle { get; set; }
-        public ShapeSheet.CellData ShapeSplit { get; set; }
-        public ShapeSheet.CellData ShapeSplittable { get; set; }
+        public ShapeSheet.CellData FixedCode { get; set; }
+        public ShapeSheet.CellData PermeablePlace { get; set; }
+        public ShapeSheet.CellData PermeableX { get; set; }
+        public ShapeSheet.CellData PermeableY { get; set; }
+        public ShapeSheet.CellData PlaceFlip { get; set; }
+        public ShapeSheet.CellData PlaceStyle { get; set; }
+        public ShapeSheet.CellData PlowCode { get; set; }
+        public ShapeSheet.CellData RouteStyle { get; set; }
+        public ShapeSheet.CellData Split { get; set; }
+        public ShapeSheet.CellData Splittable { get; set; }
         public ShapeSheet.CellData DisplayLevel { get; set; } // new in visio 2010
         public ShapeSheet.CellData Relationships { get; set; } // new in visio 2010
 
@@ -29,24 +29,24 @@ namespace VisioAutomation.Shapes.Layout
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.ConFixedCode, this.ConFixedCode.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConLineJumpDirX, this.ConLineJumpDirX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConLineJumpDirY, this.ConLineJumpDirY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConLineJumpStyle, this.ConLineJumpStyle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConLineRouteExt, this.ConLineRouteExt.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeFixedCode, this.ShapeFixedCode.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapePermeablePlace, this.ShapePermeablePlace.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapePermeableX, this.ShapePermeableX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapePermeableY, this.ShapePermeableY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapePlaceFlip, this.ShapePlaceFlip.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapePlaceStyle, this.ShapePlaceStyle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapePlowCode, this.ShapePlowCode.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeRouteStyle, this.ShapeRouteStyle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeSplit, this.ShapeSplit.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeSplittable, this.ShapeSplittable.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.DisplayLevel, this.DisplayLevel.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Relationships, this.Relationships.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConFixedCode, this.ConFixedCode.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineJumpCode, this.ConLineJumpCode.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineJumpDirX, this.ConLineJumpDirX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineJumpDirY, this.ConLineJumpDirY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineJumpStyle, this.ConLineJumpStyle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineRouteExt, this.ConLineRouteExt.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutFixedCode, this.FixedCode.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutPermeablePlace, this.PermeablePlace.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutPermeableX, this.PermeableX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutPermeableY, this.PermeableY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutPlaceFlip, this.PlaceFlip.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutPlaceStyle, this.PlaceStyle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutPlowCode, this.PlowCode.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutRouteStyle, this.RouteStyle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutSplit, this.Split.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutSplittable, this.Splittable.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutDisplayLevel, this.DisplayLevel.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutRelationships, this.Relationships.Formula);
             }
         }
 

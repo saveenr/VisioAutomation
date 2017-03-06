@@ -42,10 +42,10 @@ namespace VisioAutomationSamples
                 tn.Cells = cells;
 
                 cells.ParaHorizontalAlign = 0; // align text to left
-                cells.VerticalAlign = 0; // align text block to top
+                cells.TextBlockVerticalAlign = 0; // align text block to top
                 cells.CharFont = font.ID;
                 cells.CharSize = "10pt";
-                cells.FillForegnd = "rgb(255,250,200)";
+                cells.FillForeground = "rgb(255,250,200)";
                 cells.CharColor = "rgb(255,0,0)";
             }
 

@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Utilities
             
             foreach (int shapeid in shapeids)
             {
-                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TxtWidth, formula);
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TextXFormWidth, formula);
             }
 
             writer.Commit(page);

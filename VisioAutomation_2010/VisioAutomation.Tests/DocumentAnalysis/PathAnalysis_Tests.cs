@@ -31,11 +31,11 @@ namespace VisioAutomation_Tests.DocumentAnalysis
                 var writer = new SidSrcWriter();
                 if (a_arrow)
                 {
-                    writer.SetFormula(c1.ID16, VASS.SrcConstants.BeginArrow, "13");                    
+                    writer.SetFormula(c1.ID16, VASS.SrcConstants.LineBeginArrow, "13");                    
                 }
                 if (b_arrow)
                 {
-                    writer.SetFormula(c1.ID16, VASS.SrcConstants.EndArrow, "13");
+                    writer.SetFormula(c1.ID16, VASS.SrcConstants.LineEndArrow, "13");
                 }
 
                 writer.Commit(page);
