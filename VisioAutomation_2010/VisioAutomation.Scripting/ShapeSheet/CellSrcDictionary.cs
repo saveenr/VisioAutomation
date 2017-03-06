@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LineWeight)] = SrcConstants.LineWeight;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockAspect)] = SrcConstants.LockAspect;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockBegin)] = SrcConstants.LockBegin;
-                CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockCalcWidthHeight)] = SrcConstants.LockCalcWidthHeight;
+                CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockCalcWH)] = SrcConstants.LockCalcWH;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockCrop)] = SrcConstants.LockCrop;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockCustProp)] = SrcConstants.LockCustProp;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockDelete)] = SrcConstants.LockDelete;

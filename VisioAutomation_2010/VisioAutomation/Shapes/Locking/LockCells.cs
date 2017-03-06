@@ -8,7 +8,7 @@ namespace VisioAutomation.Shapes.Locking
     {
         public ShapeSheet.CellData LockAspect { get; set; }
         public ShapeSheet.CellData LockBegin { get; set; }
-        public ShapeSheet.CellData LockCalcWidthHeight { get; set; }
+        public ShapeSheet.CellData LockCalcWH { get; set; }
         public ShapeSheet.CellData LockCrop { get; set; }
         public ShapeSheet.CellData LockCustProp { get; set; }
         public ShapeSheet.CellData LockDelete { get; set; }
@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes.Locking
             {
                 yield return this.newpair(ShapeSheet.SrcConstants.LockAspect, this.LockAspect.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockBegin, this.LockBegin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCalcWidthHeight, this.LockCalcWidthHeight.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCalcWH, this.LockCalcWH.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockCrop, this.LockCrop.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockCustProp, this.LockCustProp.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockDelete, this.LockDelete.Formula);
