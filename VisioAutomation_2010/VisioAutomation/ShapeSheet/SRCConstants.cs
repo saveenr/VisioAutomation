@@ -95,10 +95,10 @@ namespace VisioAutomation.ShapeSheet
 
         // Events
         private static Src EventCell(CEL c) => new Src(SEC.visSectionObject, ROW.visRowEvent, c);
-        public static Src EventDblClick => EventCell(CEL.visEvtCellDblClick);
+        public static Src EventDoubleClick => EventCell(CEL.visEvtCellDblClick);
         public static Src EventDrop => EventCell(CEL.visEvtCellDrop);
         public static Src EventMultiDrop => EventCell(CEL.visEvtCellMultiDrop);
-        public static Src EventXFMod => EventCell(CEL.visEvtCellXFMod);
+        public static Src EventXFormMod => EventCell(CEL.visEvtCellXFMod);
         public static Src EventTheText => EventCell(CEL.visEvtCellTheText);
 
         // ForeignImageInfo
