@@ -4,7 +4,6 @@ namespace VisioAutomation.ShapeSheet.Streams
 {
     public abstract class FixedStreamBuilderBase<T>
     {
-        protected readonly short [] _stream;
         private readonly int _capacity = -1;
 
         protected readonly StreamType _streamtype;
@@ -13,12 +12,13 @@ namespace VisioAutomation.ShapeSheet.Streams
         private int _count = 0;
         private int _pos = 0;
 
+        private VisioAutomation.Utilities.SegmentedArray<short> _segarray;
+
         internal FixedStreamBuilderBase(int capacity, StreamType stream_type)
         {
             this._streamtype = stream_type;
             this._capacity = capacity;
-            int num_shorts = capacity * this._chunksize;
-            this._stream = new short[num_shorts];
+            this._segarray = new VisioAutomation.Utilities.SegmentedArray<short>(capacity,this._chunksize);         
         }
 
         public int Count => this._count;
@@ -30,9 +30,8 @@ namespace VisioAutomation.ShapeSheet.Streams
                 throw new System.ArgumentException("Already full");
             }
 
-            var seg = new Utilities.ArraySegment<short>(this._stream,this._pos,this._chunksize);
+            var seg = this._segarray[this._count];
             this._fill_segment_with_item(seg,item);
-            this._pos = this._pos + this._chunksize;
             this._count++;
         }
 
@@ -52,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             {
                 throw new System.ArgumentException("Not full");
             }
-            return new StreamArray(this._stream, this._streamtype, this._capacity);
+            return new StreamArray(this._segarray.Array, this._streamtype, this._capacity);
         }
 
         public void Clear()
