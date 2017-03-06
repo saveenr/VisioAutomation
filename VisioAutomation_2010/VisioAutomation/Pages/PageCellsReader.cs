@@ -166,19 +166,19 @@ namespace VisioAutomation.Pages
             cells.PrintScaleX = row[this.ScaleX];
             cells.PrintScaleY = row[this.ScaleY];
             cells.PrintPaperSource = row[this.PaperSource];
-            cells.DrawingScale = row[this.DrawingScale];
-            cells.DrawingScaleType = row[this.DrawingScaleType];
-            cells.DrawingSizeType = row[this.DrawingSizeType];
-            cells.InhibitSnap = row[this.InhibitSnap];
+            cells.PageDrawingScale = row[this.DrawingScale];
+            cells.PageDrawingScaleType = row[this.DrawingScaleType];
+            cells.PageDrawingSizeType = row[this.DrawingSizeType];
+            cells.PageInhibitSnap = row[this.InhibitSnap];
             cells.PageHeight = row[this.PageHeight];
             cells.PageScale = row[this.PageScale];
             cells.PageWidth = row[this.PageWidth];
-            cells.ShdwObliqueAngle = row[this.ShdwObliqueAngle];
-            cells.ShdwOffsetX = row[this.ShdwOffsetX];
-            cells.ShdwOffsetY = row[this.ShdwOffsetY];
-            cells.ShdwScaleFactor = row[this.ShdwScaleFactor];
-            cells.ShdwType = row[this.ShdwType];
-            cells.UIVisibility = row[this.UIVisibility];
+            cells.PageShadowObliqueAngle = row[this.ShdwObliqueAngle];
+            cells.PageShadowOffsetX = row[this.ShdwOffsetX];
+            cells.PageShadowOffsetY = row[this.ShdwOffsetY];
+            cells.PageShadowScaleFactor = row[this.ShdwScaleFactor];
+            cells.PageShadowType = row[this.ShdwType];
+            cells.PageUIVisibility = row[this.UIVisibility];
             cells.XGridDensity = row[this.XGridDensity];
             cells.XGridOrigin = row[this.XGridOrigin];
             cells.XGridSpacing = row[this.XGridSpacing];
@@ -217,7 +217,7 @@ namespace VisioAutomation.Pages
             cells.PageLayoutResizePage = row[this.ResizePage];
             cells.PageLayoutRouteStyle = row[this.RouteStyle];
             cells.PageLayoutAvoidPageBreaks = row[this.AvoidPageBreaks];
-            cells.DrawingResizeType = row[this.DrawingResizeType];
+            cells.PageDrawingResizeType = row[this.DrawingResizeType];
             return cells;
         }
     }
