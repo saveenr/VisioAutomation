@@ -307,7 +307,7 @@ namespace VisioAutomation.ShapeSheet
         private static Src LockCell(CEL c) => new Src(SEC.visSectionObject, ROW.visRowLock, c);
         public static Src LockAspect => LockCell(CEL.visLockAspect);
         public static Src LockBegin => LockCell(CEL.visLockBegin);
-        public static Src LockCalcWH => LockCell(CEL.visLockCalcWH);
+        public static Src LockCalcWidthHeight => LockCell(CEL.visLockCalcWH);
         public static Src LockCrop => LockCell(CEL.visLockCrop);
         public static Src LockCustProp => LockCell(CEL.visLockCustProp);
         public static Src LockDelete => LockCell(CEL.visLockDelete);

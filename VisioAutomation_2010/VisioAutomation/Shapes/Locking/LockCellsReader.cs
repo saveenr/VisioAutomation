@@ -31,7 +31,7 @@ namespace VisioAutomation.Shapes.Locking
         {
             this.LockAspect = this.query.AddCell(SrcConstants.LockAspect, nameof(SrcConstants.LockAspect));
             this.LockBegin = this.query.AddCell(SrcConstants.LockBegin, nameof(SrcConstants.LockBegin));
-            this.LockCalcWH = this.query.AddCell(SrcConstants.LockCalcWH, nameof(SrcConstants.LockCalcWH));
+            this.LockCalcWH = this.query.AddCell(SrcConstants.LockCalcWidthHeight, nameof(SrcConstants.LockCalcWidthHeight));
             this.LockCrop = this.query.AddCell(SrcConstants.LockCrop, nameof(SrcConstants.LockCrop));
             this.LockCustProp = this.query.AddCell(SrcConstants.LockCustProp, nameof(SrcConstants.LockCustProp));
             this.LockDelete = this.query.AddCell(SrcConstants.LockDelete, nameof(SrcConstants.LockDelete));
@@ -56,7 +56,7 @@ namespace VisioAutomation.Shapes.Locking
             var cells = new LockCells();
             cells.LockAspect = row[this.LockAspect];
             cells.LockBegin = row[this.LockBegin];
-            cells.LockCalcWH = row[this.LockCalcWH];
+            cells.LockCalcWidthHeight = row[this.LockCalcWH];
             cells.LockCrop = row[this.LockCrop];
             cells.LockCustProp = row[this.LockCustProp];
             cells.LockDelete = row[this.LockDelete];
