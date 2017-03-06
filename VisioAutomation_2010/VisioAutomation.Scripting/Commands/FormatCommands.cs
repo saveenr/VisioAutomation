@@ -81,8 +81,8 @@ namespace VisioAutomation.Scripting.Commands
             var shape = selection[1];
 
             var query = new ShapeSheetQuery();
-            var width_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, "Width");
-            var height_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, "Height");
+            var width_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth));
+            var height_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth));
 
             var queryresults = query.GetResults<double>(shape);
 

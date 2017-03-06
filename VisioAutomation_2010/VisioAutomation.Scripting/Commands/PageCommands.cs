@@ -110,8 +110,8 @@ namespace VisioAutomation.Scripting.Commands
 
 
             var query = new ShapeSheetQuery();
-            var col_height = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, "PageHeight");
-            var col_width = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
+            var col_height = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
+            var col_width = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
 
             var results = query.GetResults<double>(active_page.PageSheet);
             double height = results.Cells[col_height];
