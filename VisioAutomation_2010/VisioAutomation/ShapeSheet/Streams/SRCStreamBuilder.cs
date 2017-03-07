@@ -17,23 +17,17 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         protected override StreamArray build_stream()
         {
-            var short_array = ToStream(this._items);
-            return new StreamArray(short_array, Streams.StreamType.Src, this.Count);
-        }
-
-        private short[] ToStream(IList<Src> srcs)
-        {
             const int src_length = 3;
-            var a = new SegmentedArray<short>(srcs.Count, src_length);
-            for (int i = 0; i < srcs.Count; i++)
+            var a = new SegmentedArray<short>(this._items.Count, src_length);
+            for (int i = 0; i < this._items.Count; i++)
             {
-                var src = srcs[i];
+                var src = this._items[i];
                 var item = a[i];
                 item[0] = src.Section;
                 item[1] = src.Row;
                 item[2] = src.Cell;
             }
-            return a.Array;
+            return new StreamArray(a.Array, Streams.StreamType.Src, this.Count);
         }
     }
 }
