@@ -5,7 +5,6 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
-using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;

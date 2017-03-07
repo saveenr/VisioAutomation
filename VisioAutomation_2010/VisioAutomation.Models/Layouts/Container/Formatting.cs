@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
+﻿using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Models.Layouts.Container
 {

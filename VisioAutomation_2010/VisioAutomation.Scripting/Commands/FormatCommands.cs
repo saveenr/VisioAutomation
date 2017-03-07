@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Scripting.FormatPaint;
-using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
