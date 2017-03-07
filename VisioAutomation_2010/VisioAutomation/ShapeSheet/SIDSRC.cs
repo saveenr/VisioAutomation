@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace VisioAutomation.ShapeSheet
 {
     public struct SidSrc
