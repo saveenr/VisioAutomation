@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Utilities;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
@@ -23,16 +24,16 @@ namespace VisioAutomation.ShapeSheet.Streams
         private short[] ToStream(IList<Src> srcs)
         {
             const int src_length = 3;
-            var src_stream = new short[src_length * srcs.Count];
+            var a = new SegmentedArray<short>(srcs.Count, src_length);
             for (int i = 0; i < srcs.Count; i++)
             {
-                var sidsrc = srcs[i];
-                int pos = i * src_length;
-                src_stream[pos + 0] = sidsrc.Section;
-                src_stream[pos + 1] = sidsrc.Row;
-                src_stream[pos + 2] = sidsrc.Cell;
+                var src = srcs[i];
+                var item = a[i];
+                item[0] = src.Section;
+                item[1] = src.Row;
+                item[2] = src.Cell;
             }
-            return src_stream;
+            return a.Array;
         }
     }
 }
