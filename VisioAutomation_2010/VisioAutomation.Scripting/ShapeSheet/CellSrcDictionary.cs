@@ -57,7 +57,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockTextEdit)] = SrcConstants.LockTextEdit;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockThemeColors)] = SrcConstants.LockThemeColors;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockThemeEffects)] = SrcConstants.LockThemeEffects;
-                CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockVtxEdit)] = SrcConstants.LockVtxEdit;
+                CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockVertexEdit)] = SrcConstants.LockVertexEdit;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockWidth)] = SrcConstants.LockWidth;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.XFormLocPinX)] = SrcConstants.XFormLocPinX;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.XFormLocPinY)] = SrcConstants.XFormLocPinY;

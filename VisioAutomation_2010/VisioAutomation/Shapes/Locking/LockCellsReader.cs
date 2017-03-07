@@ -47,7 +47,7 @@ namespace VisioAutomation.Shapes.Locking
             this.LockTextEdit = this.query.AddCell(SrcConstants.LockTextEdit, nameof(SrcConstants.LockTextEdit));
             this.LockThemeColors = this.query.AddCell(SrcConstants.LockThemeColors, nameof(SrcConstants.LockThemeColors));
             this.LockThemeEffects = this.query.AddCell(SrcConstants.LockThemeEffects, nameof(SrcConstants.LockThemeEffects));
-            this.LockVtxEdit = this.query.AddCell(SrcConstants.LockVtxEdit, nameof(SrcConstants.LockVtxEdit));
+            this.LockVtxEdit = this.query.AddCell(SrcConstants.LockVertexEdit, nameof(SrcConstants.LockVertexEdit));
             this.LockWidth = this.query.AddCell(SrcConstants.LockWidth, nameof(SrcConstants.LockWidth));
         }
 

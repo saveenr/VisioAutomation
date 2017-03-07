@@ -25,8 +25,8 @@ namespace VisioAutomation.Shapes.Controls
                 yield return this.newpair(ShapeSheet.SrcConstants.ControlY, this.Y.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlXDyn, this.XDynamics.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlYDyn, this.YDynamics.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlXDynamics, this.XDynamics.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlYDynamics, this.YDynamics.Formula);
             }
         }
 

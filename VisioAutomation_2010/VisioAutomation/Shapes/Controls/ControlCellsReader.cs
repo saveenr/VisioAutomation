@@ -26,8 +26,8 @@ namespace VisioAutomation.Shapes.Controls
             this.Y = sec.AddCell(SrcConstants.ControlY, nameof(SrcConstants.ControlY));
             this.YBehavior = sec.AddCell(SrcConstants.ControlYBehavior, nameof(SrcConstants.ControlYBehavior));
             this.XBehavior = sec.AddCell(SrcConstants.ControlXBehavior, nameof(SrcConstants.ControlXBehavior));
-            this.XDynamics = sec.AddCell(SrcConstants.ControlXDyn, nameof(SrcConstants.ControlXDyn));
-            this.YDynamics = sec.AddCell(SrcConstants.ControlYDyn, nameof(SrcConstants.ControlYDyn));
+            this.XDynamics = sec.AddCell(SrcConstants.ControlXDynamics, nameof(SrcConstants.ControlXDynamics));
+            this.YDynamics = sec.AddCell(SrcConstants.ControlYDynamics, nameof(SrcConstants.ControlYDynamics));
 
         }
 

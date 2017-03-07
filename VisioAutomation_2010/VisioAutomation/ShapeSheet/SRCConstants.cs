@@ -64,13 +64,13 @@ namespace VisioAutomation.ShapeSheet
         public static Src CharUseVertical => CharCell(CEL.visCharacterUseVertical);
 
         // Connections
-        private static Src ConnectionCell(CEL c) => new Src(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, c);
-        public static Src ConnectionD => ConnectionCell(CEL.visCnnctD);
-        public static Src ConnectionDirX => ConnectionCell(CEL.visCnnctDirX);
-        public static Src ConnectionDirY => ConnectionCell(CEL.visCnnctDirY);
-        public static Src ConnectionType => ConnectionCell(CEL.visCnnctType);
-        public static Src ConnectionX => ConnectionCell(CEL.visX);
-        public static Src ConnectionY => ConnectionCell(CEL.visY);
+        private static Src ConnectionPointCell(CEL c) => new Src(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, c);
+        public static Src ConnectionPointD => ConnectionPointCell(CEL.visCnnctD);
+        public static Src ConnectionPointDirX => ConnectionPointCell(CEL.visCnnctDirX);
+        public static Src ConnectionPointDirY => ConnectionPointCell(CEL.visCnnctDirY);
+        public static Src ConnectionPointType => ConnectionPointCell(CEL.visCnnctType);
+        public static Src ConnectionPointX => ConnectionPointCell(CEL.visX);
+        public static Src ConnectionPointY => ConnectionPointCell(CEL.visY);
 
         // Controls
         private static Src ControlCell(CEL c) => new Src(SEC.visSectionControls, ROW.visRowControl, c);
@@ -78,10 +78,10 @@ namespace VisioAutomation.ShapeSheet
         public static Src ControlTip => ControlCell(CEL.visCtlTip);
         public static Src ControlXBehavior => ControlCell(CEL.visCtlXCon);
         public static Src ControlX => ControlCell(CEL.visCtlX);
-        public static Src ControlXDyn => ControlCell(CEL.visCtlXDyn);
+        public static Src ControlXDynamics => ControlCell(CEL.visCtlXDyn);
         public static Src ControlYBehavior => ControlCell(CEL.visCtlYCon);
         public static Src ControlY => ControlCell(CEL.visCtlY);
-        public static Src ControlYDyn => ControlCell(CEL.visCtlYDyn);
+        public static Src ControlYDynamics => ControlCell(CEL.visCtlYDyn);
 
         // Document Properties
         private static Src DocCell(CEL c) => new Src(SEC.visSectionObject, ROW.visRowDoc, c);
@@ -205,7 +205,7 @@ namespace VisioAutomation.ShapeSheet
         public static Src MiscLangID => MiscCell(CEL.visObjLangID);
         public static Src MiscLocalizeMerge => MiscCell(CEL.visObjLocalizeMerge);
         public static Src MiscNoAlignBox => MiscCell(CEL.visNoAlignBox);
-        public static Src MiscNoCtlHandles => MiscCell(CEL.visNoCtlHandles);
+        public static Src MiscNoControlHandles => MiscCell(CEL.visNoCtlHandles);
         public static Src MiscNoLiveDynamics => MiscCell(CEL.visNoLiveDynamics);
         public static Src MiscNonPrinting => MiscCell(CEL.visNonPrinting);
         public static Src MiscNoObjHandles => MiscCell(CEL.visNoObjHandles);
@@ -323,7 +323,7 @@ namespace VisioAutomation.ShapeSheet
         public static Src LockTextEdit => LockCell(CEL.visLockTextEdit);
         public static Src LockThemeColors => LockCell(CEL.visLockThemeColors);
         public static Src LockThemeEffects => LockCell(CEL.visLockThemeEffects);
-        public static Src LockVtxEdit => LockCell(CEL.visLockVtxEdit);
+        public static Src LockVertexEdit => LockCell(CEL.visLockVtxEdit);
         public static Src LockWidth => LockCell(CEL.visLockWidth);
 
         // ruler and grid
@@ -366,7 +366,7 @@ namespace VisioAutomation.ShapeSheet
         public static Src CustPropFormat => CustPropCell(CEL.visCustPropsFormat);
         public static Src CustPropInvisible => CustPropCell(CEL.visCustPropsInvis);
         public static Src CustPropLabel => CustPropCell(CEL.visCustPropsLabel);
-        public static Src CustPropLangId => CustPropCell(CEL.visCustPropsLangID);
+        public static Src CustPropLangID => CustPropCell(CEL.visCustPropsLangID);
         public static Src CustPropPrompt => CustPropCell(CEL.visCustPropsPrompt);
         public static Src CustPropType => CustPropCell(CEL.visCustPropsType);
         public static Src CustPropValue => CustPropCell(CEL.visCustPropsValue);

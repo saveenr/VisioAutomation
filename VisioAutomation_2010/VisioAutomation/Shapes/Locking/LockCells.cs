@@ -49,7 +49,7 @@ namespace VisioAutomation.Shapes.Locking
                 yield return this.newpair(ShapeSheet.SrcConstants.LockTextEdit, this.LockTextEdit.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockThemeColors, this.LockThemeColors.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockThemeEffects, this.LockThemeEffects.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockVtxEdit, this.LockVtxEdit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockVertexEdit, this.LockVtxEdit.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockWidth, this.LockWidth.Formula);
             }
         }
