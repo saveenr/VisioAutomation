@@ -9,7 +9,7 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.CellValueLiteral PageLayoutAvenueSizeY { get; set; }
         public ShapeSheet.CellValueLiteral PageLayoutBlockSizeX { get; set; }
         public ShapeSheet.CellValueLiteral PageLayoutBlockSizeY { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutCtrlAsInput { get; set; }
+        public ShapeSheet.CellValueLiteral PageLayoutControlAsInput { get; set; }
         public ShapeSheet.CellValueLiteral PageLayoutDynamicsOff { get; set; }
         public ShapeSheet.CellValueLiteral PageLayoutEnableGrid { get; set; }
         public ShapeSheet.CellValueLiteral PageLayoutLineAdjustFrom { get; set; }
@@ -39,7 +39,7 @@ namespace VisioAutomation.Models.Dom
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, this.PageLayoutAvenueSizeY);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutBlockSizeX, this.PageLayoutBlockSizeX);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutBlockSizeY, this.PageLayoutBlockSizeY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutCtrlAsInput, this.PageLayoutCtrlAsInput);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutControlAsInput, this.PageLayoutControlAsInput);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutDynamicsOff, this.PageLayoutDynamicsOff);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutEnableGrid, this.PageLayoutEnableGrid);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutLineAdjustFrom, this.PageLayoutLineAdjustFrom);
@@ -55,7 +55,7 @@ namespace VisioAutomation.Models.Dom
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutLineToNodeY, this.PageLayoutLineToNodeY);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutLineJumpDirX, this.PageLayoutPageLineJumpDirX);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutLineJumpDirY, this.PageLayoutPageLineJumpDirY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutPageShapeSplit, this.PageShapeSplit);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip);
             writer.SetFormula(id, ShapeSheet.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle);

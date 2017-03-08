@@ -6,12 +6,12 @@ namespace VisioAutomation.Shapes.Layout
 {
     class ShapeLayoutCellsReader : SingleRowReader<Shapes.Layout.ShapeLayoutCells>
     {
-        public CellColumn ConFixedCode { get; set; }
-        public CellColumn ConLineJumpCode { get; set; }
-        public CellColumn ConLineJumpDirX { get; set; }
-        public CellColumn ConLineJumpDirY { get; set; }
-        public CellColumn ConLineJumpStyle { get; set; }
-        public CellColumn ConLineRouteExt { get; set; }
+        public CellColumn ConnectorFixedCode { get; set; }
+        public CellColumn ConnectorLineJumpCode { get; set; }
+        public CellColumn ConnectorLineJumpDirX { get; set; }
+        public CellColumn ConnectorLineJumpDirY { get; set; }
+        public CellColumn ConnectorLineJumpStyle { get; set; }
+        public CellColumn ConnectorLineRouteExt { get; set; }
         public CellColumn ShapeFixedCode { get; set; }
         public CellColumn ShapePermeablePlace { get; set; }
         public CellColumn ShapePermeableX { get; set; }
@@ -27,12 +27,12 @@ namespace VisioAutomation.Shapes.Layout
 
         public ShapeLayoutCellsReader() 
         {
-            this.ConFixedCode = this.query.AddCell(SrcConstants.ShapeLayoutConFixedCode, nameof(SrcConstants.ShapeLayoutConFixedCode));
-            this.ConLineJumpCode = this.query.AddCell(SrcConstants.ShapeLayoutConLineJumpCode, nameof(SrcConstants.ShapeLayoutConLineJumpCode));
-            this.ConLineJumpDirX = this.query.AddCell(SrcConstants.ShapeLayoutConLineJumpDirX, nameof(SrcConstants.ShapeLayoutConLineJumpDirX));
-            this.ConLineJumpDirY = this.query.AddCell(SrcConstants.ShapeLayoutConLineJumpDirY, nameof(SrcConstants.ShapeLayoutConLineJumpDirY));
-            this.ConLineJumpStyle = this.query.AddCell(SrcConstants.ShapeLayoutConLineJumpStyle, nameof(SrcConstants.ShapeLayoutConLineJumpStyle));
-            this.ConLineRouteExt = this.query.AddCell(SrcConstants.ShapeLayoutConLineRouteExt, nameof(SrcConstants.ShapeLayoutConLineRouteExt));
+            this.ConnectorFixedCode = this.query.AddCell(SrcConstants.ShapeLayoutConnectorFixedCode, nameof(SrcConstants.ShapeLayoutConnectorFixedCode));
+            this.ConnectorLineJumpCode = this.query.AddCell(SrcConstants.ShapeLayoutConnectorLineJumpCode, nameof(SrcConstants.ShapeLayoutConnectorLineJumpCode));
+            this.ConnectorLineJumpDirX = this.query.AddCell(SrcConstants.ShapeLayoutConnectorLineJumpDirX, nameof(SrcConstants.ShapeLayoutConnectorLineJumpDirX));
+            this.ConnectorLineJumpDirY = this.query.AddCell(SrcConstants.ShapeLayoutConnectorLineJumpDirY, nameof(SrcConstants.ShapeLayoutConnectorLineJumpDirY));
+            this.ConnectorLineJumpStyle = this.query.AddCell(SrcConstants.ShapeLayoutConnectorLineJumpStyle, nameof(SrcConstants.ShapeLayoutConnectorLineJumpStyle));
+            this.ConnectorLineRouteExt = this.query.AddCell(SrcConstants.ShapeLayoutConnectorLineRouteExt, nameof(SrcConstants.ShapeLayoutConnectorLineRouteExt));
             this.ShapeFixedCode = this.query.AddCell(SrcConstants.ShapeLayoutFixedCode, nameof(SrcConstants.ShapeLayoutFixedCode));
             this.ShapePermeablePlace = this.query.AddCell(SrcConstants.ShapeLayoutPermeablePlace, nameof(SrcConstants.ShapeLayoutPermeablePlace));
             this.ShapePermeableX = this.query.AddCell(SrcConstants.ShapeLayoutPermeableX, nameof(SrcConstants.ShapeLayoutPermeableX));
@@ -52,12 +52,12 @@ namespace VisioAutomation.Shapes.Layout
         public override Shapes.Layout.ShapeLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Shapes.Layout.ShapeLayoutCells();
-            cells.ConFixedCode = row[this.ConFixedCode];
-            cells.ConLineJumpCode = row[this.ConLineJumpCode];
-            cells.ConLineJumpDirX = row[this.ConLineJumpDirX];
-            cells.ConLineJumpDirY = row[this.ConLineJumpDirY];
-            cells.ConLineJumpStyle = row[this.ConLineJumpStyle];
-            cells.ConLineRouteExt = row[this.ConLineRouteExt];
+            cells.ConnectorFixedCode = row[this.ConnectorFixedCode];
+            cells.ConnectorLineJumpCode = row[this.ConnectorLineJumpCode];
+            cells.ConnectorLineJumpDirX = row[this.ConnectorLineJumpDirX];
+            cells.ConnectorLineJumpDirY = row[this.ConnectorLineJumpDirY];
+            cells.ConnectorLineJumpStyle = row[this.ConnectorLineJumpStyle];
+            cells.ConnectorLineRouteExt = row[this.ConnectorLineRouteExt];
             cells.FixedCode = row[this.ShapeFixedCode];
             cells.PermeablePlace = row[this.ShapePermeablePlace];
             cells.PermeableX = row[this.ShapePermeableX];

@@ -205,12 +205,12 @@ namespace VisioAutomation.Models.Dom
             writer.SetFormula(id, ShapeSheet.SrcConstants.TextXFormWidth, this.TextXFormWidth);
 
             // ShapeLayout
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConFixedCode, this.ShapeLayoutConFixedCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConLineJumpCode, this.ShapeLayoutConLineJumpCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConLineJumpDirX, this.ShapeLayoutConLineJumpDirX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConLineJumpDirY, this.ShapeLayoutConLineJumpDirY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConLineJumpStyle, this.ShapeLayoutConLineJumpStyle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConLineRouteExt, this.ShapeLayoutConLineRouteExt);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorFixedCode, this.ShapeLayoutConFixedCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpCode, this.ShapeLayoutConLineJumpCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpDirX, this.ShapeLayoutConLineJumpDirX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpDirY, this.ShapeLayoutConLineJumpDirY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpStyle, this.ShapeLayoutConLineJumpStyle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineRouteExt, this.ShapeLayoutConLineRouteExt);
             writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutFixedCode, this.ShapeLayoutFixedCode);
             writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutPermeablePlace, this.ShapeLayoutPermeablePlace);
             writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutPermeableX, this.ShapeLayoutPermeableX);

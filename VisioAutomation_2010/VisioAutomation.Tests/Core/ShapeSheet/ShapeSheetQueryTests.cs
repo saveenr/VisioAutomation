@@ -177,7 +177,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var query = new ShapeSheetQuery();
 
             var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.AddCell(VA.ShapeSheet.SrcConstants.CustPropValue,"Value");
+            var value_col = prop_sec.AddCell(VA.ShapeSheet.SrcConstants.CustomPropValue,"Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 

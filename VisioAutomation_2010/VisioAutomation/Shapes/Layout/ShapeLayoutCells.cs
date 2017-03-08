@@ -6,12 +6,12 @@ namespace VisioAutomation.Shapes.Layout
 {
     public class ShapeLayoutCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData ConFixedCode { get; set; }
-        public ShapeSheet.CellData ConLineJumpCode { get; set; }
-        public ShapeSheet.CellData ConLineJumpDirX { get; set; }
-        public ShapeSheet.CellData ConLineJumpDirY { get; set; }
-        public ShapeSheet.CellData ConLineJumpStyle { get; set; }
-        public ShapeSheet.CellData ConLineRouteExt { get; set; }
+        public ShapeSheet.CellData ConnectorFixedCode { get; set; }
+        public ShapeSheet.CellData ConnectorLineJumpCode { get; set; }
+        public ShapeSheet.CellData ConnectorLineJumpDirX { get; set; }
+        public ShapeSheet.CellData ConnectorLineJumpDirY { get; set; }
+        public ShapeSheet.CellData ConnectorLineJumpStyle { get; set; }
+        public ShapeSheet.CellData ConnectorLineRouteExt { get; set; }
         public ShapeSheet.CellData FixedCode { get; set; }
         public ShapeSheet.CellData PermeablePlace { get; set; }
         public ShapeSheet.CellData PermeableX { get; set; }
@@ -29,12 +29,12 @@ namespace VisioAutomation.Shapes.Layout
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConFixedCode, this.ConFixedCode.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineJumpCode, this.ConLineJumpCode.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineJumpDirX, this.ConLineJumpDirX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineJumpDirY, this.ConLineJumpDirY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineJumpStyle, this.ConLineJumpStyle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConLineRouteExt, this.ConLineRouteExt.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConnectorFixedCode, this.ConnectorFixedCode.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpCode, this.ConnectorLineJumpCode.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpDirX, this.ConnectorLineJumpDirX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpDirY, this.ConnectorLineJumpDirY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpStyle, this.ConnectorLineJumpStyle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutConnectorLineRouteExt, this.ConnectorLineRouteExt.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutFixedCode, this.FixedCode.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutPermeablePlace, this.PermeablePlace.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.ShapeLayoutPermeableX, this.PermeableX.Formula);

@@ -14,26 +14,26 @@ namespace VisioAutomation.Pages
         public CellColumn PrintRightMargin { get; set; }
         public CellColumn PrintPagesX { get; set; }
         public CellColumn PrintPagesY { get; set; }
-        public CellColumn PageTopMargin { get; set; }
-        public CellColumn PaperKind { get; set; }
+        public CellColumn PrintPageTopMargin { get; set; }
+        public CellColumn PrintPaperKind { get; set; }
         public CellColumn PrintGrid { get; set; }
         public CellColumn PrintPageOrientation { get; set; }
-        public CellColumn ScaleX { get; set; }
-        public CellColumn ScaleY { get; set; }
-        public CellColumn PaperSource { get; set; }
-        public CellColumn DrawingScale { get; set; }
-        public CellColumn DrawingScaleType { get; set; }
-        public CellColumn DrawingSizeType { get; set; }
-        public CellColumn InhibitSnap { get; set; }
+        public CellColumn PrintScaleX { get; set; }
+        public CellColumn PrintScaleY { get; set; }
+        public CellColumn PrintPaperSource { get; set; }
+        public CellColumn PageDrawingScale { get; set; }
+        public CellColumn PageDrawingScaleType { get; set; }
+        public CellColumn PageDrawingSizeType { get; set; }
+        public CellColumn PageInhibitSnap { get; set; }
         public CellColumn PageHeight { get; set; }
         public CellColumn PageScale { get; set; }
         public CellColumn PageWidth { get; set; }
-        public CellColumn ShdwObliqueAngle { get; set; }
-        public CellColumn ShdwOffsetX { get; set; }
-        public CellColumn ShdwOffsetY { get; set; }
-        public CellColumn ShdwScaleFactor { get; set; }
-        public CellColumn ShdwType { get; set; }
-        public CellColumn UIVisibility { get; set; }
+        public CellColumn PageShadowObliqueAngle { get; set; }
+        public CellColumn PageShadowOffsetX { get; set; }
+        public CellColumn PageShadowOffsetY { get; set; }
+        public CellColumn PageShadowScaleFactor { get; set; }
+        public CellColumn PageShadowType { get; set; }
+        public CellColumn PageUIVisibility { get; set; }
         public CellColumn XGridDensity { get; set; }
         public CellColumn XGridOrigin { get; set; }
         public CellColumn XGridSpacing { get; set; }
@@ -44,34 +44,34 @@ namespace VisioAutomation.Pages
         public CellColumn YGridSpacing { get; set; }
         public CellColumn YRulerDensity { get; set; }
         public CellColumn YRulerOrigin { get; set; }
-        public CellColumn AvenueSizeX { get; set; }
-        public CellColumn AvenueSizeY { get; set; }
-        public CellColumn BlockSizeX { get; set; }
-        public CellColumn BlockSizeY { get; set; }
-        public CellColumn CtrlAsInput { get; set; }
-        public CellColumn DynamicsOff { get; set; }
-        public CellColumn EnableGrid { get; set; }
-        public CellColumn LineAdjustFrom { get; set; }
-        public CellColumn LineAdjustTo { get; set; }
-        public CellColumn LineJumpCode { get; set; }
-        public CellColumn LineJumpFactorX { get; set; }
-        public CellColumn LineJumpFactorY { get; set; }
-        public CellColumn LineJumpStyle { get; set; }
-        public CellColumn LineRouteExt { get; set; }
-        public CellColumn LineToLineX { get; set; }
-        public CellColumn LineToLineY { get; set; }
-        public CellColumn LineToNodeX { get; set; }
-        public CellColumn LineToNodeY { get; set; }
-        public CellColumn PageLineJumpDirX { get; set; }
-        public CellColumn PageLineJumpDirY { get; set; }
-        public CellColumn PageShapeSplit { get; set; }
-        public CellColumn PlaceDepth { get; set; }
-        public CellColumn PlaceFlip { get; set; }
-        public CellColumn PlaceStyle { get; set; }
-        public CellColumn PlowCode { get; set; }
-        public CellColumn ResizePage { get; set; }
-        public CellColumn RouteStyle { get; set; }
-        public CellColumn AvoidPageBreaks { get; set; }
+        public CellColumn PageLayoutAvenueSizeX { get; set; }
+        public CellColumn PageLayoutAvenueSizeY { get; set; }
+        public CellColumn PageLayoutBlockSizeX { get; set; }
+        public CellColumn PageLayoutBlockSizeY { get; set; }
+        public CellColumn PageLayoutControlAsInput { get; set; }
+        public CellColumn PageLayoutDynamicsOff { get; set; }
+        public CellColumn PageLayoutEnableGrid { get; set; }
+        public CellColumn PageLayoutLineAdjustFrom { get; set; }
+        public CellColumn PageLayoutLineAdjustTo { get; set; }
+        public CellColumn PageLayoutLineJumpCode { get; set; }
+        public CellColumn PageLayoutLineJumpFactorX { get; set; }
+        public CellColumn PageLayoutLineJumpFactorY { get; set; }
+        public CellColumn PageLayoutLineJumpStyle { get; set; }
+        public CellColumn PageLayoutLineRouteExt { get; set; }
+        public CellColumn PageLayoutLineToLineX { get; set; }
+        public CellColumn PageLayoutLineToLineY { get; set; }
+        public CellColumn PageLayoutLineToNodeX { get; set; }
+        public CellColumn PageLayoutLineToNodeY { get; set; }
+        public CellColumn PageLayoutLineJumpDirX { get; set; }
+        public CellColumn PageLayoutLineJumpDirY { get; set; }
+        public CellColumn PageLayoutShapeSplit { get; set; }
+        public CellColumn PageLayoutPlaceDepth { get; set; }
+        public CellColumn PageLayoutPlaceFlip { get; set; }
+        public CellColumn PageLayoutPlaceStyle { get; set; }
+        public CellColumn PageLayoutPlowCode { get; set; }
+        public CellColumn PageLayoutResizePage { get; set; }
+        public CellColumn PageLayoutRouteStyle { get; set; }
+        public CellColumn PageLayoutAvoidPageBreaks { get; set; }
         public CellColumn DrawingResizeType { get; set; }
 
         public PageCellsReader()
@@ -84,26 +84,26 @@ namespace VisioAutomation.Pages
             this.PrintRightMargin = this.query.AddCell(SrcConstants.PrintRightMargin, nameof(SrcConstants.PrintRightMargin));
             this.PrintPagesX = this.query.AddCell(SrcConstants.PrintPagesX, nameof(SrcConstants.PrintPagesX));
             this.PrintPagesY = this.query.AddCell(SrcConstants.PrintPagesY, nameof(SrcConstants.PrintPagesY));
-            this.PageTopMargin = this.query.AddCell(SrcConstants.PrintTopMargin, nameof(SrcConstants.PrintTopMargin));
-            this.PaperKind = this.query.AddCell(SrcConstants.PrintPaperKind, nameof(SrcConstants.PrintPaperKind));
+            this.PrintPageTopMargin = this.query.AddCell(SrcConstants.PrintTopMargin, nameof(SrcConstants.PrintTopMargin));
+            this.PrintPaperKind = this.query.AddCell(SrcConstants.PrintPaperKind, nameof(SrcConstants.PrintPaperKind));
             this.PrintGrid = this.query.AddCell(SrcConstants.PrintGrid, nameof(SrcConstants.PrintGrid));
             this.PrintPageOrientation = this.query.AddCell(SrcConstants.PrintPageOrientation, nameof(SrcConstants.PrintPageOrientation));
-            this.ScaleX = this.query.AddCell(SrcConstants.PrintScaleX, nameof(SrcConstants.PrintScaleX));
-            this.ScaleY = this.query.AddCell(SrcConstants.PrintScaleY, nameof(SrcConstants.PrintScaleY));
-            this.PaperSource = this.query.AddCell(SrcConstants.PrintPaperSource, nameof(SrcConstants.PrintPaperSource));
-            this.DrawingScale = this.query.AddCell(SrcConstants.PageDrawingScale, nameof(SrcConstants.PageDrawingScale));
-            this.DrawingScaleType = this.query.AddCell(SrcConstants.PageDrawingScaleType, nameof(SrcConstants.PageDrawingScaleType));
-            this.DrawingSizeType = this.query.AddCell(SrcConstants.PageDrawingSizeType, nameof(SrcConstants.PageDrawingSizeType));
-            this.InhibitSnap = this.query.AddCell(SrcConstants.PageInhibitSnap, nameof(SrcConstants.PageInhibitSnap));
+            this.PrintScaleX = this.query.AddCell(SrcConstants.PrintScaleX, nameof(SrcConstants.PrintScaleX));
+            this.PrintScaleY = this.query.AddCell(SrcConstants.PrintScaleY, nameof(SrcConstants.PrintScaleY));
+            this.PrintPaperSource = this.query.AddCell(SrcConstants.PrintPaperSource, nameof(SrcConstants.PrintPaperSource));
+            this.PageDrawingScale = this.query.AddCell(SrcConstants.PageDrawingScale, nameof(SrcConstants.PageDrawingScale));
+            this.PageDrawingScaleType = this.query.AddCell(SrcConstants.PageDrawingScaleType, nameof(SrcConstants.PageDrawingScaleType));
+            this.PageDrawingSizeType = this.query.AddCell(SrcConstants.PageDrawingSizeType, nameof(SrcConstants.PageDrawingSizeType));
+            this.PageInhibitSnap = this.query.AddCell(SrcConstants.PageInhibitSnap, nameof(SrcConstants.PageInhibitSnap));
             this.PageHeight = this.query.AddCell(SrcConstants.PageHeight, nameof(SrcConstants.PageHeight));
             this.PageScale = this.query.AddCell(SrcConstants.PageScale, nameof(SrcConstants.PageScale));
             this.PageWidth = this.query.AddCell(SrcConstants.PageWidth, nameof(SrcConstants.PageWidth));
-            this.ShdwObliqueAngle = this.query.AddCell(SrcConstants.PageShadowObliqueAngle, nameof(SrcConstants.PageShadowObliqueAngle));
-            this.ShdwOffsetX = this.query.AddCell(SrcConstants.PageShadowOffsetX, nameof(SrcConstants.PageShadowOffsetX));
-            this.ShdwOffsetY = this.query.AddCell(SrcConstants.PageShadowOffsetY, nameof(SrcConstants.PageShadowOffsetY));
-            this.ShdwScaleFactor = this.query.AddCell(SrcConstants.PageShadowScaleFactor, nameof(SrcConstants.PageShadowScaleFactor));
-            this.ShdwType = this.query.AddCell(SrcConstants.PageShadowType, nameof(SrcConstants.PageShadowType));
-            this.UIVisibility = this.query.AddCell(SrcConstants.PageUIVisibility, nameof(SrcConstants.PageUIVisibility));
+            this.PageShadowObliqueAngle = this.query.AddCell(SrcConstants.PageShadowObliqueAngle, nameof(SrcConstants.PageShadowObliqueAngle));
+            this.PageShadowOffsetX = this.query.AddCell(SrcConstants.PageShadowOffsetX, nameof(SrcConstants.PageShadowOffsetX));
+            this.PageShadowOffsetY = this.query.AddCell(SrcConstants.PageShadowOffsetY, nameof(SrcConstants.PageShadowOffsetY));
+            this.PageShadowScaleFactor = this.query.AddCell(SrcConstants.PageShadowScaleFactor, nameof(SrcConstants.PageShadowScaleFactor));
+            this.PageShadowType = this.query.AddCell(SrcConstants.PageShadowType, nameof(SrcConstants.PageShadowType));
+            this.PageUIVisibility = this.query.AddCell(SrcConstants.PageUIVisibility, nameof(SrcConstants.PageUIVisibility));
             this.XGridDensity = this.query.AddCell(SrcConstants.XGridDensity, nameof(SrcConstants.XGridDensity));
             this.XGridOrigin = this.query.AddCell(SrcConstants.XGridOrigin, nameof(SrcConstants.XGridOrigin));
             this.XGridSpacing = this.query.AddCell(SrcConstants.XGridSpacing, nameof(SrcConstants.XGridSpacing));
@@ -114,34 +114,34 @@ namespace VisioAutomation.Pages
             this.YGridSpacing = this.query.AddCell(SrcConstants.YGridSpacing, nameof(SrcConstants.YGridSpacing));
             this.YRulerDensity = this.query.AddCell(SrcConstants.YRulerDensity, nameof(SrcConstants.YRulerDensity));
             this.YRulerOrigin = this.query.AddCell(SrcConstants.YRulerOrigin, nameof(SrcConstants.YRulerOrigin));
-            this.AvenueSizeX = this.query.AddCell(SrcConstants.PageLayoutAvenueSizeX, nameof(SrcConstants.PageLayoutAvenueSizeX));
-            this.AvenueSizeY = this.query.AddCell(SrcConstants.PageLayoutAvenueSizeY, nameof(SrcConstants.PageLayoutAvenueSizeY));
-            this.BlockSizeX = this.query.AddCell(SrcConstants.PageLayoutBlockSizeX, nameof(SrcConstants.PageLayoutBlockSizeX));
-            this.BlockSizeY = this.query.AddCell(SrcConstants.PageLayoutBlockSizeY, nameof(SrcConstants.PageLayoutBlockSizeY));
-            this.CtrlAsInput = this.query.AddCell(SrcConstants.PageLayoutCtrlAsInput, nameof(SrcConstants.PageLayoutCtrlAsInput));
-            this.DynamicsOff = this.query.AddCell(SrcConstants.PageLayoutDynamicsOff, nameof(SrcConstants.PageLayoutDynamicsOff));
-            this.EnableGrid = this.query.AddCell(SrcConstants.PageLayoutEnableGrid, nameof(SrcConstants.PageLayoutEnableGrid));
-            this.LineAdjustFrom = this.query.AddCell(SrcConstants.PageLayoutLineAdjustFrom, nameof(SrcConstants.PageLayoutLineAdjustFrom));
-            this.LineAdjustTo = this.query.AddCell(SrcConstants.PageLayoutLineAdjustTo, nameof(SrcConstants.PageLayoutLineAdjustTo));
-            this.LineJumpCode = this.query.AddCell(SrcConstants.PageLayoutLineJumpCode, nameof(SrcConstants.PageLayoutLineJumpCode));
-            this.LineJumpFactorX = this.query.AddCell(SrcConstants.PageLayoutLineJumpFactorX, nameof(SrcConstants.PageLayoutLineJumpFactorX));
-            this.LineJumpFactorY = this.query.AddCell(SrcConstants.PageLayoutLineJumpFactorY, nameof(SrcConstants.PageLayoutLineJumpFactorY));
-            this.LineJumpStyle = this.query.AddCell(SrcConstants.PageLayoutLineJumpStyle, nameof(SrcConstants.PageLayoutLineJumpStyle));
-            this.LineRouteExt = this.query.AddCell(SrcConstants.PageLayoutLineRouteExt, nameof(SrcConstants.PageLayoutLineRouteExt));
-            this.LineToLineX = this.query.AddCell(SrcConstants.PageLayoutLineToLineX, nameof(SrcConstants.PageLayoutLineToLineX));
-            this.LineToLineY = this.query.AddCell(SrcConstants.PageLayoutLineToLineY, nameof(SrcConstants.PageLayoutLineToLineY));
-            this.LineToNodeX = this.query.AddCell(SrcConstants.PageLayoutLineToNodeX, nameof(SrcConstants.PageLayoutLineToNodeX));
-            this.LineToNodeY = this.query.AddCell(SrcConstants.PageLayoutLineToNodeY, nameof(SrcConstants.PageLayoutLineToNodeY));
-            this.PageLineJumpDirX = this.query.AddCell(SrcConstants.PageLayoutLineJumpDirX, nameof(SrcConstants.PageLayoutLineJumpDirX));
-            this.PageLineJumpDirY = this.query.AddCell(SrcConstants.PageLayoutLineJumpDirY, nameof(SrcConstants.PageLayoutLineJumpDirY));
-            this.PageShapeSplit = this.query.AddCell(SrcConstants.PageLayoutPageShapeSplit, nameof(SrcConstants.PageLayoutPageShapeSplit));
-            this.PlaceDepth = this.query.AddCell(SrcConstants.PageLayoutPlaceDepth, nameof(SrcConstants.PageLayoutPlaceDepth));
-            this.PlaceFlip = this.query.AddCell(SrcConstants.PageLayoutPlaceFlip, nameof(SrcConstants.PageLayoutPlaceFlip));
-            this.PlaceStyle = this.query.AddCell(SrcConstants.PageLayoutPlaceStyle, nameof(SrcConstants.PageLayoutPlaceStyle));
-            this.PlowCode = this.query.AddCell(SrcConstants.PageLayoutPlowCode, nameof(SrcConstants.PageLayoutPlowCode));
-            this.ResizePage = this.query.AddCell(SrcConstants.PageLayoutResizePage, nameof(SrcConstants.PageLayoutResizePage));
-            this.RouteStyle = this.query.AddCell(SrcConstants.PageLayoutRouteStyle, nameof(SrcConstants.PageLayoutRouteStyle));
-            this.AvoidPageBreaks = this.query.AddCell(SrcConstants.PageLayoutAvoidPageBreaks, nameof(SrcConstants.PageLayoutAvoidPageBreaks));
+            this.PageLayoutAvenueSizeX = this.query.AddCell(SrcConstants.PageLayoutAvenueSizeX, nameof(SrcConstants.PageLayoutAvenueSizeX));
+            this.PageLayoutAvenueSizeY = this.query.AddCell(SrcConstants.PageLayoutAvenueSizeY, nameof(SrcConstants.PageLayoutAvenueSizeY));
+            this.PageLayoutBlockSizeX = this.query.AddCell(SrcConstants.PageLayoutBlockSizeX, nameof(SrcConstants.PageLayoutBlockSizeX));
+            this.PageLayoutBlockSizeY = this.query.AddCell(SrcConstants.PageLayoutBlockSizeY, nameof(SrcConstants.PageLayoutBlockSizeY));
+            this.PageLayoutControlAsInput = this.query.AddCell(SrcConstants.PageLayoutControlAsInput, nameof(SrcConstants.PageLayoutControlAsInput));
+            this.PageLayoutDynamicsOff = this.query.AddCell(SrcConstants.PageLayoutDynamicsOff, nameof(SrcConstants.PageLayoutDynamicsOff));
+            this.PageLayoutEnableGrid = this.query.AddCell(SrcConstants.PageLayoutEnableGrid, nameof(SrcConstants.PageLayoutEnableGrid));
+            this.PageLayoutLineAdjustFrom = this.query.AddCell(SrcConstants.PageLayoutLineAdjustFrom, nameof(SrcConstants.PageLayoutLineAdjustFrom));
+            this.PageLayoutLineAdjustTo = this.query.AddCell(SrcConstants.PageLayoutLineAdjustTo, nameof(SrcConstants.PageLayoutLineAdjustTo));
+            this.PageLayoutLineJumpCode = this.query.AddCell(SrcConstants.PageLayoutLineJumpCode, nameof(SrcConstants.PageLayoutLineJumpCode));
+            this.PageLayoutLineJumpFactorX = this.query.AddCell(SrcConstants.PageLayoutLineJumpFactorX, nameof(SrcConstants.PageLayoutLineJumpFactorX));
+            this.PageLayoutLineJumpFactorY = this.query.AddCell(SrcConstants.PageLayoutLineJumpFactorY, nameof(SrcConstants.PageLayoutLineJumpFactorY));
+            this.PageLayoutLineJumpStyle = this.query.AddCell(SrcConstants.PageLayoutLineJumpStyle, nameof(SrcConstants.PageLayoutLineJumpStyle));
+            this.PageLayoutLineRouteExt = this.query.AddCell(SrcConstants.PageLayoutLineRouteExt, nameof(SrcConstants.PageLayoutLineRouteExt));
+            this.PageLayoutLineToLineX = this.query.AddCell(SrcConstants.PageLayoutLineToLineX, nameof(SrcConstants.PageLayoutLineToLineX));
+            this.PageLayoutLineToLineY = this.query.AddCell(SrcConstants.PageLayoutLineToLineY, nameof(SrcConstants.PageLayoutLineToLineY));
+            this.PageLayoutLineToNodeX = this.query.AddCell(SrcConstants.PageLayoutLineToNodeX, nameof(SrcConstants.PageLayoutLineToNodeX));
+            this.PageLayoutLineToNodeY = this.query.AddCell(SrcConstants.PageLayoutLineToNodeY, nameof(SrcConstants.PageLayoutLineToNodeY));
+            this.PageLayoutLineJumpDirX = this.query.AddCell(SrcConstants.PageLayoutLineJumpDirX, nameof(SrcConstants.PageLayoutLineJumpDirX));
+            this.PageLayoutLineJumpDirY = this.query.AddCell(SrcConstants.PageLayoutLineJumpDirY, nameof(SrcConstants.PageLayoutLineJumpDirY));
+            this.PageLayoutShapeSplit = this.query.AddCell(SrcConstants.PageLayoutShapeSplit, nameof(SrcConstants.PageLayoutShapeSplit));
+            this.PageLayoutPlaceDepth = this.query.AddCell(SrcConstants.PageLayoutPlaceDepth, nameof(SrcConstants.PageLayoutPlaceDepth));
+            this.PageLayoutPlaceFlip = this.query.AddCell(SrcConstants.PageLayoutPlaceFlip, nameof(SrcConstants.PageLayoutPlaceFlip));
+            this.PageLayoutPlaceStyle = this.query.AddCell(SrcConstants.PageLayoutPlaceStyle, nameof(SrcConstants.PageLayoutPlaceStyle));
+            this.PageLayoutPlowCode = this.query.AddCell(SrcConstants.PageLayoutPlowCode, nameof(SrcConstants.PageLayoutPlowCode));
+            this.PageLayoutResizePage = this.query.AddCell(SrcConstants.PageLayoutResizePage, nameof(SrcConstants.PageLayoutResizePage));
+            this.PageLayoutRouteStyle = this.query.AddCell(SrcConstants.PageLayoutRouteStyle, nameof(SrcConstants.PageLayoutRouteStyle));
+            this.PageLayoutAvoidPageBreaks = this.query.AddCell(SrcConstants.PageLayoutAvoidPageBreaks, nameof(SrcConstants.PageLayoutAvoidPageBreaks));
 
             // Page cells
             this.DrawingResizeType = this.query.AddCell(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
@@ -159,26 +159,26 @@ namespace VisioAutomation.Pages
             cells.PrintRightMargin = row[this.PrintRightMargin];
             cells.PrintPagesX = row[this.PrintPagesX];
             cells.PrintPagesY = row[this.PrintPagesY];
-            cells.PrintTopMargin = row[this.PageTopMargin];
-            cells.PrintPaperKind = row[this.PaperKind];
+            cells.PrintTopMargin = row[this.PrintPageTopMargin];
+            cells.PrintPaperKind = row[this.PrintPaperKind];
             cells.PrintGrid = row[this.PrintGrid];
             cells.PrintPageOrientation = row[this.PrintPageOrientation];
-            cells.PrintScaleX = row[this.ScaleX];
-            cells.PrintScaleY = row[this.ScaleY];
-            cells.PrintPaperSource = row[this.PaperSource];
-            cells.PageDrawingScale = row[this.DrawingScale];
-            cells.PageDrawingScaleType = row[this.DrawingScaleType];
-            cells.PageDrawingSizeType = row[this.DrawingSizeType];
-            cells.PageInhibitSnap = row[this.InhibitSnap];
+            cells.PrintScaleX = row[this.PrintScaleX];
+            cells.PrintScaleY = row[this.PrintScaleY];
+            cells.PrintPaperSource = row[this.PrintPaperSource];
+            cells.PageDrawingScale = row[this.PageDrawingScale];
+            cells.PageDrawingScaleType = row[this.PageDrawingScaleType];
+            cells.PageDrawingSizeType = row[this.PageDrawingSizeType];
+            cells.PageInhibitSnap = row[this.PageInhibitSnap];
             cells.PageHeight = row[this.PageHeight];
             cells.PageScale = row[this.PageScale];
             cells.PageWidth = row[this.PageWidth];
-            cells.PageShadowObliqueAngle = row[this.ShdwObliqueAngle];
-            cells.PageShadowOffsetX = row[this.ShdwOffsetX];
-            cells.PageShadowOffsetY = row[this.ShdwOffsetY];
-            cells.PageShadowScaleFactor = row[this.ShdwScaleFactor];
-            cells.PageShadowType = row[this.ShdwType];
-            cells.PageUIVisibility = row[this.UIVisibility];
+            cells.PageShadowObliqueAngle = row[this.PageShadowObliqueAngle];
+            cells.PageShadowOffsetX = row[this.PageShadowOffsetX];
+            cells.PageShadowOffsetY = row[this.PageShadowOffsetY];
+            cells.PageShadowScaleFactor = row[this.PageShadowScaleFactor];
+            cells.PageShadowType = row[this.PageShadowType];
+            cells.PageUIVisibility = row[this.PageUIVisibility];
             cells.XGridDensity = row[this.XGridDensity];
             cells.XGridOrigin = row[this.XGridOrigin];
             cells.XGridSpacing = row[this.XGridSpacing];
@@ -189,34 +189,34 @@ namespace VisioAutomation.Pages
             cells.YGridSpacing = row[this.YGridSpacing];
             cells.YRulerDensity = row[this.YRulerDensity];
             cells.YRulerOrigin = row[this.YRulerOrigin];
-            cells.PageLayoutAvenueSizeX = row[this.AvenueSizeX];
-            cells.PageLayoutAvenueSizeY = row[this.AvenueSizeY];
-            cells.PageLayoutBlockSizeX = row[this.BlockSizeX];
-            cells.PageLayoutBlockSizeY = row[this.BlockSizeY];
-            cells.PageLayoutCtrlAsInput = row[this.CtrlAsInput];
-            cells.PageLayoutDynamicsOff = row[this.DynamicsOff];
-            cells.PageLayoutEnableGrid = row[this.EnableGrid];
-            cells.PageLayoutLineAdjustFrom = row[this.LineAdjustFrom];
-            cells.PageLayoutLineAdjustTo = row[this.LineAdjustTo];
-            cells.PageLayoutLineJumpCode = row[this.LineJumpCode];
-            cells.PageLayoutLineJumpFactorX = row[this.LineJumpFactorX];
-            cells.PageLayoutLineJumpFactorY = row[this.LineJumpFactorY];
-            cells.PageLayoutLineJumpStyle = row[this.LineJumpStyle];
-            cells.PageLayoutLineRouteExt = row[this.LineRouteExt];
-            cells.PageLayoutLineToLineX = row[this.LineToLineX];
-            cells.PageLayoutLineToLineY = row[this.LineToLineY];
-            cells.PageLayoutLineToNodeX = row[this.LineToNodeX];
-            cells.PageLayoutLineToNodeY = row[this.LineToNodeY];
-            cells.PageLayoutLineJumpDirX = row[this.PageLineJumpDirX];
-            cells.PageLayoutLineJumpDirY = row[this.PageLineJumpDirY];
-            cells.PageLayoutPageShapeSplit = row[this.PageShapeSplit];
-            cells.PageLayoutPlaceDepth = row[this.PlaceDepth];
-            cells.PageLayoutPlaceFlip = row[this.PlaceFlip];
-            cells.PageLayoutPlaceStyle = row[this.PlaceStyle];
-            cells.PageLayoutPlowCode = row[this.PlowCode];
-            cells.PageLayoutResizePage = row[this.ResizePage];
-            cells.PageLayoutRouteStyle = row[this.RouteStyle];
-            cells.PageLayoutAvoidPageBreaks = row[this.AvoidPageBreaks];
+            cells.PageLayoutAvenueSizeX = row[this.PageLayoutAvenueSizeX];
+            cells.PageLayoutAvenueSizeY = row[this.PageLayoutAvenueSizeY];
+            cells.PageLayoutBlockSizeX = row[this.PageLayoutBlockSizeX];
+            cells.PageLayoutBlockSizeY = row[this.PageLayoutBlockSizeY];
+            cells.PageLayoutCtrlAsInput = row[this.PageLayoutControlAsInput];
+            cells.PageLayoutDynamicsOff = row[this.PageLayoutDynamicsOff];
+            cells.PageLayoutEnableGrid = row[this.PageLayoutEnableGrid];
+            cells.PageLayoutLineAdjustFrom = row[this.PageLayoutLineAdjustFrom];
+            cells.PageLayoutLineAdjustTo = row[this.PageLayoutLineAdjustTo];
+            cells.PageLayoutLineJumpCode = row[this.PageLayoutLineJumpCode];
+            cells.PageLayoutLineJumpFactorX = row[this.PageLayoutLineJumpFactorX];
+            cells.PageLayoutLineJumpFactorY = row[this.PageLayoutLineJumpFactorY];
+            cells.PageLayoutLineJumpStyle = row[this.PageLayoutLineJumpStyle];
+            cells.PageLayoutLineRouteExt = row[this.PageLayoutLineRouteExt];
+            cells.PageLayoutLineToLineX = row[this.PageLayoutLineToLineX];
+            cells.PageLayoutLineToLineY = row[this.PageLayoutLineToLineY];
+            cells.PageLayoutLineToNodeX = row[this.PageLayoutLineToNodeX];
+            cells.PageLayoutLineToNodeY = row[this.PageLayoutLineToNodeY];
+            cells.PageLayoutLineJumpDirX = row[this.PageLayoutLineJumpDirX];
+            cells.PageLayoutLineJumpDirY = row[this.PageLayoutLineJumpDirY];
+            cells.PageLayoutPageShapeSplit = row[this.PageLayoutShapeSplit];
+            cells.PageLayoutPlaceDepth = row[this.PageLayoutPlaceDepth];
+            cells.PageLayoutPlaceFlip = row[this.PageLayoutPlaceFlip];
+            cells.PageLayoutPlaceStyle = row[this.PageLayoutPlaceStyle];
+            cells.PageLayoutPlowCode = row[this.PageLayoutPlowCode];
+            cells.PageLayoutResizePage = row[this.PageLayoutResizePage];
+            cells.PageLayoutRouteStyle = row[this.PageLayoutRouteStyle];
+            cells.PageLayoutAvoidPageBreaks = row[this.PageLayoutAvoidPageBreaks];
             cells.PageDrawingResizeType = row[this.DrawingResizeType];
             return cells;
         }

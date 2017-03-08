@@ -35,7 +35,7 @@ namespace VisioAutomation.Shapes.Locking
                 yield return this.newpair(ShapeSheet.SrcConstants.LockBegin, this.LockBegin.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockCalcWH, this.LockCalcWH.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockCrop, this.LockCrop.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCustProp, this.LockCustProp.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCustomProp, this.LockCustProp.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockDelete, this.LockDelete.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockEnd, this.LockEnd.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockFormat, this.LockFormat.Formula);

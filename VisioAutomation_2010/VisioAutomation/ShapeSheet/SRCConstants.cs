@@ -226,7 +226,7 @@ namespace VisioAutomation.ShapeSheet
         public static Src PageLayoutAvenueSizeY => PageLayoutCell(CEL.visPLOAvenueSizeY);
         public static Src PageLayoutBlockSizeX => PageLayoutCell(CEL.visPLOBlockSizeX);
         public static Src PageLayoutBlockSizeY => PageLayoutCell(CEL.visPLOBlockSizeY);
-        public static Src PageLayoutCtrlAsInput => PageLayoutCell(CEL.visPLOCtrlAsInput);
+        public static Src PageLayoutControlAsInput => PageLayoutCell(CEL.visPLOCtrlAsInput);
         public static Src PageLayoutDynamicsOff => PageLayoutCell(CEL.visPLODynamicsOff);
         public static Src PageLayoutEnableGrid => PageLayoutCell(CEL.visPLOEnableGrid);
         public static Src PageLayoutLineAdjustFrom => PageLayoutCell(CEL.visPLOLineAdjustFrom);
@@ -242,7 +242,7 @@ namespace VisioAutomation.ShapeSheet
         public static Src PageLayoutLineToNodeY => PageLayoutCell(CEL.visPLOLineToNodeY);
         public static Src PageLayoutLineJumpDirX => PageLayoutCell(CEL.visPLOJumpDirX);
         public static Src PageLayoutLineJumpDirY => PageLayoutCell(CEL.visPLOJumpDirY);
-        public static Src PageLayoutPageShapeSplit => PageLayoutCell(CEL.visPLOSplit);
+        public static Src PageLayoutShapeSplit => PageLayoutCell(CEL.visPLOSplit);
         public static Src PageLayoutPlaceDepth => PageLayoutCell(CEL.visPLOPlaceDepth);
         public static Src PageLayoutPlaceFlip => PageLayoutCell(CEL.visPLOPlaceFlip);
         public static Src PageLayoutPlaceStyle => PageLayoutCell(CEL.visPLOPlaceStyle);
@@ -309,7 +309,7 @@ namespace VisioAutomation.ShapeSheet
         public static Src LockBegin => LockCell(CEL.visLockBegin);
         public static Src LockCalcWH => LockCell(CEL.visLockCalcWH);
         public static Src LockCrop => LockCell(CEL.visLockCrop);
-        public static Src LockCustProp => LockCell(CEL.visLockCustProp);
+        public static Src LockCustomProp => LockCell(CEL.visLockCustProp);
         public static Src LockDelete => LockCell(CEL.visLockDelete);
         public static Src LockEnd => LockCell(CEL.visLockEnd);
         public static Src LockFormat => LockCell(CEL.visLockFormat);
@@ -359,17 +359,17 @@ namespace VisioAutomation.ShapeSheet
         public static Src ReviewerName => ReviewerCell(CEL.visReviewerName);
 
         // shape data
-        private static Src CustPropCell(CEL c) => new Src(SEC.visSectionProp, ROW.visRowProp, c);
-        public static Src CustPropSortKey => CustPropCell(CEL.visCustPropsSortKey);
-        public static Src CustPropAsk => CustPropCell(CEL.visCustPropsAsk);
-        public static Src CustPropCalendar => CustPropCell(CEL.visCustPropsCalendar);
-        public static Src CustPropFormat => CustPropCell(CEL.visCustPropsFormat);
-        public static Src CustPropInvisible => CustPropCell(CEL.visCustPropsInvis);
-        public static Src CustPropLabel => CustPropCell(CEL.visCustPropsLabel);
-        public static Src CustPropLangID => CustPropCell(CEL.visCustPropsLangID);
-        public static Src CustPropPrompt => CustPropCell(CEL.visCustPropsPrompt);
-        public static Src CustPropType => CustPropCell(CEL.visCustPropsType);
-        public static Src CustPropValue => CustPropCell(CEL.visCustPropsValue);
+        private static Src CustomPropCell(CEL c) => new Src(SEC.visSectionProp, ROW.visRowProp, c);
+        public static Src CustomPropSortKey => CustomPropCell(CEL.visCustPropsSortKey);
+        public static Src CustomPropAsk => CustomPropCell(CEL.visCustPropsAsk);
+        public static Src CustomPropCalendar => CustomPropCell(CEL.visCustPropsCalendar);
+        public static Src CustomPropFormat => CustomPropCell(CEL.visCustPropsFormat);
+        public static Src CustomPropInvisible => CustomPropCell(CEL.visCustPropsInvis);
+        public static Src CustomPropLabel => CustomPropCell(CEL.visCustPropsLabel);
+        public static Src CustomPropLangID => CustomPropCell(CEL.visCustPropsLangID);
+        public static Src CustomPropPrompt => CustomPropCell(CEL.visCustPropsPrompt);
+        public static Src CustomPropType => CustomPropCell(CEL.visCustPropsType);
+        public static Src CustomPropValue => CustomPropCell(CEL.visCustPropsValue);
 
         // Layers
         private static Src LayerCell(CEL c) => new Src(SEC.visSectionLayer, ROW.visRowLayer, c);
@@ -446,12 +446,12 @@ namespace VisioAutomation.ShapeSheet
 
         // shape layout
         private static Src ShapeLayoutCell(CEL c) => new Src(SEC.visSectionObject, ROW.visRowShapeLayout, c);
-        public static Src ShapeLayoutConFixedCode => ShapeLayoutCell(CEL.visSLOConFixedCode);
-        public static Src ShapeLayoutConLineJumpCode => ShapeLayoutCell(CEL.visSLOJumpCode);
-        public static Src ShapeLayoutConLineJumpDirX => ShapeLayoutCell(CEL.visSLOJumpDirX);
-        public static Src ShapeLayoutConLineJumpDirY => ShapeLayoutCell(CEL.visSLOJumpDirY);
-        public static Src ShapeLayoutConLineJumpStyle => ShapeLayoutCell(CEL.visSLOJumpStyle);
-        public static Src ShapeLayoutConLineRouteExt => ShapeLayoutCell(CEL.visSLOLineRouteExt);
+        public static Src ShapeLayoutConnectorFixedCode => ShapeLayoutCell(CEL.visSLOConFixedCode);
+        public static Src ShapeLayoutConnectorLineJumpCode => ShapeLayoutCell(CEL.visSLOJumpCode);
+        public static Src ShapeLayoutConnectorLineJumpDirX => ShapeLayoutCell(CEL.visSLOJumpDirX);
+        public static Src ShapeLayoutConnectorLineJumpDirY => ShapeLayoutCell(CEL.visSLOJumpDirY);
+        public static Src ShapeLayoutConnectorLineJumpStyle => ShapeLayoutCell(CEL.visSLOJumpStyle);
+        public static Src ShapeLayoutConnectorLineRouteExt => ShapeLayoutCell(CEL.visSLOLineRouteExt);
         public static Src ShapeLayoutFixedCode => ShapeLayoutCell(CEL.visSLOFixedCode);
         public static Src ShapeLayoutPermeablePlace => ShapeLayoutCell(CEL.visSLOPermeablePlace);
         public static Src ShapeLayoutPermeableX => ShapeLayoutCell(CEL.visSLOPermX);

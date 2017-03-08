@@ -23,16 +23,16 @@ namespace VisioAutomation.Shapes.CustomProperties
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
 
 
-            this.SortKey = sec.AddCell(SrcConstants.CustPropSortKey, nameof(SrcConstants.CustPropSortKey));
-            this.Ask = sec.AddCell(SrcConstants.CustPropAsk, nameof(SrcConstants.CustPropAsk));
-            this.Calendar = sec.AddCell(SrcConstants.CustPropCalendar, nameof(SrcConstants.CustPropCalendar));
-            this.Format = sec.AddCell(SrcConstants.CustPropFormat, nameof(SrcConstants.CustPropFormat));
-            this.Invis = sec.AddCell(SrcConstants.CustPropInvisible, nameof(SrcConstants.CustPropInvisible));
-            this.Label = sec.AddCell(SrcConstants.CustPropLabel, nameof(SrcConstants.CustPropLabel));
-            this.LangID = sec.AddCell(SrcConstants.CustPropLangID, nameof(SrcConstants.CustPropLangID));
-            this.Prompt = sec.AddCell(SrcConstants.CustPropPrompt, nameof(SrcConstants.CustPropPrompt));
-            this.Type = sec.AddCell(SrcConstants.CustPropType, nameof(SrcConstants.CustPropType));
-            this.Value = sec.AddCell(SrcConstants.CustPropValue, nameof(SrcConstants.CustPropValue));
+            this.SortKey = sec.AddCell(SrcConstants.CustomPropSortKey, nameof(SrcConstants.CustomPropSortKey));
+            this.Ask = sec.AddCell(SrcConstants.CustomPropAsk, nameof(SrcConstants.CustomPropAsk));
+            this.Calendar = sec.AddCell(SrcConstants.CustomPropCalendar, nameof(SrcConstants.CustomPropCalendar));
+            this.Format = sec.AddCell(SrcConstants.CustomPropFormat, nameof(SrcConstants.CustomPropFormat));
+            this.Invis = sec.AddCell(SrcConstants.CustomPropInvisible, nameof(SrcConstants.CustomPropInvisible));
+            this.Label = sec.AddCell(SrcConstants.CustomPropLabel, nameof(SrcConstants.CustomPropLabel));
+            this.LangID = sec.AddCell(SrcConstants.CustomPropLangID, nameof(SrcConstants.CustomPropLangID));
+            this.Prompt = sec.AddCell(SrcConstants.CustomPropPrompt, nameof(SrcConstants.CustomPropPrompt));
+            this.Type = sec.AddCell(SrcConstants.CustomPropType, nameof(SrcConstants.CustomPropType));
+            this.Value = sec.AddCell(SrcConstants.CustomPropValue, nameof(SrcConstants.CustomPropValue));
 
         }
 

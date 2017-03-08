@@ -43,7 +43,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockBegin)] = SrcConstants.LockBegin;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockCalcWH)] = SrcConstants.LockCalcWH;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockCrop)] = SrcConstants.LockCrop;
-                CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockCustProp)] = SrcConstants.LockCustProp;
+                CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockCustomProp)] = SrcConstants.LockCustomProp;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockDelete)] = SrcConstants.LockDelete;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockEnd)] = SrcConstants.LockEnd;
                 CellSrcDictionary.shape_cellmap[nameof(SrcConstants.LockFormat)] = SrcConstants.LockFormat;
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutLineJumpDirY)] = SrcConstants.PageLayoutLineJumpDirY;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PrintRightMargin)] = SrcConstants.PrintRightMargin;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageScale)] = SrcConstants.PageScale;
-                CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutPageShapeSplit)] = SrcConstants.PageLayoutPageShapeSplit;
+                CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutShapeSplit)] = SrcConstants.PageLayoutShapeSplit;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PrintTopMargin)] = SrcConstants.PrintTopMargin;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageWidth)] = SrcConstants.PageWidth;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PrintCenterX)] = SrcConstants.PrintCenterX;
@@ -135,7 +135,7 @@ namespace VisioAutomation.Scripting.ShapeSheet
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutAvenueSizeY)] = SrcConstants.PageLayoutAvenueSizeY;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutBlockSizeX)] = SrcConstants.PageLayoutBlockSizeX;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutBlockSizeY)] = SrcConstants.PageLayoutBlockSizeY;
-                CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutCtrlAsInput)] = SrcConstants.PageLayoutCtrlAsInput;
+                CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutControlAsInput)] = SrcConstants.PageLayoutControlAsInput;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutDynamicsOff)] = SrcConstants.PageLayoutDynamicsOff;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutEnableGrid)] = SrcConstants.PageLayoutEnableGrid;
                 CellSrcDictionary.page_cellmap[nameof(SrcConstants.PageLayoutLineAdjustFrom)] = SrcConstants.PageLayoutLineAdjustFrom;

@@ -111,16 +111,16 @@ namespace VisioAutomation.Shapes.CustomProperties
                 string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
                 string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropLabel, str_label);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropValue, str_value);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropFormat, str_format);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropPrompt, str_prompt);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropCalendar, cp.Calendar.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropLangID, cp.LangID.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropSortKey, cp.SortKey.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropInvisible, cp.Invisible.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropType, cp.Type.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustPropAsk, cp.Ask.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropLabel, str_label);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropValue, str_value);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropFormat, str_format);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropPrompt, str_prompt);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropCalendar, cp.Calendar.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropLangID, cp.LangID.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropSortKey, cp.SortKey.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropInvisible, cp.Invisible.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropType, cp.Type.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropAsk, cp.Ask.Formula);
             }
         }
 

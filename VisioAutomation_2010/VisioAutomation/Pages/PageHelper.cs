@@ -132,7 +132,7 @@ namespace VisioAutomation.Pages
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutAvenueSizeY);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutBlockSizeX);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutBlockSizeY);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutCtrlAsInput);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutControlAsInput);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutDynamicsOff);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutEnableGrid);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineAdjustFrom);
@@ -148,7 +148,7 @@ namespace VisioAutomation.Pages
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineToNodeY);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineJumpDirX);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineJumpDirY);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutPageShapeSplit);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutShapeSplit);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutPlaceDepth);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutPlaceFlip);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutPlaceStyle);

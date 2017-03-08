@@ -121,7 +121,7 @@ namespace VisioAutomation.Pages
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, this.PageLayoutAvenueSizeY.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutBlockSizeX, this.PageLayoutBlockSizeX.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutBlockSizeY, this.PageLayoutBlockSizeY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutCtrlAsInput, this.PageLayoutCtrlAsInput.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutControlAsInput, this.PageLayoutCtrlAsInput.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutDynamicsOff, this.PageLayoutDynamicsOff.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutEnableGrid, this.PageLayoutEnableGrid.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineAdjustFrom, this.PageLayoutLineAdjustFrom.Formula);
@@ -137,7 +137,7 @@ namespace VisioAutomation.Pages
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineToNodeY, this.PageLayoutLineToNodeY.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineJumpDirX, this.PageLayoutLineJumpDirX.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineJumpDirY, this.PageLayoutLineJumpDirY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutPageShapeSplit, this.PageLayoutPageShapeSplit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutShapeSplit, this.PageLayoutPageShapeSplit.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutPlaceDepth, this.PageLayoutPlaceDepth.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutPlaceFlip, this.PageLayoutPlaceFlip.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutPlaceStyle, this.PageLayoutPlaceStyle.Formula);
