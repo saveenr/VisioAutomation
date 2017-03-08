@@ -206,21 +206,21 @@ namespace VisioAutomation.Models.Dom
 
             // ShapeLayout
             writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorFixedCode, this.ShapeLayoutConFixedCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpCode, this.ShapeLayoutConLineJumpCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpDirX, this.ShapeLayoutConLineJumpDirX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpDirY, this.ShapeLayoutConLineJumpDirY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineJumpStyle, this.ShapeLayoutConLineJumpStyle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorLineRouteExt, this.ShapeLayoutConLineRouteExt);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutFixedCode, this.ShapeLayoutFixedCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutPermeablePlace, this.ShapeLayoutPermeablePlace);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutPermeableX, this.ShapeLayoutPermeableX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutPermeableY, this.ShapeLayoutPermeableY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutPlaceFlip, this.ShapeLayoutPlaceFlip);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutPlaceStyle, this.ShapeLayoutPlaceStyle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutPlowCode, this.ShapeLayoutPlowCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutRouteStyle, this.ShapeLayoutRouteStyle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutSplit, this.ShapeLayoutSplit);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutSplittable, this.ShapeLayoutSplittable);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineJumpCode, this.ShapeLayoutConLineJumpCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineJumpDirX, this.ShapeLayoutConLineJumpDirX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineJumpDirY, this.ShapeLayoutConLineJumpDirY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineJumpStyle, this.ShapeLayoutConLineJumpStyle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineRouteExt, this.ShapeLayoutConLineRouteExt);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapeFixedCode, this.ShapeLayoutFixedCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePermeablePlace, this.ShapeLayoutPermeablePlace);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePermeableX, this.ShapeLayoutPermeableX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePermeableY, this.ShapeLayoutPermeableY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePlaceFlip, this.ShapeLayoutPlaceFlip);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePlaceStyle, this.ShapeLayoutPlaceStyle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePlowCode, this.ShapeLayoutPlowCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapeRouteStyle, this.ShapeLayoutRouteStyle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapeSplit, this.ShapeLayoutSplit);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapeSplittable, this.ShapeLayoutSplittable);
         }
 
         public ShapeCells ShallowCopy()

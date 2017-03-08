@@ -447,22 +447,22 @@ namespace VisioAutomation.ShapeSheet
         // shape layout
         private static Src ShapeLayoutCell(CEL c) => new Src(SEC.visSectionObject, ROW.visRowShapeLayout, c);
         public static Src ShapeLayoutConnectorFixedCode => ShapeLayoutCell(CEL.visSLOConFixedCode);
-        public static Src ShapeLayoutConnectorLineJumpCode => ShapeLayoutCell(CEL.visSLOJumpCode);
-        public static Src ShapeLayoutConnectorLineJumpDirX => ShapeLayoutCell(CEL.visSLOJumpDirX);
-        public static Src ShapeLayoutConnectorLineJumpDirY => ShapeLayoutCell(CEL.visSLOJumpDirY);
-        public static Src ShapeLayoutConnectorLineJumpStyle => ShapeLayoutCell(CEL.visSLOJumpStyle);
-        public static Src ShapeLayoutConnectorLineRouteExt => ShapeLayoutCell(CEL.visSLOLineRouteExt);
-        public static Src ShapeLayoutFixedCode => ShapeLayoutCell(CEL.visSLOFixedCode);
-        public static Src ShapeLayoutPermeablePlace => ShapeLayoutCell(CEL.visSLOPermeablePlace);
-        public static Src ShapeLayoutPermeableX => ShapeLayoutCell(CEL.visSLOPermX);
-        public static Src ShapeLayoutPermeableY => ShapeLayoutCell(CEL.visSLOPermY);
-        public static Src ShapeLayoutPlaceFlip => ShapeLayoutCell(CEL.visSLOPlaceFlip);
-        public static Src ShapeLayoutPlaceStyle => ShapeLayoutCell(CEL.visSLOPlaceStyle);
-        public static Src ShapeLayoutPlowCode => ShapeLayoutCell(CEL.visSLOPlowCode);
-        public static Src ShapeLayoutRouteStyle => ShapeLayoutCell(CEL.visSLORouteStyle);
-        public static Src ShapeLayoutSplit => ShapeLayoutCell(CEL.visSLOSplit);
-        public static Src ShapeLayoutSplittable => ShapeLayoutCell(CEL.visSLOSplittable);
-        public static Src ShapeLayoutDisplayLevel => ShapeLayoutCell(CEL.visSLODisplayLevel); // new in Visio 2010
+        public static Src ShapeLayoutLineJumpCode => ShapeLayoutCell(CEL.visSLOJumpCode);
+        public static Src ShapeLayoutLineJumpDirX => ShapeLayoutCell(CEL.visSLOJumpDirX);
+        public static Src ShapeLayoutLineJumpDirY => ShapeLayoutCell(CEL.visSLOJumpDirY);
+        public static Src ShapeLayoutLineJumpStyle => ShapeLayoutCell(CEL.visSLOJumpStyle);
+        public static Src ShapeLayoutLineRouteExt => ShapeLayoutCell(CEL.visSLOLineRouteExt);
+        public static Src ShapeLayoutShapeFixedCode => ShapeLayoutCell(CEL.visSLOFixedCode);
+        public static Src ShapeLayoutShapePermeablePlace => ShapeLayoutCell(CEL.visSLOPermeablePlace);
+        public static Src ShapeLayoutShapePermeableX => ShapeLayoutCell(CEL.visSLOPermX);
+        public static Src ShapeLayoutShapePermeableY => ShapeLayoutCell(CEL.visSLOPermY);
+        public static Src ShapeLayoutShapePlaceFlip => ShapeLayoutCell(CEL.visSLOPlaceFlip);
+        public static Src ShapeLayoutShapePlaceStyle => ShapeLayoutCell(CEL.visSLOPlaceStyle);
+        public static Src ShapeLayoutShapePlowCode => ShapeLayoutCell(CEL.visSLOPlowCode);
+        public static Src ShapeLayoutShapeRouteStyle => ShapeLayoutCell(CEL.visSLORouteStyle);
+        public static Src ShapeLayoutShapeSplit => ShapeLayoutCell(CEL.visSLOSplit);
+        public static Src ShapeLayoutShapeSplittable => ShapeLayoutCell(CEL.visSLOSplittable);
+        public static Src ShapeLayoutShapeDisplayLevel => ShapeLayoutCell(CEL.visSLODisplayLevel); // new in Visio 2010
         public static Src ShapeLayoutRelationships => ShapeLayoutCell(CEL.visSLORelationships); // new in Visio 2010
     }
 }
