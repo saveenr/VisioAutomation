@@ -72,7 +72,7 @@ namespace VisioAutomation.Pages
         public CellColumn PageLayoutResizePage { get; set; }
         public CellColumn PageLayoutRouteStyle { get; set; }
         public CellColumn PageLayoutAvoidPageBreaks { get; set; }
-        public CellColumn DrawingResizeType { get; set; }
+        public CellColumn PageDrawingResizeType { get; set; }
 
         public PageCellsReader()
         {
@@ -91,6 +91,7 @@ namespace VisioAutomation.Pages
             this.PrintScaleX = this.query.AddCell(SrcConstants.PrintScaleX, nameof(SrcConstants.PrintScaleX));
             this.PrintScaleY = this.query.AddCell(SrcConstants.PrintScaleY, nameof(SrcConstants.PrintScaleY));
             this.PrintPaperSource = this.query.AddCell(SrcConstants.PrintPaperSource, nameof(SrcConstants.PrintPaperSource));
+
             this.PageDrawingScale = this.query.AddCell(SrcConstants.PageDrawingScale, nameof(SrcConstants.PageDrawingScale));
             this.PageDrawingScaleType = this.query.AddCell(SrcConstants.PageDrawingScaleType, nameof(SrcConstants.PageDrawingScaleType));
             this.PageDrawingSizeType = this.query.AddCell(SrcConstants.PageDrawingSizeType, nameof(SrcConstants.PageDrawingSizeType));
@@ -104,6 +105,8 @@ namespace VisioAutomation.Pages
             this.PageShadowScaleFactor = this.query.AddCell(SrcConstants.PageShadowScaleFactor, nameof(SrcConstants.PageShadowScaleFactor));
             this.PageShadowType = this.query.AddCell(SrcConstants.PageShadowType, nameof(SrcConstants.PageShadowType));
             this.PageUIVisibility = this.query.AddCell(SrcConstants.PageUIVisibility, nameof(SrcConstants.PageUIVisibility));
+            this.PageDrawingResizeType = this.query.AddCell(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
+
             this.XGridDensity = this.query.AddCell(SrcConstants.XGridDensity, nameof(SrcConstants.XGridDensity));
             this.XGridOrigin = this.query.AddCell(SrcConstants.XGridOrigin, nameof(SrcConstants.XGridOrigin));
             this.XGridSpacing = this.query.AddCell(SrcConstants.XGridSpacing, nameof(SrcConstants.XGridSpacing));
@@ -114,6 +117,7 @@ namespace VisioAutomation.Pages
             this.YGridSpacing = this.query.AddCell(SrcConstants.YGridSpacing, nameof(SrcConstants.YGridSpacing));
             this.YRulerDensity = this.query.AddCell(SrcConstants.YRulerDensity, nameof(SrcConstants.YRulerDensity));
             this.YRulerOrigin = this.query.AddCell(SrcConstants.YRulerOrigin, nameof(SrcConstants.YRulerOrigin));
+
             this.PageLayoutAvenueSizeX = this.query.AddCell(SrcConstants.PageLayoutAvenueSizeX, nameof(SrcConstants.PageLayoutAvenueSizeX));
             this.PageLayoutAvenueSizeY = this.query.AddCell(SrcConstants.PageLayoutAvenueSizeY, nameof(SrcConstants.PageLayoutAvenueSizeY));
             this.PageLayoutBlockSizeX = this.query.AddCell(SrcConstants.PageLayoutBlockSizeX, nameof(SrcConstants.PageLayoutBlockSizeX));
@@ -142,9 +146,6 @@ namespace VisioAutomation.Pages
             this.PageLayoutResizePage = this.query.AddCell(SrcConstants.PageLayoutResizePage, nameof(SrcConstants.PageLayoutResizePage));
             this.PageLayoutRouteStyle = this.query.AddCell(SrcConstants.PageLayoutRouteStyle, nameof(SrcConstants.PageLayoutRouteStyle));
             this.PageLayoutAvoidPageBreaks = this.query.AddCell(SrcConstants.PageLayoutAvoidPageBreaks, nameof(SrcConstants.PageLayoutAvoidPageBreaks));
-
-            // Page cells
-            this.DrawingResizeType = this.query.AddCell(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
         }
 
 
@@ -217,7 +218,7 @@ namespace VisioAutomation.Pages
             cells.PageLayoutResizePage = row[this.PageLayoutResizePage];
             cells.PageLayoutRouteStyle = row[this.PageLayoutRouteStyle];
             cells.PageLayoutAvoidPageBreaks = row[this.PageLayoutAvoidPageBreaks];
-            cells.PageDrawingResizeType = row[this.DrawingResizeType];
+            cells.PageDrawingResizeType = row[this.PageDrawingResizeType];
             return cells;
         }
     }
