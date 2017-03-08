@@ -66,7 +66,7 @@ namespace VisioAutomation.Pages
 
             // Set the Cells on the Destination
            
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             for (i = 0; i < page_srcs.Count; i++)
             {
                 writer.SetFormula(page_srcs[i],src_formulas.Cells[i]);
@@ -90,34 +90,34 @@ namespace VisioAutomation.Pages
             {
                 page_srcs = new List<Src>();
 
-                page_srcs.Add(ShapeSheet.SrcConstants.PageLeftMargin);
-                page_srcs.Add(ShapeSheet.SrcConstants.CenterX);
-                page_srcs.Add(ShapeSheet.SrcConstants.CenterY);
-                page_srcs.Add(ShapeSheet.SrcConstants.OnPage);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageBottomMargin);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageRightMargin);
-                page_srcs.Add(ShapeSheet.SrcConstants.PagesX);
-                page_srcs.Add(ShapeSheet.SrcConstants.PagesY);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageTopMargin);
-                page_srcs.Add(ShapeSheet.SrcConstants.PaperKind);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintLeftMargin);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintCenterX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintCenterY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintOnPage);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintBottomMargin);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintRightMargin);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintPagesX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintPagesY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintTopMargin);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintPaperKind);
                 page_srcs.Add(ShapeSheet.SrcConstants.PrintGrid);
                 page_srcs.Add(ShapeSheet.SrcConstants.PrintPageOrientation);
-                page_srcs.Add(ShapeSheet.SrcConstants.ScaleX);
-                page_srcs.Add(ShapeSheet.SrcConstants.ScaleY);
-                page_srcs.Add(ShapeSheet.SrcConstants.PaperSource);
-                page_srcs.Add(ShapeSheet.SrcConstants.DrawingScale);
-                page_srcs.Add(ShapeSheet.SrcConstants.DrawingScaleType);
-                page_srcs.Add(ShapeSheet.SrcConstants.DrawingSizeType);
-                page_srcs.Add(ShapeSheet.SrcConstants.InhibitSnap);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintScaleX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintScaleY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PrintPaperSource);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingScale);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingScaleType);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingSizeType);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageInhibitSnap);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageHeight);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageScale);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageWidth);
-                page_srcs.Add(ShapeSheet.SrcConstants.ShdwObliqueAngle);
-                page_srcs.Add(ShapeSheet.SrcConstants.ShdwOffsetX);
-                page_srcs.Add(ShapeSheet.SrcConstants.ShdwOffsetY);
-                page_srcs.Add(ShapeSheet.SrcConstants.ShdwScaleFactor);
-                page_srcs.Add(ShapeSheet.SrcConstants.ShdwType);
-                page_srcs.Add(ShapeSheet.SrcConstants.UIVisibility);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageShadowObliqueAngle);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageShadowOffsetX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageShadowOffsetY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageShadowScaleFactor);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageShadowType);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageUIVisibility);
                 page_srcs.Add(ShapeSheet.SrcConstants.XGridDensity);
                 page_srcs.Add(ShapeSheet.SrcConstants.XGridOrigin);
                 page_srcs.Add(ShapeSheet.SrcConstants.XGridSpacing);
@@ -128,43 +128,43 @@ namespace VisioAutomation.Pages
                 page_srcs.Add(ShapeSheet.SrcConstants.YGridSpacing);
                 page_srcs.Add(ShapeSheet.SrcConstants.YRulerDensity);
                 page_srcs.Add(ShapeSheet.SrcConstants.YRulerOrigin);
-                page_srcs.Add(ShapeSheet.SrcConstants.AvenueSizeX);
-                page_srcs.Add(ShapeSheet.SrcConstants.AvenueSizeY);
-                page_srcs.Add(ShapeSheet.SrcConstants.BlockSizeX);
-                page_srcs.Add(ShapeSheet.SrcConstants.BlockSizeY);
-                page_srcs.Add(ShapeSheet.SrcConstants.CtrlAsInput);
-                page_srcs.Add(ShapeSheet.SrcConstants.DynamicsOff);
-                page_srcs.Add(ShapeSheet.SrcConstants.EnableGrid);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineAdjustFrom);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineAdjustTo);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineJumpCode);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineJumpFactorX);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineJumpFactorY);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineJumpStyle);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineRouteExt);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineToLineX);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineToLineY);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineToNodeX);
-                page_srcs.Add(ShapeSheet.SrcConstants.LineToNodeY);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageLineJumpDirX);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageLineJumpDirY);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageShapeSplit);
-                page_srcs.Add(ShapeSheet.SrcConstants.PlaceDepth);
-                page_srcs.Add(ShapeSheet.SrcConstants.PlaceFlip);
-                page_srcs.Add(ShapeSheet.SrcConstants.PlaceStyle);
-                page_srcs.Add(ShapeSheet.SrcConstants.PlowCode);
-                page_srcs.Add(ShapeSheet.SrcConstants.ResizePage);
-                page_srcs.Add(ShapeSheet.SrcConstants.RouteStyle);
-                page_srcs.Add(ShapeSheet.SrcConstants.AvoidPageBreaks);
-                page_srcs.Add(ShapeSheet.SrcConstants.DrawingResizeType);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutAvenueSizeX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutAvenueSizeY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutBlockSizeX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutBlockSizeY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutControlAsInput);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutDynamicsOff);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutEnableGrid);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineAdjustFrom);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineAdjustTo);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineJumpCode);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineJumpFactorX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineJumpFactorY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineJumpStyle);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineRouteExt);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineToLineX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineToLineY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineToNodeX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineToNodeY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineJumpDirX);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutLineJumpDirY);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutShapeSplit);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutPlaceDepth);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutPlaceFlip);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutPlaceStyle);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutPlowCode);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutResizePage);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutRouteStyle);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutAvoidPageBreaks);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingResizeType);
             }
         }
 
         internal static Drawing.Size GetSize(IVisio.Page page)
         {
             var query = new ShapeSheetQuery();
-            var col_height = query.AddCell(ShapeSheet.SrcConstants.PageHeight,"PageHeight");
-            var col_width = query.AddCell(ShapeSheet.SrcConstants.PageWidth,"PageWidth");
+            var col_height = query.AddCell(ShapeSheet.SrcConstants.PageHeight,nameof(ShapeSheet.SrcConstants.PageHeight));
+            var col_width = query.AddCell(ShapeSheet.SrcConstants.PageWidth,nameof(ShapeSheet.SrcConstants.PageWidth));
 
             var results = query.GetResults<double>(page.PageSheet);
             double height = results.Cells[col_height];
@@ -175,7 +175,7 @@ namespace VisioAutomation.Pages
 
         internal static void SetSize(IVisio.Page page, Drawing.Size size)
         {
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
@@ -184,7 +184,7 @@ namespace VisioAutomation.Pages
 
         public static short[] DropManyAutoConnectors(
             IVisio.Page page,
-            IEnumerable<Drawing.Point> points)
+            ICollection<Drawing.Point> points)
         {
 
             if (points == null)
@@ -196,7 +196,7 @@ namespace VisioAutomation.Pages
 
             var app = page.Application;
             var thing = app.ConnectorToolDataObject;
-            int num_points = points.Count();
+            int num_points = points.Count;
             var masters_obj_array = Enumerable.Repeat(thing, num_points).ToArray();
             var xy_array = Drawing.Point.ToDoubles(points).ToArray();
 

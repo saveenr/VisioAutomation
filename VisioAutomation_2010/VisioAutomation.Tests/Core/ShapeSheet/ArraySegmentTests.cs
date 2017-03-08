@@ -29,7 +29,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void Case1()
+        public void Segment_read_full_array_exactly()
         {
             // Can fully accomodate an array
 
@@ -52,7 +52,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void Case2()
+        public void Segment_read_full_array_exactly_multiple_empty_at_end()
         {
             // Can fully accomodate an array and get multiple empty segments at end
 
@@ -83,7 +83,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void Case3()
+        public void Segment_error_if_asked_to_produce_too_much_1()
         {
             // fails if asks too much - current position is in middle of array
 
@@ -98,9 +98,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void Case4()
+        public void Segment_error_if_asked_to_produce_too_much_2()
         {
-            // fails if asks too much - current position is at start middle of array
+            // fails if asks too much - current position is at start middle strt of array after asking for empty segment
 
             var a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
             var s = new VA.Utilities.ArraySegmentReader<int>(a);
@@ -113,7 +113,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void Case5()
+        public void Segment_ask_for_entire_array_at_once()
         {
             // fails if asks too much - current position is at start middle of array
 

@@ -44,10 +44,10 @@ namespace VisioAutomationSamples
                 node.Cells = fmt;
 
                 fmt.FillPattern = 25; // Linear pattern left to right
-                fmt.FillForegnd = color1.ToFormula();
-                fmt.FillBkgnd = color2.ToFormula();
-                fmt.FillForegndTrans = 0;
-                fmt.FillBkgndTrans = transparency;
+                fmt.FillForeground = color1.ToFormula();
+                fmt.FillBackground = color2.ToFormula();
+                fmt.FillForegroundTransparency = 0;
+                fmt.FillBackgroundTransparency = transparency;
                 fmt.LinePattern = 0;
 
                 node.Text = string.Format("bg trans = {0}%", transparency);

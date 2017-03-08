@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Scripting.FormatPaint;
-using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var writer = new ShapeSheetWriter();
+            var writer = new SidSrcWriter();
             var shapeids = targets.Shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -80,8 +80,8 @@ namespace VisioAutomation.Scripting.Commands
             var shape = selection[1];
 
             var query = new ShapeSheetQuery();
-            var width_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Width, "Width");
-            var height_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Height, "Height");
+            var width_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth));
+            var height_col = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth));
 
             var queryresults = query.GetResults<double>(shape);
 
@@ -106,19 +106,19 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var writer = new ShapeSheetWriter();
+            var writer = new SidSrcWriter();
             var shapeids = targets.Shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)
             {
                 if (paste_width)
                 {
-                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.Width, this.cached_size_width.Value);
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, this.cached_size_width.Value);
                 }
 
                 if (paste_height)
                 {
-                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.Height, this.cached_size_height.Value);
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, this.cached_size_height.Value);
                 }
             }
 

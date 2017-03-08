@@ -1,6 +1,5 @@
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes.Geometry
 {
@@ -25,22 +24,22 @@ namespace VisioAutomation.Shapes.Geometry
             return this.RowTag;
         }
 
-        public void AddTo(IVisio.Shape shape, ShapeSheetWriter writer, short row, short section)
+        public void AddTo(IVisio.Shape shape, ShapeSheet.Writers.SrcWriter writer, short row, short section)
         {
             short row_index = shape.AddRow(section, row, (short) this.GetRowTagType());
             this.Update(section, row_index, writer);
         }
 
 
-        private void Update(short section_index, short row_index, ShapeSheetWriter writer)
+        private void Update(short section_index, short row_index, ShapeSheet.Writers.SrcWriter writer)
         {
-            var x_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.Geometry_X.Cell);
-            var y_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.Geometry_Y.Cell);
-            var a_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.Geometry_A.Cell);
-            var b_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.Geometry_B.Cell);
-            var c_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.Geometry_C.Cell);
-            var d_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.Geometry_D.Cell);
-            var e_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.Geometry_E.Cell);
+            var x_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexX.Cell);
+            var y_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexY.Cell);
+            var a_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexA.Cell);
+            var b_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexB.Cell);
+            var c_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexC.Cell);
+            var d_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexD.Cell);
+            var e_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexE.Cell);
 
             writer.SetFormula(x_src, this.X);
             writer.SetFormula(y_src, this.Y);

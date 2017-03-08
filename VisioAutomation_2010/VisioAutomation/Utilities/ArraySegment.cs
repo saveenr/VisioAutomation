@@ -4,27 +4,34 @@ namespace VisioAutomation.Utilities
 {
     public struct ArraySegment<T> : IEnumerable<T>
     {
-        private readonly T[] Array;
+        private readonly T[] _array;
         private readonly int _offset;
         private readonly int _length;
 
         public ArraySegment(T[] array, int offset, int length)
         {
-            this.Array = array;
+            this._array = array;
             this._offset = offset;
             this._length = length;
         }
 
         public T this[int index]
         {
-            get { return set_value_at_index(index); }
+            get { return get_value_at_index(index); }
+            set { set_value_at_index(index, value); }
         }
 
-        private T set_value_at_index(int index)
+        private void set_value_at_index(int index, T value)
+        {
+            validate_index(index);
+            this._array[this._offset + index] = value;
+        }
+
+        private T get_value_at_index(int index)
         {
             validate_index(index);
 
-            var value = this.Array[this._offset + index];
+            var value = this._array[this._offset + index];
             return value;
         }
 
@@ -40,7 +47,7 @@ namespace VisioAutomation.Utilities
         {
             for (int i = 0; i < this._length; i++)
             {
-                yield return this.Array[_offset + i];
+                yield return this._array[_offset + i];
             }
         }
 

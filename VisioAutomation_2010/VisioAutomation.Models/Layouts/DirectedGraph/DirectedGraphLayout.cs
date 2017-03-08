@@ -67,10 +67,10 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             new_connector.Label = label;
             new_connector.ConnectorType = type;
             new_connector.Cells = new ShapeCells();
-            new_connector.Cells.BeginArrow = begin_arrow;
-            new_connector.Cells.BeginArrowSize = begin_arrow;
-            new_connector.Cells.EndArrow = end_arrow;
-            new_connector.Cells.EndArrowSize = end_arrow;
+            new_connector.Cells.LineBeginArrow = begin_arrow;
+            new_connector.Cells.LineBeginArrowSize = begin_arrow;
+            new_connector.Cells.LineEndArrow = end_arrow;
+            new_connector.Cells.LineEndArrowSize = end_arrow;
 
             if (!string.IsNullOrEmpty(hyperlink))
             {

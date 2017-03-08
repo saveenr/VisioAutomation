@@ -11,7 +11,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         public ShapeSheet.CellData Format { get; set; }
         public ShapeSheet.CellData Invisible { get; set; }
         public ShapeSheet.CellData Label { get; set; }
-        public ShapeSheet.CellData LangId { get; set; }
+        public ShapeSheet.CellData LangID { get; set; }
         public ShapeSheet.CellData Prompt { get; set; }
         public ShapeSheet.CellData SortKey { get; set; }
         public ShapeSheet.CellData Type { get; set; }
@@ -111,16 +111,16 @@ namespace VisioAutomation.Shapes.CustomProperties
                 string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
                 string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Label, str_label);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Value, str_value);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Format, str_format);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Prompt, str_prompt);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Calendar, cp.Calendar.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_LangID, cp.LangId.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_SortKey, cp.SortKey.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Invisible, cp.Invisible.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Type, cp.Type.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.Prop_Ask, cp.Ask.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropLabel, str_label);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropValue, str_value);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropFormat, str_format);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropPrompt, str_prompt);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropCalendar, cp.Calendar.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropLangID, cp.LangID.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropSortKey, cp.SortKey.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropInvisible, cp.Invisible.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropType, cp.Type.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropAsk, cp.Ask.Formula);
             }
         }
 
@@ -140,35 +140,33 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public static CustomPropertyCells FromValue(object value)
         {
-            if (value is string)
+            if (value is string value_str)
             {
-                return new CustomPropertyCells((string) value);
+                return new CustomPropertyCells(value_str);
             }
-            else if (value is int)
+            else if (value is int value_int)
             {
-                return new CustomPropertyCells((int) value);
+                return new CustomPropertyCells(value_int);
             }
-            else if (value is double)
+            else if (value is double value_double)
             {
-                return new CustomPropertyCells((double) value);
+                return new CustomPropertyCells(value_double);
             }
-            else if (value is float)
+            else if (value is float value_float)
             {
-                return new CustomPropertyCells((float) value);
+                return new CustomPropertyCells(value_float);
             }
-            else if (value is bool)
+            else if (value is bool value_bool)
             {
-                return new CustomPropertyCells((bool) value);
+                return new CustomPropertyCells(value_bool);
             }
-            else if (value is System.DateTime)
+            else if (value is System.DateTime value_datetime)
             {
-                return new CustomPropertyCells((System.DateTime) value);
+                return new CustomPropertyCells(value_datetime);
             }
-            else
-            {
-                string msg = string.Format("Unsupported type for value \"{0}\" \"{1}\"", value, value.GetType());
-                throw new System.ArgumentOutOfRangeException(msg);
-            }
+            var value_type = value.GetType();
+            string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
+            throw new System.ArgumentException(msg);
         }
     }
 }

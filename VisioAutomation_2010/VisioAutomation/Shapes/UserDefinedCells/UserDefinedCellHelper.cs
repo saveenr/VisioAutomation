@@ -2,14 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.UserDefinedCells
 {
     public static class UserDefinedCellHelper
     {
-        private static readonly short _userdefinedcell_section = ShapeSheet.SrcConstants.User_Prompt.Section;
+        private static readonly short _userdefinedcell_section = ShapeSheet.SrcConstants.UserDefCellPrompt.Section;
 
         private static string GetRowName(string name)
         {
@@ -75,7 +74,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
             if (value.HasValue)
             {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Text
@@ -160,7 +159,7 @@ namespace VisioAutomation.Models.Text
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
             foreach (var region in regions_to_format)
             {
@@ -193,7 +192,7 @@ namespace VisioAutomation.Models.Text
                     var chars = shape.Characters;
                     chars.Begin = region.Start;
                     chars.End = region.End;
-                    chars.ParaProps[ShapeSheet.SrcConstants.Para_Bullet.Cell] = 0;
+                    chars.ParaProps[ShapeSheet.SrcConstants.ParaBullet.Cell] = 0;
                     short rownum = chars.ParaPropsRow[(short) default_chars_bias];
 
                     if (rownum < 0)

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet
@@ -37,21 +36,6 @@ namespace VisioAutomation.ShapeSheet
         {
             // Src that has a different row index. Very common scenario
             return new Src(this.Section, row, this.Cell);
-        }
-
-        public static short[] ToStream(IList<Src> srcs)
-        {
-            const int src_length = 3;
-            var src_stream = new short[src_length * srcs.Count];
-            for (int i = 0; i < srcs.Count; i++)
-            {
-                var sidsrc = srcs[i];
-                int pos = i * src_length;
-                src_stream[pos + 0] = sidsrc.Section;
-                src_stream[pos + 1] = sidsrc.Row;
-                src_stream[pos + 2] = sidsrc.Cell;
-            }
-            return src_stream;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace VisioAutomation.Shapes.Locking
         public ShapeSheet.CellData LockTextEdit { get; set; }
         public ShapeSheet.CellData LockThemeColors { get; set; }
         public ShapeSheet.CellData LockThemeEffects { get; set; }
-        public ShapeSheet.CellData LockVtxEdit { get; set; }
+        public ShapeSheet.CellData LockVertexEdit { get; set; }
         public ShapeSheet.CellData LockWidth { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
@@ -35,7 +35,7 @@ namespace VisioAutomation.Shapes.Locking
                 yield return this.newpair(ShapeSheet.SrcConstants.LockBegin, this.LockBegin.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockCalcWH, this.LockCalcWH.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockCrop, this.LockCrop.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCustProp, this.LockCustProp.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCustomProp, this.LockCustProp.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockDelete, this.LockDelete.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockEnd, this.LockEnd.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockFormat, this.LockFormat.Formula);
@@ -49,7 +49,7 @@ namespace VisioAutomation.Shapes.Locking
                 yield return this.newpair(ShapeSheet.SrcConstants.LockTextEdit, this.LockTextEdit.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockThemeColors, this.LockThemeColors.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockThemeEffects, this.LockThemeEffects.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockVtxEdit, this.LockVtxEdit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockVertexEdit, this.LockVertexEdit.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockWidth, this.LockWidth.Formula);
             }
         }

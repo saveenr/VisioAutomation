@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Scripting.Utilities;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -100,7 +101,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 // Now restore all the formatting - based on any initial formatting from the text
 
-                var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+                var writer = new SidSrcWriter();
                 for (int i = 0; i < targets.Shapes.Count; i++)
                 {
                     var format = formats[i];
@@ -179,7 +180,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            var writer = new SidSrcWriter();
             foreach (var shape in targets.Shapes)
             {
                 if (0 ==
@@ -196,9 +197,9 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = targets.Shapes.Select(s => s.ID);
             foreach (int shapeid in shapeids)
             {
-                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TxtHeight, "Height*0");
-                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TxtPinY, "Height*0");
-                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.VerticalAlign, "0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TextXFormHeight, "Height*0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TextXFormPinY, "Height*0");
+                writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TextBlockVerticalAlign, "0");
             }
 
             writer.Commit(application.ActivePage);
@@ -255,10 +256,10 @@ namespace VisioAutomation.Scripting.Commands
                     new_sizes.Add(max_size);
                 }
 
-                var src_width = VisioAutomation.ShapeSheet.SrcConstants.Width;
-                var src_height = VisioAutomation.ShapeSheet.SrcConstants.Height;
+                var src_width = VisioAutomation.ShapeSheet.SrcConstants.XFormWidth;
+                var src_height = VisioAutomation.ShapeSheet.SrcConstants.XFormHeight;
 
-                var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+                var writer = new SidSrcWriter();
                 for (int i = 0; i < new_sizes.Count; i++)
                 {
                     var shapeid = shapeids[i];

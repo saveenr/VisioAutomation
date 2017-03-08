@@ -1,5 +1,5 @@
 ﻿using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Dom
@@ -73,7 +73,7 @@ namespace VisioAutomation.Models.Dom
                     this.PageCells.PageWidth = this.Size.Value.Width;
                 }
 
-                var writer = new ShapeSheetWriter();
+                var writer = new SidSrcWriter();
                 this.PageCells.SetFormulas((short)page_sheet.ID, writer);
                 writer.Commit(page);
                 

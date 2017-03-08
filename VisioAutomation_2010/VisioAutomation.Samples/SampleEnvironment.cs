@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
+﻿using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -59,7 +58,7 @@ namespace VisioAutomationSamples
 
             var page_sheet = page.PageSheet;
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetFormula(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetFormula(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
@@ -74,8 +73,8 @@ namespace VisioAutomationSamples
             }
 
             var query = new ShapeSheetQuery();
-            var col_height = query.AddCell(VA.ShapeSheet.SrcConstants.PageHeight,"PageHeight");
-            var col_width = query.AddCell(VA.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
+            var col_height = query.AddCell(VA.ShapeSheet.SrcConstants.PageHeight,nameof(VA.ShapeSheet.SrcConstants.PageHeight));
+            var col_width = query.AddCell(VA.ShapeSheet.SrcConstants.PageWidth, nameof(VA.ShapeSheet.SrcConstants.PageHeight));
 
             var results = query.GetResults<double>(page.PageSheet);
             double height = results.Cells[col_height];

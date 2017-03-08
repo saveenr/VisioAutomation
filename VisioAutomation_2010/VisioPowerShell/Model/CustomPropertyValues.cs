@@ -27,7 +27,7 @@ namespace VisioPowerShell.Model
             this.Format = propcells.Format.Formula.Value;
             this.Invisible = propcells.Invisible.Formula.Value;
             this.Label = propcells.Label.Formula.Value;
-            this.LangId = propcells.LangId.Formula.Value;
+            this.LangId = propcells.LangID.Formula.Value;
             this.Prompt = propcells.Prompt.Formula.Value;
             this.SortKey = propcells.SortKey.Formula.Value;
             this.Type = propcells.Type.Formula.Value;

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Documents.Forms
@@ -30,15 +30,15 @@ namespace VisioAutomation.Models.Documents.Forms
 
             // Update the Page Cells
             var pagesheet = this._page.PageSheet;
-            var writer = new ShapeSheetWriter();
+            var writer = new SrcWriter();
 
             var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;
             pagecells.PageHeight = formpage.Size.Height;
-            pagecells.PageLeftMargin = formpage.Margin.Left;
-            pagecells.PageRightMargin = formpage.Margin.Right;
-            pagecells.PageTopMargin = formpage.Margin.Top;
-            pagecells.PageBottomMargin = formpage.Margin.Bottom;
+            pagecells.PrintLeftMargin = formpage.Margin.Left;
+            pagecells.PrintRightMargin = formpage.Margin.Right;
+            pagecells.PrintTopMargin = formpage.Margin.Top;
+            pagecells.PrintBottomMargin = formpage.Margin.Bottom;
             pagecells.SetFormulas(writer);
 
             writer.Commit(pagesheet);
@@ -95,7 +95,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Finish()
         {
-            var writer = new ShapeSheetWriter();
+            var writer = new SidSrcWriter();
             foreach (var block in this.Blocks)
             {
                 block.FormatCells.SetFormulas((short)block.VisioShapeID,writer);

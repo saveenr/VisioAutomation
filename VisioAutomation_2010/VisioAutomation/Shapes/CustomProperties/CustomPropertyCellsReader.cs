@@ -23,16 +23,16 @@ namespace VisioAutomation.Shapes.CustomProperties
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
 
 
-            this.SortKey = sec.AddCell(SrcConstants.Prop_SortKey, nameof(SrcConstants.Prop_SortKey));
-            this.Ask = sec.AddCell(SrcConstants.Prop_Ask, nameof(SrcConstants.Prop_Ask));
-            this.Calendar = sec.AddCell(SrcConstants.Prop_Calendar, nameof(SrcConstants.Prop_Calendar));
-            this.Format = sec.AddCell(SrcConstants.Prop_Format, nameof(SrcConstants.Prop_Format));
-            this.Invis = sec.AddCell(SrcConstants.Prop_Invisible, nameof(SrcConstants.Prop_Invisible));
-            this.Label = sec.AddCell(SrcConstants.Prop_Label, nameof(SrcConstants.Prop_Label));
-            this.LangID = sec.AddCell(SrcConstants.Prop_LangID, nameof(SrcConstants.Prop_LangID));
-            this.Prompt = sec.AddCell(SrcConstants.Prop_Prompt, nameof(SrcConstants.Prop_Prompt));
-            this.Type = sec.AddCell(SrcConstants.Prop_Type, nameof(SrcConstants.Prop_Type));
-            this.Value = sec.AddCell(SrcConstants.Prop_Value, nameof(SrcConstants.Prop_Value));
+            this.SortKey = sec.AddCell(SrcConstants.CustomPropSortKey, nameof(SrcConstants.CustomPropSortKey));
+            this.Ask = sec.AddCell(SrcConstants.CustomPropAsk, nameof(SrcConstants.CustomPropAsk));
+            this.Calendar = sec.AddCell(SrcConstants.CustomPropCalendar, nameof(SrcConstants.CustomPropCalendar));
+            this.Format = sec.AddCell(SrcConstants.CustomPropFormat, nameof(SrcConstants.CustomPropFormat));
+            this.Invis = sec.AddCell(SrcConstants.CustomPropInvisible, nameof(SrcConstants.CustomPropInvisible));
+            this.Label = sec.AddCell(SrcConstants.CustomPropLabel, nameof(SrcConstants.CustomPropLabel));
+            this.LangID = sec.AddCell(SrcConstants.CustomPropLangID, nameof(SrcConstants.CustomPropLangID));
+            this.Prompt = sec.AddCell(SrcConstants.CustomPropPrompt, nameof(SrcConstants.CustomPropPrompt));
+            this.Type = sec.AddCell(SrcConstants.CustomPropType, nameof(SrcConstants.CustomPropType));
+            this.Value = sec.AddCell(SrcConstants.CustomPropValue, nameof(SrcConstants.CustomPropValue));
 
         }
 
@@ -44,7 +44,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             cells.Format = row[this.Format];
             cells.Invisible = row[this.Invis];
             cells.Label = row[this.Label];
-            cells.LangId = row[this.LangID];
+            cells.LangID = row[this.LangID];
             cells.Prompt = row[this.Prompt];
             cells.SortKey = row[this.SortKey];
             cells.Type = row[this.Type];

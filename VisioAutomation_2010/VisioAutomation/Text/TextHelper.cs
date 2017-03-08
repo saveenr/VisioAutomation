@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -86,7 +85,7 @@ namespace VisioAutomation.Text
             shape.RowType[tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             for (int stop_index = 0; stop_index < stops.Count; stop_index++)
             {
                 int i = stop_index * 3;
@@ -141,7 +140,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SrcConstants.Tabs_StopCount.Section, ShapeSheet.SrcConstants.Tabs_StopCount.Row, ShapeSheet.SrcConstants.Tabs_StopCount.Cell];
+            var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SrcConstants.TabStopCount.Section, ShapeSheet.SrcConstants.TabStopCount.Row, ShapeSheet.SrcConstants.TabStopCount.Cell];
             const short rounding = 0;
 
             return cell_tabstopcount.ResultInt[(short)IVisio.VisUnitCodes.visNumber, rounding];
@@ -165,12 +164,12 @@ namespace VisioAutomation.Text
                 return;
             }
 
-            var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SrcConstants.Tabs_StopCount.Section, ShapeSheet.SrcConstants.Tabs_StopCount.Row, ShapeSheet.SrcConstants.Tabs_StopCount.Cell];
+            var cell_tabstopcount = shape.CellsSRC[ShapeSheet.SrcConstants.TabStopCount.Section, ShapeSheet.SrcConstants.TabStopCount.Row, ShapeSheet.SrcConstants.TabStopCount.Cell];
             cell_tabstopcount.FormulaForce = "0";
 
             const string formula = "0";
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             for (int i = 1; i < num_existing_tabstops * 3; i++)
             {
                 var src = new ShapeSheet.Src(tab_section, (short)IVisio.VisRowIndices.visRowTab,

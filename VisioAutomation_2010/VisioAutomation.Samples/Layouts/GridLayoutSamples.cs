@@ -1,6 +1,7 @@
 ﻿using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Grid;
+using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomationSamples
 {
@@ -45,13 +46,13 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Shapes.ShapeFormatCells();
             int i = 0;
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            var writer = new SidSrcWriter();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;
                 int color_index = i%colors.Length;
                 var color = colors[color_index];
-                fmtcells.FillForegnd = new VisioAutomation.Drawing.ColorRGB(color).ToFormula();
+                fmtcells.FillForeground = new VisioAutomation.Drawing.ColorRGB(color).ToFormula();
                 fmtcells.LinePattern = 0;
                 fmtcells.LineWeight = 0;
                 fmtcells.SetFormulas(shapeid, writer);

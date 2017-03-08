@@ -9,7 +9,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData Font { get; set; }
         public ShapeSheet.CellData Size { get; set; }
         public ShapeSheet.CellData Style { get; set; }
-        public ShapeSheet.CellData Transparency { get; set; }
+        public ShapeSheet.CellData ColorTransparency { get; set; }
         public ShapeSheet.CellData AsianFont { get; set; }
         public ShapeSheet.CellData Case { get; set; }
         public ShapeSheet.CellData ComplexScriptFont { get; set; }
@@ -36,12 +36,12 @@ namespace VisioAutomation.Text
                 yield return this.newpair(ShapeSheet.SrcConstants.CharFont, this.Font.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharSize, this.Size.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharStyle, this.Style.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharColorTrans, this.Transparency.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharColorTransparency, this.ColorTransparency.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharAsianFont, this.AsianFont.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharCase, this.Case.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharComplexScriptFont, this.ComplexScriptFont.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharComplexScriptSize, this.ComplexScriptSize.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharDblUnderline, this.DoubleUnderline.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleUnderline, this.DoubleUnderline.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikeThrough.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharLangID, this.LangID.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharFontScale, this.FontScale.Formula);

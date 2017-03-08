@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.Utilities;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Core.ShapeSheet
@@ -55,7 +54,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             }
 
             var b2 = new VA.ShapeSheet.Streams.FixedSidSrcStreamBuilder(1);
-            b2.Add(new SidSrc((short)0, (short)0, (short)0, (short)0));
+            var src = new Src((short)0, (short)0, (short)0);
+            var sidsrc = new SidSrc((short)0, src);
+            b2.Add(sidsrc);
             var s2 = b2.ToStream();
         }
 

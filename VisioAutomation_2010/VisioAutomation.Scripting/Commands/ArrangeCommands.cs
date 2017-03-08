@@ -1,5 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Shapes.Locking;
+using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Scripting.Layout
 {
@@ -99,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var page = this._client.Page.Get();
             var target_shapeids = targets.ToShapeIDs();
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            var writer = new SidSrcWriter();
 
             foreach (int shapeid in target_shapeids.ShapeIDs)
             {
@@ -125,16 +126,16 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = this._client.Page.Get();
             var shapeids = targets.ToShapeIDs();
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            var writer = new SidSrcWriter();
             foreach (int shapeid in shapeids.ShapeIDs)
             {
                 if (w.HasValue && w.Value>=0)
                 {
-                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.Width, w.Value);
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, w.Value);
                 }
                 if (h.HasValue && h.Value >= 0)
                 {
-                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.Height, h.Value);                    
+                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, h.Value);                    
                 }
             }
 

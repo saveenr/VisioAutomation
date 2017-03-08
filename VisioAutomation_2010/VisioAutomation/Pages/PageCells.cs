@@ -6,34 +6,34 @@ namespace VisioAutomation.Pages
 {
     public class PageCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData PageLeftMargin { get; set; }
-        public ShapeSheet.CellData CenterX { get; set; }
-        public ShapeSheet.CellData CenterY { get; set; }
-        public ShapeSheet.CellData OnPage { get; set; }
-        public ShapeSheet.CellData PageBottomMargin { get; set; }
-        public ShapeSheet.CellData PageRightMargin { get; set; }
-        public ShapeSheet.CellData PagesX { get; set; }
-        public ShapeSheet.CellData PagesY { get; set; }
-        public ShapeSheet.CellData PageTopMargin { get; set; }
-        public ShapeSheet.CellData PaperKind { get; set; }
+        public ShapeSheet.CellData PrintLeftMargin { get; set; }
+        public ShapeSheet.CellData PrintCenterX { get; set; }
+        public ShapeSheet.CellData PrintCenterY { get; set; }
+        public ShapeSheet.CellData PrintOnPage { get; set; }
+        public ShapeSheet.CellData PrintBottomMargin { get; set; }
+        public ShapeSheet.CellData PrintRightMargin { get; set; }
+        public ShapeSheet.CellData PrintPagesX { get; set; }
+        public ShapeSheet.CellData PrintPagesY { get; set; }
+        public ShapeSheet.CellData PrintTopMargin { get; set; }
+        public ShapeSheet.CellData PrintPaperKind { get; set; }
         public ShapeSheet.CellData PrintGrid { get; set; }
         public ShapeSheet.CellData PrintPageOrientation { get; set; }
-        public ShapeSheet.CellData ScaleX { get; set; }
-        public ShapeSheet.CellData ScaleY { get; set; }
-        public ShapeSheet.CellData PaperSource { get; set; }
-        public ShapeSheet.CellData DrawingScale { get; set; }
-        public ShapeSheet.CellData DrawingScaleType { get; set; }
-        public ShapeSheet.CellData DrawingSizeType { get; set; }
-        public ShapeSheet.CellData InhibitSnap { get; set; }
+        public ShapeSheet.CellData PrintScaleX { get; set; }
+        public ShapeSheet.CellData PrintScaleY { get; set; }
+        public ShapeSheet.CellData PrintPaperSource { get; set; }
+        public ShapeSheet.CellData PageDrawingScale { get; set; }
+        public ShapeSheet.CellData PageDrawingScaleType { get; set; }
+        public ShapeSheet.CellData PageDrawingSizeType { get; set; }
+        public ShapeSheet.CellData PageInhibitSnap { get; set; }
         public ShapeSheet.CellData PageHeight { get; set; }
         public ShapeSheet.CellData PageScale { get; set; }
         public ShapeSheet.CellData PageWidth { get; set; }
-        public ShapeSheet.CellData ShdwObliqueAngle { get; set; }
-        public ShapeSheet.CellData ShdwOffsetX { get; set; }
-        public ShapeSheet.CellData ShdwOffsetY { get; set; }
-        public ShapeSheet.CellData ShdwScaleFactor { get; set; }
-        public ShapeSheet.CellData ShdwType { get; set; }
-        public ShapeSheet.CellData UIVisibility { get; set; }
+        public ShapeSheet.CellData PageShadowObliqueAngle { get; set; }
+        public ShapeSheet.CellData PageShadowOffsetX { get; set; }
+        public ShapeSheet.CellData PageShadowOffsetY { get; set; }
+        public ShapeSheet.CellData PageShadowScaleFactor { get; set; }
+        public ShapeSheet.CellData PageShadowType { get; set; }
+        public ShapeSheet.CellData PageUIVisibility { get; set; }
         public ShapeSheet.CellData XGridDensity { get; set; }
         public ShapeSheet.CellData XGridOrigin { get; set; }
         public ShapeSheet.CellData XGridSpacing { get; set; }
@@ -44,68 +44,69 @@ namespace VisioAutomation.Pages
         public ShapeSheet.CellData YGridSpacing { get; set; }
         public ShapeSheet.CellData YRulerDensity { get; set; }
         public ShapeSheet.CellData YRulerOrigin { get; set; }
-        public ShapeSheet.CellData AvenueSizeX { get; set; }
-        public ShapeSheet.CellData AvenueSizeY { get; set; }
-        public ShapeSheet.CellData BlockSizeX { get; set; }
-        public ShapeSheet.CellData BlockSizeY { get; set; }
-        public ShapeSheet.CellData CtrlAsInput { get; set; }
-        public ShapeSheet.CellData DynamicsOff { get; set; }
-        public ShapeSheet.CellData EnableGrid { get; set; }
-        public ShapeSheet.CellData LineAdjustFrom { get; set; }
-        public ShapeSheet.CellData LineAdjustTo { get; set; }
-        public ShapeSheet.CellData LineJumpCode { get; set; }
-        public ShapeSheet.CellData LineJumpFactorX { get; set; }
-        public ShapeSheet.CellData LineJumpFactorY { get; set; }
-        public ShapeSheet.CellData LineJumpStyle { get; set; }
-        public ShapeSheet.CellData LineRouteExt { get; set; }
-        public ShapeSheet.CellData LineToLineX { get; set; }
-        public ShapeSheet.CellData LineToLineY { get; set; }
-        public ShapeSheet.CellData LineToNodeX { get; set; }
-        public ShapeSheet.CellData LineToNodeY { get; set; }
-        public ShapeSheet.CellData PageLineJumpDirX { get; set; }
-        public ShapeSheet.CellData PageLineJumpDirY { get; set; }
-        public ShapeSheet.CellData PageShapeSplit { get; set; }
-        public ShapeSheet.CellData PlaceDepth { get; set; }
-        public ShapeSheet.CellData PlaceFlip { get; set; }
-        public ShapeSheet.CellData PlaceStyle { get; set; }
-        public ShapeSheet.CellData PlowCode { get; set; }
-        public ShapeSheet.CellData ResizePage { get; set; }
-        public ShapeSheet.CellData RouteStyle { get; set; }
-        public ShapeSheet.CellData AvoidPageBreaks { get; set; } // new in visio 2010
-        public ShapeSheet.CellData DrawingResizeType { get; set; } // new in visio 2010
+        public ShapeSheet.CellData PageLayoutAvenueSizeX { get; set; }
+        public ShapeSheet.CellData PageLayoutAvenueSizeY { get; set; }
+        public ShapeSheet.CellData PageLayoutBlockSizeX { get; set; }
+        public ShapeSheet.CellData PageLayoutBlockSizeY { get; set; }
+        public ShapeSheet.CellData PageLayoutCtrlAsInput { get; set; }
+        public ShapeSheet.CellData PageLayoutDynamicsOff { get; set; }
+        public ShapeSheet.CellData PageLayoutEnableGrid { get; set; }
+        public ShapeSheet.CellData PageLayoutLineAdjustFrom { get; set; }
+        public ShapeSheet.CellData PageLayoutLineAdjustTo { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpCode { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpFactorX { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpFactorY { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpStyle { get; set; }
+        public ShapeSheet.CellData PageLayoutLineRouteExt { get; set; }
+        public ShapeSheet.CellData PageLayoutLineToLineX { get; set; }
+        public ShapeSheet.CellData PageLayoutLineToLineY { get; set; }
+        public ShapeSheet.CellData PageLayoutLineToNodeX { get; set; }
+        public ShapeSheet.CellData PageLayoutLineToNodeY { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpDirX { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpDirY { get; set; }
+        public ShapeSheet.CellData PageLayoutPageShapeSplit { get; set; }
+        public ShapeSheet.CellData PageLayoutPlaceDepth { get; set; }
+        public ShapeSheet.CellData PageLayoutPlaceFlip { get; set; }
+        public ShapeSheet.CellData PageLayoutPlaceStyle { get; set; }
+        public ShapeSheet.CellData PageLayoutPlowCode { get; set; }
+        public ShapeSheet.CellData PageLayoutResizePage { get; set; }
+        public ShapeSheet.CellData PageLayoutRouteStyle { get; set; }
+        public ShapeSheet.CellData PageLayoutAvoidPageBreaks { get; set; } // new in visio 2010
+        public ShapeSheet.CellData PageDrawingResizeType { get; set; } // new in visio 2010
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
-            {
-                yield return this.newpair(ShapeSheet.SrcConstants.PageLeftMargin, this.PageLeftMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CenterX, this.CenterX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CenterY, this.CenterY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.OnPage, this.OnPage.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageBottomMargin, this.PageBottomMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageRightMargin, this.PageRightMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PagesX, this.PagesX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PagesY, this.PagesY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageTopMargin, this.PageTopMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PaperKind, this.PaperKind.Formula);
+            { 
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintLeftMargin, this.PrintLeftMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterX, this.PrintCenterX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterY, this.PrintCenterY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintOnPage, this.PrintOnPage.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintBottomMargin, this.PrintBottomMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintRightMargin, this.PrintRightMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPagesX, this.PrintPagesX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPagesY, this.PrintPagesY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintTopMargin, this.PrintTopMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPaperKind, this.PrintPaperKind.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PrintGrid, this.PrintGrid.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PrintPageOrientation, this.PrintPageOrientation.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ScaleX, this.ScaleX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ScaleY, this.ScaleY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PaperSource, this.PaperSource.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.DrawingScale, this.DrawingScale.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.DrawingScaleType, this.DrawingScaleType.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.DrawingSizeType, this.DrawingSizeType.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.InhibitSnap, this.InhibitSnap.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintScaleX, this.PrintScaleX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintScaleY, this.PrintScaleY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPaperSource, this.PrintPaperSource.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingScale, this.PageDrawingScale.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingScaleType, this.PageDrawingScaleType.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingSizeType, this.PageDrawingSizeType.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageInhibitSnap, this.PageInhibitSnap.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageHeight, this.PageHeight.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageScale, this.PageScale.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageWidth, this.PageWidth.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwObliqueAngle, this.ShdwObliqueAngle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwOffsetX, this.ShdwOffsetX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwOffsetY, this.ShdwOffsetY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwScaleFactor, this.ShdwScaleFactor.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ShdwType, this.ShdwType.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.UIVisibility, this.UIVisibility.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowObliqueAngle, this.PageShadowObliqueAngle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowOffsetX, this.PageShadowOffsetX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowOffsetY, this.PageShadowOffsetY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowScaleFactor, this.PageShadowScaleFactor.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowType, this.PageShadowType.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageUIVisibility, this.PageUIVisibility.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingResizeType, this.PageDrawingResizeType.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing.Formula);
@@ -116,35 +117,34 @@ namespace VisioAutomation.Pages
                 yield return this.newpair(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.AvenueSizeX, this.AvenueSizeX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.AvenueSizeY, this.AvenueSizeY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.BlockSizeX, this.BlockSizeX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.BlockSizeY, this.BlockSizeY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CtrlAsInput, this.CtrlAsInput.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.DynamicsOff, this.DynamicsOff.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.EnableGrid, this.EnableGrid.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineAdjustFrom, this.LineAdjustFrom.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineAdjustTo, this.LineAdjustTo.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineJumpCode, this.LineJumpCode.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineJumpFactorX, this.LineJumpFactorX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineJumpFactorY, this.LineJumpFactorY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineJumpStyle, this.LineJumpStyle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineRouteExt, this.LineRouteExt.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineToLineX, this.LineToLineX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineToLineY, this.LineToLineY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineToNodeX, this.LineToNodeX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LineToNodeY, this.LineToNodeY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageLineJumpDirX, this.PageLineJumpDirX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageLineJumpDirY, this.PageLineJumpDirY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageShapeSplit, this.PageShapeSplit.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PlaceDepth, this.PlaceDepth.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PlaceFlip, this.PlaceFlip.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PlaceStyle, this.PlaceStyle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PlowCode, this.PlowCode.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ResizePage, this.ResizePage.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.RouteStyle, this.RouteStyle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.AvoidPageBreaks, this.AvoidPageBreaks.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.DrawingResizeType, this.DrawingResizeType.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutAvenueSizeX, this.PageLayoutAvenueSizeX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, this.PageLayoutAvenueSizeY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutBlockSizeX, this.PageLayoutBlockSizeX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutBlockSizeY, this.PageLayoutBlockSizeY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutControlAsInput, this.PageLayoutCtrlAsInput.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutDynamicsOff, this.PageLayoutDynamicsOff.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutEnableGrid, this.PageLayoutEnableGrid.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineAdjustFrom, this.PageLayoutLineAdjustFrom.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineAdjustTo, this.PageLayoutLineAdjustTo.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineJumpCode, this.PageLayoutLineJumpCode.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineJumpFactorX, this.PageLayoutLineJumpFactorX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineJumpFactorY, this.PageLayoutLineJumpFactorY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineJumpStyle, this.PageLayoutLineJumpStyle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineRouteExt, this.PageLayoutLineRouteExt.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineToLineX, this.PageLayoutLineToLineX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineToLineY, this.PageLayoutLineToLineY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineToNodeX, this.PageLayoutLineToNodeX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineToNodeY, this.PageLayoutLineToNodeY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineJumpDirX, this.PageLayoutLineJumpDirX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutLineJumpDirY, this.PageLayoutLineJumpDirY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutShapeSplit, this.PageLayoutPageShapeSplit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutPlaceDepth, this.PageLayoutPlaceDepth.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutPlaceFlip, this.PageLayoutPlaceFlip.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutPlaceStyle, this.PageLayoutPlaceStyle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutPlowCode, this.PageLayoutPlowCode.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutResizePage, this.PageLayoutResizePage.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutRouteStyle, this.PageLayoutRouteStyle.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutAvoidPageBreaks, this.PageLayoutAvoidPageBreaks.Formula);
             }
         }
 

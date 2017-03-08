@@ -118,8 +118,8 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 {
                     var orgnode = (Node)treenodes[i].Data;
                     orgnode.DOMNode = vmasters[i];
-                    vmasters[i].Cells.Width = treenodes[i].Size.Width;
-                    vmasters[i].Cells.Height = treenodes[i].Size.Height;
+                    vmasters[i].Cells.XFormWidth = treenodes[i].Size.Width;
+                    vmasters[i].Cells.XFormHeight = treenodes[i].Size.Height;
                 }
 
                 if (this.LayoutOptions.UseDynamicConnectors)

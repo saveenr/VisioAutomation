@@ -4,7 +4,6 @@ using System.Linq;
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes.CustomProperties
 {
@@ -33,7 +32,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                     throw new InternalAssertionException(msg);
                 }
 
-                var writer = new ShapeSheetWriter();
+                var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                 cp.SetFormulas(writer, cell_propname.Row);
 
                 writer.Commit(shape);
@@ -56,7 +55,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             cp.SetFormulas(writer, row);
 
             writer.Commit(shape);

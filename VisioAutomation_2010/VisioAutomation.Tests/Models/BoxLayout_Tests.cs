@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Exceptions;
 using VisioAutomation.Models.Layouts.Box;
 
 namespace VisioAutomation_Tests.Models
@@ -20,7 +19,7 @@ namespace VisioAutomation_Tests.Models
                 layout.PerformLayout();
 
             }
-            catch (AutomationException)
+            catch (System.ArgumentException)
             {
                 thrown = true;
             }

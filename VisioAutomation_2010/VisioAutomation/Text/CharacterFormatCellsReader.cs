@@ -35,7 +35,7 @@ namespace VisioAutomation.Text
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
 
             this.Color = sec.AddCell(SrcConstants.CharColor, nameof(SrcConstants.CharColor));
-            this.Trans = sec.AddCell(SrcConstants.CharColorTrans, nameof(SrcConstants.CharColorTrans));
+            this.Trans = sec.AddCell(SrcConstants.CharColorTransparency, nameof(SrcConstants.CharColorTransparency));
             this.Font = sec.AddCell(SrcConstants.CharFont, nameof(SrcConstants.CharFont));
             this.Size = sec.AddCell(SrcConstants.CharSize, nameof(SrcConstants.CharSize));
             this.Style = sec.AddCell(SrcConstants.CharStyle, nameof(SrcConstants.CharStyle));
@@ -44,7 +44,7 @@ namespace VisioAutomation.Text
             this.ComplexScriptFont = sec.AddCell(SrcConstants.CharComplexScriptFont, nameof(SrcConstants.CharComplexScriptFont));
             this.ComplexScriptSize = sec.AddCell(SrcConstants.CharComplexScriptSize, nameof(SrcConstants.CharComplexScriptSize));
             this.DoubleStrikethrough = sec.AddCell(SrcConstants.CharDoubleStrikethrough, nameof(SrcConstants.CharDoubleStrikethrough));
-            this.DoubleUnderline = sec.AddCell(SrcConstants.CharDblUnderline, nameof(SrcConstants.CharDblUnderline));
+            this.DoubleUnderline = sec.AddCell(SrcConstants.CharDoubleUnderline, nameof(SrcConstants.CharDoubleUnderline));
             this.LangID = sec.AddCell(SrcConstants.CharLangID, nameof(SrcConstants.CharLangID));
             this.Locale = sec.AddCell(SrcConstants.CharLocale, nameof(SrcConstants.CharLocale));
             this.LocalizeFont = sec.AddCell(SrcConstants.CharLocalizeFont, nameof(SrcConstants.CharLocalizeFont));
@@ -63,7 +63,7 @@ namespace VisioAutomation.Text
         {
             var cells = new Text.CharacterCells();
             cells.Color = row[this.Color];
-            cells.Transparency = row[this.Trans];
+            cells.ColorTransparency = row[this.Trans];
             cells.Font = row[this.Font];
             cells.Size = row[this.Size];
             cells.Style = row[this.Style];

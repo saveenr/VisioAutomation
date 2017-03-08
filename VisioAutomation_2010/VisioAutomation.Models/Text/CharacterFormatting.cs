@@ -27,18 +27,18 @@ namespace VisioAutomation.Models.Text
         public ShapeSheet.CellValueLiteral Transparency { get; set; }
         public ShapeSheet.CellValueLiteral UseVertical { get; set; }
 
-        internal void ApplyFormulas(ShapeSheetWriter writer, short row)
+        internal void ApplyFormulas(VisioAutomation.ShapeSheet.Writers.SrcWriter writer, short row)
         {
             writer.SetFormula(SrcConstants.CharColor.CloneWithNewRow(row), this.Color);
             writer.SetFormula(SrcConstants.CharFont.CloneWithNewRow(row), this.Font);
             writer.SetFormula(SrcConstants.CharSize.CloneWithNewRow(row), this.Size);
             writer.SetFormula(SrcConstants.CharStyle.CloneWithNewRow(row), this.Style);
-            writer.SetFormula(SrcConstants.CharColorTrans.CloneWithNewRow(row), this.Transparency);
+            writer.SetFormula(SrcConstants.CharColorTransparency.CloneWithNewRow(row), this.Transparency);
             writer.SetFormula(SrcConstants.CharAsianFont.CloneWithNewRow(row), this.AsianFont);
             writer.SetFormula(SrcConstants.CharCase.CloneWithNewRow(row), this.Case);
             writer.SetFormula(SrcConstants.CharComplexScriptFont.CloneWithNewRow(row), this.ComplexScriptFont);
             writer.SetFormula(SrcConstants.CharComplexScriptSize.CloneWithNewRow(row), this.ComplexScriptSize);
-            writer.SetFormula(SrcConstants.CharDblUnderline.CloneWithNewRow(row), this.DoubleUnderline);
+            writer.SetFormula(SrcConstants.CharDoubleUnderline.CloneWithNewRow(row), this.DoubleUnderline);
             writer.SetFormula(SrcConstants.CharDoubleStrikethrough.CloneWithNewRow(row), this.DoubleStrikeThrough);
             writer.SetFormula(SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
             writer.SetFormula(SrcConstants.CharFontScale.CloneWithNewRow(row), this.FontScale);

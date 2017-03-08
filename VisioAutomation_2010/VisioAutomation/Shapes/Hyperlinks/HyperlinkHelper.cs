@@ -1,5 +1,4 @@
 using System;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Hyperlinks
@@ -61,7 +60,7 @@ namespace VisioAutomation.Shapes.Hyperlinks
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             hyperlink.SetFormulas(writer, row);
 
             writer.Commit(shape);

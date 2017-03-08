@@ -85,8 +85,8 @@ namespace VisioAutomation_Tests
         public static VisioAutomation.Drawing.Size GetSize(IVisio.Shape shape)
         {
             var query = new ShapeSheetQuery();
-            var col_w = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Width,"Width");
-            var col_h = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.Height,"Height");
+            var col_w = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth,"Width");
+            var col_h = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight,"Height");
 
             var table = query.GetResults<double>(shape);
             double w = table.Cells[col_w];
@@ -143,7 +143,7 @@ namespace VisioAutomation_Tests
 
             var page_sheet = page.PageSheet;
 
-            var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 

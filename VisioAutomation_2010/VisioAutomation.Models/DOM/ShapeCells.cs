@@ -1,43 +1,43 @@
-using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Models.Dom
 {
     public class ShapeCells
     {
         // XFormOut
-        public ShapeSheet.CellValueLiteral Width { get; set; }
-        public ShapeSheet.CellValueLiteral Height { get; set; }
-        public ShapeSheet.CellValueLiteral Angle { get; set; }
-        public ShapeSheet.CellValueLiteral PinX { get; set; }
-        public ShapeSheet.CellValueLiteral PinY { get; set; }
-        public ShapeSheet.CellValueLiteral LocPinX { get; set; }
-        public ShapeSheet.CellValueLiteral LocPinY { get; set; }
+        public ShapeSheet.CellValueLiteral XFormWidth { get; set; }
+        public ShapeSheet.CellValueLiteral XFormHeight { get; set; }
+        public ShapeSheet.CellValueLiteral XFormAngle { get; set; }
+        public ShapeSheet.CellValueLiteral XFormPinX { get; set; }
+        public ShapeSheet.CellValueLiteral XFormPinY { get; set; }
+        public ShapeSheet.CellValueLiteral XFormLocPinX { get; set; }
+        public ShapeSheet.CellValueLiteral XFormLocPinY { get; set; }
 
         // Fill
-        public ShapeSheet.CellValueLiteral FillBkgnd { get; set; }
-        public ShapeSheet.CellValueLiteral FillBkgndTrans { get; set; }
-        public ShapeSheet.CellValueLiteral FillForegnd { get; set; }
-        public ShapeSheet.CellValueLiteral FillForegndTrans { get; set; }
+        public ShapeSheet.CellValueLiteral FillBackground { get; set; }
+        public ShapeSheet.CellValueLiteral FillBackgroundTransparency { get; set; }
+        public ShapeSheet.CellValueLiteral FillForeground { get; set; }
+        public ShapeSheet.CellValueLiteral FillForegroundTransparency { get; set; }
         public ShapeSheet.CellValueLiteral FillPattern { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeShdwObliqueAngle { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeShdwOffsetX { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeShdwOffsetY { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeShdwScaleFactor { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeShdwType { get; set; }
-        public ShapeSheet.CellValueLiteral ShdwBkgnd { get; set; }
-        public ShapeSheet.CellValueLiteral ShdwBkgndTrans { get; set; }
-        public ShapeSheet.CellValueLiteral ShdwForegnd { get; set; }
-        public ShapeSheet.CellValueLiteral ShdwForegndTrans { get; set; }
-        public ShapeSheet.CellValueLiteral ShdwPattern { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowObliqueAngle { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowOffsetX { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowOffsetY { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowScaleFactor { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowType { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowBackground { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowBackgroundTransparency { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowForeground { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowForegroundTransparency { get; set; }
+        public ShapeSheet.CellValueLiteral FillShadowPattern { get; set; }
 
         // Line
-        public ShapeSheet.CellValueLiteral BeginArrow { get; set; }
-        public ShapeSheet.CellValueLiteral BeginArrowSize { get; set; }
-        public ShapeSheet.CellValueLiteral EndArrow { get; set; }
-        public ShapeSheet.CellValueLiteral EndArrowSize { get; set; }
+        public ShapeSheet.CellValueLiteral LineBeginArrow { get; set; }
+        public ShapeSheet.CellValueLiteral LineBeginArrowSize { get; set; }
+        public ShapeSheet.CellValueLiteral LineEndArrow { get; set; }
+        public ShapeSheet.CellValueLiteral LineEndArrowSize { get; set; }
         public ShapeSheet.CellValueLiteral LineCap { get; set; }
         public ShapeSheet.CellValueLiteral LineColor { get; set; }
-        public ShapeSheet.CellValueLiteral LineColorTrans { get; set; }
+        public ShapeSheet.CellValueLiteral LineColorTransparency { get; set; }
         public ShapeSheet.CellValueLiteral LinePattern { get; set; }
         public ShapeSheet.CellValueLiteral LineWeight { get; set; }
         public ShapeSheet.CellValueLiteral Rounding { get; set; }
@@ -67,15 +67,15 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.CellValueLiteral CharUseVertical { get; set; }
 
         // Text Block
-        public ShapeSheet.CellValueLiteral BottomMargin { get; set; }
-        public ShapeSheet.CellValueLiteral DefaultTabstop { get; set; }
-        public ShapeSheet.CellValueLiteral LeftMargin { get; set; }
-        public ShapeSheet.CellValueLiteral RightMargin { get; set; }
-        public ShapeSheet.CellValueLiteral TextBkgnd { get; set; }
-        public ShapeSheet.CellValueLiteral TextBkgndTrans { get; set; }
-        public ShapeSheet.CellValueLiteral TextDirection { get; set; }
-        public ShapeSheet.CellValueLiteral TopMargin { get; set; }
-        public ShapeSheet.CellValueLiteral VerticalAlign { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockBottomMargin { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockDefaultTabStop { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockLeftMargin { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockRightMargin { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockBackground { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockBackgroundTransparency { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockDirection { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockTopMargin { get; set; }
+        public ShapeSheet.CellValueLiteral TextBlockVerticalAlign { get; set; }
 
         // Paragraph
         public ShapeSheet.CellValueLiteral ParaBullet { get; set; }
@@ -94,61 +94,61 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.CellValueLiteral ParaTextPosAfterBullet { get; set; }
 
         //TextXForm
-        public ShapeSheet.CellValueLiteral TxtAngle { get; set; }
-        public ShapeSheet.CellValueLiteral TxtHeight { get; set; }
-        public ShapeSheet.CellValueLiteral TxtLocPinX { get; set; }
-        public ShapeSheet.CellValueLiteral TxtLocPinY { get; set; }
-        public ShapeSheet.CellValueLiteral TxtPinX { get; set; }
-        public ShapeSheet.CellValueLiteral TxtPinY { get; set; }
-        public ShapeSheet.CellValueLiteral TxtWidth { get; set; }
+        public ShapeSheet.CellValueLiteral TextXFormAngle { get; set; }
+        public ShapeSheet.CellValueLiteral TextXFormHeight { get; set; }
+        public ShapeSheet.CellValueLiteral TextXFormLocPinX { get; set; }
+        public ShapeSheet.CellValueLiteral TextXFormLocPinY { get; set; }
+        public ShapeSheet.CellValueLiteral TextXFormPinX { get; set; }
+        public ShapeSheet.CellValueLiteral TextXFormPinY { get; set; }
+        public ShapeSheet.CellValueLiteral TextXFormWidth { get; set; }
 
         // ShapeLayout
-        public ShapeSheet.CellValueLiteral ConFixedCode { get; set; }
-        public ShapeSheet.CellValueLiteral ConLineJumpCode { get; set; }
-        public ShapeSheet.CellValueLiteral ConLineJumpDirX { get; set; }
-        public ShapeSheet.CellValueLiteral ConLineJumpDirY { get; set; }
-        public ShapeSheet.CellValueLiteral ConLineJumpStyle { get; set; }
-        public ShapeSheet.CellValueLiteral ConLineRouteExt { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeFixedCode { get; set; }
-        public ShapeSheet.CellValueLiteral ShapePermeablePlace { get; set; }
-        public ShapeSheet.CellValueLiteral ShapePermeableX { get; set; }
-        public ShapeSheet.CellValueLiteral ShapePermeableY { get; set; }
-        public ShapeSheet.CellValueLiteral ShapePlaceFlip { get; set; }
-        public ShapeSheet.CellValueLiteral ShapePlaceStyle { get; set; }
-        public ShapeSheet.CellValueLiteral ShapePlowCode { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeRouteStyle { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeSplit { get; set; }
-        public ShapeSheet.CellValueLiteral ShapeSplittable { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutConFixedCode { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutConLineJumpCode { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutConLineJumpDirX { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutConLineJumpDirY { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutConLineJumpStyle { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutConLineRouteExt { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutFixedCode { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutPermeablePlace { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutPermeableX { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutPermeableY { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutPlaceFlip { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutPlaceStyle { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutPlowCode { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutRouteStyle { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutSplit { get; set; }
+        public ShapeSheet.CellValueLiteral ShapeLayoutSplittable { get; set; }
 
 
-        public void Apply(ShapeSheetWriter writer, short id)
+        public void Apply(SidSrcWriter writer, short id)
         {
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Width, this.Width);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Height, this.Height);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.PinX, this.PinX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.PinY, this.PinY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.LocPinX, this.LocPinX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.LocPinY, this.LocPinY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Angle, this.Angle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.BeginArrow, this.BeginArrow);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.BeginArrowSize, this.BeginArrowSize);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.XFormWidth, this.XFormWidth);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.XFormHeight, this.XFormHeight);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.XFormPinX, this.XFormPinX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.XFormPinY, this.XFormPinY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.XFormLocPinX, this.XFormLocPinX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.XFormLocPinY, this.XFormLocPinY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.XFormAngle, this.XFormAngle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.LineBeginArrow, this.LineBeginArrow);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
 
-            writer.SetFormula(id, ShapeSheet.SrcConstants.FillBkgnd, this.FillBkgnd);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.FillBkgndTrans, this.FillBkgndTrans);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.FillForegnd, this.FillForegnd);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.FillForegndTrans, this.FillForegndTrans);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillBackground, this.FillBackground);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillForeground, this.FillForeground);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
             writer.SetFormula(id, ShapeSheet.SrcConstants.FillPattern, this.FillPattern);
 
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeShdwType, this.ShapeShdwType);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShdwBkgnd, this.ShdwBkgnd);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShdwBkgndTrans, this.ShdwBkgndTrans);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShdwForegnd, this.ShdwForegnd);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShdwForegndTrans, this.ShdwForegndTrans);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShdwPattern, this.ShdwPattern);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowType, this.FillShadowType);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowBackground, this.FillShadowBackground);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowForeground, this.FillShadowForeground);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.FillShadowPattern, this.FillShadowPattern);
 
             writer.SetFormula(id, ShapeSheet.SrcConstants.CharCase, this.CharCase);
             writer.SetFormula(id, ShapeSheet.SrcConstants.CharFont, this.CharFont);
@@ -156,71 +156,71 @@ namespace VisioAutomation.Models.Dom
             writer.SetFormula(id, ShapeSheet.SrcConstants.CharSize, this.CharSize);
             writer.SetFormula(id, ShapeSheet.SrcConstants.CharLetterspace, this.CharLetterspace);
             writer.SetFormula(id, ShapeSheet.SrcConstants.CharStyle, this.CharStyle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.CharColorTrans, this.CharTransparency);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.CharColorTransparency, this.CharTransparency);
 
-            writer.SetFormula(id, ShapeSheet.SrcConstants.EndArrow, this.EndArrow);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.EndArrowSize, this.EndArrowSize);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.LineEndArrow, this.LineEndArrow);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
 
             // Line
             writer.SetFormula(id, ShapeSheet.SrcConstants.LineColor, this.LineColor);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.LineColorTrans, this.LineColorTrans);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.LineColorTransparency, this.LineColorTransparency);
             writer.SetFormula(id, ShapeSheet.SrcConstants.LinePattern, this.LinePattern);
             writer.SetFormula(id, ShapeSheet.SrcConstants.LineWeight, this.LineWeight);
 
             // Text
-            writer.SetFormula(id, ShapeSheet.SrcConstants.BottomMargin, this.BottomMargin);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.DefaultTabStop, this.DefaultTabstop);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.LeftMargin, this.LeftMargin);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.RightMargin, this.RightMargin);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBkgnd, this.TextBkgnd);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBkgndTrans, this.TextBkgndTrans);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TextDirection, this.TextDirection);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TopMargin, this.TopMargin);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.VerticalAlign, this.VerticalAlign);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockBottomMargin, this.TextBlockBottomMargin);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockDefaultTabStop, this.TextBlockDefaultTabStop);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockLeftMargin, this.TextBlockLeftMargin);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockRightMargin, this.TextBlockRightMargin);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockBackground, this.TextBlockBackground);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBlockBackgroundTransparency);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockDirection, this.TextBlockDirection);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockTopMargin, this.TextBlockTopMargin);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextBlockVerticalAlign, this.TextBlockVerticalAlign);
 
             // Paragraph
 
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_Bullet, this.ParaBullet);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_BulletFont, this.ParaBulletFont);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_BulletFontSize, this.ParaBulletFontSize);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_BulletStr, this.ParaBulletString);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_Flags, this.ParaFlags);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_HorzAlign, this.ParaHorizontalAlign);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_IndFirst, this.ParaIndentFirst);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_IndLeft, this.ParaIndentLeft);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_IndRight, this.ParaIndentRight);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_LocalizeBulletFont, this.ParaLocBulletFont);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_SpAfter, this.ParaSpacingAfter);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_SpBefore, this.ParaSpacingBefore);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_SpLine, this.ParaSpacingLine);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.Para_TextPosAfterBullet, this.ParaTextPosAfterBullet);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBullet, this.ParaBullet);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBulletFont, this.ParaBulletFont);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBulletFontSize, this.ParaBulletFontSize);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaBulletString, this.ParaBulletString);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaFlags, this.ParaFlags);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaHorizontalAlign, this.ParaHorizontalAlign);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaIndentFirst, this.ParaIndentFirst);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaIndentLeft, this.ParaIndentLeft);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaIndentRight, this.ParaIndentRight);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaLocalizeBulletFont, this.ParaLocBulletFont);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaSpacingAfter, this.ParaSpacingAfter);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaSpacingBefore, this.ParaSpacingBefore);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaSpacingLine, this.ParaSpacingLine);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ParaTextPosAfterBullet, this.ParaTextPosAfterBullet);
 
             // TextXForm
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TxtAngle, this.TxtAngle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TxtHeight, this.TxtHeight);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TxtLocPinX, this.TxtLocPinX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TxtLocPinY, this.TxtLocPinY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TxtPinX, this.TxtPinX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TxtPinY, this.TxtPinY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.TxtWidth, this.TxtWidth);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextXFormAngle, this.TextXFormAngle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextXFormHeight, this.TextXFormHeight);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextXFormLocPinX, this.TextXFormLocPinX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextXFormLocPinY, this.TextXFormLocPinY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextXFormPinX, this.TextXFormPinX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextXFormPinY, this.TextXFormPinY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.TextXFormWidth, this.TextXFormWidth);
 
             // ShapeLayout
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ConFixedCode, this.ConFixedCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ConLineJumpCode, this.ConLineJumpCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ConLineJumpDirX, this.ConLineJumpDirX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ConLineJumpDirY, this.ConLineJumpDirY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ConLineJumpStyle, this.ConLineJumpStyle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ConLineRouteExt, this.ConLineRouteExt);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeFixedCode, this.ShapeFixedCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapePermeablePlace, this.ShapePermeablePlace);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapePermeableX, this.ShapePermeableX);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapePermeableY, this.ShapePermeableY);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapePlaceFlip, this.ShapePlaceFlip);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapePlaceStyle, this.ShapePlaceStyle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapePlowCode, this.ShapePlowCode);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeRouteStyle, this.ShapeRouteStyle);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeSplit, this.ShapeSplit);
-            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeSplittable, this.ShapeSplittable);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutConnectorFixedCode, this.ShapeLayoutConFixedCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineJumpCode, this.ShapeLayoutConLineJumpCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineJumpDirX, this.ShapeLayoutConLineJumpDirX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineJumpDirY, this.ShapeLayoutConLineJumpDirY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineJumpStyle, this.ShapeLayoutConLineJumpStyle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutLineRouteExt, this.ShapeLayoutConLineRouteExt);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapeFixedCode, this.ShapeLayoutFixedCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePermeablePlace, this.ShapeLayoutPermeablePlace);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePermeableX, this.ShapeLayoutPermeableX);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePermeableY, this.ShapeLayoutPermeableY);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePlaceFlip, this.ShapeLayoutPlaceFlip);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePlaceStyle, this.ShapeLayoutPlaceStyle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapePlowCode, this.ShapeLayoutPlowCode);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapeRouteStyle, this.ShapeLayoutRouteStyle);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapeSplit, this.ShapeLayoutSplit);
+            writer.SetFormula(id, ShapeSheet.SrcConstants.ShapeLayoutShapeSplittable, this.ShapeLayoutSplittable);
         }
 
         public ShapeCells ShallowCopy()
@@ -230,35 +230,35 @@ namespace VisioAutomation.Models.Dom
 
         public void ApplyFormulasTo(ShapeCells target)
         {
-            if (this.Width.HasValue) { target.Width = this.Width; }
-            if (this.Height.HasValue) { target.Height = this.Height; }
-            if (this.Angle.HasValue) { target.Angle = this.Angle; }
-            if (this.PinX.HasValue) { target.PinX = this.PinX; }
-            if (this.PinY.HasValue) { target.PinY = this.PinY; }
-            if (this.LocPinX.HasValue) { target.LocPinX = this.LocPinX; }
-            if (this.LocPinY.HasValue) { target.LocPinY = this.LocPinY; }
-            if (this.FillBkgnd.HasValue) { target.FillBkgnd = this.FillBkgnd; }
-            if (this.FillBkgndTrans.HasValue) { target.FillBkgndTrans = this.FillBkgndTrans; }
-            if (this.FillForegnd.HasValue) { target.FillForegnd = this.FillForegnd; }
-            if (this.FillForegndTrans.HasValue) { target.FillForegndTrans = this.FillForegndTrans; }
+            if (this.XFormWidth.HasValue) { target.XFormWidth = this.XFormWidth; }
+            if (this.XFormHeight.HasValue) { target.XFormHeight = this.XFormHeight; }
+            if (this.XFormAngle.HasValue) { target.XFormAngle = this.XFormAngle; }
+            if (this.XFormPinX.HasValue) { target.XFormPinX = this.XFormPinX; }
+            if (this.XFormPinY.HasValue) { target.XFormPinY = this.XFormPinY; }
+            if (this.XFormLocPinX.HasValue) { target.XFormLocPinX = this.XFormLocPinX; }
+            if (this.XFormLocPinY.HasValue) { target.XFormLocPinY = this.XFormLocPinY; }
+            if (this.FillBackground.HasValue) { target.FillBackground = this.FillBackground; }
+            if (this.FillBackgroundTransparency.HasValue) { target.FillBackgroundTransparency = this.FillBackgroundTransparency; }
+            if (this.FillForeground.HasValue) { target.FillForeground = this.FillForeground; }
+            if (this.FillForegroundTransparency.HasValue) { target.FillForegroundTransparency = this.FillForegroundTransparency; }
             if (this.FillPattern.HasValue) { target.FillPattern = this.FillPattern; }
-            if (this.ShapeShdwObliqueAngle.HasValue) { target.ShapeShdwObliqueAngle = this.ShapeShdwObliqueAngle; }
-            if (this.ShapeShdwOffsetX.HasValue) { target.ShapeShdwOffsetX = this.ShapeShdwOffsetX; }
-            if (this.ShapeShdwOffsetY.HasValue) { target.ShapeShdwOffsetY = this.ShapeShdwOffsetY; }
-            if (this.ShapeShdwScaleFactor.HasValue) { target.ShapeShdwScaleFactor = this.ShapeShdwScaleFactor; }
-            if (this.ShapeShdwType.HasValue) { target.ShapeShdwType = this.ShapeShdwType; }
-            if (this.ShdwBkgnd.HasValue) { target.ShdwBkgnd = this.ShdwBkgnd; }
-            if (this.ShdwBkgndTrans.HasValue) { target.ShdwBkgndTrans = this.ShdwBkgndTrans; }
-            if (this.ShdwForegnd.HasValue) { target.ShdwForegnd = this.ShdwForegnd; }
-            if (this.ShdwForegndTrans.HasValue) { target.ShdwForegndTrans = this.ShdwForegndTrans; }
-            if (this.ShdwPattern.HasValue) { target.ShdwPattern = this.ShdwPattern; }
-            if (this.BeginArrow.HasValue) { target.BeginArrow = this.BeginArrow; }
-            if (this.BeginArrowSize.HasValue) { target.BeginArrowSize = this.BeginArrowSize; }
-            if (this.EndArrow.HasValue) { target.EndArrow = this.EndArrow; }
-            if (this.EndArrowSize.HasValue) { target.EndArrowSize = this.EndArrowSize; }
+            if (this.FillShadowObliqueAngle.HasValue) { target.FillShadowObliqueAngle = this.FillShadowObliqueAngle; }
+            if (this.FillShadowOffsetX.HasValue) { target.FillShadowOffsetX = this.FillShadowOffsetX; }
+            if (this.FillShadowOffsetY.HasValue) { target.FillShadowOffsetY = this.FillShadowOffsetY; }
+            if (this.FillShadowScaleFactor.HasValue) { target.FillShadowScaleFactor = this.FillShadowScaleFactor; }
+            if (this.FillShadowType.HasValue) { target.FillShadowType = this.FillShadowType; }
+            if (this.FillShadowBackground.HasValue) { target.FillShadowBackground = this.FillShadowBackground; }
+            if (this.FillShadowBackgroundTransparency.HasValue) { target.FillShadowBackgroundTransparency = this.FillShadowBackgroundTransparency; }
+            if (this.FillShadowForeground.HasValue) { target.FillShadowForeground = this.FillShadowForeground; }
+            if (this.FillShadowForegroundTransparency.HasValue) { target.FillShadowForegroundTransparency = this.FillShadowForegroundTransparency; }
+            if (this.FillShadowPattern.HasValue) { target.FillShadowPattern = this.FillShadowPattern; }
+            if (this.LineBeginArrow.HasValue) { target.LineBeginArrow = this.LineBeginArrow; }
+            if (this.LineBeginArrowSize.HasValue) { target.LineBeginArrowSize = this.LineBeginArrowSize; }
+            if (this.LineEndArrow.HasValue) { target.LineEndArrow = this.LineEndArrow; }
+            if (this.LineEndArrowSize.HasValue) { target.LineEndArrowSize = this.LineEndArrowSize; }
             if (this.LineCap.HasValue) { target.LineCap = this.LineCap; }
             if (this.LineColor.HasValue) { target.LineColor = this.LineColor; }
-            if (this.LineColorTrans.HasValue) { target.LineColorTrans = this.LineColorTrans; }
+            if (this.LineColorTransparency.HasValue) { target.LineColorTransparency = this.LineColorTransparency; }
             if (this.LinePattern.HasValue) { target.LinePattern = this.LinePattern; }
             if (this.LineWeight.HasValue) { target.LineWeight = this.LineWeight; }
             if (this.Rounding.HasValue) { target.Rounding = this.Rounding; }
@@ -284,15 +284,15 @@ namespace VisioAutomation.Models.Dom
             if (this.CharStyle.HasValue) { target.CharStyle = this.CharStyle; }
             if (this.CharTransparency.HasValue) { target.CharTransparency = this.CharTransparency; }
             if (this.CharUseVertical.HasValue) { target.CharUseVertical = this.CharUseVertical; }
-            if (this.BottomMargin.HasValue) { target.BottomMargin = this.BottomMargin; }
-            if (this.DefaultTabstop.HasValue) { target.DefaultTabstop = this.DefaultTabstop; }
-            if (this.LeftMargin.HasValue) { target.LeftMargin = this.LeftMargin; }
-            if (this.RightMargin.HasValue) { target.RightMargin = this.RightMargin; }
-            if (this.TextBkgnd.HasValue) { target.TextBkgnd = this.TextBkgnd; }
-            if (this.TextBkgndTrans.HasValue) { target.TextBkgndTrans = this.TextBkgndTrans; }
-            if (this.TextDirection.HasValue) { target.TextDirection = this.TextDirection; }
-            if (this.TopMargin.HasValue) { target.TopMargin = this.TopMargin; }
-            if (this.VerticalAlign.HasValue) { target.VerticalAlign = this.VerticalAlign; }
+            if (this.TextBlockBottomMargin.HasValue) { target.TextBlockBottomMargin = this.TextBlockBottomMargin; }
+            if (this.TextBlockDefaultTabStop.HasValue) { target.TextBlockDefaultTabStop = this.TextBlockDefaultTabStop; }
+            if (this.TextBlockLeftMargin.HasValue) { target.TextBlockLeftMargin = this.TextBlockLeftMargin; }
+            if (this.TextBlockRightMargin.HasValue) { target.TextBlockRightMargin = this.TextBlockRightMargin; }
+            if (this.TextBlockBackground.HasValue) { target.TextBlockBackground = this.TextBlockBackground; }
+            if (this.TextBlockBackgroundTransparency.HasValue) { target.TextBlockBackgroundTransparency = this.TextBlockBackgroundTransparency; }
+            if (this.TextBlockDirection.HasValue) { target.TextBlockDirection = this.TextBlockDirection; }
+            if (this.TextBlockTopMargin.HasValue) { target.TextBlockTopMargin = this.TextBlockTopMargin; }
+            if (this.TextBlockVerticalAlign.HasValue) { target.TextBlockVerticalAlign = this.TextBlockVerticalAlign; }
             if (this.ParaBullet.HasValue) { target.ParaBullet = this.ParaBullet; }
             if (this.ParaBulletFont.HasValue) { target.ParaBulletFont = this.ParaBulletFont; }
             if (this.ParaBulletFontSize.HasValue) { target.ParaBulletFontSize = this.ParaBulletFontSize; }
@@ -307,29 +307,29 @@ namespace VisioAutomation.Models.Dom
             if (this.ParaSpacingBefore.HasValue) { target.ParaSpacingBefore = this.ParaSpacingBefore; }
             if (this.ParaSpacingLine.HasValue) { target.ParaSpacingLine = this.ParaSpacingLine; }
             if (this.ParaTextPosAfterBullet.HasValue) { target.ParaTextPosAfterBullet = this.ParaTextPosAfterBullet; }
-            if (this.TxtAngle.HasValue) { target.TxtAngle = this.TxtAngle; }
-            if (this.TxtHeight.HasValue) { target.TxtHeight = this.TxtHeight; }
-            if (this.TxtLocPinX.HasValue) { target.TxtLocPinX = this.TxtLocPinX; }
-            if (this.TxtLocPinY.HasValue) { target.TxtLocPinY = this.TxtLocPinY; }
-            if (this.TxtPinX.HasValue) { target.TxtPinX = this.TxtPinX; }
-            if (this.TxtPinY.HasValue) { target.TxtPinY = this.TxtPinY; }
-            if (this.TxtWidth.HasValue) { target.TxtWidth = this.TxtWidth; }
-            if (this.ConFixedCode.HasValue) { target.ConFixedCode = this.ConFixedCode; }
-            if (this.ConLineJumpCode.HasValue) { target.ConLineJumpCode = this.ConLineJumpCode; }
-            if (this.ConLineJumpDirX.HasValue) { target.ConLineJumpDirX = this.ConLineJumpDirX; }
-            if (this.ConLineJumpDirY.HasValue) { target.ConLineJumpDirY = this.ConLineJumpDirY; }
-            if (this.ConLineJumpStyle.HasValue) { target.ConLineJumpStyle = this.ConLineJumpStyle; }
-            if (this.ConLineRouteExt.HasValue) { target.ConLineRouteExt = this.ConLineRouteExt; }
-            if (this.ShapeFixedCode.HasValue) { target.ShapeFixedCode = this.ShapeFixedCode; }
-            if (this.ShapePermeablePlace.HasValue) { target.ShapePermeablePlace = this.ShapePermeablePlace; }
-            if (this.ShapePermeableX.HasValue) { target.ShapePermeableX = this.ShapePermeableX; }
-            if (this.ShapePermeableY.HasValue) { target.ShapePermeableY = this.ShapePermeableY; }
-            if (this.ShapePlaceFlip.HasValue) { target.ShapePlaceFlip = this.ShapePlaceFlip; }
-            if (this.ShapePlaceStyle.HasValue) { target.ShapePlaceStyle = this.ShapePlaceStyle; }
-            if (this.ShapePlowCode.HasValue) { target.ShapePlowCode = this.ShapePlowCode; }
-            if (this.ShapeRouteStyle.HasValue) { target.ShapeRouteStyle = this.ShapeRouteStyle; }
-            if (this.ShapeSplit.HasValue) { target.ShapeSplit = this.ShapeSplit; }
-            if (this.ShapeSplittable.HasValue) { target.ShapeSplittable = this.ShapeSplittable; }
+            if (this.TextXFormAngle.HasValue) { target.TextXFormAngle = this.TextXFormAngle; }
+            if (this.TextXFormHeight.HasValue) { target.TextXFormHeight = this.TextXFormHeight; }
+            if (this.TextXFormLocPinX.HasValue) { target.TextXFormLocPinX = this.TextXFormLocPinX; }
+            if (this.TextXFormLocPinY.HasValue) { target.TextXFormLocPinY = this.TextXFormLocPinY; }
+            if (this.TextXFormPinX.HasValue) { target.TextXFormPinX = this.TextXFormPinX; }
+            if (this.TextXFormPinY.HasValue) { target.TextXFormPinY = this.TextXFormPinY; }
+            if (this.TextXFormWidth.HasValue) { target.TextXFormWidth = this.TextXFormWidth; }
+            if (this.ShapeLayoutConFixedCode.HasValue) { target.ShapeLayoutConFixedCode = this.ShapeLayoutConFixedCode; }
+            if (this.ShapeLayoutConLineJumpCode.HasValue) { target.ShapeLayoutConLineJumpCode = this.ShapeLayoutConLineJumpCode; }
+            if (this.ShapeLayoutConLineJumpDirX.HasValue) { target.ShapeLayoutConLineJumpDirX = this.ShapeLayoutConLineJumpDirX; }
+            if (this.ShapeLayoutConLineJumpDirY.HasValue) { target.ShapeLayoutConLineJumpDirY = this.ShapeLayoutConLineJumpDirY; }
+            if (this.ShapeLayoutConLineJumpStyle.HasValue) { target.ShapeLayoutConLineJumpStyle = this.ShapeLayoutConLineJumpStyle; }
+            if (this.ShapeLayoutConLineRouteExt.HasValue) { target.ShapeLayoutConLineRouteExt = this.ShapeLayoutConLineRouteExt; }
+            if (this.ShapeLayoutFixedCode.HasValue) { target.ShapeLayoutFixedCode = this.ShapeLayoutFixedCode; }
+            if (this.ShapeLayoutPermeablePlace.HasValue) { target.ShapeLayoutPermeablePlace = this.ShapeLayoutPermeablePlace; }
+            if (this.ShapeLayoutPermeableX.HasValue) { target.ShapeLayoutPermeableX = this.ShapeLayoutPermeableX; }
+            if (this.ShapeLayoutPermeableY.HasValue) { target.ShapeLayoutPermeableY = this.ShapeLayoutPermeableY; }
+            if (this.ShapeLayoutPlaceFlip.HasValue) { target.ShapeLayoutPlaceFlip = this.ShapeLayoutPlaceFlip; }
+            if (this.ShapeLayoutPlaceStyle.HasValue) { target.ShapeLayoutPlaceStyle = this.ShapeLayoutPlaceStyle; }
+            if (this.ShapeLayoutPlowCode.HasValue) { target.ShapeLayoutPlowCode = this.ShapeLayoutPlowCode; }
+            if (this.ShapeLayoutRouteStyle.HasValue) { target.ShapeLayoutRouteStyle = this.ShapeLayoutRouteStyle; }
+            if (this.ShapeLayoutSplit.HasValue) { target.ShapeLayoutSplit = this.ShapeLayoutSplit; }
+            if (this.ShapeLayoutSplittable.HasValue) { target.ShapeLayoutSplittable = this.ShapeLayoutSplittable; }
         }
     }
 }

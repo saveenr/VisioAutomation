@@ -5,7 +5,7 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes.Connectors;
-using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Writers;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -116,7 +116,7 @@ namespace VisioAutomation.Models.Dom
         {
             this.UpdateCellsWithDropSizes(context);
 
-            var writer = new ShapeSheetWriter();
+            var writer = new SidSrcWriter();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {
@@ -265,14 +265,14 @@ namespace VisioAutomation.Models.Dom
             {
                 if (master.DropSize.HasValue)
                 {
-                    if (!master.Cells.Width.HasValue)
+                    if (!master.Cells.XFormWidth.HasValue)
                     {
-                        master.Cells.Width = master.DropSize.Value.Width;
+                        master.Cells.XFormWidth = master.DropSize.Value.Width;
                     }
 
-                    if (!master.Cells.Height.HasValue)
+                    if (!master.Cells.XFormHeight.HasValue)
                     {
-                        master.Cells.Height = master.DropSize.Value.Height;
+                        master.Cells.XFormHeight = master.DropSize.Value.Height;
                     }
                 }
             }

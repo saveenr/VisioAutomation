@@ -43,7 +43,7 @@ namespace VisioPowerShell.Commands
                     newpagecells.PageHeight = this.Height;
                 }
 
-                var writer = new VisioAutomation.ShapeSheet.ShapeSheetWriter();
+                var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                 newpagecells.SetFormulas(writer);
                 writer.BlastGuards = true;
 

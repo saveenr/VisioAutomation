@@ -286,21 +286,21 @@ namespace VisioAutomation.ShapeSheet.Query
             return count;
         }
 
-        private short[] _build_src_stream()
+        private Streams.StreamArray _build_src_stream()
         {
             int dummy_shapeid = -1;
             int numshapes = 1;
             int shapeindex = 0;
             int numcells = this._get_total_cell_count(numshapes);
             var stream = new VisioAutomation.ShapeSheet.Streams.FixedSrcStreamBuilder(numcells);
-            var cellinfos = this.enum_cellinfo(dummy_shapeid, shapeindex);
+            var cellinfos = this._enum_total_cellinfo(dummy_shapeid, shapeindex);
             var srcs = cellinfos.Select(i => i.SidSrc.Src);
             stream.AddRange(srcs);
 
             return stream.ToStream();
         }
 
-        private short[] _build_sidsrc_stream(IList<int> shapeids)
+        private VisioAutomation.ShapeSheet.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
@@ -312,7 +312,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 // For each shape add the cells to query
                 var shapeid = shapeids[shapeindex];
 
-                var cellinfos = this.enum_cellinfo(shapeid, shapeindex);
+                var cellinfos = this._enum_total_cellinfo(shapeid, shapeindex);
                 var sidsrcs = cellinfos.Select(i => i.SidSrc);
                 stream.AddRange(sidsrcs);
             }
@@ -320,7 +320,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream.ToStream();
         }
 
-        private IEnumerable<Internal.QueryCellInfo> enum_cellinfo(int shapeid, int shapeindex)
+        private IEnumerable<Internal.QueryCellInfo> _enum_total_cellinfo(int shapeid, int shapeindex)
         {
             // enum Cells
             foreach (var col in this.Cells)

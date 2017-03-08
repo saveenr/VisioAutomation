@@ -1,5 +1,4 @@
 using System.Linq;
-using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -101,8 +100,8 @@ namespace VisioAutomation.Models.Layouts.Tree
                     master_node.Cells = tree_node.Cells.ShallowCopy();
                 }
 
-                master_node.Cells.Width = treenodes[i].Size.Width;
-                master_node.Cells.Height = treenodes[i].Size.Height;
+                master_node.Cells.XFormWidth = treenodes[i].Size.Width;
+                master_node.Cells.XFormHeight = treenodes[i].Size.Height;
                 master_node.Text = tree_node.Text;
             }
 

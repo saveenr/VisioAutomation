@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes.Geometry
 {
@@ -43,13 +42,13 @@ namespace VisioAutomation.Shapes.Geometry
             short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
-            var writer = new ShapeSheetWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
-            var src_nofill = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.Geometry_NoFill.Cell);
-            var src_noline = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.Geometry_NoLine.Cell);
-            var src_noshow = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.Geometry_NoShow.Cell);
-            var src_nosnap = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.Geometry_NoSnap.Cell);
-            var src_noquickdrag = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.Geometry_NoQuickDrag.Cell);
+            var src_nofill = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoFill.Cell);
+            var src_noline = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoLine.Cell);
+            var src_noshow = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoShow.Cell);
+            var src_nosnap = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoSnap.Cell);
+            var src_noquickdrag = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoQuickDrag.Cell);
 
             writer.SetFormula(src_nofill, this.NoFill);
             writer.SetFormula(src_noline, this.NoLine);

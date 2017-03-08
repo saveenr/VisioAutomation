@@ -21,15 +21,15 @@ namespace VisioAutomation.Shapes.Hyperlinks
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionHyperlink);
 
-            this.Address = sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_Address , nameof(ShapeSheet.SrcConstants.Hyperlink_Address));
-            this.Default = sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_Default, nameof(ShapeSheet.SrcConstants.Hyperlink_Default));
-            this.Description= sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_Description, nameof(ShapeSheet.SrcConstants.Hyperlink_Description));
-            this.ExtraInfo= sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_ExtraInfo, nameof(ShapeSheet.SrcConstants.Hyperlink_ExtraInfo));
-            this.Frame= sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_Frame, nameof(ShapeSheet.SrcConstants.Hyperlink_Frame));
-            this.Invisible= sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_Invisible, nameof(ShapeSheet.SrcConstants.Hyperlink_Invisible));
-            this.NewWindow= sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_NewWindow, nameof(ShapeSheet.SrcConstants.Hyperlink_NewWindow));
-            this.SortKey= sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_SortKey, nameof(ShapeSheet.SrcConstants.Hyperlink_SortKey));
-            this.SubAddress= sec.AddCell(ShapeSheet.SrcConstants.Hyperlink_SubAddress, nameof(ShapeSheet.SrcConstants.Hyperlink_SubAddress));
+            this.Address = sec.AddCell(ShapeSheet.SrcConstants.HyperlinkAddress , nameof(ShapeSheet.SrcConstants.HyperlinkAddress));
+            this.Default = sec.AddCell(ShapeSheet.SrcConstants.HyperlinkDefault, nameof(ShapeSheet.SrcConstants.HyperlinkDefault));
+            this.Description= sec.AddCell(ShapeSheet.SrcConstants.HyperlinkDescription, nameof(ShapeSheet.SrcConstants.HyperlinkDescription));
+            this.ExtraInfo= sec.AddCell(ShapeSheet.SrcConstants.HyperlinkExtraInfo, nameof(ShapeSheet.SrcConstants.HyperlinkExtraInfo));
+            this.Frame= sec.AddCell(ShapeSheet.SrcConstants.HyperlinkFrame, nameof(ShapeSheet.SrcConstants.HyperlinkFrame));
+            this.Invisible= sec.AddCell(ShapeSheet.SrcConstants.HyperlinkInvisible, nameof(ShapeSheet.SrcConstants.HyperlinkInvisible));
+            this.NewWindow= sec.AddCell(ShapeSheet.SrcConstants.HyperlinkNewWindow, nameof(ShapeSheet.SrcConstants.HyperlinkNewWindow));
+            this.SortKey= sec.AddCell(ShapeSheet.SrcConstants.HyperlinkSortKey, nameof(ShapeSheet.SrcConstants.HyperlinkSortKey));
+            this.SubAddress= sec.AddCell(ShapeSheet.SrcConstants.HyperlinkSubAddress, nameof(ShapeSheet.SrcConstants.HyperlinkSubAddress));
         }
 
         public override Shapes.Hyperlinks.HyperlinkCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)

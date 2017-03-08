@@ -98,19 +98,20 @@
     <Compile Include="Pages\PageLayout\PageLayoutFormulas.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
-    <Compile Include="ShapeSheet\Internal\CoordType.cs" />
+    <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
+    <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
+    <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
+    <Compile Include="ShapeSheet\Streams\StreamType.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
     <Compile Include="ShapeSheet\Streams\FixedSidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\FixedSrcStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\FixedStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Internal\WriterCollection_SidSrc.cs" />
-    <Compile Include="ShapeSheet\Internal\WriterCollection_Src.cs" />
+    <Compile Include="ShapeSheet\Streams\FixedStreamBuilderBase.cs" />
+    <Compile Include="ShapeSheet\Writers\WriteCache.cs" />
+    <Compile Include="ShapeSheet\Streams\StreamArray.cs" />
     <Compile Include="Utilities\ArraySegmentReader.cs" />
     <Compile Include="Utilities\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryOutputRowCollection.cs" />
-    <Compile Include="ShapeSheet\Internal\ObjectArrayBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilderBase.cs" />
@@ -194,7 +195,6 @@
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Query\CellColumn.cs" />
-    <Compile Include="ShapeSheet\ShapeSheetWriter.cs" />
     <Compile Include="ShapeSheet\CellValueLiteral.cs" />
     <Compile Include="Drawing\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
@@ -232,6 +232,7 @@
     <Compile Include="Shapes\ShapeHelper.cs" />
     <Compile Include="Text\TextRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\SegmentedArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
