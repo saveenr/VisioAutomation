@@ -140,35 +140,33 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public static CustomPropertyCells FromValue(object value)
         {
-            if (value is string)
+            if (value is string value_str)
             {
-                return new CustomPropertyCells((string) value);
+                return new CustomPropertyCells(value_str);
             }
-            else if (value is int)
+            else if (value is int value_int)
             {
-                return new CustomPropertyCells((int) value);
+                return new CustomPropertyCells(value_int);
             }
-            else if (value is double)
+            else if (value is double value_double)
             {
-                return new CustomPropertyCells((double) value);
+                return new CustomPropertyCells(value_double);
             }
-            else if (value is float)
+            else if (value is float value_float)
             {
-                return new CustomPropertyCells((float) value);
+                return new CustomPropertyCells(value_float);
             }
-            else if (value is bool)
+            else if (value is bool value_bool)
             {
-                return new CustomPropertyCells((bool) value);
+                return new CustomPropertyCells(value_bool);
             }
-            else if (value is System.DateTime)
+            else if (value is System.DateTime value_datetime)
             {
-                return new CustomPropertyCells((System.DateTime) value);
+                return new CustomPropertyCells(value_datetime);
             }
-            else
-            {
-                string msg = string.Format("Unsupported type for value \"{0}\" \"{1}\"", value, value.GetType());
-                throw new System.ArgumentOutOfRangeException(msg);
-            }
+            var value_type = value.GetType();
+            string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
+            throw new System.ArgumentException(msg);
         }
     }
 }

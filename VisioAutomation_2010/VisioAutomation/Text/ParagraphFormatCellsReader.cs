@@ -12,7 +12,7 @@ namespace VisioAutomation.Text
         public SubQueryColumn BulletFontSize { get; set; }
         public SubQueryColumn BulletString { get; set; }
         public SubQueryColumn Flags { get; set; }
-        public SubQueryColumn HorzAlign { get; set; }
+        public SubQueryColumn HorizontalAlign { get; set; }
         public SubQueryColumn IndentFirst { get; set; }
         public SubQueryColumn IndentLeft { get; set; }
         public SubQueryColumn IndentRight { get; set; }
@@ -30,7 +30,7 @@ namespace VisioAutomation.Text
             this.BulletFontSize = sec.AddCell(SrcConstants.ParaBulletFontSize, nameof(SrcConstants.ParaBulletFontSize));
             this.BulletString = sec.AddCell(SrcConstants.ParaBulletString, nameof(SrcConstants.ParaBulletString));
             this.Flags = sec.AddCell(SrcConstants.ParaFlags, nameof(SrcConstants.ParaFlags));
-            this.HorzAlign = sec.AddCell(SrcConstants.ParaHorizontalAlign, nameof(SrcConstants.ParaHorizontalAlign));
+            this.HorizontalAlign = sec.AddCell(SrcConstants.ParaHorizontalAlign, nameof(SrcConstants.ParaHorizontalAlign));
             this.IndentFirst = sec.AddCell(SrcConstants.ParaIndentFirst, nameof(SrcConstants.ParaIndentFirst));
             this.IndentLeft = sec.AddCell(SrcConstants.ParaIndentLeft, nameof(SrcConstants.ParaIndentLeft));
             this.IndentRight = sec.AddCell(SrcConstants.ParaIndentRight, nameof(SrcConstants.ParaIndentRight));
@@ -50,7 +50,7 @@ namespace VisioAutomation.Text
             cells.SpacingAfter = row[this.SpaceAfter];
             cells.SpacingBefore = row[this.SpaceBefore];
             cells.SpacingLine = row[this.SpaceLine];
-            cells.HorizontalAlign = row[this.HorzAlign];
+            cells.HorizontalAlign = row[this.HorizontalAlign];
             cells.Bullet = row[this.Bullet];
             cells.BulletFont = row[this.BulletFont];
             cells.BulletFontSize = row[this.BulletFontSize];

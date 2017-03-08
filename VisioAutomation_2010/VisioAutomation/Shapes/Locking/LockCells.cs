@@ -24,7 +24,7 @@ namespace VisioAutomation.Shapes.Locking
         public ShapeSheet.CellData LockTextEdit { get; set; }
         public ShapeSheet.CellData LockThemeColors { get; set; }
         public ShapeSheet.CellData LockThemeEffects { get; set; }
-        public ShapeSheet.CellData LockVtxEdit { get; set; }
+        public ShapeSheet.CellData LockVertexEdit { get; set; }
         public ShapeSheet.CellData LockWidth { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
@@ -49,7 +49,7 @@ namespace VisioAutomation.Shapes.Locking
                 yield return this.newpair(ShapeSheet.SrcConstants.LockTextEdit, this.LockTextEdit.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockThemeColors, this.LockThemeColors.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockThemeEffects, this.LockThemeEffects.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockVertexEdit, this.LockVtxEdit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockVertexEdit, this.LockVertexEdit.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.LockWidth, this.LockWidth.Formula);
             }
         }

@@ -72,7 +72,7 @@ namespace VisioAutomation.Shapes.Locking
             cells.LockTextEdit = row[this.LockTextEdit];
             cells.LockThemeColors = row[this.LockThemeColors];
             cells.LockThemeEffects = row[this.LockThemeEffects];
-            cells.LockVtxEdit = row[this.LockVertexEdit];
+            cells.LockVertexEdit = row[this.LockVertexEdit];
             cells.LockWidth = row[this.LockWidth];
             return cells;
         }
