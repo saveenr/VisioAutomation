@@ -7,7 +7,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         public VisioLayoutOptions()
         {
             var flowchart = new Pages.PageLayout.FlowchartLayout();
-            flowchart.Direction = Pages.PageLayout.Direction.TopToBottom;
+            flowchart.LayoutDirection = Pages.PageLayout.LayoutDirection.TopToBottom;
             this.Layout = flowchart;
         }        
     }

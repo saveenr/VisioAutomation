@@ -1,6 +1,6 @@
 namespace VisioAutomation.Pages.PageLayout
 {
-    public enum Direction
+    public enum LayoutDirection
     {
         TopToBottom,
         BottomToTop,

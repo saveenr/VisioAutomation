@@ -160,7 +160,7 @@
     <Compile Include="Pages\PageLayout\CompactTreeLayout.cs" />
     <Compile Include="Pages\PageLayout\ConnectorAppearance.cs" />
     <Compile Include="Pages\PageLayout\ConnectorStyle.cs" />
-    <Compile Include="Pages\PageLayout\Direction.cs" />
+    <Compile Include="Pages\PageLayout\LayoutDirection.cs" />
     <Compile Include="Pages\PageLayout\FlowchartLayout.cs" />
     <Compile Include="Pages\PageLayout\HierarchyLayout.cs" />
     <Compile Include="Pages\PageLayout\HorizontalAlignment.cs" />
