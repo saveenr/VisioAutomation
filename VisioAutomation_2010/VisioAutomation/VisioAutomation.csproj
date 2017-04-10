@@ -168,7 +168,6 @@
     <Compile Include="Pages\PageLayout\LayoutStyle.cs" />
     <Compile Include="Pages\PageLayout\RadialLayout.cs" />
     <Compile Include="Pages\PageLayout\VerticalAlignment.cs" />
-    <Compile Include="Pages\PrintPageOrientation.cs" />
     <Compile Include="Shapes\Geometry\GeometrySection.cs" />
     <Compile Include="Shapes\Geometry\GeometryRow.cs" />
     <Compile Include="Shapes\Geometry\GeometryHelper.cs" />

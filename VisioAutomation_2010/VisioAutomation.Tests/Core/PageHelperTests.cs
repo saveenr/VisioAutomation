@@ -42,15 +42,15 @@ namespace VisioAutomation_Tests.Core.Page
             var client = this.GetScriptingClient();
 
             var orientation_1 = client.Page.GetOrientation();
-            Assert.AreEqual(VA.Pages.PrintPageOrientation.Portrait, orientation_1);
+            Assert.AreEqual(VisioAutomation.Scripting.Layout.PrintPageOrientation.Portrait, orientation_1);
 
             var size1 = client.Page.GetSize();
             Assert.AreEqual(size, size1);
 
-            client.Page.SetOrientation(VA.Pages.PrintPageOrientation.Landscape);
+            client.Page.SetOrientation(VisioAutomation.Scripting.Layout.PrintPageOrientation.Landscape);
 
             var orientation_2 = client.Page.GetOrientation();
-            Assert.AreEqual(VA.Pages.PrintPageOrientation.Landscape, orientation_2);
+            Assert.AreEqual(VisioAutomation.Scripting.Layout.PrintPageOrientation.Landscape, orientation_2);
 
             var actual_final_size = client.Page.GetSize();
             var expected_final_size = new VA.Drawing.Size(3, 4);
