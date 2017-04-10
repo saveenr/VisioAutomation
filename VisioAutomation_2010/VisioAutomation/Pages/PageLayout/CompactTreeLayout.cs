@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Pages.PageLayout
 {
-    public class CompactTreeLayout : Layout
+    public class CompactTreeLayout : LayoutBase
     {
         public CompactTreeDirection Direction { get; set; }
 

@@ -12,7 +12,7 @@ namespace VisioAutomation.Models.Dom
         public Drawing.Size? ResizeToFitMargin;
         public Pages.PageCells PageCells;
         public string Name;
-        public Pages.PageLayout.Layout Layout;
+        public Pages.PageLayout.LayoutBase Layout;
         public IVisio.Page VisioPage;
         public Application.PerfSettings PerfSettings { get; }
 

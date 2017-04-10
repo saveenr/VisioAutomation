@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Pages.PageLayout
 {
-    public class HierarchyLayout : Layout
+    public class HierarchyLayout : LayoutBase
     {
         public LayoutDirection LayoutDirection { get; set; }
         public HorizontalAlignment HorizontalAlignment { get; set; }

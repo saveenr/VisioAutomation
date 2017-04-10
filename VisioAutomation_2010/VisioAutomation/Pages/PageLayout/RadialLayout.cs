@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Pages.PageLayout
 {
-    public class RadialLayout : Layout
+    public class RadialLayout : LayoutBase
     {
         public RadialLayout()
         {

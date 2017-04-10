@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Pages.PageLayout
 {
-    public class FlowchartLayout : Layout
+    public class FlowchartLayout : LayoutBase
     {
         public LayoutDirection LayoutDirection { get; set; }
 

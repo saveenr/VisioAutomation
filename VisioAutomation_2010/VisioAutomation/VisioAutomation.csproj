@@ -164,7 +164,7 @@
     <Compile Include="Pages\PageLayout\FlowchartLayout.cs" />
     <Compile Include="Pages\PageLayout\HierarchyLayout.cs" />
     <Compile Include="Pages\PageLayout\HorizontalAlignment.cs" />
-    <Compile Include="Pages\PageLayout\Layout.cs" />
+    <Compile Include="Pages\PageLayout\LayoutBase.cs" />
     <Compile Include="Pages\PageLayout\LayoutStyle.cs" />
     <Compile Include="Pages\PageLayout\RadialLayout.cs" />
     <Compile Include="Pages\PageLayout\VerticalAlignment.cs" />

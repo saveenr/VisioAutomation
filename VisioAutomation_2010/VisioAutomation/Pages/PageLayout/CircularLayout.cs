@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Pages.PageLayout
 {
-    public class CircularLayout : Layout
+    public class CircularLayout : LayoutBase
     {
         public CircularLayout()
         {

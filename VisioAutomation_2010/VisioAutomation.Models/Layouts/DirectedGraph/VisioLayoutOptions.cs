@@ -2,7 +2,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class VisioLayoutOptions
     {
-        public Pages.PageLayout.Layout Layout;
+        public Pages.PageLayout.LayoutBase Layout;
 
         public VisioLayoutOptions()
         {
