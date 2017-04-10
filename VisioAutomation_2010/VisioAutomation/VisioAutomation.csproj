@@ -130,7 +130,7 @@
     <Compile Include="Shapes\Layout\ShapeLayoutCellsReader.cs" />
     <Compile Include="Text\TextBlockCellsReader.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellsReader.cs" />
-    <Compile Include="Shapes\XFormCellsReader.cs" />
+    <Compile Include="Shapes\ShapeXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBase.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryColumn.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryColumnCollection.cs" />
@@ -190,7 +190,7 @@
     <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Text\CharacterCells.cs" />
-    <Compile Include="Shapes\XFormCells.cs" />
+    <Compile Include="Shapes\ShapeXFormCells.cs" />
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Query\CellColumn.cs" />

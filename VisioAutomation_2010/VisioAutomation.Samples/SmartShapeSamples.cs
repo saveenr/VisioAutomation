@@ -29,14 +29,14 @@ namespace VisioAutomationSamples
 
             // Set the progress shape update itself based on its position
             string bkname = background.NameID;
-            var xform = new VA.Shapes.XFormCells();
-            xform.PinX = string.Format("GUARD({0}!PinX-{0}!LocPinX+LocPinX)", bkname);
-            xform.PinY = string.Format("GUARD({0}!PinY)", bkname);
-            xform.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
-            xform.Height = string.Format("GUARD({0}!Height)", bkname); 
+            var xfrm = new VA.Shapes.ShapeXFormCells();
+            xfrm.PinX = string.Format("GUARD({0}!PinX-{0}!LocPinX+LocPinX)", bkname);
+            xfrm.PinY = string.Format("GUARD({0}!PinY)", bkname);
+            xfrm.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
+            xfrm.Height = string.Format("GUARD({0}!Height)", bkname); 
 
             var writer = new SidSrcWriter();
-            xform.SetFormulas(progress.ID16, writer);
+            xfrm.SetFormulas(progress.ID16, writer);
             background_fmt.SetFormulas(progress.ID16, writer);
             progress_fmt.SetFormulas(progress.ID16, writer);
 

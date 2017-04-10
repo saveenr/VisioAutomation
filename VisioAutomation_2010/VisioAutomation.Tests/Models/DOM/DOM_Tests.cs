@@ -406,7 +406,7 @@ namespace VisioAutomation_Tests.Models.Dom
                 s2.VisioShapeID, 
                 s3.VisioShapeID };
 
-            var xfrms = VA.Shapes.XFormCells.GetCells(page, shapeids);
+            var xfrms = VA.Shapes.ShapeXFormCells.GetCells(page, shapeids);
 
             Assert.AreEqual(xfrms[1].PinX, xfrms[0].PinX);
             Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);
