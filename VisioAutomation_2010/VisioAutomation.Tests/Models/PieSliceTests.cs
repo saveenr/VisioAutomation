@@ -86,7 +86,7 @@ namespace VisioAutomation_Tests.Models
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var xfrms = VisioAutomation.Shapes.XFormCells.GetCells(page, shapeids);
+            var xfrms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(page, shapeids);
 
             Assert.AreEqual("4.25 in", xfrms[0].PinX.Formula);
             Assert.AreEqual("5.5 in", xfrms[0].PinY.Formula);

@@ -42,15 +42,15 @@ namespace VisioAutomation_Tests.Core.Page
             var client = this.GetScriptingClient();
 
             var orientation_1 = client.Page.GetOrientation();
-            Assert.AreEqual(VA.Pages.PrintPageOrientation.Portrait, orientation_1);
+            Assert.AreEqual(VisioAutomation.Scripting.Layout.PrintPageOrientation.Portrait, orientation_1);
 
             var size1 = client.Page.GetSize();
             Assert.AreEqual(size, size1);
 
-            client.Page.SetOrientation(VA.Pages.PrintPageOrientation.Landscape);
+            client.Page.SetOrientation(VisioAutomation.Scripting.Layout.PrintPageOrientation.Landscape);
 
             var orientation_2 = client.Page.GetOrientation();
-            Assert.AreEqual(VA.Pages.PrintPageOrientation.Landscape, orientation_2);
+            Assert.AreEqual(VisioAutomation.Scripting.Layout.PrintPageOrientation.Landscape, orientation_2);
 
             var actual_final_size = client.Page.GetSize();
             var expected_final_size = new VA.Drawing.Size(3, 4);
@@ -157,7 +157,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5 + shape_size.Height);
             page.ResizeToFitContents(padding_size);
-            var xform = VA.Shapes.XFormCells.GetCells(shape);
+            var xform = VA.Shapes.ShapeXFormCells.GetCells(shape);
             var pinpos = xform.GetPinPosResult();
             Assert.AreEqual(expected_pinx, pinpos.X, 0.1);
             Assert.AreEqual(expected_piny, pinpos.Y, 0.1);

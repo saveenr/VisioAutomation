@@ -1,8 +1,8 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Pages.PageLayout
+namespace VisioAutomation.PageLayouts
 {
-    public class CompactTreeLayout : Layout
+    public class CompactTreeLayout : LayoutBase
     {
         public CompactTreeDirection Direction { get; set; }
 

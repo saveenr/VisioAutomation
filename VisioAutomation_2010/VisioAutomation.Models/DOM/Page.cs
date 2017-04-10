@@ -1,4 +1,5 @@
 ﻿using VisioAutomation.Extensions;
+using VisioAutomation.PageLayouts;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -12,7 +13,7 @@ namespace VisioAutomation.Models.Dom
         public Drawing.Size? ResizeToFitMargin;
         public Pages.PageCells PageCells;
         public string Name;
-        public Pages.PageLayout.Layout Layout;
+        public LayoutBase Layout;
         public IVisio.Page VisioPage;
         public Application.PerfSettings PerfSettings { get; }
 

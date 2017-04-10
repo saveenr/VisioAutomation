@@ -1,8 +1,8 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Pages.PageLayout
+namespace VisioAutomation.PageLayouts
 {
-    public class RadialLayout : Layout
+    public class RadialLayout : LayoutBase
     {
         public RadialLayout()
         {

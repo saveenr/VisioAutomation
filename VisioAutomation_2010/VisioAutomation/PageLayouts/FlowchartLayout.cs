@@ -1,39 +1,39 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Pages.PageLayout
+namespace VisioAutomation.PageLayouts
 {
-    public class FlowchartLayout : Layout
+    public class FlowchartLayout : LayoutBase
     {
-        public Direction Direction { get; set; }
+        public LayoutDirection LayoutDirection { get; set; }
 
         public FlowchartLayout()
         {
             this.LayoutStyle = LayoutStyle.Flowchart;
             this.ConnectorStyle = ConnectorStyle.Flowchart;
-            this.Direction = Direction.TopToBottom;
+            this.LayoutDirection = LayoutDirection.TopToBottom;
         }
 
         protected override void SetPageCells(PageLayoutFormulas pagecells)
         {
             base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) FlowchartLayout.GetPlaceStyle(this.Direction);
+            pagecells.PlaceStyle = (int) FlowchartLayout.GetPlaceStyle(this.LayoutDirection);
         }
 
-        private static IVisio.VisCellVals GetPlaceStyle(Direction dir)
+        private static IVisio.VisCellVals GetPlaceStyle(LayoutDirection dir)
         {
-            if (dir == Direction.TopToBottom)
+            if (dir == LayoutDirection.TopToBottom)
             {
                 return IVisio.VisCellVals.visPLOPlaceTopToBottom;
             }
-            else if (dir == Direction.LeftToRight)
+            else if (dir == LayoutDirection.LeftToRight)
             {
                 return IVisio.VisCellVals.visPLOPlaceLeftToRight;
             }
-            else if (dir == Direction.BottomToTop)
+            else if (dir == LayoutDirection.BottomToTop)
             {
                 return IVisio.VisCellVals.visPLOPlaceBottomToTop;
             }
-            else if (dir == Direction.RightToLeft)
+            else if (dir == LayoutDirection.RightToLeft)
             {
                 return IVisio.VisCellVals.visPLOPlaceRightToLeft;
             }
@@ -50,7 +50,7 @@ namespace VisioAutomation.Pages.PageLayout
             {
                 return rs;
             }
-            return this.ConnectorsStyleAndDirectionToRouteStyle(this.ConnectorStyle, this.Direction);
+            return this.ConnectorsStyleAndDirectionToRouteStyle(this.ConnectorStyle, this.LayoutDirection);
         }
     }
 }

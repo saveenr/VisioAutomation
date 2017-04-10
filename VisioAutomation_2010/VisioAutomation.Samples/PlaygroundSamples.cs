@@ -62,7 +62,7 @@ namespace VisioAutomationSamples
 
             var writer = new SidSrcWriter();
             var format = new VA.Shapes.ShapeFormatCells();
-            var xfrm = new VA.Shapes.XFormCells();
+            var xfrm = new VA.Shapes.ShapeXFormCells();
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
             {

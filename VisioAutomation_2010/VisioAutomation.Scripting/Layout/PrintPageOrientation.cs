@@ -1,6 +1,6 @@
 ﻿using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Pages
+namespace VisioAutomation.Scripting.Layout
 {
     public enum PrintPageOrientation
     {

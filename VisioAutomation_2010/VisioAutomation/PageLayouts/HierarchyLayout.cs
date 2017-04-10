@@ -1,10 +1,10 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Pages.PageLayout
+namespace VisioAutomation.PageLayouts
 {
-    public class HierarchyLayout : Layout
+    public class HierarchyLayout : LayoutBase
     {
-        public Direction Direction { get; set; }
+        public LayoutDirection LayoutDirection { get; set; }
         public HorizontalAlignment HorizontalAlignment { get; set; }
         public VerticalAlignment VerticalAlignment { get; set; }
 
@@ -19,12 +19,12 @@ namespace VisioAutomation.Pages.PageLayout
         protected override void SetPageCells(PageLayoutFormulas pagecells)
         {
             base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) HierarchyLayout.GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);
+            pagecells.PlaceStyle = (int) HierarchyLayout.GetPlaceStyle(this.LayoutDirection, this.HorizontalAlignment, this.VerticalAlignment);
         }
 
-        private static IVisio.VisCellVals GetPlaceStyle(Direction dir, HorizontalAlignment halign, VerticalAlignment valign)
+        private static IVisio.VisCellVals GetPlaceStyle(LayoutDirection dir, HorizontalAlignment halign, VerticalAlignment valign)
         {
-            if (dir == Direction.BottomToTop)
+            if (dir == LayoutDirection.BottomToTop)
             {
                 if (halign == HorizontalAlignment.Left)
                 {
@@ -39,7 +39,7 @@ namespace VisioAutomation.Pages.PageLayout
                     return IVisio.VisCellVals.visPLOPlaceHierarchyBottomToTopRight;
                 }
             }
-            else if (dir == Direction.TopToBottom)
+            else if (dir == LayoutDirection.TopToBottom)
             {
                 if (halign == HorizontalAlignment.Left)
                 {
@@ -54,7 +54,7 @@ namespace VisioAutomation.Pages.PageLayout
                     return IVisio.VisCellVals.visPLOPlaceHierarchyTopToBottomRight;
                 }
             }
-            else if (dir == Direction.LeftToRight)
+            else if (dir == LayoutDirection.LeftToRight)
             {
                 if (valign == VerticalAlignment.Top)
                 {
@@ -69,7 +69,7 @@ namespace VisioAutomation.Pages.PageLayout
                     return IVisio.VisCellVals.visPLOPlaceHierarchyLeftToRightBottom;
                 }
             }
-            else if (dir == Direction.RightToLeft)
+            else if (dir == LayoutDirection.RightToLeft)
             {
                 if (valign == VerticalAlignment.Top)
                 {
@@ -98,7 +98,7 @@ namespace VisioAutomation.Pages.PageLayout
             {
                 return rs;
             }
-            return this.ConnectorsStyleAndDirectionToRouteStyle(this.ConnectorStyle, this.Direction);
+            return this.ConnectorsStyleAndDirectionToRouteStyle(this.ConnectorStyle, this.LayoutDirection);
         }
     }
 }

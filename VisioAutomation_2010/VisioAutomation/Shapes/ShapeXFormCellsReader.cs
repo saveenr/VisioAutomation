@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    class XFormCellsReader : SingleRowReader<VisioAutomation.Shapes.XFormCells>
+    class ShapeXFormCellsReader : SingleRowReader<VisioAutomation.Shapes.ShapeXFormCells>
     {
         public CellColumn Width { get; set; }
         public CellColumn Height { get; set; }
@@ -14,7 +14,7 @@ namespace VisioAutomation.Shapes
         public CellColumn LocPinY { get; set; }
         public CellColumn Angle { get; set; }
         
-        public XFormCellsReader() 
+        public ShapeXFormCellsReader() 
         {
             this.PinX = this.query.AddCell(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             this.PinY = this.query.AddCell(SrcConstants.XFormPinY, nameof(SrcConstants.XFormPinY));
@@ -25,9 +25,9 @@ namespace VisioAutomation.Shapes
             this.Angle = this.query.AddCell(SrcConstants.XFormAngle, nameof(SrcConstants.XFormAngle));
         }
 
-        public override XFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override ShapeXFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
-            var cells = new Shapes.XFormCells();
+            var cells = new Shapes.ShapeXFormCells();
             cells.PinX = row[this.PinX];
             cells.PinY = row[this.PinY];
             cells.LocPinX = row[this.LocPinX];

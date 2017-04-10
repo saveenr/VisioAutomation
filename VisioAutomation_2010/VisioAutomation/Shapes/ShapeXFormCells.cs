@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class ShapeXFormCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
         public ShapeSheet.CellData PinX { get; set; }
         public ShapeSheet.CellData PinY { get; set; }
@@ -28,18 +28,18 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<ShapeXFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = XFormCells.lazy_query.Value;
+            var query = ShapeXFormCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static XFormCells GetCells(IVisio.Shape shape)
+        public static ShapeXFormCells GetCells(IVisio.Shape shape)
         {
-            var query = XFormCells.lazy_query.Value;
+            var query = ShapeXFormCells.lazy_query.Value;
             return query.GetCellGroup(shape);
         }
 
-        private static readonly System.Lazy<XFormCellsReader> lazy_query = new System.Lazy<XFormCellsReader>();
+        private static readonly System.Lazy<ShapeXFormCellsReader> lazy_query = new System.Lazy<ShapeXFormCellsReader>();
     }
 }
