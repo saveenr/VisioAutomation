@@ -114,7 +114,7 @@
     <Compile Include="ShapeSheet\Query\SubQueryOutputRowCollection.cs" />
     <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\StreamBuilderBase.cs" />
+    <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnCollectionBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
