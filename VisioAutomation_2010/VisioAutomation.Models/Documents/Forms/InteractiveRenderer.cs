@@ -32,18 +32,18 @@ namespace VisioAutomation.Models.Documents.Forms
             var pagesheet = this._page.PageSheet;
             var writer = new SrcWriter();
 
-            var pagecells = new Pages.PageCells();
-            pagecells.PageWidth = formpage.Size.Width;
-            pagecells.PageHeight = formpage.Size.Height;
+            var page_fmt_cells = new Pages.PageFormatCells();
+            page_fmt_cells.PageWidth = formpage.Size.Width;
+            page_fmt_cells.PageHeight = formpage.Size.Height;
 
-            var printcells = new Pages.PagePrintCells();
-            printcells.PrintLeftMargin = formpage.Margin.Left;
-            printcells.PrintRightMargin = formpage.Margin.Right;
-            printcells.PrintTopMargin = formpage.Margin.Top;
-            printcells.PrintBottomMargin = formpage.Margin.Bottom;
+            var page_print_cells = new Pages.PagePrintCells();
+            page_print_cells.PrintLeftMargin = formpage.Margin.Left;
+            page_print_cells.PrintRightMargin = formpage.Margin.Right;
+            page_print_cells.PrintTopMargin = formpage.Margin.Top;
+            page_print_cells.PrintBottomMargin = formpage.Margin.Bottom;
 
-            pagecells.SetFormulas(writer);
-            pagecells.SetFormulas(writer);
+            page_fmt_cells.SetFormulas(writer);
+            page_fmt_cells.SetFormulas(writer);
 
             writer.Commit(pagesheet);
 

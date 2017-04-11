@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PageCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class PageFormatCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
         public ShapeSheet.CellData PageDrawingScale { get; set; }
         public ShapeSheet.CellData PageDrawingScaleType { get; set; }
@@ -42,12 +42,12 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageCells GetCells(IVisio.Shape shape)
+        public static PageFormatCells GetCells(IVisio.Shape shape)
         {
-            var query = PageCells.lazy_query.Value;
+            var query = PageFormatCells.lazy_query.Value;
             return query.GetCellGroup(shape);
         }
 
-        private static readonly System.Lazy<PageCellsReader> lazy_query = new System.Lazy<PageCellsReader>();
+        private static readonly System.Lazy<PageFormatCellsReader> lazy_query = new System.Lazy<PageFormatCellsReader>();
     }
 }

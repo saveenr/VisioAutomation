@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
-    class PageCellsReader : SingleRowReader<VisioAutomation.Pages.PageCells>
+    class PageFormatCellsReader : SingleRowReader<VisioAutomation.Pages.PageFormatCells>
     {
         public CellColumn PageDrawingScale { get; set; }
         public CellColumn PageDrawingScaleType { get; set; }
@@ -21,7 +21,7 @@ namespace VisioAutomation.Pages
         public CellColumn PageUIVisibility { get; set; }
         public CellColumn PageDrawingResizeType { get; set; }
 
-        public PageCellsReader()
+        public PageFormatCellsReader()
         {
             this.PageDrawingScale = this.query.AddCell(SrcConstants.PageDrawingScale, nameof(SrcConstants.PageDrawingScale));
             this.PageDrawingScaleType = this.query.AddCell(SrcConstants.PageDrawingScaleType, nameof(SrcConstants.PageDrawingScaleType));
@@ -39,9 +39,9 @@ namespace VisioAutomation.Pages
             this.PageDrawingResizeType = this.query.AddCell(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
         }
 
-        public override Pages.PageCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override Pages.PageFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
-            var cells = new Pages.PageCells();
+            var cells = new Pages.PageFormatCells();
             cells.PageDrawingScale = row[this.PageDrawingScale];
             cells.PageDrawingScaleType = row[this.PageDrawingScaleType];
             cells.PageDrawingSizeType = row[this.PageDrawingSizeType];

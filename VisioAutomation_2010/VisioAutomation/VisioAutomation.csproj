@@ -130,7 +130,7 @@
     <Compile Include="Shapes\CustomProperties\CustomPropertyCellsReader.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCellsReader.cs" />
     <Compile Include="Shapes\Locking\LockCellsReader.cs" />
-    <Compile Include="Pages\PageCellsReader.cs" />
+    <Compile Include="Pages\PageFormatCellsReader.cs" />
     <Compile Include="Text\ParagraphFormatCellsReader.cs" />
     <Compile Include="Shapes\ShapeFormatCellsReader.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCellsReader.cs" />
@@ -157,7 +157,7 @@
     <Compile Include="Shapes\Controls\ControlHelper.cs" />
     <Compile Include="Drawing\BoundingBoxBuilder.cs" />
     <Compile Include="Shapes\ShapeFormatCells.cs" />
-    <Compile Include="Pages\PageCells.cs" />
+    <Compile Include="Pages\PageFormatCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyHelper.cs" />
     <Compile Include="Shapes\Locking\LockCells.cs" />
     <Compile Include="Application\PerfSettings.cs" />

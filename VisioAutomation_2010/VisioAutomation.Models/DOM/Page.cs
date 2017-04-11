@@ -12,7 +12,7 @@ namespace VisioAutomation.Models.Dom
         public Drawing.Size? Size;
         public bool ResizeToFit;
         public Drawing.Size? ResizeToFitMargin;
-        public Pages.PageCells PageCells;
+        public Pages.PageFormatCells PageFormatCells;
         public Pages.PageLayoutCells PageLayoutCells;
         public string Name;
         public LayoutBase Layout;
@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.Dom
         public Page()
         {
             this.Shapes = new ShapeList();
-            this.PageCells = new Pages.PageCells();
+            this.PageFormatCells = new Pages.PageFormatCells();
             this.PageLayoutCells = new PageLayoutCells();
 
             this.PerfSettings = new Application.PerfSettings();
@@ -73,12 +73,12 @@ namespace VisioAutomation.Models.Dom
             {
                 if (this.Size.HasValue)
                 {
-                    this.PageCells.PageHeight = this.Size.Value.Height;
-                    this.PageCells.PageWidth = this.Size.Value.Width;
+                    this.PageFormatCells.PageHeight = this.Size.Value.Height;
+                    this.PageFormatCells.PageWidth = this.Size.Value.Width;
                 }
 
                 var writer = new SidSrcWriter();
-                this.PageCells.SetFormulas((short)page_sheet.ID, writer);
+                this.PageFormatCells.SetFormulas((short)page_sheet.ID, writer);
                 this.PageLayoutCells.SetFormulas((short)page_sheet.ID, writer);
                 writer.Commit(page);
                 
