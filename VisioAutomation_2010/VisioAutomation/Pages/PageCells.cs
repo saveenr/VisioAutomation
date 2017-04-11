@@ -19,6 +19,8 @@ namespace VisioAutomation.Pages
         public ShapeSheet.CellData PageShadowScaleFactor { get; set; }
         public ShapeSheet.CellData PageShadowType { get; set; }
         public ShapeSheet.CellData PageUIVisibility { get; set; }
+        public ShapeSheet.CellData PageDrawingResizeType { get; set; } // new in visio 2010
+
         public ShapeSheet.CellData XGridDensity { get; set; }
         public ShapeSheet.CellData XGridOrigin { get; set; }
         public ShapeSheet.CellData XGridSpacing { get; set; }
@@ -29,7 +31,6 @@ namespace VisioAutomation.Pages
         public ShapeSheet.CellData YGridSpacing { get; set; }
         public ShapeSheet.CellData YRulerDensity { get; set; }
         public ShapeSheet.CellData YRulerOrigin { get; set; }
-        public ShapeSheet.CellData PageDrawingResizeType { get; set; } // new in visio 2010
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
