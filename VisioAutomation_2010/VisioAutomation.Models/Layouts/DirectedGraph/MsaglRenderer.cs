@@ -173,14 +173,14 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // Find all the shapes that were created in the DOM and put them in the layout structure
             foreach (var layout_shape in layout_diagram.Shapes)
             {
-                var shape_node = layout_shape.DOMNode;
+                var shape_node = layout_shape.DomNode;
                 layout_shape.VisioShape = shape_node.VisioShape;
             }
 
             var layout_edges = layout_diagram.Connectors;
             foreach (var layout_edge in layout_edges)
             {
-                var vnode = layout_edge.DOMNode;
+                var vnode = layout_edge.DomNode;
                 layout_edge.VisioShape = vnode.VisioShape;
             }
         }
@@ -309,7 +309,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var key = layout_shape.StencilName.ToLower() + "+" + layout_shape.MasterName;
                 var master = master_map[key];
                 var shape_node = new Dom.Shape(master, node_centerpoints[count]);
-                layout_shape.DOMNode = shape_node;
+                layout_shape.DomNode = shape_node;
                 domshapeslist.Add(shape_node);
                 count++;
             }
@@ -321,7 +321,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var layout_shape = ud.Shape;
                 if (layout_shape != null)
                 {
-                    this.format_shape(layout_shape, layout_shape.DOMNode);                    
+                    this.format_shape(layout_shape, layout_shape.DomNode);                    
                 }
             }
         }
@@ -334,7 +334,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var ud = (NodeUserData) mg_edge.UserData;
                 var layoutconnector =  ud.Connector;
                 var vconnector = this.draw_edge_bezier(mg_edge);
-                layoutconnector.DOMNode = vconnector;
+                layoutconnector.DomNode = vconnector;
                 domshapes.Add(vconnector);
             }
 
@@ -345,7 +345,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
                 if (layout_connector.Cells != null)
                 {
-                    var bezier_node = (Dom.BezierCurve)layout_connector.DOMNode;
+                    var bezier_node = (Dom.BezierCurve)layout_connector.DomNode;
                     bezier_node.Cells = layout_connector.Cells.ShallowCopy();
                 }
             }
@@ -381,16 +381,16 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
               if (layout_connector.MasterName != null && layout_connector.StencilName != null)
               {
                   vconnector = new Dom.Connector(
-                  layout_connector.From.DOMNode,
-                  layout_connector.To.DOMNode, layout_connector.MasterName, layout_connector.StencilName);
+                  layout_connector.From.DomNode,
+                  layout_connector.To.DomNode, layout_connector.MasterName, layout_connector.StencilName);
               }
               else
               {
                   vconnector = new Dom.Connector(
-                  layout_connector.From.DOMNode,
-                  layout_connector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
+                  layout_connector.From.DomNode,
+                  layout_connector.To.DomNode, "Dynamic Connector", "connec_u.vss");
               }
-                layout_connector.DOMNode = vconnector;
+                layout_connector.DomNode = vconnector;
                 shape_nodes.Add(vconnector);
             }
 
@@ -399,7 +399,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var ud = (NodeUserData)edge.UserData;
                 var layoutconnector = ud.Connector;
 
-                var vconnector = (Dom.Connector) layoutconnector.DOMNode;
+                var vconnector = (Dom.Connector) layoutconnector.DomNode;
 
                 int con_route_style = (int) this.ConnectorTypeToCellVal_Appearance(layoutconnector.ConnectorType);
                 int shape_route_style = (int) this.ConnectorTypeToCellVal_Style(layoutconnector.ConnectorType);

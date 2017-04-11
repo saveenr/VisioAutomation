@@ -27,16 +27,16 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             foreach (var shape in directedGraphLayout.Shapes)
             {
                 var shape_nodes = page_node.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
-                shape.DOMNode = shape_nodes;
-                shape.DOMNode.Text = new VisioAutomation.Models.Text.TextElement(shape.Label);
+                shape.DomNode = shape_nodes;
+                shape.DomNode.Text = new VisioAutomation.Models.Text.TextElement(shape.Label);
                 x += 1.0;
             }
 
             foreach (var connector in directedGraphLayout.Connectors)
             {
-                var connector_node = page_node.Shapes.Connect("Dynamic Connector", "connec_u.vss", connector.From.DOMNode, connector.To.DOMNode);
-                connector.DOMNode = connector_node;
-                connector.DOMNode.Text = new VisioAutomation.Models.Text.TextElement(connector.Label);
+                var connector_node = page_node.Shapes.Connect("Dynamic Connector", "connec_u.vss", connector.From.DomNode, connector.To.DomNode);
+                connector.DomNode = connector_node;
+                connector.DomNode.Text = new VisioAutomation.Models.Text.TextElement(connector.Label);
             }
 
             page_node.ResizeToFit = true;
