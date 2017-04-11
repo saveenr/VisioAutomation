@@ -38,7 +38,7 @@ namespace VisioAutomation.Scripting.Commands
         public List<int> Add( TargetShapes targets, 
             string fx,
             string fy,
-            ConnectionPointType type)
+            VisioAutomation.Scripting.Shapes.ConnectionPointType type)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.Commands
         public List<int> Add(
             string fx,
             string fy,
-            ConnectionPointType type)
+            VisioAutomation.Scripting.Shapes.ConnectionPointType type)
         {
             this._client.Application.AssertApplicationAvailable();
 

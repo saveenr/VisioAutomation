@@ -14,7 +14,7 @@ namespace VisioAutomation_Tests.Core.Connections
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
             Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
-            var cp_type = ConnectionPointType.Inward;
+            var cp_type = VisioAutomation.Scripting.Shapes.ConnectionPointType.Inward;
 
             var cpd1 = new ConnectionPointCells();
             cpd1.X = "Width*0.25";
@@ -77,7 +77,7 @@ namespace VisioAutomation_Tests.Core.Connections
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
             Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
-            var cp_type = ConnectionPointType.Inward;
+            var cp_type = VisioAutomation.Scripting.Shapes.ConnectionPointType.Inward;
 
             var xpositions = new[] {"Width*0.25", "Width*0.30", "Width*0.75", "Width*0.90"};
             var ypos = "Height*0";

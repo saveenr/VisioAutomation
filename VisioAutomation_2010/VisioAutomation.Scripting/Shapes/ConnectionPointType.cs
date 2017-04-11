@@ -1,6 +1,6 @@
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.ConnectionPoints
+namespace VisioAutomation.Scripting.Shapes
 {
     public enum ConnectionPointType
     {

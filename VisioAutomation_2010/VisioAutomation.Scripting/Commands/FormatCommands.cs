@@ -15,7 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(TargetShapes targets, Shapes.ShapeFormatCells format)
+        public void Set(TargetShapes targets, VisioAutomation.Shapes.ShapeFormatCells format)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -40,7 +40,7 @@ namespace VisioAutomation.Scripting.Commands
             writer.Commit(application.ActivePage);            
         }
 
-        public IList<Shapes.ShapeFormatCells> Get(TargetShapes targets)
+        public IList<VisioAutomation.Shapes.ShapeFormatCells> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -49,12 +49,12 @@ namespace VisioAutomation.Scripting.Commands
             
             if (targets.Shapes.Count < 1)
             {
-                return new List<Shapes.ShapeFormatCells>(0);
+                return new List<VisioAutomation.Shapes.ShapeFormatCells>(0);
             }
 
             var shapeids = targets.Shapes.Select(s => s.ID).ToList();
             var application = this._client.Application.Get();
-            var fmts = Shapes.ShapeFormatCells.GetCells(application.ActivePage, shapeids);
+            var fmts = VisioAutomation.Shapes.ShapeFormatCells.GetCells(application.ActivePage, shapeids);
             return fmts;
         }
 
