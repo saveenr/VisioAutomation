@@ -6,13 +6,17 @@ namespace VisioAutomation.Pages
     public class PageRulerAndGridCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
         public ShapeSheet.CellData XGridDensity { get; set; }
+        public ShapeSheet.CellData YGridDensity { get; set; }
+
         public ShapeSheet.CellData XGridOrigin { get; set; }
+        public ShapeSheet.CellData YGridOrigin { get; set; }
+
         public ShapeSheet.CellData XGridSpacing { get; set; }
+        public ShapeSheet.CellData YGridSpacing { get; set; }
+
         public ShapeSheet.CellData XRulerDensity { get; set; }
         public ShapeSheet.CellData XRulerOrigin { get; set; }
-        public ShapeSheet.CellData YGridDensity { get; set; }
-        public ShapeSheet.CellData YGridOrigin { get; set; }
-        public ShapeSheet.CellData YGridSpacing { get; set; }
+
         public ShapeSheet.CellData YRulerDensity { get; set; }
         public ShapeSheet.CellData YRulerOrigin { get; set; }
 
