@@ -96,6 +96,8 @@
     <Compile Include="Extensions\WindowMethods.cs" />
     <Compile Include="Exceptions\InternalAssertionException.cs" />
     <Compile Include="PageLayouts\PageLayoutFormulas.cs" />
+    <Compile Include="Pages\PageLayoutCells.cs" />
+    <Compile Include="Pages\PageLayoutCellsReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
