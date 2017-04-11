@@ -13,12 +13,12 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>> Get(TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCellCells>> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var prop_dic = new Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>>();
+            var prop_dic = new Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCellCells>>();
 
             targets = targets.ResolveShapes(this._client);
 
@@ -95,7 +95,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Set(TargetShapes targets, VA_UDC.UserDefinedCell userdefinedcell)
+        public void Set(TargetShapes targets, VA_UDC.UserDefinedCellCells userdefinedcell)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

@@ -135,7 +135,7 @@
     <Compile Include="Shapes\ShapeFormatCellsReader.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCellsReader.cs" />
     <Compile Include="Text\TextBlockCellsReader.cs" />
-    <Compile Include="Shapes\UserDefinedCells\UserDefinedCellsReader.cs" />
+    <Compile Include="Shapes\UserDefinedCells\UserDefinedCellCellsReader.cs" />
     <Compile Include="Shapes\ShapeXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBase.cs" />
     <Compile Include="ShapeSheet\Query\SubQueryColumn.cs" />
@@ -214,7 +214,7 @@
     <Compile Include="ShapeSheet\Src.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointCells.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellHelper.cs" />
-    <Compile Include="Shapes\UserDefinedCells\UserDefinedCell.cs" />
+    <Compile Include="Shapes\UserDefinedCells\UserDefinedCellCells.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

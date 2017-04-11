@@ -4,23 +4,23 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.UserDefinedCells
 {
-    public class UserDefinedCell : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class UserDefinedCellCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public string Name { get; set; }
         public ShapeSheet.CellData Value { get; set; }
         public ShapeSheet.CellData Prompt { get; set; }
 
-        public UserDefinedCell()
+        public UserDefinedCellCells()
         {
         }
 
-        public UserDefinedCell(string name)
+        public UserDefinedCellCells(string name)
         {
             UserDefinedCellHelper.CheckValidName(name);
             this.Name = name;
         }
 
-        public UserDefinedCell(string name, string value)
+        public UserDefinedCellCells(string name, string value)
         {
             UserDefinedCellHelper.CheckValidName(name);
 
@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             this.Value = value;
         }
 
-        public UserDefinedCell(string name, string value, string prompt)
+        public UserDefinedCellCells(string name, string value, string prompt)
         {
             UserDefinedCellHelper.CheckValidName(name);
 
@@ -62,18 +62,18 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             return s;
         }
 
-        public static List<List<UserDefinedCell>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = UserDefinedCell.lazy_query.Value;
+            var query = UserDefinedCellCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static List<UserDefinedCell> GetCells(IVisio.Shape shape)
+        public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape)
         {
-            var query = UserDefinedCell.lazy_query.Value;
+            var query = UserDefinedCellCells.lazy_query.Value;
             return query.GetCellGroups(shape);
         }
 
-        private static readonly System.Lazy<UserDefinedCellsReader> lazy_query = new System.Lazy<UserDefinedCellsReader>();
+        private static readonly System.Lazy<UserDefinedCellCellsReader> lazy_query = new System.Lazy<UserDefinedCellCellsReader>();
     }
 }

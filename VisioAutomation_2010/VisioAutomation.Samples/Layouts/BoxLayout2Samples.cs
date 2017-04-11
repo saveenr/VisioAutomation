@@ -87,7 +87,7 @@ namespace VisioAutomationSamples
             int num_types = 10;
             int max_properties = 50;
 
-            var types = typeof(VAUDCELLS.UserDefinedCell).Assembly.GetExportedTypes().Take(num_types).ToList();
+            var types = typeof(VAUDCELLS.UserDefinedCellCells).Assembly.GetExportedTypes().Take(num_types).ToList();
 
             var data = new List<string[]>();
             foreach (var type in types)

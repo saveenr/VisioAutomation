@@ -191,7 +191,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             Assert.AreEqual(0, VAUSERCELL.UserDefinedCellHelper.GetCount(s1));
 
-            var prop = new VAUSERCELL.UserDefinedCell("foo");
+            var prop = new VAUSERCELL.UserDefinedCellCells("foo");
             prop.Prompt = "Some Prompt";
             VAUSERCELL.UserDefinedCellHelper.Set(s1, "foo", null, "Some prompt");
             Assert.AreEqual(1, VAUSERCELL.UserDefinedCellHelper.GetCount(s1));
