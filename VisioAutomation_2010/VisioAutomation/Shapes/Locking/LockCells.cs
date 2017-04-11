@@ -6,51 +6,51 @@ namespace VisioAutomation.Shapes.Locking
 {
     public class LockCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData LockAspect { get; set; }
-        public ShapeSheet.CellData LockBegin { get; set; }
-        public ShapeSheet.CellData LockCalcWH { get; set; }
-        public ShapeSheet.CellData LockCrop { get; set; }
-        public ShapeSheet.CellData LockCustProp { get; set; }
-        public ShapeSheet.CellData LockDelete { get; set; }
-        public ShapeSheet.CellData LockEnd { get; set; }
-        public ShapeSheet.CellData LockFormat { get; set; }
-        public ShapeSheet.CellData LockFromGroupFormat { get; set; }
-        public ShapeSheet.CellData LockGroup { get; set; }
-        public ShapeSheet.CellData LockHeight { get; set; }
-        public ShapeSheet.CellData LockMoveX { get; set; }
-        public ShapeSheet.CellData LockMoveY { get; set; }
-        public ShapeSheet.CellData LockRotate { get; set; }
-        public ShapeSheet.CellData LockSelect { get; set; }
-        public ShapeSheet.CellData LockTextEdit { get; set; }
-        public ShapeSheet.CellData LockThemeColors { get; set; }
-        public ShapeSheet.CellData LockThemeEffects { get; set; }
-        public ShapeSheet.CellData LockVertexEdit { get; set; }
-        public ShapeSheet.CellData LockWidth { get; set; }
+        public ShapeSheet.CellData Aspect { get; set; }
+        public ShapeSheet.CellData Begin { get; set; }
+        public ShapeSheet.CellData CalcWH { get; set; }
+        public ShapeSheet.CellData Crop { get; set; }
+        public ShapeSheet.CellData CustProp { get; set; }
+        public ShapeSheet.CellData Delete { get; set; }
+        public ShapeSheet.CellData End { get; set; }
+        public ShapeSheet.CellData Format { get; set; }
+        public ShapeSheet.CellData FromGroupFormat { get; set; }
+        public ShapeSheet.CellData Group { get; set; }
+        public ShapeSheet.CellData Height { get; set; }
+        public ShapeSheet.CellData MoveX { get; set; }
+        public ShapeSheet.CellData MoveY { get; set; }
+        public ShapeSheet.CellData Rotate { get; set; }
+        public ShapeSheet.CellData Select { get; set; }
+        public ShapeSheet.CellData TextEdit { get; set; }
+        public ShapeSheet.CellData ThemeColors { get; set; }
+        public ShapeSheet.CellData ThemeEffects { get; set; }
+        public ShapeSheet.CellData VertexEdit { get; set; }
+        public ShapeSheet.CellData Width { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.LockAspect, this.LockAspect.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockBegin, this.LockBegin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCalcWH, this.LockCalcWH.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCrop, this.LockCrop.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCustomProp, this.LockCustProp.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockDelete, this.LockDelete.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockEnd, this.LockEnd.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockFormat, this.LockFormat.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockFromGroupFormat, this.LockFromGroupFormat.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockGroup, this.LockGroup.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockHeight, this.LockHeight.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockMoveX, this.LockMoveX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockMoveY, this.LockMoveY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockRotate, this.LockRotate.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockSelect, this.LockSelect.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockTextEdit, this.LockTextEdit.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockThemeColors, this.LockThemeColors.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockThemeEffects, this.LockThemeEffects.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockVertexEdit, this.LockVertexEdit.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockWidth, this.LockWidth.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockAspect, this.Aspect.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockBegin, this.Begin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCalcWH, this.CalcWH.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCrop, this.Crop.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCustomProp, this.CustProp.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockDelete, this.Delete.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockEnd, this.End.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockFormat, this.Format.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockFromGroupFormat, this.FromGroupFormat.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockGroup, this.Group.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockHeight, this.Height.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockMoveX, this.MoveX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockMoveY, this.MoveY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockRotate, this.Rotate.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockSelect, this.Select.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockTextEdit, this.TextEdit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockThemeColors, this.ThemeColors.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockThemeEffects, this.ThemeEffects.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockVertexEdit, this.VertexEdit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockWidth, this.Width.Formula);
             }
         }
 
