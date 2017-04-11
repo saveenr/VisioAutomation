@@ -33,14 +33,14 @@ namespace VisioAutomation.Models.Documents.Forms
             var writer = new SrcWriter();
 
             var page_fmt_cells = new Pages.PageFormatCells();
-            page_fmt_cells.PageWidth = formpage.Size.Width;
-            page_fmt_cells.PageHeight = formpage.Size.Height;
+            page_fmt_cells.Width = formpage.Size.Width;
+            page_fmt_cells.Height = formpage.Size.Height;
 
             var page_print_cells = new Pages.PagePrintCells();
-            page_print_cells.PrintLeftMargin = formpage.Margin.Left;
-            page_print_cells.PrintRightMargin = formpage.Margin.Right;
-            page_print_cells.PrintTopMargin = formpage.Margin.Top;
-            page_print_cells.PrintBottomMargin = formpage.Margin.Bottom;
+            page_print_cells.LeftMargin = formpage.Margin.Left;
+            page_print_cells.RightMargin = formpage.Margin.Right;
+            page_print_cells.TopMargin = formpage.Margin.Top;
+            page_print_cells.BottomMargin = formpage.Margin.Bottom;
 
             page_fmt_cells.SetFormulas(writer);
             page_fmt_cells.SetFormulas(writer);

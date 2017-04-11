@@ -14,12 +14,12 @@ namespace VisioAutomation_Tests.Core.Page
             var size = new VA.Drawing.Size(4, 3);
             var page1 = this.GetNewPage(size);
             var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
-            Assert.AreEqual("4.0000 in.", page_fmt_cells.PageWidth.Result);
-            Assert.AreEqual("3.0000 in.", page_fmt_cells.PageHeight.Result);
+            Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Result);
+            Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Result);
 
             // Double each side
-            page_fmt_cells.PageWidth = "8.0";
-            page_fmt_cells.PageHeight = "6.0";
+            page_fmt_cells.Width = "8.0";
+            page_fmt_cells.Height = "6.0";
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             page_fmt_cells.SetFormulas(writer);
@@ -27,8 +27,8 @@ namespace VisioAutomation_Tests.Core.Page
             writer.Commit(page1.PageSheet);
 
             var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
-            Assert.AreEqual("8.0000 in.", actual_page_format_cells.PageWidth.Result);
-            Assert.AreEqual("6.0000 in.", actual_page_format_cells.PageHeight.Result);
+            Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Result);
+            Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Result);
             page1.Delete(0);
         }
 
@@ -144,10 +144,10 @@ namespace VisioAutomation_Tests.Core.Page
             var page = doc.Pages.Add();
 
             var pagecells = new VA.Pages.PagePrintCells();
-            pagecells.PrintTopMargin = upperright_margin.Height;
-            pagecells.PrintBottomMargin = bottomleft_margin.Height;
-            pagecells.PrintLeftMargin = bottomleft_margin.Width;
-            pagecells.PrintRightMargin = upperright_margin.Width;
+            pagecells.TopMargin = upperright_margin.Height;
+            pagecells.BottomMargin = bottomleft_margin.Height;
+            pagecells.LeftMargin = bottomleft_margin.Width;
+            pagecells.RightMargin = upperright_margin.Width;
 
             var page_writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             pagecells.SetFormulas(page_writer);

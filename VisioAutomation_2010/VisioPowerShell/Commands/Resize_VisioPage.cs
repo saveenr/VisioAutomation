@@ -37,12 +37,12 @@ namespace VisioPowerShell.Commands
                 
                 if (this.Width > 0)
                 {
-                    new_page_format_cells.PageWidth = this.Width;
+                    new_page_format_cells.Width = this.Width;
                 }
 
                 if (this.Height > 0)
                 {
-                    new_page_format_cells.PageHeight = this.Height;
+                    new_page_format_cells.Height = this.Height;
                 }
 
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();

@@ -73,8 +73,8 @@ namespace VisioAutomation.Models.Dom
             {
                 if (this.Size.HasValue)
                 {
-                    this.PageFormatCells.PageHeight = this.Size.Value.Height;
-                    this.PageFormatCells.PageWidth = this.Size.Value.Width;
+                    this.PageFormatCells.Height = this.Size.Value.Height;
+                    this.PageFormatCells.Width = this.Size.Value.Width;
                 }
 
                 var writer = new SidSrcWriter();

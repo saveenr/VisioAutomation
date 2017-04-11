@@ -21,13 +21,6 @@ namespace VisioAutomation.Pages
         public CellColumn PrintScaleX { get; set; }
         public CellColumn PrintScaleY { get; set; }
         public CellColumn PrintPaperSource { get; set; }
-        public CellColumn PageDrawingScale { get; set; }
-        public CellColumn PageDrawingScaleType { get; set; }
-        public CellColumn PageDrawingSizeType { get; set; }
-        public CellColumn PageInhibitSnap { get; set; }
-        public CellColumn PageHeight { get; set; }
-        public CellColumn PageScale { get; set; }
-        public CellColumn PageWidth { get; set; }
 
         public PagePrintCellsReader()
         {
@@ -46,41 +39,26 @@ namespace VisioAutomation.Pages
             this.PrintScaleX = this.query.AddCell(SrcConstants.PrintScaleX, nameof(SrcConstants.PrintScaleX));
             this.PrintScaleY = this.query.AddCell(SrcConstants.PrintScaleY, nameof(SrcConstants.PrintScaleY));
             this.PrintPaperSource = this.query.AddCell(SrcConstants.PrintPaperSource, nameof(SrcConstants.PrintPaperSource));
-
-            this.PageDrawingScale = this.query.AddCell(SrcConstants.PageDrawingScale, nameof(SrcConstants.PageDrawingScale));
-            this.PageDrawingScaleType = this.query.AddCell(SrcConstants.PageDrawingScaleType, nameof(SrcConstants.PageDrawingScaleType));
-            this.PageDrawingSizeType = this.query.AddCell(SrcConstants.PageDrawingSizeType, nameof(SrcConstants.PageDrawingSizeType));
-            this.PageInhibitSnap = this.query.AddCell(SrcConstants.PageInhibitSnap, nameof(SrcConstants.PageInhibitSnap));
-            this.PageHeight = this.query.AddCell(SrcConstants.PageHeight, nameof(SrcConstants.PageHeight));
-            this.PageScale = this.query.AddCell(SrcConstants.PageScale, nameof(SrcConstants.PageScale));
-            this.PageWidth = this.query.AddCell(SrcConstants.PageWidth, nameof(SrcConstants.PageWidth));
         }
 
         public override Pages.PagePrintCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
             var cells = new Pages.PagePrintCells();
-            cells.PrintLeftMargin = row[this.PrintLeftMargin];
-            cells.PrintCenterX = row[this.PrintCenterX];
-            cells.PrintCenterY = row[this.PrintCenterY];
-            cells.PrintOnPage = row[this.PrintOnPage];
-            cells.PrintBottomMargin = row[this.PrintBottomMargin];
-            cells.PrintRightMargin = row[this.PrintRightMargin];
-            cells.PrintPagesX = row[this.PrintPagesX];
-            cells.PrintPagesY = row[this.PrintPagesY];
-            cells.PrintTopMargin = row[this.PrintTopMargin];
-            cells.PrintPaperKind = row[this.PrintPaperKind];
-            cells.PrintGrid = row[this.PrintGrid];
-            cells.PrintPageOrientation = row[this.PrintPageOrientation];
-            cells.PrintScaleX = row[this.PrintScaleX];
-            cells.PrintScaleY = row[this.PrintScaleY];
-            cells.PrintPaperSource = row[this.PrintPaperSource];
-            cells.PageDrawingScale = row[this.PageDrawingScale];
-            cells.PageDrawingScaleType = row[this.PageDrawingScaleType];
-            cells.PageDrawingSizeType = row[this.PageDrawingSizeType];
-            cells.PageInhibitSnap = row[this.PageInhibitSnap];
-            cells.PageHeight = row[this.PageHeight];
-            cells.PageScale = row[this.PageScale];
-            cells.PageWidth = row[this.PageWidth];
+            cells.LeftMargin = row[this.PrintLeftMargin];
+            cells.CenterX = row[this.PrintCenterX];
+            cells.CenterY = row[this.PrintCenterY];
+            cells.OnPage = row[this.PrintOnPage];
+            cells.BottomMargin = row[this.PrintBottomMargin];
+            cells.RightMargin = row[this.PrintRightMargin];
+            cells.PagesX = row[this.PrintPagesX];
+            cells.PagesY = row[this.PrintPagesY];
+            cells.TopMargin = row[this.PrintTopMargin];
+            cells.PaperKind = row[this.PrintPaperKind];
+            cells.Grid = row[this.PrintGrid];
+            cells.Orientation = row[this.PrintPageOrientation];
+            cells.ScaleX = row[this.PrintScaleX];
+            cells.ScaleY = row[this.PrintScaleY];
+            cells.PaperSource = row[this.PrintPaperSource];
             return cells;
         }
     }
