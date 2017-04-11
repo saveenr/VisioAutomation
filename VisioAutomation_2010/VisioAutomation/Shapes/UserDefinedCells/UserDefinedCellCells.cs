@@ -51,7 +51,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.UserDelCellValue, this.Value.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.UserDefCellValue, this.Value.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.UserDefCellPrompt, this.Prompt.Formula);
             }
         }
