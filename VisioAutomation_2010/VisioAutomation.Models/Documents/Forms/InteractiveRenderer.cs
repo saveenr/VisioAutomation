@@ -35,10 +35,14 @@ namespace VisioAutomation.Models.Documents.Forms
             var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;
             pagecells.PageHeight = formpage.Size.Height;
-            pagecells.PrintLeftMargin = formpage.Margin.Left;
-            pagecells.PrintRightMargin = formpage.Margin.Right;
-            pagecells.PrintTopMargin = formpage.Margin.Top;
-            pagecells.PrintBottomMargin = formpage.Margin.Bottom;
+
+            var printcells = new Pages.PagePrintCells();
+            printcells.PrintLeftMargin = formpage.Margin.Left;
+            printcells.PrintRightMargin = formpage.Margin.Right;
+            printcells.PrintTopMargin = formpage.Margin.Top;
+            printcells.PrintBottomMargin = formpage.Margin.Bottom;
+
+            pagecells.SetFormulas(writer);
             pagecells.SetFormulas(writer);
 
             writer.Commit(pagesheet);

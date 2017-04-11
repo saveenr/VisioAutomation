@@ -143,7 +143,7 @@ namespace VisioAutomation_Tests.Core.Page
         {
             var page = doc.Pages.Add();
 
-            var pagecells = new VA.Pages.PageCells();
+            var pagecells = new VA.Pages.PagePrintCells();
             pagecells.PrintTopMargin = upperright_margin.Height;
             pagecells.PrintBottomMargin = bottomleft_margin.Height;
             pagecells.PrintLeftMargin = bottomleft_margin.Width;

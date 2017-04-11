@@ -1,11 +1,25 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PageCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class PagePrintCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
+        public ShapeSheet.CellData PrintLeftMargin { get; set; }
+        public ShapeSheet.CellData PrintCenterX { get; set; }
+        public ShapeSheet.CellData PrintCenterY { get; set; }
+        public ShapeSheet.CellData PrintOnPage { get; set; }
+        public ShapeSheet.CellData PrintBottomMargin { get; set; }
+        public ShapeSheet.CellData PrintRightMargin { get; set; }
+        public ShapeSheet.CellData PrintPagesX { get; set; }
+        public ShapeSheet.CellData PrintPagesY { get; set; }
+        public ShapeSheet.CellData PrintTopMargin { get; set; }
+        public ShapeSheet.CellData PrintPaperKind { get; set; }
+        public ShapeSheet.CellData PrintGrid { get; set; }
+        public ShapeSheet.CellData PrintPageOrientation { get; set; }
+        public ShapeSheet.CellData PrintScaleX { get; set; }
+        public ShapeSheet.CellData PrintScaleY { get; set; }
+        public ShapeSheet.CellData PrintPaperSource { get; set; }
         public ShapeSheet.CellData PageDrawingScale { get; set; }
         public ShapeSheet.CellData PageDrawingScaleType { get; set; }
         public ShapeSheet.CellData PageDrawingSizeType { get; set; }
@@ -34,7 +48,22 @@ namespace VisioAutomation.Pages
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {
             get
-            { 
+            {
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintLeftMargin, this.PrintLeftMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterX, this.PrintCenterX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterY, this.PrintCenterY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintOnPage, this.PrintOnPage.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintBottomMargin, this.PrintBottomMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintRightMargin, this.PrintRightMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPagesX, this.PrintPagesX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPagesY, this.PrintPagesY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintTopMargin, this.PrintTopMargin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPaperKind, this.PrintPaperKind.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintGrid, this.PrintGrid.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPageOrientation, this.PrintPageOrientation.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintScaleX, this.PrintScaleX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintScaleY, this.PrintScaleY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPaperSource, this.PrintPaperSource.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingScale, this.PageDrawingScale.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingScaleType, this.PageDrawingScaleType.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingSizeType, this.PageDrawingSizeType.Formula);
@@ -62,12 +91,12 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageCells GetCells(IVisio.Shape shape)
+        public static PagePrintCells GetCells(Microsoft.Office.Interop.Visio.Shape shape)
         {
-            var query = PageCells.lazy_query.Value;
+            var query = PagePrintCells.lazy_query.Value;
             return query.GetCellGroup(shape);
         }
 
-        private static readonly System.Lazy<PageCellsReader> lazy_query = new System.Lazy<PageCellsReader>();
+        private static readonly System.Lazy<PagePrintCellsReader> lazy_query = new System.Lazy<PagePrintCellsReader>();
     }
 }
