@@ -1,5 +1,6 @@
 ﻿using VisioAutomation.Extensions;
 using VisioAutomation.PageLayouts;
+using VisioAutomation.Pages;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -12,6 +13,7 @@ namespace VisioAutomation.Models.Dom
         public bool ResizeToFit;
         public Drawing.Size? ResizeToFitMargin;
         public Pages.PageCells PageCells;
+        public Pages.PageLayoutCells PageLayoutCells;
         public string Name;
         public LayoutBase Layout;
         public IVisio.Page VisioPage;
@@ -21,6 +23,7 @@ namespace VisioAutomation.Models.Dom
         {
             this.Shapes = new ShapeList();
             this.PageCells = new Pages.PageCells();
+            this.PageLayoutCells = new PageLayoutCells();
 
             this.PerfSettings = new Application.PerfSettings();
             this.PerfSettings.DeferRecalc = 0;
@@ -76,6 +79,7 @@ namespace VisioAutomation.Models.Dom
 
                 var writer = new SidSrcWriter();
                 this.PageCells.SetFormulas((short)page_sheet.ID, writer);
+                this.PageLayoutCells.SetFormulas((short)page_sheet.ID, writer);
                 writer.Commit(page);
                 
                 // Then render the shapes

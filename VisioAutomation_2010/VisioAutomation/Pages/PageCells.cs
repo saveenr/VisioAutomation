@@ -44,34 +44,6 @@ namespace VisioAutomation.Pages
         public ShapeSheet.CellData YGridSpacing { get; set; }
         public ShapeSheet.CellData YRulerDensity { get; set; }
         public ShapeSheet.CellData YRulerOrigin { get; set; }
-        public ShapeSheet.CellData PageLayoutAvenueSizeX { get; set; }
-        public ShapeSheet.CellData PageLayoutAvenueSizeY { get; set; }
-        public ShapeSheet.CellData PageLayoutBlockSizeX { get; set; }
-        public ShapeSheet.CellData PageLayoutBlockSizeY { get; set; }
-        public ShapeSheet.CellData PageLayoutCtrlAsInput { get; set; }
-        public ShapeSheet.CellData PageLayoutDynamicsOff { get; set; }
-        public ShapeSheet.CellData PageLayoutEnableGrid { get; set; }
-        public ShapeSheet.CellData PageLayoutLineAdjustFrom { get; set; }
-        public ShapeSheet.CellData PageLayoutLineAdjustTo { get; set; }
-        public ShapeSheet.CellData PageLayoutLineJumpCode { get; set; }
-        public ShapeSheet.CellData PageLayoutLineJumpFactorX { get; set; }
-        public ShapeSheet.CellData PageLayoutLineJumpFactorY { get; set; }
-        public ShapeSheet.CellData PageLayoutLineJumpStyle { get; set; }
-        public ShapeSheet.CellData PageLayoutLineRouteExt { get; set; }
-        public ShapeSheet.CellData PageLayoutLineToLineX { get; set; }
-        public ShapeSheet.CellData PageLayoutLineToLineY { get; set; }
-        public ShapeSheet.CellData PageLayoutLineToNodeX { get; set; }
-        public ShapeSheet.CellData PageLayoutLineToNodeY { get; set; }
-        public ShapeSheet.CellData PageLayoutLineJumpDirX { get; set; }
-        public ShapeSheet.CellData PageLayoutLineJumpDirY { get; set; }
-        public ShapeSheet.CellData PageLayoutPageShapeSplit { get; set; }
-        public ShapeSheet.CellData PageLayoutPlaceDepth { get; set; }
-        public ShapeSheet.CellData PageLayoutPlaceFlip { get; set; }
-        public ShapeSheet.CellData PageLayoutPlaceStyle { get; set; }
-        public ShapeSheet.CellData PageLayoutPlowCode { get; set; }
-        public ShapeSheet.CellData PageLayoutResizePage { get; set; }
-        public ShapeSheet.CellData PageLayoutRouteStyle { get; set; }
-        public ShapeSheet.CellData PageLayoutAvoidPageBreaks { get; set; } // new in visio 2010
         public ShapeSheet.CellData PageDrawingResizeType { get; set; } // new in visio 2010
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
@@ -117,6 +89,53 @@ namespace VisioAutomation.Pages
                 yield return this.newpair(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin.Formula);
+            }
+        }
+
+        public static PageCells GetCells(IVisio.Shape shape)
+        {
+            var query = PageCells.lazy_query.Value;
+            return query.GetCellGroup(shape);
+        }
+
+        private static readonly System.Lazy<PageCellsReader> lazy_query = new System.Lazy<PageCellsReader>();
+    }
+
+    public class PageLayoutCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    {
+        public ShapeSheet.CellData PageLayoutAvenueSizeX { get; set; }
+        public ShapeSheet.CellData PageLayoutAvenueSizeY { get; set; }
+        public ShapeSheet.CellData PageLayoutBlockSizeX { get; set; }
+        public ShapeSheet.CellData PageLayoutBlockSizeY { get; set; }
+        public ShapeSheet.CellData PageLayoutCtrlAsInput { get; set; }
+        public ShapeSheet.CellData PageLayoutDynamicsOff { get; set; }
+        public ShapeSheet.CellData PageLayoutEnableGrid { get; set; }
+        public ShapeSheet.CellData PageLayoutLineAdjustFrom { get; set; }
+        public ShapeSheet.CellData PageLayoutLineAdjustTo { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpCode { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpFactorX { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpFactorY { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpStyle { get; set; }
+        public ShapeSheet.CellData PageLayoutLineRouteExt { get; set; }
+        public ShapeSheet.CellData PageLayoutLineToLineX { get; set; }
+        public ShapeSheet.CellData PageLayoutLineToLineY { get; set; }
+        public ShapeSheet.CellData PageLayoutLineToNodeX { get; set; }
+        public ShapeSheet.CellData PageLayoutLineToNodeY { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpDirX { get; set; }
+        public ShapeSheet.CellData PageLayoutLineJumpDirY { get; set; }
+        public ShapeSheet.CellData PageLayoutPageShapeSplit { get; set; }
+        public ShapeSheet.CellData PageLayoutPlaceDepth { get; set; }
+        public ShapeSheet.CellData PageLayoutPlaceFlip { get; set; }
+        public ShapeSheet.CellData PageLayoutPlaceStyle { get; set; }
+        public ShapeSheet.CellData PageLayoutPlowCode { get; set; }
+        public ShapeSheet.CellData PageLayoutResizePage { get; set; }
+        public ShapeSheet.CellData PageLayoutRouteStyle { get; set; }
+        public ShapeSheet.CellData PageLayoutAvoidPageBreaks { get; set; } // new in visio 2010
+
+        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        {
+            get
+            {
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutAvenueSizeX, this.PageLayoutAvenueSizeX.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, this.PageLayoutAvenueSizeY.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.PageLayoutBlockSizeX, this.PageLayoutBlockSizeX.Formula);
@@ -148,12 +167,13 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageCells GetCells(IVisio.Shape shape)
+        public static PageLayoutCells GetCells(IVisio.Shape shape)
         {
-            var query = PageCells.lazy_query.Value;
+            var query = PageLayoutCells.lazy_query.Value;
             return query.GetCellGroup(shape);
         }
 
-        private static readonly System.Lazy<PageCellsReader> lazy_query = new System.Lazy<PageCellsReader>();
+        private static readonly System.Lazy<PageLayoutCellsReader> lazy_query = new System.Lazy<PageLayoutCellsReader>();
     }
+
 }
