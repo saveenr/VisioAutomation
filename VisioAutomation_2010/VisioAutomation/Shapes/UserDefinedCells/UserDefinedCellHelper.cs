@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             UserDefinedCellHelper.Set(shape, name, value.Formula.Value, prompt.Formula.Value);
         }
 
-        public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellValueLiteral value, ShapeSheet.CellValueLiteral prompt)
+        public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellValueLiteral udfcell_value, ShapeSheet.CellValueLiteral udfcell_prompt)
         {
             if (shape == null)
             {
@@ -53,18 +53,18 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             {
                 string full_prop_name = UserDefinedCellHelper.GetRowName(name);
 
-                if (value.HasValue)
+                if (udfcell_value.HasValue)
                 {
                     string value_cell_name = full_prop_name;
                     var cell = shape.CellsU[value_cell_name];
-                    cell.FormulaU = value.Encode();                    
+                    cell.FormulaU = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_value.Value);                    
                 }
 
-                if (prompt.HasValue)
+                if (udfcell_prompt.HasValue)
                 {
                     string prompt_cell_name = full_prop_name+".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    cell.FormulaU = prompt.Encode();                                        
+                    cell.FormulaU = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_prompt.Value);                                        
                 }
                 return;
             }
@@ -76,16 +76,18 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
-            if (value.HasValue)
+            if (udfcell_value.HasValue)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                writer.SetFormula(src, value.Encode());
+                var formula = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_value.Value);
+                writer.SetFormula(src, formula);
             }
 
-            if (prompt.HasValue)
+            if (udfcell_prompt.HasValue)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                writer.SetFormula(src, prompt.Encode());
+                var formula = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_prompt.Value);
+                writer.SetFormula(src, formula);
             }
 
             writer.Commit(shape);

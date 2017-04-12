@@ -47,14 +47,5 @@ namespace VisioAutomation.ShapeSheet
             var formula = value ? "1" : "0";
             return new CellValueLiteral(formula);
         }
-
-        public string Encode()
-        {
-            if (!this.HasValue)
-            {
-                throw new System.ArgumentException("No Value to Encode");
-            }
-            return Convert.StringToFormulaString(this.Value);
-        }
     }
 }
