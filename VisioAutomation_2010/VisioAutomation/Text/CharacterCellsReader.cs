@@ -24,7 +24,7 @@ namespace VisioAutomation.Text
         public SubQueryColumn Overline { get; set; }
         public SubQueryColumn Perpendicular { get; set; }
         public SubQueryColumn Pos { get; set; }
-        public SubQueryColumn RTLText { get; set; }
+        public SubQueryColumn RtlText { get; set; }
         public SubQueryColumn FontScale { get; set; }
         public SubQueryColumn Letterspace { get; set; }
         public SubQueryColumn Strikethru { get; set; }
@@ -51,7 +51,7 @@ namespace VisioAutomation.Text
             this.Overline = sec.AddCell(SrcConstants.CharOverline, nameof(SrcConstants.CharOverline));
             this.Perpendicular = sec.AddCell(SrcConstants.CharPerpendicular, nameof(SrcConstants.CharPerpendicular));
             this.Pos = sec.AddCell(SrcConstants.CharPos, nameof(SrcConstants.CharPos));
-            this.RTLText = sec.AddCell(SrcConstants.CharRTLText, nameof(SrcConstants.CharRTLText));
+            this.RtlText = sec.AddCell(SrcConstants.CharRTLText, nameof(SrcConstants.CharRTLText));
             this.FontScale = sec.AddCell(SrcConstants.CharFontScale, nameof(SrcConstants.CharFontScale));
             this.Letterspace = sec.AddCell(SrcConstants.CharLetterspace, nameof(SrcConstants.CharLetterspace));
             this.Strikethru = sec.AddCell(SrcConstants.CharStrikethru, nameof(SrcConstants.CharStrikethru));
@@ -82,7 +82,7 @@ namespace VisioAutomation.Text
             cells.Overline = row[this.Overline];
             cells.Perpendicular = row[this.Perpendicular];
             cells.Pos = row[this.Pos];
-            cells.RtlText = row[this.RTLText];
+            cells.RtlText = row[this.RtlText];
             cells.Strikethru = row[this.Strikethru];
             cells.UseVertical = row[this.UseVertical];
 
