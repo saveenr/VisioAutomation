@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    class ParagraphFormatCellsReader : MultiRowReader<Text.ParagraphCells>
+    class ParagraphCellsReader : MultiRowReader<Text.ParagraphCells>
     {
         public SubQueryColumn Bullet { get; set; }
         public SubQueryColumn BulletFont { get; set; }
@@ -22,7 +22,7 @@ namespace VisioAutomation.Text
         public SubQueryColumn SpaceLine { get; set; }
         public SubQueryColumn TextPosAfterBullet { get; set; }
 
-        public ParagraphFormatCellsReader()
+        public ParagraphCellsReader()
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionParagraph);
             this.Bullet = sec.AddCell(SrcConstants.ParaBullet, nameof(SrcConstants.ParaBullet));

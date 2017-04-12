@@ -124,14 +124,14 @@
     <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnCollectionBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\SingleRowReader.cs" />
-    <Compile Include="Text\CharacterFormatCellsReader.cs" />
+    <Compile Include="Text\CharacterCellsReader.cs" />
     <Compile Include="Shapes\ConnectionPoints\ConnectionPointCellsReader.cs" />
     <Compile Include="Shapes\Controls\ControlCellsReader.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCellsReader.cs" />
     <Compile Include="Shapes\Hyperlinks\HyperlinkCellsReader.cs" />
     <Compile Include="Shapes\Locking\LockCellsReader.cs" />
     <Compile Include="Pages\PageFormatCellsReader.cs" />
-    <Compile Include="Text\ParagraphFormatCellsReader.cs" />
+    <Compile Include="Text\ParagraphCellsReader.cs" />
     <Compile Include="Shapes\ShapeFormatCellsReader.cs" />
     <Compile Include="Shapes\Layout\ShapeLayoutCellsReader.cs" />
     <Compile Include="Text\TextBlockCellsReader.cs" />
