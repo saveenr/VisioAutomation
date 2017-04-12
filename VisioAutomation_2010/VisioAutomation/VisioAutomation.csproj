@@ -75,11 +75,11 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Logging\LoggingHelper.cs" />
-    <Compile Include="Application\Logging\XmlErrorLog.cs" />
-    <Compile Include="Application\Logging\LogRecord.cs" />
-    <Compile Include="Application\Logging\FileSessions.cs" />
-    <Compile Include="Application\Logging\LogState.cs" />
+    <Compile Include="Logging\LoggingHelper.cs" />
+    <Compile Include="Logging\XmlErrorLog.cs" />
+    <Compile Include="Logging\LogRecord.cs" />
+    <Compile Include="Logging\LogSession.cs" />
+    <Compile Include="Logging\LogState.cs" />
     <Compile Include="Exceptions\VisioOperationException.cs" />
     <Compile Include="Extensions\ApplicationMethods.cs" />
     <Compile Include="Extensions\ColorsMethods.cs" />

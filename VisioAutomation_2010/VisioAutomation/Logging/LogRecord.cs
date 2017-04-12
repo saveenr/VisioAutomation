@@ -1,4 +1,4 @@
-namespace VisioAutomation.Application.Logging
+namespace VisioAutomation.Logging
 {
     public class LogRecord
     {

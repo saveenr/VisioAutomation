@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.Application.Logging
+namespace VisioAutomation.Logging
 {
     public class XmlErrorLog
     {
-        public List<FileSessions> FileSessions;
+        public List<LogSession> LogSessions;
 
         public XmlErrorLog(string filename)
         {
-            this.FileSessions = new List<FileSessions>();
+            this.LogSessions = new List<LogSession>();
 
             if (!System.IO.File.Exists(filename))
             {
@@ -23,11 +23,11 @@ namespace VisioAutomation.Application.Logging
             var lines = XmlErrorLog.GetLines(filename);
             lines.Reverse();
 
-            var q = new Stack<string>(lines);
+            var stack = new Stack<string>(lines);
 
-            while (q.Count > 0)
+            while (stack.Count > 0)
             {
-                string rawline = q.Pop();
+                string rawline = stack.Pop();
                 string line = rawline.Trim();
 
                 if (state == LogState.Start)
@@ -79,7 +79,7 @@ namespace VisioAutomation.Application.Logging
                     else if (line.StartsWith("Open") || line.StartsWith("Insert"))
                     {
                         state = this.TerminateCurrentSession(line);
-                        q.Push(line);
+                        stack.Push(line);
                     }
                     else if (line.StartsWith("["))
                     {
@@ -149,7 +149,7 @@ namespace VisioAutomation.Application.Logging
             rec.Type = line.Substring(1, n - 1);
             rec.SubType = line.Substring(n + 2).Replace(":", string.Empty);
 
-            var session = this.FileSessions[this.FileSessions.Count - 1];
+            var session = this.LogSessions[this.LogSessions.Count - 1];
             session.Records.Add(rec);
             state = LogState.InRecord;
             return state;
@@ -157,12 +157,12 @@ namespace VisioAutomation.Application.Logging
 
         private LogState StartNewSession(string line)
         {
-            var session = new FileSessions();
+            var session = new LogSession();
             session.StartLine = line;
             var tokens = line.Split();
             session.FileType = tokens[1];
 
-            this.FileSessions.Add(session);
+            this.LogSessions.Add(session);
 
             return LogState.InFileSession;
         }
@@ -174,9 +174,9 @@ namespace VisioAutomation.Application.Logging
             return LogState.Start;
         }
 
-        public FileSessions GetMostRecentSession()
+        public LogSession GetMostRecentSession()
         {
-            return this.FileSessions[this.FileSessions.Count - 1];
+            return this.LogSessions[this.LogSessions.Count - 1];
         }
 
         private static List<string> GetLines(string filename)
@@ -200,6 +200,5 @@ namespace VisioAutomation.Application.Logging
             }
             return lines;
         }
-
     }
 }

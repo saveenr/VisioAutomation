@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace VisioAutomation.Application.Logging
+namespace VisioAutomation.Logging
 {
     public class LoggingHelper
     {
