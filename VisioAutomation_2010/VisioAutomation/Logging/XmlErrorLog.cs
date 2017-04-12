@@ -105,14 +105,14 @@ namespace VisioAutomation.Logging
                         {
                             // Store a Context Record 
                             var session = this.GetMostRecentSession();
-                            var rec = session.Records[session.Records.Count - 1];
+                            var rec = session.LogRecords[session.LogRecords.Count - 1];
                             rec.Context = context;
                         }
                         else if (description != null)
                         {
                             // Store a Description Record 
                             var session = this.GetMostRecentSession();
-                            var rec = session.Records[session.Records.Count - 1];
+                            var rec = session.LogRecords[session.LogRecords.Count - 1];
                             rec.Description = description;
                         }
                         else
@@ -150,7 +150,7 @@ namespace VisioAutomation.Logging
             rec.SubType = line.Substring(n + 2).Replace(":", string.Empty);
 
             var session = this.LogSessions[this.LogSessions.Count - 1];
-            session.Records.Add(rec);
+            session.LogRecords.Add(rec);
             state = LogState.InRecord;
             return state;
         }

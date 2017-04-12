@@ -10,11 +10,11 @@ namespace VisioAutomation.Logging
         public string Source;
         public string StartTimeRaw;
         public System.DateTime StartTime;
-        public List<LogRecord> Records;
+        public List<LogRecord> LogRecords;
 
         internal LogSession()
         {
-            this.Records = new List<LogRecord>();
+            this.LogRecords = new List<LogRecord>();
         }
     }
 }
