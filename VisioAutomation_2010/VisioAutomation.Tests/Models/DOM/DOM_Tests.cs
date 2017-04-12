@@ -2,6 +2,7 @@
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;
+using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -112,13 +113,13 @@ namespace VisioAutomation_Tests.Models.Dom
             var vrect1 = new Rectangle(1, 1, 9, 9);
             vrect1.Text = new VisioAutomation.Models.Text.TextElement("HELLO WORLD");
 
-            vrect1.CustomProperties = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary();
+            vrect1.CustomProperties = new CustomPropertyDictionary();
 
-            var cp1 = new VA.Shapes.CustomProperties.CustomPropertyCells();
+            var cp1 = new CustomPropertyCells();
             cp1.Value = "FOOVALUE";
             cp1.Label = "Foo Label";
 
-            var cp2 = new VA.Shapes.CustomProperties.CustomPropertyCells();
+            var cp2 = new CustomPropertyCells();
             cp2.Value = "BARVALUE";
             cp2.Label = "Bar Label";
 
@@ -135,8 +136,8 @@ namespace VisioAutomation_Tests.Models.Dom
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
             Assert.AreEqual("HELLO WORLD", vrect1.VisioShape.Text);
-            Assert.IsTrue(VA.Shapes.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "FOO"));
-            Assert.IsTrue(VA.Shapes.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
+            Assert.IsTrue(CustomPropertyHelper.Contains(vrect1.VisioShape, "FOO"));
+            Assert.IsTrue(CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
 
             doc.Close(true);
         }

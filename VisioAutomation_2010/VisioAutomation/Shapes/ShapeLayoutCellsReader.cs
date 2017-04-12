@@ -2,9 +2,9 @@ using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
 
-namespace VisioAutomation.Shapes.Layout
+namespace VisioAutomation.Shapes
 {
-    class ShapeLayoutCellsReader : SingleRowReader<Shapes.Layout.ShapeLayoutCells>
+    class ShapeLayoutCellsReader : SingleRowReader<ShapeLayoutCells>
     {
         public CellColumn ConnectorFixedCode { get; set; }
         public CellColumn LineJumpCode { get; set; }
@@ -47,9 +47,9 @@ namespace VisioAutomation.Shapes.Layout
             this.Relationships = this.query.AddCell(SrcConstants.ShapeLayoutRelationships, nameof(SrcConstants.ShapeLayoutRelationships));
         }
 
-        public override Shapes.Layout.ShapeLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override ShapeLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
-            var cells = new Shapes.Layout.ShapeLayoutCells();
+            var cells = new ShapeLayoutCells();
             cells.ConnectorFixedCode = row[this.ConnectorFixedCode];
             cells.LineJumpCode = row[this.LineJumpCode];
             cells.LineJumpDirX = row[this.LineJumpDirX];

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.UserDefinedCells
+namespace VisioAutomation.Shapes
 {
     public class UserDefinedCellCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {

@@ -1,7 +1,7 @@
 using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.Hyperlinks
+namespace VisioAutomation.Shapes
 {
     public static class HyperlinkHelper
     {

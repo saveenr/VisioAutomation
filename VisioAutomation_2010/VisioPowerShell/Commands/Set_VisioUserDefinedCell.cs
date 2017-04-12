@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -21,7 +22,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
-            var userprop = new VisioAutomation.Shapes.UserDefinedCells.UserDefinedCellCells(this.Name, this.Value);
+            var userprop = new UserDefinedCellCells(this.Name, this.Value);
             if (this.Prompt != null)
             {
                 userprop.Prompt = this.Prompt;

@@ -1,4 +1,4 @@
-using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
+using VisioAutomation.Shapes;
 
 namespace VisioPowerShell.Model
 {
@@ -19,7 +19,7 @@ namespace VisioPowerShell.Model
         public readonly string Value;
 
 
-        internal CustomPropertyValues(int id, string propname, VACUSTPROP.CustomPropertyCells propcells)
+        internal CustomPropertyValues(int id, string propname, CustomPropertyCells propcells)
         {
             this.ShapeID = id;
             this.Name = propname;

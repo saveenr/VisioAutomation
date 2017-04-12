@@ -3,7 +3,7 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.Connectors
+namespace VisioAutomation.Shapes
 {
     public static class ConnectorHelper
     {

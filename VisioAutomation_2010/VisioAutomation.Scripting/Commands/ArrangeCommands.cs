@@ -1,5 +1,5 @@
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Shapes.Locking;
 using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioAutomation.Scripting.Layout

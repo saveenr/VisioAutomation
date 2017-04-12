@@ -5,10 +5,10 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Grid;
+using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VAUSERCELL = VisioAutomation.Shapes.UserDefinedCells;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -494,7 +494,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Verify that we did indeed drop a container
             Assert.AreEqual("Container",
-                VAUSERCELL.UserDefinedCellHelper
+                UserDefinedCellHelper
                     .Get(dropped_container)
                     .First(s => s.Name == "msvStructureType")
                     .Value.Result);
@@ -538,7 +538,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Verify that we did indeed drop a container
             Assert.AreEqual("Container",
-                VAUSERCELL.UserDefinedCellHelper
+                UserDefinedCellHelper
                     .Get(dropped_container)
                     .First(s => s.Name == "msvStructureType")
                     .Value.Result);

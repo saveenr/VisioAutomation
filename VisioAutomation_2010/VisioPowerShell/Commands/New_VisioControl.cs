@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Shapes;
 using VisioAutomation.Utilities;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -37,7 +38,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var ctrl = new VA.Shapes.Controls.ControlCells();
+            var ctrl = new ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
                 ctrl.XBehavior = this.XBehavior;

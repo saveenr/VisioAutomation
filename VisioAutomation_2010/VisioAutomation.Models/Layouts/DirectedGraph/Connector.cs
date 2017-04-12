@@ -1,4 +1,4 @@
-﻿using VisioAutomation.Shapes.Connectors;
+﻿using VisioAutomation.Shapes;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {

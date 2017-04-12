@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Shapes;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -32,7 +33,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, hyperlinks0[s2].Count);
             Assert.AreEqual(0, hyperlinks0[s3].Count);
 
-            var hyperlink = new VisioAutomation.Shapes.Hyperlinks.HyperlinkCells();
+            var hyperlink = new HyperlinkCells();
             hyperlink.Address = "http://www.microsoft.com";
             client.Hyperlink.Add(targets, hyperlink);
 

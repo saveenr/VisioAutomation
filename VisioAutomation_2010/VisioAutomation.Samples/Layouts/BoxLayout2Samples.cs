@@ -1,10 +1,10 @@
-﻿using VAUDCELLS = VisioAutomation.Shapes.UserDefinedCells;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.Box;
+using VisioAutomation.Shapes;
 
 namespace VisioAutomationSamples
 {
@@ -87,7 +87,7 @@ namespace VisioAutomationSamples
             int num_types = 10;
             int max_properties = 50;
 
-            var types = typeof(VAUDCELLS.UserDefinedCellCells).Assembly.GetExportedTypes().Take(num_types).ToList();
+            var types = typeof(UserDefinedCellCells).Assembly.GetExportedTypes().Take(num_types).ToList();
 
             var data = new List<string[]>();
             foreach (var type in types)

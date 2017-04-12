@@ -3,9 +3,9 @@ using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.CustomProperties
+namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCellsReader : MultiRowReader<Shapes.CustomProperties.CustomPropertyCells>
+    public class CustomPropertyCellsReader : MultiRowReader<CustomPropertyCells>
     {
         public SubQueryColumn SortKey { get; set; }
         public SubQueryColumn Ask { get; set; }
@@ -36,9 +36,9 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         }
 
-        public override Shapes.CustomProperties.CustomPropertyCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override CustomPropertyCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
-            var cells = new Shapes.CustomProperties.CustomPropertyCells();
+            var cells = new CustomPropertyCells();
             cells.Value = row[this.Value];
             cells.Calendar = row[this.Calendar];
             cells.Format = row[this.Format];

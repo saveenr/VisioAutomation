@@ -1,5 +1,5 @@
 using VisioAutomation.Scripting.Utilities;
-using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
+using VisioAutomation.Shapes;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.DirectedGraph
@@ -13,7 +13,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         public string URL;
         public SXL.XElement Element;
 
-        public VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary custprops;
+        public CustomPropertyDictionary custprops;
 
         public static ShapeInfo FromXml(Client client, SXL.XElement shape_el)
         {
@@ -27,13 +27,13 @@ namespace VisioAutomation.Scripting.DirectedGraph
             info.Element = shape_el;
             info.URL = shape_el.GetAttributeValue("url", null);
 
-            info.custprops = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary();
+            info.custprops = new CustomPropertyDictionary();
             foreach (var customprop_el in shape_el.Elements("customprop"))
             {
                 string cp_name = customprop_el.Attribute("name").Value;
                 string cp_value = customprop_el.Attribute("value").Value;
 
-                var cp = new VACUSTPROP.CustomPropertyCells();
+                var cp = new CustomPropertyCells();
                 cp.Value = cp_value;
 
                 info.custprops.Add(cp_name,cp);

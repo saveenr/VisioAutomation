@@ -3,9 +3,9 @@ using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.Controls
+namespace VisioAutomation.Shapes
 {
-    class ControlCellsReader : MultiRowReader<Shapes.Controls.ControlCells>
+    class ControlCellsReader : MultiRowReader<ControlCells>
     {
         public SubQueryColumn CanGlue { get; set; }
         public SubQueryColumn Tip { get; set; }
@@ -31,9 +31,9 @@ namespace VisioAutomation.Shapes.Controls
 
         }
 
-        public override Shapes.Controls.ControlCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override ControlCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
-            var cells = new Shapes.Controls.ControlCells();
+            var cells = new ControlCells();
             cells.CanGlue = row[this.CanGlue];
             cells.Tip = row[this.Tip];
             cells.X = row[this.X];

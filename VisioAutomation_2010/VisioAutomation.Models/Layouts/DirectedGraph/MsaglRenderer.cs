@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
-using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using MSAGL = Microsoft.Msagl;
 using VA = VisioAutomation;
@@ -471,7 +471,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // ADD CUSTOM PROPS
             if (layout_shape.CustomProperties != null)
             {
-                shape_node.CustomProperties = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary();
+                shape_node.CustomProperties = new CustomPropertyDictionary();
                 foreach (var kv in layout_shape.CustomProperties)
                 {
                     shape_node.CustomProperties[kv.Key] = kv.Value;

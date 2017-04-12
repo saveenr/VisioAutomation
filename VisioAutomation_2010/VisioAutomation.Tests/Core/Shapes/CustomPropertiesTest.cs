@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes;
 
 namespace VisioAutomation_Tests.Core.Shapes
 {
@@ -11,13 +11,13 @@ namespace VisioAutomation_Tests.Core.Shapes
         [TestMethod]
         public void CustomProps_Names()
         {
-            Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName(null));
-            Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName(string.Empty));
-            Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName(" foo "));
-            Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName("foo "));
-            Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName("foo\t"));
-            Assert.IsFalse(VACUSTPROP.CustomPropertyHelper.IsValidName("fo bar"));
-            Assert.IsTrue(VACUSTPROP.CustomPropertyHelper.IsValidName("foobar"));
+            Assert.IsFalse(CustomPropertyHelper.IsValidName(null));
+            Assert.IsFalse(CustomPropertyHelper.IsValidName(string.Empty));
+            Assert.IsFalse(CustomPropertyHelper.IsValidName(" foo "));
+            Assert.IsFalse(CustomPropertyHelper.IsValidName("foo "));
+            Assert.IsFalse(CustomPropertyHelper.IsValidName("foo\t"));
+            Assert.IsFalse(CustomPropertyHelper.IsValidName("fo bar"));
+            Assert.IsTrue(CustomPropertyHelper.IsValidName("foobar"));
         }
 
         [TestMethod]
@@ -29,20 +29,20 @@ namespace VisioAutomation_Tests.Core.Shapes
             s1.Text = "Checking for Custom Properties";
 
             // A new rectangle should have zero props
-            var c0 = VACUSTPROP.CustomPropertyHelper.Get(s1);
+            var c0 = CustomPropertyHelper.Get(s1);
             Assert.AreEqual(0,c0.Count);
 
             // Set one property
             // Notice that the properties some back double-quoted
-            VACUSTPROP.CustomPropertyHelper.Set(s1,"PROP1","VAL1");
-            var c1 = VACUSTPROP.CustomPropertyHelper.Get(s1);
+            CustomPropertyHelper.Set(s1,"PROP1","VAL1");
+            var c1 = CustomPropertyHelper.Get(s1);
             Assert.AreEqual(1, c1.Count);
             Assert.IsTrue(c1.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"",c1["PROP1"].Value.Formula);
 
             // Add another property
-            VACUSTPROP.CustomPropertyHelper.Set(s1, "PROP2", "VAL 2");
-            var c2 = VACUSTPROP.CustomPropertyHelper.Get(s1);
+            CustomPropertyHelper.Set(s1, "PROP2", "VAL 2");
+            var c2 = CustomPropertyHelper.Get(s1);
             Assert.AreEqual(2, c2.Count);
             Assert.IsTrue(c2.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"", c2["PROP1"].Value.Formula);
@@ -50,8 +50,8 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual("\"VAL 2\"", c2["PROP2"].Value.Formula);
 
             // Modify the value of the second property
-            VACUSTPROP.CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"");
-            var c3 = VACUSTPROP.CustomPropertyHelper.Get(s1);
+            CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"");
+            var c3 = CustomPropertyHelper.Get(s1);
             Assert.AreEqual(2, c3.Count);
             Assert.IsTrue(c3.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"", c3["PROP1"].Value.Formula);
@@ -61,9 +61,9 @@ namespace VisioAutomation_Tests.Core.Shapes
             // Now delete all the custom properties
             foreach (string name in c3.Keys)
             {
-                VACUSTPROP.CustomPropertyHelper.Delete(s1,name);
+                CustomPropertyHelper.Delete(s1,name);
             }
-            var c4 = VACUSTPROP.CustomPropertyHelper.Get(s1);
+            var c4 = CustomPropertyHelper.Get(s1);
             Assert.AreEqual(0, c4.Count);
 
             var app = this.GetVisioApplication();
@@ -83,7 +83,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             s1.Text = "Checking for Custom Properties";
 
 
-            var cp1 = new VACUSTPROP.CustomPropertyCells();
+            var cp1 = new CustomPropertyCells();
             cp1.Ask = "1";
             cp1.Calendar = "0";
             cp1.Format= "1";
@@ -95,9 +95,9 @@ namespace VisioAutomation_Tests.Core.Shapes
             cp1.Type= "0";
             cp1.Value= "1";
 
-            VACUSTPROP.CustomPropertyHelper.Set(s1, "PROP1", cp1);
+            CustomPropertyHelper.Set(s1, "PROP1", cp1);
 
-            var props1 = VACUSTPROP.CustomPropertyHelper.Get(s1);
+            var props1 = CustomPropertyHelper.Get(s1);
 
             var cp2 = props1["PROP1"];
             Assert.AreEqual("TRUE", cp2.Ask.Formula.Value);
@@ -113,7 +113,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             Assert.AreEqual("\"1\"", cp2.Value.Formula.Value);
 
-            var cp3 = new VACUSTPROP.CustomPropertyCells();
+            var cp3 = new CustomPropertyCells();
             cp3.Ask = "0";
             cp3.Calendar = "2";
             cp3.Format = "0";
@@ -125,8 +125,8 @@ namespace VisioAutomation_Tests.Core.Shapes
             cp3.Type = "3";
             cp3.Value = "2";
 
-            VACUSTPROP.CustomPropertyHelper.Set(s1,"PROP1",cp3);
-            var props2 = VACUSTPROP.CustomPropertyHelper.Get(s1);
+            CustomPropertyHelper.Set(s1,"PROP1",cp3);
+            var props2 = CustomPropertyHelper.Get(s1);
 
             var cp4 = props2["PROP1"];
             Assert.AreEqual("FALSE", cp4.Ask.Formula.Value);

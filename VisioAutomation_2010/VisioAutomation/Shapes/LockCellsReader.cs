@@ -2,7 +2,7 @@ using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
 
-namespace VisioAutomation.Shapes.Locking
+namespace VisioAutomation.Shapes
 {
     class LockCellsReader : SingleRowReader<LockCells>
     {

@@ -4,9 +4,8 @@ using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
-using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
-using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Dom
@@ -92,8 +91,8 @@ namespace VisioAutomation.Models.Dom
                 foreach (var kv in shape.CustomProperties)
                 {
                     string cp_name = kv.Key;
-                    VACUSTPROP.CustomPropertyCells cp_cells = kv.Value;
-                    VACUSTPROP.CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
+                    CustomPropertyCells cp_cells = kv.Value;
+                    CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
                 }
             }
         }

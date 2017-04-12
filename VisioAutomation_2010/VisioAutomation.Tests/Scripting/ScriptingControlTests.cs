@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VACONTROL = VisioAutomation.Shapes.Controls;
+using VisioAutomation.Shapes;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -31,7 +31,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, controls0[s2].Count);
             Assert.AreEqual(0, controls0[s3].Count);
 
-            var ctrl = new VACONTROL.ControlCells();
+            var ctrl = new ControlCells();
             ctrl.X = "Width*0.5";
             ctrl.Y = "0";
             client.Control.Add(targets, ctrl);

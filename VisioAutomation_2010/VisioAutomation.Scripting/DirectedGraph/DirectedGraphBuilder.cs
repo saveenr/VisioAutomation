@@ -3,7 +3,7 @@ using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Scripting.Utilities;
-using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.Shapes;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.DirectedGraph
@@ -158,7 +158,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 {
                     var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
                     dg_shape.URL = shape_info.URL;
-                    dg_shape.CustomProperties = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary();
+                    dg_shape.CustomProperties = new CustomPropertyDictionary();
                     foreach (var kv in shape_info.custprops)
                     {
                         dg_shape.CustomProperties[kv.Key] = kv.Value;

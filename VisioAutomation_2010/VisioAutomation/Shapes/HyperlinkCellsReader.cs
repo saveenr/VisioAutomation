@@ -2,9 +2,9 @@ using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.Hyperlinks
+namespace VisioAutomation.Shapes
 {
-    class HyperlinkCellsReader : MultiRowReader<Shapes.Hyperlinks.HyperlinkCells>
+    class HyperlinkCellsReader : MultiRowReader<HyperlinkCells>
     {
 
         public SubQueryColumn Address { get; set; }
@@ -32,9 +32,9 @@ namespace VisioAutomation.Shapes.Hyperlinks
             this.SubAddress= sec.AddCell(ShapeSheet.SrcConstants.HyperlinkSubAddress, nameof(ShapeSheet.SrcConstants.HyperlinkSubAddress));
         }
 
-        public override Shapes.Hyperlinks.HyperlinkCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override HyperlinkCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
-            var cells = new Shapes.Hyperlinks.HyperlinkCells();
+            var cells = new HyperlinkCells();
 
             cells.Address = row[this.Address].Formula;
             cells.Description= row[this.Description].Formula;

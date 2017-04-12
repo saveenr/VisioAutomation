@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Shapes.CustomProperties
+namespace VisioAutomation.Shapes
 {
     public class CustomPropertyDictionary : Dictionary<string, CustomPropertyCells>
     {

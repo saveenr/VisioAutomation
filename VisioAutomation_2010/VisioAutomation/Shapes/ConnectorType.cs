@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Shapes.Connectors
+﻿namespace VisioAutomation.Shapes
 {
     public enum ConnectorType
     {

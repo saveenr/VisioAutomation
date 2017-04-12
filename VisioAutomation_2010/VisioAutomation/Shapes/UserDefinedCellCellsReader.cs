@@ -3,9 +3,9 @@ using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.UserDefinedCells
+namespace VisioAutomation.Shapes
 {
-    class UserDefinedCellCellsReader : MultiRowReader<Shapes.UserDefinedCells.UserDefinedCellCells>
+    class UserDefinedCellCellsReader : MultiRowReader<UserDefinedCellCells>
     {
         public SubQueryColumn Value { get; set; }
         public SubQueryColumn Prompt { get; set; }
@@ -17,9 +17,9 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             this.Prompt = sec.AddCell(SrcConstants.UserDefCellPrompt, nameof(SrcConstants.UserDefCellPrompt));
         }
 
-        public override Shapes.UserDefinedCells.UserDefinedCellCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override UserDefinedCellCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
         {
-            var cells = new Shapes.UserDefinedCells.UserDefinedCellCells();
+            var cells = new UserDefinedCellCells();
             cells.Value = row[this.Value];
             cells.Prompt = row[this.Prompt];
             return cells;

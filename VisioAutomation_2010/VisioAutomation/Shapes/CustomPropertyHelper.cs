@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.CustomProperties
+namespace VisioAutomation.Shapes
 {
     public static class CustomPropertyHelper
     {
@@ -83,7 +83,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return dic;
         }
 
-        public static List<VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static List<CustomPropertyDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
         {
             if (page == null)
             {
@@ -96,7 +96,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_dic = new List<VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary>(shapeids.Count);
+            var customprops_dic = new List<CustomPropertyDictionary>(shapeids.Count);
             var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids);
             
             if (customprops_per_shape.Count!=shapeids.Count)
@@ -115,7 +115,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                     throw new InternalAssertionException();
                 }
 
-                var dic = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary(prop_names.Count);
+                var dic = new CustomPropertyDictionary(prop_names.Count);
                 
                 for (int prop_index=0; prop_index< prop_names.Count(); prop_index++)
                 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Shapes.Geometry
+namespace VisioAutomation.Shapes
 {
     public class GeometrySection : IEnumerable<GeometryRow>
     {

@@ -3,7 +3,7 @@ using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.ConnectionPoints
+namespace VisioAutomation.Shapes
 {
     class ConnectionPointCellsReader : MultiRowReader<ConnectionPointCells>
     {

@@ -1,7 +1,7 @@
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.Geometry
+namespace VisioAutomation.Shapes
 {
     public static class GeometryHelper
     {

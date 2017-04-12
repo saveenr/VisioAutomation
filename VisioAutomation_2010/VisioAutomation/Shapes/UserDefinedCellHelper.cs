@@ -4,7 +4,7 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Shapes.UserDefinedCells
+namespace VisioAutomation.Shapes
 {
     public static class UserDefinedCellHelper
     {

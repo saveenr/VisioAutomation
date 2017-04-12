@@ -1,4 +1,4 @@
-using VisioAutomation.Shapes.ConnectionPoints;
+using VisioAutomation.Shapes;
 
 namespace VisioPowerShell.Model
 {

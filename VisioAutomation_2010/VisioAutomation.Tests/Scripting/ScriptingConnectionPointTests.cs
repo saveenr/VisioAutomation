@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Shapes.ConnectionPoints;
 
 namespace VisioAutomation_Tests.Scripting
 {

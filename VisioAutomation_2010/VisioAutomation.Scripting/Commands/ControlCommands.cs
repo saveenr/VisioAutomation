@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VACONTROL = VisioAutomation.Shapes.Controls;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
@@ -12,7 +12,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public List<int> Add(TargetShapes targets, VACONTROL.ControlCells ctrl)
+        public List<int> Add(TargetShapes targets, ControlCells ctrl)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    int ci = VACONTROL.ControlHelper.Add(shape, ctrl);
+                    int ci = ControlHelper.Add(shape, ctrl);
                     control_indices.Add(ci);
                 }
             }
@@ -60,12 +60,12 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    VACONTROL.ControlHelper.Delete(shape, n);
+                    ControlHelper.Delete(shape, n);
                 }
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>> Get(TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<ControlCells>> Get(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -74,13 +74,13 @@ namespace VisioAutomation.Scripting.Commands
 
             if (targets.Shapes.Count < 1)
             {
-                return new Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>>(0);
+                return new Dictionary<IVisio.Shape, IList<ControlCells>>(0);
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<VACONTROL.ControlCells>>();
+            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>();
             foreach (var shape in targets.Shapes)
             {
-                var controls = VACONTROL.ControlCells.GetCells(shape);
+                var controls = ControlCells.GetCells(shape);
                 dic[shape] = controls;
             }
             return dic;
