@@ -2,7 +2,7 @@
 {
     public enum AlertResponseCode
     {
-        OK = 1,
+        Ok = 1,
         Cancel = 2,
         Abort = 3,
         Retry = 4,
