@@ -16,10 +16,10 @@ namespace VisioAutomation.PageLayouts
             this.VerticalAlignment = VerticalAlignment.Middle;
         }
 
-        protected override void SetPageCells(PageLayoutFormulas pagecells)
+        protected override void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
-            base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) HierarchyLayout.GetPlaceStyle(this.LayoutDirection, this.HorizontalAlignment, this.VerticalAlignment);
+            base.SetPageCells(page_layout_cells);
+            page_layout_cells.PlaceStyle = (int) HierarchyLayout.GetPlaceStyle(this.LayoutDirection, this.HorizontalAlignment, this.VerticalAlignment);
         }
 
         private static IVisio.VisCellVals GetPlaceStyle(LayoutDirection dir, HorizontalAlignment halign, VerticalAlignment valign)

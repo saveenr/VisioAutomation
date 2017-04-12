@@ -14,36 +14,36 @@ namespace VisioAutomation.PageLayouts
             this.AvenueSize = new Drawing.Size(0.375, 0.375);
         }
 
-        protected virtual void SetPageCells(PageLayoutFormulas pagecells)
+        protected virtual void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
-            pagecells.AvenueSizeX = this.AvenueSize.Width;
-            pagecells.AvenueSizeY = this.AvenueSize.Height;
-            pagecells.LineRouteExt = (int) LayoutBase.ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
+            page_layout_cells.AvenueSizeX = this.AvenueSize.Width;
+            page_layout_cells.AvenueSizeY = this.AvenueSize.Height;
+            page_layout_cells.LineRouteExt = (int) LayoutBase.ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
 
             var rs = this.ConnectorsStyleToRouteStyle();
             if (rs.HasValue)
             {
-                pagecells.RouteStyle = (int) rs.Value;
+                page_layout_cells.RouteStyle = (int) rs.Value;
             }
         }
 
-        private static IVisio.VisCellVals ConnectorAppearanceToLineRouteExt(ConnectorAppearance ca)
+        private static IVisio.VisCellVals ConnectorAppearanceToLineRouteExt(ConnectorAppearance con_appearance)
         {
-            if (ca == ConnectorAppearance.Default)
+            if (con_appearance == ConnectorAppearance.Default)
             {
                 return IVisio.VisCellVals.visLORouteExtDefault;
             }
-            else if (ca == ConnectorAppearance.Straight)
+            else if (con_appearance == ConnectorAppearance.Straight)
             {
                 return IVisio.VisCellVals.visLORouteExtStraight;
             }
-            else if (ca == ConnectorAppearance.Curved)
+            else if (con_appearance == ConnectorAppearance.Curved)
             {
                 return IVisio.VisCellVals.visLORouteExtNURBS;
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException(nameof(ca));
+                throw new System.ArgumentOutOfRangeException(nameof(con_appearance));
             }
         }
 
@@ -72,9 +72,9 @@ namespace VisioAutomation.PageLayouts
             }
         }
 
-        protected IVisio.VisCellVals ConnectorsStyleAndDirectionToRouteStyle(ConnectorStyle cs, LayoutDirection dir)
+        protected IVisio.VisCellVals ConnectorsStyleAndDirectionToRouteStyle(ConnectorStyle con_style, LayoutDirection dir)
         {
-            if (cs == ConnectorStyle.Flowchart)
+            if (con_style == ConnectorStyle.Flowchart)
             {
                 if (dir == LayoutDirection.BottomToTop)
                 {
@@ -93,7 +93,7 @@ namespace VisioAutomation.PageLayouts
                     return IVisio.VisCellVals.visLORouteFlowchartEW;
                 }
             }
-            else if (cs == ConnectorStyle.OrganizationChart)
+            else if (con_style == ConnectorStyle.OrganizationChart)
             {
                 if (dir == LayoutDirection.BottomToTop)
                 {
@@ -112,7 +112,7 @@ namespace VisioAutomation.PageLayouts
                     return IVisio.VisCellVals.visLORouteOrgChartEW;
                 }
             }
-            else if (cs == ConnectorStyle.Simple)
+            else if (con_style == ConnectorStyle.Simple)
             {
                 if (dir == LayoutDirection.BottomToTop)
                 {
@@ -131,20 +131,16 @@ namespace VisioAutomation.PageLayouts
                     return IVisio.VisCellVals.visLORouteSimpleEW;
                 }
             }
-            throw new System.ArgumentOutOfRangeException(nameof(cs));
+            throw new System.ArgumentOutOfRangeException(nameof(con_style));
         }
 
         public void Apply(IVisio.Page page)
         {
-            var pagecells = new PageLayoutFormulas();
-            this.SetPageCells(pagecells);
+            var page_layout_cells = new VisioAutomation.Pages.PageLayoutCells();
+            this.SetPageCells(page_layout_cells);
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutAvenueSizeX, pagecells.AvenueSizeX);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, pagecells.AvenueSizeY);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineRouteExt, pagecells.LineRouteExt);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutRouteStyle, pagecells.RouteStyle);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutPlaceStyle, pagecells.PlaceStyle);
+            page_layout_cells.SetFormulas(writer);
 
             writer.Commit(page.PageSheet);
             page.Layout();

@@ -13,10 +13,10 @@ namespace VisioAutomation.PageLayouts
             this.LayoutDirection = LayoutDirection.TopToBottom;
         }
 
-        protected override void SetPageCells(PageLayoutFormulas pagecells)
+        protected override void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
-            base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) FlowchartLayout.GetPlaceStyle(this.LayoutDirection);
+            base.SetPageCells(page_layout_cells);
+            page_layout_cells.PlaceStyle = (int) FlowchartLayout.GetPlaceStyle(this.LayoutDirection);
         }
 
         private static IVisio.VisCellVals GetPlaceStyle(LayoutDirection dir)

@@ -10,10 +10,10 @@ namespace VisioAutomation.PageLayouts
             this.ConnectorStyle = ConnectorStyle.CenterToCenter;
         }
 
-        protected override void SetPageCells(PageLayoutFormulas pagecells)
+        protected override void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
-            base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) IVisio.VisCellVals.visPLOPlaceCircular;
+            base.SetPageCells(page_layout_cells);
+            page_layout_cells.PlaceStyle = (int) IVisio.VisCellVals.visPLOPlaceCircular;
         }
     }
 }
