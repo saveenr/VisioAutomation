@@ -1,5 +1,6 @@
 using System;
 using System.Management.Automation;
+using VisioAutomation.Scripting.Builders;
 using VisioAutomation.Scripting.Models;
 using VAS = VisioAutomation.Scripting;
 using SXL = System.Xml.Linq;

@@ -1,5 +1,5 @@
 using System.IO;
-using VisioAutomation.Scripting.Models.ShapeSheet;
+using VisioAutomation.Scripting.Models;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 

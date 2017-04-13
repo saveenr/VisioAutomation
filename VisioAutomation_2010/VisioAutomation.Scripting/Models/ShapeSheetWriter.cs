@@ -1,6 +1,6 @@
 ﻿using VisioAutomation.ShapeSheet.Writers;
 
-namespace VisioAutomation.Scripting.Models.ShapeSheet
+namespace VisioAutomation.Scripting.Models
 {
     public class ShapeSheetWriter
     {

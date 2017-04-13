@@ -3,10 +3,11 @@ using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Scripting.Extensions;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.Shapes;
 using SXL = System.Xml.Linq;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioAutomation.Scripting.Builders
 {
     public class DirectedGraphBuilder
     {

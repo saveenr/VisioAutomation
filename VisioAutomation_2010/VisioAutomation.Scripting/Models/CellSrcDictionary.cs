@@ -1,6 +1,6 @@
 ﻿using VisioAutomation.ShapeSheet;
 
-namespace VisioAutomation.Scripting.Models.ShapeSheet
+namespace VisioAutomation.Scripting.Models
 {
     public class CellSrcDictionary : NamedSrcDictionary
     {

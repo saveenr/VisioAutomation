@@ -4,7 +4,7 @@ using System.Linq;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
 
-namespace VisioAutomation.Scripting.Models.ShapeSheet
+namespace VisioAutomation.Scripting.Models
 {
     public class NamedSrcDictionary : NameDictionary<Src>
     {

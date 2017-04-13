@@ -3,7 +3,7 @@ using VisioAutomation.Scripting.Extensions;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 using SXL = System.Xml.Linq;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioAutomation.Scripting.Builders
 {
     public class OrgChartBuilder
     {

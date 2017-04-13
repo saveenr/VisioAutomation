@@ -1,7 +1,7 @@
 ﻿using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Models.ShapeSheet
+namespace VisioAutomation.Scripting.Models
 {
     public class ShapeSheetReader
     {
