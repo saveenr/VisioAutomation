@@ -1,13 +1,10 @@
-
-using VisioAutomation.Models;
-
 namespace VisioPowerShell.Models
 {
     public enum HorizontalAlignment
     {
         None = -1,
-        Left = AlignmentHorizontal.Left,
-        Center = AlignmentHorizontal.Center,
-        Right = AlignmentHorizontal.Right
+        Left = VisioAutomation.Scripting.Models.AlignmentHorizontal.Left,
+        Center = VisioAutomation.Scripting.Models.AlignmentHorizontal.Center,
+        Right = VisioAutomation.Scripting.Models.AlignmentHorizontal.Right
     }
 }

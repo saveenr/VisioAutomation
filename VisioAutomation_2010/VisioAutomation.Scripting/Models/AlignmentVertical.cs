@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Models
+﻿namespace VisioAutomation.Scripting.Models
 {
     public enum AlignmentVertical
     {

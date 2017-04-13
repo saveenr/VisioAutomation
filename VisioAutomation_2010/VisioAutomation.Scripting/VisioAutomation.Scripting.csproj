@@ -48,6 +48,8 @@
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="Commands\SnapCommands.cs" />
+    <Compile Include="Models\AlignmentHorizontal.cs" />
+    <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\PrintPageOrientation.cs" />
     <Compile Include="Models\NameDictionary.cs" />
