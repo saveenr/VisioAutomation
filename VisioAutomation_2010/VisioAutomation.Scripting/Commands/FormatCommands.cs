@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Scripting.FormatPaint;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.ShapeSheet.Query;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -144,7 +144,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var targets = new VisioAutomation.Scripting.TargetShapes( target_shape );
+            var targets = new TargetShapes( target_shape );
             var shapes = targets.ResolveShapes(this._client);
             if (shapes.Shapes.Count < 1)
             {

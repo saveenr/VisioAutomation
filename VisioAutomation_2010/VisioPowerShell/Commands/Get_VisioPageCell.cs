@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
+using VisioAutomation.Scripting.Models.ShapeSheet;
 using VisioAutomation.ShapeSheet;
 using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -25,7 +26,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSrcDictionary.GetCellMapForPages();
+            var cellmap = CellSrcDictionary.GetCellMapForPages();
 
             if (this.Cells == null || this.Cells.Length < 1 || this.Cells.Contains("*"))
             {
@@ -38,7 +39,7 @@ namespace VisioPowerShell.Commands
             var query = cellmap.ToQuery(this.Cells);
             var surface = new ShapeSheetSurface(target_page);
             var target_shapeids = new[] { surface.Target.Page.PageSheet.ID };
-            var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
+            var dt = DataTableHelpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
             this.WriteObject(dt);
         }
 

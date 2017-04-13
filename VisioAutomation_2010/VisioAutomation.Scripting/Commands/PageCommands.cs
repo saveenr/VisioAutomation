@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.View;
+using VisioAutomation.Scripting.Helpers;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -260,7 +261,7 @@ namespace VisioAutomation.Scripting.Commands
             return dest_page;
         }
 
-        public VisioAutomation.Scripting.Layout.PrintPageOrientation GetOrientation()
+        public PrintPageOrientation GetOrientation()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -270,7 +271,7 @@ namespace VisioAutomation.Scripting.Commands
             return PageCommands.GetOrientation(active_page);
         }
 
-        private static VisioAutomation.Scripting.Layout.PrintPageOrientation GetOrientation(IVisio.Page page)
+        private static PrintPageOrientation GetOrientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -281,10 +282,10 @@ namespace VisioAutomation.Scripting.Commands
             var src = VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation;
             var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNumber, 0];
-            return (VisioAutomation.Scripting.Layout.PrintPageOrientation)value;
+            return (PrintPageOrientation)value;
         }
 
-        public void SetOrientation(VisioAutomation.Scripting.Layout.PrintPageOrientation orientation)
+        public void SetOrientation(PrintPageOrientation orientation)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -294,7 +295,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = application.ActivePage;
 
-            if (orientation != VisioAutomation.Scripting.Layout.PrintPageOrientation.Landscape && orientation != VisioAutomation.Scripting.Layout.PrintPageOrientation.Portrait)
+            if (orientation != PrintPageOrientation.Landscape && orientation != PrintPageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
@@ -541,7 +542,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // otherwise we start checking for each name
-            var shapes_list = VisioAutomation.Scripting.Utilities.WildcardHelper.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, VisioAutomation.Scripting.Utilities.WildcardHelper.FilterAction.Include).ToList();
+            var shapes_list = WildcardHelper.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, WildcardHelper.FilterAction.Include).ToList();
 
             return shapes_list;
         }
@@ -560,7 +561,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 // return the named page
                 var pages = active_document.Pages.ToEnumerable();
-                var pages2= VisioAutomation.Scripting.Utilities.WildcardHelper.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, VisioAutomation.Scripting.Utilities.WildcardHelper.FilterAction.Include).ToList();
+                var pages2= WildcardHelper.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, WildcardHelper.FilterAction.Include).ToList();
                 return pages2;
             }
         }

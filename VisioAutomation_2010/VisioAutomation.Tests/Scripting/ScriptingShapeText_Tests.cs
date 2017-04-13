@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Scripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -36,7 +37,7 @@ namespace VisioAutomation_Tests.Scripting
             var names = new[] { "TestName", "TestName2" };
             var texts = names.ToArray();
 
-            var targets = new VA.Scripting.TargetShapes(shapes);
+            var targets = new TargetShapes(shapes);
             client.Text.Set(targets, texts);
             client.ShapeSheet.SetName(targets, names);
 

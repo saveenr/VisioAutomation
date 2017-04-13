@@ -1,5 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 
@@ -21,7 +22,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Selection.SelectNone();
 
-            var shapes = new VisioAutomation.Scripting.TargetShapes(s1,s2,s3);
+            var shapes = new TargetShapes(s1,s2,s3);
             var shape_ids = shapes.ToShapeIDs();
             var page = client.Page.Get();
             var writer = client.ShapeSheet.GetWriter(page);
@@ -52,7 +53,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new VisioAutomation.Scripting.TargetShapes();
+            var targets = new TargetShapes();
             var prop_dic0 = client.CustomProp.Get(targets);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);

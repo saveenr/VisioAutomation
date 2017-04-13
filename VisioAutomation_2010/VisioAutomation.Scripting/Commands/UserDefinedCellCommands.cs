@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 

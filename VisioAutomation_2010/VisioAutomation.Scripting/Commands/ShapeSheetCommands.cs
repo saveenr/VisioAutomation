@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using VisioAutomation.Scripting.Models;
+using VisioAutomation.Scripting.Models.ShapeSheet;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -82,15 +84,15 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public VisioAutomation.Scripting.ShapeSheet.ShapeSheetWriter GetWriter(IVisio.Page page)
+        public ShapeSheetWriter GetWriter(IVisio.Page page)
         {
-            var writer = new VisioAutomation.Scripting.ShapeSheet.ShapeSheetWriter(this._client, page);
+            var writer = new ShapeSheetWriter(this._client, page);
             return writer;
         }
 
-        public VisioAutomation.Scripting.ShapeSheet.ShapeSheetReader GetReader(IVisio.Page page)
+        public ShapeSheetReader GetReader(IVisio.Page page)
         {
-            var reader = new VisioAutomation.Scripting.ShapeSheet.ShapeSheetReader(this._client, page);
+            var reader = new ShapeSheetReader(this._client, page);
             return reader;
         }
 
@@ -107,8 +109,8 @@ namespace VisioAutomation.Scripting.Commands
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSrcDictionary.GetCellMapForPages();
-            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, hashtable);
+            var cellmap = CellSrcDictionary.GetCellMapForPages();
+            var valuemap = new CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
             {
@@ -147,8 +149,8 @@ namespace VisioAutomation.Scripting.Commands
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = VisioAutomation.Scripting.ShapeSheet.CellSrcDictionary.GetCellMapForShapes();
-            var valuemap = new VisioAutomation.Scripting.ShapeSheet.CellValueDictionary(cellmap, hashtable);
+            var cellmap = CellSrcDictionary.GetCellMapForShapes();
+            var valuemap = new CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
             {

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -38,7 +39,7 @@ namespace VisioAutomation.Scripting.Commands
         public List<int> Add( TargetShapes targets, 
             string fx,
             string fy,
-            VisioAutomation.Scripting.Shapes.ConnectionPointType type)
+            ConnectionPointType type)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -78,7 +79,7 @@ namespace VisioAutomation.Scripting.Commands
         public List<int> Add(
             string fx,
             string fy,
-            VisioAutomation.Scripting.Shapes.ConnectionPointType type)
+            ConnectionPointType type)
         {
             this._client.Application.AssertApplicationAvailable();
 

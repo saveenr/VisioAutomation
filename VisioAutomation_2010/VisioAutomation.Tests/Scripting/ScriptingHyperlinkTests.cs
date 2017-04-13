@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.Shapes;
 
 namespace VisioAutomation_Tests.Scripting
@@ -24,7 +25,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new VisioAutomation.Scripting.TargetShapes();
+            var targets = new TargetShapes();
 
             var hyperlinks0 = client.Hyperlink.Get(targets);
 

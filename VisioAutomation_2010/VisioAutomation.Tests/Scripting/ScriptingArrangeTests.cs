@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Models;
+using VisioAutomation.Scripting.Models;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Scripting
@@ -34,7 +35,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new VisioAutomation.Scripting.TargetShapes();
+            var targets = new TargetShapes();
 
             client.Distribute.DistributeHorizontal(targets, AlignmentHorizontal.Center);
 
@@ -70,7 +71,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new VA.Scripting.TargetShapes();
+            var targets = new TargetShapes();
             client.Distribute.DistributeOnAxis(targets, Axis.XAxis , 0.25);
             client.Distribute.DistributeOnAxis(targets, Axis.YAxis, 1.0);
 
@@ -112,7 +113,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new VisioAutomation.Scripting.TargetShapes();
+            var targets = new TargetShapes();
 
             client.Arrange.Nudge(targets, 0.50, -0.25);
 

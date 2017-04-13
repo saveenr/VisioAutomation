@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.Tree;
-using VisioAutomation.Scripting.Utilities;
+using VisioAutomation.Scripting.Helpers;
+using VisioAutomation.Scripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
@@ -37,7 +38,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
 
-            var formdoc = new Models.Documents.Forms.FormDocument();
+            var formdoc = new VisioAutomation.Models.Documents.Forms.FormDocument();
             formdoc.Subject = "VisioAutomation.Scripting Documenation";
             formdoc.Title = "VisioAutomation.Scripting Documenation";
             formdoc.Creator = "";
@@ -83,12 +84,12 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextHelper.Join(helpstr,"\r\n",lines);
 
-                var formpage = new Models.Documents.Forms.FormPage();
+                var formpage = new VisioAutomation.Models.Documents.Forms.FormPage();
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
                 formpage.Size = new Drawing.Size(8.5, 11);
-                formpage.Margin = new Models.Margin(0.5, 0.5, 0.5, 0.5);
+                formpage.Margin = new VisioAutomation.Models.Margin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
             }
@@ -105,12 +106,12 @@ namespace VisioAutomation.Scripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
             
-            var formdoc = new Models.Documents.Forms.FormDocument();
+            var formdoc = new VisioAutomation.Models.Documents.Forms.FormDocument();
 
             var helpstr = new System.Text.StringBuilder();
             int chunksize = 70;
 
-            var interop_enums = Utilities.InteropHelper.GetEnums();
+            var interop_enums = InteropHelper.GetEnums();
 
             foreach (var enum_ in interop_enums)
             {
@@ -125,9 +126,9 @@ namespace VisioAutomation.Scripting.Commands
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
                     }
 
-                    var formpage = new Models.Documents.Forms.FormPage();
+                    var formpage = new VisioAutomation.Models.Documents.Forms.FormPage();
                     formpage.Size = new Drawing.Size(8.5, 11);
-                    formpage.Margin = new Models.Margin(0.5, 0.5, 0.5, 0.5);
+                    formpage.Margin = new VisioAutomation.Models.Margin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)
@@ -245,7 +246,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new Models.Layouts.Tree.Drawing();
+            var tree_layout = new VisioAutomation.Models.Layouts.Tree.Drawing();
             tree_layout.LayoutOptions.Direction = LayoutDirection.Right;
             tree_layout.LayoutOptions.ConnectorType = ConnectorType.CurvedBezier;
             var ns_node_map = new Dictionary<string, Node>(namespaces.Count);
@@ -332,19 +333,19 @@ namespace VisioAutomation.Scripting.Commands
             return doc;
         }
 
-        public List<Utilities.EnumType> GetInteropEnums()
+        public List<EnumType> GetInteropEnums()
         {
-            return Utilities.InteropHelper.GetEnums();
+            return InteropHelper.GetEnums();
         }
 
-        public Utilities.EnumType GetInteropEnum(string name)
+        public EnumType GetInteropEnum(string name)
         {
-            return Utilities.InteropHelper.GetEnum(name);
+            return InteropHelper.GetEnum(name);
         }
 
-        public Utilities.EnumType GetEnum(Type type)
+        public EnumType GetEnum(Type type)
         {
-            return new Utilities.EnumType(type);
+            return new EnumType(type);
         }
         
         private static IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> source, int chunksize)
@@ -404,7 +405,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new Models.Layouts.Tree.Drawing();
+            var tree_layout = new VisioAutomation.Models.Layouts.Tree.Drawing();
             tree_layout.LayoutOptions.Direction = LayoutDirection.Down;
             tree_layout.LayoutOptions.ConnectorType = ConnectorType.PolyLine;
             var ns_node_map = new Dictionary<string, Node>(namespaces.Count);

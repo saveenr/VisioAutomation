@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Scripting.Models;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -21,13 +22,13 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var indices0 = client.ConnectionPoint.Add("0", "Width*0.67", VisioAutomation.Scripting.Shapes.ConnectionPointType.Outward);
+            var indices0 = client.ConnectionPoint.Add("0", "Width*0.67", ConnectionPointType.Outward);
             Assert.AreEqual(3, indices0.Count);
             Assert.AreEqual(0, indices0[0]);
             Assert.AreEqual(0, indices0[1]);
             Assert.AreEqual(0, indices0[2]);
 
-            var targets = new VisioAutomation.Scripting.TargetShapes();
+            var targets = new TargetShapes();
             var dic = client.ConnectionPoint.Get(targets);
             Assert.AreEqual(3, dic.Count);
             Assert.AreEqual("Width*0.67", dic[s1][0].Y.Formula);

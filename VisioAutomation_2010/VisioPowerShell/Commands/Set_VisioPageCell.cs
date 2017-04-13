@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using VisioAutomation.Scripting.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -27,7 +28,7 @@ namespace VisioPowerShell.Commands
             foreach (var page in target_pages)
             {
                 var pagesheet = page.PageSheet;
-                var t = new VisioAutomation.Scripting.TargetShapes(pagesheet);
+                var t = new TargetShapes(pagesheet);
 
                 var dic = CellHashtableToDictionary(this.Hashtable);
                 this.Client.ShapeSheet.SetPageCells( t , dic, this.BlastGuards, this.TestCircular);

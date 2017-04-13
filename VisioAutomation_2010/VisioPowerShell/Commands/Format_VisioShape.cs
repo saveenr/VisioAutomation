@@ -1,5 +1,6 @@
 using System.Management.Automation;
 using VisioAutomation.Models;
+using VisioAutomation.Scripting.Models;
 using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -33,7 +34,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
 
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {

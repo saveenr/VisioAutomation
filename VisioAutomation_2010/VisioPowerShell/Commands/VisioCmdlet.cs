@@ -1,4 +1,5 @@
 using System.IO;
+using VisioAutomation.Scripting.Models.ShapeSheet;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 
@@ -31,7 +32,7 @@ namespace VisioPowerShell.Commands
                 // for the lifetime of this cmdlet
 
                 VisioCmdlet._client = VisioCmdlet._client ?? new VisioAutomation.Scripting.Client(null);
-                VisioCmdlet._client.Context = new VisioPsContext(this);
+                VisioCmdlet._client.ClientContext = new VisioPsClientContext(this);
                 return VisioCmdlet._client;
 
                 // Must always setup the client output
@@ -64,7 +65,7 @@ namespace VisioPowerShell.Commands
             return false;
         }
 
-        protected void DumpValues(VisioAutomation.Scripting.ShapeSheet.CellValueDictionary cellvalues)
+        protected void DumpValues(CellValueDictionary cellvalues)
         {
             this.WriteVerbose(string.Format("CellValues contains {0} items", cellvalues.Keys.Count));
             foreach (var cellname in cellvalues.Keys)

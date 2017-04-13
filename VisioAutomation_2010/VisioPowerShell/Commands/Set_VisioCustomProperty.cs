@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Management.Automation;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -111,13 +112,13 @@ namespace VisioPowerShell.Commands
                 cp.Invisible = this.Invisible;
             }
 
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
             this.Client.CustomProp.Set(targets, this.Name, cp);
         }
 
         private void SetFromHashTable()
         {
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
 
             if (this.HashTable.Count < 1)
             {

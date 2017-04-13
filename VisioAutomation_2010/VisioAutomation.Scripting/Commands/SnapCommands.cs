@@ -1,5 +1,5 @@
-using VisioAutomation.Scripting.Layout;
-using VisioAutomation.Scripting.Utilities;
+using VisioAutomation.Scripting.Helpers;
+using VisioAutomation.Scripting.Models;
 
 namespace VisioAutomation.Scripting.Commands
 {

@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Scripting.Utilities;
+using VisioAutomation.Scripting.Models;
+
 namespace VisioAutomation_Tests.Core.Internal
 {
     [TestClass]

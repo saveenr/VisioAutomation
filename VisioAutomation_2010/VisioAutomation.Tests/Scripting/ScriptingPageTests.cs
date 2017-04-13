@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.View;
+using VisioAutomation.Scripting.Models;
 
 namespace VisioAutomation_Tests.Scripting
 {

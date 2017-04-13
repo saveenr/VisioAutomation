@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Utilities;
+using VisioAutomation.Scripting.Helpers;
+using VisioAutomation.Scripting.Models;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 

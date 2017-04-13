@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Scripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -19,7 +20,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
             if (this.Font != null)
             {
                 this.Client.Text.SetFont(targets, this.Font);                

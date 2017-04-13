@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioAutomation.Scripting.Models;
 using VisioPowerShell.Models;
 
 namespace VisioPowerShell.Commands
@@ -16,7 +17,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.Orientation != PageOrientation.None)
             {
-                this.Client.Page.SetOrientation((VisioAutomation.Scripting.Layout.PrintPageOrientation) this.Orientation);
+                this.Client.Page.SetOrientation((PrintPageOrientation) this.Orientation);
             }
 
             if (this.BackgroundPage != null)
