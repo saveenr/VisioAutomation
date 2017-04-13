@@ -128,7 +128,6 @@
     <Compile Include="Commands\Remove_VisioShape.cs" />
     <Compile Include="Commands\Get_VisioLayer.cs" />
     <Compile Include="Commands\Select_VisioShape.cs" />
-    <Compile Include="Commands\Set_VisioShapeSheet.cs" />
     <Compile Include="Commands\New_VisioBezier.cs" />
     <Compile Include="Commands\New_VisioModelPieChart.cs" />
     <Compile Include="Commands\New_VisioPolyLine.cs" />
