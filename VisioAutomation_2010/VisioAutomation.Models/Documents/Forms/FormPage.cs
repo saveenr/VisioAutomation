@@ -6,7 +6,7 @@ namespace VisioAutomation.Models.Documents.Forms
     {
         public string Name;
         public Drawing.Size Size;
-        public Models.Margin Margin;
+        public PageMargin PageMargin;
         public IVisio.Page VisioPage;
 
         public double TitleTextSize { get; set; }
@@ -19,7 +19,7 @@ namespace VisioAutomation.Models.Documents.Forms
         public FormPage()
         {
             this.Size = new Drawing.Size(8.5, 11);
-            this.Margin = new Models.Margin(0.5, 0.5, 0.5, 0.5);
+            this.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
             this.DefaultFont = "Segoe UI";
             this.BodyTextSize = 8.0;
             this.BodyParaSpacingAfter = 0.0;

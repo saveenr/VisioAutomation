@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Models.Documents.Forms;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.Tree;
 using VisioAutomation.Scripting.Helpers;
@@ -89,7 +90,7 @@ namespace VisioAutomation.Scripting.Commands
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
                 formpage.Size = new Drawing.Size(8.5, 11);
-                formpage.Margin = new VisioAutomation.Models.Margin(0.5, 0.5, 0.5, 0.5);
+                formpage.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
             }
@@ -128,7 +129,7 @@ namespace VisioAutomation.Scripting.Commands
 
                     var formpage = new VisioAutomation.Models.Documents.Forms.FormPage();
                     formpage.Size = new Drawing.Size(8.5, 11);
-                    formpage.Margin = new VisioAutomation.Models.Margin(0.5, 0.5, 0.5, 0.5);
+                    formpage.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)

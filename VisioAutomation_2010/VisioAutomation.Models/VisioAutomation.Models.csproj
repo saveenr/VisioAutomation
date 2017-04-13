@@ -119,7 +119,7 @@
     <Compile Include="Layouts\InternalTree\TreeLayoutOptions.cs" />
     <Compile Include="AlignmentHorizontal.cs" />
     <Compile Include="AlignmentVertical.cs" />
-    <Compile Include="Margin.cs" />
+    <Compile Include="Documents\Forms\PageMargin.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Utilities\MasterLoader.cs" />
     <Compile Include="Text\CharacterFormatting.cs" />

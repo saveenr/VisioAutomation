@@ -1,13 +1,13 @@
-﻿namespace VisioAutomation.Models
+﻿namespace VisioAutomation.Models.Documents.Forms
 {
-    public struct Margin
+    public struct PageMargin
     {
         public double Left { get; }
         public double Bottom { get; }
         public double Right { get; }
         public double Top { get; }
 
-        public Margin(double left, double bottom, double right, double top)
+        public PageMargin(double left, double bottom, double right, double top)
             : this()
         {
             if (right < left)
