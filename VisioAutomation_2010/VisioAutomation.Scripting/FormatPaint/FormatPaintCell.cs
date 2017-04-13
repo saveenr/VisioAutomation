@@ -2,16 +2,16 @@
 {
     public class FormatPaintCell
     {
-        public FormatCategory Category { get; }
+        public FormatPaintCategory PaintCategory { get; }
         public VisioAutomation.ShapeSheet.Src Src { get; private set; }
         public string Name;
 
         public string Result { get; set; }
         public string Formula { get; set; }
 
-        public FormatPaintCell(VisioAutomation.ShapeSheet.Src src, string name, FormatCategory category)
+        public FormatPaintCell(VisioAutomation.ShapeSheet.Src src, string name, FormatPaintCategory paint_category)
         {
-            this.Category = category;
+            this.PaintCategory = paint_category;
             this.Name = name;
             this.Src = src;
             this.Formula = null;
@@ -24,9 +24,9 @@
             this.Formula = null;
         }
 
-        public bool MatchesCategory(FormatCategory category)
+        public bool MatchesCategory(FormatPaintCategory paint_category)
         {
-            return ((this.Category & category) != 0);
+            return ((this.PaintCategory & paint_category) != 0);
         }
     }
 }

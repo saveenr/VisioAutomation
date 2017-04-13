@@ -96,7 +96,7 @@
     <Compile Include="Utilities\WildcardHelper.cs" />
     <Compile Include="Utilities\XFormData.cs" />
     <Compile Include="Utilities\XmlLinqExtensions.cs" />
-    <Compile Include="FormatPaint\FormatCategory.cs" />
+    <Compile Include="FormatPaint\FormatPaintCategory.cs" />
     <Compile Include="FormatPaint\FormatPaintCache.cs" />
     <Compile Include="FormatPaint\FormatPaintCell.cs" />
     <Compile Include="OrgChart\OrgChartBuilder.cs" />

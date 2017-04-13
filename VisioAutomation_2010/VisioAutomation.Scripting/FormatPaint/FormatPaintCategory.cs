@@ -1,7 +1,7 @@
 ﻿namespace VisioAutomation.Scripting.FormatPaint
 {
     [System.Flags]
-    public enum FormatCategory
+    public enum FormatPaintCategory
     {
         Fill = 0x01 << 0 ,
         Character = 0x01 << 1,

@@ -139,7 +139,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Copy(null, allflags);
         }
 
-        public void Copy(IVisio.Shape target_shape, FormatCategory category)
+        public void Copy(IVisio.Shape target_shape, FormatPaintCategory paint_category)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -153,7 +153,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shape = shapes.Shapes[0];
 
-            this.cache.CopyFormat(shape, category);
+            this.cache.CopyFormat(shape, paint_category);
         }
 
         public void ClearFormatCache()
@@ -161,7 +161,7 @@ namespace VisioAutomation.Scripting.Commands
             this.cache.Clear();
         }
 
-        public void Paste(TargetShapes targets, FormatCategory category, bool apply_formulas)
+        public void Paste(TargetShapes targets, FormatPaintCategory paint_category, bool apply_formulas)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -177,7 +177,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this._client.Application.Get();
             var active_page = application.ActivePage;
 
-            this.cache.PasteFormat(active_page, shapeids, category, apply_formulas);
+            this.cache.PasteFormat(active_page, shapeids, paint_category, apply_formulas);
         }
     }
 }
