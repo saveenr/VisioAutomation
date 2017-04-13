@@ -1,9 +1,8 @@
-﻿namespace VisioAutomation.Models
+﻿namespace VisioAutomation.Scripting.Models
 {
     public enum Axis
     {
         XAxis,
         YAxis
-    } ;
-
+    }
 }
