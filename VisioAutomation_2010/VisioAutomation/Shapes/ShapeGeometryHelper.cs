@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public static class GeometryHelper
+    public static class ShapeGeometryHelper
     {
         public static short AddSection(IVisio.Shape shape)
         {
@@ -13,7 +13,7 @@ namespace VisioAutomation.Shapes
             }
 
             int num_geometry_sections = shape.GeometryCount;
-            short new_sec_index = GeometryHelper.GetGeometrySectionIndex((short)num_geometry_sections);
+            short new_sec_index = ShapeGeometryHelper.GetGeometrySectionIndex((short)num_geometry_sections);
             short actual_sec_index = shape.AddSection(new_sec_index);
 
             if (actual_sec_index != new_sec_index)
@@ -37,7 +37,7 @@ namespace VisioAutomation.Shapes
             int num = shape.GeometryCount;
             for (int i = num-1; i >=0; i--)
             {
-                GeometryHelper.DeleteSection(shape, (short)i);                
+                ShapeGeometryHelper.DeleteSection(shape, (short)i);                
             }
         }
 
@@ -48,7 +48,7 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            short target_section_index = GeometryHelper.GetGeometrySectionIndex(index);
+            short target_section_index = ShapeGeometryHelper.GetGeometrySectionIndex(index);
             shape.DeleteSection(target_section_index);
         }
     }

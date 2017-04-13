@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes
 {
-    public class GeometryRow
+    public class ShapeGeometryRow
     {
         public ShapeSheet.CellValueLiteral X { get; set; }
         public ShapeSheet.CellValueLiteral Y { get; set; }
@@ -14,7 +14,7 @@ namespace VisioAutomation.Shapes
         public ShapeSheet.CellValueLiteral E { get; set; }
         public IVisio.VisRowTags RowTag { get; set; }
 
-        public GeometryRow(IVisio.VisRowTags tag)
+        public ShapeGeometryRow(IVisio.VisRowTags tag)
         {
             this.RowTag = tag;
         }
@@ -50,39 +50,39 @@ namespace VisioAutomation.Shapes
             writer.SetFormula(e_src, this.E);
         }
 
-        public static GeometryRow CreateLineTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y)
+        public static ShapeGeometryRow CreateLineTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y)
         {
             // http://msdn.microsoft.com/en-us/library/aa195656(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagLineTo);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagLineTo);
             row.X = x;
             row.Y = y;
             return row;
         }
 
-        public static GeometryRow CreateMoveTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y)
+        public static ShapeGeometryRow CreateMoveTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y)
         {
             // http://msdn.microsoft.com/en-us/library/aa195679(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagMoveTo);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagMoveTo);
             row.X = x;
             row.Y = y;
             return row;
         }
 
-        public static GeometryRow CreateArcTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y,
+        public static ShapeGeometryRow CreateArcTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y,
                                               ShapeSheet.CellValueLiteral a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195698(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagArcTo);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagArcTo);
             row.X = x;
             row.Y = y;
             row.A = a;
             return row;
         }
 
-        public static GeometryRow CreateEllipticalArcTo(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreateEllipticalArcTo(ShapeSheet.CellValueLiteral x,
                                                         ShapeSheet.CellValueLiteral y,
                                                         ShapeSheet.CellValueLiteral a,
                                                         ShapeSheet.CellValueLiteral b,
@@ -91,7 +91,7 @@ namespace VisioAutomation.Shapes
         {
             // http://msdn.microsoft.com/en-us/library/aa195660(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagEllipticalArcTo);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagEllipticalArcTo);
             row.X = x;
             row.Y = y;
             row.A = a;
@@ -101,7 +101,7 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static GeometryRow CreateEllipse(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreateEllipse(ShapeSheet.CellValueLiteral x,
                                                 ShapeSheet.CellValueLiteral y,
                                                 ShapeSheet.CellValueLiteral a,
                                                 ShapeSheet.CellValueLiteral b,
@@ -111,7 +111,7 @@ namespace VisioAutomation.Shapes
 
             // http://msdn.microsoft.com/en-us/library/aa195692(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagEllipse);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagEllipse);
             row.X = x;
             row.Y = y;
             row.A = a;
@@ -121,7 +121,7 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static GeometryRow CreateNURBSTo(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreateNURBSTo(ShapeSheet.CellValueLiteral x,
                                                 ShapeSheet.CellValueLiteral y,
                                                 ShapeSheet.CellValueLiteral a,
                                                 ShapeSheet.CellValueLiteral b,
@@ -131,7 +131,7 @@ namespace VisioAutomation.Shapes
         {
             // http://msdn.microsoft.com/en-us/library/aa195685(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagEllipse);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagEllipse);
             row.X = x;
             row.Y = y;
             row.A = a;
@@ -142,27 +142,27 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static GeometryRow CreatePolylineTo(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreatePolylineTo(ShapeSheet.CellValueLiteral x,
                                         ShapeSheet.CellValueLiteral y,
                                         ShapeSheet.CellValueLiteral a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195682(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagPolylineTo);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagPolylineTo);
             row.X = x;
             row.Y = y;
             row.A = a;
             return row;
         }
 
-        public static GeometryRow CreateInfiniteLine(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreateInfiniteLine(ShapeSheet.CellValueLiteral x,
                                 ShapeSheet.CellValueLiteral y,
                                 ShapeSheet.CellValueLiteral a,
                                 ShapeSheet.CellValueLiteral b)
         {
             // http://msdn.microsoft.com/en-us/library/aa195682(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagInfiniteLine);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagInfiniteLine);
             row.X = x;
             row.Y = y;
             row.A = a;
@@ -170,20 +170,20 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static GeometryRow CreateSplineKnot(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreateSplineKnot(ShapeSheet.CellValueLiteral x,
                                 ShapeSheet.CellValueLiteral y,
                                 ShapeSheet.CellValueLiteral a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195667(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagSplineSpan);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagSplineSpan);
             row.X = x;
             row.Y = y;
             row.A = a;
             return row;
         }
 
-        public static GeometryRow CreateSplineStart(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreateSplineStart(ShapeSheet.CellValueLiteral x,
                                                 ShapeSheet.CellValueLiteral y,
                                                 ShapeSheet.CellValueLiteral a,
                                                 ShapeSheet.CellValueLiteral b,
@@ -193,7 +193,7 @@ namespace VisioAutomation.Shapes
 
             // http://msdn.microsoft.com/en-us/library/aa195663(v=office.11).aspx
 
-            var row = new GeometryRow(IVisio.VisRowTags.visTagSplineBeg);
+            var row = new ShapeGeometryRow(IVisio.VisRowTags.visTagSplineBeg);
             row.X = x;
             row.Y = y;
             row.A = a;

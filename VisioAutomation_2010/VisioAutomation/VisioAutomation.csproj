@@ -172,9 +172,9 @@
     <Compile Include="PageLayouts\LayoutStyle.cs" />
     <Compile Include="PageLayouts\RadialLayout.cs" />
     <Compile Include="PageLayouts\VerticalAlignment.cs" />
-    <Compile Include="Shapes\GeometrySection.cs" />
-    <Compile Include="Shapes\GeometryRow.cs" />
-    <Compile Include="Shapes\GeometryHelper.cs" />
+    <Compile Include="Shapes\ShapeGeometrySection.cs" />
+    <Compile Include="Shapes\ShapeGeometryRow.cs" />
+    <Compile Include="Shapes\ShapeGeometryHelper.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupSingleRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBase.cs" />
