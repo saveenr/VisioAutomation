@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -33,7 +34,7 @@ namespace VisioPowerShell.Commands
 
                 foreach (var point_cells in points)
                 {
-                    var cp = new Model.ConnectionPointValues(shapeid, point_cells);
+                    var cp = new ConnectionPointValues(shapeid, point_cells);
                     this.WriteObject(cp);
                 }
             }

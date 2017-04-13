@@ -1,5 +1,6 @@
 using System.Management.Automation;
 using VisioAutomation.Models;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -22,10 +23,10 @@ namespace VisioPowerShell.Commands
         [Parameter(Mandatory = false)] public double Distance = -1.0;
 
         [Parameter(Mandatory = false)]
-        public Model.VerticalAlignment AlignVertical = Model.VerticalAlignment.None;
+        public VerticalAlignment AlignVertical = VerticalAlignment.None;
 
         [Parameter(Mandatory = false)]
-        public Model.HorizontalAlignment AlignHorizontal = Model.HorizontalAlignment.None;
+        public HorizontalAlignment AlignHorizontal = HorizontalAlignment.None;
 
         [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
@@ -63,12 +64,12 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            if (this.AlignVertical != Model.VerticalAlignment.None)
+            if (this.AlignVertical != VerticalAlignment.None)
             {
                 this.Client.Align.AlignVertical(targets, (AlignmentVertical)this.AlignVertical);
             }
 
-            if (this.AlignHorizontal != Model.HorizontalAlignment.None)
+            if (this.AlignHorizontal != HorizontalAlignment.None)
             {
                 this.Client.Align.AlignHorizontal(targets, (AlignmentHorizontal)this.AlignHorizontal);
             }

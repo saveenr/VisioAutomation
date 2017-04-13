@@ -1,4 +1,5 @@
 using System.IO;
+using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
@@ -30,7 +31,7 @@ namespace VisioPowerShell.Commands
                 // for the lifetime of this cmdlet
 
                 VisioCmdlet._client = VisioCmdlet._client ?? new VisioAutomation.Scripting.Client(null);
-                VisioCmdlet._client.Context = new Model.VisioPsContext(this);
+                VisioCmdlet._client.Context = new VisioPsContext(this);
                 return VisioCmdlet._client;
 
                 // Must always setup the client output

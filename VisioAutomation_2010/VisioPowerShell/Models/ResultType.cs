@@ -1,4 +1,4 @@
-namespace VisioPowerShell.Model
+namespace VisioPowerShell.Models
 {
     public enum ResultType
     {

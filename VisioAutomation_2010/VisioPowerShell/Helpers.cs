@@ -2,6 +2,7 @@
 using System.Data;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
+using VisioPowerShell.Models;
 
 namespace VisioPowerShell
 {
@@ -39,7 +40,7 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(ShapeSheetQuery cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, ShapeSheetSurface surface)
+        public static DataTable QueryToDataTable(ShapeSheetQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, ShapeSheetSurface surface)
         {
             if (!getresults)
             {
@@ -49,22 +50,22 @@ namespace VisioPowerShell
 
             switch (ResultType)
             {
-                case Model.ResultType.String:
+                case ResultType.String:
                 {
                     var output = cellQuery.GetResults<string>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
-                case Model.ResultType.Boolean:
+                case ResultType.Boolean:
                 {
                     var output = cellQuery.GetResults<bool>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
-                case Model.ResultType.Double:
+                case ResultType.Double:
                 {
                     var output = cellQuery.GetResults<double>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
-                case Model.ResultType.Integer:
+                case ResultType.Integer:
                 {
                     var output = cellQuery.GetResults<int>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);

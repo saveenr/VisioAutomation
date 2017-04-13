@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -32,7 +33,7 @@ namespace VisioPowerShell.Commands
                 {
                     string propname = propname_propcells_pair.Key;
                     var propcells = propname_propcells_pair.Value;
-                    var cpf = new Model.CustomPropertyValues(shape_id, propname, propcells);
+                    var cpf = new CustomPropertyValues(shape_id, propname, propcells);
                     this.WriteObject(cpf);
                 }
             }

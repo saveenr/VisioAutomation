@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using VisioAutomation.ShapeSheet;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -20,7 +21,7 @@ namespace VisioPowerShell.Commands
         public SwitchParameter GetResults;
 
         [Parameter(Mandatory = false)]
-        public Model.ResultType ResultType = Model.ResultType.String;
+        public ResultType ResultType = ResultType.String;
 
         protected override void ProcessRecord()
         {

@@ -1,6 +1,6 @@
 using VisioAutomation.Models;
 
-namespace VisioPowerShell.Model
+namespace VisioPowerShell.Models
 {
     public enum VerticalAlignment
     {

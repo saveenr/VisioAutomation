@@ -1,6 +1,6 @@
 using VisioAutomation.Shapes;
 
-namespace VisioPowerShell.Model
+namespace VisioPowerShell.Models
 {
     public class ConnectionPointValues
     {
