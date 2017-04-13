@@ -131,7 +131,7 @@ namespace VisioAutomationSamples
 
                 if (info.Text!=null)
                 {
-                    shape.Text = new VisioAutomation.Models.Text.TextElement(info.Text);                    
+                    shape.Text = new VisioAutomation.Models.Text.Element(info.Text);                    
                 }
                 
                 shape.Cells = info.ShapeCells.ShallowCopy();

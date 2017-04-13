@@ -155,7 +155,7 @@ namespace VisioAutomationSamples
                 }
 
                 shape_node.Cells = cells;
-                shape_node.Text = new VisioAutomation.Models.Text.TextElement( node_data.Text );
+                shape_node.Text = new VisioAutomation.Models.Text.Element( node_data.Text );
             }
 
             domshapescol.Render(page);
@@ -184,7 +184,7 @@ namespace VisioAutomationSamples
 
                     var r = new VA.Drawing.Rectangle(x0, 0 - th, x0 + w, 0);
                     var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
-                    n1.Text = new VisioAutomation.Models.Text.TextElement( fontname.ToUpper() ) ;
+                    n1.Text = new VisioAutomation.Models.Text.Element( fontname.ToUpper() ) ;
                     n1.Cells.FillForeground = "rgb(255,255,255)";
                     n1.Cells.LineWeight = 0.0;
                     n1.Cells.LinePattern = 0;
@@ -203,7 +203,7 @@ namespace VisioAutomationSamples
                         var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
-                            n1.Text = new VisioAutomation.Models.Text.TextElement(chunk[i]);
+                            n1.Text = new VisioAutomation.Models.Text.Element(chunk[i]);
                         }
                         n1.CharFontName = fontnames[j];
                         n1.Cells.CharSize = "36pt";
@@ -247,7 +247,7 @@ namespace VisioAutomationSamples
                         var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
-                            n1.Text = new VisioAutomation.Models.Text.TextElement(chunk[i]);
+                            n1.Text = new VisioAutomation.Models.Text.Element(chunk[i]);
                             n1.Text.CharacterFormatting.Color = colors[j];
 
                         }

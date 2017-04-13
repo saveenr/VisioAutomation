@@ -133,8 +133,8 @@
     <Compile Include="Text\NodeList.cs" />
     <Compile Include="Text\NodeType.cs" />
     <Compile Include="Text\ParagraphFormatting.cs" />
-    <Compile Include="Text\TextElement.cs" />
-    <Compile Include="Text\TextRegion.cs" />
+    <Compile Include="Text\Element.cs" />
+    <Compile Include="Text\Region.cs" />
     <Compile Include="Documents\OrgCharts\LayoutDirection.cs" />
     <Compile Include="Documents\OrgCharts\LayoutOptions.cs" />
     <Compile Include="Documents\OrgCharts\Node.cs" />

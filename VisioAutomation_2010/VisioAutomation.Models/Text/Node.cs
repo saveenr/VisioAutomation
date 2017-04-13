@@ -64,7 +64,7 @@ namespace VisioAutomation.Models.Text
 
         IEnumerable<Node> get_children_for_walk(Node n)
         {
-            if (n is TextElement)
+            if (n is Element)
             {
                 foreach (var c in n.Children)
                 {

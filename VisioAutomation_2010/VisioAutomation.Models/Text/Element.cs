@@ -5,19 +5,19 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Text
 {
-    public class TextElement : Node
+    public class Element : Node
     {
         public CharacterFormatting CharacterFormatting { get; set; }
         public ParagraphFormatting ParagraphFormatting { get; set; }
 
-        public TextElement() :
+        public Element() :
             base(NodeType.Element)
         {
             this.CharacterFormatting = new CharacterFormatting();
             this.ParagraphFormatting = new ParagraphFormatting();
         }
 
-        public TextElement(string text) :
+        public Element(string text) :
             base(NodeType.Element)
         {
             this.CharacterFormatting = new CharacterFormatting();
@@ -38,23 +38,23 @@ namespace VisioAutomation.Models.Text
             return field;
         }
 
-        public TextElement AddElement()
+        public Element AddElement()
         {
-            var el = new TextElement();
+            var el = new Element();
             this.Add(el);
             return el;
         }
 
-        public TextElement AddElement(string text)
+        public Element AddElement(string text)
         {
-            var el = new TextElement(text);
+            var el = new Element(text);
             this.Add(el);
             return el;
         }
 
-        public IEnumerable<TextElement> Elements
+        public IEnumerable<Element> Elements
         {
-            get { return this.Children.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
+            get { return this.Children.Where(n => n.NodeType == NodeType.Element).Cast<Element>(); }
         }
         
         internal MarkupRegions GetMarkupInfo()
@@ -62,16 +62,16 @@ namespace VisioAutomation.Models.Text
             var markupinfo = new MarkupRegions();
 
             int start_pos = 0;
-            var region_stack = new Stack<TextRegion>();
+            var region_stack = new Stack<Region>();
 
             foreach (var walkevent in this.Walk())
             {
                 if (walkevent.HasEnteredNode)
                 {
-                    if (walkevent.Node is TextElement)
+                    if (walkevent.Node is Element)
                     {
-                        var element = (TextElement) walkevent.Node;
-                        var region = new TextRegion(start_pos, element);
+                        var element = (Element) walkevent.Node;
+                        var region = new Region(start_pos, element);
                         region_stack.Push(region);
                         markupinfo.FormatRegions.Add(region);
                     }
@@ -94,7 +94,7 @@ namespace VisioAutomation.Models.Text
                         var f = (Field) walkevent.Node;
                         if (!string.IsNullOrEmpty(f.PlaceholderText))
                         {
-                            var field_region = new TextRegion(start_pos,f);
+                            var field_region = new Region(start_pos,f);
                             markupinfo.FieldRegions.Add(field_region);
 
                             // Add text length to parent
@@ -113,7 +113,7 @@ namespace VisioAutomation.Models.Text
                 }
                 else if (walkevent.HasExitedNode)
                 {
-                    if (walkevent.Node is TextElement)
+                    if (walkevent.Node is Element)
                     {
                         var this_region = region_stack.Pop();
 

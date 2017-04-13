@@ -262,7 +262,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
 
                 var node = new Node(ns);
-                node.Text = new VisioAutomation.Models.Text.TextElement(label);
+                node.Text = new VisioAutomation.Models.Text.Element(label);
                 node.Size = new Drawing.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
             }
@@ -429,7 +429,7 @@ namespace VisioAutomation.Scripting.Commands
                 node.Size = new Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
-                var markup = new VisioAutomation.Models.Text.TextElement();
+                var markup = new VisioAutomation.Models.Text.Element();
                 var m1 = markup.AddElement(label+"\n");
                 m1.CharacterFormatting.Font = fontid_segoe;
                 m1.CharacterFormatting.Size = "12.0pt";

@@ -1,17 +1,17 @@
 namespace VisioAutomation.Models.Text
 {
-    class TextRegion
+    class Region
     {
         // This class is used to identify continuos regions of text
         // mostly it is used to set character and paragraph formating
 
         // optionally a textregion may be associated with a text element
-        public TextElement Element { get; internal set; }
+        public Element Element { get; internal set; }
         public Field Field { get; internal set; }
         public int Start { get; internal set; }
         public int Length { get; internal set; }
 
-        internal TextRegion()
+        internal Region()
         {
             // initialize an empty span
             this.Start = 0;
@@ -25,14 +25,14 @@ namespace VisioAutomation.Models.Text
 
         }
 
-        internal TextRegion(int start, TextElement el) :
+        internal Region(int start, Element el) :
             this()
         {
             this.Element = el;
             this.Start = start;
         }
 
-        internal TextRegion(int start, Field field) :
+        internal Region(int start, Field field) :
             this()
         {
             this.Field = field;

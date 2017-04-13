@@ -364,7 +364,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     domshapes.Add(vshape);
 
                     vshape.Cells = this.DefaultBezierConnectorShapeCells.ShallowCopy();
-                    vshape.Text = new VisioAutomation.Models.Text.TextElement(layout_connector.Label);                    
+                    vshape.Text = new VisioAutomation.Models.Text.Element(layout_connector.Label);                    
                 }
             }
         }
@@ -404,7 +404,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 int con_route_style = (int) this.ConnectorTypeToCellVal_Appearance(layoutconnector.ConnectorType);
                 int shape_route_style = (int) this.ConnectorTypeToCellVal_Style(layoutconnector.ConnectorType);
 
-                vconnector.Text = new VisioAutomation.Models.Text.TextElement(layoutconnector.Label);
+                vconnector.Text = new VisioAutomation.Models.Text.Element(layoutconnector.Label);
 
                 vconnector.Cells = layoutconnector.Cells != null ? 
                     layoutconnector.Cells.ShallowCopy()
@@ -431,7 +431,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     // construct multiple text regions
 
                     // create the root text element
-                    shape_node.Text = new VisioAutomation.Models.Text.TextElement();
+                    shape_node.Text = new VisioAutomation.Models.Text.Element();
 
                     // Split apart the string
                     var tokens = layout_shape.Label.Split(vertical_bar).Select(tok => tok.Trim()).ToArray();
@@ -444,7 +444,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 else
                 {
                     // No line breaks. Just use a simple TextElement with the label string
-                    shape_node.Text = new VisioAutomation.Models.Text.TextElement(layout_shape.Label);
+                    shape_node.Text = new VisioAutomation.Models.Text.Element(layout_shape.Label);
                 }
             }
 

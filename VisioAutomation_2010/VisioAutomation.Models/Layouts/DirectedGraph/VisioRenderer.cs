@@ -28,7 +28,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             {
                 var shape_nodes = page_node.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
                 shape.DomNode = shape_nodes;
-                shape.DomNode.Text = new VisioAutomation.Models.Text.TextElement(shape.Label);
+                shape.DomNode.Text = new VisioAutomation.Models.Text.Element(shape.Label);
                 x += 1.0;
             }
 
@@ -36,7 +36,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             {
                 var connector_node = page_node.Shapes.Connect("Dynamic Connector", "connec_u.vss", connector.From.DomNode, connector.To.DomNode);
                 connector.DomNode = connector_node;
-                connector.DomNode.Text = new VisioAutomation.Models.Text.TextElement(connector.Label);
+                connector.DomNode.Text = new VisioAutomation.Models.Text.Element(connector.Label);
             }
 
             page_node.ResizeToFit = true;

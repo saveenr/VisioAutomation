@@ -10,7 +10,7 @@ namespace VisioAutomation.Models.Dom
         public IVisio.Shape VisioShape { get; set; }
         public short VisioShapeID { get; internal set; }
 
-        public VisioAutomation.Models.Text.TextElement Text { get; set; }
+        public VisioAutomation.Models.Text.Element Text { get; set; }
         public CustomPropertyDictionary CustomProperties { get; set; }
         public List<Hyperlink> Hyperlinks { get; set; }
 
