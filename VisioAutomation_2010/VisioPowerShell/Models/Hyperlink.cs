@@ -1,6 +1,6 @@
 namespace VisioPowerShell.Models
 {
-    public class HyperlinkFormulas
+    public class Hyperlink
     {
         public int ShapeID;
         public string Address { get; set; }
@@ -12,6 +12,5 @@ namespace VisioPowerShell.Models
         public string NewWindow { get; set; }
         public string SortKey { get; set; }
         public string SubAddress { get; set; }
-
     }
 }

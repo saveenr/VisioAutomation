@@ -1,6 +1,6 @@
 namespace VisioPowerShell.Models
 {
-    public class ControlFormulas
+    public class Control
     {
         public int ShapeID;
         public string CanGlue;

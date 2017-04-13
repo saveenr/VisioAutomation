@@ -83,9 +83,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ControlFormulas.cs" />
+    <Compile Include="Models\Control.cs" />
     <Compile Include="Commands\Get_VisioHyperlink.cs" />
-    <Compile Include="Models\HyperlinkFormulas.cs" />
+    <Compile Include="Models\Hyperlink.cs" />
     <Compile Include="Commands\New_VisioHyperlink.cs" />
     <Compile Include="Commands\Remove_VisioHyperlink.cs" />
     <Compile Include="Nouns.cs" />
@@ -94,9 +94,9 @@
     <Compile Include="Commands\Format_VisioText.cs" />
     <Compile Include="Commands\New_VisioContainer.cs" />
     <Compile Include="Commands\Open_VisioMaster.cs" />
-    <Compile Include="Models\UserDefinedCellvalues.cs" />
-    <Compile Include="Models\ConnectionPointValues.cs" />
-    <Compile Include="Models\CustomPropertyValues.cs" />
+    <Compile Include="Models\UserDefinedCell.cs" />
+    <Compile Include="Models\ConnectionPoint.cs" />
+    <Compile Include="Models\CustomProperty.cs" />
     <Compile Include="Commands\Out_Visio.cs" />
     <Compile Include="Models\DirectedEdge.cs" />
     <Compile Include="Commands\Get_VisioPageCell.cs" />

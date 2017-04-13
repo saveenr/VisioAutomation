@@ -2,7 +2,7 @@ using VisioAutomation.Shapes;
 
 namespace VisioPowerShell.Models
 {
-    public class ConnectionPointValues
+    public class ConnectionPoint
     {
         public readonly int ShapeID;
         public readonly string Type;
@@ -11,7 +11,7 @@ namespace VisioPowerShell.Models
         public readonly string DirX;
         public readonly string DirY;
 
-        internal ConnectionPointValues(int shapeid, ConnectionPointCells point)
+        internal ConnectionPoint(int shapeid, ConnectionPointCells point)
         {
             this.ShapeID = shapeid;
             this.Type = point.Type.Formula.Value;

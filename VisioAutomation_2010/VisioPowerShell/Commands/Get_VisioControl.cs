@@ -33,7 +33,7 @@ namespace VisioPowerShell.Commands
 
                 foreach (var point in points)
                 {
-                    var cp = new ControlFormulas();
+                    var cp = new Control();
 
                     cp.ShapeID = shapeid;
 

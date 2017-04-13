@@ -2,7 +2,7 @@ using VisioAutomation.Shapes;
 
 namespace VisioPowerShell.Models
 {
-    public class CustomPropertyValues
+    public class CustomProperty
     {
         public readonly int ShapeID;
         public readonly string Name;
@@ -19,7 +19,7 @@ namespace VisioPowerShell.Models
         public readonly string Value;
 
 
-        internal CustomPropertyValues(int id, string propname, CustomPropertyCells propcells)
+        internal CustomProperty(int id, string propname, CustomPropertyCells propcells)
         {
             this.ShapeID = id;
             this.Name = propname;

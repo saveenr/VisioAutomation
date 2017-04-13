@@ -30,7 +30,7 @@ namespace VisioPowerShell.Commands
                 int shapeid = kv.Key.ID;
                 foreach (var udc in kv.Value)
                 {
-                    var udcell_vals = new UserDefinedCellvalues(shapeid, udc.Name, udc.Value.Formula.Value,udc.Prompt.Formula.Value);
+                    var udcell_vals = new UserDefinedCell(shapeid, udc.Name, udc.Value.Formula.Value,udc.Prompt.Formula.Value);
                     this.WriteObject(udcell_vals);
                 }
             }

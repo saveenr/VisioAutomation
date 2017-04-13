@@ -35,7 +35,7 @@ namespace VisioPowerShell.Commands
 
                 foreach (var point_cells in points)
                 {
-                    var cp = new ConnectionPointValues(shapeid, point_cells);
+                    var cp = new ConnectionPoint(shapeid, point_cells);
                     this.WriteObject(cp);
                 }
             }

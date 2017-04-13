@@ -33,7 +33,7 @@ namespace VisioPowerShell.Commands
 
                 foreach (var hyperlink in hyperlinks)
                 {
-                    var hl_formulas = new HyperlinkFormulas();
+                    var hl_formulas = new Hyperlink();
 
                     hl_formulas.ShapeID = shapeid;
 
