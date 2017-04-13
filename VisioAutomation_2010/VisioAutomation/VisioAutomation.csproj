@@ -158,7 +158,6 @@
     <Compile Include="Pages\PageFormatCells.cs" />
     <Compile Include="Shapes\CustomPropertyHelper.cs" />
     <Compile Include="Shapes\LockCells.cs" />
-    <Compile Include="Application\PerfSettings.cs" />
     <Compile Include="PageLayouts\CircularLayout.cs" />
     <Compile Include="PageLayouts\CompactTreeDirection.cs" />
     <Compile Include="PageLayouts\CompactTreeLayout.cs" />
@@ -191,7 +190,6 @@
     <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\ColorHSL.cs" />
     <Compile Include="Shapes\ConnectorType.cs" />
-    <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Text\CharacterCells.cs" />
     <Compile Include="Shapes\ShapeXFormCells.cs" />

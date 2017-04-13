@@ -1,18 +1,18 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Application
+namespace VisioAutomation.Models.Dom
 {
-    public class PerfScope : System.IDisposable
+    class RenderPerformanceScope : System.IDisposable
     {
         private readonly IVisio.Application _app;
-        private readonly PerfSettings _old_settings;
+        private readonly RenderPerforfmanceSettings _old_settings;
 
-        public PerfScope(IVisio.Application vis, PerfSettings new_settings)
+        public RenderPerformanceScope(IVisio.Application vis, RenderPerforfmanceSettings new_settings)
         {
             this._app = vis;
 
             // save the old settings
-            this._old_settings = new PerfSettings();
+            this._old_settings = new RenderPerforfmanceSettings();
             this._old_settings.Load(this._app);
 
             // Set the new settings

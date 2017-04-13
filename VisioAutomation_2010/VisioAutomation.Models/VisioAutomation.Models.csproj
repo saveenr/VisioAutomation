@@ -44,6 +44,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dom\RenderPerformanceScope.cs" />
+    <Compile Include="Dom\RenderPerforfmanceSettings.cs" />
     <Compile Include="Layouts\Box\AlignmentHorizontal.cs" />
     <Compile Include="Layouts\Box\AlignmentVertical.cs" />
     <Compile Include="Layouts\Box\Box.cs" />

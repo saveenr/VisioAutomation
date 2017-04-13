@@ -17,7 +17,7 @@ namespace VisioAutomation.Models.Dom
         public string Name;
         public LayoutBase Layout;
         public IVisio.Page VisioPage;
-        public Application.PerfSettings PerfSettings { get; }
+        public RenderPerforfmanceSettings RenderPerforfmanceSettings { get; }
 
         public Page()
         {
@@ -25,16 +25,16 @@ namespace VisioAutomation.Models.Dom
             this.PageFormatCells = new Pages.PageFormatCells();
             this.PageLayoutCells = new PageLayoutCells();
 
-            this.PerfSettings = new Application.PerfSettings();
-            this.PerfSettings.DeferRecalc = 0;
+            this.RenderPerforfmanceSettings = new RenderPerforfmanceSettings();
+            this.RenderPerforfmanceSettings.DeferRecalc = 0;
             
             // By Enable ScreenUpdating by default
             // If it is disabled it messes up page resizing (there may be a workaround)
             // TODO: Try the DrawTreeMultiNode2 unit test to see how setting it to 1 will affect the rendering
 
-            this.PerfSettings.ScreenUpdating = 1; 
-            this.PerfSettings.EnableAutoConnect = false;
-            this.PerfSettings.LiveDynamics = false;
+            this.RenderPerforfmanceSettings.ScreenUpdating = 1; 
+            this.RenderPerforfmanceSettings.EnableAutoConnect = false;
+            this.RenderPerforfmanceSettings.LiveDynamics = false;
         }
 
         public IVisio.Page Render(IVisio.Document doc)
@@ -69,7 +69,7 @@ namespace VisioAutomation.Models.Dom
             var page_sheet = page.PageSheet;
             var app = page.Application;
 
-            using (var perfscope = new Application.PerfScope(app, this.PerfSettings))
+            using (var perfscope = new RenderPerformanceScope(app, this.RenderPerforfmanceSettings))
             {
                 if (this.Size.HasValue)
                 {

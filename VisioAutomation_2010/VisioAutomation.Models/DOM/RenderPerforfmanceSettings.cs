@@ -1,15 +1,15 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Application
+namespace VisioAutomation.Models.Dom
 {
-    public class PerfSettings
+    public class RenderPerforfmanceSettings
     {
         public bool? EnableAutoConnect;
         public bool? LiveDynamics;
         public short? ScreenUpdating;
         public short? DeferRecalc;
 
-        public PerfSettings()
+        public RenderPerforfmanceSettings()
         {
 
         }
