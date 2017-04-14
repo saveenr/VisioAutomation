@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Shapes.ConnectionPoints;
+using VisioAutomation.Scripting.Models;
+using VisioAutomation.Shapes;
 
 namespace VisioAutomation_Tests.Core.Connections
 {

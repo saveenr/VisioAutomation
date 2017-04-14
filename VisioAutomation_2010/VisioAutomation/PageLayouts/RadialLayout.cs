@@ -10,10 +10,10 @@ namespace VisioAutomation.PageLayouts
             this.ConnectorStyle = ConnectorStyle.RightAngle;
         }
 
-        protected override void SetPageCells(PageLayoutFormulas pagecells)
+        protected override void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
-            base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) IVisio.VisCellVals.visPLOPlaceDefault;
+            base.SetPageCells(page_layout_cells);
+            page_layout_cells.PlaceStyle = (int) IVisio.VisCellVals.visPLOPlaceDefault;
         }
     }
 }

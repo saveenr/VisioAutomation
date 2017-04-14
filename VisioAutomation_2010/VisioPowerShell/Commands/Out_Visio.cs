@@ -98,7 +98,7 @@ namespace VisioPowerShell.Commands
         {
             var n = new Node();
             tree_drawing.Root = n;
-            n.Text = new VisioAutomation.Models.Text.TextElement(xmlDocument.Name);
+            n.Text = new VisioAutomation.Models.Text.Element(xmlDocument.Name);
             this.build_from_xml_element(xmlDocument.DocumentElement,n);
 
         }
@@ -110,7 +110,7 @@ namespace VisioPowerShell.Commands
                 if (xchild is XmlElement)
                 {
                     var nchild = new Node();
-                    nchild.Text = new VisioAutomation.Models.Text.TextElement(xchild.Name);
+                    nchild.Text = new VisioAutomation.Models.Text.Element(xchild.Name);
 
                     parent.Children.Add(nchild);
                     this.build_from_xml_element( (XmlElement) xchild, nchild);

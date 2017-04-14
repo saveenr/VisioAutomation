@@ -3,6 +3,7 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Models.Layouts.Grid;
+using VisioAutomation.Scripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 
@@ -251,7 +252,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
-                var slice = new Models.Charting.PieSlice(center, radius, start_angle, end_angle);
+                var slice = new VisioAutomation.Models.Charting.PieSlice(center, radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
             }
@@ -269,13 +270,13 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
-                var slice = new Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
+                var slice = new VisioAutomation.Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
             }
         }
 
-        public void PieChart(Models.Charting.PieChart chart)
+        public void PieChart(VisioAutomation.Models.Charting.PieChart chart)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -285,7 +286,7 @@ namespace VisioAutomation.Scripting.Commands
             chart.Render(page);
         }
 
-        public void BarChart(Models.Charting.BarChart chart)
+        public void BarChart(VisioAutomation.Models.Charting.BarChart chart)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -295,7 +296,7 @@ namespace VisioAutomation.Scripting.Commands
             chart.Render(page);
         }
 
-        public void AreaChart(Models.Charting.AreaChart chart)
+        public void AreaChart(VisioAutomation.Models.Charting.AreaChart chart)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -349,7 +350,7 @@ namespace VisioAutomation.Scripting.Commands
                 this._client.WriteVerbose("Rendering page: {0}", i + 1);
                 dg.Render(page, options);
                 this._client.Page.ResizeToFitContents(new Drawing.Size(1.0, 1.0), true);
-                this._client.View.Zoom(VisioAutomation.Scripting.View.Zoom.ToPage);
+                this._client.View.Zoom(Zoom.ToPage);
                 this._client.WriteVerbose("Finished rendering page");
 
                 num_pages_created++;

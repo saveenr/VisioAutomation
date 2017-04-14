@@ -1,7 +1,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
 using VADRAW=VisioAutomation.Drawing;
 using VASS=VisioAutomation.ShapeSheet;

@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Scripting.Models;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -28,7 +29,7 @@ namespace VisioAutomation_Tests.Scripting
             var s1 = client.Selection.GetShapes();
             Assert.AreEqual(1, s1.Count);
 
-            var targets = new VisioAutomation.Scripting.TargetShapes();
+            var targets = new TargetShapes();
 
             client.Grouping.Ungroup(targets);
             client.Selection.SelectAll();

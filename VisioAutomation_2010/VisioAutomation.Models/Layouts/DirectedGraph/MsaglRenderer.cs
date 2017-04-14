@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
-using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using MSAGL = Microsoft.Msagl;
 using VA = VisioAutomation;
@@ -173,14 +173,14 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // Find all the shapes that were created in the DOM and put them in the layout structure
             foreach (var layout_shape in layout_diagram.Shapes)
             {
-                var shape_node = layout_shape.DOMNode;
+                var shape_node = layout_shape.DomNode;
                 layout_shape.VisioShape = shape_node.VisioShape;
             }
 
             var layout_edges = layout_diagram.Connectors;
             foreach (var layout_edge in layout_edges)
             {
-                var vnode = layout_edge.DOMNode;
+                var vnode = layout_edge.DomNode;
                 layout_edge.VisioShape = vnode.VisioShape;
             }
         }
@@ -208,18 +208,18 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var master_to_size = new Dictionary<IVisio.Master, VA.Drawing.Size>();
 
             // Load and cache all the masters
-            var loader = new MasterLoader();
+            var master_cache = new MasterCache();
             foreach (var layout_shape in layout_diagram.Shapes)
             {
-                loader.Add(layout_shape.MasterName,layout_shape.StencilName);                
+                master_cache.Add(layout_shape.MasterName,layout_shape.StencilName);                
             }
-            loader.Resolve(documents);
+            master_cache.Resolve(documents);
             
             // If no size was provided for the shape, then set the size based on the master
             var layoutshapes_without_size_info = layout_diagram.Shapes.Where(s => s.Size == null);
             foreach (var layoutshape in layoutshapes_without_size_info)
             {
-                var master = loader.Get(layoutshape.MasterName,layoutshape.StencilName);
+                var master = master_cache.Get(layoutshape.MasterName,layoutshape.StencilName);
                 var size = MsaglRenderer.TryGetValue(master_to_size,master.VisioMaster);
                 if (!size.HasValue)
                 {
@@ -240,8 +240,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             this.CreateDOMShapes(page_node.Shapes, mg_graph, vis);
 
-
-
             if (this.LayoutOptions.UseDynamicConnectors)
             {
                 this.CreateDynamicConnectorEdges(page_node.Shapes, mg_graph);
@@ -250,14 +248,13 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             {
                 this.CreateBezierEdges(page_node.Shapes, mg_graph);
             }
-
-
+            
             // Additional Page properties
-            page_node.PageCells.PageLayoutPlaceStyle = 1;
-            page_node.PageCells.PageLayoutRouteStyle = 5;
-            page_node.PageCells.PageLayoutAvenueSizeX = 2.0;
-            page_node.PageCells.PageLayoutAvenueSizeY = 2.0;
-            page_node.PageCells.PageLayoutLineRouteExt = 2;
+            page_node.PageLayoutCells.PlaceStyle = 1;
+            page_node.PageLayoutCells.RouteStyle = 5;
+            page_node.PageLayoutCells.AvenueSizeX = 2.0;
+            page_node.PageLayoutCells.AvenueSizeY = 2.0;
+            page_node.PageLayoutCells.LineRouteExt = 2;
             page_node.Size = this._layout_bb.Size;
 
             return page_node;
@@ -309,7 +306,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var key = layout_shape.StencilName.ToLower() + "+" + layout_shape.MasterName;
                 var master = master_map[key];
                 var shape_node = new Dom.Shape(master, node_centerpoints[count]);
-                layout_shape.DOMNode = shape_node;
+                layout_shape.DomNode = shape_node;
                 domshapeslist.Add(shape_node);
                 count++;
             }
@@ -321,7 +318,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var layout_shape = ud.Shape;
                 if (layout_shape != null)
                 {
-                    this.format_shape(layout_shape, layout_shape.DOMNode);                    
+                    this.format_shape(layout_shape, layout_shape.DomNode);                    
                 }
             }
         }
@@ -334,7 +331,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var ud = (NodeUserData) mg_edge.UserData;
                 var layoutconnector =  ud.Connector;
                 var vconnector = this.draw_edge_bezier(mg_edge);
-                layoutconnector.DOMNode = vconnector;
+                layoutconnector.DomNode = vconnector;
                 domshapes.Add(vconnector);
             }
 
@@ -345,7 +342,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
                 if (layout_connector.Cells != null)
                 {
-                    var bezier_node = (Dom.BezierCurve)layout_connector.DOMNode;
+                    var bezier_node = (Dom.BezierCurve)layout_connector.DomNode;
                     bezier_node.Cells = layout_connector.Cells.ShallowCopy();
                 }
             }
@@ -364,7 +361,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     domshapes.Add(vshape);
 
                     vshape.Cells = this.DefaultBezierConnectorShapeCells.ShallowCopy();
-                    vshape.Text = new VisioAutomation.Models.Text.TextElement(layout_connector.Label);                    
+                    vshape.Text = new VisioAutomation.Models.Text.Element(layout_connector.Label);                    
                 }
             }
         }
@@ -381,16 +378,16 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
               if (layout_connector.MasterName != null && layout_connector.StencilName != null)
               {
                   vconnector = new Dom.Connector(
-                  layout_connector.From.DOMNode,
-                  layout_connector.To.DOMNode, layout_connector.MasterName, layout_connector.StencilName);
+                  layout_connector.From.DomNode,
+                  layout_connector.To.DomNode, layout_connector.MasterName, layout_connector.StencilName);
               }
               else
               {
                   vconnector = new Dom.Connector(
-                  layout_connector.From.DOMNode,
-                  layout_connector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
+                  layout_connector.From.DomNode,
+                  layout_connector.To.DomNode, "Dynamic Connector", "connec_u.vss");
               }
-                layout_connector.DOMNode = vconnector;
+                layout_connector.DomNode = vconnector;
                 shape_nodes.Add(vconnector);
             }
 
@@ -399,12 +396,12 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var ud = (NodeUserData)edge.UserData;
                 var layoutconnector = ud.Connector;
 
-                var vconnector = (Dom.Connector) layoutconnector.DOMNode;
+                var vconnector = (Dom.Connector) layoutconnector.DomNode;
 
                 int con_route_style = (int) this.ConnectorTypeToCellVal_Appearance(layoutconnector.ConnectorType);
                 int shape_route_style = (int) this.ConnectorTypeToCellVal_Style(layoutconnector.ConnectorType);
 
-                vconnector.Text = new VisioAutomation.Models.Text.TextElement(layoutconnector.Label);
+                vconnector.Text = new VisioAutomation.Models.Text.Element(layoutconnector.Label);
 
                 vconnector.Cells = layoutconnector.Cells != null ? 
                     layoutconnector.Cells.ShallowCopy()
@@ -431,7 +428,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     // construct multiple text regions
 
                     // create the root text element
-                    shape_node.Text = new VisioAutomation.Models.Text.TextElement();
+                    shape_node.Text = new VisioAutomation.Models.Text.Element();
 
                     // Split apart the string
                     var tokens = layout_shape.Label.Split(vertical_bar).Select(tok => tok.Trim()).ToArray();
@@ -444,7 +441,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 else
                 {
                     // No line breaks. Just use a simple TextElement with the label string
-                    shape_node.Text = new VisioAutomation.Models.Text.TextElement(layout_shape.Label);
+                    shape_node.Text = new VisioAutomation.Models.Text.Element(layout_shape.Label);
                 }
             }
 
@@ -471,7 +468,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // ADD CUSTOM PROPS
             if (layout_shape.CustomProperties != null)
             {
-                shape_node.CustomProperties = new VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary();
+                shape_node.CustomProperties = new CustomPropertyDictionary();
                 foreach (var kv in layout_shape.CustomProperties)
                 {
                     shape_node.CustomProperties[kv.Key] = kv.Value;

@@ -4,13 +4,13 @@ namespace VisioAutomation.Models.Text
 {
     class MarkupRegions
     {
-        public List<TextRegion> FormatRegions { get; private set; }
-        public List<TextRegion> FieldRegions { get; private set; }
+        public List<Region> FormatRegions { get; private set; }
+        public List<Region> FieldRegions { get; private set; }
 
         public MarkupRegions()
         {
-            this.FormatRegions = new List<TextRegion>();
-            this.FieldRegions = new List<TextRegion>();
+            this.FormatRegions = new List<Region>();
+            this.FieldRegions = new List<Region>();
         }
     }
 }

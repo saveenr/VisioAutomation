@@ -1,4 +1,6 @@
 using System.Management.Automation;
+using VisioAutomation.Scripting.Models;
+using VisioAutomation.Shapes;
 using VisioAutomation.Utilities;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -37,7 +39,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var ctrl = new VA.Shapes.Controls.ControlCells();
+            var ctrl = new ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
                 ctrl.XBehavior = this.XBehavior;
@@ -47,7 +49,7 @@ namespace VisioPowerShell.Commands
                 ctrl.CanGlue = Convert.BoolToFormula(this.CanGlue);
                 ctrl.Tip = this.Tip;
 
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
 
             this.Client.Control.Add(targets, ctrl);
         }

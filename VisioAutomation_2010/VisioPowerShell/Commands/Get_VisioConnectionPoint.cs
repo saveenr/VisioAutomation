@@ -1,4 +1,6 @@
 using System.Management.Automation;
+using VisioAutomation.Scripting.Models;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -14,7 +16,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
 
             var dic = this.Client.ConnectionPoint.Get(targets);
 
@@ -33,7 +35,7 @@ namespace VisioPowerShell.Commands
 
                 foreach (var point_cells in points)
                 {
-                    var cp = new Model.ConnectionPointValues(shapeid, point_cells);
+                    var cp = new ConnectionPoint(shapeid, point_cells);
                     this.WriteObject(cp);
                 }
             }

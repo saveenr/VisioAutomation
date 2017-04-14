@@ -1,4 +1,6 @@
 using System.Management.Automation;
+using VisioAutomation.Scripting.Models;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -14,7 +16,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
             var dic = this.Client.UserDefinedCell.Get(targets);
 
             if (this.GetCells)
@@ -28,7 +30,7 @@ namespace VisioPowerShell.Commands
                 int shapeid = kv.Key.ID;
                 foreach (var udc in kv.Value)
                 {
-                    var udcell_vals = new Model.UserDefinedCellvalues(shapeid, udc.Name, udc.Value.Formula.Value,udc.Prompt.Formula.Value);
+                    var udcell_vals = new UserDefinedCell(shapeid, udc.Name, udc.Value.Formula.Value,udc.Prompt.Formula.Value);
                     this.WriteObject(udcell_vals);
                 }
             }

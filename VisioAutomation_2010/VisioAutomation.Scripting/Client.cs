@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Scripting.Commands;
+using VisioAutomation.Scripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting
 {
     public class Client
     {
-        private Context _context;
+        private ClientContext _client_context;
 
         public Commands.ApplicationCommands Application { get; private set; }
         public Commands.ViewCommands View { get; private set; }
@@ -38,18 +39,18 @@ namespace VisioAutomation.Scripting
         public bool VerboseLogging = true;
 
         public Client(IVisio.Application app):
-            this(app,new DefaultContext())
+            this(app,new DefaultClientContext())
         {
         }
         
-        public Client(IVisio.Application app, Context context)
+        public Client(IVisio.Application app, ClientContext client_context)
         {
-            if (context == null)
+            if (client_context == null)
             {
-                throw new System.ArgumentNullException(nameof(context));
+                throw new System.ArgumentNullException(nameof(client_context));
             }
 
-            this._context = context;
+            this._client_context = client_context;
 
             this.Application = new Commands.ApplicationCommands(this,app);
             this.View = new Commands.ViewCommands(this);
@@ -93,13 +94,13 @@ namespace VisioAutomation.Scripting
         public void WriteUser(string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);
-            this._context.WriteUser(s);
+            this._client_context.WriteUser(s);
         }
 
         public void WriteDebug(string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);
-            this._context.WriteDebug(s);
+            this._client_context.WriteDebug(s);
         }
 
         public void WriteVerbose(string fmt, params object[] items)
@@ -107,53 +108,53 @@ namespace VisioAutomation.Scripting
             if (this.VerboseLogging)
             {
                 string s = string.Format(fmt, items);
-                this._context.WriteVerbose(s);
+                this._client_context.WriteVerbose(s);
             }
         }
 
         public void WriteWarning(string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);
-            this._context.WriteWarning(s);
+            this._client_context.WriteWarning(s);
         }
 
         public void WriteError(string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);
-            this._context.WriteError(s);
+            this._client_context.WriteError(s);
         }
 
         public void WriteUser(string s)
         {
-            this._context.WriteUser(s);
+            this._client_context.WriteUser(s);
         }
 
         public void WriteDebug(string s)
         {
-            this._context.WriteDebug(s);
+            this._client_context.WriteDebug(s);
         }
 
         public void WriteVerbose(string s)
         {
             if (this.VerboseLogging)
             {
-                this._context.WriteVerbose(s);
+                this._client_context.WriteVerbose(s);
             }
         }
 
         public void WriteWarning(string s)
         {
-            this._context.WriteWarning(s);
+            this._client_context.WriteWarning(s);
         }
         
         public void WriteError(string s)
         {
-            this._context.WriteError(s);
+            this._client_context.WriteError(s);
         }
 
-        public Context Context
+        public ClientContext ClientContext
         {
-            get { return this._context; }
+            get { return this._client_context; }
             set
             {
                 if (value == null)
@@ -161,7 +162,7 @@ namespace VisioAutomation.Scripting
                     string msg = "Context must be non-null";
                     throw new System.ArgumentNullException(msg);
                 }
-                this._context = value;
+                this._client_context = value;
             }
         }
 

@@ -2,6 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
 using VisioPowerShell.Commands;
+using VisioPowerShell.Models;
 
 namespace VisioAutomation_Tests
 {
@@ -96,7 +97,7 @@ namespace VisioAutomation_Tests
             var cmd = new Get_VisioPageCell();
             cmd.Cells = cells;
             cmd.GetResults = getresults;
-            cmd.ResultType = VisioPowerShell.Model.ResultType.Double;
+            cmd.ResultType = ResultType.Double;
             var results = cmd.Invoke <System.Data.DataTable>();
             var dt = results.First();
             return dt;

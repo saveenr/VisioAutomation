@@ -77,7 +77,7 @@ namespace VisioAutomation_Tests
             var app = this.GetVisioApplication();
             // this ensures that any debug, verbose, user , etc. messages are 
             // sent to a useful place in the unit tests
-            var context = new DiagnosticDebugContext(); 
+            var context = new DiagnosticDebugClientContext(); 
             var client = new VisioAutomation.Scripting.Client(app,context);
             return client;
         }

@@ -1,0 +1,48 @@
+using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.Query;
+using IVisio = Microsoft.Office.Interop.Visio;
+
+namespace VisioAutomation.Shapes
+{
+    class ControlCellsReader : MultiRowReader<ControlCells>
+    {
+        public SubQueryColumn CanGlue { get; set; }
+        public SubQueryColumn Tip { get; set; }
+        public SubQueryColumn X { get; set; }
+        public SubQueryColumn Y { get; set; }
+        public SubQueryColumn YBehavior { get; set; }
+        public SubQueryColumn XBehavior { get; set; }
+        public SubQueryColumn XDynamics { get; set; }
+        public SubQueryColumn YDynamics { get; set; }
+
+        public ControlCellsReader()
+        {
+            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionControls);
+
+            this.CanGlue = sec.AddCell(SrcConstants.ControlCanGlue, nameof(SrcConstants.ControlCanGlue));
+            this.Tip = sec.AddCell(SrcConstants.ControlTip, nameof(SrcConstants.ControlTip));
+            this.X = sec.AddCell(SrcConstants.ControlX, nameof(SrcConstants.ControlX));
+            this.Y = sec.AddCell(SrcConstants.ControlY, nameof(SrcConstants.ControlY));
+            this.YBehavior = sec.AddCell(SrcConstants.ControlYBehavior, nameof(SrcConstants.ControlYBehavior));
+            this.XBehavior = sec.AddCell(SrcConstants.ControlXBehavior, nameof(SrcConstants.ControlXBehavior));
+            this.XDynamics = sec.AddCell(SrcConstants.ControlXDynamics, nameof(SrcConstants.ControlXDynamics));
+            this.YDynamics = sec.AddCell(SrcConstants.ControlYDynamics, nameof(SrcConstants.ControlYDynamics));
+
+        }
+
+        public override ControlCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        {
+            var cells = new ControlCells();
+            cells.CanGlue = row[this.CanGlue];
+            cells.Tip = row[this.Tip];
+            cells.X = row[this.X];
+            cells.Y = row[this.Y];
+            cells.YBehavior = row[this.YBehavior];
+            cells.XBehavior = row[this.XBehavior];
+            cells.XDynamics = row[this.XDynamics];
+            cells.YDynamics = row[this.YDynamics];
+            return cells;
+        }
+    }
+}

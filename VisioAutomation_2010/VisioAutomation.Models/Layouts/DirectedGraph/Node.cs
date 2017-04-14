@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
@@ -7,8 +8,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         public string ID { get; set; }
         public IVisio.Shape VisioShape { get; set; }
         public string Label { get; set; }
-        public Dom.BaseShape DOMNode { get; set; }
-        public VisioAutomation.Shapes.CustomProperties.CustomPropertyDictionary CustomProperties { get; set; }
+        public Dom.BaseShape DomNode { get; set; }
+        public CustomPropertyDictionary CustomProperties { get; set; }
 
         public Dom.ShapeCells Cells;
     }

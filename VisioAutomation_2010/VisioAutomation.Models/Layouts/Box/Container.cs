@@ -73,11 +73,6 @@ namespace VisioAutomation.Models.Layouts.Box
 
         public void AddNode(Node n)
         {
-            if (n.Parent != null)
-            {
-                throw new System.ArgumentException("This item already has a parent");                
-            }
-
             if (this.m_children == null)
             {
                 this.m_children = new List<Node>();

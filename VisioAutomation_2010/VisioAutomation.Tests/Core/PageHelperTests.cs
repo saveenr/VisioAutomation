@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.Scripting.Models;
 
 namespace VisioAutomation_Tests.Core.Page
 {
@@ -13,22 +14,22 @@ namespace VisioAutomation_Tests.Core.Page
         {
             var size = new VA.Drawing.Size(4, 3);
             var page1 = this.GetNewPage(size);
-            var pagecells = VA.Pages.PageCells.GetCells(page1.PageSheet);
-            Assert.AreEqual("4.0000 in.", pagecells.PageWidth.Result);
-            Assert.AreEqual("3.0000 in.", pagecells.PageHeight.Result);
+            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
+            Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Result);
+            Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Result);
 
             // Double each side
-            pagecells.PageWidth = "8.0";
-            pagecells.PageHeight = "6.0";
+            page_fmt_cells.Width = "8.0";
+            page_fmt_cells.Height = "6.0";
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            pagecells.SetFormulas(writer);
+            page_fmt_cells.SetFormulas(writer);
 
             writer.Commit(page1.PageSheet);
 
-            var pagecells2 = VA.Pages.PageCells.GetCells(page1.PageSheet);
-            Assert.AreEqual("8.0000 in.", pagecells2.PageWidth.Result);
-            Assert.AreEqual("6.0000 in.", pagecells2.PageHeight.Result);
+            var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
+            Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Result);
+            Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Result);
             page1.Delete(0);
         }
 
@@ -42,15 +43,15 @@ namespace VisioAutomation_Tests.Core.Page
             var client = this.GetScriptingClient();
 
             var orientation_1 = client.Page.GetOrientation();
-            Assert.AreEqual(VisioAutomation.Scripting.Layout.PrintPageOrientation.Portrait, orientation_1);
+            Assert.AreEqual(PrintPageOrientation.Portrait, orientation_1);
 
             var size1 = client.Page.GetSize();
             Assert.AreEqual(size, size1);
 
-            client.Page.SetOrientation(VisioAutomation.Scripting.Layout.PrintPageOrientation.Landscape);
+            client.Page.SetOrientation(PrintPageOrientation.Landscape);
 
             var orientation_2 = client.Page.GetOrientation();
-            Assert.AreEqual(VisioAutomation.Scripting.Layout.PrintPageOrientation.Landscape, orientation_2);
+            Assert.AreEqual(PrintPageOrientation.Landscape, orientation_2);
 
             var actual_final_size = client.Page.GetSize();
             var expected_final_size = new VA.Drawing.Size(3, 4);
@@ -143,11 +144,11 @@ namespace VisioAutomation_Tests.Core.Page
         {
             var page = doc.Pages.Add();
 
-            var pagecells = new VA.Pages.PageCells();
-            pagecells.PrintTopMargin = upperright_margin.Height;
-            pagecells.PrintBottomMargin = bottomleft_margin.Height;
-            pagecells.PrintLeftMargin = bottomleft_margin.Width;
-            pagecells.PrintRightMargin = upperright_margin.Width;
+            var pagecells = new VA.Pages.PagePrintCells();
+            pagecells.TopMargin = upperright_margin.Height;
+            pagecells.BottomMargin = bottomleft_margin.Height;
+            pagecells.LeftMargin = bottomleft_margin.Width;
+            pagecells.RightMargin = upperright_margin.Width;
 
             var page_writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             pagecells.SetFormulas(page_writer);

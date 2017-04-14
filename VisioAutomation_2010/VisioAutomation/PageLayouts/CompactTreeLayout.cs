@@ -13,10 +13,10 @@ namespace VisioAutomation.PageLayouts
             this.Direction = CompactTreeDirection.DownThenRight;
         }
 
-        protected override void SetPageCells(PageLayoutFormulas pagecells)
+        protected override void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
-            base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) CompactTreeLayout.GetPlaceStyle(this.Direction);
+            base.SetPageCells(page_layout_cells);
+            page_layout_cells.PlaceStyle = (int) CompactTreeLayout.GetPlaceStyle(this.Direction);
         }
 
         private static IVisio.VisCellVals GetPlaceStyle(CompactTreeDirection dir)

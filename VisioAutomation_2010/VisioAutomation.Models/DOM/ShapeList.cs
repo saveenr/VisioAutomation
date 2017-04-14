@@ -4,9 +4,8 @@ using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Utilities;
-using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
-using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Dom
@@ -92,8 +91,8 @@ namespace VisioAutomation.Models.Dom
                 foreach (var kv in shape.CustomProperties)
                 {
                     string cp_name = kv.Key;
-                    VACUSTPROP.CustomPropertyCells cp_cells = kv.Value;
-                    VACUSTPROP.CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
+                    CustomPropertyCells cp_cells = kv.Value;
+                    CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
                 }
             }
         }
@@ -230,19 +229,19 @@ namespace VisioAutomation.Models.Dom
                 .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
 
-            var loader = new MasterLoader();
+            var master_cache = new MasterCache();
             foreach (var shape_node in shape_nodes)
             {
-                loader.Add(shape_node.Master.MasterName,shape_node.Master.StencilName);
+                master_cache.Add(shape_node.Master.MasterName,shape_node.Master.StencilName);
             }
 
             var application = context.VisioPage.Application;
             var docs = application.Documents;
-            loader.Resolve(docs);
+            master_cache.Resolve(docs);
 
             foreach (var shape_node in shape_nodes)
             {
-                var mref = loader.Get(shape_node.Master.MasterName, shape_node.Master.StencilName);
+                var mref = master_cache.Get(shape_node.Master.MasterName, shape_node.Master.StencilName);
                 shape_node.Master.VisioMaster = mref.VisioMaster;
             }
 

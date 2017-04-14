@@ -395,7 +395,7 @@ namespace VisioAutomation.ShapeSheet
         // user defined cells
         private static Src UserDefCell(CEL c) => new Src(SEC.visSectionUser, ROW.visRowUser, c);
         public static Src UserDefCellPrompt => UserDefCell(CEL.visUserPrompt);
-        public static Src UserDelCellValue => UserDefCell(CEL.visUserValue);
+        public static Src UserDefCellValue => UserDefCell(CEL.visUserValue);
 
         // Fields
         private static Src FieldCell(CEL c) => new Src(SEC.visSectionTextField, ROW.visRowField, c);

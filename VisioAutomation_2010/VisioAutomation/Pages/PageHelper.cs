@@ -105,6 +105,7 @@ namespace VisioAutomation.Pages
                 page_srcs.Add(ShapeSheet.SrcConstants.PrintScaleX);
                 page_srcs.Add(ShapeSheet.SrcConstants.PrintScaleY);
                 page_srcs.Add(ShapeSheet.SrcConstants.PrintPaperSource);
+
                 page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingScale);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingScaleType);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingSizeType);
@@ -118,6 +119,8 @@ namespace VisioAutomation.Pages
                 page_srcs.Add(ShapeSheet.SrcConstants.PageShadowScaleFactor);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageShadowType);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageUIVisibility);
+                page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingResizeType);
+
                 page_srcs.Add(ShapeSheet.SrcConstants.XGridDensity);
                 page_srcs.Add(ShapeSheet.SrcConstants.XGridOrigin);
                 page_srcs.Add(ShapeSheet.SrcConstants.XGridSpacing);
@@ -128,6 +131,7 @@ namespace VisioAutomation.Pages
                 page_srcs.Add(ShapeSheet.SrcConstants.YGridSpacing);
                 page_srcs.Add(ShapeSheet.SrcConstants.YRulerDensity);
                 page_srcs.Add(ShapeSheet.SrcConstants.YRulerOrigin);
+
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutAvenueSizeX);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutAvenueSizeY);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutBlockSizeX);
@@ -156,7 +160,6 @@ namespace VisioAutomation.Pages
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutResizePage);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutRouteStyle);
                 page_srcs.Add(ShapeSheet.SrcConstants.PageLayoutAvoidPageBreaks);
-                page_srcs.Add(ShapeSheet.SrcConstants.PageDrawingResizeType);
             }
         }
 

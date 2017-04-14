@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
+using VisioAutomation.Scripting.Models;
 
 namespace VisioAutomation.Scripting.Commands
 {

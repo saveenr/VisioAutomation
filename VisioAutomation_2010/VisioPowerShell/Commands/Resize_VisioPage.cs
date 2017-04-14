@@ -5,9 +5,11 @@ namespace VisioPowerShell.Commands
     [Cmdlet(VerbsCommon.Resize, VisioPowerShell.Nouns.VisioPage)]
     public class Resize_VisioPage : VisioCmdlet
     {
-        [Parameter(Mandatory = false)] public double Width = -1;
+        [Parameter(Mandatory = false)]
+        public double Width = -1;
 
-        [Parameter(Mandatory = false)] public double Height = -1;
+        [Parameter(Mandatory = false)]
+        public double Height = -1;
 
         [Parameter(Mandatory = false)]
         public SwitchParameter FitContents;
@@ -29,22 +31,22 @@ namespace VisioPowerShell.Commands
             if (this.Width > 0 || this.Height > 0)
             {
                 var page = this.Client.Application.Get().ActivePage;
-                var pagecells = VisioAutomation.Pages.PageCells.GetCells(page.PageSheet);
+                var old_page_format_cells = VisioAutomation.Pages.PageFormatCells.GetCells(page.PageSheet);
 
-                var newpagecells = new VisioAutomation.Pages.PageCells();
+                var new_page_format_cells = new VisioAutomation.Pages.PageFormatCells();
                 
                 if (this.Width > 0)
                 {
-                    newpagecells.PageWidth = this.Width;
+                    new_page_format_cells.Width = this.Width;
                 }
 
                 if (this.Height > 0)
                 {
-                    newpagecells.PageHeight = this.Height;
+                    new_page_format_cells.Height = this.Height;
                 }
 
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                newpagecells.SetFormulas(writer);
+                new_page_format_cells.SetFormulas(writer);
                 writer.BlastGuards = true;
 
                 writer.Commit(page);

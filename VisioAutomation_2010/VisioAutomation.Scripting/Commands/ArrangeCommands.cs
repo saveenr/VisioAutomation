@@ -1,8 +1,9 @@
-using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Shapes.Locking;
+using Microsoft.Office.Interop.Visio;
+using VisioAutomation.Scripting.Models;
+using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
 
-namespace VisioAutomation.Scripting.Layout
+namespace VisioAutomation.Scripting.Commands
 {
     public enum ShapeSendDirection
     {
@@ -11,10 +12,6 @@ namespace VisioAutomation.Scripting.Layout
         Backward,
         ToBack
     }
-}
-
-namespace VisioAutomation.Scripting.Commands
-{
 
     public class ArrangeCommands : CommandSet
     {
@@ -43,36 +40,36 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Nudge"))
             {
                 var selection = this._client.Selection.Get();
-                var unitcode = IVisio.VisUnitCodes.visInches;
+                var unitcode = Microsoft.Office.Interop.Visio.VisUnitCodes.visInches;
 
                 // Move method: http://msdn.microsoft.com/en-us/library/ms367549.aspx   
                 selection.Move(dx, dy, unitcode);
             }
         }
 
-        private static void SendShapes(IVisio.Selection selection, VisioAutomation.Scripting.Layout.ShapeSendDirection dir)
+        private static void SendShapes(Microsoft.Office.Interop.Visio.Selection selection, ShapeSendDirection dir)
         {
 
-            if (dir == VisioAutomation.Scripting.Layout.ShapeSendDirection.ToBack)
+            if (dir == ShapeSendDirection.ToBack)
             {
                 selection.SendToBack();
             }
-            else if (dir == VisioAutomation.Scripting.Layout.ShapeSendDirection.Backward)
+            else if (dir == ShapeSendDirection.Backward)
             {
                 selection.SendBackward();
             }
-            else if (dir == VisioAutomation.Scripting.Layout.ShapeSendDirection.Forward)
+            else if (dir == ShapeSendDirection.Forward)
             {
                 selection.BringForward();
             }
-            else if (dir == VisioAutomation.Scripting.Layout.ShapeSendDirection.ToFront)
+            else if (dir == ShapeSendDirection.ToFront)
             {
                 selection.BringToFront();
             }
         }
 
 
-        public void Send(TargetShapes targets, VisioAutomation.Scripting.Layout.ShapeSendDirection dir)
+        public void Send(TargetShapes targets, ShapeSendDirection dir)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

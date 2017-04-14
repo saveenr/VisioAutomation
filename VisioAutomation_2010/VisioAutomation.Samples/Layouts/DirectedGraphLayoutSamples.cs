@@ -2,7 +2,7 @@
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
-using VisioAutomation.Shapes.Connectors;
+using VisioAutomation.Shapes;
 
 namespace VisioAutomationSamples
 {

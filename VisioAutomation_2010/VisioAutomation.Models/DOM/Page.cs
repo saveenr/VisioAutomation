@@ -1,5 +1,6 @@
 ﻿using VisioAutomation.Extensions;
 using VisioAutomation.PageLayouts;
+using VisioAutomation.Pages;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -11,27 +12,29 @@ namespace VisioAutomation.Models.Dom
         public Drawing.Size? Size;
         public bool ResizeToFit;
         public Drawing.Size? ResizeToFitMargin;
-        public Pages.PageCells PageCells;
+        public Pages.PageFormatCells PageFormatCells;
+        public Pages.PageLayoutCells PageLayoutCells;
         public string Name;
         public LayoutBase Layout;
         public IVisio.Page VisioPage;
-        public Application.PerfSettings PerfSettings { get; }
+        public RenderPerforfmanceSettings RenderPerforfmanceSettings { get; }
 
         public Page()
         {
             this.Shapes = new ShapeList();
-            this.PageCells = new Pages.PageCells();
+            this.PageFormatCells = new Pages.PageFormatCells();
+            this.PageLayoutCells = new PageLayoutCells();
 
-            this.PerfSettings = new Application.PerfSettings();
-            this.PerfSettings.DeferRecalc = 0;
+            this.RenderPerforfmanceSettings = new RenderPerforfmanceSettings();
+            this.RenderPerforfmanceSettings.DeferRecalc = 0;
             
             // By Enable ScreenUpdating by default
             // If it is disabled it messes up page resizing (there may be a workaround)
             // TODO: Try the DrawTreeMultiNode2 unit test to see how setting it to 1 will affect the rendering
 
-            this.PerfSettings.ScreenUpdating = 1; 
-            this.PerfSettings.EnableAutoConnect = false;
-            this.PerfSettings.LiveDynamics = false;
+            this.RenderPerforfmanceSettings.ScreenUpdating = 1; 
+            this.RenderPerforfmanceSettings.EnableAutoConnect = false;
+            this.RenderPerforfmanceSettings.LiveDynamics = false;
         }
 
         public IVisio.Page Render(IVisio.Document doc)
@@ -66,16 +69,17 @@ namespace VisioAutomation.Models.Dom
             var page_sheet = page.PageSheet;
             var app = page.Application;
 
-            using (var perfscope = new Application.PerfScope(app, this.PerfSettings))
+            using (var perfscope = new RenderPerformanceScope(app, this.RenderPerforfmanceSettings))
             {
                 if (this.Size.HasValue)
                 {
-                    this.PageCells.PageHeight = this.Size.Value.Height;
-                    this.PageCells.PageWidth = this.Size.Value.Width;
+                    this.PageFormatCells.Height = this.Size.Value.Height;
+                    this.PageFormatCells.Width = this.Size.Value.Width;
                 }
 
                 var writer = new SidSrcWriter();
-                this.PageCells.SetFormulas((short)page_sheet.ID, writer);
+                this.PageFormatCells.SetFormulas((short)page_sheet.ID, writer);
+                this.PageLayoutCells.SetFormulas((short)page_sheet.ID, writer);
                 writer.Commit(page);
                 
                 // Then render the shapes

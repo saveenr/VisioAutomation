@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.View;
+using VisioAutomation.Scripting.Models;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -76,25 +76,25 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_window = this.GetActiveWindow();
 
-            if (zoom == View.Zoom.Out)
+            if (zoom == Models.Zoom.Out)
             {
                 var cur = active_window.Zoom;
                 this.ZoomToPercentage(cur / this.ZoomIncrement);                
             }
-            else if (zoom == View.Zoom.In)
+            else if (zoom == Models.Zoom.In)
             {
                 var cur = active_window.Zoom;
                 this.ZoomToPercentage(cur * this.ZoomIncrement);
             }
-            else if (zoom == View.Zoom.ToPage)
+            else if (zoom == Models.Zoom.ToPage)
             {
                 active_window.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
             }
-            else if (zoom == View.Zoom.ToWidth)
+            else if (zoom == Models.Zoom.ToWidth)
             {
                 active_window.ViewFit = (short)IVisio.VisWindowFit.visFitWidth;
             }
-            else if (zoom == View.Zoom.ToSelection)
+            else if (zoom == Models.Zoom.ToSelection)
             {
                 if (!this._client.Selection.HasShapes())
                 {

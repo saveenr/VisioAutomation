@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Scripting.Helpers;
 
 namespace VisioAutomation_Tests.Core.Text
 {
@@ -7,7 +8,7 @@ namespace VisioAutomation_Tests.Core.Text
     {
         public bool Match(string pat, string text)
         {
-            var regex = VisioAutomation.Scripting.Utilities.WildcardHelper.GetRegexForWildcardPattern(pat,true);
+            var regex = WildcardHelper.GetRegexForWildcardPattern(pat,true);
             return regex.IsMatch(text);
         }
 

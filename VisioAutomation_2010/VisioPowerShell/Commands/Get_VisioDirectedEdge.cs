@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Management.Automation;
+using VisioPowerShell.Models;
 using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
@@ -54,7 +55,7 @@ namespace VisioPowerShell.Commands
         {
             foreach (var edge in edges)
             {
-                var e = new Model.DirectedEdge(
+                var e = new DirectedEdge(
                     edge.From.ID,
                     edge.To.ID,
                     edge.Connector.ID

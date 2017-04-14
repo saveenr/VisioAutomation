@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
-using VACONT = VisioAutomation.Shapes.Controls;
-using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -166,13 +165,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s3 = page1.DrawRectangle(3, 1, 4, 2);
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
-            VACUSTPROP.CustomPropertyHelper.Set(s1, "S1P1", "1");
-            VACUSTPROP.CustomPropertyHelper.Set(s2, "S2P1", "2");
-            VACUSTPROP.CustomPropertyHelper.Set(s2, "S2P2", "3");
+            CustomPropertyHelper.Set(s1, "S1P1", "1");
+            CustomPropertyHelper.Set(s2, "S2P1", "2");
+            CustomPropertyHelper.Set(s2, "S2P2", "3");
             //set nothing for s3
-            VACUSTPROP.CustomPropertyHelper.Set(s4, "S3P1", "4");
-            VACUSTPROP.CustomPropertyHelper.Set(s4, "S3P2", "5");
-            VACUSTPROP.CustomPropertyHelper.Set(s4, "S3P3", "6");
+            CustomPropertyHelper.Set(s4, "S3P1", "4");
+            CustomPropertyHelper.Set(s4, "S3P2", "5");
+            CustomPropertyHelper.Set(s4, "S3P3", "6");
 
             var query = new ShapeSheetQuery();
 
@@ -331,12 +330,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Try to retrieve the control cells rows for each shape, every shape should return zero rows
             foreach (var s in shapes)
             {
-                var r1 = VACONT.ControlCells.GetCells(s);
+                var r1 = ControlCells.GetCells(s);
                 Assert.AreEqual(0,r1.Count);
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
-            var r2 = VACONT.ControlCells.GetCells(page1, shapeids);
+            var r2 = ControlCells.GetCells(page1, shapeids);
             Assert.AreEqual(shapes.Count(),r2.Count);
             for (int i = 0; i < shapes.Count();i++)
             {
@@ -344,8 +343,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             }
 
             // Add a Controls row to shape2
-            var cc = new VACONT.ControlCells();
-            VACONT.ControlHelper.Add(s2, cc);
+            var cc = new ControlCells();
+            ControlHelper.Add(s2, cc);
 
             // Now verify that none of the shapes *except s2* have the controls section locally or otherwise
             foreach (var s in shapes)
@@ -367,18 +366,18 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 if (s != s2)
                 {
-                    var r1 = VACONT.ControlCells.GetCells(s);
+                    var r1 = ControlCells.GetCells(s);
                     Assert.AreEqual(0, r1.Count);
                 }
                 else
                 {
-                    var r1 = VACONT.ControlCells.GetCells(s);
+                    var r1 = ControlCells.GetCells(s);
                     Assert.AreEqual(1, r1.Count);
                 }
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
-            var r3 = VACONT.ControlCells.GetCells(page1, shapeids);
+            var r3 = ControlCells.GetCells(page1, shapeids);
             Assert.AreEqual(shapes.Count(), r3.Count);
             for (int i = 0; i < shapes.Count(); i++)
             {

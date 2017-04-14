@@ -1,6 +1,7 @@
 using VisioAutomation.Models;
+using VisioAutomation.Scripting.Helpers;
+using VisioAutomation.Scripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Scripting.Utilities;
 
 namespace VisioAutomation.Scripting.Commands
 {

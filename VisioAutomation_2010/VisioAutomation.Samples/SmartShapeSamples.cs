@@ -42,7 +42,7 @@ namespace VisioAutomationSamples
 
             writer.Commit(page_a);
 
-            var markup1 = new VisioAutomation.Models.Text.TextElement();
+            var markup1 = new VisioAutomation.Models.Text.Element();
             markup1.AddField(VisioAutomation.Models.Text.FieldConstants.PageName);
             markup1.AddText(" (");
             markup1.AddField(VisioAutomation.Models.Text.FieldConstants.PageNumber);

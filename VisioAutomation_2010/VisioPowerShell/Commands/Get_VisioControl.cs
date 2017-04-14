@@ -1,5 +1,6 @@
 using System.Management.Automation;
-using VisioPowerShell.Model;
+using VisioAutomation.Scripting.Models;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -15,7 +16,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
             var dic = this.Client.Control.Get(targets);
 
             if (this.GetCells)
@@ -32,7 +33,7 @@ namespace VisioPowerShell.Commands
 
                 foreach (var point in points)
                 {
-                    var cp = new ControlFormulas();
+                    var cp = new Control();
 
                     cp.ShapeID = shapeid;
 

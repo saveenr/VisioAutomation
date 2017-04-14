@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Shapes.ConnectionPoints;
+using VisioAutomation.Scripting.Models;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, indices0[1]);
             Assert.AreEqual(0, indices0[2]);
 
-            var targets = new VisioAutomation.Scripting.TargetShapes();
+            var targets = new TargetShapes();
             var dic = client.ConnectionPoint.Get(targets);
             Assert.AreEqual(3, dic.Count);
             Assert.AreEqual("Width*0.67", dic[s1][0].Y.Formula);

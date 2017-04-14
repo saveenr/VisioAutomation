@@ -1,5 +1,6 @@
 using System.Management.Automation;
-using VisioPowerShell.Model;
+using VisioAutomation.Scripting.Models;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -15,7 +16,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioAutomation.Scripting.TargetShapes(this.Shapes);
+            var targets = new TargetShapes(this.Shapes);
             var dic = this.Client.Hyperlink.Get(targets);
 
             if (this.GetCells)
@@ -32,7 +33,7 @@ namespace VisioPowerShell.Commands
 
                 foreach (var hyperlink in hyperlinks)
                 {
-                    var hl_formulas = new HyperlinkFormulas();
+                    var hl_formulas = new Hyperlink();
 
                     hl_formulas.ShapeID = shapeid;
 

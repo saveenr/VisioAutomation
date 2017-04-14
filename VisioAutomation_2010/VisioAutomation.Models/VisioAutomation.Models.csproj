@@ -44,6 +44,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dom\RenderPerformanceScope.cs" />
+    <Compile Include="Dom\RenderPerforfmanceSettings.cs" />
     <Compile Include="Layouts\Box\AlignmentHorizontal.cs" />
     <Compile Include="Layouts\Box\AlignmentVertical.cs" />
     <Compile Include="Layouts\Box\Box.cs" />
@@ -115,12 +117,10 @@
     <Compile Include="Layouts\InternalTree\Node.cs" />
     <Compile Include="Layouts\InternalTree\TreeLayout.cs" />
     <Compile Include="Layouts\InternalTree\TreeLayoutOptions.cs" />
-    <Compile Include="AlignmentHorizontal.cs" />
-    <Compile Include="AlignmentVertical.cs" />
-    <Compile Include="Axis.cs" />
-    <Compile Include="Margin.cs" />
+    <Compile Include="Documents\Forms\PageMargin.cs" />
     <Compile Include="Text\CharStyle.cs" />
-    <Compile Include="Utilities\MasterLoader.cs" />
+    <Compile Include="Layouts\InternalTree\AlignmentVertical.cs" />
+    <Compile Include="Utilities\MasterCache.cs" />
     <Compile Include="Text\CharacterFormatting.cs" />
     <Compile Include="Text\CustomField.cs" />
     <Compile Include="Text\Field.cs" />
@@ -132,8 +132,8 @@
     <Compile Include="Text\NodeList.cs" />
     <Compile Include="Text\NodeType.cs" />
     <Compile Include="Text\ParagraphFormatting.cs" />
-    <Compile Include="Text\TextElement.cs" />
-    <Compile Include="Text\TextRegion.cs" />
+    <Compile Include="Text\Element.cs" />
+    <Compile Include="Text\Region.cs" />
     <Compile Include="Documents\OrgCharts\LayoutDirection.cs" />
     <Compile Include="Documents\OrgCharts\LayoutOptions.cs" />
     <Compile Include="Documents\OrgCharts\Node.cs" />
