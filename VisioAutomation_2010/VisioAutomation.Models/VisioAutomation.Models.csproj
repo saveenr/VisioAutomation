@@ -120,7 +120,7 @@
     <Compile Include="Documents\Forms\PageMargin.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Layouts\InternalTree\AlignmentVertical.cs" />
-    <Compile Include="Utilities\MasterLoader.cs" />
+    <Compile Include="Utilities\MasterCache.cs" />
     <Compile Include="Text\CharacterFormatting.cs" />
     <Compile Include="Text\CustomField.cs" />
     <Compile Include="Text\Field.cs" />
