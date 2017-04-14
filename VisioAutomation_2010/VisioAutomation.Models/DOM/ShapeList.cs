@@ -229,19 +229,19 @@ namespace VisioAutomation.Models.Dom
                 .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
 
-            var loader = new MasterLoader();
+            var master_cache = new MasterCache();
             foreach (var shape_node in shape_nodes)
             {
-                loader.Add(shape_node.Master.MasterName,shape_node.Master.StencilName);
+                master_cache.Add(shape_node.Master.MasterName,shape_node.Master.StencilName);
             }
 
             var application = context.VisioPage.Application;
             var docs = application.Documents;
-            loader.Resolve(docs);
+            master_cache.Resolve(docs);
 
             foreach (var shape_node in shape_nodes)
             {
-                var mref = loader.Get(shape_node.Master.MasterName, shape_node.Master.StencilName);
+                var mref = master_cache.Get(shape_node.Master.MasterName, shape_node.Master.StencilName);
                 shape_node.Master.VisioMaster = mref.VisioMaster;
             }
 

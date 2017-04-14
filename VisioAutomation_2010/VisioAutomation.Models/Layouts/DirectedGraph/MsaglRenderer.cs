@@ -208,18 +208,18 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var master_to_size = new Dictionary<IVisio.Master, VA.Drawing.Size>();
 
             // Load and cache all the masters
-            var loader = new MasterLoader();
+            var master_cache = new MasterCache();
             foreach (var layout_shape in layout_diagram.Shapes)
             {
-                loader.Add(layout_shape.MasterName,layout_shape.StencilName);                
+                master_cache.Add(layout_shape.MasterName,layout_shape.StencilName);                
             }
-            loader.Resolve(documents);
+            master_cache.Resolve(documents);
             
             // If no size was provided for the shape, then set the size based on the master
             var layoutshapes_without_size_info = layout_diagram.Shapes.Where(s => s.Size == null);
             foreach (var layoutshape in layoutshapes_without_size_info)
             {
-                var master = loader.Get(layoutshape.MasterName,layoutshape.StencilName);
+                var master = master_cache.Get(layoutshape.MasterName,layoutshape.StencilName);
                 var size = MsaglRenderer.TryGetValue(master_to_size,master.VisioMaster);
                 if (!size.HasValue)
                 {
@@ -240,8 +240,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             this.CreateDOMShapes(page_node.Shapes, mg_graph, vis);
 
-
-
             if (this.LayoutOptions.UseDynamicConnectors)
             {
                 this.CreateDynamicConnectorEdges(page_node.Shapes, mg_graph);
@@ -250,8 +248,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             {
                 this.CreateBezierEdges(page_node.Shapes, mg_graph);
             }
-
-
+            
             // Additional Page properties
             page_node.PageLayoutCells.PlaceStyle = 1;
             page_node.PageLayoutCells.RouteStyle = 5;
