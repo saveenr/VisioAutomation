@@ -4,8 +4,6 @@ namespace VisioAutomation.Models.Layouts.Box
 {
     public abstract class Node
     {
-        internal Node _parent;
-
         public object Data { get; set; }
         public Drawing.Rectangle Rectangle { get; set; }
         public Drawing.Rectangle ReservedRectangle { get; set; }
@@ -15,10 +13,5 @@ namespace VisioAutomation.Models.Layouts.Box
         public abstract Drawing.Size CalculateSize();
         public abstract void _place(Drawing.Point origin);
         public abstract IEnumerable<Node> GetChildren();
-
-        public Node Parent
-        {
-            get { return this._parent; }
-        }
     }
 }
