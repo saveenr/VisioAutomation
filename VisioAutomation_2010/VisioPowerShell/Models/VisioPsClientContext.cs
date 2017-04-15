@@ -1,3 +1,4 @@
+using VisioAutomation.Scripting;
 using VisioAutomation.Scripting.Models;
 using SMA = System.Management.Automation;
 

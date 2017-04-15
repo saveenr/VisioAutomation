@@ -1,6 +1,7 @@
 using System.Management.Automation;
 using VisioAutomation.Scripting.Models;
 using VisioPowerShell.Models;
+using PageOrientation = VisioAutomation.Scripting.Models.PageOrientation;
 
 namespace VisioPowerShell.Commands
 {
@@ -8,16 +9,16 @@ namespace VisioPowerShell.Commands
     public class Set_VisioPageLayout : VisioCmdlet
     {
         [Parameter(Mandatory = false)] 
-        public PageOrientation Orientation = PageOrientation.None;
+        public Models.PageOrientation Orientation = Models.PageOrientation.None;
         
         [Parameter(Mandatory = false)] 
         public string BackgroundPage = null;
 
         protected override void ProcessRecord()
         {
-            if (this.Orientation != PageOrientation.None)
+            if (this.Orientation != Models.PageOrientation.None)
             {
-                this.Client.Page.SetOrientation((PrintPageOrientation) this.Orientation);
+                this.Client.Page.SetOrientation((PageOrientation) this.Orientation);
             }
 
             if (this.BackgroundPage != null)

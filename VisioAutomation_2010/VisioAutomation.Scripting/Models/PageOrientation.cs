@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Scripting.Models
 {
-    public enum PrintPageOrientation
+    public enum PageOrientation
     {
         SameAsPrinter = IVisio.VisCellVals.visPPOSameAsPrinter,
         Portrait = IVisio.VisCellVals.visPPOPortrait,

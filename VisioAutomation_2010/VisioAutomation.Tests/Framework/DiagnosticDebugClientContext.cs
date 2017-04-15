@@ -4,7 +4,7 @@ using VASCRIPT=VisioAutomation.Scripting;
 
 namespace VisioAutomation_Tests
 {
-    public class DiagnosticDebugClientContext : ClientContext
+    public class DiagnosticDebugClientContext : VASCRIPT.ClientContext
     {
         public DiagnosticDebugClientContext()
         {

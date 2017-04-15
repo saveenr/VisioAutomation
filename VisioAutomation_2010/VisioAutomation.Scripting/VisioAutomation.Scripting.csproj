@@ -51,7 +51,7 @@
     <Compile Include="Models\AlignmentHorizontal.cs" />
     <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
-    <Compile Include="Models\PrintPageOrientation.cs" />
+    <Compile Include="Models\PageOrientation.cs" />
     <Compile Include="Models\NameDictionary.cs" />
     <Compile Include="Models\CellSrcDictionary.cs" />
     <Compile Include="Models\CellValueDictionary.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="Commands\TextCommands.cs" />
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
     <Compile Include="Commands\ViewCommands.cs" />
-    <Compile Include="Models\ClientContext.cs" />
+    <Compile Include="ClientContext.cs" />
     <Compile Include="Models\DefaultClientContext.cs" />
     <Compile Include="Models\DGConnectorInfo.cs" />
     <Compile Include="Builders\DirectedGraphBuilder.cs" />
@@ -105,7 +105,7 @@
     <Compile Include="Builders\OrgChartBuilder.cs" />
     <Compile Include="Models\PageDirection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\RelativePosition.cs" />
+    <Compile Include="Models\ShapeRelativePosition.cs" />
     <Compile Include="Models\SnapCornerPosition.cs" />
     <Compile Include="Models\SnappingGrid.cs" />
     <Compile Include="Helpers\TextHelper.cs" />

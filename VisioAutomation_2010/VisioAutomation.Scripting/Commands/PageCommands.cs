@@ -261,7 +261,7 @@ namespace VisioAutomation.Scripting.Commands
             return dest_page;
         }
 
-        public PrintPageOrientation GetOrientation()
+        public PageOrientation GetOrientation()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -271,7 +271,7 @@ namespace VisioAutomation.Scripting.Commands
             return PageCommands.GetOrientation(active_page);
         }
 
-        private static PrintPageOrientation GetOrientation(IVisio.Page page)
+        private static PageOrientation GetOrientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -282,10 +282,10 @@ namespace VisioAutomation.Scripting.Commands
             var src = VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation;
             var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNumber, 0];
-            return (PrintPageOrientation)value;
+            return (PageOrientation)value;
         }
 
-        public void SetOrientation(PrintPageOrientation orientation)
+        public void SetOrientation(PageOrientation orientation)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -295,7 +295,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = application.ActivePage;
 
-            if (orientation != PrintPageOrientation.Landscape && orientation != PrintPageOrientation.Portrait)
+            if (orientation != PageOrientation.Landscape && orientation != PageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
