@@ -1,6 +1,6 @@
 namespace VisioAutomation.Scripting.Models
 {
-    public enum RelativePosition
+    public enum ShapeRelativePosition
     {
         PinY, 
         PinX, 

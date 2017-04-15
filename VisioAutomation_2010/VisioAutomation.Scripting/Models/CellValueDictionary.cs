@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Models
 
             this.srcmap = srcmap;
 
-            this.UpdateFrom(dictionary);
+            this.Update(dictionary);
         }
 
 
@@ -25,22 +25,22 @@ namespace VisioAutomation.Scripting.Models
             return this.srcmap[name];
         }
 
-        public void UpdateFrom(Dictionary<string,string> from_dic)
+        public void Update(Dictionary<string,string> cells)
         {
-            if (from_dic == null)
+            if (cells == null)
             {
-                throw new System.ArgumentNullException(nameof(from_dic));
+                throw new System.ArgumentNullException(nameof(cells));
             }
 
             // We are certain all the keys are strings
-            foreach (var pair in from_dic)
+            foreach (var pair in cells)
             {
                 string cellname = pair.Key;
-                this.UpdateFrom(cellname, pair.Value);
+                this.Update(cellname, pair.Value);
             }
         }
 
-        public void UpdateFrom(string cellname,string cellvalue)
+        public void Update(string cellname, string cellvalue)
         {
             if (!this.srcmap.ContainsKey(cellname))
             {

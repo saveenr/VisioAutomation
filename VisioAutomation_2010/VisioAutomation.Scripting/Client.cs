@@ -10,31 +10,31 @@ namespace VisioAutomation.Scripting
     {
         private ClientContext _client_context;
 
-        public Commands.ApplicationCommands Application { get; private set; }
-        public Commands.ViewCommands View { get; private set; }
-        public Commands.FormatCommands Format { get; private set; }
-        public Commands.LayerCommands Layer { get; private set; }
-        public Commands.ControlCommands Control { get; private set; }
-        public Commands.HyperlinkCommands Hyperlink { get; private set; }
-        public Commands.CustomPropCommands CustomProp { get; private set; }
-        public Commands.ExportCommands Export { get; private set; }
-        public Commands.ConnectionCommands Connection { get; private set; }
-        public Commands.ConnectionPointCommands ConnectionPoint { get; private set; }
-        public Commands.DrawCommands Draw { get; private set; }
-        public Commands.MasterCommands Master { get; private set; }
-        public Commands.ArrangeCommands Arrange { get; private set; }
-        public Commands.SnapCommands Snap { get; private set; }
-        public Commands.DistributeCommands Distribute { get; private set; }
-        public Commands.AlignCommands Align { get; private set; }
-        public Commands.PageCommands Page { get; private set; }
-        public Commands.SelectionCommands Selection { get; private set; }
-        public Commands.ShapeSheetCommands ShapeSheet { get; private set; }
-        public Commands.TextCommands Text { get; private set; }
-        public Commands.UserDefinedCellCommands UserDefinedCell { get; private set; }
-        public Commands.DocumentCommands Document { get; private set; }
-        public Commands.DeveloperCommands Developer { get; private set; }
-        public Commands.OutputCommands Output { get; private set; }
-        public Commands.GroupingCommands Grouping { get; private set; }
+        public Commands.ApplicationCommands Application { get; }
+        public Commands.ViewCommands View { get; }
+        public Commands.FormatCommands Format { get; }
+        public Commands.LayerCommands Layer { get; }
+        public Commands.ControlCommands Control { get; }
+        public Commands.HyperlinkCommands Hyperlink { get; }
+        public Commands.CustomPropCommands CustomProp { get; }
+        public Commands.ExportCommands Export { get; }
+        public Commands.ConnectionCommands Connection { get; }
+        public Commands.ConnectionPointCommands ConnectionPoint { get; }
+        public Commands.DrawCommands Draw { get; }
+        public Commands.MasterCommands Master { get; }
+        public Commands.ArrangeCommands Arrange { get; }
+        public Commands.SnapCommands Snap { get; }
+        public Commands.DistributeCommands Distribute { get; }
+        public Commands.AlignCommands Align { get; }
+        public Commands.PageCommands Page { get; }
+        public Commands.SelectionCommands Selection { get; }
+        public Commands.ShapeSheetCommands ShapeSheet { get; }
+        public Commands.TextCommands Text { get; }
+        public Commands.UserDefinedCellCommands UserDefinedCell { get; }
+        public Commands.DocumentCommands Document { get; }
+        public Commands.DeveloperCommands Developer { get; }
+        public Commands.OutputCommands Output { get; }
+        public Commands.GroupingCommands Grouping { get; }
 
         public bool VerboseLogging = true;
 
@@ -75,6 +75,8 @@ namespace VisioAutomation.Scripting
             this.Output = new Commands.OutputCommands(this);
             this.Distribute = new DistributeCommands(this);
             this.Grouping = new GroupingCommands(this);
+            this.Snap = new SnapCommands(this);
+            this.Align = new AlignCommands(this);
         }
 
         public System.Reflection.Assembly GetVisioAutomationAssembly()

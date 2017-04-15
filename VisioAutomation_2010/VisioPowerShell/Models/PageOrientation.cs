@@ -5,8 +5,8 @@ namespace VisioPowerShell.Models
     public enum PageOrientation
     {
         None = -1,
-        Portrait = PrintPageOrientation.Portrait,
-        Landscape = PrintPageOrientation.Landscape,
-        SameAsPrinter = PrintPageOrientation.SameAsPrinter
+        Portrait = VisioAutomation.Scripting.Models.PageOrientation.Portrait,
+        Landscape = VisioAutomation.Scripting.Models.PageOrientation.Landscape,
+        SameAsPrinter = VisioAutomation.Scripting.Models.PageOrientation.SameAsPrinter
     }
 }

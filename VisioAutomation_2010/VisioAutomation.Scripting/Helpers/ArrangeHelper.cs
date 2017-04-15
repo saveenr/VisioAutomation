@@ -9,30 +9,30 @@ namespace VisioAutomation.Scripting.Helpers
 {
     internal static class ArrangeHelper
     {
-        private static double GetPositionOnShape(ShapeXFormData xform, RelativePosition pos)
+        private static double GetPositionOnShape(ShapeXFormData xform, ShapeRelativePosition pos)
         {
             var r = xform.GetRectangle();
 
             switch (pos)
             {
-                case RelativePosition.PinY:
+                case ShapeRelativePosition.PinY:
                     return xform.PinY;
-                case RelativePosition.PinX:
+                case ShapeRelativePosition.PinX:
                     return xform.PinX;
-                case RelativePosition.Left:
+                case ShapeRelativePosition.Left:
                     return r.Left;
-                case RelativePosition.Right:
+                case ShapeRelativePosition.Right:
                     return r.Right;
-                case RelativePosition.Top:
+                case ShapeRelativePosition.Top:
                     return r.Top;
-                case RelativePosition.Bottom:
+                case ShapeRelativePosition.Bottom:
                     return r.Bottom;
             }
 
             throw new System.ArgumentOutOfRangeException(nameof(pos));
         }
 
-        internal static List<int> SortShapesByPosition(IVisio.Page page, TargetShapeIDs targets, RelativePosition pos)
+        internal static List<int> SortShapesByPosition(IVisio.Page page, TargetShapeIDs targets, ShapeRelativePosition pos)
         {
             // First get the transforms of the shapes on the given axis
             var xforms = ShapeXFormData.Get(page, targets);
@@ -62,8 +62,8 @@ namespace VisioAutomation.Scripting.Helpers
 
             // Calculate the new Xfrms
             var sortpos = axis == Axis.XAxis
-                ? RelativePosition.PinX
-                : RelativePosition.PinY;
+                ? ShapeRelativePosition.PinX
+                : ShapeRelativePosition.PinY;
 
             var delta = axis == Axis.XAxis
                 ? new Drawing.Size(spacing, 0)
