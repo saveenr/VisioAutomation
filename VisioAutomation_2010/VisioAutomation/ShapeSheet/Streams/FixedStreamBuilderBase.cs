@@ -10,7 +10,6 @@ namespace VisioAutomation.ShapeSheet.Streams
         protected int _chunksize => this._streamtype == StreamType.SidSrc ? 4 : 3;
 
         private int _count = 0;
-        private int _pos = 0;
 
         private VisioAutomation.Utilities.SegmentedArray<short> _segarray;
 
@@ -57,7 +56,6 @@ namespace VisioAutomation.ShapeSheet.Streams
         public void Clear()
         {
             this._count = 0;
-            this._pos = 0;
         }
     }
 }
