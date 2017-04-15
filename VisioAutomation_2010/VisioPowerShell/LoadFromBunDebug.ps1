@@ -1,6 +1,4 @@
-﻿# Loads the module fom bin debug.
-# For those cases where you need to check something quick
-# and don't want to overwrite the installed version
+﻿# Loads the module from bin/debug folder.
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
