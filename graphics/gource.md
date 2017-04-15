@@ -1,21 +1,21 @@
 
-# Getting the tools
+# Install the tools
 
 ## Gource
 
-First install the gource tool from here: https://github.com/acaudwell/Gource/releases
+Download gource from: https://github.com/acaudwell/Gource/releases
 
-For example store it here:
+And extract it into a folder like ...
 	
-	E:\gource-0.42.win32
+    e:\gource-0.42.win32
 
-## FFMPEG
+##  FFMPEG
 
 Get the windows version from here: http://ffmpeg.zeranoe.com/builds/
 
-keep the files in here
+Store the FFMPEG files in here
 
-	E:\ffmpeg
+    e:\ffmpeg
 
 ## Git
 
@@ -23,12 +23,12 @@ If you need to donwload git for Windows get it here: https://git-scm.com/downloa
 
 ## Running Gource
 
-	set path=%path%;C:\Program Files (x86)\Git\bin
-
-	gource.exe E:\code\github\VisioAutomation --seconds-per-day 0.005 --title VisioAutomation --hide filenames,usernames --background 5555dd -viewport 1920x1080 -o d:\visioautomation.ppm
+    set path=%path%;C:\Program Files (x86)\Git\bin
+	
+    gource.exe E:\code\github\VisioAutomation --seconds-per-day 0.005 --title VisioAutomation --hide filenames,usernames --background 5555dd -viewport 1920x1080 -o d:\visioautomation.ppm
 
 ## Running ffmpeg
 
-NOTE  opens correctly with VLC but not with WMP x264 co
+NOTE  opens correctly with VLC but not with Windows Media Player
 
-	ffmpeg.exe -y -r 60 -f image2pipe -vcodec ppm -i d:\visioautomation.ppm -vcodec libx264 -preset ultrafast -crf 1 -threads 0 -bf 0 d:\visioautomation.mp4
+    ffmpeg.exe -y -r 60 -f image2pipe -vcodec ppm -i d:\visioautomation.ppm -vcodec libx264 -preset ultrafast -crf 1 -threads 0 -bf 0 d:\visioautomation.mp4
