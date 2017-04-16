@@ -1,7 +1,9 @@
 ﻿# PURPOSE
-# *Manually* installs the Visio PowerShell into the users PowerShell folder
+# -------
+# Manually installs the Visio PowerShell module into the user's PowerShell folder
 #
 # NOTES
+# -----
 # - If another PowerShell session has the Visio PS module loaded, then the VisioPS binaries cannot 
 #   be replaced by this script because those binaries are locked. In this case, those PS sessions
 #   must be terminated before the script will work
