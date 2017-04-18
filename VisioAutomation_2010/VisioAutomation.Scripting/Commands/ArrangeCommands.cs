@@ -1,4 +1,3 @@
-using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Scripting.Models;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;

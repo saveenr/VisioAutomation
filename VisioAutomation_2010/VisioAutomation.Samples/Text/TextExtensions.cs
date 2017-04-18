@@ -1,4 +1,3 @@
-using VisioAutomation.Models;
 using VA=VisioAutomation;
 
 namespace VisioAutomationSamples

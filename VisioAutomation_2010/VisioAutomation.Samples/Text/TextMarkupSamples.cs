@@ -1,5 +1,4 @@
-﻿using VisioAutomation.Models;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 
 namespace VisioAutomationSamples
 {

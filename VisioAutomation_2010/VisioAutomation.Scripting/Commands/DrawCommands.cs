@@ -459,7 +459,10 @@ namespace VisioAutomation.Scripting.Commands
         public List<IVisio.Shape> GetAllShapes()
         {
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            return surface.Target.GetAllShapes();
+            var shapes = surface.Target.Shapes;
+            var list = new List<IVisio.Shape>();
+            list.AddRange(shapes.ToEnumerable());
+            return list;
         }
     }
 }

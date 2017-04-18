@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Grid;
 using VisioAutomation.Scripting.Builders;
-using VisioAutomation.Scripting.Models;
 using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
