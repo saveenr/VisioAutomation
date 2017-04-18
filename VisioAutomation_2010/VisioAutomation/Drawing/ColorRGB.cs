@@ -2,36 +2,36 @@
 
 namespace VisioAutomation.Drawing
 {
-    public struct ColorRGB
+    public struct ColorRgb
     {
         private readonly byte _r;
         private readonly byte _g;
         private readonly byte _b;
 
-        public ColorRGB(byte r, byte g, byte b)
+        public ColorRgb(byte r, byte g, byte b)
         {
             this._r = r;
             this._g = g;
             this._b = b;
         }
 
-        public ColorRGB(short r, short g, short b) :
+        public ColorRgb(short r, short g, short b) :
             this( (byte)r, (byte)g, (byte) b)
         {
         }
 
-        public ColorRGB(int rgb)
+        public ColorRgb(int rgb)
         {
-            ColorRGB.GetRGBBytes((uint) rgb, out this._r, out this._g, out this._b);
+            ColorRgb.GetRGBBytes((uint) rgb, out this._r, out this._g, out this._b);
         }
 
-        public ColorRGB(uint rgb)
+        public ColorRgb(uint rgb)
         {
-            ColorRGB.GetRGBBytes(rgb, out this._r, out this._g, out this._b);
+            ColorRgb.GetRGBBytes(rgb, out this._r, out this._g, out this._b);
         }
 
 
-        public ColorRGB(System.Drawing.Color color)
+        public ColorRgb(System.Drawing.Color color)
         {
             this._r = color.R;
             this._g = color.G;
@@ -46,46 +46,46 @@ namespace VisioAutomation.Drawing
 
         public override string ToString()
         {
-            var s = string.Format(CultureInfo.InvariantCulture, "{0}({1},{2},{3})", nameof(ColorRGB), this.R, this.G, this.B);
+            var s = string.Format(CultureInfo.InvariantCulture, "{0}({1},{2},{3})", nameof(ColorRgb), this.R, this.G, this.B);
             return s;
         }
 
-        public static explicit operator System.Drawing.Color(ColorRGB color)
+        public static explicit operator System.Drawing.Color(ColorRgb color)
         {
             return System.Drawing.Color.FromArgb(color._r, color._g, color._b);
         }
 
-        public static explicit operator int(ColorRGB color)
+        public static explicit operator int(ColorRgb color)
         {
             return color.ToRGB();
         }
 
-        public static explicit operator ColorRGB(int rgbint)
+        public static explicit operator ColorRgb(int rgbint)
         {
-            return new ColorRGB(rgbint);
+            return new ColorRgb(rgbint);
         }
 
         public string ToWebColorString()
         {
-            return ColorRGB.ToWebColorString(this._r, this._g, this._b);
+            return ColorRgb.ToWebColorString(this._r, this._g, this._b);
         }
 
         public override bool Equals(object other)
         {
-            return other is ColorRGB && this.Equals((ColorRGB) other);
+            return other is ColorRgb && this.Equals((ColorRgb) other);
         }
 
-        public static bool operator ==(ColorRGB lhs, ColorRGB rhs)
+        public static bool operator ==(ColorRgb lhs, ColorRgb rhs)
         {
             return lhs.Equals(rhs);
         }
 
-        public static bool operator !=(ColorRGB lhs, ColorRGB rhs)
+        public static bool operator !=(ColorRgb lhs, ColorRgb rhs)
         {
             return !lhs.Equals(rhs);
         }
 
-        private bool Equals(ColorRGB other)
+        private bool Equals(ColorRgb other)
         {
             return (this._r == other._r && this._g == other._g && this._b == other._b);
         }
@@ -100,9 +100,9 @@ namespace VisioAutomation.Drawing
             return (this._r << 16) | (this._g << 8) | (this._b);
         }
 
-        public static ColorRGB ParseWebColor(string webcolor)
+        public static ColorRgb ParseWebColor(string webcolor)
         {
-            var c = ColorRGB.TryParseWebColor(webcolor);
+            var c = ColorRgb.TryParseWebColor(webcolor);
             if (!c.HasValue)
             {
                 string s = string.Format("Failed to parse color string \"{0}\"", webcolor);
@@ -112,7 +112,7 @@ namespace VisioAutomation.Drawing
             return c.Value;
         }
 
-        public static ColorRGB? TryParseWebColor(string webcolor)
+        public static ColorRgb? TryParseWebColor(string webcolor)
         {
             // fail if string is null
             if (webcolor == null)
@@ -169,7 +169,7 @@ namespace VisioAutomation.Drawing
 
             // the integer value is converted directly to an rgb value
 
-            var the_color = new ColorRGB(current_color);
+            var the_color = new ColorRgb(current_color);
             return the_color;
         }
         

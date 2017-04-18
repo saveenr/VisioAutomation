@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Drawing
 {
-    public struct ColorHSL
+    public struct ColorHsl
     {
         // HSL http://msdn.microsoft.com/en-us/library/ms406705(v=office.12).aspx
         // HUE http://msdn.microsoft.com/en-us/library/ms406706(v=office.12).aspx
@@ -11,7 +11,7 @@
         private readonly byte _s;
         private readonly byte _l;
 
-        public ColorHSL(byte h, byte s, byte l)
+        public ColorHsl(byte h, byte s, byte l)
         {
             this._h = h;
             this._s = s;
@@ -39,7 +39,7 @@
             }
         }
 
-        public ColorHSL(short h, short s, short l) :
+        public ColorHsl(short h, short s, short l) :
             this((byte)h, (byte)s, (byte)l)
         {
         }
@@ -52,26 +52,26 @@
 
         public override string ToString()
         {
-            var s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}({1},{2},{3})", nameof(ColorHSL), this.H, this.S, this.L);
+            var s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}({1},{2},{3})", nameof(ColorHsl), this.H, this.S, this.L);
             return s;
         }
 
         public override bool Equals(object other)
         {
-            return other is ColorHSL && this.Equals((ColorHSL)other);
+            return other is ColorHsl && this.Equals((ColorHsl)other);
         }
 
-        public static bool operator ==(ColorHSL lhs, ColorHSL rhs)
+        public static bool operator ==(ColorHsl lhs, ColorHsl rhs)
         {
             return lhs.Equals(rhs);
         }
 
-        public static bool operator !=(ColorHSL lhs, ColorHSL rhs)
+        public static bool operator !=(ColorHsl lhs, ColorHsl rhs)
         {
             return !lhs.Equals(rhs);
         }
 
-        private bool Equals(ColorHSL other)
+        private bool Equals(ColorHsl other)
         {
             return (this.H == other.H && this.S == other.S && this.L == other.L);
         }
