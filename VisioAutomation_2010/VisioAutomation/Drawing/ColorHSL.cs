@@ -1,5 +1,6 @@
 ﻿namespace VisioAutomation.Drawing
 {
+
     public struct ColorHsl
     {
         // HSL http://msdn.microsoft.com/en-us/library/ms406705(v=office.12).aspx
