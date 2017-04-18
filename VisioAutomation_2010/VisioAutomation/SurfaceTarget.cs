@@ -24,7 +24,7 @@ namespace VisioAutomation
 
         public SurfaceTarget(IVisio.Master master)
         {
-            if (master== null)
+            if (master == null)
             {
                 throw new System.ArgumentNullException(nameof(master));
             }
@@ -36,7 +36,7 @@ namespace VisioAutomation
 
         public SurfaceTarget(IVisio.Shape shape)
         {
-            if (shape== null)
+            if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
