@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace VisioAutomation.Logging
@@ -15,7 +16,7 @@ namespace VisioAutomation.Logging
             string ver = app.Version;
             string ver_normalized = ver.Replace(",", ".");
 
-            string path = $@"Software\Microsoft\Office\{ver_normalized}\Visio\Application";
+            string path = string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", ver_normalized);
 
             string logfilename = null;
             using (var key_visio_application = hkcu.OpenSubKey(path))
