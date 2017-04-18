@@ -22,12 +22,12 @@ namespace VisioAutomation.Drawing
 
         public ColorRgb(int rgb)
         {
-            ColorRgb.GetRGBBytes((uint) rgb, out this._r, out this._g, out this._b);
+            ColorRgb.GetRgbBytes((uint) rgb, out this._r, out this._g, out this._b);
         }
 
         public ColorRgb(uint rgb)
         {
-            ColorRgb.GetRGBBytes(rgb, out this._r, out this._g, out this._b);
+            ColorRgb.GetRgbBytes(rgb, out this._r, out this._g, out this._b);
         }
 
 
@@ -46,7 +46,8 @@ namespace VisioAutomation.Drawing
 
         public override string ToString()
         {
-            var s = string.Format(CultureInfo.InvariantCulture, "{0}({1},{2},{3})", nameof(ColorRgb), this.R, this.G, this.B);
+            var invariant_culture = CultureInfo.InvariantCulture;
+            var s = string.Format(invariant_culture, "{0}({1},{2},{3})", nameof(ColorRgb), this.R, this.G, this.B);
             return s;
         }
 
@@ -57,7 +58,7 @@ namespace VisioAutomation.Drawing
 
         public static explicit operator int(ColorRgb color)
         {
-            return color.ToRGB();
+            return color.ToRgb();
         }
 
         public static explicit operator ColorRgb(int rgbint)
@@ -92,10 +93,10 @@ namespace VisioAutomation.Drawing
 
         public override int GetHashCode()
         {
-            return this.ToRGB();
+            return this.ToRgb();
         }
 
-        public int ToRGB()
+        public int ToRgb()
         {
             return (this._r << 16) | (this._g << 8) | (this._b);
         }
@@ -173,7 +174,7 @@ namespace VisioAutomation.Drawing
             return the_color;
         }
         
-        private static void GetRGBBytes(uint rgb, out byte r, out byte g, out byte b)
+        private static void GetRgbBytes(uint rgb, out byte r, out byte g, out byte b)
         {
             r = (byte)((rgb & 0x00ff0000) >> 16);
             g = (byte)((rgb & 0x0000ff00) >> 8);

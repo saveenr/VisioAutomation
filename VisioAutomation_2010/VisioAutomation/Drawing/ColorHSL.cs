@@ -19,12 +19,12 @@
             this._l = l;
         }
 
-        private void CheckValidVisioHSL()
+        private void CheckValidVisioHsl()
         {
-            CheckValidVisioHSL(this.H,this.S,this.L);
+            CheckValidVisioHsl(this.H,this.S,this.L);
         }
 
-        private static void CheckValidVisioHSL(byte h, byte s, byte l)
+        private static void CheckValidVisioHsl(byte h, byte s, byte l)
         {
             if (h > 255)
             {
@@ -53,7 +53,8 @@
 
         public override string ToString()
         {
-            var s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}({1},{2},{3})", nameof(ColorHsl), this.H, this.S, this.L);
+            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
+            var s = string.Format(invariant_culture, "{0}({1},{2},{3})", nameof(ColorHsl), this.H, this.S, this.L);
             return s;
         }
 
@@ -79,17 +80,17 @@
 
         public override int GetHashCode()
         {
-            return this.ToHSLBytes();
+            return this.ToHslBytes();
         }
 
-        private int ToHSLBytes()
+        private int ToHslBytes()
         {
             return (this.H << 16) | (this.S << 8) | (this.L);
         }
 
         public string ToFormula()
         {
-            this.CheckValidVisioHSL();
+            this.CheckValidVisioHsl();
             string formula = string.Format("{0}({1},{2},{3})", "HSL",this.H, this.S, this.L);
             return formula;
         }
