@@ -7,15 +7,15 @@
         // SAT http://msdn.microsoft.com/en-us/library/ms425560(office.12).aspx
         // LUM http://office.microsoft.com/en-us/visio-help/HV080400509.aspx
 
-        public byte H { get; }
-        public byte S { get; }
-        public byte L { get; }
+        private readonly byte _h;
+        private readonly byte _s;
+        private readonly byte _l;
 
         public ColorHSL(byte h, byte s, byte l)
         {
-            this.H = h;
-            this.S = s;
-            this.L = l;
+            this._h = h;
+            this._s = s;
+            this._l = l;
         }
 
         private void CheckValidVisioHSL()
@@ -43,6 +43,12 @@
             this((byte)h, (byte)s, (byte)l)
         {
         }
+
+        public byte H => _h;
+
+        public byte S => _s;
+
+        public byte L => _l;
 
         public override string ToString()
         {
