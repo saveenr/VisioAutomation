@@ -8,29 +8,6 @@ namespace VisioAutomation_Tests.Core.Extensions
     public class DocumentTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Document_Activation()
-        {
-            var app = this.GetVisioApplication();
-            var documents = app.Documents;
-            var doc1 = documents.Add(string.Empty);
-            var doc2 = documents.Add(string.Empty);
-            var doc3 = documents.Add(string.Empty);
-
-            VA.Documents.DocumentHelper.Activate(doc1);
-            Assert.AreEqual(doc1, app.ActiveDocument);
-            VA.Documents.DocumentHelper.Activate(doc2);
-            Assert.AreEqual(doc2, app.ActiveDocument);
-            VA.Documents.DocumentHelper.Activate(doc3);
-            Assert.AreEqual(doc3, app.ActiveDocument);
-            VA.Documents.DocumentHelper.Activate(doc1);
-            Assert.AreEqual(doc1, app.ActiveDocument);
-
-            doc1.Close(true);
-            doc2.Close(true);
-            doc3.Close(true);
-        }
-
-        [TestMethod]
         public void Document_ForceClose()
         {
             var app = this.GetVisioApplication();

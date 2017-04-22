@@ -96,7 +96,39 @@ namespace VisioAutomation.Scripting.Commands
         public void Activate(IVisio.Document doc)
         {
             this._client.Application.AssertApplicationAvailable();
-            Documents.DocumentHelper.Activate(doc);
+
+            var app = doc.Application;
+            var cur_active_doc = app.ActiveDocument;
+
+            // if the doc is already active do nothing
+            if (doc == cur_active_doc)
+            {
+                // do nothing
+                return;
+            }
+
+            // go through each window and check if it is assigned
+            // to the target document
+            var appwindows = app.Windows;
+            var allwindows = appwindows.ToEnumerable();
+            foreach (var curwin in allwindows)
+            {
+                if (curwin.Document == doc)
+                {
+                    // we did find one, so activate that window
+                    // and then exit the method
+                    curwin.Activate();
+                    if (app.ActiveDocument != doc)
+                    {
+                        throw new InternalAssertionException("failed to activate document");
+                    }
+                    return;
+                }
+            }
+
+            // If we get here, we couldn't find any matching window
+            throw new VisioOperationException("could not find window for document");
+
         }
 
         public void Close(bool force)

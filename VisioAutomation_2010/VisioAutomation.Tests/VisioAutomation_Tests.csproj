@@ -100,6 +100,7 @@
     <Compile Include="Framework\AssertUtil.cs" />
     <Compile Include="Core\Shapes\HyperlinkTests.cs" />
     <Compile Include="Framework\PowerShellTestsSession.cs" />
+    <Compile Include="Scripting\ScriptingDocumentTests.cs" />
     <Compile Include="Scripting\ScriptingHyperlinkTests.cs" />
     <Compile Include="Framework\VisioPSContext.cs" />
     <Compile Include="Scripting\ScriptingShapeText_Tests.cs" />
