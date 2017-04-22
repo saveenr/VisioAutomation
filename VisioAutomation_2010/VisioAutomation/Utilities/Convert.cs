@@ -20,15 +20,8 @@
             return d != 0;
         }
 
-        /// <summary>
-        /// Converts a short value to bool
-        /// </summary>
-        /// <param name="v"></param>
-        /// <returns></returns>
         public static bool ShortToBool(short v)
         {
-            // if v is 0 then false
-            // if v != 0 then true
             return v != 0;
         }
         
