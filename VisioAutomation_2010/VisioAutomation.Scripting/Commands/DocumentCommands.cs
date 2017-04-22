@@ -109,26 +109,21 @@ namespace VisioAutomation.Scripting.Commands
 
             // go through each window and check if it is assigned
             // to the target document
-            var appwindows = app.Windows;
-            var allwindows = appwindows.ToEnumerable();
-            foreach (var curwin in allwindows)
+            var allwindows = app.Windows.ToEnumerable();
+            var target_win = allwindows.FirstOrDefault(w => w.Document == doc);
+
+            if (target_win == null)
             {
-                if (curwin.Document == doc)
-                {
-                    // we did find one, so activate that window
-                    // and then exit the method
-                    curwin.Activate();
-                    if (app.ActiveDocument != doc)
-                    {
-                        throw new InternalAssertionException("failed to activate document");
-                    }
-                    return;
-                }
+                // no window found
+                throw new VisioOperationException("Could not find window for document");
             }
 
-            // If we get here, we couldn't find any matching window
-            throw new VisioOperationException("could not find window for document");
-
+            target_win.Activate();
+            if (app.ActiveDocument != doc)
+            {
+                // tried to activate window, but active document does not reflect it
+                throw new InternalAssertionException("Failed to activate document");
+            }
         }
 
         public void Close(bool force)
