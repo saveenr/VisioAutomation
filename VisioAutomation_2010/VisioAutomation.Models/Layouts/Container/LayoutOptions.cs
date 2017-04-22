@@ -8,11 +8,13 @@
         public string ContainerMaster = "Container 1";
 
         public double ItemWidth { get; set; }
-        public double ContainerHorizontalDistance { get; set; }
         public double ItemHeight { get; set; }
         public double ItemVerticalSpacing { get; set; }
+
         public double Padding { get; set; }
+
         public double ContainerHeaderHeight { get; set; }
+        public double ContainerHorizontalDistance { get; set; }
 
         public Formatting ContainerFormatting { get; set; }
         public Formatting ContainerItemFormatting { get; set; }

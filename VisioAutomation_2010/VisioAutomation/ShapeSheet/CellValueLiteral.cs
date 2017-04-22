@@ -1,6 +1,4 @@
-﻿using VisioAutomation.Utilities;
-
-namespace VisioAutomation.ShapeSheet
+﻿namespace VisioAutomation.ShapeSheet
 {
     /// <summary>
     /// CellValueLiteral is used in those cases where you want a caller to provide an int, double, bool, or string value to be used as a formula

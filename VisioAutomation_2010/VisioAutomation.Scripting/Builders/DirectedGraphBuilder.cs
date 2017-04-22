@@ -175,7 +175,7 @@ namespace VisioAutomation.Scripting.Builders
                     var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);
                     var to_shape = pagedata.DirectedGraph.Shapes.Find(con_info.To);
 
-                    var def_con_color = new VisioAutomation.Drawing.ColorRGB(0x000000);
+                    var def_con_color = new VisioAutomation.Drawing.ColorRgb(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
                     var dg_connector = pagedata.DirectedGraph.AddConnection(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);

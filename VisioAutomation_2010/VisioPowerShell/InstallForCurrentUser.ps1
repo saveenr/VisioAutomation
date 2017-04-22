@@ -1,12 +1,9 @@
-﻿# WHAT THIS SCRIPT DOES
-# *Manually* installs the Visio PowerShell for the user copying files instead of using an MSI install
+﻿# PURPOSE
+# -------
+# Manually installs the Visio PowerShell module into the user's PowerShell folder
 #
-# WHY IS THIS USEFUL
-# Sometimes you may want to check that the installed version works without wanting to
-# go through the process of generating the installer and executing the MSI. This manual
-# install methof is much faster
-#
-# NOTE
+# NOTES
+# -----
 # - If another PowerShell session has the Visio PS module loaded, then the VisioPS binaries cannot 
 #   be replaced by this script because those binaries are locked. In this case, those PS sessions
 #   must be terminated before the script will work

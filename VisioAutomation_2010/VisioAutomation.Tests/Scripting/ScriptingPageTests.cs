@@ -71,7 +71,7 @@ namespace VisioAutomation_Tests.Scripting
             // Second case: the source document has to be activated beforehand
             var docfrom_2 = client.Document.New();
             var docto_2 = client.Document.New();
-            VisioAutomation.Documents.DocumentHelper.Activate(docfrom_2);
+            client.Document.Activate(docfrom_2);
             client.Draw.Rectangle(0, 0, 1, 1);
             client.Page.Duplicate(docto_2);
 

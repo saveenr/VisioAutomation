@@ -1,6 +1,4 @@
 using System.Management.Automation;
-using VisioAutomation.Scripting.Models;
-using VisioPowerShell.Models;
 using PageOrientation = VisioAutomation.Scripting.Models.PageOrientation;
 
 namespace VisioPowerShell.Commands

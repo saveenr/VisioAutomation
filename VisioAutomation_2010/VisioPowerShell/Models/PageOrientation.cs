@@ -1,5 +1,3 @@
-using VisioAutomation.Scripting.Models;
-
 namespace VisioPowerShell.Models
 {
     public enum PageOrientation

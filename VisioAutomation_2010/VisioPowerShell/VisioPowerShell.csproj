@@ -195,8 +195,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Load.ps1" />
-    <None Include="Install.ps1" />
+    <None Include="LoadFromBunDebug.ps1" />
+    <None Include="InstallForCurrentUser.ps1" />
     <None Include="packages.config" />
     <None Include="Visio.Types.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
