@@ -1,4 +1,3 @@
-using VisioScripting.Models;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -31,7 +30,7 @@ namespace VisioScripting.Commands
             return g;
         }
 
-        public void Ungroup(TargetShapes targets)
+        public void Ungroup(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             if (targets.Shapes == null)

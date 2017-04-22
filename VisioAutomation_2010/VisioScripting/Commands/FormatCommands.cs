@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioScripting.Models;
 using VisioAutomation.ShapeSheet.Query;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -15,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void Set(TargetShapes targets, VisioAutomation.Shapes.ShapeFormatCells format)
+        public void Set(VisioScripting.Models.TargetShapes targets, VisioAutomation.Shapes.ShapeFormatCells format)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -40,7 +39,7 @@ namespace VisioScripting.Commands
             writer.Commit(application.ActivePage);            
         }
 
-        public IList<VisioAutomation.Shapes.ShapeFormatCells> Get(TargetShapes targets)
+        public IList<VisioAutomation.Shapes.ShapeFormatCells> Get(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -89,7 +88,7 @@ namespace VisioScripting.Commands
             this.cached_size_height = queryresults.Cells[height_col];
         }
 
-        public void PasteSize(TargetShapes targets, bool paste_width, bool paste_height)
+        public void PasteSize(VisioScripting.Models.TargetShapes targets, bool paste_width, bool paste_height)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -128,7 +127,7 @@ namespace VisioScripting.Commands
             writer.Commit(active_page);
         }
 
-        private readonly FormatPaintCache cache = new FormatPaintCache();
+        private readonly VisioScripting.Models.FormatPaintCache cache = new VisioScripting.Models.FormatPaintCache();
 
         public void Copy()
         {
@@ -139,12 +138,12 @@ namespace VisioScripting.Commands
             this.Copy(null, allflags);
         }
 
-        public void Copy(IVisio.Shape target_shape, FormatPaintCategory paint_category)
+        public void Copy(IVisio.Shape target_shape, VisioScripting.Models.FormatPaintCategory paint_category)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var targets = new TargetShapes( target_shape );
+            var targets = new VisioScripting.Models.TargetShapes( target_shape );
             var shapes = targets.ResolveShapes(this._client);
             if (shapes.Shapes.Count < 1)
             {
@@ -161,7 +160,7 @@ namespace VisioScripting.Commands
             this.cache.Clear();
         }
 
-        public void Paste(TargetShapes targets, FormatPaintCategory paint_category, bool apply_formulas)
+        public void Paste(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.FormatPaintCategory paint_category, bool apply_formulas)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

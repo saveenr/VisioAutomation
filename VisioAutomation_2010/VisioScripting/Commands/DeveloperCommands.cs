@@ -5,7 +5,6 @@ using VisioAutomation.Models.Documents.Forms;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.Tree;
 using VisioScripting.Helpers;
-using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
@@ -334,19 +333,19 @@ namespace VisioScripting.Commands
             return doc;
         }
 
-        public List<EnumType> GetInteropEnums()
+        public List<VisioScripting.Models.EnumType> GetInteropEnums()
         {
             return InteropHelper.GetEnums();
         }
 
-        public EnumType GetInteropEnum(string name)
+        public VisioScripting.Models.EnumType GetInteropEnum(string name)
         {
             return InteropHelper.GetEnum(name);
         }
 
-        public EnumType GetEnum(Type type)
+        public VisioScripting.Models.EnumType GetEnum(Type type)
         {
-            return new EnumType(type);
+            return new VisioScripting.Models.EnumType(type);
         }
         
         private static IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> source, int chunksize)

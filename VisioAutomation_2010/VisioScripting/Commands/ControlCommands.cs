@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -13,7 +12,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<int> Add(TargetShapes targets, ControlCells ctrl)
+        public List<int> Add(VisioScripting.Models.TargetShapes targets, ControlCells ctrl)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -45,7 +44,7 @@ namespace VisioScripting.Commands
             return control_indices;
         }
 
-        public void Delete(TargetShapes targets, int n)
+        public void Delete(VisioScripting.Models.TargetShapes targets, int n)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -66,7 +65,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<ControlCells>> Get(TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<ControlCells>> Get(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

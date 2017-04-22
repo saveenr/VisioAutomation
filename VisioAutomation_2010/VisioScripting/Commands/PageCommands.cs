@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioScripting.Helpers;
-using VisioScripting.Models;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -261,7 +260,7 @@ namespace VisioScripting.Commands
             return dest_page;
         }
 
-        public PageOrientation GetOrientation()
+        public VisioScripting.Models.PageOrientation GetOrientation()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -271,7 +270,7 @@ namespace VisioScripting.Commands
             return PageCommands.GetOrientation(active_page);
         }
 
-        private static PageOrientation GetOrientation(IVisio.Page page)
+        private static VisioScripting.Models.PageOrientation GetOrientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -282,10 +281,10 @@ namespace VisioScripting.Commands
             var src = VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation;
             var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNumber, 0];
-            return (PageOrientation)value;
+            return (VisioScripting.Models.PageOrientation)value;
         }
 
-        public void SetOrientation(PageOrientation orientation)
+        public void SetOrientation(VisioScripting.Models.PageOrientation orientation)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -295,7 +294,7 @@ namespace VisioScripting.Commands
 
             var active_page = application.ActivePage;
 
-            if (orientation != PageOrientation.Landscape && orientation != PageOrientation.Portrait)
+            if (orientation != VisioScripting.Models.PageOrientation.Landscape && orientation != VisioScripting.Models.PageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
@@ -336,7 +335,7 @@ namespace VisioScripting.Commands
                 active_page.ResizeToFitContents(bordersize);
                 if (zoom_to_page)
                 {
-                    this._client.View.Zoom(Zoom.ToPage);
+                    this._client.View.Zoom(VisioScripting.Models.Zoom.ToPage);
                 }
             }
         }
@@ -411,7 +410,7 @@ namespace VisioScripting.Commands
             this.SetSize(width, null);
         }
 
-        public void GoTo(PageDirection flags)
+        public void GoTo(VisioScripting.Models.PageDirection flags)
         {
             this._client.Application.AssertApplicationAvailable();
 
@@ -427,7 +426,7 @@ namespace VisioScripting.Commands
             this._GoTo(pages, flags);
         }
 
-        private void _GoTo(IVisio.Pages pages, PageDirection flags)
+        private void _GoTo(IVisio.Pages pages, VisioScripting.Models.PageDirection flags)
         {
             this._client.Application.AssertApplicationAvailable();
 
@@ -464,7 +463,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        internal static int move_in_range(int cur, int min, int max, PageDirection direction)
+        internal static int move_in_range(int cur, int min, int max, VisioScripting.Models.PageDirection direction)
         {
             if (max < min)
             {
@@ -481,19 +480,19 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(cur));
             }
 
-            if (direction == PageDirection.Next)
+            if (direction == VisioScripting.Models.PageDirection.Next)
             {
                 return System.Math.Min(cur + 1, max);
             }
-            else if (direction == PageDirection.Previous)
+            else if (direction == VisioScripting.Models.PageDirection.Previous)
             {
                 return System.Math.Max(cur - 1, min);
             }
-            else if (direction == PageDirection.First)
+            else if (direction == VisioScripting.Models.PageDirection.First)
             {
                 return min;
             }
-            else if (direction == PageDirection.Last)
+            else if (direction == VisioScripting.Models.PageDirection.Last)
             {
                 return max;
             }

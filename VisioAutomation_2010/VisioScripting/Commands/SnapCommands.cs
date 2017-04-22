@@ -1,5 +1,4 @@
 using VisioScripting.Helpers;
-using VisioScripting.Models;
 
 namespace VisioScripting.Commands
 {
@@ -10,7 +9,7 @@ namespace VisioScripting.Commands
         {
         }
 
-        public void SnapSize(TargetShapes targets, double w, double h)
+        public void SnapSize(VisioScripting.Models.TargetShapes targets, double w, double h)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -32,7 +31,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SnapCorner(TargetShapes targets, double w, double h, SnapCornerPosition corner)
+        public void SnapCorner(VisioScripting.Models.TargetShapes targets, double w, double h, VisioScripting.Models.SnapCornerPosition corner)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -53,7 +52,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SnapSize(TargetShapes targets, VisioAutomation.Drawing.Size snapsize, VisioAutomation.Drawing.Size minsize)
+        public void SnapSize(VisioScripting.Models.TargetShapes targets, VisioAutomation.Drawing.Size snapsize, VisioAutomation.Drawing.Size minsize)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

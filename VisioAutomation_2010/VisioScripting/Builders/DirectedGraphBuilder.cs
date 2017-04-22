@@ -3,7 +3,6 @@ using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioScripting.Extensions;
-using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using SXL = System.Xml.Linq;
 
@@ -57,8 +56,8 @@ namespace VisioScripting.Builders
         {
             public MsaglLayoutOptions LayoutOptions;
             public DirectedGraphLayout DirectedGraph;
-            public List<DGShapeInfo> ShapeInfos;
-            public List<DGConnectorInfo> ConnectorInfos;
+            public List<VisioScripting.Models.DGShapeInfo> ShapeInfos;
+            public List<VisioScripting.Models.DGConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
         }
 
@@ -86,8 +85,8 @@ namespace VisioScripting.Builders
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
-                pagedata.ShapeInfos = shape_els.Select(e => DGShapeInfo.FromXml(client, e)).ToList();
-                pagedata.ConnectorInfos = con_els.Select(e => DGConnectorInfo.FromXml(client, e)).ToList();
+                pagedata.ShapeInfos = shape_els.Select(e => VisioScripting.Models.DGShapeInfo.FromXml(client, e)).ToList();
+                pagedata.ConnectorInfos = con_els.Select(e => VisioScripting.Models.DGConnectorInfo.FromXml(client, e)).ToList();
 
                 client.WriteVerbose( "Analyzing shape data for page {0}", pagenum);
                 foreach (var shape_info in pagedata.ShapeInfos)

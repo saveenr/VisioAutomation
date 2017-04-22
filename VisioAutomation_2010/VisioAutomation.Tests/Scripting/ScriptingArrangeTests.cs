@@ -1,6 +1,5 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioScripting.Models;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Scripting
@@ -34,9 +33,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new TargetShapes();
+            var targets = new VisioScripting.Models.TargetShapes();
 
-            client.Distribute.DistributeHorizontal(targets, AlignmentHorizontal.Center);
+            client.Distribute.DistributeHorizontal(targets, VisioScripting.Models.AlignmentHorizontal.Center);
 
             var shapeids = new[] {s1.ID, s2.ID, s3.ID };
             VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.Get(),shapeids);
@@ -70,9 +69,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new TargetShapes();
-            client.Distribute.DistributeOnAxis(targets, Axis.XAxis , 0.25);
-            client.Distribute.DistributeOnAxis(targets, Axis.YAxis, 1.0);
+            var targets = new VisioScripting.Models.TargetShapes();
+            client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.XAxis , 0.25);
+            client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.YAxis, 1.0);
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID };
             var out_xfrms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.Get(), shapeids);
@@ -112,7 +111,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new TargetShapes();
+            var targets = new VisioScripting.Models.TargetShapes();
 
             client.Arrange.Nudge(targets, 0.50, -0.25);
 
