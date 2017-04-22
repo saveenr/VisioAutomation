@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Scripting.Models
+﻿namespace VisioScripting.Models
 {
     public enum Axis
     {

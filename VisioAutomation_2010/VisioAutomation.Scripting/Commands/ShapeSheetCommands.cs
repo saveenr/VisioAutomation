@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class ShapeSheetCommands : CommandSet
     {

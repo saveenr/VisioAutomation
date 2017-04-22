@@ -72,13 +72,13 @@ namespace VisioAutomation_Tests
 
         }
 
-        public VisioAutomation.Scripting.Client GetScriptingClient()
+        public VisioScripting.Client GetScriptingClient()
         {
             var app = this.GetVisioApplication();
             // this ensures that any debug, verbose, user , etc. messages are 
             // sent to a useful place in the unit tests
             var context = new DiagnosticDebugClientContext(); 
-            var client = new VisioAutomation.Scripting.Client(app,context);
+            var client = new VisioScripting.Client(app,context);
             return client;
         }
 

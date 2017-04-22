@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VisioAutomation.ShapeSheet.Query;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class FormatCommands : CommandSet
     {

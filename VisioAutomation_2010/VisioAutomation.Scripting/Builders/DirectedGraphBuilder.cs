@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
-using VisioAutomation.Scripting.Extensions;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Extensions;
+using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using SXL = System.Xml.Linq;
 
-namespace VisioAutomation.Scripting.Builders
+namespace VisioScripting.Builders
 {
     public class DirectedGraphBuilder
     {

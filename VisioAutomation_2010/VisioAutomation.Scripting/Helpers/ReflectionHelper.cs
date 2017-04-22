@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace VisioAutomation.Scripting.Helpers
+namespace VisioScripting.Helpers
 {
     internal class ReflectionHelper
     {

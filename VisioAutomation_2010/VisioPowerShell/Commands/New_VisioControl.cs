@@ -1,5 +1,5 @@
 using System.Management.Automation;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using VisioAutomation.Utilities;
 using VA = VisioAutomation;

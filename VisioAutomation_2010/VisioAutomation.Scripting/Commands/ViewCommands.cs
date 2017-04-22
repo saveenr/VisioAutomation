@@ -1,8 +1,8 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class ViewCommands : CommandSet
     {
@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             var sel_bb = sel.GetBoundingBox(bbargs);
 
             var delta = sel_bb.Size*padding_scale;
-            var view_rect = new Drawing.Rectangle(sel_bb.Left - delta.Width, sel_bb.Bottom - delta.Height,
+            var view_rect = new VisioAutomation.Drawing.Rectangle(sel_bb.Left - delta.Width, sel_bb.Bottom - delta.Height,
                                                           sel_bb.Right + delta.Height, sel_bb.Top + delta.Height);
             window.SetViewRect(view_rect);
         }

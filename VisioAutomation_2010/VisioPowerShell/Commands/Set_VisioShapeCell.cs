@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 

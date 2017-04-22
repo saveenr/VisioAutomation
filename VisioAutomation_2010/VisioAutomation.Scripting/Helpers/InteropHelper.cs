@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 
-namespace VisioAutomation.Scripting.Helpers
+namespace VisioScripting.Helpers
 {
     public static class InteropHelper
     {

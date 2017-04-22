@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Management.Automation;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Helpers
+namespace VisioScripting.Helpers
 {
     internal static class ArrangeHelper
     {
@@ -65,20 +65,20 @@ namespace VisioAutomation.Scripting.Helpers
                 : ShapeRelativePosition.PinY;
 
             var delta = axis == Axis.XAxis
-                ? new Drawing.Size(spacing, 0)
-                : new Drawing.Size(0, spacing);
+                ? new VisioAutomation.Drawing.Size(spacing, 0)
+                : new VisioAutomation.Drawing.Size(0, spacing);
 
 
             var input_xfrms = ShapeXFormData.Get(page, target);
             var bb = ShapeXFormData.GetBoundingBox(input_xfrms);
-            var cur_pos = new Drawing.Point(bb.Left, bb.Bottom);
+            var cur_pos = new VisioAutomation.Drawing.Point(bb.Left, bb.Bottom);
 
             var newpositions = new List<VisioAutomation.Drawing.Point>(target.ShapeIDs.Count);
             foreach (var input_xfrm in input_xfrms)
             {
                 var new_pinpos = axis == Axis.XAxis
-                    ? new Drawing.Point(cur_pos.X + input_xfrm.LocPinX, input_xfrm.PinY)
-                    : new Drawing.Point(input_xfrm.PinX, cur_pos.Y + input_xfrm.LocPinY);
+                    ? new VisioAutomation.Drawing.Point(cur_pos.X + input_xfrm.LocPinX, input_xfrm.PinY)
+                    : new VisioAutomation.Drawing.Point(input_xfrm.PinX, cur_pos.Y + input_xfrm.LocPinY);
 
                 newpositions.Add(new_pinpos);
                 cur_pos = cur_pos.Add(input_xfrm.Width, input_xfrm.Height).Add(delta);
@@ -114,7 +114,7 @@ namespace VisioAutomation.Scripting.Helpers
             writer.Commit(page);
         }
 
-        public static void SnapCorner(IVisio.Page page, TargetShapeIDs target, Drawing.Size snapsize, SnapCornerPosition corner)
+        public static void SnapCorner(IVisio.Page page, TargetShapeIDs target, VisioAutomation.Drawing.Size snapsize, SnapCornerPosition corner)
         {
             // First caculate the new transforms
             var snap_grid = new SnappingGrid(snapsize);
@@ -135,10 +135,10 @@ namespace VisioAutomation.Scripting.Helpers
         }
 
 
-        private static Drawing.Point GetPinPositionForCorner(ShapeXFormData input_xfrm, Drawing.Point new_lower_left, SnapCornerPosition corner)
+        private static VisioAutomation.Drawing.Point GetPinPositionForCorner(ShapeXFormData input_xfrm, VisioAutomation.Drawing.Point new_lower_left, SnapCornerPosition corner)
         {
-            var size = new Drawing.Size(input_xfrm.Width, input_xfrm.Height);
-            var locpin = new Drawing.Point(input_xfrm.LocPinX, input_xfrm.LocPinY);
+            var size = new VisioAutomation.Drawing.Size(input_xfrm.Width, input_xfrm.Height);
+            var locpin = new VisioAutomation.Drawing.Point(input_xfrm.LocPinX, input_xfrm.LocPinY);
 
             switch (corner)
             {
@@ -165,7 +165,7 @@ namespace VisioAutomation.Scripting.Helpers
             }
         }
 
-        public static void SnapSize(IVisio.Page page, TargetShapeIDs target, Drawing.Size snapsize, Drawing.Size minsize)
+        public static void SnapSize(IVisio.Page page, TargetShapeIDs target, VisioAutomation.Drawing.Size snapsize, VisioAutomation.Drawing.Size minsize)
         {
             var input_xfrms = ShapeXFormData.Get(page, target);
             var sizes = new List<VisioAutomation.Drawing.Size>(input_xfrms.Count);
@@ -176,7 +176,7 @@ namespace VisioAutomation.Scripting.Helpers
                 // First snap the size to the grid
                 double old_w = input_xfrm.Width;
                 double old_h = input_xfrm.Height;
-                var input_size = new Drawing.Size(old_w, old_h);
+                var input_size = new VisioAutomation.Drawing.Size(old_w, old_h);
                 var snapped_size = grid.Snap(input_size);
 
                 // then account for any minum size requirements

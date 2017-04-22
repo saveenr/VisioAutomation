@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Helpers;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Helpers;
+using VisioScripting.Models;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class TextCommands : CommandSet
     {
@@ -87,7 +87,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 var page = application.ActivePage;
                 // Store all the formatting
-                var formats = Text.TextFormat.GetFormat(page, shapeids);
+                var formats = VisioAutomation.Text.TextFormat.GetFormat(page, shapeids);
 
                 // Change the text - this will wipe out all the character and paragraph formatting
                 foreach (var shape in targets.Shapes)
@@ -150,7 +150,7 @@ namespace VisioAutomation.Scripting.Commands
 
 
 
-        public List<Text.TextFormat> GetFormat(TargetShapes targets)
+        public List<VisioAutomation.Text.TextFormat> GetFormat(TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -159,13 +159,13 @@ namespace VisioAutomation.Scripting.Commands
 
             if (targets.Shapes.Count < 1)
             {
-                return new List<Text.TextFormat>(0);
+                return new List<VisioAutomation.Text.TextFormat>(0);
             }
 
             var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this._client.Application.Get();
-            var formats = Text.TextFormat.GetFormat(application.ActivePage, shapeids);
+            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
         }
 
@@ -245,7 +245,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Fit Shape To Text"))
             {
                 // Calculate the new sizes for each shape
-                var new_sizes = new List<Drawing.Size>(shapeids.Count);
+                var new_sizes = new List<VisioAutomation.Drawing.Size>(shapeids.Count);
                 foreach (var shape in shapes.Shapes)
                 {
                     var text_bounding_box = shape.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightText).Size;
@@ -253,7 +253,7 @@ namespace VisioAutomation.Scripting.Commands
 
                     double max_w = System.Math.Max(text_bounding_box.Width, wh_bounding_box.Width);
                     double max_h = System.Math.Max(text_bounding_box.Height, wh_bounding_box.Height);
-                    var max_size = new Drawing.Size(max_w, max_h);
+                    var max_size = new VisioAutomation.Drawing.Size(max_w, max_h);
                     new_sizes.Add(max_size);
                 }
 

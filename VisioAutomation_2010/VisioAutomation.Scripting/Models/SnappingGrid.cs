@@ -1,6 +1,6 @@
 ﻿using VisioAutomation.Drawing;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     public class SnappingGrid
     {

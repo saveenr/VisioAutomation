@@ -3,7 +3,7 @@ using System.Linq;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Helpers
+namespace VisioScripting.Helpers
 {
     internal static class TextHelper
     {

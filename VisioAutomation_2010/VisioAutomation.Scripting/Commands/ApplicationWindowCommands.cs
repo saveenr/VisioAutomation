@@ -1,6 +1,6 @@
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class ApplicationWindowCommands : CommandSet
     {
@@ -20,7 +20,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            Application.ApplicationHelper.BringWindowToTop(app);
+            VisioAutomation.Application.ApplicationHelper.BringWindowToTop(app);
         }
 
         public System.Drawing.Size GetSize()

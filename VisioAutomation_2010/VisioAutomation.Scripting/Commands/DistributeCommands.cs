@@ -1,8 +1,8 @@
-using VisioAutomation.Scripting.Helpers;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Helpers;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class DistributeCommands : CommandSet
     {

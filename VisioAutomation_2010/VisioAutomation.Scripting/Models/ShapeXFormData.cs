@@ -4,7 +4,7 @@ using VisioAutomation.Drawing;
 using VisioAutomation.ShapeSheet.Query;
 using VisioAutomation.ShapeSheet.Writers;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     internal struct ShapeXFormData
     {
@@ -56,12 +56,12 @@ namespace VisioAutomation.Scripting.Models
             return list;
         }
 
-        public Drawing.Rectangle GetRectangle()
+        public VisioAutomation.Drawing.Rectangle GetRectangle()
         {
-            var pin = new Drawing.Point(this.PinX, this.PinY);
-            var locpin = new Drawing.Point(this.LocPinX, this.LocPinY);
-            var size = new Drawing.Size(this.Width, this.Height);
-            return new Drawing.Rectangle(pin - locpin, size);
+            var pin = new VisioAutomation.Drawing.Point(this.PinX, this.PinY);
+            var locpin = new VisioAutomation.Drawing.Point(this.LocPinX, this.LocPinY);
+            var size = new VisioAutomation.Drawing.Size(this.Width, this.Height);
+            return new VisioAutomation.Drawing.Rectangle(pin - locpin, size);
         }
 
         public void SetFormulas(SidSrcWriter writer, short id)
@@ -74,7 +74,7 @@ namespace VisioAutomation.Scripting.Models
             writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, this.Height);
         }
 
-        public static Drawing.Rectangle GetBoundingBox(IEnumerable<ShapeXFormData> xfrms)
+        public static VisioAutomation.Drawing.Rectangle GetBoundingBox(IEnumerable<ShapeXFormData> xfrms)
         {
             var bb = BoundingBoxBuilder.FromRectangles(xfrms.Select(x => x.GetRectangle()));
             if (!bb.HasValue)

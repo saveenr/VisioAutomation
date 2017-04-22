@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     public class TargetShapes
     {
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Models
         }
 
 
-        internal int SetSelectionGetSelectedCount(VisioAutomation.Scripting.Client client)
+        internal int SetSelectionGetSelectedCount(VisioScripting.Client client)
         {
             client.Application.AssertApplicationAvailable();
 
@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting.Models
             return selected_count;
         }
 
-        private IList<IVisio.Shape> __ResolveShapes(VisioAutomation.Scripting.Client client)
+        private IList<IVisio.Shape> __ResolveShapes(VisioScripting.Client client)
         {
             client.Application.AssertApplicationAvailable();
 
@@ -82,14 +82,14 @@ namespace VisioAutomation.Scripting.Models
             return this.Shapes;
         }
 
-        internal TargetShapes ResolveShapes(VisioAutomation.Scripting.Client client)
+        internal TargetShapes ResolveShapes(VisioScripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
             var targets = new TargetShapes(shapes);
             return targets;
         }
 
-        internal TargetShapes ResolveShapes2D(VisioAutomation.Scripting.Client client)
+        internal TargetShapes ResolveShapes2D(VisioScripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();

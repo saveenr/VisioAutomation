@@ -1,5 +1,5 @@
 using System.Management.Automation;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 

@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Grid;
-using VisioAutomation.Scripting.Builders;
+using VisioScripting.Builders;
 using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
@@ -361,7 +361,7 @@ namespace VisioAutomation_Tests.Scripting
             return text;
         }
 
-        private void draw_directed_graph(VisioAutomation.Scripting.Client client, string dg_text)
+        private void draw_directed_graph(VisioScripting.Client client, string dg_text)
         {
             var dg_xml = SXL.XDocument.Parse(dg_text);
             var dg_model = DirectedGraphBuilder.LoadFromXML(client, dg_xml);
@@ -444,7 +444,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.Close(true);
         }
 
-        private void draw_org_chart(VisioAutomation.Scripting.Client client, string text)
+        private void draw_org_chart(VisioScripting.Client client, string text)
         {
             var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = OrgChartBuilder.LoadFromXml(client, xmldoc);

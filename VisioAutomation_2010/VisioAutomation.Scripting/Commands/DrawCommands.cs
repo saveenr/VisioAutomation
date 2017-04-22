@@ -3,11 +3,11 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Models.Layouts.Grid;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class DrawCommands : CommandSet
     {
@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public Drawing.DrawingSurface GetDrawingSurface()
+        public VisioAutomation.Drawing.DrawingSurface GetDrawingSurface()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 this._client.WriteVerbose("Window = Master Editing");
                 var surf_Master = (IVisio.Master)surf_Window.Master;
-                var surface = new Drawing.DrawingSurface(surf_Master);
+                var surface = new VisioAutomation.Drawing.DrawingSurface(surf_Master);
                 return surface;
 
             }
@@ -42,7 +42,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 this._client.WriteVerbose("Window = Page ");
                 var surf_Page = surf_Application.ActivePage;
-                var surface = new Drawing.DrawingSurface(surf_Page);
+                var surface = new VisioAutomation.Drawing.DrawingSurface(surf_Page);
                 return surface;
             }
         }
@@ -50,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
         public List<IVisio.Shape> Table(System.Data.DataTable datatable,
                                           IList<double> widths,
                                           IList<double> heights,
-                                          Drawing.Size cellspacing)
+            VisioAutomation.Drawing.Size cellspacing)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -92,8 +92,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var pagesize = this._client.Page.GetSize();
 
-            var layout = new GridLayout(datatable.Columns.Count, datatable.Rows.Count, new Drawing.Size(1, 1), masterobj);
-            layout.Origin = new Drawing.Point(0, pagesize.Height);
+            var layout = new GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VisioAutomation.Drawing.Size(1, 1), masterobj);
+            layout.Origin = new VisioAutomation.Drawing.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;
             layout.RowDirection = RowDirection.TopToBottom;
             layout.PerformLayout();
@@ -139,7 +139,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape NURBSCurve(IList<Drawing.Point> controlpoints,
+        public IVisio.Shape NURBSCurve(IList<VisioAutomation.Drawing.Point> controlpoints,
                                     IList<double> knots,
                                     IList<double> weights, int degree)
         {
@@ -206,11 +206,11 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
-            var rect = new Drawing.Rectangle(x0, y0, x1, y1);
+            var rect = new VisioAutomation.Drawing.Rectangle(x0, y0, x1, y1);
             return this.Oval(rect);
         }
 
-        public IVisio.Shape Oval(Drawing.Point center, double radius)
+        public IVisio.Shape Oval(VisioAutomation.Drawing.Point center, double radius)
         {
             var surface = this.GetDrawingSurface();
             using (var undoscope = this._client.Application.NewUndoScope("Draw Oval"))
@@ -220,7 +220,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape Bezier(IEnumerable<Drawing.Point> points)
+        public IVisio.Shape Bezier(IEnumerable<VisioAutomation.Drawing.Point> points)
         {
             var surface = this.GetDrawingSurface();
             using (var undoscope = this._client.Application.NewUndoScope("Draw Bezier"))
@@ -230,7 +230,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape PolyLine(IList<Drawing.Point> points)
+        public IVisio.Shape PolyLine(IList<VisioAutomation.Drawing.Point> points)
         {
             var surface = this.GetDrawingSurface();
             using (var undoscope = this._client.Application.NewUndoScope("Draw PolyLine"))
@@ -240,7 +240,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape PieSlice(Drawing.Point center,
+        public IVisio.Shape PieSlice(VisioAutomation.Drawing.Point center,
                                   double radius,
                                   double start_angle,
                                   double end_angle)
@@ -257,7 +257,7 @@ namespace VisioAutomation.Scripting.Commands
                 return shape;
             }
         }
-        public IVisio.Shape DoughnutSlice(Drawing.Point center,
+        public IVisio.Shape DoughnutSlice(VisioAutomation.Drawing.Point center,
                           double inner_radius,
                           double outer_radius,
                           double start_angle,
@@ -349,7 +349,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 this._client.WriteVerbose("Rendering page: {0}", i + 1);
                 dg.Render(page, options);
-                this._client.Page.ResizeToFitContents(new Drawing.Size(1.0, 1.0), true);
+                this._client.Page.ResizeToFitContents(new VisioAutomation.Drawing.Size(1.0, 1.0), true);
                 this._client.View.Zoom(Zoom.ToPage);
                 this._client.WriteVerbose("Finished rendering page");
 

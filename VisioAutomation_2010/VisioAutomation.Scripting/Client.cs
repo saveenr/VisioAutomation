@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Scripting.Commands;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Commands;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting
+namespace VisioScripting
 {
     public class Client
     {

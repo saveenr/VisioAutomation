@@ -1,8 +1,8 @@
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public enum ShapeSendDirection
     {

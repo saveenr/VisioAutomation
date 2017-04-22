@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Scripting
+﻿namespace VisioScripting
 {
     public abstract class ClientContext
     {

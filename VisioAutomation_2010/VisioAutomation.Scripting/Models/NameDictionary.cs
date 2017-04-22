@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     public class NameDictionary<T>
     {

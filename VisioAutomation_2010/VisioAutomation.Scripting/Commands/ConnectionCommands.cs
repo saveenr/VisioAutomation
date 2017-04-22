@@ -3,7 +3,7 @@ using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class ConnectionCommands : CommandSet
     {

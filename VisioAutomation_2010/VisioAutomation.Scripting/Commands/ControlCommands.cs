@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class ControlCommands : CommandSet
     {

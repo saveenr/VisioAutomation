@@ -1,8 +1,8 @@
-using VisioAutomation.Scripting.Extensions;
+using VisioScripting.Extensions;
 using VisioAutomation.Shapes;
 using SXL = System.Xml.Linq;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     internal class DGShapeInfo
     {

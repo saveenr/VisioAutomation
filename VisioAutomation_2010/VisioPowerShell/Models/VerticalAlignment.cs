@@ -3,8 +3,8 @@ namespace VisioPowerShell.Models
     public enum VerticalAlignment
     {
         None = -1,
-        Bottom = VisioAutomation.Scripting.Models.AlignmentVertical.Bottom,
-        Center = VisioAutomation.Scripting.Models.AlignmentVertical.Center,
-        Top = VisioAutomation.Scripting.Models.AlignmentVertical.Top
+        Bottom = VisioScripting.Models.AlignmentVertical.Bottom,
+        Center = VisioScripting.Models.AlignmentVertical.Center,
+        Top = VisioScripting.Models.AlignmentVertical.Top
     }
 }

@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Scripting.Helpers;
+using VisioScripting.Helpers;
 
 namespace VisioAutomation_Tests.Core.Text
 {

@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using VASCRIPT=VisioAutomation.Scripting;
+using VASCRIPT=VisioScripting;
 
 namespace VisioAutomation_Tests
 {

@@ -1,7 +1,7 @@
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class AlignCommands : CommandSet
     {

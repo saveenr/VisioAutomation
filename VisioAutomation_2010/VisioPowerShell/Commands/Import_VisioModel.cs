@@ -1,7 +1,7 @@
 using System;
 using System.Management.Automation;
-using VisioAutomation.Scripting.Builders;
-using VAS = VisioAutomation.Scripting;
+using VisioScripting.Builders;
+using VAS = VisioScripting;
 using SXL = System.Xml.Linq;
 
 namespace VisioPowerShell.Commands

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     public class TargetShapeIDs
     {

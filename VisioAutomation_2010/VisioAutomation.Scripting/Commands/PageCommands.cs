@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Helpers;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Helpers;
+using VisioScripting.Models;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class PageCommands : CommandSet
     {
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public Drawing.Size GetSize()
+        public VisioAutomation.Drawing.Size GetSize()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -116,7 +116,7 @@ namespace VisioAutomation.Scripting.Commands
             var results = query.GetResults<double>(active_page.PageSheet);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];
-            var s = new Drawing.Size(width, height);
+            var s = new VisioAutomation.Drawing.Size(width, height);
             return s;
         }
 
@@ -139,7 +139,7 @@ namespace VisioAutomation.Scripting.Commands
             page.NameU = name;
         }
 
-        public IVisio.Page New(Drawing.Size? size, bool isbackgroundpage)
+        public IVisio.Page New(VisioAutomation.Drawing.Size? size, bool isbackgroundpage)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -226,7 +226,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 var win = application.ActiveWindow;
                 win.Page = src_page;
-                Pages.PageHelper.Duplicate(src_page, new_page);
+                VisioAutomation.Pages.PageHelper.Duplicate(src_page, new_page);
                 win.Page = new_page;
                 return new_page;
             }
@@ -252,7 +252,7 @@ namespace VisioAutomation.Scripting.Commands
             var src_page = application.ActivePage;
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
-            Pages.PageHelper.Duplicate(src_page, dest_page);
+            VisioAutomation.Pages.PageHelper.Duplicate(src_page, dest_page);
 
             // the active window will be to the new document
             var active_window = application.ActiveWindow;
@@ -324,7 +324,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void ResizeToFitContents(Drawing.Size bordersize, bool zoom_to_page)
+        public void ResizeToFitContents(VisioAutomation.Drawing.Size bordersize, bool zoom_to_page)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -365,7 +365,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetSize(Drawing.Size new_size)
+        public void SetSize(VisioAutomation.Drawing.Size new_size)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -397,7 +397,7 @@ namespace VisioAutomation.Scripting.Commands
             var old_size = this.GetSize();
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
-            var new_size = new Drawing.Size(w, h);
+            var new_size = new VisioAutomation.Drawing.Size(w, h);
             this.SetSize(new_size);
         }
 

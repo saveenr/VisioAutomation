@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Scripting.Models
+﻿namespace VisioScripting.Models
 {
     [System.Flags]
     public enum FormatPaintCategory

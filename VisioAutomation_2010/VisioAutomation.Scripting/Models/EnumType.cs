@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     public class EnumType
     {

@@ -1,6 +1,6 @@
 using SXL = System.Xml.Linq;
 
-namespace VisioAutomation.Scripting.Extensions
+namespace VisioScripting.Extensions
 {
     static class XmlLinqExtensions
     {

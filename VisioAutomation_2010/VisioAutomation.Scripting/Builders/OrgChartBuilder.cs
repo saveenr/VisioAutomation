@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using VisioAutomation.Scripting.Extensions;
+using VisioScripting.Extensions;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 using SXL = System.Xml.Linq;
 
-namespace VisioAutomation.Scripting.Builders
+namespace VisioScripting.Builders
 {
     public class OrgChartBuilder
     {

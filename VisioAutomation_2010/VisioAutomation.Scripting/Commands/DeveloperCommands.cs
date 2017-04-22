@@ -4,12 +4,12 @@ using System.Linq;
 using VisioAutomation.Models.Documents.Forms;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.Tree;
-using VisioAutomation.Scripting.Helpers;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Helpers;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class DeveloperCommands : CommandSet
     {
@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
         public static List<Type> GetTypes()
         {
             // TODO: Consider filtering out types that should *not* be exposed despite being public
-            var va_type = typeof(Application.ApplicationHelper);
+            var va_type = typeof(VisioAutomation.Application.ApplicationHelper);
             var vas_type = typeof (CommandSet);
 
             var va_types = va_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
@@ -89,7 +89,7 @@ namespace VisioAutomation.Scripting.Commands
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
-                formpage.Size = new Drawing.Size(8.5, 11);
+                formpage.Size = new VisioAutomation.Drawing.Size(8.5, 11);
                 formpage.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
@@ -128,7 +128,7 @@ namespace VisioAutomation.Scripting.Commands
                     }
 
                     var formpage = new VisioAutomation.Models.Documents.Forms.FormPage();
-                    formpage.Size = new Drawing.Size(8.5, 11);
+                    formpage.Size = new VisioAutomation.Drawing.Size(8.5, 11);
                     formpage.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
@@ -148,7 +148,7 @@ namespace VisioAutomation.Scripting.Commands
             
                     var tabstops = new[]
                                  {
-                                     new Text.TabStop(1.5, Text.TabStopAlignment.Left)
+                                     new VisioAutomation.Text.TabStop(1.5, VisioAutomation.Text.TabStopAlignment.Left)
                                  };
 
                     //VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
@@ -264,7 +264,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 var node = new Node(ns);
                 node.Text = new VisioAutomation.Models.Text.Element(label);
-                node.Size = new Drawing.Size(2.0, 0.25);
+                node.Size = new VisioAutomation.Drawing.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
             }
 
@@ -427,7 +427,7 @@ namespace VisioAutomation.Scripting.Commands
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
                 var node = new Node(ns);
-                node.Size = new Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
+                node.Size = new VisioAutomation.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
                 var markup = new VisioAutomation.Models.Text.Element();

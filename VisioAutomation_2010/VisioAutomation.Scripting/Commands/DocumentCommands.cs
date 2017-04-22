@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Helpers;
+using VisioScripting.Helpers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class DocumentCommands : CommandSet
     {
@@ -145,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (force)
             {
-                using (var alert = new Application.AlertResponseScope(application, Application.AlertResponseCode.No))
+                using (var alert = new VisioAutomation.Application.AlertResponseScope(application, VisioAutomation.Application.AlertResponseCode.No))
                 {
                     doc.Close();
                 }
@@ -163,7 +163,7 @@ namespace VisioAutomation.Scripting.Commands
             var documents = application.Documents;
             var docs = documents.ToEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
-            using (var alert = new Application.AlertResponseScope(application, Application.AlertResponseCode.No))
+            using (var alert = new VisioAutomation.Application.AlertResponseScope(application, VisioAutomation.Application.AlertResponseCode.No))
             {
                 foreach (var doc in docs)
                 {

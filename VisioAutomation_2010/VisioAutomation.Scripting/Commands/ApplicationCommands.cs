@@ -2,7 +2,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class ApplicationCommands : CommandSet
     {
@@ -134,7 +134,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     this._client.Application.AssertApplicationAvailable();
                     var application = this._client.Application.Get();
-                    ApplicationCommands.visio_app_version = Application.ApplicationHelper.GetVersion(application);
+                    ApplicationCommands.visio_app_version = VisioAutomation.Application.ApplicationHelper.GetVersion(application);
                 }
                 return ApplicationCommands.visio_app_version;
             }            

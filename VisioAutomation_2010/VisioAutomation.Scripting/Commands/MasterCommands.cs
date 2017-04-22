@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting.Helpers;
+using VisioScripting.Helpers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class MasterCommands : CommandSet
     {
@@ -167,7 +167,7 @@ namespace VisioAutomation.Scripting.Commands
             return shape;
         }
 
-        public short[] Drop(IList<IVisio.Master> masters, IList<Drawing.Point> points)
+        public short[] Drop(IList<IVisio.Master> masters, IList<VisioAutomation.Drawing.Point> points)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     public class CellValueDictionary : NameDictionary<string>
     {

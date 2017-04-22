@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 
-namespace VisioAutomation.Scripting.Commands
+namespace VisioScripting.Commands
 {
     public class SelectionCommands : CommandSet
     {
@@ -192,7 +192,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
 
             var selection = this._client.Selection.Get();
-            return VisioAutomation.Scripting.Helpers.SelectionHelper.GetSelectedShapes(selection);
+            return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(selection);
         }
 
         public List<IVisio.Shape> GetShapesRecursive()
@@ -200,7 +200,7 @@ namespace VisioAutomation.Scripting.Commands
             this._client.Application.AssertApplicationAvailable();
 
             var selection = this._client.Selection.Get();
-            return VisioAutomation.Scripting.Helpers.SelectionHelper.GetSelectedShapesRecursive(selection);
+            return VisioScripting.Helpers.SelectionHelper.GetSelectedShapesRecursive(selection);
         }
 
         public int Count()

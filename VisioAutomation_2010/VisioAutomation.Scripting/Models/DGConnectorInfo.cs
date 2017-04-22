@@ -1,6 +1,6 @@
 using SXL = System.Xml.Linq;
 
-namespace VisioAutomation.Scripting.Models
+namespace VisioScripting.Models
 {
     internal class DGConnectorInfo
     {

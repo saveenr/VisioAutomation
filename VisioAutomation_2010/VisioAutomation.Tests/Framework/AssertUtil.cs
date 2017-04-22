@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Scripting.Models;
+using VisioScripting.Models;
 using VA=VisioAutomation;
 using VADRAW = VisioAutomation.Drawing;
 
