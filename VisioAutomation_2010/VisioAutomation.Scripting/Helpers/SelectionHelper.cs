@@ -3,7 +3,7 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Selections
+namespace VisioAutomation.Scripting.Helpers
 {
     public static class SelectionHelper
     {
