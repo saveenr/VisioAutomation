@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioScripting.Helpers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -128,7 +127,7 @@ namespace VisioScripting.Commands
             {
                 // return masters matching the name
                 var masters2 = doc.Masters.ToEnumerable();
-                var masters3 = WildcardHelper.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, WildcardHelper.FilterAction.Include).ToList();
+                var masters3 = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 return masters3;
             }
         }

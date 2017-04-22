@@ -1,5 +1,3 @@
-using VisioScripting.Helpers;
-
 namespace VisioScripting.Commands
 {
     public class SnapCommands : CommandSet
@@ -27,7 +25,7 @@ namespace VisioScripting.Commands
             {
                 var snapsize = new VisioAutomation.Drawing.Size(w, h);
                 var minsize = new VisioAutomation.Drawing.Size(w, h);
-                ArrangeHelper.SnapSize(page, target_ids, snapsize, minsize);
+                VisioScripting.Helpers.ArrangeHelper.SnapSize(page, target_ids, snapsize, minsize);
             }
         }
 
@@ -48,7 +46,7 @@ namespace VisioScripting.Commands
             var target_ids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Snap Shape Corner"))
             {
-                ArrangeHelper.SnapCorner(page, target_ids, new VisioAutomation.Drawing.Size(w, h), corner);
+                VisioScripting.Helpers.ArrangeHelper.SnapCorner(page, target_ids, new VisioAutomation.Drawing.Size(w, h), corner);
             }
         }
 
@@ -69,7 +67,7 @@ namespace VisioScripting.Commands
             var target_ids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Snap Shape Size"))
             {
-                ArrangeHelper.SnapSize(page, target_ids, snapsize, minsize);
+                VisioScripting.Helpers.ArrangeHelper.SnapSize(page, target_ids, snapsize, minsize);
             }
         }
     }

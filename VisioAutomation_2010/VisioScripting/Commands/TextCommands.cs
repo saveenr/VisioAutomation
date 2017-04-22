@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioScripting.Helpers;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -96,7 +95,7 @@ namespace VisioScripting.Commands
                     {
                         continue;
                     }
-                    shape.Text = TextHelper.toggle_case(t);
+                    shape.Text = VisioScripting.Helpers.TextHelper.toggle_case(t);
                 }
 
                 // Now restore all the formatting - based on any initial formatting from the text
@@ -221,7 +220,7 @@ namespace VisioScripting.Commands
             var active_page = this._client.Page.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set Text Wrapping"))
             {
-                TextHelper.set_text_wrapping(active_page, shapeids, wrap);
+                VisioScripting.Helpers.TextHelper.set_text_wrapping(active_page, shapeids, wrap);
             }
         }
 

@@ -4,7 +4,6 @@ using System.Linq;
 using VisioAutomation.Models.Documents.Forms;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.Tree;
-using VisioScripting.Helpers;
 using IVisio = Microsoft.Office.Interop.Visio;
 using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
@@ -62,14 +61,14 @@ namespace VisioScripting.Commands
                 {
                     sb.Length = 0;
                     var method_params = command.MethodInfo.GetParameters();
-                    TextHelper.Join(sb, ", ", method_params.Select(param =>
-                        string.Format("{0} {1}", ReflectionHelper.GetNiceTypeName(param.ParameterType), param.Name)));
+                    VisioScripting.Helpers.TextHelper.Join(sb, ", ", method_params.Select(param =>
+                        string.Format("{0} {1}", VisioScripting.Helpers.ReflectionHelper.GetNiceTypeName(param.ParameterType), param.Name)));
 
                     if (command.MethodInfo.ReturnType != typeof(void))
                     {
                         string line =
                             string.Format("{0}({1}) -> {2}", command.MethodInfo.Name, sb,
-                                ReflectionHelper.GetNiceTypeName(command.MethodInfo.ReturnType));
+                                VisioScripting.Helpers.ReflectionHelper.GetNiceTypeName(command.MethodInfo.ReturnType));
                         lines.Add(line);
                     }
                     else
@@ -82,7 +81,7 @@ namespace VisioScripting.Commands
                 lines.Sort();
                 
                 helpstr.Length = 0;
-                TextHelper.Join(helpstr,"\r\n",lines);
+                VisioScripting.Helpers.TextHelper.Join(helpstr,"\r\n",lines);
 
                 var formpage = new VisioAutomation.Models.Documents.Forms.FormPage();
                 formpage.Title = cmdset_prop.Name + " commands";
@@ -111,7 +110,7 @@ namespace VisioScripting.Commands
             var helpstr = new System.Text.StringBuilder();
             int chunksize = 70;
 
-            var interop_enums = InteropHelper.GetEnums();
+            var interop_enums = VisioScripting.Helpers.InteropHelper.GetEnums();
 
             foreach (var enum_ in interop_enums)
             {
@@ -335,12 +334,12 @@ namespace VisioScripting.Commands
 
         public List<VisioScripting.Models.EnumType> GetInteropEnums()
         {
-            return InteropHelper.GetEnums();
+            return VisioScripting.Helpers.InteropHelper.GetEnums();
         }
 
         public VisioScripting.Models.EnumType GetInteropEnum(string name)
         {
-            return InteropHelper.GetEnum(name);
+            return VisioScripting.Helpers.InteropHelper.GetEnum(name);
         }
 
         public VisioScripting.Models.EnumType GetEnum(Type type)
@@ -360,14 +359,14 @@ namespace VisioScripting.Commands
         private class TypeInfo
         {
             public readonly Type Type;
-            public ReflectionHelper.TypeCategory TypeCategory ;
+            public VisioScripting.Helpers.ReflectionHelper.TypeCategory TypeCategory ;
             public readonly string Label;
 
             public TypeInfo(Type type)
             {
                 this.Type = type;
-                this.TypeCategory = ReflectionHelper.GetTypeCategory(type);
-                this.Label = ReflectionHelper.GetTypeCategoryDisplayString(type) + " " + ReflectionHelper.GetNiceTypeName(type);
+                this.TypeCategory = VisioScripting.Helpers.ReflectionHelper.GetTypeCategory(type);
+                this.Label = VisioScripting.Helpers.ReflectionHelper.GetTypeCategoryDisplayString(type) + " " + VisioScripting.Helpers.ReflectionHelper.GetNiceTypeName(type);
 
             }
         }

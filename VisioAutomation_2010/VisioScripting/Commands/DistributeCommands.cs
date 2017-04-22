@@ -1,4 +1,3 @@
-using VisioScripting.Helpers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -22,7 +21,7 @@ namespace VisioScripting.Commands
             var targetids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
-                ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
+                VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
             }
         }
 

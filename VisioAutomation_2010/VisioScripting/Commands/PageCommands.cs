@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioScripting.Helpers;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -541,7 +540,7 @@ namespace VisioScripting.Commands
             }
 
             // otherwise we start checking for each name
-            var shapes_list = WildcardHelper.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, WildcardHelper.FilterAction.Include).ToList();
+            var shapes_list = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
 
             return shapes_list;
         }
@@ -560,7 +559,7 @@ namespace VisioScripting.Commands
             {
                 // return the named page
                 var pages = active_document.Pages.ToEnumerable();
-                var pages2= WildcardHelper.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, WildcardHelper.FilterAction.Include).ToList();
+                var pages2= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 return pages2;
             }
         }
