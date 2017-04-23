@@ -1,5 +1,4 @@
 ﻿using System.Management.Automation;
-using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -12,7 +11,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new TargetShapes(this.Shapes);
+            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
             this.Client.Selection.Duplicate(targets);
         }
     }

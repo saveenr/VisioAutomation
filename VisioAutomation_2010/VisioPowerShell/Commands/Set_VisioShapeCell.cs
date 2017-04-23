@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using VisioScripting.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -23,7 +22,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
-            var targets = new TargetShapes(target_shapes);
+            var targets = new VisioScripting.Models.TargetShapes(target_shapes);
 
             var dic = Set_VisioPageCell.CellHashtableToDictionary(this.Hashtable);
             this.Client.ShapeSheet.SetShapeCells(targets, dic, this.BlastGuards, this.TestCircular);

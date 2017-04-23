@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
-using VisioScripting.Models;
 
 namespace VisioScripting.Commands
 {
@@ -273,7 +272,7 @@ namespace VisioScripting.Commands
             selection.Copy(flags);
         }
 
-        public void Duplicate( TargetShapes target_shapes )
+        public void Duplicate(VisioScripting.Models.TargetShapes target_shapes )
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

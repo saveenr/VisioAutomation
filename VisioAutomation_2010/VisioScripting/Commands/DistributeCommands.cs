@@ -1,5 +1,3 @@
-using VisioScripting.Helpers;
-using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -12,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void DistributeOnAxis(TargetShapes targets, Axis axis, double spacing)
+        public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
         {
             if (!this._client.Document.HasActiveDocument)
             {
@@ -23,11 +21,11 @@ namespace VisioScripting.Commands
             var targetids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
-                ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
+                VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
             }
         }
 
-        public void DistributeOnAxis(TargetShapes targets, Axis axis)
+        public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -43,10 +41,10 @@ namespace VisioScripting.Commands
 
             switch (axis)
             {
-                case Axis.XAxis:
+                case VisioScripting.Models.Axis.XAxis:
                     cmd = IVisio.VisUICmds.visCmdDistributeHSpace;
                     break;
-                case Axis.YAxis:
+                case VisioScripting.Models.Axis.YAxis:
                     cmd = IVisio.VisUICmds.visCmdDistributeVSpace;
                     break;
                 default:
@@ -60,7 +58,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeHorizontal(TargetShapes targets, AlignmentHorizontal halign)
+        public void DistributeHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal halign)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -75,13 +73,13 @@ namespace VisioScripting.Commands
 
             switch (halign)
             {
-                case AlignmentHorizontal.Left:
+                case VisioScripting.Models.AlignmentHorizontal.Left:
                     cmd = IVisio.VisUICmds.visCmdDistributeLeft;
                     break;
-                case AlignmentHorizontal.Center:
+                case VisioScripting.Models.AlignmentHorizontal.Center:
                     cmd = IVisio.VisUICmds.visCmdDistributeCenter;
                     break;
-                case AlignmentHorizontal.Right:
+                case VisioScripting.Models.AlignmentHorizontal.Right:
                     cmd = IVisio.VisUICmds.visCmdDistributeRight;
                     break;
                 default: throw new System.ArgumentOutOfRangeException();
@@ -91,7 +89,7 @@ namespace VisioScripting.Commands
             application.DoCmd((short)cmd);
         }
 
-        public void DistributeVertical(TargetShapes targets, AlignmentVertical valign)
+        public void DistributeVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical valign)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -105,11 +103,11 @@ namespace VisioScripting.Commands
             IVisio.VisUICmds cmd;
             switch (valign)
             {
-                case AlignmentVertical.Top:
+                case VisioScripting.Models.AlignmentVertical.Top:
                     cmd = IVisio.VisUICmds.visCmdDistributeTop;
                     break;
-                case AlignmentVertical.Center: cmd = IVisio.VisUICmds.visCmdDistributeMiddle; break;
-                case AlignmentVertical.Bottom: cmd = IVisio.VisUICmds.visCmdDistributeBottom; break;
+                case VisioScripting.Models.AlignmentVertical.Center: cmd = IVisio.VisUICmds.visCmdDistributeMiddle; break;
+                case VisioScripting.Models.AlignmentVertical.Bottom: cmd = IVisio.VisUICmds.visCmdDistributeBottom; break;
                 default: throw new System.ArgumentOutOfRangeException();
             }
 

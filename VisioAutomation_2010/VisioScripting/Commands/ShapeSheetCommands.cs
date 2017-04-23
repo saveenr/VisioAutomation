@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioScripting.Models;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -14,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        internal void __SetCells(TargetShapes targets, VisioAutomation.ShapeSheet.CellGroups.CellGroupBase cells, IVisio.Page page)
+        internal void __SetCells(VisioScripting.Models.TargetShapes targets, VisioAutomation.ShapeSheet.CellGroups.CellGroupBase cells, IVisio.Page page)
         {
             targets = targets.ResolveShapes(this._client);
             var shape_ids = targets.ToShapeIDs();
@@ -37,7 +36,7 @@ namespace VisioScripting.Commands
             writer.Commit(page);
         }
 
-        public void SetName(TargetShapes targets, IList<string> names)
+        public void SetName(VisioScripting.Models.TargetShapes targets, IList<string> names)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -83,33 +82,33 @@ namespace VisioScripting.Commands
         }
 
 
-        public ShapeSheetWriter GetWriter(IVisio.Page page)
+        public VisioScripting.Models.ShapeSheetWriter GetWriter(IVisio.Page page)
         {
-            var writer = new ShapeSheetWriter(this._client, page);
+            var writer = new VisioScripting.Models.ShapeSheetWriter(this._client, page);
             return writer;
         }
 
-        public ShapeSheetReader GetReader(IVisio.Page page)
+        public VisioScripting.Models.ShapeSheetReader GetReader(IVisio.Page page)
         {
-            var reader = new ShapeSheetReader(this._client, page);
+            var reader = new VisioScripting.Models.ShapeSheetReader(this._client, page);
             return reader;
         }
 
-        public void SetPageCells(TargetShapes targets, Dictionary<string, string> hashtable, bool blast_guards,
+        public void SetPageCells(VisioScripting.Models.TargetShapes targets, Dictionary<string, string> hashtable, bool blast_guards,
             bool test_circular)
         {
             var targets2 = targets.ToShapeIDs();
             this.SetPageCells(targets2,hashtable,blast_guards,test_circular);
         }
 
-        public void SetPageCells(TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
+        public void SetPageCells(VisioScripting.Models.TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
         {
             var writer = new SidSrcWriter();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = CellSrcDictionary.GetCellMapForPages();
-            var valuemap = new CellValueDictionary(cellmap, hashtable);
+            var cellmap = VisioScripting.Models.CellSrcDictionary.GetCellMapForPages();
+            var valuemap = new VisioScripting.Models.CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
             {
@@ -135,21 +134,21 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetShapeCells(TargetShapes targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
+        public void SetShapeCells(VisioScripting.Models.TargetShapes targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
         {
             targets = targets.ResolveShapes(this._client);
             var target_ids= targets.ToShapeIDs();
             this.SetShapeCells(target_ids, hashtable, blast_guards, test_circular);
         }
 
-        public void SetShapeCells(TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
+        public void SetShapeCells(VisioScripting.Models.TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
         {
             var writer = new SidSrcWriter();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = CellSrcDictionary.GetCellMapForShapes();
-            var valuemap = new CellValueDictionary(cellmap, hashtable);
+            var cellmap = VisioScripting.Models.CellSrcDictionary.GetCellMapForShapes();
+            var valuemap = new VisioScripting.Models.CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
             {

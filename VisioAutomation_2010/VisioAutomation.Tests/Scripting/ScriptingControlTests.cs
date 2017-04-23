@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioScripting.Models;
 using VisioAutomation.Shapes;
 
 namespace VisioAutomation_Tests.Scripting
@@ -23,7 +22,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s2);
             client.Selection.Select(s3);
 
-            var targets = new TargetShapes();
+            var targets = new VisioScripting.Models.TargetShapes();
 
             var controls0 = client.Control.Get(targets);
             int found_controls = controls0.Count;

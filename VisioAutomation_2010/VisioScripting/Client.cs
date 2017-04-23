@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioScripting.Commands;
-using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting
@@ -39,7 +38,7 @@ namespace VisioScripting
         public bool VerboseLogging = true;
 
         public Client(IVisio.Application app):
-            this(app,new DefaultClientContext())
+            this(app,new VisioScripting.Models.DefaultClientContext())
         {
         }
         

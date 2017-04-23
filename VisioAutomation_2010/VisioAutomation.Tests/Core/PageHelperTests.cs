@@ -2,7 +2,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioScripting.Models;
 
 namespace VisioAutomation_Tests.Core.Page
 {
@@ -43,15 +42,15 @@ namespace VisioAutomation_Tests.Core.Page
             var client = this.GetScriptingClient();
 
             var orientation_1 = client.Page.GetOrientation();
-            Assert.AreEqual(PageOrientation.Portrait, orientation_1);
+            Assert.AreEqual(VisioScripting.Models.PageOrientation.Portrait, orientation_1);
 
             var size1 = client.Page.GetSize();
             Assert.AreEqual(size, size1);
 
-            client.Page.SetOrientation(PageOrientation.Landscape);
+            client.Page.SetOrientation(VisioScripting.Models.PageOrientation.Landscape);
 
             var orientation_2 = client.Page.GetOrientation();
-            Assert.AreEqual(PageOrientation.Landscape, orientation_2);
+            Assert.AreEqual(VisioScripting.Models.PageOrientation.Landscape, orientation_2);
 
             var actual_final_size = client.Page.GetSize();
             var expected_final_size = new VA.Drawing.Size(3, 4);

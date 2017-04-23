@@ -1,5 +1,4 @@
 using System.IO;
-using VisioScripting.Models;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 
@@ -65,7 +64,7 @@ namespace VisioPowerShell.Commands
             return false;
         }
 
-        protected void DumpValues(CellValueDictionary cellvalues)
+        protected void DumpValues(VisioScripting.Models.CellValueDictionary cellvalues)
         {
             this.WriteVerbose(string.Format("CellValues contains {0} items", cellvalues.Keys.Count));
             foreach (var cellname in cellvalues.Keys)

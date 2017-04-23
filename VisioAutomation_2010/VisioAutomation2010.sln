@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Tests", "Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPowerShell", "VisioPowerShell\VisioPowerShell.csproj", "{6DFB7C5E-7AC1-48EE-A065-2075921A7413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioScripting", "VisioAutomation.Scripting\VisioScripting.csproj", "{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioScripting", "VisioScripting\VisioScripting.csproj", "{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Models", "VisioAutomation.Models\VisioAutomation.Models.csproj", "{29CB2B65-8E8D-4B2C-935C-453B2B371143}"
 EndProject

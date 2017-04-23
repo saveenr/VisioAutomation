@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -14,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> Get(TargetShapes targets)
+        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> Get(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -36,10 +35,10 @@ namespace VisioScripting.Commands
             return dic;
         }
 
-        public List<int> Add( TargetShapes targets, 
+        public List<int> Add(VisioScripting.Models.TargetShapes targets, 
             string fx,
             string fy,
-            ConnectionPointType type)
+            VisioScripting.Models.ConnectionPointType type)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -79,15 +78,15 @@ namespace VisioScripting.Commands
         public List<int> Add(
             string fx,
             string fy,
-            ConnectionPointType type)
+            VisioScripting.Models.ConnectionPointType type)
         {
             this._client.Application.AssertApplicationAvailable();
 
-            var targets = new TargetShapes();
+            var targets = new VisioScripting.Models.TargetShapes();
             return this.Add(targets, fx, fy, type);
         }
 
-        public void Delete(TargetShapes targets, int index)
+        public void Delete(VisioScripting.Models.TargetShapes targets, int index)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

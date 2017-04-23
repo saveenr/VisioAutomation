@@ -1,6 +1,5 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioScripting.Models;
 
 namespace VisioScripting.Commands
 {
@@ -70,7 +69,7 @@ namespace VisioScripting.Commands
             active_window.Zoom = amount;
         }
 
-        public void Zoom(Zoom zoom)
+        public void Zoom(VisioScripting.Models.Zoom zoom)
         {
             this._client.Application.AssertApplicationAvailable();
 

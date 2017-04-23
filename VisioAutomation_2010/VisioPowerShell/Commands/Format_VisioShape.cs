@@ -1,5 +1,4 @@
 using System.Management.Automation;
-using VisioScripting.Models;
 using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -33,7 +32,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new TargetShapes(this.Shapes);
+            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
 
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
@@ -44,11 +43,11 @@ namespace VisioPowerShell.Commands
             {
                 if (this.Distance < 0)
                 {
-                    this.Client.Distribute.DistributeOnAxis(targets, Axis.XAxis);
+                    this.Client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.XAxis);
                 }
                 else
                 {
-                    this.Client.Distribute.DistributeOnAxis(targets, Axis.XAxis, this.Distance);
+                    this.Client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.XAxis, this.Distance);
                 }
             }
 
@@ -56,22 +55,22 @@ namespace VisioPowerShell.Commands
             {
                 if (this.Distance < 0)
                 {
-                    this.Client.Distribute.DistributeOnAxis(targets, Axis.YAxis);
+                    this.Client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.YAxis);
                 }
                 else
                 {
-                    this.Client.Distribute.DistributeOnAxis(targets, Axis.YAxis, this.Distance);
+                    this.Client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.YAxis, this.Distance);
                 }
             }
 
             if (this.AlignVertical != VerticalAlignment.None)
             {
-                this.Client.Align.AlignVertical(targets, (AlignmentVertical)this.AlignVertical);
+                this.Client.Align.AlignVertical(targets, (VisioScripting.Models.AlignmentVertical)this.AlignVertical);
             }
 
             if (this.AlignHorizontal != HorizontalAlignment.None)
             {
-                this.Client.Align.AlignHorizontal(targets, (AlignmentHorizontal)this.AlignHorizontal);
+                this.Client.Align.AlignHorizontal(targets, (VisioScripting.Models.AlignmentHorizontal)this.AlignHorizontal);
             }
 
         }

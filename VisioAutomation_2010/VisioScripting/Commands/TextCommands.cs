@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioScripting.Helpers;
-using VisioScripting.Models;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -16,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void Set(TargetShapes targets, IList<string> texts)
+        public void Set(VisioScripting.Models.TargetShapes targets, IList<string> texts)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -52,7 +50,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<string> Get(TargetShapes targets)
+        public List<string> Get(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -68,7 +66,7 @@ namespace VisioScripting.Commands
             return texts;
         }
 
-        public void ToogleCase(TargetShapes targets)
+        public void ToogleCase(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -97,7 +95,7 @@ namespace VisioScripting.Commands
                     {
                         continue;
                     }
-                    shape.Text = TextHelper.toggle_case(t);
+                    shape.Text = VisioScripting.Helpers.TextHelper.toggle_case(t);
                 }
 
                 // Now restore all the formatting - based on any initial formatting from the text
@@ -124,7 +122,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetFont(TargetShapes targets, string fontname)
+        public void SetFont(VisioScripting.Models.TargetShapes targets, string fontname)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -150,7 +148,7 @@ namespace VisioScripting.Commands
 
 
 
-        public List<VisioAutomation.Text.TextFormat> GetFormat(TargetShapes targets)
+        public List<VisioAutomation.Text.TextFormat> GetFormat(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -169,7 +167,7 @@ namespace VisioScripting.Commands
             return formats;
         }
 
-        public void MoveTextToBottom(TargetShapes targets)
+        public void MoveTextToBottom(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -206,7 +204,7 @@ namespace VisioScripting.Commands
             writer.Commit(application.ActivePage);
         }
 
-        public void SetTextWrapping(TargetShapes targets, bool wrap)
+        public void SetTextWrapping(VisioScripting.Models.TargetShapes targets, bool wrap)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -222,11 +220,11 @@ namespace VisioScripting.Commands
             var active_page = this._client.Page.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Set Text Wrapping"))
             {
-                TextHelper.set_text_wrapping(active_page, shapeids, wrap);
+                VisioScripting.Helpers.TextHelper.set_text_wrapping(active_page, shapeids, wrap);
             }
         }
 
-        public void FitShapeToText(TargetShapes targets)
+        public void FitShapeToText(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -14,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, IList<UserDefinedCellCells>> Get(TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -42,7 +41,7 @@ namespace VisioScripting.Commands
             return prop_dic;
         }
 
-        public List<bool> Contains(TargetShapes targets, string name)
+        public List<bool> Contains(VisioScripting.Models.TargetShapes targets, string name)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -65,7 +64,7 @@ namespace VisioScripting.Commands
             return results;
         }
        
-        public void Delete(TargetShapes targets, string name)
+        public void Delete(VisioScripting.Models.TargetShapes targets, string name)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -96,7 +95,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Set(TargetShapes targets, UserDefinedCellCells userdefinedcell)
+        public void Set(VisioScripting.Models.TargetShapes targets, UserDefinedCellCells userdefinedcell)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

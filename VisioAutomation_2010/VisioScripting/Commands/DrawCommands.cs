@@ -3,7 +3,6 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Models.Layouts.Grid;
-using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 
@@ -350,7 +349,7 @@ namespace VisioScripting.Commands
                 this._client.WriteVerbose("Rendering page: {0}", i + 1);
                 dg.Render(page, options);
                 this._client.Page.ResizeToFitContents(new VisioAutomation.Drawing.Size(1.0, 1.0), true);
-                this._client.View.Zoom(Zoom.ToPage);
+                this._client.View.Zoom(VisioScripting.Models.Zoom.ToPage);
                 this._client.WriteVerbose("Finished rendering page");
 
                 num_pages_created++;

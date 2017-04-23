@@ -1,5 +1,4 @@
 using System.Management.Automation;
-using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using VisioAutomation.Utilities;
 using VA = VisioAutomation;
@@ -56,7 +55,7 @@ namespace VisioPowerShell.Commands
             hlink.NewWindow = Convert.BoolToFormula(this.NewWindow);
             hlink.Invisible = Convert.BoolToFormula(this.Invisible);
 
-            var targets = new TargetShapes(this.Shapes);
+            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
             this.Client.Hyperlink.Add(targets, hlink);
         }
     }

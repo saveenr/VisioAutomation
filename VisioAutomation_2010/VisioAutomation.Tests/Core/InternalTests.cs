@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioScripting.Models;
 
 namespace VisioAutomation_Tests.Core.Internal
 {
@@ -11,7 +10,7 @@ namespace VisioAutomation_Tests.Core.Internal
         {
             double delta = 0.000000001;
 
-            var g1 = new SnappingGrid(1.0, 1.0);
+            var g1 = new VisioScripting.Models.SnappingGrid(1.0, 1.0);
 
             AssertUtil.AssertSnap((0.0, 0.0), g1, (0.0, 0.0), delta);
             AssertUtil.AssertSnap((0.0, 0.0), g1, (0.3, 0.3), delta);
@@ -24,7 +23,7 @@ namespace VisioAutomation_Tests.Core.Internal
             AssertUtil.AssertSnap((2.0, 2.0), g1, (1.5, 1.5), delta);
             AssertUtil.AssertSnap((2.0, 2.0), g1, (1.500001, 1.500001), delta);
 
-            var g2 = new SnappingGrid(1.0, 0.3);
+            var g2 = new VisioScripting.Models.SnappingGrid(1.0, 0.3);
 
             AssertUtil.AssertSnap((0.0, 0.0), g2, (0.0, 0.0), delta);
             AssertUtil.AssertSnap((0.0, 0.0), g2, (0.3, 0.1), delta);

@@ -1,4 +1,3 @@
-using VisioScripting.Models;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
 
@@ -20,7 +19,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void Nudge(TargetShapes targets, double dx, double dy)
+        public void Nudge(VisioScripting.Models.TargetShapes targets, double dx, double dy)
         {
             if (dx == 0.0 && dy == 0.0)
             {
@@ -68,7 +67,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void Send(TargetShapes targets, ShapeSendDirection dir)
+        public void Send(VisioScripting.Models.TargetShapes targets, ShapeSendDirection dir)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -83,7 +82,7 @@ namespace VisioScripting.Commands
             ArrangeCommands.SendShapes(selection, dir);
         }
 
-        public void SetLock(TargetShapes targets, LockCells lockcells)
+        public void SetLock(VisioScripting.Models.TargetShapes targets, LockCells lockcells)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -109,7 +108,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetSize(TargetShapes targets, double? w, double? h)
+        public void SetSize(VisioScripting.Models.TargetShapes targets, double? w, double? h)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
