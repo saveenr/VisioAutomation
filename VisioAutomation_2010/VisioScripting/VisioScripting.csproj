@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VisioScripting</RootNamespace>
+    <AssemblyName>VisioScripting</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\packages\Visio2010.PrimaryInteropAssembly.1.0.0.4\lib\net20\Microsoft.Office.Interop.Visio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\AlignCommands.cs" />
+    <Compile Include="Commands\DistributeCommands.cs" />
+    <Compile Include="Commands\GroupingCommands.cs" />
+    <Compile Include="Commands\SnapCommands.cs" />
+    <Compile Include="Helpers\SelectionHelper.cs" />
+    <Compile Include="Models\AlignmentHorizontal.cs" />
+    <Compile Include="Models\AlignmentVertical.cs" />
+    <Compile Include="Models\Axis.cs" />
+    <Compile Include="Models\PageOrientation.cs" />
+    <Compile Include="Models\NameDictionary.cs" />
+    <Compile Include="Models\CellSrcDictionary.cs" />
+    <Compile Include="Models\CellValueDictionary.cs" />
+    <Compile Include="Models\NamedSrcDictionary.cs" />
+    <Compile Include="Models\ShapeSheetReader.cs" />
+    <Compile Include="Models\ShapeSheetWriter.cs" />
+    <Compile Include="Models\ConnectionPointType.cs" />
+    <Compile Include="Models\TargetShapeIDs.cs" />
+    <Compile Include="Models\TargetShapes.cs" />
+    <Compile Include="Helpers\ArrangeHelper.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandSet.cs" />
+    <Compile Include="Commands\ApplicationCommands.cs" />
+    <Compile Include="Commands\ApplicationWindowCommands.cs" />
+    <Compile Include="Commands\ArrangeCommands.cs" />
+    <Compile Include="Commands\ConnectionCommands.cs" />
+    <Compile Include="Commands\ConnectionPointCommands.cs" />
+    <Compile Include="Commands\ControlCommands.cs" />
+    <Compile Include="Commands\CustomPropCommands.cs" />
+    <Compile Include="Commands\DeveloperCommands.cs" />
+    <Compile Include="Commands\DocumentCommands.cs" />
+    <Compile Include="Commands\DrawCommands.cs" />
+    <Compile Include="Commands\ExportCommands.cs" />
+    <Compile Include="Commands\FormatCommands.cs" />
+    <Compile Include="Commands\HyperlinkCommands.cs" />
+    <Compile Include="Commands\LayerCommands.cs" />
+    <Compile Include="Commands\MasterCommands.cs" />
+    <Compile Include="Commands\OutputCommands.cs" />
+    <Compile Include="Commands\PageCommands.cs" />
+    <Compile Include="Models\EnumType.cs" />
+    <Compile Include="Models\EnumValue.cs" />
+    <Compile Include="Helpers\InteropHelper.cs" />
+    <Compile Include="Helpers\ReflectionHelper.cs" />
+    <Compile Include="Commands\SelectionCommands.cs" />
+    <Compile Include="Commands\ShapeSheetCommands.cs" />
+    <Compile Include="Commands\TextCommands.cs" />
+    <Compile Include="Commands\UserDefinedCellCommands.cs" />
+    <Compile Include="Commands\ViewCommands.cs" />
+    <Compile Include="ClientContext.cs" />
+    <Compile Include="Models\DefaultClientContext.cs" />
+    <Compile Include="Models\DGConnectorInfo.cs" />
+    <Compile Include="Builders\DirectedGraphBuilder.cs" />
+    <Compile Include="Models\DGShapeInfo.cs" />
+    <Compile Include="Helpers\WildcardHelper.cs" />
+    <Compile Include="Models\ShapeXFormData.cs" />
+    <Compile Include="Extensions\XmlLinqExtensions.cs" />
+    <Compile Include="Models\FormatPaintCategory.cs" />
+    <Compile Include="Models\FormatPaintCache.cs" />
+    <Compile Include="Models\FormatPaintCell.cs" />
+    <Compile Include="Builders\OrgChartBuilder.cs" />
+    <Compile Include="Models\PageDirection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\ShapeRelativePosition.cs" />
+    <Compile Include="Models\SnapCornerPosition.cs" />
+    <Compile Include="Models\SnappingGrid.cs" />
+    <Compile Include="Helpers\TextHelper.cs" />
+    <Compile Include="Models\Zoom.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">
+      <Project>{d0eda4f5-bb56-45cd-b95a-d061e90f1160}</Project>
+      <Name>VisioAutomation.DocumentAnalysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj">
+      <Project>{29cb2b65-8e8d-4b2c-935c-453b2b371143}</Project>
+      <Name>VisioAutomation.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
+      <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>
+      <Name>VisioAutomation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

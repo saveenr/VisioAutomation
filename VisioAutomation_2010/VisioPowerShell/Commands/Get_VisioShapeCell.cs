@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Management.Automation;
-using VisioAutomation.Scripting.Models;
 using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -23,7 +22,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var cellmap = CellSrcDictionary.GetCellMapForShapes();
+            var cellmap = VisioScripting.Models.CellSrcDictionary.GetCellMapForShapes();
             if (this.Cells == null || this.Cells.Length < 1 || this.Cells.Contains("*"))
             {
                 this.Cells = cellmap.GetNames().ToArray();

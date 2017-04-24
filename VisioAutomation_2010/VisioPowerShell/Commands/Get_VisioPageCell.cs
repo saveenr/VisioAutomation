@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
-using VisioAutomation.Scripting.Models;
 using VisioAutomation.ShapeSheet;
 using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -26,7 +25,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var cellmap = CellSrcDictionary.GetCellMapForPages();
+            var cellmap = VisioScripting.Models.CellSrcDictionary.GetCellMapForPages();
 
             if (this.Cells == null || this.Cells.Length < 1 || this.Cells.Contains("*"))
             {

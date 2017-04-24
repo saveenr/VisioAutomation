@@ -1,5 +1,4 @@
 using System.Management.Automation;
-using VisioAutomation.Scripting.Models;
 using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -16,7 +15,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var targets = new TargetShapes(this.Shapes);
+            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
             var dic = this.Client.CustomProp.Get(targets);
 
             if (this.GetCells)

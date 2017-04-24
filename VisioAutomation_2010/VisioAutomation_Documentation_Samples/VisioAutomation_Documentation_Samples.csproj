@@ -60,9 +60,9 @@
       <Project>{6e4e26fe-e903-474b-80f9-cf8ed12d34b3}</Project>
       <Name>VisioAutomation.Samples</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
+    <ProjectReference Include="..\VisioScripting\VisioScripting.csproj">
       <Project>{f3e3a5a8-de55-44ed-87f3-7962c3d22a88}</Project>
-      <Name>VisioAutomation.Scripting</Name>
+      <Name>VisioScripting</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
       <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>

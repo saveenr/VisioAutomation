@@ -1,6 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Scripting.Models;
-using VA=VisioAutomation;
 using VADRAW = VisioAutomation.Drawing;
 
 namespace VisioAutomation_Tests
@@ -32,7 +30,7 @@ namespace VisioAutomation_Tests
             Assert.AreEqual(expected.height, actual_size.Height, delta);
         }
 
-        public static void AssertSnap((double x, double y) expected, SnappingGrid snapgrid, (double x, double y) input, double delta)
+        public static void AssertSnap((double x, double y) expected, VisioScripting.Models.SnappingGrid snapgrid, (double x, double y) input, double delta)
         {
             var snapped = snapgrid.Snap(input.x, input.y);
             Assert.AreEqual(expected.x, snapped.X, delta);

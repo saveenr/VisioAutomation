@@ -1,5 +1,4 @@
 using System.IO;
-using VisioAutomation.Scripting.Models;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 
@@ -13,7 +12,7 @@ namespace VisioPowerShell.Commands
         // 
         // To prevent confustion this should be the only static 
         // variable defined in VisioPS
-        private static VisioAutomation.Scripting.Client _client;
+        private static VisioScripting.Client _client;
 
         // Attached Visio Application represents the Visio instance
         //
@@ -24,14 +23,14 @@ namespace VisioPowerShell.Commands
         // AttachedApplication != null && it is an unusable instance. For example
         //                     it might have been manually deleted
 
-        public VisioAutomation.Scripting.Client Client
+        public VisioScripting.Client Client
         {
             get
             {
                 // if a scripting client is not available create one and cache it
                 // for the lifetime of this cmdlet
 
-                VisioCmdlet._client = VisioCmdlet._client ?? new VisioAutomation.Scripting.Client(null);
+                VisioCmdlet._client = VisioCmdlet._client ?? new VisioScripting.Client(null);
                 VisioCmdlet._client.ClientContext = new VisioPsClientContext(this);
                 return VisioCmdlet._client;
 
@@ -65,7 +64,7 @@ namespace VisioPowerShell.Commands
             return false;
         }
 
-        protected void DumpValues(CellValueDictionary cellvalues)
+        protected void DumpValues(VisioScripting.Models.CellValueDictionary cellvalues)
         {
             this.WriteVerbose(string.Format("CellValues contains {0} items", cellvalues.Keys.Count));
             foreach (var cellname in cellvalues.Keys)
