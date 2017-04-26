@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands
         public int[] ShapeIDs { get; set; }
         
         [Parameter(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
-        public SelectionOperation Operation { get; set; }
+        public VisioScripting.Models.SelectionOperation Operation { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -28,15 +28,15 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                if (this.Operation == SelectionOperation.All)
+                if (this.Operation == VisioScripting.Models.SelectionOperation.All)
                 {
                     this.Client.Selection.SelectAll();
                 }
-                else if (this.Operation == SelectionOperation.None)
+                else if (this.Operation == VisioScripting.Models.SelectionOperation.None)
                 {
                     this.Client.Selection.SelectNone();
                 }
-                else if (this.Operation == SelectionOperation.Invert)
+                else if (this.Operation == VisioScripting.Models.SelectionOperation.Invert)
                 {
                     this.Client.Selection.Invert();
                 }
