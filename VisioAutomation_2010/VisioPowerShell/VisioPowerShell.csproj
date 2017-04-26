@@ -138,7 +138,6 @@
     <Compile Include="Commands\Import_VisioModel.cs" />
     <Compile Include="Commands\Get_VisioMaster.cs" />
     <Compile Include="Commands\Get_VisioUserDefinedCell.cs" />
-    <Compile Include="Models\HorizontalAlignment.cs" />
     <Compile Include="Commands\New_VisioControl.cs" />
     <Compile Include="Commands\New_VisioDocument.cs" />
     <Compile Include="Models\SelectionOperation.cs" />
@@ -164,7 +163,6 @@
     <Compile Include="Commands\Format_VisioShape.cs" />
     <Compile Include="Commands\Resize_VisioPage.cs" />
     <Compile Include="Commands\Set_VisioWindowSize.cs" />
-    <Compile Include="Models\VerticalAlignment.cs" />
     <Compile Include="Commands\VisioCmdlet.cs" />
     <Compile Include="Commands\Set_VisioPageLayout.cs" />
     <Compile Include="Commands\Set_VisioCustomProperty.cs" />

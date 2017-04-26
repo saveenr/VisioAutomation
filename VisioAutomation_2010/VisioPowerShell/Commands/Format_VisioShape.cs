@@ -22,10 +22,10 @@ namespace VisioPowerShell.Commands
         [Parameter(Mandatory = false)] public double Distance = -1.0;
 
         [Parameter(Mandatory = false)]
-        public VerticalAlignment AlignVertical = VerticalAlignment.None;
+        public VisioScripting.Models.AlignmentVertical? AlignVertical = null;
 
         [Parameter(Mandatory = false)]
-        public HorizontalAlignment AlignHorizontal = HorizontalAlignment.None;
+        public VisioScripting.Models.AlignmentHorizontal? AlignHorizontal = null;
 
         [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
@@ -36,7 +36,7 @@ namespace VisioPowerShell.Commands
 
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                this.Client.Arrange.Nudge(targets, this.NudgeX, this.NudgeY);                
+                this.Client.Arrange.Nudge(targets, this.NudgeX, this.NudgeY);
             }
 
             if (this.DistributeHorizontal)
@@ -63,14 +63,14 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            if (this.AlignVertical != VerticalAlignment.None)
+            if (this.AlignVertical.HasValue)
             {
-                this.Client.Align.AlignVertical(targets, (VisioScripting.Models.AlignmentVertical)this.AlignVertical);
+                this.Client.Align.AlignVertical(targets, this.AlignVertical.Value);
             }
 
-            if (this.AlignHorizontal != HorizontalAlignment.None)
+            if (this.AlignHorizontal.HasValue)
             {
-                this.Client.Align.AlignHorizontal(targets, (VisioScripting.Models.AlignmentHorizontal)this.AlignHorizontal);
+                this.Client.Align.AlignHorizontal(targets, this.AlignHorizontal.Value);
             }
 
         }
