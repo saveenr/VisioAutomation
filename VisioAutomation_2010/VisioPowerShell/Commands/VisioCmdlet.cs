@@ -1,5 +1,4 @@
 using System.IO;
-using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands

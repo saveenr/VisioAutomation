@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Nouns.VisioHyperlink)]
+    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Commands.Nouns.VisioHyperlink)]
     public class Remove_VisioHyperlink : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

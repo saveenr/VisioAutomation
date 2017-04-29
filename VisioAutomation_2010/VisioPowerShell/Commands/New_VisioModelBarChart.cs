@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioModelBarChart)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelBarChart)]
     public class New_VisioModelBarChart : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

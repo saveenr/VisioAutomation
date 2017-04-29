@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Nouns.VisioPageLayout)]
+    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioPageLayout)]
     public class Set_VisioPageLayout : VisioCmdlet
     {
         [Parameter(Mandatory = false)] 

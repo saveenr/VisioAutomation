@@ -3,7 +3,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Open, VisioPowerShell.Nouns.VisioDocument)]
+    [Cmdlet(VerbsCommon.Open, VisioPowerShell.Commands.Nouns.VisioDocument)]
     public class Open_VisioDocument : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

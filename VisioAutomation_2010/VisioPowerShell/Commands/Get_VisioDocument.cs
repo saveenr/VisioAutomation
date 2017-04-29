@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioDocument)]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioDocument)]
     public class Get_VisioDocument : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]

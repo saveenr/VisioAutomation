@@ -3,7 +3,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioPolyLine)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioPolyLine)]
     public class New_VisioPolyLine : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

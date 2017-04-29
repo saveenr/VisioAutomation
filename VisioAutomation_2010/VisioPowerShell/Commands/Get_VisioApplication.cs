@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioApplication)]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioApplication)]
     public class Get_VisioApplication : VisioCmdlet
     {
         protected override void ProcessRecord()

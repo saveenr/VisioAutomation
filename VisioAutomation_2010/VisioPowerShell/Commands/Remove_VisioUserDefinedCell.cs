@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Nouns.VisioUserDefinedCell)]
+    [Cmdlet(VerbsCommon.Remove, VisioPowerShell.Commands.Nouns.VisioUserDefinedCell)]
     public class Remove_VisioUserDefinedCell : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

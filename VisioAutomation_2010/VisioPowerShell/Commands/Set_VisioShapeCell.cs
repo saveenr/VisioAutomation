@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Nouns.VisioShapeCell)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioShapeCell)]
     public class Set_VisioShapeCell : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, Position = 0)]

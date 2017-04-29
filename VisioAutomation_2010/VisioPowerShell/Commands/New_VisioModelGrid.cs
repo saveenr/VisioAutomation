@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioModelGrid)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelGrid)]
     public class New_VisioModelGrid : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

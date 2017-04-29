@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioLayer)]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioLayer)]
     public class Get_VisioLayer : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]

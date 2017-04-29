@@ -10,7 +10,7 @@ using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsData.Out, VisioPowerShell.Nouns.Visio)]
+    [Cmdlet(VerbsData.Out, VisioPowerShell.Commands.Nouns.Visio)]
     public class Out_Visio : VisioCmdlet
     {
         [Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]

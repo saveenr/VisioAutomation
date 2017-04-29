@@ -1,10 +1,9 @@
 ﻿using System.Management.Automation;
-using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Select, VisioPowerShell.Nouns.VisioShape)]
+    [Cmdlet(VerbsCommon.Select, VisioPowerShell.Commands.Nouns.VisioShape)]
     public class Select_VisioShape : VisioCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]

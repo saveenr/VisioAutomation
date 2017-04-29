@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioPage)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioPage)]
     public class New_VisioPage : VisioCmdlet
     {
         [Parameter(Mandatory = false)] 

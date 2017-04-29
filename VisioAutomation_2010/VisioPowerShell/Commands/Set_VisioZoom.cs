@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Nouns.VisioZoom)]
+    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioZoom)]
     public class Set_VisioZoom : VisioCmdlet
     {
         [Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 

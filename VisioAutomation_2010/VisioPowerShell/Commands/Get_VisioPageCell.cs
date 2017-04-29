@@ -8,7 +8,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioPageCell)]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioPageCell)]
     public class Get_VisioPageCell : VisioCmdlet
     {
         [Parameter(Mandatory = false, Position = 0)]

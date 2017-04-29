@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioModelDirectedGraph)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelDirectedGraph)]
     public class New_VisioModelDirectedGraph : VisioCmdlet
     {
         protected override void ProcessRecord()

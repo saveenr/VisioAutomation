@@ -2,7 +2,7 @@ using System.Management.Automation;
 using VA = VisioAutomation;
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioOval)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioOval)]
     public class New_VisioOval : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

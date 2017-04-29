@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioModelOrgChart)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelOrgChart)]
     public class New_VisioModelOrgChart : VisioCmdlet
     {
         protected override void ProcessRecord()

@@ -2,7 +2,7 @@
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsDiagnostic.Test, VisioPowerShell.Nouns.VisioSelectedShapes)]
+    [Cmdlet(VerbsDiagnostic.Test, VisioPowerShell.Commands.Nouns.VisioSelectedShapes)]
     public class Test_VisioSelectedShapes: VisioCmdlet
     {
         // checks to see if we have any selected shapes

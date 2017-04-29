@@ -1,10 +1,9 @@
 using System.Management.Automation;
-using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Format, VisioPowerShell.Nouns.VisioShape)]
+    [Cmdlet(VerbsCommon.Format, VisioPowerShell.Commands.Nouns.VisioShape)]
     public class Format_VisioShape : VisioCmdlet
     {
         [Parameter(Mandatory = false)]

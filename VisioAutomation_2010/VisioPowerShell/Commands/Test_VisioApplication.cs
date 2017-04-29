@@ -2,7 +2,7 @@
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsDiagnostic.Test, VisioPowerShell.Nouns.VisioApplication)]
+    [Cmdlet(VerbsDiagnostic.Test, VisioPowerShell.Commands.Nouns.VisioApplication)]
     public class Test_VisioApplication: VisioCmdlet
     {
         // checks to see if we hae an active drawing open

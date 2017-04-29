@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Nouns.VisioHyperlink)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioHyperlink)]
     public class New_VisioHyperlink : VisioCmdlet
     {
         [Parameter(Mandatory = true)]

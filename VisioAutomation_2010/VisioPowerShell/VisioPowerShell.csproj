@@ -88,7 +88,7 @@
     <Compile Include="Models\Hyperlink.cs" />
     <Compile Include="Commands\New_VisioHyperlink.cs" />
     <Compile Include="Commands\Remove_VisioHyperlink.cs" />
-    <Compile Include="Nouns.cs" />
+    <Compile Include="Commands\Nouns.cs" />
     <Compile Include="Commands\Close_VisioDocument.cs" />
     <Compile Include="Commands\Close_VisioMaster.cs" />
     <Compile Include="Commands\Format_VisioText.cs" />

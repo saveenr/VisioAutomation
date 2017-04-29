@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Nouns.VisioConnectionPoint)]
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioConnectionPoint)]
     public class Get_VisioConnectionPoint : VisioCmdlet
     {
         [Parameter(Mandatory = false)]

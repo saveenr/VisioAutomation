@@ -2,7 +2,7 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsData.Export, VisioPowerShell.Nouns.VisioPage)]
+    [Cmdlet(VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioPage)]
     public class Export_VisioPage : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)] 
