@@ -4,36 +4,36 @@ namespace VisioPowerShell
 {
     public class VisioPsClientContext : VisioScripting.ClientContext
     {
-        private readonly SMA.Cmdlet cmdlet;
+        private readonly SMA.Cmdlet _cmdlet;
         
         public VisioPsClientContext(SMA.Cmdlet cmdlet)
         {
-            this.cmdlet = cmdlet;
+            this._cmdlet = cmdlet;
         }
 
         public override void WriteDebug(string s)
         {
-            this.cmdlet.WriteDebug(s);
+            this._cmdlet.WriteDebug(s);
         }
 
         public override void WriteError(string s)
         {
-            this.cmdlet.WriteObject(s);
+            this._cmdlet.WriteObject(s);
         }
 
         public override void WriteUser(string s)
         {
-            this.cmdlet.WriteObject(s);
+            this._cmdlet.WriteObject(s);
         }
 
         public override void WriteVerbose(string s)
         {
-            this.cmdlet.WriteVerbose(s);
+            this._cmdlet.WriteVerbose(s);
         }
 
         public override void WriteWarning(string s)
         {
-            this.cmdlet.WriteWarning(s);
+            this._cmdlet.WriteWarning(s);
         }
 
     }

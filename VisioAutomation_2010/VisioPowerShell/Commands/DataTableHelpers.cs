@@ -8,19 +8,19 @@ namespace VisioPowerShell
 {
     static class DataTableHelpers
     {
-        private static DataTable querytable_to_datatable<T>(ShapeSheetQuery cellQuery, QueryOutputCollection<T> query_output)
+        private static DataTable querytable_to_datatable<T>(ShapeSheetQuery cell_query, QueryOutputCollection<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
             dt.Columns.Add("ShapeID", typeof(int));
-            foreach (var col in cellQuery.Cells)
+            foreach (var col in cell_query.Cells)
             {
                 dt.Columns.Add(col.Name, typeof(T));
             }
 
             // Then populate the rows of the datatable
             dt.BeginLoadData();
-            int colcount = cellQuery.Cells.Count;
+            int colcount = cell_query.Cells.Count;
             var rowbuf = new object[colcount+1];
             for (int r = 0; r < query_output.Count; r++)
             {
@@ -40,35 +40,35 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(ShapeSheetQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, ShapeSheetSurface surface)
+        public static DataTable QueryToDataTable(ShapeSheetQuery cell_query, bool getresults, ResultType result_type, IList<int> shapeids, ShapeSheetSurface surface)
         {
             if (!getresults)
             {
-                var output = cellQuery.GetFormulas(surface, shapeids);
-                return DataTableHelpers.querytable_to_datatable(cellQuery, output);
+                var output = cell_query.GetFormulas(surface, shapeids);
+                return DataTableHelpers.querytable_to_datatable(cell_query, output);
             }
 
-            switch (ResultType)
+            switch (result_type)
             {
                 case ResultType.String:
                 {
-                    var output = cellQuery.GetResults<string>(surface, shapeids);
-                    return DataTableHelpers.querytable_to_datatable(cellQuery, output);
+                    var output = cell_query.GetResults<string>(surface, shapeids);
+                    return DataTableHelpers.querytable_to_datatable(cell_query, output);
                 }
                 case ResultType.Boolean:
                 {
-                    var output = cellQuery.GetResults<bool>(surface, shapeids);
-                    return DataTableHelpers.querytable_to_datatable(cellQuery, output);
+                    var output = cell_query.GetResults<bool>(surface, shapeids);
+                    return DataTableHelpers.querytable_to_datatable(cell_query, output);
                 }
                 case ResultType.Double:
                 {
-                    var output = cellQuery.GetResults<double>(surface, shapeids);
-                    return DataTableHelpers.querytable_to_datatable(cellQuery, output);
+                    var output = cell_query.GetResults<double>(surface, shapeids);
+                    return DataTableHelpers.querytable_to_datatable(cell_query, output);
                 }
                 case ResultType.Integer:
                 {
-                    var output = cellQuery.GetResults<int>(surface, shapeids);
-                    return DataTableHelpers.querytable_to_datatable(cellQuery, output);
+                    var output = cell_query.GetResults<int>(surface, shapeids);
+                    return DataTableHelpers.querytable_to_datatable(cell_query, output);
                 }
             }
 

@@ -18,7 +18,7 @@ namespace VisioAutomation_Tests
             var xdoc = this.Open_Visio_Document(cont_doc);
             var xmaster = this.Get_Visio_Master(cont_master_name,cont_doc);
 
-            var cmd = new New_VisioContainer();
+            var cmd = new NewVisioContainer();
             cmd.Master = xmaster;
             var results = cmd.Invoke<IVisio.ShapeClass>();
             var shape = results.First();
@@ -27,7 +27,7 @@ namespace VisioAutomation_Tests
 
         public List<IVisio.Shape> New_VisioShape(IVisio.MasterClass master, double[] points)
         {
-            var cmd = new New_VisioShape();
+            var cmd = new NewVisioShape();
             cmd.Masters = new IVisio.Master[]{ master };
             cmd.Points= points;
             var results = cmd.Invoke<List<IVisio.Shape>>();
@@ -39,7 +39,7 @@ namespace VisioAutomation_Tests
         {
             var doc = this.Open_Visio_Document(basic_u_vss);
 
-            var cmd = new Get_VisioMaster();
+            var cmd = new GetVisioMaster();
             cmd.Name = rectangle;
             cmd.Document = doc;
             var results = cmd.Invoke<IVisio.MasterClass>();
@@ -49,7 +49,7 @@ namespace VisioAutomation_Tests
 
         public IVisio.DocumentClass Open_Visio_Document(string filename)
         {
-            var cmd = new Open_VisioDocument();
+            var cmd = new OpenVisioDocument();
             cmd.Filename = filename;
             var results = cmd.Invoke<IVisio.DocumentClass>();
             var doc = results.First();
@@ -58,7 +58,7 @@ namespace VisioAutomation_Tests
 
         public void Set_Visio_PageCells(Dictionary<string,object> dic)
         {
-            var cmd = new Set_VisioShapeCell();
+            var cmd = new SetVisioShapeCell();
             cmd.Hashtable = new System.Collections.Hashtable();
             foreach (var kv in dic)
             {
@@ -69,7 +69,7 @@ namespace VisioAutomation_Tests
 
         public IVisio.DocumentClass New_Visio_Document()
         {
-            var cmd = new New_VisioDocument();
+            var cmd = new NewVisioDocument();
             var results = cmd.Invoke<IVisio.DocumentClass>();
             var doc = results.First();
             return doc;
@@ -77,7 +77,7 @@ namespace VisioAutomation_Tests
 
         public IVisio.PageClass New_Visio_Page()
         {
-            var cmd = new New_VisioPage();
+            var cmd = new NewVisioPage();
             var results = cmd.Invoke<IVisio.PageClass>();
             var page  = results.First();
             return page;
@@ -86,7 +86,7 @@ namespace VisioAutomation_Tests
 
         public IVisio.ApplicationClass Get_Visio_Application()
         {
-            var cmd = new Get_VisioApplication();
+            var cmd = new GetVisioApplication();
             var results = cmd.Invoke<IVisio.ApplicationClass>();
             var app = results.First();
             return app;
@@ -94,7 +94,7 @@ namespace VisioAutomation_Tests
 
         public System.Data.DataTable Get_Visio_Page_Cell( string [] cells, bool getresults, string resulttype)
         {
-            var cmd = new Get_VisioPageCell();
+            var cmd = new GetVisioPageCell();
             cmd.Cells = cells;
             cmd.GetResults = getresults;
             cmd.ResultType = ResultType.Double;
@@ -105,7 +105,7 @@ namespace VisioAutomation_Tests
 
         public void Close_Visio_Application()
         {
-            var cmd = new Close_VisioApplication();
+            var cmd = new CloseVisioApplication();
             cmd.Force = true;
             var results = cmd.Invoke();
         }
