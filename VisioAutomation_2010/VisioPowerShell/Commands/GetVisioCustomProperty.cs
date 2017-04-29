@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var dic = this.Client.CustomProp.Get(targets);
+            var dic = this.Client.CustomProperty.Get(targets);
 
             if (this.GetCells)
             {

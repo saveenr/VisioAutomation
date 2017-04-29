@@ -74,7 +74,7 @@
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Commands\ConnectionPointCommands.cs" />
     <Compile Include="Commands\ControlCommands.cs" />
-    <Compile Include="Commands\CustomPropCommands.cs" />
+    <Compile Include="Commands\CustomPropertyCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="Commands\DocumentCommands.cs" />
     <Compile Include="Commands\DrawCommands.cs" />

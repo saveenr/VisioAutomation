@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
 {
-    public class CustomPropCommands : CommandSet
+    public class CustomPropertyCommands : CommandSet
     {
-        internal CustomPropCommands(Client client) :
+        internal CustomPropertyCommands(Client client) :
             base(client)
         {
 
@@ -50,10 +51,8 @@ namespace VisioScripting.Commands
             targets = targets.ResolveShapes(this._client);
 
             var results = new List<bool>(targets.Shapes.Count);
-            foreach (var shape in targets.Shapes)
-            {
-                results.Add(CustomPropertyHelper.Contains(shape, name));
-            }
+            var values = targets.Shapes.Select(shape => CustomPropertyHelper.Contains(shape, name));
+            results.AddRange(values);
 
             return results;
         }
