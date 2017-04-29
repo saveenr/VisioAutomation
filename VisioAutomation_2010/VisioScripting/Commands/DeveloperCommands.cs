@@ -64,9 +64,9 @@ namespace VisioScripting.Commands
                     var cmdparam_strings = cmdparams.Select(p => string.Format("{0} {1}", p.TypeDisplayName, p.Name));
                     VisioScripting.Helpers.TextHelper.Join(sb, ", ", cmdparam_strings);
 
-                    if (command.Type != typeof(void))
+                    if (command.ReturnsValue)
                     {
-                        string line = string.Format("{0}({1}) -> {2}", command.Name, sb, command.TypeDisplayName);
+                        string line = string.Format("{0}({1}) -> {2}", command.Name, sb, command.ReturnTypeDisplayName);
                         lines.Add(line);
                     }
                     else
