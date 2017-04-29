@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioScripting.Helpers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -315,7 +314,8 @@ namespace VisioScripting.Commands
             }
 
             // get the named document
-            var docs2 = WildcardHelper.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, WildcardHelper.FilterAction.Include).ToList();
+            var filter_action = VisioScripting.Helpers.WildcardHelper.FilterAction.Include;
+            var docs2 = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, filter_action).ToList();
             return docs2;
         }
     }

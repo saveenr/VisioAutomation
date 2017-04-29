@@ -113,23 +113,5 @@ namespace VisioScripting.Commands
                 }
             }
         }
-
-        public IEnumerable<IVisio.Shape> EnumerateAndSelect(IEnumerable<IVisio.Shape> shapes)
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-            
-            if (shapes == null)
-            {
-                throw new System.ArgumentNullException(nameof(shapes));
-            }
-
-            foreach (var shape in shapes)
-            {
-                this._client.Selection.SelectNone();
-                this._client.Selection.Select(shape);
-                yield return shape;
-            }
-        }
     }
 }
