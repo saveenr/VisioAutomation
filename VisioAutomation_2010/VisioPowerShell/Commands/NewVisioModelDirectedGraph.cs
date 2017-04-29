@@ -1,6 +1,5 @@
 using System.Management.Automation;
 using VisioAutomation.Models.Layouts.DirectedGraph;
-using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {

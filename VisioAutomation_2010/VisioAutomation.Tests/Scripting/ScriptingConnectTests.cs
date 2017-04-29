@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.DocumentAnalysis;
 using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation_Tests.Scripting
 {

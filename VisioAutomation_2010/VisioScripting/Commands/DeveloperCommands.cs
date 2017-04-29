@@ -54,26 +54,24 @@ namespace VisioScripting.Commands
             {
                 var cmdset_type = cmdset_prop.PropertyType;
 
-                // Calculate the text
                 var commands = CommandSet.GetCommands(cmdset_type);
                 lines.Clear();
                 foreach (var command in commands)
                 {
                     sb.Length = 0;
-                    var method_params = command.MethodInfo.GetParameters();
-                    VisioScripting.Helpers.TextHelper.Join(sb, ", ", method_params.Select(param =>
-                        string.Format("{0} {1}", VisioScripting.Helpers.ReflectionHelper.GetNiceTypeName(param.ParameterType), param.Name)));
+                    
+                    var cmdparams = command.GetParameters();
+                    var cmdparam_strings = cmdparams.Select(p => string.Format("{0} {1}", p.TypeDisplayName, p.Name));
+                    VisioScripting.Helpers.TextHelper.Join(sb, ", ", cmdparam_strings);
 
-                    if (command.MethodInfo.ReturnType != typeof(void))
+                    if (command.Type != typeof(void))
                     {
-                        string line =
-                            string.Format("{0}({1}) -> {2}", command.MethodInfo.Name, sb,
-                                VisioScripting.Helpers.ReflectionHelper.GetNiceTypeName(command.MethodInfo.ReturnType));
+                        string line = string.Format("{0}({1}) -> {2}", command.Name, sb, command.TypeDisplayName);
                         lines.Add(line);
                     }
                     else
                     {
-                        string line = string.Format("{0}({1})", command.MethodInfo.Name, sb);
+                        string line = string.Format("{0}({1})", command.Name, sb);
                         lines.Add(line);
                     }
                 }

@@ -1,5 +1,4 @@
 using System.Management.Automation;
-using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {

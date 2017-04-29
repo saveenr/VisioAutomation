@@ -1,5 +1,4 @@
 using System.Linq;
-using IVisio=Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 

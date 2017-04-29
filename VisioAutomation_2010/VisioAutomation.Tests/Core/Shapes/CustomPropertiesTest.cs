@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
 

@@ -1,7 +1,6 @@
 using System.Management.Automation;
 using VisioAutomation.Shapes;
 using VisioAutomation.Utilities;
-using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
