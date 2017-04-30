@@ -99,8 +99,11 @@
 
         public Rectangle Subtract(double dx, double dy) => new Rectangle(this.Left - dx, this.Bottom - dy, this.Right - dx, this.Top - dy);
         public Rectangle Subtract(Size s) => this.Subtract(s.Width, s.Height);
-        public Rectangle Subtract(Point s) => this.Subtract(s.X, s.Y);
+        public Rectangle Subtract(Point p) => this.Subtract(p.X, p.Y);
 
         public Rectangle Multiply(double sx, double sy) => new Rectangle(this.Left*sx, this.Bottom*sy, this.Right*sx, this.Top*sy);
+        public Rectangle Multiply(Size s) => this.Multiply(s.Width, s.Height);
+        public Rectangle Multiply(Point p) => this.Multiply(p.X, p.Y);
+
     }
 }

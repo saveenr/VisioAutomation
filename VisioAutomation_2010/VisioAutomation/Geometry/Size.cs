@@ -27,20 +27,20 @@
         }
 
         public Size Multiply(double sx, double sy) => new Size(this.Width*sx, this.Height*sy);
-        public Size Multiply(double amount) => this.Multiply(amount, amount);
         public Size Multiply(Size s) => this.Multiply(s.Width, s.Height);
+        public Size Multiply(Point p) => this.Multiply(p.X, p.Y);
 
         public Size Divide(double sx, double sy) => new Size(this.Width / sx, this.Height / sy);
-        public Size Divide(double amount) => this.Divide(amount, amount);
         public Size Divide(Size s) => this.Divide(s.Width, s.Height);
+        public Size Divide(Point p) => this.Divide(p.X, p.Y);
 
         public Size Add(double dx, double dy) => new Size(this.Width + dx, this.Height + dy);
-        public Size Add(Point p) => this.Add(p.X, p.Y);
         public Size Add(Size s) => this.Add(s.Width, s.Height);
+        public Size Add(Point p) => this.Add(p.X, p.Y);
 
         public static Size operator +(Size left, Point right) => left.Add(right);
         public static Size operator +(Size left, Size right) => left.Add(right);
-        public static Size operator *(Size left, double right) => left.Multiply(right);
-        public static Size operator /(Size left, double right) => left.Divide(right);
+        public static Size operator *(Size left, Size right) => left.Multiply(right);
+        public static Size operator /(Size left, Size right) => left.Divide(right);
     }
 }
