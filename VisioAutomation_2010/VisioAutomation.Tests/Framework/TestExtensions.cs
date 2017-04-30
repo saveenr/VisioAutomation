@@ -17,7 +17,8 @@ namespace VisioAutomation_Tests
 
             string suffix = " in.";
             string s2 = s.Substring(0, s.Length - suffix.Length);
-            return double.Parse(s2, System.Globalization.CultureInfo.InvariantCulture);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            return double.Parse(s2, culture);
         }
 
         public static void AddParameter(this System.Management.Automation.Runspaces.Command cmd, string name, object value)

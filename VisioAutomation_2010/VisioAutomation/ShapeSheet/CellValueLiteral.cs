@@ -30,13 +30,15 @@
 
         public static implicit operator CellValueLiteral(int value)
         {
-            var formula = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            var formula = value.ToString(culture);
             return new CellValueLiteral(formula);
         }
 
         public static implicit operator CellValueLiteral(double value)
         {
-            var formula = value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            var formula = value.ToString(culture);
             return new CellValueLiteral(formula);
         }
 

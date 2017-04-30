@@ -22,7 +22,8 @@
         
         public override string ToString()
         {
-            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####}, {1:0.#####})", this.Width, this.Height);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            string s = string.Format(culture, "({0:0.#####}, {1:0.#####})", this.Width, this.Height);
             return s;
         }
 

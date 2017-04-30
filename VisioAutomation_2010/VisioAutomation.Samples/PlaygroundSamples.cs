@@ -54,7 +54,8 @@ namespace VisioAutomationSamples
             var angles = Enumerable.Range(0, numpoints).Select(i => i*angle_step).ToList();
             var centers = angles.Select(a => PlaygroundSamples.GetPointAtRadius(origin, a, radius)).ToList();
             var shapes = centers.Select(p => PlaygroundSamples.draw_leaf(page, p)).ToList();
-            var angles_as_formulas = angles.Select(a => a.ToString(CultureInfo.InvariantCulture)).ToList();
+            var culture = CultureInfo.InvariantCulture;
+            var angles_as_formulas = angles.Select(a => a.ToString(culture)).ToList();
 
             var color_formulas = colors.Select(x => new VA.Color.ColorRgb(x).ToFormula()).ToList();
 

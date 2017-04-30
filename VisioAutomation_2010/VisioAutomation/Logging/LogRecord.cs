@@ -9,7 +9,8 @@ namespace VisioAutomation.Logging
 
         public override string ToString()
         {
-            return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}:{1}", this.Type, this.SubType);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            return string.Format(culture,"{0}:{1}", this.Type, this.SubType);
         }
     }
 }

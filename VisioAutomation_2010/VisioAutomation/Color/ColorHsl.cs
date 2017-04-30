@@ -53,8 +53,8 @@
 
         public override string ToString()
         {
-            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
-            var s = string.Format(invariant_culture, "{0}({1},{2},{3})", nameof(ColorHsl), this.H, this.S, this.L);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            var s = string.Format(culture, "{0}({1},{2},{3})", nameof(ColorHsl), this.H, this.S, this.L);
             return s;
         }
 

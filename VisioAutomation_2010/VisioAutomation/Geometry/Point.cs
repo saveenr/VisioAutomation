@@ -16,8 +16,8 @@ namespace VisioAutomation.Geometry
 
         public override string ToString()
         {
-            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
-            string s = string.Format(invariant_culture, "Point({0:0.#####}, {1:0.#####})", this.X, this.Y);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            string s = string.Format(culture, "Point({0:0.#####}, {1:0.#####})", this.X, this.Y);
             return s;
         }
 

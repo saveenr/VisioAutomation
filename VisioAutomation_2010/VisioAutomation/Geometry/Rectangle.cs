@@ -75,7 +75,8 @@
 
         public override string ToString()
         {
-            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####},{1:0.#####},{2:0.#####},{3:0.#####})", this.Left, this.Bottom, this.Right, this.Top);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            string s = string.Format(culture, "({0:0.#####},{1:0.#####},{2:0.#####},{3:0.#####})", this.Left, this.Bottom, this.Right, this.Top);
             return s;
         }
 

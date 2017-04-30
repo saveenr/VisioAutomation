@@ -194,11 +194,11 @@ namespace VisioScripting.Builders
 
         private static void GetRenderOptionsFromXml(SXL.XElement el, MsaglLayoutOptions options)
         {
-            System.Func<string, double> double_parse =
-                str => double.Parse(str, System.Globalization.CultureInfo.InvariantCulture);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            double DoubleParse(string str) => double.Parse(str, culture);
 
             options.UseDynamicConnectors = el.GetAttributeValue("usedynamicconnectors", bool.Parse);
-            options.ScalingFactor = el.GetAttributeValue("scalingfactor", double_parse);
+            options.ScalingFactor = el.GetAttributeValue("scalingfactor", DoubleParse);
         }
     }
 }

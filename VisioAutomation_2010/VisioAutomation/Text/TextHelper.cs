@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
@@ -75,10 +74,10 @@ namespace VisioAutomation.Text
             }
 
             const short row = 0;
-            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
             var vis_tab_stop_count = (short)IVisio.VisCellIndices.visTabStopCount;
             var tabstopcountcell = shape.CellsSRC[tab_section, row, vis_tab_stop_count];
-            tabstopcountcell.FormulaU = stops.Count.ToString(invariant_culture);
+            tabstopcountcell.FormulaU = stops.Count.ToString(culture);
 
             // set the number of tab stobs allowed for the shape
             var tagtab = GetTabTagForStops(stops.Count);
@@ -90,8 +89,8 @@ namespace VisioAutomation.Text
             {
                 int i = stop_index * 3;
 
-                var alignment = ((int)stops[stop_index].Alignment).ToString(invariant_culture);
-                var position = ((int)stops[stop_index].Position).ToString(invariant_culture);
+                var alignment = ((int)stops[stop_index].Alignment).ToString(culture);
+                var position = ((int)stops[stop_index].Position).ToString(culture);
 
                 var src_tabpos = new ShapeSheet.Src(tab_section, row, (short)(i + 1));
                 var src_tabalign = new ShapeSheet.Src(tab_section, row, (short)(i + 2));

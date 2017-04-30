@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
 using VisioPowerShell.Models;
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
-using VisioAutomation.ShapeSheet;
 using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 

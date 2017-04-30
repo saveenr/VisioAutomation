@@ -68,8 +68,9 @@ namespace VisioAutomation.Logging
 
                         // Dates are in this format "Sat Jan 10 20:09:12 2015"
 
+                        var culture = System.Globalization.CultureInfo.InvariantCulture;
                         cur_session.StartTime = DateTime.ParseExact(cur_session.StartTimeRaw, "ddd MMM dd HH:mm:ss yyyy",
-                            System.Globalization.CultureInfo.InvariantCulture);
+                            culture);
 
                     }
                     else if (line.EndsWith("End Session"))

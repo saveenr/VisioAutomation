@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
@@ -82,7 +81,8 @@ namespace VisioAutomation_Tests.Models
                 var slice = slices[i];
                 var shape = slice.Render(page);
                 shapes[i] = shape;
-                shape.Text = values[i].ToString(CultureInfo.InvariantCulture);
+                var culture = System.Globalization.CultureInfo.InvariantCulture;
+                shape.Text = values[i].ToString(culture);
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();

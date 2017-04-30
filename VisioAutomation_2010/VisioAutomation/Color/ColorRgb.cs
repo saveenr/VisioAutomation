@@ -46,8 +46,8 @@ namespace VisioAutomation.Color
 
         public override string ToString()
         {
-            var invariant_culture = CultureInfo.InvariantCulture;
-            var s = string.Format(invariant_culture, "{0}({1},{2},{3})", nameof(ColorRgb), this.R, this.G, this.B);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            var s = string.Format(culture, "{0}({1},{2},{3})", nameof(ColorRgb), this.R, this.G, this.B);
             return s;
         }
 
@@ -183,8 +183,8 @@ namespace VisioAutomation.Color
 
         private static string ToWebColorString(byte r, byte g, byte b)
         {
-            var invariant_culture = CultureInfo.InvariantCulture;
-            string color_string = string.Format(invariant_culture, "#{0:x2}{1:x2}{2:x2}", r, g, b);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            string color_string = string.Format(culture, "#{0:x2}{1:x2}{2:x2}", r, g, b);
             return color_string;
         }
 

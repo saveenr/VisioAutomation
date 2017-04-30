@@ -15,9 +15,9 @@ namespace VisioAutomation.ShapeSheet
         public override string ToString()
         {
             var formula_string = this.Formula ?? "null";
-            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
             var format = "(\"{0}\",{1})";
-            return string.Format(invariant_culture,format, formula_string, this.Result);
+            return string.Format(culture,format, formula_string, this.Result);
         }
 
         public static implicit operator CellData(CellValueLiteral formula)
