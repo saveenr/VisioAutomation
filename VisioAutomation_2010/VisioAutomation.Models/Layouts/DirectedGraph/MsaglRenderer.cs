@@ -453,15 +453,15 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
 
             // ADD URL
-            if (!string.IsNullOrEmpty(layout_shape.URL))
+            if (!string.IsNullOrEmpty(layout_shape.Url))
             {
-                var hyperlink = new Dom.Hyperlink("Row_1", layout_shape.URL);
+                var hyperlink = new Dom.Hyperlink("Row_1", layout_shape.Url);
                 shape_node.Hyperlinks = new List<Dom.Hyperlink> {hyperlink};
             }
 
             if ((layout_shape.Hyperlinks != null))
             {
-                //var hyperlink = new VA.DOM.Hyperlink("Row_1", layout_shape.URL);
+                //var hyperlink = new VA.DOM.Hyperlink("Row_1", layout_shape.Url);
                 shape_node.Hyperlinks = layout_shape.Hyperlinks;
             }
 

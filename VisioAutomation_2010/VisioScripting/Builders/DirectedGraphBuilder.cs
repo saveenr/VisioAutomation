@@ -157,7 +157,7 @@ namespace VisioScripting.Builders
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
                     var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
-                    dg_shape.URL = shape_info.URL;
+                    dg_shape.Url = shape_info.Url;
                     dg_shape.CustomProperties = new CustomPropertyDictionary();
                     foreach (var kv in shape_info.custprops)
                     {

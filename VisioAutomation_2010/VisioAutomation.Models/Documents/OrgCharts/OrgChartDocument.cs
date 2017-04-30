@@ -164,14 +164,14 @@ namespace VisioAutomation.Models.Documents.OrgCharts
             foreach (var treenodes in trees)
             {
                 var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
-                var orgnodes_with_urls = orgnodes.Where(n => n.URL != null);
-                var all_urls = orgnodes_with_urls.Select(n => new { orgnode = n, shape = (Dom.BaseShape)n.DOMNode, url = n.URL.Trim() });
+                var orgnodes_with_urls = orgnodes.Where(n => n.Url != null);
+                var all_urls = orgnodes_with_urls.Select(n => new { orgnode = n, shape = (Dom.BaseShape)n.DOMNode, url = n.Url.Trim() });
 
                 foreach (var url in all_urls)
                 {
                     var hlink = url.orgnode.VisioShape.Hyperlinks.Add();
                     hlink.Name = "Row_1";
-                    hlink.Address = url.orgnode.URL;
+                    hlink.Address = url.orgnode.Url;
                 }
 
                 // Attach all the orgchart nodes to the Visio shapes that were created
