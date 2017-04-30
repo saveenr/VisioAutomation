@@ -95,7 +95,7 @@
 
         public Rectangle Add(double dx, double dy) => new Rectangle(this.Left + dx, this.Bottom + dy, this.Right + dx, this.Top + dy);
         public Rectangle Add(Size s) => this.Add(s.Width,s.Height);
-        public Rectangle Add(Point s) => this.Add(s.X, s.Y);
+        public Rectangle Add(Point p) => this.Add(p.X, p.Y);
 
         public Rectangle Subtract(double dx, double dy) => new Rectangle(this.Left - dx, this.Bottom - dy, this.Right - dx, this.Top - dy);
         public Rectangle Subtract(Size s) => this.Subtract(s.Width, s.Height);
