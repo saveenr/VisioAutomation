@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class ParagraphFormatCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public ShapeSheet.CellData IndentFirst { get; set; }
         public ShapeSheet.CellData IndentRight { get; set; }
@@ -42,18 +42,18 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static List<List<ParagraphCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = ParagraphCells.lazy_query.Value;
+            var query = ParagraphFormatCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static List<ParagraphCells> GetCells(IVisio.Shape shape)
+        public static List<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
-            var query = ParagraphCells.lazy_query.Value;
+            var query = ParagraphFormatCells.lazy_query.Value;
             return query.GetCellGroups(shape);
         }
 
-        private static readonly System.Lazy<ParagraphCellsReader> lazy_query = new System.Lazy<ParagraphCellsReader>();
+        private static readonly System.Lazy<ParagraphFormatCellsReader> lazy_query = new System.Lazy<ParagraphFormatCellsReader>();
     }
 } 

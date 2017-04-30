@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class CharacterFormatCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public ShapeSheet.CellData Color { get; set; }
         public ShapeSheet.CellData Font { get; set; }
@@ -58,18 +58,18 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static List<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = CharacterCells.lazy_query.Value;
+            var query = CharacterFormatCells.lazy_query.Value;
             return query.GetCellGroups(page, shapeids);
         }
 
-        public static List<CharacterCells> GetCells(IVisio.Shape shape)
+        public static List<CharacterFormatCells> GetCells(IVisio.Shape shape)
         {
-            var query = CharacterCells.lazy_query.Value;
+            var query = CharacterFormatCells.lazy_query.Value;
             return query.GetCellGroups(shape);
         }
 
-        private static readonly System.Lazy<CharacterCellsReader> lazy_query = new System.Lazy<CharacterCellsReader>();
+        private static readonly System.Lazy<CharacterFormatCellsReader> lazy_query = new System.Lazy<CharacterFormatCellsReader>();
     }
 }

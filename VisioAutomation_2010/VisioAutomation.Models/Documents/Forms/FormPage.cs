@@ -37,11 +37,11 @@ namespace VisioAutomation.Models.Documents.Forms
 
             int fontid = context.GetFontID(this.DefaultFont);
             titleblock.TextBlockCells.VerticalAlign = 0;
-            titleblock.ParagraphCells.HorizontalAlign = 0;
+            titleblock.ParagraphFormatCells.HorizontalAlign = 0;
             titleblock.FormatCells.LineWeight = 0;
             titleblock.FormatCells.LinePattern = 0;
-            titleblock.CharacterCells.Font = fontid;
-            titleblock.CharacterCells.Size = get_pt_string(this.TitleTextSize);
+            titleblock.CharacterFormatCells.Font = fontid;
+            titleblock.CharacterFormatCells.Size = get_pt_string(this.TitleTextSize);
 
 
 
@@ -51,10 +51,10 @@ namespace VisioAutomation.Models.Documents.Forms
 
             double body_height = r.GetDistanceToBottomMargin();
             var bodyblock = new TextBlock(new Geometry.Size(7.5, body_height), this.Body);
-            bodyblock.ParagraphCells.HorizontalAlign = 0;
-            bodyblock.ParagraphCells.SpacingAfter = get_pt_string(this.BodyParaSpacingAfter);
-            bodyblock.CharacterCells.Font = fontid;
-            bodyblock.CharacterCells.Size = get_pt_string(this.BodyTextSize);
+            bodyblock.ParagraphFormatCells.HorizontalAlign = 0;
+            bodyblock.ParagraphFormatCells.SpacingAfter = get_pt_string(this.BodyParaSpacingAfter);
+            bodyblock.CharacterFormatCells.Font = fontid;
+            bodyblock.CharacterFormatCells.Size = get_pt_string(this.BodyTextSize);
             bodyblock.FormatCells.LineWeight = 0;
             bodyblock.FormatCells.LinePattern = 0;
             bodyblock.TextBlockCells.VerticalAlign = 0;

@@ -139,7 +139,7 @@ namespace VisioScripting.Commands
             var font = active_doc_fonts[fontname];
             var page = this._client.Page.Get();
 
-            var cells = new VisioAutomation.Text. CharacterCells();
+            var cells = new VisioAutomation.Text. CharacterFormatCells();
             cells.Font = font.ID;
 
             this._client.ShapeSheet.__SetCells(targets, cells, page);
