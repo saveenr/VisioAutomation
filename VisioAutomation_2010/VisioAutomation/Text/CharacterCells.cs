@@ -22,7 +22,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData Overline { get; set; }
         public ShapeSheet.CellData Perpendicular { get; set; }
         public ShapeSheet.CellData Pos { get; set; }
-        public ShapeSheet.CellData RtlText { get; set; }
+        public ShapeSheet.CellData RTLText { get; set; }
         public ShapeSheet.CellData FontScale { get; set; }
         public ShapeSheet.CellData Letterspace { get; set; }
         public ShapeSheet.CellData Strikethru { get; set; }
@@ -52,7 +52,7 @@ namespace VisioAutomation.Text
                 yield return this.newpair(ShapeSheet.SrcConstants.CharOverline, this.Overline.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharPerpendicular, this.Perpendicular.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharPos, this.Pos.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharRTLText, this.RtlText.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharRTLText, this.RTLText.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharStrikethru, this.Strikethru.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharUseVertical, this.UseVertical.Formula);
             }

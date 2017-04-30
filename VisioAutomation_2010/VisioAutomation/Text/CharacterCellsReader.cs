@@ -82,7 +82,7 @@ namespace VisioAutomation.Text
             cells.Overline = row[this.Overline];
             cells.Perpendicular = row[this.Perpendicular];
             cells.Pos = row[this.Pos];
-            cells.RtlText = row[this.RtlText];
+            cells.RTLText = row[this.RtlText];
             cells.Strikethru = row[this.Strikethru];
             cells.UseVertical = row[this.UseVertical];
 
