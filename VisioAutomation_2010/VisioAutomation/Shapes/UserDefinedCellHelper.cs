@@ -37,7 +37,7 @@ namespace VisioAutomation.Shapes
 
         public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellData value, ShapeSheet.CellData prompt)
         {
-            UserDefinedCellHelper.Set(shape, name, value.Formula.Value, prompt.Formula.Value);
+            UserDefinedCellHelper.Set(shape, name, value.Formula, prompt.Formula);
         }
 
         public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellValueLiteral udfcell_value, ShapeSheet.CellValueLiteral udfcell_prompt)

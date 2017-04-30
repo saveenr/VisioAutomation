@@ -116,7 +116,7 @@ namespace VisioScripting.Models
 
                 var cellrec = desired_cells[col];
                 cellrec.Result = result;
-                cellrec.Formula = formula.Value;
+                cellrec.Formula = formula;
             }
         }
 

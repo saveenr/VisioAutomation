@@ -262,12 +262,12 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(0, allprops[2].Count);
             Assert.AreEqual(3, allprops[3].Count);
 
-            Assert.AreEqual("\"1\"", allprops[0][0].Value.Formula.Value);
-            Assert.AreEqual("\"2\"", allprops[1][0].Value.Formula.Value);
-            Assert.AreEqual("\"3\"", allprops[1][1].Value.Formula.Value);
-            Assert.AreEqual("\"4\"", allprops[3][0].Value.Formula.Value);
-            Assert.AreEqual("\"5\"", allprops[3][1].Value.Formula.Value);
-            Assert.AreEqual("\"6\"", allprops[3][2].Value.Formula.Value);
+            Assert.AreEqual("\"1\"", allprops[0][0].Value.Formula);
+            Assert.AreEqual("\"2\"", allprops[1][0].Value.Formula);
+            Assert.AreEqual("\"3\"", allprops[1][1].Value.Formula);
+            Assert.AreEqual("\"4\"", allprops[3][0].Value.Formula);
+            Assert.AreEqual("\"5\"", allprops[3][1].Value.Formula);
+            Assert.AreEqual("\"6\"", allprops[3][2].Value.Formula);
             page1.Delete(0);
         }
 
@@ -288,13 +288,13 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(3, p2.Count);
             
             Assert.AreEqual("FOO1",p2[0].Name);
-            Assert.AreEqual("\"1\"", p2[0].Value.Formula.Value);
+            Assert.AreEqual("\"1\"", p2[0].Value.Formula);
 
             Assert.AreEqual("FOO2", p2[1].Name);
-            Assert.AreEqual("\"2\"", p2[1].Value.Formula.Value);
+            Assert.AreEqual("\"2\"", p2[1].Value.Formula);
 
             Assert.AreEqual("FOO3", p2[2].Name);
-            Assert.AreEqual("\"3\"\"4\"", p2[2].Value.Formula.Value);
+            Assert.AreEqual("\"3\"\"4\"", p2[2].Value.Formula);
 
             page1.Delete(0);
         }
