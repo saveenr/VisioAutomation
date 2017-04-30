@@ -1,5 +1,3 @@
-using Microsoft.Office.Interop.Visio;
-
 namespace VisioAutomation.ShapeSheet
 {
     public struct CellData
