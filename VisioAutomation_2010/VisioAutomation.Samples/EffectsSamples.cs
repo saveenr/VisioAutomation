@@ -13,8 +13,8 @@ namespace VisioAutomationSamples
         {
             int num_cols = 1;
             int num_rows = 10;
-            var color1 = new VisioAutomation.Geometry.ColorRgb(0xff000);
-            var color2 = new VisioAutomation.Geometry.ColorRgb(0x000ff);
+            var color1 = new VisioAutomation.Color.ColorRgb(0xff000);
+            var color2 = new VisioAutomation.Color.ColorRgb(0x000ff);
 
             var page_size = new VA.Geometry.Size(num_rows/2.0, num_rows);
             var upperleft = new VA.Geometry.Point(0, page_size.Height);

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
  
-namespace VisioAutomation.Geometry
+namespace VisioAutomation.Color
 {
     public struct ColorRgb
     {

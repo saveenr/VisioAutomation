@@ -56,7 +56,7 @@ namespace VisioAutomationSamples
             var shapes = centers.Select(p => PlaygroundSamples.draw_leaf(page, p)).ToList();
             var angles_as_formulas = angles.Select(a => a.ToString(CultureInfo.InvariantCulture)).ToList();
 
-            var color_formulas = colors.Select(x => new VA.Geometry.ColorRgb(x).ToFormula()).ToList();
+            var color_formulas = colors.Select(x => new VA.Color.ColorRgb(x).ToFormula()).ToList();
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
@@ -119,8 +119,8 @@ namespace VisioAutomationSamples
 
             layout.Render(page);
 
-            var color1 = new VA.Geometry.ColorRgb(0xffdddd);
-            var color2 = new VA.Geometry.ColorRgb(0x00ffff);
+            var color1 = new VA.Color.ColorRgb(0xffdddd);
+            var color2 = new VA.Color.ColorRgb(0x00ffff);
 
             var format = new VA.Shapes.ShapeFormatCells();
 
