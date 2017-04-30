@@ -22,9 +22,13 @@ namespace VisioAutomation.Geometry
         }
 
         public static Point operator -(Point left, Point right) => left.Subtract(right);
+        public static Point operator -(Point left, Size right) => left.Subtract(right);
         public static Point operator +(Point left, Point right) => left.Add(right);
+        public static Point operator +(Point left, Size right) => left.Add(right);
+        public static Point operator *(Point left, Point right) => left.Multiply(right);
         public static Point operator *(Point left, Size right) => left.Multiply(right);
-        public static Point operator *(Point left, Point right) => left.Multiply(right.X, right.Y);
+        public static Point operator /(Point left, Point right) => left.Divide(right);
+        public static Point operator /(Point left, Size right) => left.Divide(right);
 
         public Point Add(double dx, double dy) => new Point(this.X + dx, this.Y + dy);
         public Point Add(Size s) => this.Add(s.Width, s.Height);
@@ -39,6 +43,8 @@ namespace VisioAutomation.Geometry
         public Point Multiply(Point p) => this.Multiply(p.X, p.Y);
 
         public Point Divide(double sx, double sy) => new Point(this.X/sx, this.Y/sy);
+        public Point Divide(Size s) => this.Divide(s.Width, s.Height);
+        public Point Divide(Point p) => this.Divide(p.X, p.Y);
 
         public static IEnumerable<Point> FromDoubles(IEnumerable<double> doubles)
         {

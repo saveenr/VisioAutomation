@@ -90,8 +90,13 @@
         public Point Center => new Point((this.Left + this.Right)/2.0, (this.Bottom + this.Top)/2.0);
 
         public static Rectangle operator +(Rectangle left, Point right) => left.Add(right);
+        public static Rectangle operator +(Rectangle left, Size right) => left.Add(right);
         public static Rectangle operator -(Rectangle left, Point right) => left.Subtract(right);
+        public static Rectangle operator -(Rectangle left, Size right) => left.Subtract(right);
         public static Rectangle operator *(Rectangle left, Point right) => left.Multiply(right);
+        public static Rectangle operator *(Rectangle left, Size right) => left.Multiply(right);
+        public static Rectangle operator /(Rectangle left, Point right) => left.Divide(right);
+        public static Rectangle operator /(Rectangle left, Size right) => left.Divide(right);
 
         public Rectangle Add(double dx, double dy) => new Rectangle(this.Left + dx, this.Bottom + dy, this.Right + dx, this.Top + dy);
         public Rectangle Add(Size s) => this.Add(s.Width,s.Height);
@@ -104,6 +109,10 @@
         public Rectangle Multiply(double sx, double sy) => new Rectangle(this.Left*sx, this.Bottom*sy, this.Right*sx, this.Top*sy);
         public Rectangle Multiply(Size s) => this.Multiply(s.Width, s.Height);
         public Rectangle Multiply(Point p) => this.Multiply(p.X, p.Y);
+
+        public Rectangle Divide(double sx, double sy) => new Rectangle(this.Left / sx, this.Bottom / sy, this.Right / sx, this.Top / sy);
+        public Rectangle Divide(Size s) => this.Divide(s.Width, s.Height);
+        public Rectangle Divide(Point p) => this.Divide(p.X, p.Y);
 
     }
 }

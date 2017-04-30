@@ -26,6 +26,15 @@
             return s;
         }
 
+        public static Size operator +(Size left, Point right) => left.Add(right);
+        public static Size operator +(Size left, Size right) => left.Add(right);
+        public static Size operator -(Size left, Point right) => left.Subtract(right);
+        public static Size operator -(Size left, Size right) => left.Subtract(right);
+        public static Size operator *(Size left, Point right) => left.Multiply(right);
+        public static Size operator *(Size left, Size right) => left.Multiply(right);
+        public static Size operator /(Size left, Point right) => left.Divide(right);
+        public static Size operator /(Size left, Size right) => left.Divide(right);
+
         public Size Multiply(double sx, double sy) => new Size(this.Width*sx, this.Height*sy);
         public Size Multiply(Size s) => this.Multiply(s.Width, s.Height);
         public Size Multiply(Point p) => this.Multiply(p.X, p.Y);
@@ -38,9 +47,8 @@
         public Size Add(Size s) => this.Add(s.Width, s.Height);
         public Size Add(Point p) => this.Add(p.X, p.Y);
 
-        public static Size operator +(Size left, Point right) => left.Add(right);
-        public static Size operator +(Size left, Size right) => left.Add(right);
-        public static Size operator *(Size left, Size right) => left.Multiply(right);
-        public static Size operator /(Size left, Size right) => left.Divide(right);
+        public Size Subtract(double dx, double dy) => new Size(this.Width - dx, this.Height - dy);
+        public Size Subtract(Size s) => this.Subtract(s.Width, s.Height);
+        public Size Subtract(Point p) => this.Subtract(p.X, p.Y);
     }
 }
