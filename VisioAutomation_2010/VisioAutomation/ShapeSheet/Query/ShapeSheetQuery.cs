@@ -34,9 +34,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return col;
         }
 
-        private static void RestrictToShapesOnly(ShapeSheetSurface surface)
+        private static void RestrictToShapesOnly(SurfaceTarget surface)
         {
-            if (surface.Target.Shape == null)
+            if (surface.Shape == null)
             {
                 string msg = "Target must be Shape not Page or Master";
                 throw new System.ArgumentException(msg);
@@ -45,15 +45,15 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public QueryOutput<string> GetFormulas(IVisio.Shape shape)
         {
-            var surface = new ShapeSheetSurface(shape);
+            var surface = new SurfaceTarget(shape);
             return GetFormulas(surface);
         }
 
-        public QueryOutput<string> GetFormulas(ShapeSheetSurface surface)
+        public QueryOutput<string> GetFormulas(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
-            var shapes = new List<IVisio.Shape> { surface.Target.Shape };
+            var shapes = new List<IVisio.Shape> { surface.Shape };
 
             this.cache_section_info(shapes);
             var srcstream = this._build_src_stream();
@@ -61,22 +61,22 @@ namespace VisioAutomation.ShapeSheet.Query
             var shape_index = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index, _cache);
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<string>(values);
-            var output_for_shape = this._create_output_for_shape(surface.Target.ID16, sectioninfo, seg_builder);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, seg_builder);
 
             return output_for_shape;
         }
 
         public QueryOutput<TResult> GetResults<TResult>(IVisio.Shape shape )
         {
-            var surface = new ShapeSheetSurface(shape);
+            var surface = new SurfaceTarget(shape);
             return GetResults<TResult>(surface);
         }
 
-        public QueryOutput<TResult> GetResults<TResult>(ShapeSheetSurface surface)
+        public QueryOutput<TResult> GetResults<TResult>(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
-            var shapes = new List<IVisio.Shape> { surface.Target.Shape };
+            var shapes = new List<IVisio.Shape> { surface.Shape };
 
             this.cache_section_info(shapes);
             var srcstream = this._build_src_stream();
@@ -85,13 +85,13 @@ namespace VisioAutomation.ShapeSheet.Query
             var shape_index = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index, _cache);
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<TResult>(values);
-            var output_for_shape = this._create_output_for_shape(surface.Target.ID16, sectioninfo, seg_builder);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, seg_builder);
             return output_for_shape;
         }
 
         public QueryOutput<ShapeSheet.CellData> GetFormulasAndResults(IVisio.Shape shape)
         {
-            var surface = new ShapeSheetSurface(shape);
+            var surface = new SurfaceTarget(shape);
             return this.GetFormulasAndResults(surface);
         }
 
@@ -112,11 +112,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return combined_data;
         }
 
-        public QueryOutput<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface)
+        public QueryOutput<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
-            var shapes = new List<IVisio.Shape> { surface.Target.Shape };
+            var shapes = new List<IVisio.Shape> { surface.Shape };
 
             this.cache_section_info(shapes);
             var srcstream = this._build_src_stream();
@@ -128,20 +128,20 @@ namespace VisioAutomation.ShapeSheet.Query
             var shape_index = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index, _cache);
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<CellData>(combined_data);
-            var output_for_shape = this._create_output_for_shape(surface.Target.ID16, sectioninfo, seg_builder);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, seg_builder);
             return output_for_shape;
         }
 
         public QueryOutputCollection<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new ShapeSheetSurface(page);
+            var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
-        public QueryOutputCollection<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryOutputCollection<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
             var shapes = new List<IVisio.Shape>(shapeids.Count);
-            shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
+            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
 
             this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids);
@@ -153,14 +153,14 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public QueryOutputCollection<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new ShapeSheetSurface(page);
+            var surface = new SurfaceTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
         }
 
-        public QueryOutputCollection<TResult> GetResults<TResult>(ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryOutputCollection<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
             var shapes = new List<IVisio.Shape>(shapeids.Count);
-            shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
+            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
 
             this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids);
@@ -173,14 +173,14 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public QueryOutputCollection<ShapeSheet.CellData> GetFormulasAndResults(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new ShapeSheetSurface(page);
+            var surface = new SurfaceTarget(page);
             return this.GetFormulasAndResults(surface, shapeids);
         }
 
-        public QueryOutputCollection<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface, IList<int> shapeids)
+        public QueryOutputCollection<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface, IList<int> shapeids)
         {
             var shapes = new List<IVisio.Shape>(shapeids.Count);
-            shapes.AddRange(shapeids.Select(shapeid => surface.Target.Shapes.ItemFromID16[(short)shapeid]));
+            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
 
             this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids);

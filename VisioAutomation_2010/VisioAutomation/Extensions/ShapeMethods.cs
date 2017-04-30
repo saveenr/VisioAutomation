@@ -9,7 +9,7 @@ namespace VisioAutomation.Extensions
             this IVisio.Shape shape, 
             Drawing.Point p1, Drawing.Point p2)
         {
-            var surface = new Drawing.DrawingSurface(shape);
+            var surface = new SurfaceTarget(shape);
             var s = surface.DrawLine(p1, p2);
             return s;
         }
@@ -20,7 +20,7 @@ namespace VisioAutomation.Extensions
             Drawing.Point p1, 
             IVisio.VisArcSweepFlags flags)
         {
-            var surface = new Drawing.DrawingSurface(shape);
+            var surface = new SurfaceTarget(shape);
             var s = surface.DrawQuarterArc(p0, p1, flags);
             return s;
         }
@@ -29,7 +29,7 @@ namespace VisioAutomation.Extensions
             this IVisio.Shape shape, 
             IVisio.VisBoundingBoxArgs args)
         {
-            var surface = new Drawing.DrawingSurface(shape);
+            var surface = new SurfaceTarget(shape);
             var r = surface.GetBoundingBox(args);
             return r;
         }

@@ -6,13 +6,13 @@ namespace VisioScripting.Models
     public class ShapeSheetReader
     {
         public Client Client;
-        public VisioAutomation.ShapeSheet.ShapeSheetSurface Surface;
+        public VisioAutomation.SurfaceTarget Surface;
         public VisioAutomation.ShapeSheet.Streams.SidSrcStreamBuilder SidSrcStreamBuilder;
         
         public ShapeSheetReader(Client client, IVisio.Page page)
         {
             this.Client = client;
-            this.Surface = new ShapeSheetSurface(page);
+            this.Surface = new VisioAutomation.SurfaceTarget(page);
             this.SidSrcStreamBuilder = new VisioAutomation.ShapeSheet.Streams.SidSrcStreamBuilder();
         }
 

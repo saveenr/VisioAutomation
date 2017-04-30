@@ -40,7 +40,7 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(ShapeSheetQuery cell_query, bool getresults, ResultType result_type, IList<int> shapeids, ShapeSheetSurface surface)
+        public static DataTable QueryToDataTable(ShapeSheetQuery cell_query, bool getresults, ResultType result_type, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
         {
             if (!getresults)
             {

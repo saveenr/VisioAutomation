@@ -38,7 +38,7 @@ namespace VisioAutomation.Text
                 stream.Add(src_tabother);
             }
 
-            var surface = new ShapeSheetSurface(shape);
+            var surface = new SurfaceTarget(shape);
 
             const object[] unitcodes = null;
 

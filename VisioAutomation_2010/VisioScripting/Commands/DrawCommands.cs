@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public VisioAutomation.Drawing.DrawingSurface GetDrawingSurface()
+        public VisioAutomation.SurfaceTarget GetDrawingSurface()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
             {
                 this._client.WriteVerbose("Window = Master Editing");
                 var surf_Master = (IVisio.Master)surf_Window.Master;
-                var surface = new VisioAutomation.Drawing.DrawingSurface(surf_Master);
+                var surface = new VisioAutomation.SurfaceTarget(surf_Master);
                 return surface;
 
             }
@@ -41,7 +41,7 @@ namespace VisioScripting.Commands
             {
                 this._client.WriteVerbose("Window = Page ");
                 var surf_Page = surf_Application.ActivePage;
-                var surface = new VisioAutomation.Drawing.DrawingSurface(surf_Page);
+                var surface = new VisioAutomation.SurfaceTarget(surf_Page);
                 return surface;
             }
         }
@@ -458,7 +458,7 @@ namespace VisioScripting.Commands
         public List<IVisio.Shape> GetAllShapes()
         {
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var shapes = surface.Target.Shapes;
+            var shapes = surface.Shapes;
             var list = new List<IVisio.Shape>();
             list.AddRange(shapes.ToEnumerable());
             return list;

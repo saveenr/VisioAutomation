@@ -142,15 +142,13 @@
     <Compile Include="ShapeSheet\Query\SubQueryOutputRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\SRCFormulaPair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
-    <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
-    <Compile Include="Drawing\DrawingSurface.cs" />
+    <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\HyperlinkCells.cs" />
     <Compile Include="Shapes\HyperlinkHelper.cs" />
     <Compile Include="Shapes\ShapeLayoutCells.cs" />
     <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Text\TextXFormCells.cs" />
-    <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\ConnectionPointHelper.cs" />
     <Compile Include="Shapes\ControlHelper.cs" />
     <Compile Include="Drawing\BoundingBoxBuilder.cs" />

@@ -31,42 +31,42 @@ namespace VisioAutomation.Extensions
 
         public static IVisio.Shape DrawLine(this IVisio.Page page, Drawing.Point p1, Drawing.Point p2)
         {
-            var surface = new Drawing.DrawingSurface(page);
+            var surface = new SurfaceTarget(page);
             var shape = surface.DrawLine(p1,p2);
             return shape;
         }
 
         public static IVisio.Shape DrawOval(this IVisio.Page page, Drawing.Rectangle rect)
         {
-            var surface = new Drawing.DrawingSurface(page);
+            var surface = new SurfaceTarget(page);
             var shape = surface.DrawOval(rect);
             return shape;
         }
 
         public static IVisio.Shape DrawRectangle(this IVisio.Page page, Drawing.Rectangle rect)
         {
-            var surface = new Drawing.DrawingSurface(page);
+            var surface = new SurfaceTarget(page);
             var shape = surface.DrawRectangle(rect);
             return shape;
         }
 
         public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<Drawing.Point> points)
         {
-            var surface = new Drawing.DrawingSurface(page);
+            var surface = new SurfaceTarget(page);
             var shape = surface.DrawBezier(points);
             return shape;
         }
 
         public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<Drawing.Point> points, short degree, short flags)
         {
-            var surface = new Drawing.DrawingSurface(page);
+            var surface = new SurfaceTarget(page);
             var shape = surface.DrawBezier(points, degree, flags);
             return shape;
         }
 
         public static IVisio.Shape DrawPolyline(this IVisio.Page page, IList<Drawing.Point> points)
         {
-            var surface = new Drawing.DrawingSurface(page);
+            var surface = new SurfaceTarget(page);
             var shape = surface.DrawBezier(points);
             return shape;
         }
@@ -77,7 +77,7 @@ namespace VisioAutomation.Extensions
             IList<double> knots,
             IList<double> weights, int degree)
         {
-            var surface = new Drawing.DrawingSurface(page);
+            var surface = new SurfaceTarget(page);
             var shape = surface.DrawNURBS(controlpoints, knots, weights, degree);
             return shape;
         }
@@ -87,7 +87,7 @@ namespace VisioAutomation.Extensions
             IVisio.Master master,
             Drawing.Point point)
         {
-            var surface = new Drawing.DrawingSurface(page);
+            var surface = new SurfaceTarget(page);
             return surface.Drop(master, point);
         }
 

@@ -74,10 +74,10 @@ namespace VisioScripting.Commands
         }
 
 
-        public ShapeSheetSurface GetShapeSheetSurface()
+        public VisioAutomation.SurfaceTarget GetShapeSheetSurface()
         {
             var drawing_surface = this._client.Draw.GetDrawingSurface();
-            var shapesheet_surface = new ShapeSheetSurface(drawing_surface.Target);
+            var shapesheet_surface = drawing_surface;
             return shapesheet_surface;
         }
 
