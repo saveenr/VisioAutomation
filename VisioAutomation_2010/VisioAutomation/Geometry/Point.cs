@@ -23,7 +23,6 @@ namespace VisioAutomation.Geometry
 
         public static Point operator -(Point left, Point right) => left.Subtract(right);
         public static Point operator +(Point left, Point right) => left.Add(right);
-        public static Point operator *(Point left, double right) => left.Multiply(right, right);
         public static Point operator *(Point left, Size right) => left.Multiply(right);
         public static Point operator *(Point left, Point right) => left.Multiply(right.X, right.Y);
 

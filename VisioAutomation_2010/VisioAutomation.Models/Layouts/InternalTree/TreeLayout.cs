@@ -562,7 +562,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                                           : new Geometry.Point(dif.X, 0);
 
             var h1 = parent_attach_point.Add(handle_displacement);
-            var h2 = child_attach_point.Add(handle_displacement * (-1));
+            var h2 = child_attach_point.Add( handle_displacement.Multiply(-1, -1));
 
             return new[] {parent_attach_point, h1, h2, child_attach_point};
         }
