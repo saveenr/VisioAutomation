@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         protected SrcFormulaPair newpair(ShapeSheet.Src src, ShapeSheet.CellValueLiteral formula)
         {
-            return new SrcFormulaPair(src, formula);
+            return new SrcFormulaPair(src, formula.Value);
         }
 
         public abstract IEnumerable<SrcFormulaPair> SrcFormulaPairs { get; }
