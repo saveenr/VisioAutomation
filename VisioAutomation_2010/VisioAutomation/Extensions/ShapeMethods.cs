@@ -6,8 +6,8 @@ namespace VisioAutomation.Extensions
     public static class ShapeMethods
     {
         public static IVisio.Shape DrawLine(
-            this IVisio.Shape shape, 
-            Drawing.Point p1, Drawing.Point p2)
+            this IVisio.Shape shape,
+            Geometry.Point p1, Geometry.Point p2)
         {
             var surface = new SurfaceTarget(shape);
             var s = surface.DrawLine(p1, p2);
@@ -15,9 +15,9 @@ namespace VisioAutomation.Extensions
         }
 
         public static IVisio.Shape DrawQuarterArc(
-            this IVisio.Shape shape, 
-            Drawing.Point p0, 
-            Drawing.Point p1, 
+            this IVisio.Shape shape,
+            Geometry.Point p0,
+            Geometry.Point p1, 
             IVisio.VisArcSweepFlags flags)
         {
             var surface = new SurfaceTarget(shape);
@@ -25,7 +25,7 @@ namespace VisioAutomation.Extensions
             return s;
         }
 
-        public static Drawing.Rectangle GetBoundingBox(
+        public static Geometry.Rectangle GetBoundingBox(
             this IVisio.Shape shape, 
             IVisio.VisBoundingBoxArgs args)
         {
@@ -34,26 +34,26 @@ namespace VisioAutomation.Extensions
             return r;
         }
 
-        public static Drawing.Point XYFromPage(
-            this IVisio.Shape shape, 
-            Drawing.Point xy)
+        public static Geometry.Point XYFromPage(
+            this IVisio.Shape shape,
+            Geometry.Point xy)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ff767213.aspx
             double xprime;
             double yprime;
             shape.XYFromPage(xy.X, xy.Y, out xprime, out yprime);
-            return new Drawing.Point(xprime, yprime);
+            return new Geometry.Point(xprime, yprime);
         }
 
-        public static Drawing.Point XYToPage(
-            this IVisio.Shape shape, 
-            Drawing.Point xy)
+        public static Geometry.Point XYToPage(
+            this IVisio.Shape shape,
+            Geometry.Point xy)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ff766239.aspx
             double xprime;
             double yprime;
             shape.XYToPage(xy.X, xy.Y, out xprime, out yprime);
-            return new Drawing.Point(xprime, yprime);
+            return new Geometry.Point(xprime, yprime);
         }
 
         public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Shapes shapes)

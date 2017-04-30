@@ -98,7 +98,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public VisioAutomation.Drawing.Size GetSize()
+        public VisioAutomation.Geometry.Size GetSize()
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -114,7 +114,7 @@ namespace VisioScripting.Commands
             var results = query.GetResults<double>(active_page.PageSheet);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];
-            var s = new VisioAutomation.Drawing.Size(width, height);
+            var s = new VisioAutomation.Geometry.Size(width, height);
             return s;
         }
 
@@ -137,7 +137,7 @@ namespace VisioScripting.Commands
             page.NameU = name;
         }
 
-        public IVisio.Page New(VisioAutomation.Drawing.Size? size, bool isbackgroundpage)
+        public IVisio.Page New(VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -322,7 +322,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void ResizeToFitContents(VisioAutomation.Drawing.Size bordersize, bool zoom_to_page)
+        public void ResizeToFitContents(VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -363,7 +363,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetSize(VisioAutomation.Drawing.Size new_size)
+        public void SetSize(VisioAutomation.Geometry.Size new_size)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -395,7 +395,7 @@ namespace VisioScripting.Commands
             var old_size = this.GetSize();
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
-            var new_size = new VisioAutomation.Drawing.Size(w, h);
+            var new_size = new VisioAutomation.Geometry.Size(w, h);
             this.SetSize(new_size);
         }
 

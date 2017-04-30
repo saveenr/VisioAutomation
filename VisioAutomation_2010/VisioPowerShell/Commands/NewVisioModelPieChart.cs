@@ -25,7 +25,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var center = new VisioAutomation.Drawing.Point(this.X0, this.Y0);
+            var center = new VisioAutomation.Geometry.Point(this.X0, this.Y0);
             var chart = new VisioAutomation.Models.Charting.PieChart(center,this.Radius);
             chart.InnerRadius = this.InnerRadius;
             chart.DataPoints = new VisioAutomation.Models.Charting.DataPointList(this.Values, this.Labels);

@@ -24,9 +24,9 @@ namespace VisioPowerShell.Commands
             this.WriteObject(shape);
         }
 
-        protected VA.Drawing.Rectangle GetRectangle()
+        protected VA.Geometry.Rectangle GetRectangle()
         {
-            return new VA.Drawing.Rectangle(this.X0, this.Y0, this.X1, this.Y1);
+            return new VA.Geometry.Rectangle(this.X0, this.Y0, this.X1, this.Y1);
         }
     }
 }

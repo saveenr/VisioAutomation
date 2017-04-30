@@ -8,17 +8,17 @@ namespace VisioAutomation.Models.Charting
     {
         public double Radius= 1;
         public double InnerRadius = -1;
-        public Drawing.Point Center;
+        public Geometry.Point Center;
         public DataPointList DataPoints;
  
-        public PieChart(Drawing.Point center, double radius)
+        public PieChart(Geometry.Point center, double radius)
         {
             this.DataPoints = new DataPointList();
             this.Center = center;
             this.Radius = radius;
         }
 
-        public PieChart(Drawing.Rectangle rect)
+        public PieChart(Geometry.Rectangle rect)
         {
             var center = rect.Center;
             var radius = System.Math.Min(rect.Width,rect.Height)/2.0;

@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var points = VA.Drawing.Point.FromDoubles(this.Doubles).ToList();
+            var points = VA.Geometry.Point.FromDoubles(this.Doubles).ToList();
             var shape = this.Client.Draw.Bezier(points);
             this.WriteObject(shape);
         }

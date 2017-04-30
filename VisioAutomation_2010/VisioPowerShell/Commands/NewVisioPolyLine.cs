@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var points = VisioAutomation.Drawing.Point.FromDoubles(this.Doubles).ToList();
+            var points = VisioAutomation.Geometry.Point.FromDoubles(this.Doubles).ToList();
             var shape = this.Client.Draw.PolyLine(points);
             this.WriteObject(shape);
         }

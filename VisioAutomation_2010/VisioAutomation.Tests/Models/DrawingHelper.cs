@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
+using VisioAutomation.Geometry;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Models
@@ -11,7 +11,7 @@ namespace VisioAutomation_Tests.Models
         public void Drawing_CreateBoundingBox_0Points()
         {
             var doubles = new double[] { };
-            var points = VA.Drawing.Point.FromDoubles(doubles);
+            var points = VA.Geometry.Point.FromDoubles(doubles);
             var bb = BoundingBoxBuilder.FromPoints(points);
 
             Assert.IsFalse(bb.HasValue);
@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Models
         public void Drawing_CreateBoundingBox_1Point()
         {
             var doubles = new[] { 1.0, -2.0 };
-            var points = VA.Drawing.Point.FromDoubles(doubles);
+            var points = VA.Geometry.Point.FromDoubles(doubles);
             var bb = BoundingBoxBuilder.FromPoints(points);
 
             Assert.IsTrue(bb.HasValue);
@@ -35,7 +35,7 @@ namespace VisioAutomation_Tests.Models
         public void Drawing_CreateBoundingBox_4Points()
         {
             var doubles = new[] {0.0, 0.0, 1.0, -2.0};
-            var points = VA.Drawing.Point.FromDoubles(doubles);
+            var points = VA.Geometry.Point.FromDoubles(doubles);
             var bb = BoundingBoxBuilder.FromPoints(points);
 
             Assert.IsTrue(bb.HasValue);

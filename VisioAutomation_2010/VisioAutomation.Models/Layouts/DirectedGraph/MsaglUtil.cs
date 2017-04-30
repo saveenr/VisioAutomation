@@ -7,24 +7,24 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     static class MsaglUtil
     {
-        public static VisioAutomation.Drawing.Rectangle ToVARectangle(MG.Core.Geometry.Rectangle n)
+        public static VisioAutomation.Geometry.Rectangle ToVARectangle(MG.Core.Geometry.Rectangle n)
         {
-            return new VisioAutomation.Drawing.Rectangle(n.Left, n.Bottom, n.Right, n.Top);
+            return new VisioAutomation.Geometry.Rectangle(n.Left, n.Bottom, n.Right, n.Top);
         }
 
-        public static VisioAutomation.Drawing.Point ToVAPoint(MG.Core.Geometry.Point p)
+        public static VisioAutomation.Geometry.Point ToVAPoint(MG.Core.Geometry.Point p)
         {
-            return new VisioAutomation.Drawing.Point(p.X, p.Y);
+            return new VisioAutomation.Geometry.Point(p.X, p.Y);
         }
 
-        public static IList<VisioAutomation.Drawing.Point> ToVAPoints(MG.Core.Layout.Edge edge)
+        public static IList<VisioAutomation.Geometry.Point> ToVAPoints(MG.Core.Layout.Edge edge)
         {
 
             if (edge.Curve is MG.Core.Geometry.Curves.Curve)
             {
                 var curve = (MG.Core.Geometry.Curves.Curve)edge.Curve;
 
-                var final_bez_points = new List<VisioAutomation.Drawing.Point> { MsaglUtil.ToVAPoint(edge.Curve.Start) };
+                var final_bez_points = new List<VisioAutomation.Geometry.Point> { MsaglUtil.ToVAPoint(edge.Curve.Start) };
 
                 foreach (var cur_seg in curve.Segments)
                 {
@@ -58,7 +58,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
             else if (edge.Curve is MG.Core.Geometry.Curves.LineSegment)
             {
-                var final_bez_points = new List<VisioAutomation.Drawing.Point> { MsaglUtil.ToVAPoint(edge.Curve.Start) };
+                var final_bez_points = new List<VisioAutomation.Geometry.Point> { MsaglUtil.ToVAPoint(edge.Curve.Start) };
                 var line_seg = (MG.Core.Geometry.Curves.LineSegment)edge.Curve;
                 final_bez_points.Add(MsaglUtil.ToVAPoint(line_seg.Start));
                 final_bez_points.Add(MsaglUtil.ToVAPoint(line_seg.End));

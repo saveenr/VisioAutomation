@@ -6,7 +6,7 @@ namespace VisioAutomation.Extensions
 {
     public static class PageMethods
     {
-        public static void ResizeToFitContents(this IVisio.Page page, Drawing.Size padding)
+        public static void ResizeToFitContents(this IVisio.Page page, Geometry.Size padding)
         {
             // first perform the native resizetofit
             page.ResizeToFitContents();
@@ -29,42 +29,42 @@ namespace VisioAutomation.Extensions
             }
         }
 
-        public static IVisio.Shape DrawLine(this IVisio.Page page, Drawing.Point p1, Drawing.Point p2)
+        public static IVisio.Shape DrawLine(this IVisio.Page page, Geometry.Point p1, Geometry.Point p2)
         {
             var surface = new SurfaceTarget(page);
             var shape = surface.DrawLine(p1,p2);
             return shape;
         }
 
-        public static IVisio.Shape DrawOval(this IVisio.Page page, Drawing.Rectangle rect)
+        public static IVisio.Shape DrawOval(this IVisio.Page page, Geometry.Rectangle rect)
         {
             var surface = new SurfaceTarget(page);
             var shape = surface.DrawOval(rect);
             return shape;
         }
 
-        public static IVisio.Shape DrawRectangle(this IVisio.Page page, Drawing.Rectangle rect)
+        public static IVisio.Shape DrawRectangle(this IVisio.Page page, Geometry.Rectangle rect)
         {
             var surface = new SurfaceTarget(page);
             var shape = surface.DrawRectangle(rect);
             return shape;
         }
 
-        public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<Drawing.Point> points)
+        public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<Geometry.Point> points)
         {
             var surface = new SurfaceTarget(page);
             var shape = surface.DrawBezier(points);
             return shape;
         }
 
-        public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<Drawing.Point> points, short degree, short flags)
+        public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<Geometry.Point> points, short degree, short flags)
         {
             var surface = new SurfaceTarget(page);
             var shape = surface.DrawBezier(points, degree, flags);
             return shape;
         }
 
-        public static IVisio.Shape DrawPolyline(this IVisio.Page page, IList<Drawing.Point> points)
+        public static IVisio.Shape DrawPolyline(this IVisio.Page page, IList<Geometry.Point> points)
         {
             var surface = new SurfaceTarget(page);
             var shape = surface.DrawBezier(points);
@@ -73,7 +73,7 @@ namespace VisioAutomation.Extensions
 
         public static IVisio.Shape DrawNURBS(
             this IVisio.Page page, 
-            IList<Drawing.Point> controlpoints,
+            IList<Geometry.Point> controlpoints,
             IList<double> knots,
             IList<double> weights, int degree)
         {
@@ -85,7 +85,7 @@ namespace VisioAutomation.Extensions
         public static IVisio.Shape Drop(
             this IVisio.Page page,
             IVisio.Master master,
-            Drawing.Point point)
+            Geometry.Point point)
         {
             var surface = new SurfaceTarget(page);
             return surface.Drop(master, point);
@@ -94,7 +94,7 @@ namespace VisioAutomation.Extensions
         public static short[] DropManyU(
             this IVisio.Page page,
             IList<IVisio.Master> masters,
-            IEnumerable<Drawing.Point> points)
+            IEnumerable<Geometry.Point> points)
         {
             if (masters == null)
             {
@@ -113,7 +113,7 @@ namespace VisioAutomation.Extensions
 
             // NOTE: DropMany will fail if you pass in zero items to drop
             var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = Drawing.Point.ToDoubles(points).ToArray();
+            var xy_array = Geometry.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 

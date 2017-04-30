@@ -18,7 +18,7 @@ namespace VisioAutomation_Tests.Models
             var app = doc.Application;
             var page = app.ActivePage;
 
-            var center = new VA.Drawing.Point(4, 5);
+            var center = new VA.Geometry.Point(4, 5);
             double radius = 1.0;
             var values = new[] {1.0, 2.0};
             var slices = VACHART.PieSlice.GetSlicesFromValues(center, radius, values);

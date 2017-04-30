@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace VisioAutomation.Drawing
+namespace VisioAutomation.Geometry
 {
     public class BezierCurve
     {

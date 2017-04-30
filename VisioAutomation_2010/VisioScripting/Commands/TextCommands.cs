@@ -242,7 +242,7 @@ namespace VisioScripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Fit Shape To Text"))
             {
                 // Calculate the new sizes for each shape
-                var new_sizes = new List<VisioAutomation.Drawing.Size>(shapeids.Count);
+                var new_sizes = new List<VisioAutomation.Geometry.Size>(shapeids.Count);
                 foreach (var shape in shapes.Shapes)
                 {
                     var text_bounding_box = shape.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightText).Size;
@@ -250,7 +250,7 @@ namespace VisioScripting.Commands
 
                     double max_w = System.Math.Max(text_bounding_box.Width, wh_bounding_box.Width);
                     double max_h = System.Math.Max(text_bounding_box.Height, wh_bounding_box.Height);
-                    var max_size = new VisioAutomation.Drawing.Size(max_w, max_h);
+                    var max_size = new VisioAutomation.Geometry.Size(max_w, max_h);
                     new_sizes.Add(max_size);
                 }
 

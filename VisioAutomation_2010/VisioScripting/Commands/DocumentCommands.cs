@@ -223,12 +223,12 @@ namespace VisioScripting.Commands
             doc.SaveAs(filename);
         }
 
-        public IVisio.Document New(VisioAutomation.Drawing.Size size)
+        public IVisio.Document New(VisioAutomation.Geometry.Size size)
         {
             return this.New(size,null);
         }
 
-        public IVisio.Document New(VisioAutomation.Drawing.Size size,string template)
+        public IVisio.Document New(VisioAutomation.Geometry.Size size,string template)
         {
             this._client.Application.AssertApplicationAvailable();
             var doc = this.New(template);

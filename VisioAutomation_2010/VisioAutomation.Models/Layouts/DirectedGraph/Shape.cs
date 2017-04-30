@@ -12,7 +12,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         public string StencilName { get; set; }
         public string MasterName { get; set; }
         public string URL { get; set; }
-        public VA.Drawing.Size? Size { get; set; }
+        public VA.Geometry.Size? Size { get; set; }
         public System.Collections.Generic.List<Dom.Hyperlink> Hyperlinks { get; set; }
     }
 }

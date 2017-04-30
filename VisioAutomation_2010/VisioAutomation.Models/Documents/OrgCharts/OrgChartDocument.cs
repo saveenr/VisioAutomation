@@ -100,7 +100,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                     i.Position = i.Position.Add(border_width, border_width);
                 }
 
-                var centerpoints = new Drawing.Point[treenodes.Count];
+                var centerpoints = new Geometry.Point[treenodes.Count];
                 foreach (int i in Enumerable.Range(0, treenodes.Count))
                 {
                     centerpoints[i] = treenodes[i].Rect.Center;
@@ -156,7 +156,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);
                 page_node.Size = page_size_with_border;
                 page_node.ResizeToFit = true;
-                page_node.ResizeToFitMargin = new Drawing.Size(border_width * 2, border_width * 2.0);
+                page_node.ResizeToFitMargin = new Geometry.Size(border_width * 2, border_width * 2.0);
             } // finish handling root node
 
             var doc = doc_node.Render(app);

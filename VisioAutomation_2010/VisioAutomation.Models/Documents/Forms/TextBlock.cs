@@ -5,7 +5,7 @@ namespace VisioAutomation.Models.Documents.Forms
 {
     public class TextBlock
     {
-        public Drawing.Size Size;
+        public Geometry.Size Size;
         public string Font = "SegoeUI";
         public VisioAutomation.Text.TextBlockCells TextBlockCells;
         public VisioAutomation.Text.ParagraphCells ParagraphCells;
@@ -14,9 +14,9 @@ namespace VisioAutomation.Models.Documents.Forms
         public string Text;
         public IVisio.Shape VisioShape;
         public int VisioShapeID;
-        public Drawing.Rectangle Rectangle;
+        public Geometry.Rectangle Rectangle;
 
-        public TextBlock(Drawing.Size size, string text)
+        public TextBlock(Geometry.Size size, string text)
         {
             this.Text = text;
             this.Size = size;

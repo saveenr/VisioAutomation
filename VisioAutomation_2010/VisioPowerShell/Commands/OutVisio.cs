@@ -64,7 +64,7 @@ namespace VisioPowerShell.Commands
             {
                 var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
-                var spacing = new VisioAutomation.Drawing.Size(this.CellSpacing, this.CellSpacing);
+                var spacing = new VisioAutomation.Geometry.Size(this.CellSpacing, this.CellSpacing);
                 var shapes = this.Client.Draw.Table(this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }

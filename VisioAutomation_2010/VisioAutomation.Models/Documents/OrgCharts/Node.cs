@@ -11,7 +11,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
         public IVisio.Shape VisioShape { get; set; }
         public Dom.Node DOMNode { get; set; }
         public string URL { get; set; }
-        public Drawing.Size? Size { get; set; }
+        public Geometry.Size? Size { get; set; }
 
         public Node()
         {

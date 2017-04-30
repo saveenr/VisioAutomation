@@ -23,8 +23,8 @@ namespace VisioAutomation_Tests.Scripting
 
             var masters1 = stencil_doc.Masters;
             var masters = new[] { masters1["Rounded Rectangle"], masters1["Ellipse"] };
-            var point0 = new VA.Drawing.Point(1, 2);
-            var point1 = new VA.Drawing.Point(3, 4);
+            var point0 = new VA.Geometry.Point(1, 2);
+            var point1 = new VA.Geometry.Point(3, 4);
             var points = new[] { point0, point1 };
             Assert.AreEqual(0, page1.Shapes.Count);
 

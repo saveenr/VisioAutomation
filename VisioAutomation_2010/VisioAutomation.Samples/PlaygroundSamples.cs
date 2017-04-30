@@ -10,7 +10,7 @@ namespace VisioAutomationSamples
 {
     public static class PlaygroundSamples
     {
-        private static IVisio.Shape draw_leaf(IVisio.Page page, VA.Drawing.Point p0)
+        private static IVisio.Shape draw_leaf(IVisio.Page page, VA.Geometry.Point p0)
         {
             var p1 = p0.Add(1, 1);
             var p2 = p1.Add(1, 0);
@@ -24,9 +24,9 @@ namespace VisioAutomationSamples
             return s;
         }
 
-        public static VA.Drawing.Point GetPointAtRadius(VA.Drawing.Point origin, double angle, double radius)
+        public static VA.Geometry.Point GetPointAtRadius(VA.Geometry.Point origin, double angle, double radius)
         {
-            var new_point = new VA.Drawing.Point(radius*System.Math.Cos(angle),
+            var new_point = new VA.Geometry.Point(radius*System.Math.Cos(angle),
                                          radius*System.Math.Sin(angle));
             new_point = origin + new_point;
             return new_point;
@@ -47,7 +47,7 @@ namespace VisioAutomationSamples
                         0xec008b, 0xec1c23, 0xc1272c, 0x981a1e
                     };
 
-            var origin = new VA.Drawing.Point(4, 4);
+            var origin = new VA.Geometry.Point(4, 4);
             double radius = 3.0;
             int numpoints = colors.Length;
             double angle_step = (System.Math.PI*2/numpoints);
@@ -56,7 +56,7 @@ namespace VisioAutomationSamples
             var shapes = centers.Select(p => PlaygroundSamples.draw_leaf(page, p)).ToList();
             var angles_as_formulas = angles.Select(a => a.ToString(CultureInfo.InvariantCulture)).ToList();
 
-            var color_formulas = colors.Select(x => new VA.Drawing.ColorRgb(x).ToFormula()).ToList();
+            var color_formulas = colors.Select(x => new VA.Geometry.ColorRgb(x).ToFormula()).ToList();
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
@@ -80,7 +80,7 @@ namespace VisioAutomationSamples
 
             writer.Commit(page);
 
-            page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0));
+            page.ResizeToFitContents(new VA.Geometry.Size(1.0, 1.0));
         }
 
         public static void DrawAllGradients()
@@ -94,17 +94,17 @@ namespace VisioAutomationSamples
             int num_cols = 7;
             int num_rows = 7;
 
-            var page_size = new VA.Drawing.Size(5, 5);
+            var page_size = new VA.Geometry.Size(5, 5);
             SampleEnvironment.SetPageSize(page,page_size);
 
-            var lowerleft = new VA.Drawing.Point(0, 0);
+            var lowerleft = new VA.Geometry.Point(0, 0);
             var actual_page_size = SampleEnvironment.GetPageSize(page);
-            var page_rect = new VA.Drawing.Rectangle(lowerleft, actual_page_size);
+            var page_rect = new VA.Geometry.Rectangle(lowerleft, actual_page_size);
 
-            var layout = new GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
+            var layout = new GridLayout(num_cols, num_rows, new VA.Geometry.Size(1, 1), master);
             layout.RowDirection = RowDirection.TopToBottom;
             layout.Origin = page_rect.UpperLeft;
-            layout.CellSpacing = new VA.Drawing.Size(0, 0);
+            layout.CellSpacing = new VA.Geometry.Size(0, 0);
             layout.PerformLayout();
 
             int max_grad_id = 40;
@@ -119,8 +119,8 @@ namespace VisioAutomationSamples
 
             layout.Render(page);
 
-            var color1 = new VA.Drawing.ColorRgb(0xffdddd);
-            var color2 = new VA.Drawing.ColorRgb(0x00ffff);
+            var color1 = new VA.Geometry.ColorRgb(0xffdddd);
+            var color2 = new VA.Geometry.ColorRgb(0x00ffff);
 
             var format = new VA.Shapes.ShapeFormatCells();
 
@@ -148,7 +148,7 @@ namespace VisioAutomationSamples
 
             writer.Commit(page);
 
-            var bordersize = new VA.Drawing.Size(1, 1);
+            var bordersize = new VA.Geometry.Size(1, 1);
             page.ResizeToFitContents(bordersize);
         }
     }

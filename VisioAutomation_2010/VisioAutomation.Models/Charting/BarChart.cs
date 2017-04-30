@@ -6,13 +6,13 @@ namespace VisioAutomation.Models.Charting
 {
     public class BarChart
     {
-        public Drawing.Rectangle Rectangle;
+        public Geometry.Rectangle Rectangle;
         public DataPointList DataPoints;
         public double TotalBarWidth;
         public double TotalMarginWidth;
         public double TotalBarSpacingWidth;
  
-        public BarChart(Drawing.Rectangle rect)
+        public BarChart(Geometry.Rectangle rect)
         {
             this.Rectangle = rect;
             this.DataPoints = new DataPointList();
@@ -42,29 +42,29 @@ namespace VisioAutomation.Models.Charting
                 base_y += System.Math.Abs(this.Rectangle.Height * (min / range));
             }
 
-            var category_axis_start_point = new Drawing.Point(this.Rectangle.Left, base_y);
-            var category_axis_end_point = new Drawing.Point(this.Rectangle.Right, base_y);
+            var category_axis_start_point = new Geometry.Point(this.Rectangle.Left, base_y);
+            var category_axis_end_point = new Geometry.Point(this.Rectangle.Right, base_y);
             var category_axis_shape = page.DrawLine(category_axis_start_point, category_axis_end_point);
 
             foreach (var p in this.DataPoints)
             {
                 var value_height = System.Math.Abs(this.Rectangle.Height*(p.Value/range));
 
-                Drawing.Point bar_p0;
-                Drawing.Point bar_p1;
+                Geometry.Point bar_p0;
+                Geometry.Point bar_p1;
 
                 if (p.Value >= 0.0)
                 {
-                    bar_p0 = new Drawing.Point(cur_x, base_y);
-                    bar_p1 = new Drawing.Point(cur_x + bar_width, base_y + value_height);
+                    bar_p0 = new Geometry.Point(cur_x, base_y);
+                    bar_p1 = new Geometry.Point(cur_x + bar_width, base_y + value_height);
                 }
                 else
                 {
-                    bar_p0 = new Drawing.Point(cur_x, base_y - value_height);
-                    bar_p1 = new Drawing.Point(cur_x + bar_width, base_y);                    
+                    bar_p0 = new Geometry.Point(cur_x, base_y - value_height);
+                    bar_p1 = new Geometry.Point(cur_x + bar_width, base_y);                    
                 }
                 
-                var bar_rect = new Drawing.Rectangle(bar_p0, bar_p1);
+                var bar_rect = new Geometry.Rectangle(bar_p0, bar_p1);
                 var shape = page.DrawRectangle(bar_rect);
                 p.VisioShape = shape;
 

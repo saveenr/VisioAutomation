@@ -5,10 +5,10 @@ namespace VisioScripting.Extensions
     static class XmlLinqExtensions
     {
 
-        public static VisioAutomation.Drawing.ColorRgb AttributeAsColor(this SXL.XElement el, string name,
-            VisioAutomation.Drawing.ColorRgb def)
+        public static VisioAutomation.Geometry.ColorRgb AttributeAsColor(this SXL.XElement el, string name,
+            VisioAutomation.Geometry.ColorRgb def)
         {
-            return el.GetAttributeValue(name, def, VisioAutomation.Drawing.ColorRgb.ParseWebColor);
+            return el.GetAttributeValue(name, def, VisioAutomation.Geometry.ColorRgb.ParseWebColor);
         }
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)

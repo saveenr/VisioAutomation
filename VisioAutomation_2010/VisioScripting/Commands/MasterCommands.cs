@@ -155,7 +155,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape Drop(IVisio.Master master, VisioAutomation.Drawing.Point p)
+        public IVisio.Shape Drop(IVisio.Master master, VisioAutomation.Geometry.Point p)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -166,7 +166,7 @@ namespace VisioScripting.Commands
             return shape;
         }
 
-        public short[] Drop(IList<IVisio.Master> masters, IList<VisioAutomation.Drawing.Point> points)
+        public short[] Drop(IList<IVisio.Master> masters, IList<VisioAutomation.Geometry.Point> points)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

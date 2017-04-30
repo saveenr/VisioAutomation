@@ -23,7 +23,7 @@ namespace VisioPowerShell.Commands
         {
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
-            var points = VisioAutomation.Drawing.Point.FromDoubles(this.Points).ToList();
+            var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
             var shape_ids = this.Client.Master.Drop(this.Masters, points);
 
             var page = this.Client.Page.Get();

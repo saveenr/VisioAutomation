@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Test_Resize_Application_Window2()
         {
             var client = this.GetScriptingClient();
-            var page_size = new VisioAutomation.Drawing.Size(10,5);
+            var page_size = new VisioAutomation.Geometry.Size(10,5);
             var doc = client.Document.New(page_size);
 
             Assert.IsTrue(client.Document.HasActiveDocument);
@@ -58,7 +58,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Undo_Scenarios()
         {
             var client = this.GetScriptingClient();
-            var page_size = new VisioAutomation.Drawing.Size(8.5,11);
+            var page_size = new VisioAutomation.Geometry.Size(8.5,11);
             var drawing = client.Document.New(page_size);
             var page = client.Page.New(page_size, false);
             Assert.AreEqual(0, page.Shapes.Count);
@@ -72,7 +72,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_CloseDocument_Scenarios()
         {
-            var page_size = new VisioAutomation.Drawing.Size(8.5, 11);
+            var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc1 = client.Document.New(page_size);
             var doc2 = client.Document.New(page_size);

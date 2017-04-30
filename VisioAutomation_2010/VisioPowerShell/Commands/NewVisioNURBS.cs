@@ -21,7 +21,7 @@ namespace VisioPowerShell.Commands
         
         protected override void ProcessRecord()
         {
-            var points = VA.Drawing.Point.FromDoubles(this.ControlPoints).ToList();
+            var points = VA.Geometry.Point.FromDoubles(this.ControlPoints).ToList();
             var shape = this.Client.Draw.NURBSCurve(points, this.Knots, this.Weights, this.Degree);
             this.WriteObject(shape);
         }

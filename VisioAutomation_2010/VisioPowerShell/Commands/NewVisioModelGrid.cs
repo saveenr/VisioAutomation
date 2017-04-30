@@ -37,9 +37,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var cellsize = new VA.Drawing.Size(this.CellWidth, this.CellHeight);
+            var cellsize = new VA.Geometry.Size(this.CellWidth, this.CellHeight);
             var layout = new GridLayout(this.Columns, this.Rows, cellsize, this.Master);
-            layout.CellSpacing = new VA.Drawing.Size(this.CellHorizontalSpacing, this.CellVerticalSpacing);
+            layout.CellSpacing = new VA.Geometry.Size(this.CellHorizontalSpacing, this.CellVerticalSpacing);
             layout.RowDirection = this.RowDirection;
             layout.ColumnDirection = this.ColumnDirection;
             this.WriteObject(layout);

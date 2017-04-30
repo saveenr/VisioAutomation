@@ -24,7 +24,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.FitContents)
             {
-                var bordersize = new VisioAutomation.Drawing.Size(this.BorderWidth, this.BorderWidth);
+                var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderWidth);
                 this.Client.Page.ResizeToFitContents(bordersize, true);                
             }
 

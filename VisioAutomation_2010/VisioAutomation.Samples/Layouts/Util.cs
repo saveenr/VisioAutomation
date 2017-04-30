@@ -21,7 +21,7 @@ namespace VisioAutomationSamples
 
             var root_shape = (Microsoft.Office.Interop.Visio.Shape)layout.Root.Data;
             root_shape.CellsU["FillForegnd"].FormulaForceU = "rgb(240,240,240)";
-            var margin = new VisioAutomation.Drawing.Size(0.5, 0.5);
+            var margin = new VisioAutomation.Geometry.Size(0.5, 0.5);
             page1.ResizeToFitContents(margin);
 
         }

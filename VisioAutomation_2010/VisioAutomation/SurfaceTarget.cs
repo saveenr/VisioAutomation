@@ -95,7 +95,7 @@ namespace VisioAutomation
             }
         }
 
-        public IVisio.Shape DrawLine(VisioAutomation.Drawing.Point p1, VisioAutomation.Drawing.Point p2)
+        public IVisio.Shape DrawLine(VisioAutomation.Geometry.Point p1, VisioAutomation.Geometry.Point p2)
         {
 
             if (this.Master != null)
@@ -118,9 +118,9 @@ namespace VisioAutomation
 
         }
 
-        public IVisio.Shape DrawPolyLine(IList<VisioAutomation.Drawing.Point> points)
+        public IVisio.Shape DrawPolyLine(IList<VisioAutomation.Geometry.Point> points)
         {
-            var doubles_array = VisioAutomation.Drawing.Point.ToDoubles(points).ToArray();
+            var doubles_array = VisioAutomation.Geometry.Point.ToDoubles(points).ToArray();
 
             if (this.Master != null)
             {
@@ -141,9 +141,9 @@ namespace VisioAutomation
             throw new System.ArgumentException("Unhandled Drawing Surface");
         }
 
-        public IVisio.Shape DrawBezier(IList<VisioAutomation.Drawing.Point> points, short degree, short flags)
+        public IVisio.Shape DrawBezier(IList<VisioAutomation.Geometry.Point> points, short degree, short flags)
         {
-            var doubles_array = VisioAutomation.Drawing.Point.ToDoubles(points).ToArray();
+            var doubles_array = VisioAutomation.Geometry.Point.ToDoubles(points).ToArray();
 
             if (this.Master != null)
             {
@@ -165,7 +165,7 @@ namespace VisioAutomation
 
         }
 
-        public IVisio.Shape DrawBezier(IList<VisioAutomation.Drawing.Point> points)
+        public IVisio.Shape DrawBezier(IList<VisioAutomation.Geometry.Point> points)
         {
             short degree = 3;
             short flags = 0;
@@ -173,7 +173,7 @@ namespace VisioAutomation
             return shape;
         }
 
-        public IVisio.Shape DrawOval(VisioAutomation.Drawing.Rectangle rect)
+        public IVisio.Shape DrawOval(VisioAutomation.Geometry.Rectangle rect)
         {
             if (this.Master != null)
             {
@@ -194,16 +194,16 @@ namespace VisioAutomation
             throw new System.ArgumentException("Unhandled Drawing Surface");
         }
 
-        public IVisio.Shape DrawOval(VisioAutomation.Drawing.Point center, double radius)
+        public IVisio.Shape DrawOval(VisioAutomation.Geometry.Point center, double radius)
         {
             var lower_left = center.Add(-radius, -radius);
             var upper_right = center.Add(radius, radius);
-            var rect = new VisioAutomation.Drawing.Rectangle(lower_left, upper_right);
+            var rect = new VisioAutomation.Geometry.Rectangle(lower_left, upper_right);
 
             return this.DrawOval(rect);
         }
 
-        public IVisio.Shape DrawRectangle(VisioAutomation.Drawing.Rectangle rect)
+        public IVisio.Shape DrawRectangle(VisioAutomation.Geometry.Rectangle rect)
         {
             var shape = this.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
             return shape;
@@ -255,7 +255,7 @@ namespace VisioAutomation
             
         }
 
-        public IVisio.Shape DrawNURBS(IList<VisioAutomation.Drawing.Point> controlpoints,
+        public IVisio.Shape DrawNURBS(IList<VisioAutomation.Geometry.Point> controlpoints,
             IList<double> knots,
             IList<double> weights, int degree)
         {
@@ -264,7 +264,7 @@ namespace VisioAutomation
             // IVisio.VisDrawSplineFlags.visSpline1D
 
             var flags = 0;
-            double[] pts_dbl_a = VisioAutomation.Drawing.Point.ToDoubles(controlpoints).ToArray();
+            double[] pts_dbl_a = VisioAutomation.Geometry.Point.ToDoubles(controlpoints).ToArray();
             double[] kts_dbl_a = knots.ToArray();
             double[] weights_dbl_a = weights.ToArray();
 
@@ -290,7 +290,7 @@ namespace VisioAutomation
 
         public short[] DropManyU(
             IList<IVisio.Master> masters,
-            IEnumerable<VisioAutomation.Drawing.Point> points)
+            IEnumerable<VisioAutomation.Geometry.Point> points)
         {
             if (masters == null)
             {
@@ -309,7 +309,7 @@ namespace VisioAutomation
 
             // NOTE: DropMany will fail if you pass in zero items to drop
             var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = VisioAutomation.Drawing.Point.ToDoubles(points).ToArray();
+            var xy_array = VisioAutomation.Geometry.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 
@@ -336,7 +336,7 @@ namespace VisioAutomation
 
         public IVisio.Shape Drop(
             IVisio.Master master,
-            VisioAutomation.Drawing.Point point)
+            VisioAutomation.Geometry.Point point)
         {
             if (master == null)
             {
@@ -360,7 +360,7 @@ namespace VisioAutomation
             
         }
 
-        public IVisio.Shape DrawQuarterArc(VisioAutomation.Drawing.Point p0, VisioAutomation.Drawing.Point p1, IVisio.VisArcSweepFlags flags)
+        public IVisio.Shape DrawQuarterArc(VisioAutomation.Geometry.Point p0, VisioAutomation.Geometry.Point p1, IVisio.VisArcSweepFlags flags)
         {
             if (this.Master != null)
             {
@@ -379,7 +379,7 @@ namespace VisioAutomation
             
         }
 
-        public VisioAutomation.Drawing.Rectangle GetBoundingBox(IVisio.VisBoundingBoxArgs args)
+        public VisioAutomation.Geometry.Rectangle GetBoundingBox(IVisio.VisBoundingBoxArgs args)
         {
             double bbx0, bby0, bbx1, bby1;
             if (this.Master != null)
@@ -399,7 +399,7 @@ namespace VisioAutomation
                 throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
-            var r = new VisioAutomation.Drawing.Rectangle(bbx0, bby0, bbx1, bby1);
+            var r = new VisioAutomation.Geometry.Rectangle(bbx0, bby0, bbx1, bby1);
             return r;
         }
 
