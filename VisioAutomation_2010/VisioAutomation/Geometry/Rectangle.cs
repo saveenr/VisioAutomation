@@ -89,17 +89,17 @@
         public double Height => this.Top - this.Bottom;
         public Point Center => new Point((this.Left + this.Right)/2.0, (this.Bottom + this.Top)/2.0);
 
-        public static Rectangle operator +(Rectangle r, Point p) => r.Add(p.X, p.Y);
-        public static Rectangle operator -(Rectangle r, Point p) => r.Subtract(p.X, p.Y);
-        public static Rectangle operator *(Rectangle r, double s) => r.Multiply(s, s);
+        public static Rectangle operator +(Rectangle left, Point right) => left.Add(right.X, right.Y);
+        public static Rectangle operator -(Rectangle left, Point right) => left.Subtract(right.X, right.Y);
+        public static Rectangle operator *(Rectangle left, double right) => left.Multiply(right, right);
 
         public Rectangle Add(double dx, double dy) => new Rectangle(this.Left + dx, this.Bottom + dy, this.Right + dx, this.Top + dy);
-        public Rectangle Add(Size s) => new Rectangle(this.Left + s.Width, this.Bottom + s.Height, this.Right + s.Width, this.Top + s.Height);
-        public Rectangle Add(Point s) => new Rectangle(this.Left + s.X, this.Bottom + s.Y, this.Right + s.X, this.Top + s.Y);
+        public Rectangle Add(Size s) => this.Add(s.Width,s.Height);
+        public Rectangle Add(Point s) => this.Add(s.X, s.Y);
 
         public Rectangle Subtract(double dx, double dy) => new Rectangle(this.Left - dx, this.Bottom - dy, this.Right - dx, this.Top - dy);
-        public Rectangle Subtract(Size s) => new Rectangle(this.Left - s.Width, this.Bottom - s.Height, this.Right - s.Width, this.Top - s.Height);
-        public Rectangle Subtract(Point s) => new Rectangle(this.Left - s.X, this.Bottom - s.Y, this.Right - s.X, this.Top - s.Y);
+        public Rectangle Subtract(Size s) => this.Subtract(s.Width, s.Height);
+        public Rectangle Subtract(Point s) => this.Subtract(s.X, s.Y);
 
         public Rectangle Multiply(double sx, double sy) => new Rectangle(this.Left*sx, this.Bottom*sy, this.Right*sx, this.Top*sy);
     }

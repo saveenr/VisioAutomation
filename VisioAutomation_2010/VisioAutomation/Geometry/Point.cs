@@ -21,22 +21,23 @@ namespace VisioAutomation.Geometry
             return s;
         }
 
-        public static Point operator -(Point pa, Point pb) => pa.Subtract(pb);
-        public static Point operator +(Point pa, Point pb) => pa.Add(pb);
-        public static Point operator *(Point pa, double s) => pa.Multiply(s, s);
-        public static Point operator *(Point pa, Size s) => pa.Multiply(s);
-        public static Point operator *(Point pa, Point pb) => pa.Multiply(pb.X, pb.Y);
+        public static Point operator -(Point left, Point right) => left.Subtract(right);
+        public static Point operator +(Point left, Point right) => left.Add(right);
+        public static Point operator *(Point left, double right) => left.Multiply(right, right);
+        public static Point operator *(Point left, Size right) => left.Multiply(right);
+        public static Point operator *(Point left, Point right) => left.Multiply(right.X, right.Y);
 
         public Point Add(double dx, double dy) => new Point(this.X + dx, this.Y + dy);
-        public Point Add(Point p) => new Point(this.X + p.X, this.Y + p.Y);
-        public Point Add(Size s) => new Point(this.X + s.Width, this.Y + s.Height);
+        public Point Add(Point p) => this.Add(p.X, p.Y);
+        public Point Add(Size s) => this.Add(s.Width, s.Height);
 
         public Point Subtract(double dx, double dy) => new Point(this.X - dx, this.Y - dy);
-        public Point Subtract(Size s) => new Point(this.X - s.Width, this.Y - s.Height);
-        public Point Subtract(Point p) => new Point(this.X - p.X, this.Y - p.Y);
+        public Point Subtract(Size s) => this.Subtract(s.Width, s.Height);
+        public Point Subtract(Point p) => this.Subtract(p.X, p.Y);
 
         public Point Multiply(double sx, double sy) => new Point(this.X*sx, this.Y*sy);
-        public Point Multiply(Size s) => new Point(this.X*s.Width, this.Y*s.Height);
+        public Point Multiply(Size s) => this.Multiply(s.Width, s.Height);
+        public Point Multiply(Point p) => this.Multiply(p.X, p.Y);
 
         public Point Divide(double sx, double sy) => new Point(this.X/sx, this.Y/sy);
 

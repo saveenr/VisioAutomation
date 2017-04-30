@@ -26,18 +26,21 @@
             return s;
         }
 
-        public Size Multiply(double amount) => new Size(this.Width*amount, this.Height*amount);
-        public Size Multiply(double width, double height) => new Size(this.Width*width, this.Height*height);
+        public Size Multiply(double sx, double sy) => new Size(this.Width*sx, this.Height*sy);
+        public Size Multiply(double amount) => this.Multiply(amount, amount);
+        public Size Multiply(Size s) => this.Multiply(s.Width, s.Height);
 
-        public Size Divide(double amount) => new Size(this.Width/amount, this.Height/amount);
+        public Size Divide(double sx, double sy) => new Size(this.Width / sx, this.Height / sy);
+        public Size Divide(double amount) => this.Divide(amount, amount);
+        public Size Divide(Size s) => this.Divide(s.Width, s.Height);
 
-        public Size Add(Point point) => new Size(this.Width + point.X, this.Height + point.Y);
-        public Size Add(Size size) => new Size(this.Width + size.Width, this.Height + size.Height);
-        public Size Add(double width, double height) => new Size(this.Width + width, this.Height + height);
+        public Size Add(double dx, double dy) => new Size(this.Width + dx, this.Height + dy);
+        public Size Add(Point p) => this.Add(p.X, p.Y);
+        public Size Add(Size s) => this.Add(s.Width, s.Height);
 
-        public static Size operator +(Size size, Point point) => size.Add(point);
-        public static Size operator +(Size left_size, Size right_size) => left_size.Add(right_size);
-        public static Size operator *(Size left_size, double right_size) => left_size.Multiply(right_size);
-        public static Size operator /(Size left_size, double right_size) => left_size.Divide(right_size);
+        public static Size operator +(Size left, Point right) => left.Add(right);
+        public static Size operator +(Size left, Size right) => left.Add(right);
+        public static Size operator *(Size left, double right) => left.Multiply(right);
+        public static Size operator /(Size left, double right) => left.Divide(right);
     }
 }
