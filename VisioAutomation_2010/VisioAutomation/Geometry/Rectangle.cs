@@ -91,7 +91,7 @@
 
         public static Rectangle operator +(Rectangle left, Point right) => left.Add(right.X, right.Y);
         public static Rectangle operator -(Rectangle left, Point right) => left.Subtract(right.X, right.Y);
-        public static Rectangle operator *(Rectangle left, double right) => left.Multiply(right, right);
+        public static Rectangle operator *(Rectangle left, Point right) => left.Multiply(right.X, right.Y);
 
         public Rectangle Add(double dx, double dy) => new Rectangle(this.Left + dx, this.Bottom + dy, this.Right + dx, this.Top + dy);
         public Rectangle Add(Size s) => this.Add(s.Width,s.Height);
