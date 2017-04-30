@@ -136,7 +136,7 @@ namespace VisioScripting.Commands
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
                 this._client.WriteVerbose("Not a Drawing Window", doc.Name);
-                throw new AutomationException("Not a Drawing Window");
+                throw new System.ArgumentException("Not a Drawing Window");
             }
 
             this._client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
