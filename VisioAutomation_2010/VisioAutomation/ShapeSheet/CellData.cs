@@ -1,3 +1,5 @@
+using Microsoft.Office.Interop.Visio;
+
 namespace VisioAutomation.ShapeSheet
 {
     public struct CellData
@@ -5,16 +7,16 @@ namespace VisioAutomation.ShapeSheet
         public string Formula { get; }
         public string Result { get; }
 
-        public CellData(CellValueLiteral formula, string result)
+        public CellData(string formula, string result)
             : this()
         {
-            this.Formula = formula.Value;
+            this.Formula = formula;
             this.Result = result;
         }
 
         public override string ToString()
         {
-            var formula_string = (this.Formula!=null) ? this.Formula : "null";
+            var formula_string = this.Formula ?? "null";
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
             var format = "(\"{0}\",{1})";
             return string.Format(invariant_culture,format, formula_string, this.Result);
@@ -22,7 +24,7 @@ namespace VisioAutomation.ShapeSheet
 
         public static implicit operator CellData(CellValueLiteral formula)
         {
-            return new CellData(formula,default(string));
+            return new CellData(formula.Value, default(string));
         }
 
         public static implicit operator CellData(string formula)
@@ -32,17 +34,20 @@ namespace VisioAutomation.ShapeSheet
 
         public static implicit operator CellData(int formula)
         {
-            return new CellData(formula, default(string));
+            var cv = (CellValueLiteral) formula;
+            return new CellData(cv.Value, default(string));
         }
 
         public static implicit operator CellData(double formula)
         {
-            return new CellData(formula, default(string));
+            var cv = (CellValueLiteral)formula;
+            return new CellData(cv.Value, default(string));
         }
 
         public static implicit operator CellData(bool formula)
         {
-            return new CellData(formula, default(string));
+            var cv = (CellValueLiteral)formula;
+            return new CellData(cv.Value, default(string));
         }
     }
 }
