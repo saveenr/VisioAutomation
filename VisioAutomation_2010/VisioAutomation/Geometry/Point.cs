@@ -21,88 +21,24 @@ namespace VisioAutomation.Geometry
             return s;
         }
 
-        public static Point operator -(Point pa, Point pb)
-        {
-            var result = new Point(pa.X - pb.X, pa.Y - pb.Y);
-            return result;
-        }
+        public static Point operator -(Point pa, Point pb) => pa.Subtract(pb);
+        public static Point operator +(Point pa, Point pb) => pa.Add(pb);
+        public static Point operator *(Point pa, double s) => pa.Multiply(s, s);
+        public static Point operator *(Point pa, Size s) => pa.Multiply(s);
+        public static Point operator *(Point pa, Point pb) => pa.Multiply(pb.X, pb.Y);
 
-        public static Point operator +(Point pa, Point pb)
-        {
-            var result = new Point(pa.X + pb.X, pa.Y + pb.Y);
-            return result;
-        }
+        public Point Add(double dx, double dy) => new Point(this.X + dx, this.Y + dy);
+        public Point Add(Point p) => new Point(this.X + p.X, this.Y + p.Y);
+        public Point Add(Size s) => new Point(this.X + s.Width, this.Y + s.Height);
 
-        public static Point operator *(Point pa, double s)
-        {
-            var result = new Point(pa.X*s, pa.Y*s);
-            return result;
-        }
+        public Point Subtract(double dx, double dy) => new Point(this.X - dx, this.Y - dy);
+        public Point Subtract(Size s) => new Point(this.X - s.Width, this.Y - s.Height);
+        public Point Subtract(Point p) => new Point(this.X - p.X, this.Y - p.Y);
 
-        public static Point operator *(Point pa, Size s)
-        {
-            var result = new Point(pa.X*s.Width, pa.Y*s.Height);
-            return result;
-        }
+        public Point Multiply(double sx, double sy) => new Point(this.X*sx, this.Y*sy);
+        public Point Multiply(Size s) => new Point(this.X*s.Width, this.Y*s.Height);
 
-        public Point Add(double dx, double dy)
-        {
-            var new_point = new Point(this.X + dx, this.Y + dy);
-            return new_point;
-        }
-
-        public Point Subtract(double dx, double dy)
-        {
-            var new_point = new Point(this.X - dx, this.Y - dy);
-            return new_point;
-        }
-
-        public Point Add(Point p)
-        {
-            var new_point = new Point(this.X + p.X, this.Y + p.Y);
-            return new_point;
-        }
-
-        public Point Subtract(Point p)
-        {
-            var new_point = new Point(this.X - p.X, this.Y - p.Y);
-            return new_point;
-        }
-
-        public Point Add(Size s)
-        {
-            var new_point = new Point(this.X + s.Width, this.Y + s.Height);
-            return new_point;
-        }
-
-        public Point Subtract(Size s)
-        {
-            var new_point = new Point(this.X - s.Width, this.Y - s.Height);
-            return new_point;
-        }
-
-        public static Point operator *(Point pa, Point pb)
-        {
-            return pa.Multiply(pb.X, pb.Y);
-        }
-
-        public Point Multiply(double sx, double sy)
-        {
-            var new_point = new Point(this.X*sx, this.Y*sy);
-            return new_point;
-        }
-
-        public Point Multiply(Size s)
-        {
-            var new_point = new Point(this.X*s.Width, this.Y*s.Height);
-            return new_point;
-        }
-
-        public Point Divide(double sx, double sy)
-        {
-            var new_point = new Point(this.X/sx, this.Y/sy);
-            return new_point;
-        }
+        public Point Divide(double sx, double sy) => new Point(this.X/sx, this.Y/sy);
 
         public static IEnumerable<Point> FromDoubles(IEnumerable<double> doubles)
         {
