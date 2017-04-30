@@ -44,22 +44,5 @@ namespace VisioAutomation.ShapeSheet
         {
             return new CellData(formula, default(string));
         }
-
-        public static CellData[] Combine(string[] formulas, string[] results)
-        {
-            int n = results.Length;
-
-            if (formulas.Length != results.Length)
-            {
-                throw new System.ArgumentException("Array Lengths must match");
-            }
-
-            var combined_data = new ShapeSheet.CellData[n];
-            for (int i = 0; i < n; i++)
-            {
-                combined_data[i] = new ShapeSheet.CellData(formulas[i], results[i]);
-            }
-            return combined_data;
-        }
     }
 }

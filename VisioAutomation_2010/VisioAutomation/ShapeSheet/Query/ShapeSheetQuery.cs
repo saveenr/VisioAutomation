@@ -95,6 +95,23 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetFormulasAndResults(surface);
         }
 
+        private static CellData[] _combine_formulas_and_results(string[] formulas, string[] results)
+        {
+            int n = results.Length;
+
+            if (formulas.Length != results.Length)
+            {
+                throw new System.ArgumentException("Array Lengths must match");
+            }
+
+            var combined_data = new ShapeSheet.CellData[n];
+            for (int i = 0; i < n; i++)
+            {
+                combined_data[i] = new ShapeSheet.CellData(formulas[i], results[i]);
+            }
+            return combined_data;
+        }
+
         public QueryOutput<ShapeSheet.CellData> GetFormulasAndResults(ShapeSheetSurface surface)
         {
             RestrictToShapesOnly(surface);
@@ -106,7 +123,7 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var formulas = surface.GetFormulasU(srcstream);
             var results = surface.GetResults<string>(srcstream, unitcodes);
-            var combined_data = CellData.Combine(formulas, results);
+            var combined_data = _combine_formulas_and_results(formulas, results);
 
             var shape_index = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index, _cache);
@@ -170,7 +187,7 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var results = surface.GetResults<string>(srcstream, unitcodes);
             var formulas  = surface.GetFormulasU(srcstream);
-            var combined_data = CellData.Combine(formulas, results);
+            var combined_data = _combine_formulas_and_results(formulas, results);
 
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<CellData>(combined_data);
             var r = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
