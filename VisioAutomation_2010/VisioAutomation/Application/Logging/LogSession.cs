@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Logging
+namespace VisioAutomation.Application.Logging
 {
     public class LogSession
     {

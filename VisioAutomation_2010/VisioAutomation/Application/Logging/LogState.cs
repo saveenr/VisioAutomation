@@ -1,4 +1,4 @@
-namespace VisioAutomation.Logging
+namespace VisioAutomation.Application.Logging
 {
     enum LogState
     {

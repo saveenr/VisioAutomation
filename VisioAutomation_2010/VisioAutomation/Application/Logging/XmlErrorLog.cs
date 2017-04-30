@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.Logging
+namespace VisioAutomation.Application.Logging
 {
     public class XmlErrorLog
     {
