@@ -10,7 +10,7 @@ namespace VisioScripting.Models
         public string Label;
         public string Stencil;
         public string Master;
-        public string URL;
+        public string Url;
         public SXL.XElement Element;
 
         public CustomPropertyDictionary custprops;
@@ -25,7 +25,7 @@ namespace VisioScripting.Models
             info.Stencil = shape_el.Attribute("stencil").Value;
             info.Master = shape_el.Attribute("master").Value;
             info.Element = shape_el;
-            info.URL = shape_el.GetAttributeValue("url", null);
+            info.Url = shape_el.GetAttributeValue("url", null);
 
             info.custprops = new CustomPropertyDictionary();
             foreach (var customprop_el in shape_el.Elements("customprop"))

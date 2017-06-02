@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.DocumentAnalysis;
 using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -13,7 +12,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            var pagesize = new VA.Drawing.Size(4, 4);
+            var pagesize = new VA.Geometry.Size(4, 4);
             client.Page.New(pagesize, false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
@@ -70,7 +69,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            var pagesize = new VA.Drawing.Size(4, 4);
+            var pagesize = new VA.Geometry.Size(4, 4);
             client.Page.New(pagesize, false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);

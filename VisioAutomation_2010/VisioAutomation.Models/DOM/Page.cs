@@ -9,9 +9,9 @@ namespace VisioAutomation.Models.Dom
     public class Page : Node
     {
         public ShapeList Shapes { get; }
-        public Drawing.Size? Size;
+        public Geometry.Size? Size;
         public bool ResizeToFit;
-        public Drawing.Size? ResizeToFitMargin;
+        public Geometry.Size? ResizeToFitMargin;
         public Pages.PageFormatCells PageFormatCells;
         public Pages.PageLayoutCells PageLayoutCells;
         public string Name;

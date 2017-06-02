@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
 {
@@ -10,7 +9,7 @@ namespace VisioScripting.Commands
         // for a the current context
         protected readonly Client _client;
 
-        public CommandSet(Client client)
+        internal CommandSet(Client client)
         {
             this._client = client;
         }

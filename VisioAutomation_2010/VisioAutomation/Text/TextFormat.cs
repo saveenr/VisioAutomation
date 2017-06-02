@@ -5,8 +5,8 @@ namespace VisioAutomation.Text
 {
     public class TextFormat
     {
-        public List<CharacterCells> CharacterFormats { get; private set; }
-        public List<ParagraphCells> ParagraphFormats { get; private set; }
+        public List<CharacterFormatCells> CharacterFormats { get; private set; }
+        public List<ParagraphFormatCells> ParagraphFormats { get; private set; }
         public TextBlockCells TextBlock { get; private set; }
         public TextXFormCells TextXForm { get; private set; }
         public List<TextRun> CharacterTextRuns { get; private set; }
@@ -68,8 +68,8 @@ namespace VisioAutomation.Text
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
             var cells = new TextFormat();
-            cells.CharacterFormats = CharacterCells.GetCells(shape);
-            cells.ParagraphFormats = ParagraphCells.GetCells(shape);
+            cells.CharacterFormats = CharacterFormatCells.GetCells(shape);
+            cells.ParagraphFormats = ParagraphFormatCells.GetCells(shape);
             cells.TextBlock = TextBlockCells.GetCells(shape);
             if (HasTextXFormCells(shape))
             {
@@ -92,8 +92,8 @@ namespace VisioAutomation.Text
 
         public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
         {
-            var charcells = CharacterCells.GetCells(page, shapeids);
-            var paracells = ParagraphCells.GetCells(page, shapeids);
+            var charcells = CharacterFormatCells.GetCells(page, shapeids);
+            var paracells = ParagraphFormatCells.GetCells(page, shapeids);
             var textblockcells = TextBlockCells.GetCells(page, shapeids);
             var page_shapes = page.Shapes;
             var formats = new List<TextFormat>(shapeids.Count);

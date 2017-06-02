@@ -14,11 +14,11 @@ namespace VisioPowerShell.Models
         internal ConnectionPoint(int shapeid, ConnectionPointCells point)
         {
             this.ShapeID = shapeid;
-            this.Type = point.Type.Formula.Value;
-            this.X = point.X.Formula.Value;
-            this.Y = point.Y.Formula.Value;
-            this.DirX = point.DirX.Formula.Value;
-            this.DirY = point.DirY.Formula.Value;
+            this.Type = point.Type.Formula;
+            this.X = point.X.Formula;
+            this.Y = point.Y.Formula;
+            this.DirX = point.DirX.Formula;
+            this.DirY = point.DirY.Formula;
         }
     }
 }

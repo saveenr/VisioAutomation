@@ -4,13 +4,13 @@ namespace VisioAutomation.Models.Documents.OrgCharts
     {
         public LayoutOptions()
         {
-            this.DefaultNodeSize = new Drawing.Size(2, 0.5);
+            this.DefaultNodeSize = new Geometry.Size(2, 0.5);
             this.Direction = LayoutDirection.Down;
             this.UseDynamicConnectors = true;
         }
 
         public bool UseDynamicConnectors { get; set; }
         public LayoutDirection Direction { get; set; }
-        public Drawing.Size DefaultNodeSize { get; set; }
+        public Geometry.Size DefaultNodeSize { get; set; }
     }
 }

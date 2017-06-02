@@ -18,17 +18,17 @@
 
         public void Commit(Microsoft.Office.Interop.Visio.Shape shape)
         {
-            var surface = new ShapeSheetSurface(shape);
+            var surface = new SurfaceTarget(shape);
             this.Commit(surface);
         }
 
         public void Commit(Microsoft.Office.Interop.Visio.Page page)
         {
-            var surface = new ShapeSheetSurface(page);
+            var surface = new SurfaceTarget(page);
             this.Commit(surface);
         }
 
-        public void Commit(VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
+        public void Commit(VisioAutomation.SurfaceTarget surface)
         {
             this.CommitFormulas(surface);
             this.CommitResults(surface);
@@ -65,7 +65,7 @@
             return builder.ToStream();
         }
 
-        private void CommitFormulas(ShapeSheetSurface surface)
+        private void CommitFormulas(SurfaceTarget surface)
         {
             if ((this._formulaRecords == null || this._formulaRecords.Count < 1))
             {
@@ -101,7 +101,7 @@
             this._resultRecords.Add(sidsrc, result.Value);
         }
 
-        private void CommitResults(ShapeSheetSurface surface)
+        private void CommitResults(SurfaceTarget surface)
         {
             if ((this._resultRecords == null || this._resultRecords.Count < 1))
             {

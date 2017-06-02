@@ -12,11 +12,11 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class MsaglRenderer
     {
-        private VA.Drawing.Rectangle _mg_bb;
-        private VA.Drawing.Rectangle _layout_bb;
+        private VA.Geometry.Rectangle _mg_bb;
+        private VA.Geometry.Rectangle _layout_bb;
 
         public Dom.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
-        public VA.Drawing.Size DefaultBezierConnectorLabelBoxSize { get; set; }
+        public VA.Geometry.Size DefaultBezierConnectorLabelBoxSize { get; set; }
         public MsaglLayoutOptions LayoutOptions { get; set; }
 
         private double ScaleToMsagl
@@ -37,22 +37,22 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             this.DefaultBezierConnectorShapeCells.LinePattern = 0;
             this.DefaultBezierConnectorShapeCells.LineWeight = 0.0;
             this.DefaultBezierConnectorShapeCells.FillPattern = 0;
-            this.DefaultBezierConnectorLabelBoxSize = new VA.Drawing.Size(1.0, 0.5);
+            this.DefaultBezierConnectorLabelBoxSize = new VA.Geometry.Size(1.0, 0.5);
         }
 
-        private VA.Drawing.Point ToDocumentCoordinates(VA.Drawing.Point point)
+        private VA.Geometry.Point ToDocumentCoordinates(VA.Geometry.Point point)
         {
             var np = point.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
             return np;
         }
 
-        private VA.Drawing.Rectangle ToDocumentCoordinates(VA.Drawing.Rectangle rect)
+        private VA.Geometry.Rectangle ToDocumentCoordinates(VA.Geometry.Rectangle rect)
         {
             var nr = rect.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
             return nr;
         }
 
-        private VA.Drawing.Size ToMGCoordinates(VA.Drawing.Size s)
+        private VA.Geometry.Size ToMGCoordinates(VA.Geometry.Size s)
         {
             return s.Multiply(this.ScaleToMsagl, this.ScaleToMsagl);
         }
@@ -148,13 +148,13 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             //Update the graphs bounding box
             mg_graph.UpdateBoundingBox();
 
-            this._mg_bb = new VA.Drawing.Rectangle(
+            this._mg_bb = new VA.Geometry.Rectangle(
                 mg_graph.BoundingBox.Left, 
                 mg_graph.BoundingBox.Bottom,
                 mg_graph.BoundingBox.Right,
                 mg_graph.BoundingBox.Top);
             
-            this._layout_bb = new VA.Drawing.Rectangle(0, 0, this._mg_bb.Width, this._mg_bb.Height)
+            this._layout_bb = new VA.Geometry.Rectangle(0, 0, this._mg_bb.Width, this._mg_bb.Height)
                 .Multiply(this.ScaleToDocument, this.ScaleToDocument);
 
             return mg_graph;
@@ -205,7 +205,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // loading the specified stenciles
 
             var documents = app.Documents;
-            var master_to_size = new Dictionary<IVisio.Master, VA.Drawing.Size>();
+            var master_to_size = new Dictionary<IVisio.Master, VA.Geometry.Size>();
 
             // Load and cache all the masters
             var master_cache = new MasterCache();
@@ -453,15 +453,15 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
 
             // ADD URL
-            if (!string.IsNullOrEmpty(layout_shape.URL))
+            if (!string.IsNullOrEmpty(layout_shape.Url))
             {
-                var hyperlink = new Dom.Hyperlink("Row_1", layout_shape.URL);
+                var hyperlink = new Dom.Hyperlink("Row_1", layout_shape.Url);
                 shape_node.Hyperlinks = new List<Dom.Hyperlink> {hyperlink};
             }
 
             if ((layout_shape.Hyperlinks != null))
             {
-                //var hyperlink = new VA.DOM.Hyperlink("Row_1", layout_shape.URL);
+                //var hyperlink = new VA.DOM.Hyperlink("Row_1", layout_shape.Url);
                 shape_node.Hyperlinks = layout_shape.Hyperlinks;
             }
 

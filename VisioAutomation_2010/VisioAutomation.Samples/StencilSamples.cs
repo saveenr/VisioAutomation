@@ -14,7 +14,7 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             // Resize the page to a sqaure
-            var page_size = new VA.Drawing.Size(4, 4);
+            var page_size = new VA.Geometry.Size(4, 4);
             SampleEnvironment.SetPageSize(page,page_size);
 
             // Load the Stencil
@@ -28,12 +28,12 @@ namespace VisioAutomationSamples
             int num_cols = 10;
             int num_rows = 10;
 
-            var centerpoints = new List<VA.Drawing.Point>(num_rows*num_cols);
+            var centerpoints = new List<VA.Geometry.Point>(num_rows*num_cols);
             foreach (var row in Enumerable.Range(0, num_rows))
             {
                 foreach (var col in Enumerable.Range(0, num_cols))
                 {
-                    var p = new VA.Drawing.Point(row*1.0, col*1.0);
+                    var p = new VA.Geometry.Point(row*1.0, col*1.0);
                     centerpoints.Add(p);
                 }
             }
@@ -43,7 +43,7 @@ namespace VisioAutomationSamples
             // Draw the masters
             var shapeids = page.DropManyU(masters, centerpoints);
 
-            var bordersize = new VA.Drawing.Size(1,1);
+            var bordersize = new VA.Geometry.Size(1,1);
             page.ResizeToFitContents(bordersize);
         }
     }

@@ -20,7 +20,7 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(hyperlink));
             }
 
-            if (hyperlink.Address.Formula.Value == null)
+            if (hyperlink.Address.Formula == null)
             {
                 throw new ArgumentException("Address is null",nameof(hyperlink));
             }
@@ -36,12 +36,12 @@ namespace VisioAutomation.Shapes
     */
             var hlinks_collection = shape.Hyperlinks;
             var hlinks_object = hlinks_collection.Add();
-            hlinks_object.Address = hyperlink.Address.Formula.Value;
-            hlinks_object.Description = hyperlink.Description.Formula.Value;
-            hlinks_object.ExtraInfo = hyperlink.ExtraInfo.Formula.Value;
-            hlinks_object.Frame= hyperlink.Frame.Formula.Value;
-            hlinks_object.SubAddress= hyperlink.SubAddress.Formula.Value;
-            hlinks_object.ExtraInfo= hyperlink.ExtraInfo.Formula.Value;
+            hlinks_object.Address = hyperlink.Address.Formula;
+            hlinks_object.Description = hyperlink.Description.Formula;
+            hlinks_object.ExtraInfo = hyperlink.ExtraInfo.Formula;
+            hlinks_object.Frame= hyperlink.Frame.Formula;
+            hlinks_object.SubAddress= hyperlink.SubAddress.Formula;
+            hlinks_object.ExtraInfo= hyperlink.ExtraInfo.Formula;
 
             //hlinks_object.NewWindow = hyperlink.NewWindow.Formula.Value;
             //hlinks_object.IsDefaultLink = hyperlink.Default.Formula.Value;

@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VADRAW = VisioAutomation.Drawing;
+using VADRAW = VisioAutomation.Geometry;
 
 namespace VisioAutomation_Tests
 {

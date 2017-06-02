@@ -10,7 +10,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Test_Export_Selection_SVGHTML()
         {
             var client = this.GetScriptingClient();
-            var page_size = new VisioAutomation.Drawing.Size(10,5);
+            var page_size = new VisioAutomation.Geometry.Size(10,5);
 
             var doc = client.Document.New(page_size);
 

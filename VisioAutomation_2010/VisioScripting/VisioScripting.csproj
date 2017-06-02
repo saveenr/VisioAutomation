@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AlignCommands.cs" />
+    <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="Commands\SnapCommands.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Models\CellSrcDictionary.cs" />
     <Compile Include="Models\CellValueDictionary.cs" />
     <Compile Include="Models\NamedSrcDictionary.cs" />
+    <Compile Include="Models\SelectionOperation.cs" />
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
     <Compile Include="Models\ConnectionPointType.cs" />
@@ -72,7 +74,7 @@
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Commands\ConnectionPointCommands.cs" />
     <Compile Include="Commands\ControlCommands.cs" />
-    <Compile Include="Commands\CustomPropCommands.cs" />
+    <Compile Include="Commands\CustomPropertyCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="Commands\DocumentCommands.cs" />
     <Compile Include="Commands\DrawCommands.cs" />

@@ -33,10 +33,10 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Draw_DataTable()
         {
-            var pagesize = new VisioAutomation.Drawing.Size(4, 4);
+            var pagesize = new VisioAutomation.Geometry.Size(4, 4);
             var widths = new[] { 2.0, 1.5, 1.0 };
             double default_height = 0.25;
-            var cellspacing = new VisioAutomation.Drawing.Size(0, 0);
+            var cellspacing = new VisioAutomation.Geometry.Size(0, 0);
 
             var items = new[]
                 {
@@ -76,9 +76,9 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Draw_Grid()
         {
-            var origin = new VisioAutomation.Drawing.Point(0, 4);
-            var pagesize = new VisioAutomation.Drawing.Size(4, 4);
-            var cellsize = new VisioAutomation.Drawing.Size(0.5, 0.25);
+            var origin = new VisioAutomation.Geometry.Point(0, 4);
+            var pagesize = new VisioAutomation.Geometry.Size(4, 4);
+            var cellsize = new VisioAutomation.Geometry.Size(0.5, 0.25);
             int cols = 3;
             int rows = 6;
 
@@ -112,13 +112,13 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            var pagesize = new VA.Drawing.Size(4, 4);
+            var pagesize = new VA.Geometry.Size(4, 4);
             client.Page.New(pagesize, false);
 
             var shape_rect = client.Draw.Rectangle(1, 1, 3, 3);
             var shape_line = client.Draw.Line(0.5, 0.5, 3.5, 3.5);
             var shape_oval1 = client.Draw.Oval(0.2, 1, 3.8, 2);
-            var shape_oval2 = client.Draw.Oval(new VA.Drawing.Point(2, 2), 0.5);
+            var shape_oval2 = client.Draw.Oval(new VA.Geometry.Point(2, 2), 0.5);
 
             // Cleanup
             client.Document.Close(true);
@@ -129,12 +129,12 @@ namespace VisioAutomation_Tests.Scripting
         {
             var points = new[]
                 {
-                    new VA.Drawing.Point(0, 0),
-                    new VA.Drawing.Point(2, 0.5),
-                    new VA.Drawing.Point(2, 2),
-                    new VA.Drawing.Point(3, 0.5)
+                    new VA.Geometry.Point(0, 0),
+                    new VA.Geometry.Point(2, 0.5),
+                    new VA.Geometry.Point(2, 2),
+                    new VA.Geometry.Point(3, 0.5)
                 };
-            var pagesize = new VA.Drawing.Size(4, 4);
+            var pagesize = new VA.Geometry.Size(4, 4);
 
             // Create the Page
             var client = this.GetScriptingClient();
@@ -152,8 +152,8 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Draw_PieSlice()
         {
-            var pagesize = new VA.Drawing.Size(4, 4);
-            var center = new VA.Drawing.Point(2, 2);
+            var pagesize = new VA.Geometry.Size(4, 4);
+            var center = new VA.Geometry.Point(2, 2);
             double radius = 1.0;
             double start_angle = 0;
             double end_angle = Math.PI;
@@ -173,8 +173,8 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Draw_PieChart()
         {
-            var pagesize = new VA.Drawing.Size(4, 4);
-            var center = new VA.Drawing.Point(2, 2);
+            var pagesize = new VA.Geometry.Size(4, 4);
+            var center = new VA.Geometry.Point(2, 2);
             double radius = 1.0;
             
             var chart = new VisioAutomation.Models.Charting.PieChart(center, radius);
@@ -199,11 +199,11 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Draw_BarChart()
         {
-            var pagesize = new VA.Drawing.Size(4, 4);
-            var rect1 = new VA.Drawing.Rectangle(0, 0, 4, 4);
-            var rect2 = new VA.Drawing.Rectangle(5, 0, 9, 4);
-            var rect3 = new VA.Drawing.Rectangle(10, 0, 14, 4);
-            var bordersize = new VA.Drawing.Size(1.0, 1.0);
+            var pagesize = new VA.Geometry.Size(4, 4);
+            var rect1 = new VA.Geometry.Rectangle(0, 0, 4, 4);
+            var rect2 = new VA.Geometry.Rectangle(5, 0, 9, 4);
+            var rect3 = new VA.Geometry.Rectangle(10, 0, 14, 4);
+            var bordersize = new VA.Geometry.Size(1.0, 1.0);
 
             var chart1 = new VisioAutomation.Models.Charting.BarChart(rect1);
             chart1.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(1.0));
@@ -241,11 +241,11 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Draw_AreaChart()
         {
-            var pagesize = new VA.Drawing.Size(4, 4);
-            var rect1 = new VA.Drawing.Rectangle(0, 0, 4, 4);
-            var rect2 = new VA.Drawing.Rectangle(5, 0, 9, 4);
-            var rect3 = new VA.Drawing.Rectangle(10, 0, 14, 4);
-            var padding = new VA.Drawing.Size(1.0, 1.0);
+            var pagesize = new VA.Geometry.Size(4, 4);
+            var rect1 = new VA.Geometry.Rectangle(0, 0, 4, 4);
+            var rect2 = new VA.Geometry.Rectangle(5, 0, 9, 4);
+            var rect3 = new VA.Geometry.Rectangle(10, 0, 14, 4);
+            var padding = new VA.Geometry.Size(1.0, 1.0);
             
             var chart1 = new VisioAutomation.Models.Charting.AreaChart(rect1);
             chart1.DataPoints.Add(1.0);
@@ -390,7 +390,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Drop_Master()
         {
-            var pagesize = new VA.Drawing.Size(4, 4);
+            var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
             
             // Create the page
@@ -402,7 +402,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.Get("Rectangle", basic_stencil);
 
             // Frop the Shapes
-            client.Master.Drop(master, new VA.Drawing.Point(2, 2));
+            client.Master.Drop(master, new VA.Geometry.Point(2, 2));
 
             // Verify
             var application = client.Application.Get();
@@ -417,7 +417,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Drop_Many()
         {
-            var pagesize = new VA.Drawing.Size(10, 10);
+            var pagesize = new VA.Geometry.Size(10, 10);
             var client = this.GetScriptingClient();
 
             // Create the Page
@@ -432,7 +432,7 @@ namespace VisioAutomation_Tests.Scripting
             // Drop the Shapes
             var masters = new[] {m1, m2};
             var xys = new[] { 1.0, 2.0, 3.0, 4.0, 1.5, 4.5, 5.7, 2.4 };
-            var points = VA.Drawing.Point.FromDoubles(xys).ToList();
+            var points = VA.Geometry.Point.FromDoubles(xys).ToList();
             client.Master.Drop(masters, points);
 
             // Verify
@@ -453,7 +453,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Drop_Container_Master_Object()
         {
-            var pagesize = new VA.Drawing.Size(4, 4);
+            var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
 
             // Create the page
@@ -468,7 +468,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.Get("Rectangle", basic_stencil);
 
             // Drop the rectangle
-            client.Master.Drop(master, new VA.Drawing.Point(2, 2) );
+            client.Master.Drop(master, new VA.Geometry.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
             client.Selection.SelectAll();
@@ -506,7 +506,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Drop_Container_Master_Name()
         {
-            var pagesize = new VA.Drawing.Size(4, 4);
+            var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
 
             // Create the page
@@ -521,7 +521,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.Get("Rectangle", basic_stencil);
 
             // Drop the rectangle
-            client.Master.Drop(master, new VA.Drawing.Point(2, 2) );
+            client.Master.Drop(master, new VA.Geometry.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
             client.Selection.SelectAll();

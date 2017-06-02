@@ -111,7 +111,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Formula.Value, userdefinedcell.Prompt.Formula.Value);
+                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Formula, userdefinedcell.Prompt.Formula);
                 }
             }
         }

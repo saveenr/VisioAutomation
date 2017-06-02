@@ -9,7 +9,7 @@ namespace VisioAutomation.Models.Charting
     {
         public double InnerRadius { get; private set; }
         public double Radius { get; }
-        public Drawing.Point Center { get; }
+        public Geometry.Point Center { get; }
         public double SectorStartAngle { get; }
         public double SectorEndAngle { get; }
 
@@ -18,7 +18,7 @@ namespace VisioAutomation.Models.Charting
             get { return this.SectorEndAngle - this.SectorStartAngle; }
         }
 
-        public PieSlice(Drawing.Point center, double start, double end)
+        public PieSlice(Geometry.Point center, double start, double end)
         {
             this.Center = center;
 
@@ -31,7 +31,7 @@ namespace VisioAutomation.Models.Charting
             this.SectorEndAngle = end;
         }
 
-        public PieSlice(Drawing.Point center, double radius, double start, double end) :
+        public PieSlice(Geometry.Point center, double radius, double start, double end) :
             this(center,start,end)
         {
             if (radius < 0.0)
@@ -42,7 +42,7 @@ namespace VisioAutomation.Models.Charting
             this.Radius = radius;
         }
 
-        public PieSlice(Drawing.Point center, double start, double end, double inner_radius, double radius) :
+        public PieSlice(Geometry.Point center, double start, double end, double inner_radius, double radius) :
             this(center,start,end)
         {
             if (inner_radius < 0.0)
@@ -65,7 +65,7 @@ namespace VisioAutomation.Models.Charting
         }
 
 
-        internal List<Drawing.Point> GetShapeBezierForPie(out int degree)
+        internal List<Geometry.Point> GetShapeBezierForPie(out int degree)
         {
             this.check_normal_angle();
 
@@ -73,7 +73,7 @@ namespace VisioAutomation.Models.Charting
 
             // Create one big bezier that accounts for the entire pie shape. This includes the arc
             // calculated above and the sides of the pie slice
-            var pie_bez = new List<Drawing.Point>(3 + arc_bez.Count + 3);
+            var pie_bez = new List<Geometry.Point>(3 + arc_bez.Count + 3);
 
             var point_first = arc_bez[0];
             var point_last = arc_bez[arc_bez.Count - 1];
@@ -111,7 +111,7 @@ namespace VisioAutomation.Models.Charting
             {
                 var a = this.Center.Add(-this.Radius, -this.Radius);
                 var b = this.Center.Add(this.Radius, this.Radius);
-                var rect = new Drawing.Rectangle(a, b);
+                var rect = new Geometry.Rectangle(a, b);
                 var shape = page.DrawOval(rect);
                 return shape;
             }
@@ -121,7 +121,7 @@ namespace VisioAutomation.Models.Charting
                 var pie_bez = this.GetShapeBezierForPie(out degree);
 
                 // Render the bezier
-                var doubles_array = Drawing.Point.ToDoubles(pie_bez).ToArray();
+                var doubles_array = Geometry.Point.ToDoubles(pie_bez).ToArray();
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }
@@ -140,15 +140,15 @@ namespace VisioAutomation.Models.Charting
             }
             else if (total_angle >= System.Math.PI)
             {
-                var outer_radius_point = new Drawing.Point(this.Radius, this.Radius);
+                var outer_radius_point = new Geometry.Point(this.Radius, this.Radius);
                 var c = this.Center - outer_radius_point;
                 var d = this.Center + outer_radius_point;
-                var outer_rect = new Drawing.Rectangle(c, d);
+                var outer_rect = new Geometry.Rectangle(c, d);
 
-                var inner_radius_point = new Drawing.Point(this.InnerRadius, this.InnerRadius);
+                var inner_radius_point = new Geometry.Point(this.InnerRadius, this.InnerRadius);
                 var a = this.Center - inner_radius_point - c;
                 var b = this.Center + inner_radius_point - c;
-                var inner_rect = new Drawing.Rectangle(a, b);
+                var inner_rect = new Geometry.Rectangle(a, b);
 
                 var shape = page.DrawOval(outer_rect);
                 shape.DrawOval(inner_rect.Left, inner_rect.Bottom, inner_rect.Right, inner_rect.Top);
@@ -161,13 +161,13 @@ namespace VisioAutomation.Models.Charting
                 var thickarc = this.GetShapeBezierForDoughnut(out degree);
 
                 // Render the bezier
-                var doubles_array = Drawing.Point.ToDoubles(thickarc).ToArray();
+                var doubles_array = Geometry.Point.ToDoubles(thickarc).ToArray();
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }
         }
 
-        List<Drawing.Point> GetShapeBezierForDoughnut(out int degree)
+        List<Geometry.Point> GetShapeBezierForDoughnut(out int degree)
         {
             this.check_normal_angle();
 
@@ -177,7 +177,7 @@ namespace VisioAutomation.Models.Charting
 
             // Create one big bezier that accounts for the entire pie shape. This includes the arc
             // calculated above and the sides of the pie slice
-            var bez = new List<Drawing.Point>(3 + bez_inner.Count + 3);
+            var bez = new List<Geometry.Point>(3 + bez_inner.Count + 3);
 
             var point_first = bez_inner[0];
             var point_last = bez_inner[bez_inner.Count - 1];
@@ -196,7 +196,7 @@ namespace VisioAutomation.Models.Charting
             return bez;
         }
 
-        public static List<PieSlice> GetSlicesFromValues(Drawing.Point center, double radius, IList<double> values)
+        public static List<PieSlice> GetSlicesFromValues(Geometry.Point center, double radius, IList<double> values)
         {
             double sectors_sum = values.Sum();
             var slices = new List<PieSlice>(values.Count);
@@ -216,7 +216,7 @@ namespace VisioAutomation.Models.Charting
             return slices;
         }
 
-        public static List<PieSlice> GetSlicesFromValues(Drawing.Point center, double inner_radius, double outer_radius, IList<double> values)
+        public static List<PieSlice> GetSlicesFromValues(Geometry.Point center, double inner_radius, double outer_radius, IList<double> values)
         {
             var slices = PieSlice.GetSlicesFromValues(center, outer_radius, values);
             foreach (var slice in slices)
@@ -226,27 +226,27 @@ namespace VisioAutomation.Models.Charting
             return slices;
         }
 
-        protected Drawing.Point GetPointAtRadius(Drawing.Point origin, double angle, double radius)
+        protected Geometry.Point GetPointAtRadius(Geometry.Point origin, double angle, double radius)
         {
             double x = radius * System.Math.Cos(angle);
             double y = radius * System.Math.Sin(angle);
-            var new_point = new Drawing.Point(x, y);
+            var new_point = new Geometry.Point(x, y);
             new_point = origin + new_point;
             return new_point;
         }
 
-        protected List<Drawing.Point> GetArcBez(double radius, out int degree)
+        protected List<Geometry.Point> GetArcBez(double radius, out int degree)
         {
             // split apart the arc into distinct bezier segments (will end up with at least 1 segment)
             // the segments will "fit" end to end
-            var sub_arcs = Drawing.BezierSegment.FromArc(
+            var sub_arcs = Geometry.BezierSegment.FromArc(
                 this.SectorStartAngle,
                 this.SectorEndAngle);
 
             // merge bezier segments together into a list of points
-            var merged_points = Drawing.BezierSegment.Merge(sub_arcs, out degree);
+            var merged_points = Geometry.BezierSegment.Merge(sub_arcs, out degree);
 
-            var arc_bez = new List<Drawing.Point>(merged_points.Count);
+            var arc_bez = new List<Geometry.Point>(merged_points.Count);
             foreach (var p in merged_points)
             {
                 var np = p.Multiply(radius,radius) + this.Center;

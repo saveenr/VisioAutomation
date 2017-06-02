@@ -54,26 +54,24 @@ namespace VisioScripting.Commands
             {
                 var cmdset_type = cmdset_prop.PropertyType;
 
-                // Calculate the text
                 var commands = CommandSet.GetCommands(cmdset_type);
                 lines.Clear();
                 foreach (var command in commands)
                 {
                     sb.Length = 0;
-                    var method_params = command.MethodInfo.GetParameters();
-                    VisioScripting.Helpers.TextHelper.Join(sb, ", ", method_params.Select(param =>
-                        string.Format("{0} {1}", VisioScripting.Helpers.ReflectionHelper.GetNiceTypeName(param.ParameterType), param.Name)));
+                    
+                    var cmdparams = command.GetParameters();
+                    var cmdparam_strings = cmdparams.Select(p => string.Format("{0} {1}", p.TypeDisplayName, p.Name));
+                    VisioScripting.Helpers.TextHelper.Join(sb, ", ", cmdparam_strings);
 
-                    if (command.MethodInfo.ReturnType != typeof(void))
+                    if (command.ReturnsValue)
                     {
-                        string line =
-                            string.Format("{0}({1}) -> {2}", command.MethodInfo.Name, sb,
-                                VisioScripting.Helpers.ReflectionHelper.GetNiceTypeName(command.MethodInfo.ReturnType));
+                        string line = string.Format("{0}({1}) -> {2}", command.Name, sb, command.ReturnTypeDisplayName);
                         lines.Add(line);
                     }
                     else
                     {
-                        string line = string.Format("{0}({1})", command.MethodInfo.Name, sb);
+                        string line = string.Format("{0}({1})", command.Name, sb);
                         lines.Add(line);
                     }
                 }
@@ -87,7 +85,7 @@ namespace VisioScripting.Commands
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
-                formpage.Size = new VisioAutomation.Drawing.Size(8.5, 11);
+                formpage.Size = new VisioAutomation.Geometry.Size(8.5, 11);
                 formpage.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
@@ -126,7 +124,7 @@ namespace VisioScripting.Commands
                     }
 
                     var formpage = new VisioAutomation.Models.Documents.Forms.FormPage();
-                    formpage.Size = new VisioAutomation.Drawing.Size(8.5, 11);
+                    formpage.Size = new VisioAutomation.Geometry.Size(8.5, 11);
                     formpage.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
@@ -231,7 +229,7 @@ namespace VisioScripting.Commands
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
 
-            var page_size = new VisioAutomation.Drawing.Size(8.5,11);
+            var page_size = new VisioAutomation.Geometry.Size(8.5,11);
             var doc = this._client.Document.New(page_size,template);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
@@ -262,7 +260,7 @@ namespace VisioScripting.Commands
 
                 var node = new Node(ns);
                 node.Text = new VisioAutomation.Models.Text.Element(label);
-                node.Size = new VisioAutomation.Drawing.Size(2.0, 0.25);
+                node.Size = new VisioAutomation.Geometry.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
             }
 
@@ -386,7 +384,7 @@ namespace VisioScripting.Commands
             string def_shape_fill = "rgb(245,245,245)";
             string template = null;
 
-            var page_size = new VisioAutomation.Drawing.Size(8.5,11);
+            var page_size = new VisioAutomation.Geometry.Size(8.5,11);
             var doc = this._client.Document.New(page_size,template);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
@@ -425,7 +423,7 @@ namespace VisioScripting.Commands
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
                 var node = new Node(ns);
-                node.Size = new VisioAutomation.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
+                node.Size = new VisioAutomation.Geometry.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
                 var markup = new VisioAutomation.Models.Text.Element();

@@ -1,6 +1,5 @@
 ﻿using VisioAutomation.Models.Layouts.Tree;
 using VADOM = VisioAutomation.Models.Dom;
-using VA = VisioAutomation;
 
 namespace VisioAutomationSamples
 {

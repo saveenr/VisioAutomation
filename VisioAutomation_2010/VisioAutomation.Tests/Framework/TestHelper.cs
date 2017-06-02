@@ -41,7 +41,8 @@ namespace VisioAutomation_Tests
             }
 
             string abs_path = this._output_path;
-            var datetime_str = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss", System.Globalization.CultureInfo.InvariantCulture);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            var datetime_str = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss", culture);
             var basename = method + "_" + datetime_str + ext;
             string abs_filename = Path.Combine(abs_path, basename);
             return abs_filename;

@@ -16,8 +16,8 @@ namespace VisioAutomation.Application
         public static string GetContentLocation(IVisio.Application app)
         {
             var ver = ApplicationHelper.GetVersion(app);
-            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
-            string app_Lang = app.Language.ToString(invariant_culture);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            string app_Lang = app.Language.ToString(culture);
             var str_visio_content = "Visio Content";
 
             if (ver.Major == 14)
@@ -34,7 +34,7 @@ namespace VisioAutomation.Application
                 return path;
             }
 
-            string msg = string.Format(invariant_culture,"VisioAutomation does not support Visio version {0}", ver.Major);
+            string msg = string.Format(culture,"VisioAutomation does not support Visio version {0}", ver.Major);
             throw new System.ArgumentException(msg);
         }
         

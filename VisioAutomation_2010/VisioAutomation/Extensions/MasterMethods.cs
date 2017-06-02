@@ -5,9 +5,9 @@ namespace VisioAutomation.Extensions
 {
     public static class MasterMethods
     {
-        public static Drawing.Rectangle GetBoundingBox(this IVisio.Master master, IVisio.VisBoundingBoxArgs args)
+        public static Geometry.Rectangle GetBoundingBox(this IVisio.Master master, IVisio.VisBoundingBoxArgs args)
         {
-            var surface = new VisioAutomation.Drawing.DrawingSurface(master);
+            var surface = new VisioAutomation.SurfaceTarget(master);
             return surface.GetBoundingBox(args);
         }
 

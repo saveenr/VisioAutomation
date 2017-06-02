@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -100,7 +99,7 @@ namespace VisioScripting.Commands
 
                 // Now restore all the formatting - based on any initial formatting from the text
 
-                var writer = new SidSrcWriter();
+                var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                 for (int i = 0; i < targets.Shapes.Count; i++)
                 {
                     var format = formats[i];
@@ -140,7 +139,7 @@ namespace VisioScripting.Commands
             var font = active_doc_fonts[fontname];
             var page = this._client.Page.Get();
 
-            var cells = new VisioAutomation.Text. CharacterCells();
+            var cells = new VisioAutomation.Text. CharacterFormatCells();
             cells.Font = font.ID;
 
             this._client.ShapeSheet.__SetCells(targets, cells, page);
@@ -179,7 +178,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var writer = new SidSrcWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
             foreach (var shape in targets.Shapes)
             {
                 if (0 ==
@@ -243,7 +242,7 @@ namespace VisioScripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Fit Shape To Text"))
             {
                 // Calculate the new sizes for each shape
-                var new_sizes = new List<VisioAutomation.Drawing.Size>(shapeids.Count);
+                var new_sizes = new List<VisioAutomation.Geometry.Size>(shapeids.Count);
                 foreach (var shape in shapes.Shapes)
                 {
                     var text_bounding_box = shape.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightText).Size;
@@ -251,14 +250,14 @@ namespace VisioScripting.Commands
 
                     double max_w = System.Math.Max(text_bounding_box.Width, wh_bounding_box.Width);
                     double max_h = System.Math.Max(text_bounding_box.Height, wh_bounding_box.Height);
-                    var max_size = new VisioAutomation.Drawing.Size(max_w, max_h);
+                    var max_size = new VisioAutomation.Geometry.Size(max_w, max_h);
                     new_sizes.Add(max_size);
                 }
 
                 var src_width = VisioAutomation.ShapeSheet.SrcConstants.XFormWidth;
                 var src_height = VisioAutomation.ShapeSheet.SrcConstants.XFormHeight;
 
-                var writer = new SidSrcWriter();
+                var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                 for (int i = 0; i < new_sizes.Count; i++)
                 {
                     var shapeid = shapeids[i];

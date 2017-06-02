@@ -13,7 +13,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VA.Drawing.Size(4, 4), false);
+            client.Page.New(new VA.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
@@ -41,7 +41,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VA.Drawing.Size(4, 4), false);
+            client.Page.New(new VA.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
@@ -53,7 +53,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(s3);
 
             var targets = new VisioScripting.Models.TargetShapes();
-            var prop_dic0 = client.CustomProp.Get(targets);
+            var prop_dic0 = client.CustomProperty.Get(targets);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);
             Assert.AreEqual(0, prop_dic0[s2].Count);
@@ -61,9 +61,9 @@ namespace VisioAutomation_Tests.Scripting
 
             var cp = new CustomPropertyCells();
             cp.Value = "BAR";
-            client.CustomProp.Set(targets, "FOO",cp);
+            client.CustomProperty.Set(targets, "FOO",cp);
 
-            var prop_dic1 = client.CustomProp.Get(targets);
+            var prop_dic1 = client.CustomProperty.Get(targets);
             Assert.AreEqual(3, prop_dic1.Count);
             Assert.AreEqual(1, prop_dic1[s1].Count);
             Assert.AreEqual(1, prop_dic1[s2].Count);
@@ -77,18 +77,18 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("\"BAR\"", cp3.Value.Formula);
             
 
-            var hasprops0 = client.CustomProp.Contains(targets,"FOO");
+            var hasprops0 = client.CustomProperty.Contains(targets,"FOO");
             Assert.IsTrue(hasprops0.All(v => v == true));
 
-            client.CustomProp.Delete(targets,"FOO");
+            client.CustomProperty.Delete(targets,"FOO");
 
-            var prop_dic2 = client.CustomProp.Get(targets);
+            var prop_dic2 = client.CustomProperty.Get(targets);
             Assert.AreEqual(3, prop_dic2.Count);
             Assert.AreEqual(0, prop_dic2[s1].Count);
             Assert.AreEqual(0, prop_dic2[s2].Count);
             Assert.AreEqual(0, prop_dic2[s3].Count);
 
-            var hasprops1 = client.CustomProp.Contains(targets,"FOO");
+            var hasprops1 = client.CustomProperty.Contains(targets,"FOO");
             Assert.IsTrue(hasprops1.All(v => v == false));
 
             client.Document.Close(true);

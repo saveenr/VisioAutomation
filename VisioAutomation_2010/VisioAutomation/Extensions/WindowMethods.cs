@@ -16,7 +16,7 @@ namespace VisioAutomation.Extensions
             }
         }
 
-        public static Drawing.Rectangle GetViewRect(this IVisio.Window window)
+        public static Geometry.Rectangle GetViewRect(this IVisio.Window window)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ff765846.aspx
             double left, top, height, width;
@@ -26,7 +26,7 @@ namespace VisioAutomation.Extensions
             double y0 = top - height;
             double y1 = y0 + height;
 
-            var r = new Drawing.Rectangle(x0, y0, x1, y1);
+            var r = new Geometry.Rectangle(x0, y0, x1, y1);
             return r;
         }
 
@@ -48,8 +48,8 @@ namespace VisioAutomation.Extensions
         }
 
         public static void SetViewRect(
-            this IVisio.Window window, 
-            Drawing.Rectangle rect)
+            this IVisio.Window window,
+            Geometry.Rectangle rect)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ms367542(v=office.14).aspx
             window.SetViewRect(rect.Left, rect.Top, rect.Width, rect.Height);

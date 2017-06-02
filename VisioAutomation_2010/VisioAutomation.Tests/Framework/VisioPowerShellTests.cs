@@ -11,7 +11,7 @@ namespace VisioAutomation_Tests.PowerShell
         [ClassInitialize]
         public static void PSTestFixtureSetup(TestContext context)
         {
-            var new_visio_application = new New_VisioApplication();
+            var new_visio_application = new NewVisioApplication();
             var visio_app = new_visio_application.Invoke();
         }
 

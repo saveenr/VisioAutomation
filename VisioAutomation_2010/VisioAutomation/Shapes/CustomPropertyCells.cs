@@ -98,7 +98,7 @@ namespace VisioAutomation.Shapes
 
                 string str_label = this.SmartStringToFormulaString(cp.Label.Formula, false);
                 string str_value = null;
-                if (cp.Type.Formula.Value == "0" || cp.Type.Formula.Value == null)
+                if (cp.Type.Formula == "0" || cp.Type.Formula == null)
                 {
                     // if type has no value or is a "0" then it is a string
                     str_value = this.SmartStringToFormulaString(cp.Value.Formula, false);

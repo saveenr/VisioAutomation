@@ -24,7 +24,7 @@ namespace VisioAutomation_Tests.Dom
         public void DomText_CharacterPlain()
         {
             var m = new VisioAutomation.Models.Text.Element("{Normal}");
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -39,7 +39,7 @@ namespace VisioAutomation_Tests.Dom
         {
             var m = new VisioAutomation.Models.Text.Element("{Bold}");
             m.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Bold;
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -55,7 +55,7 @@ namespace VisioAutomation_Tests.Dom
         {
             var m = new VisioAutomation.Models.Text.Element("{Italic}");
             m.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Italic;
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -69,7 +69,7 @@ namespace VisioAutomation_Tests.Dom
 
         public void DomText_CharacterFont()
         {
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
 
             var impact = page1.Document.Fonts["Arial"];
             var m = new VisioAutomation.Models.Text.Element("Normal Text in Impact Font");
@@ -88,7 +88,7 @@ namespace VisioAutomation_Tests.Dom
 
         public void DomText_CharacterComplex()
         {
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
             var doc = page1.Document;
             var fonts = doc.Fonts;
 
@@ -151,7 +151,7 @@ namespace VisioAutomation_Tests.Dom
         public void DomText_ParagraphDefault()
         {
             var m = new VisioAutomation.Models.Text.Element("{DefaultPara}");
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -166,7 +166,7 @@ namespace VisioAutomation_Tests.Dom
         {
             var m = new VisioAutomation.Models.Text.Element("{LeftHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)AlignmentHorizontal.Left;
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -183,7 +183,7 @@ namespace VisioAutomation_Tests.Dom
         {
             var m = new VisioAutomation.Models.Text.Element("{CenterHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)AlignmentHorizontal.Center;
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -200,7 +200,7 @@ namespace VisioAutomation_Tests.Dom
         {
             var m = new VisioAutomation.Models.Text.Element("{RightHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)AlignmentHorizontal.Right;
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 

@@ -9,7 +9,7 @@ namespace VisioAutomationSamples
     {
         public static void DrawNode(
             Node node,
-            VA.Drawing.Rectangle rect, IVisio.Page page)
+            VA.Geometry.Rectangle rect, IVisio.Page page)
         {           
             var shape = page.DrawRectangle(rect);
             node.Data = shape;

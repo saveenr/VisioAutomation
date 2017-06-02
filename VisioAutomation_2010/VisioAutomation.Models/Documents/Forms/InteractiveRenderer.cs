@@ -13,7 +13,7 @@ namespace VisioAutomation.Models.Documents.Forms
         private FormPage _form_page;
 
         public List<TextBlock> Blocks;
-        public Drawing.Point InsertionPoint;
+        public Geometry.Point InsertionPoint;
 
         public InteractiveRenderer(IVisio.Document doc)
         {
@@ -59,13 +59,13 @@ namespace VisioAutomation.Models.Documents.Forms
 
         private void ResetInsertionPoint()
         {
-            this.InsertionPoint = new Drawing.Point(this._form_page.PageMargin.Left,
+            this.InsertionPoint = new Geometry.Point(this._form_page.PageMargin.Left,
                 this._form_page.Size.Height - this._form_page.PageMargin.Top);
         }
 
         public TextBlock AddShape(double w, double h, string text)
         {
-            var tb = new TextBlock(new Drawing.Size(w, h), text);
+            var tb = new TextBlock(new Geometry.Size(w, h), text);
             this.AddShape(tb);
             return tb;
         }
@@ -76,9 +76,9 @@ namespace VisioAutomation.Models.Documents.Forms
             this.Blocks.Add(block);
 
             // Calculate the Correct Full Rectangle
-            var ll = new Drawing.Point(this.InsertionPoint.X, this.InsertionPoint.Y - block.Size.Height);
-            var tr = new Drawing.Point(this.InsertionPoint.X + block.Size.Width, this.InsertionPoint.Y);
-            var rect = new Drawing.Rectangle(ll, tr);
+            var ll = new Geometry.Point(this.InsertionPoint.X, this.InsertionPoint.Y - block.Size.Height);
+            var tr = new Geometry.Point(this.InsertionPoint.X + block.Size.Width, this.InsertionPoint.Y);
+            var rect = new Geometry.Rectangle(ll, tr);
 
             // Draw the Shape
             var newshape = this._page.DrawRectangle(rect);
@@ -104,14 +104,14 @@ namespace VisioAutomation.Models.Documents.Forms
             {
                 block.FormatCells.SetFormulas((short)block.VisioShapeID,writer);
                 block.TextBlockCells.SetFormulas((short)block.VisioShapeID,writer);
-                block.ParagraphCells.SetFormulas((short)block.VisioShapeID, writer, 0);
-                block.CharacterCells.SetFormulas((short)block.VisioShapeID, writer, 0);
+                block.ParagraphFormatCells.SetFormulas((short)block.VisioShapeID, writer, 0);
+                block.CharacterFormatCells.SetFormulas((short)block.VisioShapeID, writer, 0);
             }
 
             writer.Commit(this._page);
         }
 
-        private void AdjustInsertionPoint(Drawing.Size size)
+        private void AdjustInsertionPoint(Geometry.Size size)
         {
             this.InsertionPoint = this.InsertionPoint.Add(size.Width, 0);
             this._current_line_height = System.Math.Max(this._current_line_height, size.Height);
@@ -119,26 +119,26 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Linefeed()
         {
-            this.InsertionPoint = new Drawing.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y - this._current_line_height);
+            this.InsertionPoint = new Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y - this._current_line_height);
             this._current_line_height = 0;
         }
 
         public void Linefeed(double advance)
         {
-            this.InsertionPoint = new Drawing.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y - this._current_line_height - advance);
+            this.InsertionPoint = new Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y - this._current_line_height - advance);
             this._current_line_height = 0;
         }
 
         public void MoveRight(double advance)
         {
-            this.InsertionPoint = new Drawing.Point(this.InsertionPoint.X + advance, this.InsertionPoint.Y);
+            this.InsertionPoint = new Geometry.Point(this.InsertionPoint.X + advance, this.InsertionPoint.Y);
             
         }
 
 
         public void CarriageReturn()
         {
-            this.InsertionPoint = new Drawing.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y);
+            this.InsertionPoint = new Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y);
         }
 
         public double GetDistanceToBottomMargin()

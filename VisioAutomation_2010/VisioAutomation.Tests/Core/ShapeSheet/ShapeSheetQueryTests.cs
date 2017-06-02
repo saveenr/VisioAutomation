@@ -210,7 +210,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes()
         {
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(10, 10));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(10, 10));
 
             // draw a simple shape
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -258,7 +258,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes_Verify_Out_Of_order()
         {
-            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(10, 10));
+            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(10, 10));
 
             // draw a simple shape
             var sa = page1.DrawRectangle(-1, -1, 0, 0);

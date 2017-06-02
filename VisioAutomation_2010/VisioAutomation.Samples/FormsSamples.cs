@@ -53,9 +53,9 @@ namespace VisioAutomationSamples
 
             double max_body_width = 30.0;
             var page_title = renderer.AddShape(max_body_width, 1.5, "Standard Resolutions by Aspect Ratio");
-            page_title.CharacterCells.Font = segoe_ui__light_font_id;
-            page_title.CharacterCells.Size = "100pt";
-            page_title.ParagraphCells.HorizontalAlign = 0;
+            page_title.CharacterFormatCells.Font = segoe_ui__light_font_id;
+            page_title.CharacterFormatCells.Size = "100pt";
+            page_title.ParagraphFormatCells.HorizontalAlign = 0;
             page_title.FormatCells.LineWeight = 0;
             page_title.FormatCells.LinePattern = 0;
             //page_title.FormatCells.FillForegnd = "RGB(240,240,240)"; renderer.Linefeed(0.5);
@@ -65,9 +65,9 @@ namespace VisioAutomationSamples
             foreach (var group in grouped)
             {
                 var group_title = renderer.AddShape(max_body_width, 1, group.Key);
-               group_title.CharacterCells.Font = segoe_ui__light_font_id;
-               group_title.CharacterCells.Size = "50pt";
-               group_title.ParagraphCells.HorizontalAlign = 0;
+               group_title.CharacterFormatCells.Font = segoe_ui__light_font_id;
+               group_title.CharacterFormatCells.Size = "50pt";
+               group_title.ParagraphFormatCells.HorizontalAlign = 0;
                group_title.FormatCells.LineWeight = 0;
                group_title.FormatCells.LinePattern = 0;
                group_title.FormatCells.FillForeground = "RGB(250,250,250)";
@@ -81,8 +81,8 @@ namespace VisioAutomationSamples
 
                     string label = string.Format("{0}\n{1}x{2}", resolution.Name, resolution.Width, resolution.Height);
                     var res_title = renderer.AddShape(w, h, label);
-                    res_title.CharacterCells.Font = segoe_ui_font_id;
-                    res_title.CharacterCells.Size = "25pt";
+                    res_title.CharacterFormatCells.Font = segoe_ui_font_id;
+                    res_title.CharacterFormatCells.Size = "25pt";
                     //res_title.ParagraphCells.HorizontalAlign = 0;
                     //res_title.FormatCells.LineWeight = 0;
                     //res_title.FormatCells.LinePattern = 0;

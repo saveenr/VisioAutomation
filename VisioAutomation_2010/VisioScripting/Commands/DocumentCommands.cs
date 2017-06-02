@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioScripting.Helpers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -137,7 +136,7 @@ namespace VisioScripting.Commands
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
                 this._client.WriteVerbose("Not a Drawing Window", doc.Name);
-                throw new AutomationException("Not a Drawing Window");
+                throw new System.ArgumentException("Not a Drawing Window");
             }
 
             this._client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
@@ -224,12 +223,12 @@ namespace VisioScripting.Commands
             doc.SaveAs(filename);
         }
 
-        public IVisio.Document New(VisioAutomation.Drawing.Size size)
+        public IVisio.Document New(VisioAutomation.Geometry.Size size)
         {
             return this.New(size,null);
         }
 
-        public IVisio.Document New(VisioAutomation.Drawing.Size size,string template)
+        public IVisio.Document New(VisioAutomation.Geometry.Size size,string template)
         {
             this._client.Application.AssertApplicationAvailable();
             var doc = this.New(template);
@@ -315,7 +314,8 @@ namespace VisioScripting.Commands
             }
 
             // get the named document
-            var docs2 = WildcardHelper.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, WildcardHelper.FilterAction.Include).ToList();
+            var filter_action = VisioScripting.Helpers.WildcardHelper.FilterAction.Include;
+            var docs2 = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, filter_action).ToList();
             return docs2;
         }
     }

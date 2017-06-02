@@ -7,11 +7,11 @@ namespace VisioAutomation.PageLayouts
         public LayoutStyle LayoutStyle { get; set; }
         public ConnectorStyle ConnectorStyle { get; set; }
         public ConnectorAppearance ConnectorAppearance { get; set; }
-        public Drawing.Size AvenueSize { get; set; }
+        public Geometry.Size AvenueSize { get; set; }
 
         protected LayoutBase()
         {
-            this.AvenueSize = new Drawing.Size(0.375, 0.375);
+            this.AvenueSize = new Geometry.Size(0.375, 0.375);
         }
 
         protected virtual void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)

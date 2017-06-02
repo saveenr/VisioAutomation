@@ -41,7 +41,7 @@ namespace VisioAutomation_Tests.Models
             var orgchart = new VAORGCHART.OrgChartDocument();
 
             var n_a = new VAORGCHART.Node("A");
-            n_a.Size = new VA.Drawing.Size(4, 2);
+            n_a.Size = new VA.Geometry.Size(4, 2);
             orgchart.OrgCharts.Add(n_a);
 
             var app = new IVisio.Application();
@@ -72,7 +72,7 @@ namespace VisioAutomation_Tests.Models
             n_c.Children.Add(n_d);
             n_c.Children.Add(n_e);
 
-            n_a.Size = new VA.Drawing.Size(4, 2);
+            n_a.Size = new VA.Geometry.Size(4, 2);
 
             orgchart_doc.OrgCharts.Add(n_a);
 
@@ -101,7 +101,7 @@ namespace VisioAutomation_Tests.Models
             Assert.AreEqual("D", n_d.VisioShape.Text.Trim());
             Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
-            Assert.AreEqual(new VA.Drawing.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
+            Assert.AreEqual(new VA.Geometry.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
             Assert.AreEqual(orgchart_doc.LayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
 
             app.Quit(true);
@@ -126,7 +126,7 @@ namespace VisioAutomation_Tests.Models
             n_c.Children.Add(n_d);
             n_c.Children.Add(n_e);
 
-            n_a.Size = new VA.Drawing.Size(4, 2);
+            n_a.Size = new VA.Geometry.Size(4, 2);
 
             orgchart.OrgCharts.Add(n_a);
             orgchart.OrgCharts.Add(n_a);

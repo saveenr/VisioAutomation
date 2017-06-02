@@ -163,7 +163,7 @@ namespace VisioAutomation.Pages
             }
         }
 
-        internal static Drawing.Size GetSize(IVisio.Page page)
+        internal static Geometry.Size GetSize(IVisio.Page page)
         {
             var query = new ShapeSheetQuery();
             var col_height = query.AddCell(ShapeSheet.SrcConstants.PageHeight,nameof(ShapeSheet.SrcConstants.PageHeight));
@@ -172,11 +172,11 @@ namespace VisioAutomation.Pages
             var results = query.GetResults<double>(page.PageSheet);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];
-            var s = new Drawing.Size(width, height);
+            var s = new Geometry.Size(width, height);
             return s;
         }
 
-        internal static void SetSize(IVisio.Page page, Drawing.Size size)
+        internal static void SetSize(IVisio.Page page, Geometry.Size size)
         {
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
@@ -187,7 +187,7 @@ namespace VisioAutomation.Pages
 
         public static short[] DropManyAutoConnectors(
             IVisio.Page page,
-            ICollection<Drawing.Point> points)
+            ICollection<Geometry.Point> points)
         {
 
             if (points == null)
@@ -201,7 +201,7 @@ namespace VisioAutomation.Pages
             var thing = app.ConnectorToolDataObject;
             int num_points = points.Count;
             var masters_obj_array = Enumerable.Repeat(thing, num_points).ToArray();
-            var xy_array = Drawing.Point.ToDoubles(points).ToArray();
+            var xy_array = Geometry.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 

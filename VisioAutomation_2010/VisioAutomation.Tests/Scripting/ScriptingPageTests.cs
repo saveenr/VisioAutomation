@@ -10,7 +10,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Page_Navigation()
         {
-            var page_size = new VisioAutomation.Drawing.Size(8.5, 11);
+            var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.New(page_size);
 
@@ -49,7 +49,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Page_Duplication()
         {
-            var page_size = new VisioAutomation.Drawing.Size(8.5, 11);
+            var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.New(page_size);
             client.Draw.Rectangle(0, 0, 1, 1);

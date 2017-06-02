@@ -11,7 +11,7 @@ namespace VisioAutomation_Tests.Core.Page
         [TestMethod]
         public void Page_Query()
         {
-            var size = new VA.Drawing.Size(4, 3);
+            var size = new VA.Geometry.Size(4, 3);
             var page1 = this.GetNewPage(size);
             var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
             Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Result);
@@ -35,7 +35,7 @@ namespace VisioAutomation_Tests.Core.Page
         [TestMethod]
         public void Page_Orientation()
         {
-            var size = new VA.Drawing.Size(4, 3);
+            var size = new VA.Geometry.Size(4, 3);
 
             var page1 = this.GetNewPage(size);
 
@@ -53,7 +53,7 @@ namespace VisioAutomation_Tests.Core.Page
             Assert.AreEqual(VisioScripting.Models.PageOrientation.Landscape, orientation_2);
 
             var actual_final_size = client.Page.GetSize();
-            var expected_final_size = new VA.Drawing.Size(3, 4);
+            var expected_final_size = new VA.Geometry.Size(3, 4);
             Assert.AreEqual(expected_final_size, actual_final_size);
 
             page1.Delete(0);
@@ -62,7 +62,7 @@ namespace VisioAutomation_Tests.Core.Page
         [TestMethod]
         public void Page_Duplicate()
         {
-            var page_size = new VA.Drawing.Size(4, 3);
+            var page_size = new VA.Geometry.Size(4, 3);
             var page1 = this.GetNewPage(page_size);
             var s1 = page1.DrawRectangle(1, 1, 3, 3);
 
@@ -116,28 +116,28 @@ namespace VisioAutomation_Tests.Core.Page
         public void Page_ResizeBorder()
         {
             var doc = this.GetNewDoc();
-            var shapesize = new VisioAutomation.Drawing.Size(1, 2);
-            var border1 = new VisioAutomation.Drawing.Size(0, 0);
-            var border2 = new VA.Drawing.Size(3, 4);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(1, 1), new VA.Drawing.Size(1, 1), shapesize, border1, 1.5, 2);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(0, 0), new VA.Drawing.Size(0, 0), shapesize, border1, 0.5, 1);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(1, 0), new VA.Drawing.Size(0, 0), shapesize, border1, 1.5, 1);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(0, 1), new VA.Drawing.Size(0, 0), shapesize, border1, 0.5, 2);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(0, 0), new VA.Drawing.Size(1, 0), shapesize, border1, 0.5, 1);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(0, 0), new VA.Drawing.Size(0, 1), shapesize, border1, 0.5, 1);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(1, 1), new VA.Drawing.Size(1, 1), shapesize, border2, 4.5, 6);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(1, 0), new VA.Drawing.Size(0, 0), shapesize, border2, 4, 5);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(0, 1), new VA.Drawing.Size(0, 0), shapesize, border2, 3.5, 5.5);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(0, 0), new VA.Drawing.Size(1, 0), shapesize, border2, 4, 5);
-            VerifyPageSizeToFit(doc, new VA.Drawing.Size(0, 0), new VA.Drawing.Size(0, 1), shapesize, border2, 3.5, 5.5);
+            var shapesize = new VisioAutomation.Geometry.Size(1, 2);
+            var border1 = new VisioAutomation.Geometry.Size(0, 0);
+            var border2 = new VA.Geometry.Size(3, 4);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(1, 1), new VA.Geometry.Size(1, 1), shapesize, border1, 1.5, 2);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(0, 0), new VA.Geometry.Size(0, 0), shapesize, border1, 0.5, 1);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(1, 0), new VA.Geometry.Size(0, 0), shapesize, border1, 1.5, 1);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(0, 1), new VA.Geometry.Size(0, 0), shapesize, border1, 0.5, 2);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(0, 0), new VA.Geometry.Size(1, 0), shapesize, border1, 0.5, 1);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(0, 0), new VA.Geometry.Size(0, 1), shapesize, border1, 0.5, 1);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(1, 1), new VA.Geometry.Size(1, 1), shapesize, border2, 4.5, 6);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(1, 0), new VA.Geometry.Size(0, 0), shapesize, border2, 4, 5);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(0, 1), new VA.Geometry.Size(0, 0), shapesize, border2, 3.5, 5.5);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(0, 0), new VA.Geometry.Size(1, 0), shapesize, border2, 4, 5);
+            VerifyPageSizeToFit(doc, new VA.Geometry.Size(0, 0), new VA.Geometry.Size(0, 1), shapesize, border2, 3.5, 5.5);
             doc.Close(true);
         }
 
         private static void VerifyPageSizeToFit(IVisio.Document doc,
-            VA.Drawing.Size bottomleft_margin,
-            VA.Drawing.Size upperright_margin,
-            VA.Drawing.Size shape_size,
-            VA.Drawing.Size padding_size,
+            VA.Geometry.Size bottomleft_margin,
+            VA.Geometry.Size upperright_margin,
+            VA.Geometry.Size shape_size,
+            VA.Geometry.Size padding_size,
             double expected_pinx,
             double expected_piny)
         {

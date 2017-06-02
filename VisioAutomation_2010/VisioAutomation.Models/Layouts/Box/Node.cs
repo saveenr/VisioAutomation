@@ -5,13 +5,13 @@ namespace VisioAutomation.Models.Layouts.Box
     public abstract class Node
     {
         public object Data { get; set; }
-        public Drawing.Rectangle Rectangle { get; set; }
-        public Drawing.Rectangle ReservedRectangle { get; set; }
-        public Drawing.Size Size { get; set; }
+        public Geometry.Rectangle Rectangle { get; set; }
+        public Geometry.Rectangle ReservedRectangle { get; set; }
+        public Geometry.Size Size { get; set; }
         public AlignmentHorizontal HAlignToParent;
         public AlignmentVertical VAlignToParent;
-        public abstract Drawing.Size CalculateSize();
-        public abstract void _place(Drawing.Point origin);
+        public abstract Geometry.Size CalculateSize();
+        public abstract void _place(Geometry.Point origin);
         public abstract IEnumerable<Node> GetChildren();
     }
 }

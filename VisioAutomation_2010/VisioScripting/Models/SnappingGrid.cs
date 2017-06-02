@@ -1,4 +1,4 @@
-﻿using VisioAutomation.Drawing;
+﻿using VisioAutomation.Geometry;
 
 namespace VisioScripting.Models
 {

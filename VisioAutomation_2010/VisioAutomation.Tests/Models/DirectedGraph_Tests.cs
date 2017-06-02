@@ -53,7 +53,7 @@ namespace VisioAutomation_Tests.Models
 
             var n0 = d.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
-            n0.Size = new VA.Drawing.Size(3, 2);
+            n0.Size = new VA.Geometry.Size(3, 2);
             n0.CustomProperties = new CustomPropertyDictionary();
             n0.CustomProperties["p1"] = new CustomPropertyCells("v1");
             n0.CustomProperties["p2"] = new CustomPropertyCells("v2");
@@ -88,7 +88,7 @@ namespace VisioAutomation_Tests.Models
 
             var basic_stencil = "basic_u.vss";
             var n0 = d.AddShape("n0", "Node 0", basic_stencil, "Rectangle");
-            n0.Size = new VA.Drawing.Size(3, 2);
+            n0.Size = new VA.Geometry.Size(3, 2);
             var n1 = d.AddShape("n1", "Node 1", basic_stencil, "Rectangle");
             var n2 = d.AddShape("n2", "Node 2", basic_stencil, "Rectangle");
             var n3 = d.AddShape("n3", "Node 3", basic_stencil, "Rectangle");

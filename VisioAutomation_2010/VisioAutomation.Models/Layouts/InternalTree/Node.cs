@@ -17,11 +17,11 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
         public int Id { get; set; }
 
-        public Drawing.Size Size { get; set; }
+        public Geometry.Size Size { get; set; }
 
-        public Drawing.Rectangle Rect => new Drawing.Rectangle(this.Position, this.Size);
+        public Geometry.Rectangle Rect => new Geometry.Rectangle(this.Position, this.Size);
 
-        internal void init(int id, Node<T> parent, Drawing.Size size, T data)
+        internal void init(int id, Node<T> parent, Geometry.Size size, T data)
         {
             this.Id = id;
             this.Size = size;
@@ -31,16 +31,16 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             this._child_list = new List<Node<T>>();
             this.left_neighbor = null;
             this.right_neighbor = null;
-            this.Position = new Drawing.Point(0, 0);
+            this.Position = new Geometry.Point(0, 0);
             this._is_collapsed = false;
         }
 
-        internal Node(int id, Node<T> parent, Drawing.Size size)
+        internal Node(int id, Node<T> parent, Geometry.Size size)
         {
             this.init(id, parent, size, default(T));
         }
 
-        public Node(Drawing.Size size, T data)
+        public Node(Geometry.Size size, T data)
         {
             this.init(Node<T>._nodeSeqNum++, null, size, data);
         }
@@ -101,7 +101,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             return child;
         }
 
-        public Node<T> AddNewChild(Drawing.Size size)
+        public Node<T> AddNewChild(Geometry.Size size)
         {
             var new_child = new Node<T>(Node<T>._nodeSeqNum++, null, size);
             this.add_child(new_child);
@@ -124,7 +124,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
         public T Data { get; set; }
 
-        public Drawing.Point Position { get; set; }
+        public Geometry.Point Position { get; set; }
 
         public bool GetIsAncestorCollapsed()
         {

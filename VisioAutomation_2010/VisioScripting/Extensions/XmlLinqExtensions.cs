@@ -4,17 +4,17 @@ namespace VisioScripting.Extensions
 {
     static class XmlLinqExtensions
     {
-
-        public static VisioAutomation.Drawing.ColorRgb AttributeAsColor(this SXL.XElement el, string name,
-            VisioAutomation.Drawing.ColorRgb def)
+        public static VisioAutomation.Color.ColorRgb AttributeAsColor(this SXL.XElement el, string name,
+            VisioAutomation.Color.ColorRgb def)
         {
-            return el.GetAttributeValue(name, def, VisioAutomation.Drawing.ColorRgb.ParseWebColor);
+            return el.GetAttributeValue(name, def, VisioAutomation.Color.ColorRgb.ParseWebColor);
         }
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)
         {
-            System.Func<string, double> double_parse = str => double.Parse(str, System.Globalization.CultureInfo.InvariantCulture);
-            return el.GetAttributeValue(name, def, s => XmlLinqExtensions.PointsToInches(double_parse(s)));
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            double DoubleParse(string str) => double.Parse(str, culture);
+            return el.GetAttributeValue(name, def, s => XmlLinqExtensions.PointsToInches(DoubleParse(s)));
         }
 
         private static double PointsToInches(double points)

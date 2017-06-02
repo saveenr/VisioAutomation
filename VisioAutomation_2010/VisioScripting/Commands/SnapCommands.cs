@@ -23,8 +23,8 @@ namespace VisioScripting.Commands
             var target_ids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Snape Shape Sizes"))
             {
-                var snapsize = new VisioAutomation.Drawing.Size(w, h);
-                var minsize = new VisioAutomation.Drawing.Size(w, h);
+                var snapsize = new VisioAutomation.Geometry.Size(w, h);
+                var minsize = new VisioAutomation.Geometry.Size(w, h);
                 VisioScripting.Helpers.ArrangeHelper.SnapSize(page, target_ids, snapsize, minsize);
             }
         }
@@ -46,11 +46,11 @@ namespace VisioScripting.Commands
             var target_ids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Snap Shape Corner"))
             {
-                VisioScripting.Helpers.ArrangeHelper.SnapCorner(page, target_ids, new VisioAutomation.Drawing.Size(w, h), corner);
+                VisioScripting.Helpers.ArrangeHelper.SnapCorner(page, target_ids, new VisioAutomation.Geometry.Size(w, h), corner);
             }
         }
 
-        public void SnapSize(VisioScripting.Models.TargetShapes targets, VisioAutomation.Drawing.Size snapsize, VisioAutomation.Drawing.Size minsize)
+        public void SnapSize(VisioScripting.Models.TargetShapes targets, VisioAutomation.Geometry.Size snapsize, VisioAutomation.Geometry.Size minsize)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
