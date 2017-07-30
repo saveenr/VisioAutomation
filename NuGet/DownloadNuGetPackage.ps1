@@ -5,6 +5,8 @@ $package_name = "VisioAutomation2010"
 $pkgsource_name = "nuget.org"
 $destination_path = [Environment]::GetFolderPath("MyDocuments")
 
+Write-Host "Attempting to install NuGet $package_name to $destination_path"
+
 $pkgsource = Get-PackageSource -Name $pkgsource_name 
 $package = find-package $package_name -Source $pkgsource.Location
 
