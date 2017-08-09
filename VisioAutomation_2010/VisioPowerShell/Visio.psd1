@@ -2,6 +2,7 @@
 #
 # HISTORY
 # -------
+# 2017/08/09 Removed the -Distance parameter from Format-VisioShape
 # 2017/04/14 Updated to latest VisioAutomation code
 # 2016/02/14 Added Hyperlink commands
 # 2015/10/19 Updated module manifest
@@ -19,7 +20,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '2.0.0'
+ModuleVersion = '2.0.1'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
