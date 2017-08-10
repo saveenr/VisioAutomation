@@ -32,35 +32,5 @@ namespace VisioPowerShell.Commands
                 this.Client.ShapeSheet.SetPageCells( t , this.Cells, this.BlastGuards, this.TestCircular);
             }
         }
-
-        public static Dictionary<string, string> CellHashtableToDictionary(Hashtable ht)
-        {
-            var dic = new Dictionary<string, string>();
-
-            foreach (object key in ht.Keys)
-            {
-                if (!(key is string))
-                {
-                    string message =
-                        string.Format("Only string values can be keys in the hashtable. Encountered a key of type {0}",
-                            key.GetType().FullName);
-                    throw new System.ArgumentOutOfRangeException(message);
-                }
-
-                string cellname = (string) key;
-                var cell_value_o = ht[key];
-
-                if (!(cell_value_o is string))
-                {
-                    string message =
-                        string.Format("Only string values can be values in the hashtable. Encountered a key of type {0}",
-                            key.GetType().FullName);
-                    throw new System.ArgumentOutOfRangeException(message);
-
-                }
-                dic[cellname] = (string) cell_value_o;
-            }
-            return dic;
-        }
     }
 }
