@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands
     public class SetVisioShapeCell : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, Position = 0)]
-        public VisioAutomation.Models.Dom.ShapeCells Cells { get; set; }
+        public VisioScripting.Models.ShapeCells Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }

@@ -9,7 +9,7 @@ namespace VisioPowerShell.Commands
     public class SetVisioPageCell: VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true,Position=0)] 
-        public VisioAutomation.Models.Dom.PageCells Cells{ get; set; }
+        public VisioScripting.Models.PageCells Cells{ get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
