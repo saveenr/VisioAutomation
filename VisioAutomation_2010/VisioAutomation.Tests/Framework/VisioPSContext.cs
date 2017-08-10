@@ -58,6 +58,7 @@ namespace VisioAutomation_Tests
 
         public void Set_Visio_PageCells(Dictionary<string,object> dic)
         {
+            /*
             var cmd = new SetVisioShapeCell();
             cmd.Hashtable = new System.Collections.Hashtable();
             foreach (var kv in dic)
@@ -65,6 +66,7 @@ namespace VisioAutomation_Tests
                 cmd.Hashtable[kv.Key] = kv.Value;
             }
             var results = cmd.Invoke();
+            */
         }
 
         public IVisio.DocumentClass New_Visio_Document()

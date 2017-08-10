@@ -1,7 +1,440 @@
-﻿using VisioAutomation.ShapeSheet;
+﻿using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioScripting.Models
 {
+    /*
+     * 
+ ['PrintBottomMargin',
+ 'PageHeight',
+ 'PrintLeftMargin',
+ 'PageLayoutLineJumpDirX',
+ 'PageLayoutLineJumpDirY',
+ 'PrintRightMargin',
+ 'PageScale',
+ 'PageLayoutShapeSplit',
+ 'PrintTopMargin',
+ 'PageWidth',
+ 'PrintCenterX',
+ 'PrintCenterY',
+ 'PrintPaperKind',
+ 'PrintGrid',
+ 'PrintPageOrientation',
+ 'PrintScaleX',
+ 'PrintScaleY',
+ 'PrintPaperSource',
+ 'PageDrawingScale',
+ 'PageDrawingScaleType',
+ 'PageDrawingSizeType',
+ 'PageInhibitSnap',
+ 'PageShadowObliqueAngle',
+ 'PageShadowOffsetX',
+ 'PageShadowOffsetY',
+ 'PageShadowScaleFactor',
+ 'PageShadowType',
+ 'PageUIVisibility',
+ 'XGridDensity',
+ 'XGridOrigin',
+ 'XGridSpacing',
+ 'XRulerDensity',
+ 'XRulerOrigin',
+ 'YGridDensity',
+ 'YGridOrigin',
+ 'YGridSpacing',
+ 'YRulerDensity',
+ 'YRulerOrigin',
+ 'PageLayoutAvenueSizeX',
+ 'PageLayoutAvenueSizeY',
+ 'PageLayoutBlockSizeX',
+ 'PageLayoutBlockSizeY',
+ 'PageLayoutControlAsInput',
+ 'PageLayoutDynamicsOff',
+ 'PageLayoutEnableGrid',
+ 'PageLayoutLineAdjustFrom',
+ 'PageLayoutLineAdjustTo',
+ 'PageLayoutLineJumpCode',
+ 'PageLayoutLineJumpFactorX',
+ 'PageLayoutLineJumpFactorY',
+ 'PageLayoutLineJumpStyle',
+ 'PageLayoutLineRouteExt',
+ 'PageLayoutLineToLineX',
+ 'PageLayoutLineToLineY',
+ 'PageLayoutLineToNodeX',
+ 'PageLayoutLineToNodeY',
+ 'PageLayoutPlaceDepth',
+ 'PageLayoutPlaceFlip',
+ 'PageLayoutPlaceStyle',
+ 'PageLayoutPlowCode',
+ 'PageLayoutResizePage',
+ 'PageLayoutRouteStyle',
+ 'PageLayoutAvoidPageBreaks',
+ 'PageDrawingResizeType']
+ 
+         
+         
+ ['XFormAngle',
+ 'OneDBeginX',
+ 'OneDBeginY',
+ 'LineBeginArrow',
+ 'LineBeginArrowSize',
+ 'CharCase',
+ 'CharColor',
+ 'CharColorTransparency',
+ 'CharFont',
+ 'CharFontScale',
+ 'CharLetterspace',
+ 'CharSize',
+ 'CharStyle',
+ 'OneDEndX',
+ 'OneDEndY',
+ 'LineEndArrow',
+ 'LineEndArrowSize',
+ 'FillBackground',
+ 'FillBackgroundTransparency',
+ 'FillForeground',
+ 'FillForegroundTransparency',
+ 'FillPattern',
+ 'XFormHeight',
+ 'LineCap',
+ 'LineColor',
+ 'LinePattern',
+ 'LineWeight',
+ 'LockAspect',
+ 'LockBegin',
+ 'LockCalcWH',
+ 'LockCrop',
+ 'LockCustomProp',
+ 'LockDelete',
+ 'LockEnd',
+ 'LockFormat',
+ 'LockFromGroupFormat',
+ 'LockGroup',
+ 'LockHeight',
+ 'LockMoveX',
+ 'LockMoveY',
+ 'LockRotate',
+ 'LockSelect',
+ 'LockTextEdit',
+ 'LockThemeColors',
+ 'LockThemeEffects',
+ 'LockVertexEdit',
+ 'LockWidth',
+ 'XFormLocPinX',
+ 'XFormLocPinY',
+ 'XFormPinX',
+ 'XFormPinY',
+ 'LineRounding',
+ 'GroupSelectMode',
+ 'FillShadowBackground',
+ 'FillShadowBackgroundTransparency',
+ 'FillShadowForeground',
+ 'FillShadowForegroundTransparency',
+ 'PageShadowObliqueAngle',
+ 'PageShadowOffsetX',
+ 'PageShadowOffsetY',
+ 'FillShadowPattern',
+ 'PageShadowScaleFactor',
+ 'PageShadowType',
+ 'TextXFormAngle',
+ 'TextXFormHeight',
+ 'TextXFormLocPinX',
+ 'TextXFormLocPinY',
+ 'TextXFormPinX',
+ 'TextXFormPinY',
+ 'TextXFormWidth',
+ 'XFormWidth']
+
+
+
+
+         */
+
+    public class PageCells
+    {
+        public string PrintBottomMargin;
+        public string PageHeight;
+        public string PrintLeftMargin;
+        public string PageLayoutLineJumpDirX;
+        public string PageLayoutLineJumpDirY;
+        public string PrintRightMargin;
+        public string PageScale;
+        public string PageLayoutShapeSplit;
+        public string PrintTopMargin;
+        public string PageWidth;
+        public string PrintCenterX;
+        public string PrintCenterY;
+        public string PrintPaperKind;
+        public string PrintGrid;
+        public string PrintPageOrientation;
+        public string PrintScaleX;
+        public string PrintScaleY;
+        public string PrintPaperSource;
+        public string PageDrawingScale;
+        public string PageDrawingScaleType;
+        public string PageDrawingSizeType;
+        public string PageInhibitSnap;
+        public string PageShadowObliqueAngle;
+        public string PageShadowOffsetX;
+        public string PageShadowOffsetY;
+        public string PageShadowScaleFactor;
+        public string PageShadowType;
+        public string PageUIVisibility;
+        public string XGridDensity;
+        public string XGridOrigin;
+        public string XGridSpacing;
+        public string XRulerDensity;
+        public string XRulerOrigin;
+        public string YGridDensity;
+        public string YGridOrigin;
+        public string YGridSpacing;
+        public string YRulerDensity;
+        public string YRulerOrigin;
+        public string PageLayoutAvenueSizeX;
+        public string PageLayoutAvenueSizeY;
+        public string PageLayoutBlockSizeX;
+        public string PageLayoutBlockSizeY;
+        public string PageLayoutControlAsInput;
+        public string PageLayoutDynamicsOff;
+        public string PageLayoutEnableGrid;
+        public string PageLayoutLineAdjustFrom;
+        public string PageLayoutLineAdjustTo;
+        public string PageLayoutLineJumpCode;
+        public string PageLayoutLineJumpFactorX;
+        public string PageLayoutLineJumpFactorY;
+        public string PageLayoutLineJumpStyle;
+        public string PageLayoutLineRouteExt;
+        public string PageLayoutLineToLineX;
+        public string PageLayoutLineToLineY;
+        public string PageLayoutLineToNodeX;
+        public string PageLayoutLineToNodeY;
+        public string PageLayoutPlaceDepth;
+        public string PageLayoutPlaceFlip;
+        public string PageLayoutPlaceStyle;
+        public string PageLayoutPlowCode;
+        public string PageLayoutResizePage;
+        public string PageLayoutRouteStyle;
+        public string PageLayoutAvoidPageBreaks;
+        public string PageDrawingResizeType;
+
+        public IEnumerable<VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair> GetSrcFormulaPairs()
+        {
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintBottomMargin, this.PrintBottomMargin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, this.PageHeight);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintLeftMargin, this.PrintLeftMargin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineJumpDirX, this.PageLayoutLineJumpDirX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineJumpDirY, this.PageLayoutLineJumpDirY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintRightMargin, this.PrintRightMargin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageScale, this.PageScale);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutShapeSplit, this.PageLayoutShapeSplit);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintTopMargin, this.PrintTopMargin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, this.PageWidth);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintCenterX, this.PrintCenterX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintCenterY, this.PrintCenterY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintPaperKind, this.PrintPaperKind);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintGrid, this.PrintGrid);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, this.PrintPageOrientation);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintScaleX, this.PrintScaleX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintScaleY, this.PrintScaleY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PrintPaperSource, this.PrintPaperSource);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageDrawingScale, this.PageDrawingScale);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageDrawingScaleType, this.PageDrawingScaleType);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageDrawingSizeType, this.PageDrawingSizeType);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageInhibitSnap, this.PageInhibitSnap);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowObliqueAngle, this.PageShadowObliqueAngle);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowOffsetX, this.PageShadowOffsetX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowOffsetY, this.PageShadowOffsetY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowScaleFactor, this.PageShadowScaleFactor);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowType, this.PageShadowType);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageUIVisibility, this.PageUIVisibility);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XRulerDensity, this.XRulerDensity);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XRulerOrigin, this.XRulerOrigin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.YGridDensity, this.YGridDensity);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.YGridOrigin, this.YGridOrigin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutAvenueSizeX, this.PageLayoutAvenueSizeX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, this.PageLayoutAvenueSizeY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutBlockSizeX, this.PageLayoutBlockSizeX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutBlockSizeY, this.PageLayoutBlockSizeY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutControlAsInput, this.PageLayoutControlAsInput);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutDynamicsOff, this.PageLayoutDynamicsOff);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutEnableGrid, this.PageLayoutEnableGrid);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineAdjustFrom, this.PageLayoutLineAdjustFrom);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineAdjustTo, this.PageLayoutLineAdjustTo);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineJumpCode, this.PageLayoutLineJumpCode);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineJumpFactorX, this.PageLayoutLineJumpFactorX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineJumpFactorY, this.PageLayoutLineJumpFactorY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineJumpStyle, this.PageLayoutLineJumpStyle);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineRouteExt, this.PageLayoutLineRouteExt);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineToLineX, this.PageLayoutLineToLineX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineToLineY, this.PageLayoutLineToLineY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineToNodeX, this.PageLayoutLineToNodeX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutLineToNodeY, this.PageLayoutLineToNodeY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutPlaceDepth, this.PageLayoutPlaceDepth);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutPlaceFlip, this.PageLayoutPlaceFlip);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutPlaceStyle, this.PageLayoutPlaceStyle);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutPlowCode, this.PageLayoutPlowCode);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutResizePage, this.PageLayoutResizePage);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutRouteStyle, this.PageLayoutRouteStyle);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageLayoutAvoidPageBreaks, this.PageLayoutAvoidPageBreaks);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageDrawingResizeType, this.PageDrawingResizeType);
+        }      
+    }
+
+    public class ShapeCells
+    {
+        public string XFormAngle;
+        public string OneDBeginX;
+        public string OneDBeginY;
+        public string LineBeginArrow;
+        public string LineBeginArrowSize;
+        public string CharCase;
+        public string CharColor;
+        public string CharColorTransparency;
+        public string CharFont;
+        public string CharFontScale;
+        public string CharLetterspace;
+        public string CharSize;
+        public string CharStyle;
+        public string OneDEndX;
+        public string OneDEndY;
+        public string LineEndArrow;
+        public string LineEndArrowSize;
+        public string FillBackground;
+        public string FillBackgroundTransparency;
+        public string FillForeground;
+        public string FillForegroundTransparency;
+        public string FillPattern;
+        public string XFormHeight;
+        public string LineCap;
+        public string LineColor;
+        public string LinePattern;
+        public string LineWeight;
+        public string LockAspect;
+        public string LockBegin;
+        public string LockCalcWH;
+        public string LockCrop;
+        public string LockCustomProp;
+        public string LockDelete;
+        public string LockEnd;
+        public string LockFormat;
+        public string LockFromGroupFormat;
+        public string LockGroup;
+        public string LockHeight;
+        public string LockMoveX;
+        public string LockMoveY;
+        public string LockRotate;
+        public string LockSelect;
+        public string LockTextEdit;
+        public string LockThemeColors;
+        public string LockThemeEffects;
+        public string LockVertexEdit;
+        public string LockWidth;
+        public string XFormLocPinX;
+        public string XFormLocPinY;
+        public string XFormPinX;
+        public string XFormPinY;
+        public string LineRounding;
+        public string GroupSelectMode;
+        public string FillShadowBackground;
+        public string FillShadowBackgroundTransparency;
+        public string FillShadowForeground;
+        public string FillShadowForegroundTransparency;
+        public string PageShadowObliqueAngle;
+        public string PageShadowOffsetX;
+        public string PageShadowOffsetY;
+        public string FillShadowPattern;
+        public string PageShadowScaleFactor;
+        public string PageShadowType;
+        public string TextXFormAngle;
+        public string TextXFormHeight;
+        public string TextXFormLocPinX;
+        public string TextXFormLocPinY;
+        public string TextXFormPinX;
+        public string TextXFormPinY;
+        public string TextXFormWidth;
+        public string XFormWidth;
+
+        public IEnumerable<VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair> GetSrcFormulaPairs()
+        {
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XFormAngle, this.XFormAngle);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.OneDBeginX, this.OneDBeginX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.OneDBeginY, this.OneDBeginY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LineBeginArrow, this.LineBeginArrow);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.CharCase, this.CharCase);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.CharColor, this.CharColor);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.CharColorTransparency, this.CharColorTransparency);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.CharFont, this.CharFont);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.CharFontScale, this.CharFontScale);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.CharLetterspace, this.CharLetterspace);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.CharSize, this.CharSize);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.CharStyle, this.CharStyle);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.OneDEndX, this.OneDEndX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.OneDEndY, this.OneDEndY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LineEndArrow, this.LineEndArrow);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillBackground, this.FillBackground);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillForeground, this.FillForeground);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillPattern, this.FillPattern);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, this.XFormHeight);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LineCap, this.LineCap);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LineColor, this.LineColor);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LinePattern, this.LinePattern);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LineWeight, this.LineWeight);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockAspect, this.LockAspect);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockBegin, this.LockBegin);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockCalcWH, this.LockCalcWH);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockCrop, this.LockCrop);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockCustomProp, this.LockCustomProp);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockDelete, this.LockDelete);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockEnd, this.LockEnd);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockFormat, this.LockFormat);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockFromGroupFormat, this.LockFromGroupFormat);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockGroup, this.LockGroup);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockHeight, this.LockHeight);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockMoveX, this.LockMoveX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockMoveY, this.LockMoveY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockRotate, this.LockRotate);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockSelect, this.LockSelect);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockTextEdit, this.LockTextEdit);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockThemeColors, this.LockThemeColors);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockThemeEffects, this.LockThemeEffects);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockVertexEdit, this.LockVertexEdit);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LockWidth, this.LockWidth);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, this.XFormLocPinX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY, this.XFormLocPinY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, this.XFormPinX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, this.XFormPinY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.LineRounding, this.LineRounding);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.GroupSelectMode, this.GroupSelectMode);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillShadowBackground, this.FillShadowBackground);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillShadowForeground, this.FillShadowForeground);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowObliqueAngle, this.PageShadowObliqueAngle);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowOffsetX, this.PageShadowOffsetX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowOffsetY, this.PageShadowOffsetY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.FillShadowPattern, this.FillShadowPattern);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowScaleFactor, this.PageShadowScaleFactor);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.PageShadowType, this.PageShadowType);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.TextXFormAngle, this.TextXFormAngle);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.TextXFormHeight, this.TextXFormHeight);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.TextXFormLocPinX, this.TextXFormLocPinX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.TextXFormLocPinY, this.TextXFormLocPinY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.TextXFormPinX, this.TextXFormPinX);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.TextXFormPinY, this.TextXFormPinY);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.TextXFormWidth, this.TextXFormWidth);
+            yield return new VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, this.XFormWidth);
+        }
+    }
+
     public class CellSrcDictionary : NamedSrcDictionary
     {
         private static CellSrcDictionary shape_cellmap;

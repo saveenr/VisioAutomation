@@ -83,6 +83,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\NewVisioPageCells.cs" />
+    <Compile Include="Commands\NewVisioShapeCells.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Commands\GetVisioHyperlink.cs" />
     <Compile Include="Models\Hyperlink.cs" />

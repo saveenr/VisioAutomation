@@ -9,7 +9,7 @@ namespace VisioPowerShell.Commands
     public class SetVisioPageCell: VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true,Position=0)] 
-        public Hashtable Hashtable  { get; set; }
+        public VisioAutomation.Models.Dom.PageCells Cells{ get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
@@ -29,8 +29,7 @@ namespace VisioPowerShell.Commands
                 var pagesheet = page.PageSheet;
                 var t = new VisioScripting.Models.TargetShapes(pagesheet);
 
-                var dic = CellHashtableToDictionary(this.Hashtable);
-                this.Client.ShapeSheet.SetPageCells( t , dic, this.BlastGuards, this.TestCircular);
+                this.Client.ShapeSheet.SetPageCells( t , this.Cells, this.BlastGuards, this.TestCircular);
             }
         }
 
