@@ -5,9 +5,9 @@ namespace VisioScripting.Models
 {
     public class CellValueDictionary : NameDictionary<string>
     {
-        private readonly CellSrcDictionary srcmap;
+        private readonly NamedSrcDictionary srcmap;
 
-        public CellValueDictionary(CellSrcDictionary srcmap, Dictionary<string,string> dictionary)
+        public CellValueDictionary(NamedSrcDictionary srcmap, Dictionary<string,string> dictionary)
         {
             if (srcmap == null)
             {

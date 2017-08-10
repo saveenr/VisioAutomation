@@ -70,7 +70,19 @@ namespace VisioScripting.Models
         public string YRulerDensity;
         public string YRulerOrigin;
 
-        public override IEnumerable<CellTuple> GetSrcFormulaPairs()
+        private static NamedSrcDictionary page_cellmap;
+
+        public static NamedSrcDictionary GetCellDictionary()
+        {
+            if (page_cellmap == null)
+            {
+                var cells = new VisioScripting.Models.PageCells();
+                page_cellmap = NamedSrcDictionary.FromCells(cells);
+            }
+            return page_cellmap;
+        }
+
+        public override IEnumerable<CellTuple> GetCellTuples()
         {
             yield return new CellTuple(nameof(SRCCON.PageDrawingResizeType), SRCCON.PageDrawingResizeType, this.PageDrawingResizeType);
             yield return new CellTuple(nameof(SRCCON.PageDrawingScale), SRCCON.PageDrawingScale, this.PageDrawingScale);

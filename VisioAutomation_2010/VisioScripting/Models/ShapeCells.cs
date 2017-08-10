@@ -77,7 +77,19 @@ namespace VisioScripting.Models
         public string TextXFormWidth;
         public string XFormWidth;
 
-        public override IEnumerable<CellTuple> GetSrcFormulaPairs()
+        private static NamedSrcDictionary shape_cellmap;
+
+        public static NamedSrcDictionary GetCellDictionary()
+        {
+            if (shape_cellmap == null)
+            {
+                var cells = new VisioScripting.Models.ShapeCells();
+                shape_cellmap = NamedSrcDictionary.FromCells(cells);
+            }
+            return shape_cellmap;
+        }
+
+        public override IEnumerable<CellTuple> GetCellTuples()
         {
             yield return new CellTuple(nameof(SRCCON.CharCase), SRCCON.CharCase, this.CharCase);
             yield return new CellTuple(nameof(SRCCON.CharColor), SRCCON.CharColor, this.CharColor);

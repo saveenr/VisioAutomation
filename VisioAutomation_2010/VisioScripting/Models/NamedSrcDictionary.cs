@@ -29,5 +29,22 @@ namespace VisioScripting.Models
             }
             return query;
         }
+
+        public static NamedSrcDictionary FromCells(BaseCells cells)
+        {
+            var tuples = cells.GetCellTuples();
+            return FromCellTuples(tuples);
+        }
+
+        public static NamedSrcDictionary FromCellTuples( IEnumerable<CellTuple> items)
+        {
+            var  dic = new NamedSrcDictionary();
+
+            foreach (var t in items)
+            {
+                dic[t.Name] = t.Src;
+            }
+            return dic;
+        }
     }
 }
