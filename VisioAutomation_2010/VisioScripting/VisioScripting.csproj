@@ -54,14 +54,12 @@
     <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\BaseCells.cs" />
-    <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\PageOrientation.cs" />
     <Compile Include="Models\NameDictionary.cs" />
     <Compile Include="Models\CellSrcDictionary.cs" />
     <Compile Include="Models\CellValueDictionary.cs" />
     <Compile Include="Models\NamedSrcDictionary.cs" />
     <Compile Include="Models\SelectionOperation.cs" />
-    <Compile Include="Models\ShapeCells.cs" />
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
     <Compile Include="Models\ConnectionPointType.cs" />

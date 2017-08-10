@@ -22,7 +22,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var cellmap = VisioScripting.Models.ShapeCells.GetCellDictionary();
+            var cellmap = VisioPowerShell.Models.ShapeCells.GetCellDictionary();
             if (this.Cells == null || this.Cells.Length < 1 || this.Cells.Contains("*"))
             {
                 this.Cells = cellmap.GetNames().ToArray();

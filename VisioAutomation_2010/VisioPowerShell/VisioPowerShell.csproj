@@ -96,6 +96,8 @@
     <Compile Include="Commands\FormatVisioShapeText.cs" />
     <Compile Include="Commands\NewVisioContainer.cs" />
     <Compile Include="Commands\OpenVisioMaster.cs" />
+    <Compile Include="Models\PageCells.cs" />
+    <Compile Include="Models\ShapeCells.cs" />
     <Compile Include="Models\UserDefinedCell.cs" />
     <Compile Include="Models\ConnectionPoint.cs" />
     <Compile Include="Models\CustomProperty.cs" />

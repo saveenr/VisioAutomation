@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using SRCCON = VisioAutomation.ShapeSheet.SrcConstants;
+using CellTuple = VisioScripting.Models.CellTuple;
 
-namespace VisioScripting.Models
+namespace VisioPowerShell.Models
 {
-    public class PageCells : BaseCells
+    public class PageCells : VisioScripting.Models.BaseCells
     {
         public string PageDrawingResizeType;
         public string PageDrawingScale;
@@ -70,14 +71,14 @@ namespace VisioScripting.Models
         public string YRulerDensity;
         public string YRulerOrigin;
 
-        private static NamedSrcDictionary page_cellmap;
+        private static VisioScripting.Models.NamedSrcDictionary page_cellmap;
 
-        public static NamedSrcDictionary GetCellDictionary()
+        public static VisioScripting.Models.NamedSrcDictionary GetCellDictionary()
         {
             if (page_cellmap == null)
             {
-                var cells = new VisioScripting.Models.PageCells();
-                page_cellmap = NamedSrcDictionary.FromCells(cells);
+                var cells = new VisioPowerShell.Models.PageCells();
+                page_cellmap = VisioScripting.Models.NamedSrcDictionary.FromCells(cells);
             }
             return page_cellmap;
         }

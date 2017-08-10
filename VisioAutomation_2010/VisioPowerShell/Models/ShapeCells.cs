@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using SRCCON = VisioAutomation.ShapeSheet.SrcConstants;
+using CellTuple = VisioScripting.Models.CellTuple;
 
-namespace VisioScripting.Models
+namespace VisioPowerShell.Models
 {
-    public class ShapeCells : BaseCells
+    public class ShapeCells : VisioScripting.Models.BaseCells
     {
         public string XFormAngle;
         public string OneDBeginX;
@@ -77,14 +78,14 @@ namespace VisioScripting.Models
         public string TextXFormWidth;
         public string XFormWidth;
 
-        private static NamedSrcDictionary shape_cellmap;
+        private static VisioScripting.Models.NamedSrcDictionary shape_cellmap;
 
-        public static NamedSrcDictionary GetCellDictionary()
+        public static VisioScripting.Models.NamedSrcDictionary GetCellDictionary()
         {
             if (shape_cellmap == null)
             {
-                var cells = new VisioScripting.Models.ShapeCells();
-                shape_cellmap = NamedSrcDictionary.FromCells(cells);
+                var cells = new VisioPowerShell.Models.ShapeCells();
+                shape_cellmap = VisioScripting.Models.NamedSrcDictionary.FromCells(cells);
             }
             return shape_cellmap;
         }
