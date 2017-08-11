@@ -93,14 +93,14 @@ namespace VisioScripting.Commands
             return reader;
         }
 
-        public void SetPageCells(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.BaseCells cells, bool blast_guards,
+        public void SetPageCells(VisioScripting.Models.TargetShapes targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards,
             bool test_circular)
         {
             var targets2 = targets.ToShapeIDs();
-            this.SetPageCells(targets2,cells,blast_guards,test_circular);
+            this.SetPageCells(targets2,apply_cells,blast_guards,test_circular);
         }
 
-        public void SetPageCells(VisioScripting.Models.TargetShapeIDs targets, VisioScripting.Models.BaseCells cells, bool blast_guards, bool test_circular)
+        public void SetPageCells(VisioScripting.Models.TargetShapeIDs targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards, bool test_circular)
         {
             var writer = new SidSrcWriter();
             writer.BlastGuards = blast_guards;
@@ -109,7 +109,7 @@ namespace VisioScripting.Commands
 
             foreach (var shape_id in targets.ShapeIDs)
             {
-                cells.Apply(writer, (short) shape_id);
+                apply_cells(writer, (short) shape_id);
             }
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
@@ -126,14 +126,14 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetShapeCells(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.BaseCells cells, bool blast_guards, bool test_circular)
+        public void SetShapeCells(VisioScripting.Models.TargetShapes targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards, bool test_circular)
         {
             targets = targets.ResolveShapes(this._client);
             var target_ids = targets.ToShapeIDs();
-            this.SetShapeCells(target_ids, cells, blast_guards, test_circular);
+            this.SetShapeCells(target_ids, apply_cells, blast_guards, test_circular);
         }
 
-        public void SetShapeCells(VisioScripting.Models.TargetShapeIDs targets, VisioScripting.Models.BaseCells cells, bool blast_guards, bool test_circular)
+        public void SetShapeCells(VisioScripting.Models.TargetShapeIDs targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards, bool test_circular)
         {
             var writer = new SidSrcWriter();
             writer.BlastGuards = blast_guards;
@@ -142,7 +142,7 @@ namespace VisioScripting.Commands
 
             foreach (var shape_id in targets.ShapeIDs)
             {
-                cells.Apply(writer, (short)shape_id);
+                apply_cells(writer, (short)shape_id);
             }
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();

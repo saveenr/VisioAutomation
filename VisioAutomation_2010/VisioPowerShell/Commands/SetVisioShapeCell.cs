@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using VisioAutomation.ShapeSheet.Writers;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -24,7 +25,13 @@ namespace VisioPowerShell.Commands
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
             var targets = new VisioScripting.Models.TargetShapes(target_shapes);
 
-            this.Client.ShapeSheet.SetShapeCells(targets, this.Cells, this.BlastGuards, this.TestCircular);
+            this.Client.ShapeSheet.SetShapeCells(targets, this.ApplyCells, this.BlastGuards, this.TestCircular);
         }
+
+        public void ApplyCells(SidSrcWriter writer, short id)
+        {
+            this.Cells.Apply(writer, id);
+        }
+
     }
 }

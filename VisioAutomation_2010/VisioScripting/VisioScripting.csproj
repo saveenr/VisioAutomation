@@ -53,12 +53,7 @@
     <Compile Include="Models\AlignmentHorizontal.cs" />
     <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
-    <Compile Include="Models\BaseCells.cs" />
-    <Compile Include="Models\CellTuple.cs" />
     <Compile Include="Models\PageOrientation.cs" />
-    <Compile Include="Models\NamedDictionary.cs" />
-    <Compile Include="Models\CellValueDictionary.cs" />
-    <Compile Include="Models\NamedSrcDictionary.cs" />
     <Compile Include="Models\SelectionOperation.cs" />
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioScripting.Models
+namespace VisioPowerShell.Models
 {
     public abstract class BaseCells
     {

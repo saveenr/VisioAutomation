@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using SRCCON = VisioAutomation.ShapeSheet.SrcConstants;
-using CellTuple = VisioScripting.Models.CellTuple;
+using CellTuple = VisioPowerShell.Models.CellTuple;
 
 namespace VisioPowerShell.Models
 {
-    public class ShapeCells : VisioScripting.Models.BaseCells
+    public class ShapeCells : VisioPowerShell.Models.BaseCells
     {
         public string CharCase;
         public string CharColor;
@@ -78,14 +78,14 @@ namespace VisioPowerShell.Models
         public string XFormPinY;
         public string XFormWidth;
 
-        private static VisioScripting.Models.NamedSrcDictionary cellmap;
+        private static VisioPowerShell.Models.NamedSrcDictionary cellmap;
 
-        public static VisioScripting.Models.NamedSrcDictionary GetCellDictionary()
+        public static VisioPowerShell.Models.NamedSrcDictionary GetCellDictionary()
         {
             if (cellmap == null)
             {
                 var cells = new VisioPowerShell.Models.ShapeCells();
-                cellmap = VisioScripting.Models.NamedSrcDictionary.FromCells(cells);
+                cellmap = VisioPowerShell.Models.NamedSrcDictionary.FromCells(cells);
             }
             return cellmap;
         }

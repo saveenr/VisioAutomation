@@ -63,7 +63,7 @@ namespace VisioPowerShell.Commands
             return false;
         }
 
-        protected void DumpValues(VisioScripting.Models.CellValueDictionary cellvalues)
+        protected void DumpValues(VisioPowerShell.Models.CellValueDictionary cellvalues)
         {
             this.WriteVerbose(string.Format("CellValues contains {0} items", cellvalues.Keys.Count));
             foreach (var cellname in cellvalues.Keys)

@@ -1,4 +1,4 @@
-namespace VisioScripting.Models
+namespace VisioPowerShell.Models
 {
     public struct CellTuple
     {

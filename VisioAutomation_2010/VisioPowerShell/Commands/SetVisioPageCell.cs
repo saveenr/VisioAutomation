@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Writers;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -29,8 +30,14 @@ namespace VisioPowerShell.Commands
                 var pagesheet = page.PageSheet;
                 var t = new VisioScripting.Models.TargetShapes(pagesheet);
 
-                this.Client.ShapeSheet.SetPageCells( t , this.Cells, this.BlastGuards, this.TestCircular);
+
+                this.Client.ShapeSheet.SetPageCells( t , this.ApplyCells, this.BlastGuards, this.TestCircular);
             }
+        }
+
+        public void ApplyCells(SidSrcWriter writer, short id)
+        {
+            this.Cells.Apply(writer,id);
         }
     }
 }
