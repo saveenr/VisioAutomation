@@ -54,6 +54,7 @@
     <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\BaseCells.cs" />
+    <Compile Include="Models\CellTuple.cs" />
     <Compile Include="Models\PageOrientation.cs" />
     <Compile Include="Models\NameDictionary.cs" />
     <Compile Include="Models\CellSrcDictionary.cs" />
