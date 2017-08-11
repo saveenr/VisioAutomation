@@ -3,7 +3,7 @@ using VisioAutomation.ShapeSheet;
 
 namespace VisioScripting.Models
 {
-    public class CellValueDictionary : NameDictionary<string>
+    public class CellValueDictionary : NamedDictionary<string>
     {
         private readonly NamedSrcDictionary srcmap;
 

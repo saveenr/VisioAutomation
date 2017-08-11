@@ -5,13 +5,13 @@ using System.Text.RegularExpressions;
 
 namespace VisioScripting.Models
 {
-    public class NameDictionary<T>
+    public class NamedDictionary<T>
     {
         private readonly Dictionary<string, T> dic;
         private readonly Regex regex_name;
         private readonly Regex regex_name_wildcard;
 
-        public NameDictionary()
+        public NamedDictionary()
         {
             this.regex_name = new Regex("^[a-zA-Z]*$");
             this.regex_name_wildcard = new Regex("^[a-zA-Z\\*\\?]*$");
@@ -84,7 +84,7 @@ namespace VisioScripting.Models
             {
                 this.CheckNameWildcard(name);
 
-                var regex = NameDictionary<T>.GetRegexForWildCardPattern(name);
+                var regex = NamedDictionary<T>.GetRegexForWildCardPattern(name);
 
                 foreach (string k in this.Keys)
                 {

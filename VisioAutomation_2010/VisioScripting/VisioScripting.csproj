@@ -56,7 +56,7 @@
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />
     <Compile Include="Models\PageOrientation.cs" />
-    <Compile Include="Models\NameDictionary.cs" />
+    <Compile Include="Models\NamedDictionary.cs" />
     <Compile Include="Models\CellSrcDictionary.cs" />
     <Compile Include="Models\CellValueDictionary.cs" />
     <Compile Include="Models\NamedSrcDictionary.cs" />
