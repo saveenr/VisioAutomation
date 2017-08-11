@@ -30,6 +30,19 @@ namespace VisioScripting.Models
             return query;
         }
 
+
+        public string[] ExpandCellNames(string [] names)
+        {
+            // if empty or contains "*" return all the cell names
+            if (names == null || names.Length < 1 || names.Contains("*"))
+            {
+                return this.GetNames().ToArray();
+            }
+
+            // otherwise use the names specified
+            return names;
+        }
+
         public static NamedSrcDictionary FromCells(BaseCells cells)
         {
             var tuples = cells.GetCellTuples();

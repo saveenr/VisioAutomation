@@ -6,11 +6,6 @@ namespace VisioPowerShell.Models
 {
     public class ShapeCells : VisioScripting.Models.BaseCells
     {
-        public string XFormAngle;
-        public string OneDBeginX;
-        public string OneDBeginY;
-        public string LineBeginArrow;
-        public string LineBeginArrowSize;
         public string CharCase;
         public string CharColor;
         public string CharColorTransparency;
@@ -19,19 +14,25 @@ namespace VisioPowerShell.Models
         public string CharLetterspace;
         public string CharSize;
         public string CharStyle;
-        public string OneDEndX;
-        public string OneDEndY;
-        public string LineEndArrow;
-        public string LineEndArrowSize;
         public string FillBackground;
         public string FillBackgroundTransparency;
         public string FillForeground;
         public string FillForegroundTransparency;
         public string FillPattern;
-        public string XFormHeight;
+        public string FillShadowBackground;
+        public string FillShadowBackgroundTransparency;
+        public string FillShadowForeground;
+        public string FillShadowForegroundTransparency;
+        public string FillShadowPattern;
+        public string GroupSelectMode;
+        public string LineBeginArrow;
+        public string LineBeginArrowSize;
         public string LineCap;
         public string LineColor;
+        public string LineEndArrow;
+        public string LineEndArrowSize;
         public string LinePattern;
+        public string LineRounding;
         public string LineWeight;
         public string LockAspect;
         public string LockBegin;
@@ -53,20 +54,13 @@ namespace VisioPowerShell.Models
         public string LockThemeEffects;
         public string LockVertexEdit;
         public string LockWidth;
-        public string XFormLocPinX;
-        public string XFormLocPinY;
-        public string XFormPinX;
-        public string XFormPinY;
-        public string LineRounding;
-        public string GroupSelectMode;
-        public string FillShadowBackground;
-        public string FillShadowBackgroundTransparency;
-        public string FillShadowForeground;
-        public string FillShadowForegroundTransparency;
+        public string OneDBeginX;
+        public string OneDBeginY;
+        public string OneDEndX;
+        public string OneDEndY;
         public string PageShadowObliqueAngle;
         public string PageShadowOffsetX;
         public string PageShadowOffsetY;
-        public string FillShadowPattern;
         public string PageShadowScaleFactor;
         public string PageShadowType;
         public string TextXFormAngle;
@@ -76,18 +70,24 @@ namespace VisioPowerShell.Models
         public string TextXFormPinX;
         public string TextXFormPinY;
         public string TextXFormWidth;
+        public string XFormAngle;
+        public string XFormHeight;
+        public string XFormLocPinX;
+        public string XFormLocPinY;
+        public string XFormPinX;
+        public string XFormPinY;
         public string XFormWidth;
 
-        private static VisioScripting.Models.NamedSrcDictionary shape_cellmap;
+        private static VisioScripting.Models.NamedSrcDictionary cellmap;
 
         public static VisioScripting.Models.NamedSrcDictionary GetCellDictionary()
         {
-            if (shape_cellmap == null)
+            if (cellmap == null)
             {
                 var cells = new VisioPowerShell.Models.ShapeCells();
-                shape_cellmap = VisioScripting.Models.NamedSrcDictionary.FromCells(cells);
+                cellmap = VisioScripting.Models.NamedSrcDictionary.FromCells(cells);
             }
-            return shape_cellmap;
+            return cellmap;
         }
 
         public override IEnumerable<CellTuple> GetCellTuples()

@@ -71,16 +71,16 @@ namespace VisioPowerShell.Models
         public string YRulerDensity;
         public string YRulerOrigin;
 
-        private static VisioScripting.Models.NamedSrcDictionary page_cellmap;
+        private static VisioScripting.Models.NamedSrcDictionary cellmap;
 
         public static VisioScripting.Models.NamedSrcDictionary GetCellDictionary()
         {
-            if (page_cellmap == null)
+            if (cellmap == null)
             {
                 var cells = new VisioPowerShell.Models.PageCells();
-                page_cellmap = VisioScripting.Models.NamedSrcDictionary.FromCells(cells);
+                cellmap = VisioScripting.Models.NamedSrcDictionary.FromCells(cells);
             }
-            return page_cellmap;
+            return cellmap;
         }
 
         public override IEnumerable<CellTuple> GetCellTuples()

@@ -23,12 +23,9 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var cellmap = VisioPowerShell.Models.ShapeCells.GetCellDictionary();
-            if (this.Cells == null || this.Cells.Length < 1 || this.Cells.Contains("*"))
-            {
-                this.Cells = cellmap.GetNames().ToArray();
-            }
 
-            GetVisioPageCell.EnsureEnoughCellNames(this.Cells);
+            this.Cells = cellmap.ExpandCellNames(this.Cells);
+
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
             var v = string.Join(",", cellmap.GetNames());
             this.WriteVerbose(string.Format("Valid Names: {0}", v));
