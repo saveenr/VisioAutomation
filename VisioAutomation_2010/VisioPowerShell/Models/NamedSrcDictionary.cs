@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioPowerShell.Models
 {
-    public class NamedSrcDictionary : NamedDictionary<Src>
+    public class NamedSrcDictionary : NamedDictionary<VisioAutomation.ShapeSheet.Src>
     {
-        public ShapeSheetQuery ToQuery(IList<string> Cells)
+        public VisioAutomation.ShapeSheet.Query.ShapeSheetQuery ToQuery(IList<string> Cells)
         {
             var invalid_names = Cells.Where(cellname => !this.ContainsKey(cellname)).ToList();
             if (invalid_names.Count > 0)
@@ -17,7 +15,7 @@ namespace VisioPowerShell.Models
                 throw new ArgumentException(msg);
             }
 
-            var query = new ShapeSheetQuery();
+            var query = new VisioAutomation.ShapeSheet.Query.ShapeSheetQuery();
 
             foreach (string resolved_cellname in this.ResolveNames(Cells))
             {
@@ -29,7 +27,6 @@ namespace VisioPowerShell.Models
             }
             return query;
         }
-
 
         public string[] ExpandCellNames(string [] names)
         {
@@ -46,16 +43,15 @@ namespace VisioPowerShell.Models
         public static NamedSrcDictionary FromCells(BaseCells cells)
         {
             var tuples = cells.GetCellTuples();
-            return FromCellTuples(tuples);
+            return FromCells(tuples);
         }
 
-        public static NamedSrcDictionary FromCellTuples( IEnumerable<CellTuple> items)
+        public static NamedSrcDictionary FromCells( IEnumerable<CellTuple> tuples)
         {
             var  dic = new NamedSrcDictionary();
-
-            foreach (var t in items)
+            foreach (var tuple in tuples)
             {
-                dic[t.Name] = t.Src;
+                dic[tuple.Name] = tuple.Src;
             }
             return dic;
         }
