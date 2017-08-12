@@ -11,7 +11,6 @@ namespace VisioScripting
 
         public Commands.ApplicationCommands Application { get; }
         public Commands.ViewCommands View { get; }
-        public Commands.FormatCommands Format { get; }
         public Commands.LayerCommands Layer { get; }
         public Commands.ControlCommands Control { get; }
         public Commands.HyperlinkCommands Hyperlink { get; }
@@ -53,7 +52,6 @@ namespace VisioScripting
 
             this.Application = new Commands.ApplicationCommands(this,app);
             this.View = new Commands.ViewCommands(this);
-            this.Format = new Commands.FormatCommands(this);
             this.Layer = new Commands.LayerCommands(this);
             this.Control = new Commands.ControlCommands(this);
             this.Hyperlink = new Commands.HyperlinkCommands(this);

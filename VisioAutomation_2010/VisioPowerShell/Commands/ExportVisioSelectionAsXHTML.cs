@@ -35,7 +35,7 @@ namespace VisioPowerShell.Commands
 
             if (ext == ".html" || ext == ".xhtml" || ext == ".htm")
             {
-                this.Client.Export.SelectionToSVGXHTML(this.Filename);                
+                this.Client.Export.SelectionToHtml(this.Filename);                
             }
             else
             {

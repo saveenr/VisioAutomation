@@ -103,7 +103,7 @@ namespace VisioScripting.Commands
             active_window.Page = old_page;
         }
 
-        public void SelectionToSVGXHTML(string filename)
+        public void SelectionToHtml(string filename)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -120,10 +120,10 @@ namespace VisioScripting.Commands
             }
 
             var selection = this._client.Selection.Get();
-            this.SelectionToSVGXHTML(selection, filename, s => this._client.WriteVerbose(s));
+            this.SelectionToHtml(selection, filename, s => this._client.WriteVerbose(s));
         }
 
-        private void SelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
+        private void SelectionToHtml(IVisio.Selection selection, string filename, System.Action<string> verboselog)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
