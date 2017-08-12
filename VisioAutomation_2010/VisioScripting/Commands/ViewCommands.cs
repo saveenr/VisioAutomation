@@ -22,7 +22,7 @@ namespace VisioScripting.Commands
             return active_window;
         }
 
-        public double GetActiveZoom()
+        public double GetZoom()
         {
             this._client.Application.AssertApplicationAvailable();
 
