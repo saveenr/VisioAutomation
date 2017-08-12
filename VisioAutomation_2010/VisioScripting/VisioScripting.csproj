@@ -48,7 +48,6 @@
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
-    <Compile Include="Commands\SnapCommands.cs" />
     <Compile Include="Helpers\SelectionHelper.cs" />
     <Compile Include="Models\AlignmentHorizontal.cs" />
     <Compile Include="Models\AlignmentVertical.cs" />

@@ -21,7 +21,6 @@ namespace VisioScripting
         public Commands.DrawCommands Draw { get; }
         public Commands.MasterCommands Master { get; }
         public Commands.ArrangeCommands Arrange { get; }
-        public Commands.SnapCommands Snap { get; }
         public Commands.DistributeCommands Distribute { get; }
         public Commands.AlignCommands Align { get; }
         public Commands.PageCommands Page { get; }
@@ -72,7 +71,6 @@ namespace VisioScripting
             this.Output = new Commands.OutputCommands(this);
             this.Distribute = new DistributeCommands(this);
             this.Grouping = new GroupingCommands(this);
-            this.Snap = new SnapCommands(this);
             this.Align = new AlignCommands(this);
         }
 
