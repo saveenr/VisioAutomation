@@ -7,7 +7,7 @@ namespace GenTreeOps_Test
     public class PreOrderTests
     {
         [TestMethod]
-        public void Walk_4()
+        public void PreOrder_1()
         {
             var n0 = new XNode("A");
 
@@ -18,7 +18,7 @@ namespace GenTreeOps_Test
         }
 
         [TestMethod]
-        public void Walk_5()
+        public void PreOrder_2()
         {
             var n0 = new XNode("A");
             var n1 = new XNode("B");
@@ -31,7 +31,7 @@ namespace GenTreeOps_Test
         }
 
         [TestMethod]
-        public void Walk_6()
+        public void PreOrder_3()
         {
             var n0 = new XNode("A");
             var n1 = new XNode("B");
@@ -44,8 +44,9 @@ namespace GenTreeOps_Test
             var preorder_results = GenTreeOps.Algorithms.PreOrder(n0, n => n.Children).ToList();
             var preorder_string = string.Join("", preorder_results.Select(n => n.Name));
 
-            Assert.AreEqual("ABCD", preorder_results.Count);
+            Assert.AreEqual("ABCD", preorder_string);
         }
+
 
     }
 }

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GenTreeOps_Test
@@ -7,7 +8,7 @@ namespace GenTreeOps_Test
     public class CopyTests
     {
         [TestMethod]
-        public void Walk_4()
+        public void Copy_1()
         {
             var n0 = new XNode("A");
 
@@ -26,7 +27,7 @@ namespace GenTreeOps_Test
         }
 
         [TestMethod]
-        public void Walk_5()
+        public void Copy_2()
         {
             var n0 = new XNode("A");
             var n1 = new XNode("B");
@@ -69,6 +70,32 @@ namespace GenTreeOps_Test
 
             Assert.AreEqual("ABCD", src);
             Assert.AreEqual("ABCD", dest);
+        }
+
+        [TestMethod]
+        public void Copy_4()
+        {
+            var n0 = new XNode("A");
+            var n1 = new XNode("B");
+            var n2 = new XNode("C");
+            var n3 = new XNode("D");
+            n0.Children.Add(n1);
+            n0.Children.Add(n2);
+            n2.Children.Add(n3);
+
+            var output = GenTreeOps.Algorithms.CopyTree(
+                n0, // the source root 
+                src_n => src_n.Children, // how to enum src children
+                src_n => new System.Xml.Linq.XElement(src_n.Name), // how to create a dest node
+                (dest_p, dest_c) => { dest_p.Add(dest_c); }// how ot add a child
+            );
+
+            string src = n0.GetPreorderString();
+            string dest = output[0].ToString() ;
+            dest = Regex.Replace(dest, @"\s+", "");
+
+            Assert.AreEqual("ABCD", src);
+            Assert.AreEqual("<A><B/><C><D/></C></A>", dest);
         }
 
     }
