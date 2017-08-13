@@ -72,7 +72,7 @@ namespace VisioAutomation.Text
             cells.Case = row[this.Case];
             cells.ComplexScriptFont = row[this.ComplexScriptFont];
             cells.ComplexScriptSize = row[this.ComplexScriptSize];
-            cells.DoubleStrikeThrough = row[this.DoubleStrikethrough];
+            cells.DoubleStrikethrough = row[this.DoubleStrikethrough];
             cells.DoubleUnderline = row[this.DoubleUnderline];
             cells.FontScale = row[this.FontScale];
             cells.LangID = row[this.LangID];
