@@ -16,5 +16,26 @@ namespace VisioPowerShell.Models
                 }
             }
         }
+
+        public static BaseCells CreateCells(CellsType type)
+        {
+            if (type == VisioPowerShell.Models.CellsType.Page)
+            {
+                return new VisioPowerShell.Models.PageCells();
+            }
+            else if (type == VisioPowerShell.Models.CellsType.ShapeFormat)
+            {
+                return new VisioPowerShell.Models.ShapeCells();
+            }
+            else if (type == VisioPowerShell.Models.CellsType.TextFormat)
+            {
+                return new VisioPowerShell.Models.TextCells();
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+        }
+
     }
 }

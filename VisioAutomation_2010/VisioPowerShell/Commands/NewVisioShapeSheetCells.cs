@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioPowerShell.Models;
 
 namespace VisioPowerShell.Commands
 {
@@ -10,27 +11,8 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (this.Type == VisioPowerShell.Models.CellsType.Page)
-            {
-                var pagecells = new VisioPowerShell.Models.PageCells();
-                this.WriteObject(pagecells);
-
-            }
-            else if (this.Type == VisioPowerShell.Models.CellsType.ShapeFormat)
-            {
-                var shapecells = new VisioPowerShell.Models.ShapeCells();
-                this.WriteObject(shapecells);
-
-            }
-            else if (this.Type == VisioPowerShell.Models.CellsType.TextFormat)
-            {
-                var textcells = new VisioPowerShell.Models.TextCells();
-                this.WriteObject(textcells);
-            }
-            else
-            {
-                throw new System.ArgumentException();
-            }
+            var cells = BaseCells.CreateCells(this.Type);
+            this.WriteObject(cells);
         }
     }
 }
