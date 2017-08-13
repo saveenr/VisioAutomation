@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\NewVisioPageCells.cs" />
+    <Compile Include="Commands\NewVisioTextCells.cs" />
     <Compile Include="Commands\NewVisioShapeCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Models\NamedSrcDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\ShapeCells.cs" />
+    <Compile Include="Models\TextCells.cs" />
     <Compile Include="Models\UserDefinedCell.cs" />
     <Compile Include="Models\ConnectionPoint.cs" />
     <Compile Include="Models\CustomProperty.cs" />

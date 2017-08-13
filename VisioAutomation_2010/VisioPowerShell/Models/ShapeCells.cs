@@ -6,14 +6,6 @@ namespace VisioPowerShell.Models
 {
     public class ShapeCells : VisioPowerShell.Models.BaseCells
     {
-        public string CharCase;
-        public string CharColor;
-        public string CharColorTransparency;
-        public string CharFont;
-        public string CharFontScale;
-        public string CharLetterspace;
-        public string CharSize;
-        public string CharStyle;
         public string FillBackground;
         public string FillBackgroundTransparency;
         public string FillForeground;
@@ -63,13 +55,6 @@ namespace VisioPowerShell.Models
         public string PageShadowOffsetY;
         public string PageShadowScaleFactor;
         public string PageShadowType;
-        public string TextXFormAngle;
-        public string TextXFormHeight;
-        public string TextXFormLocPinX;
-        public string TextXFormLocPinY;
-        public string TextXFormPinX;
-        public string TextXFormPinY;
-        public string TextXFormWidth;
         public string XFormAngle;
         public string XFormHeight;
         public string XFormLocPinX;
@@ -92,14 +77,6 @@ namespace VisioPowerShell.Models
 
         public override IEnumerable<CellTuple> GetCellTuples()
         {
-            yield return new CellTuple(nameof(SRCCON.CharCase), SRCCON.CharCase, this.CharCase);
-            yield return new CellTuple(nameof(SRCCON.CharColor), SRCCON.CharColor, this.CharColor);
-            yield return new CellTuple(nameof(SRCCON.CharColorTransparency), SRCCON.CharColorTransparency, this.CharColorTransparency);
-            yield return new CellTuple(nameof(SRCCON.CharFont), SRCCON.CharFont, this.CharFont);
-            yield return new CellTuple(nameof(SRCCON.CharFontScale), SRCCON.CharFontScale, this.CharFontScale);
-            yield return new CellTuple(nameof(SRCCON.CharLetterspace), SRCCON.CharLetterspace, this.CharLetterspace);
-            yield return new CellTuple(nameof(SRCCON.CharSize), SRCCON.CharSize, this.CharSize);
-            yield return new CellTuple(nameof(SRCCON.CharStyle), SRCCON.CharStyle, this.CharStyle);
             yield return new CellTuple(nameof(SRCCON.FillBackground), SRCCON.FillBackground, this.FillBackground);
             yield return new CellTuple(nameof(SRCCON.FillBackgroundTransparency), SRCCON.FillBackgroundTransparency, this.FillBackgroundTransparency);
             yield return new CellTuple(nameof(SRCCON.FillForeground), SRCCON.FillForeground, this.FillForeground);
@@ -149,13 +126,6 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.PageShadowOffsetY), SRCCON.PageShadowOffsetY, this.PageShadowOffsetY);
             yield return new CellTuple(nameof(SRCCON.PageShadowScaleFactor), SRCCON.PageShadowScaleFactor, this.PageShadowScaleFactor);
             yield return new CellTuple(nameof(SRCCON.PageShadowType), SRCCON.PageShadowType, this.PageShadowType);
-            yield return new CellTuple(nameof(SRCCON.TextXFormAngle), SRCCON.TextXFormAngle, this.TextXFormAngle);
-            yield return new CellTuple(nameof(SRCCON.TextXFormHeight), SRCCON.TextXFormHeight, this.TextXFormHeight);
-            yield return new CellTuple(nameof(SRCCON.TextXFormLocPinX), SRCCON.TextXFormLocPinX, this.TextXFormLocPinX);
-            yield return new CellTuple(nameof(SRCCON.TextXFormLocPinY), SRCCON.TextXFormLocPinY, this.TextXFormLocPinY);
-            yield return new CellTuple(nameof(SRCCON.TextXFormPinX), SRCCON.TextXFormPinX, this.TextXFormPinX);
-            yield return new CellTuple(nameof(SRCCON.TextXFormPinY), SRCCON.TextXFormPinY, this.TextXFormPinY);
-            yield return new CellTuple(nameof(SRCCON.TextXFormWidth), SRCCON.TextXFormWidth, this.TextXFormWidth);
             yield return new CellTuple(nameof(SRCCON.XFormAngle), SRCCON.XFormAngle, this.XFormAngle);
             yield return new CellTuple(nameof(SRCCON.XFormHeight), SRCCON.XFormHeight, this.XFormHeight);
             yield return new CellTuple(nameof(SRCCON.XFormLocPinX), SRCCON.XFormLocPinX, this.XFormLocPinX);
@@ -245,6 +215,27 @@ Shape Cells
     'XFormPinX',
     'XFormPinY',
     'XFormWidth'
+    ]
+
+Text Cells
+     [
+
+
+    'CharCase',
+    'CharColor',
+    'CharColorTransparency',
+    'CharFont',
+    'CharFontScale',
+    'CharLetterspace',
+    'CharSize',
+    'CharStyle',
+    'TextXFormAngle',
+    'TextXFormHeight',
+    'TextXFormLocPinX',
+    'TextXFormLocPinY',
+    'TextXFormPinX',
+    'TextXFormPinY',
+    'TextXFormWidth'
     ]
 
      */
