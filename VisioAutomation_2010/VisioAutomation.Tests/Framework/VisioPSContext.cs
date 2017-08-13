@@ -58,6 +58,7 @@ namespace VisioAutomation_Tests
 
         public void Set_Visio_PageCells(Dictionary<string,object> dic)
         {
+            /*
             var cmd = new SetVisioShapeCell();
             cmd.Hashtable = new System.Collections.Hashtable();
             foreach (var kv in dic)
@@ -65,6 +66,7 @@ namespace VisioAutomation_Tests
                 cmd.Hashtable[kv.Key] = kv.Value;
             }
             var results = cmd.Invoke();
+            */
         }
 
         public IVisio.DocumentClass New_Visio_Document()
@@ -92,6 +94,7 @@ namespace VisioAutomation_Tests
             return app;
         }
 
+        /*
         public System.Data.DataTable Get_Visio_Page_Cell( string [] cells, bool getresults, string resulttype)
         {
             var cmd = new GetVisioPageCell();
@@ -101,7 +104,7 @@ namespace VisioAutomation_Tests
             var results = cmd.Invoke <System.Data.DataTable>();
             var dt = results.First();
             return dt;
-        }
+        }*/
 
         public void Close_Visio_Application()
         {

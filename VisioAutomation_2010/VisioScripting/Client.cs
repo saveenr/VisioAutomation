@@ -11,7 +11,6 @@ namespace VisioScripting
 
         public Commands.ApplicationCommands Application { get; }
         public Commands.ViewCommands View { get; }
-        public Commands.FormatCommands Format { get; }
         public Commands.LayerCommands Layer { get; }
         public Commands.ControlCommands Control { get; }
         public Commands.HyperlinkCommands Hyperlink { get; }
@@ -22,7 +21,6 @@ namespace VisioScripting
         public Commands.DrawCommands Draw { get; }
         public Commands.MasterCommands Master { get; }
         public Commands.ArrangeCommands Arrange { get; }
-        public Commands.SnapCommands Snap { get; }
         public Commands.DistributeCommands Distribute { get; }
         public Commands.AlignCommands Align { get; }
         public Commands.PageCommands Page { get; }
@@ -53,7 +51,6 @@ namespace VisioScripting
 
             this.Application = new Commands.ApplicationCommands(this,app);
             this.View = new Commands.ViewCommands(this);
-            this.Format = new Commands.FormatCommands(this);
             this.Layer = new Commands.LayerCommands(this);
             this.Control = new Commands.ControlCommands(this);
             this.Hyperlink = new Commands.HyperlinkCommands(this);
@@ -74,7 +71,6 @@ namespace VisioScripting
             this.Output = new Commands.OutputCommands(this);
             this.Distribute = new DistributeCommands(this);
             this.Grouping = new GroupingCommands(this);
-            this.Snap = new SnapCommands(this);
             this.Align = new AlignCommands(this);
         }
 

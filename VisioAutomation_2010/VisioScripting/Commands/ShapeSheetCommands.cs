@@ -93,30 +93,23 @@ namespace VisioScripting.Commands
             return reader;
         }
 
-        public void SetPageCells(VisioScripting.Models.TargetShapes targets, Dictionary<string, string> hashtable, bool blast_guards,
+        public void SetPageCells(VisioScripting.Models.TargetShapes targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards,
             bool test_circular)
         {
             var targets2 = targets.ToShapeIDs();
-            this.SetPageCells(targets2,hashtable,blast_guards,test_circular);
+            this.SetPageCells(targets2,apply_cells,blast_guards,test_circular);
         }
 
-        public void SetPageCells(VisioScripting.Models.TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
+        public void SetPageCells(VisioScripting.Models.TargetShapeIDs targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards, bool test_circular)
         {
             var writer = new SidSrcWriter();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = VisioScripting.Models.CellSrcDictionary.GetCellMapForPages();
-            var valuemap = new VisioScripting.Models.CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
             {
-                foreach (var cellname in valuemap.Keys)
-                {
-                    string cell_value = valuemap[cellname];
-                    var cell_src = valuemap.GetSrc(cellname);
-                    writer.SetFormula((short)shape_id, cell_src, cell_value);
-                }
+                apply_cells(writer, (short) shape_id);
             }
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
@@ -133,30 +126,23 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetShapeCells(VisioScripting.Models.TargetShapes targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
+        public void SetShapeCells(VisioScripting.Models.TargetShapes targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards, bool test_circular)
         {
             targets = targets.ResolveShapes(this._client);
-            var target_ids= targets.ToShapeIDs();
-            this.SetShapeCells(target_ids, hashtable, blast_guards, test_circular);
+            var target_ids = targets.ToShapeIDs();
+            this.SetShapeCells(target_ids, apply_cells, blast_guards, test_circular);
         }
 
-        public void SetShapeCells(VisioScripting.Models.TargetShapeIDs targets, Dictionary<string, string> hashtable, bool blast_guards, bool test_circular)
+        public void SetShapeCells(VisioScripting.Models.TargetShapeIDs targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards, bool test_circular)
         {
             var writer = new SidSrcWriter();
             writer.BlastGuards = blast_guards;
             writer.TestCircular = test_circular;
 
-            var cellmap = VisioScripting.Models.CellSrcDictionary.GetCellMapForShapes();
-            var valuemap = new VisioScripting.Models.CellValueDictionary(cellmap, hashtable);
 
             foreach (var shape_id in targets.ShapeIDs)
             {
-                foreach (var cellname in valuemap.Keys)
-                {
-                    string cell_value = valuemap[cellname];
-                    var cell_src = valuemap.GetSrc(cellname);
-                    writer.SetFormula((short)shape_id, cell_src, cell_value);
-                }
+                apply_cells(writer, (short)shape_id);
             }
 
             var surface = this._client.ShapeSheet.GetShapeSheetSurface();
@@ -172,5 +158,6 @@ namespace VisioScripting.Commands
                 this._client.WriteVerbose("End Update");
             }
         }
+
     }
 }

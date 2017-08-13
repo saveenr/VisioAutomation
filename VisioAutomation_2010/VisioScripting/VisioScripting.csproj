@@ -48,16 +48,11 @@
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
-    <Compile Include="Commands\SnapCommands.cs" />
     <Compile Include="Helpers\SelectionHelper.cs" />
     <Compile Include="Models\AlignmentHorizontal.cs" />
     <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\PageOrientation.cs" />
-    <Compile Include="Models\NameDictionary.cs" />
-    <Compile Include="Models\CellSrcDictionary.cs" />
-    <Compile Include="Models\CellValueDictionary.cs" />
-    <Compile Include="Models\NamedSrcDictionary.cs" />
     <Compile Include="Models\SelectionOperation.cs" />
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
@@ -79,7 +74,6 @@
     <Compile Include="Commands\DocumentCommands.cs" />
     <Compile Include="Commands\DrawCommands.cs" />
     <Compile Include="Commands\ExportCommands.cs" />
-    <Compile Include="Commands\FormatCommands.cs" />
     <Compile Include="Commands\HyperlinkCommands.cs" />
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
@@ -102,9 +96,6 @@
     <Compile Include="Helpers\WildcardHelper.cs" />
     <Compile Include="Models\ShapeXFormData.cs" />
     <Compile Include="Extensions\XmlLinqExtensions.cs" />
-    <Compile Include="Models\FormatPaintCategory.cs" />
-    <Compile Include="Models\FormatPaintCache.cs" />
-    <Compile Include="Models\FormatPaintCell.cs" />
     <Compile Include="Builders\OrgChartBuilder.cs" />
     <Compile Include="Models\PageDirection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,9 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Management.Automation;
 using System.Xml;
-using VisioAutomation.Models.Layouts.DirectedGraph;
-using VisioAutomation.Models.Layouts.Grid;
-using VisioAutomation.Models.Layouts.Tree;
+using VA = VisioAutomation;
 using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
 namespace VisioPowerShell.Commands
@@ -14,13 +12,13 @@ namespace VisioPowerShell.Commands
     public class OutVisio : VisioCmdlet
     {
         [Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
+        public VA.Models.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
 
         [Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public GridLayout GridLayout { get; set; }
+        public VA.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
 
         [Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public List<DirectedGraphLayout> DirectedGraphs { get; set; }
+        public List<VA.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
 
         [Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public DataTable DataTable { get; set; }
@@ -35,13 +33,13 @@ namespace VisioPowerShell.Commands
         public double CellSpacing { get; set; }
 
         [Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Charting.PieChart PieChart;
+        public VA.Models.Charting.PieChart PieChart;
 
         [Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Charting.BarChart BarChart;
+        public VA.Models.Charting.BarChart BarChart;
 
         [Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Charting.AreaChart AreaChart;
+        public VA.Models.Charting.AreaChart AreaChart;
 
         [Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public XmlDocument XmlDocument;
@@ -83,7 +81,7 @@ namespace VisioPowerShell.Commands
             else if (this.XmlDocument != null)
             {
                 this.WriteVerbose("XmlDocument");
-                var tree_drawing = new Drawing();
+                var tree_drawing = new VA.Models.Layouts.Tree.Drawing();
                 this.build_from_xml_doc(this.XmlDocument, tree_drawing);
 
                 tree_drawing.Render(this.Client.Page.Get());
@@ -94,7 +92,7 @@ namespace VisioPowerShell.Commands
             }
         }
 
-        private void build_from_xml_doc(XmlDocument xml_document, Drawing tree_drawing)
+        private void build_from_xml_doc(XmlDocument xml_document, VA.Models.Layouts.Tree.Drawing tree_drawing)
         {
             var n = new Node();
             tree_drawing.Root = n;

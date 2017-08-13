@@ -12,6 +12,9 @@ namespace VisioPowerShell.Commands
         public const string VisioModelOrgChart = nameof(VisioModelOrgChart);
         public const string VisioModelPieChart = nameof(VisioModelPieChart);
 
+        public const string VisioShapeSheetCells = "VisioShapeSheetCells";
+        public const string VisioPageCells = "VisioPageCells";
+        public const string VisioTextCells = "VisioTextCells";
         public const string VisioBezier = nameof(VisioBezier);
         public const string VisioClient = nameof(VisioClient);
         public const string VisioConnection = nameof(VisioConnection);
@@ -37,7 +40,6 @@ namespace VisioPowerShell.Commands
         public const string VisioSelectedShapes = nameof(VisioSelectedShapes);
         public const string VisioSelectionAsXHTML = nameof(VisioSelectionAsXHTML);
         public const string VisioShape = nameof(VisioShape);
-        public const string VisioShapeCell = nameof(VisioShapeCell);
         public const string VisioShapeSheet = nameof(VisioShapeSheet);
         public const string VisioShapeText = nameof(VisioShapeText);
         public const string VisioUserDefinedCell = nameof(VisioUserDefinedCell);

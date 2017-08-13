@@ -586,7 +586,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             Node<T> layout_root = null;
             foreach (var walkevent in walkevents)
             {
-                if (walkevent.Type == GenTreeOps.WalkEvent<TA>.WalkEventType.Enter)
+                if (walkevent.Type == GenTreeOps.WalkEventType.EventEnter)
                 {
                     Node<T> parent = null;
                     if (stack.Count > 0)
@@ -609,7 +609,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                         layout_root = layout_node;
                     }
                 }
-                else if (walkevent.Type == GenTreeOps.WalkEvent<TA>.WalkEventType.Exit)
+                else if (walkevent.Type == GenTreeOps.WalkEventType.EventExit)
                 {
                     var layout_node = stack.Pop();
                 }
