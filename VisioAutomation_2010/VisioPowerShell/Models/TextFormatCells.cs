@@ -23,15 +23,6 @@ namespace VisioPowerShell.Models
         public string CharPos { get; set; }
         public string CharStrikethru { get; set; }
 
-
-        public string TextXFormAngle;
-        public string TextXFormHeight;
-        public string TextXFormLocPinX;
-        public string TextXFormLocPinY;
-        public string TextXFormPinX;
-        public string TextXFormPinY;
-        public string TextXFormWidth;
-
         public override IEnumerable<CellTuple> GetCellTuples()
         {
             yield return new CellTuple(nameof(SrcConstants.CharCase), SrcConstants.CharCase, this.CharCase);
@@ -50,7 +41,21 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SrcConstants.CharPerpendicular), SrcConstants.CharPerpendicular, this.CharPerpendicular);
             yield return new CellTuple(nameof(SrcConstants.CharPos), SrcConstants.CharPos, this.CharPos);
             yield return new CellTuple(nameof(SrcConstants.CharStrikethru), SrcConstants.CharStrikethru, this.CharStrikethru);
+        }
+    }
 
+    public class TextBlockCells : VisioPowerShell.Models.BaseCells
+    {
+        public string TextXFormAngle;
+        public string TextXFormHeight;
+        public string TextXFormLocPinX;
+        public string TextXFormLocPinY;
+        public string TextXFormPinX;
+        public string TextXFormPinY;
+        public string TextXFormWidth;
+
+        public override IEnumerable<CellTuple> GetCellTuples()
+        {
             yield return new CellTuple(nameof(SrcConstants.TextXFormAngle), SrcConstants.TextXFormAngle, this.TextXFormAngle);
             yield return new CellTuple(nameof(SrcConstants.TextXFormHeight), SrcConstants.TextXFormHeight, this.TextXFormHeight);
             yield return new CellTuple(nameof(SrcConstants.TextXFormLocPinX), SrcConstants.TextXFormLocPinX, this.TextXFormLocPinX);

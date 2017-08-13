@@ -5,6 +5,7 @@ namespace VisioPowerShell.Models
         ShapeFormat,
         ShapeXForm,
         TextFormat,
+        TextBlock,
         Lock,
         Page
     }

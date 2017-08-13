@@ -31,6 +31,10 @@ namespace VisioPowerShell.Models
             {
                 return new VisioPowerShell.Models.TextFormatCells();
             }
+            else if (type == VisioPowerShell.Models.CellsType.TextBlock)
+            {
+                return new VisioPowerShell.Models.TextBlockCells();
+            }
             else if (type == VisioPowerShell.Models.CellsType.ShapeXForm)
             {
                 return new VisioPowerShell.Models.ShapeXFormCells();
