@@ -22,28 +22,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
 
-            NamedSrcDictionary cellmap;
-
-            if (this.Type == CellsType.Page)
-            {
-                cellmap = VisioPowerShell.Models.PageCells.GetCellDictionary();
-            }
-            else if (this.Type == CellsType.ShapeFormat)
-            {
-                cellmap = VisioPowerShell.Models.ShapeCells.GetCellDictionary();
-            }
-            else if (this.Type == CellsType.TextFormat)
-            {
-                cellmap = VisioPowerShell.Models.TextCells.GetCellDictionary();
-            }
-            else
-            {
-                throw new System.ArgumentException();
-            }
-
+            var cellmap = BaseCells.GetDictionary(this.Type);
             var cells = cellmap.ExpandCellNames(null);
 
             var query = cellmap.ToQuery(cells);

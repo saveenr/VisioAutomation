@@ -37,5 +37,11 @@ namespace VisioPowerShell.Models
             }
         }
 
+        public static VisioPowerShell.Models.NamedSrcDictionary GetDictionary(CellsType type)
+        {
+            var cells = BaseCells.CreateCells(type);
+            var dic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(cells);
+            return dic;
+        }
     }
 }
