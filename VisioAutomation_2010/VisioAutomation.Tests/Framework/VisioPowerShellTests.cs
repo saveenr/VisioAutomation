@@ -58,6 +58,7 @@ namespace VisioAutomation_Tests.PowerShell
             //VisioPowerShellTests.Close_Visio_Application();
         }
 
+        /*
         [TestMethod]
         public void VisioPS_Get_Visio_Page_Cell()
         {
@@ -84,7 +85,7 @@ namespace VisioAutomation_Tests.PowerShell
 
             VisioPowerShellTests.Close_Visio_Application();
         }
-
+        */
 
       [TestMethod]
       public void VisioPS_NewVisioContainer()

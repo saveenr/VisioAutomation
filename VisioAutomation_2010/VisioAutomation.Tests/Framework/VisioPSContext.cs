@@ -94,6 +94,7 @@ namespace VisioAutomation_Tests
             return app;
         }
 
+        /*
         public System.Data.DataTable Get_Visio_Page_Cell( string [] cells, bool getresults, string resulttype)
         {
             var cmd = new GetVisioPageCell();
@@ -103,7 +104,7 @@ namespace VisioAutomation_Tests
             var results = cmd.Invoke <System.Data.DataTable>();
             var dt = results.First();
             return dt;
-        }
+        }*/
 
         public void Close_Visio_Application()
         {
