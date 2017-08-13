@@ -99,11 +99,13 @@
     <Compile Include="Commands\FormatVisioShapeText.cs" />
     <Compile Include="Commands\NewVisioContainer.cs" />
     <Compile Include="Commands\OpenVisioMaster.cs" />
+    <Compile Include="Models\LockCells.cs" />
     <Compile Include="Models\NamedDictionary.cs" />
     <Compile Include="Models\NamedSrcDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
-    <Compile Include="Models\ShapeCells.cs" />
-    <Compile Include="Models\TextCells.cs" />
+    <Compile Include="Models\ShapeFormatCells.cs" />
+    <Compile Include="Models\ShapeXFormCells.cs" />
+    <Compile Include="Models\TextFormatCells.cs" />
     <Compile Include="Models\UserDefinedCell.cs" />
     <Compile Include="Models\ConnectionPoint.cs" />
     <Compile Include="Models\CustomProperty.cs" />

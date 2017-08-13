@@ -25,11 +25,19 @@ namespace VisioPowerShell.Models
             }
             else if (type == VisioPowerShell.Models.CellsType.ShapeFormat)
             {
-                return new VisioPowerShell.Models.ShapeCells();
+                return new VisioPowerShell.Models.ShapeFormatCells();
             }
             else if (type == VisioPowerShell.Models.CellsType.TextFormat)
             {
-                return new VisioPowerShell.Models.TextCells();
+                return new VisioPowerShell.Models.TextFormatCells();
+            }
+            else if (type == VisioPowerShell.Models.CellsType.ShapeXForm)
+            {
+                return new VisioPowerShell.Models.ShapeXFormCells();
+            }
+            else if (type == VisioPowerShell.Models.CellsType.Lock)
+            {
+                return new VisioPowerShell.Models.LockCells();
             }
             else
             {

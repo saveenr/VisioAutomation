@@ -71,18 +71,6 @@ namespace VisioPowerShell.Models
         public string YRulerDensity;
         public string YRulerOrigin;
 
-        private static VisioPowerShell.Models.NamedSrcDictionary cellmap;
-
-        public static VisioPowerShell.Models.NamedSrcDictionary GetCellDictionary()
-        {
-            if (cellmap == null)
-            {
-                var cells = new VisioPowerShell.Models.PageCells();
-                cellmap = VisioPowerShell.Models.NamedSrcDictionary.FromCells(cells);
-            }
-            return cellmap;
-        }
-
         public override IEnumerable<CellTuple> GetCellTuples()
         {
             yield return new CellTuple(nameof(SRCCON.PageDrawingResizeType), SRCCON.PageDrawingResizeType, this.PageDrawingResizeType);

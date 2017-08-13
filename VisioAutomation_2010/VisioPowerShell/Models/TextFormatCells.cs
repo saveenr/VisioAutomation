@@ -3,7 +3,7 @@ using VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Models
 {
-    public class TextCells : VisioPowerShell.Models.BaseCells
+    public class TextFormatCells : VisioPowerShell.Models.BaseCells
     {
         public string CharCase;
         public string CharColor;
@@ -21,18 +21,6 @@ namespace VisioPowerShell.Models
         public string TextXFormPinX;
         public string TextXFormPinY;
         public string TextXFormWidth;
-
-        private static VisioPowerShell.Models.NamedSrcDictionary cellmap;
-
-        public static VisioPowerShell.Models.NamedSrcDictionary GetCellDictionary()
-        {
-            if (cellmap == null)
-            {
-                var cells = new VisioPowerShell.Models.ShapeCells();
-                cellmap = VisioPowerShell.Models.NamedSrcDictionary.FromCells(cells);
-            }
-            return cellmap;
-        }
 
         public override IEnumerable<CellTuple> GetCellTuples()
         {
