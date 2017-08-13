@@ -83,9 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\NewVisioPageCells.cs" />
-    <Compile Include="Commands\NewVisioTextCells.cs" />
-    <Compile Include="Commands\NewVisioShapeCells.cs" />
+    <Compile Include="Commands\NewVisioShapeSheetCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />
     <Compile Include="Models\CellValueDictionary.cs" />
@@ -118,8 +116,7 @@
     <Compile Include="Commands\NewVisioModelOrgChart.cs" />
     <Compile Include="Commands\SetVisioDocument.cs" />
     <Compile Include="Commands\SetVisioPage.cs" />
-    <Compile Include="Commands\SetVisioPageCell.cs" />
-    <Compile Include="Commands\SetVisioShapeCell.cs" />
+    <Compile Include="Commands\SetVisioShapeSheetCells.cs" />
     <Compile Include="Commands\RemoveVisioPage.cs" />
     <Compile Include="Commands\TestVisioApplication.cs" />
     <Compile Include="Commands\GetVisioClient.cs" />

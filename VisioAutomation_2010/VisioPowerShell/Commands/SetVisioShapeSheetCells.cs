@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using VisioAutomation.ShapeSheet.Writers;
+﻿using VisioAutomation.ShapeSheet.Writers;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioShapeCell)]
-    public class SetVisioShapeCell : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioShapeSheetCells)]
+    public class SetVisioShapeSheetCells : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, Position = 0)]
-        public VisioPowerShell.Models.ShapeCells Cells { get; set; }
+        public VisioPowerShell.Models.BaseCells Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
@@ -32,6 +31,5 @@ namespace VisioPowerShell.Commands
         {
             this.Cells.Apply(writer, id);
         }
-
     }
 }
