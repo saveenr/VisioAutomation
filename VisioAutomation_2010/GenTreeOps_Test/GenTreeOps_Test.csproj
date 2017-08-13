@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AssertX.cs" />
     <Compile Include="CopyTests.cs" />
+    <Compile Include="PostOrderTests.cs" />
     <Compile Include="PreOrderTests.cs" />
     <Compile Include="WalkTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
