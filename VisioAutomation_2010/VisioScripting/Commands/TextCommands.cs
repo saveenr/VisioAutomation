@@ -65,62 +65,6 @@ namespace VisioScripting.Commands
             return texts;
         }
 
-        public void ToogleCase(VisioScripting.Models.TargetShapes targets)
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            targets = targets.ResolveShapes(this._client);
-            
-            if (targets.Shapes.Count < 1)
-            {
-                return;
-            }
-
-            var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Toggle Shape Text Case"))
-            {
-                var shapeids = targets.Shapes.Select(s => s.ID).ToList();
-
-                var page = application.ActivePage;
-                // Store all the formatting
-                var formats = VisioAutomation.Text.TextFormat.GetFormat(page, shapeids);
-
-                // Change the text - this will wipe out all the character and paragraph formatting
-                foreach (var shape in targets.Shapes)
-                {
-                    string t = shape.Text;
-                    if (t.Length < 1)
-                    {
-                        continue;
-                    }
-                    shape.Text = VisioScripting.Helpers.TextHelper.toggle_case(t);
-                }
-
-                // Now restore all the formatting - based on any initial formatting from the text
-
-                var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
-                for (int i = 0; i < targets.Shapes.Count; i++)
-                {
-                    var format = formats[i];
-
-                    if (format.CharacterFormats.Count > 0)
-                    {
-                        var fmt = format.CharacterFormats[0];
-                        fmt.SetFormulas((short)shapeids[i], writer, 0);
-                    }
-
-                    if (format.ParagraphFormats.Count > 0)
-                    {
-                        var fmt = format.ParagraphFormats[0];
-                        fmt.SetFormulas((short)shapeids[i], writer, 0);
-                    }
-                }
-
-                writer.Commit(page);
-            }
-        }
-
         public void SetFont(VisioScripting.Models.TargetShapes targets, string fontname)
         {
             this._client.Application.AssertApplicationAvailable();

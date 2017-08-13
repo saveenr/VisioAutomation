@@ -14,20 +14,12 @@ namespace VisioPowerShell.Commands
         [ValidateNotNullOrEmpty]
         public string  Font { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter Togglecase { get; set; }
-
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
             if (this.Font != null)
             {
                 this.Client.Text.SetFont(targets, this.Font);                
-            }
-
-            if (this.Togglecase)
-            {
-                this.Client.Text.ToogleCase(targets);
             }
         }
     }
