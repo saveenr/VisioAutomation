@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 
 
 $sourceNugetExe = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
-$destination_path = [Environment]::GetFolderPath("MyDocuments")
+$destination_path = Join-Path $env:LOCALAPPDATA "NuGetCommandLine"
 
 $targetNugetExe = "$destination_path\nuget.exe"
 
