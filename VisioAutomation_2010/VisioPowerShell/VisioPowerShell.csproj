@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CellsType.cs" />
     <Compile Include="Commands\NewVisioShapeSheetCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />
@@ -108,8 +109,7 @@
     <Compile Include="Models\CustomProperty.cs" />
     <Compile Include="Commands\OutVisio.cs" />
     <Compile Include="Models\DirectedEdge.cs" />
-    <Compile Include="Commands\GetVisioPageCell.cs" />
-    <Compile Include="Commands\GetVisioShapeCell.cs" />
+    <Compile Include="Commands\GetVisioShapeSheetCell.cs" />
     <Compile Include="Commands\NewVisioModelAreaChart.cs" />
     <Compile Include="Commands\NewVisioModelBarChart.cs" />
     <Compile Include="Commands\NewVisioModelDirectedGraph.cs" />

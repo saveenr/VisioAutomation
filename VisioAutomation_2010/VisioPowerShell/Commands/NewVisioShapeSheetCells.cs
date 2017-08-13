@@ -2,13 +2,6 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    public enum CellsType
-    {
-        ShapeFormat,
-        TextFormat,
-        Page
-    }
-
     [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioShapeSheetCells)]
     public class NewVisioShapeSheetCells : VisioCmdlet
     {
