@@ -67,12 +67,12 @@ namespace GenTreeOps
 
         public static IEnumerable<T> PreOrder<T>(T root, EnumerateChildren<T> enum_children)
         {
-            return Algorithms.Walk(root, enum_children).Where(ev => ev.HasEnteredNode).Select(ev => ev.Node);
+            return Algorithms.Walk(root, enum_children).Where(ev => ev.Type == WalkEventType.EventEnter).Select(ev => ev.Node);
         }
 
         public static IEnumerable<T> PostOrder<T>(T root, EnumerateChildren<T> enum_children)
         {
-            return Algorithms.Walk(root, enum_children).Where(ev => ev.HasExitedNode).Select(ev => ev.Node);
+            return Algorithms.Walk(root, enum_children).Where(ev => ev.Type == WalkEventType.EventExit).Select(ev => ev.Node);
         }
 
         internal static IEnumerable<T> efficient_reverse<T>(IEnumerable<T> items)
@@ -106,7 +106,7 @@ namespace GenTreeOps
             var walkevents = Algorithms.Walk<TSrc>(src_root_node, input_node => enum_src_children(input_node));
             foreach (var ev in walkevents)
             {
-                if (ev.HasEnteredNode)
+                if (ev.Type == WalkEventType.EventEnter)
                 {
                     var new_dst_node = create_dest_node(ev.Node);
 
@@ -124,7 +124,7 @@ namespace GenTreeOps
                     stack.Push(new_dst_node);
                     dest_nodes.Add(new_dst_node);
                 }
-                else if (ev.HasExitedNode)
+                else if (ev.Type == WalkEventType.EventExit)
                 {
                     stack.Pop();
                 }

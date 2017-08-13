@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GenTreeOps;
 
 namespace VisioAutomation.Models.Layouts.InternalTree
 {
@@ -162,7 +163,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
         public IEnumerable<Node<T>> EnumRecursive()
         {
             var iter = GenTreeOps.Algorithms.Walk<Node<T>>(this, n => n.EnumChildren());
-            var iter2 = iter.Where(i => i.HasEnteredNode).Select(i => i.Node);
+            var iter2 = iter.Where(i => i.Type == WalkEventType.EventEnter).Select(i => i.Node);
             return iter2;
         }
     }

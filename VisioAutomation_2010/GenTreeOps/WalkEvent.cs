@@ -4,13 +4,15 @@
     /// Assists in performing a depth-first traversal of nodes for some Node type T. 
     /// T need not be of any specific type.
     /// </summary>
+    /// 
+    public enum WalkEventType
+    {
+        EventEnter,
+        EventExit
+    }
+
     public struct WalkEvent<T>
     {
-        public enum WalkEventType
-        {
-            Enter,
-            Exit
-        }
  
         public readonly WalkEventType Type;
         public readonly T Node;
@@ -23,24 +25,14 @@
 
         public static WalkEvent<T> CreateEnterEvent(T node)
         {
-            var we = new WalkEvent<T>(node,WalkEventType.Enter);
+            var we = new WalkEvent<T>(node, WalkEventType.EventEnter);
             return we;
         }
 
         public static WalkEvent<T> CreateExitEvent(T node)
         {
-            var we = new WalkEvent<T>(node, WalkEventType.Exit);
+            var we = new WalkEvent<T>(node, WalkEventType.EventExit);
             return we;
-        }
-
-        public bool HasEnteredNode
-        {
-            get { return this.Type == WalkEventType.Enter; }
-        }
-
-        public bool HasExitedNode
-        {
-            get { return this.Type == WalkEventType.Exit; }
         }
     }
 }

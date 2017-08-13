@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GenTreeOps;
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -66,7 +67,7 @@ namespace VisioAutomation.Models.Text
 
             foreach (var walkevent in this.Walk())
             {
-                if (walkevent.HasEnteredNode)
+                if (walkevent.Type == WalkEventType.EventEnter)
                 {
                     if (walkevent.Node is Element)
                     {
@@ -111,7 +112,7 @@ namespace VisioAutomation.Models.Text
                         throw new VisioOperationException(msg);
                     }
                 }
-                else if (walkevent.HasExitedNode)
+                else if (walkevent.Type == WalkEventType.EventExit)
                 {
                     if (walkevent.Node is Element)
                     {
