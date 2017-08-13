@@ -49,6 +49,9 @@ namespace GenTreeOps
 
                     stack.Push(new WalkState<T>(cur_item.Node,true));
 
+                    // placing the children on the stack in reverse
+                    // order means that the children be walked in 
+                    // their "natural order"
                     foreach (var child in Algorithms.efficient_reverse(enum_children(cur_item.Node)))
                     {
                         stack.Push(new WalkState<T>(child,false));
@@ -65,6 +68,11 @@ namespace GenTreeOps
         public static IEnumerable<T> PreOrder<T>(T root, EnumerateChildren<T> enum_children)
         {
             return Algorithms.Walk(root, enum_children).Where(ev => ev.HasEnteredNode).Select(ev => ev.Node);
+        }
+
+        public static IEnumerable<T> PostOrder<T>(T root, EnumerateChildren<T> enum_children)
+        {
+            return Algorithms.Walk(root, enum_children).Where(ev => ev.HasExitedNode).Select(ev => ev.Node);
         }
 
         internal static IEnumerable<T> efficient_reverse<T>(IEnumerable<T> items)
