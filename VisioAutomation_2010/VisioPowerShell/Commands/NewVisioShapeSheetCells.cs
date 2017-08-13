@@ -6,23 +6,23 @@ namespace VisioPowerShell.Commands
     public class NewVisioShapeSheetCells : VisioCmdlet
     {
         [Parameter(Mandatory = true)]
-        public CellsType Type { get; set; }
+        public VisioPowerShell.Models.CellsType Type { get; set; }
 
         protected override void ProcessRecord()
         {
-            if (this.Type == CellsType.Page)
+            if (this.Type == VisioPowerShell.Models.CellsType.Page)
             {
                 var pagecells = new VisioPowerShell.Models.PageCells();
                 this.WriteObject(pagecells);
 
             }
-            else if (this.Type == CellsType.ShapeFormat)
+            else if (this.Type == VisioPowerShell.Models.CellsType.ShapeFormat)
             {
                 var shapecells = new VisioPowerShell.Models.ShapeCells();
                 this.WriteObject(shapecells);
 
             }
-            else if (this.Type == CellsType.TextFormat)
+            else if (this.Type == VisioPowerShell.Models.CellsType.TextFormat)
             {
                 var textcells = new VisioPowerShell.Models.TextCells();
                 this.WriteObject(textcells);

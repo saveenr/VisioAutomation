@@ -1,4 +1,4 @@
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Models
 {
     public enum CellsType
     {
