@@ -41,7 +41,7 @@ namespace VisioPowerShell.Commands
         [Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Charting.AreaChart AreaChart;
 
-        [Parameter(ParameterSetName = "stemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public XmlDocument XmlDocument;
 
         protected override void ProcessRecord()
