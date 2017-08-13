@@ -6,7 +6,6 @@ namespace VisioPowerShell.Commands
     [Cmdlet(VerbsCommon.Format, VisioPowerShell.Commands.Nouns.VisioShapeText)]
     public class FormatVisioShapeText : VisioCmdlet
     {
-
         [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
