@@ -109,7 +109,7 @@
     <Compile Include="Models\CustomProperty.cs" />
     <Compile Include="Commands\OutVisio.cs" />
     <Compile Include="Models\DirectedEdge.cs" />
-    <Compile Include="Commands\GetVisioShapeSheetCell.cs" />
+    <Compile Include="Commands\GetVisioShapeSheetCells.cs" />
     <Compile Include="Commands\NewVisioModelAreaChart.cs" />
     <Compile Include="Commands\NewVisioModelBarChart.cs" />
     <Compile Include="Commands\NewVisioModelDirectedGraph.cs" />

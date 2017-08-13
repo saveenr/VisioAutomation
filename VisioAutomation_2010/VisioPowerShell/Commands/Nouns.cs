@@ -40,7 +40,6 @@ namespace VisioPowerShell.Commands
         public const string VisioSelectedShapes = nameof(VisioSelectedShapes);
         public const string VisioSelectionAsXHTML = nameof(VisioSelectionAsXHTML);
         public const string VisioShape = nameof(VisioShape);
-        public const string VisioShapeCell = nameof(VisioShapeCell);
         public const string VisioShapeSheet = nameof(VisioShapeSheet);
         public const string VisioShapeText = nameof(VisioShapeText);
         public const string VisioUserDefinedCell = nameof(VisioUserDefinedCell);
