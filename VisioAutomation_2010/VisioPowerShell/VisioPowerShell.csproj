@@ -131,7 +131,7 @@
     <Compile Include="Models\ResultType.cs" />
     <Compile Include="Commands\NewVisioShape.cs" />
     <Compile Include="Commands\CopyVisioShape.cs" />
-    <Compile Include="Commands\ExportVisioSelectionAsXHTML.cs" />
+    <Compile Include="Commands\ExportVisioSelectionAsHtml.cs" />
     <Compile Include="Commands\RedoVisio.cs" />
     <Compile Include="Commands\SaveVisioDocument.cs" />
     <Compile Include="Commands\TestVisioDocument.cs" />
