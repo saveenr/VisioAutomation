@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (this.Name == null)
+            if (this.Name == null || this.Name.Length <1)
             {
                 // return selected shapes
 
@@ -43,7 +43,8 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                if (this.Name.Contains("*"))
+                string str_asterisk = "*";
+                if (this.Name.Contains(str_asterisk))
                 {
                     var shapes = this.Client.Draw.GetAllShapes();
                     this.WriteObject(shapes, false);
