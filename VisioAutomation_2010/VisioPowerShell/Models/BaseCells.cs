@@ -49,10 +49,10 @@ namespace VisioPowerShell.Models
             }
         }
 
-        public static VisioPowerShell.Models.NamedSrcDictionary GetDictionary(CellType type)
+        public static VisioPowerShell.Models.NamedCellDictionary GetDictionary(CellType type)
         {
             var cells = BaseCells.CreateCells(type);
-            var dic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(cells);
+            var dic = VisioPowerShell.Models.NamedCellDictionary.FromCells(cells);
             return dic;
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace VisioPowerShell.Models
 {
-    public class NamedSrcDictionary : NamedDictionary<VisioAutomation.ShapeSheet.Src>
+    public class NamedCellDictionary : NamedDictionary<VisioAutomation.ShapeSheet.Src>
     {
         public VisioAutomation.ShapeSheet.Query.ShapeSheetQuery ToQuery(IList<string> cells)
         {
@@ -33,27 +33,15 @@ namespace VisioPowerShell.Models
             return query;
         }
 
-        public string[] ExpandCellNames(string [] names)
-        {
-            // if empty or contains "*" return all the cell names
-            if (names == null || names.Length < 1 || names.Contains("*"))
-            {
-                return this.Keys.ToArray();
-            }
-
-            // otherwise use the names specified
-            return names;
-        }
-
-        public static NamedSrcDictionary FromCells(BaseCells cells)
+        public static NamedCellDictionary FromCells(BaseCells cells)
         {
             var tuples = cells.GetCellTuples();
             return FromCells(tuples);
         }
 
-        public static NamedSrcDictionary FromCells(IEnumerable<CellTuple> tuples)
+        public static NamedCellDictionary FromCells(IEnumerable<CellTuple> tuples)
         {
-            var  dic = new NamedSrcDictionary();
+            var  dic = new NamedCellDictionary();
             foreach (var tuple in tuples)
             {
                 dic[tuple.Name] = tuple.Src;

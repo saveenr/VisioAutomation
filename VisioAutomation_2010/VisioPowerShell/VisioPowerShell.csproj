@@ -101,7 +101,7 @@
     <Compile Include="Commands\OpenVisioMaster.cs" />
     <Compile Include="Models\LockCells.cs" />
     <Compile Include="Models\NamedDictionary.cs" />
-    <Compile Include="Models\NamedSrcDictionary.cs" />
+    <Compile Include="Models\NamedCellDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\ShapeFormatCells.cs" />
     <Compile Include="Models\ShapeXFormCells.cs" />
