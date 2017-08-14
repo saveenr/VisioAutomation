@@ -181,7 +181,7 @@
     <Compile Include="Commands\RemoveVisioGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\SetVisioZoom.cs" />
-    <Compile Include="Commands\DataTableHelpers.cs" />
+    <Compile Include="Models\DataTableHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">

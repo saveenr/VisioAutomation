@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using VisioAutomation.ShapeSheet.Query;
-using VisioPowerShell.Models;
 
-namespace VisioPowerShell
+namespace VisioPowerShell.Models
 {
     static class DataTableHelpers
     {
