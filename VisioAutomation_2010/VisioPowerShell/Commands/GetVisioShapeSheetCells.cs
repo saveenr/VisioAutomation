@@ -9,7 +9,7 @@ namespace VisioPowerShell.Commands
     public class GetVisioShapeSheetCells : VisioCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
-        public CellsType Type { get; set; }
+        public CellType Type { get; set; }
 
         [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }

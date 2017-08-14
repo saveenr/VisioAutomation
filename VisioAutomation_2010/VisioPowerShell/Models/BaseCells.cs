@@ -17,29 +17,29 @@ namespace VisioPowerShell.Models
             }
         }
 
-        public static BaseCells CreateCells(CellsType type)
+        public static BaseCells CreateCells(CellType type)
         {
-            if (type == VisioPowerShell.Models.CellsType.Page)
+            if (type == VisioPowerShell.Models.CellType.Page)
             {
                 return new VisioPowerShell.Models.PageCells();
             }
-            else if (type == VisioPowerShell.Models.CellsType.ShapeFormat)
+            else if (type == VisioPowerShell.Models.CellType.ShapeFormat)
             {
                 return new VisioPowerShell.Models.ShapeFormatCells();
             }
-            else if (type == VisioPowerShell.Models.CellsType.TextFormat)
+            else if (type == VisioPowerShell.Models.CellType.TextFormat)
             {
                 return new VisioPowerShell.Models.TextFormatCells();
             }
-            else if (type == VisioPowerShell.Models.CellsType.TextBlock)
+            else if (type == VisioPowerShell.Models.CellType.TextBlock)
             {
                 return new VisioPowerShell.Models.TextBlockCells();
             }
-            else if (type == VisioPowerShell.Models.CellsType.ShapeXForm)
+            else if (type == VisioPowerShell.Models.CellType.ShapeXForm)
             {
                 return new VisioPowerShell.Models.ShapeXFormCells();
             }
-            else if (type == VisioPowerShell.Models.CellsType.Lock)
+            else if (type == VisioPowerShell.Models.CellType.Lock)
             {
                 return new VisioPowerShell.Models.LockCells();
             }
@@ -49,7 +49,7 @@ namespace VisioPowerShell.Models
             }
         }
 
-        public static VisioPowerShell.Models.NamedSrcDictionary GetDictionary(CellsType type)
+        public static VisioPowerShell.Models.NamedSrcDictionary GetDictionary(CellType type)
         {
             var cells = BaseCells.CreateCells(type);
             var dic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(cells);

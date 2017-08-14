@@ -83,7 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\CellsType.cs" />
+    <Compile Include="Models\CellType.cs" />
     <Compile Include="Commands\NewVisioShapeSheetCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />

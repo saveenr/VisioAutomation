@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands
     public class NewVisioShapeSheetCells : VisioCmdlet
     {
         [Parameter(Mandatory = true)]
-        public VisioPowerShell.Models.CellsType Type { get; set; }
+        public VisioPowerShell.Models.CellType Type { get; set; }
 
         protected override void ProcessRecord()
         {
