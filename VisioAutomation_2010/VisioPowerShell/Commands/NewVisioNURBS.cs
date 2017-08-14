@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioNURBS)]
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioNurbs)]
     public class NewVisioNurbs : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]

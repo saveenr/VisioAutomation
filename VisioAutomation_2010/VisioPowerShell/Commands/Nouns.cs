@@ -29,7 +29,7 @@ namespace VisioPowerShell.Commands
         public const string VisioLine = nameof(VisioLine);
         public const string VisioMaster = nameof(VisioMaster);
         public const string VisioModel = nameof(VisioModel);
-        public const string VisioNURBS = nameof(VisioNURBS);
+        public const string VisioNurbs = nameof(VisioNurbs);
         public const string VisioOval = nameof(VisioOval);
         public const string VisioPage = nameof(VisioPage);
         public const string VisioPageCell = nameof(VisioPageCell);
