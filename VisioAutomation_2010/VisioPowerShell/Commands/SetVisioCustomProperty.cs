@@ -10,7 +10,7 @@ namespace VisioPowerShell.Commands
     public class SetVisioCustomProperty : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]
-        public Hashtable HashTable{ get; set; }
+        public Hashtable Hashtable{ get; set; }
         
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "NonHashTable")]
         public string Name { get; set; }
@@ -50,7 +50,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (this.HashTable != null)
+            if (this.Hashtable != null)
             {
                 this.SetFromHashTable();
             }
@@ -119,12 +119,12 @@ namespace VisioPowerShell.Commands
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
 
-            if (this.HashTable.Count < 1)
+            if (this.Hashtable.Count < 1)
             {
                 return;
             }
 
-            foreach (object key in this.HashTable.Keys)
+            foreach (object key in this.Hashtable.Keys)
             {
                 if (!(key is string))
                 {
@@ -134,7 +134,7 @@ namespace VisioPowerShell.Commands
 
                 string key_string = (string) key;
 
-                object value = this.HashTable[key];
+                object value = this.Hashtable[key];
                 var cp = CustomPropertyCells.FromValue(value);
                 this.Client.CustomProperty.Set(targets, key_string, cp);
             }
