@@ -6,9 +6,10 @@ namespace VisioPowerShell.Models
 {
     public class NamedSrcDictionary : NamedDictionary<VisioAutomation.ShapeSheet.Src>
     {
-        public VisioAutomation.ShapeSheet.Query.ShapeSheetQuery ToQuery(IList<string> Cells)
+        public VisioAutomation.ShapeSheet.Query.ShapeSheetQuery ToQuery(IList<string> cells)
         {
-            var invalid_names = Cells.Where(cellname => !this.ContainsKey(cellname)).ToList();
+            var invalid_names = cells.Where(cellname => !this.ContainsKey(cellname)).ToList();
+
             if (invalid_names.Count > 0)
             {
                 string msg = "Invalid cell names: " + string.Join(",", invalid_names);
@@ -17,14 +18,18 @@ namespace VisioPowerShell.Models
 
             var query = new VisioAutomation.ShapeSheet.Query.ShapeSheetQuery();
 
-            foreach (string resolved_cellname in this.ResolveNames(Cells))
+            foreach (string cell in cells)
             {
-                if (!query.Cells.Contains(resolved_cellname))
+                foreach (var resolved_cellname in this.GetValuesWithKeyLike(cell))
                 {
-                    var resolved_src = this[resolved_cellname];
-                    query.AddCell(resolved_src, resolved_cellname);
+                    if (!query.Cells.Contains(resolved_cellname))
+                    {
+                        var resolved_src = this[resolved_cellname];
+                        query.AddCell(resolved_src, resolved_cellname);
+                    }
                 }
             }
+
             return query;
         }
 
@@ -33,7 +38,7 @@ namespace VisioPowerShell.Models
             // if empty or contains "*" return all the cell names
             if (names == null || names.Length < 1 || names.Contains("*"))
             {
-                return this.GetNames().ToArray();
+                return this.Keys.ToArray();
             }
 
             // otherwise use the names specified
@@ -46,7 +51,7 @@ namespace VisioPowerShell.Models
             return FromCells(tuples);
         }
 
-        public static NamedSrcDictionary FromCells( IEnumerable<CellTuple> tuples)
+        public static NamedSrcDictionary FromCells(IEnumerable<CellTuple> tuples)
         {
             var  dic = new NamedSrcDictionary();
             foreach (var tuple in tuples)

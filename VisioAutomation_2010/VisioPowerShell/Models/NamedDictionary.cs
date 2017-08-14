@@ -1,27 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace VisioPowerShell.Models
 {
     public class NamedDictionary<T>
     {
         private readonly Dictionary<string, T> dic;
-        private readonly Regex regex_name;
-        private readonly Regex regex_name_wildcard;
+        private readonly System.Text.RegularExpressions.Regex regex_name;
+        private readonly System.Text.RegularExpressions.Regex regex_name_wildcard;
 
         public NamedDictionary()
         {
-            this.regex_name = new Regex("^[a-zA-Z]*$");
-            this.regex_name_wildcard = new Regex("^[a-zA-Z\\*\\?]*$");
+            this.regex_name = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
+            this.regex_name_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
             var compare = StringComparer.InvariantCultureIgnoreCase;
             this.dic = new Dictionary<string, T>(compare);
-        }
-
-        public List<string> GetNames()
-        {
-            return this.Keys.ToList();
         }
 
         public T this[string name]
@@ -29,7 +23,7 @@ namespace VisioPowerShell.Models
             get { return this.dic[name]; }
             set
             {
-                this.CheckName(name);
+                this._AssertKeyIsValid(name);
 
                 if (this.dic.ContainsKey(name))
                 {
@@ -46,19 +40,19 @@ namespace VisioPowerShell.Models
             get { return this.dic.Keys; }
         }
 
-        public bool IsValidName(string name)
+        private bool _IsValidKey(string name)
         {
             return this.regex_name.IsMatch(name);
         }
 
-        public bool IsValidNameWildCard(string name)
+        private bool _IsValidKeyWithWildCard(string name)
         {
             return this.regex_name_wildcard.IsMatch(name);
         }
 
-        public void CheckName(string name)
+        private void _AssertKeyIsValid(string name)
         {
-            if (this.IsValidName(name))
+            if (this._IsValidKey(name))
             {
                 return;
             }
@@ -67,9 +61,9 @@ namespace VisioPowerShell.Models
             throw new ArgumentOutOfRangeException(msg);
         }
 
-        public void CheckNameWildcard(string name)
+        private void _CheckNameWildcard(string name)
         {
-            if (this.IsValidNameWildCard(name))
+            if (this._IsValidKeyWithWildCard(name))
             {
                 return;
             }
@@ -78,13 +72,16 @@ namespace VisioPowerShell.Models
             throw new ArgumentException(msg, nameof(name));
         }
 
-        public IEnumerable<string> ResolveName(string name)
+        public IEnumerable<string> GetValuesWithKeyLike(string key)
         {
-            if (name.Contains("*") || name.Contains("?"))
-            {
-                this.CheckNameWildcard(name);
+            string str_asterisk = "*";
+            string str_questionmark = "?";
 
-                var regex = NamedDictionary<T>.GetRegexForWildCardPattern(name);
+            if (key.Contains(str_asterisk) || key.Contains(str_questionmark))
+            {
+                this._CheckNameWildcard(key);
+
+                var regex = NamedDictionary<T>.GetRegexForWildCardPattern(key);
 
                 foreach (string k in this.Keys)
                 {
@@ -96,11 +93,11 @@ namespace VisioPowerShell.Models
             }
             else
             {
-                this.CheckName(name);
-                if (this.dic.ContainsKey(name))
+                this._AssertKeyIsValid(key);
+                if (this.dic.ContainsKey(key))
                 {
                     // found the exact cell name, yield it
-                    yield return name;
+                    yield return key;
                 }
                 else
                 {
@@ -110,28 +107,17 @@ namespace VisioPowerShell.Models
             }
         }
 
-        private static Regex GetRegexForWildCardPattern(string cellname)
+        private static System.Text.RegularExpressions.Regex GetRegexForWildCardPattern(string s)
         {
-            string pat = "^" + Regex.Escape(cellname).Replace(@"\*", ".*").Replace(@"\?", ".") + "$";
-
-            var regex = new Regex(pat, RegexOptions.IgnoreCase);
+            string pat = "^" + System.Text.RegularExpressions.Regex.Escape(s).Replace(@"\*", ".*").Replace(@"\?", ".") + "$";
+            var regex_options = System.Text.RegularExpressions.RegexOptions.IgnoreCase;
+            var regex = new System.Text.RegularExpressions.Regex(pat, regex_options);
             return regex;
         }
 
-        public IEnumerable<string> ResolveNames(IEnumerable<string> cellnames)
+        public bool ContainsKey(string key)
         {
-            foreach (var name in cellnames)
-            {
-                foreach (var resolved_name in this.ResolveName(name))
-                {
-                    yield return resolved_name;
-                }
-            }
-        }
-
-        public bool ContainsKey(string name)
-        {
-            return this.dic.ContainsKey(name);
+            return this.dic.ContainsKey(key);
         }
     }
 }
