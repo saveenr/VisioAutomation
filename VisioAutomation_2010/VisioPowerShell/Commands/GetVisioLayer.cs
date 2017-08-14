@@ -10,7 +10,8 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (this.Name!=null || this.Name=="*")
+            string str_asterisk = "*";
+            if (this.Name!=null || this.Name==str_asterisk)
             {
                 var layer = this.Client.Layer.Get(this.Name);
                 this.WriteObject(layer);
