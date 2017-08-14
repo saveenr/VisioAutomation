@@ -20,7 +20,7 @@ namespace VisioPowerShell.Models
 
             foreach (string cell in cells)
             {
-                foreach (var resolved_cellname in this.GetValuesWithKeyLike(cell))
+                foreach (var resolved_cellname in this.ExpandKeyWildcard(cell))
                 {
                     if (!query.Cells.Contains(resolved_cellname))
                     {

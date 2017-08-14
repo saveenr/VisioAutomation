@@ -72,7 +72,7 @@ namespace VisioPowerShell.Models
             throw new ArgumentException(msg, nameof(name));
         }
 
-        public IEnumerable<string> GetValuesWithKeyLike(string key)
+        public IEnumerable<string> ExpandKeyWildcard(string key)
         {
             string str_asterisk = "*";
             string str_questionmark = "?";
