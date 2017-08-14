@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands
     public class GetVisioShape : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = false)]
-        public object[] NameOrID;
+        public object[] Name;
 
         [Parameter(Mandatory = false)]
         public SwitchParameter Recursive;
@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (this.NameOrID == null)
+            if (this.Name == null)
             {
                 // return selected shapes
 
@@ -43,15 +43,15 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                if (this.NameOrID.Contains("*"))
+                if (this.Name.Contains("*"))
                 {
                     var shapes = this.Client.Draw.GetAllShapes();
                     this.WriteObject(shapes, false);
                 }
                 else
                 {
-                    bool all_ints = this.NameOrID.All(i => i is int);
-                    bool all_strings = this.NameOrID.All(i => i is string);
+                    bool all_ints = this.Name.All(i => i is int);
+                    bool all_strings = this.Name.All(i => i is string);
 
                     if (!all_ints && !all_strings)
                     {
@@ -60,13 +60,13 @@ namespace VisioPowerShell.Commands
 
                     if (all_ints)
                     {
-                        var ints = this.NameOrID.Where(i => i is int).Cast<int>().ToArray();
+                        var ints = this.Name.Where(i => i is int).Cast<int>().ToArray();
                         var shapes = this.Client.Page.GetShapesByID(ints);
                         this.WriteObject(shapes, false);
                     }
                     else if (all_strings)
                     {
-                        var strings = this.NameOrID.Where(i => i is string).Cast<string>().ToArray();
+                        var strings = this.Name.Where(i => i is string).Cast<string>().ToArray();
                         var shapes = this.Client.Page.GetShapesByName(strings);
                         this.WriteObject(shapes, false);
                     }

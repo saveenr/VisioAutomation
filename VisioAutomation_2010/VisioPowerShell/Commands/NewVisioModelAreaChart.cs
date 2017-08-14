@@ -26,15 +26,10 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var rect = this.GetRectangle();
+            var rect = new VA.Geometry.Rectangle(this.X0, this.Y0, this.X1, this.Y1);
             var chart = new VA.Models.Charting.AreaChart(rect);
             chart.DataPoints = new VA.Models.Charting.DataPointList(this.Values, this.Labels);
             this.WriteObject(chart);
-        }
-
-        protected VA.Geometry.Rectangle GetRectangle()
-        {
-            return new VA.Geometry.Rectangle(this.X0, this.Y0, this.X1, this.Y1);
         }
     }
 }
