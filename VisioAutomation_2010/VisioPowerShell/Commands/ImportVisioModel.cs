@@ -2,6 +2,7 @@ using System;
 using System.Management.Automation;
 using VisioScripting.Builders;
 using SXL = System.Xml.Linq;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
@@ -43,6 +44,18 @@ namespace VisioPowerShell.Commands
                 var exc = new ArgumentException("Unknown root element for XML");
                 throw exc;
             }
+        }
+
+        protected bool CheckFileExists(string file)
+        {
+            if (System.IO.File.Exists(file)) return true;
+
+            this.WriteVerbose("Filename: {0}", file);
+            this.WriteVerbose("Abs Filename: {0}", System.IO.Path.GetFullPath(file));
+            var exc = new System.IO.FileNotFoundException(file);
+            var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
+            this.WriteError(er);
+            return false;
         }
     }
 }
