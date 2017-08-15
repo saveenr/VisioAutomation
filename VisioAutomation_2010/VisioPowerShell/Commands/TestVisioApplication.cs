@@ -5,7 +5,6 @@ namespace VisioPowerShell.Commands
     [Cmdlet(VerbsDiagnostic.Test, VisioPowerShell.Commands.Nouns.VisioApplication)]
     public class TestVisioApplication: VisioCmdlet
     {
-        // checks to see if we hae an active drawing open
         protected override void ProcessRecord()
         {
             bool valid_app = this.Client.Application.Validate();
