@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
+using SRCCON=VisioAutomation.ShapeSheet.SrcConstants;
 
 namespace VisioPowerShell.Models
 {
@@ -15,13 +15,13 @@ namespace VisioPowerShell.Models
 
         public override IEnumerable<CellTuple> GetCellTuples()
         {
-            yield return new CellTuple(nameof(SrcConstants.XFormAngle), SrcConstants.XFormAngle, this.XFormAngle);
-            yield return new CellTuple(nameof(SrcConstants.XFormHeight), SrcConstants.XFormHeight, this.XFormHeight);
-            yield return new CellTuple(nameof(SrcConstants.XFormLocPinX), SrcConstants.XFormLocPinX, this.XFormLocPinX);
-            yield return new CellTuple(nameof(SrcConstants.XFormLocPinY), SrcConstants.XFormLocPinY, this.XFormLocPinY);
-            yield return new CellTuple(nameof(SrcConstants.XFormPinX), SrcConstants.XFormPinX, this.XFormPinX);
-            yield return new CellTuple(nameof(SrcConstants.XFormPinY), SrcConstants.XFormPinY, this.XFormPinY);
-            yield return new CellTuple(nameof(SrcConstants.XFormWidth), SrcConstants.XFormWidth, this.XFormWidth);
+            yield return new CellTuple(nameof(SRCCON.XFormAngle), SRCCON.XFormAngle, this.XFormAngle);
+            yield return new CellTuple(nameof(SRCCON.XFormHeight), SRCCON.XFormHeight, this.XFormHeight);
+            yield return new CellTuple(nameof(SRCCON.XFormLocPinX), SRCCON.XFormLocPinX, this.XFormLocPinX);
+            yield return new CellTuple(nameof(SRCCON.XFormLocPinY), SRCCON.XFormLocPinY, this.XFormLocPinY);
+            yield return new CellTuple(nameof(SRCCON.XFormPinX), SRCCON.XFormPinX, this.XFormPinX);
+            yield return new CellTuple(nameof(SRCCON.XFormPinY), SRCCON.XFormPinY, this.XFormPinY);
+            yield return new CellTuple(nameof(SRCCON.XFormWidth), SRCCON.XFormWidth, this.XFormWidth);
         }
     }
 }

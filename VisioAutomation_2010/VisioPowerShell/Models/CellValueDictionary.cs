@@ -5,9 +5,9 @@ namespace VisioPowerShell.Models
 {
     public class CellValueDictionary : NamedDictionary<string>
     {
-        private readonly NamedSrcDictionary srcmap;
+        private readonly NamedCellDictionary srcmap;
 
-        public CellValueDictionary(NamedSrcDictionary srcmap, Dictionary<string,string> dictionary)
+        public CellValueDictionary(NamedCellDictionary srcmap, Dictionary<string,string> dictionary)
         {
             if (srcmap == null)
             {

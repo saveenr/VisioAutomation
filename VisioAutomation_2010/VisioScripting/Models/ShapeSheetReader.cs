@@ -23,7 +23,8 @@ namespace VisioScripting.Models
 
         public string[] GetFormulas()
         {
-            var formulas = this.Surface.GetFormulasU(this.SidSrcStreamBuilder.ToStream());
+            var stream = this.SidSrcStreamBuilder.ToStream();
+            var formulas = this.Surface.GetFormulasU(stream);
             return formulas;
         }
 

@@ -7,9 +7,12 @@ namespace VisioPowerShell.Commands
     [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioShape)]
     public class GetVisioShape : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = false)]
-        public object[] NameOrID;
+        [Parameter(ParameterSetName="name", Position = 0, Mandatory = false)]
+        public string[] Name;
 
+        [Parameter(ParameterSetName = "id", Position = 0, Mandatory = false)]
+        public int[] Id;
+        
         [Parameter(Mandatory = false)]
         public SwitchParameter Recursive;
 
@@ -18,7 +21,8 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (this.NameOrID == null)
+            // Handle the case where neither names nor ids where passed
+            if (this.Name == null && this.Id == null)
             {
                 // return selected shapes
 
@@ -39,43 +43,40 @@ namespace VisioPowerShell.Commands
                     this.WriteVerbose("Returning selected shapes ");
                     var shapes = this.Client.Selection.GetShapes();
                     this.WriteObject(shapes, false);
-                }                
+                }
+
+                return;
             }
-            else
+
+            // Handle the case where names where passed
+            if (this.Name != null)
             {
-                if (this.NameOrID.Contains("*"))
+                string str_asterisk = "*";
+                if (this.Name.Contains(str_asterisk))
                 {
                     var shapes = this.Client.Draw.GetAllShapes();
                     this.WriteObject(shapes, false);
                 }
                 else
                 {
-                    bool all_ints = this.NameOrID.All(i => i is int);
-                    bool all_strings = this.NameOrID.All(i => i is string);
-
-                    if (!all_ints && !all_strings)
-                    {
-                        throw new ArgumentOutOfRangeException("must be array of only ints or only strings");
-                    }
-
-                    if (all_ints)
-                    {
-                        var ints = this.NameOrID.Where(i => i is int).Cast<int>().ToArray();
-                        var shapes = this.Client.Page.GetShapesByID(ints);
-                        this.WriteObject(shapes, false);
-                    }
-                    else if (all_strings)
-                    {
-                        var strings = this.NameOrID.Where(i => i is string).Cast<string>().ToArray();
-                        var shapes = this.Client.Page.GetShapesByName(strings);
-                        this.WriteObject(shapes, false);
-                    }
-                    else
-                    {
-                        throw new ArgumentOutOfRangeException("Should never get here");
-                    }                    
+                    var strings = this.Name.Where(i => i is string).Cast<string>().ToArray();
+                    var shapes = this.Client.Page.GetShapesByName(strings);
+                    this.WriteObject(shapes, false);
                 }
+
+                return;
             }
+
+            // Handle the case where ids where passed
+            if (this.Id != null)
+            {
+                var shapes = this.Client.Page.GetShapesByID(this.Id);
+                this.WriteObject(shapes, false);
+
+                return;
+            }
+
+            throw new System.ArgumentOutOfRangeException();
         }
     }
 }

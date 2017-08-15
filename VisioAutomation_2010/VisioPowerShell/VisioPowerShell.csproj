@@ -83,7 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\CellsType.cs" />
+    <Compile Include="Models\CellType.cs" />
     <Compile Include="Commands\NewVisioShapeSheetCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />
@@ -101,10 +101,11 @@
     <Compile Include="Commands\OpenVisioMaster.cs" />
     <Compile Include="Models\LockCells.cs" />
     <Compile Include="Models\NamedDictionary.cs" />
-    <Compile Include="Models\NamedSrcDictionary.cs" />
+    <Compile Include="Models\NamedCellDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\ShapeFormatCells.cs" />
     <Compile Include="Models\ShapeXFormCells.cs" />
+    <Compile Include="Models\TextBlockCells.cs" />
     <Compile Include="Models\TextFormatCells.cs" />
     <Compile Include="Models\UserDefinedCell.cs" />
     <Compile Include="Models\ConnectionPoint.cs" />
@@ -122,7 +123,7 @@
     <Compile Include="Commands\RemoveVisioPage.cs" />
     <Compile Include="Commands\TestVisioApplication.cs" />
     <Compile Include="Commands\GetVisioClient.cs" />
-    <Compile Include="Commands\NewVisioNURBS.cs" />
+    <Compile Include="Commands\NewVisioNurbs.cs" />
     <Compile Include="Commands\NewVisioModelGrid.cs" />
     <Compile Include="Commands\NewVisioMaster.cs" />
     <Compile Include="Commands\RemoveVisioUserDefinedCell.cs" />
@@ -130,7 +131,7 @@
     <Compile Include="Models\ResultType.cs" />
     <Compile Include="Commands\NewVisioShape.cs" />
     <Compile Include="Commands\CopyVisioShape.cs" />
-    <Compile Include="Commands\ExportVisioSelectionAsXHTML.cs" />
+    <Compile Include="Commands\ExportVisioSelectionAsHtml.cs" />
     <Compile Include="Commands\RedoVisio.cs" />
     <Compile Include="Commands\SaveVisioDocument.cs" />
     <Compile Include="Commands\TestVisioDocument.cs" />
@@ -180,7 +181,7 @@
     <Compile Include="Commands\RemoveVisioGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\SetVisioZoom.cs" />
-    <Compile Include="Commands\DataTableHelpers.cs" />
+    <Compile Include="Models\DataTableHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">

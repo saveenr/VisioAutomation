@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Management.Automation;
-using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -9,7 +10,7 @@ namespace VisioPowerShell.Commands
     public class GetVisioShapeSheetCells : VisioCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
-        public CellsType Type { get; set; }
+        public VisioPowerShell.Models.CellType Type { get; set; }
 
         [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }
@@ -18,20 +19,47 @@ namespace VisioPowerShell.Commands
         public SwitchParameter GetResults;
 
         [Parameter(Mandatory = false)] 
-        public ResultType ResultType = ResultType.String;
+        public VisioPowerShell.Models.ResultType ResultType = VisioPowerShell.Models.ResultType.String;
 
         protected override void ProcessRecord()
         {
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
-
-            var cellmap = BaseCells.GetDictionary(this.Type);
-            var cells = cellmap.ExpandCellNames(null);
-
-            var query = cellmap.ToQuery(cells);
+            var celldic = VisioPowerShell.Models.BaseCells.GetDictionary(this.Type);
+            var cells = celldic.Keys.ToArray();
+            var query = _CreateQuery(celldic, cells);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
-            var dt = DataTableHelpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
+            var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
             this.WriteObject(dt);
+        }
+
+        private VisioAutomation.ShapeSheet.Query.ShapeSheetQuery _CreateQuery(
+            VisioPowerShell.Models.NamedCellDictionary celldic, 
+            IList<string> cells)
+        {
+            var invalid_names = cells.Where(cellname => !celldic.ContainsKey(cellname)).ToList();
+
+            if (invalid_names.Count > 0)
+            {
+                string msg = "Invalid cell names: " + string.Join(",", invalid_names);
+                throw new ArgumentException(msg);
+            }
+
+            var query = new VisioAutomation.ShapeSheet.Query.ShapeSheetQuery();
+
+            foreach (string cell in cells)
+            {
+                foreach (var resolved_cellname in celldic.ExpandKeyWildcard(cell))
+                {
+                    if (!query.Cells.Contains(resolved_cellname))
+                    {
+                        var resolved_src = celldic[resolved_cellname];
+                        query.AddCell(resolved_src, resolved_cellname);
+                    }
+                }
+            }
+
+            return query;
         }
     }
 }

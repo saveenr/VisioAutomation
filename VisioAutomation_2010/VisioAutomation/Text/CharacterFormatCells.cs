@@ -14,7 +14,7 @@ namespace VisioAutomation.Text
         public ShapeSheet.CellData Case { get; set; }
         public ShapeSheet.CellData ComplexScriptFont { get; set; }
         public ShapeSheet.CellData ComplexScriptSize { get; set; }
-        public ShapeSheet.CellData DoubleStrikeThrough { get; set; }
+        public ShapeSheet.CellData DoubleStrikethrough { get; set; }
         public ShapeSheet.CellData DoubleUnderline { get; set; }
         public ShapeSheet.CellData LangID { get; set; }
         public ShapeSheet.CellData Locale { get; set; }
@@ -42,7 +42,7 @@ namespace VisioAutomation.Text
                 yield return this.newpair(ShapeSheet.SrcConstants.CharComplexScriptFont, this.ComplexScriptFont.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharComplexScriptSize, this.ComplexScriptSize.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleUnderline, this.DoubleUnderline.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikeThrough.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharLangID, this.LangID.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharFontScale, this.FontScale.Formula);
                 yield return this.newpair(ShapeSheet.SrcConstants.CharLangID, this.LangID.Formula);

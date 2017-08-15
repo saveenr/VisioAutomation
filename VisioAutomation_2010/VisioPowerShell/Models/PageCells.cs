@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using SRCCON = VisioAutomation.ShapeSheet.SrcConstants;
-using CellTuple = VisioPowerShell.Models.CellTuple;
 
 namespace VisioPowerShell.Models
 {

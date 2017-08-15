@@ -4,8 +4,8 @@ using System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioSelectionAsXHTML)]
-    public class ExportVisioSelectionAsXhtml : VisioCmdlet
+    [Cmdlet(VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioSelectionAsHtml)]
+    public class ExportVisioSelectionAsHtml : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
         [ValidateNotNullOrEmpty]

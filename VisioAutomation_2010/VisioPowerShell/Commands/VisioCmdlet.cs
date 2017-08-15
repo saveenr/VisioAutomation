@@ -1,4 +1,3 @@
-using System.IO;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
@@ -49,28 +48,6 @@ namespace VisioPowerShell.Commands
         {
             string s = string.Format(fmt, items);
             base.WriteVerbose(s);
-        }
-        
-        protected bool CheckFileExists(string file)
-        {
-            if (File.Exists(file)) return true;
-
-            this.WriteVerbose("Filename: {0}",file);
-            this.WriteVerbose("Abs Filename: {0}", Path.GetFullPath(file));
-            var exc = new FileNotFoundException(file);
-            var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
-            this.WriteError(er);
-            return false;
-        }
-
-        protected void DumpValues(VisioPowerShell.Models.CellValueDictionary cellvalues)
-        {
-            this.WriteVerbose(string.Format("CellValues contains {0} items", cellvalues.Keys.Count));
-            foreach (var cellname in cellvalues.Keys)
-            {
-                string cell_value = cellvalues[cellname];
-                this.WriteVerbose("{0} = {1}", cellname, cell_value);
-            }
         }
     }
 }

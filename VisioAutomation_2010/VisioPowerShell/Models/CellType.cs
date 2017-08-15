@@ -1,10 +1,11 @@
 namespace VisioPowerShell.Models
 {
-    public enum CellsType
+    public enum CellType
     {
         ShapeFormat,
         ShapeXForm,
         TextFormat,
+        TextBlock,
         Lock,
         Page
     }
