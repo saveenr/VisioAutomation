@@ -54,25 +54,30 @@ namespace VisioPowerShell.Commands
             if (this.Type == ShapeType.Rectangle)
             {
                 var r = new VisioAutomation.Geometry.Rectangle(points[0], points[1]);
-                this.Client.Draw.Rectangle(r);
+                var shape = this.Client.Draw.Rectangle(r);
+                this.WriteObject(shape);
             }
             else if (this.Type == ShapeType.Line)
             {
                 var lineseg = new VisioAutomation.Geometry.LineSegment(points[0], points[1]);
-                this.Client.Draw.Line(lineseg.Start, lineseg.End);
+                var shape = this.Client.Draw.Line(lineseg.Start, lineseg.End);
+                this.WriteObject(shape);
             }
             else if (this.Type == ShapeType.Oval)
             {
                 var r = new VisioAutomation.Geometry.Rectangle(points[0], points[1]);
-                this.Client.Draw.Oval(r);
+                var shape = this.Client.Draw.Oval(r);
+                this.WriteObject(shape);
             }
             else if (this.Type == ShapeType.Polyline)
             {
-                this.Client.Draw.PolyLine(points);
+                var shape = this.Client.Draw.PolyLine(points);
+                this.WriteObject(shape);
             }
             else if (this.Type == ShapeType.Bezier)
             {
-                this.Client.Draw.Bezier(points);
+                var shape = this.Client.Draw.Bezier(points);
+                this.WriteObject(shape);
             }
             else
             {
