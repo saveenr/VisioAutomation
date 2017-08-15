@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
+using SRCCON = VisioAutomation.ShapeSheet.SrcConstants;
 
 namespace VisioPowerShell.Models
 {
@@ -25,22 +25,22 @@ namespace VisioPowerShell.Models
 
         public override IEnumerable<CellTuple> GetCellTuples()
         {
-            yield return new CellTuple(nameof(SrcConstants.CharCase), SrcConstants.CharCase, this.CharCase);
-            yield return new CellTuple(nameof(SrcConstants.CharColor), SrcConstants.CharColor, this.CharColor);
-            yield return new CellTuple(nameof(SrcConstants.CharColorTransparency), SrcConstants.CharColorTransparency, this.CharColorTransparency);
-            yield return new CellTuple(nameof(SrcConstants.CharFont), SrcConstants.CharFont, this.CharFont);
-            yield return new CellTuple(nameof(SrcConstants.CharFontScale), SrcConstants.CharFontScale, this.CharFontScale);
-            yield return new CellTuple(nameof(SrcConstants.CharLetterspace), SrcConstants.CharLetterspace, this.CharLetterspace);
-            yield return new CellTuple(nameof(SrcConstants.CharSize), SrcConstants.CharSize, this.CharSize);
+            yield return new CellTuple(nameof(SRCCON.CharCase), SRCCON.CharCase, this.CharCase);
+            yield return new CellTuple(nameof(SRCCON.CharColor), SRCCON.CharColor, this.CharColor);
+            yield return new CellTuple(nameof(SRCCON.CharColorTransparency), SRCCON.CharColorTransparency, this.CharColorTransparency);
+            yield return new CellTuple(nameof(SRCCON.CharFont), SRCCON.CharFont, this.CharFont);
+            yield return new CellTuple(nameof(SRCCON.CharFontScale), SRCCON.CharFontScale, this.CharFontScale);
+            yield return new CellTuple(nameof(SRCCON.CharLetterspace), SRCCON.CharLetterspace, this.CharLetterspace);
+            yield return new CellTuple(nameof(SRCCON.CharSize), SRCCON.CharSize, this.CharSize);
 
-            yield return new CellTuple(nameof(SrcConstants.CharDoubleStrikethrough), SrcConstants.CharDoubleStrikethrough, this.CharDoubleStrikethrough);
-            yield return new CellTuple(nameof(SrcConstants.CharDoubleUnderline), SrcConstants.CharDoubleUnderline, this.CharDoubleUnderline);
-            yield return new CellTuple(nameof(SrcConstants.CharLangID), SrcConstants.CharLangID, this.CharLangID);
-            yield return new CellTuple(nameof(SrcConstants.CharLocale), SrcConstants.CharLocale, this.CharLocale);
-            yield return new CellTuple(nameof(SrcConstants.CharOverline), SrcConstants.CharOverline, this.CharOverline);
-            yield return new CellTuple(nameof(SrcConstants.CharPerpendicular), SrcConstants.CharPerpendicular, this.CharPerpendicular);
-            yield return new CellTuple(nameof(SrcConstants.CharPos), SrcConstants.CharPos, this.CharPos);
-            yield return new CellTuple(nameof(SrcConstants.CharStrikethru), SrcConstants.CharStrikethru, this.CharStrikethru);
+            yield return new CellTuple(nameof(SRCCON.CharDoubleStrikethrough), SRCCON.CharDoubleStrikethrough, this.CharDoubleStrikethrough);
+            yield return new CellTuple(nameof(SRCCON.CharDoubleUnderline), SRCCON.CharDoubleUnderline, this.CharDoubleUnderline);
+            yield return new CellTuple(nameof(SRCCON.CharLangID), SRCCON.CharLangID, this.CharLangID);
+            yield return new CellTuple(nameof(SRCCON.CharLocale), SRCCON.CharLocale, this.CharLocale);
+            yield return new CellTuple(nameof(SRCCON.CharOverline), SRCCON.CharOverline, this.CharOverline);
+            yield return new CellTuple(nameof(SRCCON.CharPerpendicular), SRCCON.CharPerpendicular, this.CharPerpendicular);
+            yield return new CellTuple(nameof(SRCCON.CharPos), SRCCON.CharPos, this.CharPos);
+            yield return new CellTuple(nameof(SRCCON.CharStrikethru), SRCCON.CharStrikethru, this.CharStrikethru);
         }
     }
 }

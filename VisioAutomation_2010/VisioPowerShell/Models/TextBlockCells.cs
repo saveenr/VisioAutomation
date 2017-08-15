@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
+using SRCCON = VisioAutomation.ShapeSheet.SrcConstants;
 
 namespace VisioPowerShell.Models
 {
@@ -15,13 +15,13 @@ namespace VisioPowerShell.Models
 
         public override IEnumerable<CellTuple> GetCellTuples()
         {
-            yield return new CellTuple(nameof(SrcConstants.TextXFormAngle), SrcConstants.TextXFormAngle, this.TextXFormAngle);
-            yield return new CellTuple(nameof(SrcConstants.TextXFormHeight), SrcConstants.TextXFormHeight, this.TextXFormHeight);
-            yield return new CellTuple(nameof(SrcConstants.TextXFormLocPinX), SrcConstants.TextXFormLocPinX, this.TextXFormLocPinX);
-            yield return new CellTuple(nameof(SrcConstants.TextXFormLocPinY), SrcConstants.TextXFormLocPinY, this.TextXFormLocPinY);
-            yield return new CellTuple(nameof(SrcConstants.TextXFormPinX), SrcConstants.TextXFormPinX, this.TextXFormPinX);
-            yield return new CellTuple(nameof(SrcConstants.TextXFormPinY), SrcConstants.TextXFormPinY, this.TextXFormPinY);
-            yield return new CellTuple(nameof(SrcConstants.TextXFormWidth), SrcConstants.TextXFormWidth, this.TextXFormWidth);
+            yield return new CellTuple(nameof(SRCCON.TextXFormAngle), SRCCON.TextXFormAngle, this.TextXFormAngle);
+            yield return new CellTuple(nameof(SRCCON.TextXFormHeight), SRCCON.TextXFormHeight, this.TextXFormHeight);
+            yield return new CellTuple(nameof(SRCCON.TextXFormLocPinX), SRCCON.TextXFormLocPinX, this.TextXFormLocPinX);
+            yield return new CellTuple(nameof(SRCCON.TextXFormLocPinY), SRCCON.TextXFormLocPinY, this.TextXFormLocPinY);
+            yield return new CellTuple(nameof(SRCCON.TextXFormPinX), SRCCON.TextXFormPinX, this.TextXFormPinX);
+            yield return new CellTuple(nameof(SRCCON.TextXFormPinY), SRCCON.TextXFormPinY, this.TextXFormPinY);
+            yield return new CellTuple(nameof(SRCCON.TextXFormWidth), SRCCON.TextXFormWidth, this.TextXFormWidth);
         }
     }
 }
