@@ -123,7 +123,6 @@
     <Compile Include="Commands\RemoveVisioPage.cs" />
     <Compile Include="Commands\TestVisioApplication.cs" />
     <Compile Include="Commands\GetVisioClient.cs" />
-    <Compile Include="Commands\NewVisioNurbs.cs" />
     <Compile Include="Commands\NewVisioModelGrid.cs" />
     <Compile Include="Commands\NewVisioMaster.cs" />
     <Compile Include="Commands\RemoveVisioUserDefinedCell.cs" />
@@ -141,7 +140,6 @@
     <Compile Include="Commands\SelectVisioShape.cs" />
     <Compile Include="Commands\NewVisioBezier.cs" />
     <Compile Include="Commands\NewVisioModelPieChart.cs" />
-    <Compile Include="Commands\NewVisioPolyLine.cs" />
     <Compile Include="Commands\ExportVisioPage.cs" />
     <Compile Include="Commands\GetVisioConnectionPoint.cs" />
     <Compile Include="Commands\GetVisioControl.cs" />
@@ -156,9 +154,6 @@
     <Compile Include="Commands\SetVisioUserDefinedCell.cs" />
     <Compile Include="Commands\NewVisioConnection.cs" />
     <Compile Include="Commands\RemoveVisioCustomProperty.cs" />
-    <Compile Include="Commands\NewVisioLine.cs" />
-    <Compile Include="Commands\NewVisioOval.cs" />
-    <Compile Include="Commands\NewVisioRectangle.cs" />
     <Compile Include="Commands\CopyVisioPage.cs" />
     <Compile Include="Commands\GetVisioDirectedEdge.cs" />
     <Compile Include="Commands\GetVisioPage.cs" />
