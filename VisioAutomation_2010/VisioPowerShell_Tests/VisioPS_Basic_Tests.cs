@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell_Tests
 {
@@ -62,8 +63,15 @@ namespace VisioPowerShell_Tests
         public void VisioPS_DrawRect()
         {
             var d = visiops_session.New_VisioDocument();
-            var s = visiops_session.New_VisioShape_Rectangle(new[] {0.0, 1.0, 2.0, 3.0});
-            visiops_session.Set_VisioShapeText("Hello World");
+            var s = visiops_session.New_VisioShape(VisioPowerShell.Commands.ShapeType.Rectangle, new[] {0.0, 1.0, 2.0, 3.0});
+            visiops_session.Set_VisioShapeText("Hello World",s);
+
+            var r = visiops_session.Get_VisioShapeText();
+
+            Assert.AreEqual(1,r.Length);
+            Assert.AreEqual("Hello World", r[0]);
+            bool force = true;
+            visiops_session.Close_VisioDocument(new [] { (IVisio.Document)d}, force);
         }
 
         [TestMethod]
