@@ -6,13 +6,12 @@ namespace VisioPowerShell_Tests
     [TestClass]
     public class VisioPS_Basic_Tests
     {
-        private static readonly VisioPS_Session visiops_session = new VisioPS_Session();
+        private static readonly VisioPS_Session session = new VisioPS_Session();
 
         [ClassInitialize]
         public static void PSTestFixtureSetup(TestContext context)
         {
             var new_visio_application = new VisioPowerShell.Commands.NewVisioApplication();
-            var visio_app = new_visio_application.Invoke();
         }
 
         [TestCleanup]
@@ -24,20 +23,20 @@ namespace VisioPowerShell_Tests
         [ClassCleanup]
         public static void CleanUp()
         {
-            VisioPS_Basic_Tests.visiops_session.CleanUp();
+            VisioPS_Basic_Tests.session.CleanUp();
         }
 
         [TestMethod]
         public void VisioPS_New_Visio_Document()
         {
-            var doc = VisioPS_Basic_Tests.visiops_session.New_VisioDocument();
+            var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             Assert.IsNotNull(doc);
             VisioPS_Basic_Tests.Close_Visio_Application();
         }
 
         private static void Close_Visio_Application()
         {
-            VisioPS_Basic_Tests.visiops_session.Close_VisioApplication();
+            VisioPS_Basic_Tests.session.Close_VisioApplication();
         }
 
         [TestMethod]
@@ -62,16 +61,16 @@ namespace VisioPowerShell_Tests
         [TestMethod]
         public void VisioPS_DrawRect()
         {
-            var d = visiops_session.New_VisioDocument();
-            var s = visiops_session.New_VisioShape(VisioPowerShell.Commands.ShapeType.Rectangle, new[] {0.0, 1.0, 2.0, 3.0});
-            visiops_session.Set_VisioShapeText("Hello World",s);
+            var d = session.New_VisioDocument();
+            var s = session.New_VisioShape(VisioPowerShell.Commands.ShapeType.Rectangle, new[] {0.0, 1.0, 2.0, 3.0});
+            session.Set_VisioShapeText("Hello World",s);
 
-            var r = visiops_session.Get_VisioShapeText();
+            var r = session.Get_VisioShapeText();
 
             Assert.AreEqual(1,r.Length);
             Assert.AreEqual("Hello World", r[0]);
             bool force = true;
-            visiops_session.Close_VisioDocument(new [] { (IVisio.Document)d}, force);
+            session.Close_VisioDocument(new [] { (IVisio.Document)d}, force);
         }
 
         [TestMethod]
@@ -106,8 +105,8 @@ namespace VisioPowerShell_Tests
         [TestMethod]
         public void VisioPS_NewVisioContainer()
         {
-            var doc = VisioPS_Basic_Tests.visiops_session.New_VisioDocument();
-            var app = VisioPS_Basic_Tests.visiops_session.Get_VisioApplication();
+            var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
+            var app = VisioPS_Basic_Tests.session.Get_VisioApplication();
 
             var ver = VisioAutomation.Application.ApplicationHelper.GetVersion(app);
 
@@ -116,14 +115,14 @@ namespace VisioPowerShell_Tests
             var rectangle = "Rectangle";
             var basic_u_vss = "BASIC_U.VSS";
 
-            var rect = VisioPS_Basic_Tests.visiops_session.Get_VisioMaster(rectangle, basic_u_vss);
+            var rect = VisioPS_Basic_Tests.session.Get_VisioMaster(rectangle, basic_u_vss);
 
-            VisioPS_Basic_Tests.visiops_session.New_VisioShape(rect, new[] { 1.0, 1.0 });
+            VisioPS_Basic_Tests.session.New_VisioShape(rect, new[] { 1.0, 1.0 });
 
             // Drop a container on the page... the rectangle we created above should be selected by default. 
             // Since it is selected it will be added as a member to the container.
 
-            var container = VisioPS_Basic_Tests.visiops_session.New_VisioContainer(cont_master_name, cont_doc);
+            var container = VisioPS_Basic_Tests.session.New_VisioContainer(cont_master_name, cont_doc);
 
             Assert.IsNotNull(container);
 

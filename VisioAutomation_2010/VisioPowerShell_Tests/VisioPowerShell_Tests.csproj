@@ -52,7 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework\PowerShellModuleSession.cs" />
+    <Compile Include="Framework\PowerShellSession.cs" />
     <Compile Include="Framework\Extensions\CmdletExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisioPS_Basic_Tests.cs" />

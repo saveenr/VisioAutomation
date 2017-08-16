@@ -6,20 +6,23 @@ using VisioPowerShell_Tests.Framework.Extensions;
 
 namespace VisioPowerShell_Tests
 {
-    public class VisioPS_Session : VisioPowerShell_Tests.Framework.PowerShellModuleSession<VisioPowerShell.Commands.VisioCmdlet>
+    public class VisioPS_Session : VisioPowerShell_Tests.Framework.PowerShellSession
     {
-        public VisioPS_Session()
+        private static System.Reflection.Assembly visiops_asm = typeof(VisioPowerShell.Commands.VisioCmdlet).Assembly;
+
+        public VisioPS_Session() :
+            base(visiops_asm)
         {
             
         }
 
         public IVisio.ShapeClass New_VisioContainer(string cont_master_name, string cont_doc)
         {
-            var xdoc = this.Open_VisioDocument(cont_doc);
-            var xmaster = this.Get_VisioMaster(cont_master_name,cont_doc);
+            var doc = this.Open_VisioDocument(cont_doc);
+            var master = this.Get_VisioMaster(cont_master_name,cont_doc);
 
             var cmd = new VisioPowerShell.Commands.NewVisioContainer();
-            cmd.Master = xmaster;
+            cmd.Master = master;
             var shape = cmd.ExInvokeFirst<IVisio.ShapeClass>();
             return shape ;
         }
@@ -112,6 +115,5 @@ namespace VisioPowerShell_Tests
             cmd.Force = true;
             cmd.ExInvokeVoid();
         }
-
     }
 }
