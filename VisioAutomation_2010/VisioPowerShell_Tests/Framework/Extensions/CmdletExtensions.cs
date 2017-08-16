@@ -1,8 +1,8 @@
 using System.Linq;
 
-namespace VisioPowerShell_Tests
+namespace VisioPowerShell_Tests.Framework.Extensions
 {
-    public static class VisioPS_CmdletExtensions
+    public static class CmdletExtensions
     {
         public static void ExInvokeVoid(this System.Management.Automation.Cmdlet cmd)
         {

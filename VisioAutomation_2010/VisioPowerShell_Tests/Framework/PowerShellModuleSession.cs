@@ -1,4 +1,4 @@
-namespace VisioPowerShell_Tests
+namespace VisioPowerShell_Tests.Framework
 {
     public class PowerShellModuleSession<T> : System.IDisposable 
     {

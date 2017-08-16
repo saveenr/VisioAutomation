@@ -2,12 +2,13 @@ using System.Collections;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
+using VisioPowerShell_Tests.Framework.Extensions;
 
 namespace VisioPowerShell_Tests
 {
-    public class VisioPS_Session : PowerShellModuleSession<VisioPowerShell.Commands.VisioCmdlet>
+    public class VisioPS_Session : VisioPowerShell_Tests.Framework.PowerShellModuleSession<VisioPowerShell.Commands.VisioCmdlet>
     {
-        public VisioPS_Session() : base()
+        public VisioPS_Session()
         {
             
         }
