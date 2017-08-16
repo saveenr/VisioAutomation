@@ -1,3 +1,5 @@
+using SMA = System.Management.Automation;
+
 namespace VisioPowerShell_Tests
 {
     public class VisioPS_TestSession : System.IDisposable
@@ -5,14 +7,14 @@ namespace VisioPowerShell_Tests
         // This class should implement IDisposable because
         // it contains disposable members
 
-        protected System.Management.Automation.PowerShell PowerShell;
-        protected System.Management.Automation.Runspaces.InitialSessionState SessionState;
-        protected System.Management.Automation.Runspaces.Runspace RunSpace;
-        protected System.Management.Automation.RunspaceInvoke Invoker;
+        protected SMA.PowerShell PowerShell;
+        protected SMA.Runspaces.InitialSessionState SessionState;
+        protected SMA.Runspaces.Runspace RunSpace;
+        protected SMA.RunspaceInvoke Invoker;
 
         public VisioPS_TestSession()
         {
-            this.SessionState = System.Management.Automation.Runspaces.InitialSessionState.CreateDefault();
+            this.SessionState = SMA.Runspaces.InitialSessionState.CreateDefault();
 
 
             // Get path of where everything is executing so we can find the VisioPS.dll assembly
@@ -24,11 +26,11 @@ namespace VisioPowerShell_Tests
 
             // Import the latest VisioPS module into the PowerShell session
             this.SessionState.ImportPSModule(modules);
-            this.RunSpace = System.Management.Automation.Runspaces.RunspaceFactory.CreateRunspace(this.SessionState);
+            this.RunSpace = SMA.Runspaces.RunspaceFactory.CreateRunspace(this.SessionState);
             this.RunSpace.Open();
-            this.PowerShell = System.Management.Automation.PowerShell.Create();
+            this.PowerShell = SMA.PowerShell.Create();
             this.PowerShell.Runspace = this.RunSpace;
-            this.Invoker = new System.Management.Automation.RunspaceInvoke(this.RunSpace);
+            this.Invoker = new SMA.RunspaceInvoke(this.RunSpace);
         }
 
         public void CleanUp()
