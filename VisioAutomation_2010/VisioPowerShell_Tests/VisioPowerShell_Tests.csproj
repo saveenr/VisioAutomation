@@ -52,10 +52,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PowerShellTestsSession.cs" />
+    <Compile Include="VisioPS_TestSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisioPowerShellTests.cs" />
-    <Compile Include="VisioPSContext.cs" />
+    <Compile Include="VisioPS_Basic_Tests.cs" />
+    <Compile Include="VisioPS_Context.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

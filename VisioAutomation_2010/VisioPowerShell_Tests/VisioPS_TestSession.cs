@@ -1,6 +1,6 @@
 namespace VisioPowerShell_Tests
 {
-    public class PowerShellTestsSession : System.IDisposable
+    public class VisioPS_TestSession : System.IDisposable
     {
         // This class should implement IDisposable because
         // it contains disposable members
@@ -10,7 +10,7 @@ namespace VisioPowerShell_Tests
         protected System.Management.Automation.Runspaces.Runspace RunSpace;
         protected System.Management.Automation.RunspaceInvoke Invoker;
 
-        public PowerShellTestsSession()
+        public VisioPS_TestSession()
         {
             this.SessionState = System.Management.Automation.Runspaces.InitialSessionState.CreateDefault();
 

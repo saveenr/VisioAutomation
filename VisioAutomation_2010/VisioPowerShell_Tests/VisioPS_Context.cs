@@ -1,13 +1,12 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
-using VisioPowerShell.Commands;
 
 namespace VisioPowerShell_Tests
 {
-    public class VisioPSContext : PowerShellTestsSession
+    public class VisioPS_Context : VisioPS_TestSession
     {
-        public VisioPSContext() : base()
+        public VisioPS_Context() : base()
         {
             
         }
@@ -74,7 +73,7 @@ namespace VisioPowerShell_Tests
         public IVisio.Shape New_VisioShape_Rectangle(double[] points)
         {
             var cmd = new VisioPowerShell.Commands.NewVisioShape();
-            cmd.Type = ShapeType.Rectangle;
+            cmd.Type = VisioPowerShell.Commands.ShapeType.Rectangle;
             cmd.Points = points;
             var results = cmd.Invoke<IVisio.ShapeClass>();
             var shape = results.First();
