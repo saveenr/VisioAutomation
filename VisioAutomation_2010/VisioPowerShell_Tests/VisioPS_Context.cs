@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace VisioPowerShell_Tests
 {
-    public class VisioPS_Context : VisioPS_TestSession
+    public class VisioPS_Context : VisioPS_Session
     {
         public VisioPS_Context() : base()
         {
