@@ -99,12 +99,9 @@
     <Compile Include="DocumentAnalysis\PathAnalysis_Tests.cs" />
     <Compile Include="Framework\AssertUtil.cs" />
     <Compile Include="Core\Shapes\HyperlinkTests.cs" />
-    <Compile Include="Framework\PowerShellTestsSession.cs" />
     <Compile Include="Scripting\ScriptingDocumentTests.cs" />
     <Compile Include="Scripting\ScriptingHyperlinkTests.cs" />
-    <Compile Include="Framework\VisioPSContext.cs" />
     <Compile Include="Scripting\ScriptingShapeText_Tests.cs" />
-    <Compile Include="Framework\VisioPowerShellTests.cs" />
     <Compile Include="Framework\DiagnosticDebugClientContext.cs" />
     <Compile Include="Models\Dom\Dom_Text.cs" />
     <Compile Include="Framework\TestGlobals.cs" />

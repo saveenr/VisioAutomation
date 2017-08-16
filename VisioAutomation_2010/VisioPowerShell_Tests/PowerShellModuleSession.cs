@@ -1,6 +1,6 @@
-namespace VisioAutomation_Tests
+namespace VisioPowerShell_Tests
 {
-    public class PowerShellTestsSession : System.IDisposable
+    public class PowerShellModuleSession<T> : System.IDisposable 
     {
         // This class should implement IDisposable because
         // it contains disposable members
@@ -10,17 +10,13 @@ namespace VisioAutomation_Tests
         protected System.Management.Automation.Runspaces.Runspace RunSpace;
         protected System.Management.Automation.RunspaceInvoke Invoker;
 
-        public PowerShellTestsSession()
+        public PowerShellModuleSession()
         {
             this.SessionState = System.Management.Automation.Runspaces.InitialSessionState.CreateDefault();
 
-
-            // Get path of where everything is executing so we can find the VisioPS.dll assembly
-            var executing_assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var asm_path = System.IO.Path.GetDirectoryName(executing_assembly.GetName().CodeBase);
-            var uri = new System.Uri(asm_path);
-            var visio_ps = System.IO.Path.Combine(uri.LocalPath, "VisioPS.dll");
-            var modules = new[] { visio_ps };
+            // Find the path to the assembly
+            var target_assembly = typeof(T).Assembly;
+            var modules = new[] { target_assembly.Location };
 
             // Import the latest VisioPS module into the PowerShell session
             this.SessionState.ImportPSModule(modules);

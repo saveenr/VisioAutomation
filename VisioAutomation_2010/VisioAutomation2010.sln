@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.DocumentAna
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Documentation_Samples", "VisioAutomation_Documentation_Samples\VisioAutomation_Documentation_Samples.csproj", "{DCC18B41-41BB-42B8-B6CE-247588DE4EC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPowerShell_Tests", "VisioPowerShell_Tests\VisioPowerShell_Tests.csproj", "{669CDDEB-7609-4294-9D0E-721F47129D0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +154,22 @@ Global
 		{DCC18B41-41BB-42B8-B6CE-247588DE4EC9}.Release|Win32.Build.0 = Release|Any CPU
 		{DCC18B41-41BB-42B8-B6CE-247588DE4EC9}.Release|x86.ActiveCfg = Release|Any CPU
 		{DCC18B41-41BB-42B8-B6CE-247588DE4EC9}.Release|x86.Build.0 = Release|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Debug|Win32.Build.0 = Debug|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Debug|x86.Build.0 = Debug|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|Win32.ActiveCfg = Release|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|Win32.Build.0 = Release|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|x86.ActiveCfg = Release|Any CPU
+		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
