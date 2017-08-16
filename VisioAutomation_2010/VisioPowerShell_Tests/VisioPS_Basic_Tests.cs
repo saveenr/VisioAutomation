@@ -6,7 +6,7 @@ namespace VisioPowerShell_Tests
     [TestClass]
     public class VisioPS_Basic_Tests
     {
-        private static readonly VisioPS_Context visiops_session = new VisioPS_Context();
+        private static readonly VisioPS_Session visiops_session = new VisioPS_Session();
 
         [ClassInitialize]
         public static void PSTestFixtureSetup(TestContext context)

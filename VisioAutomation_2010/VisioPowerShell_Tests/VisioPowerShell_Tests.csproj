@@ -54,10 +54,9 @@
   <ItemGroup>
     <Compile Include="PowerShellModuleSession.cs" />
     <Compile Include="VisioPS_CmdletExtensions.cs" />
-    <Compile Include="VisioPS_Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisioPS_Basic_Tests.cs" />
-    <Compile Include="VisioPS_Context.cs" />
+    <Compile Include="VisioPS_Session.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
