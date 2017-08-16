@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioPowerShell.Commands;
 
-namespace VisioAutomation_Tests.PowerShell
+namespace VisioPowerShell_Tests
 {
     [TestClass]
     public class VisioPowerShellTests

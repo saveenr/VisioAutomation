@@ -1,4 +1,4 @@
-namespace VisioAutomation_Tests
+namespace VisioPowerShell_Tests
 {
     public class PowerShellTestsSession : System.IDisposable
     {
