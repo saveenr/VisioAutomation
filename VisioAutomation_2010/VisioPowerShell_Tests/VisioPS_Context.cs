@@ -2,29 +2,9 @@ using System.Collections;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
-using SMA = System.Management.Automation;
 
 namespace VisioPowerShell_Tests
 {
-    public static class PSExtensions
-    {
-        public static void ExInvokeVoid(this SMA.Cmdlet cmd)
-        {
-            var results = cmd.Invoke();
-            foreach (var z in results)
-            {
-
-            }
-        }
-
-        public static T ExInvokeFirst<T>(this SMA.Cmdlet cmd)
-        {
-            var results = cmd.Invoke<T>();
-            T output = results.First();
-            return output;
-        }
-    }
-
     public class VisioPS_Context : VisioPS_TestSession
     {
         public VisioPS_Context() : base()

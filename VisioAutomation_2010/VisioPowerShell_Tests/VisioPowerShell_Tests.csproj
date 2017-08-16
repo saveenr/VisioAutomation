@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VisioPS_CmdletExtensions.cs" />
     <Compile Include="VisioPS_TestSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisioPS_Basic_Tests.cs" />
