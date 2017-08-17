@@ -79,20 +79,13 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             var page = VisioPS_Basic_Tests.session.Get_VisioPage();
 
-            var datatable = VisioPS_Basic_Tests.session.Get_VisioShapeCells(page.PageSheet);
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeCells(page.PageSheet);
+
+            Assert.IsNotNull(datatable1);
+            Assert.AreEqual("8.5 in", datatable1.Rows[0]["PageWidth"]);
+            Assert.AreEqual("11 in", datatable1.Rows[0]["PageHeight"]);
 
             /*
-                var cells = new[] { "PageWidth", "PageHeight" };
-                var result_type = "Double";
-                var get_results = true;
-    
-                // Handle the page that gets created when a document is created
-    
-                var datatable1 = VisioPowerShellTests.visiops_session.Get_Visio_Page_Cell(cells, get_results, result_type);
-    
-                Assert.IsNotNull(datatable1);
-                Assert.AreEqual(8.5, datatable1.Rows[0]["PageWidth"]);
-                Assert.AreEqual(11.0, datatable1.Rows[0]["PageHeight"]);
                 
                 //Now lets add another page and get it's width and height
                 var page2 = VisioPowerShellTests.visiops_session.New_Visio_Page();
