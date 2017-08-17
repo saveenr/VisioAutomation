@@ -24,7 +24,7 @@ namespace VisioPowerShell_Tests
 
             var cmd = new VisioPowerShell.Commands.NewVisioContainer();
             cmd.Master = master;
-            var shape = cmd.ExInvokeFirst<IVisio.ShapeClass>();
+            var shape = cmd.InvokeFirst<IVisio.ShapeClass>();
             return shape ;
         }
 
@@ -33,7 +33,7 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.NewVisioShape();
             cmd.Masters = new IVisio.Master[]{ master };
             cmd.Points= points;
-            var shape_list = cmd.ExInvokeFirst<List<IVisio.Shape>>();
+            var shape_list = cmd.InvokeFirst<List<IVisio.Shape>>();
             return shape_list;
         }
 
@@ -44,7 +44,7 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.GetVisioMaster();
             cmd.Name = rectangle;
             cmd.Document = doc;
-            var master = cmd.ExInvokeFirst<IVisio.MasterClass>();
+            var master = cmd.InvokeFirst<IVisio.MasterClass>();
             return master;
         }
 
@@ -52,14 +52,14 @@ namespace VisioPowerShell_Tests
         {
             var cmd = new VisioPowerShell.Commands.OpenVisioDocument();
             cmd.Filename = filename;
-            var doc = cmd.ExInvokeFirst<IVisio.DocumentClass>();
+            var doc = cmd.InvokeFirst<IVisio.DocumentClass>();
             return doc;
         }
 
         public IVisio.DocumentClass New_VisioDocument()
         {
             var cmd = new VisioPowerShell.Commands.NewVisioDocument();
-            var doc = cmd.ExInvokeFirst<IVisio.DocumentClass>();
+            var doc = cmd.InvokeFirst<IVisio.DocumentClass>();
             return doc;
         }
 
@@ -68,7 +68,7 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.GetVisioShapeSheetCells();
             cmd.Type = CellType.Page;
             cmd.Shapes = new[] {shape};
-            var cells = cmd.ExInvokeFirst<System.Data.DataTable>();
+            var cells = cmd.InvokeFirst<System.Data.DataTable>();
             return cells;
         }
 
@@ -85,7 +85,7 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.NewVisioShape();
             cmd.Type = type;
             cmd.Points = points;
-            var shape = cmd.ExInvokeFirst<IVisio.ShapeClass>();
+            var shape = cmd.InvokeFirst<IVisio.ShapeClass>();
             return shape;
         }
 
@@ -94,13 +94,13 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.SetVisioShapeText();
             cmd.Text = new [] { text };
             cmd.Shapes = new[] {shapes};
-            cmd.ExInvokeVoid();
+            cmd.InvokeVoid();
         }
 
         public string[] Get_VisioShapeText()
         {
             var cmd = new VisioPowerShell.Commands.GetVisioShapeText();
-            var results = cmd.ExInvokeFirst<List<string>>();
+            var results = cmd.InvokeFirst<List<string>>();
             return results.ToArray();
         }
 
@@ -109,20 +109,20 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.CloseVisioDocument();
             cmd.Documents = docs;
             cmd.Force = force;
-            cmd.ExInvokeVoid();
+            cmd.InvokeVoid();
         }
 
         public IVisio.ApplicationClass Get_VisioApplication()
         {
             var cmd = new VisioPowerShell.Commands.GetVisioApplication();
-            var app = cmd.ExInvokeFirst<IVisio.ApplicationClass>();
+            var app = cmd.InvokeFirst<IVisio.ApplicationClass>();
             return app;
         }
 
         public IVisio.Page Get_VisioPage()
         {
             var cmd = new VisioPowerShell.Commands.GetVisioPage();
-            var page = cmd.ExInvokeFirst<IVisio.Page>();
+            var page = cmd.InvokeFirst<IVisio.Page>();
             return page;
         }
 
@@ -130,7 +130,7 @@ namespace VisioPowerShell_Tests
         {
             var cmd = new VisioPowerShell.Commands.CloseVisioApplication();
             cmd.Force = true;
-            cmd.ExInvokeVoid();
+            cmd.InvokeVoid();
         }
     }
 }
