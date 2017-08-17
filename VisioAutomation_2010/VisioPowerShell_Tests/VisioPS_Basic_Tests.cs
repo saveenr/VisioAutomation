@@ -63,24 +63,23 @@ namespace VisioPowerShell_Tests
         {
             var d = session.New_VisioDocument();
             var s = session.New_VisioShape(VisioPowerShell.Commands.ShapeType.Rectangle, new[] {0.0, 1.0, 2.0, 3.0});
-            session.Set_VisioShapeText("Hello World",s);
+            session.Set_VisioShapeText( PsArray.From("Hello World"), PsArray.From(s));
 
             var r = session.Get_VisioShapeText();
 
             Assert.AreEqual(1,r.Length);
             Assert.AreEqual("Hello World", r[0]);
             bool force = true;
-            session.Close_VisioDocument(d, force);
+            session.Close_VisioDocument( PsArray.From(d), force);
         }
 
         [TestMethod]
         public void VisioPS_Get_Visio_Page_Cell()
         {
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
-            var page = VisioPS_Basic_Tests.session.Get_VisioPage();
+            var page = VisioPS_Basic_Tests.session.Get_VisioPage(active:true,name:null);
 
-            var pagesheet = page.PageSheet;
-            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeCells(new IVisio.Shape[]{pagesheet});
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeCells( PsArray.From(page.PageSheet));
 
             Assert.IsNotNull(datatable1);
             Assert.AreEqual("8.5 in", datatable1.Rows[0]["PageWidth"]);
@@ -115,7 +114,7 @@ namespace VisioPowerShell_Tests
 
             var rect = VisioPS_Basic_Tests.session.Get_VisioMaster(rectangle, basic_u_vss);
 
-            VisioPS_Basic_Tests.session.New_VisioShape(rect, new[] { 1.0, 1.0 });
+            VisioPS_Basic_Tests.session.New_VisioShape( PsArray.From(rect) , new[] { 1.0, 1.0 });
 
             // Drop a container on the page... the rectangle we created above should be selected by default. 
             // Since it is selected it will be added as a member to the container.
