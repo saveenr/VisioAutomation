@@ -76,6 +76,11 @@ namespace VisioPowerShell_Tests
         [TestMethod]
         public void VisioPS_Get_Visio_Page_Cell()
         {
+            var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
+            var page = VisioPS_Basic_Tests.session.Get_VisioPage();
+
+            var datatable = VisioPS_Basic_Tests.session.Get_VisioShapeCells(page.PageSheet);
+
             /*
                 var cells = new[] { "PageWidth", "PageHeight" };
                 var result_type = "Double";
@@ -83,7 +88,6 @@ namespace VisioPowerShell_Tests
     
                 // Handle the page that gets created when a document is created
     
-                var doc = VisioPowerShellTests.visiops_session.New_Visio_Document();
                 var datatable1 = VisioPowerShellTests.visiops_session.Get_Visio_Page_Cell(cells, get_results, result_type);
     
                 Assert.IsNotNull(datatable1);

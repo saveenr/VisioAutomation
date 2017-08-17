@@ -2,6 +2,7 @@ using System.Collections;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
+using VisioPowerShell.Models;
 using VisioPowerShell_Tests.Framework.Extensions;
 
 namespace VisioPowerShell_Tests
@@ -62,6 +63,15 @@ namespace VisioPowerShell_Tests
             return doc;
         }
 
+        public System.Data.DataTable Get_VisioShapeCells(IVisio.Shape shape)
+        {
+            var cmd = new VisioPowerShell.Commands.GetVisioShapeSheetCells();
+            cmd.Type = CellType.Page;
+            cmd.Shapes = new[] {shape};
+            var cells = cmd.ExInvokeFirst<System.Data.DataTable>();
+            return cells;
+        }
+
         public IVisio.PageClass New_VisioPage()
         {
             var cmd = new VisioPowerShell.Commands.NewVisioPage();
@@ -107,6 +117,13 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.GetVisioApplication();
             var app = cmd.ExInvokeFirst<IVisio.ApplicationClass>();
             return app;
+        }
+
+        public IVisio.Page Get_VisioPage()
+        {
+            var cmd = new VisioPowerShell.Commands.GetVisioPage();
+            var page = cmd.ExInvokeFirst<IVisio.Page>();
+            return page;
         }
 
         public void Close_VisioApplication()
