@@ -70,7 +70,7 @@ namespace VisioPowerShell_Tests
             Assert.AreEqual(1,r.Length);
             Assert.AreEqual("Hello World", r[0]);
             bool force = true;
-            session.Close_VisioDocument(new [] { (IVisio.Document)d}, force);
+            session.Close_VisioDocument(d, force);
         }
 
         [TestMethod]
@@ -79,7 +79,8 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             var page = VisioPS_Basic_Tests.session.Get_VisioPage();
 
-            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeCells(page.PageSheet);
+            var pagesheet = page.PageSheet;
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeCells(new IVisio.Shape[]{pagesheet});
 
             Assert.IsNotNull(datatable1);
             Assert.AreEqual("8.5 in", datatable1.Rows[0]["PageWidth"]);
