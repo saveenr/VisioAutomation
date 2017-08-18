@@ -10,23 +10,18 @@ namespace VisioPowerShell_Tests.Framework
 
     public class PsArray<T>
     {
-        private readonly T[] Items;
+        private readonly T[] _array;
 
         public PsArray()
         {
-            this.Items = null;
-        }
-
-        public PsArray(T item)
-        {
-            this.Items = new T[]{ item };
+            this._array = null;
         }
 
         public PsArray(params T[] items)
         {
-            this.Items = items;
+            this._array = items;
         }
 
-        public T[] Array => this.Items;
+        public T[] Array => this._array;
     }
 }
