@@ -85,19 +85,6 @@ namespace VisioPowerShell_Tests
             Assert.IsNotNull(datatable1);
             Assert.AreEqual("8.5 in", datatable1.Rows[0]["PageWidth"]);
             Assert.AreEqual("11 in", datatable1.Rows[0]["PageHeight"]);
-
-            /*
-                
-                //Now lets add another page and get it's width and height
-                var page2 = VisioPowerShellTests.visiops_session.New_Visio_Page();
-                var datatable2 = VisioPowerShellTests.visiops_session.Get_Visio_Page_Cell(cells, get_results, result_type);
-     
-                Assert.IsNotNull(datatable2);
-                Assert.AreEqual(8.5, datatable2.Rows[0]["PageWidth"]);
-                Assert.AreEqual(11.0, datatable2.Rows[0]["PageHeight"]);
-    
-                VisioPowerShellTests.Close_Visio_Application();
-            */
         }
 
         [TestMethod]
