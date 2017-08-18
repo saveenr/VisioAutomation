@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioPowerShell_Tests.Framework;
 
@@ -43,20 +44,22 @@ namespace VisioPowerShell_Tests
         [TestMethod]
         public void VisioPS_Set_Visio_Page_Cell()
         {
-            /*
-            // Handle the page that gets created when a document is created
+            var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
+            var page = VisioPS_Basic_Tests.session.Get_VisioPage(active: true, name: null);
 
-            var doc = VisioPowerShellTests.visiops_session.New_Visio_Document();
-            var dic = new System.Collections.Generic.Dictionary<string, object>
-            {
-                {"PageWidth", 3},
-                {"PageHeight", 5}
-            };
+            var cells = VisioPS_Basic_Tests.session.New_VisioShapeSheetCells(CellType.Page);
+            var pagecells = (PageCells) cells;
+            pagecells.PageHeight = "4 in";
+            pagecells.PageWidth= "3 in";
 
-            VisioPowerShellTests.visiops_session.Set_Visio_PageCells(dic);
+            VisioPS_Basic_Tests.session.Set_VisioShapeCells(cells, PsArray.From(page.PageSheet));
+            
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeSheetCells(PsArray.From(page.PageSheet));
 
-            //VisioPowerShellTests.Close_Visio_Application();
-            */
+            Assert.IsNotNull(datatable1);
+            Assert.AreEqual("3 in", datatable1.Rows[0]["PageWidth"]);
+            Assert.AreEqual("4 in", datatable1.Rows[0]["PageHeight"]);
+            VisioPS_Basic_Tests.session.Close_VisioDocument(PsArray.From(doc), true);
         }
 
         [TestMethod]
@@ -80,11 +83,12 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             var page = VisioPS_Basic_Tests.session.Get_VisioPage(active:true,name:null);
 
-            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeCells( PsArray.From(page.PageSheet));
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeSheetCells( PsArray.From(page.PageSheet));
 
             Assert.IsNotNull(datatable1);
             Assert.AreEqual("8.5 in", datatable1.Rows[0]["PageWidth"]);
             Assert.AreEqual("11 in", datatable1.Rows[0]["PageHeight"]);
+            VisioPS_Basic_Tests.session.Close_VisioDocument(PsArray.From(doc),true);
         }
 
         [TestMethod]

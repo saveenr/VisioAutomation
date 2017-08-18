@@ -65,7 +65,7 @@ namespace VisioPowerShell_Tests
             return (IVisio.Document)doc;
         }
 
-        public System.Data.DataTable Get_VisioShapeCells(PsArray<IVisio.Shape> shapes)
+        public System.Data.DataTable Get_VisioShapeSheetCells(PsArray<IVisio.Shape> shapes)
         {
             var cmd = new VisioPowerShell.Commands.GetVisioShapeSheetCells();
             cmd.Type = CellType.Page;
@@ -111,6 +111,16 @@ namespace VisioPowerShell_Tests
             cmd.InvokeVoid();
         }
 
+        public void Set_VisioShapeCells(
+            BaseCells cells,
+            PsArray<IVisio.Shape> shapes)
+        {
+            var cmd = new VisioPowerShell.Commands.SetVisioShapeSheetCells();
+            cmd.Cells = cells;
+            cmd.Shapes = shapes.Array;
+            cmd.InvokeVoid();
+        }
+
         public string[] Get_VisioShapeText()
         {
             var cmd = new VisioPowerShell.Commands.GetVisioShapeText();
@@ -140,6 +150,14 @@ namespace VisioPowerShell_Tests
             cmd.Name = name;
             var page = cmd.InvokeFirst<IVisio.Page>();
             return page;
+        }
+
+        public BaseCells New_VisioShapeSheetCells(CellType celltype)
+        {
+            var cmd = new VisioPowerShell.Commands.NewVisioShapeSheetCells();
+            cmd.Type = celltype;
+            var cells = cmd.InvokeFirst<BaseCells>();
+            return cells;
         }
 
         public void Close_VisioApplication()
