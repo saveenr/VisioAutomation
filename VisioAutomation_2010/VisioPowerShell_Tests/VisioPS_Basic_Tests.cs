@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioPowerShell_Tests.Framework;
 
 namespace VisioPowerShell_Tests
 {

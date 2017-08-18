@@ -1,4 +1,4 @@
-namespace VisioPowerShell_Tests
+namespace VisioPowerShell_Tests.Framework
 {
     public class PsArray
     {
@@ -10,7 +10,7 @@ namespace VisioPowerShell_Tests
 
     public class PsArray<T>
     {
-        private T[] Items;
+        private readonly T[] Items;
 
         public PsArray()
         {

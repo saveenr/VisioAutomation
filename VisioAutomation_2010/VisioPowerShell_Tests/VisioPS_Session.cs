@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioPowerShell.Models;
 using VisioPowerShell_Tests.Framework.Extensions;
+using VisioPowerShell_Tests.Framework;
+
 
 namespace VisioPowerShell_Tests
 {
