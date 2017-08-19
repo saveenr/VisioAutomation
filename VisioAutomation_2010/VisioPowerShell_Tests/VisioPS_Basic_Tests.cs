@@ -45,7 +45,7 @@ namespace VisioPowerShell_Tests
         public void VisioPS_Set_Visio_Page_Cell()
         {
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
-            var page = VisioPS_Basic_Tests.session.Get_VisioPage(active: true, name: null);
+            var page = VisioPS_Basic_Tests.session.Get_VisioPage(activepage: true, name: null);
 
             var cells = VisioPS_Basic_Tests.session.New_VisioShapeSheetCells(CellType.Page);
             var pagecells = (PageCells) cells;
@@ -81,7 +81,7 @@ namespace VisioPowerShell_Tests
         public void VisioPS_Get_Visio_Page_Cell()
         {
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
-            var page = VisioPS_Basic_Tests.session.Get_VisioPage(active:true,name:null);
+            var page = VisioPS_Basic_Tests.session.Get_VisioPage(activepage:true,name:null);
 
             var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeSheetCells( PsArray.From(page.PageSheet));
 
