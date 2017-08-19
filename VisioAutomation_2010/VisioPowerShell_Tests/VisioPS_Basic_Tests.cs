@@ -11,27 +11,26 @@ namespace VisioPowerShell_Tests
         private static readonly VisioPS_Session session = new VisioPS_Session();
 
         [ClassInitialize]
-        public static void PSTestFixtureSetup(TestContext context)
+        public static void ClassInitialize(TestContext context)
         {
             var new_visio_application = new VisioPowerShell.Commands.NewVisioApplication();
         }
 
         [ClassCleanup]
-        public static void CleanUp()
+        public static void ClassCleanup()
         {
             VisioPS_Basic_Tests.session.CleanUp();
         }
-
         
         [TestMethod]
         public void VisioPS_New_Visio_Document()
         {
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             Assert.IsNotNull(doc);
-            VisioPS_Basic_Tests.Close_Visio_Application();
+            VisioPS_Basic_Tests.VisioPS_Close_Visio_Application();
         }
 
-        private static void Close_Visio_Application()
+        private static void VisioPS_Close_Visio_Application()
         {
             VisioPS_Basic_Tests.session.Close_VisioApplication();
         }
@@ -110,7 +109,7 @@ namespace VisioPowerShell_Tests
 
             Assert.IsNotNull(container);
 
-            VisioPS_Basic_Tests.Close_Visio_Application();
+            VisioPS_Basic_Tests.VisioPS_Close_Visio_Application();
         }
     }
 }
