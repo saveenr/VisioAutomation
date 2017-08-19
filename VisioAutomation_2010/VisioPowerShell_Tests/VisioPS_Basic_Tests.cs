@@ -16,18 +16,13 @@ namespace VisioPowerShell_Tests
             var new_visio_application = new VisioPowerShell.Commands.NewVisioApplication();
         }
 
-        [TestCleanup]
-        public void PSTestFixtureTeardown()
-        {
-
-        }
-
         [ClassCleanup]
         public static void CleanUp()
         {
             VisioPS_Basic_Tests.session.CleanUp();
         }
 
+        
         [TestMethod]
         public void VisioPS_New_Visio_Document()
         {
