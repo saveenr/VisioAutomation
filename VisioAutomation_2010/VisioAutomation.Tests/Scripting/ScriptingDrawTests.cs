@@ -4,8 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Models.Layouts.Grid;
-using VisioAutomation.Shapes;
+using GRID = VisioAutomation.Models.Layouts.Grid;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -93,7 +92,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Draw the grid
             var page = client.Page.Get();
-            var grid = new GridLayout(cols, rows, cellsize, master);
+            var grid = new GRID.GridLayout(cols, rows, cellsize, master);
             grid.Origin = origin;
             grid.Render(page);
 
@@ -493,7 +492,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Verify that we did indeed drop a container
             Assert.AreEqual("Container",
-                UserDefinedCellHelper
+                VisioAutomation.Shapes.UserDefinedCellHelper
                     .Get(dropped_container)
                     .First(s => s.Name == "msvStructureType")
                     .Value.Result);
@@ -537,7 +536,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Verify that we did indeed drop a container
             Assert.AreEqual("Container",
-                UserDefinedCellHelper
+                VisioAutomation.Shapes.UserDefinedCellHelper
                     .Get(dropped_container)
                     .First(s => s.Name == "msvStructureType")
                     .Value.Result);
