@@ -14,11 +14,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             {
                 throw new InternalAssertionException("Query must contain at least one cell");
             }
-
-            if (this.query.SubQueries.Count != 0)
-            {
-                throw new InternalAssertionException("Query should not contain contain any subqueries");
-            }
         }
 
         public List<TCellGroup> GetCellGroups(IVisio.Page page, IList<int> shapeids)

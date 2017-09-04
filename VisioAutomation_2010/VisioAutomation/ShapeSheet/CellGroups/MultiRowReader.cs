@@ -5,7 +5,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class MultiRowReader<TCellGroup> : ReaderBase<TCellGroup>
+    public abstract class MultiRowReader<TCellGroup> : ReaderBaseMulti<TCellGroup>
     {
         protected override void validate_query()
         {
