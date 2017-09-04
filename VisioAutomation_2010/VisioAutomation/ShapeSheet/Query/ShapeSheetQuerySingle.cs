@@ -48,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<string>(values);
-            var output_for_shape = this._create_output_for_shape(surface.ID16, null, seg_builder);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
 
             return output_for_shape;
         }
@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<TResult>(values);
-            var output_for_shape = this._create_output_for_shape(surface.ID16, null, seg_builder);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
             return output_for_shape;
         }
 
@@ -110,7 +110,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var combined_data = _combine_formulas_and_results(formulas, results);
 
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<CellData>(combined_data);
-            var output_for_shape = this._create_output_for_shape(surface.ID16, null, seg_builder);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
             return output_for_shape;
         }
 
@@ -180,14 +180,14 @@ namespace VisioAutomation.ShapeSheet.Query
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var output_for_shape = this._create_output_for_shape((short)shapeid, null, segReader);
+                var output_for_shape = this._create_output_for_shape((short)shapeid, segReader);
                 output_for_all_shapes.Add(output_for_shape);
             }
 
             return output_for_all_shapes;
         }
 
-        private QueryOutput<T> _create_output_for_shape<T>(short shapeid, List<SectionInfo> section_infos, VisioAutomation.Utilities.ArraySegmentReader<T> segReader)
+        private QueryOutput<T> _create_output_for_shape<T>(short shapeid, VisioAutomation.Utilities.ArraySegmentReader<T> segReader)
         {
             int original_seg_size = segReader.Count;
 
@@ -195,33 +195,9 @@ namespace VisioAutomation.ShapeSheet.Query
 
             // Figure out the total cell count for this shape
             output.TotalCellCount = this.Cells.Count;
-            if (section_infos != null)
-            {
-                output.TotalCellCount += section_infos.Select(x => x.RowCount * x.SubQuery.Columns.Count).Sum();
-            }
 
             // First Copy the Query Cell Values into the output
             output.Cells = segReader.GetNextSegment(this.Cells.Count); ;
-
-            // Now copy the Section values over
-            if (section_infos != null)
-            {
-                output.Sections = new List<SubQueryOutput<T>>(section_infos.Count);
-                foreach (var section_info in section_infos)
-                {
-                    var subquery_output = new SubQueryOutput<T>(section_info.RowCount, section_info.SubQuery.SectionIndex);
-
-                    int num_cols = section_info.SubQuery.Columns.Count;
-                    foreach (int row_index in section_info.RowIndexes)
-                    {
-                        var segment = segReader.GetNextSegment(num_cols);
-                        var sec_res_row = new SubQueryOutputRow<T>(segment, section_info.SubQuery.SectionIndex, row_index);
-                        subquery_output.Rows.Add(sec_res_row);
-                    }
-
-                    output.Sections.Add(subquery_output);
-                }
-            }
 
             int final_seg_size = segReader.Count;
 
