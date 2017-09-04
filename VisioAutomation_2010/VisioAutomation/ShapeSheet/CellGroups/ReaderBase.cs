@@ -19,11 +19,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
     public abstract class ReaderBaseMulti<TCellGroup>
     {
-        protected ShapeSheetQuery query;
+        protected ShapeSheetQueryMulti2 query;
 
         protected ReaderBaseMulti()
         {
-            this.query = new ShapeSheetQuery();
+            this.query = new ShapeSheetQueryMulti2();
         }
 
         protected abstract void validate_query();
