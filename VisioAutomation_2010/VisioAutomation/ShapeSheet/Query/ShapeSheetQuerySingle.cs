@@ -63,8 +63,6 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var shapes = new List<Microsoft.Office.Interop.Visio.Shape> { surface.Shape };
-
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
