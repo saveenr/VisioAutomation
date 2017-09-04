@@ -33,7 +33,7 @@ namespace VisioPowerShell.Commands
             this.WriteObject(dt);
         }
 
-        private VisioAutomation.ShapeSheet.Query.ShapeSheetQuerySingle _CreateQuery(
+        private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
             VisioPowerShell.Models.NamedCellDictionary celldic, 
             IList<string> cells)
         {
@@ -45,7 +45,7 @@ namespace VisioPowerShell.Commands
                 throw new ArgumentException(msg);
             }
 
-            var query = new VisioAutomation.ShapeSheet.Query.ShapeSheetQuerySingle();
+            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
 
             foreach (string cell in cells)
             {

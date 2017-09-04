@@ -103,8 +103,8 @@
     <Compile Include="Pages\PageRulerAndGridCellsReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\MultiRowReader.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderBase.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeSheetQueryMulti.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeSheetQuerySingle.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
+    <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />

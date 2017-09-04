@@ -54,7 +54,7 @@ namespace VisioAutomation.Pages
             }
 
             // Get the Cells from the Source
-            var query = new ShapeSheetQuerySingle();
+            var query = new CellQuery();
             int i = 0;
             foreach (var src in page_srcs)
             {
@@ -165,7 +165,7 @@ namespace VisioAutomation.Pages
 
         internal static Geometry.Size GetSize(IVisio.Page page)
         {
-            var query = new ShapeSheetQuerySingle();
+            var query = new CellQuery();
             var col_height = query.AddCell(ShapeSheet.SrcConstants.PageHeight,nameof(ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.AddCell(ShapeSheet.SrcConstants.PageWidth,nameof(ShapeSheet.SrcConstants.PageWidth));
 

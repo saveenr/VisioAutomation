@@ -4,11 +4,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class ReaderBase<TCellGroup>
     {
-        protected ShapeSheetQuerySingle query;
+        protected CellQuery query;
 
         protected ReaderBase()
         {
-            this.query = new ShapeSheetQuerySingle();
+            this.query = new CellQuery();
         }
 
         protected abstract void validate_query();
@@ -19,11 +19,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
     public abstract class ReaderBaseMulti<TCellGroup>
     {
-        protected ShapeSheetQueryMulti query;
+        protected SectionQuery query;
 
         protected ReaderBaseMulti()
         {
-            this.query = new ShapeSheetQueryMulti();
+            this.query = new SectionQuery();
         }
 
         protected abstract void validate_query();
