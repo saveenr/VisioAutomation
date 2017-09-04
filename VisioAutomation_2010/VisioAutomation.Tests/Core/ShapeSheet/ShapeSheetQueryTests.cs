@@ -496,7 +496,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         public void ShapeSheet_Query_TestDuplicates()
         {
             // Ensure that duplicate cells are caught
-            var q1 = new ShapeSheetQuery();
+            var q1 = new ShapeSheetQuerySingle();
             q1.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
 
             bool caught_exc1 = false;
@@ -513,7 +513,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that duplicate sections are caught
 
-            var q2 = new ShapeSheetQuery();
+            var q2 = new ShapeSheetQueryMulti2();
             q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
@@ -529,7 +529,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.IsTrue(caught_exc2);
 
             // Ensure that Duplicates in Section Queries Are caught - 
-            var q3 = new ShapeSheetQuery();
+            var q3 = new ShapeSheetQueryMulti2();
             var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             sec.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX,"PinX");
             bool caught_exc3 = false;
