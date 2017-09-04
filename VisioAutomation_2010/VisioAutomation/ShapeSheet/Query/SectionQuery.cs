@@ -208,18 +208,16 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             int original_seg_size = segReader.Count;
 
-            var output = new QueryOutputSections<T>(shapeid);
-
-            output.TotalCellCount = 0;
+            int results_cell_count = 0;
             if (section_infos != null)
             {
-                output.TotalCellCount += section_infos.Select(x => x.RowCount * x.SubQuery.Columns.Count).Sum();
+                results_cell_count += section_infos.Select(x => x.RowCount * x.SubQuery.Columns.Count).Sum();
             }
 
-            // Now copy the Section values over
+            List<SubQueryOutput<T>> sections = null;
             if (section_infos != null)
             {
-                output.Sections = new List<SubQueryOutput<T>>(section_infos.Count);
+               sections = new List<SubQueryOutput<T>>(section_infos.Count);
                 foreach (var section_info in section_infos)
                 {
                     var subquery_output = new SubQueryOutput<T>(section_info.RowCount, section_info.SubQuery.SectionIndex);
@@ -232,13 +230,15 @@ namespace VisioAutomation.ShapeSheet.Query
                         subquery_output.Rows.Add(sec_res_row);
                     }
 
-                    output.Sections.Add(subquery_output);
+                    sections.Add(subquery_output);
                 }
             }
 
+            var output = new QueryOutputSections<T>(shapeid, results_cell_count, sections);
+            
             int final_seg_size = segReader.Count;
 
-            if ((final_seg_size - original_seg_size) != output.TotalCellCount)
+            if ((final_seg_size - original_seg_size) != output.__totalcellcount)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");
             }

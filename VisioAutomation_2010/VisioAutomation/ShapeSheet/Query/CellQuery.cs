@@ -185,17 +185,11 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             int original_seg_size = segReader.Count;
 
-            var output = new QueryOutputCells<T>(shapeid);
-
-            // Figure out the total cell count for this shape
-            output.TotalCellCount = this.Cells.Count;
-
-            // First Copy the Query Cell Values into the output
-            output.Cells = segReader.GetNextSegment(this.Cells.Count);
+            var output = new QueryOutputCells<T>(shapeid, this.Cells.Count, segReader.GetNextSegment(this.Cells.Count));
 
             int final_seg_size = segReader.Count;
 
-            if ((final_seg_size - original_seg_size) != output.TotalCellCount)
+            if ((final_seg_size - original_seg_size) != output.__totalcellcount)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");
             }
