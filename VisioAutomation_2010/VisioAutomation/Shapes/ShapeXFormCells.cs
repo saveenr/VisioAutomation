@@ -18,13 +18,13 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.XFormPinX, this.PinX.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XFormPinY, this.PinY.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XFormLocPinX, this.LocPinX.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XFormLocPinY, this.LocPinY.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XFormWidth, this.Width.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XFormHeight, this.Height.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XFormAngle, this.Angle.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormPinX, this.PinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormPinY, this.PinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormLocPinX, this.LocPinX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormLocPinY, this.LocPinY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormWidth, this.Width.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormHeight, this.Height.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XFormAngle, this.Angle.Formula);
             }
         }
 

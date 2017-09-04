@@ -32,29 +32,29 @@ namespace VisioAutomation.Text
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.CharColor, this.Color.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharFont, this.Font.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharSize, this.Size.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharStyle, this.Style.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharColorTransparency, this.ColorTransparency.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharAsianFont, this.AsianFont.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharCase, this.Case.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharComplexScriptFont, this.ComplexScriptFont.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharComplexScriptSize, this.ComplexScriptSize.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleUnderline, this.DoubleUnderline.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharLangID, this.LangID.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharFontScale, this.FontScale.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharLangID, this.LangID.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharLetterspace, this.Letterspace.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharLocale, this.Locale.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharLocalizeFont, this.LocalizeFont.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharOverline, this.Overline.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharPerpendicular, this.Perpendicular.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharPos, this.Pos.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharRTLText, this.RTLText.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharStrikethru, this.Strikethru.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.CharUseVertical, this.UseVertical.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharColor, this.Color.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharFont, this.Font.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharSize, this.Size.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharStyle, this.Style.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharColorTransparency, this.ColorTransparency.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharAsianFont, this.AsianFont.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharCase, this.Case.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharComplexScriptFont, this.ComplexScriptFont.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharComplexScriptSize, this.ComplexScriptSize.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleUnderline, this.DoubleUnderline.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharLangID, this.LangID.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharFontScale, this.FontScale.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharLangID, this.LangID.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharLetterspace, this.Letterspace.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharLocale, this.Locale.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharLocalizeFont, this.LocalizeFont.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharOverline, this.Overline.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharPerpendicular, this.Perpendicular.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharPos, this.Pos.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharRTLText, this.RTLText.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharStrikethru, this.Strikethru.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CharUseVertical, this.UseVertical.Formula);
             }
         }
 

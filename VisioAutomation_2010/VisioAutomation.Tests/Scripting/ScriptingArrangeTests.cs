@@ -75,7 +75,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID };
             var out_xfrms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.Get(), shapeids);
-            var out_positions = out_xfrms.Select(xfrm => TestExtensions.ToPoint(xfrm.PinX.ValueR, xfrm.PinY.ValueR)).ToArray();
+            var out_positions = out_xfrms.Select(xfrm => TestExtensions.ToPoint(xfrm.PinX.Result, xfrm.PinY.Result)).ToArray();
 
             Assert.AreEqual(1.25, out_positions[0].X);
             Assert.AreEqual(1.25, out_positions[0].Y);

@@ -24,16 +24,16 @@ namespace VisioAutomation.Pages
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XRulerDensity, this.XRulerDensity.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.XRulerOrigin, this.XRulerOrigin.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.YGridDensity, this.YGridDensity.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.YGridOrigin, this.YGridOrigin.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XRulerDensity, this.XRulerDensity.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.XRulerOrigin, this.XRulerOrigin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.YGridDensity, this.YGridDensity.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.YGridOrigin, this.YGridOrigin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin.Formula);
             }
         }
 

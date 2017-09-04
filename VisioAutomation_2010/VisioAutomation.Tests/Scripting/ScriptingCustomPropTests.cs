@@ -72,9 +72,9 @@ namespace VisioAutomation_Tests.Scripting
             var cp1 = prop_dic1[s1]["FOO"];
             var cp2 = prop_dic1[s2]["FOO"];
             var cp3 = prop_dic1[s3]["FOO"];
-            Assert.AreEqual("\"BAR\"", cp1.Value.ValueF);
-            Assert.AreEqual("\"BAR\"", cp2.Value.ValueF);
-            Assert.AreEqual("\"BAR\"", cp3.Value.ValueF);
+            Assert.AreEqual("\"BAR\"", cp1.Value.Formula);
+            Assert.AreEqual("\"BAR\"", cp2.Value.Formula);
+            Assert.AreEqual("\"BAR\"", cp3.Value.Formula);
             
 
             var hasprops0 = client.CustomProperty.Contains(targets,"FOO");

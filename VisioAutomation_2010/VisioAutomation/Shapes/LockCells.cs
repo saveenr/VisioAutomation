@@ -31,26 +31,26 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.LockAspect, this.Aspect.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockBegin, this.Begin.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCalcWH, this.CalcWH.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCrop, this.Crop.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockCustomProp, this.CustProp.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockDelete, this.Delete.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockEnd, this.End.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockFormat, this.Format.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockFromGroupFormat, this.FromGroupFormat.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockGroup, this.Group.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockHeight, this.Height.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockMoveX, this.MoveX.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockMoveY, this.MoveY.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockRotate, this.Rotate.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockSelect, this.Select.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockTextEdit, this.TextEdit.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockThemeColors, this.ThemeColors.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockThemeEffects, this.ThemeEffects.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockVertexEdit, this.VertexEdit.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.LockWidth, this.Width.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockAspect, this.Aspect.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockBegin, this.Begin.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCalcWH, this.CalcWH.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCrop, this.Crop.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockCustomProp, this.CustProp.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockDelete, this.Delete.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockEnd, this.End.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockFormat, this.Format.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockFromGroupFormat, this.FromGroupFormat.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockGroup, this.Group.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockHeight, this.Height.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockMoveX, this.MoveX.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockMoveY, this.MoveY.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockRotate, this.Rotate.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockSelect, this.Select.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockTextEdit, this.TextEdit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockThemeColors, this.ThemeColors.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockThemeEffects, this.ThemeEffects.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockVertexEdit, this.VertexEdit.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.LockWidth, this.Width.Formula);
             }
         }
 

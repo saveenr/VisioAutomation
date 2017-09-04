@@ -4,7 +4,7 @@ namespace VisioAutomation_Tests
     {
         public static VisioAutomation.Geometry.Point GetPinPosResult(this VisioAutomation.Shapes.ShapeXFormCells xform)
         {
-            return  ToPoint(xform.PinX.ValueR, xform.PinY.ValueR);
+            return  ToPoint(xform.PinX.Result, xform.PinY.Result);
         }
 
         public static VisioAutomation.Geometry.Point ToPoint(string x,string y)

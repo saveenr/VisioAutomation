@@ -35,14 +35,14 @@ namespace VisioPowerShell.Commands
 
                     cp.ShapeID = shapeid;
 
-                    cp.CanGlue = point.CanGlue.ValueF;
-                    cp.Tip = point.Tip.ValueF;
-                    cp.X = point.X.ValueF;
-                    cp.Y = point.Y.ValueF;
-                    cp.XBehavior = point.XBehavior.ValueF;
-                    cp.YBehavior = point.YBehavior.ValueF;
-                    cp.XDynamics = point.XDynamics.ValueF;
-                    cp.YDynamics = point.YDynamics.ValueF;
+                    cp.CanGlue = point.CanGlue.Formula;
+                    cp.Tip = point.Tip.Formula;
+                    cp.X = point.X.Formula;
+                    cp.Y = point.Y.Formula;
+                    cp.XBehavior = point.XBehavior.Formula;
+                    cp.YBehavior = point.YBehavior.Formula;
+                    cp.XDynamics = point.XDynamics.Formula;
+                    cp.YDynamics = point.YDynamics.Formula;
 
                     this.WriteObject(cp);
                 }

@@ -19,14 +19,14 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlCanGlue, this.CanGlue.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlTip, this.Tip.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlX, this.X.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlY, this.Y.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlXDynamics, this.XDynamics.ValueF);
-                yield return this.newpair(ShapeSheet.SrcConstants.ControlYDynamics, this.YDynamics.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlCanGlue, this.CanGlue.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlTip, this.Tip.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlX, this.X.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlY, this.Y.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlXDynamics, this.XDynamics.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ControlYDynamics, this.YDynamics.Formula);
             }
         }
 
