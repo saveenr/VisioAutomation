@@ -15,7 +15,7 @@ namespace VisioAutomation.Shapes
 
         public ConnectionPointCellsReader()
         {
-            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionConnectionPts);
+            var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
 
             this.DirX = sec.Columns.Add(SrcConstants.ConnectionPointDirX, nameof(SrcConstants.ConnectionPointDirX));
             this.DirY = sec.Columns.Add(SrcConstants.ConnectionPointDirY, nameof(SrcConstants.ConnectionPointDirY));

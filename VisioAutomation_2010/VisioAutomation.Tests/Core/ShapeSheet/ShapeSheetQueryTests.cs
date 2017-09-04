@@ -22,10 +22,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         {
             var query = new SectionsQuery();
 
-            var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
+            var sec_char = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character", sec_char.Name);
 
-            var sec_obj = query.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+            var sec_obj = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
             Assert.AreEqual("Object", sec_obj.Name);
 
         }
@@ -170,7 +170,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             var query = new SectionsQuery();
 
-            var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
+            var prop_sec = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
             var value_col = prop_sec.Columns.Add(VA.ShapeSheet.SrcConstants.CustomPropValue,"Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
@@ -445,12 +445,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Ensure that duplicate sections are caught
 
             var q2 = new SectionsQuery();
-            q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+            q2.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
             try
             {
-                q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+                q2.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
             }
             catch (System.ArgumentException)
             {
@@ -461,7 +461,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that Duplicates in Section Queries Are caught - 
             var q3 = new SectionsQuery();
-            var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+            var sec = q3.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
             sec.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinX,"PinX");
             bool caught_exc3 = false;
             try

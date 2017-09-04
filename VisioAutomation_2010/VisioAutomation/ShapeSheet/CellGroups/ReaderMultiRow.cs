@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected void validate_query()
         {
-            if (this.query.Queries.Count != 1)
+            if (this.query.SectionQueries.Count != 1)
             {
                 throw new InternalAssertionException("Query should contain contain exactly 1 subquery");
             }

@@ -27,7 +27,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public SectionQuery this[int index] => this._subqueries[index];
 
-        internal SectionQuery Add(IVisio.VisSectionIndices section)
+        public SectionQuery Add(IVisio.VisSectionIndices section)
         {
             if (this._section_set.ContainsKey(section))
             {

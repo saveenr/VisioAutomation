@@ -32,7 +32,7 @@ namespace VisioAutomation.Text
 
         public CharacterFormatCellsReader()
         {
-            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
+            var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
 
             this.Color = sec.Columns.Add(SrcConstants.CharColor, nameof(SrcConstants.CharColor));
             this.Trans = sec.Columns.Add(SrcConstants.CharColorTransparency, nameof(SrcConstants.CharColorTransparency));

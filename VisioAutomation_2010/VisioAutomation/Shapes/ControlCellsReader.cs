@@ -18,7 +18,7 @@ namespace VisioAutomation.Shapes
 
         public ControlCellsReader()
         {
-            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionControls);
+            var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionControls);
 
             this.CanGlue = sec.Columns.Add(SrcConstants.ControlCanGlue, nameof(SrcConstants.ControlCanGlue));
             this.Tip = sec.Columns.Add(SrcConstants.ControlTip, nameof(SrcConstants.ControlTip));

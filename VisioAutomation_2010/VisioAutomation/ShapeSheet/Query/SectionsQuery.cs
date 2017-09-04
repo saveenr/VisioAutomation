@@ -5,19 +5,13 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionsQuery
     {
-        public SectionQueryList Queries { get; }
+        public SectionQueryList SectionQueries { get; }
 
         private SectionInfoCache _cache;
 
         public SectionsQuery()
         {
-            this.Queries = new SectionQueryList(0);
-        }
-
-        public SectionQuery AddSubQuery(Microsoft.Office.Interop.Visio.VisSectionIndices section)
-        {
-            var col = this.Queries.Add(section);
-            return col;
+            this.SectionQueries = new SectionQueryList(0);
         }
 
         private static void RestrictToShapesOnly(SurfaceTarget surface)
@@ -232,7 +226,7 @@ namespace VisioAutomation.ShapeSheet.Query
         private void cache_section_info(IList<Microsoft.Office.Interop.Visio.Shape> shapes)
         {
             // there aren't any subqueries so return an empty cache
-            if (this.Queries.Count < 1)
+            if (this.SectionQueries.Count < 1)
             {
                 this._cache = new SectionInfoCache(0);
             }
@@ -242,8 +236,8 @@ namespace VisioAutomation.ShapeSheet.Query
             // For each shape, for each subquery (section) find the number of rows
             foreach (var shape in shapes)
             {
-                var l_sectioninfo = new List<SectionInfo>(this.Queries.Count);
-                l_sectioninfo.AddRange(this.Queries.Select(subquery => subquery.GetSectionInfoForShape(shape)));
+                var l_sectioninfo = new List<SectionInfo>(this.SectionQueries.Count);
+                l_sectioninfo.AddRange(this.SectionQueries.Select(subquery => subquery.GetSectionInfoForShape(shape)));
                 _cache.AddSectionInfosForShape(l_sectioninfo);
             }
 

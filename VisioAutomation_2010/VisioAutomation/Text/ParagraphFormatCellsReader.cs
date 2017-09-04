@@ -24,7 +24,7 @@ namespace VisioAutomation.Text
 
         public ParagraphFormatCellsReader()
         {
-            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionParagraph);
+            var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionParagraph);
             this.Bullet = sec.Columns.Add(SrcConstants.ParaBullet, nameof(SrcConstants.ParaBullet));
             this.BulletFont = sec.Columns.Add(SrcConstants.ParaBulletFont, nameof(SrcConstants.ParaBulletFont));
             this.BulletFontSize = sec.Columns.Add(SrcConstants.ParaBulletFontSize, nameof(SrcConstants.ParaBulletFontSize));

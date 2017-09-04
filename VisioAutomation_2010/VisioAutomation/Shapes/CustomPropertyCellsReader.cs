@@ -20,7 +20,7 @@ namespace VisioAutomation.Shapes
 
         public CustomPropertyCellsReader()
         {
-            var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
+            var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
 
 
             this.SortKey = sec.Columns.Add(SrcConstants.CustomPropSortKey, nameof(SrcConstants.CustomPropSortKey));
