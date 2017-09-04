@@ -2,14 +2,14 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class CellQueryOutputList<T> : List<QueryOutputCells<T>>
+    public class CellQueryOutputList<T> : List<CellQueryOutput<T>>
     {
         internal CellQueryOutputList() : base()
         {
         }
     }
 
-    public class SectionQueryOutputList<T> : List<QueryOutputSections<T>>
+    public class SectionQueryOutputList<T> : List<SectionsQueryOutput<T>>
     {
         internal SectionQueryOutputList() : base()
         {

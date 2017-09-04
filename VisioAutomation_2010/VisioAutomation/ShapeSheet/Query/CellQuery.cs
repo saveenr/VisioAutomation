@@ -32,13 +32,13 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public QueryOutputCells<string> GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
+        public CellQueryOutput<string> GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetFormulas(surface);
         }
 
-        public QueryOutputCells<string> GetFormulas(SurfaceTarget surface)
+        public CellQueryOutput<string> GetFormulas(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -51,13 +51,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public QueryOutputCells<TResult> GetResults<TResult>(Microsoft.Office.Interop.Visio.Shape shape)
+        public CellQueryOutput<TResult> GetResults<TResult>(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetResults<TResult>(surface);
         }
 
-        public QueryOutputCells<TResult> GetResults<TResult>(SurfaceTarget surface)
+        public CellQueryOutput<TResult> GetResults<TResult>(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -70,13 +70,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public QueryOutputCells<ShapeSheet.CellData> GetFormulasAndResults(Microsoft.Office.Interop.Visio.Shape shape)
+        public CellQueryOutput<ShapeSheet.CellData> GetFormulasAndResults(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return this.GetFormulasAndResults(surface);
         }
 
-        public QueryOutputCells<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface)
+        public CellQueryOutput<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -164,11 +164,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_all_shapes;
         }
 
-        private QueryOutputCells<T> _create_output_for_shape<T>(short shapeid, VisioAutomation.Utilities.ArraySegmentReader<T> segReader)
+        private CellQueryOutput<T> _create_output_for_shape<T>(short shapeid, VisioAutomation.Utilities.ArraySegmentReader<T> segReader)
         {
             int original_seg_size = segReader.Count;
 
-            var output = new QueryOutputCells<T>(shapeid, this.Cells.Count, segReader.GetNextSegment(this.Cells.Count));
+            var output = new CellQueryOutput<T>(shapeid, this.Cells.Count, segReader.GetNextSegment(this.Cells.Count));
 
             int final_seg_size = segReader.Count;
 
