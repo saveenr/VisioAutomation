@@ -56,15 +56,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var src_bg = VA.ShapeSheet.SrcConstants.FillBackground;
             var src_filpat = VA.ShapeSheet.SrcConstants.FillPattern;
 
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_fg = query.AddCell(src_fg, "FillForegnd");
             var col_bg = query.AddCell(src_bg, "FillBkgnd");
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
-            var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
-            Assert.AreEqual("Character",sec_char.Name);
-            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharCase, "CharCase");
-            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharColor, "CharColor");
-            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharColorTransparency, "CharColorTrans");
 
             var shapeids = new[] {s1_id};
 
@@ -173,7 +168,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             CustomPropertyHelper.Set(s4, "S3P2", "5");
             CustomPropertyHelper.Set(s4, "S3P3", "6");
 
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQueryMulti2();
 
             var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
             var value_col = prop_sec.AddCell(VA.ShapeSheet.SrcConstants.CustomPropValue,"Value");
