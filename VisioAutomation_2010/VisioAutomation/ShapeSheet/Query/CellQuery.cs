@@ -44,7 +44,6 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
-            var shape_index = 0;
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<string>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
 
@@ -64,7 +63,6 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var shape_index = 0;
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<TResult>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
             return output_for_shape;
@@ -182,11 +180,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private int _get_total_cell_count(int numshapes)
         {
-            // Count the cells not in sections
-            int count = this.Cells.Count * numshapes;
-
-            // Count the Cells in the Sections
-            return count;
+            return this.Cells.Count * numshapes;
         }
 
         private Streams.StreamArray _build_src_stream()
@@ -229,7 +223,6 @@ namespace VisioAutomation.ShapeSheet.Query
             foreach (var col in this.Cells)
             {
                 var sidsrc = new SidSrc((short)shapeid, col.Src);
-
                 var cellinfo = new Internal.QueryCellInfo(sidsrc, col);
                 yield return cellinfo;
             }
