@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class ReaderSingleRow<TCellGroup>
+    public abstract class ReaderSingleRow<TCellGroup> where TCellGroup : CellGroupSingleRow
     {
         protected Query.CellQuery query;
 

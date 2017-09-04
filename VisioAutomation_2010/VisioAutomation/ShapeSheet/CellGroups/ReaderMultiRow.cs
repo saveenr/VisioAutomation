@@ -5,7 +5,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class ReaderMultiRow<TCellGroup> 
+    public abstract class ReaderMultiRow<TCellGroup> where TCellGroup : CellGroupMultiRow
     {
         protected SectionQuery query;
 
