@@ -76,23 +76,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetFormulasAndResults(surface);
         }
 
-        private static CellData[] _combine_formulas_and_results(string[] formulas, string[] results)
-        {
-            int n = results.Length;
-
-            if (formulas.Length != results.Length)
-            {
-                throw new System.ArgumentException("Array Lengths must match");
-            }
-
-            var combined_data = new ShapeSheet.CellData[n];
-            for (int i = 0; i < n; i++)
-            {
-                combined_data[i] = new ShapeSheet.CellData(formulas[i], results[i]);
-            }
-            return combined_data;
-        }
-
         public QueryOutputCells<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
@@ -101,7 +84,7 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var formulas = surface.GetFormulasU(srcstream);
             var results = surface.GetResults<string>(srcstream, unitcodes);
-            var combined_data = _combine_formulas_and_results(formulas, results);
+            var combined_data = QueryUtil._combine_formulas_and_results(formulas, results);
 
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<CellData>(combined_data);
             var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
@@ -160,7 +143,7 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var results = surface.GetResults<string>(srcstream, unitcodes);
             var formulas = surface.GetFormulasU(srcstream);
-            var combined_data = _combine_formulas_and_results(formulas, results);
+            var combined_data = QueryUtil._combine_formulas_and_results(formulas, results);
 
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<CellData>(combined_data);
             var r = this._create_outputs_for_shapes(shapeids, null, seg_builder);
