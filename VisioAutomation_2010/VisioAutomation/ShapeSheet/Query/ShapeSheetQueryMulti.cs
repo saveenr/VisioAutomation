@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeSheetQueryMulti2
+    public class ShapeSheetQueryMulti
     {
         public SubQueryCollection SubQueries { get; }
 
         private SectionInfoCache _cache;
 
-        public ShapeSheetQueryMulti2()
+        public ShapeSheetQueryMulti()
         {
             this.SubQueries = new SubQueryCollection(0);
         }
