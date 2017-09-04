@@ -6,7 +6,7 @@ namespace VisioPowerShell.Models
 {
     static class DataTableHelpers
     {
-        private static DataTable querytable_to_datatable<T>(ShapeSheetQuery cell_query, QueryOutputCollection<T> query_output)
+        private static DataTable querytable_to_datatable<T>(ShapeSheetQuerySingle cell_query, QueryOutputCollection<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
@@ -38,7 +38,7 @@ namespace VisioPowerShell.Models
             return dt;
         }
 
-        public static DataTable QueryToDataTable(ShapeSheetQuery cell_query, bool getresults, ResultType result_type, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
+        public static DataTable QueryToDataTable(ShapeSheetQuerySingle cell_query, bool getresults, ResultType result_type, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
         {
             if (!getresults)
             {
