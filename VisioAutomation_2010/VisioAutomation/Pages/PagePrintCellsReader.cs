@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
-    class PagePrintCellsReader : SingleRowReader<VisioAutomation.Pages.PagePrintCells>
+    class PagePrintCellsReader : ReaderSingleRow<VisioAutomation.Pages.PagePrintCells>
     {
         public CellColumn LeftMargin { get; set; }
         public CellColumn CenterX { get; set; }

@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    class HyperlinkCellsReader : MultiRowReader<HyperlinkCells>
+    class HyperlinkCellsReader : ReaderMultiRow<HyperlinkCells>
     {
 
         public SubQueryColumn Address { get; set; }

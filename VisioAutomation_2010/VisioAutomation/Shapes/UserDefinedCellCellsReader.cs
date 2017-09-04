@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    class UserDefinedCellCellsReader : MultiRowReader<UserDefinedCellCells>
+    class UserDefinedCellCellsReader : ReaderMultiRow<UserDefinedCellCells>
     {
         public SubQueryColumn Value { get; set; }
         public SubQueryColumn Prompt { get; set; }

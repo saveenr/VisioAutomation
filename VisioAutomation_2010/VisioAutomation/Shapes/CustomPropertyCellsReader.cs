@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCellsReader : MultiRowReader<CustomPropertyCells>
+    public class CustomPropertyCellsReader : ReaderMultiRow<CustomPropertyCells>
     {
         public SubQueryColumn SortKey { get; set; }
         public SubQueryColumn Ask { get; set; }

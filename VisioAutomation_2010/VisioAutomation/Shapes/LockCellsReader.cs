@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    class LockCellsReader : SingleRowReader<LockCells>
+    class LockCellsReader : ReaderSingleRow<LockCells>
     {
         public CellColumn Aspect { get; set; }
         public CellColumn Begin { get; set; }

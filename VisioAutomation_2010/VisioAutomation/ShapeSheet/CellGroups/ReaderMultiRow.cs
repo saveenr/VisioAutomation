@@ -5,11 +5,11 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class MultiRowReader<TCellGroup> 
+    public abstract class ReaderMultiRow<TCellGroup> 
     {
         protected SectionQuery query;
 
-        protected MultiRowReader()
+        protected ReaderMultiRow()
         {
             this.query = new SectionQuery();
         }

@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
-    class TextXFormCellsReader : SingleRowReader<Text.TextXFormCells>
+    class TextXFormCellsReader : ReaderSingleRow<Text.TextXFormCells>
     {
         public CellColumn Width { get; set; }
         public CellColumn Height { get; set; }

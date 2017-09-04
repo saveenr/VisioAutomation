@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    class CharacterFormatCellsReader : MultiRowReader<Text.CharacterFormatCells>
+    class CharacterFormatCellsReader : ReaderMultiRow<Text.CharacterFormatCells>
     {
         public SubQueryColumn Font { get; set; }
         public SubQueryColumn Style { get; set; }

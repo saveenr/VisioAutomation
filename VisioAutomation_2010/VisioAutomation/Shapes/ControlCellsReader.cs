@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    class ControlCellsReader : MultiRowReader<ControlCells>
+    class ControlCellsReader : ReaderMultiRow<ControlCells>
     {
         public SubQueryColumn CanGlue { get; set; }
         public SubQueryColumn Tip { get; set; }

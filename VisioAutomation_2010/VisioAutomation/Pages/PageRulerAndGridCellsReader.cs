@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
-    class PageRulerAndGridCellsReader : SingleRowReader<VisioAutomation.Pages.PageRulerAndGridCells>
+    class PageRulerAndGridCellsReader : ReaderSingleRow<VisioAutomation.Pages.PageRulerAndGridCells>
     {
         public CellColumn XGridDensity { get; set; }
         public CellColumn XGridOrigin { get; set; }

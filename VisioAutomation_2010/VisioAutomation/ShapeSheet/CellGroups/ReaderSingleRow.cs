@@ -5,11 +5,11 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class SingleRowReader<TCellGroup>
+    public abstract class ReaderSingleRow<TCellGroup>
     {
         protected Query.CellQuery query;
 
-        protected SingleRowReader()
+        protected ReaderSingleRow()
         {
             this.query = new Query.CellQuery();
         }

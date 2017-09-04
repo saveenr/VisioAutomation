@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
-    class TextBlockCellsReader : SingleRowReader<Text.TextBlockCells>
+    class TextBlockCellsReader : ReaderSingleRow<Text.TextBlockCells>
     {
         public CellColumn BottomMargin { get; set; }
         public CellColumn LeftMargin { get; set; }

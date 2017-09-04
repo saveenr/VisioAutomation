@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
-    class PageFormatCellsReader : SingleRowReader<VisioAutomation.Pages.PageFormatCells>
+    class PageFormatCellsReader : ReaderSingleRow<VisioAutomation.Pages.PageFormatCells>
     {
         public CellColumn DrawingScale { get; set; }
         public CellColumn DrawingScaleType { get; set; }

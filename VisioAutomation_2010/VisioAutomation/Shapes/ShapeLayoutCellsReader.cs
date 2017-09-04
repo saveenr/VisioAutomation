@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    class ShapeLayoutCellsReader : SingleRowReader<ShapeLayoutCells>
+    class ShapeLayoutCellsReader : ReaderSingleRow<ShapeLayoutCells>
     {
         public CellColumn ConnectorFixedCode { get; set; }
         public CellColumn LineJumpCode { get; set; }

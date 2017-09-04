@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    class ParagraphFormatCellsReader : MultiRowReader<Text.ParagraphFormatCells>
+    class ParagraphFormatCellsReader : ReaderMultiRow<Text.ParagraphFormatCells>
     {
         public SubQueryColumn Bullet { get; set; }
         public SubQueryColumn BulletFont { get; set; }

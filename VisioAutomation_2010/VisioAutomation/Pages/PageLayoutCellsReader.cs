@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
-    class PageLayoutCellsReader : SingleRowReader<VisioAutomation.Pages.PageLayoutCells>
+    class PageLayoutCellsReader : ReaderSingleRow<VisioAutomation.Pages.PageLayoutCells>
     {
         public CellColumn AvenueSizeX { get; set; }
         public CellColumn AvenueSizeY { get; set; }

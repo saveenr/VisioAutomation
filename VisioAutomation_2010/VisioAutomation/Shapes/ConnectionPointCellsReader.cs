@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    class ConnectionPointCellsReader : MultiRowReader<ConnectionPointCells>
+    class ConnectionPointCellsReader : ReaderMultiRow<ConnectionPointCells>
     {
         public SubQueryColumn DirX { get; set; }
         public SubQueryColumn DirY { get; set; }

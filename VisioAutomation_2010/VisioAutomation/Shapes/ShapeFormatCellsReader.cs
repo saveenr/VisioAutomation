@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    class ShapeFormatCellsReader : SingleRowReader<Shapes.ShapeFormatCells>
+    class ShapeFormatCellsReader : ReaderSingleRow<Shapes.ShapeFormatCells>
     {
         public CellColumn FillBackground { get; set; }
         public CellColumn FillBackgroundTransparency { get; set; }
