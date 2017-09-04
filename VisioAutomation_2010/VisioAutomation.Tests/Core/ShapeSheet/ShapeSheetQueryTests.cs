@@ -20,7 +20,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_SectionCells_have_names()
         {
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQueryMulti2();
 
             var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character", sec_char.Name);
@@ -120,7 +120,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // now retrieve the formulas with GetFormulas
 
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_fg = query.AddCell(src_fg, "FillForegnd");
             var col_bg = query.AddCell(src_bg, "FillBkgnd");
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
@@ -221,7 +221,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             Assert.AreEqual(3, page1.Shapes.Count);
 
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
             var col_piny = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinY, "PinY");
 
@@ -273,7 +273,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             Assert.AreEqual(5, page1.Shapes.Count);
 
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
             var col_piny = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinY, "PinY");
 

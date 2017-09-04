@@ -34,7 +34,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(page1);
 
             // Verify that the formulas were set
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_pinx = query.AddCell(ShapeSheetWriterTests.src_pinx, "PinX");
             var col_piny = query.AddCell(ShapeSheetWriterTests.src_piny, "PinY");
 
@@ -66,7 +66,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(shape1);
 
             // Build the query
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat,"LinePattern");
 
             // Retrieve the values
@@ -104,7 +104,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(shape1);
 
             // Build the query
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
 
             // Retrieve the values
@@ -139,7 +139,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(page1);
 
             // Verify that the formulas were set
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_pinx = query.AddCell(ShapeSheetWriterTests.src_pinx,"PinX");
             var col_piny = query.AddCell(ShapeSheetWriterTests.src_piny, "PinY");
 
@@ -178,7 +178,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.Commit(shape1);
 
             // Build the query
-            var query = new ShapeSheetQuery();
+            var query = new ShapeSheetQuerySingle();
             var col_linepat = query.AddCell(ShapeSheetWriterTests.src_linepat, "LinePattern");
             var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
 

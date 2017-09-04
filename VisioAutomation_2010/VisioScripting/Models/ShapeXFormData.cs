@@ -21,13 +21,13 @@ namespace VisioScripting.Models
         private static CellColumn ColLocPinY;
         private static CellColumn ColWidth;
         private static CellColumn ColHeight;
-        private static ShapeSheetQuery query;
+        private static ShapeSheetQuerySingle query;
 
         public static List<ShapeXFormData> Get(Microsoft.Office.Interop.Visio.Page page, TargetShapeIDs target)
         {
             if (query == null)
             {
-                query = new ShapeSheetQuery();
+                query = new ShapeSheetQuerySingle();
                 ColPinX = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX));
                 ColPinY = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY));
                 ColLocPinX = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX));
