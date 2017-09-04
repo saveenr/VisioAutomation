@@ -5,7 +5,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class ReaderMultiRow<TCellGroup> where TCellGroup : CellGroupMultiRow
+    public abstract class ReaderMultiRow<TGroup> where TGroup : CellGroupMultiRow
     {
         protected SectionQuery query;
 
@@ -14,7 +14,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.query = new SectionQuery();
         }
         
-        public abstract TCellGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row);
+        public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row);
 
         protected void validate_query()
         {
@@ -24,17 +24,17 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public List<List<TCellGroup>> GetCellGroups(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public List<List<TGroup>> GetCellGroups(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             this.validate_query();
             var data_for_shapes = query.GetFormulasAndResults(page, shapeids);
-            var list = new List<List<TCellGroup>>(shapeids.Count);
+            var list = new List<List<TGroup>>(shapeids.Count);
             var objects = data_for_shapes.Select(d => this.SubQueryRowsToCellGroups(d.Sections[0]));
             list.AddRange(objects);
             return list;
         }
 
-        public List<TCellGroup> GetCellGroups(Microsoft.Office.Interop.Visio.Shape shape)
+        public List<TGroup> GetCellGroups(Microsoft.Office.Interop.Visio.Shape shape)
         {
             this.validate_query();
             var data_for_shape = query.GetFormulasAndResults(shape);
@@ -43,10 +43,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TCellGroup> SubQueryRowsToCellGroups(SubQueryOutput<ShapeSheet.CellData> subquery_output)
+        private List<TGroup> SubQueryRowsToCellGroups(SubQueryOutput<ShapeSheet.CellData> subquery_output)
         {
             var list_celldata = subquery_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
-            var cellgroups = new List<TCellGroup>(subquery_output.Rows.Count);
+            var cellgroups = new List<TGroup>(subquery_output.Rows.Count);
             cellgroups.AddRange(list_celldata);
             return cellgroups;
         }

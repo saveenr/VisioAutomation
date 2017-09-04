@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class ReaderSingleRow<TCellGroup> where TCellGroup : CellGroupSingleRow
+    public abstract class ReaderSingleRow<TGroup> where TGroup : CellGroupSingleRow
     {
         protected Query.CellQuery query;
 
@@ -14,7 +14,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.query = new Query.CellQuery();
         }
 
-        public abstract TCellGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row);
+        public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row);
 
         protected void validate_query()
         {
@@ -24,18 +24,18 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public List<TCellGroup> GetCellGroups(IVisio.Page page, IList<int> shapeids)
+        public List<TGroup> GetCellGroups(IVisio.Page page, IList<int> shapeids)
         {
             validate_query();
 
             var data_for_shapes = this.query.GetFormulasAndResults(page, shapeids);
-            var list = new List<TCellGroup>(shapeids.Count);
+            var list = new List<TGroup>(shapeids.Count);
             var objects = data_for_shapes.Select(d => this.CellDataToCellGroup(d.Cells));
             list.AddRange(objects);
             return list;
         }
 
-        public TCellGroup GetCellGroup(IVisio.Shape shape)
+        public TGroup GetCellGroup(IVisio.Shape shape)
         {
             validate_query();
             var data_for_shape = this.query.GetFormulasAndResults(shape);
