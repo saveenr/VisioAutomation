@@ -7,28 +7,28 @@ namespace VisioAutomation.Text
 {
     class CharacterFormatCellsReader : ReaderMultiRow<Text.CharacterFormatCells>
     {
-        public SubQueryColumn Font { get; set; }
-        public SubQueryColumn Style { get; set; }
-        public SubQueryColumn Color { get; set; }
-        public SubQueryColumn Size { get; set; }
-        public SubQueryColumn Trans { get; set; }
-        public SubQueryColumn AsianFont { get; set; }
-        public SubQueryColumn Case { get; set; }
-        public SubQueryColumn ComplexScriptFont { get; set; }
-        public SubQueryColumn ComplexScriptSize { get; set; }
-        public SubQueryColumn DoubleStrikethrough { get; set; }
-        public SubQueryColumn DoubleUnderline { get; set; }
-        public SubQueryColumn LangID { get; set; }
-        public SubQueryColumn Locale { get; set; }
-        public SubQueryColumn LocalizeFont { get; set; }
-        public SubQueryColumn Overline { get; set; }
-        public SubQueryColumn Perpendicular { get; set; }
-        public SubQueryColumn Pos { get; set; }
-        public SubQueryColumn RtlText { get; set; }
-        public SubQueryColumn FontScale { get; set; }
-        public SubQueryColumn Letterspace { get; set; }
-        public SubQueryColumn Strikethru { get; set; }
-        public SubQueryColumn UseVertical { get; set; }
+        public SectionSubQueryColumn Font { get; set; }
+        public SectionSubQueryColumn Style { get; set; }
+        public SectionSubQueryColumn Color { get; set; }
+        public SectionSubQueryColumn Size { get; set; }
+        public SectionSubQueryColumn Trans { get; set; }
+        public SectionSubQueryColumn AsianFont { get; set; }
+        public SectionSubQueryColumn Case { get; set; }
+        public SectionSubQueryColumn ComplexScriptFont { get; set; }
+        public SectionSubQueryColumn ComplexScriptSize { get; set; }
+        public SectionSubQueryColumn DoubleStrikethrough { get; set; }
+        public SectionSubQueryColumn DoubleUnderline { get; set; }
+        public SectionSubQueryColumn LangID { get; set; }
+        public SectionSubQueryColumn Locale { get; set; }
+        public SectionSubQueryColumn LocalizeFont { get; set; }
+        public SectionSubQueryColumn Overline { get; set; }
+        public SectionSubQueryColumn Perpendicular { get; set; }
+        public SectionSubQueryColumn Pos { get; set; }
+        public SectionSubQueryColumn RtlText { get; set; }
+        public SectionSubQueryColumn FontScale { get; set; }
+        public SectionSubQueryColumn Letterspace { get; set; }
+        public SectionSubQueryColumn Strikethru { get; set; }
+        public SectionSubQueryColumn UseVertical { get; set; }
 
         public CharacterFormatCellsReader()
         {

@@ -7,8 +7,8 @@ namespace VisioAutomation.Shapes
 {
     class UserDefinedCellCellsReader : ReaderMultiRow<UserDefinedCellCells>
     {
-        public SubQueryColumn Value { get; set; }
-        public SubQueryColumn Prompt { get; set; }
+        public SectionSubQueryColumn Value { get; set; }
+        public SectionSubQueryColumn Prompt { get; set; }
 
         public UserDefinedCellCellsReader()
         {

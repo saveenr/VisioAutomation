@@ -7,20 +7,20 @@ namespace VisioAutomation.Text
 {
     class ParagraphFormatCellsReader : ReaderMultiRow<Text.ParagraphFormatCells>
     {
-        public SubQueryColumn Bullet { get; set; }
-        public SubQueryColumn BulletFont { get; set; }
-        public SubQueryColumn BulletFontSize { get; set; }
-        public SubQueryColumn BulletString { get; set; }
-        public SubQueryColumn Flags { get; set; }
-        public SubQueryColumn HorizontalAlign { get; set; }
-        public SubQueryColumn IndentFirst { get; set; }
-        public SubQueryColumn IndentLeft { get; set; }
-        public SubQueryColumn IndentRight { get; set; }
-        public SubQueryColumn LocalizeBulletFont { get; set; }
-        public SubQueryColumn SpaceAfter { get; set; }
-        public SubQueryColumn SpaceBefore { get; set; }
-        public SubQueryColumn SpaceLine { get; set; }
-        public SubQueryColumn TextPosAfterBullet { get; set; }
+        public SectionSubQueryColumn Bullet { get; set; }
+        public SectionSubQueryColumn BulletFont { get; set; }
+        public SectionSubQueryColumn BulletFontSize { get; set; }
+        public SectionSubQueryColumn BulletString { get; set; }
+        public SectionSubQueryColumn Flags { get; set; }
+        public SectionSubQueryColumn HorizontalAlign { get; set; }
+        public SectionSubQueryColumn IndentFirst { get; set; }
+        public SectionSubQueryColumn IndentLeft { get; set; }
+        public SectionSubQueryColumn IndentRight { get; set; }
+        public SectionSubQueryColumn LocalizeBulletFont { get; set; }
+        public SectionSubQueryColumn SpaceAfter { get; set; }
+        public SectionSubQueryColumn SpaceBefore { get; set; }
+        public SectionSubQueryColumn SpaceLine { get; set; }
+        public SectionSubQueryColumn TextPosAfterBullet { get; set; }
 
         public ParagraphFormatCellsReader()
         {

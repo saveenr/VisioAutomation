@@ -3,19 +3,19 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SubQueryList : IEnumerable<SubQuery>
+    public class SectionSubQueryList : IEnumerable<SectionSubQuery>
     {
-        private IList<SubQuery> _subqueries { get; }
+        private IList<SectionSubQuery> _subqueries { get; }
 
-        private readonly Dictionary<IVisio.VisSectionIndices,SubQuery> _section_set; 
+        private readonly Dictionary<IVisio.VisSectionIndices,SectionSubQuery> _section_set; 
 
-        internal SubQueryList(int capacity)
+        internal SectionSubQueryList(int capacity)
         {
-            this._subqueries = new List<SubQuery>(capacity);
-            this._section_set = new Dictionary<IVisio.VisSectionIndices, SubQuery>(capacity);
+            this._subqueries = new List<SectionSubQuery>(capacity);
+            this._section_set = new Dictionary<IVisio.VisSectionIndices, SectionSubQuery>(capacity);
         }
 
-        public IEnumerator<SubQuery> GetEnumerator()
+        public IEnumerator<SectionSubQuery> GetEnumerator()
         {
             return this._subqueries.GetEnumerator();
         }
@@ -25,9 +25,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public SubQuery this[int index] => this._subqueries[index];
+        public SectionSubQuery this[int index] => this._subqueries[index];
 
-        internal SubQuery Add(IVisio.VisSectionIndices section)
+        internal SectionSubQuery Add(IVisio.VisSectionIndices section)
         {
             if (this._section_set.ContainsKey(section))
             {
@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             int ordinal = this._subqueries.Count;
-            var section_query = new SubQuery(ordinal, section);
+            var section_query = new SectionSubQuery(ordinal, section);
             this._subqueries.Add(section_query);
             this._section_set[section] = section_query;
             return section_query;

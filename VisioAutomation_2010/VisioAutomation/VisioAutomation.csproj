@@ -118,7 +118,7 @@
     <Compile Include="Utilities\ArraySegmentReader.cs" />
     <Compile Include="Utilities\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
-    <Compile Include="ShapeSheet\Query\SubQueryOutputRowList.cs" />
+    <Compile Include="ShapeSheet\Query\SectionSubQueryOutputRowList.cs" />
     <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
@@ -139,9 +139,9 @@
     <Compile Include="Shapes\UserDefinedCellCellsReader.cs" />
     <Compile Include="Shapes\ShapeXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBase.cs" />
-    <Compile Include="ShapeSheet\Query\SubQueryColumn.cs" />
-    <Compile Include="ShapeSheet\Query\SubQueryColumnList.cs" />
-    <Compile Include="ShapeSheet\Query\SubQueryOutputRow.cs" />
+    <Compile Include="ShapeSheet\Query\SectionSubQueryColumn.cs" />
+    <Compile Include="ShapeSheet\Query\SectionSubQueryColumnList.cs" />
+    <Compile Include="ShapeSheet\Query\SectionSubQueryOutputRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\SRCFormulaPair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="SurfaceTarget.cs" />
@@ -180,10 +180,10 @@
     <Compile Include="ShapeSheet\Query\QueryOutputList.cs" />
     <Compile Include="ShapeSheet\Query\QueryOutput.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfo.cs" />
-    <Compile Include="ShapeSheet\Query\SubQuery.cs" />
-    <Compile Include="ShapeSheet\Query\SubQueryOutput.cs" />
+    <Compile Include="ShapeSheet\Query\SectionSubQuery.cs" />
+    <Compile Include="ShapeSheet\Query\SectionSubQueryOutput.cs" />
     <Compile Include="ShapeSheet\Query\CellColumnList.cs" />
-    <Compile Include="ShapeSheet\Query\SubQueryList.cs" />
+    <Compile Include="ShapeSheet\Query\SectionSubQueryList.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />

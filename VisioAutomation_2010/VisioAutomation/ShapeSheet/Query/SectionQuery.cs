@@ -5,16 +5,16 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionQuery
     {
-        public SubQueryList SubQueries { get; }
+        public SectionSubQueryList SubQueries { get; }
 
         private SectionInfoCache _cache;
 
         public SectionQuery()
         {
-            this.SubQueries = new SubQueryList(0);
+            this.SubQueries = new SectionSubQueryList(0);
         }
 
-        public SubQuery AddSubQuery(Microsoft.Office.Interop.Visio.VisSectionIndices section)
+        public SectionSubQuery AddSubQuery(Microsoft.Office.Interop.Visio.VisSectionIndices section)
         {
             var col = this.SubQueries.Add(section);
             return col;
@@ -197,19 +197,19 @@ namespace VisioAutomation.ShapeSheet.Query
                 results_cell_count += section_infos.Select(x => x.RowCount * x.SubQuery.Columns.Count).Sum();
             }
 
-            List<SubQueryOutput<T>> sections = null;
+            List<SectionSubQueryOutput<T>> sections = null;
             if (section_infos != null)
             {
-               sections = new List<SubQueryOutput<T>>(section_infos.Count);
+               sections = new List<SectionSubQueryOutput<T>>(section_infos.Count);
                 foreach (var section_info in section_infos)
                 {
-                    var subquery_output = new SubQueryOutput<T>(section_info.RowCount, section_info.SubQuery.SectionIndex);
+                    var subquery_output = new SectionSubQueryOutput<T>(section_info.RowCount, section_info.SubQuery.SectionIndex);
 
                     int num_cols = section_info.SubQuery.Columns.Count;
                     foreach (int row_index in section_info.RowIndexes)
                     {
                         var segment = segReader.GetNextSegment(num_cols);
-                        var sec_res_row = new SubQueryOutputRow<T>(segment, section_info.SubQuery.SectionIndex, row_index);
+                        var sec_res_row = new SectionSubQueryOutputRow<T>(segment, section_info.SubQuery.SectionIndex, row_index);
                         subquery_output.Rows.Add(sec_res_row);
                     }
 

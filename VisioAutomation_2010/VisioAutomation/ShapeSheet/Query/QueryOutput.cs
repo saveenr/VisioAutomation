@@ -27,9 +27,9 @@ namespace VisioAutomation.ShapeSheet.Query
 
     public class QueryOutputSections<T> : QueryOutputBase<T>
     {
-        public List<SubQueryOutput<T>> Sections { get; internal set; }
+        public List<SectionSubQueryOutput<T>> Sections { get; internal set; }
 
-        internal QueryOutputSections(int shape_id, int count, List<SubQueryOutput<T>> sections) : base(shape_id, count)
+        internal QueryOutputSections(int shape_id, int count, List<SectionSubQueryOutput<T>> sections) : base(shape_id, count)
         {
             this.Sections = sections;
         }

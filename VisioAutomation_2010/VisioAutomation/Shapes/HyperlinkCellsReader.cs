@@ -7,15 +7,15 @@ namespace VisioAutomation.Shapes
     class HyperlinkCellsReader : ReaderMultiRow<HyperlinkCells>
     {
 
-        public SubQueryColumn Address { get; set; }
-        public SubQueryColumn Description { get; set; }
-        public SubQueryColumn ExtraInfo { get; set; }
-        public SubQueryColumn Frame { get; set; }
-        public SubQueryColumn SortKey { get; set; }
-        public SubQueryColumn SubAddress { get; set; }
-        public SubQueryColumn NewWindow { get; set; }
-        public SubQueryColumn Default { get; set; }
-        public SubQueryColumn Invisible { get; set; }
+        public SectionSubQueryColumn Address { get; set; }
+        public SectionSubQueryColumn Description { get; set; }
+        public SectionSubQueryColumn ExtraInfo { get; set; }
+        public SectionSubQueryColumn Frame { get; set; }
+        public SectionSubQueryColumn SortKey { get; set; }
+        public SectionSubQueryColumn SubAddress { get; set; }
+        public SectionSubQueryColumn NewWindow { get; set; }
+        public SectionSubQueryColumn Default { get; set; }
+        public SectionSubQueryColumn Invisible { get; set; }
 
         public HyperlinkCellsReader()
         {
