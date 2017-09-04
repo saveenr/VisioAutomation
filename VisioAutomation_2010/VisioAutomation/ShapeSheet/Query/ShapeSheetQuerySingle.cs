@@ -180,21 +180,11 @@ namespace VisioAutomation.ShapeSheet.Query
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var subqueryinfo = this.GetSectionInfoForShape(shape_index, cache);
-                var output_for_shape = this._create_output_for_shape((short)shapeid, subqueryinfo, segReader);
+                var output_for_shape = this._create_output_for_shape((short)shapeid, null, segReader);
                 output_for_all_shapes.Add(output_for_shape);
             }
 
             return output_for_all_shapes;
-        }
-
-        private List<SectionInfo> GetSectionInfoForShape(int shape_index, SectionInfoCache cache)
-        {
-            if (cache.CountShapes > 0)
-            {
-                return cache.GetSectionInfosForShapeAtIndex(shape_index);
-            }
-            return null;
         }
 
         private QueryOutput<T> _create_output_for_shape<T>(short shapeid, List<SectionInfo> section_infos, VisioAutomation.Utilities.ArraySegmentReader<T> segReader)
