@@ -5,12 +5,12 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     internal class SectionInfo
     {
-        public SectionSubQuery SubQuery { get; private set; }
+        public SectionQuery Query { get; private set; }
         public int RowCount  { get; }
 
-        internal SectionInfo(SectionSubQuery subquery, int numrows)
+        internal SectionInfo(SectionQuery subquery, int numrows)
         {
-            this.SubQuery = subquery;
+            this.Query = subquery;
             this.RowCount = numrows;
         }
 

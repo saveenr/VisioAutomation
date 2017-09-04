@@ -95,7 +95,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             UserDefinedCellHelper.Set(s1, "foo", "bar", null);
 
-            var query = new SectionQuery();
+            var query = new SectionsQuery();
             var sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionUser);
             var Value = sec.AddCell(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
             var Prompt = sec.AddCell(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");

@@ -7,16 +7,16 @@ namespace VisioAutomation.Shapes
 {
     public class CustomPropertyCellsReader : ReaderMultiRow<CustomPropertyCells>
     {
-        public SectionSubQueryColumn SortKey { get; set; }
-        public SectionSubQueryColumn Ask { get; set; }
-        public SectionSubQueryColumn Calendar { get; set; }
-        public SectionSubQueryColumn Format { get; set; }
-        public SectionSubQueryColumn Invis { get; set; }
-        public SectionSubQueryColumn Label { get; set; }
-        public SectionSubQueryColumn LangID { get; set; }
-        public SectionSubQueryColumn Prompt { get; set; }
-        public SectionSubQueryColumn Value { get; set; }
-        public SectionSubQueryColumn Type { get; set; }
+        public SectionQueryColumn SortKey { get; set; }
+        public SectionQueryColumn Ask { get; set; }
+        public SectionQueryColumn Calendar { get; set; }
+        public SectionQueryColumn Format { get; set; }
+        public SectionQueryColumn Invis { get; set; }
+        public SectionQueryColumn Label { get; set; }
+        public SectionQueryColumn LangID { get; set; }
+        public SectionQueryColumn Prompt { get; set; }
+        public SectionQueryColumn Value { get; set; }
+        public SectionQueryColumn Type { get; set; }
 
         public CustomPropertyCellsReader()
         {

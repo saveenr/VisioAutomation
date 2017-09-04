@@ -7,18 +7,18 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class ReaderMultiRow<TGroup> where TGroup : CellGroupMultiRow
     {
-        protected SectionQuery query;
+        protected SectionsQuery query;
 
         protected ReaderMultiRow()
         {
-            this.query = new SectionQuery();
+            this.query = new SectionsQuery();
         }
         
         public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row);
 
         protected void validate_query()
         {
-            if (this.query.SubQueries.Count != 1)
+            if (this.query.Queries.Count != 1)
             {
                 throw new InternalAssertionException("Query should contain contain exactly 1 subquery");
             }
@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> SubQueryRowsToCellGroups(SectionSubQueryOutput<ShapeSheet.CellData> subquery_output)
+        private List<TGroup> SubQueryRowsToCellGroups(SectionQueryOutput<ShapeSheet.CellData> subquery_output)
         {
             var list_celldata = subquery_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
             var cellgroups = new List<TGroup>(subquery_output.Rows.Count);

@@ -3,19 +3,19 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionSubQueryList : IEnumerable<SectionSubQuery>
+    public class SectionQueryList : IEnumerable<SectionQuery>
     {
-        private IList<SectionSubQuery> _subqueries { get; }
+        private IList<SectionQuery> _subqueries { get; }
 
-        private readonly Dictionary<IVisio.VisSectionIndices,SectionSubQuery> _section_set; 
+        private readonly Dictionary<IVisio.VisSectionIndices,SectionQuery> _section_set; 
 
-        internal SectionSubQueryList(int capacity)
+        internal SectionQueryList(int capacity)
         {
-            this._subqueries = new List<SectionSubQuery>(capacity);
-            this._section_set = new Dictionary<IVisio.VisSectionIndices, SectionSubQuery>(capacity);
+            this._subqueries = new List<SectionQuery>(capacity);
+            this._section_set = new Dictionary<IVisio.VisSectionIndices, SectionQuery>(capacity);
         }
 
-        public IEnumerator<SectionSubQuery> GetEnumerator()
+        public IEnumerator<SectionQuery> GetEnumerator()
         {
             return this._subqueries.GetEnumerator();
         }
@@ -25,9 +25,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public SectionSubQuery this[int index] => this._subqueries[index];
+        public SectionQuery this[int index] => this._subqueries[index];
 
-        internal SectionSubQuery Add(IVisio.VisSectionIndices section)
+        internal SectionQuery Add(IVisio.VisSectionIndices section)
         {
             if (this._section_set.ContainsKey(section))
             {
@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             int ordinal = this._subqueries.Count;
-            var section_query = new SectionSubQuery(ordinal, section);
+            var section_query = new SectionQuery(ordinal, section);
             this._subqueries.Add(section_query);
             this._section_set[section] = section_query;
             return section_query;

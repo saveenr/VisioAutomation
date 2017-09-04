@@ -2,27 +2,27 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionSubQueryColumnList : ColumnListBase<SectionSubQueryColumn>
+    public class SectionQueryColumnList : ColumnListBase<SectionQueryColumn>
     {
         private HashSet<short> _cellindex_set;
 
-        internal SectionSubQueryColumnList() :
+        internal SectionQueryColumnList() :
             base(0)
         {
         }
 
-        internal SectionSubQueryColumnList(int capacity) : base(capacity)
+        internal SectionQueryColumnList(int capacity) : base(capacity)
         {
         }
 
-        public SectionSubQueryColumn Add(short cellindex, string sname)
+        public SectionQueryColumn Add(short cellindex, string sname)
         {
             check_duplicate_cellindex(cellindex);
             string norm_name = this.normalize_name(sname);
             check_duplicate_column_name(norm_name);
 
             int ordinal = this._items.Count;
-            var col = new SectionSubQueryColumn(ordinal, cellindex, norm_name);
+            var col = new SectionQueryColumn(ordinal, cellindex, norm_name);
             this._items.Add(col);
             this._cellindex_set.Add(cellindex);
 

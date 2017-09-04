@@ -20,7 +20,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_SectionCells_have_names()
         {
-            var query = new SectionQuery();
+            var query = new SectionsQuery();
 
             var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character", sec_char.Name);
@@ -168,7 +168,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             CustomPropertyHelper.Set(s4, "S3P2", "5");
             CustomPropertyHelper.Set(s4, "S3P3", "6");
 
-            var query = new SectionQuery();
+            var query = new SectionsQuery();
 
             var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
             var value_col = prop_sec.AddCell(VA.ShapeSheet.SrcConstants.CustomPropValue,"Value");
@@ -444,7 +444,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that duplicate sections are caught
 
-            var q2 = new SectionQuery();
+            var q2 = new SectionsQuery();
             q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
@@ -460,7 +460,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.IsTrue(caught_exc2);
 
             // Ensure that Duplicates in Section Queries Are caught - 
-            var q3 = new SectionQuery();
+            var q3 = new SectionsQuery();
             var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
             sec.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX,"PinX");
             bool caught_exc3 = false;

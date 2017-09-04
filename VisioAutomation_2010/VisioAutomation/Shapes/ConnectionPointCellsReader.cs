@@ -7,11 +7,11 @@ namespace VisioAutomation.Shapes
 {
     class ConnectionPointCellsReader : ReaderMultiRow<ConnectionPointCells>
     {
-        public SectionSubQueryColumn DirX { get; set; }
-        public SectionSubQueryColumn DirY { get; set; }
-        public SectionSubQueryColumn Type { get; set; }
-        public SectionSubQueryColumn X { get; set; }
-        public SectionSubQueryColumn Y { get; set; }
+        public SectionQueryColumn DirX { get; set; }
+        public SectionQueryColumn DirY { get; set; }
+        public SectionQueryColumn Type { get; set; }
+        public SectionQueryColumn X { get; set; }
+        public SectionQueryColumn Y { get; set; }
 
         public ConnectionPointCellsReader()
         {
