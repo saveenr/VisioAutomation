@@ -191,7 +191,7 @@ namespace VisioAutomation.ShapeSheet.Query
             output.TotalCellCount = this.Cells.Count;
 
             // First Copy the Query Cell Values into the output
-            output.Cells = segReader.GetNextSegment(this.Cells.Count); ;
+            output.Cells = segReader.GetNextSegment(this.Cells.Count);
 
             int final_seg_size = segReader.Count;
 
