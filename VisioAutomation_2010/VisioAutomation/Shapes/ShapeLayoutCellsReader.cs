@@ -27,24 +27,24 @@ namespace VisioAutomation.Shapes
 
         public ShapeLayoutCellsReader() 
         {
-            this.ConnectorFixedCode = this.query.AddCell(SrcConstants.ShapeLayoutConnectorFixedCode, nameof(SrcConstants.ShapeLayoutConnectorFixedCode));
-            this.LineJumpCode = this.query.AddCell(SrcConstants.ShapeLayoutLineJumpCode, nameof(SrcConstants.ShapeLayoutLineJumpCode));
-            this.LineJumpDirX = this.query.AddCell(SrcConstants.ShapeLayoutLineJumpDirX, nameof(SrcConstants.ShapeLayoutLineJumpDirX));
-            this.LineJumpDirY = this.query.AddCell(SrcConstants.ShapeLayoutLineJumpDirY, nameof(SrcConstants.ShapeLayoutLineJumpDirY));
-            this.LineJumpStyle = this.query.AddCell(SrcConstants.ShapeLayoutLineJumpStyle, nameof(SrcConstants.ShapeLayoutLineJumpStyle));
-            this.LineRouteExt = this.query.AddCell(SrcConstants.ShapeLayoutLineRouteExt, nameof(SrcConstants.ShapeLayoutLineRouteExt));
-            this.ShapeFixedCode = this.query.AddCell(SrcConstants.ShapeLayoutShapeFixedCode, nameof(SrcConstants.ShapeLayoutShapeFixedCode));
-            this.ShapePermeablePlace = this.query.AddCell(SrcConstants.ShapeLayoutShapePermeablePlace, nameof(SrcConstants.ShapeLayoutShapePermeablePlace));
-            this.ShapePermeableX = this.query.AddCell(SrcConstants.ShapeLayoutShapePermeableX, nameof(SrcConstants.ShapeLayoutShapePermeableX));
-            this.ShapePermeableY = this.query.AddCell(SrcConstants.ShapeLayoutShapePermeableY, nameof(SrcConstants.ShapeLayoutShapePermeableY));
-            this.ShapePlaceFlip = this.query.AddCell(SrcConstants.ShapeLayoutShapePlaceFlip, nameof(SrcConstants.ShapeLayoutShapePlaceFlip));
-            this.ShapePlaceStyle = this.query.AddCell(SrcConstants.ShapeLayoutShapePlaceStyle, nameof(SrcConstants.ShapeLayoutShapePlaceStyle));
-            this.ShapePlowCode = this.query.AddCell(SrcConstants.ShapeLayoutShapePlowCode, nameof(SrcConstants.ShapeLayoutShapePlowCode));
-            this.ShapeRouteStyle = this.query.AddCell(SrcConstants.ShapeLayoutShapeRouteStyle, nameof(SrcConstants.ShapeLayoutShapeRouteStyle));
-            this.ShapeSplit = this.query.AddCell(SrcConstants.ShapeLayoutShapeSplit, nameof(SrcConstants.ShapeLayoutShapeSplit));
-            this.ShapeSplittable = this.query.AddCell(SrcConstants.ShapeLayoutShapeSplittable, nameof(SrcConstants.ShapeLayoutShapeSplittable));
-            this.ShapeDisplayLevel = this.query.AddCell(SrcConstants.ShapeLayoutShapeDisplayLevel, nameof(SrcConstants.ShapeLayoutShapeDisplayLevel));
-            this.Relationships = this.query.AddCell(SrcConstants.ShapeLayoutRelationships, nameof(SrcConstants.ShapeLayoutRelationships));
+            this.ConnectorFixedCode = this.query.AddColumn(SrcConstants.ShapeLayoutConnectorFixedCode, nameof(SrcConstants.ShapeLayoutConnectorFixedCode));
+            this.LineJumpCode = this.query.AddColumn(SrcConstants.ShapeLayoutLineJumpCode, nameof(SrcConstants.ShapeLayoutLineJumpCode));
+            this.LineJumpDirX = this.query.AddColumn(SrcConstants.ShapeLayoutLineJumpDirX, nameof(SrcConstants.ShapeLayoutLineJumpDirX));
+            this.LineJumpDirY = this.query.AddColumn(SrcConstants.ShapeLayoutLineJumpDirY, nameof(SrcConstants.ShapeLayoutLineJumpDirY));
+            this.LineJumpStyle = this.query.AddColumn(SrcConstants.ShapeLayoutLineJumpStyle, nameof(SrcConstants.ShapeLayoutLineJumpStyle));
+            this.LineRouteExt = this.query.AddColumn(SrcConstants.ShapeLayoutLineRouteExt, nameof(SrcConstants.ShapeLayoutLineRouteExt));
+            this.ShapeFixedCode = this.query.AddColumn(SrcConstants.ShapeLayoutShapeFixedCode, nameof(SrcConstants.ShapeLayoutShapeFixedCode));
+            this.ShapePermeablePlace = this.query.AddColumn(SrcConstants.ShapeLayoutShapePermeablePlace, nameof(SrcConstants.ShapeLayoutShapePermeablePlace));
+            this.ShapePermeableX = this.query.AddColumn(SrcConstants.ShapeLayoutShapePermeableX, nameof(SrcConstants.ShapeLayoutShapePermeableX));
+            this.ShapePermeableY = this.query.AddColumn(SrcConstants.ShapeLayoutShapePermeableY, nameof(SrcConstants.ShapeLayoutShapePermeableY));
+            this.ShapePlaceFlip = this.query.AddColumn(SrcConstants.ShapeLayoutShapePlaceFlip, nameof(SrcConstants.ShapeLayoutShapePlaceFlip));
+            this.ShapePlaceStyle = this.query.AddColumn(SrcConstants.ShapeLayoutShapePlaceStyle, nameof(SrcConstants.ShapeLayoutShapePlaceStyle));
+            this.ShapePlowCode = this.query.AddColumn(SrcConstants.ShapeLayoutShapePlowCode, nameof(SrcConstants.ShapeLayoutShapePlowCode));
+            this.ShapeRouteStyle = this.query.AddColumn(SrcConstants.ShapeLayoutShapeRouteStyle, nameof(SrcConstants.ShapeLayoutShapeRouteStyle));
+            this.ShapeSplit = this.query.AddColumn(SrcConstants.ShapeLayoutShapeSplit, nameof(SrcConstants.ShapeLayoutShapeSplit));
+            this.ShapeSplittable = this.query.AddColumn(SrcConstants.ShapeLayoutShapeSplittable, nameof(SrcConstants.ShapeLayoutShapeSplittable));
+            this.ShapeDisplayLevel = this.query.AddColumn(SrcConstants.ShapeLayoutShapeDisplayLevel, nameof(SrcConstants.ShapeLayoutShapeDisplayLevel));
+            this.Relationships = this.query.AddColumn(SrcConstants.ShapeLayoutRelationships, nameof(SrcConstants.ShapeLayoutRelationships));
         }
 
         public override ShapeLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)

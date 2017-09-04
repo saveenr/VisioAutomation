@@ -18,15 +18,15 @@ namespace VisioAutomation.Text
 
         public TextBlockCellsReader()
         {
-            this.BottomMargin = this.query.AddCell(SrcConstants.TextBlockBottomMargin, nameof(SrcConstants.TextBlockBottomMargin));
-            this.LeftMargin = this.query.AddCell(SrcConstants.TextBlockLeftMargin, nameof(SrcConstants.TextBlockLeftMargin));
-            this.RightMargin = this.query.AddCell(SrcConstants.TextBlockRightMargin, nameof(SrcConstants.TextBlockRightMargin));
-            this.TopMargin = this.query.AddCell(SrcConstants.TextBlockTopMargin, nameof(SrcConstants.TextBlockTopMargin));
-            this.DefaultTabStop = this.query.AddCell(SrcConstants.TextBlockDefaultTabStop, nameof(SrcConstants.TextBlockDefaultTabStop));
-            this.Background = this.query.AddCell(SrcConstants.TextBlockBackground, nameof(SrcConstants.TextBlockBackground));
-            this.BackgroundTransparency = this.query.AddCell(SrcConstants.TextBlockBackgroundTransparency, nameof(SrcConstants.TextBlockBackgroundTransparency));
-            this.Direction = this.query.AddCell(SrcConstants.TextBlockDirection, nameof(SrcConstants.TextBlockDirection));
-            this.VerticalAlign = this.query.AddCell(SrcConstants.TextBlockVerticalAlign, nameof(SrcConstants.TextBlockVerticalAlign));
+            this.BottomMargin = this.query.AddColumn(SrcConstants.TextBlockBottomMargin, nameof(SrcConstants.TextBlockBottomMargin));
+            this.LeftMargin = this.query.AddColumn(SrcConstants.TextBlockLeftMargin, nameof(SrcConstants.TextBlockLeftMargin));
+            this.RightMargin = this.query.AddColumn(SrcConstants.TextBlockRightMargin, nameof(SrcConstants.TextBlockRightMargin));
+            this.TopMargin = this.query.AddColumn(SrcConstants.TextBlockTopMargin, nameof(SrcConstants.TextBlockTopMargin));
+            this.DefaultTabStop = this.query.AddColumn(SrcConstants.TextBlockDefaultTabStop, nameof(SrcConstants.TextBlockDefaultTabStop));
+            this.Background = this.query.AddColumn(SrcConstants.TextBlockBackground, nameof(SrcConstants.TextBlockBackground));
+            this.BackgroundTransparency = this.query.AddColumn(SrcConstants.TextBlockBackgroundTransparency, nameof(SrcConstants.TextBlockBackgroundTransparency));
+            this.Direction = this.query.AddColumn(SrcConstants.TextBlockDirection, nameof(SrcConstants.TextBlockDirection));
+            this.VerticalAlign = this.query.AddColumn(SrcConstants.TextBlockVerticalAlign, nameof(SrcConstants.TextBlockVerticalAlign));
 
         }
 

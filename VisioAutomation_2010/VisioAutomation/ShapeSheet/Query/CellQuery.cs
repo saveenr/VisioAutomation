@@ -5,21 +5,21 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellQuery
     {
-        public CellColumnList Cells { get; }
+        public CellColumnList Columns { get; }
 
         public CellQuery()
         {
-            this.Cells = new CellColumnList(0);
+            this.Columns = new CellColumnList(0);
         }
 
-        public CellColumn AddCell(ShapeSheet.Src src, string name)
+        public CellColumn AddColumn(ShapeSheet.Src src, string name)
         {
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            var col = this.Cells.Add(src, name);
+            var col = this.Columns.Add(src, name);
             return col;
         }
 
@@ -166,7 +166,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             int original_seg_size = segReader.Count;
 
-            var output = new CellQueryOutput<T>(shapeid, this.Cells.Count, segReader.GetNextSegment(this.Cells.Count));
+            var output = new CellQueryOutput<T>(shapeid, this.Columns.Count, segReader.GetNextSegment(this.Columns.Count));
 
             int final_seg_size = segReader.Count;
 
@@ -180,7 +180,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private int _get_total_cell_count(int numshapes)
         {
-            return this.Cells.Count * numshapes;
+            return this.Columns.Count * numshapes;
         }
 
         private Streams.StreamArray _build_src_stream()
@@ -220,7 +220,7 @@ namespace VisioAutomation.ShapeSheet.Query
         private IEnumerable<Internal.QueryCellInfo> _enum_total_cellinfo(int shapeid, int shapeindex)
         {
             // enum Cells
-            foreach (var col in this.Cells)
+            foreach (var col in this.Columns)
             {
                 var sidsrc = new SidSrc((short)shapeid, col.Src);
                 var cellinfo = new Internal.QueryCellInfo(sidsrc, col);

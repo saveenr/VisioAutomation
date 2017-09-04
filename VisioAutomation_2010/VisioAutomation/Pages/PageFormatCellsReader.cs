@@ -23,20 +23,20 @@ namespace VisioAutomation.Pages
 
         public PageFormatCellsReader()
         {
-            this.DrawingScale = this.query.AddCell(SrcConstants.PageDrawingScale, nameof(SrcConstants.PageDrawingScale));
-            this.DrawingScaleType = this.query.AddCell(SrcConstants.PageDrawingScaleType, nameof(SrcConstants.PageDrawingScaleType));
-            this.DrawingSizeType = this.query.AddCell(SrcConstants.PageDrawingSizeType, nameof(SrcConstants.PageDrawingSizeType));
-            this.InhibitSnap = this.query.AddCell(SrcConstants.PageInhibitSnap, nameof(SrcConstants.PageInhibitSnap));
-            this.Height = this.query.AddCell(SrcConstants.PageHeight, nameof(SrcConstants.PageHeight));
-            this.Scale = this.query.AddCell(SrcConstants.PageScale, nameof(SrcConstants.PageScale));
-            this.Width = this.query.AddCell(SrcConstants.PageWidth, nameof(SrcConstants.PageWidth));
-            this.ShadowObliqueAngle = this.query.AddCell(SrcConstants.PageShadowObliqueAngle, nameof(SrcConstants.PageShadowObliqueAngle));
-            this.ShadowOffsetX = this.query.AddCell(SrcConstants.PageShadowOffsetX, nameof(SrcConstants.PageShadowOffsetX));
-            this.ShadowOffsetY = this.query.AddCell(SrcConstants.PageShadowOffsetY, nameof(SrcConstants.PageShadowOffsetY));
-            this.ShadowScaleFactor = this.query.AddCell(SrcConstants.PageShadowScaleFactor, nameof(SrcConstants.PageShadowScaleFactor));
-            this.ShadowType = this.query.AddCell(SrcConstants.PageShadowType, nameof(SrcConstants.PageShadowType));
-            this.UIVisibility = this.query.AddCell(SrcConstants.PageUIVisibility, nameof(SrcConstants.PageUIVisibility));
-            this.DrawingResizeType = this.query.AddCell(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
+            this.DrawingScale = this.query.AddColumn(SrcConstants.PageDrawingScale, nameof(SrcConstants.PageDrawingScale));
+            this.DrawingScaleType = this.query.AddColumn(SrcConstants.PageDrawingScaleType, nameof(SrcConstants.PageDrawingScaleType));
+            this.DrawingSizeType = this.query.AddColumn(SrcConstants.PageDrawingSizeType, nameof(SrcConstants.PageDrawingSizeType));
+            this.InhibitSnap = this.query.AddColumn(SrcConstants.PageInhibitSnap, nameof(SrcConstants.PageInhibitSnap));
+            this.Height = this.query.AddColumn(SrcConstants.PageHeight, nameof(SrcConstants.PageHeight));
+            this.Scale = this.query.AddColumn(SrcConstants.PageScale, nameof(SrcConstants.PageScale));
+            this.Width = this.query.AddColumn(SrcConstants.PageWidth, nameof(SrcConstants.PageWidth));
+            this.ShadowObliqueAngle = this.query.AddColumn(SrcConstants.PageShadowObliqueAngle, nameof(SrcConstants.PageShadowObliqueAngle));
+            this.ShadowOffsetX = this.query.AddColumn(SrcConstants.PageShadowOffsetX, nameof(SrcConstants.PageShadowOffsetX));
+            this.ShadowOffsetY = this.query.AddColumn(SrcConstants.PageShadowOffsetY, nameof(SrcConstants.PageShadowOffsetY));
+            this.ShadowScaleFactor = this.query.AddColumn(SrcConstants.PageShadowScaleFactor, nameof(SrcConstants.PageShadowScaleFactor));
+            this.ShadowType = this.query.AddColumn(SrcConstants.PageShadowType, nameof(SrcConstants.PageShadowType));
+            this.UIVisibility = this.query.AddColumn(SrcConstants.PageUIVisibility, nameof(SrcConstants.PageUIVisibility));
+            this.DrawingResizeType = this.query.AddColumn(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
         }
 
         public override Pages.PageFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)

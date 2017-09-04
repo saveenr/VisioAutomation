@@ -19,16 +19,16 @@ namespace VisioAutomation.Pages
 
         public PageRulerAndGridCellsReader()
         {
-            this.XGridDensity = this.query.AddCell(SrcConstants.XGridDensity, nameof(SrcConstants.XGridDensity));
-            this.XGridOrigin = this.query.AddCell(SrcConstants.XGridOrigin, nameof(SrcConstants.XGridOrigin));
-            this.XGridSpacing = this.query.AddCell(SrcConstants.XGridSpacing, nameof(SrcConstants.XGridSpacing));
-            this.XRulerDensity = this.query.AddCell(SrcConstants.XRulerDensity, nameof(SrcConstants.XRulerDensity));
-            this.XRulerOrigin = this.query.AddCell(SrcConstants.XRulerOrigin, nameof(SrcConstants.XRulerOrigin));
-            this.YGridDensity = this.query.AddCell(SrcConstants.YGridDensity, nameof(SrcConstants.YGridDensity));
-            this.YGridOrigin = this.query.AddCell(SrcConstants.YGridOrigin, nameof(SrcConstants.YGridOrigin));
-            this.YGridSpacing = this.query.AddCell(SrcConstants.YGridSpacing, nameof(SrcConstants.YGridSpacing));
-            this.YRulerDensity = this.query.AddCell(SrcConstants.YRulerDensity, nameof(SrcConstants.YRulerDensity));
-            this.YRulerOrigin = this.query.AddCell(SrcConstants.YRulerOrigin, nameof(SrcConstants.YRulerOrigin));
+            this.XGridDensity = this.query.AddColumn(SrcConstants.XGridDensity, nameof(SrcConstants.XGridDensity));
+            this.XGridOrigin = this.query.AddColumn(SrcConstants.XGridOrigin, nameof(SrcConstants.XGridOrigin));
+            this.XGridSpacing = this.query.AddColumn(SrcConstants.XGridSpacing, nameof(SrcConstants.XGridSpacing));
+            this.XRulerDensity = this.query.AddColumn(SrcConstants.XRulerDensity, nameof(SrcConstants.XRulerDensity));
+            this.XRulerOrigin = this.query.AddColumn(SrcConstants.XRulerOrigin, nameof(SrcConstants.XRulerOrigin));
+            this.YGridDensity = this.query.AddColumn(SrcConstants.YGridDensity, nameof(SrcConstants.YGridDensity));
+            this.YGridOrigin = this.query.AddColumn(SrcConstants.YGridOrigin, nameof(SrcConstants.YGridOrigin));
+            this.YGridSpacing = this.query.AddColumn(SrcConstants.YGridSpacing, nameof(SrcConstants.YGridSpacing));
+            this.YRulerDensity = this.query.AddColumn(SrcConstants.YRulerDensity, nameof(SrcConstants.YRulerDensity));
+            this.YRulerOrigin = this.query.AddColumn(SrcConstants.YRulerOrigin, nameof(SrcConstants.YRulerOrigin));
         }
 
         public override PageRulerAndGridCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)

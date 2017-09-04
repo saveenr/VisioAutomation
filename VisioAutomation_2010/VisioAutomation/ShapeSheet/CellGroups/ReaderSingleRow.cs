@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected void validate_query()
         {
-            if (this.query.Cells.Count < 1)
+            if (this.query.Columns.Count < 1)
             {
                 throw new InternalAssertionException("Query must contain at least one cell");
             }

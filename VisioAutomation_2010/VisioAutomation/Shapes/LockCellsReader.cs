@@ -29,26 +29,26 @@ namespace VisioAutomation.Shapes
 
         public LockCellsReader()
         {
-            this.Aspect = this.query.AddCell(SrcConstants.LockAspect, nameof(SrcConstants.LockAspect));
-            this.Begin = this.query.AddCell(SrcConstants.LockBegin, nameof(SrcConstants.LockBegin));
-            this.CalcWH = this.query.AddCell(SrcConstants.LockCalcWH, nameof(SrcConstants.LockCalcWH));
-            this.Crop = this.query.AddCell(SrcConstants.LockCrop, nameof(SrcConstants.LockCrop));
-            this.CustomProp = this.query.AddCell(SrcConstants.LockCustomProp, nameof(SrcConstants.LockCustomProp));
-            this.Delete = this.query.AddCell(SrcConstants.LockDelete, nameof(SrcConstants.LockDelete));
-            this.End = this.query.AddCell(SrcConstants.LockEnd, nameof(SrcConstants.LockEnd));
-            this.Format = this.query.AddCell(SrcConstants.LockFormat, nameof(SrcConstants.LockFormat));
-            this.FromGroupFormat = this.query.AddCell(SrcConstants.LockFromGroupFormat, nameof(SrcConstants.LockFromGroupFormat));
-            this.Group = this.query.AddCell(SrcConstants.LockGroup, nameof(SrcConstants.LockGroup));
-            this.Height = this.query.AddCell(SrcConstants.LockHeight, nameof(SrcConstants.LockHeight));
-            this.MoveX = this.query.AddCell(SrcConstants.LockMoveX, nameof(SrcConstants.LockMoveX));
-            this.MoveY = this.query.AddCell(SrcConstants.LockMoveY, nameof(SrcConstants.LockMoveY));
-            this.Rotate = this.query.AddCell(SrcConstants.LockRotate, nameof(SrcConstants.LockRotate));
-            this.Select = this.query.AddCell(SrcConstants.LockSelect, nameof(SrcConstants.LockSelect));
-            this.TextEdit = this.query.AddCell(SrcConstants.LockTextEdit, nameof(SrcConstants.LockTextEdit));
-            this.ThemeColors = this.query.AddCell(SrcConstants.LockThemeColors, nameof(SrcConstants.LockThemeColors));
-            this.ThemeEffects = this.query.AddCell(SrcConstants.LockThemeEffects, nameof(SrcConstants.LockThemeEffects));
-            this.VertexEdit = this.query.AddCell(SrcConstants.LockVertexEdit, nameof(SrcConstants.LockVertexEdit));
-            this.Width = this.query.AddCell(SrcConstants.LockWidth, nameof(SrcConstants.LockWidth));
+            this.Aspect = this.query.AddColumn(SrcConstants.LockAspect, nameof(SrcConstants.LockAspect));
+            this.Begin = this.query.AddColumn(SrcConstants.LockBegin, nameof(SrcConstants.LockBegin));
+            this.CalcWH = this.query.AddColumn(SrcConstants.LockCalcWH, nameof(SrcConstants.LockCalcWH));
+            this.Crop = this.query.AddColumn(SrcConstants.LockCrop, nameof(SrcConstants.LockCrop));
+            this.CustomProp = this.query.AddColumn(SrcConstants.LockCustomProp, nameof(SrcConstants.LockCustomProp));
+            this.Delete = this.query.AddColumn(SrcConstants.LockDelete, nameof(SrcConstants.LockDelete));
+            this.End = this.query.AddColumn(SrcConstants.LockEnd, nameof(SrcConstants.LockEnd));
+            this.Format = this.query.AddColumn(SrcConstants.LockFormat, nameof(SrcConstants.LockFormat));
+            this.FromGroupFormat = this.query.AddColumn(SrcConstants.LockFromGroupFormat, nameof(SrcConstants.LockFromGroupFormat));
+            this.Group = this.query.AddColumn(SrcConstants.LockGroup, nameof(SrcConstants.LockGroup));
+            this.Height = this.query.AddColumn(SrcConstants.LockHeight, nameof(SrcConstants.LockHeight));
+            this.MoveX = this.query.AddColumn(SrcConstants.LockMoveX, nameof(SrcConstants.LockMoveX));
+            this.MoveY = this.query.AddColumn(SrcConstants.LockMoveY, nameof(SrcConstants.LockMoveY));
+            this.Rotate = this.query.AddColumn(SrcConstants.LockRotate, nameof(SrcConstants.LockRotate));
+            this.Select = this.query.AddColumn(SrcConstants.LockSelect, nameof(SrcConstants.LockSelect));
+            this.TextEdit = this.query.AddColumn(SrcConstants.LockTextEdit, nameof(SrcConstants.LockTextEdit));
+            this.ThemeColors = this.query.AddColumn(SrcConstants.LockThemeColors, nameof(SrcConstants.LockThemeColors));
+            this.ThemeEffects = this.query.AddColumn(SrcConstants.LockThemeEffects, nameof(SrcConstants.LockThemeEffects));
+            this.VertexEdit = this.query.AddColumn(SrcConstants.LockVertexEdit, nameof(SrcConstants.LockVertexEdit));
+            this.Width = this.query.AddColumn(SrcConstants.LockWidth, nameof(SrcConstants.LockWidth));
         }
 
         public override LockCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)

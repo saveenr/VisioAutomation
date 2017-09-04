@@ -51,10 +51,10 @@ namespace VisioPowerShell.Commands
             {
                 foreach (var resolved_cellname in celldic.ExpandKeyWildcard(cell))
                 {
-                    if (!query.Cells.Contains(resolved_cellname))
+                    if (!query.Columns.Contains(resolved_cellname))
                     {
                         var resolved_src = celldic[resolved_cellname];
-                        query.AddCell(resolved_src, resolved_cellname);
+                        query.AddColumn(resolved_src, resolved_cellname);
                     }
                 }
             }

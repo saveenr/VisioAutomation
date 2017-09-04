@@ -17,11 +17,11 @@ namespace VisioAutomation.Shapes
         {
             var sec = this.query.AddSubQuery(IVisio.VisSectionIndices.visSectionConnectionPts);
 
-            this.DirX = sec.AddCell(SrcConstants.ConnectionPointDirX, nameof(SrcConstants.ConnectionPointDirX));
-            this.DirY = sec.AddCell(SrcConstants.ConnectionPointDirY, nameof(SrcConstants.ConnectionPointDirY));
-            this.Type = sec.AddCell(SrcConstants.ConnectionPointType, nameof(SrcConstants.ConnectionPointType));
-            this.X = sec.AddCell(SrcConstants.ConnectionPointX, nameof(SrcConstants.ConnectionPointX));
-            this.Y = sec.AddCell(SrcConstants.ConnectionPointY, nameof(SrcConstants.ConnectionPointY));
+            this.DirX = sec.AddColumn(SrcConstants.ConnectionPointDirX, nameof(SrcConstants.ConnectionPointDirX));
+            this.DirY = sec.AddColumn(SrcConstants.ConnectionPointDirY, nameof(SrcConstants.ConnectionPointDirY));
+            this.Type = sec.AddColumn(SrcConstants.ConnectionPointType, nameof(SrcConstants.ConnectionPointType));
+            this.X = sec.AddColumn(SrcConstants.ConnectionPointX, nameof(SrcConstants.ConnectionPointX));
+            this.Y = sec.AddColumn(SrcConstants.ConnectionPointY, nameof(SrcConstants.ConnectionPointY));
 
         }
 
