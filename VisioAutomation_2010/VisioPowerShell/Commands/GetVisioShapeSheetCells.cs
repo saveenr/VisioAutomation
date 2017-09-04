@@ -54,7 +54,7 @@ namespace VisioPowerShell.Commands
                     if (!query.Columns.Contains(resolved_cellname))
                     {
                         var resolved_src = celldic[resolved_cellname];
-                        query.AddColumn(resolved_src, resolved_cellname);
+                        query.Columns.Add(resolved_src, resolved_cellname);
                     }
                 }
             }

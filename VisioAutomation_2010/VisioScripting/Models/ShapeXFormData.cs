@@ -28,12 +28,12 @@ namespace VisioScripting.Models
             if (query == null)
             {
                 query = new CellQuery();
-                ColPinX = query.AddColumn(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX));
-                ColPinY = query.AddColumn(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY));
-                ColLocPinX = query.AddColumn(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX));
-                ColLocPinY = query.AddColumn(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY));
-                ColWidth = query.AddColumn(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth));
-                ColHeight = query.AddColumn(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight));
+                ColPinX = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX));
+                ColPinY = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY));
+                ColLocPinX = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX));
+                ColLocPinY = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY));
+                ColWidth = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth));
+                ColHeight = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight));
             }
 
             var results = query.GetResults<double>(page, target.ShapeIDs);

@@ -57,9 +57,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var src_filpat = VA.ShapeSheet.SrcConstants.FillPattern;
 
             var query = new CellQuery();
-            var col_fg = query.AddColumn(src_fg, "FillForegnd");
-            var col_bg = query.AddColumn(src_bg, "FillBkgnd");
-            var col_filpat = query.AddColumn(src_filpat, "FillPattern");
+            var col_fg = query.Columns.Add(src_fg, "FillForegnd");
+            var col_bg = query.Columns.Add(src_bg, "FillBkgnd");
+            var col_filpat = query.Columns.Add(src_filpat, "FillPattern");
 
             var shapeids = new[] {s1_id};
 
@@ -116,9 +116,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // now retrieve the formulas with GetFormulas
 
             var query = new CellQuery();
-            var col_fg = query.AddColumn(src_fg, "FillForegnd");
-            var col_bg = query.AddColumn(src_bg, "FillBkgnd");
-            var col_filpat = query.AddColumn(src_filpat, "FillPattern");
+            var col_fg = query.Columns.Add(src_fg, "FillForegnd");
+            var col_bg = query.Columns.Add(src_bg, "FillBkgnd");
+            var col_filpat = query.Columns.Add(src_filpat, "FillPattern");
 
             var shapeids = new[] {s1_id};
 
@@ -171,7 +171,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var query = new SectionsQuery();
 
             var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.AddColumn(VA.ShapeSheet.SrcConstants.CustomPropValue,"Value");
+            var value_col = prop_sec.Columns.Add(VA.ShapeSheet.SrcConstants.CustomPropValue,"Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
@@ -217,8 +217,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual(3, page1.Shapes.Count);
 
             var query = new CellQuery();
-            var col_pinx = query.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
-            var col_piny = query.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinY, "PinY");
+            var col_pinx = query.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+            var col_piny = query.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinY, "PinY");
 
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
@@ -269,8 +269,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual(5, page1.Shapes.Count);
 
             var query = new CellQuery();
-            var col_pinx = query.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
-            var col_piny = query.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinY, "PinY");
+            var col_pinx = query.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+            var col_piny = query.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinY, "PinY");
 
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
@@ -428,12 +428,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         {
             // Ensure that duplicate cells are caught
             var q1 = new CellQuery();
-            q1.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+            q1.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
 
             bool caught_exc1 = false;
             try
             {
-                q1.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+                q1.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
             }
             catch (System.ArgumentException)
             {
@@ -462,11 +462,11 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Ensure that Duplicates in Section Queries Are caught - 
             var q3 = new SectionsQuery();
             var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
-            sec.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinX,"PinX");
+            sec.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinX,"PinX");
             bool caught_exc3 = false;
             try
             {
-                sec.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+                sec.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
             }
             catch (System.ArgumentException)
             {

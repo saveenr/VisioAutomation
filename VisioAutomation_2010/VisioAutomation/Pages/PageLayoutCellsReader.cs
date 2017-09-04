@@ -37,34 +37,34 @@ namespace VisioAutomation.Pages
 
         public PageLayoutCellsReader()
         {
-            this.AvenueSizeX = this.query.AddColumn(SrcConstants.PageLayoutAvenueSizeX, nameof(SrcConstants.PageLayoutAvenueSizeX));
-            this.AvenueSizeY = this.query.AddColumn(SrcConstants.PageLayoutAvenueSizeY, nameof(SrcConstants.PageLayoutAvenueSizeY));
-            this.BlockSizeX = this.query.AddColumn(SrcConstants.PageLayoutBlockSizeX, nameof(SrcConstants.PageLayoutBlockSizeX));
-            this.BlockSizeY = this.query.AddColumn(SrcConstants.PageLayoutBlockSizeY, nameof(SrcConstants.PageLayoutBlockSizeY));
-            this.ControlAsInput = this.query.AddColumn(SrcConstants.PageLayoutControlAsInput, nameof(SrcConstants.PageLayoutControlAsInput));
-            this.DynamicsOff = this.query.AddColumn(SrcConstants.PageLayoutDynamicsOff, nameof(SrcConstants.PageLayoutDynamicsOff));
-            this.EnableGrid = this.query.AddColumn(SrcConstants.PageLayoutEnableGrid, nameof(SrcConstants.PageLayoutEnableGrid));
-            this.LineAdjustFrom = this.query.AddColumn(SrcConstants.PageLayoutLineAdjustFrom, nameof(SrcConstants.PageLayoutLineAdjustFrom));
-            this.LineAdjustTo = this.query.AddColumn(SrcConstants.PageLayoutLineAdjustTo, nameof(SrcConstants.PageLayoutLineAdjustTo));
-            this.LineJumpCode = this.query.AddColumn(SrcConstants.PageLayoutLineJumpCode, nameof(SrcConstants.PageLayoutLineJumpCode));
-            this.LineJumpFactorX = this.query.AddColumn(SrcConstants.PageLayoutLineJumpFactorX, nameof(SrcConstants.PageLayoutLineJumpFactorX));
-            this.LineJumpFactorY = this.query.AddColumn(SrcConstants.PageLayoutLineJumpFactorY, nameof(SrcConstants.PageLayoutLineJumpFactorY));
-            this.LineJumpStyle = this.query.AddColumn(SrcConstants.PageLayoutLineJumpStyle, nameof(SrcConstants.PageLayoutLineJumpStyle));
-            this.LineRouteExt = this.query.AddColumn(SrcConstants.PageLayoutLineRouteExt, nameof(SrcConstants.PageLayoutLineRouteExt));
-            this.LineToLineX = this.query.AddColumn(SrcConstants.PageLayoutLineToLineX, nameof(SrcConstants.PageLayoutLineToLineX));
-            this.LineToLineY = this.query.AddColumn(SrcConstants.PageLayoutLineToLineY, nameof(SrcConstants.PageLayoutLineToLineY));
-            this.LineToNodeX = this.query.AddColumn(SrcConstants.PageLayoutLineToNodeX, nameof(SrcConstants.PageLayoutLineToNodeX));
-            this.LineToNodeY = this.query.AddColumn(SrcConstants.PageLayoutLineToNodeY, nameof(SrcConstants.PageLayoutLineToNodeY));
-            this.LineJumpDirX = this.query.AddColumn(SrcConstants.PageLayoutLineJumpDirX, nameof(SrcConstants.PageLayoutLineJumpDirX));
-            this.LineJumpDirY = this.query.AddColumn(SrcConstants.PageLayoutLineJumpDirY, nameof(SrcConstants.PageLayoutLineJumpDirY));
-            this.ShapeSplit = this.query.AddColumn(SrcConstants.PageLayoutShapeSplit, nameof(SrcConstants.PageLayoutShapeSplit));
-            this.PlaceDepth = this.query.AddColumn(SrcConstants.PageLayoutPlaceDepth, nameof(SrcConstants.PageLayoutPlaceDepth));
-            this.PlaceFlip = this.query.AddColumn(SrcConstants.PageLayoutPlaceFlip, nameof(SrcConstants.PageLayoutPlaceFlip));
-            this.PlaceStyle = this.query.AddColumn(SrcConstants.PageLayoutPlaceStyle, nameof(SrcConstants.PageLayoutPlaceStyle));
-            this.PlowCode = this.query.AddColumn(SrcConstants.PageLayoutPlowCode, nameof(SrcConstants.PageLayoutPlowCode));
-            this.ResizePage = this.query.AddColumn(SrcConstants.PageLayoutResizePage, nameof(SrcConstants.PageLayoutResizePage));
-            this.RouteStyle = this.query.AddColumn(SrcConstants.PageLayoutRouteStyle, nameof(SrcConstants.PageLayoutRouteStyle));
-            this.AvoidPageBreaks = this.query.AddColumn(SrcConstants.PageLayoutAvoidPageBreaks, nameof(SrcConstants.PageLayoutAvoidPageBreaks));
+            this.AvenueSizeX = this.query.Columns.Add(SrcConstants.PageLayoutAvenueSizeX, nameof(SrcConstants.PageLayoutAvenueSizeX));
+            this.AvenueSizeY = this.query.Columns.Add(SrcConstants.PageLayoutAvenueSizeY, nameof(SrcConstants.PageLayoutAvenueSizeY));
+            this.BlockSizeX = this.query.Columns.Add(SrcConstants.PageLayoutBlockSizeX, nameof(SrcConstants.PageLayoutBlockSizeX));
+            this.BlockSizeY = this.query.Columns.Add(SrcConstants.PageLayoutBlockSizeY, nameof(SrcConstants.PageLayoutBlockSizeY));
+            this.ControlAsInput = this.query.Columns.Add(SrcConstants.PageLayoutControlAsInput, nameof(SrcConstants.PageLayoutControlAsInput));
+            this.DynamicsOff = this.query.Columns.Add(SrcConstants.PageLayoutDynamicsOff, nameof(SrcConstants.PageLayoutDynamicsOff));
+            this.EnableGrid = this.query.Columns.Add(SrcConstants.PageLayoutEnableGrid, nameof(SrcConstants.PageLayoutEnableGrid));
+            this.LineAdjustFrom = this.query.Columns.Add(SrcConstants.PageLayoutLineAdjustFrom, nameof(SrcConstants.PageLayoutLineAdjustFrom));
+            this.LineAdjustTo = this.query.Columns.Add(SrcConstants.PageLayoutLineAdjustTo, nameof(SrcConstants.PageLayoutLineAdjustTo));
+            this.LineJumpCode = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpCode, nameof(SrcConstants.PageLayoutLineJumpCode));
+            this.LineJumpFactorX = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpFactorX, nameof(SrcConstants.PageLayoutLineJumpFactorX));
+            this.LineJumpFactorY = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpFactorY, nameof(SrcConstants.PageLayoutLineJumpFactorY));
+            this.LineJumpStyle = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpStyle, nameof(SrcConstants.PageLayoutLineJumpStyle));
+            this.LineRouteExt = this.query.Columns.Add(SrcConstants.PageLayoutLineRouteExt, nameof(SrcConstants.PageLayoutLineRouteExt));
+            this.LineToLineX = this.query.Columns.Add(SrcConstants.PageLayoutLineToLineX, nameof(SrcConstants.PageLayoutLineToLineX));
+            this.LineToLineY = this.query.Columns.Add(SrcConstants.PageLayoutLineToLineY, nameof(SrcConstants.PageLayoutLineToLineY));
+            this.LineToNodeX = this.query.Columns.Add(SrcConstants.PageLayoutLineToNodeX, nameof(SrcConstants.PageLayoutLineToNodeX));
+            this.LineToNodeY = this.query.Columns.Add(SrcConstants.PageLayoutLineToNodeY, nameof(SrcConstants.PageLayoutLineToNodeY));
+            this.LineJumpDirX = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpDirX, nameof(SrcConstants.PageLayoutLineJumpDirX));
+            this.LineJumpDirY = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpDirY, nameof(SrcConstants.PageLayoutLineJumpDirY));
+            this.ShapeSplit = this.query.Columns.Add(SrcConstants.PageLayoutShapeSplit, nameof(SrcConstants.PageLayoutShapeSplit));
+            this.PlaceDepth = this.query.Columns.Add(SrcConstants.PageLayoutPlaceDepth, nameof(SrcConstants.PageLayoutPlaceDepth));
+            this.PlaceFlip = this.query.Columns.Add(SrcConstants.PageLayoutPlaceFlip, nameof(SrcConstants.PageLayoutPlaceFlip));
+            this.PlaceStyle = this.query.Columns.Add(SrcConstants.PageLayoutPlaceStyle, nameof(SrcConstants.PageLayoutPlaceStyle));
+            this.PlowCode = this.query.Columns.Add(SrcConstants.PageLayoutPlowCode, nameof(SrcConstants.PageLayoutPlowCode));
+            this.ResizePage = this.query.Columns.Add(SrcConstants.PageLayoutResizePage, nameof(SrcConstants.PageLayoutResizePage));
+            this.RouteStyle = this.query.Columns.Add(SrcConstants.PageLayoutRouteStyle, nameof(SrcConstants.PageLayoutRouteStyle));
+            this.AvoidPageBreaks = this.query.Columns.Add(SrcConstants.PageLayoutAvoidPageBreaks, nameof(SrcConstants.PageLayoutAvoidPageBreaks));
         }
 
 

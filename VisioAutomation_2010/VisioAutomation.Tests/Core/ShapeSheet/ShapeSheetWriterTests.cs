@@ -35,8 +35,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Verify that the formulas were set
             var query = new CellQuery();
-            var col_pinx = query.AddColumn(ShapeSheetWriterTests.src_pinx, "PinX");
-            var col_piny = query.AddColumn(ShapeSheetWriterTests.src_piny, "PinY");
+            var col_pinx = query.Columns.Add(ShapeSheetWriterTests.src_pinx, "PinX");
+            var col_piny = query.Columns.Add(ShapeSheetWriterTests.src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -67,7 +67,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Build the query
             var query = new CellQuery();
-            var col_linepat = query.AddColumn(ShapeSheetWriterTests.src_linepat,"LinePattern");
+            var col_linepat = query.Columns.Add(ShapeSheetWriterTests.src_linepat,"LinePattern");
 
             // Retrieve the values
             var data_formulas = query.GetFormulas(shape1);
@@ -105,7 +105,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Build the query
             var query = new CellQuery();
-            var col_linepat = query.AddColumn(ShapeSheetWriterTests.src_linepat, "LinePattern");
+            var col_linepat = query.Columns.Add(ShapeSheetWriterTests.src_linepat, "LinePattern");
 
             // Retrieve the values
             var data_formulas = query.GetFormulas(shape1);
@@ -140,8 +140,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Verify that the formulas were set
             var query = new CellQuery();
-            var col_pinx = query.AddColumn(ShapeSheetWriterTests.src_pinx,"PinX");
-            var col_piny = query.AddColumn(ShapeSheetWriterTests.src_piny, "PinY");
+            var col_pinx = query.Columns.Add(ShapeSheetWriterTests.src_pinx,"PinX");
+            var col_piny = query.Columns.Add(ShapeSheetWriterTests.src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -179,8 +179,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Build the query
             var query = new CellQuery();
-            var col_linepat = query.AddColumn(ShapeSheetWriterTests.src_linepat, "LinePattern");
-            var col_pinx = query.AddColumn(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+            var col_linepat = query.Columns.Add(ShapeSheetWriterTests.src_linepat, "LinePattern");
+            var col_pinx = query.Columns.Add(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
 
             // Retrieve the values
             var data_formulas = query.GetFormulas(shape1);

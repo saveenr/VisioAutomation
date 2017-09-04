@@ -97,8 +97,8 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             var query = new SectionsQuery();
             var sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionUser);
-            var Value = sec.AddColumn(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
-            var Prompt = sec.AddColumn(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
+            var Value = sec.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
+            var Prompt = sec.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
 
             var formulas = query.GetFormulas(page1, shapes.Select(s => s.ID).ToList());
 

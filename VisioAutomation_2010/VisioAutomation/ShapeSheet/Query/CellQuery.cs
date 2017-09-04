@@ -12,17 +12,6 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Columns = new CellColumnList(0);
         }
 
-        public CellColumn AddColumn(ShapeSheet.Src src, string name)
-        {
-            if (name == null)
-            {
-                throw new System.ArgumentNullException(nameof(name));
-            }
-
-            var col = this.Columns.Add(src, name);
-            return col;
-        }
-
         private static void RestrictToShapesOnly(SurfaceTarget surface)
         {
             if (surface.Shape == null)

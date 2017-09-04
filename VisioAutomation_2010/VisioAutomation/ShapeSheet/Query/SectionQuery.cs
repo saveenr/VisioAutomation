@@ -17,12 +17,6 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Columns = new SectionQueryColumnList();
         }
 
-        public SectionQueryColumn AddColumn(VisioAutomation.ShapeSheet.Src src, string name)
-        {
-            var col = this.Columns.Add(src.Cell, name);
-            return col;
-        }
-
         public static implicit operator int(SectionQuery col)
         {
             return col.Ordinal;

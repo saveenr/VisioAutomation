@@ -15,6 +15,11 @@ namespace VisioAutomation.ShapeSheet.Query
         {
         }
 
+        public SectionQueryColumn Add(Src src, string sname)
+        {
+            return this.Add(src.Cell, sname);
+        }
+
         public SectionQueryColumn Add(short cellindex, string sname)
         {
             check_duplicate_cellindex(cellindex);

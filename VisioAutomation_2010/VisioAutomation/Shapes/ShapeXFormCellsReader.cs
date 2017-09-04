@@ -16,13 +16,13 @@ namespace VisioAutomation.Shapes
         
         public ShapeXFormCellsReader() 
         {
-            this.PinX = this.query.AddColumn(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
-            this.PinY = this.query.AddColumn(SrcConstants.XFormPinY, nameof(SrcConstants.XFormPinY));
-            this.LocPinX = this.query.AddColumn(SrcConstants.XFormLocPinX, nameof(SrcConstants.XFormLocPinX));
-            this.LocPinY = this.query.AddColumn(SrcConstants.XFormLocPinY, nameof(SrcConstants.XFormLocPinY));
-            this.Width = this.query.AddColumn(SrcConstants.XFormWidth, nameof(SrcConstants.XFormWidth));
-            this.Height = this.query.AddColumn(SrcConstants.XFormHeight, nameof(SrcConstants.XFormHeight));
-            this.Angle = this.query.AddColumn(SrcConstants.XFormAngle, nameof(SrcConstants.XFormAngle));
+            this.PinX = this.query.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+            this.PinY = this.query.Columns.Add(SrcConstants.XFormPinY, nameof(SrcConstants.XFormPinY));
+            this.LocPinX = this.query.Columns.Add(SrcConstants.XFormLocPinX, nameof(SrcConstants.XFormLocPinX));
+            this.LocPinY = this.query.Columns.Add(SrcConstants.XFormLocPinY, nameof(SrcConstants.XFormLocPinY));
+            this.Width = this.query.Columns.Add(SrcConstants.XFormWidth, nameof(SrcConstants.XFormWidth));
+            this.Height = this.query.Columns.Add(SrcConstants.XFormHeight, nameof(SrcConstants.XFormHeight));
+            this.Angle = this.query.Columns.Add(SrcConstants.XFormAngle, nameof(SrcConstants.XFormAngle));
         }
 
         public override ShapeXFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)

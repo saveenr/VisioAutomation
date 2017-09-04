@@ -15,8 +15,13 @@ namespace VisioAutomation.ShapeSheet.Query
         {
         }
 
-        internal CellColumn Add(ShapeSheet.Src src, string name)
+        public CellColumn Add(ShapeSheet.Src src, string name)
         {
+            if (name == null)
+            {
+                throw new System.ArgumentNullException(nameof(name));
+            }
+
             check_deplicate_src(src);
             string norm_name = this.normalize_name(name);
             check_duplicate_column_name(norm_name);
