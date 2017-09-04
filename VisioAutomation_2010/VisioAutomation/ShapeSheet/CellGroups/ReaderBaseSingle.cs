@@ -2,11 +2,11 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class ReaderBase<TCellGroup>
+    public abstract class ReaderBaseSingle<TCellGroup>
     {
         protected CellQuery query;
 
-        protected ReaderBase()
+        protected ReaderBaseSingle()
         {
             this.query = new CellQuery();
         }
