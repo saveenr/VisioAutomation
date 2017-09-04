@@ -2,16 +2,16 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SubQueryColumnCollection : ColumnCollectionBase<SubQueryColumn>
+    public class SubQueryColumnList : ColumnListBase<SubQueryColumn>
     {
         private HashSet<short> _cellindex_set;
 
-        internal SubQueryColumnCollection() :
+        internal SubQueryColumnList() :
             base(0)
         {
         }
 
-        internal SubQueryColumnCollection(int capacity) : base(capacity)
+        internal SubQueryColumnList(int capacity) : base(capacity)
         {
         }
 

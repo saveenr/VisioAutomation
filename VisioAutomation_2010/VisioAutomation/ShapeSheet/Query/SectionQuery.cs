@@ -5,13 +5,13 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionQuery
     {
-        public SubQueryCollection SubQueries { get; }
+        public SubQueryList SubQueries { get; }
 
         private SectionInfoCache _cache;
 
         public SectionQuery()
         {
-            this.SubQueries = new SubQueryCollection(0);
+            this.SubQueries = new SubQueryList(0);
         }
 
         public SubQuery AddSubQuery(Microsoft.Office.Interop.Visio.VisSectionIndices section)
@@ -101,13 +101,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public QueryOutputCollectionSections<string> GetFormulas(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public SectionQueryOutputList<string> GetFormulas(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
-        public QueryOutputCollectionSections<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
+        public SectionQueryOutputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
             var shapes = new List<Microsoft.Office.Interop.Visio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
@@ -120,13 +120,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public QueryOutputCollectionSections<TResult> GetResults<TResult>(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public SectionQueryOutputList<TResult> GetResults<TResult>(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
         }
 
-        public QueryOutputCollectionSections<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
+        public SectionQueryOutputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
             var shapes = new List<Microsoft.Office.Interop.Visio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
@@ -140,13 +140,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public QueryOutputCollectionSections<ShapeSheet.CellData> GetFormulasAndResults(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public SectionQueryOutputList<ShapeSheet.CellData> GetFormulasAndResults(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetFormulasAndResults(surface, shapeids);
         }
 
-        public QueryOutputCollectionSections<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface, IList<int> shapeids)
+        public SectionQueryOutputList<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface, IList<int> shapeids)
         {
             var shapes = new List<Microsoft.Office.Interop.Visio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
@@ -163,9 +163,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return r;
         }
 
-        private QueryOutputCollectionSections<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionInfoCache cache, VisioAutomation.Utilities.ArraySegmentReader<T> segReader)
+        private SectionQueryOutputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionInfoCache cache, VisioAutomation.Utilities.ArraySegmentReader<T> segReader)
         {
-            var output_for_all_shapes = new QueryOutputCollectionSections<T>();
+            var output_for_all_shapes = new SectionQueryOutputList<T>();
 
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {

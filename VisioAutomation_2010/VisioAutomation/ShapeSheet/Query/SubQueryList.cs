@@ -3,13 +3,13 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SubQueryCollection : IEnumerable<SubQuery>
+    public class SubQueryList : IEnumerable<SubQuery>
     {
         private IList<SubQuery> _subqueries { get; }
 
         private readonly Dictionary<IVisio.VisSectionIndices,SubQuery> _section_set; 
 
-        internal SubQueryCollection(int capacity)
+        internal SubQueryList(int capacity)
         {
             this._subqueries = new List<SubQuery>(capacity);
             this._section_set = new Dictionary<IVisio.VisSectionIndices, SubQuery>(capacity);

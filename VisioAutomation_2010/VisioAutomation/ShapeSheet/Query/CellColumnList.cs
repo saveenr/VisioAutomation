@@ -2,16 +2,16 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class CellColumnCollection : ColumnCollectionBase<CellColumn>
+    public class CellColumnList : ColumnListBase<CellColumn>
     {
         private HashSet<ShapeSheet.Src> items;
 
-        internal CellColumnCollection() :
+        internal CellColumnList() :
             this(0)
         {
         }
 
-        internal CellColumnCollection(int capacity) : base(capacity)
+        internal CellColumnList(int capacity) : base(capacity)
         {
         }
 

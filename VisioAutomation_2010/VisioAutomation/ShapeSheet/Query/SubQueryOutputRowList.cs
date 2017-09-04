@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SubQueryOutputRowCollection<T> : IEnumerable<SubQueryOutputRow<T>>
+    public class SubQueryOutputRowList<T> : IEnumerable<SubQueryOutputRow<T>>
     {
         private readonly List<SubQueryOutputRow<T>> _rows;
 
-        public SubQueryOutputRowCollection(int capacity)
+        public SubQueryOutputRowList(int capacity)
         {
             this._rows = new List<SubQueryOutputRow<T>>(capacity);
         }
