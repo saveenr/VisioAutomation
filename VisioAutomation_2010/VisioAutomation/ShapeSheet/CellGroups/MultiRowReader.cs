@@ -5,9 +5,18 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class MultiRowReader<TCellGroup> : ReaderBaseMulti<TCellGroup>
+    public abstract class MultiRowReader<TCellGroup> 
     {
-        protected override void validate_query()
+        protected SectionQuery query;
+
+        protected MultiRowReader()
+        {
+            this.query = new SectionQuery();
+        }
+        
+        public abstract TCellGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row);
+
+        protected void validate_query()
         {
             if (this.query.SubQueries.Count != 1)
             {

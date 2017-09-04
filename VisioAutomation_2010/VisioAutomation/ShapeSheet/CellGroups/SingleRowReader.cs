@@ -5,10 +5,18 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class SingleRowReader<TCellGroup>: ReaderBaseSingle<TCellGroup>
+    public abstract class SingleRowReader<TCellGroup>
     {
+        protected Query.CellQuery query;
 
-        protected override void validate_query()
+        protected SingleRowReader()
+        {
+            this.query = new Query.CellQuery();
+        }
+
+        public abstract TCellGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row);
+
+        protected void validate_query()
         {
             if (this.query.Cells.Count < 1)
             {
