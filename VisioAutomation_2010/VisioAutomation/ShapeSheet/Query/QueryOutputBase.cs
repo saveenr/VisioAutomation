@@ -6,9 +6,9 @@
 
         internal readonly int __totalcellcount;
 
-        internal QueryOutputBase(int shape_id, int count)
+        internal QueryOutputBase(int shapeid, int count)
         {
-            this.ShapeID = shape_id;
+            this.ShapeID = shapeid;
             this.__totalcellcount = count;
         }
     }
