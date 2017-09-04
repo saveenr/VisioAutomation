@@ -2,22 +2,22 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct CellData
     {
-        public string Formula { get; }
-        public string Result { get; }
+        public string ValueF { get; }
+        public string ValueR { get; }
 
         public CellData(string formula, string result)
             : this()
         {
-            this.Formula = formula;
-            this.Result = result;
+            this.ValueF = formula;
+            this.ValueR = result;
         }
 
         public override string ToString()
         {
-            var formula_string = this.Formula ?? "null";
+            var formula_string = this.ValueF ?? "null";
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             var format = "(\"{0}\",{1})";
-            return string.Format(culture,format, formula_string, this.Result);
+            return string.Format(culture,format, formula_string, this.ValueR);
         }
 
         public static implicit operator CellData(CellValueLiteral formula)

@@ -13,13 +13,13 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            if (connection_point_cells.X.Formula==null)
+            if (connection_point_cells.X.ValueF==null)
             {
                 string msg = "Must provide an X Formula";
                 throw new System.ArgumentException(msg, nameof(connection_point_cells));
             }
 
-            if (connection_point_cells.Y.Formula==null)
+            if (connection_point_cells.Y.ValueF==null)
             {
                 string msg = "Must provide an Y Formula";
                 throw new System.ArgumentException(msg, nameof(connection_point_cells));

@@ -25,21 +25,21 @@ namespace VisioAutomation.Pages
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintLeftMargin, this.LeftMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterX, this.CenterX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterY, this.CenterY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintOnPage, this.OnPage.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintBottomMargin, this.BottomMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintRightMargin, this.RightMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintPagesX, this.PagesX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintPagesY, this.PagesY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintTopMargin, this.TopMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintPaperKind, this.PaperKind.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintGrid, this.Grid.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintPageOrientation, this.Orientation.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintScaleX, this.ScaleX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintScaleY, this.ScaleY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PrintPaperSource, this.PaperSource.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintLeftMargin, this.LeftMargin.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterX, this.CenterX.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintCenterY, this.CenterY.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintOnPage, this.OnPage.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintBottomMargin, this.BottomMargin.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintRightMargin, this.RightMargin.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPagesX, this.PagesX.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPagesY, this.PagesY.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintTopMargin, this.TopMargin.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPaperKind, this.PaperKind.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintGrid, this.Grid.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPageOrientation, this.Orientation.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintScaleX, this.ScaleX.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintScaleY, this.ScaleY.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PrintPaperSource, this.PaperSource.ValueF);
             }
         }
 

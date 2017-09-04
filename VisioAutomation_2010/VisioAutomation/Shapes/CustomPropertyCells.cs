@@ -96,31 +96,31 @@ namespace VisioAutomation.Shapes
             {
                 var cp = this;
 
-                string str_label = this.SmartStringToFormulaString(cp.Label.Formula, false);
+                string str_label = this.SmartStringToFormulaString(cp.Label.ValueF, false);
                 string str_value = null;
-                if (cp.Type.Formula == "0" || cp.Type.Formula == null)
+                if (cp.Type.ValueF == "0" || cp.Type.ValueF == null)
                 {
                     // if type has no value or is a "0" then it is a string
-                    str_value = this.SmartStringToFormulaString(cp.Value.Formula, false);
+                    str_value = this.SmartStringToFormulaString(cp.Value.ValueF, false);
                 }
                 else
                 {
                     // For non-stringd don't add any extra quotes
-                    str_value = this.SmartStringToFormulaString(cp.Value.Formula, true);
+                    str_value = this.SmartStringToFormulaString(cp.Value.ValueF, true);
                 }
-                string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
-                string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
+                string str_format = this.SmartStringToFormulaString(cp.Format.ValueF, false);
+                string str_prompt = this.SmartStringToFormulaString(cp.Prompt.ValueF, false);
 
                 yield return this.newpair(ShapeSheet.SrcConstants.CustomPropLabel, str_label);
                 yield return this.newpair(ShapeSheet.SrcConstants.CustomPropValue, str_value);
                 yield return this.newpair(ShapeSheet.SrcConstants.CustomPropFormat, str_format);
                 yield return this.newpair(ShapeSheet.SrcConstants.CustomPropPrompt, str_prompt);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropCalendar, cp.Calendar.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropLangID, cp.LangID.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropSortKey, cp.SortKey.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropInvisible, cp.Invisible.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropType, cp.Type.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropAsk, cp.Ask.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropCalendar, cp.Calendar.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropLangID, cp.LangID.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropSortKey, cp.SortKey.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropInvisible, cp.Invisible.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropType, cp.Type.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.CustomPropAsk, cp.Ask.ValueF);
             }
         }
 

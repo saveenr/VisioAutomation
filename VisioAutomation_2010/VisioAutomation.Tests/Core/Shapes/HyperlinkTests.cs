@@ -34,8 +34,8 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // verify that the hyperlinks were set propery
             Assert.AreEqual(2, hlinks.Count);
-            Assert.AreEqual("\"http://microsoft.com\"", hlinks[0].Address.Formula);
-            Assert.AreEqual("\"http://google.com\"", hlinks[1].Address.Formula);
+            Assert.AreEqual("\"http://microsoft.com\"", hlinks[0].Address.ValueF);
+            Assert.AreEqual("\"http://google.com\"", hlinks[1].Address.ValueF);
 
             // Delete both hyperlinks
             HyperlinkHelper.Delete(s1, 0);

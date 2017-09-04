@@ -25,20 +25,20 @@ namespace VisioAutomation.Pages
         {
             get
             { 
-                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingScale, this.DrawingScale.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingScaleType, this.DrawingScaleType.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingSizeType, this.DrawingSizeType.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageInhibitSnap, this.InhibitSnap.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageHeight, this.Height.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageScale, this.Scale.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageWidth, this.Width.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowType, this.ShadowType.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageUIVisibility, this.UIVisibility.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingResizeType, this.DrawingResizeType.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingScale, this.DrawingScale.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingScaleType, this.DrawingScaleType.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingSizeType, this.DrawingSizeType.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageInhibitSnap, this.InhibitSnap.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageHeight, this.Height.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageScale, this.Scale.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageWidth, this.Width.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageShadowType, this.ShadowType.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageUIVisibility, this.UIVisibility.ValueF);
+                yield return this.newpair(ShapeSheet.SrcConstants.PageDrawingResizeType, this.DrawingResizeType.ValueF);
             }
         }
 

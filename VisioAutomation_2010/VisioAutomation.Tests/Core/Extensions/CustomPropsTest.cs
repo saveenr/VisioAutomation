@@ -176,12 +176,12 @@ namespace VisioAutomation_Tests.Core.Extensions
             Assert.AreEqual(0, allprops[2].Count);
             Assert.AreEqual(3, allprops[3].Count);
 
-            Assert.AreEqual("\"1\"", allprops[0]["FOO1"].Value.Formula);
-            Assert.AreEqual("\"2\"", allprops[1]["FOO2"].Value.Formula);
-            Assert.AreEqual("\"3\"", allprops[1]["FOO3"].Value.Formula);
-            Assert.AreEqual("\"4\"", allprops[3]["FOO4"].Value.Formula);
-            Assert.AreEqual("\"5\"", allprops[3]["FOO5"].Value.Formula);
-            Assert.AreEqual("\"6\"", allprops[3]["FOO6"].Value.Formula);
+            Assert.AreEqual("\"1\"", allprops[0]["FOO1"].Value.ValueF);
+            Assert.AreEqual("\"2\"", allprops[1]["FOO2"].Value.ValueF);
+            Assert.AreEqual("\"3\"", allprops[1]["FOO3"].Value.ValueF);
+            Assert.AreEqual("\"4\"", allprops[3]["FOO4"].Value.ValueF);
+            Assert.AreEqual("\"5\"", allprops[3]["FOO5"].Value.ValueF);
+            Assert.AreEqual("\"6\"", allprops[3]["FOO6"].Value.ValueF);
 
             page1.Delete(0);
         }

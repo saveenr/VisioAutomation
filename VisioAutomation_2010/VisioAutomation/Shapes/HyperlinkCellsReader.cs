@@ -36,12 +36,12 @@ namespace VisioAutomation.Shapes
         {
             var cells = new HyperlinkCells();
 
-            cells.Address = row[this.Address].Formula;
-            cells.Description= row[this.Description].Formula;
-            cells.ExtraInfo= row[this.ExtraInfo].Formula;
-            cells.Frame= row[this.Frame].Formula;
-            cells.SortKey= row[this.SortKey].Formula;
-            cells.SubAddress= row[this.SubAddress].Formula;
+            cells.Address = row[this.Address].ValueF;
+            cells.Description= row[this.Description].ValueF;
+            cells.ExtraInfo= row[this.ExtraInfo].ValueF;
+            cells.Frame= row[this.Frame].ValueF;
+            cells.SortKey= row[this.SortKey].ValueF;
+            cells.SubAddress= row[this.SubAddress].ValueF;
             cells.NewWindow = row[this.NewWindow];
             cells.Default = row[this.Default];
             cells.Invisible = row[this.Invisible];

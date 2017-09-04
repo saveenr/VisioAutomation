@@ -41,12 +41,12 @@ namespace VisioAutomation.Shapes
             }
 
 
-            if (ctrl.XDynamics.Formula==null)
+            if (ctrl.XDynamics.ValueF==null)
             {
                 ctrl.XDynamics = string.Format("Controls.Row_{0}", row + 1);
             }
 
-            if (ctrl.YDynamics.Formula == null)
+            if (ctrl.YDynamics.ValueF == null)
             {
                 ctrl.YDynamics = string.Format("Controls.Row_{0}.Y", row + 1);
             }
