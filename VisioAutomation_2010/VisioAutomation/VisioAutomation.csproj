@@ -180,7 +180,7 @@
     <Compile Include="ShapeSheet\CellGroups\CellGroupSingleRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBase.cs" />
-    <Compile Include="ShapeSheet\Query\QueryOutputList.cs" />
+    <Compile Include="ShapeSheet\Query\SectionsQueryOutputList.cs" />
     <Compile Include="ShapeSheet\Query\QueryOutputBase.cs" />
     <Compile Include="ShapeSheet\Query\SectionInfo.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
