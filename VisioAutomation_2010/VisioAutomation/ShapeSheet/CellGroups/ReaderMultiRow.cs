@@ -20,7 +20,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             var data_for_shapes = query.GetFormulasAndResults(page, shapeids);
             var list = new List<List<TGroup>>(shapeids.Count);
-            var objects = data_for_shapes.Select(d => this.SubQueryRowsToCellGroups(d.Sections[0]));
+            var objects = data_for_shapes.Select(d => this.__SectionRowsToCellGroups(d.Sections[0]));
             list.AddRange(objects);
             return list;
         }
@@ -29,11 +29,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             var data_for_shape = query.GetFormulasAndResults(shape);
             var sec = data_for_shape.Sections[0];
-            var cellgroups = this.SubQueryRowsToCellGroups(sec);
+            var cellgroups = this.__SectionRowsToCellGroups(sec);
             return cellgroups;
         }
 
-        private List<TGroup> SubQueryRowsToCellGroups(SectionQueryOutput<ShapeSheet.CellData> subquery_output)
+        private List<TGroup> __SectionRowsToCellGroups(SectionQueryOutput<ShapeSheet.CellData> subquery_output)
         {
             var list_celldata = subquery_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
             var cellgroups = new List<TGroup>(subquery_output.Rows.Count);
