@@ -164,8 +164,8 @@ namespace VisioAutomation.ShapeSheet.Query
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var subqueryinfo = this.GetSectionInfoForShape(shape_index, cache);
-                var output_for_shape = this._create_output_for_shape((short)shapeid, subqueryinfo, segReader);
+                var secinfo = this.GetSectionInfoForShape(shape_index, cache);
+                var output_for_shape = this._create_output_for_shape((short)shapeid, secinfo, segReader);
                 output_for_all_shapes.Add(output_for_shape);
             }
 
@@ -197,17 +197,17 @@ namespace VisioAutomation.ShapeSheet.Query
                sections = new List<SectionQueryOutput<T>>(section_infos.Count);
                 foreach (var section_info in section_infos)
                 {
-                    var subquery_output = new SectionQueryOutput<T>(section_info.RowCount, section_info.Query.SectionIndex);
+                    var section_output = new SectionQueryOutput<T>(section_info.RowCount, section_info.Query.SectionIndex);
 
                     int num_cols = section_info.Query.Columns.Count;
                     foreach (int row_index in section_info.RowIndexes)
                     {
                         var segment = segReader.GetNextSegment(num_cols);
                         var sec_res_row = new SectionQueryOutputRow<T>(segment, section_info.Query.SectionIndex, row_index);
-                        subquery_output.Rows.Add(sec_res_row);
+                        section_output.Rows.Add(sec_res_row);
                     }
 
-                    sections.Add(subquery_output);
+                    sections.Add(section_output);
                 }
             }
 
@@ -233,11 +233,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
             this._cache = new SectionInfoCache();
 
-            // For each shape, for each subquery (section) find the number of rows
+            // For each shape, for each section find the number of rows
             foreach (var shape in shapes)
             {
                 var l_sectioninfo = new List<SectionInfo>(this.SectionQueries.Count);
-                l_sectioninfo.AddRange(this.SectionQueries.Select(subquery => subquery.GetSectionInfoForShape(shape)));
+                l_sectioninfo.AddRange(this.SectionQueries.Select(sec => sec.GetSectionInfoForShape(shape)));
                 _cache.AddSectionInfosForShape(l_sectioninfo);
             }
 

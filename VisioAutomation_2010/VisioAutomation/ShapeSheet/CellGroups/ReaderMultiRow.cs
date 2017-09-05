@@ -33,10 +33,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> __SectionRowsToCellGroups(SectionQueryOutput<ShapeSheet.CellData> subquery_output)
+        private List<TGroup> __SectionRowsToCellGroups(SectionQueryOutput<ShapeSheet.CellData> section_output)
         {
-            var list_celldata = subquery_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
-            var cellgroups = new List<TGroup>(subquery_output.Rows.Count);
+            var list_celldata = section_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
+            var cellgroups = new List<TGroup>(section_output.Rows.Count);
             cellgroups.AddRange(list_celldata);
             return cellgroups;
         }
