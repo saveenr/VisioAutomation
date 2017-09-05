@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public void SetFormulas(short shapeid, SidSrcWriter writer)
+        public void SetFormulas(SidSrcWriter writer, short shapeid)
         {
             foreach (var pair in this.SrcFormulaPairs)
             {

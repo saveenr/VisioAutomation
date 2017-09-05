@@ -19,10 +19,10 @@ namespace VisioAutomation.Models.Layouts.Container
 
         public void Apply(SidSrcWriter writer, short shapeid_label, short shapeid_box)
         {
-            this.CharacterFormatCells.SetFormulas(shapeid_label, writer, 0);
-            this.ParagraphFormatCells.SetFormulas(shapeid_label, writer, 0);
-            this.ShapeFormatCells.SetFormulas(shapeid_box, writer);
-            this.TextBlockCells.SetFormulas(shapeid_label, writer);
+            this.CharacterFormatCells.SetFormulas(writer, shapeid_label, 0);
+            this.ParagraphFormatCells.SetFormulas(writer, shapeid_label, 0);
+            this.ShapeFormatCells.SetFormulas(writer, shapeid_box);
+            this.TextBlockCells.SetFormulas(writer, shapeid_label);
         }
     }
 }

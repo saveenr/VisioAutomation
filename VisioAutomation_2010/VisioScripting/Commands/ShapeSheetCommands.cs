@@ -23,12 +23,12 @@ namespace VisioScripting.Commands
                 if (cells is VisioAutomation.ShapeSheet.CellGroups.CellGroupMultiRow)
                 {
                     var cells_mr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupMultiRow)cells;
-                    cells_mr.SetFormulas((short)shape_id, writer, 0);
+                    cells_mr.SetFormulas(writer, (short)shape_id, 0);
                 }
                 else
                 {
                     var cells_sr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupSingleRow)cells;
-                    cells_sr.SetFormulas((short)shape_id, writer);
+                    cells_sr.SetFormulas(writer, (short)shape_id);
                 }
             }
 
