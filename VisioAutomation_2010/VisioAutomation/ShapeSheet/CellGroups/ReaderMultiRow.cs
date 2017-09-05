@@ -16,17 +16,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         
         public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row);
 
-        protected void validate_query()
-        {
-            if (this.query.SectionQueries.Count != 1)
-            {
-                throw new InternalAssertionException("Query should contain contain exactly 1 subquery");
-            }
-        }
-
         public List<List<TGroup>> GetCellGroups(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
-            this.validate_query();
             var data_for_shapes = query.GetFormulasAndResults(page, shapeids);
             var list = new List<List<TGroup>>(shapeids.Count);
             var objects = data_for_shapes.Select(d => this.SubQueryRowsToCellGroups(d.Sections[0]));
@@ -36,7 +27,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public List<TGroup> GetCellGroups(Microsoft.Office.Interop.Visio.Shape shape)
         {
-            this.validate_query();
             var data_for_shape = query.GetFormulasAndResults(shape);
             var sec = data_for_shape.Sections[0];
             var cellgroups = this.SubQueryRowsToCellGroups(sec);
