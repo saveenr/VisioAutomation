@@ -102,6 +102,7 @@
     <Compile Include="Core\Extensions\PageDropTests.cs" />
     <Compile Include="Core\ShapeSheet\FixedStreamBuilderTests.cs" />
     <Compile Include="Core\ShapeSheet\ArraySegmentTests.cs" />
+    <Compile Include="Core\Shapes\CellGroups.cs" />
     <Compile Include="Core\Shapes\ConnectorTests.cs" />
     <Compile Include="DocumentAnalysis\ConnectivityMap.cs" />
     <Compile Include="DocumentAnalysis\PathAnalysis_Tests.cs" />
