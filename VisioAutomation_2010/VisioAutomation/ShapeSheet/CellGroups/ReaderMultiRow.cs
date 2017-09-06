@@ -19,25 +19,32 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public List<List<TGroup>> GetCellGroups(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var data_for_shapes = query.GetFormulasAndResults(page, shapeids);
-            var list = new List<List<TGroup>>(shapeids.Count);
-            var objects = data_for_shapes.Select(d => this.__SectionRowsToCellGroups(d.Sections[0]));
-            list.AddRange(objects);
-            return list;
+            var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
+            foreach (var d in data_for_shapes)
+            {
+                var first_section = d.Sections[0];
+                var cellgroups = this.__SectionRowsToCellGroups(first_section);
+                list_cellgroups.Add(cellgroups);
+            }
+            return list_cellgroups;
         }
 
         public List<TGroup> GetCellGroups(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var data_for_shape = query.GetFormulasAndResults(shape);
-            var sec = data_for_shape.Sections[0];
-            var cellgroups = this.__SectionRowsToCellGroups(sec);
+            var first_section = data_for_shape.Sections[0];
+            var cellgroups = this.__SectionRowsToCellGroups(first_section);
             return cellgroups;
         }
 
-        private List<TGroup> __SectionRowsToCellGroups(SectionQueryOutput<ShapeSheet.CellData> section_output)
+        private List<TGroup> __SectionRowsToCellGroups(SectionQueryOutput<ShapeSheet.CellData> section_data)
         {
-            var list_celldata = section_output.Rows.Select(row => this.CellDataToCellGroup(row.Cells));
-            var cellgroups = new List<TGroup>(section_output.Rows.Count);
-            cellgroups.AddRange(list_celldata);
+            var cellgroups = new List<TGroup>(section_data.Rows.Count);
+            foreach (var section_row in section_data.Rows)
+            {
+                var cellgroup = this.CellDataToCellGroup(section_row.Cells);
+                cellgroups.Add(cellgroup);                
+            }
             return cellgroups;
         }
     }
