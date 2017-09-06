@@ -28,11 +28,13 @@ namespace VisioAutomation_Tests.Core.Shapes
             types.Add(typeof(VisioAutomation.Pages.PagePrintCells));
             types.Add(typeof(VisioAutomation.Pages.PageRulerAndGridCells));
 
-            foreach (var t in types)
-            {
-                var props = GetCellDataProps(t);
+            var xg1 = new VisioAutomation.Shapes.ShapeXFormCells();
+            xg1.PinX = 1.0;
+            xg1.PinY = 2.0;
 
-            }
+            var props = GetCellDataProps(xg1.GetType());
+
+            var values = props.Select(p => p.GetValue(xg1,null)).ToList();
 
             int x = 1;
         }
