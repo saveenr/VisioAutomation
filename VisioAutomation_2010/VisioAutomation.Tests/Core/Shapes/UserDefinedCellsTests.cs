@@ -260,7 +260,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(3, allprops[3].Count);
 
             Assert.AreEqual("\"1\"", allprops[0]["FOO1"].Value.Value);
-            Assert.AreEqual("\"2\"", allprops[1]["FOO1"].Value.Value);
+            Assert.AreEqual("\"2\"", allprops[1]["FOO2"].Value.Value);
             Assert.AreEqual("\"3\"", allprops[1]["FOO3"].Value.Value);
             Assert.AreEqual("\"4\"", allprops[3]["FOO4"].Value.Value);
             Assert.AreEqual("\"5\"", allprops[3]["FOO5"].Value.Value);
