@@ -26,8 +26,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             else
             {
                 data_for_shapes = query.GetResults<string>(page, shapeids);
-
             }
+
             var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
             foreach (var d in data_for_shapes)
             {
