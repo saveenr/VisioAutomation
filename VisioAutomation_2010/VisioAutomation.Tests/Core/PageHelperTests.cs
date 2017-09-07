@@ -13,9 +13,9 @@ namespace VisioAutomation_Tests.Core.Page
         {
             var size = new VA.Geometry.Size(4, 3);
             var page1 = this.GetNewPage(size);
-            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
-            Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Result);
-            Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Result);
+            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, VisioAutomation.ShapeSheet.CellValueType.Result);
+            Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Formula);
+            Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Formula);
 
             // Double each side
             page_fmt_cells.Width = "8.0";
@@ -26,9 +26,9 @@ namespace VisioAutomation_Tests.Core.Page
 
             writer.Commit(page1.PageSheet);
 
-            var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
-            Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Result);
-            Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Result);
+            var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, VisioAutomation.ShapeSheet.CellValueType.Result);
+            Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Formula);
+            Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Formula);
             page1.Delete(0);
         }
 
@@ -157,7 +157,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5 + shape_size.Height);
             page.ResizeToFitContents(padding_size);
-            var xform = VA.Shapes.ShapeXFormCells.GetCells(shape);
+            var xform = VA.Shapes.ShapeXFormCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Result);
             var pinpos = xform.GetPinPosResult();
             Assert.AreEqual(expected_pinx, pinpos.X, 0.1);
             Assert.AreEqual(expected_piny, pinpos.Y, 0.1);

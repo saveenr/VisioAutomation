@@ -41,7 +41,7 @@ namespace VisioAutomation.Text
             this.TextPosAfterBullet = sec.Columns.Add(SrcConstants.ParaTextPosAfterBullet, nameof(SrcConstants.ParaTextPosAfterBullet));
         }
 
-        public override Text.ParagraphFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override Text.ParagraphFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
         {
             var cells = new Text.ParagraphFormatCells();
             cells.IndentFirst = row[this.IndentFirst];

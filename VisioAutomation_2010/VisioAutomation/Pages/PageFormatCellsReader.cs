@@ -39,7 +39,7 @@ namespace VisioAutomation.Pages
             this.DrawingResizeType = this.query.Columns.Add(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
         }
 
-        public override Pages.PageFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override Pages.PageFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
         {
             var cells = new Pages.PageFormatCells();
             cells.DrawingScale = row[this.DrawingScale];

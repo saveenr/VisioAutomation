@@ -47,7 +47,7 @@ namespace VisioAutomation.Shapes
             this.Relationships = this.query.Columns.Add(SrcConstants.ShapeLayoutRelationships, nameof(SrcConstants.ShapeLayoutRelationships));
         }
 
-        public override ShapeLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override ShapeLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
         {
             var cells = new ShapeLayoutCells();
             cells.ConnectorFixedCode = row[this.ConnectorFixedCode];

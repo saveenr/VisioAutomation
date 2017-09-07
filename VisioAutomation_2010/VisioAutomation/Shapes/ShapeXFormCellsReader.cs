@@ -25,7 +25,7 @@ namespace VisioAutomation.Shapes
             this.Angle = this.query.Columns.Add(SrcConstants.XFormAngle, nameof(SrcConstants.XFormAngle));
         }
 
-        public override ShapeXFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override ShapeXFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
         {
             var cells = new Shapes.ShapeXFormCells();
             cells.PinX = row[this.PinX];

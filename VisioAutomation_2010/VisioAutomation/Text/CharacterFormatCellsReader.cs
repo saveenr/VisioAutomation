@@ -59,7 +59,7 @@ namespace VisioAutomation.Text
 
         }
 
-        public override Text.CharacterFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override Text.CharacterFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
         {
             var cells = new Text.CharacterFormatCells();
             cells.Color = row[this.Color];

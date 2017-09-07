@@ -41,7 +41,7 @@ namespace VisioAutomation.Pages
             this.PaperSource = this.query.Columns.Add(SrcConstants.PrintPaperSource, nameof(SrcConstants.PrintPaperSource));
         }
 
-        public override Pages.PagePrintCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override Pages.PagePrintCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
         {
             var cells = new Pages.PagePrintCells();
             cells.LeftMargin = row[this.LeftMargin];

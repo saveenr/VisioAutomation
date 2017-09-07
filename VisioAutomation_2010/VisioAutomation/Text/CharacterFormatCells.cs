@@ -58,16 +58,16 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, VisioAutomation.ShapeSheet.CellValueType cvt)
         {
             var query = CharacterFormatCells.lazy_query.Value;
-            return query.GetCellGroups(page, shapeids);
+            return query.GetCellGroups(page, shapeids, cvt);
         }
 
-        public static List<CharacterFormatCells> GetCells(IVisio.Shape shape)
+        public static List<CharacterFormatCells> GetCells(IVisio.Shape shape, VisioAutomation.ShapeSheet.CellValueType cvt)
         {
             var query = CharacterFormatCells.lazy_query.Value;
-            return query.GetCellGroups(shape);
+            return query.GetCellGroups(shape,cvt);
         }
 
         private static readonly System.Lazy<CharacterFormatCellsReader> lazy_query = new System.Lazy<CharacterFormatCellsReader>();

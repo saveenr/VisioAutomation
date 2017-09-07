@@ -43,10 +43,10 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PagePrintCells GetCells(Microsoft.Office.Interop.Visio.Shape shape)
+        public static PagePrintCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, VisioAutomation.ShapeSheet.CellValueType cvt)
         {
             var query = PagePrintCells.lazy_query.Value;
-            return query.GetCellGroup(shape);
+            return query.GetCellGroup(shape, cvt);
         }
 
         private static readonly System.Lazy<PagePrintCellsReader> lazy_query = new System.Lazy<PagePrintCellsReader>();

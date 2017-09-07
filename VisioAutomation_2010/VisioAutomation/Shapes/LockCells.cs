@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -55,16 +56,16 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
             var query = LockCells.lazy_query.Value;
-            return query.GetCellGroups(page, shapeids);
+            return query.GetCellGroups(page, shapeids, cvt);
         }
 
-        public static LockCells GetCells(IVisio.Shape shape)
+        public static LockCells GetCells(IVisio.Shape shape, CellValueType cvt)
         {
             var query = LockCells.lazy_query.Value;
-            return query.GetCellGroup(shape);
+            return query.GetCellGroup(shape, cvt);
         }
 
         private static readonly System.Lazy<LockCellsReader> lazy_query = new System.Lazy<LockCellsReader>();

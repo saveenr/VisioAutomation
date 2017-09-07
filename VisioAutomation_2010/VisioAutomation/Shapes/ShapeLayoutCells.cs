@@ -51,16 +51,16 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, VisioAutomation.ShapeSheet.CellValueType cvt)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return query.GetCellGroups(page, shapeids);
+            return query.GetCellGroups(page, shapeids, cvt);
         }
 
-        public static ShapeLayoutCells GetCells(IVisio.Shape shape)
+        public static ShapeLayoutCells GetCells(IVisio.Shape shape, VisioAutomation.ShapeSheet.CellValueType cvt)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return query.GetCellGroup(shape);
+            return query.GetCellGroup(shape, cvt);
         }
 
         private static readonly System.Lazy<ShapeLayoutCellsReader> lazy_query = new System.Lazy<ShapeLayoutCellsReader>();

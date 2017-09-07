@@ -32,16 +32,16 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static IList<TextBlockCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static IList<TextBlockCells> GetCells(IVisio.Page page, IList<int> shapeids, VisioAutomation.ShapeSheet.CellValueType cvt)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return query.GetCellGroups(page, shapeids);
+            return query.GetCellGroups(page, shapeids, cvt);
         }
 
-        public static TextBlockCells GetCells(IVisio.Shape shape)
+        public static TextBlockCells GetCells(IVisio.Shape shape, VisioAutomation.ShapeSheet.CellValueType cvt)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return query.GetCellGroup(shape);
+            return query.GetCellGroup(shape, cvt);
         }
 
         private static readonly System.Lazy<TextBlockCellsReader> lazy_query = new System.Lazy<TextBlockCellsReader>();

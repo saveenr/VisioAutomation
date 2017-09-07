@@ -79,7 +79,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<HyperlinkCells>>();
             foreach (var shape in targets.Shapes)
             {
-                var hyperlinks = HyperlinkCells.GetCells(shape);
+                var hyperlinks = HyperlinkCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Formula);
                 dic[shape] = hyperlinks;
             }
             return dic;

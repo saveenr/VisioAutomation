@@ -68,7 +68,7 @@ namespace VisioAutomation.Pages
         }
 
 
-        public override Pages.PageLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override Pages.PageLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
         {
             var cells = new Pages.PageLayoutCells();
             cells.AvenueSizeX = row[this.AvenueSizeX];

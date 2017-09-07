@@ -32,16 +32,16 @@ namespace VisioAutomation.Shapes
             this.SubAddress= sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkSubAddress, nameof(ShapeSheet.SrcConstants.HyperlinkSubAddress));
         }
 
-        public override HyperlinkCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<ShapeSheet.CellData> row)
+        public override HyperlinkCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
         {
             var cells = new HyperlinkCells();
 
-            cells.Address = row[this.Address].Formula;
-            cells.Description= row[this.Description].Formula;
-            cells.ExtraInfo= row[this.ExtraInfo].Formula;
-            cells.Frame= row[this.Frame].Formula;
-            cells.SortKey= row[this.SortKey].Formula;
-            cells.SubAddress= row[this.SubAddress].Formula;
+            cells.Address = row[this.Address];
+            cells.Description= row[this.Description];
+            cells.ExtraInfo= row[this.ExtraInfo];
+            cells.Frame= row[this.Frame];
+            cells.SortKey= row[this.SortKey];
+            cells.SubAddress= row[this.SubAddress];
             cells.NewWindow = row[this.NewWindow];
             cells.Default = row[this.Default];
             cells.Invisible = row[this.Invisible];

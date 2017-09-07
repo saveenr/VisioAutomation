@@ -119,7 +119,7 @@ namespace VisioAutomation.Shapes
                 throw new InternalAssertionException("Unexpected number of prop names");
             }
 
-            var shape_data = UserDefinedCellCells.GetCells(shape);
+            var shape_data = UserDefinedCellCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
             var list = new List<UserDefinedCellCells>(prop_count);
             for (int i = 0; i < prop_count; i++)
@@ -145,7 +145,7 @@ namespace VisioAutomation.Shapes
 
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var list_data = UserDefinedCellCells.GetCells(page,shapeids);
+            var list_data = UserDefinedCellCells.GetCells(page,shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
             var list_list = new List<List<UserDefinedCellCells>>(shapeids.Count);
 
