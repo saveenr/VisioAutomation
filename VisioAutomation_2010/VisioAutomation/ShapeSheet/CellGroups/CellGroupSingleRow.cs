@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             foreach (var pair in this.SrcValuePairs)
             {
-                writer.SetFormula(pair.Src, pair.Formula);
+                writer.SetFormula(pair.Src, pair.Value);
             }
         }
 
@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             foreach (var pair in this.SrcValuePairs)
             {
-                writer.SetFormula(shapeid, pair.Src, pair.Formula);
+                writer.SetFormula(shapeid, pair.Src, pair.Value);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             foreach (var pair in this.SrcValuePairs)
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
-                writer.SetFormula(shapeid, new_src, pair.Formula);
+                writer.SetFormula(shapeid, new_src, pair.Value);
             }
         }
 
@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             foreach (var pair in this.SrcValuePairs)
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
-                writer.SetFormula(new_src, pair.Formula);
+                writer.SetFormula(new_src, pair.Value);
             }
         }
     }
