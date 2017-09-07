@@ -69,32 +69,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public SectionsQueryOutput<ShapeSheet.CellData> GetFormulasAndResults(Microsoft.Office.Interop.Visio.Shape shape)
-        {
-            var surface = new SurfaceTarget(shape);
-            return this.GetFormulasAndResults(surface);
-        }
-
-        public SectionsQueryOutput<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface)
-        {
-            RestrictToShapesOnly(surface);
-
-            var shapes = new List<Microsoft.Office.Interop.Visio.Shape> { surface.Shape };
-
-            this.cache_section_info(shapes);
-            var srcstream = this._build_src_stream();
-            const object[] unitcodes = null;
-            var formulas = surface.GetFormulasU(srcstream);
-            var results = surface.GetResults<string>(srcstream, unitcodes);
-            var combined_data = QueryUtil._combine_formulas_and_results(formulas, results);
-
-            var shape_index = 0;
-            var sectioninfo = this.GetSectionInfoForShape(shape_index, _cache);
-            var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<CellData>(combined_data);
-            var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, seg_builder);
-            return output_for_shape;
-        }
-
         public SectionsQueryOutputList<string> GetFormulas(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
@@ -132,29 +106,6 @@ namespace VisioAutomation.ShapeSheet.Query
             var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<TResult>(values);
             var list = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
             return list;
-        }
-
-        public SectionsQueryOutputList<ShapeSheet.CellData> GetFormulasAndResults(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
-        {
-            var surface = new SurfaceTarget(page);
-            return this.GetFormulasAndResults(surface, shapeids);
-        }
-
-        public SectionsQueryOutputList<ShapeSheet.CellData> GetFormulasAndResults(SurfaceTarget surface, IList<int> shapeids)
-        {
-            var shapes = new List<Microsoft.Office.Interop.Visio.Shape>(shapeids.Count);
-            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
-
-            this.cache_section_info(shapes);
-            var srcstream = this._build_sidsrc_stream(shapeids);
-            const object[] unitcodes = null;
-            var results = surface.GetResults<string>(srcstream, unitcodes);
-            var formulas = surface.GetFormulasU(srcstream);
-            var combined_data = QueryUtil._combine_formulas_and_results(formulas, results);
-
-            var seg_builder = new VisioAutomation.Utilities.ArraySegmentReader<CellData>(combined_data);
-            var r = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
-            return r;
         }
 
         private SectionsQueryOutputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionInfoCache cache, VisioAutomation.Utilities.ArraySegmentReader<T> segReader)

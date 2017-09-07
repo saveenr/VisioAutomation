@@ -18,9 +18,20 @@ namespace VisioAutomation_Tests.Core.Page
             Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Value);
 
             // Double each side
-            var page_fmt_cells1 = new VA.Pages.PageFormatCells();
-            page_fmt_cells1.Width = "8.0 in";
-            page_fmt_cells1.Height = "6.0 in";
+            var page_fmt_cells1 = page_fmt_cells;
+            page_fmt_cells1.Width = "8";
+            page_fmt_cells1.Height = "6";
+            //page_fmt_cells1.DrawingResizeType = null;
+            page_fmt_cells1.DrawingScale = null; // this has a problem
+            // page_fmt_cells1.DrawingScaleType = null;
+            // page_fmt_cells1.InhibitSnap = null;
+            page_fmt_cells1.Scale = null;  // this has a problem
+            page_fmt_cells1.ShadowObliqueAngle = null; // this has a problem
+            page_fmt_cells1.ShadowOffsetX = null; // this has a problem
+            page_fmt_cells1.ShadowOffsetY = null;  // this has a problem
+            // page_fmt_cells1.ShadowScaleFactor = null;
+            // page_fmt_cells1.ShadowType= null;
+            // page_fmt_cells1.UIVisibility = null;
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             page_fmt_cells1.SetFormulas(writer);

@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet
     {
         public string Value { get; }
 
-        public CellData(string formula, string result)
+        public CellData(string formula)
             : this()
         {
             this.Value = formula;
@@ -14,36 +14,36 @@ namespace VisioAutomation.ShapeSheet
         {
             var formula_string = this.Value ?? "null";
             var culture = System.Globalization.CultureInfo.InvariantCulture;
-            var format = "(\"{0}\",{1})";
-            return string.Format(culture,format, formula_string, null);
+            var format = "\"{0}\"";
+            return string.Format(culture,format, formula_string);
         }
 
         public static implicit operator CellData(CellValueLiteral formula)
         {
-            return new CellData(formula.Value, default(string));
+            return new CellData(formula.Value);
         }
 
         public static implicit operator CellData(string formula)
         {
-            return new CellData(formula, default(string));
+            return new CellData(formula);
         }
 
         public static implicit operator CellData(int formula)
         {
             var cv = (CellValueLiteral) formula;
-            return new CellData(cv.Value, default(string));
+            return new CellData(cv.Value);
         }
 
         public static implicit operator CellData(double formula)
         {
             var cv = (CellValueLiteral)formula;
-            return new CellData(cv.Value, default(string));
+            return new CellData(cv.Value);
         }
 
         public static implicit operator CellData(bool formula)
         {
             var cv = (CellValueLiteral)formula;
-            return new CellData(cv.Value, default(string));
+            return new CellData(cv.Value);
         }
     }
 }
