@@ -18,11 +18,12 @@ namespace VisioAutomation_Tests.Core.Page
             Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Value);
 
             // Double each side
-            page_fmt_cells.Width = "8.0";
-            page_fmt_cells.Height = "6.0";
+            var page_fmt_cells1 = new VA.Pages.PageFormatCells();
+            page_fmt_cells1.Width = "8.0 in";
+            page_fmt_cells1.Height = "6.0 in";
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            page_fmt_cells.SetFormulas(writer);
+            page_fmt_cells1.SetFormulas(writer);
 
             writer.Commit(page1.PageSheet);
 
