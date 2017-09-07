@@ -4,15 +4,6 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-
-namespace VisioAutomation.ShapeSheet
-{
-    public enum CellValueType
-    {
-        Formula, Result
-    }
-}
-
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class ReaderSingleRow<TGroup> where TGroup : CellGroupSingleRow
