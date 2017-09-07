@@ -115,14 +115,19 @@ namespace VisioAutomation.Shapes
             }
 
             var shape_data = UserDefinedCellCells.GetFormulas(shape);
+            var list = create_list(prop_count, shape_data, prop_names);
 
+            return list;
+        }
+
+        private static List<UserDefinedCellCells> create_list(int prop_count, List<UserDefinedCellCells> shape_data, List<string> prop_names)
+        {
             var list = new List<UserDefinedCellCells>(prop_count);
             for (int i = 0; i < prop_count; i++)
             {
                 shape_data[i].Name = prop_names[i];
                 list.Add(shape_data[i]);
             }
-
             return list;
         }
 
@@ -146,13 +151,7 @@ namespace VisioAutomation.Shapes
             }
 
             var shape_data = UserDefinedCellCells.GetResults(shape);
-
-            var list = new List<UserDefinedCellCells>(prop_count);
-            for (int i = 0; i < prop_count; i++)
-            {
-                shape_data[i].Name = prop_names[i];
-                list.Add(shape_data[i]);
-            }
+            var list = create_list(prop_count, shape_data, prop_names);
 
             return list;
         }

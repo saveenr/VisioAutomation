@@ -96,10 +96,38 @@ namespace VisioAutomation.Shapes
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_dic = new List<CustomPropertyDictionary>(shapeids.Count);
             var customprops_per_shape = CustomPropertyCells.GetFormulas(page, shapeids);
-            
-            if (customprops_per_shape.Count!=shapeids.Count)
+            var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
+
+            return customprops_dic;
+        }
+
+        public static List<CustomPropertyDictionary> GetResults(IVisio.Page page, IList<IVisio.Shape> shapes)
+        {
+            if (page == null)
+            {
+                throw new ArgumentNullException(nameof(page));
+            }
+
+            if (shapes == null)
+            {
+                throw new ArgumentNullException(nameof(shapes));
+            }
+
+            var shapeids = shapes.Select(s => s.ID).ToList();
+            var customprops_per_shape = CustomPropertyCells.GetResults(page, shapeids);
+            var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
+
+            return customprops_dic;
+        }
+
+
+        private static List<CustomPropertyDictionary> create_dic(IList<IVisio.Shape> shapes, List<int> shapeids, List<List<CustomPropertyCells>> customprops_per_shape)
+        {
+            var customprops_dic = new List<CustomPropertyDictionary>(shapeids.Count);
+
+
+            if (customprops_per_shape.Count != shapeids.Count)
             {
                 throw new InternalAssertionException();
             }
@@ -116,8 +144,8 @@ namespace VisioAutomation.Shapes
                 }
 
                 var dic = new CustomPropertyDictionary(prop_names.Count);
-                
-                for (int prop_index=0; prop_index< prop_names.Count(); prop_index++)
+
+                for (int prop_index = 0; prop_index < prop_names.Count(); prop_index++)
                 {
                     string prop_name = prop_names[prop_index];
                     dic[prop_name] = customprops_for_shape[prop_index];
@@ -125,7 +153,6 @@ namespace VisioAutomation.Shapes
 
                 customprops_dic.Add(dic);
             }
-
             return customprops_dic;
         }
 
