@@ -32,10 +32,16 @@ namespace VisioAutomation_Tests.Core.Shapes
             xg1.PinX = 1.0;
             xg1.PinY = 2.0;
 
-            var props = GetCellDataProps(xg1.GetType());
+            var xg1_type = xg1.GetType();
+            var props = GetCellDataProps(xg1_type);
 
-            var values = props.Select(p => p.GetValue(xg1,null)).ToList();
+            var cellvalues = props.Select(p => (VisioAutomation.ShapeSheet.CellData)p.GetValue(xg1,null)).ToList();
+            var cellvalues_formulas = cellvalues.Select(p=>p.Formula).ToList();
 
+            var cellnames = props.Select(p => p.Name).ToList();
+
+            var f2 = xg1.SrcFormulaPairs.Select(i => i.Formula).ToList();
+            
             int x = 1;
         }
 
@@ -45,5 +51,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var cellprops = props.Where(p => p.PropertyType == typeof(VisioAutomation.ShapeSheet.CellData)).ToList();
             return cellprops;
         }
+
+
     }
 }
