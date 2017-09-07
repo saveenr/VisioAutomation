@@ -48,7 +48,7 @@ namespace VisioAutomation_Tests.Core.Connections
             Assert.AreEqual("0.0000 in.", cp_r0.DirY.Value);
             Assert.AreEqual("0", cp_r0.Type.Value);
             Assert.AreEqual("1.0000 in.", cp_r0.X.Value);
-            Assert.AreEqual("0.0000 in.", cp_f0.Y.Value);
+            Assert.AreEqual("0.0000 in.", cp_r0.Y.Value);
 
             var cp_f1 = controlpoints_f[1];
             var cp_r1 = controlpoints_r[1];
