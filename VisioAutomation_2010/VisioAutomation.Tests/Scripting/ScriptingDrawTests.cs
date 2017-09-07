@@ -492,9 +492,10 @@ namespace VisioAutomation_Tests.Scripting
 
             // Verify that we did indeed drop a container
 
-            var results = VisioAutomation.Shapes.UserDefinedCellHelper.GetResults(dropped_container);
-            var first = results.Where(s => s.Name == "msvStructureType").First();
-            Assert.AreEqual("Container", first.Cells.Value.Value);
+            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(dropped_container, VA.ShapeSheet.CellValueType.Result);
+            Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
+            var prop = results_dic["msvStructureType"];
+            Assert.AreEqual("Container", prop.Value.Value);
 
             // cleanup
             client.Document.Close(true);
@@ -534,9 +535,11 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(2, shapes.Count);
 
             // Verify that we did indeed drop a container           
-            var results = VisioAutomation.Shapes.UserDefinedCellHelper.GetResults(dropped_container);
-            var first = results.Where(s => s.Name == "msvStructureType").First();
-            Assert.AreEqual("Container", first.Cells.Value.Value);
+            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(dropped_container, VA.ShapeSheet.CellValueType.Result);
+            Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
+            var prop = results_dic["msvStructureType"];
+            Assert.AreEqual("Container", prop.Value.Value);
+
 
 
             // cleanup

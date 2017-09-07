@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -28,35 +29,33 @@ namespace VisioAutomation_Tests.Core.Shapes
             // Check that non-existent properties can't be found
             Assert.AreEqual(false, CustomPropertyHelper.Contains(s1, "FOOX"));
 
-            var udcs = UserDefinedCellHelper.GetFormulas(s1);
+
+
+            var udcs = UserDefinedCellHelper.GetDictionary(s1, CellValueType.Formula);
             Assert.AreEqual(1,udcs.Count);
-            Assert.AreEqual("FOO1",udcs[0].Name);
-            Assert.AreEqual("\"BAR\"", udcs[0].Cells.Value.Value);
-            Assert.AreEqual("\"\"", udcs[0].Cells.Prompt.Value);
+            Assert.AreEqual("\"BAR\"", udcs["FOO1"].Value.Value);
+            Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set the value without affecting the prompt
             UserDefinedCellHelper.Set(s1,"FOO1","BEER",null);
-            udcs = UserDefinedCellHelper.GetFormulas(s1);
+            udcs = UserDefinedCellHelper.GetDictionary(s1, CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
-            Assert.AreEqual("FOO1", udcs[0].Name);
-            Assert.AreEqual("\"BEER\"", udcs[0].Cells.Value.Value);
-            Assert.AreEqual("\"\"", udcs[0].Cells.Prompt.Value);
+            Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
+            Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set passing in nulls changes nothing
             UserDefinedCellHelper.Set(s1, "FOO1", null, null);
-            udcs = UserDefinedCellHelper.GetFormulas(s1);
+            udcs = UserDefinedCellHelper.GetDictionary(s1, CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
-            Assert.AreEqual("FOO1", udcs[0].Name);
-            Assert.AreEqual("\"BEER\"", udcs[0].Cells.Value.Value);
-            Assert.AreEqual("\"\"", udcs[0].Cells.Prompt.Value);
+            Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
+            Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set the prompt without affecting the value
             UserDefinedCellHelper.Set(s1, "FOO1", null, "Prompt1");
-            udcs = UserDefinedCellHelper.GetFormulas(s1);
+            udcs = UserDefinedCellHelper.GetDictionary(s1, CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
-            Assert.AreEqual("FOO1", udcs[0].Name);
-            Assert.AreEqual("\"BEER\"", udcs[0].Cells.Value.Value);
-            Assert.AreEqual("\"Prompt1\"", udcs[0].Cells.Prompt.Value);
+            Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
+            Assert.AreEqual("\"Prompt1\"", udcs["FOO1"].Prompt.Value);
 
             // Delete that custom property
             UserDefinedCellHelper.Delete(s1, "FOO1");
@@ -277,36 +276,26 @@ namespace VisioAutomation_Tests.Core.Shapes
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
-            var p1 = UserDefinedCellHelper.GetFormulas(s1);
+            var p1 = UserDefinedCellHelper.GetDictionary(s1, CellValueType.Formula);
             Assert.AreEqual(0, p1.Count);
 
             UserDefinedCellHelper.Set(s1, "FOO1", "1", null);
             UserDefinedCellHelper.Set(s1, "FOO2", "2", null);
             UserDefinedCellHelper.Set(s1, "FOO3", "3\"4", null);
 
-            var p2 = UserDefinedCellHelper.GetFormulas(s1);
+            var p2 = UserDefinedCellHelper.GetDictionary(s1, CellValueType.Formula);
             Assert.AreEqual(3, p2.Count);
             
-            Assert.AreEqual("FOO1",p2[0].Name);
-            Assert.AreEqual("\"1\"", p2[0].Cells.Value.Value);
+            Assert.AreEqual("\"1\"", p2["FOO1"].Value.Value);
+            Assert.AreEqual("\"2\"", p2["FOO2"].Value.Value);
+            Assert.AreEqual("\"3\"\"4\"", p2["FOO3"].Value.Value);
+            
+            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            Assert.AreEqual(3, results_dic.Count);
 
-            Assert.AreEqual("FOO2", p2[1].Name);
-            Assert.AreEqual("\"2\"", p2[1].Cells.Value.Value);
-
-            Assert.AreEqual("FOO3", p2[2].Name);
-            Assert.AreEqual("\"3\"\"4\"", p2[2].Cells.Value.Value);
-
-            var p3 = UserDefinedCellHelper.GetResults(s1);
-            Assert.AreEqual(3, p3.Count);
-
-            Assert.AreEqual("FOO1", p3[0].Name);
-            Assert.AreEqual("1", p3[0].Cells.Value.Value);
-
-            Assert.AreEqual("FOO2", p3[1].Name);
-            Assert.AreEqual("2", p3[1].Cells.Value.Value);
-
-            Assert.AreEqual("FOO3", p3[2].Name);
-            Assert.AreEqual("3\"4", p3[2].Cells.Value.Value);
+            Assert.AreEqual("1", results_dic["FOO1"].Value.Value);
+            Assert.AreEqual("2", results_dic["FOO2"].Value.Value);
+            Assert.AreEqual("3\"4", results_dic["FOO3"].Value.Value);
 
             page1.Delete(0);
         }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -88,14 +89,8 @@ namespace VisioAutomation.Shapes
             writer.Commit(shape);
         }
 
-        /// <summary>
-        /// Gets all the user properties defined on a shape
-        /// </summary>
-        /// <remarks>
-        /// If there are no user properties then null will be returned</remarks>
-        /// <param name="shape"></param>
-        /// <returns>A list of user  properties</returns>
-        public static List<UserDefinedCell> GetFormulas(IVisio.Shape shape)
+
+        public static Dictionary<string, UserDefinedCellCells> GetDictionary(IVisio.Shape shape, ShapeSheet.CellValueType cvt)
         {
             if (shape == null)
             {
@@ -105,7 +100,7 @@ namespace VisioAutomation.Shapes
             var prop_count = UserDefinedCellHelper.GetCount(shape);
             if (prop_count < 1)
             {
-                return new List<UserDefinedCell>(0);
+                return new Dictionary<string, UserDefinedCellCells>(0);
             }
 
             var prop_names = UserDefinedCellHelper.GetNames(shape);
@@ -114,46 +109,21 @@ namespace VisioAutomation.Shapes
                 throw new InternalAssertionException("Unexpected number of prop names");
             }
 
-            var shape_data = UserDefinedCellCells.GetFormulas(shape);
-            var list = create_list(prop_count, shape_data, prop_names);
-
-            return list;
-        }
-
-        private static List<UserDefinedCell> create_list(int prop_count, List<UserDefinedCellCells> shape_data, List<string> prop_names)
-        {
-            var list = new List<UserDefinedCell>(prop_count);
+            List<UserDefinedCellCells> shape_data;
+            if (cvt == CellValueType.Formula)
+            {
+                shape_data = UserDefinedCellCells.GetFormulas(shape);
+            }
+            else
+            {
+                shape_data = UserDefinedCellCells.GetResults(shape);
+            }
+            var dic = new Dictionary<string,UserDefinedCellCells>(prop_count);
             for (int i = 0; i < prop_count; i++)
             {
-                var c = new UserDefinedCell(prop_names[i],shape_data[i]);
-                list.Add(c);
+                dic[prop_names[i]] = shape_data[i];
             }
-            return list;
-        }
-
-        public static List<UserDefinedCell> GetResults(IVisio.Shape shape)
-        {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException(nameof(shape));
-            }
-
-            var prop_count = UserDefinedCellHelper.GetCount(shape);
-            if (prop_count < 1)
-            {
-                return new List<UserDefinedCell>(0);
-            }
-
-            var prop_names = UserDefinedCellHelper.GetNames(shape);
-            if (prop_names.Count != prop_count)
-            {
-                throw new InternalAssertionException("Unexpected number of prop names");
-            }
-
-            var shape_data = UserDefinedCellCells.GetResults(shape);
-            var list = create_list(prop_count, shape_data, prop_names);
-
-            return list;
+            return dic;
         }
 
         public static List<List<UserDefinedCell>> GetFormulas(IVisio.Page page, IList<IVisio.Shape> shapes)
