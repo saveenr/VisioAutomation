@@ -71,9 +71,9 @@ namespace VisioAutomation_Tests.Models
             Assert.IsNotNull(n0.VisioShape);
             var props_dic = CustomPropertyHelper.Get(n0.VisioShape);
             Assert.IsTrue(props_dic.Count>=3);
-            Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Formula);
-            Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Formula);
-            Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Formula);
+            Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Value);
+            Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Value);
+            Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Value);
 
             page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 

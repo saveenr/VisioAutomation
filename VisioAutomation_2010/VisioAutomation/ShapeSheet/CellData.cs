@@ -2,17 +2,17 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct CellData
     {
-        public string Formula { get; }
+        public string Value { get; }
 
         public CellData(string formula, string result)
             : this()
         {
-            this.Formula = formula;
+            this.Value = formula;
         }
 
         public override string ToString()
         {
-            var formula_string = this.Formula ?? "null";
+            var formula_string = this.Value ?? "null";
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             var format = "(\"{0}\",{1})";
             return string.Format(culture,format, formula_string, null);

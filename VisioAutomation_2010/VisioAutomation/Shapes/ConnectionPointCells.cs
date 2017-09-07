@@ -16,11 +16,11 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointX, this.X.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointY, this.Y.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointDirX, this.DirX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointDirY, this.DirY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointType, this.Type.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointX, this.X.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointY, this.Y.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointDirX, this.DirX.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointDirY, this.DirY.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.ConnectionPointType, this.Type.Value);
             }
         }
 

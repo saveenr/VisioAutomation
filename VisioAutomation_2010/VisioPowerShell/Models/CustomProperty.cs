@@ -23,16 +23,16 @@ namespace VisioPowerShell.Models
         {
             this.ShapeID = id;
             this.Name = propname;
-            this.Value = propcells.Value.Formula;
-            this.Format = propcells.Format.Formula;
-            this.Invisible = propcells.Invisible.Formula;
-            this.Label = propcells.Label.Formula;
-            this.LangId = propcells.LangID.Formula;
-            this.Prompt = propcells.Prompt.Formula;
-            this.SortKey = propcells.SortKey.Formula;
-            this.Type = propcells.Type.Formula;
-            this.Ask = propcells.Ask.Formula;
-            this.Calendar = propcells.Calendar.Formula;
+            this.Value = propcells.Value.Value;
+            this.Format = propcells.Format.Value;
+            this.Invisible = propcells.Invisible.Value;
+            this.Label = propcells.Label.Value;
+            this.LangId = propcells.LangID.Value;
+            this.Prompt = propcells.Prompt.Value;
+            this.SortKey = propcells.SortKey.Value;
+            this.Type = propcells.Type.Value;
+            this.Ask = propcells.Ask.Value;
+            this.Calendar = propcells.Calendar.Value;
         }
     }
 }

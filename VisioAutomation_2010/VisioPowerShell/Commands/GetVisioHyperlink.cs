@@ -35,15 +35,15 @@ namespace VisioPowerShell.Commands
 
                     hl_formulas.ShapeID = shapeid;
 
-                    hl_formulas.Address = hyperlink.Address.Formula;
-                    hl_formulas.Default = hyperlink.Default.Formula;
-                    hl_formulas.Description = hyperlink.Description.Formula;
-                    hl_formulas.ExtraInfo = hyperlink.ExtraInfo.Formula;
-                    hl_formulas.Frame = hyperlink.Frame.Formula;
-                    hl_formulas.Invisible = hyperlink.Invisible.Formula;
-                    hl_formulas.NewWindow = hyperlink.NewWindow.Formula;
-                    hl_formulas.SortKey = hyperlink.SortKey.Formula;
-                    hl_formulas.SubAddress = hyperlink.SubAddress.Formula;
+                    hl_formulas.Address = hyperlink.Address.Value;
+                    hl_formulas.Default = hyperlink.Default.Value;
+                    hl_formulas.Description = hyperlink.Description.Value;
+                    hl_formulas.ExtraInfo = hyperlink.ExtraInfo.Value;
+                    hl_formulas.Frame = hyperlink.Frame.Value;
+                    hl_formulas.Invisible = hyperlink.Invisible.Value;
+                    hl_formulas.NewWindow = hyperlink.NewWindow.Value;
+                    hl_formulas.SortKey = hyperlink.SortKey.Value;
+                    hl_formulas.SubAddress = hyperlink.SubAddress.Value;
 
                     this.WriteObject(hl_formulas);
                 }

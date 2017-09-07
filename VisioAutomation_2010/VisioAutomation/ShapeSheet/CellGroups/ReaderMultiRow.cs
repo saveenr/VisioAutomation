@@ -49,7 +49,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             else
             {
                 data_for_shape = query.GetResults<string>(shape);
-
             }
             var first_section = data_for_shape.Sections[0];
             var cellgroups = this.__SectionRowsToCellGroups(first_section);

@@ -46,7 +46,7 @@ namespace VisioAutomation_Tests.Dom
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[0].Style.Formula);
+            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[0].Style.Value);
 
             page1.Delete(0);
         }
@@ -62,7 +62,7 @@ namespace VisioAutomation_Tests.Dom
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[0].Style.Formula);
+            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[0].Style.Value);
 
             page1.Delete(0);
         }
@@ -80,8 +80,8 @@ namespace VisioAutomation_Tests.Dom
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual("0", charfmt[0].Style.Formula);
-            Assert.AreEqual(impact.ID.ToString(), charfmt[0].Font.Formula);
+            Assert.AreEqual("0", charfmt[0].Style.Value);
+            Assert.AreEqual(impact.ID.ToString(), charfmt[0].Font.Value);
 
             page1.Delete(0);
         }
@@ -122,19 +122,19 @@ namespace VisioAutomation_Tests.Dom
             Assert.AreEqual(5, charfmt.Count);
 
             // check the fonts
-            Assert.AreEqual(segoeui.ID.ToString(), charfmt[0].Font.Formula);
-            Assert.AreEqual(impact.ID.ToString(), charfmt[1].Font.Formula);
-            Assert.AreEqual(couriernew.ID.ToString(), charfmt[2].Font.Formula);
-            Assert.AreEqual(georgia.ID.ToString(), charfmt[3].Font.Formula);
-            Assert.AreEqual(segoeui.ID.ToString(), charfmt[4].Font.Formula);
+            Assert.AreEqual(segoeui.ID.ToString(), charfmt[0].Font.Value);
+            Assert.AreEqual(impact.ID.ToString(), charfmt[1].Font.Value);
+            Assert.AreEqual(couriernew.ID.ToString(), charfmt[2].Font.Value);
+            Assert.AreEqual(georgia.ID.ToString(), charfmt[3].Font.Value);
+            Assert.AreEqual(segoeui.ID.ToString(), charfmt[4].Font.Value);
 
 
             // check the styles
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.None).ToString(), charfmt[0].Style.Formula);
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[1].Style.Formula);
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[2].Style.Formula);
-            Assert.AreEqual(((int)(VA.Models.Text.CharStyle.Italic | VA.Models.Text.CharStyle.Bold)).ToString(), charfmt[3].Style.Formula);
-            Assert.AreEqual(((int)(VA.Models.Text.CharStyle.None)).ToString(), charfmt[4].Style.Formula);
+            Assert.AreEqual(((int)VA.Models.Text.CharStyle.None).ToString(), charfmt[0].Style.Value);
+            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[1].Style.Value);
+            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[2].Style.Value);
+            Assert.AreEqual(((int)(VA.Models.Text.CharStyle.Italic | VA.Models.Text.CharStyle.Bold)).ToString(), charfmt[3].Style.Value);
+            Assert.AreEqual(((int)(VA.Models.Text.CharStyle.None)).ToString(), charfmt[4].Style.Value);
 
             // check the text run content
             var charruns = textfmt.CharacterTextRuns;
@@ -174,7 +174,7 @@ namespace VisioAutomation_Tests.Dom
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual(((int)AlignmentHorizontal.Left).ToString(), parafmt[0].HorizontalAlign.Formula);
+            Assert.AreEqual(((int)AlignmentHorizontal.Left).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }
@@ -191,7 +191,7 @@ namespace VisioAutomation_Tests.Dom
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual(((int)AlignmentHorizontal.Center).ToString(), parafmt[0].HorizontalAlign.Formula);
+            Assert.AreEqual(((int)AlignmentHorizontal.Center).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }
@@ -208,7 +208,7 @@ namespace VisioAutomation_Tests.Dom
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual(((int)AlignmentHorizontal.Right).ToString(), parafmt[0].HorizontalAlign.Formula);
+            Assert.AreEqual(((int)AlignmentHorizontal.Right).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }

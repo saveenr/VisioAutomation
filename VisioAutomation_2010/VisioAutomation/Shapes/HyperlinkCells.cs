@@ -21,15 +21,15 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkAddress, this.Address.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkDescription, this.Description.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkFrame, this.Frame.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkSortKey, this.SortKey.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkSubAddress, this.SubAddress.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkNewWindow, this.NewWindow.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkDefault, this.Default.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkInvisible, this.Invisible.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkAddress, this.Address.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkDescription, this.Description.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkFrame, this.Frame.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkSortKey, this.SortKey.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkSubAddress, this.SubAddress.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkNewWindow, this.NewWindow.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkDefault, this.Default.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.HyperlinkInvisible, this.Invisible.Value);
             }
         }
 

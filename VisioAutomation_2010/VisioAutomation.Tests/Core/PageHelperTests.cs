@@ -14,8 +14,8 @@ namespace VisioAutomation_Tests.Core.Page
             var size = new VA.Geometry.Size(4, 3);
             var page1 = this.GetNewPage(size);
             var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, VisioAutomation.ShapeSheet.CellValueType.Result);
-            Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Formula);
-            Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Formula);
+            Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Value);
+            Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Value);
 
             // Double each side
             page_fmt_cells.Width = "8.0";
@@ -27,8 +27,8 @@ namespace VisioAutomation_Tests.Core.Page
             writer.Commit(page1.PageSheet);
 
             var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, VisioAutomation.ShapeSheet.CellValueType.Result);
-            Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Formula);
-            Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Formula);
+            Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Value);
+            Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Value);
             page1.Delete(0);
         }
 

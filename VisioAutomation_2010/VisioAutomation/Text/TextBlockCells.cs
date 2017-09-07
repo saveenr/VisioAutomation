@@ -20,15 +20,15 @@ namespace VisioAutomation.Text
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBottomMargin, this.BottomMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockLeftMargin, this.LeftMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockRightMargin, this.RightMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockTopMargin, this.TopMargin.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackground, this.TextBackground.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBackgroundTransparency.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockDirection, this.TextDirection.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign.Formula);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBottomMargin, this.BottomMargin.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockLeftMargin, this.LeftMargin.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockRightMargin, this.RightMargin.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockTopMargin, this.TopMargin.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackground, this.TextBackground.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBackgroundTransparency.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockDirection, this.TextDirection.Value);
+                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign.Value);
             }
         }
 

@@ -29,10 +29,10 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // verify that the controls were set propery
             Assert.AreEqual(2, controls.Count);
-            Assert.AreEqual("Width*0", controls[0].X.Formula);
-            Assert.AreEqual("Controls.Row_1", controls[0].XDynamics.Formula);
-            Assert.AreEqual("Width*0", controls[1].X.Formula);
-            Assert.AreEqual("Controls.Row_2", controls[1].XDynamics.Formula);
+            Assert.AreEqual("Width*0", controls[0].X.Value);
+            Assert.AreEqual("Controls.Row_1", controls[0].XDynamics.Value);
+            Assert.AreEqual("Width*0", controls[1].X.Value);
+            Assert.AreEqual("Controls.Row_2", controls[1].XDynamics.Value);
 
             // Delete both controls
             ControlHelper.Delete(s1, 0);

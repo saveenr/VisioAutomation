@@ -36,7 +36,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var props = GetCellDataProps(xg1_type);
 
             var cellvalues = props.Select(p => (VisioAutomation.ShapeSheet.CellData)p.GetValue(xg1,null)).ToList();
-            var cellvalues_formulas = cellvalues.Select(p=>p.Formula).ToList();
+            var cellvalues_formulas = cellvalues.Select(p=>p.Value).ToList();
 
             var cellnames = props.Select(p => p.Name).ToList();
 

@@ -32,33 +32,37 @@ namespace VisioAutomation_Tests.Core.Connections
             ConnectionPointHelper.Add(s1, cpd2);
             Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
 
-            var controlpoints = ConnectionPointCells.GetCells(s1, VisioAutomation.ShapeSheet.CellValueType.Formula);
-            Assert.AreEqual(2, controlpoints.Count);
-            var cp_0 = controlpoints[0];
-            Assert.AreEqual("0 in", cp_0.DirX.Formula);
-            Assert.AreEqual("0 in", cp_0.DirY.Formula);
-            Assert.AreEqual("0", cp_0.Type.Formula);
-            Assert.AreEqual("Width*0.25", cp_0.X.Formula);
-            Assert.AreEqual("Height*0", cp_0.Y.Formula);
+            var controlpoints_f = ConnectionPointCells.GetCells(s1, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var controlpoints_r = ConnectionPointCells.GetCells(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            Assert.AreEqual(2, controlpoints_f.Count);
+            Assert.AreEqual(2, controlpoints_r.Count);
+            var cp_f0 = controlpoints_f[0];
+            var cp_r0 = controlpoints_r[0];
+            Assert.AreEqual("0 in", cp_f0.DirX.Value);
+            Assert.AreEqual("0 in", cp_f0.DirY.Value);
+            Assert.AreEqual("0", cp_f0.Type.Value);
+            Assert.AreEqual("Width*0.25", cp_f0.X.Value);
+            Assert.AreEqual("Height*0", cp_f0.Y.Value);
 
-            Assert.AreEqual("0.0000 in.", cp_0.DirX.Formula);
-            Assert.AreEqual("0.0000 in.", cp_0.DirY.Formula);
-            Assert.AreEqual("0", cp_0.Type.Formula);
-            Assert.AreEqual("1.0000 in.", cp_0.X.Formula);
-            Assert.AreEqual("0.0000 in.", cp_0.Y.Formula);
+            Assert.AreEqual("0.0000 in.", cp_r0.DirX.Value);
+            Assert.AreEqual("0.0000 in.", cp_r0.DirY.Value);
+            Assert.AreEqual("0", cp_r0.Type.Value);
+            Assert.AreEqual("1.0000 in.", cp_r0.X.Value);
+            Assert.AreEqual("0.0000 in.", cp_f0.Y.Value);
 
-            var cp_1 = controlpoints[1];
-            Assert.AreEqual("0 in", cp_1.DirX.Formula);
-            Assert.AreEqual("0 in", cp_1.DirY.Formula);
-            Assert.AreEqual("0", cp_1.Type.Formula);
-            Assert.AreEqual("Width*0.75", cp_1.X.Formula);
-            Assert.AreEqual("Height*0", cp_1.Y.Formula);
+            var cp_f1 = controlpoints_f[1];
+            var cp_r1 = controlpoints_r[1];
+            Assert.AreEqual("0 in", cp_f1.DirX.Value);
+            Assert.AreEqual("0 in", cp_f1.DirY.Value);
+            Assert.AreEqual("0", cp_f1.Type.Value);
+            Assert.AreEqual("Width*0.75", cp_f1.X.Value);
+            Assert.AreEqual("Height*0", cp_f1.Y.Value);
 
-            Assert.AreEqual("0.0000 in.", cp_1.DirX.Formula);
-            Assert.AreEqual("0.0000 in.", cp_1.DirY.Formula);
-            Assert.AreEqual("0", cp_1.Type.Formula);
-            Assert.AreEqual("3.0000 in.", cp_1.X.Formula);
-            Assert.AreEqual("0.0000 in.", cp_1.Y.Formula);
+            Assert.AreEqual("0.0000 in.", cp_r1.DirX.Value);
+            Assert.AreEqual("0.0000 in.", cp_r1.DirY.Value);
+            Assert.AreEqual("0", cp_r1.Type.Value);
+            Assert.AreEqual("3.0000 in.", cp_r1.X.Value);
+            Assert.AreEqual("0.0000 in.", cp_r1.Y.Value);
 
 
             ConnectionPointHelper.Delete(s1, 1);

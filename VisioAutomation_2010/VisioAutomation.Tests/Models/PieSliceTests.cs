@@ -88,10 +88,10 @@ namespace VisioAutomation_Tests.Models
             var shapeids = shapes.Select(s => s.ID).ToList();
             var xfrms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(page, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
-            Assert.AreEqual("4.25 in", xfrms[0].PinX.Formula);
-            Assert.AreEqual("5.5 in", xfrms[0].PinY.Formula);
-            Assert.AreEqual("4 in", xfrms[1].PinX.Formula);
-            Assert.AreEqual("4.9330127018922 in", xfrms[1].PinY.Formula);
+            Assert.AreEqual("4.25 in", xfrms[0].PinX.Value);
+            Assert.AreEqual("5.5 in", xfrms[0].PinY.Value);
+            Assert.AreEqual("4 in", xfrms[1].PinX.Value);
+            Assert.AreEqual("4.9330127018922 in", xfrms[1].PinY.Value);
 
             doc.Close(true);
         }
