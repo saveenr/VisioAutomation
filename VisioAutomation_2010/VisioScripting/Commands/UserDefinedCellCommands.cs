@@ -14,12 +14,12 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, IList<UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<UserDefinedCell>> Get(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var prop_dic = new Dictionary<IVisio.Shape, IList<UserDefinedCellCells>>();
+            var prop_dic = new Dictionary<IVisio.Shape, IList<UserDefinedCell>>();
 
             targets = targets.ResolveShapes(this._client);
 
@@ -96,7 +96,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Set(VisioScripting.Models.TargetShapes targets, UserDefinedCellCells userdefinedcell)
+        public void Set(VisioScripting.Models.TargetShapes targets, UserDefinedCell userdefinedcell)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -112,7 +112,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Value, userdefinedcell.Prompt.Value);
+                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells.Value.Value, userdefinedcell.Cells.Prompt.Value);
                 }
             }
         }

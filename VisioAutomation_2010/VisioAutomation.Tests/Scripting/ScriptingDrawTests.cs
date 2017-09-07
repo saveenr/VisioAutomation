@@ -495,7 +495,7 @@ namespace VisioAutomation_Tests.Scripting
                 VisioAutomation.Shapes.UserDefinedCellHelper
                     .GetResults(dropped_container)
                     .First(s => s.Name == "msvStructureType")
-                    .Value.Value);
+                    .Cells.Value.Value);
 
             // cleanup
             client.Document.Close(true);
@@ -539,7 +539,7 @@ namespace VisioAutomation_Tests.Scripting
                 VisioAutomation.Shapes.UserDefinedCellHelper
                     .GetResults(dropped_container)
                     .First(s => s.Name == "msvStructureType")
-                    .Value.Value);
+                    .Cells.Value.Value);
 
             // cleanup
             client.Document.Close(true);

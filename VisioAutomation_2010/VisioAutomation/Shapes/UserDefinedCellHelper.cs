@@ -95,7 +95,7 @@ namespace VisioAutomation.Shapes
         /// If there are no user properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of user  properties</returns>
-        public static List<UserDefinedCellCells> GetFormulas(IVisio.Shape shape)
+        public static List<UserDefinedCell> GetFormulas(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -105,7 +105,7 @@ namespace VisioAutomation.Shapes
             var prop_count = UserDefinedCellHelper.GetCount(shape);
             if (prop_count < 1)
             {
-                return new List<UserDefinedCellCells>(0);
+                return new List<UserDefinedCell>(0);
             }
 
             var prop_names = UserDefinedCellHelper.GetNames(shape);
@@ -120,18 +120,18 @@ namespace VisioAutomation.Shapes
             return list;
         }
 
-        private static List<UserDefinedCellCells> create_list(int prop_count, List<UserDefinedCellCells> shape_data, List<string> prop_names)
+        private static List<UserDefinedCell> create_list(int prop_count, List<UserDefinedCellCells> shape_data, List<string> prop_names)
         {
-            var list = new List<UserDefinedCellCells>(prop_count);
+            var list = new List<UserDefinedCell>(prop_count);
             for (int i = 0; i < prop_count; i++)
             {
-                shape_data[i].Name = prop_names[i];
-                list.Add(shape_data[i]);
+                var c = new UserDefinedCell(prop_names[i],shape_data[i]);
+                list.Add(c);
             }
             return list;
         }
 
-        public static List<UserDefinedCellCells> GetResults(IVisio.Shape shape)
+        public static List<UserDefinedCell> GetResults(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -141,7 +141,7 @@ namespace VisioAutomation.Shapes
             var prop_count = UserDefinedCellHelper.GetCount(shape);
             if (prop_count < 1)
             {
-                return new List<UserDefinedCellCells>(0);
+                return new List<UserDefinedCell>(0);
             }
 
             var prop_names = UserDefinedCellHelper.GetNames(shape);
@@ -156,7 +156,7 @@ namespace VisioAutomation.Shapes
             return list;
         }
 
-        public static List<List<UserDefinedCellCells>> GetFormulas(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static List<List<UserDefinedCell>> GetFormulas(IVisio.Page page, IList<IVisio.Shape> shapes)
         {
             if (page == null)
             {
@@ -172,7 +172,7 @@ namespace VisioAutomation.Shapes
 
             var list_data = UserDefinedCellCells.GetFormulas(page,shapeids);
 
-            var list_list = new List<List<UserDefinedCellCells>>(shapeids.Count);
+            var list_list = new List<List<UserDefinedCell>>(shapeids.Count);
 
             for (int i = 0; i < shapes.Count; i++)
             {
@@ -180,12 +180,12 @@ namespace VisioAutomation.Shapes
                 var shape_data = list_data[i];
                 var prop_names = UserDefinedCellHelper.GetNames(shape);
 
-                var list = new List<UserDefinedCellCells>(shape_data.Count);
+                var list = new List<UserDefinedCell>(shape_data.Count);
                 list_list.Add(list);
                 for (int j = 0; j < shape_data.Count ; j++)
                 {
-                    shape_data[j].Name = prop_names[j];
-                    list.Add(shape_data[j]);
+                    var c = new UserDefinedCell(prop_names[j], shape_data[j]);
+                    list.Add(c);
                 }
             }
 
