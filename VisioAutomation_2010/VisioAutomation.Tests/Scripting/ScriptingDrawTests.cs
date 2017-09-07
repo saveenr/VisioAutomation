@@ -493,7 +493,7 @@ namespace VisioAutomation_Tests.Scripting
             // Verify that we did indeed drop a container
             Assert.AreEqual("Container",
                 VisioAutomation.Shapes.UserDefinedCellHelper
-                    .Get(dropped_container)
+                    .Get(dropped_container, VisioAutomation.ShapeSheet.CellValueType.Result)
                     .First(s => s.Name == "msvStructureType")
                     .Value.Value);
 
@@ -537,7 +537,7 @@ namespace VisioAutomation_Tests.Scripting
             // Verify that we did indeed drop a container
             Assert.AreEqual("Container",
                 VisioAutomation.Shapes.UserDefinedCellHelper
-                    .Get(dropped_container)
+                    .Get(dropped_container, VisioAutomation.ShapeSheet.CellValueType.Result)
                     .First(s => s.Name == "msvStructureType")
                     .Value.Value);
 

@@ -100,7 +100,7 @@ namespace VisioAutomation.Shapes
         /// If there are no user properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of user  properties</returns>
-        public static List<UserDefinedCellCells> Get(IVisio.Shape shape)
+        public static List<UserDefinedCellCells> Get(IVisio.Shape shape, VisioAutomation.ShapeSheet.CellValueType cvt)
         {
             if (shape == null)
             {
@@ -119,7 +119,7 @@ namespace VisioAutomation.Shapes
                 throw new InternalAssertionException("Unexpected number of prop names");
             }
 
-            var shape_data = UserDefinedCellCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var shape_data = UserDefinedCellCells.GetCells(shape, cvt);
 
             var list = new List<UserDefinedCellCells>(prop_count);
             for (int i = 0; i < prop_count; i++)
