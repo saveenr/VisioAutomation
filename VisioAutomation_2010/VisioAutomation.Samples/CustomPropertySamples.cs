@@ -25,7 +25,7 @@ namespace VisioAutomationSamples
             CustomPropertyHelper.Set(s1, "FOO3", formula);
 
             // retrieve all the properties
-            var props = CustomPropertyHelper.Get(s1);
+            var props = CustomPropertyHelper.GetFormulas(s1);
         }
     }
 }

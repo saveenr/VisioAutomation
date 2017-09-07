@@ -326,12 +326,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Try to retrieve the control cells rows for each shape, every shape should return zero rows
             foreach (var s in shapes)
             {
-                var r1 = ControlCells.GetCells(s, VisioAutomation.ShapeSheet.CellValueType.Formula);
+                var r1 = ControlCells.GetFormulas(s);
                 Assert.AreEqual(0,r1.Count);
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
-            var r2 = ControlCells.GetCells(page1, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var r2 = ControlCells.GetFormulas(page1, shapeids);
             Assert.AreEqual(shapes.Count(),r2.Count);
             for (int i = 0; i < shapes.Count();i++)
             {
@@ -362,18 +362,18 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 if (s != s2)
                 {
-                    var r1 = ControlCells.GetCells(s, VisioAutomation.ShapeSheet.CellValueType.Formula);
+                    var r1 = ControlCells.GetFormulas(s);
                     Assert.AreEqual(0, r1.Count);
                 }
                 else
                 {
-                    var r1 = ControlCells.GetCells(s, VisioAutomation.ShapeSheet.CellValueType.Formula);
+                    var r1 = ControlCells.GetFormulas(s);
                     Assert.AreEqual(1, r1.Count);
                 }
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
-            var r3 = ControlCells.GetCells(page1, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var r3 = ControlCells.GetFormulas(page1, shapeids);
             Assert.AreEqual(shapes.Count(), r3.Count);
             for (int i = 0; i < shapes.Count(); i++)
             {

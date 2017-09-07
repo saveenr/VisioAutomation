@@ -16,14 +16,14 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.Get(s1).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.GetFormulas(s1).Count);
 
             // Add a Custom Property
             var cp = new CustomPropertyCells();
             cp.Value = "BAR1";
             CustomPropertyHelper.Set(s1, "FOO1", cp);
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.Get(s1).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.GetFormulas(s1).Count);
             // Check that it is called FOO1
             Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             // Delete that custom property
             CustomPropertyHelper.Delete(s1, "FOO1");
             // Verify that we have zero Custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.Get(s1).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.GetFormulas(s1).Count);
 
             page1.Delete(0);
         }
@@ -46,12 +46,12 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.Get(s1).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.GetFormulas(s1).Count);
 
             // Add the same one multiple times Custom Property
             CustomPropertyHelper.Set(s1, "FOO1", "BAR1");
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.Get(s1).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.GetFormulas(s1).Count);
             // Check that it is called FOO1
             Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
@@ -61,7 +61,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             CustomPropertyHelper.Set(s1, "FOO1", "BAR4");
 
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.Get(s1).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.GetFormulas(s1).Count);
             // Check that it is called FOO1
             Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
@@ -74,7 +74,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             bool caught = false;
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
-            Assert.AreEqual(0, CustomPropertyHelper.Get(s1).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.GetFormulas(s1).Count);
             try
             {
                 CustomPropertyHelper.Set(s1, "FOO 1", "BAR1");
@@ -106,7 +106,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             in_cp.Calendar = (int) IVisio.VisCellVals.visCalWestern;
             in_cp.Invisible = 0;
             CustomPropertyHelper.Set(s1, "foo", in_cp);
-            var out_cp = CustomPropertyHelper.Get(s1);
+            var out_cp = CustomPropertyHelper.GetFormulas(s1);
             Assert.AreEqual(1, out_cp.Count);
             page1.Delete(0);
         }
@@ -168,7 +168,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             CustomPropertyHelper.Set(s4, "FOO6", "6");
 
             var shapes = new[] {s1, s2, s3, s4};
-            var allprops = CustomPropertyHelper.Get(page1, shapes);
+            var allprops = CustomPropertyHelper.GetFormulas(page1, shapes);
 
             Assert.AreEqual(4, allprops.Count);
             Assert.AreEqual(1, allprops[0].Count);

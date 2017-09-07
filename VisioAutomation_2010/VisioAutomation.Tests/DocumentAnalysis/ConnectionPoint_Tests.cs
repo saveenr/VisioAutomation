@@ -32,8 +32,8 @@ namespace VisioAutomation_Tests.Core.Connections
             ConnectionPointHelper.Add(s1, cpd2);
             Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
 
-            var controlpoints_f = ConnectionPointCells.GetCells(s1, VisioAutomation.ShapeSheet.CellValueType.Formula);
-            var controlpoints_r = ConnectionPointCells.GetCells(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            var controlpoints_f = ConnectionPointCells.GetFormulas(s1);
+            var controlpoints_r = ConnectionPointCells.GetResults(s1);
             Assert.AreEqual(2, controlpoints_f.Count);
             Assert.AreEqual(2, controlpoints_r.Count);
             var cp_f0 = controlpoints_f[0];

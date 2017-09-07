@@ -69,12 +69,17 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageLayoutCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, ShapeSheet.CellValueType cvt)
+        public static PageLayoutCells GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var query = PageLayoutCells.lazy_query.Value;
-            return query.GetCellGroup(shape,cvt);
+            return query.GetFormulas(shape);
         }
 
+        public static PageLayoutCells GetResults(Microsoft.Office.Interop.Visio.Shape shape)
+        {
+            var query = PageLayoutCells.lazy_query.Value;
+            return query.GetResults(shape);
+        }
         private static readonly System.Lazy<PageLayoutCellsReader> lazy_query = new System.Lazy<PageLayoutCellsReader>();
     }
 }

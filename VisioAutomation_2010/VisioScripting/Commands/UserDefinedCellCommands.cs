@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -29,7 +30,7 @@ namespace VisioScripting.Commands
 
             var application = this._client.Application.Get();
             var page = application.ActivePage;
-            var list_user_props = UserDefinedCellHelper.Get(page, targets.Shapes);
+            var list_user_props = UserDefinedCellHelper.GetFormulas((IVisio.Page) page , targets.Shapes);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {

@@ -15,18 +15,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         
         public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row);
 
-        public List<List<TGroup>> GetCellGroups(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, VisioAutomation.ShapeSheet.CellValueType cvt)
+        public List<List<TGroup>> GetFormulas(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
-            SectionsQueryOutputList<string> data_for_shapes;
-
-            if (cvt == CellValueType.Formula)
-            {
-                data_for_shapes = query.GetFormulas(page, shapeids);
-            }
-            else
-            {
-                data_for_shapes = query.GetResults<string>(page, shapeids);
-            }
+            var data_for_shapes = query.GetFormulas(page, shapeids);
 
             var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
             foreach (var d in data_for_shapes)
@@ -38,21 +29,37 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return list_cellgroups;
         }
 
-        public List<TGroup> GetCellGroups(Microsoft.Office.Interop.Visio.Shape shape, VisioAutomation.ShapeSheet.CellValueType cvt)
+        public List<List<TGroup>> GetResults(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
-            SectionsQueryOutput<string> data_for_shape;
-            if (cvt == CellValueType.Formula)
+            var data_for_shapes = query.GetResults<string>(page, shapeids);
+
+            var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
+            foreach (var d in data_for_shapes)
             {
-                data_for_shape = query.GetFormulas(shape);
+                var first_section = d.Sections[0];
+                var cellgroups = this.__SectionRowsToCellGroups(first_section);
+                list_cellgroups.Add(cellgroups);
             }
-            else
-            {
-                data_for_shape = query.GetResults<string>(shape);
-            }
+            return list_cellgroups;
+        }
+
+
+        public List<TGroup> GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
+        {
+            var data_for_shape = query.GetFormulas(shape);
             var first_section = data_for_shape.Sections[0];
             var cellgroups = this.__SectionRowsToCellGroups(first_section);
             return cellgroups;
         }
+
+        public List<TGroup> GetResults(Microsoft.Office.Interop.Visio.Shape shape)
+        {
+            var data_for_shape = query.GetResults<string>(shape);
+            var first_section = data_for_shape.Sections[0];
+            var cellgroups = this.__SectionRowsToCellGroups(first_section);
+            return cellgroups;
+        }
+
 
         private List<TGroup> __SectionRowsToCellGroups(SectionQueryOutput<string> section_data)
         {

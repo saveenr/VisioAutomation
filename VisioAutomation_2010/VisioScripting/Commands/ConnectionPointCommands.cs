@@ -13,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> Get(VisioScripting.Models.TargetShapes targets)
+        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> GetFormulas(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -28,7 +28,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
             foreach (var shape in targets.Shapes)
             {
-                var cp = ConnectionPointCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Formula);
+                var cp = ConnectionPointCells.GetFormulas(shape);
                 dic[shape] = cp;
             }
 

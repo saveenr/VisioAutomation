@@ -42,12 +42,17 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageFormatCells GetCells(IVisio.Shape shape, VisioAutomation.ShapeSheet.CellValueType cvt)
+        public static PageFormatCells GetFormulas(IVisio.Shape shape)
         {
             var query = PageFormatCells.lazy_query.Value;
-            return query.GetCellGroup(shape, cvt);
+            return query.GetFormulas(shape);
         }
 
+        public static PageFormatCells GetResults(IVisio.Shape shape)
+        {
+            var query = PageFormatCells.lazy_query.Value;
+            return query.GetResults(shape);
+        }
         private static readonly System.Lazy<PageFormatCellsReader> lazy_query = new System.Lazy<PageFormatCellsReader>();
     }
 }

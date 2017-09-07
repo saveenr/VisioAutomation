@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, indices0[2]);
 
             var targets = new VisioScripting.Models.TargetShapes();
-            var dic = client.ConnectionPoint.Get(targets);
+            var dic = client.ConnectionPoint.GetFormulas(targets);
             Assert.AreEqual(3, dic.Count);
             Assert.AreEqual("Width*0.67", dic[s1][0].Y.Value);
             Assert.AreEqual("Width*0.67", dic[s2][0].Y.Value);

@@ -27,16 +27,29 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static List<TextXFormCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, VisioAutomation.ShapeSheet.CellValueType cvt)
+        public static List<TextXFormCells> GetFormulas(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var query = TextXFormCells.lazy_query.Value;
-            return query.GetCellGroups(page, shapeids, cvt);
+            return query.GetFormulas(page, shapeids);
         }
 
-        public static TextXFormCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, VisioAutomation.ShapeSheet.CellValueType cvt)
+        public static List<TextXFormCells> GetResults(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var query = TextXFormCells.lazy_query.Value;
-            return query.GetCellGroup(shape, cvt);
+            return query.GetResults(page, shapeids);
+        }
+
+
+        public static TextXFormCells GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
+        {
+            var query = TextXFormCells.lazy_query.Value;
+            return query.GetFormulas(shape);
+        }
+
+        public static TextXFormCells GetResults(Microsoft.Office.Interop.Visio.Shape shape)
+        {
+            var query = TextXFormCells.lazy_query.Value;
+            return query.GetResults(shape);
         }
 
         private static readonly System.Lazy<TextXFormCellsReader> lazy_query = new System.Lazy<TextXFormCellsReader>();

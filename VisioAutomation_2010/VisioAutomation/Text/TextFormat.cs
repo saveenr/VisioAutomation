@@ -68,12 +68,12 @@ namespace VisioAutomation.Text
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
             var cells = new TextFormat();
-            cells.CharacterFormats = CharacterFormatCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Formula);
-            cells.ParagraphFormats = ParagraphFormatCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Formula);
-            cells.TextBlock = TextBlockCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            cells.CharacterFormats = CharacterFormatCells.GetFormulas(shape);
+            cells.ParagraphFormats = ParagraphFormatCells.GetFormulas(shape);
+            cells.TextBlock = TextBlockCells.GetFormulas(shape);
             if (HasTextXFormCells(shape))
             {
-                cells.TextXForm = TextXFormCells.GetCells(shape, VisioAutomation.ShapeSheet.CellValueType.Formula);
+                cells.TextXForm = TextXFormCells.GetFormulas(shape);
             }
             cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
@@ -92,9 +92,9 @@ namespace VisioAutomation.Text
 
         public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
         {
-            var charcells = CharacterFormatCells.GetCells(page, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
-            var paracells = ParagraphFormatCells.GetCells(page, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
-            var textblockcells = TextBlockCells.GetCells(page, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var charcells = CharacterFormatCells.GetFormulas(page, shapeids);
+            var paracells = ParagraphFormatCells.GetFormulas(page, shapeids);
+            var textblockcells = TextBlockCells.GetFormulas(page, shapeids);
             var page_shapes = page.Shapes;
             var formats = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)
