@@ -28,30 +28,30 @@ namespace VisioAutomation.Shapes
         public VisioAutomation.ShapeSheet.CellValueLiteral VertexEdit { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral Width { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockAspect, this.Aspect.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockBegin, this.Begin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockCalcWH, this.CalcWH.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockCrop, this.Crop.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockCustomProp, this.CustProp.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockDelete, this.Delete.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockEnd, this.End.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockFormat, this.Format.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockFromGroupFormat, this.FromGroupFormat.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockGroup, this.Group.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockHeight, this.Height.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockMoveX, this.MoveX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockMoveY, this.MoveY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockRotate, this.Rotate.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockSelect, this.Select.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockTextEdit, this.TextEdit.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockThemeColors, this.ThemeColors.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockThemeEffects, this.ThemeEffects.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockVertexEdit, this.VertexEdit.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.LockWidth, this.Width.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockAspect, this.Aspect.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockBegin, this.Begin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockCalcWH, this.CalcWH.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockCrop, this.Crop.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockCustomProp, this.CustProp.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockDelete, this.Delete.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockEnd, this.End.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockFormat, this.Format.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockFromGroupFormat, this.FromGroupFormat.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockGroup, this.Group.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockHeight, this.Height.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockMoveX, this.MoveX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockMoveY, this.MoveY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockRotate, this.Rotate.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockSelect, this.Select.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockTextEdit, this.TextEdit.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockThemeColors, this.ThemeColors.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockThemeEffects, this.ThemeEffects.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockVertexEdit, this.VertexEdit.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockWidth, this.Width.Value);
             }
         }
 

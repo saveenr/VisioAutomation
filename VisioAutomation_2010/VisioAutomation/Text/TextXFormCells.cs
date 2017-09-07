@@ -13,17 +13,17 @@ namespace VisioAutomation.Text
         public VisioAutomation.ShapeSheet.CellValueLiteral LocPinX { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral LocPinY { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormPinX, this.PinX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormPinY, this.PinY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormLocPinX, this.LocPinX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormLocPinY, this.LocPinY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormWidth, this.Width.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormHeight, this.Height.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormAngle, this.Angle.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextXFormPinX, this.PinX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextXFormPinY, this.PinY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextXFormLocPinX, this.LocPinX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextXFormLocPinY, this.LocPinY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextXFormWidth, this.Width.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextXFormHeight, this.Height.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextXFormAngle, this.Angle.Value);
             }
         }
 

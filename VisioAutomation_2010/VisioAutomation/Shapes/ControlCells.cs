@@ -15,18 +15,18 @@ namespace VisioAutomation.Shapes
         public VisioAutomation.ShapeSheet.CellValueLiteral XDynamics { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral YDynamics { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ControlCanGlue, this.CanGlue.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ControlTip, this.Tip.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ControlX, this.X.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ControlY, this.Y.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ControlXDynamics, this.XDynamics.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ControlYDynamics, this.YDynamics.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlCanGlue, this.CanGlue.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlTip, this.Tip.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlX, this.X.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlY, this.Y.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlXDynamics, this.XDynamics.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlYDynamics, this.YDynamics.Value);
             }
         }
 

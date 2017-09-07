@@ -12,15 +12,15 @@ namespace VisioAutomation.Shapes
         public VisioAutomation.ShapeSheet.CellValueLiteral DirY { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral Type { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ConnectionPointX, this.X.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ConnectionPointY, this.Y.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ConnectionPointDirX, this.DirX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ConnectionPointDirY, this.DirY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ConnectionPointType, this.Type.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointX, this.X.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointY, this.Y.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointDirX, this.DirX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointDirY, this.DirY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointType, this.Type.Value);
             }
         }
 

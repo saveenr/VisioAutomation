@@ -40,7 +40,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             var cellnames = props.Select(p => p.Name).ToList();
 
-            var f2 = xg1.SrcFormulaPairs.Select(i => i.Formula).ToList();
+            var f2 = xg1.SrcValuePairs.Select(i => i.Formula).ToList();
             
             int x = 1;
         }

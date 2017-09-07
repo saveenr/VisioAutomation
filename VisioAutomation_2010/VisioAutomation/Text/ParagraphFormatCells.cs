@@ -21,24 +21,24 @@ namespace VisioAutomation.Text
         public VisioAutomation.ShapeSheet.CellValueLiteral Flags { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral BulletString { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaIndentLeft, this.IndentLeft.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaIndentFirst, this.IndentFirst.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaIndentRight, this.IndentRight.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaSpacingAfter, this.SpacingAfter.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaSpacingBefore, this.SpacingBefore.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaSpacingLine, this.SpacingLine.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaHorizontalAlign, this.HorizontalAlign.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaBulletFont, this.BulletFont.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaBullet, this.Bullet.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaBulletFontSize, this.BulletFontSize.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaFlags, this.Flags.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.ParaBulletString, this.BulletString.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaIndentLeft, this.IndentLeft.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaIndentFirst, this.IndentFirst.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaIndentRight, this.IndentRight.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaSpacingAfter, this.SpacingAfter.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaSpacingBefore, this.SpacingBefore.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaSpacingLine, this.SpacingLine.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaHorizontalAlign, this.HorizontalAlign.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaBulletFont, this.BulletFont.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaBullet, this.Bullet.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaBulletFontSize, this.BulletFontSize.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaFlags, this.Flags.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ParaBulletString, this.BulletString.Value);
             }
         }
 

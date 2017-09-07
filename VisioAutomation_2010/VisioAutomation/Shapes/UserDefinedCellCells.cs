@@ -47,12 +47,12 @@ namespace VisioAutomation.Shapes
             this.Prompt = prompt;
         }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.UserDefCellValue, this.Value.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.UserDefCellPrompt, this.Prompt.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.UserDefCellValue, this.Value.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.UserDefCellPrompt, this.Prompt.Value);
             }
         }
 

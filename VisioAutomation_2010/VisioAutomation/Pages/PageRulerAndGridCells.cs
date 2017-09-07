@@ -16,20 +16,20 @@ namespace VisioAutomation.Pages
         public VisioAutomation.ShapeSheet.CellValueLiteral YRulerDensity { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral YRulerOrigin { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XRulerDensity, this.XRulerDensity.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XRulerOrigin, this.XRulerOrigin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YGridDensity, this.YGridDensity.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YGridOrigin, this.YGridOrigin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XRulerDensity, this.XRulerDensity.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XRulerOrigin, this.XRulerOrigin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YGridDensity, this.YGridDensity.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YGridOrigin, this.YGridOrigin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin.Value);
             }
         }
 

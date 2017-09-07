@@ -21,24 +21,24 @@ namespace VisioAutomation.Pages
         public VisioAutomation.ShapeSheet.CellValueLiteral UIVisibility { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral DrawingResizeType { get; set; } // new in visio 2010
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             { 
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageDrawingScale, this.DrawingScale.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageDrawingScaleType, this.DrawingScaleType.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageDrawingSizeType, this.DrawingSizeType.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageInhibitSnap, this.InhibitSnap.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageHeight, this.Height.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageScale, this.Scale.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageWidth, this.Width.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageShadowType, this.ShadowType.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageUIVisibility, this.UIVisibility.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageDrawingResizeType, this.DrawingResizeType.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageDrawingScale, this.DrawingScale.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageDrawingScaleType, this.DrawingScaleType.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageDrawingSizeType, this.DrawingSizeType.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageInhibitSnap, this.InhibitSnap.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageHeight, this.Height.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageScale, this.Scale.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageWidth, this.Width.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowType, this.ShadowType.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageUIVisibility, this.UIVisibility.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageDrawingResizeType, this.DrawingResizeType.Value);
             }
         }
 

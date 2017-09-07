@@ -16,19 +16,19 @@ namespace VisioAutomation.Text
         public VisioAutomation.ShapeSheet.CellValueLiteral TextDirection { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral VerticalAlign { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockBottomMargin, this.BottomMargin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockLeftMargin, this.LeftMargin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockRightMargin, this.RightMargin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockTopMargin, this.TopMargin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockBackground, this.TextBackground.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBackgroundTransparency.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockDirection, this.TextDirection.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockBottomMargin, this.BottomMargin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockLeftMargin, this.LeftMargin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockRightMargin, this.RightMargin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockTopMargin, this.TopMargin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockBackground, this.TextBackground.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBackgroundTransparency.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockDirection, this.TextDirection.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign.Value);
             }
         }
 

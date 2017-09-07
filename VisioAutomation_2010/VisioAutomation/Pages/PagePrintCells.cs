@@ -21,25 +21,25 @@ namespace VisioAutomation.Pages
         public VisioAutomation.ShapeSheet.CellValueLiteral ScaleY { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral PaperSource { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintLeftMargin, this.LeftMargin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintCenterX, this.CenterX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintCenterY, this.CenterY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintOnPage, this.OnPage.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintBottomMargin, this.BottomMargin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintRightMargin, this.RightMargin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintPagesX, this.PagesX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintPagesY, this.PagesY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintTopMargin, this.TopMargin.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintPaperKind, this.PaperKind.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintGrid, this.Grid.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintPageOrientation, this.Orientation.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintScaleX, this.ScaleX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintScaleY, this.ScaleY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PrintPaperSource, this.PaperSource.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintLeftMargin, this.LeftMargin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintCenterX, this.CenterX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintCenterY, this.CenterY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintOnPage, this.OnPage.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintBottomMargin, this.BottomMargin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintRightMargin, this.RightMargin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPagesX, this.PagesX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPagesY, this.PagesY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintTopMargin, this.TopMargin.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPaperKind, this.PaperKind.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintGrid, this.Grid.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPageOrientation, this.Orientation.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintScaleX, this.ScaleX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintScaleY, this.ScaleY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPaperSource, this.PaperSource.Value);
             }
         }
 

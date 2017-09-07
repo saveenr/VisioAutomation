@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         public void SetFormulas(SidSrcWriter writer, short shapeid, short row)
         {
-            foreach (var pair in this.SrcFormulaPairs)
+            foreach (var pair in this.SrcValuePairs)
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
                 writer.SetFormula(shapeid, new_src, pair.Formula);
@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public void SetFormulas(SrcWriter writer, short row)
         {
-            foreach (var pair in this.SrcFormulaPairs)
+            foreach (var pair in this.SrcValuePairs)
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
                 writer.SetFormula(new_src, pair.Formula);

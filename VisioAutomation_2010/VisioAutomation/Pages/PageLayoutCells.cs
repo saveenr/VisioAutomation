@@ -34,38 +34,38 @@ namespace VisioAutomation.Pages
         public VisioAutomation.ShapeSheet.CellValueLiteral RouteStyle { get; set; }
         public VisioAutomation.ShapeSheet.CellValueLiteral AvoidPageBreaks { get; set; } // new in visio 2010
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutEnableGrid, this.EnableGrid.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineAdjustFrom, this.LineAdjustFrom.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpFactorX, this.LineJumpFactorX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpFactorY, this.LineJumpFactorY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineToLineX, this.LineToLineX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineToLineY, this.LineToLineY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutPlowCode, this.PlowCode.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutResizePage, this.ResizePage.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutRouteStyle, this.RouteStyle.Value);
-                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.PageLayoutAvoidPageBreaks, this.AvoidPageBreaks.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutEnableGrid, this.EnableGrid.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineAdjustFrom, this.LineAdjustFrom.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpFactorX, this.LineJumpFactorX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpFactorY, this.LineJumpFactorY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineToLineX, this.LineToLineX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineToLineY, this.LineToLineY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutPlowCode, this.PlowCode.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutResizePage, this.ResizePage.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutRouteStyle, this.RouteStyle.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageLayoutAvoidPageBreaks, this.AvoidPageBreaks.Value);
             }
         }
 
