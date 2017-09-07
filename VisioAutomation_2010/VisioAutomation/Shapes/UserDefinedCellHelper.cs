@@ -251,7 +251,7 @@ namespace VisioAutomation.Shapes
             return true;
         }
 
-        internal static void CheckValidName(string name)
+        public static void CheckValidName(string name)
         {
             if (!UserDefinedCellHelper.IsValidName(name))
             {

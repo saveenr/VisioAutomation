@@ -1,20 +1,20 @@
-namespace VisioAutomation.Shapes
+namespace VisioScripting.Models
 {
     public class UserDefinedCell
     {
         public string Name { get; set; }
-        public UserDefinedCellCells Cells { get; set; }
+        public VisioAutomation.Shapes.UserDefinedCellCells Cells { get; set; }
 
         public UserDefinedCell(string name)
         {
-            UserDefinedCellHelper.CheckValidName(name);
+            VisioAutomation.Shapes.UserDefinedCellHelper.CheckValidName(name);
             this.Name = name;
-            this.Cells = new UserDefinedCellCells();
+            this.Cells = new VisioAutomation.Shapes.UserDefinedCellCells();
         }
 
         public UserDefinedCell(string name, string value)
         {
-            UserDefinedCellHelper.CheckValidName(name);
+            VisioAutomation.Shapes.UserDefinedCellHelper.CheckValidName(name);
 
             if (value == null)
             {
@@ -22,13 +22,13 @@ namespace VisioAutomation.Shapes
             }
 
             this.Name = name;
-            this.Cells = new UserDefinedCellCells();
+            this.Cells = new VisioAutomation.Shapes.UserDefinedCellCells();
             this.Cells.Value = value;
         }
 
         public UserDefinedCell(string name, string value, string prompt)
         {
-            UserDefinedCellHelper.CheckValidName(name);
+            VisioAutomation.Shapes.UserDefinedCellHelper.CheckValidName(name);
 
             if (value == null)
             {
@@ -40,9 +40,9 @@ namespace VisioAutomation.Shapes
             this.Cells.Prompt = prompt;
         }
 
-        public UserDefinedCell(string name, UserDefinedCellCells cells)
+        public UserDefinedCell(string name, VisioAutomation.Shapes.UserDefinedCellCells cells)
         {
-            UserDefinedCellHelper.CheckValidName(name);
+            VisioAutomation.Shapes.UserDefinedCellHelper.CheckValidName(name);
 
             if (cells == null)
             {

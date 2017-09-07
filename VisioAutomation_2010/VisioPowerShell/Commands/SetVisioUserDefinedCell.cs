@@ -22,7 +22,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var userprop = new UserDefinedCell(this.Name, this.Value);
+            var userprop = new VisioScripting.Models.UserDefinedCell(this.Name, this.Value);
             if (this.Prompt != null)
             {
                 userprop.Cells.Prompt = this.Prompt;

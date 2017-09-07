@@ -96,7 +96,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Set(VisioScripting.Models.TargetShapes targets, UserDefinedCell userdefinedcell)
+        public void Set(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.UserDefinedCell udc)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -112,7 +112,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells.Value.Value, userdefinedcell.Cells.Prompt.Value);
+                    UserDefinedCellHelper.Set(shape, udc.Name, udc.Cells.Value, udc.Cells.Prompt);
                 }
             }
         }
