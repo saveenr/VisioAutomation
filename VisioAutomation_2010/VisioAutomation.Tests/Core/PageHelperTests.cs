@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Core.Page
             var page_fmt_cells1 = page_fmt_cells;
             page_fmt_cells1.Width = "8";
             page_fmt_cells1.Height = "6";
-  
+
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             page_fmt_cells1.SetFormulas(writer);
 

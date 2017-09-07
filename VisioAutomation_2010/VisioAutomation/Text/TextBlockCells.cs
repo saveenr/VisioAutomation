@@ -6,15 +6,15 @@ namespace VisioAutomation.Text
 {
     public class TextBlockCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData BottomMargin { get; set; }
-        public ShapeSheet.CellData LeftMargin { get; set; }
-        public ShapeSheet.CellData RightMargin { get; set; }
-        public ShapeSheet.CellData TopMargin { get; set; }
-        public ShapeSheet.CellData DefaultTabStop { get; set; }
-        public ShapeSheet.CellData TextBackground { get; set; }
-        public ShapeSheet.CellData TextBackgroundTransparency { get; set; }
-        public ShapeSheet.CellData TextDirection { get; set; }
-        public ShapeSheet.CellData VerticalAlign { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral BottomMargin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LeftMargin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral RightMargin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral TopMargin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DefaultTabStop { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral TextBackground { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral TextBackgroundTransparency { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral TextDirection { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral VerticalAlign { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

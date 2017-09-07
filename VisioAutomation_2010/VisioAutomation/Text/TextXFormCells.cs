@@ -5,13 +5,13 @@ namespace VisioAutomation.Text
 {
     public class TextXFormCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData Angle { get; set; }
-        public ShapeSheet.CellData Width { get; set; }
-        public ShapeSheet.CellData Height { get; set; }
-        public ShapeSheet.CellData PinX { get; set; }
-        public ShapeSheet.CellData PinY { get; set; }
-        public ShapeSheet.CellData LocPinX { get; set; }
-        public ShapeSheet.CellData LocPinY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Angle { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Width { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Height { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PinX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PinY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LocPinX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LocPinY { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

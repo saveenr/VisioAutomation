@@ -35,11 +35,6 @@ namespace VisioAutomation.Shapes
             shape.DeleteRow(UserDefinedCellHelper._userdefinedcell_section, row);
         }
 
-        public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellData value, ShapeSheet.CellData prompt)
-        {
-            UserDefinedCellHelper.Set(shape, name, value.Value, prompt.Value);
-        }
-
         public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellValueLiteral udfcell_value, ShapeSheet.CellValueLiteral udfcell_prompt)
         {
             if (shape == null)

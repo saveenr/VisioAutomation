@@ -6,14 +6,14 @@ namespace VisioAutomation.Shapes
 {
     public class ControlCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData CanGlue { get; set; }
-        public ShapeSheet.CellData Tip { get; set; }
-        public ShapeSheet.CellData X { get; set; }
-        public ShapeSheet.CellData Y { get; set; }
-        public ShapeSheet.CellData YBehavior { get; set; }
-        public ShapeSheet.CellData XBehavior { get; set; }
-        public ShapeSheet.CellData XDynamics { get; set; }
-        public ShapeSheet.CellData YDynamics { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral CanGlue { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Tip { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral X { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Y { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral YBehavior { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral XBehavior { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral XDynamics { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral YDynamics { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

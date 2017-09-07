@@ -7,8 +7,8 @@ namespace VisioAutomation.Shapes
     public class UserDefinedCellCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public string Name { get; set; }
-        public ShapeSheet.CellData Value { get; set; }
-        public ShapeSheet.CellData Prompt { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Value { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Prompt { get; set; }
 
         public UserDefinedCellCells()
         {

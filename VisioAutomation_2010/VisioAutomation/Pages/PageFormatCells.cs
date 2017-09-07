@@ -6,20 +6,20 @@ namespace VisioAutomation.Pages
 {
     public class PageFormatCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData DrawingScale { get; set; }
-        public ShapeSheet.CellData DrawingScaleType { get; set; }
-        public ShapeSheet.CellData DrawingSizeType { get; set; }
-        public ShapeSheet.CellData InhibitSnap { get; set; }
-        public ShapeSheet.CellData Height { get; set; }
-        public ShapeSheet.CellData Scale { get; set; }
-        public ShapeSheet.CellData Width { get; set; }
-        public ShapeSheet.CellData ShadowObliqueAngle { get; set; }
-        public ShapeSheet.CellData ShadowOffsetX { get; set; }
-        public ShapeSheet.CellData ShadowOffsetY { get; set; }
-        public ShapeSheet.CellData ShadowScaleFactor { get; set; }
-        public ShapeSheet.CellData ShadowType { get; set; }
-        public ShapeSheet.CellData UIVisibility { get; set; }
-        public ShapeSheet.CellData DrawingResizeType { get; set; } // new in visio 2010
+        public VisioAutomation.ShapeSheet.CellValueLiteral DrawingScale { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DrawingScaleType { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DrawingSizeType { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral InhibitSnap { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Height { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Scale { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Width { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowObliqueAngle { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowOffsetX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowOffsetY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowScaleFactor { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowType { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral UIVisibility { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DrawingResizeType { get; set; } // new in visio 2010
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

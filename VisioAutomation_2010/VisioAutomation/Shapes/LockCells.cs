@@ -7,26 +7,26 @@ namespace VisioAutomation.Shapes
 {
     public class LockCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData Aspect { get; set; }
-        public ShapeSheet.CellData Begin { get; set; }
-        public ShapeSheet.CellData CalcWH { get; set; }
-        public ShapeSheet.CellData Crop { get; set; }
-        public ShapeSheet.CellData CustProp { get; set; }
-        public ShapeSheet.CellData Delete { get; set; }
-        public ShapeSheet.CellData End { get; set; }
-        public ShapeSheet.CellData Format { get; set; }
-        public ShapeSheet.CellData FromGroupFormat { get; set; }
-        public ShapeSheet.CellData Group { get; set; }
-        public ShapeSheet.CellData Height { get; set; }
-        public ShapeSheet.CellData MoveX { get; set; }
-        public ShapeSheet.CellData MoveY { get; set; }
-        public ShapeSheet.CellData Rotate { get; set; }
-        public ShapeSheet.CellData Select { get; set; }
-        public ShapeSheet.CellData TextEdit { get; set; }
-        public ShapeSheet.CellData ThemeColors { get; set; }
-        public ShapeSheet.CellData ThemeEffects { get; set; }
-        public ShapeSheet.CellData VertexEdit { get; set; }
-        public ShapeSheet.CellData Width { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Aspect { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Begin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral CalcWH { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Crop { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral CustProp { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Delete { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral End { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Format { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral FromGroupFormat { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Group { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Height { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral MoveX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral MoveY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Rotate { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Select { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral TextEdit { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ThemeColors { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ThemeEffects { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral VertexEdit { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Width { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

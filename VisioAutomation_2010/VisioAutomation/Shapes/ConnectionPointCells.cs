@@ -6,11 +6,11 @@ namespace VisioAutomation.Shapes
 {
     public class ConnectionPointCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData X { get; set; }
-        public ShapeSheet.CellData Y { get; set; }
-        public ShapeSheet.CellData DirX { get; set; }
-        public ShapeSheet.CellData DirY { get; set; }
-        public ShapeSheet.CellData Type { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral X { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Y { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DirX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DirY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Type { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

@@ -35,7 +35,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var xg1_type = xg1.GetType();
             var props = GetCellDataProps(xg1_type);
 
-            var cellvalues = props.Select(p => (VisioAutomation.ShapeSheet.CellData)p.GetValue(xg1,null)).ToList();
+            var cellvalues = props.Select(p => (VisioAutomation.ShapeSheet.CellValueLiteral)p.GetValue(xg1,null)).ToList();
             var cellvalues_formulas = cellvalues.Select(p=>p.Value).ToList();
 
             var cellnames = props.Select(p => p.Name).ToList();
@@ -48,7 +48,7 @@ namespace VisioAutomation_Tests.Core.Shapes
         private static List<PropertyInfo> GetCellDataProps(Type t)
         {
             var props = t.GetProperties().Where(p => p.MemberType == MemberTypes.Property).ToList();
-            var cellprops = props.Where(p => p.PropertyType == typeof(VisioAutomation.ShapeSheet.CellData)).ToList();
+            var cellprops = props.Where(p => p.PropertyType == typeof(VisioAutomation.ShapeSheet.CellValueLiteral)).ToList();
             return cellprops;
         }
 

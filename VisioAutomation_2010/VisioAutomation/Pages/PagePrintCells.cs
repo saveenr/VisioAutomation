@@ -5,21 +5,21 @@ namespace VisioAutomation.Pages
 {
     public class PagePrintCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData LeftMargin { get; set; }
-        public ShapeSheet.CellData CenterX { get; set; }
-        public ShapeSheet.CellData CenterY { get; set; }
-        public ShapeSheet.CellData OnPage { get; set; }
-        public ShapeSheet.CellData BottomMargin { get; set; }
-        public ShapeSheet.CellData RightMargin { get; set; }
-        public ShapeSheet.CellData PagesX { get; set; }
-        public ShapeSheet.CellData PagesY { get; set; }
-        public ShapeSheet.CellData TopMargin { get; set; }
-        public ShapeSheet.CellData PaperKind { get; set; }
-        public ShapeSheet.CellData Grid { get; set; }
-        public ShapeSheet.CellData Orientation { get; set; }
-        public ShapeSheet.CellData ScaleX { get; set; }
-        public ShapeSheet.CellData ScaleY { get; set; }
-        public ShapeSheet.CellData PaperSource { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LeftMargin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral CenterX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral CenterY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral OnPage { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral BottomMargin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral RightMargin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PagesX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PagesY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral TopMargin { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PaperKind { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Grid { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Orientation { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ScaleX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ScaleY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PaperSource { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

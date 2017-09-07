@@ -6,24 +6,24 @@ namespace VisioAutomation.Shapes
 {
     public class ShapeLayoutCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData ConnectorFixedCode { get; set; }
-        public ShapeSheet.CellData LineJumpCode { get; set; }
-        public ShapeSheet.CellData LineJumpDirX { get; set; }
-        public ShapeSheet.CellData LineJumpDirY { get; set; }
-        public ShapeSheet.CellData LineJumpStyle { get; set; }
-        public ShapeSheet.CellData LineRouteExt { get; set; }
-        public ShapeSheet.CellData ShapeFixedCode { get; set; }
-        public ShapeSheet.CellData ShapePermeablePlace { get; set; }
-        public ShapeSheet.CellData ShapePermeableX { get; set; }
-        public ShapeSheet.CellData ShapePermeableY { get; set; }
-        public ShapeSheet.CellData ShapePlaceFlip { get; set; }
-        public ShapeSheet.CellData ShapePlaceStyle { get; set; }
-        public ShapeSheet.CellData ShapePlowCode { get; set; }
-        public ShapeSheet.CellData ShapeRouteStyle { get; set; }
-        public ShapeSheet.CellData ShapeSplit { get; set; }
-        public ShapeSheet.CellData ShapeSplittable { get; set; }
-        public ShapeSheet.CellData ShapeDisplayLevel { get; set; } // new in visio 2010
-        public ShapeSheet.CellData Relationships { get; set; } // new in visio 2010
+        public VisioAutomation.ShapeSheet.CellValueLiteral ConnectorFixedCode { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpCode { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpDirX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpDirY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpStyle { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineRouteExt { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeFixedCode { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePermeablePlace { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePermeableX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePermeableY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePlaceFlip { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePlaceStyle { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePlowCode { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeRouteStyle { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeSplit { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeSplittable { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeDisplayLevel { get; set; } // new in visio 2010
+        public VisioAutomation.ShapeSheet.CellValueLiteral Relationships { get; set; } // new in visio 2010
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

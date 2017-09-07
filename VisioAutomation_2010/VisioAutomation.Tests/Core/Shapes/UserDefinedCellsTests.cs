@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             // Check that non-existent properties can't be found
             Assert.AreEqual(false, CustomPropertyHelper.Contains(s1, "FOOX"));
 
-            var udcs = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            var udcs = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(1,udcs.Count);
             Assert.AreEqual("FOO1",udcs[0].Name);
             Assert.AreEqual("\"BAR\"", udcs[0].Value.Value);
@@ -36,7 +36,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // Verify that we can set the value without affecting the prompt
             UserDefinedCellHelper.Set(s1,"FOO1","BEER",null);
-            udcs = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            udcs = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("FOO1", udcs[0].Name);
             Assert.AreEqual("\"BEER\"", udcs[0].Value.Value);
@@ -44,7 +44,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // Verify that we can set passing in nulls changes nothing
             UserDefinedCellHelper.Set(s1, "FOO1", null, null);
-            udcs = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            udcs = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("FOO1", udcs[0].Name);
             Assert.AreEqual("\"BEER\"", udcs[0].Value.Value);
@@ -52,7 +52,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // Verify that we can set the prompt without affecting the value
             UserDefinedCellHelper.Set(s1, "FOO1", null, "Prompt1");
-            udcs = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            udcs = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("FOO1", udcs[0].Name);
             Assert.AreEqual("\"BEER\"", udcs[0].Value.Value);
@@ -284,7 +284,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             UserDefinedCellHelper.Set(s1, "FOO2", "2", null);
             UserDefinedCellHelper.Set(s1, "FOO3", "3\"4", null);
 
-            var p2 = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            var p2 = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(3, p2.Count);
             
             Assert.AreEqual("FOO1",p2[0].Name);
@@ -295,6 +295,18 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             Assert.AreEqual("FOO3", p2[2].Name);
             Assert.AreEqual("\"3\"\"4\"", p2[2].Value.Value);
+
+            var p3 = UserDefinedCellHelper.Get(s1, VisioAutomation.ShapeSheet.CellValueType.Result);
+            Assert.AreEqual(3, p3.Count);
+
+            Assert.AreEqual("FOO1", p3[0].Name);
+            Assert.AreEqual("1", p3[0].Value.Value);
+
+            Assert.AreEqual("FOO2", p3[1].Name);
+            Assert.AreEqual("2", p3[1].Value.Value);
+
+            Assert.AreEqual("FOO3", p3[2].Name);
+            Assert.AreEqual("3\"4", p3[2].Value.Value);
 
             page1.Delete(0);
         }

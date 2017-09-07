@@ -5,34 +5,34 @@ namespace VisioAutomation.Pages
 {
     public class PageLayoutCells : ShapeSheet.CellGroups.CellGroupSingleRow
     {
-        public ShapeSheet.CellData AvenueSizeX { get; set; }
-        public ShapeSheet.CellData AvenueSizeY { get; set; }
-        public ShapeSheet.CellData BlockSizeX { get; set; }
-        public ShapeSheet.CellData BlockSizeY { get; set; }
-        public ShapeSheet.CellData CtrlAsInput { get; set; }
-        public ShapeSheet.CellData DynamicsOff { get; set; }
-        public ShapeSheet.CellData EnableGrid { get; set; }
-        public ShapeSheet.CellData LineAdjustFrom { get; set; }
-        public ShapeSheet.CellData LineAdjustTo { get; set; }
-        public ShapeSheet.CellData LineJumpCode { get; set; }
-        public ShapeSheet.CellData LineJumpFactorX { get; set; }
-        public ShapeSheet.CellData LineJumpFactorY { get; set; }
-        public ShapeSheet.CellData LineJumpStyle { get; set; }
-        public ShapeSheet.CellData LineRouteExt { get; set; }
-        public ShapeSheet.CellData LineToLineX { get; set; }
-        public ShapeSheet.CellData LineToLineY { get; set; }
-        public ShapeSheet.CellData LineToNodeX { get; set; }
-        public ShapeSheet.CellData LineToNodeY { get; set; }
-        public ShapeSheet.CellData LineJumpDirX { get; set; }
-        public ShapeSheet.CellData LineJumpDirY { get; set; }
-        public ShapeSheet.CellData PageShapeSplit { get; set; }
-        public ShapeSheet.CellData PlaceDepth { get; set; }
-        public ShapeSheet.CellData PlaceFlip { get; set; }
-        public ShapeSheet.CellData PlaceStyle { get; set; }
-        public ShapeSheet.CellData PlowCode { get; set; }
-        public ShapeSheet.CellData ResizePage { get; set; }
-        public ShapeSheet.CellData RouteStyle { get; set; }
-        public ShapeSheet.CellData AvoidPageBreaks { get; set; } // new in visio 2010
+        public VisioAutomation.ShapeSheet.CellValueLiteral AvenueSizeX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral AvenueSizeY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral BlockSizeX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral BlockSizeY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral CtrlAsInput { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DynamicsOff { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral EnableGrid { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineAdjustFrom { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineAdjustTo { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpCode { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpFactorX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpFactorY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpStyle { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineRouteExt { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineToLineX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineToLineY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineToNodeX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineToNodeY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpDirX { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpDirY { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PageShapeSplit { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PlaceDepth { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PlaceFlip { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PlaceStyle { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral PlowCode { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ResizePage { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral RouteStyle { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral AvoidPageBreaks { get; set; } // new in visio 2010
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

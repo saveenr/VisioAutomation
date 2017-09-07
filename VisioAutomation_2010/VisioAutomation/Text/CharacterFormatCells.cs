@@ -5,28 +5,28 @@ namespace VisioAutomation.Text
 {
     public class CharacterFormatCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData Color { get; set; }
-        public ShapeSheet.CellData Font { get; set; }
-        public ShapeSheet.CellData Size { get; set; }
-        public ShapeSheet.CellData Style { get; set; }
-        public ShapeSheet.CellData ColorTransparency { get; set; }
-        public ShapeSheet.CellData AsianFont { get; set; }
-        public ShapeSheet.CellData Case { get; set; }
-        public ShapeSheet.CellData ComplexScriptFont { get; set; }
-        public ShapeSheet.CellData ComplexScriptSize { get; set; }
-        public ShapeSheet.CellData DoubleStrikethrough { get; set; }
-        public ShapeSheet.CellData DoubleUnderline { get; set; }
-        public ShapeSheet.CellData LangID { get; set; }
-        public ShapeSheet.CellData Locale { get; set; }
-        public ShapeSheet.CellData LocalizeFont { get; set; }
-        public ShapeSheet.CellData Overline { get; set; }
-        public ShapeSheet.CellData Perpendicular { get; set; }
-        public ShapeSheet.CellData Pos { get; set; }
-        public ShapeSheet.CellData RTLText { get; set; }
-        public ShapeSheet.CellData FontScale { get; set; }
-        public ShapeSheet.CellData Letterspace { get; set; }
-        public ShapeSheet.CellData Strikethru { get; set; }
-        public ShapeSheet.CellData UseVertical { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Color { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Font { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Size { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Style { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ColorTransparency { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral AsianFont { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Case { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ComplexScriptFont { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ComplexScriptSize { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DoubleStrikethrough { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral DoubleUnderline { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LangID { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Locale { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LocalizeFont { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Overline { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Perpendicular { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Pos { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral RTLText { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral FontScale { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Letterspace { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Strikethru { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral UseVertical { get; set; }
 
         public override IEnumerable<VisioAutomation.ShapeSheet.CellGroups.SrcFormulaPair> SrcFormulaPairs
         {

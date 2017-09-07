@@ -6,20 +6,20 @@ namespace VisioAutomation.Text
 {
     public class ParagraphFormatCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData IndentFirst { get; set; }
-        public ShapeSheet.CellData IndentRight { get; set; }
-        public ShapeSheet.CellData IndentLeft { get; set; }
-        public ShapeSheet.CellData SpacingBefore { get; set; }
-        public ShapeSheet.CellData SpacingAfter { get; set; }
-        public ShapeSheet.CellData SpacingLine { get; set; }
-        public ShapeSheet.CellData HorizontalAlign { get; set; }
-        public ShapeSheet.CellData Bullet { get; set; }
-        public ShapeSheet.CellData BulletFont { get; set; }
-        public ShapeSheet.CellData BulletFontSize { get; set; }
-        public ShapeSheet.CellData LocalizeBulletFont { get; set; }
-        public ShapeSheet.CellData TextPosAfterBullet { get; set; }
-        public ShapeSheet.CellData Flags { get; set; }
-        public ShapeSheet.CellData BulletString { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral IndentFirst { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral IndentRight { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral IndentLeft { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral SpacingBefore { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral SpacingAfter { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral SpacingLine { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral HorizontalAlign { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Bullet { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral BulletFont { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral BulletFontSize { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LocalizeBulletFont { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral TextPosAfterBullet { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Flags { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral BulletString { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

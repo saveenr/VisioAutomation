@@ -6,16 +6,15 @@ namespace VisioAutomation.Shapes
 {
     public class HyperlinkCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData Address { get; set; }
-        public ShapeSheet.CellData Description { get; set; }
-        public ShapeSheet.CellData ExtraInfo { get; set; }
-        public ShapeSheet.CellData Frame { get; set; }
-        public ShapeSheet.CellData SortKey { get; set; }
-        public ShapeSheet.CellData SubAddress { get; set; }
-
-        public ShapeSheet.CellData NewWindow { get; set; }
-        public ShapeSheet.CellData Default { get; set; }
-        public ShapeSheet.CellData Invisible { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Address { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Description { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral ExtraInfo { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Frame { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral SortKey { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral SubAddress { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral NewWindow { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Default { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Invisible { get; set; }
 
         public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
         {

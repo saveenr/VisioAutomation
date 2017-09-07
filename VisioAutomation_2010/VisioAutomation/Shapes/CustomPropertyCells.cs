@@ -6,16 +6,16 @@ namespace VisioAutomation.Shapes
 {
     public class CustomPropertyCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public ShapeSheet.CellData Ask { get; set; }
-        public ShapeSheet.CellData Calendar { get; set; }
-        public ShapeSheet.CellData Format { get; set; }
-        public ShapeSheet.CellData Invisible { get; set; }
-        public ShapeSheet.CellData Label { get; set; }
-        public ShapeSheet.CellData LangID { get; set; }
-        public ShapeSheet.CellData Prompt { get; set; }
-        public ShapeSheet.CellData SortKey { get; set; }
-        public ShapeSheet.CellData Type { get; set; }
-        public ShapeSheet.CellData Value { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Ask { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Calendar { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Format { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Invisible { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Label { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral LangID { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Prompt { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral SortKey { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Type { get; set; }
+        public VisioAutomation.ShapeSheet.CellValueLiteral Value { get; set; }
 
         public CustomPropertyCells()
         {
