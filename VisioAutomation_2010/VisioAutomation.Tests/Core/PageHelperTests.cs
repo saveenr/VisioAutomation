@@ -13,26 +13,15 @@ namespace VisioAutomation_Tests.Core.Page
         {
             var size = new VA.Geometry.Size(4, 3);
             var page1 = this.GetNewPage(size);
-            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, VisioAutomation.ShapeSheet.CellValueType.Result);
-            Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Value);
-            Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Value);
+            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            Assert.AreEqual("4 in", page_fmt_cells.Width.Value);
+            Assert.AreEqual("3 in", page_fmt_cells.Height.Value);
 
             // Double each side
             var page_fmt_cells1 = page_fmt_cells;
             page_fmt_cells1.Width = "8";
             page_fmt_cells1.Height = "6";
-            //page_fmt_cells1.DrawingResizeType = null;
-            page_fmt_cells1.DrawingScale = null; // this has a problem
-            // page_fmt_cells1.DrawingScaleType = null;
-            // page_fmt_cells1.InhibitSnap = null;
-            page_fmt_cells1.Scale = null;  // this has a problem
-            page_fmt_cells1.ShadowObliqueAngle = null; // this has a problem
-            page_fmt_cells1.ShadowOffsetX = null; // this has a problem
-            page_fmt_cells1.ShadowOffsetY = null;  // this has a problem
-            // page_fmt_cells1.ShadowScaleFactor = null;
-            // page_fmt_cells1.ShadowType= null;
-            // page_fmt_cells1.UIVisibility = null;
-
+  
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             page_fmt_cells1.SetFormulas(writer);
 
