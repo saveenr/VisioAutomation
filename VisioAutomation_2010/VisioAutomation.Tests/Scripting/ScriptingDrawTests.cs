@@ -491,11 +491,10 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(2, shapes.Count);
 
             // Verify that we did indeed drop a container
-            Assert.AreEqual("Container",
-                VisioAutomation.Shapes.UserDefinedCellHelper
-                    .GetResults(dropped_container)
-                    .First(s => s.Name == "msvStructureType")
-                    .Cells.Value.Value);
+
+            var results = VisioAutomation.Shapes.UserDefinedCellHelper.GetResults(dropped_container);
+            var first = results.Where(s => s.Name == "msvStructureType").First();
+            Assert.AreEqual("Container", first.Cells.Value.Value);
 
             // cleanup
             client.Document.Close(true);
@@ -534,12 +533,11 @@ namespace VisioAutomation_Tests.Scripting
             // There should be two shapes... the rectangle and the container
             Assert.AreEqual(2, shapes.Count);
 
-            // Verify that we did indeed drop a container
-            Assert.AreEqual("Container",
-                VisioAutomation.Shapes.UserDefinedCellHelper
-                    .GetResults(dropped_container)
-                    .First(s => s.Name == "msvStructureType")
-                    .Cells.Value.Value);
+            // Verify that we did indeed drop a container           
+            var results = VisioAutomation.Shapes.UserDefinedCellHelper.GetResults(dropped_container);
+            var first = results.Where(s => s.Name == "msvStructureType").First();
+            Assert.AreEqual("Container", first.Cells.Value.Value);
+
 
             // cleanup
             client.Document.Close(true);
