@@ -20,16 +20,16 @@ namespace VisioAutomation.Pages
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.XRulerDensity, this.XRulerDensity.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.XRulerOrigin, this.XRulerOrigin.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.YGridDensity, this.YGridDensity.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.YGridOrigin, this.YGridOrigin.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XRulerDensity, this.XRulerDensity.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.XRulerOrigin, this.XRulerOrigin.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YGridDensity, this.YGridDensity.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YGridOrigin, this.YGridOrigin.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin.Value);
             }
         }
 

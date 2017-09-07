@@ -51,8 +51,8 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.UserDefCellValue, this.Value.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.UserDefCellPrompt, this.Prompt.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.UserDefCellValue, this.Value.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.UserDefCellPrompt, this.Prompt.Value);
             }
         }
 

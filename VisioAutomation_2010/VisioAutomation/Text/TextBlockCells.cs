@@ -20,15 +20,15 @@ namespace VisioAutomation.Text
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBottomMargin, this.BottomMargin.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockLeftMargin, this.LeftMargin.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockRightMargin, this.RightMargin.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockTopMargin, this.TopMargin.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackground, this.TextBackground.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBackgroundTransparency.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockDirection, this.TextDirection.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockBottomMargin, this.BottomMargin.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockLeftMargin, this.LeftMargin.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockRightMargin, this.RightMargin.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockTopMargin, this.TopMargin.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockBackground, this.TextBackground.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockBackgroundTransparency, this.TextBackgroundTransparency.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockDirection, this.TextDirection.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign.Value);
             }
         }
 

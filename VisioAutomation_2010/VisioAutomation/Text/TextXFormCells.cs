@@ -17,13 +17,13 @@ namespace VisioAutomation.Text
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormPinX, this.PinX.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormPinY, this.PinY.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormLocPinX, this.LocPinX.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormLocPinY, this.LocPinY.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormWidth, this.Width.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormHeight, this.Height.Value);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormAngle, this.Angle.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormPinX, this.PinX.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormPinY, this.PinY.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormLocPinX, this.LocPinX.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormLocPinY, this.LocPinY.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormWidth, this.Width.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormHeight, this.Height.Value);
+                yield return SrcFormulaPair.Create(ShapeSheet.SrcConstants.TextXFormAngle, this.Angle.Value);
             }
         }
 

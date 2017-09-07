@@ -10,5 +10,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.Src = src;
             this.Formula = formula;
         }
+
+        public static SrcFormulaPair Create(ShapeSheet.Src src, string formula)
+        {
+            return new SrcFormulaPair(src,formula);
+        }
     }
 }
