@@ -104,7 +104,6 @@
     <Compile Include="ShapeSheet\CellGroups\ReaderMultiRow.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryOutput.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryOutputList.cs" />
-    <Compile Include="ShapeSheet\Query\QueryUtil.cs" />
     <Compile Include="ShapeSheet\Query\SectionsQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Query\SectionsQueryOutput.cs" />
