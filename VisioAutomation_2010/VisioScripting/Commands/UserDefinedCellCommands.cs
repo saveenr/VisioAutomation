@@ -14,12 +14,12 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, IList<UserDefinedCell>> Get(VisioScripting.Models.TargetShapes targets)
+        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var prop_dic = new Dictionary<IVisio.Shape, IList<UserDefinedCell>>();
+            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, UserDefinedCellCells>>();
 
             targets = targets.ResolveShapes(this._client);
 
@@ -30,7 +30,7 @@ namespace VisioScripting.Commands
 
             var application = this._client.Application.Get();
             var page = application.ActivePage;
-            var list_user_props = UserDefinedCellHelper.GetFormulas((IVisio.Page) page , targets.Shapes);
+            var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, CellValueType.Formula);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {

@@ -24,15 +24,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            foreach (var kv in dic)
-            {
-                int shapeid = kv.Key.ID;
-                foreach (var udc in kv.Value)
-                {
-                    var udcell_vals = new UserDefinedCell(shapeid, udc.Name, udc.Cells.Value.Value,udc.Cells.Prompt.Value);
-                    this.WriteObject(udcell_vals);
-                }
-            }
+            this.WriteObject(dic);
         }
     }
 }

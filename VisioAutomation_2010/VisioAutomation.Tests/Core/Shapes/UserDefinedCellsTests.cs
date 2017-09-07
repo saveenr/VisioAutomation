@@ -75,7 +75,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var shapes = new[] { s1, s2 };
 
             UserDefinedCellHelper.Set(s1, "foo", "bar", null);
-            var props1 = UserDefinedCellHelper.GetFormulas(page1, shapes);
+            var props1 = UserDefinedCellHelper.GetDictionary(page1, shapes, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(2, props1.Count);
             Assert.AreEqual(1, props1[0].Count);
             Assert.AreEqual(0, props1[1].Count);
@@ -253,7 +253,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             UserDefinedCellHelper.Set(s4, "FOO6", "6", "p6");
 
             var shapeids = new[] {s1, s2, s3, s4};
-            var allprops = UserDefinedCellHelper.GetFormulas(page1, shapeids);
+            var allprops = UserDefinedCellHelper.GetDictionary(page1, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
             Assert.AreEqual(4, allprops.Count);
             Assert.AreEqual(1, allprops[0].Count);
@@ -261,12 +261,12 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(0, allprops[2].Count);
             Assert.AreEqual(3, allprops[3].Count);
 
-            Assert.AreEqual("\"1\"", allprops[0][0].Cells.Value.Value);
-            Assert.AreEqual("\"2\"", allprops[1][0].Cells.Value.Value);
-            Assert.AreEqual("\"3\"", allprops[1][1].Cells.Value.Value);
-            Assert.AreEqual("\"4\"", allprops[3][0].Cells.Value.Value);
-            Assert.AreEqual("\"5\"", allprops[3][1].Cells.Value.Value);
-            Assert.AreEqual("\"6\"", allprops[3][2].Cells.Value.Value);
+            Assert.AreEqual("\"1\"", allprops[0]["FOO1"].Value.Value);
+            Assert.AreEqual("\"2\"", allprops[1]["FOO1"].Value.Value);
+            Assert.AreEqual("\"3\"", allprops[1]["FOO3"].Value.Value);
+            Assert.AreEqual("\"4\"", allprops[3]["FOO4"].Value.Value);
+            Assert.AreEqual("\"5\"", allprops[3]["FOO5"].Value.Value);
+            Assert.AreEqual("\"6\"", allprops[3]["FOO6"].Value.Value);
             page1.Delete(0);
         }
 

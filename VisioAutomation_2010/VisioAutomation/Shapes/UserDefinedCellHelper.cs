@@ -126,7 +126,7 @@ namespace VisioAutomation.Shapes
             return dic;
         }
 
-        public static List<List<UserDefinedCell>> GetFormulas(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static List<Dictionary<string, UserDefinedCellCells>> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, ShapeSheet.CellValueType cvt)
         {
             if (page == null)
             {
@@ -142,7 +142,7 @@ namespace VisioAutomation.Shapes
 
             var list_data = UserDefinedCellCells.GetFormulas(page,shapeids);
 
-            var list_list = new List<List<UserDefinedCell>>(shapeids.Count);
+            var list_dics = new List<Dictionary<string, UserDefinedCellCells>>(shapeids.Count);
 
             for (int i = 0; i < shapes.Count; i++)
             {
@@ -150,16 +150,15 @@ namespace VisioAutomation.Shapes
                 var shape_data = list_data[i];
                 var prop_names = UserDefinedCellHelper.GetNames(shape);
 
-                var list = new List<UserDefinedCell>(shape_data.Count);
-                list_list.Add(list);
+                var dic = new Dictionary<string, UserDefinedCellCells>(shape_data.Count);
+                list_dics.Add(dic);
                 for (int j = 0; j < shape_data.Count ; j++)
                 {
-                    var c = new UserDefinedCell(prop_names[j], shape_data[j]);
-                    list.Add(c);
+                    dic[prop_names[j]] = shape_data[j];
                 }
             }
 
-            return list_list;
+            return list_dics;
         }
 
         /// <summary>
