@@ -73,13 +73,13 @@ namespace VisioAutomation.Pages
         public static PageLayoutCells GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var query = PageLayoutCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static PageLayoutCells GetResults(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var query = PageLayoutCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
         private static readonly System.Lazy<PageLayoutCellsReader> lazy_query = new System.Lazy<PageLayoutCellsReader>();
 

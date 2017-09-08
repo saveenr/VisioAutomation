@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -62,25 +63,25 @@ namespace VisioAutomation.Text
         public static List<List<CharacterFormatCells>> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var query = CharacterFormatCells.lazy_query.Value;
-            return query.GetFormulas(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Formula);
         }
 
         public static List<List<CharacterFormatCells>> GetResults(IVisio.Page page, IList<int> shapeids)
         {
             var query = CharacterFormatCells.lazy_query.Value;
-            return query.GetResults(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Result);
         }
 
         public static List<CharacterFormatCells> GetFormulas(IVisio.Shape shape)
         {
             var query = CharacterFormatCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static List<CharacterFormatCells> GetResults(IVisio.Shape shape)
         {
             var query = CharacterFormatCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<CharacterFormatCellsReader> lazy_query = new System.Lazy<CharacterFormatCellsReader>();

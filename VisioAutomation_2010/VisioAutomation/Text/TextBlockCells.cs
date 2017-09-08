@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -35,26 +36,26 @@ namespace VisioAutomation.Text
         public static IList<TextBlockCells> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return query.GetFormulas(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Formula);
         }
 
         public static IList<TextBlockCells> GetResults(IVisio.Page page, IList<int> shapeids)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return query.GetResults(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Result);
         }
 
 
         public static TextBlockCells GetFormulas(IVisio.Shape shape)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static TextBlockCells GetResults(IVisio.Shape shape)
         {
             var query = TextBlockCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<TextBlockCellsReader> lazy_query = new System.Lazy<TextBlockCellsReader>();

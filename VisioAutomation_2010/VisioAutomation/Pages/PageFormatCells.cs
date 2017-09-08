@@ -47,13 +47,13 @@ namespace VisioAutomation.Pages
         public static PageFormatCells GetFormulas(IVisio.Shape shape)
         {
             var query = PageFormatCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static PageFormatCells GetResults(IVisio.Shape shape)
         {
             var query = PageFormatCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<PageFormatCellsReader> lazy_query = new System.Lazy<PageFormatCellsReader>();

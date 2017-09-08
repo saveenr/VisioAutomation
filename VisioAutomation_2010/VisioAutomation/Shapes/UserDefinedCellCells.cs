@@ -28,25 +28,25 @@ namespace VisioAutomation.Shapes
         public static List<List<UserDefinedCellCells>> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var query = UserDefinedCellCells.lazy_query.Value;
-            return query.GetFormulas(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Formula);
         }
 
         public static List<List<UserDefinedCellCells>> GetResults(IVisio.Page page, IList<int> shapeids)
         {
             var query = UserDefinedCellCells.lazy_query.Value;
-            return query.GetResults(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Result);
         }
 
         public static List<UserDefinedCellCells> GetFormulas(IVisio.Shape shape)
         {
             var query = UserDefinedCellCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static List<UserDefinedCellCells> GetResults(IVisio.Shape shape)
         {
             var query = UserDefinedCellCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<UserDefinedCellCellsReader> lazy_query = new System.Lazy<UserDefinedCellCellsReader>();

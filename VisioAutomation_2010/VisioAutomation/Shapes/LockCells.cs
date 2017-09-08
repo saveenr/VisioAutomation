@@ -59,25 +59,25 @@ namespace VisioAutomation.Shapes
         public static List<LockCells> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var query = LockCells.lazy_query.Value;
-            return query.GetFormulas(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Formula);
         }
 
         public static List<LockCells> GetResults(IVisio.Page page, IList<int> shapeids)
         {
             var query = LockCells.lazy_query.Value;
-            return query.GetResults(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Result);
         }
 
         public static LockCells GetFormulas(IVisio.Shape shape)
         {
             var query = LockCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static LockCells GetResults(IVisio.Shape shape, CellValueType cvt)
         {
             var query = LockCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<LockCellsReader> lazy_query = new System.Lazy<LockCellsReader>();

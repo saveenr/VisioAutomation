@@ -55,25 +55,25 @@ namespace VisioAutomation.Shapes
         public static List<ShapeLayoutCells> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return query.GetFormulas(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Formula);
         }
 
         public static List<ShapeLayoutCells> GetResults(IVisio.Page page, IList<int> shapeids)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return query.GetResults(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Result);
         }
 
         public static ShapeLayoutCells GetFormulas(IVisio.Shape shape)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static ShapeLayoutCells GetResults(IVisio.Shape shape)
         {
             var query = ShapeLayoutCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<ShapeLayoutCellsReader> lazy_query = new System.Lazy<ShapeLayoutCellsReader>();

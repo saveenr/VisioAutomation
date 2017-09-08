@@ -29,25 +29,25 @@ namespace VisioAutomation.Shapes
         public static List<List<ConnectionPointCells>> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var query = ConnectionPointCells.lazy_query.Value;
-            return query.GetFormulas(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Formula);
         }
 
         public static List<List<ConnectionPointCells>> GetResults(IVisio.Page page, IList<int> shapeids)
         {
             var query = ConnectionPointCells.lazy_query.Value;
-            return query.GetResults(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Result);
         }
 
         public static List<ConnectionPointCells> GetFormulas(IVisio.Shape shape)
         {
             var query = ConnectionPointCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static List<ConnectionPointCells> GetResults(IVisio.Shape shape)
         {
             var query = ConnectionPointCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<ConnectionPointCellsReader> lazy_query = new System.Lazy<ConnectionPointCellsReader>();

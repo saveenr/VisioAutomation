@@ -38,13 +38,13 @@ namespace VisioAutomation.Pages
         public static PageRulerAndGridCells GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var query = PageRulerAndGridCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static PageRulerAndGridCells GetResults(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var query = PageRulerAndGridCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<PageRulerAndGridCellsReader> lazy_query = new System.Lazy<PageRulerAndGridCellsReader>();

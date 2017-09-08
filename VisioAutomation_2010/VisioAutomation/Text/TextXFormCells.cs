@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
@@ -30,26 +31,26 @@ namespace VisioAutomation.Text
         public static List<TextXFormCells> GetFormulas(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var query = TextXFormCells.lazy_query.Value;
-            return query.GetFormulas(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Formula);
         }
 
         public static List<TextXFormCells> GetResults(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var query = TextXFormCells.lazy_query.Value;
-            return query.GetResults(page, shapeids);
+            return query.GetValues(page, shapeids, CellValueType.Result);
         }
 
 
         public static TextXFormCells GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var query = TextXFormCells.lazy_query.Value;
-            return query.GetFormulas(shape);
+            return query.GetValues(shape, CellValueType.Formula);
         }
 
         public static TextXFormCells GetResults(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var query = TextXFormCells.lazy_query.Value;
-            return query.GetResults(shape);
+            return query.GetValues(shape, CellValueType.Result);
         }
 
         private static readonly System.Lazy<TextXFormCellsReader> lazy_query = new System.Lazy<TextXFormCellsReader>();

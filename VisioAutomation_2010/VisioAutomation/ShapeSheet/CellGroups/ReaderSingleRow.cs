@@ -15,34 +15,18 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row);
 
-        public List<TGroup> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        public List<TGroup> GetValues(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var data_for_shapes = this.query.GetFormulas(page, shapeids);
+            var data_for_shapes = this.query.GetValues(page, shapeids, cvt);
             var list = new List<TGroup>(shapeids.Count);
             var objects = data_for_shapes.Select(d => this.CellDataToCellGroup(d.Cells));
             list.AddRange(objects);
             return list;
         }
 
-        public List<TGroup> GetResults(IVisio.Page page, IList<int> shapeids)
+        public TGroup GetValues(IVisio.Shape shape, CellValueType cvt)
         {
-            var data_for_shapes = this.query.GetResults<string>(page, shapeids);
-            var list = new List<TGroup>(shapeids.Count);
-            var objects = data_for_shapes.Select(d => this.CellDataToCellGroup(d.Cells));
-            list.AddRange(objects);
-            return list;
-        }
-
-        public TGroup GetFormulas(IVisio.Shape shape)
-        {
-            var data_for_shape = this.query.GetFormulas(shape);
-            var cells = this.CellDataToCellGroup(data_for_shape.Cells);
-            return cells;
-        }
-
-        public TGroup GetResults(IVisio.Shape shape)
-        {
-            var data_for_shape = this.query.GetResults<string>(shape);
+            var data_for_shape = this.query.GetValues(shape, cvt);
             var cells = this.CellDataToCellGroup(data_for_shape.Cells);
             return cells;
         }

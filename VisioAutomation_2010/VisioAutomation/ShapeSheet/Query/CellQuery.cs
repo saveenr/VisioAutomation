@@ -27,6 +27,19 @@ namespace VisioAutomation.ShapeSheet.Query
             return GetFormulas(surface);
         }
 
+        public CellQueryOutput<string> GetValues(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
+        {
+            var surface = new SurfaceTarget(shape);
+            if (cvt == CellValueType.Formula)
+            {
+                return GetFormulas(surface);
+            }
+            else
+            {
+                return GetResults<string>(surface);
+            }
+        }
+
         public CellQueryOutput<string> GetFormulas(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
@@ -62,6 +75,20 @@ namespace VisioAutomation.ShapeSheet.Query
             var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
+
+        public CellQueryOutputList<string> GetValues(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType cvt)
+        {
+            var surface = new SurfaceTarget(page);
+            if (cvt == CellValueType.Formula)
+            {
+                return this.GetFormulas(surface, shapeids);
+            }
+            else
+            {
+                return this.GetResults<string>(surface, shapeids);
+            }
+        }
+
 
         public CellQueryOutputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
