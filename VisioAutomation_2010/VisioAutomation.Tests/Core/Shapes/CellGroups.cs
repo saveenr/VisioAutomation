@@ -2,8 +2,6 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Shapes;
-using VisioAutomation.Extensions;
 using System.Collections.Generic;
 
 namespace VisioAutomation_Tests.Core.Shapes

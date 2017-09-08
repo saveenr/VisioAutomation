@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages

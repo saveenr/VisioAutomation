@@ -1,6 +1,5 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Scripting
