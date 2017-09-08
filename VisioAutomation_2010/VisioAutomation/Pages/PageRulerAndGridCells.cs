@@ -35,16 +35,10 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageRulerAndGridCells GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
+        public static PageRulerAndGridCells GetValues(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
         {
             var query = PageRulerAndGridCells.lazy_query.Value;
-            return query.GetValues(shape, CellValueType.Formula);
-        }
-
-        public static PageRulerAndGridCells GetResults(Microsoft.Office.Interop.Visio.Shape shape)
-        {
-            var query = PageRulerAndGridCells.lazy_query.Value;
-            return query.GetValues(shape, CellValueType.Result);
+            return query.GetValues(shape, cvt);
         }
 
         private static readonly System.Lazy<PageRulerAndGridCellsReader> lazy_query = new System.Lazy<PageRulerAndGridCellsReader>();

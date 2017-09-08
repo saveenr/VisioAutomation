@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -80,7 +81,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>();
             foreach (var shape in targets.Shapes)
             {
-                var controls = ControlCells.GetFormulas(shape);
+                var controls = ControlCells.GetValues(shape, CellValueType.Formula);
                 dic[shape] = controls;
             }
             return dic;

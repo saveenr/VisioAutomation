@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -72,7 +73,7 @@ namespace VisioAutomation.Shapes
         {
             var prop_names = CustomPropertyHelper.GetNames(shape);
             var dic = new CustomPropertyDictionary(prop_names.Count);
-            var cells = CustomPropertyCells.GetFormulas(shape);
+            var cells = CustomPropertyCells.GetValues(shape, CellValueType.Formula);
 
             for (int prop_index = 0; prop_index < prop_names.Count(); prop_index++)
             {
@@ -96,7 +97,7 @@ namespace VisioAutomation.Shapes
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_per_shape = CustomPropertyCells.GetFormulas(page, shapeids);
+            var customprops_per_shape = CustomPropertyCells.GetValues(page, shapeids, CellValueType.Formula);
             var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
 
             return customprops_dic;
@@ -115,7 +116,7 @@ namespace VisioAutomation.Shapes
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_per_shape = CustomPropertyCells.GetResults(page, shapeids);
+            var customprops_per_shape = CustomPropertyCells.GetValues(page, shapeids, CellValueType.Result);
             var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
 
             return customprops_dic;

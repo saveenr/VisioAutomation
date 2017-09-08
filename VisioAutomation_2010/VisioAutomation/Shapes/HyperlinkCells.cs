@@ -34,29 +34,16 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<List<HyperlinkCells>> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        public static List<List<HyperlinkCells>> GetValues(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
             var query = HyperlinkCells.lazy_query.Value;
-            return query.GetValues(page, shapeids, CellValueType.Formula);
+            return query.GetValues(page, shapeids, cvt);
         }
 
-        public static List<List<HyperlinkCells>> GetResults(IVisio.Page page, IList<int> shapeids)
+        public static List<HyperlinkCells> GetValues(IVisio.Shape shape, CellValueType cvt)
         {
             var query = HyperlinkCells.lazy_query.Value;
-            return query.GetValues(page, shapeids, CellValueType.Result);
-        }
-
-        public static List<HyperlinkCells> GetFormulas(IVisio.Shape shape)
-        {
-            var query = HyperlinkCells.lazy_query.Value;
-            return query.GetValues(shape, CellValueType.Formula);
-        }
-
-
-        public static List<HyperlinkCells> GetResults(IVisio.Shape shape)
-        {
-            var query = HyperlinkCells.lazy_query.Value;
-            return query.GetValues(shape, CellValueType.Result);
+            return query.GetValues(shape, cvt);
         }
 
         private static readonly System.Lazy<HyperlinkCellsReader> lazy_query = new System.Lazy<HyperlinkCellsReader>();

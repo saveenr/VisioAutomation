@@ -44,16 +44,10 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageFormatCells GetFormulas(IVisio.Shape shape)
+        public static PageFormatCells GetValues(IVisio.Shape shape, CellValueType cvt)
         {
             var query = PageFormatCells.lazy_query.Value;
-            return query.GetValues(shape, CellValueType.Formula);
-        }
-
-        public static PageFormatCells GetResults(IVisio.Shape shape)
-        {
-            var query = PageFormatCells.lazy_query.Value;
-            return query.GetValues(shape, CellValueType.Result);
+            return query.GetValues(shape, cvt);
         }
 
         private static readonly System.Lazy<PageFormatCellsReader> lazy_query = new System.Lazy<PageFormatCellsReader>();

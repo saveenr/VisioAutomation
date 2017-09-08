@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Core.Shapes
 {
@@ -25,7 +26,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(2, ControlHelper.GetCount(s1));
             
             // retrieve the control information
-            var controls = ControlCells.GetFormulas(s1);
+            var controls = ControlCells.GetValues(s1, CellValueType.Formula);
 
             // verify that the controls were set propery
             Assert.AreEqual(2, controls.Count);

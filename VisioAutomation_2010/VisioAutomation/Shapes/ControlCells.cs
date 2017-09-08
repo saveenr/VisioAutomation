@@ -33,31 +33,18 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<List<ControlCells>> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        public static List<List<ControlCells>> GetValues(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
             var query = ControlCells.lazy_query.Value;
-            return query.GetValues(page, shapeids, CellValueType.Formula);
+            return query.GetValues(page, shapeids, cvt);
         }
 
-        public static List<List<ControlCells>> GetResults(IVisio.Page page, IList<int> shapeids)
+        public static List<ControlCells> GetValues(IVisio.Shape shape, CellValueType cvt)
         {
             var query = ControlCells.lazy_query.Value;
-            return query.GetValues(page, shapeids, CellValueType.Result);
+            return query.GetValues(shape, cvt);
         }
-
-
-        public static List<ControlCells> GetFormulas(IVisio.Shape shape)
-        {
-            var query = ControlCells.lazy_query.Value;
-            return query.GetValues(shape, CellValueType.Formula);
-        }
-
-        public static List<ControlCells> GetResults(IVisio.Shape shape)
-        {
-            var query = ControlCells.lazy_query.Value;
-            return query.GetValues(shape, CellValueType.Result);
-        }
-
+        
         private static readonly System.Lazy<ControlCellsReader> lazy_query = new System.Lazy<ControlCellsReader>();
 
         class ControlCellsReader : ReaderMultiRow<ControlCells>

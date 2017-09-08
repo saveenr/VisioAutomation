@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Core.Connections
 {
@@ -32,8 +33,8 @@ namespace VisioAutomation_Tests.Core.Connections
             ConnectionPointHelper.Add(s1, cpd2);
             Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
 
-            var controlpoints_f = ConnectionPointCells.GetFormulas(s1);
-            var controlpoints_r = ConnectionPointCells.GetResults(s1);
+            var controlpoints_f = ConnectionPointCells.GetValues(s1, CellValueType.Formula);
+            var controlpoints_r = ConnectionPointCells.GetValues(s1,CellValueType.Result);
             Assert.AreEqual(2, controlpoints_f.Count);
             Assert.AreEqual(2, controlpoints_r.Count);
             var cp_f0 = controlpoints_f[0];

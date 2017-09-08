@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -28,7 +29,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
             foreach (var shape in targets.Shapes)
             {
-                var cp = ConnectionPointCells.GetFormulas(shape);
+                var cp = ConnectionPointCells.GetValues(shape, CellValueType.Formula);
                 dic[shape] = cp;
             }
 
