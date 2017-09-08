@@ -32,7 +32,7 @@ namespace VisioPowerShell.Commands
             if (this.Width > 0 || this.Height > 0)
             {
                 var page = this.Client.Application.Get().ActivePage;
-                var old_page_format_cells = VisioAutomation.Pages.PageFormatCells.GetValues(page.PageSheet, CellValueType.Formula);
+                var old_page_format_cells = VisioAutomation.Pages.PageFormatCells.GetCells(page.PageSheet, CellValueType.Formula);
 
                 var new_page_format_cells = new VisioAutomation.Pages.PageFormatCells();
                 

@@ -29,7 +29,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
             foreach (var shape in targets.Shapes)
             {
-                var cp = ConnectionPointCells.GetValues(shape, CellValueType.Formula);
+                var cp = ConnectionPointCells.GetCells(shape, CellValueType.Formula);
                 dic[shape] = cp;
             }
 

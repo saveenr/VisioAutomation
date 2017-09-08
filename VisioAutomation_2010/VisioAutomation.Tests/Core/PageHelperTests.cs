@@ -14,7 +14,7 @@ namespace VisioAutomation_Tests.Core.Page
         {
             var size = new VA.Geometry.Size(4, 3);
             var page1 = this.GetNewPage(size);
-            var page_fmt_cells = VA.Pages.PageFormatCells.GetValues(page1.PageSheet, CellValueType.Formula);
+            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, CellValueType.Formula);
             Assert.AreEqual("4 in", page_fmt_cells.Width.Value);
             Assert.AreEqual("3 in", page_fmt_cells.Height.Value);
 
@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             writer.Commit(page1.PageSheet);
 
-            var actual_page_format_cells = VA.Pages.PageFormatCells.GetValues(page1.PageSheet, CellValueType.Result);
+            var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, CellValueType.Result);
             Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Value);
             Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Value);
             page1.Delete(0);
@@ -159,7 +159,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5 + shape_size.Height);
             page.ResizeToFitContents(padding_size);
-            var xform = VA.Shapes.ShapeXFormCells.GetValues(shape, CellValueType.Result);
+            var xform = VA.Shapes.ShapeXFormCells.GetCells(shape, CellValueType.Result);
             var pinpos = xform.GetPinPosResult();
             Assert.AreEqual(expected_pinx, pinpos.X, 0.1);
             Assert.AreEqual(expected_piny, pinpos.Y, 0.1);

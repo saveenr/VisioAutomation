@@ -44,7 +44,7 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageFormatCells GetValues(IVisio.Shape shape, CellValueType cvt)
+        public static PageFormatCells GetCells(IVisio.Shape shape, CellValueType cvt)
         {
             var query = PageFormatCells.lazy_query.Value;
             return query.GetValues(shape, cvt);

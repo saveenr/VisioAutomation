@@ -73,7 +73,7 @@ namespace VisioAutomation.Shapes
         {
             var prop_names = CustomPropertyHelper.GetNames(shape);
             var dic = new CustomPropertyDictionary(prop_names.Count);
-            var cells = CustomPropertyCells.GetValues(shape, CellValueType.Formula);
+            var cells = CustomPropertyCells.GetCells(shape, CellValueType.Formula);
 
             for (int prop_index = 0; prop_index < prop_names.Count(); prop_index++)
             {
@@ -97,7 +97,7 @@ namespace VisioAutomation.Shapes
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_per_shape = CustomPropertyCells.GetValues(page, shapeids, CellValueType.Formula);
+            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids, CellValueType.Formula);
             var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
 
             return customprops_dic;
@@ -116,7 +116,7 @@ namespace VisioAutomation.Shapes
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_per_shape = CustomPropertyCells.GetValues(page, shapeids, CellValueType.Result);
+            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids, CellValueType.Result);
             var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
 
             return customprops_dic;

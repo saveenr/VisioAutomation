@@ -67,13 +67,13 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<ShapeFormatCells> GetValues(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
+        public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
             var query = ShapeFormatCells.lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
-        public static ShapeFormatCells GetValues(IVisio.Shape shape, CellValueType cvt)
+        public static ShapeFormatCells GetCells(IVisio.Shape shape, CellValueType cvt)
         {
             var query = ShapeFormatCells.lazy_query.Value;
             return query.GetValues(shape, cvt);

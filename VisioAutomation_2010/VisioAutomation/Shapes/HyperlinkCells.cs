@@ -34,13 +34,13 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<List<HyperlinkCells>> GetValues(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
+        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
             var query = HyperlinkCells.lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
-        public static List<HyperlinkCells> GetValues(IVisio.Shape shape, CellValueType cvt)
+        public static List<HyperlinkCells> GetCells(IVisio.Shape shape, CellValueType cvt)
         {
             var query = HyperlinkCells.lazy_query.Value;
             return query.GetValues(shape, cvt);

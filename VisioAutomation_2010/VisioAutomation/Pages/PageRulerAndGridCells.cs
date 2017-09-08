@@ -35,7 +35,7 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageRulerAndGridCells GetValues(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
+        public static PageRulerAndGridCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
         {
             var query = PageRulerAndGridCells.lazy_query.Value;
             return query.GetValues(shape, cvt);
