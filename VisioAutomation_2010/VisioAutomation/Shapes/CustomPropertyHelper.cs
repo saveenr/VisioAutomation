@@ -321,5 +321,102 @@ namespace VisioAutomation.Shapes
 
             CustomPropertyHelper.Set(shape, name, cp);
         }
+
+        public static CustomPropertyCells FromValue(string value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 0;
+            return x;
+        }
+
+        public static CustomPropertyCells FromValue(int value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 0;
+            return x;
+        }
+
+        public static CustomPropertyCells FromValue(double value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 2;
+            return x;
+        }
+
+        public static CustomPropertyCells FromValue(float value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 2;
+            return x;
+        }
+
+        public static CustomPropertyCells FromValue(bool value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value ? "TRUE" : "FALSE";
+            x.Type = 3;
+            return x;
+        }
+
+
+        public static CustomPropertyCells FromValue(DateTime value)
+        {
+            var x = new CustomPropertyCells();
+            var current_culture = System.Globalization.CultureInfo.CurrentCulture;
+            string formatted_dt = value.ToString(current_culture);
+            x.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
+            x.Type = 5;
+            return x;
+        }
+
+
+        public static CustomPropertyCells FromValue(CellValueLiteral value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 2;
+            return x;
+        }
+
+        public static CustomPropertyCells FromValue(object value)
+        {
+            if (value is string value_str)
+            {
+                return FromValue(value_str);
+            }
+            else if (value is int value_int)
+            {
+                return FromValue(value_int);
+            }
+            else if (value is double value_double)
+            {
+                return FromValue(value_double);
+            }
+            else if (value is float value_float)
+            {
+                return FromValue(value_float);
+            }
+            else if (value is bool value_bool)
+            {
+                return FromValue(value_bool);
+            }
+            else if (value is System.DateTime value_datetime)
+            {
+                return FromValue(value_datetime);
+            }
+            else if (value is CellValueLiteral value_cvl)
+            {
+                return FromValue(value_cvl);
+            }
+
+            var value_type = value.GetType();
+            string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
+            throw new System.ArgumentException(msg);
+        }
+
     }
 }

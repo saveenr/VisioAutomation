@@ -24,50 +24,6 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public CustomPropertyCells(string value)
-        {
-            this.Value = value;
-            this.Type = 0;
-        }
-
-        public CustomPropertyCells(int value)
-        {
-            this.Value = value;
-            this.Type = 2;
-        }
-
-        public CustomPropertyCells(double value)
-        {
-            this.Value = value;
-            this.Type = 2;
-        }
-
-        public CustomPropertyCells(float value)
-        {
-            this.Value = value;
-            this.Type = 2;
-        }
-
-        public CustomPropertyCells(bool value)
-        {
-            this.Value = value ? "TRUE" : "FALSE";
-            this.Type = 3;
-        }
-
-        public CustomPropertyCells(System.DateTime value)
-        {
-            var current_culture = System.Globalization.CultureInfo.CurrentCulture;
-            string formatted_dt = value.ToString(current_culture);
-            this.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
-            this.Type = 5;
-        }
-
-        public CustomPropertyCells(ShapeSheet.CellValueLiteral value)
-        {
-            this.Value = value;
-            this.Type = 2;
-        }
-
         private string SmartStringToFormulaString(ShapeSheet.CellValueLiteral formula, bool force_no_quoting)
         {
             if (!formula.HasValue)
@@ -139,38 +95,6 @@ namespace VisioAutomation.Shapes
         }
 
         private static readonly System.Lazy<CustomPropertyCellsReader> lazy_query = new System.Lazy<CustomPropertyCellsReader>();
-
-        public static CustomPropertyCells FromValue(object value)
-        {
-            if (value is string value_str)
-            {
-                return new CustomPropertyCells(value_str);
-            }
-            else if (value is int value_int)
-            {
-                return new CustomPropertyCells(value_int);
-            }
-            else if (value is double value_double)
-            {
-                return new CustomPropertyCells(value_double);
-            }
-            else if (value is float value_float)
-            {
-                return new CustomPropertyCells(value_float);
-            }
-            else if (value is bool value_bool)
-            {
-                return new CustomPropertyCells(value_bool);
-            }
-            else if (value is System.DateTime value_datetime)
-            {
-                return new CustomPropertyCells(value_datetime);
-            }
-            var value_type = value.GetType();
-            string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
-            throw new System.ArgumentException(msg);
-        }
-
 
 
         public class CustomPropertyCellsReader : ReaderMultiRow<CustomPropertyCells>
