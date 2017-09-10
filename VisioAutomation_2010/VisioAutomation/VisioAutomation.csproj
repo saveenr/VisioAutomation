@@ -122,12 +122,8 @@
     <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
-    <Compile Include="Text\TextXFormCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnListBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderSingleRow.cs" />
-    <Compile Include="Text\CharacterFormatCellsReader.cs" />
-    <Compile Include="Text\ParagraphFormatCellsReader.cs" />
-    <Compile Include="Text\TextBlockCellsReader.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBase.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryColumn.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryColumnList.cs" />
