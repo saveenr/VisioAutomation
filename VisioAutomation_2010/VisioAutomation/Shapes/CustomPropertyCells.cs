@@ -73,12 +73,12 @@ namespace VisioAutomation.Shapes
                 yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropValue, str_value);
                 yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropFormat, str_format);
                 yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropPrompt, str_prompt);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropCalendar, cp.Calendar.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropLangID, cp.LangID.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropSortKey, cp.SortKey.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropInvisible, cp.Invisible.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropType, cp.Type.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropAsk, cp.Ask.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropCalendar, cp.Calendar);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropLangID, cp.LangID);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropSortKey, cp.SortKey);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropInvisible, cp.Invisible);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropType, cp.Type);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropAsk, cp.Ask);
             }
         }
 

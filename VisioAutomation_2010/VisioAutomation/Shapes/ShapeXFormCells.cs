@@ -20,13 +20,13 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormPinX, this.PinX.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormPinY, this.PinY.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormLocPinX, this.LocPinX.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormLocPinY, this.LocPinY.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormWidth, this.Width.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormHeight, this.Height.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormAngle, this.Angle.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormPinX, this.PinX);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormPinY, this.PinY);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormLocPinX, this.LocPinX);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormLocPinY, this.LocPinY);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormWidth, this.Width);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormHeight, this.Height);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormAngle, this.Angle);
             }
         }
 

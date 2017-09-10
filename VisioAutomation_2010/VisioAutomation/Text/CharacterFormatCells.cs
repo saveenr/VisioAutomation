@@ -34,29 +34,29 @@ namespace VisioAutomation.Text
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharColor, this.Color.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharFont, this.Font.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharSize, this.Size.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharStyle, this.Style.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharColorTransparency, this.ColorTransparency.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharAsianFont, this.AsianFont.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharCase, this.Case.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharComplexScriptFont, this.ComplexScriptFont.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharComplexScriptSize, this.ComplexScriptSize.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharDoubleUnderline, this.DoubleUnderline.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLangID, this.LangID.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharFontScale, this.FontScale.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLangID, this.LangID.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLetterspace, this.Letterspace.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLocale, this.Locale.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLocalizeFont, this.LocalizeFont.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharOverline, this.Overline.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharPerpendicular, this.Perpendicular.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharPos, this.Pos.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharRTLText, this.RTLText.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharStrikethru, this.Strikethru.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharUseVertical, this.UseVertical.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharColor, this.Color);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharFont, this.Font);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharSize, this.Size);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharStyle, this.Style);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharColorTransparency, this.ColorTransparency);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharAsianFont, this.AsianFont);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharCase, this.Case);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharComplexScriptFont, this.ComplexScriptFont);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharComplexScriptSize, this.ComplexScriptSize);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLangID, this.LangID);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharFontScale, this.FontScale);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLangID, this.LangID);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLetterspace, this.Letterspace);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLocale, this.Locale);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharLocalizeFont, this.LocalizeFont);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharOverline, this.Overline);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharPerpendicular, this.Perpendicular);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharPos, this.Pos);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharRTLText, this.RTLText);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharStrikethru, this.Strikethru);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CharUseVertical, this.UseVertical);
             }
         }
 

@@ -22,14 +22,14 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlCanGlue, this.CanGlue.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlTip, this.Tip.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlX, this.X.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlY, this.Y.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlXDynamics, this.XDynamics.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlYDynamics, this.YDynamics.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlCanGlue, this.CanGlue);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlTip, this.Tip);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlX, this.X);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlY, this.Y);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlXDynamics, this.XDynamics);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlYDynamics, this.YDynamics);
             }
         }
 

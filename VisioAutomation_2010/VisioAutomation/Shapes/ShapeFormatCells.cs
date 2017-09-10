@@ -38,31 +38,31 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillBackground, this.FillBackground.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillForeground, this.FillForeground.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillPattern, this.FillPattern.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowType, this.FillShadowType.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowBackground, this.FillShadowBackground.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowForeground, this.FillShadowForeground.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowPattern, this.FillShadowPattern.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineBeginArrow, this.LineBeginArrow.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineEndArrow, this.LineEndArrow.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineEndArrowSize, this.LineEndArrowSize.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineCap, this.LineCap.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineColor, this.LineColor.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineColorTransparency, this.LineColorTransparency.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LinePattern, this.LinePattern.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineWeight, this.LineWeight.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineRounding, this.LineRounding.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillBackground, this.FillBackground);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillForeground, this.FillForeground);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillPattern, this.FillPattern);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowType, this.FillShadowType);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowBackground, this.FillShadowBackground);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowForeground, this.FillShadowForeground);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowPattern, this.FillShadowPattern);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineBeginArrow, this.LineBeginArrow);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineEndArrow, this.LineEndArrow);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineCap, this.LineCap);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineColor, this.LineColor);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineColorTransparency, this.LineColorTransparency);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LinePattern, this.LinePattern);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineWeight, this.LineWeight);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineRounding, this.LineRounding);
             }
         }
 

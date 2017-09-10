@@ -22,15 +22,15 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkAddress, this.Address.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkDescription, this.Description.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkFrame, this.Frame.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkSortKey, this.SortKey.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkSubAddress, this.SubAddress.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkNewWindow, this.NewWindow.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkDefault, this.Default.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkInvisible, this.Invisible.Value);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkAddress, this.Address);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkDescription, this.Description);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkFrame, this.Frame);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkSortKey, this.SortKey);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkSubAddress, this.SubAddress);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkNewWindow, this.NewWindow);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkDefault, this.Default);
+                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkInvisible, this.Invisible);
             }
         }
 
