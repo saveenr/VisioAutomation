@@ -70,7 +70,7 @@ namespace VisioAutomation.Shapes
                 }
                 else
                 {
-                    // For non-stringd don't add any extra quotes
+                    // For non-strings don't add any extra quotes
                     str_value = this.SmartStringToFormulaString(this.Value.Value, true);
                 }
 
