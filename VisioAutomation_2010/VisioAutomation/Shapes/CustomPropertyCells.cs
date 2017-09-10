@@ -52,7 +52,16 @@ namespace VisioAutomation.Shapes
         {
             get
             {
+                // Label
                 string str_label = this.SmartStringToFormulaString(this.Label.Value, false);
+
+                // Value
+                string str_format = this.SmartStringToFormulaString(this.Format.Value, false);
+
+                // Prompt
+                string str_prompt = this.SmartStringToFormulaString(this.Prompt.Value, false);
+
+                // Value
                 string str_value = null;
                 if (this.Type.Value == "0" || this.Type.Value == null)
                 {
@@ -64,8 +73,6 @@ namespace VisioAutomation.Shapes
                     // For non-stringd don't add any extra quotes
                     str_value = this.SmartStringToFormulaString(this.Value.Value, true);
                 }
-                string str_format = this.SmartStringToFormulaString(this.Format.Value, false);
-                string str_prompt = this.SmartStringToFormulaString(this.Prompt.Value, false);
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropValue, str_value);
