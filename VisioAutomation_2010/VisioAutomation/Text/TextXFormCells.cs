@@ -73,13 +73,13 @@ namespace VisioAutomation.Text
 
             public TextXFormCellsReader()
             {
-                this.PinX = this.query.Columns.Add(SrcConstants.TextXFormPinX, nameof(SrcConstants.TextXFormPinX));
-                this.PinY = this.query.Columns.Add(SrcConstants.TextXFormPinY, nameof(SrcConstants.TextXFormPinY));
-                this.LocPinX = this.query.Columns.Add(SrcConstants.TextXFormLocPinX, nameof(SrcConstants.TextXFormLocPinX));
-                this.LocPinY = this.query.Columns.Add(SrcConstants.TextXFormLocPinY, nameof(SrcConstants.TextXFormLocPinY));
-                this.Width = this.query.Columns.Add(SrcConstants.TextXFormWidth, nameof(SrcConstants.TextXFormWidth));
-                this.Height = this.query.Columns.Add(SrcConstants.TextXFormHeight, nameof(SrcConstants.TextXFormHeight));
-                this.Angle = this.query.Columns.Add(SrcConstants.TextXFormAngle, nameof(SrcConstants.TextXFormAngle));
+                this.PinX = this.query.Columns.Add(SrcConstants.TextXFormPinX, nameof(this.PinX));
+                this.PinY = this.query.Columns.Add(SrcConstants.TextXFormPinY, nameof(this.PinY));
+                this.LocPinX = this.query.Columns.Add(SrcConstants.TextXFormLocPinX, nameof(this.LocPinX));
+                this.LocPinY = this.query.Columns.Add(SrcConstants.TextXFormLocPinY, nameof(this.LocPinY));
+                this.Width = this.query.Columns.Add(SrcConstants.TextXFormWidth, nameof(this.Width));
+                this.Height = this.query.Columns.Add(SrcConstants.TextXFormHeight, nameof(this.Height));
+                this.Angle = this.query.Columns.Add(SrcConstants.TextXFormAngle, nameof(this.Angle));
 
             }
 
