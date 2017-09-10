@@ -52,33 +52,31 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                var cp = this;
-
-                string str_label = this.SmartStringToFormulaString(cp.Label.Value, false);
+                string str_label = this.SmartStringToFormulaString(this.Label.Value, false);
                 string str_value = null;
-                if (cp.Type.Value == "0" || cp.Type.Value == null)
+                if (this.Type.Value == "0" || this.Type.Value == null)
                 {
                     // if type has no value or is a "0" then it is a string
-                    str_value = this.SmartStringToFormulaString(cp.Value.Value, false);
+                    str_value = this.SmartStringToFormulaString(this.Value.Value, false);
                 }
                 else
                 {
                     // For non-stringd don't add any extra quotes
-                    str_value = this.SmartStringToFormulaString(cp.Value.Value, true);
+                    str_value = this.SmartStringToFormulaString(this.Value.Value, true);
                 }
-                string str_format = this.SmartStringToFormulaString(cp.Format.Value, false);
-                string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Value, false);
+                string str_format = this.SmartStringToFormulaString(this.Format.Value, false);
+                string str_prompt = this.SmartStringToFormulaString(this.Prompt.Value, false);
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropValue, str_value);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropFormat, str_format);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropPrompt, str_prompt);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropCalendar, cp.Calendar);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropLangID, cp.LangID);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropSortKey, cp.SortKey);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropInvisible, cp.Invisible);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropType, cp.Type);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropAsk, cp.Ask);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropCalendar, this.Calendar);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropLangID, this.LangID);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropSortKey, this.SortKey);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropInvisible, this.Invisible);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropType, this.Type);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropAsk, this.Ask);
             }
         }
 
