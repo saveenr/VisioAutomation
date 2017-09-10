@@ -6,25 +6,25 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class CustomPropertyCells : CellGroupMultiRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral Ask { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Calendar { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Format { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Invisible { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Label { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LangID { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Prompt { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral SortKey { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Type { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Value { get; set; }
+        public CellValueLiteral Ask { get; set; }
+        public CellValueLiteral Calendar { get; set; }
+        public CellValueLiteral Format { get; set; }
+        public CellValueLiteral Invisible { get; set; }
+        public CellValueLiteral Label { get; set; }
+        public CellValueLiteral LangID { get; set; }
+        public CellValueLiteral Prompt { get; set; }
+        public CellValueLiteral SortKey { get; set; }
+        public CellValueLiteral Type { get; set; }
+        public CellValueLiteral Value { get; set; }
 
         public CustomPropertyCells()
         {
 
         }
 
-        private string SmartStringToFormulaString(ShapeSheet.CellValueLiteral formula, bool force_no_quoting)
+        private string SmartStringToFormulaString(CellValueLiteral formula, bool force_no_quoting)
         {
             if (!formula.HasValue)
             {
@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes
 
             if (formula.Value.Length == 0)
             {
-                return VisioAutomation.Utilities.Convert.StringToFormulaString(formula.Value);
+                return Utilities.Convert.StringToFormulaString(formula.Value);
             }
 
             if (formula.Value[0] != '\"')
@@ -42,7 +42,7 @@ namespace VisioAutomation.Shapes
                 {
                     return formula.Value;
                 }
-                return VisioAutomation.Utilities.Convert.StringToFormulaString(formula.Value);
+                return Utilities.Convert.StringToFormulaString(formula.Value);
             }
 
             return formula.Value;
@@ -69,28 +69,28 @@ namespace VisioAutomation.Shapes
                 string str_format = this.SmartStringToFormulaString(cp.Format.Value, false);
                 string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Value, false);
 
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropLabel, str_label);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropValue, str_value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropFormat, str_format);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropPrompt, str_prompt);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropCalendar, cp.Calendar);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropLangID, cp.LangID);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropSortKey, cp.SortKey);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropInvisible, cp.Invisible);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropType, cp.Type);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.CustomPropAsk, cp.Ask);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropValue, str_value);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropFormat, str_format);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropPrompt, str_prompt);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropCalendar, cp.Calendar);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropLangID, cp.LangID);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropSortKey, cp.SortKey);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropInvisible, cp.Invisible);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropType, cp.Type);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropAsk, cp.Ask);
             }
         }
 
         public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = CustomPropertyCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
         
         public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = CustomPropertyCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
@@ -128,7 +128,7 @@ namespace VisioAutomation.Shapes
 
             }
 
-            public override CustomPropertyCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override CustomPropertyCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new CustomPropertyCells();
                 cells.Value = row[this.Value];

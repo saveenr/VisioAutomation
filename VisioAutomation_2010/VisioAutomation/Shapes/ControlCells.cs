@@ -7,41 +7,41 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ControlCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class ControlCells : CellGroupMultiRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral CanGlue { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Tip { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral X { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Y { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral YBehavior { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral XBehavior { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral XDynamics { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral YDynamics { get; set; }
+        public CellValueLiteral CanGlue { get; set; }
+        public CellValueLiteral Tip { get; set; }
+        public CellValueLiteral X { get; set; }
+        public CellValueLiteral Y { get; set; }
+        public CellValueLiteral YBehavior { get; set; }
+        public CellValueLiteral XBehavior { get; set; }
+        public CellValueLiteral XDynamics { get; set; }
+        public CellValueLiteral YDynamics { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlCanGlue, this.CanGlue);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlTip, this.Tip);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlX, this.X);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlY, this.Y);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlYBehavior, this.YBehavior);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlXBehavior, this.XBehavior);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlXDynamics, this.XDynamics);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ControlYDynamics, this.YDynamics);
+                yield return SrcValuePair.Create(SrcConstants.ControlCanGlue, this.CanGlue);
+                yield return SrcValuePair.Create(SrcConstants.ControlTip, this.Tip);
+                yield return SrcValuePair.Create(SrcConstants.ControlX, this.X);
+                yield return SrcValuePair.Create(SrcConstants.ControlY, this.Y);
+                yield return SrcValuePair.Create(SrcConstants.ControlYBehavior, this.YBehavior);
+                yield return SrcValuePair.Create(SrcConstants.ControlXBehavior, this.XBehavior);
+                yield return SrcValuePair.Create(SrcConstants.ControlXDynamics, this.XDynamics);
+                yield return SrcValuePair.Create(SrcConstants.ControlYDynamics, this.YDynamics);
             }
         }
 
         public static List<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = ControlCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
         public static List<ControlCells> GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = ControlCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
         
@@ -73,7 +73,7 @@ namespace VisioAutomation.Shapes
 
             }
 
-            public override ControlCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override ControlCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new ControlCells();
                 cells.CanGlue = row[this.CanGlue];

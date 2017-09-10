@@ -6,45 +6,45 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeXFormCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class ShapeXFormCells : CellGroupSingleRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral PinX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral PinY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LocPinX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LocPinY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Width { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Height { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Angle { get; set; }
+        public CellValueLiteral PinX { get; set; }
+        public CellValueLiteral PinY { get; set; }
+        public CellValueLiteral LocPinX { get; set; }
+        public CellValueLiteral LocPinY { get; set; }
+        public CellValueLiteral Width { get; set; }
+        public CellValueLiteral Height { get; set; }
+        public CellValueLiteral Angle { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormPinX, this.PinX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormPinY, this.PinY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormLocPinX, this.LocPinX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormLocPinY, this.LocPinY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormWidth, this.Width);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormHeight, this.Height);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XFormAngle, this.Angle);
+                yield return SrcValuePair.Create(SrcConstants.XFormPinX, this.PinX);
+                yield return SrcValuePair.Create(SrcConstants.XFormPinY, this.PinY);
+                yield return SrcValuePair.Create(SrcConstants.XFormLocPinX, this.LocPinX);
+                yield return SrcValuePair.Create(SrcConstants.XFormLocPinY, this.LocPinY);
+                yield return SrcValuePair.Create(SrcConstants.XFormWidth, this.Width);
+                yield return SrcValuePair.Create(SrcConstants.XFormHeight, this.Height);
+                yield return SrcValuePair.Create(SrcConstants.XFormAngle, this.Angle);
             }
         }
 
         public static List<ShapeXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = ShapeXFormCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
         public static ShapeXFormCells GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = ShapeXFormCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
         private static readonly System.Lazy<ShapeXFormCellsReader> lazy_query = new System.Lazy<ShapeXFormCellsReader>();
 
-        class ShapeXFormCellsReader : ReaderSingleRow<VisioAutomation.Shapes.ShapeXFormCells>
+        class ShapeXFormCellsReader : ReaderSingleRow<ShapeXFormCells>
         {
             public CellColumn Width { get; set; }
             public CellColumn Height { get; set; }
@@ -65,9 +65,9 @@ namespace VisioAutomation.Shapes
                 this.Angle = this.query.Columns.Add(SrcConstants.XFormAngle, nameof(SrcConstants.XFormAngle));
             }
 
-            public override ShapeXFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override ShapeXFormCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
-                var cells = new Shapes.ShapeXFormCells();
+                var cells = new ShapeXFormCells();
                 cells.PinX = row[this.PinX];
                 cells.PinY = row[this.PinY];
                 cells.LocPinX = row[this.LocPinX];

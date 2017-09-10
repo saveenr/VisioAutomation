@@ -6,43 +6,43 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class HyperlinkCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class HyperlinkCells : CellGroupMultiRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral Address { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Description { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ExtraInfo { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Frame { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral SortKey { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral SubAddress { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral NewWindow { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Default { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Invisible { get; set; }
+        public CellValueLiteral Address { get; set; }
+        public CellValueLiteral Description { get; set; }
+        public CellValueLiteral ExtraInfo { get; set; }
+        public CellValueLiteral Frame { get; set; }
+        public CellValueLiteral SortKey { get; set; }
+        public CellValueLiteral SubAddress { get; set; }
+        public CellValueLiteral NewWindow { get; set; }
+        public CellValueLiteral Default { get; set; }
+        public CellValueLiteral Invisible { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkAddress, this.Address);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkDescription, this.Description);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkFrame, this.Frame);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkSortKey, this.SortKey);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkSubAddress, this.SubAddress);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkNewWindow, this.NewWindow);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkDefault, this.Default);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.HyperlinkInvisible, this.Invisible);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkAddress, this.Address);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkDescription, this.Description);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkFrame, this.Frame);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkSortKey, this.SortKey);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkSubAddress, this.SubAddress);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkNewWindow, this.NewWindow);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkDefault, this.Default);
+                yield return SrcValuePair.Create(SrcConstants.HyperlinkInvisible, this.Invisible);
             }
         }
 
         public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = HyperlinkCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
         public static List<HyperlinkCells> GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = HyperlinkCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
@@ -66,18 +66,18 @@ namespace VisioAutomation.Shapes
             {
                 var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionHyperlink);
 
-                this.Address = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkAddress, nameof(ShapeSheet.SrcConstants.HyperlinkAddress));
-                this.Default = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkDefault, nameof(ShapeSheet.SrcConstants.HyperlinkDefault));
-                this.Description = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkDescription, nameof(ShapeSheet.SrcConstants.HyperlinkDescription));
-                this.ExtraInfo = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkExtraInfo, nameof(ShapeSheet.SrcConstants.HyperlinkExtraInfo));
-                this.Frame = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkFrame, nameof(ShapeSheet.SrcConstants.HyperlinkFrame));
-                this.Invisible = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkInvisible, nameof(ShapeSheet.SrcConstants.HyperlinkInvisible));
-                this.NewWindow = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkNewWindow, nameof(ShapeSheet.SrcConstants.HyperlinkNewWindow));
-                this.SortKey = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkSortKey, nameof(ShapeSheet.SrcConstants.HyperlinkSortKey));
-                this.SubAddress = sec.Columns.Add(ShapeSheet.SrcConstants.HyperlinkSubAddress, nameof(ShapeSheet.SrcConstants.HyperlinkSubAddress));
+                this.Address = sec.Columns.Add(SrcConstants.HyperlinkAddress, nameof(SrcConstants.HyperlinkAddress));
+                this.Default = sec.Columns.Add(SrcConstants.HyperlinkDefault, nameof(SrcConstants.HyperlinkDefault));
+                this.Description = sec.Columns.Add(SrcConstants.HyperlinkDescription, nameof(SrcConstants.HyperlinkDescription));
+                this.ExtraInfo = sec.Columns.Add(SrcConstants.HyperlinkExtraInfo, nameof(SrcConstants.HyperlinkExtraInfo));
+                this.Frame = sec.Columns.Add(SrcConstants.HyperlinkFrame, nameof(SrcConstants.HyperlinkFrame));
+                this.Invisible = sec.Columns.Add(SrcConstants.HyperlinkInvisible, nameof(SrcConstants.HyperlinkInvisible));
+                this.NewWindow = sec.Columns.Add(SrcConstants.HyperlinkNewWindow, nameof(SrcConstants.HyperlinkNewWindow));
+                this.SortKey = sec.Columns.Add(SrcConstants.HyperlinkSortKey, nameof(SrcConstants.HyperlinkSortKey));
+                this.SubAddress = sec.Columns.Add(SrcConstants.HyperlinkSubAddress, nameof(SrcConstants.HyperlinkSubAddress));
             }
 
-            public override HyperlinkCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override HyperlinkCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new HyperlinkCells();
 

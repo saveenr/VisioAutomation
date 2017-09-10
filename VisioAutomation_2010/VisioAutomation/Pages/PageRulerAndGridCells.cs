@@ -5,45 +5,45 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
-    public class PageRulerAndGridCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class PageRulerAndGridCells : CellGroupSingleRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral XGridDensity { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral YGridDensity { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral XGridOrigin { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral YGridOrigin { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral XGridSpacing { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral YGridSpacing { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral XRulerDensity { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral XRulerOrigin { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral YRulerDensity { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral YRulerOrigin { get; set; }
+        public CellValueLiteral XGridDensity { get; set; }
+        public CellValueLiteral YGridDensity { get; set; }
+        public CellValueLiteral XGridOrigin { get; set; }
+        public CellValueLiteral YGridOrigin { get; set; }
+        public CellValueLiteral XGridSpacing { get; set; }
+        public CellValueLiteral YGridSpacing { get; set; }
+        public CellValueLiteral XRulerDensity { get; set; }
+        public CellValueLiteral XRulerOrigin { get; set; }
+        public CellValueLiteral YRulerDensity { get; set; }
+        public CellValueLiteral YRulerOrigin { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XGridDensity, this.XGridDensity);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XGridOrigin, this.XGridOrigin);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XGridSpacing, this.XGridSpacing);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XRulerDensity, this.XRulerDensity);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.XRulerOrigin, this.XRulerOrigin);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YGridDensity, this.YGridDensity);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YGridOrigin, this.YGridOrigin);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YGridSpacing, this.YGridSpacing);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YRulerDensity, this.YRulerDensity);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.YRulerOrigin, this.YRulerOrigin);
+                yield return SrcValuePair.Create(SrcConstants.XGridDensity, this.XGridDensity);
+                yield return SrcValuePair.Create(SrcConstants.XGridOrigin, this.XGridOrigin);
+                yield return SrcValuePair.Create(SrcConstants.XGridSpacing, this.XGridSpacing);
+                yield return SrcValuePair.Create(SrcConstants.XRulerDensity, this.XRulerDensity);
+                yield return SrcValuePair.Create(SrcConstants.XRulerOrigin, this.XRulerOrigin);
+                yield return SrcValuePair.Create(SrcConstants.YGridDensity, this.YGridDensity);
+                yield return SrcValuePair.Create(SrcConstants.YGridOrigin, this.YGridOrigin);
+                yield return SrcValuePair.Create(SrcConstants.YGridSpacing, this.YGridSpacing);
+                yield return SrcValuePair.Create(SrcConstants.YRulerDensity, this.YRulerDensity);
+                yield return SrcValuePair.Create(SrcConstants.YRulerOrigin, this.YRulerOrigin);
             }
         }
 
         public static PageRulerAndGridCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
         {
-            var query = PageRulerAndGridCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
         private static readonly System.Lazy<PageRulerAndGridCellsReader> lazy_query = new System.Lazy<PageRulerAndGridCellsReader>();
 
-        class PageRulerAndGridCellsReader : ReaderSingleRow<VisioAutomation.Pages.PageRulerAndGridCells>
+        class PageRulerAndGridCellsReader : ReaderSingleRow<PageRulerAndGridCells>
         {
             public CellColumn XGridDensity { get; set; }
             public CellColumn XGridOrigin { get; set; }
@@ -70,9 +70,9 @@ namespace VisioAutomation.Pages
                 this.YRulerOrigin = this.query.Columns.Add(SrcConstants.YRulerOrigin, nameof(SrcConstants.YRulerOrigin));
             }
 
-            public override PageRulerAndGridCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override PageRulerAndGridCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
-                var cells = new Pages.PageRulerAndGridCells();
+                var cells = new PageRulerAndGridCells();
                 cells.XGridDensity = row[this.XGridDensity];
                 cells.XGridOrigin = row[this.XGridOrigin];
                 cells.XGridSpacing = row[this.XGridSpacing];

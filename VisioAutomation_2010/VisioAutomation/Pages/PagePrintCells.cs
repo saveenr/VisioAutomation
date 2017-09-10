@@ -5,55 +5,55 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
-    public class PagePrintCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class PagePrintCells : CellGroupSingleRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral LeftMargin { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral CenterX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral CenterY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral OnPage { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral BottomMargin { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral RightMargin { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral PagesX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral PagesY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral TopMargin { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral PaperKind { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Grid { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Orientation { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ScaleX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ScaleY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral PaperSource { get; set; }
+        public CellValueLiteral LeftMargin { get; set; }
+        public CellValueLiteral CenterX { get; set; }
+        public CellValueLiteral CenterY { get; set; }
+        public CellValueLiteral OnPage { get; set; }
+        public CellValueLiteral BottomMargin { get; set; }
+        public CellValueLiteral RightMargin { get; set; }
+        public CellValueLiteral PagesX { get; set; }
+        public CellValueLiteral PagesY { get; set; }
+        public CellValueLiteral TopMargin { get; set; }
+        public CellValueLiteral PaperKind { get; set; }
+        public CellValueLiteral Grid { get; set; }
+        public CellValueLiteral Orientation { get; set; }
+        public CellValueLiteral ScaleX { get; set; }
+        public CellValueLiteral ScaleY { get; set; }
+        public CellValueLiteral PaperSource { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintLeftMargin, this.LeftMargin);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintCenterX, this.CenterX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintCenterY, this.CenterY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintOnPage, this.OnPage);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintBottomMargin, this.BottomMargin);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintRightMargin, this.RightMargin);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPagesX, this.PagesX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPagesY, this.PagesY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintTopMargin, this.TopMargin);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPaperKind, this.PaperKind);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintGrid, this.Grid);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPageOrientation, this.Orientation);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintScaleX, this.ScaleX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintScaleY, this.ScaleY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PrintPaperSource, this.PaperSource);
+                yield return SrcValuePair.Create(SrcConstants.PrintLeftMargin, this.LeftMargin);
+                yield return SrcValuePair.Create(SrcConstants.PrintCenterX, this.CenterX);
+                yield return SrcValuePair.Create(SrcConstants.PrintCenterY, this.CenterY);
+                yield return SrcValuePair.Create(SrcConstants.PrintOnPage, this.OnPage);
+                yield return SrcValuePair.Create(SrcConstants.PrintBottomMargin, this.BottomMargin);
+                yield return SrcValuePair.Create(SrcConstants.PrintRightMargin, this.RightMargin);
+                yield return SrcValuePair.Create(SrcConstants.PrintPagesX, this.PagesX);
+                yield return SrcValuePair.Create(SrcConstants.PrintPagesY, this.PagesY);
+                yield return SrcValuePair.Create(SrcConstants.PrintTopMargin, this.TopMargin);
+                yield return SrcValuePair.Create(SrcConstants.PrintPaperKind, this.PaperKind);
+                yield return SrcValuePair.Create(SrcConstants.PrintGrid, this.Grid);
+                yield return SrcValuePair.Create(SrcConstants.PrintPageOrientation, this.Orientation);
+                yield return SrcValuePair.Create(SrcConstants.PrintScaleX, this.ScaleX);
+                yield return SrcValuePair.Create(SrcConstants.PrintScaleY, this.ScaleY);
+                yield return SrcValuePair.Create(SrcConstants.PrintPaperSource, this.PaperSource);
             }
         }
 
         public static PagePrintCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
         {
-            var query = PagePrintCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
         private static readonly System.Lazy<PagePrintCellsReader> lazy_query = new System.Lazy<PagePrintCellsReader>();
 
-        class PagePrintCellsReader : ReaderSingleRow<VisioAutomation.Pages.PagePrintCells>
+        class PagePrintCellsReader : ReaderSingleRow<PagePrintCells>
         {
             public CellColumn LeftMargin { get; set; }
             public CellColumn CenterX { get; set; }
@@ -90,9 +90,9 @@ namespace VisioAutomation.Pages
                 this.PaperSource = this.query.Columns.Add(SrcConstants.PrintPaperSource, nameof(SrcConstants.PrintPaperSource));
             }
 
-            public override Pages.PagePrintCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override PagePrintCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
-                var cells = new Pages.PagePrintCells();
+                var cells = new PagePrintCells();
                 cells.LeftMargin = row[this.LeftMargin];
                 cells.CenterX = row[this.CenterX];
                 cells.CenterY = row[this.CenterY];

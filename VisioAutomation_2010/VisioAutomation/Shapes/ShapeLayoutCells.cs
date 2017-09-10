@@ -6,61 +6,61 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeLayoutCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class ShapeLayoutCells : CellGroupSingleRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral ConnectorFixedCode { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpCode { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpDirX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpDirY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineJumpStyle { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineRouteExt { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeFixedCode { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePermeablePlace { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePermeableX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePermeableY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePlaceFlip { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePlaceStyle { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapePlowCode { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeRouteStyle { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeSplit { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeSplittable { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShapeDisplayLevel { get; set; } // new in visio 2010
-        public VisioAutomation.ShapeSheet.CellValueLiteral Relationships { get; set; } // new in visio 2010
+        public CellValueLiteral ConnectorFixedCode { get; set; }
+        public CellValueLiteral LineJumpCode { get; set; }
+        public CellValueLiteral LineJumpDirX { get; set; }
+        public CellValueLiteral LineJumpDirY { get; set; }
+        public CellValueLiteral LineJumpStyle { get; set; }
+        public CellValueLiteral LineRouteExt { get; set; }
+        public CellValueLiteral ShapeFixedCode { get; set; }
+        public CellValueLiteral ShapePermeablePlace { get; set; }
+        public CellValueLiteral ShapePermeableX { get; set; }
+        public CellValueLiteral ShapePermeableY { get; set; }
+        public CellValueLiteral ShapePlaceFlip { get; set; }
+        public CellValueLiteral ShapePlaceStyle { get; set; }
+        public CellValueLiteral ShapePlowCode { get; set; }
+        public CellValueLiteral ShapeRouteStyle { get; set; }
+        public CellValueLiteral ShapeSplit { get; set; }
+        public CellValueLiteral ShapeSplittable { get; set; }
+        public CellValueLiteral ShapeDisplayLevel { get; set; } // new in visio 2010
+        public CellValueLiteral Relationships { get; set; } // new in visio 2010
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutConnectorFixedCode, this.ConnectorFixedCode);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutLineJumpCode, this.LineJumpCode);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutLineJumpDirX, this.LineJumpDirX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutLineJumpDirY, this.LineJumpDirY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutLineJumpStyle, this.LineJumpStyle);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutLineRouteExt, this.LineRouteExt);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapeFixedCode, this.ShapeFixedCode);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapePermeablePlace, this.ShapePermeablePlace);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapePermeableX, this.ShapePermeableX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapePermeableY, this.ShapePermeableY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapePlaceFlip, this.ShapePlaceFlip);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapePlaceStyle, this.ShapePlaceStyle);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapePlowCode, this.ShapePlowCode);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapeRouteStyle, this.ShapeRouteStyle);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapeSplit, this.ShapeSplit);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapeSplittable, this.ShapeSplittable);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutShapeDisplayLevel, this.ShapeDisplayLevel);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ShapeLayoutRelationships, this.Relationships);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutConnectorFixedCode, this.ConnectorFixedCode);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineJumpCode, this.LineJumpCode);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineJumpDirX, this.LineJumpDirX);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineJumpDirY, this.LineJumpDirY);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineJumpStyle, this.LineJumpStyle);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineRouteExt, this.LineRouteExt);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeFixedCode, this.ShapeFixedCode);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePermeablePlace, this.ShapePermeablePlace);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePermeableX, this.ShapePermeableX);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePermeableY, this.ShapePermeableY);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePlaceFlip, this.ShapePlaceFlip);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePlaceStyle, this.ShapePlaceStyle);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePlowCode, this.ShapePlowCode);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeRouteStyle, this.ShapeRouteStyle);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeSplit, this.ShapeSplit);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeSplittable, this.ShapeSplittable);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeDisplayLevel, this.ShapeDisplayLevel);
+                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutRelationships, this.Relationships);
             }
         }
         
         public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = ShapeLayoutCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
         public static ShapeLayoutCells GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = ShapeLayoutCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
@@ -109,7 +109,7 @@ namespace VisioAutomation.Shapes
                 this.Relationships = this.query.Columns.Add(SrcConstants.ShapeLayoutRelationships, nameof(SrcConstants.ShapeLayoutRelationships));
             }
 
-            public override ShapeLayoutCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override ShapeLayoutCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new ShapeLayoutCells();
                 cells.ConnectorFixedCode = row[this.ConnectorFixedCode];

@@ -6,82 +6,82 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeFormatCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class ShapeFormatCells : CellGroupSingleRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillBackground { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillBackgroundTransparency { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillForeground { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillForegroundTransparency { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillPattern { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowObliqueAngle { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowOffsetX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowOffsetY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowScaleFactor { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowType { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowBackground { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowBackgroundTransparency { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowForeground { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowForegroundTransparency { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FillShadowPattern { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineBeginArrow { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineBeginArrowSize { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineEndArrow { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineEndArrowSize { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineCap { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineColor { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineColorTransparency { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LinePattern { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineWeight { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral LineRounding { get; set; }
+        public CellValueLiteral FillBackground { get; set; }
+        public CellValueLiteral FillBackgroundTransparency { get; set; }
+        public CellValueLiteral FillForeground { get; set; }
+        public CellValueLiteral FillForegroundTransparency { get; set; }
+        public CellValueLiteral FillPattern { get; set; }
+        public CellValueLiteral FillShadowObliqueAngle { get; set; }
+        public CellValueLiteral FillShadowOffsetX { get; set; }
+        public CellValueLiteral FillShadowOffsetY { get; set; }
+        public CellValueLiteral FillShadowScaleFactor { get; set; }
+        public CellValueLiteral FillShadowType { get; set; }
+        public CellValueLiteral FillShadowBackground { get; set; }
+        public CellValueLiteral FillShadowBackgroundTransparency { get; set; }
+        public CellValueLiteral FillShadowForeground { get; set; }
+        public CellValueLiteral FillShadowForegroundTransparency { get; set; }
+        public CellValueLiteral FillShadowPattern { get; set; }
+        public CellValueLiteral LineBeginArrow { get; set; }
+        public CellValueLiteral LineBeginArrowSize { get; set; }
+        public CellValueLiteral LineEndArrow { get; set; }
+        public CellValueLiteral LineEndArrowSize { get; set; }
+        public CellValueLiteral LineCap { get; set; }
+        public CellValueLiteral LineColor { get; set; }
+        public CellValueLiteral LineColorTransparency { get; set; }
+        public CellValueLiteral LinePattern { get; set; }
+        public CellValueLiteral LineWeight { get; set; }
+        public CellValueLiteral LineRounding { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillBackground, this.FillBackground);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillForeground, this.FillForeground);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillPattern, this.FillPattern);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowType, this.FillShadowType);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowBackground, this.FillShadowBackground);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowForeground, this.FillShadowForeground);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.FillShadowPattern, this.FillShadowPattern);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineBeginArrow, this.LineBeginArrow);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineEndArrow, this.LineEndArrow);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineCap, this.LineCap);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineColor, this.LineColor);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineColorTransparency, this.LineColorTransparency);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LinePattern, this.LinePattern);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineWeight, this.LineWeight);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LineRounding, this.LineRounding);
+                yield return SrcValuePair.Create(SrcConstants.FillBackground, this.FillBackground);
+                yield return SrcValuePair.Create(SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
+                yield return SrcValuePair.Create(SrcConstants.FillForeground, this.FillForeground);
+                yield return SrcValuePair.Create(SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
+                yield return SrcValuePair.Create(SrcConstants.FillPattern, this.FillPattern);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowType, this.FillShadowType);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowBackground, this.FillShadowBackground);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowForeground, this.FillShadowForeground);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+                yield return SrcValuePair.Create(SrcConstants.FillShadowPattern, this.FillShadowPattern);
+                yield return SrcValuePair.Create(SrcConstants.LineBeginArrow, this.LineBeginArrow);
+                yield return SrcValuePair.Create(SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
+                yield return SrcValuePair.Create(SrcConstants.LineEndArrow, this.LineEndArrow);
+                yield return SrcValuePair.Create(SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+                yield return SrcValuePair.Create(SrcConstants.LineCap, this.LineCap);
+                yield return SrcValuePair.Create(SrcConstants.LineColor, this.LineColor);
+                yield return SrcValuePair.Create(SrcConstants.LineColorTransparency, this.LineColorTransparency);
+                yield return SrcValuePair.Create(SrcConstants.LinePattern, this.LinePattern);
+                yield return SrcValuePair.Create(SrcConstants.LineWeight, this.LineWeight);
+                yield return SrcValuePair.Create(SrcConstants.LineRounding, this.LineRounding);
             }
         }
 
 
         public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = ShapeFormatCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
         public static ShapeFormatCells GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = ShapeFormatCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
         private static readonly System.Lazy<ShapeFormatCellsReader> lazy_query = new System.Lazy<ShapeFormatCellsReader>();
 
-        class ShapeFormatCellsReader : ReaderSingleRow<Shapes.ShapeFormatCells>
+        class ShapeFormatCellsReader : ReaderSingleRow<ShapeFormatCells>
         {
             public CellColumn FillBackground { get; set; }
             public CellColumn FillBackgroundTransparency { get; set; }
@@ -139,9 +139,9 @@ namespace VisioAutomation.Shapes
                 this.LineRounding = this.query.Columns.Add(SrcConstants.LineRounding, nameof(SrcConstants.LineRounding));
             }
 
-            public override Shapes.ShapeFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override ShapeFormatCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
-                var cells = new Shapes.ShapeFormatCells();
+                var cells = new ShapeFormatCells();
                 cells.FillBackground = row[this.FillBackground];
                 cells.FillBackgroundTransparency = row[this.FillBackgroundTransparency];
                 cells.FillForeground = row[this.FillForeground];

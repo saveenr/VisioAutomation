@@ -6,53 +6,53 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PageFormatCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class PageFormatCells : CellGroupSingleRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral DrawingScale { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral DrawingScaleType { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral DrawingSizeType { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral InhibitSnap { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Height { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Scale { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Width { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowObliqueAngle { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowOffsetX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowOffsetY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowScaleFactor { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ShadowType { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral UIVisibility { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral DrawingResizeType { get; set; } // new in visio 2010
+        public CellValueLiteral DrawingScale { get; set; }
+        public CellValueLiteral DrawingScaleType { get; set; }
+        public CellValueLiteral DrawingSizeType { get; set; }
+        public CellValueLiteral InhibitSnap { get; set; }
+        public CellValueLiteral Height { get; set; }
+        public CellValueLiteral Scale { get; set; }
+        public CellValueLiteral Width { get; set; }
+        public CellValueLiteral ShadowObliqueAngle { get; set; }
+        public CellValueLiteral ShadowOffsetX { get; set; }
+        public CellValueLiteral ShadowOffsetY { get; set; }
+        public CellValueLiteral ShadowScaleFactor { get; set; }
+        public CellValueLiteral ShadowType { get; set; }
+        public CellValueLiteral UIVisibility { get; set; }
+        public CellValueLiteral DrawingResizeType { get; set; } // new in visio 2010
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             { 
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageDrawingScale, this.DrawingScale);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageDrawingScaleType, this.DrawingScaleType);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageInhibitSnap, this.InhibitSnap);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageHeight, this.Height);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageScale, this.Scale);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageWidth, this.Width);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageShadowType, this.ShadowType);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageUIVisibility, this.UIVisibility);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.PageDrawingResizeType, this.DrawingResizeType);
+                yield return SrcValuePair.Create(SrcConstants.PageDrawingScale, this.DrawingScale);
+                yield return SrcValuePair.Create(SrcConstants.PageDrawingScaleType, this.DrawingScaleType);
+                yield return SrcValuePair.Create(SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
+                yield return SrcValuePair.Create(SrcConstants.PageInhibitSnap, this.InhibitSnap);
+                yield return SrcValuePair.Create(SrcConstants.PageHeight, this.Height);
+                yield return SrcValuePair.Create(SrcConstants.PageScale, this.Scale);
+                yield return SrcValuePair.Create(SrcConstants.PageWidth, this.Width);
+                yield return SrcValuePair.Create(SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle);
+                yield return SrcValuePair.Create(SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
+                yield return SrcValuePair.Create(SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
+                yield return SrcValuePair.Create(SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor);
+                yield return SrcValuePair.Create(SrcConstants.PageShadowType, this.ShadowType);
+                yield return SrcValuePair.Create(SrcConstants.PageUIVisibility, this.UIVisibility);
+                yield return SrcValuePair.Create(SrcConstants.PageDrawingResizeType, this.DrawingResizeType);
             }
         }
 
         public static PageFormatCells GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = PageFormatCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
         private static readonly System.Lazy<PageFormatCellsReader> lazy_query = new System.Lazy<PageFormatCellsReader>();
 
-        class PageFormatCellsReader : ReaderSingleRow<VisioAutomation.Pages.PageFormatCells>
+        class PageFormatCellsReader : ReaderSingleRow<PageFormatCells>
         {
             public CellColumn DrawingScale { get; set; }
             public CellColumn DrawingScaleType { get; set; }
@@ -87,9 +87,9 @@ namespace VisioAutomation.Pages
                 this.DrawingResizeType = this.query.Columns.Add(SrcConstants.PageDrawingResizeType, nameof(SrcConstants.PageDrawingResizeType));
             }
 
-            public override Pages.PageFormatCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override PageFormatCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
-                var cells = new Pages.PageFormatCells();
+                var cells = new PageFormatCells();
                 cells.DrawingScale = row[this.DrawingScale];
                 cells.DrawingScaleType = row[this.DrawingScaleType];
                 cells.DrawingSizeType = row[this.DrawingSizeType];

@@ -6,35 +6,35 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ConnectionPointCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class ConnectionPointCells : CellGroupMultiRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral X { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Y { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral DirX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral DirY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Type { get; set; }
+        public CellValueLiteral X { get; set; }
+        public CellValueLiteral Y { get; set; }
+        public CellValueLiteral DirX { get; set; }
+        public CellValueLiteral DirY { get; set; }
+        public CellValueLiteral Type { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointX, this.X);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointY, this.Y);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointDirX, this.DirX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointDirY, this.DirY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.ConnectionPointType, this.Type);
+                yield return SrcValuePair.Create(SrcConstants.ConnectionPointX, this.X);
+                yield return SrcValuePair.Create(SrcConstants.ConnectionPointY, this.Y);
+                yield return SrcValuePair.Create(SrcConstants.ConnectionPointDirX, this.DirX);
+                yield return SrcValuePair.Create(SrcConstants.ConnectionPointDirY, this.DirY);
+                yield return SrcValuePair.Create(SrcConstants.ConnectionPointType, this.Type);
             }
         }
 
         public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = ConnectionPointCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
         public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = ConnectionPointCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
 
             }
 
-            public override ConnectionPointCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override ConnectionPointCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new ConnectionPointCells();
                 cells.X = row[this.X];

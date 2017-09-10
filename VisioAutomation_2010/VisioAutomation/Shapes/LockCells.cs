@@ -6,66 +6,66 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class LockCells : CellGroupSingleRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral Aspect { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Begin { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral CalcWH { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Crop { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral CustProp { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Delete { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral End { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Format { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral FromGroupFormat { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Group { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Height { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral MoveX { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral MoveY { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Rotate { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Select { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral TextEdit { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ThemeColors { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral ThemeEffects { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral VertexEdit { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Width { get; set; }
+        public CellValueLiteral Aspect { get; set; }
+        public CellValueLiteral Begin { get; set; }
+        public CellValueLiteral CalcWH { get; set; }
+        public CellValueLiteral Crop { get; set; }
+        public CellValueLiteral CustProp { get; set; }
+        public CellValueLiteral Delete { get; set; }
+        public CellValueLiteral End { get; set; }
+        public CellValueLiteral Format { get; set; }
+        public CellValueLiteral FromGroupFormat { get; set; }
+        public CellValueLiteral Group { get; set; }
+        public CellValueLiteral Height { get; set; }
+        public CellValueLiteral MoveX { get; set; }
+        public CellValueLiteral MoveY { get; set; }
+        public CellValueLiteral Rotate { get; set; }
+        public CellValueLiteral Select { get; set; }
+        public CellValueLiteral TextEdit { get; set; }
+        public CellValueLiteral ThemeColors { get; set; }
+        public CellValueLiteral ThemeEffects { get; set; }
+        public CellValueLiteral VertexEdit { get; set; }
+        public CellValueLiteral Width { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockAspect, this.Aspect);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockBegin, this.Begin);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockCalcWH, this.CalcWH);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockCrop, this.Crop);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockCustomProp, this.CustProp);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockDelete, this.Delete);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockEnd, this.End);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockFormat, this.Format);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockGroup, this.Group);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockHeight, this.Height);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockMoveX, this.MoveX);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockMoveY, this.MoveY);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockRotate, this.Rotate);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockSelect, this.Select);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockTextEdit, this.TextEdit);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockThemeColors, this.ThemeColors);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockThemeEffects, this.ThemeEffects);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockVertexEdit, this.VertexEdit);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.LockWidth, this.Width);
+                yield return SrcValuePair.Create(SrcConstants.LockAspect, this.Aspect);
+                yield return SrcValuePair.Create(SrcConstants.LockBegin, this.Begin);
+                yield return SrcValuePair.Create(SrcConstants.LockCalcWH, this.CalcWH);
+                yield return SrcValuePair.Create(SrcConstants.LockCrop, this.Crop);
+                yield return SrcValuePair.Create(SrcConstants.LockCustomProp, this.CustProp);
+                yield return SrcValuePair.Create(SrcConstants.LockDelete, this.Delete);
+                yield return SrcValuePair.Create(SrcConstants.LockEnd, this.End);
+                yield return SrcValuePair.Create(SrcConstants.LockFormat, this.Format);
+                yield return SrcValuePair.Create(SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
+                yield return SrcValuePair.Create(SrcConstants.LockGroup, this.Group);
+                yield return SrcValuePair.Create(SrcConstants.LockHeight, this.Height);
+                yield return SrcValuePair.Create(SrcConstants.LockMoveX, this.MoveX);
+                yield return SrcValuePair.Create(SrcConstants.LockMoveY, this.MoveY);
+                yield return SrcValuePair.Create(SrcConstants.LockRotate, this.Rotate);
+                yield return SrcValuePair.Create(SrcConstants.LockSelect, this.Select);
+                yield return SrcValuePair.Create(SrcConstants.LockTextEdit, this.TextEdit);
+                yield return SrcValuePair.Create(SrcConstants.LockThemeColors, this.ThemeColors);
+                yield return SrcValuePair.Create(SrcConstants.LockThemeEffects, this.ThemeEffects);
+                yield return SrcValuePair.Create(SrcConstants.LockVertexEdit, this.VertexEdit);
+                yield return SrcValuePair.Create(SrcConstants.LockWidth, this.Width);
             }
         }
 
 
         public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = LockCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
         public static LockCells GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = LockCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
@@ -119,7 +119,7 @@ namespace VisioAutomation.Shapes
                 this.Width = this.query.Columns.Add(SrcConstants.LockWidth, nameof(SrcConstants.LockWidth));
             }
 
-            public override LockCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override LockCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new LockCells();
                 cells.Aspect = row[this.Aspect];

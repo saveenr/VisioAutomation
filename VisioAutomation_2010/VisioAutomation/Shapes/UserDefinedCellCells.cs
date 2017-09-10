@@ -7,10 +7,10 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class UserDefinedCellCells : CellGroupMultiRow
     {
-        public VisioAutomation.ShapeSheet.CellValueLiteral Value { get; set; }
-        public VisioAutomation.ShapeSheet.CellValueLiteral Prompt { get; set; }
+        public CellValueLiteral Value { get; set; }
+        public CellValueLiteral Prompt { get; set; }
 
         public UserDefinedCellCells()
         {
@@ -20,20 +20,20 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.UserDefCellValue, this.Value);
-                yield return SrcValuePair.Create(ShapeSheet.SrcConstants.UserDefCellPrompt, this.Prompt);
+                yield return SrcValuePair.Create(SrcConstants.UserDefCellValue, this.Value);
+                yield return SrcValuePair.Create(SrcConstants.UserDefCellPrompt, this.Prompt);
             }
         }
 
         public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var query = UserDefinedCellCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(page, shapeids, cvt);
         }
 
         public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, CellValueType cvt)
         {
-            var query = UserDefinedCellCells.lazy_query.Value;
+            var query = lazy_query.Value;
             return query.GetValues(shape, cvt);
         }
 
@@ -52,7 +52,7 @@ namespace VisioAutomation.Shapes
                 this.Prompt = sec.Columns.Add(SrcConstants.UserDefCellPrompt, nameof(SrcConstants.UserDefCellPrompt));
             }
 
-            public override UserDefinedCellCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override UserDefinedCellCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new UserDefinedCellCells();
                 cells.Value = row[this.Value];
