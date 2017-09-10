@@ -82,7 +82,7 @@ namespace VisioAutomation.Text
             public SectionQueryColumn Style { get; set; }
             public SectionQueryColumn Color { get; set; }
             public SectionQueryColumn Size { get; set; }
-            public SectionQueryColumn Trans { get; set; }
+            public SectionQueryColumn ColorTransparency { get; set; }
             public SectionQueryColumn AsianFont { get; set; }
             public SectionQueryColumn Case { get; set; }
             public SectionQueryColumn ComplexScriptFont { get; set; }
@@ -106,7 +106,7 @@ namespace VisioAutomation.Text
                 var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
 
                 this.Color = sec.Columns.Add(SrcConstants.CharColor, nameof(this.Color));
-                this.Trans = sec.Columns.Add(SrcConstants.CharColorTransparency, nameof(this.Trans));
+                this.ColorTransparency = sec.Columns.Add(SrcConstants.CharColorTransparency, nameof(this.ColorTransparency));
                 this.Font = sec.Columns.Add(SrcConstants.CharFont, nameof(this.Font));
                 this.Size = sec.Columns.Add(SrcConstants.CharSize, nameof(this.Size));
                 this.Style = sec.Columns.Add(SrcConstants.CharStyle, nameof(this.Style));
@@ -134,7 +134,7 @@ namespace VisioAutomation.Text
             {
                 var cells = new Text.CharacterFormatCells();
                 cells.Color = row[this.Color];
-                cells.ColorTransparency = row[this.Trans];
+                cells.ColorTransparency = row[this.ColorTransparency];
                 cells.Font = row[this.Font];
                 cells.Size = row[this.Size];
                 cells.Style = row[this.Style];
