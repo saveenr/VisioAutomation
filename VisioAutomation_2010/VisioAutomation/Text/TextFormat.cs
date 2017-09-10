@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
@@ -65,15 +66,15 @@ namespace VisioAutomation.Text
             return runs;
         }
         
-        public static TextFormat GetFormat(IVisio.Shape shape)
+        public static TextFormat GetFormat(IVisio.Shape shape, CellValueType cvt)
         {
             var cells = new TextFormat();
-            cells.CharacterFormats = CharacterFormatCells.GetFormulas(shape);
-            cells.ParagraphFormats = ParagraphFormatCells.GetFormulas(shape);
-            cells.TextBlock = TextBlockCells.GetFormulas(shape);
+            cells.CharacterFormats = CharacterFormatCells.GetValues(shape, cvt);
+            cells.ParagraphFormats = ParagraphFormatCells.GetValues(shape, cvt);
+            cells.TextBlock = TextBlockCells.GetValues(shape, cvt);
             if (HasTextXFormCells(shape))
             {
-                cells.TextXForm = TextXFormCells.GetFormulas(shape);
+                cells.TextXForm = TextXFormCells.GetValues(shape, cvt);
             }
             cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
@@ -90,11 +91,11 @@ namespace VisioAutomation.Text
                     (short) 0] != 0) ;
         }
 
-        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
+        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
-            var charcells = CharacterFormatCells.GetFormulas(page, shapeids);
-            var paracells = ParagraphFormatCells.GetFormulas(page, shapeids);
-            var textblockcells = TextBlockCells.GetFormulas(page, shapeids);
+            var charcells = CharacterFormatCells.GetValues(page, shapeids, cvt);
+            var paracells = ParagraphFormatCells.GetValues(page, shapeids, cvt);
+            var textblockcells = TextBlockCells.GetValues(page, shapeids, cvt);
             var page_shapes = page.Shapes;
             var formats = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)
