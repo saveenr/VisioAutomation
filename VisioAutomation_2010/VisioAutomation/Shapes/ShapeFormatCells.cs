@@ -104,7 +104,7 @@ namespace VisioAutomation.Shapes
             public CellColumn LineEndArrowSize { get; set; }
             public CellColumn LineColor { get; set; }
             public CellColumn LineCap { get; set; }
-            public CellColumn LineColorTrans { get; set; }
+            public CellColumn LineColorTransparency { get; set; }
             public CellColumn LinePattern { get; set; }
             public CellColumn LineWeight { get; set; }
             public CellColumn LineRounding { get; set; }
@@ -112,31 +112,31 @@ namespace VisioAutomation.Shapes
             public ShapeFormatCellsReader()
             {
 
-                this.FillBackground = this.query.Columns.Add(SrcConstants.FillBackground, nameof(SrcConstants.FillBackground));
-                this.FillBackgroundTransparency = this.query.Columns.Add(SrcConstants.FillBackgroundTransparency, nameof(SrcConstants.FillBackgroundTransparency));
-                this.FillForeground = this.query.Columns.Add(SrcConstants.FillForeground, nameof(SrcConstants.FillForeground));
-                this.FillForegroundTransparency = this.query.Columns.Add(SrcConstants.FillForegroundTransparency, nameof(SrcConstants.FillForegroundTransparency));
-                this.FillPattern = this.query.Columns.Add(SrcConstants.FillPattern, nameof(SrcConstants.FillPattern));
-                this.FillShadowObliqueAngle = this.query.Columns.Add(SrcConstants.FillShadowObliqueAngle, nameof(SrcConstants.FillShadowObliqueAngle));
-                this.FillShadowOffsetX = this.query.Columns.Add(SrcConstants.FillShadowOffsetX, nameof(SrcConstants.FillShadowOffsetX));
-                this.FillShadowOffsetY = this.query.Columns.Add(SrcConstants.FillShadowOffsetY, nameof(SrcConstants.FillShadowOffsetY));
-                this.FillShadowScaleFactor = this.query.Columns.Add(SrcConstants.FillShadowScaleFactor, nameof(SrcConstants.FillShadowScaleFactor));
-                this.FillShadowType = this.query.Columns.Add(SrcConstants.FillShadowType, nameof(SrcConstants.FillShadowType));
-                this.FillShadowBackground = this.query.Columns.Add(SrcConstants.FillShadowBackground, nameof(SrcConstants.FillShadowBackground));
-                this.FillShadowBackgroundTransparency = this.query.Columns.Add(SrcConstants.FillShadowBackgroundTransparency, nameof(SrcConstants.FillShadowBackgroundTransparency));
-                this.FillShadowForeground = this.query.Columns.Add(SrcConstants.FillShadowForeground, nameof(SrcConstants.FillShadowForeground));
-                this.FillShadowForegroundTransparency = this.query.Columns.Add(SrcConstants.FillShadowForegroundTransparency, nameof(SrcConstants.FillShadowForegroundTransparency));
-                this.FillShadowPattern = this.query.Columns.Add(SrcConstants.FillShadowPattern, nameof(SrcConstants.FillShadowPattern));
-                this.LineBeginArrow = this.query.Columns.Add(SrcConstants.LineBeginArrow, nameof(SrcConstants.LineBeginArrow));
-                this.LineBeginArrowSize = this.query.Columns.Add(SrcConstants.LineBeginArrowSize, nameof(SrcConstants.LineBeginArrowSize));
-                this.LineEndArrow = this.query.Columns.Add(SrcConstants.LineEndArrow, nameof(SrcConstants.LineEndArrow));
-                this.LineEndArrowSize = this.query.Columns.Add(SrcConstants.LineEndArrowSize, nameof(SrcConstants.LineEndArrowSize));
-                this.LineColor = this.query.Columns.Add(SrcConstants.LineColor, nameof(SrcConstants.LineColor));
-                this.LineCap = this.query.Columns.Add(SrcConstants.LineCap, nameof(SrcConstants.LineCap));
-                this.LineColorTrans = this.query.Columns.Add(SrcConstants.LineColorTransparency, nameof(SrcConstants.LineColorTransparency));
-                this.LinePattern = this.query.Columns.Add(SrcConstants.LinePattern, nameof(SrcConstants.LinePattern));
-                this.LineWeight = this.query.Columns.Add(SrcConstants.LineWeight, nameof(SrcConstants.LineWeight));
-                this.LineRounding = this.query.Columns.Add(SrcConstants.LineRounding, nameof(SrcConstants.LineRounding));
+                this.FillBackground = this.query.Columns.Add(SrcConstants.FillBackground, nameof(this.FillBackground));
+                this.FillBackgroundTransparency = this.query.Columns.Add(SrcConstants.FillBackgroundTransparency, nameof(this.FillBackgroundTransparency));
+                this.FillForeground = this.query.Columns.Add(SrcConstants.FillForeground, nameof(this.FillForeground));
+                this.FillForegroundTransparency = this.query.Columns.Add(SrcConstants.FillForegroundTransparency, nameof(this.FillForegroundTransparency));
+                this.FillPattern = this.query.Columns.Add(SrcConstants.FillPattern, nameof(this.FillPattern));
+                this.FillShadowObliqueAngle = this.query.Columns.Add(SrcConstants.FillShadowObliqueAngle, nameof(this.FillShadowObliqueAngle));
+                this.FillShadowOffsetX = this.query.Columns.Add(SrcConstants.FillShadowOffsetX, nameof(this.FillShadowOffsetX));
+                this.FillShadowOffsetY = this.query.Columns.Add(SrcConstants.FillShadowOffsetY, nameof(this.FillShadowOffsetY));
+                this.FillShadowScaleFactor = this.query.Columns.Add(SrcConstants.FillShadowScaleFactor, nameof(this.FillShadowScaleFactor));
+                this.FillShadowType = this.query.Columns.Add(SrcConstants.FillShadowType, nameof(this.FillShadowType));
+                this.FillShadowBackground = this.query.Columns.Add(SrcConstants.FillShadowBackground, nameof(this.FillShadowBackground));
+                this.FillShadowBackgroundTransparency = this.query.Columns.Add(SrcConstants.FillShadowBackgroundTransparency, nameof(this.FillShadowBackgroundTransparency));
+                this.FillShadowForeground = this.query.Columns.Add(SrcConstants.FillShadowForeground, nameof(this.FillShadowForeground));
+                this.FillShadowForegroundTransparency = this.query.Columns.Add(SrcConstants.FillShadowForegroundTransparency, nameof(this.FillShadowForegroundTransparency));
+                this.FillShadowPattern = this.query.Columns.Add(SrcConstants.FillShadowPattern, nameof(this.FillShadowPattern));
+                this.LineBeginArrow = this.query.Columns.Add(SrcConstants.LineBeginArrow, nameof(this.LineBeginArrow));
+                this.LineBeginArrowSize = this.query.Columns.Add(SrcConstants.LineBeginArrowSize, nameof(this.LineBeginArrowSize));
+                this.LineEndArrow = this.query.Columns.Add(SrcConstants.LineEndArrow, nameof(this.LineEndArrow));
+                this.LineEndArrowSize = this.query.Columns.Add(SrcConstants.LineEndArrowSize, nameof(this.LineEndArrowSize));
+                this.LineColor = this.query.Columns.Add(SrcConstants.LineColor, nameof(this.LineColor));
+                this.LineCap = this.query.Columns.Add(SrcConstants.LineCap, nameof(this.LineCap));
+                this.LineColorTransparency = this.query.Columns.Add(SrcConstants.LineColorTransparency, nameof(this.LineColorTransparency));
+                this.LinePattern = this.query.Columns.Add(SrcConstants.LinePattern, nameof(this.LinePattern));
+                this.LineWeight = this.query.Columns.Add(SrcConstants.LineWeight, nameof(this.LineWeight));
+                this.LineRounding = this.query.Columns.Add(SrcConstants.LineRounding, nameof(this.LineRounding));
             }
 
             public override ShapeFormatCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
@@ -163,7 +163,7 @@ namespace VisioAutomation.Shapes
                 cells.LineEndArrowSize = row[this.LineEndArrowSize];
                 cells.LineCap = row[this.LineCap];
                 cells.LineColor = row[this.LineColor];
-                cells.LineColorTransparency = row[this.LineColorTrans];
+                cells.LineColorTransparency = row[this.LineColorTransparency];
                 cells.LinePattern = row[this.LinePattern];
                 cells.LineWeight = row[this.LineWeight];
                 cells.LineRounding = row[this.LineRounding];

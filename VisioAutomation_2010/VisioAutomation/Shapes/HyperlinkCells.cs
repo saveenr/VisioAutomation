@@ -66,15 +66,15 @@ namespace VisioAutomation.Shapes
             {
                 var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionHyperlink);
 
-                this.Address = sec.Columns.Add(SrcConstants.HyperlinkAddress, nameof(SrcConstants.HyperlinkAddress));
-                this.Default = sec.Columns.Add(SrcConstants.HyperlinkDefault, nameof(SrcConstants.HyperlinkDefault));
-                this.Description = sec.Columns.Add(SrcConstants.HyperlinkDescription, nameof(SrcConstants.HyperlinkDescription));
-                this.ExtraInfo = sec.Columns.Add(SrcConstants.HyperlinkExtraInfo, nameof(SrcConstants.HyperlinkExtraInfo));
-                this.Frame = sec.Columns.Add(SrcConstants.HyperlinkFrame, nameof(SrcConstants.HyperlinkFrame));
-                this.Invisible = sec.Columns.Add(SrcConstants.HyperlinkInvisible, nameof(SrcConstants.HyperlinkInvisible));
-                this.NewWindow = sec.Columns.Add(SrcConstants.HyperlinkNewWindow, nameof(SrcConstants.HyperlinkNewWindow));
-                this.SortKey = sec.Columns.Add(SrcConstants.HyperlinkSortKey, nameof(SrcConstants.HyperlinkSortKey));
-                this.SubAddress = sec.Columns.Add(SrcConstants.HyperlinkSubAddress, nameof(SrcConstants.HyperlinkSubAddress));
+                this.Address = sec.Columns.Add(SrcConstants.HyperlinkAddress, nameof(this.Address));
+                this.Default = sec.Columns.Add(SrcConstants.HyperlinkDefault, nameof(this.Default));
+                this.Description = sec.Columns.Add(SrcConstants.HyperlinkDescription, nameof(this.Description));
+                this.ExtraInfo = sec.Columns.Add(SrcConstants.HyperlinkExtraInfo, nameof(this.ExtraInfo));
+                this.Frame = sec.Columns.Add(SrcConstants.HyperlinkFrame, nameof(this.Frame));
+                this.Invisible = sec.Columns.Add(SrcConstants.HyperlinkInvisible, nameof(this.Invisible));
+                this.NewWindow = sec.Columns.Add(SrcConstants.HyperlinkNewWindow, nameof(this.NewWindow));
+                this.SortKey = sec.Columns.Add(SrcConstants.HyperlinkSortKey, nameof(this.SortKey));
+                this.SubAddress = sec.Columns.Add(SrcConstants.HyperlinkSubAddress, nameof(this.SubAddress));
             }
 
             public override HyperlinkCells CellDataToCellGroup(Utilities.ArraySegment<string> row)

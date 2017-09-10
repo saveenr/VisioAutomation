@@ -62,14 +62,14 @@ namespace VisioAutomation.Shapes
             {
                 var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionControls);
 
-                this.CanGlue = sec.Columns.Add(SrcConstants.ControlCanGlue, nameof(SrcConstants.ControlCanGlue));
-                this.Tip = sec.Columns.Add(SrcConstants.ControlTip, nameof(SrcConstants.ControlTip));
-                this.X = sec.Columns.Add(SrcConstants.ControlX, nameof(SrcConstants.ControlX));
-                this.Y = sec.Columns.Add(SrcConstants.ControlY, nameof(SrcConstants.ControlY));
-                this.YBehavior = sec.Columns.Add(SrcConstants.ControlYBehavior, nameof(SrcConstants.ControlYBehavior));
-                this.XBehavior = sec.Columns.Add(SrcConstants.ControlXBehavior, nameof(SrcConstants.ControlXBehavior));
-                this.XDynamics = sec.Columns.Add(SrcConstants.ControlXDynamics, nameof(SrcConstants.ControlXDynamics));
-                this.YDynamics = sec.Columns.Add(SrcConstants.ControlYDynamics, nameof(SrcConstants.ControlYDynamics));
+                this.CanGlue = sec.Columns.Add(SrcConstants.ControlCanGlue, nameof(this.CanGlue));
+                this.Tip = sec.Columns.Add(SrcConstants.ControlTip, nameof(this.Tip));
+                this.X = sec.Columns.Add(SrcConstants.ControlX, nameof(this.X));
+                this.Y = sec.Columns.Add(SrcConstants.ControlY, nameof(this.Y));
+                this.YBehavior = sec.Columns.Add(SrcConstants.ControlYBehavior, nameof(this.YBehavior));
+                this.XBehavior = sec.Columns.Add(SrcConstants.ControlXBehavior, nameof(this.XBehavior));
+                this.XDynamics = sec.Columns.Add(SrcConstants.ControlXDynamics, nameof(this.XDynamics));
+                this.YDynamics = sec.Columns.Add(SrcConstants.ControlYDynamics, nameof(this.YDynamics));
 
             }
 

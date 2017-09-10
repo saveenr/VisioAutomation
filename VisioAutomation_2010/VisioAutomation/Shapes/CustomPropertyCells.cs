@@ -115,16 +115,16 @@ namespace VisioAutomation.Shapes
                 var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
 
 
-                this.SortKey = sec.Columns.Add(SrcConstants.CustomPropSortKey, nameof(SrcConstants.CustomPropSortKey));
-                this.Ask = sec.Columns.Add(SrcConstants.CustomPropAsk, nameof(SrcConstants.CustomPropAsk));
-                this.Calendar = sec.Columns.Add(SrcConstants.CustomPropCalendar, nameof(SrcConstants.CustomPropCalendar));
-                this.Format = sec.Columns.Add(SrcConstants.CustomPropFormat, nameof(SrcConstants.CustomPropFormat));
-                this.Invis = sec.Columns.Add(SrcConstants.CustomPropInvisible, nameof(SrcConstants.CustomPropInvisible));
-                this.Label = sec.Columns.Add(SrcConstants.CustomPropLabel, nameof(SrcConstants.CustomPropLabel));
-                this.LangID = sec.Columns.Add(SrcConstants.CustomPropLangID, nameof(SrcConstants.CustomPropLangID));
-                this.Prompt = sec.Columns.Add(SrcConstants.CustomPropPrompt, nameof(SrcConstants.CustomPropPrompt));
-                this.Type = sec.Columns.Add(SrcConstants.CustomPropType, nameof(SrcConstants.CustomPropType));
-                this.Value = sec.Columns.Add(SrcConstants.CustomPropValue, nameof(SrcConstants.CustomPropValue));
+                this.SortKey = sec.Columns.Add(SrcConstants.CustomPropSortKey, nameof(this.SortKey));
+                this.Ask = sec.Columns.Add(SrcConstants.CustomPropAsk, nameof(this.Ask));
+                this.Calendar = sec.Columns.Add(SrcConstants.CustomPropCalendar, nameof(this.Calendar));
+                this.Format = sec.Columns.Add(SrcConstants.CustomPropFormat, nameof(this.Format));
+                this.Invis = sec.Columns.Add(SrcConstants.CustomPropInvisible, nameof(this.Invis));
+                this.Label = sec.Columns.Add(SrcConstants.CustomPropLabel, nameof(this.Label));
+                this.LangID = sec.Columns.Add(SrcConstants.CustomPropLangID, nameof(this.LangID));
+                this.Prompt = sec.Columns.Add(SrcConstants.CustomPropPrompt, nameof(this.Prompt));
+                this.Type = sec.Columns.Add(SrcConstants.CustomPropType, nameof(this.Type));
+                this.Value = sec.Columns.Add(SrcConstants.CustomPropValue, nameof(this.Value));
 
             }
 

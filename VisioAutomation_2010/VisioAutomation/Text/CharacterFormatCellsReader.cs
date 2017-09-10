@@ -34,28 +34,28 @@ namespace VisioAutomation.Text
         {
             var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
 
-            this.Color = sec.Columns.Add(SrcConstants.CharColor, nameof(SrcConstants.CharColor));
-            this.Trans = sec.Columns.Add(SrcConstants.CharColorTransparency, nameof(SrcConstants.CharColorTransparency));
-            this.Font = sec.Columns.Add(SrcConstants.CharFont, nameof(SrcConstants.CharFont));
-            this.Size = sec.Columns.Add(SrcConstants.CharSize, nameof(SrcConstants.CharSize));
-            this.Style = sec.Columns.Add(SrcConstants.CharStyle, nameof(SrcConstants.CharStyle));
-            this.AsianFont = sec.Columns.Add(SrcConstants.CharAsianFont, nameof(SrcConstants.CharAsianFont));
-            this.Case = sec.Columns.Add(SrcConstants.CharCase, nameof(SrcConstants.CharCase));
-            this.ComplexScriptFont = sec.Columns.Add(SrcConstants.CharComplexScriptFont, nameof(SrcConstants.CharComplexScriptFont));
-            this.ComplexScriptSize = sec.Columns.Add(SrcConstants.CharComplexScriptSize, nameof(SrcConstants.CharComplexScriptSize));
-            this.DoubleStrikethrough = sec.Columns.Add(SrcConstants.CharDoubleStrikethrough, nameof(SrcConstants.CharDoubleStrikethrough));
-            this.DoubleUnderline = sec.Columns.Add(SrcConstants.CharDoubleUnderline, nameof(SrcConstants.CharDoubleUnderline));
-            this.LangID = sec.Columns.Add(SrcConstants.CharLangID, nameof(SrcConstants.CharLangID));
-            this.Locale = sec.Columns.Add(SrcConstants.CharLocale, nameof(SrcConstants.CharLocale));
-            this.LocalizeFont = sec.Columns.Add(SrcConstants.CharLocalizeFont, nameof(SrcConstants.CharLocalizeFont));
-            this.Overline = sec.Columns.Add(SrcConstants.CharOverline, nameof(SrcConstants.CharOverline));
-            this.Perpendicular = sec.Columns.Add(SrcConstants.CharPerpendicular, nameof(SrcConstants.CharPerpendicular));
-            this.Pos = sec.Columns.Add(SrcConstants.CharPos, nameof(SrcConstants.CharPos));
-            this.RtlText = sec.Columns.Add(SrcConstants.CharRTLText, nameof(SrcConstants.CharRTLText));
-            this.FontScale = sec.Columns.Add(SrcConstants.CharFontScale, nameof(SrcConstants.CharFontScale));
-            this.Letterspace = sec.Columns.Add(SrcConstants.CharLetterspace, nameof(SrcConstants.CharLetterspace));
-            this.Strikethru = sec.Columns.Add(SrcConstants.CharStrikethru, nameof(SrcConstants.CharStrikethru));
-            this.UseVertical = sec.Columns.Add(SrcConstants.CharUseVertical, nameof(SrcConstants.CharUseVertical));
+            this.Color = sec.Columns.Add(SrcConstants.CharColor, nameof(this.Color));
+            this.Trans = sec.Columns.Add(SrcConstants.CharColorTransparency, nameof(this.Trans));
+            this.Font = sec.Columns.Add(SrcConstants.CharFont, nameof(this.Font));
+            this.Size = sec.Columns.Add(SrcConstants.CharSize, nameof(this.Size));
+            this.Style = sec.Columns.Add(SrcConstants.CharStyle, nameof(this.Style));
+            this.AsianFont = sec.Columns.Add(SrcConstants.CharAsianFont, nameof(this.AsianFont));
+            this.Case = sec.Columns.Add(SrcConstants.CharCase, nameof(this.Case));
+            this.ComplexScriptFont = sec.Columns.Add(SrcConstants.CharComplexScriptFont, nameof(this.ComplexScriptFont));
+            this.ComplexScriptSize = sec.Columns.Add(SrcConstants.CharComplexScriptSize, nameof(this.ComplexScriptSize));
+            this.DoubleStrikethrough = sec.Columns.Add(SrcConstants.CharDoubleStrikethrough, nameof(this.DoubleStrikethrough));
+            this.DoubleUnderline = sec.Columns.Add(SrcConstants.CharDoubleUnderline, nameof(this.DoubleUnderline));
+            this.LangID = sec.Columns.Add(SrcConstants.CharLangID, nameof(this.LangID));
+            this.Locale = sec.Columns.Add(SrcConstants.CharLocale, nameof(this.Locale));
+            this.LocalizeFont = sec.Columns.Add(SrcConstants.CharLocalizeFont, nameof(this.LocalizeFont));
+            this.Overline = sec.Columns.Add(SrcConstants.CharOverline, nameof(this.Overline));
+            this.Perpendicular = sec.Columns.Add(SrcConstants.CharPerpendicular, nameof(this.Perpendicular));
+            this.Pos = sec.Columns.Add(SrcConstants.CharPos, nameof(this.Pos));
+            this.RtlText = sec.Columns.Add(SrcConstants.CharRTLText, nameof(this.RtlText));
+            this.FontScale = sec.Columns.Add(SrcConstants.CharFontScale, nameof(this.FontScale));
+            this.Letterspace = sec.Columns.Add(SrcConstants.CharLetterspace, nameof(this.Letterspace));
+            this.Strikethru = sec.Columns.Add(SrcConstants.CharStrikethru, nameof(this.Strikethru));
+            this.UseVertical = sec.Columns.Add(SrcConstants.CharUseVertical, nameof(this.UseVertical));
 
         }
 

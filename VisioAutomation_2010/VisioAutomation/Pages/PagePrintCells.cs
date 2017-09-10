@@ -73,21 +73,21 @@ namespace VisioAutomation.Pages
 
             public PagePrintCellsReader()
             {
-                this.LeftMargin = this.query.Columns.Add(SrcConstants.PrintLeftMargin, nameof(SrcConstants.PrintLeftMargin));
-                this.CenterX = this.query.Columns.Add(SrcConstants.PrintCenterX, nameof(SrcConstants.PrintCenterX));
-                this.CenterY = this.query.Columns.Add(SrcConstants.PrintCenterY, nameof(SrcConstants.PrintCenterY));
-                this.OnPage = this.query.Columns.Add(SrcConstants.PrintOnPage, nameof(SrcConstants.PrintOnPage));
-                this.BottomMargin = this.query.Columns.Add(SrcConstants.PrintBottomMargin, nameof(SrcConstants.PrintBottomMargin));
-                this.RightMargin = this.query.Columns.Add(SrcConstants.PrintRightMargin, nameof(SrcConstants.PrintRightMargin));
-                this.PagesX = this.query.Columns.Add(SrcConstants.PrintPagesX, nameof(SrcConstants.PrintPagesX));
-                this.PagesY = this.query.Columns.Add(SrcConstants.PrintPagesY, nameof(SrcConstants.PrintPagesY));
-                this.TopMargin = this.query.Columns.Add(SrcConstants.PrintTopMargin, nameof(SrcConstants.PrintTopMargin));
-                this.PaperKind = this.query.Columns.Add(SrcConstants.PrintPaperKind, nameof(SrcConstants.PrintPaperKind));
-                this.Grid = this.query.Columns.Add(SrcConstants.PrintGrid, nameof(SrcConstants.PrintGrid));
-                this.PageOrientation = this.query.Columns.Add(SrcConstants.PrintPageOrientation, nameof(SrcConstants.PrintPageOrientation));
-                this.ScaleX = this.query.Columns.Add(SrcConstants.PrintScaleX, nameof(SrcConstants.PrintScaleX));
-                this.ScaleY = this.query.Columns.Add(SrcConstants.PrintScaleY, nameof(SrcConstants.PrintScaleY));
-                this.PaperSource = this.query.Columns.Add(SrcConstants.PrintPaperSource, nameof(SrcConstants.PrintPaperSource));
+                this.LeftMargin = this.query.Columns.Add(SrcConstants.PrintLeftMargin, nameof(this.LeftMargin));
+                this.CenterX = this.query.Columns.Add(SrcConstants.PrintCenterX, nameof(this.CenterX));
+                this.CenterY = this.query.Columns.Add(SrcConstants.PrintCenterY, nameof(this.CenterY));
+                this.OnPage = this.query.Columns.Add(SrcConstants.PrintOnPage, nameof(this.OnPage));
+                this.BottomMargin = this.query.Columns.Add(SrcConstants.PrintBottomMargin, nameof(this.BottomMargin));
+                this.RightMargin = this.query.Columns.Add(SrcConstants.PrintRightMargin, nameof(this.RightMargin));
+                this.PagesX = this.query.Columns.Add(SrcConstants.PrintPagesX, nameof(this.PagesX));
+                this.PagesY = this.query.Columns.Add(SrcConstants.PrintPagesY, nameof(this.PagesY));
+                this.TopMargin = this.query.Columns.Add(SrcConstants.PrintTopMargin, nameof(this.TopMargin));
+                this.PaperKind = this.query.Columns.Add(SrcConstants.PrintPaperKind, nameof(this.PaperKind));
+                this.Grid = this.query.Columns.Add(SrcConstants.PrintGrid, nameof(this.Grid));
+                this.PageOrientation = this.query.Columns.Add(SrcConstants.PrintPageOrientation, nameof(this.PageOrientation));
+                this.ScaleX = this.query.Columns.Add(SrcConstants.PrintScaleX, nameof(this.ScaleX));
+                this.ScaleY = this.query.Columns.Add(SrcConstants.PrintScaleY, nameof(this.ScaleY));
+                this.PaperSource = this.query.Columns.Add(SrcConstants.PrintPaperSource, nameof(this.PaperSource));
             }
 
             public override PagePrintCells CellDataToCellGroup(Utilities.ArraySegment<string> row)

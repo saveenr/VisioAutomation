@@ -48,8 +48,8 @@ namespace VisioAutomation.Shapes
             public UserDefinedCellCellsReader()
             {
                 var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
-                this.Value = sec.Columns.Add(SrcConstants.UserDefCellValue, nameof(SrcConstants.UserDefCellValue));
-                this.Prompt = sec.Columns.Add(SrcConstants.UserDefCellPrompt, nameof(SrcConstants.UserDefCellPrompt));
+                this.Value = sec.Columns.Add(SrcConstants.UserDefCellValue, nameof(this.Value));
+                this.Prompt = sec.Columns.Add(SrcConstants.UserDefCellPrompt, nameof(this.Prompt));
             }
 
             public override UserDefinedCellCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
