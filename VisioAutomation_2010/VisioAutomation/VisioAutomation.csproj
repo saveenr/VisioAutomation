@@ -110,9 +110,9 @@
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
     <Compile Include="ShapeSheet\Streams\StreamType.cs" />
     <Compile Include="ShapeSheet\Internal\QueryCellInfo.cs" />
-    <Compile Include="ShapeSheet\Streams\FixedSidSrcStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\FixedSrcStreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\FixedStreamBuilderBase.cs" />
+    <Compile Include="ShapeSheet\Streams\SidSrcStreamArrayBuilder.cs" />
+    <Compile Include="ShapeSheet\Streams\SrcStreamArrayBuilder.cs" />
+    <Compile Include="ShapeSheet\Streams\StreamArrayBuilderBase.cs" />
     <Compile Include="ShapeSheet\Writers\WriteCache.cs" />
     <Compile Include="ShapeSheet\Streams\StreamArray.cs" />
     <Compile Include="Utilities\ArraySegmentReader.cs" />

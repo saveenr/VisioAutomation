@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
-    public abstract class FixedStreamBuilderBase<T>
+    public abstract class StreamArrayBuilderBase<T>
     {
         private readonly int _capacity = -1;
 
@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         private VisioAutomation.Utilities.SegmentedArray<short> _segarray;
 
-        internal FixedStreamBuilderBase(int capacity, StreamType stream_type)
+        internal StreamArrayBuilderBase(int capacity, StreamType stream_type)
         {
             this._streamtype = stream_type;
             this._capacity = capacity;
@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
         }
 
-        public VisioAutomation.ShapeSheet.Streams.StreamArray ToStream()
+        public VisioAutomation.ShapeSheet.Streams.StreamArray ToStreamArray()
         {
             if (this._count != this._capacity)
             {
