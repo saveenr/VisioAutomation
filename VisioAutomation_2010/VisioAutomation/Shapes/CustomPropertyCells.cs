@@ -26,6 +26,8 @@ namespace VisioAutomation.Shapes
 
         private string SmartStringToFormulaString(CellValueLiteral formula, bool force_no_quoting)
         {
+            var char_doublequote = '\"';
+
             if (!formula.HasValue)
             {
                 return null;
@@ -36,7 +38,7 @@ namespace VisioAutomation.Shapes
                 return Utilities.Convert.StringToFormulaString(formula.Value);
             }
 
-            if (formula.Value[0] != '\"')
+            if (formula.Value[0] != char_doublequote)
             {
                 if (force_no_quoting)
                 {
