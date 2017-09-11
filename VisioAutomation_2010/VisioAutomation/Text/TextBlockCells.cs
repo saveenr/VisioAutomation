@@ -13,9 +13,9 @@ namespace VisioAutomation.Text
         public CellValueLiteral RightMargin { get; set; }
         public CellValueLiteral TopMargin { get; set; }
         public CellValueLiteral DefaultTabStop { get; set; }
-        public CellValueLiteral TextBackground { get; set; }
-        public CellValueLiteral TextBackgroundTransparency { get; set; }
-        public CellValueLiteral TextDirection { get; set; }
+        public CellValueLiteral Background { get; set; }
+        public CellValueLiteral BackgroundTransparency { get; set; }
+        public CellValueLiteral Direction { get; set; }
         public CellValueLiteral VerticalAlign { get; set; }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
@@ -27,9 +27,9 @@ namespace VisioAutomation.Text
                 yield return SrcValuePair.Create(SrcConstants.TextBlockRightMargin, this.RightMargin);
                 yield return SrcValuePair.Create(SrcConstants.TextBlockTopMargin, this.TopMargin);
                 yield return SrcValuePair.Create(SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop);
-                yield return SrcValuePair.Create(SrcConstants.TextBlockBackground, this.TextBackground);
-                yield return SrcValuePair.Create(SrcConstants.TextBlockBackgroundTransparency, this.TextBackgroundTransparency);
-                yield return SrcValuePair.Create(SrcConstants.TextBlockDirection, this.TextDirection);
+                yield return SrcValuePair.Create(SrcConstants.TextBlockBackground, this.Background);
+                yield return SrcValuePair.Create(SrcConstants.TextBlockBackgroundTransparency, this.BackgroundTransparency);
+                yield return SrcValuePair.Create(SrcConstants.TextBlockDirection, this.Direction);
                 yield return SrcValuePair.Create(SrcConstants.TextBlockVerticalAlign, this.VerticalAlign);
             }
         }
@@ -82,9 +82,9 @@ namespace VisioAutomation.Text
                 cells.RightMargin = row[this.RightMargin];
                 cells.TopMargin = row[this.TopMargin];
                 cells.DefaultTabStop = row[this.DefaultTabStop];
-                cells.TextBackground = row[this.Background];
-                cells.TextBackgroundTransparency = row[this.BackgroundTransparency];
-                cells.TextDirection = row[this.Direction];
+                cells.Background = row[this.Background];
+                cells.BackgroundTransparency = row[this.BackgroundTransparency];
+                cells.Direction = row[this.Direction];
                 cells.VerticalAlign = row[this.VerticalAlign];
                 return cells;
             }
