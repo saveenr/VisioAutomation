@@ -50,29 +50,6 @@
             this.Top = bottomleft.Y + s.Height;
         }
 
-        public static Rectangle FromCenterPoint(double x, double y, double w, double h)
-        {
-            if (w < 0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(w), "width must be non-negative");
-            }
-
-            if (h < 0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(h), "height must be non-negative");
-            }
-
-            var xradius = w/2.0;
-            var yradius = h/2.0;
-            var r = new Rectangle(x - xradius, y - yradius, x + xradius, y + yradius);
-            return r;
-        }
-
-        public static Rectangle FromCenterPoint(Point p, double width, double height)
-        {
-            return Rectangle.FromCenterPoint(p.X, p.Y, width, height);
-        }
-
         public override string ToString()
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
