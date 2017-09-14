@@ -26,22 +26,18 @@ namespace VisioAutomation.Shapes
 
         private static string SmartStringToFormulaString(string str, bool force_no_quoting)
         {
-            if (str != null)
+            // if null or empty, return null or empty
+            if (string.IsNullOrEmpty(str))
             {
-                if (str.Length == 0)
+                return str;
+            }
+
+            var char_doublequote = '\"';
+            if (str[0] != char_doublequote)
+            {
+                if (!force_no_quoting)
                 {
                     str = Utilities.Convert.StringToFormulaString(str);
-                }
-                else
-                {
-                    var char_doublequote = '\"';
-                    if (str[0] != char_doublequote)
-                    {
-                        if (!force_no_quoting)
-                        {
-                            str = Utilities.Convert.StringToFormulaString(str);
-                        }
-                    }
                 }
             }
             return str;
