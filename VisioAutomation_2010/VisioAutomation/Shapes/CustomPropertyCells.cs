@@ -24,30 +24,27 @@ namespace VisioAutomation.Shapes
 
         }
 
-        private string SmartStringToFormulaString(CellValueLiteral formula, bool force_no_quoting)
+        private static string SmartStringToFormulaString(string str, bool force_no_quoting)
         {
-            var char_doublequote = '\"';
-
-            if (!formula.HasValue)
+            if (str != null)
             {
-                return null;
-            }
-
-            if (formula.Value.Length == 0)
-            {
-                return Utilities.Convert.StringToFormulaString(formula.Value);
-            }
-
-            if (formula.Value[0] != char_doublequote)
-            {
-                if (force_no_quoting)
+                if (str.Length == 0)
                 {
-                    return formula.Value;
+                    str = Utilities.Convert.StringToFormulaString(str);
                 }
-                return Utilities.Convert.StringToFormulaString(formula.Value);
+                else
+                {
+                    var char_doublequote = '\"';
+                    if (str[0] != char_doublequote)
+                    {
+                        if (!force_no_quoting)
+                        {
+                            str = Utilities.Convert.StringToFormulaString(str);
+                        }
+                    }
+                }
             }
-
-            return formula.Value;
+            return str;
         }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs
@@ -55,25 +52,25 @@ namespace VisioAutomation.Shapes
             get
             {
                 // Label
-                string str_label = this.SmartStringToFormulaString(this.Label.Value, false);
+                string str_label = SmartStringToFormulaString(this.Label.Value, false);
 
                 // Value
-                string str_format = this.SmartStringToFormulaString(this.Format.Value, false);
+                string str_format = SmartStringToFormulaString(this.Format.Value, false);
 
                 // Prompt
-                string str_prompt = this.SmartStringToFormulaString(this.Prompt.Value, false);
+                string str_prompt = SmartStringToFormulaString(this.Prompt.Value, false);
 
                 // Value
                 string str_value = null;
                 if (this.Type.Value == "0" || this.Type.Value == null)
                 {
                     // if type has no value or is a "0" then it is a string
-                    str_value = this.SmartStringToFormulaString(this.Value.Value, false);
+                    str_value = SmartStringToFormulaString(this.Value.Value, false);
                 }
                 else
                 {
                     // For non-strings don't add any extra quotes
-                    str_value = this.SmartStringToFormulaString(this.Value.Value, true);
+                    str_value = SmartStringToFormulaString(this.Value.Value, true);
                 }
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
