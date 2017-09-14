@@ -24,7 +24,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        private static string SmartStringToFormulaString(string str, bool force_no_quoting)
+        private static string SmartStringToFormulaString(string str, bool quote)
         {
             // if null or empty, return null or empty
             if (string.IsNullOrEmpty(str))
@@ -35,7 +35,7 @@ namespace VisioAutomation.Shapes
             var char_doublequote = '\"';
             if (str[0] != char_doublequote)
             {
-                if (!force_no_quoting)
+                if (quote)
                 {
                     str = Utilities.Convert.StringToFormulaString(str);
                 }
@@ -48,25 +48,25 @@ namespace VisioAutomation.Shapes
             get
             {
                 // Label
-                string str_label = SmartStringToFormulaString(this.Label.Value, false);
+                string str_label = SmartStringToFormulaString(this.Label.Value, true);
 
                 // Value
-                string str_format = SmartStringToFormulaString(this.Format.Value, false);
+                string str_format = SmartStringToFormulaString(this.Format.Value, true);
 
                 // Prompt
-                string str_prompt = SmartStringToFormulaString(this.Prompt.Value, false);
+                string str_prompt = SmartStringToFormulaString(this.Prompt.Value, true);
 
                 // Value
                 string str_value = null;
                 if (this.Type.Value == "0" || this.Type.Value == null)
                 {
                     // if type has no value or is a "0" then it is a string
-                    str_value = SmartStringToFormulaString(this.Value.Value, false);
+                    str_value = SmartStringToFormulaString(this.Value.Value, true);
                 }
                 else
                 {
                     // For non-strings don't add any extra quotes
-                    str_value = SmartStringToFormulaString(this.Value.Value, true);
+                    str_value = SmartStringToFormulaString(this.Value.Value, false);
                 }
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
