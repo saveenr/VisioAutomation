@@ -208,7 +208,7 @@ namespace VisioAutomation_Tests.Core.Extensions
 
             var cp_bool = new CustomPropertyCells();
             cp_bool.Value = "TRUE";
-            cp_bool.Type = 2;
+            cp_bool.Type = 3;
 
             var cp_float = new CustomPropertyCells();
             cp_float.Value = 3.14;
