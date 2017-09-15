@@ -69,13 +69,13 @@ namespace VisioAutomation.Shapes
         /// If there are no custom properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of custom properties</returns>
-        public static CustomPropertyDictionary GetFormulas(IVisio.Shape shape)
+        public static CustomPropertyDictionary GetValues(IVisio.Shape shape, CellValueType cvt)
         {
             var prop_names = CustomPropertyHelper.GetNames(shape);
             var dic = new CustomPropertyDictionary(prop_names.Count);
-            var cells = CustomPropertyCells.GetCells(shape, CellValueType.Formula);
+            var cells = CustomPropertyCells.GetCells(shape, cvt);
 
-            for (int prop_index = 0; prop_index < prop_names.Count(); prop_index++)
+            for (int prop_index = 0; prop_index < prop_names.Count; prop_index++)
             {
                 string prop_name = prop_names[prop_index];
                 dic[prop_name] = cells[prop_index];
@@ -84,7 +84,7 @@ namespace VisioAutomation.Shapes
             return dic;
         }
 
-        public static List<CustomPropertyDictionary> GetFormulas(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static List<CustomPropertyDictionary> GetValues(IVisio.Page page, IList<IVisio.Shape> shapes, CellValueType cvt)
         {
             if (page == null)
             {
@@ -97,31 +97,11 @@ namespace VisioAutomation.Shapes
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids, CellValueType.Formula);
+            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids, cvt);
             var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
 
             return customprops_dic;
         }
-
-        public static List<CustomPropertyDictionary> GetResults(IVisio.Page page, IList<IVisio.Shape> shapes)
-        {
-            if (page == null)
-            {
-                throw new ArgumentNullException(nameof(page));
-            }
-
-            if (shapes == null)
-            {
-                throw new ArgumentNullException(nameof(shapes));
-            }
-
-            var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids, CellValueType.Result);
-            var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
-
-            return customprops_dic;
-        }
-
 
         private static List<CustomPropertyDictionary> create_dic(IList<IVisio.Shape> shapes, List<int> shapeids, List<List<CustomPropertyCells>> customprops_per_shape)
         {

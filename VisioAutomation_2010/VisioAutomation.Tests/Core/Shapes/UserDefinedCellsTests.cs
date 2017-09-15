@@ -1,5 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -111,7 +112,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, VisioAutomation.Shapes.CustomPropertyHelper.GetFormulas(s1).Count);
+            Assert.AreEqual(0, VisioAutomation.Shapes.CustomPropertyHelper.GetValues(s1, CellValueType.Formula).Count);
 
             // Add the same one multiple times Custom Property
             VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR1", null);

@@ -1,4 +1,5 @@
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.Utilities;
 
 namespace VisioAutomationSamples
@@ -25,7 +26,7 @@ namespace VisioAutomationSamples
             CustomPropertyHelper.Set(s1, "FOO3", formula);
 
             // retrieve all the properties
-            var props = CustomPropertyHelper.GetFormulas(s1);
+            var props = CustomPropertyHelper.GetValues(s1, CellValueType.Formula);
         }
     }
 }

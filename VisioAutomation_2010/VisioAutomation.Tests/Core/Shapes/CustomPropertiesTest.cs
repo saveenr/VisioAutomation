@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Core.Shapes
 {
@@ -28,20 +29,20 @@ namespace VisioAutomation_Tests.Core.Shapes
             s1.Text = "Checking for Custom Properties";
 
             // A new rectangle should have zero props
-            var c0 = CustomPropertyHelper.GetFormulas(s1);
+            var c0 = CustomPropertyHelper.GetValues(s1, CellValueType.Formula);
             Assert.AreEqual(0,c0.Count);
 
             // Set one property
             // Notice that the properties some back double-quoted
             CustomPropertyHelper.Set(s1,"PROP1","VAL1");
-            var c1 = CustomPropertyHelper.GetFormulas(s1);
+            var c1 = CustomPropertyHelper.GetValues(s1, CellValueType.Formula);
             Assert.AreEqual(1, c1.Count);
             Assert.IsTrue(c1.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"",c1["PROP1"].Value.Value);
 
             // Add another property
             CustomPropertyHelper.Set(s1, "PROP2", "VAL 2");
-            var c2 = CustomPropertyHelper.GetFormulas(s1);
+            var c2 = CustomPropertyHelper.GetValues(s1, CellValueType.Formula);
             Assert.AreEqual(2, c2.Count);
             Assert.IsTrue(c2.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"", c2["PROP1"].Value.Value);
@@ -50,7 +51,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // Modify the value of the second property
             CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"");
-            var c3 = CustomPropertyHelper.GetFormulas(s1);
+            var c3 = CustomPropertyHelper.GetValues(s1, CellValueType.Formula);
             Assert.AreEqual(2, c3.Count);
             Assert.IsTrue(c3.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"", c3["PROP1"].Value.Value);
@@ -62,7 +63,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             {
                 CustomPropertyHelper.Delete(s1,name);
             }
-            var c4 = CustomPropertyHelper.GetFormulas(s1);
+            var c4 = CustomPropertyHelper.GetValues(s1, CellValueType.Formula);
             Assert.AreEqual(0, c4.Count);
 
             var app = this.GetVisioApplication();
@@ -96,7 +97,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             CustomPropertyHelper.Set(s1, "PROP1", cp1);
 
-            var props1 = CustomPropertyHelper.GetFormulas(s1);
+            var props1 = CustomPropertyHelper.GetValues(s1, CellValueType.Formula);
 
             var cp2 = props1["PROP1"];
             Assert.AreEqual("TRUE", cp2.Ask.Value);
@@ -125,7 +126,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             cp3.Value = "2";
 
             CustomPropertyHelper.Set(s1,"PROP1",cp3);
-            var props2 = CustomPropertyHelper.GetFormulas(s1);
+            var props2 = CustomPropertyHelper.GetValues(s1, CellValueType.Formula);
 
             var cp4 = props2["PROP1"];
             Assert.AreEqual("FALSE", cp4.Ask.Value);
