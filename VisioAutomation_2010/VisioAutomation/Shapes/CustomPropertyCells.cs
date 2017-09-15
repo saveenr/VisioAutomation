@@ -26,8 +26,14 @@ namespace VisioAutomation.Shapes
 
         private static string SmartStringToFormulaString(string str, bool force_formulastring)
         {
-            // if null or empty, return null or empty
-            if (string.IsNullOrEmpty(str))
+            // if null , return null
+            if (str == null)
+            {
+                return str;
+            }
+
+            // if empty, return empty
+            if (str.Length == 0)
             {
                 return str;
             }
