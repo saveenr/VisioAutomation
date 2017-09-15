@@ -24,25 +24,25 @@ namespace VisioAutomation.Shapes
 
         }
 
-        private static string FixupString(string str, bool force_quoting)
+        private static string FixupString(string text, bool force_quoting)
         {
             // For these cases return the input string unchanged
-            if ( (str == null) || (str.Length == 0) || (str[0] == '\"') || (str[0] == '='))
+            if ( (text == null) || (text.Length == 0) || (text[0] == '\"') || (text[0] == '='))
             {
-                return str;
+                return text;
             }
 
             // if the caller wants to force the content to a formula string
             // then do so: escape internal double quotes and then wrap in double quotes
             if (force_quoting)
             {
-                string str_quoted = str.Replace("\"", "\"\"");
+                string str_quoted = text.Replace("\"", "\"\"");
                 str_quoted = string.Format("\"{0}\"", str_quoted);
                 return str_quoted;
             }
 
             // For all other cases, just return the input string
-            return str;
+            return text;
         }
 
         public override IEnumerable<SrcValuePair> SrcValuePairs

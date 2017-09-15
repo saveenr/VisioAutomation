@@ -5,20 +5,20 @@
         private const string doublequote = "\"";
         private const string doublequote_x2 = "\"\"";
 
-        public static string FormulaEncodeSmart(string s)
+        public static string FormulaEncodeSmart(string text)
         {
-            if (s == null)
+            if (text == null)
             {
-                throw new System.ArgumentNullException(nameof(s));
+                throw new System.ArgumentNullException(nameof(text));
             }
 
             // if its empty or begins with '=' return it as is
-            if (s.Length == 0 || s[0]=='=')
+            if (text.Length == 0 || text[0]=='=')
             {
-                return s;
+                return text;
             }
 
-            var result_quote_escaped = s.Replace(Convert.doublequote, Convert.doublequote_x2);
+            var result_quote_escaped = text.Replace(Convert.doublequote, Convert.doublequote_x2);
             string result = string.Format("\"{0}\"", result_quote_escaped);
 
             return result;
