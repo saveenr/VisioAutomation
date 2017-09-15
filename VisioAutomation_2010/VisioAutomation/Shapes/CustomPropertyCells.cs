@@ -24,7 +24,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        private static string SmartStringToFormulaString(string str, bool force_formulastring)
+        private static string SmartQuote(string str, bool force_formulastring)
         {
             // if null , return null
             if (str == null)
@@ -70,25 +70,25 @@ namespace VisioAutomation.Shapes
             get
             {
                 // Label
-                string str_label = SmartStringToFormulaString(this.Label.Value, true);
+                string str_label = SmartQuote(this.Label.Value, true);
 
                 // Value
-                string str_format = SmartStringToFormulaString(this.Format.Value, true);
+                string str_format = SmartQuote(this.Format.Value, true);
 
                 // Prompt
-                string str_prompt = SmartStringToFormulaString(this.Prompt.Value, true);
+                string str_prompt = SmartQuote(this.Prompt.Value, true);
 
                 // Value
                 string str_value = null;
                 if (this.Type.Value == "0" || this.Type.Value == null)
                 {
                     // if type has no value or is a "0" then it is a string
-                    str_value = SmartStringToFormulaString(this.Value.Value, true);
+                    str_value = SmartQuote(this.Value.Value, true);
                 }
                 else
                 {
                     // For non-strings don't add any extra quotes
-                    str_value = SmartStringToFormulaString(this.Value.Value, false);
+                    str_value = SmartQuote(this.Value.Value, false);
                 }
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
