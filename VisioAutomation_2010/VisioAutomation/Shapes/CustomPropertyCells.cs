@@ -26,28 +26,8 @@ namespace VisioAutomation.Shapes
 
         private static string SmartQuote(string str, bool force_formulastring)
         {
-            // if null , return null
-            if (str == null)
-            {
-                return str;
-            }
-
-            // if empty, return empty
-            if (str.Length == 0)
-            {
-                return str;
-            }
-
-            // if begins with a doublequote, assume it is correctly
-            // quoted and do nothing
-            if (str[0] == '\"')
-            {
-                return str;
-            }
-
-            // if begins with an equals sign, assume it is correctly
-            // written as a formula and do nothing
-            if (str[0] == '=')
+            // For these cases return the input string unchanged
+            if ( (str == null) || (str.Length == 0) || (str[0] == '\"') || (str[0] == '='))
             {
                 return str;
             }
