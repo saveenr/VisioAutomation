@@ -24,7 +24,7 @@
             return result;
         }
 
-        public static string FormulaDecode(string formula)
+        public static string FormulaDecodeSmart(string formula)
         {
             if (formula == null)
             {

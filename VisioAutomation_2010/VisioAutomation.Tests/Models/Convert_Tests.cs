@@ -42,7 +42,7 @@ namespace VisioAutomation_Tests.Models
             bool caught = false;
             try
             {
-                var t = Convert.FormulaDecode(null);
+                var t = Convert.FormulaDecodeSmart(null);
             }
             catch (ArgumentNullException)
             {
@@ -55,17 +55,17 @@ namespace VisioAutomation_Tests.Models
                 Assert.Fail("Did not throw expected exception");
             }
 
-            Assert.AreEqual("", Convert.FormulaDecode(string.Empty));
-            Assert.AreEqual(" ", Convert.FormulaDecode(" "));
-            Assert.AreEqual(" \"foo\" ", Convert.FormulaDecode(" \"foo\" "));
+            Assert.AreEqual("", Convert.FormulaDecodeSmart(string.Empty));
+            Assert.AreEqual(" ", Convert.FormulaDecodeSmart(" "));
+            Assert.AreEqual(" \"foo\" ", Convert.FormulaDecodeSmart(" \"foo\" "));
 
-            Assert.AreEqual("", Convert.FormulaDecode("\"\""));
-            Assert.AreEqual(" ", Convert.FormulaDecode("\" \""));
-            Assert.AreEqual(" \"foo\" ", Convert.FormulaDecode("\" \"\"foo\"\" \""));
+            Assert.AreEqual("", Convert.FormulaDecodeSmart("\"\""));
+            Assert.AreEqual(" ", Convert.FormulaDecodeSmart("\" \""));
+            Assert.AreEqual(" \"foo\" ", Convert.FormulaDecodeSmart("\" \"\"foo\"\" \""));
 
-            Assert.AreEqual("=", Convert.FormulaDecode("="));
-            Assert.AreEqual("=1", Convert.FormulaDecode("=1"));
-            Assert.AreEqual("=\"1\"", Convert.FormulaDecode("=\"1\""));
+            Assert.AreEqual("=", Convert.FormulaDecodeSmart("="));
+            Assert.AreEqual("=1", Convert.FormulaDecodeSmart("=1"));
+            Assert.AreEqual("=\"1\"", Convert.FormulaDecodeSmart("=\"1\""));
 
         }
     }
