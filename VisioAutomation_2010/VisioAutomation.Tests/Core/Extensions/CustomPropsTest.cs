@@ -220,6 +220,28 @@ namespace VisioAutomation_Tests.Core.Extensions
             CustomPropertyHelper.Set(s1, "PropertyDateTime", cp_dt);
             CustomPropertyHelper.Set(s1, "PropertyBool", cp_bool);
 
+            var cpdic = CustomPropertyHelper.GetFormulas(s1);
+            var out_cpstring = cpdic["PropertyString"];
+            var out_cpint = cpdic["PropertyInt"];
+            var out_cpfloat = cpdic["PropertyFloat"];
+            var out_cpdatetime = cpdic["PropertyDateTime"];
+            var out_cpbool = cpdic["PropertyBool"];
+
+            Assert.AreEqual("\"Hello World\"", out_cpstring.Value.Value);
+            Assert.AreEqual("0", out_cpstring.Type.Value);
+
+            Assert.AreEqual("1024", out_cpint.Value.Value);
+            Assert.AreEqual("2", out_cpint.Type.Value);
+
+            Assert.AreEqual("3.14", out_cpfloat.Value.Value);
+            Assert.AreEqual("2", out_cpfloat.Type.Value);
+
+            Assert.AreEqual("DATETIME(\"03/31/1979\")", out_cpdatetime.Value.Value);
+            Assert.AreEqual("5", out_cpdatetime.Type.Value);
+
+            Assert.AreEqual("TRUE", out_cpbool.Value.Value);
+            Assert.AreEqual("2", out_cpbool.Type.Value);
+
             page1.Delete(0);
         }
 
