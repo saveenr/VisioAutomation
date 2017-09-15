@@ -38,18 +38,16 @@ namespace VisioAutomation.Shapes
                 return str;
             }
 
-            char first_char = str[0];
-
             // if begins with a doublequote, assume it is correctly
             // quoted and do nothing
-            if (first_char == '\"')
+            if (str[0] == '\"')
             {
                 return str;
             }
 
             // if begins with an equals sign, assume it is correctly
             // written as a formula and do nothing
-            if (first_char == '=')
+            if (str[0] == '=')
             {
                 return str;
             }
@@ -58,11 +56,12 @@ namespace VisioAutomation.Shapes
             // then do so: escape internal double quotes and then wrap in double quotes
             if (force_formulastring)
             {
-                string str2 = str.Replace("\"", "\"\"");
-                return string.Format("\"{0}\"", str2);
+                string str_quoted = str.Replace("\"", "\"\"");
+                str_quoted = string.Format("\"{0}\"", str_quoted);
+                return str_quoted;
             }
 
-            // otherwise, just return the input string
+            // For all other cases, just return the input string
             return str;
         }
 
