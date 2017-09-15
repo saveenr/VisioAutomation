@@ -26,11 +26,26 @@ namespace VisioAutomation.Shapes
 
         private static string FixupString(string text, bool force_quoting)
         {
-            // For these cases return the input string unchanged
-            if ( (text == null) || (text.Length == 0) || (text[0] == '\"') || (text[0] == '='))
+            if ( text == null)
             {
                 return text;
             }
+
+            if (text.Length == 0)
+            {
+                return text;
+            }
+
+            if (text[0] == '\"')
+            {
+                return text;
+            }
+
+            if (text[0] == '=')
+            {
+                return text;
+            }
+
 
             // if the caller wants to force the content to a formula string
             // then do so: escape internal double quotes and then wrap in double quotes

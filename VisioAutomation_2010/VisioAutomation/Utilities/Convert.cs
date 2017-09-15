@@ -12,8 +12,12 @@
                 throw new System.ArgumentNullException(nameof(text));
             }
 
-            // if its empty or begins with '=' return it as is
-            if (text.Length == 0 || text[0]=='=')
+            if (text.Length == 0)
+            {
+                return text;
+            }
+
+            if (text[0] == '\"')
             {
                 return text;
             }
