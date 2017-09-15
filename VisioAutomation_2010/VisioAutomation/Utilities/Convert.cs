@@ -5,31 +5,9 @@
         private const string doublequote = "\"";
         private const string doublequote_x2 = "\"\"";
 
-        public static short BoolToShort(bool b)
-        {
-            return b ? ((short)1) : ((short)0);
-        }
-
-        public static string BoolToFormula(bool b)
-        {
-            return b ? "1" : "0";
-        }
-
-        public static bool DoubleToBool(double d)
-        {
-            return d != 0;
-        }
-
-        public static bool ShortToBool(short v)
-        {
-            return v != 0;
-        }
-        
         /// <summary>
         /// Properly quotes a string being used as a formula
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
         public static string StringToFormulaString(string s)
         {
             if (s == null)
@@ -37,12 +15,8 @@
                 throw new System.ArgumentNullException(nameof(s));
             }
 
-            if (s.Length == 0)
-            {
-                return s;
-            }
-
-            if (s.StartsWith("="))
+            // if its empty or begins with '=' return it as is
+            if (s.Length == 0 || s[0]=='=')
             {
                 return s;
             }

@@ -10,18 +10,8 @@ namespace VisioAutomation_Tests.Models
         [TestMethod]
         public void Convert_TestConversions()
         {
-            this.TestBoolToShortConversion();
             this.Test_FormulaStringToString();
             this.Test_StringToFormulaString();
-        }
-
-        public void TestBoolToShortConversion()
-        {
-            Assert.AreEqual(1, Convert.BoolToShort(true));
-            Assert.AreEqual(0, Convert.BoolToShort(false));
-            Assert.AreEqual(true, Convert.ShortToBool(-1));
-            Assert.AreEqual(true, Convert.ShortToBool(1));
-            Assert.AreEqual(false, Convert.ShortToBool(0));
         }
 
         public void Test_StringToFormulaString()
