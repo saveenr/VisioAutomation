@@ -69,27 +69,16 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                // Label
+                // Handle, .Label, .Value, .Prompt
                 string str_label = SmartQuote(this.Label.Value, true);
-
-                // Value
                 string str_format = SmartQuote(this.Format.Value, true);
-
-                // Prompt
                 string str_prompt = SmartQuote(this.Prompt.Value, true);
 
-                // Value
-                string str_value = null;
-                if (this.Type.Value == "0" || this.Type.Value == null)
-                {
-                    // if type has no value or is a "0" then it is a string
-                    str_value = SmartQuote(this.Value.Value, true);
-                }
-                else
-                {
-                    // For non-strings don't add any extra quotes
-                    str_value = SmartQuote(this.Value.Value, false);
-                }
+                // Handle .Value
+                // use formulastring quoting if needed for string values//
+                // note: if .Type is zero or null then assume .Value is a string
+                bool force_formulastring_for_value = (this.Type.Value == "0" || this.Type.Value == null);
+                string str_value = SmartQuote(this.Value.Value, force_formulastring_for_value);
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropValue, str_value);
