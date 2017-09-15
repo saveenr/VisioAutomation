@@ -24,7 +24,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        private static string SmartQuote(string str, bool force_formulastring)
+        private static string FixupString(string str, bool force_quoting)
         {
             // For these cases return the input string unchanged
             if ( (str == null) || (str.Length == 0) || (str[0] == '\"') || (str[0] == '='))
@@ -34,7 +34,7 @@ namespace VisioAutomation.Shapes
 
             // if the caller wants to force the content to a formula string
             // then do so: escape internal double quotes and then wrap in double quotes
-            if (force_formulastring)
+            if (force_quoting)
             {
                 string str_quoted = str.Replace("\"", "\"\"");
                 str_quoted = string.Format("\"{0}\"", str_quoted);
@@ -50,15 +50,15 @@ namespace VisioAutomation.Shapes
             get
             {
                 // Handle, .Label, .Value, .Prompt
-                string str_label = SmartQuote(this.Label.Value, true);
-                string str_format = SmartQuote(this.Format.Value, true);
-                string str_prompt = SmartQuote(this.Prompt.Value, true);
+                string str_label = FixupString(this.Label.Value, true);
+                string str_format = FixupString(this.Format.Value, true);
+                string str_prompt = FixupString(this.Prompt.Value, true);
 
                 // Handle .Value
                 // use formulastring quoting if needed for string values//
                 // note: if .Type is zero or null then assume .Value is a string
-                bool force_formulastring_for_value = (this.Type.Value == "0" || this.Type.Value == null);
-                string str_value = SmartQuote(this.Value.Value, force_formulastring_for_value);
+                bool force_quoting_for_value = (this.Type.Value == "0" || this.Type.Value == null);
+                string str_value = FixupString(this.Value.Value, force_quoting_for_value);
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropValue, str_value);
