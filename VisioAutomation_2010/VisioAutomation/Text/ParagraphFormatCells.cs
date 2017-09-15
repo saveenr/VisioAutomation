@@ -44,16 +44,16 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static List<List<ParagraphFormatCells>> GetValues(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
+        public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
             var query = lazy_query.Value;
-            return query.GetValues(page, shapeids, cvt);
+            return query.GetCells(page, shapeids, cvt);
         }
 
-        public static List<ParagraphFormatCells> GetValues(IVisio.Shape shape, CellValueType cvt)
+        public static List<ParagraphFormatCells> GetCells(IVisio.Shape shape, CellValueType cvt)
         {
             var query = lazy_query.Value;
-            return query.GetValues(shape, cvt);
+            return query.GetCells(shape, cvt);
         }
 
 

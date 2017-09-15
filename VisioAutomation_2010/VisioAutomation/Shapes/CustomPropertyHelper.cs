@@ -69,7 +69,7 @@ namespace VisioAutomation.Shapes
         /// If there are no custom properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of custom properties</returns>
-        public static CustomPropertyDictionary GetValues(IVisio.Shape shape, CellValueType cvt)
+        public static CustomPropertyDictionary GetCells(IVisio.Shape shape, CellValueType cvt)
         {
             var prop_names = CustomPropertyHelper.GetNames(shape);
             var dic = new CustomPropertyDictionary(prop_names.Count);
@@ -84,7 +84,7 @@ namespace VisioAutomation.Shapes
             return dic;
         }
 
-        public static List<CustomPropertyDictionary> GetValues(IVisio.Page page, IList<IVisio.Shape> shapes, CellValueType cvt)
+        public static List<CustomPropertyDictionary> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, CellValueType cvt)
         {
             if (page == null)
             {

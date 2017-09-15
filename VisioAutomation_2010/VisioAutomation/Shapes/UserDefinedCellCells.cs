@@ -28,13 +28,13 @@ namespace VisioAutomation.Shapes
         public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
         {
             var query = lazy_query.Value;
-            return query.GetValues(page, shapeids, cvt);
+            return query.GetCells(page, shapeids, cvt);
         }
 
         public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, CellValueType cvt)
         {
             var query = lazy_query.Value;
-            return query.GetValues(shape, cvt);
+            return query.GetCells(shape, cvt);
         }
 
         private static readonly System.Lazy<UserDefinedCellCellsReader> lazy_query = new System.Lazy<UserDefinedCellCellsReader>();

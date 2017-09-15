@@ -30,7 +30,7 @@ namespace VisioScripting.Commands
             var application = this._client.Application.Get();
             var page = application.ActivePage;
 
-            var list_custom_props = CustomPropertyHelper.GetValues(page, targets.Shapes, CellValueType.Formula);
+            var list_custom_props = CustomPropertyHelper.GetCells(page, targets.Shapes, CellValueType.Formula);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {

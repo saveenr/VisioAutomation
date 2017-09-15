@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return GetFormulas(surface);
         }
 
-        public SectionsQueryOutput<string> GetValues(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
+        public SectionsQueryOutput<string> GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
         {
             var surface = new SurfaceTarget(shape);
             if (cvt == CellValueType.Formula)
@@ -89,7 +89,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetFormulas(surface, shapeids);
         }
 
-        public SectionsQueryOutputList<string> GetValues(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType cvt)
+        public SectionsQueryOutputList<string> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType cvt)
         {
             var surface = new SurfaceTarget(page);
             if (cvt == CellValueType.Formula)
