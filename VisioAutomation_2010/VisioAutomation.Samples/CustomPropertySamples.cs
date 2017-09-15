@@ -22,7 +22,7 @@ namespace VisioAutomationSamples
             CustomPropertyHelper.Delete(s1, "FOO2");
 
             // Set the value of an existing properties
-            string formula = Convert.StringToFormulaString("BAR3updated");
+            string formula = Convert.FormulaEncodeSmart("BAR3updated");
             CustomPropertyHelper.Set(s1, "FOO3", formula);
 
             // retrieve all the properties

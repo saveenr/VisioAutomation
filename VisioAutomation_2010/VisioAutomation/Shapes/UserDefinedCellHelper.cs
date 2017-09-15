@@ -53,14 +53,14 @@ namespace VisioAutomation.Shapes
                 {
                     string value_cell_name = full_prop_name;
                     var cell = shape.CellsU[value_cell_name];
-                    cell.FormulaU = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_value.Value);                    
+                    cell.FormulaU = VisioAutomation.Utilities.Convert.FormulaEncodeSmart(udfcell_value.Value);                    
                 }
 
                 if (udfcell_prompt.HasValue)
                 {
                     string prompt_cell_name = full_prop_name+".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    cell.FormulaU = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_prompt.Value);                                        
+                    cell.FormulaU = VisioAutomation.Utilities.Convert.FormulaEncodeSmart(udfcell_prompt.Value);                                        
                 }
                 return;
             }
@@ -75,14 +75,14 @@ namespace VisioAutomation.Shapes
             if (udfcell_value.HasValue)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                var formula = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_value.Value);
+                var formula = VisioAutomation.Utilities.Convert.FormulaEncodeSmart(udfcell_value.Value);
                 writer.SetFormula(src, formula);
             }
 
             if (udfcell_prompt.HasValue)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                var formula = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_prompt.Value);
+                var formula = VisioAutomation.Utilities.Convert.FormulaEncodeSmart(udfcell_prompt.Value);
                 writer.SetFormula(src, formula);
             }
 

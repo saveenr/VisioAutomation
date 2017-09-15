@@ -5,10 +5,7 @@
         private const string doublequote = "\"";
         private const string doublequote_x2 = "\"\"";
 
-        /// <summary>
-        /// Properly quotes a string being used as a formula
-        /// </summary>
-        public static string StringToFormulaString(string s)
+        public static string FormulaEncodeSmart(string s)
         {
             if (s == null)
             {
@@ -21,11 +18,13 @@
                 return s;
             }
 
-            string result = string.Format("\"{0}\"", s.Replace(Convert.doublequote, Convert.doublequote_x2));
+            var result_quote_escaped = s.Replace(Convert.doublequote, Convert.doublequote_x2);
+            string result = string.Format("\"{0}\"", result_quote_escaped);
+
             return result;
         }
 
-        public static string FormulaStringToString(string formula)
+        public static string FormulaDecode(string formula)
         {
             if (formula == null)
             {

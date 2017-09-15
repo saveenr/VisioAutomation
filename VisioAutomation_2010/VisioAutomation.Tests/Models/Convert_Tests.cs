@@ -19,7 +19,7 @@ namespace VisioAutomation_Tests.Models
             bool caught = false;
             try
             {
-                var t = Convert.StringToFormulaString(null);
+                var t = Convert.FormulaEncodeSmart(null);
             }
             catch (ArgumentNullException)
             {
@@ -32,9 +32,9 @@ namespace VisioAutomation_Tests.Models
                 Assert.Fail("Did not throw expected exception");
             }
             
-            Assert.AreEqual("", Convert.StringToFormulaString(string.Empty));
-            Assert.AreEqual("\" \"", Convert.StringToFormulaString(" "));
-            Assert.AreEqual("\" \"\"foo\"\" \"", Convert.StringToFormulaString(" \"foo\" "));
+            Assert.AreEqual("", Convert.FormulaEncodeSmart(string.Empty));
+            Assert.AreEqual("\" \"", Convert.FormulaEncodeSmart(" "));
+            Assert.AreEqual("\" \"\"foo\"\" \"", Convert.FormulaEncodeSmart(" \"foo\" "));
         }
 
         public void Test_FormulaStringToString()
@@ -42,7 +42,7 @@ namespace VisioAutomation_Tests.Models
             bool caught = false;
             try
             {
-                var t = Convert.FormulaStringToString(null);
+                var t = Convert.FormulaDecode(null);
             }
             catch (ArgumentNullException)
             {
@@ -55,17 +55,17 @@ namespace VisioAutomation_Tests.Models
                 Assert.Fail("Did not throw expected exception");
             }
 
-            Assert.AreEqual("", Convert.FormulaStringToString(string.Empty));
-            Assert.AreEqual(" ", Convert.FormulaStringToString(" "));
-            Assert.AreEqual(" \"foo\" ", Convert.FormulaStringToString(" \"foo\" "));
+            Assert.AreEqual("", Convert.FormulaDecode(string.Empty));
+            Assert.AreEqual(" ", Convert.FormulaDecode(" "));
+            Assert.AreEqual(" \"foo\" ", Convert.FormulaDecode(" \"foo\" "));
 
-            Assert.AreEqual("", Convert.FormulaStringToString("\"\""));
-            Assert.AreEqual(" ", Convert.FormulaStringToString("\" \""));
-            Assert.AreEqual(" \"foo\" ", Convert.FormulaStringToString("\" \"\"foo\"\" \""));
+            Assert.AreEqual("", Convert.FormulaDecode("\"\""));
+            Assert.AreEqual(" ", Convert.FormulaDecode("\" \""));
+            Assert.AreEqual(" \"foo\" ", Convert.FormulaDecode("\" \"\"foo\"\" \""));
 
-            Assert.AreEqual("=", Convert.FormulaStringToString("="));
-            Assert.AreEqual("=1", Convert.FormulaStringToString("=1"));
-            Assert.AreEqual("=\"1\"", Convert.FormulaStringToString("=\"1\""));
+            Assert.AreEqual("=", Convert.FormulaDecode("="));
+            Assert.AreEqual("=1", Convert.FormulaDecode("=1"));
+            Assert.AreEqual("=\"1\"", Convert.FormulaDecode("=\"1\""));
 
         }
     }
