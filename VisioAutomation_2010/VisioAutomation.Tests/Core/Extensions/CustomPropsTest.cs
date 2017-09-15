@@ -240,7 +240,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             Assert.AreEqual("5", out_cpdatetime.Type.Value);
 
             Assert.AreEqual("TRUE", out_cpbool.Value.Value);
-            Assert.AreEqual("2", out_cpbool.Type.Value);
+            Assert.AreEqual("3", out_cpbool.Type.Value);
 
             page1.Delete(0);
         }
