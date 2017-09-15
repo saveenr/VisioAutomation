@@ -24,7 +24,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        private static string SmartStringToFormulaString(string str, bool quote)
+        private static string SmartStringToFormulaString(string str, bool force_formulastring)
         {
             // if null or empty, return null or empty
             if (string.IsNullOrEmpty(str))
@@ -32,14 +32,31 @@ namespace VisioAutomation.Shapes
                 return str;
             }
 
-            var char_doublequote = '\"';
-            if (str[0] != char_doublequote)
+            char first_char = str[0];
+
+            // if begins with a doublequote, assume it is correctly
+            // quoted and do nothing
+            if (first_char == '\"')
             {
-                if (quote)
-                {
-                    str = Utilities.Convert.StringToFormulaString(str);
-                }
+                return str;
             }
+
+            // if begins with an equals sign, assume it is correctly
+            // written as a formula and do nothing
+            if (first_char == '=')
+            {
+                return str;
+            }
+
+            // if the caller wants to force the content to a formula string
+            // then do so: escape internal double quotes and then wrap in double quotes
+            if (force_formulastring)
+            {
+                string str2 = str.Replace("\"", "\"\"");
+                return string.Format("\"{0}\"", str2);
+            }
+
+            // otherwise, just return the input string
             return str;
         }
 
