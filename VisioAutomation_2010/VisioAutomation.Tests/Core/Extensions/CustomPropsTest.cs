@@ -17,14 +17,14 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
             // Add a Custom Property
             var cp = new CustomPropertyCells();
             cp.Value = "BAR1";
             CustomPropertyHelper.Set(s1, "FOO1", cp);
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             // Check that it is called FOO1
             Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
@@ -34,7 +34,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             // Delete that custom property
             CustomPropertyHelper.Delete(s1, "FOO1");
             // Verify that we have zero Custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
             page1.Delete(0);
         }
@@ -47,12 +47,12 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
             // Add the same one multiple times Custom Property
             CustomPropertyHelper.Set(s1, "FOO1", "BAR1");
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             // Check that it is called FOO1
             Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
@@ -62,7 +62,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             CustomPropertyHelper.Set(s1, "FOO1", "BAR4");
 
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             // Check that it is called FOO1
             Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
