@@ -66,15 +66,15 @@ namespace VisioAutomation.Text
             return runs;
         }
         
-        public static TextFormat GetFormat(IVisio.Shape shape, CellValueType cvt)
+        public static TextFormat GetFormat(IVisio.Shape shape, CellValueType type)
         {
             var cells = new TextFormat();
-            cells.CharacterFormats = CharacterFormatCells.GetCells(shape, cvt);
-            cells.ParagraphFormats = ParagraphFormatCells.GetCells(shape, cvt);
-            cells.TextBlock = TextBlockCells.GetCells(shape, cvt);
+            cells.CharacterFormats = CharacterFormatCells.GetCells(shape, type);
+            cells.ParagraphFormats = ParagraphFormatCells.GetCells(shape, type);
+            cells.TextBlock = TextBlockCells.GetCells(shape, type);
             if (HasTextXFormCells(shape))
             {
-                cells.TextXForm = TextXFormCells.GetCells(shape, cvt);
+                cells.TextXForm = TextXFormCells.GetCells(shape, type);
             }
             cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
@@ -91,11 +91,11 @@ namespace VisioAutomation.Text
                     (short) 0] != 0) ;
         }
 
-        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids, CellValueType cvt)
+        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var charcells = CharacterFormatCells.GetCells(page, shapeids, cvt);
-            var paracells = ParagraphFormatCells.GetCells(page, shapeids, cvt);
-            var textblockcells = TextBlockCells.GetCells(page, shapeids, cvt);
+            var charcells = CharacterFormatCells.GetCells(page, shapeids, type);
+            var paracells = ParagraphFormatCells.GetCells(page, shapeids, type);
+            var textblockcells = TextBlockCells.GetCells(page, shapeids, type);
             var page_shapes = page.Shapes;
             var formats = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)

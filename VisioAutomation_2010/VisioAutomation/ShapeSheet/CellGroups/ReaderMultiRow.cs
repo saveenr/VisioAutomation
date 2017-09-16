@@ -14,9 +14,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         
         public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row);
 
-        public List<List<TGroup>> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType cvt)
+        public List<List<TGroup>> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var data_for_shapes = query.GetCells(page, shapeids, cvt);
+            var data_for_shapes = query.GetCells(page, shapeids, type);
 
             var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
             foreach (var d in data_for_shapes)
@@ -28,9 +28,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return list_cellgroups;
         }
 
-        public List<TGroup> GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType cvt)
+        public List<TGroup> GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType type)
         {
-            var data_for_shape = query.GetCells(shape,cvt);
+            var data_for_shape = query.GetCells(shape,type);
             var first_section = data_for_shape.Sections[0];
             var cellgroups = this.__SectionRowsToCellGroups(first_section);
             return cellgroups;

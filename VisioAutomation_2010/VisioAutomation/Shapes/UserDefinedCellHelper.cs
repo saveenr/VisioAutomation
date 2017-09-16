@@ -92,7 +92,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static Dictionary<string, UserDefinedCellCells> GetDictionary(IVisio.Shape shape, ShapeSheet.CellValueType cvt)
+        public static Dictionary<string, UserDefinedCellCells> GetDictionary(IVisio.Shape shape, ShapeSheet.CellValueType type)
         {
             if (shape == null)
             {
@@ -111,7 +111,7 @@ namespace VisioAutomation.Shapes
                 throw new InternalAssertionException("Unexpected number of prop names");
             }
 
-            var  shape_data = UserDefinedCellCells.GetCells(shape, cvt);
+            var  shape_data = UserDefinedCellCells.GetCells(shape, type);
 
             var dic = new Dictionary<string,UserDefinedCellCells>(prop_count);
             for (int i = 0; i < prop_count; i++)
@@ -121,7 +121,7 @@ namespace VisioAutomation.Shapes
             return dic;
         }
 
-        public static List<Dictionary<string, UserDefinedCellCells>> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, ShapeSheet.CellValueType cvt)
+        public static List<Dictionary<string, UserDefinedCellCells>> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, ShapeSheet.CellValueType type)
         {
             if (page == null)
             {
