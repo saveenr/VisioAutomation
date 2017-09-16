@@ -57,9 +57,6 @@
             return new CellValueLiteral(value);
         }
 
-        public static implicit operator string(CellValueLiteral value)
-        {
-            return value.Value;
-        }
+
     }
 }
