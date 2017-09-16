@@ -36,7 +36,7 @@ namespace VisioAutomation.Shapes
             shape.DeleteRow(UserDefinedCellHelper._userdefinedcell_section, row);
         }
 
-        public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellValueLiteral udfcell_value, ShapeSheet.CellValueLiteral udfcell_prompt)
+        public static void Set(IVisio.Shape shape, string name, string value, string prompt)
         {
             if (shape == null)
             {
@@ -49,20 +49,21 @@ namespace VisioAutomation.Shapes
             {
                 string full_prop_name = UserDefinedCellHelper.GetRowName(name);
 
-                if (udfcell_value.HasValue)
+                if (value!=null)
                 {
                     string value_cell_name = full_prop_name;
                     var cell = shape.CellsU[value_cell_name];
-                    string encoded_value = FormulaEncodeSmart(udfcell_value.Value);
+                    string encoded_value = FormulaEncodeSmart(value);
                     cell.FormulaU = encoded_value;                    
                 }
 
-                if (udfcell_prompt.HasValue)
+                if (prompt!=null)
                 {
                     string prompt_cell_name = full_prop_name+".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    var encoded_prompt = FormulaEncodeSmart(udfcell_prompt.Value);
-                    cell.FormulaU = encoded_prompt;                }
+                    var encoded_prompt = FormulaEncodeSmart(prompt);
+                    cell.FormulaU = encoded_prompt;
+                }
                 return;
             }
 
@@ -73,17 +74,17 @@ namespace VisioAutomation.Shapes
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
-            if (udfcell_value.HasValue)
+            if (value!=null)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                string encoded_value = FormulaEncodeSmart(udfcell_value.Value);
+                string encoded_value = FormulaEncodeSmart(value);
                 writer.SetFormula(src, encoded_value);
             }
 
-            if (udfcell_prompt.HasValue)
+            if (prompt!=null)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                var encoded_prompt = FormulaEncodeSmart(udfcell_prompt.Value);
+                var encoded_prompt = FormulaEncodeSmart(prompt);
                 writer.SetFormula(src, encoded_prompt);
             }
 

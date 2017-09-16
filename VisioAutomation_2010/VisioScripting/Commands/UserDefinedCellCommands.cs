@@ -112,7 +112,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Set(shape, udc.Name, udc.Cells.Value, udc.Cells.Prompt);
+                    UserDefinedCellHelper.Set(shape, udc.Name, udc.Cells.Value.Value, udc.Cells.Prompt.Value);
                 }
             }
         }
