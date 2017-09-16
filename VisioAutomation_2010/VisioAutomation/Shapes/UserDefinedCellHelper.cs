@@ -53,15 +53,16 @@ namespace VisioAutomation.Shapes
                 {
                     string value_cell_name = full_prop_name;
                     var cell = shape.CellsU[value_cell_name];
-                    cell.FormulaU = VisioAutomation.Utilities.Convert.FormulaEncodeSmart(udfcell_value.Value);                    
+                    string encoded_value = FormulaEncodeSmart(udfcell_value.Value);
+                    cell.FormulaU = encoded_value;                    
                 }
 
                 if (udfcell_prompt.HasValue)
                 {
                     string prompt_cell_name = full_prop_name+".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    cell.FormulaU = VisioAutomation.Utilities.Convert.FormulaEncodeSmart(udfcell_prompt.Value);                                        
-                }
+                    var encoded_prompt = FormulaEncodeSmart(udfcell_prompt.Value);
+                    cell.FormulaU = encoded_prompt;                }
                 return;
             }
 
@@ -75,15 +76,15 @@ namespace VisioAutomation.Shapes
             if (udfcell_value.HasValue)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                var formula = VisioAutomation.Utilities.Convert.FormulaEncodeSmart(udfcell_value.Value);
-                writer.SetFormula(src, formula);
+                string encoded_value = FormulaEncodeSmart(udfcell_value.Value);
+                writer.SetFormula(src, encoded_value);
             }
 
             if (udfcell_prompt.HasValue)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                var formula = VisioAutomation.Utilities.Convert.FormulaEncodeSmart(udfcell_prompt.Value);
-                writer.SetFormula(src, formula);
+                var encoded_prompt = FormulaEncodeSmart(udfcell_prompt.Value);
+                writer.SetFormula(src, encoded_prompt);
             }
 
             writer.Commit(shape);
@@ -272,5 +273,39 @@ namespace VisioAutomation.Shapes
             var exists = (short)IVisio.VisExistsFlags.visExistsAnywhere;
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
+
+        public static string FormulaEncodeSmart(string text)
+        {
+
+            const string doublequote = "\"";
+            const string doublequote_x2 = "\"\"";
+
+
+            if (text == null)
+            {
+                return null;
+            }
+
+            if (text.Length == 0)
+            {
+                return text;
+            }
+
+            if (text[0] == '\"')
+            {
+                return text;
+            }
+
+            if (text[0] == '=')
+            {
+                return text;
+            }
+
+            var result_quote_escaped = text.Replace(doublequote, doublequote_x2);
+            string result = string.Format("\"{0}\"", result_quote_escaped);
+
+            return result;
+        }
+
     }
 }

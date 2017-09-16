@@ -191,7 +191,6 @@
     <Compile Include="Geometry\Rectangle.cs" />
     <Compile Include="ShapeSheet\SidSrc.cs" />
     <Compile Include="Geometry\Size.cs" />
-    <Compile Include="Utilities\Convert.cs" />
     <Compile Include="ShapeSheet\SrcConstants.cs" />
     <Compile Include="ShapeSheet\Src.cs" />
     <Compile Include="Shapes\ConnectionPointCells.cs" />

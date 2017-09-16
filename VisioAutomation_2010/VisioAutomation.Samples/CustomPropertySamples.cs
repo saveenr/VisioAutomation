@@ -1,6 +1,5 @@
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.Utilities;
 
 namespace VisioAutomationSamples
 {
@@ -22,11 +21,14 @@ namespace VisioAutomationSamples
             CustomPropertyHelper.Delete(s1, "FOO2");
 
             // Set the value of an existing properties
-            string formula = Convert.FormulaEncodeSmart("BAR3updated");
-            CustomPropertyHelper.Set(s1, "FOO3", formula);
+            CustomPropertyHelper.Set(s1, "FOO3", "BAR3updated");
 
             // retrieve all the properties
             var props = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
+
+            var cp_foo1 = props["FOO1"];
+            var cp_foo2 = props["FOO2"];
+            var cp_foo3 = props["FOO3"];
         }
     }
 }
