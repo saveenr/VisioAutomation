@@ -301,5 +301,41 @@ namespace VisioAutomation.Shapes
 
             CustomPropertyHelper.Set(shape, name, cp);
         }
+
+        internal static string EncodeFormula(string text, bool force_quoting)
+        {
+            if (text == null)
+            {
+                return text;
+            }
+
+            if (text.Length == 0)
+            {
+                return text;
+            }
+
+            if (text[0] == '\"')
+            {
+                return text;
+            }
+
+            if (text[0] == '=')
+            {
+                return text;
+            }
+
+
+            // if the caller wants to force the content to a formula string
+            // then do so: escape internal double quotes and then wrap in double quotes
+            if (force_quoting)
+            {
+                string str_quoted = text.Replace("\"", "\"\"");
+                str_quoted = string.Format("\"{0}\"", str_quoted);
+                return str_quoted;
+            }
+
+            // For all other cases, just return the input string
+            return text;
+        }
     }
 }

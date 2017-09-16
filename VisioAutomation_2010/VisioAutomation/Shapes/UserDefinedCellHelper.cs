@@ -53,7 +53,7 @@ namespace VisioAutomation.Shapes
                 {
                     string value_cell_name = full_prop_name;
                     var cell = shape.CellsU[value_cell_name];
-                    string encoded_value = FormulaEncodeSmart(value);
+                    string encoded_value = EncodeFormula(value);
                     cell.FormulaU = encoded_value;                    
                 }
 
@@ -61,7 +61,7 @@ namespace VisioAutomation.Shapes
                 {
                     string prompt_cell_name = full_prop_name+".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    var encoded_prompt = FormulaEncodeSmart(prompt);
+                    var encoded_prompt = EncodeFormula(prompt);
                     cell.FormulaU = encoded_prompt;
                 }
                 return;
@@ -77,14 +77,14 @@ namespace VisioAutomation.Shapes
             if (value!=null)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                string encoded_value = FormulaEncodeSmart(value);
+                string encoded_value = EncodeFormula(value);
                 writer.SetFormula(src, encoded_value);
             }
 
             if (prompt!=null)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                var encoded_prompt = FormulaEncodeSmart(prompt);
+                var encoded_prompt = EncodeFormula(prompt);
                 writer.SetFormula(src, encoded_prompt);
             }
 
@@ -275,7 +275,7 @@ namespace VisioAutomation.Shapes
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
 
-        public static string FormulaEncodeSmart(string text)
+        internal static string EncodeFormula(string text)
         {
 
             const string doublequote = "\"";

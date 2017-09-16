@@ -24,56 +24,20 @@ namespace VisioAutomation.Shapes
 
         }
 
-        private static string FixupString(string text, bool force_quoting)
-        {
-            if ( text == null)
-            {
-                return text;
-            }
-
-            if (text.Length == 0)
-            {
-                return text;
-            }
-
-            if (text[0] == '\"')
-            {
-                return text;
-            }
-
-            if (text[0] == '=')
-            {
-                return text;
-            }
-
-
-            // if the caller wants to force the content to a formula string
-            // then do so: escape internal double quotes and then wrap in double quotes
-            if (force_quoting)
-            {
-                string str_quoted = text.Replace("\"", "\"\"");
-                str_quoted = string.Format("\"{0}\"", str_quoted);
-                return str_quoted;
-            }
-
-            // For all other cases, just return the input string
-            return text;
-        }
-
         public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
                 // Handle, .Label, .Value, .Prompt
-                string str_label = FixupString(this.Label.Value, true);
-                string str_format = FixupString(this.Format.Value, true);
-                string str_prompt = FixupString(this.Prompt.Value, true);
+                string str_label = CustomPropertyHelper.EncodeFormula(this.Label.Value, true);
+                string str_format = CustomPropertyHelper.EncodeFormula(this.Format.Value, true);
+                string str_prompt = CustomPropertyHelper.EncodeFormula(this.Prompt.Value, true);
 
                 // Handle .Value
                 // use formulastring quoting if needed for string values//
                 // note: if .Type is zero or null then assume .Value is a string
                 bool force_quoting_for_value = (this.Type.Value == "0" || this.Type.Value == null);
-                string str_value = FixupString(this.Value.Value, force_quoting_for_value);
+                string str_value = CustomPropertyHelper.EncodeFormula(this.Value.Value, force_quoting_for_value);
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropValue, str_value);
