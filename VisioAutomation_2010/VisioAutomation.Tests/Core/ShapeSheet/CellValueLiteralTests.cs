@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.ShapeSheet;
-using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Core.ShapeSheet
 {
@@ -35,8 +34,6 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var c5 = new CellValueLiteral(false);
             Assert.AreEqual("FALSE", c5.Value);
             Assert.IsTrue(c5.HasValue);
-
         }
-
     }
 }
