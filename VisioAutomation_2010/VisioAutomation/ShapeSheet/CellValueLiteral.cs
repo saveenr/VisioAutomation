@@ -12,24 +12,24 @@
     {
         private readonly string _stringval;
 
-        private CellValueLiteral(string value)
+        public CellValueLiteral(string value)
         {
             this._stringval = value;
         }
 
-        private CellValueLiteral(int value)
+        public CellValueLiteral(int value)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             this._stringval = value.ToString(culture);
         }
 
-        private CellValueLiteral(double value)
+        public CellValueLiteral(double value)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             this._stringval = value.ToString(culture);
         }
 
-        private CellValueLiteral(bool value)
+        public CellValueLiteral(bool value)
         {
             this._stringval = value ? "TRUE" : "FALSE";
         }
