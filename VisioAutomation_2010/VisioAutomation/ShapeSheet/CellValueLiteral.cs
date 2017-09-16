@@ -11,6 +11,9 @@
     public struct CellValueLiteral
     {
         private readonly string _stringval;
+        public string Value => this._stringval;
+        public bool HasValue => this._stringval != null;
+        public override string ToString() => this.Value;
 
         public CellValueLiteral(string value)
         {
@@ -34,12 +37,6 @@
             this._stringval = value ? "TRUE" : "FALSE";
         }
 
-        public string Value => this._stringval;
-
-        public bool HasValue => this._stringval != null;
-
-        public override string ToString() => this.Value;
-
         public static implicit operator CellValueLiteral(string value)
         {
             return new CellValueLiteral(value);
@@ -58,6 +55,11 @@
         public static implicit operator CellValueLiteral(bool value)
         {
             return new CellValueLiteral(value);
+        }
+
+        public static implicit operator string(CellValueLiteral value)
+        {
+            return value.Value;
         }
     }
 }
