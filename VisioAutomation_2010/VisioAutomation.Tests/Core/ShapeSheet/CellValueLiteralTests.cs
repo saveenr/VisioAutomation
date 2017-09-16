@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.ShapeSheet;
 
@@ -6,6 +8,44 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
     [TestClass]
     public class CellValueLiteralTests
     {
+
+        [TestMethod]
+        public void CellValueLiteral_Equivalence()
+        {
+            // unitialized CVTs are equal
+            CellValueLiteral c0;
+            CellValueLiteral c1;
+
+            Assert.AreEqual(c0,c1);
+
+            // initialized CVTs set to null are equal
+            var c2 = new CellValueLiteral(null);
+            var c3 = new CellValueLiteral(null);
+            Assert.AreEqual(c2, c3);
+
+            // initialized CVTs set to empty strings are equal
+            var c4 = new CellValueLiteral(string.Empty);
+            var c5 = new CellValueLiteral("");
+            Assert.AreEqual(c4, c5);
+
+            // initialized CVTs set to the same strings are equal
+            var c6 = new CellValueLiteral("FOO");
+            var sb = new StringBuilder();
+            sb.Append("F");
+            sb.Append("O");
+            sb.Append("O");
+            var c7 = new CellValueLiteral(sb.ToString());
+            Assert.AreEqual(c6, c7);
+
+            // itialized CVTs to different values are not considered equal
+            var c8 = new CellValueLiteral("FOO");
+            var c9 = new CellValueLiteral("BAR");
+            Assert.AreNotEqual(c8, c9);
+
+            var c10 = new CellValueLiteral(null);
+            var c11 = new CellValueLiteral("BAR");
+            Assert.AreNotEqual(c10, c11);
+        }
 
         [TestMethod]
         public void CellValueLiteral_Creation()
