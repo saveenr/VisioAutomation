@@ -211,7 +211,7 @@ namespace VisioAutomation.Models.Layouts.Container
             // Dropping takes care of the PinX and PinY
             // Now set the Width's and Heights
             var writer = new SidSrcWriter();
-            for (int i = 0; i < rects.Count(); i++)
+            for (int i = 0; i < rects.Count; i++)
             {
                 writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, rects[i].Width);
                 writer.SetFormula(shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, rects[i].Height);

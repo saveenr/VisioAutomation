@@ -18,7 +18,7 @@ namespace VisioAutomation_Tests.Core.Application
             var files1 = Directory.GetFiles(path, "*.vs?");
             var files2 = Directory.GetFiles(path, "*.vss?");
 
-            Assert.IsTrue( files1.Count()>100 || files2.Count()>100);
+            Assert.IsTrue( files1.Length>100 || files2.Length>100);
         }
     }
 }

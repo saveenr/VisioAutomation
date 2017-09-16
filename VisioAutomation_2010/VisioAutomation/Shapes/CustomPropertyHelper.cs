@@ -126,7 +126,7 @@ namespace VisioAutomation.Shapes
 
                 var dic = new CustomPropertyDictionary(prop_names.Count);
 
-                for (int prop_index = 0; prop_index < prop_names.Count(); prop_index++)
+                for (int prop_index = 0; prop_index < prop_names.Count; prop_index++)
                 {
                     string prop_name = prop_names[prop_index];
                     dic[prop_name] = customprops_for_shape[prop_index];

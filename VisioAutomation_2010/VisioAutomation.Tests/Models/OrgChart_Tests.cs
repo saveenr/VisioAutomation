@@ -89,10 +89,10 @@ namespace VisioAutomation_Tests.Models
             var shapes_1d = shapes.Where(s => s.OneD != 0).ToList();
             var shapes_connector = shapes.Where(s => s.Master.NameU == "Dynamic connector").ToList();
 
-            Assert.AreEqual(5 + 4, shapes.Count());
-            Assert.AreEqual(5, shapes_2d.Count());
-            Assert.AreEqual(4, shapes_1d.Count());
-            Assert.AreEqual(4, shapes_connector.Count());
+            Assert.AreEqual(5 + 4, shapes.Count);
+            Assert.AreEqual(5, shapes_2d.Count);
+            Assert.AreEqual(4, shapes_1d.Count);
+            Assert.AreEqual(4, shapes_connector.Count);
 
             Assert.AreEqual("A", n_a.VisioShape.Text.Trim());
                 // trimming because extra ending space is added (don't know why)

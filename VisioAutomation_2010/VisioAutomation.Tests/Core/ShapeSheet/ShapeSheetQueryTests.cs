@@ -318,8 +318,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
             var r2 = VA.Shapes.ControlCells.GetCells(page1, shapeids, CellValueType.Formula);
-            Assert.AreEqual(shapes.Count(),r2.Count);
-            for (int i = 0; i < shapes.Count();i++)
+            Assert.AreEqual(shapes.Length,r2.Count);
+            for (int i = 0; i < shapes.Length;i++)
             {
                 Assert.AreEqual(0,r2[i].Count);
             }
@@ -360,8 +360,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
             var r3 = VA.Shapes.ControlCells.GetCells(page1, shapeids, CellValueType.Formula);
-            Assert.AreEqual(shapes.Count(), r3.Count);
-            for (int i = 0; i < shapes.Count(); i++)
+            Assert.AreEqual(shapes.Length, r3.Count);
+            for (int i = 0; i < shapes.Length; i++)
             {
                 if (shapes[i] != s2)
                 {
