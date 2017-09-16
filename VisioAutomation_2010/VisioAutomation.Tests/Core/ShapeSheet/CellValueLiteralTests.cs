@@ -28,13 +28,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var c5 = new CellValueLiteral("");
             Assert.AreEqual(c4, c5);
 
-            // initialized CVTs set to the same strings are equal
+            // initialized CVTs set to the same strings are equal (when the strings aren't interned)
             var c6 = new CellValueLiteral("FOO");
-            var sb = new StringBuilder();
-            sb.Append("F");
-            sb.Append("O");
-            sb.Append("O");
-            var c7 = new CellValueLiteral(sb.ToString());
+            var c7 = new CellValueLiteral(string.Copy("FOO")); // string.Copy avoids string interning
             Assert.AreEqual(c6, c7);
 
             // itialized CVTs to different values are not considered equal
