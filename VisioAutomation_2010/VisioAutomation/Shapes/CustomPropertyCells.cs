@@ -151,5 +151,101 @@ namespace VisioAutomation.Shapes
             }
         }
 
+        public static CustomPropertyCells Create(string value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 0;
+            return x;
+        }
+
+        public static CustomPropertyCells Create(int value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 0;
+            return x;
+        }
+
+        public static CustomPropertyCells Create(double value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 2;
+            return x;
+        }
+
+        public static CustomPropertyCells Create(float value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 2;
+            return x;
+        }
+
+        public static CustomPropertyCells Create(bool value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value ? "TRUE" : "FALSE";
+            x.Type = 3;
+            return x;
+        }
+
+
+        public static CustomPropertyCells Create(System.DateTime value)
+        {
+            var x = new CustomPropertyCells();
+            var current_culture = System.Globalization.CultureInfo.CurrentCulture;
+            string formatted_dt = value.ToString(current_culture);
+            x.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
+            x.Type = 5;
+            return x;
+        }
+
+
+        public static CustomPropertyCells Create(CellValueLiteral value)
+        {
+            var x = new CustomPropertyCells();
+            x.Value = value;
+            x.Type = 2;
+            return x;
+        }
+
+        public static CustomPropertyCells Create(object value)
+        {
+            if (value is string value_str)
+            {
+                return Create(value_str);
+            }
+            else if (value is int value_int)
+            {
+                return Create(value_int);
+            }
+            else if (value is double value_double)
+            {
+                return Create(value_double);
+            }
+            else if (value is float value_float)
+            {
+                return Create(value_float);
+            }
+            else if (value is bool value_bool)
+            {
+                return Create(value_bool);
+            }
+            else if (value is System.DateTime value_datetime)
+            {
+                return Create(value_datetime);
+            }
+            else if (value is CellValueLiteral value_cvl)
+            {
+                return Create(value_cvl);
+            }
+
+            var value_type = value.GetType();
+            string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
+            throw new System.ArgumentException(msg);
+        }
+
     }
 }

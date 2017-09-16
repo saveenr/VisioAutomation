@@ -135,7 +135,7 @@ namespace VisioPowerShell.Commands
                 string key_string = (string) key;
 
                 object value = this.Hashtable[key];
-                var cp = CustomPropertyHelper.FromValue(value);
+                var cp = CustomPropertyCells.Create(value);
                 this.Client.CustomProperty.Set(targets, key_string, cp);
             }
         }
