@@ -12,26 +12,26 @@
     {
         private readonly string _stringval;
 
-        private CellValueLiteral(string s)
+        private CellValueLiteral(string value)
         {
-            this._stringval = s;
+            this._stringval = value;
         }
 
-        private CellValueLiteral(int s)
+        private CellValueLiteral(int value)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
-            this._stringval = s.ToString(culture);
+            this._stringval = value.ToString(culture);
         }
 
-        private CellValueLiteral(double s)
+        private CellValueLiteral(double value)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
-            this._stringval = s.ToString(culture);
+            this._stringval = value.ToString(culture);
         }
 
-        private CellValueLiteral(bool s)
+        private CellValueLiteral(bool value)
         {
-            this._stringval = s ? "1" : "0";
+            this._stringval = value ? "TRUE" : "FALSE";
         }
 
         public string Value => this._stringval;
