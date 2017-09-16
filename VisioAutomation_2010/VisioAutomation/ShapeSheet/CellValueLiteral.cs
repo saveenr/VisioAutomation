@@ -17,6 +17,23 @@
             this._stringval = s;
         }
 
+        private CellValueLiteral(int s)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            this._stringval = s.ToString(culture);
+        }
+
+        private CellValueLiteral(double s)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            this._stringval = s.ToString(culture);
+        }
+
+        private CellValueLiteral(bool s)
+        {
+            this._stringval = s ? "1" : "0";
+        }
+
         public string Value => this._stringval;
 
         public bool HasValue => this._stringval != null;
@@ -30,22 +47,17 @@
 
         public static implicit operator CellValueLiteral(int value)
         {
-            var culture = System.Globalization.CultureInfo.InvariantCulture;
-            var formula = value.ToString(culture);
-            return new CellValueLiteral(formula);
+            return new CellValueLiteral(value);
         }
 
         public static implicit operator CellValueLiteral(double value)
         {
-            var culture = System.Globalization.CultureInfo.InvariantCulture;
-            var formula = value.ToString(culture);
-            return new CellValueLiteral(formula);
+            return new CellValueLiteral(value);
         }
 
         public static implicit operator CellValueLiteral(bool value)
         {
-            var formula = value ? "1" : "0";
-            return new CellValueLiteral(formula);
+            return new CellValueLiteral(value);
         }
     }
 }
