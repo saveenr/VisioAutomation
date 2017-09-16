@@ -153,62 +153,62 @@ namespace VisioAutomation.Shapes
 
         public static CustomPropertyCells Create(string value)
         {
-            var x = new CustomPropertyCells();
-            x.Value = value;
-            x.Type = 0;
-            return x;
+            var cp_cells = new CustomPropertyCells();
+            cp_cells.Value = value;
+            cp_cells.Type = "0";
+            return cp_cells;
         }
 
         public static CustomPropertyCells Create(int value)
         {
-            var x = new CustomPropertyCells();
-            x.Value = value;
-            x.Type = 0;
-            return x;
+            var cp_cells = new CustomPropertyCells();
+            cp_cells.Value = value;
+            cp_cells.Type = "0";
+            return cp_cells;
         }
 
         public static CustomPropertyCells Create(double value)
         {
-            var x = new CustomPropertyCells();
-            x.Value = value;
-            x.Type = 2;
-            return x;
+            var cp_cells = new CustomPropertyCells();
+            cp_cells.Value = value;
+            cp_cells.Type = "2";
+            return cp_cells;
         }
 
         public static CustomPropertyCells Create(float value)
         {
-            var x = new CustomPropertyCells();
-            x.Value = value;
-            x.Type = 2;
-            return x;
+            var cp_cells = new CustomPropertyCells();
+            cp_cells.Value = value;
+            cp_cells.Type = "2";
+            return cp_cells;
         }
 
         public static CustomPropertyCells Create(bool value)
         {
-            var x = new CustomPropertyCells();
-            x.Value = value ? "TRUE" : "FALSE";
-            x.Type = 3;
-            return x;
+            var cp_cells = new CustomPropertyCells();
+            cp_cells.Value = value ? "TRUE" : "FALSE";
+            cp_cells.Type = "3";
+            return cp_cells;
         }
 
 
         public static CustomPropertyCells Create(System.DateTime value)
         {
-            var x = new CustomPropertyCells();
+            var cp_cells = new CustomPropertyCells();
             var current_culture = System.Globalization.CultureInfo.CurrentCulture;
             string formatted_dt = value.ToString(current_culture);
-            x.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
-            x.Type = 5;
-            return x;
+            cp_cells.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
+            cp_cells.Type = "5";
+            return cp_cells;
         }
 
 
         public static CustomPropertyCells Create(CellValueLiteral value)
         {
-            var x = new CustomPropertyCells();
-            x.Value = value;
-            x.Type = 2;
-            return x;
+            var cp_cells = new CustomPropertyCells();
+            cp_cells.Value = value;
+            cp_cells.Type = "2";
+            return cp_cells;
         }
 
         public static CustomPropertyCells Create(object value)
