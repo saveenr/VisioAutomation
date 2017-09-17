@@ -28,20 +28,10 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                // Handle, .Label, .Value, .Prompt
-                string str_label = this.Label.Value;
-                string str_format = this.Format.Value;
-                string str_prompt = this.Prompt.Value;
-
-                // Handle .Value
-                // use formulastring quoting if needed for string values//
-                // note: if .Type is zero or null then assume .Value is a string
-                string str_value = this.Value.Value;
-
-                yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropValue, str_value);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropFormat, str_format);
-                yield return SrcValuePair.Create(SrcConstants.CustomPropPrompt, str_prompt);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, this.Label);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropValue, this.Value);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropFormat, this.Format);
+                yield return SrcValuePair.Create(SrcConstants.CustomPropPrompt, this.Prompt);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropCalendar, this.Calendar);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLangID, this.LangID);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropSortKey, this.SortKey);
