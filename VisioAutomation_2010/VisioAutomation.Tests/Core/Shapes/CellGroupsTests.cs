@@ -36,12 +36,17 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
                 var props = GetCellDataProps(cellgroup_type);
 
+                // Set unique values for the cells
+                // Later we'll verify they can be retrieved
+
+                var input_values = Enumerable.Range(0, props.Count).Select(i => i.ToString()).ToList();
                 for (int i = 0; i < props.Count; i++)
                 {
                     var prop = props[i];
-                    var x = cvt_ctor.Invoke(new object[] {i.ToString()});
-                    prop.SetValue(cellgroup, x);
+                    var cvl_value = cvt_ctor.Invoke(new object[] {input_values[i]});
+                    prop.SetValue(cellgroup, cvl_value);
                 }
+
                 var reflected_cvts = props.Select(p => (VisioAutomation.ShapeSheet.CellValueLiteral)p.GetValue(cellgroup, null)).ToList();
                 var reflected_cvt_values = reflected_cvts.Select(p => p.Value).ToList();
                 var reflected_cvt_names = props.Select(p => p.Name).ToList();
@@ -60,11 +65,17 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 Assert.AreEqual(reflected_cvts.Count, enumerated_values.Count);
 
                 // Verify that all the enumerated Srcs are distinct
-                var unique_srcs = enumerated_srcs.Distinct().ToList();
-                Assert.AreEqual(reflected_cvts.Count, unique_srcs.Count);
+                var unique_enumerated_srcs = enumerated_srcs.Distinct().ToList();
+                Assert.AreEqual(reflected_cvts.Count, unique_enumerated_srcs.Count);
 
-                var unique_values = enumerated_values.Distinct().ToList();
-                Assert.AreEqual(reflected_cvts.Count, unique_values.Count);
+                // Verify that all the enumerated values are distinct
+                var unique_enumerated_values = enumerated_values.Distinct().ToList();
+                Assert.AreEqual(reflected_cvts.Count, unique_enumerated_values.Count);
+
+                foreach (var input_value in input_values)
+                {
+                    //Assert.IsTrue(unique_enumerated_values.Contains(input_value));
+                }
 
             }
         }
