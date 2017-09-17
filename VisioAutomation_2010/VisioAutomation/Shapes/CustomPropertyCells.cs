@@ -46,7 +46,7 @@ namespace VisioAutomation.Shapes
             var query = lazy_query.Value;
             return query.GetCells(page, shapeids, type);
         }
-        
+
         public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
@@ -104,37 +104,92 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static CustomPropertyCells Create(CellValueLiteral value,string type)
+        public static CustomPropertyCells Create(CellValueLiteral value, string type)
         {
             var cp_cells = new CustomPropertyCells();
             cp_cells.Value = value;
-            cp_cells.Type = "0";
+            cp_cells.Type = type;
             return cp_cells;
         }
 
+        public static CustomPropertyCells Create(string value, CustomPropertyType type)
+        {
+            var type_int = CustomPropertyTypeToInt(type);
+            var cp_cells = new CustomPropertyCells();
+            cp_cells.Value = value;
+            cp_cells.Type = type_int;
+            return cp_cells;
+        }
+
+        private static int CustomPropertyTypeToInt(CustomPropertyType type)
+        {
+            int type_int = -1;
+            if (type == CustomPropertyType.String)
+            {
+                type_int = 0;
+            }
+            else if (type == CustomPropertyType.FixedList)
+            {
+                type_int = 1;
+            }
+            else if (type == CustomPropertyType.Number)
+            {
+                type_int = 2;
+            }
+            else if (type == CustomPropertyType.Boolean)
+            {
+                type_int = 3;
+            }
+            else if (type == CustomPropertyType.VariableList)
+            {
+                type_int = 4;
+            }
+            else if (type == CustomPropertyType.Date)
+            {
+                type_int = 5;
+            }
+            else if (type == CustomPropertyType.Duration)
+            {
+                type_int = 6;
+            }
+            else if (type == CustomPropertyType.Currency)
+            {
+                type_int = 7;
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException(nameof(type));
+            }
+            return type_int;
+        }
+
+
         public static CustomPropertyCells Create(string value)
         {
-            return Create(value, "0");
+            return Create(value, CustomPropertyType.String);
         }
 
         public static CustomPropertyCells Create(int value)
         {
-            return Create(value, "0");
+            var cvl = new CellValueLiteral(value);
+            return Create(cvl.Value, CustomPropertyType.Number);
         }
 
         public static CustomPropertyCells Create(double value)
         {
-            return Create(value, "2");
+            var cvl = new CellValueLiteral(value);
+            return Create(cvl.Value, CustomPropertyType.Number);
         }
 
         public static CustomPropertyCells Create(float value)
         {
-            return Create(value, "2");
+            var cvl = new CellValueLiteral(value);
+            return Create(cvl.Value, CustomPropertyType.Number);
         }
 
         public static CustomPropertyCells Create(bool value)
         {
-            return Create(value ? "TRUE" : "FALSE", "3");
+            return Create(value ? "TRUE" : "FALSE", CustomPropertyType.Boolean);
         }
 
         public static CustomPropertyCells Create(System.DateTime value)
@@ -142,13 +197,12 @@ namespace VisioAutomation.Shapes
             var current_culture = System.Globalization.CultureInfo.CurrentCulture;
             string formatted_dt = value.ToString(current_culture);
             string _Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
-            string _Type = "5";
-            return Create(_Value, _Type);
+            return Create(_Value, CustomPropertyType.Date);
         }
 
         public static CustomPropertyCells Create(CellValueLiteral value)
         {
-            return Create(value, "0");
+            return Create(value.Value, CustomPropertyType.String);
         }
 
         public void EncodeValues()
