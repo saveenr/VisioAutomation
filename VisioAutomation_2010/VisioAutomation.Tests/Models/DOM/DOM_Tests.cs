@@ -117,11 +117,11 @@ namespace VisioAutomation_Tests.Models.Dom
 
             var cp1 = new CustomPropertyCells();
             cp1.Value = "FOOVALUE";
-            cp1.Label = "Foo Label";
+            cp1.Label = CustomPropertyHelper.EncodeFormula("Foo Label",true);
 
             var cp2 = new CustomPropertyCells();
             cp2.Value = "BARVALUE";
-            cp2.Label = "Bar Label";
+            cp2.Label = CustomPropertyHelper.EncodeFormula("Bar Label",true);
 
             vrect1.CustomProperties["FOO"] = cp1;
             vrect1.CustomProperties["BAR"] = cp2;

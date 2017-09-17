@@ -66,7 +66,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
                 // Verify that all the enumerated Srcs are distinct
                 var unique_enumerated_srcs = enumerated_srcs.Distinct().ToList();
-                Assert.AreEqual(reflected_cvts.Count, unique_enumerated_srcs.Count);
+                Assert.AreEqual(enumerated_srcs.Count, unique_enumerated_srcs.Count);
 
                 // Verify that all the enumerated values are distinct
                 var unique_enumerated_values = enumerated_values.Distinct().ToList();

@@ -99,7 +99,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             var in_cp = new CustomPropertyCells();
-            in_cp.Label = "The Foo property";
+            in_cp.Label = CustomPropertyHelper.EncodeFormula("The Foo property",true);
             in_cp.Value = "Some value";
             in_cp.Prompt = "Some Prompt";
             in_cp.LangID = 1034;

@@ -29,8 +29,8 @@ namespace VisioAutomation.Shapes
             get
             {
                 // Handle, .Label, .Value, .Prompt
-                string str_label = CustomPropertyHelper.EncodeFormula(this.Label.Value, true);
-                string str_format = CustomPropertyHelper.EncodeFormula(this.Format.Value, true);
+                string str_label = this.Label.Value;
+                string str_format = this.Format.Value;
                 string str_prompt = CustomPropertyHelper.EncodeFormula(this.Prompt.Value, true);
 
                 // Handle .Value

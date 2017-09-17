@@ -86,9 +86,9 @@ namespace VisioAutomation_Tests.Core.Shapes
             var cp1 = new CustomPropertyCells();
             cp1.Ask = "1";
             cp1.Calendar = "0";
-            cp1.Format= "1";
+            cp1.Format= CustomPropertyHelper.EncodeFormula("1",true);
             cp1.Invisible = "0";
-            cp1.Label= "1";
+            cp1.Label= CustomPropertyHelper.EncodeFormula("1", true);
             cp1.LangID= "0";
             cp1.Prompt= "1";
             cp1.SortKey= "0";
@@ -116,9 +116,9 @@ namespace VisioAutomation_Tests.Core.Shapes
             var cp3 = new CustomPropertyCells();
             cp3.Ask = "0";
             cp3.Calendar = "2";
-            cp3.Format = "0";
+            cp3.Format = CustomPropertyHelper.EncodeFormula("0",true);
             cp3.Invisible = "TRUE";
-            cp3.Label = "3";
+            cp3.Label = CustomPropertyHelper.EncodeFormula("3",true);
             cp3.LangID = "2";
             cp3.Prompt = "3";
             cp3.SortKey = "2";
