@@ -39,6 +39,12 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<UserDefinedCellCellsReader> lazy_query = new System.Lazy<UserDefinedCellCellsReader>();
 
+        public void EncodeValues()
+        {
+            this.Value = UserDefinedCellHelper.EncodeValue(this.Value.Value);
+            this.Prompt = UserDefinedCellHelper.EncodeValue(this.Prompt.Value);
+        }
+
 
         class UserDefinedCellCellsReader : ReaderMultiRow<UserDefinedCellCells>
         {

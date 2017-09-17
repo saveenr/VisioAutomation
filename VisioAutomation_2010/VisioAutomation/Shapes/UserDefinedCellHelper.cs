@@ -41,7 +41,7 @@ namespace VisioAutomation.Shapes
             var cells = new UserDefinedCellCells();
             cells.Value = value;
             cells.Prompt = prompt;
-            EncodeValues(cells);
+            cells.EncodeValues();
             Set(shape, name, cells);
         }
 
@@ -103,13 +103,6 @@ namespace VisioAutomation.Shapes
 
             writer.Commit(shape);
         }
-
-        public static void EncodeValues(UserDefinedCellCells cells)
-        {
-            cells.Value = UserDefinedCellHelper.EncodeValue(cells.Value.Value);
-            cells.Prompt = UserDefinedCellHelper.EncodeValue(cells.Prompt.Value);
-        }
-
 
         public static Dictionary<string, UserDefinedCellCells> GetDictionary(IVisio.Shape shape, ShapeSheet.CellValueType type)
         {
