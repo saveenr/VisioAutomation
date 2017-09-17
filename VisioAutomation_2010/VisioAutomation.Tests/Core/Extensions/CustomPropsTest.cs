@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Core.Extensions
 
             // Add a Custom Property
             var cp = new CustomPropertyCells();
-            cp.Value = "BAR1";
+            cp.Value = "\"BAR1\"";
             CustomPropertyHelper.Set(s1, "FOO1", cp);
             // Asset that now we have ONE CustomProperty
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
