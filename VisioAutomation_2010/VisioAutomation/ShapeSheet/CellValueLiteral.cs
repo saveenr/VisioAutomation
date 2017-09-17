@@ -57,40 +57,12 @@
             return new CellValueLiteral(value);
         }
 
-        public static string EncodeValue_UDCELL(string text)
+        public static string EncodeValue(string text)
         {
-
-            const string doublequote = "\"";
-            const string doublequote_x2 = "\"\"";
-
-
-            if (text == null)
-            {
-                return null;
-            }
-
-            if (text.Length == 0)
-            {
-                return text;
-            }
-
-            if (text[0] == '\"')
-            {
-                return text;
-            }
-
-            if (text[0] == '=')
-            {
-                return text;
-            }
-
-            var result_quote_escaped = text.Replace(doublequote, doublequote_x2);
-            string result = string.Format("\"{0}\"", result_quote_escaped);
-
-            return result;
+            return EncodeValue(text, true);
         }
 
-        public static string EncodeValue_CP(string text, bool force_quoting)
+        public static string EncodeValue(string text, bool force_quoting)
         {
             if (text == null)
             {
