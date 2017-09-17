@@ -106,6 +106,8 @@ namespace VisioScripting.Commands
                 return;
             }
 
+            customprop.EncodeValues();
+
             using (var undoscope = this._client.Application.NewUndoScope("Set Custom Property"))
             {
                 foreach (var shape in targets.Shapes)
