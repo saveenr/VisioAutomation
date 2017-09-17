@@ -285,7 +285,7 @@ namespace VisioAutomation.Shapes
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
 
-        internal static string EncodeValue(string text)
+        public static string EncodeValue(string text)
         {
 
             const string doublequote = "\"";
