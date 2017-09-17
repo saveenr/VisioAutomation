@@ -146,13 +146,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s3 = page1.DrawRectangle(3, 1, 4, 2);
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
-            VA.Shapes.CustomPropertyHelper.Set(s1, "S1P1", "1");
-            VA.Shapes.CustomPropertyHelper.Set(s2, "S2P1", "2");
-            VA.Shapes.CustomPropertyHelper.Set(s2, "S2P2", "3");
+            VA.Shapes.CustomPropertyHelper.Set(s1, "S1P1", "\"1\"");
+            VA.Shapes.CustomPropertyHelper.Set(s2, "S2P1", "\"2\"");
+            VA.Shapes.CustomPropertyHelper.Set(s2, "S2P2", "\"3\"");
             //set nothing for s3
-            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P1", "4");
-            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P2", "5");
-            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P3", "6");
+            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P1", "\"4\"");
+            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P2", "\"5\"");
+            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P3", "\"6\"");
 
             var query = new VA.ShapeSheet.Query.SectionsQuery();
 
