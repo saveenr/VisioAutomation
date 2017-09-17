@@ -302,7 +302,7 @@ namespace VisioAutomation.Shapes
             CustomPropertyHelper.Set(shape, name, cp);
         }
 
-        public static string EncodeFormula(string text, bool force_quoting)
+        public static string EncodeValue(string text, bool force_quoting)
         {
             if (text == null)
             {

@@ -200,20 +200,20 @@ namespace VisioAutomation.Shapes
             throw new System.ArgumentException(msg);
         }
 
-        public void Encode()
+        public void EncodeValues()
         {
             if (this.Type.Value == null || this.Type.Value == "0")
             {
-                this.Value = CustomPropertyHelper.EncodeFormula(this.Value.Value, true);
+                this.Value = CustomPropertyHelper.EncodeValue(this.Value.Value, true);
             }
             else
             {
-                this.Value = CustomPropertyHelper.EncodeFormula(this.Value.Value, false);
+                this.Value = CustomPropertyHelper.EncodeValue(this.Value.Value, false);
 
             }
-            this.Label = CustomPropertyHelper.EncodeFormula(this.Label.Value, true);
-            this.Format = CustomPropertyHelper.EncodeFormula(this.Format.Value, true);
-            this.Prompt = CustomPropertyHelper.EncodeFormula(this.Prompt.Value, true);
+            this.Label = CustomPropertyHelper.EncodeValue(this.Label.Value, true);
+            this.Format = CustomPropertyHelper.EncodeValue(this.Format.Value, true);
+            this.Prompt = CustomPropertyHelper.EncodeValue(this.Prompt.Value, true);
         }
 
     }
