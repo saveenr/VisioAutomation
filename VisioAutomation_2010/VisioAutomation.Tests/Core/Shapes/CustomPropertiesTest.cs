@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(0,c0.Count);
 
 
-            var cp_type = "0"; // 0 for string
+            int cp_type = 0; // 0 for string
             
             // Set one property
             // Notice that the properties some back double-quoted

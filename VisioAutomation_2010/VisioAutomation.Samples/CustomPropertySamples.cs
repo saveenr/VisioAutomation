@@ -12,7 +12,7 @@ namespace VisioAutomationSamples
             // Draw a shape
             var s1 = page.DrawRectangle(1, 1, 4, 3);
 
-            var cp_type = "0"; // string type
+            int cp_type = 0; // string type
 
             // Set some properties on it
             CustomPropertyHelper.Set(s1, "FOO1", "BAR1", cp_type);

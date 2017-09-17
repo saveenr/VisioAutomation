@@ -49,7 +49,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             // By default a shape has ZERO custom Properties
             Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
-            var cp_type = "0"; // string type
+            int cp_type = 0; // string type
 
             // Add the same one multiple times Custom Property
             CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
@@ -79,7 +79,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             Assert.AreEqual(0, CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
 
-            var cp_type = "0"; // 0 for string
+            int cp_type = 0; // 0 for string
 
             try
             {
@@ -123,7 +123,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
-            var cp_type = "0"; // 0 for string
+            int cp_type = 0; // 0 for string
 
             Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
             CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
@@ -168,7 +168,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s3 = page1.DrawRectangle(0, 0, 2, 2);
             var s4 = page1.DrawRectangle(0, 0, 2, 2);
 
-            var cp_type = "0"; // 0 for string
+            int cp_type = 0; // 0 for string
 
             CustomPropertyHelper.Set(s1, "FOO1", "1", cp_type);
             CustomPropertyHelper.Set(s2, "FOO2", "2", cp_type);

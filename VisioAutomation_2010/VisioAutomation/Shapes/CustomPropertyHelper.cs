@@ -280,7 +280,7 @@ namespace VisioAutomation.Shapes
             shape.DeleteRow((short)IVisio.VisSectionIndices.visSectionProp, row);
         }
 
-        public static void Set(IVisio.Shape shape, string name, string value, string type)
+        public static void Set(IVisio.Shape shape, string name, string value, int type)
         {
             if (shape == null)
             {
