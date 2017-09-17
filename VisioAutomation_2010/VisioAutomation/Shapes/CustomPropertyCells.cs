@@ -154,50 +154,13 @@ namespace VisioAutomation.Shapes
             cp_cells.Type = "5";
             return cp_cells;
         }
-
-
+        
         public static CustomPropertyCells Create(CellValueLiteral value)
         {
             var cp_cells = new CustomPropertyCells();
             cp_cells.Value = value;
             cp_cells.Type = "2";
             return cp_cells;
-        }
-
-        public static CustomPropertyCells Create(object value)
-        {
-            if (value is string value_str)
-            {
-                return Create(value_str);
-            }
-            else if (value is int value_int)
-            {
-                return Create(value_int);
-            }
-            else if (value is double value_double)
-            {
-                return Create(value_double);
-            }
-            else if (value is float value_float)
-            {
-                return Create(value_float);
-            }
-            else if (value is bool value_bool)
-            {
-                return Create(value_bool);
-            }
-            else if (value is System.DateTime value_datetime)
-            {
-                return Create(value_datetime);
-            }
-            else if (value is CellValueLiteral value_cvl)
-            {
-                return Create(value_cvl);
-            }
-
-            var value_type = value.GetType();
-            string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
-            throw new System.ArgumentException(msg);
         }
 
         public void EncodeValues()

@@ -135,9 +135,46 @@ namespace VisioPowerShell.Commands
                 string key_string = (string) key;
 
                 object value = this.Hashtable[key];
-                var cp = CustomPropertyCells.Create(value);
+                var cp = CreateCustPropFromObject(value);
                 this.Client.CustomProperty.Set(targets, key_string, cp);
             }
         }
+
+        private static CustomPropertyCells CreateCustPropFromObject(object value)
+        {
+            if (value is string value_str)
+            {
+                return CustomPropertyCells.Create(value_str);
+            }
+            else if (value is int value_int)
+            {
+                return CustomPropertyCells.Create(value_int);
+            }
+            else if (value is double value_double)
+            {
+                return CustomPropertyCells.Create(value_double);
+            }
+            else if (value is float value_float)
+            {
+                return CustomPropertyCells.Create(value_float);
+            }
+            else if (value is bool value_bool)
+            {
+                return CustomPropertyCells.Create(value_bool);
+            }
+            else if (value is System.DateTime value_datetime)
+            {
+                return CustomPropertyCells.Create(value_datetime);
+            }
+            else if (value is VisioAutomation.ShapeSheet.CellValueLiteral value_cvl)
+            {
+                return CustomPropertyCells.Create(value_cvl);
+            }
+
+            var value_type = value.GetType();
+            string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
+            throw new System.ArgumentException(msg);
+        }
+
     }
 }
