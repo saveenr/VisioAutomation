@@ -4,13 +4,13 @@ using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace VisioAutomation_Tests.Core.Shapes
+namespace VisioAutomation_Tests.Core.ShapeSheet
 {
     [TestClass]
     public class CellGroupTests : VisioAutomationTest
     {
         [TestMethod]
-        public void EnumCellgroupCells()
+        public void VerifyAllCellsAreEnumerated()
         {
             var types = new List<Type>();
             types.Add(typeof(VisioAutomation.Shapes.ControlCells));
@@ -26,19 +26,25 @@ namespace VisioAutomation_Tests.Core.Shapes
             types.Add(typeof(VisioAutomation.Pages.PagePrintCells));
             types.Add(typeof(VisioAutomation.Pages.PageRulerAndGridCells));
 
-            var xg1 = new VisioAutomation.Shapes.ShapeXFormCells();
-            xg1.PinX = 1.0;
-            xg1.PinY = 2.0;
+            foreach (var type in types)
+            {
+                string type_name = type.Name;
+                var ctor = type.GetConstructor(Type.EmptyTypes);
+                var type_obj = ctor.Invoke(new object[] { });
+                var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroupBase) type_obj;
 
-            var xg1_type = xg1.GetType();
-            var props = GetCellDataProps(xg1_type);
+                var props = GetCellDataProps(type);
+                var reflected_cvts = props.Select(p => (VisioAutomation.ShapeSheet.CellValueLiteral)p.GetValue(cellgroup, null)).ToList();
+                var reflected_values = reflected_cvts.Select(p => p.Value).ToList();
 
-            var cellvalues = props.Select(p => (VisioAutomation.ShapeSheet.CellValueLiteral)p.GetValue(xg1,null)).ToList();
-            var cellvalues_formulas = cellvalues.Select(p=>p.Value).ToList();
+                var cellnames = props.Select(p => p.Name).ToList();
 
-            var cellnames = props.Select(p => p.Name).ToList();
+                var enumerated_values = cellgroup.SrcValuePairs.Select(i => i.Value).ToList();
+                var enumerated_srcs = cellgroup.SrcValuePairs.Select(i => i.Src).ToList();
+                var enumerated_dic = cellgroup.SrcValuePairs.ToDictionary(i => i.Src, i => i.Value);
 
-            var f2 = xg1.SrcValuePairs.Select(i => i.Value).ToList();
+                Assert.AreEqual(reflected_cvts.Count, enumerated_values.Count);
+            }
         }
 
         private static List<PropertyInfo> GetCellDataProps(Type t)
