@@ -204,16 +204,16 @@ namespace VisioAutomation.Shapes
         {
             if (this.Type.Value == null || this.Type.Value == "0")
             {
-                this.Value = CustomPropertyHelper.EncodeValue(this.Value.Value, true);
+                this.Value = CellValueLiteral.EncodeValue_CP(this.Value.Value, true);
             }
             else
             {
-                this.Value = CustomPropertyHelper.EncodeValue(this.Value.Value, false);
+                this.Value = CellValueLiteral.EncodeValue_CP(this.Value.Value, false);
 
             }
-            this.Label = CustomPropertyHelper.EncodeValue(this.Label.Value, true);
-            this.Format = CustomPropertyHelper.EncodeValue(this.Format.Value, true);
-            this.Prompt = CustomPropertyHelper.EncodeValue(this.Prompt.Value, true);
+            this.Label = CellValueLiteral.EncodeValue_CP(this.Label.Value, true);
+            this.Format = CellValueLiteral.EncodeValue_CP(this.Format.Value, true);
+            this.Prompt = CellValueLiteral.EncodeValue_CP(this.Prompt.Value, true);
         }
 
     }

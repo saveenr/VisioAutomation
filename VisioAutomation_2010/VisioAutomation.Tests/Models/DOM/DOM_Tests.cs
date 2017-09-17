@@ -3,6 +3,7 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -117,11 +118,11 @@ namespace VisioAutomation_Tests.Models.Dom
 
             var cp1 = new CustomPropertyCells();
             cp1.Value = "\"FOOVALUE\"";
-            cp1.Label = CustomPropertyHelper.EncodeValue("Foo Label",true);
+            cp1.Label = "\"Foo Label\"";
 
             var cp2 = new CustomPropertyCells();
             cp2.Value = "\"BARVALUE\"";
-            cp2.Label = CustomPropertyHelper.EncodeValue("Bar Label",true);
+            cp2.Label = "\"Bar Label\"";
 
             vrect1.CustomProperties["FOO"] = cp1;
             vrect1.CustomProperties["BAR"] = cp2;

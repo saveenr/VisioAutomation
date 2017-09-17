@@ -57,6 +57,75 @@
             return new CellValueLiteral(value);
         }
 
+        public static string EncodeValue_UDCELL(string text)
+        {
+
+            const string doublequote = "\"";
+            const string doublequote_x2 = "\"\"";
+
+
+            if (text == null)
+            {
+                return null;
+            }
+
+            if (text.Length == 0)
+            {
+                return text;
+            }
+
+            if (text[0] == '\"')
+            {
+                return text;
+            }
+
+            if (text[0] == '=')
+            {
+                return text;
+            }
+
+            var result_quote_escaped = text.Replace(doublequote, doublequote_x2);
+            string result = string.Format("\"{0}\"", result_quote_escaped);
+
+            return result;
+        }
+
+        public static string EncodeValue_CP(string text, bool force_quoting)
+        {
+            if (text == null)
+            {
+                return text;
+            }
+
+            if (text.Length == 0)
+            {
+                return text;
+            }
+
+            if (text[0] == '\"')
+            {
+                return text;
+            }
+
+            if (text[0] == '=')
+            {
+                return text;
+            }
+
+
+            // if the caller wants to force the content to a formula string
+            // then do so: escape internal double quotes and then wrap in double quotes
+            if (force_quoting)
+            {
+                string str_quoted = text.Replace("\"", "\"\"");
+                str_quoted = string.Format("\"{0}\"", str_quoted);
+                return str_quoted;
+            }
+
+            // For all other cases, just return the input string
+            return text;
+        }
+
 
     }
 }

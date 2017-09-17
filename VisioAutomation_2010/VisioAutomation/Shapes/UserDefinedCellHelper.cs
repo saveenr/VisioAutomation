@@ -284,39 +284,5 @@ namespace VisioAutomation.Shapes
             var exists = (short)IVisio.VisExistsFlags.visExistsAnywhere;
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
-
-        public static string EncodeValue(string text)
-        {
-
-            const string doublequote = "\"";
-            const string doublequote_x2 = "\"\"";
-
-
-            if (text == null)
-            {
-                return null;
-            }
-
-            if (text.Length == 0)
-            {
-                return text;
-            }
-
-            if (text[0] == '\"')
-            {
-                return text;
-            }
-
-            if (text[0] == '=')
-            {
-                return text;
-            }
-
-            var result_quote_escaped = text.Replace(doublequote, doublequote_x2);
-            string result = string.Format("\"{0}\"", result_quote_escaped);
-
-            return result;
-        }
-
     }
 }

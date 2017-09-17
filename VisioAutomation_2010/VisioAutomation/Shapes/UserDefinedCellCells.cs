@@ -41,8 +41,8 @@ namespace VisioAutomation.Shapes
 
         public void EncodeValues()
         {
-            this.Value = UserDefinedCellHelper.EncodeValue(this.Value.Value);
-            this.Prompt = UserDefinedCellHelper.EncodeValue(this.Prompt.Value);
+            this.Value = CellValueLiteral.EncodeValue_UDCELL(this.Value.Value);
+            this.Prompt = CellValueLiteral.EncodeValue_UDCELL(this.Prompt.Value);
         }
 
 
