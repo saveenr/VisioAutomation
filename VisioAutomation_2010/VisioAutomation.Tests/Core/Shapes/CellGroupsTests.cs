@@ -26,14 +26,22 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             types.Add(typeof(VisioAutomation.Pages.PagePrintCells));
             types.Add(typeof(VisioAutomation.Pages.PageRulerAndGridCells));
 
-            foreach (var type in types)
+            var cvt_ctor = typeof(VisioAutomation.ShapeSheet.CellValueLiteral).GetConstructor(new []{typeof(string)});
+            foreach (var cellgroup_type in types)
             {
-                string type_name = type.Name;
-                var ctor = type.GetConstructor(Type.EmptyTypes);
-                var type_obj = ctor.Invoke(new object[] { });
-                var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroupBase) type_obj;
+                string type_name = cellgroup_type.Name;
+                var cellgroup_ctor = cellgroup_type.GetConstructor(Type.EmptyTypes);
+                var cellgroup_obj = cellgroup_ctor.Invoke(new object[] { });
+                var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroupBase) cellgroup_obj;
 
-                var props = GetCellDataProps(type);
+                var props = GetCellDataProps(cellgroup_type);
+
+                for (int i = 0; i < props.Count; i++)
+                {
+                    var prop = props[i];
+                    var x = cvt_ctor.Invoke(new object[] {i.ToString()});
+                    prop.SetValue(cellgroup, x);
+                }
                 var reflected_cvts = props.Select(p => (VisioAutomation.ShapeSheet.CellValueLiteral)p.GetValue(cellgroup, null)).ToList();
                 var reflected_cvt_values = reflected_cvts.Select(p => p.Value).ToList();
                 var reflected_cvt_names = props.Select(p => p.Name).ToList();
@@ -54,6 +62,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 // Verify that all the enumerated Srcs are distinct
                 var unique_srcs = enumerated_srcs.Distinct().ToList();
                 Assert.AreEqual(reflected_cvts.Count, unique_srcs.Count);
+
+                var unique_values = enumerated_values.Distinct().ToList();
+                Assert.AreEqual(reflected_cvts.Count, unique_values.Count);
 
             }
         }
