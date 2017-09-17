@@ -206,23 +206,23 @@ namespace VisioAutomation_Tests.Core.Extensions
             // string
             var cp_string = new CustomPropertyCells();
             cp_string.Value = "\"Hello World\"";
-            cp_string.Type = 0;
+            cp_string.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.String);
 
             var cp_int = new CustomPropertyCells();
             cp_int.Value = 1024;
-            cp_int.Type = 2;
+            cp_int.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Number);
 
             var cp_dt = new CustomPropertyCells();
             cp_dt.Value = "DATETIME(\"03/31/1979\")";
-            cp_dt.Type = 5;
+            cp_dt.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Date);
 
             var cp_bool = new CustomPropertyCells();
             cp_bool.Value = "TRUE";
-            cp_bool.Type = 3;
+            cp_bool.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Boolean);
 
             var cp_float = new CustomPropertyCells();
             cp_float.Value = 3.14;
-            cp_float.Type = 2;
+            cp_float.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Number);
 
             CustomPropertyHelper.Set(s1, "PropertyString", cp_string);
             CustomPropertyHelper.Set(s1, "PropertyInt", cp_int);

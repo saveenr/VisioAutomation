@@ -95,7 +95,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             cp1.LangID= "0";
             cp1.Prompt= "\"1\"";
             cp1.SortKey= "0";
-            cp1.Type= "0";
+            cp1.Type= CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.String);
             cp1.Value= "1";
 
             CustomPropertyHelper.Set(s1, "PROP1", cp1);
@@ -125,7 +125,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             cp3.LangID = "2";
             cp3.Prompt = "\"3\"";
             cp3.SortKey = "2";
-            cp3.Type = "3";
+            cp3.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Boolean);
             cp3.Value = "2";
 
             CustomPropertyHelper.Set(s1,"PROP1",cp3);

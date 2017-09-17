@@ -121,7 +121,7 @@ namespace VisioAutomation.Shapes
             return cp_cells;
         }
 
-        private static int CustomPropertyTypeToInt(CustomPropertyType type)
+        public static int CustomPropertyTypeToInt(CustomPropertyType type)
         {
             int type_int = -1;
             if (type == CustomPropertyType.String)
