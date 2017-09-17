@@ -119,11 +119,11 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
-            CustomPropertyHelper.Set(s1, "FOO1", "BAR1");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"");
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
-            CustomPropertyHelper.Set(s1, "FOO1", "BAR2");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR2\"");
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
-            CustomPropertyHelper.Set(s1, "FOO2", "BAR3");
+            CustomPropertyHelper.Set(s1, "FOO2", "\"BAR3\"");
 
             var names1 = CustomPropertyHelper.GetNames(s1);
             Assert.AreEqual(2,names1.Count);
@@ -137,7 +137,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             Assert.AreEqual(1, names2.Count);
             Assert.IsTrue(names2.Contains("FOO2"));
 
-            CustomPropertyHelper.Set(s1, "FOO3", "BAR1");
+            CustomPropertyHelper.Set(s1, "FOO3", "\"BAR1\"");
             var names3 = CustomPropertyHelper.GetNames(s1);
             Assert.AreEqual(2, names3.Count);
             Assert.IsTrue(names3.Contains("FOO3"));
