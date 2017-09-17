@@ -35,13 +35,19 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
                 var props = GetCellDataProps(type);
                 var reflected_cvts = props.Select(p => (VisioAutomation.ShapeSheet.CellValueLiteral)p.GetValue(cellgroup, null)).ToList();
-                var reflected_values = reflected_cvts.Select(p => p.Value).ToList();
-
-                var cellnames = props.Select(p => p.Name).ToList();
+                var reflected_cvt_values = reflected_cvts.Select(p => p.Value).ToList();
+                var reflected_cvt_names = props.Select(p => p.Name).ToList();
+                var reflected_nametovalue = new Dictionary<string,string>();
+                for (int i = 0; i < props.Count; i++)
+                {
+                    string k = reflected_cvt_names[i];
+                    string v = reflected_cvt_values[i];
+                    reflected_nametovalue[k] = v;
+                }
 
                 var enumerated_values = cellgroup.SrcValuePairs.Select(i => i.Value).ToList();
                 var enumerated_srcs = cellgroup.SrcValuePairs.Select(i => i.Src).ToList();
-                var enumerated_dic = cellgroup.SrcValuePairs.ToDictionary(i => i.Src, i => i.Value);
+                var enumerated_srctovalue = cellgroup.SrcValuePairs.ToDictionary(i => i.Src, i => i.Value);
 
                 Assert.AreEqual(reflected_cvts.Count, enumerated_values.Count);
             }
