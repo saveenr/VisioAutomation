@@ -196,7 +196,7 @@ namespace VisioAutomation_Tests.Core.Extensions
 
             // string
             var cp_string = new CustomPropertyCells();
-            cp_string.Value = "Hello World";
+            cp_string.Value = "\"Hello World\"";
             cp_string.Type = 0;
 
             var cp_int = new CustomPropertyCells();
