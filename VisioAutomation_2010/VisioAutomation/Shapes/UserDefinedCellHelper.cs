@@ -105,7 +105,7 @@ namespace VisioAutomation.Shapes
             writer.Commit(shape);
         }
 
-        private static void EncodeValues(UserDefinedCellCells cells)
+        public static void EncodeValues(UserDefinedCellCells cells)
         {
             cells.Value = UserDefinedCellHelper.EncodeValue(cells.Value.Value);
             cells.Prompt = UserDefinedCellHelper.EncodeValue(cells.Prompt.Value);
