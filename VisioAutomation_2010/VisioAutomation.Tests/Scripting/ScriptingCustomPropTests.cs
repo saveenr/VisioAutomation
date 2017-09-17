@@ -60,7 +60,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, prop_dic0[s3].Count);
 
             var cp = new CustomPropertyCells();
-            cp.Value = "BAR";
+            cp.Value = "\"BAR\"";
             client.CustomProperty.Set(targets, "FOO",cp);
 
             var prop_dic1 = client.CustomProperty.Get(targets);

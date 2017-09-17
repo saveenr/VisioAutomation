@@ -56,9 +56,9 @@ namespace VisioAutomation_Tests.Models
                                    "Decision");
             n0.Size = new VA.Geometry.Size(3, 2);
             n0.CustomProperties = new CustomPropertyDictionary();
-            n0.CustomProperties["p1"] = CustomPropertyCells.Create("v1");
-            n0.CustomProperties["p2"] = CustomPropertyCells.Create("v2");
-            n0.CustomProperties["p3"] = CustomPropertyCells.Create("v3");
+            n0.CustomProperties["p1"] = CustomPropertyCells.Create("\"v1\"");
+            n0.CustomProperties["p2"] = CustomPropertyCells.Create("\"v2\"");
+            n0.CustomProperties["p3"] = CustomPropertyCells.Create("\"v3\"");
 
             var options = new MsaglLayoutOptions();
             options.UseDynamicConnectors = true;

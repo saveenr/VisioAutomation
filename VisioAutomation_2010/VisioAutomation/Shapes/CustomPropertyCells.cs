@@ -36,8 +36,7 @@ namespace VisioAutomation.Shapes
                 // Handle .Value
                 // use formulastring quoting if needed for string values//
                 // note: if .Type is zero or null then assume .Value is a string
-                bool force_quoting_for_value = (this.Type.Value == "0" || this.Type.Value == null);
-                string str_value = CustomPropertyHelper.EncodeFormula(this.Value.Value, force_quoting_for_value);
+                string str_value = this.Value.Value;
 
                 yield return SrcValuePair.Create(SrcConstants.CustomPropLabel, str_label);
                 yield return SrcValuePair.Create(SrcConstants.CustomPropValue, str_value);

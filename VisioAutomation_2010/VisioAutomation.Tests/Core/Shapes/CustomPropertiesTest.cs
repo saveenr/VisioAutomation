@@ -34,14 +34,14 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // Set one property
             // Notice that the properties some back double-quoted
-            CustomPropertyHelper.Set(s1,"PROP1","VAL1");
+            CustomPropertyHelper.Set(s1,"PROP1","\"VAL1\"");
             var c1 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
             Assert.AreEqual(1, c1.Count);
             Assert.IsTrue(c1.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"",c1["PROP1"].Value.Value);
 
             // Add another property
-            CustomPropertyHelper.Set(s1, "PROP2", "VAL 2");
+            CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2\"");
             var c2 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
             Assert.AreEqual(2, c2.Count);
             Assert.IsTrue(c2.ContainsKey("PROP1"));
@@ -86,11 +86,11 @@ namespace VisioAutomation_Tests.Core.Shapes
             var cp1 = new CustomPropertyCells();
             cp1.Ask = "1";
             cp1.Calendar = "0";
-            cp1.Format= CustomPropertyHelper.EncodeFormula("1",true);
+            cp1.Format= "\"1\"";
             cp1.Invisible = "0";
-            cp1.Label= CustomPropertyHelper.EncodeFormula("1", true);
+            cp1.Label= "\"1\"";
             cp1.LangID= "0";
-            cp1.Prompt= CustomPropertyHelper.EncodeFormula("1",true);
+            cp1.Prompt= "\"1\"";
             cp1.SortKey= "0";
             cp1.Type= "0";
             cp1.Value= "1";
@@ -111,16 +111,16 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual("0", cp2.SortKey.Value);
             Assert.AreEqual("0", cp2.Type.Value);
 
-            Assert.AreEqual("\"1\"", cp2.Value.Value);
+            Assert.AreEqual("1", cp2.Value.Value);
 
             var cp3 = new CustomPropertyCells();
             cp3.Ask = "0";
             cp3.Calendar = "2";
-            cp3.Format = CustomPropertyHelper.EncodeFormula("0",true);
+            cp3.Format = "\"0\"";
             cp3.Invisible = "TRUE";
-            cp3.Label = CustomPropertyHelper.EncodeFormula("3",true);
+            cp3.Label = "\"3\"";
             cp3.LangID = "2";
-            cp3.Prompt = CustomPropertyHelper.EncodeFormula("3",true);
+            cp3.Prompt = "\"3\"";
             cp3.SortKey = "2";
             cp3.Type = "3";
             cp3.Value = "2";
