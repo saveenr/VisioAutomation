@@ -204,11 +204,11 @@ namespace VisioAutomation.Shapes
         {
             if (this.Type.Value == null || this.Type.Value == "0")
             {
-                this.Value = CellValueLiteral.EncodeValue(this.Value.Value);
+                this.Value = CellValueLiteral.EncodeValue(this.Value.Value, false);
             }
             else
             {
-                this.Value = CellValueLiteral.EncodeValue(this.Value.Value, false);
+                this.Value = CellValueLiteral.EncodeValue(this.Value.Value);
 
             }
             this.Label = CellValueLiteral.EncodeValue(this.Label.Value);

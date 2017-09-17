@@ -59,10 +59,10 @@
 
         public static string EncodeValue(string text)
         {
-            return EncodeValue(text, true);
+            return EncodeValue(text, false);
         }
 
-        public static string EncodeValue(string text, bool force_quoting)
+        public static string EncodeValue(string text, bool noquote)
         {
             if (text == null)
             {
@@ -87,7 +87,7 @@
 
             // if the caller wants to force the content to a formula string
             // then do so: escape internal double quotes and then wrap in double quotes
-            if (force_quoting)
+            if (!noquote)
             {
                 string str_quoted = text.Replace("\"", "\"\"");
                 str_quoted = string.Format("\"{0}\"", str_quoted);
