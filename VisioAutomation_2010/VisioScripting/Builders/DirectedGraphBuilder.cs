@@ -162,18 +162,7 @@ namespace VisioScripting.Builders
                     foreach (var kv in shape_info.custprops)
                     {
                         var cp_cells = kv.Value;
-                        if (cp_cells.Type.Value == null || cp_cells.Type.Value == "0")
-                        {
-                            cp_cells.Value = CustomPropertyHelper.EncodeFormula(cp_cells.Value.Value, true);
-                        }
-                        else
-                        {
-                            cp_cells.Value = CustomPropertyHelper.EncodeFormula(cp_cells.Value.Value, false);
-
-                        }
-                        cp_cells.Label = CustomPropertyHelper.EncodeFormula(cp_cells.Label.Value, true);
-                        cp_cells.Format = CustomPropertyHelper.EncodeFormula(cp_cells.Format.Value, true);
-                        cp_cells.Prompt= CustomPropertyHelper.EncodeFormula(cp_cells.Prompt.Value, true);
+                        cp_cells.Encode();
                         dg_shape.CustomProperties[kv.Key] = kv.Value;
                     }
                 }
