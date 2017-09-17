@@ -104,63 +104,51 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static CustomPropertyCells Create(string value)
+        public static CustomPropertyCells Create(CellValueLiteral value,string type)
         {
             var cp_cells = new CustomPropertyCells();
             cp_cells.Value = value;
             cp_cells.Type = "0";
             return cp_cells;
+        }
+
+        public static CustomPropertyCells Create(string value)
+        {
+            return Create(value, "0");
         }
 
         public static CustomPropertyCells Create(int value)
         {
-            var cp_cells = new CustomPropertyCells();
-            cp_cells.Value = value;
-            cp_cells.Type = "0";
-            return cp_cells;
+            return Create(value, "0");
         }
 
         public static CustomPropertyCells Create(double value)
         {
-            var cp_cells = new CustomPropertyCells();
-            cp_cells.Value = value;
-            cp_cells.Type = "2";
-            return cp_cells;
+            return Create(value, "2");
         }
 
         public static CustomPropertyCells Create(float value)
         {
-            var cp_cells = new CustomPropertyCells();
-            cp_cells.Value = value;
-            cp_cells.Type = "2";
-            return cp_cells;
+            return Create(value, "2");
         }
 
         public static CustomPropertyCells Create(bool value)
         {
-            var cp_cells = new CustomPropertyCells();
-            cp_cells.Value = value ? "TRUE" : "FALSE";
-            cp_cells.Type = "3";
-            return cp_cells;
+            return Create(value ? "TRUE" : "FALSE", "3");
         }
-
 
         public static CustomPropertyCells Create(System.DateTime value)
         {
-            var cp_cells = new CustomPropertyCells();
             var current_culture = System.Globalization.CultureInfo.CurrentCulture;
             string formatted_dt = value.ToString(current_culture);
-            cp_cells.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
-            cp_cells.Type = "5";
-            return cp_cells;
+            string _Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
+            string _Type = "5";
+            return Create(_Value, _Type);
         }
-        
+
         public static CustomPropertyCells Create(CellValueLiteral value)
         {
-            var cp_cells = new CustomPropertyCells();
-            cp_cells.Value = value;
-            cp_cells.Type = "2";
-            return cp_cells;
+            return Create(value, "0");
         }
 
         public void EncodeValues()
