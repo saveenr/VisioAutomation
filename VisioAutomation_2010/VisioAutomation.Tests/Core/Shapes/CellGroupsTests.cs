@@ -50,6 +50,11 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 var enumerated_srctovalue = cellgroup.SrcValuePairs.ToDictionary(i => i.Src, i => i.Value);
 
                 Assert.AreEqual(reflected_cvts.Count, enumerated_values.Count);
+
+                // Verify that all the enumerated Srcs are distinct
+                var unique_srcs = enumerated_srcs.Distinct().ToList();
+                Assert.AreEqual(reflected_cvts.Count, unique_srcs.Count);
+
             }
         }
 
