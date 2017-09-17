@@ -38,35 +38,51 @@ namespace VisioAutomation.Shapes
 
         public static void Set(IVisio.Shape shape, string name, string value, string prompt)
         {
+            var cells = new UserDefinedCellCells();
+            cells.Value = value;
+            cells.Prompt = prompt;
+            Set(shape, name, cells);
+        }
+
+        public static void Set(IVisio.Shape shape, string name, UserDefinedCellCells cells)
+        {
             if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
+            if (cells == null)
+            {
+                throw new System.ArgumentNullException(nameof(cells));
+            }
+
+
             UserDefinedCellHelper.CheckValidName(name);
+
+            EncodeValues(cells);
 
             if (UserDefinedCellHelper.Contains(shape, name))
             {
                 string full_prop_name = UserDefinedCellHelper.GetRowName(name);
 
-                if (value!=null)
+
+                if (cells.Value.HasValue)
                 {
                     string value_cell_name = full_prop_name;
                     var cell = shape.CellsU[value_cell_name];
-                    string encoded_value = EncodeValue(value);
-                    cell.FormulaU = encoded_value;                    
+                    cell.FormulaU = cells.Value.Value;
                 }
 
-                if (prompt!=null)
+                if (cells.Prompt.HasValue)
                 {
-                    string prompt_cell_name = full_prop_name+".Prompt";
+                    string prompt_cell_name = full_prop_name + ".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    var encoded_prompt = EncodeValue(prompt);
-                    cell.FormulaU = encoded_prompt;
+                    cell.FormulaU = cells.Prompt.Value;
                 }
                 return;
             }
 
+            // The row doesn't already exist
             short row = shape.AddNamedRow(
                 UserDefinedCellHelper._userdefinedcell_section,
                 name,
@@ -74,21 +90,25 @@ namespace VisioAutomation.Shapes
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
-            if (value!=null)
+            if (cells.Value.HasValue)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                string encoded_value = EncodeValue(value);
-                writer.SetFormula(src, encoded_value);
+                writer.SetFormula(src, cells.Value.Value);
             }
 
-            if (prompt!=null)
+            if (cells.Prompt.HasValue)
             {
                 var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                var encoded_prompt = EncodeValue(prompt);
-                writer.SetFormula(src, encoded_prompt);
+                writer.SetFormula(src, cells.Prompt.Value);
             }
 
             writer.Commit(shape);
+        }
+
+        private static void EncodeValues(UserDefinedCellCells cells)
+        {
+            cells.Value = UserDefinedCellHelper.EncodeValue(cells.Value.Value);
+            cells.Prompt = UserDefinedCellHelper.EncodeValue(cells.Prompt.Value);
         }
 
 
