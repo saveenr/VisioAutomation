@@ -101,7 +101,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             var in_cp = new CustomPropertyCells();
             in_cp.Label = CustomPropertyHelper.EncodeFormula("The Foo property",true);
             in_cp.Value = "Some value";
-            in_cp.Prompt = "Some Prompt";
+            in_cp.Prompt = CustomPropertyHelper.EncodeFormula("Some Prompt",true);
             in_cp.LangID = 1034;
             in_cp.Type = 0; // 0 = string. see: http://msdn.microsoft.com/en-us/library/aa200980(v=office.10).aspx
             in_cp.Calendar = (int) IVisio.VisCellVals.visCalWestern;

@@ -31,7 +31,7 @@ namespace VisioAutomation.Shapes
                 // Handle, .Label, .Value, .Prompt
                 string str_label = this.Label.Value;
                 string str_format = this.Format.Value;
-                string str_prompt = CustomPropertyHelper.EncodeFormula(this.Prompt.Value, true);
+                string str_prompt = this.Prompt.Value;
 
                 // Handle .Value
                 // use formulastring quoting if needed for string values//

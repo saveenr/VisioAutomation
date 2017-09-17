@@ -90,7 +90,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             cp1.Invisible = "0";
             cp1.Label= CustomPropertyHelper.EncodeFormula("1", true);
             cp1.LangID= "0";
-            cp1.Prompt= "1";
+            cp1.Prompt= CustomPropertyHelper.EncodeFormula("1",true);
             cp1.SortKey= "0";
             cp1.Type= "0";
             cp1.Value= "1";
@@ -120,7 +120,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             cp3.Invisible = "TRUE";
             cp3.Label = CustomPropertyHelper.EncodeFormula("3",true);
             cp3.LangID = "2";
-            cp3.Prompt = "3";
+            cp3.Prompt = CustomPropertyHelper.EncodeFormula("3",true);
             cp3.SortKey = "2";
             cp3.Type = "3";
             cp3.Value = "2";
