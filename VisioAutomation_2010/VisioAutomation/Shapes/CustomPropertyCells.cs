@@ -87,7 +87,7 @@ namespace VisioAutomation.Shapes
 
             }
 
-            public override CustomPropertyCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
+            public override CustomPropertyCells ToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new CustomPropertyCells();
                 cells.Value = row[this.Value];

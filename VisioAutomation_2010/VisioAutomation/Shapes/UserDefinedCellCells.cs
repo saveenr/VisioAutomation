@@ -58,7 +58,7 @@ namespace VisioAutomation.Shapes
                 this.Prompt = sec.Columns.Add(SrcConstants.UserDefCellPrompt, nameof(this.Prompt));
             }
 
-            public override UserDefinedCellCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
+            public override UserDefinedCellCells ToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new UserDefinedCellCells();
                 cells.Value = row[this.Value];

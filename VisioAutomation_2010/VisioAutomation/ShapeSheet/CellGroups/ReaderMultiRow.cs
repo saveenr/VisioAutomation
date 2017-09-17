@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.Query;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
@@ -12,9 +13,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.query = new SectionsQuery();
         }
         
-        public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row);
+        public abstract TGroup ToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row);
 
-        public List<List<TGroup>> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType type)
+        public List<List<TGroup>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var data_for_shapes = query.GetCells(page, shapeids, type);
 
@@ -22,26 +23,26 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             foreach (var d in data_for_shapes)
             {
                 var first_section = d.Sections[0];
-                var cellgroups = this.__SectionRowsToCellGroups(first_section);
+                var cellgroups = this.__ToCellGroups(first_section);
                 list_cellgroups.Add(cellgroups);
             }
             return list_cellgroups;
         }
 
-        public List<TGroup> GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType type)
+        public List<TGroup> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var data_for_shape = query.GetCells(shape,type);
             var first_section = data_for_shape.Sections[0];
-            var cellgroups = this.__SectionRowsToCellGroups(first_section);
+            var cellgroups = this.__ToCellGroups(first_section);
             return cellgroups;
         }
 
-        private List<TGroup> __SectionRowsToCellGroups(SectionQueryOutput<string> section_data)
+        private List<TGroup> __ToCellGroups(SectionQueryOutput<string> section_data)
         {
             var cellgroups = new List<TGroup>(section_data.Rows.Count);
             foreach (var section_row in section_data.Rows)
             {
-                var cellgroup = this.CellDataToCellGroup(section_row.Cells);
+                var cellgroup = this.ToCellGroup(section_row.Cells);
                 cellgroups.Add(cellgroup);                
             }
             return cellgroups;
