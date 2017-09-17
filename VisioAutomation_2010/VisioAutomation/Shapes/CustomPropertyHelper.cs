@@ -280,7 +280,7 @@ namespace VisioAutomation.Shapes
             shape.DeleteRow((short)IVisio.VisSectionIndices.visSectionProp, row);
         }
 
-        public static void Set(IVisio.Shape shape, string name, string val)
+        public static void Set(IVisio.Shape shape, string name, string value, string type)
         {
             if (shape == null)
             {
@@ -289,17 +289,18 @@ namespace VisioAutomation.Shapes
 
             CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
-            if (val == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(val));
+                throw new ArgumentNullException(nameof(value));
             }
 
             // create a new property
             var cp = new CustomPropertyCells();
-            cp.Value = val;
-            cp.Type = 0; // 0 = string
+            cp.Value = value;
+            cp.Type = type;
 
             CustomPropertyHelper.Set(shape, name, cp);
         }
+
     }
 }

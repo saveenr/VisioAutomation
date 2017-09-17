@@ -49,17 +49,19 @@ namespace VisioAutomation_Tests.Core.Extensions
             // By default a shape has ZERO custom Properties
             Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
+            var cp_type = "0"; // string type
+
             // Add the same one multiple times Custom Property
-            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
             // Asset that now we have ONE CustomProperty
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             // Check that it is called FOO1
             Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
             // Try to SET the same property again many times
-            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR2\"");
-            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR3\"");
-            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR4\"");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR2\"", cp_type);
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR3\"", cp_type);
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR4\"", cp_type);
 
             // Asset that now we have ONE CustomProperty
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
@@ -76,9 +78,12 @@ namespace VisioAutomation_Tests.Core.Extensions
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             Assert.AreEqual(0, CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+
+            var cp_type = "0"; // 0 for string
+
             try
             {
-                CustomPropertyHelper.Set(s1, "FOO 1", "BAR1");
+                CustomPropertyHelper.Set(s1, "FOO 1", "BAR1", cp_type);
             }
             catch (System.ArgumentException)
             {
@@ -118,12 +123,14 @@ namespace VisioAutomation_Tests.Core.Extensions
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
+            var cp_type = "0"; // 0 for string
+
             Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
-            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
-            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR2\"");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR2\"", cp_type);
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
-            CustomPropertyHelper.Set(s1, "FOO2", "\"BAR3\"");
+            CustomPropertyHelper.Set(s1, "FOO2", "\"BAR3\"", cp_type);
 
             var names1 = CustomPropertyHelper.GetNames(s1);
             Assert.AreEqual(2,names1.Count);
@@ -137,7 +144,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             Assert.AreEqual(1, names2.Count);
             Assert.IsTrue(names2.Contains("FOO2"));
 
-            CustomPropertyHelper.Set(s1, "FOO3", "\"BAR1\"");
+            CustomPropertyHelper.Set(s1, "FOO3", "\"BAR1\"", cp_type);
             var names3 = CustomPropertyHelper.GetNames(s1);
             Assert.AreEqual(2, names3.Count);
             Assert.IsTrue(names3.Contains("FOO3"));
@@ -161,12 +168,14 @@ namespace VisioAutomation_Tests.Core.Extensions
             var s3 = page1.DrawRectangle(0, 0, 2, 2);
             var s4 = page1.DrawRectangle(0, 0, 2, 2);
 
-            CustomPropertyHelper.Set(s1, "FOO1", "1");
-            CustomPropertyHelper.Set(s2, "FOO2", "2");
-            CustomPropertyHelper.Set(s2, "FOO3", "3");
-            CustomPropertyHelper.Set(s4, "FOO4", "4");
-            CustomPropertyHelper.Set(s4, "FOO5", "5");
-            CustomPropertyHelper.Set(s4, "FOO6", "6");
+            var cp_type = "0"; // 0 for string
+
+            CustomPropertyHelper.Set(s1, "FOO1", "1", cp_type);
+            CustomPropertyHelper.Set(s2, "FOO2", "2", cp_type);
+            CustomPropertyHelper.Set(s2, "FOO3", "3", cp_type);
+            CustomPropertyHelper.Set(s4, "FOO4", "4", cp_type);
+            CustomPropertyHelper.Set(s4, "FOO5", "5", cp_type);
+            CustomPropertyHelper.Set(s4, "FOO6", "6", cp_type);
 
             var shapes = new[] {s1, s2, s3, s4};
             var allprops = CustomPropertyHelper.GetCells(page1, shapes, CellValueType.Formula);
