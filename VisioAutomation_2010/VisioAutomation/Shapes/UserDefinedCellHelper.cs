@@ -41,6 +41,7 @@ namespace VisioAutomation.Shapes
             var cells = new UserDefinedCellCells();
             cells.Value = value;
             cells.Prompt = prompt;
+            EncodeValues(cells);
             Set(shape, name, cells);
         }
 
@@ -58,8 +59,6 @@ namespace VisioAutomation.Shapes
 
 
             UserDefinedCellHelper.CheckValidName(name);
-
-            EncodeValues(cells);
 
             if (UserDefinedCellHelper.Contains(shape, name))
             {
