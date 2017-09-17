@@ -62,8 +62,8 @@ namespace VisioAutomation.Shapes
 
             if (UserDefinedCellHelper.Contains(shape, name))
             {
+                // The user-defined cell already exists
                 string full_prop_name = UserDefinedCellHelper.GetRowName(name);
-
 
                 if (cells.Value.HasValue)
                 {
@@ -78,30 +78,32 @@ namespace VisioAutomation.Shapes
                     var cell = shape.CellsU[prompt_cell_name];
                     cell.FormulaU = cells.Prompt.Value;
                 }
-                return;
             }
-
-            // The row doesn't already exist
-            short row = shape.AddNamedRow(
-                UserDefinedCellHelper._userdefinedcell_section,
-                name,
-                (short)IVisio.VisRowIndices.visRowUser);
-
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-
-            if (cells.Value.HasValue)
+            else
             {
-                var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                writer.SetFormula(src, cells.Value.Value);
-            }
+                // The user-defined cell doesn't already exist
+                short row = shape.AddNamedRow(
+                    UserDefinedCellHelper._userdefinedcell_section,
+                    name,
+                    (short)IVisio.VisRowIndices.visRowUser);
 
-            if (cells.Prompt.HasValue)
-            {
-                var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                writer.SetFormula(src, cells.Prompt.Value);
-            }
+                var src_value = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
+                var src_prompt = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
 
-            writer.Commit(shape);
+                var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+
+                if (cells.Value.HasValue)
+                {
+                    writer.SetFormula(src_value, cells.Value.Value);
+                }
+
+                if (cells.Prompt.HasValue)
+                {
+                    writer.SetFormula(src_prompt, cells.Prompt.Value);
+                }
+
+                writer.Commit(shape);            
+            }
         }
 
         public static Dictionary<string, UserDefinedCellCells> GetDictionary(IVisio.Shape shape, ShapeSheet.CellValueType type)
