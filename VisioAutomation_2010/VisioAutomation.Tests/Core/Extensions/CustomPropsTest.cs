@@ -50,16 +50,16 @@ namespace VisioAutomation_Tests.Core.Extensions
             Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
             // Add the same one multiple times Custom Property
-            CustomPropertyHelper.Set(s1, "FOO1", "BAR1");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"");
             // Asset that now we have ONE CustomProperty
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             // Check that it is called FOO1
             Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
             // Try to SET the same property again many times
-            CustomPropertyHelper.Set(s1, "FOO1", "BAR2");
-            CustomPropertyHelper.Set(s1, "FOO1", "BAR3");
-            CustomPropertyHelper.Set(s1, "FOO1", "BAR4");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR2\"");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR3\"");
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR4\"");
 
             // Asset that now we have ONE CustomProperty
             Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
