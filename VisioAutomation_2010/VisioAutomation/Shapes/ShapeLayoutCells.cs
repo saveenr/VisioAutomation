@@ -109,7 +109,7 @@ namespace VisioAutomation.Shapes
                 this.Relationships = this.query.Columns.Add(SrcConstants.ShapeLayoutRelationships, nameof(this.Relationships));
             }
 
-            public override ShapeLayoutCells CellDataToCellGroup(Utilities.ArraySegment<string> row)
+            public override ShapeLayoutCells ToCellGroup(Utilities.ArraySegment<string> row)
             {
                 var cells = new ShapeLayoutCells();
                 cells.ConnectorFixedCode = row[this.ConnectorFixedCode];

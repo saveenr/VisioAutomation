@@ -59,10 +59,10 @@
 
         public static string EncodeValue(string text)
         {
-            return EncodeValue(text, false);
+            return EncodeValue(text, true);
         }
 
-        public static string EncodeValue(string text, bool noquote)
+        public static string EncodeValue(string text, bool quote)
         {
             // Some cells are very pick about values being quoted
             // This method is a reasonable way of getting values quoted smartly
@@ -94,11 +94,10 @@
             {
                 return text;
             }
-
-
+            
             // if the caller wants to force the content to a formula string
             // then do so: escape internal double quotes and then wrap in double quotes
-            if (!noquote)
+            if (quote)
             {
                 string str_quoted = text.Replace("\"", "\"\"");
                 str_quoted = string.Format("\"{0}\"", str_quoted);

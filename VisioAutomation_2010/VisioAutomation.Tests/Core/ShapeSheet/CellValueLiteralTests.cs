@@ -83,13 +83,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual("\"A\"\"", CellValueLiteral.EncodeValue("\"A\"\""));
             Assert.AreEqual("\"A\"\"\"", CellValueLiteral.EncodeValue("A\""));
 
-            Assert.AreEqual(null, CellValueLiteral.EncodeValue(null,true));
-            Assert.AreEqual("", CellValueLiteral.EncodeValue("", true));
-            Assert.AreEqual("=1", CellValueLiteral.EncodeValue("=1", true));
-            Assert.AreEqual("\"A\"", CellValueLiteral.EncodeValue("\"A\"", true));
-            Assert.AreEqual("A", CellValueLiteral.EncodeValue("A", true));
-            Assert.AreEqual("\"A\"\"", CellValueLiteral.EncodeValue("\"A\"\"",true));
-            Assert.AreEqual("A\"", CellValueLiteral.EncodeValue("A\"",true));
+            Assert.AreEqual(null, CellValueLiteral.EncodeValue(null,false));
+            Assert.AreEqual("", CellValueLiteral.EncodeValue("", false));
+            Assert.AreEqual("=1", CellValueLiteral.EncodeValue("=1", false));
+            Assert.AreEqual("\"A\"", CellValueLiteral.EncodeValue("\"A\"", false));
+            Assert.AreEqual("A", CellValueLiteral.EncodeValue("A", false));
+            Assert.AreEqual("\"A\"\"", CellValueLiteral.EncodeValue("\"A\"\"", false));
+            Assert.AreEqual("A\"", CellValueLiteral.EncodeValue("A\"", false));
         }
     }
 }

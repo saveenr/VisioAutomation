@@ -217,8 +217,8 @@ namespace VisioAutomation.Shapes
         public void EncodeValues()
         {
             // only quote the value when it is a string (no type specified or type equals zero)
-            bool noquote = (!(this.Type.Value == null || this.Type.Value == "0"));
-            this.Value = CellValueLiteral.EncodeValue(this.Value.Value, noquote);
+            bool quote = (this.Type.Value == null || this.Type.Value == "0");
+            this.Value = CellValueLiteral.EncodeValue(this.Value.Value, quote);
             this.Label = CellValueLiteral.EncodeValue(this.Label.Value);
             this.Format = CellValueLiteral.EncodeValue(this.Format.Value);
             this.Prompt = CellValueLiteral.EncodeValue(this.Prompt.Value);
