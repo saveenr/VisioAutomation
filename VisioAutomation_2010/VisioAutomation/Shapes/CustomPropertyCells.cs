@@ -104,13 +104,23 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static CustomPropertyCells Create(string value, CustomPropertyType type)
+        public CustomPropertyCells(string value, CustomPropertyType type)
         {
             var type_int = CustomPropertyTypeToInt(type);
-            var cp_cells = new CustomPropertyCells();
-            cp_cells.Value = value;
-            cp_cells.Type = type_int;
-            return cp_cells;
+            this.Value = value;
+            this.Type = type_int;
+        }
+
+        public CustomPropertyCells(CellValueLiteral value, CustomPropertyType type)
+        {
+            var type_int = CustomPropertyTypeToInt(type);
+            this.Value = value;
+            this.Type = type_int;
+        }
+        
+        public static CustomPropertyCells Create(CellValueLiteral value, CustomPropertyType type)
+        {
+            return new CustomPropertyCells(value.Value, type);
         }
 
         public static int CustomPropertyTypeToInt(CustomPropertyType type)
@@ -153,45 +163,53 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static CustomPropertyCells Create(string value)
+        public CustomPropertyCells(string value):
+            this(value, CustomPropertyType.String)
         {
-            return Create(value, CustomPropertyType.String);
         }
 
-        public static CustomPropertyCells Create(int value)
+        public CustomPropertyCells(int value) :
+            this(new CellValueLiteral(value), CustomPropertyType.Number)
         {
-            var cvl = new CellValueLiteral(value);
-            return Create(cvl.Value, CustomPropertyType.Number);
         }
 
-        public static CustomPropertyCells Create(double value)
+        public CustomPropertyCells(long value) :
+            this(new CellValueLiteral(value), CustomPropertyType.Number)
         {
-            var cvl = new CellValueLiteral(value);
-            return Create(cvl.Value, CustomPropertyType.Number);
         }
 
-        public static CustomPropertyCells Create(float value)
+        public CustomPropertyCells(short value) :
+            this(new CellValueLiteral(value), CustomPropertyType.Number)
         {
-            var cvl = new CellValueLiteral(value);
-            return Create(cvl.Value, CustomPropertyType.Number);
         }
 
-        public static CustomPropertyCells Create(bool value)
+        public CustomPropertyCells(float value) :
+            this(new CellValueLiteral(value), CustomPropertyType.Number)
         {
-            return Create(value ? "TRUE" : "FALSE", CustomPropertyType.Boolean);
         }
 
-        public static CustomPropertyCells Create(System.DateTime value)
+        public CustomPropertyCells(double value) :
+            this(new CellValueLiteral(value), CustomPropertyType.Number)
+        {
+        }
+
+        public CustomPropertyCells(bool value) :
+            this(new CellValueLiteral(value), CustomPropertyType.Number)
+        {
+        }
+        
+        public CustomPropertyCells(CellValueLiteral value):
+            this(value.Value)
+        {
+        }
+
+        public CustomPropertyCells(System.DateTime value)
         {
             var current_culture = System.Globalization.CultureInfo.CurrentCulture;
             string formatted_dt = value.ToString(current_culture);
             string _Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
-            return Create(_Value, CustomPropertyType.Date);
-        }
-
-        public static CustomPropertyCells Create(CellValueLiteral value)
-        {
-            return Create(value.Value, CustomPropertyType.String);
+            this.Value = _Value;
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Date);
         }
 
         public void EncodeValues()
@@ -203,6 +221,5 @@ namespace VisioAutomation.Shapes
             this.Format = CellValueLiteral.EncodeValue(this.Format.Value);
             this.Prompt = CellValueLiteral.EncodeValue(this.Prompt.Value);
         }
-
     }
 }

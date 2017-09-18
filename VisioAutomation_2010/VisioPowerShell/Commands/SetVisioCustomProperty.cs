@@ -144,31 +144,31 @@ namespace VisioPowerShell.Commands
         {
             if (value is string value_str)
             {
-                return CustomPropertyCells.Create(value_str);
+                return new CustomPropertyCells(value_str);
             }
             else if (value is int value_int)
             {
-                return CustomPropertyCells.Create(value_int);
+                return new CustomPropertyCells(value_int);
             }
             else if (value is double value_double)
             {
-                return CustomPropertyCells.Create(value_double);
+                return new CustomPropertyCells(value_double);
             }
             else if (value is float value_float)
             {
-                return CustomPropertyCells.Create(value_float);
+                return new CustomPropertyCells(value_float);
             }
             else if (value is bool value_bool)
             {
-                return CustomPropertyCells.Create(value_bool);
+                return new CustomPropertyCells(value_bool);
             }
             else if (value is System.DateTime value_datetime)
             {
-                return CustomPropertyCells.Create(value_datetime);
+                return new CustomPropertyCells(value_datetime);
             }
             else if (value is VisioAutomation.ShapeSheet.CellValueLiteral value_cvl)
             {
-                return CustomPropertyCells.Create(value_cvl);
+                return new CustomPropertyCells(value_cvl);
             }
 
             var value_type = value.GetType();
