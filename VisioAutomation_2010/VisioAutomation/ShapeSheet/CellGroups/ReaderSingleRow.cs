@@ -13,13 +13,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.query = new Query.CellQuery();
         }
 
-        public abstract TGroup CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row);
+        public abstract TGroup ToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row);
 
         public List<TGroup> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var data_for_shapes = this.query.GetCells(page, shapeids, type);
             var list = new List<TGroup>(shapeids.Count);
-            var objects = data_for_shapes.Select(d => this.CellDataToCellGroup(d.Cells));
+            var objects = data_for_shapes.Select(d => this.ToCellGroup(d.Cells));
             list.AddRange(objects);
             return list;
         }
@@ -27,7 +27,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public TGroup GetCells(IVisio.Shape shape, CellValueType type)
         {
             var data_for_shape = this.query.GetCells(shape, type);
-            var cells = this.CellDataToCellGroup(data_for_shape.Cells);
+            var cells = this.ToCellGroup(data_for_shape.Cells);
             return cells;
         }
     }
