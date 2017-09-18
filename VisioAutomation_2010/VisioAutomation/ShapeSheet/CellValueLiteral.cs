@@ -64,6 +64,17 @@
 
         public static string EncodeValue(string text, bool noquote)
         {
+            // Some cells are very pick about values being quoted
+            // This method is a reasonable way of getting values quoted smartly
+            // and avoids quoting multiple times
+
+            // Rules are simple:
+            // - passthrough null values
+            // - passthrough empty values
+            // - passthrough values that begin with = - it is assumed the such strings have been carefully crafter
+            // - passthrough values that begin with " - it is assumed the such strings are already correct
+            // - finally (of noqutoe==false) replace " with "" and surround with " the result
+
             if (text == null)
             {
                 return text;
