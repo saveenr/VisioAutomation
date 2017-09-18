@@ -115,46 +115,43 @@ namespace VisioAutomation.Shapes
 
         public static int CustomPropertyTypeToInt(CustomPropertyType type)
         {
-            int type_int = -1;
             if (type == CustomPropertyType.String)
             {
-                type_int = 0;
+                return 0;
             }
             else if (type == CustomPropertyType.FixedList)
             {
-                type_int = 1;
+                return 1;
             }
             else if (type == CustomPropertyType.Number)
             {
-                type_int = 2;
+                return 2;
             }
             else if (type == CustomPropertyType.Boolean)
             {
-                type_int = 3;
+                return 3;
             }
             else if (type == CustomPropertyType.VariableList)
             {
-                type_int = 4;
+                return 4;
             }
             else if (type == CustomPropertyType.Date)
             {
-                type_int = 5;
+                return 5;
             }
             else if (type == CustomPropertyType.Duration)
             {
-                type_int = 6;
+                return 6;
             }
             else if (type == CustomPropertyType.Currency)
             {
-                type_int = 7;
+                return 7;
             }
             else
             {
                 throw new System.ArgumentOutOfRangeException(nameof(type));
             }
-            return type_int;
         }
-
 
         public static CustomPropertyCells Create(string value)
         {
