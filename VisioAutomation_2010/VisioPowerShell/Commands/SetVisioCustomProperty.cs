@@ -1,51 +1,51 @@
 using System;
 using System.Collections;
-using System.Management.Automation;
+using SMA=System.Management.Automation;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioCustomProperty)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioCustomProperty)]
     public class SetVisioCustomProperty : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]
+        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]
         public Hashtable Hashtable{ get; set; }
         
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "NonHashTable")]
+        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "NonHashTable")]
         public string Name { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true, ParameterSetName = "NonHashTable")]
-        public string Value { get; set; }
+        [SMA.Parameter(Position = 1, Mandatory = true, ParameterSetName = "NonHashTable")]
+        public object Value { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public string Label { get; set; }
-
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public string Format { get; set; }
-
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public string Prompt { get; set; }
-
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
-        public int LangId = -1;
-
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
-        public int SortKey = -1;
-
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
         public int Type = 0;
 
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
+        public string Label { get; set; }
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
+        public string Format { get; set; }
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
+        public string Prompt { get; set; }
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        public int LangId = -1;
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        public int SortKey = -1;
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int Ask = -1;
 
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int Calendar = -1;
 
-        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int Invisible = -1;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
@@ -62,9 +62,15 @@ namespace VisioPowerShell.Commands
 
         private void SetFromParameters()
         {
-            var cp = new CustomPropertyCells();
+            // this will set .Value and automatically set
+            // .Type as needed.
+            var cp = CreateCustPropFromObject(this.Value);
 
-            cp.Value = this.Value;
+            // The user can override .Type if desired
+            if (this.Type >= 0)
+            {
+                cp.Type = this.Type;
+            }
 
             if (this.Label != null)
             {
@@ -89,11 +95,6 @@ namespace VisioPowerShell.Commands
             if (this.SortKey >= 0)
             {
                 cp.SortKey = this.SortKey;
-            }
-
-            if (this.Type >= 0)
-            {
-                cp.Type = this.Type;
             }
 
             if (this.Ask>= 0)
@@ -175,6 +176,5 @@ namespace VisioPowerShell.Commands
             string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
             throw new System.ArgumentException(msg);
         }
-
     }
 }
