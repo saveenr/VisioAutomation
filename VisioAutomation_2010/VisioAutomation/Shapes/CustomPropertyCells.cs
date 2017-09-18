@@ -163,44 +163,46 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public CustomPropertyCells(string value):
-            this(value, CustomPropertyType.String)
+        public CustomPropertyCells(string value)
         {
+            this.Value = value;
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
         }
 
-        public CustomPropertyCells(int value) :
-            this(new CellValueLiteral(value), CustomPropertyType.Number)
+        public CustomPropertyCells(int value)
         {
+            this.Value = value;
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
         }
 
-        public CustomPropertyCells(long value) :
-            this(new CellValueLiteral(value), CustomPropertyType.Number)
+        public CustomPropertyCells(long value)
         {
+            this.Value = value;
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
         }
 
-        public CustomPropertyCells(short value) :
-            this(new CellValueLiteral(value), CustomPropertyType.Number)
+        public CustomPropertyCells(float value)
         {
+            this.Value = value;
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
         }
 
-        public CustomPropertyCells(float value) :
-            this(new CellValueLiteral(value), CustomPropertyType.Number)
+        public CustomPropertyCells(double value)
         {
+            this.Value = value;
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
         }
 
-        public CustomPropertyCells(double value) :
-            this(new CellValueLiteral(value), CustomPropertyType.Number)
+        public CustomPropertyCells(bool value)
         {
+            this.Value = value;
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Boolean);
         }
 
-        public CustomPropertyCells(bool value) :
-            this(new CellValueLiteral(value), CustomPropertyType.Number)
+        public CustomPropertyCells(CellValueLiteral value)
         {
-        }
-        
-        public CustomPropertyCells(CellValueLiteral value):
-            this(value.Value)
-        {
+            this.Value = value;
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
         }
 
         public CustomPropertyCells(System.DateTime value)
