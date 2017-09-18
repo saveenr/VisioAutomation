@@ -104,14 +104,6 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static CustomPropertyCells Create(CellValueLiteral value, string type)
-        {
-            var cp_cells = new CustomPropertyCells();
-            cp_cells.Value = value;
-            cp_cells.Type = type;
-            return cp_cells;
-        }
-
         public static CustomPropertyCells Create(string value, CustomPropertyType type)
         {
             var type_int = CustomPropertyTypeToInt(type);
