@@ -54,11 +54,11 @@ namespace VisioAutomation.Pages
             }
 
             // Get the Cells from the Source
-            var query = new ShapeSheetQuery();
+            var query = new CellQuery();
             int i = 0;
             foreach (var src in page_srcs)
             {
-                query.AddCell(src,"Col"+i.ToString());
+                query.Columns.Add(src,"Col"+i.ToString());
                 i++;
             }
 
@@ -165,9 +165,9 @@ namespace VisioAutomation.Pages
 
         internal static Geometry.Size GetSize(IVisio.Page page)
         {
-            var query = new ShapeSheetQuery();
-            var col_height = query.AddCell(ShapeSheet.SrcConstants.PageHeight,nameof(ShapeSheet.SrcConstants.PageHeight));
-            var col_width = query.AddCell(ShapeSheet.SrcConstants.PageWidth,nameof(ShapeSheet.SrcConstants.PageWidth));
+            var query = new CellQuery();
+            var col_height = query.Columns.Add(ShapeSheet.SrcConstants.PageHeight,nameof(ShapeSheet.SrcConstants.PageHeight));
+            var col_width = query.Columns.Add(ShapeSheet.SrcConstants.PageWidth,nameof(ShapeSheet.SrcConstants.PageWidth));
 
             var results = query.GetResults<double>(page.PageSheet);
             double height = results.Cells[col_height];

@@ -1,5 +1,4 @@
 using System.Management.Automation;
-using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -24,15 +23,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            foreach (var kv in dic)
-            {
-                int shapeid = kv.Key.ID;
-                foreach (var udc in kv.Value)
-                {
-                    var udcell_vals = new UserDefinedCell(shapeid, udc.Name, udc.Value.Formula,udc.Prompt.Formula);
-                    this.WriteObject(udcell_vals);
-                }
-            }
+            this.WriteObject(dic);
         }
     }
 }

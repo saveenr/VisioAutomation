@@ -36,9 +36,9 @@ namespace VisioAutomationSamples
             xfrm.Height = string.Format("GUARD({0}!Height)", bkname); 
 
             var writer = new SidSrcWriter();
-            xfrm.SetFormulas(progress.ID16, writer);
-            background_fmt.SetFormulas(progress.ID16, writer);
-            progress_fmt.SetFormulas(progress.ID16, writer);
+            xfrm.SetFormulas(writer, progress.ID16);
+            background_fmt.SetFormulas(writer, progress.ID16);
+            progress_fmt.SetFormulas(writer, progress.ID16);
 
             writer.Commit(page_a);
 

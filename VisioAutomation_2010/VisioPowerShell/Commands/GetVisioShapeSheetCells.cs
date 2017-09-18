@@ -33,7 +33,7 @@ namespace VisioPowerShell.Commands
             this.WriteObject(dt);
         }
 
-        private VisioAutomation.ShapeSheet.Query.ShapeSheetQuery _CreateQuery(
+        private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
             VisioPowerShell.Models.NamedCellDictionary celldic, 
             IList<string> cells)
         {
@@ -45,16 +45,16 @@ namespace VisioPowerShell.Commands
                 throw new ArgumentException(msg);
             }
 
-            var query = new VisioAutomation.ShapeSheet.Query.ShapeSheetQuery();
+            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
 
             foreach (string cell in cells)
             {
                 foreach (var resolved_cellname in celldic.ExpandKeyWildcard(cell))
                 {
-                    if (!query.Cells.Contains(resolved_cellname))
+                    if (!query.Columns.Contains(resolved_cellname))
                     {
                         var resolved_src = celldic[resolved_cellname];
-                        query.AddCell(resolved_src, resolved_cellname);
+                        query.Columns.Add(resolved_src, resolved_cellname);
                     }
                 }
             }

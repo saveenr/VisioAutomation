@@ -1,44 +1,87 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
-    public class TextXFormCells : ShapeSheet.CellGroups.CellGroupSingleRow
+    public class TextXFormCells : CellGroupSingleRow
     {
-        public ShapeSheet.CellData Angle { get; set; }
-        public ShapeSheet.CellData Width { get; set; }
-        public ShapeSheet.CellData Height { get; set; }
-        public ShapeSheet.CellData PinX { get; set; }
-        public ShapeSheet.CellData PinY { get; set; }
-        public ShapeSheet.CellData LocPinX { get; set; }
-        public ShapeSheet.CellData LocPinY { get; set; }
+        public CellValueLiteral Angle { get; set; }
+        public CellValueLiteral Width { get; set; }
+        public CellValueLiteral Height { get; set; }
+        public CellValueLiteral PinX { get; set; }
+        public CellValueLiteral PinY { get; set; }
+        public CellValueLiteral LocPinX { get; set; }
+        public CellValueLiteral LocPinY { get; set; }
 
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormPinX, this.PinX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormPinY, this.PinY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormLocPinX, this.LocPinX.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormLocPinY, this.LocPinY.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormWidth, this.Width.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormHeight, this.Height.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.TextXFormAngle, this.Angle.Formula);
+                yield return SrcValuePair.Create(SrcConstants.TextXFormPinX, this.PinX);
+                yield return SrcValuePair.Create(SrcConstants.TextXFormPinY, this.PinY);
+                yield return SrcValuePair.Create(SrcConstants.TextXFormLocPinX, this.LocPinX);
+                yield return SrcValuePair.Create(SrcConstants.TextXFormLocPinY, this.LocPinY);
+                yield return SrcValuePair.Create(SrcConstants.TextXFormWidth, this.Width);
+                yield return SrcValuePair.Create(SrcConstants.TextXFormHeight, this.Height);
+                yield return SrcValuePair.Create(SrcConstants.TextXFormAngle, this.Angle);
             }
         }
 
-        public static List<TextXFormCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public static List<TextXFormCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var query = TextXFormCells.lazy_query.Value;
-            return query.GetCellGroups(page, shapeids);
+            var query = lazy_query.Value;
+            return query.GetCells(page, shapeids, type);
         }
 
-        public static TextXFormCells GetCells(Microsoft.Office.Interop.Visio.Shape shape)
+        public static TextXFormCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType type)
         {
-            var query = TextXFormCells.lazy_query.Value;
-            return query.GetCellGroup(shape);
+            var query = lazy_query.Value;
+            return query.GetCells(shape, type);
         }
 
         private static readonly System.Lazy<TextXFormCellsReader> lazy_query = new System.Lazy<TextXFormCellsReader>();
+
+
+        class TextXFormCellsReader : ReaderSingleRow<Text.TextXFormCells>
+        {
+            public CellColumn Width { get; set; }
+            public CellColumn Height { get; set; }
+            public CellColumn PinX { get; set; }
+            public CellColumn PinY { get; set; }
+            public CellColumn LocPinX { get; set; }
+            public CellColumn LocPinY { get; set; }
+            public CellColumn Angle { get; set; }
+
+            public TextXFormCellsReader()
+            {
+                this.PinX = this.query.Columns.Add(SrcConstants.TextXFormPinX, nameof(this.PinX));
+                this.PinY = this.query.Columns.Add(SrcConstants.TextXFormPinY, nameof(this.PinY));
+                this.LocPinX = this.query.Columns.Add(SrcConstants.TextXFormLocPinX, nameof(this.LocPinX));
+                this.LocPinY = this.query.Columns.Add(SrcConstants.TextXFormLocPinY, nameof(this.LocPinY));
+                this.Width = this.query.Columns.Add(SrcConstants.TextXFormWidth, nameof(this.Width));
+                this.Height = this.query.Columns.Add(SrcConstants.TextXFormHeight, nameof(this.Height));
+                this.Angle = this.query.Columns.Add(SrcConstants.TextXFormAngle, nameof(this.Angle));
+
+            }
+
+            public override Text.TextXFormCells CellDataToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            {
+                var cells = new Text.TextXFormCells();
+                cells.PinX = row[this.PinX];
+                cells.PinY = row[this.PinY];
+                cells.LocPinX = row[this.LocPinX];
+                cells.LocPinY = row[this.LocPinY];
+                cells.Width = row[this.Width];
+                cells.Height = row[this.Height];
+                cells.Angle = row[this.Angle];
+                return cells;
+            }
+        }
     }
 }

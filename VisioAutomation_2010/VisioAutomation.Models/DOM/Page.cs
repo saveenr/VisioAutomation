@@ -78,8 +78,8 @@ namespace VisioAutomation.Models.Dom
                 }
 
                 var writer = new SidSrcWriter();
-                this.PageFormatCells.SetFormulas((short)page_sheet.ID, writer);
-                this.PageLayoutCells.SetFormulas((short)page_sheet.ID, writer);
+                this.PageFormatCells.SetFormulas(writer, (short)page_sheet.ID);
+                this.PageLayoutCells.SetFormulas(writer, (short)page_sheet.ID);
                 writer.Commit(page);
                 
                 // Then render the shapes

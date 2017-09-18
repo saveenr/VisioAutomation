@@ -102,10 +102,10 @@ namespace VisioAutomation.Models.Documents.Forms
             var writer = new SidSrcWriter();
             foreach (var block in this.Blocks)
             {
-                block.FormatCells.SetFormulas((short)block.VisioShapeID,writer);
-                block.TextBlockCells.SetFormulas((short)block.VisioShapeID,writer);
-                block.ParagraphFormatCells.SetFormulas((short)block.VisioShapeID, writer, 0);
-                block.CharacterFormatCells.SetFormulas((short)block.VisioShapeID, writer, 0);
+                block.FormatCells.SetFormulas(writer, (short)block.VisioShapeID);
+                block.TextBlockCells.SetFormulas(writer, (short)block.VisioShapeID);
+                block.ParagraphFormatCells.SetFormulas(writer, (short)block.VisioShapeID, 0);
+                block.CharacterFormatCells.SetFormulas(writer, (short)block.VisioShapeID, 0);
             }
 
             writer.Commit(this._page);

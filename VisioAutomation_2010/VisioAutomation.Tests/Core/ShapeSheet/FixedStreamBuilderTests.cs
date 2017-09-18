@@ -15,8 +15,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             try
             {
-                var b1 = new VA.ShapeSheet.Streams.FixedSidSrcStreamBuilder(1);
-                var s1 = b1.ToStream();
+                var b1 = new VA.ShapeSheet.Streams.SidSrcStreamArrayBuilder(1);
+                var s1 = b1.ToStreamArray();
             }
             catch (System.ArgumentException e)
             {
@@ -28,9 +28,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 Assert.Fail("Did not catch expected exception");
             }
 
-            var b2 = new VA.ShapeSheet.Streams.FixedSrcStreamBuilder(1);
+            var b2 = new VA.ShapeSheet.Streams.SrcStreamArrayBuilder(1);
             b2.Add(new Src((short)0, (short)0, (short)0));
-            var s2 = b2.ToStream();
+            var s2 = b2.ToStreamArray();
         }
 
         [TestMethod]
@@ -40,8 +40,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             try
             {
-                var b1 = new VA.ShapeSheet.Streams.FixedSrcStreamBuilder(1);
-                var s1 = b1.ToStream();
+                var b1 = new VA.ShapeSheet.Streams.SrcStreamArrayBuilder(1);
+                var s1 = b1.ToStreamArray();
             }
             catch (System.ArgumentException e)
             {
@@ -53,11 +53,11 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 Assert.Fail("Did not catch expected exception");
             }
 
-            var b2 = new VA.ShapeSheet.Streams.FixedSidSrcStreamBuilder(1);
+            var b2 = new VA.ShapeSheet.Streams.SidSrcStreamArrayBuilder(1);
             var src = new Src((short)0, (short)0, (short)0);
             var sidsrc = new SidSrc((short)0, src);
             b2.Add(sidsrc);
-            var s2 = b2.ToStream();
+            var s2 = b2.ToStreamArray();
         }
 
     }

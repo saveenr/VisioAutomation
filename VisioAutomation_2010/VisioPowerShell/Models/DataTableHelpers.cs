@@ -6,19 +6,19 @@ namespace VisioPowerShell.Models
 {
     static class DataTableHelpers
     {
-        private static DataTable querytable_to_datatable<T>(ShapeSheetQuery cell_query, QueryOutputCollection<T> query_output)
+        private static DataTable querytable_to_datatable<T>(CellQuery cell_query, CellQueryOutputList<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
             dt.Columns.Add("ShapeID", typeof(int));
-            foreach (var col in cell_query.Cells)
+            foreach (var col in cell_query.Columns)
             {
                 dt.Columns.Add(col.Name, typeof(T));
             }
 
             // Then populate the rows of the datatable
             dt.BeginLoadData();
-            int colcount = cell_query.Cells.Count;
+            int colcount = cell_query.Columns.Count;
             var rowbuf = new object[colcount+1];
             for (int r = 0; r < query_output.Count; r++)
             {
@@ -38,7 +38,7 @@ namespace VisioPowerShell.Models
             return dt;
         }
 
-        public static DataTable QueryToDataTable(ShapeSheetQuery cell_query, bool getresults, ResultType result_type, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
+        public static DataTable QueryToDataTable(CellQuery cell_query, bool getresults, ResultType result_type, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
         {
             if (!getresults)
             {

@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -55,9 +56,9 @@ namespace VisioAutomation_Tests.Models
                                    "Decision");
             n0.Size = new VA.Geometry.Size(3, 2);
             n0.CustomProperties = new CustomPropertyDictionary();
-            n0.CustomProperties["p1"] = new CustomPropertyCells("v1");
-            n0.CustomProperties["p2"] = new CustomPropertyCells("v2");
-            n0.CustomProperties["p3"] = new CustomPropertyCells("v3");
+            n0.CustomProperties["p1"] = new CustomPropertyCells("\"v1\"");
+            n0.CustomProperties["p2"] = new CustomPropertyCells("\"v2\"");
+            n0.CustomProperties["p3"] = new CustomPropertyCells("\"v3\"");
 
             var options = new MsaglLayoutOptions();
             options.UseDynamicConnectors = true;
@@ -69,11 +70,11 @@ namespace VisioAutomation_Tests.Models
             d.Render(page1, options);
             
             Assert.IsNotNull(n0.VisioShape);
-            var props_dic = CustomPropertyHelper.Get(n0.VisioShape);
+            var props_dic = CustomPropertyHelper.GetCells(n0.VisioShape, CellValueType.Formula);
             Assert.IsTrue(props_dic.Count>=3);
-            Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Formula);
-            Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Formula);
-            Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Formula);
+            Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Value);
+            Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Value);
+            Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Value);
 
             page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 

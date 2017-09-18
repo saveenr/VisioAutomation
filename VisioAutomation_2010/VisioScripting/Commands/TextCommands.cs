@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -104,7 +105,7 @@ namespace VisioScripting.Commands
             var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this._client.Application.Get();
-            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids);
+            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids, CellValueType.Formula);
             return formats;
         }
 

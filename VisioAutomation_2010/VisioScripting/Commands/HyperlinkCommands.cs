@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -79,7 +80,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<HyperlinkCells>>();
             foreach (var shape in targets.Shapes)
             {
-                var hyperlinks = HyperlinkCells.GetCells(shape);
+                var hyperlinks = HyperlinkCells.GetCells(shape, CellValueType.Formula);
                 dic[shape] = hyperlinks;
             }
             return dic;

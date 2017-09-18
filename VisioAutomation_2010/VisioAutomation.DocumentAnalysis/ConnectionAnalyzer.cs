@@ -56,9 +56,9 @@ namespace VisioAutomation.DocumentAnalysis
             var src_beginarrow = ShapeSheet.SrcConstants.LineBeginArrow;
             var src_endarrow = ShapeSheet.SrcConstants.LineEndArrow;
 
-            var query = new ShapeSheetQuery();
-            var col_beginarrow = query.AddCell(src_beginarrow, nameof(ShapeSheet.SrcConstants.LineBeginArrow));
-            var col_endarrow = query.AddCell(src_endarrow, nameof(ShapeSheet.SrcConstants.LineEndArrow));
+            var query = new CellQuery();
+            var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(ShapeSheet.SrcConstants.LineBeginArrow));
+            var col_endarrow = query.Columns.Add(src_endarrow, nameof(ShapeSheet.SrcConstants.LineEndArrow));
 
             var arrow_table = query.GetResults<int>(page , connnector_ids);
             

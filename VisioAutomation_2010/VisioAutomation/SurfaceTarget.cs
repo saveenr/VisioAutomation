@@ -194,15 +194,6 @@ namespace VisioAutomation
             throw new System.ArgumentException("Unhandled Drawing Surface");
         }
 
-        public IVisio.Shape DrawOval(VisioAutomation.Geometry.Point center, double radius)
-        {
-            var lower_left = center.Add(-radius, -radius);
-            var upper_right = center.Add(radius, radius);
-            var rect = new VisioAutomation.Geometry.Rectangle(lower_left, upper_right);
-
-            return this.DrawOval(rect);
-        }
-
         public IVisio.Shape DrawRectangle(VisioAutomation.Geometry.Rectangle rect)
         {
             var shape = this.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);

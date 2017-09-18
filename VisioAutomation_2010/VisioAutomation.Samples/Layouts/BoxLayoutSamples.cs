@@ -177,7 +177,7 @@ namespace VisioAutomationSamples
             {
                 var domshapescol = new ShapeList();
 
-                for (int j = 0; j < fontnames.Count(); j++)
+                for (int j = 0; j < fontnames.Length; j++)
                 {
                     string fontname = fontnames[j];
                     double x0 = j*w;
@@ -192,7 +192,7 @@ namespace VisioAutomationSamples
                 }
 
 
-                for (int j = 0; j < fontnames.Count(); j++)
+                for (int j = 0; j < fontnames.Length; j++)
                 {
                     for (int i = 0; i < chunksize; i++)
                     {
@@ -236,7 +236,7 @@ namespace VisioAutomationSamples
             {
                 var domshapescol = new ShapeList();
 
-                for (int j = 0; j < fontnames.Count(); j++)
+                for (int j = 0; j < fontnames.Length; j++)
                 {
                     for (int i = 0; i < chunksize; i++)
                     {

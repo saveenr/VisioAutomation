@@ -21,19 +21,19 @@ namespace VisioScripting.Models
         private static CellColumn ColLocPinY;
         private static CellColumn ColWidth;
         private static CellColumn ColHeight;
-        private static ShapeSheetQuery query;
+        private static CellQuery query;
 
         public static List<ShapeXFormData> Get(Microsoft.Office.Interop.Visio.Page page, TargetShapeIDs target)
         {
             if (query == null)
             {
-                query = new ShapeSheetQuery();
-                ColPinX = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX));
-                ColPinY = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY));
-                ColLocPinX = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX));
-                ColLocPinY = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY));
-                ColWidth = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth));
-                ColHeight = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight));
+                query = new CellQuery();
+                ColPinX = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX));
+                ColPinY = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY));
+                ColLocPinX = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX));
+                ColLocPinY = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinY));
+                ColWidth = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth));
+                ColHeight = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight));
             }
 
             var results = query.GetResults<double>(page, target.ShapeIDs);

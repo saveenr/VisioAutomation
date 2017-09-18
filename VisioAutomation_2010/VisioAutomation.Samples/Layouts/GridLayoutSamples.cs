@@ -55,7 +55,7 @@ namespace VisioAutomationSamples
                 fmtcells.FillForeground = new VisioAutomation.Color.ColorRgb(color).ToFormula();
                 fmtcells.LinePattern = 0;
                 fmtcells.LineWeight = 0;
-                fmtcells.SetFormulas(shapeid, writer);
+                fmtcells.SetFormulas(writer, shapeid);
                 i++;
             }
 

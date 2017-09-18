@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Core.Shapes
 {
@@ -30,12 +31,12 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(2, HyperlinkHelper.GetCount(s1));
             
             // retrieve the control information
-            var hlinks= HyperlinkCells.GetCells(s1);
+            var hlinks= HyperlinkCells.GetCells(s1, CellValueType.Formula);
 
             // verify that the hyperlinks were set propery
             Assert.AreEqual(2, hlinks.Count);
-            Assert.AreEqual("\"http://microsoft.com\"", hlinks[0].Address.Formula);
-            Assert.AreEqual("\"http://google.com\"", hlinks[1].Address.Formula);
+            Assert.AreEqual("\"http://microsoft.com\"", hlinks[0].Address.Value);
+            Assert.AreEqual("\"http://google.com\"", hlinks[1].Address.Value);
 
             // Delete both hyperlinks
             HyperlinkHelper.Delete(s1, 0);

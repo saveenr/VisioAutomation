@@ -11,17 +11,31 @@
     public struct CellValueLiteral
     {
         private readonly string _stringval;
+        public string Value => this._stringval;
+        public bool HasValue => this._stringval != null;
+        public override string ToString() => this.Value;
 
-        private CellValueLiteral(string s)
+        public CellValueLiteral(string value)
         {
-            this._stringval = s;
+            this._stringval = value;
         }
 
-        public string Value => this._stringval;
+        public CellValueLiteral(int value)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            this._stringval = value.ToString(culture);
+        }
 
-        public bool HasValue => this._stringval != null;
+        public CellValueLiteral(double value)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            this._stringval = value.ToString(culture);
+        }
 
-        public override string ToString() => this.Value;
+        public CellValueLiteral(bool value)
+        {
+            this._stringval = value ? "TRUE" : "FALSE";
+        }
 
         public static implicit operator CellValueLiteral(string value)
         {
@@ -30,22 +44,71 @@
 
         public static implicit operator CellValueLiteral(int value)
         {
-            var culture = System.Globalization.CultureInfo.InvariantCulture;
-            var formula = value.ToString(culture);
-            return new CellValueLiteral(formula);
+            return new CellValueLiteral(value);
         }
 
         public static implicit operator CellValueLiteral(double value)
         {
-            var culture = System.Globalization.CultureInfo.InvariantCulture;
-            var formula = value.ToString(culture);
-            return new CellValueLiteral(formula);
+            return new CellValueLiteral(value);
         }
 
         public static implicit operator CellValueLiteral(bool value)
         {
-            var formula = value ? "1" : "0";
-            return new CellValueLiteral(formula);
+            return new CellValueLiteral(value);
         }
+
+        public static string EncodeValue(string text)
+        {
+            return EncodeValue(text, false);
+        }
+
+        public static string EncodeValue(string text, bool noquote)
+        {
+            // Some cells are very pick about values being quoted
+            // This method is a reasonable way of getting values quoted smartly
+            // and avoids quoting multiple times
+
+            // Rules are simple:
+            // - passthrough null values
+            // - passthrough empty values
+            // - passthrough values that begin with = - it is assumed the such strings have been carefully crafter
+            // - passthrough values that begin with " - it is assumed the such strings are already correct
+            // - finally (of noqutoe==false) replace " with "" and surround with " the result
+
+            if (text == null)
+            {
+                return text;
+            }
+
+            if (text.Length == 0)
+            {
+                return text;
+            }
+
+            if (text[0] == '\"')
+            {
+                return text;
+            }
+
+            if (text[0] == '=')
+            {
+                return text;
+            }
+
+
+            // if the caller wants to force the content to a formula string
+            // then do so: escape internal double quotes and then wrap in double quotes
+            if (!noquote)
+            {
+                string str_quoted = text.Replace("\"", "\"\"");
+                str_quoted = string.Format("\"{0}\"", str_quoted);
+                return str_quoted;
+            }
+
+            // For all other cases, just return the input string
+            return text;
+        }
+
+
     }
 }

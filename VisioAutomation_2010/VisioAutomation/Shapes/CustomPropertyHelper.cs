@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -68,13 +69,13 @@ namespace VisioAutomation.Shapes
         /// If there are no custom properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of custom properties</returns>
-        public static CustomPropertyDictionary Get(IVisio.Shape shape)
+        public static CustomPropertyDictionary GetCells(IVisio.Shape shape, CellValueType type)
         {
             var prop_names = CustomPropertyHelper.GetNames(shape);
             var dic = new CustomPropertyDictionary(prop_names.Count);
-            var cells = CustomPropertyCells.GetCells(shape);
+            var cells = CustomPropertyCells.GetCells(shape, type);
 
-            for (int prop_index = 0; prop_index < prop_names.Count(); prop_index++)
+            for (int prop_index = 0; prop_index < prop_names.Count; prop_index++)
             {
                 string prop_name = prop_names[prop_index];
                 dic[prop_name] = cells[prop_index];
@@ -83,7 +84,7 @@ namespace VisioAutomation.Shapes
             return dic;
         }
 
-        public static List<CustomPropertyDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static List<CustomPropertyDictionary> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, CellValueType type)
         {
             if (page == null)
             {
@@ -96,10 +97,18 @@ namespace VisioAutomation.Shapes
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
+            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids, type);
+            var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
+
+            return customprops_dic;
+        }
+
+        private static List<CustomPropertyDictionary> create_dic(IList<IVisio.Shape> shapes, List<int> shapeids, List<List<CustomPropertyCells>> customprops_per_shape)
+        {
             var customprops_dic = new List<CustomPropertyDictionary>(shapeids.Count);
-            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids);
-            
-            if (customprops_per_shape.Count!=shapeids.Count)
+
+
+            if (customprops_per_shape.Count != shapeids.Count)
             {
                 throw new InternalAssertionException();
             }
@@ -116,8 +125,8 @@ namespace VisioAutomation.Shapes
                 }
 
                 var dic = new CustomPropertyDictionary(prop_names.Count);
-                
-                for (int prop_index=0; prop_index< prop_names.Count(); prop_index++)
+
+                for (int prop_index = 0; prop_index < prop_names.Count; prop_index++)
                 {
                     string prop_name = prop_names[prop_index];
                     dic[prop_name] = customprops_for_shape[prop_index];
@@ -125,7 +134,6 @@ namespace VisioAutomation.Shapes
 
                 customprops_dic.Add(dic);
             }
-
             return customprops_dic;
         }
 
@@ -272,7 +280,7 @@ namespace VisioAutomation.Shapes
             shape.DeleteRow((short)IVisio.VisSectionIndices.visSectionProp, row);
         }
 
-        public static void Set(IVisio.Shape shape, string name, string val)
+        public static void Set(IVisio.Shape shape, string name, string value, int type)
         {
             if (shape == null)
             {
@@ -281,17 +289,18 @@ namespace VisioAutomation.Shapes
 
             CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
-            if (val == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(val));
+                throw new ArgumentNullException(nameof(value));
             }
 
             // create a new property
             var cp = new CustomPropertyCells();
-            cp.Value = val;
-            cp.Type = 0; // 0 = string
+            cp.Value = value;
+            cp.Type = type;
 
             CustomPropertyHelper.Set(shape, name, cp);
         }
+
     }
 }

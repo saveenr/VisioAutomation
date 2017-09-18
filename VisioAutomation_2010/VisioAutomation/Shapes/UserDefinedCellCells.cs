@@ -1,79 +1,70 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
+
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellCells : ShapeSheet.CellGroups.CellGroupMultiRow
+    public class UserDefinedCellCells : CellGroupMultiRow
     {
-        public string Name { get; set; }
-        public ShapeSheet.CellData Value { get; set; }
-        public ShapeSheet.CellData Prompt { get; set; }
+        public CellValueLiteral Value { get; set; }
+        public CellValueLiteral Prompt { get; set; }
 
         public UserDefinedCellCells()
         {
         }
 
-        public UserDefinedCellCells(string name)
-        {
-            UserDefinedCellHelper.CheckValidName(name);
-            this.Name = name;
-        }
-
-        public UserDefinedCellCells(string name, string value)
-        {
-            UserDefinedCellHelper.CheckValidName(name);
-
-            if (value == null)
-            {
-                throw new System.ArgumentNullException(nameof(value));
-            }
-
-            this.Name = name;
-            this.Value = value;
-        }
-
-        public UserDefinedCellCells(string name, string value, string prompt)
-        {
-            UserDefinedCellHelper.CheckValidName(name);
-
-            if (value == null)
-            {
-                throw new System.ArgumentNullException(nameof(value));
-            }
-            
-            this.Name = name;
-            this.Value = value;
-            this.Prompt = prompt;
-        }
-
-        public override IEnumerable<SrcFormulaPair> SrcFormulaPairs
+        public override IEnumerable<SrcValuePair> SrcValuePairs
         {
             get
             {
-                yield return this.newpair(ShapeSheet.SrcConstants.UserDefCellValue, this.Value.Formula);
-                yield return this.newpair(ShapeSheet.SrcConstants.UserDefCellPrompt, this.Prompt.Formula);
+                yield return SrcValuePair.Create(SrcConstants.UserDefCellValue, this.Value);
+                yield return SrcValuePair.Create(SrcConstants.UserDefCellPrompt, this.Prompt);
             }
         }
 
-        public override string ToString()
+        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            string s = string.Format("(Name={0},Value={1},Prompt={2})", this.Name, this.Value, this.Prompt);
-            return s;
+            var query = lazy_query.Value;
+            return query.GetCells(page, shapeids, type);
         }
 
-        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
-            var query = UserDefinedCellCells.lazy_query.Value;
-            return query.GetCellGroups(page, shapeids);
-        }
-
-        public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape)
-        {
-            var query = UserDefinedCellCells.lazy_query.Value;
-            return query.GetCellGroups(shape);
+            var query = lazy_query.Value;
+            return query.GetCells(shape, type);
         }
 
         private static readonly System.Lazy<UserDefinedCellCellsReader> lazy_query = new System.Lazy<UserDefinedCellCellsReader>();
+
+        public void EncodeValues()
+        {
+            this.Value = CellValueLiteral.EncodeValue(this.Value.Value);
+            this.Prompt = CellValueLiteral.EncodeValue(this.Prompt.Value);
+        }
+
+
+        class UserDefinedCellCellsReader : ReaderMultiRow<UserDefinedCellCells>
+        {
+            public SectionQueryColumn Value { get; set; }
+            public SectionQueryColumn Prompt { get; set; }
+
+            public UserDefinedCellCellsReader()
+            {
+                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
+                this.Value = sec.Columns.Add(SrcConstants.UserDefCellValue, nameof(this.Value));
+                this.Prompt = sec.Columns.Add(SrcConstants.UserDefCellPrompt, nameof(this.Prompt));
+            }
+
+            public override UserDefinedCellCells ToCellGroup(Utilities.ArraySegment<string> row)
+            {
+                var cells = new UserDefinedCellCells();
+                cells.Value = row[this.Value];
+                cells.Prompt = row[this.Prompt];
+                return cells;
+            }
+        }
     }
 }

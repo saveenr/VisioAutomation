@@ -50,9 +50,9 @@ namespace VisioPowerShell.Commands
 
             hlink.SubAddress = this.SubAddress;
 
-            hlink.Default = Convert.BoolToFormula(this.Default);
-            hlink.NewWindow = Convert.BoolToFormula(this.NewWindow);
-            hlink.Invisible = Convert.BoolToFormula(this.Invisible);
+            hlink.Default = this.Default;
+            hlink.NewWindow = this.NewWindow;
+            hlink.Invisible = this.Invisible;
 
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
             this.Client.Hyperlink.Add(targets, hlink);

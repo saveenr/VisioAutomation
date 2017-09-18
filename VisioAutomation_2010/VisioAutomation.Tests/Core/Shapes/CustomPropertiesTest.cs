@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Core.Shapes
 {
@@ -28,41 +29,44 @@ namespace VisioAutomation_Tests.Core.Shapes
             s1.Text = "Checking for Custom Properties";
 
             // A new rectangle should have zero props
-            var c0 = CustomPropertyHelper.Get(s1);
+            var c0 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
             Assert.AreEqual(0,c0.Count);
 
+
+            int cp_type = 0; // 0 for string
+            
             // Set one property
             // Notice that the properties some back double-quoted
-            CustomPropertyHelper.Set(s1,"PROP1","VAL1");
-            var c1 = CustomPropertyHelper.Get(s1);
+            CustomPropertyHelper.Set(s1,"PROP1","\"VAL1\"", cp_type);
+            var c1 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
             Assert.AreEqual(1, c1.Count);
             Assert.IsTrue(c1.ContainsKey("PROP1"));
-            Assert.AreEqual("\"VAL1\"",c1["PROP1"].Value.Formula);
+            Assert.AreEqual("\"VAL1\"",c1["PROP1"].Value.Value);
 
             // Add another property
-            CustomPropertyHelper.Set(s1, "PROP2", "VAL 2");
-            var c2 = CustomPropertyHelper.Get(s1);
+            CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2\"", cp_type);
+            var c2 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
             Assert.AreEqual(2, c2.Count);
             Assert.IsTrue(c2.ContainsKey("PROP1"));
-            Assert.AreEqual("\"VAL1\"", c2["PROP1"].Value.Formula);
+            Assert.AreEqual("\"VAL1\"", c2["PROP1"].Value.Value);
             Assert.IsTrue(c2.ContainsKey("PROP2"));
-            Assert.AreEqual("\"VAL 2\"", c2["PROP2"].Value.Formula);
+            Assert.AreEqual("\"VAL 2\"", c2["PROP2"].Value.Value);
 
             // Modify the value of the second property
-            CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"");
-            var c3 = CustomPropertyHelper.Get(s1);
+            CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"", cp_type);
+            var c3 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
             Assert.AreEqual(2, c3.Count);
             Assert.IsTrue(c3.ContainsKey("PROP1"));
-            Assert.AreEqual("\"VAL1\"", c3["PROP1"].Value.Formula);
+            Assert.AreEqual("\"VAL1\"", c3["PROP1"].Value.Value);
             Assert.IsTrue(c3.ContainsKey("PROP2"));
-            Assert.AreEqual("\"VAL 2 MOD\"", c3["PROP2"].Value.Formula);
+            Assert.AreEqual("\"VAL 2 MOD\"", c3["PROP2"].Value.Value);
             
             // Now delete all the custom properties
             foreach (string name in c3.Keys)
             {
                 CustomPropertyHelper.Delete(s1,name);
             }
-            var c4 = CustomPropertyHelper.Get(s1);
+            var c4 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
             Assert.AreEqual(0, c4.Count);
 
             var app = this.GetVisioApplication();
@@ -85,61 +89,61 @@ namespace VisioAutomation_Tests.Core.Shapes
             var cp1 = new CustomPropertyCells();
             cp1.Ask = "1";
             cp1.Calendar = "0";
-            cp1.Format= "1";
+            cp1.Format= "\"1\"";
             cp1.Invisible = "0";
-            cp1.Label= "1";
+            cp1.Label= "\"1\"";
             cp1.LangID= "0";
-            cp1.Prompt= "1";
+            cp1.Prompt= "\"1\"";
             cp1.SortKey= "0";
-            cp1.Type= "0";
+            cp1.Type= CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.String);
             cp1.Value= "1";
 
             CustomPropertyHelper.Set(s1, "PROP1", cp1);
 
-            var props1 = CustomPropertyHelper.Get(s1);
+            var props1 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
 
             var cp2 = props1["PROP1"];
-            Assert.AreEqual("TRUE", cp2.Ask.Formula);
-            Assert.AreEqual("0", cp2.Calendar.Formula);
-            Assert.AreEqual("\"1\"", cp2.Format.Formula);
-            Assert.AreEqual("FALSE", cp2.Invisible.Formula);
-            Assert.AreEqual("\"1\"", cp2.Label.Formula);
+            Assert.AreEqual("TRUE", cp2.Ask.Value);
+            Assert.AreEqual("0", cp2.Calendar.Value);
+            Assert.AreEqual("\"1\"", cp2.Format.Value);
+            Assert.AreEqual("FALSE", cp2.Invisible.Value);
+            Assert.AreEqual("\"1\"", cp2.Label.Value);
 
-            Assert.AreEqual("0", cp2.LangID.Formula);
-            Assert.AreEqual("\"1\"", cp2.Prompt.Formula);
-            Assert.AreEqual("0", cp2.SortKey.Formula);
-            Assert.AreEqual("0", cp2.Type.Formula);
+            Assert.AreEqual("0", cp2.LangID.Value);
+            Assert.AreEqual("\"1\"", cp2.Prompt.Value);
+            Assert.AreEqual("0", cp2.SortKey.Value);
+            Assert.AreEqual("0", cp2.Type.Value);
 
-            Assert.AreEqual("\"1\"", cp2.Value.Formula);
+            Assert.AreEqual("1", cp2.Value.Value);
 
             var cp3 = new CustomPropertyCells();
             cp3.Ask = "0";
             cp3.Calendar = "2";
-            cp3.Format = "0";
+            cp3.Format = "\"0\"";
             cp3.Invisible = "TRUE";
-            cp3.Label = "3";
+            cp3.Label = "\"3\"";
             cp3.LangID = "2";
-            cp3.Prompt = "3";
+            cp3.Prompt = "\"3\"";
             cp3.SortKey = "2";
-            cp3.Type = "3";
+            cp3.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Boolean);
             cp3.Value = "2";
 
             CustomPropertyHelper.Set(s1,"PROP1",cp3);
-            var props2 = CustomPropertyHelper.Get(s1);
+            var props2 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
 
             var cp4 = props2["PROP1"];
-            Assert.AreEqual("FALSE", cp4.Ask.Formula);
-            Assert.AreEqual("2", cp4.Calendar.Formula);
-            Assert.AreEqual("\"0\"", cp4.Format.Formula);
-            Assert.AreEqual("TRUE", cp4.Invisible.Formula);
-            Assert.AreEqual("\"3\"", cp4.Label.Formula);
+            Assert.AreEqual("FALSE", cp4.Ask.Value);
+            Assert.AreEqual("2", cp4.Calendar.Value);
+            Assert.AreEqual("\"0\"", cp4.Format.Value);
+            Assert.AreEqual("TRUE", cp4.Invisible.Value);
+            Assert.AreEqual("\"3\"", cp4.Label.Value);
                                    
-            Assert.AreEqual("2", cp4.LangID.Formula);
-            Assert.AreEqual("\"3\"", cp4.Prompt.Formula);
-            Assert.AreEqual("2", cp4.SortKey.Formula);
-            Assert.AreEqual("3", cp4.Type.Formula);
+            Assert.AreEqual("2", cp4.LangID.Value);
+            Assert.AreEqual("\"3\"", cp4.Prompt.Value);
+            Assert.AreEqual("2", cp4.SortKey.Value);
+            Assert.AreEqual("3", cp4.Type.Value);
                                    
-            Assert.AreEqual("2", cp4.Value.Formula);
+            Assert.AreEqual("2", cp4.Value.Value);
 
             var app = this.GetVisioApplication();
             var doc = app.ActiveDocument;

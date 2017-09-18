@@ -60,7 +60,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, prop_dic0[s3].Count);
 
             var cp = new CustomPropertyCells();
-            cp.Value = "BAR";
+            cp.Value = "\"BAR\"";
             client.CustomProperty.Set(targets, "FOO",cp);
 
             var prop_dic1 = client.CustomProperty.Get(targets);
@@ -72,9 +72,9 @@ namespace VisioAutomation_Tests.Scripting
             var cp1 = prop_dic1[s1]["FOO"];
             var cp2 = prop_dic1[s2]["FOO"];
             var cp3 = prop_dic1[s3]["FOO"];
-            Assert.AreEqual("\"BAR\"", cp1.Value.Formula);
-            Assert.AreEqual("\"BAR\"", cp2.Value.Formula);
-            Assert.AreEqual("\"BAR\"", cp3.Value.Formula);
+            Assert.AreEqual("\"BAR\"", cp1.Value.Value);
+            Assert.AreEqual("\"BAR\"", cp2.Value.Value);
+            Assert.AreEqual("\"BAR\"", cp3.Value.Value);
             
 
             var hasprops0 = client.CustomProperty.Contains(targets,"FOO");

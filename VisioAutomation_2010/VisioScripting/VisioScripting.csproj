@@ -98,6 +98,7 @@
     <Compile Include="Extensions\XmlLinqExtensions.cs" />
     <Compile Include="Builders\OrgChartBuilder.cs" />
     <Compile Include="Models\PageDirection.cs" />
+    <Compile Include="Models\UserDefinedCell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ShapeRelativePosition.cs" />
     <Compile Include="Models\SnapCornerPosition.cs" />

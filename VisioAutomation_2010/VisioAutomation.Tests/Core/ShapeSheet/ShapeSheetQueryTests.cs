@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -13,19 +11,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
     [TestClass]
     public class ShapeSheetQueryTests : VisioAutomationTest
     {
-        public static VA.ShapeSheet.Src cell_fg = VA.ShapeSheet.SrcConstants.FillForeground;
-        public static VA.ShapeSheet.Src cell_bg = VA.ShapeSheet.SrcConstants.FillBackground;
-        public static VA.ShapeSheet.Src cell_pat = VA.ShapeSheet.SrcConstants.FillPattern;
-
         [TestMethod]
         public void ShapeSheet_Query_SectionCells_have_names()
         {
-            var query = new ShapeSheetQuery();
+            var query = new VA.ShapeSheet.Query.SectionsQuery();
 
-            var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
+            var sec_char = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character", sec_char.Name);
 
-            var sec_obj = query.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+            var sec_obj = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
             Assert.AreEqual("Object", sec_obj.Name);
 
         }
@@ -52,19 +46,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // now retrieve the formulas with GetFormulas
 
-            var src_fg = VA.ShapeSheet.SrcConstants.FillForeground;
-            var src_bg = VA.ShapeSheet.SrcConstants.FillBackground;
-            var src_filpat = VA.ShapeSheet.SrcConstants.FillPattern;
-
-            var query = new ShapeSheetQuery();
-            var col_fg = query.AddCell(src_fg, "FillForegnd");
-            var col_bg = query.AddCell(src_bg, "FillBkgnd");
-            var col_filpat = query.AddCell(src_filpat, "FillPattern");
-            var sec_char = query.AddSubQuery(IVisio.VisSectionIndices.visSectionCharacter);
-            Assert.AreEqual("Character",sec_char.Name);
-            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharCase, "CharCase");
-            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharColor, "CharColor");
-            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SrcConstants.CharColorTransparency, "CharColorTrans");
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_fg = query.Columns.Add(SrcConstants.FillForeground, nameof(SrcConstants.FillForeground));
+            var col_bg = query.Columns.Add(SrcConstants.FillBackground, nameof(SrcConstants.FillBackground));
+            var col_filpat = query.Columns.Add(SrcConstants.FillPattern, nameof(SrcConstants.FillPattern));
 
             var shapeids = new[] {s1_id};
 
@@ -114,16 +99,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             bg_cell.ResultIU = 3.0; //green
             pat_cell.ResultIU = 40.0;
 
-            var src_fg = VA.ShapeSheet.SrcConstants.FillForeground;
-            var src_bg = VA.ShapeSheet.SrcConstants.FillBackground;
-            var src_filpat = VA.ShapeSheet.SrcConstants.FillPattern;
-
             // now retrieve the formulas with GetFormulas
 
-            var query = new ShapeSheetQuery();
-            var col_fg = query.AddCell(src_fg, "FillForegnd");
-            var col_bg = query.AddCell(src_bg, "FillBkgnd");
-            var col_filpat = query.AddCell(src_filpat, "FillPattern");
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_fg = query.Columns.Add(SrcConstants.FillForeground, nameof(SrcConstants.FillForeground));
+            var col_bg = query.Columns.Add(SrcConstants.FillBackground, nameof(SrcConstants.FillBackground));
+            var col_filpat = query.Columns.Add(SrcConstants.FillPattern, nameof(SrcConstants.FillPattern));
 
             var shapeids = new[] {s1_id};
 
@@ -165,22 +146,25 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s3 = page1.DrawRectangle(3, 1, 4, 2);
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
-            CustomPropertyHelper.Set(s1, "S1P1", "1");
-            CustomPropertyHelper.Set(s2, "S2P1", "2");
-            CustomPropertyHelper.Set(s2, "S2P2", "3");
+            int cp_type = 0; // 0 for string
+
+            VA.Shapes.CustomPropertyHelper.Set(s1, "S1P1", "\"1\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s2, "S2P1", "\"2\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s2, "S2P2", "\"3\"", cp_type);
             //set nothing for s3
-            CustomPropertyHelper.Set(s4, "S3P1", "4");
-            CustomPropertyHelper.Set(s4, "S3P2", "5");
-            CustomPropertyHelper.Set(s4, "S3P3", "6");
+            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P1", "\"4\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P2", "\"5\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s4, "S3P3", "\"6\"", cp_type);
 
-            var query = new ShapeSheetQuery();
+            var query = new VA.ShapeSheet.Query.SectionsQuery();
 
-            var prop_sec = query.AddSubQuery(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.AddCell(VA.ShapeSheet.SrcConstants.CustomPropValue,"Value");
+            var prop_sec = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
+            var value_col = prop_sec.Columns.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var data = query.GetFormulasAndResults(page1, shapeids);
+            var data = query.GetFormulas(page1, shapeids);
+            var data2 = query.GetResults<string>(page1, shapeids);
 
             Assert.AreEqual(4, data.Count);
             Assert.AreEqual(1, data[0].Sections[prop_sec].Rows.Count);
@@ -188,20 +172,20 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual(0, data[2].Sections[prop_sec].Rows.Count);
             Assert.AreEqual(3, data[3].Sections[prop_sec].Rows.Count);
 
-            Assert.AreEqual("\"1\"", data[0].Sections[prop_sec].Rows[0].Cells[0].Formula);
-            Assert.AreEqual("\"2\"", data[1].Sections[prop_sec].Rows[0].Cells[0].Formula);
-            Assert.AreEqual("\"3\"", data[1].Sections[prop_sec].Rows[1].Cells[0].Formula);
-            Assert.AreEqual("\"4\"", data[3].Sections[prop_sec].Rows[0].Cells[0].Formula);
-            Assert.AreEqual("\"5\"", data[3].Sections[prop_sec].Rows[1].Cells[0].Formula);
-            Assert.AreEqual("\"6\"", data[3].Sections[prop_sec].Rows[2].Cells[0].Formula);
+            Assert.AreEqual("\"1\"", data[0].Sections[prop_sec].Rows[0].Cells[0]);
+            Assert.AreEqual("\"2\"", data[1].Sections[prop_sec].Rows[0].Cells[0]);
+            Assert.AreEqual("\"3\"", data[1].Sections[prop_sec].Rows[1].Cells[0]);
+            Assert.AreEqual("\"4\"", data[3].Sections[prop_sec].Rows[0].Cells[0]);
+            Assert.AreEqual("\"5\"", data[3].Sections[prop_sec].Rows[1].Cells[0]);
+            Assert.AreEqual("\"6\"", data[3].Sections[prop_sec].Rows[2].Cells[0]);
 
 
-            Assert.AreEqual( "1", data[0].Sections[prop_sec].Rows[0].Cells[0].Result);
-            Assert.AreEqual( "2", data[1].Sections[prop_sec].Rows[0].Cells[0].Result);
-            Assert.AreEqual( "3", data[1].Sections[prop_sec].Rows[1].Cells[0].Result);
-            Assert.AreEqual( "4", data[3].Sections[prop_sec].Rows[0].Cells[0].Result);
-            Assert.AreEqual( "5", data[3].Sections[prop_sec].Rows[1].Cells[0].Result);
-            Assert.AreEqual( "6", data[3].Sections[prop_sec].Rows[2].Cells[0].Result);
+            Assert.AreEqual( "1", data2[0].Sections[prop_sec].Rows[0].Cells[0]);
+            Assert.AreEqual( "2", data2[1].Sections[prop_sec].Rows[0].Cells[0]);
+            Assert.AreEqual( "3", data2[1].Sections[prop_sec].Rows[1].Cells[0]);
+            Assert.AreEqual( "4", data2[3].Sections[prop_sec].Rows[0].Cells[0]);
+            Assert.AreEqual( "5", data2[3].Sections[prop_sec].Rows[1].Cells[0]);
+            Assert.AreEqual( "6", data2[3].Sections[prop_sec].Rows[2].Cells[0]);
 
             page1.Delete(0);
         }
@@ -221,9 +205,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             Assert.AreEqual(3, page1.Shapes.Count);
 
-            var query = new ShapeSheetQuery();
-            var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
-            var col_piny = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinY, "PinY");
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_pinx = query.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+            var col_piny = query.Columns.Add(SrcConstants.XFormPinY, nameof(SrcConstants.XFormPinY));
 
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
@@ -245,7 +229,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             for (int row = 0; row < data_results.Count; row++)
             {
-                for (int col = 0; col < query.Cells.Count; col++)
+                for (int col = 0; col < query.Columns.Count; col++)
                 {
                     Assert.AreEqual(expected_formulas[row,col], data_formulas[row].Cells[col]);
                     Assert.AreEqual(expected_results[row,col], data_results[row].Cells[col]);
@@ -273,9 +257,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             Assert.AreEqual(5, page1.Shapes.Count);
 
-            var query = new ShapeSheetQuery();
-            var col_pinx = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
-            var col_piny = query.AddCell(VA.ShapeSheet.SrcConstants.XFormPinY, "PinY");
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_pinx = query.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+            var col_piny = query.Columns.Add(SrcConstants.XFormPinY, nameof(SrcConstants.XFormPinY));
 
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
@@ -297,7 +281,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             for (int row = 0; row < data_results.Count; row++)
             {
-                for (int col = 0; col < query.Cells.Count; col++)
+                for (int col = 0; col < query.Columns.Count; col++)
                 {
                     Assert.AreEqual(expected_formulas[row, col], data_formulas[row].Cells[col]);
                     Assert.AreEqual(expected_results[row, col], data_results[row].Cells[col]);
@@ -330,21 +314,21 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Try to retrieve the control cells rows for each shape, every shape should return zero rows
             foreach (var s in shapes)
             {
-                var r1 = ControlCells.GetCells(s);
+                var r1 = VA.Shapes.ControlCells.GetCells(s, CellValueType.Formula);
                 Assert.AreEqual(0,r1.Count);
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
-            var r2 = ControlCells.GetCells(page1, shapeids);
-            Assert.AreEqual(shapes.Count(),r2.Count);
-            for (int i = 0; i < shapes.Count();i++)
+            var r2 = VA.Shapes.ControlCells.GetCells(page1, shapeids, CellValueType.Formula);
+            Assert.AreEqual(shapes.Length,r2.Count);
+            for (int i = 0; i < shapes.Length;i++)
             {
                 Assert.AreEqual(0,r2[i].Count);
             }
 
             // Add a Controls row to shape2
-            var cc = new ControlCells();
-            ControlHelper.Add(s2, cc);
+            var cc = new VA.Shapes.ControlCells();
+            VA.Shapes.ControlHelper.Add(s2, cc);
 
             // Now verify that none of the shapes *except s2* have the controls section locally or otherwise
             foreach (var s in shapes)
@@ -366,20 +350,20 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 if (s != s2)
                 {
-                    var r1 = ControlCells.GetCells(s);
+                    var r1 = VA.Shapes.ControlCells.GetCells(s, CellValueType.Formula);
                     Assert.AreEqual(0, r1.Count);
                 }
                 else
                 {
-                    var r1 = ControlCells.GetCells(s);
+                    var r1 = VA.Shapes.ControlCells.GetCells(s, CellValueType.Formula);
                     Assert.AreEqual(1, r1.Count);
                 }
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
-            var r3 = ControlCells.GetCells(page1, shapeids);
-            Assert.AreEqual(shapes.Count(), r3.Count);
-            for (int i = 0; i < shapes.Count(); i++)
+            var r3 = VA.Shapes.ControlCells.GetCells(page1, shapeids, CellValueType.Formula);
+            Assert.AreEqual(shapes.Length, r3.Count);
+            for (int i = 0; i < shapes.Length; i++)
             {
                 if (shapes[i] != s2)
                 {
@@ -429,85 +413,16 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         }
 
         [TestMethod]
-        public void ShapeSheet_Query_Demo_AllCellsAndSections()
-        {
-            // Verifies that  "complex" query can be run. This test case constructs
-            // a query that goes against event known cell and section. Importantly, the
-            // sections that support multiple rows are retrieved via subqueries
-            //
-            // NOTE: This test only verifies that the query will succeed. It doesn't
-            // validate the values that are retrieved
-
-            var doc1 = this.GetNewDoc();
-            var page1 = doc1.Pages[1];
-            VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
-
-            // draw simple shapes
-            var s1 = page1.DrawRectangle(0,0,1,1);
-            var s2 = page1.DrawRectangle(2,2,3,3);
-
-            var query = create_query_for_all_cells_and_sections();
-
-            var formulas1 = query.GetFormulas(s1);
-            var formulas2 = query.GetFormulas(page1, new [] {s1.ID,s2.ID});
-            var results1 = query.GetResults<double>(s1);
-            var results2 = query.GetResults<double>(page1, new[] { s1.ID, s2.ID });
-
-            doc1.Close(true);
-        }
-
-        private ShapeSheetQuery create_query_for_all_cells_and_sections()
-        {
-            var query = new ShapeSheetQuery();
-
-            // Dictionary of Cell Names to Srcs (excluding invalid sections)
-            var name_to_src = GetSrcDictionary();
-            name_to_src = name_to_src.Where(pair => !section_is_skippable(pair.Value))
-                .ToDictionary(pair => pair.Key, pair => pair.Value);
-
-            // Create a dictionary of the subqueries for each section, this
-            // will be reused as fill in the query
-            var unique_section_ids = name_to_src.Select(pair => pair.Value).Select(src => src.Section).Distinct().ToList();
-            var section_to_subquery = new Dictionary<short, SubQuery>(unique_section_ids.Count);
-            foreach (short section_id in unique_section_ids.Where(i=>i!=(short)IVisio.VisSectionIndices.visSectionObject))
-            {
-                    section_to_subquery[section_id] = query.AddSubQuery((IVisio.VisSectionIndices)section_id);
-            }
-
-            // Now for each src add it as a top level cell, or as a cell in 
-            // a subquery depending on its section index
-            foreach (var kv in name_to_src)
-            {
-                var name = kv.Key;
-                var src = kv.Value;
-
-                if (src.Section == (short) IVisio.VisSectionIndices.visSectionObject)
-                {
-                    query.AddCell(src, name);
-                }
-                else
-                {
-                    // the subquery will always be in the dictionary
-                    // because the dictionary was populated in a previous
-                    // step
-                    var subquery = section_to_subquery[src.Section];
-                    subquery.AddCell(src, name);
-                }
-            }
-            return query;
-        }
-
-        [TestMethod]
         public void ShapeSheet_Query_TestDuplicates()
         {
             // Ensure that duplicate cells are caught
-            var q1 = new ShapeSheetQuery();
-            q1.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+            var q1 = new VA.ShapeSheet.Query.CellQuery();
+            q1.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
 
             bool caught_exc1 = false;
             try
             {
-                q1.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+                q1.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             }
             catch (System.ArgumentException)
             {
@@ -518,13 +433,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that duplicate sections are caught
 
-            var q2 = new ShapeSheetQuery();
-            q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+            var q2 = new VA.ShapeSheet.Query.SectionsQuery();
+            q2.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
             try
             {
-                q2.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
+                q2.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
             }
             catch (System.ArgumentException)
             {
@@ -534,13 +449,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.IsTrue(caught_exc2);
 
             // Ensure that Duplicates in Section Queries Are caught - 
-            var q3 = new ShapeSheetQuery();
-            var sec = q3.AddSubQuery(IVisio.VisSectionIndices.visSectionObject);
-            sec.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX,"PinX");
+            var q3 = new VA.ShapeSheet.Query.SectionsQuery();
+            var sec = q3.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
+            sec.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             bool caught_exc3 = false;
             try
             {
-                sec.AddCell(VA.ShapeSheet.SrcConstants.XFormPinX, "PinX");
+                sec.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             }
             catch (System.ArgumentException)
             {

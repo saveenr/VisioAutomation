@@ -2,13 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
     public static class UserDefinedCellHelper
     {
-        private static readonly short _userdefinedcell_section = ShapeSheet.SrcConstants.UserDefCellPrompt.Section;
+        private static readonly short _udcell_section = ShapeSheet.SrcConstants.UserDefCellPrompt.Section;
 
         private static string GetRowName(string name)
         {
@@ -32,75 +33,75 @@ namespace VisioAutomation.Shapes
             string full_prop_name = UserDefinedCellHelper.GetRowName(name);
 
             short row = shape.CellsU[full_prop_name].Row;
-            shape.DeleteRow(UserDefinedCellHelper._userdefinedcell_section, row);
+            shape.DeleteRow(_udcell_section, row);
         }
 
-        public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellData value, ShapeSheet.CellData prompt)
+        public static void Set(IVisio.Shape shape, string name, string value, string prompt)
         {
-            UserDefinedCellHelper.Set(shape, name, value.Formula, prompt.Formula);
+            var cells = new UserDefinedCellCells();
+            cells.Value = value;
+            cells.Prompt = prompt;
+            cells.EncodeValues();
+            Set(shape, name, cells);
         }
 
-        public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellValueLiteral udfcell_value, ShapeSheet.CellValueLiteral udfcell_prompt)
+        public static void Set(IVisio.Shape shape, string name, UserDefinedCellCells cells)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
+            if (cells == null)
+            {
+                throw new System.ArgumentNullException(nameof(cells));
+            }
+
             UserDefinedCellHelper.CheckValidName(name);
 
             if (UserDefinedCellHelper.Contains(shape, name))
             {
+                // The user-defined cell already exists
                 string full_prop_name = UserDefinedCellHelper.GetRowName(name);
 
-                if (udfcell_value.HasValue)
+                if (cells.Value.HasValue)
                 {
                     string value_cell_name = full_prop_name;
                     var cell = shape.CellsU[value_cell_name];
-                    cell.FormulaU = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_value.Value);                    
+                    cell.FormulaU = cells.Value.Value;
                 }
 
-                if (udfcell_prompt.HasValue)
+                if (cells.Prompt.HasValue)
                 {
-                    string prompt_cell_name = full_prop_name+".Prompt";
+                    string prompt_cell_name = full_prop_name + ".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    cell.FormulaU = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_prompt.Value);                                        
+                    cell.FormulaU = cells.Prompt.Value;
                 }
-                return;
             }
-
-            short row = shape.AddNamedRow(
-                UserDefinedCellHelper._userdefinedcell_section,
-                name,
-                (short)IVisio.VisRowIndices.visRowUser);
-
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-
-            if (udfcell_value.HasValue)
+            else
             {
-                var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                var formula = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_value.Value);
-                writer.SetFormula(src, formula);
-            }
+                // The user-defined cell doesn't already exist
+                short row = shape.AddNamedRow(_udcell_section, name, (short)IVisio.VisRowIndices.visRowUser);
+                var src_value = new ShapeSheet.Src(_udcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
+                var src_prompt = new ShapeSheet.Src(_udcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
 
-            if (udfcell_prompt.HasValue)
-            {
-                var src = new ShapeSheet.Src(UserDefinedCellHelper._userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                var formula = VisioAutomation.Utilities.Convert.StringToFormulaString(udfcell_prompt.Value);
-                writer.SetFormula(src, formula);
-            }
+                var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
-            writer.Commit(shape);
+                if (cells.Value.HasValue)
+                {
+                    writer.SetFormula(src_value, cells.Value.Value);
+                }
+
+                if (cells.Prompt.HasValue)
+                {
+                    writer.SetFormula(src_prompt, cells.Prompt.Value);
+                }
+
+                writer.Commit(shape);            
+            }
         }
 
-        /// <summary>
-        /// Gets all the user properties defined on a shape
-        /// </summary>
-        /// <remarks>
-        /// If there are no user properties then null will be returned</remarks>
-        /// <param name="shape"></param>
-        /// <returns>A list of user  properties</returns>
-        public static List<UserDefinedCellCells> Get(IVisio.Shape shape)
+        public static Dictionary<string, UserDefinedCellCells> GetDictionary(IVisio.Shape shape, ShapeSheet.CellValueType type)
         {
             if (shape == null)
             {
@@ -110,7 +111,7 @@ namespace VisioAutomation.Shapes
             var prop_count = UserDefinedCellHelper.GetCount(shape);
             if (prop_count < 1)
             {
-                return new List<UserDefinedCellCells>(0);
+                return new Dictionary<string, UserDefinedCellCells>(0);
             }
 
             var prop_names = UserDefinedCellHelper.GetNames(shape);
@@ -119,19 +120,17 @@ namespace VisioAutomation.Shapes
                 throw new InternalAssertionException("Unexpected number of prop names");
             }
 
-            var shape_data = UserDefinedCellCells.GetCells(shape);
+            var  shape_data = UserDefinedCellCells.GetCells(shape, type);
 
-            var list = new List<UserDefinedCellCells>(prop_count);
+            var dic = new Dictionary<string,UserDefinedCellCells>(prop_count);
             for (int i = 0; i < prop_count; i++)
             {
-                shape_data[i].Name = prop_names[i];
-                list.Add(shape_data[i]);
+                dic[prop_names[i]] = shape_data[i];
             }
-
-            return list;
+            return dic;
         }
 
-        public static List<List<UserDefinedCellCells>> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static List<Dictionary<string, UserDefinedCellCells>> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, ShapeSheet.CellValueType type)
         {
             if (page == null)
             {
@@ -145,26 +144,26 @@ namespace VisioAutomation.Shapes
 
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var list_data = UserDefinedCellCells.GetCells(page,shapeids);
+            var list_list_customprops = UserDefinedCellCells.GetCells(page,shapeids, CellValueType.Formula);
 
-            var list_list = new List<List<UserDefinedCellCells>>(shapeids.Count);
+            var list_dic_customprops = new List<Dictionary<string, UserDefinedCellCells>>(shapeids.Count);
 
-            for (int i = 0; i < shapes.Count; i++)
+            for (int shape_index = 0; shape_index < shapes.Count; shape_index++)
             {
-                var shape = shapes[i];
-                var shape_data = list_data[i];
+                var shape = shapes[shape_index];
+                var list_customprops = list_list_customprops[shape_index];
                 var prop_names = UserDefinedCellHelper.GetNames(shape);
 
-                var list = new List<UserDefinedCellCells>(shape_data.Count);
-                list_list.Add(list);
-                for (int j = 0; j < shape_data.Count ; j++)
+                var dic_customprops = new Dictionary<string, UserDefinedCellCells>(list_customprops.Count);
+                list_dic_customprops.Add(dic_customprops);
+                for (int i = 0; i < list_customprops.Count ; i++)
                 {
-                    shape_data[j].Name = prop_names[j];
-                    list.Add(shape_data[j]);
+                    var prop_name = prop_names[i];
+                    dic_customprops[prop_name] = list_customprops[i];
                 }
             }
 
-            return list_list;
+            return list_dic_customprops;
         }
 
         /// <summary>
@@ -180,12 +179,12 @@ namespace VisioAutomation.Shapes
             }
 
             // If the User Property section does not exist then return zero immediately
-            if (0 == shape.SectionExists[UserDefinedCellHelper._userdefinedcell_section, (short)IVisio.VisExistsFlags.visExistsAnywhere])
+            if (0 == shape.SectionExists[_udcell_section, (short)IVisio.VisExistsFlags.visExistsAnywhere])
             {
                 return 0;
             }
 
-            var section = shape.Section[UserDefinedCellHelper._userdefinedcell_section];
+            var section = shape.Section[_udcell_section];
 
             if (section == null)
             {
@@ -193,7 +192,7 @@ namespace VisioAutomation.Shapes
                 throw new InternalAssertionException(msg);
             }
 
-            int row_count = section.Shape.RowCount[UserDefinedCellHelper._userdefinedcell_section];
+            int row_count = section.Shape.RowCount[_udcell_section];
 
             return row_count;
         }
@@ -221,7 +220,7 @@ namespace VisioAutomation.Shapes
             }
 
             var prop_names = new List<string>(user_prop_row_count);
-            var prop_section = shape.Section[UserDefinedCellHelper._userdefinedcell_section];
+            var prop_section = shape.Section[UserDefinedCellHelper._udcell_section];
             var query_names = prop_section.ToEnumerable().Select(row => row.NameU);
             prop_names.AddRange(query_names);
 
@@ -257,7 +256,7 @@ namespace VisioAutomation.Shapes
             return true;
         }
 
-        internal static void CheckValidName(string name)
+        public static void CheckValidName(string name)
         {
             if (!UserDefinedCellHelper.IsValidName(name))
             {

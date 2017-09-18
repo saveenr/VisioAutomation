@@ -44,7 +44,7 @@ namespace VisioPowerShell.Commands
                 ctrl.YBehavior = this.YBehavior;
                 ctrl.X = this.X;
                 ctrl.Y = this.Y;
-                ctrl.CanGlue = Convert.BoolToFormula(this.CanGlue);
+                ctrl.CanGlue = this.CanGlue;
                 ctrl.Tip = this.Tip;
 
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);

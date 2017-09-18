@@ -4,8 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Models.Layouts.Grid;
-using VisioAutomation.Shapes;
+using GRID = VisioAutomation.Models.Layouts.Grid;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -93,7 +92,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Draw the grid
             var page = client.Page.Get();
-            var grid = new GridLayout(cols, rows, cellsize, master);
+            var grid = new GRID.GridLayout(cols, rows, cellsize, master);
             grid.Origin = origin;
             grid.Render(page);
 
@@ -118,7 +117,6 @@ namespace VisioAutomation_Tests.Scripting
             var shape_rect = client.Draw.Rectangle(1, 1, 3, 3);
             var shape_line = client.Draw.Line(0.5, 0.5, 3.5, 3.5);
             var shape_oval1 = client.Draw.Oval(0.2, 1, 3.8, 2);
-            var shape_oval2 = client.Draw.Oval(new VA.Geometry.Point(2, 2), 0.5);
 
             // Cleanup
             client.Document.Close(true);
@@ -493,11 +491,11 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(2, shapes.Count);
 
             // Verify that we did indeed drop a container
-            Assert.AreEqual("Container",
-                UserDefinedCellHelper
-                    .Get(dropped_container)
-                    .First(s => s.Name == "msvStructureType")
-                    .Value.Result);
+
+            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(dropped_container, VA.ShapeSheet.CellValueType.Result);
+            Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
+            var prop = results_dic["msvStructureType"];
+            Assert.AreEqual("Container", prop.Value.Value);
 
             // cleanup
             client.Document.Close(true);
@@ -536,12 +534,13 @@ namespace VisioAutomation_Tests.Scripting
             // There should be two shapes... the rectangle and the container
             Assert.AreEqual(2, shapes.Count);
 
-            // Verify that we did indeed drop a container
-            Assert.AreEqual("Container",
-                UserDefinedCellHelper
-                    .Get(dropped_container)
-                    .First(s => s.Name == "msvStructureType")
-                    .Value.Result);
+            // Verify that we did indeed drop a container           
+            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(dropped_container, VA.ShapeSheet.CellValueType.Result);
+            Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
+            var prop = results_dic["msvStructureType"];
+            Assert.AreEqual("Container", prop.Value.Value);
+
+
 
             // cleanup
             client.Document.Close(true);

@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Core.Page
 {
@@ -13,22 +14,23 @@ namespace VisioAutomation_Tests.Core.Page
         {
             var size = new VA.Geometry.Size(4, 3);
             var page1 = this.GetNewPage(size);
-            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
-            Assert.AreEqual("4.0000 in.", page_fmt_cells.Width.Result);
-            Assert.AreEqual("3.0000 in.", page_fmt_cells.Height.Result);
+            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, CellValueType.Formula);
+            Assert.AreEqual("4 in", page_fmt_cells.Width.Value);
+            Assert.AreEqual("3 in", page_fmt_cells.Height.Value);
 
             // Double each side
-            page_fmt_cells.Width = "8.0";
-            page_fmt_cells.Height = "6.0";
+            var page_fmt_cells1 = page_fmt_cells;
+            page_fmt_cells1.Width = "8";
+            page_fmt_cells1.Height = "6";
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            page_fmt_cells.SetFormulas(writer);
+            page_fmt_cells1.SetFormulas(writer);
 
             writer.Commit(page1.PageSheet);
 
-            var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet);
-            Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Result);
-            Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Result);
+            var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, CellValueType.Result);
+            Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Value);
+            Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Value);
             page1.Delete(0);
         }
 
@@ -157,7 +159,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5 + shape_size.Height);
             page.ResizeToFitContents(padding_size);
-            var xform = VA.Shapes.ShapeXFormCells.GetCells(shape);
+            var xform = VA.Shapes.ShapeXFormCells.GetCells(shape, CellValueType.Result);
             var pinpos = xform.GetPinPosResult();
             Assert.AreEqual(expected_pinx, pinpos.X, 0.1);
             Assert.AreEqual(expected_piny, pinpos.Y, 0.1);

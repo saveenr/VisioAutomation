@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -13,12 +14,12 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, IList<UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
+        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
 
-            var prop_dic = new Dictionary<IVisio.Shape, IList<UserDefinedCellCells>>();
+            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, UserDefinedCellCells>>();
 
             targets = targets.ResolveShapes(this._client);
 
@@ -29,7 +30,7 @@ namespace VisioScripting.Commands
 
             var application = this._client.Application.Get();
             var page = application.ActivePage;
-            var list_user_props = UserDefinedCellHelper.Get(page, targets.Shapes);
+            var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, CellValueType.Formula);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {
@@ -95,7 +96,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Set(VisioScripting.Models.TargetShapes targets, UserDefinedCellCells userdefinedcell)
+        public void Set(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.UserDefinedCell cell)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -111,7 +112,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Formula, userdefinedcell.Prompt.Formula);
+                    UserDefinedCellHelper.Set(shape, cell.Name, cell.Cells);
                 }
             }
         }

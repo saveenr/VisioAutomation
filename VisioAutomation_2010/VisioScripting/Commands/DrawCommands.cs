@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using ORGCHART = VisioAutomation.Models.Documents.OrgCharts;
-using DG = VisioAutomation.Models.Layouts.DirectedGraph;
+using ORG = VisioAutomation.Models.Documents.OrgCharts;
+using GRAPH = VisioAutomation.Models.Layouts.DirectedGraph;
 using GRID = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioScripting.Commands
@@ -209,16 +209,6 @@ namespace VisioScripting.Commands
             return this.Oval(rect);
         }
 
-        public IVisio.Shape Oval(VisioAutomation.Geometry.Point center, double radius)
-        {
-            var surface = this.GetDrawingSurface();
-            using (var undoscope = this._client.Application.NewUndoScope("Draw Oval"))
-            {
-                var shape = surface.DrawOval(center, radius);
-                return shape;
-            }
-        }
-
         public IVisio.Shape Bezier(IEnumerable<VisioAutomation.Geometry.Point> points)
         {
             var surface = this.GetDrawingSurface();
@@ -306,7 +296,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void OrgChart(ORGCHART.OrgChartDocument orgChartDocument)
+        public void OrgChart(ORG.OrgChartDocument orgChartDocument)
         {
 
             this._client.WriteVerbose("Start OrgChart Rendering");
@@ -319,7 +309,7 @@ namespace VisioScripting.Commands
             this._client.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DirectedGraph(IList<DG.DirectedGraphLayout> graph)
+        public void DirectedGraph(IList<GRAPH.DirectedGraphLayout> graph)
         {
             this._client.Application.AssertApplicationAvailable();
 
@@ -338,7 +328,7 @@ namespace VisioScripting.Commands
                 var dg = graph[i];
 
                 
-                var options = new DG.MsaglLayoutOptions();
+                var options = new GRAPH.MsaglLayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 // if this is the first page to drawe

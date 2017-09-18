@@ -99,7 +99,7 @@ namespace VisioScripting.Commands
 
             foreach (int shapeid in target_shapeids.ShapeIDs)
             {
-                lockcells.SetFormulas((short)shapeid, writer);
+                lockcells.SetFormulas(writer, (short)shapeid);
             }
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Lock Properties"))

@@ -3,6 +3,7 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -116,12 +117,12 @@ namespace VisioAutomation_Tests.Models.Dom
             vrect1.CustomProperties = new CustomPropertyDictionary();
 
             var cp1 = new CustomPropertyCells();
-            cp1.Value = "FOOVALUE";
-            cp1.Label = "Foo Label";
+            cp1.Value = "\"FOOVALUE\"";
+            cp1.Label = "\"Foo Label\"";
 
             var cp2 = new CustomPropertyCells();
-            cp2.Value = "BARVALUE";
-            cp2.Label = "Bar Label";
+            cp2.Value = "\"BARVALUE\"";
+            cp2.Label = "\"Bar Label\"";
 
             vrect1.CustomProperties["FOO"] = cp1;
             vrect1.CustomProperties["BAR"] = cp2;
@@ -407,7 +408,7 @@ namespace VisioAutomation_Tests.Models.Dom
                 s2.VisioShapeID, 
                 s3.VisioShapeID };
 
-            var xfrms = VA.Shapes.ShapeXFormCells.GetCells(page, shapeids);
+            var xfrms = VA.Shapes.ShapeXFormCells.GetCells(page, shapeids, VA.ShapeSheet.CellValueType.Formula);
 
             Assert.AreEqual(xfrms[1].PinX, xfrms[0].PinX);
             Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);

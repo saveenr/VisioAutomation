@@ -84,9 +84,9 @@ namespace VisioAutomation_Tests
 
         public static VisioAutomation.Geometry.Size GetSize(IVisio.Shape shape)
         {
-            var query = new ShapeSheetQuery();
-            var col_w = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth,"Width");
-            var col_h = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight,"Height");
+            var query = new CellQuery();
+            var col_w = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth,"Width");
+            var col_h = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight,"Height");
 
             var table = query.GetResults<double>(shape);
             double w = table.Cells[col_w];
@@ -157,9 +157,9 @@ namespace VisioAutomation_Tests
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var query = new ShapeSheetQuery();
-            var col_height = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, "PageHeight");
-            var col_width = query.AddCell(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
+            var query = new CellQuery();
+            var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, "PageHeight");
+            var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
 
             var results = query.GetResults<double>(page.PageSheet);
             double height = results.Cells[col_height];

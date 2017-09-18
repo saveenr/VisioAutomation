@@ -161,6 +161,8 @@ namespace VisioScripting.Builders
                     dg_shape.CustomProperties = new CustomPropertyDictionary();
                     foreach (var kv in shape_info.custprops)
                     {
+                        var cp_cells = kv.Value;
+                        cp_cells.EncodeValues();
                         dg_shape.CustomProperties[kv.Key] = kv.Value;
                     }
                 }

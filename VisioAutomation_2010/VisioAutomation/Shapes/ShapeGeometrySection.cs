@@ -21,9 +21,9 @@ namespace VisioAutomation.Shapes
 
         public IEnumerator<ShapeGeometryRow> GetEnumerator()
         {
-            foreach (var i in this.Rows)
+            foreach (var row in this.Rows)
             {
-                yield return i;
+                yield return row;
             }
         }
 
