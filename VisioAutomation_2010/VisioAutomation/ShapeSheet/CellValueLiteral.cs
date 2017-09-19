@@ -108,6 +108,40 @@
             return text;
         }
 
+        internal bool ValidateValue(bool quote_required)
+        {
+            string text = this.Value;
 
+            if (text == null)
+            {
+                return true;
+            }
+
+            if (text.Length == 0)
+            {
+                return true;
+            }
+
+            if (text[0] == '=')
+            {
+                return true;
+            }
+
+            if (text[0] == '\"')
+            {
+                if (text[text.Length - 1] != '\"')
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (quote_required)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
