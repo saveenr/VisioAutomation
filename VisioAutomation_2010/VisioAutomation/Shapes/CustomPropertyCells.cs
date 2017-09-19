@@ -223,5 +223,62 @@ namespace VisioAutomation.Shapes
             this.Format = CellValueLiteral.EncodeValue(this.Format.Value);
             this.Prompt = CellValueLiteral.EncodeValue(this.Prompt.Value);
         }
+
+        public void Validate()
+        {
+            if (!this.ValidateValue(this.Prompt.Value,true))
+            {
+                throw new System.ArgumentException("Invalid value for Custom Property's Prompt");
+            }
+
+            if (!this.ValidateValue(this.Label.Value, true))
+            {
+                throw new System.ArgumentException("Invalid value for Custom Property's Label");
+            }
+
+            if (!this.ValidateValue(this.Format.Value, true))
+            {
+                throw new System.ArgumentException("Invalid value for Custom Property's Format");
+            }
+
+            if (!this.ValidateValue(this.Value.Value, false))
+            {
+                //throw new System.ArgumentException("Invalid value for Custom Property's Value");
+            }
+        }
+
+        private bool ValidateValue(string text, bool quote_required)
+        {
+            if (text == null)
+            {
+                return true;
+            }
+
+            if (text.Length == 0)
+            {
+                return true;
+            }
+
+            if (text[0] == '=')
+            {
+                return true;
+            }
+
+            if (text[0] == '\"')
+            {
+                if (text[text.Length - 1] != '\"')
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (quote_required)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
