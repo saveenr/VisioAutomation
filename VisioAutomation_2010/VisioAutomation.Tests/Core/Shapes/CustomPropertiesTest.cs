@@ -102,7 +102,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             prop_bool_in.Value = true;
 
             // Date
-            var dt = new System.DateTime(2017,3,31,4,5,6);
+            var dt = new System.DateTime(2017,3,31,14,5,6);
             var st = dt.ToString(CultureInfo.InvariantCulture);
             var prop_date_in = new CustomPropertyCells();
             prop_date_in.Format = "\"Format\"";
@@ -137,7 +137,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual("\"Label\"", prop_date_out.Label.Value);
             Assert.AreEqual("\"Prompt\"", prop_date_out.Prompt.Value);
             Assert.AreEqual("3", prop_date_out.Type.Value);
-            Assert.AreEqual("DATETIME(\"03/31/2017 04:05:06\")", prop_date_out.Value.Value);
+            Assert.AreEqual("DATETIME(\"03/31/2017 14:05:06\")", prop_date_out.Value.Value);
 
             var app = this.GetVisioApplication();
             var doc = app.ActiveDocument;
