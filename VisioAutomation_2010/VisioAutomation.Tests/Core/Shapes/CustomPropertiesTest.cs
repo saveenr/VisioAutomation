@@ -108,12 +108,21 @@ namespace VisioAutomation_Tests.Core.Shapes
             prop_date_in.Format = "\"Format\"";
             prop_date_in.Label = "\"Label\"";
             prop_date_in.Prompt = "\"Prompt\"";
-            prop_date_in.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Boolean);
+            prop_date_in.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Date);
             prop_date_in.Value = string.Format("DATETIME(\"{0}\")", st); ;
+
+            // Boolean
+            var prop_number_in = new CustomPropertyCells();
+            prop_number_in.Format = "\"Format\"";
+            prop_number_in.Label = "\"Label\"";
+            prop_number_in.Prompt = "\"Prompt\"";
+            prop_number_in.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Number);
+            prop_number_in.Value = "3.14";
 
             CustomPropertyHelper.Set(s1, "PROP_STRING", prop_string_in);
             CustomPropertyHelper.Set(s1, "PROP_BOOLEAN", prop_bool_in);
             CustomPropertyHelper.Set(s1, "PROP_DATE", prop_date_in);
+            CustomPropertyHelper.Set(s1, "PROP_NUMBER", prop_number_in);
 
             var props_dic = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
 
@@ -136,8 +145,15 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual("\"Format\"", prop_date_out.Format.Value);
             Assert.AreEqual("\"Label\"", prop_date_out.Label.Value);
             Assert.AreEqual("\"Prompt\"", prop_date_out.Prompt.Value);
-            Assert.AreEqual("3", prop_date_out.Type.Value);
+            Assert.AreEqual("5", prop_date_out.Type.Value);
             Assert.AreEqual("DATETIME(\"03/31/2017 14:05:06\")", prop_date_out.Value.Value);
+
+            var prop_number_out = props_dic["PROP_NUMBER"];
+            Assert.AreEqual("\"Format\"", prop_number_out.Format.Value);
+            Assert.AreEqual("\"Label\"", prop_number_out.Label.Value);
+            Assert.AreEqual("\"Prompt\"", prop_number_out.Prompt.Value);
+            Assert.AreEqual("2", prop_number_out.Type.Value);
+            Assert.AreEqual("3.14", prop_number_out.Value.Value);
 
             var app = this.GetVisioApplication();
             var doc = app.ActiveDocument;
