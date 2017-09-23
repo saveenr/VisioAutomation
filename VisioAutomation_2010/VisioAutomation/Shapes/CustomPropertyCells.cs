@@ -207,7 +207,7 @@ namespace VisioAutomation.Shapes
 
         public CustomPropertyCells(System.DateTime value)
         {
-            var current_culture = System.Globalization.CultureInfo.CurrentCulture;
+            var current_culture = System.Globalization.CultureInfo.InvariantCulture;
             string formatted_dt = value.ToString(current_culture);
             string _Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
             this.Value = _Value;

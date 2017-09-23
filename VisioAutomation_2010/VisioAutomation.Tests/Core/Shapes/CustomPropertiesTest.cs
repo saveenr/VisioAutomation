@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
@@ -100,8 +101,19 @@ namespace VisioAutomation_Tests.Core.Shapes
             prop_bool_in.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Boolean);
             prop_bool_in.Value = true;
 
+            // Date
+            var dt = new System.DateTime(2017,3,31,4,5,6);
+            var st = dt.ToString(CultureInfo.InvariantCulture);
+            var prop_date_in = new CustomPropertyCells();
+            prop_date_in.Format = "\"Format\"";
+            prop_date_in.Label = "\"Label\"";
+            prop_date_in.Prompt = "\"Prompt\"";
+            prop_date_in.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Boolean);
+            prop_date_in.Value = string.Format("DATETIME(\"{0}\")", st); ;
+
             CustomPropertyHelper.Set(s1, "PROP_STRING", prop_string_in);
             CustomPropertyHelper.Set(s1, "PROP_BOOLEAN", prop_bool_in);
+            CustomPropertyHelper.Set(s1, "PROP_DATE", prop_date_in);
 
             var props_dic = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
 
@@ -119,6 +131,13 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual("\"Prompt\"", prop_bool_out.Prompt.Value);
             Assert.AreEqual("3", prop_bool_out.Type.Value);
             Assert.AreEqual("TRUE", prop_bool_out.Value.Value);
+
+            var prop_date_out = props_dic["PROP_DATE"];
+            Assert.AreEqual("\"Format\"", prop_date_out.Format.Value);
+            Assert.AreEqual("\"Label\"", prop_date_out.Label.Value);
+            Assert.AreEqual("\"Prompt\"", prop_date_out.Prompt.Value);
+            Assert.AreEqual("3", prop_date_out.Type.Value);
+            Assert.AreEqual("DATETIME(\"03/31/2017 04:05:06\")", prop_date_out.Value.Value);
 
             var app = this.GetVisioApplication();
             var doc = app.ActiveDocument;
