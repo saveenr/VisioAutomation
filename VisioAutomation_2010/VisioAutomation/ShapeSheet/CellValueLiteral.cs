@@ -92,10 +92,9 @@
             }
 
 
-            if (text[0] == '\"')
+            // it's quoted already, just return it
+            if (text[0] == '\"' && text[text.Length-1]=='\"')
             {
-                // it's quoted already, just return it
-                // we assume it ends with a quote
                 return text;
             }
 
