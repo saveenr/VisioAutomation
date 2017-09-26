@@ -23,29 +23,29 @@ namespace VisioAutomation.Extensions
             }
         }
 
-        public static IEnumerable<IVisio.Document> ToEnumerable(this IVisio.Documents docs)
+        public static IEnumerable<IVisio.Document> ToEnumerable(this IVisio.Documents documents)
         {
-            short count = docs.Count;
+            short count = documents.Count;
             for (int i = 0; i < count; i++)
             {
-                yield return docs[i + 1];
+                yield return documents[i + 1];
             }
         }
 
-        public static IList<IVisio.Document> ToList(this IVisio.Documents docs)
+        public static IList<IVisio.Document> ToList(this IVisio.Documents documents)
         {
-            int count = docs.Count;
+            int count = documents.Count;
             var list = new List<IVisio.Document>(count);
             for (int i = 0; i < count; i++)
             {
-                list.Add(docs[i+1]);
+                list.Add(documents[i+1]);
             }
             return list;
         }
 
-        public static IVisio.Document OpenStencil(this IVisio.Documents docs, string filename)
+        public static IVisio.Document OpenStencil(this IVisio.Documents documents, string filename)
         {
-            var stencil = VisioAutomation.Documents.DocumentHelper.TryOpenStencil(docs, filename);
+            var stencil = VisioAutomation.Documents.DocumentHelper.TryOpenStencil(documents, filename);
             if (stencil == null)
             {
                 string msg = string.Format("Could not open stencil \"{0}\"", filename);
@@ -53,6 +53,5 @@ namespace VisioAutomation.Extensions
             }
             return stencil;
         }
-
     }
 }
