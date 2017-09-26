@@ -75,7 +75,8 @@ namespace VisioAutomation.Extensions
             this IVisio.Page page, 
             IList<Geometry.Point> controlpoints,
             IList<double> knots,
-            IList<double> weights, int degree)
+            IList<double> weights, 
+            int degree)
         {
             var surface = new SurfaceTarget(page);
             var shape = surface.DrawNURBS(controlpoints, knots, weights, degree);
