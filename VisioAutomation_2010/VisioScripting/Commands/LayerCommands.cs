@@ -52,7 +52,8 @@ namespace VisioScripting.Commands
 
             var application = this._client.Application.Get();
             var page = application.ActivePage;
-            return page.Layers.ToEnumerable().ToList();
+
+            return page.Layers.ToList();
         }
     }
 }

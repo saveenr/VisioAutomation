@@ -43,7 +43,7 @@ namespace VisioScripting.Commands
             var application = this._client.Application.Get();
             var doc = application.ActiveDocument;
             var doc_masters = doc.Masters;
-            var masters = doc_masters.ToEnumerable().ToList();
+            var masters = doc_masters.ToList();
             return masters;
         }
 
@@ -51,7 +51,7 @@ namespace VisioScripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
             var doc_masters = doc.Masters;
-            var masters = doc_masters.ToEnumerable().ToList();
+            var masters = doc_masters.ToList();
             return masters;
         }
 
@@ -120,7 +120,7 @@ namespace VisioScripting.Commands
             if (name == null || name == "*")
             {
                 // return all masters
-                var masters = doc.Masters.ToEnumerable().ToList();
+                var masters = doc.Masters.ToList();
                 return masters;
             }
             else

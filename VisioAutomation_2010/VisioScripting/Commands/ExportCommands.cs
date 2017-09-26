@@ -73,7 +73,7 @@ namespace VisioScripting.Commands
             var active_document = application.ActiveDocument;
             var active_window = application.ActiveWindow;
 
-            var pages = active_document.Pages.ToEnumerable().ToList();
+            var pages = active_document.Pages.ToList();
             var pbase = System.IO.Path.GetDirectoryName(filename);
 
             if (!System.IO.Directory.Exists(pbase))

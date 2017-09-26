@@ -32,6 +32,17 @@ namespace VisioAutomation.Extensions
             }
         }
 
+        public static IList<IVisio.Document> ToList(this IVisio.Documents docs)
+        {
+            int count = docs.Count;
+            var list = new List<IVisio.Document>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(docs[i+1]);
+            }
+            return list;
+        }
+
         public static IVisio.Document OpenStencil(this IVisio.Documents docs, string filename)
         {
             var stencil = VisioAutomation.Documents.DocumentHelper.TryOpenStencil(docs, filename);

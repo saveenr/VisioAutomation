@@ -13,5 +13,16 @@ namespace VisioAutomation.Extensions
                 yield return connects[i + 1];
             }
         }
+
+        public static IList<IVisio.Connect> ToList(this IVisio.Connects connects)
+        {
+            int count = connects.Count;
+            var list = new List<IVisio.Connect>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(connects[i+1]);
+            }
+            return list;
+        }
     }
 }

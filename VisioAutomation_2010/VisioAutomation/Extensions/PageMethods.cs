@@ -133,6 +133,17 @@ namespace VisioAutomation.Extensions
             }
         }
 
+        public static List<IVisio.Page> ToList(this IVisio.Pages pages)
+        {
+            short count = pages.Count;
+            var list = new List<IVisio.Page>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(pages[i + 1]);
+            }
+            return list;
+        }
+
         public static string[] GetNamesU(this IVisio.Pages pages)
         {
             System.Array names_sa;

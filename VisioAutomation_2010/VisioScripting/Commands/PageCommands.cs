@@ -552,7 +552,7 @@ namespace VisioScripting.Commands
             if (Name == null || Name == "*")
             {
                 // return all pages
-                var pages = active_document.Pages.ToEnumerable().ToList();
+                var pages = active_document.Pages.ToList();
                 return pages;
             }
             else
@@ -570,7 +570,7 @@ namespace VisioScripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var page = this._client.Page.Get();
-            var shapes = page.Shapes.ToEnumerable().ToList();
+            var shapes = page.Shapes.ToList();
             return shapes;
         }
 

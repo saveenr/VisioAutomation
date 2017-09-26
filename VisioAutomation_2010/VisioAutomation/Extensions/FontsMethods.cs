@@ -13,5 +13,16 @@ namespace VisioAutomation.Extensions
                 yield return fonts[i + 1];
             }
         }
+
+        public static IList<IVisio.Font> ToList(this IVisio.Fonts fonts)
+        {
+            int count = fonts.Count;
+            var list = new List<IVisio.Font>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(fonts[i+1]);
+            }
+            return list;
+        }
     }
 }

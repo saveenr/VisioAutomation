@@ -63,5 +63,16 @@ namespace VisioAutomation.Extensions
                 yield return windows[(short)(i + 1)];
             }
         }
+
+        public static IList<IVisio.Window> ToList(this IVisio.Windows windows)
+        {
+            int count = windows.Count;
+            var list = new List<IVisio.Window>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(windows[(short)(i + 1)]);
+            }
+            return list;
+        }
     }
 }

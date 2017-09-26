@@ -128,7 +128,7 @@ namespace VisioAutomation.DocumentAnalysis
             }
 
             var page_connects = page.Connects;
-            var connects = page_connects.ToEnumerable();
+            var connects = page_connects.ToList();
 
             var edges = new List<ConnectorEdge>();
 

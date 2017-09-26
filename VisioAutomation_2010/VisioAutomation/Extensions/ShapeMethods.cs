@@ -64,5 +64,16 @@ namespace VisioAutomation.Extensions
                 yield return shapes[i + 1];
             }
         }
+
+        public static List<IVisio.Shape> ToList(this IVisio.Shapes shapes)
+        {
+            int count = shapes.Count;
+            var list = new List<IVisio.Shape>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(shapes[i + 1]);
+            }
+            return list;
+        }
     }
 }

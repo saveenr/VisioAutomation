@@ -13,5 +13,16 @@ namespace VisioAutomation.Extensions
                 yield return colors[i];
             }
         }
+
+        public static IList<IVisio.Color> ToList(this IVisio.Colors colors)
+        {
+            int count = colors.Count;
+            var list = new List<IVisio.Color>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(colors[i]);
+            }
+            return list;
+        }
     }
 }

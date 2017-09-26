@@ -14,6 +14,17 @@ namespace VisioAutomation.Extensions
             }
         }
 
+        public static IList<IVisio.Shape> ToList(this IVisio.Selection selection)
+        {
+            int count = selection.Count;
+            var list = new List<IVisio.Shape>(count);
+            for (int i = 0; i < count; i++)
+            {
+                list.Add(selection[i + 1]);
+            }
+            return list;
+        }
+
         public static Geometry.Rectangle GetBoundingBox(this IVisio.Selection selection, IVisio.VisBoundingBoxArgs args)
         {
             double bbx0, bby0, bbx1, bby1;
