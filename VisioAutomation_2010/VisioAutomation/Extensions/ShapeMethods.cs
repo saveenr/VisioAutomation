@@ -58,22 +58,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Shapes shapes)
         {
-            int count = shapes.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return shapes[i + 1];
-            }
+            return ExtensionHelpers.ToEnumerable(() => shapes.Count, i => shapes[i + 1]);
         }
 
         public static List<IVisio.Shape> ToList(this IVisio.Shapes shapes)
         {
-            int count = shapes.Count;
-            var list = new List<IVisio.Shape>(count);
-            for (int i = 0; i < count; i++)
-            {
-                list.Add(shapes[i + 1]);
-            }
-            return list;
+            return ExtensionHelpers.ToList(() => shapes.Count, i => shapes[i + 1]);
         }
     }
 }
