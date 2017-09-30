@@ -53,6 +53,7 @@
     <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\PageOrientation.cs" />
+    <Compile Include="Models\PageType.cs" />
     <Compile Include="Models\SelectionOperation.cs" />
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />

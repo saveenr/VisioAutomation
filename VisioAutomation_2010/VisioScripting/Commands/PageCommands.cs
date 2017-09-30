@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet.Query;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -545,23 +546,52 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> GetPagesByName(string Name)
+        public List<IVisio.Page> GetPagesByName(string Name, PageType pt)
         {
             var application = this._client.Application.Get();
             var active_document = application.ActiveDocument;
             if (Name == null || Name == "*")
             {
                 // return all pages
-                var pages = active_document.Pages.ToList();
-                return pages;
+                var all_pages = active_document.Pages.ToList();
+                all_pages = filter_pages_by_type(all_pages, pt);
+                return all_pages;
             }
             else
             {
                 // return the named page
-                var pages = active_document.Pages.ToEnumerable();
-                var pages2= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
-                return pages2;
+                var all_pages = active_document.Pages.ToEnumerable();
+                var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { Name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
+                named_pages = filter_pages_by_type(named_pages, pt);
+
+                return named_pages;
             }
+        }
+
+        private List<IVisio.Page> filter_pages_by_type(List<IVisio.Page> pages, VisioScripting.Models.PageType pagetype)
+        {
+            if (pages == null)
+            {
+                return null;
+            }
+
+            if (pagetype == PageType.Any)
+            {
+                return pages;
+            }
+
+            if (pagetype == PageType.Foreground)
+            {
+                return pages.Where(p=>p.Background==0).ToList();
+            }
+
+            if (pagetype == PageType.Background)
+            {
+                return pages.Where(p => p.Background != 0).ToList();
+            }
+
+            string msg = "Unsupported value for pagetype";
+            throw new System.ArgumentOutOfRangeException(nameof(pagetype),msg);
         }
 
         public List<IVisio.Shape> GetShapes()

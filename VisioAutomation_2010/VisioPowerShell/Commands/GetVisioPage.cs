@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using VisioScripting.Models;
 
 namespace VisioPowerShell.Commands
 {
@@ -9,6 +10,8 @@ namespace VisioPowerShell.Commands
         public string Name=null;
 
         [Parameter(Mandatory = false)] public SwitchParameter ActivePage;
+
+        [Parameter(Mandatory = false)] public VisioScripting.Models.PageType Type = PageType.Any;
 
         protected override void ProcessRecord()
         {
@@ -21,7 +24,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var pages = this.Client.Page.GetPagesByName(this.Name);
+            var pages = this.Client.Page.GetPagesByName(this.Name, this.Type);
             this.WriteObject(pages, false);
         }
     }
