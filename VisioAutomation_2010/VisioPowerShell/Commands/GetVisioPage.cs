@@ -22,7 +22,7 @@ namespace VisioPowerShell.Commands
             }
 
             var pages = this.Client.Page.GetPagesByName(this.Name);
-            this.WriteObject(pages, true);
+            this.WriteObject(pages, false);
         }
     }
 }

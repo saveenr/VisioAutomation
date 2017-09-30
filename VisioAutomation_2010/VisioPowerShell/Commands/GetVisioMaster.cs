@@ -24,13 +24,13 @@ namespace VisioPowerShell.Commands
                 {
                     ((Cmdlet) this).WriteVerbose("Get master from specified document");
                     var masters = this.Client.Master.GetMastersByName(this.Name, this.Document);
-                    this.WriteObject(masters,true);
+                    this.WriteObject(masters,false);
                 }
                 else
                 {
                     ((Cmdlet) this).WriteVerbose("Get master from active document");
                     var masters = this.Client.Master.GetMastersByName(this.Name);
-                    this.WriteObject(masters,true);
+                    this.WriteObject(masters, false);
                 }
             }
             else
