@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
@@ -25,22 +26,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Document> ToEnumerable(this IVisio.Documents documents)
         {
-            short count = documents.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return documents[i + 1];
-            }
+            return ExtensionHelpers.ToEnumerable(() => documents.Count, i => documents[i + 1]); ;
         }
 
-        public static IList<IVisio.Document> ToList(this IVisio.Documents documents)
+        public static List<IVisio.Document> ToList(this IVisio.Documents documents)
         {
-            int count = documents.Count;
-            var list = new List<IVisio.Document>(count);
-            for (int i = 0; i < count; i++)
-            {
-                list.Add(documents[i+1]);
-            }
-            return list;
+            return ExtensionHelpers.ToList(() => documents.Count, i => documents[i + 1]); ;
         }
 
         public static IVisio.Document OpenStencil(this IVisio.Documents documents, string filename)
@@ -52,6 +43,32 @@ namespace VisioAutomation.Extensions
                 throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
             return stencil;
+        }
+    }
+
+    internal static class ExtensionHelpers
+    {
+        public static IEnumerable<T> ToEnumerable<T>(Func<int> get_count, Func<int, T> get_item)
+        {
+            int count = get_count();
+            var list = new List<T>(count);
+            for (int i = 0; i < count; i++)
+            {
+                var item = get_item(i);
+                yield return item;
+            }
+        }
+
+        public static List<T> ToList<T>(Func<int> get_count, Func<int,T> get_item)
+        {
+            int count = get_count();
+            var list = new List<T>(count);
+            for (int i = 0; i < count; i++)
+            {
+                var item = get_item(i);
+                list.Add(item);
+            }
+            return list;
         }
     }
 }

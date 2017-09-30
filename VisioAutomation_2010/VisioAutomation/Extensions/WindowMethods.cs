@@ -57,22 +57,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Window> ToEnumerable(this IVisio.Windows windows)
         {
-            short count = windows.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return windows[(short)(i + 1)];
-            }
+            return ExtensionHelpers.ToEnumerable(() => windows.Count, i => windows[(short)(i + 1)]);
         }
 
-        public static IList<IVisio.Window> ToList(this IVisio.Windows windows)
+        public static List<IVisio.Window> ToList(this IVisio.Windows windows)
         {
-            int count = windows.Count;
-            var list = new List<IVisio.Window>(count);
-            for (int i = 0; i < count; i++)
-            {
-                list.Add(windows[(short)(i + 1)]);
-            }
-            return list;
+            return ExtensionHelpers.ToList(() => windows.Count, i => windows[(short)(i + 1)]);
         }
     }
 }

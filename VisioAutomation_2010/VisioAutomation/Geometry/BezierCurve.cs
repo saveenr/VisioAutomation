@@ -9,7 +9,7 @@ namespace VisioAutomation.Geometry
 
         public BezierCurve(Point[] controlpoints, int degree)
         {
-            if (controlpoints== null)
+            if (controlpoints == null)
             {
                 throw new System.ArgumentNullException(nameof(controlpoints));
             }

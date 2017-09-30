@@ -7,22 +7,12 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Connect> ToEnumerable(this IVisio.Connects connects)
         {
-            int count = connects.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return connects[i + 1];
-            }
+            return ExtensionHelpers.ToEnumerable(() => connects.Count, i => connects[i + 1]);
         }
 
-        public static IList<IVisio.Connect> ToList(this IVisio.Connects connects)
+        public static List<IVisio.Connect> ToList(this IVisio.Connects connects)
         {
-            int count = connects.Count;
-            var list = new List<IVisio.Connect>(count);
-            for (int i = 0; i < count; i++)
-            {
-                list.Add(connects[i+1]);
-            }
-            return list;
+            return ExtensionHelpers.ToList(() => connects.Count, i => connects[i + 1]);
         }
     }
 }
