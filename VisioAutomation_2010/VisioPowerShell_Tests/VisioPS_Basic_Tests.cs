@@ -43,8 +43,8 @@ namespace VisioPowerShell_Tests
 
             var cells = VisioPS_Basic_Tests.session.New_VisioShapeSheetCells(CellType.Page);
             var pagecells = (PageCells) cells;
-            pagecells.PageHeight = "4 in";
-            pagecells.PageWidth= "3 in";
+            pagecells.Height = "4 in";
+            pagecells.Width= "3 in";
 
             VisioPS_Basic_Tests.session.Set_VisioShapeCells(cells, PsArray.From(page.PageSheet));
             

@@ -105,7 +105,7 @@
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\ShapeFormatCells.cs" />
     <Compile Include="Models\ShapeXFormCells.cs" />
-    <Compile Include="Models\TextBlockCells.cs" />
+    <Compile Include="Models\TextXFormCells.cs" />
     <Compile Include="Models\TextFormatCells.cs" />
     <Compile Include="Models\UserDefinedCell.cs" />
     <Compile Include="Models\ConnectionPoint.cs" />

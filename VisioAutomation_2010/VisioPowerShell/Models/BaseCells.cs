@@ -33,7 +33,7 @@ namespace VisioPowerShell.Models
             }
             else if (type == VisioPowerShell.Models.CellType.TextBlock)
             {
-                return new VisioPowerShell.Models.TextBlockCells();
+                return new VisioPowerShell.Models.TextXFormCells();
             }
             else if (type == VisioPowerShell.Models.CellType.ShapeXForm)
             {
