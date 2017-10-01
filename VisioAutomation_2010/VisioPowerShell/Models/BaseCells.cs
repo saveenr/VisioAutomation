@@ -17,35 +17,19 @@ namespace VisioPowerShell.Models
             }
         }
 
-        public static BaseCells CreateCells(CellType type)
+        public static BaseCells CreateCells(CellType celltype)
         {
-            if (type == VisioPowerShell.Models.CellType.Page)
+            if (celltype == VisioPowerShell.Models.CellType.Page)
             {
                 return new VisioPowerShell.Models.PageCells();
             }
-            else if (type == VisioPowerShell.Models.CellType.ShapeFormat)
+            else if (celltype == VisioPowerShell.Models.CellType.Shape)
             {
-                return new VisioPowerShell.Models.ShapeFormatCells();
-            }
-            else if (type == VisioPowerShell.Models.CellType.TextFormat)
-            {
-                return new VisioPowerShell.Models.TextFormatCells();
-            }
-            else if (type == VisioPowerShell.Models.CellType.TextBlock)
-            {
-                return new VisioPowerShell.Models.TextXFormCells();
-            }
-            else if (type == VisioPowerShell.Models.CellType.ShapeXForm)
-            {
-                return new VisioPowerShell.Models.ShapeXFormCells();
-            }
-            else if (type == VisioPowerShell.Models.CellType.Lock)
-            {
-                return new VisioPowerShell.Models.LockCells();
+                return new VisioPowerShell.Models.ShapeCells();
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException(nameof(celltype));
             }
         }
 
