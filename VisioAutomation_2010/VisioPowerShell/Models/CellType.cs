@@ -7,9 +7,6 @@ namespace VisioPowerShell.Models
         TextFormat,
         TextBlock,
         Lock,
-        PageFormat,
-        PagePrintCells,
-        PageLayoutCells,
-        PageRulerAndGridCells
+        Page
     }
 }

@@ -41,10 +41,10 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             var page = VisioPS_Basic_Tests.session.Get_VisioPage(activepage: true, name: null);
 
-            var cells = VisioPS_Basic_Tests.session.New_VisioShapeSheetCells(CellType.PageFormat);
-            var pagecells = (PageFormatCells) cells;
-            pagecells.Height = "4 in";
-            pagecells.Width= "3 in";
+            var cells = VisioPS_Basic_Tests.session.New_VisioShapeSheetCells(CellType.Page);
+            var pagecells = (PageCells) cells;
+            pagecells.PageHeight = "4 in";
+            pagecells.PageWidth= "3 in";
 
             VisioPS_Basic_Tests.session.Set_VisioShapeCells(cells, PsArray.From(page.PageSheet));
             

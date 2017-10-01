@@ -19,21 +19,9 @@ namespace VisioPowerShell.Models
 
         public static BaseCells CreateCells(CellType type)
         {
-            if (type == VisioPowerShell.Models.CellType.PageFormat)
+            if (type == VisioPowerShell.Models.CellType.Page)
             {
-                return new VisioPowerShell.Models.PageFormatCells();
-            }
-            else if (type == VisioPowerShell.Models.CellType.PagePrintCells)
-            {
-                return new VisioPowerShell.Models.PagePrintCells();
-            }
-            else if (type == VisioPowerShell.Models.CellType.PageLayoutCells)
-            {
-                return new VisioPowerShell.Models.PageLayoutCells();
-            }
-            else if (type == VisioPowerShell.Models.CellType.PageRulerAndGridCells)
-            {
-                return new VisioPowerShell.Models.PageRulerAndGridCells();
+                return new VisioPowerShell.Models.PageCells();
             }
             else if (type == VisioPowerShell.Models.CellType.ShapeFormat)
             {

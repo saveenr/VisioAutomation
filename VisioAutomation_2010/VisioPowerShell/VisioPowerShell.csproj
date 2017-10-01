@@ -104,7 +104,6 @@
     <Compile Include="Models\NamedCellDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\PageFormatCells.cs" />
-    <Compile Include="Models\PageLayoutCells.cs" />
     <Compile Include="Models\PagePrintCells.cs" />
     <Compile Include="Models\PageRulerAndGridCells.cs" />
     <Compile Include="Models\ShapeFormatCells.cs" />
