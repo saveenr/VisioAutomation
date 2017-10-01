@@ -5,41 +5,40 @@ namespace VisioPowerShell.Models
 {
     public class PageFormatCells : VisioPowerShell.Models.BaseCells
     {
-        public string DrawingScale;
-        public string DrawingScaleType;
-        public string DrawingSizeType;
-        public string Height;
 
-        public string Scale;
-        public string Width;
-
-        public string ShadowObliqueAngle;
-        public string ShadowOffsetX;
-        public string ShadowOffsetY;
-        public string ShadowScaleFactor;
-        public string ShadowType;
+        // Page Format
+        public string PageDrawingScale;
+        public string PageDrawingScaleType;
+        public string PageDrawingSizeType;
+        public string PageHeight;
+        public string PageScale;
+        public string PageWidth;
+        public string PageShadowObliqueAngle;
+        public string PageShadowOffsetX;
+        public string PageShadowOffsetY;
+        public string PageShadowScaleFactor;
+        public string PageShadowType;
         public string UIVisibility;
-        public string DrawingResizeType;
-        public string InhibitSnap;
+        public string PageDrawingResizeType;
+        public string PageInhibitSnap;
 
 
         public override IEnumerable<CellTuple> GetCellTuples()
         {
-            yield return new CellTuple(nameof(SrcConstants.PageDrawingResizeType), SrcConstants.PageDrawingResizeType, this.DrawingResizeType);
-            yield return new CellTuple(nameof(SrcConstants.PageDrawingScale), SrcConstants.PageDrawingScale, this.DrawingScale);
-            yield return new CellTuple(nameof(SrcConstants.PageDrawingScaleType), SrcConstants.PageDrawingScaleType, this.DrawingScaleType);
-            yield return new CellTuple(nameof(SrcConstants.PageDrawingSizeType), SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
-            yield return new CellTuple(nameof(SrcConstants.PageHeight), SrcConstants.PageHeight, this.Height);
-            yield return new CellTuple(nameof(SrcConstants.PageInhibitSnap), SrcConstants.PageInhibitSnap, this.InhibitSnap);
-            yield return new CellTuple(nameof(SrcConstants.PageWidth), SrcConstants.PageWidth, this.Width);
-            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageScale, this.Scale);
-
-            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageShadowType, this.ShadowType);
-            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle);
-            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
-            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
-            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor);
-            yield return new CellTuple(nameof(SrcConstants.PageInhibitSnap), SrcConstants.PageInhibitSnap, this.InhibitSnap);
+            yield return new CellTuple(nameof(SrcConstants.PageDrawingResizeType), SrcConstants.PageDrawingResizeType, this.PageDrawingResizeType);
+            yield return new CellTuple(nameof(SrcConstants.PageDrawingScale), SrcConstants.PageDrawingScale, this.PageDrawingScale);
+            yield return new CellTuple(nameof(SrcConstants.PageDrawingScaleType), SrcConstants.PageDrawingScaleType, this.PageDrawingScaleType);
+            yield return new CellTuple(nameof(SrcConstants.PageDrawingSizeType), SrcConstants.PageDrawingSizeType, this.PageDrawingSizeType);
+            yield return new CellTuple(nameof(SrcConstants.PageHeight), SrcConstants.PageHeight, this.PageHeight);
+            yield return new CellTuple(nameof(SrcConstants.PageInhibitSnap), SrcConstants.PageInhibitSnap, this.PageInhibitSnap);
+            yield return new CellTuple(nameof(SrcConstants.PageWidth), SrcConstants.PageWidth, this.PageWidth);
+            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageScale, this.PageScale);
+            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageShadowType, this.PageShadowType);
+            yield return new CellTuple(nameof(SrcConstants.PageShadowObliqueAngle), SrcConstants.PageShadowObliqueAngle, this.PageShadowObliqueAngle);
+            yield return new CellTuple(nameof(SrcConstants.PageShadowOffsetX), SrcConstants.PageShadowOffsetX, this.PageShadowOffsetX);
+            yield return new CellTuple(nameof(SrcConstants.PageShadowOffsetY), SrcConstants.PageShadowOffsetY, this.PageShadowOffsetY);
+            yield return new CellTuple(nameof(SrcConstants.PageShadowScaleFactor), SrcConstants.PageShadowScaleFactor, this.PageShadowScaleFactor);
+            yield return new CellTuple(nameof(SrcConstants.PageInhibitSnap), SrcConstants.PageInhibitSnap, this.PageInhibitSnap);
         }
     }
 }
