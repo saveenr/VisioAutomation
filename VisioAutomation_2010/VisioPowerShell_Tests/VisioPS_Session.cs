@@ -73,7 +73,7 @@ namespace VisioPowerShell_Tests
             IVisio.Shape[] shapes)
         {
             var cmd = new VisioPowerShell.Commands.GetVisioShapeSheetCells();
-            cmd.Type = CellType.Page;
+            cmd.Type = CellType.PageFormat;
             cmd.Shapes = shapes;
             var cells = cmd.InvokeFirst<System.Data.DataTable>();
             return cells;

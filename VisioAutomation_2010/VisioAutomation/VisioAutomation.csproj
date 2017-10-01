@@ -97,7 +97,7 @@
     <Compile Include="Exceptions\InternalAssertionException.cs" />
     <Compile Include="Pages\PageLayoutCells.cs" />
     <Compile Include="Pages\PagePrintCells.cs" />
-    <Compile Include="Pages\PageRulerAndGridCells.cs" />
+    <Compile Include="Pages\PageCells.cs" />
     <Compile Include="ShapeSheet\CellGroups\ReaderMultiRow.cs" />
     <Compile Include="ShapeSheet\CellValueType.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryOutput.cs" />
