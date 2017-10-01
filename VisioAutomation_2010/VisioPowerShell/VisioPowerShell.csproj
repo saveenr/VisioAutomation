@@ -103,13 +103,7 @@
     <Compile Include="Models\NamedDictionary.cs" />
     <Compile Include="Models\NamedCellDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
-    <Compile Include="Models\PageFormatCells.cs" />
-    <Compile Include="Models\PagePrintCells.cs" />
-    <Compile Include="Models\PageRulerAndGridCells.cs" />
-    <Compile Include="Models\ShapeFormatCells.cs" />
-    <Compile Include="Models\ShapeXFormCells.cs" />
-    <Compile Include="Models\TextXFormCells.cs" />
-    <Compile Include="Models\TextFormatCells.cs" />
+    <Compile Include="Models\ShapeCells.cs" />
     <Compile Include="Models\UserDefinedCell.cs" />
     <Compile Include="Models\ConnectionPoint.cs" />
     <Compile Include="Models\CustomProperty.cs" />
