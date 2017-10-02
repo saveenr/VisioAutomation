@@ -65,6 +65,7 @@ namespace VisioPowerShell.Models
         public string CharPos { get; set; }
         public string CharStrikethru { get; set; }
 
+        /*
         // Shape TextXForm
         public string TextFormAngle;
         public string TextFormHeight;
@@ -72,7 +73,7 @@ namespace VisioPowerShell.Models
         public string TextFormLocPinY;
         public string TextFormPinX;
         public string TextFormPinY;
-        public string TextFormWidth;
+        public string TextFormWidth;*/
 
         // Shape Lock
         public string LockAspect;
@@ -156,6 +157,7 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.CharPos), SRCCON.CharPos, this.CharPos);
             yield return new CellTuple(nameof(SRCCON.CharStrikethru), SRCCON.CharStrikethru, this.CharStrikethru);
 
+            /*
             // Shape TextXForm
             yield return new CellTuple(nameof(SRCCON.TextXFormAngle), SRCCON.TextXFormAngle, this.TextFormAngle);
             yield return new CellTuple(nameof(SRCCON.TextXFormHeight), SRCCON.TextXFormHeight, this.TextFormHeight);
@@ -164,6 +166,7 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.TextXFormPinX), SRCCON.TextXFormPinX, this.TextFormPinX);
             yield return new CellTuple(nameof(SRCCON.TextXFormPinY), SRCCON.TextXFormPinY, this.TextFormPinY);
             yield return new CellTuple(nameof(SRCCON.TextXFormWidth), SRCCON.TextXFormWidth, this.TextFormWidth);
+            */
 
             // Shape Lock
             yield return new CellTuple(nameof(SRCCON.LockAspect), SRCCON.LockAspect, this.LockAspect);

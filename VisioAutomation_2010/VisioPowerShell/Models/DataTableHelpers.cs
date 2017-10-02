@@ -38,39 +38,40 @@ namespace VisioPowerShell.Models
             return dt;
         }
 
-        public static DataTable QueryToDataTable(CellQuery cell_query, bool getresults, ResultType result_type, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
+        public static DataTable QueryToDataTable(CellQuery cell_query,CellOutputType cvk, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
         {
-            if (!getresults)
+            // Caller is asking for Results
+            switch (cvk)
             {
-                var output = cell_query.GetFormulas(surface, shapeids);
-                return DataTableHelpers.querytable_to_datatable(cell_query, output);
-            }
-
-            switch (result_type)
-            {
-                case ResultType.String:
+                case CellOutputType.Formula:
+                {
+                    var output = cell_query.GetFormulas(surface, shapeids);
+                    var dt = DataTableHelpers.querytable_to_datatable(cell_query, output);
+                    return dt;
+                    }
+                case CellOutputType.ResultString:
                 {
                     var output = cell_query.GetResults<string>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(cell_query, output);
                 }
-                case ResultType.Boolean:
+                case CellOutputType.ResultBoolean:
                 {
                     var output = cell_query.GetResults<bool>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(cell_query, output);
                 }
-                case ResultType.Double:
+                case CellOutputType.ResultDouble:
                 {
                     var output = cell_query.GetResults<double>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(cell_query, output);
                 }
-                case ResultType.Integer:
+                case CellOutputType.ResultInteger:
                 {
                     var output = cell_query.GetResults<int>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(cell_query, output);
                 }
             }
 
-            throw new System.ArgumentOutOfRangeException("Unsupported Result type");
+            throw new System.ArgumentOutOfRangeException(nameof(cvk), "Unsupported Result type");
         }
     }
 }

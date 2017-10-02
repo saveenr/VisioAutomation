@@ -84,10 +84,9 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SrcConstants.PageDrawingScaleType), SrcConstants.PageDrawingScaleType, this.PageDrawingScaleType);
             yield return new CellTuple(nameof(SrcConstants.PageDrawingSizeType), SrcConstants.PageDrawingSizeType, this.PageDrawingSizeType);
             yield return new CellTuple(nameof(SrcConstants.PageHeight), SrcConstants.PageHeight, this.PageHeight);
-            yield return new CellTuple(nameof(SrcConstants.PageInhibitSnap), SrcConstants.PageInhibitSnap, this.PageInhibitSnap);
             yield return new CellTuple(nameof(SrcConstants.PageWidth), SrcConstants.PageWidth, this.PageWidth);
             yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageScale, this.PageScale);
-            yield return new CellTuple(nameof(SrcConstants.PageScale), SrcConstants.PageShadowType, this.PageShadowType);
+            yield return new CellTuple(nameof(SrcConstants.PageShadowType), SrcConstants.PageShadowType, this.PageShadowType);
             yield return new CellTuple(nameof(SrcConstants.PageShadowObliqueAngle), SrcConstants.PageShadowObliqueAngle, this.PageShadowObliqueAngle);
             yield return new CellTuple(nameof(SrcConstants.PageShadowOffsetX), SrcConstants.PageShadowOffsetX, this.PageShadowOffsetX);
             yield return new CellTuple(nameof(SrcConstants.PageShadowOffsetY), SrcConstants.PageShadowOffsetY, this.PageShadowOffsetY);

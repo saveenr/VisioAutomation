@@ -6,6 +6,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
+
+
     [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioCells)]
     public class GetVisioCells : VisioCmdlet
     {
@@ -16,10 +18,7 @@ namespace VisioPowerShell.Commands
         public IVisio.Shape[] Shapes { get; set; }
 
         [Parameter(Mandatory = false)] 
-        public SwitchParameter GetResults;
-
-        [Parameter(Mandatory = false)] 
-        public VisioPowerShell.Models.ResultType ResultType = VisioPowerShell.Models.ResultType.String;
+        public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
         protected override void ProcessRecord()
         {
@@ -29,7 +28,7 @@ namespace VisioPowerShell.Commands
             var query = _CreateQuery(celldic, cells);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
-            var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
+            var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
             this.WriteObject(dt);
         }
 
