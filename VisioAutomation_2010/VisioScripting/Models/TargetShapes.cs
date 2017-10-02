@@ -74,7 +74,7 @@ namespace VisioScripting.Models
             return this.Shapes;
         }
 
-        internal TargetShapes ResolveShapes(VisioScripting.Client client)
+        public TargetShapes ResolveShapes(VisioScripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
             var targets = new TargetShapes(shapes);
