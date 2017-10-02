@@ -135,7 +135,6 @@
     <Compile Include="Commands\RemoveVisioShape.cs" />
     <Compile Include="Commands\GetVisioLayer.cs" />
     <Compile Include="Commands\SelectVisioShape.cs" />
-    <Compile Include="Commands\NewVisioBezier.cs" />
     <Compile Include="Commands\NewVisioModelPieChart.cs" />
     <Compile Include="Commands\ExportVisioPage.cs" />
     <Compile Include="Commands\GetVisioConnectionPoint.cs" />
