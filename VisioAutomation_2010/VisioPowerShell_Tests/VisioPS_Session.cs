@@ -109,7 +109,7 @@ namespace VisioPowerShell_Tests
         }
 
         public void Set_VisioShapeCells(
-            BaseCells cells,
+            BaseCells[] cells,
             IVisio.Shape[] shapes)
         {
             var cmd = new VisioPowerShell.Commands.SetVisioShapeSheetCells();

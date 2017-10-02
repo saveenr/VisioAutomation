@@ -7,8 +7,8 @@ namespace VisioPowerShell.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioShapeSheetCells)]
     public class SetVisioShapeSheetCells : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false, Position = 0)]
-        public VisioPowerShell.Models.BaseCells Cells { get; set; }
+        [SMA.Parameter(Mandatory = true, Position = 0)]
+        public VisioPowerShell.Models.BaseCells[] Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
@@ -24,45 +24,49 @@ namespace VisioPowerShell.Commands
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
             var targets = new VisioScripting.Models.TargetShapes(target_shapes);
 
-            this.SetCells(this.Client, targets, this.ApplyCells, this.BlastGuards, this.TestCircular);
-        }
+            if (this.Cells == null)
+            {
+                return;
+            }
 
-        public void ApplyCells(SidSrcWriter writer, short id)
-        {
-            this.Cells.Apply(writer, id);
-        }
+            if (this.Cells.Length < 1)
+            {
+                return;
+            }
 
-        public void SetCells(VisioScripting.Client _client, VisioScripting.Models.TargetShapes targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards, bool test_circular)
-        {
-            targets = targets.ResolveShapes(_client);
+            targets = targets.ResolveShapes(this.Client);
+
+            if (targets.Shapes.Count < 1)
+            {
+                return;
+            }
+
             var target_ids = targets.ToShapeIDs();
-            this.SetCells(_client, target_ids, apply_cells, blast_guards, test_circular);
-        }
 
-        public void SetCells(VisioScripting.Client _client, VisioScripting.Models.TargetShapeIDs targets, System.Action<SidSrcWriter, short> apply_cells, bool blast_guards, bool test_circular)
-        {
             var writer = new SidSrcWriter();
-            writer.BlastGuards = blast_guards;
-            writer.TestCircular = test_circular;
+            writer.BlastGuards = this.BlastGuards;
+            writer.TestCircular = this.TestCircular;
 
-            foreach (var shape_id in targets.ShapeIDs)
+            for (int i = 0; i < target_ids.ShapeIDs.Count; i++)
             {
-                apply_cells(writer, (short)shape_id);
+                var shape_id = target_ids.ShapeIDs[i];
+                var cells = this.Cells[i % this.Cells.Length];
+
+                cells.Apply(writer, (short)shape_id);
             }
 
-            var surface = _client.ShapeSheet.GetShapeSheetSurface();
+            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
-            _client.WriteVerbose("BlastGuards: {0}", blast_guards);
-            _client.WriteVerbose("TestCircular: {0}", test_circular);
-            _client.WriteVerbose("Number of Shapes : {0}", targets.ShapeIDs.Count);
+            this.Client.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
+            this.Client.WriteVerbose("TestCircular: {0}", this.TestCircular);
+            this.Client.WriteVerbose("Number of Shapes : {0}", target_ids.ShapeIDs.Count);
 
-            using (var undoscope = _client.Application.NewUndoScope("Set Shape Cells"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Cells"))
             {
-                _client.WriteVerbose("Start Update");
+                this.Client.WriteVerbose("Start Update");
                 writer.Commit(surface);
-                _client.WriteVerbose("End Update");
+                this.Client.WriteVerbose("End Update");
             }
         }
-
     }
 }

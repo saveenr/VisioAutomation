@@ -46,7 +46,7 @@ namespace VisioPowerShell_Tests
             pagecells.PageHeight = "4 in";
             pagecells.PageWidth= "3 in";
 
-            VisioPS_Basic_Tests.session.Set_VisioShapeCells(cells, PsArray.From(page.PageSheet));
+            VisioPS_Basic_Tests.session.Set_VisioShapeCells(PsArray.From(cells), PsArray.From(page.PageSheet));
             
             var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeSheetCells(PsArray.From(page.PageSheet));
 
