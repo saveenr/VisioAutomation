@@ -72,7 +72,7 @@ namespace VisioPowerShell_Tests
         public System.Data.DataTable Get_VisioShapeSheetCells(
             IVisio.Shape[] shapes)
         {
-            var cmd = new VisioPowerShell.Commands.GetVisioShapeSheetCells();
+            var cmd = new VisioPowerShell.Commands.GetVisioCells();
             cmd.Type = CellType.Page;
             cmd.Shapes = shapes;
             var cells = cmd.InvokeFirst<System.Data.DataTable>();
@@ -112,7 +112,7 @@ namespace VisioPowerShell_Tests
             BaseCells[] cells,
             IVisio.Shape[] shapes)
         {
-            var cmd = new VisioPowerShell.Commands.SetVisioShapeSheetCells();
+            var cmd = new VisioPowerShell.Commands.SetVisioCells();
             cmd.Cells = cells;
             cmd.Shapes = shapes;
             cmd.InvokeVoid();
@@ -156,7 +156,7 @@ namespace VisioPowerShell_Tests
         public BaseCells New_VisioShapeSheetCells(
             CellType type)
         {
-            var cmd = new VisioPowerShell.Commands.NewVisioShapeSheetCells();
+            var cmd = new VisioPowerShell.Commands.NewVisioCells();
             cmd.Type = type;
             var cells = cmd.InvokeFirst<BaseCells>();
             return cells;

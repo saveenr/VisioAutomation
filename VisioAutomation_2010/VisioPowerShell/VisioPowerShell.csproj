@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CellType.cs" />
-    <Compile Include="Commands\NewVisioShapeSheetCells.cs" />
+    <Compile Include="Commands\NewVisioCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />
     <Compile Include="Models\CellValueDictionary.cs" />
@@ -109,14 +109,14 @@
     <Compile Include="Models\CustomProperty.cs" />
     <Compile Include="Commands\OutVisio.cs" />
     <Compile Include="Models\DirectedEdge.cs" />
-    <Compile Include="Commands\GetVisioShapeSheetCells.cs" />
+    <Compile Include="Commands\GetVisioCells.cs" />
     <Compile Include="Commands\NewVisioModelAreaChart.cs" />
     <Compile Include="Commands\NewVisioModelBarChart.cs" />
     <Compile Include="Commands\NewVisioModelDirectedGraph.cs" />
     <Compile Include="Commands\NewVisioModelOrgChart.cs" />
     <Compile Include="Commands\SetVisioDocument.cs" />
     <Compile Include="Commands\SetVisioPage.cs" />
-    <Compile Include="Commands\SetVisioShapeSheetCells.cs" />
+    <Compile Include="Commands\SetVisioCells.cs" />
     <Compile Include="Commands\RemoveVisioPage.cs" />
     <Compile Include="Commands\TestVisioApplication.cs" />
     <Compile Include="Commands\GetVisioClient.cs" />

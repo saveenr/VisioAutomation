@@ -3,8 +3,8 @@ using VisioPowerShell.Models;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioShapeSheetCells)]
-    public class NewVisioShapeSheetCells : VisioCmdlet
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioCells)]
+    public class NewVisioCells : VisioCmdlet
     {
         [Parameter(Mandatory = true)]
         public VisioPowerShell.Models.CellType Type { get; set; }
