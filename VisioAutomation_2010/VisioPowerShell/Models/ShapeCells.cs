@@ -5,7 +5,7 @@ namespace VisioPowerShell.Models
 {
     public class ShapeCells : VisioPowerShell.Models.BaseCells
     {
-
+        // Shape XForm
         public string XFormAngle;
         public string XFormHeight;
         public string XFormLocPinX;
@@ -14,6 +14,7 @@ namespace VisioPowerShell.Models
         public string XFormPinY;
         public string XFormWidth;
 
+        // Shape Fill
         public string FillBackground;
         public string FillBackgroundTransparency;
         public string FillForeground;
@@ -24,7 +25,9 @@ namespace VisioPowerShell.Models
         public string FillShadowForeground;
         public string FillShadowForegroundTransparency;
         public string FillShadowPattern;
-        public string GroupSelectMode;
+
+        // Shape Line
+
         public string LineBeginArrow;
         public string LineBeginArrowSize;
         public string LineCap;
@@ -34,11 +37,17 @@ namespace VisioPowerShell.Models
         public string LinePattern;
         public string LineRounding;
         public string LineWeight;
+
+        // Shape 1-D
         public string OneDBeginX;
         public string OneDBeginY;
         public string OneDEndX;
         public string OneDEndY;
 
+        // Shape Other
+        public string GroupSelectMode;
+
+        // Shape Character
         public string CharCase;
         public string CharColor;
         public string CharColorTransparency;
@@ -56,6 +65,7 @@ namespace VisioPowerShell.Models
         public string CharPos { get; set; }
         public string CharStrikethru { get; set; }
 
+        // Shape TextXForm
         public string TextFormAngle;
         public string TextFormHeight;
         public string TextFormLocPinX;
@@ -64,6 +74,7 @@ namespace VisioPowerShell.Models
         public string TextFormPinY;
         public string TextFormWidth;
 
+        // Shape Lock
         public string LockAspect;
         public string LockBegin;
         public string LockCalcWH;
@@ -85,12 +96,9 @@ namespace VisioPowerShell.Models
         public string LockVertexEdit;
         public string LockWidth;
 
-
-
-
         public override IEnumerable<CellTuple> GetCellTuples()
         {
-
+            // Shape XForm
             yield return new CellTuple(nameof(SRCCON.XFormAngle), SRCCON.XFormAngle, this.XFormAngle);
             yield return new CellTuple(nameof(SRCCON.XFormHeight), SRCCON.XFormHeight, this.XFormHeight);
             yield return new CellTuple(nameof(SRCCON.XFormLocPinX), SRCCON.XFormLocPinX, this.XFormLocPinX);
@@ -99,8 +107,7 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.XFormPinY), SRCCON.XFormPinY, this.XFormPinY);
             yield return new CellTuple(nameof(SRCCON.XFormWidth), SRCCON.XFormWidth, this.XFormWidth);
 
-
-
+            // Shape Fill
             yield return new CellTuple(nameof(SRCCON.FillBackground), SRCCON.FillBackground, this.FillBackground);
             yield return new CellTuple(nameof(SRCCON.FillBackgroundTransparency), SRCCON.FillBackgroundTransparency, this.FillBackgroundTransparency);
             yield return new CellTuple(nameof(SRCCON.FillForeground), SRCCON.FillForeground, this.FillForeground);
@@ -111,7 +118,8 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.FillShadowForeground), SRCCON.FillShadowForeground, this.FillShadowForeground);
             yield return new CellTuple(nameof(SRCCON.FillShadowForegroundTransparency), SRCCON.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
             yield return new CellTuple(nameof(SRCCON.FillShadowPattern), SRCCON.FillShadowPattern, this.FillShadowPattern);
-            yield return new CellTuple(nameof(SRCCON.GroupSelectMode), SRCCON.GroupSelectMode, this.GroupSelectMode);
+
+            // Shape Line
             yield return new CellTuple(nameof(SRCCON.LineBeginArrow), SRCCON.LineBeginArrow, this.LineBeginArrow);
             yield return new CellTuple(nameof(SRCCON.LineBeginArrowSize), SRCCON.LineBeginArrowSize, this.LineBeginArrowSize);
             yield return new CellTuple(nameof(SRCCON.LineCap), SRCCON.LineCap, this.LineCap);
@@ -121,11 +129,17 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.LinePattern), SRCCON.LinePattern, this.LinePattern);
             yield return new CellTuple(nameof(SRCCON.LineRounding), SRCCON.LineRounding, this.LineRounding);
             yield return new CellTuple(nameof(SRCCON.LineWeight), SRCCON.LineWeight, this.LineWeight);
+
+            // Shape 1-D
             yield return new CellTuple(nameof(SRCCON.OneDBeginX), SRCCON.OneDBeginX, this.OneDBeginX);
             yield return new CellTuple(nameof(SRCCON.OneDBeginY), SRCCON.OneDBeginY, this.OneDBeginY);
             yield return new CellTuple(nameof(SRCCON.OneDEndX), SRCCON.OneDEndX, this.OneDEndX);
             yield return new CellTuple(nameof(SRCCON.OneDEndY), SRCCON.OneDEndY, this.OneDEndY);
 
+            // Shape Other
+            yield return new CellTuple(nameof(SRCCON.GroupSelectMode), SRCCON.GroupSelectMode, this.GroupSelectMode);
+
+            // Shape Character
             yield return new CellTuple(nameof(SRCCON.CharCase), SRCCON.CharCase, this.CharCase);
             yield return new CellTuple(nameof(SRCCON.CharColor), SRCCON.CharColor, this.CharColor);
             yield return new CellTuple(nameof(SRCCON.CharColorTransparency), SRCCON.CharColorTransparency, this.CharColorTransparency);
@@ -142,7 +156,7 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.CharPos), SRCCON.CharPos, this.CharPos);
             yield return new CellTuple(nameof(SRCCON.CharStrikethru), SRCCON.CharStrikethru, this.CharStrikethru);
 
-
+            // Shape TextXForm
             yield return new CellTuple(nameof(SRCCON.TextXFormAngle), SRCCON.TextXFormAngle, this.TextFormAngle);
             yield return new CellTuple(nameof(SRCCON.TextXFormHeight), SRCCON.TextXFormHeight, this.TextFormHeight);
             yield return new CellTuple(nameof(SRCCON.TextXFormLocPinX), SRCCON.TextXFormLocPinX, this.TextFormLocPinX);
@@ -151,7 +165,7 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.TextXFormPinY), SRCCON.TextXFormPinY, this.TextFormPinY);
             yield return new CellTuple(nameof(SRCCON.TextXFormWidth), SRCCON.TextXFormWidth, this.TextFormWidth);
 
-
+            // Shape Lock
             yield return new CellTuple(nameof(SRCCON.LockAspect), SRCCON.LockAspect, this.LockAspect);
             yield return new CellTuple(nameof(SRCCON.LockBegin), SRCCON.LockBegin, this.LockBegin);
             yield return new CellTuple(nameof(SRCCON.LockCalcWH), SRCCON.LockCalcWH, this.LockCalcWH);
@@ -175,4 +189,3 @@ namespace VisioPowerShell.Models
         }
     }
 }
-
