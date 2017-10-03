@@ -3,8 +3,9 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioShapeText)]
-    public class SetVisioShapeText : VisioCmdlet
+    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioText)]
+    [System.Management.Automation.Alias("Set-VisioShapeText")]
+    public class SetVisioText : VisioCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
         public string[] Text { get; set; }

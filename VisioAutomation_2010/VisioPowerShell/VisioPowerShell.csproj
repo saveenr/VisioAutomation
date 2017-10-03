@@ -158,7 +158,7 @@
     <Compile Include="Commands\GetVisioPage.cs" />
     <Compile Include="Commands\GetVisioCustomProperty.cs" />
     <Compile Include="Commands\GetVisioShape.cs" />
-    <Compile Include="Commands\GetVisioShapeText.cs" />
+    <Compile Include="Commands\GetVisioText.cs" />
     <Compile Include="Commands\GetVisioApplication.cs" />
     <Compile Include="Commands\NewVisioGroup.cs" />
     <Compile Include="Commands\NewVisioPage.cs" />
@@ -169,7 +169,7 @@
     <Compile Include="Commands\VisioCmdlet.cs" />
     <Compile Include="Commands\SetVisioPageLayout.cs" />
     <Compile Include="Commands\SetVisioCustomProperty.cs" />
-    <Compile Include="Commands\SetVisioShapeText.cs" />
+    <Compile Include="Commands\SetVisioText.cs" />
     <Compile Include="Commands\CloseVisioApplication.cs" />
     <Compile Include="Commands\UndoVisio.cs" />
     <Compile Include="Commands\RemoveVisioGroup.cs" />

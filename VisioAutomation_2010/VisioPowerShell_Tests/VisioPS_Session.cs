@@ -111,7 +111,7 @@ namespace VisioPowerShell_Tests
             string[] text, 
             IVisio.Shape[] shapes)
         {
-            var cmd = new VisioPowerShell.Commands.SetVisioShapeText();
+            var cmd = new VisioPowerShell.Commands.SetVisioText();
             cmd.Text = text;
             cmd.Shapes = shapes;
             cmd.InvokeVoid();
@@ -139,7 +139,7 @@ namespace VisioPowerShell_Tests
 
         public string[] Get_VisioShapeText()
         {
-            var cmd = new VisioPowerShell.Commands.GetVisioShapeText();
+            var cmd = new VisioPowerShell.Commands.GetVisioText();
             var results = cmd.InvokeFirst<List<string>>();
             return results.ToArray();
         }
