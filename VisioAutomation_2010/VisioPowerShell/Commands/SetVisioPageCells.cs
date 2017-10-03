@@ -4,14 +4,14 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioShapeCells)]
-    public class SetVisioShapeCells : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioPageCells)]
+    public class SetVisioPageCells : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position = 0)]
-        public VisioPowerShell.Models.ShapeCells[] Cells { get; set; }
+        public VisioPowerShell.Models.PageCells Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes { get; set; }
+        public IVisio.Page Page { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
@@ -21,7 +21,8 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
+            var target_page = this.Page ?? this.Client.Page.Get();
+            var target_shapes = new[] {target_page.PageSheet};
             var targets = new VisioScripting.Models.TargetShapes(target_shapes);
 
             if (this.Cells == null)
@@ -29,10 +30,6 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            if (this.Cells.Length < 1)
-            {
-                return;
-            }
 
             targets = targets.ResolveShapes(this.Client);
 
@@ -47,15 +44,8 @@ namespace VisioPowerShell.Commands
             writer.BlastGuards = this.BlastGuards;
             writer.TestCircular = this.TestCircular;
 
-            for (int i = 0; i < target_ids.ShapeIDs.Count; i++)
-            {
-                var shape_id = target_ids.ShapeIDs[i];
-                var cells = this.Cells[i % this.Cells.Length];
+            this.Cells.Apply(writer, (short)target_page.PageSheet.ID);
 
-                cells.Apply(writer, (short)shape_id);
-            }
-
-            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
             this.Client.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.WriteVerbose("TestCircular: {0}", this.TestCircular);
@@ -64,9 +54,10 @@ namespace VisioPowerShell.Commands
             using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Cells"))
             {
                 this.Client.WriteVerbose("Start Update");
-                writer.Commit(surface);
+                writer.Commit(target_page);
                 this.Client.WriteVerbose("End Update");
             }
         }
     }
+
 }

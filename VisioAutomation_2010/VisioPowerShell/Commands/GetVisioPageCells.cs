@@ -7,29 +7,29 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioShapeCells)]
-    public class GetVisioShapeCells : VisioCmdlet
+    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioPageCells)]
+    public class GetVisioPageCells: VisioCmdlet
     {
         [Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes { get; set; }
+        public IVisio.Page Page { get; set; }
 
-        [Parameter(Mandatory = false)] 
+        [Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
         protected override void ProcessRecord()
         {
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
-            var celldic = VisioPowerShell.Models.BaseCells.GetDictionary(CellType.Shape);
+            var target_page = this.Page ?? this.Client.Page.Get();
+            var celldic = VisioPowerShell.Models.BaseCells.GetDictionary(CellType.Page);
             var cells = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cells);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            var target_shapeids = target_shapes.Select(s => s.ID).ToList();
+            var target_shapeids = new List<int> { target_page.PageSheet.ID };
             var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
             this.WriteObject(dt);
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
-            VisioPowerShell.Models.NamedCellDictionary celldic, 
+            VisioPowerShell.Models.NamedCellDictionary celldic,
             IList<string> cells)
         {
             var invalid_names = cells.Where(cellname => !celldic.ContainsKey(cellname)).ToList();
@@ -57,4 +57,5 @@ namespace VisioPowerShell.Commands
             return query;
         }
     }
+
 }

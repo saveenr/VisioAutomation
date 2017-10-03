@@ -83,6 +83,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\GetVisioPageCells.cs" />
+    <Compile Include="Commands\NewVisioPageCells.cs" />
+    <Compile Include="Commands\SetVisioPageCells.cs" />
     <Compile Include="Models\CellType.cs" />
     <Compile Include="Commands\NewVisioShapeCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
