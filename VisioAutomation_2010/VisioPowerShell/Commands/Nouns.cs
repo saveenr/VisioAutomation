@@ -12,7 +12,8 @@ namespace VisioPowerShell.Commands
         public const string VisioModelOrgChart = nameof(VisioModelOrgChart);
         public const string VisioModelPieChart = nameof(VisioModelPieChart);
 
-        public const string VisioCells = nameof(VisioCells);
+        public const string VisioShapeCells = nameof(VisioShapeCells);
+        public const string VisioPageCells = nameof(VisioPageCells);
 
         public const string VisioBezier = nameof(VisioBezier);
         public const string VisioClient = nameof(VisioClient);

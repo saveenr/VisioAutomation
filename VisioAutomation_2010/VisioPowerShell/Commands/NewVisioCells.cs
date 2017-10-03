@@ -3,15 +3,22 @@ using VisioPowerShell.Models;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioCells)]
-    public class NewVisioCells : VisioCmdlet
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioShapeCells)]
+    public class NewVisioShapeCells : VisioCmdlet
     {
-        [Parameter(Mandatory = true)]
-        public VisioPowerShell.Models.CellType Type { get; set; }
-
         protected override void ProcessRecord()
         {
-            var cells = BaseCells.CreateCells(this.Type);
+            var cells = new VisioPowerShell.Models.ShapeCells();
+            this.WriteObject(cells);
+        }
+    }
+
+    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioPageCells)]
+    public class NewVisioPageCells : VisioCmdlet
+    {
+        protected override void ProcessRecord()
+        {
+            var cells = new VisioPowerShell.Models.PageCells();
             this.WriteObject(cells);
         }
     }

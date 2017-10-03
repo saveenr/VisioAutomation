@@ -41,14 +41,14 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             var page = VisioPS_Basic_Tests.session.Get_VisioPage(activepage: true, name: null);
 
-            var cells = VisioPS_Basic_Tests.session.New_VisioShapeSheetCells(CellType.Page);
-            var pagecells = (PageCells) cells;
+            var cells = VisioPS_Basic_Tests.session.New_VisioPageCells();
+            var pagecells = cells;
             pagecells.PageHeight = "4 in";
             pagecells.PageWidth= "3 in";
 
-            VisioPS_Basic_Tests.session.Set_VisioShapeCells(PsArray.From(cells), PsArray.From(page.PageSheet));
+            VisioPS_Basic_Tests.session.Set_VisioPageCells(cells, page);
             
-            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeSheetCells(PsArray.From(page.PageSheet));
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioPageCells(page);
 
             Assert.IsNotNull(datatable1);
             Assert.AreEqual("3 in", datatable1.Rows[0]["PageWidth"]);
@@ -77,7 +77,7 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             var page = VisioPS_Basic_Tests.session.Get_VisioPage(activepage:true,name:null);
 
-            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioShapeSheetCells( PsArray.From(page.PageSheet));
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioPageCells( page );
 
             Assert.IsNotNull(datatable1);
             Assert.AreEqual("8.5 in", datatable1.Rows[0]["PageWidth"]);
@@ -100,7 +100,7 @@ namespace VisioPowerShell_Tests
 
             var rect = VisioPS_Basic_Tests.session.Get_VisioMaster(rectangle, basic_u_vss);
 
-            VisioPS_Basic_Tests.session.New_VisioShape( PsArray.From(rect) , new[] { 1.0, 1.0 });
+            VisioPS_Basic_Tests.session.New_VisioShape( rect.ToArray() , new[] { 1.0, 1.0 });
 
             // Drop a container on the page... the rectangle we created above should be selected by default. 
             // Since it is selected it will be added as a member to the container.
