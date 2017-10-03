@@ -79,10 +79,10 @@ namespace VisioPowerShell_Tests
         }
 
         public System.Data.DataTable Get_VisioPageCells(
-            IVisio.Page page)
+            IVisio.Page[] pages)
         {
             var cmd = new VisioPowerShell.Commands.GetVisioPageCells();
-            cmd.Page = page;
+            cmd.Pages = pages;
             var cells = cmd.InvokeFirst<System.Data.DataTable>();
             return cells;
         }

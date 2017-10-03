@@ -11,21 +11,32 @@ namespace VisioPowerShell.Commands
     public class GetVisioPageCells: VisioCmdlet
     {
         [Parameter(Mandatory = false)]
-        public IVisio.Page Page { get; set; }
+        public IVisio.Page[] Pages { get; set; }
 
         [Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
         protected override void ProcessRecord()
         {
-            var target_page = this.Page ?? this.Client.Page.Get();
+            var target_pages = this.Pages ?? new[] { this.Client.Page.Get() };
+
+            if (target_pages.Length < 1)
+            {
+                return;
+            }
+
             var celldic = VisioPowerShell.Models.BaseCells.GetDictionary(CellType.Page);
             var cells = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cells);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            var target_shapeids = new List<int> { target_page.PageSheet.ID };
-            var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
-            this.WriteObject(dt);
+
+            foreach (var target_page in target_pages)
+            {
+                var target_pagesheet = target_page.PageSheet;
+                var target_shapeids = new List<int> { target_pagesheet.ID };
+                var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
+                this.WriteObject(dt);
+            }
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(

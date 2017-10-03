@@ -48,7 +48,7 @@ namespace VisioPowerShell_Tests
 
             VisioPS_Basic_Tests.session.Set_VisioPageCells(cells, PsArray.From(page));
             
-            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioPageCells(page);
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioPageCells(PsArray.From(page));
 
             Assert.IsNotNull(datatable1);
             Assert.AreEqual("3 in", datatable1.Rows[0]["PageWidth"]);
@@ -77,7 +77,7 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.session.New_VisioDocument();
             var page = VisioPS_Basic_Tests.session.Get_VisioPage(activepage:true,name:null);
 
-            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioPageCells( page );
+            var datatable1 = VisioPS_Basic_Tests.session.Get_VisioPageCells( PsArray.From(page) );
 
             Assert.IsNotNull(datatable1);
             Assert.AreEqual("8.5 in", datatable1.Rows[0]["PageWidth"]);
