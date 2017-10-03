@@ -128,7 +128,7 @@ namespace VisioPowerShell_Tests
         }
 
         public void Set_VisioPageCells(
-            PageCells cells,
+            PageCells[] cells,
             IVisio.Page[] pages)
         {
             var cmd = new VisioPowerShell.Commands.SetVisioPageCells();
