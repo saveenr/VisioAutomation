@@ -129,11 +129,11 @@ namespace VisioPowerShell_Tests
 
         public void Set_VisioPageCells(
             PageCells cells,
-            IVisio.Page page)
+            IVisio.Page[] pages)
         {
             var cmd = new VisioPowerShell.Commands.SetVisioPageCells();
             cmd.Cells = cells;
-            cmd.Page = page;
+            cmd.Pages = pages;
             cmd.InvokeVoid();
         }
 

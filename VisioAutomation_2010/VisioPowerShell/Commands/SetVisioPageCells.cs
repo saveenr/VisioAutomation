@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands
         public VisioPowerShell.Models.PageCells Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page Page { get; set; }
+        public IVisio.Page[] Pages { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
@@ -21,43 +21,42 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var target_page = this.Page ?? this.Client.Page.Get();
-            var target_shapes = new[] {target_page.PageSheet};
-            var targets = new VisioScripting.Models.TargetShapes(target_shapes);
-
             if (this.Cells == null)
             {
                 return;
             }
 
+            var target_pages = this.Pages ?? new []{ this.Client.Page.Get() };
 
-            targets = targets.ResolveShapes(this.Client);
-
-            if (targets.Shapes.Count < 1)
+            if (target_pages.Length < 1)
             {
                 return;
             }
 
-            var target_ids = targets.ToShapeIDs();
 
-            var writer = new SidSrcWriter();
-            writer.BlastGuards = this.BlastGuards;
-            writer.TestCircular = this.TestCircular;
-
-            this.Cells.Apply(writer, (short)target_page.PageSheet.ID);
-
-
-            this.Client.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
-            this.Client.WriteVerbose("TestCircular: {0}", this.TestCircular);
-            this.Client.WriteVerbose("Number of Shapes : {0}", target_ids.ShapeIDs.Count);
-
-            using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Cells"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Set Page Cells"))
             {
-                this.Client.WriteVerbose("Start Update");
-                writer.Commit(target_page);
-                this.Client.WriteVerbose("End Update");
+                for (int i = 0; i < target_pages.Length; i++)
+                {
+                    var target_page = target_pages[i];
+
+                    this.Client.WriteVerbose("Start Update Page Name={0}", target_page.NameU);
+
+                    var target_pagesheet = target_page.PageSheet;
+                    int target_pagesheet_id = target_pagesheet.ID;
+
+                    var writer = new SidSrcWriter();
+                    writer.BlastGuards = this.BlastGuards;
+                    writer.TestCircular = this.TestCircular;
+                    this.Cells.Apply(writer, (short)target_pagesheet_id);
+                    this.Client.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
+                    this.Client.WriteVerbose("TestCircular: {0}", this.TestCircular);
+
+                    writer.Commit(target_page);
+                    this.Client.WriteVerbose("End Update Page Name={0}", target_page.NameU);
+                }
+
             }
         }
     }
-
 }
