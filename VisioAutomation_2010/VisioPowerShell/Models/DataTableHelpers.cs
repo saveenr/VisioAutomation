@@ -38,7 +38,6 @@ namespace VisioPowerShell.Models
 
         public static DataTable QueryToDataTable(CellQuery cell_query,CellOutputType cell_output_type, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
         {
-            // Caller is asking for Results
             switch (cell_output_type)
             {
                 case CellOutputType.Formula:
@@ -69,7 +68,7 @@ namespace VisioPowerShell.Models
                 }
             }
 
-            string msg = string.Format("Unsupported value of \"{0}\"for type {1}", cell_output_type, nameof(CellOutputType));
+            string msg = string.Format("Unsupported value of \"{0}\" for type {1}", cell_output_type, nameof(CellOutputType));
             throw new System.ArgumentOutOfRangeException(nameof(cell_output_type), msg);
         }
     }
