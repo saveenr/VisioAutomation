@@ -19,7 +19,8 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
-            var celldic = VisioPowerShell.Models.BaseCells.GetDictionary(CellType.Shape);
+
+            var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(new ShapeCells());
             var cells = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cells);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();

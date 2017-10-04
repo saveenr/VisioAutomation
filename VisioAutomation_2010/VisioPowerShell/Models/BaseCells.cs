@@ -27,17 +27,8 @@ namespace VisioPowerShell.Models
             {
                 return new VisioPowerShell.Models.ShapeCells();
             }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(celltype));
-            }
-        }
 
-        public static VisioPowerShell.Models.NamedCellDictionary GetDictionary(CellType type)
-        {
-            var cells = BaseCells.CreateCells(type);
-            var dic = VisioPowerShell.Models.NamedCellDictionary.FromCells(cells);
-            return dic;
+            throw new System.ArgumentOutOfRangeException(nameof(celltype));
         }
     }
 }
