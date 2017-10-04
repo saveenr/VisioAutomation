@@ -12,7 +12,6 @@ namespace VisioPowerShell.Models
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
-            dt.Columns.Add("ShapeID", typeof(int));
             foreach (var col in cell_query.Columns)
             {
                 dt.Columns.Add(col.Name, typeof(T));
@@ -21,15 +20,13 @@ namespace VisioPowerShell.Models
             // Then populate the rows of the datatable
             dt.BeginLoadData();
             int colcount = cell_query.Columns.Count;
-            var rowbuf = new object[colcount+1];
+            var rowbuf = new object[colcount];
             for (int r = 0; r < query_output.Count; r++)
             {
                 // populate the row buffer
-                rowbuf[0] = query_output[r].ShapeID;
-
                 for (int i = 0; i < colcount; i++)
                 {
-                    rowbuf[i+1] = query_output[r].Cells[i];
+                    rowbuf[i] = query_output[r].Cells[i];
                 }
 
                 // load it into the table

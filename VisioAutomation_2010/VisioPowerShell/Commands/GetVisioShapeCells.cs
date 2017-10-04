@@ -27,6 +27,15 @@ namespace VisioPowerShell.Commands
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
             var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
+
+            // Annotate the returned datatable to disambiguate rows
+            var c = dt.Columns.Add("ShapeID", typeof(System.Int32));
+            c.SetOrdinal(0);
+            for (int i = 0; i < target_shapeids.Count; i++)
+            {
+                dt.Rows[i]["ShapeID"] = target_shapeids[i];
+            }
+
             this.WriteObject(dt);
         }
 

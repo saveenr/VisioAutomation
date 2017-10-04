@@ -41,6 +41,14 @@ namespace VisioPowerShell.Commands
                 result_dt.Merge(dt);
             }
 
+            // Annotate the returned datatable to disambiguate rows
+            var c = result_dt.Columns.Add("PageIndex", typeof(System.Int32));
+            c.SetOrdinal(0);
+            for (int i = 0; i < target_pages.Length; i++)
+            {
+                result_dt.Rows[i]["PageIndex"] = target_pages[i].Index;
+            }
+
             this.WriteObject(result_dt);
         }
 
