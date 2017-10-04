@@ -26,28 +26,28 @@ namespace VisioPowerShell.Commands
             }
 
             var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(new PageCells());
-            var cells = celldic.Keys.ToArray();
-            var query = _CreateQuery(celldic, cells);
+            var cellnames = celldic.Keys.ToArray();
+            var query = _CreateQuery(celldic, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
-            var final_datatable = new System.Data.DataTable();
+            var result_dt = new System.Data.DataTable();
 
             foreach (var target_page in target_pages)
             {
                 var target_pagesheet = target_page.PageSheet;
                 var target_shapeids = new List<int> { target_pagesheet.ID };
                 var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
-                final_datatable.Merge(dt);
+                result_dt.Merge(dt);
             }
 
-            this.WriteObject(final_datatable);
+            this.WriteObject(result_dt);
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
             VisioPowerShell.Models.NamedCellDictionary celldic,
-            IList<string> cells)
+            IList<string> cellnames)
         {
-            var invalid_names = cells.Where(cellname => !celldic.ContainsKey(cellname)).ToList();
+            var invalid_names = cellnames.Where(cellname => !celldic.ContainsKey(cellname)).ToList();
 
             if (invalid_names.Count > 0)
             {
@@ -57,7 +57,7 @@ namespace VisioPowerShell.Commands
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
 
-            foreach (string cell in cells)
+            foreach (string cell in cellnames)
             {
                 foreach (var resolved_cellname in celldic.ExpandKeyWildcard(cell))
                 {

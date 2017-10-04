@@ -102,7 +102,6 @@
     <Compile Include="Commands\FormatVisioShapeText.cs" />
     <Compile Include="Commands\NewVisioContainer.cs" />
     <Compile Include="Commands\OpenVisioMaster.cs" />
-    <Compile Include="Models\LockCells.cs" />
     <Compile Include="Models\NamedDictionary.cs" />
     <Compile Include="Models\NamedCellDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />

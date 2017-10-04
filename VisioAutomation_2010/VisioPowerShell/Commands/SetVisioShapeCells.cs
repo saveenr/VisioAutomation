@@ -21,9 +21,6 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
-            var targets = new VisioScripting.Models.TargetShapes(target_shapes);
-
             if (this.Cells == null)
             {
                 return;
@@ -34,13 +31,15 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            targets = targets.ResolveShapes(this.Client);
+            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
 
-            if (targets.Shapes.Count < 1)
+            if (target_shapes.Count < 1)
             {
                 return;
             }
 
+            var targets = new VisioScripting.Models.TargetShapes(target_shapes);
+            targets = targets.ResolveShapes(this.Client);
             var target_ids = targets.ToShapeIDs();
 
             var writer = new SidSrcWriter();
@@ -50,9 +49,9 @@ namespace VisioPowerShell.Commands
             for (int i = 0; i < target_ids.ShapeIDs.Count; i++)
             {
                 var shape_id = target_ids.ShapeIDs[i];
-                var cells = this.Cells[i % this.Cells.Length];
+                var shape_cells = this.Cells[i % this.Cells.Length];
 
-                cells.Apply(writer, (short)shape_id);
+                shape_cells.Apply(writer, (short)shape_id);
             }
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();

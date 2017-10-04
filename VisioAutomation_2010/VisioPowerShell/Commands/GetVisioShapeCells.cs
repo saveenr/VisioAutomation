@@ -21,8 +21,8 @@ namespace VisioPowerShell.Commands
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
 
             var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(new ShapeCells());
-            var cells = celldic.Keys.ToArray();
-            var query = _CreateQuery(celldic, cells);
+            var cellnames = celldic.Keys.ToArray();
+            var query = _CreateQuery(celldic, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
             var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
@@ -31,9 +31,9 @@ namespace VisioPowerShell.Commands
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
             VisioPowerShell.Models.NamedCellDictionary celldic, 
-            IList<string> cells)
+            IList<string> cellnames)
         {
-            var invalid_names = cells.Where(cellname => !celldic.ContainsKey(cellname)).ToList();
+            var invalid_names = cellnames.Where(cellname => !celldic.ContainsKey(cellname)).ToList();
 
             if (invalid_names.Count > 0)
             {
@@ -43,7 +43,7 @@ namespace VisioPowerShell.Commands
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
 
-            foreach (string cell in cells)
+            foreach (string cell in cellnames)
             {
                 foreach (var resolved_cellname in celldic.ExpandKeyWildcard(cell))
                 {
