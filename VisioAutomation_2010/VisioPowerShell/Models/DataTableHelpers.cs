@@ -25,7 +25,6 @@ namespace VisioPowerShell.Models
             for (int r = 0; r < query_output.Count; r++)
             {
                 // populate the row buffer
-
                 rowbuf[0] = query_output[r].ShapeID;
 
                 for (int i = 0; i < colcount; i++)

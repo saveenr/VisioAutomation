@@ -30,13 +30,17 @@ namespace VisioPowerShell.Commands
             var query = _CreateQuery(celldic, cells);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
+            var final_datatable = new System.Data.DataTable();
+
             foreach (var target_page in target_pages)
             {
                 var target_pagesheet = target_page.PageSheet;
                 var target_shapeids = new List<int> { target_pagesheet.ID };
                 var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
-                this.WriteObject(dt);
+                final_datatable.Merge(dt);
             }
+
+            this.WriteObject(final_datatable);
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
