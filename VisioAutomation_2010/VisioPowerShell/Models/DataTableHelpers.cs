@@ -6,7 +6,9 @@ namespace VisioPowerShell.Models
 {
     static class DataTableHelpers
     {
-        private static DataTable querytable_to_datatable<T>(CellQuery cell_query, CellQueryOutputList<T> query_output)
+        private static DataTable querytable_to_datatable<T>(
+            CellQuery cell_query, 
+            CellQueryOutputList<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
@@ -38,17 +40,17 @@ namespace VisioPowerShell.Models
             return dt;
         }
 
-        public static DataTable QueryToDataTable(CellQuery cell_query,CellOutputType cvk, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
+        public static DataTable QueryToDataTable(CellQuery cell_query,CellOutputType cell_output_type, IList<int> shapeids, VisioAutomation.SurfaceTarget surface)
         {
             // Caller is asking for Results
-            switch (cvk)
+            switch (cell_output_type)
             {
                 case CellOutputType.Formula:
                 {
                     var output = cell_query.GetFormulas(surface, shapeids);
                     var dt = DataTableHelpers.querytable_to_datatable(cell_query, output);
                     return dt;
-                    }
+                }
                 case CellOutputType.ResultString:
                 {
                     var output = cell_query.GetResults<string>(surface, shapeids);
@@ -71,7 +73,8 @@ namespace VisioPowerShell.Models
                 }
             }
 
-            throw new System.ArgumentOutOfRangeException(nameof(cvk), "Unsupported Result type");
+            string msg = string.Format("Unsupported value of \"{0}\"for type {1}", cell_output_type, nameof(CellOutputType));
+            throw new System.ArgumentOutOfRangeException(nameof(cell_output_type), msg);
         }
     }
 }
