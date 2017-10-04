@@ -20,7 +20,8 @@ namespace VisioPowerShell.Commands
         {
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
 
-            var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(new ShapeCells());
+            var template = new ShapeCells();
+            var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(template);
             var cellnames = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();

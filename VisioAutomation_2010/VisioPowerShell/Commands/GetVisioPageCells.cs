@@ -25,7 +25,8 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(new PageCells());
+            var template = new PageCells();
+            var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(template);
             var cellnames = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
