@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Management.Automation;
-using VisioPowerShell.Models;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioShapeCells)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioShapeCells)]
     public class GetVisioShapeCells : VisioCmdlet
     {
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }
 
-        [Parameter(Mandatory = false)] 
+        [SMA.Parameter(Mandatory = false)] 
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
         protected override void ProcessRecord()
         {
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
 
-            var template = new ShapeCells();
+            var template = new VisioPowerShell.Models.ShapeCells();
             var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(template);
             var cellnames = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cellnames);
@@ -29,11 +28,11 @@ namespace VisioPowerShell.Commands
             var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
 
             // Annotate the returned datatable to disambiguate rows
-            var c = dt.Columns.Add("ShapeID", typeof(System.Int32));
-            c.SetOrdinal(0);
-            for (int i = 0; i < target_shapeids.Count; i++)
+            var shapeid_col = dt.Columns.Add("ShapeID", typeof(System.Int32));
+            shapeid_col.SetOrdinal(0);
+            for (int row_index = 0; row_index < target_shapeids.Count; row_index++)
             {
-                dt.Rows[i]["ShapeID"] = target_shapeids[i];
+                dt.Rows[row_index][shapeid_col.ColumnName] = target_shapeids[row_index];
             }
 
             this.WriteObject(dt);

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Management.Automation;
-using VisioPowerShell.Models;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioPageCells)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioPageCells)]
     public class GetVisioPageCells: VisioCmdlet
     {
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Page[] Pages { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
         protected override void ProcessRecord()
@@ -25,7 +24,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var template = new PageCells();
+            var template = new VisioPowerShell.Models.PageCells();
             var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(template);
             var cellnames = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cellnames);
@@ -42,11 +41,11 @@ namespace VisioPowerShell.Commands
             }
 
             // Annotate the returned datatable to disambiguate rows
-            var c = result_dt.Columns.Add("PageIndex", typeof(System.Int32));
-            c.SetOrdinal(0);
-            for (int i = 0; i < target_pages.Length; i++)
+            var pageindex_col = result_dt.Columns.Add("PageIndex", typeof(System.Int32));
+            pageindex_col.SetOrdinal(0);
+            for (int row_index = 0; row_index < target_pages.Length; row_index++)
             {
-                result_dt.Rows[i]["PageIndex"] = target_pages[i].Index;
+                result_dt.Rows[row_index][pageindex_col.ColumnName] = target_pages[row_index].Index;
             }
 
             this.WriteObject(result_dt);
