@@ -59,15 +59,19 @@ namespace VisioPowerShell.Commands
 
             if (invalid_names.Count > 0)
             {
-                string msg = "Invalid cell names: " + string.Join(",", invalid_names);
-                throw new ArgumentException(msg);
+                var quoted_names = invalid_names.Select( s=> string.Format("\"{0}\"",s));
+                string msg = "Invalid cell names: " + string.Join(",", quoted_names);
+                throw new ArgumentException(nameof(cellnames),msg);
             }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
 
-            foreach (string cell in cellnames)
+            foreach (string cellname in cellnames)
             {
-                foreach (var resolved_cellname in celldic.ExpandKeyWildcard(cell))
+                // resolve any wildcards to the actual cell names
+                var resolved_cellnames = celldic.ExpandKeyWildcard(cellname);
+
+                foreach (var resolved_cellname in resolved_cellnames)
                 {
                     if (!query.Columns.Contains(resolved_cellname))
                     {
