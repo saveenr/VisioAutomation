@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioPowerShell.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioPowerShell_Tests.Framework;
 
