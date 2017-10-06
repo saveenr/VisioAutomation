@@ -1,17 +1,17 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioPage)]
     public class NewVisioPage : VisioCmdlet
     {
-        [Parameter(Mandatory = false)] 
+        [SMA.Parameter(Mandatory = false)] 
         public double Width = -1.0;
         
-        [Parameter(Mandatory = false)] 
+        [SMA.Parameter(Mandatory = false)] 
         public double Height = -1.0;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string Name { get; set; }
 
         protected override void ProcessRecord()

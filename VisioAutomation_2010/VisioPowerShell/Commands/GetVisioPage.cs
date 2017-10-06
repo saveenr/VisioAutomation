@@ -1,17 +1,18 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using VisioScripting.Models;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioPage)]
     public class GetVisioPage : VisioCmdlet
     {
-        [Parameter(Position=0, Mandatory = false)]
+        [SMA.Parameter(Position=0, Mandatory = false)]
         public string Name=null;
 
-        [Parameter(Mandatory = false)] public SwitchParameter ActivePage;
+        [SMA.Parameter(Mandatory = false)] public 
+        SMA.SwitchParameter ActivePage;
 
-        [Parameter(Mandatory = false)] public VisioScripting.Models.PageType Type = PageType.Any;
+        [SMA.Parameter(Mandatory = false)] public VisioScripting.Models.PageType Type = PageType.Any;
 
         protected override void ProcessRecord()
         {

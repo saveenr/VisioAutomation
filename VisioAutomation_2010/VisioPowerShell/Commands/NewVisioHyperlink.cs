@@ -1,41 +1,40 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using VisioAutomation.Shapes;
-using VisioAutomation.Utilities;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioHyperlink)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioHyperlink)]
     public class NewVisioHyperlink : VisioCmdlet
     {
-        [Parameter(Mandatory = true)]
+        [SMA.Parameter(Mandatory = true)]
         public string Address { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string SubAddress { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string ExtraInfo { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string Frame { get; set; }
  
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string SortKey { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public bool NewWindow { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public bool Default { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public bool Invisible { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

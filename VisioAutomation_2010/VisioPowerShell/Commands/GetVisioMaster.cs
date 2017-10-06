@@ -1,15 +1,15 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioMaster)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioMaster)]
     public class GetVisioMaster : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name;
 
-        [Parameter(Position = 1, Mandatory = false)]
+        [SMA.Parameter(Position = 1, Mandatory = false)]
         public IVisio.Document Document;
 
         protected override void ProcessRecord()
@@ -22,13 +22,13 @@ namespace VisioPowerShell.Commands
                 // master name is specified
                 if (doc_specified)
                 {
-                    ((Cmdlet) this).WriteVerbose("Get master from specified document");
+                    ((SMA.Cmdlet) this).WriteVerbose("Get master from specified document");
                     var masters = this.Client.Master.GetMastersByName(this.Name, this.Document);
                     this.WriteObject(masters,false);
                 }
                 else
                 {
-                    ((Cmdlet) this).WriteVerbose("Get master from active document");
+                    ((SMA.Cmdlet) this).WriteVerbose("Get master from active document");
                     var masters = this.Client.Master.GetMastersByName(this.Name);
                     this.WriteObject(masters, false);
                 }
@@ -38,13 +38,13 @@ namespace VisioPowerShell.Commands
                 // master name is not specified
                 if (doc_specified)
                 {
-                    ((Cmdlet) this).WriteVerbose("Get all masters from specified document");
+                    ((SMA.Cmdlet) this).WriteVerbose("Get all masters from specified document");
                     var masters = this.Client.Master.Get(this.Document);
                     this.WriteObject(masters, false);                    
                 }
                 else
                 {
-                    ((Cmdlet) this).WriteVerbose("Get all masters from active document");
+                    ((SMA.Cmdlet) this).WriteVerbose("Get all masters from active document");
                     var masters = this.Client.Master.Get();
                     this.WriteObject(masters, false);                   
                 }

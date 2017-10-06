@@ -1,21 +1,21 @@
 using System.Collections.Generic;
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using VisioPowerShell.Models;
 using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioDirectedEdge)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioDirectedEdge)]
     public class GetVisioDirectedEdge : VisioCmdlet
     {
-        [Parameter(Mandatory = false)]
-        public SwitchParameter GetShapeObjects { get; set; }
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter GetShapeObjects { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter Raw { get; set; }
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter Raw { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter TreatUndirectedAsBidirectional { get; set; }
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter TreatUndirectedAsBidirectional { get; set; }
 
         protected override void ProcessRecord()
         {

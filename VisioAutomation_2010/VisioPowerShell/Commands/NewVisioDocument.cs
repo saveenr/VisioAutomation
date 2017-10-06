@@ -1,8 +1,9 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
+
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioDocument)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioDocument)]
     public class NewVisioDocument : VisioCmdlet
     {
         protected override void ProcessRecord()

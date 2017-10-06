@@ -1,30 +1,30 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Format, VisioPowerShell.Commands.Nouns.VisioShape)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Format, VisioPowerShell.Commands.Nouns.VisioShape)]
     public class FormatVisioShape : VisioCmdlet
     {
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public double NudgeX { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public double NudgeY { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter DistributeHorizontal { get; set; }
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter DistributeHorizontal { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter DistributeVertical { get; set; }
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter DistributeVertical { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public VisioScripting.Models.AlignmentVertical? AlignVertical = null;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public VisioScripting.Models.AlignmentHorizontal? AlignHorizontal = null;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

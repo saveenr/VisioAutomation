@@ -1,12 +1,12 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Close, VisioPowerShell.Commands.Nouns.VisioApplication)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Close, VisioPowerShell.Commands.Nouns.VisioApplication)]
     public class CloseVisioApplication : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = false)]
-        public SwitchParameter Force { get; set; }
+        [SMA.Parameter(Position = 0, Mandatory = false)]
+        public SMA.SwitchParameter Force { get; set; }
         
         protected override void ProcessRecord()
         {

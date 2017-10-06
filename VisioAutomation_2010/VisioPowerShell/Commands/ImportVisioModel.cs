@@ -1,16 +1,15 @@
 using System;
-using System.Management.Automation;
 using VisioScripting.Builders;
 using SXL = System.Xml.Linq;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsData.Import, VisioPowerShell.Commands.Nouns.VisioModel)]
+    [SMA.Cmdlet(SMA.VerbsData.Import, VisioPowerShell.Commands.Nouns.VisioModel)]
     public class ImportVisioModel : VisioCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
-        [ValidateNotNullOrEmpty]
+        [SMA.Parameter(Mandatory = true, Position = 0)]
+        [SMA.ValidateNotNullOrEmpty]
         public string Filename { get; set; }
 
         protected override void ProcessRecord()

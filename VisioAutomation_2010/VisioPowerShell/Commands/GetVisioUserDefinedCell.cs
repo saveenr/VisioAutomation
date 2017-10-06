@@ -1,16 +1,16 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioUserDefinedCell)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioUserDefinedCell)]
     public class GetVisioUserDefinedCell : VisioCmdlet
     {
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter GetCells;
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter GetCells;
 
         protected override void ProcessRecord()
         {

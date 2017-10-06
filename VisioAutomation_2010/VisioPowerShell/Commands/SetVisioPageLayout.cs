@@ -1,14 +1,14 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioPageLayout)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioPageLayout)]
     public class SetVisioPageLayout : VisioCmdlet
     {
-        [Parameter(Mandatory = false)] 
+        [SMA.Parameter(Mandatory = false)] 
         public VisioScripting.Models.PageOrientation? Orientation = null;
         
-        [Parameter(Mandatory = false)] 
+        [SMA.Parameter(Mandatory = false)] 
         public string BackgroundPage = null;
 
         protected override void ProcessRecord()

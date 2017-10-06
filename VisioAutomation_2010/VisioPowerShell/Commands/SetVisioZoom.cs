@@ -1,14 +1,14 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioZoom)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioZoom)]
     public class SetVisioZoom : VisioCmdlet
     {
-        [Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 
+        [SMA.Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 
         public VisioScripting.Models.Zoom Level = VisioScripting.Models.Zoom.In;
 
-        [Parameter(ParameterSetName = "percent", Position = 0, Mandatory = true)] 
+        [SMA.Parameter(ParameterSetName = "percent", Position = 0, Mandatory = true)] 
         public double Percent = 0;
 
         protected override void ProcessRecord()

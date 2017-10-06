@@ -1,14 +1,14 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioWindowSize)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioWindowSize)]
     public class SetVisioWindowSize : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)]
+        [SMA.Parameter(Position = 0, Mandatory = true)]
         public int Width { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true)]
+        [SMA.Parameter(Position = 1, Mandatory = true)]
         public int Height { get; set; }
         
         protected override void ProcessRecord()

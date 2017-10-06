@@ -1,8 +1,8 @@
-﻿using System.Management.Automation;
+﻿using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsDiagnostic.Test, VisioPowerShell.Commands.Nouns.VisioApplication)]
+    [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, VisioPowerShell.Commands.Nouns.VisioApplication)]
     public class TestVisioApplication: VisioCmdlet
     {
         protected override void ProcessRecord()

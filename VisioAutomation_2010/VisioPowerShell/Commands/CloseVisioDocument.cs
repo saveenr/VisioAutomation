@@ -1,17 +1,17 @@
-﻿using System.Management.Automation;
+﻿using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Close, VisioPowerShell.Commands.Nouns.VisioDocument)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Close, VisioPowerShell.Commands.Nouns.VisioDocument)]
     public class CloseVisioDocument : VisioCmdlet
     {
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Document[] Documents;
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter Force;
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter Force;
 
         protected override void ProcessRecord()
         {

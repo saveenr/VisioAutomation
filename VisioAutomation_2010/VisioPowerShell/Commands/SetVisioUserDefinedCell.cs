@@ -1,21 +1,21 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioUserDefinedCell)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioUserDefinedCell)]
     public class SetVisioUserDefinedCell : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)]
+        [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Name { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true)]
+        [SMA.Parameter(Position = 1, Mandatory = true)]
         public string Value { get; set; }
 
-        [Parameter(Mandatory = false)] 
+        [SMA.Parameter(Mandatory = false)] 
         public string Prompt;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes; 
 
         protected override void ProcessRecord()

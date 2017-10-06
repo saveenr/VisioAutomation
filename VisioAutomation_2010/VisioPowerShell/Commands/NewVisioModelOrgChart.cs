@@ -1,9 +1,9 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelOrgChart)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelOrgChart)]
     public class NewVisioModelOrgChart : VisioCmdlet
     {
         protected override void ProcessRecord()

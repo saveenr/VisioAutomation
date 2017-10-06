@@ -1,16 +1,16 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioPage)]
     public class ExportVisioPage : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)] 
-        [ValidateNotNullOrEmpty]
+        [SMA.Parameter(Position = 0, Mandatory = true)] 
+        [SMA.ValidateNotNullOrEmpty]
         public string Filename;
 
-        [Parameter(Position = 1, Mandatory = false)]
-        public SwitchParameter AllPages;
+        [SMA.Parameter(Position = 1, Mandatory = false)]
+        public SMA.SwitchParameter AllPages;
 
         protected override void ProcessRecord()
         {

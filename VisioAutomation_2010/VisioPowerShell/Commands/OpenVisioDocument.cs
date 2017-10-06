@@ -1,13 +1,13 @@
 using System.IO;
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Open, VisioPowerShell.Commands.Nouns.VisioDocument)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Open, VisioPowerShell.Commands.Nouns.VisioDocument)]
     public class OpenVisioDocument : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)]
-        [ValidateNotNullOrEmpty]
+        [SMA.Parameter(Position = 0, Mandatory = true)]
+        [SMA.ValidateNotNullOrEmpty]
         public string Filename { get; set; }
 
         protected override void ProcessRecord()

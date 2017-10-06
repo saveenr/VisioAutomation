@@ -1,47 +1,47 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using System.Xml;
 using VA = VisioAutomation;
 using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsData.Out, VisioPowerShell.Commands.Nouns.Visio)]
+    [SMA.Cmdlet(SMA.VerbsData.Out, VisioPowerShell.Commands.Nouns.Visio)]
     public class OutVisio : VisioCmdlet
     {
-        [Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
 
-        [Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
 
-        [Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public List<VA.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
 
-        [Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public DataTable DataTable { get; set; }
 
-        [Parameter(ParameterSetName = "datatable", Position = 1, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "datatable", Position = 1, Mandatory = true, ValueFromPipeline = true)]
         public double CellWidth { get; set; }
 
-        [Parameter(ParameterSetName = "datatable", Position = 2, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "datatable", Position = 2, Mandatory = true, ValueFromPipeline = true)]
         public double CellHeight { get; set; }
 
-        [Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true, ValueFromPipeline = true)]
         public double CellSpacing { get; set; }
 
-        [Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Charting.PieChart PieChart;
 
-        [Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Charting.BarChart BarChart;
 
-        [Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Charting.AreaChart AreaChart;
 
-        [Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public XmlDocument XmlDocument;
 
         protected override void ProcessRecord()

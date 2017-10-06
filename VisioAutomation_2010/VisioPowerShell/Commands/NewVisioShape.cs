@@ -1,37 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using VisioAutomation.Geometry;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    public enum ShapeType
-    {
-        Rectangle,
-        Oval,
-        Line,
-        Polyline,
-        Bezier
-    }
-
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioShape)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioShape)]
     public class NewVisioShape : VisioCmdlet
     {
-        [Parameter(ParameterSetName = "masters", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "masters", Position = 0, Mandatory = true)]
         public IVisio.Master[] Masters { get; set; }
 
-        [Parameter(ParameterSetName = "shape", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "shape", Position = 0, Mandatory = true)]
         public ShapeType Type { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true)]
+        [SMA.Parameter(Position = 1, Mandatory = true)]
         public double [] Points { get; set; }
 
-        [Parameter(ParameterSetName = "masters", Mandatory = false)]
+        [SMA.Parameter(ParameterSetName = "masters", Mandatory = false)]
         public string[] Names { get; set; }
 
-        [Parameter(ParameterSetName = "masters", Mandatory = false)]
-        public SwitchParameter NoSelect=false;
+        [SMA.Parameter(ParameterSetName = "masters", Mandatory = false)]
+        public SMA.SwitchParameter NoSelect=false;
 
         protected override void ProcessRecord()
         {
@@ -141,7 +132,7 @@ namespace VisioPowerShell.Commands
             if (!this.NoSelect)
             {
                 // Select the Shapes
-                ((Cmdlet) this).WriteVerbose("Selecting");
+                ((SMA.Cmdlet) this).WriteVerbose("Selecting");
                 this.Client.Selection.Select(shape_objects);
             }
             this.WriteObject(shape_objects, false);

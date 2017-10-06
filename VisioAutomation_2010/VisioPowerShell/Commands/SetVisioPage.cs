@@ -1,21 +1,21 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioPage)]
     public class SetVisioPage : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Name")]
+        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Name")]
         public string Name { get; set; }
 
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Page")]
+        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Page")]
         public IVisio.Page Page  { get; set; }
 
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "PageNumber")]
+        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "PageNumber")]
         public int PageNumber = -1;
 
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Flags")]
+        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Flags")]
         public VisioScripting.Models.PageDirection Direction { get; set; }
         
         protected override void ProcessRecord()

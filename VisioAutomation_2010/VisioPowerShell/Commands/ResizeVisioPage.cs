@@ -1,24 +1,24 @@
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 using VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Resize, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Resize, VisioPowerShell.Commands.Nouns.VisioPage)]
     public class ResizeVisioPage : VisioCmdlet
     {
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public double Width = -1;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public double Height = -1;
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter FitContents;
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter FitContents;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public double BorderWidth { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public double BorderHeight { get; set; }
 
         protected override void ProcessRecord()

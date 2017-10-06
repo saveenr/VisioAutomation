@@ -1,38 +1,38 @@
-﻿using System.Management.Automation;
+﻿using SMA = System.Management.Automation;
 using VisioAutomation.Models.Layouts.Grid;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelGrid)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelGrid)]
     public class NewVisioModelGrid : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)]
+        [SMA.Parameter(Position = 0, Mandatory = true)]
         public IVisio.Master Master { get; set; }
 
-        [Parameter(Mandatory = true)]
+        [SMA.Parameter(Mandatory = true)]
         public int Columns { get; set; }
 
-        [Parameter(Mandatory = true)]
+        [SMA.Parameter(Mandatory = true)]
         public int Rows { get; set; }
 
-        [Parameter(Mandatory = true)]
+        [SMA.Parameter(Mandatory = true)]
         public double CellWidth = 0.5;
         
-        [Parameter(Mandatory = true)]
+        [SMA.Parameter(Mandatory = true)]
         public double CellHeight = 0.5;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public double CellHorizontalSpacing = 0.25;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public double CellVerticalSpacing = 0.25;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public RowDirection RowDirection = RowDirection.BottomToTop;
 
-        [Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public ColumnDirection ColumnDirection = ColumnDirection.LeftToRight;
 
         protected override void ProcessRecord()

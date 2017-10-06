@@ -1,18 +1,18 @@
 ﻿using System;
 using System.IO;
-using System.Management.Automation;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioSelectionAsHtml)]
+    [SMA.Cmdlet(SMA.VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioSelectionAsHtml)]
     public class ExportVisioSelectionAsHtml : VisioCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)]
-        [ValidateNotNullOrEmpty]
+        [SMA.Parameter(Position = 0, Mandatory = true)]
+        [SMA.ValidateNotNullOrEmpty]
         public string Filename;
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter Overwrite;
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter Overwrite;
 
         protected override void ProcessRecord()
         {

@@ -1,18 +1,18 @@
-﻿using System.Management.Automation;
+﻿using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [Cmdlet(VerbsCommon.Select, VisioPowerShell.Commands.Nouns.VisioShape)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Select, VisioPowerShell.Commands.Nouns.VisioShape)]
     public class SelectVisioShape : VisioCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
+        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
         public IVisio.Shape[] Shapes { get; set; }
         
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapeIDs")]
+        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapeIDs")]
         public int[] ShapeIDs { get; set; }
         
-        [Parameter(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
+        [SMA.Parameter(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
         public VisioScripting.Models.SelectionOperation Operation { get; set; }
 
         protected override void ProcessRecord()
