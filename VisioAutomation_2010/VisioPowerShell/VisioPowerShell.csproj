@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\GetVisioPageCells.cs" />
+    <Compile Include="Commands\GetVisioLockCells.cs" />
     <Compile Include="Commands\NewVisioPageCells.cs" />
     <Compile Include="Commands\SetVisioPageCells.cs" />
     <Compile Include="Models\CellType.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Commands\FormatVisioShapeText.cs" />
     <Compile Include="Commands\NewVisioContainer.cs" />
     <Compile Include="Commands\OpenVisioMaster.cs" />
+    <Compile Include="Models\LockStatus.cs" />
     <Compile Include="Models\NamedDictionary.cs" />
     <Compile Include="Models\NamedCellDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />

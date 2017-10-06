@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioScripting.Commands
@@ -106,6 +108,35 @@ namespace VisioScripting.Commands
             {
                 writer.Commit(page);
             }
+        }
+
+
+        public Dictionary<int,LockCells> GetLock(VisioScripting.Models.TargetShapes targets)
+        {
+            this._client.Application.AssertApplicationAvailable();
+            this._client.Document.AssertDocumentAvailable();
+
+            targets = targets.ResolveShapes(this._client);
+            if (targets.Shapes.Count < 1)
+            {
+                return new Dictionary<int, LockCells>();
+            }
+
+            var dic = new Dictionary<int, LockCells>();
+
+            var page = this._client.Page.Get();
+            var target_shapeids = targets.ToShapeIDs();
+
+            var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids.ShapeIDs, CellValueType.Formula);
+
+            for (int i = 0; i < target_shapeids.ShapeIDs.Count; i++)
+            {
+                var shapeid = target_shapeids.ShapeIDs[i];
+                var cur_cells = cells[i];
+                dic[shapeid] = cur_cells;
+            }
+
+            return dic;
         }
 
         public void SetSize(VisioScripting.Models.TargetShapes targets, double? w, double? h)

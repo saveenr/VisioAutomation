@@ -45,5 +45,6 @@ namespace VisioPowerShell.Commands
         public const string VisioUserDefinedCell = nameof(VisioUserDefinedCell);
         public const string VisioWindowSize = nameof(VisioWindowSize);
         public const string VisioZoom = nameof(VisioZoom);
+        public const string VisioLockCells = nameof(VisioLockCells);
     }
 }
