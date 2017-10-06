@@ -53,6 +53,18 @@ namespace VisioPowerShell_Tests
             return master;
         }
 
+        public List<IVisio.Master> Get_VisioMaster(
+            string mastername,
+            IVisio.Document stencil)
+        {
+            var cmd = new VisioPowerShell.Commands.GetVisioMaster();
+            cmd.Name = mastername;
+            cmd.Document = stencil;
+            var master = cmd.InvokeFirst<List<IVisio.Master>>();
+            return master;
+        }
+
+
         public IVisio.DocumentClass Open_VisioDocument(
             string filename)
         {
