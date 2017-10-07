@@ -30,15 +30,15 @@ namespace VisioPowerShell_Tests
         public void VisioPS_SetShapeCells()
         {
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
-            var basic_stencil = VisioPS_Basic_Tests.Session.Cmd_Open_VisioDocument("basic_u.vss");
-            var rrect_master = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster("Rectangle", basic_stencil);
-            var shapes = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape(PsArray.From(rrect_master), new [] {2.0, 3.0});
+            var stencil_basic = VisioPS_Basic_Tests.Session.Cmd_Open_VisioDocument("basic_u.vss");
+            var master_roundrect = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster("Rectangle", stencil_basic);
+            var shapes = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape(PsArray.From(master_roundrect), new [] {2.0, 3.0});
 
-            var cells = VisioPS_Basic_Tests.Session.Cmd_New_VisioShapeCells();
-            cells.XFormPinX= "4 in";
-            cells.XFormPinY = "6 in";
+            var shapecells = VisioPS_Basic_Tests.Session.Cmd_New_VisioShapeCells();
+            shapecells.XFormPinX= "4 in";
+            shapecells.XFormPinY = "6 in";
 
-            VisioPS_Basic_Tests.Session.Cmd_Set_VisioShapeCells(PsArray.From(cells), PsArray.From(shapes));
+            VisioPS_Basic_Tests.Session.Cmd_Set_VisioShapeCells(PsArray.From(shapecells), PsArray.From(shapes));
 
             var dt = VisioPS_Basic_Tests.Session.Cmd_Get_VisioShapeCells(PsArray.From(shapes));
 
@@ -54,12 +54,11 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
             var page = VisioPS_Basic_Tests.Session.Cmd_Get_VisioPage(activepage: true, name: null);
 
-            var cells = VisioPS_Basic_Tests.Session.Cmd_New_VisioPageCells();
-            var pagecells = cells;
+            var pagecells = VisioPS_Basic_Tests.Session.Cmd_New_VisioPageCells();
             pagecells.PageHeight = "4 in";
             pagecells.PageWidth= "3 in";
 
-            VisioPS_Basic_Tests.Session.Cmd_Set_VisioPageCells( PsArray.From(cells), PsArray.From(page));
+            VisioPS_Basic_Tests.Session.Cmd_Set_VisioPageCells( PsArray.From(pagecells), PsArray.From(page));
             
             var dt = VisioPS_Basic_Tests.Session.Cmd_Get_VisioPageCells(PsArray.From(page));
 
