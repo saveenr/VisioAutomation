@@ -26,8 +26,9 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException();
-                
+                string msg = string.Format("Either -{0} or -{1} must be provided.", nameof(this.Master),
+                    nameof(this.MasterName));
+                throw new System.ArgumentException(msg);
             }
         }
     }
