@@ -21,7 +21,7 @@ namespace VisioPowerShell.Commands
             }
             else if (this.MasterName != null)
             {
-                var shape = this.Client.Master.DropContainer(this.Master);
+                var shape = this.Client.Master.DropContainer(this.MasterName);
                 this.WriteObject(shape);
             }
             else
