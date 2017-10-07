@@ -83,6 +83,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\LockVisioLockShape.cs" />
+    <Compile Include="Commands\UnlockVisioLockCells.cs" />
     <Compile Include="Commands\GetVisioPageCells.cs" />
     <Compile Include="Commands\GetVisioLockCells.cs" />
     <Compile Include="Commands\NewVisioPageCells.cs" />
