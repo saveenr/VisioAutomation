@@ -15,7 +15,6 @@ namespace VisioPowerShell.Commands
         public const string VisioShapeCells = nameof(VisioShapeCells);
         public const string VisioPageCells = nameof(VisioPageCells);
 
-        public const string VisioBezier = nameof(VisioBezier);
         public const string VisioClient = nameof(VisioClient);
         public const string VisioConnection = nameof(VisioConnection);
         public const string VisioConnectionPoint = nameof(VisioConnectionPoint);
@@ -27,23 +26,18 @@ namespace VisioPowerShell.Commands
         public const string VisioDocument = nameof(VisioDocument);
         public const string VisioGroup = nameof(VisioGroup);
         public const string VisioLayer = nameof(VisioLayer);
-        public const string VisioLine = nameof(VisioLine);
         public const string VisioMaster = nameof(VisioMaster);
         public const string VisioModel = nameof(VisioModel);
-        public const string VisioNurbs = nameof(VisioNurbs);
-        public const string VisioOval = nameof(VisioOval);
         public const string VisioPage = nameof(VisioPage);
         public const string VisioPageCell = nameof(VisioPageCell);
         public const string VisioPageLayout = nameof(VisioPageLayout);
-        public const string VisioPolyLine = nameof(VisioPolyLine);
-        public const string VisioRectangle = nameof(VisioRectangle);
         public const string VisioSelectedShapes = nameof(VisioSelectedShapes);
         public const string VisioSelectionAsHtml = nameof(VisioSelectionAsHtml);
         public const string VisioShape = nameof(VisioShape);
         public const string VisioShapeSheet = nameof(VisioShapeSheet);
         public const string VisioText = nameof(VisioText);
         public const string VisioUserDefinedCell = nameof(VisioUserDefinedCell);
-        public const string VisioWindowSize = nameof(VisioWindowSize);
+        public const string VisioWindow = nameof(VisioWindow);
         public const string VisioZoom = nameof(VisioZoom);
         public const string VisioLockCells = nameof(VisioLockCells);
     }

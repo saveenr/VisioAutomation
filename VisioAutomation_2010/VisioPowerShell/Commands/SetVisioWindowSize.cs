@@ -2,8 +2,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioWindowSize)]
-    public class SetVisioWindowSize : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioWindow)]
+    public class SetVisioWindow : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public int Width { get; set; }
@@ -13,8 +13,11 @@ namespace VisioPowerShell.Commands
         
         protected override void ProcessRecord()
         {
-            var w = this.Client.Application.Window;
-            w.SetSize(this.Width, this.Height);
+            if (this.Width > 0 || this.Height > 0)
+            {
+                var w = this.Client.Application.Window;
+                w.SetSize(this.Width, this.Height);
+            }
         }
     }
 }
