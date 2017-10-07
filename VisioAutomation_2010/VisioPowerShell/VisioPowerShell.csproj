@@ -126,7 +126,7 @@
     <Compile Include="Commands\SetVisioShapeCells.cs" />
     <Compile Include="Commands\RemoveVisioPage.cs" />
     <Compile Include="Commands\TestVisioApplication.cs" />
-    <Compile Include="Commands\GetVisioClient.cs" />
+    <Compile Include="Commands\GetVisioScriptingClient.cs" />
     <Compile Include="Commands\NewVisioModelGrid.cs" />
     <Compile Include="Commands\NewVisioMaster.cs" />
     <Compile Include="Commands\RemoveVisioUserDefinedCell.cs" />
