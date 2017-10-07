@@ -138,7 +138,7 @@
     <Compile Include="Commands\RedoVisio.cs" />
     <Compile Include="Commands\SaveVisioDocument.cs" />
     <Compile Include="Commands\TestVisioDocument.cs" />
-    <Compile Include="Commands\TestVisioSelectedShapes.cs" />
+    <Compile Include="Commands\TestVisioSelection.cs" />
     <Compile Include="Commands\RemoveVisioShape.cs" />
     <Compile Include="Commands\GetVisioLayer.cs" />
     <Compile Include="Commands\SelectVisioShape.cs" />

@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands
         public const string VisioPageCells = nameof(VisioPageCells);
         public const string VisioPageLayout = nameof(VisioPageLayout);
         public const string VisioScriptingClient = nameof(VisioScriptingClient);
-        public const string VisioSelectedShapes = nameof(VisioSelectedShapes);
+        public const string VisioSelection = nameof(VisioSelection);
         public const string VisioSelectionAsHtml = nameof(VisioSelectionAsHtml);
         public const string VisioShape = nameof(VisioShape);
         public const string VisioShapeCells = nameof(VisioShapeCells);

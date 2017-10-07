@@ -2,8 +2,8 @@
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, VisioPowerShell.Commands.Nouns.VisioSelectedShapes)]
-    public class TestVisioSelectedShapes: VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, VisioPowerShell.Commands.Nouns.VisioSelection)]
+    public class TestVisioSelection: VisioCmdlet
     {
         protected override void ProcessRecord()
         {
