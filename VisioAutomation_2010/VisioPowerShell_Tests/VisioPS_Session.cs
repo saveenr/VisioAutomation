@@ -7,12 +7,12 @@ namespace VisioPowerShell_Tests
 {
     public class VisioPS_Session : VisioPowerShell_Tests.Framework.PowerShellSession
     {
-        private static System.Reflection.Assembly visiops_asm = typeof(VisioPowerShell.Commands.VisioCmdlet).Assembly;
-
-        public VisioPS_Session() :
-            base(visiops_asm)
+        public VisioPS_Session()
         {
-            
+            // Find the path to the assembly
+            var visiops_asm = typeof(VisioPowerShell.Commands.VisioCmdlet).Assembly;
+            var modules = new[] { visiops_asm.Location };
+            this.SessionState.ImportPSModule(modules);
         }
 
         public IVisio.ShapeClass Cmd_New_VisioContainer(

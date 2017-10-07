@@ -9,14 +9,9 @@ namespace VisioPowerShell_Tests.Framework
         protected SMA.Runspaces.Runspace RunSpace;
         protected SMA.RunspaceInvoke Invoker;
 
-        public PowerShellSession(System.Reflection.Assembly module)
+        public PowerShellSession()
         {
             this.SessionState = SMA.Runspaces.InitialSessionState.CreateDefault();
-
-            // Find the path to the assembly
-            var modules = new[] { module.Location };
-            this.SessionState.ImportPSModule(modules);
-
             this.RunSpace = SMA.Runspaces.RunspaceFactory.CreateRunspace(this.SessionState);
             this.RunSpace.Open();
             this.PowerShell = SMA.PowerShell.Create();
