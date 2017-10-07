@@ -23,7 +23,8 @@ namespace VisioPowerShell_Tests
         
         private static void VisioPS_Close_Visio_Application()
         {
-            VisioPS_Basic_Tests.Session.Cmd_Close_VisioApplication();
+            bool force = true;
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioApplication(true);
         }
 
         [TestMethod]

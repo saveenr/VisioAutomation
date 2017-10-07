@@ -63,7 +63,6 @@ namespace VisioPowerShell_Tests
             return master;
         }
 
-
         public IVisio.DocumentClass Cmd_Open_VisioDocument(
             string filename)
         {
@@ -97,7 +96,6 @@ namespace VisioPowerShell_Tests
             var cells = cmd.InvokeFirst<System.Data.DataTable>();
             return cells;
         }
-
 
         public IVisio.PageClass Cmd_New_VisioPage()
         {
@@ -197,10 +195,10 @@ namespace VisioPowerShell_Tests
             return cells;
         }
 
-        public void Cmd_Close_VisioApplication()
+        public void Cmd_Close_VisioApplication(bool force)
         {
             var cmd = new VisioPowerShell.Commands.CloseVisioApplication();
-            cmd.Force = true;
+            cmd.Force = force;
             cmd.InvokeVoid();
         }
     }
