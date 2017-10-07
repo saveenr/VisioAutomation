@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioSelectionAsHtml)]
-    public class ExportVisioSelectionAsHtml : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioSelection)]
+    public class ExportVisioSelection : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         [SMA.ValidateNotNullOrEmpty]
@@ -13,6 +14,8 @@ namespace VisioPowerShell.Commands
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
+
+        private static HashSet<string> _htmlExtensions;
 
         protected override void ProcessRecord()
         {
@@ -31,9 +34,15 @@ namespace VisioPowerShell.Commands
                 }
             }
 
+
+            if (_htmlExtensions == null)
+            {
+                _htmlExtensions = new HashSet<string> { ".html", ".htm", ".xhtml" };
+            }
+
             string ext = Path.GetExtension(this.Filename).ToLowerInvariant();
 
-            if (ext == ".html" || ext == ".xhtml" || ext == ".htm")
+            if (_htmlExtensions.Contains(ext))
             {
                 this.Client.Export.SelectionToHtml(this.Filename);                
             }
