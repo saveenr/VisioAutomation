@@ -1,4 +1,3 @@
-using System.IO;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
@@ -32,7 +31,7 @@ namespace VisioPowerShell.Commands
 
         public bool filename_is_stencil(string fname)
         {
-            var ext = Path.GetExtension(fname).ToLowerInvariant();
+            var ext = System.IO.Path.GetExtension(fname).ToLowerInvariant();
             return (ext == ".vss" || ext == ".vst" || ext == ".vssx" || ext == ".vstx");
         }
     }

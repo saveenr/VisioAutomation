@@ -3,8 +3,6 @@ using System.Data;
 using System.Linq;
 using SMA = System.Management.Automation;
 using System.Xml;
-using VA = VisioAutomation;
-using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
 namespace VisioPowerShell.Commands
 {
@@ -12,13 +10,13 @@ namespace VisioPowerShell.Commands
     public class OutVisio : VisioCmdlet
     {
         [SMA.Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
+        public VisioAutomation.Models.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
 
         [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
+        public VisioAutomation.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
 
         [SMA.Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public List<VA.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
+        public List<VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
 
         [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public DataTable DataTable { get; set; }
@@ -33,13 +31,13 @@ namespace VisioPowerShell.Commands
         public double CellSpacing { get; set; }
 
         [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Charting.PieChart PieChart;
+        public VisioAutomation.Models.Charting.PieChart PieChart;
 
         [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Charting.BarChart BarChart;
+        public VisioAutomation.Models.Charting.BarChart BarChart;
 
         [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Charting.AreaChart AreaChart;
+        public VisioAutomation.Models.Charting.AreaChart AreaChart;
 
         [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public XmlDocument XmlDocument;
@@ -81,7 +79,7 @@ namespace VisioPowerShell.Commands
             else if (this.XmlDocument != null)
             {
                 this.WriteVerbose("XmlDocument");
-                var tree_drawing = new VA.Models.Layouts.Tree.Drawing();
+                var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
                 this.build_from_xml_doc(this.XmlDocument, tree_drawing);
 
                 tree_drawing.Render(this.Client.Page.Get());
@@ -92,22 +90,22 @@ namespace VisioPowerShell.Commands
             }
         }
 
-        private void build_from_xml_doc(XmlDocument xml_document, VA.Models.Layouts.Tree.Drawing tree_drawing)
+        private void build_from_xml_doc(XmlDocument xml_document, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
         {
-            var n = new Node();
+            var n = new VisioAutomation.Models.Layouts.Tree.Node();
             tree_drawing.Root = n;
             n.Text = new VisioAutomation.Models.Text.Element(xml_document.Name);
             this.build_from_xml_element(xml_document.DocumentElement,n);
 
         }
 
-        private void build_from_xml_element(XmlElement x, Node parent)
+        private void build_from_xml_element(XmlElement x, VisioAutomation.Models.Layouts.Tree.Node parent)
         {
             foreach (XmlNode xchild in x.ChildNodes)
             {
                 if (xchild is XmlElement)
                 {
-                    var nchild = new Node();
+                    var nchild = new VisioAutomation.Models.Layouts.Tree.Node();
                     nchild.Text = new VisioAutomation.Models.Text.Element(xchild.Name);
 
                     parent.Children.Add(nchild);

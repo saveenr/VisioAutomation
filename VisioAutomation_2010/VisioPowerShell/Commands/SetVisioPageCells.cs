@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet.Writers;
-using SMA = System.Management.Automation;
+﻿using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -51,7 +50,7 @@ namespace VisioPowerShell.Commands
                     var target_pagesheet = target_page.PageSheet;
                     int target_pagesheet_id = target_pagesheet.ID;
 
-                    var writer = new SidSrcWriter();
+                    var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                     writer.BlastGuards = this.BlastGuards;
                     writer.TestCircular = this.TestCircular;
                     target_cells.Apply(writer, (short)target_pagesheet_id);

@@ -1,5 +1,4 @@
 using SMA = System.Management.Automation;
-using VisioAutomation.Models.Layouts.DirectedGraph;
 
 namespace VisioPowerShell.Commands
 {
@@ -8,7 +7,7 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            var dg_model = new DirectedGraphLayout();
+            var dg_model = new VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout();
             this.WriteObject(dg_model);
         }
     }

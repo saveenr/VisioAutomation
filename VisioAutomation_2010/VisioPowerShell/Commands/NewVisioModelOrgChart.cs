@@ -1,5 +1,4 @@
 using SMA = System.Management.Automation;
-using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
@@ -8,7 +7,7 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            var orgchart = new VA.Models.Documents.OrgCharts.OrgChartDocument();
+            var orgchart = new VisioAutomation.Models.Documents.OrgCharts.OrgChartDocument();
             this.WriteObject(orgchart);
         }
     }

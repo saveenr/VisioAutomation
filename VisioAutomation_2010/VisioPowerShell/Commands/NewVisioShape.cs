@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SMA = System.Management.Automation;
-using VisioAutomation.Geometry;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -76,7 +75,7 @@ namespace VisioPowerShell.Commands
             }
         }
 
-        private void check_points_for_shape_type(List<Point> points)
+        private void check_points_for_shape_type(List<VisioAutomation.Geometry.Point> points)
         {
             if (this.Type == Models.ShapeType.Rectangle || this.Type == Models.ShapeType.Line || this.Type == Models.ShapeType.Oval)
             {

@@ -1,7 +1,5 @@
 ﻿using SMA = System.Management.Automation;
-using VisioAutomation.Models.Layouts.Grid;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
@@ -30,16 +28,16 @@ namespace VisioPowerShell.Commands
         public double CellVerticalSpacing = 0.25;
 
         [SMA.Parameter(Mandatory = false)]
-        public RowDirection RowDirection = RowDirection.BottomToTop;
+        public VisioAutomation.Models.Layouts.Grid.RowDirection RowDirection = VisioAutomation.Models.Layouts.Grid.RowDirection.BottomToTop;
 
         [SMA.Parameter(Mandatory = false)]
-        public ColumnDirection ColumnDirection = ColumnDirection.LeftToRight;
+        public VisioAutomation.Models.Layouts.Grid.ColumnDirection ColumnDirection = VisioAutomation.Models.Layouts.Grid.ColumnDirection.LeftToRight;
 
         protected override void ProcessRecord()
         {
-            var cellsize = new VA.Geometry.Size(this.CellWidth, this.CellHeight);
-            var layout = new GridLayout(this.Columns, this.Rows, cellsize, this.Master);
-            layout.CellSpacing = new VA.Geometry.Size(this.CellHorizontalSpacing, this.CellVerticalSpacing);
+            var cellsize = new VisioAutomation.Geometry.Size(this.CellWidth, this.CellHeight);
+            var layout = new VisioAutomation.Models.Layouts.Grid.GridLayout(this.Columns, this.Rows, cellsize, this.Master);
+            layout.CellSpacing = new VisioAutomation.Geometry.Size(this.CellHorizontalSpacing, this.CellVerticalSpacing);
             layout.RowDirection = this.RowDirection;
             layout.ColumnDirection = this.ColumnDirection;
             this.WriteObject(layout);

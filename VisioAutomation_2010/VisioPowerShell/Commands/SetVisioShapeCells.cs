@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet.Writers;
-using SMA = System.Management.Automation;
+﻿using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -42,7 +41,7 @@ namespace VisioPowerShell.Commands
             targets = targets.ResolveShapes(this.Client);
             var target_ids = targets.ToShapeIDs();
 
-            var writer = new SidSrcWriter();
+            var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
             writer.BlastGuards = this.BlastGuards;
             writer.TestCircular = this.TestCircular;
 

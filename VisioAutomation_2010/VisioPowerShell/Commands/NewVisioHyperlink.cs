@@ -1,5 +1,4 @@
 using SMA = System.Management.Automation;
-using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
@@ -39,7 +38,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var hlink = new HyperlinkCells();
+            var hlink = new VisioAutomation.Shapes.HyperlinkCells();
 
             hlink.Address = this.Address;
             hlink.Description= this.Description;
