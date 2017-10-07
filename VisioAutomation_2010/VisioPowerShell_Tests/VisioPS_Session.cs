@@ -108,7 +108,7 @@ namespace VisioPowerShell_Tests
         }
 
         public IVisio.Shape Cmd_New_VisioShape(
-            VisioPowerShell.Commands.ShapeType type, 
+            VisioPowerShell.Models.ShapeType type, 
             double[] points)
         {
             var cmd = new VisioPowerShell.Commands.NewVisioShape();

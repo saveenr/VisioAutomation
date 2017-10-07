@@ -73,7 +73,7 @@ namespace VisioPowerShell_Tests
         public void VisioPS_DrawRectangleWithText()
         {
             var d = Session.Cmd_New_VisioDocument();
-            var s = Session.Cmd_New_VisioShape(VisioPowerShell.Commands.ShapeType.Rectangle, new[] {0.0, 1.0, 2.0, 3.0});
+            var s = Session.Cmd_New_VisioShape(VisioPowerShell.Models.ShapeType.Rectangle, new[] {0.0, 1.0, 2.0, 3.0});
             Session.Cmd_Set_VisioText( PsArray.From("Hello World"), PsArray.From(s));
 
             var r = Session.Cmd_Get_VisioText();

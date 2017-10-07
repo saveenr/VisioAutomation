@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands
         public IVisio.Master[] Masters { get; set; }
 
         [SMA.Parameter(ParameterSetName = "shape", Position = 0, Mandatory = true)]
-        public ShapeType Type { get; set; }
+        public Models.ShapeType Type { get; set; }
 
         [SMA.Parameter(Position = 1, Mandatory = true)]
         public double [] Points { get; set; }
@@ -42,30 +42,30 @@ namespace VisioPowerShell.Commands
 
             check_points_for_shape_type(points);
 
-            if (this.Type == ShapeType.Rectangle)
+            if (this.Type == Models.ShapeType.Rectangle)
             {
                 var r = new VisioAutomation.Geometry.Rectangle(points[0], points[1]);
                 var shape = this.Client.Draw.Rectangle(r);
                 this.WriteObject(shape);
             }
-            else if (this.Type == ShapeType.Line)
+            else if (this.Type == Models.ShapeType.Line)
             {
                 var lineseg = new VisioAutomation.Geometry.LineSegment(points[0], points[1]);
                 var shape = this.Client.Draw.Line(lineseg.Start, lineseg.End);
                 this.WriteObject(shape);
             }
-            else if (this.Type == ShapeType.Oval)
+            else if (this.Type == Models.ShapeType.Oval)
             {
                 var r = new VisioAutomation.Geometry.Rectangle(points[0], points[1]);
                 var shape = this.Client.Draw.Oval(r);
                 this.WriteObject(shape);
             }
-            else if (this.Type == ShapeType.Polyline)
+            else if (this.Type == Models.ShapeType.Polyline)
             {
                 var shape = this.Client.Draw.PolyLine(points);
                 this.WriteObject(shape);
             }
-            else if (this.Type == ShapeType.Bezier)
+            else if (this.Type == Models.ShapeType.Bezier)
             {
                 var shape = this.Client.Draw.Bezier(points);
                 this.WriteObject(shape);
@@ -78,7 +78,7 @@ namespace VisioPowerShell.Commands
 
         private void check_points_for_shape_type(List<Point> points)
         {
-            if (this.Type == ShapeType.Rectangle || this.Type == ShapeType.Line || this.Type == ShapeType.Oval)
+            if (this.Type == Models.ShapeType.Rectangle || this.Type == Models.ShapeType.Line || this.Type == Models.ShapeType.Oval)
             {
                 if (points.Count != 2)
                 {
@@ -86,14 +86,14 @@ namespace VisioPowerShell.Commands
                     new System.ArgumentOutOfRangeException(msg);
                 }
             }
-            else if(this.Type == ShapeType.Polyline)
+            else if(this.Type == Models.ShapeType.Polyline)
             {
                 if (points.Count < 2)
                 {
                     new System.ArgumentOutOfRangeException("Need at leat 2 points for a polyline");
                 }
             }
-            else if (this.Type == ShapeType.Bezier)
+            else if (this.Type == Models.ShapeType.Bezier)
             {
                 if (points.Count < 2)
                 {
