@@ -45,7 +45,7 @@ namespace VisioPowerShell.Commands
                     var target_page = target_pages[i];
                     var target_cells = this.Cells[i % this.Cells.Length];
 
-                    this.Client.WriteVerbose("Start Update Page Name={0}", target_page.NameU);
+                    this.Client.Output.WriteVerbose("Start Update Page Name={0}", target_page.NameU);
 
                     var target_pagesheet = target_page.PageSheet;
                     int target_pagesheet_id = target_pagesheet.ID;
@@ -54,11 +54,11 @@ namespace VisioPowerShell.Commands
                     writer.BlastGuards = this.BlastGuards;
                     writer.TestCircular = this.TestCircular;
                     target_cells.Apply(writer, (short)target_pagesheet_id);
-                    this.Client.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
-                    this.Client.WriteVerbose("TestCircular: {0}", this.TestCircular);
+                    this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
+                    this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
 
                     writer.Commit(target_page);
-                    this.Client.WriteVerbose("End Update Page Name={0}", target_page.NameU);
+                    this.Client.Output.WriteVerbose("End Update Page Name={0}", target_page.NameU);
                 }
 
             }

@@ -56,7 +56,7 @@ namespace VisioScripting.Commands
 
             if (!System.IO.Directory.Exists(pbase))
             {
-                this._client.WriteError(" Folder {0} does not exist", pbase);
+                this._client.Output.WriteError(" Folder {0} does not exist", pbase);
                 return;
             }
             var ext = System.IO.Path.GetExtension(filename);
@@ -72,7 +72,7 @@ namespace VisioScripting.Commands
                 }
                 string page_filname = string.Format("{0}_{1}_{2}{3}{4}", fbase, page_index, page.Name, bkgnd, ext);
 
-                this._client.WriteUser("file {0}", page_filname);
+                this._client.Output.WriteUser("file {0}", page_filname);
                 page_filname = System.IO.Path.Combine(pbase, page_filname);
                 active_window.Page = page;
                 this._client.Selection.SelectNone();

@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
             this._client.Document.AssertDocumentAvailable();
 
             var app = this._client.Application.Get();
-            this._client.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
+            this._client.Output.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
             var window = app.ActiveWindow;
             window.Page = page;
         }
@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
 
             var application = this._client.Application.Get();
             var doc = application.ActiveDocument;
-            this._client.WriteVerbose("Retrieving Page \"{0}\"", name);
+            this._client.Output.WriteVerbose("Retrieving Page \"{0}\"", name);
             var pages = doc.Pages;
             var page = pages[name];
             this.Set(page);
@@ -46,7 +46,7 @@ namespace VisioScripting.Commands
 
             var application = this._client.Application.Get();
             var doc = application.ActiveDocument;
-            this._client.WriteVerbose("Retrieving Page Number \"{0}\"", pagenumber);
+            this._client.Output.WriteVerbose("Retrieving Page Number \"{0}\"", pagenumber);
             var pages = doc.Pages;
             var page = pages[pagenumber];
             this.Set(page);
@@ -93,7 +93,7 @@ namespace VisioScripting.Commands
                 var doc = app.ActiveDocument;
                 var pages = doc.Pages;
 
-                this._client.WriteVerbose("Retrieving Page for name \"{0}\"",name);
+                this._client.Output.WriteVerbose("Retrieving Page for name \"{0}\"",name);
                 var page = pages.ItemU[name];
                 page.Delete(renumber ? (short)1 : (short)0);
             }
@@ -152,7 +152,7 @@ namespace VisioScripting.Commands
             {
                 if (size.HasValue)
                 {
-                    this._client.WriteVerbose("Setting page size to {0}", size.Value);
+                    this._client.Output.WriteVerbose("Setting page size to {0}", size.Value);
                     this.SetSize(size.Value);
                 }
 
