@@ -303,9 +303,6 @@ namespace VisioScripting.Commands
 
         public bool HasShapes(int min_items)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
             if (min_items <= 0)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(min_items));

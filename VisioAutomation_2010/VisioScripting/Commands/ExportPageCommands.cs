@@ -23,8 +23,8 @@ namespace VisioScripting.Commands
 
             if (!this._client.Selection.HasShapes())
             {
-                this._client.WriteVerbose("No selected shapes. Not exporting.");
-                return;
+                string msg = string.Format("Selection contains no shapes");
+                throw new System.ArgumentException(msg);
             }
 
             var old_selection = this._client.Selection.GetShapes();
