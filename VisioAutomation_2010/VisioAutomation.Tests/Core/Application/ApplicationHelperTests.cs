@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VisioAutomation_Tests.Core.Application
