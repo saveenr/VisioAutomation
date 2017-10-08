@@ -1,3 +1,4 @@
+using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SXL = System.Xml.Linq;
 
@@ -22,8 +23,8 @@ namespace VisioScripting.Commands
 
             if (!this._client.Selection.HasShapes())
             {
-                this._client.WriteVerbose("No selected shapes. Not exporting.");
-                return;
+                string msg = String.Format("Selection contains no shapes");
+                throw new System.ArgumentException(msg);
             }
 
             var selection = this._client.Selection.Get();
@@ -42,15 +43,15 @@ namespace VisioScripting.Commands
 
             if (!this._client.Selection.HasShapes())
             {
-                this._client.WriteVerbose("No selected shapes. Not exporting.");
-                return;
+                string msg = String.Format("Selection contains no shapes");
+                throw new System.ArgumentException(msg);
             }
 
             var selection = this._client.Selection.Get();
             this.SelectionToHtml(selection, filename, s => this._client.WriteVerbose(s));
         }
 
-        private void SelectionToHtml(IVisio.Selection selection, string filename, System.Action<string> verboselog)
+        private void SelectionToHtml(IVisio.Selection selection, string filename, System.Action<string> export_log)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();
@@ -63,7 +64,7 @@ namespace VisioScripting.Commands
             var load_svg_timer = new System.Diagnostics.Stopwatch();
             var svg_doc = SXL.XDocument.Load(svg_filename);
             load_svg_timer.Stop();
-            verboselog(string.Format("Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds));
+            export_log(string.Format("Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds));
 
             // Delete temp SVG
             if (System.IO.File.Exists(svg_filename))
@@ -71,11 +72,11 @@ namespace VisioScripting.Commands
                 System.IO.File.Delete(svg_filename);
             }
 
-            verboselog("Creating XHTML with embedded SVG");
+            export_log("Creating XHTML with embedded SVG");
 
             if (System.IO.File.Exists(filename))
             {
-                verboselog(string.Format("Deleting \"{0}\"", filename));
+                export_log(string.Format("Deleting \"{0}\"", filename));
                 System.IO.File.Delete(filename);
             }
 
@@ -90,7 +91,7 @@ namespace VisioScripting.Commands
             body.Add(svg_node);
 
             xhtml_doc.Save(filename);
-            verboselog(string.Format("Done writing XHTML file \"{0}\"", filename));
+            export_log(string.Format("Done writing XHTML file \"{0}\"", filename));
         }
     }
 }
