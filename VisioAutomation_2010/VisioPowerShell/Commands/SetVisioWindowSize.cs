@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.Width > 0 || this.Height > 0)
             {
-                var w = this.Client.Application.Window;
+                var w = this.Client.Window;
                 w.SetSize(this.Width, this.Height);
             }
         }

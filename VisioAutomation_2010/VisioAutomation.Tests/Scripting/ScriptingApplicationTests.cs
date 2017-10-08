@@ -18,15 +18,15 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
 
-            var old_size = client.Application.Window.GetSize();
+            var old_size = client.Window.GetSize();
             var desired_size = new Size(600, 800);
 
-            client.Application.Window.SetSize(desired_size.Width, desired_size.Height);
+            client.Window.SetSize(desired_size.Width, desired_size.Height);
 
-            var actual_size = client.Application.Window.GetSize();
+            var actual_size = client.Window.GetSize();
             Assert.AreEqual(desired_size, actual_size);
-            client.Application.Window.SetSize(old_size.Width, old_size.Height);
-            actual_size = client.Application.Window.GetSize();
+            client.Window.SetSize(old_size.Width, old_size.Height);
+            actual_size = client.Window.GetSize();
             Assert.AreEqual(old_size, actual_size);
         }
 
@@ -51,7 +51,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Test_App_to_Front()
         {
             var client = this.GetScriptingClient();
-            client.Application.Window.ToFront();
+            client.Window.ToFront();
         }
 
         [TestMethod]

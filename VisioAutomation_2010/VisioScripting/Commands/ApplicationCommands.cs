@@ -6,9 +6,9 @@ namespace VisioScripting.Commands
 {
     public class ApplicationCommands : CommandSet
     {
-        public IVisio.Application VisioApplication { get; set; }
+        private static System.Version visio_app_version;
 
-        public ApplicationWindowCommands Window { get; private set; }
+        public IVisio.Application VisioApplication { get; set; }
 
         internal ApplicationCommands(Client client) :
             this(client, null)
@@ -18,7 +18,6 @@ namespace VisioScripting.Commands
         internal ApplicationCommands(Client client, IVisio.Application application) :
             base(client)
         {
-            this.Window = new ApplicationWindowCommands(this._client);
             this.VisioApplication = application;
         }
 
@@ -123,8 +122,6 @@ namespace VisioScripting.Commands
                 return false;
             }
         }
-
-        private static System.Version visio_app_version;
 
         public System.Version Version
         {

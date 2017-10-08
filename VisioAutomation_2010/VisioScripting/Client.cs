@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioScripting.Commands;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting
@@ -9,30 +8,31 @@ namespace VisioScripting
     {
         private ClientContext _client_context;
 
+        public Commands.AlignCommands Align { get; }
         public Commands.ApplicationCommands Application { get; }
-        public Commands.ViewCommands View { get; }
-        public Commands.LayerCommands Layer { get; }
-        public Commands.ControlCommands Control { get; }
-        public Commands.HyperlinkCommands Hyperlink { get; }
-        public Commands.CustomPropertyCommands CustomProperty { get; }
-        public Commands.ExportPageCommands ExportPage { get; }
-        public Commands.ExportSelectionCommands ExportSelection { get; }
+        public Commands.ApplicationWindowCommands Window { get; }
+        public Commands.ArrangeCommands Arrange { get; }
         public Commands.ConnectionCommands Connection { get; }
         public Commands.ConnectionPointCommands ConnectionPoint { get; }
-        public Commands.DrawCommands Draw { get; }
-        public Commands.MasterCommands Master { get; }
-        public Commands.ArrangeCommands Arrange { get; }
+        public Commands.ControlCommands Control { get; }
+        public Commands.CustomPropertyCommands CustomProperty { get; }
+        public Commands.DeveloperCommands Developer { get; }
         public Commands.DistributeCommands Distribute { get; }
-        public Commands.AlignCommands Align { get; }
+        public Commands.DocumentCommands Document { get; }
+        public Commands.DrawCommands Draw { get; }
+        public Commands.ExportPageCommands ExportPage { get; }
+        public Commands.ExportSelectionCommands ExportSelection { get; }
+        public Commands.GroupingCommands Grouping { get; }
+        public Commands.HyperlinkCommands Hyperlink { get; }
+        public Commands.LayerCommands Layer { get; }
+        public Commands.MasterCommands Master { get; }
+        public Commands.OutputCommands Output { get; }
         public Commands.PageCommands Page { get; }
         public Commands.SelectionCommands Selection { get; }
         public Commands.ShapeSheetCommands ShapeSheet { get; }
         public Commands.TextCommands Text { get; }
         public Commands.UserDefinedCellCommands UserDefinedCell { get; }
-        public Commands.DocumentCommands Document { get; }
-        public Commands.DeveloperCommands Developer { get; }
-        public Commands.OutputCommands Output { get; }
-        public Commands.GroupingCommands Grouping { get; }
+        public Commands.ViewCommands View { get; }
 
         public bool VerboseLogging = true;
 
@@ -50,30 +50,31 @@ namespace VisioScripting
 
             this._client_context = client_context;
 
-            this.Application = new Commands.ApplicationCommands(this,app);
-            this.View = new Commands.ViewCommands(this);
-            this.Layer = new Commands.LayerCommands(this);
-            this.Control = new Commands.ControlCommands(this);
-            this.Hyperlink = new Commands.HyperlinkCommands(this);
-            this.CustomProperty = new Commands.CustomPropertyCommands(this);
-            this.ExportPage = new Commands.ExportPageCommands(this);
-            this.ExportSelection = new Commands.ExportSelectionCommands(this);
+            this.Align = new Commands.AlignCommands(this);
+            this.Application = new Commands.ApplicationCommands(this, app);
+            this.Arrange = new Commands.ArrangeCommands(this);
             this.Connection = new Commands.ConnectionCommands(this);
             this.ConnectionPoint = new Commands.ConnectionPointCommands(this);
+            this.Control = new Commands.ControlCommands(this);
+            this.CustomProperty = new Commands.CustomPropertyCommands(this);
+            this.Developer = new Commands.DeveloperCommands(this);
+            this.Distribute = new Commands.DistributeCommands(this);
+            this.Document = new Commands.DocumentCommands(this);
             this.Draw = new Commands.DrawCommands(this);
+            this.ExportPage = new Commands.ExportPageCommands(this);
+            this.ExportSelection = new Commands.ExportSelectionCommands(this);
+            this.Grouping = new Commands.GroupingCommands(this);
+            this.Hyperlink = new Commands.HyperlinkCommands(this);
+            this.Layer = new Commands.LayerCommands(this);
             this.Master = new Commands.MasterCommands(this);
-            this.Arrange = new Commands.ArrangeCommands(this);
+            this.Output = new Commands.OutputCommands(this);
             this.Page = new Commands.PageCommands(this);
             this.Selection = new Commands.SelectionCommands(this);
             this.ShapeSheet = new Commands.ShapeSheetCommands(this);
             this.Text = new Commands.TextCommands(this);
             this.UserDefinedCell = new Commands.UserDefinedCellCommands(this);
-            this.Document = new Commands.DocumentCommands(this);
-            this.Developer = new Commands.DeveloperCommands(this);
-            this.Output = new Commands.OutputCommands(this);
-            this.Distribute = new DistributeCommands(this);
-            this.Grouping = new GroupingCommands(this);
-            this.Align = new AlignCommands(this);
+            this.View = new Commands.ViewCommands(this);
+            this.Window = new Commands.ApplicationWindowCommands(this);
         }
 
         public System.Reflection.Assembly GetVisioAutomationAssembly()
@@ -167,7 +168,7 @@ namespace VisioScripting
 
         internal static List<System.Reflection.PropertyInfo> GetProperties()
         {
-            var commandset_t = typeof (CommandSet);
+            var commandset_t = typeof (Commands.CommandSet);
             var all_props = typeof(Client).GetProperties();
             var command_props = all_props
                 .Where(p => commandset_t.IsAssignableFrom(p.PropertyType))
