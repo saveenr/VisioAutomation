@@ -17,12 +17,12 @@ namespace VisioPowerShell.Commands
             if (!this.AllPages)
             {
                 // this means use the current page 
-                this.Client.Export.PageToFile(this.Filename);
+                this.Client.ExportPage.PageToFile(this.Filename);
             }
             else
             {
                 // is -AllPages is set then export them all
-                this.Client.Export.PagesToFiles(this.Filename);
+                this.Client.ExportPage.PagesToFiles(this.Filename);
             }
         }
     }

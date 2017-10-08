@@ -15,7 +15,8 @@ namespace VisioScripting
         public Commands.ControlCommands Control { get; }
         public Commands.HyperlinkCommands Hyperlink { get; }
         public Commands.CustomPropertyCommands CustomProperty { get; }
-        public Commands.ExportCommands Export { get; }
+        public Commands.ExportPageCommands ExportPage { get; }
+        public Commands.ExportSelectionCommands ExportSelection { get; }
         public Commands.ConnectionCommands Connection { get; }
         public Commands.ConnectionPointCommands ConnectionPoint { get; }
         public Commands.DrawCommands Draw { get; }
@@ -55,7 +56,8 @@ namespace VisioScripting
             this.Control = new Commands.ControlCommands(this);
             this.Hyperlink = new Commands.HyperlinkCommands(this);
             this.CustomProperty = new Commands.CustomPropertyCommands(this);
-            this.Export = new Commands.ExportCommands(this);
+            this.ExportPage = new Commands.ExportPageCommands(this);
+            this.ExportSelection = new Commands.ExportSelectionCommands(this);
             this.Connection = new Commands.ConnectionCommands(this);
             this.ConnectionPoint = new Commands.ConnectionPointCommands(this);
             this.Draw = new Commands.DrawCommands(this);

@@ -47,6 +47,7 @@
     <Compile Include="Commands\AlignCommands.cs" />
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
+    <Compile Include="Commands\ExportPageCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="Helpers\SelectionHelper.cs" />
     <Compile Include="Models\AlignmentHorizontal.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="Commands\DocumentCommands.cs" />
     <Compile Include="Commands\DrawCommands.cs" />
-    <Compile Include="Commands\ExportCommands.cs" />
+    <Compile Include="Commands\ExportSelectionCommands.cs" />
     <Compile Include="Commands\HyperlinkCommands.cs" />
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
