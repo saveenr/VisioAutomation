@@ -28,8 +28,8 @@ namespace VisioPowerShell.Commands
                 // if a scripting client is not available create one and cache it
                 // for the lifetime of this cmdlet
 
-                VisioCmdlet._client = VisioCmdlet._client ?? new VisioScripting.Client(null);
-                VisioCmdlet._client.ClientContext = new VisioPsClientContext(this);
+                var ctx = new VisioPsClientContext(this);
+                VisioCmdlet._client = VisioCmdlet._client ?? new VisioScripting.Client(null,ctx);
                 return VisioCmdlet._client;
 
                 // Must always setup the client output

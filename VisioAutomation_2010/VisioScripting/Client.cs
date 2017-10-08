@@ -6,7 +6,7 @@ namespace VisioScripting
 {
     public class Client
     {
-        private ClientContext _client_context;
+        private readonly ClientContext _client_context;
 
         public Commands.AlignCommands Align { get; }
         public Commands.ApplicationCommands Application { get; }
@@ -151,21 +151,7 @@ namespace VisioScripting
         {
             this._client_context.WriteError(s);
         }
-
-        public ClientContext ClientContext
-        {
-            get { return this._client_context; }
-            set
-            {
-                if (value == null)
-                {
-                    string msg = "Context must be non-null";
-                    throw new System.ArgumentNullException(msg);
-                }
-                this._client_context = value;
-            }
-        }
-
+        
         internal static List<System.Reflection.PropertyInfo> GetProperties()
         {
             var commandset_t = typeof (Commands.CommandSet);
