@@ -16,7 +16,9 @@ namespace VisioPowerShell.Commands
             if (this.Width > 0 || this.Height > 0)
             {
                 var w = this.Client.Window;
-                w.SetSize(this.Width, this.Height);
+                var old_rect = this.Client.Window.GetRectangle();
+                var new_rect = new System.Drawing.Rectangle(old_rect.X, old_rect.Y, this.Width,this.Height);
+                w.SetRectangle(new_rect);
             }
         }
     }

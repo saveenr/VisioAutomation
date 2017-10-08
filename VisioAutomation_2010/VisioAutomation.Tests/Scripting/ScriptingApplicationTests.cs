@@ -16,18 +16,14 @@ namespace VisioAutomation_Tests.Scripting
 
         public void Scripting_Test_Resize_Application_Window1()
         {
-            var client = this.GetScriptingClient();
-
-            var old_size = client.Window.GetSize();
             var desired_size = new Size(600, 800);
+            var client = this.GetScriptingClient();
+            var old_rect = client.Window.GetRectangle();
+            var new_rect = new System.Drawing.Rectangle(old_rect.X, old_rect.Y, desired_size.Width, desired_size.Height);
 
-            client.Window.SetSize(desired_size.Width, desired_size.Height);
-
-            var actual_size = client.Window.GetSize();
-            Assert.AreEqual(desired_size, actual_size);
-            client.Window.SetSize(old_size.Width, old_size.Height);
-            actual_size = client.Window.GetSize();
-            Assert.AreEqual(old_size, actual_size);
+            client.Window.SetRectangle(new_rect);
+            var actual_rect = client.Window.GetRectangle();
+            Assert.AreEqual(desired_size, actual_rect);
         }
 
         public void Scripting_Test_Resize_Application_Window2()
