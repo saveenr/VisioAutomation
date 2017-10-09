@@ -5,14 +5,6 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VisioScripting.Commands
 {
-    public enum ShapeSendDirection
-    {
-        ToFront,
-        Forward,
-        Backward,
-        ToBack
-    }
-
     public class ArrangeCommands : CommandSet
     {
         internal ArrangeCommands(Client client) :
@@ -47,29 +39,29 @@ namespace VisioScripting.Commands
             }
         }
 
-        private static void SendShapes(Microsoft.Office.Interop.Visio.Selection selection, ShapeSendDirection dir)
+        private static void SendShapes(Microsoft.Office.Interop.Visio.Selection selection, Models.ShapeSendDirection dir)
         {
 
-            if (dir == ShapeSendDirection.ToBack)
+            if (dir == Models.ShapeSendDirection.ToBack)
             {
                 selection.SendToBack();
             }
-            else if (dir == ShapeSendDirection.Backward)
+            else if (dir == Models.ShapeSendDirection.Backward)
             {
                 selection.SendBackward();
             }
-            else if (dir == ShapeSendDirection.Forward)
+            else if (dir == Models.ShapeSendDirection.Forward)
             {
                 selection.BringForward();
             }
-            else if (dir == ShapeSendDirection.ToFront)
+            else if (dir == Models.ShapeSendDirection.ToFront)
             {
                 selection.BringToFront();
             }
         }
 
 
-        public void Send(VisioScripting.Models.TargetShapes targets, ShapeSendDirection dir)
+        public void Send(VisioScripting.Models.TargetShapes targets, Models.ShapeSendDirection dir)
         {
             this._client.Application.AssertApplicationAvailable();
             this._client.Document.AssertDocumentAvailable();

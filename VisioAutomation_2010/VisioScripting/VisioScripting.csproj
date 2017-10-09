@@ -49,6 +49,7 @@
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\ExportPageCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
+    <Compile Include="Models\ShapeSendDirection.cs" />
     <Compile Include="Helpers\SelectionHelper.cs" />
     <Compile Include="Models\AlignmentHorizontal.cs" />
     <Compile Include="Models\AlignmentVertical.cs" />
