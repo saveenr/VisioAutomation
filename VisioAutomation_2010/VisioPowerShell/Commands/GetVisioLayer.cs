@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands
             else
             {
                 var layers = this.Client.Layer.Get();
-                this.WriteObject(layers,false);
+                this.WriteObject(layers, true);
             }
         }
     }

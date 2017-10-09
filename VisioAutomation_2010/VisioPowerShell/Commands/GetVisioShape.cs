@@ -29,19 +29,19 @@ namespace VisioPowerShell.Commands
                 {
                     this.WriteVerbose("Returning selected shapes (nested)");
                     var shapes = this.Client.Selection.GetShapesRecursive();
-                    this.WriteObject(shapes, false);
+                    this.WriteObject(shapes, true);
                 }
                 if (this.SubSelected)
                 {
                     this.WriteVerbose("Returning selected shapes (subselecte)");
                     var shapes = this.Client.Selection.GetSubSelectedShapes();
-                    this.WriteObject(shapes, false);
+                    this.WriteObject(shapes, true);
                 }
                 else
                 {
                     this.WriteVerbose("Returning selected shapes ");
                     var shapes = this.Client.Selection.GetShapes();
-                    this.WriteObject(shapes, false);
+                    this.WriteObject(shapes, true);
                 }
 
                 return;
@@ -54,13 +54,13 @@ namespace VisioPowerShell.Commands
                 if (this.Name.Contains(str_asterisk))
                 {
                     var shapes = this.Client.Draw.GetAllShapes();
-                    this.WriteObject(shapes, false);
+                    this.WriteObject(shapes, true);
                 }
                 else
                 {
                     var strings = this.Name.Where(i => i is string).Cast<string>().ToArray();
                     var shapes = this.Client.Page.GetShapesByName(strings);
-                    this.WriteObject(shapes, false);
+                    this.WriteObject(shapes, true);
                 }
 
                 return;
@@ -70,7 +70,7 @@ namespace VisioPowerShell.Commands
             if (this.Id != null)
             {
                 var shapes = this.Client.Page.GetShapesByID(this.Id);
-                this.WriteObject(shapes, false);
+                this.WriteObject(shapes, true);
 
                 return;
             }

@@ -24,7 +24,7 @@ namespace VisioPowerShell.Commands
             }
 
             var docs = this.Client.Document.GetDocumentsByName(this.Name);
-            this.WriteObject(docs, false);
+            this.WriteObject(docs, true);
         }
     }
 }

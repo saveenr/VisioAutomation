@@ -35,7 +35,7 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.NewVisioShape();
             cmd.Masters = masters;
             cmd.Points= points;
-            var shape_list = cmd.InvokeFirst<List<IVisio.Shape>>();
+            var shape_list = cmd.Invoke<IVisio.Shape>().ToList();
             return shape_list;
         }
 
@@ -48,7 +48,7 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.GetVisioMaster();
             cmd.Name = mastername;
             cmd.Document = doc;
-            var master = cmd.InvokeFirst<List<IVisio.Master>>();
+            var master = cmd.Invoke<IVisio.Master>().ToList();
             return master;
         }
 
@@ -59,7 +59,7 @@ namespace VisioPowerShell_Tests
             var cmd = new VisioPowerShell.Commands.GetVisioMaster();
             cmd.Name = mastername;
             cmd.Document = stencil;
-            var master = cmd.InvokeFirst<List<IVisio.Master>>();
+            var master = cmd.Invoke<IVisio.Master>().ToList();
             return master;
         }
 

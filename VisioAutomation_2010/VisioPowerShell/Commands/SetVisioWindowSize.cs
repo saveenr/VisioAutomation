@@ -6,16 +6,16 @@ namespace VisioPowerShell.Commands
     public class SetVisioWindow : VisioCmdlet
     {
         [SMA.Parameter(Position = 0)]
-        public int Width = -1;
+        public int? Width;
 
         [SMA.Parameter(Position = 1)]
-        public int Height = -1;
+        public int? Height;
 
         [SMA.Parameter(Position = 2)]
-        public int X = -1;
+        public int? X;
 
         [SMA.Parameter(Position = 3)]
-        public int Y = -1;
+        public int? Y;
 
         protected override void ProcessRecord()
         {
@@ -24,24 +24,24 @@ namespace VisioPowerShell.Commands
                 var old_rect = this.Client.Window.GetRectangle();
                 var new_rect = old_rect;
 
-                if (this.Width > 0)
+                if (this.Width.HasValue)
                 {
-                    new_rect.Width = this.Width;
+                    new_rect.Width = this.Width.Value;
                 }
 
-                if (this.Height > 0)
+                if (this.Height.HasValue)
                 {
-                    new_rect.Height = this.Height;
+                    new_rect.Height = this.Height.Value;
                 }
 
-                if (this.X >= 0)
+                if (this.X.HasValue)
                 {
-                    new_rect.X = this.X;
+                    new_rect.X = this.X.Value;
                 }
 
-                if (this.Y >= 0)
+                if (this.Y.HasValue)
                 {
-                    new_rect.Y = this.Y;
+                    new_rect.Y = this.Y.Value;
                 }
 
                 this.Client.Window.SetRectangle(new_rect);

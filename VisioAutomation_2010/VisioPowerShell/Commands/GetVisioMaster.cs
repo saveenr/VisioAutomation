@@ -24,13 +24,13 @@ namespace VisioPowerShell.Commands
                 {
                     ((SMA.Cmdlet) this).WriteVerbose("Get master from specified document");
                     var masters = this.Client.Master.GetMastersByName(this.Name, this.Document);
-                    this.WriteObject(masters,false);
+                    this.WriteObject(masters, true);
                 }
                 else
                 {
                     ((SMA.Cmdlet) this).WriteVerbose("Get master from active document");
                     var masters = this.Client.Master.GetMastersByName(this.Name);
-                    this.WriteObject(masters, false);
+                    this.WriteObject(masters, true);
                 }
             }
             else
@@ -40,13 +40,13 @@ namespace VisioPowerShell.Commands
                 {
                     ((SMA.Cmdlet) this).WriteVerbose("Get all masters from specified document");
                     var masters = this.Client.Master.Get(this.Document);
-                    this.WriteObject(masters, false);                    
+                    this.WriteObject(masters, true);                    
                 }
                 else
                 {
                     ((SMA.Cmdlet) this).WriteVerbose("Get all masters from active document");
                     var masters = this.Client.Master.Get();
-                    this.WriteObject(masters, false);                   
+                    this.WriteObject(masters, true);                   
                 }
             }
         }

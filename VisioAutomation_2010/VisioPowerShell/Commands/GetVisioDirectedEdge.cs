@@ -24,7 +24,7 @@ namespace VisioPowerShell.Commands
 
             if (this.GetShapeObjects)
             {
-                this.WriteObject(edges, false);
+                this.WriteObject(edges, true);
                 return;
             }
 

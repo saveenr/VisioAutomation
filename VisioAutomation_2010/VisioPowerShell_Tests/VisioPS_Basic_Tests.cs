@@ -96,9 +96,9 @@ namespace VisioPowerShell_Tests
             var rectangle = "Rectangle";
             var basic_u_vss = "BASIC_U.VSS";
 
-            var masters = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(rectangle, basic_u_vss);
+            var master = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(rectangle, basic_u_vss);
 
-            VisioPS_Basic_Tests.Session.Cmd_New_VisioShape( PsArray.From(masters) , new[] { 1.0, 1.0 });
+            VisioPS_Basic_Tests.Session.Cmd_New_VisioShape( PsArray.From(master) , new[] { 1.0, 1.0 });
 
             // Drop a container on the page... the rectangle we created above should be selected by default. 
             // Since it is selected it will be added as a member to the container.

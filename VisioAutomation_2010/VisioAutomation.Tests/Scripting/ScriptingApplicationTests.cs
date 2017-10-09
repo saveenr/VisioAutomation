@@ -23,7 +23,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Window.SetRectangle(new_rect);
             var actual_rect = client.Window.GetRectangle();
-            Assert.AreEqual(desired_size, actual_rect);
+            Assert.AreEqual(desired_size, actual_rect.Size);
         }
 
         public void Scripting_Test_Resize_Application_Window2()

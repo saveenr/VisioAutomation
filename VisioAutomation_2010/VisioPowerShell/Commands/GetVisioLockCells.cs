@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
             var dic = this.Client.Arrange.GetLock(targets);
-            this.WriteObject(dic,false);
+            this.WriteObject(dic, true);
         }
     }
 }
