@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
                 // if there's no active document, then there can't be an active document
                 if (app.ActiveDocument == null)
                 {
-                    this._client.WriteVerbose("HasActiveDocument: No Active Window");
+                    this._client.Output.WriteVerbose("HasActiveDocument: No Active Window");
                     return false;
                 }
 
@@ -32,7 +32,7 @@ namespace VisioScripting.Commands
                 // If there's no active window there can't be an active document
                 if (active_window == null)
                 {
-                    this._client.WriteVerbose("HasActiveDocument: No Active Document");
+                    this._client.Output.WriteVerbose("HasActiveDocument: No Active Document");
                     return false;
                 }
 
@@ -42,17 +42,17 @@ namespace VisioScripting.Commands
                 var vis_master = (int)IVisio.VisWinTypes.visMasterWin;
                 // var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
 
-                this._client.WriteVerbose("The Active Window: Type={0} & SybType={1}", active_window_type, active_window.SubType);
+                this._client.Output.WriteVerbose("The Active Window: Type={0} & SybType={1}", active_window_type, active_window.SubType);
                 if (!(active_window_type == vis_drawing || active_window_type == vis_master))
                 {
-                    this._client.WriteVerbose("The Active Window Type must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
+                    this._client.Output.WriteVerbose("The Active Window Type must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
                     return false;
                 }
 
                 //  verify there is an active page
                 if (app.ActivePage == null)
                 {
-                    this._client.WriteVerbose("HasActiveDocument: Active Page is null");
+                    this._client.Output.WriteVerbose("HasActiveDocument: Active Page is null");
 
                     if (active_window.SubType == 64)
                     {
@@ -61,12 +61,12 @@ namespace VisioScripting.Commands
                     }
                     else
                     {
-                        this._client.WriteVerbose("HasActiveDocument: Active Page is null");
+                        this._client.Output.WriteVerbose("HasActiveDocument: Active Page is null");
                         return false;
                     }
                 }
 
-                this._client.WriteVerbose("HasActiveDocument: Verified a drawing is available for use");
+                this._client.Output.WriteVerbose("HasActiveDocument: Verified a drawing is available for use");
 
                 return true;
             }
@@ -135,12 +135,12 @@ namespace VisioScripting.Commands
 
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
-                this._client.WriteVerbose("Not a Drawing Window", doc.Name);
+                this._client.Output.WriteVerbose("Not a Drawing Window", doc.Name);
                 throw new System.ArgumentException("Not a Drawing Window");
             }
 
-            this._client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-            this._client.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+            this._client.Output.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+            this._client.Output.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
 
             if (force)
             {
@@ -166,8 +166,8 @@ namespace VisioScripting.Commands
             {
                 foreach (var doc in docs)
                 {
-                    this._client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-                    this._client.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+                    this._client.Output.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+                    this._client.Output.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
                     doc.Close();
                 }
             }
@@ -182,7 +182,7 @@ namespace VisioScripting.Commands
         {
             this._client.Application.AssertApplicationAvailable();
 
-            this._client.WriteVerbose("Creating Empty Drawing");
+            this._client.Output.WriteVerbose("Creating Empty Drawing");
             var application = this._client.Application.Get();
             var documents = application.Documents;
             
@@ -250,13 +250,13 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("name");
             }
 
-            this._client.WriteVerbose( "Loading stencil \"{0}\"", name);
+            this._client.Output.WriteVerbose( "Loading stencil \"{0}\"", name);
 
             var application = this._client.Application.Get();
             var documents = application.Documents;
             var doc = documents.OpenStencil(name);
 
-            this._client.WriteVerbose( "Finished loading stencil \"{0}\"", name);
+            this._client.Output.WriteVerbose( "Finished loading stencil \"{0}\"", name);
             return doc;
         }
 
@@ -276,8 +276,8 @@ namespace VisioScripting.Commands
 
             string abs_filename = System.IO.Path.GetFullPath(filename);
 
-            this._client.WriteVerbose( "Input filename: {0}", filename);
-            this._client.WriteVerbose( "Absolute filename: {0}", abs_filename);
+            this._client.Output.WriteVerbose( "Input filename: {0}", filename);
+            this._client.Output.WriteVerbose( "Absolute filename: {0}", abs_filename);
 
             if (!System.IO.File.Exists(abs_filename))
             {

@@ -48,7 +48,7 @@ namespace VisioScripting.Commands
             }
 
             var selection = this._client.Selection.Get();
-            this.SelectionToHtml(selection, filename, s => this._client.WriteVerbose(s));
+            this.SelectionToHtml(selection, filename, s => this._client.Output.WriteVerbose(s));
         }
 
         private void SelectionToHtml(IVisio.Selection selection, string filename, System.Action<string> export_log)

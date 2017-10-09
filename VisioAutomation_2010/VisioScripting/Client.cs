@@ -6,7 +6,7 @@ namespace VisioScripting
 {
     public class Client
     {
-        private ClientContext _client_context;
+        private readonly ClientContext _client_context;
 
         public Commands.AlignCommands Align { get; }
         public Commands.ApplicationCommands Application { get; }
@@ -34,8 +34,6 @@ namespace VisioScripting
         public Commands.UserDefinedCellCommands UserDefinedCell { get; }
         public Commands.ViewCommands View { get; }
 
-        public bool VerboseLogging = true;
-
         public Client(IVisio.Application app):
             this(app,new VisioScripting.Models.DefaultClientContext())
         {
@@ -49,7 +47,6 @@ namespace VisioScripting
             }
 
             this._client_context = client_context;
-
             this.Align = new Commands.AlignCommands(this);
             this.Application = new Commands.ApplicationCommands(this, app);
             this.Arrange = new Commands.ArrangeCommands(this);
@@ -90,82 +87,12 @@ namespace VisioScripting
             var asm = type.Assembly;
             return asm;
         }
-        
-        public void WriteUser(string fmt, params object[] items)
-        {
-            string s = string.Format(fmt, items);
-            this._client_context.WriteUser(s);
-        }
-
-        public void WriteDebug(string fmt, params object[] items)
-        {
-            string s = string.Format(fmt, items);
-            this._client_context.WriteDebug(s);
-        }
-
-        public void WriteVerbose(string fmt, params object[] items)
-        {
-            if (this.VerboseLogging)
-            {
-                string s = string.Format(fmt, items);
-                this._client_context.WriteVerbose(s);
-            }
-        }
-
-        public void WriteWarning(string fmt, params object[] items)
-        {
-            string s = string.Format(fmt, items);
-            this._client_context.WriteWarning(s);
-        }
-
-        public void WriteError(string fmt, params object[] items)
-        {
-            string s = string.Format(fmt, items);
-            this._client_context.WriteError(s);
-        }
-
-        public void WriteUser(string s)
-        {
-            this._client_context.WriteUser(s);
-        }
-
-        public void WriteDebug(string s)
-        {
-            this._client_context.WriteDebug(s);
-        }
-
-        public void WriteVerbose(string s)
-        {
-            if (this.VerboseLogging)
-            {
-                this._client_context.WriteVerbose(s);
-            }
-        }
-
-        public void WriteWarning(string s)
-        {
-            this._client_context.WriteWarning(s);
-        }
-        
-        public void WriteError(string s)
-        {
-            this._client_context.WriteError(s);
-        }
 
         public ClientContext ClientContext
         {
             get { return this._client_context; }
-            set
-            {
-                if (value == null)
-                {
-                    string msg = "Context must be non-null";
-                    throw new System.ArgumentNullException(msg);
-                }
-                this._client_context = value;
-            }
         }
-
+        
         internal static List<System.Reflection.PropertyInfo> GetProperties()
         {
             var commandset_t = typeof (Commands.CommandSet);

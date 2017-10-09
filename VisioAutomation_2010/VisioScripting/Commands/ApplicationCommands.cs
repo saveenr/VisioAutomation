@@ -26,7 +26,7 @@ namespace VisioScripting.Commands
             get
             {
                 bool b = this.VisioApplication != null;
-                this._client.WriteVerbose("HasApplication: {0}", b);
+                this._client.Output.WriteVerbose("HasApplication: {0}", b);
                 return b;
             }
         }
@@ -51,7 +51,7 @@ namespace VisioScripting.Commands
 
             if (app == null)
             {
-                this._client.WriteWarning("There is no Visio Application to stop");
+                this._client.Output.WriteWarning("There is no Visio Application to stop");
                 return;
             }
 
@@ -78,9 +78,9 @@ namespace VisioScripting.Commands
 
         public IVisio.Application New()
         {
-            this._client.WriteVerbose("Creating a new Instance of Visio");
+            this._client.Output.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
-            this._client.WriteVerbose("Attaching that instance to current scripting client");
+            this._client.Output.WriteVerbose("Attaching that instance to current scripting client");
             this.VisioApplication = app;
             return app;
         }
@@ -101,7 +101,7 @@ namespace VisioScripting.Commands
         {
             if (this.VisioApplication == null)
             {
-                this._client.WriteVerbose("Client's Application object is null");
+                this._client.Output.WriteVerbose("Client's Application object is null");
                 return false;
             }
 
@@ -111,12 +111,12 @@ namespace VisioScripting.Commands
                 //  if No COMException was thrown when reading ProductName property. This application instance is treated as valid
 
                 var app_version = this.VisioApplication.ProductName;
-                this._client.WriteVerbose("Application validated");
+                this._client.Output.WriteVerbose("Application validated");
                 return true;
             }
             catch (System.Runtime.InteropServices.COMException)
             {
-                this._client.WriteVerbose("COMException thrown during validation. Treating as invalid application");
+                this._client.Output.WriteVerbose("COMException thrown during validation. Treating as invalid application");
                 // If a COMException is thrown, this indicates that the
                 // application object is invalid
                 return false;

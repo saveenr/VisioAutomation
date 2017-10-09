@@ -28,10 +28,10 @@ namespace VisioScripting.Commands
             // TODO: Revisit the logic here
             // TODO: And what about a selected shape as a surface?
 
-            this._client.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
+            this._client.Output.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
             if (surf_Window_subtype == 64)
             {
-                this._client.WriteVerbose("Window = Master Editing");
+                this._client.Output.WriteVerbose("Window = Master Editing");
                 var surf_Master = (IVisio.Master)surf_Window.Master;
                 var surface = new VisioAutomation.SurfaceTarget(surf_Master);
                 return surface;
@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
             }
             else
             {
-                this._client.WriteVerbose("Window = Page ");
+                this._client.Output.WriteVerbose("Window = Page ");
                 var surf_Page = surf_Application.ActivePage;
                 var surface = new VisioAutomation.SurfaceTarget(surf_Page);
                 return surface;
@@ -299,25 +299,25 @@ namespace VisioScripting.Commands
         public void OrgChart(ORG.OrgChartDocument orgChartDocument)
         {
 
-            this._client.WriteVerbose("Start OrgChart Rendering");
+            this._client.Output.WriteVerbose("Start OrgChart Rendering");
             this._client.Application.AssertApplicationAvailable();
 
             var application = this._client.Application.Get();
             orgChartDocument.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();
-            this._client.WriteVerbose("Finished OrgChart Rendering");
+            this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 
         public void DirectedGraph(IList<GRAPH.DirectedGraphLayout> graph)
         {
             this._client.Application.AssertApplicationAvailable();
 
-            this._client.WriteVerbose("Start rendering directed graph");
+            this._client.Output.WriteVerbose("Start rendering directed graph");
             var app = this._client.Application.Get();
 
 
-            this._client.WriteVerbose("Creating a New Document For the Directed Graphs");
+            this._client.Output.WriteVerbose("Creating a New Document For the Directed Graphs");
             var doc = this._client.Document.New(null);
 
             int num_pages_created = 0;
@@ -336,17 +336,17 @@ namespace VisioScripting.Commands
                 // otherwise, create a new page.
                 var page = num_pages_created == 0 ? app.ActivePage : doc_pages.Add();
 
-                this._client.WriteVerbose("Rendering page: {0}", i + 1);
+                this._client.Output.WriteVerbose("Rendering page: {0}", i + 1);
                 dg.Render(page, options);
                 this._client.Page.ResizeToFitContents(new VisioAutomation.Geometry.Size(1.0, 1.0), true);
                 this._client.View.Zoom(VisioScripting.Models.Zoom.ToPage);
-                this._client.WriteVerbose("Finished rendering page");
+                this._client.Output.WriteVerbose("Finished rendering page");
 
                 num_pages_created++;
             }
 
-            this._client.WriteVerbose("Finished rendering all pages");
-            this._client.WriteVerbose("Finished rendering directed graph.");
+            this._client.Output.WriteVerbose("Finished rendering all pages");
+            this._client.Output.WriteVerbose("Finished rendering directed graph.");
         }
 
         public void Duplicate(int n)

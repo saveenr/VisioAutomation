@@ -28,7 +28,7 @@ namespace VisioPowerShell.Commands
             {
                 foreach (var doc in this.Documents)
                 {
-                    this.Client.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
+                    this.Client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
                     doc.Close(this.Force);
                 }
             }

@@ -279,11 +279,11 @@ namespace VisioScripting.Commands
 
             int n = target_shapes.SetSelectionGetSelectedCount(this._client);
 
-            this._client.WriteVerbose("Number of shapes to duplicate: {0}", n);
+            this._client.Output.WriteVerbose("Number of shapes to duplicate: {0}", n);
 
             if (n<1)
             {
-                this._client.WriteVerbose("Zero shapes to duplicate. No duplication operation performed");
+                this._client.Output.WriteVerbose("Zero shapes to duplicate. No duplication operation performed");
                 return;
             }
 

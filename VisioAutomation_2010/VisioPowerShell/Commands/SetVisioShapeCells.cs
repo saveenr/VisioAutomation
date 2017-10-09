@@ -55,15 +55,15 @@ namespace VisioPowerShell.Commands
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
-            this.Client.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
-            this.Client.WriteVerbose("TestCircular: {0}", this.TestCircular);
-            this.Client.WriteVerbose("Number of Shapes : {0}", target_ids.ShapeIDs.Count);
+            this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
+            this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
+            this.Client.Output.WriteVerbose("Number of Shapes : {0}", target_ids.ShapeIDs.Count);
 
             using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Cells"))
             {
-                this.Client.WriteVerbose("Start Update");
+                this.Client.Output.WriteVerbose("Start Update");
                 writer.Commit(surface);
-                this.Client.WriteVerbose("End Update");
+                this.Client.Output.WriteVerbose("End Update");
             }
         }
     }
