@@ -226,9 +226,9 @@ namespace VisioScripting.Commands
 
             var application = cmdtarget.Application;
             var page = application.ActivePage;
-            var selectedShapes = this._client.Selection.Get();
-
-            var shape = page.DropContainer(master, selectedShapes);
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+            var shape = page.DropContainer(master, selection);
             return shape;
         }
 
@@ -239,7 +239,9 @@ namespace VisioScripting.Commands
 
             var application = cmdtarget.Application;
             var page = application.ActivePage;
-            var selectedShapes = this._client.Selection.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+
 
             var stencil_type = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
             var measurement_system = IVisio.VisMeasurementSystem.visMSUS;
@@ -247,7 +249,7 @@ namespace VisioScripting.Commands
             var containers_doc = application.Documents.OpenStencil(containers_file);
             var masters = containers_doc.Masters;
             var container_master = masters.ItemU[master];
-            var shape = page.DropContainer(container_master,selectedShapes);
+            var shape = page.DropContainer(container_master,selection);
 
             return shape;
         }

@@ -189,19 +189,16 @@ namespace VisioScripting.Commands
         public IList<IVisio.Shape> GetShapes()
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
-
-            var selection = this._client.Selection.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(selection);
         }
 
         public List<IVisio.Shape> GetShapesRecursive()
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
-            var selection = this._client.Selection.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapesRecursive(selection);
         }
 
@@ -224,7 +221,9 @@ namespace VisioScripting.Commands
 
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
             var shapes = new List<IVisio.Shape>(0);
-            var sel = this._client.Selection.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var sel = window.Selection;
+
             var original_itermode = sel.IterationMode;
 
             // normal selection
@@ -256,7 +255,8 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var selection = this.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             selection.Delete();
         }
 
@@ -272,7 +272,8 @@ namespace VisioScripting.Commands
 
             var flags = IVisio.VisCutCopyPasteCodes.visCopyPasteNormal;
 
-            var selection = this.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             selection.Copy(flags);
         }
 

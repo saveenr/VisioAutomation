@@ -161,7 +161,8 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Application.NewUndoScope("Nudge"))
             {
-                var selection = this._client.Selection.Get();
+                var window = cmdtarget.Application.ActiveWindow;
+                var selection = window.Selection;
                 var unitcode = Microsoft.Office.Interop.Visio.VisUnitCodes.visInches;
 
                 // Move method: http://msdn.microsoft.com/en-us/library/ms367549.aspx   
@@ -201,7 +202,8 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var selection = this._client.Selection.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             ArrangeCommands.SendShapes(selection, dir);
         }
 

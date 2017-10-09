@@ -26,7 +26,8 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException(msg);
             }
 
-            var selection = this._client.Selection.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             selection.Export(filename);
         }
 
@@ -45,7 +46,8 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException(msg);
             }
 
-            var selection = this._client.Selection.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             this.SelectionToHtml(selection, filename, s => this._client.Output.WriteVerbose(s));
         }
 

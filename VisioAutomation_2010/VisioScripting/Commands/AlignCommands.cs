@@ -41,7 +41,8 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Application.NewUndoScope("Align Horizontal"))
             {
-                var selection = this._client.Selection.Get();
+                var window = cmdtarget.Application.ActiveWindow;
+                var selection = window.Selection;
                 selection.Align(halign, valign, glue_to_guide);
             }
         }
@@ -72,7 +73,8 @@ namespace VisioScripting.Commands
             // Perform the alignment
             using (var undoscope = this._client.Application.NewUndoScope("Align Vertical"))
             {
-                var selection = this._client.Selection.Get();
+                var window = cmdtarget.Application.ActiveWindow;
+                var selection = window.Selection;
                 selection.Align(halign, valign, glue_to_guide);
             }
         }

@@ -24,7 +24,8 @@ namespace VisioScripting.Commands
             // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
             // but it doesn't return the group
 
-            var selection = this._client.Selection.Get();
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             var g = selection.Group();
             return g;
         }
