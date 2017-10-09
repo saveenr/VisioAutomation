@@ -13,8 +13,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape Group()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             // No shapes provided, use the active selection
             if (!this._client.Selection.HasShapes())
@@ -32,12 +31,13 @@ namespace VisioScripting.Commands
 
         public void Ungroup(VisioScripting.Models.TargetShapes targets)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
             if (targets.Shapes == null)
             {
                 if (this._client.Selection.HasShapes())
                 {
-                    var application = this._client.Application.Get();
+                    var application = cmdtarget.Application;
                     application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
                 }
             }

@@ -12,8 +12,7 @@ namespace VisioScripting.Commands
 
         public void PageToFile(string filename)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (filename == null)
             {
@@ -29,7 +28,7 @@ namespace VisioScripting.Commands
             var old_selection = this._client.Selection.GetShapes();
 
             this._client.Selection.SelectNone();
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var active_page = application.ActivePage;
             active_page.Export(filename);
             var active_window = application.ActiveWindow;
@@ -38,15 +37,14 @@ namespace VisioScripting.Commands
 
         public void PagesToFiles(string filename)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var old_page = application.ActivePage;
             var active_document = application.ActiveDocument;
             var active_window = application.ActiveWindow;

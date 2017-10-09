@@ -35,7 +35,8 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawScriptingDocumentation()
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
 
             var formdoc = new VisioAutomation.Models.Documents.Forms.FormDocument();
             formdoc.Subject = "VisioAutomation.Scripting Documenation";
@@ -94,15 +95,16 @@ namespace VisioScripting.Commands
 
             //hide_ui_stuff(docbuilder.VisioDocument);
 
-            var app = this._client.Application.Get();
+            var app = cmdtarget.Application;
             var doc = formdoc.Render(app);
             return doc;
         }
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
-            this._client.Application.AssertApplicationAvailable();
-            
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
+
             var formdoc = new VisioAutomation.Models.Documents.Forms.FormDocument();
 
             var helpstr = new System.Text.StringBuilder();
@@ -161,7 +163,7 @@ namespace VisioScripting.Commands
             //hide_ui_stuff(docbuilder.VisioDocument);
 
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var doc = formdoc.Render(application);
             return doc;
         }
@@ -222,7 +224,8 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawNamespaces(IList<Type> types)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
 
             string template = null;
             string def_linecolor = "rgb(140,140,140)";
@@ -376,7 +379,8 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses(IList<Type> types_)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
 
             string segoeui_fontname = "Segoe UI";
             string segoeuilight_fontname = "Segoe UI Light";

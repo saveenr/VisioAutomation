@@ -81,5 +81,13 @@ namespace VisioAutomation_Tests.Scripting
             var documents = application.Documents;
             Assert.AreEqual(0, documents.Count);
         }
+
+        [TestMethod]
+        public void XXX()
+        {
+            var client = this.GetScriptingClient();
+            client.Application.New();
+            client.Document.New();
+        }
     }
 }

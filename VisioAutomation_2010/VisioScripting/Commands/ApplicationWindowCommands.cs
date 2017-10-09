@@ -12,8 +12,9 @@ namespace VisioScripting.Commands
 
         public void ToFront()
         {
-            this._client.Application.AssertApplicationAvailable();
-            var app = this._client.Application.Get();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
+            var app = cmdtarget.Application;
 
             if (app == null)
             {
@@ -25,18 +26,19 @@ namespace VisioScripting.Commands
 
         public System.Drawing.Rectangle GetRectangle()
         {
-            this._client.Application.AssertApplicationAvailable();
-            var app = this._client.Application.Get();
-            var appwindow = app.Window;
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
+            var appwindow = cmdtarget.Application.Window;
             var rect = appwindow.GetWindowRect();
             return rect;
         }
 
         public void SetRectangle(System.Drawing.Rectangle rect)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
 
-            var app = this._client.Application.Get();
+
+            var app = cmdtarget.Application;
             var appwindow = app.Window;
             appwindow.SetWindowRect(rect);
         }

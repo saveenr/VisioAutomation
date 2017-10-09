@@ -1,10 +1,141 @@
 using System.Collections.Generic;
+using VisioAutomation.Exceptions;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
 {
+    [System.Flags]
+    public enum CommandTargetFlags
+    {
+        Application,
+        ActiveDocument,
+        ActivePage
+    }
+
+    public class CommandTarget
+    {
+        public IVisio.Application Application;
+        public IVisio.Document Document;
+        public IVisio.Page Page;
+
+        public bool has_app => this.Application != null;
+        public bool has_doc => this.Document != null;
+        public bool has_page => this.Page != null;
+        public Client Client;
+
+        public CommandTarget(Client client)
+        {
+            this.Client = client;
+        }
+
+        public CommandTarget(Client client, CommandTargetFlags flags )
+        {
+            this.Client = client;
+
+            check(flags);
+        }
+
+        public void Assert(CommandTargetFlags flags)
+        {
+            check(flags);
+        }
+
+        private void check(CommandTargetFlags flags)
+        {
+            bool require_app = (flags & CommandTargetFlags.Application) != 0;
+            bool require_document = (flags & CommandTargetFlags.ActiveDocument) != 0;
+            bool require_page = (flags & CommandTargetFlags.ActivePage) != 0;
+
+            require_app = require_app || require_document || require_page;
+            require_document = require_document || require_page;
+
+            this.Application = this.Client.Application.VisioApplication;
+
+            if (this.Application == null && require_app )
+            {
+                var has_app = this.Client.Application.VisioApplication != null;
+                if (!has_app)
+                {
+                    throw new System.ArgumentException("CommandTarget: No Visio Application available");
+                }
+            }
+
+            if (require_app && this.Application == null)
+            {
+                throw new VisioOperationException("CommandTarget: No Application");
+            }
+
+            if ((this.Document == null) && require_document)
+            {
+                var active_window = this.Application.ActiveWindow;
+
+                // If there's no active window there can't be an active document
+                if (active_window == null)
+                {
+                    this.Client.Output.WriteVerbose("CommandTarget: No Active Document");
+                    throw new System.ArgumentException("CommandTarget: No Active Document");
+                }
+
+                // Check if the window type matches that of a document
+                short active_window_type = active_window.Type;
+                var vis_drawing = (int) IVisio.VisWinTypes.visDrawing;
+                var vis_master = (int) IVisio.VisWinTypes.visMasterWin;
+                // var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
+
+                this.Client.Output.WriteVerbose("CommandTarget: The Active Window: Type={0} & SybType={1}", active_window_type,
+                    active_window.SubType);
+                if (!(active_window_type == vis_drawing || active_window_type == vis_master))
+                {
+                    this.Client.Output.WriteVerbose("CommandTarget: The Active Window Type must be one of {0} or {1}",
+                        IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
+                    throw new System.ArgumentException("CommandTarget: The Active Window Type must be one of {0} or {1}");
+                }
+
+                //  verify there is an active page
+
+                if (this.Application.ActivePage == null)
+                {
+                    this.Client.Output.WriteVerbose("CommandTarget: Active Page is null");
+
+                    if (active_window.SubType == 64)
+                    {
+                        // 64 means master is being edited
+                    }
+                    else
+                    {
+                        this.Client.Output.WriteVerbose("CommandTarget: Active Page is null");
+                    }
+                }
+
+                this.Client.Output.WriteVerbose("CommandTarget: Verified a drawing is available for use");
+                this.Document = this.Application.ActiveDocument;
+            }
+
+            if (this.Document == null && require_document)
+            {
+                throw new VisioOperationException("CommandTarget: No Document");
+            }
+
+            if ((this.Page == null) && ((flags & CommandTargetFlags.ActivePage) != 0))
+            {
+                if (this.Application == null)
+                {
+                    throw new VisioOperationException("CommandTarget: Internal error application should never be null in this case");
+                }
+                this.Page = this.Application.ActivePage;
+            }
+
+            if (this.Page == null && require_page)
+            {
+                throw new VisioOperationException("CommandTarget: No Page");
+            }
+
+        }
+    }
+
     public class ArrangeCommands : CommandSet
     {
         internal ArrangeCommands(Client client) :
@@ -20,8 +151,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -63,8 +193,7 @@ namespace VisioScripting.Commands
 
         public void Send(VisioScripting.Models.TargetShapes targets, Models.ShapeSendDirection dir)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -78,8 +207,8 @@ namespace VisioScripting.Commands
 
         public void SetLock(VisioScripting.Models.TargetShapes targets, LockCells lockcells)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)
@@ -105,8 +234,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<int,LockCells> GetLock(VisioScripting.Models.TargetShapes targets)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)
@@ -133,8 +261,7 @@ namespace VisioScripting.Commands
 
         public void SetSize(VisioScripting.Models.TargetShapes targets, double? w, double? h)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)

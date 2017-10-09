@@ -19,41 +19,33 @@ namespace VisioScripting.Commands
         /// <returns></returns>
         public List<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosure(VA.DocumentAnalysis.ConnectorHandling flag)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var app = this._client.Application.Get();
-            return VA.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(app.ActivePage, flag);
+            return VA.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(cmdtarget.Page, flag);
         }
 
         public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdges(VA.DocumentAnalysis.ConnectorHandling flag)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var application = this._client.Application.Get();
-            var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(application.ActivePage, flag);
+            var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(cmdtarget.Page, flag);
             return directed_edges;
         }
 
         public List<IVisio.Shape> Connect(IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master master)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            var application = this._client.Application.Get();
-            var active_page = application.ActivePage;
-
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            
             using (var undoscope = this._client.Application.NewUndoScope("Connect Shapes"))
             {
                 if (master == null)
                 {
-                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, null, false);
+                    var connectors = ConnectorHelper.ConnectShapes(cmdtarget.Page, fromshapes, toshapes, null, false);
                     return connectors;                    
                 }
                 else
                 {
-                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, master);
+                    var connectors = ConnectorHelper.ConnectShapes(cmdtarget.Page, fromshapes, toshapes, master);
                     return connectors;
                 }
             }

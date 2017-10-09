@@ -37,8 +37,8 @@ namespace VisioScripting.Commands
 
         public void SetName(VisioScripting.Models.TargetShapes targets, IList<string> names)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (names == null || names.Count < 1)
             {

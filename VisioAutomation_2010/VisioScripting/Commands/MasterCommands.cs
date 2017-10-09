@@ -22,7 +22,9 @@ namespace VisioScripting.Commands
 
         public void CloseMasterEditing()
         {
-            var application = this._client.Application.Get();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
+            var application = cmdtarget.Application;
             var window = application.ActiveWindow;
 
             var st = window.SubType;
@@ -37,10 +39,9 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Master> Get()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var doc = application.ActiveDocument;
             var doc_masters = doc.Masters;
             var masters = doc_masters.ToList();
@@ -49,7 +50,8 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Master> Get(IVisio.Document doc)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
             var doc_masters = doc.Masters;
             var masters = doc_masters.ToList();
             return masters;
@@ -57,8 +59,8 @@ namespace VisioScripting.Commands
 
         public IVisio.Master Get(string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (name == null)
             {
@@ -73,7 +75,7 @@ namespace VisioScripting.Commands
             IVisio.Master master;
             try
             {
-                var application = this._client.Application.Get();
+                var application = cmdtarget.Application;
                 var active_document = application.ActiveDocument;
                 var masters = active_document.Masters;
                 master = masters.ItemU[name];
@@ -88,8 +90,8 @@ namespace VisioScripting.Commands
 
         public IVisio.Master Get(string master, IVisio.Document doc)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (master == null)
             {
@@ -101,7 +103,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(doc));
             }
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var documents = application.Documents;
 
             var masters = doc.Masters;
@@ -134,15 +136,17 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Master> GetMastersByName(string name)
         {
-            var application = this._client.Application.Get();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
+            var application = cmdtarget.Application;
             var doc = application.ActiveDocument;
             return this.GetMastersByName(name, doc);
         }
 
         private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             try
             {
@@ -157,10 +161,10 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape Drop(IVisio.Master master, VisioAutomation.Geometry.Point p)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var page = application.ActivePage;
             var shape = page.Drop(master, p.X, p.Y);
             return shape;
@@ -168,8 +172,8 @@ namespace VisioScripting.Commands
 
         public short[] Drop(IList<IVisio.Master> masters, IList<VisioAutomation.Geometry.Point> points)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (masters == null)
             {
@@ -181,7 +185,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(points));
             }
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var page = application.ActivePage;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;
@@ -189,11 +193,12 @@ namespace VisioScripting.Commands
 
         public IVisio.Master New(IVisio.Document document, string name)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+
 
             if (document == null)
             {
-                var application = this._client.Application.Get();
+                var application = cmdtarget.Application;
                 document = application.ActiveDocument;
                 if (document == null)
                 {
@@ -216,10 +221,10 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropContainer(IVisio.Master master)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var page = application.ActivePage;
             var selectedShapes = this._client.Selection.Get();
 
@@ -229,10 +234,10 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropContainer(string master)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var page = application.ActivePage;
             var selectedShapes = this._client.Selection.Get();
 

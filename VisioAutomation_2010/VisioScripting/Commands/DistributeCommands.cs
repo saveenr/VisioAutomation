@@ -27,8 +27,7 @@ namespace VisioScripting.Commands
 
         public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -51,17 +50,15 @@ namespace VisioScripting.Commands
                     throw new System.ArgumentOutOfRangeException();
             }
 
-            var application = this._client.Application.Get();
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
             {
-                application.DoCmd((short)cmd);
+                cmdtarget.Application.DoCmd((short)cmd);
             }
         }
 
         public void DistributeHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal halign)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -85,14 +82,12 @@ namespace VisioScripting.Commands
                 default: throw new System.ArgumentOutOfRangeException();
             }
 
-            var application = this._client.Application.Get();
-            application.DoCmd((short)cmd);
+            cmdtarget.Application.DoCmd((short)cmd);
         }
 
         public void DistributeVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical valign)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -111,8 +106,7 @@ namespace VisioScripting.Commands
                 default: throw new System.ArgumentOutOfRangeException();
             }
 
-            var application = this._client.Application.Get();
-            application.DoCmd((short)cmd);
+            cmdtarget.Application.DoCmd((short)cmd);
         }
     }
 }

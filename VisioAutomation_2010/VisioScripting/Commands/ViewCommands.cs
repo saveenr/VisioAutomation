@@ -15,18 +15,20 @@ namespace VisioScripting.Commands
 
         public IVisio.Window GetActiveWindow()
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var active_window = application.ActiveWindow;
             return active_window;
         }
 
         public double GetZoom()
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
 
-            var active_window = this.GetActiveWindow();
+
+            var active_window = cmdtarget.Application.ActiveWindow;
             return active_window.Zoom;
         }
 
@@ -57,8 +59,8 @@ namespace VisioScripting.Commands
 
         public void ZoomToPercentage(double amount)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (amount <= 0)
             {
@@ -71,7 +73,8 @@ namespace VisioScripting.Commands
 
         public void Zoom(VisioScripting.Models.Zoom zoom)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             var active_window = this.GetActiveWindow();
 

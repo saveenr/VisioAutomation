@@ -16,8 +16,8 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, UserDefinedCellCells>>();
 
@@ -28,7 +28,7 @@ namespace VisioScripting.Commands
                 return prop_dic;
             }
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var page = application.ActivePage;
             var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, CellValueType.Formula);
 
@@ -44,8 +44,8 @@ namespace VisioScripting.Commands
 
         public List<bool> Contains(VisioScripting.Models.TargetShapes targets, string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (name == null)
             {
@@ -67,8 +67,8 @@ namespace VisioScripting.Commands
        
         public void Delete(VisioScripting.Models.TargetShapes targets, string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             targets = targets.ResolveShapes(this._client);
 
@@ -98,8 +98,8 @@ namespace VisioScripting.Commands
 
         public void Set(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.UserDefinedCell cell)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             targets = targets.ResolveShapes(this._client);
 

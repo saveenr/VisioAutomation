@@ -17,10 +17,10 @@ namespace VisioScripting.Commands
 
         public void Set(IVisio.Page page)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var app = this._client.Application.Get();
+
+            var app = cmdtarget.Application;
             this._client.Output.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
             var window = app.ActiveWindow;
             window.Page = page;
@@ -28,10 +28,10 @@ namespace VisioScripting.Commands
 
         public void Set(string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var doc = application.ActiveDocument;
             this._client.Output.WriteVerbose("Retrieving Page \"{0}\"", name);
             var pages = doc.Pages;
@@ -41,10 +41,10 @@ namespace VisioScripting.Commands
 
         public void Set(int pagenumber)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var doc = application.ActiveDocument;
             this._client.Output.WriteVerbose("Retrieving Page Number \"{0}\"", pagenumber);
             var pages = doc.Pages;
@@ -54,17 +54,17 @@ namespace VisioScripting.Commands
         
         public IVisio.Page Get()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             return application.ActivePage;
         }
 
         public void Delete(IList<IVisio.Page> pages, bool renumber)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (pages == null)
             {
@@ -79,8 +79,8 @@ namespace VisioScripting.Commands
 
         public void Delete(IList<string> names, bool renumber)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (names == null)
             {
@@ -89,7 +89,7 @@ namespace VisioScripting.Commands
 
             foreach (var name in names)
             {
-                var app = this._client.Application.Get();
+                var app = cmdtarget.Application;
                 var doc = app.ActiveDocument;
                 var pages = doc.Pages;
 
@@ -101,10 +101,10 @@ namespace VisioScripting.Commands
 
         public VisioAutomation.Geometry.Size GetSize()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var active_page = application.ActivePage;
 
 
@@ -121,8 +121,8 @@ namespace VisioScripting.Commands
 
         public void SetName(string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (name == null)
             {
@@ -140,10 +140,10 @@ namespace VisioScripting.Commands
 
         public IVisio.Page New(VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages;
             IVisio.Page page = pages.Add();
@@ -167,15 +167,15 @@ namespace VisioScripting.Commands
 
         public void SetBackgroundPage(string background_page_name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (background_page_name == null)
             {
                 throw new System.ArgumentNullException(nameof(background_page_name));
             }
 
-            var app = this._client.Application.Get();
+            var app = cmdtarget.Application;
             var application = app;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages;
@@ -212,10 +212,10 @@ namespace VisioScripting.Commands
 
         public IVisio.Page Duplicate()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Duplicate Page"))
             {
                 var doc = application.ActiveDocument;
@@ -233,15 +233,15 @@ namespace VisioScripting.Commands
 
         public IVisio.Page Duplicate(IVisio.Document dest_doc)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (dest_doc==null)
             {
                 throw new System.ArgumentNullException(nameof(dest_doc));
             }
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
 
             if (application.ActiveDocument == dest_doc)
             {
@@ -262,10 +262,10 @@ namespace VisioScripting.Commands
 
         public VisioScripting.Models.PageOrientation GetOrientation()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var active_page = application.ActivePage;
             return PageCommands.GetOrientation(active_page);
         }
@@ -286,10 +286,10 @@ namespace VisioScripting.Commands
 
         public void SetOrientation(VisioScripting.Models.PageOrientation orientation)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var app = this._client.Application.Get();
+
+            var app = cmdtarget.Application;
             var application = app;
 
             var active_page = application.ActivePage;
@@ -325,10 +325,10 @@ namespace VisioScripting.Commands
 
         public void ResizeToFitContents(VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Resize Page to Fit Contents"))
             {
                 var active_page = application.ActivePage;
@@ -342,10 +342,10 @@ namespace VisioScripting.Commands
 
         public void ResetOrigin(IVisio.Page page)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             if (page == null)
             {
                 page = application.ActivePage;
@@ -366,10 +366,10 @@ namespace VisioScripting.Commands
 
         public void SetSize(VisioAutomation.Geometry.Size new_size)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Set Page Size"))
             {
                 var active_page = application.ActivePage;
@@ -384,8 +384,8 @@ namespace VisioScripting.Commands
 
         public void SetSize(double? width, double? height)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (!width.HasValue && !height.HasValue)
             {
@@ -412,9 +412,10 @@ namespace VisioScripting.Commands
 
         public void GoTo(VisioScripting.Models.PageDirection flags)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application );
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var active_document = application.ActiveDocument;
             var docpages = active_document.Pages;
             if (docpages.Count < 2)
@@ -428,7 +429,8 @@ namespace VisioScripting.Commands
 
         private void _GoTo(IVisio.Pages pages, VisioScripting.Models.PageDirection flags)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application );
+
 
             if (pages == null)
             {
@@ -504,8 +506,8 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesByID(int[] shapeids)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             var page = this._client.Page.Get();
             var shapes = page.Shapes;
@@ -525,8 +527,8 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesByName(string[] shapenames, bool ignore_bad_names)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             var page = this._client.Page.Get();
             var shapes = page.Shapes;
@@ -548,8 +550,8 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Page> GetPagesByName(string Name, PageType pt)
         {
-            var application = this._client.Application.Get();
-            var active_document = application.ActiveDocument;
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var active_document = cmdtarget.Application.ActiveDocument;
             if (Name == null || Name == "*")
             {
                 // return all pages
@@ -596,8 +598,8 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapes()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             var page = this._client.Page.Get();
             var shapes = page.Shapes.ToList();
@@ -606,8 +608,8 @@ namespace VisioScripting.Commands
 
         public List<short> GetShapeIDs()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             var page = this._client.Page.Get();
             var shapes = page.Shapes.ToEnumerable().Select(s=>s.ID16).ToList();

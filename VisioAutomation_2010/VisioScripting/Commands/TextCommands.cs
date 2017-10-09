@@ -15,8 +15,8 @@ namespace VisioScripting.Commands
 
         public void Set(VisioScripting.Models.TargetShapes targets, IList<string> texts)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (texts == null || texts.Count < 1)
             {
@@ -51,8 +51,8 @@ namespace VisioScripting.Commands
 
         public List<string> Get(VisioScripting.Models.TargetShapes targets)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             targets = targets.ResolveShapes(this._client);
 
@@ -67,8 +67,8 @@ namespace VisioScripting.Commands
 
         public void SetFont(VisioScripting.Models.TargetShapes targets, string fontname)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             targets = targets.ResolveShapes(this._client);
 
@@ -77,7 +77,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
@@ -91,8 +91,8 @@ namespace VisioScripting.Commands
 
         public List<VisioAutomation.Text.TextFormat> GetFormat(VisioScripting.Models.TargetShapes targets)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             targets = targets.ResolveShapes(this._client);
 
@@ -103,7 +103,7 @@ namespace VisioScripting.Commands
 
             var selection = this._client.Selection.Get();
             var shapeids = selection.GetIDs();
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids, CellValueType.Formula);
             return formats;
         }

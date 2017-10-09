@@ -16,8 +16,7 @@ namespace VisioScripting.Commands
 
         public IDictionary<IVisio.Shape, CustomPropertyDictionary> Get(VisioScripting.Models.TargetShapes targets)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var prop_dic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
             targets = targets.ResolveShapes(this._client);
@@ -27,8 +26,7 @@ namespace VisioScripting.Commands
                 return prop_dic;
             }
 
-            var application = this._client.Application.Get();
-            var page = application.ActivePage;
+            var page = cmdtarget.Page;
 
             var list_custom_props = CustomPropertyHelper.GetCells(page, targets.Shapes, CellValueType.Formula);
 
@@ -60,9 +58,8 @@ namespace VisioScripting.Commands
 
         public void Delete(VisioScripting.Models.TargetShapes targets, string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-            
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
@@ -91,9 +88,9 @@ namespace VisioScripting.Commands
 
         public void Set(VisioScripting.Models.TargetShapes  targets, string name, CustomPropertyCells customprop)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-            
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
+
             if (customprop == null)
             {
                 throw new System.ArgumentNullException(nameof(customprop));

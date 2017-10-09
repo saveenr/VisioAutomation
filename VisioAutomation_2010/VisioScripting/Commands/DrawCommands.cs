@@ -18,10 +18,9 @@ namespace VisioScripting.Commands
 
         public VisioAutomation.SurfaceTarget GetDrawingSurface()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var surf_Application = this._client.Application.Get();
+            var surf_Application = cmdtarget.Application;
             var surf_Window = surf_Application.ActiveWindow;
             var surf_Window_subtype = surf_Window.SubType;
 
@@ -51,8 +50,7 @@ namespace VisioScripting.Commands
                                           IList<double> heights,
             VisioAutomation.Geometry.Size cellspacing)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (datatable == null)
             {
@@ -81,9 +79,7 @@ namespace VisioScripting.Commands
             var stencildoc_masters = stencildoc.Masters;
             var masterobj = stencildoc_masters.ItemU[master];
 
-            var app = this._client.Application.Get();
-            var application = app;
-            var active_document = application.ActiveDocument;
+            var active_document = cmdtarget.Document;
             var pages = active_document.Pages;
 
             var page = pages.Add();
@@ -124,12 +120,10 @@ namespace VisioScripting.Commands
 
         public void Grid(GRID.GridLayout layout)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             //Create a new page to hold the grid
-            var application = this._client.Application.Get();
-            var page = application.ActivePage;
+            var page = cmdtarget.Page;
             layout.PerformLayout();
 
             using (var undoscope = this._client.Application.NewUndoScope("Draw Grid"))
@@ -147,15 +141,13 @@ namespace VisioScripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Draw NURBS Curve"))
             {
 
-                var page = application.ActivePage;
-                var shape = page.DrawNURBS(controlpoints, knots, weights, degree);
+                var shape = cmdtarget.Page.DrawNURBS(controlpoints, knots, weights, degree);
                 return shape;
             }
         }
@@ -234,10 +226,9 @@ namespace VisioScripting.Commands
                                   double start_angle,
                                   double end_angle)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
@@ -252,13 +243,12 @@ namespace VisioScripting.Commands
                           double start_angle,
                           double end_angle)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            var application = this._client.Application.Get();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            
+            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
             {
-                var active_page = application.ActivePage;
+                var active_page = cmdtarget.Page;
                 var slice = new VisioAutomation.Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
@@ -267,42 +257,37 @@ namespace VisioScripting.Commands
 
         public void PieChart(VisioAutomation.Models.Charting.PieChart chart)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var application = this._client.Application.Get();
-            var page = application.ActivePage;
+            var page = cmdtarget.Page;
             chart.Render(page);
         }
 
         public void BarChart(VisioAutomation.Models.Charting.BarChart chart)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var page = application.ActivePage;
             chart.Render(page);
         }
 
         public void AreaChart(VisioAutomation.Models.Charting.AreaChart chart)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var application = this._client.Application.Get();
-            var page = application.ActivePage;
+            var page = cmdtarget.Page;
             chart.Render(page);
         }
 
 
         public void OrgChart(ORG.OrgChartDocument orgChartDocument)
         {
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
 
             this._client.Output.WriteVerbose("Start OrgChart Rendering");
-            this._client.Application.AssertApplicationAvailable();
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             orgChartDocument.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();
@@ -311,11 +296,10 @@ namespace VisioScripting.Commands
 
         public void DirectedGraph(IList<GRAPH.DirectedGraphLayout> graph)
         {
-            this._client.Application.AssertApplicationAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
 
             this._client.Output.WriteVerbose("Start rendering directed graph");
-            var app = this._client.Application.Get();
-
+            var app = cmdtarget.Application;
 
             this._client.Output.WriteVerbose("Creating a New Document For the Directed Graphs");
             var doc = this._client.Document.New(null);
@@ -351,8 +335,7 @@ namespace VisioScripting.Commands
 
         public void Duplicate(int n)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument );
 
             if (n < 1)
             {
@@ -367,7 +350,7 @@ namespace VisioScripting.Commands
             // this dupicates exactly 1 shape N - times what it
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope(string.Format("Duplicate Shape {0} Times", n)))
             {
                 var active_window = application.ActiveWindow;

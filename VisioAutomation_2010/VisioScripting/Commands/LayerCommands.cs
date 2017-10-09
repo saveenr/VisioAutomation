@@ -15,8 +15,8 @@ namespace VisioScripting.Commands
 
         public IVisio.Layer Get(string layername)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             if (layername == null)
             {
@@ -28,7 +28,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("Layer name cannot be empty", nameof(layername));
             }
 
-            var application = this._client.Application.Get();
+            var application = cmdtarget.Application;
             var page = application.ActivePage;
             IVisio.Layer layer = null;
             try
@@ -47,10 +47,10 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Layer> Get()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var application = this._client.Application.Get();
+
+            var application = cmdtarget.Application;
             var page = application.ActivePage;
 
             return page.Layers.ToList();

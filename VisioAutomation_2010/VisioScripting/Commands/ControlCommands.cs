@@ -15,8 +15,7 @@ namespace VisioScripting.Commands
 
         public List<int> Add(VisioScripting.Models.TargetShapes targets, ControlCells ctrl)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             if (ctrl == null)
             {
@@ -47,8 +46,8 @@ namespace VisioScripting.Commands
 
         public void Delete(VisioScripting.Models.TargetShapes targets, int n)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+
 
             targets = targets.ResolveShapes(this._client);
 
@@ -68,8 +67,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, IList<ControlCells>> Get(VisioScripting.Models.TargetShapes targets)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             targets = targets.ResolveShapes(this._client);
 
