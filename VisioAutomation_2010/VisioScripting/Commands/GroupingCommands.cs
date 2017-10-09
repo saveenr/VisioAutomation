@@ -16,7 +16,10 @@ namespace VisioScripting.Commands
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             // No shapes provided, use the active selection
-            if (!this._client.Selection.HasShapes())
+
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+            if (selection.Count<1)
             {
                 throw new VisioAutomation.Exceptions.VisioOperationException("No Selected Shapes to Group");
             }
@@ -24,8 +27,6 @@ namespace VisioScripting.Commands
             // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
             // but it doesn't return the group
 
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
             var g = selection.Group();
             return g;
         }
@@ -34,9 +35,12 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
 
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+
             if (targets.Shapes == null)
             {
-                if (this._client.Selection.HasShapes())
+                if (selection.Count>=1)
                 {
                     var application = cmdtarget.Application;
                     application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);

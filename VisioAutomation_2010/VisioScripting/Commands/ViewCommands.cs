@@ -98,7 +98,9 @@ namespace VisioScripting.Commands
             }
             else if (zoom == Models.Zoom.ToSelection)
             {
-                if (!this._client.Selection.HasShapes())
+                var window = cmdtarget.Application.ActiveWindow;
+                var selection = window.Selection;
+                if (selection.Count<1)
                 {
                     return;
                 }

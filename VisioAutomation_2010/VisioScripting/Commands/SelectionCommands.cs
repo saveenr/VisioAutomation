@@ -249,14 +249,13 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
-            if (!this._client.Selection.HasShapes())
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+            if (selection.Count<1)
             {
                 return;
             }
 
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
             selection.Delete();
         }
 
@@ -264,16 +263,14 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
-            if (!this._client.Selection.HasShapes())
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+            if (selection.Count<1)
             {
                 return;
             }
 
             var flags = IVisio.VisCutCopyPasteCodes.visCopyPasteNormal;
-
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
             selection.Copy(flags);
         }
 
@@ -300,9 +297,6 @@ namespace VisioScripting.Commands
 
         public bool HasShapes()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
             return this.HasShapes(1);
         }
 
@@ -314,11 +308,8 @@ namespace VisioScripting.Commands
             }
 
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
-            var application = cmdtarget.Application;
-            var active_window = application.ActiveWindow;
-            var selection = active_window.Selection;
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
             int num_selected = selection.Count;
             bool v = num_selected >= min_items;
             return v;

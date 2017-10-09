@@ -341,7 +341,10 @@ namespace VisioScripting.Commands
             {
                 throw new System.ArgumentOutOfRangeException(nameof(n));
             }
-            if (!this._client.Selection.HasShapes())
+
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+            if (selection.Count<1)
             {
                 return;
             }
@@ -353,8 +356,6 @@ namespace VisioScripting.Commands
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope(string.Format("Duplicate Shape {0} Times", n)))
             {
-                var active_window = application.ActiveWindow;
-                var selection = active_window.Selection;
                 var active_page = application.ActivePage;
                 var new_shapes = DrawCommands.CreateDuplicates(active_page, selection[1], n);
             }

@@ -20,14 +20,14 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            if (!this._client.Selection.HasShapes())
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+            if (selection.Count < 1)
             {
                 string msg = String.Format("Selection contains no shapes");
                 throw new System.ArgumentException(msg);
             }
 
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
             selection.Export(filename);
         }
 
@@ -40,14 +40,14 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            if (!this._client.Selection.HasShapes())
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+            if (selection.Count<1)
             {
                 string msg = String.Format("Selection contains no shapes");
                 throw new System.ArgumentException(msg);
             }
 
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
             this.SelectionToHtml(selection, filename, s => this._client.Output.WriteVerbose(s));
         }
 

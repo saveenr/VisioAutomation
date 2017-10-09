@@ -19,20 +19,22 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            if (!this._client.Selection.HasShapes())
+            var window = cmdtarget.Application.ActiveWindow;
+            var selection = window.Selection;
+            if (selection.Count < 1)
             {
                 string msg = string.Format("Selection contains no shapes");
                 throw new System.ArgumentException(msg);
             }
 
-            var old_selection = this._client.Selection.GetShapes();
+            var old_selected_shapes = this._client.Selection.GetShapes();
 
             this._client.Selection.SelectNone();
             var application = cmdtarget.Application;
             var active_page = application.ActivePage;
             active_page.Export(filename);
             var active_window = application.ActiveWindow;
-            active_window.Select(old_selection, IVisio.VisSelectArgs.visSelect);
+            active_window.Select(old_selected_shapes, IVisio.VisSelectArgs.visSelect);
         }
 
         public void PagesToFiles(string filename)
