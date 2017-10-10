@@ -14,12 +14,6 @@ namespace VisioScripting.Commands
         public bool HasActiveDocument => this.ActiveDocument != null;
         public bool HasActivePage => this.ActivePage != null;
 
-
-        public CommandTarget(Client client)
-        {
-            this.Client = client;
-        }
-
         public CommandTarget(Client client, CommandTargetFlags flags )
         {
             this.Client = client;
