@@ -544,7 +544,7 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> GetPagesByName(string name, Models.PageType pt)
+        public List<IVisio.Page> GetPagesByName(string name, Models.PageType pagetype)
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
             var active_document = cmdtarget.Application.ActiveDocument;
@@ -552,7 +552,7 @@ namespace VisioScripting.Commands
             {
                 // return all pages
                 var all_pages = active_document.Pages.ToList();
-                all_pages = filter_pages_by_type(all_pages, pt);
+                all_pages = filter_pages_by_type(all_pages, pagetype);
                 return all_pages;
             }
             else
@@ -560,7 +560,7 @@ namespace VisioScripting.Commands
                 // return the named page
                 var all_pages = active_document.Pages.ToEnumerable();
                 var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
-                named_pages = filter_pages_by_type(named_pages, pt);
+                named_pages = filter_pages_by_type(named_pages, pagetype);
 
                 return named_pages;
             }
