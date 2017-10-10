@@ -12,11 +12,9 @@ namespace VisioScripting.Commands
 
         public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
         {
-            if (!this._client.Document.HasActiveDocument)
-            {
-                return;
-            }
-            var page = this._client.Page.Get();
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+
+            var page = cmdtarget.ActivePage;
             targets = targets.ResolveShapes(this._client);
             var targetids = targets.ToShapeIDs();
             using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
@@ -27,7 +25,7 @@ namespace VisioScripting.Commands
 
         public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |  CommandTargetFlags.ActivePage);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)

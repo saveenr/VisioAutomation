@@ -74,15 +74,6 @@ namespace VisioScripting.Commands
             }
         }
 
-        internal void AssertDocumentAvailable()
-        {
-            if (!this._client.Document.HasActiveDocument)
-            {
-                throw new VisioOperationException("No Drawing available");
-            }
-        }
-
-
         public void Activate(string name)
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
@@ -99,7 +90,7 @@ namespace VisioScripting.Commands
 
 
             // if the doc is already active do nothing
-            if (doc == cmdtarget.Document)
+            if (doc == cmdtarget.ActiveDocument)
             {
                 // do nothing
                 return;
@@ -128,7 +119,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            var doc = cmdtarget.Document;
+            var doc = cmdtarget.ActiveDocument;
 
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
@@ -171,10 +162,10 @@ namespace VisioScripting.Commands
 
         public IVisio.Document New()
         {
-            return this.New(null);
+            return this.NewWithTemplate(null);
         }
 
-        public IVisio.Document New(string template)
+        public IVisio.Document NewWithTemplate(string template)
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
 
@@ -201,27 +192,24 @@ namespace VisioScripting.Commands
         public void Save()
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-            cmdtarget.Document.Save();
+            cmdtarget.ActiveDocument.Save();
         }
 
         public void SaveAs(string filename)
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-            cmdtarget.Document.SaveAs(filename);
+            cmdtarget.ActiveDocument.SaveAs(filename);
         }
 
         public IVisio.Document New(VisioAutomation.Geometry.Size size)
         {
-            return this.New(size,null);
+            return this.NewWithTemplate(size,null);
         }
 
-        public IVisio.Document New(VisioAutomation.Geometry.Size size,string template)
+        public IVisio.Document NewWithTemplate(VisioAutomation.Geometry.Size size,string template)
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
-
-            var doc = this.New(template);
+            var doc = this.NewWithTemplate(template);
             this._client.Page.SetSize(size);
             return doc;
         }

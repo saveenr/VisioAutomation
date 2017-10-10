@@ -506,10 +506,9 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesByID(int[] shapeids)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-
-            var page = this._client.Page.Get();
+            var page = cmdtarget.ActivePage;
             var shapes = page.Shapes;
             var shapes_list = new List<IVisio.Shape>(shapeids.Length);
             foreach (int id in shapeids)
@@ -528,9 +527,8 @@ namespace VisioScripting.Commands
         public List<IVisio.Shape> GetShapesByName(string[] shapenames, bool ignore_bad_names)
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
-            var page = this._client.Page.Get();
+            
+            var page = cmdtarget.ActivePage;
             var shapes = page.Shapes;
 
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
@@ -598,20 +596,18 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapes()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-
-            var page = this._client.Page.Get();
+            var page = cmdtarget.ActivePage;
             var shapes = page.Shapes.ToList();
             return shapes;
         }
 
         public List<short> GetShapeIDs()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-
-            var page = this._client.Page.Get();
+            var page = cmdtarget.ActivePage;
             var shapes = page.Shapes.ToEnumerable().Select(s=>s.ID16).ToList();
             return shapes;
         }

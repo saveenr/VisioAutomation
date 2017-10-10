@@ -233,7 +233,7 @@ namespace VisioScripting.Commands
             string def_font = "Segoe UI";
 
             var page_size = new VisioAutomation.Geometry.Size(8.5,11);
-            var doc = this._client.Document.New(page_size,template);
+            var doc = this._client.Document.NewWithTemplate(page_size,template);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
             int fontid = font.ID16;
@@ -389,7 +389,7 @@ namespace VisioScripting.Commands
             string template = null;
 
             var page_size = new VisioAutomation.Geometry.Size(8.5,11);
-            var doc = this._client.Document.New(page_size,template);
+            var doc = this._client.Document.NewWithTemplate(page_size,template);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
             var font_segoelight = fonts[segoeuilight_fontname];

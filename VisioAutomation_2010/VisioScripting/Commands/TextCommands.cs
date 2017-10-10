@@ -67,7 +67,7 @@ namespace VisioScripting.Commands
 
         public void SetFont(VisioScripting.Models.TargetShapes targets, string fontname)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
 
             targets = targets.ResolveShapes(this._client);
@@ -77,11 +77,9 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var application = cmdtarget.Application;
-            var active_document = application.ActiveDocument;
-            var active_doc_fonts = active_document.Fonts;
+            var active_doc_fonts = cmdtarget.ActiveDocument.Fonts;
             var font = active_doc_fonts[fontname];
-            var page = this._client.Page.Get();
+            var page = cmdtarget.ActivePage;
 
             var cells = new VisioAutomation.Text. CharacterFormatCells();
             cells.Font = font.ID;

@@ -18,12 +18,12 @@ namespace VisioScripting.Commands
     public class CommandTarget
     {
         public IVisio.Application Application;
-        public IVisio.Document Document;
-        public IVisio.Page Page;
+        public IVisio.Document ActiveDocument;
+        public IVisio.Page ActivePage;
 
         public bool has_app => this.Application != null;
-        public bool has_doc => this.Document != null;
-        public bool has_page => this.Page != null;
+        public bool has_doc => this.ActiveDocument != null;
+        public bool has_page => this.ActivePage != null;
         public Client Client;
 
         public CommandTarget(Client client)
@@ -68,7 +68,7 @@ namespace VisioScripting.Commands
                 throw new VisioOperationException("CommandTarget: No Application");
             }
 
-            if ((this.Document == null) && require_document)
+            if ((this.ActiveDocument == null) && require_document)
             {
                 var active_window = this.Application.ActiveWindow;
 
@@ -111,24 +111,24 @@ namespace VisioScripting.Commands
                 }
 
                 this.Client.Output.WriteVerbose("CommandTarget: Verified a drawing is available for use");
-                this.Document = this.Application.ActiveDocument;
+                this.ActiveDocument = this.Application.ActiveDocument;
             }
 
-            if (this.Document == null && require_document)
+            if (this.ActiveDocument == null && require_document)
             {
                 throw new VisioOperationException("CommandTarget: No Document");
             }
 
-            if ((this.Page == null) && ((flags & CommandTargetFlags.ActivePage) != 0))
+            if ((this.ActivePage == null) && ((flags & CommandTargetFlags.ActivePage) != 0))
             {
                 if (this.Application == null)
                 {
                     throw new VisioOperationException("CommandTarget: Internal error application should never be null in this case");
                 }
-                this.Page = this.Application.ActivePage;
+                this.ActivePage = this.Application.ActivePage;
             }
 
-            if (this.Page == null && require_page)
+            if (this.ActivePage == null && require_page)
             {
                 throw new VisioOperationException("CommandTarget: No Page");
             }
@@ -209,8 +209,7 @@ namespace VisioScripting.Commands
 
         public void SetLock(VisioScripting.Models.TargetShapes targets, LockCells lockcells)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)
@@ -218,7 +217,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var page = this._client.Page.Get();
+            var page = cmdtarget.ActivePage;
             var target_shapeids = targets.ToShapeIDs();
             var writer = new SidSrcWriter();
 
@@ -236,7 +235,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<int,LockCells> GetLock(VisioScripting.Models.TargetShapes targets)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)
@@ -246,7 +245,7 @@ namespace VisioScripting.Commands
 
             var dic = new Dictionary<int, LockCells>();
 
-            var page = this._client.Page.Get();
+            var page = cmdtarget.ActivePage;
             var target_shapeids = targets.ToShapeIDs();
 
             var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids.ShapeIDs, CellValueType.Formula);
@@ -263,7 +262,7 @@ namespace VisioScripting.Commands
 
         public void SetSize(VisioScripting.Models.TargetShapes targets, double? w, double? h)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)
@@ -271,7 +270,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var active_page = this._client.Page.Get();
+            var active_page = cmdtarget.ActivePage;
             var shapeids = targets.ToShapeIDs();
             var writer = new SidSrcWriter();
             foreach (int shapeid in shapeids.ShapeIDs)

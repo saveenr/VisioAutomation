@@ -79,7 +79,7 @@ namespace VisioScripting.Commands
             var stencildoc_masters = stencildoc.Masters;
             var masterobj = stencildoc_masters.ItemU[master];
 
-            var active_document = cmdtarget.Document;
+            var active_document = cmdtarget.ActiveDocument;
             var pages = active_document.Pages;
 
             var page = pages.Add();
@@ -123,7 +123,7 @@ namespace VisioScripting.Commands
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             //Create a new page to hold the grid
-            var page = cmdtarget.Page;
+            var page = cmdtarget.ActivePage;
             layout.PerformLayout();
 
             using (var undoscope = this._client.Application.NewUndoScope("Draw Grid"))
@@ -147,7 +147,7 @@ namespace VisioScripting.Commands
             using (var undoscope = this._client.Application.NewUndoScope("Draw NURBS Curve"))
             {
 
-                var shape = cmdtarget.Page.DrawNURBS(controlpoints, knots, weights, degree);
+                var shape = cmdtarget.ActivePage.DrawNURBS(controlpoints, knots, weights, degree);
                 return shape;
             }
         }
@@ -248,7 +248,7 @@ namespace VisioScripting.Commands
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
             {
-                var active_page = cmdtarget.Page;
+                var active_page = cmdtarget.ActivePage;
                 var slice = new VisioAutomation.Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
@@ -259,7 +259,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var page = cmdtarget.Page;
+            var page = cmdtarget.ActivePage;
             chart.Render(page);
         }
 
@@ -276,7 +276,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var page = cmdtarget.Page;
+            var page = cmdtarget.ActivePage;
             chart.Render(page);
         }
 
@@ -302,7 +302,8 @@ namespace VisioScripting.Commands
             var app = cmdtarget.Application;
 
             this._client.Output.WriteVerbose("Creating a New Document For the Directed Graphs");
-            var doc = this._client.Document.New(null);
+            string template = null;
+            var doc = this._client.Document.NewWithTemplate(template);
 
             int num_pages_created = 0;
             var doc_pages = doc.Pages;

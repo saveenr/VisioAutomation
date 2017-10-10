@@ -21,14 +21,14 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            return VA.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(cmdtarget.Page, flag);
+            return VA.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(cmdtarget.ActivePage, flag);
         }
 
         public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdges(VA.DocumentAnalysis.ConnectorHandling flag)
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(cmdtarget.Page, flag);
+            var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(cmdtarget.ActivePage, flag);
             return directed_edges;
         }
 
@@ -40,12 +40,12 @@ namespace VisioScripting.Commands
             {
                 if (master == null)
                 {
-                    var connectors = ConnectorHelper.ConnectShapes(cmdtarget.Page, fromshapes, toshapes, null, false);
+                    var connectors = ConnectorHelper.ConnectShapes(cmdtarget.ActivePage, fromshapes, toshapes, null, false);
                     return connectors;                    
                 }
                 else
                 {
-                    var connectors = ConnectorHelper.ConnectShapes(cmdtarget.Page, fromshapes, toshapes, master);
+                    var connectors = ConnectorHelper.ConnectShapes(cmdtarget.ActivePage, fromshapes, toshapes, master);
                     return connectors;
                 }
             }
