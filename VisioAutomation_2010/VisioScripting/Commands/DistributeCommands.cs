@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var page = cmdtarget.ActivePage;
             targets = targets.ResolveShapes(this._client);
@@ -25,7 +25,7 @@ namespace VisioScripting.Commands
 
         public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |  CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |  CommandTargetFlags.ActivePage);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -56,7 +56,7 @@ namespace VisioScripting.Commands
 
         public void DistributeHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal halign)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
 
         public void DistributeVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical valign)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)

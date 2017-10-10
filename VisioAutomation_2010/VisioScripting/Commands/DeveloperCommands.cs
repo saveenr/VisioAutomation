@@ -35,7 +35,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawScriptingDocumentation()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
 
             var formdoc = new VisioAutomation.Models.Documents.Forms.FormDocument();
@@ -102,7 +102,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
 
             var formdoc = new VisioAutomation.Models.Documents.Forms.FormDocument();
@@ -224,7 +224,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawNamespaces(IList<Type> types)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
 
             string template = null;
@@ -379,7 +379,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses(IList<Type> types_)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
 
             string segoeui_fontname = "Segoe UI";

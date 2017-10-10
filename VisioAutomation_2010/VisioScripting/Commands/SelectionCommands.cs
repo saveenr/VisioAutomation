@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
         
         public IVisio.Selection Get()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             var application = cmdtarget.Application;
@@ -26,7 +26,7 @@ namespace VisioScripting.Commands
 
         public void SelectAll()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             var active_window = this._client.View.GetActiveWindow();
@@ -35,7 +35,7 @@ namespace VisioScripting.Commands
 
         public void Invert()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             var application = cmdtarget.Application;
@@ -74,7 +74,7 @@ namespace VisioScripting.Commands
 
         public void SelectNone()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             var application = cmdtarget.Application;
@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
 
         public void Select(IVisio.Shape shape)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (shape == null)
@@ -100,7 +100,7 @@ namespace VisioScripting.Commands
 
         public void Select(IEnumerable<IVisio.Shape> shapes)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (shapes == null)
@@ -115,7 +115,7 @@ namespace VisioScripting.Commands
 
         public void Select(IEnumerable<int> shapeids)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (shapeids == null)
@@ -133,7 +133,7 @@ namespace VisioScripting.Commands
         
         public void SubSelect(IList<IVisio.Shape> shapes)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (shapes == null)
@@ -148,7 +148,7 @@ namespace VisioScripting.Commands
 
         public void SelectByMaster(IVisio.Master master)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             var application = cmdtarget.Application;
@@ -162,7 +162,7 @@ namespace VisioScripting.Commands
 
         public void SelectByLayer(string layername)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (layername == null)
@@ -188,7 +188,7 @@ namespace VisioScripting.Commands
 
         public IList<IVisio.Shape> GetShapes()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(selection);
@@ -196,7 +196,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesRecursive()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapesRecursive(selection);
@@ -204,7 +204,7 @@ namespace VisioScripting.Commands
 
         public int Count()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
 
             var application = cmdtarget.Application;
@@ -216,7 +216,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetSubSelectedShapes()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
@@ -247,7 +247,7 @@ namespace VisioScripting.Commands
 
         public void Delete()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
@@ -261,7 +261,7 @@ namespace VisioScripting.Commands
 
         public void Copy()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
@@ -276,7 +276,7 @@ namespace VisioScripting.Commands
 
         public void Duplicate(VisioScripting.Models.TargetShapes target_shapes )
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             int n = target_shapes.SetSelectionGetSelectedCount(this._client);
@@ -307,7 +307,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(min_items));
             }
 
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
             int num_selected = selection.Count;

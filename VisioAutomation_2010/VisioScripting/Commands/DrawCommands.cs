@@ -18,7 +18,7 @@ namespace VisioScripting.Commands
 
         public VisioAutomation.SurfaceTarget GetDrawingSurface()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             var surf_Application = cmdtarget.Application;
             var surf_Window = surf_Application.ActiveWindow;
@@ -50,7 +50,7 @@ namespace VisioScripting.Commands
                                           IList<double> heights,
             VisioAutomation.Geometry.Size cellspacing)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (datatable == null)
             {
@@ -120,7 +120,7 @@ namespace VisioScripting.Commands
 
         public void Grid(GRID.GridLayout layout)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             //Create a new page to hold the grid
             var page = cmdtarget.ActivePage;
@@ -141,7 +141,7 @@ namespace VisioScripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Draw NURBS Curve"))
@@ -226,7 +226,7 @@ namespace VisioScripting.Commands
                                   double start_angle,
                                   double end_angle)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
@@ -243,7 +243,7 @@ namespace VisioScripting.Commands
                           double start_angle,
                           double end_angle)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
             
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Draw Pie Slice"))
@@ -257,7 +257,7 @@ namespace VisioScripting.Commands
 
         public void PieChart(VisioAutomation.Models.Charting.PieChart chart)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var page = cmdtarget.ActivePage;
             chart.Render(page);
@@ -265,7 +265,7 @@ namespace VisioScripting.Commands
 
         public void BarChart(VisioAutomation.Models.Charting.BarChart chart)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var application = cmdtarget.Application;
             var page = application.ActivePage;
@@ -274,7 +274,7 @@ namespace VisioScripting.Commands
 
         public void AreaChart(VisioAutomation.Models.Charting.AreaChart chart)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var page = cmdtarget.ActivePage;
             chart.Render(page);
@@ -283,7 +283,7 @@ namespace VisioScripting.Commands
 
         public void OrgChart(ORG.OrgChartDocument orgChartDocument)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             this._client.Output.WriteVerbose("Start OrgChart Rendering");
 
@@ -296,7 +296,7 @@ namespace VisioScripting.Commands
 
         public void DirectedGraph(IList<GRAPH.DirectedGraphLayout> graph)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             this._client.Output.WriteVerbose("Start rendering directed graph");
             var app = cmdtarget.Application;
@@ -336,7 +336,7 @@ namespace VisioScripting.Commands
 
         public void Duplicate(int n)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument );
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument );
 
             if (n < 1)
             {

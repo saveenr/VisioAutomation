@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Layer Get(string layername)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (layername == null)
@@ -47,7 +47,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Layer> Get()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             var application = cmdtarget.Application;

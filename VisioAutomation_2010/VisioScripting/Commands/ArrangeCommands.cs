@@ -20,7 +20,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -63,7 +63,7 @@ namespace VisioScripting.Commands
 
         public void Send(VisioScripting.Models.TargetShapes targets, Models.ShapeSendDirection dir)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             int shape_count = targets.SetSelectionGetSelectedCount(this._client);
             if (shape_count < 1)
@@ -78,7 +78,7 @@ namespace VisioScripting.Commands
 
         public void SetLock(VisioScripting.Models.TargetShapes targets, LockCells lockcells)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)
@@ -104,7 +104,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<int,LockCells> GetLock(VisioScripting.Models.TargetShapes targets)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)
@@ -131,7 +131,7 @@ namespace VisioScripting.Commands
 
         public void SetSize(VisioScripting.Models.TargetShapes targets, double? w, double? h)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)

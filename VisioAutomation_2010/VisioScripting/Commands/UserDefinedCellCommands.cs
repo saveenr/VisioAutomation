@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, UserDefinedCellCells>>();
@@ -44,7 +44,7 @@ namespace VisioScripting.Commands
 
         public List<bool> Contains(VisioScripting.Models.TargetShapes targets, string name)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (name == null)
@@ -67,7 +67,7 @@ namespace VisioScripting.Commands
        
         public void Delete(VisioScripting.Models.TargetShapes targets, string name)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             targets = targets.ResolveShapes(this._client);
@@ -98,7 +98,7 @@ namespace VisioScripting.Commands
 
         public void Set(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.UserDefinedCell cell)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             targets = targets.ResolveShapes(this._client);

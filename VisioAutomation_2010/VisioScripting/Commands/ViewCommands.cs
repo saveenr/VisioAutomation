@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Window GetActiveWindow()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
 
             var application = cmdtarget.Application;
@@ -25,7 +25,7 @@ namespace VisioScripting.Commands
 
         public double GetZoom()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
 
             var active_window = cmdtarget.Application.ActiveWindow;
@@ -59,7 +59,7 @@ namespace VisioScripting.Commands
 
         public void ZoomToPercentage(double amount)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (amount <= 0)
@@ -73,7 +73,7 @@ namespace VisioScripting.Commands
 
         public void Zoom(VisioScripting.Models.Zoom zoom)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             var active_window = this.GetActiveWindow();

@@ -18,7 +18,7 @@ namespace VisioScripting.Commands
         {
             get
             {
-                var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+                var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
                 var app = cmdtarget.Application;
 
@@ -76,7 +76,7 @@ namespace VisioScripting.Commands
 
         public void Activate(string name)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
             var documents = cmdtarget.Application.Documents;
             var doc = documents[name];
@@ -86,7 +86,7 @@ namespace VisioScripting.Commands
 
         public void Activate(IVisio.Document doc)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
 
             // if the doc is already active do nothing
@@ -117,7 +117,7 @@ namespace VisioScripting.Commands
 
         public void Close(bool force)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             var doc = cmdtarget.ActiveDocument;
 
@@ -145,7 +145,7 @@ namespace VisioScripting.Commands
 
         public void CloseAllWithoutSaving()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
             var documents = cmdtarget.Application.Documents;
             var docs = documents.ToEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
@@ -167,7 +167,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document NewWithTemplate(string template)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
             this._client.Output.WriteVerbose("Creating Empty Drawing");
             var documents = cmdtarget.Application.Documents;
@@ -191,13 +191,13 @@ namespace VisioScripting.Commands
 
         public void Save()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             cmdtarget.ActiveDocument.Save();
         }
 
         public void SaveAs(string filename)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             cmdtarget.ActiveDocument.SaveAs(filename);
         }
 
@@ -208,7 +208,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document NewWithTemplate(VisioAutomation.Geometry.Size size,string template)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
             var doc = this.NewWithTemplate(template);
             this._client.Page.SetSize(size);
             return doc;
@@ -216,7 +216,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document OpenStencil(string name)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             if (name == null)
             {
@@ -239,7 +239,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document Open(string filename)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             if (filename == null)
             {
@@ -270,7 +270,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document Get(string name)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             var documents = cmdtarget.Application.Documents;
             var doc = documents[name];
@@ -279,7 +279,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Document> GetDocumentsByName(string name)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             var documents = cmdtarget.Application.Documents;
             if (name == null || name == "*")

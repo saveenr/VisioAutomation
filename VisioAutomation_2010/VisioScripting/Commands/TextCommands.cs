@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
 
         public void Set(VisioScripting.Models.TargetShapes targets, IList<string> texts)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             if (texts == null || texts.Count < 1)
@@ -51,7 +51,7 @@ namespace VisioScripting.Commands
 
         public List<string> Get(VisioScripting.Models.TargetShapes targets)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             targets = targets.ResolveShapes(this._client);
@@ -67,7 +67,7 @@ namespace VisioScripting.Commands
 
         public void SetFont(VisioScripting.Models.TargetShapes targets, string fontname)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
 
             targets = targets.ResolveShapes(this._client);
@@ -89,7 +89,7 @@ namespace VisioScripting.Commands
 
         public List<VisioAutomation.Text.TextFormat> GetFormat(VisioScripting.Models.TargetShapes targets)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
 
             targets = targets.ResolveShapes(this._client);

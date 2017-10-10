@@ -47,7 +47,7 @@ namespace VisioScripting.Commands
 
         public void Close(bool force)
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
             var app = cmdtarget.Application;
 
@@ -89,14 +89,14 @@ namespace VisioScripting.Commands
 
         public void Undo()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
             this.VisioApplication.Undo();
         }
 
         public void Redo()
         {
-            var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
             this.VisioApplication.Redo();
         }
@@ -133,7 +133,7 @@ namespace VisioScripting.Commands
             {
                 if (ApplicationCommands.visio_app_version == null)
                 {
-                    var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
+                    var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
                     var application = cmdtarget.Application;
                     ApplicationCommands.visio_app_version = VisioAutomation.Application.ApplicationHelper.GetVersion(application);

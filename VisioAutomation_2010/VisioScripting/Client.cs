@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioScripting.Commands;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting
@@ -101,6 +102,12 @@ namespace VisioScripting
                 .Where(p => commandset_t.IsAssignableFrom(p.PropertyType))
                 .ToList();
             return command_props;
+        }
+
+        public CommandTarget GetCommandTarget(CommandTargetFlags flags)
+        {
+            var ct = new CommandTarget(this, flags);
+            return ct;
         }
     }
 }
