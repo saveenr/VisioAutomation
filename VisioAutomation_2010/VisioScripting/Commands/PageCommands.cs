@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
-using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -108,7 +106,7 @@ namespace VisioScripting.Commands
             var active_page = application.ActivePage;
 
 
-            var query = new CellQuery();
+            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
 
@@ -546,11 +544,11 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> GetPagesByName(string Name, PageType pt)
+        public List<IVisio.Page> GetPagesByName(string name, Models.PageType pt)
         {
             var cmdtarget = new CommandTarget(this._client, CommandTargetFlags.Application);
             var active_document = cmdtarget.Application.ActiveDocument;
-            if (Name == null || Name == "*")
+            if (name == null || name == "*")
             {
                 // return all pages
                 var all_pages = active_document.Pages.ToList();
@@ -561,7 +559,7 @@ namespace VisioScripting.Commands
             {
                 // return the named page
                 var all_pages = active_document.Pages.ToEnumerable();
-                var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { Name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
+                var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 named_pages = filter_pages_by_type(named_pages, pt);
 
                 return named_pages;
@@ -575,17 +573,17 @@ namespace VisioScripting.Commands
                 return null;
             }
 
-            if (pagetype == PageType.Any)
+            if (pagetype == Models.PageType.Any)
             {
                 return pages;
             }
 
-            if (pagetype == PageType.Foreground)
+            if (pagetype == Models.PageType.Foreground)
             {
                 return pages.Where(p=>p.Background==0).ToList();
             }
 
-            if (pagetype == PageType.Background)
+            if (pagetype == Models.PageType.Background)
             {
                 return pages.Where(p => p.Background != 0).ToList();
             }
