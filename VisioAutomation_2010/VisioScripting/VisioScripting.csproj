@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Commands\AlignCommands.cs" />
     <Compile Include="Commands\CommandParameter.cs" />
+    <Compile Include="Commands\CommandTarget.cs" />
+    <Compile Include="Commands\CommandTargetFlags.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\ExportPageCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
