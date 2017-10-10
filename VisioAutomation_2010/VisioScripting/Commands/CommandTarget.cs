@@ -1,4 +1,5 @@
 using VisioAutomation.Exceptions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
 {
@@ -58,48 +59,23 @@ namespace VisioScripting.Commands
 
             if ((this.ActiveDocument == null) && require_document)
             {
-                var active_window = this.Application.ActiveWindow;
+                var doc = this.Application.ActiveDocument;
 
-                // If there's no active window there can't be an active document
-                if (active_window == null)
+                if (doc == null)
                 {
-                    this.Client.Output.WriteVerbose("CommandTarget: No Active Document");
-                    throw new System.ArgumentException("CommandTarget: No Active Document");
+                    throw new VisioOperationException("CommandTarget: No Document");
                 }
 
-                // Check if the window type matches that of a document
-                short active_window_type = active_window.Type;
-                var vis_drawing = (int) Microsoft.Office.Interop.Visio.VisWinTypes.visDrawing;
-                var vis_master = (int) Microsoft.Office.Interop.Visio.VisWinTypes.visMasterWin;
-                // var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
-
-                this.Client.Output.WriteVerbose("CommandTarget: The Active Window: Type={0} & SybType={1}", active_window_type,
-                    active_window.SubType);
-                if (!(active_window_type == vis_drawing || active_window_type == vis_master))
+                this.ActiveDocument = doc;
+                bool is_drawing = this.ActiveDocumentIsDrawing;
+                if (is_drawing)
                 {
-                    this.Client.Output.WriteVerbose("CommandTarget: The Active Window Type must be one of {0} or {1}",
-                        Microsoft.Office.Interop.Visio.VisWinTypes.visDrawing, Microsoft.Office.Interop.Visio.VisWinTypes.visMasterWin);
-                    throw new System.ArgumentException("CommandTarget: The Active Window Type must be one of {0} or {1}");
+                    this.Client.Output.WriteVerbose("CommandTarget: Verified a drawing is available for use");
                 }
-
-                //  verify there is an active page
-
-                if (this.Application.ActivePage == null)
+                else
                 {
-                    this.Client.Output.WriteVerbose("CommandTarget: Active Page is null");
-
-                    if (active_window.SubType == 64)
-                    {
-                        // 64 means master is being edited
-                    }
-                    else
-                    {
-                        this.Client.Output.WriteVerbose("CommandTarget: Active Page is null");
-                    }
+                    throw new VisioOperationException("CommandTarget: The Document is not a drawing document");
                 }
-
-                this.Client.Output.WriteVerbose("CommandTarget: Verified a drawing is available for use");
-                this.ActiveDocument = this.Application.ActiveDocument;
             }
 
             if (this.ActiveDocument == null && require_document)
@@ -121,6 +97,59 @@ namespace VisioScripting.Commands
                 throw new VisioOperationException("CommandTarget: No Page");
             }
 
+        }
+
+        public bool ActiveDocumentIsDrawing
+        {
+            get
+            {
+                // if there's no active document, then there can't be an active document
+                if (this.ActiveDocument == null)
+                {
+                    this.Client.Output.WriteVerbose("ActiveDocumentIsDrawing: No Active Document");
+                    return false;
+                }
+
+                var active_window = this.Application.ActiveWindow;
+
+                // If there's no active window there can't be an active document
+                if (active_window == null)
+                {
+                    this.Client.Output.WriteVerbose("ActiveDocumentIsDrawing: No Active Window");
+                    return false;
+                }
+
+                // Check if the window type matches that of a document
+                short active_window_type = active_window.Type;
+                var vis_drawing = (int)IVisio.VisWinTypes.visDrawing;
+                var vis_master = (int)IVisio.VisWinTypes.visMasterWin;
+                // var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
+
+                this.Client.Output.WriteVerbose("ActiveDocumentIsDrawing: The Active Window: Type={0} & SybType={1}", active_window_type, active_window.SubType);
+                if (!(active_window_type == vis_drawing || active_window_type == vis_master))
+                {
+                    this.Client.Output.WriteVerbose("ActiveDocumentIsDrawing: The Active Window Type must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
+                    return false;
+                }
+
+                var ap = this.Application.ActivePage;
+                //  verify there is an active page
+                if (ap == null)
+                {
+                    this.Client.Output.WriteVerbose("ActiveDocumentIsDrawing: No Active Page");
+
+                    // 64 means master is being edited
+                    if (active_window.SubType != 64)
+                    {
+                        this.Client.Output.WriteVerbose("ActiveDocumentIsDrawing: Window is not editing a master");
+                        return false;
+                    }
+                }
+
+                this.Client.Output.WriteVerbose("ActiveDocumentIsDrawing: Success. Verified a drawing is available for use");
+
+                return true;
+            }
         }
     }
 }
