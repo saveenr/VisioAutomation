@@ -60,7 +60,6 @@ namespace VisioPowerShell.Commands
                     writer.Commit(target_page);
                     this.Client.Output.WriteVerbose("End Update Page Name={0}", target_page.NameU);
                 }
-
             }
         }
     }
