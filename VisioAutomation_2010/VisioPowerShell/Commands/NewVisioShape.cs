@@ -21,6 +21,9 @@ namespace VisioPowerShell.Commands
         public string[] Names { get; set; }
 
         [SMA.Parameter(ParameterSetName = "masters", Mandatory = false)]
+        public VisioPowerShell.Models.ShapeCells[] Cells { get; set; }
+
+        [SMA.Parameter(ParameterSetName = "masters", Mandatory = false)]
         public SMA.SwitchParameter NoSelect=false;
 
         protected override void ProcessRecord()
@@ -126,14 +129,40 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            this.Client.Selection.SelectNone();
-
             if (!this.NoSelect)
             {
                 // Select the Shapes
                 ((SMA.Cmdlet) this).WriteVerbose("Selecting");
                 this.Client.Selection.Select(shape_objects);
             }
+
+            // If there are cells to set, then use them
+            if (this.Cells != null)
+            {
+                var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
+                writer.BlastGuards = true;
+                writer.TestCircular = true;
+
+                for (int i = 0; i < shape_ids.Count(); i++)
+                {
+                    var shape_id = shape_ids[i];
+                    var shape_cells = this.Cells[i % this.Cells.Length];
+
+                    shape_cells.Apply(writer, (short)shape_id);
+                }
+
+                var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
+
+                using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Cells"))
+                {
+                    writer.Commit(surface);
+                }
+
+            }
+
+
+            this.Client.Selection.SelectNone();
+
             this.WriteObject(shape_objects, true);
         }
     }

@@ -40,7 +40,7 @@ Copyright = '(c) 2017 Saveen Reddy'
 Description = 'Visio PowerShell for Visio 2010'
 
 # Minimum version of the Windows PowerShell engine required by this module
-PowerShellVersion = '2.0'
+PowerShellVersion = '2.1'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''
