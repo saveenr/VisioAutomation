@@ -31,7 +31,7 @@ namespace VisioPowerShell_Tests
         {
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
             var stencil_basic = VisioPS_Basic_Tests.Session.Cmd_Open_VisioDocument("basic_u.vss");
-            var master_roundrect = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster("Rectangle", stencil_basic);
+            var master_roundrect = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(PsArray.From("Rectangle"), stencil_basic);
             var shapes = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape(PsArray.From(master_roundrect), new [] {2.0, 3.0});
 
             var shapecells = VisioPS_Basic_Tests.Session.Cmd_New_VisioShapeCells();
@@ -96,7 +96,7 @@ namespace VisioPowerShell_Tests
             var rectangle = "Rectangle";
             var basic_u_vss = "BASIC_U.VSS";
 
-            var master = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(rectangle, basic_u_vss);
+            var master = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(PsArray.From(rectangle), basic_u_vss);
 
             VisioPS_Basic_Tests.Session.Cmd_New_VisioShape( PsArray.From(master) , new[] { 1.0, 1.0 });
 

@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands
     public class GetVisioMaster : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
-        public string Name;
+        public string[] Name;
 
         [SMA.Parameter(Position = 1, Mandatory = false)]
         public IVisio.Document Document;
@@ -23,14 +23,21 @@ namespace VisioPowerShell.Commands
                 if (doc_specified)
                 {
                     ((SMA.Cmdlet) this).WriteVerbose("Get master from specified document");
-                    var masters = this.Client.Master.GetMastersByName(this.Name, this.Document);
-                    this.WriteObject(masters, true);
+                    foreach (var name in this.Name)
+                    {
+                        var masters = this.Client.Master.GetMastersByName(name, this.Document);
+                        this.WriteObject(masters, true);
+                    }
                 }
                 else
                 {
                     ((SMA.Cmdlet) this).WriteVerbose("Get master from active document");
-                    var masters = this.Client.Master.GetMastersByName(this.Name);
-                    this.WriteObject(masters, true);
+
+                    foreach (var name in this.Name)
+                    {
+                        var masters = this.Client.Master.GetMastersByName(name);
+                        this.WriteObject(masters, true);
+                    }
                 }
             }
             else

@@ -2,6 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
 using VisioPowerShell_Tests.Framework.Extensions;
+using VisioPowerShell_Tests.Framework;
 
 namespace VisioPowerShell_Tests
 {
@@ -20,7 +21,7 @@ namespace VisioPowerShell_Tests
             string cont_doc)
         {
             var doc = this.Cmd_Open_VisioDocument(cont_doc);
-            var master = this.Cmd_Get_VisioMaster(cont_master_name,cont_doc);
+            var master = this.Cmd_Get_VisioMaster(PsArray.From(cont_master_name),cont_doc);
 
             var cmd = new VisioPowerShell.Commands.NewVisioContainer();
             cmd.Master = master[0];
@@ -40,24 +41,24 @@ namespace VisioPowerShell_Tests
         }
 
         public List<IVisio.Master> Cmd_Get_VisioMaster(
-            string mastername, 
+            string[] name, 
             string stencilname)
         {
             var doc = this.Cmd_Open_VisioDocument(stencilname);
 
             var cmd = new VisioPowerShell.Commands.GetVisioMaster();
-            cmd.Name = mastername;
+            cmd.Name = name;
             cmd.Document = doc;
             var master = cmd.Invoke<IVisio.Master>().ToList();
             return master;
         }
 
         public List<IVisio.Master> Cmd_Get_VisioMaster(
-            string mastername,
+            string [] name,
             IVisio.Document stencil)
         {
             var cmd = new VisioPowerShell.Commands.GetVisioMaster();
-            cmd.Name = mastername;
+            cmd.Name = name;
             cmd.Document = stencil;
             var master = cmd.Invoke<IVisio.Master>().ToList();
             return master;
