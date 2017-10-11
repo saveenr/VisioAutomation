@@ -22,7 +22,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '2.20.0'
+ModuleVersion = '2.21.0'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
@@ -40,7 +40,7 @@ Copyright = '(c) 2017 Saveen Reddy'
 Description = 'Visio PowerShell for Visio 2010'
 
 # Minimum version of the Windows PowerShell engine required by this module
-PowerShellVersion = '2.1'
+PowerShellVersion = '2.0'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''
