@@ -10,7 +10,7 @@ namespace VisioPowerShell.Commands
             var app = this.Client.Application.Get();
             if (app == null)
             {
-                this.WriteVerbose("A Visio Application Instance is NOT Attached");
+                this.WriteVerbose("A Visio Application Instance is not Attached");
                 this.WriteObject(null);
             }
             else
