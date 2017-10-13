@@ -14,15 +14,13 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (!this.AllPages)
+            if (this.AllPages)
             {
-                // this means use the current page 
-                this.Client.ExportPage.PageToFile(this.Filename);
+                this.Client.ExportPage.PagesToFiles(this.Filename);
             }
             else
             {
-                // is -AllPages is set then export them all
-                this.Client.ExportPage.PagesToFiles(this.Filename);
+                this.Client.ExportPage.PageToFile(this.Filename);
             }
         }
     }
