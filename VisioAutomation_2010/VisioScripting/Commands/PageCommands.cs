@@ -251,7 +251,7 @@ namespace VisioScripting.Commands
 
         public VisioScripting.Models.PageOrientation GetOrientation()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var active_page = cmdtarget.ActivePage;
             return PageCommands.GetOrientation(active_page);
