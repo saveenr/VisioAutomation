@@ -1,6 +1,6 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Linq;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
 
 namespace VisioPowerShell.Commands
 {
@@ -21,11 +21,7 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                foreach (var doc in this.Documents)
-                {
-                    this.Client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
-                    doc.Close(this.Force);
-                }
+                this.Client.Document.Close(this.Documents.ToList(), this.Force);
             }
         }
     }

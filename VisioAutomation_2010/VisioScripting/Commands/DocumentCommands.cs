@@ -143,6 +143,15 @@ namespace VisioScripting.Commands
             }
         }
 
+        public void Close(List<IVisio.Document> docs, bool force)
+        {
+            foreach (var doc in docs)
+            {
+                this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID, doc.Name);
+                doc.Close(force);
+            }
+        }
+
         public void CloseAllWithoutSaving()
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
