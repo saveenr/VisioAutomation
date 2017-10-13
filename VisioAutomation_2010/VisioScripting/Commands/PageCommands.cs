@@ -101,10 +101,8 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
             var application = cmdtarget.Application;
             var active_page = application.ActivePage;
-
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
@@ -120,7 +118,6 @@ namespace VisioScripting.Commands
         public void SetName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
 
             if (name == null)
             {
@@ -167,7 +164,6 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
             if (background_page_name == null)
             {
                 throw new System.ArgumentNullException(nameof(background_page_name));
@@ -212,16 +208,14 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
-            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Duplicate Page"))
             {
-                var doc = application.ActiveDocument;
+                var doc = cmdtarget.Application.ActiveDocument;
                 var pages = doc.Pages;
-                var src_page = application.ActivePage;
+                var src_page = cmdtarget.Application.ActivePage;
                 var new_page = pages.Add();
 
-                var win = application.ActiveWindow;
+                var win = cmdtarget.Application.ActiveWindow;
                 win.Page = src_page;
                 VisioAutomation.Pages.PageHelper.Duplicate(src_page, new_page);
                 win.Page = new_page;
@@ -233,26 +227,23 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
             if (dest_doc==null)
             {
                 throw new System.ArgumentNullException(nameof(dest_doc));
             }
 
-            var application = cmdtarget.Application;
-
-            if (application.ActiveDocument == dest_doc)
+            if (cmdtarget.ActiveDocument == dest_doc)
             {
                 throw new VisioAutomation.Exceptions.VisioOperationException("dest doc is same as active doc");
             }
 
-            var src_page = application.ActivePage;
+            var src_page = cmdtarget.ActivePage;
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
             VisioAutomation.Pages.PageHelper.Duplicate(src_page, dest_page);
 
             // the active window will be to the new document
-            var active_window = application.ActiveWindow;
+            var active_window = cmdtarget.Application.ActiveWindow;
             //active_window.Page = dest_page;
 
             return dest_page;
@@ -262,9 +253,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
-            var application = cmdtarget.Application;
-            var active_page = application.ActivePage;
+            var active_page = cmdtarget.ActivePage;
             return PageCommands.GetOrientation(active_page);
         }
 
@@ -284,20 +273,14 @@ namespace VisioScripting.Commands
 
         public void SetOrientation(VisioScripting.Models.PageOrientation orientation)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
-            var app = cmdtarget.Application;
-            var application = app;
-
-            var active_page = application.ActivePage;
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (orientation != VisioScripting.Models.PageOrientation.Landscape && orientation != VisioScripting.Models.PageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
 
-            var old_orientation = PageCommands.GetOrientation(active_page);
+            var old_orientation = PageCommands.GetOrientation(cmdtarget.Application.ActivePage);
 
             if (old_orientation == orientation)
             {
@@ -317,7 +300,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Application.NewUndoScope("Set Page Orientation"))
             {
-                writer.Commit(active_page.PageSheet);
+                writer.Commit(cmdtarget.ActivePage.PageSheet);
             }
         }
 
@@ -342,11 +325,9 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
-            var application = cmdtarget.Application;
             if (page == null)
             {
-                page = application.ActivePage;
+                page = cmdtarget.Application.ActivePage;
             }
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
@@ -366,11 +347,9 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
-            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Set Page Size"))
             {
-                var active_page = application.ActivePage;
+                var active_page = cmdtarget.Application.ActivePage;
                 var page_sheet = active_page.PageSheet;
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                 writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
@@ -382,8 +361,7 @@ namespace VisioScripting.Commands
 
         public void SetSize(double? width, double? height)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (!width.HasValue && !height.HasValue)
             {
@@ -509,9 +487,7 @@ namespace VisioScripting.Commands
         public List<IVisio.Shape> GetShapesByName(string[] shapenames, bool ignore_bad_names)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-            
             var shapes = cmdtarget.ActivePage.Shapes;
-
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
             cached_shapes_list.AddRange(shapes.ToEnumerable());
             
@@ -529,7 +505,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Page> GetPagesByName(string name, Models.PageType pagetype)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             var active_document = cmdtarget.ActiveDocument;
             if (name == null || name == "*")

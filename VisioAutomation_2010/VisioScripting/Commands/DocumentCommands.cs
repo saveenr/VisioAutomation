@@ -206,11 +206,20 @@ namespace VisioScripting.Commands
             return this.NewWithTemplate(size,null);
         }
 
-        public IVisio.Document NewWithTemplate(VisioAutomation.Geometry.Size size,string template)
+        public IVisio.Document NewWithTemplate(VisioAutomation.Geometry.Size size, string template)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
+
             var doc = this.NewWithTemplate(template);
-            this._client.Page.SetSize(size);
+            var pagecells = new VisioAutomation.Pages.PageFormatCells();
+
+            var pages = doc.Pages;
+            var page = pages[1];
+
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            pagecells.SetFormulas(writer);
+            writer.Commit(page);
+
             return doc;
         }
 
@@ -225,7 +234,7 @@ namespace VisioScripting.Commands
 
             if (name.Length == 0)
             {
-                throw new System.ArgumentException("name");
+                throw new System.ArgumentException(nameof(name));
             }
 
             this._client.Output.WriteVerbose( "Loading stencil \"{0}\"", name);
@@ -266,7 +275,6 @@ namespace VisioScripting.Commands
             var doc = documents.Add(filename);
             return doc;
         }
-
 
         public IVisio.Document Get(string name)
         {

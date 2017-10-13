@@ -37,9 +37,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
-
-            var app = cmdtarget.Application;
-            var appwindow = app.Window;
+            var appwindow = cmdtarget.Application.Window;
             appwindow.SetWindowRect(rect);
         }
     }

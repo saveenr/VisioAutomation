@@ -27,8 +27,8 @@ namespace VisioScripting.Commands
             var application = cmdtarget.Application;
             var window = application.ActiveWindow;
 
-            var st = window.SubType;
-            if (st != 64)
+            var win_subtype = window.SubType;
+            if (win_subtype != 64)
             {
                 throw new System.ArgumentException("The active window is not a master window");
             }

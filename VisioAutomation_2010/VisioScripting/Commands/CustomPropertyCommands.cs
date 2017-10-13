@@ -26,9 +26,7 @@ namespace VisioScripting.Commands
                 return prop_dic;
             }
 
-            var page = cmdtarget.ActivePage;
-
-            var list_custom_props = CustomPropertyHelper.GetCells(page, targets.Shapes, CellValueType.Formula);
+            var list_custom_props = CustomPropertyHelper.GetCells(cmdtarget.ActivePage, targets.Shapes, CellValueType.Formula);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {
@@ -89,7 +87,6 @@ namespace VisioScripting.Commands
         public void Set(VisioScripting.Models.TargetShapes  targets, string name, CustomPropertyCells customprop)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
 
             if (customprop == null)
             {

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -48,7 +47,6 @@ namespace VisioScripting.Commands
         public List<IVisio.Layer> Get()
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
 
             var application = cmdtarget.Application;
             var page = application.ActivePage;
