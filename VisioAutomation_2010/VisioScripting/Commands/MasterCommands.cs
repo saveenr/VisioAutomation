@@ -151,7 +151,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape Drop(IVisio.Master master, VisioAutomation.Geometry.Point p)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var page = cmdtarget.ActivePage;
             var shape = page.Drop(master, p.X, p.Y);
@@ -160,7 +160,7 @@ namespace VisioScripting.Commands
 
         public short[] Drop(IList<IVisio.Master> masters, IList<VisioAutomation.Geometry.Point> points)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (masters == null)
             {

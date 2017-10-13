@@ -102,7 +102,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public Dictionary<int,LockCells> GetLock(VisioScripting.Models.TargetShapes targets)
+        public Dictionary<int,LockCells> GetLock(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -117,7 +117,7 @@ namespace VisioScripting.Commands
             var page = cmdtarget.ActivePage;
             var target_shapeids = targets.ToShapeIDs();
 
-            var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids.ShapeIDs, CellValueType.Formula);
+            var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids.ShapeIDs, cvt);
 
             for (int i = 0; i < target_shapeids.ShapeIDs.Count; i++)
             {

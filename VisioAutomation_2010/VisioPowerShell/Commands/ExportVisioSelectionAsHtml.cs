@@ -19,6 +19,10 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
+            if (this.Filename == null)
+            {
+                throw new System.ArgumentNullException(nameof(this.Filename));
+            }
             if (!File.Exists(this.Filename))
             {
                 this.WriteVerbose("File already exists");

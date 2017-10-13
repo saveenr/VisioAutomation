@@ -31,7 +31,7 @@ namespace VisioScripting.Commands
 
         public void Invert()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var active_page = cmdtarget.ActivePage;
             var shapes = active_page.Shapes;

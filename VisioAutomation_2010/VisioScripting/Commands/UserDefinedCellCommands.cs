@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
+        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -30,7 +30,7 @@ namespace VisioScripting.Commands
 
             var application = cmdtarget.Application;
             var page = application.ActivePage;
-            var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, CellValueType.Formula);
+            var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, cvt);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {

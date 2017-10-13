@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -24,7 +25,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioScripting.Models.TargetShapes();
 
-            var controls0 = client.Control.Get(targets);
+            var controls0 = client.Control.Get(targets, CellValueType.Formula);
             int found_controls = controls0.Count;
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls0[s1].Count);
@@ -36,14 +37,14 @@ namespace VisioAutomation_Tests.Scripting
             ctrl.Y = "0";
             client.Control.Add(targets, ctrl);
 
-            var controls1 = client.Control.Get(targets);
+            var controls1 = client.Control.Get(targets, CellValueType.Formula);
             Assert.AreEqual(3, controls1.Count);
             Assert.AreEqual(1, controls1[s1].Count);
             Assert.AreEqual(1, controls1[s2].Count);
             Assert.AreEqual(1, controls1[s3].Count);
 
             client.Control.Delete(targets, 0);
-            var controls2 = client.Control.Get(targets);
+            var controls2 = client.Control.Get(targets, CellValueType.Formula);
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls2[s1].Count);
             Assert.AreEqual(0, controls2[s2].Count);

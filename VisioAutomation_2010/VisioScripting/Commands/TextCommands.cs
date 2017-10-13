@@ -69,7 +69,6 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -91,7 +90,6 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -108,5 +106,3 @@ namespace VisioScripting.Commands
 
     }
 }
-
-

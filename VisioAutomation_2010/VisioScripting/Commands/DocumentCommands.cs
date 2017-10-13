@@ -212,6 +212,8 @@ namespace VisioScripting.Commands
 
             var doc = this.NewWithTemplate(template);
             var pagecells = new VisioAutomation.Pages.PageFormatCells();
+            pagecells.Width = size.Width;
+            pagecells.Height = size.Height;
 
             var pages = doc.Pages;
             var page = pages[1];

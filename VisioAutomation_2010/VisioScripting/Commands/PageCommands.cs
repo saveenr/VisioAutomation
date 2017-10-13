@@ -225,7 +225,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Page Duplicate(IVisio.Document dest_doc)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (dest_doc==null)
             {
@@ -388,7 +388,7 @@ namespace VisioScripting.Commands
 
         public void GoTo(VisioScripting.Models.PageDirection flags)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var docpages = cmdtarget.ActiveDocument.Pages;
             if (docpages.Count < 2)

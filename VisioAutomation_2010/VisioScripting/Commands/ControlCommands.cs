@@ -65,7 +65,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<ControlCells>> Get(VisioScripting.Models.TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<ControlCells>> Get(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -79,7 +79,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>();
             foreach (var shape in targets.Shapes)
             {
-                var controls = ControlCells.GetCells(shape, CellValueType.Formula);
+                var controls = ControlCells.GetCells(shape, cvt);
                 dic[shape] = controls;
             }
             return dic;

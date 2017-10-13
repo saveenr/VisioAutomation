@@ -29,7 +29,7 @@ namespace VisioPowerShell.Commands
             var cellnames = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-
+            
             var result_dt = new System.Data.DataTable();
 
             foreach (var target_page in target_pages)

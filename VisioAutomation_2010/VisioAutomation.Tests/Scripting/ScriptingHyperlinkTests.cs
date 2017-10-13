@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -26,7 +27,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioScripting.Models.TargetShapes();
 
-            var hyperlinks0 = client.Hyperlink.Get(targets);
+            var hyperlinks0 = client.Hyperlink.Get(targets, CellValueType.Formula);
 
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks0[s1].Count);
@@ -37,15 +38,14 @@ namespace VisioAutomation_Tests.Scripting
             hyperlink.Address = "http://www.microsoft.com";
             client.Hyperlink.Add(targets, hyperlink);
 
-
-            var hyperlinks1 = client.Hyperlink.Get(targets);
+            var hyperlinks1 = client.Hyperlink.Get(targets, CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks1.Count);
             Assert.AreEqual(1, hyperlinks1[s1].Count);
             Assert.AreEqual(1, hyperlinks1[s2].Count);
             Assert.AreEqual(1, hyperlinks1[s3].Count);
 
             client.Hyperlink.Delete(targets, 0);
-            var hyperlinks2 = client.Hyperlink.Get(targets);
+            var hyperlinks2 = client.Hyperlink.Get(targets, CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks2[s1].Count);
             Assert.AreEqual(0, hyperlinks2[s2].Count);
