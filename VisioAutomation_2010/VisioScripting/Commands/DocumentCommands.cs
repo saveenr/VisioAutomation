@@ -220,7 +220,7 @@ namespace VisioScripting.Commands
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             pagecells.SetFormulas(writer);
-            writer.Commit(page);
+            writer.Commit(page.PageSheet);
 
             return doc;
         }

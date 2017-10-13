@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Geometry;
 using VisioScripting.Models;
 
 namespace VisioAutomation_Tests.Scripting
@@ -7,6 +8,16 @@ namespace VisioAutomation_Tests.Scripting
     [TestClass]
     public class ScriptingPageTests : VisioAutomationTest
     {
+        [TestMethod]
+        public void Scripting_Page_NewPage()
+        {
+            var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
+            var client = this.GetScriptingClient();
+            var doc = client.Document.New();
+            client.Page.New(new Size(4, 5), false);
+        }
+
+
         [TestMethod]
         public void Scripting_Page_Navigation()
         {
