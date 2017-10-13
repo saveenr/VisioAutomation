@@ -14,10 +14,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var application = this.Client.Application.Get();
-
             if (this.ActiveDocument)
             {
+                var application = this.Client.Application.Get();
                 var active_doc = application.ActiveDocument;
                 this.WriteObject(active_doc);
                 return;
