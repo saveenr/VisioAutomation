@@ -98,6 +98,7 @@ namespace VisioPowerShell_Tests
 
             var master = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(PsArray.From(rectangle), basic_u_vss);
 
+
             VisioPS_Basic_Tests.Session.Cmd_New_VisioShape( PsArray.From(master) , new[] { 1.0, 1.0 });
 
             // Drop a container on the page... the rectangle we created above should be selected by default. 
@@ -107,7 +108,9 @@ namespace VisioPowerShell_Tests
 
             Assert.IsNotNull(container);
 
-            VisioPS_Basic_Tests.VisioPS_Close_Visio_Application();
+           
+
+            //VisioPS_Basic_Tests.VisioPS_Close_Visio_Application();
         }
     }
 }

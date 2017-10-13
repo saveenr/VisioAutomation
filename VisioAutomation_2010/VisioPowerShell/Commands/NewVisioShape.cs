@@ -129,13 +129,6 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            if (!this.NoSelect)
-            {
-                // Select the Shapes
-                ((SMA.Cmdlet) this).WriteVerbose("Selecting");
-                this.Client.Selection.Select(shape_objects);
-            }
-
             // If there are cells to set, then use them
             if (this.Cells != null)
             {
@@ -160,8 +153,14 @@ namespace VisioPowerShell.Commands
 
             }
 
-
             this.Client.Selection.SelectNone();
+
+            if (!this.NoSelect)
+            {
+                // Select the Shapes
+                ((SMA.Cmdlet)this).WriteVerbose("Selecting");
+                this.Client.Selection.Select(shape_objects);
+            }
 
             this.WriteObject(shape_objects, true);
         }

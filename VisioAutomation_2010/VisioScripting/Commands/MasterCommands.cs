@@ -210,6 +210,7 @@ namespace VisioScripting.Commands
             var page = cmdtarget.ActivePage;
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
+
             var shape = page.DropContainer(master, selection);
             return shape;
         }
