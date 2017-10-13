@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
@@ -23,28 +21,27 @@ namespace VisioPowerShell.Commands
             {
                 throw new System.ArgumentNullException(nameof(this.Filename));
             }
-            if (!File.Exists(this.Filename))
+            if (!System.IO.File.Exists(this.Filename))
             {
                 this.WriteVerbose("File already exists");
                 if (this.Overwrite)
                 {
-                    File.Delete(this.Filename);
+                    System.IO.File.Delete(this.Filename);
                 }
                 else
                 {
                     string msg = string.Format("File \"{0}\" already exists", this.Filename);
-                    var exc = new ArgumentException(msg);
+                    var exc = new System.ArgumentException(msg);
                     throw exc;
                 }
             }
-
 
             if (_htmlExtensions == null)
             {
                 _htmlExtensions = new HashSet<string> { ".html", ".htm", ".xhtml" };
             }
 
-            string ext = Path.GetExtension(this.Filename).ToLowerInvariant();
+            string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
 
             if (_htmlExtensions.Contains(ext))
             {
