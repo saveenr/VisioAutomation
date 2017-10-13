@@ -410,36 +410,23 @@ namespace VisioScripting.Commands
 
         public void GoTo(VisioScripting.Models.PageDirection flags)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application );
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
-            var application = cmdtarget.Application;
-            var active_document = application.ActiveDocument;
-            var docpages = active_document.Pages;
+            var docpages = cmdtarget.ActiveDocument.Pages;
             if (docpages.Count < 2)
             {
                 return;
             }
 
             var pages = docpages;
-            this._GoTo(pages, flags);
+            this._GoTo(pages, flags, cmdtarget);
         }
 
-        private void _GoTo(IVisio.Pages pages, VisioScripting.Models.PageDirection flags)
+        private void _GoTo(IVisio.Pages pages, VisioScripting.Models.PageDirection flags, CommandTarget cmdtarget)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application );
-
-
             if (pages == null)
             {
                 throw new System.ArgumentNullException(nameof(pages));
-            }
-
-            var app = pages.Application;
-            var active_document = app.ActiveDocument;
-            if (pages.Document != active_document)
-            {
-                throw new VisioAutomation.Exceptions.VisioOperationException("Page.Document is not application's ActiveDocument");
             }
 
             if (pages.Count < 2)
@@ -447,18 +434,16 @@ namespace VisioScripting.Commands
                 throw new VisioAutomation.Exceptions.VisioOperationException("Only 1 page available. Navigation not possible.");
             }
 
-            var activepage = app.ActivePage;
-
-            int cur_index = activepage.Index;
+            int cur_index = cmdtarget.ActivePage.Index;
             const int min_index = 1;
             int max_index = pages.Count;
             int new_index = PageCommands.move_in_range(cur_index, min_index, max_index, flags);
             if (cur_index != new_index)
             {
-                var doc_pages = active_document.Pages;
+                var doc_pages = cmdtarget.ActiveDocument.Pages;
                 var page = doc_pages[new_index];
 
-                var active_window = app.ActiveWindow;
+                var active_window = cmdtarget.Application.ActiveWindow;
                 active_window.Page = page;
             }
         }
@@ -506,8 +491,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var page = cmdtarget.ActivePage;
-            var shapes = page.Shapes;
+            var shapes = cmdtarget.ActivePage.Shapes;
             var shapes_list = new List<IVisio.Shape>(shapeids.Length);
             foreach (int id in shapeids)
             {
@@ -526,8 +510,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             
-            var page = cmdtarget.ActivePage;
-            var shapes = page.Shapes;
+            var shapes = cmdtarget.ActivePage.Shapes;
 
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
             cached_shapes_list.AddRange(shapes.ToEnumerable());
@@ -547,7 +530,8 @@ namespace VisioScripting.Commands
         public List<IVisio.Page> GetPagesByName(string name, Models.PageType pagetype)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
-            var active_document = cmdtarget.Application.ActiveDocument;
+
+            var active_document = cmdtarget.ActiveDocument;
             if (name == null || name == "*")
             {
                 // return all pages
@@ -596,8 +580,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var page = cmdtarget.ActivePage;
-            var shapes = page.Shapes.ToList();
+            var shapes = cmdtarget.ActivePage.Shapes.ToList();
             return shapes;
         }
 
@@ -605,8 +588,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var page = cmdtarget.ActivePage;
-            var shapes = page.Shapes.ToEnumerable().Select(s=>s.ID16).ToList();
+            var shapes = cmdtarget.ActivePage.Shapes.ToEnumerable().Select(s=>s.ID16).ToList();
             return shapes;
         }
     }
