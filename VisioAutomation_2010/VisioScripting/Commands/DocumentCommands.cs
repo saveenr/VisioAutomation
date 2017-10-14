@@ -301,7 +301,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             var documents = cmdtarget.Application.Documents;
-            if (name == null || name == "*")
+            if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all documents
                 var docs1 = documents.ToEnumerable().ToList();

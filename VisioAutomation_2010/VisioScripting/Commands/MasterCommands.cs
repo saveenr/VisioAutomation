@@ -113,7 +113,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Master> GetMastersByName(string name, IVisio.Document doc)
         {
-            if (name == null || name == "*")
+            if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all masters
                 var masters = doc.Masters.ToList();

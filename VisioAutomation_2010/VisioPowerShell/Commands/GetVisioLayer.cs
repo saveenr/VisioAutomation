@@ -10,16 +10,17 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            string str_asterisk = "*";
-            if (this.Name!=null || this.Name==str_asterisk)
+            if (VisioScripting.Helpers.WildcardHelper.NullOrStar(this.Name))
             {
-                var layer = this.Client.Layer.Get(this.Name);
-                this.WriteObject(layer);
+                // get all
+                var layers = this.Client.Layer.Get();
+                this.WriteObject(layers, true);
             }
             else
             {
-                var layers = this.Client.Layer.Get();
-                this.WriteObject(layers, true);
+                // get all that match a specific name
+                var layer = this.Client.Layer.Get(this.Name);
+                this.WriteObject(layer);
             }
         }
     }

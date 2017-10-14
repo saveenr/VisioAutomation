@@ -508,7 +508,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             var active_document = cmdtarget.ActiveDocument;
-            if (name == null || name == "*")
+            if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all pages
                 var all_pages = active_document.Pages.ToList();
