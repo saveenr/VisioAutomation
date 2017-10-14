@@ -46,35 +46,35 @@ namespace VisioPowerShell.Commands
         {
             if (this.OrgChart != null)
             {
-                this.Client.Draw.DrawOrgChart(this.OrgChart);
+                this.Client.Charting.DrawOrgChart(this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
-                this.Client.Draw.DrawGrid(this.GridLayout);
+                this.Client.Charting.DrawGrid(this.GridLayout);
             }
             else if (this.DirectedGraphs != null)
             {
-                this.Client.Draw.DrawDirectedGraph(this.DirectedGraphs);
+                this.Client.Charting.DrawDirectedGraph(this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {
                 var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
                 var spacing = new VisioAutomation.Geometry.Size(this.CellSpacing, this.CellSpacing);
-                var shapes = this.Client.Draw.DrawTable(this.DataTable, widths, heights, spacing);
+                var shapes = this.Client.Charting.DrawTable(this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
             else if (this.PieChart != null)
             {
-                this.Client.Draw.DrawPieChart(this.PieChart);
+                this.Client.Charting.DrawPieChart(this.PieChart);
             }
             else if (this.BarChart != null)
             {
-                this.Client.Draw.DrawBarChart(this.BarChart);
+                this.Client.Charting.DrawBarChart(this.BarChart);
             }
             else if (this.AreaChart != null)
             {
-                this.Client.Draw.DrawAreaChart(this.AreaChart);
+                this.Client.Charting.DrawAreaChart(this.AreaChart);
             }
             else if (this.XmlDocument != null)
             {

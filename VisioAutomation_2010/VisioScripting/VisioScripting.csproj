@@ -49,6 +49,7 @@
     <Compile Include="Commands\CommandTarget.cs" />
     <Compile Include="Commands\CommandTargetFlags.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
+    <Compile Include="Commands\ChartingCommands.cs" />
     <Compile Include="Commands\ExportPageCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="Models\ShapeSendDirection.cs" />
