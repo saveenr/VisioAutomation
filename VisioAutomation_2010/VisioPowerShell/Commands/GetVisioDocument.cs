@@ -6,7 +6,6 @@ namespace VisioPowerShell.Commands
     public class GetVisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
-        [SMA.ValidateNotNullOrEmpty]
         public string Name = null;
 
         [SMA.Parameter(Mandatory = false)]
