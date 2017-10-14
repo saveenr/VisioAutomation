@@ -31,7 +31,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Application Get()
+        public IVisio.Application GetApplication()
         {
             return this.VisioApplication;
         }
@@ -45,7 +45,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Close(bool force)
+        public void CloseApplication(bool force)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
@@ -78,7 +78,7 @@ namespace VisioScripting.Commands
             this.VisioApplication = null;
         }
 
-        public IVisio.Application New()
+        public IVisio.Application NewApplication()
         {
             this._client.Output.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
@@ -101,7 +101,7 @@ namespace VisioScripting.Commands
             this.VisioApplication.Redo();
         }
 
-        public bool Validate()
+        public bool ValidateApplication()
         {
             if (this.VisioApplication == null)
             {

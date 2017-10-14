@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void OpenForEdit(IVisio.Master master)
+        public void OpenMasterForEdit(IVisio.Master master)
         {
             var mdraw_window = master.OpenDrawWindow();
             mdraw_window.Activate();
@@ -55,7 +55,7 @@ namespace VisioScripting.Commands
             return masters;
         }
 
-        public IVisio.Master Get(string name)
+        public IVisio.Master GetMasterWithName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
             return master;
         }
 
-        public IVisio.Master Get(string master, IVisio.Document doc)
+        public IVisio.Master GetMasterWithNameFromDocument(string master, IVisio.Document doc)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -111,7 +111,7 @@ namespace VisioScripting.Commands
             return masterobj;
         }
 
-        public List<IVisio.Master> GetMastersByName(string name, IVisio.Document doc)
+        public List<IVisio.Master> GetMastersByNameFromDocument(string name, IVisio.Document doc)
         {
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
@@ -128,12 +128,12 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<IVisio.Master> GetMastersByName(string name)
+        public List<IVisio.Master> GetMastersByNameFromDocument(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             var doc = cmdtarget.ActiveDocument;
-            return this.GetMastersByName(name, doc);
+            return this.GetMastersByNameFromDocument(name, doc);
         }
 
         private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
@@ -149,7 +149,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape Drop(IVisio.Master master, VisioAutomation.Geometry.Point p)
+        public IVisio.Shape DropMasterOnActivePage(IVisio.Master master, VisioAutomation.Geometry.Point p)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -158,7 +158,7 @@ namespace VisioScripting.Commands
             return shape;
         }
 
-        public short[] Drop(IList<IVisio.Master> masters, IList<VisioAutomation.Geometry.Point> points)
+        public short[] DropMastersOnActivePage(IList<IVisio.Master> masters, IList<VisioAutomation.Geometry.Point> points)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -177,7 +177,7 @@ namespace VisioScripting.Commands
             return shapeids;
         }
 
-        public IVisio.Master New(IVisio.Document document, string name)
+        public IVisio.Master NewMaster(IVisio.Document document, string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -203,7 +203,7 @@ namespace VisioScripting.Commands
         // http://blogs.msdn.com/b/visio/archive/2010/01/27/container-list-and-callout-api-in-visio-2010.aspx
         // https://msdn.microsoft.com/en-us/library/office/ff768907(v=office.14).aspx
 
-        public IVisio.Shape DropContainer(IVisio.Master master)
+        public IVisio.Shape DropContainerMaster(IVisio.Master master)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 

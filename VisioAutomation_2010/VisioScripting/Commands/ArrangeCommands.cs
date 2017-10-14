@@ -13,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void Nudge(VisioScripting.Models.TargetShapes targets, double dx, double dy)
+        public void NudgeShapes(VisioScripting.Models.TargetShapes targets, double dx, double dy)
         {
             if (dx == 0.0 && dy == 0.0)
             {
@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private static void SendShapes(Microsoft.Office.Interop.Visio.Selection selection, Models.ShapeSendDirection dir)
+        private static void SendSelectedShapes(Microsoft.Office.Interop.Visio.Selection selection, Models.ShapeSendDirection dir)
         {
 
             if (dir == Models.ShapeSendDirection.ToBack)
@@ -61,7 +61,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void Send(VisioScripting.Models.TargetShapes targets, Models.ShapeSendDirection dir)
+        public void SendShaped(VisioScripting.Models.TargetShapes targets, Models.ShapeSendDirection dir)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -73,10 +73,10 @@ namespace VisioScripting.Commands
 
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
-            ArrangeCommands.SendShapes(selection, dir);
+            ArrangeCommands.SendSelectedShapes(selection, dir);
         }
 
-        public void SetLock(VisioScripting.Models.TargetShapes targets, LockCells lockcells)
+        public void SetLockCellsForShapes(VisioScripting.Models.TargetShapes targets, LockCells lockcells)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -102,7 +102,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public Dictionary<int,LockCells> GetLock(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<int,LockCells> GetLockCells(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -127,37 +127,6 @@ namespace VisioScripting.Commands
             }
 
             return dic;
-        }
-
-        public void SetSize(VisioScripting.Models.TargetShapes targets, double? w, double? h)
-        {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-
-            targets = targets.ResolveShapes(this._client);
-            if (targets.Shapes.Count < 1)
-            {
-                return;
-            }
-
-            var active_page = cmdtarget.ActivePage;
-            var shapeids = targets.ToShapeIDs();
-            var writer = new SidSrcWriter();
-            foreach (int shapeid in shapeids.ShapeIDs)
-            {
-                if (w.HasValue && w.Value>=0)
-                {
-                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, w.Value);
-                }
-                if (h.HasValue && h.Value >= 0)
-                {
-                    writer.SetFormula((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, h.Value);                    
-                }
-            }
-
-            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Size"))
-            {
-                writer.Commit(active_page);
-            }
         }
     }
 }

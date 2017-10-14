@@ -13,7 +13,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Hyperlinks_Scenarios()
         {
             var client = this.GetScriptingClient();
-            client.Document.New();
+            client.Document.NewDocument();
             client.Page.NewPage(new VisioAutomation.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(1, 1, 1.5, 1.5);
@@ -27,7 +27,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioScripting.Models.TargetShapes();
 
-            var hyperlinks0 = client.Hyperlink.Get(targets, CellValueType.Formula);
+            var hyperlinks0 = client.Hyperlink.GetHyperlinkCells(targets, CellValueType.Formula);
 
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks0[s1].Count);
@@ -36,22 +36,22 @@ namespace VisioAutomation_Tests.Scripting
 
             var hyperlink = new HyperlinkCells();
             hyperlink.Address = "http://www.microsoft.com";
-            client.Hyperlink.Add(targets, hyperlink);
+            client.Hyperlink.AddHyperlink(targets, hyperlink);
 
-            var hyperlinks1 = client.Hyperlink.Get(targets, CellValueType.Formula);
+            var hyperlinks1 = client.Hyperlink.GetHyperlinkCells(targets, CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks1.Count);
             Assert.AreEqual(1, hyperlinks1[s1].Count);
             Assert.AreEqual(1, hyperlinks1[s2].Count);
             Assert.AreEqual(1, hyperlinks1[s3].Count);
 
-            client.Hyperlink.Delete(targets, 0);
-            var hyperlinks2 = client.Hyperlink.Get(targets, CellValueType.Formula);
+            client.Hyperlink.DeleteHyperlinkAtIndex(targets, 0);
+            var hyperlinks2 = client.Hyperlink.GetHyperlinkCells(targets, CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks2[s1].Count);
             Assert.AreEqual(0, hyperlinks2[s2].Count);
             Assert.AreEqual(0, hyperlinks2[s3].Count);
 
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
     }
 }

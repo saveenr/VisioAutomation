@@ -13,7 +13,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
-            var doc = client.Document.New();
+            var doc = client.Document.NewDocument();
             client.Page.NewPage(new Size(4, 5), false);
         }
 
@@ -23,7 +23,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
-            var doc = client.Document.New(page_size);
+            var doc = client.Document.NewDocument(page_size);
 
             var page1 = client.Page.GetActivePage();
             client.Page.NewPage(page_size, false);
@@ -62,7 +62,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
-            var doc = client.Document.New(page_size);
+            var doc = client.Document.NewDocument(page_size);
             client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Page.DuplicateActivePage();
             doc.Close(true);
@@ -74,15 +74,15 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
 
             // First case: the source document is already the active document
-            var docto_1 = client.Document.New();
-            var docfrom_1 = client.Document.New();
+            var docto_1 = client.Document.NewDocument();
+            var docfrom_1 = client.Document.NewDocument();
             client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Page.DuplicateActivePageToDocument(docto_1);
 
             // Second case: the source document has to be activated beforehand
-            var docfrom_2 = client.Document.New();
-            var docto_2 = client.Document.New();
-            client.Document.Activate(docfrom_2);
+            var docfrom_2 = client.Document.NewDocument();
+            var docto_2 = client.Document.NewDocument();
+            client.Document.ActivateDocument(docfrom_2);
             client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Page.DuplicateActivePageToDocument(docto_2);
 
@@ -97,7 +97,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
 
-            var visDoc = client.Document.New();
+            var visDoc = client.Document.NewDocument();
 /*            var results1 = client.Page.
 
             var cells1 = VisioPowerShellTests.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");

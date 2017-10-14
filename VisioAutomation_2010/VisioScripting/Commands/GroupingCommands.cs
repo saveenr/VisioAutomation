@@ -11,7 +11,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public IVisio.Shape Group()
+        public IVisio.Shape GroupSelectedShapes()
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -31,7 +31,7 @@ namespace VisioScripting.Commands
             return g;
         }
 
-        public void Ungroup(VisioScripting.Models.TargetShapes targets)
+        public void UngroupSelectedShapes(VisioScripting.Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 

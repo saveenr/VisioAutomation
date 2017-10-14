@@ -10,7 +10,7 @@ namespace VisioPowerShell.Commands
         
         protected override void ProcessRecord()
         {
-            this.Client.Application.Close(this.Force);
+            this.Client.Application.CloseApplication(this.Force);
         }
     }
 }

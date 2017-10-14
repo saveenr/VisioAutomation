@@ -11,7 +11,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Controls_Scenarios()
         {
             var client = this.GetScriptingClient();
-            client.Document.New();
+            client.Document.NewDocument();
             client.Page.NewPage(new VisioAutomation.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(1, 1, 1.5, 1.5);
@@ -25,7 +25,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioScripting.Models.TargetShapes();
 
-            var controls0 = client.Control.Get(targets, CellValueType.Formula);
+            var controls0 = client.Control.GetControlCells(targets, CellValueType.Formula);
             int found_controls = controls0.Count;
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls0[s1].Count);
@@ -35,22 +35,22 @@ namespace VisioAutomation_Tests.Scripting
             var ctrl = new ControlCells();
             ctrl.X = "Width*0.5";
             ctrl.Y = "0";
-            client.Control.Add(targets, ctrl);
+            client.Control.AddControlToShapes(targets, ctrl);
 
-            var controls1 = client.Control.Get(targets, CellValueType.Formula);
+            var controls1 = client.Control.GetControlCells(targets, CellValueType.Formula);
             Assert.AreEqual(3, controls1.Count);
             Assert.AreEqual(1, controls1[s1].Count);
             Assert.AreEqual(1, controls1[s2].Count);
             Assert.AreEqual(1, controls1[s3].Count);
 
-            client.Control.Delete(targets, 0);
-            var controls2 = client.Control.Get(targets, CellValueType.Formula);
+            client.Control.DeleteControlWithIndex(targets, 0);
+            var controls2 = client.Control.GetControlCells(targets, CellValueType.Formula);
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls2[s1].Count);
             Assert.AreEqual(0, controls2[s2].Count);
             Assert.AreEqual(0, controls2[s3].Count);
 
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
     }
 }

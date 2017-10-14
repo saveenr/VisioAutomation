@@ -33,27 +33,27 @@ namespace VisioPowerShell.Commands
 
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                this.Client.Arrange.Nudge(targets, this.NudgeX, this.NudgeY);
+                this.Client.Arrange.NudgeShapes(targets, this.NudgeX, this.NudgeY);
             }
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.XAxis);
+                this.Client.Distribute.DistributeShapesOnAxis(targets, VisioScripting.Models.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.YAxis);
+                this.Client.Distribute.DistributeShapesOnAxis(targets, VisioScripting.Models.Axis.YAxis);
             }
 
             if (this.AlignVertical.HasValue)
             {
-                this.Client.Align.AlignVertical(targets, this.AlignVertical.Value);
+                this.Client.Align.AlignSelectedShapesVertical(targets, this.AlignVertical.Value);
             }
 
             if (this.AlignHorizontal.HasValue)
             {
-                this.Client.Align.AlignHorizontal(targets, this.AlignHorizontal.Value);
+                this.Client.Align.AlignSelectedShapesHorizontal(targets, this.AlignHorizontal.Value);
             }
 
         }

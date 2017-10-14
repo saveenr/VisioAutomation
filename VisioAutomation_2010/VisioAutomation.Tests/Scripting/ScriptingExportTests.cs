@@ -12,7 +12,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Geometry.Size(10,5);
 
-            var doc = client.Document.New(page_size);
+            var doc = client.Document.NewDocument(page_size);
 
             var page1 = doc.Pages[1];
 
@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Scripting
             client.ExportSelection.SelectionToHtml(output_filename);
 
             AssertUtil.FileExists(output_filename);
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
     }
 }

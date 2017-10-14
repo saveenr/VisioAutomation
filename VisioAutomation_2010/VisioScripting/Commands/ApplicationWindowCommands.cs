@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void ToFront()
+        public void MoveApplicationWindowToFront()
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
@@ -24,7 +24,7 @@ namespace VisioScripting.Commands
             VisioAutomation.Application.ApplicationHelper.BringWindowToTop(app);
         }
 
-        public System.Drawing.Rectangle GetRectangle()
+        public System.Drawing.Rectangle GetApplicationWindowRectangle()
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
             return rect;
         }
 
-        public void SetRectangle(System.Drawing.Rectangle rect)
+        public void SetApplicationWindowRectangle(System.Drawing.Rectangle rect)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 

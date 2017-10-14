@@ -48,7 +48,7 @@ namespace VisioPowerShell.Commands
 
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
 
-            this.Client.Control.Add(targets, ctrl);
+            this.Client.Control.AddControlToShapes(targets, ctrl);
         }
     }
 }

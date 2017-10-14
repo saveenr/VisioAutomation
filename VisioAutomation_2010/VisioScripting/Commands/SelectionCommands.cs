@@ -156,7 +156,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("Layer name cannot be empty", nameof(layername));
             }
 
-            var layer = this._client.Layer.Get(layername);
+            var layer = this._client.Layer.GetLayersOnActivePageByName(layername);
             var page = cmdtarget.ActivePage;
 
             // Get a selection of connectors, by layer: 

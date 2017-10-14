@@ -14,9 +14,9 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> GetHyperlinkCellsFromShapes(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
 
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, UserDefinedCellCells>>();
@@ -28,8 +28,7 @@ namespace VisioScripting.Commands
                 return prop_dic;
             }
 
-            var application = cmdtarget.Application;
-            var page = application.ActivePage;
+            var page = cmdtarget.ActivePage;
             var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, cvt);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
@@ -42,10 +41,9 @@ namespace VisioScripting.Commands
             return prop_dic;
         }
 
-        public List<bool> Contains(VisioScripting.Models.TargetShapes targets, string name)
+        public List<bool> ShapesContainUserDefinedCellsWithName(VisioScripting.Models.TargetShapes targets, string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
 
             if (name == null)
             {
@@ -65,7 +63,7 @@ namespace VisioScripting.Commands
             return results;
         }
        
-        public void Delete(VisioScripting.Models.TargetShapes targets, string name)
+        public void DeleteUserDefinedCellsByName(VisioScripting.Models.TargetShapes targets, string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -96,7 +94,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Set(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.UserDefinedCell cell)
+        public void SetUserDefinedCell(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.UserDefinedCell cell)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 

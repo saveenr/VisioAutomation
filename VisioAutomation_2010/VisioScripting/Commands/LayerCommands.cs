@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public IVisio.Layer Get(string name)
+        public IVisio.Layer GetLayersOnActivePageByName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -43,7 +43,7 @@ namespace VisioScripting.Commands
             return layer;
         }
 
-        public List<IVisio.Layer> Get()
+        public List<IVisio.Layer> GetLayersOnActivePage()
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 

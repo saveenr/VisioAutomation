@@ -17,11 +17,11 @@ namespace VisioPowerShell.Commands
         {
             if (this.Documents == null)
             {
-                this.Client.Document.Close(this.Force);
+                this.Client.Document.CloseActiveDocument(this.Force);
             }
             else
             {
-                this.Client.Document.Close(this.Documents.ToList(), this.Force);
+                this.Client.Document.CloseDocuments(this.Documents.ToList(), this.Force);
             }
         }
     }

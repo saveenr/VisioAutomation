@@ -109,7 +109,7 @@ namespace VisioPowerShell.Commands
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
             var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
-            var shape_ids = this.Client.Master.Drop(this.Masters, points);
+            var shape_ids = this.Client.Master.DropMastersOnActivePage(this.Masters, points);
 
             var page = this.Client.Page.GetActivePage();
             var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);

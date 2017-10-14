@@ -12,7 +12,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Geometry.Size(10,5);
-            var doc = client.Document.New(page_size);
+            var doc = client.Document.NewDocument(page_size);
 
             var page1 = doc.Pages[1];
             var app = page1.Application;
@@ -46,7 +46,7 @@ namespace VisioAutomation_Tests.Scripting
             var x4 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(0, x4.Count);
 
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
     }
 }

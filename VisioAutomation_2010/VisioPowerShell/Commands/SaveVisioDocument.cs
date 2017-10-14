@@ -13,11 +13,11 @@ namespace VisioPowerShell.Commands
         {
             if (this.Filename!=null)
             {
-                this.Client.Document.SaveAs(this.Filename);
+                this.Client.Document.SaveActiveDocumentAs(this.Filename);
             }
             else
             {
-                this.Client.Document.Save();
+                this.Client.Document.SaveActiveDocument();
             }
         }
     }

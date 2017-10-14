@@ -35,7 +35,7 @@ namespace VisioScripting.Commands
             writer.Commit(page);
         }
 
-        public void SetName(VisioScripting.Models.TargetShapes targets, IList<string> names)
+        public void SetShapeName(VisioScripting.Models.TargetShapes targets, IList<string> names)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -79,13 +79,13 @@ namespace VisioScripting.Commands
             return shapesheet_surface;
         }
         
-        public VisioScripting.Models.ShapeSheetWriter GetWriter(IVisio.Page page)
+        public VisioScripting.Models.ShapeSheetWriter GetWriterForPage(IVisio.Page page)
         {
             var writer = new VisioScripting.Models.ShapeSheetWriter(this._client, page);
             return writer;
         }
 
-        public VisioScripting.Models.ShapeSheetReader GetReader(IVisio.Page page)
+        public VisioScripting.Models.ShapeSheetReader GetReaderForPage(IVisio.Page page)
         {
             var reader = new VisioScripting.Models.ShapeSheetReader(this._client, page);
             return reader;

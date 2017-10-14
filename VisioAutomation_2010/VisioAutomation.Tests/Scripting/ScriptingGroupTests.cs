@@ -9,7 +9,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Grouping()
         {
             var client = this.GetScriptingClient();
-            client.Document.New();
+            client.Document.NewDocument();
             client.Page.NewPage(new VisioAutomation.Geometry.Size(4, 4), false);
 
             var shape_rect = client.Draw.DrawRectangle(1, 1, 3, 3);
@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Scripting
             var s0 = client.Selection.GetShapesInSelection();
             Assert.AreEqual(4, s0.Count);
 
-            var g = client.Grouping.Group();
+            var g = client.Grouping.GroupSelectedShapes();
             client.Selection.SelectNone();
             client.Selection.SelectAllShapes();
 
@@ -30,11 +30,11 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioScripting.Models.TargetShapes();
 
-            client.Grouping.Ungroup(targets);
+            client.Grouping.UngroupSelectedShapes(targets);
             client.Selection.SelectAllShapes();
             var s2 = client.Selection.GetShapesInSelection();
             Assert.AreEqual(4, s2.Count);
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
     }
 }

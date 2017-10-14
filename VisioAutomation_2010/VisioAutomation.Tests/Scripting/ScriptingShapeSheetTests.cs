@@ -11,7 +11,7 @@ namespace VisioAutomation_Tests.Scripting
         public void QueryPage()
         {
             var client = this.GetScriptingClient();
-            var doc = client.Document.New();
+            var doc = client.Document.NewDocument();
             client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Draw.DrawRectangle(1, 1, 2, 2);
 
@@ -23,7 +23,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var page = client.Page.GetActivePage();
 
-            var reader = client.ShapeSheet.GetReader(page);
+            var reader = client.ShapeSheet.GetReaderForPage(page);
             foreach (var shapeid in shapeids)
             {
                 foreach (var src in srcs)

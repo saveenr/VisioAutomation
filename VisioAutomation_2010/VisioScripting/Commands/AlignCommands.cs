@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void AlignHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal align)
+        public void AlignSelectedShapesHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal align)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -47,7 +47,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void AlignVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical align)
+        public void AlignSelectedShapesVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical align)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 

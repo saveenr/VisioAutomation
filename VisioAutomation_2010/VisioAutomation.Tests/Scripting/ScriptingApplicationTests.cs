@@ -18,11 +18,11 @@ namespace VisioAutomation_Tests.Scripting
         {
             var desired_size = new Size(600, 800);
             var client = this.GetScriptingClient();
-            var old_rect = client.Window.GetRectangle();
+            var old_rect = client.Window.GetApplicationWindowRectangle();
             var new_rect = new System.Drawing.Rectangle(old_rect.X, old_rect.Y, desired_size.Width, desired_size.Height);
 
-            client.Window.SetRectangle(new_rect);
-            var actual_rect = client.Window.GetRectangle();
+            client.Window.SetApplicationWindowRectangle(new_rect);
+            var actual_rect = client.Window.GetApplicationWindowRectangle();
             Assert.AreEqual(desired_size, actual_rect.Size);
         }
 
@@ -30,7 +30,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Geometry.Size(10,5);
-            var doc = client.Document.New(page_size);
+            var doc = client.Document.NewDocument(page_size);
             var pagesize = client.Page.GetActivePageSize();
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
@@ -38,13 +38,13 @@ namespace VisioAutomation_Tests.Scripting
             client.Draw.DrawRectangle(1, 1, 2, 2);
             Assert.AreEqual(1, client.Selection.GetActiveSelection().Count);
 
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
 
         public void Scripting_Test_App_to_Front()
         {
             var client = this.GetScriptingClient();
-            client.Window.ToFront();
+            client.Window.MoveApplicationWindowToFront();
         }
 
         [TestMethod]
@@ -52,14 +52,14 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Geometry.Size(8.5,11);
-            var drawing = client.Document.New(page_size);
+            var drawing = client.Document.NewDocument(page_size);
             var page = client.Page.NewPage(page_size, false);
             Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1, page.Shapes.Count);
             client.Application.Undo();
             Assert.AreEqual(0, page.Shapes.Count);
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
 
         [TestMethod]
@@ -67,14 +67,14 @@ namespace VisioAutomation_Tests.Scripting
         {
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
-            var doc1 = client.Document.New(page_size);
-            var doc2 = client.Document.New(page_size);
-            var doc3 = client.Document.New(page_size);
+            var doc1 = client.Document.NewDocument(page_size);
+            var doc2 = client.Document.NewDocument(page_size);
+            var doc3 = client.Document.NewDocument(page_size);
 
-            client.Document.CloseAllWithoutSaving();
+            client.Document.CloseAllDocumentsWithoutSaving();
 
             Assert.IsFalse(client.Document.HasActiveDocument);
-            var application = client.Application.Get();
+            var application = client.Application.GetApplication();
             var documents = application.Documents;
             Assert.AreEqual(0, documents.Count);
         }
@@ -83,8 +83,8 @@ namespace VisioAutomation_Tests.Scripting
         public void XXX()
         {
             var client = this.GetScriptingClient();
-            client.Application.New();
-            client.Document.New();
+            client.Application.NewApplication();
+            client.Document.NewDocument();
         }
     }
 }

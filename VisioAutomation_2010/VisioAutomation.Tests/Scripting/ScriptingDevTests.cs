@@ -10,7 +10,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Developer.DrawScriptingDocumentation();
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
     }
 }

@@ -74,17 +74,17 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Activate(string name)
+        public void ActivateDocumentWithName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
             var documents = cmdtarget.Application.Documents;
             var doc = documents[name];
 
-            this.Activate(doc);
+            this.ActivateDocument(doc);
         }
 
-        public void Activate(IVisio.Document doc)
+        public void ActivateDocument(IVisio.Document doc)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
@@ -115,7 +115,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Close(bool force)
+        public void CloseActiveDocument(bool force)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -143,7 +143,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Close(List<IVisio.Document> docs, bool force)
+        public void CloseDocuments(List<IVisio.Document> docs, bool force)
         {
             foreach (var doc in docs)
             {
@@ -152,7 +152,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void CloseAllWithoutSaving()
+        public void CloseAllDocumentsWithoutSaving()
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
             var documents = cmdtarget.Application.Documents;
@@ -169,12 +169,12 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Document New()
+        public IVisio.Document NewDocument()
         {
-            return this.NewWithTemplate(null);
+            return this.NewDocumentFromTemplate(null);
         }
 
-        public IVisio.Document NewWithTemplate(string template)
+        public IVisio.Document NewDocumentFromTemplate(string template)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
 
@@ -198,28 +198,28 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Save()
+        public void SaveActiveDocument()
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             cmdtarget.ActiveDocument.Save();
         }
 
-        public void SaveAs(string filename)
+        public void SaveActiveDocumentAs(string filename)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             cmdtarget.ActiveDocument.SaveAs(filename);
         }
 
-        public IVisio.Document New(VisioAutomation.Geometry.Size size)
+        public IVisio.Document NewDocument(VisioAutomation.Geometry.Size size)
         {
-            return this.NewWithTemplate(size,null);
+            return this.NewDocumentFromTemplate(size,null);
         }
 
-        public IVisio.Document NewWithTemplate(VisioAutomation.Geometry.Size size, string template)
+        public IVisio.Document NewDocumentFromTemplate(VisioAutomation.Geometry.Size size, string template)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
-            var doc = this.NewWithTemplate(template);
+            var doc = this.NewDocumentFromTemplate(template);
             var pagecells = new VisioAutomation.Pages.PageFormatCells();
             pagecells.Width = size.Width;
             pagecells.Height = size.Height;
@@ -234,7 +234,7 @@ namespace VisioScripting.Commands
             return doc;
         }
 
-        public IVisio.Document OpenStencil(string name)
+        public IVisio.Document OpenStencilDocument(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
@@ -257,7 +257,7 @@ namespace VisioScripting.Commands
             return doc;
         }
 
-        public IVisio.Document Open(string filename)
+        public IVisio.Document OpenDocument(string filename)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
@@ -287,7 +287,7 @@ namespace VisioScripting.Commands
             return doc;
         }
 
-        public IVisio.Document Get(string name)
+        public IVisio.Document GetDocumentWithName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 

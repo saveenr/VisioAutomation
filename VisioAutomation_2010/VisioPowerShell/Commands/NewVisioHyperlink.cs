@@ -53,7 +53,7 @@ namespace VisioPowerShell.Commands
             hlink.Invisible = this.Invisible;
 
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            this.Client.Hyperlink.Add(targets, hlink);
+            this.Client.Hyperlink.AddHyperlink(targets, hlink);
         }
     }
 }

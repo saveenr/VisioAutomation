@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
+        public void DistributeShapesOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
+        public void DistributeShapesOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |  CommandTargetFlags.ActivePage);
 

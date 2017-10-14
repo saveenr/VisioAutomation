@@ -13,13 +13,13 @@ namespace VisioPowerShell.Commands
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(this.Name))
             {
                 // get all
-                var layers = this.Client.Layer.Get();
+                var layers = this.Client.Layer.GetLayersOnActivePage();
                 this.WriteObject(layers, true);
             }
             else
             {
                 // get all that match a specific name
-                var layer = this.Client.Layer.Get(this.Name);
+                var layer = this.Client.Layer.GetLayersOnActivePageByName(this.Name);
                 this.WriteObject(layer);
             }
         }

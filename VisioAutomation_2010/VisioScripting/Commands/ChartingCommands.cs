@@ -75,7 +75,7 @@ namespace VisioScripting.Commands
 
             string master = "Rectangle";
             string stencil = "basic_u.vss";
-            var stencildoc = this._client.Document.OpenStencil(stencil);
+            var stencildoc = this._client.Document.OpenStencilDocument(stencil);
             var stencildoc_masters = stencildoc.Masters;
             var masterobj = stencildoc_masters.ItemU[master];
 
@@ -214,7 +214,7 @@ namespace VisioScripting.Commands
 
             this._client.Output.WriteVerbose("Creating a New Document For the Directed Graphs");
             string template = null;
-            var doc = this._client.Document.NewWithTemplate(template);
+            var doc = this._client.Document.NewDocumentFromTemplate(template);
 
             int num_pages_created = 0;
             var doc_pages = doc.Pages;

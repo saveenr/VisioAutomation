@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> GetFormulas(VisioScripting.Models.TargetShapes targets)
+        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> GetConnectionPointCells(VisioScripting.Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -35,7 +35,7 @@ namespace VisioScripting.Commands
             return dic;
         }
 
-        public List<int> Add(VisioScripting.Models.TargetShapes targets, 
+        public List<int> AddConnectionPoint(VisioScripting.Models.TargetShapes targets, 
             string fx,
             string fy,
             VisioScripting.Models.ConnectionPointType type)
@@ -74,7 +74,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public List<int> Add(
+        public List<int> AddConnectionPoint(
             string fx,
             string fy,
             VisioScripting.Models.ConnectionPointType type)
@@ -82,10 +82,10 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             var targets = new VisioScripting.Models.TargetShapes();
-            return this.Add(targets, fx, fy, type);
+            return this.AddConnectionPoint(targets, fx, fy, type);
         }
 
-        public void Delete(VisioScripting.Models.TargetShapes targets, int index)
+        public void DeleteConnectionPointAtIndex(VisioScripting.Models.TargetShapes targets, int index)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 

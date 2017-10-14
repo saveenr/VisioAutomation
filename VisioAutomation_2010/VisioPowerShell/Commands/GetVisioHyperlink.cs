@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var dic = this.Client.Hyperlink.Get(targets, CellValueType.Formula);
+            var dic = this.Client.Hyperlink.GetHyperlinkCells(targets, CellValueType.Formula);
 
             if (this.GetCells)
             {

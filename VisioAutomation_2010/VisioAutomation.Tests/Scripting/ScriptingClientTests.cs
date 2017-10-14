@@ -18,25 +18,25 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var doc = client.Developer.DrawScriptingDocumentation();
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
 
         public void DrawVANamespaceDiagram()
         {
             var client = this.GetScriptingClient();
             var doc = client.Developer.DrawNamespaces();
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
 
         [TestMethod]
         public void Scripting_CanCloseUnsavedDrawings()
         {
             var client = this.GetScriptingClient();
-            client.Document.CloseAllWithoutSaving();
+            client.Document.CloseAllDocumentsWithoutSaving();
 
             Assert.IsFalse(client.Document.HasActiveDocument);
 
-            var doc1 = client.Document.New();
+            var doc1 = client.Document.NewDocument();
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsFalse(client.Selection.SelectionContainsShapes());
 
@@ -57,7 +57,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsFalse(client.Selection.SelectionContainsShapes());
 
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands
                 userprop.Cells.Prompt = this.Prompt;
             }
 
-            this.Client.UserDefinedCell.Set(targets, userprop);
+            this.Client.UserDefinedCell.SetUserDefinedCell(targets, userprop);
         }
     }
 }

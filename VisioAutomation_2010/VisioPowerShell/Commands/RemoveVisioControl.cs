@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
 
-            this.Client.Control.Delete(targets,this.Index);
+            this.Client.Control.DeleteControlWithIndex(targets,this.Index);
         }
     }
 }

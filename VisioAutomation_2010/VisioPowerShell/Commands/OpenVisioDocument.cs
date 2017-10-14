@@ -14,17 +14,17 @@ namespace VisioPowerShell.Commands
             if (this.Client.Application.HasApplication == false)
             {
                 // no app - let's create one
-                this.Client.Application.New();
+                this.Client.Application.NewApplication();
             }
 
             if (this.filename_is_stencil(this.Filename))
             {
-                var doc = this.Client.Document.OpenStencil(this.Filename);
+                var doc = this.Client.Document.OpenStencilDocument(this.Filename);
                 this.WriteObject(doc);                
             }
             else
             {
-                var doc = this.Client.Document.Open(this.Filename);
+                var doc = this.Client.Document.OpenDocument(this.Filename);
                 this.WriteObject(doc);                
             }
         }

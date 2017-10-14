@@ -10,16 +10,16 @@ namespace VisioPowerShell.Commands
         {
             if (!this.Client.Application.HasApplication)
             {
-                this.Client.Application.New();
+                this.Client.Application.NewApplication();
             }
             else
             {
-                if (!this.Client.Application.Validate())
+                if (!this.Client.Application.ValidateApplication())
                 {
-                    this.Client.Application.New();
+                    this.Client.Application.NewApplication();
                 }
             }
-            var doc = this.Client.Document.New();
+            var doc = this.Client.Document.NewDocument();
             this.WriteObject(doc);
         }
     }

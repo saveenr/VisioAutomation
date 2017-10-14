@@ -12,7 +12,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_ShapeSheet_SetNoShapes()
         {
             var client = this.GetScriptingClient();
-            client.Document.New();
+            client.Document.NewDocument();
             client.Page.NewPage(new VA.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
@@ -24,7 +24,7 @@ namespace VisioAutomation_Tests.Scripting
             var shapes = new VisioScripting.Models.TargetShapes(s1,s2,s3);
             var shape_ids = shapes.ToShapeIDs();
             var page = client.Page.GetActivePage();
-            var writer = client.ShapeSheet.GetWriter(page);
+            var writer = client.ShapeSheet.GetWriterForPage(page);
 
             foreach (var shape_id in shape_ids.ShapeIDs)
             {
@@ -33,14 +33,14 @@ namespace VisioAutomation_Tests.Scripting
 
             writer.Commit();
             
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
 
         [TestMethod]
         public void Scripting_CustomProps_Scenarios()
         {
             var client = this.GetScriptingClient();
-            client.Document.New();
+            client.Document.NewDocument();
             client.Page.NewPage(new VA.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
@@ -53,7 +53,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s3);
 
             var targets = new VisioScripting.Models.TargetShapes();
-            var prop_dic0 = client.CustomProperty.Get(targets);
+            var prop_dic0 = client.CustomProperty.GetCustomProperties(targets);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);
             Assert.AreEqual(0, prop_dic0[s2].Count);
@@ -61,9 +61,9 @@ namespace VisioAutomation_Tests.Scripting
 
             var cp = new CustomPropertyCells();
             cp.Value = "\"BAR\"";
-            client.CustomProperty.Set(targets, "FOO",cp);
+            client.CustomProperty.SetCustomPropertyWithName(targets, "FOO",cp);
 
-            var prop_dic1 = client.CustomProperty.Get(targets);
+            var prop_dic1 = client.CustomProperty.GetCustomProperties(targets);
             Assert.AreEqual(3, prop_dic1.Count);
             Assert.AreEqual(1, prop_dic1[s1].Count);
             Assert.AreEqual(1, prop_dic1[s2].Count);
@@ -77,21 +77,21 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("\"BAR\"", cp3.Value.Value);
             
 
-            var hasprops0 = client.CustomProperty.Contains(targets,"FOO");
+            var hasprops0 = client.CustomProperty.ShapesContainCustomPropertyWithName(targets,"FOO");
             Assert.IsTrue(hasprops0.All(v => v == true));
 
-            client.CustomProperty.Delete(targets,"FOO");
+            client.CustomProperty.DeleteCustomPropertyWithName(targets,"FOO");
 
-            var prop_dic2 = client.CustomProperty.Get(targets);
+            var prop_dic2 = client.CustomProperty.GetCustomProperties(targets);
             Assert.AreEqual(3, prop_dic2.Count);
             Assert.AreEqual(0, prop_dic2[s1].Count);
             Assert.AreEqual(0, prop_dic2[s2].Count);
             Assert.AreEqual(0, prop_dic2[s3].Count);
 
-            var hasprops1 = client.CustomProperty.Contains(targets,"FOO");
+            var hasprops1 = client.CustomProperty.ShapesContainCustomPropertyWithName(targets,"FOO");
             Assert.IsTrue(hasprops1.All(v => v == false));
 
-            client.Document.Close(true);
+            client.Document.CloseActiveDocument(true);
         }
     }
 }

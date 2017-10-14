@@ -21,7 +21,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.Width > 0 || this.Height > 0)
             {
-                var old_rect = this.Client.Window.GetRectangle();
+                var old_rect = this.Client.Window.GetApplicationWindowRectangle();
                 var new_rect = old_rect;
 
                 if (this.Width.HasValue)
@@ -44,7 +44,7 @@ namespace VisioPowerShell.Commands
                     new_rect.Y = this.Y.Value;
                 }
 
-                this.Client.Window.SetRectangle(new_rect);
+                this.Client.Window.SetApplicationWindowRectangle(new_rect);
             }
         }
     }

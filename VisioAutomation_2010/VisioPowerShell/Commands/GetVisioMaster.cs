@@ -25,7 +25,7 @@ namespace VisioPowerShell.Commands
                     ((SMA.Cmdlet) this).WriteVerbose("Get master from specified document");
                     foreach (var name in this.Name)
                     {
-                        var masters = this.Client.Master.GetMastersByName(name, this.Document);
+                        var masters = this.Client.Master.GetMastersByNameFromDocument(name, this.Document);
                         this.WriteObject(masters, true);
                     }
                 }
@@ -35,7 +35,7 @@ namespace VisioPowerShell.Commands
 
                     foreach (var name in this.Name)
                     {
-                        var masters = this.Client.Master.GetMastersByName(name);
+                        var masters = this.Client.Master.GetMastersByNameFromDocument(name);
                         this.WriteObject(masters, true);
                     }
                 }
