@@ -43,18 +43,18 @@ namespace VisioAutomation_Tests.Core.Page
 
             var client = this.GetScriptingClient();
 
-            var orientation_1 = client.Page.GetOrientation();
+            var orientation_1 = client.Page.GetActivePageOrientation();
             Assert.AreEqual(VisioScripting.Models.PageOrientation.Portrait, orientation_1);
 
-            var size1 = client.Page.GetSize();
+            var size1 = client.Page.GetActivePageSize();
             Assert.AreEqual(size, size1);
 
-            client.Page.SetOrientation(VisioScripting.Models.PageOrientation.Landscape);
+            client.Page.SetActivePageOrientation(VisioScripting.Models.PageOrientation.Landscape);
 
-            var orientation_2 = client.Page.GetOrientation();
+            var orientation_2 = client.Page.GetActivePageOrientation();
             Assert.AreEqual(VisioScripting.Models.PageOrientation.Landscape, orientation_2);
 
-            var actual_final_size = client.Page.GetSize();
+            var actual_final_size = client.Page.GetActivePageSize();
             var expected_final_size = new VA.Geometry.Size(3, 4);
             Assert.AreEqual(expected_final_size, actual_final_size);
 

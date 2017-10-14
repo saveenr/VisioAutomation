@@ -13,31 +13,26 @@ namespace VisioScripting.Commands
 
         }
 
-        public void Set(IVisio.Page page)
+        public void SetActivePage(IVisio.Page page)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
             var app = cmdtarget.Application;
             this._client.Output.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
             var window = app.ActiveWindow;
             window.Page = page;
         }
 
-        public void Set(string name)
+        public void SetActivePageByPageName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
-            var application = cmdtarget.Application;
-            var doc = application.ActiveDocument;
+            var doc = cmdtarget.ActiveDocument;
             this._client.Output.WriteVerbose("Retrieving Page \"{0}\"", name);
             var pages = doc.Pages;
             var page = pages[name];
-            this.Set(page);
+            this.SetActivePage(page);
         }
 
-        public void Set(int pagenumber)
+        public void SetActivePageByPageNumber(int pagenumber)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -47,22 +42,20 @@ namespace VisioScripting.Commands
             this._client.Output.WriteVerbose("Retrieving Page Number \"{0}\"", pagenumber);
             var pages = doc.Pages;
             var page = pages[pagenumber];
-            this.Set(page);
+            this.SetActivePage(page);
         }
         
-        public IVisio.Page Get()
+        public IVisio.Page GetActivePage()
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
 
             var application = cmdtarget.Application;
             return application.ActivePage;
         }
 
-        public void Delete(IList<IVisio.Page> pages, bool renumber)
+        public void DeletePages(IList<IVisio.Page> pages, bool renumber)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
 
             if (pages == null)
             {
@@ -75,10 +68,9 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Delete(IList<string> names, bool renumber)
+        public void DeletePagesByName(IList<string> names, bool renumber)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
 
             if (names == null)
             {
@@ -97,12 +89,11 @@ namespace VisioScripting.Commands
             }
         }
 
-        public VisioAutomation.Geometry.Size GetSize()
+        public VisioAutomation.Geometry.Size GetActivePageSize()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            var application = cmdtarget.Application;
-            var active_page = application.ActivePage;
+            var active_page = cmdtarget.ActivePage;
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
@@ -115,10 +106,8 @@ namespace VisioScripting.Commands
             return s;
         }
 
-        public void SetName(string name)
+        public void SetActivePageName(string name)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
@@ -126,29 +115,28 @@ namespace VisioScripting.Commands
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name cannot be empty",nameof(name));
+                throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            var page = this.Get();
-            page.NameU = name;
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            cmdtarget.ActivePage.NameU = name;
         }
 
-        public IVisio.Page New(VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
+        public IVisio.Page NewPage(VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-
-            var application = cmdtarget.Application;
-            var active_document = application.ActiveDocument;
+            var active_document = cmdtarget.ActiveDocument;
             var pages = active_document.Pages;
-            IVisio.Page page = pages.Add();
+            IVisio.Page page;
 
             using (var undoscope = this._client.Application.NewUndoScope("New Page"))
             {
+                page = pages.Add();
+
                 if (size.HasValue)
                 {
-                    this._client.Output.WriteVerbose("Setting page size to {0}", size.Value);
-                    this.SetSize(size.Value);
+                    this.SetActivePageSize(size.Value);
                 }
 
                 if (isbackgroundpage)
@@ -160,7 +148,7 @@ namespace VisioScripting.Commands
             return page;
         }
 
-        public void SetBackgroundPage(string background_page_name)
+        public void SetActivePageBackground(string background_page_name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -204,14 +192,14 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page Duplicate()
+        public IVisio.Page DuplicateActivePage()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             using (var undoscope = this._client.Application.NewUndoScope("Duplicate Page"))
             {
-                var doc = cmdtarget.Application.ActiveDocument;
-                var pages = doc.Pages;
+                var pages = cmdtarget.ActiveDocument.Pages;
+
                 var src_page = cmdtarget.Application.ActivePage;
                 var new_page = pages.Add();
 
@@ -223,14 +211,14 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page Duplicate(IVisio.Document dest_doc)
+        public IVisio.Page DuplicateActivePageToDocument(IVisio.Document dest_doc)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-
-            if (dest_doc==null)
+            if (dest_doc == null)
             {
                 throw new System.ArgumentNullException(nameof(dest_doc));
             }
+
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             if (cmdtarget.ActiveDocument == dest_doc)
             {
@@ -249,15 +237,15 @@ namespace VisioScripting.Commands
             return dest_page;
         }
 
-        public VisioScripting.Models.PageOrientation GetOrientation()
+        public VisioScripting.Models.PageOrientation GetActivePageOrientation()
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
             var active_page = cmdtarget.ActivePage;
-            return PageCommands.GetOrientation(active_page);
+            return PageCommands._GetPageOrientation(active_page);
         }
 
-        private static VisioScripting.Models.PageOrientation GetOrientation(IVisio.Page page)
+        private static VisioScripting.Models.PageOrientation _GetPageOrientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -271,7 +259,7 @@ namespace VisioScripting.Commands
             return (VisioScripting.Models.PageOrientation)value;
         }
 
-        public void SetOrientation(VisioScripting.Models.PageOrientation orientation)
+        public void SetActivePageOrientation(VisioScripting.Models.PageOrientation orientation)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -280,7 +268,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
 
-            var old_orientation = PageCommands.GetOrientation(cmdtarget.Application.ActivePage);
+            var old_orientation = PageCommands._GetPageOrientation(cmdtarget.Application.ActivePage);
 
             if (old_orientation == orientation)
             {
@@ -288,7 +276,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var old_size = this.GetSize();
+            var old_size = this.GetActivePageSize();
 
             double new_height = old_size.Width;
             double new_width = old_size.Height;
@@ -304,10 +292,9 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void ResizeToFitContents(VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
+        public void ResizeActivePageToFitContents(VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
 
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope("Resize Page to Fit Contents"))
@@ -321,29 +308,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void ResetOrigin(IVisio.Page page)
-        {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-            if (page == null)
-            {
-                page = cmdtarget.Application.ActivePage;
-            }
-
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.XGridOrigin, "0.0");
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.YGridOrigin, "0.0");
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.XRulerOrigin, "0.0");
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.YRulerOrigin, "0.0");
-
-            using (var undoscope = this._client.Application.NewUndoScope("Reset Page Origin"))
-            {
-                writer.Commit(page.PageSheet);
-            }
-        }
-
-        public void SetSize(VisioAutomation.Geometry.Size new_size)
+        public void SetActivePageSize(VisioAutomation.Geometry.Size new_size)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -359,7 +324,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetSize(double? width, double? height)
+        public void SetActivePageSize(double? width, double? height)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -369,24 +334,14 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var old_size = this.GetSize();
+            var old_size = this.GetActivePageSize();
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VisioAutomation.Geometry.Size(w, h);
-            this.SetSize(new_size);
+            this.SetActivePageSize(new_size);
         }
 
-        public void SetHeight(double height)
-        {
-            this.SetSize(null, height);
-        }
-
-        public void SetWidth(double width)
-        {
-            this.SetSize(width, null);
-        }
-
-        public void GoTo(VisioScripting.Models.PageDirection flags)
+        public void SetActivePageByDirection(VisioScripting.Models.PageDirection flags)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -465,7 +420,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<IVisio.Shape> GetShapesByID(int[] shapeids)
+        public List<IVisio.Shape> GetShapesOnActivePageByID(int[] shapeids)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -479,12 +434,12 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Shape> GetShapesByName(string[] shapenames)
+        public List<IVisio.Shape> GetShapesOnActivePageByName(string[] shapenames)
         {
-            return this.GetShapesByName(shapenames, false);
+            return this.GetShapesOnActivePageByName(shapenames, false);
         }
 
-        public List<IVisio.Shape> GetShapesByName(string[] shapenames, bool ignore_bad_names)
+        public List<IVisio.Shape> GetShapesOnActivePageByName(string[] shapenames, bool ignore_bad_names)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             var shapes = cmdtarget.ActivePage.Shapes;
@@ -503,7 +458,7 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> GetPagesByName(string name, Models.PageType pagetype)
+        public List<IVisio.Page> GetPagesInActiveDocumentByName(string name, Models.PageType pagetype)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -552,19 +507,10 @@ namespace VisioScripting.Commands
             throw new System.ArgumentOutOfRangeException(nameof(pagetype),msg);
         }
 
-        public List<IVisio.Shape> GetShapes()
+        public List<IVisio.Shape> GetShapesOnActivePage()
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-
             var shapes = cmdtarget.ActivePage.Shapes.ToList();
-            return shapes;
-        }
-
-        public List<short> GetShapeIDs()
-        {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-
-            var shapes = cmdtarget.ActivePage.Shapes.ToEnumerable().Select(s=>s.ID16).ToList();
             return shapes;
         }
     }

@@ -13,7 +13,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(new VA.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
@@ -23,7 +23,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var shapes = new VisioScripting.Models.TargetShapes(s1,s2,s3);
             var shape_ids = shapes.ToShapeIDs();
-            var page = client.Page.Get();
+            var page = client.Page.GetActivePage();
             var writer = client.ShapeSheet.GetWriter(page);
 
             foreach (var shape_id in shape_ids.ShapeIDs)
@@ -41,7 +41,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(new VA.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);

@@ -14,7 +14,7 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.New();
-            client.Page.New(new Size(4, 5), false);
+            client.Page.NewPage(new Size(4, 5), false);
         }
 
 
@@ -25,34 +25,34 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var doc = client.Document.New(page_size);
 
-            var page1 = client.Page.Get();
-            client.Page.New(page_size, false);
-            var page2 = client.Page.Get();
-            client.Page.New(page_size, false);
-            var page3 = client.Page.Get();
+            var page1 = client.Page.GetActivePage();
+            client.Page.NewPage(page_size, false);
+            var page2 = client.Page.GetActivePage();
+            client.Page.NewPage(page_size, false);
+            var page3 = client.Page.GetActivePage();
 
             Assert.AreEqual(3,doc.Pages.Count);
-            Assert.AreEqual(page3, client.Page.Get());
-            client.Page.GoTo(PageDirection.First);
-            Assert.AreEqual(page1, client.Page.Get());
-            client.Page.GoTo(PageDirection.Last);
-            Assert.AreEqual(page3, client.Page.Get());
-            client.Page.GoTo(PageDirection.Previous);
-            Assert.AreEqual(page2, client.Page.Get());
-            client.Page.GoTo(PageDirection.Next);
-            Assert.AreEqual(page3, client.Page.Get());
+            Assert.AreEqual(page3, client.Page.GetActivePage());
+            client.Page.SetActivePageByDirection(PageDirection.First);
+            Assert.AreEqual(page1, client.Page.GetActivePage());
+            client.Page.SetActivePageByDirection(PageDirection.Last);
+            Assert.AreEqual(page3, client.Page.GetActivePage());
+            client.Page.SetActivePageByDirection(PageDirection.Previous);
+            Assert.AreEqual(page2, client.Page.GetActivePage());
+            client.Page.SetActivePageByDirection(PageDirection.Next);
+            Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to last and try to go to next page
-            client.Page.GoTo(PageDirection.Last);
-            Assert.AreEqual(page3, client.Page.Get());
-            client.Page.GoTo(PageDirection.Next);
-            Assert.AreEqual(page3, client.Page.Get());
+            client.Page.SetActivePageByDirection(PageDirection.Last);
+            Assert.AreEqual(page3, client.Page.GetActivePage());
+            client.Page.SetActivePageByDirection(PageDirection.Next);
+            Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to first and try to go to previous page
-            client.Page.GoTo(PageDirection.First);
-            Assert.AreEqual(page1, client.Page.Get());
-            client.Page.GoTo(PageDirection.Previous);
-            Assert.AreEqual(page1, client.Page.Get());
+            client.Page.SetActivePageByDirection(PageDirection.First);
+            Assert.AreEqual(page1, client.Page.GetActivePage());
+            client.Page.SetActivePageByDirection(PageDirection.Previous);
+            Assert.AreEqual(page1, client.Page.GetActivePage());
 
             doc.Close(true);
         }
@@ -64,7 +64,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var doc = client.Document.New(page_size);
             client.Draw.Rectangle(0, 0, 1, 1);
-            client.Page.Duplicate();
+            client.Page.DuplicateActivePage();
             doc.Close(true);
         }
 
@@ -77,14 +77,14 @@ namespace VisioAutomation_Tests.Scripting
             var docto_1 = client.Document.New();
             var docfrom_1 = client.Document.New();
             client.Draw.Rectangle(0, 0, 1, 1);
-            client.Page.Duplicate(docto_1);
+            client.Page.DuplicateActivePageToDocument(docto_1);
 
             // Second case: the source document has to be activated beforehand
             var docfrom_2 = client.Document.New();
             var docto_2 = client.Document.New();
             client.Document.Activate(docfrom_2);
             client.Draw.Rectangle(0, 0, 1, 1);
-            client.Page.Duplicate(docto_2);
+            client.Page.DuplicateActivePageToDocument(docto_2);
 
             docfrom_1.Close(true);
             docfrom_2.Close(true);

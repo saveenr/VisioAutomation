@@ -18,12 +18,12 @@ namespace VisioPowerShell.Commands
         {
             if (this.ActivePage)
             {
-                var page = this.Client.Page.Get();
+                var page = this.Client.Page.GetActivePage();
                 this.WriteObject(page);
                 return;
             }
 
-            var pages = this.Client.Page.GetPagesByName(this.Name, this.Type);
+            var pages = this.Client.Page.GetPagesInActiveDocumentByName(this.Name, this.Type);
             this.WriteObject(pages, true);
         }
     }

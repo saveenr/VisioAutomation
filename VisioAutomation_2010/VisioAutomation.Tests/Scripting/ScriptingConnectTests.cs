@@ -13,7 +13,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Document.New();
             var pagesize = new VA.Geometry.Size(4, 4);
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
@@ -34,7 +34,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.Select(directed_connectors);
 
 
-            var page = client.Page.Get();
+            var page = client.Page.GetActivePage();
             var writer = client.ShapeSheet.GetWriter(page);
 
             var shapes = client.Selection.GetShapes();
@@ -70,7 +70,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Document.New();
             var pagesize = new VA.Geometry.Size(4, 4);
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
 

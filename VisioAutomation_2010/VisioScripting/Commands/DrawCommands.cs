@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
             var page = pages.Add();
             page.Background = 0; // ensure this is a foreground page
 
-            var pagesize = this._client.Page.GetSize();
+            var pagesize = this._client.Page.GetActivePageSize();
 
             var layout = new GRID.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VisioAutomation.Geometry.Size(1, 1), masterobj);
             layout.Origin = new VisioAutomation.Geometry.Point(0, pagesize.Height);
@@ -323,7 +323,7 @@ namespace VisioScripting.Commands
 
                 this._client.Output.WriteVerbose("Rendering page: {0}", i + 1);
                 dg.Render(page, options);
-                this._client.Page.ResizeToFitContents(new VisioAutomation.Geometry.Size(1.0, 1.0), true);
+                this._client.Page.ResizeActivePageToFitContents(new VisioAutomation.Geometry.Size(1.0, 1.0), true);
                 this._client.View.Zoom(VisioScripting.Models.Zoom.ToPage);
                 this._client.Output.WriteVerbose("Finished rendering page");
 

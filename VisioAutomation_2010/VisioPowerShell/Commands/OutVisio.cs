@@ -82,7 +82,7 @@ namespace VisioPowerShell.Commands
                 var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
                 this.build_from_xml_doc(this.XmlDocument, tree_drawing);
 
-                tree_drawing.Render(this.Client.Page.Get());
+                tree_drawing.Render(this.Client.Page.GetActivePage());
             }
             else
             {

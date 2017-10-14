@@ -31,7 +31,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Geometry.Size(10,5);
             var doc = client.Document.New(page_size);
-            var pagesize = client.Page.GetSize();
+            var pagesize = client.Page.GetActivePageSize();
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
             Assert.AreEqual(0, client.Selection.Get().Count);
@@ -53,7 +53,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Geometry.Size(8.5,11);
             var drawing = client.Document.New(page_size);
-            var page = client.Page.New(page_size, false);
+            var page = client.Page.NewPage(page_size, false);
             Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1, page.Shapes.Count);

@@ -22,19 +22,19 @@ namespace VisioPowerShell.Commands
         {
             if (this.Name != null)
             {
-                this.Client.Page.Set(this.Name);
+                this.Client.Page.SetActivePageByPageName(this.Name);
             }
             else if (this.Page != null)
             {
-                this.Client.Page.Set(this.Page);
+                this.Client.Page.SetActivePage(this.Page);
             }
             else if (this.PageNumber > 0)
             {
-                this.Client.Page.Set(this.PageNumber);
+                this.Client.Page.SetActivePageByPageNumber(this.PageNumber);
             }
             else
             {
-                this.Client.Page.GoTo(this.Direction);                
+                this.Client.Page.SetActivePageByDirection(this.Direction);                
             }
         }
     }

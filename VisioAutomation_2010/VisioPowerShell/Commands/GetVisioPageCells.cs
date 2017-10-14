@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var target_pages = this.Pages ?? new[] { this.Client.Page.Get() };
+            var target_pages = this.Pages ?? new[] { this.Client.Page.GetActivePage() };
 
             if (target_pages.Length < 1)
             {

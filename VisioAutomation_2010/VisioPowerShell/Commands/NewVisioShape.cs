@@ -111,7 +111,7 @@ namespace VisioPowerShell.Commands
             var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
             var shape_ids = this.Client.Master.Drop(this.Masters, points);
 
-            var page = this.Client.Page.Get();
+            var page = this.Client.Page.GetActivePage();
             var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
 
             // If Names is not empty... assign it to the shape

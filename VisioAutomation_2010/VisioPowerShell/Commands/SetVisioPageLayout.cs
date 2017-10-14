@@ -15,12 +15,12 @@ namespace VisioPowerShell.Commands
         {
             if (this.Orientation.HasValue)
             {
-                this.Client.Page.SetOrientation(this.Orientation.Value);
+                this.Client.Page.SetActivePageOrientation(this.Orientation.Value);
             }
 
             if (this.BackgroundPage != null)
             {
-                this.Client.Page.SetBackgroundPage(this.BackgroundPage);
+                this.Client.Page.SetActivePageBackground(this.BackgroundPage);
             }
         }
     }

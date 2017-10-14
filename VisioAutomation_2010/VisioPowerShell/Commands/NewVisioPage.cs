@@ -21,7 +21,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             this.Client.Output.WriteVerbose("Creating a new page");
-            var page = this.Client.Page.New(null, false);
+            var page = this.Client.Page.NewPage(null, false);
             
             if (this.Name != null)
             {
@@ -90,7 +90,7 @@ namespace VisioPowerShell.Commands
 
             if (w.HasValue || h.HasValue)
             {
-                client.Page.SetSize(w, h);
+                client.Page.SetActivePageSize(w, h);
             }
         }
     }

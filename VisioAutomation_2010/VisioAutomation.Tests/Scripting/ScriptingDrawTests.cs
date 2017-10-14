@@ -58,7 +58,7 @@ namespace VisioAutomation_Tests.Scripting
             // Prepare the Page
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
@@ -84,14 +84,14 @@ namespace VisioAutomation_Tests.Scripting
             // Create the Page
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             // Find the stencil and master
             var stencildoc = client.Document.OpenStencil("basic_u.vss");
             var master = client.Master.Get("Rectangle", stencildoc);
 
             // Draw the grid
-            var page = client.Page.Get();
+            var page = client.Page.GetActivePage();
             var grid = new GRID.GridLayout(cols, rows, cellsize, master);
             grid.Origin = origin;
             grid.Render(page);
@@ -112,7 +112,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Document.New();
             var pagesize = new VA.Geometry.Size(4, 4);
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             var shape_rect = client.Draw.Rectangle(1, 1, 3, 3);
             var shape_line = client.Draw.Line(0.5, 0.5, 3.5, 3.5);
@@ -137,7 +137,7 @@ namespace VisioAutomation_Tests.Scripting
             // Create the Page
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
             
             // Draw the Shapes
             var shape_bezier = client.Draw.Bezier(points);
@@ -159,7 +159,7 @@ namespace VisioAutomation_Tests.Scripting
             // Create the page
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             // Draw the Shape
             var shape = client.Draw.PieSlice(center, radius, start_angle, end_angle);
@@ -184,7 +184,7 @@ namespace VisioAutomation_Tests.Scripting
             // Create the Page
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             // Draw the chart
 
@@ -224,13 +224,13 @@ namespace VisioAutomation_Tests.Scripting
             // Create the page
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             // Draw the Charts
             client.Draw.BarChart(chart1);
             client.Draw.BarChart(chart2);
             client.Draw.BarChart(chart3);
-            client.Page.ResizeToFitContents(bordersize,true);
+            client.Page.ResizeActivePageToFitContents(bordersize,true);
 
             // Cleanup
             client.Document.Close(true);
@@ -266,13 +266,13 @@ namespace VisioAutomation_Tests.Scripting
             // Setup the Page
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             // Draw the Charts
             client.Draw.AreaChart(chart1);
             client.Draw.AreaChart(chart2);
             client.Draw.AreaChart(chart3);
-            client.Page.Get().ResizeToFitContents(padding);
+            client.Page.GetActivePage().ResizeToFitContents(padding);
 
             // Cleanup
             client.Document.Close(true);
@@ -393,7 +393,7 @@ namespace VisioAutomation_Tests.Scripting
             
             // Create the page
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencil("Basic_U.VSS");
@@ -420,7 +420,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Create the Page
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencil("Basic_U.VSS");
@@ -456,7 +456,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Create the page
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             var application = client.Application.Get();
             var active_page = application.ActivePage;
@@ -509,7 +509,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Create the page
             client.Document.New();
-            client.Page.New(pagesize, false);
+            client.Page.NewPage(pagesize, false);
 
             var application = client.Application.Get();
             var active_page = application.ActivePage;

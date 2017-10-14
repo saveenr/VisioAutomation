@@ -19,14 +19,14 @@ namespace VisioPowerShell.Commands
                 this.WriteVerbose("No Page objects ");
                 this.WriteVerbose("Removing the Active Page");
                 var page = this.Client.Application.Get().ActivePage;
-                this.Client.Page.Delete(new[] { page }, this.Renumber);
+                this.Client.Page.DeletePages(new[] { page }, this.Renumber);
                 return;
             }
 
             if (this.Pages != null)
             {
                 this.WriteVerbose("Removing the Page Objects");
-                this.Client.Page.Delete(this.Pages, this.Renumber);                
+                this.Client.Page.DeletePages(this.Pages, this.Renumber);                
             }
         }
     }

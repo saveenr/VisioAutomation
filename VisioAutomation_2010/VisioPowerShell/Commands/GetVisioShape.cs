@@ -59,7 +59,7 @@ namespace VisioPowerShell.Commands
                 else
                 {
                     var strings = this.Name.Where(i => i is string).Cast<string>().ToArray();
-                    var shapes = this.Client.Page.GetShapesByName(strings);
+                    var shapes = this.Client.Page.GetShapesOnActivePageByName(strings);
                     this.WriteObject(shapes, true);
                 }
 
@@ -69,7 +69,7 @@ namespace VisioPowerShell.Commands
             // Handle the case where ids where passed
             if (this.Id != null)
             {
-                var shapes = this.Client.Page.GetShapesByID(this.Id);
+                var shapes = this.Client.Page.GetShapesOnActivePageByID(this.Id);
                 this.WriteObject(shapes, true);
 
                 return;

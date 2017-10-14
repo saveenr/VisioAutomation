@@ -12,7 +12,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VisioAutomation.Geometry.Size(4, 4), false);
+            client.Page.NewPage(new VisioAutomation.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.5, 1.5);
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
