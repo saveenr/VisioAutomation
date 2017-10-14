@@ -38,24 +38,24 @@ namespace VisioAutomation_Tests.Scripting
 
             var doc1 = client.Document.New();
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsFalse(client.Selection.HasShapes());
+            Assert.IsFalse(client.Selection.SelectionContainsShapes());
 
             client.Draw.Rectangle(0, 0, 1, 1);
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsTrue(client.Selection.HasShapes());
-            Assert.IsTrue(client.Selection.HasShapes(1));
-            Assert.IsFalse(client.Selection.HasShapes(2));
+            Assert.IsTrue(client.Selection.SelectionContainsShapes());
+            Assert.IsTrue(client.Selection.SelectionContainsShapes(1));
+            Assert.IsFalse(client.Selection.SelectionContainsShapes(2));
 
             client.Draw.Rectangle(2, 2, 3, 3);
-            client.Selection.SelectAll();
+            client.Selection.SelectAllShapes();
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsTrue(client.Selection.HasShapes());
-            Assert.IsTrue(client.Selection.HasShapes(1));
-            Assert.IsTrue(client.Selection.HasShapes(2));
+            Assert.IsTrue(client.Selection.SelectionContainsShapes());
+            Assert.IsTrue(client.Selection.SelectionContainsShapes(1));
+            Assert.IsTrue(client.Selection.SelectionContainsShapes(2));
 
             client.Selection.SelectNone();
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsFalse(client.Selection.HasShapes());
+            Assert.IsFalse(client.Selection.SelectionContainsShapes());
 
             client.Document.Close(true);
         }

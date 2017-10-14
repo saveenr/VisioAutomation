@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.Shapes == null)
             {
-                this.Client.Selection.Delete();                
+                this.Client.Selection.DeleteShapesInSelection();                
             }
             else
             {

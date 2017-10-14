@@ -28,7 +28,7 @@ namespace VisioPowerShell.Commands
                 if (this.Recursive)
                 {
                     this.WriteVerbose("Returning selected shapes (nested)");
-                    var shapes = this.Client.Selection.GetShapesRecursive();
+                    var shapes = this.Client.Selection.GetShapesInSelectionRecursive();
                     this.WriteObject(shapes, true);
                 }
                 if (this.SubSelected)
@@ -40,7 +40,7 @@ namespace VisioPowerShell.Commands
                 else
                 {
                     this.WriteVerbose("Returning selected shapes ");
-                    var shapes = this.Client.Selection.GetShapes();
+                    var shapes = this.Client.Selection.GetShapesInSelection();
                     this.WriteObject(shapes, true);
                 }
 

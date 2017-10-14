@@ -48,9 +48,9 @@ namespace VisioAutomation_Tests.Scripting
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
             client.Selection.SelectNone();
-            client.Selection.Select(s1);
-            client.Selection.Select(s2);
-            client.Selection.Select(s3);
+            client.Selection.SelectShapesById(s1);
+            client.Selection.SelectShapesById(s2);
+            client.Selection.SelectShapesById(s3);
 
             var targets = new VisioScripting.Models.TargetShapes();
             var prop_dic0 = client.CustomProperty.Get(targets);

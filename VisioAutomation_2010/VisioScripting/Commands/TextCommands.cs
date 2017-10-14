@@ -97,7 +97,7 @@ namespace VisioScripting.Commands
                 return new List<VisioAutomation.Text.TextFormat>(0);
             }
 
-            var selection = this._client.Selection.Get();
+            var selection = this._client.Selection.GetActiveSelection();
             var shapeids = selection.GetIDs();
             var application = cmdtarget.Application;
             var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids, CellValueType.Formula);

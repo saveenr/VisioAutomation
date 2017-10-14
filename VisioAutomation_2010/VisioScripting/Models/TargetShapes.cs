@@ -47,15 +47,15 @@ namespace VisioScripting.Models
 
             if (this.Shapes == null)
             {
-                int n = client.Selection.Count();
+                int n = client.Selection.GetCountOfSelectedShapes();
                 client.Output.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
                 return n;
             }
 
             client.Output.WriteVerbose("GetTargetSelectionCount: Reseting selecton to specified {0} shapes", this.Shapes.Count);
             client.Selection.SelectNone();
-            client.Selection.Select(this.Shapes);
-            int selected_count = client.Selection.Count();
+            client.Selection.SelectShapes(this.Shapes);
+            int selected_count = client.Selection.GetCountOfSelectedShapes();
             return selected_count;
         }
 
@@ -65,7 +65,7 @@ namespace VisioScripting.Models
 
             if (this.Shapes == null)
             {
-                var out_shapes = client.Selection.GetShapes();
+                var out_shapes = client.Selection.GetShapesInSelection();
                 client.Output.WriteVerbose("GetTargetShapes: Returning {0} shapes from the active selection", out_shapes.Count);
                 return out_shapes;
             }

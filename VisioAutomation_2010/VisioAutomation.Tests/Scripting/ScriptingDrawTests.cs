@@ -469,7 +469,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Master.Drop(master, new VA.Geometry.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
-            client.Selection.SelectAll();
+            client.Selection.SelectAllShapes();
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var app = active_page.Application;
@@ -522,7 +522,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Master.Drop(master, new VA.Geometry.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
-            client.Selection.SelectAll();
+            client.Selection.SelectAllShapes();
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var ver = client.Application.Version;

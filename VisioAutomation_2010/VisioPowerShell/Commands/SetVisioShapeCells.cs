@@ -30,7 +30,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
+            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapesInSelection();
 
             if (target_shapes.Count < 1)
             {

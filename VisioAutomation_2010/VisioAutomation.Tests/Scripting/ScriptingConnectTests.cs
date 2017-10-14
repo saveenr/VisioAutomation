@@ -20,9 +20,9 @@ namespace VisioAutomation_Tests.Scripting
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
             client.Selection.SelectNone();
-            client.Selection.Select(s1);
-            client.Selection.Select(s2);
-            client.Selection.Select(s3);
+            client.Selection.SelectShapesById(s1);
+            client.Selection.SelectShapesById(s2);
+            client.Selection.SelectShapesById(s3);
 
             client.Document.OpenStencil("basic_u.vss");
             var connec_stencil = client.Document.OpenStencil("connec_u.vss");
@@ -31,13 +31,13 @@ namespace VisioAutomation_Tests.Scripting
             var toshapes = new [] { s2,s3};
             var directed_connectors = client.Connection.Connect(fromshapes,toshapes, master);
             client.Selection.SelectNone();
-            client.Selection.Select(directed_connectors);
+            client.Selection.SelectShapes(directed_connectors);
 
 
             var page = client.Page.GetActivePage();
             var writer = client.ShapeSheet.GetWriter(page);
 
-            var shapes = client.Selection.GetShapes();
+            var shapes = client.Selection.GetShapesInSelection();
             foreach (var shape in shapes)
             {
                 writer.SetFormula( shape.ID16, VA.ShapeSheet.SrcConstants.LineEndArrow, "13");
@@ -79,9 +79,9 @@ namespace VisioAutomation_Tests.Scripting
             var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
             client.Selection.SelectNone();
-            client.Selection.Select(s1);
-            client.Selection.Select(s2);
-            client.Selection.Select(s3);
+            client.Selection.SelectShapesById(s1);
+            client.Selection.SelectShapesById(s2);
+            client.Selection.SelectShapesById(s3);
 
             client.Document.OpenStencil("basic_u.vss");
             var connec_stencil = client.Document.OpenStencil("connec_u.vss");

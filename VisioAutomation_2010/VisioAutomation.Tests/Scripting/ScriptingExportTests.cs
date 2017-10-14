@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Scripting
             var s3 = page1.DrawRectangle(0, 1, 1, 2);
             var s4 = page1.DrawRectangle(1, 1, 2, 2);
 
-            client.Selection.SelectAll();
+            client.Selection.SelectAllShapes();
 
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
 

@@ -29,9 +29,9 @@ namespace VisioAutomation_Tests.Scripting
             var s3 = client.Draw.Rectangle(r3);
 
             client.Selection.SelectNone();
-            client.Selection.Select(s1);
-            client.Selection.Select(s2);
-            client.Selection.Select(s3);
+            client.Selection.SelectShapesById(s1);
+            client.Selection.SelectShapesById(s2);
+            client.Selection.SelectShapesById(s3);
 
             var targets = new VisioScripting.Models.TargetShapes();
 
@@ -65,9 +65,9 @@ namespace VisioAutomation_Tests.Scripting
             var s3 = client.Draw.Rectangle(r3);
 
             client.Selection.SelectNone();
-            client.Selection.Select(s1);
-            client.Selection.Select(s2);
-            client.Selection.Select(s3);
+            client.Selection.SelectShapesById(s1);
+            client.Selection.SelectShapesById(s2);
+            client.Selection.SelectShapesById(s3);
 
             var targets = new VisioScripting.Models.TargetShapes();
             client.Distribute.DistributeOnAxis(targets, VisioScripting.Models.Axis.XAxis , 0.25);
@@ -107,9 +107,9 @@ namespace VisioAutomation_Tests.Scripting
             var s3 = client.Draw.Rectangle(r3);
 
             client.Selection.SelectNone();
-            client.Selection.Select(s1);
-            client.Selection.Select(s2);
-            client.Selection.Select(s3);
+            client.Selection.SelectShapesById(s1);
+            client.Selection.SelectShapesById(s2);
+            client.Selection.SelectShapesById(s3);
 
             var targets = new VisioScripting.Models.TargetShapes();
 

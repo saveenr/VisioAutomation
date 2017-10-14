@@ -159,7 +159,7 @@ namespace VisioPowerShell.Commands
             {
                 // Select the Shapes
                 ((SMA.Cmdlet)this).WriteVerbose("Selecting");
-                this.Client.Selection.Select(shape_objects);
+                this.Client.Selection.SelectShapes(shape_objects);
             }
 
             this.WriteObject(shape_objects, true);

@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            this.Client.Selection.Duplicate(targets);
+            this.Client.Selection.DuplicateSelectedShapes(targets);
         }
     }
 }

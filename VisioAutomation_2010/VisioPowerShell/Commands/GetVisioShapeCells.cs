@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapes();
+            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapesInSelection();
 
             var template = new VisioPowerShell.Models.ShapeCells();
             var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(template);
