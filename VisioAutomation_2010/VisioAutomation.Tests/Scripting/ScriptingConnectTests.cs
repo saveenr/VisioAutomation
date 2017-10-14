@@ -15,9 +15,9 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             client.Page.NewPage(pagesize, false);
 
-            var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
-            var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
-            var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
+            var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
+            var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
+            var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
 
             client.Selection.SelectNone();
             client.Selection.SelectShapesById(s1);
@@ -72,11 +72,11 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             client.Page.NewPage(pagesize, false);
 
-            var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
+            var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
 
-            var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
+            var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
 
-            var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
+            var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
 
             client.Selection.SelectNone();
             client.Selection.SelectShapesById(s1);
@@ -115,8 +115,8 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            var s1 = client.Draw.Rectangle(1, 1, 2,2);
-            var s2 = client.Draw.Rectangle(4, 4, 5, 5);
+            var s1 = client.Draw.DrawRectangle(1, 1, 2,2);
+            var s2 = client.Draw.DrawRectangle(4, 4, 5, 5);
 
             client.Connection.Connect(new[] {s1}, new[] {s2}, null);
             

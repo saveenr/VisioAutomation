@@ -24,9 +24,9 @@ namespace VisioAutomation_Tests.Scripting
             var r2 = new VA.Geometry.Rectangle(new VA.Geometry.Point(2, 2), size2);
             var r3 = new VA.Geometry.Rectangle(new VA.Geometry.Point(4, 4), size3);
 
-            var s1 = client.Draw.Rectangle(r1);
-            var s2 = client.Draw.Rectangle(r2);
-            var s3 = client.Draw.Rectangle(r3);
+            var s1 = client.Draw.DrawRectangle(r1);
+            var s2 = client.Draw.DrawRectangle(r2);
+            var s3 = client.Draw.DrawRectangle(r3);
 
             client.Selection.SelectNone();
             client.Selection.SelectShapesById(s1);
@@ -60,9 +60,9 @@ namespace VisioAutomation_Tests.Scripting
             var r2 = new VA.Geometry.Rectangle(new VA.Geometry.Point(2, 2), size2);
             var r3 = new VA.Geometry.Rectangle(new VA.Geometry.Point(4, 4), size3);
 
-            var s1 = client.Draw.Rectangle(r1);
-            var s2 = client.Draw.Rectangle(r2);
-            var s3 = client.Draw.Rectangle(r3);
+            var s1 = client.Draw.DrawRectangle(r1);
+            var s2 = client.Draw.DrawRectangle(r2);
+            var s3 = client.Draw.DrawRectangle(r3);
 
             client.Selection.SelectNone();
             client.Selection.SelectShapesById(s1);
@@ -102,9 +102,9 @@ namespace VisioAutomation_Tests.Scripting
             var r2 = new VA.Geometry.Rectangle(new VA.Geometry.Point(2, 2), size2);
             var r3 = new VA.Geometry.Rectangle(new VA.Geometry.Point(4, 4), size3);
 
-            var s1 = client.Draw.Rectangle(r1);
-            var s2 = client.Draw.Rectangle(r2);
-            var s3 = client.Draw.Rectangle(r3);
+            var s1 = client.Draw.DrawRectangle(r1);
+            var s2 = client.Draw.DrawRectangle(r2);
+            var s3 = client.Draw.DrawRectangle(r3);
 
             client.Selection.SelectNone();
             client.Selection.SelectShapesById(s1);

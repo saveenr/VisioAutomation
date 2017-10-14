@@ -16,9 +16,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.New();
             client.Page.NewPage(new VisioAutomation.Geometry.Size(4, 4), false);
 
-            var s1 = client.Draw.Rectangle(1, 1, 1.5, 1.5);
-            var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
-            var s3 = client.Draw.Rectangle(1.5, 3.5, 2, 4.0);
+            var s1 = client.Draw.DrawRectangle(1, 1, 1.5, 1.5);
+            var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
+            var s3 = client.Draw.DrawRectangle(1.5, 3.5, 2, 4.0);
 
             client.Selection.SelectNone();
             client.Selection.SelectShapesById(s1);

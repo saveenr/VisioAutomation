@@ -63,7 +63,7 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.New(page_size);
-            client.Draw.Rectangle(0, 0, 1, 1);
+            client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Page.DuplicateActivePage();
             doc.Close(true);
         }
@@ -76,14 +76,14 @@ namespace VisioAutomation_Tests.Scripting
             // First case: the source document is already the active document
             var docto_1 = client.Document.New();
             var docfrom_1 = client.Document.New();
-            client.Draw.Rectangle(0, 0, 1, 1);
+            client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Page.DuplicateActivePageToDocument(docto_1);
 
             // Second case: the source document has to be activated beforehand
             var docfrom_2 = client.Document.New();
             var docto_2 = client.Document.New();
             client.Document.Activate(docfrom_2);
-            client.Draw.Rectangle(0, 0, 1, 1);
+            client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Page.DuplicateActivePageToDocument(docto_2);
 
             docfrom_1.Close(true);

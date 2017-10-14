@@ -53,7 +53,7 @@ namespace VisioPowerShell.Commands
                 string str_asterisk = "*";
                 if (this.Name.Contains(str_asterisk))
                 {
-                    var shapes = this.Client.Draw.GetAllShapes();
+                    var shapes = this.Client.Draw.GetAllShapesOnActiveDrawingSurface();
                     this.WriteObject(shapes, true);
                 }
                 else

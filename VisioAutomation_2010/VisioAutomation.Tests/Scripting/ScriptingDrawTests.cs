@@ -62,7 +62,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
-            var shapes = client.Draw.Table(dt, widths, heights, cellspacing);
+            var shapes = client.Draw.DrawTable(dt, widths, heights, cellspacing);
 
             // Verify
             int num_shapes_expected = items.Length*dt.Columns.Count;
@@ -114,9 +114,9 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             client.Page.NewPage(pagesize, false);
 
-            var shape_rect = client.Draw.Rectangle(1, 1, 3, 3);
-            var shape_line = client.Draw.Line(0.5, 0.5, 3.5, 3.5);
-            var shape_oval1 = client.Draw.Oval(0.2, 1, 3.8, 2);
+            var shape_rect = client.Draw.DrawRectangle(1, 1, 3, 3);
+            var shape_line = client.Draw.DrawLine(0.5, 0.5, 3.5, 3.5);
+            var shape_oval1 = client.Draw.DrawOval(0.2, 1, 3.8, 2);
 
             // Cleanup
             client.Document.Close(true);
@@ -140,8 +140,8 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(pagesize, false);
             
             // Draw the Shapes
-            var shape_bezier = client.Draw.Bezier(points);
-            var shape_polyline = client.Draw.PolyLine(points);
+            var shape_bezier = client.Draw.DrawBezier(points);
+            var shape_polyline = client.Draw.DrawPolyLine(points);
 
             // Cleanup
             client.Document.Close(true);
@@ -162,7 +162,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(pagesize, false);
 
             // Draw the Shape
-            var shape = client.Draw.PieSlice(center, radius, start_angle, end_angle);
+            var shape = client.Draw.DrawPieSlice(center, radius, start_angle, end_angle);
 
             // Cleanup
             client.Document.Close(true);
@@ -188,7 +188,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Draw the chart
 
-            client.Draw.PieChart(chart);
+            client.Draw.DrawPieChart(chart);
 
             // Cleanup
             client.Document.Close(true);
@@ -227,9 +227,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(pagesize, false);
 
             // Draw the Charts
-            client.Draw.BarChart(chart1);
-            client.Draw.BarChart(chart2);
-            client.Draw.BarChart(chart3);
+            client.Draw.DrawBarChart(chart1);
+            client.Draw.DrawBarChart(chart2);
+            client.Draw.DrawBarChart(chart3);
             client.Page.ResizeActivePageToFitContents(bordersize,true);
 
             // Cleanup
@@ -269,9 +269,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(pagesize, false);
 
             // Draw the Charts
-            client.Draw.AreaChart(chart1);
-            client.Draw.AreaChart(chart2);
-            client.Draw.AreaChart(chart3);
+            client.Draw.DrawAreaChart(chart1);
+            client.Draw.DrawAreaChart(chart2);
+            client.Draw.DrawAreaChart(chart3);
             client.Page.GetActivePage().ResizeToFitContents(padding);
 
             // Cleanup
@@ -382,7 +382,7 @@ namespace VisioAutomation_Tests.Scripting
                 }
             }
             
-            client.Draw.DirectedGraph(dg_model);
+            client.Draw.DrawDirectedGraph(dg_model);
         }
         
         [TestMethod]
@@ -445,7 +445,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(client, xmldoc);
-            client.Draw.OrgChart(orgchart);
+            client.Draw.DrawOrgChart(orgchart);
         }
 
         [TestMethod]

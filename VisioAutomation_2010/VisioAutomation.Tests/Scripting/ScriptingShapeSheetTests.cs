@@ -12,8 +12,8 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var doc = client.Document.New();
-            client.Draw.Rectangle(0, 0, 1, 1);
-            client.Draw.Rectangle(1, 1, 2, 2);
+            client.Draw.DrawRectangle(0, 0, 1, 1);
+            client.Draw.DrawRectangle(1, 1, 2, 2);
 
 
             var shapes = client.Page.GetShapesOnActivePage();

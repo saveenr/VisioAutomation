@@ -35,7 +35,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
             Assert.AreEqual(0, client.Selection.GetActiveSelection().Count);
-            client.Draw.Rectangle(1, 1, 2, 2);
+            client.Draw.DrawRectangle(1, 1, 2, 2);
             Assert.AreEqual(1, client.Selection.GetActiveSelection().Count);
 
             client.Document.Close(true);
