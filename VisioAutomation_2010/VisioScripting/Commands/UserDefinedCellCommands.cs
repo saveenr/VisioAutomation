@@ -77,15 +77,15 @@ namespace VisioScripting.Commands
 
             if (name == null)
             {
-                throw new System.ArgumentNullException("name cannot be null","name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name cannot be empty", nameof(name));
+                throw new System.ArgumentException(nameof(name),"name cannot be empty");
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Delete User-Defined Cell"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DeleteUserDefinedCellsByName)))
             {
                 foreach (var shape in targets.Shapes)
                 {
@@ -106,7 +106,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set User-Defined Cell"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetUserDefinedCell)))
             {
                 foreach (var shape in targets.Shapes)
                 {

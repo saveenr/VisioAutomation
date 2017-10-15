@@ -17,7 +17,7 @@ namespace VisioScripting.Commands
             var page = cmdtarget.ActivePage;
             targets = targets.ResolveShapes(this._client);
             var targetids = targets.ToShapeIDs();
-            using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DistributeShapesOnAxis)))
             {
                 VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
             }
@@ -48,7 +48,7 @@ namespace VisioScripting.Commands
                     throw new System.ArgumentOutOfRangeException();
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DistributeShapesOnAxis)))
             {
                 cmdtarget.Application.DoCmd((short)cmd);
             }

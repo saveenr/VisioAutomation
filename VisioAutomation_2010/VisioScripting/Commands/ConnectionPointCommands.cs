@@ -54,7 +54,7 @@ namespace VisioScripting.Commands
 
             var indices = new List<int>(targets.Shapes.Count);
 
-            using (var undoscope = this._client.Application.NewUndoScope("Add Connection Point"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(AddConnectionPoint)))
             {
                 var cp = new ConnectionPointCells();
                 cp.X = fx;
@@ -98,7 +98,7 @@ namespace VisioScripting.Commands
 
             var target_shapes = shapes.Shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
 
-            using (var undoscope = this._client.Application.NewUndoScope("Delete Connection Point"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DeleteConnectionPointAtIndex)))
             {
                 foreach (var shape in target_shapes)
                 {

@@ -38,7 +38,7 @@ namespace VisioPowerShell.Commands
             }
 
 
-            using (var undoscope = this.Client.Application.NewUndoScope("Set Page Cells"))
+            using (var undoscope = this.Client.Application.NewUndoScope(nameof(SetVisioPageCells)))
             {
                 for (int i = 0; i < target_pages.Length; i++)
                 {

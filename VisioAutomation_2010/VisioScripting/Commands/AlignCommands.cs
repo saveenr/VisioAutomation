@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
 
             const bool glue_to_guide = false;
 
-            using (var undoscope = this._client.Application.NewUndoScope("Align Horizontal"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(AlignSelectedShapesHorizontal)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;
@@ -71,7 +71,7 @@ namespace VisioScripting.Commands
             const bool glue_to_guide = false;
 
             // Perform the alignment
-            using (var undoscope = this._client.Application.NewUndoScope("Align Vertical"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(AlignSelectedShapesVertical)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;

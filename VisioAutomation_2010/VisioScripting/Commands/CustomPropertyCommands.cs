@@ -75,7 +75,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Delete Custom Property"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DeleteCustomPropertyWithName)))
             {
                 foreach (var shape in targets.Shapes)
                 {
@@ -102,7 +102,7 @@ namespace VisioScripting.Commands
 
             customprop.EncodeValues();
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set Custom Property"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetCustomPropertyWithName)))
             {
                 foreach (var shape in targets.Shapes)
                 {

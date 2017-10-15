@@ -13,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void Set(VisioScripting.Models.TargetShapes targets, IList<string> texts)
+        public void SetShapeText(VisioScripting.Models.TargetShapes targets, IList<string> texts)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -30,7 +30,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set Shape Text"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetShapeText)))
             {
                 // Apply text to each shape
                 // if there are fewer texts than shapes then

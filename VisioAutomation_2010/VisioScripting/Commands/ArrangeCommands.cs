@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Nudge"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(NudgeShapes)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;

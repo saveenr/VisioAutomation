@@ -130,7 +130,7 @@ namespace VisioScripting.Commands
             var pages = active_document.Pages;
             IVisio.Page page;
 
-            using (var undoscope = this._client.Application.NewUndoScope("New Page"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(NewPage)))
             {
                 page = pages.Add();
 
@@ -186,7 +186,7 @@ namespace VisioScripting.Commands
                 throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set Background Page"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetActivePageBackground)))
             {
                 fgpage.BackPage = bgpage;
             }
@@ -196,7 +196,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            using (var undoscope = this._client.Application.NewUndoScope("Duplicate Page"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DuplicateActivePage)))
             {
                 var pages = cmdtarget.ActiveDocument.Pages;
 
@@ -286,7 +286,7 @@ namespace VisioScripting.Commands
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
             writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set Page Orientation"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetActivePageOrientation)))
             {
                 writer.Commit(cmdtarget.ActivePage.PageSheet);
             }
@@ -297,7 +297,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
             var application = cmdtarget.Application;
-            using (var undoscope = this._client.Application.NewUndoScope("Resize Page to Fit Contents"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(ResizeActivePageToFitContents)))
             {
                 var active_page = application.ActivePage;
                 active_page.ResizeToFitContents(bordersize);
@@ -325,7 +325,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set Page Size"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetActivePageSize)))
             {
                 var active_page = cmdtarget.Application.ActivePage;
                 var page_sheet = active_page.PageSheet;

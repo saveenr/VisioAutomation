@@ -59,7 +59,7 @@ namespace VisioPowerShell.Commands
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
             this.Client.Output.WriteVerbose("Number of Shapes : {0}", target_ids.ShapeIDs.Count);
 
-            using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Cells"))
+            using (var undoscope = this.Client.Application.NewUndoScope(nameof(SetVisioShapeCells)))
             {
                 this.Client.Output.WriteVerbose("Start Update");
                 writer.Commit(surface);

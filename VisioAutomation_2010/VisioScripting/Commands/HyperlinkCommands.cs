@@ -32,7 +32,7 @@ namespace VisioScripting.Commands
 
             var hyperlink_indices = new List<int>();
 
-            using (var undoscope = this._client.Application.NewUndoScope("Add Control"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(AddHyperlink)))
             {
                 foreach (var shape in targets.Shapes)
                 {
@@ -56,7 +56,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Delete Control"))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DeleteHyperlinkAtIndex)))
             {
                 foreach (var shape in targets.Shapes)
                 {
