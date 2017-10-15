@@ -43,8 +43,6 @@ namespace VisioScripting.Commands
 
         public List<bool> ShapesContainUserDefinedCellsWithName(VisioScripting.Models.TargetShapes targets, string name)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
@@ -65,9 +63,6 @@ namespace VisioScripting.Commands
        
         public void DeleteUserDefinedCellsByName(VisioScripting.Models.TargetShapes targets, string name)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
