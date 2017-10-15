@@ -62,7 +62,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
-            var shapes = client.Charting.DrawTable(dt, widths, heights, cellspacing);
+            var shapes = client.Charting.NewDataTablePageInActiveDocument(dt, widths, heights, cellspacing);
 
             // Verify
             int num_shapes_expected = items.Length*dt.Columns.Count;
@@ -162,7 +162,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(pagesize, false);
 
             // Draw the Shape
-            var shape = client.Charting.DrawPieSlice(center, radius, start_angle, end_angle);
+            var shape = client.Charting.DrawPieSliceOnActivePage(center, radius, start_angle, end_angle);
 
             // Cleanup
             client.Document.CloseActiveDocument(true);
@@ -188,7 +188,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Draw the chart
 
-            client.Charting.DrawPieChart(chart);
+            client.Charting.DrawPieChartOnActivePage(chart);
 
             // Cleanup
             client.Document.CloseActiveDocument(true);
@@ -227,9 +227,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(pagesize, false);
 
             // Draw the Charts
-            client.Charting.DrawBarChart(chart1);
-            client.Charting.DrawBarChart(chart2);
-            client.Charting.DrawBarChart(chart3);
+            client.Charting.DrawBarChartOnActivePage(chart1);
+            client.Charting.DrawBarChartOnActivePage(chart2);
+            client.Charting.DrawBarChartOnActivePage(chart3);
             client.Page.ResizeActivePageToFitContents(bordersize,true);
 
             // Cleanup
@@ -269,9 +269,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(pagesize, false);
 
             // Draw the Charts
-            client.Charting.DrawAreaChart(chart1);
-            client.Charting.DrawAreaChart(chart2);
-            client.Charting.DrawAreaChart(chart3);
+            client.Charting.DrawAreaChartOnActivePage(chart1);
+            client.Charting.DrawAreaChartOnActivePage(chart2);
+            client.Charting.DrawAreaChartOnActivePage(chart3);
             client.Page.GetActivePage().ResizeToFitContents(padding);
 
             // Cleanup
@@ -382,7 +382,7 @@ namespace VisioAutomation_Tests.Scripting
                 }
             }
             
-            client.Charting.DrawDirectedGraph(dg_model);
+            client.Charting.NewDirectedGraphDocument(dg_model);
         }
         
         [TestMethod]
@@ -445,7 +445,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(client, xmldoc);
-            client.Charting.DrawOrgChart(orgchart);
+            client.Charting.NewOrgChartDocument(orgchart);
         }
 
         [TestMethod]

@@ -15,14 +15,12 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<IVisio.Shape> DrawTable(
+        public List<IVisio.Shape> NewDataTablePageInActiveDocument(
             System.Data.DataTable datatable,
             IList<double> widths,
             IList<double> heights,
             VisioAutomation.Geometry.Size cellspacing)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-
             if (datatable == null)
             {
                 throw new System.ArgumentNullException(nameof(datatable));
@@ -40,10 +38,10 @@ namespace VisioScripting.Commands
 
             if (datatable.Rows.Count < 1)
             {
-                return new List<IVisio.Shape>(0);
+                throw new System.ArgumentOutOfRangeException(nameof(datatable),"DataTable must have at least one row");
             }
 
-
+            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
             string master = "Rectangle";
             string stencil = "basic_u.vss";
             var stencildoc = this._client.Document.OpenStencilDocument(stencil);
@@ -83,17 +81,14 @@ namespace VisioScripting.Commands
                 page.ResizeToFitContents();
             }
 
-            var page_shapes = page.Shapes;
             var shapes = layout.Nodes.Select(n => n.Shape).ToList();
             return shapes;
-
         }
 
-        public void DrawGrid(GRID.GridLayout layout)
+        public void DrawGridOnActivePage(GRID.GridLayout layout)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-            //Create a new page to hold the grid
             var page = cmdtarget.ActivePage;
             layout.PerformLayout();
 
@@ -103,7 +98,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DrawPieSlice(
+        public IVisio.Shape DrawPieSliceOnActivePage(
             VisioAutomation.Geometry.Point center,
             double radius,
             double start_angle,
@@ -120,7 +115,7 @@ namespace VisioScripting.Commands
                 return shape;
             }
         }
-        public IVisio.Shape DrawDoughnutSlice(
+        public IVisio.Shape DrawDoughnutSliceOnActivePage(
             VisioAutomation.Geometry.Point center,
             double inner_radius,
             double outer_radius,
@@ -139,7 +134,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DrawPieChart(VisioAutomation.Models.Charting.PieChart chart)
+        public void DrawPieChartOnActivePage(VisioAutomation.Models.Charting.PieChart chart)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -147,7 +142,7 @@ namespace VisioScripting.Commands
             chart.Render(page);
         }
 
-        public void DrawBarChart(VisioAutomation.Models.Charting.BarChart chart)
+        public void DrawBarChartOnActivePage(VisioAutomation.Models.Charting.BarChart chart)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -156,7 +151,7 @@ namespace VisioScripting.Commands
             chart.Render(page);
         }
 
-        public void DrawAreaChart(VisioAutomation.Models.Charting.AreaChart chart)
+        public void DrawAreaChartOnActivePage(VisioAutomation.Models.Charting.AreaChart chart)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -165,7 +160,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void DrawOrgChart(ORG.OrgChartDocument chartdocument)
+        public void NewOrgChartDocument(ORG.OrgChartDocument chartdocument)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
@@ -178,7 +173,7 @@ namespace VisioScripting.Commands
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DrawDirectedGraph(IList<GRAPH.DirectedGraphLayout> graph)
+        public void NewDirectedGraphDocument(IList<GRAPH.DirectedGraphLayout> graph)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 

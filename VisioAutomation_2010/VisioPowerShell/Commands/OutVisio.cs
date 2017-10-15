@@ -46,35 +46,35 @@ namespace VisioPowerShell.Commands
         {
             if (this.OrgChart != null)
             {
-                this.Client.Charting.DrawOrgChart(this.OrgChart);
+                this.Client.Charting.NewOrgChartDocument(this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
-                this.Client.Charting.DrawGrid(this.GridLayout);
+                this.Client.Charting.DrawGridOnActivePage(this.GridLayout);
             }
             else if (this.DirectedGraphs != null)
             {
-                this.Client.Charting.DrawDirectedGraph(this.DirectedGraphs);
+                this.Client.Charting.NewDirectedGraphDocument(this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {
                 var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
                 var spacing = new VisioAutomation.Geometry.Size(this.CellSpacing, this.CellSpacing);
-                var shapes = this.Client.Charting.DrawTable(this.DataTable, widths, heights, spacing);
+                var shapes = this.Client.Charting.NewDataTablePageInActiveDocument(this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
             else if (this.PieChart != null)
             {
-                this.Client.Charting.DrawPieChart(this.PieChart);
+                this.Client.Charting.DrawPieChartOnActivePage(this.PieChart);
             }
             else if (this.BarChart != null)
             {
-                this.Client.Charting.DrawBarChart(this.BarChart);
+                this.Client.Charting.DrawBarChartOnActivePage(this.BarChart);
             }
             else if (this.AreaChart != null)
             {
-                this.Client.Charting.DrawAreaChart(this.AreaChart);
+                this.Client.Charting.DrawAreaChartOnActivePage(this.AreaChart);
             }
             else if (this.XmlDocument != null)
             {
