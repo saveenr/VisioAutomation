@@ -35,7 +35,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioScripting.Models.TargetShapes();
 
-            client.Distribute.DistributeHorizontal(targets, VisioScripting.Models.AlignmentHorizontal.Center);
+            client.Distribute.DistributeShapesHorizontal(targets, VisioScripting.Models.AlignmentHorizontal.Center);
 
             var shapeids = new[] {s1.ID, s2.ID, s3.ID };
             VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),shapeids, VA.ShapeSheet.CellValueType.Formula);

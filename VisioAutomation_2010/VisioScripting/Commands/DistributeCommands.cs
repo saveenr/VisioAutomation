@@ -54,7 +54,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal halign)
+        public void DistributeShapesHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal halign)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 

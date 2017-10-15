@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var t = this.Client.Text.Get(targets);
+            var t = this.Client.Text.GetShapeText(targets);
             this.WriteObject(t);
         }
     }

@@ -49,7 +49,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<string> Get(VisioScripting.Models.TargetShapes targets)
+        public List<string> GetShapeText(VisioScripting.Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
@@ -65,7 +65,7 @@ namespace VisioScripting.Commands
             return texts;
         }
 
-        public void SetFont(VisioScripting.Models.TargetShapes targets, string fontname)
+        public void SetShapeFont(VisioScripting.Models.TargetShapes targets, string fontname)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -86,7 +86,7 @@ namespace VisioScripting.Commands
             this._client.ShapeSheet.__SetCells(targets, cells, page);
         }
 
-        public List<VisioAutomation.Text.TextFormat> GetFormat(VisioScripting.Models.TargetShapes targets)
+        public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(VisioScripting.Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 

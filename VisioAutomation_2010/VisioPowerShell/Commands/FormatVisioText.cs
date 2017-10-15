@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
             if (this.Font != null)
             {
-                this.Client.Text.SetFont(targets, this.Font);                
+                this.Client.Text.SetShapeFont(targets, this.Font);                
             }
         }
     }
