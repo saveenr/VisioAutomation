@@ -111,7 +111,7 @@ namespace VisioScripting.Commands
             return masterobj;
         }
 
-        public List<IVisio.Master> GetMastersByNameFromDocument(string name, IVisio.Document doc)
+        public List<IVisio.Master> FindMastersInDocumentByName(string name, IVisio.Document doc)
         {
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
@@ -128,12 +128,12 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<IVisio.Master> GetMastersByNameFromDocument(string name)
+        public List<IVisio.Master> FindMastersInActiveDocumentByName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             var doc = cmdtarget.ActiveDocument;
-            return this.GetMastersByNameFromDocument(name, doc);
+            return this.FindMastersInDocumentByName(name, doc);
         }
 
         private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)

@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public IVisio.Layer GetLayersOnActivePageByName(string name)
+        public IVisio.Layer FindLayersOnActivePageByName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 

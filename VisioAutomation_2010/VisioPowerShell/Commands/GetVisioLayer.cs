@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands
             else
             {
                 // get all that match a specific name
-                var layer = this.Client.Layer.GetLayersOnActivePageByName(this.Name);
+                var layer = this.Client.Layer.FindLayersOnActivePageByName(this.Name);
                 this.WriteObject(layer);
             }
         }

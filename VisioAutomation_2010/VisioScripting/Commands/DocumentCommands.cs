@@ -296,7 +296,7 @@ namespace VisioScripting.Commands
             return doc;
         }
 
-        public List<IVisio.Document> GetDocumentsByName(string name)
+        public List<IVisio.Document> FindDocumentsByName(string name)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 

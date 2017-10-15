@@ -23,7 +23,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var pages = this.Client.Page.GetPagesInActiveDocumentByName(this.Name, this.Type);
+            var pages = this.Client.Page.FindPagesInActiveDocumentByName(this.Name, this.Type);
             this.WriteObject(pages, true);
         }
     }

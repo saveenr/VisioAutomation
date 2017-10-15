@@ -471,7 +471,7 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> GetPagesInActiveDocumentByName(string name, Models.PageType pagetype)
+        public List<IVisio.Page> FindPagesInActiveDocumentByName(string name, Models.PageType pagetype)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
