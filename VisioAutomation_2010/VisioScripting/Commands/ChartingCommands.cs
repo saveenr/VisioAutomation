@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using ORG = VisioAutomation.Models.Documents.OrgCharts;
 using GRAPH = VisioAutomation.Models.Layouts.DirectedGraph;
@@ -16,38 +15,10 @@ namespace VisioScripting.Commands
 
         }
 
-        public VisioAutomation.SurfaceTarget GetActiveDrawingSurface()
-        {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-            var surf_Application = cmdtarget.Application;
-            var surf_Window = surf_Application.ActiveWindow;
-            var surf_Window_subtype = surf_Window.SubType;
-
-            // TODO: Revisit the logic here
-            // TODO: And what about a selected shape as a surface?
-
-            this._client.Output.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
-            if (surf_Window_subtype == 64)
-            {
-                this._client.Output.WriteVerbose("Window = Master Editing");
-                var surf_Master = (IVisio.Master)surf_Window.Master;
-                var surface = new VisioAutomation.SurfaceTarget(surf_Master);
-                return surface;
-
-            }
-            else
-            {
-                this._client.Output.WriteVerbose("Window = Page ");
-                var surf_Page = surf_Application.ActivePage;
-                var surface = new VisioAutomation.SurfaceTarget(surf_Page);
-                return surface;
-            }
-        }
-
-        public List<IVisio.Shape> DrawTable(System.Data.DataTable datatable,
-                                          IList<double> widths,
-                                          IList<double> heights,
+        public List<IVisio.Shape> DrawTable(
+            System.Data.DataTable datatable,
+            IList<double> widths,
+            IList<double> heights,
             VisioAutomation.Geometry.Size cellspacing)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
@@ -132,10 +103,11 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DrawPieSlice(VisioAutomation.Geometry.Point center,
-                                  double radius,
-                                  double start_angle,
-                                  double end_angle)
+        public IVisio.Shape DrawPieSlice(
+            VisioAutomation.Geometry.Point center,
+            double radius,
+            double start_angle,
+            double end_angle)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -148,11 +120,12 @@ namespace VisioScripting.Commands
                 return shape;
             }
         }
-        public IVisio.Shape DrawDoughnutSlice(VisioAutomation.Geometry.Point center,
-                          double inner_radius,
-                          double outer_radius,
-                          double start_angle,
-                          double end_angle)
+        public IVisio.Shape DrawDoughnutSlice(
+            VisioAutomation.Geometry.Point center,
+            double inner_radius,
+            double outer_radius,
+            double start_angle,
+            double end_angle)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
             
@@ -192,14 +165,14 @@ namespace VisioScripting.Commands
         }
 
 
-        public void DrawOrgChart(ORG.OrgChartDocument orgChartDocument)
+        public void DrawOrgChart(ORG.OrgChartDocument chartdocument)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
             this._client.Output.WriteVerbose("Start OrgChart Rendering");
 
             var application = cmdtarget.Application;
-            orgChartDocument.Render(application);
+            chartdocument.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
