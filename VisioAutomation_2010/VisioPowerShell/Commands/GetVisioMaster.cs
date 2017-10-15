@@ -14,30 +14,18 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
+            var target_doc = new VisioScripting.Models.TargetDocument(this.Document);
+            target_doc.Resolve(this.Client);
+            
             bool master_specified = this.Name !=null;
             bool doc_specified = this.Document !=null;
 
             if (master_specified)
             {
-                // master name is specified
-                if (doc_specified)
+                foreach (var name in this.Name)
                 {
-                    ((SMA.Cmdlet) this).WriteVerbose("Get master from specified document");
-                    foreach (var name in this.Name)
-                    {
-                        var masters = this.Client.Master.FindMastersInDocumentByName(name, this.Document);
-                        this.WriteObject(masters, true);
-                    }
-                }
-                else
-                {
-                    ((SMA.Cmdlet) this).WriteVerbose("Get master from active document");
-
-                    foreach (var name in this.Name)
-                    {
-                        var masters = this.Client.Master.FindMastersInActiveDocumentByName(name);
-                        this.WriteObject(masters, true);
-                    }
+                    var masters = this.Client.Master.FindMastersInDocumentByName(name, target_doc);
+                    this.WriteObject(masters, true);
                 }
             }
             else
@@ -45,14 +33,14 @@ namespace VisioPowerShell.Commands
                 // master name is not specified
                 if (doc_specified)
                 {
-                    ((SMA.Cmdlet) this).WriteVerbose("Get all masters from specified document");
-                    var masters = this.Client.Master.Get(this.Document);
+                    this.WriteVerbose("Get all masters from specified document");
+                    var masters = this.Client.Master.GetAllMastersInDocument(this.Document);
                     this.WriteObject(masters, true);                    
                 }
                 else
                 {
-                    ((SMA.Cmdlet) this).WriteVerbose("Get all masters from active document");
-                    var masters = this.Client.Master.Get();
+                    this.WriteVerbose("Get all masters from active document");
+                    var masters = this.Client.Master.GetAllMastersInDocument();
                     this.WriteObject(masters, true);                   
                 }
             }

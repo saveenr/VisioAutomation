@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -37,20 +38,22 @@ namespace VisioScripting.Commands
             master.Close();
         }
 
-        public List<IVisio.Master> Get()
+        public List<IVisio.Master> GetAllMastersInDocument()
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-            var application = cmdtarget.Application;
-            var doc = application.ActiveDocument;
-            var doc_masters = doc.Masters;
-            var masters = doc_masters.ToList();
-            return masters;
+            var target_doc = new TargetDocument(cmdtarget.ActiveDocument);
+            return this.GetAllMastersInDocument(target_doc);
         }
 
-        public List<IVisio.Master> Get(IVisio.Document doc)
+        public List<IVisio.Master> GetAllMastersInDocument(IVisio.Document doc)
         {
-            var doc_masters = doc.Masters;
+            var target_doc = new TargetDocument(doc);
+            return this.GetAllMastersInDocument(target_doc);
+        }
+
+        public List<IVisio.Master> GetAllMastersInDocument(TargetDocument target_doc)
+        {
+            var doc_masters = target_doc.Document.Masters;
             var masters = doc_masters.ToList();
             return masters;
         }
@@ -87,53 +90,45 @@ namespace VisioScripting.Commands
 
         public IVisio.Master GetMasterWithNameFromDocument(string master, IVisio.Document doc)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var target_doc = new TargetDocument(doc);
+            return this.GetMasterWithNameFromDocument(master, target_doc);
+        }
 
-
+        public IVisio.Master GetMasterWithNameFromDocument(string master, TargetDocument target_doc)
+        {
             if (master == null)
             {
                 throw new System.ArgumentNullException(nameof(master));
             }
 
-            if (doc == null)
-            {
-                throw new System.ArgumentNullException(nameof(doc));
-            }
-
-            var masters = doc.Masters;
+            var masters = target_doc.Document.Masters;
             IVisio.Master masterobj = this.TryGetMaster(masters, master);
+
             if (masterobj == null)
             {
-                string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, doc);
+                string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, target_doc.Document.Name);
                 throw new VisioOperationException(msg);
             }
 
             return masterobj;
         }
 
-        public List<IVisio.Master> FindMastersInDocumentByName(string name, IVisio.Document doc)
+
+        public List<IVisio.Master> FindMastersInDocumentByName(string name, TargetDocument target_doc)
         {
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all masters
-                var masters = doc.Masters.ToList();
+                var masters = target_doc.Document.Masters.ToList();
                 return masters;
             }
             else
             {
                 // return masters matching the name
-                var masters2 = doc.Masters.ToEnumerable();
+                var masters2 = target_doc.Document.Masters.ToEnumerable();
                 var masters3 = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 return masters3;
             }
-        }
-
-        public List<IVisio.Master> FindMastersInActiveDocumentByName(string name)
-        {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
-
-            var doc = cmdtarget.ActiveDocument;
-            return this.FindMastersInDocumentByName(name, doc);
         }
 
         private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
