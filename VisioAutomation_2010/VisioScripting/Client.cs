@@ -27,6 +27,7 @@ namespace VisioScripting
         public Commands.GroupingCommands Grouping { get; }
         public Commands.HyperlinkCommands Hyperlink { get; }
         public Commands.LayerCommands Layer { get; }
+        public Commands.LockCommands Lock { get; }
         public Commands.MasterCommands Master { get; }
         public Commands.OutputCommands Output { get; }
         public Commands.PageCommands Page { get; }
@@ -66,6 +67,7 @@ namespace VisioScripting
             this.Grouping = new Commands.GroupingCommands(this);
             this.Hyperlink = new Commands.HyperlinkCommands(this);
             this.Layer = new Commands.LayerCommands(this);
+            this.Lock = new Commands.LockCommands(this);
             this.Master = new Commands.MasterCommands(this);
             this.Output = new Commands.OutputCommands(this);
             this.Page = new Commands.PageCommands(this);

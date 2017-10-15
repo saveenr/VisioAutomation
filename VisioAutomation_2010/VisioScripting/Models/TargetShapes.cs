@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioScripting.Models
 {
@@ -40,22 +41,31 @@ namespace VisioScripting.Models
             this.Shapes = shapes;
         }
 
-
-        internal int SetSelectionGetSelectedCount(VisioScripting.Client client)
+        internal int SelectShapesAndCount(VisioScripting.Client client)
         {
             client.Application.AssertApplicationAvailable();
 
+            var app = client.Application.VisioApplication;
+            var active_window = app.ActiveWindow;
+            var sel = active_window.Selection;
+
             if (this.Shapes == null)
             {
-                int n = client.Selection.GetCountOfSelectedShapes();
+                int n = sel.Count;
                 client.Output.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
                 return n;
             }
 
             client.Output.WriteVerbose("GetTargetSelectionCount: Reseting selecton to specified {0} shapes", this.Shapes.Count);
-            client.Selection.SelectNone();
-            client.Selection.SelectShapes(this.Shapes);
-            int selected_count = client.Selection.GetCountOfSelectedShapes();
+
+            // Force empty slection
+            active_window.DeselectAll();
+            active_window.DeselectAll(); // doing this twice is deliberate
+
+            // Force selection to specific shapes
+            active_window.Select(this.Shapes, IVisio.VisSelectArgs.visSelect);
+
+            int selected_count = sel.Count;
             return selected_count;
         }
 

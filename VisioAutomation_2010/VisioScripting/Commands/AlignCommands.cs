@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
+            int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 2)
             {
                 return;
@@ -51,7 +51,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
 
-            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
+            int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 2)
             {
                 return;

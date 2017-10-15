@@ -254,7 +254,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
             
-            int n = target_shapes.SetSelectionGetSelectedCount(this._client);
+            int n = target_shapes.SelectShapesAndCount(this._client);
 
             this._client.Output.WriteVerbose("Number of shapes to duplicate: {0}", n);
 

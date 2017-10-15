@@ -57,7 +57,7 @@ namespace VisioPowerShell.Commands
             lockcells.VertexEdit = this.VertexEdit ? "0" : null;
             lockcells.Width = this.Width ? "0" : null;
 
-            this.Client.Arrange.SetLockCellsForShapes(targets, lockcells);
+            this.Client.Lock.SetLockCells(targets, lockcells);
         }
     }
 }
