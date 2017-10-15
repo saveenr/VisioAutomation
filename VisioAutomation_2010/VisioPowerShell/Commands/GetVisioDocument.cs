@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.ActiveDocument)
             {
-                var application = this.Client.Application.GetApplication();
+                var application = this.Client.Application.GetActiveApplication();
                 var active_doc = application.ActiveDocument;
                 this.WriteObject(active_doc);
                 return;

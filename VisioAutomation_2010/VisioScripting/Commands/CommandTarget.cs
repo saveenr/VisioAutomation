@@ -30,11 +30,11 @@ namespace VisioScripting.Commands
             require_app = require_app || require_document || require_page;
             require_document = require_document || require_page;
 
-            this.Application = this.Client.Application.VisioApplication;
+            this.Application = this.Client.Application.GetActiveApplication();
 
             if (this.Application == null && require_app)
             {
-                var has_app = this.Client.Application.VisioApplication != null;
+                var has_app = this.Client.Application.HasActiveApplication;
                 if (!has_app)
                 {
                     throw new System.ArgumentException("CommandTarget: No Visio Application available");

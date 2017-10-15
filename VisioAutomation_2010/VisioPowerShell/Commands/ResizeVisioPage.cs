@@ -31,23 +31,23 @@ namespace VisioPowerShell.Commands
 
             if (this.Width > 0 || this.Height > 0)
             {
-                var page = this.Client.Application.GetApplication().ActivePage;
-                var old_page_format_cells = VisioAutomation.Pages.PageFormatCells.GetCells(page.PageSheet, CellValueType.Formula);
+                var app = this.Client.Application.GetActiveApplication();
+                var page = app.ActivePage;
 
-                var new_page_format_cells = new VisioAutomation.Pages.PageFormatCells();
+                var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
                 
                 if (this.Width > 0)
                 {
-                    new_page_format_cells.Width = this.Width;
+                    page_format_cells.Width = this.Width;
                 }
 
                 if (this.Height > 0)
                 {
-                    new_page_format_cells.Height = this.Height;
+                    page_format_cells.Height = this.Height;
                 }
 
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                new_page_format_cells.SetFormulas(writer);
+                page_format_cells.SetFormulas(writer);
                 writer.BlastGuards = true;
 
                 writer.Commit(page);

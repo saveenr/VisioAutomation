@@ -367,7 +367,7 @@ namespace VisioAutomation_Tests.Scripting
             // this is a temporary fix to handle the fact that server_u.vss in Visio 2013 doesn't result in server_u.vssx 
             // gettign automatically loaded
 
-            var version = client.Application.Version;
+            var version = client.Application.ApplicationVersion;
             if (version.Major >= 15)
             {
                 foreach (var drawing in dg_model)
@@ -403,7 +403,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Master.DropMasterOnActivePage(master, new VA.Geometry.Point(2, 2));
 
             // Verify
-            var application = client.Application.GetApplication();
+            var application = client.Application.GetActiveApplication();
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             Assert.AreEqual(1, shapes.Count);
@@ -434,7 +434,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Master.DropMastersOnActivePage(masters, points);
 
             // Verify
-            var application = client.Application.GetApplication();
+            var application = client.Application.GetActiveApplication();
             Assert.AreEqual(4, application.ActivePage.Shapes.Count);
 
             // Cleanup
@@ -458,7 +458,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.NewDocument();
             client.Page.NewPage(pagesize, false);
 
-            var application = client.Application.GetApplication();
+            var application = client.Application.GetActiveApplication();
             var active_page = application.ActivePage;
 
             // Load the stencils and find the masters
@@ -474,7 +474,7 @@ namespace VisioAutomation_Tests.Scripting
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var app = active_page.Application;
 
-            var ver = client.Application.Version;
+            var ver = client.Application.ApplicationVersion;
             var cont_master_name = ver.Major >= 15 ? "Plain" : "Container 1";
 
             var stencil_type = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
@@ -511,7 +511,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.NewDocument();
             client.Page.NewPage(pagesize, false);
 
-            var application = client.Application.GetApplication();
+            var application = client.Application.GetActiveApplication();
             var active_page = application.ActivePage;
 
             // Load the stencils and find the masters
@@ -525,7 +525,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectAllShapes();
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
-            var ver = client.Application.Version;
+            var ver = client.Application.ApplicationVersion;
             var cont_master_name = ver.Major >= 15 ? "Plain" : "Container 1";
             var dropped_container = client.Master.DropContainer(cont_master_name);
 

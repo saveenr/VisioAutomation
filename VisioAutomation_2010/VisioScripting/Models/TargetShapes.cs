@@ -43,9 +43,9 @@ namespace VisioScripting.Models
 
         internal int SelectShapesAndCount(VisioScripting.Client client)
         {
-            client.Application.AssertApplicationAvailable();
+            client.Application.AssertHasActiveApplication();
 
-            var app = client.Application.VisioApplication;
+            var app = client.Application.GetActiveApplication();
             var active_window = app.ActiveWindow;
             var sel = active_window.Selection;
 
@@ -71,7 +71,7 @@ namespace VisioScripting.Models
 
         private IList<IVisio.Shape> __ResolveShapes(VisioScripting.Client client)
         {
-            client.Application.AssertApplicationAvailable();
+            client.Application.AssertHasActiveApplication();
 
             if (this.Shapes == null)
             {
