@@ -31,11 +31,9 @@ namespace VisioPowerShell.Commands
 
             if (this.Width > 0 || this.Height > 0)
             {
-                var app = this.Client.Application.GetActiveApplication();
-                var page = app.ActivePage;
 
                 var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
-                
+
                 if (this.Width > 0)
                 {
                     page_format_cells.Width = this.Width;
@@ -46,11 +44,7 @@ namespace VisioPowerShell.Commands
                     page_format_cells.Height = this.Height;
                 }
 
-                var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                page_format_cells.SetFormulas(writer);
-                writer.BlastGuards = true;
-
-                writer.Commit(page);
+                this.Client.Page.SetActivePageFormatCells(page_format_cells);
             }
         }
     }

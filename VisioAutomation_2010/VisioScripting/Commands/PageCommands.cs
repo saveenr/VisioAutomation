@@ -308,6 +308,19 @@ namespace VisioScripting.Commands
             }
         }
 
+        public void SetActivePageFormatCells(VisioAutomation.Pages.PageFormatCells cells)
+        {
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetActivePageFormatCells)))
+            {
+                var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+                cells.SetFormulas(writer);
+                writer.BlastGuards = true;
+                writer.Commit(cmdtarget.ActivePage);
+            }
+        }
+
         public void SetActivePageSize(VisioAutomation.Geometry.Size new_size)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
