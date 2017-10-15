@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
         {
         }
 
-        public void ExportActicePageToFile(string filename)
+        public void ExportActivePageToFile(string filename)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
@@ -37,7 +37,7 @@ namespace VisioScripting.Commands
             active_window.Select(old_selected_shapes, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void ExportActiveDocumentPagesToFiles(string filename)
+        public void ExportAllPagesInActiveDocumentToFiles(string filename)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
