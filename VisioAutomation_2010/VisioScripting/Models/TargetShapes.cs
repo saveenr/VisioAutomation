@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VisioScripting.Commands;
@@ -127,6 +128,51 @@ namespace VisioScripting.Models
             }
 
             return this.Document;
+        }
+    }
+
+    public class TargetPages
+    {
+        public IList<IVisio.Page> Pages { get; private set; }
+
+        public TargetPages()
+        {
+            // This explicitly means that the active document will be used
+            this.Pages = null;
+        }
+
+        public TargetPages(IList<IVisio.Page> pages)
+        {
+            this.Pages = pages;
+        }
+
+        public TargetPages( params IVisio.Page[] pages)
+        {
+            this.Pages = pages;
+        }
+
+
+        public IList<IVisio.Page> Resolve(VisioScripting.Client client)
+        {
+            if (this.Pages == null)
+            {
+                var cmdtarget = client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
+                                                        CommandTargetFlags.ActivePage);
+
+                this.Pages = new List<IVisio.Page> {cmdtarget.ActivePage};
+            }
+
+            if (this.Pages == null)
+            {
+                throw new VisioOperationException("Unvalid State No Pages");
+            }
+
+            if (this.Pages.Count < 1)
+            {
+                throw new VisioOperationException("Unvalid State No Pages");
+            }
+
+            return this.Pages;
         }
     }
 }

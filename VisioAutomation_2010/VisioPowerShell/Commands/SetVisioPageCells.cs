@@ -30,34 +30,27 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var target_pages = this.Pages ?? new []{ this.Client.Page.GetActivePage() };
+            var target_pages = new VisioScripting.Models.TargetPages(this.Pages);
 
-            if (target_pages.Length < 1)
-            {
-                return;
-            }
-
+            this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
+            this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
 
             using (var undoscope = this.Client.Application.NewUndoScope(nameof(SetVisioPageCells)))
             {
-                for (int i = 0; i < target_pages.Length; i++)
+                for (int i = 0; i < target_pages.Pages.Count; i++)
                 {
-                    var target_page = target_pages[i];
-                    var target_cells = this.Cells[i % this.Cells.Length];
-
+                    var target_page = target_pages.Pages[i];
                     this.Client.Output.WriteVerbose("Start Update Page Name={0}", target_page.NameU);
 
                     var target_pagesheet = target_page.PageSheet;
                     int target_pagesheet_id = target_pagesheet.ID;
-
+                    var target_cells = this.Cells[i % this.Cells.Length];
                     var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                     writer.BlastGuards = this.BlastGuards;
                     writer.TestCircular = this.TestCircular;
                     target_cells.Apply(writer, (short)target_pagesheet_id);
-                    this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
-                    this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
-
                     writer.Commit(target_page);
+
                     this.Client.Output.WriteVerbose("End Update Page Name={0}", target_page.NameU);
                 }
             }
