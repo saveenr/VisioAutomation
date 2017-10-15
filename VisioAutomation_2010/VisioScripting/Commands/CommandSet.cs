@@ -21,6 +21,7 @@ namespace VisioScripting.Commands
             if (!cmdsettype.IsAssignableFrom(mytype))
             {
                 string msg = string.Format("{0} must derive from {1}", mytype.Name, cmdsettype.Name);
+                throw new System.ArgumentException(msg,nameof(mytype));
             }
 
             var methods = mytype.GetMethods().Where(m => m.IsPublic && !m.IsStatic);
