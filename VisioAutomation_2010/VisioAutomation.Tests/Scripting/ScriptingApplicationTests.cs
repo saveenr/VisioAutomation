@@ -57,7 +57,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1, page.Shapes.Count);
-            client.Application.Undo();
+            client.Undo.UndoLastAction();
             Assert.AreEqual(0, page.Shapes.Count);
             client.Document.CloseActiveDocument(true);
         }

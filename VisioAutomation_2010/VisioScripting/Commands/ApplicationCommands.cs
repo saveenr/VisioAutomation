@@ -92,20 +92,6 @@ namespace VisioScripting.Commands
             return app;
         }
 
-        public void Undo()
-        {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
-
-            this._active_application.Undo();
-        }
-
-        public void Redo()
-        {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
-
-            this._active_application.Redo();
-        }
-
         public bool ValidateActiveApplication()
         {
             if (this._active_application == null)

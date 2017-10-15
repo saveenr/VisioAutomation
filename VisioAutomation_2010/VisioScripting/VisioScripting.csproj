@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AlignCommands.cs" />
+    <Compile Include="Commands\UndoCommands.cs" />
     <Compile Include="Commands\LockCommands.cs" />
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="Commands\CommandTarget.cs" />

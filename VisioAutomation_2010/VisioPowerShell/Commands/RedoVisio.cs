@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            this.Client.Application.Redo();
+            this.Client.Undo.RedoLastAction();
         }
     }
 }

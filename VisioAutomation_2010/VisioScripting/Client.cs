@@ -34,6 +34,7 @@ namespace VisioScripting
         public Commands.SelectionCommands Selection { get; }
         public Commands.ShapeSheetCommands ShapeSheet { get; }
         public Commands.TextCommands Text { get; }
+        public Commands.UndoCommands Undo { get; }
         public Commands.UserDefinedCellCommands UserDefinedCell { get; }
         public Commands.ViewCommands View { get; }
 
@@ -74,6 +75,7 @@ namespace VisioScripting
             this.Selection = new Commands.SelectionCommands(this);
             this.ShapeSheet = new Commands.ShapeSheetCommands(this);
             this.Text = new Commands.TextCommands(this);
+            this.Undo = new Commands.UndoCommands(this);
             this.UserDefinedCell = new Commands.UserDefinedCellCommands(this);
             this.View = new Commands.ViewCommands(this);
             this.Window = new Commands.ApplicationWindowCommands(this);
