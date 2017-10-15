@@ -56,8 +56,6 @@ namespace VisioScripting.Commands
 
         public void DeleteCustomPropertyWithName(VisioScripting.Models.TargetShapes targets, string name)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
@@ -86,8 +84,6 @@ namespace VisioScripting.Commands
 
         public void SetCustomPropertyWithName(VisioScripting.Models.TargetShapes  targets, string name, CustomPropertyCells customprop)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
             if (customprop == null)
             {
                 throw new System.ArgumentNullException(nameof(customprop));
