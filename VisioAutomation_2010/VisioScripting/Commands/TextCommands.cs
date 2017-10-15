@@ -15,9 +15,6 @@ namespace VisioScripting.Commands
 
         public void SetShapeText(VisioScripting.Models.TargetShapes targets, IList<string> texts)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
             if (texts == null || texts.Count < 1)
             {
                 return;
@@ -103,6 +100,5 @@ namespace VisioScripting.Commands
             var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids, CellValueType.Formula);
             return formats;
         }
-
     }
 }

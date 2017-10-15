@@ -15,9 +15,6 @@ namespace VisioScripting.Commands
 
         public List<int> AddHyperlink(VisioScripting.Models.TargetShapes targets, HyperlinkCells ctrl)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
             if (ctrl == null)
             {
                 throw new System.ArgumentNullException(nameof(ctrl));
@@ -46,9 +43,6 @@ namespace VisioScripting.Commands
 
         public void DeleteHyperlinkAtIndex(VisioScripting.Models.TargetShapes targets, int n)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -67,8 +61,6 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinkCells(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)

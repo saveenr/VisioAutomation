@@ -16,7 +16,6 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
 
-
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
