@@ -49,8 +49,6 @@ namespace VisioScripting.Commands
         public List<string> GetShapeText(VisioScripting.Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -73,10 +71,9 @@ namespace VisioScripting.Commands
                 return new List<VisioAutomation.Text.TextFormat>(0);
             }
 
-            var selection = this._client.Selection.GetActiveSelection();
-            var shapeids = selection.GetIDs();
+            var shapeids = targets.ToShapeIDs();
             var application = cmdtarget.Application;
-            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids, CellValueType.Formula);
+            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids.ShapeIDs, CellValueType.Formula);
             return formats;
         }
     }
