@@ -1,4 +1,16 @@
+using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
+
+namespace VisioPowerShell.Models
+{
+    public enum DocumentType
+    {
+        Drawing,
+        Stencil,
+        Template
+    }
+}
 
 namespace VisioPowerShell.Commands
 {
@@ -11,6 +23,8 @@ namespace VisioPowerShell.Commands
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter ActiveDocument;
 
+        [SMA.Parameter(Mandatory = false)] public VisioPowerShell.Models.DocumentType? Type;
+
         protected override void ProcessRecord()
         {
             if (this.ActiveDocument)
@@ -21,8 +35,25 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var docs = this.Client.Document.FindDocumentsByName(this.Name);
+            IVisio.VisDocumentTypes? visdoctype = null;
+
+            if (this.Type == DocumentType.Drawing)
+            {
+                visdoctype = IVisio.VisDocumentTypes.visTypeDrawing;
+            }
+            else if (this.Type == DocumentType.Stencil)
+            {
+                visdoctype = IVisio.VisDocumentTypes.visTypeStencil;
+            }
+            else if (this.Type == DocumentType.Template)
+            {
+                visdoctype = IVisio.VisDocumentTypes.visTypeTemplate;
+            }
+
+            var docs = this.Client.Document.FindDocuments(this.Name, visdoctype);
             this.WriteObject(docs, true);
         }
     }
+
+
 }

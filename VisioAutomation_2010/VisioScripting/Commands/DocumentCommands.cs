@@ -87,8 +87,7 @@ namespace VisioScripting.Commands
         public void ActivateDocument(IVisio.Document doc)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
-
-
+            
             // if the doc is already active do nothing
             if (doc == cmdtarget.ActiveDocument)
             {
@@ -297,22 +296,37 @@ namespace VisioScripting.Commands
             return doc;
         }
 
-        public List<IVisio.Document> FindDocumentsByName(string name)
+        public List<IVisio.Document> FindDocuments(string namepattern, IVisio.VisDocumentTypes? doctype)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
 
-            var documents = cmdtarget.Application.Documents;
-            if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
+            var docs = cmdtarget.Application.Documents;
+
+            // first get the full list
+            var doc_list = docs.ToEnumerable().ToList();
+
+            if (doctype == null)
             {
-                // return all documents
-                var docs1 = documents.ToEnumerable().ToList();
-                return docs1;
+                return doc_list;
+            }
+            // then filter by doc types
+            doc_list = doc_list.Where(d => doctype.Value == d.Type).ToList();
+
+            // second perform any name filtering
+
+            if (namepattern == null)
+            {
+                return doc_list;
             }
 
-            // get the named document
             var filter_action = VisioScripting.Helpers.WildcardHelper.FilterAction.Include;
-            var docs2 = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(documents.ToEnumerable(), new[] {name}, d => d.Name, true, filter_action).ToList();
-            return docs2;
+            doc_list = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(
+                doc_list, 
+                new[] {namepattern}, 
+                d => d.Name, 
+                true, 
+                filter_action).ToList();
+            return doc_list;
         }
     }
 }
