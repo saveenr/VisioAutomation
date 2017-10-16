@@ -21,7 +21,7 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                this.Client.Document.CloseDocuments(this.Documents.ToList(), this.Force);
+                this.Client.Document.CloseDocuments(this.Documents, this.Force);
             }
         }
     }

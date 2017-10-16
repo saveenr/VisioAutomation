@@ -143,8 +143,9 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void CloseDocuments(List<IVisio.Document> docs, bool force)
+        public void CloseDocuments(IList<IVisio.Document> docs, bool force)
         {
+            this._client.Output.WriteVerbose("Closing {0} documents", docs.Count);
             foreach (var doc in docs)
             {
                 this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID, doc.Name);
