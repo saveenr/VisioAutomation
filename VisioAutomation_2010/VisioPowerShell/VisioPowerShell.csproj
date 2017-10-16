@@ -104,7 +104,6 @@
     <Compile Include="Commands\Nouns.cs" />
     <Compile Include="Commands\CloseVisioDocument.cs" />
     <Compile Include="Commands\CloseVisioMaster.cs" />
-    <Compile Include="Commands\FormatVisioText.cs" />
     <Compile Include="Commands\NewVisioContainer.cs" />
     <Compile Include="Commands\OpenVisioMaster.cs" />
     <Compile Include="Models\LockStatus.cs" />

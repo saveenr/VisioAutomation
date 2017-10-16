@@ -62,27 +62,6 @@ namespace VisioScripting.Commands
             return texts;
         }
 
-        public void SetShapeFont(VisioScripting.Models.TargetShapes targets, string fontname)
-        {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-
-            targets = targets.ResolveShapes(this._client);
-
-            if (targets.Shapes.Count < 1)
-            {
-                return;
-            }
-
-            var active_doc_fonts = cmdtarget.ActiveDocument.Fonts;
-            var font = active_doc_fonts[fontname];
-            var page = cmdtarget.ActivePage;
-
-            var cells = new VisioAutomation.Text. CharacterFormatCells();
-            cells.Font = font.ID;
-
-            this._client.ShapeSheet.__SetCells(targets, cells, page);
-        }
-
         public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(VisioScripting.Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
