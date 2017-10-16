@@ -26,20 +26,11 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            IVisio.Document doc;
-
-            if (string.IsNullOrEmpty(this.Template))
-            {
-                doc = this.Client.Document.NewDocument();
-            }
-            else
-            {
-                doc = this.Client.Document.NewDocumentFromTemplate(this.Template);
-            }
+            var doc = this.Client.Document.NewDocumentFromTemplate(this.Template);
 
             if (!string.IsNullOrEmpty(this.Stencil))
             {
-                this.Client.Document.OpenStencilDocument(this.Stencil);
+                var stencildoc = this.Client.Document.OpenStencilDocument(this.Stencil);
             }
 
             this.WriteObject(doc);
