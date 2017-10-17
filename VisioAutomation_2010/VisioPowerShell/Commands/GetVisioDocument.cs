@@ -35,23 +35,32 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            IVisio.VisDocumentTypes? visdoctype = null;
-
-            if (this.Type == DocumentType.Drawing)
-            {
-                visdoctype = IVisio.VisDocumentTypes.visTypeDrawing;
-            }
-            else if (this.Type == DocumentType.Stencil)
-            {
-                visdoctype = IVisio.VisDocumentTypes.visTypeStencil;
-            }
-            else if (this.Type == DocumentType.Template)
-            {
-                visdoctype = IVisio.VisDocumentTypes.visTypeTemplate;
-            }
-
+            var visdoctype = GetVisDocumentTypes(this.Type);
             var docs = this.Client.Document.FindDocuments(this.Name, visdoctype);
             this.WriteObject(docs, true);
+        }
+
+        private static IVisio.VisDocumentTypes? GetVisDocumentTypes(DocumentType? doctype)
+        {
+            if (doctype == null)
+            {
+                return null;
+            }
+
+            if (doctype.Value == DocumentType.Drawing)
+            {
+                return IVisio.VisDocumentTypes.visTypeDrawing;
+            }
+            else if (doctype.Value == DocumentType.Stencil)
+            {
+                return IVisio.VisDocumentTypes.visTypeStencil;
+            }
+            else if (doctype.Value == DocumentType.Template)
+            {
+                return IVisio.VisDocumentTypes.visTypeTemplate;
+            }
+
+            throw new System.ArgumentOutOfRangeException(nameof(doctype));
         }
     }
 
