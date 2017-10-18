@@ -4,12 +4,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Models
 {
-    public enum DocumentType
-    {
-        Drawing,
-        Stencil,
-        Template
-    }
 }
 
 namespace VisioPowerShell.Commands
