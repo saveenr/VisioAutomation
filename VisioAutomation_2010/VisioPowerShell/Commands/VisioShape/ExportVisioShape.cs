@@ -64,11 +64,11 @@ namespace VisioPowerShell.Commands
 
             if (_htmlExtensions.Contains(ext))
             {
-                this.Client.ExportSelection.SelectionToHtml(this.Filename);                
+                this.Client.ExportSelection.ExportSelectionToHtml(this.Filename);                
             }
             else
             {
-                this.Client.ExportSelection.SelectionToFile(this.Filename);
+                this.Client.ExportSelection.ExportSelectionToFile(this.Filename);
             }
         }
     }
