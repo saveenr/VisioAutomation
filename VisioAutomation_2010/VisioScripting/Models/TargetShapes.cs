@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioScripting.Commands;
 
 namespace VisioScripting.Models
 {
@@ -99,80 +97,6 @@ namespace VisioScripting.Models
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
             var targets = new TargetShapes(shapes_2d);
             return targets;
-        }
-    }
-
-    public class TargetDocument
-    {
-        public IVisio.Document Document { get; private set; }
-
-        public TargetDocument()
-        {
-            // This explicitly means that the active document will be used
-            this.Document = null;
-        }
-
-        public TargetDocument(IVisio.Document doc)
-        {
-            // This explicitly means that the active document will be used
-            this.Document = doc;
-        }
-
-        public IVisio.Document Resolve(VisioScripting.Client client)
-        {
-            if (this.Document == null)
-            {
-                var cmdtarget = client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
-                                                        CommandTargetFlags.ActivePage);
-                this.Document = cmdtarget.ActiveDocument;
-            }
-
-            return this.Document;
-        }
-    }
-
-    public class TargetPages
-    {
-        public IList<IVisio.Page> Pages { get; private set; }
-
-        public TargetPages()
-        {
-            // This explicitly means that the active document will be used
-            this.Pages = null;
-        }
-
-        public TargetPages(IList<IVisio.Page> pages)
-        {
-            this.Pages = pages;
-        }
-
-        public TargetPages( params IVisio.Page[] pages)
-        {
-            this.Pages = pages;
-        }
-
-
-        public IList<IVisio.Page> Resolve(VisioScripting.Client client)
-        {
-            if (this.Pages == null)
-            {
-                var cmdtarget = client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
-                                                        CommandTargetFlags.ActivePage);
-
-                this.Pages = new List<IVisio.Page> {cmdtarget.ActivePage};
-            }
-
-            if (this.Pages == null)
-            {
-                throw new VisioOperationException("Unvalid State No Pages");
-            }
-
-            if (this.Pages.Count < 1)
-            {
-                throw new VisioOperationException("Unvalid State No Pages");
-            }
-
-            return this.Pages;
         }
     }
 }
