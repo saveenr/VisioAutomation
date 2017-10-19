@@ -135,11 +135,11 @@
     <Compile Include="Models\ResultType.cs" />
     <Compile Include="Commands\VisioShape\NewVisioShape.cs" />
     <Compile Include="Commands\VisioShape\CopyVisioShape.cs" />
-    <Compile Include="Commands\VisioApplication\ExportVisioSelectionAsHtml.cs" />
+    <Compile Include="Commands\VisioSelection\ExportVisioSelectionAsHtml.cs" />
     <Compile Include="Commands\VisioApplication\RedoVisio.cs" />
     <Compile Include="Commands\VisioDocument\SaveVisioDocument.cs" />
     <Compile Include="Commands\VisioDocument\TestVisioDocument.cs" />
-    <Compile Include="Commands\VisioApplication\TestVisioSelection.cs" />
+    <Compile Include="Commands\VisioSelection\TestVisioSelection.cs" />
     <Compile Include="Commands\VisioShape\RemoveVisioShape.cs" />
     <Compile Include="Commands\VisioPage\GetVisioLayer.cs" />
     <Compile Include="Commands\VisioShape\SelectVisioShape.cs" />
