@@ -1,10 +1,10 @@
-using VisioScripting.Commands;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {
     public class TargetDocuments
     {
-        public Microsoft.Office.Interop.Visio.Document[] Documents { get; private set; }
+        public IVisio.Document[] Documents { get; private set; }
 
         public TargetDocuments()
         {
@@ -12,18 +12,20 @@ namespace VisioScripting.Models
             this.Documents = null;
         }
 
-        public TargetDocuments(params Microsoft.Office.Interop.Visio.Document[] docs)
+        public TargetDocuments(params IVisio.Document[] docs)
         {
             // This explicitly means that the active document will be used
             this.Documents = docs;
         }
 
-        public Microsoft.Office.Interop.Visio.Document[] Resolve(VisioScripting.Client client)
+        public IVisio.Document[] Resolve(VisioScripting.Client client)
         {
             if (this.Documents == null)
             {
-                var cmdtarget = client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
-                                                        CommandTargetFlags.ActivePage);
+                var cmdtarget = client.GetCommandTarget(
+                    Commands.CommandTargetFlags.Application | 
+                    Commands.CommandTargetFlags.ActiveDocument |
+                    Commands.CommandTargetFlags.ActivePage);
                 this.Documents = new[] { cmdtarget.ActiveDocument };
             }
 

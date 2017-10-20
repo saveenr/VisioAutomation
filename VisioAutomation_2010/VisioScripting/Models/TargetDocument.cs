@@ -1,4 +1,3 @@
-using VisioScripting.Commands;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
@@ -23,8 +22,10 @@ namespace VisioScripting.Models
         {
             if (this.Document == null)
             {
-                var cmdtarget = client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
-                                                        CommandTargetFlags.ActivePage);
+                var cmdtarget = client.GetCommandTarget(
+                    Commands.CommandTargetFlags.Application | 
+                    Commands.CommandTargetFlags.ActiveDocument |
+                    Commands.CommandTargetFlags.ActivePage);
                 this.Document = cmdtarget.ActiveDocument;
             }
 
