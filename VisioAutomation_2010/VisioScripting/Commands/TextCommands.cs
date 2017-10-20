@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
 
 namespace VisioScripting.Commands
@@ -13,7 +12,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetShapeText(VisioScripting.Models.TargetShapes targets, IList<string> texts)
+        public void SetShapeText(Models.TargetShapes targets, IList<string> texts)
         {
             if (texts == null || texts.Count < 1)
             {
@@ -46,7 +45,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<string> GetShapeText(VisioScripting.Models.TargetShapes targets)
+        public List<string> GetShapeText(Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             targets = targets.ResolveShapes(this._client);
@@ -60,7 +59,7 @@ namespace VisioScripting.Commands
             return texts;
         }
 
-        public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(VisioScripting.Models.TargetShapes targets)
+        public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
