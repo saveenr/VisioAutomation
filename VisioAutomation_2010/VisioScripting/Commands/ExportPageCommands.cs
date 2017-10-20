@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         public void ExportActivePageToFile(string filename)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (filename == null)
             {
@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
 
         public void ExportAllPagesInActiveDocumentToFiles(string filename)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (filename == null)
             {

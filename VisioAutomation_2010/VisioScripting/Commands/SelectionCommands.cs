@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
         
         public IVisio.Selection GetActiveSelection()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
             var active_window = cmdtarget.Application.ActiveWindow;
             var selection = active_window.Selection;
             return selection;
@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
 
         public void SelectAllShapes()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             var active_window = cmdtarget.Application.ActiveWindow;
             active_window.SelectAll();
@@ -31,7 +31,7 @@ namespace VisioScripting.Commands
 
         public void InvertSelection()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var active_page = cmdtarget.ActivePage;
             var shapes = active_page.Shapes;
@@ -68,7 +68,7 @@ namespace VisioScripting.Commands
 
         public void SelectNone()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             var active_window = cmdtarget.Application.ActiveWindow;
             active_window.DeselectAll();
@@ -77,7 +77,7 @@ namespace VisioScripting.Commands
 
         public void SelectShapesById(IVisio.Shape shape)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             if (shape == null)
             {
@@ -90,7 +90,7 @@ namespace VisioScripting.Commands
 
         public void SelectShapes(IEnumerable<IVisio.Shape> shapes)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             if (shapes == null)
             {
@@ -103,7 +103,7 @@ namespace VisioScripting.Commands
 
         public void SelectShapesById(IEnumerable<int> shapeids)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (shapeids == null)
             {
@@ -119,8 +119,8 @@ namespace VisioScripting.Commands
         
         public void SubSelectShapes(IList<IVisio.Shape> shapes)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-            
+            var cmdtarget = this._client.GetCommandTargetDocument();
+
             if (shapes == null)
             {
                 throw new System.ArgumentNullException(nameof(shapes));
@@ -132,8 +132,8 @@ namespace VisioScripting.Commands
 
         public void SelectShapesByMaster(IVisio.Master master)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-            
+            var cmdtarget = this._client.GetCommandTargetPage();
+
             var page = cmdtarget.ActivePage;
             // Get a selection of connectors, by master: 
             var selection = page.CreateSelection(
@@ -144,7 +144,7 @@ namespace VisioScripting.Commands
 
         public void SelectShapesByLayer(string layername)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (layername == null)
             {
@@ -168,7 +168,7 @@ namespace VisioScripting.Commands
 
         public IList<IVisio.Shape> GetShapesInSelection()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(selection);
@@ -176,7 +176,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesInSelectionRecursive()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapesRecursive(selection);
@@ -184,7 +184,7 @@ namespace VisioScripting.Commands
 
         public int GetCountOfSelectedShapes()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTargetApplication();
             var active_window = cmdtarget.Application.ActiveWindow;
             var selection = active_window.Selection;
             int count = selection.Count;
@@ -193,7 +193,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetSubSelectedShapes()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
             var shapes = new List<IVisio.Shape>(0);
@@ -223,7 +223,7 @@ namespace VisioScripting.Commands
 
         public void DeleteShapesInSelection()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
@@ -237,7 +237,7 @@ namespace VisioScripting.Commands
 
         public void CopySelectedShapes()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
@@ -252,8 +252,8 @@ namespace VisioScripting.Commands
 
         public void DuplicateSelectedShapes(VisioScripting.Models.TargetShapes target_shapes )
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
-            
+            var cmdtarget = this._client.GetCommandTargetDocument();
+
             int n = target_shapes.SelectShapesAndCount(this._client);
 
             this._client.Output.WriteVerbose("Number of shapes to duplicate: {0}", n);
@@ -281,7 +281,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(min_items));
             }
 
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
             int num_selected = selection.Count;

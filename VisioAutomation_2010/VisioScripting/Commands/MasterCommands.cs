@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
 
         public void CloseMasterEditing()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTargetApplication();
 
             var application = cmdtarget.Application;
             var window = application.ActiveWindow;
@@ -40,7 +40,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Master> GetAllMastersInDocument()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
             var target_doc = new TargetDocument(cmdtarget.ActiveDocument);
             return this.GetAllMastersInDocument(target_doc);
         }
@@ -60,7 +60,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Master GetMasterWithName(string name)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             if (name == null)
             {
@@ -146,7 +146,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropMasterOnActivePage(IVisio.Master master, VisioAutomation.Geometry.Point p)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             var shape = page.Drop(master, p.X, p.Y);
@@ -155,7 +155,7 @@ namespace VisioScripting.Commands
 
         public short[] DropMastersOnActivePage(IList<IVisio.Master> masters, IList<VisioAutomation.Geometry.Point> points)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (masters == null)
             {
@@ -174,7 +174,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Master NewMaster(IVisio.Document document, string name)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             if (document == null)
             {
@@ -200,7 +200,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropContainerMaster(IVisio.Master master)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             var window = cmdtarget.Application.ActiveWindow;
@@ -212,7 +212,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropContainer(string master)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
 
             var application = cmdtarget.Application;

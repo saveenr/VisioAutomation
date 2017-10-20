@@ -19,14 +19,14 @@ namespace VisioScripting.Commands
         /// <returns></returns>
         public List<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosureOnActivePage(VA.DocumentAnalysis.ConnectorHandling flag)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             return VA.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(cmdtarget.ActivePage, flag);
         }
 
         public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdgesOnActivePage(VA.DocumentAnalysis.ConnectorHandling flag)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(cmdtarget.ActivePage, flag);
             return directed_edges;
@@ -34,8 +34,8 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> ConnectShapes(IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master master)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-            
+            var cmdtarget = this._client.GetCommandTargetPage();
+
             using (var undoscope = this._client.Application.NewUndoScope(nameof(ConnectShapes)))
             {
                 if (master == null)

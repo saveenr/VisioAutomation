@@ -11,13 +11,13 @@ namespace VisioScripting.Commands
 
         public void UndoLastAction()
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTargetApplication();
             cmdtarget.Application.Undo();
         }
 
         public void RedoLastAction()
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTargetApplication();
             cmdtarget.Application.Redo();
         }
     }

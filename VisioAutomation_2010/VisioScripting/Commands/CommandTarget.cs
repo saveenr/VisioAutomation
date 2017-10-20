@@ -6,9 +6,9 @@ namespace VisioScripting.Commands
     public class CommandTarget
     {
         public readonly Client Client;
-        public Microsoft.Office.Interop.Visio.Application Application;
-        public Microsoft.Office.Interop.Visio.Document ActiveDocument;
-        public Microsoft.Office.Interop.Visio.Page ActivePage;
+        public IVisio.Application Application;
+        public IVisio.Document ActiveDocument;
+        public IVisio.Page ActivePage;
 
         public bool HasActiveApplication => this.Application != null;
         public bool HasActiveDocument => this.ActiveDocument != null;
@@ -101,7 +101,7 @@ namespace VisioScripting.Commands
 
             if (doc.Application != app)
             {
-                string msg = string.Format("application does not match doc.application");
+                string msg = "application does not match doc.application";
                 new System.ArgumentException(msg);
             }
 

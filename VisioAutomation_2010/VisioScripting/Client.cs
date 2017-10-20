@@ -115,5 +115,27 @@ namespace VisioScripting
             var ct = new CommandTarget(this, flags);
             return ct;
         }
+
+        public CommandTarget GetCommandTargetPage()
+        {
+            var flags = CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
+                        CommandTargetFlags.ActivePage;
+            var ct = new CommandTarget(this, flags);
+            return ct;
+        }
+
+        public CommandTarget GetCommandTargetDocument()
+        {
+            var flags = CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument;
+            var ct = new CommandTarget(this, flags);
+            return ct;
+        }
+
+        public CommandTarget GetCommandTargetApplication()
+        {
+            var flags = CommandTargetFlags.Application;
+            var ct = new CommandTarget(this, flags);
+            return ct;
+        }
     }
 }

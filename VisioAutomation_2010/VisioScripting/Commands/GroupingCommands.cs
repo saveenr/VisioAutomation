@@ -13,7 +13,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape GroupSelectedShapes()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             // No shapes provided, use the active selection
 
@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
 
         public void UngroupSelectedShapes(VisioScripting.Models.TargetShapes targets)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTargetApplication();
 
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;

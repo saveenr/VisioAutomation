@@ -1,3 +1,5 @@
+using IVisio = Microsoft.Office.Interop.Visio;
+
 namespace VisioScripting.Commands
 {
     public class ArrangeCommands : CommandSet
@@ -15,7 +17,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 1)
@@ -27,14 +29,14 @@ namespace VisioScripting.Commands
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;
-                var unitcode = Microsoft.Office.Interop.Visio.VisUnitCodes.visInches;
+                var unitcode = IVisio.VisUnitCodes.visInches;
 
                 // Move method: http://msdn.microsoft.com/en-us/library/ms367549.aspx   
                 selection.Move(dx, dy, unitcode);
             }
         }
 
-        private static void SendSelectedShapes(Microsoft.Office.Interop.Visio.Selection selection, Models.ShapeSendDirection dir)
+        private static void SendSelectedShapes(IVisio.Selection selection, Models.ShapeSendDirection dir)
         {
 
             if (dir == Models.ShapeSendDirection.ToBack)
@@ -58,7 +60,7 @@ namespace VisioScripting.Commands
 
         public void SendShapesUpOrDown(VisioScripting.Models.TargetShapes targets, Models.ShapeSendDirection dir)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 1)
@@ -70,6 +72,5 @@ namespace VisioScripting.Commands
             var selection = window.Selection;
             ArrangeCommands.SendSelectedShapes(selection, dir);
         }
-
     }
 }

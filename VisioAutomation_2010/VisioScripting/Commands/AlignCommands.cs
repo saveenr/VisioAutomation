@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         public void AlignSelectedShapesHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal align)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 2)
@@ -49,7 +49,7 @@ namespace VisioScripting.Commands
 
         public void AlignSelectedShapesVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical align)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 2)

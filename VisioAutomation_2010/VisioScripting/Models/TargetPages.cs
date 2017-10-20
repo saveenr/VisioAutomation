@@ -29,9 +29,7 @@ namespace VisioScripting.Models
         {
             if (this.Pages == null)
             {
-                var cmdtarget = client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
-                                                        CommandTargetFlags.ActivePage);
-
+                var cmdtarget = client.GetCommandTargetPage();
                 this.Pages = new List<Microsoft.Office.Interop.Visio.Page> {cmdtarget.ActivePage};
             }
 

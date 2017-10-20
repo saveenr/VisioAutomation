@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
 
         public VisioAutomation.SurfaceTarget GetActiveDrawingSurface()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             var surf_Application = cmdtarget.Application;
             var surf_Window = surf_Application.ActiveWindow;
@@ -53,7 +53,7 @@ namespace VisioScripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope(nameof(DrawNurbsCurve)))
@@ -136,7 +136,7 @@ namespace VisioScripting.Commands
 
         public void DuplicateShapes(int n)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument );
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             if (n < 1)
             {

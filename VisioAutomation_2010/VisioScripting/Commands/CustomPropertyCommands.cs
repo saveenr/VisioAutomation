@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomProperties(VisioScripting.Models.TargetShapes targets)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var prop_dic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
             targets = targets.ResolveShapes(this._client);

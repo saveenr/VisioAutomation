@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         public void DistributeShapesOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             targets = targets.ResolveShapes(this._client);
@@ -25,7 +25,7 @@ namespace VisioScripting.Commands
 
         public void DistributeShapesOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |  CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 1)
@@ -56,7 +56,7 @@ namespace VisioScripting.Commands
 
         public void DistributeShapesHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal halign)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 1)
@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
 
         public void DistributeVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical valign)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument);
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 1)

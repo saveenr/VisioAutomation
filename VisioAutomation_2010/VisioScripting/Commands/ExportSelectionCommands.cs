@@ -13,7 +13,7 @@ namespace VisioScripting.Commands
 
         public void ExportSelectionToFile(string filename)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (filename == null)
             {
@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
 
         public void ExportSelectionToHtml(string filename)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (filename == null)
             {
@@ -53,7 +53,7 @@ namespace VisioScripting.Commands
 
         private void ExportSelectionToHtml(IVisio.Selection selection, string filename, System.Action<string> export_log)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";

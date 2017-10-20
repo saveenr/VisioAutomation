@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Layer FindLayersOnActivePageByName(string name)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (name == null)
             {
@@ -44,7 +44,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Layer> GetLayersOnActivePage()
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             return cmdtarget.ActivePage.Layers.ToList();
         }

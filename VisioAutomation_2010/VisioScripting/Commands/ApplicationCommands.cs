@@ -52,7 +52,7 @@ namespace VisioScripting.Commands
 
         public void CloseActiveApplication(bool force)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTargetApplication();
 
             var app = cmdtarget.Application;
 
@@ -124,7 +124,7 @@ namespace VisioScripting.Commands
             {
                 if (ApplicationCommands.visio_app_version == null)
                 {
-                    var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application);
+                    var cmdtarget = this._client.GetCommandTargetApplication();
 
                     var application = cmdtarget.Application;
                     ApplicationCommands.visio_app_version = VisioAutomation.Application.ApplicationHelper.GetVersion(application);

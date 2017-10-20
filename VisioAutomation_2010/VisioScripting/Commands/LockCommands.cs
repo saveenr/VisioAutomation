@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
 
         public void SetLockCells(VisioScripting.Models.TargetShapes targets, LockCells lockcells)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)
@@ -41,7 +41,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<int,LockCells> GetLockCells(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             targets = targets.ResolveShapes(this._client);
             if (targets.Shapes.Count < 1)

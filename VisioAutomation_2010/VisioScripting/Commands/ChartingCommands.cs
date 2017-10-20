@@ -41,7 +41,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(datatable),"DataTable must have at least one row");
             }
 
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
             string master = "Rectangle";
             string stencil = "basic_u.vss";
             var stencildoc = this._client.Document.OpenStencilDocument(stencil);
@@ -87,7 +87,7 @@ namespace VisioScripting.Commands
 
         public void DrawGridOnActivePage(GRID.GridLayout layout)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             layout.PerformLayout();
@@ -104,7 +104,7 @@ namespace VisioScripting.Commands
             double start_angle,
             double end_angle)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope(nameof(DrawPieSliceOnActivePage)))
@@ -122,8 +122,8 @@ namespace VisioScripting.Commands
             double start_angle,
             double end_angle)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
-            
+            var cmdtarget = this._client.GetCommandTargetPage();
+
             var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope(nameof(DrawDoughnutSliceOnActivePage)))
             {
@@ -136,7 +136,7 @@ namespace VisioScripting.Commands
 
         public void DrawPieChartOnActivePage(VisioAutomation.Models.Charting.PieChart chart)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             chart.Render(page);
@@ -144,7 +144,7 @@ namespace VisioScripting.Commands
 
         public void DrawBarChartOnActivePage(VisioAutomation.Models.Charting.BarChart chart)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var application = cmdtarget.Application;
             var page = application.ActivePage;
@@ -153,7 +153,7 @@ namespace VisioScripting.Commands
 
         public void DrawAreaChartOnActivePage(VisioAutomation.Models.Charting.AreaChart chart)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument | CommandTargetFlags.ActivePage);
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             chart.Render(page);
@@ -162,7 +162,7 @@ namespace VisioScripting.Commands
 
         public void NewOrgChartDocument(ORG.OrgChartDocument chartdocument)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTargetApplication();
 
             this._client.Output.WriteVerbose("Start OrgChart Rendering");
 
@@ -175,7 +175,7 @@ namespace VisioScripting.Commands
 
         public void NewDirectedGraphDocument(IList<GRAPH.DirectedGraphLayout> graph)
         {
-            var cmdtarget = this._client.GetCommandTarget( CommandTargetFlags.Application);
+            var cmdtarget = this._client.GetCommandTargetApplication();
 
             this._client.Output.WriteVerbose("Start rendering directed graph");
             var app = cmdtarget.Application;
