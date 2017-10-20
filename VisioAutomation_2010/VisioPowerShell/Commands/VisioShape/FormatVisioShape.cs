@@ -24,36 +24,31 @@ namespace VisioPowerShell.Commands
         [SMA.Parameter(Mandatory = false)]
         public VisioScripting.Models.AlignmentHorizontal? AlignHorizontal = null;
 
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
-
         protected override void ProcessRecord()
         {
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                this.Client.Arrange.NudgeShapes(targets, this.NudgeX, this.NudgeY);
+                this.Client.Arrange.NudgeSelection(this.NudgeX, this.NudgeY);
             }
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Distribute.DistributeShapesOnAxis(targets, VisioScripting.Models.Axis.XAxis);
+                this.Client.Distribute.DistributeSelectionOnAxis(VisioScripting.Models.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Distribute.DistributeShapesOnAxis(targets, VisioScripting.Models.Axis.YAxis);
+                this.Client.Distribute.DistributeSelectionOnAxis(VisioScripting.Models.Axis.YAxis);
             }
 
             if (this.AlignVertical.HasValue)
             {
-                this.Client.Align.AlignSelectedShapesVertical(targets, this.AlignVertical.Value);
+                this.Client.Align.AlignSelectionVertical(this.AlignVertical.Value);
             }
 
             if (this.AlignHorizontal.HasValue)
             {
-                this.Client.Align.AlignSelectedShapesHorizontal(targets, this.AlignHorizontal.Value);
+                this.Client.Align.AlignSelectionHorizontal(this.AlignHorizontal.Value);
             }
 
         }

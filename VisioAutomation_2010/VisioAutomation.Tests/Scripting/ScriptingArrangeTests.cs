@@ -70,8 +70,8 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s3);
 
             var targets = new VisioScripting.Models.TargetShapes();
-            client.Distribute.DistributeShapesOnAxis(targets, VisioScripting.Models.Axis.XAxis , 0.25);
-            client.Distribute.DistributeShapesOnAxis(targets, VisioScripting.Models.Axis.YAxis, 1.0);
+            client.Distribute.DistributeSelectionOnAxis(targets, VisioScripting.Models.Axis.XAxis , 0.25);
+            client.Distribute.DistributeSelectionOnAxis(targets, VisioScripting.Models.Axis.YAxis, 1.0);
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID };
             var out_xfrms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(), shapeids, VA.ShapeSheet.CellValueType.Result);
@@ -111,9 +111,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            var targets = new VisioScripting.Models.TargetShapes();
-
-            client.Arrange.NudgeShapes(targets, 0.50, -0.25);
+            client.Arrange.NudgeSelection(0.50, -0.25);
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID };
             var xforms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(), shapeids, VA.ShapeSheet.CellValueType.Result);

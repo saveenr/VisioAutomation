@@ -10,29 +10,22 @@ namespace VisioScripting.Commands
 
         }
 
-        public void DistributeShapesOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
+        public void DistributeSelectionOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             targets = targets.ResolveShapes(this._client);
             var targetids = targets.ToShapeIDs();
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(DistributeShapesOnAxis)))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DistributeSelectionOnAxis)))
             {
                 VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
             }
         }
 
-        public void DistributeShapesOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
+        public void DistributeSelectionOnAxis(VisioScripting.Models.Axis axis)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
-
-            int shape_count = targets.SelectShapesAndCount(this._client);
-            if (shape_count < 1)
-            {
-                return;
-            }
-
 
             IVisio.VisUICmds cmd;
 
@@ -48,7 +41,7 @@ namespace VisioScripting.Commands
                     throw new System.ArgumentOutOfRangeException();
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(DistributeShapesOnAxis)))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(DistributeSelectionOnAxis)))
             {
                 cmdtarget.Application.DoCmd((short)cmd);
             }

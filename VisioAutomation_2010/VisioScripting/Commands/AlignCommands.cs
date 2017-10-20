@@ -10,15 +10,9 @@ namespace VisioScripting.Commands
 
         }
 
-        public void AlignSelectedShapesHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal align)
+        public void AlignSelectionHorizontal(VisioScripting.Models.AlignmentHorizontal align)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
-
-            int shape_count = targets.SelectShapesAndCount(this._client);
-            if (shape_count < 2)
-            {
-                return;
-            }
 
             IVisio.VisHorizontalAlignTypes halign;
             var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
@@ -39,7 +33,7 @@ namespace VisioScripting.Commands
 
             const bool glue_to_guide = false;
 
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(AlignSelectedShapesHorizontal)))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(AlignSelectionHorizontal)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;
@@ -47,16 +41,10 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void AlignSelectedShapesVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical align)
+        public void AlignSelectionVertical(VisioScripting.Models.AlignmentVertical align)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
-
-            int shape_count = targets.SelectShapesAndCount(this._client);
-            if (shape_count < 2)
-            {
-                return;
-            }
-
+            
             // Set the align enums
             var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
             IVisio.VisVerticalAlignTypes valign;
@@ -71,7 +59,7 @@ namespace VisioScripting.Commands
             const bool glue_to_guide = false;
 
             // Perform the alignment
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(AlignSelectedShapesVertical)))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(AlignSelectionVertical)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;

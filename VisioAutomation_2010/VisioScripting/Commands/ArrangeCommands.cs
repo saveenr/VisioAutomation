@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void NudgeShapes(VisioScripting.Models.TargetShapes targets, double dx, double dy)
+        public void NudgeSelection(double dx, double dy)
         {
             if (dx == 0.0 && dy == 0.0)
             {
@@ -19,13 +19,7 @@ namespace VisioScripting.Commands
 
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            int shape_count = targets.SelectShapesAndCount(this._client);
-            if (shape_count < 1)
-            {
-                return;
-            }
-
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(NudgeShapes)))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(NudgeSelection)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;
@@ -36,7 +30,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private static void SendSelectedShapes(IVisio.Selection selection, Models.ShapeSendDirection dir)
+        private static void SendSelection(IVisio.Selection selection, Models.ShapeSendDirection dir)
         {
 
             if (dir == Models.ShapeSendDirection.ToBack)
@@ -58,19 +52,12 @@ namespace VisioScripting.Commands
         }
 
 
-        public void SendShapesUpOrDown(VisioScripting.Models.TargetShapes targets, Models.ShapeSendDirection dir)
+        public void SendSelection(Models.ShapeSendDirection dir)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
-
-            int shape_count = targets.SelectShapesAndCount(this._client);
-            if (shape_count < 1)
-            {
-                return;
-            }
-
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
-            ArrangeCommands.SendSelectedShapes(selection, dir);
+            ArrangeCommands.SendSelection(selection, dir);
         }
     }
 }
