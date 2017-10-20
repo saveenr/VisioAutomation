@@ -61,7 +61,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var cp = new CustomPropertyCells();
             cp.Value = "\"BAR\"";
-            client.CustomProperty.SetCustomPropertyWithName(targets, "FOO",cp);
+            client.CustomProperty.SetCustomProperty(targets, "FOO",cp);
 
             var prop_dic1 = client.CustomProperty.GetCustomProperties(targets);
             Assert.AreEqual(3, prop_dic1.Count);

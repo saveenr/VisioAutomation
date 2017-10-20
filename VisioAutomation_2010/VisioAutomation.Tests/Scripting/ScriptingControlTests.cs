@@ -25,7 +25,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioScripting.Models.TargetShapes();
 
-            var controls0 = client.Control.GetControlCells(targets, CellValueType.Formula);
+            var controls0 = client.Control.GetControls(targets, CellValueType.Formula);
             int found_controls = controls0.Count;
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls0[s1].Count);
@@ -37,14 +37,14 @@ namespace VisioAutomation_Tests.Scripting
             ctrl.Y = "0";
             client.Control.AddControlToShapes(targets, ctrl);
 
-            var controls1 = client.Control.GetControlCells(targets, CellValueType.Formula);
+            var controls1 = client.Control.GetControls(targets, CellValueType.Formula);
             Assert.AreEqual(3, controls1.Count);
             Assert.AreEqual(1, controls1[s1].Count);
             Assert.AreEqual(1, controls1[s2].Count);
             Assert.AreEqual(1, controls1[s3].Count);
 
             client.Control.DeleteControlWithIndex(targets, 0);
-            var controls2 = client.Control.GetControlCells(targets, CellValueType.Formula);
+            var controls2 = client.Control.GetControls(targets, CellValueType.Formula);
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls2[s1].Count);
             Assert.AreEqual(0, controls2[s2].Count);

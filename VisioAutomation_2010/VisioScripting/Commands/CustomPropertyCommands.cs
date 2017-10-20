@@ -82,7 +82,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetCustomPropertyWithName(VisioScripting.Models.TargetShapes  targets, string name, CustomPropertyCells customprop)
+        public void SetCustomProperty(VisioScripting.Models.TargetShapes  targets, string name, CustomPropertyCells customprop)
         {
             if (customprop == null)
             {
@@ -98,7 +98,7 @@ namespace VisioScripting.Commands
 
             customprop.EncodeValues();
 
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetCustomPropertyWithName)))
+            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetCustomProperty)))
             {
                 foreach (var shape in targets.Shapes)
                 {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -13,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<int> AddControlToShapes(VisioScripting.Models.TargetShapes targets, ControlCells ctrl)
+        public List<int> AddControlToShapes(Models.TargetShapes targets, ControlCells ctrl)
         {
             if (ctrl == null)
             {
@@ -41,7 +42,7 @@ namespace VisioScripting.Commands
             return control_indices;
         }
 
-        public void DeleteControlWithIndex(VisioScripting.Models.TargetShapes targets, int n)
+        public void DeleteControlWithIndex(Models.TargetShapes targets, int index)
         {
             targets = targets.ResolveShapes(this._client);
 
@@ -50,16 +51,20 @@ namespace VisioScripting.Commands
                 return;
             }
 
+            // restrict the operation to those shapes that actually have enough
+            // controls to qualify for deleting 
+            var qualified_shapes = targets.Shapes.Where(shape => ControlHelper.GetCount(shape) > index);
+
             using (var undoscope = this._client.Application.NewUndoScope(nameof(DeleteControlWithIndex)))
             {
-                foreach (var shape in targets.Shapes)
+                foreach (var shape in qualified_shapes)
                 {
-                    ControlHelper.Delete(shape, n);
+                    ControlHelper.Delete(shape, index);
                 }
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<ControlCells>> GetControlCells(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<ControlCells>> GetControls(Models.TargetShapes targets, CellValueType cvt)
         {
             targets = targets.ResolveShapes(this._client);
 
@@ -68,7 +73,7 @@ namespace VisioScripting.Commands
                 return new Dictionary<IVisio.Shape, IList<ControlCells>>(0);
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>();
+            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>(targets.Shapes.Count);
             foreach (var shape in targets.Shapes)
             {
                 var controls = ControlCells.GetCells(shape, cvt);

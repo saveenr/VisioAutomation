@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
 
-            var dic = this.Client.ConnectionPoint.GetConnectionPointCells(targets);
+            var dic = this.Client.ConnectionPoint.GetConnectionPoints(targets);
 
             if (this.GetCells)
             {

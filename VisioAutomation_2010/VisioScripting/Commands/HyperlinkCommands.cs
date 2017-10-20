@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -13,11 +14,11 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<int> AddHyperlink(VisioScripting.Models.TargetShapes targets, HyperlinkCells ctrl)
+        public List<int> AddHyperlink(VisioScripting.Models.TargetShapes targets, HyperlinkCells hlink)
         {
-            if (ctrl == null)
+            if (hlink == null)
             {
-                throw new System.ArgumentNullException(nameof(ctrl));
+                throw new System.ArgumentNullException(nameof(hlink));
             }
 
             targets = targets.ResolveShapes(this._client);
@@ -33,7 +34,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    int hi = HyperlinkHelper.Add(shape, ctrl);
+                    int hi = HyperlinkHelper.Add(shape, hlink);
                     hyperlink_indices.Add(hi);
                 }
             }
@@ -50,16 +51,20 @@ namespace VisioScripting.Commands
                 return;
             }
 
+            // restrict the operation to those shapes that actually have enough
+            // controls to qualify for deleting 
+            var qualified_shapes = targets.Shapes.Where(shape => HyperlinkHelper.GetCount(shape) > n);
+
             using (var undoscope = this._client.Application.NewUndoScope(nameof(DeleteHyperlinkAtIndex)))
             {
-                foreach (var shape in targets.Shapes)
+                foreach (var shape in qualified_shapes)
                 {
                     HyperlinkHelper.Delete(shape, n);
                 }
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinkCells(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
         {
             targets = targets.ResolveShapes(this._client);
 

@@ -14,10 +14,8 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> GetConnectionPointCells(VisioScripting.Models.TargetShapes targets)
+        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> GetConnectionPoints(Models.TargetShapes targets)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count<1)
@@ -35,13 +33,12 @@ namespace VisioScripting.Commands
             return dic;
         }
 
-        public List<int> AddConnectionPoint(VisioScripting.Models.TargetShapes targets, 
+        public List<int> AddConnectionPoint(
+            Models.TargetShapes targets, 
             string fx,
             string fy,
-            VisioScripting.Models.ConnectionPointType type)
+            Models.ConnectionPointType type)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -72,23 +69,18 @@ namespace VisioScripting.Commands
 
             return indices;
         }
-
-
+        
         public List<int> AddConnectionPoint(
             string fx,
             string fy,
-            VisioScripting.Models.ConnectionPointType type)
+            Models.ConnectionPointType type)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            var targets = new VisioScripting.Models.TargetShapes();
+            var targets = new Models.TargetShapes();
             return this.AddConnectionPoint(targets, fx, fy, type);
         }
 
-        public void DeleteConnectionPointAtIndex(VisioScripting.Models.TargetShapes targets, int index)
+        public void DeleteConnectionPointAtIndex(Models.TargetShapes targets, int index)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
             var shapes = targets.ResolveShapes(this._client);
 
             if (shapes.Shapes.Count < 1)
@@ -96,11 +88,13 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var target_shapes = shapes.Shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
+            // restrict the operation to those shapes that actually have enough
+            // connection points to qualify for deleting 
+            var qualified_shapes = shapes.Shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
 
             using (var undoscope = this._client.Application.NewUndoScope(nameof(DeleteConnectionPointAtIndex)))
             {
-                foreach (var shape in target_shapes)
+                foreach (var shape in qualified_shapes)
                 {
                     ConnectionPointHelper.Delete(shape, index);
                 }
