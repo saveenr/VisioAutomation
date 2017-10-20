@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<int> AddHyperlink(VisioScripting.Models.TargetShapes targets, HyperlinkCells hlink)
+        public List<int> AddHyperlink(Models.TargetShapes targets, HyperlinkCells hlink)
         {
             if (hlink == null)
             {
@@ -42,7 +42,7 @@ namespace VisioScripting.Commands
             return hyperlink_indices;
         }
 
-        public void DeleteHyperlinkAtIndex(VisioScripting.Models.TargetShapes targets, int n)
+        public void DeleteHyperlinkAtIndex(Models.TargetShapes targets, int n)
         {
             targets = targets.ResolveShapes(this._client);
 
@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(VisioScripting.Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(Models.TargetShapes targets, CellValueType cvt)
         {
             targets = targets.ResolveShapes(this._client);
 

@@ -333,19 +333,19 @@ namespace VisioScripting.Commands
             return doc;
         }
 
-        public List<VisioScripting.Models.EnumType> GetInteropEnums()
+        public List<Models.EnumType> GetInteropEnums()
         {
             return VisioScripting.Helpers.InteropHelper.GetEnums();
         }
 
-        public VisioScripting.Models.EnumType GetInteropEnum(string name)
+        public Models.EnumType GetInteropEnum(string name)
         {
             return VisioScripting.Helpers.InteropHelper.GetEnum(name);
         }
 
-        public VisioScripting.Models.EnumType GetEnum(Type type)
+        public Models.EnumType GetEnum(Type type)
         {
-            return new VisioScripting.Models.EnumType(type);
+            return new Models.EnumType(type);
         }
         
         private static IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> source, int chunksize)

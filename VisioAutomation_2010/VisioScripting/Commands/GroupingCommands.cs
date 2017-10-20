@@ -31,7 +31,7 @@ namespace VisioScripting.Commands
             return g;
         }
 
-        public void UngroupSelectedShapes(VisioScripting.Models.TargetShapes targets)
+        public void UngroupSelectedShapes(Models.TargetShapes targets)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 

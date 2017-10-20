@@ -56,8 +56,8 @@ namespace VisioScripting.Builders
         {
             public MsaglLayoutOptions LayoutOptions;
             public DirectedGraphLayout DirectedGraph;
-            public List<VisioScripting.Models.DGShapeInfo> ShapeInfos;
-            public List<VisioScripting.Models.DGConnectorInfo> ConnectorInfos;
+            public List<Models.DGShapeInfo> ShapeInfos;
+            public List<Models.DGConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
         }
 

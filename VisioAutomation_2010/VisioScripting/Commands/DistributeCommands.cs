@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void DistributeSelectionOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
+        public void DistributeSelectionOnAxis(Models.TargetShapes targets, Models.Axis axis, double spacing)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeSelectionOnAxis(VisioScripting.Models.Axis axis)
+        public void DistributeSelectionOnAxis(Models.Axis axis)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -47,7 +47,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeShapesHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal halign)
+        public void DistributeShapesHorizontal(Models.TargetShapes targets, Models.AlignmentHorizontal halign)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -76,7 +76,7 @@ namespace VisioScripting.Commands
             cmdtarget.Application.DoCmd((short)cmd);
         }
 
-        public void DistributeVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical valign)
+        public void DistributeVertical(Models.TargetShapes targets, Models.AlignmentVertical valign)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 

@@ -6,7 +6,7 @@ namespace VisioScripting.Helpers
     public static class InteropHelper
     {
         private static bool _initialized = false;
-        private static Dictionary<string, VisioScripting.Models.EnumType> _gNameToEnum;
+        private static Dictionary<string, Models.EnumType> _gNameToEnum;
         private static List<System.Type> _gTypes;
 
         private static void initialize()
@@ -20,25 +20,25 @@ namespace VisioScripting.Helpers
                     .ToList();
                 InteropHelper._gNameToEnum = InteropHelper._gTypes
                     .Where(t => t.IsEnum)
-                    .Select(i => new VisioScripting.Models.EnumType(i))
+                    .Select(i => new Models.EnumType(i))
                     .ToDictionary(i => i.Name, i => i);
                 InteropHelper._initialized = true;
             }
         }
 
-        public static List<VisioScripting.Models.EnumType> GetEnums()
+        public static List<Models.EnumType> GetEnums()
         {
             InteropHelper.initialize();
             return InteropHelper._gNameToEnum.Values.ToList();
         }
 
-        public static VisioScripting.Models.EnumType GetEnum(string name)
+        public static Models.EnumType GetEnum(string name)
         {
             InteropHelper.initialize();
             return InteropHelper._gNameToEnum[name];
         }
 
-        public static VisioScripting.Models.EnumType GetEnum(System.Type t)
+        public static Models.EnumType GetEnum(System.Type t)
         {
             InteropHelper.initialize();
             return InteropHelper._gNameToEnum[t.Name];

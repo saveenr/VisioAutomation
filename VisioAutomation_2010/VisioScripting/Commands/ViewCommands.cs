@@ -69,7 +69,7 @@ namespace VisioScripting.Commands
             active_window.Zoom = amount;
         }
 
-        public void Zoom(VisioScripting.Models.Zoom zoom)
+        public void Zoom(Models.Zoom zoom)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 

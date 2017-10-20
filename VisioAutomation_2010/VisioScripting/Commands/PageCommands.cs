@@ -237,7 +237,7 @@ namespace VisioScripting.Commands
             return dest_page;
         }
 
-        public VisioScripting.Models.PageOrientation GetActivePageOrientation()
+        public Models.PageOrientation GetActivePageOrientation()
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -245,7 +245,7 @@ namespace VisioScripting.Commands
             return PageCommands._GetPageOrientation(active_page);
         }
 
-        private static VisioScripting.Models.PageOrientation _GetPageOrientation(IVisio.Page page)
+        private static Models.PageOrientation _GetPageOrientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -256,10 +256,10 @@ namespace VisioScripting.Commands
             var src = VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation;
             var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNumber, 0];
-            return (VisioScripting.Models.PageOrientation)value;
+            return (Models.PageOrientation)value;
         }
 
-        public void SetActivePageOrientation(VisioScripting.Models.PageOrientation orientation)
+        public void SetActivePageOrientation(Models.PageOrientation orientation)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -354,7 +354,7 @@ namespace VisioScripting.Commands
             this.SetActivePageSize(new_size);
         }
 
-        public void SetActivePageByDirection(VisioScripting.Models.PageDirection flags)
+        public void SetActivePageByDirection(Models.PageDirection flags)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -368,7 +368,7 @@ namespace VisioScripting.Commands
             this._GoTo(pages, flags, cmdtarget);
         }
 
-        private void _GoTo(IVisio.Pages pages, VisioScripting.Models.PageDirection flags, CommandTarget cmdtarget)
+        private void _GoTo(IVisio.Pages pages, Models.PageDirection flags, CommandTarget cmdtarget)
         {
             if (pages == null)
             {
@@ -394,7 +394,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        internal static int move_in_range(int cur, int min, int max, VisioScripting.Models.PageDirection direction)
+        internal static int move_in_range(int cur, int min, int max, Models.PageDirection direction)
         {
             if (max < min)
             {
@@ -494,7 +494,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private List<IVisio.Page> filter_pages_by_type(List<IVisio.Page> pages, VisioScripting.Models.PageType pagetype)
+        private List<IVisio.Page> filter_pages_by_type(List<IVisio.Page> pages, Models.PageType pagetype)
         {
             if (pages == null)
             {

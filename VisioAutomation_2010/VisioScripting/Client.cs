@@ -39,7 +39,7 @@ namespace VisioScripting
         public Commands.ViewCommands View { get; }
 
         public Client(IVisio.Application app):
-            this(app,new VisioScripting.Models.DefaultClientContext())
+            this(app,new Models.DefaultClientContext())
         {
         }
         

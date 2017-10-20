@@ -250,7 +250,7 @@ namespace VisioScripting.Commands
             selection.Copy(flags);
         }
 
-        public void DuplicateSelectedShapes(VisioScripting.Models.TargetShapes target_shapes )
+        public void DuplicateSelectedShapes(Models.TargetShapes target_shapes )
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
