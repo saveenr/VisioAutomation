@@ -65,6 +65,7 @@
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
     <Compile Include="Models\ConnectionPointType.cs" />
+    <Compile Include="Models\TargetDocument.cs" />
     <Compile Include="Models\TargetDocuments.cs" />
     <Compile Include="Models\TargetPages.cs" />
     <Compile Include="Models\TargetShapeIDs.cs" />

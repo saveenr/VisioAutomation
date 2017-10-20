@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -142,13 +143,13 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void CloseDocuments(IList<IVisio.Document> docs, bool force)
+        public void CloseDocuments(VisioScripting.Models.TargetDocuments target_docs, bool force)
         {
-            this._client.Output.WriteVerbose("Closing {0} documents", docs.Count);
-            foreach (var doc in docs)
+            this._client.Output.WriteVerbose("Closing {0} documents", target_docs.Documents.Length);
+            foreach (var target_doc in target_docs.Documents)
             {
-                this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID, doc.Name);
-                doc.Close(force);
+                this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", target_doc.ID, target_doc.Name);
+                target_doc.Close(force);
             }
         }
 

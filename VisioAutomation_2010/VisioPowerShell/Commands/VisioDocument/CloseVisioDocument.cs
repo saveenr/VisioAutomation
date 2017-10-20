@@ -15,14 +15,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (this.Documents == null)
-            {
-                this.Client.Document.CloseActiveDocument(this.Force);
-            }
-            else
-            {
-                this.Client.Document.CloseDocuments(this.Documents, this.Force);
-            }
+            var t = new VisioScripting.Models.TargetDocuments(this.Documents);
+            t.Resolve(this.Client);
+            this.Client.Document.CloseDocuments(t, this.Force);
         }
     }
 }
