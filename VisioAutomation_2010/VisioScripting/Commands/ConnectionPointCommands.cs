@@ -81,16 +81,16 @@ namespace VisioScripting.Commands
 
         public void DeleteConnectionPointAtIndex(Models.TargetShapes targets, int index)
         {
-            var shapes = targets.ResolveShapes(this._client);
+            targets = targets.ResolveShapes(this._client);
 
-            if (shapes.Shapes.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return;
             }
 
             // restrict the operation to those shapes that actually have enough
             // connection points to qualify for deleting 
-            var qualified_shapes = shapes.Shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
+            var qualified_shapes = targets.Shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
 
             using (var undoscope = this._client.Application.NewUndoScope(nameof(DeleteConnectionPointAtIndex)))
             {

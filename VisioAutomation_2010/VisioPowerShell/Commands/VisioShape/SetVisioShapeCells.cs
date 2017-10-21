@@ -37,8 +37,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var targets = new VisioScripting.Models.TargetShapes(target_shapes);
-            targets = targets.ResolveShapes(this.Client);
+            var targets = new VisioScripting.Models.TargetShapes(target_shapes).ResolveShapes(this.Client);
             var target_ids = targets.ToShapeIDs();
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();

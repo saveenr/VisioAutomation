@@ -47,7 +47,6 @@ namespace VisioScripting.Commands
 
         public List<string> GetShapeText(Models.TargetShapes targets)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
