@@ -16,17 +16,8 @@ namespace VisioScripting.Commands
         public IVisio.Window GetActiveWindow()
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
-
-            var application = cmdtarget.Application;
-            var active_window = application.ActiveWindow;
-            return active_window;
-        }
-
-        public double GetZoom()
-        {
-            var cmdtarget = this._client.GetCommandTargetApplication();
             var active_window = cmdtarget.Application.ActiveWindow;
-            return active_window.Zoom;
+            return active_window;
         }
 
         private static void SetViewRectToSelection(
@@ -55,11 +46,8 @@ namespace VisioScripting.Commands
             window.SetViewRect(view_rect);
         }
 
-        public void ZoomToPercentage(double amount)
+        public void ZoomActiveWindowToPercentage(double amount)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-
             if (amount <= 0)
             {
                 return;
@@ -69,21 +57,21 @@ namespace VisioScripting.Commands
             active_window.Zoom = amount;
         }
 
-        public void Zoom(Models.Zoom zoom)
+        public void ZoomActiveWindow(Models.Zoom zoom)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            var active_window = this.GetActiveWindow();
+            var active_window = cmdtarget.Application.ActiveWindow;
 
             if (zoom == Models.Zoom.Out)
             {
                 var cur = active_window.Zoom;
-                this.ZoomToPercentage(cur / this.ZoomIncrement);                
+                this.ZoomActiveWindowToPercentage(cur / this.ZoomIncrement);                
             }
             else if (zoom == Models.Zoom.In)
             {
                 var cur = active_window.Zoom;
-                this.ZoomToPercentage(cur * this.ZoomIncrement);
+                this.ZoomActiveWindowToPercentage(cur * this.ZoomIncrement);
             }
             else if (zoom == Models.Zoom.ToPage)
             {

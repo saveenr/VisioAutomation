@@ -15,11 +15,11 @@ namespace VisioPowerShell.Commands
         {
             if (this.Percent > 0)
             {
-                this.Client.View.ZoomToPercentage(this.Percent);
+                this.Client.View.ZoomActiveWindowToPercentage(this.Percent);
             }
             else
             {
-                this.Client.View.Zoom(this.Level);       
+                this.Client.View.ZoomActiveWindow(this.Level);       
             }
         }
     }

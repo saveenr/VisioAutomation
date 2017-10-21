@@ -203,7 +203,7 @@ namespace VisioScripting.Commands
                 this._client.Output.WriteVerbose("Rendering page: {0}", i + 1);
                 dg.Render(page, options);
                 this._client.Page.ResizeActivePageToFitContents(new VisioAutomation.Geometry.Size(1.0, 1.0), true);
-                this._client.View.Zoom(VisioScripting.Models.Zoom.ToPage);
+                this._client.View.ZoomActiveWindow(VisioScripting.Models.Zoom.ToPage);
                 this._client.Output.WriteVerbose("Finished rendering page");
 
                 num_pages_created++;

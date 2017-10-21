@@ -303,7 +303,7 @@ namespace VisioScripting.Commands
                 active_page.ResizeToFitContents(bordersize);
                 if (zoom_to_page)
                 {
-                    this._client.View.Zoom(VisioScripting.Models.Zoom.ToPage);
+                    this._client.View.ZoomActiveWindow(VisioScripting.Models.Zoom.ToPage);
                 }
             }
         }

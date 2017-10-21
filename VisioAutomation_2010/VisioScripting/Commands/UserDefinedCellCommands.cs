@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> GetHyperlinkCells(Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> GetUserDefinedCells(Models.TargetShapes targets, CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, UserDefinedCellCells>>();
@@ -87,7 +87,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetUserDefinedCell(Models.TargetShapes targets, Models.UserDefinedCell cell)
+        public void SetUserDefinedCell(Models.TargetShapes targets, Models.UserDefinedCell userdefinedcell)
         {
             targets = targets.ResolveShapes(this._client);
 
@@ -100,7 +100,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Set(shape, cell.Name, cell.Cells);
+                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells);
                 }
             }
         }

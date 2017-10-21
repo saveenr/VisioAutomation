@@ -24,7 +24,7 @@ namespace VisioPowerShell.Commands
             {
                 foreach (var name in this.Name)
                 {
-                    var masters = this.Client.Master.FindMastersInDocumentByName(name, target_doc);
+                    var masters = this.Client.Master.FindMastersInDocumentByName(target_doc, name);
                     this.WriteObject(masters, true);
                 }
             }
@@ -34,13 +34,13 @@ namespace VisioPowerShell.Commands
                 if (doc_specified)
                 {
                     this.WriteVerbose("Get all masters from specified document");
-                    var masters = this.Client.Master.GetAllMastersInDocument(this.Document);
+                    var masters = this.Client.Master.GetAllMastersInDocument(target_doc);
                     this.WriteObject(masters, true);                    
                 }
                 else
                 {
                     this.WriteVerbose("Get all masters from active document");
-                    var masters = this.Client.Master.GetAllMastersInDocument();
+                    var masters = this.Client.Master.GetAllMastersInDocument(target_doc);
                     this.WriteObject(masters, true);                   
                 }
             }

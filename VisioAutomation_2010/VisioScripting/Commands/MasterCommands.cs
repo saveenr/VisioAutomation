@@ -25,8 +25,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
-            var application = cmdtarget.Application;
-            var window = application.ActiveWindow;
+            var window = cmdtarget.Application.ActiveWindow;
 
             var win_subtype = window.SubType;
             if (win_subtype != 64)
@@ -36,19 +35,6 @@ namespace VisioScripting.Commands
 
             var master = (IVisio.Master)window.Master;
             master.Close();
-        }
-
-        public List<IVisio.Master> GetAllMastersInDocument()
-        {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            var target_doc = new TargetDocument(cmdtarget.ActiveDocument);
-            return this.GetAllMastersInDocument(target_doc);
-        }
-
-        public List<IVisio.Master> GetAllMastersInDocument(IVisio.Document doc)
-        {
-            var target_doc = new TargetDocument(doc);
-            return this.GetAllMastersInDocument(target_doc);
         }
 
         public List<IVisio.Master> GetAllMastersInDocument(TargetDocument target_doc)
@@ -88,13 +74,7 @@ namespace VisioScripting.Commands
             return master;
         }
 
-        public IVisio.Master GetMasterWithNameFromDocument(string master, IVisio.Document doc)
-        {
-            var target_doc = new TargetDocument(doc);
-            return this.GetMasterWithNameFromDocument(master, target_doc);
-        }
-
-        public IVisio.Master GetMasterWithNameFromDocument(string master, TargetDocument target_doc)
+        public IVisio.Master GetMasterWithNameInDocument(TargetDocument target_doc, string master)
         {
             if (master == null)
             {
@@ -114,7 +94,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public List<IVisio.Master> FindMastersInDocumentByName(string name, TargetDocument target_doc)
+        public List<IVisio.Master> FindMastersInDocumentByName(TargetDocument target_doc, string name)
         {
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
@@ -153,7 +133,9 @@ namespace VisioScripting.Commands
             return shape;
         }
 
-        public short[] DropMastersOnActivePage(IList<IVisio.Master> masters, IList<VisioAutomation.Geometry.Point> points)
+        public short[] DropMastersOnActivePage(
+            IList<IVisio.Master> masters, 
+            IList<VisioAutomation.Geometry.Point> points)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
