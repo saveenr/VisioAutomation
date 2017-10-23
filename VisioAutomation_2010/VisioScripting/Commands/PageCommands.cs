@@ -294,13 +294,11 @@ namespace VisioScripting.Commands
 
         public void ResizeActivePageToFitContents(VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            var cmdtarget = this._client.GetCommandTargetPage();
 
-            var application = cmdtarget.Application;
             using (var undoscope = this._client.Application.NewUndoScope(nameof(ResizeActivePageToFitContents)))
             {
-                var active_page = application.ActivePage;
-                active_page.ResizeToFitContents(bordersize);
+                cmdtarget.ActivePage.ResizeToFitContents(bordersize);
                 if (zoom_to_page)
                 {
                     this._client.View.ZoomActiveWindow(VisioScripting.Models.Zoom.ToPage);
