@@ -411,25 +411,18 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(cur));
             }
 
-            if (direction == VisioScripting.Models.PageDirection.Next)
+            switch (direction)
             {
-                return System.Math.Min(cur + 1, max);
-            }
-            else if (direction == VisioScripting.Models.PageDirection.Previous)
-            {
-                return System.Math.Max(cur - 1, min);
-            }
-            else if (direction == VisioScripting.Models.PageDirection.First)
-            {
-                return min;
-            }
-            else if (direction == VisioScripting.Models.PageDirection.Last)
-            {
-                return max;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(direction));
+                case VisioScripting.Models.PageDirection.Next:
+                    return System.Math.Min(cur + 1, max);
+                case VisioScripting.Models.PageDirection.Previous:
+                    return System.Math.Max(cur - 1, min);
+                case VisioScripting.Models.PageDirection.First:
+                    return min;
+                case VisioScripting.Models.PageDirection.Last:
+                    return max;
+                default:
+                    throw new System.ArgumentOutOfRangeException(nameof(direction));
             }
         }
 
@@ -505,7 +498,6 @@ namespace VisioScripting.Commands
             {
                 return pages;
             }
-
             if (pagetype == Models.PageType.Foreground)
             {
                 return pages.Where(p=>p.Background==0).ToList();
