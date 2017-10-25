@@ -128,24 +128,25 @@ namespace VisioScripting.Commands
 
             var active_document = cmdtarget.ActiveDocument;
             var pages = active_document.Pages;
-            IVisio.Page page;
+            IVisio.Page new_page;
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(NewPage)))
             {
-                page = pages.Add();
+                new_page = pages.Add();
 
                 if (size.HasValue)
                 {
-                    this.SetActivePageSize(size.Value);
+                    var target_pages = new Models.TargetPages(new_page);
+                    this.SetPageSize(target_pages, size.Value);
                 }
 
                 if (isbackgroundpage)
                 {
-                    page.Background = 1;
+                    new_page.Background = 1;
                 }
             }
 
-            return page;
+            return new_page;
         }
 
         public void SetActivePageBackground(string background_page_name)
@@ -319,19 +320,20 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetActivePageSize(VisioAutomation.Geometry.Size new_size)
+        public void SetPageSize(Models.TargetPages targetpages, VisioAutomation.Geometry.Size new_size)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            var pages = targetpages.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetActivePageSize)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
-                var active_page = cmdtarget.Application.ActivePage;
-                var page_sheet = active_page.PageSheet;
-                var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
-                writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
-
-                writer.Commit(page_sheet);
+                foreach (var page in pages)
+                {
+                    var page_sheet = page.PageSheet;
+                    var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
+                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
+                    writer.Commit(page_sheet);
+                }
             }
         }
 
@@ -349,7 +351,7 @@ namespace VisioScripting.Commands
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VisioAutomation.Geometry.Size(w, h);
-            this.SetActivePageSize(new_size);
+            this.SetPageSize(new Models.TargetPages(cmdtarget.ActivePage),new_size);
         }
 
         public void SetActivePageByDirection(Models.PageDirection flags)
