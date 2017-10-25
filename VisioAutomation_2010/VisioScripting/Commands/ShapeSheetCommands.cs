@@ -50,7 +50,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetShapeName)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetShapeName)))
             {
                 int numnames = names.Count;
 

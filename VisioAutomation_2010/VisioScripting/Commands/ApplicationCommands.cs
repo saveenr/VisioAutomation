@@ -1,6 +1,5 @@
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioScripting.Commands
 {
@@ -131,16 +130,6 @@ namespace VisioScripting.Commands
                 }
                 return ApplicationCommands.visio_app_version;
             }            
-        }
-
-        public VA.Application.UndoScope NewUndoScope(string name)
-        {
-            if (this._active_application == null)
-            {
-                throw new System.ArgumentException("Cant create UndoScope. There is no visio application attached.");
-            }
-
-            return new VA.Application.UndoScope(this._active_application, name);
         }
     }
 }

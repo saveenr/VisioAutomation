@@ -25,7 +25,7 @@ namespace VisioScripting.Models
 
         public void Commit()
         {
-            using (var undoscope = this.Client.Application.NewUndoScope(nameof(ShapeSheetWriter)+"."+nameof(Commit)))
+            using (var undoscope = this.Client.Undo.NewUndoScope(nameof(ShapeSheetWriter)+"."+nameof(Commit)))
             {
                 this.writer.BlastGuards = this.BlastGuards;
                 this.writer.TestCircular = this.TestCircular;

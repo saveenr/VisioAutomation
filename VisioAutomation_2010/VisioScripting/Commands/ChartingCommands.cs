@@ -75,7 +75,7 @@ namespace VisioScripting.Commands
                 }
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(NewDataTablePageInActiveDocument)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(NewDataTablePageInActiveDocument)))
             {
                 layout.Render(page);
                 page.ResizeToFitContents();
@@ -92,7 +92,7 @@ namespace VisioScripting.Commands
             var page = cmdtarget.ActivePage;
             layout.PerformLayout();
 
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(DrawGridOnActivePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawGridOnActivePage)))
             {
                 layout.Render(page);
             }
@@ -107,7 +107,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var application = cmdtarget.Application;
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(DrawPieSliceOnActivePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPieSliceOnActivePage)))
             {
                 var active_page = application.ActivePage;
                 var slice = new VisioAutomation.Models.Charting.PieSlice(center, radius, start_angle, end_angle);
@@ -125,7 +125,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var application = cmdtarget.Application;
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(DrawDoughnutSliceOnActivePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawDoughnutSliceOnActivePage)))
             {
                 var active_page = cmdtarget.ActivePage;
                 var slice = new VisioAutomation.Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);

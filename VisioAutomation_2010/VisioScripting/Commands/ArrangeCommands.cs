@@ -19,7 +19,7 @@ namespace VisioScripting.Commands
 
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(NudgeSelection)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(NudgeSelection)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;

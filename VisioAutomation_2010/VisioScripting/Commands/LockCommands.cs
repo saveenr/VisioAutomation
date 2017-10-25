@@ -32,7 +32,7 @@ namespace VisioScripting.Commands
                 lockcells.SetFormulas(writer, (short)shapeid);
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope(nameof(SetLockCells)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetLockCells)))
             {
                 writer.Commit(page);
             }
