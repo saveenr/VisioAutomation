@@ -293,14 +293,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void ResizeActivePageToFitContents(VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
-        {
-            var cmdtarget = this._client.GetCommandTargetPage();
-            var tp = new Models.TargetPages(cmdtarget.ActivePage);
-            this.ResizePageToFitContents(tp, bordersize, zoom_to_page);
-        }
-
-        public void ResizePageToFitContents(Models.TargetPages target_pages, VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
+        public void ResizePageToFitContents(Models.TargetPages target_pages, VisioAutomation.Geometry.Size bordersize)
         {
             var pages = target_pages.Resolve(this._client);
 
@@ -309,11 +302,6 @@ namespace VisioScripting.Commands
                 foreach (var page in pages)
                 {
                     page.ResizeToFitContents(bordersize);
-                }
-
-                if (zoom_to_page)
-                {
-                    this._client.View.ZoomActiveWindow(VisioScripting.Models.Zoom.ToPage);
                 }
             }
         }

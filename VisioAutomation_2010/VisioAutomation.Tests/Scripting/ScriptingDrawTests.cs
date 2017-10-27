@@ -234,8 +234,8 @@ namespace VisioAutomation_Tests.Scripting
 
             var cmdtarget = client.GetCommandTargetPage();
             var tp = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
-            client.Page.ResizePageToFitContents(tp, bordersize,true);
-
+            client.Page.ResizePageToFitContents(tp, bordersize);
+            client.View.ZoomActiveWindow(VisioScripting.Models.Zoom.ToPage);
             // Cleanup
             client.Document.CloseActiveDocument(true);
         }

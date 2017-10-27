@@ -204,7 +204,7 @@ namespace VisioScripting.Commands
                 dg.Render(page, options);
 
                 var tp = new VisioScripting.Models.TargetPages(page);
-                this._client.Page.ResizePageToFitContents(tp, new VisioAutomation.Geometry.Size(1.0, 1.0), true);
+                this._client.Page.ResizePageToFitContents(tp, new VisioAutomation.Geometry.Size(1.0, 1.0));
                 this._client.View.ZoomActiveWindow(VisioScripting.Models.Zoom.ToPage);
                 this._client.Output.WriteVerbose("Finished rendering page");
 
