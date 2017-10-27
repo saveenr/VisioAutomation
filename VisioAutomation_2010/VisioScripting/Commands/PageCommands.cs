@@ -68,27 +68,6 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DeletePagesByName(IList<string> names, bool renumber)
-        {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            if (names == null)
-            {
-                throw new System.ArgumentNullException(nameof(names));
-            }
-
-            foreach (var name in names)
-            {
-                var app = cmdtarget.Application;
-                var doc = app.ActiveDocument;
-                var pages = doc.Pages;
-
-                this._client.Output.WriteVerbose("Retrieving Page for name \"{0}\"",name);
-                var page = pages.ItemU[name];
-                page.Delete(renumber ? (short)1 : (short)0);
-            }
-        }
-
         public VisioAutomation.Geometry.Size GetActivePageSize()
         {
             var cmdtarget = this._client.GetCommandTargetPage();
