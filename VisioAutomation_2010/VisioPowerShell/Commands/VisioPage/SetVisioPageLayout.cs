@@ -15,7 +15,9 @@ namespace VisioPowerShell.Commands
         {
             if (this.Orientation.HasValue)
             {
-                this.Client.Page.SetActivePageOrientation(this.Orientation.Value);
+                var cmdtarget = this.Client.GetCommandTargetPage();
+                var tp = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
+                this.Client.Page.SetPageOrientation(tp,this.Orientation.Value);
             }
 
             if (this.BackgroundPage != null)

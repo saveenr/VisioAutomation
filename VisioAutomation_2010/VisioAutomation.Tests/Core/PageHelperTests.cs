@@ -49,7 +49,10 @@ namespace VisioAutomation_Tests.Core.Page
             var size1 = client.Page.GetActivePageSize();
             Assert.AreEqual(size, size1);
 
-            client.Page.SetActivePageOrientation(VisioScripting.Models.PageOrientation.Landscape);
+            var tp = new VisioScripting.Models.TargetPages(page1);
+            client.Page.SetPageOrientation(tp,VisioScripting.Models.PageOrientation.Landscape);
+
+            client.Page.SetPageOrientation(tp, VisioScripting.Models.PageOrientation.Landscape);
 
             var orientation_2 = client.Page.GetActivePageOrientation();
             Assert.AreEqual(VisioScripting.Models.PageOrientation.Landscape, orientation_2);

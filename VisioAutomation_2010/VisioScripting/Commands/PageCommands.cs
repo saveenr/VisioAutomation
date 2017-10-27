@@ -239,39 +239,43 @@ namespace VisioScripting.Commands
             return (Models.PageOrientation)value;
         }
 
-        public void SetActivePageOrientation(Models.PageOrientation orientation)
+        public void SetPageOrientation(Models.TargetPages target_pages, Models.PageOrientation orientation)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
             if (orientation != VisioScripting.Models.PageOrientation.Landscape && orientation != VisioScripting.Models.PageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
 
-            var old_orientation = PageCommands._GetPageOrientation(cmdtarget.Application.ActivePage);
-
-            if (old_orientation == orientation)
+            var pages = target_pages.Resolve(this._client);
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageOrientation)))
             {
-                // don't need to do anything
-                return;
+
+                foreach (var page in pages)
+                {
+                    var old_orientation = PageCommands._GetPageOrientation(page);
+
+                    if (old_orientation == orientation)
+                    {
+                        // don't need to do anything
+                        return;
+                    }
+
+                    var old_size = this.GetActivePageSize();
+
+                    double new_height = old_size.Width;
+                    double new_width = old_size.Height;
+
+                    var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_width);
+                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
+                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
+
+                    writer.Commit(page.PageSheet);
+                }
+
             }
 
-            var old_size = this.GetActivePageSize();
-
-            double new_height = old_size.Width;
-            double new_width = old_size.Height;
-
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_width);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
-
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetActivePageOrientation)))
-            {
-                writer.Commit(cmdtarget.ActivePage.PageSheet);
-            }
         }
-
         public void ResizePageToFitContents(Models.TargetPages target_pages, VisioAutomation.Geometry.Size bordersize)
         {
             var pages = target_pages.Resolve(this._client);
