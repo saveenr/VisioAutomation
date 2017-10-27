@@ -231,7 +231,10 @@ namespace VisioAutomation_Tests.Scripting
             client.Charting.DrawBarChartOnActivePage(chart1);
             client.Charting.DrawBarChartOnActivePage(chart2);
             client.Charting.DrawBarChartOnActivePage(chart3);
-            client.Page.ResizeActivePageToFitContents(bordersize,true);
+
+            var cmdtarget = client.GetCommandTargetPage();
+            var tp = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
+            client.Page.ResizePageToFitContents(tp, bordersize,true);
 
             // Cleanup
             client.Document.CloseActiveDocument(true);

@@ -296,10 +296,21 @@ namespace VisioScripting.Commands
         public void ResizeActivePageToFitContents(VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
+            var tp = new Models.TargetPages(cmdtarget.ActivePage);
+            this.ResizePageToFitContents(tp, bordersize, zoom_to_page);
+        }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizeActivePageToFitContents)))
+        public void ResizePageToFitContents(Models.TargetPages target_pages, VisioAutomation.Geometry.Size bordersize, bool zoom_to_page)
+        {
+            var pages = target_pages.Resolve(this._client);
+
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizePageToFitContents)))
             {
-                cmdtarget.ActivePage.ResizeToFitContents(bordersize);
+                foreach (var page in pages)
+                {
+                    page.ResizeToFitContents(bordersize);
+                }
+
                 if (zoom_to_page)
                 {
                     this._client.View.ZoomActiveWindow(VisioScripting.Models.Zoom.ToPage);
@@ -307,16 +318,19 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetActivePageFormatCells(VisioAutomation.Pages.PageFormatCells cells)
+        public void SetPageFormatCells(Models.TargetPages targetpages, VisioAutomation.Pages.PageFormatCells cells)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            var pages = targetpages.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetActivePageFormatCells)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageFormatCells)))
             {
-                var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                cells.SetFormulas(writer);
-                writer.BlastGuards = true;
-                writer.Commit(cmdtarget.ActivePage);
+                foreach (var page in pages)
+                {
+                    var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+                    cells.SetFormulas(writer);
+                    writer.BlastGuards = true;
+                    writer.Commit(page);
+                }
             }
         }
 

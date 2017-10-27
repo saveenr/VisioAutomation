@@ -23,15 +23,17 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
+            var cmdtarget = this.Client.GetCommandTargetPage();
+            var tp = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
+
             if (this.FitContents)
             {
                 var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderWidth);
-                this.Client.Page.ResizeActivePageToFitContents(bordersize, true);                
+                this.Client.Page.ResizePageToFitContents(tp, bordersize, true);
             }
 
             if (this.Width > 0 || this.Height > 0)
             {
-
                 var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
 
                 if (this.Width > 0)
@@ -44,7 +46,7 @@ namespace VisioPowerShell.Commands
                     page_format_cells.Height = this.Height;
                 }
 
-                this.Client.Page.SetActivePageFormatCells(page_format_cells);
+                this.Client.Page.SetPageFormatCells(tp, page_format_cells);
             }
         }
     }
