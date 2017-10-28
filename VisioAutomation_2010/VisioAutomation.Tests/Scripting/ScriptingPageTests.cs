@@ -76,15 +76,20 @@ namespace VisioAutomation_Tests.Scripting
             // First case: the source document is already the active document
             var docto_1 = client.Document.NewDocument();
             var docfrom_1 = client.Document.NewDocument();
+
+
+            var target_src_page = new VisioScripting.Models.TargetPage();
+            target_src_page.Resolve(client);
+
             client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Page.DuplicateActivePageToDocument(docto_1);
+            client.Page.DuplicatePageToDocument(target_src_page, docto_1);
 
             // Second case: the source document has to be activated beforehand
             var docfrom_2 = client.Document.NewDocument();
             var docto_2 = client.Document.NewDocument();
             client.Document.ActivateDocument(docfrom_2);
             client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Page.DuplicateActivePageToDocument(docto_2);
+            client.Page.DuplicatePageToDocument(target_src_page, docto_2);
 
             docfrom_1.Close(true);
             docfrom_2.Close(true);

@@ -168,28 +168,23 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page DuplicateActivePageToDocument(IVisio.Document dest_doc)
+        public IVisio.Page DuplicatePageToDocument(Models.TargetPage target_page, IVisio.Document dest_doc)
         {
+            var src_page = target_page.Resolve(this._client);
+
             if (dest_doc == null)
             {
                 throw new System.ArgumentNullException(nameof(dest_doc));
             }
 
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            if (cmdtarget.ActiveDocument == dest_doc)
+            if (src_page.Document == dest_doc)
             {
-                throw new VisioAutomation.Exceptions.VisioOperationException("dest doc is same as active doc");
+                throw new VisioAutomation.Exceptions.VisioOperationException("dest doc is same as pages src doc");
             }
 
-            var src_page = cmdtarget.ActivePage;
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
             VisioAutomation.Pages.PageHelper.Duplicate(src_page, dest_page);
-
-            // the active window will be to the new document
-            var active_window = cmdtarget.Application.ActiveWindow;
-            //active_window.Page = dest_page;
 
             return dest_page;
         }
