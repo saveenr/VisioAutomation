@@ -298,10 +298,8 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetActivePageSize(double? width, double? height)
+        public void SetPageSize(Models.TargetPage target_page, double? width, double? height)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
             if (!width.HasValue && !height.HasValue)
             {
                 // nothing to do
@@ -314,7 +312,7 @@ namespace VisioScripting.Commands
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VisioAutomation.Geometry.Size(w, h);
-            this.SetPageSize(new Models.TargetPages(cmdtarget.ActivePage),new_size);
+            this.SetPageSize(new Models.TargetPages(target_page.Page),new_size);
         }
 
         public void SetActivePageByDirection(Models.PageDirection flags)
@@ -403,13 +401,31 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Shape> GetShapesOnActivePageByName(string[] shapenames)
+        public List<IVisio.Shape> GetShapesOnPageByID(Models.TargetPage target_page, int[] shapeids)
         {
-            return this.GetShapesOnActivePageByName(shapenames, false);
+            var page = target_page.Resolve(this._client);
+            var shapes = page.Shapes;
+            var shapes_list = new List<IVisio.Shape>(shapeids.Length);
+            foreach (int id in shapeids)
+            {
+                var shape = shapes.ItemFromID[id];
+                shapes_list.Add(shape);
+            }
+            return shapes_list;
         }
 
-        public List<IVisio.Shape> GetShapesOnActivePageByName(string[] shapenames, bool ignore_bad_names)
+
+        public List<IVisio.Shape> GetShapesOnPageByName(Models.TargetPage target_page, string[] shapenames)
         {
+            var page = target_page.Resolve(this._client);
+
+            return this.GetShapesOnPageByName(target_page, shapenames, false);
+        }
+
+        public List<IVisio.Shape> GetShapesOnPageByName(Models.TargetPage target_page, string[] shapenames, bool ignore_bad_names)
+        {
+            var page = target_page.Resolve(this._client);
+
             var cmdtarget = this._client.GetCommandTargetDocument();
             var shapes = cmdtarget.ActivePage.Shapes;
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);

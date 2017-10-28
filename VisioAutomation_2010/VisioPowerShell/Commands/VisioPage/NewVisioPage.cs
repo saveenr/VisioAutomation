@@ -72,26 +72,5 @@ namespace VisioPowerShell.Commands
 
             this.WriteObject(page);
         }
-
-        public static void set_page_size(VisioScripting.Client client, double width, double height)
-        {
-            double? w = null;
-            double? h = null;
-
-            if (width > 0)
-            {
-                w = width;
-            }
-
-            if (height > 0)
-            {
-                h = height;
-            }
-
-            if (w.HasValue || h.HasValue)
-            {
-                client.Page.SetActivePageSize(w, h);
-            }
-        }
     }
 }

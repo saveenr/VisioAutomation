@@ -20,6 +20,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
+            var target_page = new VisioScripting.Models.TargetPage(null);
+            var page = target_page.Resolve(this.Client);
+
             // Handle the case where neither names nor ids where passed
             if (this.Name == null && this.Id == null)
             {
@@ -59,7 +62,7 @@ namespace VisioPowerShell.Commands
                 else
                 {
                     var strings = this.Name.Where(i => i is string).Cast<string>().ToArray();
-                    var shapes = this.Client.Page.GetShapesOnActivePageByName(strings);
+                    var shapes = this.Client.Page.GetShapesOnPageByName(target_page, strings);
                     this.WriteObject(shapes, true);
                 }
 
@@ -69,7 +72,7 @@ namespace VisioPowerShell.Commands
             // Handle the case where ids where passed
             if (this.Id != null)
             {
-                var shapes = this.Client.Page.GetShapesOnActivePageByID(this.Id);
+                var shapes = this.Client.Page.GetShapesOnPageByID(target_page,this.Id);
                 this.WriteObject(shapes, true);
 
                 return;
