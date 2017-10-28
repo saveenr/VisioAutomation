@@ -40,21 +40,21 @@ namespace VisioAutomation_Tests.Core.Page
             var size = new VA.Geometry.Size(4, 3);
 
             var page1 = this.GetNewPage(size);
+            var tp = new VisioScripting.Models.TargetPages(page1);
 
             var client = this.GetScriptingClient();
 
-            var orientation_1 = client.Page.GetActivePageOrientation();
+            var orientation_1 = client.Page.GetPageOrientation(tp);
             Assert.AreEqual(VisioScripting.Models.PageOrientation.Portrait, orientation_1);
 
             var size1 = client.Page.GetActivePageSize();
             Assert.AreEqual(size, size1);
 
-            var tp = new VisioScripting.Models.TargetPages(page1);
             client.Page.SetPageOrientation(tp,VisioScripting.Models.PageOrientation.Landscape);
 
             client.Page.SetPageOrientation(tp, VisioScripting.Models.PageOrientation.Landscape);
 
-            var orientation_2 = client.Page.GetActivePageOrientation();
+            var orientation_2 = client.Page.GetPageOrientation(tp);
             Assert.AreEqual(VisioScripting.Models.PageOrientation.Landscape, orientation_2);
 
             var actual_final_size = client.Page.GetActivePageSize();

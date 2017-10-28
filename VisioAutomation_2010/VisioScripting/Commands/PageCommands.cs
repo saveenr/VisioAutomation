@@ -217,14 +217,12 @@ namespace VisioScripting.Commands
             return dest_page;
         }
 
-        public Models.PageOrientation GetActivePageOrientation()
+        public Models.PageOrientation GetPageOrientation( Models.TargetPages target_pages )
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var active_page = cmdtarget.ActivePage;
-            return PageCommands._GetPageOrientation(active_page);
+            var pages = target_pages.Resolve(this._client);
+            return PageCommands._GetPageOrientation(pages[0]);
         }
-
+        
         private static Models.PageOrientation _GetPageOrientation(IVisio.Page page)
         {
             if (page == null)
