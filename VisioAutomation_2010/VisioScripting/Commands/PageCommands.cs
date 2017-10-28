@@ -53,14 +53,9 @@ namespace VisioScripting.Commands
             return application.ActivePage;
         }
 
-        public void DeletePages(IList<IVisio.Page> pages, bool renumber)
+        public void DeletePages(Models.TargetPages target_pages, bool renumber)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            if (pages == null)
-            {
-                throw new System.ArgumentNullException(nameof(pages));
-            }
+            var pages = target_pages.Resolve(this._client);
 
             foreach (var page in pages)
             {
