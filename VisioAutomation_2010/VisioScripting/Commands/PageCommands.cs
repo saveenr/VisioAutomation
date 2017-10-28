@@ -63,37 +63,19 @@ namespace VisioScripting.Commands
             }
         }
 
-        public VisioAutomation.Geometry.Size GetActivePageSize()
+        public VisioAutomation.Geometry.Size GetPageSize(Models.TargetPages target_pages)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var active_page = cmdtarget.ActivePage;
+            var pages = target_pages.Resolve(this._client);
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
 
-            var results = query.GetResults<double>(active_page.PageSheet);
+            var results = query.GetResults<double>(pages[0].PageSheet);
             double height = results.Cells[col_height];
             double width = results.Cells[col_width];
             var s = new VisioAutomation.Geometry.Size(width, height);
             return s;
-        }
-
-        public void SetActivePageName(string name)
-        {
-            if (name == null)
-            {
-                throw new System.ArgumentNullException(nameof(name));
-            }
-
-            if (name.Length < 1)
-            {
-                throw new System.ArgumentException("name cannot be empty", nameof(name));
-            }
-
-            var cmdtarget = this._client.GetCommandTargetPage();
-            cmdtarget.ActivePage.NameU = name;
         }
 
         public IVisio.Page NewPage(VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
@@ -253,7 +235,8 @@ namespace VisioScripting.Commands
                         return;
                     }
 
-                    var old_size = this.GetActivePageSize();
+                    var page_tp = new VisioScripting.Models.TargetPages(page);
+                    var old_size = this.GetPageSize(page_tp);
 
                     double new_height = old_size.Width;
                     double new_width = old_size.Height;
@@ -325,7 +308,9 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var old_size = this.GetActivePageSize();
+            var page = this._client.Page.GetActivePage();
+            var tp = new VisioScripting.Models.TargetPages(page);
+            var old_size = this.GetPageSize(tp);
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VisioAutomation.Geometry.Size(w, h);
