@@ -30,7 +30,7 @@ namespace VisioPowerShell.Commands
             {
                 var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderWidth);
                 this.Client.Page.ResizePageToFitContents(tp, bordersize);
-                this.Client.View.ZoomActiveWindow(VisioScripting.Models.Zoom.ToPage);
+                this.Client.View.ZoomActiveWindowToObject(VisioScripting.Models.Zoom.ToPage);
             }
 
             if (this.Width > 0 || this.Height > 0)

@@ -10,7 +10,6 @@ namespace VisioScripting.Commands
         internal ViewCommands(Client client) :
             base(client)
         {
-            this.ZoomIncrement = 1.20;
         }
 
         public IVisio.Window GetActiveWindow()
@@ -46,34 +45,44 @@ namespace VisioScripting.Commands
             window.SetViewRect(view_rect);
         }
 
-        public void ZoomActiveWindowToPercentage(double amount)
+        public void SetActiveWindowToZoom(double amount)
         {
             if (amount <= 0)
             {
-                return;
+                throw new System.ArgumentException("Must have positive zoom");
             }
 
-            var active_window = this.GetActiveWindow();
+            var cmdtarget = this._client.GetCommandTargetDocument();
+            var active_window = cmdtarget.Application.ActiveWindow;
             active_window.Zoom = amount;
         }
 
-        public void ZoomActiveWindow(Models.Zoom zoom)
+        public double GetActiveWindowZoom()
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
+            var active_window = cmdtarget.Application.ActiveWindow;
+            return active_window.Zoom;
+        }
 
+        public void ZoomActiveWindowRelative(double scale)
+        {
+            if (scale <= 0)
+            {
+                throw new System.ArgumentException("Must have positive scale");
+            }
+            var cmdtarget = this._client.GetCommandTargetDocument();
+            var active_window = cmdtarget.Application.ActiveWindow;
+            double old_zoom = active_window.Zoom;
+            double new_zoom = old_zoom * scale;
+            active_window.Zoom = new_zoom;
+        }
+
+        public void ZoomActiveWindowToObject(Models.Zoom zoom)
+        {
+            var cmdtarget = this._client.GetCommandTargetDocument();
             var active_window = cmdtarget.Application.ActiveWindow;
 
-            if (zoom == Models.Zoom.Out)
-            {
-                var cur = active_window.Zoom;
-                this.ZoomActiveWindowToPercentage(cur / this.ZoomIncrement);                
-            }
-            else if (zoom == Models.Zoom.In)
-            {
-                var cur = active_window.Zoom;
-                this.ZoomActiveWindowToPercentage(cur * this.ZoomIncrement);
-            }
-            else if (zoom == Models.Zoom.ToPage)
+            if (zoom == Models.Zoom.ToPage)
             {
                 active_window.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
             }

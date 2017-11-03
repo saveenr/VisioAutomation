@@ -6,20 +6,31 @@ namespace VisioPowerShell.Commands
     public class SetVisioZoom : VisioCmdlet
     {
         [SMA.Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 
-        public VisioScripting.Models.Zoom Level = VisioScripting.Models.Zoom.In;
+        public VisioScripting.Models.Zoom? Level = null;
 
         [SMA.Parameter(ParameterSetName = "percent", Position = 0, Mandatory = true)] 
         public double Percent = 0;
+
+        [SMA.Parameter(ParameterSetName = "relativepercent", Position = 0, Mandatory = true)]
+        public double PercentMultiplier = 0;
 
         protected override void ProcessRecord()
         {
             if (this.Percent > 0)
             {
-                this.Client.View.ZoomActiveWindowToPercentage(this.Percent);
+                this.Client.View.SetActiveWindowToZoom(this.Percent);
+            }
+            else if (this.PercentMultiplier > 0)
+            {
+                this.Client.View.ZoomActiveWindowRelative(this.PercentMultiplier);
+            }
+            else if (this.Level != null)
+            {
+                this.Client.View.ZoomActiveWindowToObject(this.Level.Value);       
             }
             else
             {
-                this.Client.View.ZoomActiveWindow(this.Level);       
+                throw new System.ArgumentException("Must provide a parameter");
             }
         }
     }
