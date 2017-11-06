@@ -28,23 +28,13 @@ namespace VisioScripting.Commands
 
             this.Application = this.Client.Application.GetActiveApplication();
 
-            if (this.Application == null && require_app)
-            {
-                var has_app = this.Client.Application.HasActiveApplication;
-                if (!has_app)
-                {
-                    string msg = string.Format("{0}: No Visio Application available", nameof(CommandTarget));
-                    throw new System.ArgumentException(msg);
-                }
-            }
-
             if (require_app && this.Application == null)
             {
-                string msg = string.Format("{0}: No Application", nameof(CommandTarget));
-                throw new VisioOperationException(msg);
+                string msg = string.Format("{0}: No Visio Application available", nameof(CommandTarget));
+                throw new System.ArgumentException(msg);
             }
 
-            if ((this.ActiveDocument == null) && require_document)
+            if (require_document && this.ActiveDocument == null)
             {
                 var doc = this.Application.ActiveDocument;
 
@@ -64,7 +54,7 @@ namespace VisioScripting.Commands
                 }
             }
 
-            if (this.ActiveDocument == null && require_document)
+            if (require_document && this.ActiveDocument == null)
             {
                 string msg = string.Format("{0}: No Document", nameof(CommandTarget));
                 throw new VisioOperationException(msg);
@@ -80,7 +70,7 @@ namespace VisioScripting.Commands
                 this.ActivePage = this.Application.ActivePage;
             }
 
-            if (this.ActivePage == null && require_page)
+            if (require_page && this.ActivePage == null)
             {
                 string msg = string.Format("{0}: No Page", nameof(CommandTarget));
                 throw new VisioOperationException(msg);
