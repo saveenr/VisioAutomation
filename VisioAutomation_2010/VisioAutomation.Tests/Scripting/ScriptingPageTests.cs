@@ -100,36 +100,5 @@ namespace VisioAutomation_Tests.Scripting
             doc_dest_1.Close(true);
             doc_dest_2.Close(true);
         }
-
-        [TestMethod]
-        public void PSTestGetVisioPageCell()
-        {
-            var client = this.GetScriptingClient();
-
-            var visDoc = client.Document.NewDocument();
-/*            var results1 = client.Page.
-
-            var cells1 = VisioPowerShellTests.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
-            var data_row_collection1 = (DataRowCollection)cells1[0].Properties["Rows"].Value;
-            var results = data_row_collection1[0];
-            Assert.IsNotNull(cells1);
-            Assert.AreEqual(8.5, results["PageWidth"]);
-            Assert.AreEqual(11.0, results["PageHeight"]);
-
-            //Now lets add another page and get it's width and height
-            var page2 = VisioPowerShellTests.invoker.Invoke("New-VisioPage");
-            var cells2 = VisioPowerShellTests.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
-            var data_row_collection2 = (DataRowCollection)cells2[0].Properties["Rows"].Value;
-            var results2 = data_row_collection2[0];
-
-            Assert.IsNotNull(cells2);
-            Assert.AreEqual(8.5, results2["PageWidth"]);
-            Assert.AreEqual(11.0, results2["PageHeight"]);
-
-            // Close Visio Application that was created when "New-VisioDocument" was invoked
-            VisioPowerShellTests.invoker.Invoke("Close-VisioApplication -Force");
- * 
- * */
-        }
     }
 }
