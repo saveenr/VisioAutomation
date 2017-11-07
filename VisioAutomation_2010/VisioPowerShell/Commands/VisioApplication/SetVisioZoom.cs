@@ -5,28 +5,28 @@ namespace VisioPowerShell.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioZoom)]
     public class SetVisioZoom : VisioCmdlet
     {
-        [SMA.Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 
-        public VisioScripting.Models.Zoom? Level = null;
+        [SMA.Parameter(ParameterSetName = "zoomto", Position = 0, Mandatory = true)] 
+        public VisioScripting.Models.ZoomToObject? To = null;
 
-        [SMA.Parameter(ParameterSetName = "percent", Position = 0, Mandatory = true)] 
-        public double Percent = 0;
+        [SMA.Parameter(ParameterSetName = "value", Position = 0, Mandatory = true)] 
+        public double Value = 0;
 
-        [SMA.Parameter(ParameterSetName = "relativepercent", Position = 0, Mandatory = true)]
-        public double PercentMultiplier = 0;
+        [SMA.Parameter(ParameterSetName = "valuerelative", Position = 0, Mandatory = true)]
+        public double ValueRelative = 0;
 
         protected override void ProcessRecord()
         {
-            if (this.Percent > 0)
+            if (this.Value > 0)
             {
-                this.Client.View.SetActiveWindowToZoom(this.Percent);
+                this.Client.View.SetActiveWindowZoomValue(this.Value);
             }
-            else if (this.PercentMultiplier > 0)
+            else if (this.ValueRelative > 0)
             {
-                this.Client.View.ZoomActiveWindowRelative(this.PercentMultiplier);
+                this.Client.View.SetActiveWindowZoomValueRelative(this.ValueRelative);
             }
-            else if (this.Level != null)
+            else if (this.To != null)
             {
-                this.Client.View.ZoomActiveWindowToObject(this.Level.Value);       
+                this.Client.View.SetActiveWindowZoomToObject(this.To.Value);       
             }
             else
             {

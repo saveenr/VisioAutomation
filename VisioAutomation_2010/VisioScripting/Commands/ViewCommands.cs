@@ -45,7 +45,7 @@ namespace VisioScripting.Commands
             window.SetViewRect(view_rect);
         }
 
-        public void SetActiveWindowToZoom(double amount)
+        public void SetActiveWindowZoomValue(double amount)
         {
             if (amount <= 0)
             {
@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
             return active_window.Zoom;
         }
 
-        public void ZoomActiveWindowRelative(double scale)
+        public void SetActiveWindowZoomValueRelative(double scale)
         {
             if (scale <= 0)
             {
@@ -77,20 +77,20 @@ namespace VisioScripting.Commands
             active_window.Zoom = new_zoom;
         }
 
-        public void ZoomActiveWindowToObject(Models.Zoom zoom)
+        public void SetActiveWindowZoomToObject(Models.ZoomToObject zoom)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             var active_window = cmdtarget.Application.ActiveWindow;
 
-            if (zoom == Models.Zoom.ToPage)
+            if (zoom == Models.ZoomToObject.Page)
             {
                 active_window.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
             }
-            else if (zoom == Models.Zoom.ToWidth)
+            else if (zoom == Models.ZoomToObject.PageWidth)
             {
                 active_window.ViewFit = (short)IVisio.VisWindowFit.visFitWidth;
             }
-            else if (zoom == Models.Zoom.ToSelection)
+            else if (zoom == Models.ZoomToObject.Selection)
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;

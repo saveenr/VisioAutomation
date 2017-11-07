@@ -2,6 +2,7 @@
 #
 # HISTORY
 # -------
+# 2017/11/07 Performance optimizations
 # 2017/10/11 New-VisioPage and New-VisioShape now both support passing in cells for the newly created object
 # 2017/10/08 Cmdlets now return most collections to the pipeline as individual items instead of non-enumerated collections
 # 2017/09/30 Fixed bug in DG rendering. Get-VisioPage now lets you filter between for pages that are background or non-background
@@ -23,7 +24,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '2.24.0'
+ModuleVersion = '2.25.0'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'

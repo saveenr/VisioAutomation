@@ -115,7 +115,7 @@
     <Compile Include="Models\SnapCornerPosition.cs" />
     <Compile Include="Models\SnappingGrid.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
-    <Compile Include="Models\Zoom.cs" />
+    <Compile Include="Models\ZoomToObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">
