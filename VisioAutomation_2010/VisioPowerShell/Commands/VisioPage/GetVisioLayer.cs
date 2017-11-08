@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioLayer)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioLayer)]
     public class GetVisioLayer : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]

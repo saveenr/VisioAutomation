@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Open, VisioPowerShell.Commands.Nouns.VisioDocument)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Open, Nouns.VisioDocument)]
     public class OpenVisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

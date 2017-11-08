@@ -3,7 +3,7 @@ using VisioScripting.Models;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPage)]
     public class GetVisioPage : VisioCmdlet
     {
         [SMA.Parameter(Position=0, Mandatory = false)]

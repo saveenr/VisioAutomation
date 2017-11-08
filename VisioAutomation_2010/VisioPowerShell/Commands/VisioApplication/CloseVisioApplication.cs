@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Close, VisioPowerShell.Commands.Nouns.VisioApplication)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Close, Nouns.VisioApplication)]
     public class CloseVisioApplication : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]

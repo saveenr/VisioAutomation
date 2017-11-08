@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioDirectedEdge)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioDirectedEdge)]
     public class GetVisioDirectedEdge : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]

@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Remove, VisioPowerShell.Commands.Nouns.VisioGroup)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Remove, Nouns.VisioGroup)]
     public class RemoveVisioGroup : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]

@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioZoom)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioZoom)]
     public class SetVisioZoom : VisioCmdlet
     {
         [SMA.Parameter(ParameterSetName = "zoomto", Position = 0, Mandatory = true)] 

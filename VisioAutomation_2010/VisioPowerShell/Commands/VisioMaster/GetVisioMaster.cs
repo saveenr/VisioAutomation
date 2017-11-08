@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioMaster)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioMaster)]
     public class GetVisioMaster : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]

@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioContainer)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioContainer)]
     public class NewVisioContainer : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true,ParameterSetName="MasterObject")]

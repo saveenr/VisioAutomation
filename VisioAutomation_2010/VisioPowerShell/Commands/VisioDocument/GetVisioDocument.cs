@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioDocument)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioDocument)]
     public class GetVisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]

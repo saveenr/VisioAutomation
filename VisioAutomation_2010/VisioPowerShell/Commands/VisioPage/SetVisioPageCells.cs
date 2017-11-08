@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioPageCells)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioPageCells)]
     public class SetVisioPageCells : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position = 0)]

@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, VisioPowerShell.Commands.Nouns.VisioShape)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]
     public class GetVisioShape : VisioCmdlet
     {
         [SMA.Parameter(ParameterSetName="name", Position = 0, Mandatory = false)]

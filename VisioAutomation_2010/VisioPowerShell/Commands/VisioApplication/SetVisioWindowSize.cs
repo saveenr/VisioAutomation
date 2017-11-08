@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, VisioPowerShell.Commands.Nouns.VisioWindow)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioWindow)]
     public class SetVisioWindow : VisioCmdlet
     {
         [SMA.Parameter(Position = 0)]

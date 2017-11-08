@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Lock, VisioPowerShell.Commands.Nouns.VisioShape)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Lock, Nouns.VisioShape)]
     public class LockVisioShape : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]

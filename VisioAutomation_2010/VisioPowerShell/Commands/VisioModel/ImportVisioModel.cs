@@ -5,7 +5,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Import, VisioPowerShell.Commands.Nouns.VisioModel)]
+    [SMA.Cmdlet(SMA.VerbsData.Import, Nouns.VisioModel)]
     public class ImportVisioModel : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position = 0)]

@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelGrid)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioModelGrid)]
     public class NewVisioModelGrid : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

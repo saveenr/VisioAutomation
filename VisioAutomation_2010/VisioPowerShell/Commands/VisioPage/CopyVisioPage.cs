@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Copy, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Copy, Nouns.VisioPage)]
     public class CopyVisioPage : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]

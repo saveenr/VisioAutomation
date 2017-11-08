@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Close, VisioPowerShell.Commands.Nouns.VisioDocument)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Close, Nouns.VisioDocument)]
     public class CloseVisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]

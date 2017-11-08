@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioShape)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioShape)]
     public class NewVisioShape : VisioCmdlet
     {
         [SMA.Parameter(ParameterSetName = "masters", Position = 0, Mandatory = true)]

@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Select, VisioPowerShell.Commands.Nouns.VisioShape)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Select, Nouns.VisioShape)]
     public class SelectVisioShape : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]

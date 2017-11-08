@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Export, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsData.Export, Nouns.VisioPage)]
     public class ExportVisioPage : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)] 

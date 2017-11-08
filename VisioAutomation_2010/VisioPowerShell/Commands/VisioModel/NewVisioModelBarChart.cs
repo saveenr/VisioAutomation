@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, VisioPowerShell.Commands.Nouns.VisioModelBarChart)]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioModelBarChart)]
     public class NewVisioModelBarChart : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

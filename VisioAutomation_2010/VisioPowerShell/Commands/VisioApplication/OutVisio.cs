@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Out, VisioPowerShell.Commands.Nouns.Visio)]
+    [SMA.Cmdlet(SMA.VerbsData.Out, Nouns.Visio)]
     public class OutVisio : VisioCmdlet
     {
         [SMA.Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]

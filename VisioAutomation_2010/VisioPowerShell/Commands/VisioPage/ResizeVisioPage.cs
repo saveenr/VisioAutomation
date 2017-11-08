@@ -3,7 +3,7 @@ using VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Resize, VisioPowerShell.Commands.Nouns.VisioPage)]
+    [SMA.Cmdlet(SMA.VerbsCommon.Resize, Nouns.VisioPage)]
     public class ResizeVisioPage : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
