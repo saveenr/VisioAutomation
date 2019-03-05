@@ -324,6 +324,16 @@ namespace VisioScripting.Commands
             this._GoTo(pages, flags, cmdtarget);
         }
 
+        public void LayoutPage(Models.TargetPage targetpage, VisioAutomation.PageLayouts.LayoutBase layout)
+        {
+            var pages = targetpage.Resolve(this._client);
+
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
+            {
+                layout.Apply(targetpage.Page);
+            }
+        }
+
         private void _GoTo(IVisio.Pages pages, Models.PageDirection flags, CommandTarget cmdtarget)
         {
             if (pages == null)
