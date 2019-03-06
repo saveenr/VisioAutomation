@@ -129,7 +129,7 @@
     <Compile Include="Commands\VisioShapeCells\SetVisioShapeCells.cs" />
     <Compile Include="Commands\VisioPage\RemoveVisioPage.cs" />
     <Compile Include="Commands\VisioApplication\TestVisioApplication.cs" />
-    <Compile Include="Commands\GetVisioScriptingClient.cs" />
+    <Compile Include="Commands\VisioScriptingClient\GetVisioScriptingClient.cs" />
     <Compile Include="Commands\VisioModel\NewVisioModelGrid.cs" />
     <Compile Include="Commands\VisioMaster\NewVisioMaster.cs" />
     <Compile Include="Commands\VisioUserDefinedCell\RemoveVisioUserDefinedCell.cs" />
