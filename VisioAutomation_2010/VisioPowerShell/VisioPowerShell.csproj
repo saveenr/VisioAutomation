@@ -84,7 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\VisioPage\PageLayoutType.cs" />
+    <Compile Include="Models\PageLayoutType.cs" />
     <Compile Include="Commands\VisioPageLayout\NewVisioPageLayout.cs" />
     <Compile Include="Models\DocumentType.cs" />
     <Compile Include="Commands\VisioShape\LockVisioShape.cs" />
