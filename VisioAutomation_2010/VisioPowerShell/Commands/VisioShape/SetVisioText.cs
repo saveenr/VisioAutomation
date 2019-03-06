@@ -4,7 +4,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioText)]
-    [System.Management.Automation.Alias("Set-VisioShapeText")]
     public class SetVisioText : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

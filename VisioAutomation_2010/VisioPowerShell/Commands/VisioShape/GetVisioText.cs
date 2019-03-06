@@ -4,7 +4,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioText)]
-    [System.Management.Automation.Alias("Get-VisioShapeText")]
     public class GetVisioText : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
