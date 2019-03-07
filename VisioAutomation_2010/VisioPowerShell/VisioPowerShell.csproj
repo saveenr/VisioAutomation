@@ -174,7 +174,7 @@
     <Compile Include="Commands\VisioPage\ResizeVisioPage.cs" />
     <Compile Include="Commands\VisioApplication\SetVisioWindowSize.cs" />
     <Compile Include="Commands\VisioCmdlet.cs" />
-    <Compile Include="Commands\VisioPageLayout\SetVisioPageLayout.cs" />
+    <Compile Include="Commands\VisioPage\FormatVisioPage.cs" />
     <Compile Include="Commands\VisioCustomProperty\SetVisioCustomProperty.cs" />
     <Compile Include="Commands\VisioText\SetVisioText.cs" />
     <Compile Include="Commands\VisioApplication\CloseVisioApplication.cs" />
