@@ -161,7 +161,7 @@
     <Compile Include="Commands\VisioConnection\NewVisioConnection.cs" />
     <Compile Include="Commands\VisioCustomProperty\RemoveVisioCustomProperty.cs" />
     <Compile Include="Commands\VisioPage\CopyVisioPage.cs" />
-    <Compile Include="Commands\VisioDirectedEdge\GetVisioDirectedEdge.cs" />
+    <Compile Include="Commands\VisioPage\MeasureVisioPage.cs" />
     <Compile Include="Commands\VisioPage\GetVisioPage.cs" />
     <Compile Include="Commands\VisioCustomProperty\GetVisioCustomProperty.cs" />
     <Compile Include="Commands\VisioShape\GetVisioShape.cs" />
