@@ -167,7 +167,6 @@
     <Compile Include="Commands\VisioPage\NewVisioPage.cs" />
     <Compile Include="Commands\VisioApplication\NewVisioApplication.cs" />
     <Compile Include="Commands\VisioShape\FormatVisioShape.cs" />
-    <Compile Include="Commands\VisioPage\ResizeVisioPage.cs" />
     <Compile Include="Commands\VisioWindow\FormatVisioWindow.cs" />
     <Compile Include="Commands\VisioCmdlet.cs" />
     <Compile Include="Commands\VisioPage\FormatVisioPage.cs" />
