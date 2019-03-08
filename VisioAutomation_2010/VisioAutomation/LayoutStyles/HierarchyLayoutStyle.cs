@@ -1,16 +1,15 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.PageLayouts
+namespace VisioAutomation.LayoutStyles
 {
-    public class HierarchyLayout : LayoutBase
+    public class HierarchyLayoutStyle : LayoutStyleBase
     {
         public LayoutDirection LayoutDirection { get; set; }
         public HorizontalAlignment HorizontalAlignment { get; set; }
         public VerticalAlignment VerticalAlignment { get; set; }
 
-        public HierarchyLayout()
+        public HierarchyLayoutStyle()
         {
-            this.LayoutStyle = LayoutStyle.Hierarchy;
             this.ConnectorStyle = ConnectorStyle.OrganizationChart;
             this.HorizontalAlignment = HorizontalAlignment.Center;
             this.VerticalAlignment = VerticalAlignment.Middle;
@@ -19,7 +18,7 @@ namespace VisioAutomation.PageLayouts
         protected override void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
             base.SetPageCells(page_layout_cells);
-            page_layout_cells.PlaceStyle = (int) HierarchyLayout.GetPlaceStyle(this.LayoutDirection, this.HorizontalAlignment, this.VerticalAlignment);
+            page_layout_cells.PlaceStyle = (int) HierarchyLayoutStyle.GetPlaceStyle(this.LayoutDirection, this.HorizontalAlignment, this.VerticalAlignment);
         }
 
         private static IVisio.VisCellVals GetPlaceStyle(LayoutDirection dir, HorizontalAlignment halign, VerticalAlignment valign)

@@ -14,27 +14,27 @@ namespace VisioPowerShell.Commands
         {
             if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.FlowChart)
             {
-                var plo = new VisioAutomation.PageLayouts.FlowchartLayout();
+                var plo = new VisioAutomation.LayoutStyles.FlowchartLayoutStyle();
                 this.WriteObject(plo);
             }
             else if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.Hierarchy)
             {
-                var plo = new VisioAutomation.PageLayouts.HierarchyLayout();
+                var plo = new VisioAutomation.LayoutStyles.HierarchyLayoutStyle();
                 this.WriteObject(plo);
             }
             else if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.Circular)
             {
-                var plo = new VisioAutomation.PageLayouts.CircularLayout();
+                var plo = new VisioAutomation.LayoutStyles.CircularLayoutStyle();
                 this.WriteObject(plo);
             }
             else if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.CompactTree)
             {
-                var plo = new VisioAutomation.PageLayouts.CompactTreeLayout();
+                var plo = new VisioAutomation.LayoutStyles.CompactTreeLayout();
                 this.WriteObject(plo);
             }
             else if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.RadialLayout)
             {
-                var plo = new VisioAutomation.PageLayouts.RadialLayout();
+                var plo = new VisioAutomation.LayoutStyles.RadialLayoutStyle();
                 this.WriteObject(plo);
             }
             else

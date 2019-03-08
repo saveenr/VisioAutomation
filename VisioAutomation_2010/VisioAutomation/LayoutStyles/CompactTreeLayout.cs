@@ -1,14 +1,13 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.PageLayouts
+namespace VisioAutomation.LayoutStyles
 {
-    public class CompactTreeLayout : LayoutBase
+    public class CompactTreeLayout : LayoutStyleBase
     {
         public CompactTreeDirection Direction { get; set; }
 
         public CompactTreeLayout()
         {
-            this.LayoutStyle = LayoutStyle.CompactTree;
             this.ConnectorStyle = ConnectorStyle.OrganizationChart;
             this.Direction = CompactTreeDirection.DownThenRight;
         }

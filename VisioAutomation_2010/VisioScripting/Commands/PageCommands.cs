@@ -324,7 +324,7 @@ namespace VisioScripting.Commands
             this._GoTo(pages, flags, cmdtarget);
         }
 
-        public void LayoutPage(Models.TargetPage targetpage, VisioAutomation.PageLayouts.LayoutBase layout)
+        public void LayoutPage(Models.TargetPage targetpage, VisioAutomation.LayoutStyles.LayoutStyleBase layout)
         {
             var pages = targetpage.Resolve(this._client);
 

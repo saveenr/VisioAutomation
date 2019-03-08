@@ -1,4 +1,4 @@
-namespace VisioAutomation.PageLayouts
+namespace VisioAutomation.LayoutStyles
 {
     public enum LayoutDirection
     {

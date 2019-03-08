@@ -1,15 +1,15 @@
-using VisioAutomation.PageLayouts;
+using VisioAutomation.LayoutStyles;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class VisioLayoutOptions
     {
-        public LayoutBase Layout;
+        public LayoutStyleBase Layout;
 
         public VisioLayoutOptions()
         {
-            var flowchart = new FlowchartLayout();
-            flowchart.LayoutDirection = PageLayouts.LayoutDirection.TopToBottom;
+            var flowchart = new FlowchartLayoutStyle();
+            flowchart.LayoutDirection = LayoutStyles.LayoutDirection.TopToBottom;
             this.Layout = flowchart;
         }        
     }

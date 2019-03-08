@@ -1,12 +1,11 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.PageLayouts
+namespace VisioAutomation.LayoutStyles
 {
-    public class RadialLayout : LayoutBase
+    public class RadialLayoutStyle : LayoutStyleBase
     {
-        public RadialLayout()
+        public RadialLayoutStyle()
         {
-            this.LayoutStyle = LayoutStyle.Radial;
             this.ConnectorStyle = ConnectorStyle.RightAngle;
         }
 

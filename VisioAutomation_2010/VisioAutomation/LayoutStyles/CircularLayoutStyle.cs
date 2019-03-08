@@ -1,12 +1,11 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.PageLayouts
+namespace VisioAutomation.LayoutStyles
 {
-    public class CircularLayout : LayoutBase
+    public class CircularLayoutStyle : LayoutStyleBase
     {
-        public CircularLayout()
+        public CircularLayoutStyle()
         {
-            this.LayoutStyle = LayoutStyle.Circular;
             this.ConnectorStyle = ConnectorStyle.CenterToCenter;
         }
 

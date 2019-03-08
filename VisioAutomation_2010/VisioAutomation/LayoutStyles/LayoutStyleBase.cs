@@ -1,15 +1,14 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.PageLayouts
+namespace VisioAutomation.LayoutStyles
 {
-    public abstract class LayoutBase
+    public abstract class LayoutStyleBase
     {
-        public LayoutStyle LayoutStyle { get; set; }
         public ConnectorStyle ConnectorStyle { get; set; }
         public ConnectorAppearance ConnectorAppearance { get; set; }
         public Geometry.Size AvenueSize { get; set; }
 
-        protected LayoutBase()
+        protected LayoutStyleBase()
         {
             this.AvenueSize = new Geometry.Size(0.375, 0.375);
         }
@@ -18,7 +17,7 @@ namespace VisioAutomation.PageLayouts
         {
             page_layout_cells.AvenueSizeX = this.AvenueSize.Width;
             page_layout_cells.AvenueSizeY = this.AvenueSize.Height;
-            page_layout_cells.LineRouteExt = (int) LayoutBase.ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
+            page_layout_cells.LineRouteExt = (int) LayoutStyleBase.ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
 
             var rs = this.ConnectorsStyleToRouteStyle();
             if (rs.HasValue)
