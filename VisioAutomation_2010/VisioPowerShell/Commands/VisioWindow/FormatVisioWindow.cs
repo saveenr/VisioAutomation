@@ -17,6 +17,15 @@ namespace VisioPowerShell.Commands
         [SMA.Parameter(Position = 3)]
         public int? Y;
 
+        [SMA.Parameter(ParameterSetName = "zoomto", Position = 0, Mandatory = true)]
+        public VisioScripting.Models.ZoomToObject? To = null;
+
+        [SMA.Parameter(ParameterSetName = "value", Position = 0, Mandatory = true)]
+        public double Zoom = 0;
+
+        [SMA.Parameter(ParameterSetName = "valuerelative", Position = 0, Mandatory = true)]
+        public double ZoomRelative = 0;
+
         protected override void ProcessRecord()
         {
             if (this.Width > 0 || this.Height > 0)
@@ -46,6 +55,20 @@ namespace VisioPowerShell.Commands
 
                 this.Client.Window.SetApplicationWindowRectangle(new_rect);
             }
+
+            if (this.Zoom > 0)
+            {
+                this.Client.View.SetActiveWindowZoomValue(this.Zoom);
+            }
+            else if (this.ZoomRelative > 0)
+            {
+                this.Client.View.SetActiveWindowZoomValueRelative(this.ZoomRelative);
+            }
+            else if (this.To != null)
+            {
+                this.Client.View.SetActiveWindowZoomToObject(this.To.Value);
+            }
+
         }
     }
 }
