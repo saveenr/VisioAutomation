@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Measure, Nouns.VisioPage)]
-    public class GetVisioDirectedEdge : VisioCmdlet
+    public class MeasureVisioPage : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetShapeObjects { get; set; }
