@@ -4,7 +4,6 @@ namespace VisioPowerShell.Commands
     {
         public const string Visio = nameof(Visio);
         public const string VisioApplication = nameof(VisioApplication);
-        public const string VisioConnection = nameof(VisioConnection);
         public const string VisioConnectionPoint = nameof(VisioConnectionPoint);
         public const string VisioContainer = nameof(VisioContainer);
         public const string VisioControl = nameof(VisioControl);
@@ -33,6 +32,5 @@ namespace VisioPowerShell.Commands
         public const string VisioText = nameof(VisioText);
         public const string VisioUserDefinedCell = nameof(VisioUserDefinedCell);
         public const string VisioWindow = nameof(VisioWindow);
-        public const string VisioZoom = nameof(VisioZoom);
     }
 }
