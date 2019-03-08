@@ -2,8 +2,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioWindow)]
-    public class SetVisioWindow : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Format, Nouns.VisioWindow)]
+    public class FormatVisioWindow : VisioCmdlet
     {
         [SMA.Parameter(Position = 0)]
         public int? Width;
