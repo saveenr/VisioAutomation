@@ -120,15 +120,13 @@
     <Compile Include="Commands\Visio\OutVisio.cs" />
     <Compile Include="Models\DirectedEdge.cs" />
     <Compile Include="Commands\VisioShapeCells\GetVisioShapeCells.cs" />
-    <Compile Include="Commands\VisioModel\NewVisioModelDirectedGraph.cs" />
-    <Compile Include="Commands\VisioModel\NewVisioModelOrgChart.cs" />
+    <Compile Include="Commands\VisioModel\NewVisioModel.cs" />
     <Compile Include="Commands\VisioDocument\SetVisioDocument.cs" />
     <Compile Include="Commands\VisioPage\SetVisioPage.cs" />
     <Compile Include="Commands\VisioShapeCells\SetVisioShapeCells.cs" />
     <Compile Include="Commands\VisioPage\RemoveVisioPage.cs" />
     <Compile Include="Commands\VisioApplication\TestVisioApplication.cs" />
     <Compile Include="Commands\VisioScriptingClient\GetVisioScriptingClient.cs" />
-    <Compile Include="Commands\VisioModel\NewVisioModelGrid.cs" />
     <Compile Include="Commands\VisioMaster\NewVisioMaster.cs" />
     <Compile Include="Commands\VisioUserDefinedCell\RemoveVisioUserDefinedCell.cs" />
     <Compile Include="VisioPsClientContext.cs" />
