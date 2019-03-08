@@ -3,8 +3,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Remove, Nouns.VisioGroup)]
-    public class RemoveVisioGroup : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Split, Nouns.VisioShape)]
+    public class SplitVisioShape: VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;

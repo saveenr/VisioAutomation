@@ -9,7 +9,6 @@ namespace VisioPowerShell.Commands
         public const string VisioControl = nameof(VisioControl);
         public const string VisioCustomProperty = nameof(VisioCustomProperty);
         public const string VisioDocument = nameof(VisioDocument);
-        public const string VisioGroup = nameof(VisioGroup);
         public const string VisioHyperlink = nameof(VisioHyperlink);
         public const string VisioLayer = nameof(VisioLayer);
         public const string VisioLockCells = nameof(VisioLockCells);

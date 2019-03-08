@@ -2,8 +2,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioGroup)]
-    public class NewVisioGroup : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Join, Nouns.VisioShape)]
+    public class JoinVisioShape : VisioCmdlet
     {
         protected override void ProcessRecord()
         {
