@@ -1,12 +1,4 @@
 using SMA = System.Management.Automation;
-namespace VisioPowerShell.Models
-{
-    public enum DiagramModelType
-    {
-        DirectedGraph,
-        OrgChart
-    }
-}
 
 namespace VisioPowerShell.Commands
 {

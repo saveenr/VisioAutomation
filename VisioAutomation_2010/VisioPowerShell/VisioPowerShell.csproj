@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DiagramModelType.cs" />
     <Compile Include="Models\PageLayoutType.cs" />
     <Compile Include="Commands\VisioPageLayout\NewVisioPageLayout.cs" />
     <Compile Include="Models\DocumentType.cs" />
