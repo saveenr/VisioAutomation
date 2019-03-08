@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands
         public int? Y;
 
         [SMA.Parameter(ParameterSetName = "zoomto", Position = 0, Mandatory = true)]
-        public VisioScripting.Models.ZoomToObject? To = null;
+        public VisioScripting.Models.ZoomToObject? ZoomTo = null;
 
         [SMA.Parameter(ParameterSetName = "value", Position = 0, Mandatory = true)]
         public double Zoom = 0;
@@ -64,9 +64,9 @@ namespace VisioPowerShell.Commands
             {
                 this.Client.View.SetActiveWindowZoomValueRelative(this.ZoomRelative);
             }
-            else if (this.To != null)
+            else if (this.ZoomTo != null)
             {
-                this.Client.View.SetActiveWindowZoomToObject(this.To.Value);
+                this.Client.View.SetActiveWindowZoomToObject(this.ZoomTo.Value);
             }
 
         }
