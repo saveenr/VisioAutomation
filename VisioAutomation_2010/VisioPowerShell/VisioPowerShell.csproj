@@ -143,7 +143,6 @@
     <Compile Include="Commands\VisioShape\RemoveVisioShape.cs" />
     <Compile Include="Commands\VisioLayer\GetVisioLayer.cs" />
     <Compile Include="Commands\VisioShape\SelectVisioShape.cs" />
-    <Compile Include="Commands\VisioModel\NewVisioModelPieChart.cs" />
     <Compile Include="Commands\VisioPage\ExportVisioPage.cs" />
     <Compile Include="Commands\VisioConnectionPoint\GetVisioConnectionPoint.cs" />
     <Compile Include="Commands\VisioControl\GetVisioControl.cs" />
