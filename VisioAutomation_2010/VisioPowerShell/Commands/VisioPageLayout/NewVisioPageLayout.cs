@@ -3,36 +3,35 @@ using SMA = System.Management.Automation;
 namespace VisioPowerShell.Commands
 {
 
-    [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioPageLayout)]
-    public class NewVisioPageLayout : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.LayoutStyle)]
+    public class NewLayoutStyle : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true)]
-        public VisioPowerShell.Models.PageLayoutType LayoutType { get; set; }
-
+        public VisioPowerShell.Models.LayoutStyleType LayoutStyle { get; set; }
 
         protected override void ProcessRecord()
         {
-            if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.FlowChart)
+            if (this.LayoutStyle == VisioPowerShell.Models.LayoutStyleType.FlowChart)
             {
                 var plo = new VisioAutomation.LayoutStyles.FlowchartLayoutStyle();
                 this.WriteObject(plo);
             }
-            else if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.Hierarchy)
+            else if (this.LayoutStyle == VisioPowerShell.Models.LayoutStyleType.Hierarchy)
             {
                 var plo = new VisioAutomation.LayoutStyles.HierarchyLayoutStyle();
                 this.WriteObject(plo);
             }
-            else if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.Circular)
+            else if (this.LayoutStyle == VisioPowerShell.Models.LayoutStyleType.Circular)
             {
                 var plo = new VisioAutomation.LayoutStyles.CircularLayoutStyle();
                 this.WriteObject(plo);
             }
-            else if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.CompactTree)
+            else if (this.LayoutStyle == VisioPowerShell.Models.LayoutStyleType.CompactTree)
             {
                 var plo = new VisioAutomation.LayoutStyles.CompactTreeLayout();
                 this.WriteObject(plo);
             }
-            else if (this.LayoutType == VisioPowerShell.Models.PageLayoutType.RadialLayout)
+            else if (this.LayoutStyle == VisioPowerShell.Models.LayoutStyleType.RadialLayout)
             {
                 var plo = new VisioAutomation.LayoutStyles.RadialLayoutStyle();
                 this.WriteObject(plo);

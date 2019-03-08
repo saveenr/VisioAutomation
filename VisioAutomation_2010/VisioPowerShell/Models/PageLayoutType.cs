@@ -1,6 +1,6 @@
 ﻿namespace VisioPowerShell.Models
 {
-    public enum PageLayoutType
+    public enum LayoutStyleType
     {
         FlowChart, Hierarchy, Circular, CompactTree, RadialLayout
     }
