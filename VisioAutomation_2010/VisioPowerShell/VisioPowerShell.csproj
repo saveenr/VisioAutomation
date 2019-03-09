@@ -86,7 +86,6 @@
   <ItemGroup>
     <Compile Include="Models\DiagramModelType.cs" />
     <Compile Include="Models\PageLayoutType.cs" />
-    <Compile Include="Commands\VisioLayoutStyle\NewVisioLayoutStyle.cs" />
     <Compile Include="Models\DocumentType.cs" />
     <Compile Include="Commands\VisioShape\LockVisioShape.cs" />
     <Compile Include="Commands\VisioShape\UnlockVisioShape.cs" />
