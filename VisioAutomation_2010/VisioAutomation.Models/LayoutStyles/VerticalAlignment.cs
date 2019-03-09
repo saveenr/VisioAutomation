@@ -1,4 +1,4 @@
-namespace VisioAutomation.LayoutStyles
+namespace VisioAutomation.Models.LayoutStyles
 {
     public enum VerticalAlignment
     {

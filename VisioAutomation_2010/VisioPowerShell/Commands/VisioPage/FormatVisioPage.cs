@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands
         public string BackgroundPage = null;
 
         [SMA.Parameter(Mandatory = false)]
-        public VisioAutomation.LayoutStyles.LayoutStyleBase Layout = null;
+        public VisioAutomation.Models.LayoutStyles.LayoutStyleBase Layout = null;
 
         protected override void ProcessRecord()
         {

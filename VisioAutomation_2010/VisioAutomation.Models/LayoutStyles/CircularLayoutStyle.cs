@@ -1,6 +1,6 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.LayoutStyles
+namespace VisioAutomation.Models.LayoutStyles
 {
     public class CircularLayoutStyle : LayoutStyleBase
     {

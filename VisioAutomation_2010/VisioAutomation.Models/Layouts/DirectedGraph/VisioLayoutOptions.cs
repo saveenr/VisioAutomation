@@ -1,4 +1,4 @@
-using VisioAutomation.LayoutStyles;
+using VisioAutomation.Models.LayoutStyles;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
