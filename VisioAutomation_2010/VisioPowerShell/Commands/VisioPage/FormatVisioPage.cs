@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands
         public string BackgroundPage = null;
 
         [SMA.Parameter(Mandatory = false)]
-        public VisioAutomation.Models.LayoutStyles.LayoutStyleBase Layout = null;
+        public VisioAutomation.Models.LayoutStyles.LayoutStyleBase LayoutStyle = null;
 
         protected override void ProcessRecord()
         {
@@ -74,11 +74,11 @@ namespace VisioPowerShell.Commands
                 this.Client.Page.SetActivePageBackground(this.BackgroundPage);
             }
 
-            if (this.Layout!=null)
+            if (this.LayoutStyle!=null)
             {
                 var cmdtarget = this.Client.GetCommandTargetPage();
                 var tp = new VisioScripting.Models.TargetPage(cmdtarget.ActivePage);
-                this.Client.Page.LayoutPage(tp, this.Layout);
+                this.Client.Page.LayoutPage(tp, this.LayoutStyle);
             }
         }
     }
