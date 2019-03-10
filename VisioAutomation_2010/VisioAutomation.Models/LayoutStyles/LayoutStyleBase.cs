@@ -6,17 +6,19 @@ namespace VisioAutomation.Models.LayoutStyles
     {
         public ConnectorStyle ConnectorStyle { get; set; }
         public ConnectorAppearance ConnectorAppearance { get; set; }
-        public Geometry.Size AvenueSize { get; set; }
+        public double AvenueSizeX { get; set; }
+        public double AvenueSizeY { get; set; }
 
         protected LayoutStyleBase()
         {
-            this.AvenueSize = new Geometry.Size(0.375, 0.375);
+            this.AvenueSizeX = 0.375;
+            this.AvenueSizeY = 0.375;
         }
 
         protected virtual void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
-            page_layout_cells.AvenueSizeX = this.AvenueSize.Width;
-            page_layout_cells.AvenueSizeY = this.AvenueSize.Height;
+            page_layout_cells.AvenueSizeX = this.AvenueSizeX;
+            page_layout_cells.AvenueSizeY = this.AvenueSizeY;
             page_layout_cells.LineRouteExt = (int) LayoutStyleBase.ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
 
             var rs = this.ConnectorsStyleToRouteStyle();
