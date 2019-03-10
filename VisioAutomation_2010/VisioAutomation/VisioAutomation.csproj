@@ -140,7 +140,6 @@
     <Compile Include="Text\TextXFormCells.cs" />
     <Compile Include="Shapes\ConnectionPointHelper.cs" />
     <Compile Include="Shapes\ControlHelper.cs" />
-    <Compile Include="Geometry\BoundingBoxBuilder.cs" />
     <Compile Include="Shapes\ShapeFormatCells.cs" />
     <Compile Include="Pages\PageFormatCells.cs" />
     <Compile Include="Shapes\CustomPropertyHelper.cs" />

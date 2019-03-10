@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Dom\RenderPerformanceScope.cs" />
     <Compile Include="Dom\RenderPerforfmanceSettings.cs" />
+    <Compile Include="Geometry\BoundingBoxBuilder.cs" />
     <Compile Include="LayoutStyles\CircularLayoutStyle.cs" />
     <Compile Include="LayoutStyles\CompactTreeDirection.cs" />
     <Compile Include="LayoutStyles\CompactTreeLayout.cs" />
