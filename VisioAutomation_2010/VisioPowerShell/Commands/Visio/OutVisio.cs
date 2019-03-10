@@ -44,6 +44,14 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
+            var app = this.Client.Application.GetActiveApplication();
+            if (app == null)
+            {
+                string msg = "A Visio Application Instance is not attached";
+                this.WriteVerbose(msg);
+                throw new System.ArgumentOutOfRangeException(msg);
+            }
+
             if (this.OrgChart != null)
             {
                 this.Client.Charting.NewOrgChartDocument(this.OrgChart);
