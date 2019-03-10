@@ -52,7 +52,7 @@ namespace VisioAutomationSamples
                 var shapeid = node.ShapeID;
                 int color_index = i%colors.Length;
                 var color = colors[color_index];
-                fmtcells.FillForeground = new VisioAutomation.Color.ColorRgb(color).ToFormula();
+                fmtcells.FillForeground = new VisioAutomation.Models.Color.ColorRgb(color).ToFormula();
                 fmtcells.LinePattern = 0;
                 fmtcells.LineWeight = 0;
                 fmtcells.SetFormulas(writer, shapeid);

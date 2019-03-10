@@ -44,7 +44,8 @@ namespace VisioAutomation_Tests
             var documents = app.Documents;
             if (documents.Count < 1)
             {
-                documents.Add(string.Empty);
+                var doc = documents.Add(string.Empty);
+                doc.AutoRecover = false;
             }
             var active_document = app.ActiveDocument;
             var pages = active_document.Pages;

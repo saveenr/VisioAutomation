@@ -13,7 +13,7 @@ namespace VisioAutomationSamples
             var tnr = page.Document.Fonts["Times New Roman"];
 
             var e1 = new VisioAutomation.Models.Text.Element();
-            var color_red = new VisioAutomation.Color.ColorRgb(0xff0000);
+            var color_red = new VisioAutomation.Models.Color.ColorRgb(0xff0000);
             e1.CharacterFormatting.Color = color_red.ToFormula();
             e1.CharacterFormatting.Font = tnr.ID;
             e1.CharacterFormatting.Font = "20pt";
@@ -30,7 +30,7 @@ namespace VisioAutomationSamples
             var tnr = page.Document.Fonts["Times New Roman"];
 
             var e1 = new VisioAutomation.Models.Text.Element();
-            var color_red = new VisioAutomation.Color.ColorRgb(0xff0000);
+            var color_red = new VisioAutomation.Models.Color.ColorRgb(0xff0000);
             e1.CharacterFormatting.Color = color_red.ToFormula();
             e1.CharacterFormatting.Font = tnr.ID;
             e1.CharacterFormatting.Font = "20pt";

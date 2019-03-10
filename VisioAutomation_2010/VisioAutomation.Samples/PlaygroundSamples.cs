@@ -57,7 +57,7 @@ namespace VisioAutomationSamples
             var culture = CultureInfo.InvariantCulture;
             var angles_as_formulas = angles.Select(a => a.ToString(culture)).ToList();
 
-            var color_formulas = colors.Select(x => new VA.Color.ColorRgb(x).ToFormula()).ToList();
+            var color_formulas = colors.Select(x => new VA.Models.Color.ColorRgb(x).ToFormula()).ToList();
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
@@ -120,8 +120,8 @@ namespace VisioAutomationSamples
 
             layout.Render(page);
 
-            var color1 = new VA.Color.ColorRgb(0xffdddd);
-            var color2 = new VA.Color.ColorRgb(0x00ffff);
+            var color1 = new VA.Models.Color.ColorRgb(0xffdddd);
+            var color2 = new VA.Models.Color.ColorRgb(0x00ffff);
 
             var format = new VA.Shapes.ShapeFormatCells();
 

@@ -23,7 +23,7 @@ namespace VisioAutomationSamples
 
             if (color.HasValue)
             {
-                var c = new VisioAutomation.Color.ColorRgb(color.Value);
+                var c = new VisioAutomation.Models.Color.ColorRgb(color.Value);
                 el.CharacterFormatting.Color = c.ToFormula();
             }
 

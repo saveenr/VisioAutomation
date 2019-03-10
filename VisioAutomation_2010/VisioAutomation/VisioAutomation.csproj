@@ -161,7 +161,6 @@
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="Application\AlertResponseCode.cs" />
-    <Compile Include="Color\ColorHsl.cs" />
     <Compile Include="Shapes\ConnectorType.cs" />
     <Compile Include="Text\CharacterFormatCells.cs" />
     <Compile Include="Shapes\ShapeXFormCells.cs" />
@@ -169,7 +168,6 @@
     <Compile Include="Shapes\CustomPropertyCells.cs" />
     <Compile Include="ShapeSheet\Query\CellColumn.cs" />
     <Compile Include="ShapeSheet\CellValueLiteral.cs" />
-    <Compile Include="Color\ColorRgb.cs" />
     <Compile Include="Geometry\Point.cs" />
     <Compile Include="Geometry\Rectangle.cs" />
     <Compile Include="ShapeSheet\SidSrc.cs" />
