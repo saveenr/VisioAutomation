@@ -8,7 +8,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '3.2.0'
+ModuleVersion = '3.2.1'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
@@ -23,7 +23,7 @@ CompanyName = ''
 Copyright = 'Saveen Reddy'
 
 # Description of the functionality provided by this module
-Description = 'Visio PowerShell - Automatation cmdlets for Visio version 2010 and above'
+Description = 'Visio PowerShell - Automation cmdlets for Visio version 2010 and above'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '2.0'
