@@ -2,15 +2,15 @@ namespace VisioAutomation.Models.LayoutStyles
 {
     public enum ConnectorStyle
     {
-        RightAngle,
-        Straight,
         CenterToCenter,
+        Flowchart,
         Network,
+        OrganizationChart,
+        RightAngle,
+        Simple,
         SimpleHorizontalVertical,
         SimpleVerticalHorizontal,
-        Flowchart,
+        Straight,
         Tree,
-        OrganizationChart,
-        Simple,
     }
 }
