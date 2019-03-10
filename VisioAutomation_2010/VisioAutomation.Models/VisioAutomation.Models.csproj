@@ -48,7 +48,11 @@
   <ItemGroup>
     <Compile Include="Dom\RenderPerformanceScope.cs" />
     <Compile Include="Dom\RenderPerforfmanceSettings.cs" />
+    <Compile Include="Geometry\ArcSegment.cs" />
+    <Compile Include="Geometry\BezierCurve.cs" />
+    <Compile Include="Geometry\BezierSegment.cs" />
     <Compile Include="Geometry\BoundingBoxBuilder.cs" />
+    <Compile Include="Geometry\LineSegment.cs" />
     <Compile Include="LayoutStyles\CircularLayoutStyle.cs" />
     <Compile Include="LayoutStyles\CompactTreeDirection.cs" />
     <Compile Include="LayoutStyles\CompactTreeLayout.cs" />
