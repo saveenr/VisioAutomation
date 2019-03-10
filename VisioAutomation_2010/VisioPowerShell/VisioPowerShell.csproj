@@ -120,7 +120,6 @@
     <Compile Include="Commands\Visio\OutVisio.cs" />
     <Compile Include="Models\DirectedEdge.cs" />
     <Compile Include="Commands\VisioShapeCells\GetVisioShapeCells.cs" />
-    <Compile Include="Commands\VisioModel\NewVisioModel.cs" />
     <Compile Include="Commands\VisioDocument\SetVisioDocument.cs" />
     <Compile Include="Commands\VisioPage\SetVisioPage.cs" />
     <Compile Include="Commands\VisioShapeCells\SetVisioShapeCells.cs" />
