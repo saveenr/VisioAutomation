@@ -30,6 +30,9 @@
              <ReferencedProperties>
                <Name>Name</Name>
                <Name>ID</Name>
+               <Name>Index</Name>
+               <Name>Type</Name>
+               <Name>Creator</Name>
              </ReferencedProperties>
           </PropertySet>
         </Members>
@@ -47,8 +50,10 @@
              <Name>DefaultDisplayPropertySet</Name>
              <ReferencedProperties>
                <Name>NameU</Name>
+               <Name>NameID</Name>
                <Name>ID</Name>
-               <Name>Master</Name>
+               <Name>Index</Name>
+               <Name>Type</Name>
              </ReferencedProperties>
           </PropertySet>
         </Members>

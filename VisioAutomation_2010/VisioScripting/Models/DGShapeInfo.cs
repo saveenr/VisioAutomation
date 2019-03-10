@@ -19,7 +19,7 @@ namespace VisioScripting.Models
         {
             var info = new DGShapeInfo();
             info.ID = shape_el.Attribute("id").Value;
-            client.WriteVerbose( "Reading shape id={0}", info.ID);
+            client.Output.WriteVerbose( "Reading shape id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.Stencil = shape_el.Attribute("stencil").Value;

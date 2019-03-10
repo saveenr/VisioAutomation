@@ -1,5 +1,5 @@
 ﻿using VisioAutomation.Extensions;
-using VisioAutomation.PageLayouts;
+using VisioAutomation.Models.LayoutStyles;
 using VisioAutomation.Pages;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -15,7 +15,7 @@ namespace VisioAutomation.Models.Dom
         public Pages.PageFormatCells PageFormatCells;
         public Pages.PageLayoutCells PageLayoutCells;
         public string Name;
-        public LayoutBase Layout;
+        public VisioAutomation.Models.LayoutStyles.LayoutStyleBase Layout;
         public IVisio.Page VisioPage;
         public RenderPerforfmanceSettings RenderPerforfmanceSettings { get; }
 

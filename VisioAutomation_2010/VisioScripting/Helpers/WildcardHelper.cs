@@ -6,6 +6,11 @@ namespace VisioScripting.Helpers
 {
     public static class WildcardHelper
     {
+        public static bool NullOrStar(string s)
+        {
+            return (s == null || s == "*");
+        }
+
         public static System.Text.RegularExpressions.Regex GetRegexForWildcardPattern(string wildcardpat, bool ignorecase)
         {
             string pat = "^" + System.Text.RegularExpressions.Regex.Escape(wildcardpat)

@@ -7,11 +7,12 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Font> ToEnumerable(this IVisio.Fonts fonts)
         {
-            short count = fonts.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return fonts[i + 1];
-            }
+            return ExtensionHelpers.ToEnumerable(() => fonts.Count, i => fonts[i + 1]);
+        }
+
+        public static List<IVisio.Font> ToList(this IVisio.Fonts fonts)
+        {
+            return ExtensionHelpers.ToList(() => fonts.Count, i => fonts[i + 1]);
         }
     }
 }

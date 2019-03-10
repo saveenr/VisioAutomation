@@ -207,7 +207,7 @@ namespace VisioAutomation.Shapes
 
         public CustomPropertyCells(System.DateTime value)
         {
-            var current_culture = System.Globalization.CultureInfo.CurrentCulture;
+            var current_culture = System.Globalization.CultureInfo.InvariantCulture;
             string formatted_dt = value.ToString(current_culture);
             string _Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
             this.Value = _Value;
@@ -222,6 +222,29 @@ namespace VisioAutomation.Shapes
             this.Label = CellValueLiteral.EncodeValue(this.Label.Value);
             this.Format = CellValueLiteral.EncodeValue(this.Format.Value);
             this.Prompt = CellValueLiteral.EncodeValue(this.Prompt.Value);
+        }
+
+        private void Validate()
+        {
+            if (!this.Prompt.ValidateValue(true))
+            {
+                throw new System.ArgumentException("Invalid value for Custom Property's Prompt");
+            }
+
+            if (!this.Label.ValidateValue(true))
+            {
+                throw new System.ArgumentException("Invalid value for Custom Property's Label");
+            }
+
+            if (!this.Format.ValidateValue(true))
+            {
+                throw new System.ArgumentException("Invalid value for Custom Property's Format");
+            }
+
+            if (!this.Value.ValidateValue(false))
+            {
+                //throw new System.ArgumentException("Invalid value for Custom Property's Value");
+            }
         }
     }
 }

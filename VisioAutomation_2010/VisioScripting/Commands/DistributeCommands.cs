@@ -10,32 +10,22 @@ namespace VisioScripting.Commands
 
         }
 
-        public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis, double spacing)
+        public void DistributeSelectionOnAxis(Models.TargetShapes targets, Models.Axis axis, double spacing)
         {
-            if (!this._client.Document.HasActiveDocument)
-            {
-                return;
-            }
-            var page = this._client.Page.Get();
+            var cmdtarget = this._client.GetCommandTargetPage();
+
+            var page = cmdtarget.ActivePage;
             targets = targets.ResolveShapes(this._client);
             var targetids = targets.ToShapeIDs();
-            using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeSelectionOnAxis)))
             {
                 VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
             }
         }
 
-        public void DistributeOnAxis(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.Axis axis)
+        public void DistributeSelectionOnAxis(Models.Axis axis)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
-            if (shape_count < 1)
-            {
-                return;
-            }
-
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             IVisio.VisUICmds cmd;
 
@@ -51,19 +41,17 @@ namespace VisioScripting.Commands
                     throw new System.ArgumentOutOfRangeException();
             }
 
-            var application = this._client.Application.Get();
-            using (var undoscope = this._client.Application.NewUndoScope("Distribute on Axis"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeSelectionOnAxis)))
             {
-                application.DoCmd((short)cmd);
+                cmdtarget.Application.DoCmd((short)cmd);
             }
         }
 
-        public void DistributeHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal halign)
+        public void DistributeShapesHorizontal(Models.TargetShapes targets, Models.AlignmentHorizontal halign)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
-            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
+            int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 1)
             {
                 return;
@@ -85,16 +73,14 @@ namespace VisioScripting.Commands
                 default: throw new System.ArgumentOutOfRangeException();
             }
 
-            var application = this._client.Application.Get();
-            application.DoCmd((short)cmd);
+            cmdtarget.Application.DoCmd((short)cmd);
         }
 
-        public void DistributeVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical valign)
+        public void DistributeVertical(Models.TargetShapes targets, Models.AlignmentVertical valign)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
-            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
+            int shape_count = targets.SelectShapesAndCount(this._client);
             if (shape_count < 1)
             {
                 return;
@@ -111,8 +97,7 @@ namespace VisioScripting.Commands
                 default: throw new System.ArgumentOutOfRangeException();
             }
 
-            var application = this._client.Application.Get();
-            application.DoCmd((short)cmd);
+            cmdtarget.Application.DoCmd((short)cmd);
         }
     }
 }

@@ -11,19 +11,19 @@ namespace VisioAutomation_Tests.Scripting
         public void QueryPage()
         {
             var client = this.GetScriptingClient();
-            var doc = client.Document.New();
-            client.Draw.Rectangle(0, 0, 1, 1);
-            client.Draw.Rectangle(1, 1, 2, 2);
+            var doc = client.Document.NewDocument();
+            client.Draw.DrawRectangle(0, 0, 1, 1);
+            client.Draw.DrawRectangle(1, 1, 2, 2);
 
 
-            var shapes = client.Page.GetShapes();
+            var shapes = client.Page.GetShapesOnActivePage();
             var shapeids = shapes.Select(s => s.ID16).ToList();
             
             var srcs = new[] { VisioAutomation.ShapeSheet.SrcConstants.XFormPinX };
 
-            var page = client.Page.Get();
+            var page = client.Page.GetActivePage();
 
-            var reader = client.ShapeSheet.GetReader(page);
+            var reader = client.ShapeSheet.GetReaderForPage(page);
             foreach (var shapeid in shapeids)
             {
                 foreach (var src in srcs)

@@ -56,8 +56,8 @@ namespace VisioScripting.Builders
         {
             public MsaglLayoutOptions LayoutOptions;
             public DirectedGraphLayout DirectedGraph;
-            public List<VisioScripting.Models.DGShapeInfo> ShapeInfos;
-            public List<VisioScripting.Models.DGConnectorInfo> ConnectorInfos;
+            public List<Models.DGShapeInfo> ShapeInfos;
+            public List<Models.DGConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
         }
 
@@ -88,10 +88,10 @@ namespace VisioScripting.Builders
                 pagedata.ShapeInfos = shape_els.Select(e => VisioScripting.Models.DGShapeInfo.FromXml(client, e)).ToList();
                 pagedata.ConnectorInfos = con_els.Select(e => VisioScripting.Models.DGConnectorInfo.FromXml(client, e)).ToList();
 
-                client.WriteVerbose( "Analyzing shape data for page {0}", pagenum);
+                client.Output.WriteVerbose( "Analyzing shape data for page {0}", pagenum);
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
-                    client.WriteVerbose( "shape {0}", shape_info.ID);
+                    client.Output.WriteVerbose( "shape {0}", shape_info.ID);
 
                     if (node_ids.Contains(shape_info.ID))
                     {
@@ -103,10 +103,10 @@ namespace VisioScripting.Builders
                     }
                 }
 
-                client.WriteVerbose( "Analyzing connector data...");
+                client.Output.WriteVerbose( "Analyzing connector data...");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    client.WriteVerbose( "connector {0}", con_info.ID);
+                    client.Output.WriteVerbose( "connector {0}", con_info.ID);
 
                     if (con_ids.Contains(con_info.ID))
                     {
@@ -144,16 +144,16 @@ namespace VisioScripting.Builders
                 {
                     foreach (var error in pagedata.Errors)
                     {
-                        client.WriteVerbose( error.Text);
+                        client.Output.WriteVerbose( error.Text);
                     }
-                    client.WriteVerbose( "Errors encountered in shape data. Stopping.");
+                    client.Output.WriteVerbose( "Errors encountered in shape data. Stopping.");
                 }
             }
 
             // DRAW EACH PAGE
             foreach (var pagedata in pagedatas)
             {
-                client.WriteVerbose( "Creating shape AutoLayout nodes");
+                client.Output.WriteVerbose( "Creating shape AutoLayout nodes");
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
                     var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
@@ -167,7 +167,7 @@ namespace VisioScripting.Builders
                     }
                 }
 
-                client.WriteVerbose( "Creating connector AutoLayout nodes");
+                client.Output.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
                     var def_connector_type = ConnectorType.Curved;
@@ -186,9 +186,9 @@ namespace VisioScripting.Builders
                     dg_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
                     dg_connector.Cells.LineEndArrow = def_end_arrow;
                 }
-                client.WriteVerbose( "Rendering AutoLayout...");
+                client.Output.WriteVerbose( "Rendering AutoLayout...");
             }
-            client.WriteVerbose( "Finished rendering AutoLayout");
+            client.Output.WriteVerbose( "Finished rendering AutoLayout");
 
             var directedgraphs = pagedatas.Select(pagedata => pagedata.DirectedGraph).ToList();
             return directedgraphs;

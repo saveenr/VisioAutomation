@@ -1,15 +1,14 @@
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioScripting.Commands
 {
     public class ApplicationCommands : CommandSet
     {
-        public IVisio.Application VisioApplication { get; set; }
+        private static System.Version visio_app_version;
 
-        public ApplicationWindowCommands Window { get; private set; }
-
+        private IVisio.Application _active_application;
+        
         internal ApplicationCommands(Client client) :
             this(client, null)
         {
@@ -18,41 +17,47 @@ namespace VisioScripting.Commands
         internal ApplicationCommands(Client client, IVisio.Application application) :
             base(client)
         {
-            this.Window = new ApplicationWindowCommands(this._client);
-            this.VisioApplication = application;
+            this._active_application = application;
         }
 
-        public bool HasApplication
+        public bool HasActiveApplication
         {
             get
             {
-                bool b = this.VisioApplication != null;
-                this._client.WriteVerbose("HasApplication: {0}", b);
+                bool b = this._active_application != null;
+                this._client.Output.WriteVerbose("HasApplication: {0}", b);
                 return b;
             }
         }
 
-        public IVisio.Application Get()
+        public IVisio.Application GetActiveApplication()
         {
-            return this.VisioApplication;
+            return this._active_application;
         }
 
-        public void AssertApplicationAvailable()
+        public void SetActiveApplication(IVisio.Application app)
         {
-            var has_app = this._client.Application.HasApplication;
+            this._active_application = app;
+        }
+
+        public void AssertHasActiveApplication()
+        {
+            var has_app = this._client.Application.HasActiveApplication;
             if (!has_app)
             {
                 throw new System.ArgumentException("No Visio Application available");
             }
         }
 
-        public void Close(bool force)
+        public void CloseActiveApplication(bool force)
         {
-            var app = this._client.Application.Get();
+            var cmdtarget = this._client.GetCommandTargetApplication();
+
+            var app = cmdtarget.Application;
 
             if (app == null)
             {
-                this._client.WriteWarning("There is no Visio Application to stop");
+                this._client.Output.WriteWarning("There is no Visio Application to stop");
                 return;
             }
 
@@ -74,35 +79,23 @@ namespace VisioScripting.Commands
             {
                 app.Quit();
             }
-            this.VisioApplication = null;
+            this._active_application = null;
         }
 
-        public IVisio.Application New()
+        public IVisio.Application NewActiveApplication()
         {
-            this._client.WriteVerbose("Creating a new Instance of Visio");
+            this._client.Output.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
-            this._client.WriteVerbose("Attaching that instance to current scripting client");
-            this.VisioApplication = app;
+            this._client.Output.WriteVerbose("Attaching that instance to current scripting client");
+            this._active_application = app;
             return app;
         }
 
-        public void Undo()
+        public bool ValidateActiveApplication()
         {
-            this._client.Application.AssertApplicationAvailable();
-            this.VisioApplication.Undo();
-        }
-
-        public void Redo()
-        {
-            this._client.Application.AssertApplicationAvailable();
-            this.VisioApplication.Redo();
-        }
-
-        public bool Validate()
-        {
-            if (this.VisioApplication == null)
+            if (this._active_application == null)
             {
-                this._client.WriteVerbose("Client's Application object is null");
+                this._client.Output.WriteVerbose("Client's Application object is null");
                 return false;
             }
 
@@ -111,43 +104,32 @@ namespace VisioScripting.Commands
                 // try to do something simple, read-only, and fast with the application object
                 //  if No COMException was thrown when reading ProductName property. This application instance is treated as valid
 
-                var app_version = this.VisioApplication.ProductName;
-                this._client.WriteVerbose("Application validated");
+                var app_version = this._active_application.ProductName;
+                this._client.Output.WriteVerbose("Application validated");
                 return true;
             }
             catch (System.Runtime.InteropServices.COMException)
             {
-                this._client.WriteVerbose("COMException thrown during validation. Treating as invalid application");
+                this._client.Output.WriteVerbose("COMException thrown during validation. Treating as invalid application");
                 // If a COMException is thrown, this indicates that the
                 // application object is invalid
                 return false;
             }
         }
 
-        private static System.Version visio_app_version;
-
-        public System.Version Version
+        public System.Version ApplicationVersion
         {
             get
             {
                 if (ApplicationCommands.visio_app_version == null)
                 {
-                    this._client.Application.AssertApplicationAvailable();
-                    var application = this._client.Application.Get();
+                    var cmdtarget = this._client.GetCommandTargetApplication();
+
+                    var application = cmdtarget.Application;
                     ApplicationCommands.visio_app_version = VisioAutomation.Application.ApplicationHelper.GetVersion(application);
                 }
                 return ApplicationCommands.visio_app_version;
             }            
-        }
-
-        public VA.Application.UndoScope NewUndoScope(string name)
-        {
-            if (this.VisioApplication == null)
-            {
-                throw new System.ArgumentException("Cant create UndoScope. There is no visio application attached.");
-            }
-
-            return new VA.Application.UndoScope(this.VisioApplication, name);
         }
     }
 }

@@ -14,10 +14,9 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, CustomPropertyDictionary> Get(VisioScripting.Models.TargetShapes targets)
+        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomProperties(Models.TargetShapes targets)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
+            var cmdtarget = this._client.GetCommandTargetPage();
 
             var prop_dic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
             targets = targets.ResolveShapes(this._client);
@@ -27,10 +26,7 @@ namespace VisioScripting.Commands
                 return prop_dic;
             }
 
-            var application = this._client.Application.Get();
-            var page = application.ActivePage;
-
-            var list_custom_props = CustomPropertyHelper.GetCells(page, targets.Shapes, CellValueType.Formula);
+            var list_custom_props = CustomPropertyHelper.GetCells(cmdtarget.ActivePage, targets.Shapes, CellValueType.Formula);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {
@@ -42,7 +38,7 @@ namespace VisioScripting.Commands
             return prop_dic;
         }
 
-        public List<bool> Contains(VisioScripting.Models.TargetShapes targets, string name)
+        public List<bool> ShapesContainCustomPropertyWithName(Models.TargetShapes targets, string name)
         {
             if (name == null)
             {
@@ -58,11 +54,8 @@ namespace VisioScripting.Commands
             return results;
         }
 
-        public void Delete(VisioScripting.Models.TargetShapes targets, string name)
+        public void DeleteCustomPropertyWithName(Models.TargetShapes targets, string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-            
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
@@ -80,7 +73,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Delete Custom Property"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteCustomPropertyWithName)))
             {
                 foreach (var shape in targets.Shapes)
                 {
@@ -89,11 +82,8 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Set(VisioScripting.Models.TargetShapes  targets, string name, CustomPropertyCells customprop)
+        public void SetCustomProperty(Models.TargetShapes  targets, string name, CustomPropertyCells customprop)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-            
             if (customprop == null)
             {
                 throw new System.ArgumentNullException(nameof(customprop));
@@ -108,7 +98,7 @@ namespace VisioScripting.Commands
 
             customprop.EncodeValues();
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set Custom Property"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetCustomProperty)))
             {
                 foreach (var shape in targets.Shapes)
                 {

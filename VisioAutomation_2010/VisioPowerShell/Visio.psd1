@@ -1,17 +1,5 @@
 # Manifest for "Visio" PowerShell module (VisioPS)
 #
-# HISTORY
-# -------
-# 2017/08/09 Removed the -Distance parameter from Format-VisioShape
-# 2017/04/14 Updated to latest VisioAutomation code
-# 2016/02/14 Added Hyperlink commands
-# 2015/10/19 Updated module manifest
-# 2014/05/23 Added additional metadata
-# 2014/05/14 Renamed module from "VisioPS" to "Visio"
-# 2013/08/06 Moved VisioPS.dll moved to RootModule
-# 2012/02/16 Updated PowerShellVersion and Copyright
-# 2012/08/08 Initial version
-#
 
 @{
 
@@ -20,7 +8,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '2.6.0'
+ModuleVersion = '3.3.0'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
@@ -32,10 +20,10 @@ Author = 'Saveen Reddy'
 CompanyName = ''
 
 # Copyright statement for this module
-Copyright = '(c) 2017 Saveen Reddy'
+Copyright = 'Saveen Reddy'
 
 # Description of the functionality provided by this module
-Description = 'Visio PowerShell for Visio 2010'
+Description = 'Visio PowerShell - Automation cmdlets for Visio version 2010 and above'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '2.0'
@@ -50,7 +38,7 @@ PowerShellVersion = '2.0'
 # DotNetFrameworkVersion = ''
 
 # Minimum version of the common language runtime (CLR) required by this module
-# CLRVersion = ''
+CLRVersion = '4.0'
 
 # Processor architecture (None, X86, Amd64) required by this module
 # ProcessorArchitecture = ''
@@ -92,7 +80,38 @@ ModuleList = @()
 # FileList = @()
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess
-# PrivateData = ''
+PrivateData = @{
+
+    PSData = @{
+
+        # Tags applied to this module. These help with module discovery in online galleries.
+        Tags = 'Visio'
+
+        # A URL to the license for this module.
+        LicenseUri = 'https://github.com/saveenr/VisioAutomation/blob/master/LICENSE.txt'
+
+        # A URL to the main website for this project.
+        ProjectUri = 'https://github.com/saveenr/VisioAutomation'
+
+        # A URL to an icon representing this module.
+        # IconUri = ''
+
+        # ReleaseNotes of this module
+        #ReleaseNotes = '* Bug Fix for TokenCache initialization when importing a context'
+
+        # Prerelease string of this module
+        # Prerelease = ''
+
+        # Flag to indicate whether the module requires explicit user acceptance for install/update
+        # RequireLicenseAcceptance = $false
+
+        # External dependent modules of this module
+        # ExternalModuleDependencies = @()
+
+    } # End of PSData hashtable
+
+ } # End of PrivateData hashtable
+
 
 # HelpInfo URI of this module
 # HelpInfoURI = ''

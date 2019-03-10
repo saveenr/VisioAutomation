@@ -14,11 +14,9 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> Get(VisioScripting.Models.TargetShapes targets)
+        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> GetUserDefinedCells(Models.TargetShapes targets, CellValueType cvt)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
+            var cmdtarget = this._client.GetCommandTargetPage();
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, UserDefinedCellCells>>();
 
             targets = targets.ResolveShapes(this._client);
@@ -28,9 +26,8 @@ namespace VisioScripting.Commands
                 return prop_dic;
             }
 
-            var application = this._client.Application.Get();
-            var page = application.ActivePage;
-            var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, CellValueType.Formula);
+            var page = cmdtarget.ActivePage;
+            var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, cvt);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {
@@ -42,11 +39,8 @@ namespace VisioScripting.Commands
             return prop_dic;
         }
 
-        public List<bool> Contains(VisioScripting.Models.TargetShapes targets, string name)
+        public List<bool> ShapesContainUserDefinedCellsWithName(Models.TargetShapes targets, string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
@@ -59,17 +53,14 @@ namespace VisioScripting.Commands
                 return new List<bool>();
             }
 
-            var all_shapes = this._client.Selection.GetShapes();
+            var all_shapes = this._client.Selection.GetShapesInSelection();
             var results = all_shapes.Select(s => UserDefinedCellHelper.Contains(s, name)).ToList();
 
             return results;
         }
        
-        public void Delete(VisioScripting.Models.TargetShapes targets, string name)
+        public void DeleteUserDefinedCellsByName(Models.TargetShapes targets, string name)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -79,15 +70,15 @@ namespace VisioScripting.Commands
 
             if (name == null)
             {
-                throw new System.ArgumentNullException("name cannot be null","name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name cannot be empty", nameof(name));
+                throw new System.ArgumentException(nameof(name),"name cannot be empty");
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Delete User-Defined Cell"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteUserDefinedCellsByName)))
             {
                 foreach (var shape in targets.Shapes)
                 {
@@ -96,11 +87,8 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Set(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.UserDefinedCell cell)
+        public void SetUserDefinedCell(Models.TargetShapes targets, Models.UserDefinedCell userdefinedcell)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -108,11 +96,11 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Set User-Defined Cell"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetUserDefinedCell)))
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Set(shape, cell.Name, cell.Cells);
+                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells);
                 }
             }
         }

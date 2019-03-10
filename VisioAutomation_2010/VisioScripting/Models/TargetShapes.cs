@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioScripting.Models
 {
@@ -40,41 +41,50 @@ namespace VisioScripting.Models
             this.Shapes = shapes;
         }
 
-
-        internal int SetSelectionGetSelectedCount(VisioScripting.Client client)
+        internal int SelectShapesAndCount(VisioScripting.Client client)
         {
-            client.Application.AssertApplicationAvailable();
+            client.Application.AssertHasActiveApplication();
+
+            var app = client.Application.GetActiveApplication();
+            var active_window = app.ActiveWindow;
+            var sel = active_window.Selection;
 
             if (this.Shapes == null)
             {
-                int n = client.Selection.Count();
-                client.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
+                int n = sel.Count;
+                client.Output.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
                 return n;
             }
 
-            client.WriteVerbose("GetTargetSelectionCount: Reseting selecton to specified {0} shapes", this.Shapes.Count);
-            client.Selection.SelectNone();
-            client.Selection.Select(this.Shapes);
-            int selected_count = client.Selection.Count();
+            client.Output.WriteVerbose("GetTargetSelectionCount: Reseting selecton to specified {0} shapes", this.Shapes.Count);
+
+            // Force empty slection
+            active_window.DeselectAll();
+            active_window.DeselectAll(); // doing this twice is deliberate
+
+            // Force selection to specific shapes
+            active_window.Select(this.Shapes, IVisio.VisSelectArgs.visSelect);
+
+            int selected_count = sel.Count;
             return selected_count;
         }
 
         private IList<IVisio.Shape> __ResolveShapes(VisioScripting.Client client)
         {
-            client.Application.AssertApplicationAvailable();
+            client.Application.AssertHasActiveApplication();
 
             if (this.Shapes == null)
             {
-                var out_shapes = client.Selection.GetShapes();
-                client.WriteVerbose("GetTargetShapes: Returning {0} shapes from the active selection", out_shapes.Count);
+                var out_shapes = client.Selection.GetShapesInSelection();
+                client.Output.WriteVerbose("GetTargetShapes: Returning {0} shapes from the active selection", out_shapes.Count);
                 return out_shapes;
             }
 
-            client.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", this.Shapes.Count);
+            client.Output.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", this.Shapes.Count);
             return this.Shapes;
         }
 
-        internal TargetShapes ResolveShapes(VisioScripting.Client client)
+        public TargetShapes ResolveShapes(VisioScripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
             var targets = new TargetShapes(shapes);

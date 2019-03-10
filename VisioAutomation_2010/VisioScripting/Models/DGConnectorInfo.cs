@@ -14,7 +14,7 @@ namespace VisioScripting.Models
         {
             var info = new DGConnectorInfo();
             info.ID = shape_el.Attribute("id").Value;
-            client.WriteVerbose("Reading connector id={0}", info.ID);
+            client.Output.WriteVerbose("Reading connector id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.From = shape_el.Attribute("from").Value;

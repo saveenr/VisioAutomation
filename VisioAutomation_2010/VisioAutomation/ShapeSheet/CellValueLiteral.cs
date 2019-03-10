@@ -85,18 +85,19 @@
                 return text;
             }
 
-            if (text[0] == '\"')
-            {
-                return text;
-            }
 
             if (text[0] == '=')
             {
                 return text;
             }
-            
-            // if the caller wants to force the content to a formula string
-            // then do so: escape internal double quotes and then wrap in double quotes
+
+
+            // it's quoted already, just return it
+            if (text[0] == '\"' && text[text.Length-1]=='\"')
+            {
+                return text;
+            }
+
             if (quote)
             {
                 string str_quoted = text.Replace("\"", "\"\"");
@@ -108,6 +109,40 @@
             return text;
         }
 
+        internal bool ValidateValue(bool quote_required)
+        {
+            string text = this.Value;
 
+            if (text == null)
+            {
+                return true;
+            }
+
+            if (text.Length == 0)
+            {
+                return true;
+            }
+
+            if (text[0] == '=')
+            {
+                return true;
+            }
+
+            if (text[0] == '\"')
+            {
+                if (text[text.Length - 1] != '\"')
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (quote_required)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

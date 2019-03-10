@@ -10,10 +10,11 @@ namespace VisioScripting.Commands
 
         }
 
-        public void ToFront()
+        public void MoveApplicationWindowToFront()
         {
-            this._client.Application.AssertApplicationAvailable();
-            var app = this._client.Application.Get();
+            var cmdtarget = this._client.GetCommandTargetApplication();
+
+            var app = cmdtarget.Application;
 
             if (app == null)
             {
@@ -23,39 +24,21 @@ namespace VisioScripting.Commands
             VisioAutomation.Application.ApplicationHelper.BringWindowToTop(app);
         }
 
-        public System.Drawing.Size GetSize()
+        public System.Drawing.Rectangle GetApplicationWindowRectangle()
         {
-            this._client.Application.AssertApplicationAvailable();
-            var app = this._client.Application.Get();
-            var appwindow = app.Window;
+            var cmdtarget = this._client.GetCommandTargetApplication();
+
+            var appwindow = cmdtarget.Application.Window;
             var rect = appwindow.GetWindowRect();
-            var size = new System.Drawing.Size(rect.Width, rect.Height);
-            return size;
+            return rect;
         }
 
-        public void SetSize(int width, int height)
+        public void SetApplicationWindowRectangle(System.Drawing.Rectangle rect)
         {
-            if (width <= 0)
-            {
-                this._client.WriteError( "width must be positive");
-                return;
-            }
+            var cmdtarget = this._client.GetCommandTargetApplication();
 
-            if (height <= 0)
-            {
-                this._client.WriteError("height must be positive");
-                return;
-            }
-
-            this._client.Application.AssertApplicationAvailable();
-
-            var app = this._client.Application.Get();
-            var appwindow = app.Window;
-            var r = appwindow.GetWindowRect();
-            r.Width = width;
-            r.Height = height;
-            appwindow.SetWindowRect(r);
+            var appwindow = cmdtarget.Application.Window;
+            appwindow.SetWindowRect(rect);
         }
-
     }
 }

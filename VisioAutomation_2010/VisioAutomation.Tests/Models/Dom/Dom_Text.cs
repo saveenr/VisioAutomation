@@ -81,7 +81,9 @@ namespace VisioAutomation_Tests.Dom
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual("0", charfmt[0].Style.Value);
+
+            VisioAutomation_Tests.AssertUtil.OneOf( new[] { "0", "THEMEVAL()" }, charfmt[0].Style.Value);
+
             Assert.AreEqual(impact.ID.ToString(), charfmt[0].Font.Value);
 
             page1.Delete(0);
@@ -131,11 +133,18 @@ namespace VisioAutomation_Tests.Dom
 
 
             // check the styles
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.None).ToString(), charfmt[0].Style.Value);
+
+            string style_value_0 = charfmt[0].Style.Value;
+            string style_value_4 = charfmt[4].Style.Value;
+            string style_none = ((int)VA.Models.Text.CharStyle.None).ToString();
+
+            AssertUtil.OneOf(new[] { style_none, "THEMEVAL()" }, style_value_0);
+
             Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[1].Style.Value);
             Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[2].Style.Value);
             Assert.AreEqual(((int)(VA.Models.Text.CharStyle.Italic | VA.Models.Text.CharStyle.Bold)).ToString(), charfmt[3].Style.Value);
-            Assert.AreEqual(((int)(VA.Models.Text.CharStyle.None)).ToString(), charfmt[4].Style.Value);
+
+            AssertUtil.OneOf(new[] { style_none, "THEMEVAL()" }, style_value_4);
 
             // check the text run content
             var charruns = textfmt.CharacterTextRuns;

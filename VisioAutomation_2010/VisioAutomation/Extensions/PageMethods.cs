@@ -75,7 +75,8 @@ namespace VisioAutomation.Extensions
             this IVisio.Page page, 
             IList<Geometry.Point> controlpoints,
             IList<double> knots,
-            IList<double> weights, int degree)
+            IList<double> weights, 
+            int degree)
         {
             var surface = new SurfaceTarget(page);
             var shape = surface.DrawNURBS(controlpoints, knots, weights, degree);
@@ -125,11 +126,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Page> ToEnumerable(this IVisio.Pages pages)
         {
-            short count = pages.Count;
-            for (int i = 0; i < count; i++)
-            {
-                yield return pages[i + 1];
-            }
+            return ExtensionHelpers.ToEnumerable(() => pages.Count, i => pages[i + 1]);
+        }
+
+        public static List<IVisio.Page> ToList(this IVisio.Pages pages)
+        {
+            return ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
         }
 
         public static string[] GetNamesU(this IVisio.Pages pages)

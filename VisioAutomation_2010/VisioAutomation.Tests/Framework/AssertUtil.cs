@@ -42,5 +42,21 @@ namespace VisioAutomation_Tests
             Assert.AreEqual(expected.formula, actual.formula);
             Assert.AreEqual(expected.result, actual.result);
         }
+
+        public static void OneOf<T>(T[] expected, T actual)
+        {
+            bool match = false;
+            foreach (var value in expected)
+            {
+                match = true;
+                break;
+            }
+            if (!match)
+            {
+                string a = string.Join(",", expected);
+                string b = string.Format("Expected one of ({0}), Actual is ({1}).", a, actual);
+                Assert.Fail(b);
+            }
+        }
     }
 }

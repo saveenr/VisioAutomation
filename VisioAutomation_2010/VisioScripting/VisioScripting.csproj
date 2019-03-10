@@ -45,18 +45,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AlignCommands.cs" />
+    <Compile Include="Commands\UndoCommands.cs" />
+    <Compile Include="Commands\LockCommands.cs" />
     <Compile Include="Commands\CommandParameter.cs" />
+    <Compile Include="Commands\CommandTarget.cs" />
+    <Compile Include="Commands\CommandTargetFlags.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
+    <Compile Include="Commands\ChartingCommands.cs" />
+    <Compile Include="Commands\ExportPageCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
+    <Compile Include="Models\ShapeSendDirection.cs" />
     <Compile Include="Helpers\SelectionHelper.cs" />
     <Compile Include="Models\AlignmentHorizontal.cs" />
     <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\PageOrientation.cs" />
+    <Compile Include="Models\PageType.cs" />
     <Compile Include="Models\SelectionOperation.cs" />
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
     <Compile Include="Models\ConnectionPointType.cs" />
+    <Compile Include="Models\TargetDocument.cs" />
+    <Compile Include="Models\TargetDocuments.cs" />
+    <Compile Include="Models\TargetPages.cs" />
     <Compile Include="Models\TargetShapeIDs.cs" />
     <Compile Include="Models\TargetShapes.cs" />
     <Compile Include="Helpers\ArrangeHelper.cs" />
@@ -73,7 +84,7 @@
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="Commands\DocumentCommands.cs" />
     <Compile Include="Commands\DrawCommands.cs" />
-    <Compile Include="Commands\ExportCommands.cs" />
+    <Compile Include="Commands\ExportSelectionCommands.cs" />
     <Compile Include="Commands\HyperlinkCommands.cs" />
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
@@ -104,7 +115,7 @@
     <Compile Include="Models\SnapCornerPosition.cs" />
     <Compile Include="Models\SnappingGrid.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
-    <Compile Include="Models\Zoom.cs" />
+    <Compile Include="Models\ZoomToObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">

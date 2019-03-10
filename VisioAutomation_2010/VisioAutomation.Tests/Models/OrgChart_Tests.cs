@@ -84,7 +84,7 @@ namespace VisioAutomation_Tests.Models
             var page = active_page;
             page.ResizeToFitContents();
 
-            var shapes = active_page.Shapes.ToEnumerable().ToList();
+            var shapes = active_page.Shapes.ToList();
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
             var shapes_1d = shapes.Where(s => s.OneD != 0).ToList();
             var shapes_connector = shapes.Where(s => s.Master.NameU == "Dynamic connector").ToList();

@@ -10,16 +10,9 @@ namespace VisioScripting.Commands
 
         }
 
-        public void AlignHorizontal(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentHorizontal align)
+        public void AlignSelectionHorizontal(Models.AlignmentHorizontal align)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
-            if (shape_count < 2)
-            {
-                return;
-            }
+            var cmdtarget = this._client.GetCommandTargetDocument();
 
             IVisio.VisHorizontalAlignTypes halign;
             var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
@@ -40,24 +33,18 @@ namespace VisioScripting.Commands
 
             const bool glue_to_guide = false;
 
-            using (var undoscope = this._client.Application.NewUndoScope("Align Horizontal"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AlignSelectionHorizontal)))
             {
-                var selection = this._client.Selection.Get();
+                var window = cmdtarget.Application.ActiveWindow;
+                var selection = window.Selection;
                 selection.Align(halign, valign, glue_to_guide);
             }
         }
 
-        public void AlignVertical(VisioScripting.Models.TargetShapes targets, VisioScripting.Models.AlignmentVertical align)
+        public void AlignSelectionVertical(Models.AlignmentVertical align)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
-            int shape_count = targets.SetSelectionGetSelectedCount(this._client);
-            if (shape_count < 2)
-            {
-                return;
-            }
-
+            var cmdtarget = this._client.GetCommandTargetDocument();
+            
             // Set the align enums
             var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
             IVisio.VisVerticalAlignTypes valign;
@@ -72,9 +59,10 @@ namespace VisioScripting.Commands
             const bool glue_to_guide = false;
 
             // Perform the alignment
-            using (var undoscope = this._client.Application.NewUndoScope("Align Vertical"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AlignSelectionVertical)))
             {
-                var selection = this._client.Selection.Get();
+                var window = cmdtarget.Application.ActiveWindow;
+                var selection = window.Selection;
                 selection.Align(halign, valign, glue_to_guide);
             }
         }

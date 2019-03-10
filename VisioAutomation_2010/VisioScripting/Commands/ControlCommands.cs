@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -13,11 +14,8 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<int> Add(VisioScripting.Models.TargetShapes targets, ControlCells ctrl)
+        public List<int> AddControlToShapes(Models.TargetShapes targets, ControlCells ctrl)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
             if (ctrl == null)
             {
                 throw new System.ArgumentNullException(nameof(ctrl));
@@ -30,10 +28,9 @@ namespace VisioScripting.Commands
                 return new List<int>(0);
             }
 
-
             var control_indices = new List<int>();
 
-            using (var undoscope = this._client.Application.NewUndoScope("Add Control"))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AddControlToShapes)))
             {
                 foreach (var shape in targets.Shapes)
                 {
@@ -45,11 +42,8 @@ namespace VisioScripting.Commands
             return control_indices;
         }
 
-        public void Delete(VisioScripting.Models.TargetShapes targets, int n)
+        public void DeleteControlWithIndex(Models.TargetShapes targets, int index)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -57,20 +51,21 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Application.NewUndoScope("Delete Control"))
+            // restrict the operation to those shapes that actually have enough
+            // controls to qualify for deleting 
+            var qualified_shapes = targets.Shapes.Where(shape => ControlHelper.GetCount(shape) > index);
+
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteControlWithIndex)))
             {
-                foreach (var shape in targets.Shapes)
+                foreach (var shape in qualified_shapes)
                 {
-                    ControlHelper.Delete(shape, n);
+                    ControlHelper.Delete(shape, index);
                 }
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<ControlCells>> Get(VisioScripting.Models.TargetShapes targets)
+        public Dictionary<IVisio.Shape, IList<ControlCells>> GetControls(Models.TargetShapes targets, CellValueType cvt)
         {
-            this._client.Application.AssertApplicationAvailable();
-            this._client.Document.AssertDocumentAvailable();
-
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
@@ -78,10 +73,10 @@ namespace VisioScripting.Commands
                 return new Dictionary<IVisio.Shape, IList<ControlCells>>(0);
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>();
+            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>(targets.Shapes.Count);
             foreach (var shape in targets.Shapes)
             {
-                var controls = ControlCells.GetCells(shape, CellValueType.Formula);
+                var controls = ControlCells.GetCells(shape, cvt);
                 dic[shape] = controls;
             }
             return dic;

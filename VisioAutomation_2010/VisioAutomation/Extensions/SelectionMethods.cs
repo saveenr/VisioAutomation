@@ -7,11 +7,12 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Selection selection)
         {
-            short count16 = selection.Count16;
-            for (short i = 0; i < count16; i++)
-            {
-                yield return selection[i + 1];
-            }
+            return ExtensionHelpers.ToEnumerable(() => selection.Count, i => selection[i + 1]);
+        }
+
+        public static List<IVisio.Shape> ToList(this IVisio.Selection selection)
+        {
+            return ExtensionHelpers.ToList(() => selection.Count, i => selection[i + 1]);
         }
 
         public static Geometry.Rectangle GetBoundingBox(this IVisio.Selection selection, IVisio.VisBoundingBoxArgs args)
