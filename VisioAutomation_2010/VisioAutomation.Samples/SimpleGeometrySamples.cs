@@ -12,7 +12,7 @@ namespace VisioAutomationSamples
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
-            var curve0 = VA.Geometry.BezierCurve.FromEllipse(
+            var curve0 = VA.Models.Geometry.BezierCurve.FromEllipse(
                 new VA.Geometry.Point(5, 4),
                 new VA.Geometry.Size(1, 1));
 
@@ -26,7 +26,7 @@ namespace VisioAutomationSamples
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
-            var curve0 = VA.Geometry.BezierCurve.FromEllipse(
+            var curve0 = VA.Models.Geometry.BezierCurve.FromEllipse(
                 new VA.Geometry.Point(2, 4),
                 new VA.Geometry.Size(1, 0.5));
             var s0 = page.DrawBezier(curve0.ControlPoints);

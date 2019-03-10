@@ -7,13 +7,13 @@ namespace VisioAutomation.Models.Charting
 {
     public class AreaChart
     {
-        public Geometry.Rectangle Rectangle;
+        public VisioAutomation.Geometry.Rectangle Rectangle;
         public DataPointList DataPoints;
         public double TotalBarWidth;
         public double TotalMarginWidth;
         public double TotalBarSpacingWidth;
  
-        public AreaChart(Geometry.Rectangle rect)
+        public AreaChart(VisioAutomation.Geometry.Rectangle rect)
         {
             this.Rectangle = rect;
             this.DataPoints = new DataPointList();
@@ -43,18 +43,18 @@ namespace VisioAutomation.Models.Charting
                 base_y += System.Math.Abs(this.Rectangle.Height * (min / range));
             }
 
-            var category_axis_start_point = new Geometry.Point(this.Rectangle.Left, base_y);
-            var category_axis_end_point = new Geometry.Point(this.Rectangle.Right, base_y);
+            var category_axis_start_point = new VisioAutomation.Geometry.Point(this.Rectangle.Left, base_y);
+            var category_axis_end_point = new VisioAutomation.Geometry.Point(this.Rectangle.Right, base_y);
             var category_axis_shape = page.DrawLine(category_axis_start_point, category_axis_end_point);
 
             double cur_x = base_x;
 
-            var points = new List<Geometry.Point>();
+            var points = new List<VisioAutomation.Geometry.Point>();
             for (int i = 0; i < this.DataPoints.Count; i++)
             {
                 if (i == 0)
                 {
-                    points.Add( new Geometry.Point(cur_x,base_y));
+                    points.Add( new VisioAutomation.Geometry.Point(cur_x,base_y));
                 }
 
                 var p = this.DataPoints[i];
@@ -63,23 +63,23 @@ namespace VisioAutomation.Models.Charting
 
                 if (p.Value >= 0.0)
                 {
-                    points.Add(new Geometry.Point(cur_x, base_y+value_height));
+                    points.Add(new VisioAutomation.Geometry.Point(cur_x, base_y+value_height));
                 }
                 else
                 {
-                    points.Add(new Geometry.Point(cur_x , base_y - value_height));
+                    points.Add(new VisioAutomation.Geometry.Point(cur_x , base_y - value_height));
 
                 }
 
                 if (i == this.DataPoints.Count - 1)
                 {
-                    points.Add(new Geometry.Point(cur_x, base_y));
+                    points.Add(new VisioAutomation.Geometry.Point(cur_x, base_y));
                 }
 
                 cur_x += bar_spacing;
             }
 
-            points.Add(new Geometry.Point(base_x, base_y));
+            points.Add(new VisioAutomation.Geometry.Point(base_x, base_y));
 
 
             var area_shape = page.DrawPolyline(points);

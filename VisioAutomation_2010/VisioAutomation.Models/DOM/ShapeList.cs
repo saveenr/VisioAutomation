@@ -281,7 +281,7 @@ namespace VisioAutomation.Models.Dom
         {
             var masters = shape_nodes.Select(m => m.Master.VisioMaster).ToList();
 
-            var points = new List<Geometry.Point>(masters.Count);
+            var points = new List<VisioAutomation.Geometry.Point>(masters.Count);
             points.AddRange(shape_nodes.Select(s => s.DropPosition));
             var shapeids = context.VisioPage.DropManyU(masters, points);
             
@@ -375,9 +375,9 @@ namespace VisioAutomation.Models.Dom
 
             // Drop the number of connectors needed somewhere on the page
             var masters = connector_nodes.Select(i => i.Master.VisioMaster).ToArray();
-            var origin = new Geometry.Point(-2, -2);
+            var origin = new VisioAutomation.Geometry.Point(-2, -2);
             var points = Enumerable.Range(0, connector_nodes.Count)
-                .Select(i => origin + new Geometry.Point(1.10, 0))
+                .Select(i => origin + new VisioAutomation.Geometry.Point(1.10, 0))
                 .ToList();
             var connector_shapeids = context.VisioPage.DropManyU(masters, points);
             var page_shapes = context.VisioPage.Shapes;
@@ -398,7 +398,7 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        public PolyLine DrawPolyLine(IList<Geometry.Point> points)
+        public PolyLine DrawPolyLine(IList<VisioAutomation.Geometry.Point> points)
         {
             var pl = new PolyLine(points);
             this.Add(pl);
@@ -412,7 +412,7 @@ namespace VisioAutomation.Models.Dom
             return line;
         }
 
-        public Line DrawLine(Geometry.Point p0, Geometry.Point p1)
+        public Line DrawLine(VisioAutomation.Geometry.Point p0, VisioAutomation.Geometry.Point p1)
         {
             var line = new Line(p0, p1);
             this.Add(line);
@@ -426,7 +426,7 @@ namespace VisioAutomation.Models.Dom
             return rectangle;
         }
 
-        public Rectangle DrawRectangle(Geometry.Point p0, Geometry.Point p1)
+        public Rectangle DrawRectangle(VisioAutomation.Geometry.Point p0, VisioAutomation.Geometry.Point p1)
         {
             var rectangle = new Rectangle(p0, p1);
             this.Add(rectangle);
@@ -434,34 +434,34 @@ namespace VisioAutomation.Models.Dom
         }
 
 
-        public Oval DrawOval(Geometry.Rectangle r)
+        public Oval DrawOval(VisioAutomation.Geometry.Rectangle r)
         {
             var oval = new Oval(r);
             this.Add(oval);
             return oval;
         }
 
-        public PieSlice DrawPieSlice(Geometry.Point center, double radius, double start, double end)
+        public PieSlice DrawPieSlice(VisioAutomation.Geometry.Point center, double radius, double start, double end)
         {
             var pieslice = new PieSlice(center,radius,start,end);
             this.Add(pieslice);
             return pieslice;
         }
 
-        public Arc DrawArc(Geometry.Point center, double inner_radius, double outer_radius, double start, double end)
+        public Arc DrawArc(VisioAutomation.Geometry.Point center, double inner_radius, double outer_radius, double start, double end)
         {
             var arc = new Arc(center, inner_radius, outer_radius, start, end);
             this.Add(arc);
             return arc;
         }
-        public Rectangle DrawRectangle(Geometry.Rectangle r)
+        public Rectangle DrawRectangle(VisioAutomation.Geometry.Rectangle r)
         {
             var rectangle = new Rectangle(r);
             this.Add(rectangle);
             return rectangle;
         }
 
-        public BezierCurve DrawBezier(IEnumerable<Geometry.Point> points)
+        public BezierCurve DrawBezier(IEnumerable<VisioAutomation.Geometry.Point> points)
         {
             var bezier = new BezierCurve(points);
             this.Add(bezier);
@@ -475,7 +475,7 @@ namespace VisioAutomation.Models.Dom
             return bezier;
         }
 
-        public Shape Drop(IVisio.Master master, Geometry.Point pos)
+        public Shape Drop(IVisio.Master master, VisioAutomation.Geometry.Point pos)
         {
             var m = new Shape(master, pos);
             this.Add(m);
@@ -484,19 +484,19 @@ namespace VisioAutomation.Models.Dom
 
         public Shape Drop(IVisio.Master master, double x, double y)
         {
-            var m = new Shape(master, new Geometry.Point(x, y));
+            var m = new Shape(master, new VisioAutomation.Geometry.Point(x, y));
             this.Add(m);
             return m;
         }
 
-        public Shape Drop(string master, string stencil, Geometry.Point pos)
+        public Shape Drop(string master, string stencil, VisioAutomation.Geometry.Point pos)
         {
             var m = new Shape(master, stencil, pos);
             this.Add(m);
             return m;
         }
 
-        public Shape Drop(string master, string stencil, Geometry.Rectangle rect)
+        public Shape Drop(string master, string stencil, VisioAutomation.Geometry.Rectangle rect)
         {
             var m = new Shape(master, stencil, rect);
             this.Add(m);
@@ -505,7 +505,7 @@ namespace VisioAutomation.Models.Dom
 
         public Shape Drop(string master, string stencil, double x, double y)
         {
-            var m = new Shape(master, stencil, new Geometry.Point(x, y));
+            var m = new Shape(master, stencil, new VisioAutomation.Geometry.Point(x, y));
             this.Add(m);
             return m;
         }

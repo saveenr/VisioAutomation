@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.Geometry
+namespace VisioAutomation.Models.Geometry
 {
     public struct BezierSegment
     {
-        public Point Start { get; }
-        public Point Handle1 { get; }
-        public Point Handle2 { get; }
-        public Point End { get; }
+        public VisioAutomation.Geometry.Point Start { get; }
+        public VisioAutomation.Geometry.Point Handle1 { get; }
+        public VisioAutomation.Geometry.Point Handle2 { get; }
+        public VisioAutomation.Geometry.Point End { get; }
 
-        public BezierSegment(Point start, Point handle1, Point handle2, Point end)
+        public BezierSegment(VisioAutomation.Geometry.Point start, VisioAutomation.Geometry.Point handle1, VisioAutomation.Geometry.Point handle2, VisioAutomation.Geometry.Point end)
             : this()
         {
             this.Start = start;
@@ -19,7 +19,7 @@ namespace VisioAutomation.Geometry
             this.End = end;
         }
 
-        public BezierSegment(IList<Point> points)
+        public BezierSegment(IList<VisioAutomation.Geometry.Point> points)
             : this()
         {
             if (points == null)
@@ -39,14 +39,14 @@ namespace VisioAutomation.Geometry
             this.End = points[3];
         }
 
-        public static List<Point> Merge(IList<BezierSegment> segments, out int degree)
+        public static List<VisioAutomation.Geometry.Point> Merge(IList<BezierSegment> segments, out int degree)
         {
             if (segments == null)
             {
                 throw new System.ArgumentNullException(nameof(segments));
             }
 
-            var points = new List<Point>(segments.Count * 4);
+            var points = new List<VisioAutomation.Geometry.Point>(segments.Count * 4);
             int n = 0;
             foreach (var seg in segments)
             {
@@ -81,7 +81,7 @@ namespace VisioAutomation.Geometry
                 var arr = new BezierSegment[1];
                 double cos_theta = System.Math.Cos(startangle);
                 double sin_theta = System.Math.Sin(startangle);
-                var p0 = new Point(cos_theta, -sin_theta);
+                var p0 = new VisioAutomation.Geometry.Point(cos_theta, -sin_theta);
                 var p1 = BezierSegment.RotateAroundOrigin( p0, startangle);
                 arr[0] = new BezierSegment(p1,p1,p1,p1);
             }
@@ -147,10 +147,10 @@ namespace VisioAutomation.Geometry
             double cos_theta = System.Math.Cos(theta);
             double sin_theta = System.Math.Sin(theta);
 
-            var p0 = new Point(cos_theta, -sin_theta);
-            var p1 = new Point((4 - cos_theta) / 3.0, ((1 - cos_theta) * (cos_theta - 3.0)) / (3 * sin_theta));
-            var p2 = new Point(p1.X, -p1.Y);
-            var p3 = new Point(p0.X, -p0.Y);
+            var p0 = new VisioAutomation.Geometry.Point(cos_theta, -sin_theta);
+            var p1 = new VisioAutomation.Geometry.Point((4 - cos_theta) / 3.0, ((1 - cos_theta) * (cos_theta - 3.0)) / (3 * sin_theta));
+            var p2 = new VisioAutomation.Geometry.Point(p1.X, -p1.Y);
+            var p3 = new VisioAutomation.Geometry.Point(p0.X, -p0.Y);
 
             var arc_bezier = new[] {p0, p1, p2, p3}
                 .Select(p => BezierSegment.RotateAroundOrigin(p, theta + start_angle))
@@ -159,11 +159,11 @@ namespace VisioAutomation.Geometry
             return new BezierSegment(arc_bezier);
         }
 
-        private static Point RotateAroundOrigin(Point p1, double theta)
+        private static VisioAutomation.Geometry.Point RotateAroundOrigin(VisioAutomation.Geometry.Point p1, double theta)
         {
             double nx = (System.Math.Cos(theta)*p1.X) - (System.Math.Sin(theta)*p1.Y);
             double ny = (System.Math.Sin(theta)*p1.X) + (System.Math.Cos(theta)*p1.Y);
-            return new Point(nx, ny);
+            return new VisioAutomation.Geometry.Point(nx, ny);
         }
     }
 }

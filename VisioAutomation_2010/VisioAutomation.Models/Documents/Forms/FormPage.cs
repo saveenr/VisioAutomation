@@ -5,7 +5,7 @@ namespace VisioAutomation.Models.Documents.Forms
     public class FormPage
     {
         public string Name;
-        public Geometry.Size Size;
+        public VisioAutomation.Geometry.Size Size;
         public PageMargin PageMargin;
         public IVisio.Page VisioPage;
 
@@ -18,7 +18,7 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public FormPage()
         {
-            this.Size = new Geometry.Size(8.5, 11);
+            this.Size = new VisioAutomation.Geometry.Size(8.5, 11);
             this.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
             this.DefaultFont = "Segoe UI";
             this.BodyTextSize = 8.0;
@@ -33,7 +33,7 @@ namespace VisioAutomation.Models.Documents.Forms
             this.VisioPage = r.CreatePage(this);
             context.Page = this.VisioPage;
 
-            var titleblock = new TextBlock(new Geometry.Size(7.5, 0.5), this.Title);
+            var titleblock = new TextBlock(new VisioAutomation.Geometry.Size(7.5, 0.5), this.Title);
 
             int fontid = context.GetFontID(this.DefaultFont);
             titleblock.TextBlockCells.VerticalAlign = 0;
@@ -50,7 +50,7 @@ namespace VisioAutomation.Models.Documents.Forms
             r.Linefeed();
 
             double body_height = r.GetDistanceToBottomMargin();
-            var bodyblock = new TextBlock(new Geometry.Size(7.5, body_height), this.Body);
+            var bodyblock = new TextBlock(new VisioAutomation.Geometry.Size(7.5, body_height), this.Body);
             bodyblock.ParagraphFormatCells.HorizontalAlign = 0;
             bodyblock.ParagraphFormatCells.SpacingAfter = get_pt_string(this.BodyParaSpacingAfter);
             bodyblock.CharacterFormatCells.Font = fontid;

@@ -5,23 +5,23 @@ namespace VisioAutomation.Models.Layouts.Box
     public class Box : Node
     {
         public Box(double w, double h) :
-            this(new Geometry.Size(w, h) )
+            this(new VisioAutomation.Geometry.Size(w, h) )
         {
         }
 
-        protected Box(Geometry.Size s)
+        protected Box(VisioAutomation.Geometry.Size s)
         {
             this.Size = s;
         }
 
-        public override Geometry.Size CalculateSize()
+        public override VisioAutomation.Geometry.Size CalculateSize()
         {
             return this.Size;
         }
 
-        public override void _place(Geometry.Point origin)
+        public override void _place(VisioAutomation.Geometry.Point origin)
         {
-            this.Rectangle = new Geometry.Rectangle(origin, this.Size);
+            this.Rectangle = new VisioAutomation.Geometry.Rectangle(origin, this.Size);
         }
 
         public override IEnumerable<Node> GetChildren()

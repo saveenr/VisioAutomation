@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Geometry
+﻿namespace VisioAutomation.Models.Geometry
 {
     internal struct ArcSegment
     {

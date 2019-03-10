@@ -76,7 +76,7 @@ namespace VisioScripting.Models
 
         public static VisioAutomation.Geometry.Rectangle GetBoundingBox(IEnumerable<ShapeXFormData> xfrms)
         {
-            var bb = BoundingBoxBuilder.FromRectangles(xfrms.Select(x => x.GetRectangle()));
+            var bb = VisioAutomation.Models.Geometry.BoundingBoxBuilder.FromRectangles(xfrms.Select(x => x.GetRectangle()));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");

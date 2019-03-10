@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 
-namespace VisioAutomation.Geometry
+namespace VisioAutomation.Models.Geometry
 {
     public class BezierCurve
     {
-        public Point[] ControlPoints { get; private set; }
+        public VisioAutomation.Geometry.Point[] ControlPoints { get; private set; }
         public int Degree { get; private set; }
 
-        public BezierCurve(Point[] controlpoints, int degree)
+        public BezierCurve(VisioAutomation.Geometry.Point[] controlpoints, int degree)
         {
             if (controlpoints == null)
             {
@@ -23,12 +23,12 @@ namespace VisioAutomation.Geometry
             this.Degree = degree;
         }
 
-        public static BezierCurve FromEllipse(Point center, Size radius)
+        public static BezierCurve FromEllipse(VisioAutomation.Geometry.Point center, VisioAutomation.Geometry.Size radius)
         {
-            var pt1 = new Point(0, radius.Height); // top
-            var pt2 = new Point(radius.Width, 0); // right
-            var pt3 = new Point(0, -radius.Height); // bottom
-            var pt4 = new Point(-radius.Width, 0); // left
+            var pt1 = new VisioAutomation.Geometry.Point(0, radius.Height); // top
+            var pt2 = new VisioAutomation.Geometry.Point(radius.Width, 0); // right
+            var pt3 = new VisioAutomation.Geometry.Point(0, -radius.Height); // bottom
+            var pt4 = new VisioAutomation.Geometry.Point(-radius.Width, 0); // left
 
             double dx = radius.Width * 4.0 * (System.Math.Sqrt(2) - 1) / 3;
             double dy = radius.Height * 4.0 * (System.Math.Sqrt(2) - 1) / 3;

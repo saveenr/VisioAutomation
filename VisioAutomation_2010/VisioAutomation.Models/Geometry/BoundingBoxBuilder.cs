@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.Geometry
+namespace VisioAutomation.Models.Geometry
 {
     public class BoundingBoxBuilder
     {
@@ -15,7 +15,7 @@ namespace VisioAutomation.Geometry
             
         }
 
-        public void Add(Point p)
+        public void Add(VisioAutomation.Geometry.Point p)
         {
 
             if (initialized)
@@ -35,23 +35,23 @@ namespace VisioAutomation.Geometry
             }
         }
 
-        public void Add(Rectangle r)
+        public void Add(VisioAutomation.Geometry.Rectangle r)
         {
             this.Add(r.LowerLeft);
             this.Add(r.UpperRight);
         }
 
-        public Rectangle? ToRectangle()
+        public VisioAutomation.Geometry.Rectangle? ToRectangle()
         {
             if (initialized)
             {
-                return new Rectangle(_min_x, _min_y, _max_x, _max_y);
+                return new VisioAutomation.Geometry.Rectangle(_min_x, _min_y, _max_x, _max_y);
             }
 
             return null;
         }
 
-        public void AddRange(IEnumerable<Point> points)
+        public void AddRange(IEnumerable<VisioAutomation.Geometry.Point> points)
         {
             foreach (var p in points)
             {
@@ -59,7 +59,7 @@ namespace VisioAutomation.Geometry
             }
         }
 
-        public void AddRange(IEnumerable<Rectangle> rects)
+        public void AddRange(IEnumerable<VisioAutomation.Geometry.Rectangle> rects)
         {
             foreach (var r in rects)
             {
@@ -67,14 +67,14 @@ namespace VisioAutomation.Geometry
             }
         }
 
-        public static Rectangle? FromRectangles(IEnumerable<Rectangle> rects)
+        public static VisioAutomation.Geometry.Rectangle? FromRectangles(IEnumerable<VisioAutomation.Geometry.Rectangle> rects)
         {
             var bbb = new BoundingBoxBuilder();
             bbb.AddRange(rects);
             return bbb.ToRectangle();
         }
 
-        public static Rectangle? FromPoints(IEnumerable<Point> points)
+        public static VisioAutomation.Geometry.Rectangle? FromPoints(IEnumerable<VisioAutomation.Geometry.Point> points)
         {
             var bbb = new BoundingBoxBuilder();
             bbb.AddRange(points);

@@ -52,7 +52,7 @@ namespace VisioPowerShell.Commands
             }
             else if (this.Type == Models.ShapeType.Line)
             {
-                var lineseg = new VisioAutomation.Geometry.LineSegment(points[0], points[1]);
+                var lineseg = new VisioAutomation.Models.Geometry.LineSegment(points[0], points[1]);
                 var shape = this.Client.Draw.DrawLine(lineseg.Start, lineseg.End);
                 this.WriteObject(shape);
             }

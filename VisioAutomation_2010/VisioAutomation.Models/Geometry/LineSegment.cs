@@ -1,11 +1,11 @@
-﻿namespace VisioAutomation.Geometry
+﻿namespace VisioAutomation.Models.Geometry
 {
     public struct LineSegment
     {
-        public Point Start { get; }
-        public Point End { get; }
+        public VisioAutomation.Geometry.Point Start { get; }
+        public VisioAutomation.Geometry.Point End { get; }
 
-        public LineSegment(Point start, Point end)
+        public LineSegment(VisioAutomation.Geometry.Point start, VisioAutomation.Geometry.Point end)
         {
             this.Start = start;
             this.End = end;

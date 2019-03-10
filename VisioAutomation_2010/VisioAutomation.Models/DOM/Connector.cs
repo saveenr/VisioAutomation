@@ -16,7 +16,7 @@ namespace VisioAutomation.Models.Dom
         }
 
         public Connector(BaseShape from, BaseShape to, string mastername, string stencilname) :
-            base(mastername,stencilname, new Geometry.Point(-3,-3) )
+            base(mastername,stencilname, new VisioAutomation.Geometry.Point(-3,-3) )
         {
             this.Master = new MasterRef(mastername, stencilname);
             this.From = from;

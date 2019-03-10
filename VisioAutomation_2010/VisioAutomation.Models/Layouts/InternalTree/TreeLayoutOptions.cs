@@ -4,7 +4,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 {
     internal class TreeLayoutOptions
     {
-        public Geometry.Point TopAdjustment = new Point(0,0); // How to adjust the apex 
+        public VisioAutomation.Geometry.Point TopAdjustment = new Point(0,0); // How to adjust the apex 
 
         public TreeLayoutOptions()
         {
@@ -14,10 +14,10 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             this.Alignment = AlignmentVertical.Top;
             this.MaximumDepth = 100;
             this.LevelSeparation = 1;
-            this.DefaultNodeSize = new Geometry.Size(1, 1);
+            this.DefaultNodeSize = new VisioAutomation.Geometry.Size(1, 1);
         }
 
-        public Geometry.Size DefaultNodeSize { get; set; }
+        public VisioAutomation.Geometry.Size DefaultNodeSize { get; set; }
         public double LevelSeparation { get; set; }
         public int MaximumDepth { get; set; }
         public AlignmentVertical Alignment { get; set; }
