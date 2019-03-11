@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation", "VisioAutomation\VisioAutomation.csproj", "{920C7842-10E0-48C3-A439-C785FC2B234E}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Documentation_Samples", "VisioAutomation_Documentation_Samples\VisioAutomation_Documentation_Samples.csproj", "{DCC18B41-41BB-42B8-B6CE-247588DE4EC9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPowerShell_Tests", "VisioPowerShell_Tests\VisioPowerShell_Tests.csproj", "{669CDDEB-7609-4294-9D0E-721F47129D0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Models_Tests", "VisioAutomation_Models_Tests\VisioAutomation_Models_Tests.csproj", "{E151ADA1-7DE9-489C-86EC-29E552B95605}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +163,22 @@ Global
 		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|Win32.Build.0 = Release|Any CPU
 		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|x86.ActiveCfg = Release|Any CPU
 		{669CDDEB-7609-4294-9D0E-721F47129D0F}.Release|x86.Build.0 = Release|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Debug|Win32.Build.0 = Debug|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Debug|x86.Build.0 = Debug|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|Win32.ActiveCfg = Release|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|Win32.Build.0 = Release|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|x86.ActiveCfg = Release|Any CPU
+		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

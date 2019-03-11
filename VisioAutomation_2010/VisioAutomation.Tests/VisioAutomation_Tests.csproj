@@ -113,13 +113,9 @@
     <Compile Include="Scripting\ScriptingHyperlinkTests.cs" />
     <Compile Include="Scripting\ScriptingShapeText_Tests.cs" />
     <Compile Include="Framework\DiagnosticDebugClientContext.cs" />
-    <Compile Include="Models\Dom\Dom_Text.cs" />
     <Compile Include="Framework\TestGlobals.cs" />
     <Compile Include="Framework\TestHelper.cs" />
-    <Compile Include="Core\BezierTests.cs" />
     <Compile Include="Core\TypeTests.cs" />
-    <Compile Include="Models\CointainerLayout_Tests.cs" />
-    <Compile Include="Models\Chart_Tests.cs" />
     <Compile Include="Core\Application\XmlErrorLogTests.cs" />
     <Compile Include="Scripting\ScriptingDevTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
@@ -127,11 +123,8 @@
     <Compile Include="Core\Application\ApplicationHelperTests.cs" />
     <Compile Include="Framework\TestExtensions.cs" />
     <Compile Include="Framework\VisioApplicationSafeReference.cs" />
-    <Compile Include="Models\BoxLayout_Tests.cs" />
     <Compile Include="Core\Shapes\GeometryTests.cs" />
     <Compile Include="Core\Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Models\DrawingHelper.cs" />
-    <Compile Include="Models\PieSliceTests.cs" />
     <Compile Include="Scripting\ScriptingApplicationTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -139,10 +132,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Scripting\ScriptingPageTests.cs" />
-    <Compile Include="Models\DirectedGraph_Tests.cs" />
-    <Compile Include="Models\Tree_Tests.cs" />
-    <Compile Include="Models\OrgChart_Tests.cs" />
-    <Compile Include="Models\Dom\Dom_Tests.cs" />
     <Compile Include="Core\Text\TextFormatTests.cs" />
     <Compile Include="Core\Shapes\CustomPropertiesTest.cs" />
     <Compile Include="Core\Extensions\SelectionTests.cs" />
@@ -154,7 +143,6 @@
     <Compile Include="Scripting\ScriptingConnectTests.cs" />
     <Compile Include="Scripting\ScriptingControlTests.cs" />
     <Compile Include="Scripting\ScriptingCustomPropTests.cs" />
-    <Compile Include="Scripting\ScriptingDrawTests.cs" />
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
     <Compile Include="Scripting\ScriptingClientTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
@@ -177,10 +165,6 @@
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">
       <Project>{d0eda4f5-bb56-45cd-b95a-d061e90f1160}</Project>
       <Name>VisioAutomation.DocumentAnalysis</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj">
-      <Project>{29cb2b65-8e8d-4b2c-935c-453b2b371143}</Project>
-      <Name>VisioAutomation.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioScripting\VisioScripting.csproj">
       <Project>{f3e3a5a8-de55-44ed-87f3-7962c3d22a88}</Project>
