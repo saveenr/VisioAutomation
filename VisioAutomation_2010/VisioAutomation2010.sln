@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Documentati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPowerShell_Tests", "VisioPowerShell_Tests\VisioPowerShell_Tests.csproj", "{669CDDEB-7609-4294-9D0E-721F47129D0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Models_Tests", "VisioAutomation_Models_Tests\VisioAutomation_Models_Tests.csproj", "{E151ADA1-7DE9-489C-86EC-29E552B95605}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Tests_Models", "VisioAutomation.Tests.Models\VisioAutomation_Tests_Models.csproj", "{E151ADA1-7DE9-489C-86EC-29E552B95605}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
