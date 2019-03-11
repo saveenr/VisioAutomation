@@ -1,50 +1,48 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PageFormatCells : CellGroupSingleRow
+    public class PageFormatCells : VASS.CellGroups.CellGroupSingleRow
     {
-        public CellValueLiteral DrawingScale { get; set; }
-        public CellValueLiteral DrawingScaleType { get; set; }
-        public CellValueLiteral DrawingSizeType { get; set; }
-        public CellValueLiteral InhibitSnap { get; set; }
-        public CellValueLiteral Height { get; set; }
-        public CellValueLiteral Scale { get; set; }
-        public CellValueLiteral Width { get; set; }
-        public CellValueLiteral ShadowObliqueAngle { get; set; }
-        public CellValueLiteral ShadowOffsetX { get; set; }
-        public CellValueLiteral ShadowOffsetY { get; set; }
-        public CellValueLiteral ShadowScaleFactor { get; set; }
-        public CellValueLiteral ShadowType { get; set; }
-        public CellValueLiteral UIVisibility { get; set; }
-        public CellValueLiteral DrawingResizeType { get; set; } // new in visio 2010
+        public VASS.CellValueLiteral DrawingScale { get; set; }
+        public VASS.CellValueLiteral DrawingScaleType { get; set; }
+        public VASS.CellValueLiteral DrawingSizeType { get; set; }
+        public VASS.CellValueLiteral InhibitSnap { get; set; }
+        public VASS.CellValueLiteral Height { get; set; }
+        public VASS.CellValueLiteral Scale { get; set; }
+        public VASS.CellValueLiteral Width { get; set; }
+        public VASS.CellValueLiteral ShadowObliqueAngle { get; set; }
+        public VASS.CellValueLiteral ShadowOffsetX { get; set; }
+        public VASS.CellValueLiteral ShadowOffsetY { get; set; }
+        public VASS.CellValueLiteral ShadowScaleFactor { get; set; }
+        public VASS.CellValueLiteral ShadowType { get; set; }
+        public VASS.CellValueLiteral UIVisibility { get; set; }
+        public VASS.CellValueLiteral DrawingResizeType { get; set; } // new in visio 2010
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<VASS.CellGroups.SrcValuePair> SrcValuePairs
         {
             get
             { 
-                yield return SrcValuePair.Create(SrcConstants.PageDrawingScale, this.DrawingScale);
-                yield return SrcValuePair.Create(SrcConstants.PageDrawingScaleType, this.DrawingScaleType);
-                yield return SrcValuePair.Create(SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
-                yield return SrcValuePair.Create(SrcConstants.PageInhibitSnap, this.InhibitSnap);
-                yield return SrcValuePair.Create(SrcConstants.PageHeight, this.Height);
-                yield return SrcValuePair.Create(SrcConstants.PageScale, this.Scale);
-                yield return SrcValuePair.Create(SrcConstants.PageWidth, this.Width);
-                yield return SrcValuePair.Create(SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle);
-                yield return SrcValuePair.Create(SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
-                yield return SrcValuePair.Create(SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
-                yield return SrcValuePair.Create(SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor);
-                yield return SrcValuePair.Create(SrcConstants.PageShadowType, this.ShadowType);
-                yield return SrcValuePair.Create(SrcConstants.PageUIVisibility, this.UIVisibility);
-                yield return SrcValuePair.Create(SrcConstants.PageDrawingResizeType, this.DrawingResizeType);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageDrawingScale, this.DrawingScale);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageDrawingScaleType, this.DrawingScaleType);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageInhibitSnap, this.InhibitSnap);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageHeight, this.Height);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageScale, this.Scale);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageWidth, this.Width);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageShadowType, this.ShadowType);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageUIVisibility, this.UIVisibility);
+                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PageDrawingResizeType, this.DrawingResizeType);
             }
         }
 
-        public static PageFormatCells GetCells(IVisio.Shape shape, CellValueType type)
+        public static PageFormatCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var query = lazy_query.Value;
             return query.GetCells(shape, type);
@@ -52,39 +50,39 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<PageFormatCellsReader> lazy_query = new System.Lazy<PageFormatCellsReader>();
 
-        class PageFormatCellsReader : ReaderSingleRow<PageFormatCells>
+        class PageFormatCellsReader : VASS.CellGroups.ReaderSingleRow<PageFormatCells>
         {
-            public CellColumn DrawingScale { get; set; }
-            public CellColumn DrawingScaleType { get; set; }
-            public CellColumn DrawingSizeType { get; set; }
-            public CellColumn InhibitSnap { get; set; }
-            public CellColumn Height { get; set; }
-            public CellColumn Scale { get; set; }
-            public CellColumn Width { get; set; }
-            public CellColumn ShadowObliqueAngle { get; set; }
-            public CellColumn ShadowOffsetX { get; set; }
-            public CellColumn ShadowOffsetY { get; set; }
-            public CellColumn ShadowScaleFactor { get; set; }
-            public CellColumn ShadowType { get; set; }
-            public CellColumn UIVisibility { get; set; }
-            public CellColumn DrawingResizeType { get; set; }
+            public VASS.Query.CellColumn DrawingScale { get; set; }
+            public VASS.Query.CellColumn DrawingScaleType { get; set; }
+            public VASS.Query.CellColumn DrawingSizeType { get; set; }
+            public VASS.Query.CellColumn InhibitSnap { get; set; }
+            public VASS.Query.CellColumn Height { get; set; }
+            public VASS.Query.CellColumn Scale { get; set; }
+            public VASS.Query.CellColumn Width { get; set; }
+            public VASS.Query.CellColumn ShadowObliqueAngle { get; set; }
+            public VASS.Query.CellColumn ShadowOffsetX { get; set; }
+            public VASS.Query.CellColumn ShadowOffsetY { get; set; }
+            public VASS.Query.CellColumn ShadowScaleFactor { get; set; }
+            public VASS.Query.CellColumn ShadowType { get; set; }
+            public VASS.Query.CellColumn UIVisibility { get; set; }
+            public VASS.Query.CellColumn DrawingResizeType { get; set; }
 
             public PageFormatCellsReader()
             {
-                this.DrawingScale = this.query.Columns.Add(SrcConstants.PageDrawingScale, nameof(this.DrawingScale));
-                this.DrawingScaleType = this.query.Columns.Add(SrcConstants.PageDrawingScaleType, nameof(this.DrawingScaleType));
-                this.DrawingSizeType = this.query.Columns.Add(SrcConstants.PageDrawingSizeType, nameof(this.DrawingSizeType));
-                this.InhibitSnap = this.query.Columns.Add(SrcConstants.PageInhibitSnap, nameof(this.InhibitSnap));
-                this.Height = this.query.Columns.Add(SrcConstants.PageHeight, nameof(this.Height));
-                this.Scale = this.query.Columns.Add(SrcConstants.PageScale, nameof(this.Scale));
-                this.Width = this.query.Columns.Add(SrcConstants.PageWidth, nameof(this.Width));
-                this.ShadowObliqueAngle = this.query.Columns.Add(SrcConstants.PageShadowObliqueAngle, nameof(this.ShadowObliqueAngle));
-                this.ShadowOffsetX = this.query.Columns.Add(SrcConstants.PageShadowOffsetX, nameof(this.ShadowOffsetX));
-                this.ShadowOffsetY = this.query.Columns.Add(SrcConstants.PageShadowOffsetY, nameof(this.ShadowOffsetY));
-                this.ShadowScaleFactor = this.query.Columns.Add(SrcConstants.PageShadowScaleFactor, nameof(this.ShadowScaleFactor));
-                this.ShadowType = this.query.Columns.Add(SrcConstants.PageShadowType, nameof(this.ShadowType));
-                this.UIVisibility = this.query.Columns.Add(SrcConstants.PageUIVisibility, nameof(this.UIVisibility));
-                this.DrawingResizeType = this.query.Columns.Add(SrcConstants.PageDrawingResizeType, nameof(this.DrawingResizeType));
+                this.DrawingScale = this.query.Columns.Add(VASS.SrcConstants.PageDrawingScale, nameof(this.DrawingScale));
+                this.DrawingScaleType = this.query.Columns.Add(VASS.SrcConstants.PageDrawingScaleType, nameof(this.DrawingScaleType));
+                this.DrawingSizeType = this.query.Columns.Add(VASS.SrcConstants.PageDrawingSizeType, nameof(this.DrawingSizeType));
+                this.InhibitSnap = this.query.Columns.Add(VASS.SrcConstants.PageInhibitSnap, nameof(this.InhibitSnap));
+                this.Height = this.query.Columns.Add(VASS.SrcConstants.PageHeight, nameof(this.Height));
+                this.Scale = this.query.Columns.Add(VASS.SrcConstants.PageScale, nameof(this.Scale));
+                this.Width = this.query.Columns.Add(VASS.SrcConstants.PageWidth, nameof(this.Width));
+                this.ShadowObliqueAngle = this.query.Columns.Add(VASS.SrcConstants.PageShadowObliqueAngle, nameof(this.ShadowObliqueAngle));
+                this.ShadowOffsetX = this.query.Columns.Add(VASS.SrcConstants.PageShadowOffsetX, nameof(this.ShadowOffsetX));
+                this.ShadowOffsetY = this.query.Columns.Add(VASS.SrcConstants.PageShadowOffsetY, nameof(this.ShadowOffsetY));
+                this.ShadowScaleFactor = this.query.Columns.Add(VASS.SrcConstants.PageShadowScaleFactor, nameof(this.ShadowScaleFactor));
+                this.ShadowType = this.query.Columns.Add(VASS.SrcConstants.PageShadowType, nameof(this.ShadowType));
+                this.UIVisibility = this.query.Columns.Add(VASS.SrcConstants.PageUIVisibility, nameof(this.UIVisibility));
+                this.DrawingResizeType = this.query.Columns.Add(VASS.SrcConstants.PageDrawingResizeType, nameof(this.DrawingResizeType));
             }
 
             public override PageFormatCells ToCellGroup(Utilities.ArraySegment<string> row)
