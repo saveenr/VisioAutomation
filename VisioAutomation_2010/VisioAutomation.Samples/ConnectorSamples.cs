@@ -14,8 +14,9 @@ namespace VisioAutomationSamples
             
             // based on this example: http://www.visguy.com/2009/06/17/send-all-connectors-to-back/
 
-            var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
-            var master = stencil.Masters["Dynamic Connector"];
+            var basic_stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
+            var connec_stencil = SampleEnvironment.Application.Documents.OpenStencil("connec_u.vss");
+            var master = connec_stencil.Masters["Dynamic Connector"];
             var r0 = page.DrawRectangle(3,3,5,5);
             var r1 = page.DrawRectangle(0, 1, 2, 2);
             var r2 = page.DrawRectangle(7, 7, 8, 8);
