@@ -1,8 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Geometry;
 using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests.Models.Layouts
+namespace VisioAutomation_Tests.Models.Geometry
 {
     [TestClass]
     public class DrawingHelper : VisioAutomationTest

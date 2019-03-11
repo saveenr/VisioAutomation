@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Models.Layouts.Container;
+using VACONT = VisioAutomation.Models.Layouts.Container;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation_Tests.Models.Layouts
@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             // is called then an exception will be thrown
 
             bool caught = false;
-            var layout = new ContainerLayout();
+            var layout = new VACONT.ContainerLayout();
             var doc = this.GetNewDoc();
             try
             {
@@ -48,7 +48,7 @@ namespace VisioAutomation_Tests.Models.Layouts
 
             var doc = this.GetNewDoc();
 
-            var layout1 = new ContainerLayout();
+            var layout1 = new VACONT.ContainerLayout();
             var l1_c1 = layout1.AddContainer("L1/C1");
             var l1_c1_i1 = l1_c1.Add("L1/C1/I1");
             
@@ -67,7 +67,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             // Make sure that empty containers can be drawn
             var doc = this.GetNewDoc();
 
-            var layout1 = new ContainerLayout();
+            var layout1 = new VACONT.ContainerLayout();
             var l1_c1 = layout1.AddContainer("L1/C1");
             var l1_c1_i1 = l1_c1.Add("L1/C1/I1");
             var l1_c2 = layout1.AddContainer("L1/C2"); // this is the empty container

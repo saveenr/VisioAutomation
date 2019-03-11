@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Models.Layouts.DirectedGraph;
+using VADG = VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Models.Layouts
         {
             var directed_graph_drawing = this.create_sample_graph();
             
-            var options = new MsaglLayoutOptions();
+            var options = new VADG.MsaglLayoutOptions();
             options.UseDynamicConnectors = false;
             
             var visapp = this.GetVisioApplication();
@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Models.Layouts
         {
             var directed_graph_drawing = this.create_sample_graph();
 
-            var options = new MsaglLayoutOptions();
+            var options = new VADG.MsaglLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
@@ -50,7 +50,7 @@ namespace VisioAutomation_Tests.Models.Layouts
         [TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
-            var d = new DirectedGraphLayout();
+            var d = new VADG.DirectedGraphLayout();
 
             var n0 = d.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -60,7 +60,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             n0.CustomProperties["p2"] = new CustomPropertyCells("\"v2\"");
             n0.CustomProperties["p3"] = new CustomPropertyCells("\"v3\"");
 
-            var options = new MsaglLayoutOptions();
+            var options = new VADG.MsaglLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
@@ -83,9 +83,9 @@ namespace VisioAutomation_Tests.Models.Layouts
             doc.Close();
         }
 
-        private DirectedGraphLayout create_sample_graph()
+        private VADG.DirectedGraphLayout create_sample_graph()
         {
-            var d = new DirectedGraphLayout();
+            var d = new VADG.DirectedGraphLayout();
 
             var basic_stencil = "basic_u.vss";
             var n0 = d.AddShape("n0", "Node 0", basic_stencil, "Rectangle");
