@@ -1,7 +1,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests.Core
+namespace VisioAutomation_Tests.Models.Geometry
 {
     [TestClass]
     public class BezierTests : VisioAutomationTest

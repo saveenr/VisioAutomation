@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Models.Layouts.Box;
 
-namespace VisioAutomation_Tests.Models
+namespace VisioAutomation_Tests.Models.Layouts
 {
     [TestClass]
     public class BoxLayout_Tests : VisioAutomationTest

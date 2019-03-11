@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Models.Layouts.Tree;
+using TREE = VisioAutomation.Models.Layouts.Tree;
 using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests.Models.TreeLayout
+namespace VisioAutomation_Tests.Models.TreeLayout.Layouts
 {
     [TestClass]
     public class Tree_Tests : VisioAutomationTest
@@ -12,8 +12,8 @@ namespace VisioAutomation_Tests.Models.TreeLayout
         public void TreeLayout_SingleNode()
         {
             // Verify that a tree with a single node can be drawn
-            var t = new Drawing();
-            t.Root = new Node("Root");
+            var t = new TREE.Drawing();
+            t.Root = new TREE.Node("Root");
 
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -32,18 +32,18 @@ namespace VisioAutomation_Tests.Models.TreeLayout
             // Verify that a tree with multiple nodes can be drawn
             // Note that  the DefaultNodeSize option is being used
 
-            var t = new Drawing();
+            var t = new TREE.Drawing();
 
-            t.Root = new Node("Root");
+            t.Root = new TREE.Node("Root");
 
-            var na = new Node("A");
-            var nb = new Node("B");
+            var na = new TREE.Node("A");
+            var nb = new TREE.Node("B");
 
-            var na1 = new Node("A1");
-            var na2 = new Node("A2");
+            var na1 = new TREE.Node("A1");
+            var na2 = new TREE.Node("A2");
 
-            var nb1 = new Node("B1");
-            var nb2 = new Node("B2");
+            var nb1 = new TREE.Node("B1");
+            var nb2 = new TREE.Node("B2");
 
             t.Root.Children.Add(na);
             t.Root.Children.Add(nb);

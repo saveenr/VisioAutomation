@@ -3,7 +3,7 @@ using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Container;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation_Tests.Models
+namespace VisioAutomation_Tests.Models.Layouts
 {
     [TestClass]
     public class CointainerLayout_Tests : VisioAutomationTest
