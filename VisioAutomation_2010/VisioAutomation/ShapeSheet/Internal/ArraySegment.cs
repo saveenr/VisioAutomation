@@ -4,11 +4,15 @@ namespace VisioAutomation.ShapeSheet.Internal
 {
     public struct ArraySegment<T> : IEnumerable<T>
     {
-        private System.ArraySegment<T> sas;
-        
-        public ArraySegment(T[] array, int offset, int count)
+        private readonly T[] _array;
+        private readonly int _offset;
+        private readonly int _count;
+
+        public ArraySegment(T[] array, int offset, int length)
         {
-            this.sas = new System.ArraySegment<T>(array, offset, count);
+            this._array = array;
+            this._offset = offset;
+            this._count = length;
         }
 
         public T this[int index]
@@ -20,19 +24,20 @@ namespace VisioAutomation.ShapeSheet.Internal
         private void set_value_at_index(int index, T value)
         {
             validate_index(index);
-            this.sas.Array[this.Offset + index] = value;
+            this._array[this._offset + index] = value;
         }
 
         private T get_value_at_index(int index)
         {
             validate_index(index);
-            var value = this.sas.Array[this.Offset + index];
+
+            var value = this._array[this._offset + index];
             return value;
         }
 
         private void validate_index(int index)
         {
-            if ((index < 0) && (index >= this.sas.Count))
+            if ((index < 0) && (index >= this._count))
             {
                 throw new System.ArgumentOutOfRangeException(nameof(index));
             }
@@ -40,9 +45,9 @@ namespace VisioAutomation.ShapeSheet.Internal
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < this.sas.Count; i++)
+            for (int i = 0; i < this._count; i++)
             {
-                yield return this.sas.Array[this.sas.Offset + i];
+                yield return this._array[_offset + i];
             }
         }
 
@@ -51,8 +56,8 @@ namespace VisioAutomation.ShapeSheet.Internal
             return GetEnumerator();
         }
 
-        public int Count => this.sas.Count;
+        public int Count => this._count;
 
-        public int Offset => this.sas.Offset;
+        public int Offset => this._offset;
     }
 }
