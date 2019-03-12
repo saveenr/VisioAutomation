@@ -66,7 +66,7 @@ namespace VisioAutomation.Text
 
             }
 
-            public override Text.TextXFormCells ToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override Text.TextXFormCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new Text.TextXFormCells();
                 cells.PinX = row[this.PinX];

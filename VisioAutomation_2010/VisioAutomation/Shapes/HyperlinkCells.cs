@@ -77,7 +77,7 @@ namespace VisioAutomation.Shapes
                 this.SubAddress = sec.Columns.Add(SrcConstants.HyperlinkSubAddress, nameof(this.SubAddress));
             }
 
-            public override HyperlinkCells ToCellGroup(Utilities.ArraySegment<string> row)
+            public override HyperlinkCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new HyperlinkCells();
 

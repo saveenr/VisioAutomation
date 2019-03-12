@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
 
             }
 
-            public override ConnectionPointCells ToCellGroup(Utilities.ArraySegment<string> row)
+            public override ConnectionPointCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new ConnectionPointCells();
                 cells.X = row[this.X];

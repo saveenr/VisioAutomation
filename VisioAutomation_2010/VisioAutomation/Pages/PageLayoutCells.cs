@@ -142,7 +142,7 @@ namespace VisioAutomation.Pages
             }
 
 
-            public override PageLayoutCells ToCellGroup(Utilities.ArraySegment<string> row)
+            public override PageLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PageLayoutCells();
                 cells.AvenueSizeX = row[this.AvenueSizeX];

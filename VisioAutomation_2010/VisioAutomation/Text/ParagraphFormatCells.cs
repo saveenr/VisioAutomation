@@ -96,7 +96,7 @@ namespace VisioAutomation.Text
                 this.TextPosAfterBullet = sec.Columns.Add(SrcConstants.ParaTextPosAfterBullet, nameof(this.TextPosAfterBullet));
             }
 
-            public override Text.ParagraphFormatCells ToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row)
+            public override Text.ParagraphFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new Text.ParagraphFormatCells();
                 cells.IndentFirst = row[this.IndentFirst];

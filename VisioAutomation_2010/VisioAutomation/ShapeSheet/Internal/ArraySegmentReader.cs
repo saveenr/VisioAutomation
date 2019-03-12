@@ -1,4 +1,4 @@
-namespace VisioAutomation.Utilities
+namespace VisioAutomation.ShapeSheet.Internal
 {
     public class ArraySegmentReader<T>
     {
@@ -21,13 +21,13 @@ namespace VisioAutomation.Utilities
 
         public int Capacity => this.array.Length;
 
-        public VisioAutomation.Utilities.ArraySegment<T> GetNextSegment(int size)
+        public VisioAutomation.ShapeSheet.Internal.ArraySegment<T> GetNextSegment(int size)
         {
             if (this.pos + size > this.array.Length)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(size));
             }
-            var seg = new VisioAutomation.Utilities.ArraySegment<T>(this.array, this.pos, size);
+            var seg = new VisioAutomation.ShapeSheet.Internal.ArraySegment<T>(this.array, this.pos, size);
             this.pos += size;
             this._count += size;
             return seg;

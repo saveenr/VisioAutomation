@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.query = new SectionsQuery();
         }
         
-        public abstract TGroup ToCellGroup(VisioAutomation.Utilities.ArraySegment<string> row);
+        public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row);
 
         public List<List<TGroup>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
