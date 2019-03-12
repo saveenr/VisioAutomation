@@ -68,7 +68,7 @@ namespace VisioAutomation.Pages
                 this.YRulerOrigin = this.query.Columns.Add(VASS.SrcConstants.YRulerOrigin, nameof(this.YRulerOrigin));
             }
 
-            public override PageRulerAndGridCells ToCellGroup(Utilities.ArraySegment<string> row)
+            public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PageRulerAndGridCells();
                 cells.XGridDensity = row[this.XGridDensity];

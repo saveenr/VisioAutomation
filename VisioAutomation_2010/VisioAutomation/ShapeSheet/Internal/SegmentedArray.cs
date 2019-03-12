@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Utilities
+﻿namespace VisioAutomation.ShapeSheet.Internal
 {
     internal struct SegmentedArray<T>
     {
@@ -14,12 +14,12 @@
             this.Array = new T[total_items];
         }
 
-        public VisioAutomation.Utilities.ArraySegment<T> this[int index]
+        public VisioAutomation.ShapeSheet.Internal.ArraySegment<T> this[int index]
         {
             get
             {
                 int offset = (index * this._chucksize);
-                return new VisioAutomation.Utilities.ArraySegment<T>(this.Array, offset, this._chucksize);
+                return new VisioAutomation.ShapeSheet.Internal.ArraySegment<T>(this.Array, offset, this._chucksize);
             }
         }
 

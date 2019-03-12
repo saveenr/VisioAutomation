@@ -7,7 +7,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         }
 
-        protected override void _fill_segment_with_item(Utilities.ArraySegment<short> seg, Src item)
+        protected override void _fill_segment_with_item(ShapeSheet.Internal.ArraySegment<short> seg, Src item)
         {
             seg[0] = item.Section;
             seg[1] = item.Row;

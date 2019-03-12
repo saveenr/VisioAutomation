@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         protected override StreamArray build_stream()
         {
             const int src_length = 4;
-            var a = new SegmentedArray<short>(this._items.Count, src_length);
+            var a = new ShapeSheet.Internal.SegmentedArray<short>(this._items.Count, src_length);
             for (int i = 0; i < this._items.Count; i++)
             {
                 var sidsrc = this._items[i];

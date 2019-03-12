@@ -11,13 +11,13 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         private int _count = 0;
 
-        private VisioAutomation.Utilities.SegmentedArray<short> _segarray;
+        private VisioAutomation.ShapeSheet.Internal.SegmentedArray<short> _segarray;
 
         internal StreamArrayBuilderBase(int capacity, StreamType stream_type)
         {
             this._streamtype = stream_type;
             this._capacity = capacity;
-            this._segarray = new VisioAutomation.Utilities.SegmentedArray<short>(capacity,this._chunksize);         
+            this._segarray = new VisioAutomation.ShapeSheet.Internal.SegmentedArray<short>(capacity,this._chunksize);         
         }
 
         public int Count => this._count;
@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             this._count++;
         }
 
-        protected abstract void _fill_segment_with_item(Utilities.ArraySegment<short> seg, T item);
+        protected abstract void _fill_segment_with_item(ShapeSheet.Internal.ArraySegment<short> seg, T item);
 
         public void AddRange(IEnumerable<T> items)
         {
