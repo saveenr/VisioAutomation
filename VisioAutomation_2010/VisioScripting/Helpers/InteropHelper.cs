@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Helpers
 {
@@ -13,7 +14,7 @@ namespace VisioScripting.Helpers
         {
             if (!InteropHelper._initialized)
             {
-                InteropHelper._gTypes = typeof(Microsoft.Office.Interop.Visio.Application).Assembly.GetExportedTypes()
+                InteropHelper._gTypes = typeof(IVisio.Application).Assembly.GetExportedTypes()
                     .Where(t => t.IsPublic)
                     .Where(t => !t.Name.StartsWith("tag"))
                     .OrderBy(t => t.Name)

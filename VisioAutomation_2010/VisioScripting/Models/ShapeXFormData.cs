@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Geometry;
 using VisioAutomation.ShapeSheet.Query;
 using VisioAutomation.ShapeSheet.Writers;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {
@@ -23,7 +23,7 @@ namespace VisioScripting.Models
         private static CellColumn ColHeight;
         private static CellQuery query;
 
-        public static List<ShapeXFormData> Get(Microsoft.Office.Interop.Visio.Page page, TargetShapeIDs target)
+        public static List<ShapeXFormData> Get(IVisio.Page page, TargetShapeIDs target)
         {
             if (query == null)
             {

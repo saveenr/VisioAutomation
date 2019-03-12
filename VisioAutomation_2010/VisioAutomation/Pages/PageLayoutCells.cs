@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using VASS = VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
+
 namespace VisioAutomation.Pages
 {
     public class PageLayoutCells : VASS.CellGroups.CellGroupSingleRow
@@ -68,7 +70,7 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static PageLayoutCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, VASS.CellValueType type)
+        public static PageLayoutCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var query = lazy_query.Value;
             return query.GetCells(shape, type);

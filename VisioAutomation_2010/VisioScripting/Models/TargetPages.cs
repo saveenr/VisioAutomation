@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using VisioAutomation.Exceptions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {
     public class TargetPages
     {
-        public IList<Microsoft.Office.Interop.Visio.Page> Pages { get; private set; }
+        public IList<IVisio.Page> Pages { get; private set; }
 
         public TargetPages()
         {
@@ -13,23 +14,23 @@ namespace VisioScripting.Models
             this.Pages = null;
         }
 
-        public TargetPages(IList<Microsoft.Office.Interop.Visio.Page> pages)
+        public TargetPages(IList<IVisio.Page> pages)
         {
             this.Pages = pages;
         }
 
-        public TargetPages( params Microsoft.Office.Interop.Visio.Page[] pages)
+        public TargetPages( params IVisio.Page[] pages)
         {
             this.Pages = pages;
         }
 
 
-        public IList<Microsoft.Office.Interop.Visio.Page> Resolve(VisioScripting.Client client)
+        public IList<IVisio.Page> Resolve(VisioScripting.Client client)
         {
             if (this.Pages == null)
             {
                 var cmdtarget = client.GetCommandTargetPage();
-                this.Pages = new List<Microsoft.Office.Interop.Visio.Page> {cmdtarget.ActivePage};
+                this.Pages = new List<IVisio.Page> {cmdtarget.ActivePage};
             }
 
             if (this.Pages == null)
@@ -48,7 +49,7 @@ namespace VisioScripting.Models
 
     public class TargetPage
     {
-        public Microsoft.Office.Interop.Visio.Page Page { get; private set; }
+        public IVisio.Page Page { get; private set; }
 
         public TargetPage()
         {
@@ -56,12 +57,12 @@ namespace VisioScripting.Models
             this.Page = null;
         }
 
-        public TargetPage(Microsoft.Office.Interop.Visio.Page page)
+        public TargetPage(IVisio.Page page)
         {
             this.Page = page;
         }
 
-        public Microsoft.Office.Interop.Visio.Page Resolve(VisioScripting.Client client)
+        public IVisio.Page Resolve(VisioScripting.Client client)
         {
             if (this.Page == null)
             {

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -21,13 +22,13 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public CellQueryOutput<string> GetFormulas(Microsoft.Office.Interop.Visio.Shape shape)
+        public CellQueryOutput<string> GetFormulas(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetFormulas(surface);
         }
 
-        public CellQueryOutput<string> GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType type)
+        public CellQueryOutput<string> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
             if (type == CellValueType.Formula)
@@ -52,7 +53,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public CellQueryOutput<TResult> GetResults<TResult>(Microsoft.Office.Interop.Visio.Shape shape)
+        public CellQueryOutput<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetResults<TResult>(surface);
@@ -70,13 +71,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public CellQueryOutputList<string> GetFormulas(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public CellQueryOutputList<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
-        public CellQueryOutputList<string> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType type)
+        public CellQueryOutputList<string> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var surface = new SurfaceTarget(page);
             if (type == CellValueType.Formula)
@@ -92,7 +93,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryOutputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
-            var shapes = new List<Microsoft.Office.Interop.Visio.Shape>(shapeids.Count);
+            var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
 
             var srcstream = this._build_sidsrc_stream(shapeids);
@@ -102,7 +103,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public CellQueryOutputList<TResult> GetResults<TResult>(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
+        public CellQueryOutputList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
@@ -110,7 +111,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryOutputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
-            var shapes = new List<Microsoft.Office.Interop.Visio.Shape>(shapeids.Count);
+            var shapes = new List<IVisio.Shape>(shapeids.Count);
             shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
 
             var srcstream = this._build_sidsrc_stream(shapeids);

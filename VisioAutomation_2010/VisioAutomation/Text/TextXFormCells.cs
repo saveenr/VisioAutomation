@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet.Query;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
@@ -29,13 +30,13 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static List<TextXFormCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
             return query.GetCells(page, shapeids, type);
         }
 
-        public static TextXFormCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType type)
+        public static TextXFormCells GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
             return query.GetCells(shape, type);
