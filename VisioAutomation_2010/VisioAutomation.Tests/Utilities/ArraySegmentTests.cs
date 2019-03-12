@@ -42,13 +42,13 @@ namespace VisioAutomation_Tests.Utilities
             var s3 = s.GetNextSegment(3);
 
             Assert.AreEqual(0, s1.Offset);
-            Assert.AreEqual(1, s1.Length);
+            Assert.AreEqual(1, s1.Count);
 
             Assert.AreEqual(1, s2.Offset);
-            Assert.AreEqual(4, s2.Length);
+            Assert.AreEqual(4, s2.Count);
 
             Assert.AreEqual(5, s3.Offset);
-            Assert.AreEqual(3, s3.Length);
+            Assert.AreEqual(3, s3.Count);
 
         }
 
@@ -67,19 +67,19 @@ namespace VisioAutomation_Tests.Utilities
             var s5 = s.GetNextSegment(0);
 
             Assert.AreEqual(0, s1.Offset);
-            Assert.AreEqual(1, s1.Length);
+            Assert.AreEqual(1, s1.Count);
 
             Assert.AreEqual(1, s2.Offset);
-            Assert.AreEqual(4, s2.Length);
+            Assert.AreEqual(4, s2.Count);
 
             Assert.AreEqual(5, s3.Offset);
-            Assert.AreEqual(3, s3.Length);
+            Assert.AreEqual(3, s3.Count);
 
             Assert.AreEqual(8, s4.Offset);
-            Assert.AreEqual(0, s4.Length);
+            Assert.AreEqual(0, s4.Count);
 
             Assert.AreEqual(8, s5.Offset);
-            Assert.AreEqual(0, s5.Length);
+            Assert.AreEqual(0, s5.Count);
 
         }
 
@@ -93,7 +93,7 @@ namespace VisioAutomation_Tests.Utilities
             var s1 = s.GetNextSegment(4);
 
             Assert.AreEqual(0, s1.Offset);
-            Assert.AreEqual(4, s1.Length);
+            Assert.AreEqual(4, s1.Count);
 
             CheckOverflow(s, 5);
         }
@@ -108,7 +108,7 @@ namespace VisioAutomation_Tests.Utilities
             var s1 = s.GetNextSegment(0);
 
             Assert.AreEqual(0, s1.Offset);
-            Assert.AreEqual(0, s1.Length);
+            Assert.AreEqual(0, s1.Count);
 
             CheckOverflow(s, 9);
         }
@@ -123,7 +123,7 @@ namespace VisioAutomation_Tests.Utilities
             var s1 = s.GetNextSegment(8);
 
             Assert.AreEqual(0, s1.Offset);
-            Assert.AreEqual(8, s1.Length);
+            Assert.AreEqual(8, s1.Count);
 
             CheckOverflow(s, 1);
         }
