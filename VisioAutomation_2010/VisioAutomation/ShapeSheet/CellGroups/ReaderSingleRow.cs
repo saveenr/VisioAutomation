@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
@@ -10,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected ReaderSingleRow()
         {
-            this.query = new Query.CellQuery();
+            this.query = new VASS.Query.CellQuery();
         }
 
         public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row);

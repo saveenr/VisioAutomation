@@ -1,10 +1,10 @@
-using VisioAutomation.ShapeSheet.Writers;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupSingleRow : CellGroupBase
     {
-        public void SetFormulas(SrcWriter writer)
+        public void SetFormulas(VASS.Writers.SrcWriter writer)
         {
             foreach (var pair in this.SrcValuePairs)
             {
@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public void SetFormulas(SidSrcWriter writer, short shapeid)
+        public void SetFormulas(VASS.Writers.SidSrcWriter writer, short shapeid)
         {
             foreach (var pair in this.SrcValuePairs)
             {

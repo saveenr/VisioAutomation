@@ -1,16 +1,16 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Query;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class ReaderMultiRow<TGroup> where TGroup : CellGroupMultiRow
     {
-        protected SectionsQuery query;
+        protected VASS.Query.SectionsQuery query;
 
         protected ReaderMultiRow()
         {
-            this.query = new SectionsQuery();
+            this.query = new VASS.Query.SectionsQuery();
         }
         
         public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row);
@@ -37,7 +37,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> __ToCellGroups(SectionQueryOutput<string> section_data)
+        private List<TGroup> __ToCellGroups(VASS.Query.SectionQueryOutput<string> section_data)
         {
             var cellgroups = new List<TGroup>(section_data.Rows.Count);
             foreach (var section_row in section_data.Rows)
