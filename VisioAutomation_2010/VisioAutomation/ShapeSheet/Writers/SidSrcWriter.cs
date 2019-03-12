@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.ShapeSheet.Writers
+﻿using IVisio = Microsoft.Office.Interop.Visio;
+
+namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SidSrcWriter : WriterBase
     {
@@ -16,13 +18,13 @@
             _resultRecords?.Clear();
         }
 
-        public void Commit(Microsoft.Office.Interop.Visio.Shape shape)
+        public void Commit(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             this.Commit(surface);
         }
 
-        public void Commit(Microsoft.Office.Interop.Visio.Page page)
+        public void Commit(IVisio.Page page)
         {
             var surface = new SurfaceTarget(page);
             this.Commit(surface);
