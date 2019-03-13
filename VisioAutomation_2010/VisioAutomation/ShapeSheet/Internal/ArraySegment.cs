@@ -8,11 +8,11 @@ namespace VisioAutomation.ShapeSheet.Internal
         private readonly int _offset;
         private readonly int _count;
 
-        public ArraySegment(T[] array, int offset, int length)
+        public ArraySegment(T[] array, int offset, int count)
         {
             this._array = array;
             this._offset = offset;
-            this._count = length;
+            this._count = count;
         }
 
         public T this[int index]
