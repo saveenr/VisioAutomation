@@ -54,17 +54,17 @@ namespace VisioAutomation.Shapes
         
         public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsSingleRow(page, shapeids, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static ShapeLayoutCells GetCells(IVisio.Shape shape, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsSingleRow(shape, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeLayoutCellsReader> lazy_query = new System.Lazy<ShapeLayoutCellsReader>();
+        private static readonly System.Lazy<ShapeLayoutCellsReader> lazy_reader = new System.Lazy<ShapeLayoutCellsReader>();
 
         class ShapeLayoutCellsReader : CellGroupReader<ShapeLayoutCells>
         {

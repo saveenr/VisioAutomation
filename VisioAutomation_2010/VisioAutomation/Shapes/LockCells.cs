@@ -59,17 +59,17 @@ namespace VisioAutomation.Shapes
 
         public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsSingleRow(page, shapeids, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static LockCells GetCells(IVisio.Shape shape, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsSingleRow(shape, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<LockCellsReader> lazy_query = new System.Lazy<LockCellsReader>();
+        private static readonly System.Lazy<LockCellsReader> lazy_reader = new System.Lazy<LockCellsReader>();
 
 
         class LockCellsReader : CellGroupReader<LockCells>

@@ -63,17 +63,17 @@ namespace VisioAutomation.Text
 
         public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsMultiRow(page, shapeids, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<CharacterFormatCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsMultiRow(shape, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<CharacterFormatCellsReader> lazy_query = new System.Lazy<CharacterFormatCellsReader>();
+        private static readonly System.Lazy<CharacterFormatCellsReader> lazy_reader = new System.Lazy<CharacterFormatCellsReader>();
 
 
         class CharacterFormatCellsReader : CellGroupReader<Text.CharacterFormatCells>

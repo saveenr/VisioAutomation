@@ -36,11 +36,11 @@ namespace VisioAutomation.Pages
 
         public static PageRulerAndGridCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsSingleRow(shape, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageRulerAndGridCellsReader> lazy_query = new System.Lazy<PageRulerAndGridCellsReader>();
+        private static readonly System.Lazy<PageRulerAndGridCellsReader> lazy_reader = new System.Lazy<PageRulerAndGridCellsReader>();
 
         class PageRulerAndGridCellsReader : VASS.CellGroups.CellGroupReader<PageRulerAndGridCells>
         {

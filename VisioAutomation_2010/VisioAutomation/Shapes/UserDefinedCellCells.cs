@@ -27,17 +27,17 @@ namespace VisioAutomation.Shapes
 
         public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsMultiRow(page, shapeids, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsMultiRow(shape, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<UserDefinedCellCellsReader> lazy_query = new System.Lazy<UserDefinedCellCellsReader>();
+        private static readonly System.Lazy<UserDefinedCellCellsReader> lazy_reader = new System.Lazy<UserDefinedCellCellsReader>();
 
         public void EncodeValues()
         {

@@ -36,17 +36,17 @@ namespace VisioAutomation.Text
 
         public static IList<TextBlockCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsSingleRow(page, shapeids, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static TextBlockCells GetCells(IVisio.Shape shape, CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsSingleRow(shape, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<TextBlockCellsReader> lazy_query = new System.Lazy<TextBlockCellsReader>();
+        private static readonly System.Lazy<TextBlockCellsReader> lazy_reader = new System.Lazy<TextBlockCellsReader>();
 
         class TextBlockCellsReader : CellGroupReader<Text.TextBlockCells>
         {

@@ -46,11 +46,11 @@ namespace VisioAutomation.Pages
 
         public static PagePrintCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCellsSingleRow(shape, type);
+            var reader = lazy_reader.Value;
+            return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PagePrintCellsReader> lazy_query = new System.Lazy<PagePrintCellsReader>();
+        private static readonly System.Lazy<PagePrintCellsReader> lazy_reader = new System.Lazy<PagePrintCellsReader>();
 
         class PagePrintCellsReader : VASS.CellGroups.CellGroupReader<PagePrintCells>
         {
