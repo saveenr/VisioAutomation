@@ -30,8 +30,11 @@ namespace VisioAutomation.Models.Documents.Forms
         {
             short titleshape_id = this.VisioShape.ID16;
             this.TextBlockCells.SetFormulas(writer, titleshape_id);
-            this.ParagraphFormatCells.SetFormulas(writer, titleshape_id, 0);
-            this.CharacterFormatCells.SetFormulas(writer, titleshape_id, 0);
+
+
+            writer.SetFormulas(titleshape_id, this.ParagraphFormatCells, 0);
+            writer.SetFormulas(titleshape_id, this.CharacterFormatCells, 0);
+
             this.FormatCells.SetFormulas(writer, titleshape_id);
         }
     }

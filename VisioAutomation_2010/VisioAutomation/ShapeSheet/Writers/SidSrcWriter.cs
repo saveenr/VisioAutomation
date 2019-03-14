@@ -47,6 +47,15 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
+        public void SetFormulas(short id, CellGroups.CellGroupBase cgb, short row)
+        {
+            var pairs = cgb.SidSrcValuePairs_NewRow(id, row);
+            foreach (var pair in pairs)
+            {
+                this.SetFormula(pair.ShapeID, pair.Src, pair.Value);
+            }
+        }
+
         private void __SetFormulaIgnoreNull(SidSrc sidsrc, CellValueLiteral formula)
         {
             if (this._formulaRecords == null)

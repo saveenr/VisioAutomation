@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
                 if (cells is VisioAutomation.ShapeSheet.CellGroups.CellGroupMultiRow)
                 {
                     var cells_mr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupMultiRow)cells;
-                    cells_mr.SetFormulas(writer, (short)shape_id, 0);
+                    writer.SetFormulas((short)shape_id, cells_mr, 0);
                 }
                 else
                 {
