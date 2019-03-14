@@ -30,7 +30,7 @@ namespace VisioAutomation.Shapes
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            connection_point_cells.SetFormulas(writer,n);
+            writer.SetFormulas(connection_point_cells, n);
 
             writer.Commit(shape);
 

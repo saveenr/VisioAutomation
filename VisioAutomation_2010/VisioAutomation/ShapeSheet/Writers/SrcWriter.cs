@@ -39,7 +39,16 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             this.__SetFormulaIgnoreNull(src, formula);
         }
-        
+
+        public void SetFormulas(CellGroups.CellGroupBase cgb, short row)
+        {
+            foreach (var pair in cgb.SrcValuePairs_NewRow(row))
+            {
+                this.SetFormula(pair.Src, pair.Value);
+            }
+        }
+
+
         private void __SetFormulaIgnoreNull(Src src, CellValueLiteral formula)
         {
             if (this._formulaRecords == null)

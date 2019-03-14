@@ -34,7 +34,7 @@ namespace VisioAutomation.Shapes
                 }
 
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                cp.SetFormulas(writer, cell_propname.Row);
+                writer.SetFormulas(cp, cell_propname.Row);
 
                 writer.Commit(shape);
 
@@ -57,7 +57,7 @@ namespace VisioAutomation.Shapes
             }
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            cp.SetFormulas(writer, row);
+            writer.SetFormulas(cp, row);
 
             writer.Commit(shape);
         }

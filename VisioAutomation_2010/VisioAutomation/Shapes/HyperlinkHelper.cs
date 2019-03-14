@@ -61,7 +61,7 @@ namespace VisioAutomation.Shapes
             }
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            hyperlink.SetFormulas(writer, row);
+            writer.SetFormulas(hyperlink, row);
 
             writer.Commit(shape);
 
