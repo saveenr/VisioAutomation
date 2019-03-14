@@ -67,7 +67,7 @@ namespace VisioAutomation.Pages
             public VASS.Query.CellColumn UIVisibility { get; set; }
             public VASS.Query.CellColumn DrawingResizeType { get; set; }
 
-            public PageFormatCellsReader()
+            public PageFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.DrawingScale = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageDrawingScale, nameof(this.DrawingScale));
                 this.DrawingScaleType = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageDrawingScaleType, nameof(this.DrawingScaleType));

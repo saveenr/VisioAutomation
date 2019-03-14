@@ -109,7 +109,7 @@ namespace VisioAutomation.Shapes
             public CellColumn LineWeight { get; set; }
             public CellColumn LineRounding { get; set; }
 
-            public ShapeFormatCellsReader()
+            public ShapeFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
 
                 this.FillBackground = this.query_singlerow.Columns.Add(SrcConstants.FillBackground, nameof(this.FillBackground));

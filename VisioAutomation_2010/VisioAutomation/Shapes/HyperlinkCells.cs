@@ -62,7 +62,7 @@ namespace VisioAutomation.Shapes
             public SectionQueryColumn Default { get; set; }
             public SectionQueryColumn Invisible { get; set; }
 
-            public HyperlinkCellsReader()
+            public HyperlinkCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionHyperlink);
 

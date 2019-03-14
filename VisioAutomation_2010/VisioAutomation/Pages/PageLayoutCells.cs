@@ -109,7 +109,7 @@ namespace VisioAutomation.Pages
             public VASS.Query.CellColumn RouteStyle { get; set; }
             public VASS.Query.CellColumn AvoidPageBreaks { get; set; }
 
-            public PageLayoutCellsReader()
+            public PageLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.AvenueSizeX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutAvenueSizeX, nameof(this.AvenueSizeX));
                 this.AvenueSizeY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutAvenueSizeY, nameof(this.AvenueSizeY));

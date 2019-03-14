@@ -58,7 +58,9 @@ namespace VisioAutomation.Shapes
             public SectionQueryColumn XDynamics { get; set; }
             public SectionQueryColumn YDynamics { get; set; }
 
-            public ControlCellsReader()
+            public ControlCellsReader() 
+                : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionControls);
 

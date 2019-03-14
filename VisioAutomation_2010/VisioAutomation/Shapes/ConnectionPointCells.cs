@@ -49,6 +49,7 @@ namespace VisioAutomation.Shapes
             public SectionQueryColumn Y { get; set; }
 
             public ConnectionPointCellsReader()
+                : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
 

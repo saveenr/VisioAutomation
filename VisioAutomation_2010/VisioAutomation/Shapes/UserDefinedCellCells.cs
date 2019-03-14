@@ -51,7 +51,7 @@ namespace VisioAutomation.Shapes
             public SectionQueryColumn Value { get; set; }
             public SectionQueryColumn Prompt { get; set; }
 
-            public UserDefinedCellCellsReader()
+            public UserDefinedCellCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
                 this.Value = sec.Columns.Add(SrcConstants.UserDefCellValue, nameof(this.Value));

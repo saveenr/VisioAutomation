@@ -70,7 +70,7 @@ namespace VisioAutomation.Pages
             public VASS.Query.CellColumn ScaleY { get; set; }
             public VASS.Query.CellColumn PaperSource { get; set; }
 
-            public PagePrintCellsReader()
+            public PagePrintCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.LeftMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintLeftMargin, nameof(this.LeftMargin));
                 this.CenterX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintCenterX, nameof(this.CenterX));

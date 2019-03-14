@@ -55,7 +55,7 @@ namespace VisioAutomation.Text
             public CellColumn LocPinY { get; set; }
             public CellColumn Angle { get; set; }
 
-            public TextXFormCellsReader()
+            public TextXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.PinX = this.query_singlerow.Columns.Add(SrcConstants.TextXFormPinX, nameof(this.PinX));
                 this.PinY = this.query_singlerow.Columns.Add(SrcConstants.TextXFormPinY, nameof(this.PinY));

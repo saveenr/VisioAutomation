@@ -95,7 +95,7 @@ namespace VisioAutomation.Shapes
             public CellColumn VertexEdit { get; set; }
             public CellColumn Width { get; set; }
 
-            public LockCellsReader()
+            public LockCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.Aspect = this.query_singlerow.Columns.Add(SrcConstants.LockAspect, nameof(this.Aspect));
                 this.Begin = this.query_singlerow.Columns.Add(SrcConstants.LockBegin, nameof(this.Begin));

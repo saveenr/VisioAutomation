@@ -70,6 +70,7 @@ namespace VisioAutomation.Shapes
             public SectionQueryColumn Type { get; set; }
 
             public CustomPropertyCellsReader()
+                : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
 

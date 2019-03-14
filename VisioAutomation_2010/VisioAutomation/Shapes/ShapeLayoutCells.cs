@@ -87,7 +87,7 @@ namespace VisioAutomation.Shapes
             public CellColumn ShapeDisplayLevel { get; set; }
             public CellColumn Relationships { get; set; }
 
-            public ShapeLayoutCellsReader()
+            public ShapeLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.ConnectorFixedCode = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutConnectorFixedCode, nameof(this.ConnectorFixedCode));
                 this.LineJumpCode = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutLineJumpCode, nameof(this.LineJumpCode));

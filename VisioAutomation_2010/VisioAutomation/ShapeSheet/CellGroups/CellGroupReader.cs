@@ -10,10 +10,22 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected Query.CellQuery query_singlerow;
         protected VASS.Query.SectionsQuery query_multirow;
 
-        protected CellGroupReader()
+        private CellGroupReader()
         {
-            this.query_singlerow = new VASS.Query.CellQuery();
-            this.query_multirow = new VASS.Query.SectionsQuery();
+            this.query_singlerow = null;
+            this.query_multirow = null;
+        }
+
+        protected CellGroupReader(Query.CellQuery query)
+        {
+            this.query_singlerow = query;
+            this.query_multirow = null;
+        }
+
+        protected CellGroupReader(Query.SectionsQuery query)
+        {
+            this.query_singlerow = null;
+            this.query_multirow = query;
         }
 
         public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row);

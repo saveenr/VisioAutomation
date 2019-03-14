@@ -101,7 +101,8 @@ namespace VisioAutomation.Text
             public SectionQueryColumn Strikethru { get; set; }
             public SectionQueryColumn UseVertical { get; set; }
 
-            public CharacterFormatCellsReader()
+            public CharacterFormatCellsReader() :
+                base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
 

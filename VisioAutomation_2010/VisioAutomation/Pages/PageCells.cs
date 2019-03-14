@@ -55,7 +55,7 @@ namespace VisioAutomation.Pages
             public VASS.Query.CellColumn YRulerDensity { get; set; }
             public VASS.Query.CellColumn YRulerOrigin { get; set; }
 
-            public PageRulerAndGridCellsReader()
+            public PageRulerAndGridCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.XGridDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.XGridDensity, nameof(this.XGridDensity));
                 this.XGridOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.XGridOrigin, nameof(this.XGridOrigin));

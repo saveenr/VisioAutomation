@@ -77,7 +77,7 @@ namespace VisioAutomation.Text
             public SectionQueryColumn SpaceLine { get; set; }
             public SectionQueryColumn TextPosAfterBullet { get; set; }
 
-            public ParagraphFormatCellsReader()
+            public ParagraphFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionParagraph);
                 this.Bullet = sec.Columns.Add(SrcConstants.ParaBullet, nameof(this.Bullet));

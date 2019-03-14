@@ -54,7 +54,7 @@ namespace VisioAutomation.Shapes
             public CellColumn LocPinY { get; set; }
             public CellColumn Angle { get; set; }
 
-            public ShapeXFormCellsReader()
+            public ShapeXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.PinX = this.query_singlerow.Columns.Add(SrcConstants.XFormPinX, nameof(this.PinX));
                 this.PinY = this.query_singlerow.Columns.Add(SrcConstants.XFormPinY, nameof(this.PinY));

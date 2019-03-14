@@ -60,7 +60,7 @@ namespace VisioAutomation.Text
             public CellColumn Direction { get; set; }
             public CellColumn VerticalAlign { get; set; }
 
-            public TextBlockCellsReader()
+            public TextBlockCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 this.BottomMargin = this.query_singlerow.Columns.Add(SrcConstants.TextBlockBottomMargin, nameof(this.BottomMargin));
                 this.LeftMargin = this.query_singlerow.Columns.Add(SrcConstants.TextBlockLeftMargin, nameof(this.LeftMargin));
