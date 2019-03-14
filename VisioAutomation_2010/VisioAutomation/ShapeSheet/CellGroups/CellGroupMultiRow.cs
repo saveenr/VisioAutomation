@@ -6,9 +6,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         public void SetFormulas(VASS.Writers.SidSrcWriter writer, short shapeid, short row)
         {
-            foreach (var pair in this.SrcValuePairs_NewRow(row))
+            foreach (var pair in this.SidSrcValuePairs_NewRow(shapeid, row))
             {
-                writer.SetFormula(shapeid, pair.Src, pair.Value);
+                writer.SetFormula(pair.ShapeID, pair.Src, pair.Value);
             }
         }
 
