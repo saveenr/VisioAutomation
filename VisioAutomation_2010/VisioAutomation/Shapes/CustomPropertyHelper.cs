@@ -5,7 +5,9 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
-
+using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.Query;
 namespace VisioAutomation.Shapes
 {
     public static class CustomPropertyHelper
@@ -73,7 +75,7 @@ namespace VisioAutomation.Shapes
         {
             var prop_names = CustomPropertyHelper.GetNames(shape);
             var dic = new CustomPropertyDictionary(prop_names.Count);
-            var cells = CustomPropertyCells.GetCells(shape, type);
+            var cells = CustomPropertyHelper.GetCustomPropertyCells(shape, type);
 
             for (int prop_index = 0; prop_index < prop_names.Count; prop_index++)
             {
@@ -97,7 +99,7 @@ namespace VisioAutomation.Shapes
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids, type);
+            var customprops_per_shape = CustomPropertyHelper.GetCustomPropertyCells(page, shapeids, type);
             var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
 
             return customprops_dic;
@@ -300,6 +302,71 @@ namespace VisioAutomation.Shapes
             cp.Type = type;
 
             CustomPropertyHelper.Set(shape, name, cp);
+        }
+
+
+        public static List<List<CustomPropertyCells>> GetCustomPropertyCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var reader = Custom_Property_lazy_reader.Value;
+            return reader.GetCellsMultiRow(page, shapeids, type);
+        }
+
+        public static List<CustomPropertyCells> GetCustomPropertyCells(IVisio.Shape shape, CellValueType type)
+        {
+            var reader = Custom_Property_lazy_reader.Value;
+            return reader.GetCellsMultiRow(shape, type);
+        }
+
+        private static readonly System.Lazy<CustomPropertyCellsReader> Custom_Property_lazy_reader = new System.Lazy<CustomPropertyCellsReader>();
+
+
+        public class CustomPropertyCellsReader : CellGroupReader<CustomPropertyCells>
+        {
+            public SectionQueryColumn SortKey { get; set; }
+            public SectionQueryColumn Ask { get; set; }
+            public SectionQueryColumn Calendar { get; set; }
+            public SectionQueryColumn Format { get; set; }
+            public SectionQueryColumn Invis { get; set; }
+            public SectionQueryColumn Label { get; set; }
+            public SectionQueryColumn LangID { get; set; }
+            public SectionQueryColumn Prompt { get; set; }
+            public SectionQueryColumn Value { get; set; }
+            public SectionQueryColumn Type { get; set; }
+
+            public CustomPropertyCellsReader()
+                : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            {
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
+
+
+                this.SortKey = sec.Columns.Add(SrcConstants.CustomPropSortKey, nameof(this.SortKey));
+                this.Ask = sec.Columns.Add(SrcConstants.CustomPropAsk, nameof(this.Ask));
+                this.Calendar = sec.Columns.Add(SrcConstants.CustomPropCalendar, nameof(this.Calendar));
+                this.Format = sec.Columns.Add(SrcConstants.CustomPropFormat, nameof(this.Format));
+                this.Invis = sec.Columns.Add(SrcConstants.CustomPropInvisible, nameof(this.Invis));
+                this.Label = sec.Columns.Add(SrcConstants.CustomPropLabel, nameof(this.Label));
+                this.LangID = sec.Columns.Add(SrcConstants.CustomPropLangID, nameof(this.LangID));
+                this.Prompt = sec.Columns.Add(SrcConstants.CustomPropPrompt, nameof(this.Prompt));
+                this.Type = sec.Columns.Add(SrcConstants.CustomPropType, nameof(this.Type));
+                this.Value = sec.Columns.Add(SrcConstants.CustomPropValue, nameof(this.Value));
+
+            }
+
+            public override CustomPropertyCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
+            {
+                var cells = new CustomPropertyCells();
+                cells.Value = row[this.Value];
+                cells.Calendar = row[this.Calendar];
+                cells.Format = row[this.Format];
+                cells.Invisible = row[this.Invis];
+                cells.Label = row[this.Label];
+                cells.LangID = row[this.LangID];
+                cells.Prompt = row[this.Prompt];
+                cells.SortKey = row[this.SortKey];
+                cells.Type = row[this.Type];
+                cells.Ask = row[this.Ask];
+                return cells;
+            }
         }
 
     }

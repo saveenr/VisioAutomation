@@ -41,69 +41,6 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
-        {
-            var reader = lazy_reader.Value;
-            return reader.GetCellsMultiRow(page, shapeids, type);
-        }
-
-        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, CellValueType type)
-        {
-            var reader = lazy_reader.Value;
-            return reader.GetCellsMultiRow(shape, type);
-        }
-
-        private static readonly System.Lazy<CustomPropertyCellsReader> lazy_reader = new System.Lazy<CustomPropertyCellsReader>();
-
-
-        public class CustomPropertyCellsReader : CellGroupReader<CustomPropertyCells>
-        {
-            public SectionQueryColumn SortKey { get; set; }
-            public SectionQueryColumn Ask { get; set; }
-            public SectionQueryColumn Calendar { get; set; }
-            public SectionQueryColumn Format { get; set; }
-            public SectionQueryColumn Invis { get; set; }
-            public SectionQueryColumn Label { get; set; }
-            public SectionQueryColumn LangID { get; set; }
-            public SectionQueryColumn Prompt { get; set; }
-            public SectionQueryColumn Value { get; set; }
-            public SectionQueryColumn Type { get; set; }
-
-            public CustomPropertyCellsReader()
-                : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
-            {
-                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
-
-
-                this.SortKey = sec.Columns.Add(SrcConstants.CustomPropSortKey, nameof(this.SortKey));
-                this.Ask = sec.Columns.Add(SrcConstants.CustomPropAsk, nameof(this.Ask));
-                this.Calendar = sec.Columns.Add(SrcConstants.CustomPropCalendar, nameof(this.Calendar));
-                this.Format = sec.Columns.Add(SrcConstants.CustomPropFormat, nameof(this.Format));
-                this.Invis = sec.Columns.Add(SrcConstants.CustomPropInvisible, nameof(this.Invis));
-                this.Label = sec.Columns.Add(SrcConstants.CustomPropLabel, nameof(this.Label));
-                this.LangID = sec.Columns.Add(SrcConstants.CustomPropLangID, nameof(this.LangID));
-                this.Prompt = sec.Columns.Add(SrcConstants.CustomPropPrompt, nameof(this.Prompt));
-                this.Type = sec.Columns.Add(SrcConstants.CustomPropType, nameof(this.Type));
-                this.Value = sec.Columns.Add(SrcConstants.CustomPropValue, nameof(this.Value));
-
-            }
-
-            public override CustomPropertyCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
-            {
-                var cells = new CustomPropertyCells();
-                cells.Value = row[this.Value];
-                cells.Calendar = row[this.Calendar];
-                cells.Format = row[this.Format];
-                cells.Invisible = row[this.Invis];
-                cells.Label = row[this.Label];
-                cells.LangID = row[this.LangID];
-                cells.Prompt = row[this.Prompt];
-                cells.SortKey = row[this.SortKey];
-                cells.Type = row[this.Type];
-                cells.Ask = row[this.Ask];
-                return cells;
-            }
-        }
 
         public CustomPropertyCells(string value, CustomPropertyType type)
         {

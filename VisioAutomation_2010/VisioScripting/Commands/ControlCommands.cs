@@ -76,7 +76,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>(targets.Shapes.Count);
             foreach (var shape in targets.Shapes)
             {
-                var controls = ControlCells.GetCells(shape, cvt);
+                var controls = ControlHelper.GetControlCells(shape, cvt);
                 dic[shape] = controls;
             }
             return dic;

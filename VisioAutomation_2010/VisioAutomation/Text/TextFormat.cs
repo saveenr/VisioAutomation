@@ -69,12 +69,12 @@ namespace VisioAutomation.Text
         public static TextFormat GetFormat(IVisio.Shape shape, CellValueType type)
         {
             var cells = new TextFormat();
-            cells.CharacterFormats = CharacterFormatCells.GetCells(shape, type);
-            cells.ParagraphFormats = ParagraphFormatCells.GetCells(shape, type);
-            cells.TextBlock = TextBlockCells.GetCells(shape, type);
+            cells.CharacterFormats = TextHelper.GetCharacterFormatCells(shape, type);
+            cells.ParagraphFormats = TextHelper.GetParagraphFormatCells(shape, type);
+            cells.TextBlock = TextHelper.GetTextBlockCells(shape, type);
             if (HasTextXFormCells(shape))
             {
-                cells.TextXForm = TextXFormCells.GetCells(shape, type);
+                cells.TextXForm = TextHelper.GetTextXFormCells(shape, type);
             }
             cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
@@ -93,9 +93,9 @@ namespace VisioAutomation.Text
 
         public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var charcells = CharacterFormatCells.GetCells(page, shapeids, type);
-            var paracells = ParagraphFormatCells.GetCells(page, shapeids, type);
-            var textblockcells = TextBlockCells.GetCells(page, shapeids, type);
+            var charcells = TextHelper.GetCharacterFormatCells(page, shapeids, type);
+            var paracells = TextHelper.GetParagraphFormatCells(page, shapeids, type);
+            var textblockcells = TextHelper.GetTextBlockCells(page, shapeids, type);
             var page_shapes = page.Shapes;
             var formats = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)

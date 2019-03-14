@@ -4,6 +4,9 @@ using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
+using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
@@ -120,7 +123,7 @@ namespace VisioAutomation.Shapes
                 throw new InternalAssertionException("Unexpected number of prop names");
             }
 
-            var  shape_data = UserDefinedCellCells.GetCells(shape, type);
+            var  shape_data = UserDefinedCellHelper.GetUserDefinedCellCells(shape, type);
 
             var dic = new Dictionary<string,UserDefinedCellCells>(prop_count);
             for (int i = 0; i < prop_count; i++)
@@ -144,7 +147,7 @@ namespace VisioAutomation.Shapes
 
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var list_list_customprops = UserDefinedCellCells.GetCells(page,shapeids, CellValueType.Formula);
+            var list_list_customprops = UserDefinedCellHelper.GetUserDefinedCellCells(page,shapeids, CellValueType.Formula);
 
             var list_dic_customprops = new List<Dictionary<string, UserDefinedCellCells>>(shapeids.Count);
 
@@ -284,5 +287,44 @@ namespace VisioAutomation.Shapes
             var exists = (short)IVisio.VisExistsFlags.visExistsAnywhere;
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
+
+        public static List<List<UserDefinedCellCells>> GetUserDefinedCellCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var reader = UserDefinedCells_lazy_reader.Value;
+            return reader.GetCellsMultiRow(page, shapeids, type);
+        }
+
+        public static List<UserDefinedCellCells> GetUserDefinedCellCells(IVisio.Shape shape, CellValueType type)
+        {
+            var reader = UserDefinedCells_lazy_reader.Value;
+            return reader.GetCellsMultiRow(shape, type);
+        }
+
+        private static readonly System.Lazy<UserDefinedCellCellsReader> UserDefinedCells_lazy_reader = new System.Lazy<UserDefinedCellCellsReader>();
+
+
+
+
+        class UserDefinedCellCellsReader : CellGroupReader<UserDefinedCellCells>
+        {
+            public SectionQueryColumn Value { get; set; }
+            public SectionQueryColumn Prompt { get; set; }
+
+            public UserDefinedCellCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            {
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
+                this.Value = sec.Columns.Add(SrcConstants.UserDefCellValue, nameof(this.Value));
+                this.Prompt = sec.Columns.Add(SrcConstants.UserDefCellPrompt, nameof(this.Prompt));
+            }
+
+            public override UserDefinedCellCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
+            {
+                var cells = new UserDefinedCellCells();
+                cells.Value = row[this.Value];
+                cells.Prompt = row[this.Prompt];
+                return cells;
+            }
+        }
+
     }
 }

@@ -29,56 +29,5 @@ namespace VisioAutomation.Text
                 yield return SrcValuePair.Create(SrcConstants.TextXFormAngle, this.Angle);
             }
         }
-
-        public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
-        {
-            var reader = lazy_reader.Value;
-            return reader.GetCellsSingleRow(page, shapeids, type);
-        }
-
-        public static TextXFormCells GetCells(IVisio.Shape shape, CellValueType type)
-        {
-            var reader = lazy_reader.Value;
-            return reader.GetCellsSingleRow(shape, type);
-        }
-
-        private static readonly System.Lazy<TextXFormCellsReader> lazy_reader = new System.Lazy<TextXFormCellsReader>();
-
-
-        class TextXFormCellsReader : CellGroupReader<Text.TextXFormCells>
-        {
-            public CellColumn Width { get; set; }
-            public CellColumn Height { get; set; }
-            public CellColumn PinX { get; set; }
-            public CellColumn PinY { get; set; }
-            public CellColumn LocPinX { get; set; }
-            public CellColumn LocPinY { get; set; }
-            public CellColumn Angle { get; set; }
-
-            public TextXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
-            {
-                this.PinX = this.query_singlerow.Columns.Add(SrcConstants.TextXFormPinX, nameof(this.PinX));
-                this.PinY = this.query_singlerow.Columns.Add(SrcConstants.TextXFormPinY, nameof(this.PinY));
-                this.LocPinX = this.query_singlerow.Columns.Add(SrcConstants.TextXFormLocPinX, nameof(this.LocPinX));
-                this.LocPinY = this.query_singlerow.Columns.Add(SrcConstants.TextXFormLocPinY, nameof(this.LocPinY));
-                this.Width = this.query_singlerow.Columns.Add(SrcConstants.TextXFormWidth, nameof(this.Width));
-                this.Height = this.query_singlerow.Columns.Add(SrcConstants.TextXFormHeight, nameof(this.Height));
-                this.Angle = this.query_singlerow.Columns.Add(SrcConstants.TextXFormAngle, nameof(this.Angle));
-
-            }
-
-            public override Text.TextXFormCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
-            {
-                var cells = new Text.TextXFormCells();
-                cells.PinX = row[this.PinX];
-                cells.PinY = row[this.PinY];
-                cells.LocPinX = row[this.LocPinX];
-                cells.LocPinY = row[this.LocPinY];
-                cells.Width = row[this.Width];
-                cells.Height = row[this.Height];
-                cells.Angle = row[this.Angle];
-                return cells;
-            }
-        }
     }
 }
