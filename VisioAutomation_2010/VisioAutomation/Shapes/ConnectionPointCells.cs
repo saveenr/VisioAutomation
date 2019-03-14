@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ConnectionPointCells : CellGroupBase
+    public class ConnectionPointCells : CellGroup
     {
         public CellValueLiteral X { get; set; }
         public CellValueLiteral Y { get; set; }

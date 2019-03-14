@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class HyperlinkCells : CellGroupBase
+    public class HyperlinkCells : CellGroup
     {
         public CellValueLiteral Address { get; set; }
         public CellValueLiteral Description { get; set; }

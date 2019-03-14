@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCells : CellGroupBase
+    public class CustomPropertyCells : CellGroup
     {
         public CellValueLiteral Ask { get; set; }
         public CellValueLiteral Calendar { get; set; }

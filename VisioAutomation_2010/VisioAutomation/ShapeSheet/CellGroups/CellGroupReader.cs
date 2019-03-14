@@ -5,7 +5,7 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class CellGroupReader<TGroup> where TGroup : CellGroupBase
+    public abstract class CellGroupReader<TGroup> where TGroup : CellGroup
     {
         protected Query.CellQuery query_singlerow;
         protected VASS.Query.SectionsQuery query_multirow;

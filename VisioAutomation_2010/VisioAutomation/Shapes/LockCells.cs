@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : CellGroupBase
+    public class LockCells : CellGroup
     {
         public CellValueLiteral Aspect { get; set; }
         public CellValueLiteral Begin { get; set; }

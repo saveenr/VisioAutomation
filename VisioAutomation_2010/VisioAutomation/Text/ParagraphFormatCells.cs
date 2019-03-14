@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphFormatCells : CellGroupBase
+    public class ParagraphFormatCells : CellGroup
     {
         public CellValueLiteral IndentFirst { get; set; }
         public CellValueLiteral IndentRight { get; set; }

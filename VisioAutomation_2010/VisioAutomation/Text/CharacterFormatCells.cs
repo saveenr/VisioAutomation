@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterFormatCells : CellGroupBase
+    public class CharacterFormatCells : CellGroup
     {
         public CellValueLiteral Color { get; set; }
         public CellValueLiteral Font { get; set; }

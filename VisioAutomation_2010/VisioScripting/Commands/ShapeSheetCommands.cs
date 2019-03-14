@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         }
 
-        internal void __SetCells(Models.TargetShapes targets, VisioAutomation.ShapeSheet.CellGroups.CellGroupBase cells, IVisio.Page page)
+        internal void __SetCells(Models.TargetShapes targets, VisioAutomation.ShapeSheet.CellGroups.CellGroup cells, IVisio.Page page)
         {
             targets = targets.ResolveShapes(this._client);
             var shape_ids = targets.ToShapeIDs();
@@ -20,14 +20,14 @@ namespace VisioScripting.Commands
 
             foreach (var shape_id in shape_ids.ShapeIDs)
             {
-                if (cells is VisioAutomation.ShapeSheet.CellGroups.CellGroupBase)
+                if (cells is VisioAutomation.ShapeSheet.CellGroups.CellGroup)
                 {
-                    var cells_mr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupBase)cells;
+                    var cells_mr = (VisioAutomation.ShapeSheet.CellGroups.CellGroup)cells;
                     writer.SetFormulas((short)shape_id, cells_mr, 0);
                 }
                 else
                 {
-                    var cells_sr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupBase)cells;
+                    var cells_sr = (VisioAutomation.ShapeSheet.CellGroups.CellGroup)cells;
                     writer.SetFormulas((short)shape_id, cells_sr);
 
                 }

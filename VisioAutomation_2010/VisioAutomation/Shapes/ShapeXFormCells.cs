@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeXFormCells : CellGroupBase
+    public class ShapeXFormCells : CellGroup
     {
         public CellValueLiteral PinX { get; set; }
         public CellValueLiteral PinY { get; set; }

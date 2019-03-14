@@ -7,7 +7,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellCells : CellGroupBase
+    public class UserDefinedCellCells : CellGroup
     {
         public CellValueLiteral Value { get; set; }
         public CellValueLiteral Prompt { get; set; }

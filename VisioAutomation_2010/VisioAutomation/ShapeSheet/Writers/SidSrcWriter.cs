@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.__SetFormulaIgnoreNull(sidsrc, formula);
         }
 
-        public void SetFormulas(short id, CellGroups.CellGroupBase cgb, short row)
+        public void SetFormulas(short id, CellGroups.CellGroup cgb, short row)
         {
             var pairs = cgb.SidSrcValuePairs_NewRow(id, row);
             foreach (var pair in pairs)
@@ -56,7 +56,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        public void SetFormulas(short id, CellGroups.CellGroupBase cgb)
+        public void SetFormulas(short id, CellGroups.CellGroup cgb)
         {
             foreach (var pair in cgb.SrcValuePairs)
             {

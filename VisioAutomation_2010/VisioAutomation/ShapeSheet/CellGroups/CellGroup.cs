@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public class CellGroupBase
+    public class CellGroup
     {
         public virtual IEnumerable<SrcValuePair> SrcValuePairs { get; }
 
