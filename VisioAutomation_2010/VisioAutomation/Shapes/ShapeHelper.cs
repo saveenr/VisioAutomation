@@ -101,31 +101,32 @@ namespace VisioAutomation.Shapes
             {
 
                 var cells = new ShapeFormatCells();
-                cells.FillBackground = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillBackground)].Ordinal];
-                cells.FillBackgroundTransparency= row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillBackgroundTransparency)].Ordinal];
-                cells.FillForeground = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillForeground)].Ordinal];
-                cells.FillForegroundTransparency = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillForegroundTransparency)].Ordinal];
-                cells.FillPattern = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillPattern)].Ordinal];
-                cells.FillShadowObliqueAngle = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowObliqueAngle)].Ordinal];
-                cells.FillShadowOffsetX = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowOffsetX)].Ordinal];
-                cells.FillShadowOffsetY = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowOffsetY)].Ordinal];
-                cells.FillShadowScaleFactor = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowScaleFactor)].Ordinal];
-                cells.FillShadowType = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowType)].Ordinal];
-                cells.FillShadowBackground = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowBackground)].Ordinal];
-                cells.FillShadowBackgroundTransparency = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowBackgroundTransparency)].Ordinal];
-                cells.FillShadowForeground = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowForeground)].Ordinal];
-                cells.FillShadowForegroundTransparency = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowForegroundTransparency)].Ordinal];
-                cells.FillShadowPattern = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.FillShadowPattern)].Ordinal];
-                cells.LineBeginArrow = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineBeginArrow)].Ordinal];
-                cells.LineBeginArrowSize = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineBeginArrowSize)].Ordinal];
-                cells.LineEndArrow = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineEndArrow)].Ordinal];
-                cells.LineEndArrowSize = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineEndArrowSize)].Ordinal];
-                cells.LineCap = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineCap)].Ordinal];
-                cells.LineColor = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineColor)].Ordinal];
-                cells.LineColorTransparency = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineColorTransparency)].Ordinal];
-                cells.LinePattern = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LinePattern)].Ordinal];
-                cells.LineWeight = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineWeight)].Ordinal];
-                cells.LineRounding = row[this.query_singlerow.Columns[nameof(ShapeFormatCells.LineRounding)].Ordinal];
+                var cols = this.query_singlerow.Columns;
+                cells.FillBackground = row[cols[nameof(ShapeFormatCells.FillBackground)].Ordinal];
+                cells.FillBackgroundTransparency= row[cols[nameof(ShapeFormatCells.FillBackgroundTransparency)].Ordinal];
+                cells.FillForeground = row[cols[nameof(ShapeFormatCells.FillForeground)].Ordinal];
+                cells.FillForegroundTransparency = row[cols[nameof(ShapeFormatCells.FillForegroundTransparency)].Ordinal];
+                cells.FillPattern = row[cols[nameof(ShapeFormatCells.FillPattern)].Ordinal];
+                cells.FillShadowObliqueAngle = row[cols[nameof(ShapeFormatCells.FillShadowObliqueAngle)].Ordinal];
+                cells.FillShadowOffsetX = row[cols[nameof(ShapeFormatCells.FillShadowOffsetX)].Ordinal];
+                cells.FillShadowOffsetY = row[cols[nameof(ShapeFormatCells.FillShadowOffsetY)].Ordinal];
+                cells.FillShadowScaleFactor = row[cols[nameof(ShapeFormatCells.FillShadowScaleFactor)].Ordinal];
+                cells.FillShadowType = row[cols[nameof(ShapeFormatCells.FillShadowType)].Ordinal];
+                cells.FillShadowBackground = row[cols[nameof(ShapeFormatCells.FillShadowBackground)].Ordinal];
+                cells.FillShadowBackgroundTransparency = row[cols[nameof(ShapeFormatCells.FillShadowBackgroundTransparency)].Ordinal];
+                cells.FillShadowForeground = row[cols[nameof(ShapeFormatCells.FillShadowForeground)].Ordinal];
+                cells.FillShadowForegroundTransparency = row[cols[nameof(ShapeFormatCells.FillShadowForegroundTransparency)].Ordinal];
+                cells.FillShadowPattern = row[cols[nameof(ShapeFormatCells.FillShadowPattern)].Ordinal];
+                cells.LineBeginArrow = row[cols[nameof(ShapeFormatCells.LineBeginArrow)].Ordinal];
+                cells.LineBeginArrowSize = row[cols[nameof(ShapeFormatCells.LineBeginArrowSize)].Ordinal];
+                cells.LineEndArrow = row[cols[nameof(ShapeFormatCells.LineEndArrow)].Ordinal];
+                cells.LineEndArrowSize = row[cols[nameof(ShapeFormatCells.LineEndArrowSize)].Ordinal];
+                cells.LineCap = row[cols[nameof(ShapeFormatCells.LineCap)].Ordinal];
+                cells.LineColor = row[cols[nameof(ShapeFormatCells.LineColor)].Ordinal];
+                cells.LineColorTransparency = row[cols[nameof(ShapeFormatCells.LineColorTransparency)].Ordinal];
+                cells.LinePattern = row[cols[nameof(ShapeFormatCells.LinePattern)].Ordinal];
+                cells.LineWeight = row[cols[nameof(ShapeFormatCells.LineWeight)].Ordinal];
+                cells.LineRounding = row[cols[nameof(ShapeFormatCells.LineRounding)].Ordinal];
                 return cells;
             }
 
