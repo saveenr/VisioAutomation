@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellColumnList : ColumnListBase<CellColumn>
     {
-        private HashSet<ShapeSheet.Src> items;
+        private Dictionary<ShapeSheet.Src,CellColumn> items;
 
         internal CellColumnList() :
             this(0)
@@ -14,6 +14,8 @@ namespace VisioAutomation.ShapeSheet.Query
         internal CellColumnList(int capacity) : base(capacity)
         {
         }
+
+        public CellColumn this[VisioAutomation.ShapeSheet.Src src] => this.items[src];
 
         public CellColumn Add(ShapeSheet.Src src, string name)
         {
@@ -31,7 +33,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this._items.Add(col);
 
             this.map_name_to_item[norm_name] = col;
-            this.items.Add(src);
+            this.items.Add(src,col);
             return col;
         }
 
@@ -39,10 +41,10 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this.items == null)
             {
-                this.items = new HashSet<ShapeSheet.Src>();
+                this.items = new Dictionary<ShapeSheet.Src,CellColumn>();
             }
 
-            if (this.items.Contains(src))
+            if (this.items.ContainsKey(src))
             {
                 string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Src),src.Section, src.Row, src.Cell);
                 throw new System.ArgumentException(msg);
