@@ -32,35 +32,37 @@ namespace VisioAutomation.Shapes
         public CellValueLiteral LineWeight { get; set; }
         public CellValueLiteral LineRounding { get; set; }
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.FillBackground, this.FillBackground);
-                yield return SrcValuePair.Create(SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
-                yield return SrcValuePair.Create(SrcConstants.FillForeground, this.FillForeground);
-                yield return SrcValuePair.Create(SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
-                yield return SrcValuePair.Create(SrcConstants.FillPattern, this.FillPattern);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowType, this.FillShadowType);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowBackground, this.FillShadowBackground);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowForeground, this.FillShadowForeground);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
-                yield return SrcValuePair.Create(SrcConstants.FillShadowPattern, this.FillShadowPattern);
-                yield return SrcValuePair.Create(SrcConstants.LineBeginArrow, this.LineBeginArrow);
-                yield return SrcValuePair.Create(SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
-                yield return SrcValuePair.Create(SrcConstants.LineEndArrow, this.LineEndArrow);
-                yield return SrcValuePair.Create(SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
-                yield return SrcValuePair.Create(SrcConstants.LineCap, this.LineCap);
-                yield return SrcValuePair.Create(SrcConstants.LineColor, this.LineColor);
-                yield return SrcValuePair.Create(SrcConstants.LineColorTransparency, this.LineColorTransparency);
-                yield return SrcValuePair.Create(SrcConstants.LinePattern, this.LinePattern);
-                yield return SrcValuePair.Create(SrcConstants.LineWeight, this.LineWeight);
-                yield return SrcValuePair.Create(SrcConstants.LineRounding, this.LineRounding);
+
+
+                yield return NamedSrcValuePair.Create(nameof(this.FillBackground), SrcConstants.FillBackground, this.FillBackground);
+                yield return NamedSrcValuePair.Create(nameof(this.FillBackgroundTransparency), SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
+                yield return NamedSrcValuePair.Create(nameof(this.FillForeground), SrcConstants.FillForeground, this.FillForeground);
+                yield return NamedSrcValuePair.Create(nameof(this.FillForegroundTransparency), SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
+                yield return NamedSrcValuePair.Create(nameof(this.FillPattern), SrcConstants.FillPattern, this.FillPattern);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowObliqueAngle), SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowOffsetX), SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowOffsetY), SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowScaleFactor), SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowType), SrcConstants.FillShadowType, this.FillShadowType);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowBackground), SrcConstants.FillShadowBackground, this.FillShadowBackground);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowBackgroundTransparency), SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowForeground), SrcConstants.FillShadowForeground, this.FillShadowForeground);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowForegroundTransparency), SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+                yield return NamedSrcValuePair.Create(nameof(this.FillShadowPattern), SrcConstants.FillShadowPattern, this.FillShadowPattern);
+                yield return NamedSrcValuePair.Create(nameof(this.LineBeginArrow), SrcConstants.LineBeginArrow, this.LineBeginArrow);
+                yield return NamedSrcValuePair.Create(nameof(this.LineBeginArrowSize), SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
+                yield return NamedSrcValuePair.Create(nameof(this.LineEndArrow), SrcConstants.LineEndArrow, this.LineEndArrow);
+                yield return NamedSrcValuePair.Create(nameof(this.LineEndArrowSize), SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+                yield return NamedSrcValuePair.Create(nameof(this.LineCap), SrcConstants.LineCap, this.LineCap);
+                yield return NamedSrcValuePair.Create(nameof(this.LineColor), SrcConstants.LineColor, this.LineColor);
+                yield return NamedSrcValuePair.Create(nameof(this.LineColorTransparency), SrcConstants.LineColorTransparency, this.LineColorTransparency);
+                yield return NamedSrcValuePair.Create(nameof(this.LinePattern), SrcConstants.LinePattern, this.LinePattern);
+                yield return NamedSrcValuePair.Create(nameof(this.LineWeight), SrcConstants.LineWeight, this.LineWeight);
+                yield return NamedSrcValuePair.Create(nameof(this.LineRounding), SrcConstants.LineRounding, this.LineRounding);
             }
         }
     }

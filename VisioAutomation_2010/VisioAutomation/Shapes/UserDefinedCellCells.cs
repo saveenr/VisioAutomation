@@ -13,12 +13,14 @@ namespace VisioAutomation.Shapes
         {
         }
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.UserDefCellValue, this.Value);
-                yield return SrcValuePair.Create(SrcConstants.UserDefCellPrompt, this.Prompt);
+
+
+                yield return NamedSrcValuePair.Create(nameof(this.Value), SrcConstants.UserDefCellValue, this.Value);
+                yield return NamedSrcValuePair.Create(nameof(this.Prompt), SrcConstants.UserDefCellPrompt, this.Prompt);
             }
         }
 

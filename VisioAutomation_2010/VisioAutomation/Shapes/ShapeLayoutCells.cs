@@ -25,28 +25,30 @@ namespace VisioAutomation.Shapes
         public CellValueLiteral ShapeDisplayLevel { get; set; } // new in visio 2010
         public CellValueLiteral Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutConnectorFixedCode, this.ConnectorFixedCode);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineJumpCode, this.LineJumpCode);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineJumpDirX, this.LineJumpDirX);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineJumpDirY, this.LineJumpDirY);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineJumpStyle, this.LineJumpStyle);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutLineRouteExt, this.LineRouteExt);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeFixedCode, this.ShapeFixedCode);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePermeablePlace, this.ShapePermeablePlace);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePermeableX, this.ShapePermeableX);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePermeableY, this.ShapePermeableY);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePlaceFlip, this.ShapePlaceFlip);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePlaceStyle, this.ShapePlaceStyle);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapePlowCode, this.ShapePlowCode);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeRouteStyle, this.ShapeRouteStyle);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeSplit, this.ShapeSplit);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeSplittable, this.ShapeSplittable);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutShapeDisplayLevel, this.ShapeDisplayLevel);
-                yield return SrcValuePair.Create(SrcConstants.ShapeLayoutRelationships, this.Relationships);
+
+
+                yield return NamedSrcValuePair.Create(nameof(this.ConnectorFixedCode), SrcConstants.ShapeLayoutConnectorFixedCode, this.ConnectorFixedCode);
+                yield return NamedSrcValuePair.Create(nameof(this.LineJumpCode), SrcConstants.ShapeLayoutLineJumpCode, this.LineJumpCode);
+                yield return NamedSrcValuePair.Create(nameof(this.LineJumpDirX), SrcConstants.ShapeLayoutLineJumpDirX, this.LineJumpDirX);
+                yield return NamedSrcValuePair.Create(nameof(this.LineJumpDirY), SrcConstants.ShapeLayoutLineJumpDirY, this.LineJumpDirY);
+                yield return NamedSrcValuePair.Create(nameof(this.LineJumpStyle), SrcConstants.ShapeLayoutLineJumpStyle, this.LineJumpStyle);
+                yield return NamedSrcValuePair.Create(nameof(this.LineRouteExt), SrcConstants.ShapeLayoutLineRouteExt, this.LineRouteExt);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapeFixedCode), SrcConstants.ShapeLayoutShapeFixedCode, this.ShapeFixedCode);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapePermeablePlace), SrcConstants.ShapeLayoutShapePermeablePlace, this.ShapePermeablePlace);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapePermeableX), SrcConstants.ShapeLayoutShapePermeableX, this.ShapePermeableX);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapePermeableY), SrcConstants.ShapeLayoutShapePermeableY, this.ShapePermeableY);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapePlaceFlip), SrcConstants.ShapeLayoutShapePlaceFlip, this.ShapePlaceFlip);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapePlaceStyle), SrcConstants.ShapeLayoutShapePlaceStyle, this.ShapePlaceStyle);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapePlowCode), SrcConstants.ShapeLayoutShapePlowCode, this.ShapePlowCode);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapeRouteStyle), SrcConstants.ShapeLayoutShapeRouteStyle, this.ShapeRouteStyle);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapeSplit), SrcConstants.ShapeLayoutShapeSplit, this.ShapeSplit);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapeSplittable), SrcConstants.ShapeLayoutShapeSplittable, this.ShapeSplittable);
+                yield return NamedSrcValuePair.Create(nameof(this.ShapeDisplayLevel), SrcConstants.ShapeLayoutShapeDisplayLevel, this.ShapeDisplayLevel);
+                yield return NamedSrcValuePair.Create(nameof(this.Relationships), SrcConstants.ShapeLayoutRelationships, this.Relationships);
             }
         }
     }

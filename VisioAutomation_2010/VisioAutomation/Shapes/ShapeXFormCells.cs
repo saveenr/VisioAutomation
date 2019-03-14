@@ -14,17 +14,19 @@ namespace VisioAutomation.Shapes
         public CellValueLiteral Height { get; set; }
         public CellValueLiteral Angle { get; set; }
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.XFormPinX, this.PinX);
-                yield return SrcValuePair.Create(SrcConstants.XFormPinY, this.PinY);
-                yield return SrcValuePair.Create(SrcConstants.XFormLocPinX, this.LocPinX);
-                yield return SrcValuePair.Create(SrcConstants.XFormLocPinY, this.LocPinY);
-                yield return SrcValuePair.Create(SrcConstants.XFormWidth, this.Width);
-                yield return SrcValuePair.Create(SrcConstants.XFormHeight, this.Height);
-                yield return SrcValuePair.Create(SrcConstants.XFormAngle, this.Angle);
+
+
+                yield return NamedSrcValuePair.Create(nameof(this.PinX), SrcConstants.XFormPinX, this.PinX);
+                yield return NamedSrcValuePair.Create(nameof(this.PinY), SrcConstants.XFormPinY, this.PinY);
+                yield return NamedSrcValuePair.Create(nameof(this.LocPinX), SrcConstants.XFormLocPinX, this.LocPinX);
+                yield return NamedSrcValuePair.Create(nameof(this.LocPinY), SrcConstants.XFormLocPinY, this.LocPinY);
+                yield return NamedSrcValuePair.Create(nameof(this.Width), SrcConstants.XFormWidth, this.Width);
+                yield return NamedSrcValuePair.Create(nameof(this.Height), SrcConstants.XFormHeight, this.Height);
+                yield return NamedSrcValuePair.Create(nameof(this.Angle), SrcConstants.XFormAngle, this.Angle);
             }
         }
     }

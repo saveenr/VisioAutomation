@@ -14,17 +14,19 @@ namespace VisioAutomation.Text
         public CellValueLiteral LocPinX { get; set; }
         public CellValueLiteral LocPinY { get; set; }
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.TextXFormPinX, this.PinX);
-                yield return SrcValuePair.Create(SrcConstants.TextXFormPinY, this.PinY);
-                yield return SrcValuePair.Create(SrcConstants.TextXFormLocPinX, this.LocPinX);
-                yield return SrcValuePair.Create(SrcConstants.TextXFormLocPinY, this.LocPinY);
-                yield return SrcValuePair.Create(SrcConstants.TextXFormWidth, this.Width);
-                yield return SrcValuePair.Create(SrcConstants.TextXFormHeight, this.Height);
-                yield return SrcValuePair.Create(SrcConstants.TextXFormAngle, this.Angle);
+
+
+                yield return NamedSrcValuePair.Create(nameof(this.PinX), SrcConstants.TextXFormPinX, this.PinX);
+                yield return NamedSrcValuePair.Create(nameof(this.PinY), SrcConstants.TextXFormPinY, this.PinY);
+                yield return NamedSrcValuePair.Create(nameof(this.LocPinX), SrcConstants.TextXFormLocPinX, this.LocPinX);
+                yield return NamedSrcValuePair.Create(nameof(this.LocPinY), SrcConstants.TextXFormLocPinY, this.LocPinY);
+                yield return NamedSrcValuePair.Create(nameof(this.Width), SrcConstants.TextXFormWidth, this.Width);
+                yield return NamedSrcValuePair.Create(nameof(this.Height), SrcConstants.TextXFormHeight, this.Height);
+                yield return NamedSrcValuePair.Create(nameof(this.Angle), SrcConstants.TextXFormAngle, this.Angle);
             }
         }
     }

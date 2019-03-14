@@ -21,24 +21,26 @@ namespace VisioAutomation.Text
         public CellValueLiteral Flags { get; set; }
         public CellValueLiteral BulletString { get; set; }
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.ParaIndentLeft, this.IndentLeft);
-                yield return SrcValuePair.Create(SrcConstants.ParaIndentFirst, this.IndentFirst);
-                yield return SrcValuePair.Create(SrcConstants.ParaIndentRight, this.IndentRight);
-                yield return SrcValuePair.Create(SrcConstants.ParaSpacingAfter, this.SpacingAfter);
-                yield return SrcValuePair.Create(SrcConstants.ParaSpacingBefore, this.SpacingBefore);
-                yield return SrcValuePair.Create(SrcConstants.ParaSpacingLine, this.SpacingLine);
-                yield return SrcValuePair.Create(SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
-                yield return SrcValuePair.Create(SrcConstants.ParaBulletFont, this.BulletFont);
-                yield return SrcValuePair.Create(SrcConstants.ParaBullet, this.Bullet);
-                yield return SrcValuePair.Create(SrcConstants.ParaBulletFontSize, this.BulletFontSize);
-                yield return SrcValuePair.Create(SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont);
-                yield return SrcValuePair.Create(SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet);
-                yield return SrcValuePair.Create(SrcConstants.ParaFlags, this.Flags);
-                yield return SrcValuePair.Create(SrcConstants.ParaBulletString, this.BulletString);
+
+
+                yield return NamedSrcValuePair.Create(nameof(this.IndentLeft), SrcConstants.ParaIndentLeft, this.IndentLeft);
+                yield return NamedSrcValuePair.Create(nameof(this.IndentFirst), SrcConstants.ParaIndentFirst, this.IndentFirst);
+                yield return NamedSrcValuePair.Create(nameof(this.IndentRight), SrcConstants.ParaIndentRight, this.IndentRight);
+                yield return NamedSrcValuePair.Create(nameof(this.SpacingAfter), SrcConstants.ParaSpacingAfter, this.SpacingAfter);
+                yield return NamedSrcValuePair.Create(nameof(this.SpacingBefore), SrcConstants.ParaSpacingBefore, this.SpacingBefore);
+                yield return NamedSrcValuePair.Create(nameof(this.SpacingLine), SrcConstants.ParaSpacingLine, this.SpacingLine);
+                yield return NamedSrcValuePair.Create(nameof(this.HorizontalAlign), SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
+                yield return NamedSrcValuePair.Create(nameof(this.BulletFont), SrcConstants.ParaBulletFont, this.BulletFont);
+                yield return NamedSrcValuePair.Create(nameof(this.Bullet), SrcConstants.ParaBullet, this.Bullet);
+                yield return NamedSrcValuePair.Create(nameof(this.BulletFontSize), SrcConstants.ParaBulletFontSize, this.BulletFontSize);
+                yield return NamedSrcValuePair.Create(nameof(this.LocalizeBulletFont), SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont);
+                yield return NamedSrcValuePair.Create(nameof(this.TextPosAfterBullet), SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet);
+                yield return NamedSrcValuePair.Create(nameof(this.Flags), SrcConstants.ParaFlags, this.Flags);
+                yield return NamedSrcValuePair.Create(nameof(this.BulletString), SrcConstants.ParaBulletString, this.BulletString);
             }
         }
 

@@ -21,25 +21,25 @@ namespace VisioAutomation.Pages
         public VASS.CellValueLiteral ScaleY { get; set; }
         public VASS.CellValueLiteral PaperSource { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.SrcValuePair> SrcValuePairs
+        public override IEnumerable<VASS.CellGroups.NamedSrcValuePair> NamedSrcValuePairs
         {
             get
             {
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintLeftMargin, this.LeftMargin);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintCenterX, this.CenterX);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintCenterY, this.CenterY);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintOnPage, this.OnPage);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintBottomMargin, this.BottomMargin);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintRightMargin, this.RightMargin);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintPagesX, this.PagesX);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintPagesY, this.PagesY);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintTopMargin, this.TopMargin);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintPaperKind, this.PaperKind);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintGrid, this.Grid);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintPageOrientation, this.Orientation);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintScaleX, this.ScaleX);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintScaleY, this.ScaleY);
-                yield return VASS.CellGroups.SrcValuePair.Create(VASS.SrcConstants.PrintPaperSource, this.PaperSource);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LeftMargin), VASS.SrcConstants.PrintLeftMargin, this.LeftMargin);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.CenterX), VASS.SrcConstants.PrintCenterX, this.CenterX);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.CenterY), VASS.SrcConstants.PrintCenterY, this.CenterY);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.OnPage), VASS.SrcConstants.PrintOnPage, this.OnPage);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.BottomMargin), VASS.SrcConstants.PrintBottomMargin, this.BottomMargin);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.RightMargin), VASS.SrcConstants.PrintRightMargin, this.RightMargin);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PagesX), VASS.SrcConstants.PrintPagesX, this.PagesX);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PagesY), VASS.SrcConstants.PrintPagesY, this.PagesY);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.TopMargin), VASS.SrcConstants.PrintTopMargin, this.TopMargin);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PaperKind), VASS.SrcConstants.PrintPaperKind, this.PaperKind);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.Grid), VASS.SrcConstants.PrintGrid, this.Grid);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.Orientation), VASS.SrcConstants.PrintPageOrientation, this.Orientation);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.ScaleX), VASS.SrcConstants.PrintScaleX, this.ScaleX);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.ScaleY), VASS.SrcConstants.PrintScaleY, this.ScaleY);
+                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PaperSource), VASS.SrcConstants.PrintPaperSource, this.PaperSource);
             }
         }
 

@@ -4,8 +4,17 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public class CellGroup
     {
-        public virtual IEnumerable<SrcValuePair> SrcValuePairs { get; }
-
+        public IEnumerable<SrcValuePair> SrcValuePairs
+        {
+            get
+            {
+                foreach (var pair in this.NamedSrcValuePairs)
+                {
+                    yield return new SrcValuePair(pair.Src, pair.Value);
+                }
+            }
+        }
+        public virtual IEnumerable<NamedSrcValuePair> NamedSrcValuePairs { get; }
         public IEnumerable<SrcValuePair> SrcValuePairs_NewRow(short row)
         {
             foreach (var pair in this.SrcValuePairs)
