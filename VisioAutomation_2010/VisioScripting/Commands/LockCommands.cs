@@ -54,7 +54,7 @@ namespace VisioScripting.Commands
             var page = cmdtarget.ActivePage;
             var target_shapeids = targets.ToShapeIDs();
 
-            var cells = VisioAutomation.Shapes.LockCells.GetLockCells(page, target_shapeids.ShapeIDs, cvt);
+            var cells = VisioAutomation.Shapes.ShapeHelper.GetLockCells(page, target_shapeids.ShapeIDs, cvt);
 
             for (int i = 0; i < target_shapeids.ShapeIDs.Count; i++)
             {
