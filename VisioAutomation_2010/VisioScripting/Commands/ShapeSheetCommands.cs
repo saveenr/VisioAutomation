@@ -20,14 +20,14 @@ namespace VisioScripting.Commands
 
             foreach (var shape_id in shape_ids.ShapeIDs)
             {
-                if (cells is VisioAutomation.ShapeSheet.CellGroups.CellGroupMultiRow)
+                if (cells is VisioAutomation.ShapeSheet.CellGroups.CellGroupBase)
                 {
-                    var cells_mr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupMultiRow)cells;
+                    var cells_mr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupBase)cells;
                     writer.SetFormulas((short)shape_id, cells_mr, 0);
                 }
                 else
                 {
-                    var cells_sr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupSingleRow)cells;
+                    var cells_sr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupBase)cells;
                     writer.SetFormulas((short)shape_id, cells_sr);
 
                 }

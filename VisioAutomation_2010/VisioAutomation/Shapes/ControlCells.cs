@@ -7,7 +7,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ControlCells : CellGroupMultiRow
+    public class ControlCells : CellGroupBase
     {
         public CellValueLiteral CanGlue { get; set; }
         public CellValueLiteral Tip { get; set; }

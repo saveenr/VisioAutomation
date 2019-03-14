@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeFormatCells : CellGroupSingleRow
+    public class ShapeFormatCells : CellGroupBase
     {
         public CellValueLiteral FillBackground { get; set; }
         public CellValueLiteral FillBackgroundTransparency { get; set; }

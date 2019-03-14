@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class ReaderMultiRow<TGroup> where TGroup : CellGroupMultiRow
+    public abstract class ReaderMultiRow<TGroup> where TGroup : CellGroupBase
     {
         protected VASS.Query.SectionsQuery query;
 

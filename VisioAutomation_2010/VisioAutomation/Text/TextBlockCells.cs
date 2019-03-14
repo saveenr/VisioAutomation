@@ -6,7 +6,7 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
-    public class TextBlockCells : CellGroupSingleRow
+    public class TextBlockCells : CellGroupBase
     {
         public CellValueLiteral BottomMargin { get; set; }
         public CellValueLiteral LeftMargin { get; set; }
