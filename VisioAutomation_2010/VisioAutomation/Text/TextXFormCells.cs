@@ -33,19 +33,19 @@ namespace VisioAutomation.Text
         public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static TextXFormCells GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<TextXFormCellsReader> lazy_query = new System.Lazy<TextXFormCellsReader>();
 
 
-        class TextXFormCellsReader : ReaderSingleRow<Text.TextXFormCells>
+        class TextXFormCellsReader : CellGroupReader<Text.TextXFormCells>
         {
             public CellColumn Width { get; set; }
             public CellColumn Height { get; set; }
@@ -57,13 +57,13 @@ namespace VisioAutomation.Text
 
             public TextXFormCellsReader()
             {
-                this.PinX = this.query.Columns.Add(SrcConstants.TextXFormPinX, nameof(this.PinX));
-                this.PinY = this.query.Columns.Add(SrcConstants.TextXFormPinY, nameof(this.PinY));
-                this.LocPinX = this.query.Columns.Add(SrcConstants.TextXFormLocPinX, nameof(this.LocPinX));
-                this.LocPinY = this.query.Columns.Add(SrcConstants.TextXFormLocPinY, nameof(this.LocPinY));
-                this.Width = this.query.Columns.Add(SrcConstants.TextXFormWidth, nameof(this.Width));
-                this.Height = this.query.Columns.Add(SrcConstants.TextXFormHeight, nameof(this.Height));
-                this.Angle = this.query.Columns.Add(SrcConstants.TextXFormAngle, nameof(this.Angle));
+                this.PinX = this.query_singlerow.Columns.Add(SrcConstants.TextXFormPinX, nameof(this.PinX));
+                this.PinY = this.query_singlerow.Columns.Add(SrcConstants.TextXFormPinY, nameof(this.PinY));
+                this.LocPinX = this.query_singlerow.Columns.Add(SrcConstants.TextXFormLocPinX, nameof(this.LocPinX));
+                this.LocPinY = this.query_singlerow.Columns.Add(SrcConstants.TextXFormLocPinY, nameof(this.LocPinY));
+                this.Width = this.query_singlerow.Columns.Add(SrcConstants.TextXFormWidth, nameof(this.Width));
+                this.Height = this.query_singlerow.Columns.Add(SrcConstants.TextXFormHeight, nameof(this.Height));
+                this.Angle = this.query_singlerow.Columns.Add(SrcConstants.TextXFormAngle, nameof(this.Angle));
 
             }
 

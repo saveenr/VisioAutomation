@@ -44,19 +44,19 @@ namespace VisioAutomation.Shapes
         public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsMultiRow(shape, type);
         }
 
         private static readonly System.Lazy<CustomPropertyCellsReader> lazy_query = new System.Lazy<CustomPropertyCellsReader>();
 
 
-        public class CustomPropertyCellsReader : ReaderMultiRow<CustomPropertyCells>
+        public class CustomPropertyCellsReader : CellGroupReader<CustomPropertyCells>
         {
             public SectionQueryColumn SortKey { get; set; }
             public SectionQueryColumn Ask { get; set; }
@@ -71,7 +71,7 @@ namespace VisioAutomation.Shapes
 
             public CustomPropertyCellsReader()
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
 
 
                 this.SortKey = sec.Columns.Add(SrcConstants.CustomPropSortKey, nameof(this.SortKey));

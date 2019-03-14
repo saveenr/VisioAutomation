@@ -60,19 +60,19 @@ namespace VisioAutomation.Shapes
         public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static LockCells GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<LockCellsReader> lazy_query = new System.Lazy<LockCellsReader>();
 
 
-        class LockCellsReader : ReaderSingleRow<LockCells>
+        class LockCellsReader : CellGroupReader<LockCells>
         {
             public CellColumn Aspect { get; set; }
             public CellColumn Begin { get; set; }
@@ -97,26 +97,26 @@ namespace VisioAutomation.Shapes
 
             public LockCellsReader()
             {
-                this.Aspect = this.query.Columns.Add(SrcConstants.LockAspect, nameof(this.Aspect));
-                this.Begin = this.query.Columns.Add(SrcConstants.LockBegin, nameof(this.Begin));
-                this.CalcWH = this.query.Columns.Add(SrcConstants.LockCalcWH, nameof(this.CalcWH));
-                this.Crop = this.query.Columns.Add(SrcConstants.LockCrop, nameof(this.Crop));
-                this.CustomProp = this.query.Columns.Add(SrcConstants.LockCustomProp, nameof(this.CustomProp));
-                this.Delete = this.query.Columns.Add(SrcConstants.LockDelete, nameof(this.Delete));
-                this.End = this.query.Columns.Add(SrcConstants.LockEnd, nameof(this.End));
-                this.Format = this.query.Columns.Add(SrcConstants.LockFormat, nameof(this.Format));
-                this.FromGroupFormat = this.query.Columns.Add(SrcConstants.LockFromGroupFormat, nameof(this.FromGroupFormat));
-                this.Group = this.query.Columns.Add(SrcConstants.LockGroup, nameof(this.Group));
-                this.Height = this.query.Columns.Add(SrcConstants.LockHeight, nameof(this.Height));
-                this.MoveX = this.query.Columns.Add(SrcConstants.LockMoveX, nameof(this.MoveX));
-                this.MoveY = this.query.Columns.Add(SrcConstants.LockMoveY, nameof(this.MoveY));
-                this.Rotate = this.query.Columns.Add(SrcConstants.LockRotate, nameof(this.Rotate));
-                this.Select = this.query.Columns.Add(SrcConstants.LockSelect, nameof(this.Select));
-                this.TextEdit = this.query.Columns.Add(SrcConstants.LockTextEdit, nameof(this.TextEdit));
-                this.ThemeColors = this.query.Columns.Add(SrcConstants.LockThemeColors, nameof(this.ThemeColors));
-                this.ThemeEffects = this.query.Columns.Add(SrcConstants.LockThemeEffects, nameof(this.ThemeEffects));
-                this.VertexEdit = this.query.Columns.Add(SrcConstants.LockVertexEdit, nameof(this.VertexEdit));
-                this.Width = this.query.Columns.Add(SrcConstants.LockWidth, nameof(this.Width));
+                this.Aspect = this.query_singlerow.Columns.Add(SrcConstants.LockAspect, nameof(this.Aspect));
+                this.Begin = this.query_singlerow.Columns.Add(SrcConstants.LockBegin, nameof(this.Begin));
+                this.CalcWH = this.query_singlerow.Columns.Add(SrcConstants.LockCalcWH, nameof(this.CalcWH));
+                this.Crop = this.query_singlerow.Columns.Add(SrcConstants.LockCrop, nameof(this.Crop));
+                this.CustomProp = this.query_singlerow.Columns.Add(SrcConstants.LockCustomProp, nameof(this.CustomProp));
+                this.Delete = this.query_singlerow.Columns.Add(SrcConstants.LockDelete, nameof(this.Delete));
+                this.End = this.query_singlerow.Columns.Add(SrcConstants.LockEnd, nameof(this.End));
+                this.Format = this.query_singlerow.Columns.Add(SrcConstants.LockFormat, nameof(this.Format));
+                this.FromGroupFormat = this.query_singlerow.Columns.Add(SrcConstants.LockFromGroupFormat, nameof(this.FromGroupFormat));
+                this.Group = this.query_singlerow.Columns.Add(SrcConstants.LockGroup, nameof(this.Group));
+                this.Height = this.query_singlerow.Columns.Add(SrcConstants.LockHeight, nameof(this.Height));
+                this.MoveX = this.query_singlerow.Columns.Add(SrcConstants.LockMoveX, nameof(this.MoveX));
+                this.MoveY = this.query_singlerow.Columns.Add(SrcConstants.LockMoveY, nameof(this.MoveY));
+                this.Rotate = this.query_singlerow.Columns.Add(SrcConstants.LockRotate, nameof(this.Rotate));
+                this.Select = this.query_singlerow.Columns.Add(SrcConstants.LockSelect, nameof(this.Select));
+                this.TextEdit = this.query_singlerow.Columns.Add(SrcConstants.LockTextEdit, nameof(this.TextEdit));
+                this.ThemeColors = this.query_singlerow.Columns.Add(SrcConstants.LockThemeColors, nameof(this.ThemeColors));
+                this.ThemeEffects = this.query_singlerow.Columns.Add(SrcConstants.LockThemeEffects, nameof(this.ThemeEffects));
+                this.VertexEdit = this.query_singlerow.Columns.Add(SrcConstants.LockVertexEdit, nameof(this.VertexEdit));
+                this.Width = this.query_singlerow.Columns.Add(SrcConstants.LockWidth, nameof(this.Width));
             }
 
             public override LockCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

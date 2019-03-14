@@ -73,12 +73,12 @@ namespace VisioAutomation.Pages
         public static PageLayoutCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<PageLayoutCellsReader> lazy_query = new System.Lazy<PageLayoutCellsReader>();
 
-        class PageLayoutCellsReader : VASS.CellGroups.ReaderSingleRow<PageLayoutCells>
+        class PageLayoutCellsReader : VASS.CellGroups.CellGroupReader<PageLayoutCells>
         {
             public VASS.Query.CellColumn AvenueSizeX { get; set; }
             public VASS.Query.CellColumn AvenueSizeY { get; set; }
@@ -111,34 +111,34 @@ namespace VisioAutomation.Pages
 
             public PageLayoutCellsReader()
             {
-                this.AvenueSizeX = this.query.Columns.Add(VASS.SrcConstants.PageLayoutAvenueSizeX, nameof(this.AvenueSizeX));
-                this.AvenueSizeY = this.query.Columns.Add(VASS.SrcConstants.PageLayoutAvenueSizeY, nameof(this.AvenueSizeY));
-                this.BlockSizeX = this.query.Columns.Add(VASS.SrcConstants.PageLayoutBlockSizeX, nameof(this.BlockSizeX));
-                this.BlockSizeY = this.query.Columns.Add(VASS.SrcConstants.PageLayoutBlockSizeY, nameof(this.BlockSizeY));
-                this.ControlAsInput = this.query.Columns.Add(VASS.SrcConstants.PageLayoutControlAsInput, nameof(this.ControlAsInput));
-                this.DynamicsOff = this.query.Columns.Add(VASS.SrcConstants.PageLayoutDynamicsOff, nameof(this.DynamicsOff));
-                this.EnableGrid = this.query.Columns.Add(VASS.SrcConstants.PageLayoutEnableGrid, nameof(this.EnableGrid));
-                this.LineAdjustFrom = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineAdjustFrom, nameof(this.LineAdjustFrom));
-                this.LineAdjustTo = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineAdjustTo, nameof(this.LineAdjustTo));
-                this.LineJumpCode = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpCode, nameof(this.LineJumpCode));
-                this.LineJumpFactorX = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpFactorX, nameof(this.LineJumpFactorX));
-                this.LineJumpFactorY = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpFactorY, nameof(this.LineJumpFactorY));
-                this.LineJumpStyle = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpStyle, nameof(this.LineJumpStyle));
-                this.LineRouteExt = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineRouteExt, nameof(this.LineRouteExt));
-                this.LineToLineX = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineToLineX, nameof(this.LineToLineX));
-                this.LineToLineY = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineToLineY, nameof(this.LineToLineY));
-                this.LineToNodeX = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineToNodeX, nameof(this.LineToNodeX));
-                this.LineToNodeY = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineToNodeY, nameof(this.LineToNodeY));
-                this.LineJumpDirX = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpDirX, nameof(this.LineJumpDirX));
-                this.LineJumpDirY = this.query.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpDirY, nameof(this.LineJumpDirY));
-                this.ShapeSplit = this.query.Columns.Add(VASS.SrcConstants.PageLayoutShapeSplit, nameof(this.ShapeSplit));
-                this.PlaceDepth = this.query.Columns.Add(VASS.SrcConstants.PageLayoutPlaceDepth, nameof(this.PlaceDepth));
-                this.PlaceFlip = this.query.Columns.Add(VASS.SrcConstants.PageLayoutPlaceFlip, nameof(this.PlaceFlip));
-                this.PlaceStyle = this.query.Columns.Add(VASS.SrcConstants.PageLayoutPlaceStyle, nameof(this.PlaceStyle));
-                this.PlowCode = this.query.Columns.Add(VASS.SrcConstants.PageLayoutPlowCode, nameof(this.PlowCode));
-                this.ResizePage = this.query.Columns.Add(VASS.SrcConstants.PageLayoutResizePage, nameof(this.ResizePage));
-                this.RouteStyle = this.query.Columns.Add(VASS.SrcConstants.PageLayoutRouteStyle, nameof(this.RouteStyle));
-                this.AvoidPageBreaks = this.query.Columns.Add(VASS.SrcConstants.PageLayoutAvoidPageBreaks, nameof(this.AvoidPageBreaks));
+                this.AvenueSizeX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutAvenueSizeX, nameof(this.AvenueSizeX));
+                this.AvenueSizeY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutAvenueSizeY, nameof(this.AvenueSizeY));
+                this.BlockSizeX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutBlockSizeX, nameof(this.BlockSizeX));
+                this.BlockSizeY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutBlockSizeY, nameof(this.BlockSizeY));
+                this.ControlAsInput = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutControlAsInput, nameof(this.ControlAsInput));
+                this.DynamicsOff = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutDynamicsOff, nameof(this.DynamicsOff));
+                this.EnableGrid = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutEnableGrid, nameof(this.EnableGrid));
+                this.LineAdjustFrom = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineAdjustFrom, nameof(this.LineAdjustFrom));
+                this.LineAdjustTo = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineAdjustTo, nameof(this.LineAdjustTo));
+                this.LineJumpCode = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpCode, nameof(this.LineJumpCode));
+                this.LineJumpFactorX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpFactorX, nameof(this.LineJumpFactorX));
+                this.LineJumpFactorY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpFactorY, nameof(this.LineJumpFactorY));
+                this.LineJumpStyle = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpStyle, nameof(this.LineJumpStyle));
+                this.LineRouteExt = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineRouteExt, nameof(this.LineRouteExt));
+                this.LineToLineX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineToLineX, nameof(this.LineToLineX));
+                this.LineToLineY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineToLineY, nameof(this.LineToLineY));
+                this.LineToNodeX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineToNodeX, nameof(this.LineToNodeX));
+                this.LineToNodeY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineToNodeY, nameof(this.LineToNodeY));
+                this.LineJumpDirX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpDirX, nameof(this.LineJumpDirX));
+                this.LineJumpDirY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpDirY, nameof(this.LineJumpDirY));
+                this.ShapeSplit = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutShapeSplit, nameof(this.ShapeSplit));
+                this.PlaceDepth = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutPlaceDepth, nameof(this.PlaceDepth));
+                this.PlaceFlip = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutPlaceFlip, nameof(this.PlaceFlip));
+                this.PlaceStyle = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutPlaceStyle, nameof(this.PlaceStyle));
+                this.PlowCode = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutPlowCode, nameof(this.PlowCode));
+                this.ResizePage = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutResizePage, nameof(this.ResizePage));
+                this.RouteStyle = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutRouteStyle, nameof(this.RouteStyle));
+                this.AvoidPageBreaks = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutAvoidPageBreaks, nameof(this.AvoidPageBreaks));
             }
 
 

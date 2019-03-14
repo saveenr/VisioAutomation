@@ -28,13 +28,13 @@ namespace VisioAutomation.Shapes
         public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsMultiRow(shape, type);
         }
 
         private static readonly System.Lazy<UserDefinedCellCellsReader> lazy_query = new System.Lazy<UserDefinedCellCellsReader>();
@@ -46,14 +46,14 @@ namespace VisioAutomation.Shapes
         }
 
 
-        class UserDefinedCellCellsReader : ReaderMultiRow<UserDefinedCellCells>
+        class UserDefinedCellCellsReader : CellGroupReader<UserDefinedCellCells>
         {
             public SectionQueryColumn Value { get; set; }
             public SectionQueryColumn Prompt { get; set; }
 
             public UserDefinedCellCellsReader()
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
                 this.Value = sec.Columns.Add(SrcConstants.UserDefCellValue, nameof(this.Value));
                 this.Prompt = sec.Columns.Add(SrcConstants.UserDefCellPrompt, nameof(this.Prompt));
             }

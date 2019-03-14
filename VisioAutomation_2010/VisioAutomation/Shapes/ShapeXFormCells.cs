@@ -33,18 +33,18 @@ namespace VisioAutomation.Shapes
         public static List<ShapeXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static ShapeXFormCells GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<ShapeXFormCellsReader> lazy_query = new System.Lazy<ShapeXFormCellsReader>();
 
-        class ShapeXFormCellsReader : ReaderSingleRow<ShapeXFormCells>
+        class ShapeXFormCellsReader : CellGroupReader<ShapeXFormCells>
         {
             public CellColumn Width { get; set; }
             public CellColumn Height { get; set; }
@@ -56,13 +56,13 @@ namespace VisioAutomation.Shapes
 
             public ShapeXFormCellsReader()
             {
-                this.PinX = this.query.Columns.Add(SrcConstants.XFormPinX, nameof(this.PinX));
-                this.PinY = this.query.Columns.Add(SrcConstants.XFormPinY, nameof(this.PinY));
-                this.LocPinX = this.query.Columns.Add(SrcConstants.XFormLocPinX, nameof(this.LocPinX));
-                this.LocPinY = this.query.Columns.Add(SrcConstants.XFormLocPinY, nameof(this.LocPinY));
-                this.Width = this.query.Columns.Add(SrcConstants.XFormWidth, nameof(this.Width));
-                this.Height = this.query.Columns.Add(SrcConstants.XFormHeight, nameof(this.Height));
-                this.Angle = this.query.Columns.Add(SrcConstants.XFormAngle, nameof(this.Angle));
+                this.PinX = this.query_singlerow.Columns.Add(SrcConstants.XFormPinX, nameof(this.PinX));
+                this.PinY = this.query_singlerow.Columns.Add(SrcConstants.XFormPinY, nameof(this.PinY));
+                this.LocPinX = this.query_singlerow.Columns.Add(SrcConstants.XFormLocPinX, nameof(this.LocPinX));
+                this.LocPinY = this.query_singlerow.Columns.Add(SrcConstants.XFormLocPinY, nameof(this.LocPinY));
+                this.Width = this.query_singlerow.Columns.Add(SrcConstants.XFormWidth, nameof(this.Width));
+                this.Height = this.query_singlerow.Columns.Add(SrcConstants.XFormHeight, nameof(this.Height));
+                this.Angle = this.query_singlerow.Columns.Add(SrcConstants.XFormAngle, nameof(this.Angle));
             }
 
             public override ShapeXFormCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

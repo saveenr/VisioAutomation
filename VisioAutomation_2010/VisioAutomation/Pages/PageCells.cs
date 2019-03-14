@@ -37,12 +37,12 @@ namespace VisioAutomation.Pages
         public static PageRulerAndGridCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<PageRulerAndGridCellsReader> lazy_query = new System.Lazy<PageRulerAndGridCellsReader>();
 
-        class PageRulerAndGridCellsReader : VASS.CellGroups.ReaderSingleRow<PageRulerAndGridCells>
+        class PageRulerAndGridCellsReader : VASS.CellGroups.CellGroupReader<PageRulerAndGridCells>
         {
             public VASS.Query.CellColumn XGridDensity { get; set; }
             public VASS.Query.CellColumn XGridOrigin { get; set; }
@@ -57,16 +57,16 @@ namespace VisioAutomation.Pages
 
             public PageRulerAndGridCellsReader()
             {
-                this.XGridDensity = this.query.Columns.Add(VASS.SrcConstants.XGridDensity, nameof(this.XGridDensity));
-                this.XGridOrigin = this.query.Columns.Add(VASS.SrcConstants.XGridOrigin, nameof(this.XGridOrigin));
-                this.XGridSpacing = this.query.Columns.Add(VASS.SrcConstants.XGridSpacing, nameof(this.XGridSpacing));
-                this.XRulerDensity = this.query.Columns.Add(VASS.SrcConstants.XRulerDensity, nameof(this.XRulerDensity));
-                this.XRulerOrigin = this.query.Columns.Add(VASS.SrcConstants.XRulerOrigin, nameof(this.XRulerOrigin));
-                this.YGridDensity = this.query.Columns.Add(VASS.SrcConstants.YGridDensity, nameof(this.YGridDensity));
-                this.YGridOrigin = this.query.Columns.Add(VASS.SrcConstants.YGridOrigin, nameof(this.YGridOrigin));
-                this.YGridSpacing = this.query.Columns.Add(VASS.SrcConstants.YGridSpacing, nameof(this.YGridSpacing));
-                this.YRulerDensity = this.query.Columns.Add(VASS.SrcConstants.YRulerDensity, nameof(this.YRulerDensity));
-                this.YRulerOrigin = this.query.Columns.Add(VASS.SrcConstants.YRulerOrigin, nameof(this.YRulerOrigin));
+                this.XGridDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.XGridDensity, nameof(this.XGridDensity));
+                this.XGridOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.XGridOrigin, nameof(this.XGridOrigin));
+                this.XGridSpacing = this.query_singlerow.Columns.Add(VASS.SrcConstants.XGridSpacing, nameof(this.XGridSpacing));
+                this.XRulerDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.XRulerDensity, nameof(this.XRulerDensity));
+                this.XRulerOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.XRulerOrigin, nameof(this.XRulerOrigin));
+                this.YGridDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.YGridDensity, nameof(this.YGridDensity));
+                this.YGridOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.YGridOrigin, nameof(this.YGridOrigin));
+                this.YGridSpacing = this.query_singlerow.Columns.Add(VASS.SrcConstants.YGridSpacing, nameof(this.YGridSpacing));
+                this.YRulerDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.YRulerDensity, nameof(this.YRulerDensity));
+                this.YRulerOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.YRulerOrigin, nameof(this.YRulerOrigin));
             }
 
             public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

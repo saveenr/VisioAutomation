@@ -64,19 +64,19 @@ namespace VisioAutomation.Text
         public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<CharacterFormatCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsMultiRow(shape, type);
         }
 
         private static readonly System.Lazy<CharacterFormatCellsReader> lazy_query = new System.Lazy<CharacterFormatCellsReader>();
 
 
-        class CharacterFormatCellsReader : ReaderMultiRow<Text.CharacterFormatCells>
+        class CharacterFormatCellsReader : CellGroupReader<Text.CharacterFormatCells>
         {
             public SectionQueryColumn Font { get; set; }
             public SectionQueryColumn Style { get; set; }
@@ -103,7 +103,7 @@ namespace VisioAutomation.Text
 
             public CharacterFormatCellsReader()
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
 
                 this.Color = sec.Columns.Add(SrcConstants.CharColor, nameof(this.Color));
                 this.ColorTransparency = sec.Columns.Add(SrcConstants.CharColorTransparency, nameof(this.ColorTransparency));

@@ -47,12 +47,12 @@ namespace VisioAutomation.Pages
         public static PagePrintCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<PagePrintCellsReader> lazy_query = new System.Lazy<PagePrintCellsReader>();
 
-        class PagePrintCellsReader : VASS.CellGroups.ReaderSingleRow<PagePrintCells>
+        class PagePrintCellsReader : VASS.CellGroups.CellGroupReader<PagePrintCells>
         {
             public VASS.Query.CellColumn LeftMargin { get; set; }
             public VASS.Query.CellColumn CenterX { get; set; }
@@ -72,21 +72,21 @@ namespace VisioAutomation.Pages
 
             public PagePrintCellsReader()
             {
-                this.LeftMargin = this.query.Columns.Add(VASS.SrcConstants.PrintLeftMargin, nameof(this.LeftMargin));
-                this.CenterX = this.query.Columns.Add(VASS.SrcConstants.PrintCenterX, nameof(this.CenterX));
-                this.CenterY = this.query.Columns.Add(VASS.SrcConstants.PrintCenterY, nameof(this.CenterY));
-                this.OnPage = this.query.Columns.Add(VASS.SrcConstants.PrintOnPage, nameof(this.OnPage));
-                this.BottomMargin = this.query.Columns.Add(VASS.SrcConstants.PrintBottomMargin, nameof(this.BottomMargin));
-                this.RightMargin = this.query.Columns.Add(VASS.SrcConstants.PrintRightMargin, nameof(this.RightMargin));
-                this.PagesX = this.query.Columns.Add(VASS.SrcConstants.PrintPagesX, nameof(this.PagesX));
-                this.PagesY = this.query.Columns.Add(VASS.SrcConstants.PrintPagesY, nameof(this.PagesY));
-                this.TopMargin = this.query.Columns.Add(VASS.SrcConstants.PrintTopMargin, nameof(this.TopMargin));
-                this.PaperKind = this.query.Columns.Add(VASS.SrcConstants.PrintPaperKind, nameof(this.PaperKind));
-                this.Grid = this.query.Columns.Add(VASS.SrcConstants.PrintGrid, nameof(this.Grid));
-                this.PageOrientation = this.query.Columns.Add(VASS.SrcConstants.PrintPageOrientation, nameof(this.PageOrientation));
-                this.ScaleX = this.query.Columns.Add(VASS.SrcConstants.PrintScaleX, nameof(this.ScaleX));
-                this.ScaleY = this.query.Columns.Add(VASS.SrcConstants.PrintScaleY, nameof(this.ScaleY));
-                this.PaperSource = this.query.Columns.Add(VASS.SrcConstants.PrintPaperSource, nameof(this.PaperSource));
+                this.LeftMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintLeftMargin, nameof(this.LeftMargin));
+                this.CenterX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintCenterX, nameof(this.CenterX));
+                this.CenterY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintCenterY, nameof(this.CenterY));
+                this.OnPage = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintOnPage, nameof(this.OnPage));
+                this.BottomMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintBottomMargin, nameof(this.BottomMargin));
+                this.RightMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintRightMargin, nameof(this.RightMargin));
+                this.PagesX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPagesX, nameof(this.PagesX));
+                this.PagesY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPagesY, nameof(this.PagesY));
+                this.TopMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintTopMargin, nameof(this.TopMargin));
+                this.PaperKind = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPaperKind, nameof(this.PaperKind));
+                this.Grid = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintGrid, nameof(this.Grid));
+                this.PageOrientation = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPageOrientation, nameof(this.PageOrientation));
+                this.ScaleX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintScaleX, nameof(this.ScaleX));
+                this.ScaleY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintScaleY, nameof(this.ScaleY));
+                this.PaperSource = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPaperSource, nameof(this.PaperSource));
             }
 
             public override PagePrintCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

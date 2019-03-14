@@ -47,20 +47,20 @@ namespace VisioAutomation.Text
         public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<ParagraphFormatCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsMultiRow(shape, type);
         }
 
 
         private static readonly System.Lazy<ParagraphFormatCellsReader> lazy_query = new System.Lazy<ParagraphFormatCellsReader>();
 
 
-        class ParagraphFormatCellsReader : ReaderMultiRow<Text.ParagraphFormatCells>
+        class ParagraphFormatCellsReader : CellGroupReader<Text.ParagraphFormatCells>
         {
             public SectionQueryColumn Bullet { get; set; }
             public SectionQueryColumn BulletFont { get; set; }
@@ -79,7 +79,7 @@ namespace VisioAutomation.Text
 
             public ParagraphFormatCellsReader()
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionParagraph);
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionParagraph);
                 this.Bullet = sec.Columns.Add(SrcConstants.ParaBullet, nameof(this.Bullet));
                 this.BulletFont = sec.Columns.Add(SrcConstants.ParaBulletFont, nameof(this.BulletFont));
                 this.BulletFontSize = sec.Columns.Add(SrcConstants.ParaBulletFontSize, nameof(this.BulletFontSize));

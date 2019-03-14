@@ -29,18 +29,18 @@ namespace VisioAutomation.Shapes
         public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsMultiRow(shape, type);
         }
 
         private static readonly System.Lazy<ConnectionPointCellsReader> lazy_query = new System.Lazy<ConnectionPointCellsReader>();
 
-        class ConnectionPointCellsReader : ReaderMultiRow<ConnectionPointCells>
+        class ConnectionPointCellsReader : CellGroupReader<ConnectionPointCells>
         {
             public SectionQueryColumn DirX { get; set; }
             public SectionQueryColumn DirY { get; set; }
@@ -50,7 +50,7 @@ namespace VisioAutomation.Shapes
 
             public ConnectionPointCellsReader()
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
 
                 this.DirX = sec.Columns.Add(SrcConstants.ConnectionPointDirX, nameof(this.DirX));
                 this.DirY = sec.Columns.Add(SrcConstants.ConnectionPointDirY, nameof(this.DirY));

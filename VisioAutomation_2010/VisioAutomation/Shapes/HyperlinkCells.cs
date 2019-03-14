@@ -37,19 +37,19 @@ namespace VisioAutomation.Shapes
         public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<HyperlinkCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsMultiRow(shape, type);
         }
 
         private static readonly System.Lazy<HyperlinkCellsReader> lazy_query = new System.Lazy<HyperlinkCellsReader>();
 
 
-        class HyperlinkCellsReader : ReaderMultiRow<HyperlinkCells>
+        class HyperlinkCellsReader : CellGroupReader<HyperlinkCells>
         {
 
             public SectionQueryColumn Address { get; set; }
@@ -64,7 +64,7 @@ namespace VisioAutomation.Shapes
 
             public HyperlinkCellsReader()
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionHyperlink);
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionHyperlink);
 
                 this.Address = sec.Columns.Add(SrcConstants.HyperlinkAddress, nameof(this.Address));
                 this.Default = sec.Columns.Add(SrcConstants.HyperlinkDefault, nameof(this.Default));

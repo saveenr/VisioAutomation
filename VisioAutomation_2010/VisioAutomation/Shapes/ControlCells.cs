@@ -36,18 +36,18 @@ namespace VisioAutomation.Shapes
         public static List<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            return query.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<ControlCells> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            return query.GetCellsMultiRow(shape, type);
         }
         
         private static readonly System.Lazy<ControlCellsReader> lazy_query = new System.Lazy<ControlCellsReader>();
 
-        class ControlCellsReader : ReaderMultiRow<ControlCells>
+        class ControlCellsReader : CellGroupReader<ControlCells>
         {
             public SectionQueryColumn CanGlue { get; set; }
             public SectionQueryColumn Tip { get; set; }
@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
 
             public ControlCellsReader()
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionControls);
+                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionControls);
 
                 this.CanGlue = sec.Columns.Add(SrcConstants.ControlCanGlue, nameof(this.CanGlue));
                 this.Tip = sec.Columns.Add(SrcConstants.ControlTip, nameof(this.Tip));
