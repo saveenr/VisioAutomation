@@ -102,31 +102,37 @@ namespace VisioAutomation.Shapes
 
                 var cells = new ShapeFormatCells();
                 var cols = this.query_singlerow.Columns;
-                cells.FillBackground = row[cols[nameof(ShapeFormatCells.FillBackground)].Ordinal];
-                cells.FillBackgroundTransparency= row[cols[nameof(ShapeFormatCells.FillBackgroundTransparency)].Ordinal];
-                cells.FillForeground = row[cols[nameof(ShapeFormatCells.FillForeground)].Ordinal];
-                cells.FillForegroundTransparency = row[cols[nameof(ShapeFormatCells.FillForegroundTransparency)].Ordinal];
-                cells.FillPattern = row[cols[nameof(ShapeFormatCells.FillPattern)].Ordinal];
-                cells.FillShadowObliqueAngle = row[cols[nameof(ShapeFormatCells.FillShadowObliqueAngle)].Ordinal];
-                cells.FillShadowOffsetX = row[cols[nameof(ShapeFormatCells.FillShadowOffsetX)].Ordinal];
-                cells.FillShadowOffsetY = row[cols[nameof(ShapeFormatCells.FillShadowOffsetY)].Ordinal];
-                cells.FillShadowScaleFactor = row[cols[nameof(ShapeFormatCells.FillShadowScaleFactor)].Ordinal];
-                cells.FillShadowType = row[cols[nameof(ShapeFormatCells.FillShadowType)].Ordinal];
-                cells.FillShadowBackground = row[cols[nameof(ShapeFormatCells.FillShadowBackground)].Ordinal];
-                cells.FillShadowBackgroundTransparency = row[cols[nameof(ShapeFormatCells.FillShadowBackgroundTransparency)].Ordinal];
-                cells.FillShadowForeground = row[cols[nameof(ShapeFormatCells.FillShadowForeground)].Ordinal];
-                cells.FillShadowForegroundTransparency = row[cols[nameof(ShapeFormatCells.FillShadowForegroundTransparency)].Ordinal];
-                cells.FillShadowPattern = row[cols[nameof(ShapeFormatCells.FillShadowPattern)].Ordinal];
-                cells.LineBeginArrow = row[cols[nameof(ShapeFormatCells.LineBeginArrow)].Ordinal];
-                cells.LineBeginArrowSize = row[cols[nameof(ShapeFormatCells.LineBeginArrowSize)].Ordinal];
-                cells.LineEndArrow = row[cols[nameof(ShapeFormatCells.LineEndArrow)].Ordinal];
-                cells.LineEndArrowSize = row[cols[nameof(ShapeFormatCells.LineEndArrowSize)].Ordinal];
-                cells.LineCap = row[cols[nameof(ShapeFormatCells.LineCap)].Ordinal];
-                cells.LineColor = row[cols[nameof(ShapeFormatCells.LineColor)].Ordinal];
-                cells.LineColorTransparency = row[cols[nameof(ShapeFormatCells.LineColorTransparency)].Ordinal];
-                cells.LinePattern = row[cols[nameof(ShapeFormatCells.LinePattern)].Ordinal];
-                cells.LineWeight = row[cols[nameof(ShapeFormatCells.LineWeight)].Ordinal];
-                cells.LineRounding = row[cols[nameof(ShapeFormatCells.LineRounding)].Ordinal];
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.FillBackground = getcellvalue(nameof(ShapeFormatCells.FillBackground));
+                cells.FillBackgroundTransparency= getcellvalue(nameof(ShapeFormatCells.FillBackgroundTransparency));
+                cells.FillForeground = getcellvalue(nameof(ShapeFormatCells.FillForeground));
+                cells.FillForegroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillForegroundTransparency));
+                cells.FillPattern = getcellvalue(nameof(ShapeFormatCells.FillPattern));
+                cells.FillShadowObliqueAngle = getcellvalue(nameof(ShapeFormatCells.FillShadowObliqueAngle));
+                cells.FillShadowOffsetX = getcellvalue(nameof(ShapeFormatCells.FillShadowOffsetX));
+                cells.FillShadowOffsetY = getcellvalue(nameof(ShapeFormatCells.FillShadowOffsetY));
+                cells.FillShadowScaleFactor = getcellvalue(nameof(ShapeFormatCells.FillShadowScaleFactor));
+                cells.FillShadowType = getcellvalue(nameof(ShapeFormatCells.FillShadowType));
+                cells.FillShadowBackground = getcellvalue(nameof(ShapeFormatCells.FillShadowBackground));
+                cells.FillShadowBackgroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillShadowBackgroundTransparency));
+                cells.FillShadowForeground = getcellvalue(nameof(ShapeFormatCells.FillShadowForeground));
+                cells.FillShadowForegroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillShadowForegroundTransparency));
+                cells.FillShadowPattern = getcellvalue(nameof(ShapeFormatCells.FillShadowPattern));
+                cells.LineBeginArrow = getcellvalue(nameof(ShapeFormatCells.LineBeginArrow));
+                cells.LineBeginArrowSize = getcellvalue(nameof(ShapeFormatCells.LineBeginArrowSize));
+                cells.LineEndArrow = getcellvalue(nameof(ShapeFormatCells.LineEndArrow));
+                cells.LineEndArrowSize = getcellvalue(nameof(ShapeFormatCells.LineEndArrowSize));
+                cells.LineCap = getcellvalue(nameof(ShapeFormatCells.LineCap));
+                cells.LineColor = getcellvalue(nameof(ShapeFormatCells.LineColor));
+                cells.LineColorTransparency = getcellvalue(nameof(ShapeFormatCells.LineColorTransparency));
+                cells.LinePattern = getcellvalue(nameof(ShapeFormatCells.LinePattern));
+                cells.LineWeight = getcellvalue(nameof(ShapeFormatCells.LineWeight));
+                cells.LineRounding = getcellvalue(nameof(ShapeFormatCells.LineRounding));
                 return cells;
             }
 
