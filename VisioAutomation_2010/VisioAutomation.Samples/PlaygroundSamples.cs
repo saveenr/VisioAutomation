@@ -75,8 +75,8 @@ namespace VisioAutomationSamples
                 format.LinePattern = 0;
                 format.FillForegroundTransparency = 0.5;
 
-                xfrm.SetFormulas(writer, shapeid);
-                format.SetFormulas(writer, shapeid);
+                writer.SetFormulas(shapeid, xfrm);
+                writer.SetFormulas(shapeid, format);
             }
 
             writer.Commit(page);
@@ -142,7 +142,8 @@ namespace VisioAutomationSamples
                 format.FillBackground = color2_formula;
                 format.LinePattern = 0;
                 format.LineWeight = 0;
-                format.SetFormulas(writer, shapeid);
+
+                writer.SetFormulas(shapeid, format);
 
                 n++;
             }

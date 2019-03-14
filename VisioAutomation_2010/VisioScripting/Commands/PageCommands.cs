@@ -269,7 +269,7 @@ namespace VisioScripting.Commands
                 foreach (var page in pages)
                 {
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                    cells.SetFormulas(writer);
+                    writer.SetFormulas(cells);
                     writer.BlastGuards = true;
                     writer.Commit(page);
                 }

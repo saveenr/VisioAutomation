@@ -22,9 +22,8 @@ namespace VisioAutomation.Models.Layouts.Container
 
             writer.SetFormulas(shapeid_label, this.ParagraphFormatCells, 0);
             writer.SetFormulas(shapeid_label, this.CharacterFormatCells, 0);
-
-            this.ShapeFormatCells.SetFormulas(writer, shapeid_box);
-            this.TextBlockCells.SetFormulas(writer, shapeid_label);
+            writer.SetFormulas(shapeid_box, this.ShapeFormatCells);
+            writer.SetFormulas(shapeid_box, this.TextBlockCells);
         }
     }
 }

@@ -42,8 +42,8 @@ namespace VisioAutomation.Models.Documents.Forms
             page_print_cells.TopMargin = formpage.PageMargin.Top;
             page_print_cells.BottomMargin = formpage.PageMargin.Bottom;
 
-            page_fmt_cells.SetFormulas(writer);
-            page_fmt_cells.SetFormulas(writer);
+            writer.SetFormulas(page_fmt_cells);
+            writer.SetFormulas(page_print_cells);
 
             writer.Commit(pagesheet);
 
@@ -102,8 +102,8 @@ namespace VisioAutomation.Models.Documents.Forms
             var writer = new SidSrcWriter();
             foreach (var block in this.Blocks)
             {
-                block.FormatCells.SetFormulas(writer, (short)block.VisioShapeID);
-                block.TextBlockCells.SetFormulas(writer, (short)block.VisioShapeID);
+                writer.SetFormulas((short)block.VisioShapeID , block.FormatCells);
+                writer.SetFormulas((short)block.VisioShapeID, block.TextBlockCells);
 
                 writer.SetFormulas((short)block.VisioShapeID, block.ParagraphFormatCells, 0);
                 writer.SetFormulas((short)block.VisioShapeID, block.CharacterFormatCells, 0);

@@ -28,7 +28,8 @@ namespace VisioScripting.Commands
                 else
                 {
                     var cells_sr = (VisioAutomation.ShapeSheet.CellGroups.CellGroupSingleRow)cells;
-                    cells_sr.SetFormulas(writer, (short)shape_id);
+                    writer.SetFormulas((short)shape_id, cells_sr);
+
                 }
             }
 
