@@ -223,11 +223,7 @@ namespace VisioAutomation.Pages
         {
             public PageRulerAndGridCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                var temp_cells = new PageRulerAndGridCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
+                InitializeQuery();
             }
 
             public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
@@ -267,11 +263,7 @@ namespace VisioAutomation.Pages
         {
             public PageFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                var temp_cells = new PageFormatCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
+                InitializeQuery();
             }
 
             public override PageFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
@@ -315,11 +307,7 @@ namespace VisioAutomation.Pages
         {
             public PageLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                var temp_cells = new PageLayoutCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
+                InitializeQuery();
             }
 
 
@@ -378,11 +366,7 @@ namespace VisioAutomation.Pages
         {
             public PagePrintCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                var temp_cells = new PagePrintCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
+                InitializeQuery();
             }
 
             public override PagePrintCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

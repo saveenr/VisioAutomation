@@ -203,7 +203,7 @@ namespace VisioAutomation.Text
             public CharacterFormatCellsReader() :
                 base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-                MultiRowInit();
+                InitializeQuery();
             }
 
             public override Text.CharacterFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
@@ -265,7 +265,7 @@ namespace VisioAutomation.Text
         {
             public ParagraphFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-                MultiRowInit();
+                InitializeQuery();
             }
 
             public override Text.ParagraphFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
@@ -321,12 +321,7 @@ namespace VisioAutomation.Text
 
             public TextBlockCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-
-                var temp_cells = new TextBlockCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
+                InitializeQuery();
             }
 
             public override Text.TextBlockCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
@@ -372,11 +367,7 @@ namespace VisioAutomation.Text
         {
             public TextXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                var temp_cells = new TextXFormCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
+                InitializeQuery();
             }
 
             public override Text.TextXFormCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)

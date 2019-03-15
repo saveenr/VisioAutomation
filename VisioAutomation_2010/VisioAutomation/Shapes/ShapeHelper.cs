@@ -88,13 +88,7 @@ namespace VisioAutomation.Shapes
  
             public ShapeFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-
-                var temp_cells = new ShapeFormatCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
-
+                InitializeQuery();
             }
 
             public override ShapeFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
@@ -158,11 +152,7 @@ namespace VisioAutomation.Shapes
 
             public ShapeLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                var temp_cells = new ShapeLayoutCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
+                InitializeQuery();
             }
 
             public override ShapeLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
@@ -217,11 +207,7 @@ namespace VisioAutomation.Shapes
         {
             public ShapeXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                var temp_cells = new ShapeXFormCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
-                }
+                InitializeQuery();
             }
 
             public override ShapeXFormCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

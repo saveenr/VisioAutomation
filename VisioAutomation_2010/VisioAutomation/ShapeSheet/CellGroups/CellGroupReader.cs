@@ -28,14 +28,28 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.query_multirow = query;
         }
 
-        protected void MultiRowInit()
+        protected void InitializeQuery()
         {
             var temp_cells = new TGroup();
-            var first_cell_metadata = temp_cells.CellMetadata.First();
-            var sec = this.query_multirow.SectionQueries.Add((IVisio.VisSectionIndices)first_cell_metadata.Src.Section);
-            foreach (var pair in temp_cells.CellMetadata)
+            if (this.query_singlerow!=null)
             {
-                sec.Columns.Add(pair.Src, pair.Name);
+                foreach (var pair in temp_cells.CellMetadata)
+                {
+                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
+                }
+            }
+            else if (this.query_multirow!=null)
+            {
+                var first_cell_metadata = temp_cells.CellMetadata.First();
+                var sec = this.query_multirow.SectionQueries.Add((IVisio.VisSectionIndices)first_cell_metadata.Src.Section);
+                foreach (var pair in temp_cells.CellMetadata)
+                {
+                    sec.Columns.Add(pair.Src, pair.Name);
+                }
+            }
+            else
+            {
+                throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
         }
         public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row);

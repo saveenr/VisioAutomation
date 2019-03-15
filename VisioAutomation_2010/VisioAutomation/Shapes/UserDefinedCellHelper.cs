@@ -309,7 +309,7 @@ namespace VisioAutomation.Shapes
 
             public UserDefinedCellCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-                MultiRowInit();
+                InitializeQuery();
             }
 
             

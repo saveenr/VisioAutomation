@@ -325,7 +325,7 @@ namespace VisioAutomation.Shapes
             public CustomPropertyCellsReader()
                 : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-                MultiRowInit();
+                InitializeQuery();
             }
 
             public override CustomPropertyCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
