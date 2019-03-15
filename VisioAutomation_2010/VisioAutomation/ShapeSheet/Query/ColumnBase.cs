@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public readonly ShapeSheet.Src Src;
 
-        protected ColumnBase(int ordinal, string name, ShapeSheet.Src src) 
+        public ColumnBase(int ordinal, string name, ShapeSheet.Src src) 
         {
             if (string.IsNullOrEmpty(name))
             {

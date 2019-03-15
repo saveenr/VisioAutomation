@@ -289,7 +289,7 @@ namespace VisioAutomation.ShapeSheet.Query
                             var src = new VisioAutomation.ShapeSheet.Src(
                                 (short)section_info.Query.SectionIndex,
                                 (short)rowindex,
-                                col.CellIndex);
+                                col.Src.Cell);
                             var sidsrc = new VisioAutomation.ShapeSheet.SidSrc((short)shapeid, src);
                             var cellinfo = new Internal.QueryCellInfo(sidsrc, col);
                             yield return cellinfo;

@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         protected IList<T> _items;
         protected Dictionary<string, T> map_name_to_item;
-        protected Dictionary<ShapeSheet.Src, CellColumn> dic_src_to_col;
+        protected Dictionary<ShapeSheet.Src, T> dic_src_to_col;
 
         internal ColumnListBase() : this(0)
         {
@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this.dic_src_to_col == null)
             {
-                this.dic_src_to_col = new Dictionary<ShapeSheet.Src, CellColumn>();
+                this.dic_src_to_col = new Dictionary<ShapeSheet.Src, T>();
             }
 
             if (this.dic_src_to_col.ContainsKey(src))

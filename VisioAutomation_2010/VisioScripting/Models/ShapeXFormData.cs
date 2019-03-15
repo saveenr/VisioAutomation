@@ -15,12 +15,12 @@ namespace VisioScripting.Models
         public double Width;
         public double Height;
 
-        private static CellColumn ColPinX;
-        private static CellColumn ColPinY;
-        private static CellColumn ColLocPinX;
-        private static CellColumn ColLocPinY;
-        private static CellColumn ColWidth;
-        private static CellColumn ColHeight;
+        private static ColumnBase ColPinX;
+        private static ColumnBase ColPinY;
+        private static ColumnBase ColLocPinX;
+        private static ColumnBase ColLocPinY;
+        private static ColumnBase ColWidth;
+        private static ColumnBase ColHeight;
         private static CellQuery query;
 
         public static List<ShapeXFormData> Get(IVisio.Page page, TargetShapeIDs target)
