@@ -128,7 +128,6 @@
     <Compile Include="ShapeSheet\Query\ColumnListBase.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBase.cs" />
-    <Compile Include="ShapeSheet\Query\SectionQueryColumnList.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryOutputRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
@@ -155,7 +154,6 @@
     <Compile Include="ShapeSheet\Query\SectionInfo.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryOutput.cs" />
-    <Compile Include="ShapeSheet\Query\CellColumnList.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryList.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
