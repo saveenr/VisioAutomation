@@ -42,6 +42,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return section_query;
         }
 
+        public SectionQuery Add(Src src)
+        {
+            return this.Add((IVisio.VisSectionIndices)src.Section);
+        }
+
         public int Count => this._subqueries.Count;
     }
 }

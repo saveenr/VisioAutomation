@@ -20,35 +20,30 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected CellGroupBuilder(CellGroupBuilderType type)
         {
             var temp_cells = new TGroup();
+            Query.ColumnList cols;
 
             this.Type = type;
             if (type == CellGroupBuilderType.SingleRow)
             {
                 this.query_cells_singlerow = new Query.CellQuery();
-                var cols = this.query_cells_singlerow.Columns;
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    cols.Add(pair.Src, pair.Name);
-                }
-
+                cols = this.query_cells_singlerow.Columns;
             }
             else if (type == CellGroupBuilderType.MultiRow)
-
             {
                 this.query_sections_multirow = new Query.SectionsQuery();
-
-                var first_cell_metadata = temp_cells.CellMetadata.First();
-                var sec = this.query_sections_multirow.SectionQueries.Add((IVisio.VisSectionIndices)first_cell_metadata.Src.Section);
-                var cols = sec.Columns;
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    cols.Add(pair.Src, pair.Name);
-                }
+                var query_section = this.query_sections_multirow.SectionQueries.Add(temp_cells.CellMetadata.First().Src);
+                cols = query_section.Columns;
             }
             else
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
+
+            foreach (var pair in temp_cells.CellMetadata)
+            {
+                cols.Add(pair.Src, pair.Name);
+            }
+
         }
 
         public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row);
