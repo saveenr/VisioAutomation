@@ -2,7 +2,7 @@
 {
     public class SectionQueryColumn : ColumnBase
     {
-        public short CellIndex;
+        public readonly short CellIndex;
 
         internal SectionQueryColumn(int ordinal, short cell, string name) :
             base(ordinal, name)

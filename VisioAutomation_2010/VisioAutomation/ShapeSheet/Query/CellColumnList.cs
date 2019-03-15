@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellColumnList : ColumnListBase<CellColumn>
     {
-        private Dictionary<ShapeSheet.Src,CellColumn> items;
+        private Dictionary<ShapeSheet.Src,CellColumn> dic_src_to_col;
 
         internal CellColumnList() :
             this(0)
@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
         }
 
-        public CellColumn this[VisioAutomation.ShapeSheet.Src src] => this.items[src];
+        public CellColumn this[VisioAutomation.ShapeSheet.Src src] => this.dic_src_to_col[src];
 
         public CellColumn Add(ShapeSheet.Src src, string name)
         {
@@ -33,18 +33,18 @@ namespace VisioAutomation.ShapeSheet.Query
             this._items.Add(col);
 
             this.map_name_to_item[norm_name] = col;
-            this.items.Add(src,col);
+            this.dic_src_to_col.Add(src,col);
             return col;
         }
 
         private void check_deplicate_src(Src src)
         {
-            if (this.items == null)
+            if (this.dic_src_to_col == null)
             {
-                this.items = new Dictionary<ShapeSheet.Src,CellColumn>();
+                this.dic_src_to_col = new Dictionary<ShapeSheet.Src,CellColumn>();
             }
 
-            if (this.items.ContainsKey(src))
+            if (this.dic_src_to_col.ContainsKey(src))
             {
                 string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Src),src.Section, src.Row, src.Cell);
                 throw new System.ArgumentException(msg);

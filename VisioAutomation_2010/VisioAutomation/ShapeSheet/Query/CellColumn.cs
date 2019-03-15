@@ -2,7 +2,7 @@
 {
     public class CellColumn : ColumnBase
     {
-        public ShapeSheet.Src Src { get; protected set; }
+        public readonly ShapeSheet.Src Src;
 
         internal CellColumn(int ordinal, ShapeSheet.Src src, string name) :
             base(ordinal, name)

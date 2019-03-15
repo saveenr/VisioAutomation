@@ -6,7 +6,6 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         public string Name { get; protected set; }
         public int Ordinal { get; protected set; }
-
         protected ColumnBase(int ordinal, string name)
         {
             if (string.IsNullOrEmpty(name))

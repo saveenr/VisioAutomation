@@ -4,7 +4,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionQueryColumnList : ColumnListBase<SectionQueryColumn>
     {
-        private HashSet<short> _cellindex_set;
+        private HashSet<short> hs_cellindex;
 
         internal SectionQueryColumnList() :
             base(0)
@@ -20,7 +20,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.Add(src.Cell, sname);
         }
 
-        public SectionQueryColumn Add(short cellindex, string sname)
+        private SectionQueryColumn Add(short cellindex, string sname)
         {
             check_duplicate_cellindex(cellindex);
             string norm_name = this.normalize_name(sname);
@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int ordinal = this._items.Count;
             var col = new SectionQueryColumn(ordinal, cellindex, norm_name);
             this._items.Add(col);
-            this._cellindex_set.Add(cellindex);
+            this.hs_cellindex.Add(cellindex);
             this.map_name_to_item[norm_name] = col;
 
             return col;
@@ -37,12 +37,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private void check_duplicate_cellindex(short cellindex)
         {
-            if (this._cellindex_set == null)
+            if (this.hs_cellindex == null)
             {
-                this._cellindex_set = new HashSet<short>();
+                this.hs_cellindex = new HashSet<short>();
             }
 
-            if (this._cellindex_set.Contains(cellindex))
+            if (this.hs_cellindex.Contains(cellindex))
             {
                 string msg = string.Format("Duplicate Cell Index: {0}", cellindex);
                 throw new System.ArgumentException(msg);
