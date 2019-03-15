@@ -90,7 +90,7 @@ namespace VisioAutomation.Shapes
             {
 
                 var temp_cells = new ShapeFormatCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }
@@ -159,7 +159,7 @@ namespace VisioAutomation.Shapes
             public ShapeLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 var temp_cells = new ShapeLayoutCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }
@@ -218,7 +218,7 @@ namespace VisioAutomation.Shapes
             public ShapeXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 var temp_cells = new ShapeXFormCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }

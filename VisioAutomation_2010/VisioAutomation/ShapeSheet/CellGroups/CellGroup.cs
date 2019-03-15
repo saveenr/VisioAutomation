@@ -8,13 +8,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             get
             {
-                foreach (var pair in this.NamedSrcValuePairs)
+                foreach (var pair in this.CellMetadata)
                 {
                     yield return new SrcValuePair(pair.Src, pair.Value);
                 }
             }
         }
-        public virtual IEnumerable<NamedSrcValuePair> NamedSrcValuePairs { get; }
+        public virtual IEnumerable<CellMetadataItem> CellMetadata { get; }
         public IEnumerable<SrcValuePair> SrcValuePairs_NewRow(short row)
         {
             foreach (var pair in this.SrcValuePairs)

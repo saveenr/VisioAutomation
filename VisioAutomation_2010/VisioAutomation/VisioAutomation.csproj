@@ -98,6 +98,8 @@
     <Compile Include="Pages\PageLayoutCells.cs" />
     <Compile Include="Pages\PagePrintCells.cs" />
     <Compile Include="Pages\PageCells.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
+    <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
     <Compile Include="ShapeSheet\CellValueType.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryOutput.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryOutputList.cs" />

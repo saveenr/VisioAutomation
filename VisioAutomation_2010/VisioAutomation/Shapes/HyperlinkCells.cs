@@ -16,19 +16,19 @@ namespace VisioAutomation.Shapes
         public CellValueLiteral Default { get; set; }
         public CellValueLiteral Invisible { get; set; }
 
-        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<CellMetadataItem> CellMetadata
         {
             get
             {
-                yield return NamedSrcValuePair.Create(nameof(this.Address), SrcConstants.HyperlinkAddress, this.Address);
-                yield return NamedSrcValuePair.Create(nameof(this.Description), SrcConstants.HyperlinkDescription, this.Description);
-                yield return NamedSrcValuePair.Create(nameof(this.ExtraInfo), SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
-                yield return NamedSrcValuePair.Create(nameof(this.Frame), SrcConstants.HyperlinkFrame, this.Frame);
-                yield return NamedSrcValuePair.Create(nameof(this.SortKey), SrcConstants.HyperlinkSortKey, this.SortKey);
-                yield return NamedSrcValuePair.Create(nameof(this.SubAddress), SrcConstants.HyperlinkSubAddress, this.SubAddress);
-                yield return NamedSrcValuePair.Create(nameof(this.NewWindow), SrcConstants.HyperlinkNewWindow, this.NewWindow);
-                yield return NamedSrcValuePair.Create(nameof(this.Default), SrcConstants.HyperlinkDefault, this.Default);
-                yield return NamedSrcValuePair.Create(nameof(this.Invisible), SrcConstants.HyperlinkInvisible, this.Invisible);
+                yield return CellMetadataItem.Create(nameof(this.Address), SrcConstants.HyperlinkAddress, this.Address);
+                yield return CellMetadataItem.Create(nameof(this.Description), SrcConstants.HyperlinkDescription, this.Description);
+                yield return CellMetadataItem.Create(nameof(this.ExtraInfo), SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
+                yield return CellMetadataItem.Create(nameof(this.Frame), SrcConstants.HyperlinkFrame, this.Frame);
+                yield return CellMetadataItem.Create(nameof(this.SortKey), SrcConstants.HyperlinkSortKey, this.SortKey);
+                yield return CellMetadataItem.Create(nameof(this.SubAddress), SrcConstants.HyperlinkSubAddress, this.SubAddress);
+                yield return CellMetadataItem.Create(nameof(this.NewWindow), SrcConstants.HyperlinkNewWindow, this.NewWindow);
+                yield return CellMetadataItem.Create(nameof(this.Default), SrcConstants.HyperlinkDefault, this.Default);
+                yield return CellMetadataItem.Create(nameof(this.Invisible), SrcConstants.HyperlinkInvisible, this.Invisible);
             }
         }
     }

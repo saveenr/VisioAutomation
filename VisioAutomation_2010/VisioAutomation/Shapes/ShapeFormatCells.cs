@@ -32,37 +32,37 @@ namespace VisioAutomation.Shapes
         public CellValueLiteral LineWeight { get; set; }
         public CellValueLiteral LineRounding { get; set; }
 
-        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<CellMetadataItem> CellMetadata
         {
             get
             {
 
 
-                yield return NamedSrcValuePair.Create(nameof(this.FillBackground), SrcConstants.FillBackground, this.FillBackground);
-                yield return NamedSrcValuePair.Create(nameof(this.FillBackgroundTransparency), SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
-                yield return NamedSrcValuePair.Create(nameof(this.FillForeground), SrcConstants.FillForeground, this.FillForeground);
-                yield return NamedSrcValuePair.Create(nameof(this.FillForegroundTransparency), SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
-                yield return NamedSrcValuePair.Create(nameof(this.FillPattern), SrcConstants.FillPattern, this.FillPattern);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowObliqueAngle), SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowOffsetX), SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowOffsetY), SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowScaleFactor), SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowType), SrcConstants.FillShadowType, this.FillShadowType);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowBackground), SrcConstants.FillShadowBackground, this.FillShadowBackground);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowBackgroundTransparency), SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowForeground), SrcConstants.FillShadowForeground, this.FillShadowForeground);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowForegroundTransparency), SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
-                yield return NamedSrcValuePair.Create(nameof(this.FillShadowPattern), SrcConstants.FillShadowPattern, this.FillShadowPattern);
-                yield return NamedSrcValuePair.Create(nameof(this.LineBeginArrow), SrcConstants.LineBeginArrow, this.LineBeginArrow);
-                yield return NamedSrcValuePair.Create(nameof(this.LineBeginArrowSize), SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
-                yield return NamedSrcValuePair.Create(nameof(this.LineEndArrow), SrcConstants.LineEndArrow, this.LineEndArrow);
-                yield return NamedSrcValuePair.Create(nameof(this.LineEndArrowSize), SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
-                yield return NamedSrcValuePair.Create(nameof(this.LineCap), SrcConstants.LineCap, this.LineCap);
-                yield return NamedSrcValuePair.Create(nameof(this.LineColor), SrcConstants.LineColor, this.LineColor);
-                yield return NamedSrcValuePair.Create(nameof(this.LineColorTransparency), SrcConstants.LineColorTransparency, this.LineColorTransparency);
-                yield return NamedSrcValuePair.Create(nameof(this.LinePattern), SrcConstants.LinePattern, this.LinePattern);
-                yield return NamedSrcValuePair.Create(nameof(this.LineWeight), SrcConstants.LineWeight, this.LineWeight);
-                yield return NamedSrcValuePair.Create(nameof(this.LineRounding), SrcConstants.LineRounding, this.LineRounding);
+                yield return CellMetadataItem.Create(nameof(this.FillBackground), SrcConstants.FillBackground, this.FillBackground);
+                yield return CellMetadataItem.Create(nameof(this.FillBackgroundTransparency), SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
+                yield return CellMetadataItem.Create(nameof(this.FillForeground), SrcConstants.FillForeground, this.FillForeground);
+                yield return CellMetadataItem.Create(nameof(this.FillForegroundTransparency), SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
+                yield return CellMetadataItem.Create(nameof(this.FillPattern), SrcConstants.FillPattern, this.FillPattern);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowObliqueAngle), SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowOffsetX), SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowOffsetY), SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowScaleFactor), SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowType), SrcConstants.FillShadowType, this.FillShadowType);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowBackground), SrcConstants.FillShadowBackground, this.FillShadowBackground);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowBackgroundTransparency), SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowForeground), SrcConstants.FillShadowForeground, this.FillShadowForeground);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowForegroundTransparency), SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+                yield return CellMetadataItem.Create(nameof(this.FillShadowPattern), SrcConstants.FillShadowPattern, this.FillShadowPattern);
+                yield return CellMetadataItem.Create(nameof(this.LineBeginArrow), SrcConstants.LineBeginArrow, this.LineBeginArrow);
+                yield return CellMetadataItem.Create(nameof(this.LineBeginArrowSize), SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
+                yield return CellMetadataItem.Create(nameof(this.LineEndArrow), SrcConstants.LineEndArrow, this.LineEndArrow);
+                yield return CellMetadataItem.Create(nameof(this.LineEndArrowSize), SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+                yield return CellMetadataItem.Create(nameof(this.LineCap), SrcConstants.LineCap, this.LineCap);
+                yield return CellMetadataItem.Create(nameof(this.LineColor), SrcConstants.LineColor, this.LineColor);
+                yield return CellMetadataItem.Create(nameof(this.LineColorTransparency), SrcConstants.LineColorTransparency, this.LineColorTransparency);
+                yield return CellMetadataItem.Create(nameof(this.LinePattern), SrcConstants.LinePattern, this.LinePattern);
+                yield return CellMetadataItem.Create(nameof(this.LineWeight), SrcConstants.LineWeight, this.LineWeight);
+                yield return CellMetadataItem.Create(nameof(this.LineRounding), SrcConstants.LineRounding, this.LineRounding);
             }
         }
     }

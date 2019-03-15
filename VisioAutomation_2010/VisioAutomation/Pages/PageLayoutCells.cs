@@ -34,39 +34,39 @@ namespace VisioAutomation.Pages
         public VASS.CellValueLiteral RouteStyle { get; set; }
         public VASS.CellValueLiteral AvoidPageBreaks { get; set; } // new in visio 2010
 
-        public override IEnumerable<VASS.CellGroups.NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
 
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.AvenueSizeX), VASS.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.AvenueSizeY), VASS.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.BlockSizeX), VASS.SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.BlockSizeY), VASS.SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.CtrlAsInput), VASS.SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.DynamicsOff), VASS.SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.EnableGrid), VASS.SrcConstants.PageLayoutEnableGrid, this.EnableGrid);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineAdjustFrom), VASS.SrcConstants.PageLayoutLineAdjustFrom, this.LineAdjustFrom);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineAdjustTo), VASS.SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineJumpCode), VASS.SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineJumpFactorX), VASS.SrcConstants.PageLayoutLineJumpFactorX, this.LineJumpFactorX);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineJumpFactorY), VASS.SrcConstants.PageLayoutLineJumpFactorY, this.LineJumpFactorY);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineJumpStyle), VASS.SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineRouteExt), VASS.SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineToLineX), VASS.SrcConstants.PageLayoutLineToLineX, this.LineToLineX);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineToLineY), VASS.SrcConstants.PageLayoutLineToLineY, this.LineToLineY);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineToNodeX), VASS.SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineToNodeY), VASS.SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineJumpDirX), VASS.SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.LineJumpDirY), VASS.SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PageShapeSplit), VASS.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PlaceDepth), VASS.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PlaceFlip), VASS.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PlaceStyle), VASS.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.PlowCode), VASS.SrcConstants.PageLayoutPlowCode, this.PlowCode);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.ResizePage), VASS.SrcConstants.PageLayoutResizePage, this.ResizePage);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.RouteStyle), VASS.SrcConstants.PageLayoutRouteStyle, this.RouteStyle);
-                yield return VASS.CellGroups.NamedSrcValuePair.Create(nameof(this.AvoidPageBreaks), VASS.SrcConstants.PageLayoutAvoidPageBreaks, this.AvoidPageBreaks);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.AvenueSizeX), VASS.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.AvenueSizeY), VASS.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.BlockSizeX), VASS.SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.BlockSizeY), VASS.SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.CtrlAsInput), VASS.SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.DynamicsOff), VASS.SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.EnableGrid), VASS.SrcConstants.PageLayoutEnableGrid, this.EnableGrid);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineAdjustFrom), VASS.SrcConstants.PageLayoutLineAdjustFrom, this.LineAdjustFrom);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineAdjustTo), VASS.SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineJumpCode), VASS.SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineJumpFactorX), VASS.SrcConstants.PageLayoutLineJumpFactorX, this.LineJumpFactorX);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineJumpFactorY), VASS.SrcConstants.PageLayoutLineJumpFactorY, this.LineJumpFactorY);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineJumpStyle), VASS.SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineRouteExt), VASS.SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineToLineX), VASS.SrcConstants.PageLayoutLineToLineX, this.LineToLineX);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineToLineY), VASS.SrcConstants.PageLayoutLineToLineY, this.LineToLineY);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineToNodeX), VASS.SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineToNodeY), VASS.SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineJumpDirX), VASS.SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LineJumpDirY), VASS.SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.PageShapeSplit), VASS.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.PlaceDepth), VASS.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.PlaceFlip), VASS.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.PlaceStyle), VASS.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.PlowCode), VASS.SrcConstants.PageLayoutPlowCode, this.PlowCode);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ResizePage), VASS.SrcConstants.PageLayoutResizePage, this.ResizePage);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.RouteStyle), VASS.SrcConstants.PageLayoutRouteStyle, this.RouteStyle);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.AvoidPageBreaks), VASS.SrcConstants.PageLayoutAvoidPageBreaks, this.AvoidPageBreaks);
 
             }
         }

@@ -16,21 +16,21 @@ namespace VisioAutomation.Text
         public CellValueLiteral Direction { get; set; }
         public CellValueLiteral VerticalAlign { get; set; }
 
-        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<CellMetadataItem> CellMetadata
         {
             get
             {
 
 
-                yield return NamedSrcValuePair.Create(nameof(this.BottomMargin), SrcConstants.TextBlockBottomMargin, this.BottomMargin);
-                yield return NamedSrcValuePair.Create(nameof(this.LeftMargin), SrcConstants.TextBlockLeftMargin, this.LeftMargin);
-                yield return NamedSrcValuePair.Create(nameof(this.RightMargin), SrcConstants.TextBlockRightMargin, this.RightMargin);
-                yield return NamedSrcValuePair.Create(nameof(this.TopMargin), SrcConstants.TextBlockTopMargin, this.TopMargin);
-                yield return NamedSrcValuePair.Create(nameof(this.DefaultTabStop), SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop);
-                yield return NamedSrcValuePair.Create(nameof(this.Background), SrcConstants.TextBlockBackground, this.Background);
-                yield return NamedSrcValuePair.Create(nameof(this.BackgroundTransparency), SrcConstants.TextBlockBackgroundTransparency, this.BackgroundTransparency);
-                yield return NamedSrcValuePair.Create(nameof(this.Direction), SrcConstants.TextBlockDirection, this.Direction);
-                yield return NamedSrcValuePair.Create(nameof(this.VerticalAlign), SrcConstants.TextBlockVerticalAlign, this.VerticalAlign);
+                yield return CellMetadataItem.Create(nameof(this.BottomMargin), SrcConstants.TextBlockBottomMargin, this.BottomMargin);
+                yield return CellMetadataItem.Create(nameof(this.LeftMargin), SrcConstants.TextBlockLeftMargin, this.LeftMargin);
+                yield return CellMetadataItem.Create(nameof(this.RightMargin), SrcConstants.TextBlockRightMargin, this.RightMargin);
+                yield return CellMetadataItem.Create(nameof(this.TopMargin), SrcConstants.TextBlockTopMargin, this.TopMargin);
+                yield return CellMetadataItem.Create(nameof(this.DefaultTabStop), SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop);
+                yield return CellMetadataItem.Create(nameof(this.Background), SrcConstants.TextBlockBackground, this.Background);
+                yield return CellMetadataItem.Create(nameof(this.BackgroundTransparency), SrcConstants.TextBlockBackgroundTransparency, this.BackgroundTransparency);
+                yield return CellMetadataItem.Create(nameof(this.Direction), SrcConstants.TextBlockDirection, this.Direction);
+                yield return CellMetadataItem.Create(nameof(this.VerticalAlign), SrcConstants.TextBlockVerticalAlign, this.VerticalAlign);
             }
         }
 

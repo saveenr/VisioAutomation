@@ -224,7 +224,7 @@ namespace VisioAutomation.Pages
             public PageRulerAndGridCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 var temp_cells = new PageRulerAndGridCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }
@@ -268,7 +268,7 @@ namespace VisioAutomation.Pages
             public PageFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 var temp_cells = new PageFormatCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }
@@ -316,7 +316,7 @@ namespace VisioAutomation.Pages
             public PageLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 var temp_cells = new PageLayoutCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }
@@ -379,7 +379,7 @@ namespace VisioAutomation.Pages
             public PagePrintCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 var temp_cells = new PagePrintCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }

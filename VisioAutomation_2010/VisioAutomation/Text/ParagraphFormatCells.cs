@@ -21,26 +21,26 @@ namespace VisioAutomation.Text
         public CellValueLiteral Flags { get; set; }
         public CellValueLiteral BulletString { get; set; }
 
-        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<CellMetadataItem> CellMetadata
         {
             get
             {
 
 
-                yield return NamedSrcValuePair.Create(nameof(this.IndentLeft), SrcConstants.ParaIndentLeft, this.IndentLeft);
-                yield return NamedSrcValuePair.Create(nameof(this.IndentFirst), SrcConstants.ParaIndentFirst, this.IndentFirst);
-                yield return NamedSrcValuePair.Create(nameof(this.IndentRight), SrcConstants.ParaIndentRight, this.IndentRight);
-                yield return NamedSrcValuePair.Create(nameof(this.SpacingAfter), SrcConstants.ParaSpacingAfter, this.SpacingAfter);
-                yield return NamedSrcValuePair.Create(nameof(this.SpacingBefore), SrcConstants.ParaSpacingBefore, this.SpacingBefore);
-                yield return NamedSrcValuePair.Create(nameof(this.SpacingLine), SrcConstants.ParaSpacingLine, this.SpacingLine);
-                yield return NamedSrcValuePair.Create(nameof(this.HorizontalAlign), SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
-                yield return NamedSrcValuePair.Create(nameof(this.BulletFont), SrcConstants.ParaBulletFont, this.BulletFont);
-                yield return NamedSrcValuePair.Create(nameof(this.Bullet), SrcConstants.ParaBullet, this.Bullet);
-                yield return NamedSrcValuePair.Create(nameof(this.BulletFontSize), SrcConstants.ParaBulletFontSize, this.BulletFontSize);
-                yield return NamedSrcValuePair.Create(nameof(this.LocalizeBulletFont), SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont);
-                yield return NamedSrcValuePair.Create(nameof(this.TextPosAfterBullet), SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet);
-                yield return NamedSrcValuePair.Create(nameof(this.Flags), SrcConstants.ParaFlags, this.Flags);
-                yield return NamedSrcValuePair.Create(nameof(this.BulletString), SrcConstants.ParaBulletString, this.BulletString);
+                yield return CellMetadataItem.Create(nameof(this.IndentLeft), SrcConstants.ParaIndentLeft, this.IndentLeft);
+                yield return CellMetadataItem.Create(nameof(this.IndentFirst), SrcConstants.ParaIndentFirst, this.IndentFirst);
+                yield return CellMetadataItem.Create(nameof(this.IndentRight), SrcConstants.ParaIndentRight, this.IndentRight);
+                yield return CellMetadataItem.Create(nameof(this.SpacingAfter), SrcConstants.ParaSpacingAfter, this.SpacingAfter);
+                yield return CellMetadataItem.Create(nameof(this.SpacingBefore), SrcConstants.ParaSpacingBefore, this.SpacingBefore);
+                yield return CellMetadataItem.Create(nameof(this.SpacingLine), SrcConstants.ParaSpacingLine, this.SpacingLine);
+                yield return CellMetadataItem.Create(nameof(this.HorizontalAlign), SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
+                yield return CellMetadataItem.Create(nameof(this.BulletFont), SrcConstants.ParaBulletFont, this.BulletFont);
+                yield return CellMetadataItem.Create(nameof(this.Bullet), SrcConstants.ParaBullet, this.Bullet);
+                yield return CellMetadataItem.Create(nameof(this.BulletFontSize), SrcConstants.ParaBulletFontSize, this.BulletFontSize);
+                yield return CellMetadataItem.Create(nameof(this.LocalizeBulletFont), SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont);
+                yield return CellMetadataItem.Create(nameof(this.TextPosAfterBullet), SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet);
+                yield return CellMetadataItem.Create(nameof(this.Flags), SrcConstants.ParaFlags, this.Flags);
+                yield return CellMetadataItem.Create(nameof(this.BulletString), SrcConstants.ParaBulletString, this.BulletString);
             }
         }
 

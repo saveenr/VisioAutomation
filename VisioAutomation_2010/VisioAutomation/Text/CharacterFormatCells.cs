@@ -29,34 +29,34 @@ namespace VisioAutomation.Text
         public CellValueLiteral Strikethru { get; set; }
         public CellValueLiteral UseVertical { get; set; }
 
-        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<CellMetadataItem> CellMetadata
         {
             get
             {
 
 
-                yield return NamedSrcValuePair.Create(nameof(this.Color), SrcConstants.CharColor, this.Color);
-                yield return NamedSrcValuePair.Create(nameof(this.Font), SrcConstants.CharFont, this.Font);
-                yield return NamedSrcValuePair.Create(nameof(this.Size), SrcConstants.CharSize, this.Size);
-                yield return NamedSrcValuePair.Create(nameof(this.Style), SrcConstants.CharStyle, this.Style);
-                yield return NamedSrcValuePair.Create(nameof(this.ColorTransparency), SrcConstants.CharColorTransparency, this.ColorTransparency);
-                yield return NamedSrcValuePair.Create(nameof(this.AsianFont), SrcConstants.CharAsianFont, this.AsianFont);
-                yield return NamedSrcValuePair.Create(nameof(this.Case), SrcConstants.CharCase, this.Case);
-                yield return NamedSrcValuePair.Create(nameof(this.ComplexScriptFont), SrcConstants.CharComplexScriptFont, this.ComplexScriptFont);
-                yield return NamedSrcValuePair.Create(nameof(this.ComplexScriptSize), SrcConstants.CharComplexScriptSize, this.ComplexScriptSize);
-                yield return NamedSrcValuePair.Create(nameof(this.DoubleUnderline), SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
-                yield return NamedSrcValuePair.Create(nameof(this.DoubleStrikethrough), SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough);
-                yield return NamedSrcValuePair.Create(nameof(this.LangID), SrcConstants.CharLangID, this.LangID);
-                yield return NamedSrcValuePair.Create(nameof(this.FontScale), SrcConstants.CharFontScale, this.FontScale);
-                yield return NamedSrcValuePair.Create(nameof(this.Letterspace), SrcConstants.CharLetterspace, this.Letterspace);
-                yield return NamedSrcValuePair.Create(nameof(this.Locale), SrcConstants.CharLocale, this.Locale);
-                yield return NamedSrcValuePair.Create(nameof(this.LocalizeFont), SrcConstants.CharLocalizeFont, this.LocalizeFont);
-                yield return NamedSrcValuePair.Create(nameof(this.Overline), SrcConstants.CharOverline, this.Overline);
-                yield return NamedSrcValuePair.Create(nameof(this.Perpendicular), SrcConstants.CharPerpendicular, this.Perpendicular);
-                yield return NamedSrcValuePair.Create(nameof(this.Pos), SrcConstants.CharPos, this.Pos);
-                yield return NamedSrcValuePair.Create(nameof(this.RTLText), SrcConstants.CharRTLText, this.RTLText);
-                yield return NamedSrcValuePair.Create(nameof(this.Strikethru), SrcConstants.CharStrikethru, this.Strikethru);
-                yield return NamedSrcValuePair.Create(nameof(this.UseVertical), SrcConstants.CharUseVertical, this.UseVertical);
+                yield return CellMetadataItem.Create(nameof(this.Color), SrcConstants.CharColor, this.Color);
+                yield return CellMetadataItem.Create(nameof(this.Font), SrcConstants.CharFont, this.Font);
+                yield return CellMetadataItem.Create(nameof(this.Size), SrcConstants.CharSize, this.Size);
+                yield return CellMetadataItem.Create(nameof(this.Style), SrcConstants.CharStyle, this.Style);
+                yield return CellMetadataItem.Create(nameof(this.ColorTransparency), SrcConstants.CharColorTransparency, this.ColorTransparency);
+                yield return CellMetadataItem.Create(nameof(this.AsianFont), SrcConstants.CharAsianFont, this.AsianFont);
+                yield return CellMetadataItem.Create(nameof(this.Case), SrcConstants.CharCase, this.Case);
+                yield return CellMetadataItem.Create(nameof(this.ComplexScriptFont), SrcConstants.CharComplexScriptFont, this.ComplexScriptFont);
+                yield return CellMetadataItem.Create(nameof(this.ComplexScriptSize), SrcConstants.CharComplexScriptSize, this.ComplexScriptSize);
+                yield return CellMetadataItem.Create(nameof(this.DoubleUnderline), SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
+                yield return CellMetadataItem.Create(nameof(this.DoubleStrikethrough), SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough);
+                yield return CellMetadataItem.Create(nameof(this.LangID), SrcConstants.CharLangID, this.LangID);
+                yield return CellMetadataItem.Create(nameof(this.FontScale), SrcConstants.CharFontScale, this.FontScale);
+                yield return CellMetadataItem.Create(nameof(this.Letterspace), SrcConstants.CharLetterspace, this.Letterspace);
+                yield return CellMetadataItem.Create(nameof(this.Locale), SrcConstants.CharLocale, this.Locale);
+                yield return CellMetadataItem.Create(nameof(this.LocalizeFont), SrcConstants.CharLocalizeFont, this.LocalizeFont);
+                yield return CellMetadataItem.Create(nameof(this.Overline), SrcConstants.CharOverline, this.Overline);
+                yield return CellMetadataItem.Create(nameof(this.Perpendicular), SrcConstants.CharPerpendicular, this.Perpendicular);
+                yield return CellMetadataItem.Create(nameof(this.Pos), SrcConstants.CharPos, this.Pos);
+                yield return CellMetadataItem.Create(nameof(this.RTLText), SrcConstants.CharRTLText, this.RTLText);
+                yield return CellMetadataItem.Create(nameof(this.Strikethru), SrcConstants.CharStrikethru, this.Strikethru);
+                yield return CellMetadataItem.Create(nameof(this.UseVertical), SrcConstants.CharUseVertical, this.UseVertical);
             }
         }
 

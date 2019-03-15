@@ -15,18 +15,18 @@ namespace VisioAutomation.Shapes
         public CellValueLiteral XDynamics { get; set; }
         public CellValueLiteral YDynamics { get; set; }
 
-        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<CellMetadataItem> CellMetadata
         {
             get
             {
-                yield return NamedSrcValuePair.Create(nameof(this.CanGlue), SrcConstants.ControlCanGlue, this.CanGlue);
-                yield return NamedSrcValuePair.Create(nameof(this.Tip), SrcConstants.ControlTip, this.Tip);
-                yield return NamedSrcValuePair.Create(nameof(this.X), SrcConstants.ControlX, this.X);
-                yield return NamedSrcValuePair.Create(nameof(this.Y), SrcConstants.ControlY, this.Y);
-                yield return NamedSrcValuePair.Create(nameof(this.YBehavior), SrcConstants.ControlYBehavior, this.YBehavior);
-                yield return NamedSrcValuePair.Create(nameof(this.XBehavior), SrcConstants.ControlXBehavior, this.XBehavior);
-                yield return NamedSrcValuePair.Create(nameof(this.XDynamics), SrcConstants.ControlXDynamics, this.XDynamics);
-                yield return NamedSrcValuePair.Create(nameof(this.YDynamics), SrcConstants.ControlYDynamics, this.YDynamics);
+                yield return CellMetadataItem.Create(nameof(this.CanGlue), SrcConstants.ControlCanGlue, this.CanGlue);
+                yield return CellMetadataItem.Create(nameof(this.Tip), SrcConstants.ControlTip, this.Tip);
+                yield return CellMetadataItem.Create(nameof(this.X), SrcConstants.ControlX, this.X);
+                yield return CellMetadataItem.Create(nameof(this.Y), SrcConstants.ControlY, this.Y);
+                yield return CellMetadataItem.Create(nameof(this.YBehavior), SrcConstants.ControlYBehavior, this.YBehavior);
+                yield return CellMetadataItem.Create(nameof(this.XBehavior), SrcConstants.ControlXBehavior, this.XBehavior);
+                yield return CellMetadataItem.Create(nameof(this.XDynamics), SrcConstants.ControlXDynamics, this.XDynamics);
+                yield return CellMetadataItem.Create(nameof(this.YDynamics), SrcConstants.ControlYDynamics, this.YDynamics);
             }
         }
 

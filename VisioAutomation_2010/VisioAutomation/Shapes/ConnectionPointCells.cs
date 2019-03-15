@@ -12,15 +12,15 @@ namespace VisioAutomation.Shapes
         public CellValueLiteral DirY { get; set; }
         public CellValueLiteral Type { get; set; }
 
-        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<CellMetadataItem> CellMetadata
         {
             get
             {
-                yield return NamedSrcValuePair.Create(nameof(this.X), SrcConstants.ConnectionPointX, this.X);
-                yield return NamedSrcValuePair.Create(nameof(this.Y), SrcConstants.ConnectionPointY, this.Y);
-                yield return NamedSrcValuePair.Create(nameof(this.DirX), SrcConstants.ConnectionPointDirX, this.DirX);
-                yield return NamedSrcValuePair.Create(nameof(this.DirY), SrcConstants.ConnectionPointDirY, this.DirY);
-                yield return NamedSrcValuePair.Create(nameof(this.Type), SrcConstants.ConnectionPointType, this.Type);
+                yield return CellMetadataItem.Create(nameof(this.X), SrcConstants.ConnectionPointX, this.X);
+                yield return CellMetadataItem.Create(nameof(this.Y), SrcConstants.ConnectionPointY, this.Y);
+                yield return CellMetadataItem.Create(nameof(this.DirX), SrcConstants.ConnectionPointDirX, this.DirX);
+                yield return CellMetadataItem.Create(nameof(this.DirY), SrcConstants.ConnectionPointDirY, this.DirY);
+                yield return CellMetadataItem.Create(nameof(this.Type), SrcConstants.ConnectionPointType, this.Type);
             }
         }
 

@@ -29,32 +29,32 @@ namespace VisioAutomation.Shapes
         public CellValueLiteral VertexEdit { get; set; }
         public CellValueLiteral Width { get; set; }
 
-        public override IEnumerable<NamedSrcValuePair> NamedSrcValuePairs
+        public override IEnumerable<CellMetadataItem> CellMetadata
         {
             get
             {
 
 
-                yield return NamedSrcValuePair.Create(nameof(this.Aspect), SrcConstants.LockAspect, this.Aspect);
-                yield return NamedSrcValuePair.Create(nameof(this.Begin), SrcConstants.LockBegin, this.Begin);
-                yield return NamedSrcValuePair.Create(nameof(this.CalcWH), SrcConstants.LockCalcWH, this.CalcWH);
-                yield return NamedSrcValuePair.Create(nameof(this.Crop), SrcConstants.LockCrop, this.Crop);
-                yield return NamedSrcValuePair.Create(nameof(this.CustProp), SrcConstants.LockCustomProp, this.CustProp);
-                yield return NamedSrcValuePair.Create(nameof(this.Delete), SrcConstants.LockDelete, this.Delete);
-                yield return NamedSrcValuePair.Create(nameof(this.End), SrcConstants.LockEnd, this.End);
-                yield return NamedSrcValuePair.Create(nameof(this.Format), SrcConstants.LockFormat, this.Format);
-                yield return NamedSrcValuePair.Create(nameof(this.FromGroupFormat), SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
-                yield return NamedSrcValuePair.Create(nameof(this.Group), SrcConstants.LockGroup, this.Group);
-                yield return NamedSrcValuePair.Create(nameof(this.Height), SrcConstants.LockHeight, this.Height);
-                yield return NamedSrcValuePair.Create(nameof(this.MoveX), SrcConstants.LockMoveX, this.MoveX);
-                yield return NamedSrcValuePair.Create(nameof(this.MoveY), SrcConstants.LockMoveY, this.MoveY);
-                yield return NamedSrcValuePair.Create(nameof(this.Rotate), SrcConstants.LockRotate, this.Rotate);
-                yield return NamedSrcValuePair.Create(nameof(this.Select), SrcConstants.LockSelect, this.Select);
-                yield return NamedSrcValuePair.Create(nameof(this.TextEdit), SrcConstants.LockTextEdit, this.TextEdit);
-                yield return NamedSrcValuePair.Create(nameof(this.ThemeColors), SrcConstants.LockThemeColors, this.ThemeColors);
-                yield return NamedSrcValuePair.Create(nameof(this.ThemeEffects), SrcConstants.LockThemeEffects, this.ThemeEffects);
-                yield return NamedSrcValuePair.Create(nameof(this.VertexEdit), SrcConstants.LockVertexEdit, this.VertexEdit);
-                yield return NamedSrcValuePair.Create(nameof(this.Width), SrcConstants.LockWidth, this.Width);
+                yield return CellMetadataItem.Create(nameof(this.Aspect), SrcConstants.LockAspect, this.Aspect);
+                yield return CellMetadataItem.Create(nameof(this.Begin), SrcConstants.LockBegin, this.Begin);
+                yield return CellMetadataItem.Create(nameof(this.CalcWH), SrcConstants.LockCalcWH, this.CalcWH);
+                yield return CellMetadataItem.Create(nameof(this.Crop), SrcConstants.LockCrop, this.Crop);
+                yield return CellMetadataItem.Create(nameof(this.CustProp), SrcConstants.LockCustomProp, this.CustProp);
+                yield return CellMetadataItem.Create(nameof(this.Delete), SrcConstants.LockDelete, this.Delete);
+                yield return CellMetadataItem.Create(nameof(this.End), SrcConstants.LockEnd, this.End);
+                yield return CellMetadataItem.Create(nameof(this.Format), SrcConstants.LockFormat, this.Format);
+                yield return CellMetadataItem.Create(nameof(this.FromGroupFormat), SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
+                yield return CellMetadataItem.Create(nameof(this.Group), SrcConstants.LockGroup, this.Group);
+                yield return CellMetadataItem.Create(nameof(this.Height), SrcConstants.LockHeight, this.Height);
+                yield return CellMetadataItem.Create(nameof(this.MoveX), SrcConstants.LockMoveX, this.MoveX);
+                yield return CellMetadataItem.Create(nameof(this.MoveY), SrcConstants.LockMoveY, this.MoveY);
+                yield return CellMetadataItem.Create(nameof(this.Rotate), SrcConstants.LockRotate, this.Rotate);
+                yield return CellMetadataItem.Create(nameof(this.Select), SrcConstants.LockSelect, this.Select);
+                yield return CellMetadataItem.Create(nameof(this.TextEdit), SrcConstants.LockTextEdit, this.TextEdit);
+                yield return CellMetadataItem.Create(nameof(this.ThemeColors), SrcConstants.LockThemeColors, this.ThemeColors);
+                yield return CellMetadataItem.Create(nameof(this.ThemeEffects), SrcConstants.LockThemeEffects, this.ThemeEffects);
+                yield return CellMetadataItem.Create(nameof(this.VertexEdit), SrcConstants.LockVertexEdit, this.VertexEdit);
+                yield return CellMetadataItem.Create(nameof(this.Width), SrcConstants.LockWidth, this.Width);
             }
         }
 

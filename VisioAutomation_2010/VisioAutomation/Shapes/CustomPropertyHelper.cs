@@ -327,7 +327,7 @@ namespace VisioAutomation.Shapes
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
                 var temp_cells = new CustomPropertyCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     sec.Columns.Add(pair.Src, pair.Name);
                 }

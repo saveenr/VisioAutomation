@@ -106,7 +106,7 @@ namespace VisioAutomation.Shapes
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
 
                 var temp_cells = new ConnectionPointCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     sec.Columns.Add(pair.Src, pair.Name);
                 }

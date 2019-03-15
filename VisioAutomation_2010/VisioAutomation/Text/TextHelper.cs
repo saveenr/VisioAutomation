@@ -206,7 +206,7 @@ namespace VisioAutomation.Text
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
                 var temp_cells = new CharacterFormatCells();
 
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     sec.Columns.Add(pair.Src, pair.Name);
                 }
@@ -273,7 +273,7 @@ namespace VisioAutomation.Text
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionParagraph);
                 var temp_cells = new ParagraphFormatCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     sec.Columns.Add(pair.Src, pair.Name);
                 }
@@ -285,7 +285,7 @@ namespace VisioAutomation.Text
 
 
                 var cols = this.query_multirow.SectionQueries[0].Columns;
-                var names = cells.NamedSrcValuePairs.Select(i => i.Name).ToList();
+                var names = cells.CellMetadata.Select(i => i.Name).ToList();
 
                 string getcellvalue(string name)
                 {
@@ -334,7 +334,7 @@ namespace VisioAutomation.Text
             {
 
                 var temp_cells = new TextBlockCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }
@@ -384,7 +384,7 @@ namespace VisioAutomation.Text
             public TextXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
                 var temp_cells = new TextXFormCells();
-                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }
