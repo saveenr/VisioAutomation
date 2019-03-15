@@ -71,17 +71,17 @@ namespace VisioAutomation.Shapes
 
         public static List<ShapeFormatCells> GetShapeFormatCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = shape_format_lazy_reader.Value;
+            var reader = shape_format_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static ShapeFormatCells GetShapeFormatCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = shape_format_lazy_reader.Value;
+            var reader = shape_format_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeFormatCellsBuilder> shape_format_lazy_reader = new System.Lazy<ShapeFormatCellsBuilder>();
+        private static readonly System.Lazy<ShapeFormatCellsBuilder> shape_format_lazy_builder = new System.Lazy<ShapeFormatCellsBuilder>();
 
         class ShapeFormatCellsBuilder : CellGroupBuilder<ShapeFormatCells>
         {
@@ -134,17 +134,17 @@ namespace VisioAutomation.Shapes
 
         public static List<ShapeLayoutCells> GetShapeLayoutCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = ShapeLayoutCells_lazy_reader.Value;
+            var reader = ShapeLayoutCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static ShapeLayoutCells GetShapeLayoutCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = ShapeLayoutCells_lazy_reader.Value;
+            var reader = ShapeLayoutCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeLayoutCellsBuilder> ShapeLayoutCells_lazy_reader = new System.Lazy<ShapeLayoutCellsBuilder>();
+        private static readonly System.Lazy<ShapeLayoutCellsBuilder> ShapeLayoutCells_lazy_builder = new System.Lazy<ShapeLayoutCellsBuilder>();
 
         class ShapeLayoutCellsBuilder : CellGroupBuilder<ShapeLayoutCells>
         {
@@ -189,17 +189,17 @@ namespace VisioAutomation.Shapes
 
         public static List<ShapeXFormCells> GetShapeXFormCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = ShapeXFormCells_lazy_reader.Value;
+            var reader = ShapeXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static ShapeXFormCells GetShapeXFormCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = ShapeXFormCells_lazy_reader.Value;
+            var reader = ShapeXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeXFormCellsBuilder> ShapeXFormCells_lazy_reader = new System.Lazy<ShapeXFormCellsBuilder>();
+        private static readonly System.Lazy<ShapeXFormCellsBuilder> ShapeXFormCells_lazy_builder = new System.Lazy<ShapeXFormCellsBuilder>();
 
         class ShapeXFormCellsBuilder : CellGroupBuilder<ShapeXFormCells>
         {

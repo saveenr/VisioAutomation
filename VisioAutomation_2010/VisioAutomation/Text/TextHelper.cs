@@ -185,17 +185,17 @@ namespace VisioAutomation.Text
 
         public static List<List<CharacterFormatCells>> GetCharacterFormatCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = CharacterFormatCells_lazy_reader.Value;
+            var reader = CharacterFormatCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<CharacterFormatCells> GetCharacterFormatCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = CharacterFormatCells_lazy_reader.Value;
+            var reader = CharacterFormatCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<CharacterFormatCellsBuilder> CharacterFormatCells_lazy_reader = new System.Lazy<CharacterFormatCellsBuilder>();
+        private static readonly System.Lazy<CharacterFormatCellsBuilder> CharacterFormatCells_lazy_builder = new System.Lazy<CharacterFormatCellsBuilder>();
 
 
         class CharacterFormatCellsBuilder : CellGroupBuilder<Text.CharacterFormatCells>
@@ -245,18 +245,18 @@ namespace VisioAutomation.Text
 
         public static List<List<ParagraphFormatCells>> GetParagraphFormatCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = ParagraphFormatCells_lazy_reader.Value;
+            var reader = ParagraphFormatCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<ParagraphFormatCells> GetParagraphFormatCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = ParagraphFormatCells_lazy_reader.Value;
+            var reader = ParagraphFormatCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
 
-        private static readonly System.Lazy<ParagraphFormatCellsBuilder> ParagraphFormatCells_lazy_reader = new System.Lazy<ParagraphFormatCellsBuilder>();
+        private static readonly System.Lazy<ParagraphFormatCellsBuilder> ParagraphFormatCells_lazy_builder = new System.Lazy<ParagraphFormatCellsBuilder>();
 
 
         class ParagraphFormatCellsBuilder : CellGroupBuilder<Text.ParagraphFormatCells>
@@ -301,17 +301,17 @@ namespace VisioAutomation.Text
 
         public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = TextBlockCells_lazy_reader.Value;
+            var reader = TextBlockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = TextBlockCells_lazy_reader.Value;
+            var reader = TextBlockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<TextBlockCellsBuilder> TextBlockCells_lazy_reader = new System.Lazy<TextBlockCellsBuilder>();
+        private static readonly System.Lazy<TextBlockCellsBuilder> TextBlockCells_lazy_builder = new System.Lazy<TextBlockCellsBuilder>();
 
         class TextBlockCellsBuilder : CellGroupBuilder<Text.TextBlockCells>
         {
@@ -346,17 +346,17 @@ namespace VisioAutomation.Text
 
         public static List<TextXFormCells> GetTextXFormCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = TextXFormCells_lazy_reader.Value;
+            var reader = TextXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static TextXFormCells GetTextXFormCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = TextXFormCells_lazy_reader.Value;
+            var reader = TextXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<TextXFormCellsBuilder> TextXFormCells_lazy_reader = new System.Lazy<TextXFormCellsBuilder>();
+        private static readonly System.Lazy<TextXFormCellsBuilder> TextXFormCells_lazy_builder = new System.Lazy<TextXFormCellsBuilder>();
 
 
         class TextXFormCellsBuilder : CellGroupBuilder<Text.TextXFormCells>

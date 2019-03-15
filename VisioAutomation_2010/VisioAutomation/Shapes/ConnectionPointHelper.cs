@@ -85,17 +85,17 @@ namespace VisioAutomation.Shapes
 
         public static List<List<ConnectionPointCells>> GetConnectionPointCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = ConnectionPointCells_lazy_reader.Value;
+            var reader = ConnectionPointCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<ConnectionPointCells> GetConnectionPointCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = ConnectionPointCells_lazy_reader.Value;
+            var reader = ConnectionPointCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<ConnectionPointCellsBuilder> ConnectionPointCells_lazy_reader = new System.Lazy<ConnectionPointCellsBuilder>();
+        private static readonly System.Lazy<ConnectionPointCellsBuilder> ConnectionPointCells_lazy_builder = new System.Lazy<ConnectionPointCellsBuilder>();
 
         class ConnectionPointCellsBuilder : CellGroupBuilder<ConnectionPointCells>
         {

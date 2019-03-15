@@ -100,17 +100,17 @@ namespace VisioAutomation.Shapes
 
         public static List<List<HyperlinkCells>> GetHyperlinkCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var reader = HyperLinkCells_lazy_reader.Value;
+            var reader = HyperLinkCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
         public static List<HyperlinkCells> GetHyperlinkCells(IVisio.Shape shape, CellValueType type)
         {
-            var reader = HyperLinkCells_lazy_reader.Value;
+            var reader = HyperLinkCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<HyperlinkCellsBuilder> HyperLinkCells_lazy_reader = new System.Lazy<HyperlinkCellsBuilder>();
+        private static readonly System.Lazy<HyperlinkCellsBuilder> HyperLinkCells_lazy_builder = new System.Lazy<HyperlinkCellsBuilder>();
 
 
         class HyperlinkCellsBuilder : CellGroupBuilder<HyperlinkCells>

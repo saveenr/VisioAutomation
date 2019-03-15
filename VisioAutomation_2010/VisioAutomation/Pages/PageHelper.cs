@@ -213,11 +213,11 @@ namespace VisioAutomation.Pages
 
         public static PageRulerAndGridCells GetPageRulerAndGridCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var reader = PageRulerAndGridCells_lazy_reader.Value;
+            var reader = PageRulerAndGridCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageRulerAndGridCellsBuilder> PageRulerAndGridCells_lazy_reader = new System.Lazy<PageRulerAndGridCellsBuilder>();
+        private static readonly System.Lazy<PageRulerAndGridCellsBuilder> PageRulerAndGridCells_lazy_builder = new System.Lazy<PageRulerAndGridCellsBuilder>();
 
         class PageRulerAndGridCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageRulerAndGridCells>
         {
@@ -252,11 +252,11 @@ namespace VisioAutomation.Pages
 
         public static PageFormatCells GetPageFormatCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var reader = PageFormatCells_lazy_reader.Value;
+            var reader = PageFormatCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageFormatCellsBuilder> PageFormatCells_lazy_reader = new System.Lazy<PageFormatCellsBuilder>();
+        private static readonly System.Lazy<PageFormatCellsBuilder> PageFormatCells_lazy_builder = new System.Lazy<PageFormatCellsBuilder>();
 
         class PageFormatCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageFormatCells>
         {
@@ -295,11 +295,11 @@ namespace VisioAutomation.Pages
 
         public static PageLayoutCells GetPageLayoutCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var reader = PageLayoutCells_lazy_reader.Value;
+            var reader = PageLayoutCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageLayoutCellsBuilder> PageLayoutCells_lazy_reader = new System.Lazy<PageLayoutCellsBuilder>();
+        private static readonly System.Lazy<PageLayoutCellsBuilder> PageLayoutCells_lazy_builder = new System.Lazy<PageLayoutCellsBuilder>();
 
         class PageLayoutCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageLayoutCells>
         {
@@ -353,11 +353,11 @@ namespace VisioAutomation.Pages
 
         public static PagePrintCells GetPagePrintCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var reader = PagePrintCells_lazy_reader.Value;
+            var reader = PagePrintCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PagePrintCellsBuilder> PagePrintCells_lazy_reader = new System.Lazy<PagePrintCellsBuilder>();
+        private static readonly System.Lazy<PagePrintCellsBuilder> PagePrintCells_lazy_builder = new System.Lazy<PagePrintCellsBuilder>();
 
         class PagePrintCellsBuilder : VASS.CellGroups.CellGroupBuilder<PagePrintCells>
         {
