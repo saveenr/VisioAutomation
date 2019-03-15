@@ -94,7 +94,7 @@ namespace VisioAutomation.Shapes
             {
 
                 var cells = new ShapeFormatCells();
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -156,7 +156,7 @@ namespace VisioAutomation.Shapes
             public override ShapeLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new ShapeLayoutCells();
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -211,7 +211,7 @@ namespace VisioAutomation.Shapes
             {
                 var cells = new ShapeXFormCells();
 
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {

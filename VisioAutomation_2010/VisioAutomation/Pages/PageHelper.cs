@@ -228,7 +228,7 @@ namespace VisioAutomation.Pages
             public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PageRulerAndGridCells();
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -267,7 +267,7 @@ namespace VisioAutomation.Pages
             public override PageFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PageFormatCells();
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -311,7 +311,7 @@ namespace VisioAutomation.Pages
             public override PageLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PageLayoutCells();
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -369,7 +369,7 @@ namespace VisioAutomation.Pages
             {
                 var cells = new PagePrintCells();
 
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {

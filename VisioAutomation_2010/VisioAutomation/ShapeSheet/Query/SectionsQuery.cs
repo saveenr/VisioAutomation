@@ -3,8 +3,7 @@ using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
-{
-    public class SectionsQuery
+{    public class SectionsQuery
     {
         public SectionQueryList SectionQueries { get; }
 

@@ -315,7 +315,7 @@ namespace VisioAutomation.Shapes
             public override UserDefinedCellCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new UserDefinedCellCells();
-                var cols = this.query_multirow.SectionQueries[0].Columns;
+                var cols = this.query_sections_multirow.SectionQueries[0].Columns;
 
                 string getcellvalue(string name)
                 {

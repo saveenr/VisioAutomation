@@ -35,7 +35,7 @@ namespace VisioAutomation.Shapes
             public override LockCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new LockCells();
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {

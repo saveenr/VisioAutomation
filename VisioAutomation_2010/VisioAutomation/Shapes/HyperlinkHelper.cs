@@ -124,7 +124,7 @@ namespace VisioAutomation.Shapes
             {
                 var cells = new HyperlinkCells();
 
-                var cols = this.query_multirow.SectionQueries[0].Columns;
+                var cols = this.query_sections_multirow.SectionQueries[0].Columns;
 
                 string getcellvalue(string name)
                 {

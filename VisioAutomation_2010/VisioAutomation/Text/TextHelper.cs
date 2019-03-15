@@ -208,7 +208,7 @@ namespace VisioAutomation.Text
             {
                 var cells = new Text.CharacterFormatCells();
 
-                var cols = this.query_multirow.SectionQueries[0].Columns;
+                var cols = this.query_sections_multirow.SectionQueries[0].Columns;
 
                 string getcellvalue(string name)
                 {
@@ -270,7 +270,7 @@ namespace VisioAutomation.Text
                 var cells = new Text.ParagraphFormatCells();
 
 
-                var cols = this.query_multirow.SectionQueries[0].Columns;
+                var cols = this.query_sections_multirow.SectionQueries[0].Columns;
                 var names = cells.CellMetadata.Select(i => i.Name).ToList();
 
                 string getcellvalue(string name)
@@ -323,7 +323,7 @@ namespace VisioAutomation.Text
             public override Text.TextBlockCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new Text.TextBlockCells();
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -369,7 +369,7 @@ namespace VisioAutomation.Text
             {
                 var cells = new Text.TextXFormCells();
 
-                var cols = this.query_singlerow.Columns;
+                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
