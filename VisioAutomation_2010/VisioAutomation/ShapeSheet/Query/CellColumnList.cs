@@ -4,8 +4,6 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellColumnList : ColumnListBase<CellColumn>
     {
-        private Dictionary<ShapeSheet.Src,CellColumn> dic_src_to_col;
-
         internal CellColumnList() :
             this(0)
         {
@@ -37,18 +35,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return col;
         }
 
-        private void check_deplicate_src(Src src)
-        {
-            if (this.dic_src_to_col == null)
-            {
-                this.dic_src_to_col = new Dictionary<ShapeSheet.Src,CellColumn>();
-            }
 
-            if (this.dic_src_to_col.ContainsKey(src))
-            {
-                string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Src),src.Section, src.Row, src.Cell);
-                throw new System.ArgumentException(msg);
-            }
-        }
     }
 }
