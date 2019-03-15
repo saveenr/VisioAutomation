@@ -223,7 +223,6 @@ namespace VisioAutomation.Pages
         {
             public PageRulerAndGridCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
             {
-                InitializeQuery();
             }
 
             public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
@@ -263,7 +262,6 @@ namespace VisioAutomation.Pages
         {
             public PageFormatCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
             {
-                InitializeQuery();
             }
 
             public override PageFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
@@ -307,7 +305,6 @@ namespace VisioAutomation.Pages
         {
             public PageLayoutCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
             {
-                InitializeQuery();
             }
 
 
@@ -366,7 +363,6 @@ namespace VisioAutomation.Pages
         {
             public PagePrintCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
             {
-                InitializeQuery();
             }
 
             public override PagePrintCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

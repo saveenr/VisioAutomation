@@ -118,7 +118,6 @@ namespace VisioAutomation.Shapes
 
             public HyperlinkCellsReader() : base(CellGroupReaderType.MultiRow)
             {
-                InitializeQuery();
             }
 
             public override HyperlinkCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

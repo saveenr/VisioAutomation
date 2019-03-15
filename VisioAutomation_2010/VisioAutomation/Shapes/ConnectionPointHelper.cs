@@ -102,7 +102,6 @@ namespace VisioAutomation.Shapes
 
             public ConnectionPointCellsReader() : base(CellGroupReaderType.MultiRow)
             {
-                InitializeQuery();
             }
 
             public override ConnectionPointCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

@@ -34,19 +34,17 @@ namespace VisioAutomation.ShapeSheet.CellGroups
                 this.query_singlerow = null;
                 this.query_multirow = new Query.SectionsQuery();
             }
-        }
 
-        protected void InitializeQuery()
-        {
+
             var temp_cells = new TGroup();
-            if (this.query_singlerow!=null)
+            if (this.query_singlerow != null)
             {
                 foreach (var pair in temp_cells.CellMetadata)
                 {
                     this.query_singlerow.Columns.Add(pair.Src, pair.Name);
                 }
             }
-            else if (this.query_multirow!=null)
+            else if (this.query_multirow != null)
             {
                 var first_cell_metadata = temp_cells.CellMetadata.First();
                 var sec = this.query_multirow.SectionQueries.Add((IVisio.VisSectionIndices)first_cell_metadata.Src.Section);
@@ -60,6 +58,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
         }
+
         public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row);
 
         public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)

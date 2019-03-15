@@ -30,7 +30,6 @@ namespace VisioAutomation.Shapes
         {
             public LockCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
-                InitializeQuery();
             }
 
             public override LockCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

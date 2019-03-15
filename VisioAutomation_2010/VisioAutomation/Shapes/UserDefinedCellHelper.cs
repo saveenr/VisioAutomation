@@ -309,7 +309,6 @@ namespace VisioAutomation.Shapes
 
             public UserDefinedCellCellsReader() : base(CellGroupReaderType.MultiRow)
             {
-                InitializeQuery();
             }
 
             

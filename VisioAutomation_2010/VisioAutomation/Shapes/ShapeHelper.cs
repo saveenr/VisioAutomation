@@ -88,7 +88,6 @@ namespace VisioAutomation.Shapes
  
             public ShapeFormatCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
-                InitializeQuery();
             }
 
             public override ShapeFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
@@ -152,7 +151,6 @@ namespace VisioAutomation.Shapes
 
             public ShapeLayoutCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
-                InitializeQuery();
             }
 
             public override ShapeLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
@@ -207,7 +205,6 @@ namespace VisioAutomation.Shapes
         {
             public ShapeXFormCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
-                InitializeQuery();
             }
 
             public override ShapeXFormCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

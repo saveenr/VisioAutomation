@@ -106,9 +106,7 @@ namespace VisioAutomation.Shapes
         class ControlCellsReader : CellGroupReader<ControlCells>
         {
             public ControlCellsReader() : base(CellGroupReaderType.MultiRow)
-
             {
-                InitializeQuery();
             }
 
             public override ControlCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
