@@ -48,7 +48,6 @@ namespace VisioAutomation.Text
                 yield return NamedSrcValuePair.Create(nameof(this.DoubleStrikethrough), SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough);
                 yield return NamedSrcValuePair.Create(nameof(this.LangID), SrcConstants.CharLangID, this.LangID);
                 yield return NamedSrcValuePair.Create(nameof(this.FontScale), SrcConstants.CharFontScale, this.FontScale);
-                yield return NamedSrcValuePair.Create(nameof(this.LangID), SrcConstants.CharLangID, this.LangID);
                 yield return NamedSrcValuePair.Create(nameof(this.Letterspace), SrcConstants.CharLetterspace, this.Letterspace);
                 yield return NamedSrcValuePair.Create(nameof(this.Locale), SrcConstants.CharLocale, this.Locale);
                 yield return NamedSrcValuePair.Create(nameof(this.LocalizeFont), SrcConstants.CharLocalizeFont, this.LocalizeFont);

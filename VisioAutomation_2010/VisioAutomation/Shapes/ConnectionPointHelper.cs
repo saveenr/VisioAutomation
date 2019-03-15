@@ -99,33 +99,36 @@ namespace VisioAutomation.Shapes
 
         class ConnectionPointCellsReader : CellGroupReader<ConnectionPointCells>
         {
-            public SectionQueryColumn DirX { get; set; }
-            public SectionQueryColumn DirY { get; set; }
-            public SectionQueryColumn Type { get; set; }
-            public SectionQueryColumn X { get; set; }
-            public SectionQueryColumn Y { get; set; }
 
             public ConnectionPointCellsReader()
                 : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
 
-                this.DirX = sec.Columns.Add(SrcConstants.ConnectionPointDirX, nameof(this.DirX));
-                this.DirY = sec.Columns.Add(SrcConstants.ConnectionPointDirY, nameof(this.DirY));
-                this.Type = sec.Columns.Add(SrcConstants.ConnectionPointType, nameof(this.Type));
-                this.X = sec.Columns.Add(SrcConstants.ConnectionPointX, nameof(this.X));
-                this.Y = sec.Columns.Add(SrcConstants.ConnectionPointY, nameof(this.Y));
+                var temp_cells = new ConnectionPointCells();
+                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                {
+                    sec.Columns.Add(pair.Src, pair.Name);
+                }
 
             }
 
             public override ConnectionPointCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new ConnectionPointCells();
-                cells.X = row[this.X];
-                cells.Y = row[this.Y];
-                cells.DirX = row[this.DirX];
-                cells.DirY = row[this.DirY];
-                cells.Type = row[this.Type];
+
+                var cols = this.query_multirow.SectionQueries[0].Columns;
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+                                
+                cells.X = getcellvalue(nameof(ConnectionPointCells.X));
+                cells.Y = getcellvalue(nameof(ConnectionPointCells.Y));
+                cells.DirX = getcellvalue(nameof(ConnectionPointCells.DirX));
+                cells.DirY = getcellvalue(nameof(ConnectionPointCells.DirY));
+                cells.Type = getcellvalue(nameof(ConnectionPointCells.Type));
 
                 return cells;
             }
