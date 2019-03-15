@@ -306,21 +306,34 @@ namespace VisioAutomation.Shapes
 
         class UserDefinedCellCellsReader : CellGroupReader<UserDefinedCellCells>
         {
-            public SectionQueryColumn Value { get; set; }
-            public SectionQueryColumn Prompt { get; set; }
 
             public UserDefinedCellCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
+
                 var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
-                this.Value = sec.Columns.Add(SrcConstants.UserDefCellValue, nameof(this.Value));
-                this.Prompt = sec.Columns.Add(SrcConstants.UserDefCellPrompt, nameof(this.Prompt));
+                var temp_cells = new UserDefinedCellCells();
+                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                {
+                    sec.Columns.Add(pair.Src, pair.Name);
+                }
             }
 
             public override UserDefinedCellCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new UserDefinedCellCells();
-                cells.Value = row[this.Value];
-                cells.Prompt = row[this.Prompt];
+                var cols = this.query_multirow.SectionQueries[0].Columns;
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+
+                cells.Value = getcellvalue(nameof(UserDefinedCellCells.Value));
+                cells.Prompt = getcellvalue(nameof(UserDefinedCellCells.Prompt));
+
+
+
                 return cells;
             }
         }

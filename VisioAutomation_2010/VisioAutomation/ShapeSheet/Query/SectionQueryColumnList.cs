@@ -30,6 +30,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var col = new SectionQueryColumn(ordinal, cellindex, norm_name);
             this._items.Add(col);
             this._cellindex_set.Add(cellindex);
+            this.map_name_to_item[norm_name] = col;
 
             return col;
         }
