@@ -316,13 +316,13 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<CustomPropertyCellsReader> Custom_Property_lazy_reader = new System.Lazy<CustomPropertyCellsReader>();
+        private static readonly System.Lazy<CustomPropertyCellsBuilder> Custom_Property_lazy_reader = new System.Lazy<CustomPropertyCellsBuilder>();
 
 
-        public class CustomPropertyCellsReader : CellGroupReader<CustomPropertyCells>
+        public class CustomPropertyCellsBuilder : CellGroupBuilder<CustomPropertyCells>
         {
 
-            public CustomPropertyCellsReader() : base(CellGroupReaderType.MultiRow)
+            public CustomPropertyCellsBuilder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

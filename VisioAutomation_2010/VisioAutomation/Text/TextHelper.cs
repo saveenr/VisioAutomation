@@ -195,12 +195,12 @@ namespace VisioAutomation.Text
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<CharacterFormatCellsReader> CharacterFormatCells_lazy_reader = new System.Lazy<CharacterFormatCellsReader>();
+        private static readonly System.Lazy<CharacterFormatCellsBuilder> CharacterFormatCells_lazy_reader = new System.Lazy<CharacterFormatCellsBuilder>();
 
 
-        class CharacterFormatCellsReader : CellGroupReader<Text.CharacterFormatCells>
+        class CharacterFormatCellsBuilder : CellGroupBuilder<Text.CharacterFormatCells>
         {
-            public CharacterFormatCellsReader() : base(CellGroupReaderType.MultiRow)
+            public CharacterFormatCellsBuilder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 
@@ -256,12 +256,12 @@ namespace VisioAutomation.Text
         }
 
 
-        private static readonly System.Lazy<ParagraphFormatCellsReader> ParagraphFormatCells_lazy_reader = new System.Lazy<ParagraphFormatCellsReader>();
+        private static readonly System.Lazy<ParagraphFormatCellsBuilder> ParagraphFormatCells_lazy_reader = new System.Lazy<ParagraphFormatCellsBuilder>();
 
 
-        class ParagraphFormatCellsReader : CellGroupReader<Text.ParagraphFormatCells>
+        class ParagraphFormatCellsBuilder : CellGroupBuilder<Text.ParagraphFormatCells>
         {
-            public ParagraphFormatCellsReader() : base(CellGroupReaderType.MultiRow)
+            public ParagraphFormatCellsBuilder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 
@@ -311,12 +311,12 @@ namespace VisioAutomation.Text
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<TextBlockCellsReader> TextBlockCells_lazy_reader = new System.Lazy<TextBlockCellsReader>();
+        private static readonly System.Lazy<TextBlockCellsBuilder> TextBlockCells_lazy_reader = new System.Lazy<TextBlockCellsBuilder>();
 
-        class TextBlockCellsReader : CellGroupReader<Text.TextBlockCells>
+        class TextBlockCellsBuilder : CellGroupBuilder<Text.TextBlockCells>
         {
 
-            public TextBlockCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
+            public TextBlockCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
@@ -356,12 +356,12 @@ namespace VisioAutomation.Text
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<TextXFormCellsReader> TextXFormCells_lazy_reader = new System.Lazy<TextXFormCellsReader>();
+        private static readonly System.Lazy<TextXFormCellsBuilder> TextXFormCells_lazy_reader = new System.Lazy<TextXFormCellsBuilder>();
 
 
-        class TextXFormCellsReader : CellGroupReader<Text.TextXFormCells>
+        class TextXFormCellsBuilder : CellGroupBuilder<Text.TextXFormCells>
         {
-            public TextXFormCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
+            public TextXFormCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 

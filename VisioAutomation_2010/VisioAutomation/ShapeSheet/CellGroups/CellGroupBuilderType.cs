@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public enum CellGroupReaderType
+    public enum CellGroupBuilderType
     {
         SingleRow,
         MultiRow

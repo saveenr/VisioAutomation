@@ -217,11 +217,11 @@ namespace VisioAutomation.Pages
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageRulerAndGridCellsReader> PageRulerAndGridCells_lazy_reader = new System.Lazy<PageRulerAndGridCellsReader>();
+        private static readonly System.Lazy<PageRulerAndGridCellsBuilder> PageRulerAndGridCells_lazy_reader = new System.Lazy<PageRulerAndGridCellsBuilder>();
 
-        class PageRulerAndGridCellsReader : VASS.CellGroups.CellGroupReader<PageRulerAndGridCells>
+        class PageRulerAndGridCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageRulerAndGridCells>
         {
-            public PageRulerAndGridCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
+            public PageRulerAndGridCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
@@ -256,11 +256,11 @@ namespace VisioAutomation.Pages
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageFormatCellsReader> PageFormatCells_lazy_reader = new System.Lazy<PageFormatCellsReader>();
+        private static readonly System.Lazy<PageFormatCellsBuilder> PageFormatCells_lazy_reader = new System.Lazy<PageFormatCellsBuilder>();
 
-        class PageFormatCellsReader : VASS.CellGroups.CellGroupReader<PageFormatCells>
+        class PageFormatCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageFormatCells>
         {
-            public PageFormatCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
+            public PageFormatCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
@@ -299,11 +299,11 @@ namespace VisioAutomation.Pages
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageLayoutCellsReader> PageLayoutCells_lazy_reader = new System.Lazy<PageLayoutCellsReader>();
+        private static readonly System.Lazy<PageLayoutCellsBuilder> PageLayoutCells_lazy_reader = new System.Lazy<PageLayoutCellsBuilder>();
 
-        class PageLayoutCellsReader : VASS.CellGroups.CellGroupReader<PageLayoutCells>
+        class PageLayoutCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageLayoutCells>
         {
-            public PageLayoutCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
+            public PageLayoutCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
@@ -357,11 +357,11 @@ namespace VisioAutomation.Pages
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PagePrintCellsReader> PagePrintCells_lazy_reader = new System.Lazy<PagePrintCellsReader>();
+        private static readonly System.Lazy<PagePrintCellsBuilder> PagePrintCells_lazy_reader = new System.Lazy<PagePrintCellsBuilder>();
 
-        class PagePrintCellsReader : VASS.CellGroups.CellGroupReader<PagePrintCells>
+        class PagePrintCellsBuilder : VASS.CellGroups.CellGroupBuilder<PagePrintCells>
         {
-            public PagePrintCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
+            public PagePrintCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 

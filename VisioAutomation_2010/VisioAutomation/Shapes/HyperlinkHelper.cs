@@ -110,13 +110,13 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<HyperlinkCellsReader> HyperLinkCells_lazy_reader = new System.Lazy<HyperlinkCellsReader>();
+        private static readonly System.Lazy<HyperlinkCellsBuilder> HyperLinkCells_lazy_reader = new System.Lazy<HyperlinkCellsBuilder>();
 
 
-        class HyperlinkCellsReader : CellGroupReader<HyperlinkCells>
+        class HyperlinkCellsBuilder : CellGroupBuilder<HyperlinkCells>
         {
 
-            public HyperlinkCellsReader() : base(CellGroupReaderType.MultiRow)
+            public HyperlinkCellsBuilder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

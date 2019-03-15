@@ -98,7 +98,7 @@
     <Compile Include="Pages\PageLayoutCells.cs" />
     <Compile Include="Pages\PagePrintCells.cs" />
     <Compile Include="Pages\PageCells.cs" />
-    <Compile Include="ShapeSheet\CellGroups\CellGroupReaderType.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellGroupBuilderType.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
     <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
     <Compile Include="ShapeSheet\CellValueType.cs" />
@@ -126,7 +126,7 @@
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
     <Compile Include="ShapeSheet\Query\ColumnListBase.cs" />
-    <Compile Include="ShapeSheet\CellGroups\CellGroupReader.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
     <Compile Include="ShapeSheet\Query\ColumnBase.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryColumn.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryColumnList.cs" />

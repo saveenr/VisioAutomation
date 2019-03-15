@@ -101,11 +101,11 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<ControlCellsReader> ControlCells_lazy_reader = new System.Lazy<ControlCellsReader>();
+        private static readonly System.Lazy<ControlCellsBuilder> ControlCells_lazy_reader = new System.Lazy<ControlCellsBuilder>();
 
-        class ControlCellsReader : CellGroupReader<ControlCells>
+        class ControlCellsBuilder : CellGroupBuilder<ControlCells>
         {
-            public ControlCellsReader() : base(CellGroupReaderType.MultiRow)
+            public ControlCellsBuilder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

@@ -81,12 +81,12 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeFormatCellsReader> shape_format_lazy_reader = new System.Lazy<ShapeFormatCellsReader>();
+        private static readonly System.Lazy<ShapeFormatCellsBuilder> shape_format_lazy_reader = new System.Lazy<ShapeFormatCellsBuilder>();
 
-        class ShapeFormatCellsReader : CellGroupReader<ShapeFormatCells>
+        class ShapeFormatCellsBuilder : CellGroupBuilder<ShapeFormatCells>
         {
  
-            public ShapeFormatCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
+            public ShapeFormatCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
@@ -144,12 +144,12 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeLayoutCellsReader> ShapeLayoutCells_lazy_reader = new System.Lazy<ShapeLayoutCellsReader>();
+        private static readonly System.Lazy<ShapeLayoutCellsBuilder> ShapeLayoutCells_lazy_reader = new System.Lazy<ShapeLayoutCellsBuilder>();
 
-        class ShapeLayoutCellsReader : CellGroupReader<ShapeLayoutCells>
+        class ShapeLayoutCellsBuilder : CellGroupBuilder<ShapeLayoutCells>
         {
 
-            public ShapeLayoutCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
+            public ShapeLayoutCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
@@ -199,11 +199,11 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeXFormCellsReader> ShapeXFormCells_lazy_reader = new System.Lazy<ShapeXFormCellsReader>();
+        private static readonly System.Lazy<ShapeXFormCellsBuilder> ShapeXFormCells_lazy_reader = new System.Lazy<ShapeXFormCellsBuilder>();
 
-        class ShapeXFormCellsReader : CellGroupReader<ShapeXFormCells>
+        class ShapeXFormCellsBuilder : CellGroupBuilder<ShapeXFormCells>
         {
-            public ShapeXFormCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
+            public ShapeXFormCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 

@@ -299,15 +299,15 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<UserDefinedCellCellsReader> UserDefinedCells_lazy_reader = new System.Lazy<UserDefinedCellCellsReader>();
+        private static readonly System.Lazy<UserDefinedCellCellsBuilder> UserDefinedCells_lazy_reader = new System.Lazy<UserDefinedCellCellsBuilder>();
 
 
 
 
-        class UserDefinedCellCellsReader : CellGroupReader<UserDefinedCellCells>
+        class UserDefinedCellCellsBuilder : CellGroupBuilder<UserDefinedCellCells>
         {
 
-            public UserDefinedCellCellsReader() : base(CellGroupReaderType.MultiRow)
+            public UserDefinedCellCellsBuilder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

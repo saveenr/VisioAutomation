@@ -23,12 +23,12 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<LockCellsReader> LockCells_lazy_reader = new System.Lazy<LockCellsReader>();
+        private static readonly System.Lazy<LockCellsBuilder> LockCells_lazy_reader = new System.Lazy<LockCellsBuilder>();
 
 
-        class LockCellsReader : CellGroupReader<LockCells>
+        class LockCellsBuilder : CellGroupBuilder<LockCells>
         {
-            public LockCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
+            public LockCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 

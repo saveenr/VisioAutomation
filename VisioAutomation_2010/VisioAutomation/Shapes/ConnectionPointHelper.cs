@@ -95,12 +95,12 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<ConnectionPointCellsReader> ConnectionPointCells_lazy_reader = new System.Lazy<ConnectionPointCellsReader>();
+        private static readonly System.Lazy<ConnectionPointCellsBuilder> ConnectionPointCells_lazy_reader = new System.Lazy<ConnectionPointCellsBuilder>();
 
-        class ConnectionPointCellsReader : CellGroupReader<ConnectionPointCells>
+        class ConnectionPointCellsBuilder : CellGroupBuilder<ConnectionPointCells>
         {
 
-            public ConnectionPointCellsReader() : base(CellGroupReaderType.MultiRow)
+            public ConnectionPointCellsBuilder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 
