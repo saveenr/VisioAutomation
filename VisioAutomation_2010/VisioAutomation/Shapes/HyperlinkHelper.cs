@@ -118,14 +118,7 @@ namespace VisioAutomation.Shapes
 
             public HyperlinkCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-
-                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionHyperlink);
-                var temp_cells = new HyperlinkCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    sec.Columns.Add(pair.Src, pair.Name);
-                }
-
+                MultiRowInit();
             }
 
             public override HyperlinkCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

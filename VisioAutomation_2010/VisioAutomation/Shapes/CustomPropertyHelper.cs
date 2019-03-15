@@ -325,12 +325,7 @@ namespace VisioAutomation.Shapes
             public CustomPropertyCellsReader()
                 : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
-                var temp_cells = new CustomPropertyCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    sec.Columns.Add(pair.Src, pair.Name);
-                }
+                MultiRowInit();
             }
 
             public override CustomPropertyCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

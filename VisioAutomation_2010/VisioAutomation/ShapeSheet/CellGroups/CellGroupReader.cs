@@ -5,7 +5,7 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class CellGroupReader<TGroup> where TGroup : CellGroup
+    public abstract class CellGroupReader<TGroup> where TGroup : CellGroup, new()
     {
         protected Query.CellQuery query_singlerow;
         protected VASS.Query.SectionsQuery query_multirow;
@@ -28,6 +28,16 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.query_multirow = query;
         }
 
+        protected void MultiRowInit()
+        {
+            var temp_cells = new TGroup();
+            var first_cell_metadata = temp_cells.CellMetadata.First();
+            var sec = this.query_multirow.SectionQueries.Add((IVisio.VisSectionIndices)first_cell_metadata.Src.Section);
+            foreach (var pair in temp_cells.CellMetadata)
+            {
+                sec.Columns.Add(pair.Src, pair.Name);
+            }
+        }
         public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row);
 
         public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)

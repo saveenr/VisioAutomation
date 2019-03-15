@@ -309,15 +309,10 @@ namespace VisioAutomation.Shapes
 
             public UserDefinedCellCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-
-                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
-                var temp_cells = new UserDefinedCellCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    sec.Columns.Add(pair.Src, pair.Name);
-                }
+                MultiRowInit();
             }
 
+            
             public override UserDefinedCellCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new UserDefinedCellCells();

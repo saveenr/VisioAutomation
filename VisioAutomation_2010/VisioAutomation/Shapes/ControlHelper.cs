@@ -109,14 +109,7 @@ namespace VisioAutomation.Shapes
                 : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
 
             {
-                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionControls);
-                var temp_cells = new ControlCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    sec.Columns.Add(pair.Src, pair.Name);
-                }
-
-
+                MultiRowInit();
             }
 
             public override ControlCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)

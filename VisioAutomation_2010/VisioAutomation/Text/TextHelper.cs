@@ -203,13 +203,7 @@ namespace VisioAutomation.Text
             public CharacterFormatCellsReader() :
                 base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
-                var temp_cells = new CharacterFormatCells();
-
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    sec.Columns.Add(pair.Src, pair.Name);
-                }
+                MultiRowInit();
             }
 
             public override Text.CharacterFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
@@ -271,12 +265,7 @@ namespace VisioAutomation.Text
         {
             public ParagraphFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
             {
-                var sec = this.query_multirow.SectionQueries.Add(IVisio.VisSectionIndices.visSectionParagraph);
-                var temp_cells = new ParagraphFormatCells();
-                foreach (var pair in temp_cells.CellMetadata)
-                {
-                    sec.Columns.Add(pair.Src, pair.Name);
-                }
+                MultiRowInit();
             }
 
             public override Text.ParagraphFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
