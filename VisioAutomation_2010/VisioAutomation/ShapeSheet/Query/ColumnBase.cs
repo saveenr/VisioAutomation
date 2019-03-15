@@ -28,5 +28,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             return col.Ordinal;
         }
+
+
     }
 }
