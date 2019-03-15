@@ -307,7 +307,7 @@ namespace VisioAutomation.Shapes
         class UserDefinedCellCellsReader : CellGroupReader<UserDefinedCellCells>
         {
 
-            public UserDefinedCellCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            public UserDefinedCellCellsReader() : base(CellGroupReaderType.MultiRow)
             {
                 InitializeQuery();
             }

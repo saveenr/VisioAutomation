@@ -5,6 +5,12 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
+    public enum CellGroupReaderType
+    {
+        SingleRow,
+        MultiRow
+    }
+
     public abstract class CellGroupReader<TGroup> where TGroup : CellGroup, new()
     {
         protected Query.CellQuery query_singlerow;
@@ -16,16 +22,18 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.query_multirow = null;
         }
 
-        protected CellGroupReader(Query.CellQuery query)
+        protected CellGroupReader(CellGroupReaderType type)
         {
-            this.query_singlerow = query;
-            this.query_multirow = null;
-        }
-
-        protected CellGroupReader(Query.SectionsQuery query)
-        {
-            this.query_singlerow = null;
-            this.query_multirow = query;
+            if (type == CellGroupReaderType.SingleRow)
+            {
+                this.query_singlerow = new Query.CellQuery();
+                this.query_multirow = null;
+            }
+            else
+            {
+                this.query_singlerow = null;
+                this.query_multirow = new Query.SectionsQuery();
+            }
         }
 
         protected void InitializeQuery()

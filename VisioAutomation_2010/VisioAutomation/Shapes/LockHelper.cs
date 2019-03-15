@@ -28,7 +28,7 @@ namespace VisioAutomation.Shapes
 
         class LockCellsReader : CellGroupReader<LockCells>
         {
-            public LockCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public LockCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }

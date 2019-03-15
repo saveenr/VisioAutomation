@@ -116,7 +116,7 @@ namespace VisioAutomation.Shapes
         class HyperlinkCellsReader : CellGroupReader<HyperlinkCells>
         {
 
-            public HyperlinkCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            public HyperlinkCellsReader() : base(CellGroupReaderType.MultiRow)
             {
                 InitializeQuery();
             }

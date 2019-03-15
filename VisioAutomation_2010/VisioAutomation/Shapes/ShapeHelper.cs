@@ -86,7 +86,7 @@ namespace VisioAutomation.Shapes
         class ShapeFormatCellsReader : CellGroupReader<ShapeFormatCells>
         {
  
-            public ShapeFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public ShapeFormatCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }
@@ -150,7 +150,7 @@ namespace VisioAutomation.Shapes
         class ShapeLayoutCellsReader : CellGroupReader<ShapeLayoutCells>
         {
 
-            public ShapeLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public ShapeLayoutCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }
@@ -205,7 +205,7 @@ namespace VisioAutomation.Shapes
 
         class ShapeXFormCellsReader : CellGroupReader<ShapeXFormCells>
         {
-            public ShapeXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public ShapeXFormCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }

@@ -200,8 +200,7 @@ namespace VisioAutomation.Text
 
         class CharacterFormatCellsReader : CellGroupReader<Text.CharacterFormatCells>
         {
-            public CharacterFormatCellsReader() :
-                base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            public CharacterFormatCellsReader() : base(CellGroupReaderType.MultiRow)
             {
                 InitializeQuery();
             }
@@ -263,7 +262,7 @@ namespace VisioAutomation.Text
 
         class ParagraphFormatCellsReader : CellGroupReader<Text.ParagraphFormatCells>
         {
-            public ParagraphFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            public ParagraphFormatCellsReader() : base(CellGroupReaderType.MultiRow)
             {
                 InitializeQuery();
             }
@@ -319,7 +318,7 @@ namespace VisioAutomation.Text
         class TextBlockCellsReader : CellGroupReader<Text.TextBlockCells>
         {
 
-            public TextBlockCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public TextBlockCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }
@@ -365,7 +364,7 @@ namespace VisioAutomation.Text
 
         class TextXFormCellsReader : CellGroupReader<Text.TextXFormCells>
         {
-            public TextXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public TextXFormCellsReader() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }

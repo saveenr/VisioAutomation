@@ -322,8 +322,7 @@ namespace VisioAutomation.Shapes
         public class CustomPropertyCellsReader : CellGroupReader<CustomPropertyCells>
         {
 
-            public CustomPropertyCellsReader()
-                : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            public CustomPropertyCellsReader() : base(CellGroupReaderType.MultiRow)
             {
                 InitializeQuery();
             }

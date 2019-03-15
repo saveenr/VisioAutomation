@@ -100,8 +100,7 @@ namespace VisioAutomation.Shapes
         class ConnectionPointCellsReader : CellGroupReader<ConnectionPointCells>
         {
 
-            public ConnectionPointCellsReader()
-                : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            public ConnectionPointCellsReader() : base(CellGroupReaderType.MultiRow)
             {
                 InitializeQuery();
             }

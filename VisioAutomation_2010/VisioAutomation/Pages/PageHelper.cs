@@ -221,7 +221,7 @@ namespace VisioAutomation.Pages
 
         class PageRulerAndGridCellsReader : VASS.CellGroups.CellGroupReader<PageRulerAndGridCells>
         {
-            public PageRulerAndGridCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public PageRulerAndGridCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }
@@ -261,7 +261,7 @@ namespace VisioAutomation.Pages
 
         class PageFormatCellsReader : VASS.CellGroups.CellGroupReader<PageFormatCells>
         {
-            public PageFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public PageFormatCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }
@@ -305,7 +305,7 @@ namespace VisioAutomation.Pages
 
         class PageLayoutCellsReader : VASS.CellGroups.CellGroupReader<PageLayoutCells>
         {
-            public PageLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public PageLayoutCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }
@@ -364,7 +364,7 @@ namespace VisioAutomation.Pages
 
         class PagePrintCellsReader : VASS.CellGroups.CellGroupReader<PagePrintCells>
         {
-            public PagePrintCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
+            public PagePrintCellsReader() : base(VASS.CellGroups.CellGroupReaderType.SingleRow)
             {
                 InitializeQuery();
             }

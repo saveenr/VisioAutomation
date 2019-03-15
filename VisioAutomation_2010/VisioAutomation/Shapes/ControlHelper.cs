@@ -105,8 +105,7 @@ namespace VisioAutomation.Shapes
 
         class ControlCellsReader : CellGroupReader<ControlCells>
         {
-            public ControlCellsReader()
-                : base(new VisioAutomation.ShapeSheet.Query.SectionsQuery())
+            public ControlCellsReader() : base(CellGroupReaderType.MultiRow)
 
             {
                 InitializeQuery();
