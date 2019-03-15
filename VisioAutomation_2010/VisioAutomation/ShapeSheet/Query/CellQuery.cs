@@ -6,11 +6,11 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellQuery
     {
-        public ColumnListBase Columns { get; }
+        public ColumnList Columns { get; }
 
         public CellQuery()
         {
-            this.Columns = new ColumnListBase(0);
+            this.Columns = new ColumnList(0);
         }
 
         private static void RestrictToShapesOnly(SurfaceTarget surface)

@@ -2,17 +2,17 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ColumnListBase : IEnumerable<ColumnBase> 
+    public class ColumnList : IEnumerable<ColumnBase> 
     {
         protected IList<ColumnBase> _items;
         protected Dictionary<string, ColumnBase> map_name_to_item;
         protected Dictionary<ShapeSheet.Src, ColumnBase> dic_src_to_col;
 
-        internal ColumnListBase() : this(0)
+        internal ColumnList() : this(0)
         {
         }
 
-        internal ColumnListBase(int capacity)
+        internal ColumnList(int capacity)
         {
             this._items = new List<ColumnBase>(capacity);
             this.map_name_to_item = new Dictionary<string, ColumnBase>(capacity);
