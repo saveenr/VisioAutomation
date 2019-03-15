@@ -2,12 +2,11 @@
 {
     public class SectionQueryColumn : ColumnBase
     {
-        public readonly short CellIndex;
+        public short CellIndex => this.Src.Cell;
 
-        internal SectionQueryColumn(int ordinal, short cell, string name) :
-            base(ordinal, name)
+        internal SectionQueryColumn(int ordinal, string name, Src src) :
+            base(ordinal, name, src)
         {
-            this.CellIndex = cell;
         }
     }
 }

@@ -2,12 +2,10 @@
 {
     public class CellColumn : ColumnBase
     {
-        public readonly ShapeSheet.Src Src;
 
-        internal CellColumn(int ordinal, ShapeSheet.Src src, string name) :
-            base(ordinal, name)
+        internal CellColumn(int ordinal, string name, ShapeSheet.Src src) :
+            base(ordinal, name, src)
         {
-            this.Src = src;
         }
 
     }

@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Query
             check_duplicate_column_name(norm_name);
 
             int ordinal = this._items.Count;
-            var col = new CellColumn(ordinal, src, norm_name);
+            var col = new CellColumn(ordinal, norm_name, src);
             this._items.Add(col);
 
             this.map_name_to_item[norm_name] = col;

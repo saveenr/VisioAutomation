@@ -6,15 +6,22 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         public string Name { get; protected set; }
         public int Ordinal { get; protected set; }
-        protected ColumnBase(int ordinal, string name)
+
+        public readonly ShapeSheet.Src Src;
+
+        protected ColumnBase(int ordinal, string name, ShapeSheet.Src src) 
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("name");
             }
 
+            this.Src = src;
             this.Name = name;
             this.Ordinal = ordinal;
+        }
+        protected ColumnBase(int ordinal, string name)
+        {
         }
 
         public static implicit operator int(ColumnBase col)

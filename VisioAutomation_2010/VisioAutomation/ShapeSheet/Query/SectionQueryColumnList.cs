@@ -17,23 +17,19 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public SectionQueryColumn Add(Src src, string sname)
         {
-            return this.Add(src.Cell, sname);
-        }
-
-        private SectionQueryColumn Add(short cellindex, string sname)
-        {
-            check_duplicate_cellindex(cellindex);
+            check_duplicate_cellindex(src.Cell);
             string norm_name = this.normalize_name(sname);
             check_duplicate_column_name(norm_name);
 
             int ordinal = this._items.Count;
-            var col = new SectionQueryColumn(ordinal, cellindex, norm_name);
+            var col = new SectionQueryColumn(ordinal, norm_name, src);
             this._items.Add(col);
-            this.hs_cellindex.Add(cellindex);
+            this.hs_cellindex.Add(src.Cell);
             this.map_name_to_item[norm_name] = col;
 
             return col;
         }
+
 
         private void check_duplicate_cellindex(short cellindex)
         {
