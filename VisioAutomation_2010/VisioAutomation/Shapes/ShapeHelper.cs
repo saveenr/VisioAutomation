@@ -155,68 +155,45 @@ namespace VisioAutomation.Shapes
 
         class ShapeLayoutCellsReader : CellGroupReader<ShapeLayoutCells>
         {
-            public CellColumn ConnectorFixedCode { get; set; }
-            public CellColumn LineJumpCode { get; set; }
-            public CellColumn LineJumpDirX { get; set; }
-            public CellColumn LineJumpDirY { get; set; }
-            public CellColumn LineJumpStyle { get; set; }
-            public CellColumn LineRouteExt { get; set; }
-            public CellColumn ShapeFixedCode { get; set; }
-            public CellColumn ShapePermeablePlace { get; set; }
-            public CellColumn ShapePermeableX { get; set; }
-            public CellColumn ShapePermeableY { get; set; }
-            public CellColumn ShapePlaceFlip { get; set; }
-            public CellColumn ShapePlaceStyle { get; set; }
-            public CellColumn ShapePlowCode { get; set; }
-            public CellColumn ShapeRouteStyle { get; set; }
-            public CellColumn ShapeSplit { get; set; }
-            public CellColumn ShapeSplittable { get; set; }
-            public CellColumn ShapeDisplayLevel { get; set; }
-            public CellColumn Relationships { get; set; }
 
             public ShapeLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                this.ConnectorFixedCode = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutConnectorFixedCode, nameof(this.ConnectorFixedCode));
-                this.LineJumpCode = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutLineJumpCode, nameof(this.LineJumpCode));
-                this.LineJumpDirX = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutLineJumpDirX, nameof(this.LineJumpDirX));
-                this.LineJumpDirY = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutLineJumpDirY, nameof(this.LineJumpDirY));
-                this.LineJumpStyle = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutLineJumpStyle, nameof(this.LineJumpStyle));
-                this.LineRouteExt = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutLineRouteExt, nameof(this.LineRouteExt));
-                this.ShapeFixedCode = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapeFixedCode, nameof(this.ShapeFixedCode));
-                this.ShapePermeablePlace = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapePermeablePlace, nameof(this.ShapePermeablePlace));
-                this.ShapePermeableX = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapePermeableX, nameof(this.ShapePermeableX));
-                this.ShapePermeableY = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapePermeableY, nameof(this.ShapePermeableY));
-                this.ShapePlaceFlip = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapePlaceFlip, nameof(this.ShapePlaceFlip));
-                this.ShapePlaceStyle = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapePlaceStyle, nameof(this.ShapePlaceStyle));
-                this.ShapePlowCode = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapePlowCode, nameof(this.ShapePlowCode));
-                this.ShapeRouteStyle = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapeRouteStyle, nameof(this.ShapeRouteStyle));
-                this.ShapeSplit = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapeSplit, nameof(this.ShapeSplit));
-                this.ShapeSplittable = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapeSplittable, nameof(this.ShapeSplittable));
-                this.ShapeDisplayLevel = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutShapeDisplayLevel, nameof(this.ShapeDisplayLevel));
-                this.Relationships = this.query_singlerow.Columns.Add(SrcConstants.ShapeLayoutRelationships, nameof(this.Relationships));
+                var temp_cells = new ShapeLayoutCells();
+                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                {
+                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
+                }
             }
 
             public override ShapeLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new ShapeLayoutCells();
-                cells.ConnectorFixedCode = row[this.ConnectorFixedCode];
-                cells.LineJumpCode = row[this.LineJumpCode];
-                cells.LineJumpDirX = row[this.LineJumpDirX];
-                cells.LineJumpDirY = row[this.LineJumpDirY];
-                cells.LineJumpStyle = row[this.LineJumpStyle];
-                cells.LineRouteExt = row[this.LineRouteExt];
-                cells.ShapeFixedCode = row[this.ShapeFixedCode];
-                cells.ShapePermeablePlace = row[this.ShapePermeablePlace];
-                cells.ShapePermeableX = row[this.ShapePermeableX];
-                cells.ShapePermeableY = row[this.ShapePermeableY];
-                cells.ShapePlaceFlip = row[this.ShapePlaceFlip];
-                cells.ShapePlaceStyle = row[this.ShapePlaceStyle];
-                cells.ShapePlowCode = row[this.ShapePlowCode];
-                cells.ShapeRouteStyle = row[this.ShapeRouteStyle];
-                cells.ShapeSplit = row[this.ShapeSplit];
-                cells.ShapeSplittable = row[this.ShapeSplittable];
-                cells.ShapeDisplayLevel = row[this.ShapeDisplayLevel];
-                cells.Relationships = row[this.Relationships];
+                var cols = this.query_singlerow.Columns;
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.ConnectorFixedCode = getcellvalue(nameof(ShapeLayoutCells.ConnectorFixedCode));
+                cells.LineJumpCode = getcellvalue(nameof(ShapeLayoutCells.LineJumpCode));
+                cells.LineJumpDirX = getcellvalue(nameof(ShapeLayoutCells.LineJumpDirX));
+                cells.LineJumpDirY = getcellvalue(nameof(ShapeLayoutCells.LineJumpDirY));
+                cells.LineJumpStyle = getcellvalue(nameof(ShapeLayoutCells.LineJumpStyle));
+                cells.LineRouteExt = getcellvalue(nameof(ShapeLayoutCells.LineRouteExt));
+                cells.ShapeFixedCode = getcellvalue(nameof(ShapeLayoutCells.ShapeFixedCode));
+                cells.ShapePermeablePlace = getcellvalue(nameof(ShapeLayoutCells.ShapePermeablePlace));
+                cells.ShapePermeableX = getcellvalue(nameof(ShapeLayoutCells.ShapePermeableX));
+                cells.ShapePermeableY = getcellvalue(nameof(ShapeLayoutCells.ShapePermeableY));
+                cells.ShapePlaceFlip = getcellvalue(nameof(ShapeLayoutCells.ShapePlaceFlip));
+                cells.ShapePlaceStyle = getcellvalue(nameof(ShapeLayoutCells.ShapePlaceStyle));
+                cells.ShapePlowCode = getcellvalue(nameof(ShapeLayoutCells.ShapePlowCode));
+                cells.ShapeRouteStyle = getcellvalue(nameof(ShapeLayoutCells.ShapeRouteStyle));
+                cells.ShapeSplit = getcellvalue(nameof(ShapeLayoutCells.ShapeSplit));
+                cells.ShapeSplittable = getcellvalue(nameof(ShapeLayoutCells.ShapeSplittable));
+                cells.ShapeDisplayLevel = getcellvalue(nameof(ShapeLayoutCells.ShapeDisplayLevel));
+                cells.Relationships = getcellvalue(nameof(ShapeLayoutCells.Relationships));
+
                 return cells;
             }
         }
@@ -238,35 +215,34 @@ namespace VisioAutomation.Shapes
 
         class ShapeXFormCellsReader : CellGroupReader<ShapeXFormCells>
         {
-            public CellColumn Width { get; set; }
-            public CellColumn Height { get; set; }
-            public CellColumn PinX { get; set; }
-            public CellColumn PinY { get; set; }
-            public CellColumn LocPinX { get; set; }
-            public CellColumn LocPinY { get; set; }
-            public CellColumn Angle { get; set; }
-
             public ShapeXFormCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                this.PinX = this.query_singlerow.Columns.Add(SrcConstants.XFormPinX, nameof(this.PinX));
-                this.PinY = this.query_singlerow.Columns.Add(SrcConstants.XFormPinY, nameof(this.PinY));
-                this.LocPinX = this.query_singlerow.Columns.Add(SrcConstants.XFormLocPinX, nameof(this.LocPinX));
-                this.LocPinY = this.query_singlerow.Columns.Add(SrcConstants.XFormLocPinY, nameof(this.LocPinY));
-                this.Width = this.query_singlerow.Columns.Add(SrcConstants.XFormWidth, nameof(this.Width));
-                this.Height = this.query_singlerow.Columns.Add(SrcConstants.XFormHeight, nameof(this.Height));
-                this.Angle = this.query_singlerow.Columns.Add(SrcConstants.XFormAngle, nameof(this.Angle));
+                var temp_cells = new ShapeXFormCells();
+                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                {
+                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
+                }
             }
 
             public override ShapeXFormCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new ShapeXFormCells();
-                cells.PinX = row[this.PinX];
-                cells.PinY = row[this.PinY];
-                cells.LocPinX = row[this.LocPinX];
-                cells.LocPinY = row[this.LocPinY];
-                cells.Width = row[this.Width];
-                cells.Height = row[this.Height];
-                cells.Angle = row[this.Angle];
+
+                var cols = this.query_singlerow.Columns;
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.PinX = getcellvalue(nameof(ShapeXFormCells.PinX));
+                cells.PinY = getcellvalue(nameof(ShapeXFormCells.PinY));
+                cells.LocPinX = getcellvalue(nameof(ShapeXFormCells.LocPinX));
+                cells.LocPinY = getcellvalue(nameof(ShapeXFormCells.LocPinY));
+                cells.Width = getcellvalue(nameof(ShapeXFormCells.Width));
+                cells.Height = getcellvalue(nameof(ShapeXFormCells.Height));
+                cells.Angle = getcellvalue(nameof(ShapeXFormCells.Angle));
+
                 return cells;
             }
         }

@@ -221,44 +221,36 @@ namespace VisioAutomation.Pages
 
         class PageRulerAndGridCellsReader : VASS.CellGroups.CellGroupReader<PageRulerAndGridCells>
         {
-            public VASS.Query.CellColumn XGridDensity { get; set; }
-            public VASS.Query.CellColumn XGridOrigin { get; set; }
-            public VASS.Query.CellColumn XGridSpacing { get; set; }
-            public VASS.Query.CellColumn XRulerDensity { get; set; }
-            public VASS.Query.CellColumn XRulerOrigin { get; set; }
-            public VASS.Query.CellColumn YGridDensity { get; set; }
-            public VASS.Query.CellColumn YGridOrigin { get; set; }
-            public VASS.Query.CellColumn YGridSpacing { get; set; }
-            public VASS.Query.CellColumn YRulerDensity { get; set; }
-            public VASS.Query.CellColumn YRulerOrigin { get; set; }
-
             public PageRulerAndGridCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                this.XGridDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.XGridDensity, nameof(this.XGridDensity));
-                this.XGridOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.XGridOrigin, nameof(this.XGridOrigin));
-                this.XGridSpacing = this.query_singlerow.Columns.Add(VASS.SrcConstants.XGridSpacing, nameof(this.XGridSpacing));
-                this.XRulerDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.XRulerDensity, nameof(this.XRulerDensity));
-                this.XRulerOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.XRulerOrigin, nameof(this.XRulerOrigin));
-                this.YGridDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.YGridDensity, nameof(this.YGridDensity));
-                this.YGridOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.YGridOrigin, nameof(this.YGridOrigin));
-                this.YGridSpacing = this.query_singlerow.Columns.Add(VASS.SrcConstants.YGridSpacing, nameof(this.YGridSpacing));
-                this.YRulerDensity = this.query_singlerow.Columns.Add(VASS.SrcConstants.YRulerDensity, nameof(this.YRulerDensity));
-                this.YRulerOrigin = this.query_singlerow.Columns.Add(VASS.SrcConstants.YRulerOrigin, nameof(this.YRulerOrigin));
+                var temp_cells = new PageRulerAndGridCells();
+                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                {
+                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
+                }
             }
 
             public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PageRulerAndGridCells();
-                cells.XGridDensity = row[this.XGridDensity];
-                cells.XGridOrigin = row[this.XGridOrigin];
-                cells.XGridSpacing = row[this.XGridSpacing];
-                cells.XRulerDensity = row[this.XRulerDensity];
-                cells.XRulerOrigin = row[this.XRulerOrigin];
-                cells.YGridDensity = row[this.YGridDensity];
-                cells.YGridOrigin = row[this.YGridOrigin];
-                cells.YGridSpacing = row[this.YGridSpacing];
-                cells.YRulerDensity = row[this.YRulerDensity];
-                cells.YRulerOrigin = row[this.YRulerOrigin];
+                var cols = this.query_singlerow.Columns;
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.XGridDensity = getcellvalue(nameof(PageRulerAndGridCells.XGridDensity));
+                cells.XGridOrigin = getcellvalue(nameof(PageRulerAndGridCells.XGridOrigin));
+                cells.XGridSpacing = getcellvalue(nameof(PageRulerAndGridCells.XGridSpacing));
+                cells.XRulerDensity = getcellvalue(nameof(PageRulerAndGridCells.XRulerDensity));
+                cells.XRulerOrigin = getcellvalue(nameof(PageRulerAndGridCells.XRulerOrigin));
+                cells.YGridDensity = getcellvalue(nameof(PageRulerAndGridCells.YGridDensity));
+                cells.YGridOrigin = getcellvalue(nameof(PageRulerAndGridCells.YGridOrigin));
+                cells.YGridSpacing = getcellvalue(nameof(PageRulerAndGridCells.YGridSpacing));
+                cells.YRulerDensity = getcellvalue(nameof(PageRulerAndGridCells.YRulerDensity));
+                cells.YRulerOrigin = getcellvalue(nameof(PageRulerAndGridCells.YRulerOrigin));
+
                 return cells;
             }
         }
@@ -273,56 +265,40 @@ namespace VisioAutomation.Pages
 
         class PageFormatCellsReader : VASS.CellGroups.CellGroupReader<PageFormatCells>
         {
-            public VASS.Query.CellColumn DrawingScale { get; set; }
-            public VASS.Query.CellColumn DrawingScaleType { get; set; }
-            public VASS.Query.CellColumn DrawingSizeType { get; set; }
-            public VASS.Query.CellColumn InhibitSnap { get; set; }
-            public VASS.Query.CellColumn Height { get; set; }
-            public VASS.Query.CellColumn Scale { get; set; }
-            public VASS.Query.CellColumn Width { get; set; }
-            public VASS.Query.CellColumn ShadowObliqueAngle { get; set; }
-            public VASS.Query.CellColumn ShadowOffsetX { get; set; }
-            public VASS.Query.CellColumn ShadowOffsetY { get; set; }
-            public VASS.Query.CellColumn ShadowScaleFactor { get; set; }
-            public VASS.Query.CellColumn ShadowType { get; set; }
-            public VASS.Query.CellColumn UIVisibility { get; set; }
-            public VASS.Query.CellColumn DrawingResizeType { get; set; }
-
             public PageFormatCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                this.DrawingScale = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageDrawingScale, nameof(this.DrawingScale));
-                this.DrawingScaleType = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageDrawingScaleType, nameof(this.DrawingScaleType));
-                this.DrawingSizeType = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageDrawingSizeType, nameof(this.DrawingSizeType));
-                this.InhibitSnap = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageInhibitSnap, nameof(this.InhibitSnap));
-                this.Height = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageHeight, nameof(this.Height));
-                this.Scale = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageScale, nameof(this.Scale));
-                this.Width = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageWidth, nameof(this.Width));
-                this.ShadowObliqueAngle = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageShadowObliqueAngle, nameof(this.ShadowObliqueAngle));
-                this.ShadowOffsetX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageShadowOffsetX, nameof(this.ShadowOffsetX));
-                this.ShadowOffsetY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageShadowOffsetY, nameof(this.ShadowOffsetY));
-                this.ShadowScaleFactor = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageShadowScaleFactor, nameof(this.ShadowScaleFactor));
-                this.ShadowType = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageShadowType, nameof(this.ShadowType));
-                this.UIVisibility = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageUIVisibility, nameof(this.UIVisibility));
-                this.DrawingResizeType = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageDrawingResizeType, nameof(this.DrawingResizeType));
+                var temp_cells = new PageFormatCells();
+                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                {
+                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
+                }
             }
 
             public override PageFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PageFormatCells();
-                cells.DrawingScale = row[this.DrawingScale];
-                cells.DrawingScaleType = row[this.DrawingScaleType];
-                cells.DrawingSizeType = row[this.DrawingSizeType];
-                cells.InhibitSnap = row[this.InhibitSnap];
-                cells.Height = row[this.Height];
-                cells.Scale = row[this.Scale];
-                cells.Width = row[this.Width];
-                cells.ShadowObliqueAngle = row[this.ShadowObliqueAngle];
-                cells.ShadowOffsetX = row[this.ShadowOffsetX];
-                cells.ShadowOffsetY = row[this.ShadowOffsetY];
-                cells.ShadowScaleFactor = row[this.ShadowScaleFactor];
-                cells.ShadowType = row[this.ShadowType];
-                cells.UIVisibility = row[this.UIVisibility];
-                cells.DrawingResizeType = row[this.DrawingResizeType];
+                var cols = this.query_singlerow.Columns;
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.DrawingScale = getcellvalue(nameof(PageFormatCells.DrawingScale));
+                cells.DrawingScaleType = getcellvalue(nameof(PageFormatCells.DrawingScaleType));
+                cells.DrawingSizeType = getcellvalue(nameof(PageFormatCells.DrawingSizeType));
+                cells.InhibitSnap = getcellvalue(nameof(PageFormatCells.InhibitSnap));
+                cells.Height = getcellvalue(nameof(PageFormatCells.Height));
+                cells.Scale = getcellvalue(nameof(PageFormatCells.Scale));
+                cells.Width = getcellvalue(nameof(PageFormatCells.Width));
+                cells.ShadowObliqueAngle = getcellvalue(nameof(PageFormatCells.ShadowObliqueAngle));
+                cells.ShadowOffsetX = getcellvalue(nameof(PageFormatCells.ShadowOffsetX));
+                cells.ShadowOffsetY = getcellvalue(nameof(PageFormatCells.ShadowOffsetY));
+                cells.ShadowScaleFactor = getcellvalue(nameof(PageFormatCells.ShadowScaleFactor));
+                cells.ShadowType = getcellvalue(nameof(PageFormatCells.ShadowType));
+                cells.UIVisibility = getcellvalue(nameof(PageFormatCells.UIVisibility));
+                cells.DrawingResizeType = getcellvalue(nameof(PageFormatCells.DrawingResizeType));
+
                 return cells;
             }
         }
@@ -337,99 +313,55 @@ namespace VisioAutomation.Pages
 
         class PageLayoutCellsReader : VASS.CellGroups.CellGroupReader<PageLayoutCells>
         {
-            public VASS.Query.CellColumn AvenueSizeX { get; set; }
-            public VASS.Query.CellColumn AvenueSizeY { get; set; }
-            public VASS.Query.CellColumn BlockSizeX { get; set; }
-            public VASS.Query.CellColumn BlockSizeY { get; set; }
-            public VASS.Query.CellColumn ControlAsInput { get; set; }
-            public VASS.Query.CellColumn DynamicsOff { get; set; }
-            public VASS.Query.CellColumn EnableGrid { get; set; }
-            public VASS.Query.CellColumn LineAdjustFrom { get; set; }
-            public VASS.Query.CellColumn LineAdjustTo { get; set; }
-            public VASS.Query.CellColumn LineJumpCode { get; set; }
-            public VASS.Query.CellColumn LineJumpFactorX { get; set; }
-            public VASS.Query.CellColumn LineJumpFactorY { get; set; }
-            public VASS.Query.CellColumn LineJumpStyle { get; set; }
-            public VASS.Query.CellColumn LineRouteExt { get; set; }
-            public VASS.Query.CellColumn LineToLineX { get; set; }
-            public VASS.Query.CellColumn LineToLineY { get; set; }
-            public VASS.Query.CellColumn LineToNodeX { get; set; }
-            public VASS.Query.CellColumn LineToNodeY { get; set; }
-            public VASS.Query.CellColumn LineJumpDirX { get; set; }
-            public VASS.Query.CellColumn LineJumpDirY { get; set; }
-            public VASS.Query.CellColumn ShapeSplit { get; set; }
-            public VASS.Query.CellColumn PlaceDepth { get; set; }
-            public VASS.Query.CellColumn PlaceFlip { get; set; }
-            public VASS.Query.CellColumn PlaceStyle { get; set; }
-            public VASS.Query.CellColumn PlowCode { get; set; }
-            public VASS.Query.CellColumn ResizePage { get; set; }
-            public VASS.Query.CellColumn RouteStyle { get; set; }
-            public VASS.Query.CellColumn AvoidPageBreaks { get; set; }
-
             public PageLayoutCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                this.AvenueSizeX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutAvenueSizeX, nameof(this.AvenueSizeX));
-                this.AvenueSizeY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutAvenueSizeY, nameof(this.AvenueSizeY));
-                this.BlockSizeX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutBlockSizeX, nameof(this.BlockSizeX));
-                this.BlockSizeY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutBlockSizeY, nameof(this.BlockSizeY));
-                this.ControlAsInput = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutControlAsInput, nameof(this.ControlAsInput));
-                this.DynamicsOff = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutDynamicsOff, nameof(this.DynamicsOff));
-                this.EnableGrid = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutEnableGrid, nameof(this.EnableGrid));
-                this.LineAdjustFrom = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineAdjustFrom, nameof(this.LineAdjustFrom));
-                this.LineAdjustTo = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineAdjustTo, nameof(this.LineAdjustTo));
-                this.LineJumpCode = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpCode, nameof(this.LineJumpCode));
-                this.LineJumpFactorX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpFactorX, nameof(this.LineJumpFactorX));
-                this.LineJumpFactorY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpFactorY, nameof(this.LineJumpFactorY));
-                this.LineJumpStyle = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpStyle, nameof(this.LineJumpStyle));
-                this.LineRouteExt = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineRouteExt, nameof(this.LineRouteExt));
-                this.LineToLineX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineToLineX, nameof(this.LineToLineX));
-                this.LineToLineY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineToLineY, nameof(this.LineToLineY));
-                this.LineToNodeX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineToNodeX, nameof(this.LineToNodeX));
-                this.LineToNodeY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineToNodeY, nameof(this.LineToNodeY));
-                this.LineJumpDirX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpDirX, nameof(this.LineJumpDirX));
-                this.LineJumpDirY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutLineJumpDirY, nameof(this.LineJumpDirY));
-                this.ShapeSplit = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutShapeSplit, nameof(this.ShapeSplit));
-                this.PlaceDepth = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutPlaceDepth, nameof(this.PlaceDepth));
-                this.PlaceFlip = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutPlaceFlip, nameof(this.PlaceFlip));
-                this.PlaceStyle = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutPlaceStyle, nameof(this.PlaceStyle));
-                this.PlowCode = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutPlowCode, nameof(this.PlowCode));
-                this.ResizePage = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutResizePage, nameof(this.ResizePage));
-                this.RouteStyle = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutRouteStyle, nameof(this.RouteStyle));
-                this.AvoidPageBreaks = this.query_singlerow.Columns.Add(VASS.SrcConstants.PageLayoutAvoidPageBreaks, nameof(this.AvoidPageBreaks));
+                var temp_cells = new PageLayoutCells();
+                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                {
+                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
+                }
             }
 
 
             public override PageLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PageLayoutCells();
-                cells.AvenueSizeX = row[this.AvenueSizeX];
-                cells.AvenueSizeY = row[this.AvenueSizeY];
-                cells.BlockSizeX = row[this.BlockSizeX];
-                cells.BlockSizeY = row[this.BlockSizeY];
-                cells.CtrlAsInput = row[this.ControlAsInput];
-                cells.DynamicsOff = row[this.DynamicsOff];
-                cells.EnableGrid = row[this.EnableGrid];
-                cells.LineAdjustFrom = row[this.LineAdjustFrom];
-                cells.LineAdjustTo = row[this.LineAdjustTo];
-                cells.LineJumpCode = row[this.LineJumpCode];
-                cells.LineJumpFactorX = row[this.LineJumpFactorX];
-                cells.LineJumpFactorY = row[this.LineJumpFactorY];
-                cells.LineJumpStyle = row[this.LineJumpStyle];
-                cells.LineRouteExt = row[this.LineRouteExt];
-                cells.LineToLineX = row[this.LineToLineX];
-                cells.LineToLineY = row[this.LineToLineY];
-                cells.LineToNodeX = row[this.LineToNodeX];
-                cells.LineToNodeY = row[this.LineToNodeY];
-                cells.LineJumpDirX = row[this.LineJumpDirX];
-                cells.LineJumpDirY = row[this.LineJumpDirY];
-                cells.PageShapeSplit = row[this.ShapeSplit];
-                cells.PlaceDepth = row[this.PlaceDepth];
-                cells.PlaceFlip = row[this.PlaceFlip];
-                cells.PlaceStyle = row[this.PlaceStyle];
-                cells.PlowCode = row[this.PlowCode];
-                cells.ResizePage = row[this.ResizePage];
-                cells.RouteStyle = row[this.RouteStyle];
-                cells.AvoidPageBreaks = row[this.AvoidPageBreaks];
+                var cols = this.query_singlerow.Columns;
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+
+                cells.AvenueSizeX = getcellvalue(nameof(PageLayoutCells.AvenueSizeX));
+                cells.AvenueSizeY = getcellvalue(nameof(PageLayoutCells.AvenueSizeY));
+                cells.BlockSizeX = getcellvalue(nameof(PageLayoutCells.BlockSizeX));
+                cells.BlockSizeY = getcellvalue(nameof(PageLayoutCells.BlockSizeY));
+                cells.CtrlAsInput = getcellvalue(nameof(PageLayoutCells.CtrlAsInput));
+                cells.DynamicsOff = getcellvalue(nameof(PageLayoutCells.DynamicsOff));
+                cells.EnableGrid = getcellvalue(nameof(PageLayoutCells.EnableGrid));
+                cells.LineAdjustFrom = getcellvalue(nameof(PageLayoutCells.LineAdjustFrom));
+                cells.LineAdjustTo = getcellvalue(nameof(PageLayoutCells.LineAdjustTo));
+                cells.LineJumpCode = getcellvalue(nameof(PageLayoutCells.LineJumpCode));
+                cells.LineJumpFactorX = getcellvalue(nameof(PageLayoutCells.LineJumpFactorX));
+                cells.LineJumpFactorY = getcellvalue(nameof(PageLayoutCells.LineJumpFactorY));
+                cells.LineJumpStyle = getcellvalue(nameof(PageLayoutCells.LineJumpStyle));
+                cells.LineRouteExt = getcellvalue(nameof(PageLayoutCells.LineRouteExt));
+                cells.LineToLineX = getcellvalue(nameof(PageLayoutCells.LineToLineX));
+                cells.LineToLineY = getcellvalue(nameof(PageLayoutCells.LineToLineY));
+                cells.LineToNodeX = getcellvalue(nameof(PageLayoutCells.LineToNodeX));
+                cells.LineToNodeY = getcellvalue(nameof(PageLayoutCells.LineToNodeY));
+                cells.LineJumpDirX = getcellvalue(nameof(PageLayoutCells.LineJumpDirX));
+                cells.LineJumpDirY = getcellvalue(nameof(PageLayoutCells.LineJumpDirY));
+                cells.PageShapeSplit = getcellvalue(nameof(PageLayoutCells.PageShapeSplit));
+                cells.PlaceDepth = getcellvalue(nameof(PageLayoutCells.PlaceDepth));
+                cells.PlaceFlip = getcellvalue(nameof(PageLayoutCells.PlaceFlip));
+                cells.PlaceStyle = getcellvalue(nameof(PageLayoutCells.PlaceStyle));
+                cells.PlowCode = getcellvalue(nameof(PageLayoutCells.PlowCode));
+                cells.ResizePage = getcellvalue(nameof(PageLayoutCells.ResizePage));
+                cells.RouteStyle = getcellvalue(nameof(PageLayoutCells.RouteStyle));
+                cells.AvoidPageBreaks = getcellvalue(nameof(PageLayoutCells.AvoidPageBreaks));
                 return cells;
             }
         }
@@ -444,59 +376,45 @@ namespace VisioAutomation.Pages
 
         class PagePrintCellsReader : VASS.CellGroups.CellGroupReader<PagePrintCells>
         {
-            public VASS.Query.CellColumn LeftMargin { get; set; }
-            public VASS.Query.CellColumn CenterX { get; set; }
-            public VASS.Query.CellColumn CenterY { get; set; }
-            public VASS.Query.CellColumn OnPage { get; set; }
-            public VASS.Query.CellColumn BottomMargin { get; set; }
-            public VASS.Query.CellColumn RightMargin { get; set; }
-            public VASS.Query.CellColumn PagesX { get; set; }
-            public VASS.Query.CellColumn PagesY { get; set; }
-            public VASS.Query.CellColumn TopMargin { get; set; }
-            public VASS.Query.CellColumn PaperKind { get; set; }
-            public VASS.Query.CellColumn Grid { get; set; }
-            public VASS.Query.CellColumn PageOrientation { get; set; }
-            public VASS.Query.CellColumn ScaleX { get; set; }
-            public VASS.Query.CellColumn ScaleY { get; set; }
-            public VASS.Query.CellColumn PaperSource { get; set; }
-
             public PagePrintCellsReader() : base(new VisioAutomation.ShapeSheet.Query.CellQuery())
             {
-                this.LeftMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintLeftMargin, nameof(this.LeftMargin));
-                this.CenterX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintCenterX, nameof(this.CenterX));
-                this.CenterY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintCenterY, nameof(this.CenterY));
-                this.OnPage = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintOnPage, nameof(this.OnPage));
-                this.BottomMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintBottomMargin, nameof(this.BottomMargin));
-                this.RightMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintRightMargin, nameof(this.RightMargin));
-                this.PagesX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPagesX, nameof(this.PagesX));
-                this.PagesY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPagesY, nameof(this.PagesY));
-                this.TopMargin = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintTopMargin, nameof(this.TopMargin));
-                this.PaperKind = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPaperKind, nameof(this.PaperKind));
-                this.Grid = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintGrid, nameof(this.Grid));
-                this.PageOrientation = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPageOrientation, nameof(this.PageOrientation));
-                this.ScaleX = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintScaleX, nameof(this.ScaleX));
-                this.ScaleY = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintScaleY, nameof(this.ScaleY));
-                this.PaperSource = this.query_singlerow.Columns.Add(VASS.SrcConstants.PrintPaperSource, nameof(this.PaperSource));
+                var temp_cells = new PagePrintCells();
+                foreach (var pair in temp_cells.NamedSrcValuePairs)
+                {
+                    this.query_singlerow.Columns.Add(pair.Src, pair.Name);
+                }
             }
 
             public override PagePrintCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
             {
                 var cells = new PagePrintCells();
-                cells.LeftMargin = row[this.LeftMargin];
-                cells.CenterX = row[this.CenterX];
-                cells.CenterY = row[this.CenterY];
-                cells.OnPage = row[this.OnPage];
-                cells.BottomMargin = row[this.BottomMargin];
-                cells.RightMargin = row[this.RightMargin];
-                cells.PagesX = row[this.PagesX];
-                cells.PagesY = row[this.PagesY];
-                cells.TopMargin = row[this.TopMargin];
-                cells.PaperKind = row[this.PaperKind];
-                cells.Grid = row[this.Grid];
-                cells.Orientation = row[this.PageOrientation];
-                cells.ScaleX = row[this.ScaleX];
-                cells.ScaleY = row[this.ScaleY];
-                cells.PaperSource = row[this.PaperSource];
+
+                var cols = this.query_singlerow.Columns;
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+
+                cells.LeftMargin = getcellvalue(nameof(PagePrintCells.LeftMargin));
+                cells.CenterX = getcellvalue(nameof(PagePrintCells.CenterX));
+                cells.CenterY = getcellvalue(nameof(PagePrintCells.CenterY));
+
+                cells.OnPage = getcellvalue(nameof(PagePrintCells.OnPage));
+                cells.BottomMargin = getcellvalue(nameof(PagePrintCells.BottomMargin));
+                cells.RightMargin = getcellvalue(nameof(PagePrintCells.RightMargin));
+                cells.PagesX = getcellvalue(nameof(PagePrintCells.PagesX));
+                cells.PagesY = getcellvalue(nameof(PagePrintCells.PagesY));
+                cells.TopMargin = getcellvalue(nameof(PagePrintCells.TopMargin));
+                cells.PaperKind = getcellvalue(nameof(PagePrintCells.PaperKind));
+
+                cells.Grid = getcellvalue(nameof(PagePrintCells.Grid));
+                cells.Orientation = getcellvalue(nameof(PagePrintCells.Orientation));
+                cells.ScaleX = getcellvalue(nameof(PagePrintCells.ScaleX));
+                cells.ScaleY = getcellvalue(nameof(PagePrintCells.ScaleY));
+                cells.PaperSource = getcellvalue(nameof(PagePrintCells.PaperSource));
+
                 return cells;
             }
         }
