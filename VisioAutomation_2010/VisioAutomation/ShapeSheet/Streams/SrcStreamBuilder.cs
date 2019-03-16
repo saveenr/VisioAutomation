@@ -1,5 +1,3 @@
-using VisioAutomation.Utilities;
-
 namespace VisioAutomation.ShapeSheet.Streams
 {
     public class SrcStreamBuilder : StreamBuilder<Src>
