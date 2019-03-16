@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         public readonly CellGroupBuilderType Type;
         protected Query.CellQuery query_cells_singlerow;
-        protected VASS.Query.SectionsQuery query_sections_multirow;
+        protected VASS.Query.MultiSectionQuery query_sections_multirow;
 
         private CellGroupBuilder()
         {
@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
             else if (type == CellGroupBuilderType.MultiRow)
             {
-                this.query_sections_multirow = new Query.SectionsQuery();
+                this.query_sections_multirow = new Query.MultiSectionQuery();
                 var query_section = this.query_sections_multirow.SectionQueries.Add(temp_cells.CellMetadata.First().Src);
                 cols = query_section.Columns;
             }
