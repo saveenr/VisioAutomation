@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.Query;
-using System.Linq;
 
 namespace VisioAutomation.Text
 {

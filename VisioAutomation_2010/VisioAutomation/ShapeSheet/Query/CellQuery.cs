@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -47,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
-            var seg_builder = new VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<string>(values);
+            var seg_builder = new Internal.ArraySegmentReader<string>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
 
             return output_for_shape;
@@ -66,7 +67,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var seg_builder = new VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<TResult>(values);
+            var seg_builder = new Internal.ArraySegmentReader<TResult>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
             return output_for_shape;
         }
@@ -98,7 +99,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
-            var seg_builder = new VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<string>(values);
+            var seg_builder = new Internal.ArraySegmentReader<string>(values);
             var list = this._create_outputs_for_shapes(shapeids, seg_builder);
             return list;
         }
@@ -117,12 +118,12 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var seg_builder = new VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<TResult>(values);
+            var seg_builder = new Internal.ArraySegmentReader<TResult>(values);
             var list = this._create_outputs_for_shapes(shapeids, seg_builder);
             return list;
         }
 
-        private CellOutputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<T> segReader)
+        private CellOutputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             var output_for_all_shapes = new CellOutputList<T>();
 
@@ -136,7 +137,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_all_shapes;
         }
 
-        private CellOutput<T> _create_output_for_shape<T>(short shapeid, VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<T> segReader)
+        private CellOutput<T> _create_output_for_shape<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             int original_seg_size = segReader.Count;
 
@@ -146,7 +147,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if ((final_seg_size - original_seg_size) != output.__totalcellcount)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");
+                throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
 
             return output;
@@ -162,7 +163,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int dummy_shapeid = -1;
             int numshapes = 1;
             int numcells = this._get_total_cell_count(numshapes);
-            var stream = new VisioAutomation.ShapeSheet.Streams.SrcStreamArrayBuilder(numcells);
+            var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
             var cellinfos = this._enum_total_cellinfo(dummy_shapeid);
             var srcs = cellinfos.Select(i => i.SidSrc.Src);
             stream.AddRange(srcs);
@@ -170,12 +171,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream.ToStreamArray();
         }
 
-        private VisioAutomation.ShapeSheet.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
+        private VASS.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
 
-            var stream = new VisioAutomation.ShapeSheet.Streams.SidSrcStreamArrayBuilder(numcells);
+            var stream = new VASS.Streams.SidSrcStreamArrayBuilder(numcells);
 
             for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
             {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {    public class MultiSectionQuery
@@ -54,7 +55,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index, _cache);
-            var seg_builder = new VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<string>(values);
+            var seg_builder = new VASS.Internal.ArraySegmentReader<string>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, seg_builder);
 
             return output_for_shape;
@@ -78,7 +79,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var sectioninfo = this.GetSectionInfoForShape(shape_index, _cache);
-            var seg_builder = new VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<TResult>(values);
+            var seg_builder = new VASS.Internal.ArraySegmentReader<TResult>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, seg_builder);
             return output_for_shape;
         }
@@ -110,7 +111,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.cache_section_info(shapes);
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
-            var seg_builder = new VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<string>(values);
+            var seg_builder = new VASS.Internal.ArraySegmentReader<string>(values);
             var list = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
             return list;
         }
@@ -130,12 +131,12 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var seg_builder = new VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<TResult>(values);
+            var seg_builder = new VASS.Internal.ArraySegmentReader<TResult>(values);
             var list = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
             return list;
         }
 
-        private MultiSectionOuputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionInfoCache cache, VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<T> segReader)
+        private MultiSectionOuputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionInfoCache cache, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             var output_for_all_shapes = new MultiSectionOuputList<T>();
 
@@ -159,7 +160,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return null;
         }
 
-        private MultiSectionOutput<T> _create_output_for_shape<T>(short shapeid, List<SectionInfo> section_infos, VisioAutomation.ShapeSheet.Internal.ArraySegmentReader<T> segReader)
+        private MultiSectionOutput<T> _create_output_for_shape<T>(short shapeid, List<SectionInfo> section_infos, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             int original_seg_size = segReader.Count;
 
@@ -195,7 +196,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if ((final_seg_size - original_seg_size) != output.__totalcellcount)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected cursor");
+                throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
 
             return output;
@@ -222,7 +223,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (shapes.Count != _cache.CountShapes)
             {
                 string msg = string.Format("mismatch in number of shapes and information collected for shapes");
-                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
+                throw new Exceptions.InternalAssertionException(msg);
             }
         }
 
@@ -246,7 +247,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = 1;
             int shapeindex = 0;
             int numcells = this._get_total_cell_count(numshapes);
-            var stream = new VisioAutomation.ShapeSheet.Streams.SrcStreamArrayBuilder(numcells);
+            var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
             var cellinfos = this._enum_total_cellinfo(dummy_shapeid, shapeindex);
             var srcs = cellinfos.Select(i => i.SidSrc.Src);
             stream.AddRange(srcs);
@@ -254,12 +255,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream.ToStreamArray();
         }
 
-        private VisioAutomation.ShapeSheet.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
+        private VASS.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
 
-            var stream = new VisioAutomation.ShapeSheet.Streams.SidSrcStreamArrayBuilder(numcells);
+            var stream = new VASS.Streams.SidSrcStreamArrayBuilder(numcells);
 
             for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
             {
@@ -286,11 +287,11 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (var col in section_info.Query.Columns)
                         {
-                            var src = new VisioAutomation.ShapeSheet.Src(
+                            var src = new VASS.Src(
                                 (short)section_info.Query.SectionIndex,
                                 (short)rowindex,
                                 col.Src.Cell);
-                            var sidsrc = new VisioAutomation.ShapeSheet.SidSrc((short)shapeid, src);
+                            var sidsrc = new VASS.SidSrc((short)shapeid, src);
                             var cellinfo = new Internal.QueryCellInfo(sidsrc, col);
                             yield return cellinfo;
                         }
