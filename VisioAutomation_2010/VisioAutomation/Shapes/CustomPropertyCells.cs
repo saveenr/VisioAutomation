@@ -1,43 +1,40 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCells : CellGroup
+    public class CustomPropertyCells : VASS.CellGroups.CellGroup
     {
-        public CellValueLiteral Ask { get; set; }
-        public CellValueLiteral Calendar { get; set; }
-        public CellValueLiteral Format { get; set; }
-        public CellValueLiteral Invisible { get; set; }
-        public CellValueLiteral Label { get; set; }
-        public CellValueLiteral LangID { get; set; }
-        public CellValueLiteral Prompt { get; set; }
-        public CellValueLiteral SortKey { get; set; }
-        public CellValueLiteral Type { get; set; }
-        public CellValueLiteral Value { get; set; }
+        public VASS.CellValueLiteral Ask { get; set; }
+        public VASS.CellValueLiteral Calendar { get; set; }
+        public VASS.CellValueLiteral Format { get; set; }
+        public VASS.CellValueLiteral Invisible { get; set; }
+        public VASS.CellValueLiteral Label { get; set; }
+        public VASS.CellValueLiteral LangID { get; set; }
+        public VASS.CellValueLiteral Prompt { get; set; }
+        public VASS.CellValueLiteral SortKey { get; set; }
+        public VASS.CellValueLiteral Type { get; set; }
+        public VASS.CellValueLiteral Value { get; set; }
 
         public CustomPropertyCells()
         {
 
         }
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
-
-
-                yield return CellMetadataItem.Create(nameof(this.Label), SrcConstants.CustomPropLabel, this.Label);
-                yield return CellMetadataItem.Create(nameof(this.Value), SrcConstants.CustomPropValue, this.Value);
-                yield return CellMetadataItem.Create(nameof(this.Format), SrcConstants.CustomPropFormat, this.Format);
-                yield return CellMetadataItem.Create(nameof(this.Prompt), SrcConstants.CustomPropPrompt, this.Prompt);
-                yield return CellMetadataItem.Create(nameof(this.Calendar), SrcConstants.CustomPropCalendar, this.Calendar);
-                yield return CellMetadataItem.Create(nameof(this.LangID), SrcConstants.CustomPropLangID, this.LangID);
-                yield return CellMetadataItem.Create(nameof(this.SortKey), SrcConstants.CustomPropSortKey, this.SortKey);
-                yield return CellMetadataItem.Create(nameof(this.Invisible), SrcConstants.CustomPropInvisible, this.Invisible);
-                yield return CellMetadataItem.Create(nameof(this.Type), SrcConstants.CustomPropType, this.Type);
-                yield return CellMetadataItem.Create(nameof(this.Ask), SrcConstants.CustomPropAsk, this.Ask);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Label), VASS.SrcConstants.CustomPropLabel, this.Label);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Value), VASS.SrcConstants.CustomPropValue, this.Value);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Format), VASS.SrcConstants.CustomPropFormat, this.Format);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Prompt), VASS.SrcConstants.CustomPropPrompt, this.Prompt);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Calendar), VASS.SrcConstants.CustomPropCalendar, this.Calendar);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LangID), VASS.SrcConstants.CustomPropLangID, this.LangID);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.SortKey), VASS.SrcConstants.CustomPropSortKey, this.SortKey);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Invisible), VASS.SrcConstants.CustomPropInvisible, this.Invisible);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Type), VASS.SrcConstants.CustomPropType, this.Type);
+                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Ask), VASS.SrcConstants.CustomPropAsk, this.Ask);
             }
         }
 
@@ -49,14 +46,14 @@ namespace VisioAutomation.Shapes
             this.Type = type_int;
         }
 
-        public CustomPropertyCells(CellValueLiteral value, CustomPropertyType type)
+        public CustomPropertyCells(VASS.CellValueLiteral value, CustomPropertyType type)
         {
             var type_int = CustomPropertyTypeToInt(type);
             this.Value = value;
             this.Type = type_int;
         }
         
-        public static CustomPropertyCells Create(CellValueLiteral value, CustomPropertyType type)
+        public static CustomPropertyCells Create(VASS.CellValueLiteral value, CustomPropertyType type)
         {
             return new CustomPropertyCells(value.Value, type);
         }
@@ -137,7 +134,7 @@ namespace VisioAutomation.Shapes
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Boolean);
         }
 
-        public CustomPropertyCells(CellValueLiteral value)
+        public CustomPropertyCells(VASS.CellValueLiteral value)
         {
             this.Value = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
@@ -156,10 +153,10 @@ namespace VisioAutomation.Shapes
         {
             // only quote the value when it is a string (no type specified or type equals zero)
             bool quote = (this.Type.Value == null || this.Type.Value == "0");
-            this.Value = CellValueLiteral.EncodeValue(this.Value.Value, quote);
-            this.Label = CellValueLiteral.EncodeValue(this.Label.Value);
-            this.Format = CellValueLiteral.EncodeValue(this.Format.Value);
-            this.Prompt = CellValueLiteral.EncodeValue(this.Prompt.Value);
+            this.Value = VASS.CellValueLiteral.EncodeValue(this.Value.Value, quote);
+            this.Label = VASS.CellValueLiteral.EncodeValue(this.Label.Value);
+            this.Format = VASS.CellValueLiteral.EncodeValue(this.Format.Value);
+            this.Prompt = VASS.CellValueLiteral.EncodeValue(this.Prompt.Value);
         }
 
         private void Validate()
