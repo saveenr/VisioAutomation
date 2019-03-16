@@ -87,17 +87,20 @@ namespace VisioAutomation_Tests.Core.Shapes
         {
             var page1 = this.GetNewPage();
 
-            var s1 = page1.DrawRectangle(0, 0, 1, 1);
-            var s2 = page1.DrawRectangle(1, 1, 2, 2);
-            var shapes = new[] { s1, s2 };
+            var shape0 = page1.DrawRectangle(0, 0, 1, 1);
+            var shape1 = page1.DrawRectangle(1, 1, 2, 2);
+            var shapes = new[] { shape0, shape1 };
 
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "foo", "bar", null);
+            // add a udcell to shape0, leave shape1 alone
+            VisioAutomation.Shapes.UserDefinedCellHelper.Set(shape0, "foo", "bar", null);
 
+            // build query
             var query = new VA.ShapeSheet.Query.MultiSectionQuery();
             var sec = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
             var Value = sec.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
             var Prompt = sec.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
 
+            // run query on the two shapes
             var formulas = query.GetFormulas(page1, shapes.Select(s => s.ID).ToList());
 
             Assert.AreEqual(2, formulas.Count); // 2 because two shapes
