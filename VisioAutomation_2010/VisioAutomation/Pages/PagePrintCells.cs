@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using VASS = VisioAutomation.ShapeSheet;
+using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
@@ -40,6 +42,53 @@ namespace VisioAutomation.Pages
                 yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ScaleX), VASS.SrcConstants.PrintScaleX, this.ScaleX);
                 yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ScaleY), VASS.SrcConstants.PrintScaleY, this.ScaleY);
                 yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.PaperSource), VASS.SrcConstants.PrintPaperSource, this.PaperSource);
+            }
+        }
+
+
+        public static PagePrintCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var reader = PagePrintCells_lazy_builder.Value;
+            return reader.GetCellsSingleRow(shape, type);
+        }
+
+        private static readonly System.Lazy<PagePrintCellsBuilder> PagePrintCells_lazy_builder = new System.Lazy<PagePrintCellsBuilder>();
+
+        class PagePrintCellsBuilder : VASS.CellGroups.CellGroupBuilder<PagePrintCells>
+        {
+            public PagePrintCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
+            {
+            }
+
+            public override PagePrintCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            {
+                var cells = new PagePrintCells();
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+
+                cells.LeftMargin = getcellvalue(nameof(PagePrintCells.LeftMargin));
+                cells.CenterX = getcellvalue(nameof(PagePrintCells.CenterX));
+                cells.CenterY = getcellvalue(nameof(PagePrintCells.CenterY));
+
+                cells.OnPage = getcellvalue(nameof(PagePrintCells.OnPage));
+                cells.BottomMargin = getcellvalue(nameof(PagePrintCells.BottomMargin));
+                cells.RightMargin = getcellvalue(nameof(PagePrintCells.RightMargin));
+                cells.PagesX = getcellvalue(nameof(PagePrintCells.PagesX));
+                cells.PagesY = getcellvalue(nameof(PagePrintCells.PagesY));
+                cells.TopMargin = getcellvalue(nameof(PagePrintCells.TopMargin));
+                cells.PaperKind = getcellvalue(nameof(PagePrintCells.PaperKind));
+
+                cells.Grid = getcellvalue(nameof(PagePrintCells.Grid));
+                cells.Orientation = getcellvalue(nameof(PagePrintCells.Orientation));
+                cells.ScaleX = getcellvalue(nameof(PagePrintCells.ScaleX));
+                cells.ScaleY = getcellvalue(nameof(PagePrintCells.ScaleY));
+                cells.PaperSource = getcellvalue(nameof(PagePrintCells.PaperSource));
+
+                return cells;
             }
         }
 

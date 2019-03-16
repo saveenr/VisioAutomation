@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VASS=VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
@@ -40,6 +41,50 @@ namespace VisioAutomation.Pages
                 yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ShadowType), VASS.SrcConstants.PageShadowType, this.ShadowType);
                 yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.UIVisibility), VASS.SrcConstants.PageUIVisibility, this.UIVisibility);
                 yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.DrawingResizeType), VASS.SrcConstants.PageDrawingResizeType, this.DrawingResizeType);
+            }
+        }
+
+
+
+        public static PageFormatCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var reader = PageFormatCells_lazy_builder.Value;
+            return reader.GetCellsSingleRow(shape, type);
+        }
+
+        private static readonly System.Lazy<PageFormatCellsBuilder> PageFormatCells_lazy_builder = new System.Lazy<PageFormatCellsBuilder>();
+
+        class PageFormatCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageFormatCells>
+        {
+            public PageFormatCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
+            {
+            }
+
+            public override PageFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            {
+                var cells = new PageFormatCells();
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.DrawingScale = getcellvalue(nameof(PageFormatCells.DrawingScale));
+                cells.DrawingScaleType = getcellvalue(nameof(PageFormatCells.DrawingScaleType));
+                cells.DrawingSizeType = getcellvalue(nameof(PageFormatCells.DrawingSizeType));
+                cells.InhibitSnap = getcellvalue(nameof(PageFormatCells.InhibitSnap));
+                cells.Height = getcellvalue(nameof(PageFormatCells.Height));
+                cells.Scale = getcellvalue(nameof(PageFormatCells.Scale));
+                cells.Width = getcellvalue(nameof(PageFormatCells.Width));
+                cells.ShadowObliqueAngle = getcellvalue(nameof(PageFormatCells.ShadowObliqueAngle));
+                cells.ShadowOffsetX = getcellvalue(nameof(PageFormatCells.ShadowOffsetX));
+                cells.ShadowOffsetY = getcellvalue(nameof(PageFormatCells.ShadowOffsetY));
+                cells.ShadowScaleFactor = getcellvalue(nameof(PageFormatCells.ShadowScaleFactor));
+                cells.ShadowType = getcellvalue(nameof(PageFormatCells.ShadowType));
+                cells.UIVisibility = getcellvalue(nameof(PageFormatCells.UIVisibility));
+                cells.DrawingResizeType = getcellvalue(nameof(PageFormatCells.DrawingResizeType));
+
+                return cells;
             }
         }
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VASS=VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
@@ -32,5 +33,44 @@ namespace VisioAutomation.Pages
                 yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.YRulerOrigin), VASS.SrcConstants.YRulerOrigin, this.YRulerOrigin);
             }
         }
+
+        public static PageRulerAndGridCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var reader = PageRulerAndGridCells_lazy_builder.Value;
+            return reader.GetCellsSingleRow(shape, type);
+        }
+
+        private static readonly System.Lazy<PageRulerAndGridCellsBuilder> PageRulerAndGridCells_lazy_builder = new System.Lazy<PageRulerAndGridCellsBuilder>();
+
+        class PageRulerAndGridCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageRulerAndGridCells>
+        {
+            public PageRulerAndGridCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
+            {
+            }
+
+            public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            {
+                var cells = new PageRulerAndGridCells();
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.XGridDensity = getcellvalue(nameof(PageRulerAndGridCells.XGridDensity));
+                cells.XGridOrigin = getcellvalue(nameof(PageRulerAndGridCells.XGridOrigin));
+                cells.XGridSpacing = getcellvalue(nameof(PageRulerAndGridCells.XGridSpacing));
+                cells.XRulerDensity = getcellvalue(nameof(PageRulerAndGridCells.XRulerDensity));
+                cells.XRulerOrigin = getcellvalue(nameof(PageRulerAndGridCells.XRulerOrigin));
+                cells.YGridDensity = getcellvalue(nameof(PageRulerAndGridCells.YGridDensity));
+                cells.YGridOrigin = getcellvalue(nameof(PageRulerAndGridCells.YGridOrigin));
+                cells.YGridSpacing = getcellvalue(nameof(PageRulerAndGridCells.YGridSpacing));
+                cells.YRulerDensity = getcellvalue(nameof(PageRulerAndGridCells.YRulerDensity));
+                cells.YRulerOrigin = getcellvalue(nameof(PageRulerAndGridCells.YRulerOrigin));
+
+                return cells;
+            }
+        }
+
     }
 }

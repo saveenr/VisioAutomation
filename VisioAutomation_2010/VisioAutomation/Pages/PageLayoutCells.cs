@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using VASS = VisioAutomation.ShapeSheet;
+using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
@@ -70,5 +72,64 @@ namespace VisioAutomation.Pages
 
             }
         }
+
+        public static PageLayoutCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var reader = PageLayoutCells_lazy_builder.Value;
+            return reader.GetCellsSingleRow(shape, type);
+        }
+
+        private static readonly System.Lazy<PageLayoutCellsBuilder> PageLayoutCells_lazy_builder = new System.Lazy<PageLayoutCellsBuilder>();
+
+
+        class PageLayoutCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageLayoutCells>
+        {
+            public PageLayoutCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
+            {
+            }
+
+
+            public override PageLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            {
+                var cells = new PageLayoutCells();
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+
+                cells.AvenueSizeX = getcellvalue(nameof(PageLayoutCells.AvenueSizeX));
+                cells.AvenueSizeY = getcellvalue(nameof(PageLayoutCells.AvenueSizeY));
+                cells.BlockSizeX = getcellvalue(nameof(PageLayoutCells.BlockSizeX));
+                cells.BlockSizeY = getcellvalue(nameof(PageLayoutCells.BlockSizeY));
+                cells.CtrlAsInput = getcellvalue(nameof(PageLayoutCells.CtrlAsInput));
+                cells.DynamicsOff = getcellvalue(nameof(PageLayoutCells.DynamicsOff));
+                cells.EnableGrid = getcellvalue(nameof(PageLayoutCells.EnableGrid));
+                cells.LineAdjustFrom = getcellvalue(nameof(PageLayoutCells.LineAdjustFrom));
+                cells.LineAdjustTo = getcellvalue(nameof(PageLayoutCells.LineAdjustTo));
+                cells.LineJumpCode = getcellvalue(nameof(PageLayoutCells.LineJumpCode));
+                cells.LineJumpFactorX = getcellvalue(nameof(PageLayoutCells.LineJumpFactorX));
+                cells.LineJumpFactorY = getcellvalue(nameof(PageLayoutCells.LineJumpFactorY));
+                cells.LineJumpStyle = getcellvalue(nameof(PageLayoutCells.LineJumpStyle));
+                cells.LineRouteExt = getcellvalue(nameof(PageLayoutCells.LineRouteExt));
+                cells.LineToLineX = getcellvalue(nameof(PageLayoutCells.LineToLineX));
+                cells.LineToLineY = getcellvalue(nameof(PageLayoutCells.LineToLineY));
+                cells.LineToNodeX = getcellvalue(nameof(PageLayoutCells.LineToNodeX));
+                cells.LineToNodeY = getcellvalue(nameof(PageLayoutCells.LineToNodeY));
+                cells.LineJumpDirX = getcellvalue(nameof(PageLayoutCells.LineJumpDirX));
+                cells.LineJumpDirY = getcellvalue(nameof(PageLayoutCells.LineJumpDirY));
+                cells.PageShapeSplit = getcellvalue(nameof(PageLayoutCells.PageShapeSplit));
+                cells.PlaceDepth = getcellvalue(nameof(PageLayoutCells.PlaceDepth));
+                cells.PlaceFlip = getcellvalue(nameof(PageLayoutCells.PlaceFlip));
+                cells.PlaceStyle = getcellvalue(nameof(PageLayoutCells.PlaceStyle));
+                cells.PlowCode = getcellvalue(nameof(PageLayoutCells.PlowCode));
+                cells.ResizePage = getcellvalue(nameof(PageLayoutCells.ResizePage));
+                cells.RouteStyle = getcellvalue(nameof(PageLayoutCells.RouteStyle));
+                cells.AvoidPageBreaks = getcellvalue(nameof(PageLayoutCells.AvoidPageBreaks));
+                return cells;
+            }
+        }
+
     }
 }
