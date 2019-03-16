@@ -102,7 +102,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> __ToCellGroups(VASS.Query.SectionQueryOutput<string> section_data, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+        private List<TGroup> __ToCellGroups(VASS.Query.SectionOutput<string> section_data, VisioAutomation.ShapeSheet.Query.ColumnList cols)
         {
             var cellgroups = new List<TGroup>(section_data.Rows.Count);
             foreach (var section_row in section_data.Rows)

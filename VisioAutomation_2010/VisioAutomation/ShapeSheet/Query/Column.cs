@@ -2,14 +2,14 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ColumnBase
+    public class Column
     {
         public string Name { get; protected set; }
         public int Ordinal { get; protected set; }
 
         public readonly ShapeSheet.Src Src;
 
-        public ColumnBase(int ordinal, string name, ShapeSheet.Src src) 
+        public Column(int ordinal, string name, ShapeSheet.Src src) 
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -20,11 +20,11 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Name = name;
             this.Ordinal = ordinal;
         }
-        protected ColumnBase(int ordinal, string name)
+        protected Column(int ordinal, string name)
         {
         }
 
-        public static implicit operator int(ColumnBase col)
+        public static implicit operator int(Column col)
         {
             return col.Ordinal;
         }

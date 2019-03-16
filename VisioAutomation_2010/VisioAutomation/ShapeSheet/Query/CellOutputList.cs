@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class CellQueryOutputList<T> : List<CellQueryOutput<T>>
+    public class CellOutputList<T> : List<CellOutput<T>>
     {
-        internal CellQueryOutputList() : base()
+        internal CellOutputList() : base()
         {
         }
     }

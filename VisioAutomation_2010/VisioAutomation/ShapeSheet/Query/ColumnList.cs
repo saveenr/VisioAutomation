@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ColumnList : IEnumerable<ColumnBase> 
+    public class ColumnList : IEnumerable<Column> 
     {
-        protected IList<ColumnBase> _items;
-        protected Dictionary<string, ColumnBase> map_name_to_item;
-        protected Dictionary<ShapeSheet.Src, ColumnBase> dic_src_to_col;
+        protected IList<Column> _items;
+        protected Dictionary<string, Column> map_name_to_item;
+        protected Dictionary<ShapeSheet.Src, Column> dic_src_to_col;
 
         internal ColumnList() : this(0)
         {
@@ -14,11 +14,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         internal ColumnList(int capacity)
         {
-            this._items = new List<ColumnBase>(capacity);
-            this.map_name_to_item = new Dictionary<string, ColumnBase>(capacity);
+            this._items = new List<Column>(capacity);
+            this.map_name_to_item = new Dictionary<string, Column>(capacity);
         }
 
-        public IEnumerator<ColumnBase> GetEnumerator()
+        public IEnumerator<Column> GetEnumerator()
         {
             return (this._items).GetEnumerator();
         }
@@ -28,9 +28,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public ColumnBase this[int index] => this._items[index];
+        public Column this[int index] => this._items[index];
 
-        public ColumnBase this[string name] => this.map_name_to_item[name];
+        public Column this[string name] => this.map_name_to_item[name];
 
         public bool Contains(string name) => this.map_name_to_item.ContainsKey(name);
 
@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this.dic_src_to_col == null)
             {
-                this.dic_src_to_col = new Dictionary<ShapeSheet.Src, ColumnBase>();
+                this.dic_src_to_col = new Dictionary<ShapeSheet.Src, Column>();
             }
 
             if (this.dic_src_to_col.ContainsKey(src))
@@ -68,7 +68,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public ColumnBase Add(ShapeSheet.Src src, string name)
+        public Column Add(ShapeSheet.Src src, string name)
         {
             if (name == null)
             {
@@ -80,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.Query
             check_duplicate_column_name(norm_name);
 
             int ordinal = this._items.Count;
-            var col = new ColumnBase(ordinal, norm_name, src);
+            var col = new Column(ordinal, norm_name, src);
             this._items.Add(col);
 
             this.map_name_to_item[norm_name] = col;
