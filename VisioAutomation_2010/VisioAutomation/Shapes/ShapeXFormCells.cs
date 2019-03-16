@@ -23,13 +23,13 @@ namespace VisioAutomation.Shapes
             {
 
 
-                yield return CellMetadataItem.Create(nameof(this.PinX), VASS.SrcConstants.XFormPinX, this.PinX);
-                yield return CellMetadataItem.Create(nameof(this.PinY), VASS.SrcConstants.XFormPinY, this.PinY);
-                yield return CellMetadataItem.Create(nameof(this.LocPinX), VASS.SrcConstants.XFormLocPinX, this.LocPinX);
-                yield return CellMetadataItem.Create(nameof(this.LocPinY), VASS.SrcConstants.XFormLocPinY, this.LocPinY);
-                yield return CellMetadataItem.Create(nameof(this.Width), VASS.SrcConstants.XFormWidth, this.Width);
-                yield return CellMetadataItem.Create(nameof(this.Height), VASS.SrcConstants.XFormHeight, this.Height);
-                yield return CellMetadataItem.Create(nameof(this.Angle), VASS.SrcConstants.XFormAngle, this.Angle);
+                yield return this.Create(nameof(this.PinX), VASS.SrcConstants.XFormPinX, this.PinX);
+                yield return this.Create(nameof(this.PinY), VASS.SrcConstants.XFormPinY, this.PinY);
+                yield return this.Create(nameof(this.LocPinX), VASS.SrcConstants.XFormLocPinX, this.LocPinX);
+                yield return this.Create(nameof(this.LocPinY), VASS.SrcConstants.XFormLocPinY, this.LocPinY);
+                yield return this.Create(nameof(this.Width), VASS.SrcConstants.XFormWidth, this.Width);
+                yield return this.Create(nameof(this.Height), VASS.SrcConstants.XFormHeight, this.Height);
+                yield return this.Create(nameof(this.Angle), VASS.SrcConstants.XFormAngle, this.Angle);
             }
         }
 

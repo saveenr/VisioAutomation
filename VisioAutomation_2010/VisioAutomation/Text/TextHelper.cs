@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
@@ -183,13 +183,13 @@ namespace VisioAutomation.Text
 
 
 
-        public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
         {
             var reader = TextBlockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
-        public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, CellValueType type)
+        public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var reader = TextBlockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);

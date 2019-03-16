@@ -1,43 +1,40 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class TextXFormCells : CellGroup
+    public class TextXFormCells : VASS.CellGroups.CellGroup
     {
-        public CellValueLiteral Angle { get; set; }
-        public CellValueLiteral Width { get; set; }
-        public CellValueLiteral Height { get; set; }
-        public CellValueLiteral PinX { get; set; }
-        public CellValueLiteral PinY { get; set; }
-        public CellValueLiteral LocPinX { get; set; }
-        public CellValueLiteral LocPinY { get; set; }
+        public VASS.CellValueLiteral Angle { get; set; }
+        public VASS.CellValueLiteral Width { get; set; }
+        public VASS.CellValueLiteral Height { get; set; }
+        public VASS.CellValueLiteral PinX { get; set; }
+        public VASS.CellValueLiteral PinY { get; set; }
+        public VASS.CellValueLiteral LocPinX { get; set; }
+        public VASS.CellValueLiteral LocPinY { get; set; }
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
-
-
-                yield return CellMetadataItem.Create(nameof(this.PinX), SrcConstants.TextXFormPinX, this.PinX);
-                yield return CellMetadataItem.Create(nameof(this.PinY), SrcConstants.TextXFormPinY, this.PinY);
-                yield return CellMetadataItem.Create(nameof(this.LocPinX), SrcConstants.TextXFormLocPinX, this.LocPinX);
-                yield return CellMetadataItem.Create(nameof(this.LocPinY), SrcConstants.TextXFormLocPinY, this.LocPinY);
-                yield return CellMetadataItem.Create(nameof(this.Width), SrcConstants.TextXFormWidth, this.Width);
-                yield return CellMetadataItem.Create(nameof(this.Height), SrcConstants.TextXFormHeight, this.Height);
-                yield return CellMetadataItem.Create(nameof(this.Angle), SrcConstants.TextXFormAngle, this.Angle);
+                yield return this.Create(nameof(this.PinX), VASS.SrcConstants.TextXFormPinX, this.PinX);
+                yield return this.Create(nameof(this.PinY), VASS.SrcConstants.TextXFormPinY, this.PinY);
+                yield return this.Create(nameof(this.LocPinX), VASS.SrcConstants.TextXFormLocPinX, this.LocPinX);
+                yield return this.Create(nameof(this.LocPinY), VASS.SrcConstants.TextXFormLocPinY, this.LocPinY);
+                yield return this.Create(nameof(this.Width), VASS.SrcConstants.TextXFormWidth, this.Width);
+                yield return this.Create(nameof(this.Height), VASS.SrcConstants.TextXFormHeight, this.Height);
+                yield return this.Create(nameof(this.Angle), VASS.SrcConstants.TextXFormAngle, this.Angle);
             }
         }
 
-        public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
         {
             var reader = TextXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
-        public static TextXFormCells GetCells(IVisio.Shape shape, CellValueType type)
+        public static TextXFormCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var reader = TextXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -46,7 +43,7 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<TextXFormCellsBuilder> TextXFormCells_lazy_builder = new System.Lazy<TextXFormCellsBuilder>();
 
 
-        class TextXFormCellsBuilder : CellGroupBuilder<Text.TextXFormCells>
+        class TextXFormCellsBuilder : VASS.CellGroups.CellGroupBuilder<Text.TextXFormCells>
         {
             public TextXFormCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {

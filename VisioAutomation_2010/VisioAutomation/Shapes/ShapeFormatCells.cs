@@ -39,31 +39,31 @@ namespace VisioAutomation.Shapes
             {
 
 
-                yield return CellMetadataItem.Create(nameof(this.FillBackground), VASS.SrcConstants.FillBackground, this.FillBackground);
-                yield return CellMetadataItem.Create(nameof(this.FillBackgroundTransparency), VASS.SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
-                yield return CellMetadataItem.Create(nameof(this.FillForeground), VASS.SrcConstants.FillForeground, this.FillForeground);
-                yield return CellMetadataItem.Create(nameof(this.FillForegroundTransparency), VASS.SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
-                yield return CellMetadataItem.Create(nameof(this.FillPattern), VASS.SrcConstants.FillPattern, this.FillPattern);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowObliqueAngle), VASS.SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowOffsetX), VASS.SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowOffsetY), VASS.SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowScaleFactor), VASS.SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowType), VASS.SrcConstants.FillShadowType, this.FillShadowType);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowBackground), VASS.SrcConstants.FillShadowBackground, this.FillShadowBackground);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowBackgroundTransparency), VASS.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowForeground), VASS.SrcConstants.FillShadowForeground, this.FillShadowForeground);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowForegroundTransparency), VASS.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
-                yield return CellMetadataItem.Create(nameof(this.FillShadowPattern), VASS.SrcConstants.FillShadowPattern, this.FillShadowPattern);
-                yield return CellMetadataItem.Create(nameof(this.LineBeginArrow), VASS.SrcConstants.LineBeginArrow, this.LineBeginArrow);
-                yield return CellMetadataItem.Create(nameof(this.LineBeginArrowSize), VASS.SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
-                yield return CellMetadataItem.Create(nameof(this.LineEndArrow), VASS.SrcConstants.LineEndArrow, this.LineEndArrow);
-                yield return CellMetadataItem.Create(nameof(this.LineEndArrowSize), VASS.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
-                yield return CellMetadataItem.Create(nameof(this.LineCap), VASS.SrcConstants.LineCap, this.LineCap);
-                yield return CellMetadataItem.Create(nameof(this.LineColor), VASS.SrcConstants.LineColor, this.LineColor);
-                yield return CellMetadataItem.Create(nameof(this.LineColorTransparency), VASS.SrcConstants.LineColorTransparency, this.LineColorTransparency);
-                yield return CellMetadataItem.Create(nameof(this.LinePattern), VASS.SrcConstants.LinePattern, this.LinePattern);
-                yield return CellMetadataItem.Create(nameof(this.LineWeight), VASS.SrcConstants.LineWeight, this.LineWeight);
-                yield return CellMetadataItem.Create(nameof(this.LineRounding), VASS.SrcConstants.LineRounding, this.LineRounding);
+                yield return this.Create(nameof(this.FillBackground), VASS.SrcConstants.FillBackground, this.FillBackground);
+                yield return this.Create(nameof(this.FillBackgroundTransparency), VASS.SrcConstants.FillBackgroundTransparency, this.FillBackgroundTransparency);
+                yield return this.Create(nameof(this.FillForeground), VASS.SrcConstants.FillForeground, this.FillForeground);
+                yield return this.Create(nameof(this.FillForegroundTransparency), VASS.SrcConstants.FillForegroundTransparency, this.FillForegroundTransparency);
+                yield return this.Create(nameof(this.FillPattern), VASS.SrcConstants.FillPattern, this.FillPattern);
+                yield return this.Create(nameof(this.FillShadowObliqueAngle), VASS.SrcConstants.FillShadowObliqueAngle, this.FillShadowObliqueAngle);
+                yield return this.Create(nameof(this.FillShadowOffsetX), VASS.SrcConstants.FillShadowOffsetX, this.FillShadowOffsetX);
+                yield return this.Create(nameof(this.FillShadowOffsetY), VASS.SrcConstants.FillShadowOffsetY, this.FillShadowOffsetY);
+                yield return this.Create(nameof(this.FillShadowScaleFactor), VASS.SrcConstants.FillShadowScaleFactor, this.FillShadowScaleFactor);
+                yield return this.Create(nameof(this.FillShadowType), VASS.SrcConstants.FillShadowType, this.FillShadowType);
+                yield return this.Create(nameof(this.FillShadowBackground), VASS.SrcConstants.FillShadowBackground, this.FillShadowBackground);
+                yield return this.Create(nameof(this.FillShadowBackgroundTransparency), VASS.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+                yield return this.Create(nameof(this.FillShadowForeground), VASS.SrcConstants.FillShadowForeground, this.FillShadowForeground);
+                yield return this.Create(nameof(this.FillShadowForegroundTransparency), VASS.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+                yield return this.Create(nameof(this.FillShadowPattern), VASS.SrcConstants.FillShadowPattern, this.FillShadowPattern);
+                yield return this.Create(nameof(this.LineBeginArrow), VASS.SrcConstants.LineBeginArrow, this.LineBeginArrow);
+                yield return this.Create(nameof(this.LineBeginArrowSize), VASS.SrcConstants.LineBeginArrowSize, this.LineBeginArrowSize);
+                yield return this.Create(nameof(this.LineEndArrow), VASS.SrcConstants.LineEndArrow, this.LineEndArrow);
+                yield return this.Create(nameof(this.LineEndArrowSize), VASS.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+                yield return this.Create(nameof(this.LineCap), VASS.SrcConstants.LineCap, this.LineCap);
+                yield return this.Create(nameof(this.LineColor), VASS.SrcConstants.LineColor, this.LineColor);
+                yield return this.Create(nameof(this.LineColorTransparency), VASS.SrcConstants.LineColorTransparency, this.LineColorTransparency);
+                yield return this.Create(nameof(this.LinePattern), VASS.SrcConstants.LinePattern, this.LinePattern);
+                yield return this.Create(nameof(this.LineWeight), VASS.SrcConstants.LineWeight, this.LineWeight);
+                yield return this.Create(nameof(this.LineRounding), VASS.SrcConstants.LineRounding, this.LineRounding);
             }
         }
 

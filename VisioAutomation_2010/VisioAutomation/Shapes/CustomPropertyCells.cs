@@ -27,16 +27,16 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Label), VASS.SrcConstants.CustomPropLabel, this.Label);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Value), VASS.SrcConstants.CustomPropValue, this.Value);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Format), VASS.SrcConstants.CustomPropFormat, this.Format);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Prompt), VASS.SrcConstants.CustomPropPrompt, this.Prompt);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Calendar), VASS.SrcConstants.CustomPropCalendar, this.Calendar);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.LangID), VASS.SrcConstants.CustomPropLangID, this.LangID);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.SortKey), VASS.SrcConstants.CustomPropSortKey, this.SortKey);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Invisible), VASS.SrcConstants.CustomPropInvisible, this.Invisible);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Type), VASS.SrcConstants.CustomPropType, this.Type);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Ask), VASS.SrcConstants.CustomPropAsk, this.Ask);
+                yield return this.Create(nameof(this.Label), VASS.SrcConstants.CustomPropLabel, this.Label);
+                yield return this.Create(nameof(this.Value), VASS.SrcConstants.CustomPropValue, this.Value);
+                yield return this.Create(nameof(this.Format), VASS.SrcConstants.CustomPropFormat, this.Format);
+                yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.CustomPropPrompt, this.Prompt);
+                yield return this.Create(nameof(this.Calendar), VASS.SrcConstants.CustomPropCalendar, this.Calendar);
+                yield return this.Create(nameof(this.LangID), VASS.SrcConstants.CustomPropLangID, this.LangID);
+                yield return this.Create(nameof(this.SortKey), VASS.SrcConstants.CustomPropSortKey, this.SortKey);
+                yield return this.Create(nameof(this.Invisible), VASS.SrcConstants.CustomPropInvisible, this.Invisible);
+                yield return this.Create(nameof(this.Type), VASS.SrcConstants.CustomPropType, this.Type);
+                yield return this.Create(nameof(this.Ask), VASS.SrcConstants.CustomPropAsk, this.Ask);
             }
         }
 

@@ -27,20 +27,20 @@ namespace VisioAutomation.Pages
             {
 
 
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.DrawingScale), VASS.SrcConstants.PageDrawingScale, this.DrawingScale);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.DrawingScaleType), VASS.SrcConstants.PageDrawingScaleType, this.DrawingScaleType);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.DrawingSizeType), VASS.SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.InhibitSnap), VASS.SrcConstants.PageInhibitSnap, this.InhibitSnap);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Height), VASS.SrcConstants.PageHeight, this.Height);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Scale), VASS.SrcConstants.PageScale, this.Scale);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.Width), VASS.SrcConstants.PageWidth, this.Width);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ShadowObliqueAngle), VASS.SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ShadowOffsetX), VASS.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ShadowOffsetY), VASS.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ShadowScaleFactor), VASS.SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.ShadowType), VASS.SrcConstants.PageShadowType, this.ShadowType);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.UIVisibility), VASS.SrcConstants.PageUIVisibility, this.UIVisibility);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.DrawingResizeType), VASS.SrcConstants.PageDrawingResizeType, this.DrawingResizeType);
+                yield return this.Create(nameof(this.DrawingScale), VASS.SrcConstants.PageDrawingScale, this.DrawingScale);
+                yield return this.Create(nameof(this.DrawingScaleType), VASS.SrcConstants.PageDrawingScaleType, this.DrawingScaleType);
+                yield return this.Create(nameof(this.DrawingSizeType), VASS.SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
+                yield return this.Create(nameof(this.InhibitSnap), VASS.SrcConstants.PageInhibitSnap, this.InhibitSnap);
+                yield return this.Create(nameof(this.Height), VASS.SrcConstants.PageHeight, this.Height);
+                yield return this.Create(nameof(this.Scale), VASS.SrcConstants.PageScale, this.Scale);
+                yield return this.Create(nameof(this.Width), VASS.SrcConstants.PageWidth, this.Width);
+                yield return this.Create(nameof(this.ShadowObliqueAngle), VASS.SrcConstants.PageShadowObliqueAngle, this.ShadowObliqueAngle);
+                yield return this.Create(nameof(this.ShadowOffsetX), VASS.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
+                yield return this.Create(nameof(this.ShadowOffsetY), VASS.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
+                yield return this.Create(nameof(this.ShadowScaleFactor), VASS.SrcConstants.PageShadowScaleFactor, this.ShadowScaleFactor);
+                yield return this.Create(nameof(this.ShadowType), VASS.SrcConstants.PageShadowType, this.ShadowType);
+                yield return this.Create(nameof(this.UIVisibility), VASS.SrcConstants.PageUIVisibility, this.UIVisibility);
+                yield return this.Create(nameof(this.DrawingResizeType), VASS.SrcConstants.PageDrawingResizeType, this.DrawingResizeType);
             }
         }
 

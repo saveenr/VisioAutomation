@@ -17,11 +17,11 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return CellMetadataItem.Create(nameof(this.X), VASS.SrcConstants.ConnectionPointX, this.X);
-                yield return CellMetadataItem.Create(nameof(this.Y), VASS.SrcConstants.ConnectionPointY, this.Y);
-                yield return CellMetadataItem.Create(nameof(this.DirX), VASS.SrcConstants.ConnectionPointDirX, this.DirX);
-                yield return CellMetadataItem.Create(nameof(this.DirY), VASS.SrcConstants.ConnectionPointDirY, this.DirY);
-                yield return CellMetadataItem.Create(nameof(this.Type), VASS.SrcConstants.ConnectionPointType, this.Type);
+                yield return this.Create(nameof(this.X), VASS.SrcConstants.ConnectionPointX, this.X);
+                yield return this.Create(nameof(this.Y), VASS.SrcConstants.ConnectionPointY, this.Y);
+                yield return this.Create(nameof(this.DirX), VASS.SrcConstants.ConnectionPointDirX, this.DirX);
+                yield return this.Create(nameof(this.DirY), VASS.SrcConstants.ConnectionPointDirY, this.DirY);
+                yield return this.Create(nameof(this.Type), VASS.SrcConstants.ConnectionPointType, this.Type);
             }
         }
 

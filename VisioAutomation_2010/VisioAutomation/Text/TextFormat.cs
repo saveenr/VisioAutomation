@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
@@ -66,7 +66,7 @@ namespace VisioAutomation.Text
             return runs;
         }
         
-        public static TextFormat GetFormat(IVisio.Shape shape, CellValueType type)
+        public static TextFormat GetFormat(IVisio.Shape shape, VASS.CellValueType type)
         {
             var cells = new TextFormat();
             cells.CharacterFormats = CharacterFormatCells.GetCells(shape, type);
@@ -91,7 +91,7 @@ namespace VisioAutomation.Text
                     (short) 0] != 0) ;
         }
 
-        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
         {
             var charcells = CharacterFormatCells.GetCells(page, shapeids, type);
             var paracells = ParagraphFormatCells.GetCells(page, shapeids, type);

@@ -34,26 +34,26 @@ namespace VisioAutomation.Shapes
             {
 
 
-                yield return CellMetadataItem.Create(nameof(this.Aspect), VASS.SrcConstants.LockAspect, this.Aspect);
-                yield return CellMetadataItem.Create(nameof(this.Begin), VASS.SrcConstants.LockBegin, this.Begin);
-                yield return CellMetadataItem.Create(nameof(this.CalcWH), VASS.SrcConstants.LockCalcWH, this.CalcWH);
-                yield return CellMetadataItem.Create(nameof(this.Crop), VASS.SrcConstants.LockCrop, this.Crop);
-                yield return CellMetadataItem.Create(nameof(this.CustProp), VASS.SrcConstants.LockCustomProp, this.CustProp);
-                yield return CellMetadataItem.Create(nameof(this.Delete), VASS.SrcConstants.LockDelete, this.Delete);
-                yield return CellMetadataItem.Create(nameof(this.End), VASS.SrcConstants.LockEnd, this.End);
-                yield return CellMetadataItem.Create(nameof(this.Format), VASS.SrcConstants.LockFormat, this.Format);
-                yield return CellMetadataItem.Create(nameof(this.FromGroupFormat), VASS.SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
-                yield return CellMetadataItem.Create(nameof(this.Group), VASS.SrcConstants.LockGroup, this.Group);
-                yield return CellMetadataItem.Create(nameof(this.Height), VASS.SrcConstants.LockHeight, this.Height);
-                yield return CellMetadataItem.Create(nameof(this.MoveX), VASS.SrcConstants.LockMoveX, this.MoveX);
-                yield return CellMetadataItem.Create(nameof(this.MoveY), VASS.SrcConstants.LockMoveY, this.MoveY);
-                yield return CellMetadataItem.Create(nameof(this.Rotate), VASS.SrcConstants.LockRotate, this.Rotate);
-                yield return CellMetadataItem.Create(nameof(this.Select), VASS.SrcConstants.LockSelect, this.Select);
-                yield return CellMetadataItem.Create(nameof(this.TextEdit), VASS.SrcConstants.LockTextEdit, this.TextEdit);
-                yield return CellMetadataItem.Create(nameof(this.ThemeColors), VASS.SrcConstants.LockThemeColors, this.ThemeColors);
-                yield return CellMetadataItem.Create(nameof(this.ThemeEffects), VASS.SrcConstants.LockThemeEffects, this.ThemeEffects);
-                yield return CellMetadataItem.Create(nameof(this.VertexEdit), VASS.SrcConstants.LockVertexEdit, this.VertexEdit);
-                yield return CellMetadataItem.Create(nameof(this.Width), VASS.SrcConstants.LockWidth, this.Width);
+                yield return this.Create(nameof(this.Aspect), VASS.SrcConstants.LockAspect, this.Aspect);
+                yield return this.Create(nameof(this.Begin), VASS.SrcConstants.LockBegin, this.Begin);
+                yield return this.Create(nameof(this.CalcWH), VASS.SrcConstants.LockCalcWH, this.CalcWH);
+                yield return this.Create(nameof(this.Crop), VASS.SrcConstants.LockCrop, this.Crop);
+                yield return this.Create(nameof(this.CustProp), VASS.SrcConstants.LockCustomProp, this.CustProp);
+                yield return this.Create(nameof(this.Delete), VASS.SrcConstants.LockDelete, this.Delete);
+                yield return this.Create(nameof(this.End), VASS.SrcConstants.LockEnd, this.End);
+                yield return this.Create(nameof(this.Format), VASS.SrcConstants.LockFormat, this.Format);
+                yield return this.Create(nameof(this.FromGroupFormat), VASS.SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
+                yield return this.Create(nameof(this.Group), VASS.SrcConstants.LockGroup, this.Group);
+                yield return this.Create(nameof(this.Height), VASS.SrcConstants.LockHeight, this.Height);
+                yield return this.Create(nameof(this.MoveX), VASS.SrcConstants.LockMoveX, this.MoveX);
+                yield return this.Create(nameof(this.MoveY), VASS.SrcConstants.LockMoveY, this.MoveY);
+                yield return this.Create(nameof(this.Rotate), VASS.SrcConstants.LockRotate, this.Rotate);
+                yield return this.Create(nameof(this.Select), VASS.SrcConstants.LockSelect, this.Select);
+                yield return this.Create(nameof(this.TextEdit), VASS.SrcConstants.LockTextEdit, this.TextEdit);
+                yield return this.Create(nameof(this.ThemeColors), VASS.SrcConstants.LockThemeColors, this.ThemeColors);
+                yield return this.Create(nameof(this.ThemeEffects), VASS.SrcConstants.LockThemeEffects, this.ThemeEffects);
+                yield return this.Create(nameof(this.VertexEdit), VASS.SrcConstants.LockVertexEdit, this.VertexEdit);
+                yield return this.Create(nameof(this.Width), VASS.SrcConstants.LockWidth, this.Width);
             }
         }
 

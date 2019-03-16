@@ -21,16 +21,16 @@ namespace VisioAutomation.Pages
         {
             get
             {
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.XGridDensity), VASS.SrcConstants.XGridDensity, this.XGridDensity);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.XGridOrigin), VASS.SrcConstants.XGridOrigin, this.XGridOrigin);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.XGridSpacing), VASS.SrcConstants.XGridSpacing, this.XGridSpacing);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.XRulerDensity), VASS.SrcConstants.XRulerDensity, this.XRulerDensity);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.XRulerOrigin), VASS.SrcConstants.XRulerOrigin, this.XRulerOrigin);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.YGridDensity), VASS.SrcConstants.YGridDensity, this.YGridDensity);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.YGridOrigin), VASS.SrcConstants.YGridOrigin, this.YGridOrigin);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.YGridSpacing), VASS.SrcConstants.YGridSpacing, this.YGridSpacing);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.YRulerDensity), VASS.SrcConstants.YRulerDensity, this.YRulerDensity);
-                yield return VASS.CellGroups.CellMetadataItem.Create(nameof(this.YRulerOrigin), VASS.SrcConstants.YRulerOrigin, this.YRulerOrigin);
+                yield return this.Create(nameof(this.XGridDensity), VASS.SrcConstants.XGridDensity, this.XGridDensity);
+                yield return this.Create(nameof(this.XGridOrigin), VASS.SrcConstants.XGridOrigin, this.XGridOrigin);
+                yield return this.Create(nameof(this.XGridSpacing), VASS.SrcConstants.XGridSpacing, this.XGridSpacing);
+                yield return this.Create(nameof(this.XRulerDensity), VASS.SrcConstants.XRulerDensity, this.XRulerDensity);
+                yield return this.Create(nameof(this.XRulerOrigin), VASS.SrcConstants.XRulerOrigin, this.XRulerOrigin);
+                yield return this.Create(nameof(this.YGridDensity), VASS.SrcConstants.YGridDensity, this.YGridDensity);
+                yield return this.Create(nameof(this.YGridOrigin), VASS.SrcConstants.YGridOrigin, this.YGridOrigin);
+                yield return this.Create(nameof(this.YGridSpacing), VASS.SrcConstants.YGridSpacing, this.YGridSpacing);
+                yield return this.Create(nameof(this.YRulerDensity), VASS.SrcConstants.YRulerDensity, this.YRulerDensity);
+                yield return this.Create(nameof(this.YRulerOrigin), VASS.SrcConstants.YRulerOrigin, this.YRulerOrigin);
             }
         }
 

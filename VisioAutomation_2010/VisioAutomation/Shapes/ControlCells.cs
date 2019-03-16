@@ -20,14 +20,14 @@ namespace VisioAutomation.Shapes
         {
             get
             {
-                yield return CellMetadataItem.Create(nameof(this.CanGlue), VASS.SrcConstants.ControlCanGlue, this.CanGlue);
-                yield return CellMetadataItem.Create(nameof(this.Tip), VASS.SrcConstants.ControlTip, this.Tip);
-                yield return CellMetadataItem.Create(nameof(this.X), VASS.SrcConstants.ControlX, this.X);
-                yield return CellMetadataItem.Create(nameof(this.Y), VASS.SrcConstants.ControlY, this.Y);
-                yield return CellMetadataItem.Create(nameof(this.YBehavior), VASS.SrcConstants.ControlYBehavior, this.YBehavior);
-                yield return CellMetadataItem.Create(nameof(this.XBehavior), VASS.SrcConstants.ControlXBehavior, this.XBehavior);
-                yield return CellMetadataItem.Create(nameof(this.XDynamics), VASS.SrcConstants.ControlXDynamics, this.XDynamics);
-                yield return CellMetadataItem.Create(nameof(this.YDynamics), VASS.SrcConstants.ControlYDynamics, this.YDynamics);
+                yield return this.Create(nameof(this.CanGlue), VASS.SrcConstants.ControlCanGlue, this.CanGlue);
+                yield return this.Create(nameof(this.Tip), VASS.SrcConstants.ControlTip, this.Tip);
+                yield return this.Create(nameof(this.X), VASS.SrcConstants.ControlX, this.X);
+                yield return this.Create(nameof(this.Y), VASS.SrcConstants.ControlY, this.Y);
+                yield return this.Create(nameof(this.YBehavior), VASS.SrcConstants.ControlYBehavior, this.YBehavior);
+                yield return this.Create(nameof(this.XBehavior), VASS.SrcConstants.ControlXBehavior, this.XBehavior);
+                yield return this.Create(nameof(this.XDynamics), VASS.SrcConstants.ControlXDynamics, this.XDynamics);
+                yield return this.Create(nameof(this.YDynamics), VASS.SrcConstants.ControlYDynamics, this.YDynamics);
             }
         }
 

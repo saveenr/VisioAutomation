@@ -1,74 +1,73 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterFormatCells : CellGroup
+    public class CharacterFormatCells : VASS.CellGroups.CellGroup
     {
-        public CellValueLiteral Color { get; set; }
-        public CellValueLiteral Font { get; set; }
-        public CellValueLiteral Size { get; set; }
-        public CellValueLiteral Style { get; set; }
-        public CellValueLiteral ColorTransparency { get; set; }
-        public CellValueLiteral AsianFont { get; set; }
-        public CellValueLiteral Case { get; set; }
-        public CellValueLiteral ComplexScriptFont { get; set; }
-        public CellValueLiteral ComplexScriptSize { get; set; }
-        public CellValueLiteral DoubleStrikethrough { get; set; }
-        public CellValueLiteral DoubleUnderline { get; set; }
-        public CellValueLiteral LangID { get; set; }
-        public CellValueLiteral Locale { get; set; }
-        public CellValueLiteral LocalizeFont { get; set; }
-        public CellValueLiteral Overline { get; set; }
-        public CellValueLiteral Perpendicular { get; set; }
-        public CellValueLiteral Pos { get; set; }
-        public CellValueLiteral RTLText { get; set; }
-        public CellValueLiteral FontScale { get; set; }
-        public CellValueLiteral Letterspace { get; set; }
-        public CellValueLiteral Strikethru { get; set; }
-        public CellValueLiteral UseVertical { get; set; }
+        public VASS.CellValueLiteral Color { get; set; }
+        public VASS.CellValueLiteral Font { get; set; }
+        public VASS.CellValueLiteral Size { get; set; }
+        public VASS.CellValueLiteral Style { get; set; }
+        public VASS.CellValueLiteral ColorTransparency { get; set; }
+        public VASS.CellValueLiteral AsianFont { get; set; }
+        public VASS.CellValueLiteral Case { get; set; }
+        public VASS.CellValueLiteral ComplexScriptFont { get; set; }
+        public VASS.CellValueLiteral ComplexScriptSize { get; set; }
+        public VASS.CellValueLiteral DoubleStrikethrough { get; set; }
+        public VASS.CellValueLiteral DoubleUnderline { get; set; }
+        public VASS.CellValueLiteral LangID { get; set; }
+        public VASS.CellValueLiteral Locale { get; set; }
+        public VASS.CellValueLiteral LocalizeFont { get; set; }
+        public VASS.CellValueLiteral Overline { get; set; }
+        public VASS.CellValueLiteral Perpendicular { get; set; }
+        public VASS.CellValueLiteral Pos { get; set; }
+        public VASS.CellValueLiteral RTLText { get; set; }
+        public VASS.CellValueLiteral FontScale { get; set; }
+        public VASS.CellValueLiteral Letterspace { get; set; }
+        public VASS.CellValueLiteral Strikethru { get; set; }
+        public VASS.CellValueLiteral UseVertical { get; set; }
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
 
 
-                yield return CellMetadataItem.Create(nameof(this.Color), SrcConstants.CharColor, this.Color);
-                yield return CellMetadataItem.Create(nameof(this.Font), SrcConstants.CharFont, this.Font);
-                yield return CellMetadataItem.Create(nameof(this.Size), SrcConstants.CharSize, this.Size);
-                yield return CellMetadataItem.Create(nameof(this.Style), SrcConstants.CharStyle, this.Style);
-                yield return CellMetadataItem.Create(nameof(this.ColorTransparency), SrcConstants.CharColorTransparency, this.ColorTransparency);
-                yield return CellMetadataItem.Create(nameof(this.AsianFont), SrcConstants.CharAsianFont, this.AsianFont);
-                yield return CellMetadataItem.Create(nameof(this.Case), SrcConstants.CharCase, this.Case);
-                yield return CellMetadataItem.Create(nameof(this.ComplexScriptFont), SrcConstants.CharComplexScriptFont, this.ComplexScriptFont);
-                yield return CellMetadataItem.Create(nameof(this.ComplexScriptSize), SrcConstants.CharComplexScriptSize, this.ComplexScriptSize);
-                yield return CellMetadataItem.Create(nameof(this.DoubleUnderline), SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
-                yield return CellMetadataItem.Create(nameof(this.DoubleStrikethrough), SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough);
-                yield return CellMetadataItem.Create(nameof(this.LangID), SrcConstants.CharLangID, this.LangID);
-                yield return CellMetadataItem.Create(nameof(this.FontScale), SrcConstants.CharFontScale, this.FontScale);
-                yield return CellMetadataItem.Create(nameof(this.Letterspace), SrcConstants.CharLetterspace, this.Letterspace);
-                yield return CellMetadataItem.Create(nameof(this.Locale), SrcConstants.CharLocale, this.Locale);
-                yield return CellMetadataItem.Create(nameof(this.LocalizeFont), SrcConstants.CharLocalizeFont, this.LocalizeFont);
-                yield return CellMetadataItem.Create(nameof(this.Overline), SrcConstants.CharOverline, this.Overline);
-                yield return CellMetadataItem.Create(nameof(this.Perpendicular), SrcConstants.CharPerpendicular, this.Perpendicular);
-                yield return CellMetadataItem.Create(nameof(this.Pos), SrcConstants.CharPos, this.Pos);
-                yield return CellMetadataItem.Create(nameof(this.RTLText), SrcConstants.CharRTLText, this.RTLText);
-                yield return CellMetadataItem.Create(nameof(this.Strikethru), SrcConstants.CharStrikethru, this.Strikethru);
-                yield return CellMetadataItem.Create(nameof(this.UseVertical), SrcConstants.CharUseVertical, this.UseVertical);
+                yield return this.Create(nameof(this.Color), VASS.SrcConstants.CharColor, this.Color);
+                yield return this.Create(nameof(this.Font), VASS.SrcConstants.CharFont, this.Font);
+                yield return this.Create(nameof(this.Size), VASS.SrcConstants.CharSize, this.Size);
+                yield return this.Create(nameof(this.Style), VASS.SrcConstants.CharStyle, this.Style);
+                yield return this.Create(nameof(this.ColorTransparency), VASS.SrcConstants.CharColorTransparency, this.ColorTransparency);
+                yield return this.Create(nameof(this.AsianFont), VASS.SrcConstants.CharAsianFont, this.AsianFont);
+                yield return this.Create(nameof(this.Case), VASS.SrcConstants.CharCase, this.Case);
+                yield return this.Create(nameof(this.ComplexScriptFont), VASS.SrcConstants.CharComplexScriptFont, this.ComplexScriptFont);
+                yield return this.Create(nameof(this.ComplexScriptSize), VASS.SrcConstants.CharComplexScriptSize, this.ComplexScriptSize);
+                yield return this.Create(nameof(this.DoubleUnderline), VASS.SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
+                yield return this.Create(nameof(this.DoubleStrikethrough), VASS.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough);
+                yield return this.Create(nameof(this.LangID), VASS.SrcConstants.CharLangID, this.LangID);
+                yield return this.Create(nameof(this.FontScale), VASS.SrcConstants.CharFontScale, this.FontScale);
+                yield return this.Create(nameof(this.Letterspace), VASS.SrcConstants.CharLetterspace, this.Letterspace);
+                yield return this.Create(nameof(this.Locale), VASS.SrcConstants.CharLocale, this.Locale);
+                yield return this.Create(nameof(this.LocalizeFont), VASS.SrcConstants.CharLocalizeFont, this.LocalizeFont);
+                yield return this.Create(nameof(this.Overline), VASS.SrcConstants.CharOverline, this.Overline);
+                yield return this.Create(nameof(this.Perpendicular), VASS.SrcConstants.CharPerpendicular, this.Perpendicular);
+                yield return this.Create(nameof(this.Pos), VASS.SrcConstants.CharPos, this.Pos);
+                yield return this.Create(nameof(this.RTLText), VASS.SrcConstants.CharRTLText, this.RTLText);
+                yield return this.Create(nameof(this.Strikethru), VASS.SrcConstants.CharStrikethru, this.Strikethru);
+                yield return this.Create(nameof(this.UseVertical), VASS.SrcConstants.CharUseVertical, this.UseVertical);
             }
         }
 
 
-        public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
         {
             var reader = CharacterFormatCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
-        public static List<CharacterFormatCells> GetCells(IVisio.Shape shape, CellValueType type)
+        public static List<CharacterFormatCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var reader = CharacterFormatCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);
@@ -77,9 +76,9 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<CharacterFormatCellsBuilder> CharacterFormatCells_lazy_builder = new System.Lazy<CharacterFormatCellsBuilder>();
 
 
-        class CharacterFormatCellsBuilder : CellGroupBuilder<Text.CharacterFormatCells>
+        class CharacterFormatCellsBuilder : VASS.CellGroups.CellGroupBuilder<Text.CharacterFormatCells>
         {
-            public CharacterFormatCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public CharacterFormatCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
             {
             }
 

@@ -29,20 +29,20 @@ namespace VisioAutomation.Text
             {
 
 
-                yield return CellMetadataItem.Create(nameof(this.IndentLeft), SrcConstants.ParaIndentLeft, this.IndentLeft);
-                yield return CellMetadataItem.Create(nameof(this.IndentFirst), SrcConstants.ParaIndentFirst, this.IndentFirst);
-                yield return CellMetadataItem.Create(nameof(this.IndentRight), SrcConstants.ParaIndentRight, this.IndentRight);
-                yield return CellMetadataItem.Create(nameof(this.SpacingAfter), SrcConstants.ParaSpacingAfter, this.SpacingAfter);
-                yield return CellMetadataItem.Create(nameof(this.SpacingBefore), SrcConstants.ParaSpacingBefore, this.SpacingBefore);
-                yield return CellMetadataItem.Create(nameof(this.SpacingLine), SrcConstants.ParaSpacingLine, this.SpacingLine);
-                yield return CellMetadataItem.Create(nameof(this.HorizontalAlign), SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
-                yield return CellMetadataItem.Create(nameof(this.BulletFont), SrcConstants.ParaBulletFont, this.BulletFont);
-                yield return CellMetadataItem.Create(nameof(this.Bullet), SrcConstants.ParaBullet, this.Bullet);
-                yield return CellMetadataItem.Create(nameof(this.BulletFontSize), SrcConstants.ParaBulletFontSize, this.BulletFontSize);
-                yield return CellMetadataItem.Create(nameof(this.LocalizeBulletFont), SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont);
-                yield return CellMetadataItem.Create(nameof(this.TextPosAfterBullet), SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet);
-                yield return CellMetadataItem.Create(nameof(this.Flags), SrcConstants.ParaFlags, this.Flags);
-                yield return CellMetadataItem.Create(nameof(this.BulletString), SrcConstants.ParaBulletString, this.BulletString);
+                yield return this.Create(nameof(this.IndentLeft), SrcConstants.ParaIndentLeft, this.IndentLeft);
+                yield return this.Create(nameof(this.IndentFirst), SrcConstants.ParaIndentFirst, this.IndentFirst);
+                yield return this.Create(nameof(this.IndentRight), SrcConstants.ParaIndentRight, this.IndentRight);
+                yield return this.Create(nameof(this.SpacingAfter), SrcConstants.ParaSpacingAfter, this.SpacingAfter);
+                yield return this.Create(nameof(this.SpacingBefore), SrcConstants.ParaSpacingBefore, this.SpacingBefore);
+                yield return this.Create(nameof(this.SpacingLine), SrcConstants.ParaSpacingLine, this.SpacingLine);
+                yield return this.Create(nameof(this.HorizontalAlign), SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
+                yield return this.Create(nameof(this.BulletFont), SrcConstants.ParaBulletFont, this.BulletFont);
+                yield return this.Create(nameof(this.Bullet), SrcConstants.ParaBullet, this.Bullet);
+                yield return this.Create(nameof(this.BulletFontSize), SrcConstants.ParaBulletFontSize, this.BulletFontSize);
+                yield return this.Create(nameof(this.LocalizeBulletFont), SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont);
+                yield return this.Create(nameof(this.TextPosAfterBullet), SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet);
+                yield return this.Create(nameof(this.Flags), SrcConstants.ParaFlags, this.Flags);
+                yield return this.Create(nameof(this.BulletString), SrcConstants.ParaBulletString, this.BulletString);
             }
         }
 

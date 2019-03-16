@@ -21,8 +21,8 @@ namespace VisioAutomation.Shapes
             {
 
 
-                yield return CellMetadataItem.Create(nameof(this.Value), VASS.SrcConstants.UserDefCellValue, this.Value);
-                yield return CellMetadataItem.Create(nameof(this.Prompt), VASS.SrcConstants.UserDefCellPrompt, this.Prompt);
+                yield return this.Create(nameof(this.Value), VASS.SrcConstants.UserDefCellValue, this.Value);
+                yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.UserDefCellPrompt, this.Prompt);
             }
         }
 

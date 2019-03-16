@@ -22,15 +22,15 @@ namespace VisioAutomation.Text
             {
 
 
-                yield return CellMetadataItem.Create(nameof(this.BottomMargin), SrcConstants.TextBlockBottomMargin, this.BottomMargin);
-                yield return CellMetadataItem.Create(nameof(this.LeftMargin), SrcConstants.TextBlockLeftMargin, this.LeftMargin);
-                yield return CellMetadataItem.Create(nameof(this.RightMargin), SrcConstants.TextBlockRightMargin, this.RightMargin);
-                yield return CellMetadataItem.Create(nameof(this.TopMargin), SrcConstants.TextBlockTopMargin, this.TopMargin);
-                yield return CellMetadataItem.Create(nameof(this.DefaultTabStop), SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop);
-                yield return CellMetadataItem.Create(nameof(this.Background), SrcConstants.TextBlockBackground, this.Background);
-                yield return CellMetadataItem.Create(nameof(this.BackgroundTransparency), SrcConstants.TextBlockBackgroundTransparency, this.BackgroundTransparency);
-                yield return CellMetadataItem.Create(nameof(this.Direction), SrcConstants.TextBlockDirection, this.Direction);
-                yield return CellMetadataItem.Create(nameof(this.VerticalAlign), SrcConstants.TextBlockVerticalAlign, this.VerticalAlign);
+                yield return this.Create(nameof(this.BottomMargin), SrcConstants.TextBlockBottomMargin, this.BottomMargin);
+                yield return this.Create(nameof(this.LeftMargin), SrcConstants.TextBlockLeftMargin, this.LeftMargin);
+                yield return this.Create(nameof(this.RightMargin), SrcConstants.TextBlockRightMargin, this.RightMargin);
+                yield return this.Create(nameof(this.TopMargin), SrcConstants.TextBlockTopMargin, this.TopMargin);
+                yield return this.Create(nameof(this.DefaultTabStop), SrcConstants.TextBlockDefaultTabStop, this.DefaultTabStop);
+                yield return this.Create(nameof(this.Background), SrcConstants.TextBlockBackground, this.Background);
+                yield return this.Create(nameof(this.BackgroundTransparency), SrcConstants.TextBlockBackgroundTransparency, this.BackgroundTransparency);
+                yield return this.Create(nameof(this.Direction), SrcConstants.TextBlockDirection, this.Direction);
+                yield return this.Create(nameof(this.VerticalAlign), SrcConstants.TextBlockVerticalAlign, this.VerticalAlign);
             }
         }
 
