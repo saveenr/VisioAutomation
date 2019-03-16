@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
@@ -103,7 +100,7 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static Dictionary<string, UserDefinedCellCells> GetDictionary(IVisio.Shape shape, ShapeSheet.CellValueType type)
+        public static Dictionary<string, UserDefinedCellCells> GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
             if (shape == null)
             {
@@ -119,7 +116,7 @@ namespace VisioAutomation.Shapes
             var prop_names = UserDefinedCellHelper.GetNames(shape);
             if (prop_names.Count != prop_count)
             {
-                throw new InternalAssertionException("Unexpected number of prop names");
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected number of prop names");
             }
 
             var  shape_data = UserDefinedCellHelper.GetUserDefinedCellCells(shape, type);
@@ -132,7 +129,7 @@ namespace VisioAutomation.Shapes
             return dic;
         }
 
-        public static List<Dictionary<string, UserDefinedCellCells>> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, ShapeSheet.CellValueType type)
+        public static List<Dictionary<string, UserDefinedCellCells>> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
             if (page == null)
             {
@@ -146,7 +143,7 @@ namespace VisioAutomation.Shapes
 
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var list_list_customprops = UserDefinedCellHelper.GetUserDefinedCellCells(page,shapeids, CellValueType.Formula);
+            var list_list_customprops = UserDefinedCellHelper.GetUserDefinedCellCells(page,shapeids, VASS.CellValueType.Formula);
 
             var list_dic_customprops = new List<Dictionary<string, UserDefinedCellCells>>(shapeids.Count);
 
@@ -191,7 +188,7 @@ namespace VisioAutomation.Shapes
             if (section == null)
             {
                 string msg = string.Format("Could not find the user-defined section for shape {0}", shape.NameU);
-                throw new InternalAssertionException(msg);
+                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
 
             int row_count = section.Shape.RowCount[_udcell_section];
@@ -228,7 +225,7 @@ namespace VisioAutomation.Shapes
 
             if (user_prop_row_count != prop_names.Count)
             {
-                throw new InternalAssertionException("Unexpected number of user-defined-cell names");
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected number of user-defined-cell names");
             }
 
             return prop_names;
@@ -287,13 +284,13 @@ namespace VisioAutomation.Shapes
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
 
-        public static List<List<UserDefinedCellCells>> GetUserDefinedCellCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<List<UserDefinedCellCells>> GetUserDefinedCellCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
         {
             var reader = UserDefinedCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
-        public static List<UserDefinedCellCells> GetUserDefinedCellCells(IVisio.Shape shape, CellValueType type)
+        public static List<UserDefinedCellCells> GetUserDefinedCellCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var reader = UserDefinedCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);
@@ -304,10 +301,10 @@ namespace VisioAutomation.Shapes
 
 
 
-        class UserDefinedCellCellsBuilder : CellGroupBuilder<UserDefinedCellCells>
+        class UserDefinedCellCellsBuilder : VASS.CellGroups.CellGroupBuilder<UserDefinedCellCells>
         {
 
-            public UserDefinedCellCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public UserDefinedCellCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
             {
             }
 
