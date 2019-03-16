@@ -109,11 +109,9 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ControlCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
+            public override ControlCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new ControlCells();
-
-                var cols = this.query_sections_multirow.SectionQueries[0].Columns;
 
                 string getcellvalue(string name)
                 {

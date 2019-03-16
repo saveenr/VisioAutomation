@@ -312,10 +312,9 @@ namespace VisioAutomation.Shapes
             }
 
             
-            public override UserDefinedCellCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
+            public override UserDefinedCellCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new UserDefinedCellCells();
-                var cols = this.query_sections_multirow.SectionQueries[0].Columns;
 
                 string getcellvalue(string name)
                 {

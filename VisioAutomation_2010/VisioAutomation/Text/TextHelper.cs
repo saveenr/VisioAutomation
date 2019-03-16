@@ -204,11 +204,9 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override Text.CharacterFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
+            public override Text.CharacterFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new Text.CharacterFormatCells();
-
-                var cols = this.query_sections_multirow.SectionQueries[0].Columns;
 
                 string getcellvalue(string name)
                 {
@@ -265,12 +263,10 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override Text.ParagraphFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
+            public override Text.ParagraphFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new Text.ParagraphFormatCells();
 
-
-                var cols = this.query_sections_multirow.SectionQueries[0].Columns;
                 var names = cells.CellMetadata.Select(i => i.Name).ToList();
 
                 string getcellvalue(string name)
@@ -320,11 +316,10 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override Text.TextBlockCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
+            public override Text.TextBlockCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new Text.TextBlockCells();
-                var cols = this.query_cells_singlerow.Columns;
-
+             
                 string getcellvalue(string name)
                 {
                     return row[cols[name].Ordinal];
@@ -365,11 +360,9 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override Text.TextXFormCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row)
+            public override Text.TextXFormCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new Text.TextXFormCells();
-
-                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {

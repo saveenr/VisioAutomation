@@ -225,10 +225,9 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
+            public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new PageRulerAndGridCells();
-                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -264,10 +263,9 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PageFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
+            public override PageFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new PageFormatCells();
-                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -308,10 +306,9 @@ namespace VisioAutomation.Pages
             }
 
 
-            public override PageLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
+            public override PageLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new PageLayoutCells();
-                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
@@ -365,11 +362,9 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PagePrintCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row)
+            public override PagePrintCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new PagePrintCells();
-
-                var cols = this.query_cells_singlerow.Columns;
 
                 string getcellvalue(string name)
                 {
