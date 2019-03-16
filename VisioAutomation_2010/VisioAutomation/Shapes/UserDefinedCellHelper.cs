@@ -119,7 +119,7 @@ namespace VisioAutomation.Shapes
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected number of user-define cell names");
             }
 
-            var  shape_data = UserDefinedCellHelper.GetUserDefinedCellCells(shape, type);
+            var  shape_data = UserDefinedCellCells.GetCells(shape, type);
 
             var dic = new UserDefinedCellDictionary(udcell_count);
             for (int i = 0; i < udcell_count; i++)
@@ -143,7 +143,7 @@ namespace VisioAutomation.Shapes
 
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var list_list_udcells = UserDefinedCellHelper.GetUserDefinedCellCells(page,shapeids, VASS.CellValueType.Formula);
+            var list_list_udcells = UserDefinedCellCells.GetCells(page,shapeids, VASS.CellValueType.Formula);
 
             var list_dics = new List<UserDefinedCellDictionary>(shapeids.Count);
 
@@ -284,49 +284,6 @@ namespace VisioAutomation.Shapes
             return 0 != (shape.CellExistsU[full_udcell_name, exists]);
         }
 
-        public static List<List<UserDefinedCellCells>> GetUserDefinedCellCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
-        {
-            var reader = UserDefinedCells_lazy_builder.Value;
-            return reader.GetCellsMultiRow(page, shapeids, type);
-        }
-
-        public static List<UserDefinedCellCells> GetUserDefinedCellCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var reader = UserDefinedCells_lazy_builder.Value;
-            return reader.GetCellsMultiRow(shape, type);
-        }
-
-        private static readonly System.Lazy<UserDefinedCellCellsBuilder> UserDefinedCells_lazy_builder = new System.Lazy<UserDefinedCellCellsBuilder>();
-
-
-
-
-        class UserDefinedCellCellsBuilder : VASS.CellGroups.CellGroupBuilder<UserDefinedCellCells>
-        {
-
-            public UserDefinedCellCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
-            {
-            }
-
-            
-            public override UserDefinedCellCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
-            {
-                var cells = new UserDefinedCellCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
-
-
-                cells.Value = getcellvalue(nameof(UserDefinedCellCells.Value));
-                cells.Prompt = getcellvalue(nameof(UserDefinedCellCells.Prompt));
-
-
-
-                return cells;
-            }
-        }
 
     }
 }

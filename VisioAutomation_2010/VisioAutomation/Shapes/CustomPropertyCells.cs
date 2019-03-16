@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using VASS=VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -181,5 +184,53 @@ namespace VisioAutomation.Shapes
                 //throw new System.ArgumentException("Invalid value for Custom Property's Value");
             }
         }
+
+
+        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var reader = Custom_Property_lazy_builder.Value;
+            return reader.GetCellsMultiRow(page, shapeids, type);
+        }
+
+        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, CellValueType type)
+        {
+            var reader = Custom_Property_lazy_builder.Value;
+            return reader.GetCellsMultiRow(shape, type);
+        }
+
+        private static readonly System.Lazy<CustomPropertyCellsBuilder> Custom_Property_lazy_builder = new System.Lazy<CustomPropertyCellsBuilder>();
+
+
+        public class CustomPropertyCellsBuilder : CellGroupBuilder<CustomPropertyCells>
+        {
+
+            public CustomPropertyCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            {
+            }
+
+            public override CustomPropertyCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            {
+                var cells = new CustomPropertyCells();
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.Value = getcellvalue(nameof(CustomPropertyCells.Value));
+                cells.Calendar = getcellvalue(nameof(CustomPropertyCells.Calendar));
+                cells.Format = getcellvalue(nameof(CustomPropertyCells.Format));
+                cells.Invisible = getcellvalue(nameof(CustomPropertyCells.Invisible));
+                cells.Label = getcellvalue(nameof(CustomPropertyCells.Label));
+                cells.LangID = getcellvalue(nameof(CustomPropertyCells.LangID));
+                cells.Prompt = getcellvalue(nameof(CustomPropertyCells.Prompt));
+                cells.SortKey = getcellvalue(nameof(CustomPropertyCells.SortKey));
+                cells.Type = getcellvalue(nameof(CustomPropertyCells.Type));
+                cells.Ask = getcellvalue(nameof(CustomPropertyCells.Ask));
+
+                return cells;
+            }
+        }
+
     }
 }

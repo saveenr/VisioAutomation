@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
@@ -57,6 +58,65 @@ namespace VisioAutomation.Text
                 yield return CellMetadataItem.Create(nameof(this.RTLText), SrcConstants.CharRTLText, this.RTLText);
                 yield return CellMetadataItem.Create(nameof(this.Strikethru), SrcConstants.CharStrikethru, this.Strikethru);
                 yield return CellMetadataItem.Create(nameof(this.UseVertical), SrcConstants.CharUseVertical, this.UseVertical);
+            }
+        }
+
+
+        public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var reader = CharacterFormatCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(page, shapeids, type);
+        }
+
+        public static List<CharacterFormatCells> GetCells(IVisio.Shape shape, CellValueType type)
+        {
+            var reader = CharacterFormatCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(shape, type);
+        }
+
+        private static readonly System.Lazy<CharacterFormatCellsBuilder> CharacterFormatCells_lazy_builder = new System.Lazy<CharacterFormatCellsBuilder>();
+
+
+        class CharacterFormatCellsBuilder : CellGroupBuilder<Text.CharacterFormatCells>
+        {
+            public CharacterFormatCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            {
+            }
+
+            public override Text.CharacterFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            {
+                var cells = new Text.CharacterFormatCells();
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.Color = getcellvalue(nameof(CharacterFormatCells.Color));
+                cells.ColorTransparency = getcellvalue(nameof(CharacterFormatCells.ColorTransparency));
+                cells.Font = getcellvalue(nameof(CharacterFormatCells.Font));
+                cells.Size = getcellvalue(nameof(CharacterFormatCells.Size));
+                cells.Style = getcellvalue(nameof(CharacterFormatCells.Style));
+                cells.AsianFont = getcellvalue(nameof(CharacterFormatCells.AsianFont));
+                cells.AsianFont = getcellvalue(nameof(CharacterFormatCells.AsianFont));
+                cells.Case = getcellvalue(nameof(CharacterFormatCells.Case));
+                cells.ComplexScriptFont = getcellvalue(nameof(CharacterFormatCells.ComplexScriptFont));
+                cells.ComplexScriptSize = getcellvalue(nameof(CharacterFormatCells.ComplexScriptSize));
+                cells.DoubleStrikethrough = getcellvalue(nameof(CharacterFormatCells.DoubleStrikethrough));
+                cells.DoubleUnderline = getcellvalue(nameof(CharacterFormatCells.DoubleUnderline));
+                cells.FontScale = getcellvalue(nameof(CharacterFormatCells.FontScale));
+                cells.LangID = getcellvalue(nameof(CharacterFormatCells.LangID));
+                cells.Letterspace = getcellvalue(nameof(CharacterFormatCells.Letterspace));
+                cells.Locale = getcellvalue(nameof(CharacterFormatCells.Locale));
+                cells.LocalizeFont = getcellvalue(nameof(CharacterFormatCells.LocalizeFont));
+                cells.Overline = getcellvalue(nameof(CharacterFormatCells.Overline));
+                cells.Perpendicular = getcellvalue(nameof(CharacterFormatCells.Perpendicular));
+                cells.Pos = getcellvalue(nameof(CharacterFormatCells.Pos));
+                cells.RTLText = getcellvalue(nameof(CharacterFormatCells.RTLText));
+                cells.Strikethru = getcellvalue(nameof(CharacterFormatCells.Strikethru));
+                cells.UseVertical = getcellvalue(nameof(CharacterFormatCells.UseVertical));
+
+                return cells;
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
@@ -65,6 +66,69 @@ namespace VisioAutomation.Shapes
                 yield return CellMetadataItem.Create(nameof(this.LineRounding), SrcConstants.LineRounding, this.LineRounding);
             }
         }
+
+
+        public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var reader = shape_format_lazy_builder.Value;
+            return reader.GetCellsSingleRow(page, shapeids, type);
+        }
+
+        public static ShapeFormatCells GetCells(IVisio.Shape shape, CellValueType type)
+        {
+            var reader = shape_format_lazy_builder.Value;
+            return reader.GetCellsSingleRow(shape, type);
+        }
+
+        private static readonly System.Lazy<ShapeFormatCellsBuilder> shape_format_lazy_builder = new System.Lazy<ShapeFormatCellsBuilder>();
+
+        class ShapeFormatCellsBuilder : CellGroupBuilder<ShapeFormatCells>
+        {
+
+            public ShapeFormatCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
+            {
+            }
+
+            public override ShapeFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            {
+
+                var cells = new ShapeFormatCells();
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.FillBackground = getcellvalue(nameof(ShapeFormatCells.FillBackground));
+                cells.FillBackgroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillBackgroundTransparency));
+                cells.FillForeground = getcellvalue(nameof(ShapeFormatCells.FillForeground));
+                cells.FillForegroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillForegroundTransparency));
+                cells.FillPattern = getcellvalue(nameof(ShapeFormatCells.FillPattern));
+                cells.FillShadowObliqueAngle = getcellvalue(nameof(ShapeFormatCells.FillShadowObliqueAngle));
+                cells.FillShadowOffsetX = getcellvalue(nameof(ShapeFormatCells.FillShadowOffsetX));
+                cells.FillShadowOffsetY = getcellvalue(nameof(ShapeFormatCells.FillShadowOffsetY));
+                cells.FillShadowScaleFactor = getcellvalue(nameof(ShapeFormatCells.FillShadowScaleFactor));
+                cells.FillShadowType = getcellvalue(nameof(ShapeFormatCells.FillShadowType));
+                cells.FillShadowBackground = getcellvalue(nameof(ShapeFormatCells.FillShadowBackground));
+                cells.FillShadowBackgroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillShadowBackgroundTransparency));
+                cells.FillShadowForeground = getcellvalue(nameof(ShapeFormatCells.FillShadowForeground));
+                cells.FillShadowForegroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillShadowForegroundTransparency));
+                cells.FillShadowPattern = getcellvalue(nameof(ShapeFormatCells.FillShadowPattern));
+                cells.LineBeginArrow = getcellvalue(nameof(ShapeFormatCells.LineBeginArrow));
+                cells.LineBeginArrowSize = getcellvalue(nameof(ShapeFormatCells.LineBeginArrowSize));
+                cells.LineEndArrow = getcellvalue(nameof(ShapeFormatCells.LineEndArrow));
+                cells.LineEndArrowSize = getcellvalue(nameof(ShapeFormatCells.LineEndArrowSize));
+                cells.LineCap = getcellvalue(nameof(ShapeFormatCells.LineCap));
+                cells.LineColor = getcellvalue(nameof(ShapeFormatCells.LineColor));
+                cells.LineColorTransparency = getcellvalue(nameof(ShapeFormatCells.LineColorTransparency));
+                cells.LinePattern = getcellvalue(nameof(ShapeFormatCells.LinePattern));
+                cells.LineWeight = getcellvalue(nameof(ShapeFormatCells.LineWeight));
+                cells.LineRounding = getcellvalue(nameof(ShapeFormatCells.LineRounding));
+                return cells;
+            }
+
+        }
+
     }
 }
 

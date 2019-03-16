@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
+using IVisio = Microsoft.Office.Interop.Visio;
+using System.Linq;
 
 namespace VisioAutomation.Text
 {
@@ -41,6 +43,60 @@ namespace VisioAutomation.Text
                 yield return CellMetadataItem.Create(nameof(this.TextPosAfterBullet), SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet);
                 yield return CellMetadataItem.Create(nameof(this.Flags), SrcConstants.ParaFlags, this.Flags);
                 yield return CellMetadataItem.Create(nameof(this.BulletString), SrcConstants.ParaBulletString, this.BulletString);
+            }
+        }
+
+        public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var reader = ParagraphFormatCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(page, shapeids, type);
+        }
+
+        public static List<ParagraphFormatCells> GetCells(IVisio.Shape shape, CellValueType type)
+        {
+            var reader = ParagraphFormatCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(shape, type);
+        }
+
+
+        private static readonly System.Lazy<ParagraphFormatCellsBuilder> ParagraphFormatCells_lazy_builder = new System.Lazy<ParagraphFormatCellsBuilder>();
+
+
+        class ParagraphFormatCellsBuilder : CellGroupBuilder<Text.ParagraphFormatCells>
+        {
+            public ParagraphFormatCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            {
+            }
+
+            public override Text.ParagraphFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            {
+                var cells = new Text.ParagraphFormatCells();
+
+                var names = cells.CellMetadata.Select(i => i.Name).ToList();
+
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+
+
+                cells.IndentFirst = getcellvalue(nameof(ParagraphFormatCells.IndentFirst));
+                cells.IndentLeft = getcellvalue(nameof(ParagraphFormatCells.IndentLeft));
+                cells.IndentRight = getcellvalue(nameof(ParagraphFormatCells.IndentRight));
+                cells.SpacingAfter = getcellvalue(nameof(ParagraphFormatCells.SpacingAfter));
+                cells.SpacingBefore = getcellvalue(nameof(ParagraphFormatCells.SpacingBefore));
+                cells.SpacingLine = getcellvalue(nameof(ParagraphFormatCells.SpacingLine));
+                cells.HorizontalAlign = getcellvalue(nameof(ParagraphFormatCells.HorizontalAlign));
+                cells.Bullet = getcellvalue(nameof(ParagraphFormatCells.Bullet));
+                cells.BulletFont = getcellvalue(nameof(ParagraphFormatCells.BulletFont));
+                cells.BulletFontSize = getcellvalue(nameof(ParagraphFormatCells.BulletFontSize));
+                cells.LocalizeBulletFont = getcellvalue(nameof(ParagraphFormatCells.LocalizeBulletFont));
+                cells.TextPosAfterBullet = getcellvalue(nameof(ParagraphFormatCells.TextPosAfterBullet));
+                cells.Flags = getcellvalue(nameof(ParagraphFormatCells.Flags));
+                cells.BulletString = getcellvalue(nameof(ParagraphFormatCells.BulletString));
+
+                return cells;
             }
         }
 
