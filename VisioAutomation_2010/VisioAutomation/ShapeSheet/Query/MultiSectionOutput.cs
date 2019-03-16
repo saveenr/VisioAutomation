@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class MultiSectionOutput<T> : OutputBase<T>
+    public class MultiSectionOutput<T> : OutputBase
     {
         public List<SectionOutput<T>> Sections { get; internal set; }
 
