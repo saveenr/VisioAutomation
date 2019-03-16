@@ -143,26 +143,26 @@ namespace VisioAutomation.Shapes
 
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var list_list_customprops = UserDefinedCellHelper.GetUserDefinedCellCells(page,shapeids, VASS.CellValueType.Formula);
+            var list_list_udcells = UserDefinedCellHelper.GetUserDefinedCellCells(page,shapeids, VASS.CellValueType.Formula);
 
-            var list_dic_customprops = new List<Dictionary<string, UserDefinedCellCells>>(shapeids.Count);
+            var list_dic_udcells = new List<Dictionary<string, UserDefinedCellCells>>(shapeids.Count);
 
             for (int shape_index = 0; shape_index < shapes.Count; shape_index++)
             {
                 var shape = shapes[shape_index];
-                var list_customprops = list_list_customprops[shape_index];
+                var list_udcells = list_list_udcells[shape_index];
                 var prop_names = UserDefinedCellHelper.GetNames(shape);
 
-                var dic_customprops = new Dictionary<string, UserDefinedCellCells>(list_customprops.Count);
-                list_dic_customprops.Add(dic_customprops);
-                for (int i = 0; i < list_customprops.Count ; i++)
+                var dic_udcells = new Dictionary<string, UserDefinedCellCells>(list_udcells.Count);
+                list_dic_udcells.Add(dic_udcells);
+                for (int i = 0; i < list_udcells.Count ; i++)
                 {
                     var prop_name = prop_names[i];
-                    dic_customprops[prop_name] = list_customprops[i];
+                    dic_udcells[prop_name] = list_udcells[i];
                 }
             }
 
-            return list_dic_customprops;
+            return list_dic_udcells;
         }
 
         /// <summary>
