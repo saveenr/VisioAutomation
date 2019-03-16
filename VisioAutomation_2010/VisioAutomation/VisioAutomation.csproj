@@ -132,6 +132,7 @@
     <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="Shapes\LockHelper.cs" />
+    <Compile Include="Shapes\UserDefinedCellDictionary.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\HyperlinkCells.cs" />

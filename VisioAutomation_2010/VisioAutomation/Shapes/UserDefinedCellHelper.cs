@@ -6,15 +6,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellDictionary : Dictionary<string, UserDefinedCellCells>
-    {
-        public UserDefinedCellDictionary(int capacity) : base(capacity)
-        {
-
-        }
-
-    }
-
     public static class UserDefinedCellHelper
     {
         private static readonly short _udcell_section = ShapeSheet.SrcConstants.UserDefCellPrompt.Section;
