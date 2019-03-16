@@ -2,7 +2,6 @@
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -186,13 +185,13 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
         {
             var reader = Custom_Property_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeids, type);
         }
 
-        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, CellValueType type)
+        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var reader = Custom_Property_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);

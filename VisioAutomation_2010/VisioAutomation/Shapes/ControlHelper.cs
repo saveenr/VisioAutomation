@@ -1,9 +1,5 @@
 using System;
 using IVisio = Microsoft.Office.Interop.Visio;
-using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {

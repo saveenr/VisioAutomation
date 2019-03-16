@@ -1,33 +1,32 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
     public class LockCells : CellGroup
     {
-        public CellValueLiteral Aspect { get; set; }
-        public CellValueLiteral Begin { get; set; }
-        public CellValueLiteral CalcWH { get; set; }
-        public CellValueLiteral Crop { get; set; }
-        public CellValueLiteral CustProp { get; set; }
-        public CellValueLiteral Delete { get; set; }
-        public CellValueLiteral End { get; set; }
-        public CellValueLiteral Format { get; set; }
-        public CellValueLiteral FromGroupFormat { get; set; }
-        public CellValueLiteral Group { get; set; }
-        public CellValueLiteral Height { get; set; }
-        public CellValueLiteral MoveX { get; set; }
-        public CellValueLiteral MoveY { get; set; }
-        public CellValueLiteral Rotate { get; set; }
-        public CellValueLiteral Select { get; set; }
-        public CellValueLiteral TextEdit { get; set; }
-        public CellValueLiteral ThemeColors { get; set; }
-        public CellValueLiteral ThemeEffects { get; set; }
-        public CellValueLiteral VertexEdit { get; set; }
-        public CellValueLiteral Width { get; set; }
+        public VASS.CellValueLiteral Aspect { get; set; }
+        public VASS.CellValueLiteral Begin { get; set; }
+        public VASS.CellValueLiteral CalcWH { get; set; }
+        public VASS.CellValueLiteral Crop { get; set; }
+        public VASS.CellValueLiteral CustProp { get; set; }
+        public VASS.CellValueLiteral Delete { get; set; }
+        public VASS.CellValueLiteral End { get; set; }
+        public VASS.CellValueLiteral Format { get; set; }
+        public VASS.CellValueLiteral FromGroupFormat { get; set; }
+        public VASS.CellValueLiteral Group { get; set; }
+        public VASS.CellValueLiteral Height { get; set; }
+        public VASS.CellValueLiteral MoveX { get; set; }
+        public VASS.CellValueLiteral MoveY { get; set; }
+        public VASS.CellValueLiteral Rotate { get; set; }
+        public VASS.CellValueLiteral Select { get; set; }
+        public VASS.CellValueLiteral TextEdit { get; set; }
+        public VASS.CellValueLiteral ThemeColors { get; set; }
+        public VASS.CellValueLiteral ThemeEffects { get; set; }
+        public VASS.CellValueLiteral VertexEdit { get; set; }
+        public VASS.CellValueLiteral Width { get; set; }
 
         public override IEnumerable<CellMetadataItem> CellMetadata
         {
@@ -35,36 +34,36 @@ namespace VisioAutomation.Shapes
             {
 
 
-                yield return CellMetadataItem.Create(nameof(this.Aspect), SrcConstants.LockAspect, this.Aspect);
-                yield return CellMetadataItem.Create(nameof(this.Begin), SrcConstants.LockBegin, this.Begin);
-                yield return CellMetadataItem.Create(nameof(this.CalcWH), SrcConstants.LockCalcWH, this.CalcWH);
-                yield return CellMetadataItem.Create(nameof(this.Crop), SrcConstants.LockCrop, this.Crop);
-                yield return CellMetadataItem.Create(nameof(this.CustProp), SrcConstants.LockCustomProp, this.CustProp);
-                yield return CellMetadataItem.Create(nameof(this.Delete), SrcConstants.LockDelete, this.Delete);
-                yield return CellMetadataItem.Create(nameof(this.End), SrcConstants.LockEnd, this.End);
-                yield return CellMetadataItem.Create(nameof(this.Format), SrcConstants.LockFormat, this.Format);
-                yield return CellMetadataItem.Create(nameof(this.FromGroupFormat), SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
-                yield return CellMetadataItem.Create(nameof(this.Group), SrcConstants.LockGroup, this.Group);
-                yield return CellMetadataItem.Create(nameof(this.Height), SrcConstants.LockHeight, this.Height);
-                yield return CellMetadataItem.Create(nameof(this.MoveX), SrcConstants.LockMoveX, this.MoveX);
-                yield return CellMetadataItem.Create(nameof(this.MoveY), SrcConstants.LockMoveY, this.MoveY);
-                yield return CellMetadataItem.Create(nameof(this.Rotate), SrcConstants.LockRotate, this.Rotate);
-                yield return CellMetadataItem.Create(nameof(this.Select), SrcConstants.LockSelect, this.Select);
-                yield return CellMetadataItem.Create(nameof(this.TextEdit), SrcConstants.LockTextEdit, this.TextEdit);
-                yield return CellMetadataItem.Create(nameof(this.ThemeColors), SrcConstants.LockThemeColors, this.ThemeColors);
-                yield return CellMetadataItem.Create(nameof(this.ThemeEffects), SrcConstants.LockThemeEffects, this.ThemeEffects);
-                yield return CellMetadataItem.Create(nameof(this.VertexEdit), SrcConstants.LockVertexEdit, this.VertexEdit);
-                yield return CellMetadataItem.Create(nameof(this.Width), SrcConstants.LockWidth, this.Width);
+                yield return CellMetadataItem.Create(nameof(this.Aspect), VASS.SrcConstants.LockAspect, this.Aspect);
+                yield return CellMetadataItem.Create(nameof(this.Begin), VASS.SrcConstants.LockBegin, this.Begin);
+                yield return CellMetadataItem.Create(nameof(this.CalcWH), VASS.SrcConstants.LockCalcWH, this.CalcWH);
+                yield return CellMetadataItem.Create(nameof(this.Crop), VASS.SrcConstants.LockCrop, this.Crop);
+                yield return CellMetadataItem.Create(nameof(this.CustProp), VASS.SrcConstants.LockCustomProp, this.CustProp);
+                yield return CellMetadataItem.Create(nameof(this.Delete), VASS.SrcConstants.LockDelete, this.Delete);
+                yield return CellMetadataItem.Create(nameof(this.End), VASS.SrcConstants.LockEnd, this.End);
+                yield return CellMetadataItem.Create(nameof(this.Format), VASS.SrcConstants.LockFormat, this.Format);
+                yield return CellMetadataItem.Create(nameof(this.FromGroupFormat), VASS.SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
+                yield return CellMetadataItem.Create(nameof(this.Group), VASS.SrcConstants.LockGroup, this.Group);
+                yield return CellMetadataItem.Create(nameof(this.Height), VASS.SrcConstants.LockHeight, this.Height);
+                yield return CellMetadataItem.Create(nameof(this.MoveX), VASS.SrcConstants.LockMoveX, this.MoveX);
+                yield return CellMetadataItem.Create(nameof(this.MoveY), VASS.SrcConstants.LockMoveY, this.MoveY);
+                yield return CellMetadataItem.Create(nameof(this.Rotate), VASS.SrcConstants.LockRotate, this.Rotate);
+                yield return CellMetadataItem.Create(nameof(this.Select), VASS.SrcConstants.LockSelect, this.Select);
+                yield return CellMetadataItem.Create(nameof(this.TextEdit), VASS.SrcConstants.LockTextEdit, this.TextEdit);
+                yield return CellMetadataItem.Create(nameof(this.ThemeColors), VASS.SrcConstants.LockThemeColors, this.ThemeColors);
+                yield return CellMetadataItem.Create(nameof(this.ThemeEffects), VASS.SrcConstants.LockThemeEffects, this.ThemeEffects);
+                yield return CellMetadataItem.Create(nameof(this.VertexEdit), VASS.SrcConstants.LockVertexEdit, this.VertexEdit);
+                yield return CellMetadataItem.Create(nameof(this.Width), VASS.SrcConstants.LockWidth, this.Width);
             }
         }
 
-        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
         {
             var reader = LockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
-        public static LockCells GetCells(IVisio.Shape shape, CellValueType type)
+        public static LockCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var reader = LockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);

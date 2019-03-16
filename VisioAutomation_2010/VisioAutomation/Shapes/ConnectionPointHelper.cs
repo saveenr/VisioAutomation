@@ -1,8 +1,4 @@
-using VisioAutomation.ShapeSheet.CellGroups;
-using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
