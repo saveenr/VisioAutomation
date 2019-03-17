@@ -30,8 +30,8 @@ namespace VisioAutomation.ShapeSheet.Query
         internal ShapeCacheItem GetShapeCacheItem(IVisio.Shape shape)
         {
             int rows = this.GetNumRowsForShape(shape);
-            var section_info = new ShapeCacheItem(this,rows, shape.ID16);
-            return section_info;
+            var shapecacheitem = new ShapeCacheItem(this, rows, shape.ID16);
+            return shapecacheitem;
         }
     }
 }
