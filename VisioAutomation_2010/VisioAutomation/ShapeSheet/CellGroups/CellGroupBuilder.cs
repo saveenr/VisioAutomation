@@ -102,7 +102,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> __ToCellGroups(VASS.Query.ShapeSectionRows<string> section_rows, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+        private List<TGroup> __ToCellGroups(VASS.Query.ShapeSectionResult<string> section_rows, VisioAutomation.ShapeSheet.Query.ColumnList cols)
         {
             var cellgroups = new List<TGroup>(section_rows.Count);
             foreach (var section_row in section_rows)
@@ -113,7 +113,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private VASS.Query.ShapeSectionRowsList<string> GetCells(VASS.Query.SingleSectionQuery query, IVisio.Shape shape, CellValueType type)
+        private VASS.Query.ShapeSectionsResults<string> GetCells(VASS.Query.SingleSectionQuery query, IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
             if (type == CellValueType.Formula)

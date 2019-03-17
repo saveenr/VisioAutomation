@@ -105,7 +105,7 @@
     <Compile Include="ShapeSheet\Query\MultiSectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryResults.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeSectionRowsList.cs" />
+    <Compile Include="ShapeSheet\Query\ShapeSectionResults.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItemList.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
@@ -151,7 +151,7 @@
     <Compile Include="ShapeSheet\Query\Row.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeSectionRows.cs" />
+    <Compile Include="ShapeSheet\Query\ShapeSectionResult.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryList.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
