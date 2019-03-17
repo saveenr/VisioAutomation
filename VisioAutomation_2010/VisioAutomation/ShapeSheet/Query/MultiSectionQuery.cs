@@ -197,7 +197,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output;
         }
 
-        private int _get_total_cell_count(int numshapes)
+        private int _get_total_cell_count()
         {
             // Count the cells not in sections
             int count = 0;
@@ -214,9 +214,8 @@ namespace VisioAutomation.ShapeSheet.Query
         private Streams.StreamArray _build_src_stream()
         {
             int dummy_shapeid = -1;
-            int numshapes = 1;
             int shapeindex = 0;
-            int numcells = this._get_total_cell_count(numshapes);
+            int numcells = this._get_total_cell_count();
             var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
             var sidsrcs = this._enum_total_cell_sidsrc(dummy_shapeid, shapeindex);
             var srcs = sidsrcs.Select(i => i.Src);
@@ -227,8 +226,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private VASS.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
         {
-            int numshapes = shapeids.Count;
-            int numcells = this._get_total_cell_count(numshapes);
+            int numcells = this._get_total_cell_count();
 
             var stream = new VASS.Streams.SidSrcStreamArrayBuilder(numcells);
 
