@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             this.EnforceType(CellGroupBuilderType.SingleRow);
-            var data_for_shapes = this.query_cells_singlerow.GetCells(page, shapeids, type);
+            var data_for_shapes = this.GetCells(query_cells_singlerow, page, shapeids, type);
             var list = new List<TGroup>(shapeids.Count);
             var cols = this.query_cells_singlerow.Columns;
             var objects = data_for_shapes.Select(d => this.ToCellGroup(d.Cells,cols));
@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public TGroup GetCellsSingleRow(IVisio.Shape shape, CellValueType type)
         {
             this.EnforceType(CellGroupBuilderType.SingleRow);
-            var data_for_shape = this.query_cells_singlerow.GetCells(shape, type);
+            var data_for_shape = this.GetCells(query_cells_singlerow, shape, type);
             var cols = this.query_cells_singlerow.Columns;
             var cells = this.ToCellGroup(data_for_shape.Cells,cols);
             return cells;
@@ -81,7 +81,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.EnforceType(CellGroupBuilderType.MultiRow);
             var cols = this.query_sections_multirow.SectionQueries[0].Columns;
 
-            var data_for_shapes = query_sections_multirow.GetCells(page, shapeids, type);
+            var data_for_shapes = GetCells(query_sections_multirow,page, shapeids, type);
             var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
             {
@@ -96,7 +96,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             this.EnforceType(CellGroupBuilderType.MultiRow);
             var cols = this.query_sections_multirow.SectionQueries[0].Columns;
-            var data_for_shape = query_sections_multirow.GetCells(shape, type);
+            var data_for_shape = GetCells(query_sections_multirow, shape, type);
             var first_section = data_for_shape.Sections[0];
             var cellgroups = this.__ToCellGroups(first_section,cols);
             return cellgroups;
@@ -112,5 +112,58 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
             return cellgroups;
         }
+
+        private VASS.Query.MultiSectionOutput<string> GetCells(VASS.Query.MultiSectionQuery query, IVisio.Shape shape, CellValueType type)
+        {
+            var surface = new SurfaceTarget(shape);
+            if (type == CellValueType.Formula)
+            {
+                return query.GetFormulas(surface);
+            }
+            else
+            {
+                return query.GetResults<string>(surface);
+            }
+        }
+
+        private VASS.Query.MultiSectionOuputList<string> GetCells(VASS.Query.MultiSectionQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var surface = new SurfaceTarget(page);
+            if (type == CellValueType.Formula)
+            {
+                return query.GetFormulas(surface, shapeids);
+            }
+            else
+            {
+                return query.GetResults<string>(surface, shapeids);
+            }
+        }
+
+        private VASS.Query.CellOutput<string> GetCells(VASS.Query.CellQuery query, IVisio.Shape shape, CellValueType type)
+        {
+            var surface = new SurfaceTarget(shape);
+            if (type == CellValueType.Formula)
+            {
+                return query.GetFormulas(surface);
+            }
+            else
+            {
+                return query.GetResults<string>(surface);
+            }
+        }
+
+        private VASS.Query.CellOutputList<string> GetCells(VASS.Query.CellQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var surface = new SurfaceTarget(page);
+            if (type == CellValueType.Formula)
+            {
+                return query.GetFormulas(surface, shapeids);
+            }
+            else
+            {
+                return query.GetResults<string>(surface, shapeids);
+            }
+        }
+
     }
 }

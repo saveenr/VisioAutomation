@@ -25,33 +25,6 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public MultiSectionOutput<string> GetCells(IVisio.Shape shape, CellValueType type)
-        {
-            var surface = new SurfaceTarget(shape);
-            if (type == CellValueType.Formula)
-            {
-                return GetFormulas(surface);
-            }
-            else
-            {
-                return GetResults<string>(surface);
-            }
-        }
-
-        public MultiSectionOuputList<string> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
-        {
-            var surface = new SurfaceTarget(page);
-            if (type == CellValueType.Formula)
-            {
-                return this.GetFormulas(surface, shapeids);
-            }
-            else
-            {
-                return this.GetResults<string>(surface, shapeids);
-            }
-        }
-
-
         public MultiSectionOutput<string> GetFormulas(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
