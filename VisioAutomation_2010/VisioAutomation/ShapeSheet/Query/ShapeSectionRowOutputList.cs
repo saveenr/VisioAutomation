@@ -4,7 +4,14 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class ShapeSectionRowOutputList<T> : IEnumerable<ShapeSectionRowOutput<T>>
     {
-        private readonly List<ShapeSectionRowOutput<T>> _rows;
+        // shapeidn
+        // list {
+        //     [0] - { shapeidn, sectionindex0, {cells for (shapeidn,sectionindex0)} }
+        //     [1] - { shapeidn, sectionindex1, {cells for (shapeidn,sectionindex1)} }
+        //     [n] - { shapeidn, sectionindexn, {cells for (shapeidn,sectionindexn)} }
+        // }
+
+        private readonly List<ShapeSectionRowOutput<T>> _list;
 
         public int ShapeId;
         public readonly IVisio.VisSectionIndices SectionIndex;
@@ -13,12 +20,12 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.ShapeId = shapeid;
             this.SectionIndex = secindex;
-            this._rows = new List<ShapeSectionRowOutput<T>>(capacity);
+            this._list = new List<ShapeSectionRowOutput<T>>(capacity);
         }
 
         public IEnumerator<ShapeSectionRowOutput<T>> GetEnumerator()
         {
-            return this._rows.GetEnumerator();
+            return this._list.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -28,11 +35,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         internal void Add(ShapeSectionRowOutput<T> r)
         {
-            this._rows.Add(r);
+            this._list.Add(r);
         }
 
-        public int Count => this._rows.Count;
+        public int Count => this._list.Count;
 
-        public ShapeSectionRowOutput<T> this[int index] => this._rows[index];
+        public ShapeSectionRowOutput<T> this[int index] => this._list[index];
     }
 }

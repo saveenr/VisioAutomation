@@ -6,22 +6,29 @@ namespace VisioAutomation.ShapeSheet.Query
     public class ShapesSectionsOutputList<T> : IEnumerable<ShapeSectionOutputList<T>>
     {
         // this class contains all the outputs for every shape that was queried
+        // think of it this collection as having this shape
+        //
+        // list {
+        //     [0] - { shapeid0, {sections found for shapeid0} }
+        //     [1] - { shapeid1, {sections found for shapeid1} }
+        //     [n] - { shapeidn, {sections found for shapeidn} }
+        // }
 
-        List<ShapeSectionOutputList<T>> items;
+        List<ShapeSectionOutputList<T>> _list;
 
         internal ShapesSectionsOutputList()
         {
-            this.items = new List<ShapeSectionOutputList<T>>();
+            this._list = new List<ShapeSectionOutputList<T>>();
         }
 
         public void Add(ShapeSectionOutputList<T> item)
         {
-            this.items.Add(item);
+            this._list.Add(item);
         }
 
         public IEnumerator<ShapeSectionOutputList<T>> GetEnumerator()
         {
-            return this.items.GetEnumerator();
+            return this._list.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -33,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             get
             {
-                return this.items.Count;
+                return this._list.Count;
             }
         }
 
@@ -41,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             get
             {
-                return this.items[index];
+                return this._list[index];
             }
         }
     }
