@@ -12,19 +12,6 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
     public class ShapeSheetQueryTests : VisioAutomationTest
     {
         [TestMethod]
-        public void ShapeSheet_Query_SectionCells_have_names()
-        {
-            var query = new VA.ShapeSheet.Query.MultiSectionQuery();
-
-            var sec_char = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionCharacter);
-            Assert.AreEqual("Character", sec_char.Name);
-
-            var sec_obj = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
-            Assert.AreEqual("Object", sec_obj.Name);
-
-        }
-
-        [TestMethod]
         public void ShapeSheet_Query_GetResults_SingleShape()
         {
             var doc1 = this.GetNewDoc();
@@ -167,25 +154,25 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var data2 = query.GetResults<string>(page1, shapeids);
 
             Assert.AreEqual(4, data.Count);
-            Assert.AreEqual(1, data[0].Sections[prop_sec].Rows.Count);
-            Assert.AreEqual(2, data[1].Sections[prop_sec].Rows.Count);
-            Assert.AreEqual(0, data[2].Sections[prop_sec].Rows.Count);
-            Assert.AreEqual(3, data[3].Sections[prop_sec].Rows.Count);
+            Assert.AreEqual(1, data[0].Sections[0].Rows.Count);
+            Assert.AreEqual(2, data[1].Sections[0].Rows.Count);
+            Assert.AreEqual(0, data[2].Sections[0].Rows.Count);
+            Assert.AreEqual(3, data[3].Sections[0].Rows.Count);
 
-            Assert.AreEqual("\"1\"", data[0].Sections[prop_sec].Rows[0].Cells[0]);
-            Assert.AreEqual("\"2\"", data[1].Sections[prop_sec].Rows[0].Cells[0]);
-            Assert.AreEqual("\"3\"", data[1].Sections[prop_sec].Rows[1].Cells[0]);
-            Assert.AreEqual("\"4\"", data[3].Sections[prop_sec].Rows[0].Cells[0]);
-            Assert.AreEqual("\"5\"", data[3].Sections[prop_sec].Rows[1].Cells[0]);
-            Assert.AreEqual("\"6\"", data[3].Sections[prop_sec].Rows[2].Cells[0]);
+            Assert.AreEqual("\"1\"", data[0].Sections[0].Rows[0].Cells[0]);
+            Assert.AreEqual("\"2\"", data[1].Sections[0].Rows[0].Cells[0]);
+            Assert.AreEqual("\"3\"", data[1].Sections[0].Rows[1].Cells[0]);
+            Assert.AreEqual("\"4\"", data[3].Sections[0].Rows[0].Cells[0]);
+            Assert.AreEqual("\"5\"", data[3].Sections[0].Rows[1].Cells[0]);
+            Assert.AreEqual("\"6\"", data[3].Sections[0].Rows[2].Cells[0]);
 
 
-            Assert.AreEqual( "1", data2[0].Sections[prop_sec].Rows[0].Cells[0]);
-            Assert.AreEqual( "2", data2[1].Sections[prop_sec].Rows[0].Cells[0]);
-            Assert.AreEqual( "3", data2[1].Sections[prop_sec].Rows[1].Cells[0]);
-            Assert.AreEqual( "4", data2[3].Sections[prop_sec].Rows[0].Cells[0]);
-            Assert.AreEqual( "5", data2[3].Sections[prop_sec].Rows[1].Cells[0]);
-            Assert.AreEqual( "6", data2[3].Sections[prop_sec].Rows[2].Cells[0]);
+            Assert.AreEqual( "1", data2[0].Sections[0].Rows[0].Cells[0]);
+            Assert.AreEqual( "2", data2[1].Sections[0].Rows[0].Cells[0]);
+            Assert.AreEqual( "3", data2[1].Sections[0].Rows[1].Cells[0]);
+            Assert.AreEqual( "4", data2[3].Sections[0].Rows[0].Cells[0]);
+            Assert.AreEqual( "5", data2[3].Sections[0].Rows[1].Cells[0]);
+            Assert.AreEqual( "6", data2[3].Sections[0].Rows[2].Cells[0]);
 
             page1.Delete(0);
         }

@@ -35,8 +35,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentException(msg);
             }
 
-            int ordinal = this._list.Count;
-            var section_query = new SectionQuery(ordinal, section);
+            var section_query = new SectionQuery(section);
             this._list.Add(section_query);
             this._map_secindex_to_sectionquery[section] = section_query;
             return section_query;
