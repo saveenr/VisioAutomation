@@ -38,6 +38,19 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
+        public MultiSectionOuputList<string> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var surface = new SurfaceTarget(page);
+            if (type == CellValueType.Formula)
+            {
+                return this.GetFormulas(surface, shapeids);
+            }
+            else
+            {
+                return this.GetResults<string>(surface, shapeids);
+            }
+        }
+
 
         public MultiSectionOutput<string> GetFormulas(SurfaceTarget surface)
         {
@@ -83,19 +96,26 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetFormulas(surface, shapeids);
         }
 
-        public MultiSectionOuputList<string> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+
+        public MultiSectionOuputList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
-            if (type == CellValueType.Formula)
-            {
-                return this.GetFormulas(surface, shapeids);
-            }
-            else
-            {
-                return this.GetResults<string>(surface, shapeids);
-            }
+            return this.GetResults<TResult>(surface, shapeids);
         }
 
+        public MultiSectionOuputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
+        {
+            // Store information about the sections we need to query
+            CacheSectionInfoForAllShapes(surface, shapeids);
+
+            // Perform the query
+            var srcstream = this._build_sidsrc_stream(shapeids);
+            const object[] unitcodes = null;
+            var values = surface.GetResults<TResult>(srcstream, unitcodes);
+            var reader = new VASS.Internal.ArraySegmentReader<TResult>(values);
+            var list = this._create_outputs_for_shapes(shapeids, _cache, reader);
+            return list;
+        }
         public MultiSectionOuputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
@@ -146,25 +166,6 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public MultiSectionOuputList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
-        {
-            var surface = new SurfaceTarget(page);
-            return this.GetResults<TResult>(surface, shapeids);
-        }
-
-        public MultiSectionOuputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
-        {
-            // Store information about the sections we need to query
-            CacheSectionInfoForAllShapes(surface, shapeids);
-
-            // Perform the query
-            var srcstream = this._build_sidsrc_stream(shapeids);
-            const object[] unitcodes = null;
-            var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new VASS.Internal.ArraySegmentReader<TResult>(values);
-            var list = this._create_outputs_for_shapes(shapeids, _cache, reader);
-            return list;
-        }
 
         private MultiSectionOuputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionInfoCache cache, VASS.Internal.ArraySegmentReader<T> segReader)
         {

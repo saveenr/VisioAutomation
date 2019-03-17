@@ -14,21 +14,6 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Columns = new ColumnList(0);
         }
 
-        private static void RestrictToShapesOnly(SurfaceTarget surface)
-        {
-            if (surface.Shape == null)
-            {
-                string msg = "Target must be Shape not Page or Master";
-                throw new System.ArgumentException(msg);
-            }
-        }
-
-        public CellOutput<string> GetFormulas(IVisio.Shape shape)
-        {
-            var surface = new SurfaceTarget(shape);
-            return GetFormulas(surface);
-        }
-
         public CellOutput<string> GetCells(IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
@@ -41,6 +26,27 @@ namespace VisioAutomation.ShapeSheet.Query
                 return GetResults<string>(surface);
             }
         }
+
+        public CellOutputList<string> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        {
+            var surface = new SurfaceTarget(page);
+            if (type == CellValueType.Formula)
+            {
+                return this.GetFormulas(surface, shapeids);
+            }
+            else
+            {
+                return this.GetResults<string>(surface, shapeids);
+            }
+        }
+
+
+        public CellOutput<string> GetFormulas(IVisio.Shape shape)
+        {
+            var surface = new SurfaceTarget(shape);
+            return GetFormulas(surface);
+        }
+
 
         public CellOutput<string> GetFormulas(SurfaceTarget surface)
         {
@@ -76,19 +82,6 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
-        }
-
-        public CellOutputList<string> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
-        {
-            var surface = new SurfaceTarget(page);
-            if (type == CellValueType.Formula)
-            {
-                return this.GetFormulas(surface, shapeids);
-            }
-            else
-            {
-                return this.GetResults<string>(surface, shapeids);
-            }
         }
 
 
@@ -172,5 +165,15 @@ namespace VisioAutomation.ShapeSheet.Query
             }
             return stream.ToStreamArray();
         }
+
+        private static void RestrictToShapesOnly(SurfaceTarget surface)
+        {
+            if (surface.Shape == null)
+            {
+                string msg = "Target must be Shape not Page or Master";
+                throw new System.ArgumentException(msg);
+            }
+        }
+
     }
 }
