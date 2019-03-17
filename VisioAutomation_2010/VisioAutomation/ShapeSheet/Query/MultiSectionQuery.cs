@@ -204,7 +204,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int shapeindex = 0;
             int numcells = this._sectioncache.CountCells();
             var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
-            var sidsrcs = this._enum_total_cell_sidsrc(dummy_shapeid, shapeindex);
+            var sidsrcs = this._enum_sidsrcs(dummy_shapeid, shapeindex);
             var srcs = sidsrcs.Select(i => i.Src);
             stream.AddRange(srcs);
 
@@ -221,14 +221,14 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 // For each shape add the cells to query
                 var shapeid = shapeids[shapeindex];
-                var sidsrcs = this._enum_total_cell_sidsrc(shapeid, shapeindex);
+                var sidsrcs = this._enum_sidsrcs(shapeid, shapeindex);
                 stream.AddRange(sidsrcs);
             }
 
             return stream.ToStreamArray();
         }
 
-        private IEnumerable<SidSrc> _enum_total_cell_sidsrc(int shapeid, int shapeindex)
+        private IEnumerable<SidSrc> _enum_sidsrcs(int shape_id, int shapeindex)
         {
             if (this._sectioncache.CountShapes < 1)
             {
@@ -238,15 +238,18 @@ namespace VisioAutomation.ShapeSheet.Query
             var sectioncache = _sectioncache[shapeindex];
             foreach (var section_info in sectioncache)
             {
-                foreach (int rowindex in section_info.RowIndexes)
+                foreach (int row_index in section_info.RowIndexes)
                 {
-                    foreach (var col in section_info.SectionQuery.Columns)
+                    var cols = section_info.SectionQuery.Columns;
+                    var section_index = section_info.SectionQuery.SectionIndex;
+                    var sectionquery = section_info.SectionQuery;
+                    foreach (var col in cols)
                     {
-                        var src = new VASS.Src(
-                            (short)section_info.SectionQuery.SectionIndex,
-                            (short)rowindex,
+                        var sidsrc = new VASS.SidSrc(
+                            (short)shape_id,
+                            (short)section_index,
+                            (short)row_index,
                             col.Src.Cell);
-                        var sidsrc = new VASS.SidSrc((short)shapeid, src);
                         yield return sidsrc;
                     }
                 }
