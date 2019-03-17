@@ -112,8 +112,8 @@ namespace VisioAutomation_Tests.Core.Shapes
             var shape0_section0 = shape0_formulas[0];
 
             var shape0_section0_row0 = shape0_section0.Rows[0];
-            Assert.AreEqual("\"bar\"", shape0_section0_row0.Cells[0]);
-            Assert.AreEqual("\"\"", shape0_section0_row0.Cells[1]);
+            Assert.AreEqual("\"bar\"", shape0_section0_row0[0]);
+            Assert.AreEqual("\"\"", shape0_section0_row0[1]);
 
             // handle second shape
             Assert.AreEqual(1, shape1_formulas.Count); // 1 because there is only one section being queries

@@ -26,7 +26,7 @@ namespace VisioPowerShell.Models
                 // populate the row buffer
                 for (int col_index = 0; col_index < colcount; col_index++)
                 {
-                    rowbuf[col_index] = output[row_index].Cells[col_index];
+                    rowbuf[col_index] = output[row_index][col_index];
                 }
 
                 // load it into the table
