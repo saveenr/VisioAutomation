@@ -27,10 +27,10 @@ namespace VisioAutomation.ShapeSheet.Query
             return shape.RowCount[(short)this.SectionIndex];
         }
 
-        internal SectionCacheInfo GetSectionInfoForShape(IVisio.Shape shape)
+        internal SectionCache GetSectionInfoForShape(IVisio.Shape shape)
         {
             int rows = this.GetNumRowsForShape(shape);
-            var section_info = new SectionCacheInfo(this,rows, shape.ID16);
+            var section_info = new SectionCache(this,rows, shape.ID16);
             return section_info;
         }
     }

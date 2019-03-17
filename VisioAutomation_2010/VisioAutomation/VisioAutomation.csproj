@@ -119,7 +119,7 @@
     <Compile Include="Shapes\CustomPropertyType.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegmentReader.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegment.cs" />
-    <Compile Include="ShapeSheet\Query\SectionInfoCache.cs" />
+    <Compile Include="ShapeSheet\Query\SectionCacheList.cs" />
     <Compile Include="ShapeSheet\Query\SectionOutputRowList.cs" />
     <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
@@ -150,7 +150,7 @@
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
     <Compile Include="ShapeSheet\Query\MultiSectionOutputList.cs" />
     <Compile Include="ShapeSheet\Query\OutputBase.cs" />
-    <Compile Include="ShapeSheet\Query\SectionInfo.cs" />
+    <Compile Include="ShapeSheet\Query\SectionCache.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\SectionOutput.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryList.cs" />
