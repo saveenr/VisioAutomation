@@ -5,6 +5,15 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class ShapeSectionRows<T> : IEnumerable<Row<T>>
     {
+
+        // for a given tuple of (shape, section) gives the rows for that tuple
+        //
+        // {
+        //    (shapeid,sectionn)
+        //    [0] = rows 0
+        //    [1] = rows 1
+        //    [n] = rows n
+        // }
         public readonly int ShapeID;
         public readonly IVisio.VisSectionIndices SectionIndex;
         private readonly RowList<T> Rows;

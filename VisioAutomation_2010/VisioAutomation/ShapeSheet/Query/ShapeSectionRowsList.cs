@@ -6,7 +6,14 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class ShapeSectionRowsList<T> : IEnumerable<ShapeSectionRows<T>>
     {
-        // for a given shape, contains the outputs for every section
+        // for a given shape, contains rows for every section that was queried
+        //
+        // {
+        //    shapeid
+        //    [0] = rows for section0
+        //    [1] = rows for section1
+        //    [n] = rows for sectionn
+        // }
 
         public readonly int ShapeID;
         private List<ShapeSectionRows<T>> _items;
