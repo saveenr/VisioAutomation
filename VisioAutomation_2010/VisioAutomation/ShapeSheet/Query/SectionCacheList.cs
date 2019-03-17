@@ -2,30 +2,43 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    internal class SectionCacheList
+    internal class MSCache
     {
-        List<List<SectionCache>> items;
+        List<LISTSECTIONCLASS> items;
 
-        public SectionCacheList()
+        public MSCache()
         {
-            this.items = new List<List<SectionCache>>();
+            this.items = new List<LISTSECTIONCLASS>();
         }
 
-        public SectionCacheList(int capacity)
+        public MSCache(int capacity)
         {
-            this.items = new List<List<SectionCache>>(capacity);
+            this.items = new List<LISTSECTIONCLASS>(capacity);
         }
 
-        public void AddSectionInfosForShape(List<SectionCache> item)
+        public void AddSectionInfosForShape(LISTSECTIONCLASS item)
         {
             this.items.Add(item);
         }
 
         public int CountShapes => this.items.Count;
 
-        public IEnumerable<List<SectionCache>> EnumSectionInfoForShapes => this.items;
+        public IEnumerable<LISTSECTIONCLASS> EnumSectionInfoForShapes => this.items;
 
-        public List<SectionCache> this[int index] => this.items[index];
+        public LISTSECTIONCLASS this[int index] => this.items[index];
 
+    }
+
+    internal class LISTSECTIONCLASS : List<SectionCache>
+    {
+        public LISTSECTIONCLASS()
+        {
+
+        }
+
+        public LISTSECTIONCLASS(int capacity) : base(capacity)
+        {
+
+        }
     }
 }
