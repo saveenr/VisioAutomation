@@ -73,9 +73,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var data_formulas = query.GetFormulas(shape1);
             var data_results = query.GetResults<double>(shape1);
 
+            int rownum=0;
             // Verify
-            Assert.AreEqual("7", data_formulas[col_linepat]);
-            Assert.AreEqual(7, data_results[col_linepat]);
+            Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
+            Assert.AreEqual(7, data_results[rownum][col_linepat]);
             page1.Delete(0);
         }
 
@@ -111,9 +112,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var data_formulas = query.GetFormulas(shape1);
             var data_results = query.GetResults<double>(shape1);
 
+            int rownum = 0;
             // Verify
-            Assert.AreEqual("7", data_formulas[col_linepat]);
-            Assert.AreEqual(7, data_results[col_linepat]);
+            Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
+            Assert.AreEqual(7, data_results[rownum][col_linepat]);
             page1.Delete(0);
         }
 
@@ -186,12 +188,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var data_formulas = query.GetFormulas(shape1);
             var data_results = query.GetResults<double>(shape1);
 
+            int rownum = 0;
             // Verify
-            Assert.AreEqual("7", data_formulas[col_linepat]);
-            Assert.AreEqual(7, data_results[col_linepat]);
+            Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
+            Assert.AreEqual(7, data_results[rownum][col_linepat]);
 
-            Assert.AreEqual("2 in", data_formulas[col_pinx]);
-            Assert.AreEqual(2, data_results[col_pinx]);
+            Assert.AreEqual("2 in", data_formulas[rownum][col_pinx]);
+            Assert.AreEqual(2, data_results[rownum][col_pinx]);
             
             page1.Delete(0);
         }

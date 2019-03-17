@@ -68,7 +68,8 @@ namespace VisioAutomation.Pages
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             for (i = 0; i < page_srcs.Count; i++)
             {
-                writer.SetFormula(page_srcs[i],src_formulas[i]);
+                int row = 0;
+                writer.SetFormula(page_srcs[i],src_formulas[row][i]);
             }
 
             writer.Commit(dest_page.PageSheet);
@@ -168,7 +169,8 @@ namespace VisioAutomation.Pages
             var col_height = query.Columns.Add(ShapeSheet.SrcConstants.PageHeight,nameof(ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.Columns.Add(ShapeSheet.SrcConstants.PageWidth,nameof(ShapeSheet.SrcConstants.PageWidth));
 
-            var row = query.GetResults<double>(page.PageSheet);
+            var cellqueryresult = query.GetResults<double>(page.PageSheet);
+            var row = cellqueryresult[0];
             double height = row[col_height];
             double width = row[col_width];
             var s = new Geometry.Size(width, height);

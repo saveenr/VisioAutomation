@@ -70,9 +70,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public TGroup GetCellsSingleRow(IVisio.Shape shape, CellValueType type)
         {
             this.EnforceType(CellGroupBuilderType.SingleRow);
-            var row = this.GetCells(query_cells_singlerow, shape, type);
+            var cellqueryresult = this.GetCells(query_cells_singlerow, shape, type);
             var cols = this.query_cells_singlerow.Columns;
-            var cells = this.ToCellGroup(row,cols);
+            var cells = this.ToCellGroup(cellqueryresult[0],cols);
             return cells;
         }
         
@@ -139,7 +139,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        private VASS.Query.Row<string> GetCells(VASS.Query.CellQuery query, IVisio.Shape shape, CellValueType type)
+        private VASS.Query.CellQueryResults<string> GetCells(VASS.Query.CellQuery query, IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
             if (type == CellValueType.Formula)
