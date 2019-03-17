@@ -21,7 +21,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.items.Add(item);
         }
 
-        public int CountShapes
+        public int Count
         {
             get
             {

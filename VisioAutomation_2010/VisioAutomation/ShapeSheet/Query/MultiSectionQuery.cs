@@ -132,7 +132,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             // Ensure that we have created a cache for eash shapes
-            if (shape_ids.Count != _sectioncache.CountShapes)
+            if (shape_ids.Count != _sectioncache.Count)
             {
                 string msg = string.Format("mismatch in number of shapes and information collected for shapes");
                 throw new Exceptions.InternalAssertionException(msg);
@@ -230,11 +230,6 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private IEnumerable<SidSrc> _enum_sidsrcs(int shape_id, int shapeindex)
         {
-            if (this._sectioncache.CountShapes < 1)
-            {
-                yield break;
-            }
-
             var shapecacheitems = _sectioncache[shapeindex];
             foreach (var shapecacheitem in shapecacheitems)
             {
