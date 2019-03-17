@@ -1,15 +1,16 @@
-﻿namespace VisioAutomation.ShapeSheet.Query
+﻿using VASS = VisioAutomation.ShapeSheet;
+
+namespace VisioAutomation.ShapeSheet.Query
 {
-    public class RowBase 
+    public class RowBase<T>
     {
         public int ShapeID { get; private set; }
+        public readonly VASS.Internal.ArraySegment<T> Cells;
 
-        internal readonly int __totalcellcount;
-
-        internal RowBase(int shapeid, int count)
+        internal RowBase(int shapeid, VASS.Internal.ArraySegment<T>  cells)
         {
             this.ShapeID = shapeid;
-            this.__totalcellcount = count;
+            this.Cells = cells;
         }
     }
 }

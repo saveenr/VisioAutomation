@@ -3,7 +3,7 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public struct ShapeSectionRow<T>  
+    public class ShapeSectionRow<T> : RowBase<T>
     {
         // shapeidn
         // sectionindexn
@@ -13,15 +13,11 @@ namespace VisioAutomation.ShapeSheet.Query
         //     [n] - { cells for (shapeidn,sectionindexn) }
         // }
 
-        public readonly int ShapeID;
         public readonly IVisio.VisSectionIndices SectionIndex;
         public readonly int RowIndex;
-        public readonly VASS.Internal.ArraySegment<T> Cells;
 
-        internal ShapeSectionRow(int shapeid, VASS.Internal.ArraySegment<T> cells, IVisio.VisSectionIndices sectionindex, int rowindex)
+        internal ShapeSectionRow(int shapeid, IVisio.VisSectionIndices sectionindex, int rowindex, VASS.Internal.ArraySegment<T> cells) : base(shapeid,cells)
         {
-            this.ShapeID = shapeid;
-            this.Cells = cells;
             this.SectionIndex = sectionindex;
             this.RowIndex = rowindex;
         }

@@ -96,7 +96,7 @@ namespace VisioAutomation.ShapeSheet.Query
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
             int original_seg_size = segReader.Count;
-            var pulled_segment = segReader.GetNextSegment(numcols);
+            var cells = segReader.GetNextSegment(numcols);
 
             // verify that nothing strange has happened
             int final_seg_size = segReader.Count;
@@ -105,7 +105,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
             
-            var output = new ShapeRow<T>(shapeid, numcols, pulled_segment);
+            var output = new ShapeRow<T>(shapeid, cells);
             return output;
         }
 

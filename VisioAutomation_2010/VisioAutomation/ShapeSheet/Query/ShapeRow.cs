@@ -2,14 +2,12 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeRow<T>: RowBase
+    public class ShapeRow<T>: RowBase<T>
     {
-        public VASS.Internal.ArraySegment<T> Cells { get; internal set; }
 
-        internal ShapeRow(int shape_id, int count, VASS.Internal.ArraySegment<T> cells) :
-            base(shape_id, count)
+        internal ShapeRow(int shape_id, VASS.Internal.ArraySegment<T> cells) :
+            base(shape_id, cells)
         {
-            this.Cells = cells;
         }
     }
 }

@@ -4,14 +4,16 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeSectionOutputList<T> : RowBase,  IEnumerable<ShapeSectionOutput<T>>
+    public class ShapeSectionOutputList<T> : IEnumerable<ShapeSectionOutput<T>>
     {
         // for a given shape, contains the outputs for every section
 
+        public readonly int ShapeID;
         private List<ShapeSectionOutput<T>> _items;
 
-        internal ShapeSectionOutputList(int shape_id, int count, List<ShapeSectionOutput<T>> sections) : base(shape_id, count) 
+        internal ShapeSectionOutputList(int shape_id, List<ShapeSectionOutput<T>> sections) 
         {
+            this.ShapeID = shape_id;
             this._items = sections;
         }
 

@@ -177,8 +177,8 @@ namespace VisioAutomation.ShapeSheet.Query
                     int num_cols = shapecacheitem.SectionQuery.Columns.Count;
                     foreach (int row_index in shapecacheitem.RowIndexes)
                     {
-                        var segment = segReader.GetNextSegment(num_cols);
-                        var sec_res_row = new ShapeSectionRow<T>(shapeid, segment, shapecacheitem.SectionQuery.SectionIndex, row_index);
+                        var cells = segReader.GetNextSegment(num_cols);
+                        var sec_res_row = new ShapeSectionRow<T>(shapeid, shapecacheitem.SectionQuery.SectionIndex, row_index, cells);
                         section_output.Rows.Add(sec_res_row);
                     }
 
@@ -186,14 +186,14 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
             }
 
-            var output = new ShapeSectionOutputList<T>(shapeid, results_cell_count, sections);
+            var output = new ShapeSectionOutputList<T>(shapeid, sections);
 
             int final_seg_size = segReader.Count;
 
-            if ((final_seg_size - original_seg_size) != output.__totalcellcount)
-            {
-                throw new Exceptions.InternalAssertionException("Unexpected cursor");
-            }
+            //if ((final_seg_size - original_seg_size) != output.__totalcellcount)
+            //{
+            //    throw new Exceptions.InternalAssertionException("Unexpected cursor");
+            //}
 
             return output;
         }
