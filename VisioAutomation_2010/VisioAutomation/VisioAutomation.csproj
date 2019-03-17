@@ -150,7 +150,7 @@
     <Compile Include="Shapes\ShapeGeometryHelper.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
     <Compile Include="ShapeSheet\Query\ShapesSectionsOutputList.cs" />
-    <Compile Include="ShapeSheet\Query\OutputBase.cs" />
+    <Compile Include="ShapeSheet\Query\RowBase.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\ShapeSectionOutput.cs" />

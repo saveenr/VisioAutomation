@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeRow<T>: OutputBase
+    public class ShapeRow<T>: RowBase
     {
         public VASS.Internal.ArraySegment<T> Cells { get; internal set; }
 

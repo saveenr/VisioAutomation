@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeSectionOutputList<T> : OutputBase,  IEnumerable<ShapeSectionOutput<T>>
+    public class ShapeSectionOutputList<T> : RowBase,  IEnumerable<ShapeSectionOutput<T>>
     {
         // for a given shape, contains the outputs for every section
 
