@@ -14,14 +14,14 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Columns = new ColumnList(0);
         }
 
-        public Row<string> GetFormulas(IVisio.Shape shape)
+        public ShapeCellsRow<string> GetFormulas(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetFormulas(surface);
         }
 
 
-        public Row<string> GetFormulas(SurfaceTarget surface)
+        public ShapeCellsRow<string> GetFormulas(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -33,13 +33,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public Row<TResult> GetResults<TResult>(IVisio.Shape shape)
+        public ShapeCellsRow<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetResults<TResult>(surface);
         }
 
-        public Row<TResult> GetResults<TResult>(SurfaceTarget surface)
+        public ShapeCellsRow<TResult> GetResults<TResult>(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -91,7 +91,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_list;
         }
 
-        private Row<T> _create_output_for_shape<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
+        private ShapeCellsRow<T> _create_output_for_shape<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
@@ -105,7 +105,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
             
-            var output = new Row<T>(shapeid, cells);
+            var output = new ShapeCellsRow<T>(shapeid, cells);
             return output;
         }
 

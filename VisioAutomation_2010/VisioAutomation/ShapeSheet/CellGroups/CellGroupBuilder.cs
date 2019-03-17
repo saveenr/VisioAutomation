@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         }
 
-        public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Query.Row <string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols);
+        public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Query.ShapeCellsRow<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols);
 
         public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
@@ -139,7 +139,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        private VASS.Query.Row<string> GetCells(VASS.Query.CellQuery query, IVisio.Shape shape, CellValueType type)
+        private VASS.Query.ShapeCellsRow<string> GetCells(VASS.Query.CellQuery query, IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
             if (type == CellValueType.Formula)

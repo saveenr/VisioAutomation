@@ -89,7 +89,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ShapeFormatCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            public override ShapeFormatCells ToCellGroup(ShapeSheet.Query.ShapeCellsRow<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
 
                 var cells = new ShapeFormatCells();
