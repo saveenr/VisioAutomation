@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         }
 
-        public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols);
+        public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Query.Row <string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols);
 
         public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
@@ -54,7 +54,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             var data_for_shapes = this.GetCells(query_cells_singlerow, page, shapeids, type);
             var list = new List<TGroup>(shapeids.Count);
             var cols = this.query_cells_singlerow.Columns;
-            var objects = data_for_shapes.Select(d => this.ToCellGroup(d.Cells,cols));
+            var objects = data_for_shapes.Select(row => this.ToCellGroup(row,cols));
             list.AddRange(objects);
             return list;
         }
@@ -70,9 +70,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public TGroup GetCellsSingleRow(IVisio.Shape shape, CellValueType type)
         {
             this.EnforceType(CellGroupBuilderType.SingleRow);
-            var data_for_shape = this.GetCells(query_cells_singlerow, shape, type);
+            var row = this.GetCells(query_cells_singlerow, shape, type);
             var cols = this.query_cells_singlerow.Columns;
-            var cells = this.ToCellGroup(data_for_shape.Cells,cols);
+            var cells = this.ToCellGroup(row,cols);
             return cells;
         }
         
@@ -107,7 +107,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             var cellgroups = new List<TGroup>(section_data.Rows.Count);
             foreach (var section_row in section_data.Rows)
             {
-                var cellgroup = this.ToCellGroup(section_row.Cells,cols);
+                var cellgroup = this.ToCellGroup(section_row,cols);
                 cellgroups.Add(cellgroup);
             }
             return cellgroups;

@@ -207,7 +207,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override CustomPropertyCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            public override CustomPropertyCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new CustomPropertyCells();
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);

@@ -10,7 +10,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public int ShapeID { get; private set; }
         public readonly IVisio.VisSectionIndices SectionIndex;
         public readonly int RowIndex;
-        internal readonly VASS.Internal.ArraySegment<T> Cells;
+        private readonly VASS.Internal.ArraySegment<T> Cells;
 
         internal Row(int shapeid, VASS.Internal.ArraySegment<T>  cells)
         {
