@@ -70,14 +70,11 @@ namespace VisioAutomation.Text
 
             public override Text.ParagraphFormatCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
+
                 var cells = new Text.ParagraphFormatCells();
 
                 var names = cells.CellMetadata.Select(i => i.Name).ToList();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
 
 
 

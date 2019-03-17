@@ -54,11 +54,7 @@ namespace VisioAutomation.Shapes
             public override ControlCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new ControlCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.CanGlue = getcellvalue(nameof(ControlCells.CanGlue));
                 cells.Tip = getcellvalue(nameof(ControlCells.Tip));

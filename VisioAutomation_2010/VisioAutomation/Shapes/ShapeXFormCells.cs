@@ -57,11 +57,7 @@ namespace VisioAutomation.Shapes
             public override ShapeXFormCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new ShapeXFormCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.PinX = getcellvalue(nameof(ShapeXFormCells.PinX));
                 cells.PinY = getcellvalue(nameof(ShapeXFormCells.PinY));

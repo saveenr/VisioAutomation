@@ -20,8 +20,6 @@ namespace VisioAutomation.Text
         {
             get
             {
-
-
                 yield return this.Create(nameof(this.BottomMargin), SrcConstants.TextBlockBottomMargin, this.BottomMargin);
                 yield return this.Create(nameof(this.LeftMargin), SrcConstants.TextBlockLeftMargin, this.LeftMargin);
                 yield return this.Create(nameof(this.RightMargin), SrcConstants.TextBlockRightMargin, this.RightMargin);

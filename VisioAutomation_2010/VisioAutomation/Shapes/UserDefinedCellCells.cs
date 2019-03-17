@@ -60,12 +60,7 @@ namespace VisioAutomation.Shapes
             public override UserDefinedCellCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new UserDefinedCellCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
-
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.Value = getcellvalue(nameof(UserDefinedCellCells.Value));
                 cells.Prompt = getcellvalue(nameof(UserDefinedCellCells.Prompt));

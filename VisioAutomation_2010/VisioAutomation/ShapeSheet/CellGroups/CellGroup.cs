@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
@@ -40,6 +41,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected CellMetadataItem Create(string name, Src src, CellValueLiteral value)
         {
             return new CellMetadataItem(name, src, value.Value);
+        }
+
+        internal static System.Func<string,string> gcf(ShapeSheet.Internal.ArraySegment<string> row, VASS.Query.ColumnList cols)
+        {
+            return (s) => row[cols[s].Ordinal];
         }
     }
 }

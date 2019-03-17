@@ -51,11 +51,7 @@ namespace VisioAutomation.Pages
             public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new PageRulerAndGridCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.XGridDensity = getcellvalue(nameof(PageRulerAndGridCells.XGridDensity));
                 cells.XGridOrigin = getcellvalue(nameof(PageRulerAndGridCells.XGridOrigin));

@@ -63,11 +63,7 @@ namespace VisioAutomation.Pages
             public override PageFormatCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new PageFormatCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VASS.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.DrawingScale = getcellvalue(nameof(PageFormatCells.DrawingScale));
                 cells.DrawingScaleType = getcellvalue(nameof(PageFormatCells.DrawingScaleType));
