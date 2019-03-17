@@ -4,7 +4,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
-{    public class MultiSectionQuery
+{
+    public class MultiSectionQuery
     {
         public SectionQueryList SectionQueries { get; }
 
@@ -22,12 +23,6 @@ namespace VisioAutomation.ShapeSheet.Query
                 string msg = "Target must be Shape not Page or Master";
                 throw new System.ArgumentException(msg);
             }
-        }
-
-        public MultiSectionOutput<string> GetFormulas(IVisio.Shape shape)
-        {
-            var surface = new SurfaceTarget(shape);
-            return GetFormulas(surface);
         }
 
         public MultiSectionOutput<string> GetCells(IVisio.Shape shape, CellValueType type)
@@ -70,7 +65,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            this.CacheSectionInfoForAllShapes(surface, new [] {  surface.Shape.ID });
+            this.CacheSectionInfoForAllShapes(surface, new[] { surface.Shape.ID });
 
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
@@ -115,7 +110,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         private void CacheSectionInfoForAllShapes(SurfaceTarget surface, IList<int> shape_ids)
-        {           
+        {
             // Prepare a cache object
             if (this.SectionQueries.Count < 1)
             {
@@ -199,7 +194,7 @@ namespace VisioAutomation.ShapeSheet.Query
             List<SectionOutput<T>> sections = null;
             if (section_infos != null)
             {
-               sections = new List<SectionOutput<T>>(section_infos.Count);
+                sections = new List<SectionOutput<T>>(section_infos.Count);
                 foreach (var section_info in section_infos)
                 {
                     var section_output = new SectionOutput<T>(section_info.RowCount, section_info.Query.SectionIndex);
@@ -217,7 +212,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             var output = new MultiSectionOutput<T>(shapeid, results_cell_count, sections);
-            
+
             int final_seg_size = segReader.Count;
 
             if ((final_seg_size - original_seg_size) != output.__totalcellcount)
@@ -276,7 +271,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private IEnumerable<SidSrc> _enum_total_cell_sidsrc(int shapeid, int shapeindex)
         {
-            if (this._cache.CountShapes<1)
+            if (this._cache.CountShapes < 1)
             {
                 yield break;
             }
