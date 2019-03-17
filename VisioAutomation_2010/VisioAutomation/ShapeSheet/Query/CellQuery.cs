@@ -48,8 +48,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
-            var seg_builder = new Internal.ArraySegmentReader<string>(values);
-            var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
+            var reader = new Internal.ArraySegmentReader<string>(values);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, reader);
 
             return output_for_shape;
         }
@@ -67,8 +67,8 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var seg_builder = new Internal.ArraySegmentReader<TResult>(values);
-            var output_for_shape = this._create_output_for_shape(surface.ID16, seg_builder);
+            var reader = new Internal.ArraySegmentReader<TResult>(values);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, reader);
             return output_for_shape;
         }
 
@@ -96,8 +96,8 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
-            var seg_builder = new Internal.ArraySegmentReader<string>(values);
-            var list = this._shapesid_to_outputs(shapeids, seg_builder);
+            var reader = new Internal.ArraySegmentReader<string>(values);
+            var list = this._shapesid_to_outputs(shapeids, reader);
             return list;
         }
 
@@ -112,8 +112,8 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var seg_builder = new Internal.ArraySegmentReader<TResult>(values);
-            var output_list = this._shapesid_to_outputs(shapeids, seg_builder);
+            var reader = new Internal.ArraySegmentReader<TResult>(values);
+            var output_list = this._shapesid_to_outputs(shapeids, reader);
             return output_list;
         }
 

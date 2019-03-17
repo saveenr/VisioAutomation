@@ -54,8 +54,8 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
             var sectioninfo = _cache[shape_index];
-            var seg_builder = new VASS.Internal.ArraySegmentReader<string>(values);
-            var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, seg_builder);
+            var reader = new VASS.Internal.ArraySegmentReader<string>(values);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, reader);
 
             return output_for_shape;
         }
@@ -77,8 +77,8 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var sectioninfo = _cache[shape_index];
-            var seg_builder = new VASS.Internal.ArraySegmentReader<TResult>(values);
-            var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, seg_builder);
+            var reader = new VASS.Internal.ArraySegmentReader<TResult>(values);
+            var output_for_shape = this._create_output_for_shape(surface.ID16, sectioninfo, reader);
             return output_for_shape;
         }
 
@@ -109,8 +109,8 @@ namespace VisioAutomation.ShapeSheet.Query
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
-            var seg_builder = new VASS.Internal.ArraySegmentReader<string>(values);
-            var list = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
+            var reader = new VASS.Internal.ArraySegmentReader<string>(values);
+            var list = this._create_outputs_for_shapes(shapeids, _cache, reader);
             return list;
         }
 
@@ -157,8 +157,8 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var seg_builder = new VASS.Internal.ArraySegmentReader<TResult>(values);
-            var list = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
+            var reader = new VASS.Internal.ArraySegmentReader<TResult>(values);
+            var list = this._create_outputs_for_shapes(shapeids, _cache, reader);
             return list;
         }
 
