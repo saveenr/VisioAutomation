@@ -63,20 +63,20 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public MultiSectionOuput<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        public ShapesSectionsOutputList<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
 
-        public MultiSectionOuput<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
+        public ShapesSectionsOutputList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
         }
 
-        public MultiSectionOuput<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
+        public ShapesSectionsOutputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
             CacheSectionInfoForAllShapes(surface, shapeids);
@@ -89,7 +89,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var list_sectionoutput = this._create_outputs_for_shapes(shapeids, _cache, reader);
             return list_sectionoutput;
         }
-        public MultiSectionOuput<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
+        public ShapesSectionsOutputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
             CacheSectionInfoForAllShapes(surface, shapeids);
@@ -140,9 +140,9 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private MultiSectionOuput<T> _create_outputs_for_shapes<T>(IList<int> shapeids, MultiSectionQueryCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
+        private ShapesSectionsOutputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, MultiSectionQueryCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
         {
-            var output_for_all_shapes = new MultiSectionOuput<T>();
+            var output_for_all_shapes = new ShapesSectionsOutputList<T>();
 
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {

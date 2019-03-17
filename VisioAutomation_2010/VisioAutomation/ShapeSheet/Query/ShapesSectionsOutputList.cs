@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class MultiSectionOuput<T> : IEnumerable<ShapeSectionOutputList<T>>
+    public class ShapesSectionsOutputList<T> : IEnumerable<ShapeSectionOutputList<T>>
     {
         // this class contains all the outputs for every shape that was queried
 
         List<ShapeSectionOutputList<T>> items;
 
-        internal MultiSectionOuput()
+        internal ShapesSectionsOutputList()
         {
             this.items = new List<ShapeSectionOutputList<T>>();
         }
