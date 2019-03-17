@@ -235,14 +235,13 @@ namespace VisioAutomation.ShapeSheet.Query
                 yield break;
             }
 
-            var sectioncache = _sectioncache[shapeindex];
-            foreach (var section_info in sectioncache)
+            var shapecacheitems = _sectioncache[shapeindex];
+            foreach (var shapecacheitem in shapecacheitems)
             {
-                foreach (int row_index in section_info.RowIndexes)
+                foreach (int row_index in shapecacheitem.RowIndexes)
                 {
-                    var cols = section_info.SectionQuery.Columns;
-                    var section_index = section_info.SectionQuery.SectionIndex;
-                    var sectionquery = section_info.SectionQuery;
+                    var cols = shapecacheitem.SectionQuery.Columns;
+                    var section_index = shapecacheitem.SectionQuery.SectionIndex;
                     foreach (var col in cols)
                     {
                         var sidsrc = new VASS.SidSrc(
