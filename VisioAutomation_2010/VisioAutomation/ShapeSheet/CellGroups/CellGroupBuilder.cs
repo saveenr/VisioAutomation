@@ -126,7 +126,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        private VASS.Query.ShapesSectionsOutputList<string> GetCells(VASS.Query.SingleSectionQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
+        private VASS.Query.MultiSectionQueryResults<string> GetCells(VASS.Query.SingleSectionQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var surface = new SurfaceTarget(page);
             if (type == CellValueType.Formula)

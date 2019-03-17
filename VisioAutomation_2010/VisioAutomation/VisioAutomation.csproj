@@ -147,7 +147,7 @@
     <Compile Include="Shapes\ShapeGeometryRow.cs" />
     <Compile Include="Shapes\ShapeGeometryHelper.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
-    <Compile Include="ShapeSheet\Query\ShapesSectionsOutputList.cs" />
+    <Compile Include="ShapeSheet\Query\MultiSectionQueryResults.cs" />
     <Compile Include="ShapeSheet\Query\Row.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
