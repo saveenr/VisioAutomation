@@ -4,20 +4,20 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeSectionOutputList<T> : IEnumerable<ShapeSectionOutput<T>>
+    public class ShapeSectionRowsList<T> : IEnumerable<ShapeSectionRows<T>>
     {
         // for a given shape, contains the outputs for every section
 
         public readonly int ShapeID;
-        private List<ShapeSectionOutput<T>> _items;
+        private List<ShapeSectionRows<T>> _items;
 
-        internal ShapeSectionOutputList(int shape_id, List<ShapeSectionOutput<T>> sections) 
+        internal ShapeSectionRowsList(int shape_id, List<ShapeSectionRows<T>> sections) 
         {
             this.ShapeID = shape_id;
             this._items = sections;
         }
 
-        public IEnumerator<ShapeSectionOutput<T>> GetEnumerator()
+        public IEnumerator<ShapeSectionRows<T>> GetEnumerator()
         {
             return this._items.GetEnumerator();
         }
@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public ShapeSectionOutput<T> this[int index]
+        public ShapeSectionRows<T> this[int index]
         {
             get
             {

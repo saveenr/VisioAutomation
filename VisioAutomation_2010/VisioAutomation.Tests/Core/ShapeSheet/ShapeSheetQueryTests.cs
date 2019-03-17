@@ -160,25 +160,25 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             int section0_index = 0;
 
             Assert.AreEqual(4, data.Count);
-            Assert.AreEqual(1, data[shape0_index][section0_index].Rows.Count);
-            Assert.AreEqual(2, data[shape1_index][section0_index].Rows.Count);
-            Assert.AreEqual(0, data[shape2_index][section0_index].Rows.Count);
-            Assert.AreEqual(3, data[3][0].Rows.Count);
+            Assert.AreEqual(1, data[shape0_index][section0_index].Count);
+            Assert.AreEqual(2, data[shape1_index][section0_index].Count);
+            Assert.AreEqual(0, data[shape2_index][section0_index].Count);
+            Assert.AreEqual(3, data[3][0].Count);
 
-            Assert.AreEqual("\"1\"", data[shape0_index][section0_index].Rows[0][0]);
-            Assert.AreEqual("\"2\"", data[shape1_index][section0_index].Rows[0][0]);
-            Assert.AreEqual("\"3\"", data[shape1_index][section0_index].Rows[1][0]);
-            Assert.AreEqual("\"4\"", data[shape3_index][section0_index].Rows[0][0]);
-            Assert.AreEqual("\"5\"", data[shape3_index][section0_index].Rows[1][0]);
-            Assert.AreEqual("\"6\"", data[shape3_index][section0_index].Rows[2][0]);
+            Assert.AreEqual("\"1\"", data[shape0_index][section0_index][0][0]);
+            Assert.AreEqual("\"2\"", data[shape1_index][section0_index][0][0]);
+            Assert.AreEqual("\"3\"", data[shape1_index][section0_index][1][0]);
+            Assert.AreEqual("\"4\"", data[shape3_index][section0_index][0][0]);
+            Assert.AreEqual("\"5\"", data[shape3_index][section0_index][1][0]);
+            Assert.AreEqual("\"6\"", data[shape3_index][section0_index][2][0]);
 
 
-            Assert.AreEqual( "1", data2[shape0_index][section0_index].Rows[0][0]);
-            Assert.AreEqual( "2", data2[shape1_index][section0_index].Rows[0][0]);
-            Assert.AreEqual( "3", data2[shape1_index][section0_index].Rows[1][0]);
-            Assert.AreEqual( "4", data2[shape3_index][section0_index].Rows[0][0]);
-            Assert.AreEqual( "5", data2[shape3_index][section0_index].Rows[1][0]);
-            Assert.AreEqual( "6", data2[shape3_index][section0_index].Rows[2][0]);
+            Assert.AreEqual( "1", data2[shape0_index][section0_index][0][0]);
+            Assert.AreEqual( "2", data2[shape1_index][section0_index][0][0]);
+            Assert.AreEqual( "3", data2[shape1_index][section0_index][1][0]);
+            Assert.AreEqual( "4", data2[shape3_index][section0_index][0][0]);
+            Assert.AreEqual( "5", data2[shape3_index][section0_index][1][0]);
+            Assert.AreEqual( "6", data2[shape3_index][section0_index][2][0]);
 
             page1.Delete(0);
         }
