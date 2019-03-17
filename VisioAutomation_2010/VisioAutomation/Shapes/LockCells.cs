@@ -81,11 +81,7 @@ namespace VisioAutomation.Shapes
             public override LockCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new LockCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.Aspect = getcellvalue(nameof(LockCells.Aspect));
                 cells.Begin = getcellvalue(nameof(LockCells.Begin));

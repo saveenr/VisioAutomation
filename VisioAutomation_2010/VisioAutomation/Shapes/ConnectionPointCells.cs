@@ -49,11 +49,7 @@ namespace VisioAutomation.Shapes
             public override ConnectionPointCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new ConnectionPointCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.X = getcellvalue(nameof(ConnectionPointCells.X));
                 cells.Y = getcellvalue(nameof(ConnectionPointCells.Y));

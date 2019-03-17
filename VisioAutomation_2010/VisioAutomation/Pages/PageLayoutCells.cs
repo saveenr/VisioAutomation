@@ -91,11 +91,7 @@ namespace VisioAutomation.Pages
             public override PageLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new PageLayoutCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
 
                 cells.AvenueSizeX = getcellvalue(nameof(PageLayoutCells.AvenueSizeX));

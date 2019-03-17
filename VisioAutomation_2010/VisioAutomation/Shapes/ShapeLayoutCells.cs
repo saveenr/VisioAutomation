@@ -78,11 +78,7 @@ namespace VisioAutomation.Shapes
             public override ShapeLayoutCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new ShapeLayoutCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.ConnectorFixedCode = getcellvalue(nameof(ShapeLayoutCells.ConnectorFixedCode));
                 cells.LineJumpCode = getcellvalue(nameof(ShapeLayoutCells.LineJumpCode));

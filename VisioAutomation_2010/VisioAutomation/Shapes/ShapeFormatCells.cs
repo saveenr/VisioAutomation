@@ -93,11 +93,7 @@ namespace VisioAutomation.Shapes
             {
 
                 var cells = new ShapeFormatCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.FillBackground = getcellvalue(nameof(ShapeFormatCells.FillBackground));
                 cells.FillBackgroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillBackgroundTransparency));

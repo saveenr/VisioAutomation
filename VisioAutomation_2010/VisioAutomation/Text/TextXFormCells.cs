@@ -52,11 +52,7 @@ namespace VisioAutomation.Text
             public override Text.TextXFormCells ToCellGroup(VisioAutomation.ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new Text.TextXFormCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
 
                 cells.PinX = getcellvalue(nameof(TextXFormCells.PinX));
                 cells.PinY = getcellvalue(nameof(TextXFormCells.PinY));
