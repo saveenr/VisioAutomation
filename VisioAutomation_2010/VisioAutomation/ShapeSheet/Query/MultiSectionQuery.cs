@@ -128,7 +128,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
 
                 // For this shape, add the accumulated info into the cache
-                _sectioncache.AddSectionInfosForShape(shapecacheitems);
+                _sectioncache.Add(shapecacheitems);
             }
 
             // Ensure that we have created a cache for eash shapes

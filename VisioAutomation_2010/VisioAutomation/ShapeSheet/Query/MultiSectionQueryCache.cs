@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.list_shapecasheitems = new List<ShapeCacheItemList>(capacity);
         }
 
-        public void AddSectionInfosForShape(ShapeCacheItemList item)
+        public void Add(ShapeCacheItemList item)
         {
             this.list_shapecasheitems.Add(item);
         }
