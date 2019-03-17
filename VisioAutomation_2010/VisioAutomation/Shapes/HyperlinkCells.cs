@@ -55,7 +55,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override HyperlinkCells ToCellGroup(ShapeSheet.Internal.ArraySegment<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            public override HyperlinkCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
             {
                 var cells = new HyperlinkCells();
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);

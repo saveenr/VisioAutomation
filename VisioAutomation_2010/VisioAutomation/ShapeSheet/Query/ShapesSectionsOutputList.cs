@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapesSectionsOutputList<T> : IEnumerable<ShapeSectionOutputList<T>>
+    public class ShapesSectionsOutputList<T> : IEnumerable<ShapeSectionRowsList<T>>
     {
         // this class contains all the outputs for every shape that was queried
         // think of it this collection as having this shape
@@ -14,19 +14,19 @@ namespace VisioAutomation.ShapeSheet.Query
         //     [n] - { shapeidn, {sections found for shapeidn} }
         // }
 
-        List<ShapeSectionOutputList<T>> _list;
+        List<ShapeSectionRowsList<T>> _list;
 
         internal ShapesSectionsOutputList()
         {
-            this._list = new List<ShapeSectionOutputList<T>>();
+            this._list = new List<ShapeSectionRowsList<T>>();
         }
 
-        public void Add(ShapeSectionOutputList<T> item)
+        public void Add(ShapeSectionRowsList<T> item)
         {
             this._list.Add(item);
         }
 
-        public IEnumerator<ShapeSectionOutputList<T>> GetEnumerator()
+        public IEnumerator<ShapeSectionRowsList<T>> GetEnumerator()
         {
             return this._list.GetEnumerator();
         }
@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public ShapeSectionOutputList<T> this[int index]
+        public ShapeSectionRowsList<T> this[int index]
         {
             get
             {
