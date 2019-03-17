@@ -4,23 +4,16 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionQuery
     {
-        public string Name { get; private set; }
         public ColumnList Columns { get; }
         public IVisio.VisSectionIndices SectionIndex { get; private set; }
         public int Ordinal { get; }
 
-        internal SectionQuery(int ordinal, IVisio.VisSectionIndices section)
+        internal SectionQuery(IVisio.VisSectionIndices section)
         {
-            this.Name = VisioAutomation.ShapeSheet.ShapeSheetHelper.GetSectionName(section);
-            this.Ordinal = ordinal;
             this.SectionIndex = section;
             this.Columns = new ColumnList();
         }
 
-        public static implicit operator int(SectionQuery col)
-        {
-            return col.Ordinal;
-        }
 
         internal short GetNumRowsForShape(IVisio.Shape shape)
         {
