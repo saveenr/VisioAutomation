@@ -14,9 +14,9 @@ namespace VisioScripting.Helpers
             switch (pos)
             {
                 case VisioScripting.Models.ShapeRelativePosition.PinY:
-                    return xform.PinY;
+                    return xform.XFormPinY;
                 case VisioScripting.Models.ShapeRelativePosition.PinX:
-                    return xform.PinX;
+                    return xform.XFormPinX;
                 case VisioScripting.Models.ShapeRelativePosition.Left:
                     return r.Left;
                 case VisioScripting.Models.ShapeRelativePosition.Right:
@@ -76,11 +76,11 @@ namespace VisioScripting.Helpers
             foreach (var input_xfrm in input_xfrms)
             {
                 var new_pinpos = axis == VisioScripting.Models.Axis.XAxis
-                    ? new VisioAutomation.Geometry.Point(cur_pos.X + input_xfrm.LocPinX, input_xfrm.PinY)
-                    : new VisioAutomation.Geometry.Point(input_xfrm.PinX, cur_pos.Y + input_xfrm.LocPinY);
+                    ? new VisioAutomation.Geometry.Point(cur_pos.X + input_xfrm.XFormLocPinX, input_xfrm.XFormPinY)
+                    : new VisioAutomation.Geometry.Point(input_xfrm.XFormPinX, cur_pos.Y + input_xfrm.XFormLocPinY);
 
                 newpositions.Add(new_pinpos);
-                cur_pos = cur_pos.Add(input_xfrm.Width, input_xfrm.Height).Add(delta);
+                cur_pos = cur_pos.Add(input_xfrm.XFormWidth, input_xfrm.XFormHeight).Add(delta);
             }
 
             // Apply the changes
@@ -136,8 +136,8 @@ namespace VisioScripting.Helpers
 
         private static VisioAutomation.Geometry.Point GetPinPositionForCorner(Models.ShapeXFormData input_xfrm, VisioAutomation.Geometry.Point new_lower_left, Models.SnapCornerPosition corner)
         {
-            var size = new VisioAutomation.Geometry.Size(input_xfrm.Width, input_xfrm.Height);
-            var locpin = new VisioAutomation.Geometry.Point(input_xfrm.LocPinX, input_xfrm.LocPinY);
+            var size = new VisioAutomation.Geometry.Size(input_xfrm.XFormWidth, input_xfrm.XFormHeight);
+            var locpin = new VisioAutomation.Geometry.Point(input_xfrm.XFormLocPinX, input_xfrm.XFormLocPinY);
 
             switch (corner)
             {
@@ -173,8 +173,8 @@ namespace VisioScripting.Helpers
             foreach (var input_xfrm in input_xfrms)
             {
                 // First snap the size to the grid
-                double old_w = input_xfrm.Width;
-                double old_h = input_xfrm.Height;
+                double old_w = input_xfrm.XFormWidth;
+                double old_h = input_xfrm.XFormHeight;
                 var input_size = new VisioAutomation.Geometry.Size(old_w, old_h);
                 var snapped_size = grid.Snap(input_size);
 
