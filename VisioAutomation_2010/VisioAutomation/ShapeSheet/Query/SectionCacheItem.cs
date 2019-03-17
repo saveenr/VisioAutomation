@@ -44,5 +44,17 @@ namespace VisioAutomation.ShapeSheet.Query
                 return this.items[index];
             }
         }
+
+        public int CountCells()
+        {
+            // Count the cells not in sections
+            int count = 0;
+            foreach (var section_info in this.ShapeCacheItems)
+            {
+                count += section_info.CountCells();
+            }
+
+            return count;
+        }
     }
 }

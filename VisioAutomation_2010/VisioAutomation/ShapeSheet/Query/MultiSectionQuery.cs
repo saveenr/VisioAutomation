@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         public SectionQueryList SectionQueries { get; }
 
-        private SectionCache _cache;
+        private SectionCache _sectioncache;
 
         public MultiSectionQuery()
         {
@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
-            var shape_cache_item = _cache[shape_index];
+            var shape_cache_item = _sectioncache[shape_index];
             var reader = new VASS.Internal.ArraySegmentReader<string>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, shape_cache_item, reader);
 
@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
-            var sectioncache = _cache[shape_index];
+            var sectioncache = _sectioncache[shape_index];
             var reader = new VASS.Internal.ArraySegmentReader<TResult>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, sectioncache, reader);
             return output_for_shape;
@@ -86,7 +86,7 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var reader = new VASS.Internal.ArraySegmentReader<TResult>(values);
-            var list_sectionoutput = this._create_outputs_for_shapes(shapeids, _cache, reader);
+            var list_sectionoutput = this._create_outputs_for_shapes(shapeids, _sectioncache, reader);
             return list_sectionoutput;
         }
         public MultiSectionOuputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
@@ -98,7 +98,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
             var reader = new VASS.Internal.ArraySegmentReader<string>(values);
-            var list_sectionoutput = this._create_outputs_for_shapes(shapeids, _cache, reader);
+            var list_sectionoutput = this._create_outputs_for_shapes(shapeids, _sectioncache, reader);
             return list_sectionoutput;
         }
 
@@ -107,9 +107,9 @@ namespace VisioAutomation.ShapeSheet.Query
             // Prepare a cache object
             if (this.SectionQueries.Count < 1)
             {
-                this._cache = new SectionCache(0);
+                this._sectioncache = new SectionCache(0);
             }
-            this._cache = new SectionCache();
+            this._sectioncache = new SectionCache();
 
             // For each shape, for each section find the number of rows
             foreach (var shape_id in shape_ids)
@@ -128,11 +128,11 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
 
                 // For this shape, add the accumulated info into the cache
-                _cache.AddSectionInfosForShape(section_caches);
+                _sectioncache.AddSectionInfosForShape(section_caches);
             }
 
             // Ensure that we have created a cache for eash shapes
-            if (shape_ids.Count != _cache.CountShapes)
+            if (shape_ids.Count != _sectioncache.CountShapes)
             {
                 string msg = string.Format("mismatch in number of shapes and information collected for shapes");
                 throw new Exceptions.InternalAssertionException(msg);
@@ -162,7 +162,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int results_cell_count = 0;
             if (shapecacheitems != null)
             {
-                results_cell_count += shapecacheitems.Select(shapecacheitem => shapecacheitem.RowCount * shapecacheitem.SectionQuery.Columns.Count).Sum();
+                results_cell_count = shapecacheitems.CountCells();
             }
 
             List<SectionOutput<T>> sections = null;
@@ -197,25 +197,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return output;
         }
 
-        private int _get_total_cell_count()
-        {
-            // Count the cells not in sections
-            int count = 0;
-
-            // Count the Cells in the Sections
-            foreach (var section_info in this._cache.ShapeCacheItems)
-            {
-                count += section_info.Sum(s => s.RowCount * s.SectionQuery.Columns.Count);
-            }
-
-            return count;
-        }
-
         private Streams.StreamArray _build_src_stream()
         {
             int dummy_shapeid = -1;
             int shapeindex = 0;
-            int numcells = this._get_total_cell_count();
+            int numcells = this._sectioncache.CountCells();
             var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
             var sidsrcs = this._enum_total_cell_sidsrc(dummy_shapeid, shapeindex);
             var srcs = sidsrcs.Select(i => i.Src);
@@ -226,7 +212,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private VASS.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
         {
-            int numcells = this._get_total_cell_count();
+            int numcells = this._sectioncache.CountCells();
 
             var stream = new VASS.Streams.SidSrcStreamArrayBuilder(numcells);
 
@@ -243,12 +229,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private IEnumerable<SidSrc> _enum_total_cell_sidsrc(int shapeid, int shapeindex)
         {
-            if (this._cache.CountShapes < 1)
+            if (this._sectioncache.CountShapes < 1)
             {
                 yield break;
             }
 
-            var sectioncache = _cache[shapeindex];
+            var sectioncache = _sectioncache[shapeindex];
             foreach (var section_info in sectioncache)
             {
                 foreach (int rowindex in section_info.RowIndexes)

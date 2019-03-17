@@ -14,5 +14,15 @@ namespace VisioAutomation.ShapeSheet.Query
         {
 
         }
+
+        public int CountCells()
+        {
+            int n = 0;
+            foreach (var shapecacheitem in this)
+            {
+                n += shapecacheitem.RowCount * shapecacheitem.SectionQuery.Columns.Count;
+            }
+            return n;
+        }
     }
 }
