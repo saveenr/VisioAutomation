@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         public SectionQueryList SectionQueries { get; }
 
-        private SectionCache _sectioncache;
+        private ShapeCache _sectioncache;
 
         public MultiSectionQuery()
         {
@@ -107,9 +107,9 @@ namespace VisioAutomation.ShapeSheet.Query
             // Prepare a cache object
             if (this.SectionQueries.Count < 1)
             {
-                this._sectioncache = new SectionCache(0);
+                this._sectioncache = new ShapeCache(0);
             }
-            this._sectioncache = new SectionCache();
+            this._sectioncache = new ShapeCache();
 
             // For each shape, for each section find the number of rows
             foreach (var shape_id in shape_ids)
@@ -140,7 +140,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private MultiSectionOuputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
+        private MultiSectionOuputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, ShapeCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             var output_for_all_shapes = new MultiSectionOuputList<T>();
 
