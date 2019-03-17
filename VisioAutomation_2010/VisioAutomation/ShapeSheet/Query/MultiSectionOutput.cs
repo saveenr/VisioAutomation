@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
     public class MultiSectionOutput<T> : OutputBase
     {
-        public List<SectionOutput<T>> Sections { get; internal set; }
+        public SectionOutputList<T> Sections { get; internal set; }
 
-        internal MultiSectionOutput(int shape_id, int count, List<SectionOutput<T>> sections) : base(shape_id, count)
+        internal MultiSectionOutput(int shape_id, int count, SectionOutputList<T> sections) : base(shape_id, count)
         {
             this.Sections = sections;
         }

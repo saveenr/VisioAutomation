@@ -164,12 +164,12 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
-            int results_cell_count = shapecacheitems.CountCells(); 
+            int results_cell_count = shapecacheitems.CountCells();
 
-            List<SectionOutput<T>> sections = null;
+            SectionOutputList<T> sections = null;
             if (shapecacheitems != null)
             {
-                sections = new List<SectionOutput<T>>(shapecacheitems.Count);
+                sections = new SectionOutputList<T>(shapecacheitems.Count);
                 foreach (var shapecacheitem in shapecacheitems)
                 {
                     var section_output = new SectionOutput<T>(shapecacheitem.RowCount, shapecacheitem.SectionQuery.SectionIndex);
