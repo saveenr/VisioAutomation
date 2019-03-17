@@ -18,7 +18,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public readonly IVisio.VisSectionIndices SectionIndex;
         private readonly RowList<T> Rows;
 
-        internal ShapeSectionRows(int shapeid, int capacity, IVisio.VisSectionIndices section_index)
+        internal ShapeSectionRows(int capacity, int shapeid, IVisio.VisSectionIndices section_index)
         {
             this.ShapeID = shapeid;
             this.Rows = new RowList<T>(capacity);

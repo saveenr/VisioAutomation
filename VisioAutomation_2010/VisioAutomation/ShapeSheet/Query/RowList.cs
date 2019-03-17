@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
+
 namespace VisioAutomation.ShapeSheet.Query
 {
     public class RowList<T> : IEnumerable<Row<T>>
