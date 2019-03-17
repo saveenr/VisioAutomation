@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    internal class ShapeCache
+    internal class MultiSectionQueryCache
     {
         List<ShapeCacheItemList> list_shapecasheitems;
 
-        public ShapeCache()
+        public MultiSectionQueryCache()
         {
             this.list_shapecasheitems = new List<ShapeCacheItemList>();
         }
 
-        public ShapeCache(int capacity)
+        public MultiSectionQueryCache(int capacity)
         {
             this.list_shapecasheitems = new List<ShapeCacheItemList>(capacity);
         }
