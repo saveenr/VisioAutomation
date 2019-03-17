@@ -25,6 +25,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public IEnumerable<List<SectionInfo>> EnumSectionInfoForShapes => this.items;
 
-        public List<SectionInfo>GetSectionInfosForShapeAtIndex(int index) => this.items[index];
+        public List<SectionInfo> this[int index] => this.items[index];
+
     }
 }
