@@ -5,13 +5,13 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class MultiSectionQuery
+    public class SingleSectionQuery
     {
         public SectionQueryList SectionQueries { get; }
 
         private MultiSectionQueryCache _cache;
 
-        public MultiSectionQuery()
+        public SingleSectionQuery()
         {
             this.SectionQueries = new SectionQueryList(0);
         }
@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public MultiSectionOutput<string> GetFormulas(SurfaceTarget surface)
+        public ShapeSectionRowsList<string> GetFormulas(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -41,13 +41,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public MultiSectionOutput<TResult> GetResults<TResult>(IVisio.Shape shape)
+        public ShapeSectionRowsList<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetResults<TResult>(surface);
         }
 
-        public MultiSectionOutput<TResult> GetResults<TResult>(SurfaceTarget surface)
+        public ShapeSectionRowsList<TResult> GetResults<TResult>(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -63,20 +63,20 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public MultiSectionOuputList<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        public ShapesSectionsOutputList<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
 
-        public MultiSectionOuputList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
+        public ShapesSectionsOutputList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
         }
 
-        public MultiSectionOuputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
+        public ShapesSectionsOutputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
             CacheSectionInfoForAllShapes(surface, shapeids);
@@ -89,7 +89,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var list_sectionoutput = this._create_outputs_for_shapes(shapeids, _cache, reader);
             return list_sectionoutput;
         }
-        public MultiSectionOuputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
+        public ShapesSectionsOutputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
             CacheSectionInfoForAllShapes(surface, shapeids);
@@ -140,9 +140,9 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private MultiSectionOuputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, MultiSectionQueryCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
+        private ShapesSectionsOutputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, MultiSectionQueryCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
         {
-            var output_for_all_shapes = new MultiSectionOuputList<T>();
+            var output_for_all_shapes = new ShapesSectionsOutputList<T>();
 
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
@@ -155,7 +155,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_all_shapes;
         }
 
-        private MultiSectionOutput<T> _create_output_for_shape<T>(short shapeid, ShapeCacheItemList shapecacheitems, VASS.Internal.ArraySegmentReader<T> segReader)
+        private ShapeSectionRowsList<T> _create_output_for_shape<T>(short shapeid, ShapeCacheItemList shapecacheitems, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             int original_seg_size = segReader.Count;
 
@@ -164,36 +164,36 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
-            int results_cell_count = shapecacheitems.CountCells(); 
+            int results_cell_count = shapecacheitems.CountCells();
 
-            List<SectionOutput<T>> sections = null;
+            List<ShapeSectionRows<T>> sections = null;
             if (shapecacheitems != null)
             {
-                sections = new List<SectionOutput<T>>(shapecacheitems.Count);
+                sections = new List<ShapeSectionRows<T>>(shapecacheitems.Count);
                 foreach (var shapecacheitem in shapecacheitems)
                 {
-                    var section_output = new SectionOutput<T>(shapecacheitem.RowCount, shapecacheitem.SectionQuery.SectionIndex);
+                    var section_output = new ShapeSectionRows<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionQuery.SectionIndex);
 
                     int num_cols = shapecacheitem.SectionQuery.Columns.Count;
                     foreach (int row_index in shapecacheitem.RowIndexes)
                     {
-                        var segment = segReader.GetNextSegment(num_cols);
-                        var sec_res_row = new SectionOutputRow<T>(segment, shapecacheitem.SectionQuery.SectionIndex, row_index);
-                        section_output.Rows.Add(sec_res_row);
+                        var cells = segReader.GetNextSegment(num_cols);
+                        var sec_res_row = new Row<T>(shapeid, cells);
+                        section_output.Add(sec_res_row);
                     }
 
                     sections.Add(section_output);
                 }
             }
 
-            var output = new MultiSectionOutput<T>(shapeid, results_cell_count, sections);
+            var output = new ShapeSectionRowsList<T>(shapeid, sections);
 
             int final_seg_size = segReader.Count;
 
-            if ((final_seg_size - original_seg_size) != output.__totalcellcount)
-            {
-                throw new Exceptions.InternalAssertionException("Unexpected cursor");
-            }
+            //if ((final_seg_size - original_seg_size) != output.__totalcellcount)
+            //{
+            //    throw new Exceptions.InternalAssertionException("Unexpected cursor");
+            //}
 
             return output;
         }

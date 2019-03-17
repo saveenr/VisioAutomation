@@ -77,8 +77,8 @@ namespace VisioAutomationSamples
             var col_width = query.Columns.Add(VA.ShapeSheet.SrcConstants.PageWidth, nameof(VA.ShapeSheet.SrcConstants.PageWidth));
 
             var results = query.GetResults<double>(page.PageSheet);
-            double height = results.Cells[col_height];
-            double width = results.Cells[col_width];
+            double height = results[col_height];
+            double width = results[col_width];
             var s = new VA.Geometry.Size(width, height);
             return s;
         }

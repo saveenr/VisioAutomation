@@ -44,12 +44,12 @@ namespace VisioScripting.Models
             foreach (var row in results)
             {
                 var xform = new ShapeXFormData();
-                xform.XFormPinX = row.Cells[ColXFormPinX];
-                xform.XFormPinY = row.Cells[ColXFormPinY];
-                xform.XFormLocPinX = row.Cells[ColXFormLocPinX];
-                xform.XFormLocPinY = row.Cells[ColXFormLocPinY];
-                xform.XFormWidth = row.Cells[ColXFormWidth];
-                xform.XFormHeight = row.Cells[ColXFormHeight];
+                xform.XFormPinX = row[ColXFormPinX];
+                xform.XFormPinY = row[ColXFormPinY];
+                xform.XFormLocPinX = row[ColXFormLocPinX];
+                xform.XFormLocPinY = row[ColXFormLocPinY];
+                xform.XFormWidth = row[ColXFormWidth];
+                xform.XFormHeight = row[ColXFormHeight];
                 list.Add(xform);
             }
             return list;
