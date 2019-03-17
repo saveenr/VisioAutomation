@@ -5,13 +5,13 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class MultiSectionQuery
+    public class SingleSectionQuery
     {
         public SectionQueryList SectionQueries { get; }
 
         private MultiSectionQueryCache _cache;
 
-        public MultiSectionQuery()
+        public SingleSectionQuery()
         {
             this.SectionQueries = new SectionQueryList(0);
         }
