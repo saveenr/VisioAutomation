@@ -139,7 +139,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        private VASS.Query.ShapeRowOutput<string> GetCells(VASS.Query.CellQuery query, IVisio.Shape shape, CellValueType type)
+        private VASS.Query.ShapeRow<string> GetCells(VASS.Query.CellQuery query, IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
             if (type == CellValueType.Formula)
@@ -152,7 +152,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        private VASS.Query.ShapeRowOutputList<string> GetCells(VASS.Query.CellQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
+        private VASS.Query.ShapeRowList<string> GetCells(VASS.Query.CellQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var surface = new SurfaceTarget(page);
             if (type == CellValueType.Formula)

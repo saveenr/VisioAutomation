@@ -14,14 +14,14 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Columns = new ColumnList(0);
         }
 
-        public ShapeRowOutput<string> GetFormulas(IVisio.Shape shape)
+        public ShapeRow<string> GetFormulas(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetFormulas(surface);
         }
 
 
-        public ShapeRowOutput<string> GetFormulas(SurfaceTarget surface)
+        public ShapeRow<string> GetFormulas(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -33,13 +33,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public ShapeRowOutput<TResult> GetResults<TResult>(IVisio.Shape shape)
+        public ShapeRow<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
             return GetResults<TResult>(surface);
         }
 
-        public ShapeRowOutput<TResult> GetResults<TResult>(SurfaceTarget surface)
+        public ShapeRow<TResult> GetResults<TResult>(SurfaceTarget surface)
         {
             RestrictToShapesOnly(surface);
 
@@ -51,14 +51,14 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public ShapeRowOutputList<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        public ShapeRowList<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
 
-        public ShapeRowOutputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
+        public ShapeRowList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
@@ -67,13 +67,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public ShapeRowOutputList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
+        public ShapeRowList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
         }
 
-        public ShapeRowOutputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
+        public ShapeRowList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
@@ -83,15 +83,15 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_list;
         }
 
-        private ShapeRowOutputList<T> _shapesid_to_outputs<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
+        private ShapeRowList<T> _shapesid_to_outputs<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             var outputs = shapeids.Select(shapeid => this._create_output_for_shape((short)shapeid, segReader));
-            var output_list = new ShapeRowOutputList<T>(shapeids.Count);
+            var output_list = new ShapeRowList<T>(shapeids.Count);
             output_list.AddRange(outputs);
             return output_list;
         }
 
-        private ShapeRowOutput<T> _create_output_for_shape<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
+        private ShapeRow<T> _create_output_for_shape<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
@@ -105,7 +105,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
             
-            var output = new ShapeRowOutput<T>(shapeid, numcols, pulled_segment);
+            var output = new ShapeRow<T>(shapeid, numcols, pulled_segment);
             return output;
         }
 

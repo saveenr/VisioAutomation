@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeSectionRowOutputList<T> : IEnumerable<ShapeSectionRowOutput<T>>
+    public class ShapeSectionRowList<T> : IEnumerable<ShapeSectionRow<T>>
     {
         // shapeidn
         // list {
@@ -11,19 +11,19 @@ namespace VisioAutomation.ShapeSheet.Query
         //     [n] - { shapeidn, sectionindexn, {cells for (shapeidn,sectionindexn)} }
         // }
 
-        private readonly List<ShapeSectionRowOutput<T>> _list;
+        private readonly List<ShapeSectionRow<T>> _list;
 
         public int ShapeId;
         public readonly IVisio.VisSectionIndices SectionIndex;
 
-        internal ShapeSectionRowOutputList(int shapeid, IVisio.VisSectionIndices secindex, int capacity)
+        internal ShapeSectionRowList(int shapeid, IVisio.VisSectionIndices secindex, int capacity)
         {
             this.ShapeId = shapeid;
             this.SectionIndex = secindex;
-            this._list = new List<ShapeSectionRowOutput<T>>(capacity);
+            this._list = new List<ShapeSectionRow<T>>(capacity);
         }
 
-        public IEnumerator<ShapeSectionRowOutput<T>> GetEnumerator()
+        public IEnumerator<ShapeSectionRow<T>> GetEnumerator()
         {
             return this._list.GetEnumerator();
         }
@@ -33,13 +33,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return GetEnumerator();
         }
 
-        internal void Add(ShapeSectionRowOutput<T> r)
+        internal void Add(ShapeSectionRow<T> r)
         {
             this._list.Add(r);
         }
 
         public int Count => this._list.Count;
 
-        public ShapeSectionRowOutput<T> this[int index] => this._list[index];
+        public ShapeSectionRow<T> this[int index] => this._list[index];
     }
 }
