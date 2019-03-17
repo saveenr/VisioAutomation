@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.ShapeSheet.Query
 {
-    public class OutputBase<T> 
+    public class OutputBase 
     {
         public int ShapeID { get; private set; }
 

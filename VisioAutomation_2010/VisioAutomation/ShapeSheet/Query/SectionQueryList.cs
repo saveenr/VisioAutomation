@@ -5,19 +5,19 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionQueryList : IEnumerable<SectionQuery>
     {
-        private IList<SectionQuery> _subqueries { get; }
+        private IList<SectionQuery> _list { get; }
 
-        private readonly Dictionary<IVisio.VisSectionIndices,SectionQuery> _section_set; 
+        private readonly Dictionary<IVisio.VisSectionIndices,SectionQuery> _map_secindex_to_sectionquery; 
 
         internal SectionQueryList(int capacity)
         {
-            this._subqueries = new List<SectionQuery>(capacity);
-            this._section_set = new Dictionary<IVisio.VisSectionIndices, SectionQuery>(capacity);
+            this._list = new List<SectionQuery>(capacity);
+            this._map_secindex_to_sectionquery = new Dictionary<IVisio.VisSectionIndices, SectionQuery>(capacity);
         }
 
         public IEnumerator<SectionQuery> GetEnumerator()
         {
-            return this._subqueries.GetEnumerator();
+            return this._list.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -25,20 +25,20 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public SectionQuery this[int index] => this._subqueries[index];
+        public SectionQuery this[int index] => this._list[index];
 
         public SectionQuery Add(IVisio.VisSectionIndices section)
         {
-            if (this._section_set.ContainsKey(section))
+            if (this._map_secindex_to_sectionquery.ContainsKey(section))
             {
-                string msg = "Duplicate Section Index";
+                string msg = string.Format("Already contains section index {0} (value={1})",section, (int)section);
                 throw new System.ArgumentException(msg);
             }
 
-            int ordinal = this._subqueries.Count;
+            int ordinal = this._list.Count;
             var section_query = new SectionQuery(ordinal, section);
-            this._subqueries.Add(section_query);
-            this._section_set[section] = section_query;
+            this._list.Add(section_query);
+            this._map_secindex_to_sectionquery[section] = section_query;
             return section_query;
         }
 
@@ -47,6 +47,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.Add((IVisio.VisSectionIndices)src.Section);
         }
 
-        public int Count => this._subqueries.Count;
+        public int Count => this._list.Count;
     }
 }
