@@ -7,5 +7,9 @@ namespace VisioAutomation.ShapeSheet.Query
         internal CellOutputList() : base()
         {
         }
+
+        internal CellOutputList(int capacity) : base(capacity)
+        {
+        }
     }
 }

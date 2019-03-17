@@ -125,16 +125,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private CellOutputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
         {
-            var output_for_all_shapes = new CellOutputList<T>();
+            var outputs = shapeids.Select(shapeid => this._create_output_for_shape((short)shapeid, segReader));
+            var result = new CellOutputList<T>(shapeids.Count);
+            result.AddRange(outputs);
 
-            for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
-            {
-                var shapeid = shapeids[shape_index];
-                var output_for_shape = this._create_output_for_shape((short)shapeid, segReader);
-                output_for_all_shapes.Add(output_for_shape);
-            }
-
-            return output_for_all_shapes;
+            return result;
         }
 
         private CellOutput<T> _create_output_for_shape<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
@@ -160,12 +155,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private Streams.StreamArray _build_src_stream()
         {
-            int dummy_shapeid = -1;
             int numshapes = 1;
             int numcells = this._get_total_cell_count(numshapes);
             var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
-            var cellinfos = this._enum_total_cellinfo(dummy_shapeid);
-            var srcs = cellinfos.Select(i => i.SidSrc.Src);
+            var srcs = this.Columns.Select(c => c.Src);
             stream.AddRange(srcs);
 
             return stream.ToStreamArray();
@@ -177,28 +170,12 @@ namespace VisioAutomation.ShapeSheet.Query
             int numcells = this._get_total_cell_count(numshapes);
 
             var stream = new VASS.Streams.SidSrcStreamArrayBuilder(numcells);
-
-            for (int shapeindex = 0; shapeindex < shapeids.Count; shapeindex++)
+            foreach (var shapeid in shapeids)
             {
-                // For each shape add the cells to query
-                var shapeid = shapeids[shapeindex];
-
-                var cellinfos = this._enum_total_cellinfo(shapeid);
-                var sidsrcs = cellinfos.Select(i => i.SidSrc);
+                var sidsrcs = this.Columns.Select(c => new SidSrc((short)shapeid, c.Src));
                 stream.AddRange(sidsrcs);
             }
-
             return stream.ToStreamArray();
-        }
-
-        private IEnumerable<Internal.QueryCellInfo> _enum_total_cellinfo(int shapeid)
-        {
-            foreach (var col in this.Columns)
-            {
-                var sidsrc = new SidSrc((short)shapeid, col.Src);
-                var cellinfo = new Internal.QueryCellInfo(sidsrc, col);
-                yield return cellinfo;
-            }
         }
     }
 }
