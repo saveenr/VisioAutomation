@@ -48,9 +48,8 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var shapes = new List<IVisio.Shape> { surface.Shape };
+            this.CacheInfo(surface, new[] { surface.Shape.ID });
 
-            this.cache_section_info(shapes);
             var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
@@ -71,9 +70,8 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var shapes = new List<IVisio.Shape> { surface.Shape };
+            this.CacheInfo(surface, new [] {  surface.Shape.ID });
 
-            this.cache_section_info(shapes);
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
@@ -105,15 +103,43 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public MultiSectionOuputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
-            var shapes = new List<IVisio.Shape>(shapeids.Count);
-            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
+            // Store information about the sections we need to query
+            CacheInfo(surface, shapeids);
 
-            this.cache_section_info(shapes);
+            // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
             var seg_builder = new VASS.Internal.ArraySegmentReader<string>(values);
             var list = this._create_outputs_for_shapes(shapeids, _cache, seg_builder);
             return list;
+        }
+
+        private void CacheInfo(SurfaceTarget surface, IList<int> shapeids)
+        {
+            var shapes = new List<IVisio.Shape>(shapeids.Count);
+            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
+            
+            // there aren't any subqueries so return an empty cache
+            if (this.SectionQueries.Count < 1)
+            {
+                this._cache = new SectionInfoCache(0);
+            }
+
+            this._cache = new SectionInfoCache();
+
+            // For each shape, for each section find the number of rows
+            foreach (var shape in shapes)
+            {
+                var l_sectioninfo = new List<SectionInfo>(this.SectionQueries.Count);
+                l_sectioninfo.AddRange(this.SectionQueries.Select(sec => sec.GetSectionInfoForShape(shape)));
+                _cache.AddSectionInfosForShape(l_sectioninfo);
+            }
+
+            if (shapes.Count != _cache.CountShapes)
+            {
+                string msg = string.Format("mismatch in number of shapes and information collected for shapes");
+                throw new Exceptions.InternalAssertionException(msg);
+            }
         }
 
         public MultiSectionOuputList<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
@@ -124,10 +150,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public MultiSectionOuputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
-            var shapes = new List<IVisio.Shape>(shapeids.Count);
-            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
+            // Store information about the sections we need to query
+            CacheInfo(surface, shapeids);
 
-            this.cache_section_info(shapes);
+            // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
@@ -200,31 +226,6 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             return output;
-        }
-
-        private void cache_section_info(IList<IVisio.Shape> shapes)
-        {
-            // there aren't any subqueries so return an empty cache
-            if (this.SectionQueries.Count < 1)
-            {
-                this._cache = new SectionInfoCache(0);
-            }
-
-            this._cache = new SectionInfoCache();
-
-            // For each shape, for each section find the number of rows
-            foreach (var shape in shapes)
-            {
-                var l_sectioninfo = new List<SectionInfo>(this.SectionQueries.Count);
-                l_sectioninfo.AddRange(this.SectionQueries.Select(sec => sec.GetSectionInfoForShape(shape)));
-                _cache.AddSectionInfosForShape(l_sectioninfo);
-            }
-
-            if (shapes.Count != _cache.CountShapes)
-            {
-                string msg = string.Format("mismatch in number of shapes and information collected for shapes");
-                throw new Exceptions.InternalAssertionException(msg);
-            }
         }
 
         private int _get_total_cell_count(int numshapes)

@@ -94,13 +94,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellOutputList<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
-            var shapes = new List<IVisio.Shape>(shapeids.Count);
-            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
-
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
             var seg_builder = new Internal.ArraySegmentReader<string>(values);
-            var list = this._create_outputs_for_shapes(shapeids, seg_builder);
+            var list = this._shapesid_to_outputs(shapeids, seg_builder);
             return list;
         }
 
@@ -112,39 +109,37 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellOutputList<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
-            var shapes = new List<IVisio.Shape>(shapeids.Count);
-            shapes.AddRange(shapeids.Select(shapeid => surface.Shapes.ItemFromID16[(short)shapeid]));
-
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var seg_builder = new Internal.ArraySegmentReader<TResult>(values);
-            var list = this._create_outputs_for_shapes(shapeids, seg_builder);
-            return list;
+            var output_list = this._shapesid_to_outputs(shapeids, seg_builder);
+            return output_list;
         }
 
-        private CellOutputList<T> _create_outputs_for_shapes<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
+        private CellOutputList<T> _shapesid_to_outputs<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             var outputs = shapeids.Select(shapeid => this._create_output_for_shape((short)shapeid, segReader));
-            var result = new CellOutputList<T>(shapeids.Count);
-            result.AddRange(outputs);
-
-            return result;
+            var output_list = new CellOutputList<T>(shapeids.Count);
+            output_list.AddRange(outputs);
+            return output_list;
         }
 
         private CellOutput<T> _create_output_for_shape<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
         {
+            // From the reader, pull as many cells as there are columns
+            int numcols = this.Columns.Count;
             int original_seg_size = segReader.Count;
+            var pulled_segment = segReader.GetNextSegment(numcols);
 
-            var output = new CellOutput<T>(shapeid, this.Columns.Count, segReader.GetNextSegment(this.Columns.Count));
-
+            // verify that nothing strange has happened
             int final_seg_size = segReader.Count;
-
-            if ((final_seg_size - original_seg_size) != output.__totalcellcount)
+            if ((final_seg_size - original_seg_size) != numcols)
             {
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
-
+            
+            var output = new CellOutput<T>(shapeid, numcols, pulled_segment);
             return output;
         }
 
