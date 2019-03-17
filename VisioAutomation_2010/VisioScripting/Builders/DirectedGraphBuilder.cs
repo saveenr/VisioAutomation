@@ -170,7 +170,7 @@ namespace VisioScripting.Builders
                 client.Output.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    var def_connector_type = ConnectorType.Curved;
+                    var def_connector_type = VisioAutomation.Models.ConnectorType.Curved;
                     var connectory_type = def_connector_type;
 
                     var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);

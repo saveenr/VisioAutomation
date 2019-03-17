@@ -2,7 +2,6 @@
 using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
-using VisioAutomation.Shapes;
 
 namespace VisioAutomationSamples
 {
@@ -67,8 +66,8 @@ namespace VisioAutomationSamples
             // Create the connectors to join the nodes
             // Note that Node 4 is deliberately not connected to any other node
 
-            var curved = ConnectorType.Curved;
-            var rightangle = ConnectorType.RightAngle;
+            var curved = VisioAutomation.Models.ConnectorType.Curved;
+            var rightangle = VisioAutomation.Models.ConnectorType.RightAngle;
 
             var c0 = directed_graph_drawing.AddConnection("c0", n0, n1, null, curved);
             var c1 = directed_graph_drawing.AddConnection("c1", n1, n2, "YES", rightangle);

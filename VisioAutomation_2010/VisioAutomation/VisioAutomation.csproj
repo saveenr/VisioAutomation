@@ -159,7 +159,6 @@
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="Application\AlertResponseCode.cs" />
-    <Compile Include="Shapes\ConnectorType.cs" />
     <Compile Include="Text\CharacterFormatCells.cs" />
     <Compile Include="Shapes\ShapeXFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
