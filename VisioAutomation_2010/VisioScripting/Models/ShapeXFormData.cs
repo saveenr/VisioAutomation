@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet.Query;
-using VisioAutomation.ShapeSheet.Writers;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
@@ -15,19 +14,19 @@ namespace VisioScripting.Models
         public double Width;
         public double Height;
 
-        private static Column ColPinX;
-        private static Column ColPinY;
-        private static Column ColLocPinX;
-        private static Column ColLocPinY;
-        private static Column ColWidth;
-        private static Column ColHeight;
-        private static CellQuery query;
+        private static VASS.Query.Column ColPinX;
+        private static VASS.Query.Column ColPinY;
+        private static VASS.Query.Column ColLocPinX;
+        private static VASS.Query.Column ColLocPinY;
+        private static VASS.Query.Column ColWidth;
+        private static VASS.Query.Column ColHeight;
+        private static VASS.Query.CellQuery query;
 
         public static List<ShapeXFormData> Get(IVisio.Page page, TargetShapeIDs target)
         {
             if (query == null)
             {
-                query = new CellQuery();
+                query = new VASS.Query.CellQuery();
                 ColPinX = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinX));
                 ColPinY = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormPinY));
                 ColLocPinX = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX, nameof(VisioAutomation.ShapeSheet.SrcConstants.XFormLocPinX));
@@ -64,7 +63,7 @@ namespace VisioScripting.Models
             return new VisioAutomation.Geometry.Rectangle(pin - locpin, size);
         }
 
-        public void SetFormulas(SidSrcWriter writer, short id)
+        public void SetFormulas(VASS.Writers.SidSrcWriter writer, short id)
         {
             writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, this.PinX);
             writer.SetFormula(id, VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, this.PinY);
