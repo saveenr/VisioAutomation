@@ -104,7 +104,6 @@
     <Compile Include="ShapeSheet\CellValueType.cs" />
     <Compile Include="ShapeSheet\Query\MultiSectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
-    <Compile Include="ShapeSheet\Query\RowBase.cs" />
     <Compile Include="ShapeSheet\Query\ShapeSectionRowsList.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItemList.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />

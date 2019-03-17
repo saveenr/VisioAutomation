@@ -178,7 +178,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     foreach (int row_index in shapecacheitem.RowIndexes)
                     {
                         var cells = segReader.GetNextSegment(num_cols);
-                        var sec_res_row = new ShapeSectionCellsRow<T>(shapeid, cells, shapecacheitem.SectionQuery.SectionIndex, row_index);
+                        var sec_res_row = new Row<T>(shapeid, cells);
                         section_output.Add(sec_res_row);
                     }
 

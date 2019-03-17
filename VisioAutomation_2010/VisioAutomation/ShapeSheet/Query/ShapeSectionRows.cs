@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query 
 {
-    public class ShapeSectionRows<T> : IEnumerable<ShapeCellsRow<T>>
+    public class ShapeSectionRows<T> : IEnumerable<Row<T>>
     {
 
         // for a given tuple of (shape, section) gives the rows for that tuple
@@ -26,7 +26,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-    public IEnumerator<ShapeCellsRow<T>> GetEnumerator()
+    public IEnumerator<Row<T>> GetEnumerator()
     {
         return this.Rows.GetEnumerator();
     }
@@ -36,19 +36,19 @@ namespace VisioAutomation.ShapeSheet.Query
         return GetEnumerator();
     }
 
-    internal void Add(ShapeCellsRow<T> r)
+    internal void Add(Row<T> r)
     {
         this.Rows.Add(r);
     }
 
-    internal void AddRange(IEnumerable<ShapeCellsRow<T>> rows)
+    internal void AddRange(IEnumerable<Row<T>> rows)
     {
         this.Rows.AddRange(rows);
     }
 
     public int Count => this.Rows.Count;
 
-    public ShapeCellsRow<T> this[int index] => this.Rows[index];
+    public Row<T> this[int index] => this.Rows[index];
 
 }
 }

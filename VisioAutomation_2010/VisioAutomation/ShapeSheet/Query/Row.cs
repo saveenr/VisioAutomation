@@ -6,12 +6,12 @@ using System.Linq;
 namespace VisioAutomation.ShapeSheet.Query
 {
 
-    public class ShapeCellsRow<T> : IEnumerable<T>
+    public class Row<T> : IEnumerable<T>
     {
         public int ShapeID { get; private set; }
         private readonly VASS.Internal.ArraySegment<T> Cells;
 
-        internal ShapeCellsRow(int shapeid, VASS.Internal.ArraySegment<T> cells)
+        internal Row(int shapeid, VASS.Internal.ArraySegment<T> cells)
         {
             this.ShapeID = shapeid;
             this.Cells = cells;
@@ -42,18 +42,5 @@ namespace VisioAutomation.ShapeSheet.Query
                 return this.Cells[index];
             }
         }
-    }
-
-    public class ShapeSectionCellsRow<T> : ShapeCellsRow<T>
-    {
-        public readonly IVisio.VisSectionIndices SectionIndex;
-        public readonly int RowIndex;
-
-        internal ShapeSectionCellsRow(int shapeid, VASS.Internal.ArraySegment<T> cells, IVisio.VisSectionIndices secindex, int rowindex) : base(shapeid,cells)
-        {
-            this.SectionIndex = secindex;
-            this.RowIndex = rowindex;
-        }
-
     }
 }
