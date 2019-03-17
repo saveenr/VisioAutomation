@@ -159,11 +159,12 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             int original_seg_size = segReader.Count;
 
-            int results_cell_count = 0;
-            if (shapecacheitems != null)
+            if (shapecacheitems==null)
             {
-                results_cell_count = shapecacheitems.CountCells();
+                throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
+
+            int results_cell_count = shapecacheitems.CountCells(); 
 
             List<SectionOutput<T>> sections = null;
             if (shapecacheitems != null)
