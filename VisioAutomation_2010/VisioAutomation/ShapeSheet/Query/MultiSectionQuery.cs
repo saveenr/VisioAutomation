@@ -162,7 +162,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int results_cell_count = 0;
             if (shapecacheitems != null)
             {
-                results_cell_count += shapecacheitems.Select(shapecacheitem => shapecacheitem.RowCount * shapecacheitem.Query.Columns.Count).Sum();
+                results_cell_count += shapecacheitems.Select(shapecacheitem => shapecacheitem.RowCount * shapecacheitem.SectionQuery.Columns.Count).Sum();
             }
 
             List<SectionOutput<T>> sections = null;
@@ -171,13 +171,13 @@ namespace VisioAutomation.ShapeSheet.Query
                 sections = new List<SectionOutput<T>>(shapecacheitems.Count);
                 foreach (var section_info in shapecacheitems)
                 {
-                    var section_output = new SectionOutput<T>(section_info.RowCount, section_info.Query.SectionIndex);
+                    var section_output = new SectionOutput<T>(section_info.RowCount, section_info.SectionQuery.SectionIndex);
 
-                    int num_cols = section_info.Query.Columns.Count;
+                    int num_cols = section_info.SectionQuery.Columns.Count;
                     foreach (int row_index in section_info.RowIndexes)
                     {
                         var segment = segReader.GetNextSegment(num_cols);
-                        var sec_res_row = new SectionOutputRow<T>(segment, section_info.Query.SectionIndex, row_index);
+                        var sec_res_row = new SectionOutputRow<T>(segment, section_info.SectionQuery.SectionIndex, row_index);
                         section_output.Rows.Add(sec_res_row);
                     }
 
@@ -205,7 +205,7 @@ namespace VisioAutomation.ShapeSheet.Query
             // Count the Cells in the Sections
             foreach (var section_info in this._cache.ShapeCacheItems)
             {
-                count += section_info.Sum(s => s.RowCount * s.Query.Columns.Count);
+                count += section_info.Sum(s => s.RowCount * s.SectionQuery.Columns.Count);
             }
 
             return count;
@@ -255,10 +255,10 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 foreach (int rowindex in section_info.RowIndexes)
                 {
-                    foreach (var col in section_info.Query.Columns)
+                    foreach (var col in section_info.SectionQuery.Columns)
                     {
                         var src = new VASS.Src(
-                            (short)section_info.Query.SectionIndex,
+                            (short)section_info.SectionQuery.SectionIndex,
                             (short)rowindex,
                             col.Src.Cell);
                         var sidsrc = new VASS.SidSrc((short)shapeid, src);
