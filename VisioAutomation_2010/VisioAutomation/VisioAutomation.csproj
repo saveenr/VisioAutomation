@@ -130,7 +130,6 @@
     <Compile Include="ShapeSheet\Query\SectionOutputRow.cs" />
     <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
-    <Compile Include="Shapes\LockHelper.cs" />
     <Compile Include="Shapes\UserDefinedCellDictionary.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\CustomPropertyDictionary.cs" />
