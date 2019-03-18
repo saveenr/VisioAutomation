@@ -5,16 +5,16 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery : IEnumerable<SectionColumns>
+    public class SectionQuery : IEnumerable<SectionQueryColumns>
     {
-        private IList<SectionColumns> _list { get; }
-        private readonly Dictionary<IVisio.VisSectionIndices, SectionColumns> _map_secindex_to_sec_cols;
+        private IList<SectionQueryColumns> _list { get; }
+        private readonly Dictionary<IVisio.VisSectionIndices, SectionQueryColumns> _map_secindex_to_sec_cols;
         private SectionQueryCache _cache;
 
         public SectionQuery() : base()
         {
-            this._list = new List<SectionColumns>();
-            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionColumns>();
+            this._list = new List<SectionQueryColumns>();
+            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionQueryColumns>();
         }
 
         private static void RestrictToShapesOnly(SurfaceTarget surface)
@@ -254,7 +254,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public static ShapeCacheItem _cache_shape_item(IVisio.Shape shape, IVisio.VisSectionIndices sec_index, SectionColumns sec_cols)
+        public static ShapeCacheItem _cache_shape_item(IVisio.Shape shape, IVisio.VisSectionIndices sec_index, SectionQueryColumns sec_cols)
         {
             // first count the rows in the section
 
@@ -275,7 +275,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return shapecacheitem;
         }
 
-        public IEnumerator<SectionColumns> GetEnumerator()
+        public IEnumerator<SectionQueryColumns> GetEnumerator()
         {
             return this._list.GetEnumerator();
         }
@@ -285,9 +285,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public SectionColumns this[int index] => this._list[index];
+        public SectionQueryColumns this[int index] => this._list[index];
 
-        public SectionColumns Add(IVisio.VisSectionIndices sec_index)
+        public SectionQueryColumns Add(IVisio.VisSectionIndices sec_index)
         {
             if (this._map_secindex_to_sec_cols.ContainsKey(sec_index))
             {
@@ -295,13 +295,13 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentException(msg);
             }
 
-            var sec_cols = new SectionColumns(sec_index);
+            var sec_cols = new SectionQueryColumns(sec_index);
             this._list.Add(sec_cols);
             this._map_secindex_to_sec_cols[sec_index] = sec_cols;
             return sec_cols;
         }
 
-        public SectionColumns Add(Src src)
+        public SectionQueryColumns Add(Src src)
         {
             return this.Add((IVisio.VisSectionIndices)src.Section);
         }
