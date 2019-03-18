@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query 
 {
-    public class ShapeSectionResult<T> : IEnumerable<Row<T>>
+    public class ShapeSectionResult<T> : RowList<T>
     {
 
         // for a given tuple of (shape, section) gives the rows for that tuple
@@ -14,41 +14,14 @@ namespace VisioAutomation.ShapeSheet.Query
         //    [1] = rows 1
         //    [n] = rows n
         // }
+
         public readonly int ShapeID;
         public readonly IVisio.VisSectionIndices SectionIndex;
-        private readonly RowList<T> Rows;
 
-        internal ShapeSectionResult(int capacity, int shapeid, IVisio.VisSectionIndices section_index)
+        internal ShapeSectionResult(int capacity, int shapeid, IVisio.VisSectionIndices section_index) : base(capacity)
         {
             this.ShapeID = shapeid;
-            this.Rows = new RowList<T>(capacity);
             this.SectionIndex = section_index;
         }
-
-
-    public IEnumerator<Row<T>> GetEnumerator()
-    {
-        return this.Rows.GetEnumerator();
     }
-
-    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    internal void Add(Row<T> r)
-    {
-        this.Rows.Add(r);
-    }
-
-    internal void AddRange(IEnumerable<Row<T>> rows)
-    {
-        this.Rows.AddRange(rows);
-    }
-
-    public int Count => this.Rows.Count;
-
-    public Row<T> this[int index] => this.Rows[index];
-
-}
 }
