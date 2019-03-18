@@ -5,7 +5,7 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery : SectionColumnsList
+    public class SectionQuery : SectionQueryItems
     {
         private SectionQueryCache _cache;
 

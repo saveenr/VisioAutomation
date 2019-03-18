@@ -152,7 +152,7 @@
     <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\SectionColumns.cs" />
     <Compile Include="ShapeSheet\Query\ShapeSectionRows.cs" />
-    <Compile Include="ShapeSheet\Query\SectionColumnsList.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQueryItem.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />

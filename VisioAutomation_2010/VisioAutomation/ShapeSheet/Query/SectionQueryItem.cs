@@ -3,18 +3,18 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionColumnsList : IEnumerable<SectionColumns>
+    public class SectionQueryItems : IEnumerable<SectionColumns>
     {
         private IList<SectionColumns> _list { get; }
 
         private readonly Dictionary<IVisio.VisSectionIndices,SectionColumns> _map_secindex_to_sec_cols;
 
-        internal SectionColumnsList()
+        internal SectionQueryItems()
         {
             this._list = new List<SectionColumns>();
             this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionColumns>();
         }
-        internal SectionColumnsList(int capacity)
+        internal SectionQueryItems(int capacity)
         {
             this._list = new List<SectionColumns>(capacity);
             this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionColumns>(capacity);
