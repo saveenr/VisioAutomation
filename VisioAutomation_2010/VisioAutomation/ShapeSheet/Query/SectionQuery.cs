@@ -166,11 +166,11 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
 
-            List<SectionQueryShapeRows<T>> sections = null;
-            sections = new List<SectionQueryShapeRows<T>>(shapecacheitems.Count);
+            var section_results = new List<SectionQueryShapeRows<T>>(shapecacheitems.Count);
             foreach (var shapecacheitem in shapecacheitems)
             {
                 var section_output = new SectionQueryShapeRows<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionColumns.SectionIndex);
+                section_results.Add(section_output);
 
                 int num_cols = shapecacheitem.SectionColumns.Count;
                 foreach (int row_index in shapecacheitem.RowIndexes)
@@ -180,10 +180,9 @@ namespace VisioAutomation.ShapeSheet.Query
                     section_output.Add(sec_res_row);
                 }
 
-                sections.Add(section_output);
             }
 
-            var output = new SectionQueryShapeResults<T>(shapeid, sections);
+            var query_results = new SectionQueryShapeResults<T>(shapeid, section_results);
 
             // the difference in the segment count must match the total number of output cells
 
@@ -196,7 +195,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
 
-            return output;
+            return query_results;
         }
 
         private Streams.StreamArray _build_src_stream()
