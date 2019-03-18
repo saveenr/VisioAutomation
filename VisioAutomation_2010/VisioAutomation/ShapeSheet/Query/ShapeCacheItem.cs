@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    internal class ShapeCacheItem
+    public class ShapeCacheItem
     {
         public SectionColumns SectionColumns { get; private set; }
 

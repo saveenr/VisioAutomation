@@ -120,7 +120,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 var shapecacheitems = new ShapeCacheItemList(this.Count);
                 foreach (var sec_cols in this)
                 {
-                    var shapecacheitem = sec_cols._get_shape_cache_item(shape);
+                    var shapecacheitem = SectionQuery._cache_shape_item(shape, sec_cols.SectionIndex, sec_cols);
                     shapecacheitems.Add(shapecacheitem);
                 }
 
@@ -245,6 +245,27 @@ namespace VisioAutomation.ShapeSheet.Query
                     }
                 }
             }
+        }
+
+        public static ShapeCacheItem _cache_shape_item(IVisio.Shape shape, IVisio.VisSectionIndices sec_index, SectionColumns sec_cols)
+        {
+            // first count the rows in the section
+
+            int row_count = 0;
+            // For visSectionObject we know the result is always going to be 1
+            // so avoid making the call tp RowCount[]
+            if (sec_index == IVisio.VisSectionIndices.visSectionObject)
+            {
+                row_count = 1;
+            }
+            else
+            {
+                // For all other cases use RowCount[]
+                row_count = shape.RowCount[(short)sec_index];
+            }
+
+            var shapecacheitem = new ShapeCacheItem(sec_cols, row_count, shape.ID16);
+            return shapecacheitem;
         }
     }
 }
