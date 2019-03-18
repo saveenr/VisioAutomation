@@ -7,11 +7,6 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         private List<ShapeCacheItem> _list_shapecacheitems;
 
-        public ShapeCache()
-        {
-            this._list_shapecacheitems = new List<ShapeCacheItem>();
-        }
-
         public ShapeCache(int capacity)
         {
             this._list_shapecacheitems = new List<ShapeCacheItem>(capacity);
