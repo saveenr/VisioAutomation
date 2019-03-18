@@ -166,13 +166,13 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
 
-            List<ShapeSectionRows<T>> sections = null;
+            List<SectionQueryShapeRows<T>> sections = null;
             if (shapecacheitems != null)
             {
-                sections = new List<ShapeSectionRows<T>>(shapecacheitems.Count);
+                sections = new List<SectionQueryShapeRows<T>>(shapecacheitems.Count);
                 foreach (var shapecacheitem in shapecacheitems)
                 {
-                    var section_output = new ShapeSectionRows<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionColumns.SectionIndex);
+                    var section_output = new SectionQueryShapeRows<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionColumns.SectionIndex);
 
                     int num_cols = shapecacheitem.SectionColumns.Count;
                     foreach (int row_index in shapecacheitem.RowIndexes)
