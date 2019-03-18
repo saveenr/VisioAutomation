@@ -117,7 +117,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
                 // For that shape, fill in the section cache for each section that
                 // needs to be queried
-                var shapecacheitems = new ShapeCacheItemList(this.Count);
+                var shapecacheitems = new ShapeCache(this.Count);
                 foreach (var sec_cols in this)
                 {
                     var shapecacheitem = SectionQuery._cache_shape_item(shape, sec_cols.SectionIndex, sec_cols);
@@ -152,7 +152,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_all_shapes;
         }
 
-        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCacheItemList shapecacheitems, VASS.Internal.ArraySegmentReader<T> segReader)
+        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             int original_seg_size = segReader.Count;
 

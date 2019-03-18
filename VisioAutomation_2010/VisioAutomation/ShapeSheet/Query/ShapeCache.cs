@@ -3,16 +3,16 @@ using System.Collections.Generic;
 namespace VisioAutomation.ShapeSheet.Query
 {
 
-    internal class ShapeCacheItemList : IEnumerable<ShapeCacheItem>
+    internal class ShapeCache : IEnumerable<ShapeCacheItem>
     {
         private List<ShapeCacheItem> _list_shapecacheitems;
 
-        public ShapeCacheItemList()
+        public ShapeCache()
         {
             this._list_shapecacheitems = new List<ShapeCacheItem>();
         }
 
-        public ShapeCacheItemList(int capacity)
+        public ShapeCache(int capacity)
         {
             this._list_shapecacheitems = new List<ShapeCacheItem>(capacity);
         }

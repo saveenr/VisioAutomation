@@ -106,7 +106,7 @@
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryResults.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryShapeResults.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeCacheItemList.cs" />
+    <Compile Include="ShapeSheet\Query\ShapeCache.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />

@@ -4,19 +4,19 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     internal class SectionQueryCache
     {
-        List<ShapeCacheItemList> list_shapecasheitems;
+        List<ShapeCache> list_shapecasheitems;
 
         public SectionQueryCache()
         {
-            this.list_shapecasheitems = new List<ShapeCacheItemList>();
+            this.list_shapecasheitems = new List<ShapeCache>();
         }
 
         public SectionQueryCache(int capacity)
         {
-            this.list_shapecasheitems = new List<ShapeCacheItemList>(capacity);
+            this.list_shapecasheitems = new List<ShapeCache>(capacity);
         }
 
-        public void Add(ShapeCacheItemList item)
+        public void Add(ShapeCache item)
         {
             this.list_shapecasheitems.Add(item);
         }
@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public IEnumerable<ShapeCacheItemList> ShapeCacheItems
+        public IEnumerable<ShapeCache> ShapeCacheItems
         {
             get
             {
@@ -37,7 +37,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public ShapeCacheItemList this[int index]
+        public ShapeCache this[int index]
         {
             get
             {
