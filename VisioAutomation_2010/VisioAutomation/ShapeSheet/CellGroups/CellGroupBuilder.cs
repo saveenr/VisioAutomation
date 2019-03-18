@@ -116,7 +116,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private VASS.Query.ShapeSectionsResults<string> GetCells(VASS.Query.SectionQuery query, IVisio.Shape shape, CellValueType type)
+        private VASS.Query.SectionQueryShapeResults<string> GetCells(VASS.Query.SectionQuery query, IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
             if (type == CellValueType.Formula)
