@@ -5,11 +5,13 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class ShapeCacheItem
     {
-        public SectionColumns SectionColumns { get; private set; }
-
-        public int RowCount { get; }
 
         public short ShapeId { get; }
+        public SectionColumns SectionColumns { get; private set; }
+
+        // The RowCount is the data that is being cached
+        public int RowCount { get; }
+
         internal ShapeCacheItem(SectionColumns sec_cols, int numrows, short shapeid)
         {
             this.SectionColumns = sec_cols;
