@@ -99,9 +99,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return cellqueryresults;
         }
 
-        private RowList<T> _shapesid_to_rows<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
+        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
         {
-            var rows = new RowList<T>(shapeids.Count);
+            var rows = new Rows<T>(shapeids.Count);
             foreach (int shapeid in shapeids)
             {
                 var row = this._shapedata_to_row((short)shapeid, segReader);

@@ -8,7 +8,7 @@ namespace VisioPowerShell.Models
     {
         private static DataTable querytable_to_datatable<T>(
             CellQuery query, 
-            RowList<T> output)
+            Rows<T> output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();

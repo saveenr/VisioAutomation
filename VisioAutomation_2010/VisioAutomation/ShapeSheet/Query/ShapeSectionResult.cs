@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query 
 {
-    public class ShapeSectionResult<T> : RowList<T>
+    public class ShapeSectionResult<T> : Rows<T>
     {
 
         // for a given tuple of (shape, section) gives the rows for that tuple

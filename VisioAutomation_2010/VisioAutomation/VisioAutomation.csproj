@@ -120,7 +120,7 @@
     <Compile Include="ShapeSheet\Internal\ArraySegmentReader.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryCache.cs" />
-    <Compile Include="ShapeSheet\Query\RowList.cs" />
+    <Compile Include="ShapeSheet\Query\Rows.cs" />
     <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
