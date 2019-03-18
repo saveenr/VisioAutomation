@@ -117,15 +117,15 @@ namespace VisioAutomation.ShapeSheet.Query
 
                 // For that shape, fill in the section cache for each section that
                 // needs to be queried
-                var shapecacheitems = new ShapeCache(this.Count);
+                var shapecache = new ShapeCache(this.Count);
                 foreach (var sec_cols in this)
                 {
                     var shapecacheitem = SectionQuery._cache_shape_item(shape, sec_cols.SectionIndex, sec_cols);
-                    shapecacheitems.Add(shapecacheitem);
+                    shapecache.Add(shapecacheitem);
                 }
 
                 // For this shape, add the accumulated info into the cache
-                _cache.Add(shapecacheitems);
+                _cache.Add(shapecache);
             }
 
             // Ensure that we have created a cache for eash shapes

@@ -10,9 +10,9 @@ namespace VisioAutomation.ShapeSheet.Query
         public int RowCount { get; }
 
         public short ShapeId { get; }
-        internal ShapeCacheItem(SectionColumns sectionquery, int numrows, short shapeid)
+        internal ShapeCacheItem(SectionColumns sec_cols, int numrows, short shapeid)
         {
-            this.SectionColumns = sectionquery;
+            this.SectionColumns = sec_cols;
             this.RowCount = numrows;
             this.ShapeId = shapeid;
         }
