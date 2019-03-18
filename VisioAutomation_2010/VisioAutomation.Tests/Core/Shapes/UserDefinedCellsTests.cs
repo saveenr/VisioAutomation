@@ -96,7 +96,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // build query
             var query = new VA.ShapeSheet.Query.MultiSectionQuery();
-            var sec_cols = query.SectionColumnsList.Add(IVisio.VisSectionIndices.visSectionUser);
+            var sec_cols = query.Add(IVisio.VisSectionIndices.visSectionUser);
             var Value = sec_cols.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
             var Prompt = sec_cols.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
 

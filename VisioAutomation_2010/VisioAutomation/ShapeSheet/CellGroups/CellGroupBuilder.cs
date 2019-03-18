@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             else if (type == CellGroupBuilderType.MultiRow)
             {
                 this.query_sections_multirow = new Query.MultiSectionQuery();
-                cols = this.query_sections_multirow.SectionColumnsList.Add(temp_cells.CellMetadata.First().Src);
+                cols = this.query_sections_multirow.Add(temp_cells.CellMetadata.First().Src);
             }
             else
             {
@@ -82,14 +82,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             this.EnforceType(CellGroupBuilderType.MultiRow);
-            var cols = this.query_sections_multirow.SectionColumnsList[0];
+            var sec_cols = this.query_sections_multirow[0];
 
             var cellqueryresult = GetCells(query_sections_multirow,page, shapeids, type);
             var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
             foreach (var data_for_shape in cellqueryresult)
             {
                 var first_section_results = data_for_shape[0];
-                var cellgroups = this._section_result_to_cell_groups(first_section_results,cols);
+                var cellgroups = this._section_result_to_cell_groups(first_section_results,sec_cols);
                 list_cellgroups.Add(cellgroups);
             }
             return list_cellgroups;
@@ -98,10 +98,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public List<TGroup> GetCellsMultiRow(IVisio.Shape shape, CellValueType type)
         {
             this.EnforceType(CellGroupBuilderType.MultiRow);
-            var cols = this.query_sections_multirow.SectionColumnsList[0];
+            var sec_cols = this.query_sections_multirow[0];
             var cellqueryresult = GetCells(query_sections_multirow, shape, type);
             var first_section = cellqueryresult[0];
-            var cellgroups = this._section_result_to_cell_groups(first_section,cols);
+            var cellgroups = this._section_result_to_cell_groups(first_section,sec_cols);
             return cellgroups;
         }
 

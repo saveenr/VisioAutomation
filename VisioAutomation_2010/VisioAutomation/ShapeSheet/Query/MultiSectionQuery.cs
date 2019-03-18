@@ -5,15 +5,12 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class MultiSectionQuery
+    public class MultiSectionQuery : SectionColumnsList
     {
-        public SectionColumnsList SectionColumnsList { get; }
-
         private MultiSectionQueryCache _cache;
 
-        public MultiSectionQuery()
+        public MultiSectionQuery() : base(0)
         {
-            this.SectionColumnsList = new SectionColumnsList(0);
         }
 
         private static void RestrictToShapesOnly(SurfaceTarget surface)
@@ -105,7 +102,7 @@ namespace VisioAutomation.ShapeSheet.Query
         private void CacheSectionInfoForAllShapes(SurfaceTarget surface, IList<int> shape_ids)
         {
             // Prepare a cache object
-            if (this.SectionColumnsList.Count < 1)
+            if (this.Count < 1)
             {
                 this._cache = new MultiSectionQueryCache(0);
             }
@@ -120,10 +117,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
                 // For that shape, fill in the section cache for each section that
                 // needs to be queried
-                var shapecacheitems = new ShapeCacheItemList(this.SectionColumnsList.Count);
-                foreach (var section_query in this.SectionColumnsList)
+                var shapecacheitems = new ShapeCacheItemList(this.Count);
+                foreach (var sec_cols in this)
                 {
-                    var shapecacheitem = section_query.GetShapeCacheItem(shape);
+                    var shapecacheitem = sec_cols.GetShapeCacheItem(shape);
                     shapecacheitems.Add(shapecacheitem);
                 }
 

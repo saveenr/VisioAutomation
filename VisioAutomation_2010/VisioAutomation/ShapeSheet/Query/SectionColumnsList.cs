@@ -7,8 +7,13 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         private IList<SectionColumns> _list { get; }
 
-        private readonly Dictionary<IVisio.VisSectionIndices,SectionColumns> _map_secindex_to_sec_cols; 
+        private readonly Dictionary<IVisio.VisSectionIndices,SectionColumns> _map_secindex_to_sec_cols;
 
+        internal SectionColumnsList()
+        {
+            this._list = new List<SectionColumns>();
+            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionColumns>();
+        }
         internal SectionColumnsList(int capacity)
         {
             this._list = new List<SectionColumns>(capacity);
