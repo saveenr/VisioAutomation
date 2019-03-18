@@ -143,15 +143,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             VA.Shapes.CustomPropertyHelper.Set(s4, "S3P2", "\"5\"", cp_type);
             VA.Shapes.CustomPropertyHelper.Set(s4, "S3P3", "\"6\"", cp_type);
 
-            var query = new VA.ShapeSheet.Query.SectionQuery();
+            var sec_query = new VA.ShapeSheet.Query.SectionQuery();
 
-            var sec_cols = query.Add(IVisio.VisSectionIndices.visSectionProp);
+            var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionProp);
             var value_col = sec_cols.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var data = query.GetFormulas(page1, shapeids);
-            var data2 = query.GetResults<string>(page1, shapeids);
+            var data = sec_query.GetFormulas(page1, shapeids);
+            var data2 = sec_query.GetResults<string>(page1, shapeids);
 
             int shape0_index = 0;
             int shape1_index = 1;
