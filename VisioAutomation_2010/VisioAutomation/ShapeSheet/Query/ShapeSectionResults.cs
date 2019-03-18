@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeSectionsResults<T> : IEnumerable<ShapeSectionResult<T>>
+    public class ShapeSectionsResults<T> : IEnumerable<ShapeSectionRows<T>>
     {
         // for a given shape, contains rows for every section that was queried
         //
@@ -16,15 +16,15 @@ namespace VisioAutomation.ShapeSheet.Query
         // }
 
         public readonly int ShapeID;
-        private List<ShapeSectionResult<T>> _items;
+        private List<ShapeSectionRows<T>> _items;
 
-        internal ShapeSectionsResults(int shape_id, List<ShapeSectionResult<T>> sections) 
+        internal ShapeSectionsResults(int shape_id, List<ShapeSectionRows<T>> sections) 
         {
             this.ShapeID = shape_id;
             this._items = sections;
         }
 
-        public IEnumerator<ShapeSectionResult<T>> GetEnumerator()
+        public IEnumerator<ShapeSectionRows<T>> GetEnumerator()
         {
             return this._items.GetEnumerator();
         }
@@ -42,7 +42,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public ShapeSectionResult<T> this[int index]
+        public ShapeSectionRows<T> this[int index]
         {
             get
             {

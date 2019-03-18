@@ -163,13 +163,13 @@ namespace VisioAutomation.ShapeSheet.Query
 
             int results_cell_count = shapecacheitems.CountCells();
 
-            List<ShapeSectionResult<T>> sections = null;
+            List<ShapeSectionRows<T>> sections = null;
             if (shapecacheitems != null)
             {
-                sections = new List<ShapeSectionResult<T>>(shapecacheitems.Count);
+                sections = new List<ShapeSectionRows<T>>(shapecacheitems.Count);
                 foreach (var shapecacheitem in shapecacheitems)
                 {
-                    var section_output = new ShapeSectionResult<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionColumns.SectionIndex);
+                    var section_output = new ShapeSectionRows<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionColumns.SectionIndex);
 
                     int num_cols = shapecacheitem.SectionColumns.Count;
                     foreach (int row_index in shapecacheitem.RowIndexes)
