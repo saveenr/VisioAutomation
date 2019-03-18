@@ -51,12 +51,15 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             this.EnforceType(CellGroupBuilderType.SingleRow);
-            var data_for_shapes = this.GetCells(query_cells_singlerow, page, shapeids, type);
-            var list = new List<TGroup>(shapeids.Count);
+            var cellgroups = new List<TGroup>(shapeids.Count);
             var cols = this.query_cells_singlerow.Columns;
-            var objects = data_for_shapes.Select(row => this.ToCellGroup(row,cols));
-            list.AddRange(objects);
-            return list;
+            var rows_for_shapes = this.GetCells(query_cells_singlerow, page, shapeids, type);
+            foreach (var row in rows_for_shapes)
+            {
+                var cellgroup = this.ToCellGroup(row, cols);
+                cellgroups.Add(cellgroup);
+            }
+            return cellgroups;
         }
 
         private void EnforceType(CellGroupBuilderType t)
@@ -72,7 +75,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.EnforceType(CellGroupBuilderType.SingleRow);
             var cellqueryresult = this.GetCells(query_cells_singlerow, shape, type);
             var cols = this.query_cells_singlerow.Columns;
-            var cells = this.ToCellGroup(cellqueryresult[0],cols);
+            var first_row = cellqueryresult[0];
+            var cells = this.ToCellGroup(first_row, cols);
             return cells;
         }
         
@@ -81,12 +85,12 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.EnforceType(CellGroupBuilderType.MultiRow);
             var cols = this.query_sections_multirow.SectionQueries[0].Columns;
 
-            var data_for_shapes = GetCells(query_sections_multirow,page, shapeids, type);
+            var cellqueryresult = GetCells(query_sections_multirow,page, shapeids, type);
             var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
-            foreach (var data_for_shape in data_for_shapes)
+            foreach (var data_for_shape in cellqueryresult)
             {
-                var first_section = data_for_shape[0];
-                var cellgroups = this.__ToCellGroups(first_section,cols);
+                var first_section_results = data_for_shape[0];
+                var cellgroups = this._section_result_to_cell_groups(first_section_results,cols);
                 list_cellgroups.Add(cellgroups);
             }
             return list_cellgroups;
@@ -96,13 +100,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             this.EnforceType(CellGroupBuilderType.MultiRow);
             var cols = this.query_sections_multirow.SectionQueries[0].Columns;
-            var data_for_shape = GetCells(query_sections_multirow, shape, type);
-            var first_section = data_for_shape[0];
-            var cellgroups = this.__ToCellGroups(first_section,cols);
+            var cellqueryresult = GetCells(query_sections_multirow, shape, type);
+            var first_section = cellqueryresult[0];
+            var cellgroups = this._section_result_to_cell_groups(first_section,cols);
             return cellgroups;
         }
 
-        private List<TGroup> __ToCellGroups(VASS.Query.ShapeSectionResult<string> section_rows, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+        private List<TGroup> _section_result_to_cell_groups(VASS.Query.ShapeSectionResult<string> section_rows, VisioAutomation.ShapeSheet.Query.ColumnList cols)
         {
             var cellgroups = new List<TGroup>(section_rows.Count);
             foreach (var section_row in section_rows)
@@ -152,7 +156,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        private VASS.Query.RowList<string> GetCells(VASS.Query.CellQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
+        private VASS.Query.CellQueryResults<string> GetCells(VASS.Query.CellQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
             var surface = new SurfaceTarget(page);
             if (type == CellValueType.Formula)

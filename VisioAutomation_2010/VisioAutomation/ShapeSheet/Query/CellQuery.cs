@@ -28,7 +28,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
             var reader = new Internal.ArraySegmentReader<string>(values);
-            var row = this._create_row_for_shape(surface.ID16, reader);
+            var row = this._shapedata_to_row(surface.ID16, reader);
 
             var cellqueryresults = new CellQueryResults<string>(1);
             cellqueryresults.Add(row);
@@ -50,7 +50,7 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var reader = new Internal.ArraySegmentReader<TResult>(values);
-            var row = this._create_row_for_shape(surface.ID16, reader);
+            var row = this._shapedata_to_row(surface.ID16, reader);
 
 
             var cellqueryresults = new CellQueryResults<TResult>(1);
@@ -101,13 +101,16 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private RowList<T> _shapesid_to_rows<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
         {
-            var outputs = shapeids.Select(shapeid => this._create_row_for_shape((short)shapeid, segReader));
-            var output_list = new RowList<T>(shapeids.Count);
-            output_list.AddRange(outputs);
-            return output_list;
+            var rows = new RowList<T>(shapeids.Count);
+            foreach (int shapeid in shapeids)
+            {
+                var row = this._shapedata_to_row((short)shapeid, segReader);
+                rows.Add(row);
+            }
+            return rows;
         }
 
-        private Row<T> _create_row_for_shape<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
+        private Row<T> _shapedata_to_row<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
