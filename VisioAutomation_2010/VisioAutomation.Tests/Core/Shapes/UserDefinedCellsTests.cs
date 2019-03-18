@@ -95,10 +95,10 @@ namespace VisioAutomation_Tests.Core.Shapes
             VisioAutomation.Shapes.UserDefinedCellHelper.Set(shape0, "foo", "bar", null);
 
             // build query
-            var query = new VA.ShapeSheet.Query.SingleSectionQuery();
-            var sec = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
-            var Value = sec.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
-            var Prompt = sec.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
+            var query = new VA.ShapeSheet.Query.MultiSectionQuery();
+            var sec_cols = query.SectionColumnsList.Add(IVisio.VisSectionIndices.visSectionUser);
+            var Value = sec_cols.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
+            var Prompt = sec_cols.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
 
             // run query on the two shapes
             var formulas = query.GetFormulas(page1, shapes.Select(s => s.ID).ToList());

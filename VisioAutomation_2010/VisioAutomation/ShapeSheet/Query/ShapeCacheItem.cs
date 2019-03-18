@@ -5,14 +5,14 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     internal class ShapeCacheItem
     {
-        public SectionQuery SectionQuery { get; private set; }
+        public SectionColumns SectionColumns { get; private set; }
 
         public int RowCount { get; }
 
         public short ShapeId { get; }
-        internal ShapeCacheItem(SectionQuery sectionquery, int numrows, short shapeid)
+        internal ShapeCacheItem(SectionColumns sectionquery, int numrows, short shapeid)
         {
-            this.SectionQuery = sectionquery;
+            this.SectionColumns = sectionquery;
             this.RowCount = numrows;
             this.ShapeId = shapeid;
         }

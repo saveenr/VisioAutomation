@@ -143,10 +143,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             VA.Shapes.CustomPropertyHelper.Set(s4, "S3P2", "\"5\"", cp_type);
             VA.Shapes.CustomPropertyHelper.Set(s4, "S3P3", "\"6\"", cp_type);
 
-            var query = new VA.ShapeSheet.Query.SingleSectionQuery();
+            var query = new VA.ShapeSheet.Query.MultiSectionQuery();
 
-            var prop_sec = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.Columns.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
+            var section_cols = query.SectionColumnsList.Add(IVisio.VisSectionIndices.visSectionProp);
+            var value_col = section_cols.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
@@ -426,13 +426,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that duplicate sections are caught
 
-            var q2 = new VA.ShapeSheet.Query.SingleSectionQuery();
-            q2.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
+            var q2 = new VA.ShapeSheet.Query.MultiSectionQuery();
+            q2.SectionColumnsList.Add(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
             try
             {
-                q2.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
+                q2.SectionColumnsList.Add(IVisio.VisSectionIndices.visSectionObject);
             }
             catch (System.ArgumentException)
             {
@@ -442,13 +442,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.IsTrue(caught_exc2);
 
             // Ensure that Duplicates in Section Queries Are caught - 
-            var q3 = new VA.ShapeSheet.Query.SingleSectionQuery();
-            var sec = q3.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
-            sec.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+            var q3 = new VA.ShapeSheet.Query.MultiSectionQuery();
+            var sec_cols = q3.SectionColumnsList.Add(IVisio.VisSectionIndices.visSectionObject);
+            sec_cols.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             bool caught_exc3 = false;
             try
             {
-                sec.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+                sec_cols.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             }
             catch (System.ArgumentException)
             {

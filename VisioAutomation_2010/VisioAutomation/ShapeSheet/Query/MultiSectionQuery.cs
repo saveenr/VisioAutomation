@@ -5,15 +5,15 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SingleSectionQuery
+    public class MultiSectionQuery
     {
-        public SectionQueryList SectionQueries { get; }
+        public SectionColumnsList SectionColumnsList { get; }
 
         private MultiSectionQueryCache _cache;
 
-        public SingleSectionQuery()
+        public MultiSectionQuery()
         {
-            this.SectionQueries = new SectionQueryList(0);
+            this.SectionColumnsList = new SectionColumnsList(0);
         }
 
         private static void RestrictToShapesOnly(SurfaceTarget surface)
@@ -105,7 +105,7 @@ namespace VisioAutomation.ShapeSheet.Query
         private void CacheSectionInfoForAllShapes(SurfaceTarget surface, IList<int> shape_ids)
         {
             // Prepare a cache object
-            if (this.SectionQueries.Count < 1)
+            if (this.SectionColumnsList.Count < 1)
             {
                 this._cache = new MultiSectionQueryCache(0);
             }
@@ -120,8 +120,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
                 // For that shape, fill in the section cache for each section that
                 // needs to be queried
-                var shapecacheitems = new ShapeCacheItemList(this.SectionQueries.Count);
-                foreach (var section_query in this.SectionQueries)
+                var shapecacheitems = new ShapeCacheItemList(this.SectionColumnsList.Count);
+                foreach (var section_query in this.SectionColumnsList)
                 {
                     var shapecacheitem = section_query.GetShapeCacheItem(shape);
                     shapecacheitems.Add(shapecacheitem);
@@ -172,9 +172,9 @@ namespace VisioAutomation.ShapeSheet.Query
                 sections = new List<ShapeSectionResult<T>>(shapecacheitems.Count);
                 foreach (var shapecacheitem in shapecacheitems)
                 {
-                    var section_output = new ShapeSectionResult<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionQuery.SectionIndex);
+                    var section_output = new ShapeSectionResult<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionColumns.SectionIndex);
 
-                    int num_cols = shapecacheitem.SectionQuery.Columns.Count;
+                    int num_cols = shapecacheitem.SectionColumns.Count;
                     foreach (int row_index in shapecacheitem.RowIndexes)
                     {
                         var cells = segReader.GetNextSegment(num_cols);
@@ -235,8 +235,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 foreach (int row_index in shapecacheitem.RowIndexes)
                 {
-                    var cols = shapecacheitem.SectionQuery.Columns;
-                    var section_index = shapecacheitem.SectionQuery.SectionIndex;
+                    var cols = shapecacheitem.SectionColumns;
+                    var section_index = shapecacheitem.SectionColumns.SectionIndex;
                     foreach (var col in cols)
                     {
                         var sidsrc = new VASS.SidSrc(

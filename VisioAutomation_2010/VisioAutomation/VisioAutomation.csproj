@@ -150,9 +150,9 @@
     <Compile Include="ShapeSheet\Query\MultiSectionQueryResults.cs" />
     <Compile Include="ShapeSheet\Query\Row.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
-    <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
+    <Compile Include="ShapeSheet\Query\SectionColumns.cs" />
     <Compile Include="ShapeSheet\Query\ShapeSectionResult.cs" />
-    <Compile Include="ShapeSheet\Query\SectionQueryList.cs" />
+    <Compile Include="ShapeSheet\Query\SectionColumnsList.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />

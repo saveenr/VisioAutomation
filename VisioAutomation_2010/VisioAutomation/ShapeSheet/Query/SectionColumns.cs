@@ -2,15 +2,13 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery
+    public class SectionColumns : ColumnList
     {
-        public ColumnList Columns { get; }
         public IVisio.VisSectionIndices SectionIndex { get; private set; }
 
-        internal SectionQuery(IVisio.VisSectionIndices section)
+        internal SectionColumns(IVisio.VisSectionIndices section)
         {
             this.SectionIndex = section;
-            this.Columns = new ColumnList();
         }
 
 
