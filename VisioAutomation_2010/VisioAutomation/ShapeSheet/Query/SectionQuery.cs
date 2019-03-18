@@ -5,11 +5,11 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class MultiSectionQuery : SectionColumnsList
+    public class SectionQuery : SectionColumnsList
     {
-        private MultiSectionQueryCache _cache;
+        private SectionQueryCache _cache;
 
-        public MultiSectionQuery() : base(0)
+        public SectionQuery() : base()
         {
         }
 
@@ -60,20 +60,20 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public MultiSectionQueryResults<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        public SectionQueryResults<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
 
-        public MultiSectionQueryResults<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
+        public SectionQueryResults<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new SurfaceTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
         }
 
-        public MultiSectionQueryResults<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
+        public SectionQueryResults<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
             CacheSectionInfoForAllShapes(surface, shapeids);
@@ -86,7 +86,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var list_sectionoutput = this._create_outputs_for_shapes(shapeids, _cache, reader);
             return list_sectionoutput;
         }
-        public MultiSectionQueryResults<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
+        public SectionQueryResults<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
             CacheSectionInfoForAllShapes(surface, shapeids);
@@ -104,9 +104,9 @@ namespace VisioAutomation.ShapeSheet.Query
             // Prepare a cache object
             if (this.Count < 1)
             {
-                this._cache = new MultiSectionQueryCache(0);
+                this._cache = new SectionQueryCache(0);
             }
-            this._cache = new MultiSectionQueryCache();
+            this._cache = new SectionQueryCache();
 
             // For each shape, for each section find the number of rows
             foreach (var shape_id in shape_ids)
@@ -137,9 +137,9 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private MultiSectionQueryResults<T> _create_outputs_for_shapes<T>(IList<int> shapeids, MultiSectionQueryCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
+        private SectionQueryResults<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionQueryCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
         {
-            var output_for_all_shapes = new MultiSectionQueryResults<T>();
+            var output_for_all_shapes = new SectionQueryResults<T>();
 
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class MultiSectionQueryResults<T> : IEnumerable<ShapeSectionsResults<T>>
+    public class SectionQueryResults<T> : IEnumerable<ShapeSectionsResults<T>>
     {
         // this class contains all the outputs for every shape that was queried
         // think of it this collection as having this shape
@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         List<ShapeSectionsResults<T>> _list;
 
-        internal MultiSectionQueryResults()
+        internal SectionQueryResults()
         {
             this._list = new List<ShapeSectionsResults<T>>();
         }

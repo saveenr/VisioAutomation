@@ -102,7 +102,7 @@
     <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
     <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
     <Compile Include="ShapeSheet\CellValueType.cs" />
-    <Compile Include="ShapeSheet\Query\MultiSectionQuery.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryResults.cs" />
     <Compile Include="ShapeSheet\Query\ShapeSectionResults.cs" />
@@ -119,7 +119,7 @@
     <Compile Include="Shapes\CustomPropertyType.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegmentReader.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegment.cs" />
-    <Compile Include="ShapeSheet\Query\MultiSectionQueryCache.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQueryCache.cs" />
     <Compile Include="ShapeSheet\Query\RowList.cs" />
     <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
@@ -147,7 +147,7 @@
     <Compile Include="Shapes\ShapeGeometryRow.cs" />
     <Compile Include="Shapes\ShapeGeometryHelper.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
-    <Compile Include="ShapeSheet\Query\MultiSectionQueryResults.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQueryResults.cs" />
     <Compile Include="ShapeSheet\Query\Row.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\SectionColumns.cs" />
