@@ -120,7 +120,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 var shapecacheitems = new ShapeCacheItemList(this.Count);
                 foreach (var sec_cols in this)
                 {
-                    var shapecacheitem = sec_cols.GetShapeCacheItem(shape);
+                    var shapecacheitem = sec_cols._get_shape_cache_item(shape);
                     shapecacheitems.Add(shapecacheitem);
                 }
 

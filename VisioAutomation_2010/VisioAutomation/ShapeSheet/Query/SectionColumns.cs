@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        internal short GetNumRowsForShape(IVisio.Shape shape)
+        internal short _count_rows_in_visio_shape(IVisio.Shape shape)
         {
             // For visSectionObject we know the result is always going to be 1
             // so avoid making the call tp RowCount[]
@@ -25,9 +25,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return shape.RowCount[(short)this.SectionIndex];
         }
 
-        internal ShapeCacheItem GetShapeCacheItem(IVisio.Shape shape)
+        internal ShapeCacheItem _get_shape_cache_item(IVisio.Shape shape)
         {
-            int rows = this.GetNumRowsForShape(shape);
+            int rows = this._count_rows_in_visio_shape(shape);
             var shapecacheitem = new ShapeCacheItem(this, rows, shape.ID16);
             return shapecacheitem;
         }
