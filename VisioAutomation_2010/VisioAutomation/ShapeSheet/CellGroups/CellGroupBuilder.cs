@@ -20,7 +20,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected CellGroupBuilder(CellGroupBuilderType type)
         {
             var temp_cells = new TGroup();
-            Query.ColumnList cols;
+            Query.Columns cols;
 
             this.Type = type;
             if (type == CellGroupBuilderType.SingleRow)
@@ -45,7 +45,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         }
 
-        public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols);
+        public abstract TGroup ToCellGroup(VisioAutomation.ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols);
 
         public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
@@ -105,7 +105,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> _section_result_to_cell_groups(VASS.Query.ShapeSectionResult<string> section_rows, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+        private List<TGroup> _section_result_to_cell_groups(VASS.Query.ShapeSectionResult<string> section_rows, VisioAutomation.ShapeSheet.Query.Columns cols)
         {
             var cellgroups = new List<TGroup>(section_rows.Count);
             foreach (var section_row in section_rows)

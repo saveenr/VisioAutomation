@@ -7,11 +7,11 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellQuery
     {
-        public ColumnList Columns { get; }
+        public Columns Columns { get; }
 
         public CellQuery()
         {
-            this.Columns = new ColumnList(0);
+            this.Columns = new Columns(0);
         }
 
         public CellQueryResults<string> GetFormulas(IVisio.Shape shape)

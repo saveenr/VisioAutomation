@@ -124,7 +124,7 @@
     <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\SrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
-    <Compile Include="ShapeSheet\Query\ColumnList.cs" />
+    <Compile Include="ShapeSheet\Query\Columns.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
     <Compile Include="ShapeSheet\Query\Column.cs" />
     <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />

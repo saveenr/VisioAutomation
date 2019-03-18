@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionColumns : ColumnList
+    public class SectionColumns : Columns
     {
         public IVisio.VisSectionIndices SectionIndex { get; private set; }
 
