@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -7,16 +8,19 @@ namespace VisioAutomation.ShapeSheet.Query
     {
 
         public short ShapeId { get; }
+        public readonly IVisio.VisSectionIndices SectionIndex;
+
         public SectionColumns SectionColumns { get; private set; }
 
         // The RowCount is the data that is being cached
         public int RowCount { get; }
 
-        internal ShapeCacheItem(SectionColumns sec_cols, int numrows, short shapeid)
+        internal ShapeCacheItem(short shapeid, IVisio.VisSectionIndices sec_index, SectionColumns sec_cols, int numrows)
         {
+            this.ShapeId = shapeid;
+            this.SectionIndex = sec_index;
             this.SectionColumns = sec_cols;
             this.RowCount = numrows;
-            this.ShapeId = shapeid;
         }
 
         public IEnumerable<int> RowIndexes

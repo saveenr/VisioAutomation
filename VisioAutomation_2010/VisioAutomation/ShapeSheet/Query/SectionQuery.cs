@@ -240,7 +240,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 foreach (int row_index in shapecacheitem.RowIndexes)
                 {
                     var cols = shapecacheitem.SectionColumns;
-                    var section_index = shapecacheitem.SectionColumns.SectionIndex;
+                    var section_index = shapecacheitem.SectionIndex;
                     foreach (var col in cols)
                     {
                         var sidsrc = new VASS.SidSrc(
@@ -271,7 +271,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 row_count = shape.RowCount[(short)sec_index];
             }
 
-            var shapecacheitem = new ShapeCacheItem(sec_cols, row_count, shape.ID16);
+            var shapecacheitem = new ShapeCacheItem(shape.ID16, sec_index, sec_cols, row_count);
             return shapecacheitem;
         }
 
