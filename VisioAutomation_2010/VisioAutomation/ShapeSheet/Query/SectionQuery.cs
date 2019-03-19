@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var cache = this.CacheSectionInfoForAllShapes(surface, new[] { surface.Shape.ID });
+            var cache = this._create_sectionquerycache(surface, new[] { surface.Shape.ID });
 
             var srcstream = this._build_src_stream(cache);
             var values = surface.GetFormulasU(srcstream);
@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var cache = this.CacheSectionInfoForAllShapes(surface, new[] { surface.Shape.ID });
+            var cache = this._create_sectionquerycache(surface, new[] { surface.Shape.ID });
 
             var srcstream = this._build_src_stream(cache);
             const object[] unitcodes = null;
@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public SectionQueryResults<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
-            var cache = CacheSectionInfoForAllShapes(surface, shapeids);
+            var cache = _create_sectionquerycache(surface, shapeids);
 
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeids, cache);
@@ -92,7 +92,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public SectionQueryResults<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
             // Store information about the sections we need to query
-            var cache = CacheSectionInfoForAllShapes(surface, shapeids);
+            var cache = _create_sectionquerycache(surface, shapeids);
 
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeids, cache);
@@ -102,7 +102,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return list_sectionoutput;
         }
 
-        private SectionQueryCache CacheSectionInfoForAllShapes(SurfaceTarget surface, IList<int> shape_ids)
+        private SectionQueryCache _create_sectionquerycache(SurfaceTarget surface, IList<int> shape_ids)
         {
             // Prepare a cache object
             if (this.Count < 1)
@@ -124,7 +124,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 var shapecache = new ShapeCache(this.Count);
                 foreach (var sec_cols in this)
                 {
-                    var shapecacheitem = SectionQuery._cache_shape_item(shape, sec_cols.SectionIndex, sec_cols);
+                    var shapecacheitem = SectionQuery._create_shapesectioncacheitem(shape, sec_cols.SectionIndex, sec_cols);
                     shapecache.Add(shapecacheitem);
                 }
 
@@ -252,7 +252,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public static ShapeCacheItem _cache_shape_item(IVisio.Shape shape, IVisio.VisSectionIndices sec_index, SectionQueryColumns sec_cols)
+        public static ShapeCacheItem _create_shapesectioncacheitem(IVisio.Shape shape, IVisio.VisSectionIndices sec_index, SectionQueryColumns sec_cols)
         {
             // first count the rows in the section
 
