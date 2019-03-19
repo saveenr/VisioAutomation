@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Query
         // }
 
         public readonly int ShapeID;
-        private List<SectionQueryShapeRows<T>> _items;
+        private readonly List<SectionQueryShapeRows<T>> _items;
 
         internal SectionQueryShapeResults(int shape_id, List<SectionQueryShapeRows<T>> sections) 
         {

@@ -14,7 +14,7 @@ namespace VisioAutomation.ShapeSheet.Query
         //     [n] - { shapeidn, {sections found for shapeidn} }
         // }
 
-        List<SectionQueryShapeResults<T>> _list;
+        private readonly List<SectionQueryShapeResults<T>> _list;
 
         internal SectionQueryResults()
         {

@@ -8,14 +8,11 @@ namespace VisioAutomation.ShapeSheet.Query
         protected Dictionary<string, Column> map_name_to_item;
         protected Dictionary<ShapeSheet.Src, Column> dic_src_to_col;
 
-        internal Columns() : this(0)
+        internal Columns() 
         {
-        }
+            this._items = new List<Column>();
+            this.map_name_to_item = new Dictionary<string, Column>();
 
-        internal Columns(int capacity)
-        {
-            this._items = new List<Column>(capacity);
-            this.map_name_to_item = new Dictionary<string, Column>(capacity);
         }
 
         public IEnumerator<Column> GetEnumerator()

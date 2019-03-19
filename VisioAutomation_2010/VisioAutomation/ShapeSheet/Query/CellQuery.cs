@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQuery()
         {
-            this.Columns = new Columns(0);
+            this.Columns = new Columns();
         }
 
         public CellQueryResults<string> GetFormulas(IVisio.Shape shape)
