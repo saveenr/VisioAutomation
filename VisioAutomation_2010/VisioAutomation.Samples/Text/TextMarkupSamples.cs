@@ -38,7 +38,8 @@ namespace VisioAutomationSamples
             e1.CharacterFormatting.Font = "20pt";
             e1.AddText("Hello ");
 
-            var e2 = e1.AddElementEx("World", null, null, null, null, VAM.Text.CharStyle.Italic); 
+            var f2 = new TextFmt { CharStyle = VAM.Text.CharStyle.Italic };
+            var e2 = e1.AddElementEx("World", f2 );
             e1.SetText(s1);
         }
 
@@ -52,9 +53,14 @@ namespace VisioAutomationSamples
             var e1 = new VAM.Text.Element();
             e1.AddText("When, from behind that craggy steep\n");
             e1.AddText("till then the horizon’s bound\n");
-            var e2 = e1.AddElementEx("a huge peak, black and huge\n", null, null, null, VSM.AlignmentHorizontal.Left, VAM.Text.CharStyle.Italic);
-            var e3 = e1.AddElementEx("As if with voluntary power instinct\n", segoe_ui.ID, null, null, VSM.AlignmentHorizontal.Center, VAM.Text.CharStyle.Bold);
-            var e4 = e1.AddElementEx("Upreared its head.\n", null, null, null, VSM.AlignmentHorizontal.Right, VAM.Text.CharStyle.Italic);
+
+            var f2 = new TextFmt { HAlign = VSM.AlignmentHorizontal.Left, CharStyle = VAM.Text.CharStyle.Italic };
+            var f3 = new TextFmt { FontID = segoe_ui.ID, HAlign = VSM.AlignmentHorizontal.Center, CharStyle = VAM.Text.CharStyle.Bold };
+            var f4 = new TextFmt { HAlign = VSM.AlignmentHorizontal.Right, CharStyle = VAM.Text.CharStyle.Italic };
+
+            var e2 = e1.AddElementEx("a huge peak, black and huge\n", f2);
+            var e3 = e1.AddElementEx("As if with voluntary power instinct\n", f3);
+            var e4 = e1.AddElementEx("Upreared its head.\n", f4 );
             e1.AddText("-William Wordsworth, the Prelude");
             e1.SetText(s1);
         }
