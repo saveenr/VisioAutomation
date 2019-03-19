@@ -1,13 +1,16 @@
 using VA=VisioAutomation;
+using VAM = VisioAutomation.Models;
 
 namespace VisioAutomationSamples
 {
     public static class TextExtensions
     {
-        public static VisioAutomation.Models.Text.Element AddElementEx(this VisioAutomation.Models.Text.Element p, string text,
-                                                              int? font, double? size, int? color,
+        public static VAM.Text.Element AddElementEx(
+            this VAM.Text.Element p, 
+            string text,
+            int? font, double? size, int? color,
             VisioScripting.Models.AlignmentHorizontal? halign,
-                                                              VA.Models.Text.CharStyle? cs)
+            VAM.Text.CharStyle? cs)
         {
             var el = p.AddElement(text);
 
@@ -23,7 +26,7 @@ namespace VisioAutomationSamples
 
             if (color.HasValue)
             {
-                var c = new VisioAutomation.Models.Color.ColorRgb(color.Value);
+                var c = new VAM.Color.ColorRgb(color.Value);
                 el.CharacterFormatting.Color = c.ToFormula();
             }
 
