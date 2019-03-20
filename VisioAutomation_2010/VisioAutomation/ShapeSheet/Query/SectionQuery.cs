@@ -39,6 +39,23 @@ namespace VisioAutomation.ShapeSheet.Query
             list.AddRange(shapes.Select(s => new ShapeIdPair(s)));
             return list;
         }
+
+        public IEnumerable<int> IDs
+        {
+            get
+            {
+                return this.Select(p => p.ShapeID);
+            }
+        }
+
+        public IEnumerable<IVisio.Shape> Shapes
+        {
+            get
+            {
+                return this.Select(p => p.Shape);
+            }
+        }
+
     }
 }
 
