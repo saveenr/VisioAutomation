@@ -295,7 +295,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
             var shapes = new[] {s1, s2, s3, s4};
-            var pairs = VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Build(shapes);
+            var shapeidpairs = VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Build(shapes);
 
 
             // First verify that none of the shapes have the controls section locally or otherwise
@@ -313,7 +313,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
-            var r2 = VA.Shapes.ControlCells.GetCells(page1, pairs, CellValueType.Formula);
+            var r2 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, CellValueType.Formula);
             Assert.AreEqual(shapes.Length,r2.Count);
             for (int i = 0; i < shapes.Length;i++)
             {
@@ -355,7 +355,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
-            var r3 = VA.Shapes.ControlCells.GetCells(page1, pairs, CellValueType.Formula);
+            var r3 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, CellValueType.Formula);
             Assert.AreEqual(shapes.Length, r3.Count);
             for (int i = 0; i < shapes.Length; i++)
             {

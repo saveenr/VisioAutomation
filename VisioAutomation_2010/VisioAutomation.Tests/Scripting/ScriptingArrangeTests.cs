@@ -37,8 +37,8 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Distribute.DistributeShapesHorizontal(targets, VisioScripting.Models.AlignmentHorizontal.Center);
 
-            var pairs = VA.ShapeSheet.Query.ShapeIdPairs.Build( s1, s2, s3 ).IDs.ToList();
-            VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),pairs, VA.ShapeSheet.CellValueType.Formula);
+            var shapeids = VA.ShapeSheet.Query.ShapeIdPairs.Build( s1, s2, s3 ).IDs.ToList();
+            VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),shapeids, VA.ShapeSheet.CellValueType.Formula);
 
             client.Document.CloseActiveDocument(true);
         }

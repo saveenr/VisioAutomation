@@ -92,7 +92,8 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var cache = this._create_sectionquerycache(ShapeIdPairs.Build( surface.Shape ) );
+            var shapeidpairs = ShapeIdPairs.Build(surface.Shape);
+            var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);
             var values = surface.GetFormulasU(srcstream);
@@ -114,7 +115,8 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var cache = this._create_sectionquerycache(ShapeIdPairs.Build( surface.Shape ));
+            var shapeidpairs = ShapeIdPairs.Build(surface.Shape);
+            var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);
             const object[] unitcodes = null;
