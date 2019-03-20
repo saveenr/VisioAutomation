@@ -258,7 +258,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             int row_count = 0;
             // For visSectionObject we know the result is always going to be 1
-            // so avoid making the call tp RowCount[]
+            // so avoid making the call to RowCount[]
             if (sec_index == IVisio.VisSectionIndices.visSectionObject)
             {
                 row_count = 1;
