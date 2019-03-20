@@ -40,6 +40,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
+        public static ShapeIdPairs Build(params IVisio.Shape[] shapes)
+        {
+            var list = new ShapeIdPairs(shapes.Length);
+            list.AddRange(shapes.Select(s => new ShapeIdPair(s)));
+            return list;
+        }
+
         public IEnumerable<int> IDs
         {
             get
@@ -85,7 +92,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var cache = this._create_sectionquerycache(surface, ShapeIdPairs.Build( new[] { surface.Shape } ) );
+            var cache = this._create_sectionquerycache(ShapeIdPairs.Build( surface.Shape ) );
 
             var srcstream = this._build_src_stream(cache);
             var values = surface.GetFormulasU(srcstream);
@@ -107,7 +114,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var cache = this._create_sectionquerycache(surface, ShapeIdPairs.Build(new[] { surface.Shape }));
+            var cache = this._create_sectionquerycache(ShapeIdPairs.Build( surface.Shape ));
 
             var srcstream = this._build_src_stream(cache);
             const object[] unitcodes = null;
@@ -135,7 +142,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public SectionQueryResults<TResult> GetResults<TResult>(SurfaceTarget surface, ShapeIdPairs shapeids)
         {
             // Store information about the sections we need to query
-            var cache = _create_sectionquerycache(surface, shapeids);
+            var cache = _create_sectionquerycache(shapeids);
 
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeids, cache);
@@ -148,7 +155,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public SectionQueryResults<string> GetFormulas(SurfaceTarget surface, ShapeIdPairs shapeids)
         {
             // Store information about the sections we need to query
-            var cache = _create_sectionquerycache(surface, shapeids);
+            var cache = _create_sectionquerycache(shapeids);
 
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeids, cache);
@@ -158,7 +165,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private SectionQueryCache _create_sectionquerycache(SurfaceTarget surface, ShapeIdPairs pairs)
+        private SectionQueryCache _create_sectionquerycache(ShapeIdPairs pairs)
         {
             // Prepare a cache object
             if (this.Count < 1)
