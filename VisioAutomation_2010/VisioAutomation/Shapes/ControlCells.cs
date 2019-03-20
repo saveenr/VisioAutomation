@@ -31,10 +31,10 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<List<ControlCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs pairs, VASS.CellValueType type)
+        public static List<List<ControlCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
             var reader = ControlCells_lazy_builder.Value;
-            return reader.GetCellsMultiRow(page, pairs, type);
+            return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
         public static List<ControlCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
