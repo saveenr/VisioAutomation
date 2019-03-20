@@ -37,8 +37,8 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Distribute.DistributeShapesHorizontal(targets, VisioScripting.Models.AlignmentHorizontal.Center);
 
-            var shapeids = new[] {s1.ID, s2.ID, s3.ID };
-            VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),shapeids, VA.ShapeSheet.CellValueType.Formula);
+            var pairs = VA.ShapeSheet.Query.ShapeIdPairs.Build(new[] { s1, s2, s3 }).IDs.ToList();
+            VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),pairs, VA.ShapeSheet.CellValueType.Formula);
 
             client.Document.CloseActiveDocument(true);
         }
@@ -73,7 +73,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Distribute.DistributeSelectionOnAxis(targets, VisioScripting.Models.Axis.XAxis , 0.25);
             client.Distribute.DistributeSelectionOnAxis(targets, VisioScripting.Models.Axis.YAxis, 1.0);
 
-            var shapeids = new[] { s1.ID, s2.ID, s3.ID };
+            var shapeids = VA.ShapeSheet.Query.ShapeIdPairs.Build( new [] { s1, s2, s3} ).IDs.ToList();
             var out_xfrms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(), shapeids, VA.ShapeSheet.CellValueType.Result);
             var out_positions = out_xfrms.Select(xfrm => TestExtensions.ToPoint(xfrm.PinX.Value, xfrm.PinY.Value)).ToArray();
 
@@ -113,7 +113,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Arrange.NudgeSelection(0.50, -0.25);
 
-            var shapeids = new[] { s1.ID, s2.ID, s3.ID };
+            var shapeids = VA.ShapeSheet.Query.ShapeIdPairs.Build( new[] { s1 , s2 , s3 } ).IDs.ToList();
             var xforms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(), shapeids, VA.ShapeSheet.CellValueType.Result);
 
             AssertUtil.AreEqual( (1.75, 1), xforms[0].GetPinPosResult(), 0.00001);

@@ -148,7 +148,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionProp);
             var value_col = sec_cols.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
 
-            var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
+            var shapeids = VA.ShapeSheet.Query.ShapeIdPairs.Build(new [] { s1, s2, s3, s4} );
 
             var data = sec_query.GetFormulas(page1, shapeids);
             var data2 = sec_query.GetResults<string>(page1, shapeids);
@@ -295,7 +295,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
             var shapes = new[] {s1, s2, s3, s4};
-            var shapeids = shapes.Select(s => s.ID).ToList();
+            var pairs = VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Build(shapes);
+
 
             // First verify that none of the shapes have the controls section locally or otherwise
             foreach (var s in shapes)
@@ -312,7 +313,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
-            var r2 = VA.Shapes.ControlCells.GetCells(page1, shapeids, CellValueType.Formula);
+            var r2 = VA.Shapes.ControlCells.GetCells(page1, pairs, CellValueType.Formula);
             Assert.AreEqual(shapes.Length,r2.Count);
             for (int i = 0; i < shapes.Length;i++)
             {
@@ -354,7 +355,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
-            var r3 = VA.Shapes.ControlCells.GetCells(page1, shapeids, CellValueType.Formula);
+            var r3 = VA.Shapes.ControlCells.GetCells(page1, pairs, CellValueType.Formula);
             Assert.AreEqual(shapes.Length, r3.Count);
             for (int i = 0; i < shapes.Length; i++)
             {

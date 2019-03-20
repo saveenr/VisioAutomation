@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
@@ -52,13 +53,13 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<int, LockCells>();
 
             var page = cmdtarget.ActivePage;
-            var target_shapeids = targets.ToShapeIDs();
+            var target_shapeids = VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Build(targets.Shapes).IDs.ToList();
 
-            var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids.ShapeIDs, cvt);
+            var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids, cvt);
 
-            for (int i = 0; i < target_shapeids.ShapeIDs.Count; i++)
+            for (int i = 0; i < target_shapeids.Count; i++)
             {
-                var shapeid = target_shapeids.ShapeIDs[i];
+                var shapeid = target_shapeids[i];
                 var cur_cells = cells[i];
                 dic[shapeid] = cur_cells;
             }

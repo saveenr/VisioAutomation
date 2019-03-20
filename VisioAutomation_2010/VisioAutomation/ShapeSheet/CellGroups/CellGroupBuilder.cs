@@ -79,13 +79,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cells;
         }
         
-        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, Query.ShapeIdPairs pairs, CellValueType type)
         {
             this.EnforceType(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
 
-            var cellqueryresult = GetCells(query_sections_multirow,page, shapeids, type);
-            var list_cellgroups = new List<List<TGroup>>(shapeids.Count);
+            var cellqueryresult = GetCells(query_sections_multirow,page, pairs, type);
+            var list_cellgroups = new List<List<TGroup>>(pairs.Count);
             foreach (var data_for_shape in cellqueryresult)
             {
                 var first_section_results = data_for_shape[0];
@@ -129,16 +129,16 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        private Query.SectionQueryResults<string> GetCells(Query.SectionQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
+        private Query.SectionQueryResults<string> GetCells(Query.SectionQuery query, IVisio.Page page, Query.ShapeIdPairs pairs, CellValueType type)
         {
             var surface = new SurfaceTarget(page);
             if (type == CellValueType.Formula)
             {
-                return query.GetFormulas(surface, shapeids);
+                return query.GetFormulas(surface, pairs);
             }
             else
             {
-                return query.GetResults<string>(surface, shapeids);
+                return query.GetResults<string>(surface, pairs);
             }
         }
 

@@ -33,10 +33,10 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
+        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs pairs, VASS.CellValueType type)
         {
             var reader = HyperLinkCells_lazy_builder.Value;
-            return reader.GetCellsMultiRow(page, shapeids, type);
+            return reader.GetCellsMultiRow(page, pairs, type);
         }
 
         public static List<HyperlinkCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)

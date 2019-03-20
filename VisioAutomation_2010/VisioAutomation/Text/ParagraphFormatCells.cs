@@ -46,10 +46,10 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, ShapeSheet.Query.ShapeIdPairs pairs, CellValueType type)
         {
             var reader = ParagraphFormatCells_lazy_builder.Value;
-            return reader.GetCellsMultiRow(page, shapeids, type);
+            return reader.GetCellsMultiRow(page, pairs, type);
         }
 
         public static List<ParagraphFormatCells> GetCells(IVisio.Shape shape, CellValueType type)

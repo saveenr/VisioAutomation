@@ -69,9 +69,9 @@ namespace VisioScripting.Commands
                 return new List<VisioAutomation.Text.TextFormat>(0);
             }
 
-            var shapeids = targets.ToShapeIDs();
+            var pairs = targets.ToShapeIdPairs();
             var application = cmdtarget.Application;
-            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeids.ShapeIDs, CellValueType.Formula);
+            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, pairs, CellValueType.Formula);
             return formats;
         }
     }

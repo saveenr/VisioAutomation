@@ -101,7 +101,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var Prompt = sec_cols.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
 
             // run query on the two shapes
-            var formulas = sec_query.GetFormulas(page1, shapes.Select(s => s.ID).ToList());
+            var formulas = sec_query.GetFormulas(page1, VA.ShapeSheet.Query.ShapeIdPairs.Build( shapes ));
 
             Assert.AreEqual(2, formulas.Count); // 2 because two shapes
             var shape0_formulas = formulas[0];

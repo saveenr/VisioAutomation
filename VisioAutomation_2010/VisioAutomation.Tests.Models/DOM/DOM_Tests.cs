@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using VADOM = VisioAutomation.Models.Dom;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-
+using System.Linq;
 
 namespace VisioAutomation_Tests.Models.Dom
 {
@@ -400,11 +400,12 @@ namespace VisioAutomation_Tests.Models.Dom
             var page = page_node.Render(doc);
 
             // Verify the locations and sizes
-            var shapeids = new int[] {
-                s0.VisioShapeID, 
-                s1.VisioShapeID, 
-                s2.VisioShapeID, 
-                s3.VisioShapeID };
+
+            var shapeids = new int[] { 
+                s0.VisioShapeID,
+                s2.VisioShapeID,
+                s2.VisioShapeID,
+                s3.VisioShapeID};
 
             var xfrms = VA.Shapes.ShapeXFormCells.GetCells(page, shapeids, VA.ShapeSheet.CellValueType.Formula);
 

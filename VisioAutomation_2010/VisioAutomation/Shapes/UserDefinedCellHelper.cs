@@ -141,11 +141,11 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shapes));
             }
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
+            var pairs = VASS.Query.ShapeIdPairs.Build( shapes );
 
-            var list_list_udcells = UserDefinedCellCells.GetCells(page,shapeids, VASS.CellValueType.Formula);
+            var list_list_udcells = UserDefinedCellCells.GetCells(page,pairs, VASS.CellValueType.Formula);
 
-            var list_dics = new List<UserDefinedCellDictionary>(shapeids.Count);
+            var list_dics = new List<UserDefinedCellDictionary>(pairs.Count);
 
             for (int shape_index = 0; shape_index < shapes.Count; shape_index++)
             {

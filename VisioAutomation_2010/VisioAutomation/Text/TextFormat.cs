@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
+using System.Linq;
 
 namespace VisioAutomation.Text
 {
@@ -91,14 +92,14 @@ namespace VisioAutomation.Text
                     (short) 0] != 0) ;
         }
 
-        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
+        public static List<TextFormat> GetFormat(IVisio.Page page, VASS.Query.ShapeIdPairs pairs, VASS.CellValueType type)
         {
-            var charcells = CharacterFormatCells.GetCells(page, shapeids, type);
-            var paracells = ParagraphFormatCells.GetCells(page, shapeids, type);
-            var textblockcells = TextHelper.GetTextBlockCells(page, shapeids, type);
+            var charcells = CharacterFormatCells.GetCells(page, pairs, type);
+            var paracells = ParagraphFormatCells.GetCells(page, pairs, type);
+            var textblockcells = TextHelper.GetTextBlockCells(page, pairs.IDs.ToList(), type);
             var page_shapes = page.Shapes;
-            var formats = new List<TextFormat>(shapeids.Count);
-            for (int i = 0; i < shapeids.Count; i++)
+            var formats = new List<TextFormat>(pairs.Count);
+            for (int i = 0; i < pairs.Count; i++)
             {
                 var format = new TextFormat();
                 format.CharacterFormats = charcells[i];
@@ -106,7 +107,7 @@ namespace VisioAutomation.Text
                 format.TextBlock = textblockcells[i];
                 formats.Add(format);
 
-                var shape = page_shapes.ItemFromID[shapeids[i]];
+                var shape = page_shapes.ItemFromID[pairs[i].ShapeID];
                 format.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
                 format.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
 

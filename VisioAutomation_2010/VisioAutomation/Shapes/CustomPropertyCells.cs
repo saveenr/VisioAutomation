@@ -185,10 +185,10 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
+        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs pairs, VASS.CellValueType type)
         {
             var reader = Custom_Property_lazy_builder.Value;
-            return reader.GetCellsMultiRow(page, shapeids, type);
+            return reader.GetCellsMultiRow(page, pairs, type);
         }
 
         public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
