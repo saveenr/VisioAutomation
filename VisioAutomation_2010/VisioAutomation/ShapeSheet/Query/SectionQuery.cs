@@ -86,8 +86,8 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var reader = new VASS.Internal.ArraySegmentReader<TResult>(values);
-            var list_sectionoutput = this._create_outputs_for_shapes(shapeids, cache, reader);
-            return list_sectionoutput;
+            var results = this._create_outputs_for_shapes(shapeids, cache, reader);
+            return results;
         }
         public SectionQueryResults<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
         {
@@ -98,8 +98,8 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids, cache);
             var values = surface.GetFormulasU(srcstream);
             var reader = new VASS.Internal.ArraySegmentReader<string>(values);
-            var list_sectionoutput = this._create_outputs_for_shapes(shapeids, cache, reader);
-            return list_sectionoutput;
+            var results = this._create_outputs_for_shapes(shapeids, cache, reader);
+            return results;
         }
 
         private SectionQueryCache _create_sectionquerycache(SurfaceTarget surface, IList<int> shape_ids)
@@ -184,7 +184,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             }
 
-            var query_results = new SectionQueryShapeResults<T>(shapeid, results_rows);
+            var results = new SectionQueryShapeResults<T>(shapeid, results_rows);
 
             // the difference in the segment count must match the total number of output cells
 
@@ -197,7 +197,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
 
-            return query_results;
+            return results;
         }
 
         private Streams.StreamArray _build_src_stream(SectionQueryCache cache)
