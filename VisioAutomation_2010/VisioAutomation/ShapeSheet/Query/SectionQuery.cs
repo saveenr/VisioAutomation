@@ -5,6 +5,45 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
+    public struct ShapeIdPair
+    {
+        public readonly IVisio.Shape Shape;
+        public readonly int ShapeID;
+
+        public ShapeIdPair(IVisio.Shape shape)
+        {
+            this.Shape = shape;
+            this.ShapeID = shape.ID16;
+        }
+
+        public ShapeIdPair(IVisio.Shape shape, int id)
+        {
+            this.Shape = shape;
+            this.ShapeID = id;
+        }
+    }
+
+    public class ShapeIdPairs : List<ShapeIdPair>
+    {
+        public ShapeIdPairs()
+        {
+        }
+
+        public ShapeIdPairs(int capacity) : base (capacity)
+        {
+        }
+
+        public static ShapeIdPairs Build(IList<IVisio.Shape> shapes)
+        {
+            var list = new ShapeIdPairs(shapes.Count);
+            list.AddRange(shapes.Select(s => new ShapeIdPair(s)));
+            return list;
+        }
+    }
+}
+
+    namespace VisioAutomation.ShapeSheet.Query
+{
     public class SectionQuery : IEnumerable<SectionQueryColumns>
     {
         private IList<SectionQueryColumns> _list { get; }
