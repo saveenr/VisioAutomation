@@ -95,13 +95,13 @@ namespace VisioAutomation_Tests.Core.Shapes
             VisioAutomation.Shapes.UserDefinedCellHelper.Set(shape0, "foo", "bar", null);
 
             // build query
-            var query = new VA.ShapeSheet.Query.SingleSectionQuery();
-            var sec = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionUser);
-            var Value = sec.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
-            var Prompt = sec.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
+            var sec_query = new VA.ShapeSheet.Query.SectionQuery();
+            var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionUser);
+            var Value = sec_cols.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellValue,"Value");
+            var Prompt = sec_cols.Add(VisioAutomation.ShapeSheet.SrcConstants.UserDefCellPrompt,"Prompt");
 
             // run query on the two shapes
-            var formulas = query.GetFormulas(page1, shapes.Select(s => s.ID).ToList());
+            var formulas = sec_query.GetFormulas(page1, shapes.Select(s => s.ID).ToList());
 
             Assert.AreEqual(2, formulas.Count); // 2 because two shapes
             var shape0_formulas = formulas[0];

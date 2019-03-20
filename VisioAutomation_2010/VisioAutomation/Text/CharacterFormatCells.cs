@@ -82,7 +82,7 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override Text.CharacterFormatCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            public override Text.CharacterFormatCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new Text.CharacterFormatCells();
 

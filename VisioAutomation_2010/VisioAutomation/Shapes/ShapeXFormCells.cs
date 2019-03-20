@@ -54,7 +54,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ShapeXFormCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            public override ShapeXFormCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new ShapeXFormCells();
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);

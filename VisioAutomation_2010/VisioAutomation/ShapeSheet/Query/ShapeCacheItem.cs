@@ -1,20 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    internal class ShapeCacheItem
+    public class ShapeCacheItem
     {
-        public SectionQuery SectionQuery { get; private set; }
-
-        public int RowCount { get; }
 
         public short ShapeId { get; }
-        internal ShapeCacheItem(SectionQuery sectionquery, int numrows, short shapeid)
+        public readonly IVisio.VisSectionIndices SectionIndex;
+
+        public SectionQueryColumns SectionColumns { get; private set; }
+
+        // The RowCount is the data that is being cached
+        public int RowCount { get; }
+
+        internal ShapeCacheItem(short shapeid, IVisio.VisSectionIndices sec_index, SectionQueryColumns sec_cols, int numrows)
         {
-            this.SectionQuery = sectionquery;
-            this.RowCount = numrows;
             this.ShapeId = shapeid;
+            this.SectionIndex = sec_index;
+            this.SectionColumns = sec_cols;
+            this.RowCount = numrows;
         }
 
         public IEnumerable<int> RowIndexes

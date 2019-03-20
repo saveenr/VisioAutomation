@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.Query
     public class Row<T> : IEnumerable<T>
     {
         public int ShapeID { get; private set; }
-        private readonly VASS.Internal.ArraySegment<T> Cells;
+        private VASS.Internal.ArraySegment<T> Cells { get; }
 
         internal Row(int shapeid, VASS.Internal.ArraySegment<T> cells)
         {

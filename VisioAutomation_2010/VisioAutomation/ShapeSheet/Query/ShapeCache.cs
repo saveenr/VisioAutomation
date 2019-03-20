@@ -3,16 +3,11 @@ using System.Collections.Generic;
 namespace VisioAutomation.ShapeSheet.Query
 {
 
-    internal class ShapeCacheItemList : IEnumerable<ShapeCacheItem>
+    internal class ShapeCache : IEnumerable<ShapeCacheItem>
     {
         private List<ShapeCacheItem> _list_shapecacheitems;
 
-        public ShapeCacheItemList()
-        {
-            this._list_shapecacheitems = new List<ShapeCacheItem>();
-        }
-
-        public ShapeCacheItemList(int capacity)
+        public ShapeCache(int capacity)
         {
             this._list_shapecacheitems = new List<ShapeCacheItem>(capacity);
         }
@@ -45,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int n = 0;
             foreach (var shapecacheitem in this._list_shapecacheitems)
             {
-                n += shapecacheitem.RowCount * shapecacheitem.SectionQuery.Columns.Count;
+                n += shapecacheitem.RowCount * shapecacheitem.SectionColumns.Count;
             }
             return n;
         }

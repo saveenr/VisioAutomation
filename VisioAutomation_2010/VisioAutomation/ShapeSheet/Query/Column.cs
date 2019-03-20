@@ -7,7 +7,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public string Name { get; protected set; }
         public int Ordinal { get; protected set; }
 
-        public readonly ShapeSheet.Src Src;
+        public ShapeSheet.Src Src { get; }
 
         public Column(int ordinal, string name, ShapeSheet.Src src) 
         {

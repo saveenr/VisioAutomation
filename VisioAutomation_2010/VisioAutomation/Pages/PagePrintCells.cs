@@ -59,7 +59,7 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PagePrintCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.ColumnList cols)
+            public override PagePrintCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new PagePrintCells();
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);

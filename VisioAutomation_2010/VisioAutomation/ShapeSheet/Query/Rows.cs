@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class RowList<T> : IEnumerable<Row<T>>
+    public class Rows<T> : IEnumerable<Row<T>>
     {
 
         private readonly List<Row<T>> _list;
 
-        internal RowList(int capacity)
+        internal Rows(int capacity)
         {
             this._list = new List<Row<T>>(capacity);
         }

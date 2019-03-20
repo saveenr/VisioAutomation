@@ -89,7 +89,9 @@ namespace VisioAutomation_Tests
             var col_w = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth,"Width");
             var col_h = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight,"Height");
 
-            var row = query.GetResults<double>(shape);
+            var cellqueryresult = query.GetResults<double>(shape);
+
+            var row = cellqueryresult[0];
             double w = row[col_w];
             double h = row[col_h];
             var size = new VisioAutomation.Geometry.Size(w, h);
@@ -162,9 +164,10 @@ namespace VisioAutomation_Tests
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, "PageHeight");
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
 
-            var results = query.GetResults<double>(page.PageSheet);
-            double height = results[col_height];
-            double width = results[col_width];
+            var cellqueryresults = query.GetResults<double>(page.PageSheet);
+            var row = cellqueryresults[0];
+            double height = row[col_height];
+            double width = row[col_width];
             var s = new VisioAutomation.Geometry.Size(width, height);
             return s;
         }

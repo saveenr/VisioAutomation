@@ -143,15 +143,15 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             VA.Shapes.CustomPropertyHelper.Set(s4, "S3P2", "\"5\"", cp_type);
             VA.Shapes.CustomPropertyHelper.Set(s4, "S3P3", "\"6\"", cp_type);
 
-            var query = new VA.ShapeSheet.Query.SingleSectionQuery();
+            var sec_query = new VA.ShapeSheet.Query.SectionQuery();
 
-            var prop_sec = query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.Columns.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
+            var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionProp);
+            var value_col = sec_cols.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var data = query.GetFormulas(page1, shapeids);
-            var data2 = query.GetResults<string>(page1, shapeids);
+            var data = sec_query.GetFormulas(page1, shapeids);
+            var data2 = sec_query.GetResults<string>(page1, shapeids);
 
             int shape0_index = 0;
             int shape1_index = 1;
@@ -409,13 +409,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         public void ShapeSheet_Query_TestDuplicates()
         {
             // Ensure that duplicate cells are caught
-            var q1 = new VA.ShapeSheet.Query.CellQuery();
-            q1.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+            var cell_query_1 = new VA.ShapeSheet.Query.CellQuery();
+            cell_query_1.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
 
             bool caught_exc1 = false;
             try
             {
-                q1.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+                cell_query_1.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             }
             catch (System.ArgumentException)
             {
@@ -426,13 +426,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that duplicate sections are caught
 
-            var q2 = new VA.ShapeSheet.Query.SingleSectionQuery();
-            q2.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
+            var sec_query_2 = new VA.ShapeSheet.Query.SectionQuery();
+            sec_query_2.Add(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
             try
             {
-                q2.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
+                sec_query_2.Add(IVisio.VisSectionIndices.visSectionObject);
             }
             catch (System.ArgumentException)
             {
@@ -442,13 +442,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.IsTrue(caught_exc2);
 
             // Ensure that Duplicates in Section Queries Are caught - 
-            var q3 = new VA.ShapeSheet.Query.SingleSectionQuery();
-            var sec = q3.SectionQueries.Add(IVisio.VisSectionIndices.visSectionObject);
-            sec.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+            var sec_query_3 = new VA.ShapeSheet.Query.SectionQuery();
+            var sec_cols = sec_query_3.Add(IVisio.VisSectionIndices.visSectionObject);
+            sec_cols.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             bool caught_exc3 = false;
             try
             {
-                sec.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+                sec_cols.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
             }
             catch (System.ArgumentException)
             {

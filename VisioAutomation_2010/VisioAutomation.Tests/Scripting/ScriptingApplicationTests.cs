@@ -15,8 +15,14 @@ namespace VisioAutomation_Tests.Scripting
             var new_rect = new System.Drawing.Rectangle(old_rect.X, old_rect.Y, desired_size.Width, desired_size.Height);
 
             client.Window.SetApplicationWindowRectangle(new_rect);
-            var actual_rect = client.Window.GetApplicationWindowRectangle();
-            Assert.AreEqual(desired_size, actual_rect.Size);
+            var actual_rect1 = client.Window.GetApplicationWindowRectangle();
+            Assert.AreEqual(desired_size, actual_rect1.Size);
+
+            client.Window.SetApplicationWindowRectangle(old_rect);
+            var actual_rect2 = client.Window.GetApplicationWindowRectangle();
+            Assert.AreEqual(old_rect.Size, actual_rect2.Size);
+            Assert.AreEqual(old_rect, actual_rect2);
+
         }
 
         [TestMethod]

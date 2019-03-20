@@ -71,7 +71,8 @@ namespace VisioScripting.Commands
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
 
-            var row = query.GetResults<double>(pages[0].PageSheet);
+            var cellqueryresult = query.GetResults<double>(pages[0].PageSheet);
+            var row = cellqueryresult[0];
             double height = row[col_height];
             double width = row[col_width];
             var s = new VisioAutomation.Geometry.Size(width, height);
