@@ -143,24 +143,24 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private SectionQueryResults<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionQueryCache sectioncache, VASS.Internal.ArraySegmentReader<T> segReader)
+        private SectionQueryResults<T> _create_outputs_for_shapes<T>(IList<int> shapeids, SectionQueryCache sectioncache, VASS.Internal.ArraySegmentReader<T> segreader)
         {
-            var output_for_all_shapes = new SectionQueryResults<T>();
+            var results = new SectionQueryResults<T>();
 
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var shapecacheitems = sectioncache[shape_index];
-                var output_for_shape = this._create_output_for_shape((short)shapeid, shapecacheitems, segReader);
-                output_for_all_shapes.Add(output_for_shape);
+                var shapecache = sectioncache[shape_index];
+                var shaperesults = this._create_output_for_shape((short)shapeid, shapecache, segreader);
+                results.Add(shaperesults);
             }
 
-            return output_for_all_shapes;
+            return results;
         }
 
-        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems, VASS.Internal.ArraySegmentReader<T> segReader)
+        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems, VASS.Internal.ArraySegmentReader<T> segreader)
         {
-            int original_seg_count = segReader.Count;
+            int original_seg_count = segreader.Count;
 
             if (shapecacheitems==null)
             {
@@ -168,27 +168,27 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
 
-            var section_results = new List<SectionShapeRows<T>>(shapecacheitems.Count);
+            var results_rows = new List<SectionShapeRows<T>>(shapecacheitems.Count);
             foreach (var shapecacheitem in shapecacheitems)
             {
-                var section_output = new SectionShapeRows<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionColumns.SectionIndex);
-                section_results.Add(section_output);
+                var sectionshaperows = new SectionShapeRows<T>(shapecacheitem.RowCount, shapeid, shapecacheitem.SectionColumns.SectionIndex);
+                results_rows.Add(sectionshaperows);
 
                 int num_cols = shapecacheitem.SectionColumns.Count;
                 foreach (int row_index in shapecacheitem.RowIndexes)
                 {
-                    var cells = segReader.GetNextSegment(num_cols);
+                    var cells = segreader.GetNextSegment(num_cols);
                     var sec_res_row = new Row<T>(shapeid, cells);
-                    section_output.Add(sec_res_row);
+                    sectionshaperows.Add(sec_res_row);
                 }
 
             }
 
-            var query_results = new SectionQueryShapeResults<T>(shapeid, section_results);
+            var query_results = new SectionQueryShapeResults<T>(shapeid, results_rows);
 
             // the difference in the segment count must match the total number of output cells
 
-            int final_seg_count = segReader.Count;
+            int final_seg_count = segreader.Count;
             int segment_count_delta = final_seg_count - original_seg_count;
             int total_cell_count = shapecacheitems.CountCells();
 
