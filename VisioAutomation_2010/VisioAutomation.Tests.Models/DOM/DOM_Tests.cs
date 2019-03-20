@@ -403,7 +403,7 @@ namespace VisioAutomation_Tests.Models.Dom
 
             var shapeids = new int[] { 
                 s0.VisioShapeID,
-                s2.VisioShapeID,
+                s1.VisioShapeID,
                 s2.VisioShapeID,
                 s3.VisioShapeID};
 
