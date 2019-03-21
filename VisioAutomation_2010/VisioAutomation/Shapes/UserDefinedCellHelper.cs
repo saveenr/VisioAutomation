@@ -141,7 +141,7 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shapes));
             }
 
-            var shapeidpairs = VASS.Query.ShapeIdPairs.Build( shapes );
+            var shapeidpairs = VASS.Query.ShapeIdPairs.Create( shapes );
 
             var list_list_udcells = UserDefinedCellCells.GetCells(page,shapeidpairs, VASS.CellValueType.Formula);
 

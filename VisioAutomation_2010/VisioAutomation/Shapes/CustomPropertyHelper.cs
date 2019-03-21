@@ -96,7 +96,7 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(shapes));
             }
 
-            var shapeidpairs = ShapeSheet.Query.ShapeIdPairs.Build( shapes );
+            var shapeidpairs = ShapeSheet.Query.ShapeIdPairs.Create( shapes );
             var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeidpairs, type);
             var customprops_dic = create_dic(shapes, shapeidpairs, customprops_per_shape);
 

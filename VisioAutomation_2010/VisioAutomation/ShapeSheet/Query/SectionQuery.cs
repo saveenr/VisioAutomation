@@ -5,69 +5,6 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public struct ShapeIdPair
-    {
-        public readonly IVisio.Shape Shape;
-        public readonly int ShapeID;
-
-        public ShapeIdPair(IVisio.Shape shape)
-        {
-            this.Shape = shape;
-            this.ShapeID = shape.ID16;
-        }
-
-        public ShapeIdPair(IVisio.Shape shape, int id)
-        {
-            this.Shape = shape;
-            this.ShapeID = id;
-        }
-    }
-
-    public class ShapeIdPairs : List<ShapeIdPair>
-    {
-        public ShapeIdPairs()
-        {
-        }
-
-        public ShapeIdPairs(int capacity) : base (capacity)
-        {
-        }
-
-        public static ShapeIdPairs Build(IList<IVisio.Shape> shapes)
-        {
-            var shapeidpairs = new ShapeIdPairs(shapes.Count);
-            shapeidpairs.AddRange(shapes.Select(s => new ShapeIdPair(s)));
-            return shapeidpairs;
-        }
-
-        public static ShapeIdPairs Build(params IVisio.Shape[] shapes)
-        {
-            var shapeidpairs = new ShapeIdPairs(shapes.Length);
-            shapeidpairs.AddRange(shapes.Select(s => new ShapeIdPair(s)));
-            return shapeidpairs;
-        }
-
-        public IEnumerable<int> IDs
-        {
-            get
-            {
-                return this.Select(p => p.ShapeID);
-            }
-        }
-
-        public IEnumerable<IVisio.Shape> Shapes
-        {
-            get
-            {
-                return this.Select(p => p.Shape);
-            }
-        }
-
-    }
-}
-
-    namespace VisioAutomation.ShapeSheet.Query
-{
     public class SectionQuery : IEnumerable<SectionQueryColumns>
     {
         private IList<SectionQueryColumns> _list { get; }
@@ -92,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var shapeidpairs = ShapeIdPairs.Build(surface.Shape);
+            var shapeidpairs = ShapeIdPairs.Create(surface.Shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);
@@ -115,7 +52,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var shapeidpairs = ShapeIdPairs.Build(surface.Shape);
+            var shapeidpairs = ShapeIdPairs.Create(surface.Shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);

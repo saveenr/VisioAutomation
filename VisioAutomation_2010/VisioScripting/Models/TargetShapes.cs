@@ -34,7 +34,7 @@ namespace VisioScripting.Models
                 throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
             }
 
-            return VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Build(this.Shapes);
+            return VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Create(this.Shapes);
         }
 
         public TargetShapes(IList<IVisio.Shape> shapes)
