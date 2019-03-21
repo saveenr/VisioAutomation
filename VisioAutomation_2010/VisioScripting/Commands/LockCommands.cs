@@ -53,7 +53,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<int, LockCells>();
 
             var page = cmdtarget.ActivePage;
-            var target_shapeids = VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Build(targets.Shapes).IDs.ToList();
+            var target_shapeids = targets.Shapes.Select(s => (int)s.ID16).ToList();
 
             var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids, cvt);
 

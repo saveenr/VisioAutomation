@@ -94,9 +94,12 @@ namespace VisioAutomation.Text
 
         public static List<TextFormat> GetFormat(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
+            var shapeids = shapeidpairs.IDs.ToList();
+
             var charcells = CharacterFormatCells.GetCells(page, shapeidpairs, type);
             var paracells = ParagraphFormatCells.GetCells(page, shapeidpairs, type);
-            var textblockcells = TextHelper.GetTextBlockCells(page, shapeidpairs.IDs.ToList(), type);
+            var textblockcells = TextHelper.GetTextBlockCells(page, shapeids, type);
+
             var page_shapes = page.Shapes;
             var formats = new List<TextFormat>(shapeidpairs.Count);
             for (int i = 0; i < shapeidpairs.Count; i++)
