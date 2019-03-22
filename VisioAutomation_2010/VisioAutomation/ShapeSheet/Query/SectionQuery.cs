@@ -205,7 +205,8 @@ namespace VisioAutomation.ShapeSheet.Query
             int shapeindex = 0;
             int numcells = cache.CountCells();
             var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
-            var sidsrcs = this._enum_sidsrcs(dummy_shapeid, shapeindex, cache);
+            var shapecache = cache[shapeindex];
+            var sidsrcs = _sidsrcs_for_shape(dummy_shapeid, shapecache);
             var srcs = sidsrcs.Select(i => i.Src);
             stream.AddRange(srcs);
 
@@ -215,24 +216,30 @@ namespace VisioAutomation.ShapeSheet.Query
         private VASS.Streams.StreamArray _build_sidsrc_stream(ShapeIdPairs shapeidpairs, SectionQueryCache cache)
         {
             int numcells = cache.CountCells();
-
             var stream = new VASS.Streams.SidSrcStreamArrayBuilder(numcells);
-
-            for (int pairindex = 0; pairindex < shapeidpairs.Count; pairindex++)
-            {
-                // For each shape add the cells to query
-                var pair = shapeidpairs[pairindex];
-                var sidsrcs = this._enum_sidsrcs(pair.ShapeID, pairindex, cache);
-                stream.AddRange(sidsrcs);
-            }
-
+            var sidsrcs = _sidsrcs_for_shapes(shapeidpairs, cache);
+            stream.AddRange(sidsrcs);
             return stream.ToStreamArray();
         }
 
-        private IEnumerable<SidSrc> _enum_sidsrcs(int shape_id, int shapeindex, SectionQueryCache cache)
+        private static IEnumerable<SidSrc> _sidsrcs_for_shapes(ShapeIdPairs shapeidpairs, SectionQueryCache cache)
         {
-            var shapecacheitems = cache[shapeindex];
-            foreach (var shapecacheitem in shapecacheitems)
+            foreach (int shape_ord in Enumerable.Range(0,shapeidpairs.Count))
+            {
+                // For each shape add the cells to query
+                var pair = shapeidpairs[shape_ord];
+                var shapecache = cache[shape_ord];
+                var sidsrcs = _sidsrcs_for_shape(pair.ShapeID, shapecache);
+                foreach (var sidsrc in sidsrcs)
+                {
+                    yield return sidsrc;
+                }
+            }
+        }
+
+        private static IEnumerable<SidSrc> _sidsrcs_for_shape(int shape_id, ShapeCache shapecache)
+        {
+            foreach (var shapecacheitem in shapecache)
             {
                 foreach (int row_index in shapecacheitem.RowIndexes)
                 {
