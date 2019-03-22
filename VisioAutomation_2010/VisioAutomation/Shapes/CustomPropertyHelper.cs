@@ -96,24 +96,24 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(shapes));
             }
 
-            var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids, type);
-            var customprops_dic = create_dic(shapes, shapeids, customprops_per_shape);
+            var shapeidpairs = ShapeSheet.Query.ShapeIdPairs.Create( shapes );
+            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeidpairs, type);
+            var customprops_dic = create_dic(shapes, shapeidpairs, customprops_per_shape);
 
             return customprops_dic;
         }
 
-        private static List<CustomPropertyDictionary> create_dic(IList<IVisio.Shape> shapes, List<int> shapeids, List<List<CustomPropertyCells>> customprops_per_shape)
+        private static List<CustomPropertyDictionary> create_dic(IList<IVisio.Shape> shapes, ShapeSheet.Query.ShapeIdPairs shapeidpairs, List<List<CustomPropertyCells>> customprops_per_shape)
         {
-            var customprops_dic = new List<CustomPropertyDictionary>(shapeids.Count);
+            var customprops_dic = new List<CustomPropertyDictionary>(shapeidpairs.Count);
 
 
-            if (customprops_per_shape.Count != shapeids.Count)
+            if (customprops_per_shape.Count != shapeidpairs.Count)
             {
                 throw new InternalAssertionException();
             }
 
-            for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
+            for (int shape_index = 0; shape_index < shapeidpairs.Count; shape_index++)
             {
                 var shape = shapes[shape_index];
                 var customprops_for_shape = customprops_per_shape[shape_index];

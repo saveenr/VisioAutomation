@@ -27,6 +27,16 @@ namespace VisioScripting.Models
             return target_shapeids;
         }
 
+        public VisioAutomation.ShapeSheet.Query.ShapeIdPairs ToShapeIdPairs()
+        {
+            if (this.Shapes == null)
+            {
+                throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
+            }
+
+            return VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Create(this.Shapes);
+        }
+
         public TargetShapes(IList<IVisio.Shape> shapes)
         {
             // If shapes == null then it means to use the active selection
