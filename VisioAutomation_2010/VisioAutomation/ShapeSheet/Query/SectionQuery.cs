@@ -150,8 +150,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 var pair = shapeidpairs[pair_index];
                 var shapecache = sectioncache[pair_index];
-                var shaperesults = this._create_output_for_shape((short)pair.ShapeID, shapecache, segreader);
-                results.Add(shaperesults);
+                var output_for_shape = this._create_output_for_shape((short)pair.ShapeID, shapecache, segreader);
+                results.Add(output_for_shape);
             }
 
             return results;
