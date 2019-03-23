@@ -2,8 +2,12 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
-    public class StreamBuilderX
+    public static class StreamBuilder
     {
+        public static VisioAutomation.ShapeSheet.Streams.StreamArray CreateSidSrcStream(IList<SidSrc> sidsrcs)
+        {
+            return CreateSidSrcStream(sidsrcs.Count, sidsrcs);
+        }
 
         public static VisioAutomation.ShapeSheet.Streams.StreamArray CreateSidSrcStream(int numcells, IEnumerable<SidSrc> sidsrcs)
         {
@@ -27,7 +31,10 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
             return stream;
         }
-
+        public static VisioAutomation.ShapeSheet.Streams.StreamArray CreateSrcStream(IList<Src> srcs)
+        {
+            return CreateSrcStream(srcs.Count, srcs);
+        }
         public static VisioAutomation.ShapeSheet.Streams.StreamArray CreateSrcStream(int numcells, IEnumerable<Src> sidsrcs)
         {
             var num_shorts = numcells * 3;

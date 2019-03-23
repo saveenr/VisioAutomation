@@ -121,7 +121,6 @@
     <Compile Include="ShapeSheet\Internal\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryCache.cs" />
     <Compile Include="ShapeSheet\Query\Rows.cs" />
-    <Compile Include="ShapeSheet\Streams\SidSrcStreamBuilder.cs" />
     <Compile Include="ShapeSheet\Streams\StreamBuilder.cs" />
     <Compile Include="ShapeSheet\Query\Columns.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
