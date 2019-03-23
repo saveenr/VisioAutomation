@@ -24,8 +24,8 @@ namespace VisioAutomation.Text
             }
 
             const short row = 0;
-            
-            var stream = new VisioAutomation.ShapeSheet.Streams.SrcStreamBuilder(num_stops * 3);
+
+            var srcs = new List<VASS.Src>(num_stops * 3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
@@ -34,16 +34,18 @@ namespace VisioAutomation.Text
                 var src_tabalign = new ShapeSheet.Src(tab_section, row, (short)(i + 2));
                 var src_tabother = new ShapeSheet.Src(tab_section, row, (short)(i + 3));
 
-                stream.Add(src_tabpos);
-                stream.Add(src_tabalign);
-                stream.Add(src_tabother);
+                srcs.Add(src_tabpos);
+                srcs.Add(src_tabalign);
+                srcs.Add(src_tabother);
             }
 
+            var streamarray = VASS.Streams.StreamBuilderX.CreateSrcStream(srcs.Count, srcs);
+   
             var surface = new SurfaceTarget(shape);
 
             const object[] unitcodes = null;
 
-            var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
+            var results = surface.GetResults<double>(streamarray, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
