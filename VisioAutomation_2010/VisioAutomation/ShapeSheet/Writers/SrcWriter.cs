@@ -4,16 +4,12 @@ namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SrcWriter : WriterBase
     {
-        private WriteRecordList _records;
 
-        public SrcWriter()
+
+        public SrcWriter() : base(CellCoordinateType.Src)
         {
         }
 
-        public void Clear()
-        {
-            _records?.Clear();
-        }
 
         public void CommitFormulas(IVisio.Shape shape)
         {

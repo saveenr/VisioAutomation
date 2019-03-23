@@ -4,16 +4,8 @@ namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SidSrcWriter : WriterBase
     {
-
-        private WriteRecordList records;
-
-        public SidSrcWriter()
+        public SidSrcWriter() : base(CellCoordinateType.SidSrc)
         {
-        }
-
-        public void Clear()
-        {
-            records?.Clear();
         }
 
         public void CommitFormulas(IVisio.Shape shape)
@@ -71,26 +63,26 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         private void __SetValueIgnoreNull(SidSrc sidsrc, CellValueLiteral formula)
         {
-            if (this.records == null)
+            if (this._records == null)
             {
-                this.records = new WriteRecordList(CellCoordinateType.SidSrc);
+                this._records = new WriteRecordList(CellCoordinateType.SidSrc);
             }
 
             if (formula.HasValue)
             {
-                this.records.Add(sidsrc, formula.Value);
+                this._records.Add(sidsrc, formula.Value);
             }
         }
 
         public void CommitFormulas(SurfaceTarget surface)
         {
-            if ((this.records == null || this.records.Count < 1))
+            if ((this._records == null || this._records.Count < 1))
             {
                 return;
             }
 
-            var stream = this.records.BuildSidSrcStream();
-            var formulas = this.records.BuildValuesArray();
+            var stream = this._records.BuildSidSrcStream();
+            var formulas = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
             {
@@ -104,13 +96,13 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void CommitResults(SurfaceTarget surface)
         {
-            if ((this.records == null || this.records.Count < 1))
+            if ((this._records == null || this._records.Count < 1))
             {
                 return;
             }
 
-            var stream = this.records.BuildSidSrcStream();
-            var results = this.records.BuildValuesArray();
+            var stream = this._records.BuildSidSrcStream();
+            var results = this._records.BuildValuesArray();
             const object[] unitcodes = null;
 
             if (stream.Array.Length == 0)
