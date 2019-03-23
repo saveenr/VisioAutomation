@@ -73,7 +73,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this.records == null)
             {
-                this.records = new WriteRecordList();
+                this.records = new WriteRecordList(CellCoordinateType.SidSrc);
             }
 
             if (formula.HasValue)

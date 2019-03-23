@@ -7,11 +7,12 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
         private readonly List<WriteRecord> items;
 
-        int chunksize = -1;
+        CellCoordinateType coordtype;
 
-        public WriteRecordList()
+        public WriteRecordList(CellCoordinateType type)
         {
             this.items = new List<WriteRecord>();
+            this.coordtype = type;
         }
 
         public void Clear()
@@ -35,33 +36,25 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         private void CheckForSidSrc()
         {
-            if (this.chunksize < 0)
-            {
-                this.chunksize = 4;
-            }
-            else if (this.chunksize != 4)
-            {
-                string msg = string.Format("Excpected a src value");
-                throw new System.ArgumentOutOfRangeException(msg);
-            }
-        }
-
-        private void CheckForSrc()
-        {
-            if (this.chunksize < 0)
-            {
-                this.chunksize = 3;
-            }
-            else if (this.chunksize != 3)
+            if (this.coordtype != CellCoordinateType.SidSrc)
             {
                 string msg = string.Format("Excpected a sidsrc value");
                 throw new System.ArgumentOutOfRangeException(msg);
             }
         }
 
+        private void CheckForSrc()
+        {
+            if (this.coordtype != CellCoordinateType.Src)
+            {
+                string msg = string.Format("Excpected a src value");
+                throw new System.ArgumentOutOfRangeException(msg);
+            }
+        }
+
         public Streams.StreamArray BuildSidSrcStream()
         {
-            if (this.chunksize != 4)
+            if (this.coordtype != CellCoordinateType.SidSrc)
             {
                 string msg = string.Format("writer does not contain sidsrcvalues");
                 throw new System.ArgumentOutOfRangeException(msg);
@@ -71,7 +64,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public Streams.StreamArray BuildSrcStream()
         {
-            if (this.chunksize != 3)
+            if (this.coordtype != CellCoordinateType.Src)
             {
                 string msg = string.Format("writer does not contain srcvalues");
                 throw new System.ArgumentOutOfRangeException(msg);

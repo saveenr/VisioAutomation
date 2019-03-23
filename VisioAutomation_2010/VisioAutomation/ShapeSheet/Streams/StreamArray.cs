@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         private readonly int ChunkSize;
         public readonly int Count;
 
-        internal StreamArray(short[] array, Streams.StreamType cell_coord, int count)
+        internal StreamArray(short[] array, CellCoordinateType cell_coord, int count)
         {
             if (array == null)
             {
@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
 
             this.Array = array;
-            this.ChunkSize = cell_coord == Streams.StreamType.SidSrc ? 4 : 3;
+            this.ChunkSize = cell_coord == CellCoordinateType.SidSrc ? 4 : 3;
             this.Count = count;
 
             if (array.Length % this.ChunkSize != 0)
@@ -46,7 +46,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         {
             var num_shorts = numcells * 4;
             var array = new short[num_shorts];
-            var stream = new StreamArray(array, StreamType.SidSrc, numcells);
+            var stream = new StreamArray(array, CellCoordinateType.SidSrc, numcells);
 
             int i = 0;
             int j = 0;
@@ -74,7 +74,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         {
             var num_shorts = numcells * 3;
             var array = new short[num_shorts];
-            var stream = new StreamArray(array, StreamType.Src, numcells);
+            var stream = new StreamArray(array, CellCoordinateType.Src, numcells);
 
             int i = 0;
             int j = 0;
