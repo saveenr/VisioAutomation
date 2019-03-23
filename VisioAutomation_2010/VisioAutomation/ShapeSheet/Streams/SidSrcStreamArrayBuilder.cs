@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             seg[1] = item.Src.Section;
             seg[2] = item.Src.Row;
             seg[3] = item.Src.Cell;
-        }
+        }  
 
         public static VisioAutomation.ShapeSheet.Streams.StreamArray Create(int numcells, IEnumerable<SidSrc> sidsrcs)
         {
