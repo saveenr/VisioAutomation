@@ -30,12 +30,12 @@ namespace VisioScripting.Commands
 
             foreach (int shapeid in target_shapeids.ShapeIDs)
             {
-                writer.SetFormulas((short)shapeid, lockcells);
+                writer.SetValues((short)shapeid, lockcells);
             }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetLockCells)))
             {
-                writer.Commit(page);
+                writer.CommitFormulas(page);
             }
         }
 

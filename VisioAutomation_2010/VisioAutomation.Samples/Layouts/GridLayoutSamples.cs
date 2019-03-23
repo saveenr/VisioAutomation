@@ -56,11 +56,11 @@ namespace VisioAutomationSamples
                 fmtcells.LinePattern = 0;
                 fmtcells.LineWeight = 0;
 
-                writer.SetFormulas(shapeid, fmtcells);
+                writer.SetValues(shapeid, fmtcells);
                 i++;
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
 
             var bordersize = new VA.Geometry.Size(1,1);
             page.ResizeToFitContents(bordersize);

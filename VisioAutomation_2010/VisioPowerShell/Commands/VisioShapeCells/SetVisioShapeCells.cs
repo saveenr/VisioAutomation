@@ -61,7 +61,7 @@ namespace VisioPowerShell.Commands
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioShapeCells)))
             {
                 this.Client.Output.WriteVerbose("Start Update");
-                writer.Commit(surface);
+                writer.CommitFormulas(surface);
                 this.Client.Output.WriteVerbose("End Update");
             }
         }

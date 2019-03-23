@@ -69,10 +69,10 @@ namespace VisioAutomation.Pages
             for (i = 0; i < page_srcs.Count; i++)
             {
                 int row = 0;
-                writer.SetFormula(page_srcs[i],src_formulas[row][i]);
+                writer.SetValue(page_srcs[i],src_formulas[row][i]);
             }
 
-            writer.Commit(dest_page.PageSheet);
+            writer.CommitFormulas(dest_page.PageSheet);
 
             // make sure the new page looks like the old page
             dest_page.Background = src_page.Background;
@@ -180,10 +180,10 @@ namespace VisioAutomation.Pages
         internal static void SetSize(IVisio.Page page, Geometry.Size size)
         {
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
+            writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
+            writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            writer.Commit(page.PageSheet);
+            writer.CommitFormulas(page.PageSheet);
         }        
 
         public static short[] DropManyAutoConnectors(

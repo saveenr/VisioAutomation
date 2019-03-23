@@ -229,8 +229,8 @@ namespace VisioScripting.Commands
             var page = pages[1];
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetFormulas(pagecells);
-            writer.Commit(page.PageSheet);
+            writer.SetValues(pagecells);
+            writer.CommitFormulas(page.PageSheet);
 
             return doc;
         }

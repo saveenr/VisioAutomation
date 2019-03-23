@@ -5,8 +5,7 @@ namespace VisioAutomation.ShapeSheet.Writers
     public class SidSrcWriter : WriterBase
     {
 
-        private WriteCache<SidSrc> _formulaRecords;
-        private WriteCache<SidSrc> _resultRecords;
+        private WriteCache<SidSrc> records;
 
         public SidSrcWriter()
         {
@@ -14,66 +13,72 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Clear()
         {
-            _formulaRecords?.Clear();
-            _resultRecords?.Clear();
+            records?.Clear();
         }
 
-        public void Commit(IVisio.Shape shape)
+        public void CommitFormulas(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
-            this.Commit(surface);
+            this.CommitFormulas(surface);
         }
 
-        public void Commit(IVisio.Page page)
+        public void CommitFormulas(IVisio.Page page)
         {
             var surface = new SurfaceTarget(page);
-            this.Commit(surface);
+            this.CommitFormulas(surface);
         }
 
-        public void Commit(VisioAutomation.SurfaceTarget surface)
+        public void CommitResults(IVisio.Shape shape)
         {
-            this.CommitFormulas(surface);
+            var surface = new SurfaceTarget(shape);
             this.CommitResults(surface);
         }
 
-        public void SetFormula(short id, Src src, CellValueLiteral formula)
+        public void CommitResults(IVisio.Page page)
+        {
+            var surface = new SurfaceTarget(page);
+            this.CommitResults(surface);
+        }
+
+        
+        public void SetValue(short id, Src src, CellValueLiteral formula)
         {
             var sidsrc = new SidSrc(id, src);
-            this.__SetFormulaIgnoreNull(sidsrc, formula);
+            this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetFormula(SidSrc sidsrc, CellValueLiteral formula)
+        public void SetValue(SidSrc sidsrc, CellValueLiteral formula)
         {
-            this.__SetFormulaIgnoreNull(sidsrc, formula);
+            this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetFormulas(short id, CellGroups.CellGroup cgb, short row)
+        public void SetValues(short id, CellGroups.CellGroup cgb, short row)
         {
             var pairs = cgb.SidSrcValuePairs_NewRow(id, row);
             foreach (var pair in pairs)
             {
-                this.SetFormula(pair.ShapeID, pair.Src, pair.Value);
+                this.SetValue(pair.ShapeID, pair.Src, pair.Value);
             }
         }
 
-        public void SetFormulas(short id, CellGroups.CellGroup cgb)
+        public void SetValues(short id, CellGroups.CellGroup cgb)
         {
             foreach (var pair in cgb.SrcValuePairs)
             {
-                this.SetFormula(id, pair.Src, pair.Value);
+                this.SetValue(id, pair.Src, pair.Value);
             }
         }
 
-        private void __SetFormulaIgnoreNull(SidSrc sidsrc, CellValueLiteral formula)
+        private void __SetValueIgnoreNull(SidSrc sidsrc, CellValueLiteral formula)
         {
-            if (this._formulaRecords == null)
+            if (this.records == null)
             {
-                this._formulaRecords = new WriteCache<SidSrc>();
+                this.records = new WriteCache<SidSrc>();
             }
 
             if (formula.HasValue)
             {
-                this._formulaRecords.Add(sidsrc, formula.Value);
+                this.records.Add(sidsrc, formula.Value);
             }
         }
 
@@ -82,15 +87,15 @@ namespace VisioAutomation.ShapeSheet.Writers
             return Streams.StreamArray.FromSidSrc(wcs.Count, wcs.EnumCoords());
         }
 
-        private void CommitFormulas(SurfaceTarget surface)
+        public void CommitFormulas(SurfaceTarget surface)
         {
-            if ((this._formulaRecords == null || this._formulaRecords.Count < 1))
+            if ((this.records == null || this.records.Count < 1))
             {
                 return;
             }
 
-            var stream = this.buildstream_sidsrc(this._formulaRecords);
-            var formulas = this._formulaRecords.BuildValues();
+            var stream = this.buildstream_sidsrc(this.records);
+            var formulas = this.records.BuildValues();
 
             if (stream.Array.Length == 0)
             {
@@ -102,31 +107,15 @@ namespace VisioAutomation.ShapeSheet.Writers
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void SetResult(short id, Src src, CellValueLiteral result)
+        public void CommitResults(SurfaceTarget surface)
         {
-            var sidsrc = new SidSrc(id, src);
-            this.SetResult(sidsrc, result.Value);
-        }
-
-        public void SetResult(SidSrc sidsrc, CellValueLiteral result)
-        {
-            if (this._resultRecords == null)
-            {
-                this._resultRecords = new WriteCache<SidSrc>();
-            }
-
-            this._resultRecords.Add(sidsrc, result.Value);
-        }
-
-        private void CommitResults(SurfaceTarget surface)
-        {
-            if ((this._resultRecords == null || this._resultRecords.Count < 1))
+            if ((this.records == null || this.records.Count < 1))
             {
                 return;
             }
 
-            var stream = this.buildstream_sidsrc(this._resultRecords);
-            var results = this._resultRecords.BuildValues();
+            var stream = this.buildstream_sidsrc(this.records);
+            var results = this.records.BuildValues();
             const object[] unitcodes = null;
 
             if (stream.Array.Length == 0)

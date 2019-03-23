@@ -75,11 +75,11 @@ namespace VisioAutomationSamples
                 format.LinePattern = 0;
                 format.FillForegroundTransparency = 0.5;
 
-                writer.SetFormulas(shapeid, xfrm);
-                writer.SetFormulas(shapeid, format);
+                writer.SetValues(shapeid, xfrm);
+                writer.SetValues(shapeid, format);
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
 
             page.ResizeToFitContents(new VA.Geometry.Size(1.0, 1.0));
         }
@@ -143,12 +143,12 @@ namespace VisioAutomationSamples
                 format.LinePattern = 0;
                 format.LineWeight = 0;
 
-                writer.SetFormulas(shapeid, format);
+                writer.SetValues(shapeid, format);
 
                 n++;
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
 
             var bordersize = new VA.Geometry.Size(1, 1);
             page.ResizeToFitContents(bordersize);

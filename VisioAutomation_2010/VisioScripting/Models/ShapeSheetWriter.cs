@@ -21,7 +21,7 @@ namespace VisioScripting.Models
         public void SetFormula(short id, VisioAutomation.ShapeSheet.Src src, string formula)
         {
             var sidsrc = new VisioAutomation.ShapeSheet.SidSrc(id, src);
-            this.writer.SetFormula(sidsrc, formula);
+            this.writer.SetValue(sidsrc, formula);
         }
 
         public void Commit()
@@ -30,7 +30,7 @@ namespace VisioScripting.Models
             {
                 this.writer.BlastGuards = this.BlastGuards;
                 this.writer.TestCircular = this.TestCircular;
-                this.writer.Commit(this.Surface);
+                this.writer.CommitFormulas(this.Surface);
             }
         }
     }

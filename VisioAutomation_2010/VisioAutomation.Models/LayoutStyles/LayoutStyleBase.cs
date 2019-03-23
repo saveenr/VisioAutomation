@@ -141,9 +141,9 @@ namespace VisioAutomation.Models.LayoutStyles
             this.SetPageCells(page_layout_cells);
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetFormulas(page_layout_cells);
+            writer.SetValues(page_layout_cells);
 
-            writer.Commit(page.PageSheet);
+            writer.CommitFormulas(page.PageSheet);
             page.Layout();
         }
     }
