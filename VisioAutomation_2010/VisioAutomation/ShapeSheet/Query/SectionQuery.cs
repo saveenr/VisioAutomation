@@ -204,22 +204,19 @@ namespace VisioAutomation.ShapeSheet.Query
             int dummy_shapeid = -1;
             int shapeindex = 0;
             int numcells = cache.CountCells();
-            var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
             var shapecache = cache[shapeindex];
-            var sidsrcs = _sidsrcs_for_shape(dummy_shapeid, shapecache);
-            var srcs = sidsrcs.Select(i => i.Src);
-            stream.AddRange(srcs);
+            var srcs = _sidsrcs_for_shape(dummy_shapeid, shapecache).Select(i => i.Src);
+            var stream = VASS.Streams.SrcStreamArrayBuilder.Create(numcells,srcs);
 
-            return stream.ToStreamArray();
+            return stream;
         }
 
         private VASS.Streams.StreamArray _build_sidsrc_stream(ShapeIdPairs shapeidpairs, SectionQueryCache cache)
         {
             int numcells = cache.CountCells();
-            var stream = new VASS.Streams.SidSrcStreamArrayBuilder(numcells);
             var sidsrcs = _sidsrcs_for_shapes(shapeidpairs, cache);
-            stream.AddRange(sidsrcs);
-            return stream.ToStreamArray();
+            var stream = VASS.Streams.SidSrcStreamArrayBuilder.Create(numcells,sidsrcs);
+            return stream;
         }
 
         private static IEnumerable<SidSrc> _sidsrcs_for_shapes(ShapeIdPairs shapeidpairs, SectionQueryCache cache)

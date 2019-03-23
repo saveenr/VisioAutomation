@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace VisioAutomation.ShapeSheet.Streams
 {
     public class SrcStreamArrayBuilder : StreamArrayBuilderBase<Src>
@@ -12,6 +14,13 @@ namespace VisioAutomation.ShapeSheet.Streams
             seg[0] = item.Section;
             seg[1] = item.Row;
             seg[2] = item.Cell;
+        }
+
+        public static VisioAutomation.ShapeSheet.Streams.StreamArray Create(int numcells, IEnumerable<Src> srcs)
+        {
+            var stream = new VisioAutomation.ShapeSheet.Streams.SrcStreamArrayBuilder(numcells);
+            stream.AddRange(srcs);
+            return stream.ToStreamArray();
         }
     }
 }
