@@ -71,9 +71,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_src(WriteCache<Src> wcs)
         {
-            var builder = new VisioAutomation.ShapeSheet.Streams.SrcStreamArrayBuilder(wcs.Count);
-            builder.AddRange(wcs.EnumCoords());
-            return builder.ToStreamArray();
+            return VisioAutomation.ShapeSheet.Streams.StreamBuilderX.CreateSrcStream(wcs.Count, wcs.EnumCoords());
         }
 
         private void CommitFormulas(SurfaceTarget surface)

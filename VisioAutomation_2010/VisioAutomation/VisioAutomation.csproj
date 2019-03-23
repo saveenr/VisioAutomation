@@ -113,8 +113,7 @@
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
     <Compile Include="ShapeSheet\Streams\StreamType.cs" />
-    <Compile Include="ShapeSheet\Streams\SidSrcStreamArrayBuilder.cs" />
-    <Compile Include="ShapeSheet\Streams\SrcStreamArrayBuilder.cs" />
+    <Compile Include="ShapeSheet\Streams\StreamBuilderUtil.cs" />
     <Compile Include="ShapeSheet\Streams\StreamArrayBuilderBase.cs" />
     <Compile Include="ShapeSheet\Writers\WriteCache.cs" />
     <Compile Include="ShapeSheet\Streams\StreamArray.cs" />
