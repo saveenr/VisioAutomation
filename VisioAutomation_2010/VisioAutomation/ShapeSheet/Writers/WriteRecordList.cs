@@ -40,15 +40,4 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public int Count => this.items.Count;
     }
-
-    internal struct WriteRecord<T>
-    {
-        public readonly T Coord;
-        public readonly string Value;
-        public WriteRecord(T coord, string value)
-        {
-            this.Coord = coord;
-            this.Value = value;
-        }
-    }
 }
