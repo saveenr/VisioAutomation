@@ -82,11 +82,6 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_sidsrc(WriteRecordList wcs)
-        {
-            return Streams.StreamArray.FromSidSrc(wcs.Count, wcs.EnumSidSrcs());
-        }
-
         public void CommitFormulas(SurfaceTarget surface)
         {
             if ((this.records == null || this.records.Count < 1))
@@ -94,7 +89,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this.buildstream_sidsrc(this.records);
+            var stream = this.records.BuildSidSrcStream();
             var formulas = this.records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
@@ -114,7 +109,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this.buildstream_sidsrc(this.records);
+            var stream = this.records.BuildSidSrcStream();
             var results = this.records.BuildValuesArray();
             const object[] unitcodes = null;
 
