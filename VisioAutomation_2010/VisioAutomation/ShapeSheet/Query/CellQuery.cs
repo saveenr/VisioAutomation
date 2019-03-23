@@ -138,7 +138,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = 1;
             int numcells = this._get_total_cell_count(numshapes);
             var srcs = this._enum_srcs();
-            var stream = Streams.StreamBuilder.CreateSrcStream(numcells, srcs);
+            var stream = Streams.StreamArray.CreateSrcStream(numcells, srcs);
 
             return stream;
         }
@@ -148,7 +148,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numshapes = shapeids.Count;
             int numcells = this._get_total_cell_count(numshapes);
             var sidsrcs = _enum_sidsrcs(shapeids);
-            var stream = Streams.StreamBuilder.CreateSidSrcStream(numcells, sidsrcs);
+            var stream = Streams.StreamArray.CreateSidSrcStream(numcells, sidsrcs);
 
             return stream;
         }
