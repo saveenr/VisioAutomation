@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    internal class WriteCache<T>
+    internal class WriteRecordList<T>
     {
-        private List<WriteRecord> items;
+        private readonly List<WriteRecord<T>> items;
 
-        public WriteCache()
+        public WriteRecordList()
         {
-            this.items = new List<WriteRecord>();
+            this.items = new List<WriteRecord<T>>();
         }
 
         public void Clear()
@@ -19,7 +19,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Add(T coord, string value)
         {
-            var item = new WriteRecord(coord, value);
+            var item = new WriteRecord<T>(coord, value);
             this.items.Add(item);
         }
 
@@ -28,7 +28,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             return this.items.Select(i=>i.Coord);
         }
 
-        public object[] BuildValues()
+        public object[] BuildValuesArray()
         {
             var array = new object[this.items.Count];
             for (int i = 0; i < this.items.Count; i++)
@@ -39,17 +39,16 @@ namespace VisioAutomation.ShapeSheet.Writers
         }
 
         public int Count => this.items.Count;
+    }
 
-        struct WriteRecord
+    internal struct WriteRecord<T>
+    {
+        public readonly T Coord;
+        public readonly string Value;
+        public WriteRecord(T coord, string value)
         {
-            public T Coord;
-            public string Value;
-
-            public WriteRecord(T coord, string value)
-            {
-                this.Coord = coord;
-                this.Value = value;
-            }
+            this.Coord = coord;
+            this.Value = value;
         }
     }
 }

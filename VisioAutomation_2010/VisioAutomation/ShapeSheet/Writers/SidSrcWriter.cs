@@ -5,7 +5,7 @@ namespace VisioAutomation.ShapeSheet.Writers
     public class SidSrcWriter : WriterBase
     {
 
-        private WriteCache<SidSrc> records;
+        private WriteRecordList<SidSrc> records;
 
         public SidSrcWriter()
         {
@@ -73,7 +73,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this.records == null)
             {
-                this.records = new WriteCache<SidSrc>();
+                this.records = new WriteRecordList<SidSrc>();
             }
 
             if (formula.HasValue)
@@ -82,7 +82,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_sidsrc(WriteCache<SidSrc> wcs)
+        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_sidsrc(WriteRecordList<SidSrc> wcs)
         {
             return Streams.StreamArray.FromSidSrc(wcs.Count, wcs.EnumCoords());
         }
@@ -95,7 +95,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
 
             var stream = this.buildstream_sidsrc(this.records);
-            var formulas = this.records.BuildValues();
+            var formulas = this.records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
             {
@@ -115,7 +115,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
 
             var stream = this.buildstream_sidsrc(this.records);
-            var results = this.records.BuildValues();
+            var results = this.records.BuildValuesArray();
             const object[] unitcodes = null;
 
             if (stream.Array.Length == 0)
