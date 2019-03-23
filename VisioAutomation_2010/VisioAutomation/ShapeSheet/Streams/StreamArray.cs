@@ -5,7 +5,6 @@ namespace VisioAutomation.ShapeSheet.Streams
     public struct StreamArray
     {
         public readonly short[] Array;
-        public readonly Streams.StreamType StreamType;
         public readonly int ChunkSize;
         public readonly int Count;
 
@@ -17,7 +16,6 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
 
             this.Array = array;
-            this.StreamType = cell_coord;
             this.ChunkSize = cell_coord == Streams.StreamType.SidSrc ? 4 : 3;
 
             if (array.Length % this.ChunkSize != 0)
