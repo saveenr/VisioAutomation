@@ -3,13 +3,15 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    internal class WriteRecordList<T>
+    internal class WriteRecordList
     {
-        private readonly List<WriteRecord<T>> items;
+        private readonly List<WriteRecord> items;
+
+        int chunksize = -1;
 
         public WriteRecordList()
         {
-            this.items = new List<WriteRecord<T>>();
+            this.items = new List<WriteRecord>();
         }
 
         public void Clear()
@@ -17,15 +19,52 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.items.Clear();
         }
 
-        public void Add(T coord, string value)
+        public void Add(SidSrc sidsrc, string value)
         {
-            var item = new WriteRecord<T>(coord, value);
+            CheckForSidSrc();
+            var item = new WriteRecord(sidsrc, value);
             this.items.Add(item);
         }
 
-        public IEnumerable<T> EnumCoords()
+        public void Add(Src coord, string value)
         {
-            return this.items.Select(i=>i.Coord);
+            CheckForSrc();
+            var item = new WriteRecord(new SidSrc(-1, coord), value);
+            this.items.Add(item);
+        }
+
+        private void CheckForSidSrc()
+        {
+            if (this.chunksize < 0)
+            {
+                this.chunksize = 4;
+            }
+            else if (this.chunksize != 4)
+            {
+                string msg = string.Format("Excpected a src value");
+            }
+        }
+
+        private void CheckForSrc()
+        {
+            if (this.chunksize < 0)
+            {
+                this.chunksize = 3;
+            }
+            else if (this.chunksize != 3)
+            {
+                string msg = string.Format("Excpected a sidsrc value");
+            }
+        }
+
+        public IEnumerable<SidSrc> EnumSidSrcs()
+        {
+            return this.items.Select(i=>i.SidSrc);
+        }
+
+        public IEnumerable<Src> EnumSrcs()
+        {
+            return this.items.Select(i => i.SidSrc.Src);
         }
 
         public object[] BuildValuesArray()

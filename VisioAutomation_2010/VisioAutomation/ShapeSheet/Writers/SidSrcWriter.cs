@@ -5,7 +5,7 @@ namespace VisioAutomation.ShapeSheet.Writers
     public class SidSrcWriter : WriterBase
     {
 
-        private WriteRecordList<SidSrc> records;
+        private WriteRecordList records;
 
         public SidSrcWriter()
         {
@@ -73,7 +73,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this.records == null)
             {
-                this.records = new WriteRecordList<SidSrc>();
+                this.records = new WriteRecordList();
             }
 
             if (formula.HasValue)
@@ -82,9 +82,9 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_sidsrc(WriteRecordList<SidSrc> wcs)
+        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_sidsrc(WriteRecordList wcs)
         {
-            return Streams.StreamArray.FromSidSrc(wcs.Count, wcs.EnumCoords());
+            return Streams.StreamArray.FromSidSrc(wcs.Count, wcs.EnumSidSrcs());
         }
 
         public void CommitFormulas(SurfaceTarget surface)

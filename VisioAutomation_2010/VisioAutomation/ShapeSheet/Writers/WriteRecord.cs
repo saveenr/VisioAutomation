@@ -3,13 +3,19 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
-    internal struct WriteRecord<T>
+    internal struct WriteRecord
     {
-        public readonly T Coord;
+        public readonly SidSrc SidSrc;
         public readonly string Value;
-        public WriteRecord(T coord, string value)
+        public WriteRecord(SidSrc sidsrc, string value)
         {
-            this.Coord = coord;
+            this.SidSrc = sidsrc;
+            this.Value = value;
+        }
+
+        public WriteRecord(Src src, string value)
+        {
+            this.SidSrc = new SidSrc(-1,src);
             this.Value = value;
         }
     }
