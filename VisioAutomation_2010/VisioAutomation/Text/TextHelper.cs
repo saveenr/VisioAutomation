@@ -39,7 +39,7 @@ namespace VisioAutomation.Text
                 srcs.Add(src_tabother);
             }
 
-            var streamarray = VASS.Streams.StreamArray.CreateSrcStream(srcs);
+            var streamarray = VASS.Streams.StreamArray.FromSrc(srcs);
    
             var surface = new SurfaceTarget(shape);
 

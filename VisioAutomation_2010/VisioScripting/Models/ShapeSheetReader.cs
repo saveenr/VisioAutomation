@@ -24,7 +24,7 @@ namespace VisioScripting.Models
 
         public string[] GetFormulas()
         {
-            var stream = VisioAutomation.ShapeSheet.Streams.StreamArray.CreateSidSrcStream(this.SidSrcs);
+            var stream = VisioAutomation.ShapeSheet.Streams.StreamArray.FromSidSrc(this.SidSrcs);
             var formulas = this.Surface.GetFormulasU(stream);
             return formulas;
         }
@@ -32,7 +32,7 @@ namespace VisioScripting.Models
         public string[] GetResults()
         {
             const object [] unitcodes = null;
-            var stream = VisioAutomation.ShapeSheet.Streams.StreamArray.CreateSidSrcStream(this.SidSrcs);
+            var stream = VisioAutomation.ShapeSheet.Streams.StreamArray.FromSidSrc(this.SidSrcs);
             var formulas = this.Surface.GetResults<string>( stream, unitcodes);
             return formulas;
         }

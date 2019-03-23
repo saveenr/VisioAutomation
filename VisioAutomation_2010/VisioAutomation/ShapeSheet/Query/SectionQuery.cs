@@ -206,7 +206,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int numcells = cache.CountCells();
             var shapecache = cache[shapeindex];
             var srcs = _sidsrcs_for_shape(dummy_shapeid, shapecache).Select(i => i.Src);
-            var stream = Streams.StreamArray.CreateSrcStream(numcells,srcs);
+            var stream = Streams.StreamArray.FromSrc(numcells,srcs);
 
             return stream;
         }
@@ -215,7 +215,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             int numcells = cache.CountCells();
             var sidsrcs = _sidsrcs_for_shapes(shapeidpairs, cache);
-            var stream = VASS.Streams.StreamArray.CreateSidSrcStream(numcells,sidsrcs);
+            var stream = VASS.Streams.StreamArray.FromSidSrc(numcells,sidsrcs);
             return stream;
         }
 

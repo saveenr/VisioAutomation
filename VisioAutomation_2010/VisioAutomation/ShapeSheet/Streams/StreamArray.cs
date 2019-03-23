@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
     public struct StreamArray
     {
         public readonly short[] Array;
-        public readonly int ChunkSize;
+        private readonly int ChunkSize;
         public readonly int Count;
 
         internal StreamArray(short[] array, Streams.StreamType cell_coord, int count)
@@ -17,14 +18,17 @@ namespace VisioAutomation.ShapeSheet.Streams
 
             this.Array = array;
             this.ChunkSize = cell_coord == Streams.StreamType.SidSrc ? 4 : 3;
+            this.Count = count;
 
             if (array.Length % this.ChunkSize != 0)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException("Coordinate type and length of array to not match");
+                string msg = string.Format("Array length must be a multiple of {0}", this.ChunkSize);
+                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
 
             if (count * this.ChunkSize != array.Length)
             {
+                string msg = string.Format("Array length does not match the number of cells {0} multiplied by the chunk size {1}", this.Count, this.ChunkSize);
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Count does not match the number of short elements in the array");
             }
 
@@ -33,12 +37,12 @@ namespace VisioAutomation.ShapeSheet.Streams
 
 
 
-        public static VisioAutomation.ShapeSheet.Streams.StreamArray CreateSidSrcStream(IList<SidSrc> sidsrcs)
+        public static VASS.Streams.StreamArray FromSidSrc(IList<SidSrc> sidsrcs)
         {
-            return CreateSidSrcStream(sidsrcs.Count, sidsrcs);
+            return FromSidSrc(sidsrcs.Count, sidsrcs);
         }
 
-        public static VisioAutomation.ShapeSheet.Streams.StreamArray CreateSidSrcStream(int numcells, IEnumerable<SidSrc> sidsrcs)
+        public static VASS.Streams.StreamArray FromSidSrc(int numcells, IEnumerable<SidSrc> sidsrcs)
         {
             var num_shorts = numcells * 4;
             var array = new short[num_shorts];
@@ -60,11 +64,13 @@ namespace VisioAutomation.ShapeSheet.Streams
             }
             return stream;
         }
-        public static VisioAutomation.ShapeSheet.Streams.StreamArray CreateSrcStream(IList<Src> srcs)
+
+        public static VASS.Streams.StreamArray FromSrc(IList<Src> srcs)
         {
-            return CreateSrcStream(srcs.Count, srcs);
+            return FromSrc(srcs.Count, srcs);
         }
-        public static VisioAutomation.ShapeSheet.Streams.StreamArray CreateSrcStream(int numcells, IEnumerable<Src> sidsrcs)
+
+        public static VASS.Streams.StreamArray FromSrc(int numcells, IEnumerable<Src> sidsrcs)
         {
             var num_shorts = numcells * 3;
             var array = new short[num_shorts];

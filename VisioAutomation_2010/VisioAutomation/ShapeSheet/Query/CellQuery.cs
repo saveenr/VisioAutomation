@@ -128,17 +128,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return row;
         }
 
-        private int _get_total_cell_count(int numshapes)
-        {
-            return this.Columns.Count * numshapes;
-        }
-
         private Streams.StreamArray _build_src_stream()
         {
             int numshapes = 1;
-            int numcells = this._get_total_cell_count(numshapes);
+            int numcells = this.Columns.Count * numshapes;
             var srcs = this._enum_srcs();
-            var stream = Streams.StreamArray.CreateSrcStream(numcells, srcs);
+            var stream = Streams.StreamArray.FromSrc(numcells, srcs);
 
             return stream;
         }
@@ -146,9 +141,9 @@ namespace VisioAutomation.ShapeSheet.Query
         private VASS.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
-            int numcells = this._get_total_cell_count(numshapes);
+            int numcells = this.Columns.Count * numshapes;
             var sidsrcs = _enum_sidsrcs(shapeids);
-            var stream = Streams.StreamArray.CreateSidSrcStream(numcells, sidsrcs);
+            var stream = Streams.StreamArray.FromSidSrc(numcells, sidsrcs);
 
             return stream;
         }
