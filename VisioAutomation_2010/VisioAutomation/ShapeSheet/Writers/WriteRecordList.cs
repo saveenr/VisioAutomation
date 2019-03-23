@@ -59,7 +59,9 @@ namespace VisioAutomation.ShapeSheet.Writers
                 string msg = string.Format("writer does not contain sidsrcvalues");
                 throw new System.ArgumentOutOfRangeException(msg);
             }
-            return Streams.StreamArray.FromSidSrc(this.Count, this.EnumSidSrcs());
+
+            var sidsrcs = this.items.Select(i => i.SidSrc);
+            return Streams.StreamArray.FromSidSrc(this.Count, sidsrcs);
         }
 
         public Streams.StreamArray BuildSrcStream()
@@ -69,17 +71,9 @@ namespace VisioAutomation.ShapeSheet.Writers
                 string msg = string.Format("writer does not contain srcvalues");
                 throw new System.ArgumentOutOfRangeException(msg);
             }
-            return Streams.StreamArray.FromSrc(this.Count, this.EnumSrcs());
-        }
 
-        private IEnumerable<SidSrc> EnumSidSrcs()
-        {
-            return this.items.Select(i=>i.SidSrc);
-        }
-
-        private IEnumerable<Src> EnumSrcs()
-        {
-            return this.items.Select(i => i.SidSrc.Src);
+            var srcs = this.items.Select(i => i.SidSrc.Src);
+            return Streams.StreamArray.FromSrc(this.Count, srcs);
         }
 
         public object[] BuildValuesArray()
