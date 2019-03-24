@@ -148,7 +148,7 @@ namespace VisioPowerShell.Commands
 
                 using (var undoscope = this.Client.Undo.NewUndoScope(nameof(NewVisioShape) +":CommitCells"))
                 {
-                    writer.Commit(surface);
+                    writer.CommitFormulas(surface);
                 }
 
             }

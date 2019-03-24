@@ -37,11 +37,11 @@ namespace VisioAutomationSamples
 
             var writer = new SidSrcWriter();
 
-            writer.SetFormulas(progress.ID16, xfrm);
-            writer.SetFormulas(progress.ID16, background_fmt);
-            writer.SetFormulas(progress.ID16, progress_fmt);
+            writer.SetValues(progress.ID16, xfrm);
+            writer.SetValues(progress.ID16, background_fmt);
+            writer.SetValues(progress.ID16, progress_fmt);
 
-            writer.Commit(page_a);
+            writer.CommitFormulas(page_a);
 
             var markup1 = new VisioAutomation.Models.Text.Element();
             markup1.AddField(VisioAutomation.Models.Text.FieldConstants.PageName);

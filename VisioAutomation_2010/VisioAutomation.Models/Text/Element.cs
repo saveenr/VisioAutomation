@@ -183,7 +183,7 @@ namespace VisioAutomation.Models.Text
                     writer.Clear();
                     charcells.ApplyFormulas(writer, rownum);
 
-                    writer.Commit(shape);
+                    writer.CommitFormulas(shape);
                 }
 
                 // Apply paragraph formatting
@@ -204,7 +204,7 @@ namespace VisioAutomation.Models.Text
                     writer.Clear();
                     paracells.ApplyFormulas(writer, rownum);
 
-                    writer.Commit(shape);
+                    writer.CommitFormulas(shape);
                 }
             }
 

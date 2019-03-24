@@ -12,7 +12,7 @@ namespace VisioPowerShell.Models
             {
                 if (pair.Formula != null)
                 {
-                    writer.SetFormula(id, pair.Src, pair.Formula);
+                    writer.SetValue(id, pair.Src, pair.Formula);
                 }
             }
         }

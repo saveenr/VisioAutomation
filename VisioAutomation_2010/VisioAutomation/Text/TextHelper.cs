@@ -24,8 +24,8 @@ namespace VisioAutomation.Text
             }
 
             const short row = 0;
-            
-            var stream = new VisioAutomation.ShapeSheet.Streams.SrcStreamBuilder(num_stops * 3);
+
+            var srcs = new List<VASS.Src>(num_stops * 3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
@@ -34,16 +34,18 @@ namespace VisioAutomation.Text
                 var src_tabalign = new ShapeSheet.Src(tab_section, row, (short)(i + 2));
                 var src_tabother = new ShapeSheet.Src(tab_section, row, (short)(i + 3));
 
-                stream.Add(src_tabpos);
-                stream.Add(src_tabalign);
-                stream.Add(src_tabother);
+                srcs.Add(src_tabpos);
+                srcs.Add(src_tabalign);
+                srcs.Add(src_tabother);
             }
 
+            var streamarray = VASS.Streams.StreamArray.FromSrc(srcs);
+   
             var surface = new SurfaceTarget(shape);
 
             const object[] unitcodes = null;
 
-            var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
+            var results = surface.GetResults<double>(streamarray, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
@@ -98,12 +100,12 @@ namespace VisioAutomation.Text
                 var src_tabalign = new ShapeSheet.Src(tab_section, row, (short)(i + 2));
                 var src_tabother = new ShapeSheet.Src(tab_section, row, (short)(i + 3));
 
-                writer.SetFormula(src_tabpos, position); // tab position
-                writer.SetFormula(src_tabalign, alignment); // tab alignment
-                writer.SetFormula(src_tabother, "0"); // tab unknown
+                writer.SetValue(src_tabpos, position); // tab position
+                writer.SetValue(src_tabalign, alignment); // tab alignment
+                writer.SetValue(src_tabother, "0"); // tab unknown
             }
 
-            writer.Commit(shape);
+            writer.CommitFormulas(shape);
         }
 
         private static IVisio.VisRowTags GetTabTagForStops(int stops)
@@ -175,10 +177,10 @@ namespace VisioAutomation.Text
             {
                 var src = new ShapeSheet.Src(tab_section, (short)IVisio.VisRowIndices.visRowTab,
                     (short)i);
-                writer.SetFormula(src, formula);
+                writer.SetValue(src, formula);
             }
 
-            writer.Commit(shape);
+            writer.CommitFormulas(shape);
         }
 
 

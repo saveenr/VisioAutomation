@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioScripting.Commands
 {
@@ -26,21 +25,21 @@ namespace VisioScripting.Commands
 
             var page = cmdtarget.ActivePage;
             var target_shapeids = targets.ToShapeIDs();
-            var writer = new SidSrcWriter();
+            var writer = new VASS.Writers.SidSrcWriter();
 
             foreach (int shapeid in target_shapeids.ShapeIDs)
             {
-                writer.SetFormulas((short)shapeid, lockcells);
+                writer.SetValues((short)shapeid, lockcells);
             }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetLockCells)))
             {
-                writer.Commit(page);
+                writer.CommitFormulas(page);
             }
         }
 
 
-        public Dictionary<int,LockCells> GetLockCells(Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<int,LockCells> GetLockCells(Models.TargetShapes targets, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

@@ -94,11 +94,11 @@ namespace VisioScripting.Helpers
             var writer = new SidSrcWriter();
             for (int i = 0; i < newpositions.Count; i++)
             {
-                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, newpositions[i].X);
-                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, newpositions[i].Y);
+                writer.SetValue((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, newpositions[i].X);
+                writer.SetValue((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, newpositions[i].Y);
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
         }
 
         private static void ModifySizes(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Geometry.Size> newsizes)
@@ -106,11 +106,11 @@ namespace VisioScripting.Helpers
             var writer = new SidSrcWriter();
             for (int i = 0; i < newsizes.Count; i++)
             {
-                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, newsizes[i].Width);
-                writer.SetFormula((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, newsizes[i].Height);
+                writer.SetValue((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, newsizes[i].Width);
+                writer.SetValue((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, newsizes[i].Height);
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
         }
 
         public static void SnapCorner(IVisio.Page page, Models.TargetShapeIDs target, VisioAutomation.Geometry.Size snapsize, Models.SnapCornerPosition corner)

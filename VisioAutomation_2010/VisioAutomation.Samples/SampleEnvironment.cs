@@ -59,10 +59,10 @@ namespace VisioAutomationSamples
             var page_sheet = page.PageSheet;
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetFormula(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
-            writer.SetFormula(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
+            writer.SetValue(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
+            writer.SetValue(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            writer.Commit(page_sheet);
+            writer.CommitFormulas(page_sheet);
         }
 
         public static VA.Geometry.Size GetPageSize(IVisio.Page page)

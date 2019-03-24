@@ -42,10 +42,10 @@ namespace VisioAutomation.Models.Documents.Forms
             page_print_cells.TopMargin = formpage.PageMargin.Top;
             page_print_cells.BottomMargin = formpage.PageMargin.Bottom;
 
-            writer.SetFormulas(page_fmt_cells);
-            writer.SetFormulas(page_print_cells);
+            writer.SetValues(page_fmt_cells);
+            writer.SetValues(page_print_cells);
 
-            writer.Commit(pagesheet);
+            writer.CommitFormulas(pagesheet);
 
             this.Reset();
             return this._page;
@@ -102,14 +102,14 @@ namespace VisioAutomation.Models.Documents.Forms
             var writer = new SidSrcWriter();
             foreach (var block in this.Blocks)
             {
-                writer.SetFormulas((short)block.VisioShapeID , block.FormatCells);
-                writer.SetFormulas((short)block.VisioShapeID, block.TextBlockCells);
+                writer.SetValues((short)block.VisioShapeID , block.FormatCells);
+                writer.SetValues((short)block.VisioShapeID, block.TextBlockCells);
 
-                writer.SetFormulas((short)block.VisioShapeID, block.ParagraphFormatCells, 0);
-                writer.SetFormulas((short)block.VisioShapeID, block.CharacterFormatCells, 0);
+                writer.SetValues((short)block.VisioShapeID, block.ParagraphFormatCells, 0);
+                writer.SetValues((short)block.VisioShapeID, block.CharacterFormatCells, 0);
             }
 
-            writer.Commit(this._page);
+            writer.CommitFormulas(this._page);
         }
 
         private void AdjustInsertionPoint(VisioAutomation.Geometry.Size size)

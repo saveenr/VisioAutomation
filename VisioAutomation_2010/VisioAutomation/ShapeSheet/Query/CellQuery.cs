@@ -128,34 +128,43 @@ namespace VisioAutomation.ShapeSheet.Query
             return row;
         }
 
-        private int _get_total_cell_count(int numshapes)
-        {
-            return this.Columns.Count * numshapes;
-        }
-
         private Streams.StreamArray _build_src_stream()
         {
             int numshapes = 1;
-            int numcells = this._get_total_cell_count(numshapes);
-            var stream = new VASS.Streams.SrcStreamArrayBuilder(numcells);
-            var srcs = this.Columns.Select(c => c.Src);
-            stream.AddRange(srcs);
+            int numcells = this.Columns.Count * numshapes;
+            var srcs = this._enum_srcs();
+            var stream = Streams.StreamArray.FromSrc(numcells, srcs);
 
-            return stream.ToStreamArray();
+            return stream;
         }
 
         private VASS.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
-            int numcells = this._get_total_cell_count(numshapes);
+            int numcells = this.Columns.Count * numshapes;
+            var sidsrcs = _enum_sidsrcs(shapeids);
+            var stream = Streams.StreamArray.FromSidSrc(numcells, sidsrcs);
 
-            var stream = new VASS.Streams.SidSrcStreamArrayBuilder(numcells);
+            return stream;
+        }
+
+        private IEnumerable<Src> _enum_srcs()
+        {
+            foreach (var col in this.Columns)
+            {
+                yield return col.Src;
+            }
+        }
+
+        private IEnumerable<SidSrc> _enum_sidsrcs(IList<int> shapeids)
+        {
             foreach (var shapeid in shapeids)
             {
-                var sidsrcs = this.Columns.Select(c => new SidSrc((short)shapeid, c.Src));
-                stream.AddRange(sidsrcs);
+                foreach(var col in this.Columns)
+                {
+                    yield return new SidSrc((short)shapeid, col.Src);
+                }
             }
-            return stream.ToStreamArray();
         }
 
         private static void RestrictToShapesOnly(SurfaceTarget surface)

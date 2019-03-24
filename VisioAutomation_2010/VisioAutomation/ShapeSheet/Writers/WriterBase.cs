@@ -4,8 +4,14 @@ namespace VisioAutomation.ShapeSheet.Writers
 {
     public class WriterBase
     {
+        protected WriteRecordList _records;
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
+
+        protected WriterBase(CellCoordinateType type)
+        {
+            this._records = new WriteRecordList(type);
+        }
 
         protected IVisio.VisGetSetArgs ComputeGetResultFlags()
         {
@@ -15,6 +21,12 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             return flags;
         }
+
+        public void Clear()
+        {
+            _records.Clear();
+        }
+
 
         protected IVisio.VisGetSetArgs ComputeGetFormulaFlags()
         {

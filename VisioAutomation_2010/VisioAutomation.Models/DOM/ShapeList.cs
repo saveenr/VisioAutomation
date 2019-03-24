@@ -124,7 +124,7 @@ namespace VisioAutomation.Models.Dom
                 fmt.Apply(writer, id);
             }
 
-            writer.Commit(context.VisioPage);
+            writer.CommitFormulas(context.VisioPage);
         }
 
         private void PerformDrawing(RenderContext context)

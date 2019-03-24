@@ -65,12 +65,12 @@ namespace VisioScripting.Models
 
         public void SetFormulas(VASS.Writers.SidSrcWriter writer, short id)
         {
-            writer.SetFormula(id, VASS.SrcConstants.XFormPinX, this.XFormPinX);
-            writer.SetFormula(id, VASS.SrcConstants.XFormPinY, this.XFormPinY);
-            writer.SetFormula(id, VASS.SrcConstants.XFormLocPinX, this.XFormLocPinX);
-            writer.SetFormula(id, VASS.SrcConstants.XFormLocPinY, this.XFormLocPinY);
-            writer.SetFormula(id, VASS.SrcConstants.XFormWidth, this.XFormWidth);
-            writer.SetFormula(id, VASS.SrcConstants.XFormHeight, this.XFormHeight);
+            writer.SetValue(id, VASS.SrcConstants.XFormPinX, this.XFormPinX);
+            writer.SetValue(id, VASS.SrcConstants.XFormPinY, this.XFormPinY);
+            writer.SetValue(id, VASS.SrcConstants.XFormLocPinX, this.XFormLocPinX);
+            writer.SetValue(id, VASS.SrcConstants.XFormLocPinY, this.XFormLocPinY);
+            writer.SetValue(id, VASS.SrcConstants.XFormWidth, this.XFormWidth);
+            writer.SetValue(id, VASS.SrcConstants.XFormHeight, this.XFormHeight);
         }
 
         public static VisioAutomation.Geometry.Rectangle GetBoundingBox(IEnumerable<ShapeXFormData> xfrms)

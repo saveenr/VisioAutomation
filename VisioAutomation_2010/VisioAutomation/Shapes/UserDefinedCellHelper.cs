@@ -88,15 +88,15 @@ namespace VisioAutomation.Shapes
 
                 if (cells.Value.HasValue)
                 {
-                    writer.SetFormula(src_value, cells.Value.Value);
+                    writer.SetValue(src_value, cells.Value.Value);
                 }
 
                 if (cells.Prompt.HasValue)
                 {
-                    writer.SetFormula(src_prompt, cells.Prompt.Value);
+                    writer.SetValue(src_prompt, cells.Prompt.Value);
                 }
 
-                writer.Commit(shape);            
+                writer.CommitFormulas(shape);            
             }
         }
 

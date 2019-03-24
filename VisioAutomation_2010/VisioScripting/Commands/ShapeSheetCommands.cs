@@ -23,17 +23,17 @@ namespace VisioScripting.Commands
                 if (cells is VisioAutomation.ShapeSheet.CellGroups.CellGroup)
                 {
                     var cells_mr = (VisioAutomation.ShapeSheet.CellGroups.CellGroup)cells;
-                    writer.SetFormulas((short)shape_id, cells_mr, 0);
+                    writer.SetValues((short)shape_id, cells_mr, 0);
                 }
                 else
                 {
                     var cells_sr = (VisioAutomation.ShapeSheet.CellGroups.CellGroup)cells;
-                    writer.SetFormulas((short)shape_id, cells_sr);
+                    writer.SetValues((short)shape_id, cells_sr);
 
                 }
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
         }
 
         public void SetShapeName(Models.TargetShapes targets, IList<string> names)
