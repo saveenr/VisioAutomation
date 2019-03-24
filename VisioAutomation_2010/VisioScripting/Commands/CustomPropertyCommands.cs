@@ -26,7 +26,7 @@ namespace VisioScripting.Commands
                 return prop_dic;
             }
 
-            var list_custom_props = CustomPropertyHelper.GetCells(cmdtarget.ActivePage, targets.Shapes, CellValueType.Formula);
+            var list_custom_props = CustomPropertyHelper.Get(cmdtarget.ActivePage, targets.Shapes, CellValueType.Formula);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {

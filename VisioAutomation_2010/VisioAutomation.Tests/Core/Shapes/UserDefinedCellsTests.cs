@@ -135,7 +135,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, VisioAutomation.Shapes.CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(0, VisioAutomation.Shapes.CustomPropertyHelper.Get(s1, CellValueType.Formula).Count);
 
             // Add the same one multiple times Custom Property
             VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR1", null);
