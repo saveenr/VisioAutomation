@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeLayoutCells : CellGroup
+    public class ShapeLayoutCells : VASS.CellGroups.CellGroup
     {
         public VASS.CellValueLiteral ConnectorFixedCode { get; set; }
         public VASS.CellValueLiteral LineJumpCode { get; set; }
@@ -26,7 +25,7 @@ namespace VisioAutomation.Shapes
         public VASS.CellValueLiteral ShapeDisplayLevel { get; set; } // new in visio 2010
         public VASS.CellValueLiteral Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
@@ -68,7 +67,7 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<ShapeLayoutCellsBuilder> ShapeLayoutCells_lazy_builder = new System.Lazy<ShapeLayoutCellsBuilder>();
 
-        class ShapeLayoutCellsBuilder : CellGroupBuilder<ShapeLayoutCells>
+        class ShapeLayoutCellsBuilder : VASS.CellGroups.CellGroupBuilder<ShapeLayoutCells>
         {
 
             public ShapeLayoutCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
@@ -78,7 +77,7 @@ namespace VisioAutomation.Shapes
             public override ShapeLayoutCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new ShapeLayoutCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
                 cells.ConnectorFixedCode = getcellvalue(nameof(ShapeLayoutCells.ConnectorFixedCode));
                 cells.LineJumpCode = getcellvalue(nameof(ShapeLayoutCells.LineJumpCode));

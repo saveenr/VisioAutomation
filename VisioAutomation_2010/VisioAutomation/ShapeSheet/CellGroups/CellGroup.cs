@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return new CellMetadataItem(name, src, value.Value);
         }
 
-        internal static System.Func<string,string> gcf(ShapeSheet.Query.Row<string> row, VASS.Query.Columns cols)
+        internal static System.Func<string,string> row_to_cellgroup(ShapeSheet.Query.Row<string> row, VASS.Query.Columns cols)
         {
             return (s) => row[cols[s].Ordinal];
         }

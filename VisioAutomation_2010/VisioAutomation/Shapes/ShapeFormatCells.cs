@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeFormatCells : CellGroup
+    public class ShapeFormatCells : VASS.CellGroups.CellGroup
     {
         public VASS.CellValueLiteral FillBackground { get; set; }
         public VASS.CellValueLiteral FillBackgroundTransparency { get; set; }
@@ -33,7 +32,7 @@ namespace VisioAutomation.Shapes
         public VASS.CellValueLiteral LineWeight { get; set; }
         public VASS.CellValueLiteral LineRounding { get; set; }
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
@@ -82,7 +81,7 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<ShapeFormatCellsBuilder> shape_format_lazy_builder = new System.Lazy<ShapeFormatCellsBuilder>();
 
-        class ShapeFormatCellsBuilder : CellGroupBuilder<ShapeFormatCells>
+        class ShapeFormatCellsBuilder : VASS.CellGroups.CellGroupBuilder<ShapeFormatCells>
         {
 
             public ShapeFormatCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
@@ -93,7 +92,7 @@ namespace VisioAutomation.Shapes
             {
 
                 var cells = new ShapeFormatCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
                 cells.FillBackground = getcellvalue(nameof(ShapeFormatCells.FillBackground));
                 cells.FillBackgroundTransparency = getcellvalue(nameof(ShapeFormatCells.FillBackgroundTransparency));

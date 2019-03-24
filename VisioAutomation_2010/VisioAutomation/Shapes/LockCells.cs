@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using VASS=VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : CellGroup
+    public class LockCells : VASS.CellGroups.CellGroup
     {
         public VASS.CellValueLiteral Aspect { get; set; }
         public VASS.CellValueLiteral Begin { get; set; }
@@ -28,7 +27,7 @@ namespace VisioAutomation.Shapes
         public VASS.CellValueLiteral VertexEdit { get; set; }
         public VASS.CellValueLiteral Width { get; set; }
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
@@ -72,7 +71,7 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<LockCellsBuilder> LockCells_lazy_builder = new System.Lazy<LockCellsBuilder>();
 
 
-        class LockCellsBuilder : CellGroupBuilder<LockCells>
+        class LockCellsBuilder : VASS.CellGroups.CellGroupBuilder<LockCells>
         {
             public LockCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
@@ -81,7 +80,7 @@ namespace VisioAutomation.Shapes
             public override LockCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new LockCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
                 cells.Aspect = getcellvalue(nameof(LockCells.Aspect));
                 cells.Begin = getcellvalue(nameof(LockCells.Begin));

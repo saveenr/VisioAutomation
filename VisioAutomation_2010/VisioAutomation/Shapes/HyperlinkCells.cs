@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using VASS=VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class HyperlinkCells : CellGroup
+    public class HyperlinkCells : VASS.CellGroups.CellGroup
     {
         public VASS.CellValueLiteral Address { get; set; }
         public VASS.CellValueLiteral Description { get; set; }
@@ -17,7 +16,7 @@ namespace VisioAutomation.Shapes
         public VASS.CellValueLiteral Default { get; set; }
         public VASS.CellValueLiteral Invisible { get; set; }
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
@@ -48,17 +47,17 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<HyperlinkCellsBuilder> HyperLinkCells_lazy_builder = new System.Lazy<HyperlinkCellsBuilder>();
 
 
-        class HyperlinkCellsBuilder : CellGroupBuilder<HyperlinkCells>
+        class HyperlinkCellsBuilder : VASS.CellGroups.CellGroupBuilder<HyperlinkCells>
         {
 
-            public HyperlinkCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public HyperlinkCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
             {
             }
 
             public override HyperlinkCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new HyperlinkCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
                 
                 cells.Address = getcellvalue(nameof(HyperlinkCells.Address));
                 cells.Description = getcellvalue(nameof(HyperlinkCells.Description));
