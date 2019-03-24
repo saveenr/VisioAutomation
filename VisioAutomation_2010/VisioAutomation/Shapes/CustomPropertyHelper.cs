@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using System.Linq;
-using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -30,7 +29,7 @@ namespace VisioAutomation.Shapes
                 if (cell_propname == null)
                 {
                     string msg = string.Format("Could not retrieve cell for custom property \"{0}\"", full_prop_name);
-                    throw new InternalAssertionException(msg);
+                    throw new Exceptions.InternalAssertionException(msg);
                 }
 
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
@@ -69,7 +68,7 @@ namespace VisioAutomation.Shapes
         /// If there are no custom properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of custom properties</returns>
-        public static CustomPropertyDictionary GetCells(IVisio.Shape shape, CellValueType type)
+        public static CustomPropertyDictionary GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var prop_names = CustomPropertyHelper.GetNames(shape);
             var dic = new CustomPropertyDictionary(prop_names.Count);
@@ -84,7 +83,7 @@ namespace VisioAutomation.Shapes
             return dic;
         }
 
-        public static List<CustomPropertyDictionary> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, CellValueType type)
+        public static List<CustomPropertyDictionary> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
             if (page == null)
             {
@@ -110,7 +109,7 @@ namespace VisioAutomation.Shapes
 
             if (customprops_per_shape.Count != shapeidpairs.Count)
             {
-                throw new InternalAssertionException();
+                throw new Exceptions.InternalAssertionException();
             }
 
             for (int shape_index = 0; shape_index < shapeidpairs.Count; shape_index++)
@@ -121,7 +120,7 @@ namespace VisioAutomation.Shapes
 
                 if (customprops_for_shape.Count != prop_names.Count)
                 {
-                    throw new InternalAssertionException();
+                    throw new VisioAutomation.Exceptions.InternalAssertionException();
                 }
 
                 var dic = new CustomPropertyDictionary(prop_names.Count);
@@ -183,7 +182,7 @@ namespace VisioAutomation.Shapes
 
             if (custom_prop_row_count != prop_names.Count)
             {
-                throw new InternalAssertionException("Unexpected number of property names");
+                throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected number of property names");
             }
 
             return prop_names;
