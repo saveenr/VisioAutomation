@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Shapes
 {
@@ -200,10 +199,10 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<CustomPropertyCellsBuilder> Custom_Property_lazy_builder = new System.Lazy<CustomPropertyCellsBuilder>();
 
 
-        public class CustomPropertyCellsBuilder : CellGroupBuilder<CustomPropertyCells>
+        public class CustomPropertyCellsBuilder : VASS.CellGroups.CellGroupBuilder<CustomPropertyCells>
         {
 
-            public CustomPropertyCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public CustomPropertyCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
             {
             }
 
