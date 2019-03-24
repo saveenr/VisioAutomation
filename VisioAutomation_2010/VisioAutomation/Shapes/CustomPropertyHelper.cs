@@ -78,6 +78,7 @@ namespace VisioAutomation.Shapes
             foreach (int i in shape_custprop_indices)
             {
                 string prop_name = shape_custprop_names[i];
+                var shape_custprop_cell = shape_custprop_cells[i];
                 shape_custprop_dic[prop_name] = shape_custprop_cells[i];
             }
 
@@ -129,15 +130,16 @@ namespace VisioAutomation.Shapes
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
-            var dic = new CustomPropertyDictionary(shape_custprop_names.Count);
+            var custprop_dic = new CustomPropertyDictionary(shape_custprop_names.Count);
 
             foreach (int i in System.Linq.Enumerable.Range(0, shape_custprop_names.Count))
             {
                 string prop_name = shape_custprop_names[i];
-                dic[prop_name] = shape_custprop_values[i];
+                var shape_custprop_value = shape_custprop_values[i];
+                custprop_dic[prop_name] = shape_custprop_value;
             }
 
-            return dic;
+            return custprop_dic;
         }
 
         public static int GetCount(IVisio.Shape shape)
