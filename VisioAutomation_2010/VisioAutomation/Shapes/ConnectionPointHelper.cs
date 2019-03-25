@@ -53,16 +53,6 @@ namespace VisioAutomation.Shapes
             shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionConnectionPts, (short)row);
         }
 
-        public static int GetCount(IVisio.Shape shape)
-        {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException(nameof(shape));
-            }
-
-            return shape.RowCount[ (short) IVisio.VisSectionIndices.visSectionConnectionPts];
-        }
-
         public static int Delete(IVisio.Shape shape)
         {
             if (shape == null)
@@ -80,5 +70,14 @@ namespace VisioAutomation.Shapes
         }
 
 
+        public static int GetCount(IVisio.Shape shape)
+        {
+            if (shape == null)
+            {
+                throw new System.ArgumentNullException(nameof(shape));
+            }
+
+            return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionConnectionPts];
+        }
     }
 }
