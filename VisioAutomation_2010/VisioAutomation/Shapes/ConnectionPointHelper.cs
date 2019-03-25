@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -35,6 +37,24 @@ namespace VisioAutomation.Shapes
             writer.CommitFormulas(shape);
 
             return n;
+        }
+
+        public static int Set(
+            IVisio.Shape shape,
+            short row,
+            ConnectionPointCells cpcells)
+        {
+            if (shape == null)
+            {
+                throw new System.ArgumentNullException(nameof(shape));
+            }
+
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            writer.SetValues(cpcells, row);
+
+            writer.CommitFormulas(shape);
+
+            return row;
         }
 
         public static void Delete(IVisio.Shape shape, int index)
@@ -78,6 +98,12 @@ namespace VisioAutomation.Shapes
             }
 
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionConnectionPts];
+        }
+
+        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var conpoint_cells = ConnectionPointCells.GetCells(shape, type);
+            return conpoint_cells;
         }
     }
 }

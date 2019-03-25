@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 
@@ -105,6 +106,57 @@ namespace VisioAutomation_Tests.Core.Connections
             Assert.AreEqual(4, num_deleted);
             Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
+            page1.Delete(0);
+        }
+
+        [TestMethod]
+        public void ConnectionPoints_Set()
+        {
+            var page1 = this.GetNewPage();
+
+            var s1 = page1.DrawRectangle(0, 0, 4, 1);
+            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+
+            var cp_type = VisioScripting.Models.ConnectionPointType.Inward;
+
+            var xpositions = new[] { "Width*0.25", "Width*0.30", "Width*0.75", "Width*0.90" };
+            var ypositions = new[] { "Height*0.15", "Height*0.21", "Height*0.65", "Height*0.89" };
+
+            foreach (int i in Enumerable.Range(0,xpositions.Length))
+            {
+                var xpos = xpositions[i];
+                var ypos = ypositions[i];
+                var cp = new ConnectionPointCells();
+                cp.X = xpos;
+                cp.Y = ypos;
+                cp.DirX = 0;
+                cp.DirY = 0;
+                cp.Type = (int)cp_type;
+
+                ConnectionPointHelper.Add(s1, cp);
+            }
+
+            Assert.AreEqual(4, ConnectionPointHelper.GetCount(s1));
+
+            var desired_cp0 = new ConnectionPointCells();
+            desired_cp0.X = "Width*0.025";
+            desired_cp0.Y = "Height*0.015";
+
+            var desired_cp1 = new ConnectionPointCells();
+            desired_cp1.X = "Width*0.0025";
+            desired_cp1.Y = "Height*0.0015";
+
+            ConnectionPointHelper.Set(s1, 0, desired_cp0);
+            ConnectionPointHelper.Set(s1, 1, desired_cp1);
+
+            var actual_cp = ConnectionPointCells.GetCells(s1, CellValueType.Formula);
+
+            Assert.AreEqual(desired_cp0.X, actual_cp[0].X);
+            Assert.AreEqual(desired_cp0.Y, actual_cp[0].Y);
+
+
+            Assert.AreEqual(desired_cp1.X, actual_cp[1].X);
+            Assert.AreEqual(desired_cp1.Y, actual_cp[1].Y);
             page1.Delete(0);
         }
     }
