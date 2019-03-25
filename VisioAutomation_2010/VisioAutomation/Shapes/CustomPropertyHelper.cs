@@ -9,6 +9,8 @@ namespace VisioAutomation.Shapes
 {
     public static class CustomPropertyHelper
     {
+        static short vis_sec_prop = (short)IVisio.VisSectionIndices.visSectionProp;
+
         public static void Set(
             IVisio.Shape shape,
             string name,
@@ -41,7 +43,7 @@ namespace VisioAutomation.Shapes
             }
 
             short row = shape.AddNamedRow(
-                (short)IVisio.VisSectionIndices.visSectionProp,
+                vis_sec_prop,
                 name,
                 (short)IVisio.VisRowIndices.visRowProp);
 
@@ -97,23 +99,22 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var sectionprop_index = (short)IVisio.VisSectionIndices.visSectionProp;
             var exists_flag = (short)IVisio.VisExistsFlags.visExistsAnywhere;
 
             // If the Custom Property section does not exist then return zero immediately
-            if (0 == shape.SectionExists[sectionprop_index, exists_flag])
+            if (0 == shape.SectionExists[vis_sec_prop, exists_flag])
             {
                 return 0;
             }
 
-            var section = shape.Section[sectionprop_index];
+            var section = shape.Section[vis_sec_prop];
 
             if (section == null)
             {
                 throw new System.NullReferenceException(nameof(section));
             }
 
-            int row_count = section.Shape.RowCount[sectionprop_index];
+            int row_count = section.Shape.RowCount[vis_sec_prop];
 
             return row_count;
         }
@@ -133,7 +134,7 @@ namespace VisioAutomation.Shapes
             }
 
             var prop_names = new List<string>(custom_prop_row_count);
-            var prop_section = shape.Section[(short)IVisio.VisSectionIndices.visSectionProp];
+            var prop_section = shape.Section[vis_sec_prop];
             var query_names = prop_section.ToEnumerable().Select(row => row.NameU);
             prop_names.AddRange(query_names);
 
@@ -233,7 +234,7 @@ namespace VisioAutomation.Shapes
             string full_prop_name = CustomPropertyHelper.GetRowName(name);
 
             short row = shape.CellsU[full_prop_name].Row;
-            shape.DeleteRow((short)IVisio.VisSectionIndices.visSectionProp, row);
+            shape.DeleteRow(vis_sec_prop, row);
         }
 
         public static void Set(IVisio.Shape shape, string name, string value, int type)
