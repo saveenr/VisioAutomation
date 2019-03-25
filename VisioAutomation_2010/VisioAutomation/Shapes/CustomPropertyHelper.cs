@@ -72,7 +72,7 @@ namespace VisioAutomation.Shapes
         public static CustomPropertyDictionary Get(IVisio.Shape shape, VASS.CellValueType type)
         {
             var pairs = GetPairs(shape, type);
-            var shape_custprop_dic = CustomPropPairsToCustomDic(pairs);
+            var shape_custprop_dic = CustomPropertyDictionary.FromPairs(pairs);
             return shape_custprop_dic;
         }
 
@@ -265,7 +265,7 @@ namespace VisioAutomation.Shapes
         // ----------------------------------------
         // ----------------------------------------
 
-        private class CustomPropNameCellsPair
+        internal class CustomPropNameCellsPair
         {
             public string Name;
             public CustomPropertyCells Cells;
@@ -275,18 +275,6 @@ namespace VisioAutomation.Shapes
                 this.Name = name;
                 this.Cells = cells;
             }
-        }
-
-        private static CustomPropertyDictionary CustomPropPairsToCustomDic(List<CustomPropNameCellsPair> pairs)
-        {
-            var shape_custprop_dic = new CustomPropertyDictionary(pairs.Count);
-
-            foreach (var pair in pairs)
-            {
-                shape_custprop_dic[pair.Name] = pair.Cells;
-            }
-
-            return shape_custprop_dic;
         }
 
         private static List<CustomPropNameCellsPair> GetPairs(IVisio.Shape shape, VASS.CellValueType type)
@@ -325,18 +313,11 @@ namespace VisioAutomation.Shapes
                 throw new Exceptions.InternalAssertionException();
             }
 
-            var listof_listof_cppairs = GetListOfCpPairLists(shapeidpairs, customprops_per_shape);
-            var list_custpropdics = new List<CustomPropertyDictionary>(shapeidpairs.Count);
-
-            int num_shapes = shapeidpairs.Count;
-            var shape_indicies = System.Linq.Enumerable.Range(0, num_shapes);
-            foreach (int i in shape_indicies)
-            {
-                var listof_cppairs = listof_listof_cppairs[i];
-                var cpdic = CustomPropPairsToCustomDic(listof_cppairs);
-                list_custpropdics.Add(cpdic);
-            }
-            return list_custpropdics;
+            var listof_listof_cppair = GetListOfCpPairLists(shapeidpairs, customprops_per_shape);
+            var enumof_cpdic = listof_listof_cppair.Select(i => CustomPropertyDictionary.FromPairs(i));
+            var list_cpdic = new List<CustomPropertyDictionary>(shapeidpairs.Count);
+            list_cpdic.AddRange(enumof_cpdic);
+            return list_cpdic;
         }
 
         private static List<List<CustomPropNameCellsPair>> GetListOfCpPairLists(
