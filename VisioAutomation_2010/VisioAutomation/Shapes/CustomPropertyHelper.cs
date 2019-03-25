@@ -322,24 +322,26 @@ namespace VisioAutomation.Shapes
 
         private static List<List<CustomPropNameCellsPair>> GetListOfCpPairLists(
             ShapeSheet.Query.ShapeIdPairs shapeidpairs,
-            List<List<CustomPropertyCells>> customprops_per_shape)
+            List<List<CustomPropertyCells>> listof_listof_cpcells)
         {
-            if (customprops_per_shape.Count != shapeidpairs.Count)
+            if (listof_listof_cpcells.Count != shapeidpairs.Count)
             {
                 throw new Exceptions.InternalAssertionException();
             }
 
             var listof_listof_cppairs = new List<List<CustomPropNameCellsPair>>(shapeidpairs.Count);
+            var shape_indices = System.Linq.Enumerable.Range(0, shapeidpairs.Count);
 
-            foreach (int i in System.Linq.Enumerable.Range(0, shapeidpairs.Count))
+            foreach (int i in shape_indices)
             {
                 var shape = shapeidpairs[i].Shape;
-                var custpropnames = CustomPropertyHelper.GetNames(shape);
-                var custpropcells = customprops_per_shape[i];
+                var listof_cpnames = CustomPropertyHelper.GetNames(shape);
+                var listof_cpcells = listof_listof_cpcells[i];
 
-                var indices = Enumerable.Range(0, custpropnames.Count);
-                var pairs = indices.Select(j => new CustomPropNameCellsPair(custpropnames[j], custpropcells[j])).ToList();
-                listof_listof_cppairs.Add(pairs);
+                int num_cps = listof_cpnames.Count;
+                var cp_indices = Enumerable.Range(0, listof_cpnames.Count);
+                var enumof_cppairs = cp_indices.Select(j => new CustomPropNameCellsPair(listof_cpnames[j], listof_cpcells[j])).ToList();
+                listof_listof_cppairs.Add(enumof_cppairs);
             }
             return listof_listof_cppairs;
         }
