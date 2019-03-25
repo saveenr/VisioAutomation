@@ -111,7 +111,7 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static UserDefinedCellDictionary Get(IVisio.Shape shape, VASS.CellValueType type)
+        public static UserDefinedCellDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
             if (shape == null)
             {
@@ -140,7 +140,7 @@ namespace VisioAutomation.Shapes
             return dic;
         }
 
-        public static List<UserDefinedCellDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        public static List<UserDefinedCellDictionary> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
             int num_shapes = shapes.Count;
             var list_list_pair = GetPairs(page, shapes, type);

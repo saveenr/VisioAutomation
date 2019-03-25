@@ -69,14 +69,14 @@ namespace VisioAutomation.Shapes
             return shape_custprop_cells;
         }
 
-        public static CustomPropertyDictionary Get(IVisio.Shape shape, VASS.CellValueType type)
+        public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
             var pairs = GetPairs(shape, type);
             var shape_custprop_dic = CustomPropertyDictionary.FromPairs(pairs);
             return shape_custprop_dic;
         }
 
-        public static List<CustomPropertyDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        public static List<CustomPropertyDictionary> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
             var shapeidpairs = ShapeSheet.Query.ShapeIdPairs.Create(shapes);
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
