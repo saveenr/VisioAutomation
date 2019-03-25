@@ -144,23 +144,28 @@ namespace VisioAutomation.Shapes
         {
             int num_shapes = shapes.Count;
 
-            var list_list_pairs = GetPairs(page, shapes, type);
+            var list_list_pair = GetPairs(page, shapes, type);
+            var list_dic = new List<UserDefinedCellDictionary>(num_shapes);
 
-            var list_dics = new List<UserDefinedCellDictionary>(num_shapes);
             foreach (int shape_index in Enumerable.Range(0, shapes.Count))
             {
-                var shape = shapes[shape_index];
-                var list_pairs = list_list_pairs[shape_index];
-
-                var dic_udcells = new UserDefinedCellDictionary(list_pairs.Count);
-                foreach (var pairs in list_pairs)
-                {
-                    dic_udcells[pairs.Name] = pairs.Cells;
-                }
-                list_dics.Add(dic_udcells);
+                var list_pair = list_list_pair[shape_index];
+                var dic_udcells = PairsToDictionary(list_pair);
+                list_dic.Add(dic_udcells);
             }
 
-            return list_dics;
+            return list_dic;
+        }
+
+        private static UserDefinedCellDictionary PairsToDictionary(List<UserDefinedCellKeyValuePair> list_pairs)
+        {
+            var dic_udcells = new UserDefinedCellDictionary(list_pairs.Count);
+            foreach (var pairs in list_pairs)
+            {
+                dic_udcells[pairs.Name] = pairs.Cells;
+            }
+
+            return dic_udcells;
         }
 
 
