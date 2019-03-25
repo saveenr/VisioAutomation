@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -94,7 +96,11 @@ namespace VisioAutomation.Shapes
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionHyperlink];
         }
 
-
+        public static List<HyperlinkCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var conpoint_cells = HyperlinkCells.GetCells(shape, type);
+            return conpoint_cells;
+        }
 
     }
 }
