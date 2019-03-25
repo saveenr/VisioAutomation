@@ -145,22 +145,11 @@ namespace VisioAutomation.Shapes
             int num_shapes = shapes.Count;
             var list_list_pair = GetPairs(page, shapes, type);
             var list_dic = new List<UserDefinedCellDictionary>(num_shapes);
-            var dics = list_list_pair.Select(list_pair => PairsToDictionary(list_pair));
+            var dics = list_list_pair.Select(list_pair => UserDefinedCellDictionary.FromPairs(list_pair));
             list_dic.AddRange(dics);
 
             return list_dic;
         }
-
-        private static UserDefinedCellDictionary PairsToDictionary(List<UserDefinedCellKeyValuePair> list_pairs)
-        {
-            var dic_udcells = new UserDefinedCellDictionary(list_pairs.Count);
-            foreach (var pairs in list_pairs)
-            {
-                dic_udcells[pairs.Name] = pairs.Cells;
-            }
-            return dic_udcells;
-        }
-
 
 
         /// <summary>
