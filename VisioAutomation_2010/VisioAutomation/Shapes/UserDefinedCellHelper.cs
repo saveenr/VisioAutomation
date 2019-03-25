@@ -6,6 +6,17 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
+    public class UserDefinedCellKeyValuePair
+    {
+        public readonly string Name;
+        public readonly UserDefinedCellCells Cells;
+
+        public UserDefinedCellKeyValuePair(string name, UserDefinedCellCells cells)
+        {
+            this.Name = name;
+            this.Cells = cells;
+        }
+    }
     public static class UserDefinedCellHelper
     {
         private static readonly short _udcell_section = ShapeSheet.SrcConstants.UserDefCellPrompt.Section;
@@ -144,26 +155,37 @@ namespace VisioAutomation.Shapes
             var shapeidpairs = VASS.Query.ShapeIdPairs.Create( shapes );
 
             var list_list_udcells = UserDefinedCellCells.GetCells(page,shapeidpairs, VASS.CellValueType.Formula);
+            int num_shapes = shapeidpairs.Count;
+            var list_list_pairs = new List<List<UserDefinedCellKeyValuePair>>(num_shapes);
 
-            var list_dics = new List<UserDefinedCellDictionary>(shapeidpairs.Count);
-
-            for (int shape_index = 0; shape_index < shapes.Count; shape_index++)
+            foreach (int shape_index in Enumerable.Range(0, shapes.Count))
             {
                 var shape = shapes[shape_index];
-                var list_udcells = list_list_udcells[shape_index];
                 var udcell_names = UserDefinedCellHelper.GetNames(shape);
+                var list_udcells = list_list_udcells[shape_index];
+                var list_pairs = CreateNamePairs(udcell_names, list_udcells);
 
-                var dic_udcells = new UserDefinedCellDictionary(list_udcells.Count);
-                list_dics.Add(dic_udcells);
-                for (int i = 0; i < list_udcells.Count ; i++)
+                list_list_pairs.Add(list_pairs);
+            }
+
+            var list_dics = new List<UserDefinedCellDictionary>(num_shapes);
+            foreach (int shape_index in Enumerable.Range(0, shapes.Count))
+            {
+                var shape = shapes[shape_index];
+                var list_pairs = list_list_pairs[shape_index];
+
+                var dic_udcells = new UserDefinedCellDictionary(list_pairs.Count);
+                foreach (var pairs in list_pairs)
                 {
-                    var udcell_name = udcell_names[i];
-                    dic_udcells[udcell_name] = list_udcells[i];
+                    dic_udcells[pairs.Name] = pairs.Cells;
                 }
+                list_dics.Add(dic_udcells);
             }
 
             return list_dics;
         }
+
+
 
         /// <summary>
         /// Get the number of user-defined cells for the shape.
@@ -284,6 +306,22 @@ namespace VisioAutomation.Shapes
             return 0 != (shape.CellExistsU[full_udcell_name, exists]);
         }
 
+        // ---------------------------------------------------------------
+        // ---------------------------------------------------------------
+        // ---------------------------------------------------------------
+
+        private static List<UserDefinedCellKeyValuePair> CreateNamePairs(List<string> udcell_names, List<UserDefinedCellCells> list_udcells)
+        {
+            var namepairs = new List<UserDefinedCellKeyValuePair>(list_udcells.Count);
+            for (int i = 0; i < list_udcells.Count; i++)
+            {
+                var udcell_name = udcell_names[i];
+                var pair = new UserDefinedCellKeyValuePair(udcell_name, list_udcells[i]);
+                namepairs.Add(pair);
+            }
+
+            return namepairs;
+        }
 
     }
 }
