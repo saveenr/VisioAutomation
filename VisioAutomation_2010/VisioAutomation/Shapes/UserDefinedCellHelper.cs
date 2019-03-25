@@ -143,16 +143,10 @@ namespace VisioAutomation.Shapes
         public static List<UserDefinedCellDictionary> Get(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
             int num_shapes = shapes.Count;
-
             var list_list_pair = GetPairs(page, shapes, type);
             var list_dic = new List<UserDefinedCellDictionary>(num_shapes);
-
-            foreach (int shape_index in Enumerable.Range(0, shapes.Count))
-            {
-                var list_pair = list_list_pair[shape_index];
-                var dic_udcells = PairsToDictionary(list_pair);
-                list_dic.Add(dic_udcells);
-            }
+            var dics = list_list_pair.Select(list_pair => PairsToDictionary(list_pair));
+            list_dic.AddRange(dics);
 
             return list_dic;
         }
@@ -164,7 +158,6 @@ namespace VisioAutomation.Shapes
             {
                 dic_udcells[pairs.Name] = pairs.Cells;
             }
-
             return dic_udcells;
         }
 
