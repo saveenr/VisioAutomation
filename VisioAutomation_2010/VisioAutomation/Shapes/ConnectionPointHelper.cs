@@ -105,5 +105,14 @@ namespace VisioAutomation.Shapes
             var conpoint_cells = ConnectionPointCells.GetCells(shape, type);
             return conpoint_cells;
         }
+
+        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+        {
+            {
+                var conpoint_cells = ConnectionPointCells.GetCells(page, shapeidpairs, type);
+                return conpoint_cells;
+            }
+        }
+
     }
 }

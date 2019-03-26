@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -85,6 +87,16 @@ namespace VisioAutomation.Shapes
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];
         }
 
+        public static List<ControlCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            return ControlCells.GetCells(shape, type);
+        }
+
+        public static List<List<ControlCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+        {
+            return ControlCells.GetCells(page, shapeidpairs, type);
+
+        }
 
     }
 }

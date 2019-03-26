@@ -29,6 +29,12 @@ namespace VisioAutomation.Shapes
                 yield return this.Create(nameof(this.YDynamics), VASS.SrcConstants.ControlYDynamics, this.YDynamics);
             }
         }
+        
+        public static List<ControlCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var reader = ControlCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(shape, type);
+        }
 
         public static List<List<ControlCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
@@ -36,11 +42,6 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
-        public static List<ControlCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var reader = ControlCells_lazy_builder.Value;
-            return reader.GetCellsMultiRow(shape, type);
-        }
 
         private static readonly System.Lazy<ControlCellsBuilder> ControlCells_lazy_builder = new System.Lazy<ControlCellsBuilder>();
 

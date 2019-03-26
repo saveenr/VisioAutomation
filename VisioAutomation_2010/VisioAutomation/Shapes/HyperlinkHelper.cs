@@ -102,5 +102,10 @@ namespace VisioAutomation.Shapes
             return conpoint_cells;
         }
 
+        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+        {
+            return HyperlinkCells.GetCells(page, shapeidpairs, type);
+        }
+
     }
 }
