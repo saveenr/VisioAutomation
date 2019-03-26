@@ -25,7 +25,7 @@ namespace VisioAutomation.Shapes
 
             if (CustomPropertyHelper.Contains(shape, name))
             {
-                string full_prop_name = CustomPropertyHelper.GetRowName(name);
+                string full_prop_name = CustomPropertyHelper.__GetRowName(name);
                 var cell_propname = shape.CellsU[full_prop_name];
 
                 if (cell_propname == null)
@@ -65,7 +65,7 @@ namespace VisioAutomation.Shapes
 
         public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var pairs = GetPairs(shape, type);
+            var pairs = __GetPairs(shape, type);
             var shape_custprop_dic = CustomPropertyDictionary.FromPairs(pairs);
             return shape_custprop_dic;
         }
@@ -74,7 +74,7 @@ namespace VisioAutomation.Shapes
         {
             var shapeidpairs = ShapeSheet.Query.ShapeIdPairs.Create(shapes);
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
-            var listof_custpropdics = GetListOfCpDic(shapeidpairs, listof_listof_custpropscells);
+            var listof_custpropdics = __GetListOfCpDic(shapeidpairs, listof_listof_custpropscells);
 
             return listof_custpropdics;
         }
@@ -146,46 +146,16 @@ namespace VisioAutomation.Shapes
             return prop_names;
         }
 
-        private static bool IsValidName(string name, out string errmsg)
-        {
-            if (name == null)
-            {
-                errmsg = "The Custom Property name cannot be null";
-                return false;
-            }
-
-            if (name.Length < 1)
-            {
-                errmsg = "The Custom Property name cannot have zero length";
-                return false;
-            }
-
-            if (name.Contains(" ") || name.Contains("\t") || name.Contains("\r") || name.Contains("\n"))
-            {
-                errmsg = "The Custom Property name cannot contain any whitespace";
-                return false;
-            }
-
-            if (name.StartsWith("Prop."))
-            {
-                errmsg = "The Custom Property name cannot begin with \"Prop.\".";
-                return false;
-            }
-
-            errmsg = null;
-            return true;
-        }
-
         public static bool IsValidName(string name)
         {
             string errmsg;
-            return CustomPropertyHelper.IsValidName(name, out errmsg);
+            return CustomPropertyHelper.__IsValidName(name, out errmsg);
         }
 
         internal static void CheckValidCustomPropertyName(string name)
         {
             string errmsg;
-            if (!CustomPropertyHelper.IsValidName(name, out errmsg))
+            if (!CustomPropertyHelper.__IsValidName(name, out errmsg))
             {
                 string msg = string.Format("Invalid Property Name: \"{0}\". {1}", name, errmsg);
                 throw new System.ArgumentException(msg);
@@ -206,16 +176,12 @@ namespace VisioAutomation.Shapes
 
             CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
-            string full_prop_name = CustomPropertyHelper.GetRowName(name);
+            string full_prop_name = CustomPropertyHelper.__GetRowName(name);
 
             var exists = (short)IVisio.VisExistsFlags.visExistsAnywhere;
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
 
-        private static string GetRowName(string name)
-        {
-            return string.Format("Prop.{0}", name);
-        }
 
         public static void Delete(IVisio.Shape shape, string name)
         {
@@ -231,7 +197,7 @@ namespace VisioAutomation.Shapes
 
             CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
-            string full_prop_name = CustomPropertyHelper.GetRowName(name);
+            string full_prop_name = CustomPropertyHelper.__GetRowName(name);
 
             short row = shape.CellsU[full_prop_name].Row;
             shape.DeleteRow(vis_sec_prop, row);
@@ -277,15 +243,15 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        private static List<CustomPropNameCellsPair> GetPairs(IVisio.Shape shape, VASS.CellValueType type)
+        private static List<CustomPropNameCellsPair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
         {
             var shape_custprop_cells = CustomPropertyCells.GetCells(shape, type);
             var shape_custprop_names = CustomPropertyHelper.GetNames(shape);
-            var list = CreateListofPairs(shape_custprop_names, shape_custprop_cells);
+            var list = __CreateListofPairs(shape_custprop_names, shape_custprop_cells);
             return list;
         }
 
-        private static List<CustomPropNameCellsPair> CreateListofPairs(
+        private static List<CustomPropNameCellsPair> __CreateListofPairs(
             List<string> shape_custprop_names,
             List<CustomPropertyCells> shape_custprop_cells)
         {
@@ -304,7 +270,7 @@ namespace VisioAutomation.Shapes
             return list;
         }
 
-        private static List<CustomPropertyDictionary> GetListOfCpDic(
+        private static List<CustomPropertyDictionary> __GetListOfCpDic(
             ShapeSheet.Query.ShapeIdPairs shapeidpairs,
             List<List<CustomPropertyCells>> customprops_per_shape)
         {
@@ -313,14 +279,14 @@ namespace VisioAutomation.Shapes
                 throw new Exceptions.InternalAssertionException();
             }
 
-            var listof_listof_cppair = GetListOfCpPairLists(shapeidpairs, customprops_per_shape);
+            var listof_listof_cppair = __GetListOfCpPairLists(shapeidpairs, customprops_per_shape);
             var enumof_cpdic = listof_listof_cppair.Select(i => CustomPropertyDictionary.FromPairs(i));
             var list_cpdic = new List<CustomPropertyDictionary>(shapeidpairs.Count);
             list_cpdic.AddRange(enumof_cpdic);
             return list_cpdic;
         }
 
-        private static List<List<CustomPropNameCellsPair>> GetListOfCpPairLists(
+        private static List<List<CustomPropNameCellsPair>> __GetListOfCpPairLists(
             ShapeSheet.Query.ShapeIdPairs shapeidpairs,
             List<List<CustomPropertyCells>> listof_listof_cpcells)
         {
@@ -346,5 +312,40 @@ namespace VisioAutomation.Shapes
             return listof_listof_cppairs;
         }
 
+
+        private static string __GetRowName(string name)
+        {
+            return string.Format("Prop.{0}", name);
+        }
+
+        private static bool __IsValidName(string name, out string errmsg)
+        {
+            if (name == null)
+            {
+                errmsg = "The Custom Property name cannot be null";
+                return false;
+            }
+
+            if (name.Length < 1)
+            {
+                errmsg = "The Custom Property name cannot have zero length";
+                return false;
+            }
+
+            if (name.Contains(" ") || name.Contains("\t") || name.Contains("\r") || name.Contains("\n"))
+            {
+                errmsg = "The Custom Property name cannot contain any whitespace";
+                return false;
+            }
+
+            if (name.StartsWith("Prop."))
+            {
+                errmsg = "The Custom Property name cannot begin with \"Prop.\".";
+                return false;
+            }
+
+            errmsg = null;
+            return true;
+        }
     }
 }
