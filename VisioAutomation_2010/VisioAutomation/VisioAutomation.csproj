@@ -102,8 +102,8 @@
     <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
     <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
     <Compile Include="ShapeSheet\CellValueType.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeIdPairs.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeIdPair.cs" />
+    <Compile Include="ShapeIdPairs.cs" />
+    <Compile Include="ShapeIdPair.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryResults.cs" />

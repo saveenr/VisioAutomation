@@ -31,7 +31,7 @@ namespace VisioAutomation.Shapes
             this.Prompt = VASS.CellValueLiteral.EncodeValue(this.Prompt.Value);
         }
 
-        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
             var reader = UserDefinedCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);

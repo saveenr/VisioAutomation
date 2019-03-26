@@ -92,7 +92,7 @@ namespace VisioAutomation.Text
                     (short) 0] != 0) ;
         }
 
-        public static List<TextFormat> GetFormat(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+        public static List<TextFormat> GetFormat(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
             var shapeids = shapeidpairs.Select( s=>s.ShapeID).ToList();
 

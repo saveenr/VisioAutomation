@@ -24,7 +24,7 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
             var reader = ConnectionPointCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);

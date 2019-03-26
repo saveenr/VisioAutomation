@@ -29,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var shapeidpairs = ShapeIdPairs.Create(surface.Shape);
+            var shapeidpairs = ShapeIdPairs.FromShapes(surface.Shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);
@@ -52,7 +52,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             RestrictToShapesOnly(surface);
 
-            var shapeidpairs = ShapeIdPairs.Create(surface.Shape);
+            var shapeidpairs = ShapeIdPairs.FromShapes(surface.Shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);

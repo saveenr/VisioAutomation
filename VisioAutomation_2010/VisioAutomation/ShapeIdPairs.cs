@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VASS = VisioAutomation.ShapeSheet;
 
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation
 {
     public class ShapeIdPairs : List<ShapeIdPair>
     {
@@ -15,14 +14,14 @@ namespace VisioAutomation.ShapeSheet.Query
         {
         }
 
-        public static ShapeIdPairs Create(IList<IVisio.Shape> shapes)
+        public static ShapeIdPairs FromShapes(IList<IVisio.Shape> shapes)
         {
             var shapeidpairs = new ShapeIdPairs(shapes.Count);
             shapeidpairs.AddRange(shapes.Select(s => new ShapeIdPair(s)));
             return shapeidpairs;
         }
 
-        public static ShapeIdPairs Create(params IVisio.Shape[] shapes)
+        public static ShapeIdPairs FromShapes(params IVisio.Shape[] shapes)
         {
             var shapeidpairs = new ShapeIdPairs(shapes.Length);
             shapeidpairs.AddRange(shapes.Select(s => new ShapeIdPair(s)));

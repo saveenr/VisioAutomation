@@ -148,7 +148,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionProp);
             var value_col = sec_cols.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
 
-            var shapeidpairs = VA.ShapeSheet.Query.ShapeIdPairs.Create( s1, s2, s3, s4 );
+            var shapeidpairs = VA.ShapeIdPairs.FromShapes( s1, s2, s3, s4 );
 
             var data = sec_query.GetFormulas(page1, shapeidpairs);
             var data2 = sec_query.GetResults<string>(page1, shapeidpairs);
@@ -295,7 +295,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
             var shapes = new[] {s1, s2, s3, s4};
-            var shapeidpairs = VisioAutomation.ShapeSheet.Query.ShapeIdPairs.Create(shapes);
+            var shapeidpairs = VisioAutomation.ShapeIdPairs.FromShapes(shapes);
 
 
             // First verify that none of the shapes have the controls section locally or otherwise
