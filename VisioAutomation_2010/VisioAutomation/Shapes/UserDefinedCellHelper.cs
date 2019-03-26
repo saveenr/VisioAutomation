@@ -110,14 +110,14 @@ namespace VisioAutomation.Shapes
             return list_list_udcells;
         }
 
-        public static UserDefinedCellDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
+        public static UserDefinedCellDictionary GetCellsAsDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
             var pairs = __GetPairs(shape, type);
             var dic = UserDefinedCellDictionary.FromPairs(pairs);
             return dic;
         }
 
-        public static List<UserDefinedCellDictionary> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        public static List<UserDefinedCellDictionary> GetCellsAsDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
             int num_shapes = shapes.Count;
             var list_list_pair = __GetPairs(page, shapes, type);
