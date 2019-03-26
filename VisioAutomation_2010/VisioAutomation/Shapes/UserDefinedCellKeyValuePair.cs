@@ -1,12 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using VisioAutomation.Extensions;
-using VASS = VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
-
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellKeyValuePair
+    internal class UserDefinedCellKeyValuePair
     {
         public readonly string Name;
         public readonly UserDefinedCellCells Cells;

@@ -4,8 +4,8 @@ namespace VisioAutomation.Shapes
 
     internal class CustomPropNameCellsPair
     {
-        public string Name;
-        public CustomPropertyCells Cells;
+        public readonly string Name;
+        public readonly CustomPropertyCells Cells;
 
         public CustomPropNameCellsPair(string name, CustomPropertyCells cells)
         {

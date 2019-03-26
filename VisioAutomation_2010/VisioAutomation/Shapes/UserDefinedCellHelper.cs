@@ -101,7 +101,7 @@ namespace VisioAutomation.Shapes
             return listof_udcellcells;
         }
 
-        private static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
             var shapeidpairs = VASS.Query.ShapeIdPairs.Create(shapes);
 
