@@ -6,17 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellKeyValuePair
-    {
-        public readonly string Name;
-        public readonly UserDefinedCellCells Cells;
 
-        public UserDefinedCellKeyValuePair(string name, UserDefinedCellCells cells)
-        {
-            this.Name = name;
-            this.Cells = cells;
-        }
-    }
     public static class UserDefinedCellHelper
     {
         private static readonly short _udcell_section = ShapeSheet.SrcConstants.UserDefCellPrompt.Section;
