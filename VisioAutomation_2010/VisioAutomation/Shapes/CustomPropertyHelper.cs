@@ -63,12 +63,6 @@ namespace VisioAutomation.Shapes
             writer.CommitFormulas(shape);
         }
 
-        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var shape_custprop_cells = CustomPropertyCells.GetCells(shape, type);
-            return shape_custprop_cells;
-        }
-
         public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
             var pairs = GetPairs(shape, type);
@@ -83,6 +77,12 @@ namespace VisioAutomation.Shapes
             var listof_custpropdics = GetListOfCpDic(shapeidpairs, listof_listof_custpropscells);
 
             return listof_custpropdics;
+        }
+
+        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var shape_custprop_cells = CustomPropertyCells.GetCells(shape, type);
+            return shape_custprop_cells;
         }
 
         public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
