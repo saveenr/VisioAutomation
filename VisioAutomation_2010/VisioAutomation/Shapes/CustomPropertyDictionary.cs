@@ -7,7 +7,7 @@ namespace VisioAutomation.Shapes
         public CustomPropertyDictionary():base(){ }
         public CustomPropertyDictionary(int capacity):base(capacity){ }
 
-        internal static CustomPropertyDictionary FromPairs(List<CustomPropertyHelper.CustomPropNameCellsPair> pairs)
+        internal static CustomPropertyDictionary FromPairs(List<CustomPropNameCellsPair> pairs)
         {
             var shape_custprop_dic = new CustomPropertyDictionary(pairs.Count);
 

@@ -221,18 +221,6 @@ namespace VisioAutomation.Shapes
         // ----------------------------------------
         // ----------------------------------------
 
-        internal class CustomPropNameCellsPair
-        {
-            public string Name;
-            public CustomPropertyCells Cells;
-
-            public CustomPropNameCellsPair(string name, CustomPropertyCells cells)
-            {
-                this.Name = name;
-                this.Cells = cells;
-            }
-        }
-
         private static List<CustomPropNameCellsPair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
         {
             var shape_custprop_cells = CustomPropertyCells.GetCells(shape, type);
