@@ -85,9 +85,8 @@ namespace VisioAutomation.Shapes
             return shape_custprop_cells;
         }
 
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, ShapeSheet.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
-            var shapeidpairs = ShapeSheet.Query.ShapeIdPairs.Create(shapes);
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
             return listof_listof_custpropscells;
         }

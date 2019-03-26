@@ -84,7 +84,8 @@ namespace VisioAutomation_Tests.Core.Shapes
             var shapes = new[] { s1, s2 };
 
             SetCP(s1, "foo", "bar", null);
-            var props1 = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(page1, shapes, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var shapeidpairs = VA.ShapeSheet.Query.ShapeIdPairs.Create(shapes);
+            var props1 = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(page1, shapeidpairs, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(2, props1.Count);
             Assert.AreEqual(1, props1[0].Count);
             Assert.AreEqual(0, props1[1].Count);
@@ -282,8 +283,9 @@ namespace VisioAutomation_Tests.Core.Shapes
             SetCP(s4, "FOO5", "5", "p4");
             SetCP(s4, "FOO6", "6", "p6");
 
-            var shapeids = new[] {s1, s2, s3, s4};
-            var allprops = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(page1, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var shapeidpairs = VA.ShapeSheet.Query.ShapeIdPairs.Create(s1, s2, s3, s4);
+
+            var allprops = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(page1, shapeidpairs, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
             Assert.AreEqual(4, allprops.Count);
             Assert.AreEqual(1, allprops[0].Count);
