@@ -106,7 +106,6 @@ namespace VisioAutomation.Shapes
             var shapeidpairs = VASS.Query.ShapeIdPairs.Create(shapes);
 
             var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, VASS.CellValueType.Formula);
-            int num_shapes = shapeidpairs.Count;
             return list_list_udcells;
         }
 
