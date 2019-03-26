@@ -101,6 +101,14 @@ namespace VisioAutomation.Shapes
             return listof_udcellcells;
         }
 
+        private static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        {
+            var shapeidpairs = VASS.Query.ShapeIdPairs.Create(shapes);
+
+            var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, VASS.CellValueType.Formula);
+            int num_shapes = shapeidpairs.Count;
+            return list_list_udcells;
+        }
 
         public static UserDefinedCellDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
@@ -259,20 +267,8 @@ namespace VisioAutomation.Shapes
 
         private static List<List<UserDefinedCellKeyValuePair>> __GetPairs(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException(nameof(page));
-            }
-
-            if (shapes == null)
-            {
-                throw new System.ArgumentNullException(nameof(shapes));
-            }
-
-            var shapeidpairs = VASS.Query.ShapeIdPairs.Create(shapes);
-
-            var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, VASS.CellValueType.Formula);
-            int num_shapes = shapeidpairs.Count;
+            var list_list_udcells = GetCells(page, shapes, type);
+            int num_shapes = list_list_udcells.Count;
             var list_list_pairs = new List<List<UserDefinedCellKeyValuePair>>(num_shapes);
 
             foreach (int shape_index in Enumerable.Range(0, shapes.Count))
