@@ -79,18 +79,6 @@ namespace VisioAutomation.Shapes
             return listof_custpropdics;
         }
 
-        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var shape_custprop_cells = CustomPropertyCells.GetCells(shape, type);
-            return shape_custprop_cells;
-        }
-
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, ShapeSheet.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
-        {
-            var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
-            return listof_listof_custpropscells;
-        }
-
         public static int GetCount(IVisio.Shape shape)
         {
             if (shape == null)

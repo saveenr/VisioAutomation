@@ -87,16 +87,5 @@ namespace VisioAutomation.Shapes
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];
         }
 
-        public static List<ControlCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            return ControlCells.GetCells(shape, type);
-        }
-
-        public static List<List<ControlCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
-        {
-            return ControlCells.GetCells(page, shapeidpairs, type);
-
-        }
-
     }
 }

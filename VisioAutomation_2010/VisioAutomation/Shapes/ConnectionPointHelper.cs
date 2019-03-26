@@ -100,19 +100,5 @@ namespace VisioAutomation.Shapes
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionConnectionPts];
         }
 
-        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var conpoint_cells = ConnectionPointCells.GetCells(shape, type);
-            return conpoint_cells;
-        }
-
-        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
-        {
-            {
-                var conpoint_cells = ConnectionPointCells.GetCells(page, shapeidpairs, type);
-                return conpoint_cells;
-            }
-        }
-
     }
 }

@@ -95,17 +95,5 @@ namespace VisioAutomation.Shapes
 
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionHyperlink];
         }
-
-        public static List<HyperlinkCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var conpoint_cells = HyperlinkCells.GetCells(shape, type);
-            return conpoint_cells;
-        }
-
-        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
-        {
-            return HyperlinkCells.GetCells(page, shapeidpairs, type);
-        }
-
     }
 }

@@ -88,25 +88,6 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var udcell_count = UserDefinedCellHelper.GetCount(shape);
-            if (udcell_count < 1)
-            {
-                return new List<UserDefinedCellCells>(0);
-            }
-
-
-            var listof_udcellcells = UserDefinedCellCells.GetCells(shape, type);
-            return listof_udcellcells;
-        }
-
-        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
-        {
-            var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, VASS.CellValueType.Formula);
-            return list_list_udcells;
-        }
-
         public static UserDefinedCellDictionary GetCellsAsDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
             var pairs = __GetPairs(shape, type);
@@ -264,7 +245,7 @@ namespace VisioAutomation.Shapes
 
         private static List<List<UserDefinedCellKeyValuePair>> __GetPairs(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
-            var list_list_udcells = GetCells(page, shapeidpairs, type);
+            var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, type);
             int num_shapes = list_list_udcells.Count;
             var list_list_pairs = new List<List<UserDefinedCellKeyValuePair>>(num_shapes);
 
@@ -283,7 +264,7 @@ namespace VisioAutomation.Shapes
 
         private static List<UserDefinedCellKeyValuePair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var listof_udcellcells = GetCells(shape, type);
+            var listof_udcellcells = UserDefinedCellCells.GetCells(shape, type);
 
             int num_udcells = listof_udcellcells.Count;
 
