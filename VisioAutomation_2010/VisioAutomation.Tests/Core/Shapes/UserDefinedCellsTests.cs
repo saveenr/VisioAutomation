@@ -9,6 +9,16 @@ namespace VisioAutomation_Tests.Core.Shapes
     [TestClass]
     public class UserDefinedCellsTests : VisioAutomationTest
     {
+
+        public static void SetCP(IVisio.Shape shape, string name, string value, string prompt)
+        {
+            var cells = new VisioAutomation.Shapes.UserDefinedCellCells();
+            cells.Value = value;
+            cells.Prompt = prompt;
+            cells.EncodeValues();
+            VisioAutomation.Shapes.UserDefinedCellHelper.Set(shape, name, cells);
+        }
+
         [TestMethod]
         public void UserDefinedCells_GetSet()
         {
@@ -20,7 +30,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(0, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
 
             // Add a Custom Property
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR", null);
+            SetCP(s1, "FOO1", "BAR", null);
             Assert.AreEqual(1, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
             // Check that it is called FOO1
             Assert.AreEqual(true, VisioAutomation.Shapes.UserDefinedCellHelper.Contains(s1, "FOO1"));
@@ -36,21 +46,21 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set the value without affecting the prompt
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1,"FOO1","BEER",null);
+            SetCP(s1,"FOO1","BEER",null);
             udcs = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
             Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set passing in nulls changes nothing
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", null, null);
+            SetCP(s1, "FOO1", null, null);
             udcs = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
             Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set the prompt without affecting the value
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", null, "Prompt1");
+            SetCP(s1, "FOO1", null, "Prompt1");
             udcs = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
@@ -73,7 +83,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s2 = page1.DrawRectangle(1, 1, 2, 2);
             var shapes = new[] { s1, s2 };
 
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "foo", "bar", null);
+            SetCP(s1, "foo", "bar", null);
             var props1 = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(page1, shapes, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(2, props1.Count);
             Assert.AreEqual(1, props1[0].Count);
@@ -92,7 +102,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var shapes = new[] { shape0, shape1 };
 
             // add a udcell to shape0, leave shape1 alone
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(shape0, "foo", "bar", null);
+            SetCP(shape0, "foo", "bar", null);
 
             // build query
             var sec_query = new VA.ShapeSheet.Query.SectionQuery();
@@ -135,19 +145,19 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, VisioAutomation.Shapes.CustomPropertyHelper.GetCells(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(0, VisioAutomation.Shapes.CustomPropertyHelper.GetDictionary(s1, CellValueType.Formula).Count);
 
             // Add the same one multiple times Custom Property
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR1", null);
+            SetCP(s1, "FOO1", "BAR1", null);
             // Asset that now we have ONE CustomProperty
             Assert.AreEqual(1, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
             // Check that it is called FOO1
             Assert.AreEqual(true, VisioAutomation.Shapes.UserDefinedCellHelper.Contains(s1, "FOO1"));
 
             // Try to SET the same property again many times
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR2", null);
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR3", null);
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR4", null);
+            SetCP(s1, "FOO1", "BAR2", null);
+            SetCP(s1, "FOO1", "BAR3", null);
+            SetCP(s1, "FOO1", "BAR4", null);
 
             // Asset that now we have ONE CustomProperty
             Assert.AreEqual(1, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
@@ -189,7 +199,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(0, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
             try
             {
-                VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO 1", "BAR1", null);
+                SetCP(s1, "FOO 1", "BAR1", null);
             }
             catch (System.ArgumentException)
             {
@@ -210,7 +220,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             Assert.AreEqual(0, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
 
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "foo", null, "Some prmpt");
+            SetCP(s1, "foo", null, "Some prmpt");
             Assert.AreEqual(1, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
             page1.Delete(0);
         }
@@ -222,11 +232,11 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             Assert.AreEqual(0, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR1", null);
+            SetCP(s1, "FOO1", "BAR1", null);
             Assert.AreEqual(1, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "BAR2", null);
+            SetCP(s1, "FOO1", "BAR2", null);
             Assert.AreEqual(1, VisioAutomation.Shapes.UserDefinedCellHelper.GetCount(s1));
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO2", "BAR3", null);
+            SetCP(s1, "FOO2", "BAR3", null);
 
             var names1 = VisioAutomation.Shapes.UserDefinedCellHelper.GetNames(s1);
             Assert.AreEqual(2,names1.Count);
@@ -240,7 +250,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(1, names2.Count);
             Assert.IsTrue(names2.Contains("FOO2"));
 
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO3", "BAR1", null);
+            SetCP(s1, "FOO3", "BAR1", null);
             var names3 = VisioAutomation.Shapes.UserDefinedCellHelper.GetNames(s1);
             Assert.AreEqual(2, names3.Count);
             Assert.IsTrue(names3.Contains("FOO2"));
@@ -265,12 +275,12 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s3 = page1.DrawRectangle(0, 0, 2, 2);
             var s4 = page1.DrawRectangle(0, 0, 2, 2);
 
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "1", "p1");
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s2, "FOO2", "2", "p2");
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s2, "FOO3", "3", "p3");
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s4, "FOO4", "4", "p4");
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s4, "FOO5", "5", "p4");
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s4, "FOO6", "6", "p6");
+            SetCP(s1, "FOO1", "1", "p1");
+            SetCP(s2, "FOO2", "2", "p2");
+            SetCP(s2, "FOO3", "3", "p3");
+            SetCP(s4, "FOO4", "4", "p4");
+            SetCP(s4, "FOO5", "5", "p4");
+            SetCP(s4, "FOO6", "6", "p6");
 
             var shapeids = new[] {s1, s2, s3, s4};
             var allprops = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(page1, shapeids, VisioAutomation.ShapeSheet.CellValueType.Formula);
@@ -299,9 +309,9 @@ namespace VisioAutomation_Tests.Core.Shapes
             var p1 = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(0, p1.Count);
 
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO1", "1", null);
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO2", "2", null);
-            VisioAutomation.Shapes.UserDefinedCellHelper.Set(s1, "FOO3", "3\"4", null);
+            SetCP(s1, "FOO1", "1", null);
+            SetCP(s1, "FOO2", "2", null);
+            SetCP(s1, "FOO3", "3\"4", null);
 
             var p2 = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(3, p2.Count);

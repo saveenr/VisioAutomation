@@ -9,5 +9,15 @@ namespace VisioAutomation.Shapes
 
         }
 
+        internal static UserDefinedCellDictionary FromPairs(List<UserDefinedCellKeyValuePair> pairs)
+        {
+            var dic = new UserDefinedCellDictionary(pairs.Count);
+            foreach (var pair in pairs)
+            {
+                dic[pair.Name] = pair.Cells;
+            }
+            return dic;
+        }
+
     }
 }

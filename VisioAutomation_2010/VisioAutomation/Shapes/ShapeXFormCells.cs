@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -7,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeXFormCells : CellGroup
+    public class ShapeXFormCells : VASS.CellGroups.CellGroup
     {
         public VASS.CellValueLiteral PinX { get; set; }
         public VASS.CellValueLiteral PinY { get; set; }
@@ -17,7 +16,7 @@ namespace VisioAutomation.Shapes
         public VASS.CellValueLiteral Height { get; set; }
         public VASS.CellValueLiteral Angle { get; set; }
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
@@ -48,7 +47,7 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<ShapeXFormCellsBuilder> ShapeXFormCells_lazy_builder = new System.Lazy<ShapeXFormCellsBuilder>();
 
-        class ShapeXFormCellsBuilder : CellGroupBuilder<ShapeXFormCells>
+        class ShapeXFormCellsBuilder : VASS.CellGroups.CellGroupBuilder<ShapeXFormCells>
         {
             public ShapeXFormCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
@@ -57,7 +56,7 @@ namespace VisioAutomation.Shapes
             public override ShapeXFormCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new ShapeXFormCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
                 cells.PinX = getcellvalue(nameof(ShapeXFormCells.PinX));
                 cells.PinY = getcellvalue(nameof(ShapeXFormCells.PinY));

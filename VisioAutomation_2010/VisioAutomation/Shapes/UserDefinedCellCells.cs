@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellCells : CellGroup
+    public class UserDefinedCellCells : VASS.CellGroups.CellGroup
     {
         public VASS.CellValueLiteral Value { get; set; }
         public VASS.CellValueLiteral Prompt { get; set; }
@@ -15,7 +14,7 @@ namespace VisioAutomation.Shapes
         {
         }
 
-        public override IEnumerable<CellMetadataItem> CellMetadata
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
@@ -60,7 +59,7 @@ namespace VisioAutomation.Shapes
             public override UserDefinedCellCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new UserDefinedCellCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.gcf(row, cols);
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
                 cells.Value = getcellvalue(nameof(UserDefinedCellCells.Value));
                 cells.Prompt = getcellvalue(nameof(UserDefinedCellCells.Prompt));

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -37,6 +39,24 @@ namespace VisioAutomation.Shapes
             return n;
         }
 
+        public static int Set(
+            IVisio.Shape shape,
+            short row,
+            ConnectionPointCells cpcells)
+        {
+            if (shape == null)
+            {
+                throw new System.ArgumentNullException(nameof(shape));
+            }
+
+            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            writer.SetValues(cpcells, row);
+
+            writer.CommitFormulas(shape);
+
+            return row;
+        }
+
         public static void Delete(IVisio.Shape shape, int index)
         {
             if (shape == null)
@@ -51,16 +71,6 @@ namespace VisioAutomation.Shapes
 
             var row = (IVisio.VisRowIndices)index;
             shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionConnectionPts, (short)row);
-        }
-
-        public static int GetCount(IVisio.Shape shape)
-        {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException(nameof(shape));
-            }
-
-            return shape.RowCount[ (short) IVisio.VisSectionIndices.visSectionConnectionPts];
         }
 
         public static int Delete(IVisio.Shape shape)
@@ -80,5 +90,20 @@ namespace VisioAutomation.Shapes
         }
 
 
+        public static int GetCount(IVisio.Shape shape)
+        {
+            if (shape == null)
+            {
+                throw new System.ArgumentNullException(nameof(shape));
+            }
+
+            return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionConnectionPts];
+        }
+
+        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var conpoint_cells = ConnectionPointCells.GetCells(shape, type);
+            return conpoint_cells;
+        }
     }
 }
