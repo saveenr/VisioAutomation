@@ -21,7 +21,7 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            CustomPropertyHelper.CheckValidCustomPropertyName(name);
+            CustomPropertyHelper.__CheckValidCustomPropertyName(name);
 
             if (CustomPropertyHelper.Contains(shape, name))
             {
@@ -152,16 +152,6 @@ namespace VisioAutomation.Shapes
             return CustomPropertyHelper.__IsValidName(name, out errmsg);
         }
 
-        internal static void CheckValidCustomPropertyName(string name)
-        {
-            string errmsg;
-            if (!CustomPropertyHelper.__IsValidName(name, out errmsg))
-            {
-                string msg = string.Format("Invalid Property Name: \"{0}\". {1}", name, errmsg);
-                throw new System.ArgumentException(msg);
-            }
-        }
-
         public static bool Contains(IVisio.Shape shape, string name)
         {
             if (shape == null)
@@ -174,7 +164,7 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(name));
             }
 
-            CustomPropertyHelper.CheckValidCustomPropertyName(name);
+            CustomPropertyHelper.__CheckValidCustomPropertyName(name);
 
             string full_prop_name = CustomPropertyHelper.__GetRowName(name);
 
@@ -195,7 +185,7 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(name));
             }
 
-            CustomPropertyHelper.CheckValidCustomPropertyName(name);
+            CustomPropertyHelper.__CheckValidCustomPropertyName(name);
 
             string full_prop_name = CustomPropertyHelper.__GetRowName(name);
 
@@ -210,7 +200,7 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            CustomPropertyHelper.CheckValidCustomPropertyName(name);
+            CustomPropertyHelper.__CheckValidCustomPropertyName(name);
 
             if (value == null)
             {
@@ -347,5 +337,16 @@ namespace VisioAutomation.Shapes
             errmsg = null;
             return true;
         }
+
+        internal static void __CheckValidCustomPropertyName(string name)
+        {
+            string errmsg;
+            if (!CustomPropertyHelper.__IsValidName(name, out errmsg))
+            {
+                string msg = string.Format("Invalid Property Name: \"{0}\". {1}", name, errmsg);
+                throw new System.ArgumentException(msg);
+            }
+        }
+
     }
 }
