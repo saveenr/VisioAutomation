@@ -83,7 +83,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             VA.Pages.PageHelper.Duplicate(page1, page2);
 
-            Assert.AreEqual(page_size, VisioAutomationTest.GetPageSize(page2));
+            Assert.AreEqual(page_size, GetPageSize(page2));
             Assert.AreEqual(1, page2.Shapes.Count);
 
             page2.Delete(0);
@@ -106,7 +106,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             var page2 = doc1.Pages.Add();
             page2.Background = 0;
-            VisioAutomationTest.SetPageSize(page2, this.StandardPageSize);
+            SetPageSize(page2, this.StandardPageSize);
 
             var active_window = app.ActiveWindow;
             Assert.AreEqual(app.ActivePage, page2);

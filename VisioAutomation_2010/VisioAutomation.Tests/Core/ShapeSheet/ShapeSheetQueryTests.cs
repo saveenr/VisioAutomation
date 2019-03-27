@@ -16,7 +16,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
-            VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
+            SetPageSize(page1, this.StandardPageSize);
 
             // draw a simple shape
             var s1 = page1.DrawRectangle(this.StandardPageSizeRect);

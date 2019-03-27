@@ -3,8 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using VisioAutomation.Models.Dom;
-using VisioAutomation.Models.Layouts.Box;
+using VAM=VisioAutomation.Models;
 
 namespace VisioAutomationSamples
 {
@@ -15,17 +14,17 @@ namespace VisioAutomationSamples
             public IVisio.Shape VisioShape;
             public string Text;
             public bool Render;
-            public ShapeCells Cells;
+            public VAM.Dom.ShapeCells Cells;
             public string Font;
 
             public NodeData()
             {
                 this.Render = true;
-                this.Cells = new ShapeCells();
+                this.Cells = new VAM.Dom.ShapeCells();
             }
         }
 
-        public static Box AddNodeEx(this Container p, double w, double h, string s)
+        public static VAM.Layouts.Box.Box AddNodeEx(this VAM.Layouts.Box.Container p, double w, double h, string s)
         {
             var box = p.AddBox(w, h);
             var node_data = new NodeData();
@@ -52,9 +51,9 @@ namespace VisioAutomationSamples
 
         public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)
         {
-            var layout = new BoxLayout();
+            var layout = new VAM.Layouts.Box.BoxLayout();
 
-            var root = new Container( Direction.TopToBottom);
+            var root = new VAM.Layouts.Box.Container(VAM.Layouts.Box.Direction.TopToBottom);
 
             layout.Root = root;
             root.ChildSpacing = 0.5;
@@ -63,14 +62,14 @@ namespace VisioAutomationSamples
             nodedata.Render = false;
             root.Data = nodedata;
 
-            var fontname_cells = new ShapeCells();
+            var fontname_cells = new VAM.Dom.ShapeCells();
             fontname_cells.FillPattern = 0;
             fontname_cells.LinePattern = 0;
             fontname_cells.LineWeight = 0.0;
             fontname_cells.ParaHorizontalAlign = 0;
             fontname_cells.CharSize = "36pt";
 
-            var charbox_cells = new ShapeCells();
+            var charbox_cells = new VAM.Dom.ShapeCells();
             charbox_cells.FillPattern = 0;
             charbox_cells.LinePattern = 1;
             charbox_cells.LineWeight = 0.0;
@@ -84,7 +83,7 @@ namespace VisioAutomationSamples
                 var fontname_box_data = (NodeData) fontname_box.Data;
                 fontname_box_data.Cells = fontname_cells;
 
-                var font_box = root.AddContainer(Direction.TopToBottom);
+                var font_box = root.AddContainer(VAM.Layouts.Box.Direction.TopToBottom);
                 font_box.ChildSpacing = 0.25;
                 var font_vox_data = (NodeData) font_box.Data;
                 if (font_vox_data != null)
@@ -99,7 +98,7 @@ namespace VisioAutomationSamples
 
                 foreach (int row in Enumerable.Range(0, numrows))
                 {
-                    var row_box = font_box.AddContainer(Direction.LeftToRight);
+                    var row_box = font_box.AddContainer(VAM.Layouts.Box.Direction.LeftToRight);
                     row_box.ChildSpacing = 0.25;
                     var row_box_data = new NodeData();
                     row_box_data.Render = false;
@@ -122,7 +121,7 @@ namespace VisioAutomationSamples
 
             var page = doc.Pages.Add();
 
-            var domshapescol = new ShapeList();
+            var domshapescol = new VAM.Dom.ShapeList();
 
             foreach (var node in layout.Nodes)
             {
@@ -142,7 +141,7 @@ namespace VisioAutomationSamples
                 var cells = node_data.Cells;
                 if (cells == null)
                 {
-                    cells = new ShapeCells();
+                    cells = new VAM.Dom.ShapeCells();
                 }
                 else
                 {
@@ -155,7 +154,7 @@ namespace VisioAutomationSamples
                 }
 
                 shape_node.Cells = cells;
-                shape_node.Text = new VisioAutomation.Models.Text.Element( node_data.Text );
+                shape_node.Text = new VAM.Text.Element( node_data.Text );
             }
 
             domshapescol.Render(page);
@@ -175,7 +174,7 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var domshapescol = new ShapeList();
+                var domshapescol = new VAM.Dom.ShapeList();
 
                 for (int j = 0; j < fontnames.Length; j++)
                 {
@@ -184,7 +183,7 @@ namespace VisioAutomationSamples
 
                     var r = new VA.Geometry.Rectangle(x0, 0 - th, x0 + w, 0);
                     var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
-                    n1.Text = new VisioAutomation.Models.Text.Element( fontname.ToUpper() ) ;
+                    n1.Text = new VAM.Text.Element( fontname.ToUpper() ) ;
                     n1.Cells.FillForeground = "rgb(255,255,255)";
                     n1.Cells.LineWeight = 0.0;
                     n1.Cells.LinePattern = 0;
@@ -203,7 +202,7 @@ namespace VisioAutomationSamples
                         var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
-                            n1.Text = new VisioAutomation.Models.Text.Element(chunk[i]);
+                            n1.Text = new VAM.Text.Element(chunk[i]);
                         }
                         n1.CharFontName = fontnames[j];
                         n1.Cells.CharSize = "36pt";
@@ -234,7 +233,7 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var domshapescol = new ShapeList();
+                var domshapescol = new VAM.Dom.ShapeList();
 
                 for (int j = 0; j < fontnames.Length; j++)
                 {
@@ -247,7 +246,7 @@ namespace VisioAutomationSamples
                         var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
-                            n1.Text = new VisioAutomation.Models.Text.Element(chunk[i]);
+                            n1.Text = new VAM.Text.Element(chunk[i]);
                             n1.Text.CharacterFormatting.Color = colors[j];
 
                         }

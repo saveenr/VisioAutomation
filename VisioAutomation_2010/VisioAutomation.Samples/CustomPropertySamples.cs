@@ -1,5 +1,5 @@
 using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomationSamples
 {
@@ -26,7 +26,7 @@ namespace VisioAutomationSamples
             CustomPropertyHelper.Set(s1, "FOO3", "\"BAR3updated\"", cp_type);
 
             // retrieve all the properties
-            var props = CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
+            var props = CustomPropertyHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula);
 
             var cp_foo1 = props["FOO1"];
             // var cp_foo2 = props["FOO2"]; // there is not prop called FOO2
