@@ -116,7 +116,7 @@
     <Compile Include="ShapeSheet\Writers\WriteRecord.cs" />
     <Compile Include="ShapeSheet\Writers\WriteRecordList.cs" />
     <Compile Include="ShapeSheet\Streams\StreamArray.cs" />
-    <Compile Include="Shapes\CustomPropNameCellsPair.cs" />
+    <Compile Include="Shapes\CustomPropertyNameCellsPair.cs" />
     <Compile Include="Shapes\CustomPropertyType.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegmentReader.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegment.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="Shapes\UserDefinedCellDictionary.cs" />
-    <Compile Include="Shapes\UserDefinedCellKeyValuePair.cs" />
+    <Compile Include="Shapes\UserDefinedCellNameCellsPair.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\HyperlinkCells.cs" />

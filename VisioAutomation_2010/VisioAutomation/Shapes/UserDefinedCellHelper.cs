@@ -230,24 +230,24 @@ namespace VisioAutomation.Shapes
         // ---------------------------------------------------------------
         // ---------------------------------------------------------------
 
-        private static List<UserDefinedCellKeyValuePair> __CreateNamePairs(List<string> udcell_names, List<UserDefinedCellCells> list_udcells)
+        private static List<UserDefinedCellNameCellsPair> __CreateNamePairs(List<string> udcell_names, List<UserDefinedCellCells> list_udcells)
         {
-            var namepairs = new List<UserDefinedCellKeyValuePair>(list_udcells.Count);
+            var namepairs = new List<UserDefinedCellNameCellsPair>(list_udcells.Count);
             for (int i = 0; i < list_udcells.Count; i++)
             {
                 var udcell_name = udcell_names[i];
-                var pair = new UserDefinedCellKeyValuePair(udcell_name, list_udcells[i]);
+                var pair = new UserDefinedCellNameCellsPair(udcell_name, list_udcells[i]);
                 namepairs.Add(pair);
             }
 
             return namepairs;
         }
 
-        private static List<List<UserDefinedCellKeyValuePair>> __GetPairs(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+        private static List<List<UserDefinedCellNameCellsPair>> __GetPairs(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
             var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, type);
             int num_shapes = list_list_udcells.Count;
-            var list_list_pairs = new List<List<UserDefinedCellKeyValuePair>>(num_shapes);
+            var list_list_pairs = new List<List<UserDefinedCellNameCellsPair>>(num_shapes);
 
             foreach (int shape_index in Enumerable.Range(0, shapeidpairs.Count))
             {
@@ -262,7 +262,7 @@ namespace VisioAutomation.Shapes
             return list_list_pairs;
         }
 
-        private static List<UserDefinedCellKeyValuePair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
+        private static List<UserDefinedCellNameCellsPair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
         {
             var listof_udcellcells = UserDefinedCellCells.GetCells(shape, type);
 
@@ -274,10 +274,10 @@ namespace VisioAutomation.Shapes
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected number of user-define cell names");
             }
 
-            var pairs = new List<UserDefinedCellKeyValuePair>(num_udcells);
+            var pairs = new List<UserDefinedCellNameCellsPair>(num_udcells);
             for (int i = 0; i < num_udcells; i++)
             {
-                var pair = new UserDefinedCellKeyValuePair(udcell_names[i], listof_udcellcells[i]);
+                var pair = new UserDefinedCellNameCellsPair(udcell_names[i], listof_udcellcells[i]);
                 pairs.Add(pair);
             }
 

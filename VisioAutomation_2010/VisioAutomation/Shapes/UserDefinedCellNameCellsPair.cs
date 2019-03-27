@@ -1,11 +1,11 @@
 namespace VisioAutomation.Shapes
 {
-    internal class UserDefinedCellKeyValuePair
+    internal class UserDefinedCellNameCellsPair
     {
         public readonly string Name;
         public readonly UserDefinedCellCells Cells;
 
-        public UserDefinedCellKeyValuePair(string name, UserDefinedCellCells cells)
+        public UserDefinedCellNameCellsPair(string name, UserDefinedCellCells cells)
         {
             this.Name = name;
             this.Cells = cells;
