@@ -230,15 +230,15 @@ namespace VisioAutomation.Shapes
         // ---------------------------------------------------------------
         // ---------------------------------------------------------------
 
-        private static List<UserDefinedCellNameCellsPair> __CreateNamePairs(List<string> udcell_names, List<UserDefinedCellCells> list_udcells)
+        private static List<UserDefinedCellNameCellsPair> __CreateNamePairs(int shapeid, List<string> udcell_names, List<UserDefinedCellCells> list_udcells)
         {
             var namepairs = new List<UserDefinedCellNameCellsPair>(list_udcells.Count);
             int num_udcells = list_udcells.Count;
-            var udcell_indices = Enumerable.Range(0, num_udcells);
-            foreach (int i in udcell_indices)
+            var udcell_rows = Enumerable.Range(0, num_udcells);
+            foreach (int udcell_row in udcell_rows)
             {
-                var udcell_name = udcell_names[i];
-                var pair = new UserDefinedCellNameCellsPair(udcell_name, list_udcells[i]);
+                var udcell_name = udcell_names[udcell_row];
+                var pair = new UserDefinedCellNameCellsPair(shapeid, udcell_row, udcell_name, list_udcells[udcell_row]);
                 namepairs.Add(pair);
             }
 
@@ -256,7 +256,7 @@ namespace VisioAutomation.Shapes
                 var shapeidpair = shapeidpairs[shape_index];
                 var udcell_names = UserDefinedCellHelper.GetNames(shapeidpair.Shape);
                 var list_udcells = list_list_udcells[shape_index];
-                var list_pairs = __CreateNamePairs(udcell_names, list_udcells);
+                var list_pairs = __CreateNamePairs(shapeidpair.ShapeID,udcell_names, list_udcells);
 
                 list_list_pairs.Add(list_pairs);
             }
@@ -276,11 +276,12 @@ namespace VisioAutomation.Shapes
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected number of user-define cell names");
             }
 
+            int shapeid = shape.ID16;
             var pairs = new List<UserDefinedCellNameCellsPair>(num_udcells);
-            var udcell_indices = Enumerable.Range(0, num_udcells);
-            foreach (int i in udcell_indices)
+            var udcell_rows = Enumerable.Range(0, num_udcells);
+            foreach (int udcell_row in udcell_rows)
             {
-                var pair = new UserDefinedCellNameCellsPair(udcell_names[i], listof_udcellcells[i]);
+                var pair = new UserDefinedCellNameCellsPair(shapeid, udcell_row, udcell_names[udcell_row], listof_udcellcells[udcell_row]);
                 pairs.Add(pair);
             }
 

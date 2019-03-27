@@ -12,10 +12,10 @@ namespace VisioAutomation.Shapes
 
         public CustomPropertyNameCellsPair(int shapeid, int row, string name, CustomPropertyCells cells)
         {
-            this.Name = name;
-            this.Cells = cells;
             this.ShapeID = shapeid;
             this.Row = row;
+            this.Name = name;
+            this.Cells = cells;
         }
     }
 
