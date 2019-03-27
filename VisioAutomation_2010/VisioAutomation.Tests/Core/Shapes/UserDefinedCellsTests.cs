@@ -156,7 +156,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // By default a shape has ZERO custom Properties
 
-            Assert.AreEqual(0, VA.Shapes.CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula).Count);
+            Assert.AreEqual(0, VA.Shapes.CustomPropertyHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula).Count);
 
 
             // Add the same one multiple times Custom Property
