@@ -32,7 +32,7 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, VASS.Query.ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
             var reader = HyperLinkCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
@@ -57,7 +57,8 @@ namespace VisioAutomation.Shapes
             public override HyperlinkCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new HyperlinkCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+                var getcellvalue = VASS.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+
                 
                 cells.Address = getcellvalue(nameof(HyperlinkCells.Address));
                 cells.Description = getcellvalue(nameof(HyperlinkCells.Description));

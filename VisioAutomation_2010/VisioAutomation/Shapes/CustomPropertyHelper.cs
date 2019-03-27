@@ -63,33 +63,24 @@ namespace VisioAutomation.Shapes
             writer.CommitFormulas(shape);
         }
 
-        public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
+        public static CustomPropertyDictionary GetCellsAsDictionary(IVisio.Shape shape, VASS.CellValueType type)
+
+  
         {
             var pairs = __GetPairs(shape, type);
             var shape_custprop_dic = CustomPropertyDictionary.FromPairs(pairs);
             return shape_custprop_dic;
         }
 
-        public static List<CustomPropertyDictionary> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        public static List<CustomPropertyDictionary> GetCellsAsDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
-            var shapeidpairs = ShapeSheet.Query.ShapeIdPairs.Create(shapes);
+            var shapeidpairs = ShapeIdPairs.FromShapes(shapes);
+
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
             var listof_custpropdics = __GetListOfCpDic(shapeidpairs, listof_listof_custpropscells);
 
             return listof_custpropdics;
-        }
 
-        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var shape_custprop_cells = CustomPropertyCells.GetCells(shape, type);
-            return shape_custprop_cells;
-        }
-
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
-        {
-            var shapeidpairs = ShapeSheet.Query.ShapeIdPairs.Create(shapes);
-            var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
-            return listof_listof_custpropscells;
         }
 
         public static int GetCount(IVisio.Shape shape)
@@ -221,27 +212,30 @@ namespace VisioAutomation.Shapes
         // ----------------------------------------
         // ----------------------------------------
 
-        private static List<CustomPropNameCellsPair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
+        private static List<CustomPropertyNameCellsPair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
         {
             var shape_custprop_cells = CustomPropertyCells.GetCells(shape, type);
             var shape_custprop_names = CustomPropertyHelper.GetNames(shape);
-            var list = __CreateListofPairs(shape_custprop_names, shape_custprop_cells);
+            int shapeid = shape.ID16;
+            var list = __CreateListofPairs(shape_custprop_names, shape_custprop_cells, shapeid);
             return list;
         }
 
-        private static List<CustomPropNameCellsPair> __CreateListofPairs(
+        private static List<CustomPropertyNameCellsPair> __CreateListofPairs(
             List<string> shape_custprop_names,
-            List<CustomPropertyCells> shape_custprop_cells)
+            List<CustomPropertyCells> shape_custprop_cells,
+            int shapeid)
         {
             int num_props = shape_custprop_names.Count;
 
-            var list = new List<CustomPropNameCellsPair>(num_props);
-            var shape_custprop_indices = System.Linq.Enumerable.Range(0, num_props);
-            foreach (int i in shape_custprop_indices)
+            var list = new List<CustomPropertyNameCellsPair>(num_props);
+            var custprop_rows = System.Linq.Enumerable.Range(0, num_props);
+            foreach (int custprop_row in custprop_rows)
             {
-                string prop_name = shape_custprop_names[i];
-                var shape_custprop_cell = shape_custprop_cells[i];
-                var pair = new CustomPropNameCellsPair(prop_name, shape_custprop_cell);
+                string prop_name = shape_custprop_names[custprop_row];
+                var shape_custprop_cell = shape_custprop_cells[custprop_row];
+                var pair = new CustomPropertyNameCellsPair(shapeid, custprop_row, prop_name, shape_custprop_cell);
+
                 list.Add(pair);
             }
 
@@ -249,7 +243,8 @@ namespace VisioAutomation.Shapes
         }
 
         private static List<CustomPropertyDictionary> __GetListOfCpDic(
-            ShapeSheet.Query.ShapeIdPairs shapeidpairs,
+
+          ShapeIdPairs shapeidpairs,
             List<List<CustomPropertyCells>> customprops_per_shape)
         {
             if (customprops_per_shape.Count != shapeidpairs.Count)
@@ -264,8 +259,9 @@ namespace VisioAutomation.Shapes
             return list_cpdic;
         }
 
-        private static List<List<CustomPropNameCellsPair>> __GetListOfCpPairLists(
-            ShapeSheet.Query.ShapeIdPairs shapeidpairs,
+        private static List<List<CustomPropertyNameCellsPair>> __GetListOfCpPairLists(
+            ShapeIdPairs shapeidpairs,
+
             List<List<CustomPropertyCells>> listof_listof_cpcells)
         {
             if (listof_listof_cpcells.Count != shapeidpairs.Count)
@@ -273,7 +269,8 @@ namespace VisioAutomation.Shapes
                 throw new Exceptions.InternalAssertionException();
             }
 
-            var listof_listof_cppairs = new List<List<CustomPropNameCellsPair>>(shapeidpairs.Count);
+            var listof_listof_cppairs = new List<List<CustomPropertyNameCellsPair>>(shapeidpairs.Count);
+
             var shape_indices = System.Linq.Enumerable.Range(0, shapeidpairs.Count);
 
             foreach (int i in shape_indices)
@@ -283,9 +280,17 @@ namespace VisioAutomation.Shapes
                 var listof_cpcells = listof_listof_cpcells[i];
 
                 int num_cps = listof_cpnames.Count;
-                var cp_indices = Enumerable.Range(0, listof_cpnames.Count);
-                var enumof_cppairs = cp_indices.Select(j => new CustomPropNameCellsPair(listof_cpnames[j], listof_cpcells[j])).ToList();
-                listof_listof_cppairs.Add(enumof_cppairs);
+
+                var cp_indices = Enumerable.Range(0, num_cps);
+                var listof_cppairs = new List<CustomPropertyNameCellsPair>(num_cps);
+                foreach (int cprow in cp_indices)
+                {
+                    int shapeid = shapeidpairs[i].ShapeID;
+                    var cppair = new CustomPropertyNameCellsPair(shapeid, cprow, listof_cpnames[cprow], listof_cpcells[cprow]);
+                    listof_cppairs.Add(cppair);
+                }
+                listof_listof_cppairs.Add(listof_cppairs);
+
             }
             return listof_listof_cppairs;
         }

@@ -88,39 +88,18 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
-        {
-            var udcell_count = UserDefinedCellHelper.GetCount(shape);
-            if (udcell_count < 1)
-            {
-                return new List<UserDefinedCellCells>(0);
-            }
-
-
-            var listof_udcellcells = UserDefinedCellCells.GetCells(shape, type);
-            return listof_udcellcells;
-        }
-
-        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
-        {
-            var shapeidpairs = VASS.Query.ShapeIdPairs.Create(shapes);
-
-            var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, VASS.CellValueType.Formula);
-            int num_shapes = shapeidpairs.Count;
-            return list_list_udcells;
-        }
-
-        public static UserDefinedCellDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
+        public static UserDefinedCellDictionary GetCellsAsDictionary(IVisio.Shape shape, VASS.CellValueType type)
         {
             var pairs = __GetPairs(shape, type);
             var dic = UserDefinedCellDictionary.FromPairs(pairs);
             return dic;
         }
 
-        public static List<UserDefinedCellDictionary> GetDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        public static List<UserDefinedCellDictionary> GetCellsAsDictionary(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
-            int num_shapes = shapes.Count;
-            var list_list_pair = __GetPairs(page, shapes, type);
+            int num_shapes = shapeidpairs.Count;
+            var list_list_pair = __GetPairs(page, shapeidpairs, type);
+
             var list_dic = new List<UserDefinedCellDictionary>(num_shapes);
             var dics = list_list_pair.Select(list_pair => UserDefinedCellDictionary.FromPairs(list_pair));
             list_dic.AddRange(dics);
@@ -252,31 +231,35 @@ namespace VisioAutomation.Shapes
         // ---------------------------------------------------------------
         // ---------------------------------------------------------------
 
-        private static List<UserDefinedCellKeyValuePair> __CreateNamePairs(List<string> udcell_names, List<UserDefinedCellCells> list_udcells)
+        private static List<UserDefinedCellNameCellsPair> __CreateNamePairs(int shapeid, List<string> udcell_names, List<UserDefinedCellCells> list_udcells)
         {
-            var namepairs = new List<UserDefinedCellKeyValuePair>(list_udcells.Count);
-            for (int i = 0; i < list_udcells.Count; i++)
+            var namepairs = new List<UserDefinedCellNameCellsPair>(list_udcells.Count);
+            int num_udcells = list_udcells.Count;
+            var udcell_rows = Enumerable.Range(0, num_udcells);
+            foreach (int udcell_row in udcell_rows)
             {
-                var udcell_name = udcell_names[i];
-                var pair = new UserDefinedCellKeyValuePair(udcell_name, list_udcells[i]);
+                var udcell_name = udcell_names[udcell_row];
+                var pair = new UserDefinedCellNameCellsPair(shapeid, udcell_row, udcell_name, list_udcells[udcell_row]);
+
                 namepairs.Add(pair);
             }
 
             return namepairs;
         }
 
-        private static List<List<UserDefinedCellKeyValuePair>> __GetPairs(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        private static List<List<UserDefinedCellNameCellsPair>> __GetPairs(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
-            var list_list_udcells = GetCells(page, shapes, type);
-            int num_shapes = list_list_udcells.Count;
-            var list_list_pairs = new List<List<UserDefinedCellKeyValuePair>>(num_shapes);
-
-            foreach (int shape_index in Enumerable.Range(0, shapes.Count))
+            var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, type);
+            int num_shapes = shapeidpairs.Count;
+            var list_list_pairs = new List<List<UserDefinedCellNameCellsPair>>(num_shapes);
+            var shape_indices = Enumerable.Range(0, num_shapes);
+            foreach (int shape_index in shape_indices)
             {
-                var shape = shapes[shape_index];
-                var udcell_names = UserDefinedCellHelper.GetNames(shape);
+                var shapeidpair = shapeidpairs[shape_index];
+                var udcell_names = UserDefinedCellHelper.GetNames(shapeidpair.Shape);
                 var list_udcells = list_list_udcells[shape_index];
-                var list_pairs = __CreateNamePairs(udcell_names, list_udcells);
+                var list_pairs = __CreateNamePairs(shapeidpair.ShapeID,udcell_names, list_udcells);
+
 
                 list_list_pairs.Add(list_pairs);
             }
@@ -284,9 +267,10 @@ namespace VisioAutomation.Shapes
             return list_list_pairs;
         }
 
-        private static List<UserDefinedCellKeyValuePair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
+        private static List<UserDefinedCellNameCellsPair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var listof_udcellcells = GetCells(shape, type);
+            var listof_udcellcells = UserDefinedCellCells.GetCells(shape, type);
+
 
             int num_udcells = listof_udcellcells.Count;
 
@@ -296,10 +280,12 @@ namespace VisioAutomation.Shapes
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Unexpected number of user-define cell names");
             }
 
-            var pairs = new List<UserDefinedCellKeyValuePair>(num_udcells);
-            for (int i = 0; i < num_udcells; i++)
+            int shapeid = shape.ID16;
+            var pairs = new List<UserDefinedCellNameCellsPair>(num_udcells);
+            var udcell_rows = Enumerable.Range(0, num_udcells);
+            foreach (int udcell_row in udcell_rows)
             {
-                var pair = new UserDefinedCellKeyValuePair(udcell_names[i], listof_udcellcells[i]);
+                var pair = new UserDefinedCellNameCellsPair(shapeid, udcell_row, udcell_names[udcell_row], listof_udcellcells[udcell_row]);
                 pairs.Add(pair);
             }
 

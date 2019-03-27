@@ -27,7 +27,8 @@ namespace VisioScripting.Commands
             }
 
             var page = cmdtarget.ActivePage;
-            var list_user_props = UserDefinedCellHelper.GetDictionary((IVisio.Page) page , targets.Shapes, cvt);
+            var shapeidpairs = VisioAutomation.ShapeIdPairs.FromShapes(targets.Shapes);
+            var list_user_props = UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {

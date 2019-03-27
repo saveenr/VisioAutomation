@@ -102,8 +102,8 @@
     <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
     <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
     <Compile Include="ShapeSheet\CellValueType.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeIdPairs.cs" />
-    <Compile Include="ShapeSheet\Query\ShapeIdPair.cs" />
+    <Compile Include="ShapeIdPairs.cs" />
+    <Compile Include="ShapeIdPair.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryResults.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="ShapeSheet\Writers\WriteRecord.cs" />
     <Compile Include="ShapeSheet\Writers\WriteRecordList.cs" />
     <Compile Include="ShapeSheet\Streams\StreamArray.cs" />
-    <Compile Include="Shapes\CustomPropNameCellsPair.cs" />
+    <Compile Include="Shapes\CustomPropertyNameCellsPair.cs" />
     <Compile Include="Shapes\CustomPropertyType.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegmentReader.cs" />
     <Compile Include="ShapeSheet\Internal\ArraySegment.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="Shapes\UserDefinedCellDictionary.cs" />
-    <Compile Include="Shapes\UserDefinedCellKeyValuePair.cs" />
+    <Compile Include="Shapes\UserDefinedCellNameCellsPair.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\HyperlinkCells.cs" />
