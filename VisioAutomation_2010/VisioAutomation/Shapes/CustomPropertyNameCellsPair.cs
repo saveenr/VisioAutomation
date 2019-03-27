@@ -4,13 +4,18 @@ namespace VisioAutomation.Shapes
 
     internal class CustomPropertyNameCellsPair
     {
+        public readonly int ShapeID;
+        public readonly int Row;
         public readonly string Name;
         public readonly CustomPropertyCells Cells;
 
-        public CustomPropertyNameCellsPair(string name, CustomPropertyCells cells)
+
+        public CustomPropertyNameCellsPair(int shapeid, int row, string name, CustomPropertyCells cells)
         {
             this.Name = name;
             this.Cells = cells;
+            this.ShapeID = shapeid;
+            this.Row = row;
         }
     }
 
