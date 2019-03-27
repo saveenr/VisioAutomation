@@ -28,6 +28,7 @@ namespace VisioScripting.Commands
 
             var list_custom_props = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, targets.Shapes, CellValueType.Formula);
 
+
             for (int i = 0; i < targets.Shapes.Count; i++)
             {
                 var shape = targets.Shapes[i];

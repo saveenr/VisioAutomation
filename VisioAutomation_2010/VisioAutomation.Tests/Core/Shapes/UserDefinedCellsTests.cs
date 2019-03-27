@@ -48,20 +48,27 @@ namespace VisioAutomation_Tests.Core.Shapes
             // Verify that we can set the value without affecting the prompt
             SetCP(s1,"FOO1","BEER",null);
             udcs = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
+
+
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
             Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set passing in nulls changes nothing
             SetCP(s1, "FOO1", null, null);
-            udcs = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
+
+          udcs = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
+
+
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
             Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set the prompt without affecting the value
             SetCP(s1, "FOO1", null, "Prompt1");
+
             udcs = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VA.ShapeSheet.CellValueType.Formula);
+
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
             Assert.AreEqual("\"Prompt1\"", udcs["FOO1"].Prompt.Value);
@@ -84,8 +91,10 @@ namespace VisioAutomation_Tests.Core.Shapes
             var shapes = new[] { s1, s2 };
 
             SetCP(s1, "foo", "bar", null);
+
             var shapeidpairs = VA.ShapeIdPairs.FromShapes(shapes);
             var props1 = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(page1, shapeidpairs, VisioAutomation.ShapeSheet.CellValueType.Formula);
+
             Assert.AreEqual(2, props1.Count);
             Assert.AreEqual(1, props1[0].Count);
             Assert.AreEqual(0, props1[1].Count);
@@ -146,7 +155,9 @@ namespace VisioAutomation_Tests.Core.Shapes
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
+
             Assert.AreEqual(0, VisioAutomation.Shapes.CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula).Count);
+
 
             // Add the same one multiple times Custom Property
             SetCP(s1, "FOO1", "BAR1", null);

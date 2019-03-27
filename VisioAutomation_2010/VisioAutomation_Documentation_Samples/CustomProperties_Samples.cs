@@ -19,6 +19,7 @@ namespace VisioAutomation_Documentation_Samples
 
             var props = VisioAutomation.Shapes.CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
 
+
             // Delete the property from the shape
 
             VisioAutomation.Shapes.CustomPropertyHelper.Delete(s1, "Propname");
@@ -47,6 +48,7 @@ namespace VisioAutomation_Documentation_Samples
 
             var shapes = new[] {s1, s2};
             var props = VisioAutomation.Shapes.CustomPropertyHelper.GetCellsAsDictionary(page,shapes, CellValueType.Formula);
+
 
             // Delete the properties from the shapes
             VisioAutomation.Shapes.CustomPropertyHelper.Delete(s1, "Propname");

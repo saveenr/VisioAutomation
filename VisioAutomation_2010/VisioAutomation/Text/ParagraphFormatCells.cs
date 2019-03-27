@@ -46,6 +46,7 @@ namespace VisioAutomation.Text
         }
 
         public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
+
         {
             var reader = ParagraphFormatCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);

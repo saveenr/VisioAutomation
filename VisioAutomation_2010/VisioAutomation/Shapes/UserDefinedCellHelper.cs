@@ -99,6 +99,7 @@ namespace VisioAutomation.Shapes
         {
             int num_shapes = shapeidpairs.Count;
             var list_list_pair = __GetPairs(page, shapeidpairs, type);
+
             var list_dic = new List<UserDefinedCellDictionary>(num_shapes);
             var dics = list_list_pair.Select(list_pair => UserDefinedCellDictionary.FromPairs(list_pair));
             list_dic.AddRange(dics);
@@ -239,6 +240,7 @@ namespace VisioAutomation.Shapes
             {
                 var udcell_name = udcell_names[udcell_row];
                 var pair = new UserDefinedCellNameCellsPair(shapeid, udcell_row, udcell_name, list_udcells[udcell_row]);
+
                 namepairs.Add(pair);
             }
 
@@ -258,6 +260,7 @@ namespace VisioAutomation.Shapes
                 var list_udcells = list_list_udcells[shape_index];
                 var list_pairs = __CreateNamePairs(shapeidpair.ShapeID,udcell_names, list_udcells);
 
+
                 list_list_pairs.Add(list_pairs);
             }
 
@@ -267,6 +270,7 @@ namespace VisioAutomation.Shapes
         private static List<UserDefinedCellNameCellsPair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
         {
             var listof_udcellcells = UserDefinedCellCells.GetCells(shape, type);
+
 
             int num_udcells = listof_udcellcells.Count;
 
