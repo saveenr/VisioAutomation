@@ -233,7 +233,9 @@ namespace VisioAutomation.Shapes
         private static List<UserDefinedCellNameCellsPair> __CreateNamePairs(List<string> udcell_names, List<UserDefinedCellCells> list_udcells)
         {
             var namepairs = new List<UserDefinedCellNameCellsPair>(list_udcells.Count);
-            for (int i = 0; i < list_udcells.Count; i++)
+            int num_udcells = list_udcells.Count;
+            var udcell_indices = Enumerable.Range(0, num_udcells);
+            foreach (int i in udcell_indices)
             {
                 var udcell_name = udcell_names[i];
                 var pair = new UserDefinedCellNameCellsPair(udcell_name, list_udcells[i]);
@@ -246,10 +248,10 @@ namespace VisioAutomation.Shapes
         private static List<List<UserDefinedCellNameCellsPair>> __GetPairs(IVisio.Page page, ShapeIdPairs shapeidpairs, VASS.CellValueType type)
         {
             var list_list_udcells = UserDefinedCellCells.GetCells(page, shapeidpairs, type);
-            int num_shapes = list_list_udcells.Count;
+            int num_shapes = shapeidpairs.Count;
             var list_list_pairs = new List<List<UserDefinedCellNameCellsPair>>(num_shapes);
-
-            foreach (int shape_index in Enumerable.Range(0, shapeidpairs.Count))
+            var shape_indices = Enumerable.Range(0, num_shapes);
+            foreach (int shape_index in shape_indices)
             {
                 var shapeidpair = shapeidpairs[shape_index];
                 var udcell_names = UserDefinedCellHelper.GetNames(shapeidpair.Shape);
@@ -275,7 +277,8 @@ namespace VisioAutomation.Shapes
             }
 
             var pairs = new List<UserDefinedCellNameCellsPair>(num_udcells);
-            for (int i = 0; i < num_udcells; i++)
+            var udcell_indices = Enumerable.Range(0, num_udcells);
+            foreach (int i in udcell_indices)
             {
                 var pair = new UserDefinedCellNameCellsPair(udcell_names[i], listof_udcellcells[i]);
                 pairs.Add(pair);
