@@ -270,7 +270,7 @@ namespace VisioAutomation.Shapes
                 var listof_cpcells = listof_listof_cpcells[i];
 
                 int num_cps = listof_cpnames.Count;
-                var cp_indices = Enumerable.Range(0, listof_cpnames.Count);
+                var cp_indices = Enumerable.Range(0, num_cps);
                 var enumof_cppairs = cp_indices.Select(j => new CustomPropertyNameCellsPair(listof_cpnames[j], listof_cpcells[j])).ToList();
                 listof_listof_cppairs.Add(enumof_cppairs);
             }
