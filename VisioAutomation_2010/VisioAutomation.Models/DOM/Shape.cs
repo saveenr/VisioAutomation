@@ -6,8 +6,8 @@ namespace VisioAutomation.Models.Dom
     public class Shape : BaseShape
     {
         public MasterRef Master { get; protected set; }
-        public VisioAutomation.Geometry.Point DropPosition { get; private set; }
-        public VisioAutomation.Geometry.Size? DropSize { get; private set; }
+        public VisioAutomation.Geometry.Point DropPosition { get; }
+        public VisioAutomation.Geometry.Size? DropSize { get; }
         public string Name { get; set; }
 
         public Shape(IVisio.Master master, VisioAutomation.Geometry.Point pos)

@@ -76,7 +76,7 @@ namespace VisioScripting.Commands
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException(nameof(name),"name cannot be empty");
+                throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteUserDefinedCellsByName)))

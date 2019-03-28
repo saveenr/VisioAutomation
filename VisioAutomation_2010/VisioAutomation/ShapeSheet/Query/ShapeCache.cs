@@ -5,7 +5,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
     internal class ShapeCache : IEnumerable<ShapeCacheItem>
     {
-        private List<ShapeCacheItem> _list_shapecacheitems;
+        private readonly List<ShapeCacheItem> _list_shapecacheitems;
 
         public ShapeCache(int capacity)
         {

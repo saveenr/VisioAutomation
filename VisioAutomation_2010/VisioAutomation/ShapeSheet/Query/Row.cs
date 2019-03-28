@@ -1,14 +1,13 @@
 ﻿using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
 
     public class Row<T> : IEnumerable<T>
     {
-        public int ShapeID { get; private set; }
+        public int ShapeID { get; }
         private VASS.Internal.ArraySegment<T> Cells { get; }
 
         internal Row(int shapeid, VASS.Internal.ArraySegment<T> cells)

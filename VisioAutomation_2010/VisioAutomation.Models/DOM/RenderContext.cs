@@ -7,7 +7,7 @@ namespace VisioAutomation.Models.Dom
     {
         private readonly Dictionary<short, IVisio.Shape> _id_to_shape;
         private readonly IVisio.Shapes _pageshapes;
-        public IVisio.Page VisioPage { get; private set; }
+        public IVisio.Page VisioPage { get; }
 
         public RenderContext(IVisio.Page visio_page)
         {

@@ -7,7 +7,7 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
         private readonly List<WriteRecord> items;
 
-        CellCoordinateType coordtype;
+        readonly CellCoordinateType coordtype;
 
         public WriteRecordList(CellCoordinateType type)
         {

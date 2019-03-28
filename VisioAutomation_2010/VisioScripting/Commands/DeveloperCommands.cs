@@ -173,7 +173,7 @@ namespace VisioScripting.Commands
             public readonly Dictionary<string, string> PathToParentPath;
             public readonly List<string> Roots;
             public readonly string Separator;
-            public readonly string[] seps;
+            private readonly string[] seps;
             private StringSplitOptions options = StringSplitOptions.None;
 
             public PathTreeBuilder()

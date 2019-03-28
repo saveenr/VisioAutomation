@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using System.Linq;
 
 namespace VisioAutomation.Shapes
 {

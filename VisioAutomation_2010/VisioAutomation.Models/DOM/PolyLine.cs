@@ -5,7 +5,7 @@ namespace VisioAutomation.Models.Dom
 {
     public class PolyLine : BaseShape
     {
-        public List<VisioAutomation.Geometry.Point> Points { get; private set; }
+        public List<VisioAutomation.Geometry.Point> Points { get; }
 
         public PolyLine(params double[] doubles)
         {

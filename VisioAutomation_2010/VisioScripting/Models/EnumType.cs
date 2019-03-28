@@ -6,9 +6,9 @@ namespace VisioScripting.Models
     public class EnumType
     {
         public System.Type Type { get; }
-        public string Name { get; private set; }
+        public string Name { get; }
         public List<EnumValue> Values { get; }
-        public Dictionary<string, int> NameToValue { get; private set; }
+        public Dictionary<string, int> NameToValue { get; }
 
         public EnumType(System.Type t)
         {

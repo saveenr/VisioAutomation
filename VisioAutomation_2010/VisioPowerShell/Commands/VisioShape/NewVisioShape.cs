@@ -92,14 +92,14 @@ namespace VisioPowerShell.Commands
             {
                 if (points.Count < 2)
                 {
-                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a polyline");
+                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a polyline", nameof(points));
                 }
             }
             else if (this.Type == Models.ShapeType.Bezier)
             {
                 if (points.Count < 2)
                 {
-                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a bezier");
+                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a bezier", nameof(points));
                 }
             }
         }

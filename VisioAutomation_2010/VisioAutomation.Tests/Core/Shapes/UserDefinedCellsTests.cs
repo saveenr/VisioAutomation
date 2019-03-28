@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VASS=VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
