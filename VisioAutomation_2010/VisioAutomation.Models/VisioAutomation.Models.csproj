@@ -76,13 +76,6 @@
     <Compile Include="Layouts\Box\Container.cs" />
     <Compile Include="Layouts\Box\Direction.cs" />
     <Compile Include="Layouts\Box\Node.cs" />
-    <Compile Include="Charting\AreaChart.cs" />
-    <Compile Include="Charting\BarChart.cs" />
-    <Compile Include="Charting\ChartUtil.cs" />
-    <Compile Include="Charting\DataPoint.cs" />
-    <Compile Include="Charting\DataPointList.cs" />
-    <Compile Include="Charting\PieChart.cs" />
-    <Compile Include="Charting\PieSlice.cs" />
     <Compile Include="Layouts\Container\Container.cs" />
     <Compile Include="Layouts\Container\ContainerItem.cs" />
     <Compile Include="Layouts\Container\ContainerLayout.cs" />
@@ -103,7 +96,6 @@
     <Compile Include="Layouts\DirectedGraph\ShapeList.cs" />
     <Compile Include="Layouts\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\VisioRenderer.cs" />
-    <Compile Include="Dom\Arc.cs" />
     <Compile Include="Dom\BaseShape.cs" />
     <Compile Include="Dom\BezierCurve.cs" />
     <Compile Include="Dom\Connector.cs" />
@@ -117,7 +109,6 @@
     <Compile Include="Dom\Page.cs" />
     <Compile Include="Dom\PageCells.cs" />
     <Compile Include="Dom\PageList.cs" />
-    <Compile Include="Dom\PieSlice.cs" />
     <Compile Include="Dom\PolyLine.cs" />
     <Compile Include="Dom\Rectangle.cs" />
     <Compile Include="Dom\RenderContext.cs" />

@@ -99,68 +99,6 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DrawPieSliceOnActivePage(
-            VisioAutomation.Geometry.Point center,
-            double radius,
-            double start_angle,
-            double end_angle)
-        {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var application = cmdtarget.Application;
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPieSliceOnActivePage)))
-            {
-                var active_page = application.ActivePage;
-                var slice = new VisioAutomation.Models.Charting.PieSlice(center, radius, start_angle, end_angle);
-                var shape = slice.Render(active_page);
-                return shape;
-            }
-        }
-        public IVisio.Shape DrawDoughnutSliceOnActivePage(
-            VisioAutomation.Geometry.Point center,
-            double inner_radius,
-            double outer_radius,
-            double start_angle,
-            double end_angle)
-        {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var application = cmdtarget.Application;
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawDoughnutSliceOnActivePage)))
-            {
-                var active_page = cmdtarget.ActivePage;
-                var slice = new VisioAutomation.Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
-                var shape = slice.Render(active_page);
-                return shape;
-            }
-        }
-
-        public void DrawPieChartOnActivePage(VisioAutomation.Models.Charting.PieChart chart)
-        {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var page = cmdtarget.ActivePage;
-            chart.Render(page);
-        }
-
-        public void DrawBarChartOnActivePage(VisioAutomation.Models.Charting.BarChart chart)
-        {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var application = cmdtarget.Application;
-            var page = application.ActivePage;
-            chart.Render(page);
-        }
-
-        public void DrawAreaChartOnActivePage(VisioAutomation.Models.Charting.AreaChart chart)
-        {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var page = cmdtarget.ActivePage;
-            chart.Render(page);
-        }
-
-
         public void NewOrgChartDocument(ORG.OrgChartDocument chartdocument)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();

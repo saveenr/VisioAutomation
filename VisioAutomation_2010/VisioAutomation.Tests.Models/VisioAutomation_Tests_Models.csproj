@@ -67,12 +67,10 @@
     <Compile Include="Dom\Dom_Tests.cs" />
     <Compile Include="Dom\Dom_Text.cs" />
     <Compile Include="Layouts\BoxLayout_Tests.cs" />
-    <Compile Include="Charting\Chart_Tests.cs" />
     <Compile Include="Layouts\CointainerLayout_Tests.cs" />
     <Compile Include="Layouts\DirectedGraph_Tests.cs" />
     <Compile Include="Geometry\DrawingHelper.cs" />
     <Compile Include="Documents\OrgChart_Tests.cs" />
-    <Compile Include="Charting\PieSliceTests.cs" />
     <Compile Include="Layouts\Tree_Tests.cs" />
     <Compile Include="ScriptingDrawTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
