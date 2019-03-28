@@ -122,8 +122,9 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");
             }
-            
-            var row = new Row<T>(shapeid, cells);
+
+            var sec_index = IVisio.VisSectionIndices.visSectionInval;
+            var row = new Row<T>(shapeid, sec_index, cells);
             return row;
         }
 

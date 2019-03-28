@@ -8,12 +8,14 @@ namespace VisioAutomation.ShapeSheet.Query
     public class Row<T> : IEnumerable<T>
     {
         public int ShapeID { get; }
+        public IVisio.VisSectionIndices SectionIndex { get; }
         private VASS.Internal.ArraySegment<T> Cells { get; }
 
-        internal Row(int shapeid, VASS.Internal.ArraySegment<T> cells)
+        internal Row(int shapeid, IVisio.VisSectionIndices secindex, Internal.ArraySegment<T> cells)
         {
             this.ShapeID = shapeid;
             this.Cells = cells;
+            this.SectionIndex = secindex;
         }
 
         public IEnumerator<T> GetEnumerator()
