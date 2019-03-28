@@ -15,7 +15,7 @@ namespace VisioAutomation.Text
         public List<TextRun> ParagraphTextRuns { get; private set; }
         public List<TabStop> TabStops { get; private set; }
 
-        private static List<TextRun> GetTextRuns(
+        private static List<TextRun> _get_text_runs(
             IVisio.Shape shape,
             IVisio.VisRunTypes runtype,
             bool collect_text)
@@ -77,8 +77,8 @@ namespace VisioAutomation.Text
             {
                 cells.TextXForm = TextXFormCells.GetCells(shape, type);
             }
-            cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-            cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            cells.CharacterTextRuns = TextFormat._get_text_runs(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            cells.ParagraphTextRuns = TextFormat._get_text_runs(shape, IVisio.VisRunTypes.visParaPropRow, true);
             cells.TabStops = TextHelper.GetTabStops(shape);
             return cells;
         }
@@ -111,8 +111,8 @@ namespace VisioAutomation.Text
                 formats.Add(format);
 
                 var shape = page_shapes.ItemFromID[shapeidpairs[i].ShapeID];
-                format.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-                format.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+                format.CharacterTextRuns = TextFormat._get_text_runs(shape, IVisio.VisRunTypes.visCharPropRow, true);
+                format.ParagraphTextRuns = TextFormat._get_text_runs(shape, IVisio.VisRunTypes.visParaPropRow, true);
 
                 format.TabStops = TextHelper.GetTabStops(shape);
             }

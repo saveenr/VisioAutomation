@@ -5,47 +5,47 @@ namespace VisioAutomation.ShapeSheet.Writers
 {
     public class WriteRecordList
     {
-        private readonly List<WriteRecord> items;
+        private readonly List<WriteRecord> _items;
 
-        readonly CellCoordinateType coordtype;
+        readonly CellCoordinateType _coordtype;
 
         public WriteRecordList(CellCoordinateType type)
         {
-            this.items = new List<WriteRecord>();
-            this.coordtype = type;
+            this._items = new List<WriteRecord>();
+            this._coordtype = type;
         }
 
         public void Clear()
         {
-            this.items.Clear();
+            this._items.Clear();
         }
 
         public void Add(SidSrc sidsrc, string value)
         {
-            CheckForSidSrc();
+            _check_for_sid_src();
             var item = new WriteRecord(sidsrc, value);
-            this.items.Add(item);
+            this._items.Add(item);
         }
 
         public void Add(Src coord, string value)
         {
-            CheckForSrc();
+            _check_for_src();
             var item = new WriteRecord(new SidSrc(-1, coord), value);
-            this.items.Add(item);
+            this._items.Add(item);
         }
 
-        private void CheckForSidSrc()
+        private void _check_for_sid_src()
         {
-            if (this.coordtype != CellCoordinateType.SidSrc)
+            if (this._coordtype != CellCoordinateType.SidSrc)
             {
                 string msg = string.Format("Excpected a sidsrc value");
                 throw new System.ArgumentOutOfRangeException(msg);
             }
         }
 
-        private void CheckForSrc()
+        private void _check_for_src()
         {
-            if (this.coordtype != CellCoordinateType.Src)
+            if (this._coordtype != CellCoordinateType.Src)
             {
                 string msg = string.Format("Excpected a src value");
                 throw new System.ArgumentOutOfRangeException(msg);
@@ -54,38 +54,38 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public Streams.StreamArray BuildSidSrcStream()
         {
-            if (this.coordtype != CellCoordinateType.SidSrc)
+            if (this._coordtype != CellCoordinateType.SidSrc)
             {
                 string msg = string.Format("writer does not contain sidsrcvalues");
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
-            var sidsrcs = this.items.Select(i => i.SidSrc);
+            var sidsrcs = this._items.Select(i => i.SidSrc);
             return Streams.StreamArray.FromSidSrc(this.Count, sidsrcs);
         }
 
         public Streams.StreamArray BuildSrcStream()
         {
-            if (this.coordtype != CellCoordinateType.Src)
+            if (this._coordtype != CellCoordinateType.Src)
             {
                 string msg = string.Format("writer does not contain srcvalues");
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
-            var srcs = this.items.Select(i => i.SidSrc.Src);
+            var srcs = this._items.Select(i => i.SidSrc.Src);
             return Streams.StreamArray.FromSrc(this.Count, srcs);
         }
 
         public object[] BuildValuesArray()
         {
-            var array = new object[this.items.Count];
-            for (int i = 0; i < this.items.Count; i++)
+            var array = new object[this._items.Count];
+            for (int i = 0; i < this._items.Count; i++)
             {
-                array[i] = this.items[i].Value;
+                array[i] = this._items[i].Value;
             }
             return array;
         }
 
-        public int Count => this.items.Count;
+        public int Count => this._items.Count;
     }
 }

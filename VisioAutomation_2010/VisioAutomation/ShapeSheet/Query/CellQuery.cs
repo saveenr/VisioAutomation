@@ -22,7 +22,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(SurfaceTarget surface)
         {
-            RestrictToShapesOnly(surface);
+            _restrict_to_shapes_only(surface);
 
             var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(SurfaceTarget surface)
         {
-            RestrictToShapesOnly(surface);
+            _restrict_to_shapes_only(surface);
 
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
@@ -98,26 +98,26 @@ namespace VisioAutomation.ShapeSheet.Query
             return cellqueryresults;
         }
 
-        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> segReader)
+        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> seg_reader)
         {
             var rows = new Rows<T>(shapeids.Count);
             foreach (int shapeid in shapeids)
             {
-                var row = this._shapedata_to_row((short)shapeid, segReader);
+                var row = this._shapedata_to_row((short)shapeid, seg_reader);
                 rows.Add(row);
             }
             return rows;
         }
 
-        private Row<T> _shapedata_to_row<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> segReader)
+        private Row<T> _shapedata_to_row<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> seg_reader)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
-            int original_seg_size = segReader.Count;
-            var cells = segReader.GetNextSegment(numcols);
+            int original_seg_size = seg_reader.Count;
+            var cells = seg_reader.GetNextSegment(numcols);
 
             // verify that nothing strange has happened
-            int final_seg_size = segReader.Count;
+            int final_seg_size = seg_reader.Count;
             if ((final_seg_size - original_seg_size) != numcols)
             {
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");
@@ -166,7 +166,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static void RestrictToShapesOnly(SurfaceTarget surface)
+        private static void _restrict_to_shapes_only(SurfaceTarget surface)
         {
             if (surface.Shape == null)
             {

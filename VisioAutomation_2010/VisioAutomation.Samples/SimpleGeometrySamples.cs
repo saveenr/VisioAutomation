@@ -77,7 +77,7 @@ namespace VisioAutomationSamples
             var degree = 3;
             var weights = controlpoints.Select(i => 1.0).ToList();
 
-            var s0 = page.DrawNURBS(controlpoints, knots, weights, degree);
+            var s0 = page.DrawNurbs(controlpoints, knots, weights, degree);
             s0.Text = "Generic NURBS shape";
         }
 
@@ -107,7 +107,7 @@ namespace VisioAutomationSamples
             var degree = 3;
             var Weights = controlpoints.Select(i => 1.0).ToList();
 
-            var s0 = page.DrawNURBS(controlpoints, knots, Weights, degree);
+            var s0 = page.DrawNurbs(controlpoints, knots, Weights, degree);
             s0.Text = "Generic NURBS shape";
         }
     }

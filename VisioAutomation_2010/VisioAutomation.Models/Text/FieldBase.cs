@@ -4,7 +4,7 @@ namespace VisioAutomation.Models.Text
 {
     public class FieldBase : Node
     {
-        private const string placeholder_string = "[FIELD]";
+        private const string Placeholder = "[FIELD]";
         public IVisio.VisFieldFormats Format { get; set; }
 
         internal FieldBase(VisioAutomation.Models.Text.NodeType nt)
@@ -16,7 +16,7 @@ namespace VisioAutomation.Models.Text
         {
             get
             {
-                return FieldBase.placeholder_string;
+                return FieldBase.Placeholder;
             }
         }
     }

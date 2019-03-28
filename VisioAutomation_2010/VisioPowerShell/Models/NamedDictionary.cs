@@ -5,48 +5,48 @@ namespace VisioPowerShell.Models
 {
     public class NamedDictionary<T>
     {
-        private readonly Dictionary<string, T> dic;
-        private readonly System.Text.RegularExpressions.Regex regex_name;
-        private readonly System.Text.RegularExpressions.Regex regex_name_wildcard;
+        private readonly Dictionary<string, T> _dic;
+        private readonly System.Text.RegularExpressions.Regex _regex_name;
+        private readonly System.Text.RegularExpressions.Regex _regex_name_wildcard;
 
         public NamedDictionary()
         {
-            this.regex_name = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
-            this.regex_name_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
+            this._regex_name = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
+            this._regex_name_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
             var compare = StringComparer.InvariantCultureIgnoreCase;
-            this.dic = new Dictionary<string, T>(compare);
+            this._dic = new Dictionary<string, T>(compare);
         }
 
         public T this[string name]
         {
-            get { return this.dic[name]; }
+            get { return this._dic[name]; }
             set
             {
                 this._AssertKeyIsValid(name);
 
-                if (this.dic.ContainsKey(name))
+                if (this._dic.ContainsKey(name))
                 {
                     string msg = string.Format("Dictionary already contains a key called \"{0}\"", name);
                     throw new ArgumentOutOfRangeException(msg);
                 }
 
-                this.dic[name] = value;
+                this._dic[name] = value;
             }
         }
 
         public Dictionary<string, T>.KeyCollection Keys
         {
-            get { return this.dic.Keys; }
+            get { return this._dic.Keys; }
         }
 
         private bool _IsValidKey(string name)
         {
-            return this.regex_name.IsMatch(name);
+            return this._regex_name.IsMatch(name);
         }
 
         private bool _IsValidKeyWithWildCard(string name)
         {
-            return this.regex_name_wildcard.IsMatch(name);
+            return this._regex_name_wildcard.IsMatch(name);
         }
 
         private void _AssertKeyIsValid(string name)
@@ -93,7 +93,7 @@ namespace VisioPowerShell.Models
             else
             {
                 this._AssertKeyIsValid(key);
-                if (this.dic.ContainsKey(key))
+                if (this._dic.ContainsKey(key))
                 {
                     // found the exact cell name, yield it
                     yield return key;
@@ -116,7 +116,7 @@ namespace VisioPowerShell.Models
 
         public bool ContainsKey(string key)
         {
-            return this.dic.ContainsKey(key);
+            return this._dic.ContainsKey(key);
         }
     }
 }

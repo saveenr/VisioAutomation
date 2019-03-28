@@ -4,7 +4,7 @@ namespace VisioAutomation.Models.Geometry
 {
     public class BoundingBoxBuilder
     {
-        bool initialized = false;
+        bool _initialized = false;
         double _min_x = 0.0;
         double _min_y = 0.0;
         double _max_x = 0.0;
@@ -18,7 +18,7 @@ namespace VisioAutomation.Models.Geometry
         public void Add(VisioAutomation.Geometry.Point p)
         {
 
-            if (initialized)
+            if (_initialized)
             {
                 _min_x = System.Math.Min(_min_x, p.X);
                 _max_x = System.Math.Max(_max_x, p.X);
@@ -31,7 +31,7 @@ namespace VisioAutomation.Models.Geometry
                 _max_x = p.X;
                 _min_y = p.Y;
                 _max_y = p.Y;
-                initialized = true;
+                _initialized = true;
             }
         }
 
@@ -43,7 +43,7 @@ namespace VisioAutomation.Models.Geometry
 
         public VisioAutomation.Geometry.Rectangle? ToRectangle()
         {
-            if (initialized)
+            if (_initialized)
             {
                 return new VisioAutomation.Geometry.Rectangle(_min_x, _min_y, _max_x, _max_y);
             }

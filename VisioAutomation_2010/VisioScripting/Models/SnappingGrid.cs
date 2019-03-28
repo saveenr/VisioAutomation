@@ -20,7 +20,7 @@ namespace VisioScripting.Models
         {
             double x;
             double y;
-            this.SnapXY(size.Width,size.Height,out x, out y);
+            this._snap_xy(size.Width,size.Height,out x, out y);
             return new Size(x, y);            
         }
 
@@ -28,25 +28,25 @@ namespace VisioScripting.Models
         {
             double x;
             double y;
-            this.SnapXY(point.X,point.Y,out x, out y);
+            this._snap_xy(point.X,point.Y,out x, out y);
             return new Point(x, y);
         }
 
         public Point Snap(double x, double y)
         {
-            this.SnapXY(x, y, out x, out y);
+            this._snap_xy(x, y, out x, out y);
             return new Point(x, y);
         }
 
-        private void SnapXY(double x, double y, out double sx, out double sy)
+        private void _snap_xy(double x, double y, out double sx, out double sy)
         {
-            sx = this.Round(x, this.SnapSize.Width);
-            sy = this.Round(y, this.SnapSize.Height);
+            sx = this._round(x, this.SnapSize.Width);
+            sy = this._round(y, this.SnapSize.Height);
         }
 
-        private double Round(double val, double snap_val)
+        private double _round(double val, double snap_val)
         {
-            return this.Round(val, System.MidpointRounding.AwayFromZero, snap_val);
+            return this._round(val, System.MidpointRounding.AwayFromZero, snap_val);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace VisioScripting.Models
         /// <param name="rounding">what kind of rounding</param>
         /// <param name="frac"> round to this value (must be greater than 0.0)</param>
         /// <returns>the rounded value</returns>
-        private double Round(double val, System.MidpointRounding rounding, double frac)
+        private double _round(double val, System.MidpointRounding rounding, double frac)
         {
             if (frac <= 0)
             {

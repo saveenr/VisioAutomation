@@ -42,12 +42,12 @@ namespace VisioScripting.Helpers
             return ReflectionHelper.GetTypeCategoryDisplayString(cat);
         }
 
-        private static bool TypeIsStruct(System.Type type)
+        private static bool _type_is_struct(System.Type type)
         {
             return (type.IsValueType && !type.IsPrimitive && !type.Namespace.StartsWith("System") && !type.IsEnum);
         }
 
-        private static bool TypeIsStaticClass(System.Type type)
+        private static bool _type_is_static_class(System.Type type)
         {
             return (type.IsAbstract && type.IsSealed);
         }
@@ -67,7 +67,7 @@ namespace VisioScripting.Helpers
         {
             if (type.IsClass)
             {
-                if (ReflectionHelper.TypeIsStaticClass(type))
+                if (ReflectionHelper._type_is_static_class(type))
                 {
                     return TypeCategory.StaticClass;
                 }
@@ -85,7 +85,7 @@ namespace VisioScripting.Helpers
             {
                 return TypeCategory.Interface;
             }
-            else if (ReflectionHelper.TypeIsStruct(type))
+            else if (ReflectionHelper._type_is_struct(type))
             {
                 return TypeCategory.Struct;
             }
@@ -221,10 +221,10 @@ namespace VisioScripting.Helpers
             return type.Name;
         }
 
-        public static bool IsNullableType(System.Type colType)
+        public static bool IsNullableType(System.Type col_type)
         {
-            return ((colType.IsGenericType) &&
-                    (colType.GetGenericTypeDefinition() == typeof(System.Nullable<>)));
+            return ((col_type.IsGenericType) &&
+                    (col_type.GetGenericTypeDefinition() == typeof(System.Nullable<>)));
         } 
     }
 }

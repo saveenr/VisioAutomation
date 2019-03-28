@@ -30,7 +30,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private static void SendSelection(IVisio.Selection selection, Models.ShapeSendDirection dir)
+        private static void _send_selection(IVisio.Selection selection, Models.ShapeSendDirection dir)
         {
 
             if (dir == Models.ShapeSendDirection.ToBack)
@@ -57,7 +57,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetDocument();
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
-            ArrangeCommands.SendSelection(selection, dir);
+            ArrangeCommands._send_selection(selection, dir);
         }
     }
 }

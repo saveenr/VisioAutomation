@@ -230,7 +230,7 @@ namespace VisioAutomation_Tests.Scripting
         private void draw_directed_graph(VisioScripting.Client client, string dg_text)
         {
             var dg_xml = SXL.XDocument.Parse(dg_text);
-            var dg_model = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXML(client, dg_xml);
+            var dg_model = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXml(client, dg_xml);
 
             // TODO: Investigate if this this special case for Visio 2013 can be removed
             // this is a temporary fix to handle the fact that server_u.vss in Visio 2013 doesn't result in server_u.vssx 

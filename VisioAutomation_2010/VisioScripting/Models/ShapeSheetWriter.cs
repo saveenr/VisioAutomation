@@ -5,7 +5,7 @@ namespace VisioScripting.Models
 {
     public class ShapeSheetWriter
     {
-        internal readonly SidSrcWriter writer;
+        internal readonly SidSrcWriter Writer;
         public Client Client;
         public VisioAutomation.SurfaceTarget Surface;
         public bool BlastGuards;
@@ -15,22 +15,22 @@ namespace VisioScripting.Models
         {
             this.Client = client;
             this.Surface = new VisioAutomation.SurfaceTarget(page);
-            this.writer = new SidSrcWriter();
+            this.Writer = new SidSrcWriter();
         }
 
         public void SetFormula(short id, VisioAutomation.ShapeSheet.Src src, string formula)
         {
             var sidsrc = new VisioAutomation.ShapeSheet.SidSrc(id, src);
-            this.writer.SetValue(sidsrc, formula);
+            this.Writer.SetValue(sidsrc, formula);
         }
 
         public void Commit()
         {
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(ShapeSheetWriter)+"."+nameof(Commit)))
             {
-                this.writer.BlastGuards = this.BlastGuards;
-                this.writer.TestCircular = this.TestCircular;
-                this.writer.CommitFormulas(this.Surface);
+                this.Writer.BlastGuards = this.BlastGuards;
+                this.Writer.TestCircular = this.TestCircular;
+                this.Writer.CommitFormulas(this.Surface);
             }
         }
     }

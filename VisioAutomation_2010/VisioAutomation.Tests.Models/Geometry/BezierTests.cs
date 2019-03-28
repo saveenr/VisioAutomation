@@ -21,10 +21,10 @@ namespace VisioAutomation_Tests.Models.Geometry
             Assert.AreEqual(s1[0].Start.Y, s1[s1.Length - 1].End.Y, this.delta);
 
             // 0 width slice - 45 degrees
-            var s1x = VisioAutomation.Models.Geometry.BezierSegment.FromArc(this.piquarter, this.piquarter);
-            Assert.AreEqual(1, s1x.Length);
-            Assert.AreEqual(s1x[0].Start.X, s1x[s1.Length - 1].End.X, this.delta);
-            Assert.AreEqual(s1x[0].Start.Y, s1x[s1.Length - 1].End.Y, this.delta);
+            var s1_x = VisioAutomation.Models.Geometry.BezierSegment.FromArc(this.piquarter, this.piquarter);
+            Assert.AreEqual(1, s1_x.Length);
+            Assert.AreEqual(s1_x[0].Start.X, s1_x[s1.Length - 1].End.X, this.delta);
+            Assert.AreEqual(s1_x[0].Start.Y, s1_x[s1.Length - 1].End.Y, this.delta);
 
             // a circle
             var s2 = VisioAutomation.Models.Geometry.BezierSegment.FromArc(0.0, this.pi2);

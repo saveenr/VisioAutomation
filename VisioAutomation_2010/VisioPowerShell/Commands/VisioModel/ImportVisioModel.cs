@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands
             if (root.Name == "directedgraph")
             {
                 this.WriteVerbose("Loading as a Directed Graph");
-                var dg_model = DirectedGraphBuilder.LoadFromXML(
+                var dg_model = DirectedGraphBuilder.LoadFromXml(
                     this.Client,
                     xmldoc);
                 this.WriteObject(dg_model);               

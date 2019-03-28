@@ -145,11 +145,11 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             return this._child_list[index];
         }
 
-        public double GetChildrenCenter(TreeLayout<T> treeLayoutEngine)
+        public double GetChildrenCenter(TreeLayout<T> tree_layout_engine)
         {
             var node0 = this.FirstChild;
             var node1 = this.LastChild;
-            return node0.prelim_x + ((node1.prelim_x - node0.prelim_x) + treeLayoutEngine.GetNodeSize(node1))/2;
+            return node0.prelim_x + ((node1.prelim_x - node0.prelim_x) + tree_layout_engine.GetNodeSize(node1))/2;
         }
 
         public IEnumerable<Node<T>> EnumChildren()

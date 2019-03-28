@@ -40,10 +40,10 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            SelectionCommands.InvertSelection(cmdtarget.Application.ActiveWindow);
+            SelectionCommands._invert_selection(cmdtarget.Application.ActiveWindow);
         }
 
-        private static void InvertSelection(IVisio.Window window)
+        private static void _invert_selection(IVisio.Window window)
         {
             if (window == null)
             {

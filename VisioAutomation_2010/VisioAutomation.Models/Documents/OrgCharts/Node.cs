@@ -9,7 +9,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
 
         public string Text { get; set; }
         public IVisio.Shape VisioShape { get; set; }
-        public Dom.Node DOMNode { get; set; }
+        public Dom.Node DomNode { get; set; }
         public string Url { get; set; }
         public VisioAutomation.Geometry.Size? Size { get; set; }
 

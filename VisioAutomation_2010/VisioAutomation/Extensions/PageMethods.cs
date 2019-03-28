@@ -71,7 +71,7 @@ namespace VisioAutomation.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawNURBS(
+        public static IVisio.Shape DrawNurbs(
             this IVisio.Page page, 
             IList<Geometry.Point> controlpoints,
             IList<double> knots,

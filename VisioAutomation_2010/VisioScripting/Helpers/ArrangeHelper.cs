@@ -7,7 +7,7 @@ namespace VisioScripting.Helpers
 {
     internal static class ArrangeHelper
     {
-        private static double GetPositionOnShape(Models.ShapeXFormData xform, Models.ShapeRelativePosition pos)
+        private static double _get_position_on_shape(Models.ShapeXFormData xform, Models.ShapeRelativePosition pos)
         {
             var r = xform.GetRectangle();
 
@@ -38,7 +38,7 @@ namespace VisioScripting.Helpers
             // Then, sort the shapeids pased on the corresponding value in the results
 
             var sorted_shape_ids = Enumerable.Range(0, targets.ShapeIDs.Count)
-                .Select(i => new { index = i, shapeid = targets.ShapeIDs[i], pos = ArrangeHelper.GetPositionOnShape(xforms[i], pos) })
+                .Select(i => new { index = i, shapeid = targets.ShapeIDs[i], pos = ArrangeHelper._get_position_on_shape(xforms[i], pos) })
                 .OrderBy(i => i.pos)
                 .Select(i => i.shapeid)
                 .ToList();
@@ -86,10 +86,10 @@ namespace VisioScripting.Helpers
             // Apply the changes
             var sorted_shape_ids = ArrangeHelper.SortShapesByPosition(page, target, sortpos);
 
-            ModifyPinPositions(page, sorted_shape_ids, newpositions);
+            _modify_pin_positions(page, sorted_shape_ids, newpositions);
         }
 
-        private static void ModifyPinPositions(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Geometry.Point> newpositions)
+        private static void _modify_pin_positions(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Geometry.Point> newpositions)
         {
             var writer = new SidSrcWriter();
             for (int i = 0; i < newpositions.Count; i++)
@@ -101,7 +101,7 @@ namespace VisioScripting.Helpers
             writer.CommitFormulas(page);
         }
 
-        private static void ModifySizes(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Geometry.Size> newsizes)
+        private static void _modify_sizes(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Geometry.Size> newsizes)
         {
             var writer = new SidSrcWriter();
             for (int i = 0; i < newsizes.Count; i++)
@@ -125,16 +125,16 @@ namespace VisioScripting.Helpers
                 var old_rect = input_xfrm.GetRectangle();
                 var old_lower_left = old_rect.LowerLeft;
                 var new_lower_left = snap_grid.Snap(old_lower_left);
-                var new_pin_position = ArrangeHelper.GetPinPositionForCorner(input_xfrm, new_lower_left, corner);
+                var new_pin_position = ArrangeHelper._get_pin_position_for_corner(input_xfrm, new_lower_left, corner);
                 var output_xfrm = new VisioAutomation.Geometry.Point(new_pin_position.X, new_pin_position.Y);
                 output_xfrms.Add(output_xfrm);
             }
 
-            ModifyPinPositions(page, target.ShapeIDs, output_xfrms);
+            _modify_pin_positions(page, target.ShapeIDs, output_xfrms);
         }
 
 
-        private static VisioAutomation.Geometry.Point GetPinPositionForCorner(Models.ShapeXFormData input_xfrm, VisioAutomation.Geometry.Point new_lower_left, Models.SnapCornerPosition corner)
+        private static VisioAutomation.Geometry.Point _get_pin_position_for_corner(Models.ShapeXFormData input_xfrm, VisioAutomation.Geometry.Point new_lower_left, Models.SnapCornerPosition corner)
         {
             var size = new VisioAutomation.Geometry.Size(input_xfrm.XFormWidth, input_xfrm.XFormHeight);
             var locpin = new VisioAutomation.Geometry.Point(input_xfrm.XFormLocPinX, input_xfrm.XFormLocPinY);
@@ -186,7 +186,7 @@ namespace VisioScripting.Helpers
             }
 
             // Now apply the updates to the sizes
-            ModifySizes(page, target.ShapeIDs, sizes);
+            _modify_sizes(page, target.ShapeIDs, sizes);
         }
     }
 }

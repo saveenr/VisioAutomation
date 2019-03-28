@@ -17,18 +17,18 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            var surf_Application = cmdtarget.Application;
-            var surf_Window = surf_Application.ActiveWindow;
-            var surf_Window_subtype = surf_Window.SubType;
+            var surf_application = cmdtarget.Application;
+            var surf_window = surf_application.ActiveWindow;
+            var surf_window_subtype = surf_window.SubType;
 
             // TODO: Revisit the logic here
             // TODO: And what about a selected shape as a surface?
 
-            this._client.Output.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
-            if (surf_Window_subtype == 64)
+            this._client.Output.WriteVerbose("Window SubType: {0}", surf_window_subtype);
+            if (surf_window_subtype == 64)
             {
                 this._client.Output.WriteVerbose("Window = Master Editing");
-                var surf_Master = (IVisio.Master)surf_Window.Master;
+                var surf_Master = (IVisio.Master)surf_window.Master;
                 var surface = new VisioAutomation.SurfaceTarget(surf_Master);
                 return surface;
 
@@ -36,7 +36,7 @@ namespace VisioScripting.Commands
             else
             {
                 this._client.Output.WriteVerbose("Window = Page ");
-                var surf_Page = surf_Application.ActivePage;
+                var surf_Page = surf_application.ActivePage;
                 var surface = new VisioAutomation.SurfaceTarget(surf_Page);
                 return surface;
             }
@@ -59,7 +59,7 @@ namespace VisioScripting.Commands
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawNurbsCurve)))
             {
 
-                var shape = cmdtarget.ActivePage.DrawNURBS(controlpoints, knots, weights, degree);
+                var shape = cmdtarget.ActivePage.DrawNurbs(controlpoints, knots, weights, degree);
                 return shape;
             }
         }

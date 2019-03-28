@@ -14,12 +14,12 @@ namespace VisioScripting.Models
         public double XFormWidth;
         public double XFormHeight;
 
-        private static VASS.Query.Column ColXFormPinX;
-        private static VASS.Query.Column ColXFormPinY;
-        private static VASS.Query.Column ColXFormLocPinX;
-        private static VASS.Query.Column ColXFormLocPinY;
-        private static VASS.Query.Column ColXFormWidth;
-        private static VASS.Query.Column ColXFormHeight;
+        private static VASS.Query.Column _static_col_x_form_pin_x;
+        private static VASS.Query.Column _static_col_x_form_pin_y;
+        private static VASS.Query.Column _static_col_x_form_loc_pin_x;
+        private static VASS.Query.Column _static_col_x_form_loc_pin_y;
+        private static VASS.Query.Column _static_col_x_form_width;
+        private static VASS.Query.Column _static_col_x_form_height;
         private static VASS.Query.CellQuery query;
 
         public static List<ShapeXFormData> Get(IVisio.Page page, TargetShapeIDs target)
@@ -27,12 +27,12 @@ namespace VisioScripting.Models
             if (query == null)
             {
                 query = new VASS.Query.CellQuery();
-                ColXFormPinX = query.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(ShapeXFormData.XFormPinX));
-                ColXFormPinY = query.Columns.Add(VASS.SrcConstants.XFormPinY, nameof(ShapeXFormData.XFormPinY));
-                ColXFormLocPinX = query.Columns.Add(VASS.SrcConstants.XFormLocPinX, nameof(ShapeXFormData.XFormLocPinX));
-                ColXFormLocPinY = query.Columns.Add(VASS.SrcConstants.XFormLocPinY, nameof(ShapeXFormData.XFormLocPinY));
-                ColXFormWidth = query.Columns.Add(VASS.SrcConstants.XFormWidth, nameof(ShapeXFormData.XFormWidth));
-                ColXFormHeight = query.Columns.Add(VASS.SrcConstants.XFormHeight, nameof(ShapeXFormData.XFormHeight));
+                _static_col_x_form_pin_x = query.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(ShapeXFormData.XFormPinX));
+                _static_col_x_form_pin_y = query.Columns.Add(VASS.SrcConstants.XFormPinY, nameof(ShapeXFormData.XFormPinY));
+                _static_col_x_form_loc_pin_x = query.Columns.Add(VASS.SrcConstants.XFormLocPinX, nameof(ShapeXFormData.XFormLocPinX));
+                _static_col_x_form_loc_pin_y = query.Columns.Add(VASS.SrcConstants.XFormLocPinY, nameof(ShapeXFormData.XFormLocPinY));
+                _static_col_x_form_width = query.Columns.Add(VASS.SrcConstants.XFormWidth, nameof(ShapeXFormData.XFormWidth));
+                _static_col_x_form_height = query.Columns.Add(VASS.SrcConstants.XFormHeight, nameof(ShapeXFormData.XFormHeight));
             }
 
             var results = query.GetResults<double>(page, target.ShapeIDs);
@@ -44,12 +44,12 @@ namespace VisioScripting.Models
             foreach (var row in results)
             {
                 var xform = new ShapeXFormData();
-                xform.XFormPinX = row[ColXFormPinX];
-                xform.XFormPinY = row[ColXFormPinY];
-                xform.XFormLocPinX = row[ColXFormLocPinX];
-                xform.XFormLocPinY = row[ColXFormLocPinY];
-                xform.XFormWidth = row[ColXFormWidth];
-                xform.XFormHeight = row[ColXFormHeight];
+                xform.XFormPinX = row[_static_col_x_form_pin_x];
+                xform.XFormPinY = row[_static_col_x_form_pin_y];
+                xform.XFormLocPinX = row[_static_col_x_form_loc_pin_x];
+                xform.XFormLocPinY = row[_static_col_x_form_loc_pin_y];
+                xform.XFormWidth = row[_static_col_x_form_width];
+                xform.XFormHeight = row[_static_col_x_form_height];
                 list.Add(xform);
             }
             return list;

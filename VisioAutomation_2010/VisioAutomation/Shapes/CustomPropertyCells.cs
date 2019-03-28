@@ -145,8 +145,8 @@ namespace VisioAutomation.Shapes
         {
             var current_culture = System.Globalization.CultureInfo.InvariantCulture;
             string formatted_dt = value.ToString(current_culture);
-            string _Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
-            this.Value = _Value;
+            string _formatted_value = string.Format("DATETIME(\"{0}\")", formatted_dt);
+            this.Value = _formatted_value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Date);
         }
 
@@ -160,7 +160,7 @@ namespace VisioAutomation.Shapes
             this.Prompt = VASS.CellValueLiteral.EncodeValue(this.Prompt.Value);
         }
 
-        private void Validate()
+        private void _validate()
         {
             if (!this.Prompt.ValidateValue(true))
             {

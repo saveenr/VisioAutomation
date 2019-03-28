@@ -106,9 +106,9 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddNURBSTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y, ShapeSheet.CellValueLiteral a, ShapeSheet.CellValueLiteral b, ShapeSheet.CellValueLiteral c, ShapeSheet.CellValueLiteral d, ShapeSheet.CellValueLiteral e)
+        public ShapeGeometryRow AddNurbsTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y, ShapeSheet.CellValueLiteral a, ShapeSheet.CellValueLiteral b, ShapeSheet.CellValueLiteral c, ShapeSheet.CellValueLiteral d, ShapeSheet.CellValueLiteral e)
         {
-            var row = ShapeGeometryRow.CreateNURBSTo(x, y, a, b, c, d, e);
+            var row = ShapeGeometryRow.CreateNurbsTo(x, y, a, b, c, d, e);
             this.Rows.Add(row);
             return row;
 
