@@ -14,10 +14,10 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, Dictionary<string,VA.Shapes.UserDefinedCellCells>> GetUserDefinedCells(Models.TargetShapes targets, VASS.CellValueType cvt)
+        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(Models.TargetShapes targets, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
-            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VA.Shapes.UserDefinedCellCells>>();
+            var prop_dic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
 
             targets = targets.ResolveShapes(this._client);
 
