@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class ShapeCacheItem
+    internal class ShapeCacheItem
     {
 
         public short ShapeId { get; }

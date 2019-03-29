@@ -256,7 +256,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public static ShapeCacheItem _create_shapesectioncacheitem(ShapeIdPair shapeidpair, IVisio.VisSectionIndices sec_index, SectionQueryColumns sec_cols)
+        private static ShapeCacheItem _create_shapesectioncacheitem(ShapeIdPair shapeidpair, IVisio.VisSectionIndices sec_index, SectionQueryColumns sec_cols)
         {
             // first count the rows in the section
 
