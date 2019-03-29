@@ -2,17 +2,17 @@ using System.Collections.Generic;
 
 namespace VisioPowerShell.Models
 {
-    public class NamedCellDictionary : NamedDictionary<VisioAutomation.ShapeSheet.Src>
+    public class NameCellDictionary : NameValueDictionary<VisioAutomation.ShapeSheet.Src>
     {
-        public static NamedCellDictionary FromCells(BaseCells cells)
+        public static NameCellDictionary FromCells(BaseCells cells)
         {
             var tuples = cells.GetCellTuples();
             return FromCells(tuples);
         }
 
-        public static NamedCellDictionary FromCells(IEnumerable<CellTuple> tuples)
+        public static NameCellDictionary FromCells(IEnumerable<CellTuple> tuples)
         {
-            var  dic = new NamedCellDictionary();
+            var  dic = new NameCellDictionary();
             foreach (var tuple in tuples)
             {
                 dic[tuple.Name] = tuple.Src;

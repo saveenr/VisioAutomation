@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace VisioPowerShell.Models
 {
-    public class NamedDictionary<T>
+    public class NameValueDictionary<T>
     {
         private readonly Dictionary<string, T> _dic;
         private readonly System.Text.RegularExpressions.Regex _regex_name;
         private readonly System.Text.RegularExpressions.Regex _regex_name_wildcard;
 
-        public NamedDictionary()
+        public NameValueDictionary()
         {
             this._regex_name = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
             this._regex_name_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
@@ -80,7 +80,7 @@ namespace VisioPowerShell.Models
             {
                 this._CheckNameWildcard(key);
 
-                var regex = NamedDictionary<T>.GetRegexForWildCardPattern(key);
+                var regex = NameValueDictionary<T>.GetRegexForWildCardPattern(key);
 
                 foreach (string k in this.Keys)
                 {
