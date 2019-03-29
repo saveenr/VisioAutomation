@@ -23,11 +23,11 @@ namespace VisioAutomation.Models.Layouts.Box
             }
 
             this.Root.CalculateSize();
-            this.Place(new VisioAutomation.Geometry.Point(0, 0));
+            this._place(new VisioAutomation.Geometry.Point(0, 0));
             this.Root.ReservedRectangle = this.Root.Rectangle;
         }
 
-        private void Place(VisioAutomation.Geometry.Point origin)
+        private void _place(VisioAutomation.Geometry.Point origin)
         {
             this.Root._place(origin);
         }

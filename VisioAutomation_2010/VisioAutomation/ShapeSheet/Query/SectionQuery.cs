@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionQueryColumns>();
         }
 
-        private static void RestrictToShapesOnly(SurfaceTarget surface)
+        private static void _RestrictToShapesOnly(SurfaceTarget surface)
         {
             if (surface.Shape == null)
             {
@@ -27,7 +27,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public SectionQueryShapeResults<string> GetFormulas(SurfaceTarget surface)
         {
-            RestrictToShapesOnly(surface);
+            _RestrictToShapesOnly(surface);
 
             var shapeidpairs = ShapeIDPairs.FromShapes(surface.Shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
@@ -50,7 +50,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public SectionQueryShapeResults<TResult> GetResults<TResult>(SurfaceTarget surface)
         {
-            RestrictToShapesOnly(surface);
+            _RestrictToShapesOnly(surface);
 
             var shapeidpairs = ShapeIDPairs.FromShapes(surface.Shape);
             var cache = this._create_sectionquerycache(shapeidpairs);

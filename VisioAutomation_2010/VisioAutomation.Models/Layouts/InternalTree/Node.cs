@@ -11,10 +11,10 @@ namespace VisioAutomation.Models.Layouts.InternalTree
         private bool _is_collapsed;
         private static int _nodeSeqNum = 0;
 
-        internal double modifier; // temporary modifier
-        internal double prelim_x; // preliminary x coord    
-        internal Node<T> left_neighbor;
-        internal Node<T> right_neighbor;
+        internal double Modifier; // temporary modifier
+        internal double PrelimX; // preliminary x coord    
+        internal Node<T> LeftNeighbor;
+        internal Node<T> RightNeighbor;
 
         public int Id { get; set; }
 
@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
         public VisioAutomation.Geometry.Rectangle Rect => new VisioAutomation.Geometry.Rectangle(this.Position, this.Size);
 
-        internal void init(int id, Node<T> parent, VisioAutomation.Geometry.Size size, T data)
+        internal void Init(int id, Node<T> parent, VisioAutomation.Geometry.Size size, T data)
         {
             this.Id = id;
             this.Size = size;
@@ -30,20 +30,20 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             this.Parent = parent;
 
             this._child_list = new List<Node<T>>();
-            this.left_neighbor = null;
-            this.right_neighbor = null;
+            this.LeftNeighbor = null;
+            this.RightNeighbor = null;
             this.Position = new VisioAutomation.Geometry.Point(0, 0);
             this._is_collapsed = false;
         }
 
         internal Node(int id, Node<T> parent, VisioAutomation.Geometry.Size size)
         {
-            this.init(id, parent, size, default(T));
+            this.Init(id, parent, size, default(T));
         }
 
         public Node(VisioAutomation.Geometry.Size size, T data)
         {
-            this.init(Node<T>._nodeSeqNum++, null, size, data);
+            this.Init(Node<T>._nodeSeqNum++, null, size, data);
         }
 
         public int ChildCount
@@ -66,9 +66,9 @@ namespace VisioAutomation.Models.Layouts.InternalTree
         {
             get
             {
-                if (this.left_neighbor != null && this.left_neighbor.Parent == this.Parent)
+                if (this.LeftNeighbor != null && this.LeftNeighbor.Parent == this.Parent)
                 {
-                    return this.left_neighbor;
+                    return this.LeftNeighbor;
                 }
                 return null;
             }
@@ -78,9 +78,9 @@ namespace VisioAutomation.Models.Layouts.InternalTree
         {
             get
             {
-                if (this.right_neighbor != null && this.right_neighbor.Parent == this.Parent)
+                if (this.RightNeighbor != null && this.RightNeighbor.Parent == this.Parent)
                 {
-                    return this.right_neighbor;
+                    return this.RightNeighbor;
                 }
                 return null;
             }
@@ -149,7 +149,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
         {
             var node0 = this.FirstChild;
             var node1 = this.LastChild;
-            return node0.prelim_x + ((node1.prelim_x - node0.prelim_x) + tree_layout_engine.GetNodeSize(node1))/2;
+            return node0.PrelimX + ((node1.PrelimX - node0.PrelimX) + tree_layout_engine.GetNodeSize(node1))/2;
         }
 
         public IEnumerable<Node<T>> EnumChildren()

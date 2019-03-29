@@ -14,10 +14,10 @@ namespace VisioScripting.Extensions
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             double DoubleParse(string str) => double.Parse(str, culture);
-            return el.GetAttributeValue(name, def, s => XmlLinqExtensions.PointsToInches(DoubleParse(s)));
+            return el.GetAttributeValue(name, def, s => XmlLinqExtensions._points_to_inches(DoubleParse(s)));
         }
 
-        private static double PointsToInches(double points)
+        private static double _points_to_inches(double points)
         {
             return points/72.0;
         }

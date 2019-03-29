@@ -80,7 +80,7 @@ namespace VisioPowerShell.Models
             {
                 this._CheckNameWildcard(key);
 
-                var regex = NameValueDictionary<T>.GetRegexForWildCardPattern(key);
+                var regex = NameValueDictionary<T>._get_regex_for_wild_card_pattern(key);
 
                 foreach (string k in this.Keys)
                 {
@@ -106,7 +106,7 @@ namespace VisioPowerShell.Models
             }
         }
 
-        private static System.Text.RegularExpressions.Regex GetRegexForWildCardPattern(string s)
+        private static System.Text.RegularExpressions.Regex _get_regex_for_wild_card_pattern(string s)
         {
             string pat = "^" + System.Text.RegularExpressions.Regex.Escape(s).Replace(@"\*", ".*").Replace(@"\?", ".") + "$";
             var regex_options = System.Text.RegularExpressions.RegexOptions.IgnoreCase;

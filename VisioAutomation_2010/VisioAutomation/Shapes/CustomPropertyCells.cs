@@ -145,8 +145,8 @@ namespace VisioAutomation.Shapes
         {
             var current_culture = System.Globalization.CultureInfo.InvariantCulture;
             string formatted_dt = value.ToString(current_culture);
-            string _formatted_value = string.Format("DATETIME(\"{0}\")", formatted_dt);
-            this.Value = _formatted_value;
+            string formatted_value = string.Format("DATETIME(\"{0}\")", formatted_dt);
+            this.Value = formatted_value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Date);
         }
 

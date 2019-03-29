@@ -21,10 +21,10 @@
 
         private void _check_valid_visio_hsl()
         {
-            CheckValidVisioHsl(this.H,this.S,this.L);
+            _check_valid_visio_hsl(this.H,this.S,this.L);
         }
 
-        private static void CheckValidVisioHsl(byte h, byte s, byte l)
+        private static void _check_valid_visio_hsl(byte h, byte s, byte l)
         {
             if (h > 255)
             {
@@ -60,30 +60,30 @@
 
         public override bool Equals(object other)
         {
-            return other is ColorHsl && this.Equals((ColorHsl)other);
+            return other is ColorHsl && this._equals((ColorHsl)other);
         }
 
         public static bool operator ==(ColorHsl lhs, ColorHsl rhs)
         {
-            return lhs.Equals(rhs);
+            return lhs._equals(rhs);
         }
 
         public static bool operator !=(ColorHsl lhs, ColorHsl rhs)
         {
-            return !lhs.Equals(rhs);
+            return !lhs._equals(rhs);
         }
 
-        private bool Equals(ColorHsl other)
+        private bool _equals(ColorHsl other)
         {
             return (this.H == other.H && this.S == other.S && this.L == other.L);
         }
 
         public override int GetHashCode()
         {
-            return this.ToHslBytes();
+            return this._to_hsl_bytes();
         }
 
-        private int ToHslBytes()
+        private int _to_hsl_bytes()
         {
             return (this.H << 16) | (this.S << 8) | (this.L);
         }

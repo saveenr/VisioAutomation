@@ -54,10 +54,10 @@ namespace VisioAutomation.Models.Documents.Forms
         public void Reset()
         {
             this.Blocks = new List<TextBlock>();
-            this.ResetInsertionPoint();
+            this._reset_insertion_point();
         }
 
-        private void ResetInsertionPoint()
+        private void _reset_insertion_point()
         {
             this.InsertionPoint = new VisioAutomation.Geometry.Point(this._form_page.PageMargin.Left,
                 this._form_page.Size.Height - this._form_page.PageMargin.Top);
@@ -92,7 +92,7 @@ namespace VisioAutomation.Models.Documents.Forms
                 newshape.Text = block.Text;
             }
 
-            this.AdjustInsertionPoint(block.Size);
+            this._adjust_insertion_point(block.Size);
 
             return newshape;
         }
@@ -112,7 +112,7 @@ namespace VisioAutomation.Models.Documents.Forms
             writer.CommitFormulas(this._page);
         }
 
-        private void AdjustInsertionPoint(VisioAutomation.Geometry.Size size)
+        private void _adjust_insertion_point(VisioAutomation.Geometry.Size size)
         {
             this.InsertionPoint = this.InsertionPoint.Add(size.Width, 0);
             this._current_line_height = System.Math.Max(this._current_line_height, size.Height);

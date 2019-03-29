@@ -82,7 +82,7 @@ namespace VisioAutomation.Models.Geometry
                 double cos_theta = System.Math.Cos(startangle);
                 double sin_theta = System.Math.Sin(startangle);
                 var p0 = new VisioAutomation.Geometry.Point(cos_theta, -sin_theta);
-                var p1 = BezierSegment.RotateAroundOrigin( p0, startangle);
+                var p1 = BezierSegment._rotate_around_origin( p0, startangle);
                 arr[0] = new BezierSegment(p1,p1,p1,p1);
             }
 
@@ -153,13 +153,13 @@ namespace VisioAutomation.Models.Geometry
             var p3 = new VisioAutomation.Geometry.Point(p0.X, -p0.Y);
 
             var arc_bezier = new[] {p0, p1, p2, p3}
-                .Select(p => BezierSegment.RotateAroundOrigin(p, theta + start_angle))
+                .Select(p => BezierSegment._rotate_around_origin(p, theta + start_angle))
                 .ToArray();
 
             return new BezierSegment(arc_bezier);
         }
 
-        private static VisioAutomation.Geometry.Point RotateAroundOrigin(VisioAutomation.Geometry.Point p1, double theta)
+        private static VisioAutomation.Geometry.Point _rotate_around_origin(VisioAutomation.Geometry.Point p1, double theta)
         {
             double nx = (System.Math.Cos(theta)*p1.X) - (System.Math.Sin(theta)*p1.Y);
             double ny = (System.Math.Sin(theta)*p1.X) + (System.Math.Cos(theta)*p1.Y);

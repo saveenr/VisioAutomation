@@ -22,12 +22,12 @@ namespace VisioAutomation.Models.Color
 
         public ColorRgb(int rgb)
         {
-            ColorRgb.GetRgbBytes((uint) rgb, out this._r, out this._g, out this._b);
+            ColorRgb._get_rgb_bytes((uint) rgb, out this._r, out this._g, out this._b);
         }
 
         public ColorRgb(uint rgb)
         {
-            ColorRgb.GetRgbBytes(rgb, out this._r, out this._g, out this._b);
+            ColorRgb._get_rgb_bytes(rgb, out this._r, out this._g, out this._b);
         }
 
 
@@ -68,25 +68,25 @@ namespace VisioAutomation.Models.Color
 
         public string ToWebColorString()
         {
-            return ColorRgb.ToWebColorString(this._r, this._g, this._b);
+            return ColorRgb._to_web_color_string(this._r, this._g, this._b);
         }
 
         public override bool Equals(object other)
         {
-            return other is ColorRgb && this.Equals((ColorRgb) other);
+            return other is ColorRgb && this._equals((ColorRgb) other);
         }
 
         public static bool operator ==(ColorRgb lhs, ColorRgb rhs)
         {
-            return lhs.Equals(rhs);
+            return lhs._equals(rhs);
         }
 
         public static bool operator !=(ColorRgb lhs, ColorRgb rhs)
         {
-            return !lhs.Equals(rhs);
+            return !lhs._equals(rhs);
         }
 
-        private bool Equals(ColorRgb other)
+        private bool _equals(ColorRgb other)
         {
             return (this._r == other._r && this._g == other._g && this._b == other._b);
         }
@@ -174,14 +174,14 @@ namespace VisioAutomation.Models.Color
             return the_color;
         }
         
-        private static void GetRgbBytes(uint rgb, out byte r, out byte g, out byte b)
+        private static void _get_rgb_bytes(uint rgb, out byte r, out byte g, out byte b)
         {
             r = (byte)((rgb & 0x00ff0000) >> 16);
             g = (byte)((rgb & 0x0000ff00) >> 8);
             b = (byte)((rgb & 0x000000ff) >> 0);
         }
 
-        private static string ToWebColorString(byte r, byte g, byte b)
+        private static string _to_web_color_string(byte r, byte g, byte b)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             string color_string = string.Format(culture, "#{0:x2}{1:x2}{2:x2}", r, g, b);

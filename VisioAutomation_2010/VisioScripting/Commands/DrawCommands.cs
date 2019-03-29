@@ -28,16 +28,16 @@ namespace VisioScripting.Commands
             if (surf_window_subtype == 64)
             {
                 this._client.Output.WriteVerbose("Window = Master Editing");
-                var surf_Master = (IVisio.Master)surf_window.Master;
-                var surface = new VisioAutomation.SurfaceTarget(surf_Master);
+                var surf_master = (IVisio.Master)surf_window.Master;
+                var surface = new VisioAutomation.SurfaceTarget(surf_master);
                 return surface;
 
             }
             else
             {
                 this._client.Output.WriteVerbose("Window = Page ");
-                var surf_Page = surf_application.ActivePage;
-                var surface = new VisioAutomation.SurfaceTarget(surf_Page);
+                var surf_page = surf_application.ActivePage;
+                var surface = new VisioAutomation.SurfaceTarget(surf_page);
                 return surface;
             }
         }

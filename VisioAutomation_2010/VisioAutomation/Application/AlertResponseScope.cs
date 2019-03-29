@@ -9,19 +9,19 @@ namespace VisioAutomation.Application
     /// </summary>
     public class AlertResponseScope : System.IDisposable
     {
-        private readonly AlertResponseCode old_alertresponse;
-        private readonly IVisio.Application app;
+        private readonly AlertResponseCode _old_alertresponse;
+        private readonly IVisio.Application _app;
 
         public AlertResponseScope(IVisio.Application app, AlertResponseCode value)
         {
-            this.app = app;
-            this.old_alertresponse = (AlertResponseCode)this.app.AlertResponse;
-            this.app.AlertResponse = (short)value;
+            this._app = app;
+            this._old_alertresponse = (AlertResponseCode)this._app.AlertResponse;
+            this._app.AlertResponse = (short)value;
         }
 
         public void Dispose()
         {
-            this.app.AlertResponse = (short)this.old_alertresponse;
+            this._app.AlertResponse = (short)this._old_alertresponse;
         }
     }
 }

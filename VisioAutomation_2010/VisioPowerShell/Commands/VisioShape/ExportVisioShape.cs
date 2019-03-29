@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
 
-        private static HashSet<string> _htmlExtensions;
+        private static HashSet<string> _static_html_extensions;
 
         protected override void ProcessRecord()
         {
@@ -41,9 +41,9 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            if (_htmlExtensions == null)
+            if (_static_html_extensions == null)
             {
-                _htmlExtensions = new HashSet<string> { ".html", ".htm", ".xhtml" };
+                _static_html_extensions = new HashSet<string> { ".html", ".htm", ".xhtml" };
             }
 
             string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
@@ -62,7 +62,7 @@ namespace VisioPowerShell.Commands
                 this.Client.Selection.SelectShapes(this.Shapes);
             }
 
-            if (_htmlExtensions.Contains(ext))
+            if (_static_html_extensions.Contains(ext))
             {
                 this.Client.ExportSelection.ExportSelectionToHtml(this.Filename);                
             }

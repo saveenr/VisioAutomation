@@ -453,7 +453,7 @@ namespace VisioAutomation
                 return new TResult[0];
             }
 
-            EnforceValidResultType(typeof(TResult));
+            _enforce_valid_result_type(typeof(TResult));
 
             var flags = TypeToVisGetSetArgs(typeof(TResult));
 
@@ -517,16 +517,16 @@ namespace VisioAutomation
             return results;
         }
 
-        private static void EnforceValidResultType(System.Type result_type)
+        private static void _enforce_valid_result_type(System.Type result_type)
         {
-            if (!IsValidResultType(result_type))
+            if (!_is_valid_result_type(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
                 throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
             }
         }
 
-        private static bool IsValidResultType(System.Type result_type)
+        private static bool _is_valid_result_type(System.Type result_type)
         {
             return (result_type == typeof(int)
                     || result_type == typeof(double)

@@ -51,15 +51,15 @@ namespace VisioAutomation.Models.Dom
 
             var context = new RenderContext(page);
 
-            this.PrepareForDrawing(context);
-            this.PerformDrawing(context);
-            this.UpdateCells(context);
-            this.SetText();
-            this.SetCustomProperties(context);
-            this.AddHyperlinks(context);
+            this._prepare_for_drawing(context);
+            this._perform_drawing(context);
+            this._update_cells(context);
+            this._set_text();
+            this._set_custom_properties(context);
+            this._add_hyperlinks(context);
         }
 
-        private void AddHyperlinks(RenderContext context)
+        private void _add_hyperlinks(RenderContext context)
         {
             var shapes_with_hyperlinks = this._shapes.Where(s => s.Hyperlinks != null);
             foreach (var shape in shapes_with_hyperlinks)
@@ -82,7 +82,7 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void SetCustomProperties(RenderContext context)
+        private void _set_custom_properties(RenderContext context)
         {
             var shapes_with_custom_props = this._shapes.Where(s => s.CustomProperties != null);
             foreach (var shape in shapes_with_custom_props)
@@ -97,7 +97,7 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void SetText()
+        private void _set_text()
         {
             var shapes_with_text = this._shapes.Where(s => s.Text != null);
             foreach (var shape in shapes_with_text)
@@ -111,9 +111,9 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void UpdateCells(RenderContext context)
+        private void _update_cells(RenderContext context)
         {
-            this.UpdateCellsWithDropSizes(context);
+            this._update_cells_with_drop_sizes(context);
 
             var writer = new SidSrcWriter();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
@@ -127,7 +127,7 @@ namespace VisioAutomation.Models.Dom
             writer.CommitFormulas(context.VisioPage);
         }
 
-        private void PerformDrawing(RenderContext context)
+        private void _perform_drawing(RenderContext context)
         {
             // Draw shapes
             var non_connectors = this._shapes.Where(s => !(s is Connector)).ToList();
@@ -153,16 +153,16 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void PrepareForDrawing(RenderContext context)
+        private void _prepare_for_drawing(RenderContext context)
         {
             // Resolve all the masters
-            this.ResolveMasters(context);
+            this._resolve_masters(context);
 
             // Resolve all the Character Font Name Cells
-            this.ResolveFonts(context);
+            this._resolve_fonts(context);
         }
 
-        private void ResolveFonts(RenderContext context)
+        private void _resolve_fonts(RenderContext context)
         {
             var unique_names = new HashSet<string>();
             foreach (var shape in this._shapes)
@@ -220,7 +220,7 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void ResolveMasters(RenderContext context)
+        private void _resolve_masters(RenderContext context)
         {
             // Find all the shapes that use masters and for which
             // a Visio master object has not been identifies yet
@@ -255,7 +255,7 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void UpdateCellsWithDropSizes(RenderContext context)
+        private void _update_cells_with_drop_sizes(RenderContext context)
         {
             var masters = this._shapes
                 .Where(shape => shape is Shape).Cast<Shape>();

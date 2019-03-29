@@ -17,20 +17,20 @@ namespace VisioAutomation.Application
         {
             var ver = ApplicationHelper.GetVersion(app);
             var culture = System.Globalization.CultureInfo.InvariantCulture;
-            string app_Lang = app.Language.ToString(culture);
+            string app_lang = app.Language.ToString(culture);
             var str_visio_content = "Visio Content";
 
             if (ver.Major == 14)
             {
                 string path = System.IO.Path.Combine(app.Path, str_visio_content);
-                path = System.IO.Path.Combine(path, app_Lang);
+                path = System.IO.Path.Combine(path, app_lang);
                 return path;
             }
 
             if (ver.Major >= 15)
             {
                 string path = System.IO.Path.Combine(app.Path, str_visio_content);
-                path = System.IO.Path.Combine(path, app_Lang);
+                path = System.IO.Path.Combine(path, app_lang);
                 return path;
             }
 

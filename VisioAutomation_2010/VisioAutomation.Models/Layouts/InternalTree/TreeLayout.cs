@@ -61,12 +61,12 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
         private void set_neighbors(Node<T> node, int level)
         {
-            node.left_neighbor = this._previous_level_node.GetValueOrDefaultEx(level, null);
+            node.LeftNeighbor = this._previous_level_node.GetValueOrDefaultEx(level, null);
 
-            if (node.left_neighbor != null)
+            if (node.LeftNeighbor != null)
             {
-                node.left_neighbor = this._previous_level_node[level];
-                node.left_neighbor.right_neighbor = node;
+                node.LeftNeighbor = this._previous_level_node[level];
+                node.LeftNeighbor.RightNeighbor = node;
             }
 
             this._previous_level_node[level] = node;
@@ -92,7 +92,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             }
         }
 
-        private void apportion(Node<T> node, int level)
+        private void _apportion(Node<T> node, int level)
         {
             /*------------------------------------------------------
              * Clean up the positioning of small sibling subtrees.
@@ -104,7 +104,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
              *----------------------------------------------------*/
 
             var first_child = node.FirstChild;
-            var first_child_left_neighbor = first_child.left_neighbor;
+            var first_child_left_neighbor = first_child.LeftNeighbor;
             int j = 1;
             for (int k = this.Options.MaximumDepth - level;
                  first_child != null && first_child_left_neighbor != null && j <= k;)
@@ -117,13 +117,13 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                 {
                     right_ancestor = right_ancestor.Parent;
                     left_ancestor = left_ancestor.Parent;
-                    modifier_sum_right += right_ancestor.modifier;
-                    modifier_sum_left += left_ancestor.modifier;
+                    modifier_sum_right += right_ancestor.Modifier;
+                    modifier_sum_left += left_ancestor.Modifier;
                 }
 
-                double total_gap = (first_child_left_neighbor.prelim_x + modifier_sum_left +
+                double total_gap = (first_child_left_neighbor.PrelimX + modifier_sum_left +
                                    this.GetNodeSize(first_child_left_neighbor) + this.Options.SubtreeSeparation) -
-                                  (first_child.prelim_x + modifier_sum_right);
+                                  (first_child.PrelimX + modifier_sum_right);
                 if (total_gap > 0)
                 {
                     var subtree_aux = node;
@@ -139,8 +139,8 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                         double single_gap = total_gap/num_subtrees;
                         for (; subtree_move_aux != left_ancestor; subtree_move_aux = subtree_move_aux.LeftSibling)
                         {
-                            subtree_move_aux.prelim_x += total_gap;
-                            subtree_move_aux.modifier += total_gap;
+                            subtree_move_aux.PrelimX += total_gap;
+                            subtree_move_aux.Modifier += total_gap;
                             total_gap -= single_gap;
                         }
                     }
@@ -158,7 +158,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
                 if (first_child != null)
                 {
-                    first_child_left_neighbor = first_child.left_neighbor;
+                    first_child_left_neighbor = first_child.LeftNeighbor;
                 }
             }
         }
@@ -209,10 +209,10 @@ namespace VisioAutomation.Models.Layouts.InternalTree
         private void first_walk(Node<T> node, int level)
         {
             node.Position = new VisioAutomation.Geometry.Point(0, 0);
-            node.prelim_x = 0;
-            node.modifier = 0;
-            node.left_neighbor = null;
-            node.right_neighbor = null;
+            node.PrelimX = 0;
+            node.Modifier = 0;
+            node.LeftNeighbor = null;
+            node.RightNeighbor = null;
             this.set_level_height(node, level);
             this.set_level_width(node, level);
             this.set_neighbors(node, level);
@@ -229,14 +229,14 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                      * - mean width of left sibling & current node.
                      *--------------------------------------------*/
 
-                    node.prelim_x = left_sibling.prelim_x + this.GetNodeSize(left_sibling) +
+                    node.PrelimX = left_sibling.PrelimX + this.GetNodeSize(left_sibling) +
                                     this.Options.SiblingSeparation;
                 }
                 else
                 {
                     /*  no sibling on the left to worry about  */
 
-                    node.prelim_x = 0;
+                    node.PrelimX = 0;
                 }
             }
             else
@@ -255,15 +255,15 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
                 if (node.LeftSibling != null)
                 {
-                    node.prelim_x = node.LeftSibling.prelim_x +
+                    node.PrelimX = node.LeftSibling.PrelimX +
                                     this.GetNodeSize(node.LeftSibling) +
                                     this.Options.SiblingSeparation;
-                    node.modifier = node.prelim_x - mid_point;
-                    this.apportion(node, level);
+                    node.Modifier = node.PrelimX - mid_point;
+                    this._apportion(node, level);
                 }
                 else
                 {
-                    node.prelim_x = mid_point;
+                    node.PrelimX = mid_point;
                 }
             }
         }
@@ -282,7 +282,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
             if (level > this.Options.MaximumDepth) return;
 
-            var temp_point = this._root_offset.Add(node.prelim_x, 0) + p;
+            var temp_point = this._root_offset.Add(node.PrelimX, 0) + p;
             double maxsize_tmp = 0;
             double nodesize_tmp = 0;
             bool flag = false;
@@ -345,7 +345,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                 /* Apply the flModifier value for this    */
                 /* node to all its offspring.             */
 
-                var np = p.Add(node.modifier, maxsize_tmp + this.Options.LevelSeparation);
+                var np = p.Add(node.Modifier, maxsize_tmp + this.Options.LevelSeparation);
                 this.second_walk(node.FirstChild, level + 1, np);
             }
 
@@ -420,7 +420,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             }
         }
 
-        private static double GetSide(VisioAutomation.Geometry.Rectangle r, LayoutDirection direction)
+        private static double _get_side(VisioAutomation.Geometry.Rectangle r, LayoutDirection direction)
         {
             switch (direction)
             {
@@ -487,16 +487,16 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                 parent_x = parent_rect.Center.X;
                 child_x = child_rect.Center.X;
 
-                parent_y = TreeLayout<T>.GetSide(parent_rect, this.Options.Direction);
-                child_y = TreeLayout<T>.GetSide(child_rect, TreeLayout<T>.GetOpposite(this.Options.Direction));
+                parent_y = TreeLayout<T>._get_side(parent_rect, this.Options.Direction);
+                child_y = TreeLayout<T>._get_side(child_rect, TreeLayout<T>.GetOpposite(this.Options.Direction));
             }
             else
             {
                 var parent_dir = this.Options.Direction;
                 var child_dir = TreeLayout<T>.GetOpposite(parent_dir);
 
-                parent_x = TreeLayout<T>.GetSide(parent_rect, parent_dir);
-                child_x = TreeLayout<T>.GetSide(child_rect, child_dir);
+                parent_x = TreeLayout<T>._get_side(parent_rect, parent_dir);
+                child_x = TreeLayout<T>._get_side(child_rect, child_dir);
 
                 parent_y = parent_rect.Center.Y;
                 child_y = child_rect.Center.Y;
@@ -574,10 +574,10 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             System.Func<TA, VisioAutomation.Geometry.Size> func_get_size)
         {
             var walkevents = GenTreeOps.Algorithms.Walk<TA>(root, n => enum_children(n));
-            return TreeLayout<T>.CreateLayoutTree(walkevents, func_get_data, func_get_size);
+            return TreeLayout<T>._create_layout_tree(walkevents, func_get_data, func_get_size);
         }
 
-        private static Node<T> CreateLayoutTree<TA>(
+        private static Node<T> _create_layout_tree<TA>(
             IEnumerable<GenTreeOps.WalkEvent<TA>> walkevents,
             System.Func<TA, T> func_get_data,
             System.Func<TA, VisioAutomation.Geometry.Size> func_get_size)

@@ -2,8 +2,8 @@ namespace VisioAutomation.ShapeSheet.Internal
 {
     public class ArraySegmentReader<T>
     {
-        private readonly T[] array;
-        private int pos;
+        private readonly T[] _array;
+        private int _pos;
         private int _count;
 
         public ArraySegmentReader(T[] array)
@@ -12,23 +12,23 @@ namespace VisioAutomation.ShapeSheet.Internal
             {
                 throw new System.ArgumentNullException(nameof(array));
             }
-            this.array = array;
-            this.pos = 0;
+            this._array = array;
+            this._pos = 0;
             this._count = 0;
         }
 
         public int Count => this._count;
 
-        public int Capacity => this.array.Length;
+        public int Capacity => this._array.Length;
 
         public VisioAutomation.ShapeSheet.Internal.ArraySegment<T> GetNextSegment(int size)
         {
-            if (this.pos + size > this.array.Length)
+            if (this._pos + size > this._array.Length)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(size));
             }
-            var seg = new VisioAutomation.ShapeSheet.Internal.ArraySegment<T>(this.array, this.pos, size);
-            this.pos += size;
+            var seg = new VisioAutomation.ShapeSheet.Internal.ArraySegment<T>(this._array, this._pos, size);
+            this._pos += size;
             this._count += size;
             return seg;
         }

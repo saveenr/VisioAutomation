@@ -41,7 +41,7 @@ namespace VisioAutomation.DocumentAnalysis
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var edges = ConnectionAnalyzer.GetDirectedEdgesRaw(page);
+            var edges = ConnectionAnalyzer._get_directed_edges_raw(page);
 
             if (flag.DirectionSource == DirectionSource.UseConnectionOrder)
             {
@@ -120,7 +120,7 @@ namespace VisioAutomation.DocumentAnalysis
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        private static List<ConnectorEdge> GetDirectedEdgesRaw(IVisio.Page page)
+        private static List<ConnectorEdge> _get_directed_edges_raw(IVisio.Page page)
         {
             if (page == null)
             {

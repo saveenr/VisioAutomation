@@ -20,22 +20,22 @@ namespace VisioScripting.Models
         private static VASS.Query.Column _static_col_x_form_loc_pin_y;
         private static VASS.Query.Column _static_col_x_form_width;
         private static VASS.Query.Column _static_col_x_form_height;
-        private static VASS.Query.CellQuery query;
+        private static VASS.Query.CellQuery _static_query;
 
         public static List<ShapeXFormData> Get(IVisio.Page page, TargetShapeIDs target)
         {
-            if (query == null)
+            if (_static_query == null)
             {
-                query = new VASS.Query.CellQuery();
-                _static_col_x_form_pin_x = query.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(ShapeXFormData.XFormPinX));
-                _static_col_x_form_pin_y = query.Columns.Add(VASS.SrcConstants.XFormPinY, nameof(ShapeXFormData.XFormPinY));
-                _static_col_x_form_loc_pin_x = query.Columns.Add(VASS.SrcConstants.XFormLocPinX, nameof(ShapeXFormData.XFormLocPinX));
-                _static_col_x_form_loc_pin_y = query.Columns.Add(VASS.SrcConstants.XFormLocPinY, nameof(ShapeXFormData.XFormLocPinY));
-                _static_col_x_form_width = query.Columns.Add(VASS.SrcConstants.XFormWidth, nameof(ShapeXFormData.XFormWidth));
-                _static_col_x_form_height = query.Columns.Add(VASS.SrcConstants.XFormHeight, nameof(ShapeXFormData.XFormHeight));
+                _static_query = new VASS.Query.CellQuery();
+                _static_col_x_form_pin_x = _static_query.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(ShapeXFormData.XFormPinX));
+                _static_col_x_form_pin_y = _static_query.Columns.Add(VASS.SrcConstants.XFormPinY, nameof(ShapeXFormData.XFormPinY));
+                _static_col_x_form_loc_pin_x = _static_query.Columns.Add(VASS.SrcConstants.XFormLocPinX, nameof(ShapeXFormData.XFormLocPinX));
+                _static_col_x_form_loc_pin_y = _static_query.Columns.Add(VASS.SrcConstants.XFormLocPinY, nameof(ShapeXFormData.XFormLocPinY));
+                _static_col_x_form_width = _static_query.Columns.Add(VASS.SrcConstants.XFormWidth, nameof(ShapeXFormData.XFormWidth));
+                _static_col_x_form_height = _static_query.Columns.Add(VASS.SrcConstants.XFormHeight, nameof(ShapeXFormData.XFormHeight));
             }
 
-            var results = query.GetResults<double>(page, target.ShapeIDs);
+            var results = _static_query.GetResults<double>(page, target.ShapeIDs);
             if (results.Count != target.ShapeIDs.Count)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Didn't get as many rows back as expected");
