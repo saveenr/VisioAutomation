@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using VisioAutomation.ShapeSheet.Query;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Models
 {
     static class DataTableHelpers
     {
         private static DataTable querytable_to_datatable<T>(
-            CellQuery query, 
-            Rows<T> output)
+            VASS.Query.CellQuery query,
+            VASS.Query.Rows<T> output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
@@ -37,7 +37,7 @@ namespace VisioPowerShell.Models
         }
 
         public static DataTable QueryToDataTable(
-            CellQuery query,
+            VASS.Query.CellQuery query,
             CellOutputType output_type,
             IList<int> shapeids, 
             VisioAutomation.SurfaceTarget surface)
