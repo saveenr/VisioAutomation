@@ -175,7 +175,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 results_rows.Add(sectionshaperows);
 
                 int num_cols = shapecacheitem.SectionColumns.Count;
-                foreach (int row_index in shapecacheitem.RowIndexes)
+                foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
                     var cells = segreader.GetNextSegment(num_cols);
                     var sec_res_row = new Row<T>(shapeid, secindex, cells);
@@ -239,7 +239,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             foreach (var shapecacheitem in shapecache)
             {
-                foreach (int row_index in shapecacheitem.RowIndexes)
+                foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
                     var cols = shapecacheitem.SectionColumns;
                     var section_index = shapecacheitem.SectionIndex;

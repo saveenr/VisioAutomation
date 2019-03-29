@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -8,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
 
         public short ShapeId { get; }
-        public readonly IVisio.VisSectionIndices SectionIndex;
+        public IVisio.VisSectionIndices SectionIndex { get; }
 
         public SectionQueryColumns SectionColumns { get; }
 
@@ -21,14 +19,6 @@ namespace VisioAutomation.ShapeSheet.Query
             this.SectionIndex = sec_index;
             this.SectionColumns = sec_cols;
             this.RowCount = numrows;
-        }
-
-        public IEnumerable<int> RowIndexes
-        {
-            get
-            {
-                return Enumerable.Range(0, this.RowCount);
-            }
         }
     }
 }
