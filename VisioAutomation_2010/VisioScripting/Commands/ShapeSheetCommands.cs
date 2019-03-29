@@ -15,20 +15,20 @@ namespace VisioScripting.Commands
         internal void __SetCells(Models.TargetShapes targets, VisioAutomation.ShapeSheet.CellGroups.CellGroup cells, IVisio.Page page)
         {
             targets = targets.ResolveShapes(this._client);
-            var shape_ids = targets.ToShapeIDs();
+            var shapeids = targets.ToShapeIDs();
             var writer = new SidSrcWriter();
 
-            foreach (var shape_id in shape_ids.ShapeIDs)
+            foreach (var shapeid in shapeids.ShapeIDs)
             {
                 if (cells is VisioAutomation.ShapeSheet.CellGroups.CellGroup)
                 {
                     var cells_mr = (VisioAutomation.ShapeSheet.CellGroups.CellGroup)cells;
-                    writer.SetValues((short)shape_id, cells_mr, 0);
+                    writer.SetValues((short)shapeid, cells_mr, 0);
                 }
                 else
                 {
                     var cells_sr = (VisioAutomation.ShapeSheet.CellGroups.CellGroup)cells;
-                    writer.SetValues((short)shape_id, cells_sr);
+                    writer.SetValues((short)shapeid, cells_sr);
 
                 }
             }

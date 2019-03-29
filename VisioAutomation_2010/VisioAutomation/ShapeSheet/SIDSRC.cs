@@ -6,20 +6,20 @@ namespace VisioAutomation.ShapeSheet
         public Src Src { get; }
 
         public SidSrc(
-            short shape_id,
+            short shapeid,
             Src src)
         {
-            this.ShapeID = shape_id;
+            this.ShapeID = shapeid;
             this.Src = src;
         }
 
         public SidSrc(
-            short shape_id,
+            short shapeid,
             short section,
             short row,
             short cell)
         {
-            this.ShapeID = shape_id;
+            this.ShapeID = shapeid;
             this.Src = new Src(section,row,cell);
         }
 

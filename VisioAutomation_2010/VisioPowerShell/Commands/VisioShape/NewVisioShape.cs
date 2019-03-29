@@ -109,10 +109,10 @@ namespace VisioPowerShell.Commands
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
             var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
-            var shape_ids = this.Client.Master.DropMastersOnActivePage(this.Masters, points);
+            var shapeids = this.Client.Master.DropMastersOnActivePage(this.Masters, points);
 
             var page = this.Client.Page.GetActivePage();
-            var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
+            var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shapeids);
 
             // If Names is not empty... assign it to the shape
             if (this.Names != null)
@@ -136,12 +136,12 @@ namespace VisioPowerShell.Commands
                 writer.BlastGuards = true;
                 writer.TestCircular = true;
 
-                for (int i = 0; i < shape_ids.Count(); i++)
+                for (int i = 0; i < shapeids.Count(); i++)
                 {
-                    var shape_id = shape_ids[i];
+                    var shapeid = shapeids[i];
                     var shape_cells = this.Cells[i % this.Cells.Length];
 
-                    shape_cells.Apply(writer, (short)shape_id);
+                    shape_cells.Apply(writer, (short)shapeid);
                 }
 
                 var surface = this.Client.ShapeSheet.GetShapeSheetSurface();

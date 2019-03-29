@@ -22,13 +22,13 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectNone();
 
             var shapes = new VisioScripting.Models.TargetShapes(s1,s2,s3);
-            var shape_ids = shapes.ToShapeIDs();
+            var shapeids = shapes.ToShapeIDs();
             var page = client.Page.GetActivePage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
-            foreach (var shape_id in shape_ids.ShapeIDs)
+            foreach (var shapeid in shapeids.ShapeIDs)
             {
-                writer.SetFormula( (short) shape_id, VA.ShapeSheet.SrcConstants.XFormPinX, "1.0");
+                writer.SetFormula( (short) shapeid, VA.ShapeSheet.SrcConstants.XFormPinX, "1.0");
             }
 
             writer.Commit();

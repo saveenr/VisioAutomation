@@ -138,7 +138,7 @@ namespace VisioAutomation.Models.Dom
             this._draw_non_masters(context, non_connector_nondropshapes);
 
             // verify that all non-connectors have an associated shape id
-            this.check_valid_shape_ids();
+            this.check_valid_shapeids();
 
             // Draw Connectors
             this._draw_connectors(context);
@@ -201,7 +201,7 @@ namespace VisioAutomation.Models.Dom
         }
 
 
-        private void check_valid_shape_ids()
+        private void check_valid_shapeids()
         {
             foreach (var shape in this._shapes)
             {

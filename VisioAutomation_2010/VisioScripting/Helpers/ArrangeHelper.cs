@@ -37,13 +37,13 @@ namespace VisioScripting.Helpers
 
             // Then, sort the shapeids pased on the corresponding value in the results
 
-            var sorted_shape_ids = Enumerable.Range(0, targets.ShapeIDs.Count)
+            var sorted_shapeids = Enumerable.Range(0, targets.ShapeIDs.Count)
                 .Select(i => new { index = i, shapeid = targets.ShapeIDs[i], pos = ArrangeHelper._get_position_on_shape(xforms[i], pos) })
                 .OrderBy(i => i.pos)
                 .Select(i => i.shapeid)
                 .ToList();
 
-            return sorted_shape_ids;
+            return sorted_shapeids;
         }
 
         public static void DistributeWithSpacing(IVisio.Page page, Models.TargetShapeIDs target, Models.Axis axis, double spacing)
@@ -84,30 +84,30 @@ namespace VisioScripting.Helpers
             }
 
             // Apply the changes
-            var sorted_shape_ids = ArrangeHelper.SortShapesByPosition(page, target, sortpos);
+            var sorted_shapeids = ArrangeHelper.SortShapesByPosition(page, target, sortpos);
 
-            _modify_pin_positions(page, sorted_shape_ids, newpositions);
+            _modify_pin_positions(page, sorted_shapeids, newpositions);
         }
 
-        private static void _modify_pin_positions(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Geometry.Point> newpositions)
+        private static void _modify_pin_positions(IVisio.Page page, IList<int> sorted_shapeids, List<VisioAutomation.Geometry.Point> newpositions)
         {
             var writer = new SidSrcWriter();
             for (int i = 0; i < newpositions.Count; i++)
             {
-                writer.SetValue((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, newpositions[i].X);
-                writer.SetValue((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, newpositions[i].Y);
+                writer.SetValue((short)sorted_shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinX, newpositions[i].X);
+                writer.SetValue((short)sorted_shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, newpositions[i].Y);
             }
 
             writer.CommitFormulas(page);
         }
 
-        private static void _modify_sizes(IVisio.Page page, IList<int> sorted_shape_ids, List<VisioAutomation.Geometry.Size> newsizes)
+        private static void _modify_sizes(IVisio.Page page, IList<int> sorted_shapeids, List<VisioAutomation.Geometry.Size> newsizes)
         {
             var writer = new SidSrcWriter();
             for (int i = 0; i < newsizes.Count; i++)
             {
-                writer.SetValue((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, newsizes[i].Width);
-                writer.SetValue((short)sorted_shape_ids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, newsizes[i].Height);
+                writer.SetValue((short)sorted_shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormWidth, newsizes[i].Width);
+                writer.SetValue((short)sorted_shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, newsizes[i].Height);
             }
 
             writer.CommitFormulas(page);

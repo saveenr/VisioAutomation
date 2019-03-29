@@ -235,7 +235,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static IEnumerable<SidSrc> _sidsrcs_for_shape(int shape_id, ShapeCache shapecache)
+        private static IEnumerable<SidSrc> _sidsrcs_for_shape(int shapeid, ShapeCache shapecache)
         {
             foreach (var shapecacheitem in shapecache)
             {
@@ -246,7 +246,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     foreach (var col in cols)
                     {
                         var sidsrc = new VASS.SidSrc(
-                            (short)shape_id,
+                            (short)shapeid,
                             (short)section_index,
                             (short)row_index,
                             col.Src.Cell);
