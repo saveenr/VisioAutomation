@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int n = 0;
             foreach (var shapecacheitem in this._list_shapecacheitems)
             {
-                n += shapecacheitem.RowCount * shapecacheitem.SectionColumns.Count;
+                n += shapecacheitem.RowCount * shapecacheitem.SectionQueryColumns.Count;
             }
             return n;
         }

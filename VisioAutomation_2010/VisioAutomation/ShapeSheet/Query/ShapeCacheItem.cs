@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public short ShapeId { get; }
         public IVisio.VisSectionIndices SectionIndex { get; }
 
-        public SectionQueryColumns SectionColumns { get; }
+        public SectionQueryColumns SectionQueryColumns { get; }
 
         // The RowCount is the data that is being cached
         public int RowCount { get; }
@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.ShapeId = shapeid;
             this.SectionIndex = sec_index;
-            this.SectionColumns = sec_cols;
+            this.SectionQueryColumns = sec_cols;
             this.RowCount = numrows;
         }
     }
