@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
+using VA=VisioAutomation;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -14,10 +14,10 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, Dictionary<string,UserDefinedCellCells>> GetUserDefinedCells(Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<IVisio.Shape, Dictionary<string,VA.Shapes.UserDefinedCellCells>> GetUserDefinedCells(Models.TargetShapes targets, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
-            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, UserDefinedCellCells>>();
+            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VA.Shapes.UserDefinedCellCells>>();
 
             targets = targets.ResolveShapes(this._client);
 
@@ -28,7 +28,7 @@ namespace VisioScripting.Commands
 
             var page = cmdtarget.ActivePage;
             var shapeidpairs = VisioAutomation.ShapeIDPairs.FromShapes(targets.Shapes);
-            var list_user_props = UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
+            var list_user_props = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {
@@ -55,7 +55,7 @@ namespace VisioScripting.Commands
             }
 
             var all_shapes = this._client.Selection.GetShapesInSelection();
-            var results = all_shapes.Select(s => UserDefinedCellHelper.Contains(s, name)).ToList();
+            var results = all_shapes.Select(s => VA.Shapes.UserDefinedCellHelper.Contains(s, name)).ToList();
 
             return results;
         }
@@ -83,7 +83,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Delete(shape, name);
+                    VA.Shapes.UserDefinedCellHelper.Delete(shape, name);
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targets.Shapes)
                 {
-                    UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells);
+                    VA.Shapes.UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells);
                 }
             }
         }
