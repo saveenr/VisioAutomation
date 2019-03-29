@@ -131,7 +131,7 @@ namespace VisioAutomation.Models.Dom
         {
             // Draw shapes
             var non_connectors = this._shapes.Where(s => !(s is Connector)).ToList();
-            var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
+            var non_connector_dropshapes = non_connectors.OfType<Shape>().ToList();
             var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
 
             this.drop_masters(context, non_connector_dropshapes);
@@ -246,7 +246,7 @@ namespace VisioAutomation.Models.Dom
             }
 
             // Ensure that all shapes to drop are assigned a visio master object
-            foreach (var shape in this._shapes.Where(s=>s is Shape).Cast<Shape>())
+            foreach (var shape in this._shapes.OfType<Shape>())
             {
                 if (shape.Master.VisioMaster == null)
                 {
@@ -257,8 +257,7 @@ namespace VisioAutomation.Models.Dom
 
         private void _update_cells_with_drop_sizes(RenderContext context)
         {
-            var masters = this._shapes
-                .Where(shape => shape is Shape).Cast<Shape>();
+            var masters = this._shapes.OfType<Shape>();
 
             foreach (var master in masters)
             {
@@ -347,7 +346,7 @@ namespace VisioAutomation.Models.Dom
 
         private void _draw_connectors(RenderContext context)
         {
-            var connector_nodes = this._shapes.Where(s => s is Connector).Cast<Connector>().ToList();
+            var connector_nodes = this._shapes.OfType<Connector>().ToList();
 
             // if no dynamic connectors then do nothing
             if (connector_nodes.Count < 1)

@@ -61,7 +61,7 @@ namespace VisioPowerShell.Commands
                 }
                 else
                 {
-                    var strings = this.Name.Where(i => i is string).Cast<string>().ToArray();
+                    var strings = this.Name.OfType<string>().ToArray();
                     var shapes = this.Client.Page.GetShapesOnPageByName(target_page, strings);
                     this.WriteObject(shapes, true);
                 }
