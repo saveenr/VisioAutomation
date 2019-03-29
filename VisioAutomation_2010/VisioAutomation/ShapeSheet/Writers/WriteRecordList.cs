@@ -22,7 +22,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Add(SidSrc sidsrc, string value)
         {
-            _check_for_sid_src();
+            _check_for_sidsrc();
             var item = new WriteRecord(sidsrc, value);
             this._items.Add(item);
         }
@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._items.Add(item);
         }
 
-        private void _check_for_sid_src()
+        private void _check_for_sidsrc()
         {
             if (this._coordtype != CellCoordinateType.SidSrc)
             {
