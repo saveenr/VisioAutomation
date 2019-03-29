@@ -1,4 +1,3 @@
-using System;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -149,140 +148,6 @@ namespace VisioAutomation_Tests.Scripting
         }
 
         [TestMethod]
-        public void Scripting_Draw_PieSlice()
-        {
-            var pagesize = new VA.Geometry.Size(4, 4);
-            var center = new VA.Geometry.Point(2, 2);
-            double radius = 1.0;
-            double start_angle = 0;
-            double end_angle = Math.PI;
-
-            // Create the page
-            var client = this.GetScriptingClient();
-            client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
-
-            // Draw the Shape
-            var shape = client.Charting.DrawPieSliceOnActivePage(center, radius, start_angle, end_angle);
-
-            // Cleanup
-            client.Document.CloseActiveDocument(true);
-        }
-
-        [TestMethod]
-        public void Scripting_Draw_PieChart()
-        {
-            var pagesize = new VA.Geometry.Size(4, 4);
-            var center = new VA.Geometry.Point(2, 2);
-            double radius = 1.0;
-            
-            var chart = new VisioAutomation.Models.Charting.PieChart(center, radius);
-            chart.DataPoints.Add(1.0);
-            chart.DataPoints.Add(2.0);
-            chart.DataPoints.Add(3.0);
-            chart.DataPoints.Add(4.0);
-
-            // Create the Page
-            var client = this.GetScriptingClient();
-            client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
-
-            // Draw the chart
-
-            client.Charting.DrawPieChartOnActivePage(chart);
-
-            // Cleanup
-            client.Document.CloseActiveDocument(true);
-        }
-
-        [TestMethod]
-        public void Scripting_Draw_BarChart()
-        {
-            var pagesize = new VA.Geometry.Size(4, 4);
-            var rect1 = new VA.Geometry.Rectangle(0, 0, 4, 4);
-            var rect2 = new VA.Geometry.Rectangle(5, 0, 9, 4);
-            var rect3 = new VA.Geometry.Rectangle(10, 0, 14, 4);
-            var bordersize = new VA.Geometry.Size(1.0, 1.0);
-
-            var chart1 = new VisioAutomation.Models.Charting.BarChart(rect1);
-            chart1.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(1.0));
-            chart1.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(2.0));
-            chart1.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(3.0));
-            chart1.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(4.0));
-
-            var chart2 = new VisioAutomation.Models.Charting.BarChart(rect2);
-            chart2.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(1.0));
-            chart2.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(2.0));
-            chart2.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(-3.0));
-            chart2.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(4.0));
-
-            var chart3 = new VisioAutomation.Models.Charting.BarChart(rect3);
-            chart3.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(-1.0));
-            chart3.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(-2.0));
-            chart3.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(-3.0));
-            chart3.DataPoints.Add(new VisioAutomation.Models.Charting.DataPoint(-4.0));
-            
-            // Create the page
-            var client = this.GetScriptingClient();
-            client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
-
-            // Draw the Charts
-            client.Charting.DrawBarChartOnActivePage(chart1);
-            client.Charting.DrawBarChartOnActivePage(chart2);
-            client.Charting.DrawBarChartOnActivePage(chart3);
-
-            var cmdtarget = client.GetCommandTargetPage();
-            var tp = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
-            client.Page.ResizePageToFitContents(tp, bordersize);
-            client.View.SetActiveWindowZoomToObject(VisioScripting.Models.ZoomToObject.Page);
-            // Cleanup
-            client.Document.CloseActiveDocument(true);
-        }
-
-        [TestMethod]
-        public void Scripting_Draw_AreaChart()
-        {
-            var pagesize = new VA.Geometry.Size(4, 4);
-            var rect1 = new VA.Geometry.Rectangle(0, 0, 4, 4);
-            var rect2 = new VA.Geometry.Rectangle(5, 0, 9, 4);
-            var rect3 = new VA.Geometry.Rectangle(10, 0, 14, 4);
-            var padding = new VA.Geometry.Size(1.0, 1.0);
-            
-            var chart1 = new VisioAutomation.Models.Charting.AreaChart(rect1);
-            chart1.DataPoints.Add(1.0);
-            chart1.DataPoints.Add(2.0);
-            chart1.DataPoints.Add(3.0);
-            chart1.DataPoints.Add(4.0);
-
-            var chart2 = new VisioAutomation.Models.Charting.AreaChart(rect2);
-            chart2.DataPoints.Add(1.0);
-            chart2.DataPoints.Add(2.0);
-            chart2.DataPoints.Add(-3.0);
-            chart2.DataPoints.Add(4.0);
-
-            var chart3 = new VisioAutomation.Models.Charting.AreaChart(rect3);
-            chart3.DataPoints.Add(-1.0);
-            chart3.DataPoints.Add(-2.0);
-            chart3.DataPoints.Add(-3.0);
-            chart3.DataPoints.Add(-4.0);
-
-            // Setup the Page
-            var client = this.GetScriptingClient();
-            client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
-
-            // Draw the Charts
-            client.Charting.DrawAreaChartOnActivePage(chart1);
-            client.Charting.DrawAreaChartOnActivePage(chart2);
-            client.Charting.DrawAreaChartOnActivePage(chart3);
-            client.Page.GetActivePage().ResizeToFitContents(padding);
-
-            // Cleanup
-            client.Document.CloseActiveDocument(true);
-        }
-
-        [TestMethod]
         [DeploymentItem(@"datafiles\directed_graph_1.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph1()
         {
@@ -365,7 +230,7 @@ namespace VisioAutomation_Tests.Scripting
         private void draw_directed_graph(VisioScripting.Client client, string dg_text)
         {
             var dg_xml = SXL.XDocument.Parse(dg_text);
-            var dg_model = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXML(client, dg_xml);
+            var dg_model = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXml(client, dg_xml);
 
             // TODO: Investigate if this this special case for Visio 2013 can be removed
             // this is a temporary fix to handle the fact that server_u.vss in Visio 2013 doesn't result in server_u.vssx 

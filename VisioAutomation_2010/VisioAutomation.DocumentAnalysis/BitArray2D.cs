@@ -87,14 +87,14 @@
         /// <returns></returns>
         public BitArray2D Clone()
         {
-            var new_bitarray2d = new BitArray2D(this.Width, this.Height);
+            var new_batwod = new BitArray2D(this.Width, this.Height);
 
             for (int i = 0; i < this.BitArray.Length; i++)
             {
-                new_bitarray2d.BitArray[i] = this.BitArray[i];
+                new_batwod.BitArray[i] = this.BitArray[i];
             }
 
-            return new_bitarray2d;
+            return new_batwod;
         }
 
         public void SetAll(bool value)

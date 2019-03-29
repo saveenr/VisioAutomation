@@ -4,7 +4,7 @@ using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Models
 {
-    internal class DGShapeInfo
+    internal class DgShapeInfo
     {
         public string ID;
         public string Label;
@@ -13,11 +13,11 @@ namespace VisioScripting.Models
         public string Url;
         public SXL.XElement Element;
 
-        public CustomPropertyDictionary custprops;
+        public CustomPropertyDictionary CustProps;
 
-        public static DGShapeInfo FromXml(Client client, SXL.XElement shape_el)
+        public static DgShapeInfo FromXml(Client client, SXL.XElement shape_el)
         {
-            var info = new DGShapeInfo();
+            var info = new DgShapeInfo();
             info.ID = shape_el.Attribute("id").Value;
             client.Output.WriteVerbose( "Reading shape id={0}", info.ID);
 
@@ -27,7 +27,7 @@ namespace VisioScripting.Models
             info.Element = shape_el;
             info.Url = shape_el.GetAttributeValue("url", null);
 
-            info.custprops = new CustomPropertyDictionary();
+            info.CustProps = new CustomPropertyDictionary();
             foreach (var customprop_el in shape_el.Elements("customprop"))
             {
                 string cp_name = customprop_el.Attribute("name").Value;
@@ -36,7 +36,7 @@ namespace VisioScripting.Models
                 var cp = new CustomPropertyCells();
                 cp.Value = cp_value;
 
-                info.custprops.Add(cp_name,cp);
+                info.CustProps.Add(cp_name,cp);
             }
 
             return info;

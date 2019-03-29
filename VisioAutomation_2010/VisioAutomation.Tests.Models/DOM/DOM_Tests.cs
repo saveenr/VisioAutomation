@@ -4,7 +4,6 @@ using VisioAutomation.Extensions;
 using VADOM = VisioAutomation.Models.Dom;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using System.Linq;
 
 namespace VisioAutomation_Tests.Models.Dom
 {

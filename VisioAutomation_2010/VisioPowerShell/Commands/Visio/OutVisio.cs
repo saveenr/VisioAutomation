@@ -30,15 +30,6 @@ namespace VisioPowerShell.Commands
         [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true, ValueFromPipeline = true)]
         public double CellSpacing { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Charting.PieChart PieChart;
-
-        [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Charting.BarChart BarChart;
-
-        [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Charting.AreaChart AreaChart;
-
         [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public XmlDocument XmlDocument;
 
@@ -71,18 +62,6 @@ namespace VisioPowerShell.Commands
                 var spacing = new VisioAutomation.Geometry.Size(this.CellSpacing, this.CellSpacing);
                 var shapes = this.Client.Charting.NewDataTablePageInActiveDocument(this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
-            }
-            else if (this.PieChart != null)
-            {
-                this.Client.Charting.DrawPieChartOnActivePage(this.PieChart);
-            }
-            else if (this.BarChart != null)
-            {
-                this.Client.Charting.DrawBarChartOnActivePage(this.BarChart);
-            }
-            else if (this.AreaChart != null)
-            {
-                this.Client.Charting.DrawAreaChartOnActivePage(this.AreaChart);
             }
             else if (this.XmlDocument != null)
             {

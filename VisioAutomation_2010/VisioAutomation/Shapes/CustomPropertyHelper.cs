@@ -74,7 +74,7 @@ namespace VisioAutomation.Shapes
 
         public static List<CustomPropertyDictionary> GetCellsAsDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
         {
-            var shapeidpairs = ShapeIdPairs.FromShapes(shapes);
+            var shapeidpairs = ShapeIDPairs.FromShapes(shapes);
 
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
             var listof_custpropdics = __GetListOfCpDic(shapeidpairs, listof_listof_custpropscells);
@@ -244,7 +244,7 @@ namespace VisioAutomation.Shapes
 
         private static List<CustomPropertyDictionary> __GetListOfCpDic(
 
-          ShapeIdPairs shapeidpairs,
+          ShapeIDPairs shapeidpairs,
             List<List<CustomPropertyCells>> customprops_per_shape)
         {
             if (customprops_per_shape.Count != shapeidpairs.Count)
@@ -260,7 +260,7 @@ namespace VisioAutomation.Shapes
         }
 
         private static List<List<CustomPropertyNameCellsPair>> __GetListOfCpPairLists(
-            ShapeIdPairs shapeidpairs,
+            ShapeIDPairs shapeidpairs,
 
             List<List<CustomPropertyCells>> listof_listof_cpcells)
         {

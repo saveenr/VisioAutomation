@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
@@ -18,9 +17,9 @@ namespace VisioAutomation.ShapeSheet.Query
         public readonly int ShapeID;
         private readonly List<SectionShapeRows<T>> _items;
 
-        internal SectionQueryShapeResults(int shape_id, List<SectionShapeRows<T>> sections) 
+        internal SectionQueryShapeResults(int shapeid, List<SectionShapeRows<T>> sections) 
         {
-            this.ShapeID = shape_id;
+            this.ShapeID = shapeid;
             this._items = sections;
         }
 

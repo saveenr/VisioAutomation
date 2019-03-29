@@ -14,10 +14,10 @@ namespace VisioScripting.Commands
         {
             this.Client = client;
 
-            check(flags);
+            _check(flags);
         }
 
-        private void check(CommandTargetFlags flags)
+        private void _check(CommandTargetFlags flags)
         {
             bool require_app = (flags & CommandTargetFlags.Application) != 0;
             bool require_document = (flags & CommandTargetFlags.ActiveDocument) != 0;

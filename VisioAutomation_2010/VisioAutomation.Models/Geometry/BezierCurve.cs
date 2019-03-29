@@ -4,8 +4,8 @@ namespace VisioAutomation.Models.Geometry
 {
     public class BezierCurve
     {
-        public VisioAutomation.Geometry.Point[] ControlPoints { get; private set; }
-        public int Degree { get; private set; }
+        public VisioAutomation.Geometry.Point[] ControlPoints { get; }
+        public int Degree { get; }
 
         public BezierCurve(VisioAutomation.Geometry.Point[] controlpoints, int degree)
         {

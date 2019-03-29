@@ -18,10 +18,10 @@ namespace VisioAutomation.Models.LayoutStyles
         protected override void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
             base.SetPageCells(page_layout_cells);
-            page_layout_cells.PlaceStyle = (int) HierarchyLayoutStyle.GetPlaceStyle(this.LayoutDirection, this.HorizontalAlignment, this.VerticalAlignment);
+            page_layout_cells.PlaceStyle = (int) HierarchyLayoutStyle._get_place_style(this.LayoutDirection, this.HorizontalAlignment, this.VerticalAlignment);
         }
 
-        private static IVisio.VisCellVals GetPlaceStyle(LayoutDirection dir, HorizontalAlignment halign, VerticalAlignment valign)
+        private static IVisio.VisCellVals _get_place_style(LayoutDirection dir, HorizontalAlignment halign, VerticalAlignment valign)
         {
             if (dir == LayoutDirection.BottomToTop)
             {

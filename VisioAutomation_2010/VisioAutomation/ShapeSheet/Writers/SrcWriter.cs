@@ -14,25 +14,25 @@ namespace VisioAutomation.ShapeSheet.Writers
         public void CommitFormulas(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
-            this.CommitFormulas(surface);
+            this._commit_formulas(surface);
         }
 
         public void CommitFormulas(IVisio.Page page)
         {
             var surface = new SurfaceTarget(page);
-            this.CommitFormulas(surface);
+            this._commit_formulas(surface);
         }
 
         public void CommitResults(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
-            this.CommitResults(surface);
+            this._commit_results(surface);
         }
 
         public void CommitResults(IVisio.Page page)
         {
             var surface = new SurfaceTarget(page);
-            this.CommitResults(surface);
+            this._commit_results(surface);
         }
 
 
@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void CommitFormulas(SurfaceTarget surface)
+        private void _commit_formulas(SurfaceTarget surface)
         {
             if ((this._records == null || this._records.Count < 1))
             {
@@ -91,7 +91,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         }
 
 
-        private void CommitResults(SurfaceTarget surface)
+        private void _commit_results(SurfaceTarget surface)
         {
             if (this._records == null || this._records.Count < 1)
             {

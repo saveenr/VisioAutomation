@@ -33,7 +33,7 @@ namespace VisioAutomation.Models.Text
             {
                 var sb = new System.Text.StringBuilder();
 
-                var entered_node_events = this.WalkNodes();
+                var entered_node_events = this._walk_nodes();
 
                 foreach (var node in entered_node_events)
                 {
@@ -73,7 +73,7 @@ namespace VisioAutomation.Models.Text
             }
         }
         
-        private IEnumerable<Node> WalkNodes()
+        private IEnumerable<Node> _walk_nodes()
         {
             return GenTreeOps.Algorithms.PreOrder<Node>(this,n=>n.Children);
         }

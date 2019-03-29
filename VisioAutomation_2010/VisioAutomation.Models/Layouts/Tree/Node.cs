@@ -20,7 +20,7 @@ namespace VisioAutomation.Models.Layouts.Tree
 
         public VisioAutomation.Models.Text.Element Text { get; set;}
         public IVisio.Shape VisioShape { get; set; }
-        public Dom.Node DOMNode { get; set; }
+        public Dom.Node DomNode { get; set; }
         public VA.Geometry.Size? Size { get; set; }
         public Dom.ShapeCells Cells { get; set; }
 

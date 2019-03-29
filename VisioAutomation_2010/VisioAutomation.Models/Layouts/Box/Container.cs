@@ -5,7 +5,7 @@ namespace VisioAutomation.Models.Layouts.Box
 {
     public class Container : Node, IEnumerable<Node>
     {
-        private List<Node> m_children;
+        private List<Node> _children;
 
         public double PaddingTop { get; set; }
         public double PaddingLeft { get; set; }
@@ -35,12 +35,12 @@ namespace VisioAutomation.Models.Layouts.Box
 
         public IEnumerator<Node> GetEnumerator()
         {
-            if (this.m_children == null)
+            if (this._children == null)
             {
                 yield break;
             }
 
-            foreach (var c in this.m_children)
+            foreach (var c in this._children)
             {
                 yield return c;
             }
@@ -73,19 +73,19 @@ namespace VisioAutomation.Models.Layouts.Box
 
         public void AddNode(Node n)
         {
-            if (this.m_children == null)
+            if (this._children == null)
             {
-                this.m_children = new List<Node>();
+                this._children = new List<Node>();
             }
 
-            this.m_children.Add(n);
+            this._children.Add(n);
         }
 
         public int Count
         {
             get
             {
-                return this.m_children == null ? 0 : this.m_children.Count;
+                return this._children == null ? 0 : this._children.Count;
             }
         }
 

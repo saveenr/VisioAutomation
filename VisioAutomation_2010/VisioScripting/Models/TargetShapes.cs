@@ -27,14 +27,14 @@ namespace VisioScripting.Models
             return target_shapeids;
         }
 
-        public VisioAutomation.ShapeIdPairs ToShapeIdPairs()
+        public VisioAutomation.ShapeIDPairs ToShapeIdPairs()
         {
             if (this.Shapes == null)
             {
                 throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
             }
 
-            return VisioAutomation.ShapeIdPairs.FromShapes(this.Shapes);
+            return VisioAutomation.ShapeIDPairs.FromShapes(this.Shapes);
         }
 
         public TargetShapes(IList<IVisio.Shape> shapes)

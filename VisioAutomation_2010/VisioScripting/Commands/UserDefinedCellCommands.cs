@@ -27,7 +27,7 @@ namespace VisioScripting.Commands
             }
 
             var page = cmdtarget.ActivePage;
-            var shapeidpairs = VisioAutomation.ShapeIdPairs.FromShapes(targets.Shapes);
+            var shapeidpairs = VisioAutomation.ShapeIDPairs.FromShapes(targets.Shapes);
             var list_user_props = UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
@@ -76,7 +76,7 @@ namespace VisioScripting.Commands
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException(nameof(name),"name cannot be empty");
+                throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteUserDefinedCellsByName)))

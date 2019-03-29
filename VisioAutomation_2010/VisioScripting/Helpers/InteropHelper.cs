@@ -6,43 +6,43 @@ namespace VisioScripting.Helpers
 {
     public static class InteropHelper
     {
-        private static bool _initialized = false;
-        private static Dictionary<string, Models.EnumType> _gNameToEnum;
-        private static List<System.Type> _gTypes;
+        private static bool _static_initialized = false;
+        private static Dictionary<string, Models.EnumType> _static_g_name_to_enum;
+        private static List<System.Type> _static_g_types;
 
-        private static void initialize()
+        private static void _initialize()
         {
-            if (!InteropHelper._initialized)
+            if (!InteropHelper._static_initialized)
             {
-                InteropHelper._gTypes = typeof(IVisio.Application).Assembly.GetExportedTypes()
+                InteropHelper._static_g_types = typeof(IVisio.Application).Assembly.GetExportedTypes()
                     .Where(t => t.IsPublic)
                     .Where(t => !t.Name.StartsWith("tag"))
                     .OrderBy(t => t.Name)
                     .ToList();
-                InteropHelper._gNameToEnum = InteropHelper._gTypes
+                InteropHelper._static_g_name_to_enum = InteropHelper._static_g_types
                     .Where(t => t.IsEnum)
                     .Select(i => new Models.EnumType(i))
                     .ToDictionary(i => i.Name, i => i);
-                InteropHelper._initialized = true;
+                InteropHelper._static_initialized = true;
             }
         }
 
         public static List<Models.EnumType> GetEnums()
         {
-            InteropHelper.initialize();
-            return InteropHelper._gNameToEnum.Values.ToList();
+            InteropHelper._initialize();
+            return InteropHelper._static_g_name_to_enum.Values.ToList();
         }
 
         public static Models.EnumType GetEnum(string name)
         {
-            InteropHelper.initialize();
-            return InteropHelper._gNameToEnum[name];
+            InteropHelper._initialize();
+            return InteropHelper._static_g_name_to_enum[name];
         }
 
         public static Models.EnumType GetEnum(System.Type t)
         {
-            InteropHelper.initialize();
-            return InteropHelper._gNameToEnum[t.Name];
+            InteropHelper._initialize();
+            return InteropHelper._static_g_name_to_enum[t.Name];
         }
     }
 }

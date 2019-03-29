@@ -2,7 +2,7 @@ using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Models
 {
-    internal class DGConnectorInfo
+    internal class DgConnectorInfo
     {
         public string ID;
         public string Label;
@@ -10,9 +10,9 @@ namespace VisioScripting.Models
         public string To;
         public SXL.XElement Element;
 
-        public static DGConnectorInfo FromXml(Client client, SXL.XElement shape_el)
+        public static DgConnectorInfo FromXml(Client client, SXL.XElement shape_el)
         {
-            var info = new DGConnectorInfo();
+            var info = new DgConnectorInfo();
             info.ID = shape_el.Attribute("id").Value;
             client.Output.WriteVerbose("Reading connector id={0}", info.ID);
 

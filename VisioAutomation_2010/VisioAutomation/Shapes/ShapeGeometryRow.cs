@@ -121,7 +121,7 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateNURBSTo(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreateNurbsTo(ShapeSheet.CellValueLiteral x,
                                                 ShapeSheet.CellValueLiteral y,
                                                 ShapeSheet.CellValueLiteral a,
                                                 ShapeSheet.CellValueLiteral b,

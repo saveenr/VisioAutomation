@@ -2,8 +2,7 @@ using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using VisioAutomation.Models.Dom;
-using VisioAutomation.Models.Layouts.Grid;
+using VAM=VisioAutomation.Models;
 
 namespace VisioAutomationSamples
 {
@@ -13,8 +12,8 @@ namespace VisioAutomationSamples
         {
             int num_cols = 1;
             int num_rows = 10;
-            var color1 = new VisioAutomation.Models.Color.ColorRgb(0xff000);
-            var color2 = new VisioAutomation.Models.Color.ColorRgb(0x000ff);
+            var color1 = new VAM.Color.ColorRgb(0xff000);
+            var color2 = new VAM.Color.ColorRgb(0x000ff);
 
             var page_size = new VA.Geometry.Size(num_rows/2.0, num_rows);
             var upperleft = new VA.Geometry.Point(0, page_size.Height);
@@ -27,8 +26,8 @@ namespace VisioAutomationSamples
 
             SampleEnvironment.SetPageSize(page,page_size);
 
-            var layout = new GridLayout(num_cols, num_rows, new VA.Geometry.Size(6.0, 1.0), master);
-            layout.RowDirection = RowDirection.TopToBottom;
+            var layout = new VAM.Layouts.Grid.GridLayout(num_cols, num_rows, new VA.Geometry.Size(6.0, 1.0), master);
+            layout.RowDirection = VAM.Layouts.Grid.RowDirection.TopToBottom;
             layout.Origin = upperleft;
             layout.CellSpacing = new VA.Geometry.Size(0.1, 0.1);
             layout.PerformLayout();
@@ -40,7 +39,7 @@ namespace VisioAutomationSamples
             {
                 double transparency = trans[i];
 
-                var fmt = new ShapeCells();
+                var fmt = new VAM.Dom.ShapeCells();
                 node.Cells = fmt;
 
                 fmt.FillPattern = 25; // Linear pattern left to right

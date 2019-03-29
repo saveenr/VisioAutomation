@@ -17,7 +17,7 @@ namespace VisioAutomation.Models.Dom
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (var i in this.GetItems())
+            foreach (var i in this._get_items())
             {
                 yield return i;
             }
@@ -28,7 +28,7 @@ namespace VisioAutomation.Models.Dom
             return this.GetEnumerator();
         }
 
-        private IEnumerable<T> GetItems()
+        private IEnumerable<T> _get_items()
         {
             if (this._items == null)
             {

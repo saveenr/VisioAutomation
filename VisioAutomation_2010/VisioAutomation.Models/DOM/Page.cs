@@ -1,5 +1,4 @@
 ﻿using VisioAutomation.Extensions;
-using VisioAutomation.Models.LayoutStyles;
 using VisioAutomation.Pages;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;

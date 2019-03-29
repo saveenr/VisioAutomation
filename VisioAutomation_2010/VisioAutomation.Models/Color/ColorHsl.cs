@@ -19,7 +19,7 @@
             this._l = l;
         }
 
-        private void CheckValidVisioHsl()
+        private void _check_valid_visio_hsl()
         {
             CheckValidVisioHsl(this.H,this.S,this.L);
         }
@@ -90,7 +90,7 @@
 
         public string ToFormula()
         {
-            this.CheckValidVisioHsl();
+            this._check_valid_visio_hsl();
             string formula = string.Format("{0}({1},{2},{3})", "HSL",this.H, this.S, this.L);
             return formula;
         }

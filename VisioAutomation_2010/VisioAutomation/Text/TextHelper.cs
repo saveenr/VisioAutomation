@@ -16,7 +16,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            int num_stops = GetTabStopCount(shape);
+            int num_stops = _get_tab_stop_count(shape);
 
             if (num_stops < 1)
             {
@@ -71,7 +71,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException(nameof(stops));
             }
 
-            ClearTabStops(shape);
+            _clear_tab_stops(shape);
             if (stops.Count < 1)
             {
                 return;
@@ -84,7 +84,7 @@ namespace VisioAutomation.Text
             tabstopcountcell.FormulaU = stops.Count.ToString(culture);
 
             // set the number of tab stobs allowed for the shape
-            var tagtab = GetTabTagForStops(stops.Count);
+            var tagtab = _get_tab_tag_for_stops(stops.Count);
             shape.RowType[tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
@@ -108,7 +108,7 @@ namespace VisioAutomation.Text
             writer.CommitFormulas(shape);
         }
 
-        private static IVisio.VisRowTags GetTabTagForStops(int stops)
+        private static IVisio.VisRowTags _get_tab_tag_for_stops(int stops)
         {
             if (stops < 0)
             {
@@ -136,7 +136,7 @@ namespace VisioAutomation.Text
             return tagtab;
         }
 
-        private static int GetTabStopCount(IVisio.Shape shape)
+        private static int _get_tab_stop_count(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -153,14 +153,14 @@ namespace VisioAutomation.Text
         /// Remove all tab stops on the shape
         /// </summary>
         /// <param name="shape"></param>
-        private static void ClearTabStops(IVisio.Shape shape)
+        private static void _clear_tab_stops(IVisio.Shape shape)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            int num_existing_tabstops = GetTabStopCount(shape);
+            int num_existing_tabstops = _get_tab_stop_count(shape);
 
             if (num_existing_tabstops < 1)
             {

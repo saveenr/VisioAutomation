@@ -84,7 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DiagramModelType.cs" />
     <Compile Include="Models\DocumentType.cs" />
     <Compile Include="Commands\VisioShape\LockVisioShape.cs" />
     <Compile Include="Commands\VisioShape\UnlockVisioShape.cs" />

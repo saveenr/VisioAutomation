@@ -49,7 +49,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            this.EnforceType(CellGroupBuilderType.SingleRow);
+            this._enforce_type(CellGroupBuilderType.SingleRow);
             var cellgroups = new List<TGroup>(shapeids.Count);
             var cols = this.query_cells_singlerow.Columns;
             var rows_for_shapes = this.__GetCells(query_cells_singlerow, page, shapeids, type);
@@ -61,7 +61,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private void EnforceType(CellGroupBuilderType t)
+        private void _enforce_type(CellGroupBuilderType t)
         {
             if (this.Type != t)
             {
@@ -71,7 +71,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public TGroup GetCellsSingleRow(IVisio.Shape shape, CellValueType type)
         {
-            this.EnforceType(CellGroupBuilderType.SingleRow);
+            this._enforce_type(CellGroupBuilderType.SingleRow);
             var cellqueryresult = this.__GetCells(query_cells_singlerow, shape, type);
             var cols = this.query_cells_singlerow.Columns;
             var first_row = cellqueryresult[0];
@@ -79,9 +79,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cells;
         }
         
-        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, ShapeIdPairs shapeidpairs, CellValueType type)
+        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, ShapeIDPairs shapeidpairs, CellValueType type)
         {
-            this.EnforceType(CellGroupBuilderType.MultiRow);
+            this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
 
             var cellqueryresult = __GetCells(query_sections_multirow,page, shapeidpairs, type);
@@ -97,7 +97,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public List<TGroup> GetCellsMultiRow(IVisio.Shape shape, CellValueType type)
         {
-            this.EnforceType(CellGroupBuilderType.MultiRow);
+            this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
             var cellqueryresult = __GetCells(query_sections_multirow, shape, type);
             var shape0_sectionshaperows0 = cellqueryresult[0];
@@ -129,7 +129,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, ShapeIdPairs shapeidpairs, CellValueType type)
+        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, ShapeIDPairs shapeidpairs, CellValueType type)
         {
             var surface = new SurfaceTarget(page);
             if (type == CellValueType.Formula)

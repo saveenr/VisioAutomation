@@ -138,7 +138,7 @@ namespace VisioAutomation.Models.Dom
             this._draw_non_masters(context, non_connector_nondropshapes);
 
             // verify that all non-connectors have an associated shape id
-            this.check_valid_shape_ids();
+            this.check_valid_shapeids();
 
             // Draw Connectors
             this._draw_connectors(context);
@@ -201,7 +201,7 @@ namespace VisioAutomation.Models.Dom
         }
 
 
-        private void check_valid_shape_ids()
+        private void check_valid_shapeids()
         {
             foreach (var shape in this._shapes)
             {
@@ -318,24 +318,6 @@ namespace VisioAutomation.Models.Dom
                     oval.VisioShapeID = oval_shape.ID16;
                     oval.VisioShape = oval_shape;
                 }
-                else if (shape is Arc)
-                {
-                    var ps = (Arc)shape;
-                    var vad_arcslice = new Models.Charting.PieSlice(ps.Center, ps.StartAngle,
-                                                              ps.EndAngle, ps.InnerRadius, ps.OuterRadius);
-                    var ps_shape = vad_arcslice.Render(context.VisioPage);
-                    ps.VisioShapeID = ps_shape.ID16;
-                    ps.VisioShape = ps_shape;
-                }
-                else if (shape is PieSlice)
-                {
-                    var ps = (PieSlice)shape;
-
-                    var vad_ps = new Models.Charting.PieSlice(ps.Center, ps.Start, ps.End, ps.Radius);
-                    var ps_shape = vad_ps.Render(context.VisioPage);
-                    ps.VisioShapeID = ps_shape.ID16;
-                    ps.VisioShape = ps_shape;
-                }
                 else if (shape is BezierCurve)
                 {
                     var bez = (BezierCurve) shape;
@@ -441,19 +423,6 @@ namespace VisioAutomation.Models.Dom
             return oval;
         }
 
-        public PieSlice DrawPieSlice(VisioAutomation.Geometry.Point center, double radius, double start, double end)
-        {
-            var pieslice = new PieSlice(center,radius,start,end);
-            this.Add(pieslice);
-            return pieslice;
-        }
-
-        public Arc DrawArc(VisioAutomation.Geometry.Point center, double inner_radius, double outer_radius, double start, double end)
-        {
-            var arc = new Arc(center, inner_radius, outer_radius, start, end);
-            this.Add(arc);
-            return arc;
-        }
         public Rectangle DrawRectangle(VisioAutomation.Geometry.Rectangle r)
         {
             var rectangle = new Rectangle(r);

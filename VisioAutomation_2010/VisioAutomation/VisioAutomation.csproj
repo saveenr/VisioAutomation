@@ -102,8 +102,8 @@
     <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
     <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
     <Compile Include="ShapeSheet\CellValueType.cs" />
-    <Compile Include="ShapeIdPairs.cs" />
-    <Compile Include="ShapeIdPair.cs" />
+    <Compile Include="ShapeIDPairs.cs" />
+    <Compile Include="ShapeIDPair.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQueryResults.cs" />
@@ -188,7 +188,6 @@
     <Compile Include="Shapes\ShapeHelper.cs" />
     <Compile Include="Text\TextRun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShapeSheet\Internal\SegmentedArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />

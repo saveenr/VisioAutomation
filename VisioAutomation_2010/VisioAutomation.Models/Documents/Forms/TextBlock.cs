@@ -28,11 +28,11 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void ApplyFormus(SidSrcWriter writer)
         {
-            short titleshape_id = this.VisioShape.ID16;
-            writer.SetValues(titleshape_id, this.TextBlockCells);
-            writer.SetValues(titleshape_id, this.ParagraphFormatCells, 0);
-            writer.SetValues(titleshape_id, this.CharacterFormatCells, 0);
-            writer.SetValues(titleshape_id, this.FormatCells);
+            short title_shapeid = this.VisioShape.ID16;
+            writer.SetValues(title_shapeid, this.TextBlockCells);
+            writer.SetValues(title_shapeid, this.ParagraphFormatCells, 0);
+            writer.SetValues(title_shapeid, this.CharacterFormatCells, 0);
+            writer.SetValues(title_shapeid, this.FormatCells);
         }
     }
 }

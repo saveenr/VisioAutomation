@@ -117,7 +117,7 @@ namespace VisioScripting.Commands
                 int chunkcount = 0;
 
                 var values = enum_.Values.OrderBy(i => i.Name).ToList();
-                foreach (var chunk in DeveloperCommands.Chunk(values, chunksize))
+                foreach (var chunk in DeveloperCommands._chunk(values, chunksize))
                 {
                     helpstr.Length = 0;
                     foreach (var val in chunk)
@@ -173,7 +173,7 @@ namespace VisioScripting.Commands
             public readonly Dictionary<string, string> PathToParentPath;
             public readonly List<string> Roots;
             public readonly string Separator;
-            public readonly string[] seps;
+            private readonly string[] _seps;
             private StringSplitOptions options = StringSplitOptions.None;
 
             public PathTreeBuilder()
@@ -181,7 +181,7 @@ namespace VisioScripting.Commands
                 this.PathToParentPath = new Dictionary<string, string>();
                 this.Roots = new List<string>();
                 this.Separator = ".";
-                this.seps = new[] {this.Separator};
+                this._seps = new[] {this.Separator};
             }
 
             public void Add(string path)
@@ -191,7 +191,7 @@ namespace VisioScripting.Commands
                     return;
                 }
 
-                var tokens = path.Split(this.seps, this.options);
+                var tokens = path.Split(this._seps, this.options);
 
                 if (tokens.Length == 0)
                 {
@@ -348,7 +348,7 @@ namespace VisioScripting.Commands
             return new Models.EnumType(type);
         }
         
-        private static IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> source, int chunksize)
+        private static IEnumerable<IEnumerable<T>> _chunk<T>(IEnumerable<T> source, int chunksize)
         {
             while (source.Any())
             {

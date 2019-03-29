@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
+using VA=VisioAutomation;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -27,25 +27,25 @@ namespace VisioAutomation_Tests.Scripting
 
             var targets = new VisioScripting.Models.TargetShapes();
 
-            var hyperlinks0 = client.Hyperlink.GetHyperlinks(targets, CellValueType.Formula);
+            var hyperlinks0 = client.Hyperlink.GetHyperlinks(targets, VASS.CellValueType.Formula);
 
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks0[s1].Count);
             Assert.AreEqual(0, hyperlinks0[s2].Count);
             Assert.AreEqual(0, hyperlinks0[s3].Count);
 
-            var hyperlink = new HyperlinkCells();
+            var hyperlink = new VA.Shapes.HyperlinkCells();
             hyperlink.Address = "http://www.microsoft.com";
             client.Hyperlink.AddHyperlink(targets, hyperlink);
 
-            var hyperlinks1 = client.Hyperlink.GetHyperlinks(targets, CellValueType.Formula);
+            var hyperlinks1 = client.Hyperlink.GetHyperlinks(targets, VASS.CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks1.Count);
             Assert.AreEqual(1, hyperlinks1[s1].Count);
             Assert.AreEqual(1, hyperlinks1[s2].Count);
             Assert.AreEqual(1, hyperlinks1[s3].Count);
 
             client.Hyperlink.DeleteHyperlinkAtIndex(targets, 0);
-            var hyperlinks2 = client.Hyperlink.GetHyperlinks(targets, CellValueType.Formula);
+            var hyperlinks2 = client.Hyperlink.GetHyperlinks(targets, VASS.CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks2[s1].Count);
             Assert.AreEqual(0, hyperlinks2[s2].Count);

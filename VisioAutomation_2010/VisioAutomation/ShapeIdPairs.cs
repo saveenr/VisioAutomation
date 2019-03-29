@@ -4,27 +4,27 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation
 {
-    public class ShapeIdPairs : List<ShapeIdPair>
+    public class ShapeIDPairs : List<ShapeIDPair>
     {
-        public ShapeIdPairs()
+        public ShapeIDPairs()
         {
         }
 
-        public ShapeIdPairs(int capacity) : base (capacity)
+        public ShapeIDPairs(int capacity) : base (capacity)
         {
         }
 
-        public static ShapeIdPairs FromShapes(IList<IVisio.Shape> shapes)
+        public static ShapeIDPairs FromShapes(IList<IVisio.Shape> shapes)
         {
-            var shapeidpairs = new ShapeIdPairs(shapes.Count);
-            shapeidpairs.AddRange(shapes.Select(s => new ShapeIdPair(s)));
+            var shapeidpairs = new ShapeIDPairs(shapes.Count);
+            shapeidpairs.AddRange(shapes.Select(s => new ShapeIDPair(s)));
             return shapeidpairs;
         }
 
-        public static ShapeIdPairs FromShapes(params IVisio.Shape[] shapes)
+        public static ShapeIDPairs FromShapes(params IVisio.Shape[] shapes)
         {
-            var shapeidpairs = new ShapeIdPairs(shapes.Length);
-            shapeidpairs.AddRange(shapes.Select(s => new ShapeIdPair(s)));
+            var shapeidpairs = new ShapeIDPairs(shapes.Length);
+            shapeidpairs.AddRange(shapes.Select(s => new ShapeIDPair(s)));
             return shapeidpairs;
         }
     }

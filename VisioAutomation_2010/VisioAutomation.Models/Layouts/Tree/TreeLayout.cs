@@ -93,7 +93,7 @@ namespace VisioAutomation.Models.Layouts.Tree
             {
                 var tree_node = (Node)treenodes[i].Data;
                 Dom.Shape master_node = master_nodes[i];
-                tree_node.DOMNode = master_node;
+                tree_node.DomNode = master_node;
 
                 if (tree_node.Cells!=null)
                 {
@@ -113,8 +113,8 @@ namespace VisioAutomation.Models.Layouts.Tree
                 {
                     foreach (var child in parent.Children)
                     {
-                        var parent_shape = (Dom.BaseShape)parent.DOMNode;
-                        var child_shape = (Dom.BaseShape)child.DOMNode;
+                        var parent_shape = (Dom.BaseShape)parent.DomNode;
+                        var child_shape = (Dom.BaseShape)child.DomNode;
                         var connector = page_node.Shapes.Connect(connector_master, parent_shape, child_shape);
                         connector.Cells = this.LayoutOptions.ConnectorCells;
                     }
@@ -151,7 +151,7 @@ namespace VisioAutomation.Models.Layouts.Tree
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
                 var orgnode = (Node) treenodes[i].Data;
-                var shape = (Dom.BaseShape)orgnode.DOMNode;
+                var shape = (Dom.BaseShape)orgnode.DomNode;
                 orgnode.VisioShape = shape.VisioShape;
             }
         }

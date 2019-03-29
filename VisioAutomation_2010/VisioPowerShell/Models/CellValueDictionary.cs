@@ -5,7 +5,7 @@ namespace VisioPowerShell.Models
 {
     public class CellValueDictionary : NamedDictionary<string>
     {
-        private readonly NamedCellDictionary srcmap;
+        private readonly NamedCellDictionary _srcmap;
 
         public CellValueDictionary(NamedCellDictionary srcmap, Dictionary<string,string> dictionary)
         {
@@ -14,7 +14,7 @@ namespace VisioPowerShell.Models
                 throw new System.ArgumentNullException(nameof(srcmap));
             }
 
-            this.srcmap = srcmap;
+            this._srcmap = srcmap;
 
             this.Update(dictionary);
         }
@@ -22,7 +22,7 @@ namespace VisioPowerShell.Models
 
         public Src GetSrc(string name)
         {
-            return this.srcmap[name];
+            return this._srcmap[name];
         }
 
         public void Update(Dictionary<string,string> cells)
@@ -42,7 +42,7 @@ namespace VisioPowerShell.Models
 
         public void Update(string cellname, string cellvalue)
         {
-            if (!this.srcmap.ContainsKey(cellname))
+            if (!this._srcmap.ContainsKey(cellname))
             {
                 string message = string.Format("Cell \"{0}\" is not supported", cellname);
                 throw new System.ArgumentOutOfRangeException(message);

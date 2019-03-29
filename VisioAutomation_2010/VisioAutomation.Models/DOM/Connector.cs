@@ -4,8 +4,8 @@ namespace VisioAutomation.Models.Dom
 {
     public class Connector : Shape
     {
-        public BaseShape From { get; private set; }
-        public BaseShape To { get; private set; }
+        public BaseShape From { get; }
+        public BaseShape To { get; }
         
         public Connector(BaseShape from, BaseShape to, IVisio.Master master) :
             base(master,-3,-3)

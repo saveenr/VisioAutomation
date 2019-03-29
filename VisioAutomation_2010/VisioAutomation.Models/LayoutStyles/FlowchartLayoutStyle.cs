@@ -15,10 +15,10 @@ namespace VisioAutomation.Models.LayoutStyles
         protected override void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
             base.SetPageCells(page_layout_cells);
-            page_layout_cells.PlaceStyle = (int) FlowchartLayoutStyle.GetPlaceStyle(this.LayoutDirection);
+            page_layout_cells.PlaceStyle = (int) FlowchartLayoutStyle._get_place_style(this.LayoutDirection);
         }
 
-        private static IVisio.VisCellVals GetPlaceStyle(LayoutDirection dir)
+        private static IVisio.VisCellVals _get_place_style(LayoutDirection dir)
         {
             if (dir == LayoutDirection.TopToBottom)
             {

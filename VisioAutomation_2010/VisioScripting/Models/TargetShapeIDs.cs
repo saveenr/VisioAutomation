@@ -6,14 +6,14 @@ namespace VisioScripting.Models
     {
         public readonly IList<int> ShapeIDs;
 
-        public TargetShapeIDs(IList<int> shape_ids)
+        public TargetShapeIDs(IList<int> shapeids)
         {
-            if (shape_ids == null)
+            if (shapeids == null)
             {
-                throw new System.ArgumentNullException(nameof(shape_ids));
+                throw new System.ArgumentNullException(nameof(shapeids));
             }
 
-            this.ShapeIDs = shape_ids;
+            this.ShapeIDs = shapeids;
         }
     }
 }

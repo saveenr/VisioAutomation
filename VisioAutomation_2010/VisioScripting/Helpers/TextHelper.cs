@@ -24,9 +24,9 @@ namespace VisioScripting.Helpers
             }
             else if (input_string == t_lower)
             {
-                var cultureInfo = System.Globalization.CultureInfo.CurrentCulture;
-                var textInfo = cultureInfo.TextInfo;
-                var t_case = textInfo.ToTitleCase(input_string);
+                var culture_info = System.Globalization.CultureInfo.CurrentCulture;
+                var text_info = culture_info.TextInfo;
+                var t_case = text_info.ToTitleCase(input_string);
 
                 output_string = t_case;
             }

@@ -19,7 +19,7 @@ namespace VisioAutomation.Models.LayoutStyles
         {
             page_layout_cells.AvenueSizeX = this.AvenueSizeX;
             page_layout_cells.AvenueSizeY = this.AvenueSizeY;
-            page_layout_cells.LineRouteExt = (int) LayoutStyleBase.ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
+            page_layout_cells.LineRouteExt = (int) LayoutStyleBase._connector_appearance_to_line_route_ext(this.ConnectorAppearance);
 
             var rs = this.ConnectorsStyleToRouteStyle();
             if (rs.HasValue)
@@ -28,7 +28,7 @@ namespace VisioAutomation.Models.LayoutStyles
             }
         }
 
-        private static IVisio.VisCellVals ConnectorAppearanceToLineRouteExt(ConnectorAppearance con_appearance)
+        private static IVisio.VisCellVals _connector_appearance_to_line_route_ext(ConnectorAppearance con_appearance)
         {
             if (con_appearance == ConnectorAppearance.Default)
             {
