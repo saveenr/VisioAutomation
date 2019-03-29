@@ -18,25 +18,25 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
-            var prop_dic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
+            var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
             {
-                return prop_dic;
+                return dicof_shape_to_cpdic;
             }
 
-            var list_custom_props = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, targets.Shapes, CellValueType.Formula);
+            var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, targets.Shapes, CellValueType.Formula);
 
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {
                 var shape = targets.Shapes[i];
-                var props = list_custom_props[i];
-                prop_dic[shape] = props;
+                var cpdic = listof_cpdic[i];
+                dicof_shape_to_cpdic[shape] = cpdic;
             }
 
-            return prop_dic;
+            return dicof_shape_to_cpdic;
         }
 
         public List<bool> ShapesContainCustomPropertyWithName(Models.TargetShapes targets, string name)

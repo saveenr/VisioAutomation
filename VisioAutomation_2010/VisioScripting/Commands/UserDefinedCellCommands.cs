@@ -17,27 +17,27 @@ namespace VisioScripting.Commands
         public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(Models.TargetShapes targets, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
-            var prop_dic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
+            var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
 
             targets = targets.ResolveShapes(this._client);
 
             if (targets.Shapes.Count < 1)
             {
-                return prop_dic;
+                return dicof_shape_to_udcelldic;
             }
 
             var page = cmdtarget.ActivePage;
             var shapeidpairs = VisioAutomation.ShapeIDPairs.FromShapes(targets.Shapes);
-            var list_user_props = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
+            var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
 
             for (int i = 0; i < targets.Shapes.Count; i++)
             {
                 var shape = targets.Shapes[i];
-                var props = list_user_props[i];
-                prop_dic[shape] = props;
+                var props = listof_udcelldic[i];
+                dicof_shape_to_udcelldic[shape] = props;
             }
 
-            return prop_dic;
+            return dicof_shape_to_udcelldic;
         }
 
         public List<bool> ShapesContainUserDefinedCellsWithName(Models.TargetShapes targets, string name)
