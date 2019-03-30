@@ -1,4 +1,5 @@
-﻿using VisioAutomation.ShapeSheet.Query;
+﻿using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -62,7 +63,7 @@ namespace VisioAutomationSamples
             writer.SetValue(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetValue(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            writer.CommitFormulas(page_sheet);
+            writer.Commit(page_sheet, CellValueType.Formula);
         }
 
         public static VA.Geometry.Size GetPageSize(IVisio.Page page)

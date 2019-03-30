@@ -2,6 +2,7 @@
 using System.Linq;
 using GenTreeOps;
 using VisioAutomation.Exceptions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Text
@@ -183,7 +184,7 @@ namespace VisioAutomation.Models.Text
                     writer.Clear();
                     charcells.ApplyFormulas(writer, rownum);
 
-                    writer.CommitFormulas(shape);
+                    writer.Commit(shape, CellValueType.Formula);
                 }
 
                 // Apply paragraph formatting
@@ -204,7 +205,7 @@ namespace VisioAutomation.Models.Text
                     writer.Clear();
                     paracells.ApplyFormulas(writer, rownum);
 
-                    writer.CommitFormulas(shape);
+                    writer.Commit(shape, CellValueType.Formula);
                 }
             }
 

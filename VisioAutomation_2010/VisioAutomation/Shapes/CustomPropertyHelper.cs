@@ -37,7 +37,7 @@ namespace VisioAutomation.Shapes
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                 writer.SetValues(cp, cell_propname.Row);
 
-                writer.CommitFormulas(shape);
+                writer.Commit(shape, VASS.CellValueType.Formula);
 
                 return;
             }
@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(cp, row);
 
-            writer.CommitFormulas(shape);
+            writer.Commit(shape, VASS.CellValueType.Formula);
         }
 
         public static CustomPropertyDictionary GetCellsAsDictionary(IVisio.Shape shape, VASS.CellValueType type)

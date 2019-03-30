@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
 using VisioAutomation.ShapeSheet.Writers;
 using VA = VisioAutomation;
@@ -63,7 +64,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var writer = new SrcWriter();
             writer.SetValue(LinePattern, 7);
 
-            writer.CommitResults(shape1);
+            writer.Commit(shape1, CellValueType.Result);
 
             // Build the query
             var query = new CellQuery();
@@ -88,7 +89,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Setup the modifications to the cell values
             var writer = new SrcWriter();
-            writer.CommitFormulas(shape1);
+            writer.Commit(shape1, CellValueType.Formula);
 
             page1.Delete(0);
         }
@@ -102,7 +103,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Setup the modifications to the cell values
             var writer = new SrcWriter();
             writer.SetValue(LinePattern, "7");
-            writer.CommitFormulas(shape1);
+            writer.Commit(shape1, CellValueType.Formula);
 
             // Build the query
             var query = new CellQuery();
@@ -177,7 +178,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var writer = new SrcWriter();
             writer.SetValue(LinePattern, "7");
             writer.SetValue(XFormPinX, 2);
-            writer.CommitResults(shape1);
+            writer.Commit(shape1, CellValueType.Result);
 
             // Build the query
             var query = new CellQuery();

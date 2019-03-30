@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -242,7 +243,7 @@ namespace VisioScripting.Commands
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
 
-                    writer.CommitFormulas(page.PageSheet);
+                    writer.Commit(page.PageSheet, CellValueType.Formula);
                 }
 
             }
@@ -272,7 +273,7 @@ namespace VisioScripting.Commands
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValues(cells);
                     writer.BlastGuards = true;
-                    writer.CommitFormulas(page);
+                    writer.Commit(page, CellValueType.Formula);
                 }
             }
         }
@@ -289,7 +290,7 @@ namespace VisioScripting.Commands
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
-                    writer.CommitFormulas(page_sheet);
+                    writer.Commit(page_sheet, CellValueType.Formula);
                 }
             }
         }

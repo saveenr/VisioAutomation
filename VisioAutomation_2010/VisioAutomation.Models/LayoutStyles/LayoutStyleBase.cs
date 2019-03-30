@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.LayoutStyles
@@ -143,7 +144,7 @@ namespace VisioAutomation.Models.LayoutStyles
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(page_layout_cells);
 
-            writer.CommitFormulas(page.PageSheet);
+            writer.Commit(page.PageSheet, CellValueType.Formula);
             page.Layout();
         }
     }

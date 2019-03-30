@@ -26,7 +26,7 @@ namespace VisioAutomation_Tests.Core.Page
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(page_fmt_cells1);
 
-            writer.CommitFormulas(page1.PageSheet);
+            writer.Commit(page1.PageSheet, CellValueType.Formula);
 
             var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, CellValueType.Result);
             Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Value);
@@ -157,7 +157,7 @@ namespace VisioAutomation_Tests.Core.Page
             var page_writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             page_writer.SetValues(pagecells);
 
-            page_writer.CommitFormulas(page.PageSheet);
+            page_writer.Commit(page.PageSheet, CellValueType.Formula);
 
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5 + shape_size.Height);

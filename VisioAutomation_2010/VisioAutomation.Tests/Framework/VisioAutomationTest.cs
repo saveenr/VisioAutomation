@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -150,7 +151,7 @@ namespace VisioAutomation_Tests
             writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            writer.CommitFormulas(page_sheet);
+            writer.Commit(page_sheet, CellValueType.Formula);
         }
 
         public static VisioAutomation.Geometry.Size GetPageSize(IVisio.Page page)

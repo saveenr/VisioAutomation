@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -62,7 +63,7 @@ namespace VisioAutomation.Shapes
                 row_count++;
             }
 
-            writer.CommitFormulas(shape);
+            writer.Commit(shape, CellValueType.Formula);
 
             return 0;
         }

@@ -72,7 +72,7 @@ namespace VisioAutomation.Pages
                 writer.SetValue(_static_page_srcs[i],src_formulas[row][i]);
             }
 
-            writer.CommitFormulas(dest_page.PageSheet);
+            writer.Commit(dest_page.PageSheet, VASS.CellValueType.Formula);
 
             // make sure the new page looks like the old page
             dest_page.Background = src_page.Background;
@@ -183,7 +183,7 @@ namespace VisioAutomation.Pages
             writer.SetValue(VASS.SrcConstants.PageWidth, size.Width);
             writer.SetValue(VASS.SrcConstants.PageHeight, size.Height);
 
-            writer.CommitFormulas(page.PageSheet);
+            writer.Commit(page.PageSheet, VASS.CellValueType.Formula);
         }        
 
         public static short[] DropManyAutoConnectors(

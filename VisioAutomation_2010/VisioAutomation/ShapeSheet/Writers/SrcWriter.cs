@@ -11,30 +11,17 @@ namespace VisioAutomation.ShapeSheet.Writers
         }
 
 
-        public void CommitFormulas(IVisio.Shape shape)
+        public void Commit(IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
-            this._commit_formulas(surface);
+            this._commit(surface, type);
         }
 
-        public void CommitFormulas(IVisio.Page page)
+        public void Commit(IVisio.Page page, CellValueType type)
         {
             var surface = new SurfaceTarget(page);
-            this._commit_formulas(surface);
+            this._commit(surface, type);
         }
-
-        public void CommitResults(IVisio.Shape shape)
-        {
-            var surface = new SurfaceTarget(shape);
-            this._commit_results(surface);
-        }
-
-        public void CommitResults(IVisio.Page page)
-        {
-            var surface = new SurfaceTarget(page);
-            this._commit_results(surface);
-        }
-
 
         public void SetValue(Src src, CellValueLiteral formula)
         {
@@ -70,28 +57,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void _commit_formulas(SurfaceTarget surface)
-        {
-            if ((this._records == null || this._records.Count < 1))
-            {
-                return;
-            }
-
-            var stream = this._records.BuildSrcStream();
-            var formulas = this._records.BuildValuesArray();
-
-            if (stream.Array.Length == 0)
-            {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
-            }
-
-            var flags = this.ComputeGetFormulaFlags();
-
-            int c = surface.SetFormulas(stream, formulas, (short)flags);
-        }
-
-
-        private void _commit_results(SurfaceTarget surface)
+        private void _commit(SurfaceTarget surface, CellValueType type)
         {
             if (this._records == null || this._records.Count < 1)
             {
@@ -99,16 +65,26 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
 
             var stream = this._records.BuildSrcStream();
-            var results = this._records.BuildValuesArray();
-            const object[] unitcodes = null;
 
             if (stream.Array.Length == 0)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
-            var flags = this.ComputeGetResultFlags();
-            surface.SetResults(stream, unitcodes, results, (short)flags);
+            var values = this._records.BuildValuesArray();
+
+            if (type == CellValueType.Formula)
+            {
+                var flags = this.ComputeGetFormulaFlags();
+                int c = surface.SetFormulas(stream, values, (short)flags);
+
+            }
+            else
+            {
+                const object[] unitcodes = null;
+                var flags = this.ComputeGetResultFlags();
+                surface.SetResults(stream, unitcodes, values, (short)flags);
+            }
         }
     }
 }

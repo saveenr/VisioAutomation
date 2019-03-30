@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -45,7 +46,7 @@ namespace VisioAutomation.Models.Documents.Forms
             writer.SetValues(page_fmt_cells);
             writer.SetValues(page_print_cells);
 
-            writer.CommitFormulas(pagesheet);
+            writer.Commit(pagesheet, CellValueType.Formula);
 
             this.Reset();
             return this._page;
