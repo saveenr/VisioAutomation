@@ -109,7 +109,7 @@ namespace VisioAutomation.Models.Documents.Forms
                 writer.SetValues((short)block.VisioShapeID, block.CharacterFormatCells, 0);
             }
 
-            writer.CommitFormulas(this._page);
+            writer.Commit(this._page, ShapeSheet.CellValueType.Formula);
         }
 
         private void _adjust_insertion_point(VisioAutomation.Geometry.Size size)

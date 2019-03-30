@@ -34,7 +34,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetLockCells)))
             {
-                writer.CommitFormulas(page);
+                writer.Commit(page, VASS.CellValueType.Formula);
             }
         }
 

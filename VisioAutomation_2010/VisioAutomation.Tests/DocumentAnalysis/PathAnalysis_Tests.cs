@@ -37,7 +37,7 @@ namespace VisioAutomation_Tests.DocumentAnalysis
                     writer.SetValue(c1.ID16, VASS.SrcConstants.LineEndArrow, "13");
                 }
 
-                writer.CommitFormulas(page);
+                writer.Commit(page, VASS.CellValueType.Formula);
             }
         }
 

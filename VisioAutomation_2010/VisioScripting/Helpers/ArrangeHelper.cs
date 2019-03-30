@@ -98,7 +98,7 @@ namespace VisioScripting.Helpers
                 writer.SetValue((short)sorted_shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormPinY, newpositions[i].Y);
             }
 
-            writer.CommitFormulas(page);
+            writer.Commit(page, VisioAutomation.ShapeSheet.CellValueType.Formula);
         }
 
         private static void _modify_sizes(IVisio.Page page, IList<int> sorted_shapeids, List<VisioAutomation.Geometry.Size> newsizes)
@@ -110,7 +110,7 @@ namespace VisioScripting.Helpers
                 writer.SetValue((short)sorted_shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, newsizes[i].Height);
             }
 
-            writer.CommitFormulas(page);
+            writer.Commit(page, VisioAutomation.ShapeSheet.CellValueType.Formula);
         }
 
         public static void SnapCorner(IVisio.Page page, Models.TargetShapeIDs target, VisioAutomation.Geometry.Size snapsize, Models.SnapCornerPosition corner)

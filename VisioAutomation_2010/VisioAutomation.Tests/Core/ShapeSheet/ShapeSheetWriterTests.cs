@@ -31,7 +31,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.SetValue(shape3.ID16, XFormPinX, 2.5);
             writer.SetValue(shape3.ID16, XFormPinY, 2.5);
 
-            writer.CommitFormulas(page1);
+            writer.Commit(page1, VA.ShapeSheet.CellValueType.Formula);
 
             // Verify that the formulas were set
             var query = new CellQuery();
@@ -138,7 +138,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.SetValue( shape3.ID16, XFormPinX, 2.5);
             writer.SetValue( shape3.ID16, XFormPinY, 2.5);
 
-            writer.CommitResults(page1);
+            writer.Commit(page1, VA.ShapeSheet.CellValueType.Result);
 
             // Verify that the formulas were set
             var query = new CellQuery();

@@ -67,7 +67,7 @@ namespace VisioPowerShell.Commands.VisioPage
                 this.Cells.Apply(writer, (short)target_pagesheet_id);
 
                 this.Client.Output.WriteVerbose("Updating Cells for new page");
-                writer.CommitFormulas(page);
+                writer.Commit(page, VisioAutomation.ShapeSheet.CellValueType.Formula);
             }
 
             this.WriteObject(page);

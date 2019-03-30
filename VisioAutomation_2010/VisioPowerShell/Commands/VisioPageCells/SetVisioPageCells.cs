@@ -49,7 +49,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
                     writer.BlastGuards = this.BlastGuards;
                     writer.TestCircular = this.TestCircular;
                     target_cells.Apply(writer, (short)target_pagesheet_id);
-                    writer.CommitFormulas(target_page);
+                    writer.Commit(target_page, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
                     this.Client.Output.WriteVerbose("End Update Page Name={0}", target_page.NameU);
                 }
