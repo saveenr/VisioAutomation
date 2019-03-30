@@ -16,25 +16,25 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var dic = this.Client.CustomProperty.GetCustomProperties(targets);
+            var dicof_shape_to_cpdic = this.Client.CustomProperty.GetCustomProperties(targets);
 
             if (this.GetCells)
             {
-                this.WriteObject(dic);                
+                this.WriteObject(dicof_shape_to_cpdic);                
                 return;
             }
 
-            foreach (var shape_propdic_pair in dic)
+            foreach (var shape_cppdic_pair in dicof_shape_to_cpdic)
             {
-                var shape = shape_propdic_pair.Key;
-                var propdic = shape_propdic_pair.Value;
+                var shape = shape_cppdic_pair.Key;
+                var cpdic = shape_cppdic_pair.Value;
                 int shapeid = shape.ID;
-                foreach (var propname_propcells_pair in propdic)
+                foreach (var propname_propcells_pair in cpdic)
                 {
                     string propname = propname_propcells_pair.Key;
                     var propcells = propname_propcells_pair.Value;
-                    var cpf = new CustomProperty(shapeid, propname, propcells);
-                    this.WriteObject(cpf);
+                    var cpo = new CustomProperty(shapeid, propname, propcells);
+                    this.WriteObject(cpo);
                 }
             }
         }

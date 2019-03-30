@@ -16,15 +16,15 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var dic = this.Client.UserDefinedCell.GetUserDefinedCells(targets, CellValueType.Formula);
+            var dicof_shape_to_udcelldic = this.Client.UserDefinedCell.GetUserDefinedCells(targets, CellValueType.Formula);
 
             if (this.GetCells)
             {
-                this.WriteObject(dic);
+                this.WriteObject(dicof_shape_to_udcelldic);
                 return;
             }
 
-            this.WriteObject(dic);
+            this.WriteObject(dicof_shape_to_udcelldic);
         }
     }
 }
