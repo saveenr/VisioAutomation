@@ -160,29 +160,6 @@ namespace VisioAutomation.Shapes
             this.Prompt = VASS.CellValueLiteral.EncodeValue(this.Prompt.Value);
         }
 
-        private void _validate()
-        {
-            if (!this.Prompt.ValidateValue(true))
-            {
-                throw new System.ArgumentException("Invalid value for Custom Property's Prompt");
-            }
-
-            if (!this.Label.ValidateValue(true))
-            {
-                throw new System.ArgumentException("Invalid value for Custom Property's Label");
-            }
-
-            if (!this.Format.ValidateValue(true))
-            {
-                throw new System.ArgumentException("Invalid value for Custom Property's Format");
-            }
-
-            if (!this.Value.ValidateValue(false))
-            {
-                //throw new System.ArgumentException("Invalid value for Custom Property's Value");
-            }
-        }
-
 
         public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
         {
