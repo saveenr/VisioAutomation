@@ -239,7 +239,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             var mg_graph = this._create_msagl_graph(layout_diagram);
 
-            this._create_dom_shapes(page_node.Shapes, mg_graph, vis);
+            this.CreateDOMShapes(page_node.Shapes, mg_graph, vis);
 
             if (this.LayoutOptions.UseDynamicConnectors)
             {
@@ -261,7 +261,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             return page_node;
         }
 
-        private void _create_dom_shapes(Dom.ShapeList domshapeslist, MSAGL.Core.Layout.GeometryGraph mg_graph, IVisio.Application app)
+        private void CreateDOMShapes(Dom.ShapeList domshapeslist, MSAGL.Core.Layout.GeometryGraph mg_graph, IVisio.Application app)
         {
             var node_centerpoints = mg_graph.Nodes
                     .Select(n => this._to_document_coordinates(MsaglUtil.ToVAPoint(n.Center)))

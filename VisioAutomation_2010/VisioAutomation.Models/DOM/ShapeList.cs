@@ -7,7 +7,6 @@ using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Internal.Extensions;
 
 namespace VisioAutomation.Models.Dom
 {
@@ -52,15 +51,15 @@ namespace VisioAutomation.Models.Dom
 
             var context = new RenderContext(page);
 
-            this._prepare_for_drawing(context);
-            this._perform_drawing(context);
-            this._update_cells(context);
-            this._set_text();
-            this._set_custom_properties(context);
-            this._add_hyperlinks(context);
+            this.PrepareForDrawing(context);
+            this.PerformDrawing(context);
+            this.UpdateCells(context);
+            this.SetText();
+            this.SetCustomProperties(context);
+            this.AddHyperlinks(context);
         }
 
-        private void _add_hyperlinks(RenderContext context)
+        private void AddHyperlinks(RenderContext context)
         {
             var shapes_with_hyperlinks = this._shapes.Where(s => s.Hyperlinks != null);
             foreach (var shape in shapes_with_hyperlinks)
@@ -83,7 +82,7 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void _set_custom_properties(RenderContext context)
+        private void SetCustomProperties(RenderContext context)
         {
             var shapes_with_custom_props = this._shapes.Where(s => s.CustomProperties != null);
             foreach (var shape in shapes_with_custom_props)
@@ -98,7 +97,7 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void _set_text()
+        private void SetText()
         {
             var shapes_with_text = this._shapes.Where(s => s.Text != null);
             foreach (var shape in shapes_with_text)
@@ -112,9 +111,9 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void _update_cells(RenderContext context)
+        private void UpdateCells(RenderContext context)
         {
-            this._update_cells_with_drop_sizes(context);
+            this.UpdateCellsWithDropSizes(context);
 
             var writer = new SidSrcWriter();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);

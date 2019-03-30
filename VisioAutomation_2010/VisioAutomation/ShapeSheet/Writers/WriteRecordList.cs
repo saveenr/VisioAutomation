@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._items.Add(item);
         }
 
-        private void _check_for_sidsrc()
+        private void CheckForSidSrc()
         {
             if (this._coordtype != CellCoordinateType.SidSrc)
             {
