@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
             var target_pages = new VisioScripting.Models.TargetPages(this.Pages);
 
             var template = new VisioPowerShell.Models.PageCells();
-            var celldic = VisioPowerShell.Models.NameCellDictionary.FromCells(template);
+            var celldic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
             var cellnames = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
@@ -47,7 +47,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
-            VisioPowerShell.Models.NameCellDictionary celldic,
+            VisioPowerShell.Models.NamedSrcDictionary celldic,
             IList<string> cellnames)
         {
             var invalid_names = cellnames.Where(cellname => !celldic.ContainsKey(cellname)).ToList();

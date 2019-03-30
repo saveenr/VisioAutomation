@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             var target_shapes = this.Shapes ?? this.Client.Selection.GetShapesInSelection();
 
             var template = new VisioPowerShell.Models.ShapeCells();
-            var dicof_name_to_cell = VisioPowerShell.Models.NameCellDictionary.FromCells(template);
+            var dicof_name_to_cell = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
             var arrayof_cellnames = dicof_name_to_cell.Keys.ToArray();
             var query = _create_query(dicof_name_to_cell, arrayof_cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
@@ -40,10 +40,10 @@ namespace VisioPowerShell.Commands.VisioShapeCells
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _create_query(
-            VisioPowerShell.Models.NameCellDictionary dicof_name_to_cell, 
+            VisioPowerShell.Models.NamedSrcDictionary dicof_named_to_cell, 
             IList<string> cellnames)
         {
-            var invalid_names = cellnames.Where(cellname => !dicof_name_to_cell.ContainsKey(cellname)).ToList();
+            var invalid_names = cellnames.Where(cellname => !dicof_named_to_cell.ContainsKey(cellname)).ToList();
 
             if (invalid_names.Count > 0)
             {
@@ -55,11 +55,11 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
             foreach (string cellname in cellnames)
             {
-                foreach (var resolved_cellname in dicof_name_to_cell.ExpandKeyWildcard(cellname))
+                foreach (var resolved_cellname in dicof_named_to_cell.ExpandKeyWildcard(cellname))
                 {
                     if (!query.Columns.Contains(resolved_cellname))
                     {
-                        var resolved_src = dicof_name_to_cell[resolved_cellname];
+                        var resolved_src = dicof_named_to_cell[resolved_cellname];
                         query.Columns.Add(resolved_src, resolved_cellname);
                     }
                 }
