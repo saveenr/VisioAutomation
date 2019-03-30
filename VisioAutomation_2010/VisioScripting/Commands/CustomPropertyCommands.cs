@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
             return dicof_shape_to_cpdic;
         }
 
-        public List<bool> ShapesContainCustomPropertyWithName(Models.TargetShapes targets, string name)
+        public List<bool> ContainCustomPropertyWithName(Models.TargetShapes targets, string name)
         {
             if (name == null)
             {

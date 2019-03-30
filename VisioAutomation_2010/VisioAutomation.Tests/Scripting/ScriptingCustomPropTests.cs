@@ -77,7 +77,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("\"BAR\"", cp3.Value.Value);
             
 
-            var hasprops0 = client.CustomProperty.ShapesContainCustomPropertyWithName(targets,"FOO");
+            var hasprops0 = client.CustomProperty.ContainCustomPropertyWithName(targets,"FOO");
             Assert.IsTrue(hasprops0.All(v => v == true));
 
             client.CustomProperty.DeleteCustomPropertyWithName(targets,"FOO");
@@ -88,7 +88,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, prop_dic2[s2].Count);
             Assert.AreEqual(0, prop_dic2[s3].Count);
 
-            var hasprops1 = client.CustomProperty.ShapesContainCustomPropertyWithName(targets,"FOO");
+            var hasprops1 = client.CustomProperty.ContainCustomPropertyWithName(targets,"FOO");
             Assert.IsTrue(hasprops1.All(v => v == false));
 
             client.Document.CloseActiveDocument(true);

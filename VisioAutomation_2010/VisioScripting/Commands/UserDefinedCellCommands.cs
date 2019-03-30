@@ -40,7 +40,7 @@ namespace VisioScripting.Commands
             return dicof_shape_to_udcelldic;
         }
 
-        public List<bool> ShapesContainUserDefinedCellsWithName(Models.TargetShapes targets, string name)
+        public List<bool> ContainsUserDefinedCellsWithName(Models.TargetShapes targets, string name)
         {
             if (name == null)
             {
