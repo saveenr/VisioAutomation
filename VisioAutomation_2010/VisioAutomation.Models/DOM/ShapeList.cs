@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using VisioAutomation.Internal.Extensions;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
@@ -51,8 +52,8 @@ namespace VisioAutomation.Models.Dom
 
             var context = new RenderContext(page);
 
-            this.PrepareForDrawing(context);
-            this.PerformDrawing(context);
+            this._prepare_for_drawing(context);
+            this._perform_drawing(context);
             this.UpdateCells(context);
             this.SetText();
             this.SetCustomProperties(context);
@@ -113,7 +114,7 @@ namespace VisioAutomation.Models.Dom
 
         private void UpdateCells(RenderContext context)
         {
-            this.UpdateCellsWithDropSizes(context);
+            this._update_cells_with_drop_sizes(context);
 
             var writer = new SidSrcWriter();
             var shapes_with_cells = this._shapes.Where(s => s.Cells != null);

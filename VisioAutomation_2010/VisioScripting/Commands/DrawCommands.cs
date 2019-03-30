@@ -36,7 +36,7 @@ namespace VisioScripting.Commands
             else
             {
                 this._client.Output.WriteVerbose("Window = Page ");
-                var surf_Page = surf_Application.ActivePage;
+                var surf_Page = surf_application.ActivePage;
                 var surface = new VisioAutomation.SurfaceTarget(surf_Page);
                 return surface;
             }
