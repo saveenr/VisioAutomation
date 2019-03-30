@@ -4,11 +4,18 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class VisioRenderer
     {
+        private string _edge_master_name = "Dynamic Connector";
+        private string _edge_stencil_name = "connec_u.vss";
+
         public VisioRenderer()
         {
         }
 
-        public void Render(IVisio.Page page, DirectedGraphLayout directedGraphLayout, VisioLayoutOptions options)
+        static VisioRenderer()
+        {
+        }
+
+        public void Render(IVisio.Page page, DirectedGraphLayout directed_graph_layout, VisioLayoutOptions options)
         {
             // This is Visio-based render - it does NOT use MSAGL
             if (page == null)
@@ -24,7 +31,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var page_node = new Dom.Page();
             double x = 0;
             double y = 1;
-            foreach (var shape in directedGraphLayout.Shapes)
+            foreach (var shape in directed_graph_layout.Shapes)
             {
                 var shape_nodes = page_node.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
                 shape.DomNode = shape_nodes;
@@ -32,9 +39,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 x += 1.0;
             }
 
-            foreach (var connector in directedGraphLayout.Connectors)
+            foreach (var connector in directed_graph_layout.Connectors)
             {
-                var connector_node = page_node.Shapes.Connect("Dynamic Connector", "connec_u.vss", connector.From.DomNode, connector.To.DomNode);
+                var connector_node = page_node.Shapes.Connect(_edge_master_name, _edge_stencil_name, connector.From.DomNode, connector.To.DomNode);
                 connector.DomNode = connector_node;
                 connector.DomNode.Text = new VisioAutomation.Models.Text.Element(connector.Label);
             }

@@ -1,7 +1,7 @@
 using System.Linq;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]
     public class GetVisioShape : VisioCmdlet
@@ -61,7 +61,7 @@ namespace VisioPowerShell.Commands
                 }
                 else
                 {
-                    var strings = this.Name.Where(i => i is string).Cast<string>().ToArray();
+                    var strings = this.Name.OfType<string>().ToArray();
                     var shapes = this.Client.Page.GetShapesOnPageByName(target_page, strings);
                     this.WriteObject(shapes, true);
                 }

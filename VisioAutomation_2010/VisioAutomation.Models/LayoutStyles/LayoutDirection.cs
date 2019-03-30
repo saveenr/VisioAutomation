@@ -2,9 +2,9 @@ namespace VisioAutomation.Models.LayoutStyles
 {
     public enum LayoutDirection
     {
-        TopToBottom,
         BottomToTop,
+        TopToBottom,
         LeftToRight,
-        RightToLeft
+        RightToLeft,
     }
 }

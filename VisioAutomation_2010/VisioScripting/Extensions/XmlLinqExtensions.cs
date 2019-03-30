@@ -4,20 +4,20 @@ namespace VisioScripting.Extensions
 {
     static class XmlLinqExtensions
     {
-        public static VisioAutomation.Color.ColorRgb AttributeAsColor(this SXL.XElement el, string name,
-            VisioAutomation.Color.ColorRgb def)
+        public static VisioAutomation.Models.Color.ColorRgb AttributeAsColor(this SXL.XElement el, string name,
+            VisioAutomation.Models.Color.ColorRgb def)
         {
-            return el.GetAttributeValue(name, def, VisioAutomation.Color.ColorRgb.ParseWebColor);
+            return el.GetAttributeValue(name, def, VisioAutomation.Models.Color.ColorRgb.ParseWebColor);
         }
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             double DoubleParse(string str) => double.Parse(str, culture);
-            return el.GetAttributeValue(name, def, s => XmlLinqExtensions.PointsToInches(DoubleParse(s)));
+            return el.GetAttributeValue(name, def, s => XmlLinqExtensions._points_to_inches(DoubleParse(s)));
         }
 
-        private static double PointsToInches(double points)
+        private static double _points_to_inches(double points)
         {
             return points/72.0;
         }

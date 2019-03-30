@@ -1,6 +1,6 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Join, Nouns.VisioShape)]
     public class JoinVisioShape : VisioCmdlet

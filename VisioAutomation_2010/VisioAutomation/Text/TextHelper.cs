@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS=VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
 {
@@ -14,7 +16,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            int num_stops = GetTabStopCount(shape);
+            int num_stops = _get_tab_stop_count(shape);
 
             if (num_stops < 1)
             {
@@ -22,8 +24,8 @@ namespace VisioAutomation.Text
             }
 
             const short row = 0;
-            
-            var stream = new VisioAutomation.ShapeSheet.Streams.SrcStreamBuilder(num_stops * 3);
+
+            var srcs = new List<VASS.Src>(num_stops * 3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
@@ -32,16 +34,18 @@ namespace VisioAutomation.Text
                 var src_tabalign = new ShapeSheet.Src(tab_section, row, (short)(i + 2));
                 var src_tabother = new ShapeSheet.Src(tab_section, row, (short)(i + 3));
 
-                stream.Add(src_tabpos);
-                stream.Add(src_tabalign);
-                stream.Add(src_tabother);
+                srcs.Add(src_tabpos);
+                srcs.Add(src_tabalign);
+                srcs.Add(src_tabother);
             }
 
+            var streamarray = VASS.Streams.StreamArray.FromSrc(srcs);
+   
             var surface = new SurfaceTarget(shape);
 
             const object[] unitcodes = null;
 
-            var results = surface.GetResults<double>(stream.ToStream(), unitcodes);
+            var results = surface.GetResults<double>(streamarray, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
@@ -67,7 +71,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException(nameof(stops));
             }
 
-            ClearTabStops(shape);
+            _clear_tab_stops(shape);
             if (stops.Count < 1)
             {
                 return;
@@ -80,7 +84,7 @@ namespace VisioAutomation.Text
             tabstopcountcell.FormulaU = stops.Count.ToString(culture);
 
             // set the number of tab stobs allowed for the shape
-            var tagtab = GetTabTagForStops(stops.Count);
+            var tagtab = _get_tab_tag_for_stops(stops.Count);
             shape.RowType[tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
@@ -96,15 +100,15 @@ namespace VisioAutomation.Text
                 var src_tabalign = new ShapeSheet.Src(tab_section, row, (short)(i + 2));
                 var src_tabother = new ShapeSheet.Src(tab_section, row, (short)(i + 3));
 
-                writer.SetFormula(src_tabpos, position); // tab position
-                writer.SetFormula(src_tabalign, alignment); // tab alignment
-                writer.SetFormula(src_tabother, "0"); // tab unknown
+                writer.SetValue(src_tabpos, position); // tab position
+                writer.SetValue(src_tabalign, alignment); // tab alignment
+                writer.SetValue(src_tabother, "0"); // tab unknown
             }
 
-            writer.Commit(shape);
+            writer.CommitFormulas(shape);
         }
 
-        private static IVisio.VisRowTags GetTabTagForStops(int stops)
+        private static IVisio.VisRowTags _get_tab_tag_for_stops(int stops)
         {
             if (stops < 0)
             {
@@ -132,7 +136,7 @@ namespace VisioAutomation.Text
             return tagtab;
         }
 
-        private static int GetTabStopCount(IVisio.Shape shape)
+        private static int _get_tab_stop_count(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -149,14 +153,14 @@ namespace VisioAutomation.Text
         /// Remove all tab stops on the shape
         /// </summary>
         /// <param name="shape"></param>
-        private static void ClearTabStops(IVisio.Shape shape)
+        private static void _clear_tab_stops(IVisio.Shape shape)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            int num_existing_tabstops = GetTabStopCount(shape);
+            int num_existing_tabstops = _get_tab_stop_count(shape);
 
             if (num_existing_tabstops < 1)
             {
@@ -173,10 +177,56 @@ namespace VisioAutomation.Text
             {
                 var src = new ShapeSheet.Src(tab_section, (short)IVisio.VisRowIndices.visRowTab,
                     (short)i);
-                writer.SetFormula(src, formula);
+                writer.SetValue(src, formula);
             }
 
-            writer.Commit(shape);
+            writer.CommitFormulas(shape);
+        }
+
+
+
+        public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
+        {
+            var reader = TextBlockCells_lazy_builder.Value;
+            return reader.GetCellsSingleRow(page, shapeids, type);
+        }
+
+        public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, VASS.CellValueType type)
+        {
+            var reader = TextBlockCells_lazy_builder.Value;
+            return reader.GetCellsSingleRow(shape, type);
+        }
+
+        private static readonly System.Lazy<TextBlockCellsBuilder> TextBlockCells_lazy_builder = new System.Lazy<TextBlockCellsBuilder>();
+
+        class TextBlockCellsBuilder : CellGroupBuilder<Text.TextBlockCells>
+        {
+
+            public TextBlockCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
+            {
+            }
+
+            public override Text.TextBlockCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            {
+                var cells = new Text.TextBlockCells();
+             
+                string getcellvalue(string name)
+                {
+                    return row[cols[name].Ordinal];
+                }
+
+                cells.BottomMargin = getcellvalue(nameof(TextBlockCells.BottomMargin));
+                cells.LeftMargin = getcellvalue(nameof(TextBlockCells.LeftMargin));
+                cells.RightMargin = getcellvalue(nameof(TextBlockCells.RightMargin));
+                cells.TopMargin = getcellvalue(nameof(TextBlockCells.TopMargin));
+                cells.DefaultTabStop = getcellvalue(nameof(TextBlockCells.DefaultTabStop));
+                cells.Background = getcellvalue(nameof(TextBlockCells.Background));
+                cells.BackgroundTransparency = getcellvalue(nameof(TextBlockCells.BackgroundTransparency));
+                cells.Direction = getcellvalue(nameof(TextBlockCells.Direction));
+                cells.VerticalAlign = getcellvalue(nameof(TextBlockCells.VerticalAlign));
+
+                return cells;
+            }
         }
     }
 }

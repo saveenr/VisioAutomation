@@ -5,7 +5,7 @@ namespace VisioAutomation.Models.Documents.Forms
 {
     public class TextBlock
     {
-        public Geometry.Size Size;
+        public VisioAutomation.Geometry.Size Size;
         public string Font = "SegoeUI";
         public VisioAutomation.Text.TextBlockCells TextBlockCells;
         public VisioAutomation.Text.ParagraphFormatCells ParagraphFormatCells;
@@ -14,9 +14,9 @@ namespace VisioAutomation.Models.Documents.Forms
         public string Text;
         public IVisio.Shape VisioShape;
         public int VisioShapeID;
-        public Geometry.Rectangle Rectangle;
+        public VisioAutomation.Geometry.Rectangle Rectangle;
 
-        public TextBlock(Geometry.Size size, string text)
+        public TextBlock(VisioAutomation.Geometry.Size size, string text)
         {
             this.Text = text;
             this.Size = size;
@@ -28,11 +28,11 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void ApplyFormus(SidSrcWriter writer)
         {
-            short titleshape_id = this.VisioShape.ID16;
-            this.TextBlockCells.SetFormulas(writer, titleshape_id);
-            this.ParagraphFormatCells.SetFormulas(writer, titleshape_id, 0);
-            this.CharacterFormatCells.SetFormulas(writer, titleshape_id, 0);
-            this.FormatCells.SetFormulas(writer, titleshape_id);
+            short title_shapeid = this.VisioShape.ID16;
+            writer.SetValues(title_shapeid, this.TextBlockCells);
+            writer.SetValues(title_shapeid, this.ParagraphFormatCells, 0);
+            writer.SetValues(title_shapeid, this.CharacterFormatCells, 0);
+            writer.SetValues(title_shapeid, this.FormatCells);
         }
     }
 }

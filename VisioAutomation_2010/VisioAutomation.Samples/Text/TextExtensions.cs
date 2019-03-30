@@ -1,40 +1,50 @@
 using VA=VisioAutomation;
+using VAM = VisioAutomation.Models;
 
 namespace VisioAutomationSamples
 {
+    public class TextFmt
+    {
+        public int? FontID;
+        public double? FontSize;
+        public int? Color;
+        public VisioScripting.Models.AlignmentHorizontal? HAlign;
+        public VAM.Text.CharStyle? CharStyle;
+    }
+
     public static class TextExtensions
     {
-        public static VisioAutomation.Models.Text.Element AddElementEx(this VisioAutomation.Models.Text.Element p, string text,
-                                                              int? font, double? size, int? color,
-            VisioScripting.Models.AlignmentHorizontal? halign,
-                                                              VA.Models.Text.CharStyle? cs)
+        public static VAM.Text.Element AddElementEx(
+            this VAM.Text.Element p, 
+            string text,
+            TextFmt textfmt)
         {
             var el = p.AddElement(text);
 
-            if (font != null)
+            if (textfmt !=null && textfmt.FontID != null)
             {
-                el.CharacterFormatting.Font = font.Value;
+                el.CharacterFormatting.Font = textfmt.FontID.Value;
             }
 
-            if (size.HasValue)
+            if (textfmt != null && textfmt.FontSize.HasValue)
             {
-                el.CharacterFormatting.Size = string.Format("{0}pt",size.Value);
+                el.CharacterFormatting.Size = string.Format("{0}pt", textfmt.FontSize.Value);
             }
 
-            if (color.HasValue)
+            if (textfmt != null && textfmt.Color.HasValue)
             {
-                var c = new VisioAutomation.Color.ColorRgb(color.Value);
+                var c = new VAM.Color.ColorRgb(textfmt.Color.Value);
                 el.CharacterFormatting.Color = c.ToFormula();
             }
 
-            if (halign.HasValue)
+            if (textfmt != null && textfmt.HAlign.HasValue)
             {
-                el.ParagraphFormatting.HorizontalAlign = (int) halign.Value;
+                el.ParagraphFormatting.HorizontalAlign = (int)textfmt.HAlign.Value;
             }
 
-            if (cs.HasValue)
+            if (textfmt != null && textfmt.CharStyle.HasValue)
             {
-                el.CharacterFormatting.Style = (int) cs;
+                el.CharacterFormatting.Style = (int)textfmt.CharStyle;
             }
 
             return el;

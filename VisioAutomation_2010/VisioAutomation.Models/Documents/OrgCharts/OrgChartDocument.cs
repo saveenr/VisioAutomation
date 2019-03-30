@@ -100,7 +100,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                     i.Position = i.Position.Add(border_width, border_width);
                 }
 
-                var centerpoints = new Geometry.Point[treenodes.Count];
+                var centerpoints = new VisioAutomation.Geometry.Point[treenodes.Count];
                 foreach (int i in Enumerable.Range(0, treenodes.Count))
                 {
                     centerpoints[i] = treenodes[i].Rect.Center;
@@ -117,7 +117,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 foreach (int i in Enumerable.Range(0, treenodes.Count))
                 {
                     var orgnode = (Node)treenodes[i].Data;
-                    orgnode.DOMNode = vmasters[i];
+                    orgnode.DomNode = vmasters[i];
                     vmasters[i].Cells.XFormWidth = treenodes[i].Size.Width;
                     vmasters[i].Cells.XFormHeight = treenodes[i].Size.Height;
                 }
@@ -130,8 +130,8 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                     {
                         foreach (var child in parent.Children)
                         {
-                            var parent_shape = (Dom.BaseShape)parent.DOMNode;
-                            var child_shape = (Dom.BaseShape)child.DOMNode;
+                            var parent_shape = (Dom.BaseShape)parent.DomNode;
+                            var child_shape = (Dom.BaseShape)child.DomNode;
                             var connector = page_node.Shapes.Connect(dyncon_master_name, null, parent_shape, child_shape);
                         }
                     }
@@ -149,14 +149,14 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 foreach (int i in Enumerable.Range(0, treenodes.Count))
                 {
                     var orgnode = (Node)treenodes[i].Data;
-                    var shape = (Dom.BaseShape)orgnode.DOMNode;
+                    var shape = (Dom.BaseShape)orgnode.DomNode;
                     shape.Text = new VisioAutomation.Models.Text.Element(orgnode.Text);
                 }
 
                 var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);
                 page_node.Size = page_size_with_border;
                 page_node.ResizeToFit = true;
-                page_node.ResizeToFitMargin = new Geometry.Size(border_width * 2, border_width * 2.0);
+                page_node.ResizeToFitMargin = new VisioAutomation.Geometry.Size(border_width * 2, border_width * 2.0);
             } // finish handling root node
 
             var doc = doc_node.Render(app);
@@ -165,7 +165,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
             {
                 var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
                 var orgnodes_with_urls = orgnodes.Where(n => n.Url != null);
-                var all_urls = orgnodes_with_urls.Select(n => new { orgnode = n, shape = (Dom.BaseShape)n.DOMNode, url = n.Url.Trim() });
+                var all_urls = orgnodes_with_urls.Select(n => new { orgnode = n, shape = (Dom.BaseShape)n.DomNode, url = n.Url.Trim() });
 
                 foreach (var url in all_urls)
                 {
@@ -178,7 +178,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 foreach (int i in Enumerable.Range(0, treenodes.Count))
                 {
                     var orgnode = (Node)treenodes[i].Data;
-                    var shape = (Dom.BaseShape)orgnode.DOMNode;
+                    var shape = (Dom.BaseShape)orgnode.DomNode;
                     orgnode.VisioShape = shape.VisioShape;
                 }
             }

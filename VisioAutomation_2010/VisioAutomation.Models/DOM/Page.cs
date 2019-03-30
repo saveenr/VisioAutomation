@@ -1,5 +1,4 @@
 ﻿using VisioAutomation.Extensions;
-using VisioAutomation.Models.LayoutStyles;
 using VisioAutomation.Pages;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -9,9 +8,9 @@ namespace VisioAutomation.Models.Dom
     public class Page : Node
     {
         public ShapeList Shapes { get; }
-        public Geometry.Size? Size;
+        public VisioAutomation.Geometry.Size? Size;
         public bool ResizeToFit;
-        public Geometry.Size? ResizeToFitMargin;
+        public VisioAutomation.Geometry.Size? ResizeToFitMargin;
         public Pages.PageFormatCells PageFormatCells;
         public Pages.PageLayoutCells PageLayoutCells;
         public string Name;
@@ -78,9 +77,9 @@ namespace VisioAutomation.Models.Dom
                 }
 
                 var writer = new SidSrcWriter();
-                this.PageFormatCells.SetFormulas(writer, (short)page_sheet.ID);
-                this.PageLayoutCells.SetFormulas(writer, (short)page_sheet.ID);
-                writer.Commit(page);
+                writer.SetValues((short)page_sheet.ID, this.PageFormatCells);
+                writer.SetValues((short)page_sheet.ID, this.PageLayoutCells);
+                writer.CommitFormulas(page);
                 
                 // Then render the shapes
                 this.Shapes.Render(page);

@@ -32,7 +32,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                 string type_name = cellgroup_type.Name;
                 var cellgroup_ctor = cellgroup_type.GetConstructor(Type.EmptyTypes);
                 var cellgroup_obj = cellgroup_ctor.Invoke(new object[] { });
-                var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroupBase) cellgroup_obj;
+                var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroup) cellgroup_obj;
 
                 var props = GetCellDataProps(cellgroup_type);
 

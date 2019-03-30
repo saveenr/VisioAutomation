@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
@@ -31,14 +30,14 @@ namespace VisioAutomation_Tests.DocumentAnalysis
                 var writer = new SidSrcWriter();
                 if (a_arrow)
                 {
-                    writer.SetFormula(c1.ID16, VASS.SrcConstants.LineBeginArrow, "13");                    
+                    writer.SetValue(c1.ID16, VASS.SrcConstants.LineBeginArrow, "13");                    
                 }
                 if (b_arrow)
                 {
-                    writer.SetFormula(c1.ID16, VASS.SrcConstants.LineEndArrow, "13");
+                    writer.SetValue(c1.ID16, VASS.SrcConstants.LineEndArrow, "13");
                 }
 
-                writer.Commit(page);
+                writer.CommitFormulas(page);
             }
         }
 

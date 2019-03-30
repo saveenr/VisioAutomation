@@ -1,178 +1,127 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
+using VASS = VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
+
 namespace VisioAutomation.Pages
 {
-    public class PageLayoutCells : CellGroupSingleRow
+    public class PageLayoutCells : VASS.CellGroups.CellGroup
     {
-        public CellValueLiteral AvenueSizeX { get; set; }
-        public CellValueLiteral AvenueSizeY { get; set; }
-        public CellValueLiteral BlockSizeX { get; set; }
-        public CellValueLiteral BlockSizeY { get; set; }
-        public CellValueLiteral CtrlAsInput { get; set; }
-        public CellValueLiteral DynamicsOff { get; set; }
-        public CellValueLiteral EnableGrid { get; set; }
-        public CellValueLiteral LineAdjustFrom { get; set; }
-        public CellValueLiteral LineAdjustTo { get; set; }
-        public CellValueLiteral LineJumpCode { get; set; }
-        public CellValueLiteral LineJumpFactorX { get; set; }
-        public CellValueLiteral LineJumpFactorY { get; set; }
-        public CellValueLiteral LineJumpStyle { get; set; }
-        public CellValueLiteral LineRouteExt { get; set; }
-        public CellValueLiteral LineToLineX { get; set; }
-        public CellValueLiteral LineToLineY { get; set; }
-        public CellValueLiteral LineToNodeX { get; set; }
-        public CellValueLiteral LineToNodeY { get; set; }
-        public CellValueLiteral LineJumpDirX { get; set; }
-        public CellValueLiteral LineJumpDirY { get; set; }
-        public CellValueLiteral PageShapeSplit { get; set; }
-        public CellValueLiteral PlaceDepth { get; set; }
-        public CellValueLiteral PlaceFlip { get; set; }
-        public CellValueLiteral PlaceStyle { get; set; }
-        public CellValueLiteral PlowCode { get; set; }
-        public CellValueLiteral ResizePage { get; set; }
-        public CellValueLiteral RouteStyle { get; set; }
-        public CellValueLiteral AvoidPageBreaks { get; set; } // new in visio 2010
+        public VASS.CellValueLiteral AvenueSizeX { get; set; }
+        public VASS.CellValueLiteral AvenueSizeY { get; set; }
+        public VASS.CellValueLiteral BlockSizeX { get; set; }
+        public VASS.CellValueLiteral BlockSizeY { get; set; }
+        public VASS.CellValueLiteral CtrlAsInput { get; set; }
+        public VASS.CellValueLiteral DynamicsOff { get; set; }
+        public VASS.CellValueLiteral EnableGrid { get; set; }
+        public VASS.CellValueLiteral LineAdjustFrom { get; set; }
+        public VASS.CellValueLiteral LineAdjustTo { get; set; }
+        public VASS.CellValueLiteral LineJumpCode { get; set; }
+        public VASS.CellValueLiteral LineJumpFactorX { get; set; }
+        public VASS.CellValueLiteral LineJumpFactorY { get; set; }
+        public VASS.CellValueLiteral LineJumpStyle { get; set; }
+        public VASS.CellValueLiteral LineRouteExt { get; set; }
+        public VASS.CellValueLiteral LineToLineX { get; set; }
+        public VASS.CellValueLiteral LineToLineY { get; set; }
+        public VASS.CellValueLiteral LineToNodeX { get; set; }
+        public VASS.CellValueLiteral LineToNodeY { get; set; }
+        public VASS.CellValueLiteral LineJumpDirX { get; set; }
+        public VASS.CellValueLiteral LineJumpDirY { get; set; }
+        public VASS.CellValueLiteral PageShapeSplit { get; set; }
+        public VASS.CellValueLiteral PlaceDepth { get; set; }
+        public VASS.CellValueLiteral PlaceFlip { get; set; }
+        public VASS.CellValueLiteral PlaceStyle { get; set; }
+        public VASS.CellValueLiteral PlowCode { get; set; }
+        public VASS.CellValueLiteral ResizePage { get; set; }
+        public VASS.CellValueLiteral RouteStyle { get; set; }
+        public VASS.CellValueLiteral AvoidPageBreaks { get; set; } // new in visio 2010
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutEnableGrid, this.EnableGrid);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineAdjustFrom, this.LineAdjustFrom);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineJumpFactorX, this.LineJumpFactorX);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineJumpFactorY, this.LineJumpFactorY);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineToLineX, this.LineToLineX);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineToLineY, this.LineToLineY);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutPlowCode, this.PlowCode);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutResizePage, this.ResizePage);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutRouteStyle, this.RouteStyle);
-                yield return SrcValuePair.Create(SrcConstants.PageLayoutAvoidPageBreaks, this.AvoidPageBreaks);
+
+                yield return this.Create(nameof(this.AvenueSizeX), VASS.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX);
+                yield return this.Create(nameof(this.AvenueSizeY), VASS.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY);
+                yield return this.Create(nameof(this.BlockSizeX), VASS.SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX);
+                yield return this.Create(nameof(this.BlockSizeY), VASS.SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY);
+                yield return this.Create(nameof(this.CtrlAsInput), VASS.SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput);
+                yield return this.Create(nameof(this.DynamicsOff), VASS.SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff);
+                yield return this.Create(nameof(this.EnableGrid), VASS.SrcConstants.PageLayoutEnableGrid, this.EnableGrid);
+                yield return this.Create(nameof(this.LineAdjustFrom), VASS.SrcConstants.PageLayoutLineAdjustFrom, this.LineAdjustFrom);
+                yield return this.Create(nameof(this.LineAdjustTo), VASS.SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo);
+                yield return this.Create(nameof(this.LineJumpCode), VASS.SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode);
+                yield return this.Create(nameof(this.LineJumpFactorX), VASS.SrcConstants.PageLayoutLineJumpFactorX, this.LineJumpFactorX);
+                yield return this.Create(nameof(this.LineJumpFactorY), VASS.SrcConstants.PageLayoutLineJumpFactorY, this.LineJumpFactorY);
+                yield return this.Create(nameof(this.LineJumpStyle), VASS.SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle);
+                yield return this.Create(nameof(this.LineRouteExt), VASS.SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt);
+                yield return this.Create(nameof(this.LineToLineX), VASS.SrcConstants.PageLayoutLineToLineX, this.LineToLineX);
+                yield return this.Create(nameof(this.LineToLineY), VASS.SrcConstants.PageLayoutLineToLineY, this.LineToLineY);
+                yield return this.Create(nameof(this.LineToNodeX), VASS.SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX);
+                yield return this.Create(nameof(this.LineToNodeY), VASS.SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY);
+                yield return this.Create(nameof(this.LineJumpDirX), VASS.SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX);
+                yield return this.Create(nameof(this.LineJumpDirY), VASS.SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY);
+                yield return this.Create(nameof(this.PageShapeSplit), VASS.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit);
+                yield return this.Create(nameof(this.PlaceDepth), VASS.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth);
+                yield return this.Create(nameof(this.PlaceFlip), VASS.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip);
+                yield return this.Create(nameof(this.PlaceStyle), VASS.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle);
+                yield return this.Create(nameof(this.PlowCode), VASS.SrcConstants.PageLayoutPlowCode, this.PlowCode);
+                yield return this.Create(nameof(this.ResizePage), VASS.SrcConstants.PageLayoutResizePage, this.ResizePage);
+                yield return this.Create(nameof(this.RouteStyle), VASS.SrcConstants.PageLayoutRouteStyle, this.RouteStyle);
+                yield return this.Create(nameof(this.AvoidPageBreaks), VASS.SrcConstants.PageLayoutAvoidPageBreaks, this.AvoidPageBreaks);
+
             }
         }
 
-        public static PageLayoutCells GetCells(Microsoft.Office.Interop.Visio.Shape shape, CellValueType type)
+        public static PageLayoutCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            var reader = PageLayoutCells_lazy_builder.Value;
+            return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageLayoutCellsReader> lazy_query = new System.Lazy<PageLayoutCellsReader>();
+        private static readonly System.Lazy<PageLayoutCellsBuilder> PageLayoutCells_lazy_builder = new System.Lazy<PageLayoutCellsBuilder>();
 
-        class PageLayoutCellsReader : ReaderSingleRow<PageLayoutCells>
+
+        class PageLayoutCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageLayoutCells>
         {
-            public CellColumn AvenueSizeX { get; set; }
-            public CellColumn AvenueSizeY { get; set; }
-            public CellColumn BlockSizeX { get; set; }
-            public CellColumn BlockSizeY { get; set; }
-            public CellColumn ControlAsInput { get; set; }
-            public CellColumn DynamicsOff { get; set; }
-            public CellColumn EnableGrid { get; set; }
-            public CellColumn LineAdjustFrom { get; set; }
-            public CellColumn LineAdjustTo { get; set; }
-            public CellColumn LineJumpCode { get; set; }
-            public CellColumn LineJumpFactorX { get; set; }
-            public CellColumn LineJumpFactorY { get; set; }
-            public CellColumn LineJumpStyle { get; set; }
-            public CellColumn LineRouteExt { get; set; }
-            public CellColumn LineToLineX { get; set; }
-            public CellColumn LineToLineY { get; set; }
-            public CellColumn LineToNodeX { get; set; }
-            public CellColumn LineToNodeY { get; set; }
-            public CellColumn LineJumpDirX { get; set; }
-            public CellColumn LineJumpDirY { get; set; }
-            public CellColumn ShapeSplit { get; set; }
-            public CellColumn PlaceDepth { get; set; }
-            public CellColumn PlaceFlip { get; set; }
-            public CellColumn PlaceStyle { get; set; }
-            public CellColumn PlowCode { get; set; }
-            public CellColumn ResizePage { get; set; }
-            public CellColumn RouteStyle { get; set; }
-            public CellColumn AvoidPageBreaks { get; set; }
-
-            public PageLayoutCellsReader()
+            public PageLayoutCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
-                this.AvenueSizeX = this.query.Columns.Add(SrcConstants.PageLayoutAvenueSizeX, nameof(this.AvenueSizeX));
-                this.AvenueSizeY = this.query.Columns.Add(SrcConstants.PageLayoutAvenueSizeY, nameof(this.AvenueSizeY));
-                this.BlockSizeX = this.query.Columns.Add(SrcConstants.PageLayoutBlockSizeX, nameof(this.BlockSizeX));
-                this.BlockSizeY = this.query.Columns.Add(SrcConstants.PageLayoutBlockSizeY, nameof(this.BlockSizeY));
-                this.ControlAsInput = this.query.Columns.Add(SrcConstants.PageLayoutControlAsInput, nameof(this.ControlAsInput));
-                this.DynamicsOff = this.query.Columns.Add(SrcConstants.PageLayoutDynamicsOff, nameof(this.DynamicsOff));
-                this.EnableGrid = this.query.Columns.Add(SrcConstants.PageLayoutEnableGrid, nameof(this.EnableGrid));
-                this.LineAdjustFrom = this.query.Columns.Add(SrcConstants.PageLayoutLineAdjustFrom, nameof(this.LineAdjustFrom));
-                this.LineAdjustTo = this.query.Columns.Add(SrcConstants.PageLayoutLineAdjustTo, nameof(this.LineAdjustTo));
-                this.LineJumpCode = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpCode, nameof(this.LineJumpCode));
-                this.LineJumpFactorX = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpFactorX, nameof(this.LineJumpFactorX));
-                this.LineJumpFactorY = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpFactorY, nameof(this.LineJumpFactorY));
-                this.LineJumpStyle = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpStyle, nameof(this.LineJumpStyle));
-                this.LineRouteExt = this.query.Columns.Add(SrcConstants.PageLayoutLineRouteExt, nameof(this.LineRouteExt));
-                this.LineToLineX = this.query.Columns.Add(SrcConstants.PageLayoutLineToLineX, nameof(this.LineToLineX));
-                this.LineToLineY = this.query.Columns.Add(SrcConstants.PageLayoutLineToLineY, nameof(this.LineToLineY));
-                this.LineToNodeX = this.query.Columns.Add(SrcConstants.PageLayoutLineToNodeX, nameof(this.LineToNodeX));
-                this.LineToNodeY = this.query.Columns.Add(SrcConstants.PageLayoutLineToNodeY, nameof(this.LineToNodeY));
-                this.LineJumpDirX = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpDirX, nameof(this.LineJumpDirX));
-                this.LineJumpDirY = this.query.Columns.Add(SrcConstants.PageLayoutLineJumpDirY, nameof(this.LineJumpDirY));
-                this.ShapeSplit = this.query.Columns.Add(SrcConstants.PageLayoutShapeSplit, nameof(this.ShapeSplit));
-                this.PlaceDepth = this.query.Columns.Add(SrcConstants.PageLayoutPlaceDepth, nameof(this.PlaceDepth));
-                this.PlaceFlip = this.query.Columns.Add(SrcConstants.PageLayoutPlaceFlip, nameof(this.PlaceFlip));
-                this.PlaceStyle = this.query.Columns.Add(SrcConstants.PageLayoutPlaceStyle, nameof(this.PlaceStyle));
-                this.PlowCode = this.query.Columns.Add(SrcConstants.PageLayoutPlowCode, nameof(this.PlowCode));
-                this.ResizePage = this.query.Columns.Add(SrcConstants.PageLayoutResizePage, nameof(this.ResizePage));
-                this.RouteStyle = this.query.Columns.Add(SrcConstants.PageLayoutRouteStyle, nameof(this.RouteStyle));
-                this.AvoidPageBreaks = this.query.Columns.Add(SrcConstants.PageLayoutAvoidPageBreaks, nameof(this.AvoidPageBreaks));
             }
 
 
-            public override PageLayoutCells ToCellGroup(Utilities.ArraySegment<string> row)
+            public override PageLayoutCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new PageLayoutCells();
-                cells.AvenueSizeX = row[this.AvenueSizeX];
-                cells.AvenueSizeY = row[this.AvenueSizeY];
-                cells.BlockSizeX = row[this.BlockSizeX];
-                cells.BlockSizeY = row[this.BlockSizeY];
-                cells.CtrlAsInput = row[this.ControlAsInput];
-                cells.DynamicsOff = row[this.DynamicsOff];
-                cells.EnableGrid = row[this.EnableGrid];
-                cells.LineAdjustFrom = row[this.LineAdjustFrom];
-                cells.LineAdjustTo = row[this.LineAdjustTo];
-                cells.LineJumpCode = row[this.LineJumpCode];
-                cells.LineJumpFactorX = row[this.LineJumpFactorX];
-                cells.LineJumpFactorY = row[this.LineJumpFactorY];
-                cells.LineJumpStyle = row[this.LineJumpStyle];
-                cells.LineRouteExt = row[this.LineRouteExt];
-                cells.LineToLineX = row[this.LineToLineX];
-                cells.LineToLineY = row[this.LineToLineY];
-                cells.LineToNodeX = row[this.LineToNodeX];
-                cells.LineToNodeY = row[this.LineToNodeY];
-                cells.LineJumpDirX = row[this.LineJumpDirX];
-                cells.LineJumpDirY = row[this.LineJumpDirY];
-                cells.PageShapeSplit = row[this.ShapeSplit];
-                cells.PlaceDepth = row[this.PlaceDepth];
-                cells.PlaceFlip = row[this.PlaceFlip];
-                cells.PlaceStyle = row[this.PlaceStyle];
-                cells.PlowCode = row[this.PlowCode];
-                cells.ResizePage = row[this.ResizePage];
-                cells.RouteStyle = row[this.RouteStyle];
-                cells.AvoidPageBreaks = row[this.AvoidPageBreaks];
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+
+
+                cells.AvenueSizeX = getcellvalue(nameof(PageLayoutCells.AvenueSizeX));
+                cells.AvenueSizeY = getcellvalue(nameof(PageLayoutCells.AvenueSizeY));
+                cells.BlockSizeX = getcellvalue(nameof(PageLayoutCells.BlockSizeX));
+                cells.BlockSizeY = getcellvalue(nameof(PageLayoutCells.BlockSizeY));
+                cells.CtrlAsInput = getcellvalue(nameof(PageLayoutCells.CtrlAsInput));
+                cells.DynamicsOff = getcellvalue(nameof(PageLayoutCells.DynamicsOff));
+                cells.EnableGrid = getcellvalue(nameof(PageLayoutCells.EnableGrid));
+                cells.LineAdjustFrom = getcellvalue(nameof(PageLayoutCells.LineAdjustFrom));
+                cells.LineAdjustTo = getcellvalue(nameof(PageLayoutCells.LineAdjustTo));
+                cells.LineJumpCode = getcellvalue(nameof(PageLayoutCells.LineJumpCode));
+                cells.LineJumpFactorX = getcellvalue(nameof(PageLayoutCells.LineJumpFactorX));
+                cells.LineJumpFactorY = getcellvalue(nameof(PageLayoutCells.LineJumpFactorY));
+                cells.LineJumpStyle = getcellvalue(nameof(PageLayoutCells.LineJumpStyle));
+                cells.LineRouteExt = getcellvalue(nameof(PageLayoutCells.LineRouteExt));
+                cells.LineToLineX = getcellvalue(nameof(PageLayoutCells.LineToLineX));
+                cells.LineToLineY = getcellvalue(nameof(PageLayoutCells.LineToLineY));
+                cells.LineToNodeX = getcellvalue(nameof(PageLayoutCells.LineToNodeX));
+                cells.LineToNodeY = getcellvalue(nameof(PageLayoutCells.LineToNodeY));
+                cells.LineJumpDirX = getcellvalue(nameof(PageLayoutCells.LineJumpDirX));
+                cells.LineJumpDirY = getcellvalue(nameof(PageLayoutCells.LineJumpDirY));
+                cells.PageShapeSplit = getcellvalue(nameof(PageLayoutCells.PageShapeSplit));
+                cells.PlaceDepth = getcellvalue(nameof(PageLayoutCells.PlaceDepth));
+                cells.PlaceFlip = getcellvalue(nameof(PageLayoutCells.PlaceFlip));
+                cells.PlaceStyle = getcellvalue(nameof(PageLayoutCells.PlaceStyle));
+                cells.PlowCode = getcellvalue(nameof(PageLayoutCells.PlowCode));
+                cells.ResizePage = getcellvalue(nameof(PageLayoutCells.ResizePage));
+                cells.RouteStyle = getcellvalue(nameof(PageLayoutCells.RouteStyle));
+                cells.AvoidPageBreaks = getcellvalue(nameof(PageLayoutCells.AvoidPageBreaks));
                 return cells;
             }
         }

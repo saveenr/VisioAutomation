@@ -41,7 +41,7 @@ namespace VisioAutomation.DocumentAnalysis
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var edges = ConnectionAnalyzer.GetDirectedEdgesRaw(page);
+            var edges = ConnectionAnalyzer._get_directed_edges_raw(page);
 
             if (flag.DirectionSource == DirectionSource.UseConnectionOrder)
             {
@@ -67,8 +67,8 @@ namespace VisioAutomation.DocumentAnalysis
             int connector_index = 0;
             foreach (var e in edges)
             {
-                int beginarrow = arrow_table[connector_index].Cells[col_beginarrow];
-                int endarrow = arrow_table[connector_index].Cells[col_endarrow];
+                int beginarrow = arrow_table[connector_index][col_beginarrow];
+                int endarrow = arrow_table[connector_index][col_endarrow];
 
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
@@ -120,7 +120,7 @@ namespace VisioAutomation.DocumentAnalysis
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        private static List<ConnectorEdge> GetDirectedEdgesRaw(IVisio.Page page)
+        private static List<ConnectorEdge> _get_directed_edges_raw(IVisio.Page page)
         {
             if (page == null)
             {

@@ -3,7 +3,7 @@ using VisioScripting.Builders;
 using SXL = System.Xml.Linq;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioModel
 {
     [SMA.Cmdlet(SMA.VerbsData.Import, Nouns.VisioModel)]
     public class ImportVisioModel : VisioCmdlet
@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands
             if (root.Name == "directedgraph")
             {
                 this.WriteVerbose("Loading as a Directed Graph");
-                var dg_model = DirectedGraphBuilder.LoadFromXML(
+                var dg_model = DirectedGraphBuilder.LoadFromXml(
                     this.Client,
                     xmldoc);
                 this.WriteObject(dg_model);               

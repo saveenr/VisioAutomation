@@ -1,89 +1,69 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
-
 
 namespace VisioAutomation.Shapes
 {
-    public class ControlCells : CellGroupMultiRow
+    public class ControlCells : VASS.CellGroups.CellGroup
     {
-        public CellValueLiteral CanGlue { get; set; }
-        public CellValueLiteral Tip { get; set; }
-        public CellValueLiteral X { get; set; }
-        public CellValueLiteral Y { get; set; }
-        public CellValueLiteral YBehavior { get; set; }
-        public CellValueLiteral XBehavior { get; set; }
-        public CellValueLiteral XDynamics { get; set; }
-        public CellValueLiteral YDynamics { get; set; }
+        public VASS.CellValueLiteral CanGlue { get; set; }
+        public VASS.CellValueLiteral Tip { get; set; }
+        public VASS.CellValueLiteral X { get; set; }
+        public VASS.CellValueLiteral Y { get; set; }
+        public VASS.CellValueLiteral YBehavior { get; set; }
+        public VASS.CellValueLiteral XBehavior { get; set; }
+        public VASS.CellValueLiteral XDynamics { get; set; }
+        public VASS.CellValueLiteral YDynamics { get; set; }
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.ControlCanGlue, this.CanGlue);
-                yield return SrcValuePair.Create(SrcConstants.ControlTip, this.Tip);
-                yield return SrcValuePair.Create(SrcConstants.ControlX, this.X);
-                yield return SrcValuePair.Create(SrcConstants.ControlY, this.Y);
-                yield return SrcValuePair.Create(SrcConstants.ControlYBehavior, this.YBehavior);
-                yield return SrcValuePair.Create(SrcConstants.ControlXBehavior, this.XBehavior);
-                yield return SrcValuePair.Create(SrcConstants.ControlXDynamics, this.XDynamics);
-                yield return SrcValuePair.Create(SrcConstants.ControlYDynamics, this.YDynamics);
+                yield return this.Create(nameof(this.CanGlue), VASS.SrcConstants.ControlCanGlue, this.CanGlue);
+                yield return this.Create(nameof(this.Tip), VASS.SrcConstants.ControlTip, this.Tip);
+                yield return this.Create(nameof(this.X), VASS.SrcConstants.ControlX, this.X);
+                yield return this.Create(nameof(this.Y), VASS.SrcConstants.ControlY, this.Y);
+                yield return this.Create(nameof(this.YBehavior), VASS.SrcConstants.ControlYBehavior, this.YBehavior);
+                yield return this.Create(nameof(this.XBehavior), VASS.SrcConstants.ControlXBehavior, this.XBehavior);
+                yield return this.Create(nameof(this.XDynamics), VASS.SrcConstants.ControlXDynamics, this.XDynamics);
+                yield return this.Create(nameof(this.YDynamics), VASS.SrcConstants.ControlYDynamics, this.YDynamics);
             }
-        }
-
-        public static List<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
-        {
-            var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
-        }
-
-        public static List<ControlCells> GetCells(IVisio.Shape shape, CellValueType type)
-        {
-            var query = lazy_query.Value;
-            return query.GetCells(shape, type);
         }
         
-        private static readonly System.Lazy<ControlCellsReader> lazy_query = new System.Lazy<ControlCellsReader>();
-
-        class ControlCellsReader : ReaderMultiRow<ControlCells>
+        public static List<ControlCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            public SectionQueryColumn CanGlue { get; set; }
-            public SectionQueryColumn Tip { get; set; }
-            public SectionQueryColumn X { get; set; }
-            public SectionQueryColumn Y { get; set; }
-            public SectionQueryColumn YBehavior { get; set; }
-            public SectionQueryColumn XBehavior { get; set; }
-            public SectionQueryColumn XDynamics { get; set; }
-            public SectionQueryColumn YDynamics { get; set; }
+            var reader = ControlCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(shape, type);
+        }
 
-            public ControlCellsReader()
+        public static List<List<ControlCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        {
+            var reader = ControlCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(page, shapeidpairs, type);
+        }
+
+
+        private static readonly System.Lazy<ControlCellsBuilder> ControlCells_lazy_builder = new System.Lazy<ControlCellsBuilder>();
+
+        class ControlCellsBuilder : VASS.CellGroups.CellGroupBuilder<ControlCells>
+        {
+            public ControlCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionControls);
-
-                this.CanGlue = sec.Columns.Add(SrcConstants.ControlCanGlue, nameof(this.CanGlue));
-                this.Tip = sec.Columns.Add(SrcConstants.ControlTip, nameof(this.Tip));
-                this.X = sec.Columns.Add(SrcConstants.ControlX, nameof(this.X));
-                this.Y = sec.Columns.Add(SrcConstants.ControlY, nameof(this.Y));
-                this.YBehavior = sec.Columns.Add(SrcConstants.ControlYBehavior, nameof(this.YBehavior));
-                this.XBehavior = sec.Columns.Add(SrcConstants.ControlXBehavior, nameof(this.XBehavior));
-                this.XDynamics = sec.Columns.Add(SrcConstants.ControlXDynamics, nameof(this.XDynamics));
-                this.YDynamics = sec.Columns.Add(SrcConstants.ControlYDynamics, nameof(this.YDynamics));
-
             }
 
-            public override ControlCells ToCellGroup(Utilities.ArraySegment<string> row)
+            public override ControlCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new ControlCells();
-                cells.CanGlue = row[this.CanGlue];
-                cells.Tip = row[this.Tip];
-                cells.X = row[this.X];
-                cells.Y = row[this.Y];
-                cells.YBehavior = row[this.YBehavior];
-                cells.XBehavior = row[this.XBehavior];
-                cells.XDynamics = row[this.XDynamics];
-                cells.YDynamics = row[this.YDynamics];
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+
+                cells.CanGlue = getcellvalue(nameof(ControlCells.CanGlue));
+                cells.Tip = getcellvalue(nameof(ControlCells.Tip));
+                cells.X = getcellvalue(nameof(ControlCells.X));
+                cells.Y = getcellvalue(nameof(ControlCells.Y));
+                cells.YBehavior = getcellvalue(nameof(ControlCells.YBehavior));
+                cells.XBehavior = getcellvalue(nameof(ControlCells.XBehavior));
+                cells.XDynamics = getcellvalue(nameof(ControlCells.XDynamics));
+                cells.YDynamics = getcellvalue(nameof(ControlCells.YDynamics));
                 return cells;
             }
         }

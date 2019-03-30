@@ -40,10 +40,10 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            SelectionCommands.InvertSelection(cmdtarget.Application.ActiveWindow);
+            SelectionCommands._invert_selection(cmdtarget.Application.ActiveWindow);
         }
 
-        private static void InvertSelection(IVisio.Window window)
+        private static void _invert_selection(IVisio.Window window)
         {
             if (window == null)
             {
@@ -148,12 +148,12 @@ namespace VisioScripting.Commands
 
             if (layername == null)
             {
-                throw new System.ArgumentNullException("Layer name cannot be null", nameof(layername));
+                throw new System.ArgumentNullException(nameof(layername), "Layer name cannot be null" );
             }
 
             if (layername.Length < 1)
             {
-                throw new System.ArgumentException("Layer name cannot be empty", nameof(layername));
+                throw new System.ArgumentOutOfRangeException(nameof(layername), "Layer name cannot be empty");
             }
 
             var layer = this._client.Layer.FindLayersOnActivePageByName(layername);

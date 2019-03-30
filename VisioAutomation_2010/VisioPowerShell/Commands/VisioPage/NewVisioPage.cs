@@ -1,7 +1,7 @@
 using System.Globalization;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioPage
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioPage)]
     public class NewVisioPage : VisioCmdlet
@@ -67,7 +67,7 @@ namespace VisioPowerShell.Commands
                 this.Cells.Apply(writer, (short)target_pagesheet_id);
 
                 this.Client.Output.WriteVerbose("Updating Cells for new page");
-                writer.Commit(page);
+                writer.CommitFormulas(page);
             }
 
             this.WriteObject(page);

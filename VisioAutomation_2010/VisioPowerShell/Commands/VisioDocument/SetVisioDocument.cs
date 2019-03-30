@@ -1,7 +1,7 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioDocument
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioDocument)]
     public class SetVisioDocument : VisioCmdlet

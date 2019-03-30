@@ -1,8 +1,8 @@
-using SMA = System.Management.Automation;
 using VisioAutomation.Shapes;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioControl
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioControl)]
     public class NewVisioControl : VisioCmdlet

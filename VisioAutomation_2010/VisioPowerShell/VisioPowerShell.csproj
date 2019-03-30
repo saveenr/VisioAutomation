@@ -84,8 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DiagramModelType.cs" />
-    <Compile Include="Models\PageLayoutType.cs" />
     <Compile Include="Models\DocumentType.cs" />
     <Compile Include="Commands\VisioShape\LockVisioShape.cs" />
     <Compile Include="Commands\VisioShape\UnlockVisioShape.cs" />
@@ -98,7 +96,6 @@
     <Compile Include="Commands\VisioShapeCells\NewVisioShapeCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />
-    <Compile Include="Models\CellValueDictionary.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Commands\VisioHyperlink\GetVisioHyperlink.cs" />
     <Compile Include="Models\Hyperlink.cs" />
@@ -110,8 +107,8 @@
     <Compile Include="Commands\VisioContainer\NewVisioContainer.cs" />
     <Compile Include="Commands\VisioMaster\OpenVisioMaster.cs" />
     <Compile Include="Models\LockStatus.cs" />
-    <Compile Include="Models\NamedDictionary.cs" />
-    <Compile Include="Models\NamedCellDictionary.cs" />
+    <Compile Include="Models\NameValueDictionary.cs" />
+    <Compile Include="Models\NameCellDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\ShapeCells.cs" />
     <Compile Include="Models\UserDefinedCell.cs" />
@@ -152,7 +149,7 @@
     <Compile Include="Commands\VisioDocument\OpenVisioDocument.cs" />
     <Compile Include="Commands\VisioControl\RemoveVisioControl.cs" />
     <Compile Include="Commands\VisioUserDefinedCell\SetVisioUserDefinedCell.cs" />
-    <Compile Include="Commands\VisioShape\ConnectVisioShape.cs" />
+    <Compile Include="Commands\VisioShape\NewVisioConnection.cs" />
     <Compile Include="Commands\VisioCustomProperty\RemoveVisioCustomProperty.cs" />
     <Compile Include="Commands\VisioPage\CopyVisioPage.cs" />
     <Compile Include="Commands\VisioPage\MeasureVisioPage.cs" />

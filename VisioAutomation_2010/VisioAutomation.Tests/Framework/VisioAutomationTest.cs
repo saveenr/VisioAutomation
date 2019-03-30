@@ -16,7 +16,7 @@ namespace VisioAutomation_Tests
 
         public IVisio.Application GetVisioApplication()
         {
-            var app = VisioAutomationTest.app_ref.GetVisioApplication();
+            var app = app_ref.GetVisioApplication();
             return app;
         }
 
@@ -44,13 +44,14 @@ namespace VisioAutomation_Tests
             var documents = app.Documents;
             if (documents.Count < 1)
             {
-                documents.Add(string.Empty);
+                var doc = documents.Add(string.Empty);
+                doc.AutoRecover = false;
             }
             var active_document = app.ActiveDocument;
             var pages = active_document.Pages;
             var page = pages.Add();
             page.Background = 0;
-            VisioAutomationTest.SetPageSize(page, s);
+            SetPageSize(page, s);
 
             return page;
         }
@@ -88,9 +89,11 @@ namespace VisioAutomation_Tests
             var col_w = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth,"Width");
             var col_h = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight,"Height");
 
-            var table = query.GetResults<double>(shape);
-            double w = table.Cells[col_w];
-            double h = table.Cells[col_h];
+            var cellqueryresult = query.GetResults<double>(shape);
+
+            var row = cellqueryresult[0];
+            double w = row[col_w];
+            double h = row[col_h];
             var size = new VisioAutomation.Geometry.Size(w, h);
             return size;
         }
@@ -144,10 +147,10 @@ namespace VisioAutomation_Tests
             var page_sheet = page.PageSheet;
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
-            writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
+            writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
+            writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            writer.Commit(page_sheet);
+            writer.CommitFormulas(page_sheet);
         }
 
         public static VisioAutomation.Geometry.Size GetPageSize(IVisio.Page page)
@@ -161,9 +164,10 @@ namespace VisioAutomation_Tests
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, "PageHeight");
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
 
-            var results = query.GetResults<double>(page.PageSheet);
-            double height = results.Cells[col_height];
-            double width = results.Cells[col_width];
+            var cellqueryresults = query.GetResults<double>(page.PageSheet);
+            var row = cellqueryresults[0];
+            double height = row[col_height];
+            double width = row[col_width];
             var s = new VisioAutomation.Geometry.Size(width, height);
             return s;
         }
@@ -179,12 +183,12 @@ namespace VisioAutomation_Tests
         {
             get
             {
-                if (VisioAutomationTest.test_result_out_folder == null)
+                if (test_result_out_folder == null)
                 {
                     var asm = System.Reflection.Assembly.GetExecutingAssembly();
-                    VisioAutomationTest.test_result_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
+                    test_result_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
                 }
-                return VisioAutomationTest.test_result_out_folder;
+                return test_result_out_folder;
             }
         }
 

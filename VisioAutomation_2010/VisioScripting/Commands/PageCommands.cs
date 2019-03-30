@@ -71,9 +71,10 @@ namespace VisioScripting.Commands
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
 
-            var results = query.GetResults<double>(pages[0].PageSheet);
-            double height = results.Cells[col_height];
-            double width = results.Cells[col_width];
+            var cellqueryresult = query.GetResults<double>(pages[0].PageSheet);
+            var row = cellqueryresult[0];
+            double height = row[col_height];
+            double width = row[col_width];
             var s = new VisioAutomation.Geometry.Size(width, height);
             return s;
         }
@@ -237,11 +238,11 @@ namespace VisioScripting.Commands
                     double new_width = old_size.Height;
 
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_width);
-                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
-                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
+                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_width);
+                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
+                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
 
-                    writer.Commit(page.PageSheet);
+                    writer.CommitFormulas(page.PageSheet);
                 }
 
             }
@@ -269,9 +270,9 @@ namespace VisioScripting.Commands
                 foreach (var page in pages)
                 {
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                    cells.SetFormulas(writer);
+                    writer.SetValues(cells);
                     writer.BlastGuards = true;
-                    writer.Commit(page);
+                    writer.CommitFormulas(page);
                 }
             }
         }
@@ -286,9 +287,9 @@ namespace VisioScripting.Commands
                 {
                     var page_sheet = page.PageSheet;
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
-                    writer.SetFormula(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
-                    writer.Commit(page_sheet);
+                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
+                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
+                    writer.CommitFormulas(page_sheet);
                 }
             }
         }

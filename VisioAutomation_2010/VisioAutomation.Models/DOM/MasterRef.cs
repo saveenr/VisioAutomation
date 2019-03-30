@@ -27,7 +27,7 @@ namespace VisioAutomation.Models.Dom
                 throw new System.ArgumentNullException(nameof(mastername));
             }
 
-            if (MasterRef.HasStencilExtension(mastername))
+            if (MasterRef._has_stencil_extension(mastername))
             {
                 throw new System.ArgumentException("Master name ends with .VSS or .VSSX");
 
@@ -35,7 +35,7 @@ namespace VisioAutomation.Models.Dom
                 // so we make sure to check for it
             }
 
-            if (this.StencilName != null && (!MasterRef.HasStencilExtension(stencilname)))
+            if (this.StencilName != null && (!MasterRef._has_stencil_extension(stencilname)))
             {                    
                     throw new System.ArgumentException("Stencil name does not end with .VSS");
 
@@ -51,12 +51,12 @@ namespace VisioAutomation.Models.Dom
             this.StencilName = stencilname;
         }
 
-        private static bool HasStencilExtension(string s)
+        private static bool _has_stencil_extension(string s)
         {
-            return EndsWithCaseInsensitive(s,".vss") || EndsWithCaseInsensitive(s,".vssx");
+            return _ends_with_case_insensitive(s,".vss") || _ends_with_case_insensitive(s,".vssx");
         }
 
-        private static bool EndsWithCaseInsensitive(string s, string pat)
+        private static bool _ends_with_case_insensitive(string s, string pat)
         {
             return s.EndsWith(pat, System.StringComparison.InvariantCultureIgnoreCase);
         }

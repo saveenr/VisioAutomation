@@ -12,7 +12,7 @@ namespace VisioAutomationSamples
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
-            var curve0 = VA.Geometry.BezierCurve.FromEllipse(
+            var curve0 = VA.Models.Geometry.BezierCurve.FromEllipse(
                 new VA.Geometry.Point(5, 4),
                 new VA.Geometry.Size(1, 1));
 
@@ -26,7 +26,7 @@ namespace VisioAutomationSamples
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
-            var curve0 = VA.Geometry.BezierCurve.FromEllipse(
+            var curve0 = VA.Models.Geometry.BezierCurve.FromEllipse(
                 new VA.Geometry.Point(2, 4),
                 new VA.Geometry.Size(1, 0.5));
             var s0 = page.DrawBezier(curve0.ControlPoints);
@@ -77,7 +77,7 @@ namespace VisioAutomationSamples
             var degree = 3;
             var weights = controlpoints.Select(i => 1.0).ToList();
 
-            var s0 = page.DrawNURBS(controlpoints, knots, weights, degree);
+            var s0 = page.DrawNurbs(controlpoints, knots, weights, degree);
             s0.Text = "Generic NURBS shape";
         }
 
@@ -107,7 +107,7 @@ namespace VisioAutomationSamples
             var degree = 3;
             var Weights = controlpoints.Select(i => 1.0).ToList();
 
-            var s0 = page.DrawNURBS(controlpoints, knots, Weights, degree);
+            var s0 = page.DrawNurbs(controlpoints, knots, Weights, degree);
             s0.Text = "Generic NURBS shape";
         }
     }

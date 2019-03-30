@@ -48,10 +48,10 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException(msg);
             }
 
-            this.ExportSelectionToHtml(selection, filename, s => this._client.Output.WriteVerbose(s));
+            this._export_selection_to_html(selection, filename, s => this._client.Output.WriteVerbose(s));
         }
 
-        private void ExportSelectionToHtml(IVisio.Selection selection, string filename, System.Action<string> export_log)
+        private void _export_selection_to_html(IVisio.Selection selection, string filename, System.Action<string> export_log)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

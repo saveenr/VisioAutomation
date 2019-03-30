@@ -1,10 +1,11 @@
 using System.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Application.Logging
 {
     public class LoggingHelper
     {
-        public static string GetXmlErrorLogFilename(Microsoft.Office.Interop.Visio.Application app)
+        public static string GetXmlErrorLogFilename(IVisio.Application app)
         {
             // the location of the xml error log file is specific to the user
             // we need to retrieve it from the registry

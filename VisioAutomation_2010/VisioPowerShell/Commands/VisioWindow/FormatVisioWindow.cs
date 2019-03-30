@@ -1,6 +1,6 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioWindow
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Format, Nouns.VisioWindow)]
     public class FormatVisioWindow : VisioCmdlet

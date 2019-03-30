@@ -20,7 +20,7 @@ namespace VisioAutomation.Application.Logging
 
             var state = LogState.Start;
 
-            var lines = XmlErrorLog.GetLines(filename);
+            var lines = XmlErrorLog._get_lines(filename);
             lines.Reverse();
 
             var stack = new Stack<string>(lines);
@@ -39,7 +39,7 @@ namespace VisioAutomation.Application.Logging
 
                     if (line.StartsWith("Open") || line.StartsWith("Insert"))
                     {
-                        state = this.StartNewSession(line);
+                        state = this._start_new_session(line);
                     }
                     else
                     {
@@ -53,7 +53,7 @@ namespace VisioAutomation.Application.Logging
                         continue;
                     }
 
-                    string source = GetStringAfterStartsWith(line, "Source:");
+                    string source = _get_string_after_starts_with(line, "Source:");
 
                     if (source != null)
                     {
@@ -75,16 +75,16 @@ namespace VisioAutomation.Application.Logging
                     }
                     else if (line.EndsWith("End Session"))
                     {
-                        state = this.TerminateCurrentSession(line);
+                        state = this._terminate_current_session(line);
                     }
                     else if (line.StartsWith("Open") || line.StartsWith("Insert"))
                     {
-                        state = this.TerminateCurrentSession(line);
+                        state = this._terminate_current_session(line);
                         stack.Push(line);
                     }
                     else if (line.StartsWith("["))
                     {
-                        state = this.StartRecord(line, state);
+                        state = this._start_record(line, state);
                     }
                     else
                     {
@@ -99,8 +99,8 @@ namespace VisioAutomation.Application.Logging
                     }
                     else
                     {
-                        string context = GetStringAfterStartsWith(line, "Context:");
-                        string description = GetStringAfterStartsWith(line, "Description:");
+                        string context = _get_string_after_starts_with(line, "Context:");
+                        string description = _get_string_after_starts_with(line, "Description:");
 
                         if (context != null)
                         {
@@ -129,7 +129,7 @@ namespace VisioAutomation.Application.Logging
             }
         }
 
-        private static string GetStringAfterStartsWith(string line, string text_context)
+        private static string _get_string_after_starts_with(string line, string text_context)
         {
             if (line.StartsWith(text_context))
             {
@@ -139,7 +139,7 @@ namespace VisioAutomation.Application.Logging
             return null;
         }
 
-        private LogState StartRecord(string line, LogState state)
+        private LogState _start_record(string line, LogState state)
         {
             var rec = new LogRecord();
             int n = line.IndexOf(']');
@@ -156,7 +156,7 @@ namespace VisioAutomation.Application.Logging
             return state;
         }
 
-        private LogState StartNewSession(string line)
+        private LogState _start_new_session(string line)
         {
             var session = new LogSession();
             session.StartLine = line;
@@ -168,7 +168,7 @@ namespace VisioAutomation.Application.Logging
             return LogState.InFileSession;
         }
 
-        private LogState TerminateCurrentSession(string line)
+        private LogState _terminate_current_session(string line)
         {
             var session = this.GetMostRecentSession();
             session.EndLine = line;
@@ -180,17 +180,17 @@ namespace VisioAutomation.Application.Logging
             return this.LogSessions[this.LogSessions.Count - 1];
         }
 
-        private static List<string> GetLines(string filename)
+        private static List<string> _get_lines(string filename)
         {
             var lines = new List<string>();
             using (
-                var inStream = new System.IO.FileStream(
+                var in_stream = new System.IO.FileStream(
                     filename,
                     System.IO.FileMode.Open,
                     System.IO.FileAccess.Read,
                     System.IO.FileShare.ReadWrite))
             {
-                using (var sr = new System.IO.StreamReader(inStream))
+                using (var sr = new System.IO.StreamReader(in_stream))
                 {
                     while (!sr.EndOfStream)
                     {

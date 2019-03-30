@@ -26,8 +26,9 @@ namespace VisioAutomationSamples
             s5.Text = "s5";
             s6.Text = "s6";
 
-            var stencil = page.Application.Documents.OpenStencil("basic_u.vss");
-            var connector = stencil.Masters["Dynamic Connector"];
+            var basic_stencil = page.Application.Documents.OpenStencil("basic_u.vss");
+            var connec_stencil = page.Application.Documents.OpenStencil("connec_u.vss");
+            var connector = connec_stencil.Masters["Dynamic Connector"];
 
             // connect shapes - but leave s0 alone
             var dir = IVisio.VisAutoConnectDir.visAutoConnectDirNone;

@@ -13,7 +13,7 @@ namespace VisioAutomation.Models.Documents.Forms
         private FormPage _form_page;
 
         public List<TextBlock> Blocks;
-        public Geometry.Point InsertionPoint;
+        public VisioAutomation.Geometry.Point InsertionPoint;
 
         public InteractiveRenderer(IVisio.Document doc)
         {
@@ -42,10 +42,10 @@ namespace VisioAutomation.Models.Documents.Forms
             page_print_cells.TopMargin = formpage.PageMargin.Top;
             page_print_cells.BottomMargin = formpage.PageMargin.Bottom;
 
-            page_fmt_cells.SetFormulas(writer);
-            page_fmt_cells.SetFormulas(writer);
+            writer.SetValues(page_fmt_cells);
+            writer.SetValues(page_print_cells);
 
-            writer.Commit(pagesheet);
+            writer.CommitFormulas(pagesheet);
 
             this.Reset();
             return this._page;
@@ -54,18 +54,18 @@ namespace VisioAutomation.Models.Documents.Forms
         public void Reset()
         {
             this.Blocks = new List<TextBlock>();
-            this.ResetInsertionPoint();
+            this._reset_insertion_point();
         }
 
-        private void ResetInsertionPoint()
+        private void _reset_insertion_point()
         {
-            this.InsertionPoint = new Geometry.Point(this._form_page.PageMargin.Left,
+            this.InsertionPoint = new VisioAutomation.Geometry.Point(this._form_page.PageMargin.Left,
                 this._form_page.Size.Height - this._form_page.PageMargin.Top);
         }
 
         public TextBlock AddShape(double w, double h, string text)
         {
-            var tb = new TextBlock(new Geometry.Size(w, h), text);
+            var tb = new TextBlock(new VisioAutomation.Geometry.Size(w, h), text);
             this.AddShape(tb);
             return tb;
         }
@@ -76,9 +76,9 @@ namespace VisioAutomation.Models.Documents.Forms
             this.Blocks.Add(block);
 
             // Calculate the Correct Full Rectangle
-            var ll = new Geometry.Point(this.InsertionPoint.X, this.InsertionPoint.Y - block.Size.Height);
-            var tr = new Geometry.Point(this.InsertionPoint.X + block.Size.Width, this.InsertionPoint.Y);
-            var rect = new Geometry.Rectangle(ll, tr);
+            var ll = new VisioAutomation.Geometry.Point(this.InsertionPoint.X, this.InsertionPoint.Y - block.Size.Height);
+            var tr = new VisioAutomation.Geometry.Point(this.InsertionPoint.X + block.Size.Width, this.InsertionPoint.Y);
+            var rect = new VisioAutomation.Geometry.Rectangle(ll, tr);
 
             // Draw the Shape
             var newshape = this._page.DrawRectangle(rect);
@@ -92,7 +92,7 @@ namespace VisioAutomation.Models.Documents.Forms
                 newshape.Text = block.Text;
             }
 
-            this.AdjustInsertionPoint(block.Size);
+            this._adjust_insertion_point(block.Size);
 
             return newshape;
         }
@@ -102,16 +102,17 @@ namespace VisioAutomation.Models.Documents.Forms
             var writer = new SidSrcWriter();
             foreach (var block in this.Blocks)
             {
-                block.FormatCells.SetFormulas(writer, (short)block.VisioShapeID);
-                block.TextBlockCells.SetFormulas(writer, (short)block.VisioShapeID);
-                block.ParagraphFormatCells.SetFormulas(writer, (short)block.VisioShapeID, 0);
-                block.CharacterFormatCells.SetFormulas(writer, (short)block.VisioShapeID, 0);
+                writer.SetValues((short)block.VisioShapeID , block.FormatCells);
+                writer.SetValues((short)block.VisioShapeID, block.TextBlockCells);
+
+                writer.SetValues((short)block.VisioShapeID, block.ParagraphFormatCells, 0);
+                writer.SetValues((short)block.VisioShapeID, block.CharacterFormatCells, 0);
             }
 
-            writer.Commit(this._page);
+            writer.CommitFormulas(this._page);
         }
 
-        private void AdjustInsertionPoint(Geometry.Size size)
+        private void _adjust_insertion_point(VisioAutomation.Geometry.Size size)
         {
             this.InsertionPoint = this.InsertionPoint.Add(size.Width, 0);
             this._current_line_height = System.Math.Max(this._current_line_height, size.Height);
@@ -119,26 +120,26 @@ namespace VisioAutomation.Models.Documents.Forms
 
         public void Linefeed()
         {
-            this.InsertionPoint = new Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y - this._current_line_height);
+            this.InsertionPoint = new VisioAutomation.Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y - this._current_line_height);
             this._current_line_height = 0;
         }
 
         public void Linefeed(double advance)
         {
-            this.InsertionPoint = new Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y - this._current_line_height - advance);
+            this.InsertionPoint = new VisioAutomation.Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y - this._current_line_height - advance);
             this._current_line_height = 0;
         }
 
         public void MoveRight(double advance)
         {
-            this.InsertionPoint = new Geometry.Point(this.InsertionPoint.X + advance, this.InsertionPoint.Y);
+            this.InsertionPoint = new VisioAutomation.Geometry.Point(this.InsertionPoint.X + advance, this.InsertionPoint.Y);
             
         }
 
 
         public void CarriageReturn()
         {
-            this.InsertionPoint = new Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y);
+            this.InsertionPoint = new VisioAutomation.Geometry.Point(this._form_page.PageMargin.Left, this.InsertionPoint.Y);
         }
 
         public double GetDistanceToBottomMargin()

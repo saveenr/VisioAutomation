@@ -59,10 +59,10 @@ namespace VisioAutomationSamples
             var page_sheet = page.PageSheet;
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetFormula(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
-            writer.SetFormula(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
+            writer.SetValue(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
+            writer.SetValue(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            writer.Commit(page_sheet);
+            writer.CommitFormulas(page_sheet);
         }
 
         public static VA.Geometry.Size GetPageSize(IVisio.Page page)
@@ -74,11 +74,12 @@ namespace VisioAutomationSamples
 
             var query = new CellQuery();
             var col_height = query.Columns.Add(VA.ShapeSheet.SrcConstants.PageHeight,nameof(VA.ShapeSheet.SrcConstants.PageHeight));
-            var col_width = query.Columns.Add(VA.ShapeSheet.SrcConstants.PageWidth, nameof(VA.ShapeSheet.SrcConstants.PageHeight));
+            var col_width = query.Columns.Add(VA.ShapeSheet.SrcConstants.PageWidth, nameof(VA.ShapeSheet.SrcConstants.PageWidth));
 
-            var results = query.GetResults<double>(page.PageSheet);
-            double height = results.Cells[col_height];
-            double width = results.Cells[col_width];
+            var cellqueryresults = query.GetResults<double>(page.PageSheet);
+            var row = cellqueryresults[0];
+            double height = row[col_height];
+            double width = row[col_width];
             var s = new VA.Geometry.Size(width, height);
             return s;
         }

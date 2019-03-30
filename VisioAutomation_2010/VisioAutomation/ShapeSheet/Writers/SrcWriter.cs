@@ -1,72 +1,84 @@
-﻿namespace VisioAutomation.ShapeSheet.Writers
+﻿using IVisio = Microsoft.Office.Interop.Visio;
+
+namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SrcWriter : WriterBase
     {
-        private WriteCache<Src> _formulaRecords;
-        private WriteCache<Src> _resultRecords;
 
-        public SrcWriter()
+
+        public SrcWriter() : base(CellCoordinateType.Src)
         {
         }
 
-        public void Clear()
-        {
-            _formulaRecords?.Clear();
-            _resultRecords?.Clear();
-        }
 
-        public void Commit(Microsoft.Office.Interop.Visio.Shape shape)
+        public void CommitFormulas(IVisio.Shape shape)
         {
             var surface = new SurfaceTarget(shape);
-            this.Commit(surface);
+            this._commit_formulas(surface);
         }
 
-        public void Commit(Microsoft.Office.Interop.Visio.Page page)
+        public void CommitFormulas(IVisio.Page page)
         {
             var surface = new SurfaceTarget(page);
-            this.Commit(surface);
+            this._commit_formulas(surface);
         }
 
-        public void Commit(VisioAutomation.SurfaceTarget surface)
+        public void CommitResults(IVisio.Shape shape)
         {
-            this.CommitFormulas(surface);
-            this.CommitResults(surface);
+            var surface = new SurfaceTarget(shape);
+            this._commit_results(surface);
         }
 
-        public void SetFormula(Src src, CellValueLiteral formula)
+        public void CommitResults(IVisio.Page page)
         {
-            this.__SetFormulaIgnoreNull(src, formula);
+            var surface = new SurfaceTarget(page);
+            this._commit_results(surface);
         }
-        
-        private void __SetFormulaIgnoreNull(Src src, CellValueLiteral formula)
+
+
+        public void SetValue(Src src, CellValueLiteral formula)
         {
-            if (this._formulaRecords == null)
+            this.__SetValueIgnoreNull(src, formula);
+        }
+
+        public void SetValues(CellGroups.CellGroup cgb, short row)
+        {
+            foreach (var pair in cgb.SrcValuePairs_NewRow(row))
             {
-                this._formulaRecords = new WriteCache<Src>();
+                this.SetValue(pair.Src, pair.Value);
+            }
+        }
+
+        public void SetValues(CellGroups.CellGroup cgb)
+        {
+            foreach (var pair in cgb.SrcValuePairs)
+            {
+                this.SetValue(pair.Src, pair.Value);
+            }
+        }
+
+        private void __SetValueIgnoreNull(Src src, CellValueLiteral formula)
+        {
+            if (this._records == null)
+            {
+                this._records = new WriteRecordList(CellCoordinateType.Src);
             }
 
             if (formula.HasValue)
             {
-                this._formulaRecords.Add(src, formula.Value);
+                this._records.Add(src, formula.Value);
             }
         }
 
-        private VisioAutomation.ShapeSheet.Streams.StreamArray buildstream_src(WriteCache<Src> wcs)
+        private void _commit_formulas(SurfaceTarget surface)
         {
-            var builder = new VisioAutomation.ShapeSheet.Streams.SrcStreamArrayBuilder(wcs.Count);
-            builder.AddRange(wcs.EnumCoords());
-            return builder.ToStreamArray();
-        }
-
-        private void CommitFormulas(SurfaceTarget surface)
-        {
-            if ((this._formulaRecords == null || this._formulaRecords.Count < 1))
+            if ((this._records == null || this._records.Count < 1))
             {
                 return;
             }
 
-            var stream = this.buildstream_src(this._formulaRecords);
-            var formulas = this._formulaRecords.BuildValues();
+            var stream = this._records.BuildSrcStream();
+            var formulas = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
             {
@@ -78,25 +90,16 @@
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void SetResult(Src src, CellValueLiteral result)
-        {
-            if (this._resultRecords == null)
-            {
-                this._resultRecords = new WriteCache<Src>();
-            }
 
-            this._resultRecords.Add(src, result.Value);
-        }
-
-        private void CommitResults(SurfaceTarget surface)
+        private void _commit_results(SurfaceTarget surface)
         {
-            if (this._resultRecords == null || this._resultRecords.Count < 1)
+            if (this._records == null || this._records.Count < 1)
             {
                 return;
             }
 
-            var stream = this.buildstream_src(this._resultRecords);
-            var results = this._resultRecords.BuildValues();
+            var stream = this._records.BuildSrcStream();
+            var results = this._records.BuildValuesArray();
             const object[] unitcodes = null;
 
             if (stream.Array.Length == 0)

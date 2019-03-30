@@ -9,8 +9,8 @@ namespace VisioAutomation.Models.Layouts.Grid
     {
         public int ColumnCount { get; }
         public int RowCount { get; }
-        public Geometry.Point Origin { get;  set; }
-        public Geometry.Size CellSpacing { get; set; }
+        public VisioAutomation.Geometry.Point Origin { get;  set; }
+        public VisioAutomation.Geometry.Size CellSpacing { get; set; }
         public RowDirection RowDirection { get; set; }
         public ColumnDirection ColumnDirection { get; set; }
 
@@ -34,11 +34,11 @@ namespace VisioAutomation.Models.Layouts.Grid
             }
         }
 
-        public GridLayout(int cols, int rows, Geometry.Size cellsize, IVisio.Master master)
+        public GridLayout(int cols, int rows, VisioAutomation.Geometry.Size cellsize, IVisio.Master master)
         {
             this.ColumnDirection = ColumnDirection.LeftToRight;
             this.RowDirection = RowDirection.BottomToTop;
-            this.CellSpacing = new Geometry.Size(0.5, 0.25);
+            this.CellSpacing = new VisioAutomation.Geometry.Size(0.5, 0.25);
             this.ColumnCount = cols;
             this.RowCount = rows;
 
@@ -118,7 +118,7 @@ namespace VisioAutomation.Models.Layouts.Grid
                     }
 
                     var node = this.GetNode(col, row);
-                    node.Rectangle = new Geometry.Rectangle(final_left, final_bottom, final_right, final_top);
+                    node.Rectangle = new VisioAutomation.Geometry.Rectangle(final_left, final_bottom, final_right, final_top);
 
                     dx += this.Columns[col].Width;
                     dx += this.CellSpacing.Width;

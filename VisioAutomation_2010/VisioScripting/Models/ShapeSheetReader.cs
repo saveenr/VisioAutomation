@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {
@@ -6,24 +7,24 @@ namespace VisioScripting.Models
     {
         public Client Client;
         public VisioAutomation.SurfaceTarget Surface;
-        public VisioAutomation.ShapeSheet.Streams.SidSrcStreamBuilder SidSrcStreamBuilder;
+        public List<VisioAutomation.ShapeSheet.SidSrc> SidSrcs;
         
         public ShapeSheetReader(Client client, IVisio.Page page)
         {
             this.Client = client;
             this.Surface = new VisioAutomation.SurfaceTarget(page);
-            this.SidSrcStreamBuilder = new VisioAutomation.ShapeSheet.Streams.SidSrcStreamBuilder();
+            this.SidSrcs = new List<VisioAutomation.ShapeSheet.SidSrc>();
         }
 
         public void AddCell(short id, VisioAutomation.ShapeSheet.Src src)
         {
             var sidsrc = new VisioAutomation.ShapeSheet.SidSrc(id, src);
-            this.SidSrcStreamBuilder.Add(sidsrc);
+            this.SidSrcs.Add(sidsrc);
         }
 
         public string[] GetFormulas()
         {
-            var stream = this.SidSrcStreamBuilder.ToStream();
+            var stream = VisioAutomation.ShapeSheet.Streams.StreamArray.FromSidSrc(this.SidSrcs);
             var formulas = this.Surface.GetFormulasU(stream);
             return formulas;
         }
@@ -31,7 +32,7 @@ namespace VisioScripting.Models
         public string[] GetResults()
         {
             const object [] unitcodes = null;
-            var stream = this.SidSrcStreamBuilder.ToStream();
+            var stream = VisioAutomation.ShapeSheet.Streams.StreamArray.FromSidSrc(this.SidSrcs);
             var formulas = this.Surface.GetResults<string>( stream, unitcodes);
             return formulas;
         }

@@ -41,13 +41,13 @@ namespace VisioAutomation.Shapes
             var d_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexD.Cell);
             var e_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexE.Cell);
 
-            writer.SetFormula(x_src, this.X);
-            writer.SetFormula(y_src, this.Y);
-            writer.SetFormula(a_src, this.A);
-            writer.SetFormula(b_src, this.B);
-            writer.SetFormula(c_src, this.C);
-            writer.SetFormula(d_src, this.D);
-            writer.SetFormula(e_src, this.E);
+            writer.SetValue(x_src, this.X);
+            writer.SetValue(y_src, this.Y);
+            writer.SetValue(a_src, this.A);
+            writer.SetValue(b_src, this.B);
+            writer.SetValue(c_src, this.C);
+            writer.SetValue(d_src, this.D);
+            writer.SetValue(e_src, this.E);
         }
 
         public static ShapeGeometryRow CreateLineTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y)
@@ -121,7 +121,7 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateNURBSTo(ShapeSheet.CellValueLiteral x,
+        public static ShapeGeometryRow CreateNurbsTo(ShapeSheet.CellValueLiteral x,
                                                 ShapeSheet.CellValueLiteral y,
                                                 ShapeSheet.CellValueLiteral a,
                                                 ShapeSheet.CellValueLiteral b,

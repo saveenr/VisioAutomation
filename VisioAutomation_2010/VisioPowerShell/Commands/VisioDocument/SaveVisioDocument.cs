@@ -1,6 +1,6 @@
 ﻿using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioDocument
 {
     [SMA.Cmdlet(SMA.VerbsData.Save, Nouns.VisioDocument)]
     public class SaveVisioDocument : VisioCmdlet

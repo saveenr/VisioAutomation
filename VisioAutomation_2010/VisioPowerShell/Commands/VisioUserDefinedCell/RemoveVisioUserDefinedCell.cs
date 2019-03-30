@@ -1,7 +1,7 @@
 ﻿using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioUserDefinedCell
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, Nouns.VisioUserDefinedCell)]
     public class RemoveVisioUserDefinedCell : VisioCmdlet

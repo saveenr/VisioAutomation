@@ -24,9 +24,9 @@ namespace VisioAutomation_Tests.Core.Page
             page_fmt_cells1.Height = "6";
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            page_fmt_cells1.SetFormulas(writer);
+            writer.SetValues(page_fmt_cells1);
 
-            writer.Commit(page1.PageSheet);
+            writer.CommitFormulas(page1.PageSheet);
 
             var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, CellValueType.Result);
             Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Value);
@@ -83,7 +83,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             VA.Pages.PageHelper.Duplicate(page1, page2);
 
-            Assert.AreEqual(page_size, VisioAutomationTest.GetPageSize(page2));
+            Assert.AreEqual(page_size, GetPageSize(page2));
             Assert.AreEqual(1, page2.Shapes.Count);
 
             page2.Delete(0);
@@ -106,7 +106,7 @@ namespace VisioAutomation_Tests.Core.Page
 
             var page2 = doc1.Pages.Add();
             page2.Background = 0;
-            VisioAutomationTest.SetPageSize(page2, this.StandardPageSize);
+            SetPageSize(page2, this.StandardPageSize);
 
             var active_window = app.ActiveWindow;
             Assert.AreEqual(app.ActivePage, page2);
@@ -155,9 +155,9 @@ namespace VisioAutomation_Tests.Core.Page
             pagecells.RightMargin = upperright_margin.Width;
 
             var page_writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            pagecells.SetFormulas(page_writer);
+            page_writer.SetValues(pagecells);
 
-            page_writer.Commit(page.PageSheet);
+            page_writer.CommitFormulas(page.PageSheet);
 
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5 + shape_size.Height);

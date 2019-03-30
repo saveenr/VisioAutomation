@@ -1,6 +1,6 @@
 ﻿using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioApplication
 {
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, Nouns.VisioApplication)]
     public class TestVisioApplication: VisioCmdlet

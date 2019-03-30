@@ -50,11 +50,11 @@ namespace VisioAutomation.Shapes
             var src_nosnap = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoSnap.Cell);
             var src_noquickdrag = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoQuickDrag.Cell);
 
-            writer.SetFormula(src_nofill, this.NoFill);
-            writer.SetFormula(src_noline, this.NoLine);
-            writer.SetFormula(src_noshow, this.NoShow);
-            writer.SetFormula(src_nosnap, this.NoSnap);
-            writer.SetFormula(src_noquickdrag, this.NoQuickDrag);
+            writer.SetValue(src_nofill, this.NoFill);
+            writer.SetValue(src_noline, this.NoLine);
+            writer.SetValue(src_noshow, this.NoShow);
+            writer.SetValue(src_nosnap, this.NoSnap);
+            writer.SetValue(src_noquickdrag, this.NoQuickDrag);
 
             foreach (var row in this.Rows)
             {
@@ -62,7 +62,7 @@ namespace VisioAutomation.Shapes
                 row_count++;
             }
 
-            writer.Commit(shape);
+            writer.CommitFormulas(shape);
 
             return 0;
         }
@@ -106,9 +106,9 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddNURBSTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y, ShapeSheet.CellValueLiteral a, ShapeSheet.CellValueLiteral b, ShapeSheet.CellValueLiteral c, ShapeSheet.CellValueLiteral d, ShapeSheet.CellValueLiteral e)
+        public ShapeGeometryRow AddNurbsTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y, ShapeSheet.CellValueLiteral a, ShapeSheet.CellValueLiteral b, ShapeSheet.CellValueLiteral c, ShapeSheet.CellValueLiteral d, ShapeSheet.CellValueLiteral e)
         {
-            var row = ShapeGeometryRow.CreateNURBSTo(x, y, a, b, c, d, e);
+            var row = ShapeGeometryRow.CreateNurbsTo(x, y, a, b, c, d, e);
             this.Rows.Add(row);
             return row;
 

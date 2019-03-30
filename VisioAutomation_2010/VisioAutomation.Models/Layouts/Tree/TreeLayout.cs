@@ -6,10 +6,10 @@ namespace VisioAutomation.Models.Layouts.Tree
 {
     public class TreeLayout
     {
-        const string basic_stencil_name = "basic_u.vss";
-        const string connectors_stencil_name = "connec_u.vss";
-        string rect_master_name = "Rectangle";
-        private string dc_master_name = "Dynamic Connector";
+        private string _node_stencil_name = "basic_u.vss";
+        private string _node_master_name = "Rectangle";
+        private string _edge_stencil_name = "connec_u.vss";
+        private string _edge_master_name = "Dynamic Connector";
 
         public LayoutOptions LayoutOptions { get; set; }
 
@@ -67,13 +67,13 @@ namespace VisioAutomation.Models.Layouts.Tree
 
             var app = page.Application;
             var documents = app.Documents;
-            var basic_stencil = documents.OpenStencil(TreeLayout.basic_stencil_name);
-            var connectors_stencil = documents.OpenStencil(TreeLayout.connectors_stencil_name);
+            var basic_stencil = documents.OpenStencil(_node_stencil_name);
+            var connectors_stencil = documents.OpenStencil(_edge_stencil_name);
             var basic_masters = basic_stencil.Masters;
             var connectors_masters = connectors_stencil.Masters;
 
-            var node_master = basic_masters[this.rect_master_name];
-            var connector_master = connectors_masters[this.dc_master_name];
+            var node_master = basic_masters[this._node_master_name];
+            var connector_master = connectors_masters[this._edge_master_name];
 
             var page_node = new Dom.Page();
 
@@ -93,7 +93,7 @@ namespace VisioAutomation.Models.Layouts.Tree
             {
                 var tree_node = (Node)treenodes[i].Data;
                 Dom.Shape master_node = master_nodes[i];
-                tree_node.DOMNode = master_node;
+                tree_node.DomNode = master_node;
 
                 if (tree_node.Cells!=null)
                 {
@@ -113,8 +113,8 @@ namespace VisioAutomation.Models.Layouts.Tree
                 {
                     foreach (var child in parent.Children)
                     {
-                        var parent_shape = (Dom.BaseShape)parent.DOMNode;
-                        var child_shape = (Dom.BaseShape)child.DOMNode;
+                        var parent_shape = (Dom.BaseShape)parent.DomNode;
+                        var child_shape = (Dom.BaseShape)child.DomNode;
                         var connector = page_node.Shapes.Connect(connector_master, parent_shape, child_shape);
                         connector.Cells = this.LayoutOptions.ConnectorCells;
                     }
@@ -151,7 +151,7 @@ namespace VisioAutomation.Models.Layouts.Tree
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
                 var orgnode = (Node) treenodes[i].Data;
-                var shape = (Dom.BaseShape)orgnode.DOMNode;
+                var shape = (Dom.BaseShape)orgnode.DomNode;
                 orgnode.VisioShape = shape.VisioShape;
             }
         }

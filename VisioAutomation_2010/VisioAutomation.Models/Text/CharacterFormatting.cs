@@ -29,29 +29,29 @@ namespace VisioAutomation.Models.Text
 
         internal void ApplyFormulas(VisioAutomation.ShapeSheet.Writers.SrcWriter writer, short row)
         {
-            writer.SetFormula(SrcConstants.CharColor.CloneWithNewRow(row), this.Color);
-            writer.SetFormula(SrcConstants.CharFont.CloneWithNewRow(row), this.Font);
-            writer.SetFormula(SrcConstants.CharSize.CloneWithNewRow(row), this.Size);
-            writer.SetFormula(SrcConstants.CharStyle.CloneWithNewRow(row), this.Style);
-            writer.SetFormula(SrcConstants.CharColorTransparency.CloneWithNewRow(row), this.Transparency);
-            writer.SetFormula(SrcConstants.CharAsianFont.CloneWithNewRow(row), this.AsianFont);
-            writer.SetFormula(SrcConstants.CharCase.CloneWithNewRow(row), this.Case);
-            writer.SetFormula(SrcConstants.CharComplexScriptFont.CloneWithNewRow(row), this.ComplexScriptFont);
-            writer.SetFormula(SrcConstants.CharComplexScriptSize.CloneWithNewRow(row), this.ComplexScriptSize);
-            writer.SetFormula(SrcConstants.CharDoubleUnderline.CloneWithNewRow(row), this.DoubleUnderline);
-            writer.SetFormula(SrcConstants.CharDoubleStrikethrough.CloneWithNewRow(row), this.DoubleStrikeThrough);
-            writer.SetFormula(SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
-            writer.SetFormula(SrcConstants.CharFontScale.CloneWithNewRow(row), this.FontScale);
-            writer.SetFormula(SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
-            writer.SetFormula(SrcConstants.CharLetterspace.CloneWithNewRow(row), this.Letterspace);
-            writer.SetFormula(SrcConstants.CharLocale.CloneWithNewRow(row), this.Locale);
-            writer.SetFormula(SrcConstants.CharLocalizeFont.CloneWithNewRow(row), this.LocalizeFont);
-            writer.SetFormula(SrcConstants.CharOverline.CloneWithNewRow(row), this.Overline);
-            writer.SetFormula(SrcConstants.CharPerpendicular.CloneWithNewRow(row), this.Perpendicular);
-            writer.SetFormula(SrcConstants.CharPos.CloneWithNewRow(row), this.Pos);
-            writer.SetFormula(SrcConstants.CharRTLText.CloneWithNewRow(row), this.RTLText);
-            writer.SetFormula(SrcConstants.CharStrikethru.CloneWithNewRow(row), this.Strikethru);
-            writer.SetFormula(SrcConstants.CharUseVertical.CloneWithNewRow(row), this.UseVertical);
+            writer.SetValue(SrcConstants.CharColor.CloneWithNewRow(row), this.Color);
+            writer.SetValue(SrcConstants.CharFont.CloneWithNewRow(row), this.Font);
+            writer.SetValue(SrcConstants.CharSize.CloneWithNewRow(row), this.Size);
+            writer.SetValue(SrcConstants.CharStyle.CloneWithNewRow(row), this.Style);
+            writer.SetValue(SrcConstants.CharColorTransparency.CloneWithNewRow(row), this.Transparency);
+            writer.SetValue(SrcConstants.CharAsianFont.CloneWithNewRow(row), this.AsianFont);
+            writer.SetValue(SrcConstants.CharCase.CloneWithNewRow(row), this.Case);
+            writer.SetValue(SrcConstants.CharComplexScriptFont.CloneWithNewRow(row), this.ComplexScriptFont);
+            writer.SetValue(SrcConstants.CharComplexScriptSize.CloneWithNewRow(row), this.ComplexScriptSize);
+            writer.SetValue(SrcConstants.CharDoubleUnderline.CloneWithNewRow(row), this.DoubleUnderline);
+            writer.SetValue(SrcConstants.CharDoubleStrikethrough.CloneWithNewRow(row), this.DoubleStrikeThrough);
+            writer.SetValue(SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
+            writer.SetValue(SrcConstants.CharFontScale.CloneWithNewRow(row), this.FontScale);
+            writer.SetValue(SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
+            writer.SetValue(SrcConstants.CharLetterspace.CloneWithNewRow(row), this.Letterspace);
+            writer.SetValue(SrcConstants.CharLocale.CloneWithNewRow(row), this.Locale);
+            writer.SetValue(SrcConstants.CharLocalizeFont.CloneWithNewRow(row), this.LocalizeFont);
+            writer.SetValue(SrcConstants.CharOverline.CloneWithNewRow(row), this.Overline);
+            writer.SetValue(SrcConstants.CharPerpendicular.CloneWithNewRow(row), this.Perpendicular);
+            writer.SetValue(SrcConstants.CharPos.CloneWithNewRow(row), this.Pos);
+            writer.SetValue(SrcConstants.CharRTLText.CloneWithNewRow(row), this.RTLText);
+            writer.SetValue(SrcConstants.CharStrikethru.CloneWithNewRow(row), this.Strikethru);
+            writer.SetValue(SrcConstants.CharUseVertical.CloneWithNewRow(row), this.UseVertical);
         }
 
         public void ApplyFormulasTo(CharacterFormatting target)

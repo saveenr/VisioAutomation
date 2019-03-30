@@ -52,14 +52,15 @@ namespace VisioAutomationSamples
                 var shapeid = node.ShapeID;
                 int color_index = i%colors.Length;
                 var color = colors[color_index];
-                fmtcells.FillForeground = new VisioAutomation.Color.ColorRgb(color).ToFormula();
+                fmtcells.FillForeground = new VisioAutomation.Models.Color.ColorRgb(color).ToFormula();
                 fmtcells.LinePattern = 0;
                 fmtcells.LineWeight = 0;
-                fmtcells.SetFormulas(writer, shapeid);
+
+                writer.SetValues(shapeid, fmtcells);
                 i++;
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
 
             var bordersize = new VA.Geometry.Size(1,1);
             page.ResizeToFitContents(bordersize);

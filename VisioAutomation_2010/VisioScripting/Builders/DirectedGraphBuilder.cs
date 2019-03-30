@@ -46,22 +46,22 @@ namespace VisioScripting.Builders
             }
         }
 
-        public static List<DirectedGraphLayout> LoadFromXML(Client client, string filename)
+        public static List<DirectedGraphLayout> LoadFromXml(Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
-            return DirectedGraphBuilder.LoadFromXML(client, xmldoc);
+            return DirectedGraphBuilder.LoadFromXml(client, xmldoc);
         }
 
         private class PageData
         {
             public MsaglLayoutOptions LayoutOptions;
             public DirectedGraphLayout DirectedGraph;
-            public List<Models.DGShapeInfo> ShapeInfos;
-            public List<Models.DGConnectorInfo> ConnectorInfos;
+            public List<Models.DgShapeInfo> ShapeInfos;
+            public List<Models.DgConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
         }
 
-        private static List<PageData> LoadPageDataFromXML(Client client, SXL.XDocument xmldoc)
+        private static List<PageData> _load_page_data_from_xml(Client client, SXL.XDocument xmldoc)
         {
             var pagedatas = new List<PageData>();
             // LOAD and ANALYZE EACH PAGE
@@ -79,14 +79,14 @@ namespace VisioScripting.Builders
                 pagedata.Errors = new List<BuilderError>();
                 pagedata.LayoutOptions = new MsaglLayoutOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
-                DirectedGraphBuilder.GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
+                DirectedGraphBuilder._get_render_options_from_xml(renderoptions_el, pagedata.LayoutOptions);
 
                 pagedata.DirectedGraph = new DirectedGraphLayout();
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
-                pagedata.ShapeInfos = shape_els.Select(e => VisioScripting.Models.DGShapeInfo.FromXml(client, e)).ToList();
-                pagedata.ConnectorInfos = con_els.Select(e => VisioScripting.Models.DGConnectorInfo.FromXml(client, e)).ToList();
+                pagedata.ShapeInfos = shape_els.Select(e => VisioScripting.Models.DgShapeInfo.FromXml(client, e)).ToList();
+                pagedata.ConnectorInfos = con_els.Select(e => VisioScripting.Models.DgConnectorInfo.FromXml(client, e)).ToList();
 
                 client.Output.WriteVerbose( "Analyzing shape data for page {0}", pagenum);
                 foreach (var shape_info in pagedata.ShapeInfos)
@@ -132,9 +132,9 @@ namespace VisioScripting.Builders
             return pagedatas;
         }
 
-        public static List<DirectedGraphLayout> LoadFromXML(Client client, SXL.XDocument xmldoc)
+        public static List<DirectedGraphLayout> LoadFromXml(Client client, SXL.XDocument xmldoc)
         {
-            var pagedatas = DirectedGraphBuilder.LoadPageDataFromXML(client, xmldoc);
+            var pagedatas = DirectedGraphBuilder._load_page_data_from_xml(client, xmldoc);
 
             // STOP IF ANY ERRORS
             int num_errors = pagedatas.Select(pagedata => pagedata.Errors.Count).Sum();
@@ -159,7 +159,7 @@ namespace VisioScripting.Builders
                     var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
                     dg_shape.Url = shape_info.Url;
                     dg_shape.CustomProperties = new CustomPropertyDictionary();
-                    foreach (var kv in shape_info.custprops)
+                    foreach (var kv in shape_info.CustProps)
                     {
                         var cp_cells = kv.Value;
                         cp_cells.EncodeValues();
@@ -170,13 +170,13 @@ namespace VisioScripting.Builders
                 client.Output.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    var def_connector_type = ConnectorType.Curved;
+                    var def_connector_type = VisioAutomation.Models.ConnectorType.Curved;
                     var connectory_type = def_connector_type;
 
                     var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);
                     var to_shape = pagedata.DirectedGraph.Shapes.Find(con_info.To);
 
-                    var def_con_color = new VisioAutomation.Color.ColorRgb(0x000000);
+                    var def_con_color = new VisioAutomation.Models.Color.ColorRgb(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
                     var dg_connector = pagedata.DirectedGraph.AddConnection(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
@@ -194,7 +194,7 @@ namespace VisioScripting.Builders
             return directedgraphs;
         }
 
-        private static void GetRenderOptionsFromXml(SXL.XElement el, MsaglLayoutOptions options)
+        private static void _get_render_options_from_xml(SXL.XElement el, MsaglLayoutOptions options)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             double DoubleParse(string str) => double.Parse(str, culture);

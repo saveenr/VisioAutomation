@@ -1,6 +1,7 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
+using System.Linq;
 
 namespace VisioAutomation.Text
 {
@@ -14,7 +15,7 @@ namespace VisioAutomation.Text
         public List<TextRun> ParagraphTextRuns { get; private set; }
         public List<TabStop> TabStops { get; private set; }
 
-        private static List<TextRun> GetTextRuns(
+        private static List<TextRun> _get_text_runs(
             IVisio.Shape shape,
             IVisio.VisRunTypes runtype,
             bool collect_text)
@@ -66,18 +67,18 @@ namespace VisioAutomation.Text
             return runs;
         }
         
-        public static TextFormat GetFormat(IVisio.Shape shape, CellValueType type)
+        public static TextFormat GetFormat(IVisio.Shape shape, VASS.CellValueType type)
         {
             var cells = new TextFormat();
             cells.CharacterFormats = CharacterFormatCells.GetCells(shape, type);
             cells.ParagraphFormats = ParagraphFormatCells.GetCells(shape, type);
-            cells.TextBlock = TextBlockCells.GetCells(shape, type);
+            cells.TextBlock = TextHelper.GetTextBlockCells(shape, type);
             if (HasTextXFormCells(shape))
             {
                 cells.TextXForm = TextXFormCells.GetCells(shape, type);
             }
-            cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-            cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            cells.CharacterTextRuns = TextFormat._get_text_runs(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            cells.ParagraphTextRuns = TextFormat._get_text_runs(shape, IVisio.VisRunTypes.visParaPropRow, true);
             cells.TabStops = TextHelper.GetTabStops(shape);
             return cells;
         }
@@ -91,14 +92,17 @@ namespace VisioAutomation.Text
                     (short) 0] != 0) ;
         }
 
-        public static List<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<TextFormat> GetFormat(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
         {
-            var charcells = CharacterFormatCells.GetCells(page, shapeids, type);
-            var paracells = ParagraphFormatCells.GetCells(page, shapeids, type);
-            var textblockcells = TextBlockCells.GetCells(page, shapeids, type);
+            var shapeids = shapeidpairs.Select( s=>s.ShapeID).ToList();
+
+            var charcells = CharacterFormatCells.GetCells(page, shapeidpairs, type);
+            var paracells = ParagraphFormatCells.GetCells(page, shapeidpairs, type);
+            var textblockcells = TextHelper.GetTextBlockCells(page, shapeids, type);
+
             var page_shapes = page.Shapes;
-            var formats = new List<TextFormat>(shapeids.Count);
-            for (int i = 0; i < shapeids.Count; i++)
+            var formats = new List<TextFormat>(shapeidpairs.Count);
+            for (int i = 0; i < shapeidpairs.Count; i++)
             {
                 var format = new TextFormat();
                 format.CharacterFormats = charcells[i];
@@ -106,9 +110,9 @@ namespace VisioAutomation.Text
                 format.TextBlock = textblockcells[i];
                 formats.Add(format);
 
-                var shape = page_shapes.ItemFromID[shapeids[i]];
-                format.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-                format.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+                var shape = page_shapes.ItemFromID[shapeidpairs[i].ShapeID];
+                format.CharacterTextRuns = TextFormat._get_text_runs(shape, IVisio.VisRunTypes.visCharPropRow, true);
+                format.ParagraphTextRuns = TextFormat._get_text_runs(shape, IVisio.VisRunTypes.visParaPropRow, true);
 
                 format.TabStops = TextHelper.GetTabStops(shape);
             }

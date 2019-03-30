@@ -57,7 +57,7 @@ namespace VisioAutomationSamples
             var culture = CultureInfo.InvariantCulture;
             var angles_as_formulas = angles.Select(a => a.ToString(culture)).ToList();
 
-            var color_formulas = colors.Select(x => new VA.Color.ColorRgb(x).ToFormula()).ToList();
+            var color_formulas = colors.Select(x => new VA.Models.Color.ColorRgb(x).ToFormula()).ToList();
 
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
@@ -75,11 +75,11 @@ namespace VisioAutomationSamples
                 format.LinePattern = 0;
                 format.FillForegroundTransparency = 0.5;
 
-                xfrm.SetFormulas(writer, shapeid);
-                format.SetFormulas(writer, shapeid);
+                writer.SetValues(shapeid, xfrm);
+                writer.SetValues(shapeid, format);
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
 
             page.ResizeToFitContents(new VA.Geometry.Size(1.0, 1.0));
         }
@@ -120,8 +120,8 @@ namespace VisioAutomationSamples
 
             layout.Render(page);
 
-            var color1 = new VA.Color.ColorRgb(0xffdddd);
-            var color2 = new VA.Color.ColorRgb(0x00ffff);
+            var color1 = new VA.Models.Color.ColorRgb(0xffdddd);
+            var color2 = new VA.Models.Color.ColorRgb(0x00ffff);
 
             var format = new VA.Shapes.ShapeFormatCells();
 
@@ -142,12 +142,13 @@ namespace VisioAutomationSamples
                 format.FillBackground = color2_formula;
                 format.LinePattern = 0;
                 format.LineWeight = 0;
-                format.SetFormulas(writer, shapeid);
+
+                writer.SetValues(shapeid, format);
 
                 n++;
             }
 
-            writer.Commit(page);
+            writer.CommitFormulas(page);
 
             var bordersize = new VA.Geometry.Size(1, 1);
             page.ResizeToFitContents(bordersize);

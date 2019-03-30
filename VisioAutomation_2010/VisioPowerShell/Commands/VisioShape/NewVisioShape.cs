@@ -3,7 +3,7 @@ using System.Linq;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioShape)]
     public class NewVisioShape : VisioCmdlet
@@ -52,7 +52,7 @@ namespace VisioPowerShell.Commands
             }
             else if (this.Type == Models.ShapeType.Line)
             {
-                var lineseg = new VisioAutomation.Geometry.LineSegment(points[0], points[1]);
+                var lineseg = new VisioAutomation.Models.Geometry.LineSegment(points[0], points[1]);
                 var shape = this.Client.Draw.DrawLine(lineseg.Start, lineseg.End);
                 this.WriteObject(shape);
             }
@@ -92,14 +92,14 @@ namespace VisioPowerShell.Commands
             {
                 if (points.Count < 2)
                 {
-                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a polyline");
+                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a polyline", nameof(points));
                 }
             }
             else if (this.Type == Models.ShapeType.Bezier)
             {
                 if (points.Count < 2)
                 {
-                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a bezier");
+                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a bezier", nameof(points));
                 }
             }
         }
@@ -109,10 +109,10 @@ namespace VisioPowerShell.Commands
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
             var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
-            var shape_ids = this.Client.Master.DropMastersOnActivePage(this.Masters, points);
+            var shapeids = this.Client.Master.DropMastersOnActivePage(this.Masters, points);
 
             var page = this.Client.Page.GetActivePage();
-            var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
+            var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shapeids);
 
             // If Names is not empty... assign it to the shape
             if (this.Names != null)
@@ -136,19 +136,19 @@ namespace VisioPowerShell.Commands
                 writer.BlastGuards = true;
                 writer.TestCircular = true;
 
-                for (int i = 0; i < shape_ids.Count(); i++)
+                for (int i = 0; i < shapeids.Count(); i++)
                 {
-                    var shape_id = shape_ids[i];
+                    var shapeid = shapeids[i];
                     var shape_cells = this.Cells[i % this.Cells.Length];
 
-                    shape_cells.Apply(writer, (short)shape_id);
+                    shape_cells.Apply(writer, (short)shapeid);
                 }
 
                 var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
                 using (var undoscope = this.Client.Undo.NewUndoScope(nameof(NewVisioShape) +":CommitCells"))
                 {
-                    writer.Commit(surface);
+                    writer.CommitFormulas(surface);
                 }
 
             }

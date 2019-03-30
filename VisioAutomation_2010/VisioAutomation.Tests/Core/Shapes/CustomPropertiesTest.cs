@@ -22,6 +22,35 @@ namespace VisioAutomation_Tests.Core.Shapes
         }
 
         [TestMethod]
+        public void SimpleCP()
+        {
+            var page1 = this.GetNewPage();
+
+            // Draw a shape
+            var s1 = page1.DrawRectangle(1, 1, 4, 3);
+
+            int cp_type = 0; // string type
+
+            // Set some properties on it
+            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
+            CustomPropertyHelper.Set(s1, "FOO2", "\"BAR2\"", cp_type);
+            CustomPropertyHelper.Set(s1, "FOO3", "\"BAR3\"", cp_type);
+
+            // Delete one of those properties
+            CustomPropertyHelper.Delete(s1, "FOO2");
+
+            // Set the value of an existing properties
+            CustomPropertyHelper.Set(s1, "FOO3", "\"BAR3updated\"", cp_type);
+
+            // retrieve all the properties
+            var props = CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
+
+            var cp_foo1 = props["FOO1"];
+            // var cp_foo2 = props["FOO2"]; there is no prop called FOO2
+            var cp_foo3 = props["FOO3"];
+        }
+
+        [TestMethod]
         public void CustomProps_CRUD()
         {
             var page1 = this.GetNewPage();
@@ -30,7 +59,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             s1.Text = "Checking for Custom Properties";
 
             // A new rectangle should have zero props
-            var c0 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
+            var c0 = CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
             Assert.AreEqual(0, c0.Count);
 
 
@@ -39,14 +68,17 @@ namespace VisioAutomation_Tests.Core.Shapes
             // Set one property
             // Notice that the properties some back double-quoted
             CustomPropertyHelper.Set(s1, "PROP1", "\"VAL1\"", cp_type);
-            var c1 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
+
+            var c1 = CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
+
             Assert.AreEqual(1, c1.Count);
             Assert.IsTrue(c1.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"", c1["PROP1"].Value.Value);
 
             // Add another property
             CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2\"", cp_type);
-            var c2 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
+            var c2 = CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
+
             Assert.AreEqual(2, c2.Count);
             Assert.IsTrue(c2.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"", c2["PROP1"].Value.Value);
@@ -55,7 +87,8 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // Modify the value of the second property
             CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"", cp_type);
-            var c3 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
+            var c3 = CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
+  
             Assert.AreEqual(2, c3.Count);
             Assert.IsTrue(c3.ContainsKey("PROP1"));
             Assert.AreEqual("\"VAL1\"", c3["PROP1"].Value.Value);
@@ -67,7 +100,10 @@ namespace VisioAutomation_Tests.Core.Shapes
             {
                 CustomPropertyHelper.Delete(s1, name);
             }
-            var c4 = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
+
+            var c4 = CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
+
+
             Assert.AreEqual(0, c4.Count);
 
             var app = this.GetVisioApplication();
@@ -124,7 +160,8 @@ namespace VisioAutomation_Tests.Core.Shapes
             CustomPropertyHelper.Set(s1, "PROP_DATE", prop_date_in);
             CustomPropertyHelper.Set(s1, "PROP_NUMBER", prop_number_in);
 
-            var props_dic = CustomPropertyHelper.GetCells(s1, CellValueType.Formula);
+            var props_dic = CustomPropertyHelper.GetCellsAsDictionary(s1, CellValueType.Formula);
+
 
             var prop_string_out = props_dic["PROP_STRING"];
 

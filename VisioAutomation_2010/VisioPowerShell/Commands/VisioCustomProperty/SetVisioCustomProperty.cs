@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using SMA = System.Management.Automation;
 using VisioAutomation.Shapes;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioCustomProperty
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioCustomProperty)]
     public class SetVisioCustomProperty : VisioCmdlet
@@ -52,19 +52,19 @@ namespace VisioPowerShell.Commands
         {
             if (this.Hashtable != null)
             {
-                this.SetFromHashTable();
+                this._set_from_hash_table();
             }
             else
             {
-                this.SetFromParameters();
+                this._set_from_parameters();
             }
         }
 
-        private void SetFromParameters()
+        private void _set_from_parameters()
         {
             // this will set .Value and automatically set
             // .Type as needed.
-            var cp = CreateCustPropFromObject(this.Value);
+            var cp = _create_cust_prop_from_object(this.Value);
 
             // The user can override .Type if desired
             if (this.Type >= 0)
@@ -116,7 +116,7 @@ namespace VisioPowerShell.Commands
             this.Client.CustomProperty.SetCustomProperty(targets, this.Name, cp);
         }
 
-        private void SetFromHashTable()
+        private void _set_from_hash_table()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
 
@@ -136,12 +136,12 @@ namespace VisioPowerShell.Commands
                 string key_string = (string) key;
 
                 object value = this.Hashtable[key];
-                var cp = CreateCustPropFromObject(value);
+                var cp = _create_cust_prop_from_object(value);
                 this.Client.CustomProperty.SetCustomProperty(targets, key_string, cp);
             }
         }
 
-        private static CustomPropertyCells CreateCustPropFromObject(object value)
+        private static CustomPropertyCells _create_cust_prop_from_object(object value)
         {
             if (value is string value_str)
             {

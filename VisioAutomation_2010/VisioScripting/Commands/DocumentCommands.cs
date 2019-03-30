@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -229,8 +228,8 @@ namespace VisioScripting.Commands
             var page = pages[1];
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            pagecells.SetFormulas(writer);
-            writer.Commit(page.PageSheet);
+            writer.SetValues(pagecells);
+            writer.CommitFormulas(page.PageSheet);
 
             return doc;
         }

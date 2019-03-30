@@ -1,7 +1,7 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioMaster
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Open, Nouns.VisioMaster)]
     public class OpenVisioMaster : VisioCmdlet

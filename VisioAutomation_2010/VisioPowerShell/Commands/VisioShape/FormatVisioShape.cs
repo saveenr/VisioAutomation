@@ -1,7 +1,6 @@
 using SMA = System.Management.Automation;
-using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Format, Nouns.VisioShape)]
     public class FormatVisioShape : VisioCmdlet

@@ -2,7 +2,7 @@ using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioDocument
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioDocument)]
     public class GetVisioDocument : VisioCmdlet
@@ -25,12 +25,12 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var visdoctype = GetVisDocumentTypes(this.Type);
+            var visdoctype = _get_vis_document_type(this.Type);
             var docs = this.Client.Document.FindDocuments(this.Name, visdoctype);
             this.WriteObject(docs, true);
         }
 
-        private static IVisio.VisDocumentTypes? GetVisDocumentTypes(DocumentType? doctype)
+        private static IVisio.VisDocumentTypes? _get_vis_document_type(DocumentType? doctype)
         {
             if (doctype == null)
             {

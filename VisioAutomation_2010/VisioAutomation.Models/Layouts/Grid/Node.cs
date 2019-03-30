@@ -8,7 +8,7 @@ namespace VisioAutomation.Models.Layouts.Grid
         public IVisio.Master Master { get; set; }
         public string Text { get; set; }
         public IVisio.Shape Shape { get; set; }
-        public Geometry.Rectangle Rectangle { get; set; }
+        public VisioAutomation.Geometry.Rectangle Rectangle { get; set; }
         public short ShapeID { get; set; }
         public int Column { get; set; }
         public int Row { get; set; }

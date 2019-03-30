@@ -1,5 +1,6 @@
 using System;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -52,9 +53,9 @@ namespace VisioAutomation.Shapes
             }
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            ctrl.SetFormulas(writer, row);
+            writer.SetValues(ctrl, row);
 
-            writer.Commit(shape);
+            writer.CommitFormulas(shape);
 
             return row;
         }
@@ -84,5 +85,6 @@ namespace VisioAutomation.Shapes
 
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];
         }
+
     }
 }

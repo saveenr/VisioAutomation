@@ -5,7 +5,7 @@ namespace VisioScripting.Commands
 {
     public class ApplicationCommands : CommandSet
     {
-        private static System.Version visio_app_version;
+        private static System.Version _static_visio_app_version;
 
         private IVisio.Application _active_application;
         
@@ -121,14 +121,14 @@ namespace VisioScripting.Commands
         {
             get
             {
-                if (ApplicationCommands.visio_app_version == null)
+                if (ApplicationCommands._static_visio_app_version == null)
                 {
                     var cmdtarget = this._client.GetCommandTargetApplication();
 
                     var application = cmdtarget.Application;
-                    ApplicationCommands.visio_app_version = VisioAutomation.Application.ApplicationHelper.GetVersion(application);
+                    ApplicationCommands._static_visio_app_version = VisioAutomation.Application.ApplicationHelper.GetVersion(application);
                 }
-                return ApplicationCommands.visio_app_version;
+                return ApplicationCommands._static_visio_app_version;
             }            
         }
     }

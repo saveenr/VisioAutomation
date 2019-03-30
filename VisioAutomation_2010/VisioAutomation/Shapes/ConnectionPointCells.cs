@@ -1,73 +1,60 @@
-using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
+using System.Collections.Generic;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
-    public class ConnectionPointCells : CellGroupMultiRow
+    public class ConnectionPointCells : VASS.CellGroups.CellGroup
     {
-        public CellValueLiteral X { get; set; }
-        public CellValueLiteral Y { get; set; }
-        public CellValueLiteral DirX { get; set; }
-        public CellValueLiteral DirY { get; set; }
-        public CellValueLiteral Type { get; set; }
+        public VASS.CellValueLiteral X { get; set; }
+        public VASS.CellValueLiteral Y { get; set; }
+        public VASS.CellValueLiteral DirX { get; set; }
+        public VASS.CellValueLiteral DirY { get; set; }
+        public VASS.CellValueLiteral Type { get; set; }
 
-        public override IEnumerable<SrcValuePair> SrcValuePairs
+        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
             get
             {
-                yield return SrcValuePair.Create(SrcConstants.ConnectionPointX, this.X);
-                yield return SrcValuePair.Create(SrcConstants.ConnectionPointY, this.Y);
-                yield return SrcValuePair.Create(SrcConstants.ConnectionPointDirX, this.DirX);
-                yield return SrcValuePair.Create(SrcConstants.ConnectionPointDirY, this.DirY);
-                yield return SrcValuePair.Create(SrcConstants.ConnectionPointType, this.Type);
+                yield return this.Create(nameof(this.X), VASS.SrcConstants.ConnectionPointX, this.X);
+                yield return this.Create(nameof(this.Y), VASS.SrcConstants.ConnectionPointY, this.Y);
+                yield return this.Create(nameof(this.DirX), VASS.SrcConstants.ConnectionPointDirX, this.DirX);
+                yield return this.Create(nameof(this.DirY), VASS.SrcConstants.ConnectionPointDirY, this.DirY);
+                yield return this.Create(nameof(this.Type), VASS.SrcConstants.ConnectionPointType, this.Type);
             }
         }
 
-        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCells(page, shapeids, type);
+            var reader = ConnectionPointCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
-        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, CellValueType type)
+        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
-            var query = lazy_query.Value;
-            return query.GetCells(shape, type);
+            var reader = ConnectionPointCells_lazy_builder.Value;
+            return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<ConnectionPointCellsReader> lazy_query = new System.Lazy<ConnectionPointCellsReader>();
+        private static readonly System.Lazy<ConnectionPointCellsBuilder> ConnectionPointCells_lazy_builder = new System.Lazy<ConnectionPointCellsBuilder>();
 
-        class ConnectionPointCellsReader : ReaderMultiRow<ConnectionPointCells>
+        class ConnectionPointCellsBuilder : VASS.CellGroups.CellGroupBuilder<ConnectionPointCells>
         {
-            public SectionQueryColumn DirX { get; set; }
-            public SectionQueryColumn DirY { get; set; }
-            public SectionQueryColumn Type { get; set; }
-            public SectionQueryColumn X { get; set; }
-            public SectionQueryColumn Y { get; set; }
 
-            public ConnectionPointCellsReader()
+            public ConnectionPointCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
             {
-                var sec = this.query.SectionQueries.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
-
-                this.DirX = sec.Columns.Add(SrcConstants.ConnectionPointDirX, nameof(this.DirX));
-                this.DirY = sec.Columns.Add(SrcConstants.ConnectionPointDirY, nameof(this.DirY));
-                this.Type = sec.Columns.Add(SrcConstants.ConnectionPointType, nameof(this.Type));
-                this.X = sec.Columns.Add(SrcConstants.ConnectionPointX, nameof(this.X));
-                this.Y = sec.Columns.Add(SrcConstants.ConnectionPointY, nameof(this.Y));
-
             }
 
-            public override ConnectionPointCells ToCellGroup(Utilities.ArraySegment<string> row)
+            public override ConnectionPointCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var cells = new ConnectionPointCells();
-                cells.X = row[this.X];
-                cells.Y = row[this.Y];
-                cells.DirX = row[this.DirX];
-                cells.DirY = row[this.DirY];
-                cells.Type = row[this.Type];
+                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+
+                cells.X = getcellvalue(nameof(ConnectionPointCells.X));
+                cells.Y = getcellvalue(nameof(ConnectionPointCells.Y));
+                cells.DirX = getcellvalue(nameof(ConnectionPointCells.DirX));
+                cells.DirY = getcellvalue(nameof(ConnectionPointCells.DirY));
+                cells.Type = getcellvalue(nameof(ConnectionPointCells.Type));
 
                 return cells;
             }

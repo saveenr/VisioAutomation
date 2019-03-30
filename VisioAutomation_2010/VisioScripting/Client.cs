@@ -138,24 +138,24 @@ namespace VisioScripting
             return ct;
         }
 
-        private static List<string> dlls;
+        private static List<string> _static_dlls;
         public List<string> Assemblies
         {
             get
             {
-                if (dlls==null)
+                if (_static_dlls==null)
                 {
-                    dlls = new List<string>();
+                    _static_dlls = new List<string>();
                     var type = typeof(VisioScripting.Client);
                     string path = System.IO.Path.GetDirectoryName(type.Assembly.Location);
-                    dlls.Add(System.IO.Path.Combine(path, "VisioAutomation.dll"));
-                    dlls.Add(System.IO.Path.Combine(path, "VisioAutomation.Models.dll"));
+                    _static_dlls.Add(System.IO.Path.Combine(path, "VisioAutomation.dll"));
+                    _static_dlls.Add(System.IO.Path.Combine(path, "VisioAutomation.Models.dll"));
                     // dlls.Add(System.IO.Path.Combine(path, "VisioPS.dll"));
-                    dlls.Add(System.IO.Path.Combine(path, "VisioScripting.dll"));
-                    dlls.Add(System.IO.Path.Combine(path, "Microsoft.Msagl.dll"));
-                    dlls.Add(System.IO.Path.Combine(path, "GenTreeOps.dll"));
+                    _static_dlls.Add(System.IO.Path.Combine(path, "VisioScripting.dll"));
+                    _static_dlls.Add(System.IO.Path.Combine(path, "Microsoft.Msagl.dll"));
+                    _static_dlls.Add(System.IO.Path.Combine(path, "GenTreeOps.dll"));
                 }
-                return dlls;
+                return _static_dlls;
             }
         }
     }

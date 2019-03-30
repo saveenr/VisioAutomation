@@ -1,7 +1,7 @@
 ﻿using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioShapeCells
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioShapeCells)]
     public class SetVisioShapeCells : VisioCmdlet
@@ -38,30 +38,30 @@ namespace VisioPowerShell.Commands
             }
 
             var targets = new VisioScripting.Models.TargetShapes(target_shapes).ResolveShapes(this.Client);
-            var target_ids = targets.ToShapeIDs();
+            var target_shapeids = targets.ToShapeIDs();
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
             writer.BlastGuards = this.BlastGuards;
             writer.TestCircular = this.TestCircular;
 
-            for (int i = 0; i < target_ids.ShapeIDs.Count; i++)
+            for (int i = 0; i < target_shapeids.ShapeIDs.Count; i++)
             {
-                var shape_id = target_ids.ShapeIDs[i];
+                var shapeid = target_shapeids.ShapeIDs[i];
                 var shape_cells = this.Cells[i % this.Cells.Length];
 
-                shape_cells.Apply(writer, (short)shape_id);
+                shape_cells.Apply(writer, (short)shapeid);
             }
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
-            this.Client.Output.WriteVerbose("Number of Shapes : {0}", target_ids.ShapeIDs.Count);
+            this.Client.Output.WriteVerbose("Number of Shapes : {0}", target_shapeids.ShapeIDs.Count);
 
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioShapeCells)))
             {
                 this.Client.Output.WriteVerbose("Start Update");
-                writer.Commit(surface);
+                writer.CommitFormulas(surface);
                 this.Client.Output.WriteVerbose("End Update");
             }
         }

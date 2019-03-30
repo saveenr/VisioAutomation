@@ -4,7 +4,7 @@ using System.Linq;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioPageCells
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPageCells)]
     public class GetVisioPageCells: VisioCmdlet
@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands
             var target_pages = new VisioScripting.Models.TargetPages(this.Pages);
 
             var template = new VisioPowerShell.Models.PageCells();
-            var celldic = VisioPowerShell.Models.NamedCellDictionary.FromCells(template);
+            var celldic = VisioPowerShell.Models.NameCellDictionary.FromCells(template);
             var cellnames = celldic.Keys.ToArray();
             var query = _CreateQuery(celldic, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
@@ -47,7 +47,7 @@ namespace VisioPowerShell.Commands
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
-            VisioPowerShell.Models.NamedCellDictionary celldic,
+            VisioPowerShell.Models.NameCellDictionary celldic,
             IList<string> cellnames)
         {
             var invalid_names = cellnames.Where(cellname => !celldic.ContainsKey(cellname)).ToList();

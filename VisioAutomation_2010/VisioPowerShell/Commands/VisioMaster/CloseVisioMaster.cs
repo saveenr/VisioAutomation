@@ -1,6 +1,6 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioMaster
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Close, Nouns.VisioMaster)]
     public class CloseVisioMaster : VisioCmdlet
