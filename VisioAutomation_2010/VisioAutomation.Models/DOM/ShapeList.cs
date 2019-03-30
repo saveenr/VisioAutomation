@@ -7,6 +7,7 @@ using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Internal.Extensions;
 
 namespace VisioAutomation.Models.Dom
 {
@@ -130,9 +131,9 @@ namespace VisioAutomation.Models.Dom
         private void _perform_drawing(RenderContext context)
         {
             // Draw shapes
-            var non_connectors = this._shapes.Where(s => !(s is Connector)).ToList();
+            var non_connectors = this._shapes.WhereNotOfType(typeof(Connector)).ToList();
             var non_connector_dropshapes = non_connectors.OfType<Shape>().ToList();
-            var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
+            var non_connector_nondropshapes = non_connectors.WhereNotOfType(typeof(Shape)).ToList();
 
             this.drop_masters(context, non_connector_dropshapes);
             this._draw_non_masters(context, non_connector_nondropshapes);
@@ -224,9 +225,7 @@ namespace VisioAutomation.Models.Dom
         {
             // Find all the shapes that use masters and for which
             // a Visio master object has not been identifies yet
-            var shape_nodes = this._shapes
-                .Where(shape => shape is Shape)
-                .Cast<Shape>()
+            var shape_nodes = this._shapes.OfType<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
 
             var master_cache = new MasterCache();
