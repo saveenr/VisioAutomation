@@ -95,9 +95,11 @@
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Extensions\WindowMethods.cs" />
     <Compile Include="Exceptions\InternalAssertionException.cs" />
+    <Compile Include="ExtensionHelpers.cs" />
     <Compile Include="Pages\PageLayoutCells.cs" />
     <Compile Include="Pages\PagePrintCells.cs" />
     <Compile Include="Pages\PageRulerAndGridCells.cs" />
+    <Compile Include="LinqExtensions.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilderType.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
     <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
