@@ -9,7 +9,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Test_Resize_Application_Window1()
         {
-            var desired_size = new Size(600, 700);
+            var desired_size = new System.Drawing.Size(600, 700);
             var client = this.GetScriptingClient();
             var old_rect = client.Window.GetApplicationWindowRectangle();
             var new_rect = new System.Drawing.Rectangle(old_rect.X, old_rect.Y, desired_size.Width, desired_size.Height);

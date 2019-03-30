@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPowerShell_Tests", "Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Tests_Models", "VisioAutomation.Tests.Models\VisioAutomation_Tests_Models.csproj", "{E151ADA1-7DE9-489C-86EC-29E552B95605}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioScripting_Tests", "VisioScripting_Tests\VisioScripting_Tests.csproj", "{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,6 +181,22 @@ Global
 		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|Win32.Build.0 = Release|Any CPU
 		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|x86.ActiveCfg = Release|Any CPU
 		{E151ADA1-7DE9-489C-86EC-29E552B95605}.Release|x86.Build.0 = Release|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Win32.Build.0 = Debug|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Win32.ActiveCfg = Release|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Win32.Build.0 = Release|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

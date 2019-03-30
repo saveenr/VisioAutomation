@@ -109,43 +109,27 @@
     <Compile Include="DocumentAnalysis\PathAnalysis_Tests.cs" />
     <Compile Include="Framework\AssertUtil.cs" />
     <Compile Include="Core\Shapes\HyperlinkTests.cs" />
-    <Compile Include="Scripting\ScriptingDocumentTests.cs" />
-    <Compile Include="Scripting\ScriptingHyperlinkTests.cs" />
-    <Compile Include="Scripting\ScriptingShapeText_Tests.cs" />
     <Compile Include="Framework\DiagnosticDebugClientContext.cs" />
     <Compile Include="Framework\TestGlobals.cs" />
     <Compile Include="Framework\TestHelper.cs" />
     <Compile Include="Core\TypeTests.cs" />
     <Compile Include="Core\Application\XmlErrorLogTests.cs" />
-    <Compile Include="Scripting\ScriptingDevTests.cs" />
-    <Compile Include="Scripting\ScriptingExportTests.cs" />
-    <Compile Include="Scripting\ScriptingShapeSheetTests.cs" />
     <Compile Include="Core\Application\ApplicationHelperTests.cs" />
     <Compile Include="Framework\TestExtensions.cs" />
     <Compile Include="Framework\VisioApplicationSafeReference.cs" />
     <Compile Include="Core\Shapes\GeometryTests.cs" />
     <Compile Include="Core\Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Scripting\ScriptingApplicationTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Scripting\ScriptingPageTests.cs" />
     <Compile Include="Core\Text\TextFormatTests.cs" />
     <Compile Include="Core\Shapes\CustomPropertiesTest.cs" />
     <Compile Include="Core\Extensions\SelectionTests.cs" />
     <Compile Include="Core\InternalTests.cs" />
     <Compile Include="DocumentAnalysis\Path_Test.cs" />
     <Compile Include="Core\Shapes\UserDefinedCellsTests.cs" />
-    <Compile Include="Scripting\ScriptingArrangeTests.cs" />
-    <Compile Include="Scripting\ScriptingConnectionPointTests.cs" />
-    <Compile Include="Scripting\ScriptingConnectTests.cs" />
-    <Compile Include="Scripting\ScriptingControlTests.cs" />
-    <Compile Include="Scripting\ScriptingCustomPropTests.cs" />
-    <Compile Include="Scripting\ScriptingGroupTests.cs" />
-    <Compile Include="Scripting\ScriptingClientTests.cs" />
-    <Compile Include="Scripting\ScriptingSelectionTests.cs" />
     <Compile Include="Core\ShapeSheet\ShapeSheetWriterTests.cs" />
     <Compile Include="Core\Extensions\ApplicationTests.cs" />
     <Compile Include="Core\ShapeSheet\ShapeSheetQueryTests.cs" />
