@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Models.Utilities;
-using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using MSAGL = Microsoft.Msagl;
 using VA = VisioAutomation;
@@ -12,6 +10,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class MsaglRenderer
     {
+        private string _edge_master_name = "Dynamic Connector";
+        private string _edge_stencil_name = "connec_u.vss";
+
         private VA.Geometry.Rectangle _mg_bb;
         private VA.Geometry.Rectangle _layout_bb;
 
@@ -208,7 +209,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var master_to_size = new Dictionary<IVisio.Master, VA.Geometry.Size>();
 
             // Load and cache all the masters
-            var master_cache = new MasterCache();
+            var master_cache = new VA.Models.Utilities.MasterCache();
             foreach (var layout_shape in layout_diagram.Shapes)
             {
                 master_cache.Add(layout_shape.MasterName, layout_shape.StencilName);
@@ -383,9 +384,10 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 }
                 else
                 {
+                    
                     vconnector = new Dom.Connector(
                     layout_connector.From.DomNode,
-                    layout_connector.To.DomNode, "Dynamic Connector", "connec_u.vss");
+                    layout_connector.To.DomNode, _edge_master_name, _edge_stencil_name);
                 }
                 layout_connector.DomNode = vconnector;
                 shape_nodes.Add(vconnector);
@@ -468,7 +470,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // ADD CUSTOM PROPS
             if (layout_shape.CustomProperties != null)
             {
-                shape_node.CustomProperties = new CustomPropertyDictionary();
+                shape_node.CustomProperties = new VA.Shapes.CustomPropertyDictionary();
                 foreach (var kv in layout_shape.CustomProperties)
                 {
                     shape_node.CustomProperties[kv.Key] = kv.Value;
