@@ -29,12 +29,12 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
                 var shape = shape_cppdic_pair.Key;
                 var cpdic = shape_cppdic_pair.Value;
                 int shapeid = shape.ID;
-                foreach (var propname_propcells_pair in cpdic)
+                foreach (var cpname_cpcells_pair in cpdic)
                 {
-                    string propname = propname_propcells_pair.Key;
-                    var propcells = propname_propcells_pair.Value;
-                    var cpo = new CustomProperty(shapeid, propname, propcells);
-                    this.WriteObject(cpo);
+                    string cpname = cpname_cpcells_pair.Key;
+                    var cpcells = cpname_cpcells_pair.Value;
+                    var cp_obj = new CustomProperty(shapeid, cpname, cpcells);
+                    this.WriteObject(cp_obj);
                 }
             }
         }
