@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
@@ -26,12 +25,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Document> ToEnumerable(this IVisio.Documents documents)
         {
-            return ExtensionHelpers.ToEnumerable(() => documents.Count, i => documents[i + 1]); ;
+            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToEnumerable(() => documents.Count, i => documents[i + 1]); ;
         }
 
         public static List<IVisio.Document> ToList(this IVisio.Documents documents)
         {
-            return ExtensionHelpers.ToList(() => documents.Count, i => documents[i + 1]); ;
+            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => documents.Count, i => documents[i + 1]); ;
         }
 
         public static IVisio.Document OpenStencil(this IVisio.Documents documents, string filename)
@@ -43,32 +42,6 @@ namespace VisioAutomation.Extensions
                 throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
             return stencil;
-        }
-    }
-
-    internal static class ExtensionHelpers
-    {
-        public static IEnumerable<T> ToEnumerable<T>(Func<int> get_count, Func<int, T> get_item)
-        {
-            int count = get_count();
-            var list = new List<T>(count);
-            for (int i = 0; i < count; i++)
-            {
-                var item = get_item(i);
-                yield return item;
-            }
-        }
-
-        public static List<T> ToList<T>(Func<int> get_count, Func<int,T> get_item)
-        {
-            int count = get_count();
-            var list = new List<T>(count);
-            for (int i = 0; i < count; i++)
-            {
-                var item = get_item(i);
-                list.Add(item);
-            }
-            return list;
         }
     }
 }

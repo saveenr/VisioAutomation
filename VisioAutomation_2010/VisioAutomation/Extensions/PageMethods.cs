@@ -126,12 +126,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Page> ToEnumerable(this IVisio.Pages pages)
         {
-            return ExtensionHelpers.ToEnumerable(() => pages.Count, i => pages[i + 1]);
+            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToEnumerable(() => pages.Count, i => pages[i + 1]);
         }
 
         public static List<IVisio.Page> ToList(this IVisio.Pages pages)
         {
-            return ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
+            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
         }
 
         public static string[] GetNamesU(this IVisio.Pages pages)
