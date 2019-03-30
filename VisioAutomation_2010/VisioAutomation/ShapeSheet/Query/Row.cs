@@ -9,9 +9,9 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         public int ShapeID { get; }
         public IVisio.VisSectionIndices SectionIndex { get; }
-        private VASS.Internal.ArraySegment<T> Cells { get; }
+        private VisioAutomation.Internal.ArraySegment<T> Cells { get; }
 
-        internal Row(int shapeid, IVisio.VisSectionIndices secindex, Internal.ArraySegment<T> cells)
+        internal Row(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Internal.ArraySegment<T> cells)
         {
             this.ShapeID = shapeid;
             this.Cells = cells;

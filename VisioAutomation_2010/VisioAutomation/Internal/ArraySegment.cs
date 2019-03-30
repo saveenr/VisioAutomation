@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Internal
+namespace VisioAutomation.Internal
 {
     public struct ArraySegment<T> : IEnumerable<T>
     {

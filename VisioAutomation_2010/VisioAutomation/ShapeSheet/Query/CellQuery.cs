@@ -98,7 +98,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return cellqueryresults;
         }
 
-        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, VASS.Internal.ArraySegmentReader<T> seg_reader)
+        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, VisioAutomation.Internal.ArraySegmentReader<T> seg_reader)
         {
             var rows = new Rows<T>(shapeids.Count);
             foreach (int shapeid in shapeids)
@@ -109,7 +109,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return rows;
         }
 
-        private Row<T> _shapedata_to_row<T>(short shapeid, VASS.Internal.ArraySegmentReader<T> seg_reader)
+        private Row<T> _shapedata_to_row<T>(short shapeid, VisioAutomation.Internal.ArraySegmentReader<T> seg_reader)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;

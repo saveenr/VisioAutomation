@@ -41,7 +41,7 @@ namespace VisioAutomation.Application
         public static void BringWindowToTop(IVisio.Application app)
         {
             var visio_window_handle = new System.IntPtr(app.WindowHandle32);
-            VisioAutomation.Utilities.NativeMethods.BringWindowToTop(visio_window_handle);
+            VisioAutomation.Internal.NativeMethods.BringWindowToTop(visio_window_handle);
         }
     }
 }
