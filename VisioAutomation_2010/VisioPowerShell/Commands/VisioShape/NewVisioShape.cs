@@ -30,19 +30,19 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             if (this.Masters != null)
             {
-                drop_shape();
+                _drop_shape();
             }
             else
             {
-                draw_shape();
+                _draw_shape();
             }
         }
 
-        private void draw_shape()
+        private void _draw_shape()
         {
             var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
 
-            check_points_for_shape_type(points);
+            _check_points_for_shape_type(points);
 
             if (this.Type == Models.ShapeType.Rectangle)
             {
@@ -78,7 +78,7 @@ namespace VisioPowerShell.Commands.VisioShape
             }
         }
 
-        private void check_points_for_shape_type(List<VisioAutomation.Geometry.Point> points)
+        private void _check_points_for_shape_type(List<VisioAutomation.Geometry.Point> points)
         {
             if (this.Type == Models.ShapeType.Rectangle || this.Type == Models.ShapeType.Line || this.Type == Models.ShapeType.Oval)
             {
@@ -104,7 +104,7 @@ namespace VisioPowerShell.Commands.VisioShape
             }
         }
 
-        private void drop_shape()
+        private void _drop_shape()
         {
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 

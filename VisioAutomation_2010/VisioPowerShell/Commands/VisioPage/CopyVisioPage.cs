@@ -12,6 +12,7 @@ namespace VisioPowerShell.Commands.VisioPage
         protected override void ProcessRecord()
         {
             var target_page = new VisioScripting.Models.TargetPage();
+
             var page = target_page.Resolve(this.Client);
 
             IVisio.Page newpage;

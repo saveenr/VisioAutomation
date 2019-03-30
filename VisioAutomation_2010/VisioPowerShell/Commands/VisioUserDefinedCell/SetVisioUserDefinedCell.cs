@@ -21,13 +21,13 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var userprop = new VisioScripting.Models.UserDefinedCell(this.Name, this.Value);
+            var udcell = new VisioScripting.Models.UserDefinedCell(this.Name, this.Value);
             if (this.Prompt != null)
             {
-                userprop.Cells.Prompt = this.Prompt;
+                udcell.Cells.Prompt = this.Prompt;
             }
 
-            this.Client.UserDefinedCell.SetUserDefinedCell(targets, userprop);
+            this.Client.UserDefinedCell.SetUserDefinedCell(targets, udcell);
         }
     }
 }

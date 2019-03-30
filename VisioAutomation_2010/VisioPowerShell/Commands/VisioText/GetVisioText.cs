@@ -12,8 +12,8 @@ namespace VisioPowerShell.Commands.VisioText
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var t = this.Client.Text.GetShapeText(targets);
-            this.WriteObject(t);
+            var listof_string = this.Client.Text.GetShapeText(targets);
+            this.WriteObject(listof_string);
         }
     }
 }

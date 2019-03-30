@@ -16,18 +16,18 @@ namespace VisioPowerShell.Commands.VisioHyperlink
         protected override void ProcessRecord()
         {
             var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var dic = this.Client.Hyperlink.GetHyperlinks(targets, CellValueType.Formula);
+            var dicof_shape_to_hyperlinks = this.Client.Hyperlink.GetHyperlinks(targets, CellValueType.Formula);
 
             if (this.GetCells)
             {
-                this.WriteObject(dic);
+                this.WriteObject(dicof_shape_to_hyperlinks);
                 return;
             }
 
-            foreach (var shape_points in dic)
+            foreach (var shape_hyperlinks_pair in dicof_shape_to_hyperlinks)
             {
-                var shape = shape_points.Key;
-                var hyperlinks = shape_points.Value;
+                var shape = shape_hyperlinks_pair.Key;
+                var hyperlinks = shape_hyperlinks_pair.Value;
                 int shapeid = shape.ID;
 
                 foreach (var hyperlink in hyperlinks)

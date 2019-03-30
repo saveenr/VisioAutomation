@@ -1,5 +1,4 @@
 using System;
-using VisioScripting.Builders;
 using SXL = System.Xml.Linq;
 using SMA = System.Management.Automation;
 
@@ -27,7 +26,7 @@ namespace VisioPowerShell.Commands.VisioModel
             if (root.Name == "directedgraph")
             {
                 this.WriteVerbose("Loading as a Directed Graph");
-                var dg_model = DirectedGraphBuilder.LoadFromXml(
+                var dg_model = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXml(
                     this.Client,
                     xmldoc);
                 this.WriteObject(dg_model);               
@@ -35,7 +34,7 @@ namespace VisioPowerShell.Commands.VisioModel
             else if (root.Name == "orgchart")
             {
                 this.WriteVerbose("Loading as an Org Chart");
-                var oc = OrgChartBuilder.LoadFromXml(this.Client, xmldoc);
+                var oc = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(this.Client, xmldoc);
                 this.WriteObject(oc);
             }
             else

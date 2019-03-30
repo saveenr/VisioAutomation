@@ -1,4 +1,5 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Linq;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioShapeCells
@@ -44,11 +45,10 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             writer.BlastGuards = this.BlastGuards;
             writer.TestCircular = this.TestCircular;
 
-            for (int i = 0; i < target_shapeids.ShapeIDs.Count; i++)
+            foreach (int i in Enumerable.Range(0, target_shapeids.ShapeIDs.Count))
             {
                 var shapeid = target_shapeids.ShapeIDs[i];
                 var shape_cells = this.Cells[i % this.Cells.Length];
-
                 shape_cells.Apply(writer, (short)shapeid);
             }
 
