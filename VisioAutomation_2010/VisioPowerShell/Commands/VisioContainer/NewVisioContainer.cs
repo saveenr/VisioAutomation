@@ -1,7 +1,7 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioContainer
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioContainer)]
     public class NewVisioContainer : VisioCmdlet

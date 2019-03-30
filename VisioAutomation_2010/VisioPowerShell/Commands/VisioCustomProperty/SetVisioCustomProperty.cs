@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using SMA = System.Management.Automation;
 using VisioAutomation.Shapes;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioCustomProperty
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioCustomProperty)]
     public class SetVisioCustomProperty : VisioCmdlet

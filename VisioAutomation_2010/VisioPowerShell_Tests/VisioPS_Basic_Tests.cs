@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioPowerShell.Commands.VisioApplication;
 using VisioPowerShell_Tests.Framework;
 
 namespace VisioPowerShell_Tests
@@ -11,7 +12,7 @@ namespace VisioPowerShell_Tests
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
-            var new_visio_application = new VisioPowerShell.Commands.NewVisioApplication();
+            var new_visio_application = new NewVisioApplication();
         }
 
         [ClassCleanup]

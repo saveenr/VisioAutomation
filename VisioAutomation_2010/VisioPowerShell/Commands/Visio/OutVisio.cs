@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using SMA = System.Management.Automation;
 using System.Xml;
+using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Visio
 {
     [SMA.Cmdlet(SMA.VerbsData.Out, Nouns.Visio)]
     public class OutVisio : VisioCmdlet

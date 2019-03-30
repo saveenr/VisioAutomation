@@ -3,7 +3,7 @@ using VisioScripting.Builders;
 using SXL = System.Xml.Linq;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioModel
 {
     [SMA.Cmdlet(SMA.VerbsData.Import, Nouns.VisioModel)]
     public class ImportVisioModel : VisioCmdlet

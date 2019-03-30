@@ -1,8 +1,8 @@
-using SMA = System.Management.Automation;
 using VisioPowerShell.Models;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioCustomProperty
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioCustomProperty)]
     public class GetVisioCustomProperty : VisioCmdlet

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using SMA = System.Management.Automation;
 using VisioPowerShell.Models;
+using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioPage
 {
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Measure, Nouns.VisioPage)]
     public class MeasureVisioPage : VisioCmdlet

@@ -149,7 +149,7 @@
     <Compile Include="Commands\VisioDocument\OpenVisioDocument.cs" />
     <Compile Include="Commands\VisioControl\RemoveVisioControl.cs" />
     <Compile Include="Commands\VisioUserDefinedCell\SetVisioUserDefinedCell.cs" />
-    <Compile Include="Commands\VisioShape\ConnectVisioShape.cs" />
+    <Compile Include="Commands\VisioShape\NewVisioConnection.cs" />
     <Compile Include="Commands\VisioCustomProperty\RemoveVisioCustomProperty.cs" />
     <Compile Include="Commands\VisioPage\CopyVisioPage.cs" />
     <Compile Include="Commands\VisioPage\MeasureVisioPage.cs" />

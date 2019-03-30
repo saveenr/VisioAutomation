@@ -1,7 +1,7 @@
 using System.Globalization;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioPage
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioPage)]
     public class NewVisioPage : VisioCmdlet

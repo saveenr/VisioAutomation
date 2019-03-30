@@ -1,7 +1,7 @@
-using SMA = System.Management.Automation;
 using VisioScripting.Models;
+using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioPage
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPage)]
     public class GetVisioPage : VisioCmdlet

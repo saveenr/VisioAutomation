@@ -1,6 +1,6 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioDocument
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Open, Nouns.VisioDocument)]
     public class OpenVisioDocument : VisioCmdlet

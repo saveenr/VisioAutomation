@@ -1,7 +1,7 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommunications.Connect, Nouns.VisioShape)]
     public class NewVisioConnection : VisioCmdlet

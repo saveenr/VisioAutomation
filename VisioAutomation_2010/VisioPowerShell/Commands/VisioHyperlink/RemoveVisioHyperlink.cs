@@ -1,7 +1,7 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioHyperlink
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, Nouns.VisioHyperlink)]
     public class RemoveVisioHyperlink : VisioCmdlet

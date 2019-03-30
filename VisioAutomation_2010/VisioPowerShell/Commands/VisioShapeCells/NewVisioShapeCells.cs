@@ -1,6 +1,6 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioShapeCells
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioShapeCells)]
     public class NewVisioShapeCells : VisioCmdlet

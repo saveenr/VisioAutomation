@@ -1,7 +1,7 @@
 ﻿using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Select, Nouns.VisioShape)]
     public class SelectVisioShape : VisioCmdlet
