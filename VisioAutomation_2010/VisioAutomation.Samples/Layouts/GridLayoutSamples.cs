@@ -60,7 +60,7 @@ namespace VisioAutomationSamples
                 i++;
             }
 
-            writer.CommitFormulas(page);
+            writer.Commit(page, VA.ShapeSheet.CellValueType.Formula);
 
             var bordersize = new VA.Geometry.Size(1,1);
             page.ResizeToFitContents(bordersize);

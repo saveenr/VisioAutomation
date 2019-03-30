@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
                 }
             }
 
-            writer.CommitFormulas(page);
+            writer.Commit(page, VASS.CellValueType.Formula);
         }
 
         public void SetShapeName(Models.TargetShapes targets, IList<string> names)
