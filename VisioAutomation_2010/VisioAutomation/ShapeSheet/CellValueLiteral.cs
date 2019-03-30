@@ -68,29 +68,20 @@
             // This method is a reasonable way of getting values quoted smartly
             // and avoids quoting multiple times
 
-            // Rules are simple:
-            // - passthrough null values
-            // - passthrough empty values
-            // - passthrough values that begin with = - it is assumed the such strings have been carefully crafter
-            // - passthrough values that begin with " - it is assumed the such strings are already correct
-            // - finally (of noqutoe==false) replace " with "" and surround with " the result
+            // Rules are executed in this order:
+            // - null or empty or begins with = -> don't change
+            // - begins with " and ends with " -> don't change (assume caller has carefully crafted it)
+            // - if (quote flag on) - quote the string
+            //      turn all " to ""
+            //      add beginning " and ending "
+            // - don't change
+            
+            //  if noquote==false) replace " with "" and surround with " the result
 
-            if (text == null)
+            if (string.IsNullOrEmpty(text) || text[0] == '=')
             {
                 return text;
             }
-
-            if (text.Length == 0)
-            {
-                return text;
-            }
-
-
-            if (text[0] == '=')
-            {
-                return text;
-            }
-
 
             // it's quoted already, just return it
             if (text[0] == '\"' && text[text.Length-1]=='\"')
