@@ -5,7 +5,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SidSrcWriter : WriterBase
     {
-        public SidSrcWriter() : base(CellCoordinateType.SidSrc)
+        public SidSrcWriter() : base(StreamType.SidSrc)
         {
         }
 
@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this._records == null)
             {
-                this._records = new WriteRecordList(CellCoordinateType.SidSrc);
+                this._records = new WriteRecordList(StreamType.SidSrc);
             }
 
             if (formula.HasValue)

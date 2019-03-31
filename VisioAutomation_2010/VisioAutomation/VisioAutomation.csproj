@@ -114,7 +114,7 @@
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
-    <Compile Include="ShapeSheet\CellCoordinateType.cs" />
+    <Compile Include="ShapeSheet\StreamType.cs" />
     <Compile Include="ShapeSheet\Writers\WriteRecord.cs" />
     <Compile Include="ShapeSheet\Writers\WriteRecordList.cs" />
     <Compile Include="ShapeSheet\StreamArray.cs" />

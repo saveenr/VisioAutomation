@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
 
 
-        public SrcWriter() : base(CellCoordinateType.Src)
+        public SrcWriter() : base(StreamType.Src)
         {
         }
 
@@ -48,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this._records == null)
             {
-                this._records = new WriteRecordList(CellCoordinateType.Src);
+                this._records = new WriteRecordList(StreamType.Src);
             }
 
             if (formula.HasValue)

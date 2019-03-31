@@ -7,12 +7,12 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
         private readonly List<WriteRecord> _items;
 
-        readonly CellCoordinateType _coordtype;
+        readonly StreamType _streamtype;
 
-        public WriteRecordList(CellCoordinateType type)
+        public WriteRecordList(StreamType type)
         {
             this._items = new List<WriteRecord>();
-            this._coordtype = type;
+            this._streamtype = type;
         }
 
         public void Clear()
@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         private void _check_for_sidsrc()
         {
-            if (this._coordtype != CellCoordinateType.SidSrc)
+            if (this._streamtype != StreamType.SidSrc)
             {
                 string msg = string.Format("Excpected a sidsrc value");
                 throw new System.ArgumentOutOfRangeException(msg);
@@ -45,7 +45,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         private void _check_for_src()
         {
-            if (this._coordtype != CellCoordinateType.Src)
+            if (this._streamtype != StreamType.Src)
             {
                 string msg = string.Format("Excpected a src value");
                 throw new System.ArgumentOutOfRangeException(msg);
@@ -54,7 +54,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public Streams.StreamArray BuildSidSrcStream()
         {
-            if (this._coordtype != CellCoordinateType.SidSrc)
+            if (this._streamtype != StreamType.SidSrc)
             {
                 string msg = string.Format("writer does not contain sidsrcvalues");
                 throw new System.ArgumentOutOfRangeException(msg);
@@ -66,7 +66,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public Streams.StreamArray BuildSrcStream()
         {
-            if (this._coordtype != CellCoordinateType.Src)
+            if (this._streamtype != StreamType.Src)
             {
                 string msg = string.Format("writer does not contain srcvalues");
                 throw new System.ArgumentOutOfRangeException(msg);
