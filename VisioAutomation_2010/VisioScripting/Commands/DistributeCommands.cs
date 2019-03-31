@@ -16,10 +16,10 @@ namespace VisioScripting.Commands
 
             var page = cmdtarget.ActivePage;
             targetshapes = targetshapes.ResolveShapes(this._client);
-            var targetids = targetshapes.ToShapeIDs();
+            var targetshapeids = targetshapes.ToShapeIDs();
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeSelectionOnAxis)))
             {
-                VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
+                VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetshapeids, axis, spacing);
             }
         }
 

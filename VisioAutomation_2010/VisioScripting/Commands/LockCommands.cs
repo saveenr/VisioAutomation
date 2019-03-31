@@ -24,10 +24,10 @@ namespace VisioScripting.Commands
             }
 
             var page = cmdtarget.ActivePage;
-            var target_shapeids = targetshapes.ToShapeIDs();
+            var targetshapeids = targetshapes.ToShapeIDs();
             var writer = new VASS.Writers.SidSrcWriter();
 
-            foreach (int shapeid in target_shapeids.ShapeIDs)
+            foreach (int shapeid in targetshapeids.ShapeIDs)
             {
                 writer.SetValues((short)shapeid, lockcells);
             }
