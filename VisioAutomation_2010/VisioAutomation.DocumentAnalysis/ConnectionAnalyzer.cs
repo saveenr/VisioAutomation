@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.DocumentAnalysis
@@ -39,9 +39,9 @@ namespace VisioAutomation.DocumentAnalysis
             var src_beginarrow = ShapeSheet.SrcConstants.LineBeginArrow;
             var src_endarrow = ShapeSheet.SrcConstants.LineEndArrow;
 
-            var query = new CellQuery();
-            var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(ShapeSheet.SrcConstants.LineBeginArrow));
-            var col_endarrow = query.Columns.Add(src_endarrow, nameof(ShapeSheet.SrcConstants.LineEndArrow));
+            var query = new VASS.Query.CellQuery();
+            var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(VASS.SrcConstants.LineBeginArrow));
+            var col_endarrow = query.Columns.Add(src_endarrow, nameof(VASS.SrcConstants.LineEndArrow));
             var listof_connectorinfo = query.GetResults<int>(page , connnector_ids);
             
             var directed_edges = new List<ConnectorEdge>();
@@ -195,34 +195,35 @@ namespace VisioAutomation.DocumentAnalysis
                 throw new System.ArgumentNullException(nameof(edges));
             }
 
-            var object_to_id = new Dictionary<TNode, int>();
-            var id_to_object = new Dictionary<int, TNode>();
+            var dicof_obj_to_id = new Dictionary<TNode, int>();
+            var dicof_id_to_obj = new Dictionary<int, TNode>();
 
             foreach (var edge in edges)
             {
-                if (!object_to_id.ContainsKey(edge.From))
+                if (!dicof_obj_to_id.ContainsKey(edge.From))
                 {
-                    object_to_id[edge.From] = object_to_id.Count;
+                    dicof_obj_to_id[edge.From] = dicof_obj_to_id.Count;
                 }
 
-                if (!object_to_id.ContainsKey(edge.To))
+                if (!dicof_obj_to_id.ContainsKey(edge.To))
                 {
-                    object_to_id[edge.To] = object_to_id.Count;
+                    dicof_obj_to_id[edge.To] = dicof_obj_to_id.Count;
                 }
             }
 
-            foreach (var i in object_to_id)
+            foreach (var kv in dicof_obj_to_id)
             {
-                id_to_object[i.Value] = i.Key;
+                dicof_id_to_obj[kv.Value] = kv.Key;
             }
 
             var internal_edges = new List<DirectedEdge<int, object>>();
 
             foreach (var edge in edges)
             {
-                int fromid = object_to_id[edge.From];
-                int toid = object_to_id[edge.To];
-                var directed_edge = new DirectedEdge<int, object>(fromid, toid, null);
+                int fromid = dicof_obj_to_id[edge.From];
+                int toid = dicof_obj_to_id[edge.To];
+                object data = null;
+                var directed_edge = new DirectedEdge<int, object>(fromid, toid, data);
                 internal_edges.Add(directed_edge);
             }
 
@@ -231,11 +232,11 @@ namespace VisioAutomation.DocumentAnalysis
                 yield break;
             }
 
-            int num_vertices = object_to_id.Count;
+            int num_vertices = dicof_obj_to_id.Count;
             var adj_matrix = new BitArray2D(num_vertices, num_vertices);
-            foreach (var iedge in internal_edges)
+            foreach (var internal_edge in internal_edges)
             {
-                adj_matrix[iedge.From, iedge.To] = true;
+                adj_matrix[internal_edge.From, internal_edge.To] = true;
             }
 
             var warshall_result = adj_matrix.Clone();
@@ -248,7 +249,7 @@ namespace VisioAutomation.DocumentAnalysis
                 {
                     if (warshall_result.Get(row, col) && (row!=col))
                     {
-                        var de = new DirectedEdge<TNode, object>(id_to_object[row], id_to_object[col], null);
+                        var de = new DirectedEdge<TNode, object>(dicof_id_to_obj[row], dicof_id_to_obj[col], null);
                         yield return de;
                     }
                 }
