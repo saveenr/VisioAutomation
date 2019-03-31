@@ -49,8 +49,8 @@ namespace VisioAutomationSamples
             var ch1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
             ch1.NoArrowsHandling=VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
-            var tc_edges_0 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page, ch0);
-            var tc_edges_1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page, ch1);
+            var tc_edges_0 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, ch0);
+            var tc_edges_1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, ch1);
 
             var legend0 = page.DrawRectangle(5, 0, 6.5, 6);
             var sb0 = new System.Text.StringBuilder();

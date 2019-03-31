@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
-            return VA.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(cmdtarget.ActivePage, flag);
+            return VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(cmdtarget.ActivePage, flag);
         }
 
         public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdgesOnActivePage(VA.DocumentAnalysis.ConnectorHandling flag)

@@ -8,23 +8,6 @@ namespace VisioAutomation.DocumentAnalysis
 {
     public static class ConnectionAnalyzer
     {
-        public static List<ConnectorEdge> GetTransitiveClosure(
-            IVisio.Page page,
-            ConnectorHandling flag)
-        {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException(nameof(page));
-            }
-
-            var directed_edges = ConnectionAnalyzer.GetDirectedEdges(page, flag)
-                .Select(e => new DirectedEdge<IVisio.Shape, IVisio.Shape>(e.From, e.To, e.Connector));
-
-            var closure = ConnectionAnalyzer.GetClosureFromEdges(directed_edges)
-                .Select(x => new ConnectorEdge(null, x.From, x.To)).ToList();
-
-            return closure;
-        }
 
         /// <summary>
         /// Returns all the directed,connected pairs of shapes in the  page
@@ -59,16 +42,16 @@ namespace VisioAutomation.DocumentAnalysis
             var query = new CellQuery();
             var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(ShapeSheet.SrcConstants.LineBeginArrow));
             var col_endarrow = query.Columns.Add(src_endarrow, nameof(ShapeSheet.SrcConstants.LineEndArrow));
-
-            var arrow_table = query.GetResults<int>(page , connnector_ids);
+            var listof_connectorinfo = query.GetResults<int>(page , connnector_ids);
             
             var directed_edges = new List<ConnectorEdge>();
 
             int connector_index = 0;
-            foreach (var e in edges)
+            foreach (var edge in edges)
             {
-                int beginarrow = arrow_table[connector_index][col_beginarrow];
-                int endarrow = arrow_table[connector_index][col_endarrow];
+                var connector_info = listof_connectorinfo[connector_index];
+                int beginarrow = connector_info[col_beginarrow];
+                int endarrow = connector_info[col_endarrow];
 
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
@@ -76,8 +59,8 @@ namespace VisioAutomation.DocumentAnalysis
                     if (flag.NoArrowsHandling == NoArrowsHandling.TreatEdgeAsBidirectional)
                     {
                         // in this case treat the connector as pointing in both directions
-                        var de1 = new ConnectorEdge(e.Connector, e.To, e.From);
-                        var de2 = new ConnectorEdge(e.Connector, e.From, e.To);
+                        var de1 = new ConnectorEdge(edge.Connector, edge.To, edge.From);
+                        var de2 = new ConnectorEdge(edge.Connector, edge.From, edge.To);
                         directed_edges.Add(de1);
                         directed_edges.Add(de2);
                     }
@@ -97,14 +80,14 @@ namespace VisioAutomation.DocumentAnalysis
                     // handle if it has a from arrow
                     if (beginarrow > 0)
                     {
-                        var de = new ConnectorEdge(e.Connector, e.To, e.From);
+                        var de = new ConnectorEdge(edge.Connector, edge.To, edge.From);
                         directed_edges.Add(de);
                     }
 
                     // handle if it has a to arrow
                     if (endarrow > 0)
                     {
-                        var de = new ConnectorEdge(e.Connector, e.From, e.To);
+                        var de = new ConnectorEdge(edge.Connector, edge.From, edge.To);
                         directed_edges.Add(de);
                     }
                 }
@@ -114,6 +97,25 @@ namespace VisioAutomation.DocumentAnalysis
 
             return directed_edges;
         }
+
+        public static List<ConnectorEdge> GetDirectedEdgesTransitive(
+            IVisio.Page page,
+            ConnectorHandling flag)
+        {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException(nameof(page));
+            }
+
+            var directed_edges = ConnectionAnalyzer.GetDirectedEdges(page, flag)
+                .Select(e => new DirectedEdge<IVisio.Shape, IVisio.Shape>(e.From, e.To, e.Connector));
+
+            var closure = ConnectionAnalyzer.GetClosureFromEdges(directed_edges)
+                .Select(x => new ConnectorEdge(null, x.From, x.To)).ToList();
+
+            return closure;
+        }
+
 
         /// <summary>
         /// Gets all the pairs of shapes that are connected by a connector
@@ -127,8 +129,7 @@ namespace VisioAutomation.DocumentAnalysis
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var page_connects = page.Connects;
-            var connects = page_connects.ToList();
+            var connects = page.Connects.ToList();
 
             var edges = new List<ConnectorEdge>();
 
@@ -141,7 +142,7 @@ namespace VisioAutomation.DocumentAnalysis
 
                 if (current_connect_shape != old_connect_shape)
                 {
-                    // the currect connector is NOT same as the one we stored previously
+                    // the current connector is NOT same as the one we stored previously
                     // this means the previous connector is connected to only one shape (not two).
                     // So skip the previos connector and start remembering from the current connector
                     old_connect_shape = current_connect_shape;
@@ -160,7 +161,7 @@ namespace VisioAutomation.DocumentAnalysis
             return edges;
         }
 
-        internal static void PerformWarshall(VisioAutomation.DocumentAnalysis.BitArray2D adj_matrix)
+        internal static void PerformWarshall(BitArray2D adj_matrix)
         {
             if (adj_matrix == null)
             {
@@ -231,7 +232,7 @@ namespace VisioAutomation.DocumentAnalysis
             }
 
             int num_vertices = object_to_id.Count;
-            var adj_matrix = new VisioAutomation.DocumentAnalysis.BitArray2D(num_vertices, num_vertices);
+            var adj_matrix = new BitArray2D(num_vertices, num_vertices);
             foreach (var iedge in internal_edges)
             {
                 adj_matrix[iedge.From, iedge.To] = true;
