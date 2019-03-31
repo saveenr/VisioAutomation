@@ -120,7 +120,7 @@
     <Compile Include="ShapeSheet\StreamArray.cs" />
     <Compile Include="Shapes\CustomPropertyNameCellsPair.cs" />
     <Compile Include="Shapes\CustomPropertyType.cs" />
-    <Compile Include="Collections\ArraySegmentReader.cs" />
+    <Compile Include="Collections\ArraySegmentEnumerator.cs" />
     <Compile Include="Collections\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryCache.cs" />
     <Compile Include="ShapeSheet\Query\Rows.cs" />
