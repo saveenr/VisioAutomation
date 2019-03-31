@@ -5,14 +5,8 @@ namespace VisioScripting.Models
 {
     public class TargetShapeIDs: List<int>
     {
-        internal TargetShapeIDs(IEnumerable<int> shapeids, int count)
+        internal TargetShapeIDs(int capacity) : base (capacity)
         {
-            if (shapeids == null)
-            {
-                throw new System.ArgumentNullException(nameof(shapeids));
-            }
-
-            this.AddRange(shapeids);
         }
     }
 }

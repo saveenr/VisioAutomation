@@ -23,7 +23,8 @@ namespace VisioScripting.Models
             }
 
             var shapeids = this.Shapes.Select(s => s.ID);
-            var target_shapeids = new TargetShapeIDs(shapeids, this.Shapes.Count);
+            var target_shapeids = new TargetShapeIDs(this.Shapes.Count);
+            target_shapeids.AddRange(shapeids);
             return target_shapeids;
         }
 
