@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-            var flag = this.get_DirectedEdgeHandling();
+            var flag = this._get_directed_edge_handling();
             var edges = this.Client.Connection.GetDirectedEdgesOnActivePage(flag);
 
             if (this.GetShapeObjects)
@@ -28,11 +28,11 @@ namespace VisioPowerShell.Commands.VisioPage
                 return;
             }
 
-            this.write_edges_with_shapeids(edges);
+            this._write_edges_with_shapeids(edges);
                 
         }
 
-        private VA.DocumentAnalysis.ConnectorHandling get_DirectedEdgeHandling()
+        private VA.DocumentAnalysis.ConnectorHandling _get_directed_edge_handling()
         {
             var flag = new VA.DocumentAnalysis.ConnectorHandling();
             flag.NoArrowsHandling =  VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
@@ -51,7 +51,7 @@ namespace VisioPowerShell.Commands.VisioPage
             return flag;
         }
 
-        private void write_edges_with_shapeids(IList<VA.DocumentAnalysis.ConnectorEdge> edges)
+        private void _write_edges_with_shapeids(IList<VA.DocumentAnalysis.ConnectorEdge> edges)
         {
             foreach (var edge in edges)
             {
