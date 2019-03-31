@@ -17,14 +17,14 @@ namespace VisioScripting.Commands
         /// </summary>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public List<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosureOnActivePage(VA.DocumentAnalysis.ConnectorHandling flag)
+        public List<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosureOnActivePage(VA.DocumentAnalysis.ConnectionAnalyzerOptions flag)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
             return VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(cmdtarget.ActivePage, flag);
         }
 
-        public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdgesOnActivePage(VA.DocumentAnalysis.ConnectorHandling flag)
+        public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdgesOnActivePage(VA.DocumentAnalysis.ConnectionAnalyzerOptions flag)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

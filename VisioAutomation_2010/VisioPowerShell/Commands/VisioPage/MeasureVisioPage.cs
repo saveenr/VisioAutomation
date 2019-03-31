@@ -32,9 +32,9 @@ namespace VisioPowerShell.Commands.VisioPage
                 
         }
 
-        private VA.DocumentAnalysis.ConnectorHandling _get_directed_edge_handling()
+        private VA.DocumentAnalysis.ConnectionAnalyzerOptions _get_directed_edge_handling()
         {
-            var flag = new VA.DocumentAnalysis.ConnectorHandling();
+            var flag = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             flag.NoArrowsHandling =  VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
             if (this.Raw)

@@ -13,11 +13,11 @@ namespace VisioAutomation.DocumentAnalysis
         /// Returns all the directed,connected pairs of shapes in the  page
         /// </summary>
         /// <param name="page"></param>
-        /// <param name="flag"></param>
+        /// <param name="options"></param>
         /// <returns></returns>
         public static List<ConnectorEdge> GetDirectedEdges(
             IVisio.Page page,
-            ConnectorHandling flag)
+            ConnectionAnalyzerOptions options)
         {
             if (page == null)
             {
@@ -26,7 +26,7 @@ namespace VisioAutomation.DocumentAnalysis
 
             var edges = ConnectionAnalyzer._get_directed_edges_raw(page);
 
-            if (flag.DirectionSource == DirectionSource.UseConnectionOrder)
+            if (options.DirectionSource == DirectionSource.UseConnectionOrder)
             {
                 return edges;
             }
@@ -56,7 +56,7 @@ namespace VisioAutomation.DocumentAnalysis
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
                     // the line has no arrows
-                    if (flag.NoArrowsHandling == NoArrowsHandling.TreatEdgeAsBidirectional)
+                    if (options.NoArrowsHandling == NoArrowsHandling.TreatEdgeAsBidirectional)
                     {
                         // in this case treat the connector as pointing in both directions
                         var de1 = new ConnectorEdge(edge.Connector, edge.To, edge.From);
@@ -64,13 +64,13 @@ namespace VisioAutomation.DocumentAnalysis
                         directed_edges.Add(de1);
                         directed_edges.Add(de2);
                     }
-                    else if (flag.NoArrowsHandling == NoArrowsHandling.ExcludeEdge)
+                    else if (options.NoArrowsHandling == NoArrowsHandling.ExcludeEdge)
                     {
                         // in this case ignore the connector completely
                     }
                     else
                     {
-                        throw new System.ArgumentOutOfRangeException(nameof(flag));
+                        throw new System.ArgumentOutOfRangeException(nameof(options));
                     }
                 }
                 else
@@ -100,14 +100,14 @@ namespace VisioAutomation.DocumentAnalysis
 
         public static List<ConnectorEdge> GetDirectedEdgesTransitive(
             IVisio.Page page,
-            ConnectorHandling flag)
+            ConnectionAnalyzerOptions options)
         {
             if (page == null)
             {
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var directed_edges = ConnectionAnalyzer.GetDirectedEdges(page, flag)
+            var directed_edges = ConnectionAnalyzer.GetDirectedEdges(page, options)
                 .Select(e => new DirectedEdge<IVisio.Shape, IVisio.Shape>(e.From, e.To, e.Connector));
 
             var closure = ConnectionAnalyzer.GetClosureFromEdges(directed_edges)
