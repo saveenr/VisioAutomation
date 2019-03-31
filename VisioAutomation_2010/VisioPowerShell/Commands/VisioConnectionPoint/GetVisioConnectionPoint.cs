@@ -14,9 +14,9 @@ namespace VisioPowerShell.Commands.VisioConnectionPoint
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
 
-            var dic = this.Client.ConnectionPoint.GetConnectionPoints(targets);
+            var dic = this.Client.ConnectionPoint.GetConnectionPoints(targetshapes);
 
             if (this.GetCells)
             {

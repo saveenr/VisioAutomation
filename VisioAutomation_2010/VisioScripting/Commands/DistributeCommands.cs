@@ -10,13 +10,13 @@ namespace VisioScripting.Commands
 
         }
 
-        public void DistributeSelectionOnAxis(Models.TargetShapes targets, Models.Axis axis, double spacing)
+        public void DistributeSelectionOnAxis(Models.TargetShapes targetshapes, Models.Axis axis, double spacing)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
-            targets = targets.ResolveShapes(this._client);
-            var targetids = targets.ToShapeIDs();
+            targetshapes = targetshapes.ResolveShapes(this._client);
+            var targetids = targetshapes.ToShapeIDs();
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeSelectionOnAxis)))
             {
                 VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetids, axis, spacing);
@@ -47,11 +47,11 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeShapesHorizontal(Models.TargetShapes targets, Models.AlignmentHorizontal halign)
+        public void DistributeShapesHorizontal(Models.TargetShapes targetshapes, Models.AlignmentHorizontal halign)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            int shape_count = targets.SelectShapesAndCount(this._client);
+            int shape_count = targetshapes.SelectShapesAndCount(this._client);
             if (shape_count < 1)
             {
                 return;
@@ -76,11 +76,11 @@ namespace VisioScripting.Commands
             cmdtarget.Application.DoCmd((short)cmd);
         }
 
-        public void DistributeVertical(Models.TargetShapes targets, Models.AlignmentVertical valign)
+        public void DistributeVertical(Models.TargetShapes targetshapes, Models.AlignmentVertical valign)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            int shape_count = targets.SelectShapesAndCount(this._client);
+            int shape_count = targetshapes.SelectShapesAndCount(this._client);
             if (shape_count < 1)
             {
                 return;

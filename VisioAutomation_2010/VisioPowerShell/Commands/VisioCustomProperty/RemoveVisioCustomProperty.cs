@@ -14,8 +14,8 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            this.Client.CustomProperty.DeleteCustomPropertyWithName(targets, this.Name);
+            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
+            this.Client.CustomProperty.DeleteCustomPropertyWithName(targetshapes, this.Name);
         }
     }
 }

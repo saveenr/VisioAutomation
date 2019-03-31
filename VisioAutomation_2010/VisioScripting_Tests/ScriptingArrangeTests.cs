@@ -33,9 +33,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            var targets = new VisioScripting.Models.TargetShapes();
+            var targetshapes = new VisioScripting.Models.TargetShapes();
 
-            client.Distribute.DistributeShapesHorizontal(targets, VisioScripting.Models.AlignmentHorizontal.Center);
+            client.Distribute.DistributeShapesHorizontal(targetshapes, VisioScripting.Models.AlignmentHorizontal.Center);
 
             var shapes = new[] { s1, s2, s3 };
             var shapeids = shapes.Select(s => (int)s.ID16).ToList();
@@ -70,9 +70,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            var targets = new VisioScripting.Models.TargetShapes();
-            client.Distribute.DistributeSelectionOnAxis(targets, VisioScripting.Models.Axis.XAxis , 0.25);
-            client.Distribute.DistributeSelectionOnAxis(targets, VisioScripting.Models.Axis.YAxis, 1.0);
+            var targetshapes = new VisioScripting.Models.TargetShapes();
+            client.Distribute.DistributeSelectionOnAxis(targetshapes, VisioScripting.Models.Axis.XAxis , 0.25);
+            client.Distribute.DistributeSelectionOnAxis(targetshapes, VisioScripting.Models.Axis.YAxis, 1.0);
 
             var shapes = new[] { s1, s2, s3 };
             var shapeids = shapes.Select(s => (int)s.ID16).ToList();

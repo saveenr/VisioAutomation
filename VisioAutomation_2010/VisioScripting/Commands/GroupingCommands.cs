@@ -31,14 +31,14 @@ namespace VisioScripting.Commands
             return g;
         }
 
-        public void UngroupSelectedShapes(Models.TargetShapes targets)
+        public void UngroupSelectedShapes(Models.TargetShapes targetshapes)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
 
-            if (targets.Shapes == null)
+            if (targetshapes.Shapes == null)
             {
                 if (selection.Count>=1)
                 {
@@ -48,7 +48,7 @@ namespace VisioScripting.Commands
             }
             else
             {
-                foreach (var shape in targets.Shapes)
+                foreach (var shape in targetshapes.Shapes)
                 {
                     shape.Ungroup();
                 }

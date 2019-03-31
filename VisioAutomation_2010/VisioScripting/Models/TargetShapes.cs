@@ -97,16 +97,16 @@ namespace VisioScripting.Models
         public TargetShapes ResolveShapes(VisioScripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
-            var targets = new TargetShapes(shapes);
-            return targets;
+            var targetshapes = new TargetShapes(shapes);
+            return targetshapes;
         }
 
         internal TargetShapes ResolveShapes2D(VisioScripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
-            var targets = new TargetShapes(shapes_2d);
-            return targets;
+            var targetshapes = new TargetShapes(shapes_2d);
+            return targetshapes;
         }
     }
 }

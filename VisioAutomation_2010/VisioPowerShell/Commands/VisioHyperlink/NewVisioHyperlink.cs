@@ -52,8 +52,8 @@ namespace VisioPowerShell.Commands.VisioHyperlink
             hlink.NewWindow = this.NewWindow;
             hlink.Invisible = this.Invisible;
 
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            this.Client.Hyperlink.AddHyperlink(targets, hlink);
+            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
+            this.Client.Hyperlink.AddHyperlink(targetshapes, hlink);
         }
     }
 }

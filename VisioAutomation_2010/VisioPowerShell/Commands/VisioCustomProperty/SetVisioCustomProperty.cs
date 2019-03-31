@@ -112,13 +112,13 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
                 cp.Invisible = this.Invisible;
             }
 
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            this.Client.CustomProperty.SetCustomProperty(targets, this.Name, cp);
+            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
+            this.Client.CustomProperty.SetCustomProperty(targetshapes, this.Name, cp);
         }
 
         private void _set_from_hash_table()
         {
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
 
             if (this.Hashtable.Count < 1)
             {
@@ -137,7 +137,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
 
                 object value = this.Hashtable[key];
                 var cp = _create_cust_prop_from_object(value);
-                this.Client.CustomProperty.SetCustomProperty(targets, key_string, cp);
+                this.Client.CustomProperty.SetCustomProperty(targetshapes, key_string, cp);
             }
         }
 

@@ -27,7 +27,7 @@ namespace VisioScripting.Commands
             writer.Commit(page, VASS.CellValueType.Formula);
         }
 
-        public void SetShapeName(Models.TargetShapes targets, IList<string> names)
+        public void SetShapeName(Models.TargetShapes targetshapes, IList<string> names)
         {
             if (names == null || names.Count < 1)
             {
@@ -35,9 +35,9 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targets.Shapes.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
@@ -46,7 +46,7 @@ namespace VisioScripting.Commands
             {
                 int numnames = names.Count;
 
-                int up_to = System.Math.Min(numnames, targets.Shapes.Count);
+                int up_to = System.Math.Min(numnames, targetshapes.Shapes.Count);
 
                 for (int i = 0; i < up_to; i++)
                 {
@@ -54,7 +54,7 @@ namespace VisioScripting.Commands
 
                     if (new_name != null)
                     {
-                        var shape = targets.Shapes[i];
+                        var shape = targetshapes.Shapes[i];
                         shape.Name = new_name;
                     }
                 }

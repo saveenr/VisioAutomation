@@ -14,17 +14,17 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> GetConnectionPoints(Models.TargetShapes targets)
+        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> GetConnectionPoints(Models.TargetShapes targetshapes)
         {
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targets.Shapes.Count<1)
+            if (targetshapes.Shapes.Count<1)
             {
                 return new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
             }
 
             var dic = new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
-            foreach (var shape in targets.Shapes)
+            foreach (var shape in targetshapes.Shapes)
             {
                 var cp = VisioAutomation.Shapes.ConnectionPointCells.GetCells(shape, CellValueType.Formula);
                 dic[shape] = cp;
@@ -79,18 +79,18 @@ namespace VisioScripting.Commands
             return this.AddConnectionPoint(targets, fx, fy, type);
         }
 
-        public void DeleteConnectionPointAtIndex(Models.TargetShapes targets, int index)
+        public void DeleteConnectionPointAtIndex(Models.TargetShapes targetshapes, int index)
         {
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targets.Shapes.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
             // restrict the operation to those shapes that actually have enough
             // connection points to qualify for deleting 
-            var qualified_shapes = targets.Shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
+            var qualified_shapes = targetshapes.Shapes.Where(shape => ConnectionPointHelper.GetCount(shape) > index);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteConnectionPointAtIndex)))
             {

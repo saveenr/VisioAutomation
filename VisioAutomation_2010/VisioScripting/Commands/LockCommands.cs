@@ -13,18 +13,18 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetLockCells(Models.TargetShapes targets, LockCells lockcells)
+        public void SetLockCells(Models.TargetShapes targetshapes, LockCells lockcells)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
-            targets = targets.ResolveShapes(this._client);
-            if (targets.Shapes.Count < 1)
+            targetshapes = targetshapes.ResolveShapes(this._client);
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
             var page = cmdtarget.ActivePage;
-            var target_shapeids = targets.ToShapeIDs();
+            var target_shapeids = targetshapes.ToShapeIDs();
             var writer = new VASS.Writers.SidSrcWriter();
 
             foreach (int shapeid in target_shapeids.ShapeIDs)
@@ -39,12 +39,12 @@ namespace VisioScripting.Commands
         }
 
 
-        public Dictionary<int,LockCells> GetLockCells(Models.TargetShapes targets, VASS.CellValueType cvt)
+        public Dictionary<int,LockCells> GetLockCells(Models.TargetShapes targetshapes, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
-            targets = targets.ResolveShapes(this._client);
-            if (targets.Shapes.Count < 1)
+            targetshapes = targetshapes.ResolveShapes(this._client);
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new Dictionary<int, LockCells>();
             }
@@ -52,7 +52,7 @@ namespace VisioScripting.Commands
             var dic = new Dictionary<int, LockCells>();
 
             var page = cmdtarget.ActivePage;
-            var target_shapeids = targets.Shapes.Select(s => (int)s.ID16).ToList();
+            var target_shapeids = targetshapes.Shapes.Select(s => (int)s.ID16).ToList();
 
             var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids, cvt);
 

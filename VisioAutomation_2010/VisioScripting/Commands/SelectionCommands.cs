@@ -250,11 +250,11 @@ namespace VisioScripting.Commands
             selection.Copy(flags);
         }
 
-        public void DuplicateSelectedShapes(Models.TargetShapes target_shapes )
+        public void DuplicateSelectedShapes(Models.TargetShapes targetshapes )
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            int n = target_shapes.SelectShapesAndCount(this._client);
+            int n = targetshapes.SelectShapesAndCount(this._client);
 
             this._client.Output.WriteVerbose("Number of shapes to duplicate: {0}", n);
 
