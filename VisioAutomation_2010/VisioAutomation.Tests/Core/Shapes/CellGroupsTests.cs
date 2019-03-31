@@ -29,7 +29,6 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var cvt_ctor = typeof(VisioAutomation.ShapeSheet.CellValueLiteral).GetConstructor(new []{typeof(string)});
             foreach (var cellgroup_type in types)
             {
-                string type_name = cellgroup_type.Name;
                 var cellgroup_ctor = cellgroup_type.GetConstructor(Type.EmptyTypes);
                 var cellgroup_obj = cellgroup_ctor.Invoke(new object[] { });
                 var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroup) cellgroup_obj;

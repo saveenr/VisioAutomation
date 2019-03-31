@@ -28,17 +28,17 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.__SetValueIgnoreNull(src, formula);
         }
 
-        public void SetValues(CellGroups.CellGroup cgb, short row)
+        public void SetValues(CellGroups.CellGroup cellgroup, short row)
         {
-            foreach (var pair in cgb.SrcValuePairs_NewRow(row))
+            foreach (var pair in cellgroup.SrcValuePairs_NewRow(row))
             {
                 this.SetValue(pair.Src, pair.Value);
             }
         }
 
-        public void SetValues(CellGroups.CellGroup cgb)
+        public void SetValues(CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cgb.SrcValuePairs)
+            foreach (var pair in cellgroup.SrcValuePairs)
             {
                 this.SetValue(pair.Src, pair.Value);
             }

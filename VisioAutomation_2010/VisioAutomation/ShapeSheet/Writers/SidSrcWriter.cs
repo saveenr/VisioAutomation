@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
@@ -25,9 +25,9 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetValues(short id, CellGroups.CellGroup cgb, short row)
+        public void SetValues(short id, CellGroups.CellGroup cellgroup, short row)
         {
-            var pairs = cgb.SidSrcValuePairs_NewRow(id, row);
+            var pairs = cellgroup.SidSrcValuePairs_NewRow(id, row);
             foreach (var pair in pairs)
             {
                 this.SetValue(pair.ShapeID, pair.Src, pair.Value);
@@ -39,9 +39,9 @@ namespace VisioAutomation.ShapeSheet.Writers
             throw new NotImplementedException();
         }
 
-        public void SetValues(short id, CellGroups.CellGroup cgb)
+        public void SetValues(short id, CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cgb.SrcValuePairs)
+            foreach (var pair in cellgroup.SrcValuePairs)
             {
                 this.SetValue(id, pair.Src, pair.Value);
             }
