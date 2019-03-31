@@ -22,7 +22,7 @@ namespace VisioScripting.Models
                 throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
             }
 
-            var shapeids = this.Shapes.Select(s => s.ID);
+            var shapeids = this.Shapes.Select(s => s.ID); 
             var target_shapeids = new TargetShapeIDs(this.Shapes.Count);
             target_shapeids.AddRange(shapeids);
             return target_shapeids;
