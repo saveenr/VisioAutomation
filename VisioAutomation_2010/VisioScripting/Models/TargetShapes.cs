@@ -27,7 +27,7 @@ namespace VisioScripting.Models
             return target_shapeids;
         }
 
-        public VisioAutomation.ShapeIDPairs ToShapeIdPairs()
+        public VisioAutomation.ShapeIDPairs ToShapeIDPairs()
         {
             if (this.Shapes == null)
             {
