@@ -94,7 +94,7 @@ namespace VisioAutomation_Tests.Utilities
             Assert.AreEqual(0, s1.Offset);
             Assert.AreEqual(4, s1.Count);
 
-            CheckOverflow(s, 5);
+            _check_overflow(s, 5);
         }
 
         [TestMethod]
@@ -109,7 +109,7 @@ namespace VisioAutomation_Tests.Utilities
             Assert.AreEqual(0, s1.Offset);
             Assert.AreEqual(0, s1.Count);
 
-            CheckOverflow(s, 9);
+            _check_overflow(s, 9);
         }
 
         [TestMethod]
@@ -124,11 +124,11 @@ namespace VisioAutomation_Tests.Utilities
             Assert.AreEqual(0, s1.Offset);
             Assert.AreEqual(8, s1.Count);
 
-            CheckOverflow(s, 1);
+            _check_overflow(s, 1);
         }
 
 
-        private static void CheckOverflow(VA.Collections.ArraySegmentEnumerator<int> s, int size)
+        private static void _check_overflow(VA.Collections.ArraySegmentEnumerator<int> s, int size)
         {
             bool caught = false;
             try

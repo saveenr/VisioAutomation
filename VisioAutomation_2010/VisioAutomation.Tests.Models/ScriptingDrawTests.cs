@@ -217,7 +217,7 @@ namespace VisioAutomation_Tests.Scripting
 
         public string get_datafile_content(string name)
         {
-            string inputfilename = this.GetTestResultsOutPath( name );
+            string inputfilename = this._get_test_results_out_path( name );
 
             if (!File.Exists(inputfilename))
             {

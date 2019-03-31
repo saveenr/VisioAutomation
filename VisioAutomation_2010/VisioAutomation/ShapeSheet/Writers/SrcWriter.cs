@@ -75,7 +75,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             if (type == CellValueType.Formula)
             {
-                var flags = this.ComputeGetFormulaFlags();
+                var flags = this._compute_get_formula_flags();
                 int c = surface.SetFormulas(stream, values, (short)flags);
 
             }

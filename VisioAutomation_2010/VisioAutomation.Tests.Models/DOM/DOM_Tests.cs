@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Models.Dom
         public string node_master_name = "Rectangle";
         public string edge_master_name = "Dynamic Connector";
 
-        private VisioAutomation.Geometry.Size pagesize;
+        private VisioAutomation.Geometry.Size _pagesize;
 
         [TestMethod]
         public void Dom_EmptyRendering()
@@ -72,8 +72,8 @@ namespace VisioAutomation_Tests.Models.Dom
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
-            this.pagesize = new VA.Geometry.Size(10, 10);
-            VisioAutomationTest.SetPageSize(app.ActivePage, this.pagesize);
+            this._pagesize = new VA.Geometry.Size(10, 10);
+            VisioAutomationTest.SetPageSize(app.ActivePage, this._pagesize);
             var page = page_node.Render(app.ActiveDocument);
 
             // Verify

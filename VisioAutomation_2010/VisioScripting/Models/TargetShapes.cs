@@ -66,7 +66,7 @@ namespace VisioScripting.Models
                 return n;
             }
 
-            client.Output.WriteVerbose("GetTargetSelectionCount: Reseting selecton to specified {0} shapes", this.Shapes.Count);
+            client.Output.WriteVerbose("GetTargetSelectionCount: Resetting selection to specified {0} shapes", this.Shapes.Count);
 
             // Force empty slection
             active_window.DeselectAll();
@@ -94,7 +94,7 @@ namespace VisioScripting.Models
             return this.Shapes;
         }
 
-        public TargetShapes ResolveShapes(VisioScripting.Client client)
+        public TargetShapes  ResolveShapes(VisioScripting.Client client)
         {
             var shapes = this.__ResolveShapes(client);
             var targetshapes = new TargetShapes(shapes);

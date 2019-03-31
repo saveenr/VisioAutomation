@@ -4,41 +4,41 @@ namespace VisioPowerShell_Tests.Framework
 {
     public class PowerShellSession : System.IDisposable 
     {
-        protected SMA.PowerShell PowerShell;
-        protected SMA.Runspaces.InitialSessionState SessionState;
-        protected SMA.Runspaces.Runspace RunSpace;
-        protected SMA.RunspaceInvoke Invoker;
+        protected SMA.PowerShell _powershell;
+        protected SMA.Runspaces.InitialSessionState _sessionstate;
+        protected SMA.Runspaces.Runspace _runspace;
+        protected SMA.RunspaceInvoke _invoker;
 
         public PowerShellSession()
         {
-            this.SessionState = SMA.Runspaces.InitialSessionState.CreateDefault();
-            this.RunSpace = SMA.Runspaces.RunspaceFactory.CreateRunspace(this.SessionState);
-            this.RunSpace.Open();
-            this.PowerShell = SMA.PowerShell.Create();
-            this.PowerShell.Runspace = this.RunSpace;
-            this.Invoker = new SMA.RunspaceInvoke(this.RunSpace);
+            this._sessionstate = SMA.Runspaces.InitialSessionState.CreateDefault();
+            this._runspace = SMA.Runspaces.RunspaceFactory.CreateRunspace(this._sessionstate);
+            this._runspace.Open();
+            this._powershell = SMA.PowerShell.Create();
+            this._powershell.Runspace = this._runspace;
+            this._invoker = new SMA.RunspaceInvoke(this._runspace);
         }
 
         public void CleanUp()
         {
             // Make sure we cleanup everything
-            if (this.PowerShell != null)
+            if (this._powershell != null)
             {
-                this.PowerShell.Dispose();
-                this.PowerShell = null;
+                this._powershell.Dispose();
+                this._powershell = null;
             }
-            if (this.Invoker != null)
+            if (this._invoker != null)
             {
-                this.Invoker.Dispose();
-                this.Invoker = null;
+                this._invoker.Dispose();
+                this._invoker = null;
             }
-            if (this.RunSpace != null)
+            if (this._runspace != null)
             {
-                this.RunSpace.Close();
-                this.RunSpace = null;
+                this._runspace.Close();
+                this._runspace = null;
             }
 
-            this.SessionState = null;
+            this._sessionstate = null;
         }
 
         public void Dispose()

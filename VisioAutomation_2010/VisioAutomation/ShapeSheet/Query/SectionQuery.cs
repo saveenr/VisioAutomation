@@ -112,7 +112,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 return new SectionQueryCache(0);
             }
 
-            var _cache = new SectionQueryCache();
+            var cache = new SectionQueryCache();
 
             // For each shape, for each section find the number of rows
             foreach (var shapeidpair in shapeidpairs)
@@ -128,17 +128,17 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
 
                 // For this shape, add the accumulated info into the cache
-                _cache.Add(shapecache);
+                cache.Add(shapecache);
             }
 
             // Ensure that we have created a cache for eash shapes
-            if (shapeidpairs.Count != _cache.Count)
+            if (shapeidpairs.Count != cache.Count)
             {
                 string msg = string.Format("mismatch in number of shapes and information collected for shapes");
                 throw new Exceptions.InternalAssertionException(msg);
             }
 
-            return _cache;
+            return cache;
         }
 
 

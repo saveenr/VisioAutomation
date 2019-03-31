@@ -55,7 +55,7 @@ namespace VisioAutomation.Models.Dom
             this._prepare_for_drawing(context);
             this._perform_drawing(context);
             this.UpdateCells(context);
-            this.SetText();
+            this._set_text();
             this.SetCustomProperties(context);
             this.AddHyperlinks(context);
         }
@@ -98,7 +98,7 @@ namespace VisioAutomation.Models.Dom
             }
         }
 
-        private void SetText()
+        private void _set_text()
         {
             var shapes_with_text = this._shapes.Where(s => s.Text != null);
             foreach (var shape in shapes_with_text)

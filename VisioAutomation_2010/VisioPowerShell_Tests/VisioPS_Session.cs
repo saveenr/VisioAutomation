@@ -22,7 +22,7 @@ namespace VisioPowerShell_Tests
             // Find the path to the assembly
             var visiops_asm = typeof(VisioPowerShell.Commands.VisioCmdlet).Assembly;
             var modules = new[] { visiops_asm.Location };
-            this.SessionState.ImportPSModule(modules);
+            this._sessionstate.ImportPSModule(modules);
         }
 
         public IVisio.ShapeClass Cmd_New_VisioContainer(

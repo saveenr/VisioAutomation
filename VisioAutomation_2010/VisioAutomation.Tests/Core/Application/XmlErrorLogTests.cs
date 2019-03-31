@@ -12,7 +12,7 @@ namespace VisioAutomation_Tests.Core.Application
         [DeploymentItem(@"datafiles\VSDX_Log_Visio_2013.txt", "datafiles")]
         public void VSD_Load_Visio2013()
         {
-            string input_filename = this.GetTestResultsOutPath(@"datafiles\VSDX_Log_Visio_2013.txt");
+            string input_filename = this._get_test_results_out_path(@"datafiles\VSDX_Log_Visio_2013.txt");
 
             Assert.IsTrue(File.Exists(input_filename));
             var log = new XmlErrorLog(input_filename);
@@ -25,7 +25,7 @@ namespace VisioAutomation_Tests.Core.Application
         [DeploymentItem(@"datafiles\XMLErrorLog_Visio_2010_1.txt", "datafiles")]
         public void XmlErrorLog_Load_Visio2010_1()
         {
-            string input_filename = this.GetTestResultsOutPath(@"datafiles\XMLErrorLog_Visio_2010_1.txt");
+            string input_filename = this._get_test_results_out_path(@"datafiles\XMLErrorLog_Visio_2010_1.txt");
 
             Assert.IsTrue(File.Exists(input_filename));
             var log = new XmlErrorLog(input_filename);
@@ -53,7 +53,7 @@ namespace VisioAutomation_Tests.Core.Application
         [DeploymentItem(@"datafiles\XMLErrorLog_Visio_2013_1.txt", "datafiles")]
         public void XmlErrorLog_Load_Visio2013_1()
         {
-            string input_filename = this.GetTestResultsOutPath(@"datafiles\XMLErrorLog_Visio_2013_1.txt");
+            string input_filename = this._get_test_results_out_path(@"datafiles\XMLErrorLog_Visio_2013_1.txt");
 
             Assert.IsTrue(File.Exists(input_filename));
             var log = new XmlErrorLog(input_filename);
