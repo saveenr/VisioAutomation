@@ -37,8 +37,8 @@ namespace VisioScripting.Helpers
 
             // Then, sort the shapeids pased on the corresponding value in the results
 
-            var sorted_shapeids = Enumerable.Range(0, targets.ShapeIDs.Count)
-                .Select(i => new { index = i, shapeid = targets.ShapeIDs[i], pos = ArrangeHelper._get_position_on_shape(xforms[i], pos) })
+            var sorted_shapeids = Enumerable.Range(0, targets.Count)
+                .Select(i => new { index = i, shapeid = targets[i], pos = ArrangeHelper._get_position_on_shape(xforms[i], pos) })
                 .OrderBy(i => i.pos)
                 .Select(i => i.shapeid)
                 .ToList();
@@ -53,7 +53,7 @@ namespace VisioScripting.Helpers
                 throw new System.ArgumentOutOfRangeException(nameof(spacing));
             }
 
-            if (target.ShapeIDs.Count < 2)
+            if (target.Count < 2)
             {
                 return;
             }
@@ -72,7 +72,7 @@ namespace VisioScripting.Helpers
             var bb = VisioScripting.Models.ShapeXFormData.GetBoundingBox(input_xfrms);
             var cur_pos = new VisioAutomation.Geometry.Point(bb.Left, bb.Bottom);
 
-            var newpositions = new List<VisioAutomation.Geometry.Point>(target.ShapeIDs.Count);
+            var newpositions = new List<VisioAutomation.Geometry.Point>(target.Count);
             foreach (var input_xfrm in input_xfrms)
             {
                 var new_pinpos = axis == VisioScripting.Models.Axis.XAxis
@@ -130,7 +130,7 @@ namespace VisioScripting.Helpers
                 output_xfrms.Add(output_xfrm);
             }
 
-            _modify_pin_positions(page, target.ShapeIDs, output_xfrms);
+            _modify_pin_positions(page, target, output_xfrms);
         }
 
 
@@ -186,7 +186,7 @@ namespace VisioScripting.Helpers
             }
 
             // Now apply the updates to the sizes
-            _modify_sizes(page, target.ShapeIDs, sizes);
+            _modify_sizes(page, target, sizes);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace VisioScripting.Commands
             var targetshapeids = targetshapes.ToShapeIDs();
             var writer = new VASS.Writers.SidSrcWriter();
 
-            foreach (int shapeid in targetshapeids.ShapeIDs)
+            foreach (int shapeid in targetshapeids)
             {
                 writer.SetValues((short)shapeid, lockcells);
             }

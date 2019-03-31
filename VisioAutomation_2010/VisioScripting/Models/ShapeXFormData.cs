@@ -36,12 +36,12 @@ namespace VisioScripting.Models
                 _static_col_x_form_height = cols.Add(VASS.SrcConstants.XFormHeight, nameof(ShapeXFormData.XFormHeight));
             }
 
-            var results = _static_query.GetResults<double>(page, target.ShapeIDs);
-            if (results.Count != target.ShapeIDs.Count)
+            var results = _static_query.GetResults<double>(page, target);
+            if (results.Count != target.Count)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Didn't get as many rows back as expected");
             }
-            var list = new List<ShapeXFormData>(target.ShapeIDs.Count);
+            var list = new List<ShapeXFormData>(target.Count);
             foreach (var row in results)
             {
                 var xform = new ShapeXFormData();

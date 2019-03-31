@@ -26,7 +26,7 @@ namespace VisioAutomation_Tests.Scripting
             var page = client.Page.GetActivePage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
-            foreach (var shapeid in targetshapeids.ShapeIDs)
+            foreach (var shapeid in targetshapeids)
             {
                 writer.SetFormula( (short) shapeid, VA.ShapeSheet.SrcConstants.XFormPinX, "1.0");
             }

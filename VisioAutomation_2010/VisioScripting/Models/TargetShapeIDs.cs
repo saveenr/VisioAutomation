@@ -1,19 +1,18 @@
+using System;
 using System.Collections.Generic;
 
 namespace VisioScripting.Models
 {
-    public class TargetShapeIDs
+    public class TargetShapeIDs: List<int>
     {
-        public readonly IList<int> ShapeIDs;
-
-        public TargetShapeIDs(IList<int> shapeids)
+        internal TargetShapeIDs(IEnumerable<int> shapeids, int count)
         {
             if (shapeids == null)
             {
                 throw new System.ArgumentNullException(nameof(shapeids));
             }
 
-            this.ShapeIDs = shapeids;
+            this.AddRange(shapeids);
         }
     }
 }
