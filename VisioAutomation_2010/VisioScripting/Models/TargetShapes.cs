@@ -5,44 +5,37 @@ using VisioAutomation.Extensions;
 
 namespace VisioScripting.Models
 {
-    public enum TargetShapesType
-    {
-        UseSelection,
-        UseList
-    }
     public class TargetShapes
     {
         private readonly IList<IVisio.Shape> _shapes;
-        public readonly TargetShapesType Type;
+        public bool UseSelection;
         
         public TargetShapes()
         {
-            // This explicitly means that the current selection is intended to be used
             this._shapes = null;
-            this.Type = TargetShapesType.UseSelection;
+            this.UseSelection = true;
         }
 
 
         public TargetShapes(IList<IVisio.Shape> shapes)
         {
-            // If shapes == null then it means to use the active selection
-            // else use the specified shapes
             this._shapes = shapes;
-            this.Type = this._shapes == null ? TargetShapesType.UseSelection : TargetShapesType.UseList;
+            this.UseSelection = this._shapes == null;
         }
 
-        public bool IsResolved
+        public TargetShapes(params IVisio.Shape[] shapes)
         {
-            get
-            {
-                return (this.Type == TargetShapesType.UseList);
-            }
+            this._shapes = shapes;
+            this.UseSelection = this._shapes == null;
         }
+
+        public bool IsResolved => !this.UseSelection;
+
         public int Count
         {
             get
             {
-                if (this.Type == TargetShapesType.UseSelection)
+                if (!this.IsResolved)
                 {
                     throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
                 }
@@ -54,7 +47,7 @@ namespace VisioScripting.Models
         {
             get
             {
-                if (this.Type == TargetShapesType.UseSelection)
+                if (!this.IsResolved)
                 {
                     throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
                 }
@@ -65,7 +58,7 @@ namespace VisioScripting.Models
         {
             get
             {
-                if (this.Type == TargetShapesType.UseSelection)
+                if (!this.IsResolved)
                 {
                     throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
                 }
@@ -73,16 +66,9 @@ namespace VisioScripting.Models
             }
         }
 
-        public TargetShapes(params IVisio.Shape[] shapes)
-        {
-            // If shapes == null then it means to use the active selection
-            // else use the specified shapes
-            this._shapes = shapes;
-            this.Type = this._shapes == null ? TargetShapesType.UseSelection : TargetShapesType.UseList;
-        }
         public TargetShapeIDs ToShapeIDs()
         {
-            if (this.Type == TargetShapesType.UseSelection)
+            if (!this.IsResolved)
             {
                 throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
 
@@ -101,7 +87,7 @@ namespace VisioScripting.Models
 
         public VisioAutomation.ShapeIDPairs ToShapeIDPairs()
         {
-            if (this.Type == TargetShapesType.UseSelection)
+            if (!this.IsResolved)
             {
                 throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
 
@@ -132,7 +118,7 @@ namespace VisioScripting.Models
 
             client.Output.WriteVerbose("GetTargetSelectionCount: Resetting selection to specified {0} shapes", this._shapes.Count);
 
-            // Force empty slection
+            // Force empty selection
             active_window.DeselectAll();
             active_window.DeselectAll(); // doing this twice is deliberate
 
