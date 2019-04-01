@@ -27,12 +27,12 @@ namespace VisioScripting.Commands
             }
 
             var page = cmdtarget.ActivePage;
-            var shapeidpairs = VisioAutomation.ShapeIDPairs.FromShapes(targetshapes.Shapes);
+            var shapeidpairs = targetshapes.ToShapeIDPairs();
             var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
 
             for (int i = 0; i < targetshapes.Count; i++)
             {
-                var shape = targetshapes.Shapes[i];
+                var shape = targetshapes[i];
                 var props = listof_udcelldic[i];
                 dicof_shape_to_udcelldic[shape] = props;
             }
