@@ -5,28 +5,6 @@ using VisioAutomation.Extensions;
 
 namespace VisioScripting.Models
 {
-
-    public class TargetObjects<T>
-    {
-        public readonly IList<T> Items;
-        public readonly bool UseContext;
-
-        public TargetObjects()
-        {
-            this.Items = null;
-            this.UseContext = true;
-        }
-
-        public TargetObjects(IList<T> items)
-        {
-            this.Items = items;
-            this.UseContext = this.Items == null;
-        }
-
-        public bool IsResolved => !this.UseContext;
-
-    }
-
     public class TargetShapes : TargetObjects<IVisio.Shape>
     {
         
@@ -98,31 +76,21 @@ namespace VisioScripting.Models
             return selected_count;
         }
 
-        private IList<IVisio.Shape> _resolve_shapes(VisioScripting.Client client)
-        {
-            client.Application.AssertHasActiveApplication();
-
-            if (this.Items == null)
-            {
-                var out_shapes = client.Selection.GetShapesInSelection();
-                client.Output.WriteVerbose("GetTargetShapes: Returning {0} shapes from the active selection", out_shapes.Count);
-                return out_shapes;
-            }
-
-            client.Output.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", this.Items.Count);
-            return this.Items;
-        }
-
         public TargetShapes Resolve(VisioScripting.Client client)
         {
-            var shapes = this._resolve_shapes(client);
+            if (this.IsResolved)
+            {
+                return this;
+            }
+
+            var shapes = client.Selection.GetShapesInSelection();
             var targetshapes = new TargetShapes(shapes);
             return targetshapes;
         }
 
         internal TargetShapes ResolveShapes2D(VisioScripting.Client client)
         {
-            var shapes = this._resolve_shapes(client);
+            var shapes = client.Selection.GetShapesInSelection();
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
             var targetshapes = new TargetShapes(shapes_2d);
             return targetshapes;
