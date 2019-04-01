@@ -26,7 +26,8 @@ namespace VisioScripting.Commands
                 return dicof_shape_to_cpdic;
             }
 
-            var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, targetshapes.Shapes, CellValueType.Formula);
+            var shapeidpairs = targetshapes.ToShapeIDPairs();
+            var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, shapeidpairs, CellValueType.Formula);
 
 
             for (int i = 0; i < targetshapes.Count; i++)
