@@ -1,35 +1,38 @@
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {
-    public class TargetDocuments
+    public class TargetDocuments : TargetObjects<IVisio.Document>
     {
-        public IVisio.Document[] Documents { get; private set; }
 
-        public TargetDocuments()
+        public TargetDocuments() : base()
         {
-            // This explicitly means that the active document will be used
-            this.Documents = null;
         }
 
-        public TargetDocuments(params IVisio.Document[] docs)
+        public TargetDocuments(List<IVisio.Document> docs) : base(docs)
         {
-            // This explicitly means that the active document will be used
-            this.Documents = docs;
         }
 
-        public IVisio.Document[] Resolve(VisioScripting.Client client)
+        public TargetDocuments(params IVisio.Document[] docs) : base (docs)
         {
-            if (this.Documents == null)
+        }
+
+        public TargetDocuments Resolve(VisioScripting.Client client)
+        {
+            if (this.IsResolved==false)
             {
                 var cmdtarget = client.GetCommandTarget(
                     Commands.CommandTargetFlags.Application | 
                     Commands.CommandTargetFlags.ActiveDocument |
                     Commands.CommandTargetFlags.ActivePage);
-                this.Documents = new[] { cmdtarget.ActiveDocument };
+                var docs = new List<IVisio.Document>{ cmdtarget.ActiveDocument };
+                return new TargetDocuments(docs);
             }
-
-            return this.Documents;
+            else
+            {
+                return this;
+            }
         }
     }
 }

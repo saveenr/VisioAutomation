@@ -37,9 +37,9 @@ namespace VisioPowerShell.Commands.VisioPageCells
 
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioPageCells)))
             {
-                for (int i = 0; i < target_pages.Pages.Count; i++)
+                for (int i = 0; i < target_pages.Items.Count; i++)
                 {
-                    var target_page = target_pages.Pages[i];
+                    var target_page = target_pages.Items[i];
                     this.Client.Output.WriteVerbose("Start Update Page Name={0}", target_page.NameU);
 
                     var target_pagesheet = target_page.PageSheet;

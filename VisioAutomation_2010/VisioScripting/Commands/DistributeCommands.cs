@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
             var targetshapeids = targetshapes.ToShapeIDs();
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeSelectionOnAxis)))
             {

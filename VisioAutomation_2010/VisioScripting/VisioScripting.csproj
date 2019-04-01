@@ -70,6 +70,7 @@
     <Compile Include="Models\ConnectionPointType.cs" />
     <Compile Include="Models\TargetDocument.cs" />
     <Compile Include="Models\TargetDocuments.cs" />
+    <Compile Include="Models\TargetPage.cs" />
     <Compile Include="Models\TargetPages.cs" />
     <Compile Include="Models\TargetShapeIDs.cs" />
     <Compile Include="Models\TargetShapes.cs" />

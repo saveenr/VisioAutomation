@@ -19,9 +19,9 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return dicof_shape_to_cpdic;
             }
@@ -30,9 +30,9 @@ namespace VisioScripting.Commands
             var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, shapeidpairs, CellValueType.Formula);
 
 
-            for (int i = 0; i < targetshapes.Count; i++)
+            for (int i = 0; i < targetshapes.Items.Count; i++)
             {
-                var shape = targetshapes[i];
+                var shape = targetshapes.Items[i];
                 var cpdic = listof_cpdic[i];
                 dicof_shape_to_cpdic[shape] = cpdic;
             }
@@ -47,10 +47,10 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            var results = new List<bool>(targetshapes.Count);
-            var values = targetshapes.Shapes.Select(shape => CustomPropertyHelper.Contains(shape, name));
+            var results = new List<bool>(targetshapes.Items.Count);
+            var values = targetshapes.Items.Select(shape => CustomPropertyHelper.Contains(shape, name));
             results.AddRange(values);
 
             return results;
@@ -68,16 +68,16 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteCustomPropertyWithName)))
             {
-                foreach (var shape in targetshapes.Shapes)
+                foreach (var shape in targetshapes.Items)
                 {
                     CustomPropertyHelper.Delete(shape, name);
                 }
@@ -91,9 +91,9 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(customprop));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return;
             }
@@ -102,7 +102,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetCustomProperty)))
             {
-                foreach (var shape in targetshapes.Shapes)
+                foreach (var shape in targetshapes.Items)
                 {
                     CustomPropertyHelper.Set(shape, name, customprop);
                 }

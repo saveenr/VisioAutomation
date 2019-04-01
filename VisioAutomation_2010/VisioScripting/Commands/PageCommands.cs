@@ -54,25 +54,30 @@ namespace VisioScripting.Commands
             return application.ActivePage;
         }
 
-        public void DeletePages(Models.TargetPages target_pages, bool renumber)
+        public void DeletePages(Models.TargetPages targetpages, bool renumber)
         {
-            var pages = target_pages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
-            foreach (var page in pages)
+            foreach (var page in targetpages.Items)
             {
                 page.Delete(renumber ? (short) 1 : (short) 0);
             }
         }
 
-        public VisioAutomation.Geometry.Size GetPageSize(Models.TargetPages target_pages)
+        public VisioAutomation.Geometry.Size GetPageSize(Models.TargetPages targetpages)
         {
-            var pages = target_pages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
+
+            if (targetpages.Items.Count < 1)
+            {
+                throw new System.ArgumentException("No pages found");
+            }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
 
-            var cellqueryresult = query.GetResults<double>(pages[0].PageSheet);
+            var cellqueryresult = query.GetResults<double>(targetpages.Items[0].PageSheet);
             var row = cellqueryresult[0];
             double height = row[col_height];
             double width = row[col_width];
@@ -191,10 +196,10 @@ namespace VisioScripting.Commands
             return dest_page;
         }
 
-        public Models.PageOrientation GetPageOrientation( Models.TargetPages target_pages )
+        public Models.PageOrientation GetPageOrientation( Models.TargetPages targetpages )
         {
-            var pages = target_pages.Resolve(this._client);
-            return PageCommands._GetPageOrientation(pages[0]);
+            targetpages = targetpages.Resolve(this._client);
+            return PageCommands._GetPageOrientation(targetpages.Items[0]);
         }
         
         private static Models.PageOrientation _GetPageOrientation(IVisio.Page page)
@@ -211,18 +216,18 @@ namespace VisioScripting.Commands
             return (Models.PageOrientation)value;
         }
 
-        public void SetPageOrientation(Models.TargetPages target_pages, Models.PageOrientation orientation)
+        public void SetPageOrientation(Models.TargetPages targetpages, Models.PageOrientation orientation)
         {
             if (orientation != VisioScripting.Models.PageOrientation.Landscape && orientation != VisioScripting.Models.PageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
 
-            var pages = target_pages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageOrientation)))
             {
 
-                foreach (var page in pages)
+                foreach (var page in targetpages.Items)
                 {
                     var old_orientation = PageCommands._GetPageOrientation(page);
 
@@ -249,13 +254,13 @@ namespace VisioScripting.Commands
             }
 
         }
-        public void ResizePageToFitContents(Models.TargetPages target_pages, VisioAutomation.Geometry.Size bordersize)
+        public void ResizePageToFitContents(Models.TargetPages targetpages, VisioAutomation.Geometry.Size bordersize)
         {
-            var pages = target_pages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizePageToFitContents)))
             {
-                foreach (var page in pages)
+                foreach (var page in targetpages.Items)
                 {
                     page.ResizeToFitContents(bordersize);
                 }
@@ -264,11 +269,11 @@ namespace VisioScripting.Commands
 
         public void SetPageFormatCells(Models.TargetPages targetpages, VisioAutomation.Pages.PageFormatCells cells)
         {
-            var pages = targetpages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageFormatCells)))
             {
-                foreach (var page in pages)
+                foreach (var page in targetpages.Items)
                 {
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValues(cells);
@@ -280,11 +285,11 @@ namespace VisioScripting.Commands
 
         public void SetPageSize(Models.TargetPages targetpages, VisioAutomation.Geometry.Size new_size)
         {
-            var pages = targetpages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
-                foreach (var page in pages)
+                foreach (var page in targetpages.Items)
                 {
                     var page_sheet = page.PageSheet;
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();

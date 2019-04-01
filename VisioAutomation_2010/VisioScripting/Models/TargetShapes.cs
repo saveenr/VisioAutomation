@@ -5,100 +5,69 @@ using VisioAutomation.Extensions;
 
 namespace VisioScripting.Models
 {
-    public class TargetShapes
+
+    public class TargetObjects<T>
     {
-        private readonly IList<IVisio.Shape> _shapes;
-        public bool UseSelection;
+        public readonly IList<T> Items;
+        public readonly bool UseContext;
+
+        public TargetObjects()
+        {
+            this.Items = null;
+            this.UseContext = true;
+        }
+
+        public TargetObjects(IList<T> items)
+        {
+            this.Items = items;
+            this.UseContext = this.Items == null;
+        }
+
+        public bool IsResolved => !this.UseContext;
+
+    }
+
+    public class TargetShapes : TargetObjects<IVisio.Shape>
+    {
         
-        public TargetShapes()
+        public TargetShapes() : base()
         {
-            this._shapes = null;
-            this.UseSelection = true;
         }
 
 
-        public TargetShapes(IList<IVisio.Shape> shapes)
+        public TargetShapes(IList<IVisio.Shape> shapes): base(shapes)
         {
-            this._shapes = shapes;
-            this.UseSelection = this._shapes == null;
         }
 
-        public TargetShapes(params IVisio.Shape[] shapes)
+        public TargetShapes(params IVisio.Shape[] shapes) : base(shapes)
         {
-            this._shapes = shapes;
-            this.UseSelection = this._shapes == null;
-        }
-
-        public bool IsResolved => !this.UseSelection;
-
-        public int Count
-        {
-            get
-            {
-                if (!this.IsResolved)
-                {
-                    throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
-                }
-                return this._shapes.Count;
-            }
-        }
-
-        public IVisio.Shape this[int index]
-        {
-            get
-            {
-                if (!this.IsResolved)
-                {
-                    throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
-                }
-                return this._shapes[index];
-            }
-        }
-        public IList<IVisio.Shape> Shapes
-        {
-            get
-            {
-                if (!this.IsResolved)
-                {
-                    throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
-                }
-                return this._shapes;
-            }
         }
 
         public TargetShapeIDs ToShapeIDs()
         {
-            if (!this.IsResolved)
-            {
-                throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
+            _verify_resolved();
 
-            }
-
-            if (this._shapes == null)
+            if (this.Items == null)
             {
                 throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
             }
 
-            var shapeids = this._shapes.Select(s => s.ID); 
-            var target_shapeids = new TargetShapeIDs(this.Count);
+            var shapeids = this.Items.Select(s => s.ID); 
+            var target_shapeids = new TargetShapeIDs(this.Items.Count);
             target_shapeids.AddRange(shapeids);
             return target_shapeids;
         }
 
         public VisioAutomation.ShapeIDPairs ToShapeIDPairs()
         {
-            if (!this.IsResolved)
-            {
-                throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
+            _verify_resolved();
 
-            }
-
-            if (this._shapes == null)
+            if (this.Items == null)
             {
                 throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
             }
 
-            return VisioAutomation.ShapeIDPairs.FromShapes(this._shapes);
+            return VisioAutomation.ShapeIDPairs.FromShapes(this.Items);
         }
 
         internal int SelectShapesAndCount(VisioScripting.Client client)
@@ -109,21 +78,21 @@ namespace VisioScripting.Models
             var active_window = app.ActiveWindow;
             var sel = active_window.Selection;
 
-            if (this._shapes == null)
+            if (this.Items == null)
             {
                 int n = sel.Count;
                 client.Output.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
                 return n;
             }
 
-            client.Output.WriteVerbose("GetTargetSelectionCount: Resetting selection to specified {0} shapes", this._shapes.Count);
+            client.Output.WriteVerbose("GetTargetSelectionCount: Resetting selection to specified {0} shapes", this.Items.Count);
 
             // Force empty selection
             active_window.DeselectAll();
             active_window.DeselectAll(); // doing this twice is deliberate
 
             // Force selection to specific shapes
-            active_window.Select(this._shapes, IVisio.VisSelectArgs.visSelect);
+            active_window.Select(this.Items, IVisio.VisSelectArgs.visSelect);
 
             int selected_count = sel.Count;
             return selected_count;
@@ -133,18 +102,18 @@ namespace VisioScripting.Models
         {
             client.Application.AssertHasActiveApplication();
 
-            if (this._shapes == null)
+            if (this.Items == null)
             {
                 var out_shapes = client.Selection.GetShapesInSelection();
                 client.Output.WriteVerbose("GetTargetShapes: Returning {0} shapes from the active selection", out_shapes.Count);
                 return out_shapes;
             }
 
-            client.Output.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", this.Count);
-            return this._shapes;
+            client.Output.WriteVerbose("GetTargetShapes: Returning {0} shapes that were passed in", this.Items.Count);
+            return this.Items;
         }
 
-        public TargetShapes  ResolveShapes(VisioScripting.Client client)
+        public TargetShapes Resolve(VisioScripting.Client client)
         {
             var shapes = this._resolve_shapes(client);
             var targetshapes = new TargetShapes(shapes);
@@ -157,6 +126,14 @@ namespace VisioScripting.Models
             var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
             var targetshapes = new TargetShapes(shapes_2d);
             return targetshapes;
+        }
+
+        private void _verify_resolved()
+        {
+            if (!this.IsResolved)
+            {
+                throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
+            }
         }
     }
 }

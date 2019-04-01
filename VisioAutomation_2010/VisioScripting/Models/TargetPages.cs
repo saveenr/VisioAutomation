@@ -1,82 +1,46 @@
 using System.Collections.Generic;
+using System.Threading;
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {
-    public class TargetPages
+    public class TargetPages : TargetObjects<IVisio.Page>
     {
-        public IList<IVisio.Page> Pages { get; private set; }
 
-        public TargetPages()
+        public TargetPages() : base()
         {
-            // This explicitly means that the active document will be used
-            this.Pages = null;
         }
 
-        public TargetPages(IList<IVisio.Page> pages)
+        public TargetPages(IList<IVisio.Page> pages) : base (pages)
         {
-            this.Pages = pages;
         }
 
-        public TargetPages( params IVisio.Page[] pages)
+        public TargetPages( params IVisio.Page[] pages) : base (pages)
         {
-            this.Pages = pages;
+
         }
 
 
-        public IList<IVisio.Page> Resolve(VisioScripting.Client client)
+        public TargetPages Resolve(VisioScripting.Client client)
         {
-            if (this.Pages == null)
+            if (this.Items == null)
             {
                 var cmdtarget = client.GetCommandTargetPage();
-                this.Pages = new List<IVisio.Page> {cmdtarget.ActivePage};
+                if (cmdtarget.ActivePage != null)
+                {
+                    var pages = new List<IVisio.Page> { cmdtarget.ActivePage };
+                    return new TargetPages(pages);
+                }
+                else
+                {
+                    return new TargetPages(new List<IVisio.Page>(0));
+                }
             }
-
-            if (this.Pages == null)
+            else
             {
-                throw new VisioOperationException("Unvalid State No Pages");
+                return this;
             }
-
-            if (this.Pages.Count < 1)
-            {
-                throw new VisioOperationException("Unvalid State No Pages");
-            }
-
-            return this.Pages;
         }
     }
-
-    public class TargetPage
-    {
-        public IVisio.Page Page { get; private set; }
-
-        public TargetPage()
-        {
-            // This explicitly means that the active document will be used
-            this.Page = null;
-        }
-
-        public TargetPage(IVisio.Page page)
-        {
-            this.Page = page;
-        }
-
-        public IVisio.Page Resolve(VisioScripting.Client client)
-        {
-            if (this.Page == null)
-            {
-                var cmdtarget = client.GetCommandTargetPage();
-                this.Page = cmdtarget.ActivePage;
-            }
-
-            if (this.Page == null)
-            {
-                throw new VisioOperationException("Unvalid State No Pages");
-            }
-
-            return this.Page;
-        }
-    }
-
 }

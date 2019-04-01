@@ -21,9 +21,9 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(hlink));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
             
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return new List<int>(0);
             }
@@ -32,7 +32,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(AddHyperlink)))
             {
-                foreach (var shape in targetshapes.Shapes)
+                foreach (var shape in targetshapes.Items)
                 {
                     int hi = HyperlinkHelper.Add(shape, hlink);
                     hyperlink_indices.Add(hi);
@@ -44,16 +44,16 @@ namespace VisioScripting.Commands
 
         public void DeleteHyperlinkAtIndex(Models.TargetShapes targetshapes, int n)
         {
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return;
             }
 
             // restrict the operation to those shapes that actually have enough
             // controls to qualify for deleting 
-            var qualified_shapes = targetshapes.Shapes.Where(shape => HyperlinkHelper.GetCount(shape) > n);
+            var qualified_shapes = targetshapes.Items.Where(shape => HyperlinkHelper.GetCount(shape) > n);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteHyperlinkAtIndex)))
             {
@@ -66,15 +66,15 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(Models.TargetShapes targetshapes, CellValueType cvt)
         {
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<HyperlinkCells>>(0);
             }
 
             var dic = new Dictionary<IVisio.Shape, IList<HyperlinkCells>>();
-            foreach (var shape in targetshapes.Shapes)
+            foreach (var shape in targetshapes.Items)
             {
                 var hyperlinks = HyperlinkCells.GetCells(shape, cvt);
                 dic[shape] = hyperlinks;

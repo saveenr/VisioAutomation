@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         internal void __SetCells(Models.TargetShapes targetshapes, VASS.CellGroups.CellGroup cellgroup, IVisio.Page page)
         {
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
             var targetshapeids = targetshapes.ToShapeIDs();
             var writer = new VASS.Writers.SidSrcWriter();
 
@@ -35,9 +35,9 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return;
             }
@@ -46,7 +46,7 @@ namespace VisioScripting.Commands
             {
                 int numnames = names.Count;
 
-                int up_to = System.Math.Min(numnames, targetshapes.Count);
+                int up_to = System.Math.Min(numnames, targetshapes.Items.Count);
 
                 for (int i = 0; i < up_to; i++)
                 {
@@ -54,7 +54,7 @@ namespace VisioScripting.Commands
 
                     if (new_name != null)
                     {
-                        var shape = targetshapes[i];
+                        var shape = targetshapes.Items[i];
                         shape.Name = new_name;
                     }
                 }

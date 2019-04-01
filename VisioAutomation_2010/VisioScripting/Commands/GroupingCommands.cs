@@ -48,7 +48,7 @@ namespace VisioScripting.Commands
             }
             else
             {
-                foreach (var shape in targetshapes.Shapes)
+                foreach (var shape in targetshapes.Items)
                 {
                     shape.Ungroup();
                 }

@@ -19,9 +19,9 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetPage();
             var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return dicof_shape_to_udcelldic;
             }
@@ -30,9 +30,9 @@ namespace VisioScripting.Commands
             var shapeidpairs = targetshapes.ToShapeIDPairs();
             var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
 
-            for (int i = 0; i < targetshapes.Count; i++)
+            for (int i = 0; i < targetshapes.Items.Count; i++)
             {
-                var shape = targetshapes[i];
+                var shape = targetshapes.Items[i];
                 var props = listof_udcelldic[i];
                 dicof_shape_to_udcelldic[shape] = props;
             }
@@ -47,9 +47,9 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return new List<bool>();
             }
@@ -62,9 +62,9 @@ namespace VisioScripting.Commands
        
         public void DeleteUserDefinedCellsByName(Models.TargetShapes targetshapes, string name)
         {
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return;
             } 
@@ -81,7 +81,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteUserDefinedCellsByName)))
             {
-                foreach (var shape in targetshapes.Shapes)
+                foreach (var shape in targetshapes.Items)
                 {
                     VA.Shapes.UserDefinedCellHelper.Delete(shape, name);
                 }
@@ -90,16 +90,16 @@ namespace VisioScripting.Commands
 
         public void SetUserDefinedCell(Models.TargetShapes targetshapes, Models.UserDefinedCell userdefinedcell)
         {
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Count < 1)
+            if (targetshapes.Items.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetUserDefinedCell)))
             {
-                foreach (var shape in targetshapes.Shapes)
+                foreach (var shape in targetshapes.Items)
                 {
                     VA.Shapes.UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells);
                 }
