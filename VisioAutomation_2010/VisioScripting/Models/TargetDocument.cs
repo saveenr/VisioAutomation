@@ -2,34 +2,67 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {
-    public class TargetDocument
+    public class TargetObject<T> where  T: class
     {
-        public IVisio.Document Document { get; private set; }
+        public readonly T Item;
+        public readonly bool UseContext;
 
-        public TargetDocument()
+        public TargetObject()
         {
-            // This explicitly means that the active document will be used
-            this.Document = null;
+            this.Item = null;
+            this.UseContext = true;
+        }
+        
+        public TargetObject(T item)
+        {
+            this.Item = item;
+            this.UseContext = this.Item == null;
+        }
+        public TargetObject(T item, bool isresolved)
+        {
+            this.Item = item;
+            this.UseContext = !isresolved;
         }
 
-        public TargetDocument(IVisio.Document doc)
+        public bool IsResolved => !this.UseContext;
+    }
+
+    public class TargetDocument: TargetObject<IVisio.Document>
+    {
+        public TargetDocument() :base()
         {
-            // This explicitly means that the active document will be used
-            this.Document = doc;
         }
 
-        public IVisio.Document Resolve(VisioScripting.Client client)
+        public TargetDocument(IVisio.Document doc) : base(doc)
         {
-            if (this.Document == null)
+        }
+
+        public TargetDocument(IVisio.Document doc, bool isresolved) : base(doc, isresolved)
+        {
+        }
+
+        public TargetDocument Resolve(VisioScripting.Client client)
+        {
+            if (!this.IsResolved)
             {
                 var cmdtarget = client.GetCommandTarget(
                     Commands.CommandTargetFlags.Application | 
                     Commands.CommandTargetFlags.ActiveDocument |
                     Commands.CommandTargetFlags.ActivePage);
-                this.Document = cmdtarget.ActiveDocument;
-            }
 
-            return this.Document;
+                if (cmdtarget.ActiveDocument!=null)
+                {
+                    return new TargetDocument(cmdtarget.ActiveDocument);
+                }
+                else
+                {
+                    return  new TargetDocument(null,true);
+                }
+            }
+            else
+            {
+                return this;
+            }
         }
     }
 }

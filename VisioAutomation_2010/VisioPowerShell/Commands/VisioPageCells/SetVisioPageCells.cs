@@ -30,16 +30,16 @@ namespace VisioPowerShell.Commands.VisioPageCells
                 return;
             }
 
-            var target_pages = new VisioScripting.Models.TargetPages(this.Pages);
+            var targetpages = new VisioScripting.Models.TargetPages(this.Pages);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
 
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioPageCells)))
             {
-                for (int i = 0; i < target_pages.Items.Count; i++)
+                for (int i = 0; i < targetpages.Items.Count; i++)
                 {
-                    var target_page = target_pages.Items[i];
+                    var target_page = targetpages.Items[i];
                     this.Client.Output.WriteVerbose("Start Update Page Name={0}", target_page.NameU);
 
                     var target_pagesheet = target_page.PageSheet;

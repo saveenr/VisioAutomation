@@ -1,36 +1,41 @@
 using VisioAutomation.Exceptions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {
-    public class TargetPage
+    public class TargetPage : TargetObject<IVisio.Page>
     {
-        public Microsoft.Office.Interop.Visio.Page Page { get; private set; }
 
-        public TargetPage()
+        public TargetPage() : base()
         {
-            // This explicitly means that the active document will be used
-            this.Page = null;
         }
 
-        public TargetPage(Microsoft.Office.Interop.Visio.Page page)
+        public TargetPage(Microsoft.Office.Interop.Visio.Page page) : base (page)
         {
-            this.Page = page;
         }
 
-        public Microsoft.Office.Interop.Visio.Page Resolve(VisioScripting.Client client)
+        public TargetPage(Microsoft.Office.Interop.Visio.Page page, bool isresolved) : base (page,isresolved)
         {
-            if (this.Page == null)
+        }
+
+        public TargetPage Resolve(VisioScripting.Client client)
+        {
+            if (!this.IsResolved)
             {
                 var cmdtarget = client.GetCommandTargetPage();
-                this.Page = cmdtarget.ActivePage;
+                if (cmdtarget.ActivePage != null)
+                {
+                    return new TargetPage(cmdtarget.ActivePage);
+                }
+                else
+                {
+                    return new TargetPage(cmdtarget.ActivePage, true);
+                }
             }
-
-            if (this.Page == null)
+            else
             {
-                throw new VisioOperationException("Unvalid State No Pages");
+                return this;
             }
-
-            return this.Page;
         }
     }
 }

@@ -20,8 +20,8 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            var target_page = new VisioScripting.Models.TargetPage(null);
-            var page = target_page.Resolve(this.Client);
+            var targetpage = new VisioScripting.Models.TargetPage(null);
+            var page = targetpage.Resolve(this.Client);
 
             // Handle the case where neither names nor ids where passed
             if (this.Name == null && this.Id == null)
@@ -36,7 +36,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 }
                 if (this.SubSelected)
                 {
-                    this.WriteVerbose("Returning selected shapes (subselecte)");
+                    this.WriteVerbose("Returning selected shapes (subselect)");
                     var shapes = this.Client.Selection.GetSubSelectedShapes();
                     this.WriteObject(shapes, true);
                 }
@@ -62,7 +62,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 else
                 {
                     var strings = this.Name.OfType<string>().ToArray();
-                    var shapes = this.Client.Page.GetShapesOnPageByName(target_page, strings);
+                    var shapes = this.Client.Page.GetShapesOnPageByName(targetpage, strings);
                     this.WriteObject(shapes, true);
                 }
 
@@ -72,7 +72,7 @@ namespace VisioPowerShell.Commands.VisioShape
             // Handle the case where ids where passed
             if (this.Id != null)
             {
-                var shapes = this.Client.Page.GetShapesOnPageByID(target_page,this.Id);
+                var shapes = this.Client.Page.GetShapesOnPageByID(targetpage,this.Id);
                 this.WriteObject(shapes, true);
 
                 return;

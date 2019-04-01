@@ -34,12 +34,12 @@ namespace VisioPowerShell.Commands.VisioPage
             if (this.FitContents || this.Width >0 || this.Height >0)
             {
                 var cmdtarget = this.Client.GetCommandTargetPage();
-                var tp = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
+                var targetpages = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
 
                 if (this.FitContents)
                 {
                     var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderWidth);
-                    this.Client.Page.ResizePageToFitContents(tp, bordersize);
+                    this.Client.Page.ResizePageToFitContents(targetpages, bordersize);
                     this.Client.View.SetActiveWindowZoomToObject(VisioScripting.Models.ZoomToObject.Page);
                 }
 
@@ -57,7 +57,7 @@ namespace VisioPowerShell.Commands.VisioPage
                         page_format_cells.Height = this.Height;
                     }
 
-                    this.Client.Page.SetPageFormatCells(tp, page_format_cells);
+                    this.Client.Page.SetPageFormatCells(targetpages, page_format_cells);
                 }
             }
 
@@ -65,8 +65,8 @@ namespace VisioPowerShell.Commands.VisioPage
             if (this.Orientation.HasValue)
             {
                 var cmdtarget = this.Client.GetCommandTargetPage();
-                var tp = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
-                this.Client.Page.SetPageOrientation(tp,this.Orientation.Value);
+                var targetpages = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
+                this.Client.Page.SetPageOrientation(targetpages,this.Orientation.Value);
             }
 
             if (this.BackgroundPage != null)
@@ -77,8 +77,8 @@ namespace VisioPowerShell.Commands.VisioPage
             if (this.LayoutStyle!=null)
             {
                 var cmdtarget = this.Client.GetCommandTargetPage();
-                var tp = new VisioScripting.Models.TargetPage(cmdtarget.ActivePage);
-                this.Client.Page.LayoutPage(tp, this.LayoutStyle);
+                var targetpage = new VisioScripting.Models.TargetPage(cmdtarget.ActivePage);
+                this.Client.Page.LayoutPage(targetpage, this.LayoutStyle);
             }
         }
     }
