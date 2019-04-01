@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return;
             }
@@ -49,7 +49,7 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return new List<string>(0);
             }
@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return new List<VisioAutomation.Text.TextFormat>(0);
             }

@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
             var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return dicof_shape_to_cpdic;
             }
@@ -29,9 +29,9 @@ namespace VisioScripting.Commands
             var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, targetshapes.Shapes, CellValueType.Formula);
 
 
-            for (int i = 0; i < targetshapes.Shapes.Count; i++)
+            for (int i = 0; i < targetshapes.Count; i++)
             {
-                var shape = targetshapes.Shapes[i];
+                var shape = targetshapes[i];
                 var cpdic = listof_cpdic[i];
                 dicof_shape_to_cpdic[shape] = cpdic;
             }
@@ -48,7 +48,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            var results = new List<bool>(targetshapes.Shapes.Count);
+            var results = new List<bool>(targetshapes.Count);
             var values = targetshapes.Shapes.Select(shape => CustomPropertyHelper.Contains(shape, name));
             results.AddRange(values);
 
@@ -69,7 +69,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return;
             }
@@ -92,7 +92,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return;
             }

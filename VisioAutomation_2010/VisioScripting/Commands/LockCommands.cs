@@ -18,7 +18,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetPage();
 
             targetshapes = targetshapes.ResolveShapes(this._client);
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return;
             }
@@ -44,7 +44,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetPage();
 
             targetshapes = targetshapes.ResolveShapes(this._client);
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return new Dictionary<int, LockCells>();
             }

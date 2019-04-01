@@ -18,7 +18,7 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count<1)
+            if (targetshapes.Count<1)
             {
                 return new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
             }
@@ -41,7 +41,7 @@ namespace VisioScripting.Commands
         {
             targets = targets.ResolveShapes(this._client);
 
-            if (targets.Shapes.Count < 1)
+            if (targets.Count < 1)
             {
                 return new List<int>(0);
             }
@@ -49,7 +49,7 @@ namespace VisioScripting.Commands
             int dirx = 0;
             int diry = 0;
 
-            var indices = new List<int>(targets.Shapes.Count);
+            var indices = new List<int>(targets.Count);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(AddConnectionPoint)))
             {
@@ -83,7 +83,7 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return;
             }

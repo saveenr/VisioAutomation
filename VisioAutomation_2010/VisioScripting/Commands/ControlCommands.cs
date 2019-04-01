@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return new List<int>(0);
             }
@@ -46,7 +46,7 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return;
             }
@@ -68,12 +68,12 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.ResolveShapes(this._client);
 
-            if (targetshapes.Shapes.Count < 1)
+            if (targetshapes.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<ControlCells>>(0);
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>(targetshapes.Shapes.Count);
+            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>(targetshapes.Count);
             foreach (var shape in targetshapes.Shapes)
             {
                 var controls = ControlCells.GetCells(shape, cvt);

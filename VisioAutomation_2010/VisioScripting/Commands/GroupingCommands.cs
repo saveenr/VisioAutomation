@@ -38,7 +38,7 @@ namespace VisioScripting.Commands
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
 
-            if (targetshapes.Shapes == null)
+            if (!targetshapes.IsResolved)
             {
                 if (selection.Count>=1)
                 {
