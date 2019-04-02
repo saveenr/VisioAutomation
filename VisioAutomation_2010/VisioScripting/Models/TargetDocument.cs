@@ -50,14 +50,9 @@ namespace VisioScripting.Models
                     Commands.CommandTargetFlags.ActiveDocument |
                     Commands.CommandTargetFlags.ActivePage);
 
-                if (cmdtarget.ActiveDocument!=null)
-                {
-                    return new TargetDocument(cmdtarget.ActiveDocument);
-                }
-                else
-                {
-                    return  new TargetDocument(null,true);
-                }
+                // It doesn't matter if there is an active document or not
+                // at this point it is considered resolved
+                return new TargetDocument(cmdtarget.ActiveDocument, true);
             }
             else
             {

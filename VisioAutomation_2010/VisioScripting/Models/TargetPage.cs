@@ -23,14 +23,10 @@ namespace VisioScripting.Models
             if (!this.IsResolved)
             {
                 var cmdtarget = client.GetCommandTargetPage();
-                if (cmdtarget.ActivePage != null)
-                {
-                    return new TargetPage(cmdtarget.ActivePage);
-                }
-                else
-                {
-                    return new TargetPage(cmdtarget.ActivePage, true);
-                }
+
+                // It doesn't matter if there is an active page or not
+                // at this point it is considered resolved
+                return new TargetPage(cmdtarget.ActivePage,true);
             }
             else
             {
