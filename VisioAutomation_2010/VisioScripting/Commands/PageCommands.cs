@@ -112,28 +112,32 @@ namespace VisioScripting.Commands
             return new_page;
         }
 
-        public void SetActivePageBackground(string background_page_name)
+        public void SetActivePageBackground(Models.TargetPages targetpages, string background_page_name)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
             if (background_page_name == null)
             {
                 throw new System.ArgumentNullException(nameof(background_page_name));
             }
 
-            var app = cmdtarget.Application;
-            var application = app;
-            var active_document = application.ActiveDocument;
-            var pages = active_document.Pages;
-            var names = new HashSet<string>(pages.GetNamesU());
+            targetpages = targetpages.Resolve(this._client);
+
+            if (targetpages.Items.Count < 1)
+            {
+                return;
+            }
+
+            var page0 = targetpages.Items[0];
+            var doc = page0.Document;
+            var doc_pages = doc.Pages;
+
+            var names = new HashSet<string>(doc_pages.GetNamesU());
             if (!names.Contains(background_page_name))
             {
                 string msg = string.Format("Could not find page with name \"{0}\"", background_page_name);
                 throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
 
-            var bgpage = pages.ItemU[background_page_name];
-            var fgpage = application.ActivePage;
+            var bgpage = doc_pages.ItemU[background_page_name];
 
             // Set the background page
             // Check that the intended background is indeed a background page
@@ -144,15 +148,19 @@ namespace VisioScripting.Commands
             }
 
             // don't allow the page to be set as a background to itself
-            if (fgpage == bgpage)
-            {
-                string msg = "Cannot set page as its own background page";
-                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
-            }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetActivePageBackground)))
             {
-                fgpage.BackPage = bgpage;
+                foreach (var page in targetpages.Items)
+                {
+                    if (page == bgpage)
+                    {
+                        string msg = "Cannot set page as its own background page";
+                        throw new VisioAutomation.Exceptions.VisioOperationException(msg);
+                    }
+
+                    page.BackPage = bgpage;
+                }
             }
         }
 

@@ -68,7 +68,7 @@ namespace VisioPowerShell.Commands.VisioPage
             if (this.BackgroundPage != null)
             {
                 // TODO: SetActivePageBackground should handle targetpages
-                this.Client.Page.SetActivePageBackground(this.BackgroundPage);
+                this.Client.Page.SetActivePageBackground(targetpages, this.BackgroundPage);
             }
 
             if (this.LayoutStyle!=null)
