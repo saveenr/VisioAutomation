@@ -19,7 +19,7 @@ namespace VisioScripting.Commands
             var targetshapeids = targetshapes.ToShapeIDs();
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeSelectionOnAxis)))
             {
-                VisioScripting.Helpers.ArrangeHelper.DistributeWithSpacing(page, targetshapeids, axis, spacing);
+                VisioScripting.Helpers.ArrangeHelper._distribute_with_spacing(page, targetshapeids, axis, spacing);
             }
         }
 

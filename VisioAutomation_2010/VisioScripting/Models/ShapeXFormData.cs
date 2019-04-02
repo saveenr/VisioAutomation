@@ -22,7 +22,7 @@ namespace VisioScripting.Models
         private static VASS.Query.Column _static_col_x_form_height;
         private static VASS.Query.CellQuery _static_query;
 
-        public static List<ShapeXFormData> Get(IVisio.Page page, TargetShapeIDs target)
+        internal static List<ShapeXFormData> _get_xfrms(IVisio.Page page, TargetShapeIDs target)
         {
             if (_static_query == null)
             {
