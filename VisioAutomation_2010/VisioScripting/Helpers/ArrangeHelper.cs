@@ -30,15 +30,15 @@ namespace VisioScripting.Helpers
             throw new System.ArgumentOutOfRangeException(nameof(pos));
         }
 
-        internal static List<int> _sort_shapes_by_position(IVisio.Page page, Models.TargetShapeIDs targets, Models.ShapeRelativePosition pos)
+        internal static List<int> _sort_shapes_by_position(IVisio.Page page, IList<int> shapeids, Models.ShapeRelativePosition pos)
         {
             // First get the transforms of the shapes on the given axis
-            var xforms = VisioScripting.Models.ShapeXFormData._get_xfrms(page, targets);
+            var xforms = VisioScripting.Models.ShapeXFormData._get_xfrms(page, shapeids);
 
             // Then, sort the shapeids pased on the corresponding value in the results
 
-            var sorted_shapeids = Enumerable.Range(0, targets.Count)
-                .Select(i => new { index = i, shapeid = targets[i], pos = ArrangeHelper._get_position_on_shape(xforms[i], pos) })
+            var sorted_shapeids = Enumerable.Range(0, shapeids.Count)
+                .Select(i => new { index = i, shapeid = shapeids[i], pos = ArrangeHelper._get_position_on_shape(xforms[i], pos) })
                 .OrderBy(i => i.pos)
                 .Select(i => i.shapeid)
                 .ToList();
@@ -46,14 +46,14 @@ namespace VisioScripting.Helpers
             return sorted_shapeids;
         }
 
-        internal static void _distribute_with_spacing(IVisio.Page page, Models.TargetShapeIDs target, Models.Axis axis, double spacing)
+        internal static void _distribute_with_spacing(IVisio.Page page, IList<int> shapeids, Models.Axis axis, double spacing)
         {
             if (spacing < 0.0)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(spacing));
             }
 
-            if (target.Count < 2)
+            if (shapeids.Count < 2)
             {
                 return;
             }
@@ -68,11 +68,11 @@ namespace VisioScripting.Helpers
                 : new VisioAutomation.Geometry.Size(0, spacing);
 
 
-            var input_xfrms = VisioScripting.Models.ShapeXFormData._get_xfrms(page, target);
+            var input_xfrms = VisioScripting.Models.ShapeXFormData._get_xfrms(page, shapeids);
             var bb = VisioScripting.Models.ShapeXFormData.GetBoundingBox(input_xfrms);
             var cur_pos = new VisioAutomation.Geometry.Point(bb.Left, bb.Bottom);
 
-            var newpositions = new List<VisioAutomation.Geometry.Point>(target.Count);
+            var newpositions = new List<VisioAutomation.Geometry.Point>(shapeids.Count);
             foreach (var input_xfrm in input_xfrms)
             {
                 var new_pinpos = axis == VisioScripting.Models.Axis.XAxis
@@ -84,7 +84,7 @@ namespace VisioScripting.Helpers
             }
 
             // Apply the changes
-            var sorted_shapeids = ArrangeHelper._sort_shapes_by_position(page, target, sortpos);
+            var sorted_shapeids = ArrangeHelper._sort_shapes_by_position(page, shapeids, sortpos);
 
             _modify_pin_positions(page, sorted_shapeids, newpositions);
         }

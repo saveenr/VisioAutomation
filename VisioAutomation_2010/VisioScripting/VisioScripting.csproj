@@ -73,7 +73,6 @@
     <Compile Include="Models\TargetObjects.cs" />
     <Compile Include="Models\TargetPage.cs" />
     <Compile Include="Models\TargetPages.cs" />
-    <Compile Include="Models\TargetShapeIDs.cs" />
     <Compile Include="Models\TargetShapes.cs" />
     <Compile Include="Helpers\ArrangeHelper.cs" />
     <Compile Include="Client.cs" />

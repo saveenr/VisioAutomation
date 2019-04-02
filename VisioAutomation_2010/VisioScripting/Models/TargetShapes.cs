@@ -21,7 +21,7 @@ namespace VisioScripting.Models
         {
         }
 
-        public TargetShapeIDs ToShapeIDs()
+        public List<int> ToShapeIDs()
         {
             _verify_resolved();
 
@@ -31,7 +31,7 @@ namespace VisioScripting.Models
             }
 
             var shapeids = this.Items.Select(s => s.ID); 
-            var target_shapeids = new TargetShapeIDs(this.Items.Count);
+            var target_shapeids = new List<int>(this.Items.Count);
             target_shapeids.AddRange(shapeids);
             return target_shapeids;
         }
