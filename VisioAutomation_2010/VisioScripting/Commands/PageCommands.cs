@@ -408,20 +408,6 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<IVisio.Shape> GetShapesOnActivePageByID(int[] shapeids)
-        {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var shapes = cmdtarget.ActivePage.Shapes;
-            var shapes_list = new List<IVisio.Shape>(shapeids.Length);
-            foreach (int id in shapeids)
-            {
-                var shape = shapes.ItemFromID[id];
-                shapes_list.Add(shape);
-            }
-            return shapes_list;
-        }
-
         public List<IVisio.Shape> GetShapesOnPageByID(Models.TargetPage targetpage, int[] shapeids)
         {
             targetpage = targetpage.Resolve(this._client);
