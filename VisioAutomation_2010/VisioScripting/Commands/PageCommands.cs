@@ -446,7 +446,6 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("No page available");
             }
 
-            var cmdtarget = this._client.GetCommandTargetDocument();
             var shapes = targetpage.Item.Shapes;
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
             cached_shapes_list.AddRange(shapes.ToEnumerable());
