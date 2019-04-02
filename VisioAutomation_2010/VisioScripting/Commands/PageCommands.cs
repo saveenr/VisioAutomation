@@ -455,22 +455,25 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> FindPagesInActiveDocumentByName(string name, Models.PageType pagetype)
+        public List<IVisio.Page> FindPagesInDocumentByName(Models.TargetDocument targetdoc, string name, Models.PageType pagetype)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetdoc = targetdoc.Resolve(this._client);
+            if (targetdoc.Item == null)
+            {
+                throw new System.ArgumentException("No document to get pages from");
+            }
 
-            var active_document = cmdtarget.ActiveDocument;
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all pages
-                var all_pages = active_document.Pages.ToList();
+                var all_pages = targetdoc.Item.Pages.ToList();
                 all_pages = filter_pages_by_type(all_pages, pagetype);
                 return all_pages;
             }
             else
             {
                 // return the named page
-                var all_pages = active_document.Pages.ToEnumerable();
+                var all_pages = targetdoc.Item.Pages.ToEnumerable();
                 var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 named_pages = filter_pages_by_type(named_pages, pagetype);
 
