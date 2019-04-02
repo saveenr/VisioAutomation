@@ -31,11 +31,9 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
+            var targetpages = new VisioScripting.Models.TargetPages().Resolve(this.Client);
             if (this.FitContents || this.Width >0 || this.Height >0)
             {
-                var cmdtarget = this.Client.GetCommandTargetPage();
-                var targetpages = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
-
                 if (this.FitContents)
                 {
                     var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderWidth);
@@ -64,21 +62,18 @@ namespace VisioPowerShell.Commands.VisioPage
 
             if (this.Orientation.HasValue)
             {
-                var cmdtarget = this.Client.GetCommandTargetPage();
-                var targetpages = new VisioScripting.Models.TargetPages(cmdtarget.ActivePage);
                 this.Client.Page.SetPageOrientation(targetpages,this.Orientation.Value);
             }
 
             if (this.BackgroundPage != null)
             {
+                // TODO: SetActivePageBackground should handle targetpages
                 this.Client.Page.SetActivePageBackground(this.BackgroundPage);
             }
 
             if (this.LayoutStyle!=null)
             {
-                var cmdtarget = this.Client.GetCommandTargetPage();
-                var targetpage = new VisioScripting.Models.TargetPage(cmdtarget.ActivePage);
-                this.Client.Page.LayoutPage(targetpage, this.LayoutStyle);
+                this.Client.Page.LayoutPage(targetpages, this.LayoutStyle);
             }
         }
     }

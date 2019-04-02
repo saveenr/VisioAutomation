@@ -20,8 +20,12 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            var targetpage = new VisioScripting.Models.TargetPage(null);
-            var page = targetpage.Resolve(this.Client);
+            var targetpage = new VisioScripting.Models.TargetPage().Resolve(this.Client);
+
+            if (targetpage.Item == null)
+            {
+                return;
+            }
 
             // Handle the case where neither names nor ids where passed
             if (this.Name == null && this.Id == null)

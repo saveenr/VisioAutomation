@@ -13,8 +13,6 @@ namespace VisioPowerShell.Commands.VisioPage
         {
             var targetpage = new VisioScripting.Models.TargetPage();
 
-            var page = targetpage.Resolve(this.Client);
-
             IVisio.Page newpage;
             if (this.ToDocument == null)
             {

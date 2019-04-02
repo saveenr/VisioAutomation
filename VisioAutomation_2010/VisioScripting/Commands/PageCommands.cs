@@ -177,21 +177,27 @@ namespace VisioScripting.Commands
 
         public IVisio.Page DuplicatePageToDocument(Models.TargetPage targetpage, IVisio.Document dest_doc)
         {
-            var src_page = targetpage.Resolve(this._client);
+            targetpage = targetpage.Resolve(this._client);
+
+
+            if (targetpage.Item == null)
+            {
+                throw new VisioAutomation.Exceptions.VisioOperationException("No page found to duplicate");
+            }
 
             if (dest_doc == null)
             {
                 throw new System.ArgumentNullException(nameof(dest_doc));
             }
 
-            if (src_page.Item.Document == dest_doc)
+            if (targetpage.Item.Document == dest_doc)
             {
                 throw new VisioAutomation.Exceptions.VisioOperationException("dest doc is same as pages src doc");
             }
 
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
-            VisioAutomation.Pages.PageHelper.Duplicate(src_page.Item, dest_page);
+            VisioAutomation.Pages.PageHelper.Duplicate(targetpage.Item, dest_page);
 
             return dest_page;
         }
@@ -338,6 +344,19 @@ namespace VisioScripting.Commands
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
                 layout.Apply(targetpage.Item);
+            }
+        }
+
+        public void LayoutPage(Models.TargetPages targetpages, VisioAutomation.Models.LayoutStyles.LayoutStyleBase layout)
+        {
+            targetpages = targetpages.Resolve(this._client);
+
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
+            {
+                foreach (var page in targetpages.Items)
+                {
+                    layout.Apply(page);
+                }
             }
         }
 
