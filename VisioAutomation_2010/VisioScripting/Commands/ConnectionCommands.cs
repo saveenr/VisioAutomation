@@ -24,11 +24,15 @@ namespace VisioScripting.Commands
             return VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(cmdtarget.ActivePage, flag);
         }
 
-        public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdgesOnActivePage(VA.DocumentAnalysis.ConnectionAnalyzerOptions flag)
+        public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdgesOnPage(Models.TargetPage targetpage, VA.DocumentAnalysis.ConnectionAnalyzerOptions flag)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.Resolve(this._client);
 
-            var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(cmdtarget.ActivePage, flag);
+            if (targetpage.Item == null)
+            {
+                throw new System.ArgumentException("No page specified to get edges from");
+            }
+            var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(targetpage.Item, flag);
             return directed_edges;
         }
 
