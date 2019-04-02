@@ -112,30 +112,32 @@ namespace VisioScripting
 
         public CommandTarget GetCommandTarget(CommandTargetFlags flags)
         {
-            var ct = new CommandTarget(this, flags);
-            return ct;
+            var command_target = new CommandTarget(this, flags);
+            return command_target;
         }
 
         public CommandTarget GetCommandTargetPage()
         {
-            var flags = CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
+            var flags = CommandTargetFlags.Application | 
+                        CommandTargetFlags.ActiveDocument |
                         CommandTargetFlags.ActivePage;
-            var ct = new CommandTarget(this, flags);
-            return ct;
+            var command_target = new CommandTarget(this, flags);
+            return command_target;
         }
 
         public CommandTarget GetCommandTargetDocument()
         {
-            var flags = CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument;
-            var ct = new CommandTarget(this, flags);
-            return ct;
+            var flags = CommandTargetFlags.Application | 
+                        CommandTargetFlags.ActiveDocument;
+            var command_target = new CommandTarget(this, flags);
+            return command_target;
         }
 
         public CommandTarget GetCommandTargetApplication()
         {
             var flags = CommandTargetFlags.Application;
-            var ct = new CommandTarget(this, flags);
-            return ct;
+            var command_target = new CommandTarget(this, flags);
+            return command_target;
         }
 
         private static List<string> _static_dlls;
