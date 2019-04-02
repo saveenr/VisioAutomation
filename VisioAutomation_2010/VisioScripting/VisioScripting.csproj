@@ -68,12 +68,12 @@
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
     <Compile Include="Models\ConnectionPointType.cs" />
-    <Compile Include="Models\TargetDocument.cs" />
-    <Compile Include="Models\TargetDocuments.cs" />
-    <Compile Include="Models\TargetObjects.cs" />
-    <Compile Include="Models\TargetPage.cs" />
-    <Compile Include="Models\TargetPages.cs" />
-    <Compile Include="Models\TargetShapes.cs" />
+    <Compile Include="TargetDocument.cs" />
+    <Compile Include="TargetDocuments.cs" />
+    <Compile Include="TargetObjects.cs" />
+    <Compile Include="TargetPage.cs" />
+    <Compile Include="TargetPages.cs" />
+    <Compile Include="TargetShapes.cs" />
     <Compile Include="Helpers\ArrangeHelper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Commands\Command.cs" />
@@ -104,7 +104,7 @@
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
     <Compile Include="Commands\ViewCommands.cs" />
     <Compile Include="ClientContext.cs" />
-    <Compile Include="Models\DefaultClientContext.cs" />
+    <Compile Include="DefaultClientContext.cs" />
     <Compile Include="Models\DGConnectorInfo.cs" />
     <Compile Include="Builders\DirectedGraphBuilder.cs" />
     <Compile Include="Models\DGShapeInfo.cs" />
