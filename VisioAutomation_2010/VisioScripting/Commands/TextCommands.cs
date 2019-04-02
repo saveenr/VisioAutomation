@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetShapeText(Models.TargetShapes targetshapes, IList<string> texts)
+        public void SetShapeText(TargetShapes targetshapes, IList<string> texts)
         {
             if (texts == null || texts.Count < 1)
             {
@@ -45,7 +45,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<string> GetShapeText(Models.TargetShapes targetshapes)
+        public List<string> GetShapeText(TargetShapes targetshapes)
         {
             targetshapes = targetshapes.Resolve(this._client);
 
@@ -58,7 +58,7 @@ namespace VisioScripting.Commands
             return texts;
         }
 
-        public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(Models.TargetShapes targetshapes)
+        public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(TargetShapes targetshapes)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 

@@ -1,4 +1,4 @@
-﻿namespace VisioScripting.Models
+﻿namespace VisioScripting
 {
     public class DefaultClientContext : ClientContext
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioScripting.Models
+namespace VisioScripting
 {
     public class TargetDocuments : TargetObjects<IVisio.Document>
     {

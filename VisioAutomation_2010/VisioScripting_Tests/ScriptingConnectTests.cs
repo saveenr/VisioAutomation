@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.OpenStencilDocument("basic_u.vss");
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
 
-            var tdoc = new VisioScripting.Models.TargetDocument(connec_stencil);
+            var tdoc = new VisioScripting.TargetDocument(connec_stencil);
             var master = client.Master.GetMasterWithNameInDocument(tdoc, "Dynamic Connector");
             var fromshapes = new [] { s1,s2};
             var toshapes = new [] { s2,s3};
@@ -36,7 +36,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectNone();
             client.Selection.SelectShapes(directed_connectors);
 
-            var page = new TargetPage();
+            var page = new VisioScripting.TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
             var shapes = client.Selection.GetShapesInSelection();
@@ -48,7 +48,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var options0 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options0.DirectionSource = DirectionSource.UseConnectionOrder;
-            var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage( new TargetPage(), options0);
+            var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage( new VisioScripting.TargetPage(), options0);
             Assert.AreEqual(2, undirected_edges0.Count);
 
             var options1 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
@@ -57,10 +57,10 @@ namespace VisioAutomation_Tests.Scripting
             var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options2.NoArrowsHandling = NoArrowsHandling.TreatEdgeAsBidirectional;
 
-            var directed_edges0 = client.Connection.GetDirectedEdgesOnPage(new TargetPage(), options1);
+            var directed_edges0 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options1);
             Assert.AreEqual(2, directed_edges0.Count);
 
-            var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(new TargetPage(), options2);
+            var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options2);
             Assert.AreEqual(2, directed_edges1.Count);
 
             client.Document.CloseActiveDocument(true);
@@ -87,26 +87,26 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Document.OpenStencilDocument("basic_u.vss");
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
-            var connec_tdoc = new VisioScripting.Models.TargetDocument(connec_stencil);
+            var connec_tdoc = new VisioScripting.TargetDocument(connec_stencil);
             var master = client.Master.GetMasterWithNameInDocument(connec_tdoc, "Dynamic Connector");
             var undirected_connectors = client.Connection.ConnectShapes(new [] { s1,s2},new [] { s2,s3}, master);
 
             var options1 = new VisioAutomation.DocumentAnalysis.ConnectionAnalyzerOptions();
             options1.NoArrowsHandling = NoArrowsHandling.ExcludeEdge;
 
-            var directed_edges0 = client.Connection.GetDirectedEdgesOnPage(new TargetPage(), options1);
+            var directed_edges0 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options1);
             Assert.AreEqual(0, directed_edges0.Count);
 
             var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options2.NoArrowsHandling = NoArrowsHandling.TreatEdgeAsBidirectional;
 
-            var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(new TargetPage(), options2);
+            var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options2);
             Assert.AreEqual(4, directed_edges1.Count);
 
             var options3 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options3.DirectionSource = DirectionSource.UseConnectionOrder;
 
-            var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(new TargetPage(), options3);
+            var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options3);
             Assert.AreEqual(2, undirected_edges0.Count);
 
             client.Document.CloseActiveDocument(true);

@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(Models.TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
             var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
@@ -40,7 +40,7 @@ namespace VisioScripting.Commands
             return dicof_shape_to_udcelldic;
         }
 
-        public List<bool> ContainsUserDefinedCellsWithName(Models.TargetShapes targetshapes, string name)
+        public List<bool> ContainsUserDefinedCellsWithName(TargetShapes targetshapes, string name)
         {
             if (name == null)
             {
@@ -60,7 +60,7 @@ namespace VisioScripting.Commands
             return results;
         }
        
-        public void DeleteUserDefinedCellsByName(Models.TargetShapes targetshapes, string name)
+        public void DeleteUserDefinedCellsByName(TargetShapes targetshapes, string name)
         {
             targetshapes = targetshapes.Resolve(this._client);
 
@@ -88,7 +88,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetUserDefinedCell(Models.TargetShapes targetshapes, Models.UserDefinedCell userdefinedcell)
+        public void SetUserDefinedCell(TargetShapes targetshapes, Models.UserDefinedCell userdefinedcell)
         {
             targetshapes = targetshapes.Resolve(this._client);
 

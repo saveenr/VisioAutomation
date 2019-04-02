@@ -1,7 +1,7 @@
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioScripting.Models
+namespace VisioScripting
 {
     public class TargetPage : TargetObject<IVisio.Page>
     {

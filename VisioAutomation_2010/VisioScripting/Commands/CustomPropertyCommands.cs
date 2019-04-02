@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomProperties(Models.TargetShapes targetshapes)
+        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -40,7 +40,7 @@ namespace VisioScripting.Commands
             return dicof_shape_to_cpdic;
         }
 
-        public List<bool> ContainCustomPropertyWithName(Models.TargetShapes targetshapes, string name)
+        public List<bool> ContainCustomPropertyWithName(TargetShapes targetshapes, string name)
         {
             if (name == null)
             {
@@ -56,7 +56,7 @@ namespace VisioScripting.Commands
             return results;
         }
 
-        public void DeleteCustomPropertyWithName(Models.TargetShapes targetshapes, string name)
+        public void DeleteCustomPropertyWithName(TargetShapes targetshapes, string name)
         {
             if (name == null)
             {
@@ -84,7 +84,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetCustomProperty(Models.TargetShapes targetshapes, string name, CustomPropertyCells customprop)
+        public void SetCustomProperty(TargetShapes targetshapes, string name, CustomPropertyCells customprop)
         {
             if (customprop == null)
             {

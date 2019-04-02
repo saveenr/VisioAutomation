@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<int> AddControlToShapes(Models.TargetShapes targetshapes, ControlCells ctrl)
+        public List<int> AddControlToShapes(TargetShapes targetshapes, ControlCells ctrl)
         {
             if (ctrl == null)
             {
@@ -42,7 +42,7 @@ namespace VisioScripting.Commands
             return control_indices;
         }
 
-        public void DeleteControlWithIndex(Models.TargetShapes targetshapes, int index)
+        public void DeleteControlWithIndex(TargetShapes targetshapes, int index)
         {
             targetshapes = targetshapes.Resolve(this._client);
 
@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<ControlCells>> GetControls(Models.TargetShapes targetshapes, CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<ControlCells>> GetControls(TargetShapes targetshapes, CellValueType cvt)
         {
             targetshapes = targetshapes.Resolve(this._client);
 

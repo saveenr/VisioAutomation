@@ -3,7 +3,7 @@ using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioScripting.Models
+namespace VisioScripting
 {
     public class TargetShapes : TargetObjects<IVisio.Shape>
     {

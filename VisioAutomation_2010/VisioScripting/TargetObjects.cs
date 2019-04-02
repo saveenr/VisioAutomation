@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioScripting.Models
+namespace VisioScripting
 {
     public class TargetObjects<T>
     {

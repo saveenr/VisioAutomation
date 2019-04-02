@@ -22,9 +22,9 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Selection.SelectNone();
 
-            var targetshapes = new VisioScripting.Models.TargetShapes(s1,s2,s3);
+            var targetshapes = new VisioScripting.TargetShapes(s1,s2,s3);
             var targetshapeids = targetshapes.ToShapeIDs();
-            var page = new TargetPage();
+            var page = new VisioScripting.TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
             foreach (var shapeid in targetshapeids)
@@ -53,7 +53,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            var targetshapes = new VisioScripting.Models.TargetShapes();
+            var targetshapes = new VisioScripting.TargetShapes();
             var prop_dic0 = client.CustomProperty.GetCustomProperties(targetshapes);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);

@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioScripting.Models
+namespace VisioScripting
 {
     public class TargetObject<T> where  T: class
     {

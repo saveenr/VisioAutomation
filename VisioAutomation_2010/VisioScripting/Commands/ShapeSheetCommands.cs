@@ -12,7 +12,7 @@ namespace VisioScripting.Commands
 
         }
 
-        internal void __SetCells(Models.TargetShapes targetshapes, VASS.CellGroups.CellGroup cellgroup, IVisio.Page page)
+        internal void __SetCells(TargetShapes targetshapes, VASS.CellGroups.CellGroup cellgroup, IVisio.Page page)
         {
             targetshapes = targetshapes.Resolve(this._client);
             var targetshapeids = targetshapes.ToShapeIDs();
@@ -27,7 +27,7 @@ namespace VisioScripting.Commands
             writer.Commit(page, VASS.CellValueType.Formula);
         }
 
-        public void SetShapeName(Models.TargetShapes targetshapes, IList<string> names)
+        public void SetShapeName(TargetShapes targetshapes, IList<string> names)
         {
             if (names == null || names.Count < 1)
             {
@@ -68,14 +68,14 @@ namespace VisioScripting.Commands
             return shapesheet_surface;
         }
         
-        public Models.ShapeSheetWriter GetWriterForPage(Models.TargetPage targetpage)
+        public Models.ShapeSheetWriter GetWriterForPage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
             var writer = new Models.ShapeSheetWriter(this._client, targetpage.Item);
             return writer;
         }
 
-        public Models.ShapeSheetReader GetReaderForPage(Models.TargetPage targetpage)
+        public Models.ShapeSheetReader GetReaderForPage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
             var reader = new Models.ShapeSheetReader(this._client, targetpage.Item);

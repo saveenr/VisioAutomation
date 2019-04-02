@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>> GetConnectionPoints(Models.TargetShapes targetshapes)
+        public IDictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>> GetConnectionPoints(TargetShapes targetshapes)
         {
             targetshapes = targetshapes.Resolve(this._client);
 
@@ -34,7 +34,7 @@ namespace VisioScripting.Commands
         }
 
         public List<int> AddConnectionPoint(
-            Models.TargetShapes targets, 
+            TargetShapes targets, 
             string fx,
             string fy,
             Models.ConnectionPointType type)
@@ -75,11 +75,11 @@ namespace VisioScripting.Commands
             string y,
             Models.ConnectionPointType type)
         {
-            var targets = new Models.TargetShapes();
+            var targets = new TargetShapes();
             return this.AddConnectionPoint(targets, x, y, type);
         }
 
-        public void DeleteConnectionPointAtIndex(Models.TargetShapes targetshapes, int index)
+        public void DeleteConnectionPointAtIndex(TargetShapes targetshapes, int index)
         {
             targetshapes = targetshapes.Resolve(this._client);
 

@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-            var targetpages = new VisioScripting.Models.TargetPages(this.Pages);
+            var targetpages = new VisioScripting.TargetPages(this.Pages);
             this.Client.Page.DeletePages(targetpages, this.Renumber);
         }
     }

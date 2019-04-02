@@ -13,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetLockCells(Models.TargetShapes targetshapes, LockCells lockcells)
+        public void SetLockCells(TargetShapes targetshapes, LockCells lockcells)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public Dictionary<int,LockCells> GetLockCells(Models.TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<int,LockCells> GetLockCells(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

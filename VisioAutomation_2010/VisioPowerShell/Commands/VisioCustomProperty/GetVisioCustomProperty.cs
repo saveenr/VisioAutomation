@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
             var dicof_shape_to_cpdic = this.Client.CustomProperty.GetCustomProperties(targetshapes);
 
             if (this.GetCells)

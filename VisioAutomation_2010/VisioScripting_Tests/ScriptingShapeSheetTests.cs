@@ -17,7 +17,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Draw.DrawRectangle(1, 1, 2, 2);
 
 
-            var targetpage = new TargetPage();
+            var targetpage = new VisioScripting.TargetPage();
             var shapes = client.Page.GetShapesOnPage(targetpage);
             var shapeids = shapes.Select(s => s.ID16).ToList();
             

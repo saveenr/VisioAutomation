@@ -25,7 +25,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-            var targetpage = new TargetPage(this.Page);
+            var targetpage = new VisioScripting.TargetPage(this.Page);
 
             var flag = this._get_directed_edge_handling();
             var edges = this.Client.Connection.GetDirectedEdgesOnPage(targetpage,flag);

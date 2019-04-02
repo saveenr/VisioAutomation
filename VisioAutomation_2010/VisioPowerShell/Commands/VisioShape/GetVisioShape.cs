@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            var targetpage = new VisioScripting.Models.TargetPage().Resolve(this.Client);
+            var targetpage = new VisioScripting.TargetPage().Resolve(this.Client);
 
             if (targetpage.Item == null)
             {

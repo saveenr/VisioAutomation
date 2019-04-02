@@ -31,7 +31,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-            var targetpages = new VisioScripting.Models.TargetPages().Resolve(this.Client);
+            var targetpages = new VisioScripting.TargetPages().Resolve(this.Client);
             if (this.FitContents || this.Width >0 || this.Height >0)
             {
                 if (this.FitContents)
