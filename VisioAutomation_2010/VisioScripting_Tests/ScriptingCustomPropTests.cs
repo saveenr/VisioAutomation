@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using VisioScripting.Models;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Scripting
@@ -23,7 +24,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targetshapes = new VisioScripting.Models.TargetShapes(s1,s2,s3);
             var targetshapeids = targetshapes.ToShapeIDs();
-            var page = client.Page.GetActivePage();
+            var page = new TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
             foreach (var shapeid in targetshapeids)

@@ -68,15 +68,17 @@ namespace VisioScripting.Commands
             return shapesheet_surface;
         }
         
-        public Models.ShapeSheetWriter GetWriterForPage(IVisio.Page page)
+        public Models.ShapeSheetWriter GetWriterForPage(Models.TargetPage targetpage)
         {
-            var writer = new Models.ShapeSheetWriter(this._client, page);
+            targetpage = targetpage.Resolve(this._client);
+            var writer = new Models.ShapeSheetWriter(this._client, targetpage.Item);
             return writer;
         }
 
-        public Models.ShapeSheetReader GetReaderForPage(IVisio.Page page)
+        public Models.ShapeSheetReader GetReaderForPage(Models.TargetPage targetpage)
         {
-            var reader = new Models.ShapeSheetReader(this._client, page);
+            targetpage = targetpage.Resolve(this._client);
+            var reader = new Models.ShapeSheetReader(this._client, targetpage.Item);
             return reader;
         }
     }

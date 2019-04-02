@@ -36,7 +36,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectNone();
             client.Selection.SelectShapes(directed_connectors);
 
-            var page = client.Page.GetActivePage();
+            var page = new TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
             var shapes = client.Selection.GetShapesInSelection();

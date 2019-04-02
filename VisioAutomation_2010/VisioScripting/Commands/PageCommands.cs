@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -474,7 +475,7 @@ namespace VisioScripting.Commands
             {
                 // return all pages
                 var all_pages = targetdoc.Item.Pages.ToList();
-                all_pages = filter_pages_by_type(all_pages, pagetype);
+                all_pages = _filter_pages_by_type(all_pages, pagetype);
                 return all_pages;
             }
             else
@@ -482,13 +483,13 @@ namespace VisioScripting.Commands
                 // return the named page
                 var all_pages = targetdoc.Item.Pages.ToEnumerable();
                 var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
-                named_pages = filter_pages_by_type(named_pages, pagetype);
+                named_pages = _filter_pages_by_type(named_pages, pagetype);
 
                 return named_pages;
             }
         }
 
-        private List<IVisio.Page> filter_pages_by_type(List<IVisio.Page> pages, Models.PageType pagetype)
+        private List<IVisio.Page> _filter_pages_by_type(List<IVisio.Page> pages, Models.PageType pagetype)
         {
             if (pages == null)
             {
@@ -513,10 +514,10 @@ namespace VisioScripting.Commands
             throw new System.ArgumentOutOfRangeException(nameof(pagetype),msg);
         }
 
-        public List<IVisio.Shape> GetShapesOnActivePage()
+        public List<IVisio.Shape> GetShapesOnPage(TargetPage targetpage)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-            var shapes = cmdtarget.ActivePage.Shapes.ToList();
+            targetpage = targetpage.Resolve(this._client);
+            var shapes = targetpage.Item.Shapes.ToList();
             return shapes;
         }
     }
