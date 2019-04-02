@@ -78,8 +78,7 @@ namespace VisioAutomation_Tests.Scripting
             var doc_src_1 = client.Document.NewDocument();
 
 
-            var target_src1_page = new VisioScripting.Models.TargetPage();
-            target_src1_page.Resolve(client);
+            var target_src1_page = new VisioScripting.Models.TargetPage().Resolve(client);
 
             client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Page.DuplicatePageToDocument(target_src1_page, doc_dest_1);
@@ -90,8 +89,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.ActivateDocument(doc_src_2);
             client.Draw.DrawRectangle(0, 0, 1, 1);
 
-            var target_src2_page = new VisioScripting.Models.TargetPage();
-            target_src2_page.Resolve(client);
+            var target_src2_page = new VisioScripting.Models.TargetPage().Resolve(client);
 
             client.Page.DuplicatePageToDocument(target_src2_page, doc_dest_2);
 

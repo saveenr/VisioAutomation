@@ -337,16 +337,6 @@ namespace VisioScripting.Commands
             this._GoTo(pages, flags, cmdtarget);
         }
 
-        public void LayoutPage(Models.TargetPage targetpage, VisioAutomation.Models.LayoutStyles.LayoutStyleBase layout)
-        {
-            var pages = targetpage.Resolve(this._client);
-
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
-            {
-                layout.Apply(targetpage.Item);
-            }
-        }
-
         public void LayoutPage(Models.TargetPages targetpages, VisioAutomation.Models.LayoutStyles.LayoutStyleBase layout)
         {
             targetpages = targetpages.Resolve(this._client);
@@ -434,8 +424,8 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesOnPageByID(Models.TargetPage targetpage, int[] shapeids)
         {
-            var page = targetpage.Resolve(this._client);
-            var shapes = page.Item.Shapes;
+            targetpage = targetpage.Resolve(this._client);
+            var shapes = targetpage.Item.Shapes;
             var shapes_list = new List<IVisio.Shape>(shapeids.Length);
             foreach (int id in shapeids)
             {
@@ -448,17 +438,22 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesOnPageByName(Models.TargetPage targetpage, string[] shapenames)
         {
-            var page = targetpage.Resolve(this._client);
+            targetpage = targetpage.Resolve(this._client);
 
             return this.GetShapesOnPageByName(targetpage, shapenames, false);
         }
 
         public List<IVisio.Shape> GetShapesOnPageByName(Models.TargetPage targetpage, string[] shapenames, bool ignore_bad_names)
         {
-            var page = targetpage.Resolve(this._client);
+            targetpage = targetpage.Resolve(this._client);
+
+            if (targetpage.Item == null)
+            {
+                throw new System.ArgumentException("No page available");
+            }
 
             var cmdtarget = this._client.GetCommandTargetDocument();
-            var shapes = cmdtarget.ActivePage.Shapes;
+            var shapes = targetpage.Item.Shapes;
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
             cached_shapes_list.AddRange(shapes.ToEnumerable());
             
