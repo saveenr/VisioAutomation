@@ -33,7 +33,8 @@ namespace VisioAutomation_Tests.Scripting
             client.ExportSelection.ExportSelectionToHtml(output_filename);
 
             AssertUtil.FileExists(output_filename);
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

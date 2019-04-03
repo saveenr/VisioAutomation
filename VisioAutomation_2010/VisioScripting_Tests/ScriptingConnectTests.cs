@@ -63,7 +63,8 @@ namespace VisioAutomation_Tests.Scripting
             var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options2);
             Assert.AreEqual(2, directed_edges1.Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -109,7 +110,8 @@ namespace VisioAutomation_Tests.Scripting
             var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options3);
             Assert.AreEqual(2, undirected_edges0.Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
 
@@ -122,8 +124,9 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(4, 4, 5, 5);
 
             client.Connection.ConnectShapes(new[] {s1}, new[] {s2}, null);
-            
-            client.Document.CloseActiveDocument(true);
+
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }
