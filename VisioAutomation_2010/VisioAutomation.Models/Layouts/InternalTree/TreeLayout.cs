@@ -9,9 +9,14 @@ using System.Linq;
  * 
  * 
  * That code is in turn is based on: "Positioning Nodes For General Trees" by John Q. Walker II
- * It was originaly published in "Software - Practice and Experience", July 1990, Copyright 1990 by John Wiley and Sons, Ltd.
- * The  source available here http://www.ddj.com/cpp/184402320
+ * This algorithm has been published in several locations:
+ * 1. http://www.cs.unc.edu/techreports/89-034.pdf 
+ * 2. "Software - Practice and Experience", July 1990, Copyright 1990 by John Wiley and Sons, Ltd.
  * 
+ * Other literature:
+ * - https://llimllib.github.io/pymag-trees/
+ * - http://dirk.jivas.de/papers/buchheim02improving.pdf
+ * - https://github.com/fforw/rt03-mindmap/blob/master/src/script/tree-layout.js
  * 
  * KEY UPDATES
  * ------------
