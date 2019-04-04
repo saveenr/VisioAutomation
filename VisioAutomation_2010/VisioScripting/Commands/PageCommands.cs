@@ -190,12 +190,6 @@ namespace VisioScripting.Commands
         {
             targetpage = targetpage.Resolve(this._client);
 
-
-            if (targetpage.Item == null)
-            {
-                throw new VisioAutomation.Exceptions.VisioOperationException("No page found to duplicate");
-            }
-
             if (dest_doc == null)
             {
                 throw new System.ArgumentNullException(nameof(dest_doc));
@@ -444,11 +438,6 @@ namespace VisioScripting.Commands
         {
             targetpage = targetpage.Resolve(this._client);
 
-            if (targetpage.Item == null)
-            {
-                throw new System.ArgumentException("No page available");
-            }
-
             var shapes = targetpage.Item.Shapes;
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
             cached_shapes_list.AddRange(shapes.ToEnumerable());
@@ -468,10 +457,6 @@ namespace VisioScripting.Commands
         public List<IVisio.Page> FindPagesInDocumentByName(TargetDocument targetdoc, string name, Models.PageType pagetype)
         {
             targetdoc = targetdoc.Resolve(this._client);
-            if (targetdoc.Item == null)
-            {
-                throw new System.ArgumentException("No document to get pages from");
-            }
 
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {

@@ -22,11 +22,6 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             var targetpage = new VisioScripting.TargetPage().Resolve(this.Client);
 
-            if (targetpage.Item == null)
-            {
-                return;
-            }
-
             // Handle the case where neither names nor ids where passed
             if (this.Name == null && this.Id == null)
             {
