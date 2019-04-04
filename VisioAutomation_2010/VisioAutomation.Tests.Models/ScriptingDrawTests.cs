@@ -281,7 +281,9 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.GetMaster(stencil_tdoc, "Rectangle");
 
             // Frop the Shapes
-            client.Master.DropMasterOnActivePage(master, new VA.Geometry.Point(2, 2));
+
+            var targetpage = new VisioScripting.TargetPage();
+            client.Master.DropMaster(targetpage , master, new VA.Geometry.Point(2, 2));
 
             // Verify
             var application = client.Application.GetActiveApplication();
@@ -314,7 +316,9 @@ namespace VisioAutomation_Tests.Scripting
             var masters = new[] {m1, m2};
             var xys = new[] { 1.0, 2.0, 3.0, 4.0, 1.5, 4.5, 5.7, 2.4 };
             var points = VA.Geometry.Point.FromDoubles(xys).ToList();
-            client.Master.DropMastersOnActivePage(masters, points);
+
+            var targetpage = new VisioScripting.TargetPage();
+            client.Master.DropMasters(targetpage, masters, points);
 
             // Verify
             var application = client.Application.GetActiveApplication();
@@ -351,7 +355,8 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.GetMaster(stencil_tdoc, "Rectangle");
 
             // Drop the rectangle
-            client.Master.DropMasterOnActivePage(master, new VA.Geometry.Point(2, 2) );
+            var targetpage = new VisioScripting.TargetPage();
+            client.Master.DropMaster(targetpage, master, new VA.Geometry.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
             client.Selection.SelectAllShapes();
@@ -406,7 +411,8 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.GetMaster(basic_stencil_tdoc, "Rectangle");
 
             // Drop the rectangle
-            client.Master.DropMasterOnActivePage(master, new VA.Geometry.Point(2, 2) );
+            var targetpage = new VisioScripting.TargetPage();
+            client.Master.DropMaster(targetpage, master, new VA.Geometry.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
             client.Selection.SelectAllShapes();

@@ -94,20 +94,20 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DropMasterOnActivePage(IVisio.Master master, VisioAutomation.Geometry.Point p)
+        public IVisio.Shape DropMaster(TargetPage targetpage, IVisio.Master master, VisioAutomation.Geometry.Point p)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.Resolve(this._client);
 
-            var page = cmdtarget.ActivePage;
-            var shape = page.Drop(master, p.X, p.Y);
+            var shape = targetpage.Item.Drop(master, p.X, p.Y);
             return shape;
         }
 
-        public short[] DropMastersOnActivePage(
+        public short[] DropMasters(
+            TargetPage targetpage,
             IList<IVisio.Master> masters, 
             IList<VisioAutomation.Geometry.Point> points)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.Resolve(this._client);
 
             if (masters == null)
             {
@@ -119,7 +119,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(points));
             }
 
-            var page = cmdtarget.ActivePage;
+            var page = targetpage.Item;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;
         }
