@@ -44,36 +44,6 @@ namespace VisioScripting.Commands
             return masters;
         }
 
-        public IVisio.Master GetMasterWithName(string name)
-        {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            if (name == null)
-            {
-                throw new System.ArgumentNullException(nameof(name));
-            }
-
-            if (name.Length < 1)
-            {
-                throw new System.ArgumentException("mastername");
-            }
-
-            IVisio.Master master;
-            try
-            {
-                var application = cmdtarget.Application;
-                var active_document = application.ActiveDocument;
-                var masters = active_document.Masters;
-                master = masters.ItemU[name];
-            }
-            catch (System.Runtime.InteropServices.COMException)
-            {
-                string msg = string.Format("No such master \"{0}\"", name);
-                throw new VisioOperationException(msg);
-            }
-            return master;
-        }
-
         public IVisio.Master GetMasterWithNameInDocument(TargetDocument target_doc, string master)
         {
             if (master == null)
