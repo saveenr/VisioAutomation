@@ -12,9 +12,10 @@ namespace VisioScripting.Commands
 
         }
 
-        public IVisio.Layer FindLayersOnActivePageByName(string name)
+        public IVisio.Layer FindLayersOnPageByName(TargetPage targetpage, string name)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.Resolve(this._client);
+
 
             if (name == null)
             {
@@ -26,12 +27,11 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("Layer name cannot be empty", nameof(name));
             }
 
-            var page = cmdtarget.ActivePage;
             IVisio.Layer layer = null;
             try
             {
                 this._client.Output.WriteVerbose("Trying to find layer named \"{0}\"",name);
-                var layers = page.Layers;
+                var layers = targetpage.Item.Layers;
                 layer = layers.ItemU[name];
             }
             catch (System.Runtime.InteropServices.COMException)
@@ -42,11 +42,10 @@ namespace VisioScripting.Commands
             return layer;
         }
 
-        public List<IVisio.Layer> GetLayersOnActivePage()
+        public List<IVisio.Layer> GetLayersOnPage(TargetPage target_page)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            return cmdtarget.ActivePage.Layers.ToList();
+            target_page = target_page.Resolve(this._client);
+            return target_page.Item.Layers.ToList();
         }
     }
 }
