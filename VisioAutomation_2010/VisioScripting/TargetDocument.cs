@@ -18,12 +18,12 @@ namespace VisioScripting
             {
                 return this;
             }
-            var cmdtarget = client.GetCommandTarget(
-                Commands.CommandTargetRequirementFlags.RequireApplication |
-                Commands.CommandTargetRequirementFlags.RequireActiveDocument |
-                Commands.CommandTargetRequirementFlags.RequirePage);
 
-            return new TargetDocument(cmdtarget.ActiveDocument);
+            var command_target = new Commands.CommandTarget(client, Commands.CommandTargetRequirementFlags.RequireApplication |
+                                                                    Commands.CommandTargetRequirementFlags.RequireActiveDocument |
+                                                                    Commands.CommandTargetRequirementFlags.RequirePage);
+
+            return new TargetDocument(command_target.ActiveDocument);
         }
     }
 }

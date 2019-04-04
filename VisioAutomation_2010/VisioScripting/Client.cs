@@ -110,12 +110,6 @@ namespace VisioScripting
             return command_props;
         }
 
-        public CommandTarget GetCommandTarget(CommandTargetRequirementFlags requirement_flags)
-        {
-            var command_target = new CommandTarget(this, requirement_flags);
-            return command_target;
-        }
-
         public CommandTarget GetCommandTargetPage()
         {
             var flags = CommandTargetRequirementFlags.RequireApplication | 
