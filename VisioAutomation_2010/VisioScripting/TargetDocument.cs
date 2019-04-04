@@ -43,21 +43,18 @@ namespace VisioScripting
 
         public TargetDocument Resolve(VisioScripting.Client client)
         {
-            if (!this.IsResolved)
-            {
-                var cmdtarget = client.GetCommandTarget(
-                    Commands.CommandTargetRequirementFlags.RequireApplication | 
-                    Commands.CommandTargetRequirementFlags.RequireActiveDocument |
-                    Commands.CommandTargetRequirementFlags.RequirePage);
-
-                // It doesn't matter if there is an active document or not
-                // at this point it is considered resolved
-                return new TargetDocument(cmdtarget.ActiveDocument, true);
-            }
-            else
+            if (this.IsResolved)
             {
                 return this;
             }
+            var cmdtarget = client.GetCommandTarget(
+                Commands.CommandTargetRequirementFlags.RequireApplication |
+                Commands.CommandTargetRequirementFlags.RequireActiveDocument |
+                Commands.CommandTargetRequirementFlags.RequirePage);
+
+            // It doesn't matter if there is an active document or not
+            // at this point it is considered resolved
+            return new TargetDocument(cmdtarget.ActiveDocument, true);
         }
     }
 }
