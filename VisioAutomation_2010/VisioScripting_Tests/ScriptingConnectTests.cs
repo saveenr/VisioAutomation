@@ -29,7 +29,7 @@ namespace VisioAutomation_Tests.Scripting
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
 
             var tdoc = new VisioScripting.TargetDocument(connec_stencil);
-            var master = client.Master.GetMasterWithNameInDocument(tdoc, "Dynamic Connector");
+            var master = client.Master.GetMaster(tdoc, "Dynamic Connector");
             var fromshapes = new [] { s1,s2};
             var toshapes = new [] { s2,s3};
             var directed_connectors = client.Connection.ConnectShapes(fromshapes,toshapes, master);
@@ -89,7 +89,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.OpenStencilDocument("basic_u.vss");
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
             var connec_tdoc = new VisioScripting.TargetDocument(connec_stencil);
-            var master = client.Master.GetMasterWithNameInDocument(connec_tdoc, "Dynamic Connector");
+            var master = client.Master.GetMaster(connec_tdoc, "Dynamic Connector");
             var undirected_connectors = client.Connection.ConnectShapes(new [] { s1,s2},new [] { s2,s3}, master);
 
             var options1 = new VisioAutomation.DocumentAnalysis.ConnectionAnalyzerOptions();

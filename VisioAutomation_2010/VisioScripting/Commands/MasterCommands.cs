@@ -37,26 +37,26 @@ namespace VisioScripting.Commands
             master.Close();
         }
 
-        public List<IVisio.Master> GetAllMastersInDocument(TargetDocument target_doc)
+        public List<IVisio.Master> GetMasters(TargetDocument targetdoc)
         {
-            var doc_masters = target_doc.Item.Masters;
+            var doc_masters = targetdoc.Item.Masters;
             var masters = doc_masters.ToList();
             return masters;
         }
 
-        public IVisio.Master GetMasterWithNameInDocument(TargetDocument target_doc, string master)
+        public IVisio.Master GetMaster(TargetDocument targetdoc, string name)
         {
-            if (master == null)
+            if (name == null)
             {
-                throw new System.ArgumentNullException(nameof(master));
+                throw new System.ArgumentNullException(nameof(name));
             }
 
-            var masters = target_doc.Item.Masters;
-            IVisio.Master masterobj = this.TryGetMaster(masters, master);
+            var masters = targetdoc.Item.Masters;
+            IVisio.Master masterobj = this.TryGetMaster(masters, name);
 
             if (masterobj == null)
             {
-                string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, target_doc.Item.Name);
+                string msg = string.Format("No such master \"{0}\" in \"{1}\"", name, targetdoc.Item.Name);
                 throw new VisioOperationException(msg);
             }
 
@@ -64,18 +64,18 @@ namespace VisioScripting.Commands
         }
 
 
-        public List<IVisio.Master> FindMastersInDocumentByName(TargetDocument target_doc, string name)
+        public List<IVisio.Master> FindMasters(TargetDocument targetdoc, string name)
         {
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all masters
-                var masters = target_doc.Item.Masters.ToList();
+                var masters = targetdoc.Item.Masters.ToList();
                 return masters;
             }
             else
             {
                 // return masters matching the name
-                var masters2 = target_doc.Item.Masters.ToEnumerable();
+                var masters2 = targetdoc.Item.Masters.ToEnumerable();
                 var masters3 = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 return masters3;
             }
