@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands.VisioPage
             IVisio.Page newpage;
             if (this.ToDocument == null)
             {
-                newpage = this.Client.Page.DuplicateActivePage();
+                newpage = this.Client.Page.DuplicatePage(targetpage);
             }
             else
             {
