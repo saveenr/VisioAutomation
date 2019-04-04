@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -33,10 +33,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // now retrieve the formulas with GetFormulas
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.Columns.Add(SrcConstants.FillForeground, nameof(SrcConstants.FillForeground));
-            var col_bg = query.Columns.Add(SrcConstants.FillBackground, nameof(SrcConstants.FillBackground));
-            var col_filpat = query.Columns.Add(SrcConstants.FillPattern, nameof(SrcConstants.FillPattern));
+            var query = new VASS.Query.CellQuery();
+            var col_fg = query.Columns.Add(VASS.SrcConstants.FillForeground, nameof(VASS.SrcConstants.FillForeground));
+            var col_bg = query.Columns.Add(VASS.SrcConstants.FillBackground, nameof(VASS.SrcConstants.FillBackground));
+            var col_filpat = query.Columns.Add(VASS.SrcConstants.FillPattern, nameof(VASS.SrcConstants.FillPattern));
 
             var shapeids = new[] {s1_id};
 
@@ -88,10 +88,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // now retrieve the formulas with GetFormulas
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.Columns.Add(SrcConstants.FillForeground, nameof(SrcConstants.FillForeground));
-            var col_bg = query.Columns.Add(SrcConstants.FillBackground, nameof(SrcConstants.FillBackground));
-            var col_filpat = query.Columns.Add(SrcConstants.FillPattern, nameof(SrcConstants.FillPattern));
+            var query = new VASS.Query.CellQuery();
+            var col_fg = query.Columns.Add(VASS.SrcConstants.FillForeground, nameof(VASS.SrcConstants.FillForeground));
+            var col_bg = query.Columns.Add(VASS.SrcConstants.FillBackground, nameof(VASS.SrcConstants.FillBackground));
+            var col_filpat = query.Columns.Add(VASS.SrcConstants.FillPattern, nameof(VASS.SrcConstants.FillPattern));
 
             var shapeids = new[] {s1_id};
 
@@ -143,10 +143,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             VA.Shapes.CustomPropertyHelper.Set(s4, "S3P2", "\"5\"", cp_type);
             VA.Shapes.CustomPropertyHelper.Set(s4, "S3P3", "\"6\"", cp_type);
 
-            var sec_query = new VA.ShapeSheet.Query.SectionQuery();
+            var sec_query = new VASS.Query.SectionQuery();
 
             var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = sec_cols.Add(SrcConstants.CustomPropValue,nameof(SrcConstants.CustomPropValue));
+            var value_col = sec_cols.Add(VASS.SrcConstants.CustomPropValue,nameof(VASS.SrcConstants.CustomPropValue));
 
             var shapeidpairs = VA.ShapeIDPairs.FromShapes( s1, s2, s3, s4 );
 
@@ -187,7 +187,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes()
         {
-            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(10, 10));
+            var page1 = this.GetNewPage(new VA.Geometry.Size(10, 10));
 
             // draw a simple shape
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -198,9 +198,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             Assert.AreEqual(3, page1.Shapes.Count);
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
-            var col_piny = query.Columns.Add(SrcConstants.XFormPinY, nameof(SrcConstants.XFormPinY));
+            var query = new VASS.Query.CellQuery();
+            var col_pinx = query.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(VASS.SrcConstants.XFormPinX));
+            var col_piny = query.Columns.Add(VASS.SrcConstants.XFormPinY, nameof(VASS.SrcConstants.XFormPinY));
 
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
@@ -235,7 +235,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes_Verify_Out_Of_order()
         {
-            var page1 = this.GetNewPage(new VisioAutomation.Geometry.Size(10, 10));
+            var page1 = this.GetNewPage(new VA.Geometry.Size(10, 10));
 
             // draw a simple shape
             var sa = page1.DrawRectangle(-1, -1, 0, 0);
@@ -250,9 +250,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             Assert.AreEqual(5, page1.Shapes.Count);
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
-            var col_piny = query.Columns.Add(SrcConstants.XFormPinY, nameof(SrcConstants.XFormPinY));
+            var query = new VASS.Query.CellQuery();
+            var col_pinx = query.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(VASS.SrcConstants.XFormPinX));
+            var col_piny = query.Columns.Add(VASS.SrcConstants.XFormPinY, nameof(VASS.SrcConstants.XFormPinY));
 
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
@@ -295,7 +295,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
             var shapes = new[] {s1, s2, s3, s4};
-            var shapeidpairs = VisioAutomation.ShapeIDPairs.FromShapes(shapes);
+            var shapeidpairs = VA.ShapeIDPairs.FromShapes(shapes);
 
 
             // First verify that none of the shapes have the controls section locally or otherwise
@@ -308,12 +308,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Try to retrieve the control cells rows for each shape, every shape should return zero rows
             foreach (var s in shapes)
             {
-                var r1 = VA.Shapes.ControlCells.GetCells(s, CellValueType.Formula);
+                var r1 = VA.Shapes.ControlCells.GetCells(s, VASS.CellValueType.Formula);
                 Assert.AreEqual(0,r1.Count);
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
-            var r2 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, CellValueType.Formula);
+            var r2 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, VASS.CellValueType.Formula);
             Assert.AreEqual(shapes.Length,r2.Count);
             for (int i = 0; i < shapes.Length;i++)
             {
@@ -344,18 +344,18 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             {
                 if (s != s2)
                 {
-                    var r1 = VA.Shapes.ControlCells.GetCells(s, CellValueType.Formula);
+                    var r1 = VA.Shapes.ControlCells.GetCells(s, VASS.CellValueType.Formula);
                     Assert.AreEqual(0, r1.Count);
                 }
                 else
                 {
-                    var r1 = VA.Shapes.ControlCells.GetCells(s, CellValueType.Formula);
+                    var r1 = VA.Shapes.ControlCells.GetCells(s, VASS.CellValueType.Formula);
                     Assert.AreEqual(1, r1.Count);
                 }
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
-            var r3 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, CellValueType.Formula);
+            var r3 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, VASS.CellValueType.Formula);
             Assert.AreEqual(shapes.Length, r3.Count);
             for (int i = 0; i < shapes.Length; i++)
             {
@@ -372,7 +372,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             page1.Delete(0);
         }
 
-        public bool section_is_skippable( VA.ShapeSheet.Src src)
+        public bool section_is_skippable(VASS.Src src)
         {
             bool can_skip = (src.Section == (short)IVisio.VisSectionIndices.visSectionFirst)
                          || (src.Section == (short)IVisio.VisSectionIndices.visSectionFirstComponent)
@@ -384,21 +384,21 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             return can_skip;
         }
 
-        public static Dictionary<string, Src> GetSrcDictionary()
+        public static Dictionary<string, VASS.Src> GetSrcDictionary()
         {
-            var srcconstants_t = typeof(SrcConstants);
+            var srcconstants_t = typeof(VASS.SrcConstants);
 
             var binding_flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static;
 
             // find all the static properties that return Src types
-            var src_type = typeof(Src);
+            var src_type = typeof(VASS.Src);
             var props = srcconstants_t.GetProperties(binding_flags)
                 .Where(p => p.PropertyType == src_type);
 
-            var fields_name_to_value = new Dictionary<string, Src>();
+            var fields_name_to_value = new Dictionary<string, VASS.Src>();
             foreach (var propinfo in props)
             {
-                var src = (Src)propinfo.GetValue(null, null);
+                var src = (VASS.Src)propinfo.GetValue(null, null);
                 var name = propinfo.Name;
                 fields_name_to_value[name] = src;
             }
@@ -410,13 +410,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         public void ShapeSheet_Query_TestDuplicates()
         {
             // Ensure that duplicate cells are caught
-            var cell_query_1 = new VA.ShapeSheet.Query.CellQuery();
-            cell_query_1.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+            var cell_query_1 = new VASS.Query.CellQuery();
+            cell_query_1.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(VASS.SrcConstants.XFormPinX));
 
             bool caught_exc1 = false;
             try
             {
-                cell_query_1.Columns.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+                cell_query_1.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(VASS.SrcConstants.XFormPinX));
             }
             catch (System.ArgumentException)
             {
@@ -427,7 +427,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Ensure that duplicate sections are caught
 
-            var sec_query_2 = new VA.ShapeSheet.Query.SectionQuery();
+            var sec_query_2 = new VASS.Query.SectionQuery();
             sec_query_2.Add(IVisio.VisSectionIndices.visSectionObject);
 
             bool caught_exc2 = false;
@@ -443,13 +443,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.IsTrue(caught_exc2);
 
             // Ensure that Duplicates in Section Queries Are caught - 
-            var sec_query_3 = new VA.ShapeSheet.Query.SectionQuery();
+            var sec_query_3 = new VASS.Query.SectionQuery();
             var sec_cols = sec_query_3.Add(IVisio.VisSectionIndices.visSectionObject);
-            sec_cols.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+            sec_cols.Add(VASS.SrcConstants.XFormPinX, nameof(VASS.SrcConstants.XFormPinX));
             bool caught_exc3 = false;
             try
             {
-                sec_cols.Add(SrcConstants.XFormPinX, nameof(SrcConstants.XFormPinX));
+                sec_cols.Add(VASS.SrcConstants.XFormPinX, nameof(VASS.SrcConstants.XFormPinX));
             }
             catch (System.ArgumentException)
             {
