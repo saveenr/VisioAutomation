@@ -22,23 +22,23 @@ namespace VisioScripting
 
         public TargetPages Resolve(VisioScripting.Client client)
         {
-            if (this.Items == null)
-            {
-                var cmdtarget = client.GetCommandTargetPage();
-                if (cmdtarget.ActivePage != null)
-                {
-                    var pages = new List<IVisio.Page> { cmdtarget.ActivePage };
-                    return new TargetPages(pages);
-                }
-                else
-                {
-                    return new TargetPages(new List<IVisio.Page>(0));
-                }
-            }
-            else
+            // Handle the case where the object is already resolved
+            if (this.Items != null)
             {
                 return this;
             }
+
+            // Otherwise perform resolution
+            // Try to use the active page as the default target for the operation
+
+            var cmdtarget = client.GetCommandTargetPage();
+
+            if (cmdtarget.ActivePage == null)
+            {
+                throw new VisioAutomation.Exceptions.InternalAssertionException();
+            }
+
+            return new TargetPages(cmdtarget.ActivePage);
         }
     }
 }

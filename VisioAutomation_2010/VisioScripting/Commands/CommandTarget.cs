@@ -60,7 +60,7 @@ namespace VisioScripting.Commands
                 throw new VisioOperationException(msg);
             }
 
-            if ((this.ActivePage == null) && ((requirement_flags & CommandTargetRequirementFlags.RequirePage) != 0))
+            if (require_page && this.ActivePage == null )
             {
                 if (this.Application == null)
                 {
