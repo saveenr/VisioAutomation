@@ -150,32 +150,29 @@ namespace VisioScripting.Commands
         // http://blogs.msdn.com/b/visio/archive/2010/01/27/container-list-and-callout-api-in-visio-2010.aspx
         // https://msdn.microsoft.com/en-us/library/office/ff768907(v=office.14).aspx
 
-        public IVisio.Shape DropContainerMaster(IVisio.Master master)
+        public IVisio.Shape DropContainerMaster(TargetPage targetpage, IVisio.Master master)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var page = cmdtarget.ActivePage;
-            var window = cmdtarget.Application.ActiveWindow;
+            var page = targetpage.Item;
+            var app = page.Application;
+            var window = app.ActiveWindow;
             var selection = window.Selection;
 
             var shape = page.DropContainer(master, selection);
             return shape;
         }
 
-        public IVisio.Shape DropContainer(string master)
+        public IVisio.Shape DropContainer(TargetPage targetpage, string master)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-
-            var application = cmdtarget.Application;
-            var page = application.ActivePage;
-            var window = cmdtarget.Application.ActiveWindow;
+            var page = targetpage.Item;
+            var app = page.Application;
+            var window = app.ActiveWindow;
             var selection = window.Selection;
+            var docs = app.Documents;
 
             var stencil_type = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
             var measurement_system = IVisio.VisMeasurementSystem.visMSUS;
-            var containers_file = application.GetBuiltInStencilFile(stencil_type, measurement_system);
-            var containers_doc = application.Documents.OpenStencil(containers_file);
+            var containers_file = app.GetBuiltInStencilFile(stencil_type, measurement_system);
+            var containers_doc = docs.OpenStencil(containers_file);
             var masters = containers_doc.Masters;
             var container_master = masters.ItemU[master];
             var shape = page.DropContainer(container_master,selection);
