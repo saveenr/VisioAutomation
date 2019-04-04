@@ -12,10 +12,6 @@ namespace VisioScripting
         {
         }
 
-        public TargetDocument(IVisio.Document doc, bool isresolved) : base(doc, isresolved)
-        {
-        }
-
         public TargetDocument Resolve(VisioScripting.Client client)
         {
             if (this.IsResolved)
@@ -27,9 +23,7 @@ namespace VisioScripting
                 Commands.CommandTargetRequirementFlags.RequireActiveDocument |
                 Commands.CommandTargetRequirementFlags.RequirePage);
 
-            // It doesn't matter if there is an active document or not
-            // at this point it is considered resolved
-            return new TargetDocument(cmdtarget.ActiveDocument, true);
+            return new TargetDocument(cmdtarget.ActiveDocument);
         }
     }
 }
