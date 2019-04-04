@@ -1,7 +1,7 @@
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioScripting.Commands
+namespace VisioScripting
 {
     public class CommandTarget
     {

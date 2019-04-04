@@ -19,9 +19,9 @@ namespace VisioScripting
                 return this;
             }
 
-            var command_target = new Commands.CommandTarget(client, Commands.CommandTargetRequirementFlags.RequireApplication |
-                                                                    Commands.CommandTargetRequirementFlags.RequireActiveDocument |
-                                                                    Commands.CommandTargetRequirementFlags.RequirePage);
+            var command_target = new CommandTarget(client, CommandTargetRequirementFlags.RequireApplication |
+                                                                    CommandTargetRequirementFlags.RequireActiveDocument |
+                                                                    CommandTargetRequirementFlags.RequirePage);
 
             return new TargetDocument(command_target.ActiveDocument);
         }

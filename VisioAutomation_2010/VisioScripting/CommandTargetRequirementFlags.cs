@@ -1,4 +1,4 @@
-namespace VisioScripting.Commands
+namespace VisioScripting
 {
     [System.Flags]
     public enum CommandTargetRequirementFlags

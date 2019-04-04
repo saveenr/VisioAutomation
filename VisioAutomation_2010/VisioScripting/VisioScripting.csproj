@@ -51,8 +51,8 @@
     <Compile Include="Commands\UndoCommands.cs" />
     <Compile Include="Commands\LockCommands.cs" />
     <Compile Include="Commands\CommandParameter.cs" />
-    <Compile Include="Commands\CommandTarget.cs" />
-    <Compile Include="Commands\CommandTargetRequirementFlags.cs" />
+    <Compile Include="CommandTarget.cs" />
+    <Compile Include="CommandTargetRequirementFlags.cs" />
     <Compile Include="Commands\DistributeCommands.cs" />
     <Compile Include="Commands\ChartingCommands.cs" />
     <Compile Include="Commands\ExportPageCommands.cs" />
