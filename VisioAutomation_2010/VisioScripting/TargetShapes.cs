@@ -88,14 +88,6 @@ namespace VisioScripting
             return targetshapes;
         }
 
-        internal TargetShapes ResolveShapes2D(VisioScripting.Client client)
-        {
-            var shapes = client.Selection.GetShapesInSelection();
-            var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
-            var targetshapes = new TargetShapes(shapes_2d);
-            return targetshapes;
-        }
-
         private void _verify_resolved()
         {
             if (!this.IsResolved)
