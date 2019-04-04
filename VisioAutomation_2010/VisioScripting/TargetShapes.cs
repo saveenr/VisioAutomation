@@ -50,9 +50,9 @@ namespace VisioScripting
 
         internal int SelectShapesAndCount(VisioScripting.Client client)
         {
-            client.Application.AssertHasActiveApplication();
+            client.Application.AssertHasAttachedApplication();
 
-            var app = client.Application.GetActiveApplication();
+            var app = client.Application.GetAttachedApplication();
             var active_window = app.ActiveWindow;
             var sel = active_window.Selection;
 

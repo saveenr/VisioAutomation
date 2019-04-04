@@ -286,7 +286,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Master.DropMaster(targetpage , master, new VA.Geometry.Point(2, 2));
 
             // Verify
-            var application = client.Application.GetActiveApplication();
+            var application = client.Application.GetAttachedApplication();
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             Assert.AreEqual(1, shapes.Count);
@@ -321,7 +321,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Master.DropMasters(targetpage, masters, points);
 
             // Verify
-            var application = client.Application.GetActiveApplication();
+            var application = client.Application.GetAttachedApplication();
             Assert.AreEqual(4, application.ActivePage.Shapes.Count);
 
             // Cleanup
@@ -346,7 +346,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.NewDocument();
             client.Page.NewPage(pagesize, false);
 
-            var application = client.Application.GetActiveApplication();
+            var application = client.Application.GetAttachedApplication();
             var active_page = application.ActivePage;
 
             // Load the stencils and find the masters
@@ -403,7 +403,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.NewDocument();
             client.Page.NewPage(pagesize, false);
 
-            var application = client.Application.GetActiveApplication();
+            var application = client.Application.GetAttachedApplication();
             var active_page = application.ActivePage;
 
             // Load the stencils and find the masters

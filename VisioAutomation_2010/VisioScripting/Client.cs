@@ -110,32 +110,32 @@ namespace VisioScripting
             return command_props;
         }
 
-        public CommandTarget GetCommandTarget(CommandTargetFlags flags)
+        public CommandTarget GetCommandTarget(CommandTargetRequirementFlags requirement_flags)
         {
-            var command_target = new CommandTarget(this, flags);
+            var command_target = new CommandTarget(this, requirement_flags);
             return command_target;
         }
 
         public CommandTarget GetCommandTargetPage()
         {
-            var flags = CommandTargetFlags.Application | 
-                        CommandTargetFlags.ActiveDocument |
-                        CommandTargetFlags.ActivePage;
+            var flags = CommandTargetRequirementFlags.RequireApplication | 
+                        CommandTargetRequirementFlags.RequireActiveDocument |
+                        CommandTargetRequirementFlags.RequirePage;
             var command_target = new CommandTarget(this, flags);
             return command_target;
         }
 
         public CommandTarget GetCommandTargetDocument()
         {
-            var flags = CommandTargetFlags.Application | 
-                        CommandTargetFlags.ActiveDocument;
+            var flags = CommandTargetRequirementFlags.RequireApplication | 
+                        CommandTargetRequirementFlags.RequireActiveDocument;
             var command_target = new CommandTarget(this, flags);
             return command_target;
         }
 
         public CommandTarget GetCommandTargetApplication()
         {
-            var flags = CommandTargetFlags.Application;
+            var flags = CommandTargetRequirementFlags.RequireApplication;
             var command_target = new CommandTarget(this, flags);
             return command_target;
         }

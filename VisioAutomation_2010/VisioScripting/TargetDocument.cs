@@ -46,9 +46,9 @@ namespace VisioScripting
             if (!this.IsResolved)
             {
                 var cmdtarget = client.GetCommandTarget(
-                    Commands.CommandTargetFlags.Application | 
-                    Commands.CommandTargetFlags.ActiveDocument |
-                    Commands.CommandTargetFlags.ActivePage);
+                    Commands.CommandTargetRequirementFlags.RequireApplication | 
+                    Commands.CommandTargetRequirementFlags.RequireActiveDocument |
+                    Commands.CommandTargetRequirementFlags.RequirePage);
 
                 // It doesn't matter if there is an active document or not
                 // at this point it is considered resolved

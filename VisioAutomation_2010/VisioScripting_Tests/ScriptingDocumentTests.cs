@@ -10,7 +10,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Document_Activation()
         {
             var client = this.GetScriptingClient();
-            var app = client.Application.GetActiveApplication();
+            var app = client.Application.GetAttachedApplication();
             var doc1 = client.Document.NewDocument();
             var doc2 = client.Document.NewDocument();
             var doc3 = client.Document.NewDocument();
