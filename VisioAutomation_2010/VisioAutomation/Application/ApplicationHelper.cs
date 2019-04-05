@@ -13,6 +13,17 @@ namespace VisioAutomation.Application
             return version;
         }
 
+        public static void Quit(IVisio.Application app, bool force_close)
+        {
+            if (force_close)
+            {
+                const short new_alert_response = 7;
+                app.AlertResponse = new_alert_response;
+            }
+
+            app.Quit();
+        }
+
         public static string GetContentLocation(IVisio.Application app)
         {
             var ver = ApplicationHelper.GetVersion(app);
