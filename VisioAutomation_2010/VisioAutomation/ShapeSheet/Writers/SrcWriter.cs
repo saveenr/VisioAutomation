@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValue(Src src, CellValueLiteral formula)
         {
-            this.__SetValueIgnoreNull(src, formula);
+            this.__set_value_ignore_null(src, formula);
         }
 
         public void SetValues(CellGroups.CellGroup cellgroup, short row)
@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void __SetValueIgnoreNull(Src src, CellValueLiteral formula)
+        private void __set_value_ignore_null(Src src, CellValueLiteral formula)
         {
             if (this._records == null)
             {
@@ -75,14 +75,14 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             if (type == CellValueType.Formula)
             {
-                var flags = this._compute_get_formula_flags();
+                var flags = this._compute_setformula_flags();
                 int c = surface.SetFormulas(stream, values, (short)flags);
 
             }
             else
             {
                 const object[] unitcodes = null;
-                var flags = this.ComputeGetResultFlags();
+                var flags = this._compute_setresults_flags();
                 surface.SetResults(stream, unitcodes, values, (short)flags);
             }
         }
