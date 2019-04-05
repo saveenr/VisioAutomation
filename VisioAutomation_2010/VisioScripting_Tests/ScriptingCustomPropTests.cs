@@ -33,8 +33,9 @@ namespace VisioAutomation_Tests.Scripting
             }
 
             writer.Commit();
-            
-            client.Document.CloseActiveDocument(true);
+
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -92,7 +93,8 @@ namespace VisioAutomation_Tests.Scripting
             var hasprops1 = client.CustomProperty.ContainCustomPropertyWithName(targetshapes,"FOO");
             Assert.IsTrue(hasprops1.All(v => v == false));
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

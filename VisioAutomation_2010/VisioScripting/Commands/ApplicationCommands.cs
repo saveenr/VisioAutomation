@@ -7,49 +7,44 @@ namespace VisioScripting.Commands
     {
         private static System.Version _static_visio_app_version;
 
-        private IVisio.Application _active_application;
+        private IVisio.Application _attached_app;
         
         internal ApplicationCommands(Client client) :
             this(client, null)
         {
         }
 
-        internal ApplicationCommands(Client client, IVisio.Application application) :
+        internal ApplicationCommands(Client client, IVisio.Application app) :
             base(client)
         {
-            this._active_application = application;
+            this._attached_app = app;
         }
 
-        public bool HasActiveApplication
+        public bool HasAttachedApplication
         {
             get
             {
-                bool b = this._active_application != null;
+                bool b = this._attached_app != null;
                 this._client.Output.WriteVerbose("HasApplication: {0}", b);
                 return b;
             }
         }
 
-        public IVisio.Application GetActiveApplication()
+        public IVisio.Application GetAttachedApplication()
         {
-            return this._active_application;
+            return this._attached_app;
         }
 
-        public void SetActiveApplication(IVisio.Application app)
+        public void AssertHasAttachedApplication()
         {
-            this._active_application = app;
-        }
-
-        public void AssertHasActiveApplication()
-        {
-            var has_app = this._client.Application.HasActiveApplication;
+            var has_app = this._client.Application.HasAttachedApplication;
             if (!has_app)
             {
                 throw new System.ArgumentException("No Visio Application available");
             }
         }
 
-        public void CloseActiveApplication(bool force)
+        public void CloseAttachedApplication(bool force)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
@@ -79,21 +74,21 @@ namespace VisioScripting.Commands
             {
                 app.Quit();
             }
-            this._active_application = null;
+            this._attached_app = null;
         }
 
-        public IVisio.Application NewActiveApplication()
+        public IVisio.Application NewAttachedApplication()
         {
             this._client.Output.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
             this._client.Output.WriteVerbose("Attaching that instance to current scripting client");
-            this._active_application = app;
+            this._attached_app = app;
             return app;
         }
 
-        public bool ValidateActiveApplication()
+        public bool ValidateAttachedApplication()
         {
-            if (this._active_application == null)
+            if (this._attached_app == null)
             {
                 this._client.Output.WriteVerbose("Client's Application object is null");
                 return false;
@@ -104,7 +99,7 @@ namespace VisioScripting.Commands
                 // try to do something simple, read-only, and fast with the application object
                 //  if No COMException was thrown when reading ProductName property. This application instance is treated as valid
 
-                var app_version = this._active_application.ProductName;
+                var app_version = this._attached_app.ProductName;
                 this._client.Output.WriteVerbose("Application validated");
                 return true;
             }

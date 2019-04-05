@@ -115,11 +115,13 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void CloseActiveDocument(bool force)
+        public void CloseDocument(TargetDocument targetdoc, bool force)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetdoc = targetdoc.Resolve(this._client);
 
-            var doc = cmdtarget.ActiveDocument;
+
+            var doc = targetdoc.Item;
+            var app = doc.Application;
 
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
@@ -127,12 +129,12 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("Not a Drawing Window");
             }
 
-            this._client.Output.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-            this._client.Output.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+            this._client.Output.WriteVerbose("Closing Document Name=\"{0}\"", doc.Name);
+            this._client.Output.WriteVerbose("Closing Document FullName=\"{0}\"", doc.FullName);
 
             if (force)
             {
-                using (var alert = new VisioAutomation.Application.AlertResponseScope(cmdtarget.Application, VisioAutomation.Application.AlertResponseCode.No))
+                using (var alert = new VisioAutomation.Application.AlertResponseScope(app, VisioAutomation.Application.AlertResponseCode.No))
                 {
                     doc.Close();
                 }
@@ -143,10 +145,10 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void CloseDocuments(VisioScripting.TargetDocuments target_docs, bool force)
+        public void CloseDocuments(VisioScripting.TargetDocuments targetdocs, bool force)
         {
-            this._client.Output.WriteVerbose("Closing {0} documents", target_docs.Items.Count);
-            foreach (var target_doc in target_docs.Items)
+            this._client.Output.WriteVerbose("Closing {0} documents", targetdocs.Items.Count);
+            foreach (var target_doc in targetdocs.Items)
             {
                 this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", target_doc.ID, target_doc.Name);
                 target_doc.Close(force);
@@ -199,16 +201,17 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SaveActiveDocument()
+        public void SaveDocument(TargetDocument targetdoc)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            cmdtarget.ActiveDocument.Save();
+            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc.Item.Save();
         }
 
-        public void SaveActiveDocumentAs(string filename)
+
+        public void SaveDocumentAs(TargetDocument targetdoc, string filename)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            cmdtarget.ActiveDocument.SaveAs(filename);
+            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc.Item.SaveAs(filename);
         }
 
         public IVisio.Document NewDocument(VisioAutomation.Geometry.Size size)

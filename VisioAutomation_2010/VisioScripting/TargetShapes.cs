@@ -50,9 +50,9 @@ namespace VisioScripting
 
         internal int SelectShapesAndCount(VisioScripting.Client client)
         {
-            client.Application.AssertHasActiveApplication();
+            client.Application.AssertHasAttachedApplication();
 
-            var app = client.Application.GetActiveApplication();
+            var app = client.Application.GetAttachedApplication();
             var active_window = app.ActiveWindow;
             var sel = active_window.Selection;
 
@@ -85,14 +85,6 @@ namespace VisioScripting
 
             var shapes = client.Selection.GetShapesInSelection();
             var targetshapes = new TargetShapes(shapes);
-            return targetshapes;
-        }
-
-        internal TargetShapes ResolveShapes2D(VisioScripting.Client client)
-        {
-            var shapes = client.Selection.GetShapesInSelection();
-            var shapes_2d = shapes.Where(s => s.OneD == 0).ToList();
-            var targetshapes = new TargetShapes(shapes_2d);
             return targetshapes;
         }
 

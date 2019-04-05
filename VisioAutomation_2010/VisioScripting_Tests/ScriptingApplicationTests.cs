@@ -42,7 +42,8 @@ namespace VisioAutomation_Tests.Scripting
             client.Draw.DrawRectangle(1, 1, 2, 2);
             Assert.AreEqual(1, client.Selection.GetActiveSelection().Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -64,7 +65,8 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(1, page.Shapes.Count);
             client.Undo.UndoLastAction();
             Assert.AreEqual(0, page.Shapes.Count);
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -79,7 +81,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.CloseAllDocumentsWithoutSaving();
 
             Assert.IsFalse(client.Document.HasActiveDocument);
-            var application = client.Application.GetActiveApplication();
+            var application = client.Application.GetAttachedApplication();
             var documents = application.Documents;
             Assert.AreEqual(0, documents.Count);
         }

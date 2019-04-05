@@ -64,7 +64,9 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument(page_size);
             client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Page.DuplicateActivePage();
+
+            var targetpage = new VisioScripting.TargetPage();
+            client.Page.DuplicatePage(targetpage);
             doc.Close(true);
         }
 

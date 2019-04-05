@@ -14,8 +14,8 @@ namespace VisioPowerShell.Commands.VisioMaster
 
         protected override void ProcessRecord()
         {
-            var target_doc = new VisioScripting.TargetDocument(this.Document);
-            target_doc.Resolve(this.Client);
+            var targetdoc = new VisioScripting.TargetDocument(this.Document);
+            targetdoc.Resolve(this.Client);
             
             bool master_specified = this.Name !=null;
             bool doc_specified = this.Document !=null;
@@ -24,7 +24,7 @@ namespace VisioPowerShell.Commands.VisioMaster
             {
                 foreach (var name in this.Name)
                 {
-                    var masters = this.Client.Master.FindMastersInDocumentByName(target_doc, name);
+                    var masters = this.Client.Master.FindMasters(targetdoc, name);
                     this.WriteObject(masters, true);
                 }
             }
@@ -34,13 +34,13 @@ namespace VisioPowerShell.Commands.VisioMaster
                 if (doc_specified)
                 {
                     this.WriteVerbose("Get all masters from specified document");
-                    var masters = this.Client.Master.GetAllMastersInDocument(target_doc);
+                    var masters = this.Client.Master.GetMasters(targetdoc);
                     this.WriteObject(masters, true);                    
                 }
                 else
                 {
                     this.WriteVerbose("Get all masters from active document");
-                    var masters = this.Client.Master.GetAllMastersInDocument(target_doc);
+                    var masters = this.Client.Master.GetMasters(targetdoc);
                     this.WriteObject(masters, true);                   
                 }
             }

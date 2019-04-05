@@ -41,7 +41,8 @@ namespace VisioAutomation_Tests.Scripting
             var shapeids = shapes.Select(s => (int)s.ID16).ToList();
             VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),shapeids, VA.ShapeSheet.CellValueType.Formula);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -86,7 +87,8 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(3.75, out_positions[2].X);
             Assert.AreEqual(5.25, out_positions[2].Y);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -122,7 +124,8 @@ namespace VisioAutomation_Tests.Scripting
             AssertUtil.AreEqual( (1.75, 1), xforms[0].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual( (3, 2.25), xforms[1].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual( (5.25, 4.5), xforms[2].GetPinPosResult(), 0.00001);
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

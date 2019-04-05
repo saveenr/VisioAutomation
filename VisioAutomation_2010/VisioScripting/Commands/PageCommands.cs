@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
@@ -165,18 +166,19 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page DuplicateActivePage()
+        public IVisio.Page DuplicatePage(TargetPage targetpage)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicateActivePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicatePage)))
             {
-                var pages = cmdtarget.ActiveDocument.Pages;
-
-                var src_page = cmdtarget.Application.ActivePage;
+                var src_page = targetpage.Item;
+                var doc = src_page.Document;
+                var pages = doc.Pages;
                 var new_page = pages.Add();
+                var app = doc.Application;
 
-                var win = cmdtarget.Application.ActiveWindow;
+                var win = app.ActiveWindow;
                 win.Page = src_page;
                 VisioAutomation.Pages.PageHelper.Duplicate(src_page, new_page);
                 win.Page = new_page;

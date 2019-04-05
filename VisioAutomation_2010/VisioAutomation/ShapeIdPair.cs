@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation
@@ -13,12 +11,6 @@ namespace VisioAutomation
         {
             this.Shape = shape;
             this.ShapeID = shape.ID16;
-        }
-
-        public ShapeIDPair(IVisio.Shape shape, int id)
-        {
-            this.Shape = shape;
-            this.ShapeID = id;
         }
     }
 

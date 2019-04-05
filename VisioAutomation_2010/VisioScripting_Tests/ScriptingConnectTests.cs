@@ -29,7 +29,7 @@ namespace VisioAutomation_Tests.Scripting
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
 
             var tdoc = new VisioScripting.TargetDocument(connec_stencil);
-            var master = client.Master.GetMasterWithNameInDocument(tdoc, "Dynamic Connector");
+            var master = client.Master.GetMaster(tdoc, "Dynamic Connector");
             var fromshapes = new [] { s1,s2};
             var toshapes = new [] { s2,s3};
             var directed_connectors = client.Connection.ConnectShapes(fromshapes,toshapes, master);
@@ -63,7 +63,8 @@ namespace VisioAutomation_Tests.Scripting
             var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options2);
             Assert.AreEqual(2, directed_edges1.Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -88,7 +89,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.OpenStencilDocument("basic_u.vss");
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
             var connec_tdoc = new VisioScripting.TargetDocument(connec_stencil);
-            var master = client.Master.GetMasterWithNameInDocument(connec_tdoc, "Dynamic Connector");
+            var master = client.Master.GetMaster(connec_tdoc, "Dynamic Connector");
             var undirected_connectors = client.Connection.ConnectShapes(new [] { s1,s2},new [] { s2,s3}, master);
 
             var options1 = new VisioAutomation.DocumentAnalysis.ConnectionAnalyzerOptions();
@@ -109,7 +110,8 @@ namespace VisioAutomation_Tests.Scripting
             var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options3);
             Assert.AreEqual(2, undirected_edges0.Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
 
@@ -122,8 +124,9 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(4, 4, 5, 5);
 
             client.Connection.ConnectShapes(new[] {s1}, new[] {s2}, null);
-            
-            client.Document.CloseActiveDocument(true);
+
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

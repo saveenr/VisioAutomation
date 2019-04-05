@@ -34,7 +34,8 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectAllShapes();
             var s2 = client.Selection.GetShapesInSelection();
             Assert.AreEqual(4, s2.Count);
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

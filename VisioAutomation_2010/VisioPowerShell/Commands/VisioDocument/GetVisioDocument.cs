@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands.VisioDocument
         {
             if (this.ActiveDocument)
             {
-                var application = this.Client.Application.GetActiveApplication();
+                var application = this.Client.Application.GetAttachedApplication();
                 var active_doc = application.ActiveDocument;
                 this.WriteObject(active_doc);
                 return;
