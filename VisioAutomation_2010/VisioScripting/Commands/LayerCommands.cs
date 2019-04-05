@@ -31,7 +31,7 @@ namespace VisioScripting.Commands
             try
             {
                 this._client.Output.WriteVerbose("Trying to find layer named \"{0}\"",name);
-                var layers = targetpage.Item.Layers;
+                var layers = targetpage.Page.Layers;
                 layer = layers.ItemU[name];
             }
             catch (System.Runtime.InteropServices.COMException)
@@ -45,7 +45,7 @@ namespace VisioScripting.Commands
         public List<IVisio.Layer> GetLayersOnPage(TargetPage target_page)
         {
             target_page = target_page.Resolve(this._client);
-            return target_page.Item.Layers.ToList();
+            return target_page.Page.Layers.ToList();
         }
     }
 }

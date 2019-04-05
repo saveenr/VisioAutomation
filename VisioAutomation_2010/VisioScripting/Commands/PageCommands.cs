@@ -172,7 +172,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicatePage)))
             {
-                var src_page = targetpage.Item;
+                var src_page = targetpage.Page;
                 var doc = src_page.Document;
                 var pages = doc.Pages;
                 var new_page = pages.Add();
@@ -195,14 +195,14 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(dest_doc));
             }
 
-            if (targetpage.Item.Document == dest_doc)
+            if (targetpage.Page.Document == dest_doc)
             {
                 throw new VisioAutomation.Exceptions.VisioOperationException("dest doc is same as pages src doc");
             }
 
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
-            VisioAutomation.Pages.PageHelper.Duplicate(targetpage.Item, dest_page);
+            VisioAutomation.Pages.PageHelper.Duplicate(targetpage.Page, dest_page);
 
             return dest_page;
         }
@@ -325,7 +325,7 @@ namespace VisioScripting.Commands
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VisioAutomation.Geometry.Size(w, h);
-            this.SetPageSize(new TargetPages(targetpage.Item),new_size);
+            this.SetPageSize(new TargetPages(targetpage.Page),new_size);
         }
 
         public void SetActivePageByDirection(Models.PageDirection flags)
@@ -416,7 +416,7 @@ namespace VisioScripting.Commands
         public List<IVisio.Shape> GetShapesOnPageByID(TargetPage targetpage, int[] shapeids)
         {
             targetpage = targetpage.Resolve(this._client);
-            var shapes = targetpage.Item.Shapes;
+            var shapes = targetpage.Page.Shapes;
             var shapes_list = new List<IVisio.Shape>(shapeids.Length);
             foreach (int id in shapeids)
             {
@@ -438,7 +438,7 @@ namespace VisioScripting.Commands
         {
             targetpage = targetpage.Resolve(this._client);
 
-            var shapes = targetpage.Item.Shapes;
+            var shapes = targetpage.Page.Shapes;
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
             cached_shapes_list.AddRange(shapes.ToEnumerable());
             
@@ -461,14 +461,14 @@ namespace VisioScripting.Commands
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all pages
-                var all_pages = targetdoc.Item.Pages.ToList();
+                var all_pages = targetdoc.Document.Pages.ToList();
                 all_pages = _filter_pages_by_type(all_pages, pagetype);
                 return all_pages;
             }
             else
             {
                 // return the named page
-                var all_pages = targetdoc.Item.Pages.ToEnumerable();
+                var all_pages = targetdoc.Document.Pages.ToEnumerable();
                 var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 named_pages = _filter_pages_by_type(named_pages, pagetype);
 
@@ -504,7 +504,7 @@ namespace VisioScripting.Commands
         public List<IVisio.Shape> GetShapesOnPage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
-            var shapes = targetpage.Item.Shapes.ToList();
+            var shapes = targetpage.Page.Shapes.ToList();
             return shapes;
         }
     }

@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Master> GetMasters(TargetDocument targetdoc)
         {
-            var doc_masters = targetdoc.Item.Masters;
+            var doc_masters = targetdoc.Document.Masters;
             var masters = doc_masters.ToList();
             return masters;
         }
@@ -51,12 +51,12 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            var masters = targetdoc.Item.Masters;
+            var masters = targetdoc.Document.Masters;
             IVisio.Master masterobj = this.TryGetMaster(masters, name);
 
             if (masterobj == null)
             {
-                string msg = string.Format("No such master \"{0}\" in \"{1}\"", name, targetdoc.Item.Name);
+                string msg = string.Format("No such master \"{0}\" in \"{1}\"", name, targetdoc.Document.Name);
                 throw new VisioOperationException(msg);
             }
 
@@ -69,13 +69,13 @@ namespace VisioScripting.Commands
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all masters
-                var masters = targetdoc.Item.Masters.ToList();
+                var masters = targetdoc.Document.Masters.ToList();
                 return masters;
             }
             else
             {
                 // return masters matching the name
-                var masters2 = targetdoc.Item.Masters.ToEnumerable();
+                var masters2 = targetdoc.Document.Masters.ToEnumerable();
                 var masters3 = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 return masters3;
             }
@@ -98,7 +98,7 @@ namespace VisioScripting.Commands
         {
             targetpage = targetpage.Resolve(this._client);
 
-            var shape = targetpage.Item.Drop(master, p.X, p.Y);
+            var shape = targetpage.Page.Drop(master, p.X, p.Y);
             return shape;
         }
 
@@ -119,7 +119,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(points));
             }
 
-            var page = targetpage.Item;
+            var page = targetpage.Page;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;
         }
@@ -153,7 +153,7 @@ namespace VisioScripting.Commands
         public IVisio.Shape DropContainerMaster(TargetPage targetpage, IVisio.Master master)
         {
             targetpage = targetpage.Resolve(this._client);
-            var page = targetpage.Item;
+            var page = targetpage.Page;
             var app = page.Application;
             var window = app.ActiveWindow;
             var selection = window.Selection;
@@ -165,7 +165,7 @@ namespace VisioScripting.Commands
         public IVisio.Shape DropContainer(TargetPage targetpage, string master)
         {
             targetpage = targetpage.Resolve(this._client);
-            var page = targetpage.Item;
+            var page = targetpage.Page;
             var app = page.Application;
             var window = app.ActiveWindow;
             var selection = window.Selection;

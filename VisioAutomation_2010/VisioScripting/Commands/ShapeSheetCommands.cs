@@ -71,14 +71,14 @@ namespace VisioScripting.Commands
         public Models.ShapeSheetWriter GetWriterForPage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
-            var writer = new Models.ShapeSheetWriter(this._client, targetpage.Item);
+            var writer = new Models.ShapeSheetWriter(this._client, targetpage.Page);
             return writer;
         }
 
         public Models.ShapeSheetReader GetReaderForPage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
-            var reader = new Models.ShapeSheetReader(this._client, targetpage.Item);
+            var reader = new Models.ShapeSheetReader(this._client, targetpage.Page);
             return reader;
         }
     }

@@ -160,7 +160,7 @@ namespace VisioScripting.Commands
             var layer = this._client.Layer.FindLayersOnPageByName(target_page,layername);
 
             // Get a selection of connectors, by layer: 
-            var selection = target_page.Item.CreateSelection(
+            var selection = target_page.Page.CreateSelection(
                 IVisio.VisSelectionTypes.visSelTypeByLayer,
                 IVisio.VisSelectMode.visSelModeSkipSub, 
                 layer);

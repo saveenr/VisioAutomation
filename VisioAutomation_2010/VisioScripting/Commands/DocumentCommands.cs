@@ -120,7 +120,7 @@ namespace VisioScripting.Commands
             targetdoc = targetdoc.Resolve(this._client);
 
 
-            var doc = targetdoc.Item;
+            var doc = targetdoc.Document;
             var app = doc.Application;
 
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
@@ -204,14 +204,14 @@ namespace VisioScripting.Commands
         public void SaveDocument(TargetDocument targetdoc)
         {
             targetdoc = targetdoc.Resolve(this._client);
-            targetdoc.Item.Save();
+            targetdoc.Document.Save();
         }
 
 
         public void SaveDocumentAs(TargetDocument targetdoc, string filename)
         {
             targetdoc = targetdoc.Resolve(this._client);
-            targetdoc.Item.SaveAs(filename);
+            targetdoc.Document.SaveAs(filename);
         }
 
         public IVisio.Document NewDocument(VisioAutomation.Geometry.Size size)

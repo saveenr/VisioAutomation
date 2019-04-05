@@ -27,7 +27,7 @@ namespace VisioScripting.Commands
         public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdgesOnPage(TargetPage targetpage, VA.DocumentAnalysis.ConnectionAnalyzerOptions flag)
         {
             targetpage = targetpage.Resolve(this._client);
-            var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(targetpage.Item, flag);
+            var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(targetpage.Page, flag);
             return directed_edges;
         }
 
