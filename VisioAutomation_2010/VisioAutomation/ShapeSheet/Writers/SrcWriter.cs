@@ -64,7 +64,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildSrcStream();
+            var stream = this._records.BuildStreamArray(StreamType.Src);
 
             if (stream.Array.Length == 0)
             {

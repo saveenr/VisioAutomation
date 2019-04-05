@@ -67,7 +67,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildSidSrcStream();
+            var stream = this._records.BuildStreamArray(StreamType.SidSrc);
             var formulas = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
@@ -87,7 +87,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildSidSrcStream();
+            var stream = this._records.BuildStreamArray(StreamType.SidSrc);
             var items = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
