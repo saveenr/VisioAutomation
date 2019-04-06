@@ -60,7 +60,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 }
                 else
                 {
-                    var strings = this.Name.OfType<string>().ToArray();
+                    var strings = this.Name.ToArray();
                     var shapes = this.Client.Page.GetShapesOnPageByName(targetpage, strings);
                     this.WriteObject(shapes, true);
                 }
