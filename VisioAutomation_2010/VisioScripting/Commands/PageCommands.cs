@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VA = VisioAutomation;
-using VASS =VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet;
+using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -113,7 +114,7 @@ namespace VisioScripting.Commands
             return new_page;
         }
 
-        public void SetBackground(TargetPages targetpages, string background_page_name)
+        public void SetPageBackground(TargetPages targetpages, string background_page_name)
         {
             if (background_page_name == null)
             {
@@ -150,7 +151,7 @@ namespace VisioScripting.Commands
 
             // don't allow the page to be set as a background to itself
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetBackground)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageBackground)))
             {
                 foreach (var page in targetpages.Pages)
                 {
@@ -165,11 +166,11 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page Duplicate(TargetPage targetpage)
+        public IVisio.Page DuplicatePage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(Duplicate)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicatePage)))
             {
                 var src_page = targetpage.Page;
                 var doc = src_page.Document;
@@ -185,7 +186,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page DuplicateToDocument(TargetPage targetpage, IVisio.Document dest_doc)
+        public IVisio.Page DuplicatePageToDocument(TargetPage targetpage, IVisio.Document dest_doc)
         {
             targetpage = targetpage.Resolve(this._client);
 
@@ -258,17 +259,17 @@ namespace VisioScripting.Commands
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
 
-                    writer.Commit(page.PageSheet, VASS.CellValueType.Formula);
+                    writer.Commit(page.PageSheet, CellValueType.Formula);
                 }
 
             }
 
         }
-        public void ResizeToFitContents(TargetPages targetpages, VisioAutomation.Geometry.Size bordersize)
+        public void ResizePageToFitContents(TargetPages targetpages, VisioAutomation.Geometry.Size bordersize)
         {
             targetpages = targetpages.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizeToFitContents)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizePageToFitContents)))
             {
                 foreach (var page in targetpages.Pages)
                 {
@@ -288,7 +289,7 @@ namespace VisioScripting.Commands
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValues(cells);
                     writer.BlastGuards = true;
-                    writer.Commit(page, VASS.CellValueType.Formula);
+                    writer.Commit(page, CellValueType.Formula);
                 }
             }
         }
@@ -305,7 +306,7 @@ namespace VisioScripting.Commands
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
-                    writer.Commit(page_sheet, VASS.CellValueType.Formula);
+                    writer.Commit(page_sheet, CellValueType.Formula);
                 }
             }
         }
@@ -412,7 +413,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<IVisio.Shape> GetShapesyID(TargetPage targetpage, int[] shapeids)
+        public List<IVisio.Shape> GetShapesOnPageByID(TargetPage targetpage, int[] shapeids)
         {
             targetpage = targetpage.Resolve(this._client);
             var shapes = targetpage.Page.Shapes;
@@ -426,14 +427,14 @@ namespace VisioScripting.Commands
         }
 
 
-        public List<IVisio.Shape> GetShapesByName(TargetPage targetpage, string[] shapenames)
+        public List<IVisio.Shape> GetShapesOnPageByName(TargetPage targetpage, string[] shapenames)
         {
             targetpage = targetpage.Resolve(this._client);
 
-            return this.GetShapesByName(targetpage, shapenames, false);
+            return this.GetShapesOnPageByName(targetpage, shapenames, false);
         }
 
-        public List<IVisio.Shape> GetShapesByName(TargetPage targetpage, string[] shapenames, bool ignore_bad_names)
+        public List<IVisio.Shape> GetShapesOnPageByName(TargetPage targetpage, string[] shapenames, bool ignore_bad_names)
         {
             targetpage = targetpage.Resolve(this._client);
 
@@ -453,7 +454,7 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> FindPagesByName(TargetDocument targetdoc, string name, Models.PageType pagetype)
+        public List<IVisio.Page> FindPagesInDocumentByName(TargetDocument targetdoc, string name, Models.PageType pagetype)
         {
             targetdoc = targetdoc.Resolve(this._client);
 
@@ -500,7 +501,7 @@ namespace VisioScripting.Commands
             throw new System.ArgumentOutOfRangeException(nameof(pagetype),msg);
         }
 
-        public List<IVisio.Shape> GetShapes(TargetPage targetpage)
+        public List<IVisio.Shape> GetShapesOnPage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
             var shapes = targetpage.Page.Shapes.ToList();

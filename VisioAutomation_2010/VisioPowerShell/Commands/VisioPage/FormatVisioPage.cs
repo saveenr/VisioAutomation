@@ -37,7 +37,7 @@ namespace VisioPowerShell.Commands.VisioPage
                 if (this.FitContents)
                 {
                     var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderWidth);
-                    this.Client.Page.ResizeToFitContents(targetpages, bordersize);
+                    this.Client.Page.ResizePageToFitContents(targetpages, bordersize);
                     this.Client.View.SetActiveWindowZoomToObject(VisioScripting.Models.ZoomToObject.Page);
                 }
 
@@ -68,7 +68,7 @@ namespace VisioPowerShell.Commands.VisioPage
             if (this.BackgroundPage != null)
             {
                 // TODO: SetActivePageBackground should handle targetpages
-                this.Client.Page.SetBackground(targetpages, this.BackgroundPage);
+                this.Client.Page.SetPageBackground(targetpages, this.BackgroundPage);
             }
 
             if (this.LayoutStyle!=null)
