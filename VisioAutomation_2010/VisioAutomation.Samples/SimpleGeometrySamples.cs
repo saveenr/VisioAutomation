@@ -51,7 +51,7 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static void NURBS1()
+        public static void Nurbs1()
         {
             // Draw a simple NURBS
             // Example from this page:http://www.robthebloke.org/opengl_programming.html
@@ -81,7 +81,7 @@ namespace VisioAutomationSamples
             s0.Text = "Generic NURBS shape";
         }
 
-        public static void NURBS2()
+        public static void Nurbs2()
         {
             // Draw a simple NURBS
             // Example from Graham Wideman's book

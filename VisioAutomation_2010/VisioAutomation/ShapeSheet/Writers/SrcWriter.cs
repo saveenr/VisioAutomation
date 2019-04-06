@@ -6,62 +6,49 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
 
 
-        public SrcWriter() : base(CellCoordinateType.Src)
+        public SrcWriter() : base(StreamType.Src)
         {
         }
 
 
-        public void CommitFormulas(IVisio.Shape shape)
-        {
-            var surface = new SurfaceTarget(shape);
-            this._commit_formulas(surface);
-        }
-
-        public void CommitFormulas(IVisio.Page page)
-        {
-            var surface = new SurfaceTarget(page);
-            this._commit_formulas(surface);
-        }
-
-        public void CommitResults(IVisio.Shape shape)
+        public void Commit(IVisio.Shape shape, CellValueType type)
         {
             var surface = new SurfaceTarget(shape);
-            this._commit_results(surface);
+            this._commit(surface, type);
         }
 
-        public void CommitResults(IVisio.Page page)
+        public void Commit(IVisio.Page page, CellValueType type)
         {
             var surface = new SurfaceTarget(page);
-            this._commit_results(surface);
+            this._commit(surface, type);
         }
-
 
         public void SetValue(Src src, CellValueLiteral formula)
         {
-            this.__SetValueIgnoreNull(src, formula);
+            this.__set_value_ignore_null(src, formula);
         }
 
-        public void SetValues(CellGroups.CellGroup cgb, short row)
+        public void SetValues(CellGroups.CellGroup cellgroup, short row)
         {
-            foreach (var pair in cgb.SrcValuePairs_NewRow(row))
+            foreach (var pair in cellgroup.SrcValuePairs_NewRow(row))
             {
                 this.SetValue(pair.Src, pair.Value);
             }
         }
 
-        public void SetValues(CellGroups.CellGroup cgb)
+        public void SetValues(CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cgb.SrcValuePairs)
+            foreach (var pair in cellgroup.SrcValuePairs)
             {
                 this.SetValue(pair.Src, pair.Value);
             }
         }
 
-        private void __SetValueIgnoreNull(Src src, CellValueLiteral formula)
+        private void __set_value_ignore_null(Src src, CellValueLiteral formula)
         {
             if (this._records == null)
             {
-                this._records = new WriteRecordList(CellCoordinateType.Src);
+                this._records = new WriteRecordList(StreamType.Src);
             }
 
             if (formula.HasValue)
@@ -70,45 +57,34 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void _commit_formulas(SurfaceTarget surface)
-        {
-            if ((this._records == null || this._records.Count < 1))
-            {
-                return;
-            }
-
-            var stream = this._records.BuildSrcStream();
-            var formulas = this._records.BuildValuesArray();
-
-            if (stream.Array.Length == 0)
-            {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
-            }
-
-            var flags = this.ComputeGetFormulaFlags();
-
-            int c = surface.SetFormulas(stream, formulas, (short)flags);
-        }
-
-
-        private void _commit_results(SurfaceTarget surface)
+        private void _commit(SurfaceTarget surface, CellValueType type)
         {
             if (this._records == null || this._records.Count < 1)
             {
                 return;
             }
 
-            var stream = this._records.BuildSrcStream();
-            var results = this._records.BuildValuesArray();
-            const object[] unitcodes = null;
+            var stream = this._records.BuildStreamArray(StreamType.Src);
 
             if (stream.Array.Length == 0)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
-            var flags = this.ComputeGetResultFlags();
-            surface.SetResults(stream, unitcodes, results, (short)flags);
+            var values = this._records.BuildValuesArray();
+
+            if (type == CellValueType.Formula)
+            {
+                var flags = this._compute_setformula_flags();
+                int c = surface.SetFormulas(stream, values, (short)flags);
+
+            }
+            else
+            {
+                const object[] unitcodes = null;
+                var flags = this._compute_setresults_flags();
+                surface.SetResults(stream, unitcodes, values, (short)flags);
+            }
         }
     }
 }

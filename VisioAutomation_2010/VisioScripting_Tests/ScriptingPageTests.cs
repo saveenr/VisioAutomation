@@ -64,7 +64,9 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument(page_size);
             client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Page.DuplicateActivePage();
+
+            var targetpage = new VisioScripting.TargetPage();
+            client.Page.Duplicate(targetpage);
             doc.Close(true);
         }
 
@@ -78,11 +80,10 @@ namespace VisioAutomation_Tests.Scripting
             var doc_src_1 = client.Document.NewDocument();
 
 
-            var target_src1_page = new VisioScripting.Models.TargetPage();
-            target_src1_page.Resolve(client);
+            var target_src1_page = new VisioScripting.TargetPage().Resolve(client);
 
             client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Page.DuplicatePageToDocument(target_src1_page, doc_dest_1);
+            client.Page.DuplicateToDocument(target_src1_page, doc_dest_1);
 
             // Second case: the source document has to be activated beforehand
             var doc_src_2 = client.Document.NewDocument();
@@ -90,10 +91,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.ActivateDocument(doc_src_2);
             client.Draw.DrawRectangle(0, 0, 1, 1);
 
-            var target_src2_page = new VisioScripting.Models.TargetPage();
-            target_src2_page.Resolve(client);
+            var target_src2_page = new VisioScripting.TargetPage().Resolve(client);
 
-            client.Page.DuplicatePageToDocument(target_src2_page, doc_dest_2);
+            client.Page.DuplicateToDocument(target_src2_page, doc_dest_2);
 
             doc_src_1.Close(true);
             doc_src_2.Close(true);

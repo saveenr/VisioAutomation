@@ -109,9 +109,7 @@ namespace VisioPowerShell_Tests
 
             Assert.IsNotNull(container);
 
-           
-
-            //VisioPS_Basic_Tests.VisioPS_Close_Visio_Application();
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(PsArray.From(doc), true);
         }
     }
 }

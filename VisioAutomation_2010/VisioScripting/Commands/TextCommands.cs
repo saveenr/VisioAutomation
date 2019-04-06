@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioScripting.Commands
 {
@@ -12,16 +12,16 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetShapeText(Models.TargetShapes targets, IList<string> texts)
+        public void SetShapeText(TargetShapes targetshapes, IList<string> texts)
         {
             if (texts == null || texts.Count < 1)
             {
                 return;
             }
 
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targets.Shapes.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
                 // start reusing the texts from the beginning
 
                 int count = 0;
-                foreach (var shape in targets.Shapes)
+                foreach (var shape in targetshapes.Shapes)
                 {
                     string text = texts[count%texts.Count];
                     if (text != null)
@@ -45,33 +45,33 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<string> GetShapeText(Models.TargetShapes targets)
+        public List<string> GetShapeText(TargetShapes targetshapes)
         {
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targets.Shapes.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new List<string>(0);
             }
 
-            var texts = targets.Shapes.Select(s => s.Text).ToList();
+            var texts = targetshapes.Shapes.Select(s => s.Text).ToList();
             return texts;
         }
 
-        public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(Models.TargetShapes targets)
+        public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(TargetShapes targetshapes)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targets.Shapes.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new List<VisioAutomation.Text.TextFormat>(0);
             }
 
-            var pairs = targets.ToShapeIdPairs();
+            var shapeidpairs = targetshapes.ToShapeIDPairs();
             var application = cmdtarget.Application;
-            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, pairs, CellValueType.Formula);
+            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeidpairs, VASS.CellValueType.Formula);
             return formats;
         }
     }

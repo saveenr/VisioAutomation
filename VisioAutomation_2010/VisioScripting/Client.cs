@@ -39,7 +39,7 @@ namespace VisioScripting
         public Commands.ViewCommands View { get; }
 
         public Client(IVisio.Application app):
-            this(app,new Models.DefaultClientContext())
+            this(app,new DefaultClientContext())
         {
         }
         
@@ -110,32 +110,28 @@ namespace VisioScripting
             return command_props;
         }
 
-        public CommandTarget GetCommandTarget(CommandTargetFlags flags)
-        {
-            var ct = new CommandTarget(this, flags);
-            return ct;
-        }
-
         public CommandTarget GetCommandTargetPage()
         {
-            var flags = CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument |
-                        CommandTargetFlags.ActivePage;
-            var ct = new CommandTarget(this, flags);
-            return ct;
+            var flags = CommandTargetRequirementFlags.RequireApplication | 
+                        CommandTargetRequirementFlags.RequireActiveDocument |
+                        CommandTargetRequirementFlags.RequirePage;
+            var command_target = new CommandTarget(this, flags);
+            return command_target;
         }
 
         public CommandTarget GetCommandTargetDocument()
         {
-            var flags = CommandTargetFlags.Application | CommandTargetFlags.ActiveDocument;
-            var ct = new CommandTarget(this, flags);
-            return ct;
+            var flags = CommandTargetRequirementFlags.RequireApplication | 
+                        CommandTargetRequirementFlags.RequireActiveDocument;
+            var command_target = new CommandTarget(this, flags);
+            return command_target;
         }
 
         public CommandTarget GetCommandTargetApplication()
         {
-            var flags = CommandTargetFlags.Application;
-            var ct = new CommandTarget(this, flags);
-            return ct;
+            var flags = CommandTargetRequirementFlags.RequireApplication;
+            var command_target = new CommandTarget(this, flags);
+            return command_target;
         }
 
         private static List<string> _static_dlls;

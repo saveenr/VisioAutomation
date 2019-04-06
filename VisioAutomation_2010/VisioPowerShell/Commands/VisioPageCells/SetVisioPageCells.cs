@@ -30,28 +30,28 @@ namespace VisioPowerShell.Commands.VisioPageCells
                 return;
             }
 
-            var target_pages = new VisioScripting.Models.TargetPages(this.Pages);
+            var targetpages = new VisioScripting.TargetPages(this.Pages);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
 
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioPageCells)))
             {
-                for (int i = 0; i < target_pages.Pages.Count; i++)
+                for (int i = 0; i < targetpages.Pages.Count; i++)
                 {
-                    var target_page = target_pages.Pages[i];
-                    this.Client.Output.WriteVerbose("Start Update Page Name={0}", target_page.NameU);
+                    var targetpage = targetpages.Pages[i];
+                    this.Client.Output.WriteVerbose("Start Update Page Name={0}", targetpage.NameU);
 
-                    var target_pagesheet = target_page.PageSheet;
-                    int target_pagesheet_id = target_pagesheet.ID;
+                    var targetpage_shapesheet = targetpage.PageSheet;
+                    int targetpage_shapesheetid = targetpage_shapesheet.ID;
                     var target_cells = this.Cells[i % this.Cells.Length];
                     var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                     writer.BlastGuards = this.BlastGuards;
                     writer.TestCircular = this.TestCircular;
-                    target_cells.Apply(writer, (short)target_pagesheet_id);
-                    writer.CommitFormulas(target_page);
+                    target_cells.Apply(writer, (short)targetpage_shapesheetid);
+                    writer.Commit(targetpage, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
-                    this.Client.Output.WriteVerbose("End Update Page Name={0}", target_page.NameU);
+                    this.Client.Output.WriteVerbose("End Update Page Name={0}", targetpage.NameU);
                 }
             }
         }

@@ -52,7 +52,7 @@ namespace VisioScripting.Helpers
                 writer.SetValue((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TextXFormWidth, formula);
             }
 
-            writer.CommitFormulas(page);
+            writer.Commit(page, VisioAutomation.ShapeSheet.CellValueType.Formula);
         }
 
         public static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)

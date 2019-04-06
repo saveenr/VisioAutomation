@@ -32,7 +32,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
 
             var lockcells = new VisioAutomation.Shapes.LockCells();
 
@@ -57,7 +57,7 @@ namespace VisioPowerShell.Commands.VisioShape
             lockcells.VertexEdit = this.VertexEdit ? "0" : null;
             lockcells.Width = this.Width ? "0" : null;
 
-            this.Client.Lock.SetLockCells(targets, lockcells);
+            this.Client.Lock.SetLockCells(targetshapes, lockcells);
         }
     }
 }

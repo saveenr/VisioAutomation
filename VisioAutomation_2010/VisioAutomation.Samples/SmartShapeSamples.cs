@@ -41,7 +41,7 @@ namespace VisioAutomationSamples
             writer.SetValues(progress.ID16, background_fmt);
             writer.SetValues(progress.ID16, progress_fmt);
 
-            writer.CommitFormulas(page_a);
+            writer.Commit(page_a, VA.ShapeSheet.CellValueType.Formula);
 
             var markup1 = new VisioAutomation.Models.Text.Element();
             markup1.AddField(VisioAutomation.Models.Text.FieldConstants.PageName);

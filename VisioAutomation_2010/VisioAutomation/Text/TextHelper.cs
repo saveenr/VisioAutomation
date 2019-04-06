@@ -105,7 +105,7 @@ namespace VisioAutomation.Text
                 writer.SetValue(src_tabother, "0"); // tab unknown
             }
 
-            writer.CommitFormulas(shape);
+            writer.Commit(shape, VASS.CellValueType.Formula);
         }
 
         private static IVisio.VisRowTags _get_tab_tag_for_stops(int stops)
@@ -180,7 +180,7 @@ namespace VisioAutomation.Text
                 writer.SetValue(src, formula);
             }
 
-            writer.CommitFormulas(shape);
+            writer.Commit(shape, VASS.CellValueType.Formula);
         }
 
 

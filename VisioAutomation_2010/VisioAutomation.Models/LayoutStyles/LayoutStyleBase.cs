@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.LayoutStyles
@@ -15,7 +16,7 @@ namespace VisioAutomation.Models.LayoutStyles
             this.AvenueSizeY = 0.375;
         }
 
-        protected virtual void SetPageCells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
+        protected virtual void _set_page_cells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
             page_layout_cells.AvenueSizeX = this.AvenueSizeX;
             page_layout_cells.AvenueSizeY = this.AvenueSizeY;
@@ -138,12 +139,12 @@ namespace VisioAutomation.Models.LayoutStyles
         public void Apply(IVisio.Page page)
         {
             var page_layout_cells = new VisioAutomation.Pages.PageLayoutCells();
-            this.SetPageCells(page_layout_cells);
+            this._set_page_cells(page_layout_cells);
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(page_layout_cells);
 
-            writer.CommitFormulas(page.PageSheet);
+            writer.Commit(page.PageSheet, CellValueType.Formula);
             page.Layout();
         }
     }

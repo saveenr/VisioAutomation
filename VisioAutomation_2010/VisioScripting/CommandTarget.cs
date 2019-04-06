@@ -1,32 +1,32 @@
 using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioScripting.Commands
+namespace VisioScripting
 {
     public class CommandTarget
     {
-        public readonly Client Client;
+        private readonly Client _client;
         public IVisio.Application Application { get; private set; }
         public IVisio.Document ActiveDocument { get; private set; }
         public IVisio.Page ActivePage { get; private set; }
 
-        public CommandTarget(Client client, CommandTargetFlags flags)
+        public CommandTarget(Client client, CommandTargetRequirementFlags requirement_flags)
         {
-            this.Client = client;
+            this._client = client;
 
-            _check(flags);
+            _check(requirement_flags);
         }
 
-        private void _check(CommandTargetFlags flags)
+        private void _check(CommandTargetRequirementFlags requirement_flags)
         {
-            bool require_app = (flags & CommandTargetFlags.Application) != 0;
-            bool require_document = (flags & CommandTargetFlags.ActiveDocument) != 0;
-            bool require_page = (flags & CommandTargetFlags.ActivePage) != 0;
+            bool require_app = (requirement_flags & CommandTargetRequirementFlags.RequireApplication) != 0;
+            bool require_document = (requirement_flags & CommandTargetRequirementFlags.RequireActiveDocument) != 0;
+            bool require_page = (requirement_flags & CommandTargetRequirementFlags.RequirePage) != 0;
 
             require_app = require_app || require_document || require_page;
             require_document = require_document || require_page;
 
-            this.Application = this.Client.Application.GetActiveApplication();
+            this.Application = this._client.Application.GetAttachedApplication();
 
             if (require_app && this.Application == null)
             {
@@ -45,7 +45,7 @@ namespace VisioScripting.Commands
 
                 if (is_drawing)
                 {
-                    this.Client.Output.WriteVerbose("{0}: Verified a drawing is available for use",nameof(CommandTarget));
+                    this._client.Output.WriteVerbose("{0}: Verified a drawing is available for use",nameof(CommandTarget));
                 }
                 else
                 {
@@ -60,7 +60,7 @@ namespace VisioScripting.Commands
                 throw new VisioOperationException(msg);
             }
 
-            if ((this.ActivePage == null) && ((flags & CommandTargetFlags.ActivePage) != 0))
+            if (require_page && this.ActivePage == null )
             {
                 if (this.Application == null)
                 {

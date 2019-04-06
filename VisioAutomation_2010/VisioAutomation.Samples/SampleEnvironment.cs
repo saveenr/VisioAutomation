@@ -1,4 +1,5 @@
-﻿using VisioAutomation.ShapeSheet.Query;
+﻿using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -6,13 +7,13 @@ namespace VisioAutomationSamples
 {
     public class SampleEnvironment
     {
-        private static IVisio.Application app;
+        private static IVisio.Application _app;
 
         public static IVisio.Application Application
         {
             get
             {
-                if (SampleEnvironment.app== null)
+                if (SampleEnvironment._app== null)
                 {
                     // there is no application object associated with
                     // this session, so create one
@@ -29,7 +30,7 @@ namespace VisioAutomationSamples
                     try
                     {
                         // try to do something simple, read-only, and fast with the application object
-                        var app_version = SampleEnvironment.app.ProductName;
+                        var app_version = SampleEnvironment._app.ProductName;
                     }
                     catch (System.Runtime.InteropServices.COMException)
                     {
@@ -38,14 +39,14 @@ namespace VisioAutomationSamples
                         SampleEnvironment.create_new_app_instance();
                     }                   
                 }
-                return SampleEnvironment.app;
+                return SampleEnvironment._app;
             }
         }
 
         private static void create_new_app_instance()
         {
-            SampleEnvironment.app = new IVisio.Application();
-            var documents = SampleEnvironment.app.Documents;
+            SampleEnvironment._app = new IVisio.Application();
+            var documents = SampleEnvironment._app.Documents;
             documents.Add("");
         }
 
@@ -62,7 +63,7 @@ namespace VisioAutomationSamples
             writer.SetValue(VA.ShapeSheet.SrcConstants.PageWidth, size.Width);
             writer.SetValue(VA.ShapeSheet.SrcConstants.PageHeight, size.Height);
 
-            writer.CommitFormulas(page_sheet);
+            writer.Commit(page_sheet, CellValueType.Formula);
         }
 
         public static VA.Geometry.Size GetPageSize(IVisio.Page page)

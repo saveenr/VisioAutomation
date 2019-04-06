@@ -7,12 +7,12 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Layer> ToEnumerable(this IVisio.Layers layers)
         {
-            return ExtensionHelpers.ToEnumerable(() => layers.Count, i => layers[i + 1]);
+            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToEnumerable(() => layers.Count, i => layers[i + 1]);
         }
 
         public static List<IVisio.Layer> ToList(this IVisio.Layers layers)
         {
-            return ExtensionHelpers.ToList(() => layers.Count, i => layers[i + 1]);
+            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => layers.Count, i => layers[i + 1]);
         }
     }
 }

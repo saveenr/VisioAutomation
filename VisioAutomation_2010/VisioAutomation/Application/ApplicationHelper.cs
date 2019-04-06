@@ -13,6 +13,17 @@ namespace VisioAutomation.Application
             return version;
         }
 
+        public static void Quit(IVisio.Application app, bool force_close)
+        {
+            if (force_close)
+            {
+                const short new_alert_response = 7;
+                app.AlertResponse = new_alert_response;
+            }
+
+            app.Quit();
+        }
+
         public static string GetContentLocation(IVisio.Application app)
         {
             var ver = ApplicationHelper.GetVersion(app);
@@ -41,7 +52,7 @@ namespace VisioAutomation.Application
         public static void BringWindowToTop(IVisio.Application app)
         {
             var visio_window_handle = new System.IntPtr(app.WindowHandle32);
-            VisioAutomation.Utilities.NativeMethods.BringWindowToTop(visio_window_handle);
+            VisioAutomation.Internal.NativeMethods.BringWindowToTop(visio_window_handle);
         }
     }
 }

@@ -5,13 +5,13 @@ namespace VisioAutomation.ShapeSheet.Query
     public class Columns : IEnumerable<Column> 
     {
         protected IList<Column> _items;
-        protected Dictionary<string, Column> map_name_to_item;
-        protected Dictionary<ShapeSheet.Src, Column> dic_src_to_col;
+        protected Dictionary<string, Column> _map_name_to_item;
+        protected Dictionary<ShapeSheet.Src, Column> _dic_src_to_col;
 
         internal Columns() 
         {
             this._items = new List<Column>();
-            this.map_name_to_item = new Dictionary<string, Column>();
+            this._map_name_to_item = new Dictionary<string, Column>();
 
         }
 
@@ -27,9 +27,9 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public Column this[int index] => this._items[index];
 
-        public Column this[string name] => this.map_name_to_item[name];
+        public Column this[string name] => this._map_name_to_item[name];
 
-        public bool Contains(string name) => this.map_name_to_item.ContainsKey(name);
+        public bool Contains(string name) => this._map_name_to_item.ContainsKey(name);
 
         protected string normalize_name(string name)
         {
@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         protected void check_duplicate_column_name(string name)
         {
-            if (this.map_name_to_item.ContainsKey(name))
+            if (this._map_name_to_item.ContainsKey(name))
             {
                 throw new System.ArgumentException("Duplicate Column Name");
             }
@@ -52,12 +52,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         protected void check_deplicate_src(Src src)
         {
-            if (this.dic_src_to_col == null)
+            if (this._dic_src_to_col == null)
             {
-                this.dic_src_to_col = new Dictionary<ShapeSheet.Src, Column>();
+                this._dic_src_to_col = new Dictionary<ShapeSheet.Src, Column>();
             }
 
-            if (this.dic_src_to_col.ContainsKey(src))
+            if (this._dic_src_to_col.ContainsKey(src))
             {
                 string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Src), src.Section, src.Row, src.Cell);
                 throw new System.ArgumentException(msg);
@@ -80,8 +80,8 @@ namespace VisioAutomation.ShapeSheet.Query
             var col = new Column(ordinal, norm_name, src);
             this._items.Add(col);
 
-            this.map_name_to_item[norm_name] = col;
-            this.dic_src_to_col.Add(src, col);
+            this._map_name_to_item[norm_name] = col;
+            this._dic_src_to_col.Add(src, col);
             return col;
         }
 

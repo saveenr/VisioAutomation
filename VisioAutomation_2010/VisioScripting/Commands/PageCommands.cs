@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VA = VisioAutomation;
+using VASS =VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -53,25 +55,30 @@ namespace VisioScripting.Commands
             return application.ActivePage;
         }
 
-        public void DeletePages(Models.TargetPages target_pages, bool renumber)
+        public void DeletePages(TargetPages targetpages, bool renumber)
         {
-            var pages = target_pages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
-            foreach (var page in pages)
+            foreach (var page in targetpages.Pages)
             {
                 page.Delete(renumber ? (short) 1 : (short) 0);
             }
         }
 
-        public VisioAutomation.Geometry.Size GetPageSize(Models.TargetPages target_pages)
+        public VisioAutomation.Geometry.Size GetPageSize(TargetPages targetpages)
         {
-            var pages = target_pages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
+
+            if (targetpages.Pages.Count < 1)
+            {
+                throw new System.ArgumentException("No pages found");
+            }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
 
-            var cellqueryresult = query.GetResults<double>(pages[0].PageSheet);
+            var cellqueryresult = query.GetResults<double>(targetpages.Pages[0].PageSheet);
             var row = cellqueryresult[0];
             double height = row[col_height];
             double width = row[col_width];
@@ -93,8 +100,8 @@ namespace VisioScripting.Commands
 
                 if (size.HasValue)
                 {
-                    var target_pages = new Models.TargetPages(new_page);
-                    this.SetPageSize(target_pages, size.Value);
+                    var targetpages = new TargetPages(new_page);
+                    this.SetPageSize(targetpages, size.Value);
                 }
 
                 if (isbackgroundpage)
@@ -106,28 +113,32 @@ namespace VisioScripting.Commands
             return new_page;
         }
 
-        public void SetActivePageBackground(string background_page_name)
+        public void SetBackground(TargetPages targetpages, string background_page_name)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
             if (background_page_name == null)
             {
                 throw new System.ArgumentNullException(nameof(background_page_name));
             }
 
-            var app = cmdtarget.Application;
-            var application = app;
-            var active_document = application.ActiveDocument;
-            var pages = active_document.Pages;
-            var names = new HashSet<string>(pages.GetNamesU());
+            targetpages = targetpages.Resolve(this._client);
+
+            if (targetpages.Pages.Count < 1)
+            {
+                return;
+            }
+
+            var page0 = targetpages.Pages[0];
+            var doc = page0.Document;
+            var doc_pages = doc.Pages;
+
+            var names = new HashSet<string>(doc_pages.GetNamesU());
             if (!names.Contains(background_page_name))
             {
                 string msg = string.Format("Could not find page with name \"{0}\"", background_page_name);
                 throw new VisioAutomation.Exceptions.VisioOperationException(msg);
             }
 
-            var bgpage = pages.ItemU[background_page_name];
-            var fgpage = application.ActivePage;
+            var bgpage = doc_pages.ItemU[background_page_name];
 
             // Set the background page
             // Check that the intended background is indeed a background page
@@ -138,30 +149,35 @@ namespace VisioScripting.Commands
             }
 
             // don't allow the page to be set as a background to itself
-            if (fgpage == bgpage)
-            {
-                string msg = "Cannot set page as its own background page";
-                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
-            }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetActivePageBackground)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetBackground)))
             {
-                fgpage.BackPage = bgpage;
+                foreach (var page in targetpages.Pages)
+                {
+                    if (page == bgpage)
+                    {
+                        string msg = "Cannot set page as its own background page";
+                        throw new VisioAutomation.Exceptions.VisioOperationException(msg);
+                    }
+
+                    page.BackPage = bgpage;
+                }
             }
         }
 
-        public IVisio.Page DuplicateActivePage()
+        public IVisio.Page Duplicate(TargetPage targetpage)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicateActivePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(Duplicate)))
             {
-                var pages = cmdtarget.ActiveDocument.Pages;
-
-                var src_page = cmdtarget.Application.ActivePage;
+                var src_page = targetpage.Page;
+                var doc = src_page.Document;
+                var pages = doc.Pages;
                 var new_page = pages.Add();
+                var app = doc.Application;
 
-                var win = cmdtarget.Application.ActiveWindow;
+                var win = app.ActiveWindow;
                 win.Page = src_page;
                 VisioAutomation.Pages.PageHelper.Duplicate(src_page, new_page);
                 win.Page = new_page;
@@ -169,31 +185,31 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page DuplicatePageToDocument(Models.TargetPage target_page, IVisio.Document dest_doc)
+        public IVisio.Page DuplicateToDocument(TargetPage targetpage, IVisio.Document dest_doc)
         {
-            var src_page = target_page.Resolve(this._client);
+            targetpage = targetpage.Resolve(this._client);
 
             if (dest_doc == null)
             {
                 throw new System.ArgumentNullException(nameof(dest_doc));
             }
 
-            if (src_page.Document == dest_doc)
+            if (targetpage.Page.Document == dest_doc)
             {
                 throw new VisioAutomation.Exceptions.VisioOperationException("dest doc is same as pages src doc");
             }
 
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
-            VisioAutomation.Pages.PageHelper.Duplicate(src_page, dest_page);
+            VisioAutomation.Pages.PageHelper.Duplicate(targetpage.Page, dest_page);
 
             return dest_page;
         }
 
-        public Models.PageOrientation GetPageOrientation( Models.TargetPages target_pages )
+        public Models.PageOrientation GetPageOrientation( TargetPages targetpages )
         {
-            var pages = target_pages.Resolve(this._client);
-            return PageCommands._GetPageOrientation(pages[0]);
+            targetpages = targetpages.Resolve(this._client);
+            return PageCommands._GetPageOrientation(targetpages.Pages[0]);
         }
         
         private static Models.PageOrientation _GetPageOrientation(IVisio.Page page)
@@ -210,18 +226,18 @@ namespace VisioScripting.Commands
             return (Models.PageOrientation)value;
         }
 
-        public void SetPageOrientation(Models.TargetPages target_pages, Models.PageOrientation orientation)
+        public void SetPageOrientation(TargetPages targetpages, Models.PageOrientation orientation)
         {
             if (orientation != VisioScripting.Models.PageOrientation.Landscape && orientation != VisioScripting.Models.PageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
 
-            var pages = target_pages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageOrientation)))
             {
 
-                foreach (var page in pages)
+                foreach (var page in targetpages.Pages)
                 {
                     var old_orientation = PageCommands._GetPageOrientation(page);
 
@@ -231,7 +247,7 @@ namespace VisioScripting.Commands
                         return;
                     }
 
-                    var page_tp = new VisioScripting.Models.TargetPages(page);
+                    var page_tp = new VisioScripting.TargetPages(page);
                     var old_size = this.GetPageSize(page_tp);
 
                     double new_height = old_size.Width;
@@ -242,59 +258,59 @@ namespace VisioScripting.Commands
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
 
-                    writer.CommitFormulas(page.PageSheet);
+                    writer.Commit(page.PageSheet, VASS.CellValueType.Formula);
                 }
 
             }
 
         }
-        public void ResizePageToFitContents(Models.TargetPages target_pages, VisioAutomation.Geometry.Size bordersize)
+        public void ResizeToFitContents(TargetPages targetpages, VisioAutomation.Geometry.Size bordersize)
         {
-            var pages = target_pages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizePageToFitContents)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizeToFitContents)))
             {
-                foreach (var page in pages)
+                foreach (var page in targetpages.Pages)
                 {
                     page.ResizeToFitContents(bordersize);
                 }
             }
         }
 
-        public void SetPageFormatCells(Models.TargetPages targetpages, VisioAutomation.Pages.PageFormatCells cells)
+        public void SetPageFormatCells(TargetPages targetpages, VisioAutomation.Pages.PageFormatCells cells)
         {
-            var pages = targetpages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageFormatCells)))
             {
-                foreach (var page in pages)
+                foreach (var page in targetpages.Pages)
                 {
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValues(cells);
                     writer.BlastGuards = true;
-                    writer.CommitFormulas(page);
+                    writer.Commit(page, VASS.CellValueType.Formula);
                 }
             }
         }
 
-        public void SetPageSize(Models.TargetPages targetpages, VisioAutomation.Geometry.Size new_size)
+        public void SetPageSize(TargetPages targetpages, VisioAutomation.Geometry.Size new_size)
         {
-            var pages = targetpages.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
-                foreach (var page in pages)
+                foreach (var page in targetpages.Pages)
                 {
                     var page_sheet = page.PageSheet;
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
-                    writer.CommitFormulas(page_sheet);
+                    writer.Commit(page_sheet, VASS.CellValueType.Formula);
                 }
             }
         }
 
-        public void SetPageSize(Models.TargetPage target_page, double? width, double? height)
+        public void SetPageSize(TargetPage targetpage, double? width, double? height)
         {
             if (!width.HasValue && !height.HasValue)
             {
@@ -303,12 +319,12 @@ namespace VisioScripting.Commands
             }
 
             var page = this._client.Page.GetActivePage();
-            var tp = new VisioScripting.Models.TargetPages(page);
-            var old_size = this.GetPageSize(tp);
+            var targetpages = new VisioScripting.TargetPages(page);
+            var old_size = this.GetPageSize(targetpages);
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VisioAutomation.Geometry.Size(w, h);
-            this.SetPageSize(new Models.TargetPages(target_page.Page),new_size);
+            this.SetPageSize(new TargetPages(targetpage.Page),new_size);
         }
 
         public void SetActivePageByDirection(Models.PageDirection flags)
@@ -325,13 +341,16 @@ namespace VisioScripting.Commands
             this._GoTo(pages, flags, cmdtarget);
         }
 
-        public void LayoutPage(Models.TargetPage targetpage, VisioAutomation.Models.LayoutStyles.LayoutStyleBase layout)
+        public void LayoutPage(TargetPages targetpages, VisioAutomation.Models.LayoutStyles.LayoutStyleBase layout)
         {
-            var pages = targetpage.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
-                layout.Apply(targetpage.Page);
+                foreach (var page in targetpages.Pages)
+                {
+                    layout.Apply(page);
+                }
             }
         }
 
@@ -393,24 +412,10 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<IVisio.Shape> GetShapesOnActivePageByID(int[] shapeids)
+        public List<IVisio.Shape> GetShapesyID(TargetPage targetpage, int[] shapeids)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var shapes = cmdtarget.ActivePage.Shapes;
-            var shapes_list = new List<IVisio.Shape>(shapeids.Length);
-            foreach (int id in shapeids)
-            {
-                var shape = shapes.ItemFromID[id];
-                shapes_list.Add(shape);
-            }
-            return shapes_list;
-        }
-
-        public List<IVisio.Shape> GetShapesOnPageByID(Models.TargetPage target_page, int[] shapeids)
-        {
-            var page = target_page.Resolve(this._client);
-            var shapes = page.Shapes;
+            targetpage = targetpage.Resolve(this._client);
+            var shapes = targetpage.Page.Shapes;
             var shapes_list = new List<IVisio.Shape>(shapeids.Length);
             foreach (int id in shapeids)
             {
@@ -421,19 +426,18 @@ namespace VisioScripting.Commands
         }
 
 
-        public List<IVisio.Shape> GetShapesOnPageByName(Models.TargetPage target_page, string[] shapenames)
+        public List<IVisio.Shape> GetShapesByName(TargetPage targetpage, string[] shapenames)
         {
-            var page = target_page.Resolve(this._client);
+            targetpage = targetpage.Resolve(this._client);
 
-            return this.GetShapesOnPageByName(target_page, shapenames, false);
+            return this.GetShapesByName(targetpage, shapenames, false);
         }
 
-        public List<IVisio.Shape> GetShapesOnPageByName(Models.TargetPage target_page, string[] shapenames, bool ignore_bad_names)
+        public List<IVisio.Shape> GetShapesByName(TargetPage targetpage, string[] shapenames, bool ignore_bad_names)
         {
-            var page = target_page.Resolve(this._client);
+            targetpage = targetpage.Resolve(this._client);
 
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            var shapes = cmdtarget.ActivePage.Shapes;
+            var shapes = targetpage.Page.Shapes;
             var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
             cached_shapes_list.AddRange(shapes.ToEnumerable());
             
@@ -449,30 +453,29 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> FindPagesInActiveDocumentByName(string name, Models.PageType pagetype)
+        public List<IVisio.Page> FindPagesByName(TargetDocument targetdoc, string name, Models.PageType pagetype)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetdoc = targetdoc.Resolve(this._client);
 
-            var active_document = cmdtarget.ActiveDocument;
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
                 // return all pages
-                var all_pages = active_document.Pages.ToList();
-                all_pages = filter_pages_by_type(all_pages, pagetype);
+                var all_pages = targetdoc.Document.Pages.ToList();
+                all_pages = _filter_pages_by_type(all_pages, pagetype);
                 return all_pages;
             }
             else
             {
                 // return the named page
-                var all_pages = active_document.Pages.ToEnumerable();
+                var all_pages = targetdoc.Document.Pages.ToEnumerable();
                 var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
-                named_pages = filter_pages_by_type(named_pages, pagetype);
+                named_pages = _filter_pages_by_type(named_pages, pagetype);
 
                 return named_pages;
             }
         }
 
-        private List<IVisio.Page> filter_pages_by_type(List<IVisio.Page> pages, Models.PageType pagetype)
+        private List<IVisio.Page> _filter_pages_by_type(List<IVisio.Page> pages, Models.PageType pagetype)
         {
             if (pages == null)
             {
@@ -497,10 +500,10 @@ namespace VisioScripting.Commands
             throw new System.ArgumentOutOfRangeException(nameof(pagetype),msg);
         }
 
-        public List<IVisio.Shape> GetShapesOnActivePage()
+        public List<IVisio.Shape> GetShapes(TargetPage targetpage)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-            var shapes = cmdtarget.ActivePage.Shapes.ToList();
+            targetpage = targetpage.Resolve(this._client);
+            var shapes = targetpage.Page.Shapes.ToList();
             return shapes;
         }
     }

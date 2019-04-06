@@ -25,7 +25,7 @@ namespace VisioScripting.Commands
 
         public VA.Application.UndoScope NewUndoScope(string name)
         {
-            var app = this._client.Application.GetActiveApplication();
+            var app = this._client.Application.GetAttachedApplication();
             if (app == null)
             {
                 throw new System.ArgumentException("Cant create UndoScope. There is no visio application attached.");

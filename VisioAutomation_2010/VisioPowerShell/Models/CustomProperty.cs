@@ -19,20 +19,20 @@ namespace VisioPowerShell.Models
         public readonly string Value;
 
 
-        internal CustomProperty(int id, string propname, CustomPropertyCells propcells)
+        internal CustomProperty(int id, string name, CustomPropertyCells cells)
         {
             this.ShapeID = id;
-            this.Name = propname;
-            this.Value = propcells.Value.Value;
-            this.Format = propcells.Format.Value;
-            this.Invisible = propcells.Invisible.Value;
-            this.Label = propcells.Label.Value;
-            this.LangId = propcells.LangID.Value;
-            this.Prompt = propcells.Prompt.Value;
-            this.SortKey = propcells.SortKey.Value;
-            this.Type = propcells.Type.Value;
-            this.Ask = propcells.Ask.Value;
-            this.Calendar = propcells.Calendar.Value;
+            this.Name = name;
+            this.Value = cells.Value.Value;
+            this.Format = cells.Format.Value;
+            this.Invisible = cells.Invisible.Value;
+            this.Label = cells.Label.Value;
+            this.LangId = cells.LangID.Value;
+            this.Prompt = cells.Prompt.Value;
+            this.SortKey = cells.SortKey.Value;
+            this.Type = cells.Type.Value;
+            this.Ask = cells.Ask.Value;
+            this.Calendar = cells.Calendar.Value;
         }
     }
 }

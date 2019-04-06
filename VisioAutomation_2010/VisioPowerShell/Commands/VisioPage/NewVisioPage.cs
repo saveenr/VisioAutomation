@@ -58,16 +58,16 @@ namespace VisioPowerShell.Commands.VisioPage
 
             if (this.Cells != null)
             {
-                var target_pagesheet = page.PageSheet;
-                int target_pagesheet_id = target_pagesheet.ID;
+                var targetpage_shapesheet = page.PageSheet;
+                int targetpage_shapesheetid = targetpage_shapesheet.ID;
 
                 var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                 writer.BlastGuards = true;
                 writer.TestCircular = true;
-                this.Cells.Apply(writer, (short)target_pagesheet_id);
+                this.Cells.Apply(writer, (short)targetpage_shapesheetid);
 
                 this.Client.Output.WriteVerbose("Updating Cells for new page");
-                writer.CommitFormulas(page);
+                writer.Commit(page, VisioAutomation.ShapeSheet.CellValueType.Formula);
             }
 
             this.WriteObject(page);

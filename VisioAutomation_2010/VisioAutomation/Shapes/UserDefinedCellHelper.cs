@@ -84,7 +84,7 @@ namespace VisioAutomation.Shapes
                     writer.SetValue(src_prompt, cells.Prompt.Value);
                 }
 
-                writer.CommitFormulas(shape);            
+                writer.Commit(shape, VASS.CellValueType.Formula);            
             }
         }
 

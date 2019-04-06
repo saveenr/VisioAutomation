@@ -1,5 +1,6 @@
 using VisioScripting.Models;
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
@@ -8,6 +9,9 @@ namespace VisioPowerShell.Commands.VisioPage
     {
         [SMA.Parameter(Position=0, Mandatory = false)]
         public string Name=null;
+
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Document Document;
 
         [SMA.Parameter(Mandatory = false)] public 
         SMA.SwitchParameter ActivePage;
@@ -23,7 +27,8 @@ namespace VisioPowerShell.Commands.VisioPage
                 return;
             }
 
-            var pages = this.Client.Page.FindPagesInActiveDocumentByName(this.Name, this.Type);
+            var targetdoc = new VisioScripting.TargetDocument(this.Document).Resolve(this.Client);
+            var pages = this.Client.Page.FindPagesByName(targetdoc, this.Name, this.Type);
             this.WriteObject(pages, true);
         }
     }

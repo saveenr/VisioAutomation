@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Models
 {
@@ -6,29 +7,15 @@ namespace VisioPowerShell.Models
     {
         public abstract IEnumerable<CellTuple> GetCellTuples();
 
-        public void Apply(VisioAutomation.ShapeSheet.Writers.SidSrcWriter writer, short id)
+        public void Apply(VASS.Writers.SidSrcWriter writer, short id)
         {
-            foreach (var pair in this.GetCellTuples())
+            foreach (var tuple in this.GetCellTuples())
             {
-                if (pair.Formula != null)
+                if (tuple.Formula != null)
                 {
-                    writer.SetValue(id, pair.Src, pair.Formula);
+                    writer.SetValue(id, tuple.Src, tuple.Formula);
                 }
             }
-        }
-
-        public static BaseCells CreateCells(CellType celltype)
-        {
-            if (celltype == VisioPowerShell.Models.CellType.Page)
-            {
-                return new VisioPowerShell.Models.PageCells();
-            }
-            else if (celltype == VisioPowerShell.Models.CellType.Shape)
-            {
-                return new VisioPowerShell.Models.ShapeCells();
-            }
-
-            throw new System.ArgumentOutOfRangeException(nameof(celltype));
         }
     }
 }

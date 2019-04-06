@@ -25,9 +25,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            var targets = new VisioScripting.Models.TargetShapes();
+            var targetshapes = new VisioScripting.TargetShapes();
 
-            var hyperlinks0 = client.Hyperlink.GetHyperlinks(targets, VASS.CellValueType.Formula);
+            var hyperlinks0 = client.Hyperlink.GetHyperlinks(targetshapes, VASS.CellValueType.Formula);
 
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks0[s1].Count);
@@ -36,22 +36,23 @@ namespace VisioAutomation_Tests.Scripting
 
             var hyperlink = new VA.Shapes.HyperlinkCells();
             hyperlink.Address = "http://www.microsoft.com";
-            client.Hyperlink.AddHyperlink(targets, hyperlink);
+            client.Hyperlink.AddHyperlink(targetshapes, hyperlink);
 
-            var hyperlinks1 = client.Hyperlink.GetHyperlinks(targets, VASS.CellValueType.Formula);
+            var hyperlinks1 = client.Hyperlink.GetHyperlinks(targetshapes, VASS.CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks1.Count);
             Assert.AreEqual(1, hyperlinks1[s1].Count);
             Assert.AreEqual(1, hyperlinks1[s2].Count);
             Assert.AreEqual(1, hyperlinks1[s3].Count);
 
-            client.Hyperlink.DeleteHyperlinkAtIndex(targets, 0);
-            var hyperlinks2 = client.Hyperlink.GetHyperlinks(targets, VASS.CellValueType.Formula);
+            client.Hyperlink.DeleteHyperlinkAtIndex(targetshapes, 0);
+            var hyperlinks2 = client.Hyperlink.GetHyperlinks(targetshapes, VASS.CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks2[s1].Count);
             Assert.AreEqual(0, hyperlinks2[s2].Count);
             Assert.AreEqual(0, hyperlinks2[s3].Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

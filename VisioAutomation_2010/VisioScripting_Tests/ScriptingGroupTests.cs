@@ -28,13 +28,14 @@ namespace VisioAutomation_Tests.Scripting
             var s1 = client.Selection.GetShapesInSelection();
             Assert.AreEqual(1, s1.Count);
 
-            var targets = new VisioScripting.Models.TargetShapes();
+            var targetshapes = new VisioScripting.TargetShapes();
 
-            client.Grouping.UngroupSelectedShapes(targets);
+            client.Grouping.UngroupSelectedShapes(targetshapes);
             client.Selection.SelectAllShapes();
             var s2 = client.Selection.GetShapesInSelection();
             Assert.AreEqual(4, s2.Count);
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

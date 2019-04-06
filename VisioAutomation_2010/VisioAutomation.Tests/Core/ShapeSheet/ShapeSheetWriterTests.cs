@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.ShapeSheet.Query;
-using VisioAutomation.ShapeSheet.Writers;
+using VASS = VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Core.ShapeSheet
@@ -8,9 +7,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
     [TestClass]
     public class ShapeSheetWriterTests : VisioAutomationTest
     {
-        private static readonly VA.ShapeSheet.Src XFormPinX = VA.ShapeSheet.SrcConstants.XFormPinX;
-        private static readonly VA.ShapeSheet.Src XFormPinY = VA.ShapeSheet.SrcConstants.XFormPinY;
-        private static readonly VA.ShapeSheet.Src LinePattern = VA.ShapeSheet.SrcConstants.LinePattern;
+        private static readonly VASS.Src XFormPinX = VASS.SrcConstants.XFormPinX;
+        private static readonly VASS.Src XFormPinY = VASS.SrcConstants.XFormPinY;
+        private static readonly VASS.Src LinePattern = VASS.SrcConstants.LinePattern;
 
         [TestMethod]
         public void ShapeSheet_Writer_Formulas_MultipleShapes()
@@ -23,7 +22,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new SidSrcWriter();
+            var writer = new VASS.Writers.SidSrcWriter();
             writer.SetValue(shape1.ID16, XFormPinX, 0.5);
             writer.SetValue(shape1.ID16, XFormPinY, 0.5);
             writer.SetValue(shape2.ID16, XFormPinX, 1.5);
@@ -31,10 +30,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.SetValue(shape3.ID16, XFormPinX, 2.5);
             writer.SetValue(shape3.ID16, XFormPinY, 2.5);
 
-            writer.CommitFormulas(page1);
+            writer.Commit(page1, VASS.CellValueType.Formula);
 
             // Verify that the formulas were set
-            var query = new CellQuery();
+            var query = new VASS.Query.CellQuery();
             var col_pinx = query.Columns.Add(XFormPinX, nameof(XFormPinX));
             var col_piny = query.Columns.Add(XFormPinY, nameof(XFormPinY));
 
@@ -60,13 +59,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new SrcWriter();
+            var writer = new VASS.Writers.SrcWriter();
             writer.SetValue(LinePattern, 7);
 
-            writer.CommitResults(shape1);
+            writer.Commit(shape1, VASS.CellValueType.Result);
 
             // Build the query
-            var query = new CellQuery();
+            var query = new VASS.Query.CellQuery();
             var col_linepat = query.Columns.Add(LinePattern,nameof(LinePattern));
 
             // Retrieve the values
@@ -87,8 +86,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new SrcWriter();
-            writer.CommitFormulas(shape1);
+            var writer = new VASS.Writers.SrcWriter();
+            writer.Commit(shape1, VASS.CellValueType.Formula);
 
             page1.Delete(0);
         }
@@ -100,12 +99,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new SrcWriter();
+            var writer = new VASS.Writers.SrcWriter();
             writer.SetValue(LinePattern, "7");
-            writer.CommitFormulas(shape1);
+            writer.Commit(shape1, VASS.CellValueType.Formula);
 
             // Build the query
-            var query = new CellQuery();
+            var query = new VASS.Query.CellQuery();
             var col_linepat = query.Columns.Add(LinePattern, nameof(LinePattern));
 
             // Retrieve the values
@@ -130,7 +129,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
 
             // Set the formulas
-            var writer = new SidSrcWriter();
+            var writer = new VASS.Writers.SidSrcWriter();
             writer.SetValue( shape1.ID16, XFormPinX, 0.5);
             writer.SetValue( shape1.ID16, XFormPinY, 0.5);
             writer.SetValue( shape2.ID16, XFormPinX, 1.5);
@@ -138,10 +137,10 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             writer.SetValue( shape3.ID16, XFormPinX, 2.5);
             writer.SetValue( shape3.ID16, XFormPinY, 2.5);
 
-            writer.CommitResults(page1);
+            writer.Commit(page1, VASS.CellValueType.Result);
 
             // Verify that the formulas were set
-            var query = new CellQuery();
+            var query = new VASS.Query.CellQuery();
             var col_pinx = query.Columns.Add(XFormPinX, nameof(XFormPinX));
             var col_piny = query.Columns.Add(XFormPinY, nameof(XFormPinY));
 
@@ -174,13 +173,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var writer = new SrcWriter();
+            var writer = new VASS.Writers.SrcWriter();
             writer.SetValue(LinePattern, "7");
             writer.SetValue(XFormPinX, 2);
-            writer.CommitResults(shape1);
+            writer.Commit(shape1, VASS.CellValueType.Result);
 
             // Build the query
-            var query = new CellQuery();
+            var query = new VASS.Query.CellQuery();
             var col_linepat = query.Columns.Add(LinePattern, nameof(LinePattern));
             var col_pinx = query.Columns.Add(XFormPinX, nameof(XFormPinX));
 

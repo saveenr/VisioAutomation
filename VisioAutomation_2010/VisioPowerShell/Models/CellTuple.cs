@@ -1,12 +1,14 @@
+using VASS = VisioAutomation.ShapeSheet;
+
 namespace VisioPowerShell.Models
 {
     public struct CellTuple
     {
         public string Name;
-        public VisioAutomation.ShapeSheet.Src Src;
+        public VASS.Src Src;
         public string Formula;
 
-        public CellTuple(string name, VisioAutomation.ShapeSheet.Src src, string formula)
+        public CellTuple(string name, VASS.Src src, string formula)
         {
             this.Name = name;
             this.Src = src;

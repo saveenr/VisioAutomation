@@ -37,7 +37,7 @@ namespace VisioAutomation.Shapes
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                 writer.SetValues(cp, cell_propname.Row);
 
-                writer.CommitFormulas(shape);
+                writer.Commit(shape, VASS.CellValueType.Formula);
 
                 return;
             }
@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(cp, row);
 
-            writer.CommitFormulas(shape);
+            writer.Commit(shape, VASS.CellValueType.Formula);
         }
 
         public static CustomPropertyDictionary GetCellsAsDictionary(IVisio.Shape shape, VASS.CellValueType type)
@@ -72,15 +72,12 @@ namespace VisioAutomation.Shapes
             return shape_custprop_dic;
         }
 
-        public static List<CustomPropertyDictionary> GetCellsAsDictionary(IVisio.Page page, IList<IVisio.Shape> shapes, VASS.CellValueType type)
+        public static List<CustomPropertyDictionary> GetCellsAsDictionary(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
         {
-            var shapeidpairs = ShapeIDPairs.FromShapes(shapes);
-
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
             var listof_custpropdics = __GetListOfCpDic(shapeidpairs, listof_listof_custpropscells);
 
             return listof_custpropdics;
-
         }
 
         public static int GetCount(IVisio.Shape shape)

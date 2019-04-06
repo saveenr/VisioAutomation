@@ -1,40 +1,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.DocumentAnalysis
 {
     public static class ConnectionAnalyzer
     {
-        public static List<ConnectorEdge> GetTransitiveClosure(
-            IVisio.Page page,
-            ConnectorHandling flag)
-        {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException(nameof(page));
-            }
-
-            var directed_edges = ConnectionAnalyzer.GetDirectedEdges(page, flag)
-                .Select(e => new DirectedEdge<IVisio.Shape, IVisio.Shape>(e.From, e.To, e.Connector));
-
-            var closure = ConnectionAnalyzer.GetClosureFromEdges(directed_edges)
-                .Select(x => new ConnectorEdge(null, x.From, x.To)).ToList();
-
-            return closure;
-        }
 
         /// <summary>
         /// Returns all the directed,connected pairs of shapes in the  page
         /// </summary>
         /// <param name="page"></param>
-        /// <param name="flag"></param>
+        /// <param name="options"></param>
         /// <returns></returns>
         public static List<ConnectorEdge> GetDirectedEdges(
             IVisio.Page page,
-            ConnectorHandling flag)
+            ConnectionAnalyzerOptions options)
         {
             if (page == null)
             {
@@ -43,7 +26,7 @@ namespace VisioAutomation.DocumentAnalysis
 
             var edges = ConnectionAnalyzer._get_directed_edges_raw(page);
 
-            if (flag.DirectionSource == DirectionSource.UseConnectionOrder)
+            if (options.DirectionSource == DirectionSource.UseConnectionOrder)
             {
                 return edges;
             }
@@ -56,38 +39,38 @@ namespace VisioAutomation.DocumentAnalysis
             var src_beginarrow = ShapeSheet.SrcConstants.LineBeginArrow;
             var src_endarrow = ShapeSheet.SrcConstants.LineEndArrow;
 
-            var query = new CellQuery();
-            var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(ShapeSheet.SrcConstants.LineBeginArrow));
-            var col_endarrow = query.Columns.Add(src_endarrow, nameof(ShapeSheet.SrcConstants.LineEndArrow));
-
-            var arrow_table = query.GetResults<int>(page , connnector_ids);
+            var query = new VASS.Query.CellQuery();
+            var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(VASS.SrcConstants.LineBeginArrow));
+            var col_endarrow = query.Columns.Add(src_endarrow, nameof(VASS.SrcConstants.LineEndArrow));
+            var listof_connectorinfo = query.GetResults<int>(page , connnector_ids);
             
             var directed_edges = new List<ConnectorEdge>();
 
             int connector_index = 0;
-            foreach (var e in edges)
+            foreach (var edge in edges)
             {
-                int beginarrow = arrow_table[connector_index][col_beginarrow];
-                int endarrow = arrow_table[connector_index][col_endarrow];
+                var connector_info = listof_connectorinfo[connector_index];
+                int beginarrow = connector_info[col_beginarrow];
+                int endarrow = connector_info[col_endarrow];
 
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
                     // the line has no arrows
-                    if (flag.NoArrowsHandling == NoArrowsHandling.TreatEdgeAsBidirectional)
+                    if (options.NoArrowsHandling == NoArrowsHandling.TreatEdgeAsBidirectional)
                     {
                         // in this case treat the connector as pointing in both directions
-                        var de1 = new ConnectorEdge(e.Connector, e.To, e.From);
-                        var de2 = new ConnectorEdge(e.Connector, e.From, e.To);
+                        var de1 = new ConnectorEdge(edge.Connector, edge.To, edge.From);
+                        var de2 = new ConnectorEdge(edge.Connector, edge.From, edge.To);
                         directed_edges.Add(de1);
                         directed_edges.Add(de2);
                     }
-                    else if (flag.NoArrowsHandling == NoArrowsHandling.ExcludeEdge)
+                    else if (options.NoArrowsHandling == NoArrowsHandling.ExcludeEdge)
                     {
                         // in this case ignore the connector completely
                     }
                     else
                     {
-                        throw new System.ArgumentOutOfRangeException(nameof(flag));
+                        throw new System.ArgumentOutOfRangeException(nameof(options));
                     }
                 }
                 else
@@ -97,14 +80,14 @@ namespace VisioAutomation.DocumentAnalysis
                     // handle if it has a from arrow
                     if (beginarrow > 0)
                     {
-                        var de = new ConnectorEdge(e.Connector, e.To, e.From);
+                        var de = new ConnectorEdge(edge.Connector, edge.To, edge.From);
                         directed_edges.Add(de);
                     }
 
                     // handle if it has a to arrow
                     if (endarrow > 0)
                     {
-                        var de = new ConnectorEdge(e.Connector, e.From, e.To);
+                        var de = new ConnectorEdge(edge.Connector, edge.From, edge.To);
                         directed_edges.Add(de);
                     }
                 }
@@ -114,6 +97,25 @@ namespace VisioAutomation.DocumentAnalysis
 
             return directed_edges;
         }
+
+        public static List<ConnectorEdge> GetDirectedEdgesTransitive(
+            IVisio.Page page,
+            ConnectionAnalyzerOptions options)
+        {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException(nameof(page));
+            }
+
+            var directed_edges = ConnectionAnalyzer.GetDirectedEdges(page, options)
+                .Select(e => new DirectedEdge<IVisio.Shape, IVisio.Shape>(e.From, e.To, e.Connector));
+
+            var closure = ConnectionAnalyzer.GetClosureFromEdges(directed_edges)
+                .Select(x => new ConnectorEdge(null, x.From, x.To)).ToList();
+
+            return closure;
+        }
+
 
         /// <summary>
         /// Gets all the pairs of shapes that are connected by a connector
@@ -127,8 +129,7 @@ namespace VisioAutomation.DocumentAnalysis
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var page_connects = page.Connects;
-            var connects = page_connects.ToList();
+            var connects = page.Connects.ToList();
 
             var edges = new List<ConnectorEdge>();
 
@@ -141,7 +142,7 @@ namespace VisioAutomation.DocumentAnalysis
 
                 if (current_connect_shape != old_connect_shape)
                 {
-                    // the currect connector is NOT same as the one we stored previously
+                    // the current connector is NOT same as the one we stored previously
                     // this means the previous connector is connected to only one shape (not two).
                     // So skip the previos connector and start remembering from the current connector
                     old_connect_shape = current_connect_shape;
@@ -160,7 +161,7 @@ namespace VisioAutomation.DocumentAnalysis
             return edges;
         }
 
-        internal static void PerformWarshall(VisioAutomation.DocumentAnalysis.BitArray2D adj_matrix)
+        internal static void PerformWarshall(BitArray2D adj_matrix)
         {
             if (adj_matrix == null)
             {
@@ -194,34 +195,35 @@ namespace VisioAutomation.DocumentAnalysis
                 throw new System.ArgumentNullException(nameof(edges));
             }
 
-            var object_to_id = new Dictionary<TNode, int>();
-            var id_to_object = new Dictionary<int, TNode>();
+            var dicof_obj_to_id = new Dictionary<TNode, int>();
+            var dicof_id_to_obj = new Dictionary<int, TNode>();
 
             foreach (var edge in edges)
             {
-                if (!object_to_id.ContainsKey(edge.From))
+                if (!dicof_obj_to_id.ContainsKey(edge.From))
                 {
-                    object_to_id[edge.From] = object_to_id.Count;
+                    dicof_obj_to_id[edge.From] = dicof_obj_to_id.Count;
                 }
 
-                if (!object_to_id.ContainsKey(edge.To))
+                if (!dicof_obj_to_id.ContainsKey(edge.To))
                 {
-                    object_to_id[edge.To] = object_to_id.Count;
+                    dicof_obj_to_id[edge.To] = dicof_obj_to_id.Count;
                 }
             }
 
-            foreach (var i in object_to_id)
+            foreach (var kv in dicof_obj_to_id)
             {
-                id_to_object[i.Value] = i.Key;
+                dicof_id_to_obj[kv.Value] = kv.Key;
             }
 
             var internal_edges = new List<DirectedEdge<int, object>>();
 
             foreach (var edge in edges)
             {
-                int fromid = object_to_id[edge.From];
-                int toid = object_to_id[edge.To];
-                var directed_edge = new DirectedEdge<int, object>(fromid, toid, null);
+                int fromid = dicof_obj_to_id[edge.From];
+                int toid = dicof_obj_to_id[edge.To];
+                object data = null;
+                var directed_edge = new DirectedEdge<int, object>(fromid, toid, data);
                 internal_edges.Add(directed_edge);
             }
 
@@ -230,11 +232,11 @@ namespace VisioAutomation.DocumentAnalysis
                 yield break;
             }
 
-            int num_vertices = object_to_id.Count;
-            var adj_matrix = new VisioAutomation.DocumentAnalysis.BitArray2D(num_vertices, num_vertices);
-            foreach (var iedge in internal_edges)
+            int num_vertices = dicof_obj_to_id.Count;
+            var adj_matrix = new BitArray2D(num_vertices, num_vertices);
+            foreach (var internal_edge in internal_edges)
             {
-                adj_matrix[iedge.From, iedge.To] = true;
+                adj_matrix[internal_edge.From, internal_edge.To] = true;
             }
 
             var warshall_result = adj_matrix.Clone();
@@ -247,7 +249,7 @@ namespace VisioAutomation.DocumentAnalysis
                 {
                     if (warshall_result.Get(row, col) && (row!=col))
                     {
-                        var de = new DirectedEdge<TNode, object>(id_to_object[row], id_to_object[col], null);
+                        var de = new DirectedEdge<TNode, object>(dicof_id_to_obj[row], dicof_id_to_obj[col], null);
                         yield return de;
                     }
                 }

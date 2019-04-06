@@ -130,7 +130,7 @@ namespace VisioAutomation.Models.Layouts.Container
             var ct_items = this.Containers.ToList();
             var ct_rects = ct_items.Select(item => item.Rectangle).ToList();
             var masters = ct_items.Select(i => plain_container_master).ToList();
-            short[] ct_shapeids = ContainerLayout.DropManyU(page, masters, ct_rects);
+            short[] ct_shapeids = ContainerLayout._drop_many_u(page, masters, ct_rects);
 
             // associate each container with the corresponding shape oject and shape id
             for (int i = 0; i < ct_items.Count; i++)
@@ -147,7 +147,7 @@ namespace VisioAutomation.Models.Layouts.Container
             var items = this.ContainerItems.ToList();
             var item_rects = items.Select(item => item.Rectangle).ToList();
             var item_masters = items.Select(i => item_master).ToList();
-            short[] shapeids = ContainerLayout.DropManyU(page, item_masters, item_rects);
+            short[] shapeids = ContainerLayout._drop_many_u(page, item_masters, item_rects);
 
             // Associate each item with the corresponding shape object and shape id
             for (int i = 0; i < items.Count; i++)
@@ -183,7 +183,7 @@ namespace VisioAutomation.Models.Layouts.Container
             }
 
             writer.BlastGuards = true;
-            writer.CommitFormulas(page);
+            writer.Commit(page, ShapeSheet.CellValueType.Formula);
 
             // Set the Container Text
             foreach (var ct in this.Containers)
@@ -200,7 +200,7 @@ namespace VisioAutomation.Models.Layouts.Container
             return page;
         }
 
-        private static short[] DropManyU(
+        private static short[] _drop_many_u(
             IVisio.Page page,
             IList<IVisio.Master> masters,
             IList<VisioAutomation.Geometry.Rectangle> rects)
@@ -217,7 +217,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 writer.SetValue(shapeids[i], VisioAutomation.ShapeSheet.SrcConstants.XFormHeight, rects[i].Height);
             }
 
-            writer.CommitFormulas(page);
+            writer.Commit(page, ShapeSheet.CellValueType.Formula);
 
             return shapeids;
         }

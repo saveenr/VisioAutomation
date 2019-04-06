@@ -33,16 +33,17 @@ namespace VisioAutomation_Tests.Scripting
             var doc = client.Document.NewDocument(page_size);
 
             var page = client.Page.GetActivePage();
-            var page_tp = new VisioScripting.Models.TargetPages(page);
+            var tagetpages = new VisioScripting.TargetPages(page);
 
-            var pagesize = client.Page.GetPageSize(page_tp);
+            var pagesize = client.Page.GetPageSize(tagetpages);
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
             Assert.AreEqual(0, client.Selection.GetActiveSelection().Count);
             client.Draw.DrawRectangle(1, 1, 2, 2);
             Assert.AreEqual(1, client.Selection.GetActiveSelection().Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -64,7 +65,8 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(1, page.Shapes.Count);
             client.Undo.UndoLastAction();
             Assert.AreEqual(0, page.Shapes.Count);
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -79,7 +81,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.CloseAllDocumentsWithoutSaving();
 
             Assert.IsFalse(client.Document.HasActiveDocument);
-            var application = client.Application.GetActiveApplication();
+            var application = client.Application.GetAttachedApplication();
             var documents = application.Documents;
             Assert.AreEqual(0, documents.Count);
         }

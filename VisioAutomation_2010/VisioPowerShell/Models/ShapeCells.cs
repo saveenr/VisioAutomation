@@ -125,6 +125,7 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.CharFontScale), SRCCON.CharFontScale, this.CharFontScale);
             yield return new CellTuple(nameof(SRCCON.CharLetterspace), SRCCON.CharLetterspace, this.CharLetterspace);
             yield return new CellTuple(nameof(SRCCON.CharSize), SRCCON.CharSize, this.CharSize);
+            yield return new CellTuple(nameof(SRCCON.CharStyle), SRCCON.CharStyle, this.CharStyle);
             yield return new CellTuple(nameof(SRCCON.CharDoubleStrikethrough), SRCCON.CharDoubleStrikethrough, this.CharDoubleStrikethrough);
             yield return new CellTuple(nameof(SRCCON.CharDoubleUnderline), SRCCON.CharDoubleUnderline, this.CharDoubleUnderline);
             yield return new CellTuple(nameof(SRCCON.CharLangID), SRCCON.CharLangID, this.CharLangID);

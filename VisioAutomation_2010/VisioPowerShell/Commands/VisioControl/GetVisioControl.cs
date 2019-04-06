@@ -15,35 +15,35 @@ namespace VisioPowerShell.Commands.VisioControl
 
         protected override void ProcessRecord()
         {
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            var dic = this.Client.Control.GetControls(targets, CellValueType.Formula);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var dic_shape_to_listofcontrolscells = this.Client.Control.GetControls(targetshapes, CellValueType.Formula);
 
             if (this.GetCells)
             {
-                this.WriteObject(dic);
+                this.WriteObject(dic_shape_to_listofcontrolscells);
                 return;
             }
 
-            foreach (var shape_points in dic)
+            foreach (var shape_listofcontrolcells_pair in dic_shape_to_listofcontrolscells)
             {
-                var shape = shape_points.Key;
-                var points = shape_points.Value;
+                var shape = shape_listofcontrolcells_pair.Key;
+                var listof_controllcells = shape_listofcontrolcells_pair.Value;
                 int shapeid = shape.ID;
 
-                foreach (var point in points)
+                foreach (var controlcells in listof_controllcells)
                 {
                     var cp = new VisioPowerShell.Models.Control();
 
                     cp.ShapeID = shapeid;
 
-                    cp.CanGlue = point.CanGlue.Value;
-                    cp.Tip = point.Tip.Value;
-                    cp.X = point.X.Value;
-                    cp.Y = point.Y.Value;
-                    cp.XBehavior = point.XBehavior.Value;
-                    cp.YBehavior = point.YBehavior.Value;
-                    cp.XDynamics = point.XDynamics.Value;
-                    cp.YDynamics = point.YDynamics.Value;
+                    cp.CanGlue = controlcells.CanGlue.Value;
+                    cp.Tip = controlcells.Tip.Value;
+                    cp.X = controlcells.X.Value;
+                    cp.Y = controlcells.Y.Value;
+                    cp.XBehavior = controlcells.XBehavior.Value;
+                    cp.YBehavior = controlcells.YBehavior.Value;
+                    cp.XDynamics = controlcells.XDynamics.Value;
+                    cp.YDynamics = controlcells.YDynamics.Value;
 
                     this.WriteObject(cp);
                 }

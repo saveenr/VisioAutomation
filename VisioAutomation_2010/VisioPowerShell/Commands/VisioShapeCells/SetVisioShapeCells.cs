@@ -1,4 +1,5 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Linq;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioShapeCells
@@ -37,18 +38,17 @@ namespace VisioPowerShell.Commands.VisioShapeCells
                 return;
             }
 
-            var targets = new VisioScripting.Models.TargetShapes(target_shapes).ResolveShapes(this.Client);
-            var target_shapeids = targets.ToShapeIDs();
+            var targetshapes = new VisioScripting.TargetShapes(target_shapes).Resolve(this.Client);
+            var targetshapeids = targetshapes.ToShapeIDs();
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
             writer.BlastGuards = this.BlastGuards;
             writer.TestCircular = this.TestCircular;
 
-            for (int i = 0; i < target_shapeids.ShapeIDs.Count; i++)
+            foreach (int i in Enumerable.Range(0, targetshapeids.Count))
             {
-                var shapeid = target_shapeids.ShapeIDs[i];
+                var shapeid = targetshapeids[i];
                 var shape_cells = this.Cells[i % this.Cells.Length];
-
                 shape_cells.Apply(writer, (short)shapeid);
             }
 
@@ -56,7 +56,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
-            this.Client.Output.WriteVerbose("Number of Shapes : {0}", target_shapeids.ShapeIDs.Count);
+            this.Client.Output.WriteVerbose("Number of Shapes : {0}", targetshapeids.Count);
 
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioShapeCells)))
             {

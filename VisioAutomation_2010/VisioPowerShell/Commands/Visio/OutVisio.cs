@@ -35,7 +35,7 @@ namespace VisioPowerShell.Commands.Visio
 
         protected override void ProcessRecord()
         {
-            var app = this.Client.Application.GetActiveApplication();
+            var app = this.Client.Application.GetAttachedApplication();
             if (app == null)
             {
                 string msg = "A Visio Application Instance is not attached";
@@ -67,7 +67,7 @@ namespace VisioPowerShell.Commands.Visio
             {
                 this.WriteVerbose("XmlDocument");
                 var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
-                this.build_from_xml_doc(this.XmlDocument, tree_drawing);
+                this._build_from_xml_doc(this.XmlDocument, tree_drawing);
 
                 tree_drawing.Render(this.Client.Page.GetActivePage());
             }
@@ -77,16 +77,16 @@ namespace VisioPowerShell.Commands.Visio
             }
         }
 
-        private void build_from_xml_doc(XmlDocument xml_document, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
+        private void _build_from_xml_doc(XmlDocument xml_document, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
         {
             var n = new VisioAutomation.Models.Layouts.Tree.Node();
             tree_drawing.Root = n;
             n.Text = new VisioAutomation.Models.Text.Element(xml_document.Name);
-            this.build_from_xml_element(xml_document.DocumentElement,n);
+            this._build_from_xml_element(xml_document.DocumentElement,n);
 
         }
 
-        private void build_from_xml_element(XmlElement x, VisioAutomation.Models.Layouts.Tree.Node parent)
+        private void _build_from_xml_element(XmlElement x, VisioAutomation.Models.Layouts.Tree.Node parent)
         {
             foreach (XmlNode xchild in x.ChildNodes)
             {
@@ -96,7 +96,7 @@ namespace VisioPowerShell.Commands.Visio
                     nchild.Text = new VisioAutomation.Models.Text.Element(xchild.Name);
 
                     parent.Children.Add(nchild);
-                    this.build_from_xml_element( (XmlElement) xchild, nchild);
+                    this._build_from_xml_element( (XmlElement) xchild, nchild);
                 }
             }
         }
