@@ -27,7 +27,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, indices0[1]);
             Assert.AreEqual(0, indices0[2]);
 
-            var targetshapes = new VisioScripting.Models.TargetShapes();
+            var targetshapes = new VisioScripting.TargetShapes();
             var dic = client.ConnectionPoint.GetConnectionPoints(targetshapes);
             Assert.AreEqual(3, dic.Count);
             Assert.AreEqual("Width*0.67", dic[s1][0].Y.Value);
@@ -35,7 +35,8 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("Width*0.67", dic[s2][0].Y.Value);
 
             client.ConnectionPoint.DeleteConnectionPointAtIndex(targetshapes,0);
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

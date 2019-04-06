@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.VisioControl
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
             var dic_shape_to_listofcontrolscells = this.Client.Control.GetControls(targetshapes, CellValueType.Formula);
 
             if (this.GetCells)

@@ -22,7 +22,7 @@ namespace VisioScripting.Models
         private static VASS.Query.Column _static_col_x_form_height;
         private static VASS.Query.CellQuery _static_query;
 
-        public static List<ShapeXFormData> Get(IVisio.Page page, TargetShapeIDs target)
+        internal static List<ShapeXFormData> _get_xfrms(IVisio.Page page, IList<int> shapeids)
         {
             if (_static_query == null)
             {
@@ -36,12 +36,12 @@ namespace VisioScripting.Models
                 _static_col_x_form_height = cols.Add(VASS.SrcConstants.XFormHeight, nameof(ShapeXFormData.XFormHeight));
             }
 
-            var results = _static_query.GetResults<double>(page, target.ShapeIDs);
-            if (results.Count != target.ShapeIDs.Count)
+            var results = _static_query.GetResults<double>(page, shapeids);
+            if (results.Count != shapeids.Count)
             {
                 throw new VisioAutomation.Exceptions.InternalAssertionException("Didn't get as many rows back as expected");
             }
-            var list = new List<ShapeXFormData>(target.ShapeIDs.Count);
+            var list = new List<ShapeXFormData>(shapeids.Count);
             foreach (var row in results)
             {
                 var xform = new ShapeXFormData();

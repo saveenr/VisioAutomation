@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
             var dicof_shape_to_udcelldic = this.Client.UserDefinedCell.GetUserDefinedCells(targetshapes, CellValueType.Formula);
 
             if (this.GetCells)

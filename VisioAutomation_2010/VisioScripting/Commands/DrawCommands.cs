@@ -158,11 +158,11 @@ namespace VisioScripting.Commands
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicateShapes)))
             {
                 var active_page = application.ActivePage;
-                var new_shapes = DrawCommands._CreateDuplicates(active_page, selection[1], n);
+                var new_shapes = DrawCommands._create_duplicates(active_page, selection[1], n);
             }
         }
 
-        private static List<IVisio.Shape> _CreateDuplicates(IVisio.Page page,
+        private static List<IVisio.Shape> _create_duplicates(IVisio.Page page,
                                            IVisio.Shape shape,
                                            int n)
         {

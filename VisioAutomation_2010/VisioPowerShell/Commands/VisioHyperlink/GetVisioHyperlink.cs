@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.VisioHyperlink
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
             var dicof_shape_to_hyperlinks = this.Client.Hyperlink.GetHyperlinks(targetshapes, CellValueType.Formula);
 
             if (this.GetCells)

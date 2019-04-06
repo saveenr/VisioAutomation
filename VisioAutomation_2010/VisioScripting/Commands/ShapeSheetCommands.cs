@@ -12,13 +12,13 @@ namespace VisioScripting.Commands
 
         }
 
-        internal void __SetCells(Models.TargetShapes targetshapes, VASS.CellGroups.CellGroup cellgroup, IVisio.Page page)
+        internal void __SetCells(TargetShapes targetshapes, VASS.CellGroups.CellGroup cellgroup, IVisio.Page page)
         {
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
             var targetshapeids = targetshapes.ToShapeIDs();
             var writer = new VASS.Writers.SidSrcWriter();
 
-            foreach (var shapeid in targetshapeids.ShapeIDs)
+            foreach (var shapeid in targetshapeids)
             {
                 var cells_mr = (VASS.CellGroups.CellGroup)cellgroup;
                 writer.SetValues((short)shapeid, cells_mr, 0);
@@ -27,7 +27,7 @@ namespace VisioScripting.Commands
             writer.Commit(page, VASS.CellValueType.Formula);
         }
 
-        public void SetShapeName(Models.TargetShapes targetshapes, IList<string> names)
+        public void SetShapeName(TargetShapes targetshapes, IList<string> names)
         {
             if (names == null || names.Count < 1)
             {
@@ -35,7 +35,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -68,15 +68,17 @@ namespace VisioScripting.Commands
             return shapesheet_surface;
         }
         
-        public Models.ShapeSheetWriter GetWriterForPage(IVisio.Page page)
+        public Models.ShapeSheetWriter GetWriterForPage(TargetPage targetpage)
         {
-            var writer = new Models.ShapeSheetWriter(this._client, page);
+            targetpage = targetpage.Resolve(this._client);
+            var writer = new Models.ShapeSheetWriter(this._client, targetpage.Page);
             return writer;
         }
 
-        public Models.ShapeSheetReader GetReaderForPage(IVisio.Page page)
+        public Models.ShapeSheetReader GetReaderForPage(TargetPage targetpage)
         {
-            var reader = new Models.ShapeSheetReader(this._client, page);
+            targetpage = targetpage.Resolve(this._client);
+            var reader = new Models.ShapeSheetReader(this._client, targetpage.Page);
             return reader;
         }
     }

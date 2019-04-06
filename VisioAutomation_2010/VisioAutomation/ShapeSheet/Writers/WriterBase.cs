@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._records = new WriteRecordList(type);
         }
 
-        protected IVisio.VisGetSetArgs ComputeGetResultFlags()
+        protected IVisio.VisGetSetArgs _compute_setresults_flags()
         {
             var flags = this._combine_blastguards_and_testcircular_flags();
 
@@ -28,7 +28,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         }
 
 
-        protected IVisio.VisGetSetArgs _compute_get_formula_flags()
+        protected IVisio.VisGetSetArgs _compute_setformula_flags()
         {
             var common_flags = this._combine_blastguards_and_testcircular_flags();
             var formula_flags = (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;

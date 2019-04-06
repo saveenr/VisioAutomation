@@ -40,7 +40,7 @@ namespace VisioAutomation_Tests.Core.Page
             var size = new VA.Geometry.Size(4, 3);
 
             var page1 = this.GetNewPage(size);
-            var page1_tp = new VisioScripting.Models.TargetPages(page1);
+            var page1_tp = new VisioScripting.TargetPages(page1);
 
             var client = this.GetScriptingClient();
 

@@ -14,19 +14,20 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomProperties(Models.TargetShapes targetshapes)
+        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
                 return dicof_shape_to_cpdic;
             }
 
-            var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, targetshapes.Shapes, CellValueType.Formula);
+            var shapeidpairs = targetshapes.ToShapeIDPairs();
+            var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, shapeidpairs, CellValueType.Formula);
 
 
             for (int i = 0; i < targetshapes.Shapes.Count; i++)
@@ -39,14 +40,14 @@ namespace VisioScripting.Commands
             return dicof_shape_to_cpdic;
         }
 
-        public List<bool> ContainCustomPropertyWithName(Models.TargetShapes targetshapes, string name)
+        public List<bool> ContainCustomPropertyWithName(TargetShapes targetshapes, string name)
         {
             if (name == null)
             {
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
             var results = new List<bool>(targetshapes.Shapes.Count);
             var values = targetshapes.Shapes.Select(shape => CustomPropertyHelper.Contains(shape, name));
@@ -55,7 +56,7 @@ namespace VisioScripting.Commands
             return results;
         }
 
-        public void DeleteCustomPropertyWithName(Models.TargetShapes targetshapes, string name)
+        public void DeleteCustomPropertyWithName(TargetShapes targetshapes, string name)
         {
             if (name == null)
             {
@@ -67,7 +68,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -83,14 +84,14 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetCustomProperty(Models.TargetShapes targetshapes, string name, CustomPropertyCells customprop)
+        public void SetCustomProperty(TargetShapes targetshapes, string name, CustomPropertyCells customprop)
         {
             if (customprop == null)
             {
                 throw new System.ArgumentNullException(nameof(customprop));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

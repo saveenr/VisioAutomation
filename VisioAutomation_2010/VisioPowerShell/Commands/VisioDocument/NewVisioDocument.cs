@@ -13,15 +13,15 @@ namespace VisioPowerShell.Commands.VisioDocument
 
         protected override void ProcessRecord()
         {
-            if (!this.Client.Application.HasActiveApplication)
+            if (!this.Client.Application.HasAttachedApplication)
             {
-                this.Client.Application.NewActiveApplication();
+                this.Client.Application.NewAttachedApplication();
             }
             else
             {
-                if (!this.Client.Application.ValidateActiveApplication())
+                if (!this.Client.Application.ValidateAttachedApplication())
                 {
-                    this.Client.Application.NewActiveApplication();
+                    this.Client.Application.NewAttachedApplication();
                 }
             }
 

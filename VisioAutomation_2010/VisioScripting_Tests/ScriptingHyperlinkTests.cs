@@ -25,7 +25,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            var targetshapes = new VisioScripting.Models.TargetShapes();
+            var targetshapes = new VisioScripting.TargetShapes();
 
             var hyperlinks0 = client.Hyperlink.GetHyperlinks(targetshapes, VASS.CellValueType.Formula);
 
@@ -51,7 +51,8 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, hyperlinks2[s2].Count);
             Assert.AreEqual(0, hyperlinks2[s3].Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

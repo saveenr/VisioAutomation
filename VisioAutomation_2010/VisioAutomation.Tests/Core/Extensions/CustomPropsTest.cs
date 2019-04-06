@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -181,7 +182,8 @@ namespace VisioAutomation_Tests.Core.Extensions
             CustomPropertyHelper.Set(s4, "FOO6", "6", cp_type);
 
             var shapes = new[] {s1, s2, s3, s4};
-            var allprops = CustomPropertyHelper.GetCellsAsDictionary(page1, shapes, CellValueType.Formula);
+            var shapeidpairs = ShapeIDPairs.FromShapes(shapes);
+            var allprops = CustomPropertyHelper.GetCellsAsDictionary(page1, shapeidpairs, CellValueType.Formula);
 
 
             Assert.AreEqual(4, allprops.Count);

@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using VisioScripting.Models;
 using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.Scripting
@@ -21,19 +22,20 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Selection.SelectNone();
 
-            var targetshapes = new VisioScripting.Models.TargetShapes(s1,s2,s3);
+            var targetshapes = new VisioScripting.TargetShapes(s1,s2,s3);
             var targetshapeids = targetshapes.ToShapeIDs();
-            var page = client.Page.GetActivePage();
+            var page = new VisioScripting.TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
-            foreach (var shapeid in targetshapeids.ShapeIDs)
+            foreach (var shapeid in targetshapeids)
             {
                 writer.SetFormula( (short) shapeid, VA.ShapeSheet.SrcConstants.XFormPinX, "1.0");
             }
 
             writer.Commit();
-            
-            client.Document.CloseActiveDocument(true);
+
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -52,7 +54,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            var targetshapes = new VisioScripting.Models.TargetShapes();
+            var targetshapes = new VisioScripting.TargetShapes();
             var prop_dic0 = client.CustomProperty.GetCustomProperties(targetshapes);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);
@@ -91,7 +93,8 @@ namespace VisioAutomation_Tests.Scripting
             var hasprops1 = client.CustomProperty.ContainCustomPropertyWithName(targetshapes,"FOO");
             Assert.IsTrue(hasprops1.All(v => v == false));
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
             var udcell = new VisioScripting.Models.UserDefinedCell(this.Name, this.Value);
             if (this.Prompt != null)
             {

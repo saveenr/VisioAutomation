@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
-using VisioAutomation.Shapes;
+using VA=VisioAutomation;
 using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioScripting.Commands
@@ -13,21 +12,19 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetLockCells(Models.TargetShapes targetshapes, LockCells lockcells)
+        public void SetLockCells(TargetShapes targetshapes, VA.Shapes.LockCells lockcells)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
             if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
-            var page = cmdtarget.ActivePage;
+            var page = targetshapes.Shapes[0].ContainingPage;
             var targetshapeids = targetshapes.ToShapeIDs();
             var writer = new VASS.Writers.SidSrcWriter();
 
-            foreach (int shapeid in targetshapeids.ShapeIDs)
+            foreach (int shapeid in targetshapeids)
             {
                 writer.SetValues((short)shapeid, lockcells);
             }
@@ -39,20 +36,20 @@ namespace VisioScripting.Commands
         }
 
 
-        public Dictionary<int,LockCells> GetLockCells(Models.TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<int, VA.Shapes.LockCells> GetLockCells(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
             if (targetshapes.Shapes.Count < 1)
             {
-                return new Dictionary<int, LockCells>();
+                return new Dictionary<int, VA.Shapes.LockCells>();
             }
 
-            var dic = new Dictionary<int, LockCells>();
+            var dic = new Dictionary<int, VA.Shapes.LockCells>();
 
-            var page = cmdtarget.ActivePage;
-            var target_shapeids = targetshapes.Shapes.Select(s => (int)s.ID16).ToList();
+            var page = targetshapes.Shapes[0].ContainingPage;
+
+            var target_shapeids = targetshapes.ToShapeIDs();
 
             var cells = VisioAutomation.Shapes.LockCells.GetCells(page, target_shapeids, cvt);
 

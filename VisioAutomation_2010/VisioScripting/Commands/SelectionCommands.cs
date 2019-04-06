@@ -142,9 +142,8 @@ namespace VisioScripting.Commands
                 master);
         }
 
-        public void SelectShapesByLayer(string layername)
+        public void SelectShapesByLayer(TargetPage targetpage, string layername)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
 
             if (layername == null)
             {
@@ -156,11 +155,12 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(layername), "Layer name cannot be empty");
             }
 
-            var layer = this._client.Layer.FindLayersOnActivePageByName(layername);
-            var page = cmdtarget.ActivePage;
+            targetpage = targetpage.Resolve(this._client);
+
+            var layer = this._client.Layer.FindLayersOnPageByName(targetpage,layername);
 
             // Get a selection of connectors, by layer: 
-            var selection = page.CreateSelection(
+            var selection = targetpage.Page.CreateSelection(
                 IVisio.VisSelectionTypes.visSelTypeByLayer,
                 IVisio.VisSelectMode.visSelModeSkipSub, 
                 layer);
@@ -250,7 +250,7 @@ namespace VisioScripting.Commands
             selection.Copy(flags);
         }
 
-        public void DuplicateSelectedShapes(Models.TargetShapes targetshapes )
+        public void DuplicateSelectedShapes(TargetShapes targetshapes )
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 

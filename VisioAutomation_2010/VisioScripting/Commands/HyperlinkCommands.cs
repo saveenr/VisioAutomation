@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -14,14 +14,14 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<int> AddHyperlink(Models.TargetShapes targetshapes, HyperlinkCells hlink)
+        public List<int> AddHyperlink(TargetShapes targetshapes, HyperlinkCells hlink)
         {
             if (hlink == null)
             {
                 throw new System.ArgumentNullException(nameof(hlink));
             }
 
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
             
             if (targetshapes.Shapes.Count < 1)
             {
@@ -42,9 +42,9 @@ namespace VisioScripting.Commands
             return hyperlink_indices;
         }
 
-        public void DeleteHyperlinkAtIndex(Models.TargetShapes targetshapes, int n)
+        public void DeleteHyperlinkAtIndex(TargetShapes targetshapes, int n)
         {
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -64,9 +64,9 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(Models.TargetShapes targetshapes, CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            targetshapes = targetshapes.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
 
         protected override void ProcessRecord()
         {
-            var target_pages = new VisioScripting.Models.TargetPages(this.Pages);
+            var targetpages = new VisioScripting.TargetPages(this.Pages);
 
             var template = new VisioPowerShell.Models.PageCells();
             var celldic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
@@ -27,20 +27,20 @@ namespace VisioPowerShell.Commands.VisioPageCells
             
             var result_dt = new System.Data.DataTable();
 
-            foreach (var target_page in target_pages.Pages)
+            foreach (var targetpage in targetpages.Pages)
             {
-                var target_pagesheet = target_page.PageSheet;
-                var target_shapeids = new List<int> { target_pagesheet.ID };
-                var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
+                var targetpage_shapesheet = targetpage.PageSheet;
+                var targetpage_shapeshapeids = new List<int> { targetpage_shapesheet.ID };
+                var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, targetpage_shapeshapeids, surface);
                 result_dt.Merge(dt);
             }
 
             // Annotate the returned datatable to disambiguate rows
             var pageindex_col = result_dt.Columns.Add("PageIndex", typeof(System.Int32));
             pageindex_col.SetOrdinal(0);
-            for (int row_index = 0; row_index < target_pages.Pages.Count; row_index++)
+            for (int row_index = 0; row_index < targetpages.Pages.Count; row_index++)
             {
-                result_dt.Rows[row_index][pageindex_col.ColumnName] = target_pages.Pages[row_index].Index;
+                result_dt.Rows[row_index][pageindex_col.ColumnName] = targetpages.Pages[row_index].Index;
             }
 
             this.WriteObject(result_dt);

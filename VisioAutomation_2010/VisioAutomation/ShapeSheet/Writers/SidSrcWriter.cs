@@ -67,7 +67,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildSidSrcStream();
+            var stream = this._records.BuildStreamArray(StreamType.SidSrc);
             var formulas = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
@@ -75,7 +75,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
-            var flags = this._compute_get_formula_flags();
+            var flags = this._compute_setformula_flags();
 
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
@@ -87,7 +87,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildSidSrcStream();
+            var stream = this._records.BuildStreamArray(StreamType.SidSrc);
             var items = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
@@ -97,13 +97,13 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             if (type == CellValueType.Formula)
             {
-                var flags = this._compute_get_formula_flags();
+                var flags = this._compute_setformula_flags();
                 int c = surface.SetFormulas(stream, items, (short)flags);
             }
             else
             {
                 const object[] unitcodes = null;
-                var flags = this.ComputeGetResultFlags();
+                var flags = this._compute_setresults_flags();
                 surface.SetResults(stream, unitcodes, items, (short)flags);
             }
         }

@@ -103,16 +103,16 @@ namespace VisioAutomation_Tests
         {
             var pages = doc.Pages;
 
-            var target_pages = new List<IVisio.Page>(pages.Count);
+            var targetpages = new List<IVisio.Page>(pages.Count);
 
             foreach (IVisio.Page p in pages)
             {
-                target_pages.Add(p);
+                targetpages.Add(p);
             }
 
             var empty_page = pages.Add();
 
-            foreach (IVisio.Page p in target_pages)
+            foreach (IVisio.Page p in targetpages)
             {
                 p.Delete(1);
             }
