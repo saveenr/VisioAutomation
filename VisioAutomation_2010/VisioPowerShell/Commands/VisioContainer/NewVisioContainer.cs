@@ -14,14 +14,16 @@ namespace VisioPowerShell.Commands.VisioContainer
 
         protected override void ProcessRecord()
         {
+            var targetpage = new VisioScripting.TargetPage();
+
             if (this.Master != null)
             {
-                var shape = this.Client.Master.DropContainerMaster(this.Master);
+                var shape = this.Client.Master.DropContainerMaster(targetpage , this.Master);
                 this.WriteObject(shape);
             }
             else if (this.MasterName != null)
             {
-                var shape = this.Client.Master.DropContainer(this.MasterName);
+                var shape = this.Client.Master.DropContainer(targetpage, this.MasterName);
                 this.WriteObject(shape);
             }
             else

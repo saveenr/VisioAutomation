@@ -11,8 +11,8 @@ namespace VisioPowerShell.Commands.VisioShape
         
         protected override void ProcessRecord()
         {
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
-            this.Client.Grouping.UngroupSelectedShapes(targets);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            this.Client.Grouping.UngroupSelectedShapes(targetshapes);
         }
     }
 }

@@ -114,14 +114,14 @@
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
-    <Compile Include="ShapeSheet\CellCoordinateType.cs" />
+    <Compile Include="ShapeSheet\StreamType.cs" />
     <Compile Include="ShapeSheet\Writers\WriteRecord.cs" />
     <Compile Include="ShapeSheet\Writers\WriteRecordList.cs" />
     <Compile Include="ShapeSheet\StreamArray.cs" />
     <Compile Include="Shapes\CustomPropertyNameCellsPair.cs" />
     <Compile Include="Shapes\CustomPropertyType.cs" />
-    <Compile Include="Internal\ArraySegmentReader.cs" />
-    <Compile Include="Internal\ArraySegment.cs" />
+    <Compile Include="Collections\ArraySegmentEnumerator.cs" />
+    <Compile Include="Collections\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryCache.cs" />
     <Compile Include="ShapeSheet\Query\Rows.cs" />
     <Compile Include="ShapeSheet\Query\Columns.cs" />

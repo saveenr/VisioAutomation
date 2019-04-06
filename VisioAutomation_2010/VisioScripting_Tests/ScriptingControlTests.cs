@@ -23,9 +23,9 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            var targets = new VisioScripting.Models.TargetShapes();
+            var targetshapes = new VisioScripting.TargetShapes();
 
-            var controls0 = client.Control.GetControls(targets, CellValueType.Formula);
+            var controls0 = client.Control.GetControls(targetshapes, CellValueType.Formula);
             int found_controls = controls0.Count;
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls0[s1].Count);
@@ -35,22 +35,23 @@ namespace VisioAutomation_Tests.Scripting
             var ctrl = new ControlCells();
             ctrl.X = "Width*0.5";
             ctrl.Y = "0";
-            client.Control.AddControlToShapes(targets, ctrl);
+            client.Control.AddControlToShapes(targetshapes, ctrl);
 
-            var controls1 = client.Control.GetControls(targets, CellValueType.Formula);
+            var controls1 = client.Control.GetControls(targetshapes, CellValueType.Formula);
             Assert.AreEqual(3, controls1.Count);
             Assert.AreEqual(1, controls1[s1].Count);
             Assert.AreEqual(1, controls1[s2].Count);
             Assert.AreEqual(1, controls1[s3].Count);
 
-            client.Control.DeleteControlWithIndex(targets, 0);
-            var controls2 = client.Control.GetControls(targets, CellValueType.Formula);
+            client.Control.DeleteControlWithIndex(targetshapes, 0);
+            var controls2 = client.Control.GetControls(targetshapes, CellValueType.Formula);
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls2[s1].Count);
             Assert.AreEqual(0, controls2[s2].Count);
             Assert.AreEqual(0, controls2[s3].Count);
 
-            client.Document.CloseActiveDocument(true);
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Document.CloseDocument(targetdoc, true);
         }
     }
 }

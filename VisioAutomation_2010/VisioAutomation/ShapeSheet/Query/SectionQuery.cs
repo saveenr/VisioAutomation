@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
             var shape_cache_item = cache[shape_index];
-            var reader = new VisioAutomation.Internal.ArraySegmentReader<string>(values);
+            var reader = new VisioAutomation.Collections.ArraySegmentEnumerator<string>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, shape_cache_item, reader);
 
             return output_for_shape;
@@ -60,7 +60,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var sectioncache = cache[shape_index];
-            var reader = new VisioAutomation.Internal.ArraySegmentReader<TResult>(values);
+            var reader = new VisioAutomation.Collections.ArraySegmentEnumerator<TResult>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, sectioncache, reader);
             return output_for_shape;
         }
@@ -87,7 +87,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new VisioAutomation.Internal.ArraySegmentReader<TResult>(values);
+            var reader = new VisioAutomation.Collections.ArraySegmentEnumerator<TResult>(values);
             var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
             return results;
         }
@@ -99,7 +99,7 @@ namespace VisioAutomation.ShapeSheet.Query
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
             var values = surface.GetFormulasU(srcstream);
-            var reader = new VisioAutomation.Internal.ArraySegmentReader<string>(values);
+            var reader = new VisioAutomation.Collections.ArraySegmentEnumerator<string>(values);
             var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
             return results;
         }
@@ -112,7 +112,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 return new SectionQueryCache(0);
             }
 
-            var _cache = new SectionQueryCache();
+            var cache = new SectionQueryCache();
 
             // For each shape, for each section find the number of rows
             foreach (var shapeidpair in shapeidpairs)
@@ -128,21 +128,21 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
 
                 // For this shape, add the accumulated info into the cache
-                _cache.Add(shapecache);
+                cache.Add(shapecache);
             }
 
             // Ensure that we have created a cache for eash shapes
-            if (shapeidpairs.Count != _cache.Count)
+            if (shapeidpairs.Count != cache.Count)
             {
                 string msg = string.Format("mismatch in number of shapes and information collected for shapes");
                 throw new Exceptions.InternalAssertionException(msg);
             }
 
-            return _cache;
+            return cache;
         }
 
 
-        private SectionQueryResults<T> _create_outputs_for_shapes<T>(ShapeIDPairs shapeidpairs, SectionQueryCache sectioncache, VisioAutomation.Internal.ArraySegmentReader<T> segreader)
+        private SectionQueryResults<T> _create_outputs_for_shapes<T>(ShapeIDPairs shapeidpairs, SectionQueryCache sectioncache, VisioAutomation.Collections.ArraySegmentEnumerator<T> segreader)
         {
             var results = new SectionQueryResults<T>();
 
@@ -157,7 +157,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems, VisioAutomation.Internal.ArraySegmentReader<T> segreader)
+        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems, VisioAutomation.Collections.ArraySegmentEnumerator<T> segreader)
         {
             int original_seg_count = segreader.Count;
 

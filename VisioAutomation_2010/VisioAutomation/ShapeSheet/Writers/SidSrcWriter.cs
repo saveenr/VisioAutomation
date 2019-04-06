@@ -1,11 +1,11 @@
-﻿using System;
+﻿ using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SidSrcWriter : WriterBase
     {
-        public SidSrcWriter() : base(CellCoordinateType.SidSrc)
+        public SidSrcWriter() : base(StreamType.SidSrc)
         {
         }
 
@@ -25,9 +25,9 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetValues(short id, CellGroups.CellGroup cgb, short row)
+        public void SetValues(short id, CellGroups.CellGroup cellgroup, short row)
         {
-            var pairs = cgb.SidSrcValuePairs_NewRow(id, row);
+            var pairs = cellgroup.SidSrcValuePairs_NewRow(id, row);
             foreach (var pair in pairs)
             {
                 this.SetValue(pair.ShapeID, pair.Src, pair.Value);
@@ -39,9 +39,9 @@ namespace VisioAutomation.ShapeSheet.Writers
             throw new NotImplementedException();
         }
 
-        public void SetValues(short id, CellGroups.CellGroup cgb)
+        public void SetValues(short id, CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cgb.SrcValuePairs)
+            foreach (var pair in cellgroup.SrcValuePairs)
             {
                 this.SetValue(id, pair.Src, pair.Value);
             }
@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this._records == null)
             {
-                this._records = new WriteRecordList(CellCoordinateType.SidSrc);
+                this._records = new WriteRecordList(StreamType.SidSrc);
             }
 
             if (formula.HasValue)
@@ -67,7 +67,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildSidSrcStream();
+            var stream = this._records.BuildStreamArray(StreamType.SidSrc);
             var formulas = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
@@ -75,7 +75,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
-            var flags = this.ComputeGetFormulaFlags();
+            var flags = this._compute_setformula_flags();
 
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
@@ -87,7 +87,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildSidSrcStream();
+            var stream = this._records.BuildStreamArray(StreamType.SidSrc);
             var items = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
@@ -97,13 +97,13 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             if (type == CellValueType.Formula)
             {
-                var flags = this.ComputeGetFormulaFlags();
+                var flags = this._compute_setformula_flags();
                 int c = surface.SetFormulas(stream, items, (short)flags);
             }
             else
             {
                 const object[] unitcodes = null;
-                var flags = this.ComputeGetResultFlags();
+                var flags = this._compute_setresults_flags();
                 surface.SetResults(stream, unitcodes, items, (short)flags);
             }
         }

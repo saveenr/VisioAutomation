@@ -7,12 +7,12 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
         private readonly List<WriteRecord> _items;
 
-        readonly CellCoordinateType _coordtype;
+        readonly StreamType _streamtype;
 
-        public WriteRecordList(CellCoordinateType type)
+        public WriteRecordList(StreamType type)
         {
             this._items = new List<WriteRecord>();
-            this._coordtype = type;
+            this._streamtype = type;
         }
 
         public void Clear()
@@ -27,16 +27,16 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._items.Add(item);
         }
 
-        public void Add(Src coord, string value)
+        public void Add(Src src, string value)
         {
             _check_for_src();
-            var item = new WriteRecord(new SidSrc(-1, coord), value);
+            var item = new WriteRecord(new SidSrc(-1, src), value);
             this._items.Add(item);
         }
 
         private void _check_for_sidsrc()
         {
-            if (this._coordtype != CellCoordinateType.SidSrc)
+            if (this._streamtype != StreamType.SidSrc)
             {
                 string msg = string.Format("Excpected a sidsrc value");
                 throw new System.ArgumentOutOfRangeException(msg);
@@ -45,35 +45,36 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         private void _check_for_src()
         {
-            if (this._coordtype != CellCoordinateType.Src)
+            if (this._streamtype != StreamType.Src)
             {
                 string msg = string.Format("Excpected a src value");
                 throw new System.ArgumentOutOfRangeException(msg);
             }
         }
 
-        public Streams.StreamArray BuildSidSrcStream()
+
+        public Streams.StreamArray BuildStreamArray( StreamType type)
         {
-            if (this._coordtype != CellCoordinateType.SidSrc)
+            if (this._streamtype != type)
             {
-                string msg = string.Format("writer does not contain sidsrcvalues");
+                string msg = string.Format("writer does not contain {0} values", type.ToString() );
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
-            var sidsrcs = this._items.Select(i => i.SidSrc);
-            return Streams.StreamArray.FromSidSrc(this.Count, sidsrcs);
-        }
-
-        public Streams.StreamArray BuildSrcStream()
-        {
-            if (this._coordtype != CellCoordinateType.Src)
+            if (type == StreamType.Src)
             {
-                string msg = string.Format("writer does not contain srcvalues");
-                throw new System.ArgumentOutOfRangeException(msg);
+                var srcs = this._items.Select(i => i.SidSrc.Src);
+                return Streams.StreamArray.FromSrc(this.Count, srcs);
             }
-
-            var srcs = this._items.Select(i => i.SidSrc.Src);
-            return Streams.StreamArray.FromSrc(this.Count, srcs);
+            else if (type == StreamType.SidSrc)
+            {
+                var sidsrcs = this._items.Select(i => i.SidSrc);
+                return Streams.StreamArray.FromSidSrc(this.Count, sidsrcs);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
         }
 
         public object[] BuildValuesArray()

@@ -46,9 +46,9 @@ namespace VisioPowerShell.Commands.VisioControl
                 ctrl.CanGlue = this.CanGlue;
                 ctrl.Tip = this.Tip;
 
-            var targets = new VisioScripting.Models.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
 
-            this.Client.Control.AddControlToShapes(targets, ctrl);
+            this.Client.Control.AddControlToShapes(targetshapes, ctrl);
         }
     }
 }

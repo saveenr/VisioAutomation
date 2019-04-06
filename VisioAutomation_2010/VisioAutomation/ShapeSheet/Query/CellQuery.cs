@@ -26,7 +26,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var srcstream = this._build_src_stream();
             var values = surface.GetFormulasU(srcstream);
-            var reader = new Internal.ArraySegmentReader<string>(values);
+            var reader = new Collections.ArraySegmentEnumerator<string>(values);
             var row = this._shapedata_to_row(surface.ID16, reader);
 
             var cellqueryresults = new CellQueryResults<string>(1);
@@ -48,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new Internal.ArraySegmentReader<TResult>(values);
+            var reader = new Collections.ArraySegmentEnumerator<TResult>(values);
             var row = this._shapedata_to_row(surface.ID16, reader);
 
 
@@ -69,7 +69,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
-            var reader = new Internal.ArraySegmentReader<string>(values);
+            var reader = new Collections.ArraySegmentEnumerator<string>(values);
             var rows = this._shapesid_to_rows(shapeids, reader);
 
             var cellqueryresults = new CellQueryResults<string>(rows.Count);
@@ -89,7 +89,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new Internal.ArraySegmentReader<TResult>(values);
+            var reader = new Collections.ArraySegmentEnumerator<TResult>(values);
             var rows = this._shapesid_to_rows(shapeids, reader);
 
             var cellqueryresults = new CellQueryResults<TResult>(rows.Count);
@@ -98,26 +98,26 @@ namespace VisioAutomation.ShapeSheet.Query
             return cellqueryresults;
         }
 
-        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, VisioAutomation.Internal.ArraySegmentReader<T> seg_reader)
+        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, VisioAutomation.Collections.ArraySegmentEnumerator<T> seg_enumerator)
         {
             var rows = new Rows<T>(shapeids.Count);
             foreach (int shapeid in shapeids)
             {
-                var row = this._shapedata_to_row((short)shapeid, seg_reader);
+                var row = this._shapedata_to_row((short)shapeid, seg_enumerator);
                 rows.Add(row);
             }
             return rows;
         }
 
-        private Row<T> _shapedata_to_row<T>(short shapeid, VisioAutomation.Internal.ArraySegmentReader<T> seg_reader)
+        private Row<T> _shapedata_to_row<T>(short shapeid, VisioAutomation.Collections.ArraySegmentEnumerator<T> seg_enumerator)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
-            int original_seg_size = seg_reader.Count;
-            var cells = seg_reader.GetNextSegment(numcols);
+            int original_seg_size = seg_enumerator.Count;
+            var cells = seg_enumerator.GetNextSegment(numcols);
 
             // verify that nothing strange has happened
-            int final_seg_size = seg_reader.Count;
+            int final_seg_size = seg_enumerator.Count;
             if ((final_seg_size - original_seg_size) != numcols)
             {
                 throw new Exceptions.InternalAssertionException("Unexpected cursor");

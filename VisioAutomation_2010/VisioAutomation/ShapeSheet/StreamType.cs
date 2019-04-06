@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet
 {
-    public enum CellCoordinateType
+    public enum StreamType
     {
         SidSrc,
         Src

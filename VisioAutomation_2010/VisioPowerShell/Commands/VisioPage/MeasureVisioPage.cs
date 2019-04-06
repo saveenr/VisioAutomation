@@ -1,13 +1,19 @@
 using System.Collections.Generic;
 using VisioPowerShell.Models;
+using VisioScripting.Models;
 using SMA = System.Management.Automation;
 using VA = VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Measure, Nouns.VisioPage)]
     public class MeasureVisioPage : VisioCmdlet
     {
+
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page Page;
+
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetShapeObjects { get; set; }
 
@@ -19,8 +25,10 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-            var flag = this.get_DirectedEdgeHandling();
-            var edges = this.Client.Connection.GetDirectedEdgesOnActivePage(flag);
+            var targetpage = new VisioScripting.TargetPage(this.Page);
+
+            var flag = this._get_directed_edge_handling();
+            var edges = this.Client.Connection.GetDirectedEdgesOnPage(targetpage,flag);
 
             if (this.GetShapeObjects)
             {
@@ -28,13 +36,13 @@ namespace VisioPowerShell.Commands.VisioPage
                 return;
             }
 
-            this.write_edges_with_shapeids(edges);
+            this._write_edges_with_shapeids(edges);
                 
         }
 
-        private VA.DocumentAnalysis.ConnectorHandling get_DirectedEdgeHandling()
+        private VA.DocumentAnalysis.ConnectionAnalyzerOptions _get_directed_edge_handling()
         {
-            var flag = new VA.DocumentAnalysis.ConnectorHandling();
+            var flag = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             flag.NoArrowsHandling =  VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
             if (this.Raw)
@@ -51,7 +59,7 @@ namespace VisioPowerShell.Commands.VisioPage
             return flag;
         }
 
-        private void write_edges_with_shapeids(IList<VA.DocumentAnalysis.ConnectorEdge> edges)
+        private void _write_edges_with_shapeids(IList<VA.DocumentAnalysis.ConnectorEdge> edges)
         {
             foreach (var edge in edges)
             {

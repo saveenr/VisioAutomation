@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -14,16 +14,16 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<int> AddHyperlink(Models.TargetShapes targets, HyperlinkCells hlink)
+        public List<int> AddHyperlink(TargetShapes targetshapes, HyperlinkCells hlink)
         {
             if (hlink == null)
             {
                 throw new System.ArgumentNullException(nameof(hlink));
             }
 
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
             
-            if (targets.Shapes.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new List<int>(0);
             }
@@ -32,7 +32,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(AddHyperlink)))
             {
-                foreach (var shape in targets.Shapes)
+                foreach (var shape in targetshapes.Shapes)
                 {
                     int hi = HyperlinkHelper.Add(shape, hlink);
                     hyperlink_indices.Add(hi);
@@ -42,18 +42,18 @@ namespace VisioScripting.Commands
             return hyperlink_indices;
         }
 
-        public void DeleteHyperlinkAtIndex(Models.TargetShapes targets, int n)
+        public void DeleteHyperlinkAtIndex(TargetShapes targetshapes, int n)
         {
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targets.Shapes.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
             // restrict the operation to those shapes that actually have enough
             // controls to qualify for deleting 
-            var qualified_shapes = targets.Shapes.Where(shape => HyperlinkHelper.GetCount(shape) > n);
+            var qualified_shapes = targetshapes.Shapes.Where(shape => HyperlinkHelper.GetCount(shape) > n);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteHyperlinkAtIndex)))
             {
@@ -64,17 +64,17 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(Models.TargetShapes targets, CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            targets = targets.ResolveShapes(this._client);
+            targetshapes = targetshapes.Resolve(this._client);
 
-            if (targets.Shapes.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<HyperlinkCells>>(0);
             }
 
             var dic = new Dictionary<IVisio.Shape, IList<HyperlinkCells>>();
-            foreach (var shape in targets.Shapes)
+            foreach (var shape in targetshapes.Shapes)
             {
                 var hyperlinks = HyperlinkCells.GetCells(shape, cvt);
                 dic[shape] = hyperlinks;

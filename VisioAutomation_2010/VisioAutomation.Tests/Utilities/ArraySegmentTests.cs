@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Utilities
             bool caught = false;
             try
             {
-                var s = new VA.Internal.ArraySegmentReader<int>(null);
+                var s = new VA.Collections.ArraySegmentEnumerator<int>(null);
             }
             catch (System.ArgumentNullException e)
             {
@@ -34,7 +34,7 @@ namespace VisioAutomation_Tests.Utilities
             // Can fully accomodate an array
 
             var a = new int[] {1, 2, 3, 4, 5, 6, 7, 8};
-            var s = new VA.Internal.ArraySegmentReader<int>(a);
+            var s = new VA.Collections.ArraySegmentEnumerator<int>(a);
 
             var s1 = s.GetNextSegment(1);
             var s2 = s.GetNextSegment(4);
@@ -57,7 +57,7 @@ namespace VisioAutomation_Tests.Utilities
             // Can fully accomodate an array and get multiple empty segments at end
 
             var a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            var s = new VA.Internal.ArraySegmentReader<int>(a);
+            var s = new VA.Collections.ArraySegmentEnumerator<int>(a);
 
             var s1 = s.GetNextSegment(1);
             var s2 = s.GetNextSegment(4);
@@ -88,13 +88,13 @@ namespace VisioAutomation_Tests.Utilities
             // fails if asks too much - current position is in middle of array
 
             var a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            var s = new VA.Internal.ArraySegmentReader<int>(a);
+            var s = new VA.Collections.ArraySegmentEnumerator<int>(a);
             var s1 = s.GetNextSegment(4);
 
             Assert.AreEqual(0, s1.Offset);
             Assert.AreEqual(4, s1.Count);
 
-            CheckOverflow(s, 5);
+            _check_overflow(s, 5);
         }
 
         [TestMethod]
@@ -103,13 +103,13 @@ namespace VisioAutomation_Tests.Utilities
             // fails if asks too much - current position is at start middle strt of array after asking for empty segment
 
             var a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            var s = new VA.Internal.ArraySegmentReader<int>(a);
+            var s = new VA.Collections.ArraySegmentEnumerator<int>(a);
             var s1 = s.GetNextSegment(0);
 
             Assert.AreEqual(0, s1.Offset);
             Assert.AreEqual(0, s1.Count);
 
-            CheckOverflow(s, 9);
+            _check_overflow(s, 9);
         }
 
         [TestMethod]
@@ -118,17 +118,17 @@ namespace VisioAutomation_Tests.Utilities
             // fails if asks too much - current position is at start middle of array
 
             var a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-            var s = new VA.Internal.ArraySegmentReader<int>(a);
+            var s = new VA.Collections.ArraySegmentEnumerator<int>(a);
             var s1 = s.GetNextSegment(8);
 
             Assert.AreEqual(0, s1.Offset);
             Assert.AreEqual(8, s1.Count);
 
-            CheckOverflow(s, 1);
+            _check_overflow(s, 1);
         }
 
 
-        private static void CheckOverflow(VA.Internal.ArraySegmentReader<int> s, int size)
+        private static void _check_overflow(VA.Collections.ArraySegmentEnumerator<int> s, int size)
         {
             bool caught = false;
             try

@@ -48,6 +48,13 @@ namespace VisioAutomation_Tests.Core.Shapes
             var cp_foo1 = props["FOO1"];
             // var cp_foo2 = props["FOO2"]; there is no prop called FOO2
             var cp_foo3 = props["FOO3"];
+
+            var app = this.GetVisioApplication();
+            var doc = app.ActiveDocument;
+            if (doc != null)
+            {
+                doc.Close(true);
+            }
         }
 
         [TestMethod]

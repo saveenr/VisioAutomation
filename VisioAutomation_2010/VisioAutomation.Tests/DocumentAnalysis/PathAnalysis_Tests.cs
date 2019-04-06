@@ -5,6 +5,7 @@ using VisioAutomation.ShapeSheet.Writers;
 using VADRAW=VisioAutomation.Geometry;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VA = VisioAutomation;
 
 namespace VisioAutomation_Tests.DocumentAnalysis
 {
@@ -64,10 +65,10 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[0], shapes[1], false, false);
             this.connect(shapes[1], shapes[2], false, false);
 
-            var ch = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch.DirectionSource = VisioAutomation.DocumentAnalysis.DirectionSource.UseConnectionOrder;
+            var options = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options.DirectionSource = VA.DocumentAnalysis.DirectionSource.UseConnectionOrder;
 
-            var edges = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch);
+            var edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options);
             var map = new ConnectivityMap(edges);
             Assert.AreEqual(2, map.CountFromNodes());
             Assert.IsTrue(map.HasConnectionFromTo("A","B"));
@@ -86,9 +87,9 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[0], shapes[1], false, false);
             this.connect(shapes[1], shapes[2], false, false);
 
-            var ch1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
-            var edges1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch1);
+            var options1 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options1.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
+            var edges1 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(3, map1.CountFromNodes());
             Assert.IsTrue(map1.HasConnectionFromTo("A", "B"));
@@ -99,10 +100,10 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             Assert.AreEqual(2, map1.CountConnectionsFrom("B"));
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
-            var ch2 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
+            var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options2.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
-            var edges2 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page1, ch2);
+            var edges2 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
             var map2 = new ConnectivityMap(edges2);
             Assert.AreEqual(3, map2.CountFromNodes());
             Assert.IsTrue(map2.HasConnectionFromTo("A", "B"));
@@ -129,14 +130,14 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[0], shapes[1], false, false);
             this.connect(shapes[1], shapes[2], false, false);
 
-            var ch = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
+            var options = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
-            var edges1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch);
+            var edges1 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(0, map1.CountFromNodes());
 
-            var edges2 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page1, ch);
+            var edges2 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options);
             var map2 = new ConnectivityMap(edges2);
             Assert.AreEqual(0, map2.CountFromNodes());
 
@@ -152,10 +153,10 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[0], shapes[1], true, false);
             this.connect(shapes[1], shapes[2], true, false);
 
-            var ch1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
+            var options1 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options1.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
-            var edges1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch1);
+            var edges1 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(2, map1.CountFromNodes());
             Assert.IsTrue(map1.HasConnectionFromTo("B", "A"));
@@ -163,11 +164,11 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             Assert.AreEqual(1, map1.CountConnectionsFrom("B"));
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
-            var ch2 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
+            var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options2.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
 
-            var edges2 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page1, ch2);
+            var edges2 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
             var map2 = new ConnectivityMap(edges1);
             Assert.AreEqual(2, map2.CountFromNodes());
             Assert.IsTrue(map2.HasConnectionFromTo("B", "A"));
@@ -188,10 +189,10 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             this.connect(shapes[0], shapes[1], true, true);
             this.connect(shapes[1], shapes[2], true, true);
 
-            var ch1 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch1.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
+            var options1 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options1.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
-            var edges1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, ch1);
+            var edges1 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(3, map1.CountFromNodes());
             Assert.IsTrue(map1.HasConnectionFromTo("A", "B"));
@@ -202,10 +203,10 @@ namespace VisioAutomation_Tests.DocumentAnalysis
             Assert.AreEqual(2, map1.CountConnectionsFrom("B"));
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
-            var ch2 = new VisioAutomation.DocumentAnalysis.ConnectorHandling();
-            ch2.NoArrowsHandling = VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
+            var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options2.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
-            var edges2 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetTransitiveClosure(page1, ch2);
+            var edges2 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
             var map2 = new ConnectivityMap(edges2);
             Assert.AreEqual(3, map2.CountFromNodes());
             Assert.IsTrue(map2.HasConnectionFromTo("A", "B"));

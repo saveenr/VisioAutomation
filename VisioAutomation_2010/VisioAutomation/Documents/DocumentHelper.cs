@@ -18,5 +18,34 @@ namespace VisioAutomation.Documents
                 return null;
             }
         }
+
+        internal static void Close(IVisio.Document doc, bool force_close)
+        {
+            if (force_close)
+            {
+                var new_alert_response = Application.AlertResponseCode.No;
+                var app = doc.Application;
+
+                using (var alertresponse = new Application.AlertResponseScope(app, new_alert_response))
+                {
+                    doc.Close();
+                }
+            }
+            else
+            {
+                doc.Close();
+            }
+        }
+
+        internal static IVisio.Document OpenStencil(this IVisio.Documents documents, string filename)
+        {
+            var stencil = VisioAutomation.Documents.DocumentHelper.TryOpenStencil(documents, filename);
+            if (stencil == null)
+            {
+                string msg = string.Format("Could not open stencil \"{0}\"", filename);
+                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
+            }
+            return stencil;
+        }
     }
 }

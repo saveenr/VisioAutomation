@@ -103,16 +103,16 @@ namespace VisioAutomation_Tests
         {
             var pages = doc.Pages;
 
-            var target_pages = new List<IVisio.Page>(pages.Count);
+            var targetpages = new List<IVisio.Page>(pages.Count);
 
             foreach (IVisio.Page p in pages)
             {
-                target_pages.Add(p);
+                targetpages.Add(p);
             }
 
             var empty_page = pages.Add();
 
-            foreach (IVisio.Page p in target_pages)
+            foreach (IVisio.Page p in targetpages)
             {
                 p.Delete(1);
             }
@@ -173,23 +173,23 @@ namespace VisioAutomation_Tests
             return s;
         }
 
-        protected string GetTestResultsOutPath(string path)
+        protected string _get_test_results_out_path(string path)
         {
-            return System.IO.Path.Combine(this.TestResultsOutFolder, path);
+            return System.IO.Path.Combine(this._get_test_results_out_folder, path);
         }
 
-        private static string test_result_out_folder;
+        private static string _test_result_out_folder;
 
-        protected string TestResultsOutFolder
+        protected string _get_test_results_out_folder
         {
             get
             {
-                if (test_result_out_folder == null)
+                if (_test_result_out_folder == null)
                 {
                     var asm = System.Reflection.Assembly.GetExecutingAssembly();
-                    test_result_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
+                    _test_result_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
                 }
-                return test_result_out_folder;
+                return _test_result_out_folder;
             }
         }
 

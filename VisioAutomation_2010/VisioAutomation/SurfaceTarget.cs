@@ -455,7 +455,7 @@ namespace VisioAutomation
 
             _enforce_valid_result_type(typeof(TResult));
 
-            var flags = TypeToVisGetSetArgs(typeof(TResult));
+            var flags = _type_to_vis_get_set_args(typeof(TResult));
 
             System.Array results_sa = null;
 
@@ -533,7 +533,7 @@ namespace VisioAutomation
                     || result_type == typeof(string));
         }
 
-        private static IVisio.VisGetSetArgs TypeToVisGetSetArgs(System.Type type)
+        private static IVisio.VisGetSetArgs _type_to_vis_get_set_args(System.Type type)
         {
             IVisio.VisGetSetArgs flags;
             if (type == typeof(int))

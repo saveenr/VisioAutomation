@@ -37,30 +37,5 @@ namespace VisioScripting.Commands
             string s = string.Format(fmt, items);
             this._client.ClientContext.WriteError(s);
         }
-
-        public void WriteUser(string s)
-        {
-            this._client.ClientContext.WriteUser(s);
-        }
-
-        public void WriteDebug(string s)
-        {
-            this._client.ClientContext.WriteDebug(s);
-        }
-
-        public void WriteVerbose(string s)
-        {
-            this._client.ClientContext.WriteVerbose(s);
-        }
-
-        public void WriteWarning(string s)
-        {
-            this._client.ClientContext.WriteWarning(s);
-        }
-
-        public void WriteError(string s)
-        {
-            this._client.ClientContext.WriteError(s);
-        }
     }
 }
