@@ -28,7 +28,7 @@ namespace VisioPowerShell.Commands.VisioPage
             }
 
             var targetdoc = new VisioScripting.TargetDocument(this.Document).Resolve(this.Client);
-            var pages = this.Client.Page.FindPagesInDocumentByName(targetdoc, this.Name, this.Type);
+            var pages = this.Client.Page.FindPagesByName(targetdoc, this.Name, this.Type);
             this.WriteObject(pages, true);
         }
     }

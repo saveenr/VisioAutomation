@@ -113,7 +113,7 @@ namespace VisioScripting.Commands
             return new_page;
         }
 
-        public void SetActivePageBackground(TargetPages targetpages, string background_page_name)
+        public void SetBackground(TargetPages targetpages, string background_page_name)
         {
             if (background_page_name == null)
             {
@@ -150,7 +150,7 @@ namespace VisioScripting.Commands
 
             // don't allow the page to be set as a background to itself
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetActivePageBackground)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetBackground)))
             {
                 foreach (var page in targetpages.Items)
                 {
@@ -165,11 +165,11 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page DuplicatePage(TargetPage targetpage)
+        public IVisio.Page Duplicate(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicatePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(Duplicate)))
             {
                 var src_page = targetpage.Page;
                 var doc = src_page.Document;
@@ -185,7 +185,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Page DuplicatePageToDocument(TargetPage targetpage, IVisio.Document dest_doc)
+        public IVisio.Page DuplicateToDocument(TargetPage targetpage, IVisio.Document dest_doc)
         {
             targetpage = targetpage.Resolve(this._client);
 
@@ -264,11 +264,11 @@ namespace VisioScripting.Commands
             }
 
         }
-        public void ResizePageToFitContents(TargetPages targetpages, VisioAutomation.Geometry.Size bordersize)
+        public void ResizeToFitContents(TargetPages targetpages, VisioAutomation.Geometry.Size bordersize)
         {
             targetpages = targetpages.Resolve(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizePageToFitContents)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizeToFitContents)))
             {
                 foreach (var page in targetpages.Items)
                 {
@@ -412,7 +412,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public List<IVisio.Shape> GetShapesOnPageByID(TargetPage targetpage, int[] shapeids)
+        public List<IVisio.Shape> GetShapesyID(TargetPage targetpage, int[] shapeids)
         {
             targetpage = targetpage.Resolve(this._client);
             var shapes = targetpage.Page.Shapes;
@@ -426,14 +426,14 @@ namespace VisioScripting.Commands
         }
 
 
-        public List<IVisio.Shape> GetShapesOnPageByName(TargetPage targetpage, string[] shapenames)
+        public List<IVisio.Shape> GetShapesByName(TargetPage targetpage, string[] shapenames)
         {
             targetpage = targetpage.Resolve(this._client);
 
-            return this.GetShapesOnPageByName(targetpage, shapenames, false);
+            return this.GetShapesByName(targetpage, shapenames, false);
         }
 
-        public List<IVisio.Shape> GetShapesOnPageByName(TargetPage targetpage, string[] shapenames, bool ignore_bad_names)
+        public List<IVisio.Shape> GetShapesByName(TargetPage targetpage, string[] shapenames, bool ignore_bad_names)
         {
             targetpage = targetpage.Resolve(this._client);
 
@@ -453,7 +453,7 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> FindPagesInDocumentByName(TargetDocument targetdoc, string name, Models.PageType pagetype)
+        public List<IVisio.Page> FindPagesByName(TargetDocument targetdoc, string name, Models.PageType pagetype)
         {
             targetdoc = targetdoc.Resolve(this._client);
 
@@ -500,7 +500,7 @@ namespace VisioScripting.Commands
             throw new System.ArgumentOutOfRangeException(nameof(pagetype),msg);
         }
 
-        public List<IVisio.Shape> GetShapesOnPage(TargetPage targetpage)
+        public List<IVisio.Shape> GetShapes(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);
             var shapes = targetpage.Page.Shapes.ToList();
