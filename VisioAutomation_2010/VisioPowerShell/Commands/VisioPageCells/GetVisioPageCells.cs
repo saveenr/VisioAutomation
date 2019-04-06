@@ -27,11 +27,11 @@ namespace VisioPowerShell.Commands.VisioPageCells
             
             var result_dt = new System.Data.DataTable();
 
-            foreach (var target_page in targetpages.Pages)
+            foreach (var targetpage in targetpages.Pages)
             {
-                var target_pagesheet = target_page.PageSheet;
-                var target_shapeids = new List<int> { target_pagesheet.ID };
-                var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
+                var targetpage_shapesheet = targetpage.PageSheet;
+                var targetpage_shapeshapeids = new List<int> { targetpage_shapesheet.ID };
+                var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, targetpage_shapeshapeids, surface);
                 result_dt.Merge(dt);
             }
 

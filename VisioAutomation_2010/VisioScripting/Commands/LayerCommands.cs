@@ -42,10 +42,10 @@ namespace VisioScripting.Commands
             return layer;
         }
 
-        public List<IVisio.Layer> GetLayersOnPage(TargetPage target_page)
+        public List<IVisio.Layer> GetLayersOnPage(TargetPage targetpage)
         {
-            target_page = target_page.Resolve(this._client);
-            return target_page.Page.Layers.ToList();
+            targetpage = targetpage.Resolve(this._client);
+            return targetpage.Page.Layers.ToList();
         }
     }
 }

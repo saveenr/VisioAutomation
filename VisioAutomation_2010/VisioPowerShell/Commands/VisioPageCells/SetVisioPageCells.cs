@@ -39,19 +39,19 @@ namespace VisioPowerShell.Commands.VisioPageCells
             {
                 for (int i = 0; i < targetpages.Pages.Count; i++)
                 {
-                    var target_page = targetpages.Pages[i];
-                    this.Client.Output.WriteVerbose("Start Update Page Name={0}", target_page.NameU);
+                    var targetpage = targetpages.Pages[i];
+                    this.Client.Output.WriteVerbose("Start Update Page Name={0}", targetpage.NameU);
 
-                    var target_pagesheet = target_page.PageSheet;
-                    int target_pagesheet_id = target_pagesheet.ID;
+                    var targetpage_shapesheet = targetpage.PageSheet;
+                    int targetpage_shapesheetid = targetpage_shapesheet.ID;
                     var target_cells = this.Cells[i % this.Cells.Length];
                     var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                     writer.BlastGuards = this.BlastGuards;
                     writer.TestCircular = this.TestCircular;
-                    target_cells.Apply(writer, (short)target_pagesheet_id);
-                    writer.Commit(target_page, VisioAutomation.ShapeSheet.CellValueType.Formula);
+                    target_cells.Apply(writer, (short)targetpage_shapesheetid);
+                    writer.Commit(targetpage, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
-                    this.Client.Output.WriteVerbose("End Update Page Name={0}", target_page.NameU);
+                    this.Client.Output.WriteVerbose("End Update Page Name={0}", targetpage.NameU);
                 }
             }
         }
