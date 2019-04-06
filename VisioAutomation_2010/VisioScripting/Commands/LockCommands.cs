@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
-using VisioAutomation.Shapes;
+using VA=VisioAutomation;
 using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioScripting.Commands
@@ -13,7 +12,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetLockCells(TargetShapes targetshapes, LockCells lockcells)
+        public void SetLockCells(TargetShapes targetshapes, VA.Shapes.LockCells lockcells)
         {
             targetshapes = targetshapes.Resolve(this._client);
             if (targetshapes.Items.Count < 1)
@@ -37,16 +36,16 @@ namespace VisioScripting.Commands
         }
 
 
-        public Dictionary<int,LockCells> GetLockCells(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<int, VA.Shapes.LockCells> GetLockCells(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
 
             targetshapes = targetshapes.Resolve(this._client);
             if (targetshapes.Items.Count < 1)
             {
-                return new Dictionary<int, LockCells>();
+                return new Dictionary<int, VA.Shapes.LockCells>();
             }
 
-            var dic = new Dictionary<int, LockCells>();
+            var dic = new Dictionary<int, VA.Shapes.LockCells>();
 
             var page = targetshapes.Items[0].ContainingPage;
 

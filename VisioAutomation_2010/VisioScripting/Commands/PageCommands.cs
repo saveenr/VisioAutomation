@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
-using VisioScripting.Models;
+using VA = VisioAutomation;
+using VASS =VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -259,7 +258,7 @@ namespace VisioScripting.Commands
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
 
-                    writer.Commit(page.PageSheet, CellValueType.Formula);
+                    writer.Commit(page.PageSheet, VASS.CellValueType.Formula);
                 }
 
             }
@@ -289,7 +288,7 @@ namespace VisioScripting.Commands
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValues(cells);
                     writer.BlastGuards = true;
-                    writer.Commit(page, CellValueType.Formula);
+                    writer.Commit(page, VASS.CellValueType.Formula);
                 }
             }
         }
@@ -306,7 +305,7 @@ namespace VisioScripting.Commands
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
                     writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
-                    writer.Commit(page_sheet, CellValueType.Formula);
+                    writer.Commit(page_sheet, VASS.CellValueType.Formula);
                 }
             }
         }

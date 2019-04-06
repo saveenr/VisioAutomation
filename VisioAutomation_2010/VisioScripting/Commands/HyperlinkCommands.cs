@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
             targetshapes = targetshapes.Resolve(this._client);
 
