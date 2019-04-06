@@ -149,13 +149,13 @@
       <Project>{d0eda4f5-bb56-45cd-b95a-d061e90f1160}</Project>
       <Name>VisioAutomation.DocumentAnalysis</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
+      <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>
+      <Name>VisioAutomation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioScripting\VisioScripting.csproj">
       <Project>{f3e3a5a8-de55-44ed-87f3-7962c3d22a88}</Project>
       <Name>VisioScripting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
-      <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
-      <Name>VisioAutomation</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioPowerShell\VisioPowerShell.csproj">
       <Project>{6dfb7c5e-7ac1-48ee-a065-2075921a7413}</Project>
