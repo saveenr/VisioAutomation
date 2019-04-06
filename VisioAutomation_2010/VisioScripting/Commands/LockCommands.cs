@@ -15,12 +15,12 @@ namespace VisioScripting.Commands
         public void SetLockCells(TargetShapes targetshapes, VA.Shapes.LockCells lockcells)
         {
             targetshapes = targetshapes.Resolve(this._client);
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
-            var page = targetshapes.Items[0].ContainingPage;
+            var page = targetshapes.Shapes[0].ContainingPage;
             var targetshapeids = targetshapes.ToShapeIDs();
             var writer = new VASS.Writers.SidSrcWriter();
 
@@ -40,14 +40,14 @@ namespace VisioScripting.Commands
         {
 
             targetshapes = targetshapes.Resolve(this._client);
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new Dictionary<int, VA.Shapes.LockCells>();
             }
 
             var dic = new Dictionary<int, VA.Shapes.LockCells>();
 
-            var page = targetshapes.Items[0].ContainingPage;
+            var page = targetshapes.Shapes[0].ContainingPage;
 
             var target_shapeids = targetshapes.ToShapeIDs();
 

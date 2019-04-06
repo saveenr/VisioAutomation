@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
             var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return dicof_shape_to_cpdic;
             }
@@ -30,9 +30,9 @@ namespace VisioScripting.Commands
             var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, shapeidpairs, CellValueType.Formula);
 
 
-            for (int i = 0; i < targetshapes.Items.Count; i++)
+            for (int i = 0; i < targetshapes.Shapes.Count; i++)
             {
-                var shape = targetshapes.Items[i];
+                var shape = targetshapes.Shapes[i];
                 var cpdic = listof_cpdic[i];
                 dicof_shape_to_cpdic[shape] = cpdic;
             }
@@ -49,8 +49,8 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.Resolve(this._client);
 
-            var results = new List<bool>(targetshapes.Items.Count);
-            var values = targetshapes.Items.Select(shape => CustomPropertyHelper.Contains(shape, name));
+            var results = new List<bool>(targetshapes.Shapes.Count);
+            var values = targetshapes.Shapes.Select(shape => CustomPropertyHelper.Contains(shape, name));
             results.AddRange(values);
 
             return results;
@@ -70,14 +70,14 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteCustomPropertyWithName)))
             {
-                foreach (var shape in targetshapes.Items)
+                foreach (var shape in targetshapes.Shapes)
                 {
                     CustomPropertyHelper.Delete(shape, name);
                 }
@@ -93,7 +93,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
@@ -102,7 +102,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetCustomProperty)))
             {
-                foreach (var shape in targetshapes.Items)
+                foreach (var shape in targetshapes.Shapes)
                 {
                     CustomPropertyHelper.Set(shape, name, customprop);
                 }

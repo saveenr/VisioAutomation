@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return dicof_shape_to_udcelldic;
             }
@@ -30,9 +30,9 @@ namespace VisioScripting.Commands
             var shapeidpairs = targetshapes.ToShapeIDPairs();
             var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
 
-            for (int i = 0; i < targetshapes.Items.Count; i++)
+            for (int i = 0; i < targetshapes.Shapes.Count; i++)
             {
-                var shape = targetshapes.Items[i];
+                var shape = targetshapes.Shapes[i];
                 var props = listof_udcelldic[i];
                 dicof_shape_to_udcelldic[shape] = props;
             }
@@ -49,7 +49,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new List<bool>();
             }
@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             } 
@@ -81,7 +81,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteUserDefinedCellsByName)))
             {
-                foreach (var shape in targetshapes.Items)
+                foreach (var shape in targetshapes.Shapes)
                 {
                     VA.Shapes.UserDefinedCellHelper.Delete(shape, name);
                 }
@@ -92,14 +92,14 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetUserDefinedCell)))
             {
-                foreach (var shape in targetshapes.Items)
+                foreach (var shape in targetshapes.Shapes)
                 {
                     VA.Shapes.UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells);
                 }

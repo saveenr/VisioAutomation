@@ -18,13 +18,13 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count <1)
+            if (targetshapes.Shapes.Count <1)
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>>();
             }
 
             var dicof_shape_to_cxnpoint = new Dictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>>();
-            foreach (var shape in targetshapes.Items)
+            foreach (var shape in targetshapes.Shapes)
             {
                 var cp = VisioAutomation.Shapes.ConnectionPointCells.GetCells(shape, VASS.CellValueType.Formula);
                 dicof_shape_to_cxnpoint[shape] = cp;
@@ -41,7 +41,7 @@ namespace VisioScripting.Commands
         {
             targets = targets.Resolve(this._client);
 
-            if (targets.Items.Count < 1)
+            if (targets.Shapes.Count < 1)
             {
                 return new List<int>(0);
             }
@@ -49,7 +49,7 @@ namespace VisioScripting.Commands
             int dirx = 0;
             int diry = 0;
 
-            var indices = new List<int>(targets.Items.Count);
+            var indices = new List<int>(targets.Shapes.Count);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(AddConnectionPoint)))
             {
@@ -60,7 +60,7 @@ namespace VisioScripting.Commands
                 cxnpointcells.DirY = diry;
                 cxnpointcells.Type = (int)type;
 
-                foreach (var shape in targets.Items)
+                foreach (var shape in targets.Shapes)
                 {
                     int index = VA.Shapes.ConnectionPointHelper.Add(shape, cxnpointcells);
                     indices.Add(index);
@@ -83,14 +83,14 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
             // restrict the operation to those shapes that actually have enough
             // connection points to qualify for deleting 
-            var qualified_shapes = targetshapes.Items.Where(shape => VA.Shapes.ConnectionPointHelper.GetCount(shape) > index);
+            var qualified_shapes = targetshapes.Shapes.Where(shape => VA.Shapes.ConnectionPointHelper.GetCount(shape) > index);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteConnectionPointAtIndex)))
             {

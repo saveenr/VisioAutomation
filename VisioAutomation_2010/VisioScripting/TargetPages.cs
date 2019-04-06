@@ -23,7 +23,7 @@ namespace VisioScripting
         public TargetPages Resolve(VisioScripting.Client client)
         {
             // Handle the case where the object is already resolved
-            if (this.Items != null)
+            if (this._items != null)
             {
                 return this;
             }
@@ -40,5 +40,7 @@ namespace VisioScripting
 
             return new TargetPages(cmdtarget.ActivePage);
         }
+
+        public IList<IVisio.Page> Pages => this._items;
     }
 }

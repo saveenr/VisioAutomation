@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
                 // start reusing the texts from the beginning
 
                 int count = 0;
-                foreach (var shape in targetshapes.Items)
+                foreach (var shape in targetshapes.Shapes)
                 {
                     string text = texts[count%texts.Count];
                     if (text != null)
@@ -49,12 +49,12 @@ namespace VisioScripting.Commands
         {
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new List<string>(0);
             }
 
-            var texts = targetshapes.Items.Select(s => s.Text).ToList();
+            var texts = targetshapes.Shapes.Select(s => s.Text).ToList();
             return texts;
         }
 
@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return new List<VisioAutomation.Text.TextFormat>(0);
             }

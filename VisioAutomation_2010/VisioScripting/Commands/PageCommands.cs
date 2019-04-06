@@ -59,7 +59,7 @@ namespace VisioScripting.Commands
         {
             targetpages = targetpages.Resolve(this._client);
 
-            foreach (var page in targetpages.Items)
+            foreach (var page in targetpages.Pages)
             {
                 page.Delete(renumber ? (short) 1 : (short) 0);
             }
@@ -69,7 +69,7 @@ namespace VisioScripting.Commands
         {
             targetpages = targetpages.Resolve(this._client);
 
-            if (targetpages.Items.Count < 1)
+            if (targetpages.Pages.Count < 1)
             {
                 throw new System.ArgumentException("No pages found");
             }
@@ -78,7 +78,7 @@ namespace VisioScripting.Commands
             var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
             var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
 
-            var cellqueryresult = query.GetResults<double>(targetpages.Items[0].PageSheet);
+            var cellqueryresult = query.GetResults<double>(targetpages.Pages[0].PageSheet);
             var row = cellqueryresult[0];
             double height = row[col_height];
             double width = row[col_width];
@@ -122,12 +122,12 @@ namespace VisioScripting.Commands
 
             targetpages = targetpages.Resolve(this._client);
 
-            if (targetpages.Items.Count < 1)
+            if (targetpages.Pages.Count < 1)
             {
                 return;
             }
 
-            var page0 = targetpages.Items[0];
+            var page0 = targetpages.Pages[0];
             var doc = page0.Document;
             var doc_pages = doc.Pages;
 
@@ -152,7 +152,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetBackground)))
             {
-                foreach (var page in targetpages.Items)
+                foreach (var page in targetpages.Pages)
                 {
                     if (page == bgpage)
                     {
@@ -209,7 +209,7 @@ namespace VisioScripting.Commands
         public Models.PageOrientation GetPageOrientation( TargetPages targetpages )
         {
             targetpages = targetpages.Resolve(this._client);
-            return PageCommands._GetPageOrientation(targetpages.Items[0]);
+            return PageCommands._GetPageOrientation(targetpages.Pages[0]);
         }
         
         private static Models.PageOrientation _GetPageOrientation(IVisio.Page page)
@@ -237,7 +237,7 @@ namespace VisioScripting.Commands
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageOrientation)))
             {
 
-                foreach (var page in targetpages.Items)
+                foreach (var page in targetpages.Pages)
                 {
                     var old_orientation = PageCommands._GetPageOrientation(page);
 
@@ -270,7 +270,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizeToFitContents)))
             {
-                foreach (var page in targetpages.Items)
+                foreach (var page in targetpages.Pages)
                 {
                     page.ResizeToFitContents(bordersize);
                 }
@@ -283,7 +283,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageFormatCells)))
             {
-                foreach (var page in targetpages.Items)
+                foreach (var page in targetpages.Pages)
                 {
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValues(cells);
@@ -299,7 +299,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
-                foreach (var page in targetpages.Items)
+                foreach (var page in targetpages.Pages)
                 {
                     var page_sheet = page.PageSheet;
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
@@ -347,7 +347,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
-                foreach (var page in targetpages.Items)
+                foreach (var page in targetpages.Pages)
                 {
                     layout.Apply(page);
                 }

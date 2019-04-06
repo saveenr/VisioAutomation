@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
             
             var result_dt = new System.Data.DataTable();
 
-            foreach (var target_page in targetpages.Items)
+            foreach (var target_page in targetpages.Pages)
             {
                 var target_pagesheet = target_page.PageSheet;
                 var target_shapeids = new List<int> { target_pagesheet.ID };
@@ -38,9 +38,9 @@ namespace VisioPowerShell.Commands.VisioPageCells
             // Annotate the returned datatable to disambiguate rows
             var pageindex_col = result_dt.Columns.Add("PageIndex", typeof(System.Int32));
             pageindex_col.SetOrdinal(0);
-            for (int row_index = 0; row_index < targetpages.Items.Count; row_index++)
+            for (int row_index = 0; row_index < targetpages.Pages.Count; row_index++)
             {
-                result_dt.Rows[row_index][pageindex_col.ColumnName] = targetpages.Items[row_index].Index;
+                result_dt.Rows[row_index][pageindex_col.ColumnName] = targetpages.Pages[row_index].Index;
             }
 
             this.WriteObject(result_dt);

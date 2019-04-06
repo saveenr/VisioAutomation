@@ -37,7 +37,7 @@ namespace VisioScripting.Commands
 
             targetshapes = targetshapes.Resolve(this._client);
 
-            if (targetshapes.Items.Count < 1)
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
@@ -46,7 +46,7 @@ namespace VisioScripting.Commands
             {
                 int numnames = names.Count;
 
-                int up_to = System.Math.Min(numnames, targetshapes.Items.Count);
+                int up_to = System.Math.Min(numnames, targetshapes.Shapes.Count);
 
                 for (int i = 0; i < up_to; i++)
                 {
@@ -54,7 +54,7 @@ namespace VisioScripting.Commands
 
                     if (new_name != null)
                     {
-                        var shape = targetshapes.Items[i];
+                        var shape = targetshapes.Shapes[i];
                         shape.Name = new_name;
                     }
                 }

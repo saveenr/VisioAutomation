@@ -25,13 +25,13 @@ namespace VisioScripting
         {
             _verify_resolved();
 
-            if (this.Items == null)
+            if (this._items == null)
             {
                 throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
             }
 
-            var shapeids = this.Items.Select(s => s.ID); 
-            var target_shapeids = new List<int>(this.Items.Count);
+            var shapeids = this._items.Select(s => s.ID); 
+            var target_shapeids = new List<int>(this._items.Count);
             target_shapeids.AddRange(shapeids);
             return target_shapeids;
         }
@@ -40,12 +40,12 @@ namespace VisioScripting
         {
             _verify_resolved();
 
-            if (this.Items == null)
+            if (this._items == null)
             {
                 throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
             }
 
-            return VisioAutomation.ShapeIDPairs.FromShapes(this.Items);
+            return VisioAutomation.ShapeIDPairs.FromShapes(this._items);
         }
 
         internal int SelectShapesAndCount(VisioScripting.Client client)
@@ -56,21 +56,21 @@ namespace VisioScripting
             var active_window = app.ActiveWindow;
             var sel = active_window.Selection;
 
-            if (this.Items == null)
+            if (this._items == null)
             {
                 int n = sel.Count;
                 client.Output.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
                 return n;
             }
 
-            client.Output.WriteVerbose("GetTargetSelectionCount: Resetting selection to specified {0} shapes", this.Items.Count);
+            client.Output.WriteVerbose("GetTargetSelectionCount: Resetting selection to specified {0} shapes", this._items.Count);
 
             // Force empty selection
             active_window.DeselectAll();
             active_window.DeselectAll(); // doing this twice is deliberate
 
             // Force selection to specific shapes
-            active_window.Select(this.Items, IVisio.VisSelectArgs.visSelect);
+            active_window.Select(this._items, IVisio.VisSelectArgs.visSelect);
 
             int selected_count = sel.Count;
             return selected_count;
@@ -95,5 +95,7 @@ namespace VisioScripting
                 throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
             }
         }
+
+        public IList<IVisio.Shape> Shapes => this._items;
     }
 }

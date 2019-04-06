@@ -42,5 +42,7 @@ namespace VisioScripting
                 return new TargetDocuments(docs);
             }
         }
+
+        public IList<IVisio.Document> Documents => this._items;
     }
 }
