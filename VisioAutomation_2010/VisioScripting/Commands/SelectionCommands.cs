@@ -166,7 +166,7 @@ namespace VisioScripting.Commands
                 layer);
         }
 
-        public IList<IVisio.Shape> GetShapesInSelection(TargetSelection targetselection)
+        public IList<IVisio.Shape> GetShapes(TargetSelection targetselection)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             var window = cmdtarget.Application.ActiveWindow;
@@ -174,7 +174,7 @@ namespace VisioScripting.Commands
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(selection);
         }
 
-        public List<IVisio.Shape> GetShapesInSelectionRecursive(TargetSelection targetselection)
+        public List<IVisio.Shape> GetShapesRecursive(TargetSelection targetselection)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             var window = cmdtarget.Application.ActiveWindow;
@@ -182,7 +182,7 @@ namespace VisioScripting.Commands
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapesRecursive(selection);
         }
 
-        public int GetCountOfSelectedShapes(TargetSelection targetselection)
+        public int GetShapeCount(TargetSelection targetselection)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
             var active_window = cmdtarget.Application.ActiveWindow;
@@ -221,7 +221,7 @@ namespace VisioScripting.Commands
             return shapes;
         }
 
-        public void DeleteShapesInSelection(TargetSelection targetselection)
+        public void DeleteShapes(TargetSelection targetselection)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -250,7 +250,7 @@ namespace VisioScripting.Commands
             selection.Copy(flags);
         }
 
-        public void DuplicateSelectedShapes(TargetShapes targetshapes )
+        public void DuplicateShapes(TargetShapes targetshapes )
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -269,12 +269,12 @@ namespace VisioScripting.Commands
             selection.Duplicate();
         }
 
-        public bool SelectionContainsShapes(TargetSelection targetselection)
+        public bool ContainsShapes(TargetSelection targetselection)
         {
-            return this.SelectionContainsShapes(targetselection, 1);
+            return this.ContainsShapes(targetselection, 1);
         }
 
-        public bool SelectionContainsShapes(TargetSelection targetselection, int min_items)
+        public bool ContainsShapes(TargetSelection targetselection, int min_items)
         {
             if (min_items <= 0)
             {

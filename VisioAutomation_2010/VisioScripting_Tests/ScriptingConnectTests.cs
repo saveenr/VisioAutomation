@@ -41,7 +41,7 @@ namespace VisioAutomation_Tests.Scripting
             var page = new VisioScripting.TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
-            var shapes = client.Selection.GetShapesInSelection(new TargetSelection());
+            var shapes = client.Selection.GetShapes(new TargetSelection());
             foreach (var shape in shapes)
             {
                 writer.SetFormula( shape.ID16, VA.ShapeSheet.SrcConstants.LineEndArrow, "13");

@@ -21,21 +21,21 @@ namespace VisioAutomation_Tests.Scripting
             var targetwindow = new VisioScripting.TargetWindow();
 
             client.Selection.SelectAllShapes(targetwindow);
-            var s0 = client.Selection.GetShapesInSelection(new TargetSelection());
+            var s0 = client.Selection.GetShapes(new TargetSelection());
             Assert.AreEqual(4, s0.Count);
 
             var g = client.Grouping.Group(new VisioScripting.TargetSelection());
             client.Selection.SelectNone(targetwindow);
             client.Selection.SelectAllShapes(targetwindow);
 
-            var s1 = client.Selection.GetShapesInSelection(new TargetSelection());
+            var s1 = client.Selection.GetShapes(new TargetSelection());
             Assert.AreEqual(1, s1.Count);
 
             var targetshapes = new VisioScripting.TargetShapes();
 
             client.Grouping.Ungroup(targetshapes);
             client.Selection.SelectAllShapes(targetwindow);
-            var s2 = client.Selection.GetShapesInSelection(new TargetSelection());
+            var s2 = client.Selection.GetShapes(new TargetSelection());
             Assert.AreEqual(4, s2.Count);
             var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
