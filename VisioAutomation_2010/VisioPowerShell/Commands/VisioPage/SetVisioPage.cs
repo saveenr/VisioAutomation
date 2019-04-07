@@ -22,11 +22,11 @@ namespace VisioPowerShell.Commands.VisioPage
         {
             if (this.Name != null)
             {
-                this.Client.Page.SetActivePageByPageName(this.Name);
+                this.Client.Page.SetActivePageByPageName(new VisioScripting.TargetActiveDocument(), this.Name);
             }
             else if (this.Page != null)
             {
-                this.Client.Page.SetActivePage(this.Page);
+                this.Client.Page.SetActivePage(new VisioScripting.TargetPage(this.Page));
             }
             else if (this.PageNumber > 0)
             {

@@ -28,7 +28,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException(msg);
             }
 
-            var old_selected_shapes = this._client.Selection.GetShapesInSelection();
+            var old_selected_shapes = this._client.Selection.GetShapesInSelection( new VisioScripting.TargetSelection());
 
             var targetwindow = new VisioScripting.TargetWindow();
             this._client.Selection.SelectNone(targetwindow);

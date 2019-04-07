@@ -31,7 +31,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
                 return;
             }
 
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapesInSelection();
+            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapesInSelection(new VisioScripting.TargetSelection());
 
             if (target_shapes.Count < 1)
             {

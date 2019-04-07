@@ -1,4 +1,5 @@
 using System.Linq;
+using VisioScripting;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioShape
@@ -30,7 +31,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 if (this.Recursive)
                 {
                     this.WriteVerbose("Returning selected shapes (nested)");
-                    var shapes = this.Client.Selection.GetShapesInSelectionRecursive();
+                    var shapes = this.Client.Selection.GetShapesInSelectionRecursive(new TargetSelection());
                     this.WriteObject(shapes, true);
                 }
                 if (this.SubSelected)
@@ -42,7 +43,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 else
                 {
                     this.WriteVerbose("Returning selected shapes ");
-                    var shapes = this.Client.Selection.GetShapesInSelection();
+                    var shapes = this.Client.Selection.GetShapesInSelection(new TargetSelection());
                     this.WriteObject(shapes, true);
                 }
 

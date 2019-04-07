@@ -164,7 +164,7 @@ namespace VisioPowerShell.Commands.VisioShape
             {
                 // Select the Shapes
                 ((SMA.Cmdlet)this).WriteVerbose("Selecting");
-                this.Client.Selection.SelectShapes(shape_objects);
+                this.Client.Selection.SelectShapes(new VisioScripting.TargetSelection(), shape_objects);
             }
 
             this.WriteObject(shape_objects, true);

@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.DocumentAnalysis;
+using VisioScripting;
 using VisioScripting.Models;
 using VA = VisioAutomation;
 
@@ -35,12 +36,12 @@ namespace VisioAutomation_Tests.Scripting
             var toshapes = new [] { s2,s3};
             var directed_connectors = client.Connection.ConnectShapes(fromshapes,toshapes, master);
             client.Selection.SelectNone(targetwindow);
-            client.Selection.SelectShapes(directed_connectors);
+            client.Selection.SelectShapes(new VisioScripting.TargetSelection(), directed_connectors);
 
             var page = new VisioScripting.TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
-            var shapes = client.Selection.GetShapesInSelection();
+            var shapes = client.Selection.GetShapesInSelection(new TargetSelection());
             foreach (var shape in shapes)
             {
                 writer.SetFormula( shape.ID16, VA.ShapeSheet.SrcConstants.LineEndArrow, "13");

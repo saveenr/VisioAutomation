@@ -11,7 +11,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public IVisio.Shape GroupShapes(TargetSelection targetselection)
+        public IVisio.Shape Group(TargetSelection targetselection)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 

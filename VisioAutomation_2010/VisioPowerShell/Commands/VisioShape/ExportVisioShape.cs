@@ -59,7 +59,7 @@ namespace VisioPowerShell.Commands.VisioShape
                     throw new System.ArgumentOutOfRangeException(nameof(this.Shapes), "Shapes parameter must contain at least one shape");
                 }
 
-                this.Client.Selection.SelectShapes(this.Shapes);
+                this.Client.Selection.SelectShapes(new VisioScripting.TargetSelection(), this.Shapes);
             }
 
             if (_static_html_extensions.Contains(ext))

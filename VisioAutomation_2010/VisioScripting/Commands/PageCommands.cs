@@ -16,23 +16,26 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetActivePage(IVisio.Page page)
+        public void SetActivePage(TargetPage targetpage)
         {
+            targetpage = targetpage.Resolve(this._client);
+
             var cmdtarget = this._client.GetCommandTargetDocument();
             var app = cmdtarget.Application;
-            this._client.Output.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
+            this._client.Output.WriteVerbose("Setting Active Page to \"{0}\"", targetpage.Page.Name);
             var window = app.ActiveWindow;
-            window.Page = page;
+            window.Page = targetpage.Page;
         }
 
-        public void SetActivePageByPageName(string name)
+        public void SetActivePageByPageName(TargetActiveDocument targetdoc, string name)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             var doc = cmdtarget.ActiveDocument;
             this._client.Output.WriteVerbose("Retrieving Page \"{0}\"", name);
             var pages = doc.Pages;
             var page = pages[name];
-            this.SetActivePage(page);
+
+            this.SetActivePage(new VisioScripting.TargetPage(page));
         }
 
         public void SetActivePageByPageNumber(int pagenumber)
@@ -45,7 +48,7 @@ namespace VisioScripting.Commands
             this._client.Output.WriteVerbose("Retrieving Page Number \"{0}\"", pagenumber);
             var pages = doc.Pages;
             var page = pages[pagenumber];
-            this.SetActivePage(page);
+            this.SetActivePage(new VisioScripting.TargetPage(page));
         }
         
         public IVisio.Page GetActivePage()
@@ -210,10 +213,10 @@ namespace VisioScripting.Commands
         public Models.PageOrientation GetPageOrientation( TargetPages targetpages )
         {
             targetpages = targetpages.Resolve(this._client);
-            return PageCommands._GetPageOrientation(targetpages.Pages[0]);
+            return PageCommands._get_page_orientation(targetpages.Pages[0]);
         }
         
-        private static Models.PageOrientation _GetPageOrientation(IVisio.Page page)
+        private static Models.PageOrientation _get_page_orientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -240,7 +243,7 @@ namespace VisioScripting.Commands
 
                 foreach (var page in targetpages.Pages)
                 {
-                    var old_orientation = PageCommands._GetPageOrientation(page);
+                    var old_orientation = PageCommands._get_page_orientation(page);
 
                     if (old_orientation == orientation)
                     {
@@ -339,7 +342,7 @@ namespace VisioScripting.Commands
             }
 
             var pages = docpages;
-            this._GoTo(pages, flags, cmdtarget);
+            this._go_to_page(pages, flags, cmdtarget);
         }
 
         public void LayoutPage(TargetPages targetpages, VisioAutomation.Models.LayoutStyles.LayoutStyleBase layout)
@@ -355,7 +358,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private void _GoTo(IVisio.Pages pages, Models.PageDirection flags, CommandTarget cmdtarget)
+        private void _go_to_page(IVisio.Pages pages, Models.PageDirection flags, CommandTarget cmdtarget)
         {
             if (pages == null)
             {
