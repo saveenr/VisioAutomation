@@ -23,7 +23,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeSelectionOnAxis(Models.Axis axis)
+        public void DistributeSelectionOnAxis(VisioScripting.TargetSelection targetselection, Models.Axis axis)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void NudgeSelection(double dx, double dy)
+        public void NudgeSelection(TargetSelection targetselection, double dx, double dy)
         {
             if (dx == 0.0 && dy == 0.0)
             {

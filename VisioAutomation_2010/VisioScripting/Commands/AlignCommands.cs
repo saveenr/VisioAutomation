@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void AlignSelectionHorizontal(Models.AlignmentHorizontal align)
+        public void AlignSelectionHorizontal(TargetSelection targetselection, Models.AlignmentHorizontal align)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -41,7 +41,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void AlignSelectionVertical(Models.AlignmentVertical align)
+        public void AlignSelectionVertical(TargetSelection targetselection, Models.AlignmentVertical align)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             

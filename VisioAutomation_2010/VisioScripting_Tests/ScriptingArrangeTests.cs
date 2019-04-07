@@ -115,7 +115,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(s2);
             client.Selection.SelectShapesById(s3);
 
-            client.Arrange.NudgeSelection(0.50, -0.25);
+            client.Arrange.NudgeSelection(new VisioScripting.TargetSelection(), 0.50, -0.25);
 
             var shapes = new[] { s1, s2, s3 };
             var shapeids = shapes.Select(s => (int) s.ID16).ToList();

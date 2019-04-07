@@ -30,7 +30,7 @@ namespace VisioAutomation_Tests.Scripting
                 File.Delete(output_filename);
             }
 
-            client.ExportSelection.ExportSelectionToHtml(output_filename);
+            client.ExportSelection.ExportSelectionToHtml(new VisioScripting.TargetSelection(), output_filename);
 
             AssertUtil.FileExists(output_filename);
             var targetdoc = new VisioScripting.TargetDocument();

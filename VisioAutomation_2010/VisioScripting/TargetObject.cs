@@ -25,4 +25,13 @@ namespace VisioScripting
 
         public bool IsResolved => !this.UseContext;
     }
+
+    public class TargetSelection 
+    {
+
+        public TargetSelection()
+        {
+        }
+
+    }
 }

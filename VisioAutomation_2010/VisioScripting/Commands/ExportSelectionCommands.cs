@@ -11,7 +11,7 @@ namespace VisioScripting.Commands
         {
         }
 
-        public void ExportSelectionToFile(string filename)
+        public void ExportSelectionToFile(TargetSelection targetselection, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -31,7 +31,7 @@ namespace VisioScripting.Commands
             selection.Export(filename);
         }
 
-        public void ExportSelectionToHtml(string filename)
+        public void ExportSelectionToHtml(TargetSelection targetselection, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

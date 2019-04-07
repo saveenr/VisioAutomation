@@ -1,3 +1,4 @@
+using VisioScripting;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioShape
@@ -27,27 +28,27 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                this.Client.Arrange.NudgeSelection(this.NudgeX, this.NudgeY);
+                this.Client.Arrange.NudgeSelection(new TargetSelection(), this.NudgeX, this.NudgeY);
             }
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Distribute.DistributeSelectionOnAxis(VisioScripting.Models.Axis.XAxis);
+                this.Client.Distribute.DistributeSelectionOnAxis(new TargetSelection(), VisioScripting.Models.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Distribute.DistributeSelectionOnAxis(VisioScripting.Models.Axis.YAxis);
+                this.Client.Distribute.DistributeSelectionOnAxis(new TargetSelection(), VisioScripting.Models.Axis.YAxis);
             }
 
             if (this.AlignVertical.HasValue)
             {
-                this.Client.Align.AlignSelectionVertical(this.AlignVertical.Value);
+                this.Client.Align.AlignSelectionVertical(new TargetSelection(), this.AlignVertical.Value);
             }
 
             if (this.AlignHorizontal.HasValue)
             {
-                this.Client.Align.AlignSelectionHorizontal(this.AlignHorizontal.Value);
+                this.Client.Align.AlignSelectionHorizontal(new TargetSelection(), this.AlignHorizontal.Value);
             }
 
         }
