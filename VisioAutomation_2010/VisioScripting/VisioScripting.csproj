@@ -80,7 +80,6 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandSet.cs" />
     <Compile Include="Commands\ApplicationCommands.cs" />
-    <Compile Include="Commands\ApplicationWindowCommands.cs" />
     <Compile Include="Commands\ArrangeCommands.cs" />
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Commands\ConnectionPointCommands.cs" />
