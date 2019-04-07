@@ -38,9 +38,12 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = client.Page.GetPageSize(tagetpages);
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
-            Assert.AreEqual(0, client.Selection.GetActiveSelection().Count);
+
+            var targetwindow = new VisioScripting.TargetWindow();
+
+            Assert.AreEqual(0, client.Selection.GetActiveSelection(targetwindow).Count);
             client.Draw.DrawRectangle(1, 1, 2, 2);
-            Assert.AreEqual(1, client.Selection.GetActiveSelection().Count);
+            Assert.AreEqual(1, client.Selection.GetActiveSelection(targetwindow).Count);
 
             var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);

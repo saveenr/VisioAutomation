@@ -13,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
         
-        public IVisio.Selection GetActiveSelection()
+        public IVisio.Selection GetActiveSelection(VisioScripting.TargetWindow targetwindow)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             var active_window = cmdtarget.Application.ActiveWindow;
@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
             return selection;
         }
 
-        public void SelectAllShapes()
+        public void SelectAllShapes(VisioScripting.TargetWindow targetwindow)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -66,7 +66,7 @@ namespace VisioScripting.Commands
             window.Select(shapes_to_select, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void SelectNone()
+        public void SelectNone(VisioScripting.TargetWindow targetwindow)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -75,7 +75,7 @@ namespace VisioScripting.Commands
             active_window.DeselectAll();
         }
 
-        public void SelectShapesById(IVisio.Shape shape)
+        public void SelectShapesById(VisioScripting.TargetWindow targetwindow, IVisio.Shape shape)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 

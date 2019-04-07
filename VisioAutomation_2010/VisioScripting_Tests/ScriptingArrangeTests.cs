@@ -28,10 +28,12 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            client.Selection.SelectNone();
-            client.Selection.SelectShapesById(s1);
-            client.Selection.SelectShapesById(s2);
-            client.Selection.SelectShapesById(s3);
+            var targetwindow = new VisioScripting.TargetWindow();
+
+            client.Selection.SelectNone(targetwindow);
+            client.Selection.SelectShapesById(targetwindow, s1);
+            client.Selection.SelectShapesById(targetwindow, s2);
+            client.Selection.SelectShapesById(targetwindow, s3);
 
             var targetshapes = new VisioScripting.TargetShapes();
 
@@ -66,10 +68,12 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            client.Selection.SelectNone();
-            client.Selection.SelectShapesById(s1);
-            client.Selection.SelectShapesById(s2);
-            client.Selection.SelectShapesById(s3);
+            var targetwindow = new VisioScripting.TargetWindow();
+
+            client.Selection.SelectNone(targetwindow);
+            client.Selection.SelectShapesById(targetwindow, s1);
+            client.Selection.SelectShapesById(targetwindow, s2);
+            client.Selection.SelectShapesById(targetwindow, s3);
 
             var targetshapes = new VisioScripting.TargetShapes();
             client.Distribute.DistributenOnAxis(targetshapes, VisioScripting.Models.Axis.XAxis , 0.25);
@@ -110,10 +114,12 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            client.Selection.SelectNone();
-            client.Selection.SelectShapesById(s1);
-            client.Selection.SelectShapesById(s2);
-            client.Selection.SelectShapesById(s3);
+            var targetwindow = new VisioScripting.TargetWindow();
+
+            client.Selection.SelectNone(targetwindow);
+            client.Selection.SelectShapesById(targetwindow, s1);
+            client.Selection.SelectShapesById(targetwindow, s2);
+            client.Selection.SelectShapesById(targetwindow, s3);
 
             client.Arrange.Nudge(new VisioScripting.TargetSelection(), 0.50, -0.25);
 

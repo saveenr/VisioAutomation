@@ -29,7 +29,8 @@ namespace VisioScripting.Commands
 
             var old_selected_shapes = this._client.Selection.GetShapesInSelection();
 
-            this._client.Selection.SelectNone();
+            var targetwindow = new VisioScripting.TargetWindow();
+            this._client.Selection.SelectNone(targetwindow);
             var application = cmdtarget.Application;
             var active_page = application.ActivePage;
             active_page.Export(filename);
@@ -72,10 +73,12 @@ namespace VisioScripting.Commands
                 }
                 string page_filname = string.Format("{0}_{1}_{2}{3}{4}", fbase, page_index, page.Name, bkgnd, ext);
 
+                var targetwindow = new VisioScripting.TargetWindow();
+
                 this._client.Output.WriteUser("file {0}", page_filname);
                 page_filname = System.IO.Path.Combine(pbase, page_filname);
                 active_window.Page = page;
-                this._client.Selection.SelectNone();
+                this._client.Selection.SelectNone(targetwindow);
                 page.Export(page_filname);
             }
             active_window.Page = old_page;

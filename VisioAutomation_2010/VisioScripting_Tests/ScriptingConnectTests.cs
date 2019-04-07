@@ -20,10 +20,11 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
 
-            client.Selection.SelectNone();
-            client.Selection.SelectShapesById(s1);
-            client.Selection.SelectShapesById(s2);
-            client.Selection.SelectShapesById(s3);
+            var targetwindow = new VisioScripting.TargetWindow();
+            client.Selection.SelectNone(targetwindow);
+            client.Selection.SelectShapesById(targetwindow, s1);
+            client.Selection.SelectShapesById(targetwindow, s2);
+            client.Selection.SelectShapesById(targetwindow, s3);
 
             client.Document.OpenStencilDocument("basic_u.vss");
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
@@ -33,7 +34,7 @@ namespace VisioAutomation_Tests.Scripting
             var fromshapes = new [] { s1,s2};
             var toshapes = new [] { s2,s3};
             var directed_connectors = client.Connection.ConnectShapes(fromshapes,toshapes, master);
-            client.Selection.SelectNone();
+            client.Selection.SelectNone(targetwindow);
             client.Selection.SelectShapes(directed_connectors);
 
             var page = new VisioScripting.TargetPage();
@@ -80,11 +81,11 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
 
             var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
-
-            client.Selection.SelectNone();
-            client.Selection.SelectShapesById(s1);
-            client.Selection.SelectShapesById(s2);
-            client.Selection.SelectShapesById(s3);
+            var targetwindow = new VisioScripting.TargetWindow();
+            client.Selection.SelectNone(targetwindow);
+            client.Selection.SelectShapesById(targetwindow, s1);
+            client.Selection.SelectShapesById(targetwindow, s2);
+            client.Selection.SelectShapesById(targetwindow, s3);
 
             client.Document.OpenStencilDocument("basic_u.vss");
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");

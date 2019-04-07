@@ -27,13 +27,15 @@ namespace VisioPowerShell.Commands.VisioShape
             }
             else
             {
+                var targetwindow = new VisioScripting.TargetWindow();
+
                 if (this.Operation == VisioScripting.Models.SelectionOperation.All)
                 {
-                    this.Client.Selection.SelectAllShapes();
+                    this.Client.Selection.SelectAllShapes(targetwindow);
                 }
                 else if (this.Operation == VisioScripting.Models.SelectionOperation.None)
                 {
-                    this.Client.Selection.SelectNone();
+                    this.Client.Selection.SelectNone(targetwindow);
                 }
                 else if (this.Operation == VisioScripting.Models.SelectionOperation.Invert)
                 {

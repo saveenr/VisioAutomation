@@ -19,8 +19,8 @@ namespace VisioAutomation_Tests.Scripting
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
-
-            client.Selection.SelectNone();
+            var targetwindow = new VisioScripting.TargetWindow();
+            client.Selection.SelectNone(targetwindow);
 
             var targetshapes = new VisioScripting.TargetShapes(s1,s2,s3);
             var targetshapeids = targetshapes.ToShapeIDs();
@@ -48,11 +48,11 @@ namespace VisioAutomation_Tests.Scripting
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
-
-            client.Selection.SelectNone();
-            client.Selection.SelectShapesById(s1);
-            client.Selection.SelectShapesById(s2);
-            client.Selection.SelectShapesById(s3);
+            var targetwindow = new VisioScripting.TargetWindow();
+            client.Selection.SelectNone(targetwindow);
+            client.Selection.SelectShapesById(targetwindow, s1);
+            client.Selection.SelectShapesById(targetwindow, s2);
+            client.Selection.SelectShapesById(targetwindow, s3);
 
             var targetshapes = new VisioScripting.TargetShapes();
             var prop_dic0 = client.CustomProperty.GetCustomProperties(targetshapes);
