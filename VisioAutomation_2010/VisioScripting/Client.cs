@@ -11,7 +11,6 @@ namespace VisioScripting
 
         public Commands.AlignCommands Align { get; }
         public Commands.ApplicationCommands Application { get; }
-        public Commands.ApplicationWindowCommands Window { get; }
         public Commands.ArrangeCommands Arrange { get; }
         public Commands.ChartingCommands Charting { get; }
         public Commands.ConnectionCommands Connection { get; }
@@ -78,7 +77,6 @@ namespace VisioScripting
             this.Undo = new Commands.UndoCommands(this);
             this.UserDefinedCell = new Commands.UserDefinedCellCommands(this);
             this.View = new Commands.ViewCommands(this);
-            this.Window = new Commands.ApplicationWindowCommands(this);
         }
 
         public System.Reflection.Assembly GetVisioAutomationAssembly()
