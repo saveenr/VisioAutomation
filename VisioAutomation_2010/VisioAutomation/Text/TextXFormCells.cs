@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -14,18 +15,15 @@ namespace VisioAutomation.Text
         public VASS.CellValue LocPinX { get; set; }
         public VASS.CellValue LocPinY { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-                yield return this.Create(nameof(this.PinX), VASS.SrcConstants.TextXFormPinX, this.PinX);
-                yield return this.Create(nameof(this.PinY), VASS.SrcConstants.TextXFormPinY, this.PinY);
-                yield return this.Create(nameof(this.LocPinX), VASS.SrcConstants.TextXFormLocPinX, this.LocPinX);
-                yield return this.Create(nameof(this.LocPinY), VASS.SrcConstants.TextXFormLocPinY, this.LocPinY);
-                yield return this.Create(nameof(this.Width), VASS.SrcConstants.TextXFormWidth, this.Width);
-                yield return this.Create(nameof(this.Height), VASS.SrcConstants.TextXFormHeight, this.Height);
-                yield return this.Create(nameof(this.Angle), VASS.SrcConstants.TextXFormAngle, this.Angle);
-            }
+            yield return this.Create(nameof(this.PinX), VASS.SrcConstants.TextXFormPinX, this.PinX);
+            yield return this.Create(nameof(this.PinY), VASS.SrcConstants.TextXFormPinY, this.PinY);
+            yield return this.Create(nameof(this.LocPinX), VASS.SrcConstants.TextXFormLocPinX, this.LocPinX);
+            yield return this.Create(nameof(this.LocPinY), VASS.SrcConstants.TextXFormLocPinY, this.LocPinY);
+            yield return this.Create(nameof(this.Width), VASS.SrcConstants.TextXFormWidth, this.Width);
+            yield return this.Create(nameof(this.Height), VASS.SrcConstants.TextXFormHeight, this.Height);
+            yield return this.Create(nameof(this.Angle), VASS.SrcConstants.TextXFormAngle, this.Angle);
         }
 
         public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)

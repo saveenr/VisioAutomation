@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -14,15 +15,10 @@ namespace VisioAutomation.Shapes
         {
         }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-
-
-                yield return this.Create(nameof(this.Value), VASS.SrcConstants.UserDefCellValue, this.Value);
-                yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.UserDefCellPrompt, this.Prompt);
-            }
+            yield return this.Create(nameof(this.Value), VASS.SrcConstants.UserDefCellValue, this.Value);
+            yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.UserDefCellPrompt, this.Prompt);
         }
 
         public void EncodeValues()

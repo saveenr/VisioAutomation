@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
+using VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
 {
@@ -22,27 +23,24 @@ namespace VisioAutomation.Text
         public VASS.CellValue Flags { get; set; }
         public VASS.CellValue BulletString { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-
-
-                yield return this.Create(nameof(this.IndentLeft), VASS.SrcConstants.ParaIndentLeft, this.IndentLeft);
-                yield return this.Create(nameof(this.IndentFirst), VASS.SrcConstants.ParaIndentFirst, this.IndentFirst);
-                yield return this.Create(nameof(this.IndentRight), VASS.SrcConstants.ParaIndentRight, this.IndentRight);
-                yield return this.Create(nameof(this.SpacingAfter), VASS.SrcConstants.ParaSpacingAfter, this.SpacingAfter);
-                yield return this.Create(nameof(this.SpacingBefore), VASS.SrcConstants.ParaSpacingBefore, this.SpacingBefore);
-                yield return this.Create(nameof(this.SpacingLine), VASS.SrcConstants.ParaSpacingLine, this.SpacingLine);
-                yield return this.Create(nameof(this.HorizontalAlign), VASS.SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
-                yield return this.Create(nameof(this.BulletFont), VASS.SrcConstants.ParaBulletFont, this.BulletFont);
-                yield return this.Create(nameof(this.Bullet), VASS.SrcConstants.ParaBullet, this.Bullet);
-                yield return this.Create(nameof(this.BulletFontSize), VASS.SrcConstants.ParaBulletFontSize, this.BulletFontSize);
-                yield return this.Create(nameof(this.LocalizeBulletFont), VASS.SrcConstants.ParaLocalizeBulletFont, this.LocalizeBulletFont);
-                yield return this.Create(nameof(this.TextPosAfterBullet), VASS.SrcConstants.ParaTextPosAfterBullet, this.TextPosAfterBullet);
-                yield return this.Create(nameof(this.Flags), VASS.SrcConstants.ParaFlags, this.Flags);
-                yield return this.Create(nameof(this.BulletString), VASS.SrcConstants.ParaBulletString, this.BulletString);
-            }
+            yield return this.Create(nameof(this.IndentLeft), VASS.SrcConstants.ParaIndentLeft, this.IndentLeft);
+            yield return this.Create(nameof(this.IndentFirst), VASS.SrcConstants.ParaIndentFirst, this.IndentFirst);
+            yield return this.Create(nameof(this.IndentRight), VASS.SrcConstants.ParaIndentRight, this.IndentRight);
+            yield return this.Create(nameof(this.SpacingAfter), VASS.SrcConstants.ParaSpacingAfter, this.SpacingAfter);
+            yield return this.Create(nameof(this.SpacingBefore), VASS.SrcConstants.ParaSpacingBefore, this.SpacingBefore);
+            yield return this.Create(nameof(this.SpacingLine), VASS.SrcConstants.ParaSpacingLine, this.SpacingLine);
+            yield return this.Create(nameof(this.HorizontalAlign), VASS.SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
+            yield return this.Create(nameof(this.BulletFont), VASS.SrcConstants.ParaBulletFont, this.BulletFont);
+            yield return this.Create(nameof(this.Bullet), VASS.SrcConstants.ParaBullet, this.Bullet);
+            yield return this.Create(nameof(this.BulletFontSize), VASS.SrcConstants.ParaBulletFontSize, this.BulletFontSize);
+            yield return this.Create(nameof(this.LocalizeBulletFont), VASS.SrcConstants.ParaLocalizeBulletFont,
+                this.LocalizeBulletFont);
+            yield return this.Create(nameof(this.TextPosAfterBullet), VASS.SrcConstants.ParaTextPosAfterBullet,
+                this.TextPosAfterBullet);
+            yield return this.Create(nameof(this.Flags), VASS.SrcConstants.ParaFlags, this.Flags);
+            yield return this.Create(nameof(this.BulletString), VASS.SrcConstants.ParaBulletString, this.BulletString);
         }
 
         public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
@@ -74,7 +72,7 @@ namespace VisioAutomation.Text
 
                 var cells = new Text.ParagraphFormatCells();
 
-                var names = cells.CellMetadata.Select(i => i.Name).ToList();
+                var names = cells.GetCellMetadata().Select(i => i.Name).ToList();
 
 
 

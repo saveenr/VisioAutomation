@@ -1,5 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
@@ -12,16 +13,13 @@ namespace VisioAutomation.Shapes
         public VASS.CellValue DirY { get; set; }
         public VASS.CellValue Type { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-                yield return this.Create(nameof(this.X), VASS.SrcConstants.ConnectionPointX, this.X);
-                yield return this.Create(nameof(this.Y), VASS.SrcConstants.ConnectionPointY, this.Y);
-                yield return this.Create(nameof(this.DirX), VASS.SrcConstants.ConnectionPointDirX, this.DirX);
-                yield return this.Create(nameof(this.DirY), VASS.SrcConstants.ConnectionPointDirY, this.DirY);
-                yield return this.Create(nameof(this.Type), VASS.SrcConstants.ConnectionPointType, this.Type);
-            }
+            yield return this.Create(nameof(this.X), VASS.SrcConstants.ConnectionPointX, this.X);
+            yield return this.Create(nameof(this.Y), VASS.SrcConstants.ConnectionPointY, this.Y);
+            yield return this.Create(nameof(this.DirX), VASS.SrcConstants.ConnectionPointDirX, this.DirX);
+            yield return this.Create(nameof(this.DirY), VASS.SrcConstants.ConnectionPointDirY, this.DirY);
+            yield return this.Create(nameof(this.Type), VASS.SrcConstants.ConnectionPointType, this.Type);
         }
 
         public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)

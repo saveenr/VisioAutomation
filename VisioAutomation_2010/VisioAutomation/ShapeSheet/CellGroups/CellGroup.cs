@@ -5,11 +5,15 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public class CellGroup
     {
-        public virtual IEnumerable<CellMetadataItem> CellMetadata { get; }
+
+        public virtual IEnumerable<CellMetadataItem> GetCellMetadata()
+        {
+            throw new System.NotImplementedException();
+        }
 
         public IEnumerable<SrcValuePair> GetSrcValuePairs()
         {
-            foreach (var pair in this.CellMetadata)
+            foreach (var pair in this.GetCellMetadata())
             {
                 yield return new SrcValuePair(pair.Src, pair.Value);
             }

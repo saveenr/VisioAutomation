@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -16,20 +17,17 @@ namespace VisioAutomation.Shapes
         public VASS.CellValue Default { get; set; }
         public VASS.CellValue Invisible { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-                yield return this.Create(nameof(this.Address), VASS.SrcConstants.HyperlinkAddress, this.Address);
-                yield return this.Create(nameof(this.Description), VASS.SrcConstants.HyperlinkDescription, this.Description);
-                yield return this.Create(nameof(this.ExtraInfo), VASS.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
-                yield return this.Create(nameof(this.Frame), VASS.SrcConstants.HyperlinkFrame, this.Frame);
-                yield return this.Create(nameof(this.SortKey), VASS.SrcConstants.HyperlinkSortKey, this.SortKey);
-                yield return this.Create(nameof(this.SubAddress), VASS.SrcConstants.HyperlinkSubAddress, this.SubAddress);
-                yield return this.Create(nameof(this.NewWindow), VASS.SrcConstants.HyperlinkNewWindow, this.NewWindow);
-                yield return this.Create(nameof(this.Default), VASS.SrcConstants.HyperlinkDefault, this.Default);
-                yield return this.Create(nameof(this.Invisible), VASS.SrcConstants.HyperlinkInvisible, this.Invisible);
-            }
+            yield return this.Create(nameof(this.Address), VASS.SrcConstants.HyperlinkAddress, this.Address);
+            yield return this.Create(nameof(this.Description), VASS.SrcConstants.HyperlinkDescription, this.Description);
+            yield return this.Create(nameof(this.ExtraInfo), VASS.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
+            yield return this.Create(nameof(this.Frame), VASS.SrcConstants.HyperlinkFrame, this.Frame);
+            yield return this.Create(nameof(this.SortKey), VASS.SrcConstants.HyperlinkSortKey, this.SortKey);
+            yield return this.Create(nameof(this.SubAddress), VASS.SrcConstants.HyperlinkSubAddress, this.SubAddress);
+            yield return this.Create(nameof(this.NewWindow), VASS.SrcConstants.HyperlinkNewWindow, this.NewWindow);
+            yield return this.Create(nameof(this.Default), VASS.SrcConstants.HyperlinkDefault, this.Default);
+            yield return this.Create(nameof(this.Invisible), VASS.SrcConstants.HyperlinkInvisible, this.Invisible);
         }
 
         public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)

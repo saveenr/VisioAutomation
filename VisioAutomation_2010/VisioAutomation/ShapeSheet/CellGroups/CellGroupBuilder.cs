@@ -31,14 +31,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             else if (type == CellGroupBuilderType.MultiRow)
             {
                 this.query_sections_multirow = new Query.SectionQuery();
-                cols = this.query_sections_multirow.Add(temp_cells.CellMetadata.First().Src);
+                cols = this.query_sections_multirow.Add(temp_cells.GetCellMetadata().First().Src);
             }
             else
             {
                 throw new Exceptions.InternalAssertionException();
             }
 
-            foreach (var pair in temp_cells.CellMetadata)
+            foreach (var pair in temp_cells.GetCellMetadata())
             {
                 cols.Add(pair.Src, pair.Name);
             }

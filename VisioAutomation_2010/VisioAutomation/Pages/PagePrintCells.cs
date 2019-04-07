@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -22,26 +23,23 @@ namespace VisioAutomation.Pages
         public VASS.CellValue ScaleY { get; set; }
         public VASS.CellValue PaperSource { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-                yield return this.Create(nameof(this.LeftMargin), VASS.SrcConstants.PrintLeftMargin, this.LeftMargin);
-                yield return this.Create(nameof(this.CenterX), VASS.SrcConstants.PrintCenterX, this.CenterX);
-                yield return this.Create(nameof(this.CenterY), VASS.SrcConstants.PrintCenterY, this.CenterY);
-                yield return this.Create(nameof(this.OnPage), VASS.SrcConstants.PrintOnPage, this.OnPage);
-                yield return this.Create(nameof(this.BottomMargin), VASS.SrcConstants.PrintBottomMargin, this.BottomMargin);
-                yield return this.Create(nameof(this.RightMargin), VASS.SrcConstants.PrintRightMargin, this.RightMargin);
-                yield return this.Create(nameof(this.PagesX), VASS.SrcConstants.PrintPagesX, this.PagesX);
-                yield return this.Create(nameof(this.PagesY), VASS.SrcConstants.PrintPagesY, this.PagesY);
-                yield return this.Create(nameof(this.TopMargin), VASS.SrcConstants.PrintTopMargin, this.TopMargin);
-                yield return this.Create(nameof(this.PaperKind), VASS.SrcConstants.PrintPaperKind, this.PaperKind);
-                yield return this.Create(nameof(this.Grid), VASS.SrcConstants.PrintGrid, this.Grid);
-                yield return this.Create(nameof(this.Orientation), VASS.SrcConstants.PrintPageOrientation, this.Orientation);
-                yield return this.Create(nameof(this.ScaleX), VASS.SrcConstants.PrintScaleX, this.ScaleX);
-                yield return this.Create(nameof(this.ScaleY), VASS.SrcConstants.PrintScaleY, this.ScaleY);
-                yield return this.Create(nameof(this.PaperSource), VASS.SrcConstants.PrintPaperSource, this.PaperSource);
-            }
+            yield return this.Create(nameof(this.LeftMargin), VASS.SrcConstants.PrintLeftMargin, this.LeftMargin);
+            yield return this.Create(nameof(this.CenterX), VASS.SrcConstants.PrintCenterX, this.CenterX);
+            yield return this.Create(nameof(this.CenterY), VASS.SrcConstants.PrintCenterY, this.CenterY);
+            yield return this.Create(nameof(this.OnPage), VASS.SrcConstants.PrintOnPage, this.OnPage);
+            yield return this.Create(nameof(this.BottomMargin), VASS.SrcConstants.PrintBottomMargin, this.BottomMargin);
+            yield return this.Create(nameof(this.RightMargin), VASS.SrcConstants.PrintRightMargin, this.RightMargin);
+            yield return this.Create(nameof(this.PagesX), VASS.SrcConstants.PrintPagesX, this.PagesX);
+            yield return this.Create(nameof(this.PagesY), VASS.SrcConstants.PrintPagesY, this.PagesY);
+            yield return this.Create(nameof(this.TopMargin), VASS.SrcConstants.PrintTopMargin, this.TopMargin);
+            yield return this.Create(nameof(this.PaperKind), VASS.SrcConstants.PrintPaperKind, this.PaperKind);
+            yield return this.Create(nameof(this.Grid), VASS.SrcConstants.PrintGrid, this.Grid);
+            yield return this.Create(nameof(this.Orientation), VASS.SrcConstants.PrintPageOrientation, this.Orientation);
+            yield return this.Create(nameof(this.ScaleX), VASS.SrcConstants.PrintScaleX, this.ScaleX);
+            yield return this.Create(nameof(this.ScaleY), VASS.SrcConstants.PrintScaleY, this.ScaleY);
+            yield return this.Create(nameof(this.PaperSource), VASS.SrcConstants.PrintPaperSource, this.PaperSource);
         }
 
 

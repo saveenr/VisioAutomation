@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -22,21 +23,18 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-                yield return this.Create(nameof(this.Label), VASS.SrcConstants.CustomPropLabel, this.Label);
-                yield return this.Create(nameof(this.Value), VASS.SrcConstants.CustomPropValue, this.Value);
-                yield return this.Create(nameof(this.Format), VASS.SrcConstants.CustomPropFormat, this.Format);
-                yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.CustomPropPrompt, this.Prompt);
-                yield return this.Create(nameof(this.Calendar), VASS.SrcConstants.CustomPropCalendar, this.Calendar);
-                yield return this.Create(nameof(this.LangID), VASS.SrcConstants.CustomPropLangID, this.LangID);
-                yield return this.Create(nameof(this.SortKey), VASS.SrcConstants.CustomPropSortKey, this.SortKey);
-                yield return this.Create(nameof(this.Invisible), VASS.SrcConstants.CustomPropInvisible, this.Invisible);
-                yield return this.Create(nameof(this.Type), VASS.SrcConstants.CustomPropType, this.Type);
-                yield return this.Create(nameof(this.Ask), VASS.SrcConstants.CustomPropAsk, this.Ask);
-            }
+            yield return this.Create(nameof(this.Label), VASS.SrcConstants.CustomPropLabel, this.Label);
+            yield return this.Create(nameof(this.Value), VASS.SrcConstants.CustomPropValue, this.Value);
+            yield return this.Create(nameof(this.Format), VASS.SrcConstants.CustomPropFormat, this.Format);
+            yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.CustomPropPrompt, this.Prompt);
+            yield return this.Create(nameof(this.Calendar), VASS.SrcConstants.CustomPropCalendar, this.Calendar);
+            yield return this.Create(nameof(this.LangID), VASS.SrcConstants.CustomPropLangID, this.LangID);
+            yield return this.Create(nameof(this.SortKey), VASS.SrcConstants.CustomPropSortKey, this.SortKey);
+            yield return this.Create(nameof(this.Invisible), VASS.SrcConstants.CustomPropInvisible, this.Invisible);
+            yield return this.Create(nameof(this.Type), VASS.SrcConstants.CustomPropType, this.Type);
+            yield return this.Create(nameof(this.Ask), VASS.SrcConstants.CustomPropAsk, this.Ask);
         }
 
 

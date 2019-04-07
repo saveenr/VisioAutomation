@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -17,21 +18,18 @@ namespace VisioAutomation.Pages
         public VASS.CellValue YRulerDensity { get; set; }
         public VASS.CellValue YRulerOrigin { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-                yield return this.Create(nameof(this.XGridDensity), VASS.SrcConstants.XGridDensity, this.XGridDensity);
-                yield return this.Create(nameof(this.XGridOrigin), VASS.SrcConstants.XGridOrigin, this.XGridOrigin);
-                yield return this.Create(nameof(this.XGridSpacing), VASS.SrcConstants.XGridSpacing, this.XGridSpacing);
-                yield return this.Create(nameof(this.XRulerDensity), VASS.SrcConstants.XRulerDensity, this.XRulerDensity);
-                yield return this.Create(nameof(this.XRulerOrigin), VASS.SrcConstants.XRulerOrigin, this.XRulerOrigin);
-                yield return this.Create(nameof(this.YGridDensity), VASS.SrcConstants.YGridDensity, this.YGridDensity);
-                yield return this.Create(nameof(this.YGridOrigin), VASS.SrcConstants.YGridOrigin, this.YGridOrigin);
-                yield return this.Create(nameof(this.YGridSpacing), VASS.SrcConstants.YGridSpacing, this.YGridSpacing);
-                yield return this.Create(nameof(this.YRulerDensity), VASS.SrcConstants.YRulerDensity, this.YRulerDensity);
-                yield return this.Create(nameof(this.YRulerOrigin), VASS.SrcConstants.YRulerOrigin, this.YRulerOrigin);
-            }
+            yield return this.Create(nameof(this.XGridDensity), VASS.SrcConstants.XGridDensity, this.XGridDensity);
+            yield return this.Create(nameof(this.XGridOrigin), VASS.SrcConstants.XGridOrigin, this.XGridOrigin);
+            yield return this.Create(nameof(this.XGridSpacing), VASS.SrcConstants.XGridSpacing, this.XGridSpacing);
+            yield return this.Create(nameof(this.XRulerDensity), VASS.SrcConstants.XRulerDensity, this.XRulerDensity);
+            yield return this.Create(nameof(this.XRulerOrigin), VASS.SrcConstants.XRulerOrigin, this.XRulerOrigin);
+            yield return this.Create(nameof(this.YGridDensity), VASS.SrcConstants.YGridDensity, this.YGridDensity);
+            yield return this.Create(nameof(this.YGridOrigin), VASS.SrcConstants.YGridOrigin, this.YGridOrigin);
+            yield return this.Create(nameof(this.YGridSpacing), VASS.SrcConstants.YGridSpacing, this.YGridSpacing);
+            yield return this.Create(nameof(this.YRulerDensity), VASS.SrcConstants.YRulerDensity, this.YRulerDensity);
+            yield return this.Create(nameof(this.YRulerOrigin), VASS.SrcConstants.YRulerOrigin, this.YRulerOrigin);
         }
 
         public static PageRulerAndGridCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
