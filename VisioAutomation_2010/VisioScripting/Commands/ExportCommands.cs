@@ -11,7 +11,7 @@ namespace VisioScripting.Commands
         {
         }
 
-        public void ExportActivePageToFile(string filename)
+        public void ExportPageToImage(TargetActivePage targetpage, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
             active_window.Select(old_selected_shapes, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void ExportAllPagesInActiveDocumentToFiles(string filename)
+        public void ExportAllPagesToImages(TargetActiveDocument targetdoc, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
             active_window.Page = old_page;
         }
 
-        public void ExportSelectionToFile(TargetSelection targetselection, string filename)
+        public void ExportSelectionToImage(TargetSelection targetselection, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -105,7 +105,7 @@ namespace VisioScripting.Commands
             selection.Export(filename);
         }
 
-        public void ExportToHtml(TargetSelection targetselection, string filename)
+        public void ExportSelectionToHtml(TargetSelection targetselection, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

@@ -1,3 +1,4 @@
+using VisioScripting;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioPage
@@ -16,11 +17,11 @@ namespace VisioPowerShell.Commands.VisioPage
         {
             if (this.AllPages)
             {
-                this.Client.Export.ExportAllPagesInActiveDocumentToFiles(this.Filename);
+                this.Client.Export.ExportAllPagesToImages(new TargetActiveDocument(), this.Filename);
             }
             else
             {
-                this.Client.Export.ExportActivePageToFile(this.Filename);
+                this.Client.Export.ExportPageToImage(new TargetActivePage(), this.Filename);
             }
         }
     }

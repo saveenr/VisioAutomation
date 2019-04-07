@@ -43,4 +43,22 @@ namespace VisioScripting
         }
 
     }
+
+    public class TargetActivePage
+    {
+
+        public TargetActivePage()
+        {
+        }
+
+    }
+
+    public class TargetActiveDocument
+    {
+
+        public TargetActiveDocument()
+        {
+        }
+
+    }
 }
