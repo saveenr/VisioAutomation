@@ -7,20 +7,20 @@ namespace VisioAutomation.Text
 {
     public class ParagraphFormatCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral IndentFirst { get; set; }
-        public VASS.CellValueLiteral IndentRight { get; set; }
-        public VASS.CellValueLiteral IndentLeft { get; set; }
-        public VASS.CellValueLiteral SpacingBefore { get; set; }
-        public VASS.CellValueLiteral SpacingAfter { get; set; }
-        public VASS.CellValueLiteral SpacingLine { get; set; }
-        public VASS.CellValueLiteral HorizontalAlign { get; set; }
-        public VASS.CellValueLiteral Bullet { get; set; }
-        public VASS.CellValueLiteral BulletFont { get; set; }
-        public VASS.CellValueLiteral BulletFontSize { get; set; }
-        public VASS.CellValueLiteral LocalizeBulletFont { get; set; }
-        public VASS.CellValueLiteral TextPosAfterBullet { get; set; }
-        public VASS.CellValueLiteral Flags { get; set; }
-        public VASS.CellValueLiteral BulletString { get; set; }
+        public VASS.CellValue IndentFirst { get; set; }
+        public VASS.CellValue IndentRight { get; set; }
+        public VASS.CellValue IndentLeft { get; set; }
+        public VASS.CellValue SpacingBefore { get; set; }
+        public VASS.CellValue SpacingAfter { get; set; }
+        public VASS.CellValue SpacingLine { get; set; }
+        public VASS.CellValue HorizontalAlign { get; set; }
+        public VASS.CellValue Bullet { get; set; }
+        public VASS.CellValue BulletFont { get; set; }
+        public VASS.CellValue BulletFontSize { get; set; }
+        public VASS.CellValue LocalizeBulletFont { get; set; }
+        public VASS.CellValue TextPosAfterBullet { get; set; }
+        public VASS.CellValue Flags { get; set; }
+        public VASS.CellValue BulletString { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

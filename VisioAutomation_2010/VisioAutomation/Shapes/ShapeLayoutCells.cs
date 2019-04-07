@@ -6,24 +6,24 @@ namespace VisioAutomation.Shapes
 {
     public class ShapeLayoutCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral ConnectorFixedCode { get; set; }
-        public VASS.CellValueLiteral LineJumpCode { get; set; }
-        public VASS.CellValueLiteral LineJumpDirX { get; set; }
-        public VASS.CellValueLiteral LineJumpDirY { get; set; }
-        public VASS.CellValueLiteral LineJumpStyle { get; set; }
-        public VASS.CellValueLiteral LineRouteExt { get; set; }
-        public VASS.CellValueLiteral ShapeFixedCode { get; set; }
-        public VASS.CellValueLiteral ShapePermeablePlace { get; set; }
-        public VASS.CellValueLiteral ShapePermeableX { get; set; }
-        public VASS.CellValueLiteral ShapePermeableY { get; set; }
-        public VASS.CellValueLiteral ShapePlaceFlip { get; set; }
-        public VASS.CellValueLiteral ShapePlaceStyle { get; set; }
-        public VASS.CellValueLiteral ShapePlowCode { get; set; }
-        public VASS.CellValueLiteral ShapeRouteStyle { get; set; }
-        public VASS.CellValueLiteral ShapeSplit { get; set; }
-        public VASS.CellValueLiteral ShapeSplittable { get; set; }
-        public VASS.CellValueLiteral ShapeDisplayLevel { get; set; } // new in visio 2010
-        public VASS.CellValueLiteral Relationships { get; set; } // new in visio 2010
+        public VASS.CellValue ConnectorFixedCode { get; set; }
+        public VASS.CellValue LineJumpCode { get; set; }
+        public VASS.CellValue LineJumpDirX { get; set; }
+        public VASS.CellValue LineJumpDirY { get; set; }
+        public VASS.CellValue LineJumpStyle { get; set; }
+        public VASS.CellValue LineRouteExt { get; set; }
+        public VASS.CellValue ShapeFixedCode { get; set; }
+        public VASS.CellValue ShapePermeablePlace { get; set; }
+        public VASS.CellValue ShapePermeableX { get; set; }
+        public VASS.CellValue ShapePermeableY { get; set; }
+        public VASS.CellValue ShapePlaceFlip { get; set; }
+        public VASS.CellValue ShapePlaceStyle { get; set; }
+        public VASS.CellValue ShapePlowCode { get; set; }
+        public VASS.CellValue ShapeRouteStyle { get; set; }
+        public VASS.CellValue ShapeSplit { get; set; }
+        public VASS.CellValue ShapeSplittable { get; set; }
+        public VASS.CellValue ShapeDisplayLevel { get; set; } // new in visio 2010
+        public VASS.CellValue Relationships { get; set; } // new in visio 2010
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

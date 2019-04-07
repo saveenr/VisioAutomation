@@ -6,26 +6,26 @@ namespace VisioAutomation.Shapes
 {
     public class LockCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral Aspect { get; set; }
-        public VASS.CellValueLiteral Begin { get; set; }
-        public VASS.CellValueLiteral CalcWH { get; set; }
-        public VASS.CellValueLiteral Crop { get; set; }
-        public VASS.CellValueLiteral CustProp { get; set; }
-        public VASS.CellValueLiteral Delete { get; set; }
-        public VASS.CellValueLiteral End { get; set; }
-        public VASS.CellValueLiteral Format { get; set; }
-        public VASS.CellValueLiteral FromGroupFormat { get; set; }
-        public VASS.CellValueLiteral Group { get; set; }
-        public VASS.CellValueLiteral Height { get; set; }
-        public VASS.CellValueLiteral MoveX { get; set; }
-        public VASS.CellValueLiteral MoveY { get; set; }
-        public VASS.CellValueLiteral Rotate { get; set; }
-        public VASS.CellValueLiteral Select { get; set; }
-        public VASS.CellValueLiteral TextEdit { get; set; }
-        public VASS.CellValueLiteral ThemeColors { get; set; }
-        public VASS.CellValueLiteral ThemeEffects { get; set; }
-        public VASS.CellValueLiteral VertexEdit { get; set; }
-        public VASS.CellValueLiteral Width { get; set; }
+        public VASS.CellValue Aspect { get; set; }
+        public VASS.CellValue Begin { get; set; }
+        public VASS.CellValue CalcWH { get; set; }
+        public VASS.CellValue Crop { get; set; }
+        public VASS.CellValue CustProp { get; set; }
+        public VASS.CellValue Delete { get; set; }
+        public VASS.CellValue End { get; set; }
+        public VASS.CellValue Format { get; set; }
+        public VASS.CellValue FromGroupFormat { get; set; }
+        public VASS.CellValue Group { get; set; }
+        public VASS.CellValue Height { get; set; }
+        public VASS.CellValue MoveX { get; set; }
+        public VASS.CellValue MoveY { get; set; }
+        public VASS.CellValue Rotate { get; set; }
+        public VASS.CellValue Select { get; set; }
+        public VASS.CellValue TextEdit { get; set; }
+        public VASS.CellValue ThemeColors { get; set; }
+        public VASS.CellValue ThemeEffects { get; set; }
+        public VASS.CellValue VertexEdit { get; set; }
+        public VASS.CellValue Width { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

@@ -26,7 +26,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             types.Add(typeof(VisioAutomation.Pages.PagePrintCells));
             types.Add(typeof(VisioAutomation.Pages.PageRulerAndGridCells));
 
-            var cvt_ctor = typeof(VisioAutomation.ShapeSheet.CellValueLiteral).GetConstructor(new []{typeof(string)});
+            var cvt_ctor = typeof(VisioAutomation.ShapeSheet.CellValue).GetConstructor(new []{typeof(string)});
             foreach (var cellgroup_type in types)
             {
                 var cellgroup_ctor = cellgroup_type.GetConstructor(Type.EmptyTypes);
@@ -46,7 +46,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
                     prop.SetValue(cellgroup, cvl_value);
                 }
 
-                var reflected_cvts = props.Select(p => (VisioAutomation.ShapeSheet.CellValueLiteral)p.GetValue(cellgroup, null)).ToList();
+                var reflected_cvts = props.Select(p => (VisioAutomation.ShapeSheet.CellValue)p.GetValue(cellgroup, null)).ToList();
                 var reflected_cvt_values = reflected_cvts.Select(p => p.Value).ToList();
                 var reflected_cvt_names = props.Select(p => p.Name).ToList();
                 var reflected_nametovalue = new Dictionary<string,string>();
@@ -82,7 +82,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         private static List<PropertyInfo> _get_cell_data_props(Type t)
         {
             var props = t.GetProperties().Where(p => p.MemberType == MemberTypes.Property).ToList();
-            var cellprops = props.Where(p => p.PropertyType == typeof(VisioAutomation.ShapeSheet.CellValueLiteral)).ToList();
+            var cellprops = props.Where(p => p.PropertyType == typeof(VisioAutomation.ShapeSheet.CellValue)).ToList();
             return cellprops;
         }
 

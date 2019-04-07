@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._commit(surface, type);
         }
 
-        public void SetValue(Src src, CellValueLiteral formula)
+        public void SetValue(Src src, CellValue formula)
         {
             this.__set_value_ignore_null(src, formula);
         }
@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void __set_value_ignore_null(Src src, CellValueLiteral formula)
+        private void __set_value_ignore_null(Src src, CellValue formula)
         {
             if (this._records == null)
             {

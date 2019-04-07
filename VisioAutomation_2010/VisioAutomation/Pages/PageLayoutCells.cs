@@ -6,34 +6,34 @@ namespace VisioAutomation.Pages
 {
     public class PageLayoutCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral AvenueSizeX { get; set; }
-        public VASS.CellValueLiteral AvenueSizeY { get; set; }
-        public VASS.CellValueLiteral BlockSizeX { get; set; }
-        public VASS.CellValueLiteral BlockSizeY { get; set; }
-        public VASS.CellValueLiteral CtrlAsInput { get; set; }
-        public VASS.CellValueLiteral DynamicsOff { get; set; }
-        public VASS.CellValueLiteral EnableGrid { get; set; }
-        public VASS.CellValueLiteral LineAdjustFrom { get; set; }
-        public VASS.CellValueLiteral LineAdjustTo { get; set; }
-        public VASS.CellValueLiteral LineJumpCode { get; set; }
-        public VASS.CellValueLiteral LineJumpFactorX { get; set; }
-        public VASS.CellValueLiteral LineJumpFactorY { get; set; }
-        public VASS.CellValueLiteral LineJumpStyle { get; set; }
-        public VASS.CellValueLiteral LineRouteExt { get; set; }
-        public VASS.CellValueLiteral LineToLineX { get; set; }
-        public VASS.CellValueLiteral LineToLineY { get; set; }
-        public VASS.CellValueLiteral LineToNodeX { get; set; }
-        public VASS.CellValueLiteral LineToNodeY { get; set; }
-        public VASS.CellValueLiteral LineJumpDirX { get; set; }
-        public VASS.CellValueLiteral LineJumpDirY { get; set; }
-        public VASS.CellValueLiteral PageShapeSplit { get; set; }
-        public VASS.CellValueLiteral PlaceDepth { get; set; }
-        public VASS.CellValueLiteral PlaceFlip { get; set; }
-        public VASS.CellValueLiteral PlaceStyle { get; set; }
-        public VASS.CellValueLiteral PlowCode { get; set; }
-        public VASS.CellValueLiteral ResizePage { get; set; }
-        public VASS.CellValueLiteral RouteStyle { get; set; }
-        public VASS.CellValueLiteral AvoidPageBreaks { get; set; } // new in visio 2010
+        public VASS.CellValue AvenueSizeX { get; set; }
+        public VASS.CellValue AvenueSizeY { get; set; }
+        public VASS.CellValue BlockSizeX { get; set; }
+        public VASS.CellValue BlockSizeY { get; set; }
+        public VASS.CellValue CtrlAsInput { get; set; }
+        public VASS.CellValue DynamicsOff { get; set; }
+        public VASS.CellValue EnableGrid { get; set; }
+        public VASS.CellValue LineAdjustFrom { get; set; }
+        public VASS.CellValue LineAdjustTo { get; set; }
+        public VASS.CellValue LineJumpCode { get; set; }
+        public VASS.CellValue LineJumpFactorX { get; set; }
+        public VASS.CellValue LineJumpFactorY { get; set; }
+        public VASS.CellValue LineJumpStyle { get; set; }
+        public VASS.CellValue LineRouteExt { get; set; }
+        public VASS.CellValue LineToLineX { get; set; }
+        public VASS.CellValue LineToLineY { get; set; }
+        public VASS.CellValue LineToNodeX { get; set; }
+        public VASS.CellValue LineToNodeY { get; set; }
+        public VASS.CellValue LineJumpDirX { get; set; }
+        public VASS.CellValue LineJumpDirY { get; set; }
+        public VASS.CellValue PageShapeSplit { get; set; }
+        public VASS.CellValue PlaceDepth { get; set; }
+        public VASS.CellValue PlaceFlip { get; set; }
+        public VASS.CellValue PlaceStyle { get; set; }
+        public VASS.CellValue PlowCode { get; set; }
+        public VASS.CellValue ResizePage { get; set; }
+        public VASS.CellValue RouteStyle { get; set; }
+        public VASS.CellValue AvoidPageBreaks { get; set; } // new in visio 2010
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

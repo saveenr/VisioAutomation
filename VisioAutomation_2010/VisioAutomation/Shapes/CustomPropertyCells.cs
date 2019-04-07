@@ -6,16 +6,16 @@ namespace VisioAutomation.Shapes
 {
     public class CustomPropertyCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral Ask { get; set; }
-        public VASS.CellValueLiteral Calendar { get; set; }
-        public VASS.CellValueLiteral Format { get; set; }
-        public VASS.CellValueLiteral Invisible { get; set; }
-        public VASS.CellValueLiteral Label { get; set; }
-        public VASS.CellValueLiteral LangID { get; set; }
-        public VASS.CellValueLiteral Prompt { get; set; }
-        public VASS.CellValueLiteral SortKey { get; set; }
-        public VASS.CellValueLiteral Type { get; set; }
-        public VASS.CellValueLiteral Value { get; set; }
+        public VASS.CellValue Ask { get; set; }
+        public VASS.CellValue Calendar { get; set; }
+        public VASS.CellValue Format { get; set; }
+        public VASS.CellValue Invisible { get; set; }
+        public VASS.CellValue Label { get; set; }
+        public VASS.CellValue LangID { get; set; }
+        public VASS.CellValue Prompt { get; set; }
+        public VASS.CellValue SortKey { get; set; }
+        public VASS.CellValue Type { get; set; }
+        public VASS.CellValue Value { get; set; }
 
         public CustomPropertyCells()
         {
@@ -47,14 +47,14 @@ namespace VisioAutomation.Shapes
             this.Type = type_int;
         }
 
-        public CustomPropertyCells(VASS.CellValueLiteral value, CustomPropertyType type)
+        public CustomPropertyCells(VASS.CellValue value, CustomPropertyType type)
         {
             var type_int = CustomPropertyTypeToInt(type);
             this.Value = value;
             this.Type = type_int;
         }
         
-        public static CustomPropertyCells Create(VASS.CellValueLiteral value, CustomPropertyType type)
+        public static CustomPropertyCells Create(VASS.CellValue value, CustomPropertyType type)
         {
             return new CustomPropertyCells(value.Value, type);
         }
@@ -135,7 +135,7 @@ namespace VisioAutomation.Shapes
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Boolean);
         }
 
-        public CustomPropertyCells(VASS.CellValueLiteral value)
+        public CustomPropertyCells(VASS.CellValue value)
         {
             this.Value = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
@@ -154,10 +154,10 @@ namespace VisioAutomation.Shapes
         {
             // only quote the value when it is a string (no type specified or type equals zero)
             bool quote = (this.Type.Value == null || this.Type.Value == "0");
-            this.Value = VASS.CellValueLiteral.EncodeValue(this.Value.Value, quote);
-            this.Label = VASS.CellValueLiteral.EncodeValue(this.Label.Value);
-            this.Format = VASS.CellValueLiteral.EncodeValue(this.Format.Value);
-            this.Prompt = VASS.CellValueLiteral.EncodeValue(this.Prompt.Value);
+            this.Value = VASS.CellValue.EncodeValue(this.Value.Value, quote);
+            this.Label = VASS.CellValue.EncodeValue(this.Label.Value);
+            this.Format = VASS.CellValue.EncodeValue(this.Format.Value);
+            this.Prompt = VASS.CellValue.EncodeValue(this.Prompt.Value);
         }
 
 

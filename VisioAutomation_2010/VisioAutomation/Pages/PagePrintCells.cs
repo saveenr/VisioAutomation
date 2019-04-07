@@ -6,21 +6,21 @@ namespace VisioAutomation.Pages
 {
     public class PagePrintCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral LeftMargin { get; set; }
-        public VASS.CellValueLiteral CenterX { get; set; }
-        public VASS.CellValueLiteral CenterY { get; set; }
-        public VASS.CellValueLiteral OnPage { get; set; }
-        public VASS.CellValueLiteral BottomMargin { get; set; }
-        public VASS.CellValueLiteral RightMargin { get; set; }
-        public VASS.CellValueLiteral PagesX { get; set; }
-        public VASS.CellValueLiteral PagesY { get; set; }
-        public VASS.CellValueLiteral TopMargin { get; set; }
-        public VASS.CellValueLiteral PaperKind { get; set; }
-        public VASS.CellValueLiteral Grid { get; set; }
-        public VASS.CellValueLiteral Orientation { get; set; }
-        public VASS.CellValueLiteral ScaleX { get; set; }
-        public VASS.CellValueLiteral ScaleY { get; set; }
-        public VASS.CellValueLiteral PaperSource { get; set; }
+        public VASS.CellValue LeftMargin { get; set; }
+        public VASS.CellValue CenterX { get; set; }
+        public VASS.CellValue CenterY { get; set; }
+        public VASS.CellValue OnPage { get; set; }
+        public VASS.CellValue BottomMargin { get; set; }
+        public VASS.CellValue RightMargin { get; set; }
+        public VASS.CellValue PagesX { get; set; }
+        public VASS.CellValue PagesY { get; set; }
+        public VASS.CellValue TopMargin { get; set; }
+        public VASS.CellValue PaperKind { get; set; }
+        public VASS.CellValue Grid { get; set; }
+        public VASS.CellValue Orientation { get; set; }
+        public VASS.CellValue ScaleX { get; set; }
+        public VASS.CellValue ScaleY { get; set; }
+        public VASS.CellValue PaperSource { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

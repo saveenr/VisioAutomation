@@ -6,13 +6,13 @@ namespace VisioAutomation.Text
 {
     public class TextXFormCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral Angle { get; set; }
-        public VASS.CellValueLiteral Width { get; set; }
-        public VASS.CellValueLiteral Height { get; set; }
-        public VASS.CellValueLiteral PinX { get; set; }
-        public VASS.CellValueLiteral PinY { get; set; }
-        public VASS.CellValueLiteral LocPinX { get; set; }
-        public VASS.CellValueLiteral LocPinY { get; set; }
+        public VASS.CellValue Angle { get; set; }
+        public VASS.CellValue Width { get; set; }
+        public VASS.CellValue Height { get; set; }
+        public VASS.CellValue PinX { get; set; }
+        public VASS.CellValue PinY { get; set; }
+        public VASS.CellValue LocPinX { get; set; }
+        public VASS.CellValue LocPinY { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

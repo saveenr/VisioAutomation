@@ -161,7 +161,7 @@
     <Compile Include="Shapes\ShapeXFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="Shapes\CustomPropertyCells.cs" />
-    <Compile Include="ShapeSheet\CellValueLiteral.cs" />
+    <Compile Include="ShapeSheet\CellValue.cs" />
     <Compile Include="Geometry\Point.cs" />
     <Compile Include="Geometry\Rectangle.cs" />
     <Compile Include="ShapeSheet\SidSrc.cs" />

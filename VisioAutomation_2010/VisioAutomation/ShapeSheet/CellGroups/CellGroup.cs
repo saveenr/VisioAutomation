@@ -38,7 +38,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        protected CellMetadataItem Create(string name, Src src, CellValueLiteral value)
+        protected CellMetadataItem Create(string name, Src src, CellValue value)
         {
             return new CellMetadataItem(name, src, value.Value);
         }

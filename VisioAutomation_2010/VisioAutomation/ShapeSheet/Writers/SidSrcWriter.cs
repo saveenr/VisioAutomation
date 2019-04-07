@@ -14,13 +14,13 @@ namespace VisioAutomation.ShapeSheet.Writers
             var surface = new SurfaceTarget(page);
             this.Commit(surface, type);
         }
-        public void SetValue(short id, Src src, CellValueLiteral formula)
+        public void SetValue(short id, Src src, CellValue formula)
         {
             var sidsrc = new SidSrc(id, src);
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetValue(SidSrc sidsrc, CellValueLiteral formula)
+        public void SetValue(SidSrc sidsrc, CellValue formula)
         {
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void __SetValueIgnoreNull(SidSrc sidsrc, CellValueLiteral formula)
+        private void __SetValueIgnoreNull(SidSrc sidsrc, CellValue formula)
         {
             if (this._records == null)
             {

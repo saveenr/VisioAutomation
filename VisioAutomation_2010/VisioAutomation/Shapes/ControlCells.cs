@@ -6,14 +6,14 @@ namespace VisioAutomation.Shapes
 {
     public class ControlCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral CanGlue { get; set; }
-        public VASS.CellValueLiteral Tip { get; set; }
-        public VASS.CellValueLiteral X { get; set; }
-        public VASS.CellValueLiteral Y { get; set; }
-        public VASS.CellValueLiteral YBehavior { get; set; }
-        public VASS.CellValueLiteral XBehavior { get; set; }
-        public VASS.CellValueLiteral XDynamics { get; set; }
-        public VASS.CellValueLiteral YDynamics { get; set; }
+        public VASS.CellValue CanGlue { get; set; }
+        public VASS.CellValue Tip { get; set; }
+        public VASS.CellValue X { get; set; }
+        public VASS.CellValue Y { get; set; }
+        public VASS.CellValue YBehavior { get; set; }
+        public VASS.CellValue XBehavior { get; set; }
+        public VASS.CellValue XDynamics { get; set; }
+        public VASS.CellValue YDynamics { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

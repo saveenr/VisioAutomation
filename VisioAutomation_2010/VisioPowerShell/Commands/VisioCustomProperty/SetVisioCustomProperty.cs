@@ -167,7 +167,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
             {
                 return new CustomPropertyCells(value_datetime);
             }
-            else if (value is VisioAutomation.ShapeSheet.CellValueLiteral value_cvl)
+            else if (value is VisioAutomation.ShapeSheet.CellValue value_cvl)
             {
                 return new CustomPropertyCells(value_cvl);
             }

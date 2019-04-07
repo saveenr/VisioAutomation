@@ -8,53 +8,53 @@
     /// 
     /// IMPORTANT: The value stored is always a string. Any input will be converted to a string.
     /// </summary>
-    public struct CellValueLiteral
+    public struct CellValue
     {
         private readonly string _stringval;
         public string Value => this._stringval;
         public bool HasValue => this._stringval != null;
         public override string ToString() => this.Value;
 
-        public CellValueLiteral(string value)
+        public CellValue(string value)
         {
             this._stringval = value;
         }
 
-        public CellValueLiteral(int value)
+        public CellValue(int value)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             this._stringval = value.ToString(culture);
         }
 
-        public CellValueLiteral(double value)
+        public CellValue(double value)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             this._stringval = value.ToString(culture);
         }
 
-        public CellValueLiteral(bool value)
+        public CellValue(bool value)
         {
             this._stringval = value ? "TRUE" : "FALSE";
         }
 
-        public static implicit operator CellValueLiteral(string value)
+        public static implicit operator CellValue(string value)
         {
-            return new CellValueLiteral(value);
+            return new CellValue(value);
         }
 
-        public static implicit operator CellValueLiteral(int value)
+        public static implicit operator CellValue(int value)
         {
-            return new CellValueLiteral(value);
+            return new CellValue(value);
         }
 
-        public static implicit operator CellValueLiteral(double value)
+        public static implicit operator CellValue(double value)
         {
-            return new CellValueLiteral(value);
+            return new CellValue(value);
         }
 
-        public static implicit operator CellValueLiteral(bool value)
+        public static implicit operator CellValue(bool value)
         {
-            return new CellValueLiteral(value);
+            return new CellValue(value);
         }
 
         public static string EncodeValue(string text)

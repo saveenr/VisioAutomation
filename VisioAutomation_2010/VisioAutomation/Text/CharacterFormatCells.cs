@@ -6,28 +6,28 @@ namespace VisioAutomation.Text
 {
     public class CharacterFormatCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral Color { get; set; }
-        public VASS.CellValueLiteral Font { get; set; }
-        public VASS.CellValueLiteral Size { get; set; }
-        public VASS.CellValueLiteral Style { get; set; }
-        public VASS.CellValueLiteral ColorTransparency { get; set; }
-        public VASS.CellValueLiteral AsianFont { get; set; }
-        public VASS.CellValueLiteral Case { get; set; }
-        public VASS.CellValueLiteral ComplexScriptFont { get; set; }
-        public VASS.CellValueLiteral ComplexScriptSize { get; set; }
-        public VASS.CellValueLiteral DoubleStrikethrough { get; set; }
-        public VASS.CellValueLiteral DoubleUnderline { get; set; }
-        public VASS.CellValueLiteral LangID { get; set; }
-        public VASS.CellValueLiteral Locale { get; set; }
-        public VASS.CellValueLiteral LocalizeFont { get; set; }
-        public VASS.CellValueLiteral Overline { get; set; }
-        public VASS.CellValueLiteral Perpendicular { get; set; }
-        public VASS.CellValueLiteral Pos { get; set; }
-        public VASS.CellValueLiteral RTLText { get; set; }
-        public VASS.CellValueLiteral FontScale { get; set; }
-        public VASS.CellValueLiteral Letterspace { get; set; }
-        public VASS.CellValueLiteral Strikethru { get; set; }
-        public VASS.CellValueLiteral UseVertical { get; set; }
+        public VASS.CellValue Color { get; set; }
+        public VASS.CellValue Font { get; set; }
+        public VASS.CellValue Size { get; set; }
+        public VASS.CellValue Style { get; set; }
+        public VASS.CellValue ColorTransparency { get; set; }
+        public VASS.CellValue AsianFont { get; set; }
+        public VASS.CellValue Case { get; set; }
+        public VASS.CellValue ComplexScriptFont { get; set; }
+        public VASS.CellValue ComplexScriptSize { get; set; }
+        public VASS.CellValue DoubleStrikethrough { get; set; }
+        public VASS.CellValue DoubleUnderline { get; set; }
+        public VASS.CellValue LangID { get; set; }
+        public VASS.CellValue Locale { get; set; }
+        public VASS.CellValue LocalizeFont { get; set; }
+        public VASS.CellValue Overline { get; set; }
+        public VASS.CellValue Perpendicular { get; set; }
+        public VASS.CellValue Pos { get; set; }
+        public VASS.CellValue RTLText { get; set; }
+        public VASS.CellValue FontScale { get; set; }
+        public VASS.CellValue Letterspace { get; set; }
+        public VASS.CellValue Strikethru { get; set; }
+        public VASS.CellValue UseVertical { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

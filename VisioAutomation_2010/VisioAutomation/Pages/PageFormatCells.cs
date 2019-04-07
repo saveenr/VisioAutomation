@@ -6,20 +6,20 @@ namespace VisioAutomation.Pages
 {
     public class PageFormatCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral DrawingScale { get; set; }
-        public VASS.CellValueLiteral DrawingScaleType { get; set; }
-        public VASS.CellValueLiteral DrawingSizeType { get; set; }
-        public VASS.CellValueLiteral InhibitSnap { get; set; }
-        public VASS.CellValueLiteral Height { get; set; }
-        public VASS.CellValueLiteral Scale { get; set; }
-        public VASS.CellValueLiteral Width { get; set; }
-        public VASS.CellValueLiteral ShadowObliqueAngle { get; set; }
-        public VASS.CellValueLiteral ShadowOffsetX { get; set; }
-        public VASS.CellValueLiteral ShadowOffsetY { get; set; }
-        public VASS.CellValueLiteral ShadowScaleFactor { get; set; }
-        public VASS.CellValueLiteral ShadowType { get; set; }
-        public VASS.CellValueLiteral UIVisibility { get; set; }
-        public VASS.CellValueLiteral DrawingResizeType { get; set; } // new in visio 2010
+        public VASS.CellValue DrawingScale { get; set; }
+        public VASS.CellValue DrawingScaleType { get; set; }
+        public VASS.CellValue DrawingSizeType { get; set; }
+        public VASS.CellValue InhibitSnap { get; set; }
+        public VASS.CellValue Height { get; set; }
+        public VASS.CellValue Scale { get; set; }
+        public VASS.CellValue Width { get; set; }
+        public VASS.CellValue ShadowObliqueAngle { get; set; }
+        public VASS.CellValue ShadowOffsetX { get; set; }
+        public VASS.CellValue ShadowOffsetY { get; set; }
+        public VASS.CellValue ShadowScaleFactor { get; set; }
+        public VASS.CellValue ShadowType { get; set; }
+        public VASS.CellValue UIVisibility { get; set; }
+        public VASS.CellValue DrawingResizeType { get; set; } // new in visio 2010
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

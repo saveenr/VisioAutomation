@@ -6,16 +6,16 @@ namespace VisioAutomation.Pages
 {
     public class PageRulerAndGridCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral XGridDensity { get; set; }
-        public VASS.CellValueLiteral YGridDensity { get; set; }
-        public VASS.CellValueLiteral XGridOrigin { get; set; }
-        public VASS.CellValueLiteral YGridOrigin { get; set; }
-        public VASS.CellValueLiteral XGridSpacing { get; set; }
-        public VASS.CellValueLiteral YGridSpacing { get; set; }
-        public VASS.CellValueLiteral XRulerDensity { get; set; }
-        public VASS.CellValueLiteral XRulerOrigin { get; set; }
-        public VASS.CellValueLiteral YRulerDensity { get; set; }
-        public VASS.CellValueLiteral YRulerOrigin { get; set; }
+        public VASS.CellValue XGridDensity { get; set; }
+        public VASS.CellValue YGridDensity { get; set; }
+        public VASS.CellValue XGridOrigin { get; set; }
+        public VASS.CellValue YGridOrigin { get; set; }
+        public VASS.CellValue XGridSpacing { get; set; }
+        public VASS.CellValue YGridSpacing { get; set; }
+        public VASS.CellValue XRulerDensity { get; set; }
+        public VASS.CellValue XRulerOrigin { get; set; }
+        public VASS.CellValue YRulerDensity { get; set; }
+        public VASS.CellValue YRulerOrigin { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

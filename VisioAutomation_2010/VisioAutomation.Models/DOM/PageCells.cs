@@ -5,33 +5,33 @@ namespace VisioAutomation.Models.Dom
     public class PageCells
     {
         // PageLayout
-        public ShapeSheet.CellValueLiteral PageLayoutAvenueSizeX { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutAvenueSizeY { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutBlockSizeX { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutBlockSizeY { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutControlAsInput { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutDynamicsOff { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutEnableGrid { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineAdjustFrom { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineAdjustTo { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineJumpCode { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineJumpFactorX { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineJumpFactorY { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineJumpStyle { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineRouteExt { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineToLineX { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineToLineY { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineToNodeX { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutLineToNodeY { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutPageLineJumpDirX { get; set; }
-        public ShapeSheet.CellValueLiteral PageLayoutPageLineJumpDirY { get; set; }
-        public ShapeSheet.CellValueLiteral PageShapeSplit { get; set; }
-        public ShapeSheet.CellValueLiteral PlaceDepth { get; set; }
-        public ShapeSheet.CellValueLiteral PlaceFlip { get; set; }
-        public ShapeSheet.CellValueLiteral PlaceStyle { get; set; }
-        public ShapeSheet.CellValueLiteral PlowCode { get; set; }
-        public ShapeSheet.CellValueLiteral ResizePage { get; set; }
-        public ShapeSheet.CellValueLiteral RouteStyle { get; set; }
+        public ShapeSheet.CellValue PageLayoutAvenueSizeX { get; set; }
+        public ShapeSheet.CellValue PageLayoutAvenueSizeY { get; set; }
+        public ShapeSheet.CellValue PageLayoutBlockSizeX { get; set; }
+        public ShapeSheet.CellValue PageLayoutBlockSizeY { get; set; }
+        public ShapeSheet.CellValue PageLayoutControlAsInput { get; set; }
+        public ShapeSheet.CellValue PageLayoutDynamicsOff { get; set; }
+        public ShapeSheet.CellValue PageLayoutEnableGrid { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineAdjustFrom { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineAdjustTo { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineJumpCode { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineJumpFactorX { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineJumpFactorY { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineJumpStyle { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineRouteExt { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineToLineX { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineToLineY { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineToNodeX { get; set; }
+        public ShapeSheet.CellValue PageLayoutLineToNodeY { get; set; }
+        public ShapeSheet.CellValue PageLayoutPageLineJumpDirX { get; set; }
+        public ShapeSheet.CellValue PageLayoutPageLineJumpDirY { get; set; }
+        public ShapeSheet.CellValue PageShapeSplit { get; set; }
+        public ShapeSheet.CellValue PlaceDepth { get; set; }
+        public ShapeSheet.CellValue PlaceFlip { get; set; }
+        public ShapeSheet.CellValue PlaceStyle { get; set; }
+        public ShapeSheet.CellValue PlowCode { get; set; }
+        public ShapeSheet.CellValue ResizePage { get; set; }
+        public ShapeSheet.CellValue RouteStyle { get; set; }
 
         public void Apply(SidSrcWriter writer, short id)
         {

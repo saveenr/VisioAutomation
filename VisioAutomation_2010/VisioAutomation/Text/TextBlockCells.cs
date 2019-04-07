@@ -5,15 +5,15 @@ namespace VisioAutomation.Text
 {
     public class TextBlockCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral BottomMargin { get; set; }
-        public VASS.CellValueLiteral LeftMargin { get; set; }
-        public VASS.CellValueLiteral RightMargin { get; set; }
-        public VASS.CellValueLiteral TopMargin { get; set; }
-        public VASS.CellValueLiteral DefaultTabStop { get; set; }
-        public VASS.CellValueLiteral Background { get; set; }
-        public VASS.CellValueLiteral BackgroundTransparency { get; set; }
-        public VASS.CellValueLiteral Direction { get; set; }
-        public VASS.CellValueLiteral VerticalAlign { get; set; }
+        public VASS.CellValue BottomMargin { get; set; }
+        public VASS.CellValue LeftMargin { get; set; }
+        public VASS.CellValue RightMargin { get; set; }
+        public VASS.CellValue TopMargin { get; set; }
+        public VASS.CellValue DefaultTabStop { get; set; }
+        public VASS.CellValue Background { get; set; }
+        public VASS.CellValue BackgroundTransparency { get; set; }
+        public VASS.CellValue Direction { get; set; }
+        public VASS.CellValue VerticalAlign { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

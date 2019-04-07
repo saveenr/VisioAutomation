@@ -4,20 +4,20 @@ namespace VisioAutomation.Models.Text
 {
     public class ParagraphFormatting 
     {
-        public ShapeSheet.CellValueLiteral Bullet { get; set; }
-        public ShapeSheet.CellValueLiteral BulletFont { get; set; }
-        public ShapeSheet.CellValueLiteral BulletFontSize { get; set; }
-        public ShapeSheet.CellValueLiteral BulletString { get; set; }
-        public ShapeSheet.CellValueLiteral Flags { get; set; }
-        public ShapeSheet.CellValueLiteral HorizontalAlign { get; set; }
-        public ShapeSheet.CellValueLiteral IndentFirst { get; set; }
-        public ShapeSheet.CellValueLiteral IndentLeft { get; set; }
-        public ShapeSheet.CellValueLiteral IndentRight { get; set; }
-        public ShapeSheet.CellValueLiteral LocBulletFont { get; set; }
-        public ShapeSheet.CellValueLiteral SpacingAfter { get; set; }
-        public ShapeSheet.CellValueLiteral SpacingBefore { get; set; }
-        public ShapeSheet.CellValueLiteral SpacingLine { get; set; }
-        public ShapeSheet.CellValueLiteral TextPosAfterBullet { get; set; }
+        public ShapeSheet.CellValue Bullet { get; set; }
+        public ShapeSheet.CellValue BulletFont { get; set; }
+        public ShapeSheet.CellValue BulletFontSize { get; set; }
+        public ShapeSheet.CellValue BulletString { get; set; }
+        public ShapeSheet.CellValue Flags { get; set; }
+        public ShapeSheet.CellValue HorizontalAlign { get; set; }
+        public ShapeSheet.CellValue IndentFirst { get; set; }
+        public ShapeSheet.CellValue IndentLeft { get; set; }
+        public ShapeSheet.CellValue IndentRight { get; set; }
+        public ShapeSheet.CellValue LocBulletFont { get; set; }
+        public ShapeSheet.CellValue SpacingAfter { get; set; }
+        public ShapeSheet.CellValue SpacingBefore { get; set; }
+        public ShapeSheet.CellValue SpacingLine { get; set; }
+        public ShapeSheet.CellValue TextPosAfterBullet { get; set; }
         
         internal void ApplyFormulas(VisioAutomation.ShapeSheet.Writers.SrcWriter writer, short row)
         {

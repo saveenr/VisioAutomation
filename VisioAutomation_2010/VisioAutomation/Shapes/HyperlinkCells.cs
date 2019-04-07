@@ -6,15 +6,15 @@ namespace VisioAutomation.Shapes
 {
     public class HyperlinkCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral Address { get; set; }
-        public VASS.CellValueLiteral Description { get; set; }
-        public VASS.CellValueLiteral ExtraInfo { get; set; }
-        public VASS.CellValueLiteral Frame { get; set; }
-        public VASS.CellValueLiteral SortKey { get; set; }
-        public VASS.CellValueLiteral SubAddress { get; set; }
-        public VASS.CellValueLiteral NewWindow { get; set; }
-        public VASS.CellValueLiteral Default { get; set; }
-        public VASS.CellValueLiteral Invisible { get; set; }
+        public VASS.CellValue Address { get; set; }
+        public VASS.CellValue Description { get; set; }
+        public VASS.CellValue ExtraInfo { get; set; }
+        public VASS.CellValue Frame { get; set; }
+        public VASS.CellValue SortKey { get; set; }
+        public VASS.CellValue SubAddress { get; set; }
+        public VASS.CellValue NewWindow { get; set; }
+        public VASS.CellValue Default { get; set; }
+        public VASS.CellValue Invisible { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {

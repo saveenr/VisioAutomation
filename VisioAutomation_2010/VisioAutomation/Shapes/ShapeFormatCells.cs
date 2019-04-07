@@ -6,31 +6,31 @@ namespace VisioAutomation.Shapes
 {
     public class ShapeFormatCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral FillBackground { get; set; }
-        public VASS.CellValueLiteral FillBackgroundTransparency { get; set; }
-        public VASS.CellValueLiteral FillForeground { get; set; }
-        public VASS.CellValueLiteral FillForegroundTransparency { get; set; }
-        public VASS.CellValueLiteral FillPattern { get; set; }
-        public VASS.CellValueLiteral FillShadowObliqueAngle { get; set; }
-        public VASS.CellValueLiteral FillShadowOffsetX { get; set; }
-        public VASS.CellValueLiteral FillShadowOffsetY { get; set; }
-        public VASS.CellValueLiteral FillShadowScaleFactor { get; set; }
-        public VASS.CellValueLiteral FillShadowType { get; set; }
-        public VASS.CellValueLiteral FillShadowBackground { get; set; }
-        public VASS.CellValueLiteral FillShadowBackgroundTransparency { get; set; }
-        public VASS.CellValueLiteral FillShadowForeground { get; set; }
-        public VASS.CellValueLiteral FillShadowForegroundTransparency { get; set; }
-        public VASS.CellValueLiteral FillShadowPattern { get; set; }
-        public VASS.CellValueLiteral LineBeginArrow { get; set; }
-        public VASS.CellValueLiteral LineBeginArrowSize { get; set; }
-        public VASS.CellValueLiteral LineEndArrow { get; set; }
-        public VASS.CellValueLiteral LineEndArrowSize { get; set; }
-        public VASS.CellValueLiteral LineCap { get; set; }
-        public VASS.CellValueLiteral LineColor { get; set; }
-        public VASS.CellValueLiteral LineColorTransparency { get; set; }
-        public VASS.CellValueLiteral LinePattern { get; set; }
-        public VASS.CellValueLiteral LineWeight { get; set; }
-        public VASS.CellValueLiteral LineRounding { get; set; }
+        public VASS.CellValue FillBackground { get; set; }
+        public VASS.CellValue FillBackgroundTransparency { get; set; }
+        public VASS.CellValue FillForeground { get; set; }
+        public VASS.CellValue FillForegroundTransparency { get; set; }
+        public VASS.CellValue FillPattern { get; set; }
+        public VASS.CellValue FillShadowObliqueAngle { get; set; }
+        public VASS.CellValue FillShadowOffsetX { get; set; }
+        public VASS.CellValue FillShadowOffsetY { get; set; }
+        public VASS.CellValue FillShadowScaleFactor { get; set; }
+        public VASS.CellValue FillShadowType { get; set; }
+        public VASS.CellValue FillShadowBackground { get; set; }
+        public VASS.CellValue FillShadowBackgroundTransparency { get; set; }
+        public VASS.CellValue FillShadowForeground { get; set; }
+        public VASS.CellValue FillShadowForegroundTransparency { get; set; }
+        public VASS.CellValue FillShadowPattern { get; set; }
+        public VASS.CellValue LineBeginArrow { get; set; }
+        public VASS.CellValue LineBeginArrowSize { get; set; }
+        public VASS.CellValue LineEndArrow { get; set; }
+        public VASS.CellValue LineEndArrowSize { get; set; }
+        public VASS.CellValue LineCap { get; set; }
+        public VASS.CellValue LineColor { get; set; }
+        public VASS.CellValue LineColorTransparency { get; set; }
+        public VASS.CellValue LinePattern { get; set; }
+        public VASS.CellValue LineWeight { get; set; }
+        public VASS.CellValue LineRounding { get; set; }
 
         public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
         {
