@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Models.Documents.Forms;
-using VisioAutomation.Models.Dom;
-using VisioAutomation.Models.Layouts.Tree;
+using VADOC=VisioAutomation.Models.Documents;
+using VADOM=VisioAutomation.Models.Dom;
+using VATREE=VisioAutomation.Models.Layouts.Tree;
 using IVisio = Microsoft.Office.Interop.Visio;
-using Node = VisioAutomation.Models.Layouts.Tree.Node;
 
 namespace VisioScripting.Commands
 {
@@ -38,7 +37,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetApplication();
 
 
-            var formdoc = new VisioAutomation.Models.Documents.Forms.FormDocument();
+            var formdoc = new VADOC.Forms.FormDocument();
             formdoc.Subject = "VisioAutomation.Scripting Documenation";
             formdoc.Title = "VisioAutomation.Scripting Documenation";
             formdoc.Creator = "";
@@ -82,12 +81,12 @@ namespace VisioScripting.Commands
                 helpstr.Length = 0;
                 VisioScripting.Helpers.TextHelper.Join(helpstr,"\r\n",lines);
 
-                var formpage = new VisioAutomation.Models.Documents.Forms.FormPage();
+                var formpage = new VADOC.Forms.FormPage();
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
                 formpage.Size = new VisioAutomation.Geometry.Size(8.5, 11);
-                formpage.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
+                formpage.PageMargin = new VADOC.Forms.PageMargin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
             }
@@ -105,7 +104,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTargetApplication();
 
 
-            var formdoc = new VisioAutomation.Models.Documents.Forms.FormDocument();
+            var formdoc = new VADOC.Forms.FormDocument();
 
             var helpstr = new System.Text.StringBuilder();
             int chunksize = 70;
@@ -125,9 +124,9 @@ namespace VisioScripting.Commands
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
                     }
 
-                    var formpage = new VisioAutomation.Models.Documents.Forms.FormPage();
+                    var formpage = new VADOC.Forms.FormPage();
                     formpage.Size = new VisioAutomation.Geometry.Size(8.5, 11);
-                    formpage.PageMargin = new PageMargin(0.5, 0.5, 0.5, 0.5);
+                    formpage.PageMargin = new VADOC.Forms.PageMargin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)
@@ -246,10 +245,10 @@ namespace VisioScripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new VisioAutomation.Models.Layouts.Tree.Drawing();
-            tree_layout.LayoutOptions.Direction = LayoutDirection.Right;
-            tree_layout.LayoutOptions.ConnectorType = ConnectorType.CurvedBezier;
-            var ns_node_map = new Dictionary<string, Node>(namespaces.Count);
+            var tree_layout = new VATREE.Drawing();
+            tree_layout.LayoutOptions.Direction = VATREE.LayoutDirection.Right;
+            tree_layout.LayoutOptions.ConnectorType = VATREE.ConnectorType.CurvedBezier;
+            var ns_node_map = new Dictionary<string, VATREE.Node>(namespaces.Count);
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -261,7 +260,7 @@ namespace VisioScripting.Commands
                     label = ns.Substring(index_of_last_sep+1);
                 }
 
-                var node = new Node(ns);
+                var node = new VATREE.Node(ns);
                 node.Text = new VisioAutomation.Models.Text.Element(label);
                 node.Size = new VisioAutomation.Geometry.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
@@ -299,7 +298,7 @@ namespace VisioScripting.Commands
             else
             {
                 // if there are multiple root namespaces, inject an empty placeholder root
-                var root_n = new Node();
+                var root_n = new VATREE.Node();
                 tree_layout.Root = root_n;
 
                 foreach (var root_ns in pathbuilder.Roots)
@@ -314,7 +313,7 @@ namespace VisioScripting.Commands
             {
                 if (node.Cells==null)
                 {
-                    node.Cells = new ShapeCells();                    
+                    node.Cells = new VADOM.ShapeCells();                    
                 }
                 node.Cells.FillForeground = def_fillcolor;
                 node.Cells.CharFont = fontid;
@@ -322,7 +321,7 @@ namespace VisioScripting.Commands
                 node.Cells.ParaHorizontalAlign = "0";
             }
 
-            var cxn_cells = new ShapeCells();
+            var cxn_cells = new VADOM.ShapeCells();
             cxn_cells.LineColor = def_linecolor;
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
 
@@ -360,7 +359,7 @@ namespace VisioScripting.Commands
         private class TypeInfo
         {
             public readonly Type Type;
-            public VisioScripting.Helpers.ReflectionHelper.TypeCategory TypeCategory ;
+            public Helpers.ReflectionHelper.TypeCategory TypeCategory ;
             public readonly string Label;
 
             public TypeInfo(Type type)
@@ -406,11 +405,11 @@ namespace VisioScripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new VisioAutomation.Models.Layouts.Tree.Drawing();
-            tree_layout.LayoutOptions.Direction = LayoutDirection.Down;
-            tree_layout.LayoutOptions.ConnectorType = ConnectorType.PolyLine;
-            var ns_node_map = new Dictionary<string, Node>(namespaces.Count);
-            var node_to_nslabel = new Dictionary<Node, string>(namespaces.Count);
+            var tree_layout = new VATREE.Drawing();
+            tree_layout.LayoutOptions.Direction = VATREE.LayoutDirection.Down;
+            tree_layout.LayoutOptions.ConnectorType = VATREE.ConnectorType.PolyLine;
+            var ns_node_map = new Dictionary<string, VATREE.Node>(namespaces.Count);
+            var node_to_nslabel = new Dictionary<VATREE.Node, string>(namespaces.Count);
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -426,7 +425,7 @@ namespace VisioScripting.Commands
                 var types_in_namespace = types.Where(t => t.Type.Namespace == ns1)
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
-                var node = new Node(ns);
+                var node = new VATREE.Node(ns);
                 node.Size = new VisioAutomation.Geometry.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
@@ -478,7 +477,7 @@ namespace VisioScripting.Commands
             else
             {
                 // if there are multiple root namespaces, inject an empty placeholder root
-                var root_n = new Node();
+                var root_n = new VATREE.Node();
                 tree_layout.Root = root_n;
 
                 foreach (var root_ns in pathbuilder.Roots)
@@ -493,7 +492,7 @@ namespace VisioScripting.Commands
             {
                 if (node.Cells == null)
                 {
-                    node.Cells = new ShapeCells();
+                    node.Cells = new VADOM.ShapeCells();
                 }
                 node.Cells.FillForeground = def_shape_fill;
                 //node.ShapeCells.LineWeight = "0";
@@ -503,7 +502,7 @@ namespace VisioScripting.Commands
                 node.Cells.TextBlockVerticalAlign = "0";
             }
 
-            var cxn_cells = new ShapeCells();
+            var cxn_cells = new VADOM.ShapeCells();
             cxn_cells.LineColor = def_linecolor;
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
             tree_layout.Render(doc.Application.ActivePage);
