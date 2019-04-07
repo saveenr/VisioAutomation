@@ -134,7 +134,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void DuplicateShapes(int n)
+        public void Duplicate(VisioScripting.TargetSelection targetselection,int n)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -155,7 +155,7 @@ namespace VisioScripting.Commands
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
             var application = cmdtarget.Application;
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicateShapes)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(Duplicate)))
             {
                 var active_page = application.ActivePage;
                 var new_shapes = DrawCommands._create_duplicates(active_page, selection[1], n);

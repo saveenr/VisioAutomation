@@ -31,7 +31,7 @@ namespace VisioScripting.Commands
             selection.Export(filename);
         }
 
-        public void ExportSelectionToHtml(TargetSelection targetselection, string filename)
+        public void ExportToHtml(TargetSelection targetselection, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -48,10 +48,10 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException(msg);
             }
 
-            this._export_selection_to_html(selection, filename, s => this._client.Output.WriteVerbose(s));
+            this._export_to_html(selection, filename, s => this._client.Output.WriteVerbose(s));
         }
 
-        private void _export_selection_to_html(IVisio.Selection selection, string filename, System.Action<string> export_log)
+        private void _export_to_html(IVisio.Selection selection, string filename, System.Action<string> export_log)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void NudgeSelection(TargetSelection targetselection, double dx, double dy)
+        public void Nudge(TargetSelection targetselection, double dx, double dy)
         {
             if (dx == 0.0 && dy == 0.0)
             {
@@ -19,7 +19,7 @@ namespace VisioScripting.Commands
 
             var cmdtarget = this._client.GetCommandTargetDocument();
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(NudgeSelection)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(Nudge)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;
@@ -52,7 +52,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void SendSelection(Models.ShapeSendDirection dir)
+        public void Send(Models.ShapeSendDirection dir)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             var window = cmdtarget.Application.ActiveWindow;

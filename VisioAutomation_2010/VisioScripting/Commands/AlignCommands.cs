@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void AlignSelectionHorizontal(TargetSelection targetselection, Models.AlignmentHorizontal align)
+        public void AlignHorizontal(TargetSelection targetselection, Models.AlignmentHorizontal align)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
 
             const bool glue_to_guide = false;
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AlignSelectionHorizontal)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AlignHorizontal)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;
@@ -41,7 +41,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void AlignSelectionVertical(TargetSelection targetselection, Models.AlignmentVertical align)
+        public void AlignVertical(TargetSelection targetselection, Models.AlignmentVertical align)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
             
@@ -59,7 +59,7 @@ namespace VisioScripting.Commands
             const bool glue_to_guide = false;
 
             // Perform the alignment
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AlignSelectionVertical)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AlignVertical)))
             {
                 var window = cmdtarget.Application.ActiveWindow;
                 var selection = window.Selection;

@@ -11,7 +11,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public IVisio.Shape GroupSelectedShapes(TargetSelection targetselection)
+        public IVisio.Shape GroupShapes(TargetSelection targetselection)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -31,28 +31,20 @@ namespace VisioScripting.Commands
             return g;
         }
 
-        public void UngroupSelectedShapes(TargetShapes targetshapes)
+        public void Ungroup(TargetShapes targetshapes)
+        {
+            targetshapes = targetshapes.Resolve(this._client);
+            foreach (var shape in targetshapes.Shapes)
+            {
+                shape.Ungroup();
+            }
+        }
+
+        public void Ungroup(TargetSelection target_selection)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
-
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
-
-            if (!targetshapes.IsResolved)
-            {
-                if (selection.Count>=1)
-                {
-                    var application = cmdtarget.Application;
-                    application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
-                }
-            }
-            else
-            {
-                foreach (var shape in targetshapes.Shapes)
-                {
-                    shape.Ungroup();
-                }
-            }
+            var application = cmdtarget.Application;
+            application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
         }
     }
 }

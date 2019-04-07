@@ -10,20 +10,20 @@ namespace VisioScripting.Commands
 
         }
 
-        public void DistributeSelectionOnAxis(TargetShapes targetshapes, Models.Axis axis, double spacing)
+        public void DistributenOnAxis(TargetShapes targetshapes, Models.Axis axis, double spacing)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             targetshapes = targetshapes.Resolve(this._client);
             var targetshapeids = targetshapes.ToShapeIDs();
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeSelectionOnAxis)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeOnAxis)))
             {
                 VisioScripting.Helpers.ArrangeHelper._distribute_with_spacing(page, targetshapeids, axis, spacing);
             }
         }
 
-        public void DistributeSelectionOnAxis(VisioScripting.TargetSelection targetselection, Models.Axis axis)
+        public void DistributeOnAxis(VisioScripting.TargetSelection targetselection, Models.Axis axis)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -41,13 +41,13 @@ namespace VisioScripting.Commands
                     throw new System.ArgumentOutOfRangeException();
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeSelectionOnAxis)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeOnAxis)))
             {
                 cmdtarget.Application.DoCmd((short)cmd);
             }
         }
 
-        public void DistributeShapesHorizontal(TargetShapes targetshapes, Models.AlignmentHorizontal halign)
+        public void DistributeHorizontal(TargetShapes targetshapes, Models.AlignmentHorizontal halign)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
