@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(CellGroups.CellGroup cellgroup, short row)
         {
-            foreach (var pair in cellgroup.SrcValuePairs_NewRow(row))
+            foreach (var pair in cellgroup.GetSrcValuePairs_NewRow(row))
             {
                 this.SetValue(pair.Src, pair.Value);
             }
@@ -38,7 +38,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cellgroup.SrcValuePairs)
+            foreach (var pair in cellgroup.GetSrcValuePairs())
             {
                 this.SetValue(pair.Src, pair.Value);
             }
