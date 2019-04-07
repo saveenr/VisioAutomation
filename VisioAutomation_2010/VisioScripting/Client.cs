@@ -17,7 +17,6 @@ namespace VisioScripting
         public Commands.ControlCommands Control { get; }
         public Commands.CustomPropertyCommands CustomProperty { get; }
         public Commands.DeveloperCommands Developer { get; }
-        public Commands.DistributeCommands Distribute { get; }
         public Commands.DocumentCommands Document { get; }
         public Commands.DrawCommands Draw { get; }
         public Commands.ExportPageCommands ExportPage { get; }
@@ -57,7 +56,6 @@ namespace VisioScripting
             this.Control = new Commands.ControlCommands(this);
             this.CustomProperty = new Commands.CustomPropertyCommands(this);
             this.Developer = new Commands.DeveloperCommands(this);
-            this.Distribute = new Commands.DistributeCommands(this);
             this.Document = new Commands.DocumentCommands(this);
             this.Draw = new Commands.DrawCommands(this);
             this.ExportPage = new Commands.ExportPageCommands(this);

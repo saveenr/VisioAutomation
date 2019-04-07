@@ -33,12 +33,12 @@ namespace VisioPowerShell.Commands.VisioShape
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Distribute.DistributeOnAxis(new TargetSelection(), VisioScripting.Models.Axis.XAxis);
+                this.Client.Arrange.DistributeOnAxis(new TargetSelection(), VisioScripting.Models.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Distribute.DistributeOnAxis(new TargetSelection(), VisioScripting.Models.Axis.YAxis);
+                this.Client.Arrange.DistributeOnAxis(new TargetSelection(), VisioScripting.Models.Axis.YAxis);
             }
 
             if (this.AlignVertical.HasValue)
