@@ -11,15 +11,15 @@ namespace VisioAutomation_Tests.Scripting
         {
             var desired_size = new System.Drawing.Size(600, 700);
             var client = this.GetScriptingClient();
-            var old_rect = client.Window.GetApplicationWindowRectangle();
+            var old_rect = client.Application.GetApplicationWindowRectangle();
             var new_rect = new System.Drawing.Rectangle(old_rect.X, old_rect.Y, desired_size.Width, desired_size.Height);
 
-            client.Window.SetApplicationWindowRectangle(new_rect);
-            var actual_rect1 = client.Window.GetApplicationWindowRectangle();
+            client.Application.SetApplicationWindowRectangle(new_rect);
+            var actual_rect1 = client.Application.GetApplicationWindowRectangle();
             Assert.AreEqual(desired_size, actual_rect1.Size);
 
-            client.Window.SetApplicationWindowRectangle(old_rect);
-            var actual_rect2 = client.Window.GetApplicationWindowRectangle();
+            client.Application.SetApplicationWindowRectangle(old_rect);
+            var actual_rect2 = client.Application.GetApplicationWindowRectangle();
             Assert.AreEqual(old_rect.Size, actual_rect2.Size);
             Assert.AreEqual(old_rect, actual_rect2);
 
@@ -53,7 +53,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Test_App_to_Front()
         {
             var client = this.GetScriptingClient();
-            client.Window.MoveApplicationWindowToFront();
+            client.Application.MoveApplicationWindowToFront();
         }
 
         [TestMethod]

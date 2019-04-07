@@ -30,7 +30,7 @@ namespace VisioPowerShell.Commands.VisioWindow
         {
             if (this.Width > 0 || this.Height > 0)
             {
-                var old_rect = this.Client.Window.GetApplicationWindowRectangle();
+                var old_rect = this.Client.Application.GetApplicationWindowRectangle();
                 var new_rect = old_rect;
 
                 if (this.Width.HasValue)
@@ -53,7 +53,7 @@ namespace VisioPowerShell.Commands.VisioWindow
                     new_rect.Y = this.Y.Value;
                 }
 
-                this.Client.Window.SetApplicationWindowRectangle(new_rect);
+                this.Client.Application.SetApplicationWindowRectangle(new_rect);
             }
 
             if (this.Zoom > 0)
