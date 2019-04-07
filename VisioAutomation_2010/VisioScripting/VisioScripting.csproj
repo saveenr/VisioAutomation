@@ -66,12 +66,15 @@
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
     <Compile Include="Models\ConnectionPointType.cs" />
+    <Compile Include="TargetActiveDocument.cs" />
+    <Compile Include="TargetActivePage.cs" />
     <Compile Include="TargetDocument.cs" />
     <Compile Include="TargetDocuments.cs" />
     <Compile Include="TargetObject.cs" />
     <Compile Include="TargetObjects.cs" />
     <Compile Include="TargetPage.cs" />
     <Compile Include="TargetPages.cs" />
+    <Compile Include="TargetSelection.cs" />
     <Compile Include="TargetShapes.cs" />
     <Compile Include="Helpers\ArrangeHelper.cs" />
     <Compile Include="Client.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="Models\SnappingGrid.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Models\ZoomToObject.cs" />
+    <Compile Include="TargetWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">

@@ -25,40 +25,4 @@ namespace VisioScripting
 
         public bool IsResolved => !this.UseContext;
     }
-
-    public class TargetSelection 
-    {
-
-        public TargetSelection()
-        {
-        }
-
-    }
-
-    public class TargetWindow
-    {
-
-        public TargetWindow()
-        {
-        }
-
-    }
-
-    public class TargetActivePage
-    {
-
-        public TargetActivePage()
-        {
-        }
-
-    }
-
-    public class TargetActiveDocument
-    {
-
-        public TargetActiveDocument()
-        {
-        }
-
-    }
 }
