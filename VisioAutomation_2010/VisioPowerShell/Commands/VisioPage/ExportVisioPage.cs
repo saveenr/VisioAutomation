@@ -16,11 +16,11 @@ namespace VisioPowerShell.Commands.VisioPage
         {
             if (this.AllPages)
             {
-                this.Client.ExportPage.ExportAllPagesInActiveDocumentToFiles(this.Filename);
+                this.Client.Export.ExportAllPagesInActiveDocumentToFiles(this.Filename);
             }
             else
             {
-                this.Client.ExportPage.ExportActivePageToFile(this.Filename);
+                this.Client.Export.ExportActivePageToFile(this.Filename);
             }
         }
     }

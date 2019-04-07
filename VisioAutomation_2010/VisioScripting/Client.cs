@@ -19,8 +19,7 @@ namespace VisioScripting
         public Commands.DeveloperCommands Developer { get; }
         public Commands.DocumentCommands Document { get; }
         public Commands.DrawCommands Draw { get; }
-        public Commands.ExportPageCommands ExportPage { get; }
-        public Commands.ExportSelectionCommands ExportSelection { get; }
+        public Commands.ExportCommands Export { get; }
         public Commands.GroupingCommands Grouping { get; }
         public Commands.HyperlinkCommands Hyperlink { get; }
         public Commands.LayerCommands Layer { get; }
@@ -58,8 +57,7 @@ namespace VisioScripting
             this.Developer = new Commands.DeveloperCommands(this);
             this.Document = new Commands.DocumentCommands(this);
             this.Draw = new Commands.DrawCommands(this);
-            this.ExportPage = new Commands.ExportPageCommands(this);
-            this.ExportSelection = new Commands.ExportSelectionCommands(this);
+            this.Export = new Commands.ExportCommands(this);
             this.Grouping = new Commands.GroupingCommands(this);
             this.Hyperlink = new Commands.HyperlinkCommands(this);
             this.Layer = new Commands.LayerCommands(this);
