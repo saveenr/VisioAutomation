@@ -9,7 +9,6 @@ namespace VisioScripting
     {
         private readonly ClientContext _client_context;
 
-        public Commands.AlignCommands Align { get; }
         public Commands.ApplicationCommands Application { get; }
         public Commands.ArrangeCommands Arrange { get; }
         public Commands.ChartingCommands Charting { get; }
@@ -50,7 +49,6 @@ namespace VisioScripting
             }
 
             this._client_context = client_context;
-            this.Align = new Commands.AlignCommands(this);
             this.Application = new Commands.ApplicationCommands(this, app);
             this.Arrange = new Commands.ArrangeCommands(this);
             this.Charting = new Commands.ChartingCommands(this);

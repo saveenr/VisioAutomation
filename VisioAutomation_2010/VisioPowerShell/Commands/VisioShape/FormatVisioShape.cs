@@ -43,12 +43,12 @@ namespace VisioPowerShell.Commands.VisioShape
 
             if (this.AlignVertical.HasValue)
             {
-                this.Client.Align.AlignVertical(new TargetSelection(), this.AlignVertical.Value);
+                this.Client.Arrange.AlignVertical(new TargetSelection(), this.AlignVertical.Value);
             }
 
             if (this.AlignHorizontal.HasValue)
             {
-                this.Client.Align.AlignHorizontal(new TargetSelection(), this.AlignHorizontal.Value);
+                this.Client.Arrange.AlignHorizontal(new TargetSelection(), this.AlignHorizontal.Value);
             }
 
         }
