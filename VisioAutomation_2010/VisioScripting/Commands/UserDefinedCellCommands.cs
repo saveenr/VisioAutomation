@@ -16,20 +16,10 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells_ShapeDictionary(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-            var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
-
             targetshapes = targetshapes.Resolve(this._client);
+            var listof_udcelldic = GetUserDefinedCells_List(targetshapes, cvt);
 
-            if (targetshapes.Shapes.Count < 1)
-            {
-                return dicof_shape_to_udcelldic;
-            }
-
-            var page = cmdtarget.ActivePage;
-            var shapeidpairs = targetshapes.ToShapeIDPairs();
-            var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetDictionary((IVisio.Page) page , shapeidpairs, cvt);
-
+            var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
             for (int i = 0; i < targetshapes.Shapes.Count; i++)
             {
                 var shape = targetshapes.Shapes[i];
@@ -38,6 +28,24 @@ namespace VisioScripting.Commands
             }
 
             return dicof_shape_to_udcelldic;
+        }
+
+        public List<VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells_List(TargetShapes targetshapes, VASS.CellValueType cvt)
+        {
+            var cmdtarget = this._client.GetCommandTargetPage();
+
+            targetshapes = targetshapes.Resolve(this._client);
+
+            if (targetshapes.Shapes.Count < 1)
+            {
+                return new List<VA.Shapes.UserDefinedCellDictionary>(0);
+            }
+
+            var page = cmdtarget.ActivePage;
+            var shapeidpairs = targetshapes.ToShapeIDPairs();
+            var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetDictionary((IVisio.Page)page, shapeidpairs, cvt);
+
+            return listof_udcelldic;
         }
 
         public List<bool> ContainsUserDefinedCellsWithName(TargetShapes targetshapes, string name)
