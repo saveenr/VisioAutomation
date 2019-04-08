@@ -12,8 +12,6 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Name { get; set; }
 
-        [SMA.Parameter(Position = 1, Mandatory = true, ParameterSetName = "HashTable")]
-        public Hashtable Hashtable{ get; set; }
 
         [SMA.Parameter(Position = 1, Mandatory = true, ParameterSetName = "Cells")]
         public VisioAutomation.Shapes.CustomPropertyCells Cells { get; set; }
@@ -53,11 +51,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
 
         protected override void ProcessRecord()
         {
-            if (this.Hashtable != null)
-            {
-                this._set_from_hash_table();
-            }
-            else if (this.Cells != null)
+            if (this.Cells != null)
             {
                 this._set_from_cells();
             }
@@ -127,31 +121,6 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
         {
             var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
             this.Client.CustomProperty.SetCustomProperty(targetshapes, this.Name, this.Cells);
-        }
-
-        private void _set_from_hash_table()
-        {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
-
-            if (this.Hashtable.Count < 1)
-            {
-                return;
-            }
-
-            foreach (object key in this.Hashtable.Keys)
-            {
-                if (!(key is string))
-                {
-                    string msg = "Property Names must be strings";
-                    throw new ArgumentOutOfRangeException(msg);
-                }
-
-                string key_string = (string) key;
-
-                object value = this.Hashtable[key];
-                var cp = _create_cust_prop_from_object(value);
-                this.Client.CustomProperty.SetCustomProperty(targetshapes, key_string, cp);
-            }
         }
 
         private static CustomPropertyCells _create_cust_prop_from_object(object value)
