@@ -5,13 +5,6 @@ namespace VisioAutomation.ShapeSheet
 {
     internal static class ShapeSheetHelper
     {
-        public static string GetSectionName(IVisio.VisSectionIndices value)
-        {
-            string s = value.ToString();
-            const int start_index = 10; // Length of string "visSection"
-            return s.Substring(start_index); // Get Rid of the visSection prefix
-        }
-
         public static IEnumerable<IVisio.Row> ToEnumerable(IVisio.Section section)
         {
             // Section object: http://msdn.microsoft.com/en-us/library/ms408988(v=office.12).aspx
