@@ -88,7 +88,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetUserDefinedCell(TargetShapes targetshapes, Models.UserDefinedCell userdefinedcell)
+        public void SetUserDefinedCell(TargetShapes targetshapes, string name, VA.Shapes.UserDefinedCellCells udcellcells)
         {
             targetshapes = targetshapes.Resolve(this._client);
 
@@ -101,7 +101,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targetshapes.Shapes)
                 {
-                    VA.Shapes.UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells);
+                    VA.Shapes.UserDefinedCellHelper.Set(shape, name, udcellcells);
                 }
             }
         }
