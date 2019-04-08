@@ -20,7 +20,7 @@ namespace VisioScripting.Commands
             var listof_udcelldic = GetUserDefinedCells_List(targetshapes, cvt);
 
             var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
-            for (int i = 0; i < targetshapes.Shapes.Count; i++)
+            for (int i = 0; i < listof_udcelldic.Count; i++)
             {
                 var shape = targetshapes.Shapes[i];
                 var props = listof_udcelldic[i];
