@@ -14,11 +14,11 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomProperties_ShapeDictionary(TargetShapes targetshapes, VASS.CellValueType type)
+        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomPropertiesAsShapeDictionary(TargetShapes targetshapes, VASS.CellValueType type)
         {
             targetshapes = targetshapes.Resolve(this._client);
             var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
-            var listof_cpdic = GetCustomProperties_List(targetshapes, type);
+            var listof_cpdic = GetCustomProperties(targetshapes, type);
 
             for (int i = 0; i < listof_cpdic.Count; i++)
             {
@@ -30,7 +30,7 @@ namespace VisioScripting.Commands
             return dicof_shape_to_cpdic;
         }
 
-        public List<CustomPropertyDictionary> GetCustomProperties_List(TargetShapes targetshapes, VASS.CellValueType type)
+        public List<CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes, VASS.CellValueType type)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
             targetshapes = targetshapes.Resolve(this._client);

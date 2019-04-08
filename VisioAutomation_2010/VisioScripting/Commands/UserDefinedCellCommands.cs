@@ -14,10 +14,10 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells_ShapeDictionary(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCellsAsShapeDictionary(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
             targetshapes = targetshapes.Resolve(this._client);
-            var listof_udcelldic = GetUserDefinedCells_List(targetshapes, cvt);
+            var listof_udcelldic = GetUserDefinedCells(targetshapes, cvt);
 
             var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
             for (int i = 0; i < listof_udcelldic.Count; i++)
@@ -30,7 +30,7 @@ namespace VisioScripting.Commands
             return dicof_shape_to_udcelldic;
         }
 
-        public List<VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells_List(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public List<VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

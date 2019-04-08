@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
         {
             var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
             var type = VASS.CellValueType.Formula;
-            var dicof_shape_to_udcelldic = this.Client.UserDefinedCell.GetUserDefinedCells_ShapeDictionary(targetshapes, type);
+            var dicof_shape_to_udcelldic = this.Client.UserDefinedCell.GetUserDefinedCellsAsShapeDictionary(targetshapes, type);
 
             this.WriteObject(dicof_shape_to_udcelldic);
         }
