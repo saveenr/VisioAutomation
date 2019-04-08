@@ -113,7 +113,6 @@
     <Compile Include="Models\ShapeCells.cs" />
     <Compile Include="Models\UserDefinedCell.cs" />
     <Compile Include="Models\ConnectionPoint.cs" />
-    <Compile Include="Models\CustomProperty.cs" />
     <Compile Include="Commands\Visio\OutVisio.cs" />
     <Compile Include="Models\DirectedEdge.cs" />
     <Compile Include="Commands\VisioShapeCells\GetVisioShapeCells.cs" />
