@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells_ShapeDictionary(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
             var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
@@ -28,7 +28,7 @@ namespace VisioScripting.Commands
 
             var page = cmdtarget.ActivePage;
             var shapeidpairs = targetshapes.ToShapeIDPairs();
-            var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
+            var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetDictionary((IVisio.Page) page , shapeidpairs, cvt);
 
             for (int i = 0; i < targetshapes.Shapes.Count; i++)
             {

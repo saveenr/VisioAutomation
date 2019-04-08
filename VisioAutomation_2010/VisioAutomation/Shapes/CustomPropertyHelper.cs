@@ -63,7 +63,7 @@ namespace VisioAutomation.Shapes
             writer.Commit(shape, VASS.CellValueType.Formula);
         }
 
-        public static CustomPropertyDictionary GetCellsAsDictionary(IVisio.Shape shape, VASS.CellValueType type)
+        public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
 
   
         {
@@ -72,13 +72,30 @@ namespace VisioAutomation.Shapes
             return shape_custprop_dic;
         }
 
-        public static List<CustomPropertyDictionary> GetCellsAsDictionary(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<CustomPropertyDictionary> GetDictionary(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
         {
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
-            var listof_custpropdics = __GetListOfCpDic(shapeidpairs, listof_listof_custpropscells);
+            var listof_custpropdics = _get_cells_as_list(shapeidpairs, listof_listof_custpropscells);
 
             return listof_custpropdics;
         }
+
+        public static List<CustomPropertyDictionary> _get_cells_as_list(
+            ShapeIDPairs shapeidpairs,
+            List<List<CustomPropertyCells>> customprops_per_shape)
+        {
+            if (customprops_per_shape.Count != shapeidpairs.Count)
+            {
+                throw new Exceptions.InternalAssertionException();
+            }
+
+            var listof_listof_cppair = __GetListOfCpPairLists(shapeidpairs, customprops_per_shape);
+            var enumof_cpdic = listof_listof_cppair.Select(i => CustomPropertyDictionary.FromPairs(i));
+            var list_cpdic = new List<CustomPropertyDictionary>(shapeidpairs.Count);
+            list_cpdic.AddRange(enumof_cpdic);
+            return list_cpdic;
+        }
+
 
         public static int GetCount(IVisio.Shape shape)
         {
@@ -237,23 +254,6 @@ namespace VisioAutomation.Shapes
             }
 
             return list;
-        }
-
-        private static List<CustomPropertyDictionary> __GetListOfCpDic(
-
-          ShapeIDPairs shapeidpairs,
-            List<List<CustomPropertyCells>> customprops_per_shape)
-        {
-            if (customprops_per_shape.Count != shapeidpairs.Count)
-            {
-                throw new Exceptions.InternalAssertionException();
-            }
-
-            var listof_listof_cppair = __GetListOfCpPairLists(shapeidpairs, customprops_per_shape);
-            var enumof_cpdic = listof_listof_cppair.Select(i => CustomPropertyDictionary.FromPairs(i));
-            var list_cpdic = new List<CustomPropertyDictionary>(shapeidpairs.Count);
-            list_cpdic.AddRange(enumof_cpdic);
-            return list_cpdic;
         }
 
         private static List<List<CustomPropertyNameCellsPair>> __GetListOfCpPairLists(

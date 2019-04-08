@@ -39,14 +39,14 @@ namespace VisioAutomation_Tests.Core.Shapes
 
 
 
-            var udcs = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula);
+            var udcs = VA.Shapes.UserDefinedCellHelper.GetDictionary(s1, VASS.CellValueType.Formula);
             Assert.AreEqual(1,udcs.Count);
             Assert.AreEqual("\"BAR\"", udcs["FOO1"].Value.Value);
             Assert.AreEqual("\"\"", udcs["FOO1"].Prompt.Value);
 
             // Verify that we can set the value without affecting the prompt
             SetCP(s1,"FOO1","BEER",null);
-            udcs = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula);
+            udcs = VA.Shapes.UserDefinedCellHelper.GetDictionary(s1, VASS.CellValueType.Formula);
 
 
             Assert.AreEqual(1, udcs.Count);
@@ -56,7 +56,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             // Verify that we can set passing in nulls changes nothing
             SetCP(s1, "FOO1", null, null);
 
-          udcs = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula);
+          udcs = VA.Shapes.UserDefinedCellHelper.GetDictionary(s1, VASS.CellValueType.Formula);
 
 
             Assert.AreEqual(1, udcs.Count);
@@ -66,7 +66,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             // Verify that we can set the prompt without affecting the value
             SetCP(s1, "FOO1", null, "Prompt1");
 
-            udcs = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula);
+            udcs = VA.Shapes.UserDefinedCellHelper.GetDictionary(s1, VASS.CellValueType.Formula);
 
             Assert.AreEqual(1, udcs.Count);
             Assert.AreEqual("\"BEER\"", udcs["FOO1"].Value.Value);
@@ -92,7 +92,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             SetCP(s1, "foo", "bar", null);
 
             var shapeidpairs = VA.ShapeIDPairs.FromShapes(shapes);
-            var props1 = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(page1, shapeidpairs, VASS.CellValueType.Formula);
+            var props1 = VA.Shapes.UserDefinedCellHelper.GetDictionary(page1, shapeidpairs, VASS.CellValueType.Formula);
 
             Assert.AreEqual(2, props1.Count);
             Assert.AreEqual(1, props1[0].Count);
@@ -155,7 +155,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             // By default a shape has ZERO custom Properties
 
-            Assert.AreEqual(0, VA.Shapes.CustomPropertyHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula).Count);
+            Assert.AreEqual(0, VA.Shapes.CustomPropertyHelper.GetDictionary(s1, VASS.CellValueType.Formula).Count);
 
 
             // Add the same one multiple times Custom Property
@@ -295,7 +295,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             var shapeidpairs = VA.ShapeIDPairs.FromShapes(s1, s2, s3, s4);
 
-            var allprops = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(page1, shapeidpairs, VASS.CellValueType.Formula);
+            var allprops = VA.Shapes.UserDefinedCellHelper.GetDictionary(page1, shapeidpairs, VASS.CellValueType.Formula);
 
             Assert.AreEqual(4, allprops.Count);
             Assert.AreEqual(1, allprops[0].Count);
@@ -318,21 +318,21 @@ namespace VisioAutomation_Tests.Core.Shapes
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
-            var p1 = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula);
+            var p1 = VA.Shapes.UserDefinedCellHelper.GetDictionary(s1, VASS.CellValueType.Formula);
             Assert.AreEqual(0, p1.Count);
 
             SetCP(s1, "FOO1", "1", null);
             SetCP(s1, "FOO2", "2", null);
             SetCP(s1, "FOO3", "3\"4", null);
 
-            var p2 = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Formula);
+            var p2 = VA.Shapes.UserDefinedCellHelper.GetDictionary(s1, VASS.CellValueType.Formula);
             Assert.AreEqual(3, p2.Count);
             
             Assert.AreEqual("\"1\"", p2["FOO1"].Value.Value);
             Assert.AreEqual("\"2\"", p2["FOO2"].Value.Value);
             Assert.AreEqual("\"3\"\"4\"", p2["FOO3"].Value.Value);
             
-            var results_dic = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(s1, VASS.CellValueType.Result);
+            var results_dic = VA.Shapes.UserDefinedCellHelper.GetDictionary(s1, VASS.CellValueType.Result);
             Assert.AreEqual(3, results_dic.Count);
 
             Assert.AreEqual("1", results_dic["FOO1"].Value.Value);
