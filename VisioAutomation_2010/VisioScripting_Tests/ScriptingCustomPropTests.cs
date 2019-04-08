@@ -55,7 +55,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(targetwindow, s3);
 
             var targetshapes = new VisioScripting.TargetShapes();
-            var prop_dic0 = client.CustomProperty.GetCustomProperties(targetshapes);
+            var prop_dic0 = client.CustomProperty.GetCustomProperties(targetshapes, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);
             Assert.AreEqual(0, prop_dic0[s2].Count);
@@ -65,7 +65,7 @@ namespace VisioAutomation_Tests.Scripting
             cp.Value = "\"BAR\"";
             client.CustomProperty.SetCustomProperty(targetshapes, "FOO",cp);
 
-            var prop_dic1 = client.CustomProperty.GetCustomProperties(targetshapes);
+            var prop_dic1 = client.CustomProperty.GetCustomProperties(targetshapes, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic1.Count);
             Assert.AreEqual(1, prop_dic1[s1].Count);
             Assert.AreEqual(1, prop_dic1[s2].Count);
@@ -84,7 +84,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.CustomProperty.DeleteCustomPropertyWithName(targetshapes,"FOO");
 
-            var prop_dic2 = client.CustomProperty.GetCustomProperties(targetshapes);
+            var prop_dic2 = client.CustomProperty.GetCustomProperties(targetshapes, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic2.Count);
             Assert.AreEqual(0, prop_dic2[s1].Count);
             Assert.AreEqual(0, prop_dic2[s2].Count);

@@ -1,4 +1,4 @@
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -13,7 +13,8 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
         protected override void ProcessRecord()
         {
             var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
-            var dicof_shape_to_udcelldic = this.Client.UserDefinedCell.GetUserDefinedCells(targetshapes, CellValueType.Formula);
+            var type = VASS.CellValueType.Formula;
+            var dicof_shape_to_udcelldic = this.Client.UserDefinedCell.GetUserDefinedCells(targetshapes, type);
 
             this.WriteObject(dicof_shape_to_udcelldic);
         }
