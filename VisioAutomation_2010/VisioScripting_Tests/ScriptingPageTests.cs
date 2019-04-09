@@ -33,25 +33,25 @@ namespace VisioAutomation_Tests.Scripting
 
             Assert.AreEqual(3,doc.Pages.Count);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.First);
+            client.Page.SetActivePage(PageRelativePosition.First);
             Assert.AreEqual(page1, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Last);
+            client.Page.SetActivePage(PageRelativePosition.Last);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Previous);
+            client.Page.SetActivePage(PageRelativePosition.Previous);
             Assert.AreEqual(page2, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Next);
+            client.Page.SetActivePage(PageRelativePosition.Next);
             Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to last and try to go to next page
-            client.Page.SetActivePageByDirection(PageDirection.Last);
+            client.Page.SetActivePage(PageRelativePosition.Last);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Next);
+            client.Page.SetActivePage(PageRelativePosition.Next);
             Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to first and try to go to previous page
-            client.Page.SetActivePageByDirection(PageDirection.First);
+            client.Page.SetActivePage(PageRelativePosition.First);
             Assert.AreEqual(page1, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Previous);
+            client.Page.SetActivePage(PageRelativePosition.Previous);
             Assert.AreEqual(page1, client.Page.GetActivePage());
 
             doc.Close(true);

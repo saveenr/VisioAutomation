@@ -1,6 +1,6 @@
 ﻿namespace VisioScripting.Models
 {
-    public enum PageDirection
+    public enum PageRelativePosition
     {
         First,
         Previous,

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet;
-using VisioScripting.Models;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -27,29 +25,6 @@ namespace VisioScripting.Commands
             window.Page = targetpage.Page;
         }
 
-        public void SetActivePageByPageName(TargetActiveDocument targetdoc, string name)
-        {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            var doc = cmdtarget.ActiveDocument;
-            this._client.Output.WriteVerbose("Retrieving Page \"{0}\"", name);
-            var pages = doc.Pages;
-            var page = pages[name];
-
-            this.SetActivePage(new VisioScripting.TargetPage(page));
-        }
-
-        public void SetActivePageByPageNumber(int pagenumber)
-        {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-
-            var application = cmdtarget.Application;
-            var doc = application.ActiveDocument;
-            this._client.Output.WriteVerbose("Retrieving Page Number \"{0}\"", pagenumber);
-            var pages = doc.Pages;
-            var page = pages[pagenumber];
-            this.SetActivePage(new VisioScripting.TargetPage(page));
-        }
         
         public IVisio.Page GetActivePage()
         {
@@ -345,7 +320,7 @@ namespace VisioScripting.Commands
             this.SetPageSize(new TargetPages(targetpage.Page),new_size);
         }
 
-        public void SetActivePageByDirection(Models.PageDirection flags)
+        public void SetActivePage(Models.PageRelativePosition flags)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -373,7 +348,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private void _go_to_page(IVisio.Pages pages, Models.PageDirection flags, CommandTarget cmdtarget)
+        private void _go_to_page(IVisio.Pages pages, Models.PageRelativePosition flags, CommandTarget cmdtarget)
         {
             if (pages == null)
             {
@@ -399,7 +374,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        internal static int move_in_range(int cur, int min, int max, Models.PageDirection direction)
+        internal static int move_in_range(int cur, int min, int max, Models.PageRelativePosition relative_position)
         {
             if (max < min)
             {
@@ -416,18 +391,18 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(cur));
             }
 
-            switch (direction)
+            switch (relative_position)
             {
-                case VisioScripting.Models.PageDirection.Next:
+                case VisioScripting.Models.PageRelativePosition.Next:
                     return System.Math.Min(cur + 1, max);
-                case VisioScripting.Models.PageDirection.Previous:
+                case VisioScripting.Models.PageRelativePosition.Previous:
                     return System.Math.Max(cur - 1, min);
-                case VisioScripting.Models.PageDirection.First:
+                case VisioScripting.Models.PageRelativePosition.First:
                     return min;
-                case VisioScripting.Models.PageDirection.Last:
+                case VisioScripting.Models.PageRelativePosition.Last:
                     return max;
                 default:
-                    throw new System.ArgumentOutOfRangeException(nameof(direction));
+                    throw new System.ArgumentOutOfRangeException(nameof(relative_position));
             }
         }
 
