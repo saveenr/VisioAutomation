@@ -53,7 +53,7 @@
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="CommandTarget.cs" />
     <Compile Include="CommandTargetRequirementFlags.cs" />
-    <Compile Include="Commands\ChartingCommands.cs" />
+    <Compile Include="Commands\ModelCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
     <Compile Include="Models\ShapeSendDirection.cs" />
     <Compile Include="Helpers\SelectionHelper.cs" />

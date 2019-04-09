@@ -45,22 +45,22 @@ namespace VisioPowerShell.Commands.Visio
 
             if (this.OrgChart != null)
             {
-                this.Client.Charting.NewOrgChartDocument(this.OrgChart);
+                this.Client.Model.NewOrgChartDocument(this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
-                this.Client.Charting.DrawGridOnActivePage(this.GridLayout);
+                this.Client.Model.DrawGridOnActivePage(this.GridLayout);
             }
             else if (this.DirectedGraphs != null)
             {
-                this.Client.Charting.NewDirectedGraphDocument(this.DirectedGraphs);
+                this.Client.Model.NewDirectedGraphDocument(this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {
                 var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
                 var spacing = new VisioAutomation.Geometry.Size(this.CellSpacing, this.CellSpacing);
-                var shapes = this.Client.Charting.NewDataTablePageInActiveDocument(this.DataTable, widths, heights, spacing);
+                var shapes = this.Client.Model.NewDataTablePageInActiveDocument(this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
             else if (this.XmlDocument != null)
