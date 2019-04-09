@@ -7,9 +7,9 @@ using GRID = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioScripting.Commands
 {
-    public class ChartingCommands : CommandSet
+    public class ModelCommands : CommandSet
     {
-        internal ChartingCommands(Client client) :
+        internal ModelCommands(Client client) :
             base(client)
         {
 
