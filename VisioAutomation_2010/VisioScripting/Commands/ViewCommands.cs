@@ -50,16 +50,14 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("Must have positive zoom");
             }
 
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            var active_window = cmdtarget.Application.ActiveWindow;
-            active_window.Zoom = amount;
+            activewindow = activewindow.Resolve(this._client);
+            activewindow.Window.Zoom = amount;
         }
 
         public double GetZoom(VisioScripting.TargetActiveWindow activewindow)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            var active_window = cmdtarget.Application.ActiveWindow;
-            return active_window.Zoom;
+            activewindow = activewindow.Resolve(this._client);
+            return activewindow.Window.Zoom;
         }
 
         public void SetZoomValueRelative(VisioScripting.TargetActiveWindow activewindow, double scale)
@@ -69,10 +67,13 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("Must have positive scale");
             }
             var cmdtarget = this._client.GetCommandTargetDocument();
-            var active_window = cmdtarget.Application.ActiveWindow;
-            double old_zoom = active_window.Zoom;
+
+
+            activewindow = activewindow.Resolve(this._client);
+
+            double old_zoom = activewindow.Window.Zoom;
             double new_zoom = old_zoom * scale;
-            active_window.Zoom = new_zoom;
+            activewindow.Window.Zoom = new_zoom;
         }
 
         public void SetZoomToObject(VisioScripting.TargetActiveWindow activewindow, Models.ZoomToObject zoom)
