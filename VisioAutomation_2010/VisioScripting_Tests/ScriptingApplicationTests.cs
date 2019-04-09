@@ -35,9 +35,9 @@ namespace VisioAutomation_Tests.Scripting
             var doc = client.Document.NewDocument(page_size);
 
             var page = client.Page.GetActivePage();
-            var tagetpages = new VisioScripting.TargetPages(page);
+            var tagetpage = new VisioScripting.TargetPage(page);
 
-            var pagesize = client.Page.GetPageSize(tagetpages);
+            var pagesize = client.Page.GetPageSize(tagetpage);
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
 

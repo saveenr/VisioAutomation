@@ -54,8 +54,8 @@ namespace VisioScripting.Commands
             var page = pages.Add();
             page.Background = 0; // ensure this is a foreground page
 
-            var targetpages = new VisioScripting.TargetPages(page);
-            var pagesize = this._client.Page.GetPageSize(targetpages);
+            var targetpage = new VisioScripting.TargetPage(page);
+            var pagesize = this._client.Page.GetPageSize(targetpage);
 
             var layout = new GRID.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VisioAutomation.Geometry.Size(1, 1), masterobj);
             layout.Origin = new VisioAutomation.Geometry.Point(0, pagesize.Height);
