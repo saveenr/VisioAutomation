@@ -35,7 +35,8 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
-            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(ConnectShapes)))
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(ConnectShapes)))
             {
                 if (master == null)
                 {

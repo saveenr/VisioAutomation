@@ -43,9 +43,10 @@ namespace VisioPowerShell.Commands.Visio
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
+            var activeapp = new VisioScripting.TargetActiveApplication();
             if (this.OrgChart != null)
             {
-                this.Client.Model.NewOrgChartDocument( new VisioScripting.TargetActiveApplication() , this.OrgChart);
+                this.Client.Model.NewOrgChartDocument( activeapp , this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
@@ -53,7 +54,7 @@ namespace VisioPowerShell.Commands.Visio
             }
             else if (this.DirectedGraphs != null)
             {
-                this.Client.Model.NewDirectedGraphDocument(new VisioScripting.TargetActiveApplication(), this.DirectedGraphs);
+                this.Client.Model.NewDirectedGraphDocument(activeapp, this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {

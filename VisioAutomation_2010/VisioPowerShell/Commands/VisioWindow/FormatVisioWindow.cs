@@ -30,7 +30,8 @@ namespace VisioPowerShell.Commands.VisioWindow
         {
             if (this.Width > 0 || this.Height > 0)
             {
-                var old_rect = this.Client.Application.GetWindowRectangle(new VisioScripting.TargetActiveApplication() );
+                var activeapp = new VisioScripting.TargetActiveApplication();
+                var old_rect = this.Client.Application.GetWindowRectangle(activeapp);
                 var new_rect = old_rect;
 
                 if (this.Width.HasValue)

@@ -42,7 +42,8 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(SetShapeName)))
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(SetShapeName)))
             {
                 int numnames = names.Count;
 

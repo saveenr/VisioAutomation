@@ -30,7 +30,8 @@ namespace VisioScripting.Commands
 
             var hyperlink_indices = new List<int>();
 
-            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(AddHyperlink)))
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(AddHyperlink)))
             {
                 foreach (var shape in targetshapes.Shapes)
                 {
@@ -55,7 +56,8 @@ namespace VisioScripting.Commands
             // controls to qualify for deleting 
             var qualified_shapes = targetshapes.Shapes.Where(shape => HyperlinkHelper.GetCount(shape) > n);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(DeleteHyperlinkAtIndex)))
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DeleteHyperlinkAtIndex)))
             {
                 foreach (var shape in qualified_shapes)
                 {

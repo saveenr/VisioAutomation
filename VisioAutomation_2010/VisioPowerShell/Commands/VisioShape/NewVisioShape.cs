@@ -149,7 +149,8 @@ namespace VisioPowerShell.Commands.VisioShape
 
                 var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
-                using (var undoscope = this.Client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(NewVisioShape) +":CommitCells"))
+                var activeapp = new VisioScripting.TargetActiveApplication();
+                using (var undoscope = this.Client.Undo.NewUndoScope(activeapp, nameof(NewVisioShape) +":CommitCells"))
                 {
                     writer.CommitFormulas(surface);
                 }

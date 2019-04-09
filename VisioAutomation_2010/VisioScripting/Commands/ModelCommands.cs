@@ -76,7 +76,8 @@ namespace VisioScripting.Commands
                 }
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(NewDataTablePage)))
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(NewDataTablePage)))
             {
                 layout.Render(page);
                 page.ResizeToFitContents();
@@ -93,7 +94,8 @@ namespace VisioScripting.Commands
             var page = cmdtarget.ActivePage;
             layout.PerformLayout();
 
-            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(DrawGrid)))
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawGrid)))
             {
                 layout.Render(page);
             }

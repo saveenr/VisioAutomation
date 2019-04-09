@@ -263,8 +263,9 @@ namespace VisioAutomation_Tests.Scripting
                     }
                 }
             }
-            
-            client.Model.NewDirectedGraphDocument(new VisioScripting.TargetActiveApplication() , dg_model);
+
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            client.Model.NewDirectedGraphDocument(activeapp , dg_model);
         }
         
         [TestMethod]
@@ -335,7 +336,8 @@ namespace VisioAutomation_Tests.Scripting
         {
             var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(client, xmldoc);
-            client.Model.NewOrgChartDocument( new VisioScripting.TargetActiveApplication(),orgchart);
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            client.Model.NewOrgChartDocument(activeapp,orgchart);
         }
 
         [TestMethod]

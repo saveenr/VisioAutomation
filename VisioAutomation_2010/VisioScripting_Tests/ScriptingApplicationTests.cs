@@ -55,7 +55,8 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Test_App_to_Front()
         {
             var client = this.GetScriptingClient();
-            client.Application.MoveWindowToFront(new VisioScripting.TargetActiveApplication());
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            client.Application.MoveWindowToFront(activeapp);
         }
 
         [TestMethod]
@@ -68,7 +69,8 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1, page.Shapes.Count);
-            client.Undo.UndoLastAction(new VisioScripting.TargetActiveApplication() );
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            client.Undo.UndoLastAction(activeapp);
             Assert.AreEqual(0, page.Shapes.Count);
             var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
