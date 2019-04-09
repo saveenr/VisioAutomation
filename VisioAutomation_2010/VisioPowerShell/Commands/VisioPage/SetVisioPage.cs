@@ -22,7 +22,8 @@ namespace VisioPowerShell.Commands.VisioPage
         {
             if (this.Name != null)
             {
-                this.Client.Page.SetActivePageByPageName(new VisioScripting.TargetActiveDocument(), this.Name);
+                var targetdoc = new VisioScripting.TargetActiveDocument();
+                this.Client.Page.SetActivePageByPageName(targetdoc, this.Name);
             }
             else if (this.Page != null)
             {
