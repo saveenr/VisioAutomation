@@ -38,7 +38,7 @@ namespace VisioScripting.Commands
             if (targetshapes.Shapes.Count < 1)
             {
                 return new List<CustomPropertyDictionary>(0);
-            }
+            } 
 
             var shapeidpairs = targetshapes.ToShapeIDPairs();
             var listof_cpdic = CustomPropertyHelper.GetDictionary(cmdtarget.ActivePage, shapeidpairs, type);
