@@ -83,7 +83,9 @@ namespace VisioScripting
                 return this;
             }
 
-            var shapes = client.Selection.GetShapes(new VisioScripting.TargetActiveSelection());
+            var selection = new VisioScripting.TargetActiveSelection();
+
+            var shapes = client.Selection.GetShapes(selection);
             var targetshapes = new TargetShapes(shapes);
             return targetshapes;
         }

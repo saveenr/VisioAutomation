@@ -59,16 +59,22 @@ namespace VisioPowerShell.Commands.VisioShape
                     throw new System.ArgumentOutOfRangeException(nameof(this.Shapes), "Shapes parameter must contain at least one shape");
                 }
 
-                this.Client.Selection.SelectShapes(new VisioScripting.TargetActiveSelection(), this.Shapes);
+                var selection = new VisioScripting.TargetActiveSelection();
+
+                this.Client.Selection.SelectShapes(selection, this.Shapes);
             }
 
             if (_static_html_extensions.Contains(ext))
             {
-                this.Client.Export.ExportSelectionToHtml(new VisioScripting.TargetActiveSelection(), this.Filename);                
+                var selection = new VisioScripting.TargetActiveSelection();
+
+                this.Client.Export.ExportSelectionToHtml(selection, this.Filename);                
             }
             else
             {
-                this.Client.Export.ExportSelectionToImage(new VisioScripting.TargetActiveSelection(), this.Filename);
+                var selection = new VisioScripting.TargetActiveSelection();
+
+                this.Client.Export.ExportSelectionToImage(selection, this.Filename);
             }
         }
     }

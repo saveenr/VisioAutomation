@@ -19,7 +19,9 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             if (this.Shapes !=null)
             {
-                this.Client.Selection.SelectShapes(new VisioScripting.TargetActiveSelection(), this.Shapes);
+                var selection = new VisioScripting.TargetActiveSelection();
+
+                this.Client.Selection.SelectShapes(selection, this.Shapes);
             }
             else if (this.ShapeIDs!=null)
             {
@@ -39,7 +41,9 @@ namespace VisioPowerShell.Commands.VisioShape
                 }
                 else if (this.Operation == VisioScripting.Models.SelectionOperation.Invert)
                 {
-                    this.Client.Selection.InvertSelection(new VisioScripting.TargetActiveSelection());
+                    var targetselection = new VisioScripting.TargetActiveSelection();
+
+                    this.Client.Selection.InvertSelection(targetselection);
                 }
             }
         }

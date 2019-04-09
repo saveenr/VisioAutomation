@@ -26,29 +26,31 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
+            var selection = new VisioScripting.TargetActiveSelection();
+
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                this.Client.Arrange.Nudge(new TargetActiveSelection(), this.NudgeX, this.NudgeY);
+                this.Client.Arrange.Nudge(selection, this.NudgeX, this.NudgeY);
             }
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Arrange.DistributeOnAxis(new TargetActiveSelection(), VisioScripting.Models.Axis.XAxis);
+                this.Client.Arrange.DistributeOnAxis(selection, VisioScripting.Models.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Arrange.DistributeOnAxis(new TargetActiveSelection(), VisioScripting.Models.Axis.YAxis);
+                this.Client.Arrange.DistributeOnAxis(selection, VisioScripting.Models.Axis.YAxis);
             }
 
             if (this.AlignVertical.HasValue)
             {
-                this.Client.Arrange.AlignVertical(new TargetActiveSelection(), this.AlignVertical.Value);
+                this.Client.Arrange.AlignVertical(selection, this.AlignVertical.Value);
             }
 
             if (this.AlignHorizontal.HasValue)
             {
-                this.Client.Arrange.AlignHorizontal(new TargetActiveSelection(), this.AlignHorizontal.Value);
+                this.Client.Arrange.AlignHorizontal(selection, this.AlignHorizontal.Value);
             }
 
         }
