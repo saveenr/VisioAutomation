@@ -11,7 +11,7 @@ namespace VisioScripting.Commands
         {
         }
 
-        public void ExportPageToImage(TargetActivePage targetpage, string filename)
+        public void ExportPageToImage(TargetPage targetpage, string filename)
         {
             targetpage = targetpage.Resolve(this._client);
 
@@ -20,24 +20,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-
-            var app = targetpage.Page.Application;
-            var window = app.ActiveWindow;
-            var selection = window.Selection;
-            if (selection.Count < 1)
-            {
-                string msg = string.Format("Selection contains no shapes");
-                throw new System.ArgumentException(msg);
-            }
-
-            var old_selected_shapes = this._client.Selection.GetShapes( new VisioScripting.TargetActiveSelection());
-
-            var targetwindow = new VisioScripting.TargetWindow();
-            this._client.Selection.SelectNone(targetwindow);
-            var active_page = app.ActivePage;
-            active_page.Export(filename);
-            var active_window = app.ActiveWindow;
-            active_window.Select(old_selected_shapes, IVisio.VisSelectArgs.visSelect);
+            targetpage.Page.Export(filename);
         }
 
         public void ExportPagesToImages(TargetActiveDocument targetdoc, string filename)
