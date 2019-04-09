@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<IVisio.Shape> NewDataTablePageInActiveDocument(
+        public List<IVisio.Shape> NewDataTablePage( VisioScripting.TargetActiveDocument targetdoc, 
             System.Data.DataTable datatable,
             IList<double> widths,
             IList<double> heights,
@@ -76,7 +76,7 @@ namespace VisioScripting.Commands
                 }
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(NewDataTablePageInActiveDocument)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(NewDataTablePage)))
             {
                 layout.Render(page);
                 page.ResizeToFitContents();
