@@ -62,8 +62,8 @@ namespace VisioPowerShell.Commands.Visio
                 var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
                 var spacing = new VisioAutomation.Geometry.Size(this.CellSpacing, this.CellSpacing);
-                var targetdoc = new VisioScripting.TargetActiveDocument();
-                var shapes = this.Client.Model.NewDataTablePage(targetdoc, this.DataTable, widths, heights, spacing);
+                var targetpage = new VisioScripting.TargetPage();
+                var shapes = this.Client.Model.DrawDataTable(targetpage, this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
             else if (this.XmlDocument != null)

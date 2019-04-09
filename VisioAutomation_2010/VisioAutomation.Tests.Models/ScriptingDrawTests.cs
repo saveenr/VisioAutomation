@@ -59,13 +59,12 @@ namespace VisioAutomation_Tests.Scripting
             // Prepare the Page
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            var page = client.Page.NewPage(pagesize, false);
 
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
 
-            var targetactivedoc = new VisioScripting.TargetActiveDocument();
-            var shapes = client.Model.NewDataTablePage(targetactivedoc, dt, widths, heights, cellspacing);
+            var shapes = client.Model.DrawDataTable(new VisioScripting.TargetPage(page), dt, widths, heights, cellspacing);
 
             // Verify
             int num_shapes_expected = items.Length*dt.Columns.Count;
@@ -73,7 +72,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Cleanup
             var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            //client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]

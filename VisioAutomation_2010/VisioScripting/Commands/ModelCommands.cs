@@ -15,7 +15,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<IVisio.Shape> NewDataTablePage( VisioScripting.TargetActiveDocument targetdoc, 
+        public List<IVisio.Shape> DrawDataTable( VisioScripting.TargetPage targetpage, 
             System.Data.DataTable datatable,
             IList<double> widths,
             IList<double> heights,
@@ -41,20 +41,15 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(datatable),"DataTable must have at least one row");
             }
 
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.Resolve(this._client);
             string master = "Rectangle";
             string stencil = "basic_u.vss";
             var stencildoc = this._client.Document.OpenStencilDocument(stencil);
             var stencildoc_masters = stencildoc.Masters;
             var masterobj = stencildoc_masters.ItemU[master];
+            
+            targetpage.Page.Background = 0; // ensure this is a foreground page
 
-            var active_document = cmdtarget.ActiveDocument;
-            var pages = active_document.Pages;
-
-            var page = pages.Add();
-            page.Background = 0; // ensure this is a foreground page
-
-            var targetpage = new VisioScripting.TargetPage(page);
             var pagesize = this._client.Page.GetPageSize(targetpage);
 
             var layout = new GRID.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VisioAutomation.Geometry.Size(1, 1), masterobj);
@@ -77,10 +72,10 @@ namespace VisioScripting.Commands
             }
 
             var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(NewDataTablePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawDataTable)))
             {
-                layout.Render(page);
-                page.ResizeToFitContents();
+                layout.Render(targetpage.Page);
+                targetpage.Page.ResizeToFitContents();
             }
 
             var shapes = layout.Nodes.Select(n => n.Shape).ToList();
