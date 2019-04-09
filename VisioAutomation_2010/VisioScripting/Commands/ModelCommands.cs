@@ -7,15 +7,15 @@ using GRID = VisioAutomation.Models.Layouts.Grid;
 
 namespace VisioScripting.Commands
 {
-    public class ChartingCommands : CommandSet
+    public class ModelCommands : CommandSet
     {
-        internal ChartingCommands(Client client) :
+        internal ModelCommands(Client client) :
             base(client)
         {
 
         }
 
-        public List<IVisio.Shape> NewDataTablePageInActiveDocument(
+        public List<IVisio.Shape> NewDataTablePage( VisioScripting.TargetActiveDocument targetdoc, 
             System.Data.DataTable datatable,
             IList<double> widths,
             IList<double> heights,
@@ -76,7 +76,7 @@ namespace VisioScripting.Commands
                 }
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(NewDataTablePageInActiveDocument)))
+            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(NewDataTablePage)))
             {
                 layout.Render(page);
                 page.ResizeToFitContents();
@@ -86,20 +86,20 @@ namespace VisioScripting.Commands
             return shapes;
         }
 
-        public void DrawGridOnActivePage(GRID.GridLayout layout)
+        public void DrawGrid(VisioScripting.TargetActivePage activepage, GRID.GridLayout layout)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
             var page = cmdtarget.ActivePage;
             layout.PerformLayout();
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawGridOnActivePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(DrawGrid)))
             {
                 layout.Render(page);
             }
         }
 
-        public void NewOrgChartDocument(ORG.OrgChartDocument chartdocument)
+        public void NewOrgChartDocument(VisioScripting.TargetActiveApplication activeapp, ORG.OrgChartDocument chartdocument)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
@@ -112,7 +112,7 @@ namespace VisioScripting.Commands
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void NewDirectedGraphDocument(IList<GRAPH.DirectedGraphLayout> graph)
+        public void NewDirectedGraphDocument(VisioScripting.TargetActiveApplication activeapp, IList<GRAPH.DirectedGraphLayout> graph)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
@@ -144,7 +144,7 @@ namespace VisioScripting.Commands
 
                 var targetpages = new VisioScripting.TargetPages(page);
                 this._client.Page.ResizePageToFitContents(targetpages, new VisioAutomation.Geometry.Size(1.0, 1.0));
-                this._client.View.SetActiveWindowZoomToObject(VisioScripting.Models.ZoomToObject.Page);
+                this._client.View.SetZoomToObject(new VisioScripting.TargetActiveWindow(), VisioScripting.Models.ZoomToObject.Page);
                 this._client.Output.WriteVerbose("Finished rendering page");
 
                 num_pages_created++;

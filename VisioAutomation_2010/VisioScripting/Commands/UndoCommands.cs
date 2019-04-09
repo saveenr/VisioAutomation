@@ -11,19 +11,19 @@ namespace VisioScripting.Commands
 
         }
 
-        public void UndoLastAction()
+        public void UndoLastAction(VisioScripting.TargetActiveApplication activeapp)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
             cmdtarget.Application.Undo();
         }
 
-        public void RedoLastAction()
+        public void RedoLastAction(VisioScripting.TargetActiveApplication activeapp)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
             cmdtarget.Application.Redo();
         }
 
-        public VA.Application.UndoScope NewUndoScope(string name)
+        public VA.Application.UndoScope NewUndoScope(VisioScripting.TargetActiveApplication activeapp, string name)
         {
             var app = this._client.Application.GetAttachedApplication();
             if (app == null)

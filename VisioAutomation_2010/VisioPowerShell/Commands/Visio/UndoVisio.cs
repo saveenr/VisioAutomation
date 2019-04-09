@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.Visio
     {
         protected override void ProcessRecord()
         {
-            this.Client.Undo.UndoLastAction();
+            this.Client.Undo.UndoLastAction(new VisioScripting.TargetActiveApplication());
         }
     }
 }

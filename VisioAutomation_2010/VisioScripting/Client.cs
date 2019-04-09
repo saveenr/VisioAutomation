@@ -11,7 +11,7 @@ namespace VisioScripting
 
         public Commands.ApplicationCommands Application { get; }
         public Commands.ArrangeCommands Arrange { get; }
-        public Commands.ChartingCommands Charting { get; }
+        public Commands.ModelCommands Model { get; }
         public Commands.ConnectionCommands Connection { get; }
         public Commands.ConnectionPointCommands ConnectionPoint { get; }
         public Commands.ControlCommands Control { get; }
@@ -49,7 +49,7 @@ namespace VisioScripting
             this._client_context = client_context;
             this.Application = new Commands.ApplicationCommands(this, app);
             this.Arrange = new Commands.ArrangeCommands(this);
-            this.Charting = new Commands.ChartingCommands(this);
+            this.Model = new Commands.ModelCommands(this);
             this.Connection = new Commands.ConnectionCommands(this);
             this.ConnectionPoint = new Commands.ConnectionPointCommands(this);
             this.Control = new Commands.ControlCommands(this);

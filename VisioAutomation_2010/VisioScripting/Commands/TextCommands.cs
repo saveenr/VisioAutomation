@@ -26,7 +26,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetShapeText)))
+            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(SetShapeText)))
             {
                 // Apply text to each shape
                 // if there are fewer texts than shapes then

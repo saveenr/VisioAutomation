@@ -30,7 +30,7 @@ namespace VisioPowerShell.Commands.VisioWindow
         {
             if (this.Width > 0 || this.Height > 0)
             {
-                var old_rect = this.Client.Application.GetApplicationWindowRectangle();
+                var old_rect = this.Client.Application.GetWindowRectangle(new VisioScripting.TargetActiveApplication() );
                 var new_rect = old_rect;
 
                 if (this.Width.HasValue)
@@ -53,20 +53,20 @@ namespace VisioPowerShell.Commands.VisioWindow
                     new_rect.Y = this.Y.Value;
                 }
 
-                this.Client.Application.SetApplicationWindowRectangle(new_rect);
+                this.Client.Application.SetWindowRectangle(new VisioScripting.TargetActiveApplication (), new_rect);
             }
 
             if (this.Zoom > 0)
             {
-                this.Client.View.SetActiveWindowZoomValue(this.Zoom);
+                this.Client.View.SetZoomValue(new VisioScripting.TargetActiveWindow(), this.Zoom);
             }
             else if (this.ZoomRelative > 0)
             {
-                this.Client.View.SetActiveWindowZoomValueRelative(this.ZoomRelative);
+                this.Client.View.SetZoomValueRelative(new VisioScripting.TargetActiveWindow(), this.ZoomRelative);
             }
             else if (this.ZoomTo != null)
             {
-                this.Client.View.SetActiveWindowZoomToObject(this.ZoomTo.Value);
+                this.Client.View.SetZoomToObject(new VisioScripting.TargetActiveWindow(), this.ZoomTo.Value);
             }
 
         }

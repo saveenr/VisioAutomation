@@ -87,7 +87,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteUserDefinedCellsByName)))
+            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(DeleteUserDefinedCellsByName)))
             {
                 foreach (var shape in targetshapes.Shapes)
                 {
@@ -105,7 +105,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetUserDefinedCell)))
+            using (var undoscope = this._client.Undo.NewUndoScope(new VisioScripting.TargetActiveApplication(), nameof(SetUserDefinedCell)))
             {
                 foreach (var shape in targetshapes.Shapes)
                 {
