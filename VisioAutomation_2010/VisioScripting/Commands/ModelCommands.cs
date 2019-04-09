@@ -87,15 +87,15 @@ namespace VisioScripting.Commands
             return shapes;
         }
 
-        public void DrawGrid(VisioScripting.TargetPage activepage, GRID.GridLayout layout)
+        public void DrawGrid(VisioScripting.TargetPage targetpage, GRID.GridLayout layout)
         {
-            activepage = activepage.Resolve(this._client);
+            targetpage = targetpage.Resolve(this._client);
             layout.PerformLayout();
 
             var activeapp = new VisioScripting.TargetActiveApplication();
             using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawGrid)))
             {
-                layout.Render(activepage.Page);
+                layout.Render(targetpage.Page);
             }
         }
 
