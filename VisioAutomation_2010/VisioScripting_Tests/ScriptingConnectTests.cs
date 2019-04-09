@@ -36,12 +36,12 @@ namespace VisioAutomation_Tests.Scripting
             var toshapes = new [] { s2,s3};
             var directed_connectors = client.Connection.ConnectShapes(fromshapes,toshapes, master);
             client.Selection.SelectNone(targetwindow);
-            client.Selection.SelectShapes(new VisioScripting.TargetSelection(), directed_connectors);
+            client.Selection.SelectShapes(new VisioScripting.TargetActiveSelection(), directed_connectors);
 
             var page = new VisioScripting.TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
-            var shapes = client.Selection.GetShapes(new TargetSelection());
+            var shapes = client.Selection.GetShapes(new TargetActiveSelection());
             foreach (var shape in shapes)
             {
                 writer.SetFormula( shape.ID16, VA.ShapeSheet.SrcConstants.LineEndArrow, "13");

@@ -62,7 +62,7 @@ namespace VisioScripting.Commands
                 return new List<bool>();
             }
 
-            var all_shapes = this._client.Selection.GetShapes(new TargetSelection());
+            var all_shapes = this._client.Selection.GetShapes(new TargetActiveSelection());
             var results = all_shapes.Select(s => VA.Shapes.UserDefinedCellHelper.Contains(s, name)).ToList();
 
             return results;

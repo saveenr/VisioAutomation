@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioShape
     {
         protected override void ProcessRecord()
         {
-            var group = this.Client.Grouping.Group(new VisioScripting.TargetSelection());
+            var group = this.Client.Grouping.Group(new VisioScripting.TargetActiveSelection());
             this.WriteObject(group);
         }
     }

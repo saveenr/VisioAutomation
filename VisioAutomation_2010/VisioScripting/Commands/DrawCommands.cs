@@ -144,7 +144,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void Duplicate(VisioScripting.TargetSelection targetselection,int n)
+        public void Duplicate(VisioScripting.TargetActiveSelection targetselection,int n)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 

@@ -28,7 +28,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException(msg);
             }
 
-            var old_selected_shapes = this._client.Selection.GetShapes( new VisioScripting.TargetSelection());
+            var old_selected_shapes = this._client.Selection.GetShapes( new VisioScripting.TargetActiveSelection());
 
             var targetwindow = new VisioScripting.TargetWindow();
             this._client.Selection.SelectNone(targetwindow);
@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
             active_window.Page = old_page;
         }
 
-        public void ExportSelectionToImage(TargetSelection targetselection, string filename)
+        public void ExportSelectionToImage(TargetActiveSelection targetselection, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 
@@ -105,7 +105,7 @@ namespace VisioScripting.Commands
             selection.Export(filename);
         }
 
-        public void ExportSelectionToHtml(TargetSelection targetselection, string filename)
+        public void ExportSelectionToHtml(TargetActiveSelection targetselection, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

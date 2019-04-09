@@ -38,7 +38,7 @@ namespace VisioAutomation_Tests.Scripting
 
             Assert.IsFalse(client.Document.HasActiveDocument);
 
-            var targetselection = new VisioScripting.TargetSelection();
+            var targetselection = new VisioScripting.TargetActiveSelection();
 
             var doc1 = client.Document.NewDocument();
             Assert.IsTrue(client.Document.HasActiveDocument);

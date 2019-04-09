@@ -11,7 +11,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public IVisio.Shape Group(TargetSelection targetselection)
+        public IVisio.Shape Group(TargetActiveSelection targetselection)
         {
             var cmdtarget = this._client.GetCommandTargetDocument();
 
@@ -40,7 +40,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void Ungroup(TargetSelection target_selection)
+        public void Ungroup(TargetActiveSelection target_active_selection)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
             var application = cmdtarget.Application;
