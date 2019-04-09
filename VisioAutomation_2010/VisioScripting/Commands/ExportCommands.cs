@@ -1,3 +1,4 @@
+using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SXL = System.Xml.Linq;
@@ -23,50 +24,41 @@ namespace VisioScripting.Commands
             targetpage.Page.Export(filename);
         }
 
-        public void ExportPagesToImages(TargetActiveDocument targetdoc, string filename)
+        public void  ExportPagesToImages(TargetDocument targetdoc, string filename)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            var output_folder = System.IO.Path.GetDirectoryName(filename);
+
+            if (!System.IO.Directory.Exists(output_folder))
+            {
+                this._client.Output.WriteError(" Folder {0} does not exist", output_folder);
+                return;
+            }
+
+            targetdoc = targetdoc.Resolve(this._client);
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            var application = cmdtarget.Application;
-            var old_page = application.ActivePage;
-            var active_document = application.ActiveDocument;
-            var active_window = application.ActiveWindow;
+            var pages = targetdoc.Document.Pages.ToList();
 
-            var pages = active_document.Pages.ToList();
-            var pbase = System.IO.Path.GetDirectoryName(filename);
-
-            if (!System.IO.Directory.Exists(pbase))
-            {
-                this._client.Output.WriteError(" Folder {0} does not exist", pbase);
-                return;
-            }
             var ext = System.IO.Path.GetExtension(filename);
-            string fbase = System.IO.Path.GetFileNameWithoutExtension(filename);
+            string filename_base = System.IO.Path.GetFileNameWithoutExtension(filename);
 
-            for (int page_index = 0; page_index < pages.Count; page_index++)
+            foreach (int page_index in Enumerable.Range(0,pages.Count))
             {
                 var page = pages[page_index];
-                string bkgnd = "";
+                string bkgnd_tag = "";
                 if (page.Background != 0)
                 {
-                    bkgnd = "(Background)";
+                    bkgnd_tag = "(Background)";
                 }
-                string page_filname = string.Format("{0}_{1}_{2}{3}{4}", fbase, page_index, page.Name, bkgnd, ext);
+                string page_filname = string.Format("{0}_{1}_{2}_{3}{4}", filename_base, page_index, page.Name, bkgnd_tag, ext);
 
-                var targetwindow = new VisioScripting.TargetWindow();
-
-                this._client.Output.WriteUser("file {0}", page_filname);
-                page_filname = System.IO.Path.Combine(pbase, page_filname);
-                active_window.Page = page;
-                this._client.Selection.SelectNone(targetwindow);
+                page_filname = System.IO.Path.Combine(output_folder, page_filname);
                 page.Export(page_filname);
             }
-            active_window.Page = old_page;
         }
 
         public void ExportSelectionToImage(TargetActiveSelection targetselection, string filename)
