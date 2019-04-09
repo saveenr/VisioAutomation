@@ -87,7 +87,7 @@ namespace VisioScripting.Commands
             return shapes;
         }
 
-        public void DrawGrid(VisioScripting.TargetActivePage activepage, GRID.GridLayout layout)
+        public void DrawGrid(VisioScripting.TargetPage activepage, GRID.GridLayout layout)
         {
             activepage = activepage.Resolve(this._client);
             layout.PerformLayout();

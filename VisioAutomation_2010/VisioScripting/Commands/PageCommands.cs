@@ -277,8 +277,19 @@ namespace VisioScripting.Commands
             {
                 foreach (var page in targetpages.Pages)
                 {
-                    page.ResizeToFitContents(bordersize);
+                    ResizePageToFitContents(new VisioScripting.TargetPage(page), bordersize);
                 }
+            }
+        }
+
+        public void ResizePageToFitContents(TargetPage targetpage, VisioAutomation.Geometry.Size bordersize)
+        {
+            targetpage = targetpage.Resolve(this._client);
+
+            var activeapp = new VisioScripting.TargetActiveApplication();
+            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(ResizePageToFitContents)))
+            {
+                targetpage.Page.ResizeToFitContents(bordersize);
             }
         }
 

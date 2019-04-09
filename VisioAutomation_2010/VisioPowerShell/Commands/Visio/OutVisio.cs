@@ -50,7 +50,7 @@ namespace VisioPowerShell.Commands.Visio
             }
             else if (this.GridLayout != null)
             {
-                var activepage = new VisioScripting.TargetActivePage();
+                var activepage = new VisioScripting.TargetPage();
                 this.Client.Model.DrawGrid(activepage, this.GridLayout);
             }
             else if (this.DirectedGraphs != null)
