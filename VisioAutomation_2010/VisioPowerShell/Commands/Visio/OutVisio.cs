@@ -45,7 +45,7 @@ namespace VisioPowerShell.Commands.Visio
 
             if (this.OrgChart != null)
             {
-                this.Client.Model.NewOrgChartDocument(this.OrgChart);
+                this.Client.Model.NewOrgChartDocument( new VisioScripting.TargetActiveApplication() , this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
@@ -53,7 +53,7 @@ namespace VisioPowerShell.Commands.Visio
             }
             else if (this.DirectedGraphs != null)
             {
-                this.Client.Model.NewDirectedGraphDocument(this.DirectedGraphs);
+                this.Client.Model.NewDirectedGraphDocument(new VisioScripting.TargetActiveApplication(), this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {
