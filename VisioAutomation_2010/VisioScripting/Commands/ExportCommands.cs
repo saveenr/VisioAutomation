@@ -13,14 +13,16 @@ namespace VisioScripting.Commands
 
         public void ExportPageToImage(TargetActivePage targetpage, string filename)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.Resolve(this._client);
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            var window = cmdtarget.Application.ActiveWindow;
+
+            var app = targetpage.Page.Application;
+            var window = app.ActiveWindow;
             var selection = window.Selection;
             if (selection.Count < 1)
             {
@@ -32,14 +34,13 @@ namespace VisioScripting.Commands
 
             var targetwindow = new VisioScripting.TargetWindow();
             this._client.Selection.SelectNone(targetwindow);
-            var application = cmdtarget.Application;
-            var active_page = application.ActivePage;
+            var active_page = app.ActivePage;
             active_page.Export(filename);
-            var active_window = application.ActiveWindow;
+            var active_window = app.ActiveWindow;
             active_window.Select(old_selected_shapes, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void ExportAllPagesToImages(TargetActiveDocument targetdoc, string filename)
+        public void ExportPagesToImages(TargetActiveDocument targetdoc, string filename)
         {
             var cmdtarget = this._client.GetCommandTargetPage();
 

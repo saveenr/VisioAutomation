@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands.VisioPage
             if (this.AllPages)
             {
                 var activedoc = new TargetActiveDocument();
-                this.Client.Export.ExportAllPagesToImages(activedoc, this.Filename);
+                this.Client.Export.ExportPagesToImages(activedoc, this.Filename);
             }
             else
             {
