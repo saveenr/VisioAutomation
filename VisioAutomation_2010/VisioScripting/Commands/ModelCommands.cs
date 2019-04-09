@@ -144,7 +144,7 @@ namespace VisioScripting.Commands
 
                 var targetpages = new VisioScripting.TargetPages(page);
                 this._client.Page.ResizePageToFitContents(targetpages, new VisioAutomation.Geometry.Size(1.0, 1.0));
-                this._client.View.SetActiveWindowZoomToObject(VisioScripting.Models.ZoomToObject.Page);
+                this._client.View.SetZoomToObject(new VisioScripting.TargetActiveWindow(), VisioScripting.Models.ZoomToObject.Page);
                 this._client.Output.WriteVerbose("Finished rendering page");
 
                 num_pages_created++;
