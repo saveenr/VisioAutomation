@@ -8,22 +8,4 @@ namespace VisioScripting
         }
 
     }
-
-    public class TargetActiveApplication
-    {
-
-        public TargetActiveApplication()
-        {
-        }
-
-    }
-
-    public class TargetActiveWindow
-    {
-
-        public TargetActiveWindow()
-        {
-        }
-
-    }
 }
