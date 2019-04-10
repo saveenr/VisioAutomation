@@ -67,7 +67,6 @@
     <Compile Include="Models\ShapeSheetWriter.cs" />
     <Compile Include="Models\ConnectionPointType.cs" />
     <Compile Include="TargetActiveApplication.cs" />
-    <Compile Include="TargetActiveDocument.cs" />
     <Compile Include="TargetDocument.cs" />
     <Compile Include="TargetDocuments.cs" />
     <Compile Include="TargetObject.cs" />
