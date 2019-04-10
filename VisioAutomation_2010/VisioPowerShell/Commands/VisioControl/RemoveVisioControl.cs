@@ -15,7 +15,6 @@ namespace VisioPowerShell.Commands.VisioControl
         protected override void ProcessRecord()
         {
             var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
-
             this.Client.Control.DeleteControlWithIndex(targetshapes,this.Index);
         }
     }

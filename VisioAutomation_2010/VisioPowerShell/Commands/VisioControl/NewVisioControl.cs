@@ -1,4 +1,4 @@
-using VisioAutomation.Shapes;
+using VA=VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -36,7 +36,7 @@ namespace VisioPowerShell.Commands.VisioControl
 
         protected override void ProcessRecord()
         {
-            var ctrl = new ControlCells();
+            var ctrl = new VA.Shapes.ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
                 ctrl.XBehavior = this.XBehavior;
@@ -47,7 +47,6 @@ namespace VisioPowerShell.Commands.VisioControl
                 ctrl.Tip = this.Tip;
 
             var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
-
             this.Client.Control.AddControlToShapes(targetshapes, ctrl);
         }
     }
