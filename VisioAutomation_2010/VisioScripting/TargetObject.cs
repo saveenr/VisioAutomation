@@ -13,12 +13,8 @@ namespace VisioScripting
         
         public TargetObject(T item)
         {
-            if (item == null)
-            {
-                throw new System.ArgumentNullException();
-            }
             this._item = item;
-            this.Resolved = true;
+            this.Resolved = (item !=null);
         }
         public TargetObject(T item, bool resolved)
         {

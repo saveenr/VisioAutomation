@@ -20,7 +20,7 @@ namespace VisioScripting
 
         public TargetDocuments Resolve(VisioScripting.Client client)
         {
-            if (this.IsResolved)
+            if (this.Resolved)
             {
                 return this;
             }

@@ -78,7 +78,7 @@ namespace VisioScripting
 
         public TargetShapes Resolve(VisioScripting.Client client)
         {
-            if (this.IsResolved)
+            if (this.Resolved)
             {
                 return this;
             }
@@ -92,7 +92,7 @@ namespace VisioScripting
 
         private void _verify_resolved()
         {
-            if (!this.IsResolved)
+            if (!this.Resolved)
             {
                 throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
             }
