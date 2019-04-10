@@ -1,3 +1,4 @@
+using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.DocumentAnalysis;
 using VisioScripting;
@@ -30,11 +31,13 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.OpenStencilDocument("basic_u.vss");
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
 
+            var page = new VisioScripting.TargetPage();
+
             var tdoc = new VisioScripting.TargetDocument(connec_stencil);
             var master = client.Master.GetMaster(tdoc, "Dynamic Connector");
             var fromshapes = new [] { s1,s2};
             var toshapes = new [] { s2,s3};
-            var directed_connectors = client.Connection.ConnectShapes(fromshapes,toshapes, master);
+            var directed_connectors = client.Connection.ConnectShapes(page, fromshapes,toshapes, master);
             client.Selection.SelectNone(targetwindow);
 
             var window = new VisioScripting.TargetWindow();
@@ -42,7 +45,6 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Selection.SelectShapes(window, directed_connectors);
 
-            var page = new VisioScripting.TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
 
@@ -83,38 +85,41 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(pagesize, false);
 
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
-
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
-
             var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
+
             var targetwindow = new VisioScripting.TargetWindow();
+
             client.Selection.SelectNone(targetwindow);
             client.Selection.SelectShapesById(targetwindow, s1);
             client.Selection.SelectShapesById(targetwindow, s2);
             client.Selection.SelectShapesById(targetwindow, s3);
 
             client.Document.OpenStencilDocument("basic_u.vss");
+
+            var targetpage = new VisioScripting.TargetPage();
+
             var connec_stencil = client.Document.OpenStencilDocument("connec_u.vss");
             var connec_tdoc = new VisioScripting.TargetDocument(connec_stencil);
             var master = client.Master.GetMaster(connec_tdoc, "Dynamic Connector");
-            var undirected_connectors = client.Connection.ConnectShapes(new [] { s1,s2},new [] { s2,s3}, master);
+            var undirected_connectors = client.Connection.ConnectShapes(targetpage, new [] { s1,s2},new [] { s2,s3}, master);
 
             var options1 = new VisioAutomation.DocumentAnalysis.ConnectionAnalyzerOptions();
             options1.NoArrowsHandling = NoArrowsHandling.ExcludeEdge;
 
-            var directed_edges0 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options1);
+            var directed_edges0 = client.Connection.GetDirectedEdgesOnPage(targetpage, options1);
             Assert.AreEqual(0, directed_edges0.Count);
 
             var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options2.NoArrowsHandling = NoArrowsHandling.TreatEdgeAsBidirectional;
 
-            var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options2);
+            var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(targetpage, options2);
             Assert.AreEqual(4, directed_edges1.Count);
 
             var options3 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options3.DirectionSource = DirectionSource.UseConnectionOrder;
 
-            var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(new VisioScripting.TargetPage(), options3);
+            var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(targetpage, options3);
             Assert.AreEqual(2, undirected_edges0.Count);
 
             var targetdoc = new VisioScripting.TargetDocument();
@@ -130,7 +135,11 @@ namespace VisioAutomation_Tests.Scripting
             var s1 = client.Draw.DrawRectangle(1, 1, 2,2);
             var s2 = client.Draw.DrawRectangle(4, 4, 5, 5);
 
-            client.Connection.ConnectShapes(new[] {s1}, new[] {s2}, null);
+            var tagetpage = new VisioScripting.TargetPage();
+            var fromshapes = new[] {s1};
+            var toshapes = new[] {s2};
+            Master master = null;
+            client.Connection.ConnectShapes(tagetpage, fromshapes, toshapes, master);
 
             var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);

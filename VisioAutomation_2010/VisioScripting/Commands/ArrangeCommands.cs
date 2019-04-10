@@ -17,17 +17,14 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
+            targetselection = targetselection.Resolve(this._client);
             var activeapp = new VisioScripting.TargetActiveApplication();
             using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(Nudge)))
             {
-                var window = cmdtarget.Application.ActiveWindow;
-                var selection = window.Selection;
                 var unitcode = IVisio.VisUnitCodes.visInches;
 
                 // Move method: http://msdn.microsoft.com/en-us/library/ms367549.aspx   
-                selection.Move(dx, dy, unitcode);
+                targetselection.Selection.Move(dx, dy, unitcode);
             }
         }
 
@@ -63,7 +60,7 @@ namespace VisioScripting.Commands
 
         public void AlignHorizontal(TargetActiveSelection targetselection, Models.AlignmentHorizontal align)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetselection = targetselection.Resolve(this._client);
 
             IVisio.VisHorizontalAlignTypes halign;
             var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
@@ -87,15 +84,13 @@ namespace VisioScripting.Commands
             var activeapp = new VisioScripting.TargetActiveApplication();
             using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(AlignHorizontal)))
             {
-                var window = cmdtarget.Application.ActiveWindow;
-                var selection = window.Selection;
-                selection.Align(halign, valign, glue_to_guide);
+                targetselection.Selection.Align(halign, valign, glue_to_guide);
             }
         }
 
         public void AlignVertical(TargetActiveSelection targetselection, Models.AlignmentVertical align)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetselection = targetselection.Resolve(this._client);
 
             // Set the align enums
             var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
@@ -120,18 +115,20 @@ namespace VisioScripting.Commands
             var activeapp = new VisioScripting.TargetActiveApplication();
             using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(AlignVertical)))
             {
-                var window = cmdtarget.Application.ActiveWindow;
-                var selection = window.Selection;
-                selection.Align(halign, valign, glue_to_guide);
+                targetselection.Selection.Align(halign, valign, glue_to_guide);
             }
         }
 
         public void DistributenOnAxis(TargetShapes targetshapes, Models.Axis axis, double spacing)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var page = cmdtarget.ActivePage;
             targetshapes = targetshapes.Resolve(this._client);
+
+            if (targetshapes.Shapes.Count < 1)
+            {
+                return;
+            }
+
+            var page = targetshapes.Shapes[0].ContainingPage;
             var targetshapeids = targetshapes.ToShapeIDs();
             var activeapp = new VisioScripting.TargetActiveApplication();
             using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DistributeOnAxis)))
@@ -142,7 +139,7 @@ namespace VisioScripting.Commands
 
         public void DistributeOnAxis(VisioScripting.TargetActiveSelection targetselection, Models.Axis axis)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetselection = targetselection.Resolve(this._client);
 
             IVisio.VisUICmds cmd;
 
@@ -161,7 +158,7 @@ namespace VisioScripting.Commands
             var activeapp = new VisioScripting.TargetActiveApplication();
             using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DistributeOnAxis)))
             {
-                cmdtarget.Application.DoCmd((short) cmd);
+                targetselection.Selection.Application.DoCmd((short) cmd);
             }
         }
 

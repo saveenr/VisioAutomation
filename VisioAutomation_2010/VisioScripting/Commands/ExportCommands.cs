@@ -63,48 +63,32 @@ namespace VisioScripting.Commands
 
         public void ExportSelectionToImage(TargetActiveSelection targetselection, string filename)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetselection = targetselection.Resolve(this._client);
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
-            if (selection.Count < 1)
-            {
-                string msg = string.Format("Selection contains no shapes");
-                throw new System.ArgumentException(msg);
-            }
-
-            selection.Export(filename);
+            targetselection.Selection.Export(filename);
         }
 
         public void ExportSelectionToHtml(TargetActiveSelection targetselection, string filename)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetselection = targetselection.Resolve(this._client);
 
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
-            if (selection.Count < 1)
-            {
-                string msg = string.Format("Selection contains no shapes");
-                throw new System.ArgumentException(msg);
-            }
 
-            this._export_to_html(selection, filename, s => this._client.Output.WriteVerbose(s));
+            this._export_to_html(targetselection.Selection, filename, s => this._client.Output.WriteVerbose(s));
         }
 
         private void _export_to_html(IVisio.Selection selection, string filename, System.Action<string> export_log)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
+     
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";
             selection.Export(svg_filename);

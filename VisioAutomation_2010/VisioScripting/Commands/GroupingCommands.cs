@@ -13,21 +13,12 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape Group(TargetActiveSelection targetselection)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            // No shapes provided, use the active selection
-
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
-            if (selection.Count<1)
-            {
-                throw new VisioAutomation.Exceptions.VisioOperationException("No Selected Shapes to Group");
-            }
+            targetselection = targetselection.Resolve(this._client);
 
             // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
             // but it doesn't return the group
 
-            var g = selection.Group();
+            var g = targetselection.Selection.Group();
             return g;
         }
 

@@ -21,7 +21,8 @@ namespace VisioPowerShell.Commands.VisioPage
             }
             else
             {
-                this.Client.Page.SetActivePage(this.RelativePosition);                
+                var targetdoc = new VisioScripting.TargetDocument();
+                this.Client.Page.SetActivePage(targetdoc,this.RelativePosition);                
             }
         }
     }

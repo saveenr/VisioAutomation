@@ -53,13 +53,14 @@ namespace VisioScripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
-            var cmdtarget = this._client.GetCommandTargetPage();
+            var target_page = new VisioScripting.TargetPage();
+            target_page = target_page.Resolve(this._client);
 
             var activeapp = new VisioScripting.TargetActiveApplication();
             using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawNurbsCurve)))
             {
 
-                var shape = cmdtarget.ActivePage.DrawNurbs(controlpoints, knots, weights, degree);
+                var shape = target_page.Page.DrawNurbs(controlpoints, knots, weights, degree);
                 return shape;
             }
         }
@@ -146,30 +147,23 @@ namespace VisioScripting.Commands
 
         public void Duplicate(VisioScripting.TargetActiveSelection targetselection,int n)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
             if (n < 1)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(n));
             }
 
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
-            if (selection.Count<1)
-            {
-                return;
-            }
+            targetselection = targetselection.Resolve(this._client);
 
             // TODO: Add ability to duplicate all the selected shapes, not just the first one
             // this dupicates exactly 1 shape N - times what it
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
-            var application = cmdtarget.Application;
             var activeapp = new VisioScripting.TargetActiveApplication();
             using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(Duplicate)))
             {
-                var active_page = application.ActivePage;
-                var new_shapes = DrawCommands._create_duplicates(active_page, selection[1], n);
+                var app = targetselection.Selection.Application;
+                var active_page = app.ActivePage;
+                var new_shapes = DrawCommands._create_duplicates(active_page, targetselection.Selection[1], n);
             }
         }
 

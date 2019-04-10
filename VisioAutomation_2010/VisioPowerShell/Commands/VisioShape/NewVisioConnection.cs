@@ -17,7 +17,8 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            var connectors = this.Client.Connection.ConnectShapes(this.From, this.To, this.Master);
+            var targetpage = new VisioScripting.TargetPage();
+            var connectors = this.Client.Connection.ConnectShapes(targetpage, this.From, this.To, this.Master);
             this.WriteObject(connectors, true);
         }
     }

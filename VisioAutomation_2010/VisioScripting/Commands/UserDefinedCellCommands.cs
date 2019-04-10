@@ -32,8 +32,6 @@ namespace VisioScripting.Commands
 
         public List<VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
             targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)
@@ -41,7 +39,7 @@ namespace VisioScripting.Commands
                 return new List<VA.Shapes.UserDefinedCellDictionary>(0);
             }
 
-            var page = cmdtarget.ActivePage;
+            var page = targetshapes.Shapes[0].ContainingPage;
             var shapeidpairs = targetshapes.ToShapeIDPairs();
             var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetDictionary((IVisio.Page)page, shapeidpairs, cvt);
 

@@ -320,17 +320,20 @@ namespace VisioScripting.Commands
             this.SetPageSize(new TargetPages(targetpage.Page),new_size);
         }
 
-        public void SetActivePage(Models.PageRelativePosition flags)
+        public void SetActivePage(VisioScripting.TargetDocument targetdoc, Models.PageRelativePosition flags)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetdoc = targetdoc.Resolve(this._client);
 
-            var docpages = cmdtarget.ActiveDocument.Pages;
+            var docpages = targetdoc.Document.Pages;
             if (docpages.Count < 2)
             {
                 return;
             }
 
             var pages = docpages;
+
+            var cmdtarget = this._client.GetCommandTargetPage();
+
             this._go_to_page(pages, flags, cmdtarget);
         }
 
@@ -348,7 +351,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private void _go_to_page(IVisio.Pages pages, Models.PageRelativePosition flags, CommandTarget cmdtarget)
+        private void _go_to_page(IVisio.Pages pages, Models.PageRelativePosition flags, VisioScripting.CommandTarget cmdtarget)
         {
             if (pages == null)
             {

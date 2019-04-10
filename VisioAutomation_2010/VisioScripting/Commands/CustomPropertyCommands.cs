@@ -32,16 +32,16 @@ namespace VisioScripting.Commands
 
         public List<CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes, VASS.CellValueType type)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
             targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
                 return new List<CustomPropertyDictionary>(0);
-            } 
+            }
 
+            var page = targetshapes.Shapes[0].ContainingPage;
             var shapeidpairs = targetshapes.ToShapeIDPairs();
-            var listof_cpdic = CustomPropertyHelper.GetDictionary(cmdtarget.ActivePage, shapeidpairs, type);
+            var listof_cpdic = CustomPropertyHelper.GetDictionary(page, shapeidpairs, type);
 
             return listof_cpdic;
         }

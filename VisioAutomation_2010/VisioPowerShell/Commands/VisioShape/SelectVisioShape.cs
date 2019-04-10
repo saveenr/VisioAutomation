@@ -25,7 +25,8 @@ namespace VisioPowerShell.Commands.VisioShape
             }
             else if (this.ShapeIDs!=null)
             {
-                this.Client.Selection.SelectShapesById(this.ShapeIDs);
+                var window = new VisioScripting.TargetWindow();
+                this.Client.Selection.SelectShapesById(window, this.ShapeIDs);
             }
             else
             {

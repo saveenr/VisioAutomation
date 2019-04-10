@@ -31,27 +31,30 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(page_size, false);
             var page3 = client.Page.GetActivePage();
 
+            var targetpage = new VisioScripting.TargetPage();
+            var targetdoc = new VisioScripting.TargetDocument();
+
             Assert.AreEqual(3,doc.Pages.Count);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePage(PageRelativePosition.First);
+            client.Page.SetActivePage(targetdoc, PageRelativePosition.First);
             Assert.AreEqual(page1, client.Page.GetActivePage());
-            client.Page.SetActivePage(PageRelativePosition.Last);
+            client.Page.SetActivePage(targetdoc, PageRelativePosition.Last);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePage(PageRelativePosition.Previous);
+            client.Page.SetActivePage(targetdoc, PageRelativePosition.Previous);
             Assert.AreEqual(page2, client.Page.GetActivePage());
-            client.Page.SetActivePage(PageRelativePosition.Next);
+            client.Page.SetActivePage(targetdoc, PageRelativePosition.Next);
             Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to last and try to go to next page
-            client.Page.SetActivePage(PageRelativePosition.Last);
+            client.Page.SetActivePage(targetdoc, PageRelativePosition.Last);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePage(PageRelativePosition.Next);
+            client.Page.SetActivePage(targetdoc, PageRelativePosition.Next);
             Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to first and try to go to previous page
-            client.Page.SetActivePage(PageRelativePosition.First);
+            client.Page.SetActivePage(targetdoc, PageRelativePosition.First);
             Assert.AreEqual(page1, client.Page.GetActivePage());
-            client.Page.SetActivePage(PageRelativePosition.Previous);
+            client.Page.SetActivePage(targetdoc, PageRelativePosition.Previous);
             Assert.AreEqual(page1, client.Page.GetActivePage());
 
             doc.Close(true);

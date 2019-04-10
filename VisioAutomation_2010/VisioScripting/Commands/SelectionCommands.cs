@@ -88,17 +88,19 @@ namespace VisioScripting.Commands
             targetwindow.Window.Select(shapes, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void SelectShapesById(IEnumerable<int> shapeids)
+        public void SelectShapesById(VisioScripting.TargetWindow targetwindow, IEnumerable<int> shapeids)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetwindow = targetwindow.Resolve(this._client);
 
             if (shapeids == null)
             {
                 throw new System.ArgumentNullException(nameof(shapeids));
             }
 
-            var active_window = cmdtarget.Application.ActiveWindow;
-            var page = cmdtarget.ActivePage;
+
+            var active_window = targetwindow.Window;
+            var app = targetwindow.Window.Application;
+            var page = app.ActivePage;
             var page_shapes = page.Shapes;
             var shapes = shapeids.Select(id => page_shapes.ItemFromID[id]).ToList();
             active_window.Select(shapes, IVisio.VisSelectArgs.visSelect);
