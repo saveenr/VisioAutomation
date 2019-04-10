@@ -411,7 +411,6 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-
         public List<IVisio.Shape> GetShapesOnPageByName(TargetPage targetpage, string[] shapenames)
         {
             targetpage = targetpage.Resolve(this._client);

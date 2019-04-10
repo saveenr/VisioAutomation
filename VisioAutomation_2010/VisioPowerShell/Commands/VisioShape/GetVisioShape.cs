@@ -62,7 +62,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 string str_asterisk = "*";
                 if (this.Name.Contains(str_asterisk))
                 {
-                    var shapes = this.Client.Draw.GetAllShapesOnActiveDrawingSurface();
+                    var shapes = this.Client.Page.GetShapesOnPage(targetpage);
                     this.WriteObject(shapes, true);
                 }
                 else
