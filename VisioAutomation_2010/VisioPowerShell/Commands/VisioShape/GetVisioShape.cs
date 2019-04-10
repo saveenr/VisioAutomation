@@ -1,6 +1,7 @@
 using System.Linq;
 using VisioScripting;
 using SMA = System.Management.Automation;
+using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioShape
 {
@@ -12,7 +13,10 @@ namespace VisioPowerShell.Commands.VisioShape
 
         [SMA.Parameter(ParameterSetName = "id", Position = 0, Mandatory = false)]
         public int[] Id;
-        
+
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page Page;
+
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Recursive;
 
@@ -28,7 +32,6 @@ namespace VisioPowerShell.Commands.VisioShape
             {
                 // return selected shapes
 
-                var window = new VisioScripting.TargetWindow();
                 var selection = new VisioScripting.TargetSelection();
 
                 if (this.Recursive)
@@ -46,7 +49,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 else
                 {
                     this.WriteVerbose("Returning selected shapes ");
-                    var shapes = this.Client.Selection.GetSelectedShapes(window);
+                    var shapes = this.Client.Selection.GetSelectedShapes(selection);
                     this.WriteObject(shapes, true);
                 }
 

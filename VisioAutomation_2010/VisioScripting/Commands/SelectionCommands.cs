@@ -161,6 +161,13 @@ namespace VisioScripting.Commands
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(targetwindow.Window.Selection);
         }
 
+        public IList<IVisio.Shape> GetSelectedShapes(TargetSelection targetselection)
+        {
+            targetselection = targetselection.Resolve(this._client);
+
+            return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(targetselection.Selection);
+        }
+
         public List<IVisio.Shape> GetShapesRecursive(TargetSelection targetselection)
         {
             targetselection = targetselection.Resolve(this._client);
