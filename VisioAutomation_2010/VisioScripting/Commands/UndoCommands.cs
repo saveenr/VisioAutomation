@@ -1,3 +1,4 @@
+using VisioAutomation.Application;
 using VA = VisioAutomation;
 
 namespace VisioScripting.Commands
@@ -11,19 +12,19 @@ namespace VisioScripting.Commands
 
         }
 
-        public void UndoLastAction(VisioScripting.TargetActiveApplication activeapp)
+        public void UndoLastAction()
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
             cmdtarget.Application.Undo();
         }
 
-        public void RedoLastAction(VisioScripting.TargetActiveApplication activeapp)
+        public void RedoLastAction()
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
             cmdtarget.Application.Redo();
         }
 
-        public VA.Application.UndoScope NewUndoScope(VisioScripting.TargetActiveApplication activeapp, string name)
+        public UndoScope NewUndoScope(string name)
         {
             var app = this._client.Application.GetAttachedApplication();
             if (app == null)

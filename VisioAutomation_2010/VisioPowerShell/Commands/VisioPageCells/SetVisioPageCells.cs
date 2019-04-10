@@ -35,8 +35,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this.Client.Undo.NewUndoScope(activeapp, nameof(SetVisioPageCells)))
+            using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioPageCells)))
             {
                 for (int i = 0; i < targetpages.Pages.Count; i++)
                 {

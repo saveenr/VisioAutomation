@@ -18,8 +18,8 @@ namespace VisioScripting.Commands
             }
 
             targetselection = targetselection.Resolve(this._client);
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(Nudge)))
+
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(Nudge)))
             {
                 var unitcode = IVisio.VisUnitCodes.visInches;
 
@@ -81,8 +81,7 @@ namespace VisioScripting.Commands
 
             const bool glue_to_guide = false;
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(AlignHorizontal)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AlignHorizontal)))
             {
                 targetselection.Selection.Align(halign, valign, glue_to_guide);
             }
@@ -112,8 +111,7 @@ namespace VisioScripting.Commands
             const bool glue_to_guide = false;
 
             // Perform the alignment
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(AlignVertical)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AlignVertical)))
             {
                 targetselection.Selection.Align(halign, valign, glue_to_guide);
             }
@@ -130,8 +128,8 @@ namespace VisioScripting.Commands
 
             var page = targetshapes.Shapes[0].ContainingPage;
             var targetshapeids = targetshapes.ToShapeIDs();
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DistributeOnAxis)))
+
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeOnAxis)))
             {
                 VisioScripting.Helpers.ArrangeHelper._distribute_with_spacing(page, targetshapeids, axis, spacing);
             }
@@ -155,8 +153,7 @@ namespace VisioScripting.Commands
                     throw new System.ArgumentOutOfRangeException();
             }
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DistributeOnAxis)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeOnAxis)))
             {
                 targetselection.Selection.Application.DoCmd((short) cmd);
             }

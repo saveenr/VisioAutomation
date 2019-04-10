@@ -30,8 +30,7 @@ namespace VisioScripting.Commands
 
             var control_indices = new List<int>();
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(AddControlToShapes)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(AddControlToShapes)))
             {
                 foreach (var shape in targetshapes.Shapes)
                 {
@@ -56,8 +55,7 @@ namespace VisioScripting.Commands
             // controls to qualify for deleting 
             var qualified_shapes = targetshapes.Shapes.Where(shape => ControlHelper.GetCount(shape) > index);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DeleteControlWithIndex)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DeleteControlWithIndex)))
             {
                 foreach (var shape in qualified_shapes)
                 {

@@ -56,8 +56,7 @@ namespace VisioScripting.Commands
             var target_page = new VisioScripting.TargetPage();
             target_page = target_page.Resolve(this._client);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawNurbsCurve)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawNurbsCurve)))
             {
 
                 var shape = target_page.Page.DrawNurbs(controlpoints, knots, weights, degree);
@@ -69,8 +68,7 @@ namespace VisioScripting.Commands
         {
             var surface = this.GetActiveDrawingSurface();
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawRectangle)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawRectangle)))
             {
                 var shape = surface.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
                 return shape;
@@ -94,8 +92,7 @@ namespace VisioScripting.Commands
         {
             var surface = this.GetActiveDrawingSurface();
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawLine)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawLine)))
             {
                 var shape = surface.DrawLine(p0,p1);
                 return shape;
@@ -106,8 +103,7 @@ namespace VisioScripting.Commands
         {
             var surface = this.GetActiveDrawingSurface();
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawOval)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
                 var shape = surface.DrawOval(rect);
                 return shape;
@@ -124,8 +120,7 @@ namespace VisioScripting.Commands
         {
             var surface = this.GetActiveDrawingSurface();
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawOval)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
                 var shape = surface.DrawBezier(points.ToList());
                 return shape;
@@ -136,8 +131,7 @@ namespace VisioScripting.Commands
         {
             var surface = this.GetActiveDrawingSurface();
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawPolyLine)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPolyLine)))
             {
                 var shape = surface.DrawPolyLine(points);
                 return shape;
@@ -158,8 +152,7 @@ namespace VisioScripting.Commands
             // this dupicates exactly 1 shape N - times what it
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(Duplicate)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(Duplicate)))
             {
                 var app = targetselection.Selection.Application;
                 var active_page = app.ActivePage;

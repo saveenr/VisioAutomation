@@ -9,19 +9,18 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Test_Resize_Application_Window1()
         {
-            var active_app = new VisioScripting.TargetActiveApplication();
 
             var desired_size = new System.Drawing.Size(600, 700);
             var client = this.GetScriptingClient();
-            var old_rect = client.Application.GetWindowRectangle(active_app);
+            var old_rect = client.Application.GetWindowRectangle();
             var new_rect = new System.Drawing.Rectangle(old_rect.X, old_rect.Y, desired_size.Width, desired_size.Height);
 
-            client.Application.SetWindowRectangle(active_app, new_rect);
-            var actual_rect1 = client.Application.GetWindowRectangle(active_app);
+            client.Application.SetWindowRectangle(new_rect);
+            var actual_rect1 = client.Application.GetWindowRectangle();
             Assert.AreEqual(desired_size, actual_rect1.Size);
 
-            client.Application.SetWindowRectangle(active_app, old_rect);
-            var actual_rect2 = client.Application.GetWindowRectangle(active_app);
+            client.Application.SetWindowRectangle(old_rect);
+            var actual_rect2 = client.Application.GetWindowRectangle();
             Assert.AreEqual(old_rect.Size, actual_rect2.Size);
             Assert.AreEqual(old_rect, actual_rect2);
 
@@ -55,8 +54,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Test_App_to_Front()
         {
             var client = this.GetScriptingClient();
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            client.Application.MoveWindowToFront(activeapp);
+            client.Application.MoveWindowToFront();
         }
 
         [TestMethod]
@@ -71,8 +69,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1, page.Shapes.Count);
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            client.Undo.UndoLastAction(activeapp);
+            client.Undo.UndoLastAction();
             Assert.AreEqual(0, page.Shapes.Count);
             client.Document.CloseDocument(targetdoc, true);
         }

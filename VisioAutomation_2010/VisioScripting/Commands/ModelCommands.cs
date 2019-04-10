@@ -71,8 +71,7 @@ namespace VisioScripting.Commands
                 }
             }
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawDataTable)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawDataTable)))
             {
                 layout.Render(targetpage.Page);
                 targetpage.Page.ResizeToFitContents();
@@ -87,14 +86,13 @@ namespace VisioScripting.Commands
             targetpage = targetpage.Resolve(this._client);
             layout.PerformLayout();
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DrawGrid)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawGrid)))
             {
                 layout.Render(targetpage.Page);
             }
         }
 
-        public void NewOrgChartDocument(VisioScripting.TargetActiveApplication activeapp, ORG.OrgChartDocument chartdocument)
+        public void NewOrgChartDocument(ORG.OrgChartDocument chartdocument)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
@@ -107,7 +105,7 @@ namespace VisioScripting.Commands
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void NewDirectedGraphDocument(VisioScripting.TargetActiveApplication activeapp, IList<GRAPH.DirectedGraphLayout> graph)
+        public void NewDirectedGraphDocument(IList<GRAPH.DirectedGraphLayout> graph)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 

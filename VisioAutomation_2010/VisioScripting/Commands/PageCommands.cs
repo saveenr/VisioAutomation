@@ -66,8 +66,7 @@ namespace VisioScripting.Commands
             var pages = targetdoc.Document.Pages;
             IVisio.Page new_page;
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(NewPage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(NewPage)))
             {
                 new_page = pages.Add();
 
@@ -123,8 +122,7 @@ namespace VisioScripting.Commands
 
             // don't allow the page to be set as a background to itself
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(SetPageBackground)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageBackground)))
             {
                 foreach (var page in targetpages.Pages)
                 {
@@ -143,8 +141,7 @@ namespace VisioScripting.Commands
         {
             targetpage = targetpage.Resolve(this._client);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(DuplicatePage)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicatePage)))
             {
                 var src_page = targetpage.Page;
                 var doc = src_page.Document;
@@ -210,8 +207,7 @@ namespace VisioScripting.Commands
 
             targetpages = targetpages.Resolve(this._client);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(SetPageOrientation)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageOrientation)))
             {
 
                 foreach (var page in targetpages.Pages)
@@ -245,8 +241,7 @@ namespace VisioScripting.Commands
         {
             targetpages = targetpages.Resolve(this._client);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(ResizePageToFitContents)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizePageToFitContents)))
             {
                 foreach (var page in targetpages.Pages)
                 {
@@ -259,8 +254,7 @@ namespace VisioScripting.Commands
         {
             targetpage = targetpage.Resolve(this._client);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(ResizePageToFitContents)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizePageToFitContents)))
             {
                 targetpage.Page.ResizeToFitContents(bordersize);
             }
@@ -270,8 +264,7 @@ namespace VisioScripting.Commands
         {
             targetpages = targetpages.Resolve(this._client);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(SetPageFormatCells)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageFormatCells)))
             {
                 foreach (var page in targetpages.Pages)
                 {
@@ -287,8 +280,7 @@ namespace VisioScripting.Commands
         {
             targetpages = targetpages.Resolve(this._client);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(SetPageSize)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
                 foreach (var page in targetpages.Pages)
                 {
@@ -339,8 +331,7 @@ namespace VisioScripting.Commands
         {
             targetpages = targetpages.Resolve(this._client);
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(SetPageSize)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
                 foreach (var page in targetpages.Pages)
                 {

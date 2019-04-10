@@ -29,8 +29,7 @@ namespace VisioScripting.Commands
                 writer.SetValues((short)shapeid, lockcells);
             }
 
-            var activeapp = new VisioScripting.TargetActiveApplication();
-            using (var undoscope = this._client.Undo.NewUndoScope(activeapp, nameof(SetLockCells)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetLockCells)))
             {
                 writer.Commit(page, VASS.CellValueType.Formula);
             }

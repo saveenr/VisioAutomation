@@ -128,7 +128,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void MoveWindowToFront(VisioScripting.TargetActiveApplication activeapp)
+        public void MoveWindowToFront()
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
@@ -142,7 +142,7 @@ namespace VisioScripting.Commands
             VisioAutomation.Application.ApplicationHelper.BringWindowToTop(app);
         }
 
-        public System.Drawing.Rectangle GetWindowRectangle(VisioScripting.TargetActiveApplication activeapp)
+        public System.Drawing.Rectangle GetWindowRectangle()
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
@@ -151,7 +151,7 @@ namespace VisioScripting.Commands
             return rect;
         }
 
-        public void SetWindowRectangle(VisioScripting.TargetActiveApplication activeapp, System.Drawing.Rectangle rect)
+        public void SetWindowRectangle( System.Drawing.Rectangle rect)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
