@@ -27,9 +27,11 @@ namespace VisioScripting
 
             // Handle the unresolved case
 
-            var cmdtarget = new CommandTarget(client, CommandTargetRequirementFlags.RequireApplication |
-                                                                    CommandTargetRequirementFlags.RequireActiveDocument |
-                                                                    CommandTargetRequirementFlags.RequirePage);
+            var flags = CommandTargetRequirementFlags.RequireApplication |
+                        CommandTargetRequirementFlags.RequireActiveDocument |
+                        CommandTargetRequirementFlags.RequirePage;
+
+            var cmdtarget = new CommandTarget(client, flags);
 
             if (cmdtarget.ActiveDocument == null)
             {

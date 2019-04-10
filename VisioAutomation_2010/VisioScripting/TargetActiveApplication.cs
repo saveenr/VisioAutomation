@@ -1,6 +1,6 @@
 namespace VisioScripting
 {
-    public class TargetActiveApplication
+    public class TargetActiveApplication 
     {
 
         public TargetActiveApplication()

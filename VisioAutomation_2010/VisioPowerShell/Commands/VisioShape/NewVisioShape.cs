@@ -163,11 +163,11 @@ namespace VisioPowerShell.Commands.VisioShape
 
             if (!this.NoSelect)
             {
-                var selection = new VisioScripting.TargetActiveSelection();
+                var window = new VisioScripting.TargetWindow();
 
                 // Select the Shapes
                 ((SMA.Cmdlet)this).WriteVerbose("Selecting");
-                this.Client.Selection.SelectShapes(selection, shape_objects);
+                this.Client.Selection.SelectShapes(window, shape_objects);
             }
 
             this.WriteObject(shape_objects, true);

@@ -20,18 +20,16 @@ namespace VisioScripting
 
         public TargetPage Resolve(Client client)
         {
-            if (!this.IsResolved)
-            {
-                var cmdtarget = client.GetCommandTargetPage();
-
-                // It doesn't matter if there is an active page or not
-                // at this point it is considered resolved
-                return new TargetPage(cmdtarget.ActivePage, true);
-            }
-            else
+            if (this.Resolved)
             {
                 return this;
             }
+
+            var cmdtarget = client.GetCommandTargetPage();
+
+            // It doesn't matter if there is an active page or not
+            // at this point it is considered resolved
+            return new TargetPage(cmdtarget.ActivePage, true);
         }
 
         public IVisio.Page Page => this._item;

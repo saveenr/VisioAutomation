@@ -14,14 +14,16 @@ namespace VisioScripting
 
         public TargetDocument Resolve(VisioScripting.Client client)
         {
-            if (this.IsResolved)
+            if (this.Resolved)
             {
                 return this;
             }
 
-            var command_target = new CommandTarget(client, CommandTargetRequirementFlags.RequireApplication |
-                                                                    CommandTargetRequirementFlags.RequireActiveDocument |
-                                                                    CommandTargetRequirementFlags.RequirePage);
+            var flags = CommandTargetRequirementFlags.RequireApplication |
+                        CommandTargetRequirementFlags.RequireActiveDocument |
+                        CommandTargetRequirementFlags.RequirePage;
+
+            var command_target = new CommandTarget(client, flags);
 
             return new TargetDocument(command_target.ActiveDocument);
         }

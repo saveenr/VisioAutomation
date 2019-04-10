@@ -31,9 +31,10 @@ namespace VisioAutomation_Tests.Scripting
             Assert.IsTrue(x1.ContainsKey(s4));
 
             var targetselection = new VisioScripting.TargetActiveSelection();
+            var targetwindow = new VisioScripting.TargetWindow();
 
 
-            client.Selection.InvertSelection(targetselection);
+            client.Selection.InvertSelection(targetwindow);
 
             var x2 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(3, x2.Count);

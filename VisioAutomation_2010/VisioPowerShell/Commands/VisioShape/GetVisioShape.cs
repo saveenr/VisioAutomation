@@ -28,6 +28,7 @@ namespace VisioPowerShell.Commands.VisioShape
             {
                 // return selected shapes
 
+                var window = new VisioScripting.TargetWindow();
                 var selection = new VisioScripting.TargetActiveSelection();
 
                 if (this.Recursive)
@@ -45,7 +46,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 else
                 {
                     this.WriteVerbose("Returning selected shapes ");
-                    var shapes = this.Client.Selection.GetShapes(selection);
+                    var shapes = this.Client.Selection.GetSelectedShapes(window);
                     this.WriteObject(shapes, true);
                 }
 

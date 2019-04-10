@@ -37,15 +37,16 @@ namespace VisioAutomation_Tests.Scripting
             var directed_connectors = client.Connection.ConnectShapes(fromshapes,toshapes, master);
             client.Selection.SelectNone(targetwindow);
 
+            var window = new VisioScripting.TargetWindow();
             var selection = new VisioScripting.TargetActiveSelection();
 
-            client.Selection.SelectShapes(selection, directed_connectors);
+            client.Selection.SelectShapes(window, directed_connectors);
 
             var page = new VisioScripting.TargetPage();
             var writer = client.ShapeSheet.GetWriterForPage(page);
 
 
-            var shapes = client.Selection.GetShapes(selection);
+            var shapes = client.Selection.GetSelectedShapes(window);
             foreach (var shape in shapes)
             {
                 writer.SetFormula( shape.ID16, VA.ShapeSheet.SrcConstants.LineEndArrow, "13");
