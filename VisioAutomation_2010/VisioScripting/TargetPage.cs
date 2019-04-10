@@ -10,15 +10,15 @@ namespace VisioScripting
         {
         }
 
-        public TargetPage(Microsoft.Office.Interop.Visio.Page page) : base(page)
+        public TargetPage(IVisio.Page page) : base(page)
         {
         }
 
-        public TargetPage(Microsoft.Office.Interop.Visio.Page page, bool isresolved) : base(page, isresolved)
+        public TargetPage(IVisio.Page page, bool isresolved) : base(page, isresolved)
         {
         }
 
-        public TargetPage Resolve(VisioScripting.Client client)
+        public TargetPage Resolve(Client client)
         {
             if (!this.IsResolved)
             {
