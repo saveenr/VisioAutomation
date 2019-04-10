@@ -6,13 +6,10 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Copy, Nouns.VisioShape)]
     public class CopyVisioShape : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
-
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
-            this.Client.Selection.DuplicateShapes(targetshapes);
+            var targetselection = new VisioScripting.TargetSelection();
+            this.Client.Selection.DuplicateShapes(targetselection);
         }
     }
 }

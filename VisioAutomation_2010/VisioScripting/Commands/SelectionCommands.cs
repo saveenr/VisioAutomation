@@ -228,23 +228,18 @@ namespace VisioScripting.Commands
             targetselection.Selection.Copy(flags);
         }
 
-        public void DuplicateShapes(TargetShapes targetshapes )
+        public void DuplicateShapes(TargetSelection targetselection)
         {
-            targetshapes = targetshapes.Resolve(this._client);
-
-            int n = targetshapes.SelectShapesAndCount(this._client);
-
-            this._client.Output.WriteVerbose("Number of shapes to duplicate: {0}", n);
-
-            if (n<1)
+            targetselection = targetselection.Resolve(this._client);
+            if (targetselection.Selection.Count < 1)
             {
-                this._client.Output.WriteVerbose("Zero shapes to duplicate. No duplication operation performed");
                 return;
             }
 
-            var window = targetshapes.Shapes[0].Application.ActiveWindow;
-            var selection = window.Selection;
-            selection.Duplicate();
+            
+            this._client.Output.WriteVerbose("Number of shapes to duplicate: {0}", targetselection.Selection.Count);
+
+            targetselection.Selection.Duplicate();
         }
 
         public bool ContainsShapes(TargetSelection targetselection)

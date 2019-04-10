@@ -139,6 +139,11 @@ namespace VisioScripting.Commands
         {
             targetselection = targetselection.Resolve(this._client);
 
+            if (targetselection.Selection.Count < 2)
+            {
+                return;
+            }
+
             IVisio.VisUICmds cmd;
 
             switch (axis)
@@ -159,12 +164,11 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeHorizontal(TargetShapes targetshapes, Models.AlignmentHorizontal halign)
+        public void DistributeHorizontal(TargetSelection targetselection, Models.AlignmentHorizontal halign)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetselection = targetselection.Resolve(this._client);
 
-            int shape_count = targetshapes.SelectShapesAndCount(this._client);
-            if (shape_count < 1)
+            if (targetselection.Selection.Count < 2)
             {
                 return;
             }
@@ -185,18 +189,22 @@ namespace VisioScripting.Commands
                 default: throw new System.ArgumentOutOfRangeException();
             }
 
-            cmdtarget.Application.DoCmd((short) cmd);
+            var app = targetselection.Selection.Application;
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeHorizontal)))
+            {
+                app.DoCmd((short)cmd);
+            }
         }
 
-        public void DistributeVertical(TargetShapes targetshapes, Models.AlignmentVertical valign)
+        public void DistributeVertical(TargetSelection targetselection, Models.AlignmentVertical valign)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetselection = targetselection.Resolve(this._client);
 
-            int shape_count = targetshapes.SelectShapesAndCount(this._client);
-            if (shape_count < 1)
+            if (targetselection.Selection.Count < 2)
             {
                 return;
             }
+
 
             IVisio.VisUICmds cmd;
             switch (valign)
@@ -213,8 +221,12 @@ namespace VisioScripting.Commands
                 default: throw new System.ArgumentOutOfRangeException();
             }
 
-            cmdtarget.Application.DoCmd((short) cmd);
 
+            var app = targetselection.Selection.Application;
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeVertical)))
+            {
+                app.DoCmd((short)cmd);
+            }
         }
     }
 }
