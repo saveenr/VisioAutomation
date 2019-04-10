@@ -28,7 +28,7 @@ namespace VisioScripting
             return new TargetDocument(command_target.ActiveDocument);
         }
 
-        public IVisio.Document Document => this._item;
+        public IVisio.Document Document => this._get_item_safe();
 
     }
 }

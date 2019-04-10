@@ -32,6 +32,6 @@ namespace VisioScripting
             return new TargetPage(cmdtarget.ActivePage, true);
         }
 
-        public IVisio.Page Page => this._item;
+        public IVisio.Page Page => this._get_item_safe();
     }
 }

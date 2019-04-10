@@ -30,7 +30,7 @@ namespace VisioScripting
             return new TargetSelection(window.Selection);
         }
 
-        public IVisio.Selection Selection => this._item;
+        public IVisio.Selection Selection => this._get_item_safe();
 
     }
 }

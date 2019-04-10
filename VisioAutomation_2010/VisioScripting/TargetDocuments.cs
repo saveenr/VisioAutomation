@@ -45,6 +45,6 @@ namespace VisioScripting
             }
         }
 
-        public IList<IVisio.Document> Documents => this._items;
+        public IList<IVisio.Document> Documents => this._get_items_safe();
     }
 }
