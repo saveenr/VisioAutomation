@@ -181,14 +181,13 @@ namespace VisioScripting.Commands
             return count;
         }
 
-        public List<IVisio.Shape> GetSubSelectedShapes()
+        public List<IVisio.Shape> GetSubSelectedShapes(TargetSelection targetselection)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetselection = targetselection.Resolve(this._client);
 
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
             var shapes = new List<IVisio.Shape>(0);
-            var window = cmdtarget.Application.ActiveWindow;
-            var sel = window.Selection;
+            var sel = targetselection.Selection;
 
             var original_itermode = sel.IterationMode;
 

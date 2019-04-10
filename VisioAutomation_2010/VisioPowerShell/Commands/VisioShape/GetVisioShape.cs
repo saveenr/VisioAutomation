@@ -43,7 +43,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 if (this.SubSelected)
                 {
                     this.WriteVerbose("Returning selected shapes (subselect)");
-                    var shapes = this.Client.Selection.GetSubSelectedShapes();
+                    var shapes = this.Client.Selection.GetSubSelectedShapes(selection);
                     this.WriteObject(shapes, true);
                 }
                 else
