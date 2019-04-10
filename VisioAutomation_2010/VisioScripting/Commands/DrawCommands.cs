@@ -145,7 +145,7 @@ namespace VisioScripting.Commands
         }
 
 
-        public void Duplicate(VisioScripting.TargetActiveSelection targetselection,int n)
+        public void Duplicate(VisioScripting.TargetSelection targetselection,int n)
         {
             if (n < 1)
             {

@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioShape
     {
         protected override void ProcessRecord()
         {
-            var selection = new VisioScripting.TargetActiveSelection();
+            var selection = new VisioScripting.TargetSelection();
 
             var something_is_selected = this.Client.Selection.ContainsShapes(selection);
             this.WriteObject(something_is_selected);

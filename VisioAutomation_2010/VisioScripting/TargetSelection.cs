@@ -3,18 +3,18 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting
 {
-    public class TargetActiveSelection : TargetObject<IVisio.Selection>
+    public class TargetSelection : TargetObject<IVisio.Selection>
     {
 
-        public TargetActiveSelection() : base()
+        public TargetSelection() : base()
         {
         }
 
-        public TargetActiveSelection(IVisio.Selection selection) : base(selection)
+        public TargetSelection(IVisio.Selection selection) : base(selection)
         {
         }
 
-        public TargetActiveSelection Resolve(Client client)
+        public TargetSelection Resolve(Client client)
         {
             if (this.Resolved)
             {
@@ -27,7 +27,7 @@ namespace VisioScripting
             // at this point it is considered resolved
             var app = cmdtarget.Application;
             var window = app.ActiveWindow;
-            return new TargetActiveSelection(window.Selection);
+            return new TargetSelection(window.Selection);
         }
 
         public IVisio.Selection Selection => this._item;

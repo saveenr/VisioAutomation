@@ -31,7 +31,7 @@ namespace VisioAutomation_Tests.Scripting
                 File.Delete(output_filename);
             }
 
-            var selection = new VisioScripting.TargetActiveSelection();
+            var selection = new VisioScripting.TargetSelection();
 
             client.Export.ExportSelectionToHtml(selection, output_filename);
 

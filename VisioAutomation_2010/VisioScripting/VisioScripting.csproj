@@ -73,7 +73,7 @@
     <Compile Include="TargetObjects.cs" />
     <Compile Include="TargetPage.cs" />
     <Compile Include="TargetPages.cs" />
-    <Compile Include="TargetActiveSelection.cs" />
+    <Compile Include="TargetSelection.cs" />
     <Compile Include="TargetShapes.cs" />
     <Compile Include="Helpers\ArrangeHelper.cs" />
     <Compile Include="Client.cs" />

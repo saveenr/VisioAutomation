@@ -26,7 +26,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            var selection = new VisioScripting.TargetActiveSelection();
+            var selection = new VisioScripting.TargetSelection();
 
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {

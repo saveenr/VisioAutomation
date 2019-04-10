@@ -24,7 +24,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targetwindow = new VisioScripting.TargetWindow();
 
-            var selection = new VisioScripting.TargetActiveSelection();
+            var selection = new VisioScripting.TargetSelection();
 
             client.Selection.SelectAllShapes(targetwindow);
             var s0 = client.Selection.GetSelectedShapes(targetwindow);

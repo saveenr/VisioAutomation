@@ -10,7 +10,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public void Nudge(TargetActiveSelection targetselection, double dx, double dy)
+        public void Nudge(TargetSelection targetselection, double dx, double dy)
         {
             if (dx == 0.0 && dy == 0.0)
             {
@@ -58,7 +58,7 @@ namespace VisioScripting.Commands
             ArrangeCommands._send_selection(selection, dir);
         }
 
-        public void AlignHorizontal(TargetActiveSelection targetselection, Models.AlignmentHorizontal align)
+        public void AlignHorizontal(TargetSelection targetselection, Models.AlignmentHorizontal align)
         {
             targetselection = targetselection.Resolve(this._client);
 
@@ -88,7 +88,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void AlignVertical(TargetActiveSelection targetselection, Models.AlignmentVertical align)
+        public void AlignVertical(TargetSelection targetselection, Models.AlignmentVertical align)
         {
             targetselection = targetselection.Resolve(this._client);
 
@@ -137,7 +137,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributeOnAxis(VisioScripting.TargetActiveSelection targetselection, Models.Axis axis)
+        public void DistributeOnAxis(VisioScripting.TargetSelection targetselection, Models.Axis axis)
         {
             targetselection = targetselection.Resolve(this._client);
 

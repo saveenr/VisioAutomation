@@ -61,7 +61,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void ExportSelectionToImage(TargetActiveSelection targetselection, string filename)
+        public void ExportSelectionToImage(TargetSelection targetselection, string filename)
         {
             targetselection = targetselection.Resolve(this._client);
 
@@ -73,7 +73,7 @@ namespace VisioScripting.Commands
             targetselection.Selection.Export(filename);
         }
 
-        public void ExportSelectionToHtml(TargetActiveSelection targetselection, string filename)
+        public void ExportSelectionToHtml(TargetSelection targetselection, string filename)
         {
             targetselection = targetselection.Resolve(this._client);
 

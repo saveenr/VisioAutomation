@@ -161,13 +161,13 @@ namespace VisioScripting.Commands
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(targetwindow.Window.Selection);
         }
 
-        public List<IVisio.Shape> GetShapesRecursive(TargetActiveSelection targetselection)
+        public List<IVisio.Shape> GetShapesRecursive(TargetSelection targetselection)
         {
             targetselection = targetselection.Resolve(this._client);
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapesRecursive(targetselection.Selection);
         }
 
-        public int GetShapeCount(TargetActiveSelection targetselection)
+        public int GetShapeCount(TargetSelection targetselection)
         {
             targetselection = targetselection.Resolve(this._client);
             int count = targetselection.Selection.Count;
@@ -204,7 +204,7 @@ namespace VisioScripting.Commands
             return shapes;
         }
 
-        public void DeleteShapes(TargetActiveSelection targetselection)
+        public void DeleteShapes(TargetSelection targetselection)
         {
             targetselection = targetselection.Resolve(this._client);
 
@@ -216,7 +216,7 @@ namespace VisioScripting.Commands
             targetselection.Selection.Delete();
         }
 
-        public void CopySelectedShapes(TargetActiveSelection targetselection)
+        public void CopySelectedShapes(TargetSelection targetselection)
         {
             targetselection = targetselection.Resolve(this._client);
             if (targetselection.Selection.Count<1)
@@ -247,12 +247,12 @@ namespace VisioScripting.Commands
             selection.Duplicate();
         }
 
-        public bool ContainsShapes(TargetActiveSelection targetselection)
+        public bool ContainsShapes(TargetSelection targetselection)
         {
             return this.ContainsShapes(targetselection, 1);
         }
 
-        public bool ContainsShapes(TargetActiveSelection targetselection, int min_items)
+        public bool ContainsShapes(TargetSelection targetselection, int min_items)
         {
             if (min_items <= 0)
             {
