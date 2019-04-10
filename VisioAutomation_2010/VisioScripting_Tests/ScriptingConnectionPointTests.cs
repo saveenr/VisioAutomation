@@ -9,8 +9,10 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_ConnectionPoints_Scenarios()
         {
             var client = this.GetScriptingClient();
+
+            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.NewDocument();
-            client.Page.NewPage(new VisioAutomation.Geometry.Size(4, 4), false);
+            client.Page.NewPage(targetdoc,new VisioAutomation.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
@@ -35,7 +37,6 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("Width*0.67", dic[s2][0].Y.Value);
 
             client.ConnectionPoint.DeleteConnectionPointAtIndex(targetshapes,0);
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
     }

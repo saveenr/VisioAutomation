@@ -20,8 +20,10 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
+            var targetdoc = new VisioScripting.TargetDocument();
+
             this.Client.Output.WriteVerbose("Creating a new page");
-            var page = this.Client.Page.NewPage(null, false);
+            var page = this.Client.Page.NewPage(targetdoc , null, false);
             
             if (this.Name != null)
             {

@@ -65,14 +65,15 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Geometry.Size(8.5,11);
             var drawing = client.Document.NewDocument(page_size);
-            var page = client.Page.NewPage(page_size, false);
+
+            var targetdoc = new VisioScripting.TargetDocument();
+            var page = client.Page.NewPage(targetdoc, page_size, false);
             Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1, page.Shapes.Count);
             var activeapp = new VisioScripting.TargetActiveApplication();
             client.Undo.UndoLastAction(activeapp);
             Assert.AreEqual(0, page.Shapes.Count);
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 

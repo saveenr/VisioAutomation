@@ -14,7 +14,9 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument();
-            client.Page.NewPage(new Size(4, 5), false);
+            var targetdoc = new VisioScripting.TargetDocument();
+
+            client.Page.NewPage(targetdoc, new Size(4, 5), false);
         }
 
 
@@ -24,14 +26,14 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument(page_size);
+            var targetdoc = new VisioScripting.TargetDocument();
 
             var page1 = client.Page.GetActivePage();
-            client.Page.NewPage(page_size, false);
+            client.Page.NewPage(targetdoc, page_size, false);
             var page2 = client.Page.GetActivePage();
-            client.Page.NewPage(page_size, false);
+            client.Page.NewPage(targetdoc, page_size, false);
             var page3 = client.Page.GetActivePage();
 
-            var targetdoc = new VisioScripting.TargetDocument();
 
             Assert.AreEqual(3,doc.Pages.Count);
             Assert.AreEqual(page3, client.Page.GetActivePage());

@@ -59,7 +59,9 @@ namespace VisioAutomation_Tests.Scripting
             // Prepare the Page
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            var page = client.Page.NewPage(pagesize, false);
+
+            var targetdoc = new VisioScripting.TargetDocument();
+            var page = client.Page.NewPage(targetdoc, pagesize, false);
 
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
@@ -72,8 +74,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(num_shapes_expected, shapes.Count);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            //client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(targetdoc, true);
         }
 
         [TestMethod]
@@ -88,7 +89,9 @@ namespace VisioAutomation_Tests.Scripting
             // Create the Page
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+
+            var targetdoc = new VisioScripting.TargetDocument();
+            client.Page.NewPage(targetdoc, pagesize, false);
 
             // Find the stencil and master
             var stencildoc = client.Document.OpenStencilDocument("basic_u.vss");
@@ -108,7 +111,6 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(total_shapes_expected,total_shapes_actual);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 
@@ -118,14 +120,15 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
             var pagesize = new VA.Geometry.Size(4, 4);
-            client.Page.NewPage(pagesize, false);
+            var targetdoc = new VisioScripting.TargetDocument();
+
+            client.Page.NewPage(targetdoc, pagesize, false);
 
             var shape_rect = client.Draw.DrawRectangle(1, 1, 3, 3);
             var shape_line = client.Draw.DrawLine(0.5, 0.5, 3.5, 3.5);
             var shape_oval1 = client.Draw.DrawOval(0.2, 1, 3.8, 2);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 
@@ -141,17 +144,17 @@ namespace VisioAutomation_Tests.Scripting
                 };
             var pagesize = new VA.Geometry.Size(4, 4);
 
+            var targetdoc = new VisioScripting.TargetDocument();
             // Create the Page
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(targetdoc, pagesize, false);
             
             // Draw the Shapes
             var shape_bezier = client.Draw.DrawBezier(points);
             var shape_polyline = client.Draw.DrawPolyLine(points);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 
@@ -273,10 +276,12 @@ namespace VisioAutomation_Tests.Scripting
         {
             var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
-            
+
+            var targetdoc = new VisioScripting.TargetDocument();
             // Create the page
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+
+            client.Page.NewPage(targetdoc, pagesize, false);
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
@@ -295,7 +300,6 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(1, shapes.Count);
 
             // cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 
@@ -305,9 +309,10 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(10, 10);
             var client = this.GetScriptingClient();
 
+            var targetdoc = new VisioScripting.TargetDocument();
             // Create the Page
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(targetdoc, pagesize, false);
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
@@ -328,7 +333,6 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(4, application.ActivePage.Shapes.Count);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 
@@ -346,9 +350,11 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
 
+            var targetdoc = new VisioScripting.TargetDocument();
+
             // Create the page
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(targetdoc, pagesize, false);
 
             var application = client.Application.GetAttachedApplication();
             var active_page = application.ActivePage;
@@ -396,7 +402,6 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("Container", prop.Value.Value);
 
             // cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 
@@ -406,9 +411,11 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
 
+            var targetdoc = new VisioScripting.TargetDocument();
+
             // Create the page
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(targetdoc, pagesize, false);
 
             var application = client.Application.GetAttachedApplication();
             var active_page = application.ActivePage;
@@ -443,10 +450,7 @@ namespace VisioAutomation_Tests.Scripting
             var prop = results_dic["msvStructureType"];
             Assert.AreEqual("Container", prop.Value.Value);
 
-
-
             // cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
     }

@@ -12,9 +12,10 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var pagesize = new VA.Geometry.Size(4, 4);
+            var targetdoc = new VisioScripting.TargetDocument();
 
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(targetdoc,pagesize, false);
 
             var size1 = new VA.Geometry.Size(0.5, 0.5);
             var size2 = new VA.Geometry.Size(1.0, 1.0);
@@ -43,7 +44,6 @@ namespace VisioAutomation_Tests.Scripting
             var shapeids = shapes.Select(s => (int)s.ID16).ToList();
             VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),shapeids, VA.ShapeSheet.CellValueType.Formula);
 
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 
@@ -51,10 +51,12 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Distribute_With_Spacing()
         {
             var client = this.GetScriptingClient();
+
+            var targetdoc = new VisioScripting.TargetDocument();
             var pagesize = new VA.Geometry.Size(4, 4);
 
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(targetdoc,pagesize, false);
 
             var size1 = new VA.Geometry.Size(0.5, 0.5);
             var size2 = new VA.Geometry.Size(1.0, 1.0);
@@ -91,7 +93,6 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(3.75, out_positions[2].X);
             Assert.AreEqual(5.25, out_positions[2].Y);
 
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);
         }
 
@@ -99,8 +100,11 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Nudge2()
         {
             var client = this.GetScriptingClient();
+
+            var targetdoc = new VisioScripting.TargetDocument();
+
             client.Document.NewDocument();
-            client.Page.NewPage(new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(targetdoc, new VA.Geometry.Size(4, 4), false);
 
             var size1 = new VA.Geometry.Size(0.5, 0.5);
             var size2 = new VA.Geometry.Size(1.0, 1.0);
@@ -132,7 +136,7 @@ namespace VisioAutomation_Tests.Scripting
             AssertUtil.AreEqual( (1.75, 1), xforms[0].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual( (3, 2.25), xforms[1].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual( (5.25, 4.5), xforms[2].GetPinPosResult(), 0.00001);
-            var targetdoc = new VisioScripting.TargetDocument();
+
             client.Document.CloseDocument(targetdoc, true);
         }
     }

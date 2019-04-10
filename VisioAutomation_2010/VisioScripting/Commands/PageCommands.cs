@@ -60,12 +60,10 @@ namespace VisioScripting.Commands
             return s;
         }
 
-        public IVisio.Page NewPage(VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
+        public IVisio.Page NewPage(VisioScripting.TargetDocument targetdoc, VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            var active_document = cmdtarget.ActiveDocument;
-            var pages = active_document.Pages;
+            targetdoc = targetdoc.Resolve(this._client);
+            var pages = targetdoc.Document.Pages;
             IVisio.Page new_page;
 
             var activeapp = new VisioScripting.TargetActiveApplication();
