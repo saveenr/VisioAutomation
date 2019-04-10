@@ -19,7 +19,7 @@ namespace VisioAutomation_Tests.Scripting
             var s1 = client.Draw.DrawRectangle(1, 1, 1.5, 1.5);
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.DrawRectangle(1.5, 3.5, 2, 4.0);
-            var targetwindow = new VisioScripting.TargetActiveWindow();
+            var targetwindow = new VisioScripting.TargetWindow();
             client.Selection.SelectNone(targetwindow);
             client.Selection.SelectShapesById(targetwindow, s1);
             client.Selection.SelectShapesById(targetwindow, s2);

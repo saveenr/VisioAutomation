@@ -13,20 +13,18 @@ namespace VisioScripting.Commands
 
         }
         
-        public IVisio.Selection GetSelection(VisioScripting.TargetActiveWindow targetwindow)
+        public IVisio.Selection GetSelection(VisioScripting.TargetWindow targetwindow)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            var active_window = cmdtarget.Application.ActiveWindow;
-            var selection = active_window.Selection;
+            targetwindow = targetwindow.Resolve(this._client);
+            var selection = targetwindow.Window.Selection;
             return selection;
         }
 
-        public void SelectAllShapes(VisioScripting.TargetActiveWindow targetwindow)
+        public void SelectAllShapes(VisioScripting.TargetWindow targetwindow)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetwindow = targetwindow.Resolve(this._client);
 
-            var active_window = cmdtarget.Application.ActiveWindow;
-            active_window.SelectAll();
+            targetwindow.Window.SelectAll();
         }
 
         public void InvertSelection(TargetActiveSelection taretselection)
@@ -66,26 +64,25 @@ namespace VisioScripting.Commands
             window.Select(shapes_to_select, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void SelectNone(VisioScripting.TargetActiveWindow targetwindow)
+        public void SelectNone(VisioScripting.TargetWindow targetwindow)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetwindow = targetwindow.Resolve(this._client);
 
-            var active_window = cmdtarget.Application.ActiveWindow;
-            active_window.DeselectAll();
-            active_window.DeselectAll();
+            targetwindow.Window.DeselectAll();
+            targetwindow.Window.DeselectAll();
         }
 
-        public void SelectShapesById(VisioScripting.TargetActiveWindow targetwindow, IVisio.Shape shape)
+        public void SelectShapesById(VisioScripting.TargetWindow targetwindow, IVisio.Shape shape)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            targetwindow = targetwindow.Resolve(this._client);
+
 
             if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            var active_window = cmdtarget.Application.ActiveWindow;
-            active_window.Select(shape, (short) IVisio.VisSelectArgs.visSelect);
+            targetwindow.Window.Select(shape, (short) IVisio.VisSelectArgs.visSelect);
         }
 
         public void SelectShapes(TargetActiveSelection targetselection, IEnumerable<IVisio.Shape> shapes)

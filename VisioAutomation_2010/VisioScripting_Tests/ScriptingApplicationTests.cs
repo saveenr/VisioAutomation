@@ -41,7 +41,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
 
-            var targetwindow = new VisioScripting.TargetActiveWindow();
+            var targetwindow = new VisioScripting.TargetWindow();
 
             Assert.AreEqual(0, client.Selection.GetSelection(targetwindow).Count);
             client.Draw.DrawRectangle(1, 1, 2, 2);

@@ -43,7 +43,7 @@ namespace VisioScripting.Commands
             window.SetViewRect(view_rect);
         }
 
-        public void SetZoomValue(VisioScripting.TargetActiveWindow activewindow, double amount)
+        public void SetZoomValue(VisioScripting.TargetWindow activewindow, double amount)
         {
             if (amount <= 0)
             {
@@ -54,20 +54,18 @@ namespace VisioScripting.Commands
             activewindow.Window.Zoom = amount;
         }
 
-        public double GetZoom(VisioScripting.TargetActiveWindow activewindow)
+        public double GetZoom(VisioScripting.TargetWindow activewindow)
         {
             activewindow = activewindow.Resolve(this._client);
             return activewindow.Window.Zoom;
         }
 
-        public void SetZoomValueRelative(VisioScripting.TargetActiveWindow activewindow, double scale)
+        public void SetZoomValueRelative(VisioScripting.TargetWindow activewindow, double scale)
         {
             if (scale <= 0)
             {
                 throw new System.ArgumentException("Must have positive scale");
             }
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
 
             activewindow = activewindow.Resolve(this._client);
 
@@ -76,30 +74,28 @@ namespace VisioScripting.Commands
             activewindow.Window.Zoom = new_zoom;
         }
 
-        public void SetZoomToObject(VisioScripting.TargetActiveWindow activewindow, Models.ZoomToObject zoom)
+        public void SetZoomToObject(VisioScripting.TargetWindow targetwindow, Models.ZoomToObject zoom)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-            var active_window = cmdtarget.Application.ActiveWindow;
+            targetwindow = targetwindow.Resolve(this._client);
 
             if (zoom == Models.ZoomToObject.Page)
             {
-                active_window.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
+                targetwindow.Window.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
             }
             else if (zoom == Models.ZoomToObject.PageWidth)
             {
-                active_window.ViewFit = (short)IVisio.VisWindowFit.visFitWidth;
+                targetwindow.Window.ViewFit = (short)IVisio.VisWindowFit.visFitWidth;
             }
             else if (zoom == Models.ZoomToObject.Selection)
             {
-                var window = cmdtarget.Application.ActiveWindow;
-                var selection = window.Selection;
+                var selection = targetwindow.Window.Selection;
                 if (selection.Count<1)
                 {
                     return;
                 }
 
                 double padding_scale = 0.1;
-                ViewCommands.SetViewRectToSelection(active_window, IVisio.VisBoundingBoxArgs.visBBoxExtents, padding_scale);
+                ViewCommands.SetViewRectToSelection(targetwindow.Window, IVisio.VisBoundingBoxArgs.visBBoxExtents, padding_scale);
 
             }
             else

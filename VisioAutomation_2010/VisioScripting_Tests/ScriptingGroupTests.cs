@@ -18,7 +18,7 @@ namespace VisioAutomation_Tests.Scripting
             var shape_oval1 = client.Draw.DrawOval(0.2, 1, 3.8, 2);
             var shape_oval2 = client.Draw.DrawOval(1.5,1.5, 2.5,2.5);
 
-            var targetwindow = new VisioScripting.TargetActiveWindow();
+            var targetwindow = new VisioScripting.TargetWindow();
 
             var selection = new VisioScripting.TargetActiveSelection();
 

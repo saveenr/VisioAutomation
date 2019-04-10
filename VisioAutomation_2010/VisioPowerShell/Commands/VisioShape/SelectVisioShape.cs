@@ -29,7 +29,7 @@ namespace VisioPowerShell.Commands.VisioShape
             }
             else
             {
-                var targetactivewindow = new VisioScripting.TargetActiveWindow();
+                var targetactivewindow = new VisioScripting.TargetWindow();
 
                 if (this.Operation == VisioScripting.Models.SelectionOperation.All)
                 {

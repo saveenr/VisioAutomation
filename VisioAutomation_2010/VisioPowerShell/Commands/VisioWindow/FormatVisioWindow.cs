@@ -57,7 +57,7 @@ namespace VisioPowerShell.Commands.VisioWindow
                 this.Client.Application.SetWindowRectangle(new VisioScripting.TargetActiveApplication (), new_rect);
             }
 
-            var activewindow = new VisioScripting.TargetActiveWindow();
+            var activewindow = new VisioScripting.TargetWindow();
 
             if (this.Zoom > 0)
             {

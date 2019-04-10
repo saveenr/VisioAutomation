@@ -28,7 +28,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            var targetwindow = new VisioScripting.TargetActiveWindow();
+            var targetwindow = new VisioScripting.TargetWindow();
 
             client.Selection.SelectNone(targetwindow);
             client.Selection.SelectShapesById(targetwindow, s1);
@@ -68,7 +68,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            var targetwindow = new VisioScripting.TargetActiveWindow();
+            var targetwindow = new VisioScripting.TargetWindow();
 
             client.Selection.SelectNone(targetwindow);
             client.Selection.SelectShapesById(targetwindow, s1);
@@ -114,7 +114,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            var targetwindow = new VisioScripting.TargetActiveWindow();
+            var targetwindow = new VisioScripting.TargetWindow();
 
             client.Selection.SelectNone(targetwindow);
             client.Selection.SelectShapesById(targetwindow, s1);
