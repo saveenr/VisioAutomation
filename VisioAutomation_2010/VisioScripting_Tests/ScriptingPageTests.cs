@@ -31,7 +31,6 @@ namespace VisioAutomation_Tests.Scripting
             client.Page.NewPage(page_size, false);
             var page3 = client.Page.GetActivePage();
 
-            var targetpage = new VisioScripting.TargetPage();
             var targetdoc = new VisioScripting.TargetDocument();
 
             Assert.AreEqual(3,doc.Pages.Count);
