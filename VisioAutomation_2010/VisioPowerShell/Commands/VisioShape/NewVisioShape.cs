@@ -157,7 +157,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
             }
 
-            var targetwindow = new VisioScripting.TargetWindow();
+            var targetwindow = new VisioScripting.TargetActiveWindow();
 
             this.Client.Selection.SelectNone(targetwindow);
 

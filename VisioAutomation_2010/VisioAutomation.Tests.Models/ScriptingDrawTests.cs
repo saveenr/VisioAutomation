@@ -363,7 +363,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Select the rectangle... it should already be selected, but just make sure
 
-            var targetwindow = new VisioScripting.TargetWindow();
+            var targetwindow = new VisioScripting.TargetActiveWindow();
 
             client.Selection.SelectAllShapes(targetwindow);
 
@@ -421,7 +421,7 @@ namespace VisioAutomation_Tests.Scripting
             var targetpage = new VisioScripting.TargetPage();
             client.Master.DropMaster(targetpage, master, new VA.Geometry.Point(2, 2) );
 
-            var targetwindow = new VisioScripting.TargetWindow();
+            var targetwindow = new VisioScripting.TargetActiveWindow();
 
             // Select the rectangle... it should already be selected, but just make sure
             client.Selection.SelectAllShapes(targetwindow);
