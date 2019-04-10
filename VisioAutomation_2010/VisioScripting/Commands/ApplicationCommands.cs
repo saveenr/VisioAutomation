@@ -158,5 +158,21 @@ namespace VisioScripting.Commands
             var appwindow = cmdtarget.Application.Window;
             appwindow.SetWindowRect(rect);
         }
+
+        public void DeleteShapes(VisioScripting.TargetShapes targetshapes)
+        {
+            if (targetshapes.Resolved)
+            {
+                foreach (var shape in targetshapes.Shapes)
+                {
+                    shape.Delete();
+                }
+            }
+            else
+            {
+                var selection = new VisioScripting.TargetSelection();
+                this._client.Selection.DeleteShapes(selection);
+            }
+        }
     }
 }

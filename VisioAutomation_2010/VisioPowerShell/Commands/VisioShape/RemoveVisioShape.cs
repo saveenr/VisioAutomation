@@ -11,20 +11,8 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            // TODO: Investigate why this doesn't use the Targets method of identifying shapes
-            if (this.Shapes == null)
-            {
-                var selection = new VisioScripting.TargetSelection();
-
-                this.Client.Selection.DeleteShapes(selection);                
-            }
-            else
-            {
-                foreach (var shape in this.Shapes)
-                {
-                    shape.Delete();
-                }
-            }
+            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            this.Client.Application.DeleteShapes(targetshapes);
         }
     }
 }
