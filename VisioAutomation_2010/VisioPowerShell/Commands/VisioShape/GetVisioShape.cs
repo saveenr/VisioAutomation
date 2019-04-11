@@ -27,36 +27,13 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             var targetpage = new VisioScripting.TargetPage();
 
-            // Handle the case where neither names nor ids where passed
-            if (this.Name == null && this.Id == null)
+            // Name and Id cannot be used together
+            if (this.Name != null && this.Id != null)
             {
-                // return selected shapes
-
-                var selection = new VisioScripting.TargetSelection();
-
-                if (this.Recursive)
-                {
-                    this.WriteVerbose("Returning selected shapes (nested)");
-                    var shapes = this.Client.Selection.GetShapesRecursive(selection);
-                    this.WriteObject(shapes, true);
-                }
-                if (this.SubSelected)
-                {
-                    this.WriteVerbose("Returning selected shapes (subselect)");
-                    var shapes = this.Client.Selection.GetSubSelectedShapes(selection);
-                    this.WriteObject(shapes, true);
-                }
-                else
-                {
-                    this.WriteVerbose("Returning selected shapes ");
-                    var shapes = this.Client.Selection.GetSelectedShapes(selection);
-                    this.WriteObject(shapes, true);
-                }
-
-                return;
+                throw new System.ArgumentException("Name and ID cannot be used together");
             }
 
-            // Handle the case where names where passed
+            // Handle the case where names were passed
             if (this.Name != null)
             {
                 string str_asterisk = "*";
@@ -74,16 +51,49 @@ namespace VisioPowerShell.Commands.VisioShape
                 return;
             }
 
-            // Handle the case where ids where passed
+            // Handle the case where ids were passed
             if (this.Id != null)
             {
-                var shapes = this.Client.Page.GetShapesOnPageByID(targetpage,this.Id);
+                var shapes = this.Client.Page.GetShapesOnPageByID(targetpage, this.Id);
                 this.WriteObject(shapes, true);
 
                 return;
             }
 
-            throw new System.ArgumentOutOfRangeException();
+            var selection = new VisioScripting.TargetSelection();
+
+            if (this.SubSelected || this.Recursive)
+            {
+                if (this.Name != null && this.Id != null && this.Page != null)
+                {
+                    throw new System.ArgumentException("SubSelect and Recursive cannot be used when the Name, Id, or Page is used");
+                }
+
+                if (this.Recursive && this.SubSelected)
+                {
+                    throw new System.ArgumentException("SubSelect and Recursive cannot be used together");
+                }
+
+
+                if (this.Recursive)
+                {
+                    this.WriteVerbose("Returning selected shapes (nested)");
+                    var shapes = this.Client.Selection.GetShapesRecursive(selection);
+                    this.WriteObject(shapes, true);
+                }
+                if (this.SubSelected)
+                {
+                    this.WriteVerbose("Returning selected shapes (subselect)");
+                    var shapes = this.Client.Selection.GetSubSelectedShapes(selection);
+                    this.WriteObject(shapes, true);
+                }
+
+            }
+
+            // If we arrive here then it just means get the selected shapes
+            this.WriteVerbose("Returning selected shapes ");
+            var selected_shapes = this.Client.Selection.GetSelectedShapes(selection);
+            this.WriteObject(selected_shapes, true);
         }
     }
 }
