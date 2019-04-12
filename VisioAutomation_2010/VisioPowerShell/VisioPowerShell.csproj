@@ -102,9 +102,7 @@
     <Compile Include="Commands\VisioHyperlink\RemoveVisioHyperlink.cs" />
     <Compile Include="Commands\Nouns.cs" />
     <Compile Include="Commands\VisioDocument\CloseVisioDocument.cs" />
-    <Compile Include="Commands\VisioMaster\CloseVisioMaster.cs" />
     <Compile Include="Commands\VisioContainer\NewVisioContainer.cs" />
-    <Compile Include="Commands\VisioMaster\OpenVisioMaster.cs" />
     <Compile Include="Models\LockStatus.cs" />
     <Compile Include="Models\NameValueDictionary.cs" />
     <Compile Include="Models\NamedSrcDictionary.cs" />
@@ -121,7 +119,6 @@
     <Compile Include="Commands\VisioPage\RemoveVisioPage.cs" />
     <Compile Include="Commands\VisioApplication\TestVisioApplication.cs" />
     <Compile Include="Commands\VisioScriptingClient\GetVisioScriptingClient.cs" />
-    <Compile Include="Commands\VisioMaster\NewVisioMaster.cs" />
     <Compile Include="Commands\VisioUserDefinedCell\RemoveVisioUserDefinedCell.cs" />
     <Compile Include="VisioPsClientContext.cs" />
     <Compile Include="Models\ResultType.cs" />
