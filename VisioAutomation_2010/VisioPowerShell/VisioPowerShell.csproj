@@ -102,7 +102,6 @@
     <Compile Include="Commands\Nouns.cs" />
     <Compile Include="Commands\VisioDocument\CloseVisioDocument.cs" />
     <Compile Include="Commands\VisioContainer\NewVisioContainer.cs" />
-    <Compile Include="Models\LockStatus.cs" />
     <Compile Include="Models\NameValueDictionary.cs" />
     <Compile Include="Models\NamedSrcDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
