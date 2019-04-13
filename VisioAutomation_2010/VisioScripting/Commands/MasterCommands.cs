@@ -14,28 +14,6 @@ namespace VisioScripting.Commands
 
         }
 
-        public void OpenMasterForEdit(IVisio.Master master)
-        {
-            var mdraw_window = master.OpenDrawWindow();
-            mdraw_window.Activate();
-        }
-
-        public void CloseMasterEditing()
-        {
-            var cmdtarget = this._client.GetCommandTargetApplication();
-
-            var window = cmdtarget.Application.ActiveWindow;
-
-            var win_subtype = window.SubType;
-            if (win_subtype != 64)
-            {
-                throw new System.ArgumentException("The active window is not a master window");
-            }
-
-            var master = (IVisio.Master)window.Master;
-            master.Close();
-        }
-
         public List<IVisio.Master> GetMasters(TargetDocument targetdoc)
         {
             var doc_masters = targetdoc.Document.Masters;
