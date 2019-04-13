@@ -411,20 +411,20 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Shape> GetShapesOnPageByName(TargetPage targetpage, string[] shapenames)
+        public List<IVisio.Shape> GetShapesOnPageByName(TargetPage targetpage, string[] names)
         {
             targetpage = targetpage.Resolve(this._client);
 
             var cached_shapes_list = targetpage.Page.Shapes.ToList();
             
-            if (shapenames.Contains("*"))
+            if (names.Contains("*"))
             {
                 // if any of the shape names contains a simple wildcard then return all the shapes
                 return cached_shapes_list;
             }
 
             // otherwise we start checking for each name
-            var shapes_list = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
+            var shapes_list = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(cached_shapes_list, names, s => s.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
 
             return shapes_list;
         }

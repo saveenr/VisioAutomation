@@ -30,17 +30,8 @@ namespace VisioPowerShell.Commands.VisioShape
             // Handle the case where names were passed
             if (this.Name != null)
             {
-                string str_asterisk = "*";
-                if (this.Name.Contains(str_asterisk))
-                {
-                    var shapes = this.Client.Page.GetShapesOnPage(targetpage);
-                    this.WriteObject(shapes, true);
-                }
-                else
-                {
-                    var shapes = this.Client.Page.GetShapesOnPageByName(targetpage, this.Name);
-                    this.WriteObject(shapes, true);
-                }
+                var shapes = this.Client.Page.GetShapesOnPageByName(targetpage, this.Name);
+                this.WriteObject(shapes, true);
 
                 return;
             }
