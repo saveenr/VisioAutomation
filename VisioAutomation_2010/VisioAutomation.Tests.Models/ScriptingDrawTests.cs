@@ -385,7 +385,7 @@ namespace VisioAutomation_Tests.Scripting
             var masters = containers_doc.Masters;
             var container_master = masters.ItemU[cont_master_name];
 
-            var dropped_container = client.Master.DropContainerMaster(targetpage, container_master);
+            var dropped_container = client.Container.DropContainerMaster(targetpage, container_master);
 
             // Verify
             var shapes = active_page.Shapes;
@@ -435,7 +435,7 @@ namespace VisioAutomation_Tests.Scripting
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var ver = client.Application.ApplicationVersion;
             var cont_master_name = ver.Major >= 15 ? "Plain" : "Container 1";
-            var dropped_container = client.Master.DropContainer(targetpage, cont_master_name);
+            var dropped_container = client.Container.DropContainer(targetpage, cont_master_name);
 
             // Verify
             var shapes = active_page.Shapes;

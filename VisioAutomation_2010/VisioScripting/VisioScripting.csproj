@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ExportCommands.cs" />
+    <Compile Include="Commands\ContainerrCommands.cs" />
     <Compile Include="Commands\UndoCommands.cs" />
     <Compile Include="Commands\LockCommands.cs" />
     <Compile Include="Commands\CommandParameter.cs" />

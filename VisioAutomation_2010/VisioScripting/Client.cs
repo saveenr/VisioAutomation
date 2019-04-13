@@ -14,6 +14,7 @@ namespace VisioScripting
         public Commands.ModelCommands Model { get; }
         public Commands.ConnectionCommands Connection { get; }
         public Commands.ConnectionPointCommands ConnectionPoint { get; }
+        public Commands.ContainerCommands Container { get; }
         public Commands.ControlCommands Control { get; }
         public Commands.CustomPropertyCommands CustomProperty { get; }
         public Commands.DeveloperCommands Developer { get; }
@@ -52,6 +53,7 @@ namespace VisioScripting
             this.Model = new Commands.ModelCommands(this);
             this.Connection = new Commands.ConnectionCommands(this);
             this.ConnectionPoint = new Commands.ConnectionPointCommands(this);
+            this.Container = new Commands.ContainerCommands(this);
             this.Control = new Commands.ControlCommands(this);
             this.CustomProperty = new Commands.CustomPropertyCommands(this);
             this.Developer = new Commands.DeveloperCommands(this);
