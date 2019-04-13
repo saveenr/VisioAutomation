@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            var targetpage = new VisioScripting.TargetPage();
+            var targetpage = new VisioScripting.TargetPage(this.Page);
 
             // Name and Id cannot be used together
             if (this.Name != null && this.Id != null)
@@ -41,7 +41,13 @@ namespace VisioPowerShell.Commands.VisioShape
             {
                 var shapes = this.Client.Page.GetShapesOnPageByID(targetpage, this.Id);
                 this.WriteObject(shapes, true);
+                return;
+            }
 
+            if (this.Page != null)
+            {
+                var shapes = this.Client.Page.GetShapesOnPage(targetpage);
+                this.WriteObject(shapes, true);
                 return;
             }
 
