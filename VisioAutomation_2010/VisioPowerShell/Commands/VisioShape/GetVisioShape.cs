@@ -8,10 +8,10 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]
     public class GetVisioShape : VisioCmdlet
     {
-        [SMA.Parameter(ParameterSetName="name", Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string[] Name;
 
-        [SMA.Parameter(ParameterSetName = "id", Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public int[] Id;
 
         [SMA.Parameter(Mandatory = false)]
