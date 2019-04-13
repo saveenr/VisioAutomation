@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]
     public class GetVisioShape : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, Position = 0)]
         public string[] Name;
 
         [SMA.Parameter(Mandatory = false)]
@@ -16,12 +16,6 @@ namespace VisioPowerShell.Commands.VisioShape
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Page Page;
-
-        [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Recursive;
-
-        [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter SubSelected;
 
         protected override void ProcessRecord()
         {
@@ -61,34 +55,6 @@ namespace VisioPowerShell.Commands.VisioShape
             }
 
             var selection = new VisioScripting.TargetSelection();
-
-            if (this.SubSelected || this.Recursive)
-            {
-                if (this.Name != null && this.Id != null && this.Page != null)
-                {
-                    throw new System.ArgumentException("SubSelect and Recursive cannot be used when the Name, Id, or Page is used");
-                }
-
-                if (this.Recursive && this.SubSelected)
-                {
-                    throw new System.ArgumentException("SubSelect and Recursive cannot be used together");
-                }
-
-
-                if (this.Recursive)
-                {
-                    this.WriteVerbose("Returning selected shapes (nested)");
-                    var shapes = this.Client.Selection.GetShapesRecursive(selection);
-                    this.WriteObject(shapes, true);
-                }
-                if (this.SubSelected)
-                {
-                    this.WriteVerbose("Returning selected shapes (subselect)");
-                    var shapes = this.Client.Selection.GetSubSelectedShapes(selection);
-                    this.WriteObject(shapes, true);
-                }
-
-            }
 
             // If we arrive here then it just means get the selected shapes
             this.WriteVerbose("Returning selected shapes ");
