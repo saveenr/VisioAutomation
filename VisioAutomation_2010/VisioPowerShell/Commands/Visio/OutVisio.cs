@@ -45,12 +45,13 @@ namespace VisioPowerShell.Commands.Visio
 
             if (this.OrgChart != null)
             {
-                this.Client.Model.NewOrgChartDocument(this.OrgChart);
+                var targetpage = new VisioScripting.TargetPage();
+                this.Client.Model.NewOrgChartDocument(targetpage, this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
-                var activepage = new VisioScripting.TargetPage();
-                this.Client.Model.DrawGrid(activepage, this.GridLayout);
+                var targetpage = new VisioScripting.TargetPage();
+                this.Client.Model.DrawGrid(targetpage, this.GridLayout);
             }
             else if (this.DirectedGraphs != null)
             {

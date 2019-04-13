@@ -92,16 +92,16 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void NewOrgChartDocument(ORG.OrgChartDocument chartdocument)
+        public void NewOrgChartDocument(VisioScripting.TargetPage targetpage, ORG.OrgChartDocument chartdocument)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            targetpage = targetpage.Resolve(this._client);
 
             this._client.Output.WriteVerbose("Start OrgChart Rendering");
 
-            var application = cmdtarget.Application;
+            var application = targetpage.Page.Application;
             chartdocument.Render(application);
-            var active_page = application.ActivePage;
-            active_page.ResizeToFitContents();
+
+            targetpage.Page.ResizeToFitContents();
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 
