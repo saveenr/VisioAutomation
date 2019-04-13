@@ -1,6 +1,6 @@
 ﻿using VisioAutomation.Extensions;
-using VisioAutomation.Pages;
-using VisioAutomation.ShapeSheet.Writers;
+using VA = VisioAutomation;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Dom
@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.Dom
         {
             this.Shapes = new ShapeList();
             this.PageFormatCells = new Pages.PageFormatCells();
-            this.PageLayoutCells = new PageLayoutCells();
+            this.PageLayoutCells = new VA.Pages.PageLayoutCells();
 
             this.RenderPerforfmanceSettings = new RenderPerforfmanceSettings();
             this.RenderPerforfmanceSettings.DeferRecalc = 0;
@@ -76,7 +76,7 @@ namespace VisioAutomation.Models.Dom
                     this.PageFormatCells.Width = this.Size.Value.Width;
                 }
 
-                var writer = new SidSrcWriter();
+                var writer = new VASS.Writers.SidSrcWriter();
                 writer.SetValues((short)page_sheet.ID, this.PageFormatCells);
                 writer.SetValues((short)page_sheet.ID, this.PageLayoutCells);
                 writer.Commit(page, ShapeSheet.CellValueType.Formula);

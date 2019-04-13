@@ -1,4 +1,4 @@
-using VisioAutomation.ShapeSheet.Writers;
+using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Models.Dom
 {
@@ -33,7 +33,7 @@ namespace VisioAutomation.Models.Dom
         public ShapeSheet.CellValue ResizePage { get; set; }
         public ShapeSheet.CellValue RouteStyle { get; set; }
 
-        public void Apply(SidSrcWriter writer, short id)
+        public void Apply(VASS.Writers.SidSrcWriter writer, short id)
         {
             writer.SetValue(id, ShapeSheet.SrcConstants.PageLayoutAvenueSizeX, this.PageLayoutAvenueSizeX);
             writer.SetValue(id, ShapeSheet.SrcConstants.PageLayoutAvenueSizeY, this.PageLayoutAvenueSizeY);
