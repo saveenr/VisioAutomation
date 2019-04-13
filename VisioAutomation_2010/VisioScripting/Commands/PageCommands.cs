@@ -415,9 +415,7 @@ namespace VisioScripting.Commands
         {
             targetpage = targetpage.Resolve(this._client);
 
-            var shapes = targetpage.Page.Shapes;
-            var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
-            cached_shapes_list.AddRange(shapes.ToEnumerable());
+            var cached_shapes_list = targetpage.Page.Shapes.ToList();
             
             if (shapenames.Contains("*"))
             {
