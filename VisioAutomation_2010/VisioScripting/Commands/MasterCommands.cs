@@ -29,7 +29,7 @@ namespace VisioScripting.Commands
             }
 
             var masters = targetdoc.Document.Masters;
-            IVisio.Master masterobj = this.TryGetMaster(masters, name);
+            IVisio.Master masterobj = this._try_get_master(masters, name);
 
             if (masterobj == null)
             {
@@ -58,7 +58,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
+        private IVisio.Master _try_get_master(IVisio.Masters masters, string name)
         {
             try
             {
@@ -99,29 +99,6 @@ namespace VisioScripting.Commands
             var page = targetpage.Page;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;
-        }
-
-        public IVisio.Master NewMaster(IVisio.Document document, string name)
-        {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            if (document == null)
-            {
-                document = cmdtarget.ActiveDocument;
-                if (document == null)
-                {
-                    throw new System.ArgumentException("No Active Document");
-                }
-            }
-
-            var masters = document.Masters;
-            var master = masters.AddEx(IVisio.VisMasterTypes.visTypeMaster);
-            if (name != null)
-            {
-                master.Name = name;
-            }
-
-            return master;
         }
 
         // http://blogs.msdn.com/b/visio/archive/2010/01/27/container-list-and-callout-api-in-visio-2010.aspx
