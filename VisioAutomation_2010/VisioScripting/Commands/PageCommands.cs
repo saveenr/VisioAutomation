@@ -172,7 +172,7 @@ namespace VisioScripting.Commands
             }
 
             var dest_pages = dest_doc.Pages;
-            var dest_page = dest_pages[1];
+            var dest_page = dest_pages.Add();
             VisioAutomation.Pages.PageHelper.Duplicate(targetpage.Page, dest_page);
 
             return dest_page;

@@ -80,29 +80,24 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
 
             // First case: the source document is already the active document
-            var doc_dest_1 = client.Document.NewDocument();
-            var doc_src_1 = client.Document.NewDocument();
+            var doc_2_dest = client.Document.NewDocument();
+            doc_2_dest.Pages.Add();
+            doc_2_dest.Pages.Add();
+            var doc_1_src = client.Document.NewDocument();
 
-
-            var target_src1_page = new VisioScripting.TargetPage().Resolve(client);
+            doc_2_dest.Title = "DEST";
+            doc_1_src.Title = "SRC";
 
             client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Page.DuplicatePageToDocument(target_src1_page, doc_dest_1);
 
-            // Second case: the source document has to be activated beforehand
-            var doc_src_2 = client.Document.NewDocument();
-            var doc_dest_2 = client.Document.NewDocument();
-            client.Document.ActivateDocument(doc_src_2);
-            client.Draw.DrawRectangle(0, 0, 1, 1);
+            var src_page = new VisioScripting.TargetPage();
+            var dupe_page = client.Page.DuplicatePageToDocument(src_page, doc_2_dest);
 
-            var target_src2_page = new VisioScripting.TargetPage().Resolve(client);
-
-            client.Page.DuplicatePageToDocument(target_src2_page, doc_dest_2);
-
-            doc_src_1.Close(true);
-            doc_src_2.Close(true);
-            doc_dest_1.Close(true);
-            doc_dest_2.Close(true);
+            Assert.AreEqual(1, doc_1_src.Pages.Count);
+            Assert.AreEqual(4, doc_2_dest.Pages.Count);
+            doc_1_src.Close(true);
+            doc_2_dest.Close(true);
         }
+
     }
 }
