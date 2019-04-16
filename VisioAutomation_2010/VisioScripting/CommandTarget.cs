@@ -81,12 +81,12 @@ namespace VisioScripting
         {
             if (app == null)
             {
-                new System.ArgumentNullException(nameof(app));
+                throw new System.ArgumentNullException(nameof(app));
             }
 
             if (doc == null)
             {
-                new System.ArgumentNullException(nameof(doc));
+                throw new System.ArgumentNullException(nameof(doc));
             }
 
             if (doc.Application != app)

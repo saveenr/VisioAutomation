@@ -38,35 +38,6 @@ namespace VisioScripting
             return VisioAutomation.ShapeIDPairs.FromShapes(items);
         }
 
-        internal int SelectShapesAndCount(VisioScripting.Client client)
-        {
-            client.Application.AssertHasAttachedApplication();
-
-            var app = client.Application.GetAttachedApplication();
-            var active_window = app.ActiveWindow;
-            var sel = active_window.Selection;
-
-            var items = this._get_items_unsafe();
-            if (items == null)
-            {
-                int n = sel.Count;
-                client.Output.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
-                return n;
-            }
-
-            client.Output.WriteVerbose("GetTargetSelectionCount: Resetting selection to specified {0} shapes", items.Count);
-
-            // Force empty selection
-            active_window.DeselectAll();
-            active_window.DeselectAll(); // doing this twice is deliberate
-
-            // Force selection to specific shapes
-            active_window.Select(items, IVisio.VisSelectArgs.visSelect);
-
-            int selected_count = sel.Count;
-            return selected_count;
-        }
-
         public TargetShapes Resolve(VisioScripting.Client client)
         {
             if (this.Resolved)
@@ -74,10 +45,14 @@ namespace VisioScripting
                 return this;
             }
 
-            var target_window = new VisioScripting.TargetWindow();
-
-            var shapes = client.Selection.GetSelectedShapes(target_window);
+            var cmdtarget = client.GetCommandTargetDocument();
+            var active_window = cmdtarget.Application.ActiveWindow;
+            var selection = active_window.Selection;
+            var shapes = selection.ToList();
             var targetshapes = new TargetShapes(shapes);
+
+            client.Output.WriteVerbose("Resolving to selection (numshapes={0}) from active window (caption=\"{1}\")", shapes.Count, active_window.Caption);
+
             return targetshapes;
         }
 

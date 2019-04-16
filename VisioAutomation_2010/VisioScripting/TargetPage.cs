@@ -27,9 +27,9 @@ namespace VisioScripting
 
             var cmdtarget = client.GetCommandTargetPage();
 
-            // It doesn't matter if there is an active page or not
-            // at this point it is considered resolved
-            return new TargetPage(cmdtarget.ActivePage, true);
+            client.Output.WriteVerbose("Resolving to active page (name={0})", cmdtarget.ActivePage.Name);
+
+            return new TargetPage(cmdtarget.ActivePage);
         }
 
         public IVisio.Page Page => this._get_item_safe();

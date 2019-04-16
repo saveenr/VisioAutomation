@@ -23,6 +23,7 @@ namespace VisioAutomation_Tests.Scripting
             
             // Draw the Chart
             var client = this.GetScriptingClient();
+            client.Document.NewDocument();
             this.draw_org_chart(client, xml);
 
             // Cleanup

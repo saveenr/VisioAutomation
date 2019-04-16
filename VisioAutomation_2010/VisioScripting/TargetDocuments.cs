@@ -33,16 +33,10 @@ namespace VisioScripting
 
             var cmdtarget = new CommandTarget(client, flags);
 
-            if (cmdtarget.ActiveDocument == null)
-            {
-                var docs = new List<IVisio.Document>(0);
-                return new TargetDocuments(docs);
-            }
-            else
-            {
-                var docs = new List<IVisio.Document> { cmdtarget.ActiveDocument };
-                return new TargetDocuments(docs);
-            }
+            var docs = new List<IVisio.Document> { cmdtarget.ActiveDocument };
+
+            client.Output.WriteVerbose("Resolving to active document (name={0})", cmdtarget.ActiveDocument.Name);
+            return new TargetDocuments(docs);
         }
 
         public IList<IVisio.Document> Documents => this._get_items_safe();

@@ -25,6 +25,8 @@ namespace VisioScripting
 
             var command_target = new CommandTarget(client, flags);
 
+            client.Output.WriteVerbose("Resolving to active document (name={0})", command_target.ActiveDocument.Name);
+
             return new TargetDocument(command_target.ActiveDocument);
         }
 

@@ -36,8 +36,10 @@ namespace VisioScripting
 
             if (cmdtarget.ActivePage == null)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
+                throw new VisioAutomation.Exceptions.AutomationException("Resolving failed: No active page available");
             }
+
+            client.Output.WriteVerbose("Resolving to active page (name={0})", cmdtarget.ActivePage.Name);
 
             return new TargetPages(cmdtarget.ActivePage);
         }

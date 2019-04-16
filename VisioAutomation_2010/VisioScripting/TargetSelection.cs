@@ -22,12 +22,13 @@ namespace VisioScripting
             }
 
             var cmdtarget = client.GetCommandTargetPage();
-
-            // It doesn't matter if there is an active page or not
-            // at this point it is considered resolved
             var app = cmdtarget.Application;
             var window = app.ActiveWindow;
-            return new TargetSelection(window.Selection);
+            var selection = window.Selection;
+
+            client.Output.WriteVerbose("Resolving to selection (numshapes={0}) from active window (caption=\"{1}\")", selection.Count, window.Caption);
+
+            return new TargetSelection(selection);
         }
 
         public IVisio.Selection Selection => this._get_item_safe();

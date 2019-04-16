@@ -22,6 +22,9 @@ namespace VisioScripting
 
             var cmdtarget = client.GetCommandTargetDocument();
             var active_window = cmdtarget.Application.ActiveWindow;
+
+            client.Output.WriteVerbose("Resolving to active window (caption=\"{0}\")", active_window.Caption);
+
             return new TargetWindow(active_window);
         }
 
