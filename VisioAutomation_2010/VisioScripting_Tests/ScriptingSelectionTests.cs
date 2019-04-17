@@ -49,8 +49,7 @@ namespace VisioAutomation_Tests.Scripting
             var x4 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(0, x4.Count);
 
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
     }
 }

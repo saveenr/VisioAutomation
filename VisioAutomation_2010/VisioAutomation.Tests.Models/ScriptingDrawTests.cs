@@ -27,8 +27,7 @@ namespace VisioAutomation_Tests.Scripting
             this.draw_org_chart(client, xml);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -61,8 +60,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
 
-            var targetdoc = new VisioScripting.TargetDocument();
-            var page = client.Page.NewPage(targetdoc, pagesize, false);
+            var page = client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
 
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
@@ -75,7 +73,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(num_shapes_expected, shapes.Count);
 
             // Cleanup
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -91,8 +89,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
 
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Page.NewPage(targetdoc, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
 
             // Find the stencil and master
             var stencildoc = client.Document.OpenStencilDocument("basic_u.vss");
@@ -112,7 +109,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(total_shapes_expected,total_shapes_actual);
 
             // Cleanup
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -121,16 +118,15 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
             var pagesize = new VA.Geometry.Size(4, 4);
-            var targetdoc = new VisioScripting.TargetDocument();
 
-            client.Page.NewPage(targetdoc, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
 
             var shape_rect = client.Draw.DrawRectangle(1, 1, 3, 3);
             var shape_line = client.Draw.DrawLine(0.5, 0.5, 3.5, 3.5);
             var shape_oval1 = client.Draw.DrawOval(0.2, 1, 3.8, 2);
 
             // Cleanup
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -145,18 +141,17 @@ namespace VisioAutomation_Tests.Scripting
                 };
             var pagesize = new VA.Geometry.Size(4, 4);
 
-            var targetdoc = new VisioScripting.TargetDocument();
             // Create the Page
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Page.NewPage(targetdoc, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
             
             // Draw the Shapes
             var shape_bezier = client.Draw.DrawBezier(points);
             var shape_polyline = client.Draw.DrawPolyLine(points);
 
             // Cleanup
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -173,9 +168,8 @@ namespace VisioAutomation_Tests.Scripting
             // Cleanup
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph1),".vsd");
 
-            var targetdoc = new TargetDocument();
-            client.Document.SaveDocumentAs(targetdoc, output_filename);
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Active, output_filename);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -191,9 +185,8 @@ namespace VisioAutomation_Tests.Scripting
 
             // Cleanup
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph2),".vsd");
-            var targetdoc = new TargetDocument();
-            client.Document.SaveDocumentAs(targetdoc, output_filename);
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Active, output_filename);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -209,9 +202,9 @@ namespace VisioAutomation_Tests.Scripting
 
             // Cleanup
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph3),".vsd");
-            var targetdoc = new TargetDocument();
-            client.Document.SaveDocumentAs(targetdoc, output_filename);
-            client.Document.CloseDocument(targetdoc, true);
+
+            client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Active, output_filename);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -227,9 +220,9 @@ namespace VisioAutomation_Tests.Scripting
 
             // Cleanup
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph4),".vsd");
-            var targetdoc = new TargetDocument();
-            client.Document.SaveDocumentAs(targetdoc, output_filename);
-            client.Document.CloseDocument(targetdoc, true);
+
+            client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Active, output_filename);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         public string get_datafile_content(string name)
@@ -277,11 +270,10 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
 
-            var targetdoc = new VisioScripting.TargetDocument();
             // Create the page
             client.Document.NewDocument();
 
-            client.Page.NewPage(targetdoc, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
@@ -299,7 +291,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(1, shapes.Count);
 
             // cleanup
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -308,10 +300,9 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(10, 10);
             var client = this.GetScriptingClient();
 
-            var targetdoc = new VisioScripting.TargetDocument();
             // Create the Page
             client.Document.NewDocument();
-            client.Page.NewPage(targetdoc, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
@@ -331,7 +322,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(4, application.ActivePage.Shapes.Count);
 
             // Cleanup
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         private void draw_org_chart(VisioScripting.Client client, string text)
@@ -348,11 +339,10 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
 
-            var targetdoc = new VisioScripting.TargetDocument();
 
             // Create the page
             client.Document.NewDocument();
-            client.Page.NewPage(targetdoc, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
 
             var application = client.Application.GetAttachedApplication();
             var active_page = application.ActivePage;
@@ -398,7 +388,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("Container", prop.Value.Value);
 
             // cleanup
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -407,11 +397,9 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
 
-            var targetdoc = new VisioScripting.TargetDocument();
-
             // Create the page
             client.Document.NewDocument();
-            client.Page.NewPage(targetdoc, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
 
             var application = client.Application.GetAttachedApplication();
             var active_page = application.ActivePage;
@@ -445,7 +433,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("Container", prop.Value.Value);
 
             // cleanup
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
     }
 }

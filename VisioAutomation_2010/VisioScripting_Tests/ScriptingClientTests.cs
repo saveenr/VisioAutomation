@@ -18,16 +18,16 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var doc = client.Developer.DrawScriptingDocumentation();
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         public void DrawVANamespaceDiagram()
         {
             var client = this.GetScriptingClient();
             var doc = client.Developer.DrawNamespaces();
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
 
             var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
     }
 }

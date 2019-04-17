@@ -32,5 +32,7 @@ namespace VisioScripting
 
         public IVisio.Document Document => this._get_item_safe();
 
+        public static TargetDocument Active => new TargetDocument();
+
     }
 }
