@@ -48,16 +48,14 @@ namespace VisioAutomation_Tests.Scripting
             Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 1));
             Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 2));
 
-            var targetwindow = new VisioScripting.TargetWindow();
-
             client.Draw.DrawRectangle(2, 2, 3, 3);
-            client.Selection.SelectAllShapes(targetwindow);
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Active);
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
             Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 1));
             Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 2));
 
-            client.Selection.SelectNone(targetwindow);
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
 

@@ -367,9 +367,8 @@ namespace VisioAutomation_Tests.Scripting
 
             // Select the rectangle... it should already be selected, but just make sure
 
-            var targetwindow = new VisioScripting.TargetWindow();
 
-            client.Selection.SelectAllShapes(targetwindow);
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Active);
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var app = active_page.Application;
@@ -425,10 +424,9 @@ namespace VisioAutomation_Tests.Scripting
             // Drop the rectangle
             client.Master.DropMaster(VisioScripting.TargetPage.Active, master, new VA.Geometry.Point(2, 2) );
 
-            var targetwindow = new VisioScripting.TargetWindow();
 
             // Select the rectangle... it should already be selected, but just make sure
-            client.Selection.SelectAllShapes(targetwindow);
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Active);
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var ver = client.Application.ApplicationVersion;

@@ -22,24 +22,22 @@ namespace VisioAutomation_Tests.Scripting
             var shape_oval1 = client.Draw.DrawOval(0.2, 1, 3.8, 2);
             var shape_oval2 = client.Draw.DrawOval(1.5,1.5, 2.5,2.5);
 
-            var targetwindow = new VisioScripting.TargetWindow();
-
-            client.Selection.SelectAllShapes(targetwindow);
-            var s0 = client.Selection.GetSelectedShapes(targetwindow);
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Active);
+            var s0 = client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Active);
             Assert.AreEqual(4, s0.Count);
 
             var g = client.Grouping.Group(VisioScripting.TargetSelection.Active);
-            client.Selection.SelectNone(targetwindow);
-            client.Selection.SelectAllShapes(targetwindow);
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Active);
 
-            var s1 = client.Selection.GetSelectedShapes(targetwindow);
+            var s1 = client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Active);
             Assert.AreEqual(1, s1.Count);
 
             var targetshapes = new VisioScripting.TargetShapes();
 
             client.Grouping.Ungroup(targetshapes);
-            client.Selection.SelectAllShapes(targetwindow);
-            var s2 = client.Selection.GetSelectedShapes(targetwindow);
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Active);
+            var s2 = client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Active);
             Assert.AreEqual(4, s2.Count);
 
             client.Document.CloseDocument(targetdoc, true);

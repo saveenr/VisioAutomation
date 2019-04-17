@@ -17,11 +17,11 @@ namespace VisioAutomation_Tests.Scripting
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
-            var targetwindow = new VisioScripting.TargetWindow();
-            client.Selection.SelectNone(targetwindow);
-            client.Selection.SelectShapesById(targetwindow, s1);
-            client.Selection.SelectShapesById(targetwindow, s2);
-            client.Selection.SelectShapesById(targetwindow, s3);
+
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s1);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s2);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s3);
 
             var indices0 = client.ConnectionPoint.AddConnectionPoint("0", "Width*0.67", VisioScripting.Models.ConnectionPointType.Outward);
             Assert.AreEqual(3, indices0.Count);

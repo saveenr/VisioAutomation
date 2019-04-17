@@ -29,5 +29,7 @@ namespace VisioScripting
         }
 
         public IVisio.Window Window => this._window;
+
+        public static TargetWindow Active => new TargetWindow();
     }
 }
