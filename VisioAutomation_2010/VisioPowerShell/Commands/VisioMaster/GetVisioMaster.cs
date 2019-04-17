@@ -9,7 +9,7 @@ namespace VisioPowerShell.Commands.VisioMaster
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string[] Name;
 
-        [SMA.Parameter(Position = 1, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;
 
         protected override void ProcessRecord()

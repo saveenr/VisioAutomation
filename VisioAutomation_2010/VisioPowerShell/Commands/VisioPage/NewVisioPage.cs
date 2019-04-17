@@ -1,5 +1,6 @@
 using System.Globalization;
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
@@ -16,11 +17,14 @@ namespace VisioPowerShell.Commands.VisioPage
         public string Name { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
+        public IVisio.Document Document;
+
+        [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.PageCells Cells { get; set; }
 
         protected override void ProcessRecord()
         {
-            var targetdoc = new VisioScripting.TargetDocument();
+            var targetdoc = new VisioScripting.TargetDocument(this.Document);
 
             this.Client.Output.WriteVerbose("Creating a new page");
             var page = this.Client.Page.NewPage(targetdoc , null, false);

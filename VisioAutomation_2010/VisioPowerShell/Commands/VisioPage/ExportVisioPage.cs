@@ -22,8 +22,8 @@ namespace VisioPowerShell.Commands.VisioPage
             }
             else
             {
-                var targetdoc = new VisioScripting.TargetPage();
-                this.Client.Export.ExportPageToImage(targetdoc, this.Filename);
+                var targetpage = new VisioScripting.TargetPage();
+                this.Client.Export.ExportPageToImage(targetpage, this.Filename);
             }
         }
     }
