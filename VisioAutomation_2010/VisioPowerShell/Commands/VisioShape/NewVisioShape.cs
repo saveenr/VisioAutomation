@@ -110,9 +110,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
             var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
 
-            var targetpage = new VisioScripting.TargetPage();
-
-            var shapeids = this.Client.Master.DropMasters(targetpage, this.Masters, points);
+            var shapeids = this.Client.Master.DropMasters(VisioScripting.TargetPage.Active, this.Masters, points);
 
             var page = this.Client.Page.GetActivePage();
             var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shapeids);

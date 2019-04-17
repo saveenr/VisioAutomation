@@ -290,8 +290,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Frop the Shapes
 
-            var targetpage = new VisioScripting.TargetPage();
-            client.Master.DropMaster(targetpage , master, new VA.Geometry.Point(2, 2));
+            client.Master.DropMaster(VisioScripting.TargetPage.Active, master, new VA.Geometry.Point(2, 2));
 
             // Verify
             var application = client.Application.GetAttachedApplication();
@@ -325,8 +324,7 @@ namespace VisioAutomation_Tests.Scripting
             var xys = new[] { 1.0, 2.0, 3.0, 4.0, 1.5, 4.5, 5.7, 2.4 };
             var points = VA.Geometry.Point.FromDoubles(xys).ToList();
 
-            var targetpage = new VisioScripting.TargetPage();
-            client.Master.DropMasters(targetpage, masters, points);
+            client.Master.DropMasters(VisioScripting.TargetPage.Active, masters, points);
 
             // Verify
             var application = client.Application.GetAttachedApplication();
@@ -341,8 +339,7 @@ namespace VisioAutomation_Tests.Scripting
             var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(client, xmldoc);
 
-            var targetpage = new VisioScripting.TargetPage();
-            client.Model.NewOrgChartDocument(targetpage, orgchart);
+            client.Model.NewOrgChartDocument(VisioScripting.TargetPage.Active, orgchart);
         }
 
         [TestMethod]
@@ -366,8 +363,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
 
             // Drop the rectangle
-            var targetpage = new VisioScripting.TargetPage();
-            client.Master.DropMaster(targetpage, master, new VA.Geometry.Point(2, 2) );
+            client.Master.DropMaster(VisioScripting.TargetPage.Active, master, new VA.Geometry.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
 
@@ -388,7 +384,7 @@ namespace VisioAutomation_Tests.Scripting
             var masters = containers_doc.Masters;
             var container_master = masters.ItemU[cont_master_name];
 
-            var dropped_container = client.Container.DropContainerMaster(targetpage, container_master);
+            var dropped_container = client.Container.DropContainerMaster(VisioScripting.TargetPage.Active, container_master);
 
             // Verify
             var shapes = active_page.Shapes;
@@ -427,8 +423,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.GetMaster(basic_stencil_targetdoc, "Rectangle");
 
             // Drop the rectangle
-            var targetpage = new VisioScripting.TargetPage();
-            client.Master.DropMaster(targetpage, master, new VA.Geometry.Point(2, 2) );
+            client.Master.DropMaster(VisioScripting.TargetPage.Active, master, new VA.Geometry.Point(2, 2) );
 
             var targetwindow = new VisioScripting.TargetWindow();
 
@@ -438,7 +433,7 @@ namespace VisioAutomation_Tests.Scripting
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var ver = client.Application.ApplicationVersion;
             var cont_master_name = ver.Major >= 15 ? "Plain" : "Container 1";
-            var dropped_container = client.Container.DropContainer(targetpage, cont_master_name);
+            var dropped_container = client.Container.DropContainer(VisioScripting.TargetPage.Active, cont_master_name);
 
             // Verify
             var shapes = active_page.Shapes;

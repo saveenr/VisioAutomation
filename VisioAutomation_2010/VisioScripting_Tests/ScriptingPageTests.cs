@@ -69,8 +69,7 @@ namespace VisioAutomation_Tests.Scripting
             var doc = client.Document.NewDocument(page_size);
             client.Draw.DrawRectangle(0, 0, 1, 1);
 
-            var targetpage = new VisioScripting.TargetPage();
-            client.Page.DuplicatePage(targetpage);
+            client.Page.DuplicatePage(VisioScripting.TargetPage.Active);
             doc.Close(true);
         }
 
@@ -90,8 +89,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Draw.DrawRectangle(0, 0, 1, 1);
 
-            var src_page = new VisioScripting.TargetPage();
-            var dupe_page = client.Page.DuplicatePageToDocument(src_page, doc_2_dest);
+            var dupe_page = client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Active, doc_2_dest);
 
             Assert.AreEqual(1, doc_1_src.Pages.Count);
             Assert.AreEqual(4, doc_2_dest.Pages.Count);

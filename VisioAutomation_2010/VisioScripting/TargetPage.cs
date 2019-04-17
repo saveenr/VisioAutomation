@@ -14,10 +14,6 @@ namespace VisioScripting
         {
         }
 
-        public TargetPage(IVisio.Page page, bool isresolved) : base(page, isresolved)
-        {
-        }
-
         public TargetPage Resolve(Client client)
         {
             if (this.Resolved)
@@ -33,5 +29,7 @@ namespace VisioScripting
         }
 
         public IVisio.Page Page => this._get_item_safe();
+
+        public static TargetPage Active => new TargetPage();
     }
 }

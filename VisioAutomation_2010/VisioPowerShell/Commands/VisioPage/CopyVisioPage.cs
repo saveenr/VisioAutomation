@@ -11,16 +11,14 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-            var targetpage = new VisioScripting.TargetPage();
-
             IVisio.Page newpage;
             if (this.ToDocument == null)
             {
-                newpage = this.Client.Page.DuplicatePage(targetpage);
+                newpage = this.Client.Page.DuplicatePage(VisioScripting.TargetPage.Active);
             }
             else
             {
-                newpage = this.Client.Page.DuplicatePageToDocument(targetpage, this.ToDocument);
+                newpage = this.Client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Active, this.ToDocument);
             }
 
             this.WriteObject(newpage);            

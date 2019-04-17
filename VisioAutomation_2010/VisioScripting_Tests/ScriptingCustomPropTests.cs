@@ -29,8 +29,7 @@ namespace VisioAutomation_Tests.Scripting
 
             var targetshapes = new VisioScripting.TargetShapes(s1,s2,s3);
             var targetshapeids = targetshapes.ToShapeIDs();
-            var page = new VisioScripting.TargetPage();
-            var writer = client.ShapeSheet.GetWriterForPage(page);
+            var writer = client.ShapeSheet.GetWriterForPage(VisioScripting.TargetPage.Active);
 
             foreach (var shapeid in targetshapeids)
             {
