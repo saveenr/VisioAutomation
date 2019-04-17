@@ -168,7 +168,7 @@ namespace VisioPowerShell_Tests
             bool force)
         {
             var cmd = new CloseVisioDocument();
-            cmd.Documents = documents;
+            cmd.Document = documents;
             cmd.Force = force;
             cmd.InvokeVoid();
         }
