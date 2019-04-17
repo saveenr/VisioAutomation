@@ -30,8 +30,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
                 return;
             }
 
-            var targetpages = new VisioScripting.TargetPages(this.Pages);
-            targetpages = targetpages.Resolve(this.Client);
+            var targetpages = new VisioScripting.TargetPages(this.Pages).Resolve(this.Client);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
