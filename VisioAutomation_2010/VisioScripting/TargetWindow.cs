@@ -2,20 +2,19 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting
 {
-    public class TargetWindow
+    public class TargetWindow : TargetObject<IVisio.Window>
     {
-        private IVisio.Window _window;
         public TargetWindow()
         {
         }
-        internal TargetWindow(IVisio.Window window)
+
+        internal TargetWindow(IVisio.Window window) : base(window)
         {
-            this._window = window;
         }
 
         public TargetWindow Resolve(VisioScripting.Client client)
         {
-            if (this._window != null)
+            if (this.Resolved)
             {
                 return this;
             }
@@ -28,7 +27,7 @@ namespace VisioScripting
             return new TargetWindow(active_window);
         }
 
-        public IVisio.Window Window => this._window;
+        public IVisio.Window Window => this._get_item_safe();
 
         public static TargetWindow Active => new TargetWindow();
     }
