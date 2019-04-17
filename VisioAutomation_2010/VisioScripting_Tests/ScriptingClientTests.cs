@@ -38,30 +38,28 @@ namespace VisioAutomation_Tests.Scripting
 
             Assert.IsFalse(client.Document.HasActiveDocument);
 
-            var targetselection = new VisioScripting.TargetSelection();
-
             var doc1 = client.Document.NewDocument();
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsFalse(client.Selection.ContainsShapes(targetselection));
+            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
 
             client.Draw.DrawRectangle(0, 0, 1, 1);
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsTrue(client.Selection.ContainsShapes(targetselection));
-            Assert.IsTrue(client.Selection.ContainsShapes(targetselection, 1));
-            Assert.IsFalse(client.Selection.ContainsShapes(targetselection, 2));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 1));
+            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 2));
 
             var targetwindow = new VisioScripting.TargetWindow();
 
             client.Draw.DrawRectangle(2, 2, 3, 3);
             client.Selection.SelectAllShapes(targetwindow);
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsTrue(client.Selection.ContainsShapes(targetselection));
-            Assert.IsTrue(client.Selection.ContainsShapes(targetselection ,1));
-            Assert.IsTrue(client.Selection.ContainsShapes(targetselection ,2));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 1));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 2));
 
             client.Selection.SelectNone(targetwindow);
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsFalse(client.Selection.ContainsShapes(targetselection));
+            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
 
             var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(targetdoc, true);

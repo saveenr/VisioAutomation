@@ -30,7 +30,6 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(1, x1.Count);
             Assert.IsTrue(x1.ContainsKey(s4));
 
-            var targetselection = new VisioScripting.TargetSelection();
             var targetwindow = new VisioScripting.TargetWindow();
 
 

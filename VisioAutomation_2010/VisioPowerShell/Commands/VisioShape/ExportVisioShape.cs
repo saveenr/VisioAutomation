@@ -67,15 +67,11 @@ namespace VisioPowerShell.Commands.VisioShape
 
             if (_static_html_extensions.Contains(ext))
             {
-                var selection = new VisioScripting.TargetSelection();
-
-                this.Client.Export.ExportSelectionToHtml(selection, this.Filename);                
+                this.Client.Export.ExportSelectionToHtml(VisioScripting.TargetSelection.Active, this.Filename);                
             }
             else
             {
-                var selection = new VisioScripting.TargetSelection();
-
-                this.Client.Export.ExportSelectionToImage(selection, this.Filename);
+                this.Client.Export.ExportSelectionToImage(VisioScripting.TargetSelection.Active, this.Filename);
             }
         }
     }

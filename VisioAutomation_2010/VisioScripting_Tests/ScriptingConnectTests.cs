@@ -45,7 +45,6 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectNone(targetwindow);
 
             var window = new VisioScripting.TargetWindow();
-            var selection = new VisioScripting.TargetSelection();
 
             client.Selection.SelectShapes(window, directed_connectors);
 

@@ -170,8 +170,7 @@ namespace VisioScripting.Commands
             }
             else
             {
-                var selection = new VisioScripting.TargetSelection();
-                this._client.Selection.DeleteShapes(selection);
+                this._client.Selection.DeleteShapes(VisioScripting.TargetSelection.Active);
             }
         }
     }

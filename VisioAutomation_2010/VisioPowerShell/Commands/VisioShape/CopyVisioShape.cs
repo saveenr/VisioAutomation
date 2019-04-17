@@ -8,8 +8,7 @@ namespace VisioPowerShell.Commands.VisioShape
     {
         protected override void ProcessRecord()
         {
-            var targetselection = new VisioScripting.TargetSelection();
-            this.Client.Selection.DuplicateShapes(targetselection);
+            this.Client.Selection.DuplicateShapes(VisioScripting.TargetSelection.Active);
         }
     }
 }

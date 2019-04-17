@@ -51,11 +51,9 @@ namespace VisioPowerShell.Commands.VisioShape
                 return;
             }
 
-            var selection = new VisioScripting.TargetSelection();
-
             // If we arrive here then it just means get the selected shapes
             this.WriteVerbose("Returning selected shapes ");
-            var selected_shapes = this.Client.Selection.GetSelectedShapes(selection);
+            var selected_shapes = this.Client.Selection.GetSelectedShapes(VisioScripting.TargetSelection.Active);
             this.WriteObject(selected_shapes, true);
         }
     }
