@@ -147,6 +147,7 @@ namespace VisioScripting.Commands
 
         public void CloseDocuments(VisioScripting.TargetDocuments targetdocs, bool force)
         {
+            targetdocs = targetdocs.Resolve(this._client);
             this._client.Output.WriteVerbose("Closing {0} documents", targetdocs.Documents.Count);
             foreach (var target_doc in targetdocs.Documents)
             {                 
