@@ -96,8 +96,8 @@ namespace VisioAutomation_Tests.Scripting
 
             // Find the stencil and master
             var stencildoc = client.Document.OpenStencilDocument("basic_u.vss");
-            var stencil_tdoc = new VisioScripting.TargetDocument(stencildoc);
-            var master = client.Master.GetMaster(stencil_tdoc, "Rectangle");
+            var stencil_targetdoc = new VisioScripting.TargetDocument(stencildoc);
+            var master = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
 
             // Draw the grid
             var page = client.Page.GetActivePage();
@@ -285,8 +285,8 @@ namespace VisioAutomation_Tests.Scripting
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
-            var stencil_tdoc = new VisioScripting.TargetDocument(basic_stencil);
-            var master = client.Master.GetMaster(stencil_tdoc, "Rectangle");
+            var stencil_targetdoc = new VisioScripting.TargetDocument(basic_stencil);
+            var master = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
 
             // Frop the Shapes
 
@@ -316,9 +316,9 @@ namespace VisioAutomation_Tests.Scripting
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
-            var stencil_tdoc = new VisioScripting.TargetDocument(basic_stencil);
-            var m1 = client.Master.GetMaster(stencil_tdoc, "Rectangle");
-            var m2 = client.Master.GetMaster(stencil_tdoc, "Ellipse");
+            var stencil_targetdoc = new VisioScripting.TargetDocument(basic_stencil);
+            var m1 = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
+            var m2 = client.Master.GetMaster(stencil_targetdoc, "Ellipse");
 
             // Drop the Shapes
             var masters = new[] {m1, m2};
@@ -362,8 +362,8 @@ namespace VisioAutomation_Tests.Scripting
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
-            var stencil_tdoc = new VisioScripting.TargetDocument(basic_stencil);
-            var master = client.Master.GetMaster(stencil_tdoc, "Rectangle");
+            var stencil_targetdoc = new VisioScripting.TargetDocument(basic_stencil);
+            var master = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
 
             // Drop the rectangle
             var targetpage = new VisioScripting.TargetPage();
@@ -423,8 +423,8 @@ namespace VisioAutomation_Tests.Scripting
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
-            var basic_stencil_tdoc = new VisioScripting.TargetDocument(basic_stencil);
-            var master = client.Master.GetMaster(basic_stencil_tdoc, "Rectangle");
+            var basic_stencil_targetdoc = new VisioScripting.TargetDocument(basic_stencil);
+            var master = client.Master.GetMaster(basic_stencil_targetdoc, "Rectangle");
 
             // Drop the rectangle
             var targetpage = new VisioScripting.TargetPage();
