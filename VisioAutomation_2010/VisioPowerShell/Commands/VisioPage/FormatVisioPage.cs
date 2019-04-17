@@ -1,4 +1,5 @@
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
@@ -29,9 +30,11 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.Parameter(Mandatory = false)]
         public VisioAutomation.Models.LayoutStyles.LayoutStyleBase LayoutStyle = null;
 
+        [SMA.Parameter(Mandatory = false)] public IVisio.Page[] Page;
+
         protected override void ProcessRecord()
         {
-            var targetpages = new VisioScripting.TargetPages().Resolve(this.Client);
+            var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
             if (this.FitContents || this.Width >0 || this.Height >0)
             {
                 if (this.FitContents)
