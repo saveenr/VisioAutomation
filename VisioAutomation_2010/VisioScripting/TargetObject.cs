@@ -16,11 +16,6 @@ namespace VisioScripting
             this._item = item;
             this.Resolved = (item != null);
         }
-        protected TargetObject(T item, bool resolved)
-        {
-            this._item = item;
-            this.Resolved = resolved;
-        }
 
         protected T _get_item_safe()
         {

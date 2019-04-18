@@ -27,10 +27,5 @@ namespace VisioScripting
             }
             return this._items;
         }
-
-        internal IList<T> _get_items_unsafe()
-        {
-            return this._items;
-        }
     }
 }
