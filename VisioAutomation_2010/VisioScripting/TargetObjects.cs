@@ -7,13 +7,13 @@ namespace VisioScripting
         private readonly IList<T> _items;
         public readonly bool Resolved;
 
-        public TargetObjects()
+        protected TargetObjects()
         {
             this._items = null;
             this.Resolved = false;
         }
 
-        public TargetObjects(IList<T> items)
+        protected TargetObjects(IList<T> items)
         {
             this._items = items;
             this.Resolved = (items != null);

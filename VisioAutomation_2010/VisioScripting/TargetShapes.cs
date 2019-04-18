@@ -8,7 +8,7 @@ namespace VisioScripting
     public class TargetShapes : TargetObjects<IVisio.Shape>
     {
         
-        public TargetShapes() : base()
+        private TargetShapes() : base()
         {
         }
 

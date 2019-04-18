@@ -6,7 +6,7 @@ namespace VisioScripting
     public class TargetSelection : TargetObject<IVisio.Selection>
     {
 
-        public TargetSelection() : base()
+        private TargetSelection() : base()
         {
         }
 

@@ -4,7 +4,7 @@ namespace VisioScripting
 {
     public class TargetWindow : TargetObject<IVisio.Window>
     {
-        public TargetWindow()
+        private TargetWindow()
         {
         }
 

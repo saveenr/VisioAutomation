@@ -5,18 +5,18 @@ namespace VisioScripting
         private readonly T _item;
         public readonly bool Resolved;
 
-        public TargetObject()
+        protected TargetObject()
         {
             this._item = null;
             this.Resolved = false;
         }
-        
-        public TargetObject(T item)
+
+        protected TargetObject(T item)
         {
             this._item = item;
             this.Resolved = (item != null);
         }
-        public TargetObject(T item, bool resolved)
+        protected TargetObject(T item, bool resolved)
         {
             this._item = item;
             this.Resolved = resolved;
