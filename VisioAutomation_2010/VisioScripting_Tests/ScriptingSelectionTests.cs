@@ -30,7 +30,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(1, x1.Count);
             Assert.IsTrue(x1.ContainsKey(s4));
 
-            client.Selection.InvertSelection(VisioScripting.TargetWindow.Active);
+            client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
 
             var x2 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(3, x2.Count);
@@ -49,7 +49,7 @@ namespace VisioAutomation_Tests.Scripting
             var x4 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(0, x4.Count);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
     }
 }

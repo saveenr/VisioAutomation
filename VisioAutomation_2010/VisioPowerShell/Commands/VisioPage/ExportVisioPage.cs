@@ -17,11 +17,11 @@ namespace VisioPowerShell.Commands.VisioPage
         {
             if (this.AllPages)
             {
-                this.Client.Export.ExportPagesToImages(VisioScripting.TargetDocument.Active, this.Filename);
+                this.Client.Export.ExportPagesToImages(VisioScripting.TargetDocument.Auto, this.Filename);
             }
             else
             {
-                this.Client.Export.ExportPageToImage(VisioScripting.TargetPage.Active, this.Filename);
+                this.Client.Export.ExportPageToImage(VisioScripting.TargetPage.Auto, this.Filename);
             }
         }
     }

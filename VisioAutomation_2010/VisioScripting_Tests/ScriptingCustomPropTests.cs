@@ -17,17 +17,17 @@ namespace VisioAutomation_Tests.Scripting
 
 
             client.Document.NewDocument();
-            client.Page.NewPage(VisioScripting.TargetDocument.Active, new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
 
-            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
 
             var targetshapes = new VisioScripting.TargetShapes(s1,s2,s3);
             var targetshapeids = targetshapes.ToShapeIDs();
-            var writer = client.ShapeSheet.GetWriterForPage(VisioScripting.TargetPage.Active);
+            var writer = client.ShapeSheet.GetWriterForPage(VisioScripting.TargetPage.Auto);
 
             foreach (var shapeid in targetshapeids)
             {
@@ -36,7 +36,7 @@ namespace VisioAutomation_Tests.Scripting
 
             writer.Commit();
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
 
         [TestMethod]
@@ -45,18 +45,18 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
            
             client.Document.NewDocument();
-            client.Page.NewPage(VisioScripting.TargetDocument.Active, new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Geometry.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.DrawRectangle(2, 3, 2.5, 3.5);
             var s3 = client.Draw.DrawRectangle(4.5, 2.5, 6, 3.5);
 
-            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s1);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s2);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s3);
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s1);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
-            var prop_dic0 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Active, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var prop_dic0 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);
             Assert.AreEqual(0, prop_dic0[s2].Count);
@@ -64,9 +64,9 @@ namespace VisioAutomation_Tests.Scripting
 
             var cp = new CustomPropertyCells();
             cp.Value = "\"BAR\"";
-            client.CustomProperty.SetCustomProperty(VisioScripting.TargetShapes.Active, "FOO",cp);
+            client.CustomProperty.SetCustomProperty(VisioScripting.TargetShapes.Auto, "FOO",cp);
 
-            var prop_dic1 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Active, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var prop_dic1 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic1.Count);
             Assert.AreEqual(1, prop_dic1[s1].Count);
             Assert.AreEqual(1, prop_dic1[s2].Count);
@@ -80,21 +80,21 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual("\"BAR\"", cp3.Value.Value);
             
 
-            var hasprops0 = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Active, "FOO");
+            var hasprops0 = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
             Assert.IsTrue(hasprops0.All(v => v == true));
 
-            client.CustomProperty.DeleteCustomPropertyWithName(VisioScripting.TargetShapes.Active, "FOO");
+            client.CustomProperty.DeleteCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
 
-            var prop_dic2 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Active, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var prop_dic2 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.ShapeSheet.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic2.Count);
             Assert.AreEqual(0, prop_dic2[s1].Count);
             Assert.AreEqual(0, prop_dic2[s2].Count);
             Assert.AreEqual(0, prop_dic2[s3].Count);
 
-            var hasprops1 = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Active, "FOO");
+            var hasprops1 = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
             Assert.IsTrue(hasprops1.All(v => v == false));
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
     }
 }

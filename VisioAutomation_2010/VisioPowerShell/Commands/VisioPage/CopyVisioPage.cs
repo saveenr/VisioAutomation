@@ -14,11 +14,11 @@ namespace VisioPowerShell.Commands.VisioPage
             IVisio.Page newpage;
             if (this.ToDocument == null)
             {
-                newpage = this.Client.Page.DuplicatePage(VisioScripting.TargetPage.Active);
+                newpage = this.Client.Page.DuplicatePage(VisioScripting.TargetPage.Auto);
             }
             else
             {
-                newpage = this.Client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Active, this.ToDocument);
+                newpage = this.Client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Auto, this.ToDocument);
             }
 
             this.WriteObject(newpage);            

@@ -32,7 +32,7 @@ namespace VisioScripting
         }
 
         public IVisio.Selection Selection => this._get_item_safe();
-        public static TargetSelection Active => new TargetSelection();
+        public static TargetSelection Auto => new TargetSelection();
 
     }
 }

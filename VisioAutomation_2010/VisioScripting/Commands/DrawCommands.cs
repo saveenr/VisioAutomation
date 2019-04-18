@@ -53,7 +53,7 @@ namespace VisioScripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
-            var target_page = VisioScripting.TargetPage.Active;
+            var target_page = VisioScripting.TargetPage.Auto;
             target_page = target_page.Resolve(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawNurbsCurve)))

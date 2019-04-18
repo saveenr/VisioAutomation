@@ -58,6 +58,6 @@ namespace VisioScripting
 
         public IList<IVisio.Shape> Shapes => this._get_items_safe();
 
-        public static TargetShapes Active = new TargetShapes();
+        public static TargetShapes Auto = new TargetShapes();
     }
 }

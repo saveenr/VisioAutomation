@@ -110,7 +110,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
             var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
 
-            var shapeids = this.Client.Master.DropMasters(VisioScripting.TargetPage.Active, this.Masters, points);
+            var shapeids = this.Client.Master.DropMasters(VisioScripting.TargetPage.Auto, this.Masters, points);
 
             var page = this.Client.Page.GetActivePage();
             var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shapeids);
@@ -154,13 +154,13 @@ namespace VisioPowerShell.Commands.VisioShape
 
             }
 
-            this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
+            this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
 
             if (!this.NoSelect)
             {
                 // Select the Shapes
                 ((SMA.Cmdlet)this).WriteVerbose("Selecting");
-                this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Active, shape_objects);
+                this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, shape_objects);
             }
 
             this.WriteObject(shape_objects, true);

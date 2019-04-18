@@ -29,6 +29,6 @@ namespace VisioScripting
 
         public IVisio.Window Window => this._get_item_safe();
 
-        public static TargetWindow Active => new TargetWindow();
+        public static TargetWindow Auto => new TargetWindow();
     }
 }

@@ -40,11 +40,11 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
 
-            Assert.AreEqual(0, client.Selection.GetSelection(VisioScripting.TargetWindow.Active).Count);
+            Assert.AreEqual(0, client.Selection.GetSelection(VisioScripting.TargetWindow.Auto).Count);
             client.Draw.DrawRectangle(1, 1, 2, 2);
-            Assert.AreEqual(1, client.Selection.GetSelection(VisioScripting.TargetWindow.Active).Count);
+            Assert.AreEqual(1, client.Selection.GetSelection(VisioScripting.TargetWindow.Auto).Count);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
 
         [TestMethod]
@@ -61,13 +61,13 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(8.5,11);
             var drawing = client.Document.NewDocument(page_size);
 
-            var page = client.Page.NewPage(VisioScripting.TargetDocument.Active, page_size, false);
+            var page = client.Page.NewPage(VisioScripting.TargetDocument.Auto, page_size, false);
             Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1, page.Shapes.Count);
             client.Undo.UndoLastAction();
             Assert.AreEqual(0, page.Shapes.Count);
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
 
         [TestMethod]

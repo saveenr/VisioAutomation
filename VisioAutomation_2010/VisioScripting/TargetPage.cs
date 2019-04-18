@@ -30,6 +30,6 @@ namespace VisioScripting
 
         public IVisio.Page Page => this._get_item_safe();
 
-        public static TargetPage Active => new TargetPage();
+        public static TargetPage Auto => new TargetPage();
     }
 }

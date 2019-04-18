@@ -19,25 +19,25 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             if (this.Shapes !=null)
             {
-                this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Active, this.Shapes);
+                this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, this.Shapes);
             }
             else if (this.ShapeIDs!=null)
             {
-                this.Client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, this.ShapeIDs);
+                this.Client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, this.ShapeIDs);
             }
             else
             {
                 if (this.Operation == VisioScripting.Models.SelectionOperation.All)
                 {
-                    this.Client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Active);
+                    this.Client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
                 }
                 else if (this.Operation == VisioScripting.Models.SelectionOperation.None)
                 {
-                    this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
+                    this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
                 }
                 else if (this.Operation == VisioScripting.Models.SelectionOperation.Invert)
                 {
-                    this.Client.Selection.InvertSelection(VisioScripting.TargetWindow.Active);
+                    this.Client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
                 }
             }
         }

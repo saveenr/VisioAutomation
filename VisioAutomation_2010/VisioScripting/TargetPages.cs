@@ -45,5 +45,7 @@ namespace VisioScripting
         }
 
         public IList<IVisio.Page> Pages => this._get_items_safe();
+
+        public static TargetPages Auto => new TargetPages();
     }
 }

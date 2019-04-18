@@ -27,9 +27,9 @@ namespace VisioScripting
 
             // Handle the unresolved case
 
-            var flags = CommandTargetRequirementFlags.RequireApplication |
-                        CommandTargetRequirementFlags.RequireActiveDocument |
-                        CommandTargetRequirementFlags.RequirePage;
+            var flags = CommandTargetFlags.RequireApplication |
+                        CommandTargetFlags.RequireDocument |
+                        CommandTargetFlags.RequirePage;
 
             var cmdtarget = new CommandTarget(client, flags);
 
@@ -40,5 +40,7 @@ namespace VisioScripting
         }
 
         public IList<IVisio.Document> Documents => this._get_items_safe();
+
+        public static TargetDocuments Auto => new TargetDocuments();
     }
 }

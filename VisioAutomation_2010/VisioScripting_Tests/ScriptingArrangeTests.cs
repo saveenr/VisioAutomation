@@ -14,7 +14,7 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
 
             client.Document.NewDocument();
-            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
             var size1 = new VA.Geometry.Size(0.5, 0.5);
             var size2 = new VA.Geometry.Size(1.0, 1.0);
@@ -28,18 +28,18 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s1);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s2);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s3);
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s1);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
-            client.Arrange.DistributeHorizontal(VisioScripting.TargetSelection.Active, VisioScripting.Models.AlignmentHorizontal.Center);
+            client.Arrange.DistributeHorizontal(VisioScripting.TargetSelection.Auto, VisioScripting.Models.AlignmentHorizontal.Center);
 
             var shapes = new[] { s1, s2, s3 };
             var shapeids = shapes.Select(s => (int)s.ID16).ToList();
             VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),shapeids, VA.ShapeSheet.CellValueType.Formula);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
 
             client.Document.NewDocument();
-            client.Page.NewPage(VisioScripting.TargetDocument.Active, pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
             var size1 = new VA.Geometry.Size(0.5, 0.5);
             var size2 = new VA.Geometry.Size(1.0, 1.0);
@@ -64,13 +64,13 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s1);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s2);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s3);
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s1);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
-            client.Arrange.DistributenOnAxis(VisioScripting.TargetShapes.Active, VisioScripting.Models.Axis.XAxis , 0.25);
-            client.Arrange.DistributenOnAxis(VisioScripting.TargetShapes.Active, VisioScripting.Models.Axis.YAxis, 1.0);
+            client.Arrange.DistributenOnAxis(VisioScripting.TargetShapes.Auto, VisioScripting.Models.Axis.XAxis , 0.25);
+            client.Arrange.DistributenOnAxis(VisioScripting.TargetShapes.Auto, VisioScripting.Models.Axis.YAxis, 1.0);
 
             var shapes = new[] { s1, s2, s3 };
             var shapeids = shapes.Select(s => (int)s.ID16).ToList();
@@ -84,7 +84,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(3.75, out_positions[2].X);
             Assert.AreEqual(5.25, out_positions[2].Y);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
 
         [TestMethod]
@@ -93,7 +93,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
 
             client.Document.NewDocument();
-            client.Page.NewPage(VisioScripting.TargetDocument.Active, new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Geometry.Size(4, 4), false);
 
             var size1 = new VA.Geometry.Size(0.5, 0.5);
             var size2 = new VA.Geometry.Size(1.0, 1.0);
@@ -107,12 +107,12 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Draw.DrawRectangle(r2);
             var s3 = client.Draw.DrawRectangle(r3);
 
-            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s1);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s2);
-            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s3);
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s1);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
-            client.Arrange.Nudge(VisioScripting.TargetSelection.Active, 0.50, -0.25);
+            client.Arrange.Nudge(VisioScripting.TargetSelection.Auto, 0.50, -0.25);
 
             var shapes = new[] { s1, s2, s3 };
             var shapeids = shapes.Select(s => (int) s.ID16).ToList();
@@ -122,7 +122,7 @@ namespace VisioAutomation_Tests.Scripting
             AssertUtil.AreEqual( (3, 2.25), xforms[1].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual( (5.25, 4.5), xforms[2].GetPinPosResult(), 0.00001);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
     }
 }

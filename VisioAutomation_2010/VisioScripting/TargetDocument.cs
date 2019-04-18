@@ -19,9 +19,9 @@ namespace VisioScripting
                 return this;
             }
 
-            var flags = CommandTargetRequirementFlags.RequireApplication |
-                        CommandTargetRequirementFlags.RequireActiveDocument |
-                        CommandTargetRequirementFlags.RequirePage;
+            var flags = CommandTargetFlags.RequireApplication |
+                        CommandTargetFlags.RequireDocument |
+                        CommandTargetFlags.RequirePage;
 
             var command_target = new CommandTarget(client, flags);
 
@@ -32,7 +32,7 @@ namespace VisioScripting
 
         public IVisio.Document Document => this._get_item_safe();
 
-        public static TargetDocument Active => new TargetDocument();
+        public static TargetDocument Auto => new TargetDocument();
 
     }
 }

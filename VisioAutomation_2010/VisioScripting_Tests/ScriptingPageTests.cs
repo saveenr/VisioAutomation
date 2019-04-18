@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument();
 
-            client.Page.NewPage(VisioScripting.TargetDocument.Active, new Size(4, 5), false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new Size(4, 5), false);
         }
 
 
@@ -27,33 +27,33 @@ namespace VisioAutomation_Tests.Scripting
             var doc = client.Document.NewDocument(page_size);
 
             var page1 = client.Page.GetActivePage();
-            client.Page.NewPage(VisioScripting.TargetDocument.Active, page_size, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, page_size, false);
             var page2 = client.Page.GetActivePage();
-            client.Page.NewPage(VisioScripting.TargetDocument.Active, page_size, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, page_size, false);
             var page3 = client.Page.GetActivePage();
 
 
             Assert.AreEqual(3,doc.Pages.Count);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePage(VisioScripting.TargetDocument.Active, PageRelativePosition.First);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.First);
             Assert.AreEqual(page1, client.Page.GetActivePage());
-            client.Page.SetActivePage(VisioScripting.TargetDocument.Active, PageRelativePosition.Last);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Last);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePage(VisioScripting.TargetDocument.Active, PageRelativePosition.Previous);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Previous);
             Assert.AreEqual(page2, client.Page.GetActivePage());
-            client.Page.SetActivePage(VisioScripting.TargetDocument.Active, PageRelativePosition.Next);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Next);
             Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to last and try to go to next page
-            client.Page.SetActivePage(VisioScripting.TargetDocument.Active, PageRelativePosition.Last);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Last);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePage(VisioScripting.TargetDocument.Active, PageRelativePosition.Next);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Next);
             Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to first and try to go to previous page
-            client.Page.SetActivePage(VisioScripting.TargetDocument.Active, PageRelativePosition.First);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.First);
             Assert.AreEqual(page1, client.Page.GetActivePage());
-            client.Page.SetActivePage(VisioScripting.TargetDocument.Active, PageRelativePosition.Previous);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Previous);
             Assert.AreEqual(page1, client.Page.GetActivePage());
 
             doc.Close(true);
@@ -67,7 +67,7 @@ namespace VisioAutomation_Tests.Scripting
             var doc = client.Document.NewDocument(page_size);
             client.Draw.DrawRectangle(0, 0, 1, 1);
 
-            client.Page.DuplicatePage(VisioScripting.TargetPage.Active);
+            client.Page.DuplicatePage(VisioScripting.TargetPage.Auto);
             doc.Close(true);
         }
 
@@ -87,7 +87,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Draw.DrawRectangle(0, 0, 1, 1);
 
-            var dupe_page = client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Active, doc_2_dest);
+            var dupe_page = client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Auto, doc_2_dest);
 
             Assert.AreEqual(1, doc_1_src.Pages.Count);
             Assert.AreEqual(4, doc_2_dest.Pages.Count);

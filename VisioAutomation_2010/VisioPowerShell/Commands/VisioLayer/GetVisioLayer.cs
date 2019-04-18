@@ -17,13 +17,13 @@ namespace VisioPowerShell.Commands.VisioLayer
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(this.Name))
             {
                 // get all
-                var layers = this.Client.Layer.GetLayersOnPage(VisioScripting.TargetPage.Active);
+                var layers = this.Client.Layer.GetLayersOnPage(VisioScripting.TargetPage.Auto);
                 this.WriteObject(layers, true);
             }
             else
             {
                 // get all that match a specific name
-                var layer = this.Client.Layer.FindLayersOnPageByName(VisioScripting.TargetPage.Active, this.Name);
+                var layer = this.Client.Layer.FindLayersOnPageByName(VisioScripting.TargetPage.Auto, this.Name);
                 this.WriteObject(layer);
             }
         }

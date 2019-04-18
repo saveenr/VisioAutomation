@@ -19,7 +19,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var doc = client.Developer.DrawScriptingDocumentation();
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
 
         public void DrawVANamespaceDiagram()
@@ -27,7 +27,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             var doc = client.Developer.DrawNamespaces();
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
 
         [TestMethod]
@@ -40,26 +40,26 @@ namespace VisioAutomation_Tests.Scripting
 
             var doc1 = client.Document.NewDocument();
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
+            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto));
 
             client.Draw.DrawRectangle(0, 0, 1, 1);
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
-            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 1));
-            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 2));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto, 1));
+            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto, 2));
 
             client.Draw.DrawRectangle(2, 2, 3, 3);
-            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Active);
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
-            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 1));
-            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active, 2));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto, 1));
+            Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto, 2));
 
-            client.Selection.SelectNone(VisioScripting.TargetWindow.Active);
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
             Assert.IsTrue(client.Document.HasActiveDocument);
-            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
+            Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto));
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
         }
     }
 }

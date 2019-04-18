@@ -16,13 +16,13 @@ namespace VisioAutomation_Tests.Scripting
             client.Draw.DrawRectangle(0, 0, 1, 1);
             client.Draw.DrawRectangle(1, 1, 2, 2);
 
-            var shapes = client.Page.GetShapesOnPage(VisioScripting.TargetPage.Active);
+            var shapes = client.Page.GetShapesOnPage(VisioScripting.TargetPage.Auto);
             var shapeids = shapes.Select(s => s.ID16).ToList();
             
             var srcs = new[] { VisioAutomation.ShapeSheet.SrcConstants.XFormPinX };
 
 
-            var reader = client.ShapeSheet.GetReaderForPage(VisioScripting.TargetPage.Active);
+            var reader = client.ShapeSheet.GetReaderForPage(VisioScripting.TargetPage.Auto);
             foreach (var shapeid in shapeids)
             {
                 foreach (var src in srcs)

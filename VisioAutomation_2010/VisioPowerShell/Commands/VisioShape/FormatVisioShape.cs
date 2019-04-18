@@ -28,27 +28,27 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                this.Client.Arrange.Nudge(VisioScripting.TargetSelection.Active, this.NudgeX, this.NudgeY);
+                this.Client.Arrange.Nudge(VisioScripting.TargetSelection.Auto, this.NudgeX, this.NudgeY);
             }
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Arrange.DistributeOnAxis(VisioScripting.TargetSelection.Active, VisioScripting.Models.Axis.XAxis);
+                this.Client.Arrange.DistributeOnAxis(VisioScripting.TargetSelection.Auto, VisioScripting.Models.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Arrange.DistributeOnAxis(VisioScripting.TargetSelection.Active, VisioScripting.Models.Axis.YAxis);
+                this.Client.Arrange.DistributeOnAxis(VisioScripting.TargetSelection.Auto, VisioScripting.Models.Axis.YAxis);
             }
 
             if (this.AlignVertical.HasValue)
             {
-                this.Client.Arrange.AlignVertical(VisioScripting.TargetSelection.Active, this.AlignVertical.Value);
+                this.Client.Arrange.AlignVertical(VisioScripting.TargetSelection.Auto, this.AlignVertical.Value);
             }
 
             if (this.AlignHorizontal.HasValue)
             {
-                this.Client.Arrange.AlignHorizontal(VisioScripting.TargetSelection.Active, this.AlignHorizontal.Value);
+                this.Client.Arrange.AlignHorizontal(VisioScripting.TargetSelection.Auto, this.AlignHorizontal.Value);
             }
 
         }
