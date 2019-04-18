@@ -6,7 +6,7 @@ namespace VisioScripting
     public class TargetDocuments : TargetObjects<IVisio.Document>
     {
 
-        public TargetDocuments() : base()
+        private TargetDocuments() : base()
         {
         }
 

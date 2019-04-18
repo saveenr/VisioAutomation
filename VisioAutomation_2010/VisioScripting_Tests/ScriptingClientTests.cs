@@ -59,7 +59,6 @@ namespace VisioAutomation_Tests.Scripting
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Active));
 
-            var targetdoc = new VisioScripting.TargetDocument();
             client.Document.CloseDocument(VisioScripting.TargetDocument.Active, true);
         }
     }
