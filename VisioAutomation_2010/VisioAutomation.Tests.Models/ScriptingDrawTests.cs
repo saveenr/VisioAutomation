@@ -65,8 +65,7 @@ namespace VisioAutomation_Tests.Scripting
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
 
-            var targetpage = new VisioScripting.TargetPage(page);
-            var shapes = client.Model.DrawDataTable(targetpage, dt, widths, heights, cellspacing);
+            var shapes = client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt, widths, heights, cellspacing);
 
             // Verify
             int num_shapes_expected = items.Length*dt.Columns.Count;
