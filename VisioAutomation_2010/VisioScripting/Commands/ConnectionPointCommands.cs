@@ -69,15 +69,6 @@ namespace VisioScripting.Commands
 
             return indices;
         }
-        
-        public List<int> AddConnectionPoint(
-            string x,
-            string y,
-            Models.ConnectionPointType type)
-        {
-            var targets = new TargetShapes();
-            return this.AddConnectionPoint(targets, x, y, type);
-        }
 
         public void DeleteConnectionPointAtIndex(TargetShapes targetshapes, int index)
         {
