@@ -22,7 +22,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s2);
             client.Selection.SelectShapesById(VisioScripting.TargetWindow.Active, s3);
 
-            var indices0 = client.ConnectionPoint.AddConnectionPoint("0", "Width*0.67", VisioScripting.Models.ConnectionPointType.Outward);
+            var indices0 = client.ConnectionPoint.AddConnectionPoint(VisioScripting.TargetShapes.Active, "0", "Width*0.67", VisioScripting.Models.ConnectionPointType.Outward);
             Assert.AreEqual(3, indices0.Count);
             Assert.AreEqual(0, indices0[0]);
             Assert.AreEqual(0, indices0[1]);
