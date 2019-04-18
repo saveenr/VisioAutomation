@@ -6,7 +6,7 @@ namespace VisioScripting
     public class TargetPage : TargetObject<IVisio.Page>
     {
 
-        public TargetPage() : base()
+        private TargetPage() : base()
         {
         }
 
