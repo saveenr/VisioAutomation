@@ -4,7 +4,7 @@ namespace VisioScripting
 {
     public class TargetDocument: TargetObject<IVisio.Document>
     {
-        public TargetDocument() :base()
+        private TargetDocument() :base()
         {
         }
 
