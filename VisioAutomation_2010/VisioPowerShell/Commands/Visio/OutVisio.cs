@@ -22,7 +22,7 @@ namespace VisioPowerShell.Commands.Visio
         public VisioScripting.Models.DataTableModel DataTableModel { get; set; }
 
         [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public XmlDocument XmlDocument;
+        public VisioScripting.Models.XmlModel XmlModel;
 
         protected override void ProcessRecord()
         {
@@ -50,41 +50,13 @@ namespace VisioPowerShell.Commands.Visio
             {
                 this.Client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, this.DataTableModel);
             }
-            else if (this.XmlDocument != null)
+            else if (this.XmlModel != null)
             {
-                this.WriteVerbose("XmlDocument");
-                var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
-                this._build_from_xml_doc(this.XmlDocument, tree_drawing);
-
-                tree_drawing.Render(this.Client.Page.GetActivePage());
+                this.Client.Model.DrawXmlModel(VisioScripting.TargetPage.Auto, this.XmlModel);
             }
             else
             {
                 this.WriteVerbose("No object to draw");
-            }
-        }
-
-        private void _build_from_xml_doc(XmlDocument xml_document, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
-        {
-            var n = new VisioAutomation.Models.Layouts.Tree.Node();
-            tree_drawing.Root = n;
-            n.Text = new VisioAutomation.Models.Text.Element(xml_document.Name);
-            this._build_from_xml_element(xml_document.DocumentElement,n);
-
-        }
-
-        private void _build_from_xml_element(XmlElement x, VisioAutomation.Models.Layouts.Tree.Node parent)
-        {
-            foreach (XmlNode xchild in x.ChildNodes)
-            {
-                if (xchild is XmlElement)
-                {
-                    var nchild = new VisioAutomation.Models.Layouts.Tree.Node();
-                    nchild.Text = new VisioAutomation.Models.Text.Element(xchild.Name);
-
-                    parent.Children.Add(nchild);
-                    this._build_from_xml_element( (XmlElement) xchild, nchild);
-                }
             }
         }
     }

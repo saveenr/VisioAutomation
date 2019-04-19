@@ -102,6 +102,41 @@ namespace VisioScripting.Commands
             var shapes = this._client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt_model.DataTable, widths, heights, spacing);
         }
 
+        public void DrawXmlModel(VisioScripting.TargetPage targetpage, Models.XmlModel xmlmodel)
+        {
+            targetpage = targetpage.Resolve(this._client);
+
+            var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
+            this._build_from_xml_doc(xmlmodel.XmlDocument, tree_drawing);
+
+            tree_drawing.Render(targetpage.Page);
+
+        }
+
+        private void _build_from_xml_doc(System.Xml.XmlDocument xml_document, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
+        {
+            var n = new VisioAutomation.Models.Layouts.Tree.Node();
+            tree_drawing.Root = n;
+            n.Text = new VisioAutomation.Models.Text.Element(xml_document.Name);
+            this._build_from_xml_element(xml_document.DocumentElement, n);
+
+        }
+
+        private void _build_from_xml_element(System.Xml.XmlElement x, VisioAutomation.Models.Layouts.Tree.Node parent)
+        {
+            foreach (System.Xml.XmlNode xchild in x.ChildNodes)
+            {
+                if (xchild is System.Xml.XmlElement)
+                {
+                    var nchild = new VisioAutomation.Models.Layouts.Tree.Node();
+                    nchild.Text = new VisioAutomation.Models.Text.Element(xchild.Name);
+
+                    parent.Children.Add(nchild);
+                    this._build_from_xml_element((System.Xml.XmlElement)xchild, nchild);
+                }
+            }
+        }
+
         public void DrawOrgChart(VisioScripting.TargetPage targetpage, ORG.OrgChartDocument chartdocument)
         {
             targetpage = targetpage.Resolve(this._client);
