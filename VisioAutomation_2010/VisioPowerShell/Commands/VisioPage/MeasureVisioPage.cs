@@ -33,11 +33,12 @@ namespace VisioPowerShell.Commands.VisioPage
             if (this.GetShapeObjects)
             {
                 this.WriteObject(edges, true);
-                return;
             }
+            else
+            {
+                this._write_edges_with_shapeids(edges);
 
-            this._write_edges_with_shapeids(edges);
-                
+            }
         }
 
         private VA.DocumentAnalysis.ConnectionAnalyzerOptions _get_directed_edge_handling()
