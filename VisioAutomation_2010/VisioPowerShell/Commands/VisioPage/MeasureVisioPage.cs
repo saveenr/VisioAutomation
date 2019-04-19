@@ -36,8 +36,8 @@ namespace VisioPowerShell.Commands.VisioPage
             }
             else
             {
-                this._write_edges_with_shapeids(edges);
-
+                var edges2 = this._write_edges_with_shapeids(edges);
+                this.WriteObject(edges, true);
             }
         }
 
@@ -60,8 +60,9 @@ namespace VisioPowerShell.Commands.VisioPage
             return flag;
         }
 
-        private void _write_edges_with_shapeids(IList<VA.DocumentAnalysis.ConnectorEdge> edges)
+        private List<DirectedEdge> _write_edges_with_shapeids(IList<VA.DocumentAnalysis.ConnectorEdge> edges)
         {
+            var list = new List<DirectedEdge>(edges.Count);
             foreach (var edge in edges)
             {
                 var e = new DirectedEdge(
@@ -69,8 +70,10 @@ namespace VisioPowerShell.Commands.VisioPage
                     edge.To.ID,
                     edge.Connector.ID
                     );
-                this.WriteObject(e);
+                list.Add(e);
             }
+
+            return list;
         }
     }
 }
