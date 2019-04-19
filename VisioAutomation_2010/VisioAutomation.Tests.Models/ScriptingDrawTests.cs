@@ -329,7 +329,7 @@ namespace VisioAutomation_Tests.Scripting
             var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(client, xmldoc);
 
-            client.Model.NewOrgChartDocument(VisioScripting.TargetPage.Auto, orgchart);
+            client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
         }
 
         [TestMethod]

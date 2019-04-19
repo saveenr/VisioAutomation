@@ -45,7 +45,7 @@ namespace VisioPowerShell.Commands.Visio
 
             if (this.OrgChart != null)
             {
-                this.Client.Model.NewOrgChartDocument(VisioScripting.TargetPage.Auto, this.OrgChart);
+                this.Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, this.OrgChart);
             }
             else if (this.GridLayout != null)
             {

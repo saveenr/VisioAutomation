@@ -92,7 +92,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void NewOrgChartDocument(VisioScripting.TargetPage targetpage, ORG.OrgChartDocument chartdocument)
+        public void DrawOrgChart(VisioScripting.TargetPage targetpage, ORG.OrgChartDocument chartdocument)
         {
             targetpage = targetpage.Resolve(this._client);
 
