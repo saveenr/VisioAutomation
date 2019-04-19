@@ -107,7 +107,6 @@
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\ShapeCells.cs" />
     <Compile Include="Commands\Visio\OutVisio.cs" />
-    <Compile Include="Models\DirectedEdge.cs" />
     <Compile Include="Commands\VisioShapeCells\GetVisioShapeCells.cs" />
     <Compile Include="Commands\VisioDocument\SetVisioDocument.cs" />
     <Compile Include="Commands\VisioPage\SetVisioPage.cs" />
