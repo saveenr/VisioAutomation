@@ -19,16 +19,7 @@ namespace VisioPowerShell.Commands.Visio
         public List<VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
 
         [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public DataTable DataTable { get; set; }
-
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 1, Mandatory = true, ValueFromPipeline = true)]
-        public double CellWidth { get; set; }
-
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 2, Mandatory = true, ValueFromPipeline = true)]
-        public double CellHeight { get; set; }
-
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true, ValueFromPipeline = true)]
-        public double CellSpacing { get; set; }
+        public VisioScripting.Models.DataTableModel DataTableModel { get; set; }
 
         [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public XmlDocument XmlDocument;
@@ -55,13 +46,9 @@ namespace VisioPowerShell.Commands.Visio
             {
                 this.Client.Model.NewDirectedGraphDocument(this.DirectedGraphs);
             }
-            else if (this.DataTable != null)
+            else if (this.DataTableModel != null)
             {
-                var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
-                var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
-                var spacing = new VisioAutomation.Geometry.Size(this.CellSpacing, this.CellSpacing);
-                var shapes = this.Client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, this.DataTable, widths, heights, spacing);
-                this.WriteObject(shapes);
+                this.Client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, this.DataTableModel);
             }
             else if (this.XmlDocument != null)
             {

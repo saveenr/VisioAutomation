@@ -92,6 +92,16 @@ namespace VisioScripting.Commands
             }
         }
 
+        public void DrawDataTableModel(VisioScripting.TargetPage targetpage, Models.DataTableModel dt_model)
+        {
+            targetpage = targetpage.Resolve(this._client);
+
+            var widths = Enumerable.Repeat<double>(dt_model.CellWidth, dt_model.DataTable.Columns.Count).ToList();
+            var heights = Enumerable.Repeat<double>(dt_model.CellHeight, dt_model.DataTable.Rows.Count).ToList();
+            var spacing = new VisioAutomation.Geometry.Size(dt_model.CellSpacing, dt_model.CellSpacing);
+            var shapes = this._client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt_model.DataTable, widths, heights, spacing);
+        }
+
         public void DrawOrgChart(VisioScripting.TargetPage targetpage, ORG.OrgChartDocument chartdocument)
         {
             targetpage = targetpage.Resolve(this._client);
