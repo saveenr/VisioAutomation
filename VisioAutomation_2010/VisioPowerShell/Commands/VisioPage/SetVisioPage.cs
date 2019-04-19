@@ -16,8 +16,7 @@ namespace VisioPowerShell.Commands.VisioPage
         {
             if (this.Page != null)
             {
-                var targetpage = new VisioScripting.TargetPage(this.Page);
-                this.Client.Page.SetActivePage(targetpage);
+                this.Client.Page.SetActivePage(this.Page);
             }
             else
             {

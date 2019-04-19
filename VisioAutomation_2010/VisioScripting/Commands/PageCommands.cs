@@ -15,15 +15,13 @@ namespace VisioScripting.Commands
 
         }
 
-        public void SetActivePage(TargetPage targetpage)
+        public void SetActivePage(IVisio.Page page)
         {
-            targetpage = targetpage.Resolve(this._client);
-
             var cmdtarget = this._client.GetCommandTargetDocument();
             var app = cmdtarget.Application;
-            this._client.Output.WriteVerbose("Setting Active Page to \"{0}\"", targetpage.Page.Name);
+            this._client.Output.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
             var window = app.ActiveWindow;
-            window.Page = targetpage.Page;
+            window.Page = page;
         }
 
         
