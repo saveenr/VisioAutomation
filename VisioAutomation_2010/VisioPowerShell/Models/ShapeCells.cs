@@ -87,19 +87,27 @@ namespace VisioPowerShell.Models
 
             // Shape Fill
             yield return new CellTuple(nameof(SRCCON.FillBackground), SRCCON.FillBackground, this.FillBackground);
-            yield return new CellTuple(nameof(SRCCON.FillBackgroundTransparency), SRCCON.FillBackgroundTransparency, this.FillBackgroundTransparency);
+            yield return new CellTuple(nameof(SRCCON.FillBackgroundTransparency), SRCCON.FillBackgroundTransparency,
+                this.FillBackgroundTransparency);
             yield return new CellTuple(nameof(SRCCON.FillForeground), SRCCON.FillForeground, this.FillForeground);
-            yield return new CellTuple(nameof(SRCCON.FillForegroundTransparency), SRCCON.FillForegroundTransparency, this.FillForegroundTransparency);
+            yield return new CellTuple(nameof(SRCCON.FillForegroundTransparency), SRCCON.FillForegroundTransparency,
+                this.FillForegroundTransparency);
             yield return new CellTuple(nameof(SRCCON.FillPattern), SRCCON.FillPattern, this.FillPattern);
-            yield return new CellTuple(nameof(SRCCON.FillShadowBackground), SRCCON.FillShadowBackground, this.FillShadowBackground);
-            yield return new CellTuple(nameof(SRCCON.FillShadowBackgroundTransparency), SRCCON.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
-            yield return new CellTuple(nameof(SRCCON.FillShadowForeground), SRCCON.FillShadowForeground, this.FillShadowForeground);
-            yield return new CellTuple(nameof(SRCCON.FillShadowForegroundTransparency), SRCCON.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
-            yield return new CellTuple(nameof(SRCCON.FillShadowPattern), SRCCON.FillShadowPattern, this.FillShadowPattern);
+            yield return new CellTuple(nameof(SRCCON.FillShadowBackground), SRCCON.FillShadowBackground,
+                this.FillShadowBackground);
+            yield return new CellTuple(nameof(SRCCON.FillShadowBackgroundTransparency),
+                SRCCON.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+            yield return new CellTuple(nameof(SRCCON.FillShadowForeground), SRCCON.FillShadowForeground,
+                this.FillShadowForeground);
+            yield return new CellTuple(nameof(SRCCON.FillShadowForegroundTransparency),
+                SRCCON.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+            yield return new CellTuple(nameof(SRCCON.FillShadowPattern), SRCCON.FillShadowPattern,
+                this.FillShadowPattern);
 
             // Shape Line
             yield return new CellTuple(nameof(SRCCON.LineBeginArrow), SRCCON.LineBeginArrow, this.LineBeginArrow);
-            yield return new CellTuple(nameof(SRCCON.LineBeginArrowSize), SRCCON.LineBeginArrowSize, this.LineBeginArrowSize);
+            yield return new CellTuple(nameof(SRCCON.LineBeginArrowSize), SRCCON.LineBeginArrowSize,
+                this.LineBeginArrowSize);
             yield return new CellTuple(nameof(SRCCON.LineCap), SRCCON.LineCap, this.LineCap);
             yield return new CellTuple(nameof(SRCCON.LineColor), SRCCON.LineColor, this.LineColor);
             yield return new CellTuple(nameof(SRCCON.LineEndArrow), SRCCON.LineEndArrow, this.LineEndArrow);
@@ -120,18 +128,22 @@ namespace VisioPowerShell.Models
             // Shape Character
             yield return new CellTuple(nameof(SRCCON.CharCase), SRCCON.CharCase, this.CharCase);
             yield return new CellTuple(nameof(SRCCON.CharColor), SRCCON.CharColor, this.CharColor);
-            yield return new CellTuple(nameof(SRCCON.CharColorTransparency), SRCCON.CharColorTransparency, this.CharColorTransparency);
+            yield return new CellTuple(nameof(SRCCON.CharColorTransparency), SRCCON.CharColorTransparency,
+                this.CharColorTransparency);
             yield return new CellTuple(nameof(SRCCON.CharFont), SRCCON.CharFont, this.CharFont);
             yield return new CellTuple(nameof(SRCCON.CharFontScale), SRCCON.CharFontScale, this.CharFontScale);
             yield return new CellTuple(nameof(SRCCON.CharLetterspace), SRCCON.CharLetterspace, this.CharLetterspace);
             yield return new CellTuple(nameof(SRCCON.CharSize), SRCCON.CharSize, this.CharSize);
             yield return new CellTuple(nameof(SRCCON.CharStyle), SRCCON.CharStyle, this.CharStyle);
-            yield return new CellTuple(nameof(SRCCON.CharDoubleStrikethrough), SRCCON.CharDoubleStrikethrough, this.CharDoubleStrikethrough);
-            yield return new CellTuple(nameof(SRCCON.CharDoubleUnderline), SRCCON.CharDoubleUnderline, this.CharDoubleUnderline);
+            yield return new CellTuple(nameof(SRCCON.CharDoubleStrikethrough), SRCCON.CharDoubleStrikethrough,
+                this.CharDoubleStrikethrough);
+            yield return new CellTuple(nameof(SRCCON.CharDoubleUnderline), SRCCON.CharDoubleUnderline,
+                this.CharDoubleUnderline);
             yield return new CellTuple(nameof(SRCCON.CharLangID), SRCCON.CharLangID, this.CharLangID);
             yield return new CellTuple(nameof(SRCCON.CharLocale), SRCCON.CharLocale, this.CharLocale);
             yield return new CellTuple(nameof(SRCCON.CharOverline), SRCCON.CharOverline, this.CharOverline);
-            yield return new CellTuple(nameof(SRCCON.CharPerpendicular), SRCCON.CharPerpendicular, this.CharPerpendicular);
+            yield return new CellTuple(nameof(SRCCON.CharPerpendicular), SRCCON.CharPerpendicular,
+                this.CharPerpendicular);
             yield return new CellTuple(nameof(SRCCON.CharPos), SRCCON.CharPos, this.CharPos);
             yield return new CellTuple(nameof(SRCCON.CharStrikethru), SRCCON.CharStrikethru, this.CharStrikethru);
 
@@ -144,4 +156,36 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.TextXFormWidth), SRCCON.TextXFormWidth, this.TextFormWidth);
         }
     }
+
+    public class ShapeDimensions
+    {
+        public double XFormAngle;
+        public double XFormHeight;
+        public double XFormLocPinX;
+        public double XFormLocPinY;
+        public double XFormPinX;
+        public double XFormPinY;
+        public double XFormWidth;
+
+        public double OneDBeginX;
+        public double OneDBeginY;
+        public double OneDEndX;
+        public double OneDEndY;
+    }
+
+    public class PageDimensions
+    {
+        public double PageHeight;
+        public double PageWidth;
+
+        public double PrintLeftMargin;
+        public double PrintRightMargin;
+
+        public double PrintTopMargin;
+        public double PrintBottomMargin;
+
+
+    }
+
 }
+
