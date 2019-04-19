@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Geometry;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -44,20 +45,24 @@ namespace VisioScripting.Commands
             }
         }
 
-        public VisioAutomation.Geometry.Size GetPageSize(TargetPage targetpage)
+        public List<VisioAutomation.Geometry.Size> GetPageSize(TargetPages targetpages)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpages = targetpages.Resolve(this._client);
 
-            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
-            var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageHeight));
-            var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, nameof(VisioAutomation.ShapeSheet.SrcConstants.PageWidth));
+            if (targetpages.Pages.Count < 1)
+            {
+                return  new List<VisioAutomation.Geometry.Size>(0);
+            }
 
-            var cellqueryresult = query.GetResults<double>(targetpage.Page.PageSheet);
-            var row = cellqueryresult[0];
-            double height = row[col_height];
-            double width = row[col_width];
-            var s = new VisioAutomation.Geometry.Size(width, height);
-            return s;
+            var sizes = new List<VisioAutomation.Geometry.Size>(targetpages.Pages.Count);
+
+            foreach (var page in targetpages.Pages)
+            {
+                var size = VisioAutomation.Pages.PageHelper.GetSize(page);
+                sizes.Add(size);
+            }
+
+            return sizes;
         }
 
         public IVisio.Page NewPage(VisioScripting.TargetDocument targetdoc, VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
@@ -220,8 +225,7 @@ namespace VisioScripting.Commands
                         return;
                     }
 
-                    var page_tp = new VisioScripting.TargetPage(page);
-                    var old_size = this.GetPageSize(page_tp);
+                    var old_size = VisioAutomation.Pages.PageHelper.GetSize(page);
 
                     double new_height = old_size.Width;
                     double new_width = old_size.Height;
@@ -303,7 +307,7 @@ namespace VisioScripting.Commands
 
             targetpage = targetpage.Resolve(this._client);
 
-            var old_size = this.GetPageSize(targetpage);
+            var old_size = VisioAutomation.Pages.PageHelper.GetSize(targetpage.Page);
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VisioAutomation.Geometry.Size(w, h);

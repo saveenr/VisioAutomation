@@ -46,8 +46,8 @@ namespace VisioAutomation_Tests.Core.Page
             var orientation_1 = client.Page.GetPageOrientation(VisioScripting.TargetPage.Auto);
             Assert.AreEqual(VisioScripting.Models.PageOrientation.Portrait, orientation_1);
 
-            var size1 = client.Page.GetPageSize(VisioScripting.TargetPage.Auto);
-            Assert.AreEqual(size, size1);
+            var sizes_1 = client.Page.GetPageSize(VisioScripting.TargetPages.Auto);
+            Assert.AreEqual(size, sizes_1[0]);
 
             var target_pages = new VisioScripting.TargetPages(page1);
             client.Page.SetPageOrientation(target_pages, VisioScripting.Models.PageOrientation.Landscape);
@@ -55,9 +55,9 @@ namespace VisioAutomation_Tests.Core.Page
             var orientation_2 = client.Page.GetPageOrientation(VisioScripting.TargetPage.Auto);
             Assert.AreEqual(VisioScripting.Models.PageOrientation.Landscape, orientation_2);
 
-            var actual_final_size = client.Page.GetPageSize(VisioScripting.TargetPage.Auto);
+            var actual_final_sizes = client.Page.GetPageSize(VisioScripting.TargetPages.Auto);
             var expected_final_size = new VA.Geometry.Size(3, 4);
-            Assert.AreEqual(expected_final_size, actual_final_size);
+            Assert.AreEqual(expected_final_size, actual_final_sizes[0]);
 
             page1.Delete(0);
         }

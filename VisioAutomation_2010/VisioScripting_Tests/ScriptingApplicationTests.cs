@@ -33,9 +33,9 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(10,5);
             var doc = client.Document.NewDocument(page_size);
 
-            var pagesize = client.Page.GetPageSize(VisioScripting.TargetPage.Auto);
-            Assert.AreEqual(10.0, pagesize.Width);
-            Assert.AreEqual(5.0, pagesize.Height);
+            var pagesizes = client.Page.GetPageSize(VisioScripting.TargetPages.Auto);
+            Assert.AreEqual(10.0, pagesizes[0].Width);
+            Assert.AreEqual(5.0, pagesizes[0].Height);
 
             Assert.AreEqual(0, client.Selection.GetSelection(VisioScripting.TargetWindow.Auto).Count);
             client.Draw.DrawRectangle(1, 1, 2, 2);
