@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.VisioPage
     {
 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page Page;
+        public IVisio.Page [] Page;
 
         /*
         [SMA.Parameter(Mandatory = false)]
@@ -20,9 +20,15 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-            var pd = new Models.PageDimensions();
-            var query = new VASS.Query.CellQuery();
 
+            var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
+
+            if (targetpages.Pages.Count < 1)
+            {
+                return;
+            }
+
+            var query = new VASS.Query.CellQuery();
             var col_PageHeight = query.Columns.Add(VASS.SrcConstants.PageHeight, nameof(VASS.SrcConstants.PageHeight));
             var col_PageWidth = query.Columns.Add(VASS.SrcConstants.PageWidth, nameof(VASS.SrcConstants.PageWidth));
             var col_PrintBottomMargin = query.Columns.Add(VASS.SrcConstants.PrintBottomMargin, nameof(VASS.SrcConstants.PrintBottomMargin));
@@ -30,20 +36,28 @@ namespace VisioPowerShell.Commands.VisioPage
             var col_PrintLeftMargin = query.Columns.Add(VASS.SrcConstants.PrintLeftMargin, nameof(VASS.SrcConstants.PrintLeftMargin));
             var col_PrintRightMargin = query.Columns.Add(VASS.SrcConstants.PrintRightMargin, nameof(VASS.SrcConstants.PrintRightMargin));
 
-            var cellqueryresult = query.GetResults<double>(this.Page.PageSheet);
-            var row = cellqueryresult[0];
-            pd.PageHeight = row[col_PageHeight];
-            pd.PageWidth = row[col_PageWidth];
-            pd.PrintBottomMargin= row[col_PrintBottomMargin];
-            pd.PrintLeftMargin= row[col_PrintLeftMargin];
-            pd.PrintRightMargin= row[col_PrintRightMargin];
-            pd.PrintTopMargin= row[col_PrintTopMargin];
- 
-            this.WriteObject(pd);
+            foreach (var page in targetpages.Pages)
+            {
+                var pd = new Models.PageDimensions();
+
+                var cellqueryresult = query.GetResults<double>(page.PageSheet);
+                var row = cellqueryresult[0];
+                pd.PageHeight = row[col_PageHeight];
+                pd.PageWidth = row[col_PageWidth];
+                pd.PrintBottomMargin = row[col_PrintBottomMargin];
+                pd.PrintLeftMargin = row[col_PrintLeftMargin];
+                pd.PrintRightMargin = row[col_PrintRightMargin];
+                pd.PrintTopMargin = row[col_PrintTopMargin];
+
+                this.WriteObject(pd);
+
+            }
         }
 
         private void foo()
         {
+            /*
+
             var targetpage = new VisioScripting.TargetPage(this.Page);
 
             var options = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
@@ -51,13 +65,12 @@ namespace VisioPowerShell.Commands.VisioPage
 
             options.DirectionSource = VA.DocumentAnalysis.DirectionSource.UseConnectorArrows;
 
-            /*
             options.NoArrowsHandling = this.TreatUndirectedAsBidirectional ?
                 VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional
                 : VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
-                */
             var edges = this.Client.Connection.GetDirectedEdgesOnPage(targetpage, options);
             this.WriteObject(edges, false);
+                */
         }
     }
 }
@@ -74,17 +87,14 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-            if (this.Shape == null)
-            {
-                return;
-            }
-
-            if (this.Shape.Length < 1)
-            {
-                return;
-            }
 
             var targetshapes = new VisioScripting.TargetShapes(this.Shape).Resolve(this.Client);
+
+            if (targetshapes.Shapes.Count < 1)
+            {
+                return;
+            }
+           
 
             var query = new VASS.Query.CellQuery();
 
@@ -96,7 +106,7 @@ namespace VisioPowerShell.Commands.VisioPage
             var col_XFormPinX = query.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(VASS.SrcConstants.XFormPinX));
             var col_XFormPinY = query.Columns.Add(VASS.SrcConstants.XFormPinY, nameof(VASS.SrcConstants.XFormPinY));
 
-            var page = this.Shape[0].ContainingPage;
+            var page = targetshapes.Shapes[0].ContainingPage;
             var shapeids = VisioAutomation.ShapeIDPairs.FromShapes(targetshapes.Shapes).Select(i => i.ShapeID).ToList();
             var cellqueryresult = query.GetResults<double>(page,shapeids);
             foreach (var row in cellqueryresult)
