@@ -15,9 +15,6 @@ namespace VisioPowerShell.Commands.VisioPage
         public IVisio.Page Page;
 
         [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter GetShapeObjects { get; set; }
-
-        [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Raw { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
@@ -29,16 +26,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
             var flag = this._get_directed_edge_handling();
             var edges = this.Client.Connection.GetDirectedEdgesOnPage(targetpage,flag);
-
-            if (this.GetShapeObjects)
-            {
-                this.WriteObject(edges, true);
-            }
-            else
-            {
-                var edges2 = this._write_edges_with_shapeids(edges);
-                this.WriteObject(edges, true);
-            }
+            this.WriteObject(edges, false);
         }
 
         private VA.DocumentAnalysis.ConnectionAnalyzerOptions _get_directed_edge_handling()
@@ -58,22 +46,6 @@ namespace VisioPowerShell.Commands.VisioPage
                     : VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
             }
             return flag;
-        }
-
-        private List<DirectedEdge> _write_edges_with_shapeids(IList<VA.DocumentAnalysis.ConnectorEdge> edges)
-        {
-            var list = new List<DirectedEdge>(edges.Count);
-            foreach (var edge in edges)
-            {
-                var e = new DirectedEdge(
-                    edge.From.ID,
-                    edge.To.ID,
-                    edge.Connector.ID
-                    );
-                list.Add(e);
-            }
-
-            return list;
         }
     }
 }
