@@ -16,13 +16,14 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.Parameter(Mandatory = false)]
         public string Name { get; set; }
 
-        // CONTEXT:DOCUMENT - UNKNOWN
-
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Document Document;
 
         [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.PageCells Cells { get; set; }
+
+        // CONTEXT:DOCUMENT
+
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Document Document;
 
         protected override void ProcessRecord()
         {

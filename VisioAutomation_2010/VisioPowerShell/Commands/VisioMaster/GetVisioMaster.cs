@@ -6,10 +6,12 @@ namespace VisioPowerShell.Commands.VisioMaster
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioMaster)]
     public class GetVisioMaster : VisioCmdlet
     {
+        //TODO: SHould this be a find cmdlet instead of a get cmdlet?
+
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string[] Name;
 
-        // CONTEXT:DOCUMENT - UNKNOWN
+        // NONCONTEXT:DOCUMENT
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;
 
