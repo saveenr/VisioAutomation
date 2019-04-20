@@ -46,7 +46,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
         [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")] 
         public int Invisible = -1;
 
-        // CONTEXT:SHAPE
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 

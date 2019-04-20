@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioControl
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioControl)]
     public class GetVisioControl : VisioCmdlet
     {
-        // CONTEXT:SHAPE
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
         

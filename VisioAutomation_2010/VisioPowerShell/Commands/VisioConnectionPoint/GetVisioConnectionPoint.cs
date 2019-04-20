@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioConnectionPoint
     public class GetVisioConnectionPoint : VisioCmdlet
     {
 
-        // CONTEXT:SHAPE
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 

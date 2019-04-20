@@ -9,7 +9,7 @@ namespace VisioPowerShell.Commands.VisioDocument
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Force;
 
-        // CONTEXT:DOCUMENT
+        // CONTEXT:DOCUMENTS
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document[] Documents;
 
