@@ -6,23 +6,4 @@
         PageWidth,
         Selection
     }
-
-    public class DataTableModel
-    {
-
-        public System.Data.DataTable DataTable { get; set; }
-
-        public double CellWidth { get; set; }
-
-        public double CellHeight { get; set; }
-
-        public double CellSpacing { get; set; }
-    }
-
-    public class XmlModel
-    {
-
-        public System.Xml.XmlDocument XmlDocument { get; set; }
-    }
-
 }

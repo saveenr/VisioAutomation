@@ -56,6 +56,7 @@
     <Compile Include="CommandTargetFlags.cs" />
     <Compile Include="Commands\ModelCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
+    <Compile Include="Models\DataTableModel.cs" />
     <Compile Include="Models\PageDimensions.cs" />
     <Compile Include="Models\ShapeDimensions.cs" />
     <Compile Include="Models\ShapeSendDirection.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
     <Compile Include="Models\ConnectionPointType.cs" />
+    <Compile Include="Models\XmlModel.cs" />
     <Compile Include="TargetDocument.cs" />
     <Compile Include="TargetDocuments.cs" />
     <Compile Include="TargetObject.cs" />
