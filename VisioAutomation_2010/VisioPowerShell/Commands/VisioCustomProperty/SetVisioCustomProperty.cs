@@ -48,7 +48,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
 
         // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
         {
@@ -114,13 +114,13 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
                 cp.Invisible = this.Invisible;
             }
 
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             this.Client.CustomProperty.SetCustomProperty(targetshapes, this.Name, cp);
         }
 
         private void _set_from_cells()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             this.Client.CustomProperty.SetCustomProperty(targetshapes, this.Name, this.Cells);
         }
 

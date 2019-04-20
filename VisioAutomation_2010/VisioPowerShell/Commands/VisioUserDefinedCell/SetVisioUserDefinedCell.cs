@@ -17,11 +17,11 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
 
         // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes; 
+        public IVisio.Shape[] Shape; 
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             var udcell = new VisioAutomation.Shapes.UserDefinedCellCells();
 
             if (this.Value != null)

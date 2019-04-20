@@ -15,11 +15,11 @@ namespace VisioPowerShell.Commands.VisioPageCells
 
         // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page[] Pages { get; set; }
+        public IVisio.Page[] Page { get; set; }
 
         protected override void ProcessRecord()
         {
-            var targetpages = new VisioScripting.TargetPages(this.Pages);
+            var targetpages = new VisioScripting.TargetPages(this.Page);
 
             var template = new VisioPowerShell.Models.PageCells();
             var celldic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);

@@ -93,7 +93,7 @@ namespace VisioPowerShell_Tests
             IVisio.Shape[] shapes)
         {
             var cmd = new GetVisioShapeCells();
-            cmd.Shapes = shapes;
+            cmd.Shape = shapes;
             var cells = cmd.InvokeFirst<System.Data.DataTable>();
             return cells;
         }
@@ -102,7 +102,7 @@ namespace VisioPowerShell_Tests
             IVisio.Page[] pages)
         {
             var cmd = new GetVisioPageCells();
-            cmd.Pages = pages;
+            cmd.Page = pages;
             var cells = cmd.InvokeFirst<System.Data.DataTable>();
             return cells;
         }
@@ -132,7 +132,7 @@ namespace VisioPowerShell_Tests
         {
             var cmd = new SetVisioText();
             cmd.Text = text;
-            cmd.Shapes = shapes;
+            cmd.Shape = shapes;
             cmd.InvokeVoid();
         }
 
@@ -142,7 +142,7 @@ namespace VisioPowerShell_Tests
         {
             var cmd = new SetVisioShapeCells();
             cmd.Cells = cells;
-            cmd.Shapes = shapes;
+            cmd.Shape = shapes;
             cmd.InvokeVoid();
         }
 
@@ -152,7 +152,7 @@ namespace VisioPowerShell_Tests
         {
             var cmd = new SetVisioPageCells();
             cmd.Cells = cells;
-            cmd.Pages = pages;
+            cmd.Page = pages;
             cmd.InvokeVoid();
         }
 
@@ -168,7 +168,7 @@ namespace VisioPowerShell_Tests
             bool force)
         {
             var cmd = new CloseVisioDocument();
-            cmd.Documents = documents;
+            cmd.Document = documents;
             cmd.Force = force;
             cmd.InvokeVoid();
         }

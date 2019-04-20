@@ -7,14 +7,14 @@ namespace VisioPowerShell.Commands.VisioPage
     public class RemoveVisioPage : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, Position=0, ValueFromPipeline = true)]
-        public IVisio.Page[] Pages;
+        public IVisio.Page[] Page;
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Renumber;
 
         protected override void ProcessRecord()
         {
-            var targetpages = new VisioScripting.TargetPages(this.Pages);
+            var targetpages = new VisioScripting.TargetPages(this.Page);
             this.Client.Page.DeletePages(targetpages, this.Renumber);
         }
     }

@@ -11,11 +11,11 @@ namespace VisioPowerShell.Commands.VisioHyperlink
 
         // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             this.Client.Hyperlink.DeleteHyperlinkAtIndex(targetshapes,this.Index);
         }
     }

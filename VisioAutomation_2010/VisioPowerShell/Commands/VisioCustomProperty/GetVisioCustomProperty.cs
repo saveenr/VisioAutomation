@@ -9,11 +9,11 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
     {
         // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
         
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             var type = VASS.CellValueType.Formula;
             var dicof_shape_to_cpdic = this.Client.CustomProperty.GetCustomPropertiesAsShapeDictionary(targetshapes, type);
             this.WriteObject(dicof_shape_to_cpdic);                

@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
 
         // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page[] Pages { get; set; }
+        public IVisio.Page[] Page { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -31,7 +31,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
                 return;
             }
 
-            var targetpages = new VisioScripting.TargetPages(this.Pages).Resolve(this.Client);
+            var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);

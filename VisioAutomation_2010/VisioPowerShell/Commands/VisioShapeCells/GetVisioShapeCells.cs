@@ -16,11 +16,11 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
         // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes { get; set; }
+        public IVisio.Shape[] Shape { get; set; }
 
         protected override void ProcessRecord()
         {
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
+            var target_shapes = this.Shape ?? this.Client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
 
             var template = new VisioPowerShell.Models.ShapeCells();
             var dicof_name_to_cell = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);

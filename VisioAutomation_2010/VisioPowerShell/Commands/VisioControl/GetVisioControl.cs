@@ -9,11 +9,11 @@ namespace VisioPowerShell.Commands.VisioControl
     {
         // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
         
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             var type = VASS.CellValueType.Formula;
             var dic_shape_to_listofcontrolscells = this.Client.Control.GetControls(targetshapes, type);
             this.WriteObject(dic_shape_to_listofcontrolscells);
