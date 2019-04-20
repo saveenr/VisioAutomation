@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.VisioPage
     {
 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page [] Page;
+        public IVisio.Page [] Pages;
 
         /*
         [SMA.Parameter(Mandatory = false)]
@@ -21,7 +21,7 @@ namespace VisioPowerShell.Commands.VisioPage
         protected override void ProcessRecord()
         {
 
-            var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
+            var targetpages = new VisioScripting.TargetPages(this.Pages).Resolve(this.Client);
 
             if (targetpages.Pages.Count < 1)
             {
