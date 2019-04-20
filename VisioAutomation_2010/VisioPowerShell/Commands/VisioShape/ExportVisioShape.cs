@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
         private static HashSet<string> _static_html_extensions;
 
-        // CONTEXT:SHAPES - does not correctly use shape context
+        //  CONTEXT:SHAPES - does not correctly use shape context
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
