@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Xml;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.Visio
@@ -44,7 +41,7 @@ namespace VisioPowerShell.Commands.Visio
             }
             else if (this.DirectedGraphs != null)
             {
-                this.Client.Model.NewDirectedGraphDocument(this.DirectedGraphs);
+                this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraphs);
             }
             else if (this.DataTableModel != null)
             {

@@ -150,7 +150,7 @@ namespace VisioScripting.Commands
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void NewDirectedGraphDocument(IList<GRAPH.DirectedGraphLayout> graph)
+        public void DrawDirectedGraphDocument(IList<GRAPH.DirectedGraphLayout> graph)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 

@@ -260,7 +260,7 @@ namespace VisioAutomation_Tests.Scripting
                 }
             }
 
-            client.Model.NewDirectedGraphDocument(dg_model);
+            client.Model.DrawDirectedGraphDocument(dg_model);
         }
         
         [TestMethod]
