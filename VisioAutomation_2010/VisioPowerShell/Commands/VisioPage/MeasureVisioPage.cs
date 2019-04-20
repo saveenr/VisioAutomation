@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using VisioScripting.Models;
 using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -28,33 +30,12 @@ namespace VisioPowerShell.Commands.VisioPage
                 return;
             }
 
-            var query = new VASS.Query.CellQuery();
-            var col_PageHeight = query.Columns.Add(VASS.SrcConstants.PageHeight, nameof(VASS.SrcConstants.PageHeight));
-            var col_PageWidth = query.Columns.Add(VASS.SrcConstants.PageWidth, nameof(VASS.SrcConstants.PageWidth));
-            var col_PrintBottomMargin = query.Columns.Add(VASS.SrcConstants.PrintBottomMargin, nameof(VASS.SrcConstants.PrintBottomMargin));
-            var col_PrintTopMargin = query.Columns.Add(VASS.SrcConstants.PrintTopMargin, nameof(VASS.SrcConstants.PrintTopMargin));
-            var col_PrintLeftMargin = query.Columns.Add(VASS.SrcConstants.PrintLeftMargin, nameof(VASS.SrcConstants.PrintLeftMargin));
-            var col_PrintRightMargin = query.Columns.Add(VASS.SrcConstants.PrintRightMargin, nameof(VASS.SrcConstants.PrintRightMargin));
+            var list_pagedim = VisioScripting.Models.PageDimensions.Get_PageDimensions(targetpages.Pages);
 
-            foreach (var page in targetpages.Pages)
-            {
-                var dim = new VisioScripting.Models.PageDimensions();
+            this.WriteObject(list_pagedim,true);
 
-                dim.PageID = page.ID;
-
-                var cellqueryresult = query.GetResults<double>(page.PageSheet);
-                var row = cellqueryresult[0];
-                dim.PageHeight = row[col_PageHeight];
-                dim.PageWidth = row[col_PageWidth];
-                dim.PrintBottomMargin = row[col_PrintBottomMargin];
-                dim.PrintLeftMargin = row[col_PrintLeftMargin];
-                dim.PrintRightMargin = row[col_PrintRightMargin];
-                dim.PrintTopMargin = row[col_PrintTopMargin];
-
-                this.WriteObject(dim);
-
-            }
         }
+
 
         private void foo()
         {
