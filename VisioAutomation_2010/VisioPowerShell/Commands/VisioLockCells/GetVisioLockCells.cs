@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioLockCells
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioLockCells)]
     public class GetVisioLockCells : VisioCmdlet
     {
-        // CONTEXT:SHAPE
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 

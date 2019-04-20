@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
-        // CONTEXT:SHAPE 
+        // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }
 

@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioPage
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Measure, Nouns.VisioShape)]
     public class MeasureVisioShape: VisioCmdlet
     {
-        // CONTEXT:SHAPE 
+        // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 

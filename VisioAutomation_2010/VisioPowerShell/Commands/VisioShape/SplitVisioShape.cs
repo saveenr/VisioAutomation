@@ -6,7 +6,7 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Split, Nouns.VisioShape)]
     public class SplitVisioShape: VisioCmdlet
     {
-        // CONTEXT:SHAPE 
+        // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
         

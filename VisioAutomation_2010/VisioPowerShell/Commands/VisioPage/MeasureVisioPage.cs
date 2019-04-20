@@ -1,10 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
-using VisioScripting.Models;
 using SMA = System.Management.Automation;
-using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
@@ -12,14 +7,15 @@ namespace VisioPowerShell.Commands.VisioPage
     public class MeasureVisioPage : VisioCmdlet
     {
 
-        // CONTEXT:PAGE
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page [] Pages;
 
         /*
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TreatUndirectedAsBidirectional { get; set; }
         */
+
+        // CONTEXT:PAGES
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Pages;
 
         protected override void ProcessRecord()
         {

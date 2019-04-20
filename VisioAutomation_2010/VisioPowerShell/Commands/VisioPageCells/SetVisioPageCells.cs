@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
-        // CONTEXT:PAGE 
+        // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Page[] Pages { get; set; }
 

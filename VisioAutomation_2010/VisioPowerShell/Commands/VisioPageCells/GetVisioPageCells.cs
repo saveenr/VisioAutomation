@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
         [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
-        // CONTEXT:PAGE 
+        // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Page[] Pages { get; set; }
 

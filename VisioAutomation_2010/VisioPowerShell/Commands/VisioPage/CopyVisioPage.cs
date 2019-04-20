@@ -6,8 +6,6 @@ namespace VisioPowerShell.Commands.VisioPage
     [SMA.Cmdlet(SMA.VerbsCommon.Copy, Nouns.VisioPage)]
     public class CopyVisioPage : VisioCmdlet
     {
-        // NONCONTEXT:DOCUMENT
-
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document ToDocument=null;
 

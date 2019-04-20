@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioHyperlink
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioHyperlink)]
     public class GetVisioHyperlink : VisioCmdlet
     {
-        // CONTEXT:SHAPE
+        // CONTEXT:SHAPES
         // [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 

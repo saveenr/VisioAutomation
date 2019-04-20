@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.VisioMaster
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string[] Name;
 
-        // NONCONTEXT:DOCUMENT
+        // CONTEXT:DOCUMENT
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;
 

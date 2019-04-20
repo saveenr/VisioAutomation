@@ -9,7 +9,7 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Name { get; set; }
 
-        // CONTEXT:SHAPE 
+        // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 

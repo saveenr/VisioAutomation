@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands.VisioShape
         public SMA.SwitchParameter VertexEdit;
         public SMA.SwitchParameter Width;
 
-        // CONTEXT:SHAPE 
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 

@@ -9,7 +9,7 @@ namespace VisioPowerShell.Commands.VisioText
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string[] Text { get; set; }
 
-        // CONTEXT:SHAPE 
+        // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 

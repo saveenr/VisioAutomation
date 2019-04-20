@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false)]
         public int[] Id;
 
-        // NONCONTEXT:PAGE
+        // CONTEXT:PAGE
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Page Page;
 

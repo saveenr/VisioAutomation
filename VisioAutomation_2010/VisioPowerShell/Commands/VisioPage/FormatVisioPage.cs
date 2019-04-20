@@ -30,8 +30,9 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.Parameter(Mandatory = false)]
         public VisioAutomation.Models.LayoutStyles.LayoutStyleBase LayoutStyle = null;
 
-        // CONTEXT:PAGE
-        [SMA.Parameter(Mandatory = false)] public IVisio.Page[] Pages;
+        // CONTEXT:PAGES
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Pages;
 
         protected override void ProcessRecord()
         {
