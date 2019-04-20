@@ -11,13 +11,15 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.ValidateNotNullOrEmpty]
         public string Filename;
 
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
 
         private static HashSet<string> _static_html_extensions;
+
+        // CONTEXT:SHAPE - does not correctly use shape context
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

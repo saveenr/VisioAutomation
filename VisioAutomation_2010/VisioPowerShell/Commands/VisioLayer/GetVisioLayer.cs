@@ -9,6 +9,7 @@ namespace VisioPowerShell.Commands.VisioLayer
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name;
 
+        // NONCONTEXT:PAGE
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public IVisio.Page Page;
 

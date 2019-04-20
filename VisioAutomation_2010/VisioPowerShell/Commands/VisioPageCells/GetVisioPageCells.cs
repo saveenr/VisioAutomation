@@ -9,11 +9,13 @@ namespace VisioPowerShell.Commands.VisioPageCells
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPageCells)]
     public class GetVisioPageCells: VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page[] Pages { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
+
+        // CONTEXT:PAGE 
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Pages { get; set; }
 
         protected override void ProcessRecord()
         {

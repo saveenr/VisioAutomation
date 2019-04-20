@@ -7,10 +7,11 @@ namespace VisioPowerShell.Commands.VisioDocument
     public class CloseVisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Document[] Documents;
-
-        [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Force;
+
+        // CONTEXT:DOCUMENT
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Document[] Documents;
 
         protected override void ProcessRecord()
         {

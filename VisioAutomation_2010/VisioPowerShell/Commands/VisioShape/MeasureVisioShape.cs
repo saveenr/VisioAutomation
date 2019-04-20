@@ -1,17 +1,13 @@
 using System.Linq;
 using SMA = System.Management.Automation;
-using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VASS=VisioAutomation.ShapeSheet;
-using System.Collections.Generic;
-using VisioScripting.Models;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Measure, Nouns.VisioShape)]
     public class MeasureVisioShape: VisioCmdlet
     {
-
+        // CONTEXT:SHAPE 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 

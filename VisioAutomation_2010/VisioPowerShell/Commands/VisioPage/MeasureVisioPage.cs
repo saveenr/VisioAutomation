@@ -12,6 +12,7 @@ namespace VisioPowerShell.Commands.VisioPage
     public class MeasureVisioPage : VisioCmdlet
     {
 
+        // CONTEXT:PAGE
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Page [] Pages;
 

@@ -9,6 +9,7 @@ namespace VisioPowerShell.Commands.VisioMaster
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string[] Name;
 
+        // CONTEXT:DOCUMENT - UNKNOWN
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;
 

@@ -33,6 +33,7 @@ namespace VisioPowerShell.Commands.VisioHyperlink
         [SMA.Parameter(Mandatory = false)]
         public bool Invisible { get; set; }
 
+        // CONTEXT:SHAPE
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 

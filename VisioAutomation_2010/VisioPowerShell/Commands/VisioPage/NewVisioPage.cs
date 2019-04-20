@@ -16,6 +16,8 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.Parameter(Mandatory = false)]
         public string Name { get; set; }
 
+        // CONTEXT:DOCUMENT - UNKNOWN
+
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;
 

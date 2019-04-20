@@ -10,6 +10,8 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.ValidateNotNullOrEmpty]
         public string Filename;
 
+
+        //TODO: Instead of this parameter just identify all the pages explicitly
         [SMA.Parameter(Position = 1, Mandatory = false)]
         public SMA.SwitchParameter AllPages;
 

@@ -9,11 +9,15 @@ namespace VisioPowerShell.Commands.VisioShapeCells
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShapeCells)]
     public class GetVisioShapeCells : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes { get; set; }
+
 
         [SMA.Parameter(Mandatory = false)] 
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
+
+        // CONTEXT:SHAPE 
+
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shapes { get; set; }
 
         protected override void ProcessRecord()
         {

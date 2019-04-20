@@ -6,6 +6,9 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Format, Nouns.VisioShape)]
     public class FormatVisioShape : VisioCmdlet
     {
+        // TODO: This cmdlet only affects the active selection but acts like it can handle non-selections due to its names
+        // the same is true for the commands it calls
+
         [SMA.Parameter(Mandatory = false)]
         public double NudgeX { get; set; }
 

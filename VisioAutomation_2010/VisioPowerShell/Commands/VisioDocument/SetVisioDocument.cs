@@ -10,6 +10,7 @@ namespace VisioPowerShell.Commands.VisioDocument
         [SMA.ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
+        // NONCONTEXT:DOCUMENT
         [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Doc")]
         [SMA.ValidateNotNull]
         public IVisio.Document Document  { get; set; }

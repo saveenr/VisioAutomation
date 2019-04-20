@@ -10,13 +10,14 @@ namespace VisioPowerShell.Commands.VisioPageCells
         public VisioPowerShell.Models.PageCells[] Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page[] Pages { get; set; }
-
-        [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
+
+        // CONTEXT:PAGE 
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Pages { get; set; }
 
         protected override void ProcessRecord()
         {

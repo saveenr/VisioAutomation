@@ -6,9 +6,6 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Unlock, Nouns.VisioShape)]
     public class UnlockVisioShape : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
-
         public SMA.SwitchParameter Aspect;
         public SMA.SwitchParameter Begin;
         public SMA.SwitchParameter CalcWH;
@@ -29,6 +26,10 @@ namespace VisioPowerShell.Commands.VisioShape
         public SMA.SwitchParameter ThemeEffects;
         public SMA.SwitchParameter VertexEdit;
         public SMA.SwitchParameter Width;
+
+        // CONTEXT:SHAPE 
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

@@ -7,6 +7,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioCustomProperty)]
     public class GetVisioCustomProperty : VisioCmdlet
     {
+        // CONTEXT:SHAPE
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
         
