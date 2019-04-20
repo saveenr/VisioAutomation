@@ -42,9 +42,14 @@ namespace VisioPowerShell.Commands.VisioPage
             var page = targetshapes.Shapes[0].ContainingPage;
             var shapeids = VisioAutomation.ShapeIDPairs.FromShapes(targetshapes.Shapes).Select(i => i.ShapeID).ToList();
             var cellqueryresult = query.GetResults<double>(page,shapeids);
+
+            int n = 0;
             foreach (var row in cellqueryresult)
             {
                 var dim = new Models.ShapeDimensions();
+
+                dim.ShapeID = shapeids[n];
+
                 dim.XFormAngle = row[col_XFormAngle];
                 dim.XFormWidth = row[col_XFormWidth];
                 dim.XFormHeight = row[col_XFormHeight];
@@ -52,7 +57,15 @@ namespace VisioPowerShell.Commands.VisioPage
                 dim.XFormLocPinY = row[col_XFormLocPinY];
                 dim.XFormPinX = row[col_XFormPinX];
                 dim.XFormPinY = row[col_XFormPinY];
+
+                dim.OneDBeginX = row[col_OneDBeginX];
+                dim.OneDBeginY = row[col_OneDBeginY];
+                dim.OneDEndX = row[col_OneDEndX];
+                dim.OneDEndY = row[col_OneDEndY];
+
                 this.WriteObject(dim);
+
+                n++;
             }
         }
     }

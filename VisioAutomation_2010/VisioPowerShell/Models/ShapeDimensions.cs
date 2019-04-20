@@ -2,6 +2,8 @@ namespace VisioPowerShell.Models
 {
     public class ShapeDimensions
     {
+        public int ShapeID;
+
         public double XFormAngle;
         public double XFormHeight;
         public double XFormLocPinX;

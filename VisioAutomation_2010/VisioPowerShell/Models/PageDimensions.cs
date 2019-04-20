@@ -2,6 +2,8 @@ namespace VisioPowerShell.Models
 {
     public class PageDimensions
     {
+        public int PageID;
+
         public double PageHeight;
         public double PageWidth;
 

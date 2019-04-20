@@ -38,18 +38,20 @@ namespace VisioPowerShell.Commands.VisioPage
 
             foreach (var page in targetpages.Pages)
             {
-                var pd = new Models.PageDimensions();
+                var dim = new Models.PageDimensions();
+
+                dim.PageID = page.ID;
 
                 var cellqueryresult = query.GetResults<double>(page.PageSheet);
                 var row = cellqueryresult[0];
-                pd.PageHeight = row[col_PageHeight];
-                pd.PageWidth = row[col_PageWidth];
-                pd.PrintBottomMargin = row[col_PrintBottomMargin];
-                pd.PrintLeftMargin = row[col_PrintLeftMargin];
-                pd.PrintRightMargin = row[col_PrintRightMargin];
-                pd.PrintTopMargin = row[col_PrintTopMargin];
+                dim.PageHeight = row[col_PageHeight];
+                dim.PageWidth = row[col_PageWidth];
+                dim.PrintBottomMargin = row[col_PrintBottomMargin];
+                dim.PrintLeftMargin = row[col_PrintLeftMargin];
+                dim.PrintRightMargin = row[col_PrintRightMargin];
+                dim.PrintTopMargin = row[col_PrintTopMargin];
 
-                this.WriteObject(pd);
+                this.WriteObject(dim);
 
             }
         }
