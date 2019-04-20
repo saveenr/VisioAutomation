@@ -92,8 +92,6 @@
     <Compile Include="Commands\VisioLockCells\GetVisioLockCells.cs" />
     <Compile Include="Commands\VisioPageCells\NewVisioPageCells.cs" />
     <Compile Include="Commands\VisioPageCells\SetVisioPageCells.cs" />
-    <Compile Include="Models\PageDimensions.cs" />
-    <Compile Include="Models\ShapeDimensions.cs" />
     <Compile Include="Models\ShapeType.cs" />
     <Compile Include="Models\CellType.cs" />
     <Compile Include="Commands\VisioShapeCells\NewVisioShapeCells.cs" />

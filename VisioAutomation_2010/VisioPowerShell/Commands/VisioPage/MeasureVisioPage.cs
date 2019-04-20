@@ -38,7 +38,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
             foreach (var page in targetpages.Pages)
             {
-                var dim = new Models.PageDimensions();
+                var dim = new VisioScripting.Models.PageDimensions();
 
                 dim.PageID = page.ID;
 

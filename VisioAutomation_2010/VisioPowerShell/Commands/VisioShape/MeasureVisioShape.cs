@@ -3,6 +3,8 @@ using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VASS=VisioAutomation.ShapeSheet;
+using System.Collections.Generic;
+using VisioScripting.Models;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
@@ -22,8 +24,18 @@ namespace VisioPowerShell.Commands.VisioPage
             {
                 return;
             }
-           
 
+
+            var shapeids = VisioAutomation.ShapeIDPairs.FromShapes(targetshapes.Shapes).Select(i => i.ShapeID).ToList();
+            var page = targetshapes.Shapes[0].ContainingPage;
+            var list_shapedim = Get_ShapeDimensions(page, shapeids);
+
+            this.WriteObject(list_shapedim,true);
+
+        }
+
+        private static List<ShapeDimensions> Get_ShapeDimensions(IVisio.Page page, List<int> shapeids)
+        {
             var query = new VASS.Query.CellQuery();
 
             var col_XFormAngle = query.Columns.Add(VASS.SrcConstants.XFormAngle, nameof(VASS.SrcConstants.XFormAngle));
@@ -39,34 +51,35 @@ namespace VisioPowerShell.Commands.VisioPage
             var col_OneDEndX = query.Columns.Add(VASS.SrcConstants.OneDEndX, nameof(VASS.SrcConstants.OneDEndX));
             var col_OneDEndY = query.Columns.Add(VASS.SrcConstants.OneDEndY, nameof(VASS.SrcConstants.OneDEndY));
 
-            var page = targetshapes.Shapes[0].ContainingPage;
-            var shapeids = VisioAutomation.ShapeIDPairs.FromShapes(targetshapes.Shapes).Select(i => i.ShapeID).ToList();
-            var cellqueryresult = query.GetResults<double>(page,shapeids);
+            var cellqueryresult = query.GetResults<double>(page, shapeids);
 
+            var list_shapedim = new List<VisioScripting.Models.ShapeDimensions>(shapeids.Count);
             int n = 0;
             foreach (var row in cellqueryresult)
             {
-                var dim = new Models.ShapeDimensions();
+                var shapedim = new VisioScripting.Models.ShapeDimensions();
 
-                dim.ShapeID = shapeids[n];
+                shapedim.ShapeID = shapeids[n];
 
-                dim.XFormAngle = row[col_XFormAngle];
-                dim.XFormWidth = row[col_XFormWidth];
-                dim.XFormHeight = row[col_XFormHeight];
-                dim.XFormLocPinX = row[col_XFormLocPinX];
-                dim.XFormLocPinY = row[col_XFormLocPinY];
-                dim.XFormPinX = row[col_XFormPinX];
-                dim.XFormPinY = row[col_XFormPinY];
+                shapedim.XFormAngle = row[col_XFormAngle];
+                shapedim.XFormWidth = row[col_XFormWidth];
+                shapedim.XFormHeight = row[col_XFormHeight];
+                shapedim.XFormLocPinX = row[col_XFormLocPinX];
+                shapedim.XFormLocPinY = row[col_XFormLocPinY];
+                shapedim.XFormPinX = row[col_XFormPinX];
+                shapedim.XFormPinY = row[col_XFormPinY];
 
-                dim.OneDBeginX = row[col_OneDBeginX];
-                dim.OneDBeginY = row[col_OneDBeginY];
-                dim.OneDEndX = row[col_OneDEndX];
-                dim.OneDEndY = row[col_OneDEndY];
+                shapedim.OneDBeginX = row[col_OneDBeginX];
+                shapedim.OneDBeginY = row[col_OneDBeginY];
+                shapedim.OneDEndX = row[col_OneDEndX];
+                shapedim.OneDEndY = row[col_OneDEndY];
 
-                this.WriteObject(dim);
+                list_shapedim.Add(shapedim);
 
                 n++;
             }
+
+            return list_shapedim;
         }
     }
 }
