@@ -16,8 +16,6 @@ namespace VisioPowerShell.Commands.VisioConnectionPoint
             var dic = this.Client.ConnectionPoint.GetConnectionPoints(targetshapes);
 
             this.WriteObject(dic);
-            return;
-
         }
     }
 }
