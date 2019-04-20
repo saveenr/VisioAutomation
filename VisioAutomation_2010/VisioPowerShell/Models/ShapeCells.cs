@@ -156,36 +156,5 @@ namespace VisioPowerShell.Models
             yield return new CellTuple(nameof(SRCCON.TextXFormWidth), SRCCON.TextXFormWidth, this.TextFormWidth);
         }
     }
-
-    public class ShapeDimensions
-    {
-        public double XFormAngle;
-        public double XFormHeight;
-        public double XFormLocPinX;
-        public double XFormLocPinY;
-        public double XFormPinX;
-        public double XFormPinY;
-        public double XFormWidth;
-
-        public double OneDBeginX;
-        public double OneDBeginY;
-        public double OneDEndX;
-        public double OneDEndY;
-    }
-
-    public class PageDimensions
-    {
-        public double PageHeight;
-        public double PageWidth;
-
-        public double PrintLeftMargin;
-        public double PrintRightMargin;
-
-        public double PrintTopMargin;
-        public double PrintBottomMargin;
-
-
-    }
-
 }
 
