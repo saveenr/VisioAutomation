@@ -301,7 +301,7 @@ namespace VisioScripting.Commands
             return doc;
         }
 
-        public List<IVisio.Document> FindDocuments(string namepattern, IVisio.VisDocumentTypes? doctype)
+        public List<IVisio.Document> FindDocuments(string namepattern)
         {
             var cmdtarget = this._client.GetCommandTargetApplication();
 
@@ -309,14 +309,7 @@ namespace VisioScripting.Commands
 
             // first get the full list
             var doc_list = docs.ToEnumerable().ToList();
-
-            if (doctype == null)
-            {
-                return doc_list;
-            }
-            // then filter by doc types
-            doc_list = doc_list.Where(d => doctype.Value == d.Type).ToList();
-
+            
             // second perform any name filtering
 
             if (namepattern == null)
