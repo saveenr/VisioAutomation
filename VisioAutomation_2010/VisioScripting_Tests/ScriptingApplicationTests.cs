@@ -1,4 +1,3 @@
-using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VisioAutomation_Tests.Scripting

@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioScripting;
 using GRID = VisioAutomation.Models.Layouts.Grid;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;

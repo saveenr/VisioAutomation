@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioScripting.Commands;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting

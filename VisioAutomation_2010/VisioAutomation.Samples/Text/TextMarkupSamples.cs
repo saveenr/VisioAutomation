@@ -1,5 +1,4 @@
-﻿using VA = VisioAutomation;
-using VAM = VisioAutomation.Models;
+﻿using VAM = VisioAutomation.Models;
 using VSM = VisioScripting.Models;
 
 namespace VisioAutomationSamples

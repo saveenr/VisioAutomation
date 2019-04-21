@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioScripting;
 
 namespace VisioAutomation_Tests.Scripting
 {

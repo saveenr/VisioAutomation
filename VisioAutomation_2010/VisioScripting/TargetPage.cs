@@ -1,4 +1,3 @@
-using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting

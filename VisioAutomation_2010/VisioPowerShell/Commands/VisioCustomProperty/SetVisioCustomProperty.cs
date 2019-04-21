@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using VisioAutomation.Shapes;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;

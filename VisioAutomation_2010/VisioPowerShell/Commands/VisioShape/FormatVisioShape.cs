@@ -1,4 +1,3 @@
-using VisioScripting;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioShape
