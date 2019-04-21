@@ -74,20 +74,6 @@ namespace VisioScripting
             this.View = new Commands.ViewCommands(this);
         }
 
-        public System.Reflection.Assembly GetVisioAutomationAssembly()
-        {
-            var type = typeof(VisioAutomation.ShapeSheet.Src);
-            var asm = type.Assembly;
-            return asm;
-        }
-
-        public System.Reflection.Assembly GetVisioAssembly()
-        {
-            var type = typeof(IVisio.Application);
-            var asm = type.Assembly;
-            return asm;
-        }
-
         public ClientContext ClientContext
         {
             get { return this._client_context; }
@@ -134,12 +120,15 @@ namespace VisioScripting
             {
                 if (_static_dlls==null)
                 {
-                    _static_dlls = new List<string>();
+                    // find base path
                     var type = typeof(VisioScripting.Client);
                     string path = System.IO.Path.GetDirectoryName(type.Assembly.Location);
+                    
+                    // add dlls
+                    _static_dlls = new List<string>();
                     _static_dlls.Add(System.IO.Path.Combine(path, "VisioAutomation.dll"));
                     _static_dlls.Add(System.IO.Path.Combine(path, "VisioAutomation.Models.dll"));
-                    // dlls.Add(System.IO.Path.Combine(path, "VisioPS.dll"));
+                    _static_dlls.Add(System.IO.Path.Combine(path, "VisioPS.dll"));
                     _static_dlls.Add(System.IO.Path.Combine(path, "VisioScripting.dll"));
                     _static_dlls.Add(System.IO.Path.Combine(path, "Microsoft.Msagl.dll"));
                     _static_dlls.Add(System.IO.Path.Combine(path, "GenTreeOps.dll"));

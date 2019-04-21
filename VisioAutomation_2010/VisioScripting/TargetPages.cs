@@ -14,7 +14,7 @@ namespace VisioScripting
         {
         }
 
-        public TargetPages( params IVisio.Page[] pages) : base (pages)
+        public TargetPages(params IVisio.Page[] pages) : base (pages)
         {
 
         }

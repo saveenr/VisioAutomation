@@ -17,6 +17,19 @@ namespace VisioScripting
         {
             this._items = items;
             this.Resolved = (items != null);
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    if (item == null)
+                    {
+                        string msg = string.Format("Cannot pass an array containing a NULL to {0} constructor", nameof(TargetObjects<T>));
+                        throw new System.ArgumentException(msg, nameof(items));
+                    }
+                }
+            }
+
         }
 
         protected IList<T> _get_items_safe()
