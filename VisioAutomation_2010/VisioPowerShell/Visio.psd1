@@ -47,7 +47,15 @@ CLRVersion = '4.0'
 # RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
-# RequiredAssemblies = @()
+RequiredAssemblies = @(
+"VisioAutomation.dll",
+"VisioAutomation.Models.dll",
+"VisioPS.dll",
+"VisioScripting.dll",
+"Microsoft.Msagl.dll",
+"GenTreeOps.dll"
+)
+
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 # ScriptsToProcess = @()
