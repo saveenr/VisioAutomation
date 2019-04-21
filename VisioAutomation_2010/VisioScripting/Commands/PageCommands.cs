@@ -420,7 +420,7 @@ namespace VisioScripting.Commands
             return shapes_list;
         }
 
-        public List<IVisio.Page> FindPagesInDocumentByName(TargetDocument targetdoc, string name, Models.PageType pagetype)
+        public List<IVisio.Page> FindPagesInDocument(TargetDocument targetdoc, string name)
         {
             targetdoc = targetdoc.Resolve(this._client);
 
@@ -428,45 +428,18 @@ namespace VisioScripting.Commands
             {
                 // return all pages
                 var all_pages = targetdoc.Document.Pages.ToList();
-                all_pages = _filter_pages_by_type(all_pages, pagetype);
                 return all_pages;
             }
             else
             {
                 // return the named page
                 var all_pages = targetdoc.Document.Pages.ToEnumerable();
-                var named_pages= VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] { name }, p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
-                named_pages = _filter_pages_by_type(named_pages, pagetype);
-
+                var named_pages = VisioScripting.Helpers.WildcardHelper.FilterObjectsByNames(all_pages, new[] {name},
+                    p => p.Name, true, VisioScripting.Helpers.WildcardHelper.FilterAction.Include).ToList();
                 return named_pages;
             }
         }
-
-        private List<IVisio.Page> _filter_pages_by_type(List<IVisio.Page> pages, Models.PageType pagetype)
-        {
-            if (pages == null)
-            {
-                return null;
-            }
-
-            if (pagetype == Models.PageType.Any)
-            {
-                return pages;
-            }
-            if (pagetype == Models.PageType.Foreground)
-            {
-                return pages.Where(p=>p.Background==0).ToList();
-            }
-
-            if (pagetype == Models.PageType.Background)
-            {
-                return pages.Where(p => p.Background != 0).ToList();
-            }
-
-            string msg = "Unsupported value for pagetype";
-            throw new System.ArgumentOutOfRangeException(nameof(pagetype),msg);
-        }
-
+        
         public List<IVisio.Shape> GetShapesOnPage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);

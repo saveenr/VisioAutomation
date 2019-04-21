@@ -18,16 +18,13 @@ namespace VisioPowerShell.Commands.VisioPage
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;
-
-
-        [SMA.Parameter(Mandatory = false)] public VisioScripting.Models.PageType Type = PageType.Any;
-
+        
         protected override void ProcessRecord()
         {
             if (this.ActivePage)
             {
-                var page = this.Client.Page.GetActivePage();
-                this.WriteObject(page);
+                var page_active = this.Client.Page.GetActivePage();
+                this.WriteObject(page_active);
                 return;
             }
 
@@ -47,8 +44,19 @@ namespace VisioPowerShell.Commands.VisioPage
                 return;
             }
 
-            var pages = this.Client.Page.FindPagesInDocumentByName(targetdoc, this.Name, this.Type);
-            this.WriteObject(pages, true);
+            // Then, handle the name case
+            if (this.Name!=null)
+            {
+                var pages_by_name = this.Client.Page.FindPagesInDocument(targetdoc, this.Name);
+                this.WriteObject(pages_by_name, true);
+                return;
+            }
+
+            // Finally return all the pages in the document
+            var pages_in_doc = this.Client.Page.FindPagesInDocument(targetdoc, null);
+            this.WriteObject(pages_in_doc, true);
+            return;
+
         }
     }
 }

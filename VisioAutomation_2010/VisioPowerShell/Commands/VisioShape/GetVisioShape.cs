@@ -25,8 +25,8 @@ namespace VisioPowerShell.Commands.VisioShape
             {
                 // If we arrive here then it just means get the selected shapes
                 this.WriteVerbose("Returning selected shapes ");
-                var selected_shapes = this.Client.Selection.GetSelectedShapes(VisioScripting.TargetSelection.Auto);
-                this.WriteObject(selected_shapes, true);
+                var shapes_selected = this.Client.Selection.GetSelectedShapes(VisioScripting.TargetSelection.Auto);
+                this.WriteObject(shapes_selected, true);
                 return;
             }
 
@@ -37,36 +37,24 @@ namespace VisioPowerShell.Commands.VisioShape
             // First, the ID case
             if (this.ID != null)
             {
-                var shapes = this.Client.Page.GetShapesOnPageByID(targetpage, this.ID);
-                this.WriteObject(shapes, true);
+                var shapes_by_id = this.Client.Page.GetShapesOnPageByID(targetpage, this.ID);
+                this.WriteObject(shapes_by_id, true);
                 return;
             }
 
-
-
-            // Handle the case where names were passed
+            // Then, handle the name case
             if (this.Name != null)
             {
-                var shapes = this.Client.Page.GetShapesOnPageByName(targetpage, this.Name);
-                this.WriteObject(shapes, true);
-
+                var shapes_by_name = this.Client.Page.GetShapesOnPageByName(targetpage, this.Name);
+                this.WriteObject(shapes_by_name, true);
                 return;
             }
 
-            // Handle the case where ids were passed
-            if (this.ID != null)
-            {
-                var shapes = this.Client.Page.GetShapesOnPageByID(targetpage, this.ID);
-                this.WriteObject(shapes, true);
-                return;
-            }
+            // Finally return all the shapes on the page
 
-            if (this.Page != null)
-            {
-                var shapes = this.Client.Page.GetShapesOnPage(targetpage);
-                this.WriteObject(shapes, true);
-                return;
-            }
+            var shapes_on_page = this.Client.Page.GetShapesOnPage(targetpage);
+            this.WriteObject(shapes_on_page, true);
+            return;
 
         }
     }
