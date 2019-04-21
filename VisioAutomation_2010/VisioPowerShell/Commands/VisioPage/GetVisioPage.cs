@@ -10,6 +10,9 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter ActivePage;
 
+        [SMA.Parameter(Mandatory = false)]
+        public int[] ID;
+
         [SMA.Parameter(Position=0, Mandatory = false)]
         public string Name;
 
@@ -31,6 +34,19 @@ namespace VisioPowerShell.Commands.VisioPage
             // If the active page  is not specified then work on all the pages in a document (user-specified or auto)
 
             var targetdoc = new VisioScripting.TargetDocument(this.Document);
+
+            // First, the ID case
+            if (this.ID != null)
+            {
+                var t = targetdoc.Resolve(this.Client);
+                foreach (var id in this.ID)
+                {
+                    var page = t.Document.Pages[id];
+                    this.WriteObject(page);
+                }
+                return;
+            }
+
             var pages = this.Client.Page.FindPagesInDocumentByName(targetdoc, this.Name, this.Type);
             this.WriteObject(pages, true);
         }

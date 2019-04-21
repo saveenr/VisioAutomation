@@ -12,9 +12,9 @@ namespace VisioPowerShell.Commands.VisioDocument
 
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name = null;
-
-
-        [SMA.Parameter(Mandatory = false)] public VisioPowerShell.Models.DocumentType? Type;
+        
+        [SMA.Parameter(Mandatory = false)]
+        public VisioPowerShell.Models.DocumentType? Type;
 
         protected override void ProcessRecord()
         {

@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands.VisioShape
         public string[] Name;
 
         [SMA.Parameter(Mandatory = false)]
-        public int[] Id;
+        public int[] ID;
 
         // CONTEXT:PAGE
         [SMA.Parameter(Mandatory = false)]
@@ -34,11 +34,15 @@ namespace VisioPowerShell.Commands.VisioShape
 
             var targetpage = new VisioScripting.TargetPage(this.Page);
 
-            // Name and Id cannot be used together
-            if (this.Name != null && this.Id != null)
+            // First, the ID case
+            if (this.ID != null)
             {
-                throw new System.ArgumentException("Name and ID cannot be used together");
+                var shapes = this.Client.Page.GetShapesOnPageByID(targetpage, this.ID);
+                this.WriteObject(shapes, true);
+                return;
             }
+
+
 
             // Handle the case where names were passed
             if (this.Name != null)
@@ -50,9 +54,9 @@ namespace VisioPowerShell.Commands.VisioShape
             }
 
             // Handle the case where ids were passed
-            if (this.Id != null)
+            if (this.ID != null)
             {
-                var shapes = this.Client.Page.GetShapesOnPageByID(targetpage, this.Id);
+                var shapes = this.Client.Page.GetShapesOnPageByID(targetpage, this.ID);
                 this.WriteObject(shapes, true);
                 return;
             }
