@@ -18,7 +18,6 @@ namespace VisioPowerShell.Models
         public string PageShadowOffsetY;
         public string PageShadowScaleFactor;
         public string PageShadowType;
-        public string UIVisibility;
         public string PageDrawingResizeType;
         public string PageInhibitSnap;
 
