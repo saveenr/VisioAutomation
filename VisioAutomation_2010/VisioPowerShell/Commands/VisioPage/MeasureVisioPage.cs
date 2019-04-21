@@ -15,12 +15,12 @@ namespace VisioPowerShell.Commands.VisioPage
 
         // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page[] Pages;
+        public IVisio.Page[] Page;
 
         protected override void ProcessRecord()
         {
 
-            var targetpages = new VisioScripting.TargetPages(this.Pages).Resolve(this.Client);
+            var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
 
             if (targetpages.Pages.Count < 1)
             {
