@@ -6,6 +6,9 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]
     public class GetVisioShape : VisioCmdlet
     {
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter ActiveSelection;
+
         [SMA.Parameter(Mandatory = false, Position = 0)]
         public string[] Name;
 
@@ -18,6 +21,17 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
+            if (this.ActiveSelection)
+            {
+                // If we arrive here then it just means get the selected shapes
+                this.WriteVerbose("Returning selected shapes ");
+                var selected_shapes = this.Client.Selection.GetSelectedShapes(VisioScripting.TargetSelection.Auto);
+                this.WriteObject(selected_shapes, true);
+                return;
+            }
+
+            // If the active selection is not specified then work on all the shapes in a page (user-specified or auto)
+
             var targetpage = new VisioScripting.TargetPage(this.Page);
 
             // Name and Id cannot be used together
@@ -50,10 +64,6 @@ namespace VisioPowerShell.Commands.VisioShape
                 return;
             }
 
-            // If we arrive here then it just means get the selected shapes
-            this.WriteVerbose("Returning selected shapes ");
-            var selected_shapes = this.Client.Selection.GetSelectedShapes(VisioScripting.TargetSelection.Auto);
-            this.WriteObject(selected_shapes, true);
         }
     }
 }

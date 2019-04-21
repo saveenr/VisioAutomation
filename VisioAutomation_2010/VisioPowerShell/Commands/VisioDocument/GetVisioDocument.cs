@@ -7,11 +7,12 @@ namespace VisioPowerShell.Commands.VisioDocument
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioDocument)]
     public class GetVisioDocument : VisioCmdlet
     {
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter ActiveDocument;
+
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name = null;
 
-        [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter ActiveDocument;
 
         [SMA.Parameter(Mandatory = false)] public VisioPowerShell.Models.DocumentType? Type;
 
@@ -24,6 +25,8 @@ namespace VisioPowerShell.Commands.VisioDocument
                 this.WriteObject(active_doc);
                 return;
             }
+
+            // If the active document is not specified then work on all the pages in the application
 
             var visdoctype = _get_vis_document_type(this.Type);
             var docs = this.Client.Document.FindDocuments(this.Name, visdoctype);
