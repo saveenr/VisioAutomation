@@ -26,7 +26,7 @@ namespace VisioPowerShell.Commands.VisioPage
         
         [SMA.Parameter(Mandatory = false)] 
         public string BackgroundPage = null;
-
+        
         [SMA.Parameter(Mandatory = false)]
         public VisioAutomation.Models.LayoutStyles.LayoutStyleBase LayoutStyle = null;
 
