@@ -52,7 +52,8 @@ namespace VisioScripting.Commands
 
         public void Send(Models.ShapeSendDirection dir)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
+
             var window = cmdtarget.Application.ActiveWindow;
             var selection = window.Selection;
             ArrangeCommands._send_selection(selection, dir);

@@ -20,7 +20,7 @@ namespace VisioScripting
                 return this;
             }
 
-            var cmdtarget = client.GetCommandTargetPage();
+            var cmdtarget = client.GetCommandTarget(CommandTargetFlags.RequirePage);
             var app = cmdtarget.Application;
             var window = app.ActiveWindow;
             var selection = window.Selection;

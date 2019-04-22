@@ -20,7 +20,7 @@ namespace VisioScripting
                 return this;
             }
 
-            var cmdtarget = client.GetCommandTargetPage();
+            var cmdtarget = client.GetCommandTarget(CommandTargetFlags.RequirePage);
 
             client.Output.WriteVerbose("Resolving to active page (name={0})", cmdtarget.ActivePage.Name);
 

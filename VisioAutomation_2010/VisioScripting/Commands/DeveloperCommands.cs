@@ -34,7 +34,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawScriptingDocumentation()
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
 
             var formdoc = new VADOC.Forms.FormDocument();
@@ -101,8 +101,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
-
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             var formdoc = new VADOC.Forms.FormDocument();
 
@@ -223,8 +222,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawNamespaces(IList<Type> types)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
-
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             string template = null;
             string def_linecolor = "rgb(140,140,140)";
@@ -378,7 +376,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses(IList<Type> types_)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
 
             string segoeui_fontname = "Segoe UI";

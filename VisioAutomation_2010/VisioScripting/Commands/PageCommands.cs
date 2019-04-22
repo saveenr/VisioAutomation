@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         public void SetActivePage(IVisio.Page page)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
             var app = cmdtarget.Application;
             this._client.Output.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
             var window = app.ActiveWindow;
@@ -26,8 +26,7 @@ namespace VisioScripting.Commands
         
         public IVisio.Page GetActivePage()
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
             var application = cmdtarget.Application;
             return application.ActivePage;
         }
@@ -313,7 +312,7 @@ namespace VisioScripting.Commands
 
             var pages = docpages;
 
-            var cmdtarget = this._client.GetCommandTargetPage();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequirePage);
 
             this._go_to_page(pages, flags, cmdtarget);
         }

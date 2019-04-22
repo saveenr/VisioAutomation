@@ -32,7 +32,7 @@ namespace VisioScripting
             // Otherwise perform resolution
             // Try to use the active page as the default target for the operation
 
-            var cmdtarget = client.GetCommandTargetPage();
+            var cmdtarget = client.GetCommandTarget(CommandTargetFlags.RequirePage);
 
             if (cmdtarget.ActivePage == null)
             {

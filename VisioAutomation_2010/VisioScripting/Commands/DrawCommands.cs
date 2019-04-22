@@ -15,8 +15,7 @@ namespace VisioScripting.Commands
 
         public VisioAutomation.SurfaceTarget GetActiveDrawingSurface()
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
             var surf_application = cmdtarget.Application;
             var surf_window = surf_application.ActiveWindow;
             var surf_window_subtype = surf_window.SubType;

@@ -12,7 +12,8 @@ namespace VisioScripting.Commands
 
         public IVisio.Window GetActiveWindow()
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
+
             var active_window = cmdtarget.Application.ActiveWindow;
             return active_window;
         }

@@ -45,8 +45,7 @@ namespace VisioScripting
                 return this;
             }
 
-            var cmdtarget = client.GetCommandTargetDocument();
-            var active_window = cmdtarget.Application.ActiveWindow;
+            var cmdtarget = client.GetCommandTarget(CommandTargetFlags.RequireDocument); var active_window = cmdtarget.Application.ActiveWindow;
             var selection = active_window.Selection;
             var shapes = selection.ToList();
             var targetshapes = new TargetShapes(shapes);

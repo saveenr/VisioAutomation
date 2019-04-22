@@ -46,7 +46,7 @@ namespace VisioScripting.Commands
 
         public void CloseAttachedApplication(bool force)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             var app = cmdtarget.Application;
 
@@ -118,7 +118,7 @@ namespace VisioScripting.Commands
             {
                 if (ApplicationCommands._static_visio_app_version == null)
                 {
-                    var cmdtarget = this._client.GetCommandTargetApplication();
+                    var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
                     var application = cmdtarget.Application;
                     ApplicationCommands._static_visio_app_version = VisioAutomation.Application.ApplicationHelper.GetVersion(application);
@@ -130,7 +130,8 @@ namespace VisioScripting.Commands
 
         public void MoveWindowToFront()
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
+
 
             var app = cmdtarget.Application;
 
@@ -144,7 +145,8 @@ namespace VisioScripting.Commands
 
         public System.Drawing.Rectangle GetWindowRectangle()
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
+
 
             var appwindow = cmdtarget.Application.Window;
             var rect = appwindow.GetWindowRect();
@@ -153,7 +155,8 @@ namespace VisioScripting.Commands
 
         public void SetWindowRectangle( System.Drawing.Rectangle rect)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
+
 
             var appwindow = cmdtarget.Application.Window;
             appwindow.SetWindowRect(rect);

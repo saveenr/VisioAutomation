@@ -108,8 +108,7 @@ namespace VisioScripting.Commands
         
         public void SubSelectShapes(IList<IVisio.Shape> shapes)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
             if (shapes == null)
             {
                 throw new System.ArgumentNullException(nameof(shapes));

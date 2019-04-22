@@ -60,8 +60,7 @@ namespace VisioScripting.Commands
 
         public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(TargetShapes targetshapes)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
             targetshapes = targetshapes.Resolve(this._client);
 
             if (targetshapes.Shapes.Count < 1)

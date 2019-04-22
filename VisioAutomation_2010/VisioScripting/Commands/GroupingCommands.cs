@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
 
         public void Ungroup(TargetSelection target_selection)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
             var application = cmdtarget.Application;
             application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
         }

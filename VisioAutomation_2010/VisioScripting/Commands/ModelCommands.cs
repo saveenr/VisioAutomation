@@ -152,7 +152,7 @@ namespace VisioScripting.Commands
 
         public void DrawDirectedGraphDocument(IList<GRAPH.DirectedGraphLayout> graph)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             this._client.Output.WriteVerbose("Start rendering directed graph");
             var app = cmdtarget.Application;
