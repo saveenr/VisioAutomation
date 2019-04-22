@@ -37,31 +37,29 @@ namespace VisioPowerShell.Commands.VisioPage
         protected override void ProcessRecord()
         {
             var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
-            if (this.FitContents || this.Width >0 || this.Height >0)
+
+            if (this.FitContents)
             {
-                if (this.FitContents)
+                var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderHeight);
+                this.Client.Page.ResizePageToFitContents(targetpages, bordersize);
+                this.Client.View.SetZoomToObject(VisioScripting.TargetWindow.Auto, VisioScripting.Models.ZoomToObject.Page);
+            }
+
+            if (this.Width >0 || this.Height >0)
+            {
+                var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
+
+                if (this.Width > 0)
                 {
-                    var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderHeight);
-                    this.Client.Page.ResizePageToFitContents(targetpages, bordersize);
-                    this.Client.View.SetZoomToObject(VisioScripting.TargetWindow.Auto, VisioScripting.Models.ZoomToObject.Page);
+                    page_format_cells.Width = this.Width;
                 }
 
-                if (this.Width > 0 || this.Height > 0)
+                if (this.Height > 0)
                 {
-                    var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
-
-                    if (this.Width > 0)
-                    {
-                        page_format_cells.Width = this.Width;
-                    }
-
-                    if (this.Height > 0)
-                    {
-                        page_format_cells.Height = this.Height;
-                    }
-
-                    this.Client.Page.SetPageFormatCells(targetpages, page_format_cells);
+                    page_format_cells.Height = this.Height;
                 }
+
+                this.Client.Page.SetPageFormatCells(targetpages, page_format_cells);
             }
 
 
@@ -72,7 +70,6 @@ namespace VisioPowerShell.Commands.VisioPage
 
             if (this.BackgroundPage != null)
             {
-                // TODO: SetActivePageBackground should handle targetpages
                 this.Client.Page.SetPageBackground(targetpages, this.BackgroundPage);
             }
 
