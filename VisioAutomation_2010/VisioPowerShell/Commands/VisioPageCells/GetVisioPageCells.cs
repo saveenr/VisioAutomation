@@ -13,6 +13,10 @@ namespace VisioPowerShell.Commands.VisioPageCells
         [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
+        // CONTEXT:SHAPES 
+        [SMA.Parameter(Mandatory = false)]
+        public string[] Column { get; set; }
+
         // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Page[] Page { get; set; }
@@ -27,9 +31,9 @@ namespace VisioPowerShell.Commands.VisioPageCells
             }
 
             var template = new VisioPowerShell.Models.PageCells();
-            var celldic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
-            var cellnames = celldic.Keys.ToArray();
-            var query = _CreateQuery(celldic, cellnames);
+            var dicof_name_to_cell = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
+            var cellnames = this.Column ?? dicof_name_to_cell.Keys.ToArray();
+            var query = _CreateQuery(dicof_name_to_cell, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             
             var result_dt = new System.Data.DataTable();
