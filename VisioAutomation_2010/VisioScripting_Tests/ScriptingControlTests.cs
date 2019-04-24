@@ -49,7 +49,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(0, controls2[s2].Count);
             Assert.AreEqual(0, controls2[s3].Count);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }
 }

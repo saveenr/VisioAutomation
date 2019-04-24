@@ -169,7 +169,6 @@ namespace VisioPowerShell_Tests
         {
             var cmd = new CloseVisioDocument();
             cmd.Document = documents;
-            cmd.Force = force;
             cmd.InvokeVoid();
         }
 

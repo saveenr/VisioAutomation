@@ -11,7 +11,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Developer.DrawScriptingDocumentation();
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }
 }

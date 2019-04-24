@@ -35,7 +35,7 @@ namespace VisioAutomation_Tests.Scripting
             var s2 = client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
             Assert.AreEqual(4, s2.Count);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }
 }

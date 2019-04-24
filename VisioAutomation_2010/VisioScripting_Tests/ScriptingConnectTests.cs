@@ -69,7 +69,7 @@ namespace VisioAutomation_Tests.Scripting
             var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(VisioScripting.TargetPage.Auto, options2);
             Assert.AreEqual(2, directed_edges1.Count);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -117,7 +117,7 @@ namespace VisioAutomation_Tests.Scripting
             var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(targetpage, options3);
             Assert.AreEqual(2, undirected_edges0.Count);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
 
@@ -135,7 +135,7 @@ namespace VisioAutomation_Tests.Scripting
             Master master = null;
             client.Connection.ConnectShapes(tagetpage, fromshapes, toshapes, master);
 
-            client.Document.CloseDocument(VisioScripting.TargetDocument.Auto, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }
 }

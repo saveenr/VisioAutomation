@@ -115,44 +115,28 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void CloseDocument(TargetDocument targetdoc, bool force)
+        public void CloseDocument(VisioScripting.TargetDocuments targetdocs)
         {
-            targetdoc = targetdoc.Resolve(this._client);
-
-
-            var doc = targetdoc.Document;
-            var app = doc.Application;
-
-            if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
-            {
-                this._client.Output.WriteVerbose("Not a Drawing Window", doc.Name);
-                throw new System.ArgumentException("Not a Drawing Window");
-            }
-
-            this._client.Output.WriteVerbose("Closing Document Name=\"{0}\"", doc.Name);
-            this._client.Output.WriteVerbose("Closing Document FullName=\"{0}\"", doc.FullName);
-
-            if (force)
-            {
-                using (var alert = new VisioAutomation.Application.AlertResponseScope(app, VisioAutomation.Application.AlertResponseCode.No))
-                {
-                    doc.Close();
-                }
-            }
-            else
-            {
-                doc.Close();
-            }
-        }
-
-        public void CloseDocuments(VisioScripting.TargetDocuments targetdocs, bool force)
-        {
+            bool force = true;
             targetdocs = targetdocs.Resolve(this._client);
+
             this._client.Output.WriteVerbose("Closing {0} documents", targetdocs.Documents.Count);
-            foreach (var target_doc in targetdocs.Documents)
-            {                 
-                this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", target_doc.ID, target_doc.Name);
-                target_doc.Close(force);
+
+            if (targetdocs.Documents.Count<1)
+            {
+                return;
+            }
+
+            var app = targetdocs.Documents[0].Application;
+
+            var code = VisioAutomation.Application.AlertResponseCode.No;
+            using (var alert = new VisioAutomation.Application.AlertResponseScope(app, code))
+            {
+                foreach (var doc in targetdocs.Documents)
+                {
+                    this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID, doc.Name);
+                    doc.Close(force);
+                }
             }
         }
 
@@ -160,18 +144,12 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
-            var documents = cmdtarget.Application.Documents;
-            var docs = documents.ToEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
+            var all_documents = cmdtarget.Application.Documents.ToList();
+            var drawing_docs = all_documents.Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
-            using (var alert = new VisioAutomation.Application.AlertResponseScope(cmdtarget.Application, VisioAutomation.Application.AlertResponseCode.No))
-            {
-                foreach (var doc in docs)
-                {
-                    this._client.Output.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-                    this._client.Output.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
-                    doc.Close();
-                }
-            }
+            var targetdocs = new VisioScripting.TargetDocuments(drawing_docs);
+
+            this.CloseDocument(targetdocs);
         }
 
         public IVisio.Document NewDocument()
