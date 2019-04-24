@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\VisioShape\MeasureVisioShape.cs" />
-    <Compile Include="Models\DocumentType.cs" />
     <Compile Include="Commands\VisioShape\LockVisioShape.cs" />
     <Compile Include="Commands\VisioShape\UnlockVisioShape.cs" />
     <Compile Include="Commands\VisioPageCells\GetVisioPageCells.cs" />
