@@ -20,14 +20,20 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
         protected override void ProcessRecord()
         {
-            var target_shapes = this.Shape ?? this.Client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
+            var target_shapes = new VisioScripting.TargetShapes(this.Shape).Resolve(this.Client);
+
+            if (target_shapes.Shapes.Count < 1)
+            {
+                return;
+            }
 
             var template = new VisioPowerShell.Models.ShapeCells();
+
             var dicof_name_to_cell = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
             var arrayof_cellnames = dicof_name_to_cell.Keys.ToArray();
             var query = _create_query(dicof_name_to_cell, arrayof_cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            var target_shapeids = target_shapes.Select(s => s.ID).ToList();
+            var target_shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
             var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
 
             // Annotate the returned datatable to disambiguate rows

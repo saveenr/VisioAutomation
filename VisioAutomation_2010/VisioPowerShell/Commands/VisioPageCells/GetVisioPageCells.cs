@@ -19,7 +19,12 @@ namespace VisioPowerShell.Commands.VisioPageCells
 
         protected override void ProcessRecord()
         {
-            var targetpages = new VisioScripting.TargetPages(this.Page);
+            var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
+
+            if (targetpages.Pages.Count < 1)
+            {
+                return;
+            }
 
             var template = new VisioPowerShell.Models.PageCells();
             var celldic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
