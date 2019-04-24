@@ -1,4 +1,4 @@
-﻿namespace VisioScripting.Models
+﻿namespace VisioAutomation.Models.Data
 {
     public class XmlModel
     {

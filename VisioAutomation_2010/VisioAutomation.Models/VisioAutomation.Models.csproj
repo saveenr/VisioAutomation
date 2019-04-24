@@ -44,12 +44,16 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Color\ColorHsl.cs" />
     <Compile Include="Color\ColorRgb.cs" />
     <Compile Include="ConnectorType.cs" />
+    <Compile Include="Data\DataTableModel.cs" />
+    <Compile Include="Data\XmlModel.cs" />
     <Compile Include="Dom\RenderPerformanceScope.cs" />
     <Compile Include="Dom\RenderPerforfmanceSettings.cs" />
     <Compile Include="Geometry\ArcSegment.cs" />

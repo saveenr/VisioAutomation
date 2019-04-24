@@ -92,7 +92,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DrawDataTableModel(VisioScripting.TargetPage targetpage, Models.DataTableModel dt_model)
+        public void DrawDataTableModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.DataTableModel dt_model)
         {
             targetpage = targetpage.Resolve(this._client);
 
@@ -102,7 +102,7 @@ namespace VisioScripting.Commands
             var shapes = this._client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt_model.DataTable, widths, heights, spacing);
         }
 
-        public void DrawXmlModel(VisioScripting.TargetPage targetpage, Models.XmlModel xmlmodel)
+        public void DrawXmlModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.XmlModel xmlmodel)
         {
             targetpage = targetpage.Resolve(this._client);
 

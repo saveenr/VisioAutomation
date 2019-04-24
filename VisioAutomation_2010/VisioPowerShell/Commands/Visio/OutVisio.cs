@@ -16,10 +16,10 @@ namespace VisioPowerShell.Commands.Visio
         public List<VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
 
         [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioScripting.Models.DataTableModel DataTableModel { get; set; }
+        public VisioAutomation.Models.Data.DataTableModel DataTableModel { get; set; }
 
         [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioScripting.Models.XmlModel XmlModel;
+        public VisioAutomation.Models.Data.XmlModel XmlModel;
 
         protected override void ProcessRecord()
         {
