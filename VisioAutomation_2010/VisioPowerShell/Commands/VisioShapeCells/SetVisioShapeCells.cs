@@ -9,8 +9,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
     {
         [SMA.Parameter(Mandatory = true, Position = 0)]
         public VisioPowerShell.Models.ShapeCells[] Cells { get; set; }
-
-
+        
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
@@ -23,24 +22,19 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
         protected override void ProcessRecord()
         {
-            if (this.Cells == null)
+           
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape).Resolve(this.Client);
+
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
-            if (this.Cells.Length < 1)
+            if (this.Cells == null || this.Cells.Length < 1)
             {
                 return;
             }
 
-            var target_shapes = this.Shape ?? this.Client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
-
-            if (target_shapes.Count < 1)
-            {
-                return;
-            }
-
-            var targetshapes = new VisioScripting.TargetShapes(target_shapes).Resolve(this.Client);
             var targetshapeids = targetshapes.ToShapeIDs();
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();

@@ -22,17 +22,17 @@ namespace VisioPowerShell.Commands.VisioPageCells
 
         protected override void ProcessRecord()
         {
-            if (this.Cells == null)
-            {
-                return;
-            }
-
-            if (this.Cells.Length < 1)
-            {
-                return;
-            }
-
             var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
+
+            if (targetpages.Pages.Count < 1)
+            {
+                return;
+            }
+
+            if (this.Cells == null || this.Cells.Length < 1)
+            {
+                return;
+            }
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
