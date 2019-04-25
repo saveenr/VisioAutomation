@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
         
         [SMA.Parameter(Mandatory = false)]
-        public string[] Column { get; set; }
+        public string[] Cell { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
@@ -34,9 +34,9 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
             var dicof_name_to_cell = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
 
-            var desired_columns = this.Column ?? dicof_name_to_cell.Keys.ToArray();
+            var desired_cells = this.Cell ?? dicof_name_to_cell.Keys.ToArray();
 
-            var query = _create_query(dicof_name_to_cell, desired_columns);
+            var query = _create_query(dicof_name_to_cell, desired_cells);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
             var datatable = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
