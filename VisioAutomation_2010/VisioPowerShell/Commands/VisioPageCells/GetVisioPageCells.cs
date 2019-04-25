@@ -11,10 +11,10 @@ namespace VisioPowerShell.Commands.VisioPageCells
     {
 
         [SMA.Parameter(Mandatory = false)]
-        public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
+        public string[] Column { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public string[] Column { get; set; }
+        public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
         // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]
@@ -35,25 +35,25 @@ namespace VisioPowerShell.Commands.VisioPageCells
             var query = _create_query(dicof_name_to_cell, cellnames);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             
-            var result_dt = new System.Data.DataTable();
+            var datatable = new System.Data.DataTable();
 
             foreach (var targetpage in targetpages.Pages)
             {
                 var shapesheet = targetpage.PageSheet;
                 var shapeids = new List<int> { shapesheet.ID };
-                var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
-                result_dt.Merge(dt);
+                var temp_datatable = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
+                datatable.Merge(temp_datatable);
             }
 
             // Annotate the returned datatable to disambiguate rows
-            var pageindex_col = result_dt.Columns.Add("PageIndex", typeof(int));
+            var pageindex_col = datatable.Columns.Add("PageIndex", typeof(int));
             pageindex_col.SetOrdinal(0);
             foreach (int row_index in Enumerable.Range(0,targetpages.Pages.Count))
             {
-                result_dt.Rows[row_index][pageindex_col.ColumnName] = targetpages.Pages[row_index].Index;
+                datatable.Rows[row_index][pageindex_col.ColumnName] = targetpages.Pages[row_index].Index;
             }
 
-            this.WriteObject(result_dt);
+            this.WriteObject(datatable);
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _create_query(

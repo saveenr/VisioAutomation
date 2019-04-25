@@ -10,12 +10,12 @@ namespace VisioPowerShell.Commands.VisioShapeCells
     public class GetVisioShapeCells : VisioCmdlet
     {
 
-
-        [SMA.Parameter(Mandatory = false)] 
-        public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
-
+        
         [SMA.Parameter(Mandatory = false)]
         public string[] Column { get; set; }
+
+        [SMA.Parameter(Mandatory = false)]
+        public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
         // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
@@ -39,18 +39,18 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             var query = _create_query(dicof_name_to_cell, desired_columns);
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
-            var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
+            var datatable = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
 
             // Annotate the returned datatable to disambiguate rows
-            var shapeid_col = dt.Columns.Add("ShapeID", typeof(int));
+            var shapeid_col = datatable.Columns.Add("ShapeID", typeof(int));
             shapeid_col.SetOrdinal(0);
 
             foreach (int row_index in Enumerable.Range(0,shapeids.Count))
             {
-                dt.Rows[row_index][shapeid_col.ColumnName] = shapeids[row_index];
+                datatable.Rows[row_index][shapeid_col.ColumnName] = shapeids[row_index];
             }
 
-            this.WriteObject(dt);
+            this.WriteObject(datatable);
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _create_query(
