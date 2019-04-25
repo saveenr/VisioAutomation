@@ -9,7 +9,7 @@ namespace VisioScripting
         {
         }
 
-        public TargetSelection(IVisio.Selection selection) : base(selection)
+        private TargetSelection(IVisio.Selection selection) : base(selection)
         {
         }
 
