@@ -40,7 +40,7 @@ namespace VisioPowerShell_Tests
 
         public List<IVisio.Shape> Cmd_New_VisioShape(
             IVisio.Master[] masters, 
-            double[] points)
+            VisioAutomation.Geometry.Point[] points)
         {
             var cmd = new NewVisioShape();
             cmd.Masters = masters;
@@ -117,7 +117,7 @@ namespace VisioPowerShell_Tests
 
         public IVisio.Shape Cmd_New_VisioShape(
             VisioPowerShell.Models.ShapeType type, 
-            double[] points)
+            VisioAutomation.Geometry.Point[] points)
         {
             var cmd = new NewVisioShape();
             cmd.Type = type;

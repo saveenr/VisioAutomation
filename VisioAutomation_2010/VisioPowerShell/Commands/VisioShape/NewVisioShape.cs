@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.VisioShape
         public Models.ShapeType Type { get; set; }
 
         [SMA.Parameter(Position = 1, Mandatory = true)]
-        public double [] Points { get; set; }
+        public VisioAutomation.Geometry.Point[] Points { get; set; }
 
         [SMA.Parameter(ParameterSetName = "masters", Mandatory = false)]
         public string[] Names { get; set; }
@@ -40,7 +40,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
         private void _draw_shape()
         {
-            var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
+            var points = this.Points;
 
             _check_points_for_shape_type(points);
 
@@ -78,7 +78,7 @@ namespace VisioPowerShell.Commands.VisioShape
             }
         }
 
-        private void _check_points_for_shape_type(List<VisioAutomation.Geometry.Point> points)
+        private void _check_points_for_shape_type(IList<VisioAutomation.Geometry.Point> points)
         {
             if (this.Type == Models.ShapeType.Rectangle || this.Type == Models.ShapeType.Line || this.Type == Models.ShapeType.Oval)
             {
@@ -108,7 +108,7 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
-            var points = VisioAutomation.Geometry.Point.FromDoubles(this.Points).ToList();
+            var points = this.Points;
 
             var shapeids = this.Client.Master.DropMasters(VisioScripting.TargetPage.Auto, this.Masters, points);
 
