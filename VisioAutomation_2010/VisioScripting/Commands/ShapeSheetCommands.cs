@@ -12,21 +12,6 @@ namespace VisioScripting.Commands
 
         }
 
-        internal void __SetCells(TargetShapes targetshapes, VASS.CellGroups.CellGroup cellgroup, IVisio.Page page)
-        {
-            targetshapes = targetshapes.Resolve(this._client);
-            var targetshapeids = targetshapes.ToShapeIDs();
-            var writer = new VASS.Writers.SidSrcWriter();
-
-            foreach (var shapeid in targetshapeids)
-            {
-                var cells_mr = (VASS.CellGroups.CellGroup)cellgroup;
-                writer.SetValues((short)shapeid, cells_mr, 0);
-            }
-
-            writer.Commit(page, VASS.CellValueType.Formula);
-        }
-
         public void SetShapeName(TargetShapes targetshapes, IList<string> names)
         {
             if (names == null || names.Count < 1)
