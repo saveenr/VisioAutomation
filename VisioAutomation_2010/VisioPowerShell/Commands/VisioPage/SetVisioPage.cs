@@ -11,7 +11,6 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.Parameter(Position = 0, Mandatory = true)]
         [SMA.ValidateNotNull]
         public IVisio.Page Page  { get; set; }
-
         
         protected override void ProcessRecord()
         {
