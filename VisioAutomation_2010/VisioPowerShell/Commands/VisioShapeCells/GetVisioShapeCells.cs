@@ -14,7 +14,6 @@ namespace VisioPowerShell.Commands.VisioShapeCells
         [SMA.Parameter(Mandatory = false)] 
         public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
 
-        // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
         public string[] Column { get; set; }
 
