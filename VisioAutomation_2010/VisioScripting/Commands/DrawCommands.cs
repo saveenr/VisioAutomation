@@ -207,14 +207,5 @@ namespace VisioScripting.Commands
 
             return duplicated_shapes;
         }
-
-        public List<IVisio.Shape> GetAllShapesOnActiveDrawingSurface()
-        {
-            var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var shapes = surface.Shapes;
-            var list = new List<IVisio.Shape>();
-            list.AddRange(shapes.ToEnumerable());
-            return list;
-        }
     }
 }
