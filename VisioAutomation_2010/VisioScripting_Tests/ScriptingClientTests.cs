@@ -42,13 +42,13 @@ namespace VisioAutomation_Tests.Scripting
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto));
 
-            client.Draw.DrawRectangle(0, 0, 1, 1);
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 0, 0, 1, 1);
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto));
             Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto, 1));
             Assert.IsFalse(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto, 2));
 
-            client.Draw.DrawRectangle(2, 2, 3, 3);
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 2, 2, 3, 3);
             client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
             Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsTrue(client.Selection.ContainsShapes(VisioScripting.TargetSelection.Auto));

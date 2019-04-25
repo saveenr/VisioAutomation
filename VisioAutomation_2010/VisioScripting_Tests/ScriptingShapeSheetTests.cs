@@ -12,8 +12,10 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument();
-            client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Draw.DrawRectangle(1, 1, 2, 2);
+
+
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 0, 0, 1, 1);
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 2, 2);
 
             var shapes = client.Page.GetShapesOnPage(VisioScripting.TargetPage.Auto);
             var shapeids = shapes.Select(s => s.ID16).ToList();

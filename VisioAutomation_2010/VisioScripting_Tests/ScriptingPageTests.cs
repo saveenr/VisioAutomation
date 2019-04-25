@@ -65,7 +65,9 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument(page_size);
-            client.Draw.DrawRectangle(0, 0, 1, 1);
+
+
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 0, 0, 1, 1);
 
             client.Page.DuplicatePage(VisioScripting.TargetPage.Auto);
             doc.Close(true);
@@ -85,7 +87,8 @@ namespace VisioAutomation_Tests.Scripting
             doc_2_dest.Title = "DEST";
             doc_1_src.Title = "SRC";
 
-            client.Draw.DrawRectangle(0, 0, 1, 1);
+
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 0, 0, 1, 1);
 
             var dupe_page = client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Auto, doc_2_dest);
 
