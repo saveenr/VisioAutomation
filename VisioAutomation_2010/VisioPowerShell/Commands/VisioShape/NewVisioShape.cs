@@ -145,7 +145,8 @@ namespace VisioPowerShell.Commands.VisioShape
                     shape_cells.Apply(writer, (short)shapeid);
                 }
 
-                var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
+                var targetpage = VisioScripting.TargetPage.Auto.Resolve(this.Client);
+                var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
 
                 using (var undoscope = this.Client.Undo.NewUndoScope(nameof(NewVisioShape) +":CommitCells"))
                 {

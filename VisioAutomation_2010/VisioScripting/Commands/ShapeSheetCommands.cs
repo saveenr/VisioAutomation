@@ -61,13 +61,6 @@ namespace VisioScripting.Commands
             }
         }
         
-        public VisioAutomation.SurfaceTarget GetShapeSheetSurface()
-        {
-            var drawing_surface = this._client.Draw.GetActiveDrawingSurface();
-            var shapesheet_surface = drawing_surface;
-            return shapesheet_surface;
-        }
-        
         public Models.ShapeSheetWriter GetWriterForPage(TargetPage targetpage)
         {
             targetpage = targetpage.Resolve(this._client);

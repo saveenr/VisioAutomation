@@ -33,14 +33,14 @@ namespace VisioPowerShell.Commands.VisioPageCells
             var dicof_name_to_cell = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
             var desired_cells = this.Cell ?? dicof_name_to_cell.Keys.ToArray();
             var query = _create_query(dicof_name_to_cell, desired_cells);
-            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             
             var datatable = new System.Data.DataTable();
 
-            foreach (var targetpage in targetpages.Pages)
+            foreach (var page in targetpages.Pages)
             {
-                var shapesheet = targetpage.PageSheet;
+                var shapesheet = page.PageSheet;
                 var shapeids = new List<int> { shapesheet.ID };
+                var surface = new VisioAutomation.SurfaceTarget(page);
                 var temp_datatable = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
                 datatable.Merge(temp_datatable);
             }

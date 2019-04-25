@@ -54,7 +54,8 @@ namespace VisioPowerShell.Commands.VisioShapeCells
                 shape_cells.Apply(writer, (short)shapeid);
             }
 
-            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
+            var page = targetshapes.Shapes[0].ContainingPage;
+            var surface = new VisioAutomation.SurfaceTarget(page);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);

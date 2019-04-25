@@ -12,35 +12,6 @@ namespace VisioScripting.Commands
         {
 
         }
-
-        public VisioAutomation.SurfaceTarget GetActiveDrawingSurface()
-        {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
-            var surf_application = cmdtarget.Application;
-            var surf_window = surf_application.ActiveWindow;
-            var surf_window_subtype = surf_window.SubType;
-
-            // TODO: Revisit the logic here
-            // TODO: And what about a selected shape as a surface?
-
-            this._client.Output.WriteVerbose("Window SubType: {0}", surf_window_subtype);
-            if (surf_window_subtype == 64)
-            {
-                this._client.Output.WriteVerbose("Window = Master Editing");
-                var surf_master = (IVisio.Master)surf_window.Master;
-                var surface = new VisioAutomation.SurfaceTarget(surf_master);
-                return surface;
-
-            }
-            else
-            {
-                this._client.Output.WriteVerbose("Window = Page ");
-                var surf_Page = surf_application.ActivePage;
-                var surface = new VisioAutomation.SurfaceTarget(surf_Page);
-                return surface;
-            }
-        }
-
         public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
         {
             var rect = new VisioAutomation.Geometry.Rectangle(x0, y0, x1, y1);
