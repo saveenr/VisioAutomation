@@ -49,8 +49,12 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
             foreach (int i in Enumerable.Range(0, targetshapeids.Count))
             {
-                var shapeid = targetshapeids[i];
-                var shape_cells = this.Cells[i % this.Cells.Length];
+                int shapeid_index = i;
+                int cells_index = i % this.Cells.Length;
+
+                var shapeid = targetshapeids[shapeid_index];
+                var shape_cells = this.Cells[cells_index];
+
                 shape_cells.Apply(writer, (short)shapeid);
             }
 
