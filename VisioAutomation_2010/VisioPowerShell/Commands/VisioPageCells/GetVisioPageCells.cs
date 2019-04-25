@@ -46,11 +46,13 @@ namespace VisioPowerShell.Commands.VisioPageCells
             }
 
             // Annotate the returned datatable to disambiguate rows
-            var pageindex_col = datatable.Columns.Add("PageID", typeof(int));
-            pageindex_col.SetOrdinal(0);
+            var pageid_col = datatable.Columns.Add("PageID", typeof(int));
+            int pageid_colindex = 0;
+            pageid_col.SetOrdinal(pageid_colindex);
             foreach (int row_index in Enumerable.Range(0,targetpages.Pages.Count))
             {
-                datatable.Rows[row_index][pageindex_col.ColumnName] = targetpages.Pages[row_index].ID;
+                var page = targetpages.Pages[row_index];
+                datatable.Rows[row_index][pageid_colindex] = page.ID;
             }
 
             this.WriteObject(datatable);

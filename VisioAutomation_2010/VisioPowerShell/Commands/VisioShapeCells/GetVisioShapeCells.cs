@@ -43,11 +43,12 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
             // Annotate the returned datatable to disambiguate rows
             var shapeid_col = datatable.Columns.Add("ShapeID", typeof(int));
-            shapeid_col.SetOrdinal(0);
-
+            int shapeid_colindex = 0;
+            shapeid_col.SetOrdinal(shapeid_colindex);
             foreach (int row_index in Enumerable.Range(0,shapeids.Count))
             {
-                datatable.Rows[row_index][shapeid_col.ColumnName] = shapeids[row_index];
+                datatable.Rows[row_index][shapeid_colindex] = shapeids[row_index];
+                datatable.Rows[row_index][shapeid_colindex] = shapeids[row_index];
             }
 
             this.WriteObject(datatable);
