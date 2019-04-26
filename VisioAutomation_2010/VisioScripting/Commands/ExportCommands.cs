@@ -1,5 +1,3 @@
-using System.Linq;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SXL = System.Xml.Linq;
 
@@ -14,52 +12,16 @@ namespace VisioScripting.Commands
 
         public void ExportPageToImage(TargetPage targetpage, string filename)
         {
-            targetpage = targetpage.Resolve(this._client);
-
             if (filename == null)
             {
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
+            targetpage = targetpage.Resolve(this._client);
+            
             targetpage.Page.Export(filename);
         }
 
-        public void  ExportPagesToImages(TargetDocument targetdoc, string filename)
-        {
-            var output_folder = System.IO.Path.GetDirectoryName(filename);
-
-            if (!System.IO.Directory.Exists(output_folder))
-            {
-                this._client.Output.WriteError(" Folder {0} does not exist", output_folder);
-                return;
-            }
-
-            targetdoc = targetdoc.Resolve(this._client);
-
-            if (filename == null)
-            {
-                throw new System.ArgumentNullException(nameof(filename));
-            }
-
-            var pages = targetdoc.Document.Pages.ToList();
-
-            var ext = System.IO.Path.GetExtension(filename);
-            string filename_base = System.IO.Path.GetFileNameWithoutExtension(filename);
-
-            foreach (int page_index in Enumerable.Range(0,pages.Count))
-            {
-                var page = pages[page_index];
-                string bkgnd_tag = "";
-                if (page.Background != 0)
-                {
-                    bkgnd_tag = "(Background)";
-                }
-                string page_filname = string.Format("{0}_{1}_{2}_{3}{4}", filename_base, page_index, page.Name, bkgnd_tag, ext);
-
-                page_filname = System.IO.Path.Combine(output_folder, page_filname);
-                page.Export(page_filname);
-            }
-        }
 
         public void ExportSelectionToImage(TargetSelection targetselection, string filename)
         {

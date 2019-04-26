@@ -1,4 +1,5 @@
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
@@ -9,21 +10,13 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.ValidateNotNullOrEmpty]
         public string Filename;
 
-
-        //TODO: Instead of this parameter just identify all the pages explicitly
-        [SMA.Parameter(Position = 1, Mandatory = false)]
-        public SMA.SwitchParameter AllPages;
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page Page;
 
         protected override void ProcessRecord()
         {
-            if (this.AllPages)
-            {
-                this.Client.Export.ExportPagesToImages(VisioScripting.TargetDocument.Auto, this.Filename);
-            }
-            else
-            {
-                this.Client.Export.ExportPageToImage(VisioScripting.TargetPage.Auto, this.Filename);
-            }
+            var targetpage = new VisioScripting.TargetPage(this.Page);
+            this.Client.Export.ExportPageToImage(targetpage, this.Filename);
         }
     }
 }
