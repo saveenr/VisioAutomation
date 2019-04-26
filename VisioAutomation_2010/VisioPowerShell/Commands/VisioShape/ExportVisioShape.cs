@@ -15,17 +15,24 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
 
-        private static HashSet<string> _static_html_extensions;
-
-        //  CONTEXT:SHAPES - does not correctly use shape context
+        // PSUEDOCONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
+
+        private static HashSet<string> _static_html_extensions = new HashSet<string> { ".html", ".htm", ".xhtml" };
 
         protected override void ProcessRecord()
         {
-            if (this.Filename == null)
+            string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
+
+            if (this.Shape != null)
             {
-                throw new System.ArgumentNullException(nameof(this.Filename));
+                if (this.Shape.Length < 1)
+                {
+                    throw new System.ArgumentOutOfRangeException(nameof(this.Shape), "Shapes parameter must contain at least one shape");
+                }
+
+                this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, this.Shape);
             }
 
             if (!System.IO.File.Exists(this.Filename))
@@ -41,27 +48,6 @@ namespace VisioPowerShell.Commands.VisioShape
                     var exc = new System.ArgumentException(msg);
                     throw exc;
                 }
-            }
-
-            if (_static_html_extensions == null)
-            {
-                _static_html_extensions = new HashSet<string> { ".html", ".htm", ".xhtml" };
-            }
-
-            string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
-
-            if (this.Shapes == null)
-            {
-                // use the active selection
-            }
-            else
-            {
-                if (this.Shapes.Length < 1)
-                {
-                    throw new System.ArgumentOutOfRangeException(nameof(this.Shapes), "Shapes parameter must contain at least one shape");
-                }
-
-                this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, this.Shapes);
             }
 
             if (_static_html_extensions.Contains(ext))
