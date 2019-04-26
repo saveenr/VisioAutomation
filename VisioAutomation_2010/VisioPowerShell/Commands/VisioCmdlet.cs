@@ -1,4 +1,5 @@
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
@@ -49,5 +50,22 @@ namespace VisioPowerShell.Commands
             string s = string.Format(fmt, items);
             base.WriteVerbose(s);
         }
+
+        protected void HandlePsuedoContext(IVisio.Shape[] shapes)
+        {
+            if (shapes == null)
+            {
+                // do nothing - use the active selection
+                return;
+            }
+
+            if (shapes.Length < 1)
+            {
+                throw new System.ArgumentOutOfRangeException("Shapes parameter must contain at least one shape");
+            }
+
+            this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, shapes);
+        }
+
     }
 }

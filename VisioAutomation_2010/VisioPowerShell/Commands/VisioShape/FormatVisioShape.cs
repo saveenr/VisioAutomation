@@ -1,4 +1,5 @@
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioShape
 {
@@ -26,8 +27,14 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false)]
         public VisioScripting.Models.AlignmentHorizontal? AlignHorizontal = null;
 
+        // PSUEDOCONTEXT:SHAPES
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shape;
+
         protected override void ProcessRecord()
         {
+            this.HandlePsuedoContext(this.Shape);
+
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
                 this.Client.Arrange.Nudge(VisioScripting.TargetSelection.Auto, this.NudgeX, this.NudgeY);

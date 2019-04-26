@@ -23,18 +23,10 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
+            this.HandlePsuedoContext(this.Shape);
+
             string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
-
-            if (this.Shape != null)
-            {
-                if (this.Shape.Length < 1)
-                {
-                    throw new System.ArgumentOutOfRangeException(nameof(this.Shape), "Shapes parameter must contain at least one shape");
-                }
-
-                this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, this.Shape);
-            }
-
+            
             if (!System.IO.File.Exists(this.Filename))
             {
                 this.WriteVerbose("File already exists");
