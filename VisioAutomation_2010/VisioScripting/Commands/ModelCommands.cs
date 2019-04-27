@@ -172,7 +172,7 @@ namespace VisioScripting.Commands
                 var options = new GRAPH.MsaglLayoutOptions();
                 options.UseDynamicConnectors = false;
 
-                // if this is the first page to drawe
+                // if this is the first page to draw
                 // then reuse the initial empty page in the document
                 // otherwise, create a new page.
                 var page = num_pages_created == 0 ? app.ActivePage : doc_pages.Add();
