@@ -33,7 +33,8 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            this.HandlePseudoContext(this.Shape);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+            targetshapes.ResolveToSelection(this.Client);
 
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {

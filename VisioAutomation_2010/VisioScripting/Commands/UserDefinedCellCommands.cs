@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCellsAsShapeDictionary(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
             var listof_udcelldic = GetUserDefinedCells(targetshapes, cvt);
 
             var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
@@ -32,7 +32,7 @@ namespace VisioScripting.Commands
 
         public List<VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -53,7 +53,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -67,7 +67,7 @@ namespace VisioScripting.Commands
        
         public void DeleteUserDefinedCellsByName(TargetShapes targetshapes, string name)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -95,7 +95,7 @@ namespace VisioScripting.Commands
 
         public void SetUserDefinedCell(TargetShapes targetshapes, string name, VA.Shapes.UserDefinedCellCells udcellcells)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

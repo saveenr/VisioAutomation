@@ -17,7 +17,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(Nudge)))
             {
@@ -61,7 +61,7 @@ namespace VisioScripting.Commands
 
         public void AlignHorizontal(TargetSelection targetselection, Models.AlignmentHorizontal align)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             IVisio.VisHorizontalAlignTypes halign;
             var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
@@ -90,7 +90,7 @@ namespace VisioScripting.Commands
 
         public void AlignVertical(TargetSelection targetselection, Models.AlignmentVertical align)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             // Set the align enums
             var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
@@ -120,7 +120,7 @@ namespace VisioScripting.Commands
 
         public void DistributenOnAxis(TargetShapes targetshapes, Models.Axis axis, double spacing)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -138,7 +138,7 @@ namespace VisioScripting.Commands
 
         public void DistributeOnAxis(VisioScripting.TargetSelection targetselection, Models.Axis axis)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             if (targetselection.Selection.Count < 2)
             {
@@ -167,7 +167,7 @@ namespace VisioScripting.Commands
 
         public void DistributeHorizontal(TargetSelection targetselection, Models.AlignmentHorizontal halign)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             if (targetselection.Selection.Count < 2)
             {
@@ -199,7 +199,7 @@ namespace VisioScripting.Commands
 
         public void DistributeVertical(TargetSelection targetselection, Models.AlignmentVertical valign)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             if (targetselection.Selection.Count < 2)
             {

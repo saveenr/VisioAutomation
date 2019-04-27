@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         public IDictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>> GetConnectionPoints(TargetShapes targetshapes)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count <1)
             {
@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
             string fy,
             Models.ConnectionPointType type)
         {
-            targets = targets.Resolve(this._client);
+            targets = targets.ResolveToShapes(this._client);
 
             if (targets.Shapes.Count < 1)
             {
@@ -72,7 +72,7 @@ namespace VisioScripting.Commands
 
         public void DeleteConnectionPointAtIndex(TargetShapes targetshapes, int index)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

@@ -20,7 +20,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -48,14 +48,14 @@ namespace VisioScripting.Commands
         
         public Models.ShapeSheetWriter GetWriterForPage(TargetPage targetpage)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var writer = new Models.ShapeSheetWriter(this._client, targetpage.Page);
             return writer;
         }
 
         public Models.ShapeSheetReader GetReaderForPage(TargetPage targetpage)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var reader = new Models.ShapeSheetReader(this._client, targetpage.Page);
             return reader;
         }

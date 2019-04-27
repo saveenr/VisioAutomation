@@ -12,7 +12,7 @@ namespace VisioScripting
         {
         }
 
-        public TargetWindow Resolve(VisioScripting.Client client)
+        public TargetWindow ResolveToWindow(VisioScripting.Client client)
         {
             if (this.Resolved)
             {

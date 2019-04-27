@@ -17,7 +17,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(filename));
             }
 
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             
             targetpage.Page.Export(filename);
         }
@@ -25,7 +25,7 @@ namespace VisioScripting.Commands
 
         public void ExportSelectionToImage(TargetSelection targetselection, string filename)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             if (filename == null)
             {
@@ -37,7 +37,7 @@ namespace VisioScripting.Commands
 
         public void ExportSelectionToHtml(TargetSelection targetselection, string filename)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             if (filename == null)
             {

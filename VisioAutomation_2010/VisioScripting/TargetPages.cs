@@ -20,7 +20,7 @@ namespace VisioScripting
         }
 
 
-        public TargetPages Resolve(VisioScripting.Client client)
+        public TargetPages ResolveToPages(VisioScripting.Client client)
         {
             // Handle the case where the object is already resolved
 

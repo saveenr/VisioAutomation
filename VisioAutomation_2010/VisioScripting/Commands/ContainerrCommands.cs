@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropContainerMaster(TargetPage targetpage, IVisio.Master master)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var page = targetpage.Page;
             var app = page.Application;
             var window = app.ActiveWindow;
@@ -26,7 +26,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropContainer(TargetPage targetpage, string master)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var page = targetpage.Page;
             var app = page.Application;
             var window = app.ActiveWindow;

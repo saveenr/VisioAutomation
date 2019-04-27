@@ -40,5 +40,10 @@ namespace VisioScripting
             }
             return this._items;
         }
+
+        protected IList<T> _get_items_unsafe()
+        {
+            return this._items;
+        }
     }
 }

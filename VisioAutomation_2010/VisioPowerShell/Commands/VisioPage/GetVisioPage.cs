@@ -35,7 +35,7 @@ namespace VisioPowerShell.Commands.VisioPage
             // First, the ID case
             if (this.ID != null)
             {
-                var t = targetdoc.Resolve(this.Client);
+                var t = targetdoc.ResolveToDocument(this.Client);
                 foreach (var id in this.ID)
                 {
                     var page = t.Document.Pages[id];

@@ -23,7 +23,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
         protected override void ProcessRecord()
         {
-            var target_shapes = new VisioScripting.TargetShapes(this.Shape).Resolve(this.Client);
+            var target_shapes = new VisioScripting.TargetShapes(this.Shape).ResolveToShapes(this.Client);
 
             if (target_shapes.Shapes.Count < 1)
             {

@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Layer FindLayersOnPageByName(TargetPage targetpage, string name)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
 
             if (name == null)
@@ -44,7 +44,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Layer> GetLayersOnPage(TargetPage targetpage)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             return targetpage.Page.Layers.ToList();
         }
     }

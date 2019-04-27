@@ -20,7 +20,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, VisioAutomation.Geometry.Rectangle r)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawRectangle)))
             {
@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DrawLine(VisioScripting.TargetPage targetpage, VisioAutomation.Geometry.Point p0, VisioAutomation.Geometry.Point p1)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawLine)))
             {
@@ -50,7 +50,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DrawOval(VisioScripting.TargetPage targetpage, VisioAutomation.Geometry.Rectangle rect)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
@@ -68,7 +68,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DrawBezier(VisioScripting.TargetPage targetpage, IEnumerable<VisioAutomation.Geometry.Point> points)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
@@ -80,7 +80,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DrawPolyLine(VisioScripting.TargetPage targetpage, IList<VisioAutomation.Geometry.Point> points)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPolyLine)))
             {
@@ -97,7 +97,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(n));
             }
 
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             // TODO: Add ability to duplicate all the selected shapes, not just the first one
             // this dupicates exactly 1 shape N - times what it

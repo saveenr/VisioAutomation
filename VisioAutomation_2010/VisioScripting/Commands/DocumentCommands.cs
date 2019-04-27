@@ -118,7 +118,7 @@ namespace VisioScripting.Commands
         public void CloseDocument(VisioScripting.TargetDocuments targetdocs)
         {
             bool force = true;
-            targetdocs = targetdocs.Resolve(this._client);
+            targetdocs = targetdocs.ResolveToDocuments(this._client);
 
             this._client.Output.WriteVerbose("Closing {0} documents", targetdocs.Documents.Count);
 
@@ -183,14 +183,14 @@ namespace VisioScripting.Commands
 
         public void SaveDocument(TargetDocument targetdoc)
         {
-            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc = targetdoc.ResolveToDocument(this._client);
             targetdoc.Document.Save();
         }
 
 
         public void SaveDocumentAs(TargetDocument targetdoc, string filename)
         {
-            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc = targetdoc.ResolveToDocument(this._client);
             targetdoc.Document.SaveAs(filename);
         }
 

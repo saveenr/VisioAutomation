@@ -45,26 +45,11 @@ namespace VisioPowerShell.Commands
             }
         }
 
+
         public void WriteVerbose(string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);
             base.WriteVerbose(s);
-        }
-
-        protected void HandlePseudoContext(IVisio.Shape[] shapes)
-        {
-            if (shapes == null)
-            {
-                // do nothing - use the active selection
-                return;
-            }
-
-            if (shapes.Length < 1)
-            {
-                throw new System.ArgumentOutOfRangeException("Shapes parameter must contain at least one shape");
-            }
-
-            this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, shapes);
         }
 
     }

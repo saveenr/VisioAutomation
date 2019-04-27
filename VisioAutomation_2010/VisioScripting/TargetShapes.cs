@@ -38,7 +38,7 @@ namespace VisioScripting
             return VisioAutomation.ShapeIDPairs.FromShapes(items);
         }
 
-        public TargetShapes Resolve(VisioScripting.Client client)
+        public TargetShapes ResolveToShapes(VisioScripting.Client client)
         {
             if (this.Resolved)
             {
@@ -53,6 +53,27 @@ namespace VisioScripting
             client.Output.WriteVerbose("Resolving to selection (numshapes={0}) from active window (caption=\"{1}\")", shapes.Count, active_window.Caption);
 
             return targetshapes;
+        }
+
+        public void ResolveToSelection(VisioScripting.Client client)
+        {
+            // the purpose of this class is to handle those Visio operations that
+            // don't explicitly take a list of shapes, but instead rely on the active selection
+
+            var shapes = this._get_items_unsafe();
+
+            if (shapes==null)
+            {
+                // do nothing - use the active selection
+                return;
+            }
+
+            if (shapes.Count < 1)
+            {
+                throw new System.ArgumentOutOfRangeException("Shapes parameter must contain at least one shape");
+            }
+
+            client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, shapes);
         }
 
         public IList<IVisio.Shape> Shapes => this._get_items_safe();

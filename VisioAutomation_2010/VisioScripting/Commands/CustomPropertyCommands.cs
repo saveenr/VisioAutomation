@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomPropertiesAsShapeDictionary(TargetShapes targetshapes, VASS.CellValueType type)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
             var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
             var listof_cpdic = GetCustomProperties(targetshapes, type);
 
@@ -32,7 +32,7 @@ namespace VisioScripting.Commands
 
         public List<CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes, VASS.CellValueType type)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -53,7 +53,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             var results = new List<bool>(targetshapes.Shapes.Count);
             var values = targetshapes.Shapes.Select(shape => CustomPropertyHelper.Contains(shape, name));
@@ -74,7 +74,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -97,7 +97,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(customprop));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

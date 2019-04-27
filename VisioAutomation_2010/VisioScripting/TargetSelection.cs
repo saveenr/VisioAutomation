@@ -13,7 +13,7 @@ namespace VisioScripting
         {
         }
 
-        public TargetSelection Resolve(Client client)
+        public TargetSelection ResolveToSelection(Client client)
         {
             if (this.Resolved)
             {

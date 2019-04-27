@@ -13,7 +13,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape Group(TargetSelection targetselection)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
             // but it doesn't return the group
@@ -24,7 +24,7 @@ namespace VisioScripting.Commands
 
         public void Ungroup(TargetShapes targetshapes)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
             foreach (var shape in targetshapes.Shapes)
             {
                 shape.Ungroup();

@@ -19,7 +19,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -47,7 +47,7 @@ namespace VisioScripting.Commands
 
         public List<string> GetShapeText(TargetShapes targetshapes)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -61,7 +61,7 @@ namespace VisioScripting.Commands
         public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(TargetShapes targetshapes)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

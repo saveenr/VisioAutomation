@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands.VisioMaster
         protected override void ProcessRecord()
         {
             var targetdoc = new VisioScripting.TargetDocument(this.Document);
-            targetdoc.Resolve(this.Client);
+            targetdoc.ResolveToDocument(this.Client);
             
             bool master_specified = this.Name !=null;
             bool doc_specified = this.Document !=null;

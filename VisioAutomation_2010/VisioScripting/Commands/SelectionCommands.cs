@@ -15,21 +15,21 @@ namespace VisioScripting.Commands
         
         public IVisio.Selection GetSelection(VisioScripting.TargetWindow targetwindow)
         {
-            targetwindow = targetwindow.Resolve(this._client);
+            targetwindow = targetwindow.ResolveToWindow(this._client);
             var selection = targetwindow.Window.Selection;
             return selection;
         }
 
         public void SelectAllShapes(VisioScripting.TargetWindow targetwindow)
         {
-            targetwindow = targetwindow.Resolve(this._client);
+            targetwindow = targetwindow.ResolveToWindow(this._client);
 
             targetwindow.Window.SelectAll();
         }
 
         public void InvertSelection(TargetWindow targetwindow)
         {
-            targetwindow = targetwindow.Resolve(this._client);
+            targetwindow = targetwindow.ResolveToWindow(this._client);
             SelectionCommands._invert_selection(targetwindow.Window);
         }
 
@@ -58,7 +58,7 @@ namespace VisioScripting.Commands
 
         public void SelectNone(VisioScripting.TargetWindow targetwindow)
         {
-            targetwindow = targetwindow.Resolve(this._client);
+            targetwindow = targetwindow.ResolveToWindow(this._client);
 
             targetwindow.Window.DeselectAll();
             targetwindow.Window.DeselectAll();
@@ -66,7 +66,7 @@ namespace VisioScripting.Commands
 
         public void SelectShapesById(VisioScripting.TargetWindow targetwindow, IVisio.Shape shape)
         {
-            targetwindow = targetwindow.Resolve(this._client);
+            targetwindow = targetwindow.ResolveToWindow(this._client);
 
 
             if (shape == null)
@@ -84,13 +84,13 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(shapes));
             }
 
-            targetwindow = targetwindow.Resolve(this._client);
+            targetwindow = targetwindow.ResolveToWindow(this._client);
             targetwindow.Window.Select(shapes, IVisio.VisSelectArgs.visSelect);
         }
 
         public void SelectShapesById(VisioScripting.TargetWindow targetwindow, IEnumerable<int> shapeids)
         {
-            targetwindow = targetwindow.Resolve(this._client);
+            targetwindow = targetwindow.ResolveToWindow(this._client);
 
             if (shapeids == null)
             {
@@ -120,7 +120,7 @@ namespace VisioScripting.Commands
 
         public void SelectShapesByMaster(TargetPage targetpage, IVisio.Master master)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             // Get a selection of connectors, by master: 
             var selection = targetpage.Page.CreateSelection(
@@ -142,7 +142,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(layername), "Layer name cannot be empty");
             }
 
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             var layer = this._client.Layer.FindLayersOnPageByName(targetpage,layername);
 
@@ -155,34 +155,34 @@ namespace VisioScripting.Commands
 
         public IList<IVisio.Shape> GetSelectedShapes(TargetWindow targetwindow)
         {
-            targetwindow = targetwindow.Resolve(this._client);
+            targetwindow = targetwindow.ResolveToWindow(this._client);
 
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(targetwindow.Window.Selection);
         }
 
         public IList<IVisio.Shape> GetSelectedShapes(TargetSelection targetselection)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapes(targetselection.Selection);
         }
 
         public List<IVisio.Shape> GetShapesRecursive(TargetSelection targetselection)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
             return VisioScripting.Helpers.SelectionHelper.GetSelectedShapesRecursive(targetselection.Selection);
         }
 
         public int GetShapeCount(TargetSelection targetselection)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
             int count = targetselection.Selection.Count;
             return count;
         }
 
         public List<IVisio.Shape> GetSubSelectedShapes(TargetSelection targetselection)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
             var shapes = new List<IVisio.Shape>(0);
@@ -211,7 +211,7 @@ namespace VisioScripting.Commands
 
         public void DeleteShapes(TargetSelection targetselection)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             if (targetselection.Selection.Count<1)
             {
@@ -223,7 +223,7 @@ namespace VisioScripting.Commands
 
         public void CopySelectedShapes(TargetSelection targetselection)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
             if (targetselection.Selection.Count<1)
             {
                 return;
@@ -235,7 +235,7 @@ namespace VisioScripting.Commands
 
         public void DuplicateShapes(TargetSelection targetselection)
         {
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
             if (targetselection.Selection.Count < 1)
             {
                 return;
@@ -259,7 +259,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(min_items));
             }
 
-            targetselection = targetselection.Resolve(this._client);
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             int num_selected = targetselection.Selection.Count;
             bool v = num_selected >= min_items;

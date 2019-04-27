@@ -41,7 +41,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(datatable),"DataTable must have at least one row");
             }
 
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             string master = "Rectangle";
             string stencil = "basic_u.vss";
             var stencildoc = this._client.Document.OpenStencilDocument(stencil);
@@ -83,7 +83,7 @@ namespace VisioScripting.Commands
 
         public void DrawGrid(VisioScripting.TargetPage targetpage, GRID.GridLayout layout)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             layout.PerformLayout();
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawGrid)))
@@ -94,7 +94,7 @@ namespace VisioScripting.Commands
 
         public void DrawDataTableModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.DataTableModel dt_model)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             var widths = Enumerable.Repeat<double>(dt_model.CellWidth, dt_model.DataTable.Columns.Count).ToList();
             var heights = Enumerable.Repeat<double>(dt_model.CellHeight, dt_model.DataTable.Rows.Count).ToList();
@@ -104,7 +104,7 @@ namespace VisioScripting.Commands
 
         public void DrawXmlModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.XmlModel xmlmodel)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
             this._build_from_xml_doc(xmlmodel.XmlDocument, tree_drawing);
@@ -139,7 +139,7 @@ namespace VisioScripting.Commands
 
         public void DrawOrgChart(VisioScripting.TargetPage targetpage, ORG.OrgChartDocument chartdocument)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             this._client.Output.WriteVerbose("Start OrgChart Rendering");
 

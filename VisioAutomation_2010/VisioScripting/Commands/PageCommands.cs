@@ -33,7 +33,7 @@ namespace VisioScripting.Commands
 
         public void DeletePages(TargetPages targetpages, bool renumber)
         {
-            targetpages = targetpages.Resolve(this._client);
+            targetpages = targetpages.ResolveToPages(this._client);
 
             foreach (var page in targetpages.Pages)
             {
@@ -43,7 +43,7 @@ namespace VisioScripting.Commands
 
         public List<VisioAutomation.Geometry.Size> GetPageSize(TargetPages targetpages)
         {
-            targetpages = targetpages.Resolve(this._client);
+            targetpages = targetpages.ResolveToPages(this._client);
 
             if (targetpages.Pages.Count < 1)
             {
@@ -63,7 +63,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Page NewPage(VisioScripting.TargetDocument targetdoc, VisioAutomation.Geometry.Size? size, bool isbackgroundpage)
         {
-            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc = targetdoc.ResolveToDocument(this._client);
             var pages = targetdoc.Document.Pages;
             IVisio.Page new_page;
 
@@ -93,7 +93,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(background_page_name));
             }
 
-            targetpages = targetpages.Resolve(this._client);
+            targetpages = targetpages.ResolveToPages(this._client);
 
             if (targetpages.Pages.Count < 1)
             {
@@ -140,7 +140,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Page DuplicatePage(TargetPage targetpage)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicatePage)))
             {
@@ -160,7 +160,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Page DuplicatePageToDocument(TargetPage targetpage, IVisio.Document dest_doc)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             if (dest_doc == null)
             {
@@ -181,7 +181,7 @@ namespace VisioScripting.Commands
 
         public Models.PageOrientation GetPageOrientation( TargetPage targetpage )
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             return PageCommands._get_page_orientation(targetpage.Page);
         }
         
@@ -206,7 +206,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(orientation), "must be either Portrait or Landscape");
             }
 
-            targetpages = targetpages.Resolve(this._client);
+            targetpages = targetpages.ResolveToPages(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageOrientation)))
             {
@@ -239,7 +239,7 @@ namespace VisioScripting.Commands
         }
         public void ResizePageToFitContents(TargetPages targetpages, VisioAutomation.Geometry.Size bordersize)
         {
-            targetpages = targetpages.Resolve(this._client);
+            targetpages = targetpages.ResolveToPages(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(ResizePageToFitContents)))
             {
@@ -252,7 +252,7 @@ namespace VisioScripting.Commands
 
         public void SetPageFormatCells(TargetPages targetpages, VisioAutomation.Pages.PageFormatCells cells)
         {
-            targetpages = targetpages.Resolve(this._client);
+            targetpages = targetpages.ResolveToPages(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageFormatCells)))
             {
@@ -268,7 +268,7 @@ namespace VisioScripting.Commands
 
         public void SetPageSize(TargetPages targetpages, VisioAutomation.Geometry.Size new_size)
         {
-            targetpages = targetpages.Resolve(this._client);
+            targetpages = targetpages.ResolveToPages(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
@@ -291,7 +291,7 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             var old_size = VisioAutomation.Pages.PageHelper.GetSize(targetpage.Page);
             var w = width.GetValueOrDefault(old_size.Width);
@@ -302,7 +302,7 @@ namespace VisioScripting.Commands
 
         public void SetActivePage(VisioScripting.TargetDocument targetdoc, Models.PageRelativePosition flags)
         {
-            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc = targetdoc.ResolveToDocument(this._client);
 
             var docpages = targetdoc.Document.Pages;
             if (docpages.Count < 2)
@@ -319,7 +319,7 @@ namespace VisioScripting.Commands
 
         public void LayoutPage(TargetPages targetpages, VisioAutomation.Models.LayoutStyles.LayoutStyleBase layout)
         {
-            targetpages = targetpages.Resolve(this._client);
+            targetpages = targetpages.ResolveToPages(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageSize)))
             {
@@ -390,7 +390,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesOnPageByID(TargetPage targetpage, int[] shapeids)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var shapes = targetpage.Page.Shapes;
             var shapes_list = new List<IVisio.Shape>(shapeids.Length);
             foreach (int id in shapeids)
@@ -403,7 +403,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Shape> GetShapesOnPageByName(TargetPage targetpage, string[] names)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             var cached_shapes_list = targetpage.Page.Shapes.ToList();
             
@@ -421,7 +421,7 @@ namespace VisioScripting.Commands
 
         public List<IVisio.Page> FindPagesInDocument(TargetDocument targetdoc, string name)
         {
-            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc = targetdoc.ResolveToDocument(this._client);
 
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(name))
             {
@@ -441,7 +441,7 @@ namespace VisioScripting.Commands
         
         public List<IVisio.Shape> GetShapesOnPage(TargetPage targetpage)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var shapes = targetpage.Page.Shapes.ToList();
             return shapes;
         }

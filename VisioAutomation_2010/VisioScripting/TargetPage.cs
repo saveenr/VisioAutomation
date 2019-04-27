@@ -13,7 +13,7 @@ namespace VisioScripting
         {
         }
 
-        public TargetPage Resolve(Client client)
+        public TargetPage ResolveToPage(Client client)
         {
             if (this.Resolved)
             {

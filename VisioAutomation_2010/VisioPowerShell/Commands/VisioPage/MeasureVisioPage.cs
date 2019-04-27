@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands.VisioPage
         protected override void ProcessRecord()
         {
 
-            var targetpages = new VisioScripting.TargetPages(this.Page).Resolve(this.Client);
+            var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
 
             if (targetpages.Pages.Count < 1)
             {

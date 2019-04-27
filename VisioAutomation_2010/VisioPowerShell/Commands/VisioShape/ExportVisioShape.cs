@@ -23,7 +23,8 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            this.HandlePseudoContext(this.Shape);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+            targetshapes.ResolveToSelection(this.Client);
 
             string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
             

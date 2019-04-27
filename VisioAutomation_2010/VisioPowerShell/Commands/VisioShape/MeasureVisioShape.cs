@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.VisioPage
         protected override void ProcessRecord()
         {
 
-            var targetshapes = new VisioScripting.TargetShapes(this.Shape).Resolve(this.Client);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape).ResolveToShapes(this.Client);
 
             if (targetshapes.Shapes.Count < 1)
             {

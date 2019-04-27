@@ -73,7 +73,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropMaster(TargetPage targetpage, IVisio.Master master, VisioAutomation.Geometry.Point p)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             var shape = targetpage.Page.Drop(master, p.X, p.Y);
             return shape;
@@ -84,7 +84,7 @@ namespace VisioScripting.Commands
             IList<IVisio.Master> masters, 
             IList<VisioAutomation.Geometry.Point> points)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             if (masters == null)
             {

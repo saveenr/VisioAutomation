@@ -18,7 +18,7 @@ namespace VisioScripting
         {
         }
 
-        public TargetDocuments Resolve(VisioScripting.Client client)
+        public TargetDocuments ResolveToDocuments(VisioScripting.Client client)
         {
             if (this.Resolved)
             {
