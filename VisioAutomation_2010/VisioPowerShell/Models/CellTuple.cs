@@ -16,9 +16,4 @@ namespace VisioPowerShell.Models
             this.Formula = formula;
         }
     }
-
-    public enum ResultType
-    {
-        String, Bool, Double, Int
-    }
 }
