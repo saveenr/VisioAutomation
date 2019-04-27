@@ -38,8 +38,8 @@ namespace VisioScripting.Commands
 
 
             var formdoc = new VADOC.Forms.FormDocument();
-            formdoc.Subject = "VisioAutomation.Scripting Documenation";
-            formdoc.Title = "VisioAutomation.Scripting Documenation";
+            formdoc.Subject = "VisioAutomation.Scripting Documentation";
+            formdoc.Title = "VisioAutomation.Scripting Documentation";
             formdoc.Creator = "";
             formdoc.Company = "";
 
