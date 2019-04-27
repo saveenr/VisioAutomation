@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using VisioPowerShell.Models;
 using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Internal
@@ -39,7 +40,7 @@ namespace VisioPowerShell.Internal
         public static DataTable QueryToDataTable(
             VASS.Query.CellQuery query,
             VisioAutomation.ShapeSheet.CellValueType value_type,
-            System.Type result_type,
+            Models.ResultType result_type,
             IList<int> shapeids, 
             VisioAutomation.SurfaceTarget surface)
         {
@@ -56,29 +57,29 @@ namespace VisioPowerShell.Internal
                 throw new System.ArgumentOutOfRangeException(nameof(value_type));
             }
 
-            if (result_type == typeof(string))
+            if (result_type == ResultType.String)
             {
                 var output = query.GetResults<string>(surface, shapeids);
                 return DataTableHelpers.querytable_to_datatable(query, output);
             }
-            else if (result_type == typeof(bool))
+            else if (result_type == ResultType.Bool)
             {
                 var output = query.GetResults<string>(surface, shapeids);
                 return DataTableHelpers.querytable_to_datatable(query, output);
             }
-            else if (result_type == typeof(double))
+            else if (result_type == ResultType.Double)
             {
                 var output = query.GetResults<double>(surface, shapeids);
                 return DataTableHelpers.querytable_to_datatable(query, output);
             }
-            else if(result_type == typeof(int))
+            else if(result_type == ResultType.Int)
             {
                 var output = query.GetResults<int>(surface, shapeids);
                 return DataTableHelpers.querytable_to_datatable(query, output);
             }
             else
             {
-                string msg = string.Format("Unsupported value of \"{0}\" for type {1}", result_type, result_type.Name);
+                string msg = string.Format("Unsupported value of \"{0}\" for type {1}", result_type, nameof(result_type));
                 throw new System.ArgumentOutOfRangeException(nameof(result_type), msg);
             }
 

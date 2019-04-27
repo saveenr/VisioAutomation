@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -18,7 +19,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
         public SMA.SwitchParameter Results { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public System.Type ResultType = typeof(string);
+        public Models.ResultType ResultType = ResultType.String;
 
         // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]

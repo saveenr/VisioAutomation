@@ -1,3 +1,4 @@
+using System;
 using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Models
@@ -14,5 +15,10 @@ namespace VisioPowerShell.Models
             this.Src = src;
             this.Formula = formula;
         }
+    }
+
+    public enum ResultType
+    {
+        String, Bool, Double, Int
     }
 }
