@@ -129,7 +129,7 @@ namespace VisioPowerShell.Commands.VisioShape
             {
                 var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                 writer.BlastGuards = true;
-                writer.TestCircular = true;
+                writer.TestCircular = true;  
 
                 for (int i = 0; i < shapeids.Count(); i++)
                 {

@@ -92,7 +92,6 @@
     <Compile Include="Commands\VisioPageCells\NewVisioPageCells.cs" />
     <Compile Include="Commands\VisioPageCells\SetVisioPageCells.cs" />
     <Compile Include="Models\ResultType.cs" />
-    <Compile Include="Models\ShapeType.cs" />
     <Compile Include="Commands\VisioShapeCells\NewVisioShapeCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
     <Compile Include="Models\CellTuple.cs" />
