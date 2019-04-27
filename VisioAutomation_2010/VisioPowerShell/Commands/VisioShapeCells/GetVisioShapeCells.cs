@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
 
         [SMA.Parameter(Mandatory = false)]
-        public VisioAutomation.ShapeSheet.CellValueType ValueType = VisioAutomation.ShapeSheet.CellValueType.Formula;
+        public SMA.SwitchParameter Results{ get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellResultType ResultType = VisioPowerShell.Models.CellResultType.ResultString;
@@ -27,6 +27,10 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
         protected override void ProcessRecord()
         {
+            var valuetype = this.Results
+                ? VisioAutomation.ShapeSheet.CellValueType.Result
+                : VisioAutomation.ShapeSheet.CellValueType.Formula;
+
             var target_shapes = new VisioScripting.TargetShapes(this.Shape).ResolveToShapes(this.Client);
 
             if (target_shapes.Shapes.Count < 1)
@@ -44,7 +48,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             var page = target_shapes.Shapes[0].ContainingPage;
             var surface = new VisioAutomation.SurfaceTarget(page);
             var shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
-            var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, this.ValueType, this.ResultType, shapeids, surface);
+            var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, surface);
 
             // Annotate the returned datatable to disambiguate rows
             var shapeid_col = datatable.Columns.Add("ShapeID", typeof(int));

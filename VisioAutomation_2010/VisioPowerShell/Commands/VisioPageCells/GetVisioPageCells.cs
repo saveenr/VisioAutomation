@@ -13,8 +13,9 @@ namespace VisioPowerShell.Commands.VisioPageCells
         [SMA.Parameter(Mandatory = false)]
         public string[] Cell { get; set; }
 
+
         [SMA.Parameter(Mandatory = false)]
-        public VisioAutomation.ShapeSheet.CellValueType ValueType = VisioAutomation.ShapeSheet.CellValueType.Formula;
+        public SMA.SwitchParameter Results { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.CellResultType ResultType = VisioPowerShell.Models.CellResultType.ResultString;
@@ -25,6 +26,10 @@ namespace VisioPowerShell.Commands.VisioPageCells
 
         protected override void ProcessRecord()
         {
+            var valuetype = this.Results
+                ? VisioAutomation.ShapeSheet.CellValueType.Result
+                : VisioAutomation.ShapeSheet.CellValueType.Formula;
+
             var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
 
             if (targetpages.Pages.Count < 1)
@@ -44,7 +49,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
                 var shapesheet = page.PageSheet;
                 var shapeids = new List<int> { shapesheet.ID };
                 var surface = new VisioAutomation.SurfaceTarget(page);
-                var temp_datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, this.ValueType, this.ResultType, shapeids, surface);
+                var temp_datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, surface);
                 datatable.Merge(temp_datatable);
             }
 
