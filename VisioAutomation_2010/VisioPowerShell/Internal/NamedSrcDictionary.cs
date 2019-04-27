@@ -6,11 +6,11 @@ namespace VisioPowerShell.Internal
     {
         public static NamedSrcDictionary FromCells(Models.BaseCells cells)
         {
-            var tuples = cells.GetCellTuples();
+            var tuples = cells.EnumCellTuples();
             return FromCells(tuples);
         }
 
-        public static NamedSrcDictionary FromCells(IEnumerable<Models.CellTuple> tuples)
+        private static NamedSrcDictionary FromCells(IEnumerable<Internal.CellTuple> tuples)
         {
             var  dic = new NamedSrcDictionary();
             foreach (var tuple in tuples)

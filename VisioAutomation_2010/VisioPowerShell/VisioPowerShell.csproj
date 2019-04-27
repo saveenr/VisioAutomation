@@ -94,7 +94,7 @@
     <Compile Include="Models\ResultType.cs" />
     <Compile Include="Commands\VisioShapeCells\NewVisioShapeCells.cs" />
     <Compile Include="Models\BaseCells.cs" />
-    <Compile Include="Models\CellTuple.cs" />
+    <Compile Include="Internal\CellTuple.cs" />
     <Compile Include="Commands\VisioHyperlink\GetVisioHyperlink.cs" />
     <Compile Include="Commands\VisioHyperlink\NewVisioHyperlink.cs" />
     <Compile Include="Commands\VisioHyperlink\RemoveVisioHyperlink.cs" />
