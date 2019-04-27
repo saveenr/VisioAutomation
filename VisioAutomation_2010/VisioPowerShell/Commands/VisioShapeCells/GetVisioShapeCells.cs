@@ -14,8 +14,12 @@ namespace VisioPowerShell.Commands.VisioShapeCells
         [SMA.Parameter(Mandatory = false)]
         public string[] Cell { get; set; }
 
+
         [SMA.Parameter(Mandatory = false)]
-        public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
+        public VisioAutomation.ShapeSheet.CellValueType ValueType = VisioAutomation.ShapeSheet.CellValueType.Formula;
+
+        [SMA.Parameter(Mandatory = false)]
+        public VisioPowerShell.Models.CellResultType ResultType = VisioPowerShell.Models.CellResultType.ResultString;
 
         // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
@@ -40,7 +44,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             var page = target_shapes.Shapes[0].ContainingPage;
             var surface = new VisioAutomation.SurfaceTarget(page);
             var shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
-            var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
+            var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, this.ValueType, this.ResultType, shapeids, surface);
 
             // Annotate the returned datatable to disambiguate rows
             var shapeid_col = datatable.Columns.Add("ShapeID", typeof(int));

@@ -38,42 +38,50 @@ namespace VisioPowerShell.Internal
 
         public static DataTable QueryToDataTable(
             VASS.Query.CellQuery query,
-            Models.CellOutputType output_type,
+            VisioAutomation.ShapeSheet.CellValueType value_type,
+            Models.CellResultType result_type,
             IList<int> shapeids, 
             VisioAutomation.SurfaceTarget surface)
         {
-            switch (output_type)
+
+            if (value_type == VASS.CellValueType.Formula)
             {
-                case Models.CellOutputType.Formula:
-                {
-                    var output = query.GetFormulas(surface, shapeids);
-                    var dt = DataTableHelpers.querytable_to_datatable(query, output);
-                    return dt;
-                }
-                case Models.CellOutputType.ResultString:
+                var output = query.GetFormulas(surface, shapeids);
+                var dt = DataTableHelpers.querytable_to_datatable(query, output);
+                return dt;
+            }
+
+            if (value_type != VASS.CellValueType.Result)
+            {
+                throw new System.ArgumentOutOfRangeException(nameof(value_type));
+            }
+
+            switch (result_type)
+            {
+                case Models.CellResultType.ResultString:
                 {
                     var output = query.GetResults<string>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(query, output);
                 }
-                case Models.CellOutputType.ResultBoolean:
+                case Models.CellResultType.ResultBoolean:
                 {
                     var output = query.GetResults<bool>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(query, output);
                 }
-                case Models.CellOutputType.ResultDouble:
+                case Models.CellResultType.ResultDouble:
                 {
                     var output = query.GetResults<double>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(query, output);
                 }
-                case Models.CellOutputType.ResultInteger:
+                case Models.CellResultType.ResultInteger:
                 {
                     var output = query.GetResults<int>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(query, output);
                 }
             }
 
-            string msg = string.Format("Unsupported value of \"{0}\" for type {1}", output_type, nameof(Models.CellOutputType));
-            throw new System.ArgumentOutOfRangeException(nameof(output_type), msg);
+            string msg = string.Format("Unsupported value of \"{0}\" for type {1}", result_type, nameof(Models.CellResultType));
+            throw new System.ArgumentOutOfRangeException(nameof(result_type), msg);
         }
     }
 }
