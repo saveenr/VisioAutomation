@@ -101,8 +101,8 @@
     <Compile Include="Commands\Nouns.cs" />
     <Compile Include="Commands\VisioDocument\CloseVisioDocument.cs" />
     <Compile Include="Commands\VisioContainer\NewVisioContainer.cs" />
-    <Compile Include="Models\NameValueDictionary.cs" />
-    <Compile Include="Models\NamedSrcDictionary.cs" />
+    <Compile Include="Internal\NameValueDictionary.cs" />
+    <Compile Include="Internal\NamedSrcDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\ShapeCells.cs" />
     <Compile Include="Commands\Visio\OutVisio.cs" />

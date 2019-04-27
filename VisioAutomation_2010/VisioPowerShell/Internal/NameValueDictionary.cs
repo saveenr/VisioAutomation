@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace VisioPowerShell.Models
+namespace VisioPowerShell.Internal
 {
     public class NameValueDictionary<T>
     {
