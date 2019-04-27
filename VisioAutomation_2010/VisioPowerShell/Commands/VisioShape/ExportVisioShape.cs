@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
 
-        // PSUEDOCONTEXT:SHAPES
+        // PSEUDOCONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 
@@ -23,7 +23,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
         protected override void ProcessRecord()
         {
-            this.HandlePsuedoContext(this.Shape);
+            this.HandlePseudoContext(this.Shape);
 
             string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
             

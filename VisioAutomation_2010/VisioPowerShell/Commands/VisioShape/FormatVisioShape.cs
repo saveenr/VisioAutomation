@@ -27,13 +27,13 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false)]
         public VisioScripting.Models.AlignmentHorizontal? AlignHorizontal = null;
 
-        // PSUEDOCONTEXT:SHAPES
+        // PSEUDOCONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
         {
-            this.HandlePsuedoContext(this.Shape);
+            this.HandlePseudoContext(this.Shape);
 
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {

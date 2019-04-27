@@ -51,7 +51,7 @@ namespace VisioPowerShell.Commands
             base.WriteVerbose(s);
         }
 
-        protected void HandlePsuedoContext(IVisio.Shape[] shapes)
+        protected void HandlePseudoContext(IVisio.Shape[] shapes)
         {
             if (shapes == null)
             {
