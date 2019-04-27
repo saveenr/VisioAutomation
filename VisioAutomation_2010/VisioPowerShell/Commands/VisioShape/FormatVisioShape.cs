@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false)]
         public VisioScripting.Models.AlignmentHorizontal? AlignHorizontal = null;
 
-        // PSEUDOCONTEXT:SHAPES
+        // CONTEXT:SHAPESSELECTION
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 

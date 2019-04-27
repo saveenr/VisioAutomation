@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
 
-        // PSEUDOCONTEXT:SHAPES
+        // CONTEXT:SHAPESSELECTION
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 

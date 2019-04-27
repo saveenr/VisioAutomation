@@ -6,7 +6,7 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Join, Nouns.VisioShape)]
     public class JoinVisioShape : VisioCmdlet
     {
-        // PSEUDOCONTEXT:SHAPES
+        // CONTEXT:SHAPESSELECTION
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 
