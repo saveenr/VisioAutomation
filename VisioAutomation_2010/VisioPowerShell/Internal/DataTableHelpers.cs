@@ -2,7 +2,7 @@
 using System.Data;
 using VASS=VisioAutomation.ShapeSheet;
 
-namespace VisioPowerShell.Models
+namespace VisioPowerShell.Internal
 {
     static class DataTableHelpers
     {
@@ -38,41 +38,41 @@ namespace VisioPowerShell.Models
 
         public static DataTable QueryToDataTable(
             VASS.Query.CellQuery query,
-            CellOutputType output_type,
+            Models.CellOutputType output_type,
             IList<int> shapeids, 
             VisioAutomation.SurfaceTarget surface)
         {
             switch (output_type)
             {
-                case CellOutputType.Formula:
+                case Models.CellOutputType.Formula:
                 {
                     var output = query.GetFormulas(surface, shapeids);
                     var dt = DataTableHelpers.querytable_to_datatable(query, output);
                     return dt;
                 }
-                case CellOutputType.ResultString:
+                case Models.CellOutputType.ResultString:
                 {
                     var output = query.GetResults<string>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(query, output);
                 }
-                case CellOutputType.ResultBoolean:
+                case Models.CellOutputType.ResultBoolean:
                 {
                     var output = query.GetResults<bool>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(query, output);
                 }
-                case CellOutputType.ResultDouble:
+                case Models.CellOutputType.ResultDouble:
                 {
                     var output = query.GetResults<double>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(query, output);
                 }
-                case CellOutputType.ResultInteger:
+                case Models.CellOutputType.ResultInteger:
                 {
                     var output = query.GetResults<int>(surface, shapeids);
                     return DataTableHelpers.querytable_to_datatable(query, output);
                 }
             }
 
-            string msg = string.Format("Unsupported value of \"{0}\" for type {1}", output_type, nameof(CellOutputType));
+            string msg = string.Format("Unsupported value of \"{0}\" for type {1}", output_type, nameof(Models.CellOutputType));
             throw new System.ArgumentOutOfRangeException(nameof(output_type), msg);
         }
     }

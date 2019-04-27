@@ -41,7 +41,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
                 var shapesheet = page.PageSheet;
                 var shapeids = new List<int> { shapesheet.ID };
                 var surface = new VisioAutomation.SurfaceTarget(page);
-                var temp_datatable = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
+                var temp_datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
                 datatable.Merge(temp_datatable);
             }
 

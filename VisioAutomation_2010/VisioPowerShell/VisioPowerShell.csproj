@@ -160,7 +160,7 @@
     <Compile Include="Commands\Visio\UndoVisio.cs" />
     <Compile Include="Commands\VisioShape\SplitVisioShape.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\DataTableHelpers.cs" />
+    <Compile Include="Internal\DataTableHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">

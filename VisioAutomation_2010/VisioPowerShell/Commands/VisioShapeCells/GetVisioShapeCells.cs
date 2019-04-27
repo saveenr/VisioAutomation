@@ -40,7 +40,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             var page = target_shapes.Shapes[0].ContainingPage;
             var surface = new VisioAutomation.SurfaceTarget(page);
             var shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
-            var datatable = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
+            var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, this.OutputType, shapeids, surface);
 
             // Annotate the returned datatable to disambiguate rows
             var shapeid_col = datatable.Columns.Add("ShapeID", typeof(int));
