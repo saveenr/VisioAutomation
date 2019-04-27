@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
         public SMA.SwitchParameter Results { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public VisioPowerShell.Models.CellResultType ResultType = VisioPowerShell.Models.CellResultType.ResultString;
+        public System.Type ResultType = typeof(string);
 
         // CONTEXT:PAGES
         [SMA.Parameter(Mandatory = false)]

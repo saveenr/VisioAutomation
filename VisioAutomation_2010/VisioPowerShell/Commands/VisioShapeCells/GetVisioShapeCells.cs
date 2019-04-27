@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
         public SMA.SwitchParameter Results{ get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public VisioPowerShell.Models.CellResultType ResultType = VisioPowerShell.Models.CellResultType.ResultString;
+        public System.Type ResultType = typeof(string);
 
         // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
