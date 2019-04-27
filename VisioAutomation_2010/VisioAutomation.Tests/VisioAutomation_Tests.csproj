@@ -126,7 +126,6 @@
     <Compile Include="Core\Text\TextFormatTests.cs" />
     <Compile Include="Core\Shapes\CustomPropertiesTest.cs" />
     <Compile Include="Core\Extensions\SelectionTests.cs" />
-    <Compile Include="Core\InternalTests.cs" />
     <Compile Include="DocumentAnalysis\Path_Test.cs" />
     <Compile Include="Core\Shapes\UserDefinedCellsTests.cs" />
     <Compile Include="Core\ShapeSheet\ShapeSheetWriterTests.cs" />
