@@ -73,7 +73,7 @@ namespace VisioPowerShell_Tests
         public void VisioPS_DrawRectangleWithText()
         {
             var d = Session.Cmd_New_VisioDocument();
-            var s = Session.Cmd_New_VisioShape(VisioPowerShell.Models.ShapeType.Rectangle, new[]
+            var s = Session.Cmd_New_VisioShape_rectangle(new[]
             {
                 new VisioAutomation.Geometry.Point( 0.0, 1.0),
                 new VisioAutomation.Geometry.Point( 2.0, 3.0)

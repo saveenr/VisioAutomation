@@ -1,6 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Geometry;
 using VisioPowerShell.Commands.VisioApplication;
 using VisioPowerShell.Commands.VisioContainer;
 using VisioPowerShell.Commands.VisioDocument;
@@ -43,7 +44,7 @@ namespace VisioPowerShell_Tests
             VisioAutomation.Geometry.Point[] points)
         {
             var cmd = new NewVisioShape();
-            cmd.Masters = masters;
+            cmd.Master = masters;
             cmd.Points= points;
             var shape_list = cmd.Invoke<IVisio.Shape>().ToList();
             return shape_list;
@@ -115,13 +116,12 @@ namespace VisioPowerShell_Tests
             return page;
         }
 
-        public IVisio.Shape Cmd_New_VisioShape(
-            VisioPowerShell.Models.ShapeType type, 
+        public IVisio.Shape Cmd_New_VisioShape_rectangle(
             VisioAutomation.Geometry.Point[] points)
         {
             var cmd = new NewVisioShape();
-            cmd.Type = type;
-            cmd.Points = points;
+            cmd.Rectangle = true;
+            cmd.BoundingBox = new Rectangle(points[0],points[1]);
             var shape = cmd.InvokeFirst<IVisio.ShapeClass>();
             return shape;
         }

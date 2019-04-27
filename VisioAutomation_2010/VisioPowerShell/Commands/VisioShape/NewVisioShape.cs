@@ -9,26 +9,48 @@ namespace VisioPowerShell.Commands.VisioShape
     public class NewVisioShape : VisioCmdlet
     {
         [SMA.Parameter(ParameterSetName = "masters", Position = 0, Mandatory = true)]
-        public IVisio.Master[] Masters { get; set; }
+        public IVisio.Master[] Master { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "shape", Position = 0, Mandatory = true)]
-        public Models.ShapeType Type { get; set; }
+        [SMA.Parameter(ParameterSetName = "rectangle", Position = 0, Mandatory = true)]
+        public SMA.SwitchParameter Rectangle { get; set; }
 
-        [SMA.Parameter(Position = 1, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "oval", Position = 0, Mandatory = true)]
+        public SMA.SwitchParameter Oval { get; set; }
+
+        [SMA.Parameter(ParameterSetName = "line", Position = 0, Mandatory = true)]
+        public SMA.SwitchParameter Line { get; set; }
+
+        [SMA.Parameter(ParameterSetName = "polyline", Position = 0, Mandatory = true)]
+        public SMA.SwitchParameter Polyline { get; set; }
+
+        [SMA.Parameter(ParameterSetName = "bezier", Position = 0, Mandatory = true)]
+        public SMA.SwitchParameter Bezier { get; set; }
+
+
+        [SMA.Parameter(ParameterSetName = "masters", Mandatory = true)]
+        public VisioAutomation.Geometry.Point[] DropPosition { get; set; }
+
+        [SMA.Parameter(ParameterSetName = "line", Mandatory = true)]
+        public VisioAutomation.Geometry.Point From { get; set; }
+
+        [SMA.Parameter(ParameterSetName = "line", Mandatory = true)]
+        public VisioAutomation.Geometry.Point To { get; set; }
+
+
+        [SMA.Parameter(ParameterSetName = "polyline", Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "bezier", Mandatory = true)]
         public VisioAutomation.Geometry.Point[] Points { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "masters", Mandatory = false)]
-        public string[] Names { get; set; }
+        [SMA.Parameter(ParameterSetName = "rectangle", Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "oval", Mandatory = true)]
+        public VisioAutomation.Geometry.Rectangle BoundingBox{ get; set; }
 
-        [SMA.Parameter(ParameterSetName = "masters", Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.ShapeCells[] Cells { get; set; }
-
-        [SMA.Parameter(ParameterSetName = "masters", Mandatory = false)]
-        public SMA.SwitchParameter NoSelect=false;
 
         protected override void ProcessRecord()
         {
-            if (this.Masters != null)
+            if (this.Master != null)
             {
                 _drop_shape();
             }
@@ -40,36 +62,32 @@ namespace VisioPowerShell.Commands.VisioShape
 
         private void _draw_shape()
         {
-            var points = this.Points;
+            _check_num_Points();
 
-            _check_points_for_shape_type(points);
 
-            if (this.Type == Models.ShapeType.Rectangle)
+            if (this.Rectangle)
             {
-                var r = new VisioAutomation.Geometry.Rectangle(points[0], points[1]);
-                var shape = this.Client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, r);
+                var shape = this.Client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, this.BoundingBox);
+                this.WriteObject(shape) ;
+            }
+            else if (this.Oval)
+            {
+                var shape = this.Client.Draw.DrawOval(VisioScripting.TargetPage.Auto, this.BoundingBox);
                 this.WriteObject(shape);
             }
-            else if (this.Type == Models.ShapeType.Line)
+            else if (this.Line)
             {
-                var lineseg = new VisioAutomation.Models.Geometry.LineSegment(points[0], points[1]);
-                var shape = this.Client.Draw.DrawLine(VisioScripting.TargetPage.Auto, lineseg.Start, lineseg.End);
+                var shape = this.Client.Draw.DrawLine(VisioScripting.TargetPage.Auto, this.From, this.To);
                 this.WriteObject(shape);
             }
-            else if (this.Type == Models.ShapeType.Oval)
+            else if (this.Polyline)
             {
-                var r = new VisioAutomation.Geometry.Rectangle(points[0], points[1]);
-                var shape = this.Client.Draw.DrawOval(VisioScripting.TargetPage.Auto,  r);
+                var shape = this.Client.Draw.DrawPolyLine(VisioScripting.TargetPage.Auto, this.Points);
                 this.WriteObject(shape);
             }
-            else if (this.Type == Models.ShapeType.Polyline)
+            else if (this.Bezier)
             {
-                var shape = this.Client.Draw.DrawPolyLine(VisioScripting.TargetPage.Auto, points);
-                this.WriteObject(shape);
-            }
-            else if (this.Type == Models.ShapeType.Bezier)
-            {
-                var shape = this.Client.Draw.DrawBezier(VisioScripting.TargetPage.Auto, points);
+                var shape = this.Client.Draw.DrawBezier(VisioScripting.TargetPage.Auto, this.Points);
                 this.WriteObject(shape);
             }
             else
@@ -78,57 +96,33 @@ namespace VisioPowerShell.Commands.VisioShape
             }
         }
 
-        private void _check_points_for_shape_type(IList<VisioAutomation.Geometry.Point> points)
+        private void _check_num_Points()
         {
-            if (this.Type == Models.ShapeType.Rectangle || this.Type == Models.ShapeType.Line || this.Type == Models.ShapeType.Oval)
+            if (this.Polyline)
             {
-                if (points.Count != 2)
+                if (this.Points.Length < 2)
                 {
-                    string msg = string.Format("Need 2 points for a {0}", this.Type);
-                    new System.ArgumentOutOfRangeException(msg);
+                    new System.ArgumentOutOfRangeException("Need at least 2 points for a polyline", nameof(this.Points));
                 }
             }
-            else if(this.Type == Models.ShapeType.Polyline)
+            else if (this.Bezier)
             {
-                if (points.Count < 2)
+                if (this.Points.Length < 4)
                 {
-                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a polyline", nameof(points));
-                }
-            }
-            else if (this.Type == Models.ShapeType.Bezier)
-            {
-                if (points.Count < 2)
-                {
-                    new System.ArgumentOutOfRangeException("Need at leat 2 points for a bezier", nameof(points));
+                    // two points
+                    // two control points
+                    new System.ArgumentOutOfRangeException("Need at least 4 points for a bezier", nameof(this.Points));
                 }
             }
         }
 
         private void _drop_shape()
         {
-            this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
-            var points = this.Points;
+            var targetpage = VisioScripting.TargetPage.Auto.ResolveToPage(this.Client);
 
-            var shapeids = this.Client.Master.DropMasters(VisioScripting.TargetPage.Auto, this.Masters, points);
-
-            var page = this.Client.Page.GetActivePage();
-            var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shapeids);
-
-            // If Names is not empty... assign it to the shape
-            if (this.Names != null)
-            {
-                int up_to = System.Math.Min(shape_objects.Count, this.Names.Length);
-                for (int i = 0; i < up_to; i++)
-                {
-                    string cur_name = this.Names[i];
-                    if (cur_name != null)
-                    {
-                        var cur_shape = shape_objects[i];
-                        cur_shape.NameU = cur_name;
-                    }
-                }
-            }
+            var shapeids = this.Client.Master.DropMasters(targetpage, this.Master, this.DropPosition);
+            var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(targetpage.Page.Shapes, shapeids);
 
             // If there are cells to set, then use them
             if (this.Cells != null)
@@ -145,7 +139,6 @@ namespace VisioPowerShell.Commands.VisioShape
                     shape_cells.Apply(writer, (short)shapeid);
                 }
 
-                var targetpage = VisioScripting.TargetPage.Auto.ResolveToPage(this.Client);
                 var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
 
                 using (var undoscope = this.Client.Undo.NewUndoScope(nameof(NewVisioShape) +":CommitCells"))
@@ -155,14 +148,14 @@ namespace VisioPowerShell.Commands.VisioShape
 
             }
 
-            this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
 
-            if (!this.NoSelect)
-            {
-                // Select the Shapes
-                ((SMA.Cmdlet)this).WriteVerbose("Selecting");
-                this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, shape_objects);
-            }
+            // Visio does not select dropped masters by default - unlike shapes that are directly drawn
+            // so force visio to select the dropped shapes
+
+            ((SMA.Cmdlet)this).WriteVerbose("Clearing the selection");
+            this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
+            ((SMA.Cmdlet)this).WriteVerbose("Selecting the shapes that were dropped");
+            this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, shape_objects);
 
             this.WriteObject(shape_objects, true);
         }
