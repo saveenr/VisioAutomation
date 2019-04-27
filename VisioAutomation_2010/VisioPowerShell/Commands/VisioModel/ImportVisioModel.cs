@@ -22,24 +22,22 @@ namespace VisioPowerShell.Commands.VisioModel
             var xmldoc = SXL.XDocument.Load(this.Filename);
 
             var root = xmldoc.Root;
-            this.WriteVerbose("Root element name ={0}", root.Name);
+            this.WriteVerbose("Root element name = \"{0}\"", root.Name);
             if (root.Name == "directedgraph")
             {
-                this.WriteVerbose("Loading as a Directed Graph");
-                var dg_model = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXml(
-                    this.Client,
-                    xmldoc);
-                this.WriteObject(dg_model);               
+                this.WriteVerbose("Loading Directed Graph");
+                var list_dglayout = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXml(this.Client, xmldoc);
+                this.WriteObject(list_dglayout);               
             }
             else if (root.Name == "orgchart")
             {
-                this.WriteVerbose("Loading as an Org Chart");
-                var oc = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(this.Client, xmldoc);
-                this.WriteObject(oc);
+                this.WriteVerbose("Loading as Org Chart");
+                var orgchart_docmodel = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(this.Client, xmldoc);
+                this.WriteObject(orgchart_docmodel);
             }
             else
             {
-                var exc = new ArgumentException("Unknown root element for XML");
+                var exc = new ArgumentOutOfRangeException("Unknown root element for XML");
                 throw exc;
             }
         }
