@@ -185,7 +185,7 @@ namespace VisioPowerShell_Tests
         {
             var cmd = new GetVisioPage();
             cmd.ActivePage = activepage;
-            cmd.Name = name;
+            cmd.Name = new [] {name};
             var page = cmd.InvokeFirst<IVisio.Page>();
             return page;
         }

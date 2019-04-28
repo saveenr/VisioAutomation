@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VisioScripting.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -11,7 +12,7 @@ namespace VisioPowerShell.Commands.VisioPage
         public SMA.SwitchParameter ActivePage;
 
         [SMA.Parameter(Position=0, Mandatory = false, ParameterSetName = "pagebyname")]
-        public string Name;
+        public string[] Name;
 
         [SMA.Parameter(Mandatory = false, ParameterSetName = "pagebyid")]
         public int[] ID;
@@ -45,18 +46,21 @@ namespace VisioPowerShell.Commands.VisioPage
             }
 
             // Then, handle the name case
-            if (this.Name!=null)
+
+            if (this.Name == null)
             {
-                var pages_by_name = this.Client.Page.FindPagesInDocument(targetdoc, this.Name);
+                var pages_by_name = this.Client.Page.FindPagesInDocument(targetdoc, null);
                 this.WriteObject(pages_by_name, true);
                 return;
             }
 
-            // Finally return all the pages in the document
-            var pages_in_doc = this.Client.Page.FindPagesInDocument(targetdoc, null);
-            this.WriteObject(pages_in_doc, true);
-            return;
-
+            var list_page = new List<IVisio.Page>();
+            foreach (var name in this.Name)
+            {
+                var pages_by_name = this.Client.Page.FindPagesInDocument(targetdoc, name);
+                list_page.AddRange(pages_by_name);
+            }
+            this.WriteObject(list_page, true);
         }
     }
 }
