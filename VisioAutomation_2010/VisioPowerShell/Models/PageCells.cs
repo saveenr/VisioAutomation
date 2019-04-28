@@ -65,6 +65,7 @@ namespace VisioPowerShell.Models
         public string PrintTopMargin;
         public string PrintBottomMargin;
 
+        // Grid & Ruler
         public string XGridDensity;
         public string XGridOrigin;
         public string XGridSpacing;
