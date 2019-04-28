@@ -107,8 +107,8 @@
     <Compile Include="Models\ShapeCells.cs" />
     <Compile Include="Commands\Visio\OutVisio.cs" />
     <Compile Include="Commands\VisioShapeCells\GetVisioShapeCells.cs" />
-    <Compile Include="Commands\VisioDocument\SetVisioDocument.cs" />
-    <Compile Include="Commands\VisioPage\SetVisioPage.cs" />
+    <Compile Include="Commands\VisioDocument\SelectVisioDocument.cs" />
+    <Compile Include="Commands\VisioPage\SelectVisioPage.cs" />
     <Compile Include="Commands\VisioShapeCells\SetVisioShapeCells.cs" />
     <Compile Include="Commands\VisioPage\RemoveVisioPage.cs" />
     <Compile Include="Commands\VisioApplication\TestVisioApplication.cs" />

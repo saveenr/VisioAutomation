@@ -3,8 +3,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioDocument
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioDocument)]
-    public class SetVisioDocument : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Select, Nouns.VisioDocument)]
+    public class SelectVisioDocument : VisioCmdlet
     {
 
         // NONCONTEXT:DOCUMENT

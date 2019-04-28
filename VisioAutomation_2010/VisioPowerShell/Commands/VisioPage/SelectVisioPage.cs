@@ -3,8 +3,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioPage)]
-    public class SetVisioPage : VisioCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Select, Nouns.VisioPage)]
+    public class SelectVisioPage : VisioCmdlet
     {
         // NONCONTEXT:PAGE
 
