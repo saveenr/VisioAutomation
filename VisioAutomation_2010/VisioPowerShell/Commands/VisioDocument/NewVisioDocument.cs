@@ -6,10 +6,11 @@ namespace VisioPowerShell.Commands.VisioDocument
     public class NewVisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-        public string Stencil { get; set; }
+        public string Template { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public string Template { get; set; }
+        public string[] Stencil { get; set; }
+
 
         protected override void ProcessRecord()
         {
@@ -27,9 +28,13 @@ namespace VisioPowerShell.Commands.VisioDocument
 
             var doc = this.Client.Document.NewDocumentFromTemplate(this.Template);
 
-            if (!string.IsNullOrEmpty(this.Stencil))
+            if (this.Stencil != null)
             {
-                var stencildoc = this.Client.Document.OpenStencilDocument(this.Stencil);
+                foreach (string stencil in this.Stencil)
+                {
+                    var stencildoc = this.Client.Document.OpenStencilDocument(stencil);
+                }
+
             }
 
             this.WriteObject(doc);
