@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
+using VisioScripting.Models;
 
 namespace VisioScripting.Commands
 {
@@ -18,6 +19,25 @@ namespace VisioScripting.Commands
             targetwindow = targetwindow.ResolveToWindow(this._client);
             var selection = targetwindow.Window.Selection;
             return selection;
+        }
+
+        public void SelectShapeOperation(VisioScripting.TargetWindow targetwindow, Models.ShapeSelectionOperation operation)
+        {
+            if (operation == ShapeSelectionOperation.SelectAll)
+            {
+                this.SelectAllShapes(targetwindow);
+            }
+            else if (operation == ShapeSelectionOperation.InvertSelection)
+            {
+                this.InvertSelection(targetwindow);
+            }
+            else if (operation == ShapeSelectionOperation.SelectNone)
+            {
+                this.SelectNone(targetwindow);               
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();            }
         }
 
         public void SelectAllShapes(VisioScripting.TargetWindow targetwindow)

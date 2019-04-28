@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands.VisioShape
         public IVisio.Shape[] Shapes { get; set; }
 
         [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByOperation")]
-        public VisioPowerShell.Models.ShapeSelectionOperation SelectionOperation { get; set; }
+        public VisioScripting.Models.ShapeSelectionOperation SelectionOperation { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -21,18 +21,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 return;
             }
 
-            if (this.SelectionOperation == ShapeSelectionOperation.SelectAll)
-            {
-                this.Client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
-            }
-            else if (this.SelectionOperation == ShapeSelectionOperation.SelectNone)
-            {
-                this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
-            }
-            else if (this.SelectionOperation == ShapeSelectionOperation.InvertSelection)
-            {
-                this.Client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
-            }
+            this.Client.Selection.SelectShapeOperation(VisioScripting.TargetWindow.Auto, this.SelectionOperation);
         }
     }
 }

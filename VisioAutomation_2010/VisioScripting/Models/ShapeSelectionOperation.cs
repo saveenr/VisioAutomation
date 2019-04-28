@@ -1,4 +1,4 @@
-namespace VisioPowerShell.Models
+namespace VisioScripting.Models
 {
     public enum ShapeSelectionOperation
     {
