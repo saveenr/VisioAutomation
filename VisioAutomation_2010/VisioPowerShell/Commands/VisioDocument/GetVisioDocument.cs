@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -11,7 +12,7 @@ namespace VisioPowerShell.Commands.VisioDocument
         public SMA.SwitchParameter ActiveDocument;
 
         [SMA.Parameter(Mandatory = false, ParameterSetName = "docbyname")]
-        public string Name = null;
+        public string[] Name = null;
         
         
         protected override void ProcessRecord()
@@ -26,8 +27,22 @@ namespace VisioPowerShell.Commands.VisioDocument
 
             // If the active document is not specified then work on all the pages in the application
 
-            var docs = this.Client.Document.FindDocuments(this.Name);
-            this.WriteObject(docs, true);
+            if (this.Name == null)
+            {
+                // Get all docs
+                var docs = this.Client.Document.FindDocuments(null);
+                this.WriteObject(docs, true);
+                return;
+            }
+
+            var list_doc = new List<IVisio.Document>();
+            foreach (var name in Name)
+            {
+                var docs = this.Client.Document.FindDocuments(name);
+                list_doc.AddRange(docs);
+
+            }
+            this.WriteObject(list_doc, true);
         }
     }
 
