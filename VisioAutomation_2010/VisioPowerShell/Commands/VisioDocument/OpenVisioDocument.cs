@@ -11,11 +11,7 @@ namespace VisioPowerShell.Commands.VisioDocument
 
         protected override void ProcessRecord()
         {
-            if (this.Client.Application.HasAttachedApplication == false)
-            {
-                // no app - let's create one
-                this.Client.Application.NewAttachedApplication();
-            }
+            this.NewAppIfNeeded();
 
             if (this.filename_is_stencil(this.Filename))
             {

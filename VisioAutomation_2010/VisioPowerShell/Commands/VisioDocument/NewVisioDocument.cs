@@ -14,17 +14,7 @@ namespace VisioPowerShell.Commands.VisioDocument
 
         protected override void ProcessRecord()
         {
-            if (!this.Client.Application.HasAttachedApplication)
-            {
-                this.Client.Application.NewAttachedApplication();
-            }
-            else
-            {
-                if (!this.Client.Application.ValidateAttachedApplication())
-                {
-                    this.Client.Application.NewAttachedApplication();
-                }
-            }
+            this.NewAppIfNeeded();
 
             var doc = this.Client.Document.NewDocumentFromTemplate(this.Template);
 
@@ -39,5 +29,6 @@ namespace VisioPowerShell.Commands.VisioDocument
 
             this.WriteObject(doc);
         }
+
     }
 }

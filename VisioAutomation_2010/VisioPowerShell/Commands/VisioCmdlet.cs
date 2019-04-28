@@ -52,7 +52,21 @@ namespace VisioPowerShell.Commands
             base.WriteVerbose(s);
         }
 
-        
+        protected void NewAppIfNeeded()
+        {
+            if (!this.Client.Application.HasAttachedApplication)
+            {
+                this.Client.Application.NewAttachedApplication();
+            }
+            else
+            {
+                if (!this.Client.Application.ValidateAttachedApplication())
+                {
+                    this.Client.Application.NewAttachedApplication();
+                }
+            }
+        }
+
 
     }
 }
