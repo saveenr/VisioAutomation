@@ -9,7 +9,7 @@ namespace VisioPowerShell.Commands.VisioPage
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Renumber;
 
-        [SMA.Parameter(Mandatory = false, Position = 0, ValueFromPipeline = true)]
+        [SMA.Parameter(Mandatory = false, ValueFromPipeline = true)]
         public IVisio.Page[] Page;
 
         protected override void ProcessRecord()
