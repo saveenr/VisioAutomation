@@ -8,10 +8,8 @@ namespace VisioPowerShell.Commands.VisioShape
     {
         [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
         public IVisio.Shape[] Shapes { get; set; }
-        
-        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapeIDs")]
-        public int[] ShapeIDs { get; set; }
-        
+       
+       
         [SMA.Parameter(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
         public VisioScripting.Models.SelectionOperation Operation { get; set; }
 
@@ -20,25 +18,20 @@ namespace VisioPowerShell.Commands.VisioShape
             if (this.Shapes !=null)
             {
                 this.Client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, this.Shapes);
+                return;
             }
-            else if (this.ShapeIDs!=null)
+
+            if (this.Operation == VisioScripting.Models.SelectionOperation.All)
             {
-                this.Client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, this.ShapeIDs);
+                this.Client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
             }
-            else
+            else if (this.Operation == VisioScripting.Models.SelectionOperation.None)
             {
-                if (this.Operation == VisioScripting.Models.SelectionOperation.All)
-                {
-                    this.Client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
-                }
-                else if (this.Operation == VisioScripting.Models.SelectionOperation.None)
-                {
-                    this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
-                }
-                else if (this.Operation == VisioScripting.Models.SelectionOperation.Invert)
-                {
-                    this.Client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
-                }
+                this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
+            }
+            else if (this.Operation == VisioScripting.Models.SelectionOperation.Invert)
+            {
+                this.Client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
             }
         }
     }
