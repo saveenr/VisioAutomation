@@ -45,7 +45,7 @@ namespace VisioPowerShell_Tests
         {
             var cmd = new NewVisioShape();
             cmd.Master = masters;
-            cmd.Points= points;
+            cmd.Position = points;
             var shape_list = cmd.Invoke<IVisio.Shape>().ToList();
             return shape_list;
         }

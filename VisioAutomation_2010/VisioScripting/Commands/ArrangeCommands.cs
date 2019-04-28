@@ -118,24 +118,6 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DistributenOnAxis(TargetShapes targetshapes, Models.Axis axis, double spacing)
-        {
-            targetshapes = targetshapes.ResolveToShapes(this._client);
-
-            if (targetshapes.Shapes.Count < 1)
-            {
-                return;
-            }
-
-            var page = targetshapes.Shapes[0].ContainingPage;
-            var targetshapeids = targetshapes.ToShapeIDs();
-
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeOnAxis)))
-            {
-                VisioScripting.Helpers.ArrangeHelper._distribute_with_spacing(page, targetshapeids, axis, spacing);
-            }
-        }
-
         public void DistributeOnAxis(VisioScripting.TargetSelection targetselection, Models.Axis axis)
         {
             targetselection = targetselection.ResolveToSelection(this._client);
