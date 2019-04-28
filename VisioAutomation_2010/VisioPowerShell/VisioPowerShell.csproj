@@ -114,6 +114,7 @@
     <Compile Include="Commands\VisioApplication\TestVisioApplication.cs" />
     <Compile Include="Commands\VisioClient\GetVisioClient.cs" />
     <Compile Include="Commands\VisioUserDefinedCell\RemoveVisioUserDefinedCell.cs" />
+    <Compile Include="Models\ShapeSelectionOperation.cs" />
     <Compile Include="VisioPsClientContext.cs" />
     <Compile Include="Commands\VisioShape\NewVisioShape.cs" />
     <Compile Include="Commands\VisioShape\CopyVisioShape.cs" />

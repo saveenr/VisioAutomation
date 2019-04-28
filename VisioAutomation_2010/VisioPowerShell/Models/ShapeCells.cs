@@ -158,3 +158,7 @@ namespace VisioPowerShell.Models
     }
 }
 
+namespace VisioPowerShell.Models
+{
+}
+

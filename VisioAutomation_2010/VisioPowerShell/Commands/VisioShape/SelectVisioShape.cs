@@ -1,4 +1,5 @@
-﻿using SMA = System.Management.Automation;
+﻿using VisioPowerShell.Models;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioShape
@@ -9,14 +10,8 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
         public IVisio.Shape[] Shapes { get; set; }
 
-        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByOperation_SelectAll")]
-        public SMA.SwitchParameter All;
-
-        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByOperation_None")]
-        public SMA.SwitchParameter None;
-
-        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByOperation_Invert")]
-        public SMA.SwitchParameter Invert;
+        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByOperation")]
+        public VisioPowerShell.Models.ShapeSelectionOperation SelectionOperation { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -26,15 +21,15 @@ namespace VisioPowerShell.Commands.VisioShape
                 return;
             }
 
-            if (this.All)
+            if (this.SelectionOperation == ShapeSelectionOperation.SelectAll)
             {
                 this.Client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
             }
-            else if (this.None)
+            else if (this.SelectionOperation == ShapeSelectionOperation.SelectNone)
             {
                 this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
             }
-            else if (this.Invert)
+            else if (this.SelectionOperation == ShapeSelectionOperation.InvertSelection)
             {
                 this.Client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
             }
