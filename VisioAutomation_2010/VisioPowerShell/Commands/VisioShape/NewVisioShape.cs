@@ -28,7 +28,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
 
         [SMA.Parameter(ParameterSetName = "masters", Mandatory = true)]
-        public VisioAutomation.Geometry.Point[] DropPosition { get; set; }
+        public VisioAutomation.Geometry.Point[] Position { get; set; }
 
         [SMA.Parameter(ParameterSetName = "line", Mandatory = true)]
         public VisioAutomation.Geometry.Point From { get; set; }
@@ -121,7 +121,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
             var targetpage = VisioScripting.TargetPage.Auto.ResolveToPage(this.Client);
 
-            var shapeids = this.Client.Master.DropMasters(targetpage, this.Master, this.DropPosition);
+            var shapeids = this.Client.Master.DropMasters(targetpage, this.Master, this.Position);
             var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(targetpage.Page.Shapes, shapeids);
 
             // If there are cells to set, then use them
