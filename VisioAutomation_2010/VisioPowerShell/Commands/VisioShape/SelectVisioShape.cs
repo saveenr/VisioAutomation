@@ -8,10 +8,15 @@ namespace VisioPowerShell.Commands.VisioShape
     {
         [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
         public IVisio.Shape[] Shapes { get; set; }
-       
-       
-        [SMA.Parameter(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
-        public VisioScripting.Models.SelectionOperation Operation { get; set; }
+
+        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByOperation_SelectAll")]
+        public SMA.SwitchParameter All;
+
+        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByOperation_None")]
+        public SMA.SwitchParameter None;
+
+        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByOperation_Invert")]
+        public SMA.SwitchParameter Invert;
 
         protected override void ProcessRecord()
         {
@@ -21,15 +26,15 @@ namespace VisioPowerShell.Commands.VisioShape
                 return;
             }
 
-            if (this.Operation == VisioScripting.Models.SelectionOperation.All)
+            if (this.All)
             {
                 this.Client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
             }
-            else if (this.Operation == VisioScripting.Models.SelectionOperation.None)
+            else if (this.None)
             {
                 this.Client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
             }
-            else if (this.Operation == VisioScripting.Models.SelectionOperation.Invert)
+            else if (this.Invert)
             {
                 this.Client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
             }
