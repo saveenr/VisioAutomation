@@ -6,13 +6,13 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]
     public class GetVisioShape : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
         public SMA.SwitchParameter ActiveSelection;
 
-        [SMA.Parameter(Mandatory = false, Position = 0)]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "shapebyname")]
         public string[] Name;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "shapebyid")]
         public int[] ID;
 
         // CONTEXT:PAGE

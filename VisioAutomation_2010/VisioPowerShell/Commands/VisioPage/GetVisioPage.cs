@@ -7,14 +7,14 @@ namespace VisioPowerShell.Commands.VisioPage
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPage)]
     public class GetVisioPage : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
         public SMA.SwitchParameter ActivePage;
 
-        [SMA.Parameter(Mandatory = false)]
-        public int[] ID;
-
-        [SMA.Parameter(Position=0, Mandatory = false)]
+        [SMA.Parameter(Position=0, Mandatory = false, ParameterSetName = "pagebyname")]
         public string Name;
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "pagebyid")]
+        public int[] ID;
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;

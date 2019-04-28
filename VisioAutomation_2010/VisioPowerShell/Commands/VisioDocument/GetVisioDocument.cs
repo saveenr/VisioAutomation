@@ -7,10 +7,10 @@ namespace VisioPowerShell.Commands.VisioDocument
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioDocument)]
     public class GetVisioDocument : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
         public SMA.SwitchParameter ActiveDocument;
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "docbyname")]
         public string Name = null;
         
         
