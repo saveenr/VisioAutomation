@@ -26,7 +26,7 @@ namespace VisioPowerShell.Commands.VisioModel
             if (root.Name == "directedgraph")
             {
                 this.WriteVerbose("Loading Directed Graph");
-                var list_dglayout = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXml(this.Client, xmldoc);
+                var list_dglayout = VisioScripting.Builders.DirectedGraphDocumentLoader.LoadFromXml(this.Client, xmldoc);
                 this.WriteObject(list_dglayout);               
             }
             else if (root.Name == "orgchart")

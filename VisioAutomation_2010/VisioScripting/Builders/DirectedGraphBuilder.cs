@@ -8,7 +8,7 @@ using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Builders
 {
-    public class DirectedGraphBuilder
+    public class DirectedGraphDocumentLoader
     {
         private class BuilderError
         {
@@ -49,7 +49,7 @@ namespace VisioScripting.Builders
         public static DirectedGraphDocument LoadFromXml(Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
-            return DirectedGraphBuilder.LoadFromXml(client, xmldoc);
+            return DirectedGraphDocumentLoader.LoadFromXml(client, xmldoc);
         }
 
         private class PageData
@@ -79,7 +79,7 @@ namespace VisioScripting.Builders
                 pagedata.Errors = new List<BuilderError>();
                 pagedata.LayoutOptions = new MsaglLayoutOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
-                DirectedGraphBuilder._get_render_options_from_xml(renderoptions_el, pagedata.LayoutOptions);
+                DirectedGraphDocumentLoader._get_render_options_from_xml(renderoptions_el, pagedata.LayoutOptions);
 
                 pagedata.DirectedGraph = new DirectedGraphLayout();
                 var shape_els = page_el.Element("shapes").Elements("shape");
@@ -135,7 +135,7 @@ namespace VisioScripting.Builders
         public static DirectedGraphDocument LoadFromXml(Client client, SXL.XDocument xmldoc)
         {
             var dgdoc = new DirectedGraphDocument();
-            var pagedatas = DirectedGraphBuilder._load_page_data_from_xml(client, xmldoc);
+            var pagedatas = DirectedGraphDocumentLoader._load_page_data_from_xml(client, xmldoc);
 
             // STOP IF ANY ERRORS
             int num_errors = pagedatas.Select(pagedata => pagedata.Errors.Count).Sum();
