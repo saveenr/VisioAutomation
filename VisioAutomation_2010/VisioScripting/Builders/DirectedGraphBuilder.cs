@@ -46,7 +46,7 @@ namespace VisioScripting.Builders
             }
         }
 
-        public static List<DirectedGraphLayout> LoadFromXml(Client client, string filename)
+        public static DirectedGraphDocument LoadFromXml(Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
             return DirectedGraphBuilder.LoadFromXml(client, xmldoc);
@@ -132,8 +132,9 @@ namespace VisioScripting.Builders
             return pagedatas;
         }
 
-        public static List<DirectedGraphLayout> LoadFromXml(Client client, SXL.XDocument xmldoc)
+        public static DirectedGraphDocument LoadFromXml(Client client, SXL.XDocument xmldoc)
         {
+            var dgdoc = new DirectedGraphDocument();
             var pagedatas = DirectedGraphBuilder._load_page_data_from_xml(client, xmldoc);
 
             // STOP IF ANY ERRORS
@@ -190,8 +191,10 @@ namespace VisioScripting.Builders
             }
             client.Output.WriteVerbose( "Finished rendering AutoLayout");
 
-            var directedgraphs = pagedatas.Select(pagedata => pagedata.DirectedGraph).ToList();
-            return directedgraphs;
+            var layouts = pagedatas.Select(pagedata => pagedata.DirectedGraph);
+            dgdoc.Layouts.AddRange(layouts);
+
+            return dgdoc;
         }
 
         private static void _get_render_options_from_xml(SXL.XElement el, MsaglLayoutOptions options)
