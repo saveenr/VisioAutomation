@@ -13,7 +13,7 @@ namespace VisioPowerShell.Commands.Visio
         public VisioAutomation.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
 
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "directedgraph")]
-        public List<VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraph { get; set; }
+        public VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphDocument DirectedGraphDocument { get; set; }
 
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "datatable")]
         public VisioAutomation.Models.Data.DataTableModel DataTableModel { get; set; }
@@ -39,9 +39,9 @@ namespace VisioPowerShell.Commands.Visio
             {
                 this.Client.Model.DrawGrid(VisioScripting.TargetPage.Auto, this.GridLayout);
             }
-            else if (this.DirectedGraph != null)
+            else if (this.DirectedGraphDocument != null)
             {
-                this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraph);
+                this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraphDocument);
             }
             else if (this.DataTableModel != null)
             {

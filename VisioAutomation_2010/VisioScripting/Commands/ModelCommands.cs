@@ -150,7 +150,7 @@ namespace VisioScripting.Commands
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DrawDirectedGraphDocument(IList<GRAPH.DirectedGraphLayout> graph)
+        public void DrawDirectedGraphDocument(GRAPH.DirectedGraphDocument dgdoc)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
@@ -158,30 +158,32 @@ namespace VisioScripting.Commands
             var app = cmdtarget.Application;
 
             this._client.Output.WriteVerbose("Creating a New Document For the Directed Graphs");
-            string template = null;
-            var doc = this._client.Document.NewDocumentFromTemplate(template);
+            this._client.Output.WriteVerbose("Number of Layouts: {0}", dgdoc.Layouts.Count);
+            this._client.Output.WriteVerbose("Template: {0}", dgdoc.Template);
+            var doc = this._client.Document.NewDocumentFromTemplate(dgdoc.Template);
 
             int num_pages_created = 0;
             var doc_pages = doc.Pages;
 
-            foreach (int i in Enumerable.Range(0, graph.Count))
+            // TODO: Consider reading this in from the formatting for each directed graph layout
+            var options = new GRAPH.MsaglLayoutOptions();
+            options.UseDynamicConnectors = false;
+
+            foreach (int i in Enumerable.Range(0, dgdoc.Layouts.Count))
             {
-                var dg = graph[i];
-
-                
-                var options = new GRAPH.MsaglLayoutOptions();
-                options.UseDynamicConnectors = false;
-
+                var dg_layout = dgdoc.Layouts[i];
+                                
                 // if this is the first page to draw
                 // then reuse the initial empty page in the document
                 // otherwise, create a new page.
                 var page = num_pages_created == 0 ? app.ActivePage : doc_pages.Add();
 
-                this._client.Output.WriteVerbose("Rendering page: {0}", i + 1);
-                dg.Render(page, options);
+                this._client.Output.WriteVerbose("Rendering on page: \"{0}\",{1}", page.Name, i + 1);
+                dg_layout.Render(page, options);
 
                 var targetpages = new VisioScripting.TargetPages(page);
-                this._client.Page.ResizePageToFitContents(targetpages, new VisioAutomation.Geometry.Size(1.0, 1.0));
+
+                this._client.Page.ResizePageToFitContents(targetpages, dgdoc.BorderSize);
                 this._client.View.SetZoomToObject(VisioScripting.TargetWindow.Auto, VisioScripting.Models.ZoomToObject.Page);
                 this._client.Output.WriteVerbose("Finished rendering page");
 
