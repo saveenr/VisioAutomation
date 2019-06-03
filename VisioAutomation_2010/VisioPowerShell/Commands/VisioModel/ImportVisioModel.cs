@@ -26,14 +26,14 @@ namespace VisioPowerShell.Commands.VisioModel
             if (root.Name == "directedgraph")
             {
                 this.WriteVerbose("Loading Directed Graph");
-                var list_dglayout = VisioScripting.Builders.DirectedGraphDocumentLoader.LoadFromXml(this.Client, xmldoc);
-                this.WriteObject(list_dglayout);               
+                var dgdoc = VisioScripting.Builders.DirectedGraphDocumentLoader.LoadFromXml(this.Client, xmldoc);
+                this.WriteObject(dgdoc);               
             }
             else if (root.Name == "orgchart")
             {
                 this.WriteVerbose("Loading as Org Chart");
-                var orgchart_docmodel = VisioScripting.Builders.OrgChartDocumentLoader.LoadFromXml(this.Client, xmldoc);
-                this.WriteObject(orgchart_docmodel);
+                var orgchartdoc = VisioScripting.Builders.OrgChartDocumentLoader.LoadFromXml(this.Client, xmldoc);
+                this.WriteObject(orgchartdoc);
             }
             else
             {
