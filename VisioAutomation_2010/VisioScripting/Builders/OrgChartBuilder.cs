@@ -5,12 +5,12 @@ using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Builders
 {
-    public class OrgChartBuilder
+    public class OrgChartDocumentLoader
     {
         public static VAORGCHART.OrgChartDocument LoadFromXml(Client client, string filename)
         {
             var xdoc = SXL.XDocument.Load(filename);
-            return OrgChartBuilder.LoadFromXml(client, xdoc);
+            return OrgChartDocumentLoader.LoadFromXml(client, xdoc);
         }
 
         public static VAORGCHART.OrgChartDocument LoadFromXml(Client client, SXL.XDocument xdoc)

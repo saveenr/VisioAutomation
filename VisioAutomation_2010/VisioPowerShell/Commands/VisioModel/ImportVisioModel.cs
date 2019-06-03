@@ -32,7 +32,7 @@ namespace VisioPowerShell.Commands.VisioModel
             else if (root.Name == "orgchart")
             {
                 this.WriteVerbose("Loading as Org Chart");
-                var orgchart_docmodel = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(this.Client, xmldoc);
+                var orgchart_docmodel = VisioScripting.Builders.OrgChartDocumentLoader.LoadFromXml(this.Client, xmldoc);
                 this.WriteObject(orgchart_docmodel);
             }
             else

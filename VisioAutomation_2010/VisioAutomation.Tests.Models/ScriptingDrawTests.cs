@@ -326,7 +326,7 @@ namespace VisioAutomation_Tests.Scripting
         private void draw_org_chart(VisioScripting.Client client, string text)
         {
             var xmldoc = SXL.XDocument.Parse(text);
-            var orgchart = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(client, xmldoc);
+            var orgchart = VisioScripting.Builders.OrgChartDocumentLoader.LoadFromXml(client, xmldoc);
 
             client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
         }
