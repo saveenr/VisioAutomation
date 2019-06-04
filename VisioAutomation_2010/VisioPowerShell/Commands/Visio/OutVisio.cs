@@ -31,17 +31,17 @@ namespace VisioPowerShell.Commands.Visio
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
-            if (this.OrgChart != null)
+            if (this.DirectedGraphDocument != null)
+            {
+                this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraphDocument);
+            }
+            else if (this.OrgChart != null)
             {
                 this.Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
                 this.Client.Model.DrawGrid(VisioScripting.TargetPage.Auto, this.GridLayout);
-            }
-            else if (this.DirectedGraphDocument != null)
-            {
-                this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraphDocument);
             }
             else if (this.DataTableModel != null)
             {
