@@ -5,8 +5,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class DirectedGraphLayout
     {
-        public ShapeList Shapes;
-        public ConnectorList Connectors;
+        public readonly ShapeList Shapes;
+        public readonly ConnectorList Connectors;
 
         public DirectedGraphLayout()
         {
