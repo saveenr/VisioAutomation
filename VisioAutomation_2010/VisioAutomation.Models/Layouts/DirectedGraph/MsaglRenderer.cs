@@ -203,7 +203,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         private static void _resolve_masters(DirectedGraphLayout layout_diagram, IVisio.Application app)
         {
             // for masters that are identified by their name and stencil, go find the actual master objects by
-            // loading the specified stenciles
+            // loading the specified stencils
 
             var documents = app.Documents;
             var master_to_size = new Dictionary<IVisio.Master, VA.Geometry.Size>();
