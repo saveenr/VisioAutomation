@@ -80,7 +80,7 @@ namespace VisioAutomation_Tests.Scripting
             client.Document.CloseAllDocumentsWithoutSaving();
 
             Assert.IsFalse(client.Document.HasActiveDocument);
-            var application = client.Application.GetAttachedApplication();
+            var application = client.Application.GetApplication();
             var documents = application.Documents;
             Assert.AreEqual(0, documents.Count);
         }

@@ -26,7 +26,7 @@ namespace VisioScripting
             require_app = require_app || require_document || require_page;
             require_document = require_document || require_page;
 
-            this.Application = this._client.Application.GetAttachedApplication();
+            this.Application = this._client.Application.GetApplication();
 
             if (require_app && this.Application == null)
             {

@@ -24,7 +24,7 @@ namespace VisioPowerShell.Commands.Visio
 
         protected override void ProcessRecord()
         {
-            var app = this.Client.Application.GetAttachedApplication();
+            var app = this.Client.Application.GetApplication();
             if (app == null)
             {
                 string msg = "A Visio Application Instance is not attached";

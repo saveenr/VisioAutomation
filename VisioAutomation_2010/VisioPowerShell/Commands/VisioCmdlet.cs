@@ -54,15 +54,15 @@ namespace VisioPowerShell.Commands
 
         protected void NewAppIfNeeded()
         {
-            if (!this.Client.Application.HasAttachedApplication)
+            if (!this.Client.Application.HasApplication)
             {
-                this.Client.Application.NewAttachedApplication();
+                this.Client.Application.NewApplication();
             }
             else
             {
-                if (!this.Client.Application.ValidateAttachedApplication())
+                if (!this.Client.Application.ValidateApplication())
                 {
-                    this.Client.Application.NewAttachedApplication();
+                    this.Client.Application.NewApplication();
                 }
             }
         }

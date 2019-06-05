@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioApplication
     {
         protected override void ProcessRecord()
         {
-            var app = this.Client.Application.GetAttachedApplication();
+            var app = this.Client.Application.GetApplication();
 
             if (app == null)
             {
