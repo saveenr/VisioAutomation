@@ -44,7 +44,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void CloseApplication(bool force)
+        public void CloseApplication()
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
@@ -56,24 +56,20 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            if (force)
-            {
-                // If you want to force the thing to close
-                // it will require closing all documents and then quiting
-                var documents = app.Documents;
+            // Force the app to close
+            // it will require closing all documents and then quiting
+            var documents = app.Documents;
 
-                while (documents.Count > 0)
-                {
-                    var active_document = app.ActiveDocument;
-                    active_document.Close(true);
-                }
-
-                app.Quit(true);
-            }
-            else
+            while (documents.Count > 0)
             {
-                app.Quit();
+                var active_document = app.ActiveDocument;
+                active_document.Close(true); // force the document to close
             }
+
+            // now that all the documents are closed, close the application
+            app.Quit(true);
+
+            // clean out the app reference
             this._app = null;
         }
 

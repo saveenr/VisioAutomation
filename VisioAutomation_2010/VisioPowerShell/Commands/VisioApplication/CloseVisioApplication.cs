@@ -5,12 +5,9 @@ namespace VisioPowerShell.Commands.VisioApplication
     [SMA.Cmdlet(SMA.VerbsCommon.Close, Nouns.VisioApplication)]
     public class CloseVisioApplication : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Force { get; set; }
-        
         protected override void ProcessRecord()
         {
-            this.Client.Application.CloseApplication(this.Force);
+            this.Client.Application.CloseApplication();
         }
     }
 }

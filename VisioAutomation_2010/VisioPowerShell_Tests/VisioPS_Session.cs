@@ -197,7 +197,6 @@ namespace VisioPowerShell_Tests
         public void Cmd_Close_VisioApplication(bool force)
         {
             var cmd = new VisioPowerShell.Commands.VisioApplication.CloseVisioApplication();
-            cmd.Force = force;
             cmd.InvokeVoid();
         }
     }
