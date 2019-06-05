@@ -11,10 +11,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         {
         }
 
-        static VisioRenderer()
-        {
-        }
-
         public void Render(IVisio.Page page, DirectedGraphLayout directed_graph_layout, VisioLayoutOptions options)
         {
             // This is Visio-based render - it does NOT use MSAGL
