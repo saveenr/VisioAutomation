@@ -97,7 +97,7 @@
     <Compile Include="Layouts\DirectedGraph\MsaglUtil.cs" />
     <Compile Include="Layouts\DirectedGraph\Node.cs" />
     <Compile Include="Layouts\DirectedGraph\NodeUserData.cs" />
-    <Compile Include="Layouts\DirectedGraph\RendererOptions.cs" />
+    <Compile Include="Layouts\DirectedGraph\DirectedGraphOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\Shape.cs" />
     <Compile Include="Layouts\DirectedGraph\ShapeList.cs" />
     <Compile Include="Layouts\DirectedGraph\VisioLayoutOptions.cs" />
