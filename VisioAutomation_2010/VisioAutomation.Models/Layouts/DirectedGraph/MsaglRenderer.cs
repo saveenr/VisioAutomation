@@ -77,12 +77,12 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        private MSAGL.Core.Layout.GeometryGraph _create_msagl_graph(DirectedGraphLayout layout_diagram)
+        private MSAGL.Core.Layout.GeometryGraph _create_msagl_graph(DirectedGraphLayout dglayout)
         {
             var mg_graph = new MSAGL.Core.Layout.GeometryGraph();
 
             // Create the nodes in MSAGL
-            foreach (var layout_shape in layout_diagram.Shapes)
+            foreach (var layout_shape in dglayout.Shapes)
             {
                 var nodesize = this._to_mg_coordinates(layout_shape.Size ?? this.LayoutOptions.DefaultShapeSize);
                 var node_user_data = new NodeUserData(layout_shape.ID, layout_shape);
@@ -92,7 +92,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 mg_graph.Nodes.Add(mg_node);
             }
 
-            this.validate_connectors(layout_diagram);
+            this.validate_connectors(dglayout);
 
             var mg_coordinates = this._to_mg_coordinates(this.DefaultBezierConnectorLabelBoxSize);
 
@@ -107,7 +107,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
 
             // Create the MG Connectors
-            foreach (var layout_connector in layout_diagram.Connectors)
+            foreach (var layout_connector in dglayout.Connectors)
             {
                 if (layout_connector.From == null)
                 {
@@ -159,24 +159,22 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             return mg_graph;
         }
 
-        public void Render(
-            DirectedGraphLayout layout_diagram,
-            IVisio.Page page)
+        public void Render(DirectedGraphLayout dglayout, IVisio.Page page)
         {
             // Create A DOM and render it to the page
             var app = page.Application;
-            var page_node = this.CreateDomPage(layout_diagram, app);
+            var page_node = this.CreateDomPage(dglayout, app);
 
             page_node.Render(page);
 
             // Find all the shapes that were created in the DOM and put them in the layout structure
-            foreach (var layout_shape in layout_diagram.Shapes)
+            foreach (var layout_shape in dglayout.Shapes)
             {
                 var shape_node = layout_shape.DomNode;
                 layout_shape.VisioShape = shape_node.VisioShape;
             }
 
-            var layout_edges = layout_diagram.Connectors;
+            var layout_edges = dglayout.Connectors;
             foreach (var layout_edge in layout_edges)
             {
                 var vnode = layout_edge.DomNode;
@@ -198,7 +196,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        private static void _resolve_masters(DirectedGraphLayout layout_diagram, IVisio.Application app)
+        private static void _resolve_masters(DirectedGraphLayout dglayout, IVisio.Application app)
         {
             // for masters that are identified by their name and stencil, go find the actual master objects by
             // loading the specified stencils
@@ -208,14 +206,14 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             // Load and cache all the masters
             var master_cache = new VA.Models.Utilities.MasterCache();
-            foreach (var layout_shape in layout_diagram.Shapes)
+            foreach (var layout_shape in dglayout.Shapes)
             {
                 master_cache.Add(layout_shape.MasterName, layout_shape.StencilName);
             }
             master_cache.Resolve(documents);
 
             // If no size was provided for the shape, then set the size based on the master
-            var layoutshapes_without_size_info = layout_diagram.Shapes.Where(s => s.Size == null);
+            var layoutshapes_without_size_info = dglayout.Shapes.Where(s => s.Size == null);
             foreach (var layoutshape in layoutshapes_without_size_info)
             {
                 var master = master_cache.Get(layoutshape.MasterName, layoutshape.StencilName);
@@ -230,12 +228,12 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        public Dom.Page CreateDomPage(DirectedGraphLayout layout_diagram, IVisio.Application vis)
+        public Dom.Page CreateDomPage(DirectedGraphLayout dglayout, IVisio.Application vis)
         {
             var page_node = new Dom.Page();
-            MsaglRenderer._resolve_masters(layout_diagram, vis);
+            MsaglRenderer._resolve_masters(dglayout, vis);
 
-            var mg_graph = this._create_msagl_graph(layout_diagram);
+            var mg_graph = this._create_msagl_graph(dglayout);
 
             this._create_dom_shapes(page_node.Shapes, mg_graph, vis);
 
@@ -547,21 +545,21 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        public static void Render(IVisio.Page page, DirectedGraphLayout directed_graph_layout, MsaglLayoutOptions options)
+        public static void Render(IVisio.Page page, DirectedGraphLayout dglayout, MsaglLayoutOptions layoutoptions)
         {
             if (page == null)
             {
                 throw new ArgumentNullException(nameof(page));
             }
 
-            if (options == null)
+            if (layoutoptions == null)
             {
-                throw new ArgumentNullException(nameof(options));
+                throw new ArgumentNullException(nameof(layoutoptions));
             }
 
             var renderer = new MsaglRenderer();
-            renderer.LayoutOptions = options;
-            renderer.Render(directed_graph_layout, page);
+            renderer.LayoutOptions = layoutoptions;
+            renderer.Render(dglayout, page);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);
         }
     }

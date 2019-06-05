@@ -197,13 +197,13 @@ namespace VisioScripting.Builders
             return dgdoc;
         }
 
-        private static void _get_render_options_from_xml(SXL.XElement el, MsaglLayoutOptions options)
+        private static void _get_render_options_from_xml(SXL.XElement el, MsaglLayoutOptions layoutoptions)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             double DoubleParse(string str) => double.Parse(str, culture);
 
-            options.UseDynamicConnectors = el.GetAttributeValue("usedynamicconnectors", bool.Parse);
-            options.ScalingFactor = el.GetAttributeValue("scalingfactor", DoubleParse);
+            layoutoptions.UseDynamicConnectors = el.GetAttributeValue("usedynamicconnectors", bool.Parse);
+            layoutoptions.ScalingFactor = el.GetAttributeValue("scalingfactor", DoubleParse);
         }
     }
 }
