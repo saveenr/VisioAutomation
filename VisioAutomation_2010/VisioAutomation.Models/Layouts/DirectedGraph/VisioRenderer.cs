@@ -5,7 +5,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
     class VisioRenderer
     {
 
-        public DirectedGraphOptions DirectedGraphOptions = new DirectedGraphOptions();
 
         public VisioRenderer()
         {
@@ -37,7 +36,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             foreach (var connector in directed_graph_layout.Connectors)
             {
-                var connector_node = page_node.Shapes.Connect(this.DirectedGraphOptions.EdgeMasterName, this.DirectedGraphOptions.EdgeStencilName, connector.From.DomNode, connector.To.DomNode);
+                var connector_node = page_node.Shapes.Connect(options.EdgeMasterName, options.EdgeStencilName, connector.From.DomNode, connector.To.DomNode);
                 connector.DomNode = connector_node;
                 connector.DomNode.Text = new VisioAutomation.Models.Text.Element(connector.Label);
             }

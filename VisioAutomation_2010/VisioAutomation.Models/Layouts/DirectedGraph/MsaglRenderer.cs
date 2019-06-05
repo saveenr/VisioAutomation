@@ -10,7 +10,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class MsaglRenderer
     {
-        public DirectedGraphOptions DirectedGraphOptions = new DirectedGraphOptions();
 
         private VA.Geometry.Rectangle _mg_bb;
         private VA.Geometry.Rectangle _layout_bb;
@@ -386,7 +385,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     
                     vconnector = new Dom.Connector(
                     layout_connector.From.DomNode,
-                    layout_connector.To.DomNode, this.DirectedGraphOptions.EdgeMasterName, this.DirectedGraphOptions.EdgeStencilName);
+                    layout_connector.To.DomNode, this.LayoutOptions.EdgeMasterName, this.LayoutOptions.EdgeStencilName);
                 }
                 layout_connector.DomNode = vconnector;
                 shape_nodes.Add(vconnector);

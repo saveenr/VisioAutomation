@@ -5,6 +5,9 @@
         public double ScalingFactor { get; set; }
         public bool UseDynamicConnectors { get; set; }
 
+        public string EdgeMasterName = "Dynamic Connector";
+        public string EdgeStencilName = "connec_u.vss";
+
         public MsaglLayoutOptions() :
             base()
         {
