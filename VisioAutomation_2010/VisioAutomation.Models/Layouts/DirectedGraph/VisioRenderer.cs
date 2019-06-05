@@ -4,8 +4,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class VisioRenderer
     {
-        private string _edge_master_name = "Dynamic Connector";
-        private string _edge_stencil_name = "connec_u.vss";
+
+        public readonly RendererOptions renderer_options = new RendererOptions();
 
         public VisioRenderer()
         {
@@ -41,7 +41,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             foreach (var connector in directed_graph_layout.Connectors)
             {
-                var connector_node = page_node.Shapes.Connect(_edge_master_name, _edge_stencil_name, connector.From.DomNode, connector.To.DomNode);
+                var connector_node = page_node.Shapes.Connect(this.renderer_options.EdgeMasterName, this.renderer_options.EdgeStencilName, connector.From.DomNode, connector.To.DomNode);
                 connector.DomNode = connector_node;
                 connector.DomNode.Text = new VisioAutomation.Models.Text.Element(connector.Label);
             }
