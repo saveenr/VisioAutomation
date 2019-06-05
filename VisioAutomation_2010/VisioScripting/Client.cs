@@ -79,21 +79,21 @@ namespace VisioScripting
             get { return this._client_context; }
         }
         
-        internal static List<System.Reflection.PropertyInfo> GetProperties()
-        {
-            var commandset_t = typeof (Commands.CommandSet);
-            var all_props = typeof(Client).GetProperties();
-            var command_props = all_props
-                .Where(p => commandset_t.IsAssignableFrom(p.PropertyType))
-                .ToList();
-            return command_props;
-        }
-
         public CommandTarget GetCommandTarget(CommandTargetFlags flags)
         {
             var command_target = new CommandTarget(this, flags);
             return command_target;
 
+        }
+
+        internal static List<System.Reflection.PropertyInfo> _get_properties()
+        {
+            var commandset_t = typeof(Commands.CommandSet);
+            var all_props = typeof(Client).GetProperties();
+            var command_props = all_props
+                .Where(p => commandset_t.IsAssignableFrom(p.PropertyType))
+                .ToList();
+            return command_props;
         }
     }
 }

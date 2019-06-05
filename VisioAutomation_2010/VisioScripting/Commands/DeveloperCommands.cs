@@ -46,7 +46,7 @@ namespace VisioScripting.Commands
             //docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
-            var cmdst_props = Client.GetProperties().OrderBy(i=>i.Name).ToList();
+            var cmdst_props = Client._get_properties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using SMA = System.Management.Automation;
+using MODELS = VisioAutomation.Models;
 
 namespace VisioPowerShell.Commands.Visio
 {
@@ -7,19 +8,19 @@ namespace VisioPowerShell.Commands.Visio
     public class OutVisio : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "orgchcart")]
-        public VisioAutomation.Models.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
+        public MODELS.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
 
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "grid")]
-        public VisioAutomation.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
+        public MODELS.Layouts.Grid.GridLayout GridLayout { get; set; }
 
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "directedgraph")]
-        public VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphDocument DirectedGraphDocument { get; set; }
+        public MODELS.Layouts.DirectedGraph.DirectedGraphDocument DirectedGraphDocument { get; set; }
 
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "datatable")]
-        public VisioAutomation.Models.Data.DataTableModel DataTableModel { get; set; }
+        public MODELS.Data.DataTableModel DataTableModel { get; set; }
 
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "systemxmldoc")]
-        public VisioAutomation.Models.Data.XmlModel XmlModel;
+        public MODELS.Data.XmlModel XmlModel;
 
         protected override void ProcessRecord()
         {
