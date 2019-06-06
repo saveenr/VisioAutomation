@@ -54,6 +54,7 @@
     <Compile Include="ConnectorType.cs" />
     <Compile Include="Data\DataTableModel.cs" />
     <Compile Include="Data\XmlModel.cs" />
+    <Compile Include="Documents\OrgCharts\OrgChartStyling.cs" />
     <Compile Include="Dom\RenderPerformanceScope.cs" />
     <Compile Include="Dom\RenderPerforfmanceSettings.cs" />
     <Compile Include="Geometry\ArcSegment.cs" />
