@@ -47,9 +47,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             vr.Render(page, this, dgstyling);
         }
 
-        public void Render(IVisio.Page page, MsaglLayoutOptions layoutoptions)
+        public void Render(IVisio.Page page, MsaglLayoutOptions layoutoptions, DirectedGraphStyling styling)
         {
-            MsaglRenderer.Render(page, this, layoutoptions);
+            MsaglRenderer.Render(page, this, layoutoptions, styling);
         }
     }
 }

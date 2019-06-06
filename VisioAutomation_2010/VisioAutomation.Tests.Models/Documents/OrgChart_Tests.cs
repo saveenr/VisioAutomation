@@ -102,7 +102,7 @@ namespace VisioAutomation_Tests.Models.Documents
             Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
             Assert.AreEqual(new VA.Geometry.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
-            Assert.AreEqual(orgchart_doc.LayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
+            Assert.AreEqual(orgchart_doc.OrgChartLayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
 
             app.Quit(true);
         }

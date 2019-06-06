@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Models.Documents.OrgCharts
 {
-    public enum LayoutDirection
+    public enum OrgChartLayoutDirection
     {
         Up = 0,
         Down = 1,

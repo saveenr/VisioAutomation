@@ -9,18 +9,18 @@ namespace VisioAutomation.Models.Documents.OrgCharts
     {
         public List<Node> OrgCharts { get; }
 
-        public LayoutOptions LayoutOptions;
+        public OrgChartLayoutOptions OrgChartLayoutOptions;
         public OrgChartStyling Styling = new OrgChartStyling();
 
         public OrgChartDocument()
         {
             this.OrgCharts = new List<Node>();
-            this.LayoutOptions = new LayoutOptions();
+            this.OrgChartLayoutOptions = new OrgChartLayoutOptions();
         }
 
         private Node<object> node_to_layout_node(Node n)
         {
-            var nodesize = n.Size.GetValueOrDefault(this.LayoutOptions.DefaultNodeSize);
+            var nodesize = n.Size.GetValueOrDefault(this.OrgChartLayoutOptions.DefaultNodeSize);
             var newnode = new Node<object>(nodesize, n);
             return newnode;
         }
@@ -80,7 +80,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 // Perform the layout
                 var layout = new TreeLayout<object>();
 
-                layout.Options.Direction = this.map_direction2(this.LayoutOptions.Direction);
+                layout.Options.Direction = this.map_direction2(this.OrgChartLayoutOptions.Direction);
                 layout.Options.LevelSeparation = 1;
                 layout.Options.SiblingSeparation = 0.25;
                 layout.Options.SubtreeSeparation = 1;
@@ -99,7 +99,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 // fixup the nodes so that they render on the page
                 foreach (var i in treenodes)
                 {
-                    i.Position = i.Position.Add(this.LayoutOptions.PageBorderWidth, this.LayoutOptions.PageBorderWidth);
+                    i.Position = i.Position.Add(this.OrgChartLayoutOptions.PageBorderWidth, this.OrgChartLayoutOptions.PageBorderWidth);
                 }
 
                 var centerpoints = new VisioAutomation.Geometry.Point[treenodes.Count];
@@ -124,7 +124,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                     vmasters[i].Cells.XFormHeight = treenodes[i].Size.Height;
                 }
 
-                if (this.LayoutOptions.UseDynamicConnectors)
+                if (this.OrgChartLayoutOptions.UseDynamicConnectors)
                 {
                     var orgchart_nodes = treenodes.Select(tn => tn.Data).Cast<Node>();
 
@@ -155,10 +155,10 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                     shape.Text = new VisioAutomation.Models.Text.Element(orgnode.Text);
                 }
 
-                var page_size_with_border = bb.Size.Add(this.LayoutOptions.PageBorderWidth * 2, this.LayoutOptions.PageBorderWidth * 2.0);
+                var page_size_with_border = bb.Size.Add(this.OrgChartLayoutOptions.PageBorderWidth * 2, this.OrgChartLayoutOptions.PageBorderWidth * 2.0);
                 page_node.Size = page_size_with_border;
                 page_node.ResizeToFit = true;
-                page_node.ResizeToFitMargin = new VisioAutomation.Geometry.Size(this.LayoutOptions.PageBorderWidth * 2, this.LayoutOptions.PageBorderWidth * 2.0);
+                page_node.ResizeToFitMargin = new VisioAutomation.Geometry.Size(this.OrgChartLayoutOptions.PageBorderWidth * 2, this.OrgChartLayoutOptions.PageBorderWidth * 2.0);
             } // finish handling root node
 
             var doc = doc_node.Render(app);
@@ -186,22 +186,22 @@ namespace VisioAutomation.Models.Documents.OrgCharts
             }
         }
 
-        private Layouts.InternalTree.LayoutDirection map_direction2(LayoutDirection input_dir)
+        private Layouts.InternalTree.LayoutDirection map_direction2(OrgChartLayoutDirection input_dir)
         {
             Layouts.InternalTree.LayoutDirection dir;
-            if (input_dir == LayoutDirection.Down)
+            if (input_dir == OrgChartLayoutDirection.Down)
             {
                 dir = Layouts.InternalTree.LayoutDirection.Down;
             }
-            else if (input_dir == LayoutDirection.Up)
+            else if (input_dir == OrgChartLayoutDirection.Up)
             {
                 dir = Layouts.InternalTree.LayoutDirection.Up;
             }
-            else if (input_dir == LayoutDirection.Left)
+            else if (input_dir == OrgChartLayoutDirection.Left)
             {
                 dir = Layouts.InternalTree.LayoutDirection.Left;
             }
-            else if (input_dir == LayoutDirection.Right)
+            else if (input_dir == OrgChartLayoutDirection.Right)
             {
                 dir = Layouts.InternalTree.LayoutDirection.Right;
             }

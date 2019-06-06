@@ -4,8 +4,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class VisioRenderer
     {
-
-
         public VisioRenderer()
         {
         }

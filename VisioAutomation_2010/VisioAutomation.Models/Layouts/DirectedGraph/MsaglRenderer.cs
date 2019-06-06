@@ -10,7 +10,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     class MsaglRenderer
     {
-
         private VA.Geometry.Rectangle _mg_bb;
         private VA.Geometry.Rectangle _layout_bb;
 
@@ -159,11 +158,11 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             return mg_graph;
         }
 
-        public void Render(DirectedGraphLayout dglayout, IVisio.Page page)
+        public void Render(DirectedGraphLayout dglayout, IVisio.Page page, DirectedGraphStyling dgstyling)
         {
             // Create A DOM and render it to the page
             var app = page.Application;
-            var page_node = this.CreateDomPage(dglayout, app);
+            var page_node = this.CreateDomPage(dglayout, app, dgstyling);
 
             page_node.Render(page);
 
@@ -228,7 +227,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        public Dom.Page CreateDomPage(DirectedGraphLayout dglayout, IVisio.Application vis)
+        public Dom.Page CreateDomPage(DirectedGraphLayout dglayout, IVisio.Application vis, DirectedGraphStyling dgstyling)
         {
             var page_node = new Dom.Page();
             MsaglRenderer._resolve_masters(dglayout, vis);
@@ -239,7 +238,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             if (this.LayoutOptions.UseDynamicConnectors)
             {
-                this._create_dynamic_connector_edges(page_node.Shapes, mg_graph);
+                this._create_dynamic_connector_edges(page_node.Shapes, mg_graph, dgstyling);
             }
             else
             {
@@ -363,7 +362,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        private void _create_dynamic_connector_edges(Dom.ShapeList shape_nodes, MSAGL.Core.Layout.GeometryGraph mg_graph)
+        private void _create_dynamic_connector_edges(Dom.ShapeList shape_nodes, MSAGL.Core.Layout.GeometryGraph mg_graph, DirectedGraphStyling dgstyling)
         {
             // CREATE EDGES
             foreach (var edge in mg_graph.Edges)
@@ -383,7 +382,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     
                     vconnector = new Dom.Connector(
                     layout_connector.From.DomNode,
-                    layout_connector.To.DomNode, this.LayoutOptions.EdgeMasterName, this.LayoutOptions.EdgeStencilName);
+                    layout_connector.To.DomNode, dgstyling.EdgeMasterName, dgstyling.EdgeStencilName);
                 }
                 layout_connector.DomNode = vconnector;
                 shape_nodes.Add(vconnector);
@@ -545,7 +544,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        public static void Render(IVisio.Page page, DirectedGraphLayout dglayout, MsaglLayoutOptions layoutoptions)
+        public static void Render(IVisio.Page page, DirectedGraphLayout dglayout, MsaglLayoutOptions layoutoptions, DirectedGraphStyling dgstyling)
         {
             if (page == null)
             {
@@ -559,7 +558,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             var renderer = new MsaglRenderer();
             renderer.LayoutOptions = layoutoptions;
-            renderer.Render(dglayout, page);
+
+            renderer.Render(dglayout, page, dgstyling);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);
         }
     }

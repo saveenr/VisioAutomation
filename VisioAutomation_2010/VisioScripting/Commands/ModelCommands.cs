@@ -150,7 +150,7 @@ namespace VisioScripting.Commands
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 
-        public void DrawDirectedGraphDocument(GRAPH.DirectedGraphDocument dgdoc)
+        public void DrawDirectedGraphDocument(GRAPH.DirectedGraphDocument dgdoc, GRAPH.DirectedGraphStyling dgstyling)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
@@ -169,6 +169,7 @@ namespace VisioScripting.Commands
             var layoutoptions = new GRAPH.MsaglLayoutOptions();
             layoutoptions.UseDynamicConnectors = false;
 
+
             foreach (int i in Enumerable.Range(0, dgdoc.Layouts.Count))
             {
                 var dg_layout = dgdoc.Layouts[i];
@@ -179,7 +180,7 @@ namespace VisioScripting.Commands
                 var page = num_pages_created == 0 ? app.ActivePage : doc_pages.Add();
 
                 this._client.Output.WriteVerbose("Rendering on page: \"{0}\",{1}", page.Name, i + 1);
-                dg_layout.Render(page, layoutoptions);
+                dg_layout.Render(page, layoutoptions, dgstyling);
 
                 var targetpages = new VisioScripting.TargetPages(page);
 

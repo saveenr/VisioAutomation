@@ -259,7 +259,9 @@ namespace VisioAutomation_Tests.Scripting
                 }
             }
 
-            client.Model.DrawDirectedGraphDocument(dgdoc);
+            var dgstyling = new VA.Models.Layouts.DirectedGraph.DirectedGraphStyling();
+
+            client.Model.DrawDirectedGraphDocument(dgdoc,dgstyling);
         }
         
         [TestMethod]

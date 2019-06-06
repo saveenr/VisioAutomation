@@ -13,7 +13,9 @@ namespace VisioAutomationSamples
             var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
             var layoutoptions = new MsaglLayoutOptions();
             layoutoptions.UseDynamicConnectors = false;
-            directed_graph_drawing.Render(page1, layoutoptions);
+
+            var dgstyling = new DirectedGraphStyling();
+            directed_graph_drawing.Render(page1, layoutoptions, dgstyling);
         }
 
         public static void DirectedGraphViaVisio()

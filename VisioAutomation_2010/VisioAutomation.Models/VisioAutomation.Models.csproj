@@ -154,8 +154,8 @@
     <Compile Include="Text\ParagraphFormatting.cs" />
     <Compile Include="Text\Element.cs" />
     <Compile Include="Text\Region.cs" />
-    <Compile Include="Documents\OrgCharts\LayoutDirection.cs" />
-    <Compile Include="Documents\OrgCharts\LayoutOptions.cs" />
+    <Compile Include="Documents\OrgCharts\OrgChartLayoutDirection.cs" />
+    <Compile Include="Documents\OrgCharts\OrgChartLayoutOptions.cs" />
     <Compile Include="Documents\OrgCharts\Node.cs" />
     <Compile Include="Documents\OrgCharts\NodeList.cs" />
     <Compile Include="Documents\OrgCharts\OrgChartDocument.cs" />
