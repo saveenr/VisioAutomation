@@ -32,6 +32,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     {
                         var bezier_seg = (MG.Core.Geometry.Curves.CubicBezierSegment)cur_seg;
 
+                        // TODO: Simplify this code
                         var bez_points =
                             new[] { 0, 1, 2, 3 }
                                 .Select(bezier_seg.B)
