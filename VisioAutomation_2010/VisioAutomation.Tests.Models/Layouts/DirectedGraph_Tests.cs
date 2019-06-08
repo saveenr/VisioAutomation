@@ -23,7 +23,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page = visapp.ActivePage;
-            directed_graph_drawing.Render(page,layoutoptions, dgstyling);
+            directed_graph_drawing.Render(page, dgstyling, layoutoptions);
 
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithBezierConnectors),".vsd");
             doc.SaveAs(output_filename);
@@ -43,7 +43,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
             
-            directed_graph_drawing.Render(page1,layoutoptions, dgstyling);
+            directed_graph_drawing.Render(page1, dgstyling, layoutoptions);
 
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithDynamicConnectors),".vsd");
             doc.SaveAs(output_filename);
@@ -72,7 +72,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
 
-            d.Render(page1, layoutoptions, dgstyling);
+            d.Render(page1, dgstyling, layoutoptions);
             
             Assert.IsNotNull(n0.VisioShape);
             var props_dic = CustomPropertyHelper.GetDictionary(n0.VisioShape, CellValueType.Formula);

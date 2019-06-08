@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
-    public enum DirectedGraphLayoutDirection
+    public enum MsaglLayoutDirection
     {
         TopToBottom,
         BottomToTop,

@@ -126,19 +126,19 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var geom_graph_components = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(mg_graph.Nodes, mg_graph.Edges);
             var settings = new MSAGL.Layout.Layered.SugiyamaLayoutSettings();
 
-            if (this.LayoutOptions.LayoutDirection == DirectedGraphLayoutDirection.TopToBottom)
+            if (this.LayoutOptions.LayoutDirection == MsaglLayoutDirection.TopToBottom)
             {
                 // do nothing
             }
-            else if (this.LayoutOptions.LayoutDirection == DirectedGraphLayoutDirection.BottomToTop)
+            else if (this.LayoutOptions.LayoutDirection == MsaglLayoutDirection.BottomToTop)
             {
                 settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI);
             }
-            else if (this.LayoutOptions.LayoutDirection == DirectedGraphLayoutDirection.LeftToRight)
+            else if (this.LayoutOptions.LayoutDirection == MsaglLayoutDirection.LeftToRight)
             {
                 settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI / 2);
             }
-            else if (this.LayoutOptions.LayoutDirection == DirectedGraphLayoutDirection.RightToLeft)
+            else if (this.LayoutOptions.LayoutDirection == MsaglLayoutDirection.RightToLeft)
             {
                 settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(-Math.PI / 2);
             }
@@ -560,7 +560,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        public static void Render(IVisio.Page page, DirectedGraphLayout dglayout, MsaglLayoutOptions layoutoptions, DirectedGraphStyling dgstyling)
+        public static void Render(IVisio.Page page, DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling,
+            MsaglLayoutOptions layoutoptions)
         {
             if (page == null)
             {
@@ -576,7 +577,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             renderer.LayoutOptions = layoutoptions;
 
             renderer.Render(dglayout, page, dgstyling);
-            page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);
+            page.ResizeToFitContents(renderer.LayoutOptions.PageBorderWidth);
         }
     }
 }

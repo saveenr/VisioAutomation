@@ -15,7 +15,7 @@ namespace VisioAutomationSamples
             layoutoptions.UseDynamicConnectors = false;
 
             var dgstyling = new DirectedGraphStyling();
-            directed_graph_drawing.Render(page1, layoutoptions, dgstyling);
+            directed_graph_drawing.Render(page1, dgstyling, layoutoptions);
         }
 
         public static void DirectedGraphViaVisio()
