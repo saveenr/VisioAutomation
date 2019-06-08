@@ -32,14 +32,10 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     {
                         var bezier_seg = (MG.Core.Geometry.Curves.CubicBezierSegment)cur_seg;
 
-                        // TODO: Simplify this code
-                        var bez_points =
-                            new[] { 0, 1, 2, 3 }
-                                .Select(bezier_seg.B)
-                                .Select(MsaglUtil.ToVAPoint)
-                                .ToArray();
-
-                        final_bez_points.AddRange(bez_points.Skip(1));
+                        // The first point at index 0 is deliberately not added
+                        final_bez_points.Add(MsaglUtil.ToVAPoint(bezier_seg.B(1)));
+                        final_bez_points.Add(MsaglUtil.ToVAPoint(bezier_seg.B(2)));
+                        final_bez_points.Add(MsaglUtil.ToVAPoint(bezier_seg.B(3)));
                     }
                     else if (cur_seg is MG.Core.Geometry.Curves.LineSegment)
                     {
