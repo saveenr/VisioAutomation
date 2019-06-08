@@ -24,7 +24,8 @@ namespace VisioAutomationSamples
             var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
 
             var dg_styling = new DirectedGraphStyling();
-            directed_graph_drawing.Render(page1, dg_styling);
+            var layout_options= new VisioLayoutOptions();
+            directed_graph_drawing.Render(page1, dg_styling, layout_options);
 
             var padding = new VA.Geometry.Size(0.5, 0.5);
             page1.ResizeToFitContents(padding);

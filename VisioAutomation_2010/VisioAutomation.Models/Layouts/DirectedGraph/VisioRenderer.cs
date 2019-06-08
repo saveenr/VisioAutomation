@@ -8,7 +8,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         {
         }
 
-        public void Render(IVisio.Page page, DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling)
+        public void Render(IVisio.Page page, DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling, VisioLayoutOptions visiooptions)
         {
             // This is Visio-based render - it does NOT use MSAGL
             if (page == null)
@@ -41,9 +41,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             page_node.ResizeToFit = true;
             page_node.ResizeToFitMargin = new VisioAutomation.Geometry.Size(0.5, 0.5);
-            if (dgstyling.VisioLayoutStyle != null)
+            if (visiooptions.VisioLayoutStyle != null)
             {
-                page_node.Layout = dgstyling.VisioLayoutStyle;
+                page_node.Layout = visiooptions.VisioLayoutStyle;
             }
             page_node.Render(page);
         }

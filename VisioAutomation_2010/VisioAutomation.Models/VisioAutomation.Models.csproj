@@ -100,6 +100,7 @@
     <Compile Include="Layouts\DirectedGraph\Shape.cs" />
     <Compile Include="Layouts\DirectedGraph\ShapeList.cs" />
     <Compile Include="Layouts\DirectedGraph\DirectedGraphStyling.cs" />
+    <Compile Include="Layouts\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\VisioRenderer.cs" />
     <Compile Include="Dom\BaseShape.cs" />
     <Compile Include="Dom\BezierCurve.cs" />
