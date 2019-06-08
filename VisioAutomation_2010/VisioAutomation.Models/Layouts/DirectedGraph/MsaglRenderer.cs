@@ -15,9 +15,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         private double _scale_to_msagl => this.LayoutOptions.ScalingFactor;
         private double _scale_to_document => 1.0 / this.LayoutOptions.ScalingFactor;
 
-        public Dom.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
-        public VA.Geometry.Size DefaultBezierConnectorLabelBoxSize { get; set; }
-        public MsaglLayoutOptions LayoutOptions { get; set; }
+        private Dom.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
+        private VA.Geometry.Size DefaultBezierConnectorLabelBoxSize { get; set; }
+        private MsaglLayoutOptions LayoutOptions { get; set; }
         
 
         public MsaglRenderer()
@@ -69,7 +69,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        private MSAGL.Core.Layout.GeometryGraph _create_msagl_graph(DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling)
+        private MSAGL.Core.Layout.GeometryGraph _create_msagl_graph(DirectedGraphLayout dglayout)
         {
             var mg_graph = new MSAGL.Core.Layout.GeometryGraph();
 
@@ -248,7 +248,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var page_node = new Dom.Page();
             MsaglRenderer._resolve_masters(dglayout, vis);
 
-            var mg_graph = this._create_msagl_graph(dglayout, dgstyling);
+            var mg_graph = this._create_msagl_graph(dglayout);
 
             this._create_dom_shapes(page_node.Shapes, mg_graph, vis);
 
