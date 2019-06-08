@@ -2,9 +2,9 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
-    class VisioRenderer
+    class VisioLayoutRenderer
     {
-        public VisioRenderer()
+        public VisioLayoutRenderer()
         {
         }
 
