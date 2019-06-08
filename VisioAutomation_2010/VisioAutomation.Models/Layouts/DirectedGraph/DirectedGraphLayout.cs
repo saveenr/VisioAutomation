@@ -40,18 +40,5 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             this.Connectors.Add(id, new_connector);
             return new_connector;
         }
-
-        public void Render(IVisio.Page page, DirectedGraphStyling dgstyling, VisioLayoutOptions layoutoptions)
-        {
-            var vr = new VisioLayoutRenderer();
-            vr.Render(page, this, dgstyling, layoutoptions);
-        }
-
-        public void Render(IVisio.Page page, DirectedGraphStyling dgstyling, MsaglLayoutOptions layoutoptions)
-        {
-            var renderer = new MsaglRenderer();
-            renderer.LayoutOptions = layoutoptions;
-            renderer.Render(page, this, dgstyling);
-        }
     }
 }

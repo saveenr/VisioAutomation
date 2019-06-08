@@ -2,7 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
-    class VisioLayoutRenderer
+    public class VisioLayoutRenderer
     {
         public VisioLayoutRenderer()
         {

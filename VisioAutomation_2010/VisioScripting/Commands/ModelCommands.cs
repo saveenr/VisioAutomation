@@ -180,7 +180,10 @@ namespace VisioScripting.Commands
                 var page = num_pages_created == 0 ? app.ActivePage : doc_pages.Add();
 
                 this._client.Output.WriteVerbose("Rendering on page: \"{0}\",{1}", page.Name, i + 1);
-                dg_layout.Render(page, dgstyling, layoutoptions);
+
+                var renderer = new GRAPH.MsaglRenderer();
+                renderer.LayoutOptions = layoutoptions;
+                renderer.Render(page, dg_layout, dgstyling);
 
                 var targetpages = new VisioScripting.TargetPages(page);
 

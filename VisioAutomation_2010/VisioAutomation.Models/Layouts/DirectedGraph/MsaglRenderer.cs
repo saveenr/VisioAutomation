@@ -8,7 +8,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
-    class MsaglRenderer
+    public class MsaglRenderer
     {
         private VA.Geometry.Rectangle _mg_bb;
         private VA.Geometry.Rectangle _layout_bb;
