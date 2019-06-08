@@ -561,25 +561,5 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     }
             }
         }
-
-        public static void Render(IVisio.Page page, DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling,
-            MsaglLayoutOptions layoutoptions)
-        {
-            if (page == null)
-            {
-                throw new ArgumentNullException(nameof(page));
-            }
-
-            if (layoutoptions == null)
-            {
-                throw new ArgumentNullException(nameof(layoutoptions));
-            }
-
-            var renderer = new MsaglRenderer();
-            renderer.LayoutOptions = layoutoptions;
-
-            renderer.Render(page, dglayout, dgstyling);
-            page.ResizeToFitContents(renderer.LayoutOptions.PageBorderWidth);
-        }
     }
 }
