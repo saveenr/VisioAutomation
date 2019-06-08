@@ -2,7 +2,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class DirectedGraphStyling
     {
-        public VisioAutomation.Models.LayoutStyles.LayoutStyleBase LayoutStyle;
+        public VisioAutomation.Models.LayoutStyles.LayoutStyleBase VisioLayoutStyle;
 
         public string EdgeMasterName = "Dynamic Connector";
         public string EdgeStencilName = "connec_u.vss";
@@ -11,7 +11,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         {
             var flowchart = new VisioAutomation.Models.LayoutStyles.FlowchartLayoutStyle();
             flowchart.LayoutDirection = LayoutStyles.LayoutDirection.TopToBottom;
-            this.LayoutStyle = flowchart;
+            this.VisioLayoutStyle = flowchart;
         }        
     }
 }

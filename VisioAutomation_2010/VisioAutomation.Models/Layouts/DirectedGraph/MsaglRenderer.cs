@@ -12,20 +12,13 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
     {
         private VA.Geometry.Rectangle _mg_bb;
         private VA.Geometry.Rectangle _layout_bb;
+        private double _scale_to_msagl => this.LayoutOptions.ScalingFactor;
+        private double _scale_to_document => 1.0 / this.LayoutOptions.ScalingFactor;
 
         public Dom.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         public VA.Geometry.Size DefaultBezierConnectorLabelBoxSize { get; set; }
         public MsaglLayoutOptions LayoutOptions { get; set; }
-
-        private double ScaleToMsagl
-        {
-            get { return this.LayoutOptions.ScalingFactor; }
-        }
-
-        private double ScaleToDocument
-        {
-            get { return 1.0 / this.LayoutOptions.ScalingFactor; }
-        }
+        
 
         public MsaglRenderer()
         {
@@ -40,19 +33,19 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         private VA.Geometry.Point _to_document_coordinates(VA.Geometry.Point point)
         {
-            var np = point.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
+            var np = point.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this._scale_to_document, this._scale_to_document);
             return np;
         }
 
         private VA.Geometry.Rectangle _to_document_coordinates(VA.Geometry.Rectangle rect)
         {
-            var nr = rect.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this.ScaleToDocument, this.ScaleToDocument);
+            var nr = rect.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this._scale_to_document, this._scale_to_document);
             return nr;
         }
 
         private VA.Geometry.Size _to_mg_coordinates(VA.Geometry.Size s)
         {
-            return s.Multiply(this.ScaleToMsagl, this.ScaleToMsagl);
+            return s.Multiply(this._scale_to_msagl, this._scale_to_msagl);
         }
 
         private void validate_connectors(DirectedGraphLayout layout_diagram)
@@ -176,7 +169,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 mg_graph.BoundingBox.Top);
 
             this._layout_bb = new VA.Geometry.Rectangle(0, 0, this._mg_bb.Width, this._mg_bb.Height)
-                .Multiply(this.ScaleToDocument, this.ScaleToDocument);
+                .Multiply(this._scale_to_document, this._scale_to_document);
 
             return mg_graph;
         }

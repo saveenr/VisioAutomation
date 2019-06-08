@@ -41,9 +41,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             page_node.ResizeToFit = true;
             page_node.ResizeToFitMargin = new VisioAutomation.Geometry.Size(0.5, 0.5);
-            if (dgstyling.LayoutStyle != null)
+            if (dgstyling.VisioLayoutStyle != null)
             {
-                page_node.Layout = dgstyling.LayoutStyle;
+                page_node.Layout = dgstyling.VisioLayoutStyle;
             }
             page_node.Render(page);
         }
