@@ -17,7 +17,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         private Dom.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         private VA.Geometry.Size DefaultBezierConnectorLabelBoxSize { get; set; }
-        private MsaglLayoutOptions LayoutOptions { get; set; }
+        public MsaglLayoutOptions LayoutOptions { get; set; }
         
 
         public MsaglRenderer()
@@ -174,7 +174,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             return mg_graph;
         }
 
-        public void Render(DirectedGraphLayout dglayout, IVisio.Page page, DirectedGraphStyling dgstyling)
+        public void Render(IVisio.Page page, DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling)
         {
             // Create A DOM and render it to the page
             var app = page.Application;
@@ -195,6 +195,8 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var vnode = layout_edge.DomNode;
                 layout_edge.VisioShape = vnode.VisioShape;
             }
+
+            page.ResizeToFitContents(LayoutOptions.PageBorderWidth);
         }
 
         private static U? _try_get_value<T, U>(Dictionary<T, U> dic, T t) where U : struct
@@ -576,7 +578,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var renderer = new MsaglRenderer();
             renderer.LayoutOptions = layoutoptions;
 
-            renderer.Render(dglayout, page, dgstyling);
+            renderer.Render(page, dglayout, dgstyling);
             page.ResizeToFitContents(renderer.LayoutOptions.PageBorderWidth);
         }
     }

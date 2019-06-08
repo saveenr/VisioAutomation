@@ -1,4 +1,4 @@
-﻿using VisioAutomation.Models.Dom;
+﻿using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
@@ -49,7 +49,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         public void Render(IVisio.Page page, DirectedGraphStyling dgstyling, MsaglLayoutOptions layoutoptions)
         {
-            MsaglRenderer.Render(page, this, dgstyling, layoutoptions);
+            var renderer = new MsaglRenderer();
+            renderer.LayoutOptions = layoutoptions;
+            renderer.Render(page, this, dgstyling);
         }
     }
 }
