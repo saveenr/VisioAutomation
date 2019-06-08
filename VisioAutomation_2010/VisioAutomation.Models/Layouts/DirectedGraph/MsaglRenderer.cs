@@ -76,7 +76,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
         }
 
-        private MSAGL.Core.Layout.GeometryGraph _create_msagl_graph(DirectedGraphLayout dglayout)
+        private MSAGL.Core.Layout.GeometryGraph _create_msagl_graph(DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling)
         {
             var mg_graph = new MSAGL.Core.Layout.GeometryGraph();
 
@@ -133,10 +133,33 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var geom_graph_components = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(mg_graph.Nodes, mg_graph.Edges);
             var settings = new MSAGL.Layout.Layered.SugiyamaLayoutSettings();
 
+            if (this.LayoutOptions.LayoutDirection == DirectedGraphLayoutDirection.TopToBottom)
+            {
+                // do nothing
+            }
+            else if (this.LayoutOptions.LayoutDirection == DirectedGraphLayoutDirection.BottomToTop)
+            {
+                settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI);
+            }
+            else if (this.LayoutOptions.LayoutDirection == DirectedGraphLayoutDirection.LeftToRight)
+            {
+                settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI / 2);
+            }
+            else if (this.LayoutOptions.LayoutDirection == DirectedGraphLayoutDirection.RightToLeft)
+            {
+                settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(-Math.PI / 2);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+
             foreach (var subgraph in geom_graph_components)
             {
                 var layout = new Microsoft.Msagl.Layout.Layered.LayeredLayout(subgraph, settings);
+                
                 subgraph.Margins = settings.NodeSeparation / 2;
+                
                 layout.Run();
             }
 
@@ -232,7 +255,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var page_node = new Dom.Page();
             MsaglRenderer._resolve_masters(dglayout, vis);
 
-            var mg_graph = this._create_msagl_graph(dglayout);
+            var mg_graph = this._create_msagl_graph(dglayout, dgstyling);
 
             this._create_dom_shapes(page_node.Shapes, mg_graph, vis);
 
