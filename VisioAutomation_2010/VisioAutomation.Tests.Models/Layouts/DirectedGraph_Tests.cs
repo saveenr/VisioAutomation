@@ -15,19 +15,14 @@ namespace VisioAutomation_Tests.Models.Layouts
         {
             var directed_graph_drawing = this.create_sample_graph();
             
-            var layoutoptions = new VADG.MsaglOptions();
-            layoutoptions.UseDynamicConnectors = false;
-
-            var dgstyling = new VADG.DirectedGraphStyling();
-
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page = visapp.ActivePage;
 
 
             var renderer = new VADG.MsaglRenderer();
-            renderer.Options = layoutoptions;
-            renderer.Render(page, directed_graph_drawing, dgstyling);
+            renderer.LayoutOptions.UseDynamicConnectors = false;
+            renderer.Render(page, directed_graph_drawing);
             
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithBezierConnectors),".vsd");
             doc.SaveAs(output_filename);
@@ -39,17 +34,13 @@ namespace VisioAutomation_Tests.Models.Layouts
         {
             var directed_graph_drawing = this.create_sample_graph();
 
-            var layoutoptions = new VADG.MsaglOptions();
-            layoutoptions.UseDynamicConnectors = true;
-
-            var dgstyling = new VADG.DirectedGraphStyling();
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
 
             var renderer = new VADG.MsaglRenderer();
-            renderer.Options = layoutoptions;
-            renderer.Render(page1, directed_graph_drawing, dgstyling);
+            renderer.LayoutOptions.UseDynamicConnectors = true;
+            renderer.Render(page1, directed_graph_drawing);
 
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithDynamicConnectors),".vsd");
             doc.SaveAs(output_filename);
@@ -69,18 +60,13 @@ namespace VisioAutomation_Tests.Models.Layouts
             n0.CustomProperties["p2"] = new CustomPropertyCells("\"v2\"");
             n0.CustomProperties["p3"] = new CustomPropertyCells("\"v3\"");
 
-            var layoutoptions = new VADG.MsaglOptions();
-            layoutoptions.UseDynamicConnectors = true;
-
-            var dgstyling = new VADG.DirectedGraphStyling();
-
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
 
             var renderer = new VADG.MsaglRenderer();
-            renderer.Options = layoutoptions;
-            renderer.Render(page1, d, dgstyling);
+            renderer.LayoutOptions.UseDynamicConnectors = true;
+            renderer.Render(page1, d);
 
             Assert.IsNotNull(n0.VisioShape);
             var props_dic = CustomPropertyHelper.GetDictionary(n0.VisioShape, CellValueType.Formula);

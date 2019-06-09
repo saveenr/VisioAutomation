@@ -12,17 +12,20 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
     {
         private VA.Geometry.Rectangle _msagl_bb;
         private VA.Geometry.Rectangle _visio_bb;
-        private double _scale_to_msagl => this.Options.ScalingFactor;
-        private double _scale_to_document => 1.0 / this.Options.ScalingFactor;
+        private double _scale_to_msagl => this.LayoutOptions.ScalingFactor;
+        private double _scale_to_document => 1.0 / this.LayoutOptions.ScalingFactor;
 
         private Dom.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         private VA.Geometry.Size DefaultBezierConnectorLabelBoxSize { get; set; }
-        public MsaglOptions Options { get; set; }
-        
+        public MsaglOptions LayoutOptions { get; set; }
+
+        public DirectedGraphStyling Styling;
 
         public MsaglRenderer()
         {
-            this.Options = new MsaglOptions();
+            this.Styling = new DirectedGraphStyling();
+
+            this.LayoutOptions = new MsaglOptions();
 
             this.DefaultBezierConnectorShapeCells = new Dom.ShapeCells();
             this.DefaultBezierConnectorShapeCells.LinePattern = 0;
@@ -76,7 +79,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             // Create the nodes in MSAGL
             foreach (var layout_shape in dglayout.Nodes)
             {
-                var nodesize = this._to_mg_coordinates(layout_shape.Size ?? this.Options.DefaultShapeSize);
+                var nodesize = this._to_mg_coordinates(layout_shape.Size ?? this.LayoutOptions.DefaultShapeSize);
                 var node_user_data = new ElementUserData(layout_shape.ID, layout_shape);
                 var center = new MSAGL.Core.Geometry.Point();
                 var rectangle = MSAGL.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height, center);
@@ -126,19 +129,19 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var msagl_graphs = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(msagl_graph.Nodes, msagl_graph.Edges);
             var msagl_sugiyamasettings = new MSAGL.Layout.Layered.SugiyamaLayoutSettings();
 
-            if (this.Options.Direction == MsaglDirection.TopToBottom)
+            if (this.LayoutOptions.Direction == MsaglDirection.TopToBottom)
             {
                 // do nothing
             }
-            else if (this.Options.Direction == MsaglDirection.BottomToTop)
+            else if (this.LayoutOptions.Direction == MsaglDirection.BottomToTop)
             {
                 msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI);
             }
-            else if (this.Options.Direction == MsaglDirection.LeftToRight)
+            else if (this.LayoutOptions.Direction == MsaglDirection.LeftToRight)
             {
                 msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI / 2);
             }
-            else if (this.Options.Direction == MsaglDirection.RightToLeft)
+            else if (this.LayoutOptions.Direction == MsaglDirection.RightToLeft)
             {
                 msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(-Math.PI / 2);
             }
@@ -174,11 +177,11 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             return msagl_graph;
         }
 
-        public void Render(IVisio.Page page, DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling)
+        public void Render(IVisio.Page page, DirectedGraphLayout dglayout)
         {
             // Create A DOM and render it to the page
             var app = page.Application;
-            var page_node = this.CreateDomPage(dglayout, app, dgstyling);
+            var page_node = this.CreateDomPage(dglayout, app, this.Styling);
 
             page_node.Render(page);
 
@@ -196,7 +199,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 layout_edge.VisioShape = vnode.VisioShape;
             }
 
-            page.ResizeToFitContents(Options.PageBorderWidth);
+            page.ResizeToFitContents(LayoutOptions.PageBorderWidth);
         }
 
         private static U? _try_get_value<T, U>(Dictionary<T, U> dic, T t) where U : struct
@@ -254,7 +257,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             this._create_dom_shapes(page_node.Shapes, mg_graph, vis);
 
-            if (this.Options.UseDynamicConnectors)
+            if (this.LayoutOptions.UseDynamicConnectors)
             {
                 this._create_dynamic_connector_edges(page_node.Shapes, mg_graph, dgstyling);
             }

@@ -11,13 +11,10 @@ namespace VisioAutomationSamples
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
-            var layoutoptions = new MsaglOptions();
-            layoutoptions.UseDynamicConnectors = false;
 
-            var dgsytling = new DirectedGraphStyling();
             var renderer = new MsaglRenderer();
-            renderer.Options = layoutoptions;
-            renderer.Render(page1, directed_graph_drawing, dgsytling);
+            renderer.LayoutOptions.UseDynamicConnectors = false;
+            renderer.Render(page1, directed_graph_drawing);
         }
 
         public static void DirectedGraphViaVisio()
@@ -25,10 +22,8 @@ namespace VisioAutomationSamples
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
 
-            var dg_styling = new DirectedGraphStyling();
-            var layoutoptions= new VisioLayoutOptions();
             var vr = new VisioLayoutRenderer();
-            vr.Render(page1, directed_graph_drawing, dg_styling, layoutoptions);
+            vr.Render(page1, directed_graph_drawing);
 
             var padding = new VA.Geometry.Size(0.5, 0.5);
             page1.ResizeToFitContents(padding);

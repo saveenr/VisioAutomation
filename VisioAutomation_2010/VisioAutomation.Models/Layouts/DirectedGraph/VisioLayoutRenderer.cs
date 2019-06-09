@@ -4,11 +4,16 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class VisioLayoutRenderer
     {
+        public DirectedGraphStyling Styling;
+        public VisioLayoutOptions LayoutOptions;
+
         public VisioLayoutRenderer()
         {
+            this.Styling = new DirectedGraphStyling();
+            this.LayoutOptions = new VisioLayoutOptions();
         }
 
-        public void Render(IVisio.Page page, DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling, VisioLayoutOptions layoutoptions)
+        public void Render(IVisio.Page page, DirectedGraphLayout dglayout)
         {
             // This is Visio-based render - it does NOT use MSAGL
             if (page == null)
@@ -16,9 +21,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            if (dgstyling== null)
+            if (this.Styling== null)
             {
-                throw new System.ArgumentNullException(nameof(dgstyling));
+                throw new System.ArgumentNullException(nameof(this.Styling));
             }
 
             var page_node = new Dom.Page();
@@ -34,16 +39,16 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             foreach (var connector in dglayout.Edges)
             {
-                var connector_node = page_node.Shapes.Connect(dgstyling.EdgeMasterName, dgstyling.EdgeStencilName, connector.From.DomNode, connector.To.DomNode);
+                var connector_node = page_node.Shapes.Connect(this.Styling.EdgeMasterName, this.Styling.EdgeStencilName, connector.From.DomNode, connector.To.DomNode);
                 connector.DomNode = connector_node;
                 connector.DomNode.Text = new VisioAutomation.Models.Text.Element(connector.Label);
             }
 
             page_node.ResizeToFit = true;
             page_node.ResizeToFitMargin = new VisioAutomation.Geometry.Size(0.5, 0.5);
-            if (layoutoptions.VisioLayoutStyle != null)
+            if (this.LayoutOptions.VisioLayoutStyle != null)
             {
-                page_node.Layout = layoutoptions.VisioLayoutStyle;
+                page_node.Layout = this.LayoutOptions.VisioLayoutStyle;
             }
             page_node.Render(page);
         }

@@ -165,11 +165,6 @@ namespace VisioScripting.Commands
             int num_pages_created = 0;
             var doc_pages = doc.Pages;
 
-            // TODO: Consider reading this in from the formatting for each directed graph layout
-            var layoutoptions = new GRAPH.MsaglOptions();
-            layoutoptions.UseDynamicConnectors = false;
-
-
             foreach (int i in Enumerable.Range(0, dgdoc.Layouts.Count))
             {
                 var dg_layout = dgdoc.Layouts[i];
@@ -182,8 +177,8 @@ namespace VisioScripting.Commands
                 this._client.Output.WriteVerbose("Rendering on page: \"{0}\",{1}", page.Name, i + 1);
 
                 var renderer = new GRAPH.MsaglRenderer();
-                renderer.Options = layoutoptions;
-                renderer.Render(page, dg_layout, dgstyling);
+                renderer.LayoutOptions.UseDynamicConnectors = false;
+                renderer.Render(page, dg_layout);
 
                 var targetpages = new VisioScripting.TargetPages(page);
 
