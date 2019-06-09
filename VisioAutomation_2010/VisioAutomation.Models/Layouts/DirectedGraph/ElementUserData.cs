@@ -2,9 +2,9 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class ElementUserData
     {
-        public string ID;
-        public Node Node;
-        public Edge Edge;
+        public readonly string ID;
+        public readonly Node Node;
+        public readonly Edge Edge;
 
         public ElementUserData(string id, Node node)
         {
