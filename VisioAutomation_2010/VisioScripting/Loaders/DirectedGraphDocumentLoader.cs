@@ -157,7 +157,7 @@ namespace VisioScripting.Builders
                 client.Output.WriteVerbose( "Creating shape AutoLayout nodes");
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
-                    var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
+                    var dg_shape = pagedata.DirectedGraph.AddNode(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
                     dg_shape.Url = shape_info.Url;
                     dg_shape.CustomProperties = new CustomPropertyDictionary();
                     foreach (var kv in shape_info.CustProps)
@@ -174,13 +174,13 @@ namespace VisioScripting.Builders
                     var def_connector_type = VisioAutomation.Models.ConnectorType.Curved;
                     var connectory_type = def_connector_type;
 
-                    var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);
-                    var to_shape = pagedata.DirectedGraph.Shapes.Find(con_info.To);
+                    var from_shape = pagedata.DirectedGraph.Nodes.Find(con_info.From);
+                    var to_shape = pagedata.DirectedGraph.Nodes.Find(con_info.To);
 
                     var def_con_color = new VisioAutomation.Models.Color.ColorRgb(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
-                    var dg_connector = pagedata.DirectedGraph.AddConnection(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
+                    var dg_connector = pagedata.DirectedGraph.AddEdge(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
 
                     dg_connector.Cells = new ShapeCells();
                     dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();

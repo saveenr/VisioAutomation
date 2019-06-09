@@ -249,7 +249,7 @@ namespace VisioAutomation_Tests.Scripting
             {
                 foreach (var drawing in dgdoc.Layouts)
                 {
-                    foreach (var shape in drawing.Shapes)
+                    foreach (var shape in drawing.Nodes)
                     {
                         if (shape.StencilName == "server_u.vss")
                         {

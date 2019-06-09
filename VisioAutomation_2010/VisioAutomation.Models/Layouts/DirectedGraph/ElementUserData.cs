@@ -1,28 +1,28 @@
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
-    public class NodeUserData
+    public class ElementUserData
     {
         public string ID;
-        public Shape Shape;
-        public Connector Connector;
+        public Node Node;
+        public Edge Edge;
 
-        public NodeUserData(string id, Shape shape)
+        public ElementUserData(string id, Node node)
         {
             if (id == null)
             {
                 throw new System.ArgumentNullException(nameof(id));
             }
 
-            if (shape == null)
+            if (node == null)
             {
-                throw new System.ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(node));
             }
 
             this.ID = id;
-            this.Shape = shape;
+            this.Node = node;
         }
 
-        public NodeUserData(string id, Connector con)
+        public ElementUserData(string id, Edge con)
         {
             if (id == null)
             {
@@ -35,7 +35,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
 
             this.ID = id;
-            this.Connector = con;
+            this.Edge = con;
         }
     }
 }

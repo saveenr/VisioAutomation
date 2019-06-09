@@ -61,7 +61,7 @@ namespace VisioAutomation_Tests.Models.Layouts
         {
             var d = new VADG.DirectedGraphLayout();
 
-            var n0 = d.AddShape("n0", "Untitled Node", "basflo_u.vss",
+            var n0 = d.AddNode("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
             n0.Size = new VA.Geometry.Size(3, 2);
             n0.CustomProperties = new CustomPropertyDictionary();
@@ -102,19 +102,19 @@ namespace VisioAutomation_Tests.Models.Layouts
             var d = new VADG.DirectedGraphLayout();
 
             var basic_stencil = "basic_u.vss";
-            var n0 = d.AddShape("n0", "Node 0", basic_stencil, "Rectangle");
+            var n0 = d.AddNode("n0", "Node 0", basic_stencil, "Rectangle");
             n0.Size = new VA.Geometry.Size(3, 2);
-            var n1 = d.AddShape("n1", "Node 1", basic_stencil, "Rectangle");
-            var n2 = d.AddShape("n2", "Node 2", basic_stencil, "Rectangle");
-            var n3 = d.AddShape("n3", "Node 3", basic_stencil, "Rectangle");
-            var n4 = d.AddShape("n4", "Node 4\nUnconnected", basic_stencil, "Rectangle");
+            var n1 = d.AddNode("n1", "Node 1", basic_stencil, "Rectangle");
+            var n2 = d.AddNode("n2", "Node 2", basic_stencil, "Rectangle");
+            var n3 = d.AddNode("n3", "Node 3", basic_stencil, "Rectangle");
+            var n4 = d.AddNode("n4", "Node 4\nUnconnected", basic_stencil, "Rectangle");
 
-            var c0 = d.AddConnection("c0", n0, n1, "0 -> 1", VisioAutomation.Models.ConnectorType.Curved);
-            var c1 = d.AddConnection("c1", n1, n2, "1 -> 2", VisioAutomation.Models.ConnectorType.RightAngle);
-            var c2 = d.AddConnection("c2", n1, n0, "0 -> 1", VisioAutomation.Models.ConnectorType.Curved);
-            var c3 = d.AddConnection("c3", n0, n2, "0 -> 2", VisioAutomation.Models.ConnectorType.Straight);
-            var c4 = d.AddConnection("c4", n2, n3, "2 -> 3", VisioAutomation.Models.ConnectorType.Curved);
-            var c5 = d.AddConnection("c5", n3, n0, "3 -> 0", VisioAutomation.Models.ConnectorType.Curved);
+            var c0 = d.AddEdge("c0", n0, n1, "0 -> 1", VisioAutomation.Models.ConnectorType.Curved);
+            var c1 = d.AddEdge("c1", n1, n2, "1 -> 2", VisioAutomation.Models.ConnectorType.RightAngle);
+            var c2 = d.AddEdge("c2", n1, n0, "0 -> 1", VisioAutomation.Models.ConnectorType.Curved);
+            var c3 = d.AddEdge("c3", n0, n2, "0 -> 2", VisioAutomation.Models.ConnectorType.Straight);
+            var c4 = d.AddEdge("c4", n2, n3, "2 -> 3", VisioAutomation.Models.ConnectorType.Curved);
+            var c5 = d.AddEdge("c5", n3, n0, "3 -> 0", VisioAutomation.Models.ConnectorType.Curved);
 
             return d;
         }

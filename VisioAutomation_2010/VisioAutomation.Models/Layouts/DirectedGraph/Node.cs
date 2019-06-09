@@ -1,16 +1,18 @@
-using VisioAutomation.Shapes;
-using IVisio = Microsoft.Office.Interop.Visio;
+using VA = VisioAutomation;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
-    public class Node
+    public class Node : Element
     {
-        public string ID { get; set; }
-        public IVisio.Shape VisioShape { get; set; }
-        public string Label { get; set; }
-        public Dom.BaseShape DomNode { get; set; }
-        public CustomPropertyDictionary CustomProperties { get; set; }
+        public Node(string id)
+        {
+            this.ID = id;
+        }
 
-        public Dom.ShapeCells Cells;
+        public string StencilName { get; set; }
+        public string MasterName { get; set; }
+        public string Url { get; set; }
+        public VA.Geometry.Size? Size { get; set; }
+        public System.Collections.Generic.List<Dom.Hyperlink> Hyperlinks { get; set; }
     }
 }

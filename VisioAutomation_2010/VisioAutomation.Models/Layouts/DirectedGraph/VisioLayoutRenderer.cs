@@ -24,7 +24,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var page_node = new Dom.Page();
             double x = 0;
             double y = 1;
-            foreach (var shape in dglayout.Shapes)
+            foreach (var shape in dglayout.Nodes)
             {
                 var shape_nodes = page_node.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
                 shape.DomNode = shape_nodes;
@@ -32,7 +32,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 x += 1.0;
             }
 
-            foreach (var connector in dglayout.Connectors)
+            foreach (var connector in dglayout.Edges)
             {
                 var connector_node = page_node.Shapes.Connect(dgstyling.EdgeMasterName, dgstyling.EdgeStencilName, connector.From.DomNode, connector.To.DomNode);
                 connector.DomNode = connector_node;

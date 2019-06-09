@@ -86,7 +86,7 @@
     <Compile Include="Layouts\Container\ContainerLayout.cs" />
     <Compile Include="Layouts\Container\Formatting.cs" />
     <Compile Include="Layouts\Container\LayoutOptions.cs" />
-    <Compile Include="Layouts\DirectedGraph\Connector.cs" />
+    <Compile Include="Layouts\DirectedGraph\Edge.cs" />
     <Compile Include="Layouts\DirectedGraph\DirectedGraphDocument.cs" />
     <Compile Include="Layouts\DirectedGraph\DirectedGraphLayout.cs" />
     <Compile Include="Layouts\DirectedGraph\IDList.cs" />
@@ -94,9 +94,9 @@
     <Compile Include="Layouts\DirectedGraph\MsaglLayoutOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\MsaglRenderer.cs" />
     <Compile Include="Layouts\DirectedGraph\MsaglUtil.cs" />
+    <Compile Include="Layouts\DirectedGraph\Element.cs" />
+    <Compile Include="Layouts\DirectedGraph\ElementUserData.cs" />
     <Compile Include="Layouts\DirectedGraph\Node.cs" />
-    <Compile Include="Layouts\DirectedGraph\NodeUserData.cs" />
-    <Compile Include="Layouts\DirectedGraph\Shape.cs" />
     <Compile Include="Layouts\DirectedGraph\DirectedGraphStyling.cs" />
     <Compile Include="Layouts\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\VisioLayoutRenderer.cs" />

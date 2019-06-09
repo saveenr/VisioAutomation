@@ -5,40 +5,40 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class DirectedGraphLayout
     {
-        public readonly IDList<Shape> Shapes;
-        public readonly IDList<Connector> Connectors;
+        public readonly IDList<Node> Nodes;
+        public readonly IDList<Edge> Edges;
 
         public DirectedGraphLayout()
         {
-            this.Shapes = new IDList<Shape>();
-            this.Connectors = new IDList<Connector>();
+            this.Nodes = new IDList<Node>();
+            this.Edges = new IDList<Edge>();
         }
 
-        public Shape AddShape(string id, string label, string stencil_name, string master_name)
+        public Node AddNode(string id, string label, string stencil_name, string master_name)
         {
-            var s0 = new Shape(id);
-            s0.Label = label;
-            s0.StencilName = stencil_name;
-            s0.MasterName = master_name;
+            var new_node = new Node(id);
+            new_node.Label = label;
+            new_node.StencilName = stencil_name;
+            new_node.MasterName = master_name;
 
-            this.Shapes.Add(id, s0);
-            return s0;
+            this.Nodes.Add(id, new_node);
+            return new_node;
         }
 
-        public Connector AddConnection(
+        public Edge AddEdge(
             string id,
-            Shape from,
-            Shape to,
+            Node from,
+            Node to,
             string label,
             ConnectorType type)
         {
-            var new_connector = new Connector(from, to);
-            new_connector.ID = id;
-            new_connector.Label = label;
-            new_connector.ConnectorType = type;
+            var new_edge = new Edge(from, to);
+            new_edge.ID = id;
+            new_edge.Label = label;
+            new_edge.ConnectorType = type;
 
-            this.Connectors.Add(id, new_connector);
-            return new_connector;
+            this.Edges.Add(id, new_edge);
+            return new_edge;
         }
     }
 }
