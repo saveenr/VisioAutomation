@@ -90,8 +90,8 @@
     <Compile Include="Layouts\DirectedGraph\DirectedGraphDocument.cs" />
     <Compile Include="Layouts\DirectedGraph\DirectedGraphLayout.cs" />
     <Compile Include="Layouts\DirectedGraph\IDList.cs" />
-    <Compile Include="Layouts\DirectedGraph\MsaglLayoutDirection.cs" />
-    <Compile Include="Layouts\DirectedGraph\MsaglLayoutOptions.cs" />
+    <Compile Include="Layouts\DirectedGraph\MsaglDirection.cs" />
+    <Compile Include="Layouts\DirectedGraph\MsaglOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\MsaglRenderer.cs" />
     <Compile Include="Layouts\DirectedGraph\MsaglUtil.cs" />
     <Compile Include="Layouts\DirectedGraph\Element.cs" />

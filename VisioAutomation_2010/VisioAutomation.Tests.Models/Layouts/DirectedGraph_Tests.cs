@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Models.Layouts
         {
             var directed_graph_drawing = this.create_sample_graph();
             
-            var layoutoptions = new VADG.MsaglLayoutOptions();
+            var layoutoptions = new VADG.MsaglOptions();
             layoutoptions.UseDynamicConnectors = false;
 
             var dgstyling = new VADG.DirectedGraphStyling();
@@ -26,7 +26,7 @@ namespace VisioAutomation_Tests.Models.Layouts
 
 
             var renderer = new VADG.MsaglRenderer();
-            renderer.LayoutOptions = layoutoptions;
+            renderer.Options = layoutoptions;
             renderer.Render(page, directed_graph_drawing, dgstyling);
             
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithBezierConnectors),".vsd");
@@ -39,7 +39,7 @@ namespace VisioAutomation_Tests.Models.Layouts
         {
             var directed_graph_drawing = this.create_sample_graph();
 
-            var layoutoptions = new VADG.MsaglLayoutOptions();
+            var layoutoptions = new VADG.MsaglOptions();
             layoutoptions.UseDynamicConnectors = true;
 
             var dgstyling = new VADG.DirectedGraphStyling();
@@ -48,7 +48,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             var page1 = visapp.ActivePage;
 
             var renderer = new VADG.MsaglRenderer();
-            renderer.LayoutOptions = layoutoptions;
+            renderer.Options = layoutoptions;
             renderer.Render(page1, directed_graph_drawing, dgstyling);
 
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithDynamicConnectors),".vsd");
@@ -69,7 +69,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             n0.CustomProperties["p2"] = new CustomPropertyCells("\"v2\"");
             n0.CustomProperties["p3"] = new CustomPropertyCells("\"v3\"");
 
-            var layoutoptions = new VADG.MsaglLayoutOptions();
+            var layoutoptions = new VADG.MsaglOptions();
             layoutoptions.UseDynamicConnectors = true;
 
             var dgstyling = new VADG.DirectedGraphStyling();
@@ -79,7 +79,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             var page1 = visapp.ActivePage;
 
             var renderer = new VADG.MsaglRenderer();
-            renderer.LayoutOptions = layoutoptions;
+            renderer.Options = layoutoptions;
             renderer.Render(page1, d, dgstyling);
 
             Assert.IsNotNull(n0.VisioShape);

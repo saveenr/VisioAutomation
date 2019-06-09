@@ -10,19 +10,19 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class MsaglRenderer
     {
-        private VA.Geometry.Rectangle _mg_bb;
-        private VA.Geometry.Rectangle _layout_bb;
-        private double _scale_to_msagl => this.LayoutOptions.ScalingFactor;
-        private double _scale_to_document => 1.0 / this.LayoutOptions.ScalingFactor;
+        private VA.Geometry.Rectangle _msagl_bb;
+        private VA.Geometry.Rectangle _visio_bb;
+        private double _scale_to_msagl => this.Options.ScalingFactor;
+        private double _scale_to_document => 1.0 / this.Options.ScalingFactor;
 
         private Dom.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         private VA.Geometry.Size DefaultBezierConnectorLabelBoxSize { get; set; }
-        public MsaglLayoutOptions LayoutOptions { get; set; }
+        public MsaglOptions Options { get; set; }
         
 
         public MsaglRenderer()
         {
-            this.LayoutOptions = new MsaglLayoutOptions();
+            this.Options = new MsaglOptions();
 
             this.DefaultBezierConnectorShapeCells = new Dom.ShapeCells();
             this.DefaultBezierConnectorShapeCells.LinePattern = 0;
@@ -33,13 +33,13 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         private VA.Geometry.Point _to_document_coordinates(VA.Geometry.Point point)
         {
-            var np = point.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this._scale_to_document, this._scale_to_document);
+            var np = point.Add(-this._msagl_bb.Left, -this._msagl_bb.Bottom).Multiply(this._scale_to_document, this._scale_to_document);
             return np;
         }
 
         private VA.Geometry.Rectangle _to_document_coordinates(VA.Geometry.Rectangle rect)
         {
-            var nr = rect.Add(-this._mg_bb.Left, -this._mg_bb.Bottom).Multiply(this._scale_to_document, this._scale_to_document);
+            var nr = rect.Add(-this._msagl_bb.Left, -this._msagl_bb.Bottom).Multiply(this._scale_to_document, this._scale_to_document);
             return nr;
         }
 
@@ -71,17 +71,17 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         private MSAGL.Core.Layout.GeometryGraph _create_msagl_graph(DirectedGraphLayout dglayout)
         {
-            var mg_graph = new MSAGL.Core.Layout.GeometryGraph();
+            var msagl_graph = new MSAGL.Core.Layout.GeometryGraph();
 
             // Create the nodes in MSAGL
             foreach (var layout_shape in dglayout.Nodes)
             {
-                var nodesize = this._to_mg_coordinates(layout_shape.Size ?? this.LayoutOptions.DefaultShapeSize);
+                var nodesize = this._to_mg_coordinates(layout_shape.Size ?? this.Options.DefaultShapeSize);
                 var node_user_data = new ElementUserData(layout_shape.ID, layout_shape);
                 var center = new MSAGL.Core.Geometry.Point();
                 var rectangle = MSAGL.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height, center);
                 var mg_node = new MSAGL.Core.Layout.Node(rectangle, node_user_data);
-                mg_graph.Nodes.Add(mg_node);
+                msagl_graph.Nodes.Add(mg_node);
             }
 
             this.validate_connectors(dglayout);
@@ -89,7 +89,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var mg_coordinates = this._to_mg_coordinates(this.DefaultBezierConnectorLabelBoxSize);
 
             var map_id_to_ud = new Dictionary<string, MSAGL.Core.Layout.Node>();
-            foreach (var n in mg_graph.Nodes)
+            foreach (var n in msagl_graph.Nodes)
             {
                 var ud = (ElementUserData)n.UserData;
                 if (ud != null)
@@ -118,60 +118,60 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 // TODO: MSAGL
                 //new_edge.ArrowheadAtTarget = false;
                 new_edge.UserData = new ElementUserData(layout_connector.ID, layout_connector);
-                mg_graph.Edges.Add(new_edge);
+                msagl_graph.Edges.Add(new_edge);
 
                 new_edge.Label = new MSAGL.Core.Layout.Label(mg_coordinates.Width, mg_coordinates.Height, new_edge);
             }
 
-            var geom_graph_components = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(mg_graph.Nodes, mg_graph.Edges);
-            var settings = new MSAGL.Layout.Layered.SugiyamaLayoutSettings();
+            var msagl_graphs = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(msagl_graph.Nodes, msagl_graph.Edges);
+            var msagl_sugiyamasettings = new MSAGL.Layout.Layered.SugiyamaLayoutSettings();
 
-            if (this.LayoutOptions.LayoutDirection == MsaglLayoutDirection.TopToBottom)
+            if (this.Options.Direction == MsaglDirection.TopToBottom)
             {
                 // do nothing
             }
-            else if (this.LayoutOptions.LayoutDirection == MsaglLayoutDirection.BottomToTop)
+            else if (this.Options.Direction == MsaglDirection.BottomToTop)
             {
-                settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI);
+                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI);
             }
-            else if (this.LayoutOptions.LayoutDirection == MsaglLayoutDirection.LeftToRight)
+            else if (this.Options.Direction == MsaglDirection.LeftToRight)
             {
-                settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI / 2);
+                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI / 2);
             }
-            else if (this.LayoutOptions.LayoutDirection == MsaglLayoutDirection.RightToLeft)
+            else if (this.Options.Direction == MsaglDirection.RightToLeft)
             {
-                settings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(-Math.PI / 2);
+                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(-Math.PI / 2);
             }
             else
             {
                 throw new System.ArgumentOutOfRangeException();
             }
 
-            foreach (var subgraph in geom_graph_components)
+            foreach (var subgraph in msagl_graphs)
             {
-                var layout = new Microsoft.Msagl.Layout.Layered.LayeredLayout(subgraph, settings);
+                var layout = new Microsoft.Msagl.Layout.Layered.LayeredLayout(subgraph, msagl_sugiyamasettings);
                 
-                subgraph.Margins = settings.NodeSeparation / 2;
+                subgraph.Margins = msagl_sugiyamasettings.NodeSeparation / 2;
                 
                 layout.Run();
             }
 
             // Pack the graphs using Golden Aspect Ratio
-            MSAGL.Layout.MDS.MdsGraphLayout.PackGraphs(geom_graph_components, settings);
+            MSAGL.Layout.MDS.MdsGraphLayout.PackGraphs(msagl_graphs, msagl_sugiyamasettings);
 
             //Update the graphs bounding box
-            mg_graph.UpdateBoundingBox();
+            msagl_graph.UpdateBoundingBox();
 
-            this._mg_bb = new VA.Geometry.Rectangle(
-                mg_graph.BoundingBox.Left,
-                mg_graph.BoundingBox.Bottom,
-                mg_graph.BoundingBox.Right,
-                mg_graph.BoundingBox.Top);
+            this._msagl_bb = new VA.Geometry.Rectangle(
+                msagl_graph.BoundingBox.Left,
+                msagl_graph.BoundingBox.Bottom,
+                msagl_graph.BoundingBox.Right,
+                msagl_graph.BoundingBox.Top);
 
-            this._layout_bb = new VA.Geometry.Rectangle(0, 0, this._mg_bb.Width, this._mg_bb.Height)
+            this._visio_bb = new VA.Geometry.Rectangle(0, 0, this._msagl_bb.Width, this._msagl_bb.Height)
                 .Multiply(this._scale_to_document, this._scale_to_document);
 
-            return mg_graph;
+            return msagl_graph;
         }
 
         public void Render(IVisio.Page page, DirectedGraphLayout dglayout, DirectedGraphStyling dgstyling)
@@ -196,7 +196,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 layout_edge.VisioShape = vnode.VisioShape;
             }
 
-            page.ResizeToFitContents(LayoutOptions.PageBorderWidth);
+            page.ResizeToFitContents(Options.PageBorderWidth);
         }
 
         private static U? _try_get_value<T, U>(Dictionary<T, U> dic, T t) where U : struct
@@ -254,7 +254,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             this._create_dom_shapes(page_node.Shapes, mg_graph, vis);
 
-            if (this.LayoutOptions.UseDynamicConnectors)
+            if (this.Options.UseDynamicConnectors)
             {
                 this._create_dynamic_connector_edges(page_node.Shapes, mg_graph, dgstyling);
             }
@@ -269,7 +269,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             page_node.PageLayoutCells.AvenueSizeX = 2.0;
             page_node.PageLayoutCells.AvenueSizeY = 2.0;
             page_node.PageLayoutCells.LineRouteExt = 2;
-            page_node.Size = this._layout_bb.Size;
+            page_node.Size = this._visio_bb.Size;
 
             return page_node;
         }

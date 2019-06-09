@@ -54,7 +54,7 @@ namespace VisioScripting.Builders
 
         private class PageData
         {
-            public MsaglLayoutOptions LayoutOptions;
+            public MsaglOptions LayoutOptions;
             public DirectedGraphLayout DirectedGraph;
             public List<Models.DgShapeInfo> ShapeInfos;
             public List<Models.DgConnectorInfo> ConnectorInfos;
@@ -77,7 +77,7 @@ namespace VisioScripting.Builders
                 var pagedata = new PageData();
                 pagedatas.Add(pagedata);
                 pagedata.Errors = new List<BuilderError>();
-                pagedata.LayoutOptions = new MsaglLayoutOptions();
+                pagedata.LayoutOptions = new MsaglOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
                 DirectedGraphDocumentLoader._get_render_options_from_xml(renderoptions_el, pagedata.LayoutOptions);
 
@@ -197,7 +197,7 @@ namespace VisioScripting.Builders
             return dgdoc;
         }
 
-        private static void _get_render_options_from_xml(SXL.XElement el, MsaglLayoutOptions layoutoptions)
+        private static void _get_render_options_from_xml(SXL.XElement el, MsaglOptions layoutoptions)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             double DoubleParse(string str) => double.Parse(str, culture);
