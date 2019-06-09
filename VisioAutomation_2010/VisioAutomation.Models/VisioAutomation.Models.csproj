@@ -56,7 +56,7 @@
     <Compile Include="Data\XmlModel.cs" />
     <Compile Include="Documents\OrgCharts\OrgChartStyling.cs" />
     <Compile Include="Dom\RenderPerformanceScope.cs" />
-    <Compile Include="Dom\RenderPerforfmanceSettings.cs" />
+    <Compile Include="Dom\RenderPerformanceSettings.cs" />
     <Compile Include="Geometry\ArcSegment.cs" />
     <Compile Include="Geometry\BezierCurve.cs" />
     <Compile Include="Geometry\BezierSegment.cs" />
