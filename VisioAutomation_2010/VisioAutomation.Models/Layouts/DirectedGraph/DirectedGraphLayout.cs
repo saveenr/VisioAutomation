@@ -5,13 +5,13 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 {
     public class DirectedGraphLayout
     {
-        public readonly ShapeList Shapes;
-        public readonly ConnectorList Connectors;
+        public readonly IDList<Shape> Shapes;
+        public readonly IDList<Connector> Connectors;
 
         public DirectedGraphLayout()
         {
-            this.Shapes = new ShapeList();
-            this.Connectors = new ConnectorList();
+            this.Shapes = new IDList<Shape>();
+            this.Connectors = new IDList<Connector>();
         }
 
         public Shape AddShape(string id, string label, string stencil_name, string master_name)

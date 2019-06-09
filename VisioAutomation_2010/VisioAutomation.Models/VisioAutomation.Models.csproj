@@ -87,7 +87,6 @@
     <Compile Include="Layouts\Container\Formatting.cs" />
     <Compile Include="Layouts\Container\LayoutOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\Connector.cs" />
-    <Compile Include="Layouts\DirectedGraph\ConnectorList.cs" />
     <Compile Include="Layouts\DirectedGraph\DirectedGraphDocument.cs" />
     <Compile Include="Layouts\DirectedGraph\DirectedGraphLayout.cs" />
     <Compile Include="Layouts\DirectedGraph\IDList.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="Layouts\DirectedGraph\Node.cs" />
     <Compile Include="Layouts\DirectedGraph\NodeUserData.cs" />
     <Compile Include="Layouts\DirectedGraph\Shape.cs" />
-    <Compile Include="Layouts\DirectedGraph\ShapeList.cs" />
     <Compile Include="Layouts\DirectedGraph\DirectedGraphStyling.cs" />
     <Compile Include="Layouts\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Layouts\DirectedGraph\VisioLayoutRenderer.cs" />
