@@ -1,4 +1,5 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Linq;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPageCells
@@ -10,48 +11,54 @@ namespace VisioPowerShell.Commands.VisioPageCells
         public VisioPowerShell.Models.PageCells[] Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page[] Pages { get; set; }
-
-        [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
+        // CONTEXT:PAGES
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Page { get; set; }
+
         protected override void ProcessRecord()
         {
-            if (this.Cells == null)
+            var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
+
+            if (targetpages.Pages.Count < 1)
             {
                 return;
             }
 
-            if (this.Cells.Length < 1)
+            if (this.Cells == null || this.Cells.Length < 1)
             {
                 return;
             }
-
-            var targetpages = new VisioScripting.TargetPages(this.Pages);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
 
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioPageCells)))
             {
-                for (int i = 0; i < targetpages.Pages.Count; i++)
+                foreach (int i in Enumerable.Range(0,targetpages.Pages.Count))
                 {
-                    var targetpage = targetpages.Pages[i];
-                    this.Client.Output.WriteVerbose("Start Update Page Name={0}", targetpage.NameU);
+                    int page_index = i;
+                    int cells_index = i % this.Cells.Length;
 
-                    var targetpage_shapesheet = targetpage.PageSheet;
-                    int targetpage_shapesheetid = targetpage_shapesheet.ID;
-                    var target_cells = this.Cells[i % this.Cells.Length];
+                    var page = targetpages.Pages[page_index];
+                    var cells = this.Cells[cells_index];
+
+                    this.Client.Output.WriteVerbose("Start Update Page Name={0}", page.NameU);
+
+                    var shapesheet = page.PageSheet;
+                    int shapeid = shapesheet.ID;
+
                     var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
                     writer.BlastGuards = this.BlastGuards;
                     writer.TestCircular = this.TestCircular;
-                    target_cells.Apply(writer, (short)targetpage_shapesheetid);
-                    writer.Commit(targetpage, VisioAutomation.ShapeSheet.CellValueType.Formula);
+                    cells.Apply(writer, (short)shapeid);
+                    writer.Commit(page, VisioAutomation.ShapeSheet.CellValueType.Formula);
 
-                    this.Client.Output.WriteVerbose("End Update Page Name={0}", targetpage.NameU);
+                    this.Client.Output.WriteVerbose("End Update Page Name={0}", page.NameU);
                 }
             }
         }

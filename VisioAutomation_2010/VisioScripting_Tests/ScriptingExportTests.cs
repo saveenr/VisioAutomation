@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Scripting
             var s3 = page1.DrawRectangle(0, 1, 1, 2);
             var s4 = page1.DrawRectangle(1, 1, 2, 2);
 
-            client.Selection.SelectAllShapes();
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
 
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
 
@@ -30,11 +30,11 @@ namespace VisioAutomation_Tests.Scripting
                 File.Delete(output_filename);
             }
 
-            client.ExportSelection.ExportSelectionToHtml(output_filename);
+
+            client.Export.ExportSelectionToHtml(VisioScripting.TargetSelection.Auto, output_filename);
 
             AssertUtil.FileExists(output_filename);
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }
 }

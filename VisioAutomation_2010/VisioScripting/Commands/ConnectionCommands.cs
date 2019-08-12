@@ -17,34 +17,34 @@ namespace VisioScripting.Commands
         /// </summary>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public List<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosureOnActivePage(VA.DocumentAnalysis.ConnectionAnalyzerOptions flag)
+        public List<VA.DocumentAnalysis.ConnectorEdge> GetTransitiveClosureOnActivePage(VisioScripting.TargetPage targetpage, VA.DocumentAnalysis.ConnectionAnalyzerOptions flag)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetpage = targetpage.ResolveToPage(this._client);
 
-            return VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(cmdtarget.ActivePage, flag);
+            return VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(targetpage.Page, flag);
         }
 
         public List<VA.DocumentAnalysis.ConnectorEdge> GetDirectedEdgesOnPage(TargetPage targetpage, VA.DocumentAnalysis.ConnectionAnalyzerOptions flag)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             var directed_edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(targetpage.Page, flag);
             return directed_edges;
         }
 
-        public List<IVisio.Shape> ConnectShapes(IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master master)
+        public List<IVisio.Shape> ConnectShapes(VisioScripting.TargetPage target_page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master master)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            target_page = target_page.ResolveToPage(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(ConnectShapes)))
             {
                 if (master == null)
                 {
-                    var connectors = ConnectorHelper.ConnectShapes(cmdtarget.ActivePage, fromshapes, toshapes, null, false);
+                    var connectors = ConnectorHelper.ConnectShapes(target_page.Page, fromshapes, toshapes, null, false);
                     return connectors;                    
                 }
                 else
                 {
-                    var connectors = ConnectorHelper.ConnectShapes(cmdtarget.ActivePage, fromshapes, toshapes, master);
+                    var connectors = ConnectorHelper.ConnectShapes(target_page.Page, fromshapes, toshapes, master);
                     return connectors;
                 }
             }

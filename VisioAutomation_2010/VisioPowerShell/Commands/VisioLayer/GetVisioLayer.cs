@@ -9,12 +9,14 @@ namespace VisioPowerShell.Commands.VisioLayer
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name;
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        // CONTEXT:PAGE
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Page Page;
 
         protected override void ProcessRecord()
         {
-            var targetpage = new VisioScripting.TargetPage();
+            var targetpage = new VisioScripting.TargetPage(this.Page);
+
             if (VisioScripting.Helpers.WildcardHelper.NullOrStar(this.Name))
             {
                 // get all

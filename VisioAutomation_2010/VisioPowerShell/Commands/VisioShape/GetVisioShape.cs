@@ -1,83 +1,61 @@
-using System.Linq;
 using SMA = System.Management.Automation;
+using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]
     public class GetVisioShape : VisioCmdlet
     {
-        [SMA.Parameter(ParameterSetName="name", Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
+        public SMA.SwitchParameter ActiveSelection;
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "shapebyname")]
         public string[] Name;
 
-        [SMA.Parameter(ParameterSetName = "id", Position = 0, Mandatory = false)]
-        public int[] Id;
-        
-        [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Recursive;
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "shapebyid")]
+        public int[] ID;
 
+        // CONTEXT:PAGE
         [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter SubSelected;
+        public IVisio.Page Page;
 
         protected override void ProcessRecord()
         {
-            var targetpage = new VisioScripting.TargetPage().Resolve(this.Client);
-
-            // Handle the case where neither names nor ids where passed
-            if (this.Name == null && this.Id == null)
+            if (this.ActiveSelection)
             {
-                // return selected shapes
-
-                if (this.Recursive)
-                {
-                    this.WriteVerbose("Returning selected shapes (nested)");
-                    var shapes = this.Client.Selection.GetShapesInSelectionRecursive();
-                    this.WriteObject(shapes, true);
-                }
-                if (this.SubSelected)
-                {
-                    this.WriteVerbose("Returning selected shapes (subselect)");
-                    var shapes = this.Client.Selection.GetSubSelectedShapes();
-                    this.WriteObject(shapes, true);
-                }
-                else
-                {
-                    this.WriteVerbose("Returning selected shapes ");
-                    var shapes = this.Client.Selection.GetShapesInSelection();
-                    this.WriteObject(shapes, true);
-                }
-
+                // If we arrive here then it just means get the selected shapes
+                this.WriteVerbose("Returning selected shapes ");
+                var shapes_selected = this.Client.Selection.GetSelectedShapes(VisioScripting.TargetSelection.Auto);
+                this.WriteObject(shapes_selected, true);
                 return;
             }
 
-            // Handle the case where names where passed
+            // If the active selection is not specified then work on all the shapes in a page (user-specified or auto)
+
+            var targetpage = new VisioScripting.TargetPage(this.Page);
+
+            // First, the ID case
+            if (this.ID != null)
+            {
+                var shapes_by_id = this.Client.Page.GetShapesOnPageByID(targetpage, this.ID);
+                this.WriteObject(shapes_by_id, true);
+                return;
+            }
+
+            // Then, handle the name case
             if (this.Name != null)
             {
-                string str_asterisk = "*";
-                if (this.Name.Contains(str_asterisk))
-                {
-                    var shapes = this.Client.Draw.GetAllShapesOnActiveDrawingSurface();
-                    this.WriteObject(shapes, true);
-                }
-                else
-                {
-                    var strings = this.Name.ToArray();
-                    var shapes = this.Client.Page.GetShapesByName(targetpage, strings);
-                    this.WriteObject(shapes, true);
-                }
-
+                var shapes_by_name = this.Client.Page.GetShapesOnPageByName(targetpage, this.Name);
+                this.WriteObject(shapes_by_name, true);
                 return;
             }
 
-            // Handle the case where ids where passed
-            if (this.Id != null)
-            {
-                var shapes = this.Client.Page.GetShapesyID(targetpage,this.Id);
-                this.WriteObject(shapes, true);
+            // Finally return all the shapes on the page
 
-                return;
-            }
+            var shapes_on_page = this.Client.Page.GetShapesOnPage(targetpage);
+            this.WriteObject(shapes_on_page, true);
+            return;
 
-            throw new System.ArgumentOutOfRangeException();
         }
     }
 }

@@ -4,22 +4,46 @@ namespace VisioScripting
 {
     public class TargetObjects<T>
     {
-        protected readonly IList<T> _items;
-        public readonly bool UseContext;
+        private readonly IList<T> _items;
+        public readonly bool Resolved;
 
-        public TargetObjects()
+        protected TargetObjects()
         {
             this._items = null;
-            this.UseContext = true;
+            this.Resolved = false;
         }
 
-        public TargetObjects(IList<T> items)
+        protected TargetObjects(IList<T> items)
         {
             this._items = items;
-            this.UseContext = this._items == null;
+            this.Resolved = (items != null);
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    if (item == null)
+                    {
+                        string msg = string.Format("Cannot pass an array containing a NULL to {0} constructor", nameof(TargetObjects<T>));
+                        throw new System.ArgumentException(msg, nameof(items));
+                    }
+                }
+            }
+
         }
 
-        public bool IsResolved => !this.UseContext;
+        protected IList<T> _get_items_safe()
+        {
+            if (!this.Resolved)
+            {
+                throw new System.ArgumentException("Unresolved Target Collection");
+            }
+            return this._items;
+        }
 
+        protected IList<T> _get_items_unsafe()
+        {
+            return this._items;
+        }
     }
 }

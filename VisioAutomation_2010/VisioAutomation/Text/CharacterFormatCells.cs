@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -6,58 +7,57 @@ namespace VisioAutomation.Text
 {
     public class CharacterFormatCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral Color { get; set; }
-        public VASS.CellValueLiteral Font { get; set; }
-        public VASS.CellValueLiteral Size { get; set; }
-        public VASS.CellValueLiteral Style { get; set; }
-        public VASS.CellValueLiteral ColorTransparency { get; set; }
-        public VASS.CellValueLiteral AsianFont { get; set; }
-        public VASS.CellValueLiteral Case { get; set; }
-        public VASS.CellValueLiteral ComplexScriptFont { get; set; }
-        public VASS.CellValueLiteral ComplexScriptSize { get; set; }
-        public VASS.CellValueLiteral DoubleStrikethrough { get; set; }
-        public VASS.CellValueLiteral DoubleUnderline { get; set; }
-        public VASS.CellValueLiteral LangID { get; set; }
-        public VASS.CellValueLiteral Locale { get; set; }
-        public VASS.CellValueLiteral LocalizeFont { get; set; }
-        public VASS.CellValueLiteral Overline { get; set; }
-        public VASS.CellValueLiteral Perpendicular { get; set; }
-        public VASS.CellValueLiteral Pos { get; set; }
-        public VASS.CellValueLiteral RTLText { get; set; }
-        public VASS.CellValueLiteral FontScale { get; set; }
-        public VASS.CellValueLiteral Letterspace { get; set; }
-        public VASS.CellValueLiteral Strikethru { get; set; }
-        public VASS.CellValueLiteral UseVertical { get; set; }
+        public VASS.CellValue Color { get; set; }
+        public VASS.CellValue Font { get; set; }
+        public VASS.CellValue Size { get; set; }
+        public VASS.CellValue Style { get; set; }
+        public VASS.CellValue ColorTransparency { get; set; }
+        public VASS.CellValue AsianFont { get; set; }
+        public VASS.CellValue Case { get; set; }
+        public VASS.CellValue ComplexScriptFont { get; set; }
+        public VASS.CellValue ComplexScriptSize { get; set; }
+        public VASS.CellValue DoubleStrikethrough { get; set; }
+        public VASS.CellValue DoubleUnderline { get; set; }
+        public VASS.CellValue LangID { get; set; }
+        public VASS.CellValue Locale { get; set; }
+        public VASS.CellValue LocalizeFont { get; set; }
+        public VASS.CellValue Overline { get; set; }
+        public VASS.CellValue Perpendicular { get; set; }
+        public VASS.CellValue Pos { get; set; }
+        public VASS.CellValue RTLText { get; set; }
+        public VASS.CellValue FontScale { get; set; }
+        public VASS.CellValue Letterspace { get; set; }
+        public VASS.CellValue Strikethru { get; set; }
+        public VASS.CellValue UseVertical { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-
-
-                yield return this.Create(nameof(this.Color), VASS.SrcConstants.CharColor, this.Color);
-                yield return this.Create(nameof(this.Font), VASS.SrcConstants.CharFont, this.Font);
-                yield return this.Create(nameof(this.Size), VASS.SrcConstants.CharSize, this.Size);
-                yield return this.Create(nameof(this.Style), VASS.SrcConstants.CharStyle, this.Style);
-                yield return this.Create(nameof(this.ColorTransparency), VASS.SrcConstants.CharColorTransparency, this.ColorTransparency);
-                yield return this.Create(nameof(this.AsianFont), VASS.SrcConstants.CharAsianFont, this.AsianFont);
-                yield return this.Create(nameof(this.Case), VASS.SrcConstants.CharCase, this.Case);
-                yield return this.Create(nameof(this.ComplexScriptFont), VASS.SrcConstants.CharComplexScriptFont, this.ComplexScriptFont);
-                yield return this.Create(nameof(this.ComplexScriptSize), VASS.SrcConstants.CharComplexScriptSize, this.ComplexScriptSize);
-                yield return this.Create(nameof(this.DoubleUnderline), VASS.SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
-                yield return this.Create(nameof(this.DoubleStrikethrough), VASS.SrcConstants.CharDoubleStrikethrough, this.DoubleStrikethrough);
-                yield return this.Create(nameof(this.LangID), VASS.SrcConstants.CharLangID, this.LangID);
-                yield return this.Create(nameof(this.FontScale), VASS.SrcConstants.CharFontScale, this.FontScale);
-                yield return this.Create(nameof(this.Letterspace), VASS.SrcConstants.CharLetterspace, this.Letterspace);
-                yield return this.Create(nameof(this.Locale), VASS.SrcConstants.CharLocale, this.Locale);
-                yield return this.Create(nameof(this.LocalizeFont), VASS.SrcConstants.CharLocalizeFont, this.LocalizeFont);
-                yield return this.Create(nameof(this.Overline), VASS.SrcConstants.CharOverline, this.Overline);
-                yield return this.Create(nameof(this.Perpendicular), VASS.SrcConstants.CharPerpendicular, this.Perpendicular);
-                yield return this.Create(nameof(this.Pos), VASS.SrcConstants.CharPos, this.Pos);
-                yield return this.Create(nameof(this.RTLText), VASS.SrcConstants.CharRTLText, this.RTLText);
-                yield return this.Create(nameof(this.Strikethru), VASS.SrcConstants.CharStrikethru, this.Strikethru);
-                yield return this.Create(nameof(this.UseVertical), VASS.SrcConstants.CharUseVertical, this.UseVertical);
-            }
+            yield return this.Create(nameof(this.Color), VASS.SrcConstants.CharColor, this.Color);
+            yield return this.Create(nameof(this.Font), VASS.SrcConstants.CharFont, this.Font);
+            yield return this.Create(nameof(this.Size), VASS.SrcConstants.CharSize, this.Size);
+            yield return this.Create(nameof(this.Style), VASS.SrcConstants.CharStyle, this.Style);
+            yield return this.Create(nameof(this.ColorTransparency), VASS.SrcConstants.CharColorTransparency,
+                this.ColorTransparency);
+            yield return this.Create(nameof(this.AsianFont), VASS.SrcConstants.CharAsianFont, this.AsianFont);
+            yield return this.Create(nameof(this.Case), VASS.SrcConstants.CharCase, this.Case);
+            yield return this.Create(nameof(this.ComplexScriptFont), VASS.SrcConstants.CharComplexScriptFont,
+                this.ComplexScriptFont);
+            yield return this.Create(nameof(this.ComplexScriptSize), VASS.SrcConstants.CharComplexScriptSize,
+                this.ComplexScriptSize);
+            yield return this.Create(nameof(this.DoubleUnderline), VASS.SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
+            yield return this.Create(nameof(this.DoubleStrikethrough), VASS.SrcConstants.CharDoubleStrikethrough,
+                this.DoubleStrikethrough);
+            yield return this.Create(nameof(this.LangID), VASS.SrcConstants.CharLangID, this.LangID);
+            yield return this.Create(nameof(this.FontScale), VASS.SrcConstants.CharFontScale, this.FontScale);
+            yield return this.Create(nameof(this.Letterspace), VASS.SrcConstants.CharLetterspace, this.Letterspace);
+            yield return this.Create(nameof(this.Locale), VASS.SrcConstants.CharLocale, this.Locale);
+            yield return this.Create(nameof(this.LocalizeFont), VASS.SrcConstants.CharLocalizeFont, this.LocalizeFont);
+            yield return this.Create(nameof(this.Overline), VASS.SrcConstants.CharOverline, this.Overline);
+            yield return this.Create(nameof(this.Perpendicular), VASS.SrcConstants.CharPerpendicular, this.Perpendicular);
+            yield return this.Create(nameof(this.Pos), VASS.SrcConstants.CharPos, this.Pos);
+            yield return this.Create(nameof(this.RTLText), VASS.SrcConstants.CharRTLText, this.RTLText);
+            yield return this.Create(nameof(this.Strikethru), VASS.SrcConstants.CharStrikethru, this.Strikethru);
+            yield return this.Create(nameof(this.UseVertical), VASS.SrcConstants.CharUseVertical, this.UseVertical);
         }
 
 

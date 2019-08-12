@@ -8,7 +8,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '3.5.0'
+ModuleVersion = '4.0.0'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
@@ -47,7 +47,15 @@ CLRVersion = '4.0'
 # RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
-# RequiredAssemblies = @()
+RequiredAssemblies = @(
+"VisioAutomation.dll",
+"VisioAutomation.Models.dll",
+"VisioPS.dll",
+"VisioScripting.dll",
+"Microsoft.Msagl.dll",
+"GenTreeOps.dll"
+)
+
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 # ScriptsToProcess = @()

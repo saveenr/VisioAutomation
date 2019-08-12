@@ -1,4 +1,4 @@
-using VisioAutomation.Shapes;
+using VA=VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -31,12 +31,13 @@ namespace VisioPowerShell.Commands.VisioControl
         [SMA.Parameter(Mandatory = false)]
         public string Tip { get; set; }
 
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
         {
-            var ctrl = new ControlCells();
+            var ctrl = new VA.Shapes.ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
                 ctrl.XBehavior = this.XBehavior;
@@ -46,8 +47,7 @@ namespace VisioPowerShell.Commands.VisioControl
                 ctrl.CanGlue = this.CanGlue;
                 ctrl.Tip = this.Tip;
 
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
-
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             this.Client.Control.AddControlToShapes(targetshapes, ctrl);
         }
     }

@@ -23,12 +23,15 @@ namespace VisioAutomation_Tests.Scripting
             var s4 = page1.DrawRectangle(1, 1, 2, 2);
 
             var active_window = app.ActiveWindow;
+
+
             var selection = active_window.Selection;
             var x1 = selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(1, x1.Count);
             Assert.IsTrue(x1.ContainsKey(s4));
 
-            client.Selection.InvertSelection();
+            client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
+
             var x2 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(3, x2.Count);
             Assert.IsTrue(x2.ContainsKey(s1));
@@ -46,8 +49,7 @@ namespace VisioAutomation_Tests.Scripting
             var x4 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
             Assert.AreEqual(0, x4.Count);
 
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }
 }

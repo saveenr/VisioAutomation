@@ -23,14 +23,14 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._commit(surface, type);
         }
 
-        public void SetValue(Src src, CellValueLiteral formula)
+        public void SetValue(Src src, CellValue formula)
         {
             this.__set_value_ignore_null(src, formula);
         }
 
         public void SetValues(CellGroups.CellGroup cellgroup, short row)
         {
-            foreach (var pair in cellgroup.SrcValuePairs_NewRow(row))
+            foreach (var pair in cellgroup.GetSrcValuePairs_NewRow(row))
             {
                 this.SetValue(pair.Src, pair.Value);
             }
@@ -38,13 +38,13 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cellgroup.SrcValuePairs)
+            foreach (var pair in cellgroup.GetSrcValuePairs())
             {
                 this.SetValue(pair.Src, pair.Value);
             }
         }
 
-        private void __set_value_ignore_null(Src src, CellValueLiteral formula)
+        private void __set_value_ignore_null(Src src, CellValue formula)
         {
             if (this._records == null)
             {

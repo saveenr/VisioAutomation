@@ -12,61 +12,16 @@ namespace VisioScripting.Commands
         {
 
         }
-
-        public VisioAutomation.SurfaceTarget GetActiveDrawingSurface()
+        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            var surf_application = cmdtarget.Application;
-            var surf_window = surf_application.ActiveWindow;
-            var surf_window_subtype = surf_window.SubType;
-
-            // TODO: Revisit the logic here
-            // TODO: And what about a selected shape as a surface?
-
-            this._client.Output.WriteVerbose("Window SubType: {0}", surf_window_subtype);
-            if (surf_window_subtype == 64)
-            {
-                this._client.Output.WriteVerbose("Window = Master Editing");
-                var surf_master = (IVisio.Master)surf_window.Master;
-                var surface = new VisioAutomation.SurfaceTarget(surf_master);
-                return surface;
-
-            }
-            else
-            {
-                this._client.Output.WriteVerbose("Window = Page ");
-                var surf_Page = surf_application.ActivePage;
-                var surface = new VisioAutomation.SurfaceTarget(surf_Page);
-                return surface;
-            }
+            var rect = new VisioAutomation.Geometry.Rectangle(x0, y0, x1, y1);
+            return this.DrawRectangle(targetpage,rect);
         }
 
-
-        public IVisio.Shape DrawNurbsCurve(
-            IList<VisioAutomation.Geometry.Point> controlpoints,
-            IList<double> knots,
-            IList<double> weights, int degree)
+        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, VisioAutomation.Geometry.Rectangle r)
         {
-
-            // flags:
-            // None = 0,
-            // IVisio.VisDrawSplineFlags.visSpline1D
-
-            var cmdtarget = this._client.GetCommandTargetPage();
-
-            var application = cmdtarget.Application;
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawNurbsCurve)))
-            {
-
-                var shape = cmdtarget.ActivePage.DrawNurbs(controlpoints, knots, weights, degree);
-                return shape;
-            }
-        }
-
-        public IVisio.Shape DrawRectangle(VisioAutomation.Geometry.Rectangle r)
-        {
-            var surface = this.GetActiveDrawingSurface();
+            targetpage = targetpage.ResolveToPage(this._client);
+            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawRectangle)))
             {
                 var shape = surface.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
@@ -74,22 +29,18 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DrawRectangle(double x0, double y0, double x1, double y1)
-        {
-            var rect = new VisioAutomation.Geometry.Rectangle(x0, y0, x1, y1);
-            return this.DrawRectangle(rect);
-        }
 
-        public IVisio.Shape DrawLine(double x0, double y0, double x1, double y1)
+        public IVisio.Shape DrawLine(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
         {
             var p0 = new VisioAutomation.Geometry.Point(x0, y0);
             var p1 = new VisioAutomation.Geometry.Point(x1, y1);
-            return this.DrawLine(p0, p1);
+            return this.DrawLine(targetpage, p0, p1);
         }
 
-        public IVisio.Shape DrawLine(VisioAutomation.Geometry.Point p0, VisioAutomation.Geometry.Point p1)
+        public IVisio.Shape DrawLine(VisioScripting.TargetPage targetpage, VisioAutomation.Geometry.Point p0, VisioAutomation.Geometry.Point p1)
         {
-            var surface = this.GetActiveDrawingSurface();
+            targetpage = targetpage.ResolveToPage(this._client);
+            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawLine)))
             {
                 var shape = surface.DrawLine(p0,p1);
@@ -97,9 +48,11 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DrawOval(VisioAutomation.Geometry.Rectangle rect)
+        public IVisio.Shape DrawOval(VisioScripting.TargetPage targetpage, VisioAutomation.Geometry.Rectangle rect)
         {
-            var surface = this.GetActiveDrawingSurface();
+            targetpage = targetpage.ResolveToPage(this._client);
+            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
+
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
                 var shape = surface.DrawOval(rect);
@@ -107,15 +60,17 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DrawOval(double x0, double y0, double x1, double y1)
+        public IVisio.Shape DrawOval(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
         {
             var rect = new VisioAutomation.Geometry.Rectangle(x0, y0, x1, y1);
-            return this.DrawOval(rect);
+            return this.DrawOval(targetpage, rect);
         }
 
-        public IVisio.Shape DrawBezier(IEnumerable<VisioAutomation.Geometry.Point> points)
+        public IVisio.Shape DrawBezier(VisioScripting.TargetPage targetpage, IEnumerable<VisioAutomation.Geometry.Point> points)
         {
-            var surface = this.GetActiveDrawingSurface();
+            targetpage = targetpage.ResolveToPage(this._client);
+            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
+
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
                 var shape = surface.DrawBezier(points.ToList());
@@ -123,9 +78,10 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DrawPolyLine(IList<VisioAutomation.Geometry.Point> points)
+        public IVisio.Shape DrawPolyLine(VisioScripting.TargetPage targetpage, IList<VisioAutomation.Geometry.Point> points)
         {
-            var surface = this.GetActiveDrawingSurface();
+            targetpage = targetpage.ResolveToPage(this._client);
+            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPolyLine)))
             {
                 var shape = surface.DrawPolyLine(points);
@@ -134,31 +90,24 @@ namespace VisioScripting.Commands
         }
 
 
-        public void DuplicateShapes(int n)
+        public void Duplicate(VisioScripting.TargetSelection targetselection,int n)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
             if (n < 1)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(n));
             }
 
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
-            if (selection.Count<1)
-            {
-                return;
-            }
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             // TODO: Add ability to duplicate all the selected shapes, not just the first one
             // this dupicates exactly 1 shape N - times what it
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
-            var application = cmdtarget.Application;
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DuplicateShapes)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(Duplicate)))
             {
-                var active_page = application.ActivePage;
-                var new_shapes = DrawCommands._create_duplicates(active_page, selection[1], n);
+                var app = targetselection.Selection.Application;
+                var active_page = app.ActivePage;
+                var new_shapes = DrawCommands._create_duplicates(active_page, targetselection.Selection[1], n);
             }
         }
 
@@ -228,15 +177,6 @@ namespace VisioScripting.Commands
             }
 
             return duplicated_shapes;
-        }
-
-        public List<IVisio.Shape> GetAllShapesOnActiveDrawingSurface()
-        {
-            var surface = this._client.ShapeSheet.GetShapeSheetSurface();
-            var shapes = surface.Shapes;
-            var list = new List<IVisio.Shape>();
-            list.AddRange(shapes.ToEnumerable());
-            return list;
         }
     }
 }

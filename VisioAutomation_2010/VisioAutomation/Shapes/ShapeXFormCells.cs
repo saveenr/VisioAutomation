@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -8,28 +9,23 @@ namespace VisioAutomation.Shapes
 {
     public class ShapeXFormCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral PinX { get; set; }
-        public VASS.CellValueLiteral PinY { get; set; }
-        public VASS.CellValueLiteral LocPinX { get; set; }
-        public VASS.CellValueLiteral LocPinY { get; set; }
-        public VASS.CellValueLiteral Width { get; set; }
-        public VASS.CellValueLiteral Height { get; set; }
-        public VASS.CellValueLiteral Angle { get; set; }
+        public VASS.CellValue PinX { get; set; }
+        public VASS.CellValue PinY { get; set; }
+        public VASS.CellValue LocPinX { get; set; }
+        public VASS.CellValue LocPinY { get; set; }
+        public VASS.CellValue Width { get; set; }
+        public VASS.CellValue Height { get; set; }
+        public VASS.CellValue Angle { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-
-
-                yield return this.Create(nameof(this.PinX), VASS.SrcConstants.XFormPinX, this.PinX);
-                yield return this.Create(nameof(this.PinY), VASS.SrcConstants.XFormPinY, this.PinY);
-                yield return this.Create(nameof(this.LocPinX), VASS.SrcConstants.XFormLocPinX, this.LocPinX);
-                yield return this.Create(nameof(this.LocPinY), VASS.SrcConstants.XFormLocPinY, this.LocPinY);
-                yield return this.Create(nameof(this.Width), VASS.SrcConstants.XFormWidth, this.Width);
-                yield return this.Create(nameof(this.Height), VASS.SrcConstants.XFormHeight, this.Height);
-                yield return this.Create(nameof(this.Angle), VASS.SrcConstants.XFormAngle, this.Angle);
-            }
+            yield return this.Create(nameof(this.PinX), VASS.SrcConstants.XFormPinX, this.PinX);
+            yield return this.Create(nameof(this.PinY), VASS.SrcConstants.XFormPinY, this.PinY);
+            yield return this.Create(nameof(this.LocPinX), VASS.SrcConstants.XFormLocPinX, this.LocPinX);
+            yield return this.Create(nameof(this.LocPinY), VASS.SrcConstants.XFormLocPinY, this.LocPinY);
+            yield return this.Create(nameof(this.Width), VASS.SrcConstants.XFormWidth, this.Width);
+            yield return this.Create(nameof(this.Height), VASS.SrcConstants.XFormHeight, this.Height);
+            yield return this.Create(nameof(this.Angle), VASS.SrcConstants.XFormAngle, this.Angle);
         }
 
 

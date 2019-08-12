@@ -11,6 +11,7 @@ namespace VisioPowerShell.Commands.VisioDocument
         [SMA.ValidateNotNullOrEmpty]
         public string Filename;
 
+        // CONTEXT:DOCUMENT
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;
 

@@ -47,23 +47,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AlignCommands.cs" />
+    <Compile Include="Commands\ExportCommands.cs" />
+    <Compile Include="Commands\ContainerrCommands.cs" />
     <Compile Include="Commands\UndoCommands.cs" />
     <Compile Include="Commands\LockCommands.cs" />
     <Compile Include="Commands\CommandParameter.cs" />
     <Compile Include="CommandTarget.cs" />
-    <Compile Include="CommandTargetRequirementFlags.cs" />
-    <Compile Include="Commands\DistributeCommands.cs" />
-    <Compile Include="Commands\ChartingCommands.cs" />
-    <Compile Include="Commands\ExportPageCommands.cs" />
+    <Compile Include="CommandTargetFlags.cs" />
+    <Compile Include="Commands\ModelCommands.cs" />
     <Compile Include="Commands\GroupingCommands.cs" />
+    <Compile Include="Models\PageDimensions.cs" />
+    <Compile Include="Models\ShapeDimensions.cs" />
+    <Compile Include="Models\ShapeSelectionOperation.cs" />
     <Compile Include="Models\ShapeSendDirection.cs" />
     <Compile Include="Helpers\SelectionHelper.cs" />
     <Compile Include="Models\AlignmentHorizontal.cs" />
     <Compile Include="Models\AlignmentVertical.cs" />
     <Compile Include="Models\Axis.cs" />
     <Compile Include="Models\PageOrientation.cs" />
-    <Compile Include="Models\PageType.cs" />
     <Compile Include="Models\SelectionOperation.cs" />
     <Compile Include="Models\ShapeSheetReader.cs" />
     <Compile Include="Models\ShapeSheetWriter.cs" />
@@ -74,13 +75,13 @@
     <Compile Include="TargetObjects.cs" />
     <Compile Include="TargetPage.cs" />
     <Compile Include="TargetPages.cs" />
+    <Compile Include="TargetSelection.cs" />
     <Compile Include="TargetShapes.cs" />
     <Compile Include="Helpers\ArrangeHelper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandSet.cs" />
     <Compile Include="Commands\ApplicationCommands.cs" />
-    <Compile Include="Commands\ApplicationWindowCommands.cs" />
     <Compile Include="Commands\ArrangeCommands.cs" />
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Commands\ConnectionPointCommands.cs" />
@@ -89,7 +90,6 @@
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="Commands\DocumentCommands.cs" />
     <Compile Include="Commands\DrawCommands.cs" />
-    <Compile Include="Commands\ExportSelectionCommands.cs" />
     <Compile Include="Commands\HyperlinkCommands.cs" />
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
@@ -107,20 +107,17 @@
     <Compile Include="ClientContext.cs" />
     <Compile Include="DefaultClientContext.cs" />
     <Compile Include="Models\DGConnectorInfo.cs" />
-    <Compile Include="Builders\DirectedGraphBuilder.cs" />
+    <Compile Include="Loaders\DirectedGraphDocumentLoader.cs" />
     <Compile Include="Models\DGShapeInfo.cs" />
     <Compile Include="Helpers\WildcardHelper.cs" />
     <Compile Include="Models\ShapeXFormData.cs" />
     <Compile Include="Extensions\XmlLinqExtensions.cs" />
-    <Compile Include="Builders\OrgChartBuilder.cs" />
-    <Compile Include="Models\PageDirection.cs" />
-    <Compile Include="Models\UserDefinedCell.cs" />
+    <Compile Include="Loaders\OrgChartDocumentLoader.cs" />
+    <Compile Include="Models\PageRelativePosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\ShapeRelativePosition.cs" />
-    <Compile Include="Models\SnapCornerPosition.cs" />
-    <Compile Include="Models\SnappingGrid.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Models\ZoomToObject.cs" />
+    <Compile Include="TargetWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -7,50 +8,41 @@ namespace VisioPowerShell.Commands.VisioDocument
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioDocument)]
     public class GetVisioDocument : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = false)]
-        public string Name = null;
-
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
         public SMA.SwitchParameter ActiveDocument;
 
-        [SMA.Parameter(Mandatory = false)] public VisioPowerShell.Models.DocumentType? Type;
-
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "docbyname")]
+        public string[] Name = null;
+        
+        
         protected override void ProcessRecord()
         {
             if (this.ActiveDocument)
             {
-                var application = this.Client.Application.GetAttachedApplication();
+                var application = this.Client.Application.GetApplication();
                 var active_doc = application.ActiveDocument;
                 this.WriteObject(active_doc);
                 return;
             }
 
-            var visdoctype = _get_vis_document_type(this.Type);
-            var docs = this.Client.Document.FindDocuments(this.Name, visdoctype);
-            this.WriteObject(docs, true);
-        }
+            // If the active document is not specified then work on all the pages in the application
 
-        private static IVisio.VisDocumentTypes? _get_vis_document_type(DocumentType? doctype)
-        {
-            if (doctype == null)
+            if (this.Name == null)
             {
-                return null;
+                // Get all docs
+                var docs = this.Client.Document.FindDocuments(null);
+                this.WriteObject(docs, true);
+                return;
             }
 
-            if (doctype.Value == DocumentType.Drawing)
+            var list_doc = new List<IVisio.Document>();
+            foreach (var name in Name)
             {
-                return IVisio.VisDocumentTypes.visTypeDrawing;
-            }
-            else if (doctype.Value == DocumentType.Stencil)
-            {
-                return IVisio.VisDocumentTypes.visTypeStencil;
-            }
-            else if (doctype.Value == DocumentType.Template)
-            {
-                return IVisio.VisDocumentTypes.visTypeTemplate;
-            }
+                var docs = this.Client.Document.FindDocuments(name);
+                list_doc.AddRange(docs);
 
-            throw new System.ArgumentOutOfRangeException(nameof(doctype));
+            }
+            this.WriteObject(list_doc, true);
         }
     }
 

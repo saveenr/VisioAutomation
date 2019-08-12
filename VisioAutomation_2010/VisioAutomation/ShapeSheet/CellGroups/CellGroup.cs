@@ -5,20 +5,23 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public class CellGroup
     {
-        public IEnumerable<SrcValuePair> SrcValuePairs
+
+        public virtual IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<SrcValuePair> GetSrcValuePairs()
+        {
+            foreach (var pair in this.GetCellMetadata())
             {
-                foreach (var pair in this.CellMetadata)
-                {
-                    yield return new SrcValuePair(pair.Src, pair.Value);
-                }
+                yield return new SrcValuePair(pair.Src, pair.Value);
             }
         }
-        public virtual IEnumerable<CellMetadataItem> CellMetadata { get; }
-        public IEnumerable<SrcValuePair> SrcValuePairs_NewRow(short row)
+
+        public IEnumerable<SrcValuePair> GetSrcValuePairs_NewRow(short row)
         {
-            foreach (var pair in this.SrcValuePairs)
+            foreach (var pair in this.GetSrcValuePairs())
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
                 var new_pair = new SrcValuePair(new_src, pair.Value);
@@ -27,9 +30,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public IEnumerable<SidSrcValuePair> SidSrcValuePairs_NewRow(short shapeid, short row)
+        public IEnumerable<SidSrcValuePair> GetSidSrcValuePairs_NewRow(short shapeid, short row)
         {
-            foreach (var pair in this.SrcValuePairs)
+            foreach (var pair in this.GetSrcValuePairs())
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
                 var new_pair = new SidSrcValuePair(shapeid, new_src, pair.Value);
@@ -38,7 +41,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        protected CellMetadataItem Create(string name, Src src, CellValueLiteral value)
+        protected CellMetadataItem Create(string name, Src src, CellValue value)
         {
             return new CellMetadataItem(name, src, value.Value);
         }

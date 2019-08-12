@@ -4,28 +4,28 @@ namespace VisioAutomation.Models.Text
 {
     public class CharacterFormatting
     {
-        public ShapeSheet.CellValueLiteral AsianFont { get; set; }
-        public ShapeSheet.CellValueLiteral Case { get; set; }
-        public ShapeSheet.CellValueLiteral Color { get; set; }
-        public ShapeSheet.CellValueLiteral ComplexScriptFont { get; set; }
-        public ShapeSheet.CellValueLiteral ComplexScriptSize { get; set; }
-        public ShapeSheet.CellValueLiteral DoubleStrikeThrough { get; set; }
-        public ShapeSheet.CellValueLiteral DoubleUnderline { get; set; }
-        public ShapeSheet.CellValueLiteral Font { get; set; }
-        public ShapeSheet.CellValueLiteral FontScale { get; set; }
-        public ShapeSheet.CellValueLiteral LangID { get; set; }
-        public ShapeSheet.CellValueLiteral Letterspace { get; set; }
-        public ShapeSheet.CellValueLiteral Locale { get; set; }
-        public ShapeSheet.CellValueLiteral LocalizeFont { get; set; }
-        public ShapeSheet.CellValueLiteral Overline { get; set; }
-        public ShapeSheet.CellValueLiteral Perpendicular { get; set; }
-        public ShapeSheet.CellValueLiteral Pos { get; set; }
-        public ShapeSheet.CellValueLiteral RTLText { get; set; }
-        public ShapeSheet.CellValueLiteral Size { get; set; }
-        public ShapeSheet.CellValueLiteral Strikethru { get; set; }
-        public ShapeSheet.CellValueLiteral Style { get; set; }
-        public ShapeSheet.CellValueLiteral Transparency { get; set; }
-        public ShapeSheet.CellValueLiteral UseVertical { get; set; }
+        public ShapeSheet.CellValue AsianFont { get; set; }
+        public ShapeSheet.CellValue Case { get; set; }
+        public ShapeSheet.CellValue Color { get; set; }
+        public ShapeSheet.CellValue ComplexScriptFont { get; set; }
+        public ShapeSheet.CellValue ComplexScriptSize { get; set; }
+        public ShapeSheet.CellValue DoubleStrikeThrough { get; set; }
+        public ShapeSheet.CellValue DoubleUnderline { get; set; }
+        public ShapeSheet.CellValue Font { get; set; }
+        public ShapeSheet.CellValue FontScale { get; set; }
+        public ShapeSheet.CellValue LangID { get; set; }
+        public ShapeSheet.CellValue Letterspace { get; set; }
+        public ShapeSheet.CellValue Locale { get; set; }
+        public ShapeSheet.CellValue LocalizeFont { get; set; }
+        public ShapeSheet.CellValue Overline { get; set; }
+        public ShapeSheet.CellValue Perpendicular { get; set; }
+        public ShapeSheet.CellValue Pos { get; set; }
+        public ShapeSheet.CellValue RTLText { get; set; }
+        public ShapeSheet.CellValue Size { get; set; }
+        public ShapeSheet.CellValue Strikethru { get; set; }
+        public ShapeSheet.CellValue Style { get; set; }
+        public ShapeSheet.CellValue Transparency { get; set; }
+        public ShapeSheet.CellValue UseVertical { get; set; }
 
         internal void ApplyFormulas(VisioAutomation.ShapeSheet.Writers.SrcWriter writer, short row)
         {

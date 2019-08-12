@@ -1,4 +1,3 @@
-using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting
@@ -6,34 +5,30 @@ namespace VisioScripting
     public class TargetPage : TargetObject<IVisio.Page>
     {
 
-        public TargetPage() : base()
+        private TargetPage() : base()
         {
         }
 
-        public TargetPage(Microsoft.Office.Interop.Visio.Page page) : base(page)
+        public TargetPage(IVisio.Page page) : base(page)
         {
         }
 
-        public TargetPage(Microsoft.Office.Interop.Visio.Page page, bool isresolved) : base(page, isresolved)
+        public TargetPage ResolveToPage(Client client)
         {
-        }
-
-        public TargetPage Resolve(VisioScripting.Client client)
-        {
-            if (!this.IsResolved)
-            {
-                var cmdtarget = client.GetCommandTargetPage();
-
-                // It doesn't matter if there is an active page or not
-                // at this point it is considered resolved
-                return new TargetPage(cmdtarget.ActivePage, true);
-            }
-            else
+            if (this.Resolved)
             {
                 return this;
             }
+
+            var cmdtarget = client.GetCommandTarget(CommandTargetFlags.RequirePage);
+
+            client.Output.WriteVerbose("Resolving to active page (name={0})", cmdtarget.ActivePage.Name);
+
+            return new TargetPage(cmdtarget.ActivePage);
         }
 
-        public IVisio.Page Page => this._item;
+        public IVisio.Page Page => this._get_item_safe();
+
+        public static TargetPage Auto => new TargetPage();
     }
 }

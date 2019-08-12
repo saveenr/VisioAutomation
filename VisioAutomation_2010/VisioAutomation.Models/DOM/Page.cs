@@ -1,6 +1,6 @@
 ﻿using VisioAutomation.Extensions;
-using VisioAutomation.Pages;
-using VisioAutomation.ShapeSheet.Writers;
+using VA = VisioAutomation;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Dom
@@ -16,24 +16,24 @@ namespace VisioAutomation.Models.Dom
         public string Name;
         public VisioAutomation.Models.LayoutStyles.LayoutStyleBase Layout;
         public IVisio.Page VisioPage;
-        public RenderPerforfmanceSettings RenderPerforfmanceSettings { get; }
+        public RenderPerformanceSettings RenderPerformanceSettings { get; }
 
         public Page()
         {
             this.Shapes = new ShapeList();
             this.PageFormatCells = new Pages.PageFormatCells();
-            this.PageLayoutCells = new PageLayoutCells();
+            this.PageLayoutCells = new VA.Pages.PageLayoutCells();
 
-            this.RenderPerforfmanceSettings = new RenderPerforfmanceSettings();
-            this.RenderPerforfmanceSettings.DeferRecalc = 0;
+            this.RenderPerformanceSettings = new RenderPerformanceSettings();
+            this.RenderPerformanceSettings.DeferRecalc = 0;
             
             // By Enable ScreenUpdating by default
             // If it is disabled it messes up page resizing (there may be a workaround)
             // TODO: Try the DrawTreeMultiNode2 unit test to see how setting it to 1 will affect the rendering
 
-            this.RenderPerforfmanceSettings.ScreenUpdating = 1; 
-            this.RenderPerforfmanceSettings.EnableAutoConnect = false;
-            this.RenderPerforfmanceSettings.LiveDynamics = false;
+            this.RenderPerformanceSettings.ScreenUpdating = 1; 
+            this.RenderPerformanceSettings.EnableAutoConnect = false;
+            this.RenderPerformanceSettings.LiveDynamics = false;
         }
 
         public IVisio.Page Render(IVisio.Document doc)
@@ -68,7 +68,7 @@ namespace VisioAutomation.Models.Dom
             var page_sheet = page.PageSheet;
             var app = page.Application;
 
-            using (var perfscope = new RenderPerformanceScope(app, this.RenderPerforfmanceSettings))
+            using (var perfscope = new RenderPerformanceScope(app, this.RenderPerformanceSettings))
             {
                 if (this.Size.HasValue)
                 {
@@ -76,7 +76,7 @@ namespace VisioAutomation.Models.Dom
                     this.PageFormatCells.Width = this.Size.Value.Width;
                 }
 
-                var writer = new SidSrcWriter();
+                var writer = new VASS.Writers.SidSrcWriter();
                 writer.SetValues((short)page_sheet.ID, this.PageFormatCells);
                 writer.SetValues((short)page_sheet.ID, this.PageLayoutCells);
                 writer.Commit(page, ShapeSheet.CellValueType.Formula);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -7,28 +8,23 @@ namespace VisioAutomation.Shapes
 {
     public class UserDefinedCellCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral Value { get; set; }
-        public VASS.CellValueLiteral Prompt { get; set; }
+        public VASS.CellValue Value { get; set; }
+        public VASS.CellValue Prompt { get; set; }
 
         public UserDefinedCellCells()
         {
         }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-
-
-                yield return this.Create(nameof(this.Value), VASS.SrcConstants.UserDefCellValue, this.Value);
-                yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.UserDefCellPrompt, this.Prompt);
-            }
+            yield return this.Create(nameof(this.Value), VASS.SrcConstants.UserDefCellValue, this.Value);
+            yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.UserDefCellPrompt, this.Prompt);
         }
 
         public void EncodeValues()
         {
-            this.Value = VASS.CellValueLiteral.EncodeValue(this.Value.Value);
-            this.Prompt = VASS.CellValueLiteral.EncodeValue(this.Prompt.Value);
+            this.Value = VASS.CellValue.EncodeValue(this.Value.Value);
+            this.Prompt = VASS.CellValue.EncodeValue(this.Prompt.Value);
         }
 
         public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)

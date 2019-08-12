@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -9,45 +10,65 @@ namespace VisioPowerShell.Commands.VisioPageCells
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPageCells)]
     public class GetVisioPageCells: VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page[] Pages { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
+        public string[] Cell { get; set; }
+
+
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter Results { get; set; }
+
+        [SMA.Parameter(Mandatory = false)]
+        public Models.ResultType ResultType = ResultType.String;
+
+        // CONTEXT:PAGES
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Page { get; set; }
 
         protected override void ProcessRecord()
         {
-            var targetpages = new VisioScripting.TargetPages(this.Pages);
+            var valuetype = this.Results
+                ? VisioAutomation.ShapeSheet.CellValueType.Result
+                : VisioAutomation.ShapeSheet.CellValueType.Formula;
+
+            var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
+
+            if (targetpages.Pages.Count < 1)
+            {
+                return;
+            }
 
             var template = new VisioPowerShell.Models.PageCells();
-            var celldic = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
-            var cellnames = celldic.Keys.ToArray();
-            var query = _CreateQuery(celldic, cellnames);
-            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
+            var dicof_name_to_cell = VisioPowerShell.Internal.NamedSrcDictionary.FromCells(template);
+            var desired_cells = this.Cell ?? dicof_name_to_cell.Keys.ToArray();
+            var query = _create_query(dicof_name_to_cell, desired_cells);
             
-            var result_dt = new System.Data.DataTable();
+            var datatable = new System.Data.DataTable();
 
-            foreach (var targetpage in targetpages.Pages)
+            foreach (var page in targetpages.Pages)
             {
-                var targetpage_shapesheet = targetpage.PageSheet;
-                var targetpage_shapeshapeids = new List<int> { targetpage_shapesheet.ID };
-                var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, targetpage_shapeshapeids, surface);
-                result_dt.Merge(dt);
+                var shapesheet = page.PageSheet;
+                var shapeids = new List<int> { shapesheet.ID };
+                var surface = new VisioAutomation.SurfaceTarget(page);
+                var temp_datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, surface);
+                datatable.Merge(temp_datatable);
             }
 
             // Annotate the returned datatable to disambiguate rows
-            var pageindex_col = result_dt.Columns.Add("PageIndex", typeof(System.Int32));
-            pageindex_col.SetOrdinal(0);
-            for (int row_index = 0; row_index < targetpages.Pages.Count; row_index++)
+            var pageid_col = datatable.Columns.Add("PageID", typeof(int));
+            int pageid_colindex = 0;
+            pageid_col.SetOrdinal(pageid_colindex);
+            foreach (int row_index in Enumerable.Range(0,targetpages.Pages.Count))
             {
-                result_dt.Rows[row_index][pageindex_col.ColumnName] = targetpages.Pages[row_index].Index;
+                var page = targetpages.Pages[row_index];
+                datatable.Rows[row_index][pageid_colindex] = page.ID;
             }
 
-            this.WriteObject(result_dt);
+            this.WriteObject(datatable);
         }
 
-        private VisioAutomation.ShapeSheet.Query.CellQuery _CreateQuery(
-            VisioPowerShell.Models.NamedSrcDictionary celldic,
+        private VisioAutomation.ShapeSheet.Query.CellQuery _create_query(
+            VisioPowerShell.Internal.NamedSrcDictionary celldic,
             IList<string> cellnames)
         {
             var invalid_names = cellnames.Where(cellname => !celldic.ContainsKey(cellname)).ToList();

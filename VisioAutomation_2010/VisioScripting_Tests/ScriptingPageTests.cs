@@ -14,7 +14,8 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument();
-            client.Page.NewPage(new Size(4, 5), false);
+
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new Size(4, 5), false);
         }
 
 
@@ -26,32 +27,33 @@ namespace VisioAutomation_Tests.Scripting
             var doc = client.Document.NewDocument(page_size);
 
             var page1 = client.Page.GetActivePage();
-            client.Page.NewPage(page_size, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, page_size, false);
             var page2 = client.Page.GetActivePage();
-            client.Page.NewPage(page_size, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, page_size, false);
             var page3 = client.Page.GetActivePage();
+
 
             Assert.AreEqual(3,doc.Pages.Count);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.First);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.First);
             Assert.AreEqual(page1, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Last);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Last);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Previous);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Previous);
             Assert.AreEqual(page2, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Next);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Next);
             Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to last and try to go to next page
-            client.Page.SetActivePageByDirection(PageDirection.Last);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Last);
             Assert.AreEqual(page3, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Next);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Next);
             Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to first and try to go to previous page
-            client.Page.SetActivePageByDirection(PageDirection.First);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.First);
             Assert.AreEqual(page1, client.Page.GetActivePage());
-            client.Page.SetActivePageByDirection(PageDirection.Previous);
+            client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Previous);
             Assert.AreEqual(page1, client.Page.GetActivePage());
 
             doc.Close(true);
@@ -63,10 +65,11 @@ namespace VisioAutomation_Tests.Scripting
             var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument(page_size);
-            client.Draw.DrawRectangle(0, 0, 1, 1);
 
-            var targetpage = new VisioScripting.TargetPage();
-            client.Page.Duplicate(targetpage);
+
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 0, 0, 1, 1);
+
+            client.Page.DuplicatePage(VisioScripting.TargetPage.Auto);
             doc.Close(true);
         }
 
@@ -76,29 +79,24 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
 
             // First case: the source document is already the active document
-            var doc_dest_1 = client.Document.NewDocument();
-            var doc_src_1 = client.Document.NewDocument();
+            var doc_2_dest = client.Document.NewDocument();
+            doc_2_dest.Pages.Add();
+            doc_2_dest.Pages.Add();
+            var doc_1_src = client.Document.NewDocument();
+
+            doc_2_dest.Title = "DEST";
+            doc_1_src.Title = "SRC";
 
 
-            var target_src1_page = new VisioScripting.TargetPage().Resolve(client);
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 0, 0, 1, 1);
 
-            client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Page.DuplicateToDocument(target_src1_page, doc_dest_1);
+            var dupe_page = client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Auto, doc_2_dest);
 
-            // Second case: the source document has to be activated beforehand
-            var doc_src_2 = client.Document.NewDocument();
-            var doc_dest_2 = client.Document.NewDocument();
-            client.Document.ActivateDocument(doc_src_2);
-            client.Draw.DrawRectangle(0, 0, 1, 1);
-
-            var target_src2_page = new VisioScripting.TargetPage().Resolve(client);
-
-            client.Page.DuplicateToDocument(target_src2_page, doc_dest_2);
-
-            doc_src_1.Close(true);
-            doc_src_2.Close(true);
-            doc_dest_1.Close(true);
-            doc_dest_2.Close(true);
+            Assert.AreEqual(1, doc_1_src.Pages.Count);
+            Assert.AreEqual(4, doc_2_dest.Pages.Count);
+            doc_1_src.Close(true);
+            doc_2_dest.Close(true);
         }
+
     }
 }

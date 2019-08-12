@@ -6,7 +6,7 @@ namespace VisioScripting
     public class TargetDocuments : TargetObjects<IVisio.Document>
     {
 
-        public TargetDocuments() : base()
+        private TargetDocuments() : base()
         {
         }
 
@@ -18,31 +18,29 @@ namespace VisioScripting
         {
         }
 
-        public TargetDocuments Resolve(VisioScripting.Client client)
+        public TargetDocuments ResolveToDocuments(VisioScripting.Client client)
         {
-            if (this.IsResolved)
+            if (this.Resolved)
             {
                 return this;
             }
 
             // Handle the unresolved case
 
-            var cmdtarget = new CommandTarget(client, CommandTargetRequirementFlags.RequireApplication |
-                                                                    CommandTargetRequirementFlags.RequireActiveDocument |
-                                                                    CommandTargetRequirementFlags.RequirePage);
+            var flags = CommandTargetFlags.RequireApplication |
+                        CommandTargetFlags.RequireDocument |
+                        CommandTargetFlags.RequirePage;
 
-            if (cmdtarget.ActiveDocument == null)
-            {
-                var docs = new List<IVisio.Document>(0);
-                return new TargetDocuments(docs);
-            }
-            else
-            {
-                var docs = new List<IVisio.Document> { cmdtarget.ActiveDocument };
-                return new TargetDocuments(docs);
-            }
+            var cmdtarget = new CommandTarget(client, flags);
+
+            var docs = new List<IVisio.Document> { cmdtarget.ActiveDocument };
+
+            client.Output.WriteVerbose("Resolving to active document (name={0})", cmdtarget.ActiveDocument.Name);
+            return new TargetDocuments(docs);
         }
 
-        public IList<IVisio.Document> Documents => this._items;
+        public IList<IVisio.Document> Documents => this._get_items_safe();
+
+        public static TargetDocuments Auto => new TargetDocuments();
     }
 }

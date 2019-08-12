@@ -10,23 +10,23 @@ namespace VisioScripting
         public IVisio.Document ActiveDocument { get; private set; }
         public IVisio.Page ActivePage { get; private set; }
 
-        public CommandTarget(Client client, CommandTargetRequirementFlags requirement_flags)
+        public CommandTarget(Client client, CommandTargetFlags flags)
         {
             this._client = client;
 
-            _check(requirement_flags);
+            _check(flags);
         }
 
-        private void _check(CommandTargetRequirementFlags requirement_flags)
+        private void _check(CommandTargetFlags flags)
         {
-            bool require_app = (requirement_flags & CommandTargetRequirementFlags.RequireApplication) != 0;
-            bool require_document = (requirement_flags & CommandTargetRequirementFlags.RequireActiveDocument) != 0;
-            bool require_page = (requirement_flags & CommandTargetRequirementFlags.RequirePage) != 0;
+            bool require_app = (flags & CommandTargetFlags.RequireApplication) != 0;
+            bool require_document = (flags & CommandTargetFlags.RequireDocument) != 0;
+            bool require_page = (flags & CommandTargetFlags.RequirePage) != 0;
 
             require_app = require_app || require_document || require_page;
             require_document = require_document || require_page;
 
-            this.Application = this._client.Application.GetAttachedApplication();
+            this.Application = this._client.Application.GetApplication();
 
             if (require_app && this.Application == null)
             {
@@ -81,12 +81,12 @@ namespace VisioScripting
         {
             if (app == null)
             {
-                new System.ArgumentNullException(nameof(app));
+                throw new System.ArgumentNullException(nameof(app));
             }
 
             if (doc == null)
             {
-                new System.ArgumentNullException(nameof(doc));
+                throw new System.ArgumentNullException(nameof(doc));
             }
 
             if (doc.Application != app)

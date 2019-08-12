@@ -5,13 +5,13 @@ namespace VisioAutomation.Shapes
 {
     public class ShapeGeometryRow
     {
-        public ShapeSheet.CellValueLiteral X { get; set; }
-        public ShapeSheet.CellValueLiteral Y { get; set; }
-        public ShapeSheet.CellValueLiteral A { get; set; }
-        public ShapeSheet.CellValueLiteral B { get; set; }
-        public ShapeSheet.CellValueLiteral C { get; set; }
-        public ShapeSheet.CellValueLiteral D { get; set; }
-        public ShapeSheet.CellValueLiteral E { get; set; }
+        public ShapeSheet.CellValue X { get; set; }
+        public ShapeSheet.CellValue Y { get; set; }
+        public ShapeSheet.CellValue A { get; set; }
+        public ShapeSheet.CellValue B { get; set; }
+        public ShapeSheet.CellValue C { get; set; }
+        public ShapeSheet.CellValue D { get; set; }
+        public ShapeSheet.CellValue E { get; set; }
         public IVisio.VisRowTags RowTag { get; set; }
 
         public ShapeGeometryRow(IVisio.VisRowTags tag)
@@ -50,7 +50,7 @@ namespace VisioAutomation.Shapes
             writer.SetValue(e_src, this.E);
         }
 
-        public static ShapeGeometryRow CreateLineTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y)
+        public static ShapeGeometryRow CreateLineTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y)
         {
             // http://msdn.microsoft.com/en-us/library/aa195656(v=office.11).aspx
 
@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateMoveTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y)
+        public static ShapeGeometryRow CreateMoveTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y)
         {
             // http://msdn.microsoft.com/en-us/library/aa195679(v=office.11).aspx
 
@@ -70,8 +70,8 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateArcTo(ShapeSheet.CellValueLiteral x, ShapeSheet.CellValueLiteral y,
-                                              ShapeSheet.CellValueLiteral a)
+        public static ShapeGeometryRow CreateArcTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y,
+                                              ShapeSheet.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195698(v=office.11).aspx
 
@@ -82,12 +82,12 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateEllipticalArcTo(ShapeSheet.CellValueLiteral x,
-                                                        ShapeSheet.CellValueLiteral y,
-                                                        ShapeSheet.CellValueLiteral a,
-                                                        ShapeSheet.CellValueLiteral b,
-                                                        ShapeSheet.CellValueLiteral c,
-                                                        ShapeSheet.CellValueLiteral d)
+        public static ShapeGeometryRow CreateEllipticalArcTo(ShapeSheet.CellValue x,
+                                                        ShapeSheet.CellValue y,
+                                                        ShapeSheet.CellValue a,
+                                                        ShapeSheet.CellValue b,
+                                                        ShapeSheet.CellValue c,
+                                                        ShapeSheet.CellValue d)
         {
             // http://msdn.microsoft.com/en-us/library/aa195660(v=office.11).aspx
 
@@ -101,12 +101,12 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateEllipse(ShapeSheet.CellValueLiteral x,
-                                                ShapeSheet.CellValueLiteral y,
-                                                ShapeSheet.CellValueLiteral a,
-                                                ShapeSheet.CellValueLiteral b,
-                                                ShapeSheet.CellValueLiteral c,
-                                                ShapeSheet.CellValueLiteral d)
+        public static ShapeGeometryRow CreateEllipse(ShapeSheet.CellValue x,
+                                                ShapeSheet.CellValue y,
+                                                ShapeSheet.CellValue a,
+                                                ShapeSheet.CellValue b,
+                                                ShapeSheet.CellValue c,
+                                                ShapeSheet.CellValue d)
         {
 
             // http://msdn.microsoft.com/en-us/library/aa195692(v=office.11).aspx
@@ -121,13 +121,13 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateNurbsTo(ShapeSheet.CellValueLiteral x,
-                                                ShapeSheet.CellValueLiteral y,
-                                                ShapeSheet.CellValueLiteral a,
-                                                ShapeSheet.CellValueLiteral b,
-                                                ShapeSheet.CellValueLiteral c,
-                                                ShapeSheet.CellValueLiteral d,
-                                                ShapeSheet.CellValueLiteral e)
+        public static ShapeGeometryRow CreateNurbsTo(ShapeSheet.CellValue x,
+                                                ShapeSheet.CellValue y,
+                                                ShapeSheet.CellValue a,
+                                                ShapeSheet.CellValue b,
+                                                ShapeSheet.CellValue c,
+                                                ShapeSheet.CellValue d,
+                                                ShapeSheet.CellValue e)
         {
             // http://msdn.microsoft.com/en-us/library/aa195685(v=office.11).aspx
 
@@ -142,9 +142,9 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreatePolylineTo(ShapeSheet.CellValueLiteral x,
-                                        ShapeSheet.CellValueLiteral y,
-                                        ShapeSheet.CellValueLiteral a)
+        public static ShapeGeometryRow CreatePolylineTo(ShapeSheet.CellValue x,
+                                        ShapeSheet.CellValue y,
+                                        ShapeSheet.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195682(v=office.11).aspx
 
@@ -155,10 +155,10 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateInfiniteLine(ShapeSheet.CellValueLiteral x,
-                                ShapeSheet.CellValueLiteral y,
-                                ShapeSheet.CellValueLiteral a,
-                                ShapeSheet.CellValueLiteral b)
+        public static ShapeGeometryRow CreateInfiniteLine(ShapeSheet.CellValue x,
+                                ShapeSheet.CellValue y,
+                                ShapeSheet.CellValue a,
+                                ShapeSheet.CellValue b)
         {
             // http://msdn.microsoft.com/en-us/library/aa195682(v=office.11).aspx
 
@@ -170,9 +170,9 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateSplineKnot(ShapeSheet.CellValueLiteral x,
-                                ShapeSheet.CellValueLiteral y,
-                                ShapeSheet.CellValueLiteral a)
+        public static ShapeGeometryRow CreateSplineKnot(ShapeSheet.CellValue x,
+                                ShapeSheet.CellValue y,
+                                ShapeSheet.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195667(v=office.11).aspx
 
@@ -183,12 +183,12 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateSplineStart(ShapeSheet.CellValueLiteral x,
-                                                ShapeSheet.CellValueLiteral y,
-                                                ShapeSheet.CellValueLiteral a,
-                                                ShapeSheet.CellValueLiteral b,
-                                                ShapeSheet.CellValueLiteral c,
-                                                ShapeSheet.CellValueLiteral d)
+        public static ShapeGeometryRow CreateSplineStart(ShapeSheet.CellValue x,
+                                                ShapeSheet.CellValue y,
+                                                ShapeSheet.CellValue a,
+                                                ShapeSheet.CellValue b,
+                                                ShapeSheet.CellValue c,
+                                                ShapeSheet.CellValue d)
         {
 
             // http://msdn.microsoft.com/en-us/library/aa195663(v=office.11).aspx

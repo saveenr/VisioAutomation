@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(hlink));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
             
             if (targetshapes.Shapes.Count < 1)
             {
@@ -44,7 +44,7 @@ namespace VisioScripting.Commands
 
         public void DeleteHyperlinkAtIndex(TargetShapes targetshapes, int n)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -66,7 +66,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

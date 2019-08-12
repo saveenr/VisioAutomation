@@ -18,7 +18,7 @@
             return new SidSrcValuePair(shapeid, src, value);
         }
 
-        public static SidSrcValuePair Create(short shapeid, ShapeSheet.Src src, CellValueLiteral cvf)
+        public static SidSrcValuePair Create(short shapeid, ShapeSheet.Src src, CellValue cvf)
         {
             return new SidSrcValuePair(shapeid, src, cvf.Value);
         }

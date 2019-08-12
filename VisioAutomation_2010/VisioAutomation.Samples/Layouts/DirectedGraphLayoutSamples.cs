@@ -11,9 +11,10 @@ namespace VisioAutomationSamples
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
-            var options = new MsaglLayoutOptions();
-            options.UseDynamicConnectors = false;
-            directed_graph_drawing.Render(page1, options);
+
+            var renderer = new MsaglRenderer();
+            renderer.LayoutOptions.UseDynamicConnectors = false;
+            renderer.Render(page1, directed_graph_drawing);
         }
 
         public static void DirectedGraphViaVisio()
@@ -21,8 +22,8 @@ namespace VisioAutomationSamples
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
 
-            var visio_options = new VisioLayoutOptions();
-            directed_graph_drawing.Render(page1, visio_options);
+            var vr = new VisioLayoutRenderer();
+            vr.Render(page1, directed_graph_drawing);
 
             var padding = new VA.Geometry.Size(0.5, 0.5);
             page1.ResizeToFitContents(padding);
@@ -39,13 +40,13 @@ namespace VisioAutomationSamples
             var directed_graph_drawing = new DirectedGraphLayout();
 
             // Create a Node 0
-            var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", basflo_stencil, "Decision");
+            var n0 = directed_graph_drawing.AddNode("n0", "N0 Untitled Node", basflo_stencil, "Decision");
 
             // Format Node 0
             n0.Size = new VA.Geometry.Size(3, 2);
 
             // Create Node 1
-            var n1 = directed_graph_drawing.AddShape("n1", "N1", basflo_stencil, "Decision");
+            var n1 = directed_graph_drawing.AddNode("n1", "N1", basflo_stencil, "Decision");
 
             // Format Node 1
             n1.Cells = new ShapeCells();
@@ -54,14 +55,14 @@ namespace VisioAutomationSamples
             n1.Cells.FillPattern = 40;
 
             // Create Node 2
-            var n2 = directed_graph_drawing.AddShape("n2", "N2 MailServer", server_stencil, "Server");
+            var n2 = directed_graph_drawing.AddNode("n2", "N2 MailServer", server_stencil, "Server");
 
             // Create Node 3
 
-            var n3 = directed_graph_drawing.AddShape("n3", "N3", basflo_stencil, "Data");
+            var n3 = directed_graph_drawing.AddNode("n3", "N3", basflo_stencil, "Data");
 
             // Create Node 4
-            var n4 = directed_graph_drawing.AddShape("n4", "N4", basflo_stencil, "Data");
+            var n4 = directed_graph_drawing.AddNode("n4", "N4", basflo_stencil, "Data");
 
             // Create the connectors to join the nodes
             // Note that Node 4 is deliberately not connected to any other node
@@ -69,12 +70,12 @@ namespace VisioAutomationSamples
             var curved = VisioAutomation.Models.ConnectorType.Curved;
             var rightangle = VisioAutomation.Models.ConnectorType.RightAngle;
 
-            var c0 = directed_graph_drawing.AddConnection("c0", n0, n1, null, curved);
-            var c1 = directed_graph_drawing.AddConnection("c1", n1, n2, "YES", rightangle);
-            var c2 = directed_graph_drawing.AddConnection("c2", n3, n4, "NO", curved);
-            var c3 = directed_graph_drawing.AddConnection("c3", n0, n2, null, rightangle);
-            var c4 = directed_graph_drawing.AddConnection("c4", n2, n3, null, curved);
-            var c5 = directed_graph_drawing.AddConnection("c5", n3, n0, null, curved);
+            var c0 = directed_graph_drawing.AddEdge("c0", n0, n1, null, curved);
+            var c1 = directed_graph_drawing.AddEdge("c1", n1, n2, "YES", rightangle);
+            var c2 = directed_graph_drawing.AddEdge("c2", n3, n4, "NO", curved);
+            var c3 = directed_graph_drawing.AddEdge("c3", n0, n2, null, rightangle);
+            var c4 = directed_graph_drawing.AddEdge("c4", n2, n3, null, curved);
+            var c5 = directed_graph_drawing.AddEdge("c5", n3, n0, null, curved);
 
             // Format connector 0 to point "back" 
             c0.Cells = new ShapeCells();

@@ -2,27 +2,30 @@ namespace VisioScripting
 {
     public class TargetObject<T> where  T: class
     {
-        protected readonly T _item;
+        private readonly T _item;
+        public readonly bool Resolved;
 
-        public readonly bool UseContext;
-
-        public TargetObject()
+        protected TargetObject()
         {
             this._item = null;
-            this.UseContext = true;
-        }
-        
-        public TargetObject(T item)
-        {
-            this._item = item;
-            this.UseContext = this._item == null;
-        }
-        public TargetObject(T item, bool isresolved)
-        {
-            this._item = item;
-            this.UseContext = !isresolved;
+            this.Resolved = false;
         }
 
-        public bool IsResolved => !this.UseContext;
+        protected TargetObject(T item)
+        {
+            this._item = item;
+            this.Resolved = (item != null);
+        }
+
+        protected T _get_item_safe()
+        {
+            if (!this.Resolved)
+            {
+                throw new System.ArgumentException("Unresolved Target");
+            }
+
+            return this._item;
+        }
+
     }
 }

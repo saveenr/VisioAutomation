@@ -128,7 +128,6 @@
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
     <Compile Include="ShapeSheet\Query\Column.cs" />
     <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
-    <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="Shapes\UserDefinedCellDictionary.cs" />
     <Compile Include="Shapes\UserDefinedCellNameCellsPair.cs" />
     <Compile Include="SurfaceTarget.cs" />
@@ -161,7 +160,7 @@
     <Compile Include="Shapes\ShapeXFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="Shapes\CustomPropertyCells.cs" />
-    <Compile Include="ShapeSheet\CellValueLiteral.cs" />
+    <Compile Include="ShapeSheet\CellValue.cs" />
     <Compile Include="Geometry\Point.cs" />
     <Compile Include="Geometry\Rectangle.cs" />
     <Compile Include="ShapeSheet\SidSrc.cs" />

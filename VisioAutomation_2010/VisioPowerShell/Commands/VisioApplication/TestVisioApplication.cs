@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioApplication
     {
         protected override void ProcessRecord()
         {
-            bool valid_app = this.Client.Application.ValidateAttachedApplication();
+            bool valid_app = this.Client.Application.ValidateApplication();
             this.WriteObject(valid_app);
         }
     }

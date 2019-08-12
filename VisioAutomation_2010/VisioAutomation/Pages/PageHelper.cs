@@ -163,7 +163,7 @@ namespace VisioAutomation.Pages
             }
         }
 
-        internal static Geometry.Size GetSize(IVisio.Page page)
+        public static Geometry.Size GetSize(IVisio.Page page)
         {
             var query = new VASS.Query.CellQuery();
             var col_height = query.Columns.Add(VASS.SrcConstants.PageHeight,nameof(VASS.SrcConstants.PageHeight));
@@ -177,7 +177,7 @@ namespace VisioAutomation.Pages
             return s;
         }
 
-        internal static void SetSize(IVisio.Page page, Geometry.Size size)
+        public static void SetSize(IVisio.Page page, Geometry.Size size)
         {
             var writer = new VASS.Writers.SrcWriter();
             writer.SetValue(VASS.SrcConstants.PageWidth, size.Width);

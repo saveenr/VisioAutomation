@@ -21,7 +21,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(ctrl));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -44,7 +44,7 @@ namespace VisioScripting.Commands
 
         public void DeleteControlWithIndex(TargetShapes targetshapes, int index)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -66,7 +66,7 @@ namespace VisioScripting.Commands
 
         public Dictionary<IVisio.Shape, IList<ControlCells>> GetControls(TargetShapes targetshapes, CellValueType cvt)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

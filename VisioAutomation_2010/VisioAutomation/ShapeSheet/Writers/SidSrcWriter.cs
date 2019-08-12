@@ -14,20 +14,20 @@ namespace VisioAutomation.ShapeSheet.Writers
             var surface = new SurfaceTarget(page);
             this.Commit(surface, type);
         }
-        public void SetValue(short id, Src src, CellValueLiteral formula)
+        public void SetValue(short id, Src src, CellValue formula)
         {
             var sidsrc = new SidSrc(id, src);
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetValue(SidSrc sidsrc, CellValueLiteral formula)
+        public void SetValue(SidSrc sidsrc, CellValue formula)
         {
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
         public void SetValues(short id, CellGroups.CellGroup cellgroup, short row)
         {
-            var pairs = cellgroup.SidSrcValuePairs_NewRow(id, row);
+            var pairs = cellgroup.GetSidSrcValuePairs_NewRow(id, row);
             foreach (var pair in pairs)
             {
                 this.SetValue(pair.ShapeID, pair.Src, pair.Value);
@@ -41,13 +41,13 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(short id, CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cellgroup.SrcValuePairs)
+            foreach (var pair in cellgroup.GetSrcValuePairs())
             {
                 this.SetValue(id, pair.Src, pair.Value);
             }
         }
 
-        private void __SetValueIgnoreNull(SidSrc sidsrc, CellValueLiteral formula)
+        private void __SetValueIgnoreNull(SidSrc sidsrc, CellValue formula)
         {
             if (this._records == null)
             {

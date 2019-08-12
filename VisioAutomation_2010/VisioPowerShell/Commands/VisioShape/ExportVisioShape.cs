@@ -11,21 +11,23 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.ValidateNotNullOrEmpty]
         public string Filename;
 
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
 
-        private static HashSet<string> _static_html_extensions;
+        // CONTEXT:SHAPESSELECTION
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shape;
+
+        private static HashSet<string> _static_html_extensions = new HashSet<string> { ".html", ".htm", ".xhtml" };
 
         protected override void ProcessRecord()
         {
-            if (this.Filename == null)
-            {
-                throw new System.ArgumentNullException(nameof(this.Filename));
-            }
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+            targetshapes.ResolveToSelection(this.Client);
 
+            string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
+            
             if (!System.IO.File.Exists(this.Filename))
             {
                 this.WriteVerbose("File already exists");
@@ -41,34 +43,13 @@ namespace VisioPowerShell.Commands.VisioShape
                 }
             }
 
-            if (_static_html_extensions == null)
-            {
-                _static_html_extensions = new HashSet<string> { ".html", ".htm", ".xhtml" };
-            }
-
-            string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
-
-            if (this.Shapes == null)
-            {
-                // use the active selection
-            }
-            else
-            {
-                if (this.Shapes.Length < 1)
-                {
-                    throw new System.ArgumentOutOfRangeException(nameof(this.Shapes), "Shapes parameter must contain at least one shape");
-                }
-
-                this.Client.Selection.SelectShapes(this.Shapes);
-            }
-
             if (_static_html_extensions.Contains(ext))
             {
-                this.Client.ExportSelection.ExportSelectionToHtml(this.Filename);                
+                this.Client.Export.ExportSelectionToHtml(VisioScripting.TargetSelection.Auto, this.Filename);                
             }
             else
             {
-                this.Client.ExportSelection.ExportSelectionToFile(this.Filename);
+                this.Client.Export.ExportSelectionToImage(VisioScripting.TargetSelection.Auto, this.Filename);
             }
         }
     }

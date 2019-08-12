@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -6,30 +7,27 @@ namespace VisioAutomation.Shapes
 {
     public class ControlCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral CanGlue { get; set; }
-        public VASS.CellValueLiteral Tip { get; set; }
-        public VASS.CellValueLiteral X { get; set; }
-        public VASS.CellValueLiteral Y { get; set; }
-        public VASS.CellValueLiteral YBehavior { get; set; }
-        public VASS.CellValueLiteral XBehavior { get; set; }
-        public VASS.CellValueLiteral XDynamics { get; set; }
-        public VASS.CellValueLiteral YDynamics { get; set; }
+        public VASS.CellValue CanGlue { get; set; }
+        public VASS.CellValue Tip { get; set; }
+        public VASS.CellValue X { get; set; }
+        public VASS.CellValue Y { get; set; }
+        public VASS.CellValue YBehavior { get; set; }
+        public VASS.CellValue XBehavior { get; set; }
+        public VASS.CellValue XDynamics { get; set; }
+        public VASS.CellValue YDynamics { get; set; }
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-                yield return this.Create(nameof(this.CanGlue), VASS.SrcConstants.ControlCanGlue, this.CanGlue);
-                yield return this.Create(nameof(this.Tip), VASS.SrcConstants.ControlTip, this.Tip);
-                yield return this.Create(nameof(this.X), VASS.SrcConstants.ControlX, this.X);
-                yield return this.Create(nameof(this.Y), VASS.SrcConstants.ControlY, this.Y);
-                yield return this.Create(nameof(this.YBehavior), VASS.SrcConstants.ControlYBehavior, this.YBehavior);
-                yield return this.Create(nameof(this.XBehavior), VASS.SrcConstants.ControlXBehavior, this.XBehavior);
-                yield return this.Create(nameof(this.XDynamics), VASS.SrcConstants.ControlXDynamics, this.XDynamics);
-                yield return this.Create(nameof(this.YDynamics), VASS.SrcConstants.ControlYDynamics, this.YDynamics);
-            }
+            yield return this.Create(nameof(this.CanGlue), VASS.SrcConstants.ControlCanGlue, this.CanGlue);
+            yield return this.Create(nameof(this.Tip), VASS.SrcConstants.ControlTip, this.Tip);
+            yield return this.Create(nameof(this.X), VASS.SrcConstants.ControlX, this.X);
+            yield return this.Create(nameof(this.Y), VASS.SrcConstants.ControlY, this.Y);
+            yield return this.Create(nameof(this.YBehavior), VASS.SrcConstants.ControlYBehavior, this.YBehavior);
+            yield return this.Create(nameof(this.XBehavior), VASS.SrcConstants.ControlXBehavior, this.XBehavior);
+            yield return this.Create(nameof(this.XDynamics), VASS.SrcConstants.ControlXDynamics, this.XDynamics);
+            yield return this.Create(nameof(this.YDynamics), VASS.SrcConstants.ControlYDynamics, this.YDynamics);
         }
-        
+
         public static List<ControlCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
         {
             var reader = ControlCells_lazy_builder.Value;

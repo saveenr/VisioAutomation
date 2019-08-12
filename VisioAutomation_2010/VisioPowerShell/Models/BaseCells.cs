@@ -5,11 +5,11 @@ namespace VisioPowerShell.Models
 {
     public abstract class BaseCells
     {
-        public abstract IEnumerable<CellTuple> GetCellTuples();
+        internal abstract IEnumerable<Internal.CellTuple> EnumCellTuples();
 
         public void Apply(VASS.Writers.SidSrcWriter writer, short id)
         {
-            foreach (var tuple in this.GetCellTuples())
+            foreach (var tuple in this.EnumCellTuples())
             {
                 if (tuple.Formula != null)
                 {

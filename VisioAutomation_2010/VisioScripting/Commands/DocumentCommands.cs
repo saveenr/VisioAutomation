@@ -19,7 +19,7 @@ namespace VisioScripting.Commands
         {
             get
             {
-                var cmdtarget = this._client.GetCommandTargetApplication();
+                var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
                 var app = cmdtarget.Application;
 
@@ -77,7 +77,7 @@ namespace VisioScripting.Commands
 
         public void ActivateDocumentWithName(string name)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             var documents = cmdtarget.Application.Documents;
             var doc = documents[name];
@@ -87,7 +87,7 @@ namespace VisioScripting.Commands
 
         public void ActivateDocument(IVisio.Document doc)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             // if the doc is already active do nothing
             if (doc == cmdtarget.ActiveDocument)
@@ -115,61 +115,41 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void CloseDocument(TargetDocument targetdoc, bool force)
+        public void CloseDocument(VisioScripting.TargetDocuments targetdocs)
         {
-            targetdoc = targetdoc.Resolve(this._client);
+            bool force = true;
+            targetdocs = targetdocs.ResolveToDocuments(this._client);
 
-
-            var doc = targetdoc.Document;
-            var app = doc.Application;
-
-            if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
-            {
-                this._client.Output.WriteVerbose("Not a Drawing Window", doc.Name);
-                throw new System.ArgumentException("Not a Drawing Window");
-            }
-
-            this._client.Output.WriteVerbose("Closing Document Name=\"{0}\"", doc.Name);
-            this._client.Output.WriteVerbose("Closing Document FullName=\"{0}\"", doc.FullName);
-
-            if (force)
-            {
-                using (var alert = new VisioAutomation.Application.AlertResponseScope(app, VisioAutomation.Application.AlertResponseCode.No))
-                {
-                    doc.Close();
-                }
-            }
-            else
-            {
-                doc.Close();
-            }
-        }
-
-        public void CloseDocuments(VisioScripting.TargetDocuments targetdocs, bool force)
-        {
             this._client.Output.WriteVerbose("Closing {0} documents", targetdocs.Documents.Count);
-            foreach (var target_doc in targetdocs.Documents)
+
+            if (targetdocs.Documents.Count<1)
             {
-                this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", target_doc.ID, target_doc.Name);
-                target_doc.Close(force);
+                return;
+            }
+
+            var app = targetdocs.Documents[0].Application;
+
+            var code = VisioAutomation.Application.AlertResponseCode.No;
+            using (var alert = new VisioAutomation.Application.AlertResponseScope(app, code))
+            {
+                foreach (var doc in targetdocs.Documents)
+                {
+                    this._client.Output.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID, doc.Name);
+                    doc.Close(force);
+                }
             }
         }
 
         public void CloseAllDocumentsWithoutSaving()
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
-            var documents = cmdtarget.Application.Documents;
-            var docs = documents.ToEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
-            using (var alert = new VisioAutomation.Application.AlertResponseScope(cmdtarget.Application, VisioAutomation.Application.AlertResponseCode.No))
-            {
-                foreach (var doc in docs)
-                {
-                    this._client.Output.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-                    this._client.Output.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
-                    doc.Close();
-                }
-            }
+            var all_documents = cmdtarget.Application.Documents.ToList();
+            var drawing_docs = all_documents.Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
+
+            var targetdocs = new VisioScripting.TargetDocuments(drawing_docs);
+
+            this.CloseDocument(targetdocs);
         }
 
         public IVisio.Document NewDocument()
@@ -179,7 +159,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document NewDocumentFromTemplate(string template)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             this._client.Output.WriteVerbose("Creating Empty Drawing");
             var documents = cmdtarget.Application.Documents;
@@ -203,14 +183,14 @@ namespace VisioScripting.Commands
 
         public void SaveDocument(TargetDocument targetdoc)
         {
-            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc = targetdoc.ResolveToDocument(this._client);
             targetdoc.Document.Save();
         }
 
 
         public void SaveDocumentAs(TargetDocument targetdoc, string filename)
         {
-            targetdoc = targetdoc.Resolve(this._client);
+            targetdoc = targetdoc.ResolveToDocument(this._client);
             targetdoc.Document.SaveAs(filename);
         }
 
@@ -221,7 +201,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document NewDocumentFromTemplate(VisioAutomation.Geometry.Size size, string template)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             var doc = this.NewDocumentFromTemplate(template);
             var pagecells = new VisioAutomation.Pages.PageFormatCells();
@@ -240,7 +220,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document OpenStencilDocument(string name)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             if (name == null)
             {
@@ -263,7 +243,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Document OpenDocument(string filename)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             if (filename == null)
             {
@@ -293,29 +273,22 @@ namespace VisioScripting.Commands
 
         public IVisio.Document GetDocumentWithName(string name)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             var documents = cmdtarget.Application.Documents;
             var doc = documents[name];
             return doc;
         }
 
-        public List<IVisio.Document> FindDocuments(string namepattern, IVisio.VisDocumentTypes? doctype)
+        public List<IVisio.Document> FindDocuments(string namepattern)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             var docs = cmdtarget.Application.Documents;
 
             // first get the full list
             var doc_list = docs.ToEnumerable().ToList();
-
-            if (doctype == null)
-            {
-                return doc_list;
-            }
-            // then filter by doc types
-            doc_list = doc_list.Where(d => doctype.Value == d.Type).ToList();
-
+            
             // second perform any name filtering
 
             if (namepattern == null)

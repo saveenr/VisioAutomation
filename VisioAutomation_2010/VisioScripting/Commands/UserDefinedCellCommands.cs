@@ -14,23 +14,13 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCellsAsShapeDictionary(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
+            targetshapes = targetshapes.ResolveToShapes(this._client);
+            var listof_udcelldic = GetUserDefinedCells(targetshapes, cvt);
+
             var dicof_shape_to_udcelldic = new Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary>();
-
-            targetshapes = targetshapes.Resolve(this._client);
-
-            if (targetshapes.Shapes.Count < 1)
-            {
-                return dicof_shape_to_udcelldic;
-            }
-
-            var page = cmdtarget.ActivePage;
-            var shapeidpairs = targetshapes.ToShapeIDPairs();
-            var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetCellsAsDictionary((IVisio.Page) page , shapeidpairs, cvt);
-
-            for (int i = 0; i < targetshapes.Shapes.Count; i++)
+            for (int i = 0; i < listof_udcelldic.Count; i++)
             {
                 var shape = targetshapes.Shapes[i];
                 var props = listof_udcelldic[i];
@@ -40,6 +30,22 @@ namespace VisioScripting.Commands
             return dicof_shape_to_udcelldic;
         }
 
+        public List<VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VASS.CellValueType cvt)
+        {
+            targetshapes = targetshapes.ResolveToShapes(this._client);
+
+            if (targetshapes.Shapes.Count < 1)
+            {
+                return new List<VA.Shapes.UserDefinedCellDictionary>(0);
+            }
+
+            var page = targetshapes.Shapes[0].ContainingPage;
+            var shapeidpairs = targetshapes.ToShapeIDPairs();
+            var listof_udcelldic = VA.Shapes.UserDefinedCellHelper.GetDictionary((IVisio.Page)page, shapeidpairs, cvt);
+
+            return listof_udcelldic;
+        }
+
         public List<bool> ContainsUserDefinedCellsWithName(TargetShapes targetshapes, string name)
         {
             if (name == null)
@@ -47,22 +53,21 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
                 return new List<bool>();
             }
 
-            var all_shapes = this._client.Selection.GetShapesInSelection();
-            var results = all_shapes.Select(s => VA.Shapes.UserDefinedCellHelper.Contains(s, name)).ToList();
+            var results = targetshapes.Shapes.Select(s => VA.Shapes.UserDefinedCellHelper.Contains(s, name)).ToList();
 
             return results;
         }
        
         public void DeleteUserDefinedCellsByName(TargetShapes targetshapes, string name)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -88,9 +93,9 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetUserDefinedCell(TargetShapes targetshapes, Models.UserDefinedCell userdefinedcell)
+        public void SetUserDefinedCell(TargetShapes targetshapes, string name, VA.Shapes.UserDefinedCellCells udcellcells)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -101,7 +106,7 @@ namespace VisioScripting.Commands
             {
                 foreach (var shape in targetshapes.Shapes)
                 {
-                    VA.Shapes.UserDefinedCellHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Cells);
+                    VA.Shapes.UserDefinedCellHelper.Set(shape, name, udcellcells);
                 }
             }
         }

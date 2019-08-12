@@ -9,36 +9,32 @@ namespace VisioPowerShell.Commands.VisioShapeCells
     {
         [SMA.Parameter(Mandatory = true, Position = 0)]
         public VisioPowerShell.Models.ShapeCells[] Cells { get; set; }
-
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes { get; set; }
-
+        
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
+        // CONTEXT:SHAPES 
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shape { get; set; }
+
         protected override void ProcessRecord()
         {
-            if (this.Cells == null)
+           
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape).ResolveToShapes(this.Client);
+
+            if (targetshapes.Shapes.Count < 1)
             {
                 return;
             }
 
-            if (this.Cells.Length < 1)
+            if (this.Cells == null || this.Cells.Length < 1)
             {
                 return;
             }
 
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapesInSelection();
-
-            if (target_shapes.Count < 1)
-            {
-                return;
-            }
-
-            var targetshapes = new VisioScripting.TargetShapes(target_shapes).Resolve(this.Client);
             var targetshapeids = targetshapes.ToShapeIDs();
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SidSrcWriter();
@@ -47,12 +43,17 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
             foreach (int i in Enumerable.Range(0, targetshapeids.Count))
             {
-                var shapeid = targetshapeids[i];
-                var shape_cells = this.Cells[i % this.Cells.Length];
+                int shapeid_index = i;
+                int cells_index = i % this.Cells.Length;
+
+                var shapeid = targetshapeids[shapeid_index];
+                var shape_cells = this.Cells[cells_index];
+
                 shape_cells.Apply(writer, (short)shapeid);
             }
 
-            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
+            var page = targetshapes.Shapes[0].ContainingPage;
+            var surface = new VisioAutomation.SurfaceTarget(page);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);

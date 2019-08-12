@@ -14,7 +14,7 @@ namespace VisioScripting.Commands
 
         public void SetLockCells(TargetShapes targetshapes, VA.Shapes.LockCells lockcells)
         {
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
             if (targetshapes.Shapes.Count < 1)
             {
                 return;
@@ -39,7 +39,7 @@ namespace VisioScripting.Commands
         public Dictionary<int, VA.Shapes.LockCells> GetLockCells(TargetShapes targetshapes, VASS.CellValueType cvt)
         {
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
             if (targetshapes.Shapes.Count < 1)
             {
                 return new Dictionary<int, VA.Shapes.LockCells>();

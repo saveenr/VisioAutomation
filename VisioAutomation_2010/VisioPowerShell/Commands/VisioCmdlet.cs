@@ -1,4 +1,5 @@
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
@@ -44,10 +45,28 @@ namespace VisioPowerShell.Commands
             }
         }
 
+
         public void WriteVerbose(string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);
             base.WriteVerbose(s);
         }
+
+        protected void NewAppIfNeeded()
+        {
+            if (!this.Client.Application.HasApplication)
+            {
+                this.Client.Application.NewApplication();
+            }
+            else
+            {
+                if (!this.Client.Application.ValidateApplication())
+                {
+                    this.Client.Application.NewApplication();
+                }
+            }
+        }
+
+
     }
 }

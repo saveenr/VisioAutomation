@@ -14,28 +14,6 @@ namespace VisioScripting.Commands
 
         }
 
-        public void OpenMasterForEdit(IVisio.Master master)
-        {
-            var mdraw_window = master.OpenDrawWindow();
-            mdraw_window.Activate();
-        }
-
-        public void CloseMasterEditing()
-        {
-            var cmdtarget = this._client.GetCommandTargetApplication();
-
-            var window = cmdtarget.Application.ActiveWindow;
-
-            var win_subtype = window.SubType;
-            if (win_subtype != 64)
-            {
-                throw new System.ArgumentException("The active window is not a master window");
-            }
-
-            var master = (IVisio.Master)window.Master;
-            master.Close();
-        }
-
         public List<IVisio.Master> GetMasters(TargetDocument targetdoc)
         {
             var doc_masters = targetdoc.Document.Masters;
@@ -51,7 +29,7 @@ namespace VisioScripting.Commands
             }
 
             var masters = targetdoc.Document.Masters;
-            IVisio.Master masterobj = this.TryGetMaster(masters, name);
+            IVisio.Master masterobj = this._try_get_master(masters, name);
 
             if (masterobj == null)
             {
@@ -80,7 +58,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
+        private IVisio.Master _try_get_master(IVisio.Masters masters, string name)
         {
             try
             {
@@ -95,7 +73,7 @@ namespace VisioScripting.Commands
 
         public IVisio.Shape DropMaster(TargetPage targetpage, IVisio.Master master, VisioAutomation.Geometry.Point p)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             var shape = targetpage.Page.Drop(master, p.X, p.Y);
             return shape;
@@ -106,7 +84,7 @@ namespace VisioScripting.Commands
             IList<IVisio.Master> masters, 
             IList<VisioAutomation.Geometry.Point> points)
         {
-            targetpage = targetpage.Resolve(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             if (masters == null)
             {
@@ -121,64 +99,6 @@ namespace VisioScripting.Commands
             var page = targetpage.Page;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;
-        }
-
-        public IVisio.Master NewMaster(IVisio.Document document, string name)
-        {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            if (document == null)
-            {
-                document = cmdtarget.ActiveDocument;
-                if (document == null)
-                {
-                    throw new System.ArgumentException("No Active Document");
-                }
-            }
-
-            var masters = document.Masters;
-            var master = masters.AddEx(IVisio.VisMasterTypes.visTypeMaster);
-            if (name != null)
-            {
-                master.Name = name;
-            }
-
-            return master;
-        }
-
-        // http://blogs.msdn.com/b/visio/archive/2010/01/27/container-list-and-callout-api-in-visio-2010.aspx
-        // https://msdn.microsoft.com/en-us/library/office/ff768907(v=office.14).aspx
-
-        public IVisio.Shape DropContainerMaster(TargetPage targetpage, IVisio.Master master)
-        {
-            targetpage = targetpage.Resolve(this._client);
-            var page = targetpage.Page;
-            var app = page.Application;
-            var window = app.ActiveWindow;
-            var selection = window.Selection;
-
-            var shape = page.DropContainer(master, selection);
-            return shape;
-        }
-
-        public IVisio.Shape DropContainer(TargetPage targetpage, string master)
-        {
-            targetpage = targetpage.Resolve(this._client);
-            var page = targetpage.Page;
-            var app = page.Application;
-            var window = app.ActiveWindow;
-            var selection = window.Selection;
-            var docs = app.Documents;
-
-            var stencil_type = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
-            var measurement_system = IVisio.VisMeasurementSystem.visMSUS;
-            var containers_file = app.GetBuiltInStencilFile(stencil_type, measurement_system);
-            var containers_doc = docs.OpenStencil(containers_file);
-            var masters = containers_doc.Masters;
-            var container_master = masters.ItemU[master];
-            var shape = page.DropContainer(container_master,selection);
-
-            return shape;
         }
     }
 }

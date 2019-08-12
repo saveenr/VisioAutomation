@@ -1,11 +1,7 @@
 namespace VisioPowerShell.Models
 {
-    public enum CellOutputType
+    public enum ResultType
     {
-        Formula,
-        ResultString,
-        ResultInteger,
-        ResultDouble,
-        ResultBoolean        
+        String, Bool, Double, Int
     }
 }

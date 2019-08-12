@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Core.Internal
             // A FormulaLiteral only has a reference to a string
             // so it should be as big as a reference to a string
 
-            var instance = new VisioAutomation.ShapeSheet.CellValueLiteral();
+            var instance = new VisioAutomation.ShapeSheet.CellValue();
             int actual_size = System.Runtime.InteropServices.Marshal.SizeOf(instance);
             Assert.AreEqual(4, actual_size);
         }

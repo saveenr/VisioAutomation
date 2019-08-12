@@ -33,8 +33,9 @@ namespace VisioPowerShell.Commands.VisioHyperlink
         [SMA.Parameter(Mandatory = false)]
         public bool Invisible { get; set; }
 
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
         {
@@ -52,7 +53,7 @@ namespace VisioPowerShell.Commands.VisioHyperlink
             hlink.NewWindow = this.NewWindow;
             hlink.Invisible = this.Invisible;
 
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             this.Client.Hyperlink.AddHyperlink(targetshapes, hlink);
         }
     }

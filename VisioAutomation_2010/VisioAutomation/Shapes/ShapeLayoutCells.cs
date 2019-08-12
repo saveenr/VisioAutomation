@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -6,50 +7,58 @@ namespace VisioAutomation.Shapes
 {
     public class ShapeLayoutCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValueLiteral ConnectorFixedCode { get; set; }
-        public VASS.CellValueLiteral LineJumpCode { get; set; }
-        public VASS.CellValueLiteral LineJumpDirX { get; set; }
-        public VASS.CellValueLiteral LineJumpDirY { get; set; }
-        public VASS.CellValueLiteral LineJumpStyle { get; set; }
-        public VASS.CellValueLiteral LineRouteExt { get; set; }
-        public VASS.CellValueLiteral ShapeFixedCode { get; set; }
-        public VASS.CellValueLiteral ShapePermeablePlace { get; set; }
-        public VASS.CellValueLiteral ShapePermeableX { get; set; }
-        public VASS.CellValueLiteral ShapePermeableY { get; set; }
-        public VASS.CellValueLiteral ShapePlaceFlip { get; set; }
-        public VASS.CellValueLiteral ShapePlaceStyle { get; set; }
-        public VASS.CellValueLiteral ShapePlowCode { get; set; }
-        public VASS.CellValueLiteral ShapeRouteStyle { get; set; }
-        public VASS.CellValueLiteral ShapeSplit { get; set; }
-        public VASS.CellValueLiteral ShapeSplittable { get; set; }
-        public VASS.CellValueLiteral ShapeDisplayLevel { get; set; } // new in visio 2010
-        public VASS.CellValueLiteral Relationships { get; set; } // new in visio 2010
+        public VASS.CellValue ConnectorFixedCode { get; set; }
+        public VASS.CellValue LineJumpCode { get; set; }
+        public VASS.CellValue LineJumpDirX { get; set; }
+        public VASS.CellValue LineJumpDirY { get; set; }
+        public VASS.CellValue LineJumpStyle { get; set; }
+        public VASS.CellValue LineRouteExt { get; set; }
+        public VASS.CellValue ShapeFixedCode { get; set; }
+        public VASS.CellValue ShapePermeablePlace { get; set; }
+        public VASS.CellValue ShapePermeableX { get; set; }
+        public VASS.CellValue ShapePermeableY { get; set; }
+        public VASS.CellValue ShapePlaceFlip { get; set; }
+        public VASS.CellValue ShapePlaceStyle { get; set; }
+        public VASS.CellValue ShapePlowCode { get; set; }
+        public VASS.CellValue ShapeRouteStyle { get; set; }
+        public VASS.CellValue ShapeSplit { get; set; }
+        public VASS.CellValue ShapeSplittable { get; set; }
+        public VASS.CellValue ShapeDisplayLevel { get; set; } // new in visio 2010
+        public VASS.CellValue Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<VASS.CellGroups.CellMetadataItem> CellMetadata
+        public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            get
-            {
-
-
-                yield return this.Create(nameof(this.ConnectorFixedCode), VASS.SrcConstants.ShapeLayoutConnectorFixedCode, this.ConnectorFixedCode);
-                yield return this.Create(nameof(this.LineJumpCode), VASS.SrcConstants.ShapeLayoutLineJumpCode, this.LineJumpCode);
-                yield return this.Create(nameof(this.LineJumpDirX), VASS.SrcConstants.ShapeLayoutLineJumpDirX, this.LineJumpDirX);
-                yield return this.Create(nameof(this.LineJumpDirY), VASS.SrcConstants.ShapeLayoutLineJumpDirY, this.LineJumpDirY);
-                yield return this.Create(nameof(this.LineJumpStyle), VASS.SrcConstants.ShapeLayoutLineJumpStyle, this.LineJumpStyle);
-                yield return this.Create(nameof(this.LineRouteExt), VASS.SrcConstants.ShapeLayoutLineRouteExt, this.LineRouteExt);
-                yield return this.Create(nameof(this.ShapeFixedCode), VASS.SrcConstants.ShapeLayoutShapeFixedCode, this.ShapeFixedCode);
-                yield return this.Create(nameof(this.ShapePermeablePlace), VASS.SrcConstants.ShapeLayoutShapePermeablePlace, this.ShapePermeablePlace);
-                yield return this.Create(nameof(this.ShapePermeableX), VASS.SrcConstants.ShapeLayoutShapePermeableX, this.ShapePermeableX);
-                yield return this.Create(nameof(this.ShapePermeableY), VASS.SrcConstants.ShapeLayoutShapePermeableY, this.ShapePermeableY);
-                yield return this.Create(nameof(this.ShapePlaceFlip), VASS.SrcConstants.ShapeLayoutShapePlaceFlip, this.ShapePlaceFlip);
-                yield return this.Create(nameof(this.ShapePlaceStyle), VASS.SrcConstants.ShapeLayoutShapePlaceStyle, this.ShapePlaceStyle);
-                yield return this.Create(nameof(this.ShapePlowCode), VASS.SrcConstants.ShapeLayoutShapePlowCode, this.ShapePlowCode);
-                yield return this.Create(nameof(this.ShapeRouteStyle), VASS.SrcConstants.ShapeLayoutShapeRouteStyle, this.ShapeRouteStyle);
-                yield return this.Create(nameof(this.ShapeSplit), VASS.SrcConstants.ShapeLayoutShapeSplit, this.ShapeSplit);
-                yield return this.Create(nameof(this.ShapeSplittable), VASS.SrcConstants.ShapeLayoutShapeSplittable, this.ShapeSplittable);
-                yield return this.Create(nameof(this.ShapeDisplayLevel), VASS.SrcConstants.ShapeLayoutShapeDisplayLevel, this.ShapeDisplayLevel);
-                yield return this.Create(nameof(this.Relationships), VASS.SrcConstants.ShapeLayoutRelationships, this.Relationships);
-            }
+            yield return this.Create(nameof(this.ConnectorFixedCode), VASS.SrcConstants.ShapeLayoutConnectorFixedCode,
+                this.ConnectorFixedCode);
+            yield return this.Create(nameof(this.LineJumpCode), VASS.SrcConstants.ShapeLayoutLineJumpCode, this.LineJumpCode);
+            yield return this.Create(nameof(this.LineJumpDirX), VASS.SrcConstants.ShapeLayoutLineJumpDirX, this.LineJumpDirX);
+            yield return this.Create(nameof(this.LineJumpDirY), VASS.SrcConstants.ShapeLayoutLineJumpDirY, this.LineJumpDirY);
+            yield return this.Create(nameof(this.LineJumpStyle), VASS.SrcConstants.ShapeLayoutLineJumpStyle,
+                this.LineJumpStyle);
+            yield return this.Create(nameof(this.LineRouteExt), VASS.SrcConstants.ShapeLayoutLineRouteExt, this.LineRouteExt);
+            yield return this.Create(nameof(this.ShapeFixedCode), VASS.SrcConstants.ShapeLayoutShapeFixedCode,
+                this.ShapeFixedCode);
+            yield return this.Create(nameof(this.ShapePermeablePlace), VASS.SrcConstants.ShapeLayoutShapePermeablePlace,
+                this.ShapePermeablePlace);
+            yield return this.Create(nameof(this.ShapePermeableX), VASS.SrcConstants.ShapeLayoutShapePermeableX,
+                this.ShapePermeableX);
+            yield return this.Create(nameof(this.ShapePermeableY), VASS.SrcConstants.ShapeLayoutShapePermeableY,
+                this.ShapePermeableY);
+            yield return this.Create(nameof(this.ShapePlaceFlip), VASS.SrcConstants.ShapeLayoutShapePlaceFlip,
+                this.ShapePlaceFlip);
+            yield return this.Create(nameof(this.ShapePlaceStyle), VASS.SrcConstants.ShapeLayoutShapePlaceStyle,
+                this.ShapePlaceStyle);
+            yield return this.Create(nameof(this.ShapePlowCode), VASS.SrcConstants.ShapeLayoutShapePlowCode,
+                this.ShapePlowCode);
+            yield return this.Create(nameof(this.ShapeRouteStyle), VASS.SrcConstants.ShapeLayoutShapeRouteStyle,
+                this.ShapeRouteStyle);
+            yield return this.Create(nameof(this.ShapeSplit), VASS.SrcConstants.ShapeLayoutShapeSplit, this.ShapeSplit);
+            yield return this.Create(nameof(this.ShapeSplittable), VASS.SrcConstants.ShapeLayoutShapeSplittable,
+                this.ShapeSplittable);
+            yield return this.Create(nameof(this.ShapeDisplayLevel), VASS.SrcConstants.ShapeLayoutShapeDisplayLevel,
+                this.ShapeDisplayLevel);
+            yield return this.Create(nameof(this.Relationships), VASS.SrcConstants.ShapeLayoutRelationships,
+                this.Relationships);
         }
 
 

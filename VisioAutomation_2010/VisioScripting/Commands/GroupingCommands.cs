@@ -11,48 +11,31 @@ namespace VisioScripting.Commands
         }
 
 
-        public IVisio.Shape GroupSelectedShapes()
+        public IVisio.Shape Group(TargetSelection targetselection)
         {
-            var cmdtarget = this._client.GetCommandTargetDocument();
-
-            // No shapes provided, use the active selection
-
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
-            if (selection.Count<1)
-            {
-                throw new VisioAutomation.Exceptions.VisioOperationException("No Selected Shapes to Group");
-            }
+            targetselection = targetselection.ResolveToSelection(this._client);
 
             // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
             // but it doesn't return the group
 
-            var g = selection.Group();
+            var g = targetselection.Selection.Group();
             return g;
         }
 
-        public void UngroupSelectedShapes(TargetShapes targetshapes)
+        public void Ungroup(TargetShapes targetshapes)
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
-
-            var window = cmdtarget.Application.ActiveWindow;
-            var selection = window.Selection;
-
-            if (!targetshapes.IsResolved)
+            targetshapes = targetshapes.ResolveToShapes(this._client);
+            foreach (var shape in targetshapes.Shapes)
             {
-                if (selection.Count>=1)
-                {
-                    var application = cmdtarget.Application;
-                    application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
-                }
+                shape.Ungroup();
             }
-            else
-            {
-                foreach (var shape in targetshapes.Shapes)
-                {
-                    shape.Ungroup();
-                }
-            }
+        }
+
+        public void Ungroup(TargetSelection target_selection)
+        {
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
+            var application = cmdtarget.Application;
+            application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
         }
     }
 }

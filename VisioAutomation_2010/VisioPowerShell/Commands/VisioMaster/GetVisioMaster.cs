@@ -6,16 +6,19 @@ namespace VisioPowerShell.Commands.VisioMaster
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioMaster)]
     public class GetVisioMaster : VisioCmdlet
     {
+        //TODO: SHould this be a find cmdlet instead of a get cmdlet?
+
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string[] Name;
 
-        [SMA.Parameter(Position = 1, Mandatory = false)]
+        // CONTEXT:DOCUMENT
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Document Document;
 
         protected override void ProcessRecord()
         {
             var targetdoc = new VisioScripting.TargetDocument(this.Document);
-            targetdoc.Resolve(this.Client);
+            targetdoc.ResolveToDocument(this.Client);
             
             bool master_specified = this.Name !=null;
             bool doc_specified = this.Document !=null;

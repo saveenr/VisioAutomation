@@ -9,12 +9,13 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Name { get; set; }
 
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             this.Client.CustomProperty.DeleteCustomPropertyWithName(targetshapes, this.Name);
         }
     }

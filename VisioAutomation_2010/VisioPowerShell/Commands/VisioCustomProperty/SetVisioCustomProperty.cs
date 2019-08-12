@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using VisioAutomation.Shapes;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -9,58 +7,60 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
     [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioCustomProperty)]
     public class SetVisioCustomProperty : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]
-        public Hashtable Hashtable{ get; set; }
-        
-        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "NonHashTable")]
+        [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Name { get; set; }
 
-        [SMA.Parameter(Position = 1, Mandatory = true, ParameterSetName = "NonHashTable")]
+
+        [SMA.Parameter(Position = 1, Mandatory = true, ParameterSetName = "Cells")]
+        public VisioAutomation.Shapes.CustomPropertyCells Cells { get; set; }
+
+        [SMA.Parameter(Position = 1, Mandatory = true, ParameterSetName = "NamedProperties")]
         public object Value { get; set; }
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")]
         public int Type = 0;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")]
         public string Label { get; set; }
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")]
         public string Format { get; set; }
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")]
         public string Prompt { get; set; }
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")] 
         public int LangId = -1;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")] 
         public int SortKey = -1;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")] 
         public int Ask = -1;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")] 
         public int Calendar = -1;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NamedProperties")] 
         public int Invisible = -1;
 
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
         {
-            if (this.Hashtable != null)
+            if (this.Cells != null)
             {
-                this._set_from_hash_table();
+                this._set_from_cells();
             }
             else
             {
-                this._set_from_parameters();
+                this._set_from_namedproperties();
             }
         }
 
-        private void _set_from_parameters()
+        private void _set_from_namedproperties()
         {
             // this will set .Value and automatically set
             // .Type as needed.
@@ -112,33 +112,14 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
                 cp.Invisible = this.Invisible;
             }
 
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             this.Client.CustomProperty.SetCustomProperty(targetshapes, this.Name, cp);
         }
 
-        private void _set_from_hash_table()
+        private void _set_from_cells()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
-
-            if (this.Hashtable.Count < 1)
-            {
-                return;
-            }
-
-            foreach (object key in this.Hashtable.Keys)
-            {
-                if (!(key is string))
-                {
-                    string msg = "Property Names must be strings";
-                    throw new ArgumentOutOfRangeException(msg);
-                }
-
-                string key_string = (string) key;
-
-                object value = this.Hashtable[key];
-                var cp = _create_cust_prop_from_object(value);
-                this.Client.CustomProperty.SetCustomProperty(targetshapes, key_string, cp);
-            }
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+            this.Client.CustomProperty.SetCustomProperty(targetshapes, this.Name, this.Cells);
         }
 
         private static CustomPropertyCells _create_cust_prop_from_object(object value)
@@ -167,7 +148,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
             {
                 return new CustomPropertyCells(value_datetime);
             }
-            else if (value is VisioAutomation.ShapeSheet.CellValueLiteral value_cvl)
+            else if (value is VisioAutomation.ShapeSheet.CellValue value_cvl)
             {
                 return new CustomPropertyCells(value_cvl);
             }

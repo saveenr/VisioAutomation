@@ -8,7 +8,7 @@ namespace VisioScripting
     public class TargetShapes : TargetObjects<IVisio.Shape>
     {
         
-        public TargetShapes() : base()
+        private TargetShapes() : base()
         {
         }
 
@@ -23,79 +23,61 @@ namespace VisioScripting
 
         public List<int> ToShapeIDs()
         {
-            _verify_resolved();
+            var items = this._get_items_safe();
 
-            if (this._items == null)
-            {
-                throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
-            }
-
-            var shapeids = this._items.Select(s => s.ID); 
-            var target_shapeids = new List<int>(this._items.Count);
+            var shapeids = items.Select(s => s.ID); 
+            var target_shapeids = new List<int>(items.Count);
             target_shapeids.AddRange(shapeids);
             return target_shapeids;
         }
 
         public VisioAutomation.ShapeIDPairs ToShapeIDPairs()
         {
-            _verify_resolved();
+            var items = this._get_items_safe();
 
-            if (this._items == null)
-            {
-                throw new System.ArgumentException("Target shapes must be resolved before calling ToShapeIDs()");
-            }
-
-            return VisioAutomation.ShapeIDPairs.FromShapes(this._items);
+            return VisioAutomation.ShapeIDPairs.FromShapes(items);
         }
 
-        internal int SelectShapesAndCount(VisioScripting.Client client)
+        public TargetShapes ResolveToShapes(VisioScripting.Client client)
         {
-            client.Application.AssertHasAttachedApplication();
-
-            var app = client.Application.GetAttachedApplication();
-            var active_window = app.ActiveWindow;
-            var sel = active_window.Selection;
-
-            if (this._items == null)
-            {
-                int n = sel.Count;
-                client.Output.WriteVerbose("GetTargetSelectionCount: Using active selection of {0} shapes", n);
-                return n;
-            }
-
-            client.Output.WriteVerbose("GetTargetSelectionCount: Resetting selection to specified {0} shapes", this._items.Count);
-
-            // Force empty selection
-            active_window.DeselectAll();
-            active_window.DeselectAll(); // doing this twice is deliberate
-
-            // Force selection to specific shapes
-            active_window.Select(this._items, IVisio.VisSelectArgs.visSelect);
-
-            int selected_count = sel.Count;
-            return selected_count;
-        }
-
-        public TargetShapes Resolve(VisioScripting.Client client)
-        {
-            if (this.IsResolved)
+            if (this.Resolved)
             {
                 return this;
             }
 
-            var shapes = client.Selection.GetShapesInSelection();
+            var cmdtarget = client.GetCommandTarget(CommandTargetFlags.RequireDocument); var active_window = cmdtarget.Application.ActiveWindow;
+            var selection = active_window.Selection;
+            var shapes = selection.ToList();
             var targetshapes = new TargetShapes(shapes);
+
+            client.Output.WriteVerbose("Resolving to selection (numshapes={0}) from active window (caption=\"{1}\")", shapes.Count, active_window.Caption);
+
             return targetshapes;
         }
 
-        private void _verify_resolved()
+        public void ResolveToSelection(VisioScripting.Client client)
         {
-            if (!this.IsResolved)
+            // the purpose of this class is to handle those Visio operations that
+            // don't explicitly take a list of shapes, but instead rely on the active selection
+
+            var shapes = this._get_items_unsafe();
+
+            if (shapes==null)
             {
-                throw new System.ArgumentException("This method only supported when the target shapes have been resolved");
+                // do nothing - use the active selection
+                return;
             }
+
+            if (shapes.Count < 1)
+            {
+                throw new System.ArgumentOutOfRangeException("Shapes parameter must contain at least one shape");
+            }
+
+            client.Selection.SelectShapes(VisioScripting.TargetWindow.Auto, shapes);
         }
 
-        public IList<IVisio.Shape> Shapes => this._items;
+        public IList<IVisio.Shape> Shapes => this._get_items_safe();
+
+        public static TargetShapes Auto = new TargetShapes();
     }
 }

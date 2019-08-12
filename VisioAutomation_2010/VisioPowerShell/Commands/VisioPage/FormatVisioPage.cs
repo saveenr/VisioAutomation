@@ -1,4 +1,5 @@
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
@@ -25,38 +26,40 @@ namespace VisioPowerShell.Commands.VisioPage
         
         [SMA.Parameter(Mandatory = false)] 
         public string BackgroundPage = null;
-
+        
         [SMA.Parameter(Mandatory = false)]
         public VisioAutomation.Models.LayoutStyles.LayoutStyleBase LayoutStyle = null;
 
+        // CONTEXT:PAGES
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Page;
+
         protected override void ProcessRecord()
         {
-            var targetpages = new VisioScripting.TargetPages().Resolve(this.Client);
-            if (this.FitContents || this.Width >0 || this.Height >0)
+            var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
+
+            if (this.FitContents)
             {
-                if (this.FitContents)
+                var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderHeight);
+                this.Client.Page.ResizePageToFitContents(targetpages, bordersize);
+                this.Client.View.SetZoomToObject(VisioScripting.TargetWindow.Auto, VisioScripting.Models.ZoomToObject.Page);
+            }
+
+            if (this.Width >0 || this.Height >0)
+            {
+                var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
+
+                if (this.Width > 0)
                 {
-                    var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderWidth);
-                    this.Client.Page.ResizeToFitContents(targetpages, bordersize);
-                    this.Client.View.SetActiveWindowZoomToObject(VisioScripting.Models.ZoomToObject.Page);
+                    page_format_cells.Width = this.Width;
                 }
 
-                if (this.Width > 0 || this.Height > 0)
+                if (this.Height > 0)
                 {
-                    var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
-
-                    if (this.Width > 0)
-                    {
-                        page_format_cells.Width = this.Width;
-                    }
-
-                    if (this.Height > 0)
-                    {
-                        page_format_cells.Height = this.Height;
-                    }
-
-                    this.Client.Page.SetPageFormatCells(targetpages, page_format_cells);
+                    page_format_cells.Height = this.Height;
                 }
+
+                this.Client.Page.SetPageFormatCells(targetpages, page_format_cells);
             }
 
 
@@ -67,8 +70,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
             if (this.BackgroundPage != null)
             {
-                // TODO: SetActivePageBackground should handle targetpages
-                this.Client.Page.SetBackground(targetpages, this.BackgroundPage);
+                this.Client.Page.SetPageBackground(targetpages, this.BackgroundPage);
             }
 
             if (this.LayoutStyle!=null)

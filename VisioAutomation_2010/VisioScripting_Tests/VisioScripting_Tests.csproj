@@ -64,6 +64,7 @@
     <Compile Include="ScriptingCustomPropTests.cs" />
     <Compile Include="ScriptingDevTests.cs" />
     <Compile Include="ScriptingDocumentTests.cs" />
+    <Compile Include="ScriptingModelTests.cs" />
     <Compile Include="ScriptingExportTests.cs" />
     <Compile Include="ScriptingGroupTests.cs" />
     <Compile Include="ScriptingHyperlinkTests.cs" />
@@ -81,6 +82,10 @@
     <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj">
       <Project>{d0eda4f5-bb56-45cd-b95a-d061e90f1160}</Project>
       <Name>VisioAutomation.DocumentAnalysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj">
+      <Project>{29cb2b65-8e8d-4b2c-935c-453b2b371143}</Project>
+      <Name>VisioAutomation.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Tests\VisioAutomation_Tests.csproj">
       <Project>{f04e9277-48d2-4822-9ae6-e7e6adb262c9}</Project>

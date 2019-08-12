@@ -15,19 +15,25 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
         [SMA.Parameter(Mandatory = false)] 
         public string Prompt;
 
+        // CONTEXT:SHAPES 
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes; 
+        public IVisio.Shape[] Shape; 
 
         protected override void ProcessRecord()
         {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shapes);
-            var udcell = new VisioScripting.Models.UserDefinedCell(this.Name, this.Value);
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+            var udcell = new VisioAutomation.Shapes.UserDefinedCellCells();
+
+            if (this.Value != null)
+            {
+                udcell.Value = this.Value;
+            }
             if (this.Prompt != null)
             {
-                udcell.Cells.Prompt = this.Prompt;
+                udcell.Prompt = this.Prompt;
             }
 
-            this.Client.UserDefinedCell.SetUserDefinedCell(targetshapes, udcell);
+            this.Client.UserDefinedCell.SetUserDefinedCell(targetshapes, this.Name, udcell);
         }
     }
 }

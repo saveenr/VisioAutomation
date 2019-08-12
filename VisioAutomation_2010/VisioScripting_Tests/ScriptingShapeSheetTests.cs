@@ -1,7 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioScripting.Models;
 
 namespace VisioAutomation_Tests.Scripting
 {
@@ -13,18 +12,18 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument();
-            client.Draw.DrawRectangle(0, 0, 1, 1);
-            client.Draw.DrawRectangle(1, 1, 2, 2);
 
 
-            var targetpage = new VisioScripting.TargetPage();
-            var shapes = client.Page.GetShapes(targetpage);
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 0, 0, 1, 1);
+            client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 2, 2);
+
+            var shapes = client.Page.GetShapesOnPage(VisioScripting.TargetPage.Auto);
             var shapeids = shapes.Select(s => s.ID16).ToList();
             
             var srcs = new[] { VisioAutomation.ShapeSheet.SrcConstants.XFormPinX };
 
 
-            var reader = client.ShapeSheet.GetReaderForPage(targetpage);
+            var reader = client.ShapeSheet.GetReaderForPage(VisioScripting.TargetPage.Auto);
             foreach (var shapeid in shapeids)
             {
                 foreach (var src in srcs)

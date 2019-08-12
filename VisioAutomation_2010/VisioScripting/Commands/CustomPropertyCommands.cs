@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
+using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -14,23 +14,13 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes)
+        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomPropertiesAsShapeDictionary(TargetShapes targetshapes, VASS.CellValueType type)
         {
-            var cmdtarget = this._client.GetCommandTargetPage();
-
+            targetshapes = targetshapes.ResolveToShapes(this._client);
             var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
-            targetshapes = targetshapes.Resolve(this._client);
+            var listof_cpdic = GetCustomProperties(targetshapes, type);
 
-            if (targetshapes.Shapes.Count < 1)
-            {
-                return dicof_shape_to_cpdic;
-            }
-
-            var shapeidpairs = targetshapes.ToShapeIDPairs();
-            var listof_cpdic = CustomPropertyHelper.GetCellsAsDictionary(cmdtarget.ActivePage, shapeidpairs, CellValueType.Formula);
-
-
-            for (int i = 0; i < targetshapes.Shapes.Count; i++)
+            for (int i = 0; i < listof_cpdic.Count; i++)
             {
                 var shape = targetshapes.Shapes[i];
                 var cpdic = listof_cpdic[i];
@@ -40,6 +30,22 @@ namespace VisioScripting.Commands
             return dicof_shape_to_cpdic;
         }
 
+        public List<CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes, VASS.CellValueType type)
+        {
+            targetshapes = targetshapes.ResolveToShapes(this._client);
+
+            if (targetshapes.Shapes.Count < 1)
+            {
+                return new List<CustomPropertyDictionary>(0);
+            }
+
+            var page = targetshapes.Shapes[0].ContainingPage;
+            var shapeidpairs = targetshapes.ToShapeIDPairs();
+            var listof_cpdic = CustomPropertyHelper.GetDictionary(page, shapeidpairs, type);
+
+            return listof_cpdic;
+        }
+
         public List<bool> ContainCustomPropertyWithName(TargetShapes targetshapes, string name)
         {
             if (name == null)
@@ -47,7 +53,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(name));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             var results = new List<bool>(targetshapes.Shapes.Count);
             var values = targetshapes.Shapes.Select(shape => CustomPropertyHelper.Contains(shape, name));
@@ -68,7 +74,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentException("name cannot be empty", nameof(name));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
@@ -91,7 +97,7 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentNullException(nameof(customprop));
             }
 
-            targetshapes = targetshapes.Resolve(this._client);
+            targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {

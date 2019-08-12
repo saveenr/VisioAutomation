@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -9,38 +10,62 @@ namespace VisioPowerShell.Commands.VisioShapeCells
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShapeCells)]
     public class GetVisioShapeCells : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes { get; set; }
 
-        [SMA.Parameter(Mandatory = false)] 
-        public VisioPowerShell.Models.CellOutputType OutputType = VisioPowerShell.Models.CellOutputType.Formula;
+        
+        [SMA.Parameter(Mandatory = false)]
+        public string[] Cell { get; set; }
+
+
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter Results{ get; set; }
+
+        [SMA.Parameter(Mandatory = false)]
+        public Models.ResultType ResultType = ResultType.String;
+
+        // CONTEXT:SHAPES 
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shape { get; set; }
 
         protected override void ProcessRecord()
         {
-            var target_shapes = this.Shapes ?? this.Client.Selection.GetShapesInSelection();
+            var valuetype = this.Results
+                ? VisioAutomation.ShapeSheet.CellValueType.Result
+                : VisioAutomation.ShapeSheet.CellValueType.Formula;
 
-            var template = new VisioPowerShell.Models.ShapeCells();
-            var dicof_name_to_cell = VisioPowerShell.Models.NamedSrcDictionary.FromCells(template);
-            var arrayof_cellnames = dicof_name_to_cell.Keys.ToArray();
-            var query = _create_query(dicof_name_to_cell, arrayof_cellnames);
-            var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            var target_shapeids = target_shapes.Select(s => s.ID).ToList();
-            var dt = VisioPowerShell.Models.DataTableHelpers.QueryToDataTable(query, this.OutputType, target_shapeids, surface);
+            var target_shapes = new VisioScripting.TargetShapes(this.Shape).ResolveToShapes(this.Client);
 
-            // Annotate the returned datatable to disambiguate rows
-            var shapeid_col = dt.Columns.Add("ShapeID", typeof(System.Int32));
-            shapeid_col.SetOrdinal(0);
-
-            foreach (int row_index in Enumerable.Range(0,target_shapeids.Count))
+            if (target_shapes.Shapes.Count < 1)
             {
-                dt.Rows[row_index][shapeid_col.ColumnName] = target_shapeids[row_index];
+                return;
             }
 
-            this.WriteObject(dt);
+            var template = new VisioPowerShell.Models.ShapeCells();
+
+            var dicof_name_to_cell = VisioPowerShell.Internal.NamedSrcDictionary.FromCells(template);
+
+            var desired_cells = this.Cell ?? dicof_name_to_cell.Keys.ToArray();
+
+            var query = _create_query(dicof_name_to_cell, desired_cells);
+            var page = target_shapes.Shapes[0].ContainingPage;
+            var surface = new VisioAutomation.SurfaceTarget(page);
+            var shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
+            var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, surface);
+
+            // Annotate the returned datatable to disambiguate rows
+            var shapeid_col = datatable.Columns.Add("ShapeID", typeof(int));
+            int shapeid_colindex = 0;
+            shapeid_col.SetOrdinal(shapeid_colindex);
+            foreach (int row_index in Enumerable.Range(0,shapeids.Count))
+            {
+                datatable.Rows[row_index][shapeid_colindex] = shapeids[row_index];
+                datatable.Rows[row_index][shapeid_colindex] = shapeids[row_index];
+            }
+
+            this.WriteObject(datatable);
         }
 
         private VisioAutomation.ShapeSheet.Query.CellQuery _create_query(
-            VisioPowerShell.Models.NamedSrcDictionary dicof_named_to_cell, 
+            VisioPowerShell.Internal.NamedSrcDictionary dicof_named_to_cell, 
             IList<string> cellnames)
         {
             var invalid_names = cellnames.Where(cellname => !dicof_named_to_cell.ContainsKey(cellname)).ToList();

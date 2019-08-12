@@ -47,12 +47,6 @@ namespace VisioAutomation.Models.Utilities
             return this._master_ref_dic[key];
         }
 
-        public bool Contains(string mastername, string stencilname)
-        {
-            string key = getkey(mastername, stencilname);
-            return this._master_ref_dic.ContainsKey(key);
-        }
-
         public void Resolve(IVisio.Documents docs)
         {
             // first get the unique stencils (ignoring case)

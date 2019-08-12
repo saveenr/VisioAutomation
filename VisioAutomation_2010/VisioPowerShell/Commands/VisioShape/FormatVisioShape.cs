@@ -1,10 +1,14 @@
 using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Format, Nouns.VisioShape)]
     public class FormatVisioShape : VisioCmdlet
     {
+        // TODO: This cmdlet only affects the active selection but acts like it can handle non-selections due to its names
+        // the same is true for the commands it calls
+
         [SMA.Parameter(Mandatory = false)]
         public double NudgeX { get; set; }
 
@@ -23,31 +27,38 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false)]
         public VisioScripting.Models.AlignmentHorizontal? AlignHorizontal = null;
 
+        // CONTEXT:SHAPESSELECTION
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shape;
+
         protected override void ProcessRecord()
         {
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+            targetshapes.ResolveToSelection(this.Client);
+
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                this.Client.Arrange.NudgeSelection(this.NudgeX, this.NudgeY);
+                this.Client.Arrange.Nudge(VisioScripting.TargetSelection.Auto, this.NudgeX, this.NudgeY);
             }
 
             if (this.DistributeHorizontal)
             {
-                this.Client.Distribute.DistributeSelectionOnAxis(VisioScripting.Models.Axis.XAxis);
+                this.Client.Arrange.DistributeOnAxis(VisioScripting.TargetSelection.Auto, VisioScripting.Models.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.Client.Distribute.DistributeSelectionOnAxis(VisioScripting.Models.Axis.YAxis);
+                this.Client.Arrange.DistributeOnAxis(VisioScripting.TargetSelection.Auto, VisioScripting.Models.Axis.YAxis);
             }
 
             if (this.AlignVertical.HasValue)
             {
-                this.Client.Align.AlignSelectionVertical(this.AlignVertical.Value);
+                this.Client.Arrange.AlignVertical(VisioScripting.TargetSelection.Auto, this.AlignVertical.Value);
             }
 
             if (this.AlignHorizontal.HasValue)
             {
-                this.Client.Align.AlignSelectionHorizontal(this.AlignHorizontal.Value);
+                this.Client.Arrange.AlignHorizontal(VisioScripting.TargetSelection.Auto, this.AlignHorizontal.Value);
             }
 
         }

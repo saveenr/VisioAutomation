@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioScripting;
 using GRID = VisioAutomation.Models.Layouts.Grid;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
@@ -23,11 +22,11 @@ namespace VisioAutomation_Tests.Scripting
             
             // Draw the Chart
             var client = this.GetScriptingClient();
+            client.Document.NewDocument();
             this.draw_org_chart(client, xml);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -59,19 +58,20 @@ namespace VisioAutomation_Tests.Scripting
             // Prepare the Page
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+
+            var page = client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
-            var shapes = client.Charting.NewDataTablePageInActiveDocument(dt, widths, heights, cellspacing);
+
+            var shapes = client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt, widths, heights, cellspacing);
 
             // Verify
             int num_shapes_expected = items.Length*dt.Columns.Count;
             Assert.AreEqual(num_shapes_expected, shapes.Count);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -86,12 +86,13 @@ namespace VisioAutomation_Tests.Scripting
             // Create the Page
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
             // Find the stencil and master
             var stencildoc = client.Document.OpenStencilDocument("basic_u.vss");
-            var stencil_tdoc = new VisioScripting.TargetDocument(stencildoc);
-            var master = client.Master.GetMaster(stencil_tdoc, "Rectangle");
+            var stencil_targetdoc = new VisioScripting.TargetDocument(stencildoc);
+            var master = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
 
             // Draw the grid
             var page = client.Page.GetActivePage();
@@ -106,8 +107,7 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(total_shapes_expected,total_shapes_actual);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -116,15 +116,15 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
             var pagesize = new VA.Geometry.Size(4, 4);
-            client.Page.NewPage(pagesize, false);
 
-            var shape_rect = client.Draw.DrawRectangle(1, 1, 3, 3);
-            var shape_line = client.Draw.DrawLine(0.5, 0.5, 3.5, 3.5);
-            var shape_oval1 = client.Draw.DrawOval(0.2, 1, 3.8, 2);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
+
+            var shape_rect = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 3, 3);
+            var shape_line = client.Draw.DrawLine(VisioScripting.TargetPage.Auto, 0.5, 0.5, 3.5, 3.5);
+            var shape_oval1 = client.Draw.DrawOval(VisioScripting.TargetPage.Auto, 0.2, 1, 3.8, 2);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -142,15 +142,14 @@ namespace VisioAutomation_Tests.Scripting
             // Create the Page
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
-            
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
+
             // Draw the Shapes
-            var shape_bezier = client.Draw.DrawBezier(points);
-            var shape_polyline = client.Draw.DrawPolyLine(points);
+            var shape_bezier = client.Draw.DrawBezier(VisioScripting.TargetPage.Auto, points);
+            var shape_polyline = client.Draw.DrawPolyLine(VisioScripting.TargetPage.Auto, points);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -167,9 +166,8 @@ namespace VisioAutomation_Tests.Scripting
             // Cleanup
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph1),".vsd");
 
-            var targetdoc = new TargetDocument();
-            client.Document.SaveDocumentAs(targetdoc, output_filename);
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Auto, output_filename);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -185,9 +183,8 @@ namespace VisioAutomation_Tests.Scripting
 
             // Cleanup
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph2),".vsd");
-            var targetdoc = new TargetDocument();
-            client.Document.SaveDocumentAs(targetdoc, output_filename);
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Auto, output_filename);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -203,9 +200,9 @@ namespace VisioAutomation_Tests.Scripting
 
             // Cleanup
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph3),".vsd");
-            var targetdoc = new TargetDocument();
-            client.Document.SaveDocumentAs(targetdoc, output_filename);
-            client.Document.CloseDocument(targetdoc, true);
+
+            client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Auto, output_filename);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -221,9 +218,9 @@ namespace VisioAutomation_Tests.Scripting
 
             // Cleanup
             string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph4),".vsd");
-            var targetdoc = new TargetDocument();
-            client.Document.SaveDocumentAs(targetdoc, output_filename);
-            client.Document.CloseDocument(targetdoc, true);
+
+            client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Auto, output_filename);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         public string get_datafile_content(string name)
@@ -241,18 +238,18 @@ namespace VisioAutomation_Tests.Scripting
         private void draw_directed_graph(VisioScripting.Client client, string dg_text)
         {
             var dg_xml = SXL.XDocument.Parse(dg_text);
-            var dg_model = VisioScripting.Builders.DirectedGraphBuilder.LoadFromXml(client, dg_xml);
+            var dgdoc = VisioScripting.Builders.DirectedGraphDocumentLoader.LoadFromXml(client, dg_xml);
 
             // TODO: Investigate if this this special case for Visio 2013 can be removed
             // this is a temporary fix to handle the fact that server_u.vss in Visio 2013 doesn't result in server_u.vssx 
-            // gettign automatically loaded
+            // getting automatically loaded
 
             var version = client.Application.ApplicationVersion;
             if (version.Major >= 15)
             {
-                foreach (var drawing in dg_model)
+                foreach (var drawing in dgdoc.Layouts)
                 {
-                    foreach (var shape in drawing.Shapes)
+                    foreach (var shape in drawing.Nodes)
                     {
                         if (shape.StencilName == "server_u.vss")
                         {
@@ -261,8 +258,10 @@ namespace VisioAutomation_Tests.Scripting
                     }
                 }
             }
-            
-            client.Charting.NewDirectedGraphDocument(dg_model);
+
+            var dgstyling = new VA.Models.Layouts.DirectedGraph.DirectedGraphStyling();
+
+            client.Model.DrawDirectedGraphDocument(dgdoc,dgstyling);
         }
         
         [TestMethod]
@@ -270,30 +269,29 @@ namespace VisioAutomation_Tests.Scripting
         {
             var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
-            
+
             // Create the page
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
-            var stencil_tdoc = new VisioScripting.TargetDocument(basic_stencil);
-            var master = client.Master.GetMaster(stencil_tdoc, "Rectangle");
+            var stencil_targetdoc = new VisioScripting.TargetDocument(basic_stencil);
+            var master = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
 
             // Frop the Shapes
 
-            var targetpage = new VisioScripting.TargetPage();
-            client.Master.DropMaster(targetpage , master, new VA.Geometry.Point(2, 2));
+            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Geometry.Point(2, 2));
 
             // Verify
-            var application = client.Application.GetAttachedApplication();
+            var application = client.Application.GetApplication();
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             Assert.AreEqual(1, shapes.Count);
 
             // cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -304,36 +302,35 @@ namespace VisioAutomation_Tests.Scripting
 
             // Create the Page
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
-            var stencil_tdoc = new VisioScripting.TargetDocument(basic_stencil);
-            var m1 = client.Master.GetMaster(stencil_tdoc, "Rectangle");
-            var m2 = client.Master.GetMaster(stencil_tdoc, "Ellipse");
+            var stencil_targetdoc = new VisioScripting.TargetDocument(basic_stencil);
+            var m1 = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
+            var m2 = client.Master.GetMaster(stencil_targetdoc, "Ellipse");
 
             // Drop the Shapes
             var masters = new[] {m1, m2};
             var xys = new[] { 1.0, 2.0, 3.0, 4.0, 1.5, 4.5, 5.7, 2.4 };
             var points = VA.Geometry.Point.FromDoubles(xys).ToList();
 
-            var targetpage = new VisioScripting.TargetPage();
-            client.Master.DropMasters(targetpage, masters, points);
+            client.Master.DropMasters(VisioScripting.TargetPage.Auto, masters, points);
 
             // Verify
-            var application = client.Application.GetAttachedApplication();
+            var application = client.Application.GetApplication();
             Assert.AreEqual(4, application.ActivePage.Shapes.Count);
 
             // Cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         private void draw_org_chart(VisioScripting.Client client, string text)
         {
             var xmldoc = SXL.XDocument.Parse(text);
-            var orgchart = VisioScripting.Builders.OrgChartBuilder.LoadFromXml(client, xmldoc);
-            client.Charting.NewOrgChartDocument(orgchart);
+            var orgchart = VisioScripting.Builders.OrgChartDocumentLoader.LoadFromXml(client, xmldoc);
+
+            client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
         }
 
         [TestMethod]
@@ -342,24 +339,26 @@ namespace VisioAutomation_Tests.Scripting
             var pagesize = new VA.Geometry.Size(4, 4);
             var client = this.GetScriptingClient();
 
+
             // Create the page
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
-            var application = client.Application.GetAttachedApplication();
+            var application = client.Application.GetApplication();
             var active_page = application.ActivePage;
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
-            var stencil_tdoc = new VisioScripting.TargetDocument(basic_stencil);
-            var master = client.Master.GetMaster(stencil_tdoc, "Rectangle");
+            var stencil_targetdoc = new VisioScripting.TargetDocument(basic_stencil);
+            var master = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
 
             // Drop the rectangle
-            var targetpage = new VisioScripting.TargetPage();
-            client.Master.DropMaster(targetpage, master, new VA.Geometry.Point(2, 2) );
+            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Geometry.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
-            client.Selection.SelectAllShapes();
+
+
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var app = active_page.Application;
@@ -374,7 +373,7 @@ namespace VisioAutomation_Tests.Scripting
             var masters = containers_doc.Masters;
             var container_master = masters.ItemU[cont_master_name];
 
-            var dropped_container = client.Master.DropContainerMaster(targetpage, container_master);
+            var dropped_container = client.Container.DropContainerMaster(VisioScripting.TargetPage.Auto, container_master);
 
             // Verify
             var shapes = active_page.Shapes;
@@ -383,14 +382,13 @@ namespace VisioAutomation_Tests.Scripting
 
             // Verify that we did indeed drop a container
 
-            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(dropped_container, VA.ShapeSheet.CellValueType.Result);
+            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(dropped_container, VA.ShapeSheet.CellValueType.Result);
             Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
             var prop = results_dic["msvStructureType"];
             Assert.AreEqual("Container", prop.Value.Value);
 
             // cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [TestMethod]
@@ -401,27 +399,27 @@ namespace VisioAutomation_Tests.Scripting
 
             // Create the page
             client.Document.NewDocument();
-            client.Page.NewPage(pagesize, false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
-            var application = client.Application.GetAttachedApplication();
+            var application = client.Application.GetApplication();
             var active_page = application.ActivePage;
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencilDocument("Basic_U.VSS");
-            var basic_stencil_tdoc = new VisioScripting.TargetDocument(basic_stencil);
-            var master = client.Master.GetMaster(basic_stencil_tdoc, "Rectangle");
+            var basic_stencil_targetdoc = new VisioScripting.TargetDocument(basic_stencil);
+            var master = client.Master.GetMaster(basic_stencil_targetdoc, "Rectangle");
 
             // Drop the rectangle
-            var targetpage = new VisioScripting.TargetPage();
-            client.Master.DropMaster(targetpage, master, new VA.Geometry.Point(2, 2) );
+            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Geometry.Point(2, 2) );
+
 
             // Select the rectangle... it should already be selected, but just make sure
-            client.Selection.SelectAllShapes();
+            client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var ver = client.Application.ApplicationVersion;
             var cont_master_name = ver.Major >= 15 ? "Plain" : "Container 1";
-            var dropped_container = client.Master.DropContainer(targetpage, cont_master_name);
+            var dropped_container = client.Container.DropContainer(VisioScripting.TargetPage.Auto, cont_master_name);
 
             // Verify
             var shapes = active_page.Shapes;
@@ -429,16 +427,13 @@ namespace VisioAutomation_Tests.Scripting
             Assert.AreEqual(2, shapes.Count);
 
             // Verify that we did indeed drop a container           
-            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetCellsAsDictionary(dropped_container, VA.ShapeSheet.CellValueType.Result);
+            var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(dropped_container, VA.ShapeSheet.CellValueType.Result);
             Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
             var prop = results_dic["msvStructureType"];
             Assert.AreEqual("Container", prop.Value.Value);
 
-
-
             // cleanup
-            var targetdoc = new VisioScripting.TargetDocument();
-            client.Document.CloseDocument(targetdoc, true);
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }
 }

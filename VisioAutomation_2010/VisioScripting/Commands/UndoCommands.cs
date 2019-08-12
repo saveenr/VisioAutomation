@@ -1,3 +1,4 @@
+using VisioAutomation.Application;
 using VA = VisioAutomation;
 
 namespace VisioScripting.Commands
@@ -13,19 +14,19 @@ namespace VisioScripting.Commands
 
         public void UndoLastAction()
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
             cmdtarget.Application.Undo();
         }
 
         public void RedoLastAction()
         {
-            var cmdtarget = this._client.GetCommandTargetApplication();
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
             cmdtarget.Application.Redo();
         }
 
-        public VA.Application.UndoScope NewUndoScope(string name)
+        public UndoScope NewUndoScope(string name)
         {
-            var app = this._client.Application.GetAttachedApplication();
+            var app = this._client.Application.GetApplication();
             if (app == null)
             {
                 throw new System.ArgumentException("Cant create UndoScope. There is no visio application attached.");

@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using VisioPowerShell.Models;
-using VisioScripting.Models;
 using SMA = System.Management.Automation;
-using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
@@ -11,65 +7,51 @@ namespace VisioPowerShell.Commands.VisioPage
     public class MeasureVisioPage : VisioCmdlet
     {
 
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Page Page;
 
-        [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter GetShapeObjects { get; set; }
-
-        [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter Raw { get; set; }
-
+        /*
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TreatUndirectedAsBidirectional { get; set; }
+        */
+
+        // CONTEXT:PAGES
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Page;
 
         protected override void ProcessRecord()
         {
-            var targetpage = new VisioScripting.TargetPage(this.Page);
 
-            var flag = this._get_directed_edge_handling();
-            var edges = this.Client.Connection.GetDirectedEdgesOnPage(targetpage,flag);
+            var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
 
-            if (this.GetShapeObjects)
+            if (targetpages.Pages.Count < 1)
             {
-                this.WriteObject(edges, true);
                 return;
             }
 
-            this._write_edges_with_shapeids(edges);
-                
+            var list_pagedim = VisioScripting.Models.PageDimensions.Get_PageDimensions(targetpages.Pages);
+
+            this.WriteObject(list_pagedim,true);
+
         }
 
-        private VA.DocumentAnalysis.ConnectionAnalyzerOptions _get_directed_edge_handling()
-        {
-            var flag = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
-            flag.NoArrowsHandling =  VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
 
-            if (this.Raw)
-            {
-                flag.DirectionSource = VA.DocumentAnalysis.DirectionSource.UseConnectionOrder;
-            }
-            else
-            {
-                flag.DirectionSource = VA.DocumentAnalysis.DirectionSource.UseConnectorArrows;
-                flag.NoArrowsHandling = this.TreatUndirectedAsBidirectional ?
-                    VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional 
-                    : VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
-            }
-            return flag;
-        }
-
-        private void _write_edges_with_shapeids(IList<VA.DocumentAnalysis.ConnectorEdge> edges)
+        private void foo()
         {
-            foreach (var edge in edges)
-            {
-                var e = new DirectedEdge(
-                    edge.From.ID,
-                    edge.To.ID,
-                    edge.Connector.ID
-                    );
-                this.WriteObject(e);
-            }
+            /*
+
+            var targetpage = new VisioScripting.TargetPage(this.Page);
+
+            var options = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
+            options.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
+
+            options.DirectionSource = VA.DocumentAnalysis.DirectionSource.UseConnectorArrows;
+
+            options.NoArrowsHandling = this.TreatUndirectedAsBidirectional ?
+                VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional
+                : VA.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
+            var edges = this.Client.Connection.GetDirectedEdgesOnPage(targetpage, options);
+            this.WriteObject(edges, false);
+                */
         }
     }
 }
+

@@ -1,41 +1,31 @@
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Xml;
+using VisioAutomation.Models.Layouts.DirectedGraph;
 using SMA = System.Management.Automation;
+using MODELS = VisioAutomation.Models;
 
 namespace VisioPowerShell.Commands.Visio
 {
     [SMA.Cmdlet(SMA.VerbsData.Out, Nouns.Visio)]
     public class OutVisio : VisioCmdlet
     {
-        [SMA.Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
+        [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "orgchcart")]
+        public MODELS.Documents.OrgCharts.OrgChartDocument OrgChart { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VisioAutomation.Models.Layouts.Grid.GridLayout GridLayout { get; set; }
+        [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "grid")]
+        public MODELS.Layouts.Grid.GridLayout GridLayout { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public List<VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout> DirectedGraphs { get; set; }
+        [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "directedgraph")]
+        public MODELS.Layouts.DirectedGraph.DirectedGraphDocument DirectedGraphDocument { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public DataTable DataTable { get; set; }
+        [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "datatable")]
+        public MODELS.Data.DataTableModel DataTableModel { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 1, Mandatory = true, ValueFromPipeline = true)]
-        public double CellWidth { get; set; }
-
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 2, Mandatory = true, ValueFromPipeline = true)]
-        public double CellHeight { get; set; }
-
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true, ValueFromPipeline = true)]
-        public double CellSpacing { get; set; }
-
-        [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public XmlDocument XmlDocument;
+        [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "systemxmldoc")]
+        public MODELS.Data.XmlModel XmlModel;
 
         protected override void ProcessRecord()
         {
-            var app = this.Client.Application.GetAttachedApplication();
+            var app = this.Client.Application.GetApplication();
             if (app == null)
             {
                 string msg = "A Visio Application Instance is not attached";
@@ -43,61 +33,30 @@ namespace VisioPowerShell.Commands.Visio
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
-            if (this.OrgChart != null)
+            if (this.DirectedGraphDocument != null)
             {
-                this.Client.Charting.NewOrgChartDocument(this.OrgChart);
+                var dgstyline = new DirectedGraphStyling();
+                this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraphDocument, dgstyline);
+            }
+            else if (this.OrgChart != null)
+            {
+                this.Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
-                this.Client.Charting.DrawGridOnActivePage(this.GridLayout);
+                this.Client.Model.DrawGrid(VisioScripting.TargetPage.Auto, this.GridLayout);
             }
-            else if (this.DirectedGraphs != null)
+            else if (this.DataTableModel != null)
             {
-                this.Client.Charting.NewDirectedGraphDocument(this.DirectedGraphs);
+                this.Client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, this.DataTableModel);
             }
-            else if (this.DataTable != null)
+            else if (this.XmlModel != null)
             {
-                var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
-                var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
-                var spacing = new VisioAutomation.Geometry.Size(this.CellSpacing, this.CellSpacing);
-                var shapes = this.Client.Charting.NewDataTablePageInActiveDocument(this.DataTable, widths, heights, spacing);
-                this.WriteObject(shapes);
-            }
-            else if (this.XmlDocument != null)
-            {
-                this.WriteVerbose("XmlDocument");
-                var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
-                this._build_from_xml_doc(this.XmlDocument, tree_drawing);
-
-                tree_drawing.Render(this.Client.Page.GetActivePage());
+                this.Client.Model.DrawXmlModel(VisioScripting.TargetPage.Auto, this.XmlModel);
             }
             else
             {
                 this.WriteVerbose("No object to draw");
-            }
-        }
-
-        private void _build_from_xml_doc(XmlDocument xml_document, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
-        {
-            var n = new VisioAutomation.Models.Layouts.Tree.Node();
-            tree_drawing.Root = n;
-            n.Text = new VisioAutomation.Models.Text.Element(xml_document.Name);
-            this._build_from_xml_element(xml_document.DocumentElement,n);
-
-        }
-
-        private void _build_from_xml_element(XmlElement x, VisioAutomation.Models.Layouts.Tree.Node parent)
-        {
-            foreach (XmlNode xchild in x.ChildNodes)
-            {
-                if (xchild is XmlElement)
-                {
-                    var nchild = new VisioAutomation.Models.Layouts.Tree.Node();
-                    nchild.Text = new VisioAutomation.Models.Text.Element(xchild.Name);
-
-                    parent.Children.Add(nchild);
-                    this._build_from_xml_element( (XmlElement) xchild, nchild);
-                }
             }
         }
     }
