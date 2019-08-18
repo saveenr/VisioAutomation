@@ -1,6 +1,26 @@
 ﻿<Types>
 
   <Type>
+    <Name>VisioAutomation.Geometry.Rectangle</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>Left</Name>
+              <Name>Bottom</Name>
+              <Name>Right</Name>
+              <Name>Top</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
+
+  <Type>
     <Name>Microsoft.Office.Interop.Visio.ApplicationClass</Name>
     <Members>
       <MemberSet>
