@@ -6,6 +6,7 @@ namespace VisioPowerShell.Commands.VisioContainer
     [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioContainer)]
     public class NewVisioContainer : VisioCmdlet
     {
+        [SMA.Parameter(Mandatory = true)]
         [SMA.ValidateNotNull]
         public IVisio.Master Master { get; set; }
 
