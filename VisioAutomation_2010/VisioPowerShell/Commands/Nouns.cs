@@ -2,7 +2,6 @@ namespace VisioPowerShell.Commands
 {
     internal static class Nouns
     {
-        public const string Visio = nameof(Visio);
         public const string VisioApplication = nameof(VisioApplication);
         public const string VisioConnectionPoint = nameof(VisioConnectionPoint);
         public const string VisioContainer = nameof(VisioContainer);

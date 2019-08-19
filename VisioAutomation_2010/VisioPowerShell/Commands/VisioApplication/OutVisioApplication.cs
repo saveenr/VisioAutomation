@@ -5,7 +5,7 @@ using MODELS = VisioAutomation.Models;
 
 namespace VisioPowerShell.Commands.Visio
 {
-    [SMA.Cmdlet(SMA.VerbsData.Out, Nouns.Visio)]
+    [SMA.Cmdlet(SMA.VerbsData.Out, Nouns.VisioApplication)]
     public class OutVisio : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "orgchcart")]
