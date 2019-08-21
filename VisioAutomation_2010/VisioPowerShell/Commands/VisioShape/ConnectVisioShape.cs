@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsCommunications.Connect, Nouns.VisioShape)]
-    public class NewVisioConnection : VisioCmdlet
+    public class ConnectVisioShape : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public IVisio.Shape[] From { get; set; }
