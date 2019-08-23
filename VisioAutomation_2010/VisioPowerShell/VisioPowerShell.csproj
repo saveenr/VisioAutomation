@@ -105,7 +105,7 @@
     <Compile Include="Internal\NamedSrcDictionary.cs" />
     <Compile Include="Models\PageCells.cs" />
     <Compile Include="Models\ShapeCells.cs" />
-    <Compile Include="Commands\Visio\OutVisio.cs" />
+    <Compile Include="Commands\VisioApplication\OutVisioApplication.cs" />
     <Compile Include="Commands\VisioShapeCells\GetVisioShapeCells.cs" />
     <Compile Include="Commands\VisioDocument\SelectVisioDocument.cs" />
     <Compile Include="Commands\VisioPage\SelectVisioPage.cs" />
@@ -118,7 +118,7 @@
     <Compile Include="Commands\VisioShape\NewVisioShape.cs" />
     <Compile Include="Commands\VisioShape\CopyVisioShape.cs" />
     <Compile Include="Commands\VisioShape\ExportVisioShape.cs" />
-    <Compile Include="Commands\Visio\RedoVisio.cs" />
+    <Compile Include="Commands\VisioApplication\RedoVisioApplication.cs" />
     <Compile Include="Commands\VisioDocument\SaveVisioDocument.cs" />
     <Compile Include="Commands\VisioDocument\TestVisioDocument.cs" />
     <Compile Include="Commands\VisioShape\TestVisioShape.cs" />
@@ -126,7 +126,6 @@
     <Compile Include="Commands\VisioLayer\GetVisioLayer.cs" />
     <Compile Include="Commands\VisioShape\SelectVisioShape.cs" />
     <Compile Include="Commands\VisioPage\ExportVisioPage.cs" />
-    <Compile Include="Commands\VisioConnectionPoint\GetVisioConnectionPoint.cs" />
     <Compile Include="Commands\VisioControl\GetVisioControl.cs" />
     <Compile Include="Commands\VisioDocument\GetVisioDocument.cs" />
     <Compile Include="Commands\VisioModel\ImportVisioModel.cs" />
@@ -137,7 +136,7 @@
     <Compile Include="Commands\VisioDocument\OpenVisioDocument.cs" />
     <Compile Include="Commands\VisioControl\RemoveVisioControl.cs" />
     <Compile Include="Commands\VisioUserDefinedCell\SetVisioUserDefinedCell.cs" />
-    <Compile Include="Commands\VisioShape\NewVisioConnection.cs" />
+    <Compile Include="Commands\VisioShape\ConnectVisioShape.cs" />
     <Compile Include="Commands\VisioCustomProperty\RemoveVisioCustomProperty.cs" />
     <Compile Include="Commands\VisioPage\CopyVisioPage.cs" />
     <Compile Include="Commands\VisioPage\MeasureVisioPage.cs" />
@@ -156,7 +155,7 @@
     <Compile Include="Commands\VisioCustomProperty\SetVisioCustomProperty.cs" />
     <Compile Include="Commands\VisioText\SetVisioText.cs" />
     <Compile Include="Commands\VisioApplication\CloseVisioApplication.cs" />
-    <Compile Include="Commands\Visio\UndoVisio.cs" />
+    <Compile Include="Commands\VisioApplication\UndoVisioApplication.cs" />
     <Compile Include="Commands\VisioShape\SplitVisioShape.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internal\DataTableHelpers.cs" />
