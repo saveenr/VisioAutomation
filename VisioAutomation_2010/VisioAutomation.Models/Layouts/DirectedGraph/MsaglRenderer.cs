@@ -526,8 +526,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     }
                 case (ConnectorType.Default):
                     {
-                        // Treat as RightAngle
-                        return IVisio.VisCellVals.visLORouteExtStraight;
+                        return IVisio.VisCellVals.visLORouteExtStraight; 
                     }
                 default:
                     {

@@ -84,22 +84,14 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
         public double GetNodeSize(Node<T> node)
         {
-            switch (this.Options.Direction)
+            return this.Options.Direction switch
             {
-                case LayoutDirection.Up:
-                    return node.Size.Width;
-
-                case LayoutDirection.Left:
-                    return node.Size.Height;
-
-                case LayoutDirection.Right:
-                    return node.Size.Height;
-
-                case LayoutDirection.Down:
-                    return node.Size.Width;
-                default:
-                    throw new System.ArgumentOutOfRangeException();
-            }
+                LayoutDirection.Up => node.Size.Width,
+                LayoutDirection.Left => node.Size.Height,
+                LayoutDirection.Right => node.Size.Height,
+                LayoutDirection.Down => node.Size.Width,
+                _ => throw new System.ArgumentOutOfRangeException(),
+            };
         }
 
         private void _apportion(Node<T> node, int level)

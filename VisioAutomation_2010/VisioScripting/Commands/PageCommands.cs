@@ -373,19 +373,14 @@ namespace VisioScripting.Commands
                 throw new System.ArgumentOutOfRangeException(nameof(cur));
             }
 
-            switch (relative_position)
+            return relative_position switch
             {
-                case VisioScripting.Models.PageRelativePosition.Next:
-                    return System.Math.Min(cur + 1, max);
-                case VisioScripting.Models.PageRelativePosition.Previous:
-                    return System.Math.Max(cur - 1, min);
-                case VisioScripting.Models.PageRelativePosition.First:
-                    return min;
-                case VisioScripting.Models.PageRelativePosition.Last:
-                    return max;
-                default:
-                    throw new System.ArgumentOutOfRangeException(nameof(relative_position));
-            }
+                VisioScripting.Models.PageRelativePosition.Next => System.Math.Min(cur + 1, max),
+                VisioScripting.Models.PageRelativePosition.Previous => System.Math.Max(cur - 1, min),
+                VisioScripting.Models.PageRelativePosition.First => min,
+                VisioScripting.Models.PageRelativePosition.Last => max,
+                _ => throw new System.ArgumentOutOfRangeException(nameof(relative_position)),
+            };
         }
 
         public List<IVisio.Shape> GetShapesOnPageByID(TargetPage targetpage, int[] shapeids)
