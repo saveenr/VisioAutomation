@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -289,38 +290,30 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             double nodesize_tmp = 0;
             bool flag = false;
 
-            switch (this.Options.Direction)
+            if (this.Options.Direction == LayoutDirection.Up || this.Options.Direction == LayoutDirection.Down)
             {
-                case LayoutDirection.Up:
-                case LayoutDirection.Down:
-                    {
-                        maxsize_tmp = this._max_level_height[level];
-                        nodesize_tmp = node.Size.Height;
-                        break;
-                    }
-                case LayoutDirection.Left:
-                case LayoutDirection.Right:
-                    {
-                        maxsize_tmp = this._max_level_width[level];
-                        flag = true;
-                        nodesize_tmp = node.Size.Width;
-                        break;
-                    }
+                maxsize_tmp = this._max_level_height[level];
+                flag = false;
+                nodesize_tmp = node.Size.Height;
             }
-            switch (this.Options.Alignment)
+            else if (this.Options.Direction == LayoutDirection.Left || this.Options.Direction == LayoutDirection.Right)
             {
-                case AlignmentVertical.Top:
-                    node.Position = temp_point;
-                    break;
-
-                case AlignmentVertical.Center:
-                    node.Position = temp_point.Add(0, (maxsize_tmp - nodesize_tmp) / 2.0);
-                    break;
-
-                case AlignmentVertical.Bottom:
-                    node.Position = temp_point.Add(0, maxsize_tmp - nodesize_tmp);
-                    break;
+                maxsize_tmp = this._max_level_width[level];
+                flag = true;
+                nodesize_tmp = node.Size.Width;
             }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            node.Position = this.Options.Alignment switch
+            {
+                AlignmentVertical.Top => temp_point,
+                AlignmentVertical.Center => temp_point.Add(0, (maxsize_tmp - nodesize_tmp) / 2.0),
+                AlignmentVertical.Bottom => temp_point.Add(0, maxsize_tmp - nodesize_tmp),
+                _ => throw new ArgumentOutOfRangeException(),
+            };
 
             if (flag)
             {
@@ -328,7 +321,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                 node.Position = new VisioAutomation.Geometry.Point(node.Position.Y, node.Position.X);
             }
 
-            NewMethod(node, nodesize_tmp);
+            UpdateNodePosition(node, nodesize_tmp);
 
             if (node.ChildCount != 0)
             {
@@ -345,8 +338,10 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             }
         }
 
-        private void NewMethod(Node<T> node, double nodesize_tmp)
+        private void UpdateNodePosition(Node<T> node, double nodesize_tmp)
         {
+            var dir = this.Options.Direction;
+
             switch (this.Options.Direction)
             {
                 case LayoutDirection.Down:

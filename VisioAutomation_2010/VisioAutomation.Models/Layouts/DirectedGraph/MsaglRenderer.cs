@@ -510,58 +510,26 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
         private IVisio.VisCellVals ConnectorTypeToCellVal_Appearance(ConnectorType connector_type)
         {
-            switch (connector_type)
+            return connector_type switch
             {
-                case (ConnectorType.Curved):
-                    {
-                        return IVisio.VisCellVals.visLORouteExtNURBS;
-                    }
-                case (ConnectorType.Straight):
-                    {
-                        return IVisio.VisCellVals.visLORouteExtStraight;
-                    }
-                case (ConnectorType.RightAngle):
-                    {
-                        return IVisio.VisCellVals.visLORouteExtStraight;
-                    }
-                case (ConnectorType.Default):
-                    {
-                        return IVisio.VisCellVals.visLORouteExtStraight; 
-                    }
-                default:
-                    {
-                        string msg = string.Format("Unhandled {0} value of {1}", nameof(ConnectorType), connector_type);
-                        throw new ArgumentOutOfRangeException(nameof(connector_type), msg);
-                    }
-            }
+                ConnectorType.Curved => IVisio.VisCellVals.visLORouteExtNURBS,
+                ConnectorType.Straight => IVisio.VisCellVals.visLORouteExtStraight,
+                ConnectorType.RightAngle => IVisio.VisCellVals.visLORouteExtStraight,
+                ConnectorType.Default => IVisio.VisCellVals.visLORouteExtStraight,
+                _ => throw new System.ArgumentOutOfRangeException(nameof(connector_type), connector_type.ToString())
+            };
         }
 
         private IVisio.VisCellVals ConnectorTypeToCellVal_Style(ConnectorType connector_type)
         {
-            switch (connector_type)
+            return connector_type switch
             {
-                case (ConnectorType.Curved):
-                    {
-                        return IVisio.VisCellVals.visLORouteRightAngle;
-                    }
-                case (ConnectorType.Straight):
-                    {
-                        return IVisio.VisCellVals.visLORouteCenterToCenter;
-                    }
-                case (ConnectorType.RightAngle):
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartNS;
-                    }
-                case (ConnectorType.Default):
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartNS;
-                    }
-                default:
-                    {
-                        string msg = string.Format("Unhandled {0} value of {1}", nameof(ConnectorType), connector_type);
-                        throw new ArgumentOutOfRangeException(nameof(connector_type), msg);
-                    }
-            }
+                ConnectorType.Curved => IVisio.VisCellVals.visLORouteRightAngle,
+                ConnectorType.Straight => IVisio.VisCellVals.visLORouteCenterToCenter,
+                ConnectorType.RightAngle => IVisio.VisCellVals.visLORouteFlowchartNS,
+                ConnectorType.Default => IVisio.VisCellVals.visLORouteFlowchartNS,
+                _ => throw new System.ArgumentOutOfRangeException(nameof(connector_type), connector_type.ToString())
+            };
         }
     }
 }
