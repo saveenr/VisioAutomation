@@ -4,11 +4,18 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation
 {
+    public enum SurfaceTargetType
+    {
+        Page,
+        Master,
+        Shape
+    }
     public struct SurfaceTarget
     {
         public readonly IVisio.Page Page;
         public readonly IVisio.Master Master;
         public readonly IVisio.Shape Shape;
+        public readonly SurfaceTargetType TargetType;
 
         public SurfaceTarget(IVisio.Page page)
         {
@@ -20,6 +27,8 @@ namespace VisioAutomation
             this.Page = page;
             this.Master = null;
             this.Shape = null;
+
+            this.TargetType = SurfaceTargetType.Page;
         }
 
         public SurfaceTarget(IVisio.Master master)
@@ -32,6 +41,9 @@ namespace VisioAutomation
             this.Page = null;
             this.Master = master;
             this.Shape = null;
+
+            this.TargetType = SurfaceTargetType.Master;
+
         }
 
         public SurfaceTarget(IVisio.Shape shape)
@@ -44,30 +56,22 @@ namespace VisioAutomation
             this.Page = null;
             this.Master = null;
             this.Shape = shape;
+
+            this.TargetType = SurfaceTargetType.Shape;
         }
 
         public IVisio.Shapes Shapes
         {
             get
             {
-                IVisio.Shapes shapes;
+                var shapes = this.TargetType switch
+                {
+                    SurfaceTargetType.Master => this.Master.Shapes,
+                    SurfaceTargetType.Page => this.Page.Shapes,
+                    SurfaceTargetType.Shape => this.Shape.Shapes,
+                    _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+                };
 
-                if (this.Master != null)
-                {
-                    shapes = this.Master.Shapes;
-                }
-                else if (this.Page != null)
-                {
-                    shapes = this.Page.Shapes;
-                }
-                else if (this.Shape != null)
-                {
-                    shapes = this.Shape.Shapes;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
                 return shapes;
             }
         }
@@ -76,92 +80,61 @@ namespace VisioAutomation
         {
             get
             {
-                if (this.Shape != null)
+                short id16 = this.TargetType switch
                 {
-                    return this.Shape.ID16;
-                }
-                else if (this.Page != null)
-                {
-                    return this.Page.ID16;
-                }
-                else if (this.Master != null)
-                {
-                    return this.Master.ID16;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
+                    SurfaceTargetType.Master => this.Master.ID16,
+                    SurfaceTargetType.Page => this.Page.ID16,
+                    SurfaceTargetType.Shape => this.Shape.ID16,
+                    _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+                };
+
+                return id16;
             }
         }
 
         public IVisio.Shape DrawLine(VisioAutomation.Geometry.Point p1, VisioAutomation.Geometry.Point p2)
         {
-
-            if (this.Master != null)
+            var shape= this.TargetType switch
             {
-                var shape = this.Master.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
-                return shape;
-            }
-            else if (this.Page != null)
-            {
-                var shape = this.Page.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
-                return shape;
-            }
-            else if (this.Shape != null)
-            {
-                var shape = this.Shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
-                return shape;
-            }
+                SurfaceTargetType.Master => this.Master.DrawLine(p1.X, p1.Y, p2.X, p2.Y),
+                SurfaceTargetType.Page => this.Page.DrawLine(p1.X, p1.Y, p2.X, p2.Y),
+                SurfaceTargetType.Shape => this.Shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            throw new System.ArgumentException("Unhandled Drawing Surface");
-
+            return shape;
         }
 
         public IVisio.Shape DrawPolyLine(IList<VisioAutomation.Geometry.Point> points)
         {
             var doubles_array = VisioAutomation.Geometry.Point.ToDoubles(points).ToArray();
 
-            if (this.Master != null)
+            var shape = this.TargetType switch
             {
-                var shape = this.Master.DrawPolyline(doubles_array, 0);
-                return shape;
-            }
-            else if (this.Page != null)
-            {
-                var shape = this.Page.DrawPolyline(doubles_array, 0);
-                return shape;
-            }
-            else if (this.Shape != null)
-            {
-                var shape = this.Shape.DrawPolyline(doubles_array, 0);
-                return shape;
-            }
+                SurfaceTargetType.Master => this.Master.DrawPolyline(doubles_array, 0),
+                SurfaceTargetType.Page => this.Page.DrawPolyline(doubles_array, 0),
+                SurfaceTargetType.Shape => this.Shape.DrawPolyline(doubles_array, 0),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            throw new System.ArgumentException("Unhandled Drawing Surface");
+            return shape;
+
         }
 
         public IVisio.Shape DrawBezier(IList<VisioAutomation.Geometry.Point> points, short degree, short flags)
         {
             var doubles_array = VisioAutomation.Geometry.Point.ToDoubles(points).ToArray();
 
-            if (this.Master != null)
+            var shape = this.TargetType switch
             {
-                var shape = this.Master.DrawBezier(doubles_array, degree, flags);
-                return shape;
-            }
-            else if (this.Page != null)
-            {
-                var shape = this.Page.DrawBezier(doubles_array, degree, flags);
-                return shape;
-            }
-            else if (this.Shape != null)
-            {
-                var shape = this.Shape.DrawBezier(doubles_array, degree, flags);
-                return shape;
-            }
+                SurfaceTargetType.Master => this.Master.DrawBezier(doubles_array, degree, flags),
+                SurfaceTargetType.Page => this.Page.DrawBezier(doubles_array, degree, flags),
+                SurfaceTargetType.Shape => this.Shape.DrawBezier(doubles_array, degree, flags),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            throw new System.ArgumentException("Unhandled Drawing Surface");
+            return shape;
+
 
         }
 
@@ -175,23 +148,15 @@ namespace VisioAutomation
 
         public IVisio.Shape DrawOval(VisioAutomation.Geometry.Rectangle rect)
         {
-            if (this.Master != null)
+            var shape = this.TargetType switch
             {
-                var shape = this.Master.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
-                return shape;
-            }
-            else if (this.Page != null)
-            {
-                var shape = this.Page.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
-                return shape;
-            }
-            else if (this.Shape != null)
-            {
-                var shape = this.Shape.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
-                return shape;
-            }
+                SurfaceTargetType.Master => this.Master.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top),
+                SurfaceTargetType.Page => this.Page.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top),
+                SurfaceTargetType.Shape => this.Shape.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            throw new System.ArgumentException("Unhandled Drawing Surface");
+            return shape;
         }
 
         public IVisio.Shape DrawRectangle(VisioAutomation.Geometry.Rectangle rect)
@@ -202,48 +167,29 @@ namespace VisioAutomation
 
         public IVisio.Shape DrawRectangle(double x0, double y0, double x1, double y1)
         {
-            if (this.Master != null)
-            {
-                var shape = this.Master.DrawRectangle(x0, y0, x1, y1);
-                return shape;
-            }
-            else if (this.Page != null)
-            {
-                var shape = this.Page.DrawRectangle(x0, y0, x1, y1);
-                return shape;
-            }
-            else if (this.Shape != null)
-            {
-                var shape = this.Shape.DrawRectangle(x0, y0, x1, y1);
-                return shape;
-            }
 
-            throw new System.ArgumentException("Unhandled Drawing Surface");
-            
+            var shape = this.TargetType switch
+            {
+                SurfaceTargetType.Master => this.Master.DrawRectangle(x0, y0, x1, y1),
+                SurfaceTargetType.Page => this.Page.DrawRectangle(x0, y0, x1, y1),
+                SurfaceTargetType.Shape => this.Shape.DrawRectangle(x0, y0, x1, y1),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
+
+            return shape;
         }
 
         public IVisio.Shape DrawLine(double x0, double y0, double x1, double y1)
         {
-            if (this.Master != null)
+            var shape = this.TargetType switch
             {
-                var shape = this.Master.DrawLine(x0, y0, x1, y1);
-                return shape;
-            }
-            else if (this.Page != null)
-            {
-                var shape = this.Page.DrawLine(x0, y0, x1, y1);
+                SurfaceTargetType.Master => this.Master.DrawLine(x0, y0, x1, y1),
+                SurfaceTargetType.Page => this.Page.DrawLine(x0, y0, x1, y1),
+                SurfaceTargetType.Shape => this.Shape.DrawLine(x0, y0, x1, y1),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-                return shape;
-            }
-            else if (this.Shape != null)
-            {
-                var shape = this.Shape.DrawLine(x0, y0, x1, y1);
-
-                return shape;
-            }
-
-            throw new System.ArgumentException("Unhandled Drawing Surface");
-            
+            return shape;
         }
 
         public IVisio.Shape DrawNURBS(IList<VisioAutomation.Geometry.Point> controlpoints,
@@ -259,24 +205,16 @@ namespace VisioAutomation
             double[] kts_dbl_a = knots.ToArray();
             double[] weights_dbl_a = weights.ToArray();
 
-            if (this.Master != null)
-            {
-                var shape = this.Master.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
-                return shape;
-            }
-            else if (this.Page != null)
-            {
-                var shape = this.Page.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
-                return shape;
-            }
-            else if (this.Shape != null)
-            {
-                var shape = this.Shape.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
-                return shape;
-            }
 
-            throw new System.ArgumentException("Unhandled Drawing Surface");
+            var shape = this.TargetType switch
+            {
+                SurfaceTargetType.Master => this.Master.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a),
+                SurfaceTargetType.Page => this.Page.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a),
+                SurfaceTargetType.Shape => this.Shape.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
+            return shape;
         }
 
         public short[] DropManyU(
@@ -304,22 +242,13 @@ namespace VisioAutomation
 
             System.Array outids_sa;
 
-            if (this.Master != null)
+            var val = this.TargetType switch
             {
-                this.Master.DropManyU(masters_obj_array, xy_array, out outids_sa);
-            }
-            else if (this.Page != null)
-            {
-                this.Page.DropManyU(masters_obj_array, xy_array, out outids_sa);
-            }
-            else if (this.Shape != null)
-            {
-                this.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa);
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+                SurfaceTargetType.Master => this.Master.DropManyU(masters_obj_array, xy_array, out outids_sa),
+                SurfaceTargetType.Page => this.Page.DropManyU(masters_obj_array, xy_array, out outids_sa),
+                SurfaceTargetType.Shape => this.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
             short[] outids = (short[]) outids_sa;
             return outids;
@@ -334,45 +263,35 @@ namespace VisioAutomation
                 throw new System.ArgumentNullException(nameof(master));
             }
 
-            if (this.Master != null)
+            var shape = this.TargetType switch
             {
-                return this.Master.Drop(master, point.X, point.Y);
-            }
-            else if (this.Page != null)
-            {
-                return this.Page.Drop(master, point.X, point.Y);
-            }
-            else if (this.Shape != null)
-            {
-                return this.Shape.Drop(master, point.X, point.Y);
-            }
+                SurfaceTargetType.Master => this.Master.Drop(master, point.X, point.Y),
+                SurfaceTargetType.Page => this.Page.Drop(master, point.X, point.Y),
+                SurfaceTargetType.Shape => this.Shape.Drop(master, point.X, point.Y),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            throw new System.ArgumentException("Unhandled Drawing Surface");
-            
+            return shape;
+
         }
 
         public IVisio.Shape DrawQuarterArc(VisioAutomation.Geometry.Point p0, VisioAutomation.Geometry.Point p1, IVisio.VisArcSweepFlags flags)
         {
-            if (this.Master != null)
+            var shape = this.TargetType switch
             {
-                return this.Master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
-            }
-            else if (this.Page != null)
-            {
-                return this.Page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
-            }
-            else if (this.Shape != null)
-            {
-                return this.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
-            }
+                SurfaceTargetType.Master => this.Master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags),
+                SurfaceTargetType.Page => this.Page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags),
+                SurfaceTargetType.Shape => this.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            throw new System.ArgumentException("Unhandled Drawing Surface");
-            
+            return shape;
         }
 
         public VisioAutomation.Geometry.Rectangle GetBoundingBox(IVisio.VisBoundingBoxArgs args)
         {
             double bbx0, bby0, bbx1, bby1;
+
             if (this.Master != null)
             {
                 this.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
@@ -404,20 +323,15 @@ namespace VisioAutomation
                 throw new System.ArgumentException(msg);
             }
 
-            if (this.Shape != null)
+            var val = this.TargetType switch
             {
-                return this.Shape.SetFormulas(stream.Array, formulas, flags);
-            }
-            else if (this.Master != null)
-            {
-                return this.Master.SetFormulas(stream.Array, formulas, flags);
-            }
-            else if (this.Page != null)
-            {
-                return this.Page.SetFormulas(stream.Array, formulas, flags);
-            }
+                SurfaceTargetType.Master => this.Master.SetFormulas(stream.Array, formulas, flags),
+                SurfaceTargetType.Page => this.Page.SetFormulas(stream.Array, formulas, flags),
+                SurfaceTargetType.Shape => this.Shape.SetFormulas(stream.Array, formulas, flags),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            throw new System.ArgumentException("Unhandled Target");
+            return val;
         }
 
         public int SetResults(ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
@@ -430,20 +344,15 @@ namespace VisioAutomation
                 throw new System.ArgumentException(msg);
             }
 
-            if (this.Shape != null)
+            var val = this.TargetType switch
             {
-                return this.Shape.SetResults(stream.Array, unitcodes, results, flags);
-            }
-            else if (this.Master != null)
-            {
-                return this.Master.SetResults(stream.Array, unitcodes, results, flags);
-            }
-            else if (this.Page != null)
-            {
-                return this.Page.SetResults(stream.Array, unitcodes, results, flags);
-            }
+                SurfaceTargetType.Master => this.Master.SetResults(stream.Array, unitcodes, results, flags),
+                SurfaceTargetType.Page => this.Page.SetResults(stream.Array, unitcodes, results, flags),
+                SurfaceTargetType.Shape => this.Shape.SetResults(stream.Array, unitcodes, results, flags),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            throw new System.ArgumentException("Unhandled Target");
+            return val;
         }
 
         public TResult[] GetResults<TResult>(ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
