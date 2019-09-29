@@ -13,20 +13,15 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Master> ToEnumerable(this IVisio.Masters masters)
         {
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToEnumerable(() => masters.Count, i => masters[i + 1]);
+            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToEnumerable(() => masters.Count,
+                i => masters[i + 1]);
         }
 
         public static List<IVisio.Master> ToList(this IVisio.Masters masters)
         {
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => masters.Count, i => masters[i + 1]);
+            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => masters.Count,
+                i => masters[i + 1]);
         }
 
-        public static string[] GetNamesU(this IVisio.Masters masters)
-        {
-            System.Array names_sa;
-            masters.GetNamesU(out names_sa);
-            string[] names = (string[])names_sa;
-            return names;
-        }
     }
 }

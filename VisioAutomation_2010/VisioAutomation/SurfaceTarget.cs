@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation
 {
@@ -292,21 +293,19 @@ namespace VisioAutomation
         {
             double bbx0, bby0, bbx1, bby1;
 
-            if (this.Master != null)
+            switch (this.TargetType)
             {
-                this.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-            }
-            else if (this.Page != null)
-            {
-                this.Page.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-            }
-            else if (this.Shape != null)
-            {
-                this.Shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
+                case SurfaceTargetType.Master:
+                    this.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+                    break;
+                case SurfaceTargetType.Page:
+                    this.Page.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+                    break;
+                case SurfaceTargetType.Shape:
+                    this.Shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+                    break;
+                default:
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
             var r = new VisioAutomation.Geometry.Rectangle(bbx0, bby0, bbx1, bby1);
@@ -368,21 +367,19 @@ namespace VisioAutomation
 
             System.Array results_sa = null;
 
-            if (this.Master != null)
+            switch (this.TargetType)
             {
-                this.Master.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
-            }
-            else if (this.Page != null)
-            {
-                this.Page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
-            }
-            else if (this.Shape != null)
-            {
-                this.Shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Target");
+                case SurfaceTargetType.Master:
+                    this.Master.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+                    break;
+                case SurfaceTargetType.Page:
+                    this.Page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+                    break;
+                case SurfaceTargetType.Shape:
+                    this.Shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+                    break;
+                default:
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
             var results = system_array_to_typed_array<TResult>(results_sa);
@@ -398,21 +395,19 @@ namespace VisioAutomation
 
             System.Array formulas_sa = null;
 
-            if (this.Master != null)
+            switch (this.TargetType)
             {
-                this.Master.GetFormulasU(stream.Array, out formulas_sa);
-            }
-            else if (this.Page != null)
-            {
-                this.Page.GetFormulasU(stream.Array, out formulas_sa);
-            }
-            else if (this.Shape != null)
-            {
-                this.Shape.GetFormulasU(stream.Array, out formulas_sa);
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
+                case SurfaceTargetType.Master:
+                    this.Master.GetFormulasU(stream.Array, out formulas_sa);
+                    break;
+                case SurfaceTargetType.Page:
+                    this.Page.GetFormulasU(stream.Array, out formulas_sa);
+                    break;
+                case SurfaceTargetType.Shape:
+                    this.Shape.GetFormulasU(stream.Array, out formulas_sa);
+                    break;
+                default:
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
             }
 
             var formulas = system_array_to_typed_array<string>(formulas_sa);
@@ -445,6 +440,7 @@ namespace VisioAutomation
         private static IVisio.VisGetSetArgs _type_to_vis_get_set_args(System.Type type)
         {
             IVisio.VisGetSetArgs flags;
+
             if (type == typeof(int))
             {
                 flags = IVisio.VisGetSetArgs.visGetTruncatedInts;

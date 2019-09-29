@@ -65,5 +65,12 @@ namespace VisioAutomation.Extensions
         {
             return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => shapes.Count, i => shapes[i + 1]);
         }
+
+        public static System.Array GetFormulasU(this IVisio.Shape shape, ref System.Array SID_SRCStream)
+        {
+            System.Array formulas_sa = null;
+            shape.GetFormulasU(SID_SRCStream, out formulas_sa);
+            return formulas_sa;
+        }
     }
 }
