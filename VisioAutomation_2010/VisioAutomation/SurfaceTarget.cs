@@ -5,12 +5,6 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation
 {
-    public enum SurfaceTargetType
-    {
-        Page,
-        Master,
-        Shape
-    }
     public struct SurfaceTarget
     {
         public readonly IVisio.Page Page;
@@ -291,25 +285,15 @@ namespace VisioAutomation
 
         public VisioAutomation.Geometry.Rectangle GetBoundingBox(IVisio.VisBoundingBoxArgs args)
         {
-            double bbx0, bby0, bbx1, bby1;
-
-            switch (this.TargetType)
+            var bb = this.TargetType switch
             {
-                case SurfaceTargetType.Master:
-                    this.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-                    break;
-                case SurfaceTargetType.Page:
-                    this.Page.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-                    break;
-                case SurfaceTargetType.Shape:
-                    this.Shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-                    break;
-                default:
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+                SurfaceTargetType.Master => this.Master.GetBoundingBox(args),
+                SurfaceTargetType.Page => this.Page.GetBoundingBox(args),
+                SurfaceTargetType.Shape => this.Shape.GetBoundingBox(args),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            var r = new VisioAutomation.Geometry.Rectangle(bbx0, bby0, bbx1, bby1);
-            return r;
+            return bb;
         }
 
         public int SetFormulas(ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)

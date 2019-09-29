@@ -5,6 +5,14 @@ namespace VisioAutomation.Extensions
 {
     public static class ShapeMethods
     {
+        public static Geometry.Rectangle GetBoundingBox(this IVisio.Shape shape, IVisio.VisBoundingBoxArgs args)
+        {
+            double bbx0, bby0, bbx1, bby1;
+            shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+            var r = new VisioAutomation.Geometry.Rectangle(bbx0, bby0, bbx1, bby1);
+            return r;
+        }
+
         public static IVisio.Shape DrawLine(
             this IVisio.Shape shape,
             Geometry.Point p1, Geometry.Point p2)
@@ -23,15 +31,6 @@ namespace VisioAutomation.Extensions
             var surface = new SurfaceTarget(shape);
             var s = surface.DrawQuarterArc(p0, p1, flags);
             return s;
-        }
-
-        public static Geometry.Rectangle GetBoundingBox(
-            this IVisio.Shape shape, 
-            IVisio.VisBoundingBoxArgs args)
-        {
-            var surface = new SurfaceTarget(shape);
-            var r = surface.GetBoundingBox(args);
-            return r;
         }
 
         public static Geometry.Point XYFromPage(
