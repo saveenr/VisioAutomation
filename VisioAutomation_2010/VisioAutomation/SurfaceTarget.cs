@@ -14,44 +14,25 @@ namespace VisioAutomation
 
         public SurfaceTarget(IVisio.Page page)
         {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException(nameof(page));
-            }
-
-            this.Page = page;
+            this.Page = page ?? throw new System.ArgumentNullException(nameof(page));
             this.Master = null;
             this.Shape = null;
-
             this.TargetType = SurfaceTargetType.Page;
         }
 
         public SurfaceTarget(IVisio.Master master)
         {
-            if (master == null)
-            {
-                throw new System.ArgumentNullException(nameof(master));
-            }
-
             this.Page = null;
-            this.Master = master;
+            this.Master = master ?? throw new System.ArgumentNullException(nameof(master));
             this.Shape = null;
-
             this.TargetType = SurfaceTargetType.Master;
-
         }
 
         public SurfaceTarget(IVisio.Shape shape)
         {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException(nameof(shape));
-            }
-
             this.Page = null;
             this.Master = null;
-            this.Shape = shape;
-
+            this.Shape = shape ?? throw new System.ArgumentNullException(nameof(shape));
             this.TargetType = SurfaceTargetType.Shape;
         }
 
