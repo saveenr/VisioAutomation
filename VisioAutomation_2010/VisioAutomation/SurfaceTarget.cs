@@ -363,27 +363,15 @@ namespace VisioAutomation
 
             _enforce_valid_result_type(typeof(TResult));
 
-            var flags = _type_to_vis_get_set_args(typeof(TResult));
-
-            System.Array results_sa = null;
-
-            switch (this.TargetType)
+            var val = this.TargetType switch
             {
-                case SurfaceTargetType.Master:
-                    this.Master.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
-                    break;
-                case SurfaceTargetType.Page:
-                    this.Page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
-                    break;
-                case SurfaceTargetType.Shape:
-                    this.Shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
-                    break;
-                default:
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+                SurfaceTargetType.Master => this.Master.GetResults<TResult>(stream, unitcodes),
+                SurfaceTargetType.Page => this.Page.GetResults<TResult>(stream, unitcodes),
+                SurfaceTargetType.Shape => this.Shape.GetResults<TResult>(stream, unitcodes),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            var results = system_array_to_typed_array<TResult>(results_sa);
-            return results;
+            return val;
         }
 
         public string[] GetFormulasU(ShapeSheet.Streams.StreamArray stream)
@@ -393,28 +381,18 @@ namespace VisioAutomation
                 return new string[0];
             }
 
-            System.Array formulas_sa = null;
-
-            switch (this.TargetType)
+            var val = this.TargetType switch
             {
-                case SurfaceTargetType.Master:
-                    this.Master.GetFormulasU(stream.Array, out formulas_sa);
-                    break;
-                case SurfaceTargetType.Page:
-                    this.Page.GetFormulasU(stream.Array, out formulas_sa);
-                    break;
-                case SurfaceTargetType.Shape:
-                    this.Shape.GetFormulasU(stream.Array, out formulas_sa);
-                    break;
-                default:
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+                SurfaceTargetType.Master => this.Master.GetFormulasU(stream),
+                SurfaceTargetType.Page => this.Page.GetFormulasU(stream),
+                SurfaceTargetType.Shape => this.Shape.GetFormulasU(stream),
+                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
+            };
 
-            var formulas = system_array_to_typed_array<string>(formulas_sa);
-            return formulas;
+            return val;
         }
 
-        private static T[] system_array_to_typed_array<T>(System.Array results_sa)
+        internal static T[] system_array_to_typed_array<T>(System.Array results_sa)
         {
             var results = new T[results_sa.Length];
             results_sa.CopyTo(results, 0);
@@ -437,7 +415,7 @@ namespace VisioAutomation
                     || result_type == typeof(string));
         }
 
-        private static IVisio.VisGetSetArgs _type_to_vis_get_set_args(System.Type type)
+        internal static IVisio.VisGetSetArgs _type_to_vis_get_set_args(System.Type type)
         {
             IVisio.VisGetSetArgs flags;
 
