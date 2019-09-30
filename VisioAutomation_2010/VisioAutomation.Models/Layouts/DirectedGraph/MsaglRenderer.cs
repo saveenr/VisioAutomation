@@ -233,7 +233,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             master_cache.Resolve(documents);
 
             // If no size was provided for the shape, then set the size based on the master
-            var layoutshapes_without_size_info = dglayout.Nodes.Where(s => s.Size == null);
+            var layoutshapes_without_size_info = dglayout.Nodes.Where(s => s.Size  == null);
             foreach (var layoutshape in layoutshapes_without_size_info)
             {
                 var master = master_cache.Get(layoutshape.MasterName, layoutshape.StencilName);

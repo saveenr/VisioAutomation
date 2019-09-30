@@ -12,18 +12,13 @@ namespace VisioAutomation.Application
 
         public UndoScope(IVisio.Application app, string name)
         {
-            if (app == null)
-            {
-                throw new System.ArgumentNullException(nameof(app));
-            }
-
             if (string.IsNullOrWhiteSpace(name))
             {
                 string msg = string.Format("{0} cannot be null or empty", nameof(UndoScope));
                 throw new System.ArgumentException(msg,nameof(name));
             }
 
-            this._application = app;
+            this._application = app ?? throw new System.ArgumentNullException(nameof(app));
             this.Name = name;
             this.ScopeID = this._application.BeginUndoScope(name);
             this.Commit = true;
