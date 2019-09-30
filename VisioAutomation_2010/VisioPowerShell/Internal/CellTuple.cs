@@ -1,4 +1,3 @@
-using System;
 using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Internal

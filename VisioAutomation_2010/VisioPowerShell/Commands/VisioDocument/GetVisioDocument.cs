@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using MG = Microsoft.Msagl;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
