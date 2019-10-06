@@ -72,9 +72,9 @@ namespace VisioAutomation
         {
             var shape= this.TargetType switch
             {
-                SurfaceTargetType.Master => this.Master.DrawLine(p1.X, p1.Y, p2.X, p2.Y),
-                SurfaceTargetType.Page => this.Page.DrawLine(p1.X, p1.Y, p2.X, p2.Y),
-                SurfaceTargetType.Shape => this.Shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y),
+                SurfaceTargetType.Master => this.Master.DrawLine(p1, p2),
+                SurfaceTargetType.Page => this.Page.DrawLine(p1, p2),
+                SurfaceTargetType.Shape => this.Shape.DrawLine(p1, p2),
                 _ => throw new System.ArgumentException("Unhandled Drawing Surface")
             };
 
@@ -149,19 +149,6 @@ namespace VisioAutomation
                 SurfaceTargetType.Master => this.Master.DrawRectangle(x0, y0, x1, y1),
                 SurfaceTargetType.Page => this.Page.DrawRectangle(x0, y0, x1, y1),
                 SurfaceTargetType.Shape => this.Shape.DrawRectangle(x0, y0, x1, y1),
-                _ => throw new System.ArgumentException("Unhandled Drawing Surface")
-            };
-
-            return shape;
-        }
-
-        public IVisio.Shape DrawLine(double x0, double y0, double x1, double y1)
-        {
-            var shape = this.TargetType switch
-            {
-                SurfaceTargetType.Master => this.Master.DrawLine(x0, y0, x1, y1),
-                SurfaceTargetType.Page => this.Page.DrawLine(x0, y0, x1, y1),
-                SurfaceTargetType.Shape => this.Shape.DrawLine(x0, y0, x1, y1),
                 _ => throw new System.ArgumentException("Unhandled Drawing Surface")
             };
 
@@ -255,9 +242,9 @@ namespace VisioAutomation
         {
             var shape = this.TargetType switch
             {
-                SurfaceTargetType.Master => this.Master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags),
-                SurfaceTargetType.Page => this.Page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags),
-                SurfaceTargetType.Shape => this.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags),
+                SurfaceTargetType.Master => this.Master.DrawQuarterArc(p0, p1, flags),
+                SurfaceTargetType.Page => this.Page.DrawQuarterArc(p0, p1, flags),
+                SurfaceTargetType.Shape => this.Shape.DrawQuarterArc(p0, p1, flags),
                 _ => throw new System.ArgumentException("Unhandled Drawing Surface")
             };
 

@@ -42,5 +42,21 @@ namespace VisioAutomation.Extensions
             var results = SurfaceTarget.system_array_to_typed_array<TResult>(results_sa);
             return results;
         }
+
+        public static IVisio.Shape DrawLine(this IVisio.Master master, Geometry.Point p1, Geometry.Point p2)
+        {
+            var shape = master.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
+            return shape;
+        }
+
+        public static IVisio.Shape DrawQuarterArc(
+            this IVisio.Master master,
+            Geometry.Point p0,
+            Geometry.Point p1,
+            IVisio.VisArcSweepFlags flags)
+        {
+            var s = master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+            return s;
+        }
     }
 }

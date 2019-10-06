@@ -17,8 +17,7 @@ namespace VisioAutomation.Extensions
             this IVisio.Shape shape,
             Geometry.Point p1, Geometry.Point p2)
         {
-            var surface = new SurfaceTarget(shape);
-            var s = surface.DrawLine(p1, p2);
+            var s = shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
             return s;
         }
 
@@ -28,8 +27,7 @@ namespace VisioAutomation.Extensions
             Geometry.Point p1, 
             IVisio.VisArcSweepFlags flags)
         {
-            var surface = new SurfaceTarget(shape);
-            var s = surface.DrawQuarterArc(p0, p1, flags);
+            var s = shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             return s;
         }
 

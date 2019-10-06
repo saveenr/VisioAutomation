@@ -20,8 +20,7 @@ namespace VisioAutomation.Extensions
 
         public static IVisio.Shape DrawLine(this IVisio.Page page, Geometry.Point p1, Geometry.Point p2)
         {
-            var surface = new SurfaceTarget(page);
-            var shape = surface.DrawLine(p1,p2);
+            var shape = page.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
             return shape;
         }
 
@@ -125,5 +124,14 @@ namespace VisioAutomation.Extensions
             return results;
         }
 
+        public static IVisio.Shape DrawQuarterArc(
+            this IVisio.Page page,
+            Geometry.Point p0,
+            Geometry.Point p1,
+            IVisio.VisArcSweepFlags flags)
+        {
+            var s = page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+            return s;
+        }
     }
 }
