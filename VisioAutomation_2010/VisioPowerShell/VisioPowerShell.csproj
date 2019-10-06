@@ -125,7 +125,6 @@
     <Compile Include="Commands\VisioDocument\TestVisioDocument.cs" />
     <Compile Include="Commands\VisioShape\TestVisioShape.cs" />
     <Compile Include="Commands\VisioShape\RemoveVisioShape.cs" />
-    <Compile Include="Commands\VisioLayer\GetVisioLayer.cs" />
     <Compile Include="Commands\VisioShape\SelectVisioShape.cs" />
     <Compile Include="Commands\VisioPage\ExportVisioPage.cs" />
     <Compile Include="Commands\VisioControl\GetVisioControl.cs" />
