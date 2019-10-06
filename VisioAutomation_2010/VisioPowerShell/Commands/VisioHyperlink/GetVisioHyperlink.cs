@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands.VisioHyperlink
     public class GetVisioHyperlink : VisioCmdlet
     {
         // CONTEXT:SHAPES
-        // [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
