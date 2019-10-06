@@ -10,19 +10,9 @@ namespace VisioAutomation.DocumentAnalysis
 
         public ConnectorEdge(IVisio.Shape connectingshape, IVisio.Shape fromshape, IVisio.Shape toshape) : this()
         {
-            if (fromshape == null)
-            {
-                throw new System.ArgumentNullException(nameof(fromshape));
-            }
-
-            if (toshape == null)
-            {
-                throw new System.ArgumentNullException(nameof(toshape));
-            }
-
             this.Connector = connectingshape;
-            this.From = fromshape;
-            this.To = toshape;
+            this.From = fromshape ?? throw new System.ArgumentNullException(nameof(fromshape));
+            this.To = toshape ?? throw new System.ArgumentNullException(nameof(toshape));
         }
 
         public override string ToString()

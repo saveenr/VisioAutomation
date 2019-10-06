@@ -41,12 +41,7 @@ namespace VisioScripting
         
         public Client(IVisio.Application app, ClientContext client_context)
         {
-            if (client_context == null)
-            {
-                throw new System.ArgumentNullException(nameof(client_context));
-            }
-
-            this._client_context = client_context;
+            this._client_context = client_context ?? throw new System.ArgumentNullException(nameof(client_context));
             this.Application = new Commands.ApplicationCommands(this, app);
             this.Arrange = new Commands.ArrangeCommands(this);
             this.Model = new Commands.ModelCommands(this);

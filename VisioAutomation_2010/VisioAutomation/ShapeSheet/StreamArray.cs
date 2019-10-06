@@ -12,12 +12,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         internal StreamArray(short[] array, StreamType type, int count)
         {
-            if (array == null)
-            {
-                throw new System.ArgumentNullException(nameof(array));
-            }
-
-            this.Array = array;
+            this.Array = array ?? throw new System.ArgumentNullException(nameof(array));
             this.Type = type;
             this.ChunkSize = type == StreamType.SidSrc ? 4 : 3;
             this.Count = count;
