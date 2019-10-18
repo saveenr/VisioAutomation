@@ -6,11 +6,7 @@ namespace VisioAutomation
 {
     public class ShapeIDPairs : List<ShapeIDPair>
     {
-        public ShapeIDPairs()
-        {
-        }
-
-        public ShapeIDPairs(int capacity) : base (capacity)
+        private ShapeIDPairs(int capacity) : base (capacity)
         {
         }
 
