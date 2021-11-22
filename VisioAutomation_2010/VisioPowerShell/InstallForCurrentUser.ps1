@@ -2,6 +2,9 @@
 # -------
 # Manually installs the Visio PowerShell module into the user's PowerShell folder
 #
+# This is useful when you want to try out the module without going through all the work of 
+# creating a module an then installing it with Import-Modile
+#
 # NOTES
 # -----
 # - If another PowerShell session has the Visio PS module loaded, then the VisioPS binaries cannot 
@@ -44,7 +47,6 @@ function Mirror-Folder($frompath, $topath)
 	# /ns - don't show sizes
 	robocopy $frompath $topath /mir /njh /njs /ns /nc /np 
 }
-
 
 function Test-Locked($filePath)
 {
