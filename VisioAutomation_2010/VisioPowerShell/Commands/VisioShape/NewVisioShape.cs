@@ -36,12 +36,12 @@ namespace VisioPowerShell.Commands.VisioShape
         public VisioAutomation.Geometry.Point To { get; set; }
 
 
-        [SMA.Parameter(ParameterSetName = "polyline", Mandatory = true)]
-        [SMA.Parameter(ParameterSetName = "bezier", Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "polyline", Mandatory = true, Position = 1)]
+        [SMA.Parameter(ParameterSetName = "bezier", Mandatory = true, Position = 1)]
         public VisioAutomation.Geometry.Point[] Points { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "rectangle", Mandatory = true)]
-        [SMA.Parameter(ParameterSetName = "oval", Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "rectangle", Mandatory = true, Position = 1)]
+        [SMA.Parameter(ParameterSetName = "oval", Mandatory = true, Position = 1)]
         public VisioAutomation.Geometry.Rectangle BoundingBox{ get; set; }
 
         [SMA.Parameter(Mandatory = false)]
