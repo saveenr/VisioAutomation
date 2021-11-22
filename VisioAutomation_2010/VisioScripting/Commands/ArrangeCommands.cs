@@ -62,23 +62,15 @@ namespace VisioScripting.Commands
         public void AlignHorizontal(TargetSelection targetselection, Models.AlignmentHorizontal align)
         {
             targetselection = targetselection.ResolveToSelection(this._client);
-
-            IVisio.VisHorizontalAlignTypes halign;
             var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
 
-            switch (align)
+            var halign = align switch
             {
-                case VisioScripting.Models.AlignmentHorizontal.Left:
-                    halign = IVisio.VisHorizontalAlignTypes.visHorzAlignLeft;
-                    break;
-                case VisioScripting.Models.AlignmentHorizontal.Center:
-                    halign = IVisio.VisHorizontalAlignTypes.visHorzAlignCenter;
-                    break;
-                case VisioScripting.Models.AlignmentHorizontal.Right:
-                    halign = IVisio.VisHorizontalAlignTypes.visHorzAlignRight;
-                    break;
-                default: throw new System.ArgumentOutOfRangeException();
-            }
+                VisioScripting.Models.AlignmentHorizontal.Left => IVisio.VisHorizontalAlignTypes.visHorzAlignLeft,
+                VisioScripting.Models.AlignmentHorizontal.Center => IVisio.VisHorizontalAlignTypes.visHorzAlignCenter,
+                VisioScripting.Models.AlignmentHorizontal.Right => IVisio.VisHorizontalAlignTypes.visHorzAlignRight,
+                _ => throw new System.ArgumentOutOfRangeException(),
+            };
 
             const bool glue_to_guide = false;
 
@@ -91,24 +83,14 @@ namespace VisioScripting.Commands
         public void AlignVertical(TargetSelection targetselection, Models.AlignmentVertical align)
         {
             targetselection = targetselection.ResolveToSelection(this._client);
-
-            // Set the align enums
             var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
-            IVisio.VisVerticalAlignTypes valign;
-            switch (align)
+            var valign = align switch
             {
-                case VisioScripting.Models.AlignmentVertical.Top:
-                    valign = IVisio.VisVerticalAlignTypes.visVertAlignTop;
-                    break;
-                case VisioScripting.Models.AlignmentVertical.Center:
-                    valign = IVisio.VisVerticalAlignTypes.visVertAlignMiddle;
-                    break;
-                case VisioScripting.Models.AlignmentVertical.Bottom:
-                    valign = IVisio.VisVerticalAlignTypes.visVertAlignBottom;
-                    break;
-                default: throw new System.ArgumentOutOfRangeException();
-            }
-
+                VisioScripting.Models.AlignmentVertical.Top => IVisio.VisVerticalAlignTypes.visVertAlignTop,
+                VisioScripting.Models.AlignmentVertical.Center => IVisio.VisVerticalAlignTypes.visVertAlignMiddle,
+                VisioScripting.Models.AlignmentVertical.Bottom => IVisio.VisVerticalAlignTypes.visVertAlignBottom,
+                _ => throw new System.ArgumentOutOfRangeException(),
+            };
             const bool glue_to_guide = false;
 
             // Perform the alignment
@@ -127,20 +109,12 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            IVisio.VisUICmds cmd;
-
-            switch (axis)
+            var cmd = axis switch
             {
-                case VisioScripting.Models.Axis.XAxis:
-                    cmd = IVisio.VisUICmds.visCmdDistributeHSpace;
-                    break;
-                case VisioScripting.Models.Axis.YAxis:
-                    cmd = IVisio.VisUICmds.visCmdDistributeVSpace;
-                    break;
-                default:
-                    throw new System.ArgumentOutOfRangeException();
-            }
-
+                VisioScripting.Models.Axis.XAxis => IVisio.VisUICmds.visCmdDistributeHSpace,
+                VisioScripting.Models.Axis.YAxis => IVisio.VisUICmds.visCmdDistributeVSpace,
+                _ => throw new System.ArgumentOutOfRangeException(),
+            };
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeOnAxis)))
             {
                 targetselection.Selection.Application.DoCmd((short) cmd);
@@ -156,22 +130,13 @@ namespace VisioScripting.Commands
                 return;
             }
 
-            IVisio.VisUICmds cmd;
-
-            switch (halign)
+            var cmd = halign switch
             {
-                case VisioScripting.Models.AlignmentHorizontal.Left:
-                    cmd = IVisio.VisUICmds.visCmdDistributeLeft;
-                    break;
-                case VisioScripting.Models.AlignmentHorizontal.Center:
-                    cmd = IVisio.VisUICmds.visCmdDistributeCenter;
-                    break;
-                case VisioScripting.Models.AlignmentHorizontal.Right:
-                    cmd = IVisio.VisUICmds.visCmdDistributeRight;
-                    break;
-                default: throw new System.ArgumentOutOfRangeException();
-            }
-
+                VisioScripting.Models.AlignmentHorizontal.Left => IVisio.VisUICmds.visCmdDistributeLeft,
+                VisioScripting.Models.AlignmentHorizontal.Center => IVisio.VisUICmds.visCmdDistributeCenter,
+                VisioScripting.Models.AlignmentHorizontal.Right => IVisio.VisUICmds.visCmdDistributeRight,
+                _ => throw new System.ArgumentOutOfRangeException(),
+            };
             var app = targetselection.Selection.Application;
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeHorizontal)))
             {
@@ -187,23 +152,14 @@ namespace VisioScripting.Commands
             {
                 return;
             }
-
-
-            IVisio.VisUICmds cmd;
-            switch (valign)
+            
+            var cmd = valign switch
             {
-                case VisioScripting.Models.AlignmentVertical.Top:
-                    cmd = IVisio.VisUICmds.visCmdDistributeTop;
-                    break;
-                case VisioScripting.Models.AlignmentVertical.Center:
-                    cmd = IVisio.VisUICmds.visCmdDistributeMiddle;
-                    break;
-                case VisioScripting.Models.AlignmentVertical.Bottom:
-                    cmd = IVisio.VisUICmds.visCmdDistributeBottom;
-                    break;
-                default: throw new System.ArgumentOutOfRangeException();
-            }
-
+                VisioScripting.Models.AlignmentVertical.Top => IVisio.VisUICmds.visCmdDistributeTop,
+                VisioScripting.Models.AlignmentVertical.Center => IVisio.VisUICmds.visCmdDistributeMiddle,
+                VisioScripting.Models.AlignmentVertical.Bottom => IVisio.VisUICmds.visCmdDistributeBottom,
+                _ => throw new System.ArgumentOutOfRangeException(),
+            };
 
             var app = targetselection.Selection.Application;
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DistributeVertical)))

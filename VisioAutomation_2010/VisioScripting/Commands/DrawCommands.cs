@@ -21,10 +21,9 @@ namespace VisioScripting.Commands
         public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, VisioAutomation.Geometry.Rectangle r)
         {
             targetpage = targetpage.ResolveToPage(this._client);
-            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawRectangle)))
             {
-                var shape = surface.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
+                var shape = targetpage.Page.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
                 return shape;
             }
         }
@@ -40,10 +39,9 @@ namespace VisioScripting.Commands
         public IVisio.Shape DrawLine(VisioScripting.TargetPage targetpage, VisioAutomation.Geometry.Point p0, VisioAutomation.Geometry.Point p1)
         {
             targetpage = targetpage.ResolveToPage(this._client);
-            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawLine)))
             {
-                var shape = surface.DrawLine(p0,p1);
+                var shape = targetpage.Page.DrawLine(p0,p1);
                 return shape;
             }
         }
@@ -55,7 +53,7 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
-                var shape = surface.DrawOval(rect);
+                var shape = targetpage.Page.DrawOval(rect);
                 return shape;
             }
         }
@@ -69,11 +67,10 @@ namespace VisioScripting.Commands
         public IVisio.Shape DrawBezier(VisioScripting.TargetPage targetpage, IEnumerable<VisioAutomation.Geometry.Point> points)
         {
             targetpage = targetpage.ResolveToPage(this._client);
-            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
-                var shape = surface.DrawBezier(points.ToList());
+                var shape = targetpage.Page.DrawBezier(points.ToList());
                 return shape;
             }
         }
@@ -81,10 +78,9 @@ namespace VisioScripting.Commands
         public IVisio.Shape DrawPolyLine(VisioScripting.TargetPage targetpage, IList<VisioAutomation.Geometry.Point> points)
         {
             targetpage = targetpage.ResolveToPage(this._client);
-            var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPolyLine)))
             {
-                var shape = surface.DrawPolyLine(points);
+                var shape = targetpage.Page.DrawPolyLine(points);
                 return shape;
             }
         }

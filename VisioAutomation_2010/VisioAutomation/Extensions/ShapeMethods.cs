@@ -5,12 +5,19 @@ namespace VisioAutomation.Extensions
 {
     public static class ShapeMethods
     {
+        public static Geometry.Rectangle GetBoundingBox(this IVisio.Shape shape, IVisio.VisBoundingBoxArgs args)
+        {
+            double bbx0, bby0, bbx1, bby1;
+            shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+            var r = new VisioAutomation.Geometry.Rectangle(bbx0, bby0, bbx1, bby1);
+            return r;
+        }
+
         public static IVisio.Shape DrawLine(
             this IVisio.Shape shape,
             Geometry.Point p1, Geometry.Point p2)
         {
-            var surface = new SurfaceTarget(shape);
-            var s = surface.DrawLine(p1, p2);
+            var s = shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
             return s;
         }
 
@@ -20,18 +27,8 @@ namespace VisioAutomation.Extensions
             Geometry.Point p1, 
             IVisio.VisArcSweepFlags flags)
         {
-            var surface = new SurfaceTarget(shape);
-            var s = surface.DrawQuarterArc(p0, p1, flags);
+            var s = shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             return s;
-        }
-
-        public static Geometry.Rectangle GetBoundingBox(
-            this IVisio.Shape shape, 
-            IVisio.VisBoundingBoxArgs args)
-        {
-            var surface = new SurfaceTarget(shape);
-            var r = surface.GetBoundingBox(args);
-            return r;
         }
 
         public static Geometry.Point XYFromPage(
@@ -65,5 +62,24 @@ namespace VisioAutomation.Extensions
         {
             return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => shapes.Count, i => shapes[i + 1]);
         }
+
+        public static string[] GetFormulasU(this IVisio.Shape shape, ShapeSheet.Streams.StreamArray stream)
+        {
+            System.Array formulas_sa = null;
+            shape.GetFormulasU(stream.Array, out formulas_sa);
+            var formulas = SurfaceTarget.system_array_to_typed_array<string>(formulas_sa);
+            return formulas;
+        }
+
+        public static TResult[] GetResults<TResult>(this IVisio.Shape shape, ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
+        {
+            var flags = SurfaceTarget._type_to_vis_get_set_args(typeof(TResult));
+            System.Array results_sa = null;
+            shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+            var results = SurfaceTarget.system_array_to_typed_array<TResult>(results_sa);
+            return results;
+        }
+
+
     }
 }

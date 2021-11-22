@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <LangVersion>default</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,6 +59,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -135,6 +136,7 @@
     <Compile Include="Shapes\HyperlinkCells.cs" />
     <Compile Include="Shapes\HyperlinkHelper.cs" />
     <Compile Include="Shapes\ShapeLayoutCells.cs" />
+    <Compile Include="SurfaceTargetType.cs" />
     <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Text\TextXFormCells.cs" />
     <Compile Include="Shapes\ConnectionPointHelper.cs" />

@@ -12,11 +12,7 @@ namespace VisioAutomation.Collections
 
         public ArraySegmentEnumerator(T[] array)
         {
-            if (array == null)
-            {
-                throw new System.ArgumentNullException(nameof(array));
-            }
-            this._array = array;
+            this._array = array ?? throw new System.ArgumentNullException(nameof(array));
             this._pos = 0;
             this._count = 0;
         }

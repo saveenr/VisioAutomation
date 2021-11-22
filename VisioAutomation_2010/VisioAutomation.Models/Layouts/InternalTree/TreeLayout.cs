@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -84,22 +85,14 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
         public double GetNodeSize(Node<T> node)
         {
-            switch (this.Options.Direction)
+            return this.Options.Direction switch
             {
-                case LayoutDirection.Up:
-                    return node.Size.Width;
-
-                case LayoutDirection.Left:
-                    return node.Size.Height;
-
-                case LayoutDirection.Right:
-                    return node.Size.Height;
-
-                case LayoutDirection.Down:
-                    return node.Size.Width;
-                default:
-                    throw new System.ArgumentOutOfRangeException();
-            }
+                LayoutDirection.Up => node.Size.Width,
+                LayoutDirection.Left => node.Size.Height,
+                LayoutDirection.Right => node.Size.Height,
+                LayoutDirection.Down => node.Size.Width,
+                _ => throw new System.ArgumentOutOfRangeException(),
+            };
         }
 
         private void _apportion(Node<T> node, int level)
@@ -297,38 +290,30 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             double nodesize_tmp = 0;
             bool flag = false;
 
-            switch (this.Options.Direction)
+            if (this.Options.Direction == LayoutDirection.Up || this.Options.Direction == LayoutDirection.Down)
             {
-                case LayoutDirection.Up:
-                case LayoutDirection.Down:
-                    {
-                        maxsize_tmp = this._max_level_height[level];
-                        nodesize_tmp = node.Size.Height;
-                        break;
-                    }
-                case LayoutDirection.Left:
-                case LayoutDirection.Right:
-                    {
-                        maxsize_tmp = this._max_level_width[level];
-                        flag = true;
-                        nodesize_tmp = node.Size.Width;
-                        break;
-                    }
+                maxsize_tmp = this._max_level_height[level];
+                flag = false;
+                nodesize_tmp = node.Size.Height;
             }
-            switch (this.Options.Alignment)
+            else if (this.Options.Direction == LayoutDirection.Left || this.Options.Direction == LayoutDirection.Right)
             {
-                case AlignmentVertical.Top:
-                    node.Position = temp_point;
-                    break;
-
-                case AlignmentVertical.Center:
-                    node.Position = temp_point.Add(0, (maxsize_tmp - nodesize_tmp)/2.0);
-                    break;
-
-                case AlignmentVertical.Bottom:
-                    node.Position = temp_point.Add(0, maxsize_tmp - nodesize_tmp);
-                    break;
+                maxsize_tmp = this._max_level_width[level];
+                flag = true;
+                nodesize_tmp = node.Size.Width;
             }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            node.Position = this.Options.Alignment switch
+            {
+                AlignmentVertical.Top => temp_point,
+                AlignmentVertical.Center => temp_point.Add(0, (maxsize_tmp - nodesize_tmp) / 2.0),
+                AlignmentVertical.Bottom => temp_point.Add(0, maxsize_tmp - nodesize_tmp),
+                _ => throw new ArgumentOutOfRangeException(),
+            };
 
             if (flag)
             {
@@ -336,19 +321,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                 node.Position = new VisioAutomation.Geometry.Point(node.Position.Y, node.Position.X);
             }
 
-            switch (this.Options.Direction)
-            {
-                case LayoutDirection.Down:
-                    {
-                        node.Position = new VisioAutomation.Geometry.Point(node.Position.X, -node.Position.Y - nodesize_tmp);
-                        break;
-                    }
-                case LayoutDirection.Left:
-                    {
-                        node.Position = new VisioAutomation.Geometry.Point(-node.Position.X - nodesize_tmp, node.Position.Y);
-                        break;
-                    }
-            }
+            UpdateNodePosition(node, nodesize_tmp);
 
             if (node.ChildCount != 0)
             {
@@ -362,6 +335,32 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             if (node.RightSibling != null)
             {
                 this.second_walk(node.RightSibling, level, p);
+            }
+        }
+
+        private void UpdateNodePosition(Node<T> node, double nodesize_tmp)
+        {
+            var dir = this.Options.Direction;
+
+            switch (this.Options.Direction)
+            {
+                case LayoutDirection.Down:
+                    {
+                        node.Position = new VisioAutomation.Geometry.Point(node.Position.X, -node.Position.Y - nodesize_tmp);
+                        break;
+                    }
+                case LayoutDirection.Left:
+                    {
+                        node.Position = new VisioAutomation.Geometry.Point(-node.Position.X - nodesize_tmp, node.Position.Y);
+                        break;
+                    }
+
+                case LayoutDirection.Up:
+                    break;
+                case LayoutDirection.Right:
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -430,58 +429,28 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             }
         }
 
-        private static double _get_side(VisioAutomation.Geometry.Rectangle r, LayoutDirection direction)
+        private static double _get_side(VisioAutomation.Geometry.Rectangle r, LayoutDirection direction) 
         {
-            switch (direction)
+            return direction switch
             {
-                case (LayoutDirection.Up):
-                    {
-                        return r.Top;
-                    }
-                case (LayoutDirection.Down):
-                    {
-                        return r.Bottom;
-                    }
-                case (LayoutDirection.Left):
-                    {
-                        return r.Left;
-                    }
-                case (LayoutDirection.Right):
-                    {
-                        return r.Right;
-                    }
-                default:
-                    {
-                        throw new System.ArgumentOutOfRangeException();
-                    }
-            }
+                LayoutDirection.Up => r.Top,
+                LayoutDirection.Left => r.Left,
+                LayoutDirection.Right => r.Right,
+                LayoutDirection.Down => r.Bottom,
+                _ => throw new System.ArgumentOutOfRangeException()
+            };
         }
 
         public static LayoutDirection GetOpposite(LayoutDirection direction)
         {
-            switch (direction)
+            return direction switch
             {
-                case (LayoutDirection.Up):
-                    {
-                        return LayoutDirection.Down;
-                    }
-                case (LayoutDirection.Down):
-                    {
-                        return LayoutDirection.Up;
-                    }
-                case (LayoutDirection.Left):
-                    {
-                        return LayoutDirection.Right;
-                    }
-                case (LayoutDirection.Right):
-                    {
-                        return LayoutDirection.Left;
-                    }
-                default:
-                    {
-                        throw new System.ArgumentOutOfRangeException();
-                    }
-            }
+                LayoutDirection.Up => LayoutDirection.Down,
+                LayoutDirection.Down => LayoutDirection.Up,
+                LayoutDirection.Left => LayoutDirection.Right,
+                LayoutDirection.Right => LayoutDirection.Left,
+                _ => throw new System.ArgumentOutOfRangeException()
+            };
         }
 
         public Geometry.LineSegment GetConnectionLine(ParentChildConnection<Node<T>> connection)

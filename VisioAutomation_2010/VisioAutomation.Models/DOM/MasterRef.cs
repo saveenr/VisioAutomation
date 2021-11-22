@@ -10,12 +10,7 @@ namespace VisioAutomation.Models.Dom
 
         public MasterRef(IVisio.Master master)
         {
-            if (master == null)
-            {
-                throw new System.ArgumentNullException(nameof(master));
-            }
-
-            this.VisioMaster = master;
+            this.VisioMaster = master ?? throw new System.ArgumentNullException(nameof(master));
             this.MasterName = null;
             this.StencilName = null;
         }
