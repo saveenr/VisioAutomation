@@ -1,6 +1,6 @@
 
 
-namespace VisioPowerShell.Commands.VisioScriptingClient;
+namespace VisioPowerShell.Commands.VisioClient;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioClient)]
 public class GetVisioClient : VisioCmdlet
