@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VASS=VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text

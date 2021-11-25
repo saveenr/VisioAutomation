@@ -1,6 +1,4 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-
-namespace VisioAutomation.Documents
+﻿namespace VisioAutomation.Documents
 {
     public static class DocumentHelper
     {

@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using VASS=VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
-
 namespace VisioAutomation.Pages
 {
     public static class PageHelper

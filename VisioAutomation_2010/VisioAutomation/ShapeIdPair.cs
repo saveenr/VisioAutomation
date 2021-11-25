@@ -1,5 +1,3 @@
-using IVisio = Microsoft.Office.Interop.Visio;
-
 namespace VisioAutomation
 {
     public struct ShapeIDPair

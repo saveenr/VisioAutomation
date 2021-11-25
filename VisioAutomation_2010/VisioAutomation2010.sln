@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomationTestConsoleA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Tests", "VATests\VisioAutomation.Tests.csproj", "{1D9027F8-4974-4251-8ED9-25BF0517E4B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioScripting_Tests", "VisioScripting_Tests\VisioScripting_Tests.csproj", "{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation_Tests.Scripting", "VisioAutomation_Tests.Scripting\VisioAutomation_Tests.Scripting.csproj", "{1B40E151-F3B6-4F89-9225-8DE18FEA8E32}"
 EndProject
 Global
@@ -169,22 +167,6 @@ Global
 		{1D9027F8-4974-4251-8ED9-25BF0517E4B9}.Release|Win32.Build.0 = Release|Any CPU
 		{1D9027F8-4974-4251-8ED9-25BF0517E4B9}.Release|x86.ActiveCfg = Release|Any CPU
 		{1D9027F8-4974-4251-8ED9-25BF0517E4B9}.Release|x86.Build.0 = Release|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|Win32.Build.0 = Debug|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Debug|x86.Build.0 = Debug|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Win32.ActiveCfg = Release|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|Win32.Build.0 = Release|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|x86.ActiveCfg = Release|Any CPU
-		{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}.Release|x86.Build.0 = Release|Any CPU
 		{1B40E151-F3B6-4F89-9225-8DE18FEA8E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B40E151-F3B6-4F89-9225-8DE18FEA8E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B40E151-F3B6-4F89-9225-8DE18FEA8E32}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

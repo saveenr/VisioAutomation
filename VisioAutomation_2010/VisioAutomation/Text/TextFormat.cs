@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using VASS=VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
-using System.Linq;
-
 namespace VisioAutomation.Text
 {
     public class TextFormat

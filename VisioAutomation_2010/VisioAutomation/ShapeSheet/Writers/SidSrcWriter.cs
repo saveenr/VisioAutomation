@@ -1,5 +1,4 @@
-﻿ using System;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using System;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
-
-namespace VisioAutomation.Extensions
+﻿namespace VisioAutomation.Extensions
 {
     public static class WindowMethods
     {

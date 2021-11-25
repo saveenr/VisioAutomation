@@ -1,5 +1,3 @@
-using IVisio = Microsoft.Office.Interop.Visio;
-
 namespace VisioAutomation.Application
 {
     public static class ApplicationHelper

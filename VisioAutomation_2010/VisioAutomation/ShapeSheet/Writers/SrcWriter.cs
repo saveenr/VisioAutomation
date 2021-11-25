@@ -1,6 +1,4 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-
-namespace VisioAutomation.ShapeSheet.Writers
+﻿namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SrcWriter : WriterBase
     {

@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes
 {

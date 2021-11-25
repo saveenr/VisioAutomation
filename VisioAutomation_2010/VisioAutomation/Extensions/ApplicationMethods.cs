@@ -1,5 +1,4 @@
-﻿using IVisio=Microsoft.Office.Interop.Visio;
-
+﻿
 namespace VisioAutomation.Extensions
 {
     public static class ApplicationMethods

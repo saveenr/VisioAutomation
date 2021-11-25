@@ -1,6 +1,3 @@
-using IVisio = Microsoft.Office.Interop.Visio;
-using VASS=VisioAutomation.ShapeSheet;
-
 namespace VisioAutomation.Shapes
 {
     public static class ConnectionPointHelper
