@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿
 using System.Linq;
 using VisioAutomation.Models.Layouts.InternalTree;
 

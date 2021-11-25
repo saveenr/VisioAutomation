@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using VA=VisioAutomation;
+
 using VATEXT = VisioAutomation.Text;
-using IVisio = Microsoft.Office.Interop.Visio;
+
 
 namespace VisioAutomation.Models.Dom
 {

@@ -1,7 +1,5 @@
 ﻿using VisioAutomation.Extensions;
-using VA = VisioAutomation;
-using VASS=VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
+
 
 namespace VisioAutomation.Models.Dom
 {

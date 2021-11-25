@@ -1,5 +1,3 @@
-using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
 
 namespace VisioAutomation.Models.Layouts.Tree
 {

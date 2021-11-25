@@ -1,5 +1,4 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-
+﻿
 namespace VisioAutomation.Models.Dom
 {
     class RenderPerformanceScope : System.IDisposable

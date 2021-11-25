@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Internal.Extensions;
 using VisioAutomation.Models.Utilities;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
-using IVisio = Microsoft.Office.Interop.Visio;
+
 
 namespace VisioAutomation.Models.Dom
 {

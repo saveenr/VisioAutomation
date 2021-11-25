@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿
 using GenTreeOps;
 using VisioAutomation.Exceptions;
 using VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
+
 
 namespace VisioAutomation.Models.Text
 {
