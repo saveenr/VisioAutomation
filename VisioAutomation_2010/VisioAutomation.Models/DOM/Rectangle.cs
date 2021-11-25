@@ -1,5 +1,4 @@
 ﻿namespace VisioAutomation.Models.Dom;
-
 public class Rectangle : BaseShape
 {
     public VisioAutomation.Geometry.Point P0 { get; }

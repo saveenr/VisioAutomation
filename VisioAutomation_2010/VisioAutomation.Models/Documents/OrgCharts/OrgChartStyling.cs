@@ -1,5 +1,4 @@
 ﻿namespace VisioAutomation.Models.Documents.OrgCharts;
-
 public class OrgChartStyling
 {
     public string Visio2010Template = "orgch_u.vst";

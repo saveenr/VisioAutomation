@@ -1,5 +1,4 @@
-﻿
-namespace VisioAutomation.Models.Dom;
+﻿namespace VisioAutomation.Models.Dom;
 
 class RenderPerformanceScope : System.IDisposable
 {

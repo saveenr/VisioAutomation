@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioAutomation.Models.Dom;
+﻿namespace VisioAutomation.Models.Dom;
 
 public class Connector : Shape
 {

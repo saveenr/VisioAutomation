@@ -1,6 +1,3 @@
-using VisioAutomation.ShapeSheet.Writers;
-
-
 namespace VisioAutomation.Models.Documents.Forms;
 
 public class TextBlock
@@ -26,7 +23,7 @@ public class TextBlock
         this.CharacterFormatCells = new VisioAutomation.Text.CharacterFormatCells();
     }
 
-    public void ApplyFormus(SidSrcWriter writer)
+    public void ApplyFormus(VASS.Writers.SidSrcWriter writer)
     {
         short title_shapeid = this.VisioShape.ID16;
         writer.SetValues(title_shapeid, this.TextBlockCells);

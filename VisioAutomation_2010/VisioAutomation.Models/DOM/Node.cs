@@ -1,5 +1,4 @@
 namespace VisioAutomation.Models.Dom;
-
 public class Node
 {
     public Node Parent { get; internal set; }

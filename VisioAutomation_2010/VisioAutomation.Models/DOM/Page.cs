@@ -1,6 +1,5 @@
 ﻿using VisioAutomation.Extensions;
 
-
 namespace VisioAutomation.Models.Dom;
 
 public class Page : Node

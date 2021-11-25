@@ -1,5 +1,3 @@
-using VisioAutomation.ShapeSheet.Writers;
-
 namespace VisioAutomation.Models.Dom;
 
 public class ShapeCells
@@ -121,7 +119,7 @@ public class ShapeCells
     public ShapeSheet.CellValue ShapeLayoutSplittable { get; set; }
 
 
-    public void Apply(SidSrcWriter writer, short id)
+    public void Apply(VASS.Writers.SidSrcWriter writer, short id)
     {
         writer.SetValue(id, ShapeSheet.SrcConstants.XFormWidth, this.XFormWidth);
         writer.SetValue(id, ShapeSheet.SrcConstants.XFormHeight, this.XFormHeight);

@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 
-
 namespace VisioAutomation.Models.Dom;
-
 public class PageList : Node, IEnumerable<Page>
 {
     private readonly NodeList<Page> _pagenodes;

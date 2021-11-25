@@ -1,12 +1,8 @@
 ﻿using System.Collections;
 
-using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VisioAutomation.Internal.Extensions;
 using VisioAutomation.Models.Utilities;
-using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet.Writers;
-
 
 namespace VisioAutomation.Models.Dom;
 
@@ -91,8 +87,8 @@ public class ShapeList : Node, IEnumerable<BaseShape>
             foreach (var kv in shape.CustomProperties)
             {
                 string cp_name = kv.Key;
-                CustomPropertyCells cp_cells = kv.Value;
-                CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
+                VA.Shapes.CustomPropertyCells cp_cells = kv.Value;
+                VA.Shapes.CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
             }
         }
     }
@@ -115,7 +111,7 @@ public class ShapeList : Node, IEnumerable<BaseShape>
     {
         this._update_cells_with_drop_sizes(context);
 
-        var writer = new SidSrcWriter();
+        var writer = new VASS.Writers.SidSrcWriter();
         var shapes_with_cells = this._shapes.Where(s => s.Cells != null);
         foreach (var shape in shapes_with_cells)
         {
@@ -214,7 +210,7 @@ public class ShapeList : Node, IEnumerable<BaseShape>
                 if (shape.VisioShapeID < 1)
                 {
                     string msg = "A Shape drawn is missing its VisioShapeID";
-                    throw new InternalAssertionException(msg);
+                    throw new VA.Exceptions.InternalAssertionException(msg);
                 }
             }
         }
@@ -248,7 +244,7 @@ public class ShapeList : Node, IEnumerable<BaseShape>
         {
             if (shape.Master.VisioMaster == null)
             {
-                throw new InternalAssertionException("Missing a master for a shape");
+                throw new VA.Exceptions.InternalAssertionException("Missing a master for a shape");
             }
         }
     }
@@ -337,7 +333,7 @@ public class ShapeList : Node, IEnumerable<BaseShape>
             else
             {
                 string msg = string.Format("Unhandled DOM node type: \"{0}\"", shape.GetType());
-                throw new InternalAssertionException(msg);
+                throw new VA.Exceptions.InternalAssertionException(msg);
             }
         }
     }
@@ -371,7 +367,7 @@ public class ShapeList : Node, IEnumerable<BaseShape>
             var from_shape = context.GetShape(dyncon_shape.From.VisioShapeID);
             var to_shape = context.GetShape(dyncon_shape.To.VisioShapeID);
 
-            ConnectorHelper.ConnectShapes(from_shape, to_shape, vis_connector);
+            VA.Shapes.ConnectorHelper.ConnectShapes(from_shape, to_shape, vis_connector);
             dyncon_shape.VisioShape = vis_connector;
             dyncon_shape.VisioShapeID = connector_shapeids[i];
         }

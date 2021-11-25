@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace VisioAutomation.Models.Dom;
+﻿namespace VisioAutomation.Models.Dom;
 
 public class PolyLine : BaseShape
 {

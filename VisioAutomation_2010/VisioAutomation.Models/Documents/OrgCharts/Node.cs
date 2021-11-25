@@ -1,5 +1,3 @@
-
-
 namespace VisioAutomation.Models.Documents.OrgCharts;
 
 public class Node

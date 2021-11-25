@@ -1,6 +1,4 @@
-﻿
-using System.Linq;
-using VisioAutomation.Models.Layouts.InternalTree;
+﻿using VisioAutomation.Models.Layouts.InternalTree;
 
 namespace VisioAutomation.Models.Documents.OrgCharts;
 

@@ -1,5 +1,4 @@
 namespace VisioAutomation.Models.Dom;
-
 public class Hyperlink
 {
     public string Name { get; set; }

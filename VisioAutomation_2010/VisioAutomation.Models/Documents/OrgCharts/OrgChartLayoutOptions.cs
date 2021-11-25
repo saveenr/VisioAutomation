@@ -1,5 +1,4 @@
 namespace VisioAutomation.Models.Documents.OrgCharts;
-
 public class OrgChartLayoutOptions
 {
     public bool UseDynamicConnectors;

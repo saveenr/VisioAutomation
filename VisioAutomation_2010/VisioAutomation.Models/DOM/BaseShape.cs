@@ -1,6 +1,4 @@
-
 using VATEXT = VisioAutomation.Text;
-
 
 namespace VisioAutomation.Models.Dom;
 

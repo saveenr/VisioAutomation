@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioAutomation.Models.Dom;
+﻿namespace VisioAutomation.Models.Dom;
 
 internal class RenderContext
 {

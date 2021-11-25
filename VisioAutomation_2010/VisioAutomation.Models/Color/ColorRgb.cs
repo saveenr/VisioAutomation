@@ -1,6 +1,4 @@
-﻿using System.Globalization;
- 
-namespace VisioAutomation.Models.Color;
+﻿namespace VisioAutomation.Models.Color;
 
 public struct ColorRgb
 {
@@ -158,7 +156,7 @@ public struct ColorRgb
         }
 
         int current_color;
-        bool result = int.TryParse(webcolor, NumberStyles.HexNumber, null, out current_color);
+        bool result = int.TryParse(webcolor, System.Globalization.NumberStyles.HexNumber, null, out current_color);
 
         if (!result)
         {
