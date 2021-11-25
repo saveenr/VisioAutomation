@@ -1,11 +1,5 @@
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VA=VisioAutomation;
-using VisioAutomation.Extensions;
-using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
 
-using VisioAutomation.Extensions;
 
 namespace VisioAutomation_Tests.Core.Extensions
 {

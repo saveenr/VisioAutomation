@@ -1,8 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VASS=VisioAutomation.ShapeSheet;
-using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
-
 namespace VisioAutomation_Tests.Core.Shapes
 {
     [TestClass]

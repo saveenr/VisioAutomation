@@ -1,8 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
+
 
 namespace VisioAutomation_Tests.Core.Extensions
 {

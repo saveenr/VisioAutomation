@@ -1,7 +1,3 @@
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VA = VisioAutomation;
-
 namespace VisioAutomation_Tests.Scripting
 {
     [TestClass]

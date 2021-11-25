@@ -1,5 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VASS = VisioAutomation.ShapeSheet;
+
 
 namespace VisioAutomation_Tests.Core.ShapeSheet
 {
