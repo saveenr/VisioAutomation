@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioPowerShell.Commands.VisioShape;
+﻿namespace VisioPowerShell.Commands.VisioShape;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Remove, Nouns.VisioShape)]
 public class RemoveVisioShape : VisioCmdlet

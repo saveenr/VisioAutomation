@@ -1,9 +1,4 @@
-﻿using System;
-
-using VisioPowerShell.Models;
-
-
-namespace VisioPowerShell.Commands.VisioShapeCells;
+﻿namespace VisioPowerShell.Commands.VisioShapeCells;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShapeCells)]
 public class GetVisioShapeCells : VisioCmdlet
@@ -18,7 +13,7 @@ public class GetVisioShapeCells : VisioCmdlet
     public SMA.SwitchParameter Results{ get; set; }
 
     [SMA.Parameter(Mandatory = false)]
-    public Models.ResultType ResultType = ResultType.String;
+    public Models.ResultType ResultType = VisioPowerShell.Models.ResultType.String;
 
     // CONTEXT:SHAPES 
     [SMA.Parameter(Mandatory = false)]
@@ -71,7 +66,7 @@ public class GetVisioShapeCells : VisioCmdlet
         if (invalid_names.Count > 0)
         {
             string msg = "Invalid cell names: " + string.Join(",", invalid_names);
-            throw new ArgumentException(msg);
+            throw new System.ArgumentException(msg);
         }
 
         var query = new VisioAutomation.ShapeSheet.Query.CellQuery();

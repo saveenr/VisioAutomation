@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioShapeCells;
 
 [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioShapeCells)]

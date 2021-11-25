@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioPowerShell.Commands.VisioShape;
+﻿namespace VisioPowerShell.Commands.VisioShape;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Copy, Nouns.VisioShape)]
 public class CopyVisioShape : VisioCmdlet

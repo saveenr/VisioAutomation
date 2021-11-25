@@ -1,6 +1,3 @@
-using System.Globalization;
-
-
 namespace VisioPowerShell.Commands.VisioPage;
 
 [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioPage)]
@@ -56,11 +53,11 @@ public class NewVisioPage : VisioCmdlet
             this.Cells = this.Cells ?? new Models.PageCells();
             if (this.Width > 0)
             {
-                this.Cells.PageWidth = this.Width.ToString(CultureInfo.InvariantCulture);
+                this.Cells.PageWidth = this.Width.ToString(System.Globalization.CultureInfo.InvariantCulture);
             }
             if (this.Height > 0)
             {
-                this.Cells.PageHeight = this.Height.ToString(CultureInfo.InvariantCulture);
+                this.Cells.PageHeight = this.Height.ToString(System.Globalization.CultureInfo.InvariantCulture);
             }
         }
 

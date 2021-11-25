@@ -1,7 +1,4 @@
-﻿using VisioScripting;
-
-
-namespace VisioPowerShell.Commands.VisioDocument;
+﻿namespace VisioPowerShell.Commands.VisioDocument;
 
 [SMA.Cmdlet(SMA.VerbsData.Save, Nouns.VisioDocument)]
 public class SaveVisioDocument : VisioCmdlet
@@ -16,7 +13,7 @@ public class SaveVisioDocument : VisioCmdlet
 
     protected override void ProcessRecord()
     {
-        var targetdoc = new TargetDocument(this.Document);
+        var targetdoc = new VisioScripting.TargetDocument(this.Document);
 
         if (this.Filename!=null)
         {

@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioShape;
 
 [SMA.Cmdlet(SMA.VerbsCommunications.Connect, Nouns.VisioShape)]

@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioPage;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Copy, Nouns.VisioPage)]

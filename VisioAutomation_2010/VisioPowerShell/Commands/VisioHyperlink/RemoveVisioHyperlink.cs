@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioHyperlink;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Remove, Nouns.VisioHyperlink)]

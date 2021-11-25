@@ -1,4 +1,3 @@
-
 namespace VisioPowerShell.Commands.VisioShape;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]

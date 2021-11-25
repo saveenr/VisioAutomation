@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioWindow;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Format, Nouns.VisioWindow)]

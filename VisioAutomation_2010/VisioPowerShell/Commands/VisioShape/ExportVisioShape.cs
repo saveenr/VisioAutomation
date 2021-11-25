@@ -1,5 +1,4 @@
-﻿
-namespace VisioPowerShell.Commands.VisioShape;
+﻿namespace VisioPowerShell.Commands.VisioShape;
 
 [SMA.Cmdlet(SMA.VerbsData.Export, Nouns.VisioShape)]
 public class ExportVisioShape : VisioCmdlet

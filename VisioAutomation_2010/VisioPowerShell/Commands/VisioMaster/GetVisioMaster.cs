@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioMaster;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioMaster)]

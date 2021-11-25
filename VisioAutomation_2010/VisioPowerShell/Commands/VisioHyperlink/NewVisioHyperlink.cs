@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioHyperlink;
 
 [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioHyperlink)]

@@ -1,5 +1,3 @@
-using System;
-
 namespace VisioPowerShell.Commands.VisioModel;
 
 [SMA.Cmdlet(SMA.VerbsData.Import, Nouns.VisioModel)]
@@ -35,7 +33,7 @@ public class ImportVisioModel : VisioCmdlet
         }
         else
         {
-            var exc = new ArgumentOutOfRangeException("Unknown root element for XML");
+            var exc = new System.ArgumentOutOfRangeException("Unknown root element for XML");
             throw exc;
         }
     }

@@ -1,4 +1,3 @@
-
 namespace VisioPowerShell.Commands.VisioPage;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPage)]

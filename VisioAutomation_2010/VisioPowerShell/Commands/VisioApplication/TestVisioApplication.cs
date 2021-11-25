@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioPowerShell.Commands.VisioApplication;
+﻿namespace VisioPowerShell.Commands.VisioApplication;
 
 [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, Nouns.VisioApplication)]
 public class TestVisioApplication: VisioCmdlet

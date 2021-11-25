@@ -1,4 +1,3 @@
-
 namespace VisioPowerShell.Commands.VisioCustomProperty;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioCustomProperty)]

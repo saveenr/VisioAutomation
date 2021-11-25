@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioPowerShell.Commands.VisioShape;
+﻿namespace VisioPowerShell.Commands.VisioShape;
 
 [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, Nouns.VisioShape)]
 public class TestVisioShape: VisioCmdlet

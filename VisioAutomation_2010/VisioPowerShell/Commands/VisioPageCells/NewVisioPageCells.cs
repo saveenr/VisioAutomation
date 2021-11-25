@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioPageCells;
 
 [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioPageCells)]

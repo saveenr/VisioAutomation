@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioDocument;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Select, Nouns.VisioDocument)]

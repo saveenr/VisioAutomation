@@ -1,4 +1,4 @@
-﻿namespace VisioPowerShell.Commands.VisioRectangle;
+﻿namespace VisioPowerShell.Commands.VisioPoint;
 
 [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioPoint)]
 public class NewVisioPoint : VisioCmdlet

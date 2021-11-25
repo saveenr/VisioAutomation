@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioPowerShell.Commands.VisioPageCells;
+﻿namespace VisioPowerShell.Commands.VisioPageCells;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioPageCells)]
 public class SetVisioPageCells : VisioCmdlet

@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands;
 
 public class VisioCmdlet : SMA.Cmdlet

@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioUserDefinedCell;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioUserDefinedCell)]

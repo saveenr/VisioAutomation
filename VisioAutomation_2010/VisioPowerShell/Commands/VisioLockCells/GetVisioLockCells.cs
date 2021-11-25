@@ -1,6 +1,3 @@
-using VisioAutomation.ShapeSheet;
-
-
 namespace VisioPowerShell.Commands.VisioLockCells;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioLockCells)]
@@ -13,7 +10,7 @@ public class GetVisioLockCells : VisioCmdlet
     protected override void ProcessRecord()
     {
         var targetshapes = new VisioScripting.TargetShapes(this.Shape);
-        var dic = this.Client.Lock.GetLockCells(targetshapes, CellValueType.Formula);
+        var dic = this.Client.Lock.GetLockCells(targetshapes, VASS.CellValueType.Formula);
         this.WriteObject(dic, true);
     }
 }

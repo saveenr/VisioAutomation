@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioPowerShell.Commands.VisioShape;
+﻿namespace VisioPowerShell.Commands.VisioShape;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Select, Nouns.VisioShape)]
 public class SelectVisioShape : VisioCmdlet

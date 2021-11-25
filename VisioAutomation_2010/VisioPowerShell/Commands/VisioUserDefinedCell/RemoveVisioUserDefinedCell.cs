@@ -1,6 +1,4 @@
-﻿
-
-namespace VisioPowerShell.Commands.VisioUserDefinedCell;
+﻿namespace VisioPowerShell.Commands.VisioUserDefinedCell;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Remove, Nouns.VisioUserDefinedCell)]
 public class RemoveVisioUserDefinedCell : VisioCmdlet

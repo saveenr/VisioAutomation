@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Commands.VisioText;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioText)]
