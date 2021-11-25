@@ -85,10 +85,6 @@
       <Project>{29cb2b65-8e8d-4b2c-935c-453b2b371143}</Project>
       <Name>VisioAutomation.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VisioAutomation.Tests\VisioAutomation_Tests.csproj">
-      <Project>{f04e9277-48d2-4822-9ae6-e7e6adb262c9}</Project>
-      <Name>VisioAutomation_Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
       <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>
       <Name>VisioAutomation</Name>

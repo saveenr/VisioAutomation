@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+
+    <RootNamespace>TestVisioAutomation</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="datafiles\directed_graph_1.xml" />
+    <None Remove="datafiles\directed_graph_2.xml" />
+    <None Remove="datafiles\directed_graph_3.xml" />
+    <None Remove="datafiles\directed_graph_4.xml" />
+    <None Remove="datafiles\orgchart_1.xml" />
+    <None Remove="datafiles\VSDX_Log_Visio_2013.txt" />
+    <None Remove="datafiles\XMLErrorLog_Visio_2010_1.txt" />
+    <None Remove="datafiles\XMLErrorLog_Visio_2013_1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="datafiles\directed_graph_1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="datafiles\directed_graph_2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="datafiles\directed_graph_3.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="datafiles\directed_graph_4.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="datafiles\orgchart_1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="datafiles\VSDX_Log_Visio_2013.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="datafiles\XMLErrorLog_Visio_2010_1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="datafiles\XMLErrorLog_Visio_2013_1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
+    <PackageReference Include="System.Management.Automation" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj" />
+    <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj" />
+    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj" />
+    <ProjectReference Include="..\VisioScripting\VisioScripting.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="datafiles\template_router.vdx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="datafiles\vdx_with_warnings_1.vdx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

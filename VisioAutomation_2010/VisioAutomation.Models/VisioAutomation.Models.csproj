@@ -1,188 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{29CB2B65-8E8D-4B2C-935C-453B2B371143}</ProjectGuid>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VisioAutomation.Models</RootNamespace>
-    <AssemblyName>VisioAutomation.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GenTreeOps, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GenTreeOps.1.0.0\lib\net40\GenTreeOps.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Msagl, Version=3.0.0.0, Culture=neutral, PublicKeyToken=640c57aa40e7ae7d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Automatic.Graph.Layout.2.0.0\lib\net40\Microsoft.Msagl.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <HintPath>..\packages\Visio2010.PrimaryInteropAssembly.1.0.0.4\lib\net20\Microsoft.Office.Interop.Visio.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.XML" />
+    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Color\ColorHsl.cs" />
-    <Compile Include="Color\ColorRgb.cs" />
-    <Compile Include="ConnectorType.cs" />
-    <Compile Include="Data\DataTableModel.cs" />
-    <Compile Include="Data\XmlModel.cs" />
-    <Compile Include="Documents\OrgCharts\OrgChartStyling.cs" />
-    <Compile Include="Dom\RenderPerformanceScope.cs" />
-    <Compile Include="Dom\RenderPerformanceSettings.cs" />
-    <Compile Include="Geometry\ArcSegment.cs" />
-    <Compile Include="Geometry\BezierCurve.cs" />
-    <Compile Include="Geometry\BezierSegment.cs" />
-    <Compile Include="Geometry\BoundingBoxBuilder.cs" />
-    <Compile Include="Geometry\LineSegment.cs" />
-    <Compile Include="LayoutStyles\CircularLayoutStyle.cs" />
-    <Compile Include="LayoutStyles\CompactTreeDirection.cs" />
-    <Compile Include="LayoutStyles\CompactTreeLayout.cs" />
-    <Compile Include="LayoutStyles\ConnectorAppearance.cs" />
-    <Compile Include="LayoutStyles\ConnectorStyle.cs" />
-    <Compile Include="LayoutStyles\FlowchartLayoutStyle.cs" />
-    <Compile Include="LayoutStyles\HierarchyLayoutStyle.cs" />
-    <Compile Include="LayoutStyles\HorizontalAlignment.cs" />
-    <Compile Include="LayoutStyles\LayoutDirection.cs" />
-    <Compile Include="LayoutStyles\LayoutStyleBase.cs" />
-    <Compile Include="LayoutStyles\RadialLayout.cs" />
-    <Compile Include="LayoutStyles\VerticalAlignment.cs" />
-    <Compile Include="Layouts\Box\AlignmentHorizontal.cs" />
-    <Compile Include="Layouts\Box\AlignmentVertical.cs" />
-    <Compile Include="Layouts\Box\Box.cs" />
-    <Compile Include="Layouts\Box\BoxLayout.cs" />
-    <Compile Include="Layouts\Box\Container.cs" />
-    <Compile Include="Layouts\Box\Direction.cs" />
-    <Compile Include="Layouts\Box\Node.cs" />
-    <Compile Include="Layouts\Container\Container.cs" />
-    <Compile Include="Layouts\Container\ContainerItem.cs" />
-    <Compile Include="Layouts\Container\ContainerLayout.cs" />
-    <Compile Include="Layouts\Container\Formatting.cs" />
-    <Compile Include="Layouts\Container\LayoutOptions.cs" />
-    <Compile Include="Layouts\DirectedGraph\Edge.cs" />
-    <Compile Include="Layouts\DirectedGraph\DirectedGraphDocument.cs" />
-    <Compile Include="Layouts\DirectedGraph\DirectedGraphLayout.cs" />
-    <Compile Include="Layouts\DirectedGraph\IDList.cs" />
-    <Compile Include="Layouts\DirectedGraph\MsaglDirection.cs" />
-    <Compile Include="Layouts\DirectedGraph\MsaglOptions.cs" />
-    <Compile Include="Layouts\DirectedGraph\MsaglRenderer.cs" />
-    <Compile Include="Layouts\DirectedGraph\MsaglUtil.cs" />
-    <Compile Include="Layouts\DirectedGraph\Element.cs" />
-    <Compile Include="Layouts\DirectedGraph\ElementUserData.cs" />
-    <Compile Include="Layouts\DirectedGraph\Node.cs" />
-    <Compile Include="Layouts\DirectedGraph\DirectedGraphStyling.cs" />
-    <Compile Include="Layouts\DirectedGraph\VisioLayoutOptions.cs" />
-    <Compile Include="Layouts\DirectedGraph\VisioLayoutRenderer.cs" />
-    <Compile Include="Dom\BaseShape.cs" />
-    <Compile Include="Dom\BezierCurve.cs" />
-    <Compile Include="Dom\Connector.cs" />
-    <Compile Include="Dom\Document.cs" />
-    <Compile Include="Dom\Hyperlink.cs" />
-    <Compile Include="Dom\Line.cs" />
-    <Compile Include="Dom\MasterRef.cs" />
-    <Compile Include="Dom\Node.cs" />
-    <Compile Include="Dom\NodeList.cs" />
-    <Compile Include="Dom\Oval.cs" />
-    <Compile Include="Dom\Page.cs" />
-    <Compile Include="Dom\PageCells.cs" />
-    <Compile Include="Dom\PageList.cs" />
-    <Compile Include="Dom\PolyLine.cs" />
-    <Compile Include="Dom\Rectangle.cs" />
-    <Compile Include="Dom\RenderContext.cs" />
-    <Compile Include="Dom\Shape.cs" />
-    <Compile Include="Dom\ShapeCells.cs" />
-    <Compile Include="Dom\ShapeList.cs" />
-    <Compile Include="Documents\Forms\FormDocument.cs" />
-    <Compile Include="Documents\Forms\FormPage.cs" />
-    <Compile Include="Documents\Forms\FormRenderingContext.cs" />
-    <Compile Include="Documents\Forms\InteractiveRenderer.cs" />
-    <Compile Include="Documents\Forms\TextBlock.cs" />
-    <Compile Include="Layouts\Grid\Column.cs" />
-    <Compile Include="Layouts\Grid\ColumnDirection.cs" />
-    <Compile Include="Layouts\Grid\GridLayout.cs" />
-    <Compile Include="Layouts\Grid\Node.cs" />
-    <Compile Include="Layouts\Grid\Row.cs" />
-    <Compile Include="Layouts\Grid\RowDirection.cs" />
-    <Compile Include="Layouts\InternalTree\DictionaryExtensions.cs" />
-    <Compile Include="Layouts\InternalTree\LayoutDirection.cs" />
-    <Compile Include="Layouts\InternalTree\Node.cs" />
-    <Compile Include="Layouts\InternalTree\TreeLayout.cs" />
-    <Compile Include="Layouts\InternalTree\TreeLayoutOptions.cs" />
-    <Compile Include="Documents\Forms\PageMargin.cs" />
-    <Compile Include="Text\CharStyle.cs" />
-    <Compile Include="Layouts\InternalTree\AlignmentVertical.cs" />
-    <Compile Include="Utilities\MasterCache.cs" />
-    <Compile Include="Text\CharacterFormatting.cs" />
-    <Compile Include="Text\CustomField.cs" />
-    <Compile Include="Text\Field.cs" />
-    <Compile Include="Text\FieldBase.cs" />
-    <Compile Include="Text\FieldConstants.cs" />
-    <Compile Include="Text\Literal.cs" />
-    <Compile Include="Text\MarkupRegions.cs" />
-    <Compile Include="Text\Node.cs" />
-    <Compile Include="Text\NodeList.cs" />
-    <Compile Include="Text\NodeType.cs" />
-    <Compile Include="Text\ParagraphFormatting.cs" />
-    <Compile Include="Text\Element.cs" />
-    <Compile Include="Text\Region.cs" />
-    <Compile Include="Documents\OrgCharts\OrgChartLayoutDirection.cs" />
-    <Compile Include="Documents\OrgCharts\OrgChartLayoutOptions.cs" />
-    <Compile Include="Documents\OrgCharts\Node.cs" />
-    <Compile Include="Documents\OrgCharts\NodeList.cs" />
-    <Compile Include="Documents\OrgCharts\OrgChartDocument.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Layouts\Tree\ConnectorType.cs" />
-    <Compile Include="Layouts\Tree\Drawing.cs" />
-    <Compile Include="Layouts\Tree\LayoutDirection.cs" />
-    <Compile Include="Layouts\Tree\LayoutOptions.cs" />
-    <Compile Include="Layouts\Tree\Node.cs" />
-    <Compile Include="Layouts\Tree\NodeList.cs" />
-    <Compile Include="Layouts\Tree\TreeLayout.cs" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.256001">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
-      <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>
-      <Name>VisioAutomation</Name>
-    </ProjectReference>
+    <PackageReference Include="GenTreeOps" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Automatic.Graph.Layout" Version="2.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

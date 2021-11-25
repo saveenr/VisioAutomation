@@ -1,0 +1,40 @@
+Open VSDX Processing Log
+
+Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Saveen_ASGARD9 2015-01-10 20_12_22\Out\datafiles\template_router.vdx
+
+Sat Jan 10 20:12:32 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\COMPS_U.VSSX
+
+Sat Jan 10 20:12:32 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\PERIPH_U.VSSX
+
+Sat Jan 10 20:12:32 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Saveen_ASGARD9 2015-01-10 20_12_22\Out\datafiles\vdx_with_warnings_1.vdx
+
+Sat Jan 10 20:12:30 2015 Begin Session
+
+
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='1' Name='Shape.2'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='2' Name='Shape.3'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+

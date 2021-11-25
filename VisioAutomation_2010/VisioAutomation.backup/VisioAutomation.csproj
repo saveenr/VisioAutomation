@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{920C7842-10E0-48C3-A439-C785FC2B234E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VisioAutomation</RootNamespace>
+    <AssemblyName>VisioAutomation</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccProvider>
+    </SccProvider>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\packages\Visio2010.PrimaryInteropAssembly.1.0.0.4\lib\net20\Microsoft.Office.Interop.Visio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\Logging\LoggingHelper.cs" />
+    <Compile Include="Application\Logging\XmlErrorLog.cs" />
+    <Compile Include="Application\Logging\LogRecord.cs" />
+    <Compile Include="Application\Logging\LogSession.cs" />
+    <Compile Include="Application\Logging\LogState.cs" />
+    <Compile Include="Exceptions\VisioOperationException.cs" />
+    <Compile Include="Extensions\ApplicationMethods.cs" />
+    <Compile Include="Extensions\ColorsMethods.cs" />
+    <Compile Include="Extensions\ConnectsMethods.cs" />
+    <Compile Include="Extensions\DocumentMethods.cs" />
+    <Compile Include="Extensions\FontsMethods.cs" />
+    <Compile Include="Extensions\LayersMethods.cs" />
+    <Compile Include="Extensions\MasterMethods.cs" />
+    <Compile Include="Extensions\PageMethods.cs" />
+    <Compile Include="Extensions\SectionMethods.cs" />
+    <Compile Include="Extensions\SelectionMethods.cs" />
+    <Compile Include="Extensions\ShapeMethods.cs" />
+    <Compile Include="Extensions\StylesMethods.cs" />
+    <Compile Include="Extensions\WindowMethods.cs" />
+    <Compile Include="Exceptions\InternalAssertionException.cs" />
+    <Compile Include="Internal\ExtensionHelpers.cs" />
+    <Compile Include="Pages\PageLayoutCells.cs" />
+    <Compile Include="Pages\PagePrintCells.cs" />
+    <Compile Include="Pages\PageRulerAndGridCells.cs" />
+    <Compile Include="Internal\LinqExtensions.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellGroupBuilderType.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
+    <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
+    <Compile Include="ShapeSheet\CellValueType.cs" />
+    <Compile Include="ShapeIDPairs.cs" />
+    <Compile Include="ShapeIDPair.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
+    <Compile Include="ShapeSheet\Query\CellQuery.cs" />
+    <Compile Include="ShapeSheet\Query\CellQueryResults.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQueryShapeResults.cs" />
+    <Compile Include="ShapeSheet\Query\ShapeCache.cs" />
+    <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
+    <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
+    <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
+    <Compile Include="ShapeSheet\StreamType.cs" />
+    <Compile Include="ShapeSheet\Writers\WriteRecord.cs" />
+    <Compile Include="ShapeSheet\Writers\WriteRecordList.cs" />
+    <Compile Include="ShapeSheet\StreamArray.cs" />
+    <Compile Include="Shapes\CustomPropertyNameCellsPair.cs" />
+    <Compile Include="Shapes\CustomPropertyType.cs" />
+    <Compile Include="Collections\ArraySegmentEnumerator.cs" />
+    <Compile Include="Collections\ArraySegment.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQueryCache.cs" />
+    <Compile Include="ShapeSheet\Query\Rows.cs" />
+    <Compile Include="ShapeSheet\Query\Columns.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
+    <Compile Include="ShapeSheet\Query\Column.cs" />
+    <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
+    <Compile Include="Shapes\UserDefinedCellDictionary.cs" />
+    <Compile Include="Shapes\UserDefinedCellNameCellsPair.cs" />
+    <Compile Include="SurfaceTarget.cs" />
+    <Compile Include="Shapes\CustomPropertyDictionary.cs" />
+    <Compile Include="Shapes\HyperlinkCells.cs" />
+    <Compile Include="Shapes\HyperlinkHelper.cs" />
+    <Compile Include="Shapes\ShapeLayoutCells.cs" />
+    <Compile Include="SurfaceTargetType.cs" />
+    <Compile Include="Text\TextHelper.cs" />
+    <Compile Include="Text\TextXFormCells.cs" />
+    <Compile Include="Shapes\ConnectionPointHelper.cs" />
+    <Compile Include="Shapes\ControlHelper.cs" />
+    <Compile Include="Shapes\ShapeFormatCells.cs" />
+    <Compile Include="Pages\PageFormatCells.cs" />
+    <Compile Include="Shapes\CustomPropertyHelper.cs" />
+    <Compile Include="Shapes\LockCells.cs" />
+    <Compile Include="Shapes\ShapeGeometrySection.cs" />
+    <Compile Include="Shapes\ShapeGeometryRow.cs" />
+    <Compile Include="Shapes\ShapeGeometryHelper.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQueryResults.cs" />
+    <Compile Include="ShapeSheet\Query\Row.cs" />
+    <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
+    <Compile Include="ShapeSheet\Query\SectionQueryColumns.cs" />
+    <Compile Include="ShapeSheet\Query\SectionShapeRows.cs" />
+    <Compile Include="Text\TextFormat.cs" />
+    <Compile Include="Text\TextBlockCells.cs" />
+    <Compile Include="Text\TabStopAlignment.cs" />
+    <Compile Include="Application\AlertResponseCode.cs" />
+    <Compile Include="Text\CharacterFormatCells.cs" />
+    <Compile Include="Shapes\ShapeXFormCells.cs" />
+    <Compile Include="Text\ParagraphFormatCells.cs" />
+    <Compile Include="Shapes\CustomPropertyCells.cs" />
+    <Compile Include="ShapeSheet\CellValue.cs" />
+    <Compile Include="Geometry\Point.cs" />
+    <Compile Include="Geometry\Rectangle.cs" />
+    <Compile Include="ShapeSheet\SidSrc.cs" />
+    <Compile Include="Geometry\Size.cs" />
+    <Compile Include="ShapeSheet\SrcConstants.cs" />
+    <Compile Include="ShapeSheet\Src.cs" />
+    <Compile Include="Shapes\ConnectionPointCells.cs" />
+    <Compile Include="Shapes\UserDefinedCellHelper.cs" />
+    <Compile Include="Shapes\UserDefinedCellCells.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Shapes\ConnectorHelper.cs" />
+    <Compile Include="Documents\DocumentHelper.cs" />
+    <Compile Include="Application\UserInterfaceHelper.cs" />
+    <Compile Include="Shapes\ControlCells.cs" />
+    <Compile Include="Pages\PageHelper.cs" />
+    <Compile Include="Application\AlertResponseScope.cs" />
+    <Compile Include="Text\TabStop.cs" />
+    <Compile Include="Application\UndoScope.cs" />
+    <Compile Include="Application\ApplicationHelper.cs" />
+    <Compile Include="Internal\NativeMethods.cs" />
+    <Compile Include="Exceptions\AutomationException.cs" />
+    <Compile Include="Shapes\ShapeHelper.cs" />
+    <Compile Include="Text\TextRun.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

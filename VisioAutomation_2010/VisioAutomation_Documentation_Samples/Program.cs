@@ -11,8 +11,8 @@ namespace VisioAutomation_Documentation_Samples
 
             var doc = app.Documents.Add("");
 
-            CustomProperties_Samples.Set_Custom_Property_on_Shape(doc);
-            CustomProperties_Samples.Set_Custom_Property_on_multiple_Shapes(doc);
+            // SAVEEN CustomProperties_Samples.Set_Custom_Property_on_Shape(doc);
+            // SAVEEN CustomProperties_Samples.Set_Custom_Property_on_multiple_Shapes(doc);
             Dropping_Shapes_Using_Masters.One_shape_at_a_time(doc);
             Dropping_Shapes_Using_Masters.Multiple_shapes_at_a_time(doc);
 

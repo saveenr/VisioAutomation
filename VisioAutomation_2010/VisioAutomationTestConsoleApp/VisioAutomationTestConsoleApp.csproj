@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Visio2010.PrimaryInteropAssembly" Version="1.0.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.DocumentAnalysis\VisioAutomation.DocumentAnalysis.csproj" />
+    <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj" />
+    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj" />
+    <ProjectReference Include="..\VisioScripting\VisioScripting.csproj" />
+  </ItemGroup>
+
+</Project>

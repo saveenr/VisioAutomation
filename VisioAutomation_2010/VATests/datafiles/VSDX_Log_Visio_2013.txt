@@ -1,0 +1,776 @@
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\Theme_u.vssx
+
+Thu Feb 12 08:25:07 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\orgico_m.vssx
+
+Thu Feb 12 08:27:13 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Thu Feb 12 08:29:19 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: D:\github\visioautomation\VisioAutomation_2010\TestResults\saveenr_SAVEENR3 2015-02-12 08_24_32\Out\datafiles\vdx_with_warnings_1.vdx
+
+Thu Feb 12 08:25:02 2015 Begin Session
+
+
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='1' Name='Shape.2'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='2' Name='Shape.3'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Thu Jan 29 15:10:37 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: https://microsoft.sharepoint.com/teams/DPGBigDataTeam/Documents/UX/Presentations/Cabo/Cabo_ACLs.vsdx
+
+Thu Jan 29 15:10:37 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\Theme_u.vssx
+
+Thu Jan 29 15:10:45 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Thu Jan 29 07:57:14 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: https://microsoft.sharepoint.com/teams/DPGBigDataTeam/Documents/UX/Presentations/Cabo/Cabo_ACLs.vsdx
+
+Thu Jan 29 07:57:06 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Sat Jan 24 16:21:21 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: https://microsoft.sharepoint.com/teams/DPGBigDataTeam/Documents/UX/Presentations/Cabo/Cabo_ACLs.vsdx
+
+Sat Jan 24 16:21:21 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Sat Jan 24 16:11:02 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: https://microsoft.sharepoint.com/teams/DPGBigDataTeam/Documents/UX/Presentations/Cabo/Cabo_ACLs.vsdx
+
+Sat Jan 24 16:11:02 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\root\office15\visio content\1033\Theme_u.vssx
+
+Wed Jan 21 16:58:31 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\root\office15\visio content\1033\BASIC_U.VSSX
+
+Wed Jan 21 16:58:44 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckWeCanDetectLoadingErrors2015-08-1--12-42-03.vdx
+
+Thu Jan 08 12:42:05 2015 Begin Session
+
+
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='1' Name='Shape.2'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='2' Name='Shape.3'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
+Open VSDX Processing Log
+
+Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-41-21.vdx
+
+Thu Jan 08 12:41:23 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\COMPS_U.VSSX
+
+Thu Jan 08 12:41:23 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\PERIPH_U.VSSX
+
+Thu Jan 08 12:41:23 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-39-04.vdx
+
+Thu Jan 08 12:39:06 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\COMPS_U.VSSX
+
+Thu Jan 08 12:39:06 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\PERIPH_U.VSSX
+
+Thu Jan 08 12:39:06 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-38-20.vdx
+
+Thu Jan 08 12:38:22 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\COMPS_U.VSSX
+
+Thu Jan 08 12:38:22 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\PERIPH_U.VSSX
+
+Thu Jan 08 12:38:22 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-29-02.vdx
+
+Thu Jan 08 12:29:05 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\COMPS_U.VSSX
+
+Thu Jan 08 12:29:05 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\PERIPH_U.VSSX
+
+Thu Jan 08 12:29:05 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\Theme_u.vssx
+
+Thu Jan 08 08:15:01 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\orgico_m.vssx
+
+Thu Jan 08 08:17:19 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Thu Jan 08 08:19:44 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckWeCanDetectLoadingErrors2015-08-1--08-14-55.vdx
+
+Thu Jan 08 08:14:57 2015 Begin Session
+
+
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='1' Name='Shape.2'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='2' Name='Shape.3'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
+Open VSDX Processing Log
+
+Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--08-14-51.vdx
+
+Thu Jan 08 08:14:53 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\COMPS_U.VSSX
+
+Thu Jan 08 08:14:53 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\PERIPH_U.VSSX
+
+Thu Jan 08 08:14:53 2015 Begin Session
+
+
+
+Insert SVG 1.0 Processing Log
+
+Source: C:\Users\saveenr\Downloads\Visio\Visio\svg.svg
+
+Thu Jan 08 07:28:41 2015 Begin Session
+
+
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:dc. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:cc. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:rdf. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:svg. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:sodipodi. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:inkscape. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18 ID svg6123
+Description: Unrecognized attribute type inkscape:version. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18 ID svg6123
+Description: Unrecognized attribute type sodipodi:docname. Attribute ignored.
+
+[Information] DataType: N/A
+Context: Line 41
+Description: Unrecognized element type sodipodi:namedview found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 44
+Description: Unsupported element type metadata found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 45
+Description: Unrecognized element type rdf:RDF found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 47
+Description: Unrecognized element type cc:Work found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 47
+Description: Unrecognized element type dc:format found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 49
+Description: Unrecognized element type dc:type found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 50
+Description: Unrecognized element type dc:title found. Element skipped.
+
+[Information] DataType: Element <g>
+Context: Line 59
+Description: Unrecognized attribute type inkscape:label. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 59
+Description: Unrecognized attribute type inkscape:groupmode. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 67 ID TR_Pump_Up_Unavailable
+Description: Unrecognized attribute type inkscape:label. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 67 ID TR_Pump_Up_Unavailable
+Description: Unrecognized attribute type inkscape:export-filename. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 67 ID TR_Pump_Up_Unavailable
+Description: Unrecognized attribute type inkscape:export-xdpi. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 67 ID TR_Pump_Up_Unavailable
+Description: Unrecognized attribute type inkscape:export-ydpi. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 75
+Description: Unrecognized attribute type inkscape:label. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 75
+Description: Unrecognized attribute type inkscape:export-ydpi. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 75
+Description: Unrecognized attribute type inkscape:export-xdpi. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 75
+Description: Unrecognized attribute type inkscape:export-filename. Attribute ignored.
+
+[Information] DataType: Element <ellipse>
+Context: Line 87
+Description: Unrecognized attribute type sodipodi:ry. Attribute ignored.
+
+[Information] DataType: Element <ellipse>
+Context: Line 87
+Description: Unrecognized attribute type sodipodi:rx. Attribute ignored.
+
+[Information] DataType: Element <ellipse>
+Context: Line 87
+Description: Unrecognized attribute type sodipodi:cy. Attribute ignored.
+
+[Information] DataType: Element <ellipse>
+Context: Line 87
+Description: Unrecognized attribute type sodipodi:cx. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 92
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 97
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 102
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 107
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 113
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 118
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Warning] DataType: N/A
+Context: 
+Description: SVG document is in error.
+
+[Information] DataType: N/A
+Context: Line 87 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 92 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 102 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 107 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 113 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 118 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+Insert SVG 1.0 Processing Log
+
+Source: C:\Users\saveenr\Downloads\Visio\Visio\svg.svg
+
+Thu Jan 08 07:25:16 2015 Begin Session
+
+
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:dc. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:cc. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:rdf. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:svg. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:sodipodi. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18
+Description: Unrecognized attribute type xmlns:inkscape. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18 ID svg6123
+Description: Unrecognized attribute type inkscape:version. Attribute ignored.
+
+[Information] DataType: Element <svg>
+Context: Line 18 ID svg6123
+Description: Unrecognized attribute type sodipodi:docname. Attribute ignored.
+
+[Information] DataType: N/A
+Context: Line 41
+Description: Unrecognized element type sodipodi:namedview found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 44
+Description: Unsupported element type metadata found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 45
+Description: Unrecognized element type rdf:RDF found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 47
+Description: Unrecognized element type cc:Work found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 47
+Description: Unrecognized element type dc:format found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 49
+Description: Unrecognized element type dc:type found. Element skipped.
+
+[Information] DataType: N/A
+Context: Line 50
+Description: Unrecognized element type dc:title found. Element skipped.
+
+[Information] DataType: Element <g>
+Context: Line 59
+Description: Unrecognized attribute type inkscape:label. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 59
+Description: Unrecognized attribute type inkscape:groupmode. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 67 ID TR_Pump_Up_Unavailable
+Description: Unrecognized attribute type inkscape:label. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 67 ID TR_Pump_Up_Unavailable
+Description: Unrecognized attribute type inkscape:export-filename. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 67 ID TR_Pump_Up_Unavailable
+Description: Unrecognized attribute type inkscape:export-xdpi. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 67 ID TR_Pump_Up_Unavailable
+Description: Unrecognized attribute type inkscape:export-ydpi. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 75
+Description: Unrecognized attribute type inkscape:label. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 75
+Description: Unrecognized attribute type inkscape:export-ydpi. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 75
+Description: Unrecognized attribute type inkscape:export-xdpi. Attribute ignored.
+
+[Information] DataType: Element <g>
+Context: Line 75
+Description: Unrecognized attribute type inkscape:export-filename. Attribute ignored.
+
+[Information] DataType: Element <ellipse>
+Context: Line 87
+Description: Unrecognized attribute type sodipodi:ry. Attribute ignored.
+
+[Information] DataType: Element <ellipse>
+Context: Line 87
+Description: Unrecognized attribute type sodipodi:rx. Attribute ignored.
+
+[Information] DataType: Element <ellipse>
+Context: Line 87
+Description: Unrecognized attribute type sodipodi:cy. Attribute ignored.
+
+[Information] DataType: Element <ellipse>
+Context: Line 87
+Description: Unrecognized attribute type sodipodi:cx. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 92
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 97
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 102
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 107
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 113
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Information] DataType: Element <path>
+Context: Line 118
+Description: Unrecognized attribute type inkscape:connector-curvature. Attribute ignored.
+
+[Warning] DataType: N/A
+Context: 
+Description: SVG document is in error.
+
+[Information] DataType: N/A
+Context: Line 87 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 92 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 102 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 107 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 113 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+[Information] DataType: N/A
+Context: Line 118 ID svg6123
+Description: Unsupported property value stroke-miterlimit='4'.  Only property value of '3' is supported.
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\CALOUT_U.VSSX
+
+Wed Jan 07 17:55:54 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Wed Jan 07 17:55:55 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\CALOUT_U.VSSX
+
+Wed Jan 07 17:32:56 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Wed Jan 07 17:32:56 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\CALOUT_U.VSSX
+
+Wed Jan 07 17:30:08 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Wed Jan 07 17:30:08 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\CALOUT_U.VSSX
+
+Wed Jan 07 17:25:09 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Wed Jan 07 17:25:09 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\CALOUT_U.VSSX
+
+Wed Jan 07 17:16:02 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Wed Jan 07 17:16:02 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\Theme_u.vssx
+
+Wed Jan 07 17:08:58 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\orgico_u.vssx
+
+Wed Jan 07 17:11:09 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Program Files\Microsoft Office 15\Root\Office15\visio content\1033\BASIC_U.VSSX
+
+Wed Jan 07 17:13:35 2015 Begin Session
+
+
+
+Open VSDX Processing Log
+
+Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckErrorOnLoadLogFileExists.vdx
+
+Wed Jan 07 17:08:53 2015 Begin Session
+
+
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='1' Name='Shape.2'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
+[Warning] DataType: 
+Context: Part: /visio/pages/page1.xml, <VisioDocument><Pages><Page ID='0' Name='Page-1'><PageSheet><Shapes><Shape ID='2' Name='Shape.3'> Type=...
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has substituted an appropriate value.
+
