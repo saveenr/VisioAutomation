@@ -1,5 +1,3 @@
-
-
 namespace VisioScripting;
 
 public class TargetWindow : TargetObject<IVisio.Window>

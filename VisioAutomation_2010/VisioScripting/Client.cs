@@ -1,5 +1,3 @@
-
-
 namespace VisioScripting;
 
 public class Client
@@ -32,11 +30,11 @@ public class Client
     public Commands.UserDefinedCellCommands UserDefinedCell { get; }
     public Commands.ViewCommands View { get; }
 
-    public Client(IVisio.Application app):
-        this(app,new DefaultClientContext())
+    public Client(IVisio.Application app) :
+        this(app, new DefaultClientContext())
     {
     }
-        
+
     public Client(IVisio.Application app, ClientContext client_context)
     {
         this._client_context = client_context ?? throw new System.ArgumentNullException(nameof(client_context));
@@ -71,12 +69,11 @@ public class Client
     {
         get { return this._client_context; }
     }
-        
+
     public CommandTarget GetCommandTarget(CommandTargetFlags flags)
     {
         var command_target = new CommandTarget(this, flags);
         return command_target;
-
     }
 
     internal static List<System.Reflection.PropertyInfo> _get_properties()
