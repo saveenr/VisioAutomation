@@ -3,10 +3,10 @@ using VisioAutomation.Extensions;
 using VisioAutomation.Core;
 using VisioScripting.Models;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingPageTests : VisioAutomationTest
+    public class ScriptingPageTests : VisioAutomation_Tests.VisioAutomationTest
     {
         [TestMethod]
         public void Scripting_Page_NewPage()

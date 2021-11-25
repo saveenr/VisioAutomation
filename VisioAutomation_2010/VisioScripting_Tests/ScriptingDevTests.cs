@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingDevTests : VisioAutomationTest
+    public class ScriptingDevTests : VisioAutomation_Tests.VisioAutomationTest
     {
         [TestMethod]
         public void Scripting_Dev_ScriptingDocumentation()

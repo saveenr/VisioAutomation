@@ -2,10 +2,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA=VisioAutomation;
 using VASS=VisioAutomation.ShapeSheet;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingHyperlinkTests : VisioAutomationTest
+    public class ScriptingHyperlinkTests : VisioAutomation_Tests.VisioAutomationTest
     {
 
 

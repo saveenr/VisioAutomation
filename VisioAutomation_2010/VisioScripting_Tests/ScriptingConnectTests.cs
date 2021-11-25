@@ -3,10 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.DocumentAnalysis;
 using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingConnectTests : VisioAutomationTest
+    public class ScriptingConnectTests : VisioAutomation_Tests.VisioAutomationTest
     {
         [TestMethod]
         public void Scripting_Connects_Scenario_0()

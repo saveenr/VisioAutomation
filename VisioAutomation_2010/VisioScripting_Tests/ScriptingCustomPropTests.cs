@@ -3,10 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingCustomPropTests : VisioAutomationTest
+    public class ScriptingCustomPropTests : VisioAutomation_Tests.VisioAutomationTest
     {
         [TestMethod]
         public void Scripting_ShapeSheet_SetNoShapes()

@@ -1,4 +1,4 @@
-namespace VisioAutomation_Tests
+namespace VisioAutomation_Tests.Extensions
 {
     public static class TestExtensions
     {

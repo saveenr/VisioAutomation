@@ -1,10 +1,10 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingExportTests : VisioAutomationTest
+    public class ScriptingExportTests : VisioAutomation_Tests.VisioAutomationTest
     {
         [TestMethod]
         public void Scripting_Test_Export_Selection_SVGHTML()
@@ -23,7 +23,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
 
-            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
+            string output_filename = VisioAutomation_Tests.TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
 
             if (File.Exists(output_filename))
             {
@@ -33,7 +33,7 @@ namespace VisioAutomation_Tests.Scripting
 
             client.Export.ExportSelectionToHtml(VisioScripting.TargetSelection.Auto, output_filename);
 
-            AssertUtil.FileExists(output_filename);
+            VisioAutomation_Tests.AssertUtil.FileExists(output_filename);
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }

@@ -74,7 +74,6 @@
     <Compile Include="ScriptingSelectionTests.cs" />
     <Compile Include="ScriptingShapeSheetTests.cs" />
     <Compile Include="ScriptingShapeText_Tests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingModelTests : VisioAutomationTest
+    public class ScriptingModelTests : VisioAutomation_Tests.VisioAutomationTest
     {
         [TestMethod]
         public void DrawGrid()

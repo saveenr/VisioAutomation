@@ -2,10 +2,10 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingShapeSheetTests : VisioAutomationTest
+    public class ScriptingShapeSheetTests : VisioAutomation_Tests.VisioAutomationTest
     {
         [TestMethod]
         public void QueryPage()

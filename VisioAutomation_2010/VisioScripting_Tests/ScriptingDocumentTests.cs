@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation_Tests.Scripting
+namespace VisioScripting_Tests
 {
     [TestClass]
-    public class ScriptingDocumentTests : VisioAutomationTest
+    public class ScriptingDocumentTests : VisioAutomation_Tests.VisioAutomationTest
     {
         [TestMethod]
         public void Document_Activation()
