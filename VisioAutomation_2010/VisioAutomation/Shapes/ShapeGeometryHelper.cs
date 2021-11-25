@@ -1,4 +1,3 @@
-using VisioAutomation.Exceptions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -18,7 +17,7 @@ namespace VisioAutomation.Shapes
 
             if (actual_sec_index != new_sec_index)
             {
-                throw new InternalAssertionException();
+                throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
             short row_index = shape.AddRow(new_sec_index, (short)IVisio.VisRowIndices.visRowComponent, (short)IVisio.VisRowTags.visTagComponent);
 
