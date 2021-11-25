@@ -24,19 +24,19 @@ namespace VisioAutomation_Tests.Core.Text
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 
             // shapes shoould not have any tab stops by default
-            var m0 = VATEXT.TextFormat.GetFormat(s1, VASS.CellValueType.Formula);
+            var m0 = VATEXT.TextFormat.GetFormat(s1, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(0, m0.TabStops.Count);
 
             // clearing tab stops shoudl work even if there are no tab stops
             VATEXT.TextHelper.SetTabStops(s1, no_tab_stops);
-            var m1 = VATEXT.TextFormat.GetFormat(s1, VASS.CellValueType.Formula);
+            var m1 = VATEXT.TextFormat.GetFormat(s1, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(0, m1.TabStops.Count);
 
             // set the 3 tab stops
             VATEXT.TextHelper.SetTabStops(s1, tabstops);
 
             // should have exactly the same number we set
-            var m2 = VATEXT.TextFormat.GetFormat(s1, VASS.CellValueType.Formula);
+            var m2 = VATEXT.TextFormat.GetFormat(s1, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(tabstops.Length, m2.TabStops.Count);
             Assert.AreEqual(0.5, tabstops[0].Position);
             Assert.AreEqual(1.5, tabstops[1].Position);
@@ -49,7 +49,7 @@ namespace VisioAutomation_Tests.Core.Text
 
             // clear the tab stops
             VATEXT.TextHelper.SetTabStops(s1, no_tab_stops);
-            var m3 = VATEXT.TextFormat.GetFormat(s1, VASS.CellValueType.Formula);
+            var m3 = VATEXT.TextFormat.GetFormat(s1, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(0, m3.TabStops.Count);
 
             page1.Delete(0);

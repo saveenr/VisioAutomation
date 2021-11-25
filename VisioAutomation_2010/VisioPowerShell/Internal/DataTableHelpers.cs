@@ -39,20 +39,20 @@ namespace VisioPowerShell.Internal
 
         public static DataTable QueryToDataTable(
             VASS.Query.CellQuery query,
-            VisioAutomation.ShapeSheet.CellValueType value_type,
+            VisioAutomation.Core.CellValueType value_type,
             Models.ResultType result_type,
             IList<int> shapeids, 
             VisioAutomation.Core.SurfaceTarget surface)
         {
 
-            if (value_type == VASS.CellValueType.Formula)
+            if (value_type == VisioAutomation.Core.CellValueType.Formula)
             {
                 var output = query.GetFormulas(surface, shapeids);
                 var dt = DataTableHelpers.querytable_to_datatable(query, output);
                 return dt;
             }
 
-            if (value_type != VASS.CellValueType.Result)
+            if (value_type != VisioAutomation.Core.CellValueType.Result)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(value_type));
             }

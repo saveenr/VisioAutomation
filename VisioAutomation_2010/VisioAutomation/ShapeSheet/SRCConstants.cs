@@ -2,7 +2,7 @@
 using ROW = Microsoft.Office.Interop.Visio.VisRowIndices;
 using CEL = Microsoft.Office.Interop.Visio.VisCellIndices;
 
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.Core
 {
     public static class SrcConstants
     {

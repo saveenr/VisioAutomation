@@ -7,43 +7,43 @@ namespace VisioAutomation.Pages
 {
     public class PagePrintCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValue LeftMargin { get; set; }
-        public VASS.CellValue CenterX { get; set; }
-        public VASS.CellValue CenterY { get; set; }
-        public VASS.CellValue OnPage { get; set; }
-        public VASS.CellValue BottomMargin { get; set; }
-        public VASS.CellValue RightMargin { get; set; }
-        public VASS.CellValue PagesX { get; set; }
-        public VASS.CellValue PagesY { get; set; }
-        public VASS.CellValue TopMargin { get; set; }
-        public VASS.CellValue PaperKind { get; set; }
-        public VASS.CellValue Grid { get; set; }
-        public VASS.CellValue Orientation { get; set; }
-        public VASS.CellValue ScaleX { get; set; }
-        public VASS.CellValue ScaleY { get; set; }
-        public VASS.CellValue PaperSource { get; set; }
+        public VisioAutomation.Core.CellValue LeftMargin { get; set; }
+        public VisioAutomation.Core.CellValue CenterX { get; set; }
+        public VisioAutomation.Core.CellValue CenterY { get; set; }
+        public VisioAutomation.Core.CellValue OnPage { get; set; }
+        public VisioAutomation.Core.CellValue BottomMargin { get; set; }
+        public VisioAutomation.Core.CellValue RightMargin { get; set; }
+        public VisioAutomation.Core.CellValue PagesX { get; set; }
+        public VisioAutomation.Core.CellValue PagesY { get; set; }
+        public VisioAutomation.Core.CellValue TopMargin { get; set; }
+        public VisioAutomation.Core.CellValue PaperKind { get; set; }
+        public VisioAutomation.Core.CellValue Grid { get; set; }
+        public VisioAutomation.Core.CellValue Orientation { get; set; }
+        public VisioAutomation.Core.CellValue ScaleX { get; set; }
+        public VisioAutomation.Core.CellValue ScaleY { get; set; }
+        public VisioAutomation.Core.CellValue PaperSource { get; set; }
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.LeftMargin), VASS.SrcConstants.PrintLeftMargin, this.LeftMargin);
-            yield return this.Create(nameof(this.CenterX), VASS.SrcConstants.PrintCenterX, this.CenterX);
-            yield return this.Create(nameof(this.CenterY), VASS.SrcConstants.PrintCenterY, this.CenterY);
-            yield return this.Create(nameof(this.OnPage), VASS.SrcConstants.PrintOnPage, this.OnPage);
-            yield return this.Create(nameof(this.BottomMargin), VASS.SrcConstants.PrintBottomMargin, this.BottomMargin);
-            yield return this.Create(nameof(this.RightMargin), VASS.SrcConstants.PrintRightMargin, this.RightMargin);
-            yield return this.Create(nameof(this.PagesX), VASS.SrcConstants.PrintPagesX, this.PagesX);
-            yield return this.Create(nameof(this.PagesY), VASS.SrcConstants.PrintPagesY, this.PagesY);
-            yield return this.Create(nameof(this.TopMargin), VASS.SrcConstants.PrintTopMargin, this.TopMargin);
-            yield return this.Create(nameof(this.PaperKind), VASS.SrcConstants.PrintPaperKind, this.PaperKind);
-            yield return this.Create(nameof(this.Grid), VASS.SrcConstants.PrintGrid, this.Grid);
-            yield return this.Create(nameof(this.Orientation), VASS.SrcConstants.PrintPageOrientation, this.Orientation);
-            yield return this.Create(nameof(this.ScaleX), VASS.SrcConstants.PrintScaleX, this.ScaleX);
-            yield return this.Create(nameof(this.ScaleY), VASS.SrcConstants.PrintScaleY, this.ScaleY);
-            yield return this.Create(nameof(this.PaperSource), VASS.SrcConstants.PrintPaperSource, this.PaperSource);
+            yield return this.Create(nameof(this.LeftMargin), VisioAutomation.Core.SrcConstants.PrintLeftMargin, this.LeftMargin);
+            yield return this.Create(nameof(this.CenterX), VisioAutomation.Core.SrcConstants.PrintCenterX, this.CenterX);
+            yield return this.Create(nameof(this.CenterY), VisioAutomation.Core.SrcConstants.PrintCenterY, this.CenterY);
+            yield return this.Create(nameof(this.OnPage), VisioAutomation.Core.SrcConstants.PrintOnPage, this.OnPage);
+            yield return this.Create(nameof(this.BottomMargin), VisioAutomation.Core.SrcConstants.PrintBottomMargin, this.BottomMargin);
+            yield return this.Create(nameof(this.RightMargin), VisioAutomation.Core.SrcConstants.PrintRightMargin, this.RightMargin);
+            yield return this.Create(nameof(this.PagesX), VisioAutomation.Core.SrcConstants.PrintPagesX, this.PagesX);
+            yield return this.Create(nameof(this.PagesY), VisioAutomation.Core.SrcConstants.PrintPagesY, this.PagesY);
+            yield return this.Create(nameof(this.TopMargin), VisioAutomation.Core.SrcConstants.PrintTopMargin, this.TopMargin);
+            yield return this.Create(nameof(this.PaperKind), VisioAutomation.Core.SrcConstants.PrintPaperKind, this.PaperKind);
+            yield return this.Create(nameof(this.Grid), VisioAutomation.Core.SrcConstants.PrintGrid, this.Grid);
+            yield return this.Create(nameof(this.Orientation), VisioAutomation.Core.SrcConstants.PrintPageOrientation, this.Orientation);
+            yield return this.Create(nameof(this.ScaleX), VisioAutomation.Core.SrcConstants.PrintScaleX, this.ScaleX);
+            yield return this.Create(nameof(this.ScaleY), VisioAutomation.Core.SrcConstants.PrintScaleY, this.ScaleY);
+            yield return this.Create(nameof(this.PaperSource), VisioAutomation.Core.SrcConstants.PrintPaperSource, this.PaperSource);
         }
 
 
-        public static PagePrintCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static PagePrintCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = PagePrintCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);

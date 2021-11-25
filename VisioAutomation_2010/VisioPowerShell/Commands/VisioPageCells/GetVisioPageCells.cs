@@ -28,8 +28,8 @@ namespace VisioPowerShell.Commands.VisioPageCells
         protected override void ProcessRecord()
         {
             var valuetype = this.Results
-                ? VisioAutomation.ShapeSheet.CellValueType.Result
-                : VisioAutomation.ShapeSheet.CellValueType.Formula;
+                ? VisioAutomation.Core.CellValueType.Result
+                : VisioAutomation.Core.CellValueType.Formula;
 
             var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
 

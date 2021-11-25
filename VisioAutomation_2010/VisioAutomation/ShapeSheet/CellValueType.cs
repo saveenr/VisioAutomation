@@ -1,4 +1,4 @@
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.Core
 {
     public enum CellValueType
     {

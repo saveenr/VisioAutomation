@@ -29,8 +29,8 @@ namespace VisioPowerShell.Commands.VisioShapeCells
         protected override void ProcessRecord()
         {
             var valuetype = this.Results
-                ? VisioAutomation.ShapeSheet.CellValueType.Result
-                : VisioAutomation.ShapeSheet.CellValueType.Formula;
+                ? VisioAutomation.Core.CellValueType.Result
+                : VisioAutomation.Core.CellValueType.Formula;
 
             var target_shapes = new VisioScripting.TargetShapes(this.Shape).ResolveToShapes(this.Client);
 

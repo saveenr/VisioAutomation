@@ -18,9 +18,9 @@ namespace VisioScripting.Models
             this.Writer = new SidSrcWriter();
         }
 
-        public void SetFormula(short id, VisioAutomation.ShapeSheet.Src src, string formula)
+        public void SetFormula(short id, VisioAutomation.Core.Src src, string formula)
         {
-            var sidsrc = new VisioAutomation.ShapeSheet.SidSrc(id, src);
+            var sidsrc = new VisioAutomation.Core.SidSrc(id, src);
             this.Writer.SetValue(sidsrc, formula);
         }
 

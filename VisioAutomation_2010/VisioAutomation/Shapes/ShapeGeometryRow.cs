@@ -5,13 +5,13 @@ namespace VisioAutomation.Shapes
 {
     public class ShapeGeometryRow
     {
-        public ShapeSheet.CellValue X { get; set; }
-        public ShapeSheet.CellValue Y { get; set; }
-        public ShapeSheet.CellValue A { get; set; }
-        public ShapeSheet.CellValue B { get; set; }
-        public ShapeSheet.CellValue C { get; set; }
-        public ShapeSheet.CellValue D { get; set; }
-        public ShapeSheet.CellValue E { get; set; }
+        public VisioAutomation.Core.CellValue X { get; set; }
+        public VisioAutomation.Core.CellValue Y { get; set; }
+        public VisioAutomation.Core.CellValue A { get; set; }
+        public VisioAutomation.Core.CellValue B { get; set; }
+        public VisioAutomation.Core.CellValue C { get; set; }
+        public VisioAutomation.Core.CellValue D { get; set; }
+        public VisioAutomation.Core.CellValue E { get; set; }
         public IVisio.VisRowTags RowTag { get; set; }
 
         public ShapeGeometryRow(IVisio.VisRowTags tag)
@@ -33,13 +33,13 @@ namespace VisioAutomation.Shapes
 
         private void Update(short section_index, short row_index, ShapeSheet.Writers.SrcWriter writer)
         {
-            var x_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexX.Cell);
-            var y_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexY.Cell);
-            var a_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexA.Cell);
-            var b_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexB.Cell);
-            var c_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexC.Cell);
-            var d_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexD.Cell);
-            var e_src = new VA.ShapeSheet.Src(section_index, row_index,ShapeSheet.SrcConstants.GeometryVertexE.Cell);
+            var x_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexX.Cell);
+            var y_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexY.Cell);
+            var a_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexA.Cell);
+            var b_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexB.Cell);
+            var c_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexC.Cell);
+            var d_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexD.Cell);
+            var e_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexE.Cell);
 
             writer.SetValue(x_src, this.X);
             writer.SetValue(y_src, this.Y);
@@ -50,7 +50,7 @@ namespace VisioAutomation.Shapes
             writer.SetValue(e_src, this.E);
         }
 
-        public static ShapeGeometryRow CreateLineTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y)
+        public static ShapeGeometryRow CreateLineTo(Core.CellValue x, Core.CellValue y)
         {
             // http://msdn.microsoft.com/en-us/library/aa195656(v=office.11).aspx
 
@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateMoveTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y)
+        public static ShapeGeometryRow CreateMoveTo(Core.CellValue x, Core.CellValue y)
         {
             // http://msdn.microsoft.com/en-us/library/aa195679(v=office.11).aspx
 
@@ -70,8 +70,8 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateArcTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y,
-                                              ShapeSheet.CellValue a)
+        public static ShapeGeometryRow CreateArcTo(Core.CellValue x, Core.CellValue y,
+                                              Core.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195698(v=office.11).aspx
 
@@ -82,12 +82,12 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateEllipticalArcTo(ShapeSheet.CellValue x,
-                                                        ShapeSheet.CellValue y,
-                                                        ShapeSheet.CellValue a,
-                                                        ShapeSheet.CellValue b,
-                                                        ShapeSheet.CellValue c,
-                                                        ShapeSheet.CellValue d)
+        public static ShapeGeometryRow CreateEllipticalArcTo(Core.CellValue x,
+                                                        Core.CellValue y,
+                                                        Core.CellValue a,
+                                                        Core.CellValue b,
+                                                        Core.CellValue c,
+                                                        Core.CellValue d)
         {
             // http://msdn.microsoft.com/en-us/library/aa195660(v=office.11).aspx
 
@@ -101,12 +101,12 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateEllipse(ShapeSheet.CellValue x,
-                                                ShapeSheet.CellValue y,
-                                                ShapeSheet.CellValue a,
-                                                ShapeSheet.CellValue b,
-                                                ShapeSheet.CellValue c,
-                                                ShapeSheet.CellValue d)
+        public static ShapeGeometryRow CreateEllipse(Core.CellValue x,
+                                                Core.CellValue y,
+                                                Core.CellValue a,
+                                                Core.CellValue b,
+                                                Core.CellValue c,
+                                                Core.CellValue d)
         {
 
             // http://msdn.microsoft.com/en-us/library/aa195692(v=office.11).aspx
@@ -121,13 +121,13 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateNurbsTo(ShapeSheet.CellValue x,
-                                                ShapeSheet.CellValue y,
-                                                ShapeSheet.CellValue a,
-                                                ShapeSheet.CellValue b,
-                                                ShapeSheet.CellValue c,
-                                                ShapeSheet.CellValue d,
-                                                ShapeSheet.CellValue e)
+        public static ShapeGeometryRow CreateNurbsTo(Core.CellValue x,
+                                                Core.CellValue y,
+                                                Core.CellValue a,
+                                                Core.CellValue b,
+                                                Core.CellValue c,
+                                                Core.CellValue d,
+                                                Core.CellValue e)
         {
             // http://msdn.microsoft.com/en-us/library/aa195685(v=office.11).aspx
 
@@ -142,9 +142,9 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreatePolylineTo(ShapeSheet.CellValue x,
-                                        ShapeSheet.CellValue y,
-                                        ShapeSheet.CellValue a)
+        public static ShapeGeometryRow CreatePolylineTo(Core.CellValue x,
+                                        Core.CellValue y,
+                                        Core.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195682(v=office.11).aspx
 
@@ -155,10 +155,10 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateInfiniteLine(ShapeSheet.CellValue x,
-                                ShapeSheet.CellValue y,
-                                ShapeSheet.CellValue a,
-                                ShapeSheet.CellValue b)
+        public static ShapeGeometryRow CreateInfiniteLine(Core.CellValue x,
+                                Core.CellValue y,
+                                Core.CellValue a,
+                                Core.CellValue b)
         {
             // http://msdn.microsoft.com/en-us/library/aa195682(v=office.11).aspx
 
@@ -170,9 +170,9 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateSplineKnot(ShapeSheet.CellValue x,
-                                ShapeSheet.CellValue y,
-                                ShapeSheet.CellValue a)
+        public static ShapeGeometryRow CreateSplineKnot(Core.CellValue x,
+                                Core.CellValue y,
+                                Core.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195667(v=office.11).aspx
 
@@ -183,12 +183,12 @@ namespace VisioAutomation.Shapes
             return row;
         }
 
-        public static ShapeGeometryRow CreateSplineStart(ShapeSheet.CellValue x,
-                                                ShapeSheet.CellValue y,
-                                                ShapeSheet.CellValue a,
-                                                ShapeSheet.CellValue b,
-                                                ShapeSheet.CellValue c,
-                                                ShapeSheet.CellValue d)
+        public static ShapeGeometryRow CreateSplineStart(Core.CellValue x,
+                                                Core.CellValue y,
+                                                Core.CellValue a,
+                                                Core.CellValue b,
+                                                Core.CellValue c,
+                                                Core.CellValue d)
         {
 
             // http://msdn.microsoft.com/en-us/library/aa195663(v=office.11).aspx

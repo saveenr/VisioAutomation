@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
 

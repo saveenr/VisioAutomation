@@ -7,32 +7,32 @@ namespace VisioAutomation.Pages
 {
     public class PageRulerAndGridCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValue XGridDensity { get; set; }
-        public VASS.CellValue YGridDensity { get; set; }
-        public VASS.CellValue XGridOrigin { get; set; }
-        public VASS.CellValue YGridOrigin { get; set; }
-        public VASS.CellValue XGridSpacing { get; set; }
-        public VASS.CellValue YGridSpacing { get; set; }
-        public VASS.CellValue XRulerDensity { get; set; }
-        public VASS.CellValue XRulerOrigin { get; set; }
-        public VASS.CellValue YRulerDensity { get; set; }
-        public VASS.CellValue YRulerOrigin { get; set; }
+        public VisioAutomation.Core.CellValue XGridDensity { get; set; }
+        public VisioAutomation.Core.CellValue YGridDensity { get; set; }
+        public VisioAutomation.Core.CellValue XGridOrigin { get; set; }
+        public VisioAutomation.Core.CellValue YGridOrigin { get; set; }
+        public VisioAutomation.Core.CellValue XGridSpacing { get; set; }
+        public VisioAutomation.Core.CellValue YGridSpacing { get; set; }
+        public VisioAutomation.Core.CellValue XRulerDensity { get; set; }
+        public VisioAutomation.Core.CellValue XRulerOrigin { get; set; }
+        public VisioAutomation.Core.CellValue YRulerDensity { get; set; }
+        public VisioAutomation.Core.CellValue YRulerOrigin { get; set; }
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.XGridDensity), VASS.SrcConstants.XGridDensity, this.XGridDensity);
-            yield return this.Create(nameof(this.XGridOrigin), VASS.SrcConstants.XGridOrigin, this.XGridOrigin);
-            yield return this.Create(nameof(this.XGridSpacing), VASS.SrcConstants.XGridSpacing, this.XGridSpacing);
-            yield return this.Create(nameof(this.XRulerDensity), VASS.SrcConstants.XRulerDensity, this.XRulerDensity);
-            yield return this.Create(nameof(this.XRulerOrigin), VASS.SrcConstants.XRulerOrigin, this.XRulerOrigin);
-            yield return this.Create(nameof(this.YGridDensity), VASS.SrcConstants.YGridDensity, this.YGridDensity);
-            yield return this.Create(nameof(this.YGridOrigin), VASS.SrcConstants.YGridOrigin, this.YGridOrigin);
-            yield return this.Create(nameof(this.YGridSpacing), VASS.SrcConstants.YGridSpacing, this.YGridSpacing);
-            yield return this.Create(nameof(this.YRulerDensity), VASS.SrcConstants.YRulerDensity, this.YRulerDensity);
-            yield return this.Create(nameof(this.YRulerOrigin), VASS.SrcConstants.YRulerOrigin, this.YRulerOrigin);
+            yield return this.Create(nameof(this.XGridDensity), VisioAutomation.Core.SrcConstants.XGridDensity, this.XGridDensity);
+            yield return this.Create(nameof(this.XGridOrigin), VisioAutomation.Core.SrcConstants.XGridOrigin, this.XGridOrigin);
+            yield return this.Create(nameof(this.XGridSpacing), VisioAutomation.Core.SrcConstants.XGridSpacing, this.XGridSpacing);
+            yield return this.Create(nameof(this.XRulerDensity), VisioAutomation.Core.SrcConstants.XRulerDensity, this.XRulerDensity);
+            yield return this.Create(nameof(this.XRulerOrigin), VisioAutomation.Core.SrcConstants.XRulerOrigin, this.XRulerOrigin);
+            yield return this.Create(nameof(this.YGridDensity), VisioAutomation.Core.SrcConstants.YGridDensity, this.YGridDensity);
+            yield return this.Create(nameof(this.YGridOrigin), VisioAutomation.Core.SrcConstants.YGridOrigin, this.YGridOrigin);
+            yield return this.Create(nameof(this.YGridSpacing), VisioAutomation.Core.SrcConstants.YGridSpacing, this.YGridSpacing);
+            yield return this.Create(nameof(this.YRulerDensity), VisioAutomation.Core.SrcConstants.YRulerDensity, this.YRulerDensity);
+            yield return this.Create(nameof(this.YRulerOrigin), VisioAutomation.Core.SrcConstants.YRulerOrigin, this.YRulerOrigin);
         }
 
-        public static PageRulerAndGridCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static PageRulerAndGridCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = PageRulerAndGridCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);

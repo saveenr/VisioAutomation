@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
         protected override void ProcessRecord()
         {
             var targetshapes = new VisioScripting.TargetShapes(this.Shape);
-            var type = VASS.CellValueType.Formula;
+            var type = VisioAutomation.Core.CellValueType.Formula;
             var dicof_shape_to_cpdic = this.Client.CustomProperty.GetCustomPropertiesAsShapeDictionary(targetshapes, type);
             this.WriteObject(dicof_shape_to_cpdic);                
         }

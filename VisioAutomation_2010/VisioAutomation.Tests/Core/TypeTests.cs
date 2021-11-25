@@ -9,7 +9,7 @@ namespace VisioAutomation_Tests.Core.Internal
         public void VerifySrcSize()
         {
             // Srcs must be 6 bytes
-            var c1 = new VisioAutomation.ShapeSheet.Src();
+            var c1 = new VisioAutomation.Core.Src();
             int actual_size = System.Runtime.InteropServices.Marshal.SizeOf(c1);
             Assert.AreEqual(6, actual_size);
 
@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Core.Internal
             // A FormulaLiteral only has a reference to a string
             // so it should be as big as a reference to a string
 
-            var instance = new VisioAutomation.ShapeSheet.CellValue();
+            var instance = new VisioAutomation.Core.CellValue();
             int actual_size = System.Runtime.InteropServices.Marshal.SizeOf(instance);
             Assert.AreEqual(4, actual_size);
         }

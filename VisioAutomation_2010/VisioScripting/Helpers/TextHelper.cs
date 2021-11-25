@@ -49,10 +49,10 @@ namespace VisioScripting.Helpers
             
             foreach (int shapeid in shapeids)
             {
-                writer.SetValue((short)shapeid, VisioAutomation.ShapeSheet.SrcConstants.TextXFormWidth, formula);
+                writer.SetValue((short)shapeid, VisioAutomation.Core.SrcConstants.TextXFormWidth, formula);
             }
 
-            writer.Commit(page, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            writer.Commit(page, VisioAutomation.Core.CellValueType.Formula);
         }
 
         public static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)

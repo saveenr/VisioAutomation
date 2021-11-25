@@ -31,7 +31,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(2, VA.Shapes.HyperlinkHelper.GetCount(s1));
             
             // retrieve the control information
-            var hlinks= VA.Shapes.HyperlinkCells.GetCells(s1, VASS.CellValueType.Formula);
+            var hlinks= VA.Shapes.HyperlinkCells.GetCells(s1, VisioAutomation.Core.CellValueType.Formula);
 
             // verify that the hyperlinks were set propery
             Assert.AreEqual(2, hlinks.Count);

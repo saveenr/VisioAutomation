@@ -8,8 +8,8 @@ namespace VisioAutomation.Shapes
 {
     public class UserDefinedCellCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValue Value { get; set; }
-        public VASS.CellValue Prompt { get; set; }
+        public VisioAutomation.Core.CellValue Value { get; set; }
+        public VisioAutomation.Core.CellValue Prompt { get; set; }
 
         public UserDefinedCellCells()
         {
@@ -17,23 +17,23 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Value), VASS.SrcConstants.UserDefCellValue, this.Value);
-            yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.UserDefCellPrompt, this.Prompt);
+            yield return this.Create(nameof(this.Value), VisioAutomation.Core.SrcConstants.UserDefCellValue, this.Value);
+            yield return this.Create(nameof(this.Prompt), VisioAutomation.Core.SrcConstants.UserDefCellPrompt, this.Prompt);
         }
 
         public void EncodeValues()
         {
-            this.Value = VASS.CellValue.EncodeValue(this.Value.Value);
-            this.Prompt = VASS.CellValue.EncodeValue(this.Prompt.Value);
+            this.Value = VisioAutomation.Core.CellValue.EncodeValue(this.Value.Value);
+            this.Prompt = VisioAutomation.Core.CellValue.EncodeValue(this.Prompt.Value);
         }
 
-        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VisioAutomation.Core.CellValueType type)
         {
             var reader = UserDefinedCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
-        public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = UserDefinedCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);

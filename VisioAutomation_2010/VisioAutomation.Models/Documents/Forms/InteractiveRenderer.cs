@@ -46,7 +46,7 @@ namespace VisioAutomation.Models.Documents.Forms
             writer.SetValues(page_fmt_cells);
             writer.SetValues(page_print_cells);
 
-            writer.Commit(pagesheet, CellValueType.Formula);
+            writer.Commit(pagesheet, Core.CellValueType.Formula);
 
             this.Reset();
             return this._page;
@@ -110,7 +110,7 @@ namespace VisioAutomation.Models.Documents.Forms
                 writer.SetValues((short)block.VisioShapeID, block.CharacterFormatCells, 0);
             }
 
-            writer.Commit(this._page, ShapeSheet.CellValueType.Formula);
+            writer.Commit(this._page, Core.CellValueType.Formula);
         }
 
         private void _adjust_insertion_point(VisioAutomation.Core.Size size)

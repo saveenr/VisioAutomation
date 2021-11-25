@@ -193,7 +193,7 @@ namespace VisioScripting.Commands
             }
 
             var page_sheet = page.PageSheet;
-            var src = VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation;
+            var src = VisioAutomation.Core.SrcConstants.PrintPageOrientation;
             var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNumber, 0];
             return (Models.PageOrientation)value;
@@ -227,11 +227,11 @@ namespace VisioScripting.Commands
                     double new_width = old_size.Height;
 
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_width);
-                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_height);
-                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PrintPageOrientation, (int)orientation);
+                    writer.SetValue(VisioAutomation.Core.SrcConstants.PageWidth, new_width);
+                    writer.SetValue(VisioAutomation.Core.SrcConstants.PageHeight, new_height);
+                    writer.SetValue(VisioAutomation.Core.SrcConstants.PrintPageOrientation, (int)orientation);
 
-                    writer.Commit(page.PageSheet, CellValueType.Formula);
+                    writer.Commit(page.PageSheet, VisioAutomation.Core.CellValueType.Formula);
                 }
 
             }
@@ -261,7 +261,7 @@ namespace VisioScripting.Commands
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValues(cells);
                     writer.BlastGuards = true;
-                    writer.Commit(page, CellValueType.Formula);
+                    writer.Commit(page, VisioAutomation.Core.CellValueType.Formula);
                 }
             }
         }
@@ -276,9 +276,9 @@ namespace VisioScripting.Commands
                 {
                     var page_sheet = page.PageSheet;
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, new_size.Width);
-                    writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, new_size.Height);
-                    writer.Commit(page_sheet, CellValueType.Formula);
+                    writer.SetValue(VisioAutomation.Core.SrcConstants.PageWidth, new_size.Width);
+                    writer.SetValue(VisioAutomation.Core.SrcConstants.PageHeight, new_size.Height);
+                    writer.Commit(page_sheet, VisioAutomation.Core.CellValueType.Formula);
                 }
             }
         }

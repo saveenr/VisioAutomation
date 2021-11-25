@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public abstract TGroup ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols);
 
-        public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, VisioAutomation.Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.SingleRow);
             var cellgroups = new List<TGroup>(shapeids.Count);
@@ -69,7 +69,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public TGroup GetCellsSingleRow(IVisio.Shape shape, CellValueType type)
+        public TGroup GetCellsSingleRow(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.SingleRow);
             var cellqueryresult = this.__GetCells(query_cells_singlerow, shape, type);
@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cells;
         }
         
-        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, CellValueType type)
+        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VisioAutomation.Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
@@ -95,7 +95,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return list_cellgroups;
         }
 
-        public List<TGroup> GetCellsMultiRow(IVisio.Shape shape, CellValueType type)
+        public List<TGroup> GetCellsMultiRow(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
@@ -116,49 +116,49 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private Query.SectionQueryShapeResults<string> __GetCells(Query.SectionQuery query, IVisio.Shape shape, CellValueType type)
+        private Query.SectionQueryShapeResults<string> __GetCells(Query.SectionQuery query, IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var surface = new Core.SurfaceTarget(shape);
             var results = type switch
             {
-                CellValueType.Formula => query.GetFormulas(surface),
-                CellValueType.Result => query.GetResults<string>(surface),
+                VisioAutomation.Core.CellValueType.Formula => query.GetFormulas(surface),
+                VisioAutomation.Core.CellValueType.Result => query.GetResults<string>(surface),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
         }
 
-        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, Core.ShapeIDPairs shapeidpairs, CellValueType type)
+        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VisioAutomation.Core.CellValueType type)
         {
             var surface = new Core.SurfaceTarget(page);
             var results = type switch
             {
-                CellValueType.Formula => query.GetFormulas(surface, shapeidpairs),
-                CellValueType.Result => query.GetResults<string>(surface, shapeidpairs),
+                VisioAutomation.Core.CellValueType.Formula => query.GetFormulas(surface, shapeidpairs),
+                VisioAutomation.Core.CellValueType.Result => query.GetResults<string>(surface, shapeidpairs),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
         }
 
-        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Shape shape, CellValueType type)
+        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var surface = new Core.SurfaceTarget(shape);
             var results = type switch
             {
-                CellValueType.Formula => query.GetFormulas(surface),
-                CellValueType.Result => query.GetResults<string>(surface),
+                VisioAutomation.Core.CellValueType.Formula => query.GetFormulas(surface),
+                VisioAutomation.Core.CellValueType.Result => query.GetResults<string>(surface),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
         }
 
-        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
+        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, VisioAutomation.Core.CellValueType type)
         {
             var surface = new Core.SurfaceTarget(page);
             var results = type switch
             {
-                CellValueType.Formula => query.GetFormulas(surface, shapeids),
-                CellValueType.Result => query.GetResults<string>(surface, shapeids),
+                VisioAutomation.Core.CellValueType.Formula => query.GetFormulas(surface, shapeids),
+                VisioAutomation.Core.CellValueType.Result => query.GetResults<string>(surface, shapeids),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;

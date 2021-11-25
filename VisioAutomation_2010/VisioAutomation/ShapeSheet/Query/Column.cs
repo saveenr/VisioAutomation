@@ -7,9 +7,9 @@ namespace VisioAutomation.ShapeSheet.Query
         public string Name { get; protected set; }
         public int Ordinal { get; protected set; }
 
-        public ShapeSheet.Src Src { get; }
+        public VisioAutomation.Core.Src Src { get; }
 
-        public Column(int ordinal, string name, ShapeSheet.Src src) 
+        public Column(int ordinal, string name, VisioAutomation.Core.Src src) 
         {
             if (string.IsNullOrEmpty(name))
             {

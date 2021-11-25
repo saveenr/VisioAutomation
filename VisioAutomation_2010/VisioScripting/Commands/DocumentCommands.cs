@@ -213,7 +213,7 @@ namespace VisioScripting.Commands
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(pagecells);
-            writer.Commit(page.PageSheet, CellValueType.Formula);
+            writer.Commit(page.PageSheet, VisioAutomation.Core.CellValueType.Formula);
 
             return doc;
         }

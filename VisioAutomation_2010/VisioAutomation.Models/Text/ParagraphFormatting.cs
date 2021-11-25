@@ -4,37 +4,37 @@ namespace VisioAutomation.Models.Text
 {
     public class ParagraphFormatting 
     {
-        public ShapeSheet.CellValue Bullet { get; set; }
-        public ShapeSheet.CellValue BulletFont { get; set; }
-        public ShapeSheet.CellValue BulletFontSize { get; set; }
-        public ShapeSheet.CellValue BulletString { get; set; }
-        public ShapeSheet.CellValue Flags { get; set; }
-        public ShapeSheet.CellValue HorizontalAlign { get; set; }
-        public ShapeSheet.CellValue IndentFirst { get; set; }
-        public ShapeSheet.CellValue IndentLeft { get; set; }
-        public ShapeSheet.CellValue IndentRight { get; set; }
-        public ShapeSheet.CellValue LocBulletFont { get; set; }
-        public ShapeSheet.CellValue SpacingAfter { get; set; }
-        public ShapeSheet.CellValue SpacingBefore { get; set; }
-        public ShapeSheet.CellValue SpacingLine { get; set; }
-        public ShapeSheet.CellValue TextPosAfterBullet { get; set; }
+        public Core.CellValue Bullet { get; set; }
+        public Core.CellValue BulletFont { get; set; }
+        public Core.CellValue BulletFontSize { get; set; }
+        public Core.CellValue BulletString { get; set; }
+        public Core.CellValue Flags { get; set; }
+        public Core.CellValue HorizontalAlign { get; set; }
+        public Core.CellValue IndentFirst { get; set; }
+        public Core.CellValue IndentLeft { get; set; }
+        public Core.CellValue IndentRight { get; set; }
+        public Core.CellValue LocBulletFont { get; set; }
+        public Core.CellValue SpacingAfter { get; set; }
+        public Core.CellValue SpacingBefore { get; set; }
+        public Core.CellValue SpacingLine { get; set; }
+        public Core.CellValue TextPosAfterBullet { get; set; }
         
         internal void ApplyFormulas(VisioAutomation.ShapeSheet.Writers.SrcWriter writer, short row)
         {
-            writer.SetValue(SrcConstants.ParaIndentLeft.CloneWithNewRow(row), this.IndentLeft);
-            writer.SetValue(SrcConstants.ParaIndentFirst.CloneWithNewRow(row), this.IndentFirst);
-            writer.SetValue(SrcConstants.ParaIndentRight.CloneWithNewRow(row), this.IndentRight);
-            writer.SetValue(SrcConstants.ParaSpacingAfter.CloneWithNewRow(row), this.SpacingAfter);
-            writer.SetValue(SrcConstants.ParaSpacingBefore.CloneWithNewRow(row), this.SpacingBefore);
-            writer.SetValue(SrcConstants.ParaSpacingLine.CloneWithNewRow(row), this.SpacingLine);
-            writer.SetValue(SrcConstants.ParaHorizontalAlign.CloneWithNewRow(row), this.HorizontalAlign);
-            writer.SetValue(SrcConstants.ParaBulletFont.CloneWithNewRow(row), this.BulletFont);
-            writer.SetValue(SrcConstants.ParaBullet.CloneWithNewRow(row), this.Bullet);
-            writer.SetValue(SrcConstants.ParaBulletFontSize.CloneWithNewRow(row), this.BulletFontSize);
-            writer.SetValue(SrcConstants.ParaLocalizeBulletFont.CloneWithNewRow(row), this.LocBulletFont);
-            writer.SetValue(SrcConstants.ParaTextPosAfterBullet.CloneWithNewRow(row), this.TextPosAfterBullet);
-            writer.SetValue(SrcConstants.ParaFlags.CloneWithNewRow(row), this.Flags);
-            writer.SetValue(SrcConstants.ParaBulletString.CloneWithNewRow(row), this.BulletString);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaIndentLeft.CloneWithNewRow(row), this.IndentLeft);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaIndentFirst.CloneWithNewRow(row), this.IndentFirst);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaIndentRight.CloneWithNewRow(row), this.IndentRight);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaSpacingAfter.CloneWithNewRow(row), this.SpacingAfter);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaSpacingBefore.CloneWithNewRow(row), this.SpacingBefore);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaSpacingLine.CloneWithNewRow(row), this.SpacingLine);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaHorizontalAlign.CloneWithNewRow(row), this.HorizontalAlign);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaBulletFont.CloneWithNewRow(row), this.BulletFont);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaBullet.CloneWithNewRow(row), this.Bullet);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaBulletFontSize.CloneWithNewRow(row), this.BulletFontSize);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaLocalizeBulletFont.CloneWithNewRow(row), this.LocBulletFont);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaTextPosAfterBullet.CloneWithNewRow(row), this.TextPosAfterBullet);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaFlags.CloneWithNewRow(row), this.Flags);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.ParaBulletString.CloneWithNewRow(row), this.BulletString);
         }
 
         public void ApplyFormulasTo(ParagraphFormatting target)

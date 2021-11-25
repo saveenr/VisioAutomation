@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using SRCCON = VisioAutomation.ShapeSheet.SrcConstants;
+using SRCCON = VisioAutomation.Core.SrcConstants;
 
 namespace VisioPowerShell.Models
 {

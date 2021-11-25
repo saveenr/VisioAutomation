@@ -11,19 +11,19 @@ namespace VisioAutomation.ShapeSheet.Writers
         }
 
 
-        public void Commit(IVisio.Shape shape, CellValueType type)
+        public void Commit(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var surface = new Core.SurfaceTarget(shape);
             this._commit(surface, type);
         }
 
-        public void Commit(IVisio.Page page, CellValueType type)
+        public void Commit(IVisio.Page page, VisioAutomation.Core.CellValueType type)
         {
             var surface = new Core.SurfaceTarget(page);
             this._commit(surface, type);
         }
 
-        public void SetValue(Src src, CellValue formula)
+        public void SetValue(VisioAutomation.Core.Src src, VisioAutomation.Core.CellValue formula)
         {
             this.__set_value_ignore_null(src, formula);
         }
@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void __set_value_ignore_null(Src src, CellValue formula)
+        private void __set_value_ignore_null(VisioAutomation.Core.Src src, VisioAutomation.Core.CellValue formula)
         {
             if (this._records == null)
             {
@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void _commit(Core.SurfaceTarget surface, CellValueType type)
+        private void _commit(Core.SurfaceTarget surface, VisioAutomation.Core.CellValueType type)
         {
             if (this._records == null || this._records.Count < 1)
             {
@@ -73,7 +73,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             var values = this._records.BuildValuesArray();
 
-            if (type == CellValueType.Formula)
+            if (type == VisioAutomation.Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
                 int c = surface.SetFormulas(stream, values, (short)flags);

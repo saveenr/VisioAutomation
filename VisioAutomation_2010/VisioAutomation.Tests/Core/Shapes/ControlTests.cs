@@ -26,7 +26,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             Assert.AreEqual(2, ControlHelper.GetCount(s1));
             
             // retrieve the control information
-            var controls = ControlCells.GetCells(s1, CellValueType.Formula);
+            var controls = ControlCells.GetCells(s1, VisioAutomation.Core.CellValueType.Formula);
 
             // verify that the controls were set propery
             Assert.AreEqual(2, controls.Count);

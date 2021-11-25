@@ -87,8 +87,8 @@ namespace VisioAutomation_Tests
         public static VisioAutomation.Core.Size GetSize(IVisio.Shape shape)
         {
             var query = new CellQuery();
-            var col_w = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormWidth,"Width");
-            var col_h = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.XFormHeight,"Height");
+            var col_w = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormWidth,"Width");
+            var col_h = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormHeight,"Height");
 
             var cellqueryresult = query.GetResults<double>(shape);
 
@@ -148,10 +148,10 @@ namespace VisioAutomation_Tests
             var page_sheet = page.PageSheet;
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
-            writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, size.Width);
-            writer.SetValue(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, size.Height);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.PageWidth, size.Width);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.PageHeight, size.Height);
 
-            writer.Commit(page_sheet, CellValueType.Formula);
+            writer.Commit(page_sheet, VisioAutomation.Core.CellValueType.Formula);
         }
 
         public static VisioAutomation.Core.Size GetPageSize(IVisio.Page page)
@@ -162,8 +162,8 @@ namespace VisioAutomation_Tests
             }
 
             var query = new CellQuery();
-            var col_height = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageHeight, "PageHeight");
-            var col_width = query.Columns.Add(VisioAutomation.ShapeSheet.SrcConstants.PageWidth, "PageWidth");
+            var col_height = query.Columns.Add(VisioAutomation.Core.SrcConstants.PageHeight, "PageHeight");
+            var col_width = query.Columns.Add(VisioAutomation.Core.SrcConstants.PageWidth, "PageWidth");
 
             var cellqueryresults = query.GetResults<double>(page.PageSheet);
             var row = cellqueryresults[0];

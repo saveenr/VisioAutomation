@@ -148,7 +148,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private IEnumerable<Src> _enum_srcs()
+        private IEnumerable<VisioAutomation.Core.Src> _enum_srcs()
         {
             foreach (var col in this.Columns)
             {
@@ -156,13 +156,13 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private IEnumerable<SidSrc> _enum_sidsrcs(IList<int> shapeids)
+        private IEnumerable<VisioAutomation.Core.SidSrc> _enum_sidsrcs(IList<int> shapeids)
         {
             foreach (var shapeid in shapeids)
             {
                 foreach(var col in this.Columns)
                 {
-                    yield return new SidSrc((short)shapeid, col.Src);
+                    yield return new VisioAutomation.Core.SidSrc((short)shapeid, col.Src);
                 }
             }
         }

@@ -9,11 +9,11 @@ namespace VisioAutomation.Shapes
     public class ShapeGeometrySection : IEnumerable<ShapeGeometryRow>
     {
         private List<ShapeGeometryRow> Rows { get; }
-        public ShapeSheet.CellValue NoFill { get; set; }
-        public ShapeSheet.CellValue NoLine { get; set; }
-        public ShapeSheet.CellValue NoShow { get; set; }
-        public ShapeSheet.CellValue NoSnap { get; set; }
-        public ShapeSheet.CellValue NoQuickDrag { get; set; }
+        public Core.CellValue NoFill { get; set; }
+        public Core.CellValue NoLine { get; set; }
+        public Core.CellValue NoShow { get; set; }
+        public Core.CellValue NoSnap { get; set; }
+        public Core.CellValue NoQuickDrag { get; set; }
 
         public ShapeGeometrySection()
         {
@@ -45,11 +45,11 @@ namespace VisioAutomation.Shapes
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
 
-            var src_nofill = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoFill.Cell);
-            var src_noline = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoLine.Cell);
-            var src_noshow = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoShow.Cell);
-            var src_nosnap = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoSnap.Cell);
-            var src_noquickdrag = new VA.ShapeSheet.Src(sec_index, 0, ShapeSheet.SrcConstants.GeometryNoQuickDrag.Cell);
+            var src_nofill = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoFill.Cell);
+            var src_noline = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoLine.Cell);
+            var src_noshow = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoShow.Cell);
+            var src_nosnap = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoSnap.Cell);
+            var src_noquickdrag = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoQuickDrag.Cell);
 
             writer.SetValue(src_nofill, this.NoFill);
             writer.SetValue(src_noline, this.NoLine);
@@ -63,19 +63,19 @@ namespace VisioAutomation.Shapes
                 row_count++;
             }
 
-            writer.Commit(shape, CellValueType.Formula);
+            writer.Commit(shape, Core.CellValueType.Formula);
 
             return 0;
         }
 
-        public ShapeGeometryRow AddMoveTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y)
+        public ShapeGeometryRow AddMoveTo(Core.CellValue x, Core.CellValue y)
         {
             var row = ShapeGeometryRow.CreateMoveTo(x, y);
             this.Rows.Add(row);
             return row;
         }
 
-        public ShapeGeometryRow AddLineTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y)
+        public ShapeGeometryRow AddLineTo(Core.CellValue x, Core.CellValue y)
         {
             var row = ShapeGeometryRow.CreateLineTo(x, y);
             this.Rows.Add(row);
@@ -83,7 +83,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddArcTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y, ShapeSheet.CellValue a)
+        public ShapeGeometryRow AddArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a)
         {
             var row = ShapeGeometryRow.CreateArcTo(x, y, a);
             this.Rows.Add(row);
@@ -91,7 +91,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddEllipticalArcTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y, ShapeSheet.CellValue a, ShapeSheet.CellValue b, ShapeSheet.CellValue c, ShapeSheet.CellValue d)
+        public ShapeGeometryRow AddEllipticalArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
         {
             var row = ShapeGeometryRow.CreateEllipticalArcTo(x, y, a, b, c, d);
             this.Rows.Add(row);
@@ -99,7 +99,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddEllipse(ShapeSheet.CellValue x, ShapeSheet.CellValue y, ShapeSheet.CellValue a, ShapeSheet.CellValue b, ShapeSheet.CellValue c, ShapeSheet.CellValue d)
+        public ShapeGeometryRow AddEllipse(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
         {
             var row = ShapeGeometryRow.CreateEllipse(x, y, a, b, c, d);
             this.Rows.Add(row);
@@ -107,7 +107,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddNurbsTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y, ShapeSheet.CellValue a, ShapeSheet.CellValue b, ShapeSheet.CellValue c, ShapeSheet.CellValue d, ShapeSheet.CellValue e)
+        public ShapeGeometryRow AddNurbsTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d, Core.CellValue e)
         {
             var row = ShapeGeometryRow.CreateNurbsTo(x, y, a, b, c, d, e);
             this.Rows.Add(row);
@@ -115,7 +115,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddPolylineTo(ShapeSheet.CellValue x, ShapeSheet.CellValue y, ShapeSheet.CellValue a)
+        public ShapeGeometryRow AddPolylineTo(Core.CellValue x, Core.CellValue y, Core.CellValue a)
         {
             var row = ShapeGeometryRow.CreatePolylineTo(x, y, a);
             this.Rows.Add(row);
@@ -123,7 +123,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddInfiniteLine(ShapeSheet.CellValue x, ShapeSheet.CellValue y, ShapeSheet.CellValue a, ShapeSheet.CellValue b)
+        public ShapeGeometryRow AddInfiniteLine(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b)
         {
             var row = ShapeGeometryRow.CreateInfiniteLine(x, y, a, b);
             this.Rows.Add(row);
@@ -131,7 +131,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddSplineStart(ShapeSheet.CellValue x, ShapeSheet.CellValue y, ShapeSheet.CellValue a, ShapeSheet.CellValue b, ShapeSheet.CellValue c, ShapeSheet.CellValue d)
+        public ShapeGeometryRow AddSplineStart(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
         {
             var row = ShapeGeometryRow.CreateSplineStart(x, y, a, b, c, d);
             this.Rows.Add(row);
@@ -139,7 +139,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public ShapeGeometryRow AddSplineKnot(ShapeSheet.CellValue x, ShapeSheet.CellValue y, ShapeSheet.CellValue a)
+        public ShapeGeometryRow AddSplineKnot(Core.CellValue x, Core.CellValue y, Core.CellValue a)
         {
             var row = ShapeGeometryRow.CreateSplineKnot(x, y, a);
             this.Rows.Add(row);

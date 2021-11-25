@@ -48,7 +48,7 @@ namespace VisioScripting_Tests
             var shapes = client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
             foreach (var shape in shapes)
             {
-                writer.SetFormula( shape.ID16, VA.ShapeSheet.SrcConstants.LineEndArrow, "13");
+                writer.SetFormula( shape.ID16, VA.Core.SrcConstants.LineEndArrow, "13");
             }
             writer.Commit();
 

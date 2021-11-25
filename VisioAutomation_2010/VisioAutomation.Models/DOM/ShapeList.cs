@@ -125,7 +125,7 @@ namespace VisioAutomation.Models.Dom
                 fmt.Apply(writer, id);
             }
 
-            writer.Commit(context.VisioPage, ShapeSheet.CellValueType.Formula);
+            writer.Commit(context.VisioPage, Core.CellValueType.Formula);
         }
 
         private void _perform_drawing(RenderContext context)

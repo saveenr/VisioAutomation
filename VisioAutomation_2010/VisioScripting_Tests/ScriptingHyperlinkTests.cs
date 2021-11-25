@@ -28,7 +28,7 @@ namespace VisioScripting_Tests
             client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
 
-            var hyperlinks0 = client.Hyperlink.GetHyperlinks(VisioScripting.TargetShapes.Auto, VASS.CellValueType.Formula);
+            var hyperlinks0 = client.Hyperlink.GetHyperlinks(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
 
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks0[s1].Count);
@@ -39,14 +39,14 @@ namespace VisioScripting_Tests
             hyperlink.Address = "http://www.microsoft.com";
             client.Hyperlink.AddHyperlink(VisioScripting.TargetShapes.Auto, hyperlink);
 
-            var hyperlinks1 = client.Hyperlink.GetHyperlinks(VisioScripting.TargetShapes.Auto, VASS.CellValueType.Formula);
+            var hyperlinks1 = client.Hyperlink.GetHyperlinks(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks1.Count);
             Assert.AreEqual(1, hyperlinks1[s1].Count);
             Assert.AreEqual(1, hyperlinks1[s2].Count);
             Assert.AreEqual(1, hyperlinks1[s3].Count);
 
             client.Hyperlink.DeleteHyperlinkAtIndex(VisioScripting.TargetShapes.Auto, 0);
-            var hyperlinks2 = client.Hyperlink.GetHyperlinks(VisioScripting.TargetShapes.Auto, VASS.CellValueType.Formula);
+            var hyperlinks2 = client.Hyperlink.GetHyperlinks(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(3, hyperlinks0.Count);
             Assert.AreEqual(0, hyperlinks2[s1].Count);
             Assert.AreEqual(0, hyperlinks2[s2].Count);

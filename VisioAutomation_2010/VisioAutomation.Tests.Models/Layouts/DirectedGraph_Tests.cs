@@ -69,7 +69,7 @@ namespace VisioAutomation_Tests.Models.Layouts
             renderer.Render(page1, d);
 
             Assert.IsNotNull(n0.VisioShape);
-            var props_dic = CustomPropertyHelper.GetDictionary(n0.VisioShape, CellValueType.Formula);
+            var props_dic = CustomPropertyHelper.GetDictionary(n0.VisioShape, VisioAutomation.Core.CellValueType.Formula);
 
             Assert.IsTrue(props_dic.Count>=3);
             Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Value);

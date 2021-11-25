@@ -7,16 +7,16 @@ namespace VisioAutomation.Shapes
 {
     public class CustomPropertyCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValue Ask { get; set; }
-        public VASS.CellValue Calendar { get; set; }
-        public VASS.CellValue Format { get; set; }
-        public VASS.CellValue Invisible { get; set; }
-        public VASS.CellValue Label { get; set; }
-        public VASS.CellValue LangID { get; set; }
-        public VASS.CellValue Prompt { get; set; }
-        public VASS.CellValue SortKey { get; set; }
-        public VASS.CellValue Type { get; set; }
-        public VASS.CellValue Value { get; set; }
+        public VisioAutomation.Core.CellValue Ask { get; set; }
+        public VisioAutomation.Core.CellValue Calendar { get; set; }
+        public VisioAutomation.Core.CellValue Format { get; set; }
+        public VisioAutomation.Core.CellValue Invisible { get; set; }
+        public VisioAutomation.Core.CellValue Label { get; set; }
+        public VisioAutomation.Core.CellValue LangID { get; set; }
+        public VisioAutomation.Core.CellValue Prompt { get; set; }
+        public VisioAutomation.Core.CellValue SortKey { get; set; }
+        public VisioAutomation.Core.CellValue Type { get; set; }
+        public VisioAutomation.Core.CellValue Value { get; set; }
 
         public CustomPropertyCells()
         {
@@ -25,16 +25,16 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Label), VASS.SrcConstants.CustomPropLabel, this.Label);
-            yield return this.Create(nameof(this.Value), VASS.SrcConstants.CustomPropValue, this.Value);
-            yield return this.Create(nameof(this.Format), VASS.SrcConstants.CustomPropFormat, this.Format);
-            yield return this.Create(nameof(this.Prompt), VASS.SrcConstants.CustomPropPrompt, this.Prompt);
-            yield return this.Create(nameof(this.Calendar), VASS.SrcConstants.CustomPropCalendar, this.Calendar);
-            yield return this.Create(nameof(this.LangID), VASS.SrcConstants.CustomPropLangID, this.LangID);
-            yield return this.Create(nameof(this.SortKey), VASS.SrcConstants.CustomPropSortKey, this.SortKey);
-            yield return this.Create(nameof(this.Invisible), VASS.SrcConstants.CustomPropInvisible, this.Invisible);
-            yield return this.Create(nameof(this.Type), VASS.SrcConstants.CustomPropType, this.Type);
-            yield return this.Create(nameof(this.Ask), VASS.SrcConstants.CustomPropAsk, this.Ask);
+            yield return this.Create(nameof(this.Label), VisioAutomation.Core.SrcConstants.CustomPropLabel, this.Label);
+            yield return this.Create(nameof(this.Value), VisioAutomation.Core.SrcConstants.CustomPropValue, this.Value);
+            yield return this.Create(nameof(this.Format), VisioAutomation.Core.SrcConstants.CustomPropFormat, this.Format);
+            yield return this.Create(nameof(this.Prompt), VisioAutomation.Core.SrcConstants.CustomPropPrompt, this.Prompt);
+            yield return this.Create(nameof(this.Calendar), VisioAutomation.Core.SrcConstants.CustomPropCalendar, this.Calendar);
+            yield return this.Create(nameof(this.LangID), VisioAutomation.Core.SrcConstants.CustomPropLangID, this.LangID);
+            yield return this.Create(nameof(this.SortKey), VisioAutomation.Core.SrcConstants.CustomPropSortKey, this.SortKey);
+            yield return this.Create(nameof(this.Invisible), VisioAutomation.Core.SrcConstants.CustomPropInvisible, this.Invisible);
+            yield return this.Create(nameof(this.Type), VisioAutomation.Core.SrcConstants.CustomPropType, this.Type);
+            yield return this.Create(nameof(this.Ask), VisioAutomation.Core.SrcConstants.CustomPropAsk, this.Ask);
         }
 
 
@@ -45,14 +45,14 @@ namespace VisioAutomation.Shapes
             this.Type = type_int;
         }
 
-        public CustomPropertyCells(VASS.CellValue value, CustomPropertyType type)
+        public CustomPropertyCells(VisioAutomation.Core.CellValue value, CustomPropertyType type)
         {
             var type_int = CustomPropertyTypeToInt(type);
             this.Value = value;
             this.Type = type_int;
         }
         
-        public static CustomPropertyCells Create(VASS.CellValue value, CustomPropertyType type)
+        public static CustomPropertyCells Create(VisioAutomation.Core.CellValue value, CustomPropertyType type)
         {
             return new CustomPropertyCells(value.Value, type);
         }
@@ -133,7 +133,7 @@ namespace VisioAutomation.Shapes
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Boolean);
         }
 
-        public CustomPropertyCells(VASS.CellValue value)
+        public CustomPropertyCells(VisioAutomation.Core.CellValue value)
         {
             this.Value = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
@@ -152,20 +152,20 @@ namespace VisioAutomation.Shapes
         {
             // only quote the value when it is a string (no type specified or type equals zero)
             bool quote = (this.Type.Value == null || this.Type.Value == "0");
-            this.Value = VASS.CellValue.EncodeValue(this.Value.Value, quote);
-            this.Label = VASS.CellValue.EncodeValue(this.Label.Value);
-            this.Format = VASS.CellValue.EncodeValue(this.Format.Value);
-            this.Prompt = VASS.CellValue.EncodeValue(this.Prompt.Value);
+            this.Value = VisioAutomation.Core.CellValue.EncodeValue(this.Value.Value, quote);
+            this.Label = VisioAutomation.Core.CellValue.EncodeValue(this.Label.Value);
+            this.Format = VisioAutomation.Core.CellValue.EncodeValue(this.Format.Value);
+            this.Prompt = VisioAutomation.Core.CellValue.EncodeValue(this.Prompt.Value);
         }
 
 
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VisioAutomation.Core.CellValueType type)
         {
             var reader = Custom_Property_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
-        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = Custom_Property_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);

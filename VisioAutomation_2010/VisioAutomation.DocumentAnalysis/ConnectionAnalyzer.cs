@@ -36,12 +36,12 @@ namespace VisioAutomation.DocumentAnalysis
             var connnector_ids = edges.Select(e => e.Connector.ID).ToList();
 
             // Get the arrows for each connector
-            var src_beginarrow = ShapeSheet.SrcConstants.LineBeginArrow;
-            var src_endarrow = ShapeSheet.SrcConstants.LineEndArrow;
+            var src_beginarrow = VisioAutomation.Core.SrcConstants.LineBeginArrow;
+            var src_endarrow = VisioAutomation.Core.SrcConstants.LineEndArrow;
 
             var query = new VASS.Query.CellQuery();
-            var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(VASS.SrcConstants.LineBeginArrow));
-            var col_endarrow = query.Columns.Add(src_endarrow, nameof(VASS.SrcConstants.LineEndArrow));
+            var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(VisioAutomation.Core.SrcConstants.LineBeginArrow));
+            var col_endarrow = query.Columns.Add(src_endarrow, nameof(VisioAutomation.Core.SrcConstants.LineEndArrow));
             var listof_connectorinfo = query.GetResults<int>(page , connnector_ids);
             
             var directed_edges = new List<ConnectorEdge>();

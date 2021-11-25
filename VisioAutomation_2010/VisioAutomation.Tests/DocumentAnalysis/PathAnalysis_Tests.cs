@@ -31,14 +31,14 @@ namespace VisioAutomation_Tests.DocumentAnalysis
                 var writer = new SidSrcWriter();
                 if (a_arrow)
                 {
-                    writer.SetValue(c1.ID16, VASS.SrcConstants.LineBeginArrow, "13");                    
+                    writer.SetValue(c1.ID16, VisioAutomation.Core.SrcConstants.LineBeginArrow, "13");                    
                 }
                 if (b_arrow)
                 {
-                    writer.SetValue(c1.ID16, VASS.SrcConstants.LineEndArrow, "13");
+                    writer.SetValue(c1.ID16, VisioAutomation.Core.SrcConstants.LineEndArrow, "13");
                 }
 
-                writer.Commit(page, VASS.CellValueType.Formula);
+                writer.Commit(page, VisioAutomation.Core.CellValueType.Formula);
             }
         }
 

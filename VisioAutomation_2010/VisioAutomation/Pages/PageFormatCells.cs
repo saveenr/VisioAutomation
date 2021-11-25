@@ -1,51 +1,52 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
+
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
     public class PageFormatCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValue DrawingScale { get; set; }
-        public VASS.CellValue DrawingScaleType { get; set; }
-        public VASS.CellValue DrawingSizeType { get; set; }
-        public VASS.CellValue InhibitSnap { get; set; }
-        public VASS.CellValue Height { get; set; }
-        public VASS.CellValue Scale { get; set; }
-        public VASS.CellValue Width { get; set; }
-        public VASS.CellValue ShadowObliqueAngle { get; set; }
-        public VASS.CellValue ShadowOffsetX { get; set; }
-        public VASS.CellValue ShadowOffsetY { get; set; }
-        public VASS.CellValue ShadowScaleFactor { get; set; }
-        public VASS.CellValue ShadowType { get; set; }
-        public VASS.CellValue UIVisibility { get; set; }
-        public VASS.CellValue DrawingResizeType { get; set; } // new in visio 2010
+        public VisioAutomation.Core.CellValue DrawingScale { get; set; }
+        public VisioAutomation.Core.CellValue DrawingScaleType { get; set; }
+        public VisioAutomation.Core.CellValue DrawingSizeType { get; set; }
+        public VisioAutomation.Core.CellValue InhibitSnap { get; set; }
+        public VisioAutomation.Core.CellValue Height { get; set; }
+        public VisioAutomation.Core.CellValue Scale { get; set; }
+        public VisioAutomation.Core.CellValue Width { get; set; }
+        public VisioAutomation.Core.CellValue ShadowObliqueAngle { get; set; }
+        public VisioAutomation.Core.CellValue ShadowOffsetX { get; set; }
+        public VisioAutomation.Core.CellValue ShadowOffsetY { get; set; }
+        public VisioAutomation.Core.CellValue ShadowScaleFactor { get; set; }
+        public VisioAutomation.Core.CellValue ShadowType { get; set; }
+        public VisioAutomation.Core.CellValue UIVisibility { get; set; }
+        public VisioAutomation.Core.CellValue DrawingResizeType { get; set; } // new in visio 2010
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.DrawingScale), VASS.SrcConstants.PageDrawingScale, this.DrawingScale);
-            yield return this.Create(nameof(this.DrawingScaleType), VASS.SrcConstants.PageDrawingScaleType,
+            yield return this.Create(nameof(this.DrawingScale), VisioAutomation.Core.SrcConstants.PageDrawingScale, this.DrawingScale);
+            yield return this.Create(nameof(this.DrawingScaleType), VisioAutomation.Core.SrcConstants.PageDrawingScaleType,
                 this.DrawingScaleType);
-            yield return this.Create(nameof(this.DrawingSizeType), VASS.SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
-            yield return this.Create(nameof(this.InhibitSnap), VASS.SrcConstants.PageInhibitSnap, this.InhibitSnap);
-            yield return this.Create(nameof(this.Height), VASS.SrcConstants.PageHeight, this.Height);
-            yield return this.Create(nameof(this.Scale), VASS.SrcConstants.PageScale, this.Scale);
-            yield return this.Create(nameof(this.Width), VASS.SrcConstants.PageWidth, this.Width);
-            yield return this.Create(nameof(this.ShadowObliqueAngle), VASS.SrcConstants.PageShadowObliqueAngle,
+            yield return this.Create(nameof(this.DrawingSizeType), VisioAutomation.Core.SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
+            yield return this.Create(nameof(this.InhibitSnap), VisioAutomation.Core.SrcConstants.PageInhibitSnap, this.InhibitSnap);
+            yield return this.Create(nameof(this.Height), VisioAutomation.Core.SrcConstants.PageHeight, this.Height);
+            yield return this.Create(nameof(this.Scale), VisioAutomation.Core.SrcConstants.PageScale, this.Scale);
+            yield return this.Create(nameof(this.Width), VisioAutomation.Core.SrcConstants.PageWidth, this.Width);
+            yield return this.Create(nameof(this.ShadowObliqueAngle), VisioAutomation.Core.SrcConstants.PageShadowObliqueAngle,
                 this.ShadowObliqueAngle);
-            yield return this.Create(nameof(this.ShadowOffsetX), VASS.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
-            yield return this.Create(nameof(this.ShadowOffsetY), VASS.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
-            yield return this.Create(nameof(this.ShadowScaleFactor), VASS.SrcConstants.PageShadowScaleFactor,
+            yield return this.Create(nameof(this.ShadowOffsetX), VisioAutomation.Core.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
+            yield return this.Create(nameof(this.ShadowOffsetY), VisioAutomation.Core.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
+            yield return this.Create(nameof(this.ShadowScaleFactor), VisioAutomation.Core.SrcConstants.PageShadowScaleFactor,
                 this.ShadowScaleFactor);
-            yield return this.Create(nameof(this.ShadowType), VASS.SrcConstants.PageShadowType, this.ShadowType);
-            yield return this.Create(nameof(this.UIVisibility), VASS.SrcConstants.PageUIVisibility, this.UIVisibility);
-            yield return this.Create(nameof(this.DrawingResizeType), VASS.SrcConstants.PageDrawingResizeType,
+            yield return this.Create(nameof(this.ShadowType), VisioAutomation.Core.SrcConstants.PageShadowType, this.ShadowType);
+            yield return this.Create(nameof(this.UIVisibility), VisioAutomation.Core.SrcConstants.PageUIVisibility, this.UIVisibility);
+            yield return this.Create(nameof(this.DrawingResizeType), VisioAutomation.Core.SrcConstants.PageDrawingResizeType,
                 this.DrawingResizeType);
         }
 
 
-        public static PageFormatCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static PageFormatCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = PageFormatCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);

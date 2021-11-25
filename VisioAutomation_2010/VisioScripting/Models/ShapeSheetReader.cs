@@ -7,18 +7,18 @@ namespace VisioScripting.Models
     {
         public Client Client;
         public VisioAutomation.Core.SurfaceTarget Surface;
-        public List<VisioAutomation.ShapeSheet.SidSrc> SidSrcs;
+        public List<VisioAutomation.Core.SidSrc> SidSrcs;
         
         public ShapeSheetReader(Client client, IVisio.Page page)
         {
             this.Client = client;
             this.Surface = new VisioAutomation.Core.SurfaceTarget(page);
-            this.SidSrcs = new List<VisioAutomation.ShapeSheet.SidSrc>();
+            this.SidSrcs = new List<VisioAutomation.Core.SidSrc>();
         }
 
-        public void AddCell(short id, VisioAutomation.ShapeSheet.Src src)
+        public void AddCell(short id, VisioAutomation.Core.Src src)
         {
-            var sidsrc = new VisioAutomation.ShapeSheet.SidSrc(id, src);
+            var sidsrc = new VisioAutomation.Core.SidSrc(id, src);
             this.SidSrcs.Add(sidsrc);
         }
 

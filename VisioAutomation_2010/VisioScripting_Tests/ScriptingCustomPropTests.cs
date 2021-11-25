@@ -29,7 +29,7 @@ namespace VisioScripting_Tests
 
             foreach (var shapeid in targetshapeids)
             {
-                writer.SetFormula( (short) shapeid, VA.ShapeSheet.SrcConstants.XFormPinX, "1.0");
+                writer.SetFormula( (short) shapeid, VA.Core.SrcConstants.XFormPinX, "1.0");
             }
 
             writer.Commit();
@@ -54,7 +54,7 @@ namespace VisioScripting_Tests
             client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
             client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
-            var prop_dic0 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var prop_dic0 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);
             Assert.AreEqual(0, prop_dic0[s2].Count);
@@ -64,7 +64,7 @@ namespace VisioScripting_Tests
             cp.Value = "\"BAR\"";
             client.CustomProperty.SetCustomProperty(VisioScripting.TargetShapes.Auto, "FOO",cp);
 
-            var prop_dic1 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var prop_dic1 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic1.Count);
             Assert.AreEqual(1, prop_dic1[s1].Count);
             Assert.AreEqual(1, prop_dic1[s2].Count);
@@ -83,7 +83,7 @@ namespace VisioScripting_Tests
 
             client.CustomProperty.DeleteCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
 
-            var prop_dic2 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.ShapeSheet.CellValueType.Formula);
+            var prop_dic2 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
             Assert.AreEqual(3, prop_dic2.Count);
             Assert.AreEqual(0, prop_dic2[s1].Count);
             Assert.AreEqual(0, prop_dic2[s2].Count);

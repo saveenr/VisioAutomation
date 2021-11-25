@@ -55,7 +55,7 @@ namespace VisioAutomation.Shapes
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(ctrl, row);
 
-            writer.Commit(shape, VASS.CellValueType.Formula);
+            writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
 
             return row;
         }

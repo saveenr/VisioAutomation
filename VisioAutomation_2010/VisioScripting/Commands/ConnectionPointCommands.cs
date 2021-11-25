@@ -26,7 +26,7 @@ namespace VisioScripting.Commands
             var dicof_shape_to_cxnpoint = new Dictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>>();
             foreach (var shape in targetshapes.Shapes)
             {
-                var cp = VisioAutomation.Shapes.ConnectionPointCells.GetCells(shape, VASS.CellValueType.Formula);
+                var cp = VisioAutomation.Shapes.ConnectionPointCells.GetCells(shape, VisioAutomation.Core.CellValueType.Formula);
                 dicof_shape_to_cxnpoint[shape] = cp;
             }
 

@@ -67,7 +67,7 @@ namespace VisioAutomation.Text
             return runs;
         }
         
-        public static TextFormat GetFormat(IVisio.Shape shape, VASS.CellValueType type)
+        public static TextFormat GetFormat(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var cells = new TextFormat();
             cells.CharacterFormats = CharacterFormatCells.GetCells(shape, type);
@@ -92,7 +92,7 @@ namespace VisioAutomation.Text
                     (short) 0] != 0) ;
         }
 
-        public static List<TextFormat> GetFormat(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<TextFormat> GetFormat(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VisioAutomation.Core.CellValueType type)
         {
             var shapeids = shapeidpairs.Select( s=>s.ShapeID).ToList();
 

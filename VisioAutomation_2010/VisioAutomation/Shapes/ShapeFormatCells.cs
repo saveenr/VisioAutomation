@@ -7,82 +7,82 @@ namespace VisioAutomation.Shapes
 {
     public class ShapeFormatCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValue FillBackground { get; set; }
-        public VASS.CellValue FillBackgroundTransparency { get; set; }
-        public VASS.CellValue FillForeground { get; set; }
-        public VASS.CellValue FillForegroundTransparency { get; set; }
-        public VASS.CellValue FillPattern { get; set; }
-        public VASS.CellValue FillShadowObliqueAngle { get; set; }
-        public VASS.CellValue FillShadowOffsetX { get; set; }
-        public VASS.CellValue FillShadowOffsetY { get; set; }
-        public VASS.CellValue FillShadowScaleFactor { get; set; }
-        public VASS.CellValue FillShadowType { get; set; }
-        public VASS.CellValue FillShadowBackground { get; set; }
-        public VASS.CellValue FillShadowBackgroundTransparency { get; set; }
-        public VASS.CellValue FillShadowForeground { get; set; }
-        public VASS.CellValue FillShadowForegroundTransparency { get; set; }
-        public VASS.CellValue FillShadowPattern { get; set; }
-        public VASS.CellValue LineBeginArrow { get; set; }
-        public VASS.CellValue LineBeginArrowSize { get; set; }
-        public VASS.CellValue LineEndArrow { get; set; }
-        public VASS.CellValue LineEndArrowSize { get; set; }
-        public VASS.CellValue LineCap { get; set; }
-        public VASS.CellValue LineColor { get; set; }
-        public VASS.CellValue LineColorTransparency { get; set; }
-        public VASS.CellValue LinePattern { get; set; }
-        public VASS.CellValue LineWeight { get; set; }
-        public VASS.CellValue LineRounding { get; set; }
+        public VisioAutomation.Core.CellValue FillBackground { get; set; }
+        public VisioAutomation.Core.CellValue FillBackgroundTransparency { get; set; }
+        public VisioAutomation.Core.CellValue FillForeground { get; set; }
+        public VisioAutomation.Core.CellValue FillForegroundTransparency { get; set; }
+        public VisioAutomation.Core.CellValue FillPattern { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowObliqueAngle { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowOffsetX { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowOffsetY { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowScaleFactor { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowType { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowBackground { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowBackgroundTransparency { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowForeground { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowForegroundTransparency { get; set; }
+        public VisioAutomation.Core.CellValue FillShadowPattern { get; set; }
+        public VisioAutomation.Core.CellValue LineBeginArrow { get; set; }
+        public VisioAutomation.Core.CellValue LineBeginArrowSize { get; set; }
+        public VisioAutomation.Core.CellValue LineEndArrow { get; set; }
+        public VisioAutomation.Core.CellValue LineEndArrowSize { get; set; }
+        public VisioAutomation.Core.CellValue LineCap { get; set; }
+        public VisioAutomation.Core.CellValue LineColor { get; set; }
+        public VisioAutomation.Core.CellValue LineColorTransparency { get; set; }
+        public VisioAutomation.Core.CellValue LinePattern { get; set; }
+        public VisioAutomation.Core.CellValue LineWeight { get; set; }
+        public VisioAutomation.Core.CellValue LineRounding { get; set; }
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.FillBackground), VASS.SrcConstants.FillBackground, this.FillBackground);
-            yield return this.Create(nameof(this.FillBackgroundTransparency), VASS.SrcConstants.FillBackgroundTransparency,
+            yield return this.Create(nameof(this.FillBackground), VisioAutomation.Core.SrcConstants.FillBackground, this.FillBackground);
+            yield return this.Create(nameof(this.FillBackgroundTransparency), VisioAutomation.Core.SrcConstants.FillBackgroundTransparency,
                 this.FillBackgroundTransparency);
-            yield return this.Create(nameof(this.FillForeground), VASS.SrcConstants.FillForeground, this.FillForeground);
-            yield return this.Create(nameof(this.FillForegroundTransparency), VASS.SrcConstants.FillForegroundTransparency,
+            yield return this.Create(nameof(this.FillForeground), VisioAutomation.Core.SrcConstants.FillForeground, this.FillForeground);
+            yield return this.Create(nameof(this.FillForegroundTransparency), VisioAutomation.Core.SrcConstants.FillForegroundTransparency,
                 this.FillForegroundTransparency);
-            yield return this.Create(nameof(this.FillPattern), VASS.SrcConstants.FillPattern, this.FillPattern);
-            yield return this.Create(nameof(this.FillShadowObliqueAngle), VASS.SrcConstants.FillShadowObliqueAngle,
+            yield return this.Create(nameof(this.FillPattern), VisioAutomation.Core.SrcConstants.FillPattern, this.FillPattern);
+            yield return this.Create(nameof(this.FillShadowObliqueAngle), VisioAutomation.Core.SrcConstants.FillShadowObliqueAngle,
                 this.FillShadowObliqueAngle);
-            yield return this.Create(nameof(this.FillShadowOffsetX), VASS.SrcConstants.FillShadowOffsetX,
+            yield return this.Create(nameof(this.FillShadowOffsetX), VisioAutomation.Core.SrcConstants.FillShadowOffsetX,
                 this.FillShadowOffsetX);
-            yield return this.Create(nameof(this.FillShadowOffsetY), VASS.SrcConstants.FillShadowOffsetY,
+            yield return this.Create(nameof(this.FillShadowOffsetY), VisioAutomation.Core.SrcConstants.FillShadowOffsetY,
                 this.FillShadowOffsetY);
-            yield return this.Create(nameof(this.FillShadowScaleFactor), VASS.SrcConstants.FillShadowScaleFactor,
+            yield return this.Create(nameof(this.FillShadowScaleFactor), VisioAutomation.Core.SrcConstants.FillShadowScaleFactor,
                 this.FillShadowScaleFactor);
-            yield return this.Create(nameof(this.FillShadowType), VASS.SrcConstants.FillShadowType, this.FillShadowType);
-            yield return this.Create(nameof(this.FillShadowBackground), VASS.SrcConstants.FillShadowBackground,
+            yield return this.Create(nameof(this.FillShadowType), VisioAutomation.Core.SrcConstants.FillShadowType, this.FillShadowType);
+            yield return this.Create(nameof(this.FillShadowBackground), VisioAutomation.Core.SrcConstants.FillShadowBackground,
                 this.FillShadowBackground);
             yield return this.Create(nameof(this.FillShadowBackgroundTransparency),
-                VASS.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
-            yield return this.Create(nameof(this.FillShadowForeground), VASS.SrcConstants.FillShadowForeground,
+                VisioAutomation.Core.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
+            yield return this.Create(nameof(this.FillShadowForeground), VisioAutomation.Core.SrcConstants.FillShadowForeground,
                 this.FillShadowForeground);
             yield return this.Create(nameof(this.FillShadowForegroundTransparency),
-                VASS.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
-            yield return this.Create(nameof(this.FillShadowPattern), VASS.SrcConstants.FillShadowPattern,
+                VisioAutomation.Core.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
+            yield return this.Create(nameof(this.FillShadowPattern), VisioAutomation.Core.SrcConstants.FillShadowPattern,
                 this.FillShadowPattern);
-            yield return this.Create(nameof(this.LineBeginArrow), VASS.SrcConstants.LineBeginArrow, this.LineBeginArrow);
-            yield return this.Create(nameof(this.LineBeginArrowSize), VASS.SrcConstants.LineBeginArrowSize,
+            yield return this.Create(nameof(this.LineBeginArrow), VisioAutomation.Core.SrcConstants.LineBeginArrow, this.LineBeginArrow);
+            yield return this.Create(nameof(this.LineBeginArrowSize), VisioAutomation.Core.SrcConstants.LineBeginArrowSize,
                 this.LineBeginArrowSize);
-            yield return this.Create(nameof(this.LineEndArrow), VASS.SrcConstants.LineEndArrow, this.LineEndArrow);
-            yield return this.Create(nameof(this.LineEndArrowSize), VASS.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
-            yield return this.Create(nameof(this.LineCap), VASS.SrcConstants.LineCap, this.LineCap);
-            yield return this.Create(nameof(this.LineColor), VASS.SrcConstants.LineColor, this.LineColor);
-            yield return this.Create(nameof(this.LineColorTransparency), VASS.SrcConstants.LineColorTransparency,
+            yield return this.Create(nameof(this.LineEndArrow), VisioAutomation.Core.SrcConstants.LineEndArrow, this.LineEndArrow);
+            yield return this.Create(nameof(this.LineEndArrowSize), VisioAutomation.Core.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+            yield return this.Create(nameof(this.LineCap), VisioAutomation.Core.SrcConstants.LineCap, this.LineCap);
+            yield return this.Create(nameof(this.LineColor), VisioAutomation.Core.SrcConstants.LineColor, this.LineColor);
+            yield return this.Create(nameof(this.LineColorTransparency), VisioAutomation.Core.SrcConstants.LineColorTransparency,
                 this.LineColorTransparency);
-            yield return this.Create(nameof(this.LinePattern), VASS.SrcConstants.LinePattern, this.LinePattern);
-            yield return this.Create(nameof(this.LineWeight), VASS.SrcConstants.LineWeight, this.LineWeight);
-            yield return this.Create(nameof(this.LineRounding), VASS.SrcConstants.LineRounding, this.LineRounding);
+            yield return this.Create(nameof(this.LinePattern), VisioAutomation.Core.SrcConstants.LinePattern, this.LinePattern);
+            yield return this.Create(nameof(this.LineWeight), VisioAutomation.Core.SrcConstants.LineWeight, this.LineWeight);
+            yield return this.Create(nameof(this.LineRounding), VisioAutomation.Core.SrcConstants.LineRounding, this.LineRounding);
         }
 
 
-        public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, VASS.CellValueType type)
+        public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, VisioAutomation.Core.CellValueType type)
         {
             var reader = shape_format_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
-        public static ShapeFormatCells GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static ShapeFormatCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = shape_format_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);

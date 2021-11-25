@@ -37,7 +37,7 @@ namespace VisioAutomation.Shapes
                 var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                 writer.SetValues(cp, cell_propname.Row);
 
-                writer.Commit(shape, VASS.CellValueType.Formula);
+                writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
 
                 return;
             }
@@ -60,10 +60,10 @@ namespace VisioAutomation.Shapes
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(cp, row);
 
-            writer.Commit(shape, VASS.CellValueType.Formula);
+            writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
         }
 
-        public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, VASS.CellValueType type)
+        public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
 
   
         {
@@ -72,7 +72,7 @@ namespace VisioAutomation.Shapes
             return shape_custprop_dic;
         }
 
-        public static List<CustomPropertyDictionary> GetDictionary(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<CustomPropertyDictionary> GetDictionary(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VisioAutomation.Core.CellValueType type)
         {
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
             var listof_custpropdics = _get_cells_as_list(shapeidpairs, listof_listof_custpropscells);
@@ -226,7 +226,7 @@ namespace VisioAutomation.Shapes
         // ----------------------------------------
         // ----------------------------------------
 
-        private static List<CustomPropertyNameCellsPair> __GetPairs(IVisio.Shape shape, VASS.CellValueType type)
+        private static List<CustomPropertyNameCellsPair> __GetPairs(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var shape_custprop_cells = CustomPropertyCells.GetCells(shape, type);
             var shape_custprop_names = CustomPropertyHelper.GetNames(shape);

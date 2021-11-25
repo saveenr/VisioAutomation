@@ -9,18 +9,18 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
         }
 
-        public void Commit(IVisio.Page page, VisioAutomation.ShapeSheet.CellValueType type)
+        public void Commit(IVisio.Page page, VisioAutomation.Core.CellValueType type)
         {
             var surface = new Core.SurfaceTarget(page);
             this.Commit(surface, type);
         }
-        public void SetValue(short id, Src src, CellValue formula)
+        public void SetValue(short id, VisioAutomation.Core.Src src, VisioAutomation.Core.CellValue formula)
         {
-            var sidsrc = new SidSrc(id, src);
+            var sidsrc = new VisioAutomation.Core.SidSrc(id, src);
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetValue(SidSrc sidsrc, CellValue formula)
+        public void SetValue(VisioAutomation.Core.SidSrc sidsrc, VisioAutomation.Core.CellValue formula)
         {
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void __SetValueIgnoreNull(SidSrc sidsrc, CellValue formula)
+        private void __SetValueIgnoreNull(VisioAutomation.Core.SidSrc sidsrc, VisioAutomation.Core.CellValue formula)
         {
             if (this._records == null)
             {
@@ -80,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void Commit(Core.SurfaceTarget surface, VisioAutomation.ShapeSheet.CellValueType type)
+        public void Commit(Core.SurfaceTarget surface, VisioAutomation.Core.CellValueType type)
         {
             if ((this._records == null || this._records.Count < 1))
             {
@@ -95,7 +95,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 throw new VisioAutomation.Exceptions.InternalAssertionException();
             }
 
-            if (type == CellValueType.Formula)
+            if (type == VisioAutomation.Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
                 int c = surface.SetFormulas(stream, items, (short)flags);

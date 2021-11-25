@@ -64,7 +64,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<ControlCells>> GetControls(TargetShapes targetshapes, CellValueType cvt)
+        public Dictionary<IVisio.Shape, IList<ControlCells>> GetControls(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
 

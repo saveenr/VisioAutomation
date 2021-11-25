@@ -26,18 +26,18 @@ namespace VisioScripting.Models
         {
             var query = new VASS.Query.CellQuery();
 
-            var col_XFormAngle = query.Columns.Add(VASS.SrcConstants.XFormAngle, nameof(VASS.SrcConstants.XFormAngle));
-            var col_XFormHeight = query.Columns.Add(VASS.SrcConstants.XFormHeight, nameof(VASS.SrcConstants.XFormHeight));
-            var col_XFormWidth = query.Columns.Add(VASS.SrcConstants.XFormWidth, nameof(VASS.SrcConstants.XFormWidth));
-            var col_XFormLocPinX = query.Columns.Add(VASS.SrcConstants.XFormLocPinX, nameof(VASS.SrcConstants.XFormLocPinX));
-            var col_XFormLocPinY = query.Columns.Add(VASS.SrcConstants.XFormLocPinY, nameof(VASS.SrcConstants.XFormLocPinY));
-            var col_XFormPinX = query.Columns.Add(VASS.SrcConstants.XFormPinX, nameof(VASS.SrcConstants.XFormPinX));
-            var col_XFormPinY = query.Columns.Add(VASS.SrcConstants.XFormPinY, nameof(VASS.SrcConstants.XFormPinY));
+            var col_XFormAngle = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormAngle, nameof(VisioAutomation.Core.SrcConstants.XFormAngle));
+            var col_XFormHeight = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormHeight, nameof(VisioAutomation.Core.SrcConstants.XFormHeight));
+            var col_XFormWidth = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormWidth, nameof(VisioAutomation.Core.SrcConstants.XFormWidth));
+            var col_XFormLocPinX = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormLocPinX, nameof(VisioAutomation.Core.SrcConstants.XFormLocPinX));
+            var col_XFormLocPinY = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormLocPinY, nameof(VisioAutomation.Core.SrcConstants.XFormLocPinY));
+            var col_XFormPinX = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX, nameof(VisioAutomation.Core.SrcConstants.XFormPinX));
+            var col_XFormPinY = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinY, nameof(VisioAutomation.Core.SrcConstants.XFormPinY));
 
-            var col_OneDBeginX = query.Columns.Add(VASS.SrcConstants.OneDBeginX, nameof(VASS.SrcConstants.OneDBeginX));
-            var col_OneDBeginY = query.Columns.Add(VASS.SrcConstants.OneDBeginY, nameof(VASS.SrcConstants.OneDBeginY));
-            var col_OneDEndX = query.Columns.Add(VASS.SrcConstants.OneDEndX, nameof(VASS.SrcConstants.OneDEndX));
-            var col_OneDEndY = query.Columns.Add(VASS.SrcConstants.OneDEndY, nameof(VASS.SrcConstants.OneDEndY));
+            var col_OneDBeginX = query.Columns.Add(VisioAutomation.Core.SrcConstants.OneDBeginX, nameof(VisioAutomation.Core.SrcConstants.OneDBeginX));
+            var col_OneDBeginY = query.Columns.Add(VisioAutomation.Core.SrcConstants.OneDBeginY, nameof(VisioAutomation.Core.SrcConstants.OneDBeginY));
+            var col_OneDEndX = query.Columns.Add(VisioAutomation.Core.SrcConstants.OneDEndX, nameof(VisioAutomation.Core.SrcConstants.OneDEndX));
+            var col_OneDEndY = query.Columns.Add(VisioAutomation.Core.SrcConstants.OneDEndY, nameof(VisioAutomation.Core.SrcConstants.OneDEndY));
 
             var cellqueryresult = query.GetResults<double>(page, shapeids);
 

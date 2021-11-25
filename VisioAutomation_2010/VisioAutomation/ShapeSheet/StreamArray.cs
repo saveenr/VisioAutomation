@@ -34,12 +34,12 @@ namespace VisioAutomation.ShapeSheet.Streams
 
 
 
-        public static VASS.Streams.StreamArray FromSidSrc(IList<SidSrc> sidsrcs)
+        public static VASS.Streams.StreamArray FromSidSrc(IList<VisioAutomation.Core.SidSrc> sidsrcs)
         {
             return FromSidSrc(sidsrcs.Count, sidsrcs);
         }
 
-        public static VASS.Streams.StreamArray FromSidSrc(int numcells, IEnumerable<SidSrc> sidsrcs)
+        public static VASS.Streams.StreamArray FromSidSrc(int numcells, IEnumerable<VisioAutomation.Core.SidSrc> sidsrcs)
         {
             var num_shorts = numcells * 4;
             var array = new short[num_shorts];
@@ -62,12 +62,12 @@ namespace VisioAutomation.ShapeSheet.Streams
             return stream;
         }
 
-        public static VASS.Streams.StreamArray FromSrc(IList<Src> srcs)
+        public static VASS.Streams.StreamArray FromSrc(IList<VisioAutomation.Core.Src> srcs)
         {
             return FromSrc(srcs.Count, srcs);
         }
 
-        public static VASS.Streams.StreamArray FromSrc(int numcells, IEnumerable<Src> sidsrcs)
+        public static VASS.Streams.StreamArray FromSrc(int numcells, IEnumerable<VisioAutomation.Core.Src> sidsrcs)
         {
             var num_shorts = numcells * 3;
             var array = new short[num_shorts];

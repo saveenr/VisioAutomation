@@ -7,28 +7,28 @@ namespace VisioAutomation.Shapes
 {
     public class ConnectionPointCells : VASS.CellGroups.CellGroup
     {
-        public VASS.CellValue X { get; set; }
-        public VASS.CellValue Y { get; set; }
-        public VASS.CellValue DirX { get; set; }
-        public VASS.CellValue DirY { get; set; }
-        public VASS.CellValue Type { get; set; }
+        public VisioAutomation.Core.CellValue X { get; set; }
+        public VisioAutomation.Core.CellValue Y { get; set; }
+        public VisioAutomation.Core.CellValue DirX { get; set; }
+        public VisioAutomation.Core.CellValue DirY { get; set; }
+        public VisioAutomation.Core.CellValue Type { get; set; }
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.X), VASS.SrcConstants.ConnectionPointX, this.X);
-            yield return this.Create(nameof(this.Y), VASS.SrcConstants.ConnectionPointY, this.Y);
-            yield return this.Create(nameof(this.DirX), VASS.SrcConstants.ConnectionPointDirX, this.DirX);
-            yield return this.Create(nameof(this.DirY), VASS.SrcConstants.ConnectionPointDirY, this.DirY);
-            yield return this.Create(nameof(this.Type), VASS.SrcConstants.ConnectionPointType, this.Type);
+            yield return this.Create(nameof(this.X), VisioAutomation.Core.SrcConstants.ConnectionPointX, this.X);
+            yield return this.Create(nameof(this.Y), VisioAutomation.Core.SrcConstants.ConnectionPointY, this.Y);
+            yield return this.Create(nameof(this.DirX), VisioAutomation.Core.SrcConstants.ConnectionPointDirX, this.DirX);
+            yield return this.Create(nameof(this.DirY), VisioAutomation.Core.SrcConstants.ConnectionPointDirY, this.DirY);
+            yield return this.Create(nameof(this.Type), VisioAutomation.Core.SrcConstants.ConnectionPointType, this.Type);
         }
 
-        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VisioAutomation.Core.CellValueType type)
         {
             var reader = ConnectionPointCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
-        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = ConnectionPointCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);

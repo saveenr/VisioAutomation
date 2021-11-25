@@ -29,7 +29,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
 
@@ -44,7 +44,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
             Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[0].Style.Value);
@@ -60,7 +60,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
             Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[0].Style.Value);
@@ -78,7 +78,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
 
@@ -118,7 +118,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             t1.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
 
             // check the number of character regions
@@ -165,7 +165,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
@@ -180,7 +180,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
@@ -197,7 +197,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
@@ -214,7 +214,7 @@ namespace VisioAutomation_Tests.Dom
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, CellValueType.Formula);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
