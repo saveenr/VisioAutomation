@@ -1,6 +1,3 @@
-using VisioAutomation.Shapes;
-
-
 namespace VisioAutomation_Tests.Scripting;
 
 [TestClass]
@@ -58,7 +55,7 @@ public class ScriptingCustomPropTests : VisioAutomationTest
         Assert.AreEqual(0, prop_dic0[s2].Count);
         Assert.AreEqual(0, prop_dic0[s3].Count);
 
-        var cp = new CustomPropertyCells();
+        var cp = new VA.Shapes.CustomPropertyCells();
         cp.Value = "\"BAR\"";
         client.CustomProperty.SetCustomProperty(VisioScripting.TargetShapes.Auto, "FOO",cp);
 

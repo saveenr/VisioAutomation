@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace VisioAutomation_Tests.Scripting;
 
 [TestClass]
@@ -24,9 +22,9 @@ public class ScriptingExportTests : VisioAutomationTest
 
         string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
 
-        if (File.Exists(output_filename))
+        if (System.IO.File.Exists(output_filename))
         {
-            File.Delete(output_filename);
+            System.IO.File.Delete(output_filename);
         }
 
 

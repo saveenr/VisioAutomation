@@ -1,6 +1,4 @@
 using VisioAutomation.Extensions;
-using VisioAutomation.Geometry;
-using VisioScripting.Models;
 
 namespace VisioAutomation_Tests.Scripting;
 
@@ -14,7 +12,7 @@ public class ScriptingPageTests : VisioAutomationTest
         var client = this.GetScriptingClient();
         var doc = client.Document.NewDocument();
 
-        client.Page.NewPage(VisioScripting.TargetDocument.Auto, new Size(4, 5), false);
+        client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VAGEOM.Size(4, 5), false);
     }
 
 
@@ -34,25 +32,25 @@ public class ScriptingPageTests : VisioAutomationTest
 
         Assert.AreEqual(3,doc.Pages.Count);
         Assert.AreEqual(page3, client.Page.GetActivePage());
-        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.First);
+        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, VS_MODELS.PageRelativePosition.First);
         Assert.AreEqual(page1, client.Page.GetActivePage());
-        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Last);
+        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, VS_MODELS.PageRelativePosition.Last);
         Assert.AreEqual(page3, client.Page.GetActivePage());
-        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Previous);
+        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, VS_MODELS.PageRelativePosition.Previous);
         Assert.AreEqual(page2, client.Page.GetActivePage());
-        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Next);
+        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, VS_MODELS.PageRelativePosition.Next);
         Assert.AreEqual(page3, client.Page.GetActivePage());
 
         // move to last and try to go to next page
-        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Last);
+        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, VS_MODELS.PageRelativePosition.Last);
         Assert.AreEqual(page3, client.Page.GetActivePage());
-        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Next);
+        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, VS_MODELS.PageRelativePosition.Next);
         Assert.AreEqual(page3, client.Page.GetActivePage());
 
         // move to first and try to go to previous page
-        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.First);
+        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, VS_MODELS.PageRelativePosition.First);
         Assert.AreEqual(page1, client.Page.GetActivePage());
-        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Previous);
+        client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, VS_MODELS.PageRelativePosition.Previous);
         Assert.AreEqual(page1, client.Page.GetActivePage());
 
         doc.Close(true);

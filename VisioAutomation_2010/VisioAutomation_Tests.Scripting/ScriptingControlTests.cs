@@ -1,6 +1,3 @@
-using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
-
 namespace VisioAutomation_Tests.Scripting;
 
 [TestClass]
@@ -23,26 +20,26 @@ public class ScriptingControlTests : VisioAutomationTest
         client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
         client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
-        var controls0 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, CellValueType.Formula);
+        var controls0 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, VASS.CellValueType.Formula);
         int found_controls = controls0.Count;
         Assert.AreEqual(3, controls0.Count);
         Assert.AreEqual(0, controls0[s1].Count);
         Assert.AreEqual(0, controls0[s2].Count);
         Assert.AreEqual(0, controls0[s3].Count);
 
-        var ctrl = new ControlCells();
+        var ctrl = new VA.Shapes.ControlCells();
         ctrl.X = "Width*0.5";
         ctrl.Y = "0";
         client.Control.AddControlToShapes(VisioScripting.TargetShapes.Auto, ctrl);
 
-        var controls1 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, CellValueType.Formula);
+        var controls1 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, VASS.CellValueType.Formula);
         Assert.AreEqual(3, controls1.Count);
         Assert.AreEqual(1, controls1[s1].Count);
         Assert.AreEqual(1, controls1[s2].Count);
         Assert.AreEqual(1, controls1[s3].Count);
 
         client.Control.DeleteControlWithIndex(VisioScripting.TargetShapes.Auto, 0);
-        var controls2 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, CellValueType.Formula);
+        var controls2 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, VASS.CellValueType.Formula);
         Assert.AreEqual(3, controls0.Count);
         Assert.AreEqual(0, controls2[s1].Count);
         Assert.AreEqual(0, controls2[s2].Count);
