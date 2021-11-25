@@ -13,7 +13,7 @@ namespace VisioAutomation_Documentation_Samples
 
             var shape1 = page.Drop(rectmaster, 1.0, 2.0);
 
-            var p = new VisioAutomation.Geometry.Point(5.0, 4.0);
+            var p = new VisioAutomation.Core.Point(5.0, 4.0);
             var shape2 = page.Drop(rectmaster, p);
 
             //cleanup
@@ -27,8 +27,8 @@ namespace VisioAutomation_Documentation_Samples
             var page = doc.Pages.Add();
 
             var centerpoints = new[] {
-                new VisioAutomation.Geometry.Point(1, 2),
-                new VisioAutomation.Geometry.Point(5, 4)
+                new VisioAutomation.Core.Point(1, 2),
+                new VisioAutomation.Core.Point(5, 4)
             };
             var masters = new[] { rectmaster, rectmaster };
             short[] shapeids = page.DropManyU(masters, centerpoints);

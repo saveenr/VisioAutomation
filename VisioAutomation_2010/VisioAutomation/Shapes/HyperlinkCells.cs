@@ -30,7 +30,7 @@ namespace VisioAutomation.Shapes
             yield return this.Create(nameof(this.Invisible), VASS.SrcConstants.HyperlinkInvisible, this.Invisible);
         }
 
-        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VASS.CellValueType type)
         {
             var reader = HyperLinkCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);

@@ -7,13 +7,13 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
     {
         public readonly List<DirectedGraphLayout> Layouts;
         public string Template;
-        public VisioAutomation.Geometry.Size BorderSize;
+        public VisioAutomation.Core.Size BorderSize;
 
         public DirectedGraphDocument()
         {
             this.Layouts = new List<DirectedGraphLayout>();
             this.Template = null;
-            this.BorderSize = new VisioAutomation.Geometry.Size(1.0, 1.0);
+            this.BorderSize = new VisioAutomation.Core.Size(1.0, 1.0);
         }
     }
 }

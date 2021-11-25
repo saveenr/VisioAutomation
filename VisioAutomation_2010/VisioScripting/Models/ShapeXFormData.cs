@@ -56,12 +56,12 @@ namespace VisioScripting.Models
             return list;
         }
 
-        public VisioAutomation.Geometry.Rectangle GetRectangle()
+        public VisioAutomation.Core.Rectangle GetRectangle()
         {
-            var pin = new VisioAutomation.Geometry.Point(this.XFormPinX, this.XFormPinY);
-            var locpin = new VisioAutomation.Geometry.Point(this.XFormLocPinX, this.XFormLocPinY);
-            var size = new VisioAutomation.Geometry.Size(this.XFormWidth, this.XFormHeight);
-            return new VisioAutomation.Geometry.Rectangle(pin - locpin, size);
+            var pin = new VisioAutomation.Core.Point(this.XFormPinX, this.XFormPinY);
+            var locpin = new VisioAutomation.Core.Point(this.XFormLocPinX, this.XFormLocPinY);
+            var size = new VisioAutomation.Core.Size(this.XFormWidth, this.XFormHeight);
+            return new VisioAutomation.Core.Rectangle(pin - locpin, size);
         }
 
         public void SetFormulas(VASS.Writers.SidSrcWriter writer, short id)
@@ -74,7 +74,7 @@ namespace VisioScripting.Models
             writer.SetValue(id, VASS.SrcConstants.XFormHeight, this.XFormHeight);
         }
 
-        public static VisioAutomation.Geometry.Rectangle GetBoundingBox(IEnumerable<ShapeXFormData> xfrms)
+        public static VisioAutomation.Core.Rectangle GetBoundingBox(IEnumerable<ShapeXFormData> xfrms)
         {
             var bb = VisioAutomation.Models.Geometry.BoundingBoxBuilder.FromRectangles(xfrms.Select(x => x.GetRectangle()));
             if (!bb.HasValue)

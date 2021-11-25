@@ -13,8 +13,8 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var curve0 = VA.Models.Geometry.BezierCurve.FromEllipse(
-                new VA.Geometry.Point(5, 4),
-                new VA.Geometry.Size(1, 1));
+                new VA.Core.Point(5, 4),
+                new VA.Core.Size(1, 1));
 
             var s0 = page.DrawBezier(curve0.ControlPoints);
             s0.Text = "Bezier approximating circle";
@@ -27,8 +27,8 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var curve0 = VA.Models.Geometry.BezierCurve.FromEllipse(
-                new VA.Geometry.Point(2, 4),
-                new VA.Geometry.Size(1, 0.5));
+                new VA.Core.Point(2, 4),
+                new VA.Core.Size(1, 0.5));
             var s0 = page.DrawBezier(curve0.ControlPoints);
             s0.Text = "Bezier approximating ellipse";
         }
@@ -40,7 +40,7 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var points = new[] {0.0, 0.0, 1.0, 2.0, 3.0, 0.5, 4.0, 0.5};
-            var cpoints = VA.Geometry.Point.FromDoubles(points).ToList();
+            var cpoints = VA.Core.Point.FromDoubles(points).ToList();
             var s0 = page.DrawBezier(cpoints);
             s0.Text = "Bezier curve";
             foreach (var p in cpoints)
@@ -60,17 +60,17 @@ namespace VisioAutomationSamples
 
             var points = new[]
                              {
-                                 new VA.Geometry.Point(10, 10),
-                                 new VA.Geometry.Point(5, 10),
-                                 new VA.Geometry.Point(-5, 5),
-                                 new VA.Geometry.Point(-10, 5),
-                                 new VA.Geometry.Point(-4, 10),
-                                 new VA.Geometry.Point(-4, 5),
-                                 new VA.Geometry.Point(-8, 1)
+                                 new VA.Core.Point(10, 10),
+                                 new VA.Core.Point(5, 10),
+                                 new VA.Core.Point(-5, 5),
+                                 new VA.Core.Point(-10, 5),
+                                 new VA.Core.Point(-4, 10),
+                                 new VA.Core.Point(-4, 5),
+                                 new VA.Core.Point(-8, 1)
                              };
 
-            var origin = new VA.Geometry.Point(4, 4);
-            var scale = new VA.Geometry.Size(1.0/4.0, 1.0/4.0);
+            var origin = new VA.Core.Point(4, 4);
+            var scale = new VA.Core.Size(1.0/4.0, 1.0/4.0);
 
             var controlpoints = points.Select(x => (x*scale) + origin).ToList();
             var knots = new double[] {0, 0, 0, 0, 1, 2, 3, 4, 4, 4, 4};
@@ -90,17 +90,17 @@ namespace VisioAutomationSamples
 
             var points = new[]
                              {
-                                 new VA.Geometry.Point(0.2500, 0.2500),
-                                 new VA.Geometry.Point(0.2500, 0.7500),
-                                 new VA.Geometry.Point(0.4063, 0.8125),
-                                 new VA.Geometry.Point(0.5625, 0.3750),
-                                 new VA.Geometry.Point(0.5538, 0.8125),
-                                 new VA.Geometry.Point(0.7600, 0.7500),
-                                 new VA.Geometry.Point(0.7600, 0.2500)
+                                 new VA.Core.Point(0.2500, 0.2500),
+                                 new VA.Core.Point(0.2500, 0.7500),
+                                 new VA.Core.Point(0.4063, 0.8125),
+                                 new VA.Core.Point(0.5625, 0.3750),
+                                 new VA.Core.Point(0.5538, 0.8125),
+                                 new VA.Core.Point(0.7600, 0.7500),
+                                 new VA.Core.Point(0.7600, 0.2500)
                              };
 
-            var origin = new VA.Geometry.Point(4, 4);
-            var scale = new VA.Geometry.Size(4, 4);
+            var origin = new VA.Core.Point(4, 4);
+            var scale = new VA.Core.Size(4, 4);
 
             var controlpoints = points.Select(x => (x*scale) + origin).ToList();
             var knots = new double[] {0, 0, 0, 0, 25, 50, 75, 100, 100, 100, 100};

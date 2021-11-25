@@ -194,12 +194,12 @@ namespace VisioScripting.Commands
             targetdoc.Document.SaveAs(filename);
         }
 
-        public IVisio.Document NewDocument(VisioAutomation.Geometry.Size size)
+        public IVisio.Document NewDocument(VisioAutomation.Core.Size size)
         {
             return this.NewDocumentFromTemplate(size,null);
         }
 
-        public IVisio.Document NewDocumentFromTemplate(VisioAutomation.Geometry.Size size, string template)
+        public IVisio.Document NewDocumentFromTemplate(VisioAutomation.Core.Size size, string template)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 

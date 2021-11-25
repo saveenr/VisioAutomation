@@ -22,7 +22,7 @@ namespace VisioPowerShell.Commands.VisioPage
             }
 
 
-            var shapeids = VisioAutomation.ShapeIDPairs.FromShapes(targetshapes.Shapes).Select(i => i.ShapeID).ToList();
+            var shapeids = VisioAutomation.Core.ShapeIDPairs.FromShapes(targetshapes.Shapes).Select(i => i.ShapeID).ToList();
             var page = targetshapes.Shapes[0].ContainingPage;
             var list_shapedim = VisioScripting.Models.ShapeDimensions.Get_ShapeDimensions(page, shapeids);
 

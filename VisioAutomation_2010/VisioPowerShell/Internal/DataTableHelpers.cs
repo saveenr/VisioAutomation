@@ -42,7 +42,7 @@ namespace VisioPowerShell.Internal
             VisioAutomation.ShapeSheet.CellValueType value_type,
             Models.ResultType result_type,
             IList<int> shapeids, 
-            VisioAutomation.SurfaceTarget surface)
+            VisioAutomation.Core.SurfaceTarget surface)
         {
 
             if (value_type == VASS.CellValueType.Formula)

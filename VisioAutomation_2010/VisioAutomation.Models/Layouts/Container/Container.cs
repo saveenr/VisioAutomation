@@ -8,7 +8,7 @@ namespace VisioAutomation.Models.Layouts.Container
         public VisioAutomation.Models.Text.Element Text { get; set; }
         public List<ContainerItem> ContainerItems { get; set; }
         public IVisio.Shape VisioShape { get; set; }
-        public VisioAutomation.Geometry.Rectangle Rectangle;
+        public VisioAutomation.Core.Rectangle Rectangle;
         public short ShapeID;
 
         public Container(VisioAutomation.Models.Text.Element text)

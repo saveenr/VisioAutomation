@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation
+﻿namespace VisioAutomation.Core
 {
     public enum SurfaceTargetType
     {

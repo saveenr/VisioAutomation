@@ -22,7 +22,7 @@ namespace VisioAutomation.Shapes
             yield return this.Create(nameof(this.Type), VASS.SrcConstants.ConnectionPointType, this.Type);
         }
 
-        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VASS.CellValueType type)
         {
             var reader = ConnectionPointCells_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);

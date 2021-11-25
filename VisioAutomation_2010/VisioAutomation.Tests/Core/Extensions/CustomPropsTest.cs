@@ -182,7 +182,7 @@ namespace VisioAutomation_Tests.Core.Extensions
             CustomPropertyHelper.Set(s4, "FOO6", "6", cp_type);
 
             var shapes = new[] {s1, s2, s3, s4};
-            var shapeidpairs = ShapeIDPairs.FromShapes(shapes);
+            var shapeidpairs = VisioAutomation.Core.ShapeIDPairs.FromShapes(shapes);
             var allprops = CustomPropertyHelper.GetDictionary(page1, shapeidpairs, CellValueType.Formula);
 
 

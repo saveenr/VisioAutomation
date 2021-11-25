@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
 
             client.Document.NewDocument();
-            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Core.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 1.25, 1.5);
             var s2 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 2, 3, 2.5, 3.5);
@@ -43,7 +43,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
            
             client.Document.NewDocument();
-            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Core.Size(4, 4), false);
 
             var s1 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 1.25, 1.5);
             var s2 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 2, 3, 2.5, 3.5);

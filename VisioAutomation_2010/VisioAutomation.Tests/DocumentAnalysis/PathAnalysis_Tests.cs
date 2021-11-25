@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
-using VADRAW=VisioAutomation.Geometry;
+using VADRAW=VisioAutomation.Core;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;

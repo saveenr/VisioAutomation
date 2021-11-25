@@ -38,8 +38,8 @@ namespace VisioScripting.Commands
             var sel = active_window.Selection;
             var sel_bb = sel.GetBoundingBox(bbargs);
 
-            var delta = sel_bb.Size * (new VisioAutomation.Geometry.Size(padding_scale,padding_scale));
-            var view_rect = new VisioAutomation.Geometry.Rectangle(sel_bb.Left - delta.Width, sel_bb.Bottom - delta.Height,
+            var delta = sel_bb.Size * (new VisioAutomation.Core.Size(padding_scale,padding_scale));
+            var view_rect = new VisioAutomation.Core.Rectangle(sel_bb.Left - delta.Width, sel_bb.Bottom - delta.Height,
                                                           sel_bb.Right + delta.Height, sel_bb.Top + delta.Height);
             window.SetViewRect(view_rect);
         }

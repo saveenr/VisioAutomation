@@ -31,7 +31,7 @@ namespace VisioPowerShell_Tests
 
         public List<IVisio.Shape> Cmd_New_VisioShape(
             IVisio.Master[] masters, 
-            VisioAutomation.Geometry.Point[] points)
+            VisioAutomation.Core.Point[] points)
         {
             var cmd = new VisioPowerShell.Commands.VisioShape.NewVisioShape();
             cmd.Master = masters;
@@ -107,11 +107,11 @@ namespace VisioPowerShell_Tests
         }
 
         public IVisio.Shape Cmd_New_VisioShape_rectangle(
-            VisioAutomation.Geometry.Point[] points)
+            VisioAutomation.Core.Point[] points)
         {
             var cmd = new VisioPowerShell.Commands.VisioShape.NewVisioShape();
             cmd.Rectangle = true;
-            cmd.BoundingBox = new VisioAutomation.Geometry.Rectangle(points[0],points[1]);
+            cmd.BoundingBox = new VisioAutomation.Core.Rectangle(points[0],points[1]);
             var shape = cmd.InvokeFirst<IVisio.ShapeClass>();
             return shape;
         }

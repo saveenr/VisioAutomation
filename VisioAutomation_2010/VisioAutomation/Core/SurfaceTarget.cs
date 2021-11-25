@@ -3,7 +3,7 @@ using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation
+namespace VisioAutomation.Core
 {
     public struct SurfaceTarget
     {
@@ -71,7 +71,7 @@ namespace VisioAutomation
 
         public short[] DropManyU(
             IList<IVisio.Master> masters,
-            IEnumerable<VisioAutomation.Geometry.Point> points)
+            IEnumerable<VisioAutomation.Core.Point> points)
         {
             if (masters == null)
             {
@@ -90,7 +90,7 @@ namespace VisioAutomation
 
             // NOTE: DropMany will fail if you pass in zero items to drop
             var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = VisioAutomation.Geometry.Point.ToDoubles(points).ToArray();
+            var xy_array = VisioAutomation.Core.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 
@@ -108,7 +108,7 @@ namespace VisioAutomation
 
         public IVisio.Shape Drop(
             IVisio.Master master,
-            VisioAutomation.Geometry.Point point)
+            VisioAutomation.Core.Point point)
         {
             if (master == null)
             {

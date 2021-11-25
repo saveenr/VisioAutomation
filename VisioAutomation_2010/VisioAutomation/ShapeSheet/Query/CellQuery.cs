@@ -15,12 +15,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(IVisio.Shape shape)
         {
-            var surface = new SurfaceTarget(shape);
+            var surface = new Core.SurfaceTarget(shape);
             return GetFormulas(surface);
         }
 
 
-        public CellQueryResults<string> GetFormulas(SurfaceTarget surface)
+        public CellQueryResults<string> GetFormulas(Core.SurfaceTarget surface)
         {
             _restrict_to_shapes_only(surface);
 
@@ -37,11 +37,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
-            var surface = new SurfaceTarget(shape);
+            var surface = new Core.SurfaceTarget(shape);
             return GetResults<TResult>(surface);
         }
 
-        public CellQueryResults<TResult> GetResults<TResult>(SurfaceTarget surface)
+        public CellQueryResults<TResult> GetResults<TResult>(Core.SurfaceTarget surface)
         {
             _restrict_to_shapes_only(surface);
 
@@ -60,12 +60,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new SurfaceTarget(page);
+            var surface = new Core.SurfaceTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
 
-        public CellQueryResults<string> GetFormulas(SurfaceTarget surface, IList<int> shapeids)
+        public CellQueryResults<string> GetFormulas(Core.SurfaceTarget surface, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = surface.GetFormulasU(srcstream);
@@ -80,11 +80,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new SurfaceTarget(page);
+            var surface = new Core.SurfaceTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
         }
 
-        public CellQueryResults<TResult> GetResults<TResult>(SurfaceTarget surface, IList<int> shapeids)
+        public CellQueryResults<TResult> GetResults<TResult>(Core.SurfaceTarget surface, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
@@ -167,7 +167,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static void _restrict_to_shapes_only(SurfaceTarget surface)
+        private static void _restrict_to_shapes_only(Core.SurfaceTarget surface)
         {
             if (surface.Shape == null)
             {

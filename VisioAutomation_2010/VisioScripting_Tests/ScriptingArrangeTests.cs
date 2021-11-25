@@ -11,18 +11,18 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Distribute()
         {
             var client = this.GetScriptingClient();
-            var pagesize = new VA.Geometry.Size(4, 4);
+            var pagesize = new VA.Core.Size(4, 4);
 
             client.Document.NewDocument();
             client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
-            var size1 = new VA.Geometry.Size(0.5, 0.5);
-            var size2 = new VA.Geometry.Size(1.0, 1.0);
-            var size3 = new VA.Geometry.Size(1.5, 1.5);
+            var size1 = new VA.Core.Size(0.5, 0.5);
+            var size2 = new VA.Core.Size(1.0, 1.0);
+            var size3 = new VA.Core.Size(1.5, 1.5);
 
-            var r1 = new VA.Geometry.Rectangle(new VA.Geometry.Point(1, 1), size1);
-            var r2 = new VA.Geometry.Rectangle(new VA.Geometry.Point(2, 2), size2);
-            var r3 = new VA.Geometry.Rectangle(new VA.Geometry.Point(4, 4), size3);
+            var r1 = new VA.Core.Rectangle(new VA.Core.Point(1, 1), size1);
+            var r2 = new VA.Core.Rectangle(new VA.Core.Point(2, 2), size2);
+            var r3 = new VA.Core.Rectangle(new VA.Core.Point(4, 4), size3);
 
             var s1 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, r1);
             var s2 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, r2);
@@ -48,15 +48,15 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
 
             client.Document.NewDocument();
-            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Geometry.Size(4, 4), false);
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Core.Size(4, 4), false);
 
-            var size1 = new VA.Geometry.Size(0.5, 0.5);
-            var size2 = new VA.Geometry.Size(1.0, 1.0);
-            var size3 = new VA.Geometry.Size(1.5, 1.5);
+            var size1 = new VA.Core.Size(0.5, 0.5);
+            var size2 = new VA.Core.Size(1.0, 1.0);
+            var size3 = new VA.Core.Size(1.5, 1.5);
 
-            var r1 = new VA.Geometry.Rectangle(new VA.Geometry.Point(1, 1), size1);
-            var r2 = new VA.Geometry.Rectangle(new VA.Geometry.Point(2, 2), size2);
-            var r3 = new VA.Geometry.Rectangle(new VA.Geometry.Point(4, 4), size3);
+            var r1 = new VA.Core.Rectangle(new VA.Core.Point(1, 1), size1);
+            var r2 = new VA.Core.Rectangle(new VA.Core.Point(2, 2), size2);
+            var r3 = new VA.Core.Rectangle(new VA.Core.Point(4, 4), size3);
 
             var s1 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, r1);
             var s2 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, r2);

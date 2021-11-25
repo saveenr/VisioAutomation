@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Models.Dom
         public string node_master_name = "Rectangle";
         public string edge_master_name = "Dynamic Connector";
 
-        private VisioAutomation.Geometry.Size _pagesize;
+        private VisioAutomation.Core.Size _pagesize;
 
         [TestMethod]
         public void Dom_EmptyRendering()
@@ -72,7 +72,7 @@ namespace VisioAutomation_Tests.Models.Dom
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
-            this._pagesize = new VA.Geometry.Size(10, 10);
+            this._pagesize = new VA.Core.Size(10, 10);
             VisioAutomationTest.SetPageSize(app.ActivePage, this._pagesize);
             var page = page_node.Render(app.ActiveDocument);
 
@@ -157,13 +157,13 @@ namespace VisioAutomation_Tests.Models.Dom
 
             // Have to be smart about selecting the right master with Visio 2013
 
-            var s1 = new VADOM.Shape(position_master_name, null, new VA.Geometry.Point(3, 8));
+            var s1 = new VADOM.Shape(position_master_name, null, new VA.Core.Point(3, 8));
             page_node.Shapes.Add(s1);
 
-            var s2 = new VADOM.Shape(position_master_name, null, new VA.Geometry.Point(0, 4));
+            var s2 = new VADOM.Shape(position_master_name, null, new VA.Core.Point(0, 4));
             page_node.Shapes.Add(s2);
 
-            var s3 = new VADOM.Shape(position_master_name, null, new VA.Geometry.Point(6, 4));
+            var s3 = new VADOM.Shape(position_master_name, null, new VA.Core.Point(6, 4));
             page_node.Shapes.Add(s3);
 
             page_node.Shapes.Connect(this.edge_master_name, this.edge_stencil_name, s1, s2);
@@ -179,12 +179,12 @@ namespace VisioAutomation_Tests.Models.Dom
             // Verify that an empty DOM page can be created and rendered
             var doc = this.GetNewDoc();
             var page_node = new VADOM.Page();
-            page_node.Size = new VA.Geometry.Size(5, 5);
+            page_node.Size = new VA.Core.Size(5, 5);
             var page = page_node.Render(doc);
 
             Assert.AreEqual(0, page.Shapes.Count);
             var actual_page_size = VisioAutomationTest.GetPageSize(page);
-            var expected_page_size = new VA.Geometry.Size(5, 5);
+            var expected_page_size = new VA.Core.Size(5, 5);
             Assert.AreEqual(expected_page_size, actual_page_size);
 
             page.Delete(0);
@@ -385,8 +385,8 @@ namespace VisioAutomation_Tests.Models.Dom
             var doc = this.GetNewDoc();
             var page_node = new VADOM.Page();
 
-            var rect0 = new VisioAutomation.Geometry.Rectangle(3, 4, 7, 8);
-            var rect1 = new VisioAutomation.Geometry.Rectangle(8, 1, 9, 5);
+            var rect0 = new VisioAutomation.Core.Rectangle(3, 4, 7, 8);
+            var rect1 = new VisioAutomation.Core.Rectangle(8, 1, 9, 5);
 
             // Draw and Drop two rectangles in the same place
             var s0 = page_node.Shapes.Drop(this.node_master_name, this.node_stencil_name, rect0);

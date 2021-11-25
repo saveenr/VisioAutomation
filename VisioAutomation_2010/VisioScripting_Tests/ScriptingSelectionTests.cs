@@ -11,7 +11,7 @@ namespace VisioAutomation_Tests.Scripting
         public void Scripting_Selection_Scenarios()
         {
             var client = this.GetScriptingClient();
-            var page_size = new VisioAutomation.Geometry.Size(10,5);
+            var page_size = new VisioAutomation.Core.Size(10,5);
             var doc = client.Document.NewDocument(page_size);
 
             var page1 = doc.Pages[1];

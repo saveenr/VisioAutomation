@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Geometry
+﻿namespace VisioAutomation.Core
 {
     public struct Rectangle
     {

@@ -21,7 +21,7 @@ namespace VisioAutomation_Tests.Core.Extensions
 
             var masters1 = stencil_doc.Masters;
             var masters = new [] {masters1["Rounded Rectangle"], masters1["Ellipse"]};
-            var points = new [] {new VA.Geometry.Point(1, 2), new VA.Geometry.Point(3, 4)};
+            var points = new [] {new VA.Core.Point(1, 2), new VA.Core.Point(3, 4)};
             Assert.AreEqual(0, page1.Shapes.Count);
             var shapeids = page1.DropManyU(masters, points);
             Assert.AreEqual(2, page1.Shapes.Count);

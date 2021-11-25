@@ -163,7 +163,7 @@ namespace VisioAutomation.Pages
             }
         }
 
-        public static Geometry.Size GetSize(IVisio.Page page)
+        public static Core.Size GetSize(IVisio.Page page)
         {
             var query = new VASS.Query.CellQuery();
             var col_height = query.Columns.Add(VASS.SrcConstants.PageHeight,nameof(VASS.SrcConstants.PageHeight));
@@ -173,11 +173,11 @@ namespace VisioAutomation.Pages
             var row = cellqueryresult[0];
             double height = row[col_height];
             double width = row[col_width];
-            var s = new Geometry.Size(width, height);
+            var s = new Core.Size(width, height);
             return s;
         }
 
-        public static void SetSize(IVisio.Page page, Geometry.Size size)
+        public static void SetSize(IVisio.Page page, Core.Size size)
         {
             var writer = new VASS.Writers.SrcWriter();
             writer.SetValue(VASS.SrcConstants.PageWidth, size.Width);
@@ -188,7 +188,7 @@ namespace VisioAutomation.Pages
 
         public static short[] DropManyAutoConnectors(
             IVisio.Page page,
-            ICollection<Geometry.Point> points)
+            ICollection<Core.Point> points)
         {
 
             if (points == null)
@@ -202,7 +202,7 @@ namespace VisioAutomation.Pages
             var thing = app.ConnectorToolDataObject;
             int num_points = points.Count;
             var masters_obj_array = Enumerable.Repeat(thing, num_points).ToArray();
-            var xy_array = Geometry.Point.ToDoubles(points).ToArray();
+            var xy_array = Core.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 
@@ -212,7 +212,7 @@ namespace VisioAutomation.Pages
             return outids;
         }
 
-        public static void ResizeToFitContents(IVisio.Page page, Geometry.Size padding)
+        public static void ResizeToFitContents(IVisio.Page page, Core.Size padding)
         {
             // first perform the native resizetofit
             page.ResizeToFitContents();
@@ -238,7 +238,7 @@ namespace VisioAutomation.Pages
         public static short[] DropManyU(
             IVisio.Page page,
             IList<IVisio.Master> masters,
-            IEnumerable<Geometry.Point> points)
+            IEnumerable<Core.Point> points)
         {
             if (masters == null)
             {
@@ -257,7 +257,7 @@ namespace VisioAutomation.Pages
 
             // NOTE: DropMany will fail if you pass in zero items to drop
             var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = Geometry.Point.ToDoubles(points).ToArray();
+            var xy_array = Core.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 

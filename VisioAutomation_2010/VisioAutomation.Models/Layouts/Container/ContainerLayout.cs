@@ -64,7 +64,7 @@ namespace VisioAutomation.Models.Layouts.Container
                     double top = row_tops[ri];
                     double bottom = row_bottoms[ri];
 
-                    var rect = new VisioAutomation.Geometry.Rectangle(left, bottom, right, top);
+                    var rect = new VisioAutomation.Core.Rectangle(left, bottom, right, top);
 
                     var item = ct.ContainerItems[ri];
                     item.Rectangle = rect;
@@ -78,7 +78,7 @@ namespace VisioAutomation.Models.Layouts.Container
                 {
                     double top = this.LayoutOptions.Padding + this.LayoutOptions.ContainerHeaderHeight;
                     double bottom = top - this.LayoutOptions.ContainerHeaderHeight - this.LayoutOptions.Padding;
-                    ct.Rectangle = new VisioAutomation.Geometry.Rectangle(col_lefts[ctn], bottom, col_rights[ctn], top);
+                    ct.Rectangle = new VisioAutomation.Core.Rectangle(col_lefts[ctn], bottom, col_rights[ctn], top);
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace VisioAutomation.Models.Layouts.Container
                     min_left -= this.LayoutOptions.Padding;
                     min_bottom -= this.LayoutOptions.Padding;
 
-                    ct.Rectangle = new VisioAutomation.Geometry.Rectangle(min_left, min_bottom, max_right, max_top);                    
+                    ct.Rectangle = new VisioAutomation.Core.Rectangle(min_left, min_bottom, max_right, max_top);                    
                 }
 
 
@@ -203,7 +203,7 @@ namespace VisioAutomation.Models.Layouts.Container
         private static short[] _drop_many_u(
             IVisio.Page page,
             IList<IVisio.Master> masters,
-            IList<VisioAutomation.Geometry.Rectangle> rects)
+            IList<VisioAutomation.Core.Rectangle> rects)
         {
             var points = rects.Select(r => r.Center).ToList();
             var shapeids = page.DropManyU(masters, points);

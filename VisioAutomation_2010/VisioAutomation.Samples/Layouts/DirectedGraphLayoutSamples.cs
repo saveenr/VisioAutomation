@@ -25,7 +25,7 @@ namespace VisioAutomationSamples
             var vr = new VisioLayoutRenderer();
             vr.Render(page1, directed_graph_drawing);
 
-            var padding = new VA.Geometry.Size(0.5, 0.5);
+            var padding = new VA.Core.Size(0.5, 0.5);
             page1.ResizeToFitContents(padding);
         }
 
@@ -43,7 +43,7 @@ namespace VisioAutomationSamples
             var n0 = directed_graph_drawing.AddNode("n0", "N0 Untitled Node", basflo_stencil, "Decision");
 
             // Format Node 0
-            n0.Size = new VA.Geometry.Size(3, 2);
+            n0.Size = new VA.Core.Size(3, 2);
 
             // Create Node 1
             var n1 = directed_graph_drawing.AddNode("n1", "N1", basflo_stencil, "Decision");

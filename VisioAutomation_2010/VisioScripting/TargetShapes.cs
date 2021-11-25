@@ -31,11 +31,11 @@ namespace VisioScripting
             return target_shapeids;
         }
 
-        public VisioAutomation.ShapeIDPairs ToShapeIDPairs()
+        public VisioAutomation.Core.ShapeIDPairs ToShapeIDPairs()
         {
             var items = this._get_items_safe();
 
-            return VisioAutomation.ShapeIDPairs.FromShapes(items);
+            return VisioAutomation.Core.ShapeIDPairs.FromShapes(items);
         }
 
         public TargetShapes ResolveToShapes(VisioScripting.Client client)

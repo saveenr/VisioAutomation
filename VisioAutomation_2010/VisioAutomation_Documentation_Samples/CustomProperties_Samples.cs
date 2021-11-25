@@ -47,7 +47,7 @@ namespace VisioAutomation_Documentation_Samples
             // Retrieve all the Custom properties from multiple shapes
 
             var shapes = new[] {s1, s2};
-            var shapeidpairs = VisioAutomation.ShapeIDPairs.FromShapes(shapes);
+            var shapeidpairs = VisioAutomation.Core.ShapeIDPairs.FromShapes(shapes);
             var props = VisioAutomation.Shapes.CustomPropertyHelper.GetDictionary(page, shapeidpairs, CellValueType.Formula);
 
 

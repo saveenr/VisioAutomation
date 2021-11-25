@@ -15,8 +15,8 @@ namespace VisioAutomationSamples
             var color1 = new VAM.Color.ColorRgb(0xff000);
             var color2 = new VAM.Color.ColorRgb(0x000ff);
 
-            var page_size = new VA.Geometry.Size(num_rows/2.0, num_rows);
-            var upperleft = new VA.Geometry.Point(0, page_size.Height);
+            var page_size = new VA.Core.Size(num_rows/2.0, num_rows);
+            var upperleft = new VA.Core.Point(0, page_size.Height);
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var app = page.Application;
@@ -26,10 +26,10 @@ namespace VisioAutomationSamples
 
             SampleEnvironment.SetPageSize(page,page_size);
 
-            var layout = new VAM.Layouts.Grid.GridLayout(num_cols, num_rows, new VA.Geometry.Size(6.0, 1.0), master);
+            var layout = new VAM.Layouts.Grid.GridLayout(num_cols, num_rows, new VA.Core.Size(6.0, 1.0), master);
             layout.RowDirection = VAM.Layouts.Grid.RowDirection.TopToBottom;
             layout.Origin = upperleft;
-            layout.CellSpacing = new VA.Geometry.Size(0.1, 0.1);
+            layout.CellSpacing = new VA.Core.Size(0.1, 0.1);
             layout.PerformLayout();
 
             double[] trans = EffectsSamples.RangeSteps(0.0, 1.0, num_rows).ToArray();

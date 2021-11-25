@@ -27,22 +27,22 @@ namespace VisioPowerShell.Commands.VisioShape
 
 
         [SMA.Parameter(ParameterSetName = "masters", Mandatory = true)]
-        public VisioAutomation.Geometry.Point[] Position { get; set; }
+        public VisioAutomation.Core.Point[] Position { get; set; }
 
         [SMA.Parameter(ParameterSetName = "line", Mandatory = true)]
-        public VisioAutomation.Geometry.Point From { get; set; }
+        public VisioAutomation.Core.Point From { get; set; }
 
         [SMA.Parameter(ParameterSetName = "line", Mandatory = true)]
-        public VisioAutomation.Geometry.Point To { get; set; }
+        public VisioAutomation.Core.Point To { get; set; }
 
 
         [SMA.Parameter(ParameterSetName = "polyline", Mandatory = true, Position = 1)]
         [SMA.Parameter(ParameterSetName = "bezier", Mandatory = true, Position = 1)]
-        public VisioAutomation.Geometry.Point[] Points { get; set; }
+        public VisioAutomation.Core.Point[] Points { get; set; }
 
         [SMA.Parameter(ParameterSetName = "rectangle", Mandatory = true, Position = 1)]
         [SMA.Parameter(ParameterSetName = "oval", Mandatory = true, Position = 1)]
-        public VisioAutomation.Geometry.Rectangle BoundingBox{ get; set; }
+        public VisioAutomation.Core.Rectangle BoundingBox{ get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public VisioPowerShell.Models.ShapeCells[] Cells { get; set; }
@@ -138,7 +138,7 @@ namespace VisioPowerShell.Commands.VisioShape
                     shape_cells.Apply(writer, (short)shapeid);
                 }
 
-                var surface = new VisioAutomation.SurfaceTarget(targetpage.Page);
+                var surface = new VisioAutomation.Core.SurfaceTarget(targetpage.Page);
 
                 using (var undoscope = this.Client.Undo.NewUndoScope(nameof(NewVisioShape) +":CommitCells"))
                 {

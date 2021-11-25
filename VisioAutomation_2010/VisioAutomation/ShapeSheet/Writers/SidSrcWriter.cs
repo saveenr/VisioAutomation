@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(IVisio.Page page, VisioAutomation.ShapeSheet.CellValueType type)
         {
-            var surface = new SurfaceTarget(page);
+            var surface = new Core.SurfaceTarget(page);
             this.Commit(surface, type);
         }
         public void SetValue(short id, Src src, CellValue formula)
@@ -60,7 +60,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        public void CommitFormulas(SurfaceTarget surface)
+        public void CommitFormulas(Core.SurfaceTarget surface)
         {
             if ((this._records == null || this._records.Count < 1))
             {
@@ -80,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void Commit(SurfaceTarget surface, VisioAutomation.ShapeSheet.CellValueType type)
+        public void Commit(Core.SurfaceTarget surface, VisioAutomation.ShapeSheet.CellValueType type)
         {
             if ((this._records == null || this._records.Count < 1))
             {

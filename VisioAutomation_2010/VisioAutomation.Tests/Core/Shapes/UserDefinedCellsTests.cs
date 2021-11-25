@@ -91,7 +91,7 @@ namespace VisioAutomation_Tests.Core.Shapes
 
             SetCP(s1, "foo", "bar", null);
 
-            var shapeidpairs = VA.ShapeIDPairs.FromShapes(shapes);
+            var shapeidpairs = VA.Core.ShapeIDPairs.FromShapes(shapes);
             var props1 = VA.Shapes.UserDefinedCellHelper.GetDictionary(page1, shapeidpairs, VASS.CellValueType.Formula);
 
             Assert.AreEqual(2, props1.Count);
@@ -120,7 +120,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             var prompt = sec_cols.Add(VASS.SrcConstants.UserDefCellPrompt,"Prompt");
 
             // run query on the two shapes
-            var shapeidpairs = VA.ShapeIDPairs.FromShapes(shapes);
+            var shapeidpairs = VA.Core.ShapeIDPairs.FromShapes(shapes);
             var formulas = sec_query.GetFormulas(page1, shapeidpairs);
 
             Assert.AreEqual(2, formulas.Count); // 2 because two shapes
@@ -293,7 +293,7 @@ namespace VisioAutomation_Tests.Core.Shapes
             SetCP(s4, "FOO5", "5", "p4");
             SetCP(s4, "FOO6", "6", "p6");
 
-            var shapeidpairs = VA.ShapeIDPairs.FromShapes(s1, s2, s3, s4);
+            var shapeidpairs = VA.Core.ShapeIDPairs.FromShapes(s1, s2, s3, s4);
 
             var allprops = VA.Shapes.UserDefinedCellHelper.GetDictionary(page1, shapeidpairs, VASS.CellValueType.Formula);
 

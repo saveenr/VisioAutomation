@@ -137,7 +137,7 @@ namespace VisioAutomationSamples
             }
             domshapescol.Render(page);
 
-            var bordersize = new VA.Geometry.Size(0.5, 0.5);
+            var bordersize = new VA.Core.Size(0.5, 0.5);
             page.ResizeToFitContents(bordersize);
 
         }

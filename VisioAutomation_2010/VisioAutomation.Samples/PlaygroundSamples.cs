@@ -10,7 +10,7 @@ namespace VisioAutomationSamples
 {
     public static class PlaygroundSamples
     {
-        private static IVisio.Shape draw_leaf(IVisio.Page page, VA.Geometry.Point p0)
+        private static IVisio.Shape draw_leaf(IVisio.Page page, VA.Core.Point p0)
         {
             var p1 = p0.Add(1, 1);
             var p2 = p1.Add(1, 0);
@@ -24,9 +24,9 @@ namespace VisioAutomationSamples
             return s;
         }
 
-        public static VA.Geometry.Point GetPointAtRadius(VA.Geometry.Point origin, double angle, double radius)
+        public static VA.Core.Point GetPointAtRadius(VA.Core.Point origin, double angle, double radius)
         {
-            var new_point = new VA.Geometry.Point(radius*System.Math.Cos(angle),
+            var new_point = new VA.Core.Point(radius*System.Math.Cos(angle),
                                          radius*System.Math.Sin(angle));
             new_point = origin + new_point;
             return new_point;
@@ -47,7 +47,7 @@ namespace VisioAutomationSamples
                         0xec008b, 0xec1c23, 0xc1272c, 0x981a1e
                     };
 
-            var origin = new VA.Geometry.Point(4, 4);
+            var origin = new VA.Core.Point(4, 4);
             double radius = 3.0;
             int numpoints = colors.Length;
             double angle_step = (System.Math.PI*2/numpoints);
@@ -81,7 +81,7 @@ namespace VisioAutomationSamples
 
             writer.Commit(page, VA.ShapeSheet.CellValueType.Formula);
 
-            page.ResizeToFitContents(new VA.Geometry.Size(1.0, 1.0));
+            page.ResizeToFitContents(new VA.Core.Size(1.0, 1.0));
         }
 
         public static void DrawAllGradients()
@@ -95,17 +95,17 @@ namespace VisioAutomationSamples
             int num_cols = 7;
             int num_rows = 7;
 
-            var page_size = new VA.Geometry.Size(5, 5);
+            var page_size = new VA.Core.Size(5, 5);
             SampleEnvironment.SetPageSize(page,page_size);
 
-            var lowerleft = new VA.Geometry.Point(0, 0);
+            var lowerleft = new VA.Core.Point(0, 0);
             var actual_page_size = SampleEnvironment.GetPageSize(page);
-            var page_rect = new VA.Geometry.Rectangle(lowerleft, actual_page_size);
+            var page_rect = new VA.Core.Rectangle(lowerleft, actual_page_size);
 
-            var layout = new GridLayout(num_cols, num_rows, new VA.Geometry.Size(1, 1), master);
+            var layout = new GridLayout(num_cols, num_rows, new VA.Core.Size(1, 1), master);
             layout.RowDirection = RowDirection.TopToBottom;
             layout.Origin = page_rect.UpperLeft;
-            layout.CellSpacing = new VA.Geometry.Size(0, 0);
+            layout.CellSpacing = new VA.Core.Size(0, 0);
             layout.PerformLayout();
 
             int max_grad_id = 40;
@@ -150,7 +150,7 @@ namespace VisioAutomationSamples
 
             writer.Commit(page, VA.ShapeSheet.CellValueType.Formula);
 
-            var bordersize = new VA.Geometry.Size(1, 1);
+            var bordersize = new VA.Core.Size(1, 1);
             page.ResizeToFitContents(bordersize);
         }
     }

@@ -159,7 +159,7 @@ namespace VisioAutomationSamples
 
             domshapescol.Render(page);
 
-            var bordersize = new VA.Geometry.Size(0.5, 0.5);
+            var bordersize = new VA.Core.Size(0.5, 0.5);
             page.ResizeToFitContents(bordersize);
         }
 
@@ -181,7 +181,7 @@ namespace VisioAutomationSamples
                     string fontname = fontnames[j];
                     double x0 = j*w;
 
-                    var r = new VA.Geometry.Rectangle(x0, 0 - th, x0 + w, 0);
+                    var r = new VA.Core.Rectangle(x0, 0 - th, x0 + w, 0);
                     var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                     n1.Text = new VAM.Text.Element( fontname.ToUpper() ) ;
                     n1.Cells.FillForeground = "rgb(255,255,255)";
@@ -198,7 +198,7 @@ namespace VisioAutomationSamples
                         double x0 = j*w;
                         double y0 = i*h*-1 - th - h;
 
-                        var r = new VA.Geometry.Rectangle(x0, y0, x0 + w, y0 + h);
+                        var r = new VA.Core.Rectangle(x0, y0, x0 + w, y0 + h);
                         var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
@@ -215,7 +215,7 @@ namespace VisioAutomationSamples
                 var page = doc.Pages.Add();
                 domshapescol.Render(page);
 
-                var bordersize = new VA.Geometry.Size(0.5, 0.5);
+                var bordersize = new VA.Core.Size(0.5, 0.5);
                 page.ResizeToFitContents(bordersize);
             }
         }
@@ -242,7 +242,7 @@ namespace VisioAutomationSamples
                         double x0 = 0;
                         double y0 = i*h*-1;
 
-                        var r = new VA.Geometry.Rectangle(x0, y0, x0 + w, y0 + h);
+                        var r = new VA.Core.Rectangle(x0, y0, x0 + w, y0 + h);
                         var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
@@ -265,7 +265,7 @@ namespace VisioAutomationSamples
 
                 domshapescol.Render(page);
 
-                var bordersize = new VA.Geometry.Size(0.5, 0.5);
+                var bordersize = new VA.Core.Size(0.5, 0.5);
                 page.ResizeToFitContents(bordersize);
             }
         }

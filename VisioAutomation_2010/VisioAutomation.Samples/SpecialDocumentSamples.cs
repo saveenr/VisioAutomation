@@ -22,7 +22,7 @@ namespace VisioAutomationSamples
 
             orgchart.Render(SampleEnvironment.Application);
 
-            var bordersize = new VA.Geometry.Size(1,1);
+            var bordersize = new VA.Core.Size(1,1);
             SampleEnvironment.Application.ActivePage.ResizeToFitContents(bordersize);
         }
     }

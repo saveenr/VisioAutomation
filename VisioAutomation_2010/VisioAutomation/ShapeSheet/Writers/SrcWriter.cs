@@ -13,13 +13,13 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(IVisio.Shape shape, CellValueType type)
         {
-            var surface = new SurfaceTarget(shape);
+            var surface = new Core.SurfaceTarget(shape);
             this._commit(surface, type);
         }
 
         public void Commit(IVisio.Page page, CellValueType type)
         {
-            var surface = new SurfaceTarget(page);
+            var surface = new Core.SurfaceTarget(page);
             this._commit(surface, type);
         }
 
@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void _commit(SurfaceTarget surface, CellValueType type)
+        private void _commit(Core.SurfaceTarget surface, CellValueType type)
         {
             if (this._records == null || this._records.Count < 1)
             {

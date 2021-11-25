@@ -99,7 +99,7 @@ namespace VisioAutomation.Models.Layouts.Box
             return (this.Direction == Direction.TopToBottom) || (this.Direction == Direction.BottomToTop);
         }
 
-        public override VisioAutomation.Geometry.Size  CalculateSize()
+        public override VisioAutomation.Core.Size  CalculateSize()
         {
             double w = this.MinWidth;
             double h = this.MinHeight;
@@ -140,13 +140,13 @@ namespace VisioAutomation.Models.Layouts.Box
             w += total_sepx;
             h += total_sepy;
 
-            this.Size = new VisioAutomation.Geometry.Size(w, h);
+            this.Size = new VisioAutomation.Core.Size(w, h);
             return this.Size;
         }
 
-        public override void _place(VisioAutomation.Geometry.Point origin)
+        public override void _place(VisioAutomation.Core.Point origin)
         {
-            this.Rectangle = new VisioAutomation.Geometry.Rectangle(origin, this.Size);
+            this.Rectangle = new VisioAutomation.Core.Rectangle(origin, this.Size);
 
             double x;
             double y;
@@ -203,9 +203,9 @@ namespace VisioAutomation.Models.Layouts.Box
                     if (this.Direction == Direction.BottomToTop)
                     {
                         // BOTTOM TO TOP
-                        c.ReservedRectangle = new VisioAutomation.Geometry.Rectangle(x, y, x + reserved_width, y + c.Size.Height);
+                        c.ReservedRectangle = new VisioAutomation.Core.Rectangle(x, y, x + reserved_width, y + c.Size.Height);
 
-                        c._place(new VisioAutomation.Geometry.Point(x+align_delta_x, y));
+                        c._place(new VisioAutomation.Core.Point(x+align_delta_x, y));
                         y += c.Size.Height;
                         y += this.ChildSpacing;
 
@@ -213,9 +213,9 @@ namespace VisioAutomation.Models.Layouts.Box
                     else
                     {
                         // TOP TO BOTTOM
-                        c.ReservedRectangle = new VisioAutomation.Geometry.Rectangle(x, y - c.Size.Height, x + reserved_width, y);
+                        c.ReservedRectangle = new VisioAutomation.Core.Rectangle(x, y - c.Size.Height, x + reserved_width, y);
 
-                        c._place(new VisioAutomation.Geometry.Point(x+align_delta_x, y - c.Size.Height));
+                        c._place(new VisioAutomation.Core.Point(x+align_delta_x, y - c.Size.Height));
                         y -= c.Size.Height;
                         y -= this.ChildSpacing;
 
@@ -246,9 +246,9 @@ namespace VisioAutomation.Models.Layouts.Box
                     if (this.Direction == Direction.LeftToRight)
                     {
                         // LEFT TO RIGHT
-                        c.ReservedRectangle = new VisioAutomation.Geometry.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
+                        c.ReservedRectangle = new VisioAutomation.Core.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
 
-                        c._place(new VisioAutomation.Geometry.Point(x, y+align_delta_y));
+                        c._place(new VisioAutomation.Core.Point(x, y+align_delta_y));
                         x += c.Size.Width;
                         x += this.ChildSpacing;
 
@@ -256,9 +256,9 @@ namespace VisioAutomation.Models.Layouts.Box
                     else 
                     {
                         // RIGHT TO LEFT
-                        c.ReservedRectangle = new VisioAutomation.Geometry.Rectangle(x - c.Size.Width, y, x, y + reserved_height);
+                        c.ReservedRectangle = new VisioAutomation.Core.Rectangle(x - c.Size.Width, y, x, y + reserved_height);
 
-                        c._place(new VisioAutomation.Geometry.Point(x - c.Size.Width, y+align_delta_y));
+                        c._place(new VisioAutomation.Core.Point(x - c.Size.Width, y+align_delta_y));
                         x -= c.Size.Width;
                         x -= this.ChildSpacing;
 

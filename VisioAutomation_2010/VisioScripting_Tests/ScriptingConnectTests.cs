@@ -15,7 +15,7 @@ namespace VisioAutomation_Tests.Scripting
 
 
             client.Document.NewDocument();
-            var pagesize = new VA.Geometry.Size(4, 4);
+            var pagesize = new VA.Core.Size(4, 4);
 
             client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
@@ -78,7 +78,7 @@ namespace VisioAutomation_Tests.Scripting
             var client = this.GetScriptingClient();
 
             client.Document.NewDocument();
-            var pagesize = new VA.Geometry.Size(4, 4);
+            var pagesize = new VA.Core.Size(4, 4);
             client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
             var s1 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 1.25, 1.5);

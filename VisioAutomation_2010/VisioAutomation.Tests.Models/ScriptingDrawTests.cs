@@ -32,10 +32,10 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Draw_DataTable()
         {
-            var pagesize = new VisioAutomation.Geometry.Size(4, 4);
+            var pagesize = new VisioAutomation.Core.Size(4, 4);
             var widths = new[] { 2.0, 1.5, 1.0 };
             double default_height = 0.25;
-            var cellspacing = new VisioAutomation.Geometry.Size(0, 0);
+            var cellspacing = new VisioAutomation.Core.Size(0, 0);
 
             var items = new[]
                 {
@@ -77,9 +77,9 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Draw_Grid()
         {
-            var origin = new VisioAutomation.Geometry.Point(0, 4);
-            var pagesize = new VisioAutomation.Geometry.Size(4, 4);
-            var cellsize = new VisioAutomation.Geometry.Size(0.5, 0.25);
+            var origin = new VisioAutomation.Core.Point(0, 4);
+            var pagesize = new VisioAutomation.Core.Size(4, 4);
+            var cellsize = new VisioAutomation.Core.Size(0.5, 0.25);
             int cols = 3;
             int rows = 6;
 
@@ -115,7 +115,7 @@ namespace VisioAutomation_Tests.Scripting
         {
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            var pagesize = new VA.Geometry.Size(4, 4);
+            var pagesize = new VA.Core.Size(4, 4);
 
             client.Page.NewPage(VisioScripting.TargetDocument.Auto, pagesize, false);
 
@@ -132,12 +132,12 @@ namespace VisioAutomation_Tests.Scripting
         {
             var points = new[]
                 {
-                    new VA.Geometry.Point(0, 0),
-                    new VA.Geometry.Point(2, 0.5),
-                    new VA.Geometry.Point(2, 2),
-                    new VA.Geometry.Point(3, 0.5)
+                    new VA.Core.Point(0, 0),
+                    new VA.Core.Point(2, 0.5),
+                    new VA.Core.Point(2, 2),
+                    new VA.Core.Point(3, 0.5)
                 };
-            var pagesize = new VA.Geometry.Size(4, 4);
+            var pagesize = new VA.Core.Size(4, 4);
 
             // Create the Page
             var client = this.GetScriptingClient();
@@ -267,7 +267,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Drop_Master()
         {
-            var pagesize = new VA.Geometry.Size(4, 4);
+            var pagesize = new VA.Core.Size(4, 4);
             var client = this.GetScriptingClient();
 
             // Create the page
@@ -282,7 +282,7 @@ namespace VisioAutomation_Tests.Scripting
 
             // Frop the Shapes
 
-            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Geometry.Point(2, 2));
+            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Core.Point(2, 2));
 
             // Verify
             var application = client.Application.GetApplication();
@@ -297,7 +297,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Drop_Many()
         {
-            var pagesize = new VA.Geometry.Size(10, 10);
+            var pagesize = new VA.Core.Size(10, 10);
             var client = this.GetScriptingClient();
 
             // Create the Page
@@ -313,7 +313,7 @@ namespace VisioAutomation_Tests.Scripting
             // Drop the Shapes
             var masters = new[] {m1, m2};
             var xys = new[] { 1.0, 2.0, 3.0, 4.0, 1.5, 4.5, 5.7, 2.4 };
-            var points = VA.Geometry.Point.FromDoubles(xys).ToList();
+            var points = VA.Core.Point.FromDoubles(xys).ToList();
 
             client.Master.DropMasters(VisioScripting.TargetPage.Auto, masters, points);
 
@@ -336,7 +336,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Drop_Container_Master_Object()
         {
-            var pagesize = new VA.Geometry.Size(4, 4);
+            var pagesize = new VA.Core.Size(4, 4);
             var client = this.GetScriptingClient();
 
 
@@ -353,7 +353,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.GetMaster(stencil_targetdoc, "Rectangle");
 
             // Drop the rectangle
-            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Geometry.Point(2, 2) );
+            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Core.Point(2, 2) );
 
             // Select the rectangle... it should already be selected, but just make sure
 
@@ -394,7 +394,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Drop_Container_Master_Name()
         {
-            var pagesize = new VA.Geometry.Size(4, 4);
+            var pagesize = new VA.Core.Size(4, 4);
             var client = this.GetScriptingClient();
 
             // Create the page
@@ -410,7 +410,7 @@ namespace VisioAutomation_Tests.Scripting
             var master = client.Master.GetMaster(basic_stencil_targetdoc, "Rectangle");
 
             // Drop the rectangle
-            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Geometry.Point(2, 2) );
+            client.Master.DropMaster(VisioScripting.TargetPage.Auto, master, new VA.Core.Point(2, 2) );
 
 
             // Select the rectangle... it should already be selected, but just make sure

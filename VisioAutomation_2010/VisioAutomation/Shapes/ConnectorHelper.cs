@@ -106,7 +106,7 @@ namespace VisioAutomation.Shapes
             int num_connectors = fromshapes.Count;
             var connectors = new List<IVisio.Shape>(num_connectors);
 
-            var points = Enumerable.Range(0, num_connectors).Select(i => new Geometry.Point(i*2.0, -2)).ToList();
+            var points = Enumerable.Range(0, num_connectors).Select(i => new Core.Point(i*2.0, -2)).ToList();
             IList<IVisio.Shape> con_shapes = null;
             if (connector_master != null)
             {

@@ -148,7 +148,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionProp);
             var value_col = sec_cols.Add(VASS.SrcConstants.CustomPropValue,nameof(VASS.SrcConstants.CustomPropValue));
 
-            var shapeidpairs = VA.ShapeIDPairs.FromShapes( s1, s2, s3, s4 );
+            var shapeidpairs = VA.Core.ShapeIDPairs.FromShapes( s1, s2, s3, s4 );
 
             var data = sec_query.GetFormulas(page1, shapeidpairs);
             var data2 = sec_query.GetResults<string>(page1, shapeidpairs);
@@ -187,7 +187,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes()
         {
-            var page1 = this.GetNewPage(new VA.Geometry.Size(10, 10));
+            var page1 = this.GetNewPage(new VA.Core.Size(10, 10));
 
             // draw a simple shape
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -235,7 +235,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes_Verify_Out_Of_order()
         {
-            var page1 = this.GetNewPage(new VA.Geometry.Size(10, 10));
+            var page1 = this.GetNewPage(new VA.Core.Size(10, 10));
 
             // draw a simple shape
             var sa = page1.DrawRectangle(-1, -1, 0, 0);
@@ -295,7 +295,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
             var shapes = new[] {s1, s2, s3, s4};
-            var shapeidpairs = VA.ShapeIDPairs.FromShapes(shapes);
+            var shapeidpairs = VA.Core.ShapeIDPairs.FromShapes(shapes);
 
 
             // First verify that none of the shapes have the controls section locally or otherwise

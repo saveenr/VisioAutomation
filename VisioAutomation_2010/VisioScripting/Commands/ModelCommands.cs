@@ -19,7 +19,7 @@ namespace VisioScripting.Commands
             System.Data.DataTable datatable,
             IList<double> widths,
             IList<double> heights,
-            VisioAutomation.Geometry.Size cellspacing)
+            VisioAutomation.Core.Size cellspacing)
         {
             if (datatable == null)
             {
@@ -52,8 +52,8 @@ namespace VisioScripting.Commands
 
             var pagesize = VisioAutomation.Pages.PageHelper.GetSize(targetpage.Page);
 
-            var layout = new GRID.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VisioAutomation.Geometry.Size(1, 1), masterobj);
-            layout.Origin = new VisioAutomation.Geometry.Point(0, pagesize.Height);
+            var layout = new GRID.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VisioAutomation.Core.Size(1, 1), masterobj);
+            layout.Origin = new VisioAutomation.Core.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;
             layout.RowDirection = GRID.RowDirection.TopToBottom;
             layout.PerformLayout();
@@ -98,7 +98,7 @@ namespace VisioScripting.Commands
 
             var widths = Enumerable.Repeat<double>(dt_model.CellWidth, dt_model.DataTable.Columns.Count).ToList();
             var heights = Enumerable.Repeat<double>(dt_model.CellHeight, dt_model.DataTable.Rows.Count).ToList();
-            var spacing = new VisioAutomation.Geometry.Size(dt_model.CellSpacing, dt_model.CellSpacing);
+            var spacing = new VisioAutomation.Core.Size(dt_model.CellSpacing, dt_model.CellSpacing);
             var shapes = this._client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt_model.DataTable, widths, heights, spacing);
         }
 

@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cells;
         }
         
-        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, ShapeIDPairs shapeidpairs, CellValueType type)
+        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
@@ -118,7 +118,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.SectionQueryShapeResults<string> __GetCells(Query.SectionQuery query, IVisio.Shape shape, CellValueType type)
         {
-            var surface = new SurfaceTarget(shape);
+            var surface = new Core.SurfaceTarget(shape);
             var results = type switch
             {
                 CellValueType.Formula => query.GetFormulas(surface),
@@ -128,9 +128,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, ShapeIDPairs shapeidpairs, CellValueType type)
+        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, Core.ShapeIDPairs shapeidpairs, CellValueType type)
         {
-            var surface = new SurfaceTarget(page);
+            var surface = new Core.SurfaceTarget(page);
             var results = type switch
             {
                 CellValueType.Formula => query.GetFormulas(surface, shapeidpairs),
@@ -142,7 +142,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Shape shape, CellValueType type)
         {
-            var surface = new SurfaceTarget(shape);
+            var surface = new Core.SurfaceTarget(shape);
             var results = type switch
             {
                 CellValueType.Formula => query.GetFormulas(surface),
@@ -154,7 +154,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
         {
-            var surface = new SurfaceTarget(page);
+            var surface = new Core.SurfaceTarget(page);
             var results = type switch
             {
                 CellValueType.Formula => query.GetFormulas(surface, shapeids),

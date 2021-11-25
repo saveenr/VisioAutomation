@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
-                formpage.Size = new VisioAutomation.Geometry.Size(8.5, 11);
+                formpage.Size = new VisioAutomation.Core.Size(8.5, 11);
                 formpage.PageMargin = new VADOC.Forms.PageMargin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
@@ -124,7 +124,7 @@ namespace VisioScripting.Commands
                     }
 
                     var formpage = new VADOC.Forms.FormPage();
-                    formpage.Size = new VisioAutomation.Geometry.Size(8.5, 11);
+                    formpage.Size = new VisioAutomation.Core.Size(8.5, 11);
                     formpage.PageMargin = new VADOC.Forms.PageMargin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
@@ -229,7 +229,7 @@ namespace VisioScripting.Commands
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
 
-            var page_size = new VisioAutomation.Geometry.Size(8.5,11);
+            var page_size = new VisioAutomation.Core.Size(8.5,11);
             var doc = this._client.Document.NewDocumentFromTemplate(page_size,template);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
@@ -260,7 +260,7 @@ namespace VisioScripting.Commands
 
                 var node = new VATREE.Node(ns);
                 node.Text = new VisioAutomation.Models.Text.Element(label);
-                node.Size = new VisioAutomation.Geometry.Size(2.0, 0.25);
+                node.Size = new VisioAutomation.Core.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
             }
 
@@ -385,7 +385,7 @@ namespace VisioScripting.Commands
             string def_shape_fill = "rgb(245,245,245)";
             string template = null;
 
-            var page_size = new VisioAutomation.Geometry.Size(8.5,11);
+            var page_size = new VisioAutomation.Core.Size(8.5,11);
             var doc = this._client.Document.NewDocumentFromTemplate(page_size,template);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
@@ -424,7 +424,7 @@ namespace VisioScripting.Commands
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
                 var node = new VATREE.Node(ns);
-                node.Size = new VisioAutomation.Geometry.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
+                node.Size = new VisioAutomation.Core.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
                 var markup = new VisioAutomation.Models.Text.Element();

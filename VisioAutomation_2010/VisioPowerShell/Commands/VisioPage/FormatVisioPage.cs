@@ -40,7 +40,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
             if (this.FitContents)
             {
-                var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderHeight);
+                var bordersize = new VisioAutomation.Core.Size(this.BorderWidth, this.BorderHeight);
                 this.Client.Page.ResizePageToFitContents(targetpages, bordersize);
                 this.Client.View.SetZoomToObject(VisioScripting.TargetWindow.Auto, VisioScripting.Models.ZoomToObject.Page);
             }

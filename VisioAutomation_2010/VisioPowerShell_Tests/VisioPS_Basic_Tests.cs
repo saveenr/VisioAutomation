@@ -33,7 +33,7 @@ namespace VisioPowerShell_Tests
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
             var stencil_basic = VisioPS_Basic_Tests.Session.Cmd_Open_VisioDocument("basic_u.vss");
             var master_roundrect = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(PsArray.From("Rectangle"), stencil_basic);
-            var shapes = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape(PsArray.From(master_roundrect), new [] {new VisioAutomation.Geometry.Point( 2.0, 3.0) });
+            var shapes = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape(PsArray.From(master_roundrect), new [] {new VisioAutomation.Core.Point( 2.0, 3.0) });
 
             var shapecells = VisioPS_Basic_Tests.Session.Cmd_New_VisioShapeCells();
             shapecells.XFormPinX= "4 in";
@@ -75,8 +75,8 @@ namespace VisioPowerShell_Tests
             var d = Session.Cmd_New_VisioDocument();
             var s = Session.Cmd_New_VisioShape_rectangle(new[]
             {
-                new VisioAutomation.Geometry.Point( 0.0, 1.0),
-                new VisioAutomation.Geometry.Point( 2.0, 3.0)
+                new VisioAutomation.Core.Point( 0.0, 1.0),
+                new VisioAutomation.Core.Point( 2.0, 3.0)
             });
             Session.Cmd_Set_VisioText( PsArray.From("Hello World"), PsArray.From(s));
 
@@ -104,7 +104,7 @@ namespace VisioPowerShell_Tests
             var master = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(PsArray.From(rectangle), basic_u_vss);
 
 
-            VisioPS_Basic_Tests.Session.Cmd_New_VisioShape( PsArray.From(master) , new[] { new VisioAutomation.Geometry.Point(1.0, 1.0) });
+            VisioPS_Basic_Tests.Session.Cmd_New_VisioShape( PsArray.From(master) , new[] { new VisioAutomation.Core.Point(1.0, 1.0) });
 
             // Drop a container on the page... the rectangle we created above should be selected by default. 
             // Since it is selected it will be added as a member to the container.

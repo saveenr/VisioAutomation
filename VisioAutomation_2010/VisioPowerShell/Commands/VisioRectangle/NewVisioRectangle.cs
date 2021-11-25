@@ -20,7 +20,7 @@ namespace VisioPowerShell.Commands.VisioRectangle
 
         protected override void ProcessRecord()
         {
-            var rect = new VisioAutomation.Geometry.Rectangle(this.Left, this.Bottom, this.Right, this.Top);
+            var rect = new VisioAutomation.Core.Rectangle(this.Left, this.Bottom, this.Right, this.Top);
             this.WriteObject(rect);
         }
     }

@@ -2,14 +2,14 @@ namespace VisioAutomation_Tests
 {
     public static class TestExtensions
     {
-        public static VisioAutomation.Geometry.Point GetPinPosResult(this VisioAutomation.Shapes.ShapeXFormCells xform)
+        public static VisioAutomation.Core.Point GetPinPosResult(this VisioAutomation.Shapes.ShapeXFormCells xform)
         {
             return  ToPoint(xform.PinX.Value, xform.PinY.Value);
         }
 
-        public static VisioAutomation.Geometry.Point ToPoint(string x,string y)
+        public static VisioAutomation.Core.Point ToPoint(string x,string y)
         {
-            return new VisioAutomation.Geometry.Point(InchesToDouble(x), InchesToDouble(y));
+            return new VisioAutomation.Core.Point(InchesToDouble(x), InchesToDouble(y));
         }
 
         public static double InchesToDouble(string s)

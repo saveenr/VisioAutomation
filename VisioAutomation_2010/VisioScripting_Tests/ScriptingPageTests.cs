@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Geometry;
+using VisioAutomation.Core;
 using VisioScripting.Models;
 
 namespace VisioAutomation_Tests.Scripting
@@ -11,7 +11,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Page_NewPage()
         {
-            var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
+            var page_size = new VisioAutomation.Core.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument();
 
@@ -22,7 +22,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Page_Navigation()
         {
-            var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
+            var page_size = new VisioAutomation.Core.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument(page_size);
 
@@ -62,7 +62,7 @@ namespace VisioAutomation_Tests.Scripting
         [TestMethod]
         public void Scripting_Page_Duplication()
         {
-            var page_size = new VisioAutomation.Geometry.Size(8.5, 11);
+            var page_size = new VisioAutomation.Core.Size(8.5, 11);
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument(page_size);
 
