@@ -1,246 +1,243 @@
-﻿using VA = VisioAutomation;
-using VisioAutomation.Extensions;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using VADOM = VisioAutomation.Models.Dom;
 using VABOX = VisioAutomation.Models.Layouts.Box;
+using VisioAutomation.Extensions;
 
-namespace VisioAutomationSamples
+namespace VisioAutomationSamples;
+
+public static class BoxLayout2Samples
 {
-    public static class BoxLayout2Samples
+    public static void BoxLayout_SimpleCases()
     {
-        public static void BoxLayout_SimpleCases()
+        // Create a blank canvas in Visio 
+        var app = SampleEnvironment.Application;
+        var documents = app.Documents;
+        var doc = documents.Add(string.Empty);
+
+        // Create a simple Column
+        var layout1 = new VABOX.BoxLayout();
+        layout1.Root = new VABOX.Container(VABOX.Direction.BottomToTop);
+        layout1.Root.AddBox(1,2);
+        layout1.Root.AddBox(1,1);
+        layout1.Root.AddBox(0.5, 0.5);
+
+        // You can set the min height and width of a container
+        var layout2 = new VABOX.BoxLayout();
+        layout2.Root = new VABOX.Container(VABOX.Direction.BottomToTop,3,5);
+        layout2.Root.AddBox(1, 2);
+        layout2.Root.AddBox(1, 1);
+        layout2.Root.AddBox(0.5, 0.5);
+
+        // For vertical containers, you can layout shapes bottom-to-top or top-to-bottom
+        var layout3 = new VABOX.BoxLayout();
+        layout3.Root = new VABOX.Container(VABOX.Direction.TopToBottom,3,5);
+        layout3.Root.AddBox(1, 2);
+        layout3.Root.AddBox(1, 1);
+        layout3.Root.AddBox(0.5, 0.5);
+
+        // Now switch to horizontal containers
+        var layout4 = new VABOX.BoxLayout();
+        layout4.Root = new VABOX.Container(VABOX.Direction.RightToLeft,3,5);
+        layout4.Root.AddBox(1, 2);
+        layout4.Root.AddBox(1, 1);
+        layout4.Root.AddBox(0.5, 0.5);
+
+
+        // For Columns, you can tell the children how to horizontally align
+        var layout5 = new VABOX.BoxLayout();
+        layout5.Root = new VABOX.Container(VABOX.Direction.BottomToTop,3,0);
+        var b51 = layout5.Root.AddBox(1, 2);
+        var b52 = layout5.Root.AddBox(1, 1);
+        var b53 = layout5.Root.AddBox(0.5, 0.5);
+        b51.HAlignToParent = VABOX.AlignmentHorizontal.Left;
+        b52.HAlignToParent = VABOX.AlignmentHorizontal.Center;
+        b53.HAlignToParent = VABOX.AlignmentHorizontal.Right;
+
+        // For Rows , you can tell the children how to vertially align
+        var layout6 = new VABOX.BoxLayout();
+        layout6.Root = new VABOX.Container(VABOX.Direction.LeftToRight,0,5);
+        var b61 = layout6.Root.AddBox(1, 2);
+        var b62 = layout6.Root.AddBox(1, 1);
+        var b63 = layout6.Root.AddBox(0.5, 0.5);
+        b61.VAlignToParent = VABOX.AlignmentVertical.Bottom;
+        b62.VAlignToParent = VABOX.AlignmentVertical.Center;
+        b63.VAlignToParent = VABOX.AlignmentVertical.Top;
+
+        Util.Render(layout1, doc);
+        Util.Render(layout2, doc);
+        Util.Render(layout3, doc);
+        Util.Render(layout4, doc);
+        Util.Render(layout5, doc);
+        Util.Render(layout6, doc);
+
+    }
+
+    public class TwoLevelInfo
+    {
+        public string Text;
+        public bool Render;
+        public VADOM.ShapeCells ShapeCells;
+    }
+
+    public static void BoxLayout_TwoLevelGrouping()
+    {
+        int num_types = 10;
+        int max_properties = 50;
+
+        var types = typeof(VA.Shapes.UserDefinedCellCells).Assembly.GetExportedTypes().Take(num_types).ToList();
+
+        var data = new List<string[]>();
+        foreach (var type in types)
         {
-            // Create a blank canvas in Visio 
-            var app = SampleEnvironment.Application;
-            var documents = app.Documents;
-            var doc = documents.Add(string.Empty);
-
-            // Create a simple Column
-            var layout1 = new VABOX.BoxLayout();
-            layout1.Root = new VABOX.Container(VABOX.Direction.BottomToTop);
-            layout1.Root.AddBox(1,2);
-            layout1.Root.AddBox(1,1);
-            layout1.Root.AddBox(0.5, 0.5);
-
-            // You can set the min height and width of a container
-            var layout2 = new VABOX.BoxLayout();
-            layout2.Root = new VABOX.Container(VABOX.Direction.BottomToTop,3,5);
-            layout2.Root.AddBox(1, 2);
-            layout2.Root.AddBox(1, 1);
-            layout2.Root.AddBox(0.5, 0.5);
-
-            // For vertical containers, you can layout shapes bottom-to-top or top-to-bottom
-            var layout3 = new VABOX.BoxLayout();
-            layout3.Root = new VABOX.Container(VABOX.Direction.TopToBottom,3,5);
-            layout3.Root.AddBox(1, 2);
-            layout3.Root.AddBox(1, 1);
-            layout3.Root.AddBox(0.5, 0.5);
-
-            // Now switch to horizontal containers
-            var layout4 = new VABOX.BoxLayout();
-            layout4.Root = new VABOX.Container(VABOX.Direction.RightToLeft,3,5);
-            layout4.Root.AddBox(1, 2);
-            layout4.Root.AddBox(1, 1);
-            layout4.Root.AddBox(0.5, 0.5);
-
-
-            // For Columns, you can tell the children how to horizontally align
-            var layout5 = new VABOX.BoxLayout();
-            layout5.Root = new VABOX.Container(VABOX.Direction.BottomToTop,3,0);
-            var b51 = layout5.Root.AddBox(1, 2);
-            var b52 = layout5.Root.AddBox(1, 1);
-            var b53 = layout5.Root.AddBox(0.5, 0.5);
-            b51.HAlignToParent = VABOX.AlignmentHorizontal.Left;
-            b52.HAlignToParent = VABOX.AlignmentHorizontal.Center;
-            b53.HAlignToParent = VABOX.AlignmentHorizontal.Right;
-
-            // For Rows , you can tell the children how to vertially align
-            var layout6 = new VABOX.BoxLayout();
-            layout6.Root = new VABOX.Container(VABOX.Direction.LeftToRight,0,5);
-            var b61 = layout6.Root.AddBox(1, 2);
-            var b62 = layout6.Root.AddBox(1, 1);
-            var b63 = layout6.Root.AddBox(0.5, 0.5);
-            b61.VAlignToParent = VABOX.AlignmentVertical.Bottom;
-            b62.VAlignToParent = VABOX.AlignmentVertical.Center;
-            b63.VAlignToParent = VABOX.AlignmentVertical.Top;
-
-            Util.Render(layout1, doc);
-            Util.Render(layout2, doc);
-            Util.Render(layout3, doc);
-            Util.Render(layout4, doc);
-            Util.Render(layout5, doc);
-            Util.Render(layout6, doc);
-
-        }
-
-        public class TwoLevelInfo
-        {
-            public string Text;
-            public bool Render;
-            public VADOM.ShapeCells ShapeCells;
-        }
-
-        public static void BoxLayout_TwoLevelGrouping()
-        {
-            int num_types = 10;
-            int max_properties = 50;
-
-            var types = typeof(VA.Shapes.UserDefinedCellCells).Assembly.GetExportedTypes().Take(num_types).ToList();
-
-            var data = new List<string[]>();
-            foreach (var type in types)
+            var properties = type.GetProperties().Take(max_properties).ToList();
+            foreach (var property in properties)
             {
-                var properties = type.GetProperties().Take(max_properties).ToList();
-                foreach (var property in properties)
-                {
-                    var item = new[] {type.Name, property.Name[0].ToString().ToUpper(), property.Name};
-                    data.Add(item);
-                }
+                var item = new[] {type.Name, property.Name[0].ToString().ToUpper(), property.Name};
+                data.Add(item);
+            }
+        }
+
+        var layout1 = BoxLayout2Samples.CreateTwoLevelLayout(data);
+
+
+        layout1.PerformLayout();
+
+        // Create a blank canvas in Visio 
+        var app = SampleEnvironment.Application;
+        var documents = app.Documents;
+        var doc = documents.Add(string.Empty);
+        var page = app.ActivePage;
+
+
+        var domshapescol = new VADOM.ShapeList();
+        //var rect_master = dom.m
+        foreach (var item in layout1.Nodes)
+        {
+            if (item.Data ==null)
+            {
+                continue;
+            }
+            var info = (TwoLevelInfo) item.Data;
+
+            if (!info.Render)
+            {
+                continue;
             }
 
-            var layout1 = BoxLayout2Samples.CreateTwoLevelLayout(data);
+            var shape = domshapescol.Drop("Rectangle", "Basic_U.VSS",item.Rectangle);
 
-
-            layout1.PerformLayout();
-
-            // Create a blank canvas in Visio 
-            var app = SampleEnvironment.Application;
-            var documents = app.Documents;
-            var doc = documents.Add(string.Empty);
-            var page = app.ActivePage;
-
-
-            var domshapescol = new VADOM.ShapeList();
-            //var rect_master = dom.m
-            foreach (var item in layout1.Nodes)
+            if (info.Text!=null)
             {
-                if (item.Data ==null)
-                {
-                    continue;
-                }
-                var info = (TwoLevelInfo) item.Data;
-
-                if (!info.Render)
-                {
-                    continue;
-                }
-
-                var shape = domshapescol.Drop("Rectangle", "Basic_U.VSS",item.Rectangle);
-
-                if (info.Text!=null)
-                {
-                    shape.Text = new VisioAutomation.Models.Text.Element(info.Text);                    
-                }
+                shape.Text = new VisioAutomation.Models.Text.Element(info.Text);                    
+            }
                 
-                shape.Cells = info.ShapeCells.ShallowCopy();
-            }
-            domshapescol.Render(page);
-
-            var bordersize = new VA.Geometry.Size(0.5, 0.5);
-            page.ResizeToFitContents(bordersize);
-
+            shape.Cells = info.ShapeCells.ShallowCopy();
         }
+        domshapescol.Render(page);
 
-        private static VABOX.BoxLayout CreateTwoLevelLayout(List<string[]> data)
+        var bordersize = new VA.Geometry.Size(0.5, 0.5);
+        page.ResizeToFitContents(bordersize);
+
+    }
+
+    private static VABOX.BoxLayout CreateTwoLevelLayout(List<string[]> data)
+    {
+        double itemsep = 0.0;
+        var major_group_direction = VABOX.Direction.LeftToRight;
+        var minor_group_direction = VABOX.Direction.TopToBottom;
+
+        var name_to_major_group = new Dictionary<string, VABOX.Container>();
+        var name_to_minor_group = new Dictionary<string, VABOX.Container>();
+
+        var layout1 = new VABOX.BoxLayout();
+        layout1.Root = new VABOX.Container(major_group_direction);
+
+        var major_cells = new VADOM.ShapeCells();
+        major_cells.FillForeground = "rgb(245,245,245)";
+        major_cells.CharFont = 0;
+        major_cells.CharSize = "12pt";
+        major_cells.ParaHorizontalAlign = "0";
+        major_cells.TextBlockVerticalAlign = "0";
+        major_cells.LineWeight = "0";
+        major_cells.LinePattern = "0";
+
+        var minor_cells = new VADOM.ShapeCells();
+        minor_cells.FillForeground = "rgb(230,230,230)";
+        minor_cells.CharFont = 0;
+        minor_cells.CharSize = "10pt";
+        minor_cells.ParaHorizontalAlign = "0";
+        minor_cells.TextBlockVerticalAlign = "0";
+        minor_cells.LineWeight = "0";
+        minor_cells.LinePattern = "0";
+
+        var item_cells = new VADOM.ShapeCells();
+        item_cells.CharFont = 0;
+        item_cells.FillPattern = "0";
+        item_cells.CharSize = "8pt";
+        item_cells.ParaHorizontalAlign = "0";
+        item_cells.TextBlockVerticalAlign = "0";
+        item_cells.LineWeight = "0";
+        item_cells.LinePattern = "0";
+
+
+        foreach (var row in data)
         {
-            double itemsep = 0.0;
-            var major_group_direction = VABOX.Direction.LeftToRight;
-            var minor_group_direction = VABOX.Direction.TopToBottom;
+            var majorname = row[0];
+            var minorname = row[1];
+            var itemname = row[2];
 
-            var name_to_major_group = new Dictionary<string, VABOX.Container>();
-            var name_to_minor_group = new Dictionary<string, VABOX.Container>();
-
-            var layout1 = new VABOX.BoxLayout();
-            layout1.Root = new VABOX.Container(major_group_direction);
-
-            var major_cells = new VADOM.ShapeCells();
-            major_cells.FillForeground = "rgb(245,245,245)";
-            major_cells.CharFont = 0;
-            major_cells.CharSize = "12pt";
-            major_cells.ParaHorizontalAlign = "0";
-            major_cells.TextBlockVerticalAlign = "0";
-            major_cells.LineWeight = "0";
-            major_cells.LinePattern = "0";
-
-            var minor_cells = new VADOM.ShapeCells();
-            minor_cells.FillForeground = "rgb(230,230,230)";
-            minor_cells.CharFont = 0;
-            minor_cells.CharSize = "10pt";
-            minor_cells.ParaHorizontalAlign = "0";
-            minor_cells.TextBlockVerticalAlign = "0";
-            minor_cells.LineWeight = "0";
-            minor_cells.LinePattern = "0";
-
-            var item_cells = new VADOM.ShapeCells();
-            item_cells.CharFont = 0;
-            item_cells.FillPattern = "0";
-            item_cells.CharSize = "8pt";
-            item_cells.ParaHorizontalAlign = "0";
-            item_cells.TextBlockVerticalAlign = "0";
-            item_cells.LineWeight = "0";
-            item_cells.LinePattern = "0";
-
-
-            foreach (var row in data)
+            VABOX.Container majorcnt;
+            if (name_to_major_group.ContainsKey(majorname))
             {
-                var majorname = row[0];
-                var minorname = row[1];
-                var itemname = row[2];
+                majorcnt = name_to_major_group[majorname];
+            }
+            else
+            {
+                majorcnt = layout1.Root.AddContainer(minor_group_direction, 1, 1);
 
-                VABOX.Container majorcnt;
-                if (name_to_major_group.ContainsKey(majorname))
-                {
-                    majorcnt = name_to_major_group[majorname];
-                }
-                else
-                {
-                    majorcnt = layout1.Root.AddContainer(minor_group_direction, 1, 1);
-
-                    var major_info = new TwoLevelInfo();
-                    major_info.Text = majorname;
-                    major_info.Render = true;
-                    major_info.ShapeCells = major_cells;
-                    majorcnt.Data = major_info;
+                var major_info = new TwoLevelInfo();
+                major_info.Text = majorname;
+                major_info.Render = true;
+                major_info.ShapeCells = major_cells;
+                majorcnt.Data = major_info;
                     
 
-                    name_to_major_group[majorname] = majorcnt;
+                name_to_major_group[majorname] = majorcnt;
 
-                    VABOX.Box headerbox = majorcnt.AddBox(2, 0.25);
-                }
-
-                VABOX.Container minorcnt;
-                var minorkey = majorname + "___" + minorname;
-                if (name_to_minor_group.ContainsKey(minorkey))
-                {
-                    minorcnt = name_to_minor_group[minorkey];
-                }
-                else
-                {
-                    minorcnt = majorcnt.AddContainer(minor_group_direction);
-                    minorcnt.ChildSpacing = itemsep;
-                    var minor_info = new TwoLevelInfo();
-                    minor_info.Text = minorname;
-                    minor_info.Render = true;
-                    minor_info.ShapeCells = minor_cells;
-                    minorcnt.Data = minor_info;
-                    name_to_minor_group[minorkey] = minorcnt;
-
-                    VABOX.Box headerbox = minorcnt.AddBox(2, 0.25);
-                }
-
-                VABOX.Box itembox = minorcnt.AddBox(2, 0.25);
-
-                var item_info = new TwoLevelInfo();
-                item_info.Text = itemname;
-                item_info.Render = true;
-
-
-                item_info.ShapeCells = item_cells;
-                
-                itembox.Data = item_info;
+                VABOX.Box headerbox = majorcnt.AddBox(2, 0.25);
             }
-            return layout1;
+
+            VABOX.Container minorcnt;
+            var minorkey = majorname + "___" + minorname;
+            if (name_to_minor_group.ContainsKey(minorkey))
+            {
+                minorcnt = name_to_minor_group[minorkey];
+            }
+            else
+            {
+                minorcnt = majorcnt.AddContainer(minor_group_direction);
+                minorcnt.ChildSpacing = itemsep;
+                var minor_info = new TwoLevelInfo();
+                minor_info.Text = minorname;
+                minor_info.Render = true;
+                minor_info.ShapeCells = minor_cells;
+                minorcnt.Data = minor_info;
+                name_to_minor_group[minorkey] = minorcnt;
+
+                VABOX.Box headerbox = minorcnt.AddBox(2, 0.25);
+            }
+
+            VABOX.Box itembox = minorcnt.AddBox(2, 0.25);
+
+            var item_info = new TwoLevelInfo();
+            item_info.Text = itemname;
+            item_info.Render = true;
+
+
+            item_info.ShapeCells = item_cells;
+                
+            itembox.Data = item_info;
         }
+        return layout1;
     }
 }

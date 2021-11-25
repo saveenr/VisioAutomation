@@ -1,29 +1,27 @@
-﻿using VA = VisioAutomation;
+﻿using OCMODEL = VisioAutomation.Models.Documents.OrgCharts;
 using VisioAutomation.Extensions;
-using OCMODEL = VisioAutomation.Models.Documents.OrgCharts;
 
-namespace VisioAutomationSamples
+namespace VisioAutomationSamples;
+
+public static class SpecialDocumentSamples
 {
-    public static class SpecialDocumentSamples
+    public static void OrgChart()
     {
-        public static void OrgChart()
-        {
-            // This creates a new document
-            var orgchart = new OCMODEL.OrgChartDocument();
+        // This creates a new document
+        var orgchart = new OCMODEL.OrgChartDocument();
 
-            var bob = new OCMODEL.Node("Bob");
-            var ted = new OCMODEL.Node("Ted");
-            var alice = new OCMODEL.Node("Alice");
+        var bob = new OCMODEL.Node("Bob");
+        var ted = new OCMODEL.Node("Ted");
+        var alice = new OCMODEL.Node("Alice");
 
-            bob.Children.Add(ted);
-            bob.Children.Add(alice);
+        bob.Children.Add(ted);
+        bob.Children.Add(alice);
 
-            orgchart.OrgCharts.Add(bob);
+        orgchart.OrgCharts.Add(bob);
 
-            orgchart.Render(SampleEnvironment.Application);
+        orgchart.Render(SampleEnvironment.Application);
 
-            var bordersize = new VA.Geometry.Size(1,1);
-            SampleEnvironment.Application.ActivePage.ResizeToFitContents(bordersize);
-        }
+        var bordersize = new VA.Geometry.Size(1,1);
+        SampleEnvironment.Application.ActivePage.ResizeToFitContents(bordersize);
     }
 }

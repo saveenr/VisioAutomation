@@ -1,11 +1,10 @@
-﻿namespace VisioAutomationSamples
+﻿namespace VisioAutomationSamples;
+
+public class Program
 {
-    public class Program
+    private static void Main(string[] args)
     {
-        private static void Main(string[] args)
-        {
-            var form = new FormSampleRunner();
-            form.ShowDialog();
-        }
+        var form = new FormSampleRunner();
+        form.ShowDialog();
     }
 }
