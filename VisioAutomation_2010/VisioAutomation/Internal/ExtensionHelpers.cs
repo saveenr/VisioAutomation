@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace VisioAutomation.Internal.Extensions
 {
     public static class ExtensionHelpers
