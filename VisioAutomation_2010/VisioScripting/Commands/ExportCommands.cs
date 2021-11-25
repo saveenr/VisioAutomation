@@ -1,6 +1,4 @@
 
-using SXL = System.Xml.Linq;
-
 namespace VisioScripting.Commands
 {
     public class ExportCommands : CommandSet

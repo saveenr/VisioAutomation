@@ -1,7 +1,7 @@
-using System.Collections.Generic;
+
 using VisioScripting.Extensions;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
-using SXL = System.Xml.Linq;
+
 
 namespace VisioScripting.Builders
 {

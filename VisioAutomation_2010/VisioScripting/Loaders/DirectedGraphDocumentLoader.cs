@@ -1,10 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
+
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioScripting.Extensions;
 using VisioAutomation.Shapes;
-using SXL = System.Xml.Linq;
+
 
 namespace VisioScripting.Builders
 {

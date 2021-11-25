@@ -1,6 +1,5 @@
 using VisioScripting.Extensions;
 using VisioAutomation.Shapes;
-using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Models
 {
