@@ -1,4 +1,3 @@
-using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioApplication
 {

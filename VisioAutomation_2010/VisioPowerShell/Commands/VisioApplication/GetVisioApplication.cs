@@ -1,5 +1,3 @@
-using SMA = System.Management.Automation;
-
 namespace VisioPowerShell.Commands.VisioApplication
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioApplication)]

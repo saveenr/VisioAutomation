@@ -1,6 +1,3 @@
-using System.Linq;
-using SMA = System.Management.Automation;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {

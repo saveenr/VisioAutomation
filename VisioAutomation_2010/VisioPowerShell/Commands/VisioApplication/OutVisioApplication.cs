@@ -1,5 +1,4 @@
 using VisioAutomation.Models.Layouts.DirectedGraph;
-using SMA = System.Management.Automation;
 using MODELS = VisioAutomation.Models;
 
 namespace VisioPowerShell.Commands.Visio

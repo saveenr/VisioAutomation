@@ -1,6 +1,4 @@
 using System;
-using SXL = System.Xml.Linq;
-using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioModel
 {

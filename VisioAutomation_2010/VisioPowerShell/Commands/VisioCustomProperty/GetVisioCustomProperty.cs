@@ -1,6 +1,3 @@
-using SMA = System.Management.Automation;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Commands.VisioCustomProperty
 {
