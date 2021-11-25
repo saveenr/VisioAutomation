@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SMA = System.Management.Automation;
+﻿using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioRectangle
 {

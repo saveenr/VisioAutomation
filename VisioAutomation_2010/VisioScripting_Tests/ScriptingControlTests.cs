@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet;
 
 namespace VisioScripting_Tests
 {

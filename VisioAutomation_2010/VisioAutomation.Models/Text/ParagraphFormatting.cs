@@ -1,6 +1,4 @@
-﻿using VisioAutomation.ShapeSheet;
-
-namespace VisioAutomation.Models.Text
+﻿namespace VisioAutomation.Models.Text
 {
     public class ParagraphFormatting 
     {

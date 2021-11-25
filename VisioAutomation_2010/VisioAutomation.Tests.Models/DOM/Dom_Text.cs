@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VABOX = VisioAutomation.Models.Layouts.Box;
-using VisioAutomation.ShapeSheet;
 using VA=VisioAutomation;
 
 namespace VisioAutomation_Tests.Dom
