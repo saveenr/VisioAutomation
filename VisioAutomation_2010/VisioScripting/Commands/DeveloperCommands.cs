@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using VADOC=VisioAutomation.Models.Documents;
 using VADOM=VisioAutomation.Models.Dom;
 using VATREE=VisioAutomation.Models.Layouts.Tree;
-using IVisio = Microsoft.Office.Interop.Visio;
+
 
 namespace VisioScripting.Commands
 {

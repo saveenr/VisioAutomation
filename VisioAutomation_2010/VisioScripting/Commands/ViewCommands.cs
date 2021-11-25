@@ -1,4 +1,4 @@
-using IVisio = Microsoft.Office.Interop.Visio;
+
 using VisioAutomation.Extensions;
 
 namespace VisioScripting.Commands

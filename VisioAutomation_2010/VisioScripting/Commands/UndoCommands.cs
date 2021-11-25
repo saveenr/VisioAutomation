@@ -1,5 +1,5 @@
 using VisioAutomation.Application;
-using VA = VisioAutomation;
+
 
 namespace VisioScripting.Commands
 {

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using VA=VisioAutomation;
-using VASS=VisioAutomation.ShapeSheet;
+
 
 namespace VisioScripting.Commands
 {

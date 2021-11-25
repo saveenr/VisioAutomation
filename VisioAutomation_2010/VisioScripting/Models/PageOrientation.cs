@@ -1,5 +1,4 @@
-﻿using IVisio=Microsoft.Office.Interop.Visio;
-
+﻿
 namespace VisioScripting.Models
 {
     public enum PageOrientation

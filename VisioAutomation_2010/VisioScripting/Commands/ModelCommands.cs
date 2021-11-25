@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
+
 using ORG = VisioAutomation.Models.Documents.OrgCharts;
 using GRAPH = VisioAutomation.Models.Layouts.DirectedGraph;
 using GRID = VisioAutomation.Models.Layouts.Grid;

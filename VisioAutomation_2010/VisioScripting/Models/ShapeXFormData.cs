@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using VASS=VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Models
 {

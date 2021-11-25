@@ -1,5 +1,3 @@
-using IVisio = Microsoft.Office.Interop.Visio;
-
 namespace VisioScripting
 {
     public class TargetDocument: TargetObject<IVisio.Document>
