@@ -14,7 +14,7 @@ public class NewVisioDocument : VisioCmdlet
 
     protected override void ProcessRecord()
     {
-        this.NewAppIfNeeded();
+        this._new_app_if_needed();
 
         var doc = this.Client.Document.NewDocumentFromTemplate(this.Template);
 

@@ -8,7 +8,7 @@ public class VisioCmdlet : SMA.Cmdlet
     // the various visiops cmdlets to share state (for example
     // to share which instance of Visio they are attached to)
     // 
-    // To prevent confustion this should be the only static 
+    // To prevent confusion this should be the only static 
     // variable defined in VisioPS
     private static VisioScripting.Client _client;
 
@@ -51,7 +51,7 @@ public class VisioCmdlet : SMA.Cmdlet
         base.WriteVerbose(s);
     }
 
-    protected void NewAppIfNeeded()
+    protected void _new_app_if_needed()
     {
         if (!this.Client.Application.HasApplication)
         {

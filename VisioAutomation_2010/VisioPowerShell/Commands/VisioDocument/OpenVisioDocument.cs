@@ -11,7 +11,7 @@ public class OpenVisioDocument : VisioCmdlet
 
     protected override void ProcessRecord()
     {
-        this.NewAppIfNeeded();
+        this._new_app_if_needed();
 
         if (this.filename_is_stencil(this.Filename))
         {
