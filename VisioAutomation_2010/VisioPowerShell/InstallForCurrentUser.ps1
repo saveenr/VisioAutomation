@@ -2,6 +2,9 @@
 # -------
 # Manually installs the Visio PowerShell module into the user's PowerShell folder
 #
+# This is useful when you want to try out the module without going through all the work of 
+# creating a module an then installing it with Import-Modile
+#
 # NOTES
 # -----
 # - If another PowerShell session has the Visio PS module loaded, then the VisioPS binaries cannot 
@@ -45,7 +48,6 @@ function Mirror-Folder($frompath, $topath)
 	robocopy $frompath $topath /mir /njh /njs /ns /nc /np 
 }
 
-
 function Test-Locked($filePath)
 {
     $fileInfo = New-Object System.IO.FileInfo $filePath
@@ -79,6 +81,7 @@ $the_module_folder=  Join-Path $modules $module_foldername
 Assert-Path $bin_folder
 Assert-Path $docfolder
 
+
 # ------------------------------
 # Verify that the binaries exist
 $dlls = Get-ChildItem (Join-Path $bin_folder "*.dll")
@@ -89,8 +92,14 @@ if ( ( $dlls -eq $null) -or ( $dlls.Length -lt 1 ) )
 	Write-Error $msg
 }	
 
+# Verify key files are There
+Assert-Path (Join-Path $bin_folder "Visio.psd1")
+Assert-Path (Join-Path $bin_folder "Visio.Types.ps1xml")
+Assert-Path (Join-Path $bin_folder "VisioPS.dll")
+Assert-Path (Join-Path $bin_folder "VisioScripting.dll")
+
 # ------------------------------
-# Prepare the Distination Folder
+# Prepare the Destination Folder
 New-Folder $wps 
 New-Folder $modules
 Assert-Path $wps
@@ -101,5 +110,11 @@ Assert-Path $the_module_folder
 
 # -----------------
 # Copy the contents
+
+Write-Host "Starting mirror"
+Write-Host "FROM:" $bin_folder 
+Write-Host "TO:" $the_module_folder 
+
 Mirror-Folder $bin_folder $the_module_folder 
 
+Write-Host "Finished!"

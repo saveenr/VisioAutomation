@@ -1,7 +1,12 @@
-﻿$visio_psd1 = join-path $PSScriptRoot ".\bin\Debug\Visio.psd1"
+﻿# PURPOSE
+# -------
+# Loads the module directly from bin/debug
+#
+# This the fastest way to test the module without installing the module
+#
+
+$visio_psd1 = join-path $PSScriptRoot ".\bin\Debug\Visio.psd1"
 Import-Module $visio_psd1 
-
-
 
 # Get a new document ready
 New-VisioApplication

@@ -3,6 +3,7 @@ namespace VisioPowerShell.Commands
     internal static class Nouns
     {
         public const string VisioApplication = nameof(VisioApplication);
+        public const string VisioClient = nameof(VisioClient);
         public const string VisioConnectionPoint = nameof(VisioConnectionPoint);
         public const string VisioContainer = nameof(VisioContainer);
         public const string VisioControl = nameof(VisioControl);
@@ -15,7 +16,8 @@ namespace VisioPowerShell.Commands
         public const string VisioModel = nameof(VisioModel);
         public const string VisioPage = nameof(VisioPage);
         public const string VisioPageCells = nameof(VisioPageCells);
-        public const string VisioClient = nameof(VisioClient);
+        public const string VisioPoint = nameof(VisioPoint);
+        public const string VisioRectangle = nameof(VisioRectangle);
         public const string VisioSelection = nameof(VisioSelection);
         public const string VisioShape = nameof(VisioShape);
         public const string VisioShapeCells = nameof(VisioShapeCells);

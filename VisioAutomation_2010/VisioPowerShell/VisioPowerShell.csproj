@@ -88,6 +88,8 @@
   <ItemGroup>
     <Compile Include="Commands\VisioShape\MeasureVisioShape.cs" />
     <Compile Include="Commands\VisioShape\LockVisioShape.cs" />
+    <Compile Include="Commands\VisioPoint\NewVisioPoint.cs" />
+    <Compile Include="Commands\VisioRectangle\NewVisioRectangle.cs" />
     <Compile Include="Commands\VisioShape\UnlockVisioShape.cs" />
     <Compile Include="Commands\VisioPageCells\GetVisioPageCells.cs" />
     <Compile Include="Commands\VisioLockCells\GetVisioLockCells.cs" />
