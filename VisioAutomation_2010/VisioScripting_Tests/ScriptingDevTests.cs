@@ -1,11 +1,11 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VisioScripting_Tests
 {
-    [TestClass]
+    [UT.TestClass]
     public class ScriptingDevTests : VisioAutomation_Tests.VisioAutomationTest
     {
-        [TestMethod]
+        [UT.TestMethod]
         public void Scripting_Dev_ScriptingDocumentation()
         {
             var client = this.GetScriptingClient();

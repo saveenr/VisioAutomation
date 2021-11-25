@@ -1,12 +1,12 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
 namespace VisioScripting_Tests
 {
-    [TestClass]
+    [UT.TestClass]
     public class ScriptingDocumentTests : VisioAutomation_Tests.VisioAutomationTest
     {
-        [TestMethod]
+        [UT.TestMethod]
         public void Document_Activation()
         {
             var client = this.GetScriptingClient();
@@ -16,13 +16,13 @@ namespace VisioScripting_Tests
             var doc3 = client.Document.NewDocument();
 
             client.Document.ActivateDocument(doc1);
-            Assert.AreEqual(doc1, app.ActiveDocument);
+            UT.Assert.AreEqual(doc1, app.ActiveDocument);
             client.Document.ActivateDocument(doc2);
-            Assert.AreEqual(doc2, app.ActiveDocument);
+            UT.Assert.AreEqual(doc2, app.ActiveDocument);
             client.Document.ActivateDocument(doc3);
-            Assert.AreEqual(doc3, app.ActiveDocument);
+            UT.Assert.AreEqual(doc3, app.ActiveDocument);
             client.Document.ActivateDocument(doc1);
-            Assert.AreEqual(doc1, app.ActiveDocument);
+            UT.Assert.AreEqual(doc1, app.ActiveDocument);
 
             doc1.Close(true);
             doc2.Close(true);

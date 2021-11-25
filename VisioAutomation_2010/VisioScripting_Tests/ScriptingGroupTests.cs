@@ -1,11 +1,11 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VisioScripting_Tests
 {
-    [TestClass]
+    [UT.TestClass]
     public class ScriptingGroupTests : VisioAutomation_Tests.VisioAutomationTest
     {
-        [TestMethod]
+        [UT.TestMethod]
         public void Scripting_Grouping()
         {
             var client = this.GetScriptingClient();
@@ -21,19 +21,19 @@ namespace VisioScripting_Tests
 
             client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
             var s0 = client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
-            Assert.AreEqual(4, s0.Count);
+            UT.Assert.AreEqual(4, s0.Count);
 
             var g = client.Grouping.Group(VisioScripting.TargetSelection.Auto);
             client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
             client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
 
             var s1 = client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
-            Assert.AreEqual(1, s1.Count);
+            UT.Assert.AreEqual(1, s1.Count);
 
             client.Grouping.Ungroup(VisioScripting.TargetShapes.Auto);
             client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
             var s2 = client.Selection.GetSelectedShapes(VisioScripting.TargetWindow.Auto);
-            Assert.AreEqual(4, s2.Count);
+            UT.Assert.AreEqual(4, s2.Count);
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
