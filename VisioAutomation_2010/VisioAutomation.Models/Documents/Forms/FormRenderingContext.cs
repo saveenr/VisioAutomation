@@ -1,5 +1,3 @@
-
-
 namespace VisioAutomation.Models.Documents.Forms;
 
 internal class FormRenderingContext

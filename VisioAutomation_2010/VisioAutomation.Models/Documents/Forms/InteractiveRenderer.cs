@@ -1,7 +1,4 @@
-
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Writers;
 
 
 namespace VisioAutomation.Models.Documents.Forms;
@@ -31,7 +28,7 @@ public class InteractiveRenderer
 
         // Update the Page Cells
         var pagesheet = this._page.PageSheet;
-        var writer = new SrcWriter();
+        var writer = new VASS.Writers.SrcWriter();
 
         var page_fmt_cells = new Pages.PageFormatCells();
         page_fmt_cells.Width = formpage.Size.Width;
@@ -46,7 +43,7 @@ public class InteractiveRenderer
         writer.SetValues(page_fmt_cells);
         writer.SetValues(page_print_cells);
 
-        writer.Commit(pagesheet, CellValueType.Formula);
+        writer.Commit(pagesheet, VASS.CellValueType.Formula);
 
         this.Reset();
         return this._page;
@@ -100,7 +97,7 @@ public class InteractiveRenderer
 
     public void Finish()
     {
-        var writer = new SidSrcWriter();
+        var writer = new VASS.Writers.SidSrcWriter();
         foreach (var block in this.Blocks)
         {
             writer.SetValues((short)block.VisioShapeID , block.FormatCells);
