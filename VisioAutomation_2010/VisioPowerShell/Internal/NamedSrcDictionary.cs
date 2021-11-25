@@ -1,5 +1,4 @@
 namespace VisioPowerShell.Internal;
-
 public class NamedSrcDictionary : NameValueDictionary<VisioAutomation.ShapeSheet.Src>
 {
     public static NamedSrcDictionary FromCells(Models.BaseCells cells)

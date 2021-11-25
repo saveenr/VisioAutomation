@@ -1,5 +1,3 @@
-using System;
-
 namespace VisioPowerShell.Internal;
 
 public class NameValueDictionary<T>
@@ -12,7 +10,7 @@ public class NameValueDictionary<T>
     {
         this._regex_name = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
         this._regex_name_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
-        var compare = StringComparer.InvariantCultureIgnoreCase;
+        var compare = System.StringComparer.InvariantCultureIgnoreCase;
         this._dic = new Dictionary<string, T>(compare);
     }
 
@@ -26,7 +24,7 @@ public class NameValueDictionary<T>
             if (this._dic.ContainsKey(name))
             {
                 string msg = string.Format("Dictionary already contains a key called \"{0}\"", name);
-                throw new ArgumentOutOfRangeException(msg);
+                throw new System.ArgumentOutOfRangeException(msg);
             }
 
             this._dic[name] = value;
@@ -56,7 +54,7 @@ public class NameValueDictionary<T>
         }
 
         string msg = string.Format("Key name \"{0}\" is not valid", name);
-        throw new ArgumentOutOfRangeException(msg);
+        throw new System.ArgumentOutOfRangeException(msg);
     }
 
     private void _CheckNameWildcard(string name)
@@ -67,7 +65,7 @@ public class NameValueDictionary<T>
         }
 
         string msg = string.Format("wildcard pattern \"{0}\" is not valid", name);
-        throw new ArgumentException(msg, nameof(name));
+        throw new System.ArgumentException(msg, nameof(name));
     }
 
     public IEnumerable<string> ExpandKeyWildcard(string key)

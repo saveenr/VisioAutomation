@@ -1,5 +1,3 @@
-
-
 namespace VisioPowerShell.Internal;
 
 public struct CellTuple

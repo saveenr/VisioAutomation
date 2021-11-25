@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using VisioPowerShell.Models;
 
-
 namespace VisioPowerShell.Internal;
 
 static class DataTableHelpers
