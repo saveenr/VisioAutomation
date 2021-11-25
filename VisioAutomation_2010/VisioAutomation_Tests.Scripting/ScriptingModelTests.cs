@@ -1,11 +1,10 @@
-namespace VisioAutomation_Tests.Scripting
+namespace VisioAutomation_Tests.Scripting;
+
+[TestClass]
+public class ScriptingModelTests : VisioAutomationTest
 {
-    [TestClass]
-    public class ScriptingModelTests : VisioAutomationTest
+    [TestMethod]
+    public void DrawGrid()
     {
-        [TestMethod]
-        public void DrawGrid()
-        {
-        }
     }
 }
