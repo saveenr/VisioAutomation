@@ -1,8 +1,7 @@
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.ShapeSheet;
+
+public enum StreamType
 {
-    public enum StreamType
-    {
-        SidSrc,
-        Src
-    }
+    SidSrc,
+    Src
 }

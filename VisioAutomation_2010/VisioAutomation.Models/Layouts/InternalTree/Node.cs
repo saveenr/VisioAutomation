@@ -2,169 +2,168 @@ using System.Collections.Generic;
 using System.Linq;
 using GenTreeOps;
 
-namespace VisioAutomation.Models.Layouts.InternalTree
+namespace VisioAutomation.Models.Layouts.InternalTree;
+
+internal class Node<T>
 {
-    internal class Node<T>
+    private List<Node<T>> _child_list;
+
+    private bool _is_collapsed;
+    private static int _nodeSeqNum = 0;
+
+    internal double Modifier; // temporary modifier
+    internal double PrelimX; // preliminary x coord    
+    internal Node<T> LeftNeighbor;
+    internal Node<T> RightNeighbor;
+
+    public int Id { get; set; }
+
+    public VisioAutomation.Geometry.Size Size { get; set; }
+
+    public VisioAutomation.Geometry.Rectangle Rect => new VisioAutomation.Geometry.Rectangle(this.Position, this.Size);
+
+    internal void Init(int id, Node<T> parent, VisioAutomation.Geometry.Size size, T data)
     {
-        private List<Node<T>> _child_list;
+        this.Id = id;
+        this.Size = size;
+        this.Data = data;
+        this.Parent = parent;
 
-        private bool _is_collapsed;
-        private static int _nodeSeqNum = 0;
+        this._child_list = new List<Node<T>>();
+        this.LeftNeighbor = null;
+        this.RightNeighbor = null;
+        this.Position = new VisioAutomation.Geometry.Point(0, 0);
+        this._is_collapsed = false;
+    }
 
-        internal double Modifier; // temporary modifier
-        internal double PrelimX; // preliminary x coord    
-        internal Node<T> LeftNeighbor;
-        internal Node<T> RightNeighbor;
+    internal Node(int id, Node<T> parent, VisioAutomation.Geometry.Size size)
+    {
+        this.Init(id, parent, size, default(T));
+    }
 
-        public int Id { get; set; }
+    public Node(VisioAutomation.Geometry.Size size, T data)
+    {
+        this.Init(Node<T>._nodeSeqNum++, null, size, data);
+    }
 
-        public VisioAutomation.Geometry.Size Size { get; set; }
-
-        public VisioAutomation.Geometry.Rectangle Rect => new VisioAutomation.Geometry.Rectangle(this.Position, this.Size);
-
-        internal void Init(int id, Node<T> parent, VisioAutomation.Geometry.Size size, T data)
+    public int ChildCount
+    {
+        get
         {
-            this.Id = id;
-            this.Size = size;
-            this.Data = data;
-            this.Parent = parent;
-
-            this._child_list = new List<Node<T>>();
-            this.LeftNeighbor = null;
-            this.RightNeighbor = null;
-            this.Position = new VisioAutomation.Geometry.Point(0, 0);
-            this._is_collapsed = false;
-        }
-
-        internal Node(int id, Node<T> parent, VisioAutomation.Geometry.Size size)
-        {
-            this.Init(id, parent, size, default(T));
-        }
-
-        public Node(VisioAutomation.Geometry.Size size, T data)
-        {
-            this.Init(Node<T>._nodeSeqNum++, null, size, data);
-        }
-
-        public int ChildCount
-        {
-            get
+            if (this._is_collapsed)
             {
-                if (this._is_collapsed)
-                {
-                    return 0;
-                }
-                if (this._child_list == null)
-                {
-                    return 0;
-                }
-                return this._child_list.Count;
+                return 0;
             }
-        }
-
-        public Node<T> LeftSibling
-        {
-            get
+            if (this._child_list == null)
             {
-                if (this.LeftNeighbor != null && this.LeftNeighbor.Parent == this.Parent)
-                {
-                    return this.LeftNeighbor;
-                }
-                return null;
+                return 0;
             }
+            return this._child_list.Count;
         }
+    }
 
-        public Node<T> RightSibling
+    public Node<T> LeftSibling
+    {
+        get
         {
-            get
+            if (this.LeftNeighbor != null && this.LeftNeighbor.Parent == this.Parent)
             {
-                if (this.RightNeighbor != null && this.RightNeighbor.Parent == this.Parent)
-                {
-                    return this.RightNeighbor;
-                }
-                return null;
+                return this.LeftNeighbor;
             }
+            return null;
         }
+    }
 
-        public Node<T> FirstChild => this.GetChildAt(0);
-
-        public Node<T> LastChild => this.GetChildAt(this.ChildCount - 1);
-
-        private void add_child(Node<T> nn)
+    public Node<T> RightSibling
+    {
+        get
         {
-            nn.Parent = this;
-            this._child_list.Add(nn);
-        }
-
-        public Node<T> AddChild(Node<T> child)
-        {
-            this.add_child(child);
-            return child;
-        }
-
-        public Node<T> AddNewChild(VisioAutomation.Geometry.Size size)
-        {
-            var new_child = new Node<T>(Node<T>._nodeSeqNum++, null, size);
-            this.add_child(new_child);
-            return new_child;
-        }
-
-        public int Level
-        {
-            get
+            if (this.RightNeighbor != null && this.RightNeighbor.Parent == this.Parent)
             {
-                if (this.Parent.Id == -1)
-                {
-                    return 0;
-                }
-                return this.Parent.Level + 1;
+                return this.RightNeighbor;
             }
+            return null;
         }
+    }
 
-        public Node<T> Parent { get; set; }
+    public Node<T> FirstChild => this.GetChildAt(0);
 
-        public T Data { get; set; }
+    public Node<T> LastChild => this.GetChildAt(this.ChildCount - 1);
 
-        public VisioAutomation.Geometry.Point Position { get; set; }
+    private void add_child(Node<T> nn)
+    {
+        nn.Parent = this;
+        this._child_list.Add(nn);
+    }
 
-        public bool GetIsAncestorCollapsed()
+    public Node<T> AddChild(Node<T> child)
+    {
+        this.add_child(child);
+        return child;
+    }
+
+    public Node<T> AddNewChild(VisioAutomation.Geometry.Size size)
+    {
+        var new_child = new Node<T>(Node<T>._nodeSeqNum++, null, size);
+        this.add_child(new_child);
+        return new_child;
+    }
+
+    public int Level
+    {
+        get
         {
-            if (this.Parent._is_collapsed)
-            {
-                return true;
-            }
             if (this.Parent.Id == -1)
             {
-                return false;
+                return 0;
             }
-            return this.Parent.GetIsAncestorCollapsed();
+            return this.Parent.Level + 1;
         }
+    }
 
-        public Node<T> GetChildAt(int index)
-        {
-            return this._child_list[index];
-        }
+    public Node<T> Parent { get; set; }
 
-        public double GetChildrenCenter(TreeLayout<T> tree_layout_engine)
-        {
-            var node0 = this.FirstChild;
-            var node1 = this.LastChild;
-            return node0.PrelimX + ((node1.PrelimX - node0.PrelimX) + tree_layout_engine.GetNodeSize(node1))/2;
-        }
+    public T Data { get; set; }
 
-        public IEnumerable<Node<T>> EnumChildren()
-        {
-            foreach (var c in this._child_list)
-            {
-                yield return c;
-            }
-        }
+    public VisioAutomation.Geometry.Point Position { get; set; }
 
-        public IEnumerable<Node<T>> EnumRecursive()
+    public bool GetIsAncestorCollapsed()
+    {
+        if (this.Parent._is_collapsed)
         {
-            var iter = GenTreeOps.Algorithms.Walk<Node<T>>(this, n => n.EnumChildren());
-            var iter2 = iter.Where(i => i.Type == WalkEventType.EventEnter).Select(i => i.Node);
-            return iter2;
+            return true;
         }
+        if (this.Parent.Id == -1)
+        {
+            return false;
+        }
+        return this.Parent.GetIsAncestorCollapsed();
+    }
+
+    public Node<T> GetChildAt(int index)
+    {
+        return this._child_list[index];
+    }
+
+    public double GetChildrenCenter(TreeLayout<T> tree_layout_engine)
+    {
+        var node0 = this.FirstChild;
+        var node1 = this.LastChild;
+        return node0.PrelimX + ((node1.PrelimX - node0.PrelimX) + tree_layout_engine.GetNodeSize(node1))/2;
+    }
+
+    public IEnumerable<Node<T>> EnumChildren()
+    {
+        foreach (var c in this._child_list)
+        {
+            yield return c;
+        }
+    }
+
+    public IEnumerable<Node<T>> EnumRecursive()
+    {
+        var iter = GenTreeOps.Algorithms.Walk<Node<T>>(this, n => n.EnumChildren());
+        var iter2 = iter.Where(i => i.Type == WalkEventType.EventEnter).Select(i => i.Node);
+        return iter2;
     }
 }

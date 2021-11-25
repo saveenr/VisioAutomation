@@ -1,14 +1,13 @@
 ﻿
 
-namespace VisioPowerShell.Commands.VisioDocument
+namespace VisioPowerShell.Commands.VisioDocument;
+
+[SMA.Cmdlet(SMA.VerbsDiagnostic.Test, Nouns.VisioDocument)]
+public class TestVisioDocument: VisioCmdlet
 {
-    [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, Nouns.VisioDocument)]
-    public class TestVisioDocument: VisioCmdlet
+    // checks to see if we have an active drawing open
+    protected override void ProcessRecord()
     {
-        // checks to see if we have an active drawing open
-        protected override void ProcessRecord()
-        {
-            this.WriteObject(this.Client.Document.HasActiveDocument);
-        }
+        this.WriteObject(this.Client.Document.HasActiveDocument);
     }
 }

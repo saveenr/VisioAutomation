@@ -1,9 +1,8 @@
-﻿namespace VisioScripting.Models
+﻿namespace VisioScripting.Models;
+
+public enum AlignmentVertical
 {
-    public enum AlignmentVertical
-    {
-        Top = 2,
-        Center = 1,
-        Bottom = 0
-    }
+    Top = 2,
+    Center = 1,
+    Bottom = 0
 }

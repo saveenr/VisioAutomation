@@ -1,8 +1,7 @@
-﻿namespace VisioAutomation.Models.Layouts.Grid
+﻿namespace VisioAutomation.Models.Layouts.Grid;
+
+public enum RowDirection
 {
-    public enum RowDirection
-    {
-        TopToBottom,
-        BottomToTop
-    }
+    TopToBottom,
+    BottomToTop
 }

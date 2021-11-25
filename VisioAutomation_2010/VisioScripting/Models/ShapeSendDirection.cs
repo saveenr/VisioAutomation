@@ -1,10 +1,9 @@
-namespace VisioScripting.Models
+namespace VisioScripting.Models;
+
+public enum ShapeSendDirection
 {
-    public enum ShapeSendDirection
-    {
-        ToFront,
-        Forward,
-        Backward,
-        ToBack
-    }
+    ToFront,
+    Forward,
+    Backward,
+    ToBack
 }

@@ -1,34 +1,33 @@
 
 
-namespace VisioPowerShell.Commands.VisioDocument
+namespace VisioPowerShell.Commands.VisioDocument;
+
+[SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioDocument)]
+public class NewVisioDocument : VisioCmdlet
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioDocument)]
-    public class NewVisioDocument : VisioCmdlet
+    [SMA.Parameter(Mandatory = false)]
+    public string Template { get; set; }
+
+    [SMA.Parameter(Mandatory = false)]
+    public string[] Stencil { get; set; }
+
+
+    protected override void ProcessRecord()
     {
-        [SMA.Parameter(Mandatory = false)]
-        public string Template { get; set; }
+        this.NewAppIfNeeded();
 
-        [SMA.Parameter(Mandatory = false)]
-        public string[] Stencil { get; set; }
+        var doc = this.Client.Document.NewDocumentFromTemplate(this.Template);
 
-
-        protected override void ProcessRecord()
+        if (this.Stencil != null)
         {
-            this.NewAppIfNeeded();
-
-            var doc = this.Client.Document.NewDocumentFromTemplate(this.Template);
-
-            if (this.Stencil != null)
+            foreach (string stencil in this.Stencil)
             {
-                foreach (string stencil in this.Stencil)
-                {
-                    var stencildoc = this.Client.Document.OpenStencilDocument(stencil);
-                }
-
+                var stencildoc = this.Client.Document.OpenStencilDocument(stencil);
             }
 
-            this.WriteObject(doc);
         }
 
+        this.WriteObject(doc);
     }
+
 }

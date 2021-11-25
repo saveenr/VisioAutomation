@@ -1,19 +1,18 @@
 
-namespace VisioPowerShell.Commands.VisioCustomProperty
+namespace VisioPowerShell.Commands.VisioCustomProperty;
+
+[SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioCustomProperty)]
+public class GetVisioCustomProperty : VisioCmdlet
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioCustomProperty)]
-    public class GetVisioCustomProperty : VisioCmdlet
-    {
-        // CONTEXT:SHAPES
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shape;
+    // CONTEXT:SHAPES
+    [SMA.Parameter(Mandatory = false)]
+    public IVisio.Shape[] Shape;
         
-        protected override void ProcessRecord()
-        {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
-            var type = VASS.CellValueType.Formula;
-            var dicof_shape_to_cpdic = this.Client.CustomProperty.GetCustomPropertiesAsShapeDictionary(targetshapes, type);
-            this.WriteObject(dicof_shape_to_cpdic);                
-        }
+    protected override void ProcessRecord()
+    {
+        var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+        var type = VASS.CellValueType.Formula;
+        var dicof_shape_to_cpdic = this.Client.CustomProperty.GetCustomPropertiesAsShapeDictionary(targetshapes, type);
+        this.WriteObject(dicof_shape_to_cpdic);                
     }
 }

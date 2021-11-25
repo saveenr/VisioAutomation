@@ -1,46 +1,44 @@
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet.Query;
+
+internal class ShapeCache : IEnumerable<ShapeCacheItem>
 {
+    private readonly List<ShapeCacheItem> _list_shapecacheitems;
 
-    internal class ShapeCache : IEnumerable<ShapeCacheItem>
+    public ShapeCache(int capacity)
     {
-        private readonly List<ShapeCacheItem> _list_shapecacheitems;
+        this._list_shapecacheitems = new List<ShapeCacheItem>(capacity);
+    }
 
-        public ShapeCache(int capacity)
-        {
-            this._list_shapecacheitems = new List<ShapeCacheItem>(capacity);
-        }
-
-        public void Add(ShapeCacheItem item)
-        {
-            this._list_shapecacheitems.Add(item);
-        }
+    public void Add(ShapeCacheItem item)
+    {
+        this._list_shapecacheitems.Add(item);
+    }
         
-        public IEnumerator<ShapeCacheItem> GetEnumerator()
-        {
-            return this._list_shapecacheitems.GetEnumerator();
-        }
+    public IEnumerator<ShapeCacheItem> GetEnumerator()
+    {
+        return this._list_shapecacheitems.GetEnumerator();
+    }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+        return this.GetEnumerator();
+    }
 
-        public int Count
+    public int Count
+    {
+        get
         {
-            get
-            {
-                return this._list_shapecacheitems.Count;
-            }
+            return this._list_shapecacheitems.Count;
         }
+    }
 
-        public int CountCells()
+    public int CountCells()
+    {
+        int n = 0;
+        foreach (var shapecacheitem in this._list_shapecacheitems)
         {
-            int n = 0;
-            foreach (var shapecacheitem in this._list_shapecacheitems)
-            {
-                n += shapecacheitem.RowCount * shapecacheitem.SectionQueryColumns.Count;
-            }
-            return n;
+            n += shapecacheitem.RowCount * shapecacheitem.SectionQueryColumns.Count;
         }
+        return n;
     }
 }

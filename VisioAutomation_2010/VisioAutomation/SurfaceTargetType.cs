@@ -1,9 +1,8 @@
-﻿namespace VisioAutomation
+﻿namespace VisioAutomation;
+
+public enum SurfaceTargetType
 {
-    public enum SurfaceTargetType
-    {
-        Page,
-        Master,
-        Shape
-    }
+    Page,
+    Master,
+    Shape
 }

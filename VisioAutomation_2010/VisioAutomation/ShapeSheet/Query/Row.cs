@@ -1,44 +1,42 @@
 ﻿
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet.Query;
+
+public class Row<T> : IEnumerable<T>
 {
+    public int ShapeID { get; }
+    public IVisio.VisSectionIndices SectionIndex { get; }
+    private VisioAutomation.Collections.ArraySegment<T> Cells { get; }
 
-    public class Row<T> : IEnumerable<T>
+    internal Row(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Collections.ArraySegment<T> cells)
     {
-        public int ShapeID { get; }
-        public IVisio.VisSectionIndices SectionIndex { get; }
-        private VisioAutomation.Collections.ArraySegment<T> Cells { get; }
+        this.ShapeID = shapeid;
+        this.Cells = cells;
+        this.SectionIndex = secindex;
+    }
 
-        internal Row(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Collections.ArraySegment<T> cells)
+    public IEnumerator<T> GetEnumerator()
+    {
+        return this.Cells.GetEnumerator();
+    }
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+        return this.GetEnumerator();
+    }
+
+    public int Count
+    {
+        get
         {
-            this.ShapeID = shapeid;
-            this.Cells = cells;
-            this.SectionIndex = secindex;
+            return this.Cells.Count;
         }
+    }
 
-        public IEnumerator<T> GetEnumerator()
+    public T this[int index]
+    {
+        get
         {
-            return this.Cells.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
-
-        public int Count
-        {
-            get
-            {
-                return this.Cells.Count;
-            }
-        }
-
-        public T this[int index]
-        {
-            get
-            {
-                return this.Cells[index];
-            }
+            return this.Cells[index];
         }
     }
 }

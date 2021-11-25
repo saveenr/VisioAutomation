@@ -1,10 +1,9 @@
-﻿namespace VisioAutomation.Models.Layouts.Box
+﻿namespace VisioAutomation.Models.Layouts.Box;
+
+public enum Direction
 {
-    public enum Direction
-    {
-        LeftToRight,
-        RightToLeft,
-        BottomToTop,
-        TopToBottom
-    }
+    LeftToRight,
+    RightToLeft,
+    BottomToTop,
+    TopToBottom
 }

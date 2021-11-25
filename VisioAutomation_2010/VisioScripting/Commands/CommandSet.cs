@@ -1,46 +1,45 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioScripting.Commands
-{
-    public class CommandSet
-    {
-        // Keep a reference back to the parent client. This gives access to all other commands
-        // for a the current context
-        protected readonly Client _client;
+namespace VisioScripting.Commands;
 
-        internal CommandSet(Client client)
+public class CommandSet
+{
+    // Keep a reference back to the parent client. This gives access to all other commands
+    // for a the current context
+    protected readonly Client _client;
+
+    internal CommandSet(Client client)
+    {
+        this._client = client;
+    }
+
+    internal static IEnumerable<Command> GetCommands(System.Type mytype)
+    {
+        var cmdsettype = typeof(CommandSet);
+
+        if (!cmdsettype.IsAssignableFrom(mytype))
         {
-            this._client = client;
+            string msg = string.Format("{0} must derive from {1}", mytype.Name, cmdsettype.Name);
+            throw new System.ArgumentException(msg,nameof(mytype));
         }
 
-        internal static IEnumerable<Command> GetCommands(System.Type mytype)
+        var methods = mytype.GetMethods().Where(m => m.IsPublic && !m.IsStatic);
+
+        foreach (var method in methods)
         {
-            var cmdsettype = typeof(CommandSet);
-
-            if (!cmdsettype.IsAssignableFrom(mytype))
+            // Skip some method names
+            switch (method.Name)
             {
-                string msg = string.Format("{0} must derive from {1}", mytype.Name, cmdsettype.Name);
-                throw new System.ArgumentException(msg,nameof(mytype));
+                case "ToString":
+                case "GetHashCode":
+                case "GetType":
+                case "Equals":
+                    continue;
             }
 
-            var methods = mytype.GetMethods().Where(m => m.IsPublic && !m.IsStatic);
-
-            foreach (var method in methods)
-            {
-                // Skip some method names
-                switch (method.Name)
-                {
-                    case "ToString":
-                    case "GetHashCode":
-                    case "GetType":
-                    case "Equals":
-                        continue;
-                }
-
-                var cmd = new Command(method);
-                yield return cmd;
-            }
+            var cmd = new Command(method);
+            yield return cmd;
         }
     }
 }

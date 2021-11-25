@@ -1,12 +1,11 @@
 
-namespace VisioPowerShell.Commands.Visio
+namespace VisioPowerShell.Commands.Visio;
+
+[SMA.Cmdlet(SMA.VerbsCommon.Undo, Nouns.VisioApplication)]
+public class UndoVisio : VisioCmdlet
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Undo, Nouns.VisioApplication)]
-    public class UndoVisio : VisioCmdlet
+    protected override void ProcessRecord()
     {
-        protected override void ProcessRecord()
-        {
-            this.Client.Undo.UndoLastAction();
-        }
+        this.Client.Undo.UndoLastAction();
     }
 }

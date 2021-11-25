@@ -1,8 +1,7 @@
-﻿namespace VisioScripting.Models
+﻿namespace VisioScripting.Models;
+
+public enum Axis
 {
-    public enum Axis
-    {
-        XAxis,
-        YAxis
-    }
+    XAxis,
+    YAxis
 }

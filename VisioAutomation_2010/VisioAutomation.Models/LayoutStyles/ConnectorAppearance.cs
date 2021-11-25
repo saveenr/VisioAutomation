@@ -1,9 +1,8 @@
-namespace VisioAutomation.Models.LayoutStyles
+namespace VisioAutomation.Models.LayoutStyles;
+
+public enum ConnectorAppearance
 {
-    public enum ConnectorAppearance
-    {
-        Default,
-        Straight,
-        Curved
-    }
+    Default,
+    Straight,
+    Curved
 }

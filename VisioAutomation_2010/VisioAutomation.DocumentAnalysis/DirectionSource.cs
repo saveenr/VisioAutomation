@@ -1,8 +1,7 @@
-namespace VisioAutomation.DocumentAnalysis
+namespace VisioAutomation.DocumentAnalysis;
+
+public enum DirectionSource
 {
-    public enum DirectionSource
-    {
-        UseConnectionOrder,
-        UseConnectorArrows
-    }
+    UseConnectionOrder,
+    UseConnectorArrows
 }

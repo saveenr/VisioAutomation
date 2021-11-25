@@ -1,75 +1,74 @@
 
 
-namespace VisioScripting.Commands
+namespace VisioScripting.Commands;
+
+public class TextCommands : CommandSet
 {
-    public class TextCommands : CommandSet
+    internal TextCommands(Client client) :
+        base(client)
     {
-        internal TextCommands(Client client) :
-            base(client)
-        {
 
+    }
+
+    public void SetShapeText(TargetShapes targetshapes, IList<string> texts)
+    {
+        if (texts == null || texts.Count < 1)
+        {
+            return;
         }
 
-        public void SetShapeText(TargetShapes targetshapes, IList<string> texts)
+        targetshapes = targetshapes.ResolveToShapes(this._client);
+
+        if (targetshapes.Shapes.Count < 1)
         {
-            if (texts == null || texts.Count < 1)
+            return;
+        }
+
+        using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetShapeText)))
+        {
+            // Apply text to each shape
+            // if there are fewer texts than shapes then
+            // start reusing the texts from the beginning
+
+            int count = 0;
+            foreach (var shape in targetshapes.Shapes)
             {
-                return;
-            }
-
-            targetshapes = targetshapes.ResolveToShapes(this._client);
-
-            if (targetshapes.Shapes.Count < 1)
-            {
-                return;
-            }
-
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetShapeText)))
-            {
-                // Apply text to each shape
-                // if there are fewer texts than shapes then
-                // start reusing the texts from the beginning
-
-                int count = 0;
-                foreach (var shape in targetshapes.Shapes)
+                string text = texts[count%texts.Count];
+                if (text != null)
                 {
-                    string text = texts[count%texts.Count];
-                    if (text != null)
-                    {
-                        shape.Text = text;
-                    }
-                    count++;
+                    shape.Text = text;
                 }
+                count++;
             }
         }
+    }
 
-        public List<string> GetShapeText(TargetShapes targetshapes)
+    public List<string> GetShapeText(TargetShapes targetshapes)
+    {
+        targetshapes = targetshapes.ResolveToShapes(this._client);
+
+        if (targetshapes.Shapes.Count < 1)
         {
-            targetshapes = targetshapes.ResolveToShapes(this._client);
-
-            if (targetshapes.Shapes.Count < 1)
-            {
-                return new List<string>(0);
-            }
-
-            var texts = targetshapes.Shapes.Select(s => s.Text).ToList();
-            return texts;
+            return new List<string>(0);
         }
 
-        public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(TargetShapes targetshapes)
+        var texts = targetshapes.Shapes.Select(s => s.Text).ToList();
+        return texts;
+    }
+
+    public List<VisioAutomation.Text.TextFormat> GetShapeTextFormat(TargetShapes targetshapes)
+    {
+        var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
+        targetshapes = targetshapes.ResolveToShapes(this._client);
+
+        if (targetshapes.Shapes.Count < 1)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireDocument);
-            targetshapes = targetshapes.ResolveToShapes(this._client);
-
-            if (targetshapes.Shapes.Count < 1)
-            {
-                return new List<VisioAutomation.Text.TextFormat>(0);
-            }
-
-            var shapeidpairs = targetshapes.ToShapeIDPairs();
-            var application = cmdtarget.Application;
-            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeidpairs, VASS.CellValueType.Formula);
-            return formats;
+            return new List<VisioAutomation.Text.TextFormat>(0);
         }
+
+        var shapeidpairs = targetshapes.ToShapeIDPairs();
+        var application = cmdtarget.Application;
+        var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeidpairs, VASS.CellValueType.Formula);
+        return formats;
     }
 }

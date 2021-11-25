@@ -1,10 +1,9 @@
-﻿namespace VisioAutomation.Models.Layouts.Tree
+﻿namespace VisioAutomation.Models.Layouts.Tree;
+
+public enum LayoutDirection
 {
-    public enum LayoutDirection
-    {
-        Up = 0,
-        Down = 1,
-        Left = 2,
-        Right = 3
-    }
+    Up = 0,
+    Down = 1,
+    Left = 2,
+    Right = 3
 }

@@ -1,6 +1,5 @@
-﻿namespace VisioScripting.Helpers
+﻿namespace VisioScripting.Helpers;
+
+internal static class ArrangeHelper
 {
-    internal static class ArrangeHelper
-    {
-    }
 }

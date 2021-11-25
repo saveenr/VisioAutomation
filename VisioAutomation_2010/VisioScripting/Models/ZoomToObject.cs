@@ -1,9 +1,8 @@
-﻿namespace VisioScripting.Models
+﻿namespace VisioScripting.Models;
+
+public enum ZoomToObject
 {
-    public enum ZoomToObject
-    {
-        Page,
-        PageWidth,
-        Selection
-    }
+    Page,
+    PageWidth,
+    Selection
 }

@@ -1,10 +1,9 @@
-﻿namespace VisioAutomation.Models
+﻿namespace VisioAutomation.Models;
+
+public enum ConnectorType
 {
-    public enum ConnectorType
-    {
-        RightAngle,
-        Curved,
-        Straight,
-        Default
-    }
+    RightAngle,
+    Curved,
+    Straight,
+    Default
 }

@@ -1,105 +1,104 @@
-﻿namespace VisioAutomation.DocumentAnalysis
+﻿namespace VisioAutomation.DocumentAnalysis;
+
+public class BitArray2D
 {
-    public class BitArray2D
+    public System.Collections.BitArray BitArray { get; }
+    public int Width { get; }
+    public int Height { get; }
+
+    public BitArray2D(int cols, int rows)
     {
-        public System.Collections.BitArray BitArray { get; }
-        public int Width { get; }
-        public int Height { get; }
-
-        public BitArray2D(int cols, int rows)
+        if (cols <= 0)
         {
-            if (cols <= 0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(cols));
-            }
-
-            if (rows <= 0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(rows));
-            }
-
-            this.Width = cols;
-            this.Height = rows;
-            this.BitArray = new System.Collections.BitArray(this.Width * this.Height);
+            throw new System.ArgumentOutOfRangeException(nameof(cols));
         }
 
-        public bool this[int col, int row]
+        if (rows <= 0)
         {
-            get { return this.Get(col, row); }
-            set { this.Set(col, row, value); }
+            throw new System.ArgumentOutOfRangeException(nameof(rows));
         }
 
-        public void Set(int col, int row, bool b)
+        this.Width = cols;
+        this.Height = rows;
+        this.BitArray = new System.Collections.BitArray(this.Width * this.Height);
+    }
+
+    public bool this[int col, int row]
+    {
+        get { return this.Get(col, row); }
+        set { this.Set(col, row, value); }
+    }
+
+    public void Set(int col, int row, bool b)
+    {
+        if (col < 0)
         {
-            if (col < 0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(col));
-            }
-
-            if (col >= this.Width)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(col));
-            }
-
-            if (row < 0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(row));
-            }
-
-            if (row >= this.Height)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(row));
-            }
-
-            int pos = (row *this.Width) + col;
-            this.BitArray[pos] = b;
+            throw new System.ArgumentOutOfRangeException(nameof(col));
         }
 
-        public bool Get(int col, int row)
+        if (col >= this.Width)
         {
-            if (col < 0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(col));
-            }
-
-            if (col >= this.Width)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(col));
-            }
-
-            if (row < 0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(row));
-            }
-
-            if (row >= this.Height)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(row));
-            }
-
-            int pos = (row *this.Width) + col;
-            return this.BitArray[pos];
+            throw new System.ArgumentOutOfRangeException(nameof(col));
         }
 
-        /// <summary>
-        /// Creates a copy of the BitArray with the same values
-        /// </summary>
-        /// <returns></returns>
-        public BitArray2D Clone()
+        if (row < 0)
         {
-            var new_batwod = new BitArray2D(this.Width, this.Height);
-
-            for (int i = 0; i < this.BitArray.Length; i++)
-            {
-                new_batwod.BitArray[i] = this.BitArray[i];
-            }
-
-            return new_batwod;
+            throw new System.ArgumentOutOfRangeException(nameof(row));
         }
 
-        public void SetAll(bool value)
+        if (row >= this.Height)
         {
-            this.BitArray.SetAll(value);
+            throw new System.ArgumentOutOfRangeException(nameof(row));
         }
+
+        int pos = (row *this.Width) + col;
+        this.BitArray[pos] = b;
+    }
+
+    public bool Get(int col, int row)
+    {
+        if (col < 0)
+        {
+            throw new System.ArgumentOutOfRangeException(nameof(col));
+        }
+
+        if (col >= this.Width)
+        {
+            throw new System.ArgumentOutOfRangeException(nameof(col));
+        }
+
+        if (row < 0)
+        {
+            throw new System.ArgumentOutOfRangeException(nameof(row));
+        }
+
+        if (row >= this.Height)
+        {
+            throw new System.ArgumentOutOfRangeException(nameof(row));
+        }
+
+        int pos = (row *this.Width) + col;
+        return this.BitArray[pos];
+    }
+
+    /// <summary>
+    /// Creates a copy of the BitArray with the same values
+    /// </summary>
+    /// <returns></returns>
+    public BitArray2D Clone()
+    {
+        var new_batwod = new BitArray2D(this.Width, this.Height);
+
+        for (int i = 0; i < this.BitArray.Length; i++)
+        {
+            new_batwod.BitArray[i] = this.BitArray[i];
+        }
+
+        return new_batwod;
+    }
+
+    public void SetAll(bool value)
+    {
+        this.BitArray.SetAll(value);
     }
 }

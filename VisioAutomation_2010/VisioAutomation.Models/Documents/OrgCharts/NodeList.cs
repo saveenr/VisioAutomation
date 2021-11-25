@@ -1,68 +1,67 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace VisioAutomation.Models.Documents.OrgCharts
+namespace VisioAutomation.Models.Documents.OrgCharts;
+
+public class NodeList : IEnumerable<Node>
 {
-    public class NodeList : IEnumerable<Node>
+    private readonly Node _parent;
+    private readonly List<Node> _items;
+
+    public NodeList(Node parentnode)
     {
-        private readonly Node _parent;
-        private readonly List<Node> _items;
+        this._parent = parentnode;
+        this._items = new List<Node>(0);
+    }
 
-        public NodeList(Node parentnode)
+    public IEnumerator<Node> GetEnumerator()
+    {
+        foreach (var i in this._items)
         {
-            this._parent = parentnode;
-            this._items = new List<Node>(0);
+            yield return i;
         }
+    }
 
-        public IEnumerator<Node> GetEnumerator()
+    IEnumerator IEnumerable.GetEnumerator()     
+    {                                           
+        return this.GetEnumerator();
+    }
+
+    public void Add(Node item)
+    {
+        if (item.Parent != null)
         {
-            foreach (var i in this._items)
+            if (item.Parent == this._parent)
             {
-                yield return i;
+                throw new System.ArgumentException("already a child of parent");
+            }
+            else
+            {
+                throw new System.ArgumentException("already a child of another node");
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     
-        {                                           
-            return this.GetEnumerator();
-        }
+        item._parent = this._parent;
+        this._items.Add(item);
+    }
 
-        public void Add(Node item)
+    public void Remove(Node item)
+    {
+        if (item.Parent == null)
         {
-            if (item.Parent != null)
-            {
-                if (item.Parent == this._parent)
-                {
-                    throw new System.ArgumentException("already a child of parent");
-                }
-                else
-                {
-                    throw new System.ArgumentException("already a child of another node");
-                }
-            }
-
-            item._parent = this._parent;
-            this._items.Add(item);
+            throw new System.ArgumentException("node does not have parent");
         }
 
-        public void Remove(Node item)
+        if (item.Parent != this._parent)
         {
-            if (item.Parent == null)
-            {
-                throw new System.ArgumentException("node does not have parent");
-            }
-
-            if (item.Parent != this._parent)
-            {
-                throw new System.ArgumentException("already a child of a different parent");
-            }
-
-            this._items.Remove(item);
+            throw new System.ArgumentException("already a child of a different parent");
         }
 
-        public int Count
-        {
-            get { return this._items.Count; }
-        }
+        this._items.Remove(item);
+    }
+
+    public int Count
+    {
+        get { return this._items.Count; }
     }
 }

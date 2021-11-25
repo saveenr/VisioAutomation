@@ -1,9 +1,8 @@
-namespace VisioAutomation.Models.LayoutStyles
+namespace VisioAutomation.Models.LayoutStyles;
+
+public enum HorizontalAlignment
 {
-    public enum HorizontalAlignment
-    {
-        Left,
-        Center,
-        Right
-    }
+    Left,
+    Center,
+    Right
 }

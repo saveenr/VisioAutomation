@@ -1,20 +1,19 @@
 
-namespace VisioPowerShell.Commands.VisioShape
+namespace VisioPowerShell.Commands.VisioShape;
+
+[SMA.Cmdlet(SMA.VerbsCommon.Join, Nouns.VisioShape)]
+public class JoinVisioShape : VisioCmdlet
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Join, Nouns.VisioShape)]
-    public class JoinVisioShape : VisioCmdlet
+    // CONTEXT:SHAPESSELECTION
+    [SMA.Parameter(Mandatory = false)]
+    public IVisio.Shape[] Shape;
+
+    protected override void ProcessRecord()
     {
-        // CONTEXT:SHAPESSELECTION
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shape;
+        var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+        targetshapes.ResolveToSelection(this.Client);
 
-        protected override void ProcessRecord()
-        {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
-            targetshapes.ResolveToSelection(this.Client);
-
-            var group = this.Client.Grouping.Group(VisioScripting.TargetSelection.Auto);
-            this.WriteObject(group);
-        }
+        var group = this.Client.Grouping.Group(VisioScripting.TargetSelection.Auto);
+        this.WriteObject(group);
     }
 }

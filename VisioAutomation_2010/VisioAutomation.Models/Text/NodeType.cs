@@ -1,9 +1,8 @@
-namespace VisioAutomation.Models.Text
+namespace VisioAutomation.Models.Text;
+
+public enum NodeType
 {
-    public enum NodeType
-    {
-        Literal, 
-        Field, 
-        Element
-    }
+    Literal, 
+    Field, 
+    Element
 }

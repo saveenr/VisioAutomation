@@ -1,9 +1,8 @@
-namespace VisioAutomation.Models.Layouts.Box
+namespace VisioAutomation.Models.Layouts.Box;
+
+public enum AlignmentHorizontal
 {
-    public enum AlignmentHorizontal
-    {
-        Left,
-        Center,
-        Right
-    }
+    Left,
+    Center,
+    Right
 }

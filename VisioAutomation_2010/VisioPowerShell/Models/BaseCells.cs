@@ -1,19 +1,18 @@
 
 
-namespace VisioPowerShell.Models
-{
-    public abstract class BaseCells
-    {
-        internal abstract IEnumerable<Internal.CellTuple> EnumCellTuples();
+namespace VisioPowerShell.Models;
 
-        public void Apply(VASS.Writers.SidSrcWriter writer, short id)
+public abstract class BaseCells
+{
+    internal abstract IEnumerable<Internal.CellTuple> EnumCellTuples();
+
+    public void Apply(VASS.Writers.SidSrcWriter writer, short id)
+    {
+        foreach (var tuple in this.EnumCellTuples())
         {
-            foreach (var tuple in this.EnumCellTuples())
+            if (tuple.Formula != null)
             {
-                if (tuple.Formula != null)
-                {
-                    writer.SetValue(id, tuple.Src, tuple.Formula);
-                }
+                writer.SetValue(id, tuple.Src, tuple.Formula);
             }
         }
     }

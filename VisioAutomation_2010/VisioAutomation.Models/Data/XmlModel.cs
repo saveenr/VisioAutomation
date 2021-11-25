@@ -1,8 +1,7 @@
-﻿namespace VisioAutomation.Models.Data
-{
-    public class XmlModel
-    {
+﻿namespace VisioAutomation.Models.Data;
 
-        public System.Xml.XmlDocument XmlDocument { get; set; }
-    }
+public class XmlModel
+{
+
+    public System.Xml.XmlDocument XmlDocument { get; set; }
 }

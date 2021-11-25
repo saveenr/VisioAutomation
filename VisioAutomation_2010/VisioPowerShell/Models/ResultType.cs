@@ -1,7 +1,6 @@
-namespace VisioPowerShell.Models
+namespace VisioPowerShell.Models;
+
+public enum ResultType
 {
-    public enum ResultType
-    {
-        String, Bool, Double, Int
-    }
+    String, Bool, Double, Int
 }

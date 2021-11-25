@@ -1,35 +1,34 @@
 
 
-namespace VisioAutomation.Models.Documents.Forms
+namespace VisioAutomation.Models.Documents.Forms;
+
+internal class FormRenderingContext
 {
-    internal class FormRenderingContext
+    public IVisio.Application Application;
+    public IVisio.Document Document;
+    public IVisio.Page Page;
+    public IVisio.Pages Pages;
+    public Dictionary<string, int> NameToFontID;
+
+    public IVisio.Fonts Fonts;
+
+    public FormRenderingContext()
     {
-        public IVisio.Application Application;
-        public IVisio.Document Document;
-        public IVisio.Page Page;
-        public IVisio.Pages Pages;
-        public Dictionary<string, int> NameToFontID;
+        var compare = System.StringComparer.InvariantCultureIgnoreCase;
+        this.NameToFontID = new Dictionary<string, int>(compare);
+    }
 
-        public IVisio.Fonts Fonts;
-
-        public FormRenderingContext()
+    public int GetFontID(string name)
+    {
+        if (this.NameToFontID.ContainsKey(name))
         {
-            var compare = System.StringComparer.InvariantCultureIgnoreCase;
-            this.NameToFontID = new Dictionary<string, int>(compare);
+            return this.NameToFontID[name];
         }
-
-        public int GetFontID(string name)
+        else
         {
-            if (this.NameToFontID.ContainsKey(name))
-            {
-                return this.NameToFontID[name];
-            }
-            else
-            {
-                var font = this.Fonts[name];
-                int id = font.ID;
-                return id;
-            }
+            var font = this.Fonts[name];
+            int id = font.ID;
+            return id;
         }
     }
 }

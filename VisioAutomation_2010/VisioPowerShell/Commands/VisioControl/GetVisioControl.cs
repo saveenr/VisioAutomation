@@ -1,19 +1,18 @@
 
-namespace VisioPowerShell.Commands.VisioControl
+namespace VisioPowerShell.Commands.VisioControl;
+
+[SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioControl)]
+public class GetVisioControl : VisioCmdlet
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioControl)]
-    public class GetVisioControl : VisioCmdlet
-    {
-        // CONTEXT:SHAPES
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shape;
+    // CONTEXT:SHAPES
+    [SMA.Parameter(Mandatory = false)]
+    public IVisio.Shape[] Shape;
         
-        protected override void ProcessRecord()
-        {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
-            var type = VASS.CellValueType.Formula;
-            var dic_shape_to_listofcontrolscells = this.Client.Control.GetControls(targetshapes, type);
-            this.WriteObject(dic_shape_to_listofcontrolscells);
-        }
+    protected override void ProcessRecord()
+    {
+        var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+        var type = VASS.CellValueType.Formula;
+        var dic_shape_to_listofcontrolscells = this.Client.Control.GetControls(targetshapes, type);
+        this.WriteObject(dic_shape_to_listofcontrolscells);
     }
 }

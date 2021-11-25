@@ -1,33 +1,32 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioScripting.Models
+namespace VisioScripting.Models;
+
+public class EnumType
 {
-    public class EnumType
+    public System.Type Type { get; }
+    public string Name { get; }
+    public List<EnumValue> Values { get; }
+    public Dictionary<string, int> NameToValue { get; }
+
+    public EnumType(System.Type t)
     {
-        public System.Type Type { get; }
-        public string Name { get; }
-        public List<EnumValue> Values { get; }
-        public Dictionary<string, int> NameToValue { get; }
+        this.Type = t;
+        this.Name = t.Name;
+        this.Values = this.GetEnumValues().ToList();
+        this.NameToValue = this.Values.ToDictionary(i => i.Name, i => i.Value);
+    }
 
-        public EnumType(System.Type t)
+    public IEnumerable<EnumValue> GetEnumValues()
+    {
+        string[] names = System.Enum.GetNames(this.Type);
+        System.Array avalues = System.Enum.GetValues(this.Type);
+        for (int i = 0; i < avalues.Length; i++)
         {
-            this.Type = t;
-            this.Name = t.Name;
-            this.Values = this.GetEnumValues().ToList();
-            this.NameToValue = this.Values.ToDictionary(i => i.Name, i => i.Value);
-        }
-
-        public IEnumerable<EnumValue> GetEnumValues()
-        {
-            string[] names = System.Enum.GetNames(this.Type);
-            System.Array avalues = System.Enum.GetValues(this.Type);
-            for (int i = 0; i < avalues.Length; i++)
-            {
-                object o = avalues.GetValue(i);
-                var item = new EnumValue(names[i], (int)o);
-                yield return item;
-            }
+            object o = avalues.GetValue(i);
+            var item = new EnumValue(names[i], (int)o);
+            yield return item;
         }
     }
 }

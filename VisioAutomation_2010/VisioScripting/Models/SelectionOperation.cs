@@ -1,9 +1,8 @@
-namespace VisioScripting.Models
+namespace VisioScripting.Models;
+
+public enum SelectionOperation
 {
-    public enum SelectionOperation
-    {
-        All,
-        None,
-        Invert
-    }
+    All,
+    None,
+    Invert
 }

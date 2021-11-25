@@ -1,8 +1,7 @@
-﻿namespace VisioAutomation.Models.Layouts.Grid
+﻿namespace VisioAutomation.Models.Layouts.Grid;
+
+public enum ColumnDirection
 {
-    public enum ColumnDirection
-    {
-        LeftToRight,
-        RightToLeft
-    }
+    LeftToRight,
+    RightToLeft
 }

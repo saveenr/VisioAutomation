@@ -1,10 +1,9 @@
-﻿namespace VisioAutomation.Models.Layouts.DirectedGraph
+﻿namespace VisioAutomation.Models.Layouts.DirectedGraph;
+
+public enum MsaglDirection
 {
-    public enum MsaglDirection
-    {
-        TopToBottom,
-        BottomToTop,
-        LeftToRight,
-        RightToLeft
-    }
+    TopToBottom,
+    BottomToTop,
+    LeftToRight,
+    RightToLeft
 }

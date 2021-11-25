@@ -1,14 +1,13 @@
-namespace VisioAutomation.Shapes
+namespace VisioAutomation.Shapes;
+
+public enum CustomPropertyType
 {
-    public enum CustomPropertyType
-    {
-        String,
-        Number,
-        FixedList,
-        VariableList,
-        Boolean,
-        Currency,
-        Date,
-        Duration
-    }
+    String,
+    Number,
+    FixedList,
+    VariableList,
+    Boolean,
+    Currency,
+    Date,
+    Duration
 }

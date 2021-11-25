@@ -1,10 +1,9 @@
-﻿namespace VisioScripting.Models
+﻿namespace VisioScripting.Models;
+
+public enum PageRelativePosition
 {
-    public enum PageRelativePosition
-    {
-        First,
-        Previous,
-        Next,
-        Last
-    }
+    First,
+    Previous,
+    Next,
+    Last
 }

@@ -1,108 +1,107 @@
 
 using VisioAutomation.Extensions;
 
-namespace VisioScripting.Commands
+namespace VisioScripting.Commands;
+
+public class ViewCommands : CommandSet
 {
-    public class ViewCommands : CommandSet
+    internal ViewCommands(Client client) :
+        base(client)
     {
-        internal ViewCommands(Client client) :
-            base(client)
+    }
+
+    public IVisio.Window GetActiveWindow()
+    {
+        var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
+
+        var active_window = cmdtarget.Application.ActiveWindow;
+        return active_window;
+    }
+
+    private static void SetViewRectToSelection(
+        IVisio.Window window,
+        IVisio.VisBoundingBoxArgs bbargs, 
+        double padding_scale)
+    {
+        if (padding_scale < 0.0)
         {
+            throw new System.ArgumentOutOfRangeException(nameof(padding_scale));
         }
 
-        public IVisio.Window GetActiveWindow()
+        if (padding_scale > 1.0)
         {
-            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
-
-            var active_window = cmdtarget.Application.ActiveWindow;
-            return active_window;
+            throw new System.ArgumentOutOfRangeException(nameof(padding_scale));
         }
 
-        private static void SetViewRectToSelection(
-            IVisio.Window window,
-            IVisio.VisBoundingBoxArgs bbargs, 
-            double padding_scale)
+        var app = window.Application;
+        var active_window = app.ActiveWindow;
+        var sel = active_window.Selection;
+        var sel_bb = sel.GetBoundingBox(bbargs);
+
+        var delta = sel_bb.Size * (new VisioAutomation.Geometry.Size(padding_scale,padding_scale));
+        var view_rect = new VisioAutomation.Geometry.Rectangle(sel_bb.Left - delta.Width, sel_bb.Bottom - delta.Height,
+            sel_bb.Right + delta.Height, sel_bb.Top + delta.Height);
+        window.SetViewRect(view_rect);
+    }
+
+    public void SetZoomValue(VisioScripting.TargetWindow activewindow, double amount)
+    {
+        if (amount <= 0)
         {
-            if (padding_scale < 0.0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(padding_scale));
-            }
-
-            if (padding_scale > 1.0)
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(padding_scale));
-            }
-
-            var app = window.Application;
-            var active_window = app.ActiveWindow;
-            var sel = active_window.Selection;
-            var sel_bb = sel.GetBoundingBox(bbargs);
-
-            var delta = sel_bb.Size * (new VisioAutomation.Geometry.Size(padding_scale,padding_scale));
-            var view_rect = new VisioAutomation.Geometry.Rectangle(sel_bb.Left - delta.Width, sel_bb.Bottom - delta.Height,
-                                                          sel_bb.Right + delta.Height, sel_bb.Top + delta.Height);
-            window.SetViewRect(view_rect);
+            throw new System.ArgumentException("Must have positive zoom");
         }
 
-        public void SetZoomValue(VisioScripting.TargetWindow activewindow, double amount)
-        {
-            if (amount <= 0)
-            {
-                throw new System.ArgumentException("Must have positive zoom");
-            }
+        activewindow = activewindow.ResolveToWindow(this._client);
+        activewindow.Window.Zoom = amount;
+    }
 
-            activewindow = activewindow.ResolveToWindow(this._client);
-            activewindow.Window.Zoom = amount;
+    public double GetZoom(VisioScripting.TargetWindow activewindow)
+    {
+        activewindow = activewindow.ResolveToWindow(this._client);
+        return activewindow.Window.Zoom;
+    }
+
+    public void SetZoomValueRelative(VisioScripting.TargetWindow activewindow, double scale)
+    {
+        if (scale <= 0)
+        {
+            throw new System.ArgumentException("Must have positive scale");
         }
 
-        public double GetZoom(VisioScripting.TargetWindow activewindow)
+        activewindow = activewindow.ResolveToWindow(this._client);
+
+        double old_zoom = activewindow.Window.Zoom;
+        double new_zoom = old_zoom * scale;
+        activewindow.Window.Zoom = new_zoom;
+    }
+
+    public void SetZoomToObject(VisioScripting.TargetWindow targetwindow, Models.ZoomToObject zoom)
+    {
+        targetwindow = targetwindow.ResolveToWindow(this._client);
+
+        if (zoom == Models.ZoomToObject.Page)
         {
-            activewindow = activewindow.ResolveToWindow(this._client);
-            return activewindow.Window.Zoom;
+            targetwindow.Window.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
         }
-
-        public void SetZoomValueRelative(VisioScripting.TargetWindow activewindow, double scale)
+        else if (zoom == Models.ZoomToObject.PageWidth)
         {
-            if (scale <= 0)
-            {
-                throw new System.ArgumentException("Must have positive scale");
-            }
-
-            activewindow = activewindow.ResolveToWindow(this._client);
-
-            double old_zoom = activewindow.Window.Zoom;
-            double new_zoom = old_zoom * scale;
-            activewindow.Window.Zoom = new_zoom;
+            targetwindow.Window.ViewFit = (short)IVisio.VisWindowFit.visFitWidth;
         }
-
-        public void SetZoomToObject(VisioScripting.TargetWindow targetwindow, Models.ZoomToObject zoom)
+        else if (zoom == Models.ZoomToObject.Selection)
         {
-            targetwindow = targetwindow.ResolveToWindow(this._client);
-
-            if (zoom == Models.ZoomToObject.Page)
+            var selection = targetwindow.Window.Selection;
+            if (selection.Count<1)
             {
-                targetwindow.Window.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
+                return;
             }
-            else if (zoom == Models.ZoomToObject.PageWidth)
-            {
-                targetwindow.Window.ViewFit = (short)IVisio.VisWindowFit.visFitWidth;
-            }
-            else if (zoom == Models.ZoomToObject.Selection)
-            {
-                var selection = targetwindow.Window.Selection;
-                if (selection.Count<1)
-                {
-                    return;
-                }
 
-                double padding_scale = 0.1;
-                ViewCommands.SetViewRectToSelection(targetwindow.Window, IVisio.VisBoundingBoxArgs.visBBoxExtents, padding_scale);
+            double padding_scale = 0.1;
+            ViewCommands.SetViewRectToSelection(targetwindow.Window, IVisio.VisBoundingBoxArgs.visBBoxExtents, padding_scale);
 
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException(nameof(zoom));
-            }            
         }
+        else
+        {
+            throw new System.ArgumentOutOfRangeException(nameof(zoom));
+        }            
     }
 }

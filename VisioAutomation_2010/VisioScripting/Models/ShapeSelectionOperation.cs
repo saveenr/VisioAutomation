@@ -1,9 +1,8 @@
-namespace VisioScripting.Models
+namespace VisioScripting.Models;
+
+public enum ShapeSelectionOperation
 {
-    public enum ShapeSelectionOperation
-    {
-        SelectAll,
-        SelectNone,
-        InvertSelection
-    }
+    SelectAll,
+    SelectNone,
+    InvertSelection
 }

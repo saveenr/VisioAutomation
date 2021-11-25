@@ -1,9 +1,8 @@
-﻿namespace VisioAutomation.Models.Layouts.InternalTree
+﻿namespace VisioAutomation.Models.Layouts.InternalTree;
+
+public enum AlignmentVertical
 {
-    public enum AlignmentVertical
-    {
-        Top,
-        Center,
-        Bottom
-    }
+    Top,
+    Center,
+    Bottom
 }

@@ -1,10 +1,9 @@
 ﻿
-namespace VisioScripting.Models
+namespace VisioScripting.Models;
+
+public enum PageOrientation
 {
-    public enum PageOrientation
-    {
-        SameAsPrinter = IVisio.VisCellVals.visPPOSameAsPrinter,
-        Portrait = IVisio.VisCellVals.visPPOPortrait,
-        Landscape = IVisio.VisCellVals.visPPOLandscape
-    }
+    SameAsPrinter = IVisio.VisCellVals.visPPOSameAsPrinter,
+    Portrait = IVisio.VisCellVals.visPPOPortrait,
+    Landscape = IVisio.VisCellVals.visPPOLandscape
 }

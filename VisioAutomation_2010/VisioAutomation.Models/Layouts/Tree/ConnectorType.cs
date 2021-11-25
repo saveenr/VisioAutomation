@@ -1,9 +1,8 @@
-﻿namespace VisioAutomation.Models.Layouts.Tree
+﻿namespace VisioAutomation.Models.Layouts.Tree;
+
+public enum ConnectorType
 {
-    public enum ConnectorType
-    {
-        DynamicConnector,
-        CurvedBezier,
-        PolyLine
-    }
+    DynamicConnector,
+    CurvedBezier,
+    PolyLine
 }

@@ -1,7 +1,6 @@
-namespace VisioAutomation.Application.Logging
+namespace VisioAutomation.Application.Logging;
+
+enum LogState
 {
-    enum LogState
-    {
-        Start, InFileSession, InRecord
-    }
+    Start, InFileSession, InRecord
 }

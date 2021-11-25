@@ -1,21 +1,19 @@
 using VisioAutomation.ShapeSheet;
 
-namespace VisioPowerShell.Commands.VisioHyperlink
+namespace VisioPowerShell.Commands.VisioHyperlink;
+
+[SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioHyperlink)]
+public class GetVisioHyperlink : VisioCmdlet
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioHyperlink)]
-    public class GetVisioHyperlink : VisioCmdlet
+    // CONTEXT:SHAPES
+    [SMA.Parameter(Mandatory = false)]
+    public IVisio.Shape[] Shape;
+
+    protected override void ProcessRecord()
     {
-        // CONTEXT:SHAPES
-        [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shape;
+        var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+        var dicof_shape_to_hyperlinks = this.Client.Hyperlink.GetHyperlinks(targetshapes, CellValueType.Formula);
+        this.WriteObject(dicof_shape_to_hyperlinks);
 
-        protected override void ProcessRecord()
-        {
-            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
-            var dicof_shape_to_hyperlinks = this.Client.Hyperlink.GetHyperlinks(targetshapes, CellValueType.Formula);
-            this.WriteObject(dicof_shape_to_hyperlinks);
-
-        }
     }
 }
- 

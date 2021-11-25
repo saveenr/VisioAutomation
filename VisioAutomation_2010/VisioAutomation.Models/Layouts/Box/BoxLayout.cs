@@ -1,35 +1,34 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Models.Layouts.Box
+namespace VisioAutomation.Models.Layouts.Box;
+
+public class BoxLayout
 {
-    public class BoxLayout
+    public Container Root { get; set; }
+
+    public IEnumerable<Node> Nodes
     {
-        public Container Root { get; set; }
-
-        public IEnumerable<Node> Nodes
+        get
         {
-            get
-            {
-                Node rootn = this.Root;
-                return GenTreeOps.Algorithms.PreOrder(rootn, n => n.GetChildren());
-            }
+            Node rootn = this.Root;
+            return GenTreeOps.Algorithms.PreOrder(rootn, n => n.GetChildren());
+        }
+    }
+
+    public void PerformLayout()
+    {
+        if (this.Root.Count < 1)
+        {
+            throw new System.ArgumentException("Root must contain at least one child");
         }
 
-        public void PerformLayout()
-        {
-            if (this.Root.Count < 1)
-            {
-                throw new System.ArgumentException("Root must contain at least one child");
-            }
+        this.Root.CalculateSize();
+        this._place(new VisioAutomation.Geometry.Point(0, 0));
+        this.Root.ReservedRectangle = this.Root.Rectangle;
+    }
 
-            this.Root.CalculateSize();
-            this._place(new VisioAutomation.Geometry.Point(0, 0));
-            this.Root.ReservedRectangle = this.Root.Rectangle;
-        }
-
-        private void _place(VisioAutomation.Geometry.Point origin)
-        {
-            this.Root._place(origin);
-        }
+    private void _place(VisioAutomation.Geometry.Point origin)
+    {
+        this.Root._place(origin);
     }
 }

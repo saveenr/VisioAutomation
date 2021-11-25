@@ -1,9 +1,8 @@
-namespace VisioAutomation.Models.LayoutStyles
+namespace VisioAutomation.Models.LayoutStyles;
+
+public enum VerticalAlignment
 {
-    public enum VerticalAlignment
-    {
-        Top,
-        Middle,
-        Bottom
-    }
+    Top,
+    Middle,
+    Bottom
 }

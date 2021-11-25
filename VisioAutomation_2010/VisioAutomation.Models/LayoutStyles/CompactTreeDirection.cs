@@ -1,14 +1,13 @@
-namespace VisioAutomation.Models.LayoutStyles
+namespace VisioAutomation.Models.LayoutStyles;
+
+public enum CompactTreeDirection
 {
-    public enum CompactTreeDirection
-    {
-        DownThenLeft,
-        DownThenRight,
-        UpThenLeft,
-        UpThenRigtht,
-        LeftThenDown,
-        LeftThenUp,
-        RightThenDown,
-        RightThenUp,
-    }
+    DownThenLeft,
+    DownThenRight,
+    UpThenLeft,
+    UpThenRigtht,
+    LeftThenDown,
+    LeftThenUp,
+    RightThenDown,
+    RightThenUp,
 }

@@ -1,8 +1,7 @@
-namespace VisioAutomation.DocumentAnalysis
+namespace VisioAutomation.DocumentAnalysis;
+
+public enum NoArrowsHandling
 {
-    public enum NoArrowsHandling
-    {
-        ExcludeEdge,
-        TreatEdgeAsBidirectional,
-    }
+    ExcludeEdge,
+    TreatEdgeAsBidirectional,
 }

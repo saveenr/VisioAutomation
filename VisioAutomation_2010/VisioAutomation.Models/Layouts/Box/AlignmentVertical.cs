@@ -1,9 +1,8 @@
-namespace VisioAutomation.Models.Layouts.Box
+namespace VisioAutomation.Models.Layouts.Box;
+
+public enum AlignmentVertical
 {
-    public enum AlignmentVertical
-    {
-        Top,
-        Center,
-        Bottom
-    }
+    Top,
+    Center,
+    Bottom
 }

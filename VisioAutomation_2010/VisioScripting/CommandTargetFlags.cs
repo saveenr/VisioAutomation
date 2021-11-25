@@ -1,10 +1,9 @@
-namespace VisioScripting
+namespace VisioScripting;
+
+[System.Flags]
+public enum CommandTargetFlags
 {
-    [System.Flags]
-    public enum CommandTargetFlags
-    {
-        RequireApplication,
-        RequireDocument,
-        RequirePage
-    }
+    RequireApplication,
+    RequireDocument,
+    RequirePage
 }
