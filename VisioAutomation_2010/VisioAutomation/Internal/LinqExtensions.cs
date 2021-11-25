@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace VisioAutomation.Internal.Extensions;
 
 public static class LinqExtensions

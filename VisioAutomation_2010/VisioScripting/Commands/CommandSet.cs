@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace VisioScripting.Commands;
+﻿namespace VisioScripting.Commands;
 
 public class CommandSet
 {

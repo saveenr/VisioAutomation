@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace VisioAutomation.ShapeSheet.Writers;
 
 public class WriteRecordList

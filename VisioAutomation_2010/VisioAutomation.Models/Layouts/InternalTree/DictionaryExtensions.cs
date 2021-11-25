@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace VisioAutomation.Models.Layouts.InternalTree;
+﻿namespace VisioAutomation.Models.Layouts.InternalTree;
 
 static class DictionaryExtensions
 {

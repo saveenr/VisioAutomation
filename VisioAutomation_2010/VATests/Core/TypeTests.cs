@@ -1,5 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace VisioAutomation_Tests.Core.Internal;
 
 [TestClass]

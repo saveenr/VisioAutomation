@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace VisioAutomation.Application.Logging;
 
 public class LogSession

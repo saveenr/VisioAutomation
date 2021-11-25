@@ -1,7 +1,4 @@
-﻿using System.Linq;
-
-
-namespace VisioPowerShell.Commands.VisioRectangle;
+﻿namespace VisioPowerShell.Commands.VisioRectangle;
 
 [SMA.Cmdlet(SMA.VerbsCommon.New, Nouns.VisioPoint)]
 public class NewVisioPoint : VisioCmdlet

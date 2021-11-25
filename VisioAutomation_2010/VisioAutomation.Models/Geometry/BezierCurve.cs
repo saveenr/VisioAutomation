@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace VisioAutomation.Models.Geometry;
+﻿namespace VisioAutomation.Models.Geometry;
 
 public class BezierCurve
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace VisioAutomation.Models.Geometry;
+﻿namespace VisioAutomation.Models.Geometry;
 
 public class BoundingBoxBuilder
 {

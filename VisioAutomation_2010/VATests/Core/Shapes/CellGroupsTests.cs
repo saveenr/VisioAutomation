@@ -1,7 +1,5 @@
 using System;
-using System.Linq;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace VisioAutomation_Tests.Core.ShapeSheet;

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace VisioScripting.Commands;
 
 public class Command

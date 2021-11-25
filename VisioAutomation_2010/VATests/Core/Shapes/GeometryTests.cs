@@ -1,4 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
 
 namespace VisioAutomation_Tests.Core.Shapes;

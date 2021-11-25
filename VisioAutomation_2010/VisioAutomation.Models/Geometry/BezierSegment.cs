@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace VisioAutomation.Models.Geometry;
+﻿namespace VisioAutomation.Models.Geometry;
 
 public struct BezierSegment
 {

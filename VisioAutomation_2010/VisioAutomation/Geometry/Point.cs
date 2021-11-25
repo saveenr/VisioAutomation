@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace VisioAutomation.Geometry;
+﻿namespace VisioAutomation.Geometry;
 
 public struct Point
 {

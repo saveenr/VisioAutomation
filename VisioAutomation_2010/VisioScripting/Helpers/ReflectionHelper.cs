@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace VisioScripting.Helpers;
 
 internal class ReflectionHelper

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace VisioAutomation.Models.Text;
 
 class MarkupRegions

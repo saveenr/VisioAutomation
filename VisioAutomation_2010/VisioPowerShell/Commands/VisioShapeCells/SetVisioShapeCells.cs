@@ -1,7 +1,4 @@
-﻿using System.Linq;
-
-
-namespace VisioPowerShell.Commands.VisioShapeCells;
+﻿namespace VisioPowerShell.Commands.VisioShapeCells;
 
 [SMA.Cmdlet(SMA.VerbsCommon.Set, Nouns.VisioShapeCells)]
 public class SetVisioShapeCells : VisioCmdlet
