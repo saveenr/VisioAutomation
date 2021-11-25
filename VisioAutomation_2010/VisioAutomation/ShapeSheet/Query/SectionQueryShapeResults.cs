@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace VisioAutomation.ShapeSheet.Query
+﻿namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionQueryShapeResults<T> : IEnumerable<SectionShapeRows<T>>
     {

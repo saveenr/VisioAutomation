@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace VisioAutomation.ShapeSheet.Query
 {
     public class Rows<T> : IEnumerable<Row<T>>
