@@ -1,5 +1,4 @@
 using VisioAutomation.Shapes;
-using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomationSamples
 {

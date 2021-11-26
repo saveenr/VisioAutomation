@@ -1,6 +1,5 @@
-using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
-using VA=VisioAutomation;
-using VASS=VisioAutomation.ShapeSheet;
+using UT = Microsoft.VisualStudio.TestTools.UnitTesting;
+using VA = VisioAutomation;
 
 namespace VisioScripting_Tests
 {

@@ -1,5 +1,3 @@
-using VASS = VisioAutomation.ShapeSheet;
-
 namespace VisioPowerShell.Internal
 {
     public struct CellTuple

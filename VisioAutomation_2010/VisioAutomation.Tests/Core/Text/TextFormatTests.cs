@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VASS=VisioAutomation.ShapeSheet;
 using VATEXT = VisioAutomation.Text;
 
 namespace VisioAutomation_Tests.Core.Text

@@ -1,5 +1,4 @@
 using UT = Microsoft.VisualStudio.TestTools.UnitTesting;
-using VA = VisioAutomation;
 
 
 namespace VisioScripting_Tests
