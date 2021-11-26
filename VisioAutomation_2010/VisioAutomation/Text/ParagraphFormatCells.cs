@@ -24,22 +24,22 @@ namespace VisioAutomation.Text
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.IndentLeft), Core.SrcConstants.ParaIndentLeft, this.IndentLeft);
-            yield return this.Create(nameof(this.IndentFirst), Core.SrcConstants.ParaIndentFirst, this.IndentFirst);
-            yield return this.Create(nameof(this.IndentRight), Core.SrcConstants.ParaIndentRight, this.IndentRight);
-            yield return this.Create(nameof(this.SpacingAfter), Core.SrcConstants.ParaSpacingAfter, this.SpacingAfter);
-            yield return this.Create(nameof(this.SpacingBefore), Core.SrcConstants.ParaSpacingBefore, this.SpacingBefore);
-            yield return this.Create(nameof(this.SpacingLine), Core.SrcConstants.ParaSpacingLine, this.SpacingLine);
-            yield return this.Create(nameof(this.HorizontalAlign), Core.SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
-            yield return this.Create(nameof(this.BulletFont), Core.SrcConstants.ParaBulletFont, this.BulletFont);
-            yield return this.Create(nameof(this.Bullet), Core.SrcConstants.ParaBullet, this.Bullet);
-            yield return this.Create(nameof(this.BulletFontSize), Core.SrcConstants.ParaBulletFontSize, this.BulletFontSize);
-            yield return this.Create(nameof(this.LocalizeBulletFont), Core.SrcConstants.ParaLocalizeBulletFont,
+            yield return this._create(nameof(this.IndentLeft), Core.SrcConstants.ParaIndentLeft, this.IndentLeft);
+            yield return this._create(nameof(this.IndentFirst), Core.SrcConstants.ParaIndentFirst, this.IndentFirst);
+            yield return this._create(nameof(this.IndentRight), Core.SrcConstants.ParaIndentRight, this.IndentRight);
+            yield return this._create(nameof(this.SpacingAfter), Core.SrcConstants.ParaSpacingAfter, this.SpacingAfter);
+            yield return this._create(nameof(this.SpacingBefore), Core.SrcConstants.ParaSpacingBefore, this.SpacingBefore);
+            yield return this._create(nameof(this.SpacingLine), Core.SrcConstants.ParaSpacingLine, this.SpacingLine);
+            yield return this._create(nameof(this.HorizontalAlign), Core.SrcConstants.ParaHorizontalAlign, this.HorizontalAlign);
+            yield return this._create(nameof(this.BulletFont), Core.SrcConstants.ParaBulletFont, this.BulletFont);
+            yield return this._create(nameof(this.Bullet), Core.SrcConstants.ParaBullet, this.Bullet);
+            yield return this._create(nameof(this.BulletFontSize), Core.SrcConstants.ParaBulletFontSize, this.BulletFontSize);
+            yield return this._create(nameof(this.LocalizeBulletFont), Core.SrcConstants.ParaLocalizeBulletFont,
                 this.LocalizeBulletFont);
-            yield return this.Create(nameof(this.TextPosAfterBullet), Core.SrcConstants.ParaTextPosAfterBullet,
+            yield return this._create(nameof(this.TextPosAfterBullet), Core.SrcConstants.ParaTextPosAfterBullet,
                 this.TextPosAfterBullet);
-            yield return this.Create(nameof(this.Flags), Core.SrcConstants.ParaFlags, this.Flags);
-            yield return this.Create(nameof(this.BulletString), Core.SrcConstants.ParaBulletString, this.BulletString);
+            yield return this._create(nameof(this.Flags), Core.SrcConstants.ParaFlags, this.Flags);
+            yield return this._create(nameof(this.BulletString), Core.SrcConstants.ParaBulletString, this.BulletString);
         }
 
         public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)

@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        protected CellMetadataItem Create(string name, Core.Src src, Core.CellValue value)
+        protected CellMetadataItem _create(string name, Core.Src src, Core.CellValue value)
         {
             return new CellMetadataItem(name, src, value.Value);
         }

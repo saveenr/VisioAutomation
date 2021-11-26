@@ -32,7 +32,7 @@ namespace VisioAutomation.Core
             return string.Format("{0}({1},{2},{3})", nameof(Src), this.Section, this.Row, this.Cell);
         }
 
-        public Src CloneWithNewRow(short row)
+        public readonly Src CloneWithNewRow(short row)
         {
             // Src that has a different row index. Very common scenario
             return new Src(this.Section, row, this.Cell);

@@ -17,13 +17,13 @@ namespace VisioAutomation.Text
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.PinX), Core.SrcConstants.TextXFormPinX, this.PinX);
-            yield return this.Create(nameof(this.PinY), Core.SrcConstants.TextXFormPinY, this.PinY);
-            yield return this.Create(nameof(this.LocPinX), Core.SrcConstants.TextXFormLocPinX, this.LocPinX);
-            yield return this.Create(nameof(this.LocPinY), Core.SrcConstants.TextXFormLocPinY, this.LocPinY);
-            yield return this.Create(nameof(this.Width), Core.SrcConstants.TextXFormWidth, this.Width);
-            yield return this.Create(nameof(this.Height), Core.SrcConstants.TextXFormHeight, this.Height);
-            yield return this.Create(nameof(this.Angle), Core.SrcConstants.TextXFormAngle, this.Angle);
+            yield return this._create(nameof(this.PinX), Core.SrcConstants.TextXFormPinX, this.PinX);
+            yield return this._create(nameof(this.PinY), Core.SrcConstants.TextXFormPinY, this.PinY);
+            yield return this._create(nameof(this.LocPinX), Core.SrcConstants.TextXFormLocPinX, this.LocPinX);
+            yield return this._create(nameof(this.LocPinY), Core.SrcConstants.TextXFormLocPinY, this.LocPinY);
+            yield return this._create(nameof(this.Width), Core.SrcConstants.TextXFormWidth, this.Width);
+            yield return this._create(nameof(this.Height), Core.SrcConstants.TextXFormHeight, this.Height);
+            yield return this._create(nameof(this.Angle), Core.SrcConstants.TextXFormAngle, this.Angle);
         }
 
         public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)

@@ -19,15 +19,15 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Address), Core.SrcConstants.HyperlinkAddress, this.Address);
-            yield return this.Create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription, this.Description);
-            yield return this.Create(nameof(this.ExtraInfo), Core.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
-            yield return this.Create(nameof(this.Frame), Core.SrcConstants.HyperlinkFrame, this.Frame);
-            yield return this.Create(nameof(this.SortKey), Core.SrcConstants.HyperlinkSortKey, this.SortKey);
-            yield return this.Create(nameof(this.SubAddress), Core.SrcConstants.HyperlinkSubAddress, this.SubAddress);
-            yield return this.Create(nameof(this.NewWindow), Core.SrcConstants.HyperlinkNewWindow, this.NewWindow);
-            yield return this.Create(nameof(this.Default), Core.SrcConstants.HyperlinkDefault, this.Default);
-            yield return this.Create(nameof(this.Invisible), Core.SrcConstants.HyperlinkInvisible, this.Invisible);
+            yield return this._create(nameof(this.Address), Core.SrcConstants.HyperlinkAddress, this.Address);
+            yield return this._create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription, this.Description);
+            yield return this._create(nameof(this.ExtraInfo), Core.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
+            yield return this._create(nameof(this.Frame), Core.SrcConstants.HyperlinkFrame, this.Frame);
+            yield return this._create(nameof(this.SortKey), Core.SrcConstants.HyperlinkSortKey, this.SortKey);
+            yield return this._create(nameof(this.SubAddress), Core.SrcConstants.HyperlinkSubAddress, this.SubAddress);
+            yield return this._create(nameof(this.NewWindow), Core.SrcConstants.HyperlinkNewWindow, this.NewWindow);
+            yield return this._create(nameof(this.Default), Core.SrcConstants.HyperlinkDefault, this.Default);
+            yield return this._create(nameof(this.Invisible), Core.SrcConstants.HyperlinkInvisible, this.Invisible);
         }
 
         public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)

@@ -15,11 +15,11 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.X), Core.SrcConstants.ConnectionPointX, this.X);
-            yield return this.Create(nameof(this.Y), Core.SrcConstants.ConnectionPointY, this.Y);
-            yield return this.Create(nameof(this.DirX), Core.SrcConstants.ConnectionPointDirX, this.DirX);
-            yield return this.Create(nameof(this.DirY), Core.SrcConstants.ConnectionPointDirY, this.DirY);
-            yield return this.Create(nameof(this.Type), Core.SrcConstants.ConnectionPointType, this.Type);
+            yield return this._create(nameof(this.X), Core.SrcConstants.ConnectionPointX, this.X);
+            yield return this._create(nameof(this.Y), Core.SrcConstants.ConnectionPointY, this.Y);
+            yield return this._create(nameof(this.DirX), Core.SrcConstants.ConnectionPointDirX, this.DirX);
+            yield return this._create(nameof(this.DirY), Core.SrcConstants.ConnectionPointDirY, this.DirY);
+            yield return this._create(nameof(this.Type), Core.SrcConstants.ConnectionPointType, this.Type);
         }
 
         public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)

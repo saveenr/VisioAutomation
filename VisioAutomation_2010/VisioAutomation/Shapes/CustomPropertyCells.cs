@@ -25,16 +25,16 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Label), Core.SrcConstants.CustomPropLabel, this.Label);
-            yield return this.Create(nameof(this.Value), Core.SrcConstants.CustomPropValue, this.Value);
-            yield return this.Create(nameof(this.Format), Core.SrcConstants.CustomPropFormat, this.Format);
-            yield return this.Create(nameof(this.Prompt), Core.SrcConstants.CustomPropPrompt, this.Prompt);
-            yield return this.Create(nameof(this.Calendar), Core.SrcConstants.CustomPropCalendar, this.Calendar);
-            yield return this.Create(nameof(this.LangID), Core.SrcConstants.CustomPropLangID, this.LangID);
-            yield return this.Create(nameof(this.SortKey), Core.SrcConstants.CustomPropSortKey, this.SortKey);
-            yield return this.Create(nameof(this.Invisible), Core.SrcConstants.CustomPropInvisible, this.Invisible);
-            yield return this.Create(nameof(this.Type), Core.SrcConstants.CustomPropType, this.Type);
-            yield return this.Create(nameof(this.Ask), Core.SrcConstants.CustomPropAsk, this.Ask);
+            yield return this._create(nameof(this.Label), Core.SrcConstants.CustomPropLabel, this.Label);
+            yield return this._create(nameof(this.Value), Core.SrcConstants.CustomPropValue, this.Value);
+            yield return this._create(nameof(this.Format), Core.SrcConstants.CustomPropFormat, this.Format);
+            yield return this._create(nameof(this.Prompt), Core.SrcConstants.CustomPropPrompt, this.Prompt);
+            yield return this._create(nameof(this.Calendar), Core.SrcConstants.CustomPropCalendar, this.Calendar);
+            yield return this._create(nameof(this.LangID), Core.SrcConstants.CustomPropLangID, this.LangID);
+            yield return this._create(nameof(this.SortKey), Core.SrcConstants.CustomPropSortKey, this.SortKey);
+            yield return this._create(nameof(this.Invisible), Core.SrcConstants.CustomPropInvisible, this.Invisible);
+            yield return this._create(nameof(this.Type), Core.SrcConstants.CustomPropType, this.Type);
+            yield return this._create(nameof(this.Ask), Core.SrcConstants.CustomPropAsk, this.Ask);
         }
 
 

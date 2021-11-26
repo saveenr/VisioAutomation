@@ -20,16 +20,16 @@ namespace VisioAutomation.Pages
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.XGridDensity), Core.SrcConstants.XGridDensity, this.XGridDensity);
-            yield return this.Create(nameof(this.XGridOrigin), Core.SrcConstants.XGridOrigin, this.XGridOrigin);
-            yield return this.Create(nameof(this.XGridSpacing), Core.SrcConstants.XGridSpacing, this.XGridSpacing);
-            yield return this.Create(nameof(this.XRulerDensity), Core.SrcConstants.XRulerDensity, this.XRulerDensity);
-            yield return this.Create(nameof(this.XRulerOrigin), Core.SrcConstants.XRulerOrigin, this.XRulerOrigin);
-            yield return this.Create(nameof(this.YGridDensity), Core.SrcConstants.YGridDensity, this.YGridDensity);
-            yield return this.Create(nameof(this.YGridOrigin), Core.SrcConstants.YGridOrigin, this.YGridOrigin);
-            yield return this.Create(nameof(this.YGridSpacing), Core.SrcConstants.YGridSpacing, this.YGridSpacing);
-            yield return this.Create(nameof(this.YRulerDensity), Core.SrcConstants.YRulerDensity, this.YRulerDensity);
-            yield return this.Create(nameof(this.YRulerOrigin), Core.SrcConstants.YRulerOrigin, this.YRulerOrigin);
+            yield return this._create(nameof(this.XGridDensity), Core.SrcConstants.XGridDensity, this.XGridDensity);
+            yield return this._create(nameof(this.XGridOrigin), Core.SrcConstants.XGridOrigin, this.XGridOrigin);
+            yield return this._create(nameof(this.XGridSpacing), Core.SrcConstants.XGridSpacing, this.XGridSpacing);
+            yield return this._create(nameof(this.XRulerDensity), Core.SrcConstants.XRulerDensity, this.XRulerDensity);
+            yield return this._create(nameof(this.XRulerOrigin), Core.SrcConstants.XRulerOrigin, this.XRulerOrigin);
+            yield return this._create(nameof(this.YGridDensity), Core.SrcConstants.YGridDensity, this.YGridDensity);
+            yield return this._create(nameof(this.YGridOrigin), Core.SrcConstants.YGridOrigin, this.YGridOrigin);
+            yield return this._create(nameof(this.YGridSpacing), Core.SrcConstants.YGridSpacing, this.YGridSpacing);
+            yield return this._create(nameof(this.YRulerDensity), Core.SrcConstants.YRulerDensity, this.YRulerDensity);
+            yield return this._create(nameof(this.YRulerOrigin), Core.SrcConstants.YRulerOrigin, this.YRulerOrigin);
         }
 
         public static RulerAndGridCells GetCells(IVisio.Shape shape, Core.CellValueType type)

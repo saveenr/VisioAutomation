@@ -18,14 +18,14 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.CanGlue), Core.SrcConstants.ControlCanGlue, this.CanGlue);
-            yield return this.Create(nameof(this.Tip), Core.SrcConstants.ControlTip, this.Tip);
-            yield return this.Create(nameof(this.X), Core.SrcConstants.ControlX, this.X);
-            yield return this.Create(nameof(this.Y), Core.SrcConstants.ControlY, this.Y);
-            yield return this.Create(nameof(this.YBehavior), Core.SrcConstants.ControlYBehavior, this.YBehavior);
-            yield return this.Create(nameof(this.XBehavior), Core.SrcConstants.ControlXBehavior, this.XBehavior);
-            yield return this.Create(nameof(this.XDynamics), Core.SrcConstants.ControlXDynamics, this.XDynamics);
-            yield return this.Create(nameof(this.YDynamics), Core.SrcConstants.ControlYDynamics, this.YDynamics);
+            yield return this._create(nameof(this.CanGlue), Core.SrcConstants.ControlCanGlue, this.CanGlue);
+            yield return this._create(nameof(this.Tip), Core.SrcConstants.ControlTip, this.Tip);
+            yield return this._create(nameof(this.X), Core.SrcConstants.ControlX, this.X);
+            yield return this._create(nameof(this.Y), Core.SrcConstants.ControlY, this.Y);
+            yield return this._create(nameof(this.YBehavior), Core.SrcConstants.ControlYBehavior, this.YBehavior);
+            yield return this._create(nameof(this.XBehavior), Core.SrcConstants.ControlXBehavior, this.XBehavior);
+            yield return this._create(nameof(this.XDynamics), Core.SrcConstants.ControlXDynamics, this.XDynamics);
+            yield return this._create(nameof(this.YDynamics), Core.SrcConstants.ControlYDynamics, this.YDynamics);
         }
 
         public static List<ControlCells> GetCells(IVisio.Shape shape, Core.CellValueType type)

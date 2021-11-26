@@ -32,32 +32,32 @@ namespace VisioAutomation.Text
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Color), Core.SrcConstants.CharColor, this.Color);
-            yield return this.Create(nameof(this.Font), Core.SrcConstants.CharFont, this.Font);
-            yield return this.Create(nameof(this.Size), Core.SrcConstants.CharSize, this.Size);
-            yield return this.Create(nameof(this.Style), Core.SrcConstants.CharStyle, this.Style);
-            yield return this.Create(nameof(this.ColorTransparency), Core.SrcConstants.CharColorTransparency,
+            yield return this._create(nameof(this.Color), Core.SrcConstants.CharColor, this.Color);
+            yield return this._create(nameof(this.Font), Core.SrcConstants.CharFont, this.Font);
+            yield return this._create(nameof(this.Size), Core.SrcConstants.CharSize, this.Size);
+            yield return this._create(nameof(this.Style), Core.SrcConstants.CharStyle, this.Style);
+            yield return this._create(nameof(this.ColorTransparency), Core.SrcConstants.CharColorTransparency,
                 this.ColorTransparency);
-            yield return this.Create(nameof(this.AsianFont), Core.SrcConstants.CharAsianFont, this.AsianFont);
-            yield return this.Create(nameof(this.Case), Core.SrcConstants.CharCase, this.Case);
-            yield return this.Create(nameof(this.ComplexScriptFont), Core.SrcConstants.CharComplexScriptFont,
+            yield return this._create(nameof(this.AsianFont), Core.SrcConstants.CharAsianFont, this.AsianFont);
+            yield return this._create(nameof(this.Case), Core.SrcConstants.CharCase, this.Case);
+            yield return this._create(nameof(this.ComplexScriptFont), Core.SrcConstants.CharComplexScriptFont,
                 this.ComplexScriptFont);
-            yield return this.Create(nameof(this.ComplexScriptSize), Core.SrcConstants.CharComplexScriptSize,
+            yield return this._create(nameof(this.ComplexScriptSize), Core.SrcConstants.CharComplexScriptSize,
                 this.ComplexScriptSize);
-            yield return this.Create(nameof(this.DoubleUnderline), Core.SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
-            yield return this.Create(nameof(this.DoubleStrikethrough), Core.SrcConstants.CharDoubleStrikethrough,
+            yield return this._create(nameof(this.DoubleUnderline), Core.SrcConstants.CharDoubleUnderline, this.DoubleUnderline);
+            yield return this._create(nameof(this.DoubleStrikethrough), Core.SrcConstants.CharDoubleStrikethrough,
                 this.DoubleStrikethrough);
-            yield return this.Create(nameof(this.LangID), Core.SrcConstants.CharLangID, this.LangID);
-            yield return this.Create(nameof(this.FontScale), Core.SrcConstants.CharFontScale, this.FontScale);
-            yield return this.Create(nameof(this.Letterspace), Core.SrcConstants.CharLetterspace, this.Letterspace);
-            yield return this.Create(nameof(this.Locale), Core.SrcConstants.CharLocale, this.Locale);
-            yield return this.Create(nameof(this.LocalizeFont), Core.SrcConstants.CharLocalizeFont, this.LocalizeFont);
-            yield return this.Create(nameof(this.Overline), Core.SrcConstants.CharOverline, this.Overline);
-            yield return this.Create(nameof(this.Perpendicular), Core.SrcConstants.CharPerpendicular, this.Perpendicular);
-            yield return this.Create(nameof(this.Pos), Core.SrcConstants.CharPos, this.Pos);
-            yield return this.Create(nameof(this.RTLText), Core.SrcConstants.CharRTLText, this.RTLText);
-            yield return this.Create(nameof(this.Strikethru), Core.SrcConstants.CharStrikethru, this.Strikethru);
-            yield return this.Create(nameof(this.UseVertical), Core.SrcConstants.CharUseVertical, this.UseVertical);
+            yield return this._create(nameof(this.LangID), Core.SrcConstants.CharLangID, this.LangID);
+            yield return this._create(nameof(this.FontScale), Core.SrcConstants.CharFontScale, this.FontScale);
+            yield return this._create(nameof(this.Letterspace), Core.SrcConstants.CharLetterspace, this.Letterspace);
+            yield return this._create(nameof(this.Locale), Core.SrcConstants.CharLocale, this.Locale);
+            yield return this._create(nameof(this.LocalizeFont), Core.SrcConstants.CharLocalizeFont, this.LocalizeFont);
+            yield return this._create(nameof(this.Overline), Core.SrcConstants.CharOverline, this.Overline);
+            yield return this._create(nameof(this.Perpendicular), Core.SrcConstants.CharPerpendicular, this.Perpendicular);
+            yield return this._create(nameof(this.Pos), Core.SrcConstants.CharPos, this.Pos);
+            yield return this._create(nameof(this.RTLText), Core.SrcConstants.CharRTLText, this.RTLText);
+            yield return this._create(nameof(this.Strikethru), Core.SrcConstants.CharStrikethru, this.Strikethru);
+            yield return this._create(nameof(this.UseVertical), Core.SrcConstants.CharUseVertical, this.UseVertical);
         }
 
 

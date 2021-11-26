@@ -38,37 +38,37 @@ namespace VisioAutomation.Pages
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.AvenueSizeX), Core.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX);
-            yield return this.Create(nameof(this.AvenueSizeY), Core.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY);
-            yield return this.Create(nameof(this.BlockSizeX), Core.SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX);
-            yield return this.Create(nameof(this.BlockSizeY), Core.SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY);
-            yield return this.Create(nameof(this.CtrlAsInput), Core.SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput);
-            yield return this.Create(nameof(this.DynamicsOff), Core.SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff);
-            yield return this.Create(nameof(this.EnableGrid), Core.SrcConstants.PageLayoutEnableGrid, this.EnableGrid);
-            yield return this.Create(nameof(this.LineAdjustFrom), Core.SrcConstants.PageLayoutLineAdjustFrom,
+            yield return this._create(nameof(this.AvenueSizeX), Core.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX);
+            yield return this._create(nameof(this.AvenueSizeY), Core.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY);
+            yield return this._create(nameof(this.BlockSizeX), Core.SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX);
+            yield return this._create(nameof(this.BlockSizeY), Core.SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY);
+            yield return this._create(nameof(this.CtrlAsInput), Core.SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput);
+            yield return this._create(nameof(this.DynamicsOff), Core.SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff);
+            yield return this._create(nameof(this.EnableGrid), Core.SrcConstants.PageLayoutEnableGrid, this.EnableGrid);
+            yield return this._create(nameof(this.LineAdjustFrom), Core.SrcConstants.PageLayoutLineAdjustFrom,
                 this.LineAdjustFrom);
-            yield return this.Create(nameof(this.LineAdjustTo), Core.SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo);
-            yield return this.Create(nameof(this.LineJumpCode), Core.SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode);
-            yield return this.Create(nameof(this.LineJumpFactorX), Core.SrcConstants.PageLayoutLineJumpFactorX,
+            yield return this._create(nameof(this.LineAdjustTo), Core.SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo);
+            yield return this._create(nameof(this.LineJumpCode), Core.SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode);
+            yield return this._create(nameof(this.LineJumpFactorX), Core.SrcConstants.PageLayoutLineJumpFactorX,
                 this.LineJumpFactorX);
-            yield return this.Create(nameof(this.LineJumpFactorY), Core.SrcConstants.PageLayoutLineJumpFactorY,
+            yield return this._create(nameof(this.LineJumpFactorY), Core.SrcConstants.PageLayoutLineJumpFactorY,
                 this.LineJumpFactorY);
-            yield return this.Create(nameof(this.LineJumpStyle), Core.SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle);
-            yield return this.Create(nameof(this.LineRouteExt), Core.SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt);
-            yield return this.Create(nameof(this.LineToLineX), Core.SrcConstants.PageLayoutLineToLineX, this.LineToLineX);
-            yield return this.Create(nameof(this.LineToLineY), Core.SrcConstants.PageLayoutLineToLineY, this.LineToLineY);
-            yield return this.Create(nameof(this.LineToNodeX), Core.SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX);
-            yield return this.Create(nameof(this.LineToNodeY), Core.SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY);
-            yield return this.Create(nameof(this.LineJumpDirX), Core.SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX);
-            yield return this.Create(nameof(this.LineJumpDirY), Core.SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY);
-            yield return this.Create(nameof(this.PageShapeSplit), Core.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit);
-            yield return this.Create(nameof(this.PlaceDepth), Core.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth);
-            yield return this.Create(nameof(this.PlaceFlip), Core.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip);
-            yield return this.Create(nameof(this.PlaceStyle), Core.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle);
-            yield return this.Create(nameof(this.PlowCode), Core.SrcConstants.PageLayoutPlowCode, this.PlowCode);
-            yield return this.Create(nameof(this.ResizePage), Core.SrcConstants.PageLayoutResizePage, this.ResizePage);
-            yield return this.Create(nameof(this.RouteStyle), Core.SrcConstants.PageLayoutRouteStyle, this.RouteStyle);
-            yield return this.Create(nameof(this.AvoidPageBreaks), Core.SrcConstants.PageLayoutAvoidPageBreaks,
+            yield return this._create(nameof(this.LineJumpStyle), Core.SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle);
+            yield return this._create(nameof(this.LineRouteExt), Core.SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt);
+            yield return this._create(nameof(this.LineToLineX), Core.SrcConstants.PageLayoutLineToLineX, this.LineToLineX);
+            yield return this._create(nameof(this.LineToLineY), Core.SrcConstants.PageLayoutLineToLineY, this.LineToLineY);
+            yield return this._create(nameof(this.LineToNodeX), Core.SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX);
+            yield return this._create(nameof(this.LineToNodeY), Core.SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY);
+            yield return this._create(nameof(this.LineJumpDirX), Core.SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX);
+            yield return this._create(nameof(this.LineJumpDirY), Core.SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY);
+            yield return this._create(nameof(this.PageShapeSplit), Core.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit);
+            yield return this._create(nameof(this.PlaceDepth), Core.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth);
+            yield return this._create(nameof(this.PlaceFlip), Core.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip);
+            yield return this._create(nameof(this.PlaceStyle), Core.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle);
+            yield return this._create(nameof(this.PlowCode), Core.SrcConstants.PageLayoutPlowCode, this.PlowCode);
+            yield return this._create(nameof(this.ResizePage), Core.SrcConstants.PageLayoutResizePage, this.ResizePage);
+            yield return this._create(nameof(this.RouteStyle), Core.SrcConstants.PageLayoutRouteStyle, this.RouteStyle);
+            yield return this._create(nameof(this.AvoidPageBreaks), Core.SrcConstants.PageLayoutAvoidPageBreaks,
                 this.AvoidPageBreaks);
         }
 

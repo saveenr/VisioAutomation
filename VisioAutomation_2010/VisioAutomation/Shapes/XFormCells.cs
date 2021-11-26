@@ -19,13 +19,13 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.PinX), Core.SrcConstants.XFormPinX, this.PinX);
-            yield return this.Create(nameof(this.PinY), Core.SrcConstants.XFormPinY, this.PinY);
-            yield return this.Create(nameof(this.LocPinX), Core.SrcConstants.XFormLocPinX, this.LocPinX);
-            yield return this.Create(nameof(this.LocPinY), Core.SrcConstants.XFormLocPinY, this.LocPinY);
-            yield return this.Create(nameof(this.Width), Core.SrcConstants.XFormWidth, this.Width);
-            yield return this.Create(nameof(this.Height), Core.SrcConstants.XFormHeight, this.Height);
-            yield return this.Create(nameof(this.Angle), Core.SrcConstants.XFormAngle, this.Angle);
+            yield return this._create(nameof(this.PinX), Core.SrcConstants.XFormPinX, this.PinX);
+            yield return this._create(nameof(this.PinY), Core.SrcConstants.XFormPinY, this.PinY);
+            yield return this._create(nameof(this.LocPinX), Core.SrcConstants.XFormLocPinX, this.LocPinX);
+            yield return this._create(nameof(this.LocPinY), Core.SrcConstants.XFormLocPinY, this.LocPinY);
+            yield return this._create(nameof(this.Width), Core.SrcConstants.XFormWidth, this.Width);
+            yield return this._create(nameof(this.Height), Core.SrcConstants.XFormHeight, this.Height);
+            yield return this._create(nameof(this.Angle), Core.SrcConstants.XFormAngle, this.Angle);
         }
 
 

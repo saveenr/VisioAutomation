@@ -35,44 +35,44 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.FillBackground), Core.SrcConstants.FillBackground, this.FillBackground);
-            yield return this.Create(nameof(this.FillBackgroundTransparency), Core.SrcConstants.FillBackgroundTransparency,
+            yield return this._create(nameof(this.FillBackground), Core.SrcConstants.FillBackground, this.FillBackground);
+            yield return this._create(nameof(this.FillBackgroundTransparency), Core.SrcConstants.FillBackgroundTransparency,
                 this.FillBackgroundTransparency);
-            yield return this.Create(nameof(this.FillForeground), Core.SrcConstants.FillForeground, this.FillForeground);
-            yield return this.Create(nameof(this.FillForegroundTransparency), Core.SrcConstants.FillForegroundTransparency,
+            yield return this._create(nameof(this.FillForeground), Core.SrcConstants.FillForeground, this.FillForeground);
+            yield return this._create(nameof(this.FillForegroundTransparency), Core.SrcConstants.FillForegroundTransparency,
                 this.FillForegroundTransparency);
-            yield return this.Create(nameof(this.FillPattern), Core.SrcConstants.FillPattern, this.FillPattern);
-            yield return this.Create(nameof(this.FillShadowObliqueAngle), Core.SrcConstants.FillShadowObliqueAngle,
+            yield return this._create(nameof(this.FillPattern), Core.SrcConstants.FillPattern, this.FillPattern);
+            yield return this._create(nameof(this.FillShadowObliqueAngle), Core.SrcConstants.FillShadowObliqueAngle,
                 this.FillShadowObliqueAngle);
-            yield return this.Create(nameof(this.FillShadowOffsetX), Core.SrcConstants.FillShadowOffsetX,
+            yield return this._create(nameof(this.FillShadowOffsetX), Core.SrcConstants.FillShadowOffsetX,
                 this.FillShadowOffsetX);
-            yield return this.Create(nameof(this.FillShadowOffsetY), Core.SrcConstants.FillShadowOffsetY,
+            yield return this._create(nameof(this.FillShadowOffsetY), Core.SrcConstants.FillShadowOffsetY,
                 this.FillShadowOffsetY);
-            yield return this.Create(nameof(this.FillShadowScaleFactor), Core.SrcConstants.FillShadowScaleFactor,
+            yield return this._create(nameof(this.FillShadowScaleFactor), Core.SrcConstants.FillShadowScaleFactor,
                 this.FillShadowScaleFactor);
-            yield return this.Create(nameof(this.FillShadowType), Core.SrcConstants.FillShadowType, this.FillShadowType);
-            yield return this.Create(nameof(this.FillShadowBackground), Core.SrcConstants.FillShadowBackground,
+            yield return this._create(nameof(this.FillShadowType), Core.SrcConstants.FillShadowType, this.FillShadowType);
+            yield return this._create(nameof(this.FillShadowBackground), Core.SrcConstants.FillShadowBackground,
                 this.FillShadowBackground);
-            yield return this.Create(nameof(this.FillShadowBackgroundTransparency),
+            yield return this._create(nameof(this.FillShadowBackgroundTransparency),
                 Core.SrcConstants.FillShadowBackgroundTransparency, this.FillShadowBackgroundTransparency);
-            yield return this.Create(nameof(this.FillShadowForeground), Core.SrcConstants.FillShadowForeground,
+            yield return this._create(nameof(this.FillShadowForeground), Core.SrcConstants.FillShadowForeground,
                 this.FillShadowForeground);
-            yield return this.Create(nameof(this.FillShadowForegroundTransparency),
+            yield return this._create(nameof(this.FillShadowForegroundTransparency),
                 Core.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
-            yield return this.Create(nameof(this.FillShadowPattern), Core.SrcConstants.FillShadowPattern,
+            yield return this._create(nameof(this.FillShadowPattern), Core.SrcConstants.FillShadowPattern,
                 this.FillShadowPattern);
-            yield return this.Create(nameof(this.LineBeginArrow), Core.SrcConstants.LineBeginArrow, this.LineBeginArrow);
-            yield return this.Create(nameof(this.LineBeginArrowSize), Core.SrcConstants.LineBeginArrowSize,
+            yield return this._create(nameof(this.LineBeginArrow), Core.SrcConstants.LineBeginArrow, this.LineBeginArrow);
+            yield return this._create(nameof(this.LineBeginArrowSize), Core.SrcConstants.LineBeginArrowSize,
                 this.LineBeginArrowSize);
-            yield return this.Create(nameof(this.LineEndArrow), Core.SrcConstants.LineEndArrow, this.LineEndArrow);
-            yield return this.Create(nameof(this.LineEndArrowSize), Core.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
-            yield return this.Create(nameof(this.LineCap), Core.SrcConstants.LineCap, this.LineCap);
-            yield return this.Create(nameof(this.LineColor), Core.SrcConstants.LineColor, this.LineColor);
-            yield return this.Create(nameof(this.LineColorTransparency), Core.SrcConstants.LineColorTransparency,
+            yield return this._create(nameof(this.LineEndArrow), Core.SrcConstants.LineEndArrow, this.LineEndArrow);
+            yield return this._create(nameof(this.LineEndArrowSize), Core.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+            yield return this._create(nameof(this.LineCap), Core.SrcConstants.LineCap, this.LineCap);
+            yield return this._create(nameof(this.LineColor), Core.SrcConstants.LineColor, this.LineColor);
+            yield return this._create(nameof(this.LineColorTransparency), Core.SrcConstants.LineColorTransparency,
                 this.LineColorTransparency);
-            yield return this.Create(nameof(this.LinePattern), Core.SrcConstants.LinePattern, this.LinePattern);
-            yield return this.Create(nameof(this.LineWeight), Core.SrcConstants.LineWeight, this.LineWeight);
-            yield return this.Create(nameof(this.LineRounding), Core.SrcConstants.LineRounding, this.LineRounding);
+            yield return this._create(nameof(this.LinePattern), Core.SrcConstants.LinePattern, this.LinePattern);
+            yield return this._create(nameof(this.LineWeight), Core.SrcConstants.LineWeight, this.LineWeight);
+            yield return this._create(nameof(this.LineRounding), Core.SrcConstants.LineRounding, this.LineRounding);
         }
 
 

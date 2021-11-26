@@ -17,8 +17,8 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Value), Core.SrcConstants.UserDefCellValue, this.Value);
-            yield return this.Create(nameof(this.Prompt), Core.SrcConstants.UserDefCellPrompt, this.Prompt);
+            yield return this._create(nameof(this.Value), Core.SrcConstants.UserDefCellValue, this.Value);
+            yield return this._create(nameof(this.Prompt), Core.SrcConstants.UserDefCellPrompt, this.Prompt);
         }
 
         public void EncodeValues()
