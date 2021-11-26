@@ -12,75 +12,75 @@ namespace VisioScripting.Commands
         {
 
         }
-        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage page, double x0, double y0, double x1, double y1)
+        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
         {
             var rect = new VisioAutomation.Core.Rectangle(x0, y0, x1, y1);
-            return this.DrawRectangle(page,rect);
+            return this.DrawRectangle(targetpage,rect);
         }
 
-        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage page, VisioAutomation.Core.Rectangle r)
+        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, VisioAutomation.Core.Rectangle r)
         {
-            page = page.ResolveToPage(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawRectangle)))
             {
-                var shape = page.Page.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
+                var shape = targetpage.Page.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
                 return shape;
             }
         }
 
 
-        public IVisio.Shape DrawLine(VisioScripting.TargetPage page, double x0, double y0, double x1, double y1)
+        public IVisio.Shape DrawLine(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
         {
             var p0 = new VisioAutomation.Core.Point(x0, y0);
             var p1 = new VisioAutomation.Core.Point(x1, y1);
-            return this.DrawLine(page, p0, p1);
+            return this.DrawLine(targetpage, p0, p1);
         }
 
-        public IVisio.Shape DrawLine(VisioScripting.TargetPage page, VisioAutomation.Core.Point p0, VisioAutomation.Core.Point p1)
+        public IVisio.Shape DrawLine(VisioScripting.TargetPage targetpage, VisioAutomation.Core.Point p0, VisioAutomation.Core.Point p1)
         {
-            page = page.ResolveToPage(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawLine)))
             {
-                var shape = page.Page.DrawLine(p0,p1);
+                var shape = targetpage.Page.DrawLine(p0,p1);
                 return shape;
             }
         }
 
-        public IVisio.Shape DrawOval(VisioScripting.TargetPage page, VisioAutomation.Core.Rectangle rect)
+        public IVisio.Shape DrawOval(VisioScripting.TargetPage targetpage, VisioAutomation.Core.Rectangle rect)
         {
-            page = page.ResolveToPage(this._client);
-            var surface = new VisioAutomation.Core.SurfaceTarget(page.Page);
+            targetpage = targetpage.ResolveToPage(this._client);
+            var surface = new VisioAutomation.Core.SurfaceTarget(targetpage.Page);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
-                var shape = page.Page.DrawOval(rect);
+                var shape = targetpage.Page.DrawOval(rect);
                 return shape;
             }
         }
 
-        public IVisio.Shape DrawOval(VisioScripting.TargetPage page, double x0, double y0, double x1, double y1)
+        public IVisio.Shape DrawOval(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
         {
             var rect = new VisioAutomation.Core.Rectangle(x0, y0, x1, y1);
-            return this.DrawOval(page, rect);
+            return this.DrawOval(targetpage, rect);
         }
 
-        public IVisio.Shape DrawBezier(VisioScripting.TargetPage page, IEnumerable<VisioAutomation.Core.Point> points)
+        public IVisio.Shape DrawBezier(VisioScripting.TargetPage targetpage, IEnumerable<VisioAutomation.Core.Point> points)
         {
-            page = page.ResolveToPage(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
-                var shape = page.Page.DrawBezier(points.ToList());
+                var shape = targetpage.Page.DrawBezier(points.ToList());
                 return shape;
             }
         }
 
-        public IVisio.Shape DrawPolyLine(VisioScripting.TargetPage page, IList<VisioAutomation.Core.Point> points)
+        public IVisio.Shape DrawPolyLine(VisioScripting.TargetPage targetpage, IList<VisioAutomation.Core.Point> points)
         {
-            page = page.ResolveToPage(this._client);
+            targetpage = targetpage.ResolveToPage(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPolyLine)))
             {
-                var shape = page.Page.DrawPolyLine(points);
+                var shape = targetpage.Page.DrawPolyLine(points);
                 return shape;
             }
         }
@@ -107,7 +107,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        private static List<IVisio.Shape> _create_duplicates(IVisio.Page page,
+        private static List<IVisio.Shape> _create_duplicates(IVisio.Page targetpage,
                                            IVisio.Shape shape,
                                            int n)
         {
@@ -132,7 +132,7 @@ namespace VisioScripting.Commands
 
             var duplicated_shapes = new List<IVisio.Shape> { shape };
 
-            var application = page.Application;
+            var application = targetpage.Application;
             var win = application.ActiveWindow;
 
             foreach (int i in Enumerable.Range(0, num_doubles))
