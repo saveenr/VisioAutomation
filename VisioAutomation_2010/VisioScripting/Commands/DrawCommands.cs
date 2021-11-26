@@ -12,88 +12,88 @@ namespace VisioScripting.Commands
         {
 
         }
-        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
+        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage page, double x0, double y0, double x1, double y1)
         {
             var rect = new VisioAutomation.Core.Rectangle(x0, y0, x1, y1);
-            return this.DrawRectangle(targetpage,rect);
+            return this.DrawRectangle(page,rect);
         }
 
-        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage targetpage, VisioAutomation.Core.Rectangle r)
+        public IVisio.Shape DrawRectangle(VisioScripting.TargetPage page, VisioAutomation.Core.Rectangle r)
         {
-            targetpage = targetpage.ResolveToPage(this._client);
+            page = page.ResolveToPage(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawRectangle)))
             {
-                var shape = targetpage.Page.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
+                var shape = page.Page.DrawRectangle(r.Left, r.Bottom, r.Right, r.Top);
                 return shape;
             }
         }
 
 
-        public IVisio.Shape DrawLine(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
+        public IVisio.Shape DrawLine(VisioScripting.TargetPage page, double x0, double y0, double x1, double y1)
         {
             var p0 = new VisioAutomation.Core.Point(x0, y0);
             var p1 = new VisioAutomation.Core.Point(x1, y1);
-            return this.DrawLine(targetpage, p0, p1);
+            return this.DrawLine(page, p0, p1);
         }
 
-        public IVisio.Shape DrawLine(VisioScripting.TargetPage targetpage, VisioAutomation.Core.Point p0, VisioAutomation.Core.Point p1)
+        public IVisio.Shape DrawLine(VisioScripting.TargetPage page, VisioAutomation.Core.Point p0, VisioAutomation.Core.Point p1)
         {
-            targetpage = targetpage.ResolveToPage(this._client);
+            page = page.ResolveToPage(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawLine)))
             {
-                var shape = targetpage.Page.DrawLine(p0,p1);
+                var shape = page.Page.DrawLine(p0,p1);
                 return shape;
             }
         }
 
-        public IVisio.Shape DrawOval(VisioScripting.TargetPage targetpage, VisioAutomation.Core.Rectangle rect)
+        public IVisio.Shape DrawOval(VisioScripting.TargetPage page, VisioAutomation.Core.Rectangle rect)
         {
-            targetpage = targetpage.ResolveToPage(this._client);
-            var surface = new VisioAutomation.Core.SurfaceTarget(targetpage.Page);
+            page = page.ResolveToPage(this._client);
+            var surface = new VisioAutomation.Core.SurfaceTarget(page.Page);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
-                var shape = targetpage.Page.DrawOval(rect);
+                var shape = page.Page.DrawOval(rect);
                 return shape;
             }
         }
 
-        public IVisio.Shape DrawOval(VisioScripting.TargetPage targetpage, double x0, double y0, double x1, double y1)
+        public IVisio.Shape DrawOval(VisioScripting.TargetPage page, double x0, double y0, double x1, double y1)
         {
             var rect = new VisioAutomation.Core.Rectangle(x0, y0, x1, y1);
-            return this.DrawOval(targetpage, rect);
+            return this.DrawOval(page, rect);
         }
 
-        public IVisio.Shape DrawBezier(VisioScripting.TargetPage targetpage, IEnumerable<VisioAutomation.Core.Point> points)
+        public IVisio.Shape DrawBezier(VisioScripting.TargetPage page, IEnumerable<VisioAutomation.Core.Point> points)
         {
-            targetpage = targetpage.ResolveToPage(this._client);
+            page = page.ResolveToPage(this._client);
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawOval)))
             {
-                var shape = targetpage.Page.DrawBezier(points.ToList());
+                var shape = page.Page.DrawBezier(points.ToList());
                 return shape;
             }
         }
 
-        public IVisio.Shape DrawPolyLine(VisioScripting.TargetPage targetpage, IList<VisioAutomation.Core.Point> points)
+        public IVisio.Shape DrawPolyLine(VisioScripting.TargetPage page, IList<VisioAutomation.Core.Point> points)
         {
-            targetpage = targetpage.ResolveToPage(this._client);
+            page = page.ResolveToPage(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPolyLine)))
             {
-                var shape = targetpage.Page.DrawPolyLine(points);
+                var shape = page.Page.DrawPolyLine(points);
                 return shape;
             }
         }
 
 
-        public void Duplicate(VisioScripting.TargetSelection targetselection,int n)
+        public void Duplicate(VisioScripting.TargetSelection selection,int n)
         {
             if (n < 1)
             {
                 throw new System.ArgumentOutOfRangeException(nameof(n));
             }
 
-            targetselection = targetselection.ResolveToSelection(this._client);
+            selection = selection.ResolveToSelection(this._client);
 
             // TODO: Add ability to duplicate all the selected shapes, not just the first one
             // this dupicates exactly 1 shape N - times what it
@@ -101,9 +101,9 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(Duplicate)))
             {
-                var app = targetselection.Selection.Application;
+                var app = selection.Selection.Application;
                 var active_page = app.ActivePage;
-                var new_shapes = DrawCommands._create_duplicates(active_page, targetselection.Selection[1], n);
+                var new_shapes = DrawCommands._create_duplicates(active_page, selection.Selection[1], n);
             }
         }
 
