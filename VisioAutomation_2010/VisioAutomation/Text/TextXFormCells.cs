@@ -38,12 +38,12 @@ namespace VisioAutomation.Text
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<TextXFormCellsBuilder> TextXFormCells_lazy_builder = new System.Lazy<TextXFormCellsBuilder>();
+        private static readonly System.Lazy<Builder> TextXFormCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class TextXFormCellsBuilder : CellGroupBuilder<TextXFormCells>
+        class Builder : CellGroupBuilder<TextXFormCells>
         {
-            public TextXFormCellsBuilder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 

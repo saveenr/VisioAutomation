@@ -41,11 +41,11 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeXFormCellsBuilder> ShapeXFormCells_lazy_builder = new System.Lazy<ShapeXFormCellsBuilder>();
+        private static readonly System.Lazy<Builder> ShapeXFormCells_lazy_builder = new System.Lazy<Builder>();
 
-        class ShapeXFormCellsBuilder : CellGroupBuilder<XFormCells>
+        class Builder : CellGroupBuilder<XFormCells>
         {
-            public ShapeXFormCellsBuilder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 

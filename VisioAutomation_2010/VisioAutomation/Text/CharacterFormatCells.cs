@@ -73,12 +73,12 @@ namespace VisioAutomation.Text
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<CharacterFormatCellsBuilder> CharacterFormatCells_lazy_builder = new System.Lazy<CharacterFormatCellsBuilder>();
+        private static readonly System.Lazy<Builder> CharacterFormatCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class CharacterFormatCellsBuilder : CellGroupBuilder<CharacterFormatCells>
+        class Builder : CellGroupBuilder<CharacterFormatCells>
         {
-            public CharacterFormatCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

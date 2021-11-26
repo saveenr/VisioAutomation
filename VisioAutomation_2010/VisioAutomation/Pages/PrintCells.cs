@@ -49,11 +49,11 @@ namespace VisioAutomation.Pages
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PrintCellsBuilder> PagePrintCells_lazy_builder = new System.Lazy<PrintCellsBuilder>();
+        private static readonly System.Lazy<Builder> PagePrintCells_lazy_builder = new System.Lazy<Builder>();
 
-        class PrintCellsBuilder : CellGroupBuilder<PrintCells>
+        class Builder : CellGroupBuilder<PrintCells>
         {
-            public PrintCellsBuilder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 

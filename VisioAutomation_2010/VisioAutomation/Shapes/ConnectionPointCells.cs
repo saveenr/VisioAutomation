@@ -34,12 +34,12 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<ConnectionPointCellsBuilder> ConnectionPointCells_lazy_builder = new System.Lazy<ConnectionPointCellsBuilder>();
+        private static readonly System.Lazy<Builder> ConnectionPointCells_lazy_builder = new System.Lazy<Builder>();
 
-        class ConnectionPointCellsBuilder : CellGroupBuilder<ConnectionPointCells>
+        class Builder : CellGroupBuilder<ConnectionPointCells>
         {
 
-            public ConnectionPointCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

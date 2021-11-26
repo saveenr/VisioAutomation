@@ -197,12 +197,12 @@ namespace VisioAutomation.Text
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<TextBlockCellsBuilder> TextBlockCells_lazy_builder = new System.Lazy<TextBlockCellsBuilder>();
+        private static readonly System.Lazy<Builder> TextBlockCells_lazy_builder = new System.Lazy<Builder>();
 
-        class TextBlockCellsBuilder : CellGroupBuilder<TextBlockCells>
+        class Builder : CellGroupBuilder<TextBlockCells>
         {
 
-            public TextBlockCellsBuilder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 

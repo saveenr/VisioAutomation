@@ -39,15 +39,15 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<UserDefinedCellCellsBuilder> UserDefinedCells_lazy_builder = new System.Lazy<UserDefinedCellCellsBuilder>();
+        private static readonly System.Lazy<Builder> UserDefinedCells_lazy_builder = new System.Lazy<Builder>();
 
 
 
 
-        class UserDefinedCellCellsBuilder : CellGroupBuilder<UserDefinedCellCells>
+        class Builder : CellGroupBuilder<UserDefinedCellCells>
         {
 
-            public UserDefinedCellCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

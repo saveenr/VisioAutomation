@@ -42,13 +42,13 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<HyperlinkCellsBuilder> HyperLinkCells_lazy_builder = new System.Lazy<HyperlinkCellsBuilder>();
+        private static readonly System.Lazy<Builder> HyperLinkCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class HyperlinkCellsBuilder : CellGroupBuilder<HyperlinkCells>
+        class Builder : CellGroupBuilder<HyperlinkCells>
         {
 
-            public HyperlinkCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

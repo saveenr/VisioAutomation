@@ -38,11 +38,11 @@ namespace VisioAutomation.Pages
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<RulerAndGridCellsBuilder> PageRulerAndGridCells_lazy_builder = new System.Lazy<RulerAndGridCellsBuilder>();
+        private static readonly System.Lazy<Builder> PageRulerAndGridCells_lazy_builder = new System.Lazy<Builder>();
 
-        class RulerAndGridCellsBuilder : CellGroupBuilder<RulerAndGridCells>
+        class Builder : CellGroupBuilder<RulerAndGridCells>
         {
-            public RulerAndGridCellsBuilder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 

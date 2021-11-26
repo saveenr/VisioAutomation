@@ -41,11 +41,11 @@ namespace VisioAutomation.Shapes
         }
 
 
-        private static readonly System.Lazy<ControlCellsBuilder> ControlCells_lazy_builder = new System.Lazy<ControlCellsBuilder>();
+        private static readonly System.Lazy<Builder> ControlCells_lazy_builder = new System.Lazy<Builder>();
 
-        class ControlCellsBuilder : CellGroupBuilder<ControlCells>
+        class Builder : CellGroupBuilder<ControlCells>
         {
-            public ControlCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

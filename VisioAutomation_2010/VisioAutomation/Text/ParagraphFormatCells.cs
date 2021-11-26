@@ -56,12 +56,12 @@ namespace VisioAutomation.Text
         }
 
 
-        private static readonly System.Lazy<ParagraphFormatCellsBuilder> ParagraphFormatCells_lazy_builder = new System.Lazy<ParagraphFormatCellsBuilder>();
+        private static readonly System.Lazy<Builder> ParagraphFormatCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class ParagraphFormatCellsBuilder : CellGroupBuilder<ParagraphFormatCells>
+        class Builder : CellGroupBuilder<ParagraphFormatCells>
         {
-            public ParagraphFormatCellsBuilder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 

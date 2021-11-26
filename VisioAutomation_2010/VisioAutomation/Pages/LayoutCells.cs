@@ -78,12 +78,12 @@ namespace VisioAutomation.Pages
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageLayoutCellsBuilder> PageLayoutCells_lazy_builder = new System.Lazy<PageLayoutCellsBuilder>();
+        private static readonly System.Lazy<Builder> PageLayoutCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class PageLayoutCellsBuilder : CellGroupBuilder<LayoutCells>
+        class Builder : CellGroupBuilder<LayoutCells>
         {
-            public PageLayoutCellsBuilder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 
