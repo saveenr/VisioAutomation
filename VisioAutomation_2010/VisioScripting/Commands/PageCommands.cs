@@ -249,11 +249,11 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetPageFormatCells(TargetPages targetpages, VisioAutomation.Pages.FormatCells cells)
+        public void SetFormatCells(TargetPages targetpages, VisioAutomation.Pages.FormatCells cells)
         {
             targetpages = targetpages.ResolveToPages(this._client);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetPageFormatCells)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetFormatCells)))
             {
                 foreach (var page in targetpages.Pages)
                 {

@@ -52,11 +52,11 @@ namespace VisioAutomation.Pages
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<PageFormatCellsBuilder> PageFormatCells_lazy_builder = new System.Lazy<PageFormatCellsBuilder>();
+        private static readonly System.Lazy<FormatCellsBuilder> PageFormatCells_lazy_builder = new System.Lazy<FormatCellsBuilder>();
 
-        class PageFormatCellsBuilder : CellGroupBuilder<FormatCells>
+        class FormatCellsBuilder : CellGroupBuilder<FormatCells>
         {
-            public PageFormatCellsBuilder() : base(CellGroupBuilderType.SingleRow)
+            public FormatCellsBuilder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 

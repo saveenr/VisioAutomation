@@ -59,7 +59,7 @@ namespace VisioPowerShell.Commands.VisioPage
                     page_format_cells.Height = this.Height;
                 }
 
-                this.Client.Page.SetPageFormatCells(targetpages, page_format_cells);
+                this.Client.Page.SetFormatCells(targetpages, page_format_cells);
             }
 
 

@@ -88,12 +88,12 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<ShapeFormatCellsBuilder> shape_format_lazy_builder = new System.Lazy<ShapeFormatCellsBuilder>();
+        private static readonly System.Lazy<FormatCellsBuilder> shape_format_lazy_builder = new System.Lazy<FormatCellsBuilder>();
 
-        class ShapeFormatCellsBuilder : CellGroupBuilder<FormatCells>
+        class FormatCellsBuilder : CellGroupBuilder<FormatCells>
         {
 
-            public ShapeFormatCellsBuilder() : base(CellGroupBuilderType.SingleRow)
+            public FormatCellsBuilder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 
