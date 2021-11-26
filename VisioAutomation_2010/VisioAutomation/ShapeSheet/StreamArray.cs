@@ -20,13 +20,13 @@ namespace VisioAutomation.ShapeSheet.Streams
             if (array.Length % this.ChunkSize != 0)
             {
                 string msg = string.Format("Array length must be a multiple of {0}", this.ChunkSize);
-                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
+                throw new Exceptions.InternalAssertionException(msg);
             }
 
             if (count * this.ChunkSize != array.Length)
             {
                 string msg = string.Format("Array length does not match the number of cells {0} multiplied by the chunk size {1}", this.Count, this.ChunkSize);
-                throw new VisioAutomation.Exceptions.InternalAssertionException("Count does not match the number of short elements in the array");
+                throw new Exceptions.InternalAssertionException("Count does not match the number of short elements in the array");
             }
 
             this.Count = count;
@@ -34,12 +34,12 @@ namespace VisioAutomation.ShapeSheet.Streams
 
 
 
-        public static VASS.Streams.StreamArray FromSidSrc(IList<VisioAutomation.Core.SidSrc> sidsrcs)
+        public static StreamArray FromSidSrc(IList<Core.SidSrc> sidsrcs)
         {
             return FromSidSrc(sidsrcs.Count, sidsrcs);
         }
 
-        public static VASS.Streams.StreamArray FromSidSrc(int numcells, IEnumerable<VisioAutomation.Core.SidSrc> sidsrcs)
+        public static StreamArray FromSidSrc(int numcells, IEnumerable<Core.SidSrc> sidsrcs)
         {
             var num_shorts = numcells * 4;
             var array = new short[num_shorts];
@@ -62,12 +62,12 @@ namespace VisioAutomation.ShapeSheet.Streams
             return stream;
         }
 
-        public static VASS.Streams.StreamArray FromSrc(IList<VisioAutomation.Core.Src> srcs)
+        public static StreamArray FromSrc(IList<Core.Src> srcs)
         {
             return FromSrc(srcs.Count, srcs);
         }
 
-        public static VASS.Streams.StreamArray FromSrc(int numcells, IEnumerable<VisioAutomation.Core.Src> sidsrcs)
+        public static StreamArray FromSrc(int numcells, IEnumerable<Core.Src> sidsrcs)
         {
             var num_shorts = numcells * 3;
             var array = new short[num_shorts];

@@ -24,7 +24,7 @@ namespace VisioAutomation.Application.Logging
                 if (key_visio_application == null)
                 {
                     // key doesn't exist - can't continue
-                    throw new VisioAutomation.Exceptions.InternalAssertionException("Could not find the key visio application key in hkcu");
+                    throw new Exceptions.InternalAssertionException("Could not find the key visio application key in hkcu");
                 }
 
                 var subkeynames = key_visio_application.GetValueNames();

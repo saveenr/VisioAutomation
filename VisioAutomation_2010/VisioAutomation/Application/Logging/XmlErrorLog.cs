@@ -20,7 +20,7 @@ namespace VisioAutomation.Application.Logging
 
             var state = LogState.Start;
 
-            var lines = XmlErrorLog._get_lines(filename);
+            var lines = _get_lines(filename);
             lines.Reverse();
 
             var stack = new Stack<string>(lines);
@@ -43,7 +43,7 @@ namespace VisioAutomation.Application.Logging
                     }
                     else
                     {
-                        throw new System.ArgumentException("Unexpected Input in LogState.Start");
+                        throw new ArgumentException("Unexpected Input in LogState.Start");
                     }
                 }
                 else if (state == LogState.InFileSession)

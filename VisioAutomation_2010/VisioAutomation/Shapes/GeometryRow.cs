@@ -1,17 +1,16 @@
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes
 {
     public class GeometryRow
     {
-        public VisioAutomation.Core.CellValue X { get; set; }
-        public VisioAutomation.Core.CellValue Y { get; set; }
-        public VisioAutomation.Core.CellValue A { get; set; }
-        public VisioAutomation.Core.CellValue B { get; set; }
-        public VisioAutomation.Core.CellValue C { get; set; }
-        public VisioAutomation.Core.CellValue D { get; set; }
-        public VisioAutomation.Core.CellValue E { get; set; }
+        public Core.CellValue X { get; set; }
+        public Core.CellValue Y { get; set; }
+        public Core.CellValue A { get; set; }
+        public Core.CellValue B { get; set; }
+        public Core.CellValue C { get; set; }
+        public Core.CellValue D { get; set; }
+        public Core.CellValue E { get; set; }
         public IVisio.VisRowTags RowTag { get; set; }
 
         public GeometryRow(IVisio.VisRowTags tag)
@@ -33,13 +32,13 @@ namespace VisioAutomation.Shapes
 
         private void Update(short section_index, short row_index, ShapeSheet.Writers.SrcWriter writer)
         {
-            var x_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexX.Cell);
-            var y_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexY.Cell);
-            var a_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexA.Cell);
-            var b_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexB.Cell);
-            var c_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexC.Cell);
-            var d_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexD.Cell);
-            var e_src = new VA.Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexE.Cell);
+            var x_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexX.Cell);
+            var y_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexY.Cell);
+            var a_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexA.Cell);
+            var b_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexB.Cell);
+            var c_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexC.Cell);
+            var d_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexD.Cell);
+            var e_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexE.Cell);
 
             writer.SetValue(x_src, this.X);
             writer.SetValue(y_src, this.Y);

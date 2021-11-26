@@ -98,7 +98,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return cellqueryresults;
         }
 
-        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, VisioAutomation.Collections.ArraySegmentEnumerator<T> seg_enumerator)
+        private Rows<T> _shapesid_to_rows<T>(IList<int> shapeids, Collections.ArraySegmentEnumerator<T> seg_enumerator)
         {
             var rows = new Rows<T>(shapeids.Count);
             foreach (int shapeid in shapeids)
@@ -109,7 +109,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return rows;
         }
 
-        private Row<T> _shapedata_to_row<T>(short shapeid, VisioAutomation.Collections.ArraySegmentEnumerator<T> seg_enumerator)
+        private Row<T> _shapedata_to_row<T>(short shapeid, Collections.ArraySegmentEnumerator<T> seg_enumerator)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
@@ -138,7 +138,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private VASS.Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
+        private Streams.StreamArray _build_sidsrc_stream(IList<int> shapeids)
         {
             int numshapes = shapeids.Count;
             int numcells = this.Columns.Count * numshapes;
@@ -148,7 +148,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private IEnumerable<VisioAutomation.Core.Src> _enum_srcs()
+        private IEnumerable<Core.Src> _enum_srcs()
         {
             foreach (var col in this.Columns)
             {
@@ -156,13 +156,13 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private IEnumerable<VisioAutomation.Core.SidSrc> _enum_sidsrcs(IList<int> shapeids)
+        private IEnumerable<Core.SidSrc> _enum_sidsrcs(IList<int> shapeids)
         {
             foreach (var shapeid in shapeids)
             {
                 foreach(var col in this.Columns)
                 {
-                    yield return new VisioAutomation.Core.SidSrc((short)shapeid, col.Src);
+                    yield return new Core.SidSrc((short)shapeid, col.Src);
                 }
             }
         }

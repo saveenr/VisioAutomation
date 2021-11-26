@@ -20,17 +20,17 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._items.Clear();
         }
 
-        public void Add(VisioAutomation.Core.SidSrc sidsrc, string value)
+        public void Add(Core.SidSrc sidsrc, string value)
         {
             _check_for_sidsrc();
             var item = new WriteRecord(sidsrc, value);
             this._items.Add(item);
         }
 
-        public void Add(VisioAutomation.Core.Src src, string value)
+        public void Add(Core.Src src, string value)
         {
             _check_for_src();
-            var item = new WriteRecord(new VisioAutomation.Core.SidSrc(-1, src), value);
+            var item = new WriteRecord(new Core.SidSrc(-1, src), value);
             this._items.Add(item);
         }
 

@@ -60,10 +60,10 @@ namespace VisioAutomation.Shapes
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            var writer = new ShapeSheet.Writers.SrcWriter();
             writer.SetValues(hyperlink, row);
 
-            writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
+            writer.Commit(shape, Core.CellValueType.Formula);
 
             return row;
         }

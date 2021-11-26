@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetFormulasU(srcstream);
             var shape_index = 0;
             var shape_cache_item = cache[shape_index];
-            var reader = new VisioAutomation.Collections.ArraySegmentEnumerator<string>(values);
+            var reader = new Collections.ArraySegmentEnumerator<string>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, shape_cache_item, reader);
 
             return output_for_shape;
@@ -60,7 +60,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var sectioncache = cache[shape_index];
-            var reader = new VisioAutomation.Collections.ArraySegmentEnumerator<TResult>(values);
+            var reader = new Collections.ArraySegmentEnumerator<TResult>(values);
             var output_for_shape = this._create_output_for_shape(surface.ID16, sectioncache, reader);
             return output_for_shape;
         }
@@ -87,7 +87,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
             const object[] unitcodes = null;
             var values = surface.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new VisioAutomation.Collections.ArraySegmentEnumerator<TResult>(values);
+            var reader = new Collections.ArraySegmentEnumerator<TResult>(values);
             var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
             return results;
         }
@@ -99,7 +99,7 @@ namespace VisioAutomation.ShapeSheet.Query
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
             var values = surface.GetFormulasU(srcstream);
-            var reader = new VisioAutomation.Collections.ArraySegmentEnumerator<string>(values);
+            var reader = new Collections.ArraySegmentEnumerator<string>(values);
             var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
             return results;
         }
@@ -123,7 +123,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 var shapecache = new ShapeCache(this.Count);
                 foreach (var sec_cols in this)
                 {
-                    var shapecacheitem = SectionQuery._create_shapesectioncacheitem(shapeidpair, sec_cols.SectionIndex, sec_cols);
+                    var shapecacheitem = _create_shapesectioncacheitem(shapeidpair, sec_cols.SectionIndex, sec_cols);
                     shapecache.Add(shapecacheitem);
                 }
 
@@ -142,7 +142,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private SectionQueryResults<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs, SectionQueryCache sectioncache, VisioAutomation.Collections.ArraySegmentEnumerator<T> segreader)
+        private SectionQueryResults<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs, SectionQueryCache sectioncache, Collections.ArraySegmentEnumerator<T> segreader)
         {
             var results = new SectionQueryResults<T>();
 
@@ -157,13 +157,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems, VisioAutomation.Collections.ArraySegmentEnumerator<T> segreader)
+        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems, Collections.ArraySegmentEnumerator<T> segreader)
         {
             int original_seg_count = segreader.Count;
 
             if (shapecacheitems==null)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
+                throw new Exceptions.InternalAssertionException();
             }
 
 
@@ -212,15 +212,15 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private VASS.Streams.StreamArray _build_sidsrc_stream(Core.ShapeIDPairs shapeidpairs, SectionQueryCache cache)
+        private Streams.StreamArray _build_sidsrc_stream(Core.ShapeIDPairs shapeidpairs, SectionQueryCache cache)
         {
             int numcells = cache.CountCells();
             var sidsrcs = _sidsrcs_for_shapes(shapeidpairs, cache);
-            var stream = VASS.Streams.StreamArray.FromSidSrc(numcells,sidsrcs);
+            var stream = Streams.StreamArray.FromSidSrc(numcells,sidsrcs);
             return stream;
         }
 
-        private static IEnumerable<VisioAutomation.Core.SidSrc> _sidsrcs_for_shapes(Core.ShapeIDPairs shapeidpairs, SectionQueryCache cache)
+        private static IEnumerable<Core.SidSrc> _sidsrcs_for_shapes(Core.ShapeIDPairs shapeidpairs, SectionQueryCache cache)
         {
             foreach (int shape_ord in Enumerable.Range(0,shapeidpairs.Count))
             {
@@ -235,7 +235,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static IEnumerable<VisioAutomation.Core.SidSrc> _sidsrcs_for_shape(int shapeid, ShapeCache shapecache)
+        private static IEnumerable<Core.SidSrc> _sidsrcs_for_shape(int shapeid, ShapeCache shapecache)
         {
             foreach (var shapecacheitem in shapecache)
             {
@@ -245,7 +245,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     var section_index = shapecacheitem.SectionIndex;
                     foreach (var col in cols)
                     {
-                        var sidsrc = new VisioAutomation.Core.SidSrc(
+                        var sidsrc = new Core.SidSrc(
                             (short)shapeid,
                             (short)section_index,
                             (short)row_index,
@@ -303,7 +303,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return sec_cols;
         }
 
-        public SectionQueryColumns Add(VisioAutomation.Core.Src src)
+        public SectionQueryColumns Add(Core.Src src)
         {
             return this.Add((IVisio.VisSectionIndices)src.Section);
         }

@@ -5,60 +5,60 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : VASS.CellGroups.CellGroup
+    public class LockCells : CellGroup
     {
-        public VisioAutomation.Core.CellValue Aspect { get; set; }
-        public VisioAutomation.Core.CellValue Begin { get; set; }
-        public VisioAutomation.Core.CellValue CalcWH { get; set; }
-        public VisioAutomation.Core.CellValue Crop { get; set; }
-        public VisioAutomation.Core.CellValue CustProp { get; set; }
-        public VisioAutomation.Core.CellValue Delete { get; set; }
-        public VisioAutomation.Core.CellValue End { get; set; }
-        public VisioAutomation.Core.CellValue Format { get; set; }
-        public VisioAutomation.Core.CellValue FromGroupFormat { get; set; }
-        public VisioAutomation.Core.CellValue Group { get; set; }
-        public VisioAutomation.Core.CellValue Height { get; set; }
-        public VisioAutomation.Core.CellValue MoveX { get; set; }
-        public VisioAutomation.Core.CellValue MoveY { get; set; }
-        public VisioAutomation.Core.CellValue Rotate { get; set; }
-        public VisioAutomation.Core.CellValue Select { get; set; }
-        public VisioAutomation.Core.CellValue TextEdit { get; set; }
-        public VisioAutomation.Core.CellValue ThemeColors { get; set; }
-        public VisioAutomation.Core.CellValue ThemeEffects { get; set; }
-        public VisioAutomation.Core.CellValue VertexEdit { get; set; }
-        public VisioAutomation.Core.CellValue Width { get; set; }
+        public Core.CellValue Aspect { get; set; }
+        public Core.CellValue Begin { get; set; }
+        public Core.CellValue CalcWH { get; set; }
+        public Core.CellValue Crop { get; set; }
+        public Core.CellValue CustProp { get; set; }
+        public Core.CellValue Delete { get; set; }
+        public Core.CellValue End { get; set; }
+        public Core.CellValue Format { get; set; }
+        public Core.CellValue FromGroupFormat { get; set; }
+        public Core.CellValue Group { get; set; }
+        public Core.CellValue Height { get; set; }
+        public Core.CellValue MoveX { get; set; }
+        public Core.CellValue MoveY { get; set; }
+        public Core.CellValue Rotate { get; set; }
+        public Core.CellValue Select { get; set; }
+        public Core.CellValue TextEdit { get; set; }
+        public Core.CellValue ThemeColors { get; set; }
+        public Core.CellValue ThemeEffects { get; set; }
+        public Core.CellValue VertexEdit { get; set; }
+        public Core.CellValue Width { get; set; }
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Aspect), VisioAutomation.Core.SrcConstants.LockAspect, this.Aspect);
-            yield return this.Create(nameof(this.Begin), VisioAutomation.Core.SrcConstants.LockBegin, this.Begin);
-            yield return this.Create(nameof(this.CalcWH), VisioAutomation.Core.SrcConstants.LockCalcWH, this.CalcWH);
-            yield return this.Create(nameof(this.Crop), VisioAutomation.Core.SrcConstants.LockCrop, this.Crop);
-            yield return this.Create(nameof(this.CustProp), VisioAutomation.Core.SrcConstants.LockCustomProp, this.CustProp);
-            yield return this.Create(nameof(this.Delete), VisioAutomation.Core.SrcConstants.LockDelete, this.Delete);
-            yield return this.Create(nameof(this.End), VisioAutomation.Core.SrcConstants.LockEnd, this.End);
-            yield return this.Create(nameof(this.Format), VisioAutomation.Core.SrcConstants.LockFormat, this.Format);
-            yield return this.Create(nameof(this.FromGroupFormat), VisioAutomation.Core.SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
-            yield return this.Create(nameof(this.Group), VisioAutomation.Core.SrcConstants.LockGroup, this.Group);
-            yield return this.Create(nameof(this.Height), VisioAutomation.Core.SrcConstants.LockHeight, this.Height);
-            yield return this.Create(nameof(this.MoveX), VisioAutomation.Core.SrcConstants.LockMoveX, this.MoveX);
-            yield return this.Create(nameof(this.MoveY), VisioAutomation.Core.SrcConstants.LockMoveY, this.MoveY);
-            yield return this.Create(nameof(this.Rotate), VisioAutomation.Core.SrcConstants.LockRotate, this.Rotate);
-            yield return this.Create(nameof(this.Select), VisioAutomation.Core.SrcConstants.LockSelect, this.Select);
-            yield return this.Create(nameof(this.TextEdit), VisioAutomation.Core.SrcConstants.LockTextEdit, this.TextEdit);
-            yield return this.Create(nameof(this.ThemeColors), VisioAutomation.Core.SrcConstants.LockThemeColors, this.ThemeColors);
-            yield return this.Create(nameof(this.ThemeEffects), VisioAutomation.Core.SrcConstants.LockThemeEffects, this.ThemeEffects);
-            yield return this.Create(nameof(this.VertexEdit), VisioAutomation.Core.SrcConstants.LockVertexEdit, this.VertexEdit);
-            yield return this.Create(nameof(this.Width), VisioAutomation.Core.SrcConstants.LockWidth, this.Width);
+            yield return this.Create(nameof(this.Aspect), Core.SrcConstants.LockAspect, this.Aspect);
+            yield return this.Create(nameof(this.Begin), Core.SrcConstants.LockBegin, this.Begin);
+            yield return this.Create(nameof(this.CalcWH), Core.SrcConstants.LockCalcWH, this.CalcWH);
+            yield return this.Create(nameof(this.Crop), Core.SrcConstants.LockCrop, this.Crop);
+            yield return this.Create(nameof(this.CustProp), Core.SrcConstants.LockCustomProp, this.CustProp);
+            yield return this.Create(nameof(this.Delete), Core.SrcConstants.LockDelete, this.Delete);
+            yield return this.Create(nameof(this.End), Core.SrcConstants.LockEnd, this.End);
+            yield return this.Create(nameof(this.Format), Core.SrcConstants.LockFormat, this.Format);
+            yield return this.Create(nameof(this.FromGroupFormat), Core.SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
+            yield return this.Create(nameof(this.Group), Core.SrcConstants.LockGroup, this.Group);
+            yield return this.Create(nameof(this.Height), Core.SrcConstants.LockHeight, this.Height);
+            yield return this.Create(nameof(this.MoveX), Core.SrcConstants.LockMoveX, this.MoveX);
+            yield return this.Create(nameof(this.MoveY), Core.SrcConstants.LockMoveY, this.MoveY);
+            yield return this.Create(nameof(this.Rotate), Core.SrcConstants.LockRotate, this.Rotate);
+            yield return this.Create(nameof(this.Select), Core.SrcConstants.LockSelect, this.Select);
+            yield return this.Create(nameof(this.TextEdit), Core.SrcConstants.LockTextEdit, this.TextEdit);
+            yield return this.Create(nameof(this.ThemeColors), Core.SrcConstants.LockThemeColors, this.ThemeColors);
+            yield return this.Create(nameof(this.ThemeEffects), Core.SrcConstants.LockThemeEffects, this.ThemeEffects);
+            yield return this.Create(nameof(this.VertexEdit), Core.SrcConstants.LockVertexEdit, this.VertexEdit);
+            yield return this.Create(nameof(this.Width), Core.SrcConstants.LockWidth, this.Width);
         }
 
-        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeid, VisioAutomation.Core.CellValueType type)
+        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeid, Core.CellValueType type)
         {
             var reader = LockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeid, type);
         }
 
-        public static LockCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static LockCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = LockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -67,37 +67,37 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<LockCellsBuilder> LockCells_lazy_builder = new System.Lazy<LockCellsBuilder>();
 
 
-        class LockCellsBuilder : VASS.CellGroups.CellGroupBuilder<LockCells>
+        class LockCellsBuilder : CellGroupBuilder<LockCells>
         {
-            public LockCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
+            public LockCellsBuilder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 
-            public override LockCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override LockCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new LockCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+                var getcellvalue = row_to_cellgroup(row, cols);
 
-                cells.Aspect = getcellvalue(nameof(LockCells.Aspect));
-                cells.Begin = getcellvalue(nameof(LockCells.Begin));
-                cells.CalcWH = getcellvalue(nameof(LockCells.CalcWH));
-                cells.Crop = getcellvalue(nameof(LockCells.Crop));
-                cells.CustProp = getcellvalue(nameof(LockCells.CustProp));
-                cells.Delete = getcellvalue(nameof(LockCells.Delete));
-                cells.End = getcellvalue(nameof(LockCells.End));
-                cells.Format = getcellvalue(nameof(LockCells.Format));
-                cells.FromGroupFormat = getcellvalue(nameof(LockCells.FromGroupFormat));
-                cells.Group = getcellvalue(nameof(LockCells.Group));
-                cells.Height = getcellvalue(nameof(LockCells.Height));
-                cells.MoveX = getcellvalue(nameof(LockCells.MoveX));
-                cells.MoveY = getcellvalue(nameof(LockCells.MoveY));
-                cells.Rotate = getcellvalue(nameof(LockCells.Rotate));
-                cells.Select = getcellvalue(nameof(LockCells.Select));
-                cells.TextEdit = getcellvalue(nameof(LockCells.TextEdit));
-                cells.ThemeColors = getcellvalue(nameof(LockCells.ThemeColors));
-                cells.ThemeEffects = getcellvalue(nameof(LockCells.ThemeEffects));
-                cells.VertexEdit = getcellvalue(nameof(LockCells.VertexEdit));
-                cells.Width = getcellvalue(nameof(LockCells.Width));
+                cells.Aspect = getcellvalue(nameof(Aspect));
+                cells.Begin = getcellvalue(nameof(Begin));
+                cells.CalcWH = getcellvalue(nameof(CalcWH));
+                cells.Crop = getcellvalue(nameof(Crop));
+                cells.CustProp = getcellvalue(nameof(CustProp));
+                cells.Delete = getcellvalue(nameof(Delete));
+                cells.End = getcellvalue(nameof(End));
+                cells.Format = getcellvalue(nameof(Format));
+                cells.FromGroupFormat = getcellvalue(nameof(FromGroupFormat));
+                cells.Group = getcellvalue(nameof(Group));
+                cells.Height = getcellvalue(nameof(Height));
+                cells.MoveX = getcellvalue(nameof(MoveX));
+                cells.MoveY = getcellvalue(nameof(MoveY));
+                cells.Rotate = getcellvalue(nameof(Rotate));
+                cells.Select = getcellvalue(nameof(Select));
+                cells.TextEdit = getcellvalue(nameof(TextEdit));
+                cells.ThemeColors = getcellvalue(nameof(ThemeColors));
+                cells.ThemeEffects = getcellvalue(nameof(ThemeEffects));
+                cells.VertexEdit = getcellvalue(nameof(VertexEdit));
+                cells.Width = getcellvalue(nameof(Width));
                 return cells;
             }
         }

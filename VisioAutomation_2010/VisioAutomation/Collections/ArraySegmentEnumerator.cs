@@ -21,7 +21,7 @@ namespace VisioAutomation.Collections
 
         public int Capacity => this._array.Length;
 
-        public VisioAutomation.Collections.ArraySegment<T> GetNextSegment(int size)
+        public ArraySegment<T> GetNextSegment(int size)
         {
             // Keep in mind its ALWAYS OK to ask for a size of zero
             // even if there's nothing left to enumerte
@@ -48,7 +48,7 @@ namespace VisioAutomation.Collections
                 throw new System.ArgumentOutOfRangeException(nameof(size),msg);
             }
 
-            var seg = new VisioAutomation.Collections.ArraySegment<T>(this._array, this._pos, size);
+            var seg = new ArraySegment<T>(this._array, this._pos, size);
             this._pos += size;
             this._count += size;
             return seg;

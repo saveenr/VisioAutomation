@@ -12,12 +12,12 @@ namespace VisioAutomation.Shapes
             }
 
             int num_geometry_sections = shape.GeometryCount;
-            short new_sec_index = GeometryHelper._get_geometry_section_index((short)num_geometry_sections);
+            short new_sec_index = _get_geometry_section_index((short)num_geometry_sections);
             short actual_sec_index = shape.AddSection(new_sec_index);
 
             if (actual_sec_index != new_sec_index)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
+                throw new Exceptions.InternalAssertionException();
             }
             short row_index = shape.AddRow(new_sec_index, (short)IVisio.VisRowIndices.visRowComponent, (short)IVisio.VisRowTags.visTagComponent);
 
@@ -36,7 +36,7 @@ namespace VisioAutomation.Shapes
             int num = shape.GeometryCount;
             for (int i = num-1; i >=0; i--)
             {
-                GeometryHelper._delete_section(shape, (short)i);                
+                _delete_section(shape, (short)i);                
             }
         }
 
@@ -47,7 +47,7 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            short target_section_index = GeometryHelper._get_geometry_section_index(index);
+            short target_section_index = _get_geometry_section_index(index);
             shape.DeleteSection(target_section_index);
         }
     }

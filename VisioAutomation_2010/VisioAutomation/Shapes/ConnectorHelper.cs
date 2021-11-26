@@ -9,7 +9,7 @@ namespace VisioAutomation.Shapes
     {
         public static void ConnectShapes(IVisio.Shape from_shape, IVisio.Shape to_shape, IVisio.Shape connector_shape)
         {
-            ConnectorHelper.ConnectShapes(from_shape, to_shape, connector_shape, true);
+            ConnectShapes(from_shape, to_shape, connector_shape, true);
         }
 
         public static void ConnectShapes(IVisio.Shape from_shape, IVisio.Shape to_shape, IVisio.Shape connector_shape, bool manual_connection)
@@ -69,7 +69,7 @@ namespace VisioAutomation.Shapes
         public static List<IVisio.Shape> ConnectShapes( IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes,
             IVisio.Master connector_master)
         {
-            return ConnectorHelper.ConnectShapes(page, fromshapes, toshapes, connector_master, true);
+            return ConnectShapes(page, fromshapes, toshapes, connector_master, true);
         }
 
         public static List<IVisio.Shape> ConnectShapes(IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master connector_master, bool force_manual)
@@ -112,12 +112,12 @@ namespace VisioAutomation.Shapes
             {
                 var masters = Enumerable.Repeat(connector_master, num_connectors).ToList();
                 short[] con_shapeids = page.DropManyU(masters, points);
-                con_shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);                
+                con_shapes = ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);                
             }
             else
             {
                 short[] con_shapeids = Pages.PageHelper.DropManyAutoConnectors(page, points);
-                con_shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);
+                con_shapes = ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);
             }
 
             for (int i = 0; i < num_connectors; i++)
@@ -126,7 +126,7 @@ namespace VisioAutomation.Shapes
                 var to_shape = toshapes[i];
                 var connector = con_shapes[i];
 
-                ConnectorHelper.ConnectShapes(from_shape, to_shape, connector, true);
+                ConnectShapes(from_shape, to_shape, connector, true);
 
                 connectors.Add(connector);
             }

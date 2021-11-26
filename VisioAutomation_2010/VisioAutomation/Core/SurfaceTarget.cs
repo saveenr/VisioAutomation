@@ -71,7 +71,7 @@ namespace VisioAutomation.Core
 
         public short[] DropManyU(
             IList<IVisio.Master> masters,
-            IEnumerable<VisioAutomation.Core.Point> points)
+            IEnumerable<Point> points)
         {
             if (masters == null)
             {
@@ -90,7 +90,7 @@ namespace VisioAutomation.Core
 
             // NOTE: DropMany will fail if you pass in zero items to drop
             var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = VisioAutomation.Core.Point.ToDoubles(points).ToArray();
+            var xy_array = Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 
@@ -108,7 +108,7 @@ namespace VisioAutomation.Core
 
         public IVisio.Shape Drop(
             IVisio.Master master,
-            VisioAutomation.Core.Point point)
+            Point point)
         {
             if (master == null)
             {
@@ -219,7 +219,7 @@ namespace VisioAutomation.Core
             if (!_is_valid_result_type(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
-                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
+                throw new Exceptions.InternalAssertionException(msg);
             }
         }
 
@@ -249,7 +249,7 @@ namespace VisioAutomation.Core
             else
             {
                 string msg = string.Format("Unsupported Result Type: {0}", type.Name);
-                throw new VisioAutomation.Exceptions.InternalAssertionException(msg);
+                throw new Exceptions.InternalAssertionException(msg);
             }
             return flags;
         }

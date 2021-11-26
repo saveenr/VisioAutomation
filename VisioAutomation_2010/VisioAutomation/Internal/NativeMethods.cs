@@ -14,9 +14,9 @@ namespace VisioAutomation.Internal
         public static string GetWindowText(IntPtr hWnd)
         {
             // Allocate correct string length first
-            int length = NativeMethods.GetWindowTextLength(hWnd);
+            int length = GetWindowTextLength(hWnd);
             var sb = new System.Text.StringBuilder(length + 1);
-            NativeMethods.GetWindowText(hWnd, sb, sb.Capacity);
+            GetWindowText(hWnd, sb, sb.Capacity);
             return sb.ToString();
         }
         

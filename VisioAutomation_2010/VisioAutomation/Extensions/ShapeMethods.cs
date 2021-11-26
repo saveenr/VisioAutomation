@@ -9,7 +9,7 @@ namespace VisioAutomation.Extensions
         {
             double bbx0, bby0, bbx1, bby1;
             shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-            var r = new VisioAutomation.Core.Rectangle(bbx0, bby0, bbx1, bby1);
+            var r = new Core.Rectangle(bbx0, bby0, bbx1, bby1);
             return r;
         }
 
@@ -55,12 +55,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Shapes shapes)
         {
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToEnumerable(() => shapes.Count, i => shapes[i + 1]);
+            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => shapes.Count, i => shapes[i + 1]);
         }
 
         public static List<IVisio.Shape> ToList(this IVisio.Shapes shapes)
         {
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => shapes.Count, i => shapes[i + 1]);
+            return Internal.Extensions.ExtensionHelpers.ToList(() => shapes.Count, i => shapes[i + 1]);
         }
 
         public static string[] GetFormulasU(this IVisio.Shape shape, ShapeSheet.Streams.StreamArray stream)

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes
 {
@@ -42,13 +41,13 @@ namespace VisioAutomation.Shapes
             short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            var writer = new ShapeSheet.Writers.SrcWriter();
 
-            var src_nofill = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoFill.Cell);
-            var src_noline = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoLine.Cell);
-            var src_noshow = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoShow.Cell);
-            var src_nosnap = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoSnap.Cell);
-            var src_noquickdrag = new VA.Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoQuickDrag.Cell);
+            var src_nofill = new Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoFill.Cell);
+            var src_noline = new Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoLine.Cell);
+            var src_noshow = new Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoShow.Cell);
+            var src_nosnap = new Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoSnap.Cell);
+            var src_noquickdrag = new Core.Src(sec_index, 0, Core.SrcConstants.GeometryNoQuickDrag.Cell);
 
             writer.SetValue(src_nofill, this.NoFill);
             writer.SetValue(src_noline, this.NoLine);

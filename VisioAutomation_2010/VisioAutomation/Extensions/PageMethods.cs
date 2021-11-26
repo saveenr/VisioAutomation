@@ -10,7 +10,7 @@ namespace VisioAutomation.Extensions
         {
             double bbx0, bby0, bbx1, bby1;
             page.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
-            var r = new VisioAutomation.Core.Rectangle(bbx0, bby0, bbx1, bby1);
+            var r = new Core.Rectangle(bbx0, bby0, bbx1, bby1);
             return r;
         }
 
@@ -63,7 +63,7 @@ namespace VisioAutomation.Extensions
             // IVisio.VisDrawSplineFlags.visSpline1D
 
             var flags = 0;
-            double[] pts_dbl_a = VisioAutomation.Core.Point.ToDoubles(controlpoints).ToArray();
+            double[] pts_dbl_a = Core.Point.ToDoubles(controlpoints).ToArray();
             double[] kts_dbl_a = knots.ToArray();
             double[] weights_dbl_a = weights.ToArray();
 
@@ -90,13 +90,13 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Page> ToEnumerable(this IVisio.Pages pages)
         {
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToEnumerable(() => pages.Count,
+            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => pages.Count,
                 i => pages[i + 1]);
         }
 
         public static List<IVisio.Page> ToList(this IVisio.Pages pages)
         {
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
+            return Internal.Extensions.ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
         }
 
         public static string[] GetNamesU(this IVisio.Pages pages)
@@ -136,9 +136,9 @@ namespace VisioAutomation.Extensions
             return s;
         }
 
-        public static IVisio.Shape DrawPolyLine(this IVisio.Page page, IList<VisioAutomation.Core.Point> points)
+        public static IVisio.Shape DrawPolyLine(this IVisio.Page page, IList<Core.Point> points)
         {
-            var doubles_array = VisioAutomation.Core.Point.ToDoubles(points).ToArray();
+            var doubles_array = Core.Point.ToDoubles(points).ToArray();
             var shape = page.DrawPolyline(doubles_array, 0);
             return shape;
         }

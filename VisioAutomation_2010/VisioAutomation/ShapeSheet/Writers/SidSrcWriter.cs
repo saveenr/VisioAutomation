@@ -9,18 +9,18 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
         }
 
-        public void Commit(IVisio.Page page, VisioAutomation.Core.CellValueType type)
+        public void Commit(IVisio.Page page, Core.CellValueType type)
         {
             var surface = new Core.SurfaceTarget(page);
             this.Commit(surface, type);
         }
-        public void SetValue(short id, VisioAutomation.Core.Src src, VisioAutomation.Core.CellValue formula)
+        public void SetValue(short id, Core.Src src, Core.CellValue formula)
         {
-            var sidsrc = new VisioAutomation.Core.SidSrc(id, src);
+            var sidsrc = new Core.SidSrc(id, src);
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetValue(VisioAutomation.Core.SidSrc sidsrc, VisioAutomation.Core.CellValue formula)
+        public void SetValue(Core.SidSrc sidsrc, Core.CellValue formula)
         {
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void __SetValueIgnoreNull(VisioAutomation.Core.SidSrc sidsrc, VisioAutomation.Core.CellValue formula)
+        private void __SetValueIgnoreNull(Core.SidSrc sidsrc, Core.CellValue formula)
         {
             if (this._records == null)
             {
@@ -72,7 +72,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             if (stream.Array.Length == 0)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
+                throw new Exceptions.InternalAssertionException();
             }
 
             var flags = this._compute_setformula_flags();
@@ -80,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             int c = surface.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void Commit(Core.SurfaceTarget surface, VisioAutomation.Core.CellValueType type)
+        public void Commit(Core.SurfaceTarget surface, Core.CellValueType type)
         {
             if ((this._records == null || this._records.Count < 1))
             {
@@ -92,10 +92,10 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             if (stream.Array.Length == 0)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
+                throw new Exceptions.InternalAssertionException();
             }
 
-            if (type == VisioAutomation.Core.CellValueType.Formula)
+            if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
                 int c = surface.SetFormulas(stream, items, (short)flags);

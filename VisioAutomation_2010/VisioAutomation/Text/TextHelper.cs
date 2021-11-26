@@ -25,14 +25,14 @@ namespace VisioAutomation.Text
 
             const short row = 0;
 
-            var srcs = new List<VisioAutomation.Core.Src>(num_stops * 3);
+            var srcs = new List<Core.Src>(num_stops * 3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
 
-                var src_tabpos = new VisioAutomation.Core.Src(tab_section, row, (short)(i + 1));
-                var src_tabalign = new VisioAutomation.Core.Src(tab_section, row, (short)(i + 2));
-                var src_tabother = new VisioAutomation.Core.Src(tab_section, row, (short)(i + 3));
+                var src_tabpos = new Core.Src(tab_section, row, (short)(i + 1));
+                var src_tabalign = new Core.Src(tab_section, row, (short)(i + 2));
+                var src_tabother = new Core.Src(tab_section, row, (short)(i + 3));
 
                 srcs.Add(src_tabpos);
                 srcs.Add(src_tabalign);
@@ -88,7 +88,7 @@ namespace VisioAutomation.Text
             shape.RowType[tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            var writer = new VASS.Writers.SrcWriter();
             for (int stop_index = 0; stop_index < stops.Count; stop_index++)
             {
                 int i = stop_index * 3;
@@ -96,16 +96,16 @@ namespace VisioAutomation.Text
                 var alignment = ((int)stops[stop_index].Alignment).ToString(culture);
                 var position = ((int)stops[stop_index].Position).ToString(culture);
 
-                var src_tabpos = new VisioAutomation.Core.Src(tab_section, row, (short)(i + 1));
-                var src_tabalign = new VisioAutomation.Core.Src(tab_section, row, (short)(i + 2));
-                var src_tabother = new VisioAutomation.Core.Src(tab_section, row, (short)(i + 3));
+                var src_tabpos = new Core.Src(tab_section, row, (short)(i + 1));
+                var src_tabalign = new Core.Src(tab_section, row, (short)(i + 2));
+                var src_tabother = new Core.Src(tab_section, row, (short)(i + 3));
 
                 writer.SetValue(src_tabpos, position); // tab position
                 writer.SetValue(src_tabalign, alignment); // tab alignment
                 writer.SetValue(src_tabother, "0"); // tab unknown
             }
 
-            writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
+            writer.Commit(shape, Core.CellValueType.Formula);
         }
 
         private static IVisio.VisRowTags _get_tab_tag_for_stops(int stops)
@@ -143,7 +143,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            var cell_tabstopcount = shape.CellsSRC[VisioAutomation.Core.SrcConstants.TabStopCount.Section, VisioAutomation.Core.SrcConstants.TabStopCount.Row, VisioAutomation.Core.SrcConstants.TabStopCount.Cell];
+            var cell_tabstopcount = shape.CellsSRC[Core.SrcConstants.TabStopCount.Section, Core.SrcConstants.TabStopCount.Row, Core.SrcConstants.TabStopCount.Cell];
             const short rounding = 0;
 
             return cell_tabstopcount.ResultInt[(short)IVisio.VisUnitCodes.visNumber, rounding];
@@ -167,31 +167,31 @@ namespace VisioAutomation.Text
                 return;
             }
 
-            var cell_tabstopcount = shape.CellsSRC[VisioAutomation.Core.SrcConstants.TabStopCount.Section, VisioAutomation.Core.SrcConstants.TabStopCount.Row, VisioAutomation.Core.SrcConstants.TabStopCount.Cell];
+            var cell_tabstopcount = shape.CellsSRC[Core.SrcConstants.TabStopCount.Section, Core.SrcConstants.TabStopCount.Row, Core.SrcConstants.TabStopCount.Cell];
             cell_tabstopcount.FormulaForce = "0";
 
             const string formula = "0";
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            var writer = new VASS.Writers.SrcWriter();
             for (int i = 1; i < num_existing_tabstops * 3; i++)
             {
-                var src = new VisioAutomation.Core.Src(tab_section, (short)IVisio.VisRowIndices.visRowTab,
+                var src = new Core.Src(tab_section, (short)IVisio.VisRowIndices.visRowTab,
                     (short)i);
                 writer.SetValue(src, formula);
             }
 
-            writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
+            writer.Commit(shape, Core.CellValueType.Formula);
         }
 
 
 
-        public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, VisioAutomation.Core.CellValueType type)
+        public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = TextBlockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
-        public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = TextBlockCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -199,16 +199,16 @@ namespace VisioAutomation.Text
 
         private static readonly System.Lazy<TextBlockCellsBuilder> TextBlockCells_lazy_builder = new System.Lazy<TextBlockCellsBuilder>();
 
-        class TextBlockCellsBuilder : CellGroupBuilder<Text.TextBlockCells>
+        class TextBlockCellsBuilder : CellGroupBuilder<TextBlockCells>
         {
 
-            public TextBlockCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
+            public TextBlockCellsBuilder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 
-            public override Text.TextBlockCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override TextBlockCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
-                var cells = new Text.TextBlockCells();
+                var cells = new TextBlockCells();
              
                 string getcellvalue(string name)
                 {

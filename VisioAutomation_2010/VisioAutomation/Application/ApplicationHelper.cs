@@ -26,7 +26,7 @@ namespace VisioAutomation.Application
 
         public static string GetContentLocation(IVisio.Application app)
         {
-            var ver = ApplicationHelper.GetVersion(app);
+            var ver = GetVersion(app);
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             string app_lang = app.Language.ToString(culture);
             var str_visio_content = "Visio Content";
@@ -52,7 +52,7 @@ namespace VisioAutomation.Application
         public static void BringWindowToTop(IVisio.Application app)
         {
             var visio_window_handle = new System.IntPtr(app.WindowHandle32);
-            VisioAutomation.Internal.NativeMethods.BringWindowToTop(visio_window_handle);
+            Internal.NativeMethods.BringWindowToTop(visio_window_handle);
         }
     }
 }

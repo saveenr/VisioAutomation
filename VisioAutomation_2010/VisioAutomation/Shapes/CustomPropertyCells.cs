@@ -5,18 +5,18 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCells : VASS.CellGroups.CellGroup
+    public class CustomPropertyCells : CellGroup
     {
-        public VisioAutomation.Core.CellValue Ask { get; set; }
-        public VisioAutomation.Core.CellValue Calendar { get; set; }
-        public VisioAutomation.Core.CellValue Format { get; set; }
-        public VisioAutomation.Core.CellValue Invisible { get; set; }
-        public VisioAutomation.Core.CellValue Label { get; set; }
-        public VisioAutomation.Core.CellValue LangID { get; set; }
-        public VisioAutomation.Core.CellValue Prompt { get; set; }
-        public VisioAutomation.Core.CellValue SortKey { get; set; }
-        public VisioAutomation.Core.CellValue Type { get; set; }
-        public VisioAutomation.Core.CellValue Value { get; set; }
+        public Core.CellValue Ask { get; set; }
+        public Core.CellValue Calendar { get; set; }
+        public Core.CellValue Format { get; set; }
+        public Core.CellValue Invisible { get; set; }
+        public Core.CellValue Label { get; set; }
+        public Core.CellValue LangID { get; set; }
+        public Core.CellValue Prompt { get; set; }
+        public Core.CellValue SortKey { get; set; }
+        public Core.CellValue Type { get; set; }
+        public Core.CellValue Value { get; set; }
 
         public CustomPropertyCells()
         {
@@ -25,16 +25,16 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Label), VisioAutomation.Core.SrcConstants.CustomPropLabel, this.Label);
-            yield return this.Create(nameof(this.Value), VisioAutomation.Core.SrcConstants.CustomPropValue, this.Value);
-            yield return this.Create(nameof(this.Format), VisioAutomation.Core.SrcConstants.CustomPropFormat, this.Format);
-            yield return this.Create(nameof(this.Prompt), VisioAutomation.Core.SrcConstants.CustomPropPrompt, this.Prompt);
-            yield return this.Create(nameof(this.Calendar), VisioAutomation.Core.SrcConstants.CustomPropCalendar, this.Calendar);
-            yield return this.Create(nameof(this.LangID), VisioAutomation.Core.SrcConstants.CustomPropLangID, this.LangID);
-            yield return this.Create(nameof(this.SortKey), VisioAutomation.Core.SrcConstants.CustomPropSortKey, this.SortKey);
-            yield return this.Create(nameof(this.Invisible), VisioAutomation.Core.SrcConstants.CustomPropInvisible, this.Invisible);
-            yield return this.Create(nameof(this.Type), VisioAutomation.Core.SrcConstants.CustomPropType, this.Type);
-            yield return this.Create(nameof(this.Ask), VisioAutomation.Core.SrcConstants.CustomPropAsk, this.Ask);
+            yield return this.Create(nameof(this.Label), Core.SrcConstants.CustomPropLabel, this.Label);
+            yield return this.Create(nameof(this.Value), Core.SrcConstants.CustomPropValue, this.Value);
+            yield return this.Create(nameof(this.Format), Core.SrcConstants.CustomPropFormat, this.Format);
+            yield return this.Create(nameof(this.Prompt), Core.SrcConstants.CustomPropPrompt, this.Prompt);
+            yield return this.Create(nameof(this.Calendar), Core.SrcConstants.CustomPropCalendar, this.Calendar);
+            yield return this.Create(nameof(this.LangID), Core.SrcConstants.CustomPropLangID, this.LangID);
+            yield return this.Create(nameof(this.SortKey), Core.SrcConstants.CustomPropSortKey, this.SortKey);
+            yield return this.Create(nameof(this.Invisible), Core.SrcConstants.CustomPropInvisible, this.Invisible);
+            yield return this.Create(nameof(this.Type), Core.SrcConstants.CustomPropType, this.Type);
+            yield return this.Create(nameof(this.Ask), Core.SrcConstants.CustomPropAsk, this.Ask);
         }
 
 
@@ -45,14 +45,14 @@ namespace VisioAutomation.Shapes
             this.Type = type_int;
         }
 
-        public CustomPropertyCells(VisioAutomation.Core.CellValue value, CustomPropertyType type)
+        public CustomPropertyCells(Core.CellValue value, CustomPropertyType type)
         {
             var type_int = CustomPropertyTypeToInt(type);
             this.Value = value;
             this.Type = type_int;
         }
         
-        public static CustomPropertyCells Create(VisioAutomation.Core.CellValue value, CustomPropertyType type)
+        public static CustomPropertyCells Create(Core.CellValue value, CustomPropertyType type)
         {
             return new CustomPropertyCells(value.Value, type);
         }
@@ -133,7 +133,7 @@ namespace VisioAutomation.Shapes
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Boolean);
         }
 
-        public CustomPropertyCells(VisioAutomation.Core.CellValue value)
+        public CustomPropertyCells(Core.CellValue value)
         {
             this.Value = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
@@ -152,20 +152,20 @@ namespace VisioAutomation.Shapes
         {
             // only quote the value when it is a string (no type specified or type equals zero)
             bool quote = (this.Type.Value == null || this.Type.Value == "0");
-            this.Value = VisioAutomation.Core.CellValue.EncodeValue(this.Value.Value, quote);
-            this.Label = VisioAutomation.Core.CellValue.EncodeValue(this.Label.Value);
-            this.Format = VisioAutomation.Core.CellValue.EncodeValue(this.Format.Value);
-            this.Prompt = VisioAutomation.Core.CellValue.EncodeValue(this.Prompt.Value);
+            this.Value = Core.CellValue.EncodeValue(this.Value.Value, quote);
+            this.Label = Core.CellValue.EncodeValue(this.Label.Value);
+            this.Format = Core.CellValue.EncodeValue(this.Format.Value);
+            this.Prompt = Core.CellValue.EncodeValue(this.Prompt.Value);
         }
 
 
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, VisioAutomation.Core.CellValueType type)
+        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
             var reader = Custom_Property_lazy_builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
-        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = Custom_Property_lazy_builder.Value;
             return reader.GetCellsMultiRow(shape, type);
@@ -174,28 +174,28 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<CustomPropertyCellsBuilder> Custom_Property_lazy_builder = new System.Lazy<CustomPropertyCellsBuilder>();
 
 
-        public class CustomPropertyCellsBuilder : VASS.CellGroups.CellGroupBuilder<CustomPropertyCells>
+        public class CustomPropertyCellsBuilder : CellGroupBuilder<CustomPropertyCells>
         {
 
-            public CustomPropertyCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
+            public CustomPropertyCellsBuilder() : base(CellGroupBuilderType.MultiRow)
             {
             }
 
             public override CustomPropertyCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new CustomPropertyCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+                var getcellvalue = row_to_cellgroup(row, cols);
 
-                cells.Value = getcellvalue(nameof(CustomPropertyCells.Value));
-                cells.Calendar = getcellvalue(nameof(CustomPropertyCells.Calendar));
-                cells.Format = getcellvalue(nameof(CustomPropertyCells.Format));
-                cells.Invisible = getcellvalue(nameof(CustomPropertyCells.Invisible));
-                cells.Label = getcellvalue(nameof(CustomPropertyCells.Label));
-                cells.LangID = getcellvalue(nameof(CustomPropertyCells.LangID));
-                cells.Prompt = getcellvalue(nameof(CustomPropertyCells.Prompt));
-                cells.SortKey = getcellvalue(nameof(CustomPropertyCells.SortKey));
+                cells.Value = getcellvalue(nameof(Value));
+                cells.Calendar = getcellvalue(nameof(Calendar));
+                cells.Format = getcellvalue(nameof(Format));
+                cells.Invisible = getcellvalue(nameof(Invisible));
+                cells.Label = getcellvalue(nameof(Label));
+                cells.LangID = getcellvalue(nameof(LangID));
+                cells.Prompt = getcellvalue(nameof(Prompt));
+                cells.SortKey = getcellvalue(nameof(SortKey));
                 cells.Type = getcellvalue(nameof(CustomPropertyCells.Type));
-                cells.Ask = getcellvalue(nameof(CustomPropertyCells.Ask));
+                cells.Ask = getcellvalue(nameof(Ask));
 
                 return cells;
             }

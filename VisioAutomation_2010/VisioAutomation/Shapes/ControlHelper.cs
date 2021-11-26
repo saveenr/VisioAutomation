@@ -14,7 +14,7 @@ namespace VisioAutomation.Shapes
 
             var ctrl = new ControlCells();
 
-            return ControlHelper.Add(shape, ctrl);
+            return Add(shape, ctrl);
         }
 
         public static int Add(IVisio.Shape shape, ControlCells ctrl)
@@ -28,7 +28,7 @@ namespace VisioAutomation.Shapes
                                      (short)IVisio.VisRowIndices.visRowLast,
                                      (short)IVisio.VisRowTags.visTagDefault);
 
-            ControlHelper.Set(shape, row, ctrl);
+            Set(shape, row, ctrl);
 
             return row;
         }
@@ -51,10 +51,10 @@ namespace VisioAutomation.Shapes
                 ctrl.YDynamics = string.Format("Controls.Row_{0}.Y", row + 1);
             }
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            var writer = new ShapeSheet.Writers.SrcWriter();
             writer.SetValues(ctrl, row);
 
-            writer.Commit(shape, VisioAutomation.Core.CellValueType.Formula);
+            writer.Commit(shape, Core.CellValueType.Formula);
 
             return row;
         }

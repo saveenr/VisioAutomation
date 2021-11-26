@@ -7,35 +7,35 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : VASS.CellGroups.CellGroup
+    public class XFormCells : CellGroup
     {
-        public VisioAutomation.Core.CellValue PinX { get; set; }
-        public VisioAutomation.Core.CellValue PinY { get; set; }
-        public VisioAutomation.Core.CellValue LocPinX { get; set; }
-        public VisioAutomation.Core.CellValue LocPinY { get; set; }
-        public VisioAutomation.Core.CellValue Width { get; set; }
-        public VisioAutomation.Core.CellValue Height { get; set; }
-        public VisioAutomation.Core.CellValue Angle { get; set; }
+        public Core.CellValue PinX { get; set; }
+        public Core.CellValue PinY { get; set; }
+        public Core.CellValue LocPinX { get; set; }
+        public Core.CellValue LocPinY { get; set; }
+        public Core.CellValue Width { get; set; }
+        public Core.CellValue Height { get; set; }
+        public Core.CellValue Angle { get; set; }
 
         public override IEnumerable<CellMetadataItem> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.PinX), VisioAutomation.Core.SrcConstants.XFormPinX, this.PinX);
-            yield return this.Create(nameof(this.PinY), VisioAutomation.Core.SrcConstants.XFormPinY, this.PinY);
-            yield return this.Create(nameof(this.LocPinX), VisioAutomation.Core.SrcConstants.XFormLocPinX, this.LocPinX);
-            yield return this.Create(nameof(this.LocPinY), VisioAutomation.Core.SrcConstants.XFormLocPinY, this.LocPinY);
-            yield return this.Create(nameof(this.Width), VisioAutomation.Core.SrcConstants.XFormWidth, this.Width);
-            yield return this.Create(nameof(this.Height), VisioAutomation.Core.SrcConstants.XFormHeight, this.Height);
-            yield return this.Create(nameof(this.Angle), VisioAutomation.Core.SrcConstants.XFormAngle, this.Angle);
+            yield return this.Create(nameof(this.PinX), Core.SrcConstants.XFormPinX, this.PinX);
+            yield return this.Create(nameof(this.PinY), Core.SrcConstants.XFormPinY, this.PinY);
+            yield return this.Create(nameof(this.LocPinX), Core.SrcConstants.XFormLocPinX, this.LocPinX);
+            yield return this.Create(nameof(this.LocPinY), Core.SrcConstants.XFormLocPinY, this.LocPinY);
+            yield return this.Create(nameof(this.Width), Core.SrcConstants.XFormWidth, this.Width);
+            yield return this.Create(nameof(this.Height), Core.SrcConstants.XFormHeight, this.Height);
+            yield return this.Create(nameof(this.Angle), Core.SrcConstants.XFormAngle, this.Angle);
         }
 
 
-        public static List<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids, VisioAutomation.Core.CellValueType type)
+        public static List<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = ShapeXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
-        public static XFormCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static XFormCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = ShapeXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -43,24 +43,24 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<ShapeXFormCellsBuilder> ShapeXFormCells_lazy_builder = new System.Lazy<ShapeXFormCellsBuilder>();
 
-        class ShapeXFormCellsBuilder : VASS.CellGroups.CellGroupBuilder<XFormCells>
+        class ShapeXFormCellsBuilder : CellGroupBuilder<XFormCells>
         {
-            public ShapeXFormCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
+            public ShapeXFormCellsBuilder() : base(CellGroupBuilderType.SingleRow)
             {
             }
 
-            public override XFormCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override XFormCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new XFormCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+                var getcellvalue = row_to_cellgroup(row, cols);
 
-                cells.PinX = getcellvalue(nameof(XFormCells.PinX));
-                cells.PinY = getcellvalue(nameof(XFormCells.PinY));
-                cells.LocPinX = getcellvalue(nameof(XFormCells.LocPinX));
-                cells.LocPinY = getcellvalue(nameof(XFormCells.LocPinY));
-                cells.Width = getcellvalue(nameof(XFormCells.Width));
-                cells.Height = getcellvalue(nameof(XFormCells.Height));
-                cells.Angle = getcellvalue(nameof(XFormCells.Angle));
+                cells.PinX = getcellvalue(nameof(PinX));
+                cells.PinY = getcellvalue(nameof(PinY));
+                cells.LocPinX = getcellvalue(nameof(LocPinX));
+                cells.LocPinY = getcellvalue(nameof(LocPinY));
+                cells.Width = getcellvalue(nameof(Width));
+                cells.Height = getcellvalue(nameof(Height));
+                cells.Angle = getcellvalue(nameof(Angle));
 
                 return cells;
             }
