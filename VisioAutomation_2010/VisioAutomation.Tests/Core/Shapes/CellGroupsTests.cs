@@ -18,13 +18,13 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             types.Add(typeof(VisioAutomation.Shapes.CustomPropertyCells));
             types.Add(typeof(VisioAutomation.Shapes.HyperlinkCells));
             types.Add(typeof(VisioAutomation.Shapes.LockCells));
-            types.Add(typeof(VisioAutomation.Shapes.ShapeFormatCells));
-            types.Add(typeof(VisioAutomation.Shapes.ShapeLayoutCells));
-            types.Add(typeof(VisioAutomation.Shapes.ShapeXFormCells));
-            types.Add(typeof(VisioAutomation.Pages.PageFormatCells));
-            types.Add(typeof(VisioAutomation.Pages.PageLayoutCells));
-            types.Add(typeof(VisioAutomation.Pages.PagePrintCells));
-            types.Add(typeof(VisioAutomation.Pages.PageRulerAndGridCells));
+            types.Add(typeof(VisioAutomation.Shapes.FormatCells));
+            types.Add(typeof(VisioAutomation.Shapes.LayoutCells));
+            types.Add(typeof(VisioAutomation.Shapes.XFormCells));
+            types.Add(typeof(VisioAutomation.Pages.FormatCells));
+            types.Add(typeof(VisioAutomation.Pages.LayoutCells));
+            types.Add(typeof(VisioAutomation.Pages.PrintCells));
+            types.Add(typeof(VisioAutomation.Pages.RulerAndGridCells));
 
             var cvt_ctor = typeof(VisioAutomation.Core.CellValue).GetConstructor(new []{typeof(string)});
             foreach (var cellgroup_type in types)

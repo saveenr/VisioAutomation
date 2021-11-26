@@ -62,8 +62,8 @@ namespace VisioAutomationSamples
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
             var writer = new SidSrcWriter();
-            var format = new VA.Shapes.ShapeFormatCells();
-            var xfrm = new VA.Shapes.ShapeXFormCells();
+            var format = new VA.Shapes.FormatCells();
+            var xfrm = new VA.Shapes.XFormCells();
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
             {
@@ -123,7 +123,7 @@ namespace VisioAutomationSamples
             var color1 = new VA.Models.Color.ColorRgb(0xffdddd);
             var color2 = new VA.Models.Color.ColorRgb(0x00ffff);
 
-            var format = new VA.Shapes.ShapeFormatCells();
+            var format = new VA.Shapes.FormatCells();
 
             var writer = new SidSrcWriter();
 

@@ -32,11 +32,11 @@ namespace VisioAutomation.Models.Documents.Forms
             var pagesheet = this._page.PageSheet;
             var writer = new SrcWriter();
 
-            var page_fmt_cells = new Pages.PageFormatCells();
+            var page_fmt_cells = new Pages.FormatCells();
             page_fmt_cells.Width = formpage.Size.Width;
             page_fmt_cells.Height = formpage.Size.Height;
 
-            var page_print_cells = new Pages.PagePrintCells();
+            var page_print_cells = new Pages.PrintCells();
             page_print_cells.LeftMargin = formpage.PageMargin.Left;
             page_print_cells.RightMargin = formpage.PageMargin.Right;
             page_print_cells.TopMargin = formpage.PageMargin.Top;

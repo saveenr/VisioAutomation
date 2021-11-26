@@ -14,7 +14,7 @@ namespace VisioAutomationSamples
 
             // Demonstrates:
             // How use the GridLayout object to quickly drop a grid
-            // How to use ShapeFormatCells to apply formatting to shapes
+            // How to use FormatCells to apply formatting to shapes
             // How UpdateBase can be used to modfiy multiple shapes at once
 
             int[] colors = {
@@ -44,7 +44,7 @@ namespace VisioAutomationSamples
             layout.PerformLayout();
             layout.Render(page);
 
-            var fmtcells = new VA.Shapes.ShapeFormatCells();
+            var fmtcells = new VA.Shapes.FormatCells();
             int i = 0;
             var writer = new SidSrcWriter();
             foreach (var node in layout.Nodes)

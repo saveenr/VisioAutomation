@@ -2,7 +2,7 @@ namespace VisioAutomation_Tests.Extensions
 {
     public static class TestExtensions
     {
-        public static VisioAutomation.Core.Point GetPinPosResult(this VisioAutomation.Shapes.ShapeXFormCells xform)
+        public static VisioAutomation.Core.Point GetPinPosResult(this VisioAutomation.Shapes.XFormCells xform)
         {
             return  ToPoint(xform.PinX.Value, xform.PinY.Value);
         }

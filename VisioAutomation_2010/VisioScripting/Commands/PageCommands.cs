@@ -249,7 +249,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void SetPageFormatCells(TargetPages targetpages, VisioAutomation.Pages.PageFormatCells cells)
+        public void SetPageFormatCells(TargetPages targetpages, VisioAutomation.Pages.FormatCells cells)
         {
             targetpages = targetpages.ResolveToPages(this._client);
 

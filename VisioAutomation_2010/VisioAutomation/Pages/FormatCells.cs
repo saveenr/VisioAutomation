@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PageFormatCells : VASS.CellGroups.CellGroup
+    public class FormatCells : VASS.CellGroups.CellGroup
     {
         public VisioAutomation.Core.CellValue DrawingScale { get; set; }
         public VisioAutomation.Core.CellValue DrawingScaleType { get; set; }
@@ -46,7 +46,7 @@ namespace VisioAutomation.Pages
         }
 
 
-        public static PageFormatCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static FormatCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = PageFormatCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -54,31 +54,31 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<PageFormatCellsBuilder> PageFormatCells_lazy_builder = new System.Lazy<PageFormatCellsBuilder>();
 
-        class PageFormatCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageFormatCells>
+        class PageFormatCellsBuilder : VASS.CellGroups.CellGroupBuilder<FormatCells>
         {
             public PageFormatCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
-            public override PageFormatCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override FormatCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
-                var cells = new PageFormatCells();
+                var cells = new FormatCells();
                 var getcellvalue = VASS.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
-                cells.DrawingScale = getcellvalue(nameof(PageFormatCells.DrawingScale));
-                cells.DrawingScaleType = getcellvalue(nameof(PageFormatCells.DrawingScaleType));
-                cells.DrawingSizeType = getcellvalue(nameof(PageFormatCells.DrawingSizeType));
-                cells.InhibitSnap = getcellvalue(nameof(PageFormatCells.InhibitSnap));
-                cells.Height = getcellvalue(nameof(PageFormatCells.Height));
-                cells.Scale = getcellvalue(nameof(PageFormatCells.Scale));
-                cells.Width = getcellvalue(nameof(PageFormatCells.Width));
-                cells.ShadowObliqueAngle = getcellvalue(nameof(PageFormatCells.ShadowObliqueAngle));
-                cells.ShadowOffsetX = getcellvalue(nameof(PageFormatCells.ShadowOffsetX));
-                cells.ShadowOffsetY = getcellvalue(nameof(PageFormatCells.ShadowOffsetY));
-                cells.ShadowScaleFactor = getcellvalue(nameof(PageFormatCells.ShadowScaleFactor));
-                cells.ShadowType = getcellvalue(nameof(PageFormatCells.ShadowType));
-                cells.UIVisibility = getcellvalue(nameof(PageFormatCells.UIVisibility));
-                cells.DrawingResizeType = getcellvalue(nameof(PageFormatCells.DrawingResizeType));
+                cells.DrawingScale = getcellvalue(nameof(FormatCells.DrawingScale));
+                cells.DrawingScaleType = getcellvalue(nameof(FormatCells.DrawingScaleType));
+                cells.DrawingSizeType = getcellvalue(nameof(FormatCells.DrawingSizeType));
+                cells.InhibitSnap = getcellvalue(nameof(FormatCells.InhibitSnap));
+                cells.Height = getcellvalue(nameof(FormatCells.Height));
+                cells.Scale = getcellvalue(nameof(FormatCells.Scale));
+                cells.Width = getcellvalue(nameof(FormatCells.Width));
+                cells.ShadowObliqueAngle = getcellvalue(nameof(FormatCells.ShadowObliqueAngle));
+                cells.ShadowOffsetX = getcellvalue(nameof(FormatCells.ShadowOffsetX));
+                cells.ShadowOffsetY = getcellvalue(nameof(FormatCells.ShadowOffsetY));
+                cells.ShadowScaleFactor = getcellvalue(nameof(FormatCells.ShadowScaleFactor));
+                cells.ShadowType = getcellvalue(nameof(FormatCells.ShadowType));
+                cells.UIVisibility = getcellvalue(nameof(FormatCells.UIVisibility));
+                cells.DrawingResizeType = getcellvalue(nameof(FormatCells.DrawingResizeType));
 
                 return cells;
             }

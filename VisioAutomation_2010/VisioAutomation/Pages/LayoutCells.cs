@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PageLayoutCells : VASS.CellGroups.CellGroup
+    public class LayoutCells : VASS.CellGroups.CellGroup
     {
         public VisioAutomation.Core.CellValue AvenueSizeX { get; set; }
         public VisioAutomation.Core.CellValue AvenueSizeY { get; set; }
@@ -72,7 +72,7 @@ namespace VisioAutomation.Pages
                 this.AvoidPageBreaks);
         }
 
-        public static PageLayoutCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static LayoutCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = PageLayoutCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -81,47 +81,47 @@ namespace VisioAutomation.Pages
         private static readonly System.Lazy<PageLayoutCellsBuilder> PageLayoutCells_lazy_builder = new System.Lazy<PageLayoutCellsBuilder>();
 
 
-        class PageLayoutCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageLayoutCells>
+        class PageLayoutCellsBuilder : VASS.CellGroups.CellGroupBuilder<LayoutCells>
         {
             public PageLayoutCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
 
-            public override PageLayoutCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override LayoutCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
-                var cells = new PageLayoutCells();
+                var cells = new LayoutCells();
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
 
-                cells.AvenueSizeX = getcellvalue(nameof(PageLayoutCells.AvenueSizeX));
-                cells.AvenueSizeY = getcellvalue(nameof(PageLayoutCells.AvenueSizeY));
-                cells.BlockSizeX = getcellvalue(nameof(PageLayoutCells.BlockSizeX));
-                cells.BlockSizeY = getcellvalue(nameof(PageLayoutCells.BlockSizeY));
-                cells.CtrlAsInput = getcellvalue(nameof(PageLayoutCells.CtrlAsInput));
-                cells.DynamicsOff = getcellvalue(nameof(PageLayoutCells.DynamicsOff));
-                cells.EnableGrid = getcellvalue(nameof(PageLayoutCells.EnableGrid));
-                cells.LineAdjustFrom = getcellvalue(nameof(PageLayoutCells.LineAdjustFrom));
-                cells.LineAdjustTo = getcellvalue(nameof(PageLayoutCells.LineAdjustTo));
-                cells.LineJumpCode = getcellvalue(nameof(PageLayoutCells.LineJumpCode));
-                cells.LineJumpFactorX = getcellvalue(nameof(PageLayoutCells.LineJumpFactorX));
-                cells.LineJumpFactorY = getcellvalue(nameof(PageLayoutCells.LineJumpFactorY));
-                cells.LineJumpStyle = getcellvalue(nameof(PageLayoutCells.LineJumpStyle));
-                cells.LineRouteExt = getcellvalue(nameof(PageLayoutCells.LineRouteExt));
-                cells.LineToLineX = getcellvalue(nameof(PageLayoutCells.LineToLineX));
-                cells.LineToLineY = getcellvalue(nameof(PageLayoutCells.LineToLineY));
-                cells.LineToNodeX = getcellvalue(nameof(PageLayoutCells.LineToNodeX));
-                cells.LineToNodeY = getcellvalue(nameof(PageLayoutCells.LineToNodeY));
-                cells.LineJumpDirX = getcellvalue(nameof(PageLayoutCells.LineJumpDirX));
-                cells.LineJumpDirY = getcellvalue(nameof(PageLayoutCells.LineJumpDirY));
-                cells.PageShapeSplit = getcellvalue(nameof(PageLayoutCells.PageShapeSplit));
-                cells.PlaceDepth = getcellvalue(nameof(PageLayoutCells.PlaceDepth));
-                cells.PlaceFlip = getcellvalue(nameof(PageLayoutCells.PlaceFlip));
-                cells.PlaceStyle = getcellvalue(nameof(PageLayoutCells.PlaceStyle));
-                cells.PlowCode = getcellvalue(nameof(PageLayoutCells.PlowCode));
-                cells.ResizePage = getcellvalue(nameof(PageLayoutCells.ResizePage));
-                cells.RouteStyle = getcellvalue(nameof(PageLayoutCells.RouteStyle));
-                cells.AvoidPageBreaks = getcellvalue(nameof(PageLayoutCells.AvoidPageBreaks));
+                cells.AvenueSizeX = getcellvalue(nameof(LayoutCells.AvenueSizeX));
+                cells.AvenueSizeY = getcellvalue(nameof(LayoutCells.AvenueSizeY));
+                cells.BlockSizeX = getcellvalue(nameof(LayoutCells.BlockSizeX));
+                cells.BlockSizeY = getcellvalue(nameof(LayoutCells.BlockSizeY));
+                cells.CtrlAsInput = getcellvalue(nameof(LayoutCells.CtrlAsInput));
+                cells.DynamicsOff = getcellvalue(nameof(LayoutCells.DynamicsOff));
+                cells.EnableGrid = getcellvalue(nameof(LayoutCells.EnableGrid));
+                cells.LineAdjustFrom = getcellvalue(nameof(LayoutCells.LineAdjustFrom));
+                cells.LineAdjustTo = getcellvalue(nameof(LayoutCells.LineAdjustTo));
+                cells.LineJumpCode = getcellvalue(nameof(LayoutCells.LineJumpCode));
+                cells.LineJumpFactorX = getcellvalue(nameof(LayoutCells.LineJumpFactorX));
+                cells.LineJumpFactorY = getcellvalue(nameof(LayoutCells.LineJumpFactorY));
+                cells.LineJumpStyle = getcellvalue(nameof(LayoutCells.LineJumpStyle));
+                cells.LineRouteExt = getcellvalue(nameof(LayoutCells.LineRouteExt));
+                cells.LineToLineX = getcellvalue(nameof(LayoutCells.LineToLineX));
+                cells.LineToLineY = getcellvalue(nameof(LayoutCells.LineToLineY));
+                cells.LineToNodeX = getcellvalue(nameof(LayoutCells.LineToNodeX));
+                cells.LineToNodeY = getcellvalue(nameof(LayoutCells.LineToNodeY));
+                cells.LineJumpDirX = getcellvalue(nameof(LayoutCells.LineJumpDirX));
+                cells.LineJumpDirY = getcellvalue(nameof(LayoutCells.LineJumpDirY));
+                cells.PageShapeSplit = getcellvalue(nameof(LayoutCells.PageShapeSplit));
+                cells.PlaceDepth = getcellvalue(nameof(LayoutCells.PlaceDepth));
+                cells.PlaceFlip = getcellvalue(nameof(LayoutCells.PlaceFlip));
+                cells.PlaceStyle = getcellvalue(nameof(LayoutCells.PlaceStyle));
+                cells.PlowCode = getcellvalue(nameof(LayoutCells.PlowCode));
+                cells.ResizePage = getcellvalue(nameof(LayoutCells.ResizePage));
+                cells.RouteStyle = getcellvalue(nameof(LayoutCells.RouteStyle));
+                cells.AvoidPageBreaks = getcellvalue(nameof(LayoutCells.AvoidPageBreaks));
                 return cells;
             }
         }

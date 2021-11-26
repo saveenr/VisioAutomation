@@ -5,21 +5,21 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeGeometrySection : IEnumerable<ShapeGeometryRow>
+    public class GeometrySection : IEnumerable<GeometryRow>
     {
-        private List<ShapeGeometryRow> Rows { get; }
+        private List<GeometryRow> Rows { get; }
         public Core.CellValue NoFill { get; set; }
         public Core.CellValue NoLine { get; set; }
         public Core.CellValue NoShow { get; set; }
         public Core.CellValue NoSnap { get; set; }
         public Core.CellValue NoQuickDrag { get; set; }
 
-        public ShapeGeometrySection()
+        public GeometrySection()
         {
-            this.Rows = new List<ShapeGeometryRow>();
+            this.Rows = new List<GeometryRow>();
         }
 
-        public IEnumerator<ShapeGeometryRow> GetEnumerator()
+        public IEnumerator<GeometryRow> GetEnumerator()
         {
             foreach (var row in this.Rows)
             {
@@ -32,14 +32,14 @@ namespace VisioAutomation.Shapes
             return this.GetEnumerator();
         }
 
-        public ShapeGeometryRow this[int index]
+        public GeometryRow this[int index]
         {
             get { return this.Rows[index]; }
         }
 
         public short Render(IVisio.Shape shape)
         {
-            short sec_index = ShapeGeometryHelper.AddSection(shape);
+            short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
@@ -67,80 +67,80 @@ namespace VisioAutomation.Shapes
             return 0;
         }
 
-        public ShapeGeometryRow AddMoveTo(Core.CellValue x, Core.CellValue y)
+        public GeometryRow AddMoveTo(Core.CellValue x, Core.CellValue y)
         {
-            var row = ShapeGeometryRow.CreateMoveTo(x, y);
+            var row = GeometryRow.CreateMoveTo(x, y);
             this.Rows.Add(row);
             return row;
         }
 
-        public ShapeGeometryRow AddLineTo(Core.CellValue x, Core.CellValue y)
+        public GeometryRow AddLineTo(Core.CellValue x, Core.CellValue y)
         {
-            var row = ShapeGeometryRow.CreateLineTo(x, y);
-            this.Rows.Add(row);
-            return row;
-
-        }
-
-        public ShapeGeometryRow AddArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a)
-        {
-            var row = ShapeGeometryRow.CreateArcTo(x, y, a);
+            var row = GeometryRow.CreateLineTo(x, y);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public ShapeGeometryRow AddEllipticalArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
+        public GeometryRow AddArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a)
         {
-            var row = ShapeGeometryRow.CreateEllipticalArcTo(x, y, a, b, c, d);
+            var row = GeometryRow.CreateArcTo(x, y, a);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public ShapeGeometryRow AddEllipse(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
+        public GeometryRow AddEllipticalArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
         {
-            var row = ShapeGeometryRow.CreateEllipse(x, y, a, b, c, d);
+            var row = GeometryRow.CreateEllipticalArcTo(x, y, a, b, c, d);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public ShapeGeometryRow AddNurbsTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d, Core.CellValue e)
+        public GeometryRow AddEllipse(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
         {
-            var row = ShapeGeometryRow.CreateNurbsTo(x, y, a, b, c, d, e);
+            var row = GeometryRow.CreateEllipse(x, y, a, b, c, d);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public ShapeGeometryRow AddPolylineTo(Core.CellValue x, Core.CellValue y, Core.CellValue a)
+        public GeometryRow AddNurbsTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d, Core.CellValue e)
         {
-            var row = ShapeGeometryRow.CreatePolylineTo(x, y, a);
+            var row = GeometryRow.CreateNurbsTo(x, y, a, b, c, d, e);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public ShapeGeometryRow AddInfiniteLine(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b)
+        public GeometryRow AddPolylineTo(Core.CellValue x, Core.CellValue y, Core.CellValue a)
         {
-            var row = ShapeGeometryRow.CreateInfiniteLine(x, y, a, b);
+            var row = GeometryRow.CreatePolylineTo(x, y, a);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public ShapeGeometryRow AddSplineStart(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
+        public GeometryRow AddInfiniteLine(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b)
         {
-            var row = ShapeGeometryRow.CreateSplineStart(x, y, a, b, c, d);
+            var row = GeometryRow.CreateInfiniteLine(x, y, a, b);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public ShapeGeometryRow AddSplineKnot(Core.CellValue x, Core.CellValue y, Core.CellValue a)
+        public GeometryRow AddSplineStart(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
         {
-            var row = ShapeGeometryRow.CreateSplineKnot(x, y, a);
+            var row = GeometryRow.CreateSplineStart(x, y, a, b, c, d);
+            this.Rows.Add(row);
+            return row;
+
+        }
+
+        public GeometryRow AddSplineKnot(Core.CellValue x, Core.CellValue y, Core.CellValue a)
+        {
+            var row = GeometryRow.CreateSplineKnot(x, y, a);
             this.Rows.Add(row);
             return row;
         }

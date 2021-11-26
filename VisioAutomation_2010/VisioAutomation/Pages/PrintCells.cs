@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PagePrintCells : VASS.CellGroups.CellGroup
+    public class PrintCells : VASS.CellGroups.CellGroup
     {
         public VisioAutomation.Core.CellValue LeftMargin { get; set; }
         public VisioAutomation.Core.CellValue CenterX { get; set; }
@@ -43,7 +43,7 @@ namespace VisioAutomation.Pages
         }
 
 
-        public static PagePrintCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static PrintCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = PagePrintCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -51,35 +51,35 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<PagePrintCellsBuilder> PagePrintCells_lazy_builder = new System.Lazy<PagePrintCellsBuilder>();
 
-        class PagePrintCellsBuilder : VASS.CellGroups.CellGroupBuilder<PagePrintCells>
+        class PagePrintCellsBuilder : VASS.CellGroups.CellGroupBuilder<PrintCells>
         {
             public PagePrintCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
-            public override PagePrintCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override PrintCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
-                var cells = new PagePrintCells();
+                var cells = new PrintCells();
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
 
-                cells.LeftMargin = getcellvalue(nameof(PagePrintCells.LeftMargin));
-                cells.CenterX = getcellvalue(nameof(PagePrintCells.CenterX));
-                cells.CenterY = getcellvalue(nameof(PagePrintCells.CenterY));
+                cells.LeftMargin = getcellvalue(nameof(PrintCells.LeftMargin));
+                cells.CenterX = getcellvalue(nameof(PrintCells.CenterX));
+                cells.CenterY = getcellvalue(nameof(PrintCells.CenterY));
 
-                cells.OnPage = getcellvalue(nameof(PagePrintCells.OnPage));
-                cells.BottomMargin = getcellvalue(nameof(PagePrintCells.BottomMargin));
-                cells.RightMargin = getcellvalue(nameof(PagePrintCells.RightMargin));
-                cells.PagesX = getcellvalue(nameof(PagePrintCells.PagesX));
-                cells.PagesY = getcellvalue(nameof(PagePrintCells.PagesY));
-                cells.TopMargin = getcellvalue(nameof(PagePrintCells.TopMargin));
-                cells.PaperKind = getcellvalue(nameof(PagePrintCells.PaperKind));
+                cells.OnPage = getcellvalue(nameof(PrintCells.OnPage));
+                cells.BottomMargin = getcellvalue(nameof(PrintCells.BottomMargin));
+                cells.RightMargin = getcellvalue(nameof(PrintCells.RightMargin));
+                cells.PagesX = getcellvalue(nameof(PrintCells.PagesX));
+                cells.PagesY = getcellvalue(nameof(PrintCells.PagesY));
+                cells.TopMargin = getcellvalue(nameof(PrintCells.TopMargin));
+                cells.PaperKind = getcellvalue(nameof(PrintCells.PaperKind));
 
-                cells.Grid = getcellvalue(nameof(PagePrintCells.Grid));
-                cells.Orientation = getcellvalue(nameof(PagePrintCells.Orientation));
-                cells.ScaleX = getcellvalue(nameof(PagePrintCells.ScaleX));
-                cells.ScaleY = getcellvalue(nameof(PagePrintCells.ScaleY));
-                cells.PaperSource = getcellvalue(nameof(PagePrintCells.PaperSource));
+                cells.Grid = getcellvalue(nameof(PrintCells.Grid));
+                cells.Orientation = getcellvalue(nameof(PrintCells.Orientation));
+                cells.ScaleX = getcellvalue(nameof(PrintCells.ScaleX));
+                cells.ScaleY = getcellvalue(nameof(PrintCells.ScaleY));
+                cells.PaperSource = getcellvalue(nameof(PrintCells.PaperSource));
 
                 return cells;
             }

@@ -7,7 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class ShapeXFormCells : VASS.CellGroups.CellGroup
+    public class XFormCells : VASS.CellGroups.CellGroup
     {
         public VisioAutomation.Core.CellValue PinX { get; set; }
         public VisioAutomation.Core.CellValue PinY { get; set; }
@@ -29,13 +29,13 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<ShapeXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, VisioAutomation.Core.CellValueType type)
+        public static List<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids, VisioAutomation.Core.CellValueType type)
         {
             var reader = ShapeXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
-        public static ShapeXFormCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static XFormCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = ShapeXFormCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -43,24 +43,24 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<ShapeXFormCellsBuilder> ShapeXFormCells_lazy_builder = new System.Lazy<ShapeXFormCellsBuilder>();
 
-        class ShapeXFormCellsBuilder : VASS.CellGroups.CellGroupBuilder<ShapeXFormCells>
+        class ShapeXFormCellsBuilder : VASS.CellGroups.CellGroupBuilder<XFormCells>
         {
             public ShapeXFormCellsBuilder() : base(VisioAutomation.ShapeSheet.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
-            public override ShapeXFormCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override XFormCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
-                var cells = new ShapeXFormCells();
+                var cells = new XFormCells();
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
-                cells.PinX = getcellvalue(nameof(ShapeXFormCells.PinX));
-                cells.PinY = getcellvalue(nameof(ShapeXFormCells.PinY));
-                cells.LocPinX = getcellvalue(nameof(ShapeXFormCells.LocPinX));
-                cells.LocPinY = getcellvalue(nameof(ShapeXFormCells.LocPinY));
-                cells.Width = getcellvalue(nameof(ShapeXFormCells.Width));
-                cells.Height = getcellvalue(nameof(ShapeXFormCells.Height));
-                cells.Angle = getcellvalue(nameof(ShapeXFormCells.Angle));
+                cells.PinX = getcellvalue(nameof(XFormCells.PinX));
+                cells.PinY = getcellvalue(nameof(XFormCells.PinY));
+                cells.LocPinX = getcellvalue(nameof(XFormCells.LocPinX));
+                cells.LocPinY = getcellvalue(nameof(XFormCells.LocPinY));
+                cells.Width = getcellvalue(nameof(XFormCells.Width));
+                cells.Height = getcellvalue(nameof(XFormCells.Height));
+                cells.Angle = getcellvalue(nameof(XFormCells.Angle));
 
                 return cells;
             }

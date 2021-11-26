@@ -203,7 +203,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             var doc = this.NewDocumentFromTemplate(template);
-            var pagecells = new VisioAutomation.Pages.PageFormatCells();
+            var pagecells = new VisioAutomation.Pages.FormatCells();
             pagecells.Width = size.Width;
             pagecells.Height = size.Height;
 

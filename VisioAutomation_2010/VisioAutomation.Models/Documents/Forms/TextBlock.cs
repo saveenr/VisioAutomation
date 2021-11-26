@@ -9,7 +9,7 @@ namespace VisioAutomation.Models.Documents.Forms
         public string Font = "SegoeUI";
         public VisioAutomation.Text.TextBlockCells TextBlockCells;
         public VisioAutomation.Text.ParagraphFormatCells ParagraphFormatCells;
-        public Shapes.ShapeFormatCells FormatCells;
+        public Shapes.FormatCells FormatCells;
         public VisioAutomation.Text.CharacterFormatCells CharacterFormatCells;
         public string Text;
         public IVisio.Shape VisioShape;
@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.Documents.Forms
             this.Size = size;
             this.TextBlockCells = new VisioAutomation.Text.TextBlockCells();
             this.ParagraphFormatCells = new VisioAutomation.Text.ParagraphFormatCells();
-            this.FormatCells = new Shapes.ShapeFormatCells();
+            this.FormatCells = new Shapes.FormatCells();
             this.CharacterFormatCells = new VisioAutomation.Text.CharacterFormatCells();
         }
 

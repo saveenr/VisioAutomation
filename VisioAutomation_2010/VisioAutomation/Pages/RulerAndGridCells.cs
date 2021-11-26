@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PageRulerAndGridCells : VASS.CellGroups.CellGroup
+    public class RulerAndGridCells : VASS.CellGroups.CellGroup
     {
         public VisioAutomation.Core.CellValue XGridDensity { get; set; }
         public VisioAutomation.Core.CellValue YGridDensity { get; set; }
@@ -32,7 +32,7 @@ namespace VisioAutomation.Pages
             yield return this.Create(nameof(this.YRulerOrigin), VisioAutomation.Core.SrcConstants.YRulerOrigin, this.YRulerOrigin);
         }
 
-        public static PageRulerAndGridCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
+        public static RulerAndGridCells GetCells(IVisio.Shape shape, VisioAutomation.Core.CellValueType type)
         {
             var reader = PageRulerAndGridCells_lazy_builder.Value;
             return reader.GetCellsSingleRow(shape, type);
@@ -40,27 +40,27 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<PageRulerAndGridCellsBuilder> PageRulerAndGridCells_lazy_builder = new System.Lazy<PageRulerAndGridCellsBuilder>();
 
-        class PageRulerAndGridCellsBuilder : VASS.CellGroups.CellGroupBuilder<PageRulerAndGridCells>
+        class PageRulerAndGridCellsBuilder : VASS.CellGroups.CellGroupBuilder<RulerAndGridCells>
         {
             public PageRulerAndGridCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.SingleRow)
             {
             }
 
-            public override PageRulerAndGridCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override RulerAndGridCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
-                var cells = new PageRulerAndGridCells();
+                var cells = new RulerAndGridCells();
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
 
-                cells.XGridDensity = getcellvalue(nameof(PageRulerAndGridCells.XGridDensity));
-                cells.XGridOrigin = getcellvalue(nameof(PageRulerAndGridCells.XGridOrigin));
-                cells.XGridSpacing = getcellvalue(nameof(PageRulerAndGridCells.XGridSpacing));
-                cells.XRulerDensity = getcellvalue(nameof(PageRulerAndGridCells.XRulerDensity));
-                cells.XRulerOrigin = getcellvalue(nameof(PageRulerAndGridCells.XRulerOrigin));
-                cells.YGridDensity = getcellvalue(nameof(PageRulerAndGridCells.YGridDensity));
-                cells.YGridOrigin = getcellvalue(nameof(PageRulerAndGridCells.YGridOrigin));
-                cells.YGridSpacing = getcellvalue(nameof(PageRulerAndGridCells.YGridSpacing));
-                cells.YRulerDensity = getcellvalue(nameof(PageRulerAndGridCells.YRulerDensity));
-                cells.YRulerOrigin = getcellvalue(nameof(PageRulerAndGridCells.YRulerOrigin));
+                cells.XGridDensity = getcellvalue(nameof(RulerAndGridCells.XGridDensity));
+                cells.XGridOrigin = getcellvalue(nameof(RulerAndGridCells.XGridOrigin));
+                cells.XGridSpacing = getcellvalue(nameof(RulerAndGridCells.XGridSpacing));
+                cells.XRulerDensity = getcellvalue(nameof(RulerAndGridCells.XRulerDensity));
+                cells.XRulerOrigin = getcellvalue(nameof(RulerAndGridCells.XRulerOrigin));
+                cells.YGridDensity = getcellvalue(nameof(RulerAndGridCells.YGridDensity));
+                cells.YGridOrigin = getcellvalue(nameof(RulerAndGridCells.YGridOrigin));
+                cells.YGridSpacing = getcellvalue(nameof(RulerAndGridCells.YGridSpacing));
+                cells.YRulerDensity = getcellvalue(nameof(RulerAndGridCells.YRulerDensity));
+                cells.YRulerOrigin = getcellvalue(nameof(RulerAndGridCells.YRulerOrigin));
 
                 return cells;
             }
