@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Core
 {
-    public struct Rectangle
+    public readonly struct Rectangle
     {
         public double Left { get; }
         public double Bottom { get; }

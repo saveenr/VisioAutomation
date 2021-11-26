@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Core
 {
-    public struct SurfaceTarget
+    public readonly struct SurfaceTarget
     {
         public readonly IVisio.Page Page;
         public readonly IVisio.Master Master;

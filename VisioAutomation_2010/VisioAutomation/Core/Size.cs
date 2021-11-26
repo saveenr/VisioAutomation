@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Core
 {
-    public struct Size
+    public readonly struct Size
     {
         public double Width { get; }
         public double Height { get; }

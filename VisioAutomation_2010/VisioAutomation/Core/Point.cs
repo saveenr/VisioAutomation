@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Core
 {
-    public struct Point
+    public readonly struct Point
     {
         public double X { get; }
         public double Y { get; }

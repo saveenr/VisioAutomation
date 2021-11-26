@@ -2,7 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Core
 {
-    public struct ShapeIDPair
+    public readonly struct ShapeIDPair
     {
         public readonly IVisio.Shape Shape;
         public readonly int ShapeID;
