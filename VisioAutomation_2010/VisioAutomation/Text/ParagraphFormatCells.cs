@@ -69,12 +69,7 @@ namespace VisioAutomation.Text
             public override Text.ParagraphFormatCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
             {
                 var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
-
                 var cells = new Text.ParagraphFormatCells();
-
-                var names = cells.GetCellMetadata().Select(i => i.Name).ToList();
-
-
 
                 cells.IndentFirst = getcellvalue(nameof(ParagraphFormatCells.IndentFirst));
                 cells.IndentLeft = getcellvalue(nameof(ParagraphFormatCells.IndentLeft));
