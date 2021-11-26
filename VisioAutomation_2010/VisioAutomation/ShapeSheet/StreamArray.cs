@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
