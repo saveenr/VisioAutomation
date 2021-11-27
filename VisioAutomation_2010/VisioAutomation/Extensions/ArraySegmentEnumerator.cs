@@ -1,4 +1,4 @@
-namespace VisioAutomation.Collections
+namespace VisioAutomation.Internal
 {
     /// <summary>
     /// Allows the incremental building up of segments from an array

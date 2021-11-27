@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.Collections
+namespace VisioAutomation.Internal
 {
     public readonly struct ArraySegment<T> : IEnumerable<T>
     {
