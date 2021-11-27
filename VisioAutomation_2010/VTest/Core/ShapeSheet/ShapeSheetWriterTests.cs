@@ -1,16 +1,16 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VASS = VisioAutomation.ShapeSheet;
 
 namespace VTest.Core.ShapeSheet
 {
-    [TestClass]
+    [MUT.TestClass]
     public class ShapeSheetWriterTests : VisioAutomationTest
     {
         private static readonly VisioAutomation.Core.Src XFormPinX = VisioAutomation.Core.SrcConstants.XFormPinX;
         private static readonly VisioAutomation.Core.Src XFormPinY = VisioAutomation.Core.SrcConstants.XFormPinY;
         private static readonly VisioAutomation.Core.Src LinePattern = VisioAutomation.Core.SrcConstants.LinePattern;
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Writer_Formulas_MultipleShapes()
         {
             var page1 = this.GetNewPage();
@@ -51,7 +51,7 @@ namespace VTest.Core.ShapeSheet
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Writer_ResultsInt_SingleShape()
         {
             var page1 = this.GetNewPage();
@@ -73,12 +73,12 @@ namespace VTest.Core.ShapeSheet
 
             int rownum=0;
             // Verify
-            Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
-            Assert.AreEqual(7, data_results[rownum][col_linepat]);
+            MUT.Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
+            MUT.Assert.AreEqual(7, data_results[rownum][col_linepat]);
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Writer_Write_nothing()
         {
             var page1 = this.GetNewPage();
@@ -91,7 +91,7 @@ namespace VTest.Core.ShapeSheet
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Writer_ResultsString_SingleShape()
         {
             var page1 = this.GetNewPage();
@@ -112,12 +112,12 @@ namespace VTest.Core.ShapeSheet
 
             int rownum = 0;
             // Verify
-            Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
-            Assert.AreEqual(7, data_results[rownum][col_linepat]);
+            MUT.Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
+            MUT.Assert.AreEqual(7, data_results[rownum][col_linepat]);
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Writer_ResultsDouble_MultipleShapes()
         {
             var page1 = this.GetNewPage();
@@ -158,7 +158,7 @@ namespace VTest.Core.ShapeSheet
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Writer_ConsistencyChecking()
         {
             this.Check_Consistent_ResultTypes();
@@ -188,11 +188,11 @@ namespace VTest.Core.ShapeSheet
 
             int rownum = 0;
             // Verify
-            Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
-            Assert.AreEqual(7, data_results[rownum][col_linepat]);
+            MUT.Assert.AreEqual("7", data_formulas[rownum][col_linepat]);
+            MUT.Assert.AreEqual(7, data_results[rownum][col_linepat]);
 
-            Assert.AreEqual("2 in", data_formulas[rownum][col_pinx]);
-            Assert.AreEqual(2, data_results[rownum][col_pinx]);
+            MUT.Assert.AreEqual("2 in", data_formulas[rownum][col_pinx]);
+            MUT.Assert.AreEqual(2, data_results[rownum][col_pinx]);
             
             page1.Delete(0);
         }

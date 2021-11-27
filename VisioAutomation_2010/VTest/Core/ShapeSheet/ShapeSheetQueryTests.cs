@@ -1,17 +1,17 @@
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using VASS = VisioAutomation.ShapeSheet;
 
 namespace VTest.Core.ShapeSheet
 {
-    [TestClass]
+    [MUT.TestClass]
     public class ShapeSheetQueryTests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Query_GetResults_SingleShape()
         {
             var doc1 = this.GetNewDoc();
@@ -43,32 +43,32 @@ namespace VTest.Core.ShapeSheet
             var formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("RGB(255,0,0)", formulas[0][col_fg]);
-            Assert.AreEqual("RGB(0,0,255)", formulas[0][col_bg]);
-            Assert.AreEqual("40", formulas[0][col_filpat]);
+            MUT.Assert.AreEqual("RGB(255,0,0)", formulas[0][col_fg]);
+            MUT.Assert.AreEqual("RGB(0,0,255)", formulas[0][col_bg]);
+            MUT.Assert.AreEqual("40", formulas[0][col_filpat]);
 
             // now retrieve the results with GetResults as floats
             var float_results = query.GetResults<double>(page1,shapeids);
-            Assert.IsNotNull(float_results);
-            Assert.AreEqual(40.0, float_results[0][col_filpat]);
+            MUT.Assert.IsNotNull(float_results);
+            MUT.Assert.AreEqual(40.0, float_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1, shapeids);
-            Assert.AreEqual(40, int_results[0][col_filpat]);
+            MUT.Assert.AreEqual(40, int_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as strings
 
             var string_results = query.GetResults<string>(page1, shapeids);
 
-            Assert.AreEqual("RGB(255, 0, 0)", string_results[0][col_fg]);
-            Assert.AreEqual("RGB(0, 0, 255)", string_results[0][col_bg]);
-            Assert.AreEqual("40", string_results[0][col_filpat]);
+            MUT.Assert.AreEqual("RGB(255, 0, 0)", string_results[0][col_fg]);
+            MUT.Assert.AreEqual("RGB(0, 0, 255)", string_results[0][col_bg]);
+            MUT.Assert.AreEqual("40", string_results[0][col_filpat]);
 
             page1.Delete(0);
             doc1.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Query_GetResults_MultipleShapes()
         {
             var page1 = this.GetNewPage();
@@ -98,33 +98,33 @@ namespace VTest.Core.ShapeSheet
             var formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("2", formulas[0][col_fg]);
-            Assert.AreEqual("3", formulas[0][col_bg]);
-            Assert.AreEqual("40", formulas[0][col_filpat]);
+            MUT.Assert.AreEqual("2", formulas[0][col_fg]);
+            MUT.Assert.AreEqual("3", formulas[0][col_bg]);
+            MUT.Assert.AreEqual("40", formulas[0][col_filpat]);
 
             // now retrieve the results with GetResults as floats
             var float_results = query.GetResults<double>(page1, shapeids);
-            Assert.AreEqual(2.0, float_results[0][col_fg]);
-            Assert.AreEqual(3.0, float_results[0][col_bg]);
-            Assert.AreEqual(40.0, float_results[0][col_filpat]);
+            MUT.Assert.AreEqual(2.0, float_results[0][col_fg]);
+            MUT.Assert.AreEqual(3.0, float_results[0][col_bg]);
+            MUT.Assert.AreEqual(40.0, float_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1, shapeids);
 
-            Assert.AreEqual(2, int_results[0][col_fg]);
-            Assert.AreEqual(3, int_results[0][col_bg]);
-            Assert.AreEqual(40, int_results[0][col_filpat]);
+            MUT.Assert.AreEqual(2, int_results[0][col_fg]);
+            MUT.Assert.AreEqual(3, int_results[0][col_bg]);
+            MUT.Assert.AreEqual(40, int_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as strings
             var string_results = query.GetResults<string>(page1,shapeids);
-            Assert.AreEqual("2", string_results[0][col_fg]);
-            Assert.AreEqual("3", string_results[0][col_bg]);
-            Assert.AreEqual("40", string_results[0][col_filpat]);
+            MUT.Assert.AreEqual("2", string_results[0][col_fg]);
+            MUT.Assert.AreEqual("3", string_results[0][col_bg]);
+            MUT.Assert.AreEqual("40", string_results[0][col_filpat]);
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Query_SectionRowHandling()
         {
             var page1 = this.GetNewPage();
@@ -159,32 +159,32 @@ namespace VTest.Core.ShapeSheet
             int shape3_index = 3;
             int section0_index = 0;
 
-            Assert.AreEqual(4, data.Count);
-            Assert.AreEqual(1, data[shape0_index][section0_index].Count);
-            Assert.AreEqual(2, data[shape1_index][section0_index].Count);
-            Assert.AreEqual(0, data[shape2_index][section0_index].Count);
-            Assert.AreEqual(3, data[3][0].Count);
+            MUT.Assert.AreEqual(4, data.Count);
+            MUT.Assert.AreEqual(1, data[shape0_index][section0_index].Count);
+            MUT.Assert.AreEqual(2, data[shape1_index][section0_index].Count);
+            MUT.Assert.AreEqual(0, data[shape2_index][section0_index].Count);
+            MUT.Assert.AreEqual(3, data[3][0].Count);
 
-            Assert.AreEqual("\"1\"", data[shape0_index][section0_index][0][0]);
-            Assert.AreEqual("\"2\"", data[shape1_index][section0_index][0][0]);
-            Assert.AreEqual("\"3\"", data[shape1_index][section0_index][1][0]);
-            Assert.AreEqual("\"4\"", data[shape3_index][section0_index][0][0]);
-            Assert.AreEqual("\"5\"", data[shape3_index][section0_index][1][0]);
-            Assert.AreEqual("\"6\"", data[shape3_index][section0_index][2][0]);
+            MUT.Assert.AreEqual("\"1\"", data[shape0_index][section0_index][0][0]);
+            MUT.Assert.AreEqual("\"2\"", data[shape1_index][section0_index][0][0]);
+            MUT.Assert.AreEqual("\"3\"", data[shape1_index][section0_index][1][0]);
+            MUT.Assert.AreEqual("\"4\"", data[shape3_index][section0_index][0][0]);
+            MUT.Assert.AreEqual("\"5\"", data[shape3_index][section0_index][1][0]);
+            MUT.Assert.AreEqual("\"6\"", data[shape3_index][section0_index][2][0]);
 
 
-            Assert.AreEqual( "1", data2[shape0_index][section0_index][0][0]);
-            Assert.AreEqual( "2", data2[shape1_index][section0_index][0][0]);
-            Assert.AreEqual( "3", data2[shape1_index][section0_index][1][0]);
-            Assert.AreEqual( "4", data2[shape3_index][section0_index][0][0]);
-            Assert.AreEqual( "5", data2[shape3_index][section0_index][1][0]);
-            Assert.AreEqual( "6", data2[shape3_index][section0_index][2][0]);
+            MUT.Assert.AreEqual( "1", data2[shape0_index][section0_index][0][0]);
+            MUT.Assert.AreEqual( "2", data2[shape1_index][section0_index][0][0]);
+            MUT.Assert.AreEqual( "3", data2[shape1_index][section0_index][1][0]);
+            MUT.Assert.AreEqual( "4", data2[shape3_index][section0_index][0][0]);
+            MUT.Assert.AreEqual( "5", data2[shape3_index][section0_index][1][0]);
+            MUT.Assert.AreEqual( "6", data2[shape3_index][section0_index][2][0]);
 
             page1.Delete(0);
         }
 
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes()
         {
             var page1 = this.GetNewPage(new VA.Core.Size(10, 10));
@@ -196,7 +196,7 @@ namespace VTest.Core.ShapeSheet
 
             var shapeids = new List<int> { s1.ID, s2.ID, s3.ID };
 
-            Assert.AreEqual(3, page1.Shapes.Count);
+            MUT.Assert.AreEqual(3, page1.Shapes.Count);
 
             var query = new VASS.Query.CellQuery();
             var col_pinx = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
@@ -224,15 +224,15 @@ namespace VTest.Core.ShapeSheet
             {
                 for (int col = 0; col < query.Columns.Count; col++)
                 {
-                    Assert.AreEqual(expected_formulas[row,col], data_formulas[row][col]);
-                    Assert.AreEqual(expected_results[row,col], data_results[row][col]);
+                    MUT.Assert.AreEqual(expected_formulas[row,col], data_formulas[row][col]);
+                    MUT.Assert.AreEqual(expected_results[row,col], data_results[row][col]);
                 }
             }
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes_Verify_Out_Of_order()
         {
             var page1 = this.GetNewPage(new VA.Core.Size(10, 10));
@@ -248,7 +248,7 @@ namespace VTest.Core.ShapeSheet
             // but are queried as 2, 3, 1
             var shapeids = new List<int> { s2.ID, s3.ID, s1.ID };
 
-            Assert.AreEqual(5, page1.Shapes.Count);
+            MUT.Assert.AreEqual(5, page1.Shapes.Count);
 
             var query = new VASS.Query.CellQuery();
             var col_pinx = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
@@ -276,8 +276,8 @@ namespace VTest.Core.ShapeSheet
             {
                 for (int col = 0; col < query.Columns.Count; col++)
                 {
-                    Assert.AreEqual(expected_formulas[row, col], data_formulas[row][col]);
-                    Assert.AreEqual(expected_results[row, col], data_results[row][col]);
+                    MUT.Assert.AreEqual(expected_formulas[row, col], data_formulas[row][col]);
+                    MUT.Assert.AreEqual(expected_results[row, col], data_results[row][col]);
                 }
             }
 
@@ -285,7 +285,7 @@ namespace VTest.Core.ShapeSheet
         }
 
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Query_NonExistentSections()
         {
             var page1 = this.GetNewPage();
@@ -301,23 +301,23 @@ namespace VTest.Core.ShapeSheet
             // First verify that none of the shapes have the controls section locally or otherwise
             foreach (var s in shapes)
             {
-                Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
-                Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
+                MUT.Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
+                MUT.Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
             }
 
             // Try to retrieve the control cells rows for each shape, every shape should return zero rows
             foreach (var s in shapes)
             {
                 var r1 = VA.Shapes.ControlCells.GetCells(s, VisioAutomation.Core.CellValueType.Formula);
-                Assert.AreEqual(0,r1.Count);
+                MUT.Assert.AreEqual(0,r1.Count);
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
             var r2 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, VisioAutomation.Core.CellValueType.Formula);
-            Assert.AreEqual(shapes.Length,r2.Count);
+            MUT.Assert.AreEqual(shapes.Length,r2.Count);
             for (int i = 0; i < shapes.Length;i++)
             {
-                Assert.AreEqual(0,r2[i].Count);
+                MUT.Assert.AreEqual(0,r2[i].Count);
             }
 
             // Add a Controls row to shape2
@@ -329,13 +329,13 @@ namespace VTest.Core.ShapeSheet
             {
                 if (s != s2)
                 {
-                    Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
-                    Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
+                    MUT.Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
+                    MUT.Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
                 }
                 else
                 {
-                    Assert.AreEqual(-1, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
-                    Assert.AreEqual(-1, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
+                    MUT.Assert.AreEqual(-1, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
+                    MUT.Assert.AreEqual(-1, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
                 }
             }
 
@@ -345,27 +345,27 @@ namespace VTest.Core.ShapeSheet
                 if (s != s2)
                 {
                     var r1 = VA.Shapes.ControlCells.GetCells(s, VisioAutomation.Core.CellValueType.Formula);
-                    Assert.AreEqual(0, r1.Count);
+                    MUT.Assert.AreEqual(0, r1.Count);
                 }
                 else
                 {
                     var r1 = VA.Shapes.ControlCells.GetCells(s, VisioAutomation.Core.CellValueType.Formula);
-                    Assert.AreEqual(1, r1.Count);
+                    MUT.Assert.AreEqual(1, r1.Count);
                 }
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
             var r3 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, VisioAutomation.Core.CellValueType.Formula);
-            Assert.AreEqual(shapes.Length, r3.Count);
+            MUT.Assert.AreEqual(shapes.Length, r3.Count);
             for (int i = 0; i < shapes.Length; i++)
             {
                 if (shapes[i] != s2)
                 {
-                    Assert.AreEqual(0, r3[i].Count);
+                    MUT.Assert.AreEqual(0, r3[i].Count);
                 }
                 else
                 {
-                    Assert.AreEqual(1, r3[i].Count);
+                    MUT.Assert.AreEqual(1, r3[i].Count);
                 }
             }
 
@@ -406,7 +406,7 @@ namespace VTest.Core.ShapeSheet
             return fields_name_to_value;
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeSheet_Query_TestDuplicates()
         {
             // Ensure that duplicate cells are caught
@@ -423,7 +423,7 @@ namespace VTest.Core.ShapeSheet
                 caught_exc1 = true;
             }
 
-            Assert.IsTrue(caught_exc1);
+            MUT.Assert.IsTrue(caught_exc1);
 
             // Ensure that duplicate sections are caught
 
@@ -440,7 +440,7 @@ namespace VTest.Core.ShapeSheet
                 caught_exc2 = true;
             }
 
-            Assert.IsTrue(caught_exc2);
+            MUT.Assert.IsTrue(caught_exc2);
 
             // Ensure that Duplicates in Section Queries Are caught - 
             var sec_query_3 = new VASS.Query.SectionQuery();
@@ -456,7 +456,7 @@ namespace VTest.Core.ShapeSheet
                 caught_exc3 = true;
             }
 
-            Assert.IsTrue(caught_exc3);
+            MUT.Assert.IsTrue(caught_exc3);
         }
     }
 }
