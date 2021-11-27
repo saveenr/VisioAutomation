@@ -115,10 +115,10 @@
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
-    <Compile Include="ShapeSheet\StreamType.cs" />
+    <Compile Include="ShapeSheet\Streams\StreamType.cs" />
     <Compile Include="ShapeSheet\Writers\WriteRecord.cs" />
     <Compile Include="ShapeSheet\Writers\WriteRecordList.cs" />
-    <Compile Include="ShapeSheet\StreamArray.cs" />
+    <Compile Include="ShapeSheet\Streams\StreamArray.cs" />
     <Compile Include="Shapes\CustomPropertyNameCellsPair.cs" />
     <Compile Include="Shapes\CustomPropertyType.cs" />
     <Compile Include="Collections\ArraySegmentEnumerator.cs" />
