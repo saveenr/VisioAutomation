@@ -1,17 +1,17 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VTest.Core.Internal
 {
-    [TestClass]
+    [MUT.TestClass]
     public class TypeTests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void VerifySrcSize()
         {
             // Srcs must be 6 bytes
             var c1 = new VisioAutomation.Core.Src();
             int actual_size = System.Runtime.InteropServices.Marshal.SizeOf(c1);
-            Assert.AreEqual(6, actual_size);
+            MUT.Assert.AreEqual(6, actual_size);
 
             this.VerifyFormulaLiteralSize();
         }
@@ -23,10 +23,10 @@ namespace VTest.Core.Internal
 
             var instance = new VisioAutomation.Core.CellValue();
             int actual_size = System.Runtime.InteropServices.Marshal.SizeOf(instance);
-            Assert.AreEqual(4, actual_size);
+            MUT.Assert.AreEqual(4, actual_size);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Construct2DBitArray()
         {
             // check that cols and rows must be > 0
@@ -42,7 +42,7 @@ namespace VTest.Core.Internal
 
             if (caught == false)
             {
-                Assert.Fail("Did not catch expected exception");
+                MUT.Assert.Fail("Did not catch expected exception");
             }
 
             caught = false;
@@ -57,16 +57,16 @@ namespace VTest.Core.Internal
 
             if (caught == false)
             {
-                Assert.Fail("Did not catch expected exception");
+                MUT.Assert.Fail("Did not catch expected exception");
             }
 
             // Create a 1x1 BitArray
             var ba2 = new VisioAutomation.DocumentAnalysis.BitArray2D(1, 1);
-            Assert.AreEqual(false, ba2[0, 0]);
+            MUT.Assert.AreEqual(false, ba2[0, 0]);
             ba2[0, 0] = true;
-            Assert.AreEqual(true, ba2[0, 0]);
+            MUT.Assert.AreEqual(true, ba2[0, 0]);
             ba2[0, 0] = false;
-            Assert.AreEqual(false, ba2[0, 0]);
+            MUT.Assert.AreEqual(false, ba2[0, 0]);
         }
     }
 }

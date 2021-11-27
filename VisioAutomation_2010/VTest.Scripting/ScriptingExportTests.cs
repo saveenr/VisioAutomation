@@ -1,12 +1,12 @@
 using System.IO;
-using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VisioScripting_Tests
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingExportTests : VTest.VisioAutomationTest
     {
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Test_Export_Selection_SVGHTML()
         {
             var client = this.GetScriptingClient();

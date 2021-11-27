@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VADG = VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -6,10 +6,10 @@ using VA = VisioAutomation;
 
 namespace VTest.Models.Layouts
 {
-    [TestClass]
+    [MUT.TestClass]
     public class DirectedGraph_Tests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void DirectedGraph_WithBezierConnectors()
         {
             var directed_graph_drawing = this.create_sample_graph();
@@ -28,7 +28,7 @@ namespace VTest.Models.Layouts
             doc.Close();
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void DirectedGraph_WithDynamicConnectors()
         {
             var directed_graph_drawing = this.create_sample_graph();
@@ -46,7 +46,7 @@ namespace VTest.Models.Layouts
             doc.Close();
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
             var d = new VADG.DirectedGraphLayout();
@@ -67,13 +67,13 @@ namespace VTest.Models.Layouts
             renderer.LayoutOptions.UseDynamicConnectors = true;
             renderer.Render(page1, d);
 
-            Assert.IsNotNull(n0.VisioShape);
+            MUT.Assert.IsNotNull(n0.VisioShape);
             var props_dic = CustomPropertyHelper.GetDictionary(n0.VisioShape, VisioAutomation.Core.CellValueType.Formula);
 
-            Assert.IsTrue(props_dic.Count>=3);
-            Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Value);
-            Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Value);
-            Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Value);
+            MUT.Assert.IsTrue(props_dic.Count>=3);
+            MUT.Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Value);
+            MUT.Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Value);
+            MUT.Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Value);
 
             page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 

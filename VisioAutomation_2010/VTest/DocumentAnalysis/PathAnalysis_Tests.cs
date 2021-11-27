@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
 using VisioAutomation.ShapeSheet.Writers;
@@ -8,7 +8,7 @@ using VA = VisioAutomation;
 
 namespace VTest.DocumentAnalysis
 {
-    [TestClass]
+    [MUT.TestClass]
     public class PathAnalysis_Tests : VisioAutomationTest
     {
         private void connect(IVisio.Shape a, IVisio.Shape b, bool a_arrow, bool b_arrow)
@@ -41,7 +41,7 @@ namespace VTest.DocumentAnalysis
             }
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Connects_EnumerableExtensionMethod()
         {
             var page1 = this.GetNewPage();
@@ -51,11 +51,11 @@ namespace VTest.DocumentAnalysis
             this.connect(shapes[1], shapes[2], false, false);
 
             var cons = page1.Connects.ToList();
-            Assert.AreEqual(4, cons.Count);
+            MUT.Assert.AreEqual(4, cons.Count);
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void PathAnalysis_GetDirectEdgesRaw()
         {
             var page1 = this.GetNewPage();
@@ -69,15 +69,15 @@ namespace VTest.DocumentAnalysis
 
             var edges = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options);
             var map = new ConnectivityMap(edges);
-            Assert.AreEqual(2, map.CountFromNodes());
-            Assert.IsTrue(map.HasConnectionFromTo("A","B"));
-            Assert.IsTrue(map.HasConnectionFromTo("B", "C"));
-            Assert.AreEqual(1, map.CountConnectionsFrom("A"));
-            Assert.AreEqual(1, map.CountConnectionsFrom("B"));
+            MUT.Assert.AreEqual(2, map.CountFromNodes());
+            MUT.Assert.IsTrue(map.HasConnectionFromTo("A","B"));
+            MUT.Assert.IsTrue(map.HasConnectionFromTo("B", "C"));
+            MUT.Assert.AreEqual(1, map.CountConnectionsFrom("A"));
+            MUT.Assert.AreEqual(1, map.CountConnectionsFrom("B"));
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Connects_GetDirectedEdges_EdgesWithoutArrowsAreBidirectional()
         {
             var page1 = this.GetNewPage();
@@ -90,37 +90,37 @@ namespace VTest.DocumentAnalysis
             options1.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
             var edges1 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
-            Assert.AreEqual(3, map1.CountFromNodes());
-            Assert.IsTrue(map1.HasConnectionFromTo("A", "B"));
-            Assert.IsTrue(map1.HasConnectionFromTo("B", "A"));
-            Assert.IsTrue(map1.HasConnectionFromTo("B", "C"));
-            Assert.IsTrue(map1.HasConnectionFromTo("C", "B"));
-            Assert.AreEqual(1, map1.CountConnectionsFrom("A"));
-            Assert.AreEqual(2, map1.CountConnectionsFrom("B"));
-            Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
+            MUT.Assert.AreEqual(3, map1.CountFromNodes());
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("A", "B"));
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("B", "A"));
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("B", "C"));
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("C", "B"));
+            MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("A"));
+            MUT.Assert.AreEqual(2, map1.CountConnectionsFrom("B"));
+            MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options2.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
             var edges2 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
             var map2 = new ConnectivityMap(edges2);
-            Assert.AreEqual(3, map2.CountFromNodes());
-            Assert.IsTrue(map2.HasConnectionFromTo("A", "B"));
-            Assert.IsTrue(map2.HasConnectionFromTo("B", "A"));
-            Assert.IsTrue(map2.HasConnectionFromTo("B", "C"));
-            Assert.IsTrue(map2.HasConnectionFromTo("C", "B"));
-            Assert.IsTrue(map2.HasConnectionFromTo("A", "C"));
-            Assert.IsTrue(map2.HasConnectionFromTo("C", "A"));
+            MUT.Assert.AreEqual(3, map2.CountFromNodes());
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("A", "B"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("B", "A"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("B", "C"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("C", "B"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("A", "C"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("C", "A"));
             
-            Assert.AreEqual(2, map2.CountConnectionsFrom("A"));
-            Assert.AreEqual(2, map2.CountConnectionsFrom("B"));
-            Assert.AreEqual(2, map2.CountConnectionsFrom("C"));
+            MUT.Assert.AreEqual(2, map2.CountConnectionsFrom("A"));
+            MUT.Assert.AreEqual(2, map2.CountConnectionsFrom("B"));
+            MUT.Assert.AreEqual(2, map2.CountConnectionsFrom("C"));
 
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Connects_GetDirectedEdges_EdgesWithoutArrowsAreExcluded()
         {
             var page1 = this.GetNewPage();
@@ -134,16 +134,16 @@ namespace VTest.DocumentAnalysis
 
             var edges1 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options);
             var map1 = new ConnectivityMap(edges1);
-            Assert.AreEqual(0, map1.CountFromNodes());
+            MUT.Assert.AreEqual(0, map1.CountFromNodes());
 
             var edges2 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options);
             var map2 = new ConnectivityMap(edges2);
-            Assert.AreEqual(0, map2.CountFromNodes());
+            MUT.Assert.AreEqual(0, map2.CountFromNodes());
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Connects_GetDirectedEdges_EdgesWithoutArrowsAreExcluded_withArrowHeads1()
         {
             var page1 = this.GetNewPage();
@@ -157,11 +157,11 @@ namespace VTest.DocumentAnalysis
 
             var edges1 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
-            Assert.AreEqual(2, map1.CountFromNodes());
-            Assert.IsTrue(map1.HasConnectionFromTo("B", "A"));
-            Assert.IsTrue(map1.HasConnectionFromTo("C", "B"));
-            Assert.AreEqual(1, map1.CountConnectionsFrom("B"));
-            Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
+            MUT.Assert.AreEqual(2, map1.CountFromNodes());
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("B", "A"));
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("C", "B"));
+            MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("B"));
+            MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options2.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
@@ -169,17 +169,17 @@ namespace VTest.DocumentAnalysis
 
             var edges2 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
             var map2 = new ConnectivityMap(edges1);
-            Assert.AreEqual(2, map2.CountFromNodes());
-            Assert.IsTrue(map2.HasConnectionFromTo("B", "A"));
-            Assert.IsTrue(map2.HasConnectionFromTo("C", "B"));
-            Assert.AreEqual(1, map2.CountConnectionsFrom("B"));
-            Assert.AreEqual(1, map2.CountConnectionsFrom("C"));
+            MUT.Assert.AreEqual(2, map2.CountFromNodes());
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("B", "A"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("C", "B"));
+            MUT.Assert.AreEqual(1, map2.CountConnectionsFrom("B"));
+            MUT.Assert.AreEqual(1, map2.CountConnectionsFrom("C"));
 
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Connects_GetDirectedEdges_EdgesWithoutArrowsAreExcluded_withArrowHeads2()
         {
             var page1 = this.GetNewPage();
@@ -193,31 +193,31 @@ namespace VTest.DocumentAnalysis
 
             var edges1 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
-            Assert.AreEqual(3, map1.CountFromNodes());
-            Assert.IsTrue(map1.HasConnectionFromTo("A", "B"));
-            Assert.IsTrue(map1.HasConnectionFromTo("B", "A"));
-            Assert.IsTrue(map1.HasConnectionFromTo("B", "C"));
-            Assert.IsTrue(map1.HasConnectionFromTo("C", "B"));
-            Assert.AreEqual(1, map1.CountConnectionsFrom("A"));
-            Assert.AreEqual(2, map1.CountConnectionsFrom("B"));
-            Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
+            MUT.Assert.AreEqual(3, map1.CountFromNodes());
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("A", "B"));
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("B", "A"));
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("B", "C"));
+            MUT.Assert.IsTrue(map1.HasConnectionFromTo("C", "B"));
+            MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("A"));
+            MUT.Assert.AreEqual(2, map1.CountConnectionsFrom("B"));
+            MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var options2 = new VA.DocumentAnalysis.ConnectionAnalyzerOptions();
             options2.NoArrowsHandling = VA.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
 
             var edges2 = VA.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
             var map2 = new ConnectivityMap(edges2);
-            Assert.AreEqual(3, map2.CountFromNodes());
-            Assert.IsTrue(map2.HasConnectionFromTo("A", "B"));
-            Assert.IsTrue(map2.HasConnectionFromTo("B", "A"));
-            Assert.IsTrue(map2.HasConnectionFromTo("B", "C"));
-            Assert.IsTrue(map2.HasConnectionFromTo("C", "B"));
-            Assert.IsTrue(map2.HasConnectionFromTo("A", "C"));
-            Assert.IsTrue(map2.HasConnectionFromTo("C", "A"));
+            MUT.Assert.AreEqual(3, map2.CountFromNodes());
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("A", "B"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("B", "A"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("B", "C"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("C", "B"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("A", "C"));
+            MUT.Assert.IsTrue(map2.HasConnectionFromTo("C", "A"));
 
-            Assert.AreEqual(2, map2.CountConnectionsFrom("A"));
-            Assert.AreEqual(2, map2.CountConnectionsFrom("B"));
-            Assert.AreEqual(2, map2.CountConnectionsFrom("C"));
+            MUT.Assert.AreEqual(2, map2.CountConnectionsFrom("A"));
+            MUT.Assert.AreEqual(2, map2.CountConnectionsFrom("B"));
+            MUT.Assert.AreEqual(2, map2.CountConnectionsFrom("C"));
 
 
             page1.Delete(0);

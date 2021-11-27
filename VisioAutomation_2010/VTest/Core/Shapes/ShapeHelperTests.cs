@@ -1,11 +1,11 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VTest.Core.Shapes
 {
-    [TestClass]
+    [MUT.TestClass]
     public class ShapeHelperTests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeHelper_Test_GetNestedShapes_SingleShapeNoSubShapes()
         {
             // For a single shape with no subshapes, GetNestedShapes returns the single starting shape
@@ -14,12 +14,12 @@ namespace VTest.Core.Shapes
 
             var shapes = VisioAutomation.Shapes.ShapeHelper.GetNestedShapes(shape0);
 
-            Assert.AreEqual(1,shapes.Count);
-            Assert.IsTrue(shapes.Contains(shape0));
+            MUT.Assert.AreEqual(1,shapes.Count);
+            MUT.Assert.IsTrue(shapes.Contains(shape0));
             page.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeHelper_Test_GetNestedShapes_GroupWithTwoSubShapes()
         {
             // group with two shapes
@@ -31,14 +31,14 @@ namespace VTest.Core.Shapes
             var group = SelectAndGroup(active_window, new[] { shape0, shape1 });
             var shapes = VisioAutomation.Shapes.ShapeHelper.GetNestedShapes(group);
 
-            Assert.AreEqual(3, shapes.Count);
-            Assert.IsTrue(shapes.Contains(shape0));
-            Assert.IsTrue(shapes.Contains(shape1));
-            Assert.IsTrue(shapes.Contains(group));
+            MUT.Assert.AreEqual(3, shapes.Count);
+            MUT.Assert.IsTrue(shapes.Contains(shape0));
+            MUT.Assert.IsTrue(shapes.Contains(shape1));
+            MUT.Assert.IsTrue(shapes.Contains(group));
             page.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ShapeHelper_Test_GetNestedShapes_GroupWithSubGroups()
         {
             // group with subgroups
@@ -62,13 +62,13 @@ namespace VTest.Core.Shapes
 
             var shapes = VisioAutomation.Shapes.ShapeHelper.GetNestedShapes(group2);
 
-            Assert.AreEqual(7, shapes.Count);
-            Assert.IsTrue(shapes.Contains(shape0));
-            Assert.IsTrue(shapes.Contains(shape1));
-            Assert.IsTrue(shapes.Contains(shape2));
-            Assert.IsTrue(shapes.Contains(shape3));
-            Assert.IsTrue(shapes.Contains(group0));
-            Assert.IsTrue(shapes.Contains(group1));
+            MUT.Assert.AreEqual(7, shapes.Count);
+            MUT.Assert.IsTrue(shapes.Contains(shape0));
+            MUT.Assert.IsTrue(shapes.Contains(shape1));
+            MUT.Assert.IsTrue(shapes.Contains(shape2));
+            MUT.Assert.IsTrue(shapes.Contains(shape3));
+            MUT.Assert.IsTrue(shapes.Contains(group0));
+            MUT.Assert.IsTrue(shapes.Contains(group1));
             page.Delete(0);
         }
     }

@@ -1,12 +1,12 @@
-using UT = Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace VTest.Scripting
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingApplicationTests : VTest.VisioAutomationTest
     {
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Test_Resize_Application_Window1()
         {
 
@@ -17,16 +17,16 @@ namespace VTest.Scripting
 
             client.Application.SetWindowRectangle(new_rect);
             var actual_rect1 = client.Application.GetWindowRectangle();
-            UT.Assert.AreEqual(desired_size, actual_rect1.Size);
+            MUT.Assert.AreEqual(desired_size, actual_rect1.Size);
 
             client.Application.SetWindowRectangle(old_rect);
             var actual_rect2 = client.Application.GetWindowRectangle();
-            UT.Assert.AreEqual(old_rect.Size, actual_rect2.Size);
-            UT.Assert.AreEqual(old_rect, actual_rect2);
+            MUT.Assert.AreEqual(old_rect.Size, actual_rect2.Size);
+            MUT.Assert.AreEqual(old_rect, actual_rect2);
 
         }
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Test_Resize_Application_Window2()
         {
             var client = this.GetScriptingClient();
@@ -34,25 +34,25 @@ namespace VTest.Scripting
             var doc = client.Document.NewDocument(page_size);
 
             var pagesizes = client.Page.GetPageSize(VisioScripting.TargetPages.Auto);
-            UT.Assert.AreEqual(10.0, pagesizes[0].Width);
-            UT.Assert.AreEqual(5.0, pagesizes[0].Height);
-            UT.Assert.AreEqual(0, client.Selection.GetSelection(VisioScripting.TargetWindow.Auto).Count);
+            MUT.Assert.AreEqual(10.0, pagesizes[0].Width);
+            MUT.Assert.AreEqual(5.0, pagesizes[0].Height);
+            MUT.Assert.AreEqual(0, client.Selection.GetSelection(VisioScripting.TargetWindow.Auto).Count);
 
 
             client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 2, 2);
-            UT.Assert.AreEqual(1, client.Selection.GetSelection(VisioScripting.TargetWindow.Auto).Count);
+            MUT.Assert.AreEqual(1, client.Selection.GetSelection(VisioScripting.TargetWindow.Auto).Count);
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Test_App_to_Front()
         {
             var client = this.GetScriptingClient();
             client.Application.MoveWindowToFront();
         }
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Undo_Scenarios()
         {
             var client = this.GetScriptingClient();
@@ -60,15 +60,15 @@ namespace VTest.Scripting
             var drawing = client.Document.NewDocument(page_size);
 
             var page = client.Page.NewPage(VisioScripting.TargetDocument.Auto, page_size, false);
-            UT.Assert.AreEqual(0, page.Shapes.Count);
+            MUT.Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
-            UT.Assert.AreEqual(1, page.Shapes.Count);
+            MUT.Assert.AreEqual(1, page.Shapes.Count);
             client.Undo.UndoLastAction();
-            UT.Assert.AreEqual(0, page.Shapes.Count);
+            MUT.Assert.AreEqual(0, page.Shapes.Count);
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_CloseDocument_Scenarios()
         {
             var page_size = new VisioAutomation.Core.Size(8.5, 11);
@@ -79,10 +79,10 @@ namespace VTest.Scripting
 
             client.Document.CloseAllDocumentsWithoutSaving();
 
-            UT.Assert.IsFalse(client.Document.HasActiveDocument);
+            MUT.Assert.IsFalse(client.Document.HasActiveDocument);
             var application = client.Application.GetApplication();
             var documents = application.Documents;
-            UT.Assert.AreEqual(0, documents.Count);
+            MUT.Assert.AreEqual(0, documents.Count);
         }
     }
 }

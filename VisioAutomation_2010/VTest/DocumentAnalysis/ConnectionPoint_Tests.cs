@@ -1,19 +1,19 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using VisioAutomation.Shapes;
 
 namespace VTest.Core.Connections
 {
-    [TestClass]
+    [MUT.TestClass]
     public class ConnectionPoint_Tests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void ConnectionPoints_AddRemove()
         {
             var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             var cp_type = VisioScripting.Models.ConnectionPointType.Inward;
 
@@ -28,59 +28,59 @@ namespace VTest.Core.Connections
             cpd2.Type = (int) cp_type;
 
             ConnectionPointHelper.Add(s1, cpd1);
-            Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));
 
             ConnectionPointHelper.Add(s1, cpd2);
-            Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
 
             var controlpoints_f = ConnectionPointCells.GetCells(s1, VisioAutomation.Core.CellValueType.Formula);
             var controlpoints_r = ConnectionPointCells.GetCells(s1, VisioAutomation.Core.CellValueType.Result);
-            Assert.AreEqual(2, controlpoints_f.Count);
-            Assert.AreEqual(2, controlpoints_r.Count);
+            MUT.Assert.AreEqual(2, controlpoints_f.Count);
+            MUT.Assert.AreEqual(2, controlpoints_r.Count);
             var cp_f0 = controlpoints_f[0];
             var cp_r0 = controlpoints_r[0];
-            Assert.AreEqual("0 in", cp_f0.DirX.Value);
-            Assert.AreEqual("0 in", cp_f0.DirY.Value);
-            Assert.AreEqual("0", cp_f0.Type.Value);
-            Assert.AreEqual("Width*0.25", cp_f0.X.Value);
-            Assert.AreEqual("Height*0", cp_f0.Y.Value);
+            MUT.Assert.AreEqual("0 in", cp_f0.DirX.Value);
+            MUT.Assert.AreEqual("0 in", cp_f0.DirY.Value);
+            MUT.Assert.AreEqual("0", cp_f0.Type.Value);
+            MUT.Assert.AreEqual("Width*0.25", cp_f0.X.Value);
+            MUT.Assert.AreEqual("Height*0", cp_f0.Y.Value);
 
-            Assert.AreEqual("0.0000 in.", cp_r0.DirX.Value);
-            Assert.AreEqual("0.0000 in.", cp_r0.DirY.Value);
-            Assert.AreEqual("0", cp_r0.Type.Value);
-            Assert.AreEqual("1.0000 in.", cp_r0.X.Value);
-            Assert.AreEqual("0.0000 in.", cp_r0.Y.Value);
+            MUT.Assert.AreEqual("0.0000 in.", cp_r0.DirX.Value);
+            MUT.Assert.AreEqual("0.0000 in.", cp_r0.DirY.Value);
+            MUT.Assert.AreEqual("0", cp_r0.Type.Value);
+            MUT.Assert.AreEqual("1.0000 in.", cp_r0.X.Value);
+            MUT.Assert.AreEqual("0.0000 in.", cp_r0.Y.Value);
 
             var cp_f1 = controlpoints_f[1];
             var cp_r1 = controlpoints_r[1];
-            Assert.AreEqual("0 in", cp_f1.DirX.Value);
-            Assert.AreEqual("0 in", cp_f1.DirY.Value);
-            Assert.AreEqual("0", cp_f1.Type.Value);
-            Assert.AreEqual("Width*0.75", cp_f1.X.Value);
-            Assert.AreEqual("Height*0", cp_f1.Y.Value);
+            MUT.Assert.AreEqual("0 in", cp_f1.DirX.Value);
+            MUT.Assert.AreEqual("0 in", cp_f1.DirY.Value);
+            MUT.Assert.AreEqual("0", cp_f1.Type.Value);
+            MUT.Assert.AreEqual("Width*0.75", cp_f1.X.Value);
+            MUT.Assert.AreEqual("Height*0", cp_f1.Y.Value);
 
-            Assert.AreEqual("0.0000 in.", cp_r1.DirX.Value);
-            Assert.AreEqual("0.0000 in.", cp_r1.DirY.Value);
-            Assert.AreEqual("0", cp_r1.Type.Value);
-            Assert.AreEqual("3.0000 in.", cp_r1.X.Value);
-            Assert.AreEqual("0.0000 in.", cp_r1.Y.Value);
+            MUT.Assert.AreEqual("0.0000 in.", cp_r1.DirX.Value);
+            MUT.Assert.AreEqual("0.0000 in.", cp_r1.DirY.Value);
+            MUT.Assert.AreEqual("0", cp_r1.Type.Value);
+            MUT.Assert.AreEqual("3.0000 in.", cp_r1.X.Value);
+            MUT.Assert.AreEqual("0.0000 in.", cp_r1.Y.Value);
 
 
             ConnectionPointHelper.Delete(s1, 1);
-            Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));
             ConnectionPointHelper.Delete(s1, 0);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ConnectionPoints_DeleteAll()
         {
             var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             var cp_type = VisioScripting.Models.ConnectionPointType.Inward;
 
@@ -99,22 +99,22 @@ namespace VTest.Core.Connections
                 ConnectionPointHelper.Add(s1, cp);
             }
 
-            Assert.AreEqual(4, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(4, ConnectionPointHelper.GetCount(s1));
 
             int num_deleted = ConnectionPointHelper.Delete(s1);
-            Assert.AreEqual(4, num_deleted);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(4, num_deleted);
+            MUT.Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void ConnectionPoints_Set()
         {
             var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             var cp_type = VisioScripting.Models.ConnectionPointType.Inward;
 
@@ -135,7 +135,7 @@ namespace VTest.Core.Connections
                 ConnectionPointHelper.Add(s1, cp);
             }
 
-            Assert.AreEqual(4, ConnectionPointHelper.GetCount(s1));
+            MUT.Assert.AreEqual(4, ConnectionPointHelper.GetCount(s1));
 
             var desired_cp0 = new ConnectionPointCells();
             desired_cp0.X = "Width*0.025";
@@ -150,12 +150,12 @@ namespace VTest.Core.Connections
 
             var actual_cp = ConnectionPointCells.GetCells(s1, VisioAutomation.Core.CellValueType.Formula);
 
-            Assert.AreEqual(desired_cp0.X, actual_cp[0].X);
-            Assert.AreEqual(desired_cp0.Y, actual_cp[0].Y);
+            MUT.Assert.AreEqual(desired_cp0.X, actual_cp[0].X);
+            MUT.Assert.AreEqual(desired_cp0.Y, actual_cp[0].Y);
 
 
-            Assert.AreEqual(desired_cp1.X, actual_cp[1].X);
-            Assert.AreEqual(desired_cp1.Y, actual_cp[1].Y);
+            MUT.Assert.AreEqual(desired_cp1.X, actual_cp[1].X);
+            MUT.Assert.AreEqual(desired_cp1.Y, actual_cp[1].Y);
             page1.Delete(0);
         }
     }

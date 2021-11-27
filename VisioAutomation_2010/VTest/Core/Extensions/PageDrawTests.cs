@@ -1,15 +1,15 @@
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio= Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
 namespace VTest.Core.Extensions
 {
-    [TestClass]
+    [MUT.TestClass]
     public class PageDrawTests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void Page_Draw_Line()
         {
             var page1 = this.GetNewPage();
@@ -19,7 +19,7 @@ namespace VTest.Core.Extensions
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Page_Draw_Spline()
         {
             var page1 = this.GetNewPage();
@@ -36,7 +36,7 @@ namespace VTest.Core.Extensions
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Page_Draw_RoundedRectangle()
         {
             var page1 = this.GetNewPage();

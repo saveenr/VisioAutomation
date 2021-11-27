@@ -1,7 +1,7 @@
 using System.Data;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using GRID = VisioAutomation.Models.Layouts.Grid;
 using VA = VisioAutomation;
@@ -10,11 +10,11 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Scripting
 {
-    [TestClass]
+    [MUT.TestClass]
     public class ScriptingDrawTests : VisioAutomationTest
     {
-        [TestMethod]
-        [DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]
+        [MUT.TestMethod]
+        [MUT.DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]
         public void Scripting_Draw_OrgChart()
         {
             // Load the chart
@@ -29,7 +29,7 @@ namespace VTest.Scripting
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Draw_DataTable()
         {
             var pagesize = new VisioAutomation.Core.Size(4, 4);
@@ -68,13 +68,13 @@ namespace VTest.Scripting
 
             // Verify
             int num_shapes_expected = items.Length*dt.Columns.Count;
-            Assert.AreEqual(num_shapes_expected, shapes.Count);
+            MUT.Assert.AreEqual(num_shapes_expected, shapes.Count);
 
             // Cleanup
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Draw_Grid()
         {
             var origin = new VisioAutomation.Core.Point(0, 4);
@@ -104,13 +104,13 @@ namespace VTest.Scripting
             int total_shapes_expected = cols*rows;
             var shapes = page.Shapes.ToList();
             int total_shapes_actual = shapes.Count;
-            Assert.AreEqual(total_shapes_expected,total_shapes_actual);
+            MUT.Assert.AreEqual(total_shapes_expected,total_shapes_actual);
 
             // Cleanup
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Draw_RectangleLineOval_0()
         {
             var client = this.GetScriptingClient();
@@ -127,7 +127,7 @@ namespace VTest.Scripting
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Draw_BezierPolyLine_0()
         {
             var points = new[]
@@ -152,8 +152,8 @@ namespace VTest.Scripting
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
-        [DeploymentItem(@"datafiles\directed_graph_1.xml", "datafiles")]
+        [MUT.TestMethod]
+        [MUT.DeploymentItem(@"datafiles\directed_graph_1.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph1()
         {
             // Load the graph
@@ -170,8 +170,8 @@ namespace VTest.Scripting
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
-        [DeploymentItem(@"datafiles\directed_graph_2.xml", "datafiles")]
+        [MUT.TestMethod]
+        [MUT.DeploymentItem(@"datafiles\directed_graph_2.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph2()
         {
             // Load the graph
@@ -187,8 +187,8 @@ namespace VTest.Scripting
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
-        [DeploymentItem(@"datafiles\directed_graph_3.xml", "datafiles")]
+        [MUT.TestMethod]
+        [MUT.DeploymentItem(@"datafiles\directed_graph_3.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph3()
         {
             // Load the graph
@@ -205,8 +205,8 @@ namespace VTest.Scripting
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
-        [DeploymentItem(@"datafiles\directed_graph_4.xml", "datafiles")]
+        [MUT.TestMethod]
+        [MUT.DeploymentItem(@"datafiles\directed_graph_4.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph4()
         {
             // Load the graph
@@ -229,7 +229,7 @@ namespace VTest.Scripting
 
             if (!File.Exists(inputfilename))
             {
-                Assert.Fail("Could not locate " + inputfilename);
+                MUT.Assert.Fail("Could not locate " + inputfilename);
             }
             string text = File.ReadAllText(inputfilename);
             return text;
@@ -264,7 +264,7 @@ namespace VTest.Scripting
             client.Model.DrawDirectedGraphDocument(dgdoc,dgstyling);
         }
         
-        [TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Drop_Master()
         {
             var pagesize = new VA.Core.Size(4, 4);
@@ -288,13 +288,13 @@ namespace VTest.Scripting
             var application = client.Application.GetApplication();
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
-            Assert.AreEqual(1, shapes.Count);
+            MUT.Assert.AreEqual(1, shapes.Count);
 
             // cleanup
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Drop_Many()
         {
             var pagesize = new VA.Core.Size(10, 10);
@@ -319,7 +319,7 @@ namespace VTest.Scripting
 
             // Verify
             var application = client.Application.GetApplication();
-            Assert.AreEqual(4, application.ActivePage.Shapes.Count);
+            MUT.Assert.AreEqual(4, application.ActivePage.Shapes.Count);
 
             // Cleanup
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
@@ -333,7 +333,7 @@ namespace VTest.Scripting
             client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Drop_Container_Master_Object()
         {
             var pagesize = new VA.Core.Size(4, 4);
@@ -378,20 +378,20 @@ namespace VTest.Scripting
             // Verify
             var shapes = active_page.Shapes;
             // There should be two shapes... the rectangle and the container
-            Assert.AreEqual(2, shapes.Count);
+            MUT.Assert.AreEqual(2, shapes.Count);
 
             // Verify that we did indeed drop a container
 
             var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(dropped_container, VA.Core.CellValueType.Result);
-            Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
+            MUT.Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
             var prop = results_dic["msvStructureType"];
-            Assert.AreEqual("Container", prop.Value.Value);
+            MUT.Assert.AreEqual("Container", prop.Value.Value);
 
             // cleanup
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Drop_Container_Master_Name()
         {
             var pagesize = new VA.Core.Size(4, 4);
@@ -424,13 +424,13 @@ namespace VTest.Scripting
             // Verify
             var shapes = active_page.Shapes;
             // There should be two shapes... the rectangle and the container
-            Assert.AreEqual(2, shapes.Count);
+            MUT.Assert.AreEqual(2, shapes.Count);
 
             // Verify that we did indeed drop a container           
             var results_dic = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(dropped_container, VA.Core.CellValueType.Result);
-            Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
+            MUT.Assert.IsTrue(results_dic.ContainsKey("msvStructureType"));
             var prop = results_dic["msvStructureType"];
-            Assert.AreEqual("Container", prop.Value.Value);
+            MUT.Assert.AreEqual("Container", prop.Value.Value);
 
             // cleanup
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);

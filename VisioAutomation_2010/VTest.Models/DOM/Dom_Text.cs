@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VABOX = VisioAutomation.Models.Layouts.Box;
 using VA=VisioAutomation;
 
 namespace VTest.Dom
 {
-    [TestClass]
+    [MUT.TestClass]
     public class Dom_Text : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void DomText_CharacterFormatting()
         {
             this.DomText_CharacterBold();
@@ -30,7 +30,7 @@ namespace VTest.Dom
 
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1, charfmt.Count);
+            MUT.Assert.AreEqual(1, charfmt.Count);
 
             page1.Delete(0);
         }
@@ -45,8 +45,8 @@ namespace VTest.Dom
 
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[0].Style.Value);
+            MUT.Assert.AreEqual(1, charfmt.Count);
+            MUT.Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[0].Style.Value);
 
             page1.Delete(0);
         }
@@ -61,8 +61,8 @@ namespace VTest.Dom
 
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[0].Style.Value);
+            MUT.Assert.AreEqual(1, charfmt.Count);
+            MUT.Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[0].Style.Value);
 
             page1.Delete(0);
         }
@@ -79,11 +79,11 @@ namespace VTest.Dom
 
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var charfmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1, charfmt.Count);
+            MUT.Assert.AreEqual(1, charfmt.Count);
 
             AssertUtil.OneOf( new[] { "0", "THEMEVAL()" }, charfmt[0].Style.Value);
 
-            Assert.AreEqual(impact.ID.ToString(), charfmt[0].Font.Value);
+            MUT.Assert.AreEqual(impact.ID.ToString(), charfmt[0].Font.Value);
 
             page1.Delete(0);
         }
@@ -121,14 +121,14 @@ namespace VTest.Dom
             var charfmt = textfmt.CharacterFormats;
 
             // check the number of character regions
-            Assert.AreEqual(5, charfmt.Count);
+            MUT.Assert.AreEqual(5, charfmt.Count);
 
             // check the fonts
-            Assert.AreEqual(segoeui.ID.ToString(), charfmt[0].Font.Value);
-            Assert.AreEqual(impact.ID.ToString(), charfmt[1].Font.Value);
-            Assert.AreEqual(couriernew.ID.ToString(), charfmt[2].Font.Value);
-            Assert.AreEqual(georgia.ID.ToString(), charfmt[3].Font.Value);
-            Assert.AreEqual(segoeui.ID.ToString(), charfmt[4].Font.Value);
+            MUT.Assert.AreEqual(segoeui.ID.ToString(), charfmt[0].Font.Value);
+            MUT.Assert.AreEqual(impact.ID.ToString(), charfmt[1].Font.Value);
+            MUT.Assert.AreEqual(couriernew.ID.ToString(), charfmt[2].Font.Value);
+            MUT.Assert.AreEqual(georgia.ID.ToString(), charfmt[3].Font.Value);
+            MUT.Assert.AreEqual(segoeui.ID.ToString(), charfmt[4].Font.Value);
 
 
             // check the styles
@@ -139,19 +139,19 @@ namespace VTest.Dom
 
             AssertUtil.OneOf(new[] { style_none, "THEMEVAL()" }, style_value_0);
 
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[1].Style.Value);
-            Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[2].Style.Value);
-            Assert.AreEqual(((int)(VA.Models.Text.CharStyle.Italic | VA.Models.Text.CharStyle.Bold)).ToString(), charfmt[3].Style.Value);
+            MUT.Assert.AreEqual(((int)VA.Models.Text.CharStyle.Italic).ToString(), charfmt[1].Style.Value);
+            MUT.Assert.AreEqual(((int)VA.Models.Text.CharStyle.Bold).ToString(), charfmt[2].Style.Value);
+            MUT.Assert.AreEqual(((int)(VA.Models.Text.CharStyle.Italic | VA.Models.Text.CharStyle.Bold)).ToString(), charfmt[3].Style.Value);
 
             AssertUtil.OneOf(new[] { style_none, "THEMEVAL()" }, style_value_4);
 
             // check the text run content
             var charruns = textfmt.CharacterTextRuns;
-            Assert.AreEqual(4, charruns.Count);
-            Assert.AreEqual("{Normal}", charruns[0].Text);
-            Assert.AreEqual("{Italic}", charruns[1].Text);
-            Assert.AreEqual("{Bold}", charruns[2].Text);
-            Assert.AreEqual("{Bold Italic}", charruns[3].Text);
+            MUT.Assert.AreEqual(4, charruns.Count);
+            MUT.Assert.AreEqual("{Normal}", charruns[0].Text);
+            MUT.Assert.AreEqual("{Italic}", charruns[1].Text);
+            MUT.Assert.AreEqual("{Bold}", charruns[2].Text);
+            MUT.Assert.AreEqual("{Bold Italic}", charruns[3].Text);
 
             // cleanup
             page1.Delete(0);
@@ -166,7 +166,7 @@ namespace VTest.Dom
 
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var parafmt = textfmt.ParagraphFormats;
-            Assert.AreEqual(1, parafmt.Count);
+            MUT.Assert.AreEqual(1, parafmt.Count);
 
             page1.Delete(0);
         }
@@ -181,9 +181,9 @@ namespace VTest.Dom
 
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var parafmt = textfmt.ParagraphFormats;
-            Assert.AreEqual(1, parafmt.Count);
+            MUT.Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Left).ToString(), parafmt[0].HorizontalAlign.Value);
+            MUT.Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Left).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }
@@ -198,9 +198,9 @@ namespace VTest.Dom
 
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var parafmt = textfmt.ParagraphFormats;
-            Assert.AreEqual(1, parafmt.Count);
+            MUT.Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Center).ToString(), parafmt[0].HorizontalAlign.Value);
+            MUT.Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Center).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }
@@ -215,9 +215,9 @@ namespace VTest.Dom
 
             var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0, VisioAutomation.Core.CellValueType.Formula);
             var parafmt = textfmt.ParagraphFormats;
-            Assert.AreEqual(1, parafmt.Count);
+            MUT.Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Right).ToString(), parafmt[0].HorizontalAlign.Value);
+            MUT.Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Right).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }

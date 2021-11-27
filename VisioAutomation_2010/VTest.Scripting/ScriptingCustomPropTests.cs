@@ -1,14 +1,14 @@
 using System.Linq;
-using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 
 namespace VisioScripting_Tests
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingCustomPropTests : VTest.VisioAutomationTest
     {
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_ShapeSheet_SetNoShapes()
         {
 
@@ -37,7 +37,7 @@ namespace VisioScripting_Tests
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_CustomProps_Scenarios()
         {
             var client = this.GetScriptingClient();
@@ -55,42 +55,42 @@ namespace VisioScripting_Tests
             client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
             var prop_dic0 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
-            UT.Assert.AreEqual(3, prop_dic0.Count);
-            UT.Assert.AreEqual(0, prop_dic0[s1].Count);
-            UT.Assert.AreEqual(0, prop_dic0[s2].Count);
-            UT.Assert.AreEqual(0, prop_dic0[s3].Count);
+            MUT.Assert.AreEqual(3, prop_dic0.Count);
+            MUT.Assert.AreEqual(0, prop_dic0[s1].Count);
+            MUT.Assert.AreEqual(0, prop_dic0[s2].Count);
+            MUT.Assert.AreEqual(0, prop_dic0[s3].Count);
 
             var cp = new CustomPropertyCells();
             cp.Value = "\"BAR\"";
             client.CustomProperty.SetCustomProperty(VisioScripting.TargetShapes.Auto, "FOO",cp);
 
             var prop_dic1 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
-            UT.Assert.AreEqual(3, prop_dic1.Count);
-            UT.Assert.AreEqual(1, prop_dic1[s1].Count);
-            UT.Assert.AreEqual(1, prop_dic1[s2].Count);
-            UT.Assert.AreEqual(1, prop_dic1[s3].Count);
+            MUT.Assert.AreEqual(3, prop_dic1.Count);
+            MUT.Assert.AreEqual(1, prop_dic1[s1].Count);
+            MUT.Assert.AreEqual(1, prop_dic1[s2].Count);
+            MUT.Assert.AreEqual(1, prop_dic1[s3].Count);
 
             var cp1 = prop_dic1[s1]["FOO"];
             var cp2 = prop_dic1[s2]["FOO"];
             var cp3 = prop_dic1[s3]["FOO"];
-            UT.Assert.AreEqual("\"BAR\"", cp1.Value.Value);
-            UT.Assert.AreEqual("\"BAR\"", cp2.Value.Value);
-            UT.Assert.AreEqual("\"BAR\"", cp3.Value.Value);
+            MUT.Assert.AreEqual("\"BAR\"", cp1.Value.Value);
+            MUT.Assert.AreEqual("\"BAR\"", cp2.Value.Value);
+            MUT.Assert.AreEqual("\"BAR\"", cp3.Value.Value);
             
 
             var hasprops0 = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
-            UT.Assert.IsTrue(hasprops0.All(v => v == true));
+            MUT.Assert.IsTrue(hasprops0.All(v => v == true));
 
             client.CustomProperty.DeleteCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
 
             var prop_dic2 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
-            UT.Assert.AreEqual(3, prop_dic2.Count);
-            UT.Assert.AreEqual(0, prop_dic2[s1].Count);
-            UT.Assert.AreEqual(0, prop_dic2[s2].Count);
-            UT.Assert.AreEqual(0, prop_dic2[s3].Count);
+            MUT.Assert.AreEqual(3, prop_dic2.Count);
+            MUT.Assert.AreEqual(0, prop_dic2[s1].Count);
+            MUT.Assert.AreEqual(0, prop_dic2[s2].Count);
+            MUT.Assert.AreEqual(0, prop_dic2[s3].Count);
             
             var hasprops1 = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
-            UT.Assert.IsTrue(hasprops1.All(v => v == false));
+            MUT.Assert.IsTrue(hasprops1.All(v => v == false));
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }

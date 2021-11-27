@@ -1,22 +1,22 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioPowerShell.Commands.VisioApplication;
 using VisioPowerShell_Tests;
 using VisioPowerShell_Tests.Framework;
 
 namespace VTest.PowerShell
 {
-    [TestClass]
+    [MUT.TestClass]
     public class VisioPS_Basic_Tests
     {
         private static readonly VisioPS_Session Session = new VisioPS_Session();
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext context)
+        [MUT.ClassInitialize]
+        public static void ClassInitialize(MUT.TestContext context)
         {
             var new_visio_application = new NewVisioApplication();
         }
 
-        [ClassCleanup]
+        [MUT.ClassCleanup]
         public static void ClassCleanup()
         {
             VisioPS_Basic_Tests.Session.CleanUp();
@@ -28,7 +28,7 @@ namespace VTest.PowerShell
             VisioPS_Basic_Tests.Session.Cmd_Close_VisioApplication(force);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void VisioPS_SetShapeCells()
         {
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
@@ -44,13 +44,13 @@ namespace VTest.PowerShell
 
             var dt = VisioPS_Basic_Tests.Session.Cmd_Get_VisioShapeCells(PsArray.From(shapes));
 
-            Assert.IsNotNull(dt);
-            Assert.AreEqual("4 in", dt.Rows[0]["XFormPinX"]);
-            Assert.AreEqual("6 in", dt.Rows[0]["XFormPinY"]);
+            MUT.Assert.IsNotNull(dt);
+            MUT.Assert.AreEqual("4 in", dt.Rows[0]["XFormPinX"]);
+            MUT.Assert.AreEqual("6 in", dt.Rows[0]["XFormPinY"]);
             VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(PsArray.From(doc), true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void VisioPS_SetPageCells()
         {
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
@@ -64,13 +64,13 @@ namespace VTest.PowerShell
             
             var dt = VisioPS_Basic_Tests.Session.Cmd_Get_VisioPageCells(PsArray.From(page));
 
-            Assert.IsNotNull(dt);
-            Assert.AreEqual("3 in", dt.Rows[0]["PageWidth"]);
-            Assert.AreEqual("4 in", dt.Rows[0]["PageHeight"]);
+            MUT.Assert.IsNotNull(dt);
+            MUT.Assert.AreEqual("3 in", dt.Rows[0]["PageWidth"]);
+            MUT.Assert.AreEqual("4 in", dt.Rows[0]["PageHeight"]);
             VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(PsArray.From(doc), true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void VisioPS_DrawRectangleWithText()
         {
             var d = Session.Cmd_New_VisioDocument();
@@ -83,13 +83,13 @@ namespace VTest.PowerShell
 
             var r = Session.Cmd_Get_VisioText();
 
-            Assert.AreEqual(1,r.Length);
-            Assert.AreEqual("Hello World", r[0]);
+            MUT.Assert.AreEqual(1,r.Length);
+            MUT.Assert.AreEqual("Hello World", r[0]);
             bool force = true;
             Session.Cmd_Close_VisioDocument( PsArray.From(d), force);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void VisioPS_CreateContainer()
         {
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
@@ -112,7 +112,7 @@ namespace VTest.PowerShell
 
             var container = VisioPS_Basic_Tests.Session.Cmd_New_VisioContainer(cont_master_name, cont_doc);
 
-            Assert.IsNotNull(container);
+            MUT.Assert.IsNotNull(container);
 
             VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(PsArray.From(doc), true);
         }

@@ -1,5 +1,5 @@
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -7,10 +7,10 @@ using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 
 namespace VTest.Models.Documents
 {
-    [TestClass]
+    [MUT.TestClass]
     public class OrgChart_Tests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void OrgChart_MustHaveContent()
         {
             // Before an Org Chart is rendered it must have at least one node
@@ -29,11 +29,11 @@ namespace VTest.Models.Documents
             }
             if (caught == false)
             {
-                Assert.Fail("Did not catch expected exception");
+                MUT.Assert.Fail("Did not catch expected exception");
             }
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void OrgChart_SingleNode()
         {
             // Draw the minimum org chart - a chart with one nod
@@ -53,7 +53,7 @@ namespace VTest.Models.Documents
             app.Quit(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void OrgChart_FiveNodes()
         {
             // Verify that basic org chart connectivity is maintained
@@ -88,25 +88,25 @@ namespace VTest.Models.Documents
             var shapes_1d = shapes.Where(s => s.OneD != 0).ToList();
             var shapes_connector = shapes.Where(s => s.Master.NameU == "Dynamic connector").ToList();
 
-            Assert.AreEqual(5 + 4, shapes.Count);
-            Assert.AreEqual(5, shapes_2d.Count);
-            Assert.AreEqual(4, shapes_1d.Count);
-            Assert.AreEqual(4, shapes_connector.Count);
+            MUT.Assert.AreEqual(5 + 4, shapes.Count);
+            MUT.Assert.AreEqual(5, shapes_2d.Count);
+            MUT.Assert.AreEqual(4, shapes_1d.Count);
+            MUT.Assert.AreEqual(4, shapes_connector.Count);
 
-            Assert.AreEqual("A", n_a.VisioShape.Text.Trim());
+            MUT.Assert.AreEqual("A", n_a.VisioShape.Text.Trim());
                 // trimming because extra ending space is added (don't know why)
-            Assert.AreEqual("B", n_b.VisioShape.Text.Trim());
-            Assert.AreEqual("C", n_c.VisioShape.Text.Trim());
-            Assert.AreEqual("D", n_d.VisioShape.Text.Trim());
-            Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
+            MUT.Assert.AreEqual("B", n_b.VisioShape.Text.Trim());
+            MUT.Assert.AreEqual("C", n_c.VisioShape.Text.Trim());
+            MUT.Assert.AreEqual("D", n_d.VisioShape.Text.Trim());
+            MUT.Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
-            Assert.AreEqual(new VA.Core.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
-            Assert.AreEqual(orgchart_doc.OrgChartLayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
+            MUT.Assert.AreEqual(new VA.Core.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
+            MUT.Assert.AreEqual(orgchart_doc.OrgChartLayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
 
             app.Quit(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void OrgChart_MultipleOrgCharts()
         {
             // Verify that we can create multiple org charts in one

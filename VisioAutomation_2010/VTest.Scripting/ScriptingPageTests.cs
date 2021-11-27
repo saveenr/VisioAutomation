@@ -1,14 +1,14 @@
-using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Core;
 using VisioScripting.Models;
 
 namespace VisioScripting_Tests
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingPageTests : VTest.VisioAutomationTest
     {
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Page_NewPage()
         {
             var page_size = new VisioAutomation.Core.Size(8.5, 11);
@@ -19,7 +19,7 @@ namespace VisioScripting_Tests
         }
 
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Page_Navigation()
         {
             var page_size = new VisioAutomation.Core.Size(8.5, 11);
@@ -33,33 +33,33 @@ namespace VisioScripting_Tests
             var page3 = client.Page.GetActivePage();
 
 
-            UT.Assert.AreEqual(3,doc.Pages.Count);
-            UT.Assert.AreEqual(page3, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(3,doc.Pages.Count);
+            MUT.Assert.AreEqual(page3, client.Page.GetActivePage());
             client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.First);
-            UT.Assert.AreEqual(page1, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(page1, client.Page.GetActivePage());
             client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Last);
-            UT.Assert.AreEqual(page3, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(page3, client.Page.GetActivePage());
             client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Previous);
-            UT.Assert.AreEqual(page2, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(page2, client.Page.GetActivePage());
             client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Next);
-            UT.Assert.AreEqual(page3, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to last and try to go to next page
             client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Last);
-            UT.Assert.AreEqual(page3, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(page3, client.Page.GetActivePage());
             client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Next);
-            UT.Assert.AreEqual(page3, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(page3, client.Page.GetActivePage());
 
             // move to first and try to go to previous page
             client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.First);
-            UT.Assert.AreEqual(page1, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(page1, client.Page.GetActivePage());
             client.Page.SetActivePage(VisioScripting.TargetDocument.Auto, PageRelativePosition.Previous);
-            UT.Assert.AreEqual(page1, client.Page.GetActivePage());
+            MUT.Assert.AreEqual(page1, client.Page.GetActivePage());
 
             doc.Close(true);
         }
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Page_Duplication()
         {
             var page_size = new VisioAutomation.Core.Size(8.5, 11);
@@ -73,7 +73,7 @@ namespace VisioScripting_Tests
             doc.Close(true);
         }
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Page_DuplicationToDoc1()
         {
             var client = this.GetScriptingClient();
@@ -92,8 +92,8 @@ namespace VisioScripting_Tests
 
             var dupe_page = client.Page.DuplicatePageToDocument(VisioScripting.TargetPage.Auto, doc_2_dest);
 
-            UT.Assert.AreEqual(1, doc_1_src.Pages.Count);
-            UT.Assert.AreEqual(4, doc_2_dest.Pages.Count);
+            MUT.Assert.AreEqual(1, doc_1_src.Pages.Count);
+            MUT.Assert.AreEqual(4, doc_2_dest.Pages.Count);
             doc_1_src.Close(true);
             doc_2_dest.Close(true);
         }

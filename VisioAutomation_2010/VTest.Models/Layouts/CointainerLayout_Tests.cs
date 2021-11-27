@@ -1,14 +1,14 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VACONT = VisioAutomation.Models.Layouts.Container;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Models.Layouts
 {
-    [TestClass]
+    [MUT.TestClass]
     public class CointainerLayout_Tests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void Container_PerformLayoutBeforeRender()
         {
             // Purpose: Verify that if PerformLayout is NOT called before Render() 
@@ -34,11 +34,11 @@ namespace VTest.Models.Layouts
 
             if (caught == false)
             {
-                Assert.Fail("Did not catch expected exception");
+                MUT.Assert.Fail("Did not catch expected exception");
             }
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Container_Diagram1()
         {
 
@@ -61,7 +61,7 @@ namespace VTest.Models.Layouts
         }
 
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Container_Diagram2()
         {
             // Make sure that empty containers can be drawn

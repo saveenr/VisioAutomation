@@ -1,14 +1,14 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VATREE = VisioAutomation.Models.Layouts.Tree;
 using VA = VisioAutomation;
 
 namespace VTest.Models.TreeLayout.Layouts
 {
-    [TestClass]
+    [MUT.TestClass]
     public class Tree_Tests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void TreeLayout_SingleNode()
         {
             // Verify that a tree with a single node can be drawn
@@ -26,7 +26,7 @@ namespace VTest.Models.TreeLayout.Layouts
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void TreeLayout_MultiNode()
         {
             // Verify that a tree with multiple nodes can be drawn
@@ -64,15 +64,15 @@ namespace VTest.Models.TreeLayout.Layouts
 
             AssertUtil.AreEqual((5.25, 8.0), VisioAutomationTest.GetPageSize(page), 0.05);
 
-            Assert.AreEqual("Root", t.Root.VisioShape.Text);
-            Assert.AreEqual("A", na.VisioShape.Text);
-            Assert.AreEqual("B", nb.VisioShape.Text);
+            MUT.Assert.AreEqual("Root", t.Root.VisioShape.Text);
+            MUT.Assert.AreEqual("A", na.VisioShape.Text);
+            MUT.Assert.AreEqual("B", nb.VisioShape.Text);
 
-            Assert.AreEqual("A1", na1.VisioShape.Text);
-            Assert.AreEqual("A2", na2.VisioShape.Text);
+            MUT.Assert.AreEqual("A1", na1.VisioShape.Text);
+            MUT.Assert.AreEqual("A2", na2.VisioShape.Text);
 
-            Assert.AreEqual("B1", nb1.VisioShape.Text);
-            Assert.AreEqual("B2", nb2.VisioShape.Text);
+            MUT.Assert.AreEqual("B1", nb1.VisioShape.Text);
+            MUT.Assert.AreEqual("B2", nb2.VisioShape.Text);
 
             doc.Close(true);
         }

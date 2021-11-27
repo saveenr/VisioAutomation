@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest
 {
-    [TestClass]
+    [MUT.TestClass]
     public class VisioAutomationTest
     {
         private static readonly VisioApplicationSafeReference app_ref = new VisioApplicationSafeReference();

@@ -1,8 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VTest.Core.Text
 {
-    [TestClass]
+    [MUT.TestClass]
     public class TextUtilTests : VisioAutomationTest
     {
         public bool Match(string pat, string text)
@@ -11,20 +11,20 @@ namespace VTest.Core.Text
             return regex.IsMatch(text);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Text_Case1()
         {
-            Assert.IsTrue(this.Match("*","") );
-            Assert.IsTrue(this.Match("*", "AbC"));
-            Assert.IsTrue(this.Match("A*", "Abc"));
-            Assert.IsTrue(this.Match("*C", "Abc"));
-            Assert.IsFalse(this.Match("A*", "bcA"));
-            Assert.IsFalse(this.Match("*C", "bcA"));
-            Assert.IsTrue(this.Match("A*C", "AbC"));
-            Assert.IsFalse(this.Match("A*C", "AbA"));
-            Assert.IsTrue(this.Match("A*B*C", "A---b---C"));
-            Assert.IsFalse(this.Match("A*B*C", "A---b---A"));
-            Assert.IsTrue(this.Match("A*B?C", "A---bXC"));
+            MUT.Assert.IsTrue(this.Match("*","") );
+            MUT.Assert.IsTrue(this.Match("*", "AbC"));
+            MUT.Assert.IsTrue(this.Match("A*", "Abc"));
+            MUT.Assert.IsTrue(this.Match("*C", "Abc"));
+            MUT.Assert.IsFalse(this.Match("A*", "bcA"));
+            MUT.Assert.IsFalse(this.Match("*C", "bcA"));
+            MUT.Assert.IsTrue(this.Match("A*C", "AbC"));
+            MUT.Assert.IsFalse(this.Match("A*C", "AbA"));
+            MUT.Assert.IsTrue(this.Match("A*B*C", "A---b---C"));
+            MUT.Assert.IsFalse(this.Match("A*B*C", "A---b---A"));
+            MUT.Assert.IsTrue(this.Match("A*B?C", "A---bXC"));
         }
     }
 }

@@ -1,14 +1,14 @@
 using System.Linq;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace VTest.Core.ShapeSheet
 {
-    [TestClass]
+    [MUT.TestClass]
     public class CellGroupTests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void VerifyAllCellsAreEnumerated()
         {
             var types = new List<System.Type>();
@@ -60,19 +60,19 @@ namespace VTest.Core.ShapeSheet
                 var enumerated_srcs = cellgroup.GetSrcValuePairs().Select(i => i.Src).ToList();
                 var enumerated_srctovalue = cellgroup.GetSrcValuePairs().ToDictionary(i => i.Src, i => i.Value);
 
-                Assert.AreEqual(reflected_cvts.Count, enumerated_values.Count);
+                MUT.Assert.AreEqual(reflected_cvts.Count, enumerated_values.Count);
 
                 // Verify that all the enumerated Srcs are distinct
                 var unique_enumerated_srcs = enumerated_srcs.Distinct().ToList();
-                Assert.AreEqual(enumerated_srcs.Count, unique_enumerated_srcs.Count);
+                MUT.Assert.AreEqual(enumerated_srcs.Count, unique_enumerated_srcs.Count);
 
                 // Verify that all the enumerated values are distinct
                 var unique_enumerated_values = enumerated_values.Distinct().ToList();
-                Assert.AreEqual(reflected_cvts.Count, unique_enumerated_values.Count);
+                MUT.Assert.AreEqual(reflected_cvts.Count, unique_enumerated_values.Count);
 
                 foreach (var input_value in input_values)
                 {
-                    //Assert.IsTrue(unique_enumerated_values.Contains(input_value));
+                    //MUT.Assert.IsTrue(unique_enumerated_values.Contains(input_value));
                 }
 
             }

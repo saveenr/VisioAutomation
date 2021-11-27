@@ -3,10 +3,10 @@ using VA = VisioAutomation;
 
 namespace VisioScripting_Tests
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingControlTests : VTest.VisioAutomationTest
     {
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Controls_Scenarios()
         {
             var client = this.GetScriptingClient();
@@ -25,10 +25,10 @@ namespace VisioScripting_Tests
 
             var controls0 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
             int found_controls = controls0.Count;
-            UT.Assert.AreEqual(3, controls0.Count);
-            UT.Assert.AreEqual(0, controls0[s1].Count);
-            UT.Assert.AreEqual(0, controls0[s2].Count);
-            UT.Assert.AreEqual(0, controls0[s3].Count);
+            MUT.Assert.AreEqual(3, controls0.Count);
+            MUT.Assert.AreEqual(0, controls0[s1].Count);
+            MUT.Assert.AreEqual(0, controls0[s2].Count);
+            MUT.Assert.AreEqual(0, controls0[s3].Count);
 
             var ctrl = new VA.Shapes.ControlCells();
             ctrl.X = "Width*0.5";
@@ -36,17 +36,17 @@ namespace VisioScripting_Tests
             client.Control.AddControlToShapes(VisioScripting.TargetShapes.Auto, ctrl);
 
             var controls1 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
-            UT.Assert.AreEqual(3, controls1.Count);
-            UT.Assert.AreEqual(1, controls1[s1].Count);
-            UT.Assert.AreEqual(1, controls1[s2].Count);
-            UT.Assert.AreEqual(1, controls1[s3].Count);
+            MUT.Assert.AreEqual(3, controls1.Count);
+            MUT.Assert.AreEqual(1, controls1[s1].Count);
+            MUT.Assert.AreEqual(1, controls1[s2].Count);
+            MUT.Assert.AreEqual(1, controls1[s3].Count);
 
             client.Control.DeleteControlWithIndex(VisioScripting.TargetShapes.Auto, 0);
             var controls2 = client.Control.GetControls(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
-            UT.Assert.AreEqual(3, controls0.Count);
-            UT.Assert.AreEqual(0, controls2[s1].Count);
-            UT.Assert.AreEqual(0, controls2[s2].Count);
-            UT.Assert.AreEqual(0, controls2[s3].Count);
+            MUT.Assert.AreEqual(3, controls0.Count);
+            MUT.Assert.AreEqual(0, controls2[s1].Count);
+            MUT.Assert.AreEqual(0, controls2[s2].Count);
+            MUT.Assert.AreEqual(0, controls2[s3].Count);
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }

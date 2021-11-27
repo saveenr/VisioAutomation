@@ -1,23 +1,23 @@
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VTest.Core.Application
 {
-    [TestClass]
+    [MUT.TestClass]
     public class ApplicationHelperTests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void TestStencilLocation()
         {
             var app = this.GetVisioApplication();
             string path = VisioAutomation.Application.ApplicationHelper.GetContentLocation(app);
 
-            Assert.IsTrue(Directory.Exists(path));
+            MUT.Assert.IsTrue(Directory.Exists(path));
 
             var files1 = Directory.GetFiles(path, "*.vs?");
             var files2 = Directory.GetFiles(path, "*.vss?");
 
-            Assert.IsTrue( files1.Length>100 || files2.Length>100);
+            MUT.Assert.IsTrue( files1.Length>100 || files2.Length>100);
         }
     }
 }

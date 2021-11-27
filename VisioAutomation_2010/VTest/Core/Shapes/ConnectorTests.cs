@@ -1,13 +1,13 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
 using VisioAutomation.Extensions;
 
 namespace VTest.Core.Shapes
 {
-    [TestClass]
+    [MUT.TestClass]
     public class ConnectorTests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void Connect1()
         {
             var page1 = this.GetNewPage();

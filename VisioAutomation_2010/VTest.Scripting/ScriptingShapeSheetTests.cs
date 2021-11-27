@@ -1,13 +1,13 @@
 using System.Linq;
-using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
 namespace VisioScripting_Tests
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingShapeSheetTests : VTest.VisioAutomationTest
     {
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void QueryPage()
         {
             var client = this.GetScriptingClient();
@@ -33,8 +33,8 @@ namespace VisioScripting_Tests
             }
 
             var formulas = reader.GetFormulas();
-            UT.Assert.AreEqual("0.5 in", formulas[0]);
-            UT.Assert.AreEqual("1.5 in", formulas[1]);
+            MUT.Assert.AreEqual("0.5 in", formulas[0]);
+            MUT.Assert.AreEqual("1.5 in", formulas[1]);
             doc.Close(true);
         }
     }

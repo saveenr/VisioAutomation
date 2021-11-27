@@ -1,15 +1,15 @@
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
 namespace VTest.Core.Extensions
 {
-    [TestClass]
+    [MUT.TestClass]
     public class EnumerableExtensions : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void Extensions_TestEnumerables()
         {
             this.Layers();
@@ -29,29 +29,29 @@ namespace VTest.Core.Extensions
 
             // -------------------------------
             var a1 = page1.Shapes.ToList();
-            Assert.AreEqual(0, a1.Count);
+            MUT.Assert.AreEqual(0, a1.Count);
 
             var a2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.ToEnumerable());
-            Assert.AreEqual(0, a2.Count);
+            MUT.Assert.AreEqual(0, a2.Count);
 
             // -------------------------------
 
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             var b1 = page1.Shapes.ToList();
-            Assert.AreEqual(1, b1.Count);
+            MUT.Assert.AreEqual(1, b1.Count);
 
             var b2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.ToEnumerable());
-            Assert.AreEqual(1, b2.Count);
+            MUT.Assert.AreEqual(1, b2.Count);
 
             // -------------------------------
 
             var s2 = page1.DrawRectangle(1, 0, 2, 1);
             var s3 = page1.DrawRectangle(2, 0, 3, 1);
             var c1 = page1.Shapes.ToList();
-            Assert.AreEqual(3, c1.Count);
+            MUT.Assert.AreEqual(3, c1.Count);
 
             var c2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.ToEnumerable());
-            Assert.AreEqual(3, c2.Count);
+            MUT.Assert.AreEqual(3, c2.Count);
 
             // -------------------------------
 
@@ -61,10 +61,10 @@ namespace VTest.Core.Extensions
             var g1 = SelectAndGroup(active_window, new[] { s2, s3 });
 
             var d1 = page1.Shapes.ToList();
-            Assert.AreEqual(2, d1.Count);
+            MUT.Assert.AreEqual(2, d1.Count);
 
             var d2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.ToEnumerable());
-            Assert.AreEqual(4, d2.Count);
+            MUT.Assert.AreEqual(4, d2.Count);
 
             page1.Delete(0);
         }
@@ -84,10 +84,10 @@ namespace VTest.Core.Extensions
             var expected = doc1.Pages.Cast<IVisio.Page>().ToList();
             var actual = doc1.Pages.ToList();
 
-            Assert.AreEqual(expected.Count, actual.Count);
-            Assert.AreEqual(pages[1].NameU, actual[0].NameU);
-            Assert.AreEqual(pages[2].NameU, actual[1].NameU);
-            Assert.AreEqual(pages[3].NameU, actual[2].NameU);
+            MUT.Assert.AreEqual(expected.Count, actual.Count);
+            MUT.Assert.AreEqual(pages[1].NameU, actual[0].NameU);
+            MUT.Assert.AreEqual(pages[2].NameU, actual[1].NameU);
+            MUT.Assert.AreEqual(pages[3].NameU, actual[2].NameU);
 
             doc1.Close(true);
         }
@@ -101,10 +101,10 @@ namespace VTest.Core.Extensions
             var expects = fonts.Cast<IVisio.Font>().ToList();
             var actual = fonts.ToList();
 
-            Assert.AreEqual(expects.Count, actual.Count);
+            MUT.Assert.AreEqual(expects.Count, actual.Count);
             for (int i = 0; i < fonts.Count; i++)
             {
-                Assert.AreEqual(fonts[i + 1].Name, actual[i].Name);
+                MUT.Assert.AreEqual(fonts[i + 1].Name, actual[i].Name);
             }
 
             page1.Delete(0);
@@ -123,7 +123,7 @@ namespace VTest.Core.Extensions
             var actual = masters.ToList();
             for (int i = 0; i < masters.Count; i++)
             {
-                Assert.AreEqual(masters[i + 1].NameU, actual[i].NameU);
+                MUT.Assert.AreEqual(masters[i + 1].NameU, actual[i].NameU);
             }
 
             doc1.Close(true);
@@ -139,7 +139,7 @@ namespace VTest.Core.Extensions
             {
                 var ex = windows[(short)(i + 1)];
                 var ac = actual[i];
-                Assert.AreEqual(ex.ID, ac.ID);
+                MUT.Assert.AreEqual(ex.ID, ac.ID);
             }
             doc1.Close(true);
         }
@@ -159,7 +159,7 @@ namespace VTest.Core.Extensions
             var actual = documents.ToEnumerable().ToList();
             for (int i = 0; i < documents.Count; i++)
             {
-                Assert.AreEqual(documents[i + 1].Title, actual[i].Title);
+                MUT.Assert.AreEqual(documents[i + 1].Title, actual[i].Title);
             }
 
             doc1.Close(true);
@@ -182,7 +182,7 @@ namespace VTest.Core.Extensions
             {
                 var ex = layers[i+1];
                 var ac = actual[i];
-                Assert.AreEqual(ex.NameU, ac.NameU);
+                MUT.Assert.AreEqual(ex.NameU, ac.NameU);
             }
             doc1.Close(true);
         }
@@ -196,9 +196,9 @@ namespace VTest.Core.Extensions
             {
                 var expected_color = colors[i];
                 var actual_color = actual[i];
-                Assert.AreEqual(expected_color.Red, actual_color.Red);
-                Assert.AreEqual(expected_color.Green, actual_color.Green);
-                Assert.AreEqual(expected_color.Blue, actual_color.Blue);
+                MUT.Assert.AreEqual(expected_color.Red, actual_color.Red);
+                MUT.Assert.AreEqual(expected_color.Green, actual_color.Green);
+                MUT.Assert.AreEqual(expected_color.Blue, actual_color.Blue);
             }
             doc1.Close(true);
         }

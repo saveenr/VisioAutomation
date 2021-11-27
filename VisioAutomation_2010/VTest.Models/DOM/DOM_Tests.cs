@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
 using VADOM = VisioAutomation.Models.Dom;
@@ -7,7 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Models.Dom
 {
-    [TestClass]
+    [MUT.TestClass]
     public class Dom_Tests : VisioAutomationTest
     {
         public string node_stencil_name = "basic_u.vss";
@@ -17,7 +17,7 @@ namespace VTest.Models.Dom
 
         private VisioAutomation.Core.Size _pagesize;
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_EmptyRendering()
         {
             // Rendering a DOM should not change the page count
@@ -27,24 +27,24 @@ namespace VTest.Models.Dom
             var page_node = new VADOM.Page();
             var doc = this.GetNewDoc();
             page_node.Render(app.ActiveDocument);
-            Assert.AreEqual(0, app.ActivePage.Shapes.Count);
+            MUT.Assert.AreEqual(0, app.ActivePage.Shapes.Count);
             app.ActiveDocument.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_RenderPageToDocument()
         {
             // Rendering a dom page to a document should create a new page
             var app = this.GetVisioApplication();
             var page_node = new VADOM.Page();
             var visdoc = this.GetNewDoc();
-            Assert.AreEqual(1, visdoc.Pages.Count);
+            MUT.Assert.AreEqual(1, visdoc.Pages.Count);
             var page = page_node.Render(app.ActiveDocument);
-            Assert.AreEqual(2, visdoc.Pages.Count);
+            MUT.Assert.AreEqual(2, visdoc.Pages.Count);
             app.ActiveDocument.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_RenderDocumentToApplication()
         {
             // Rendering a dom document to an appliction instance should create a new document
@@ -54,12 +54,12 @@ namespace VTest.Models.Dom
             doc_node.Pages.Add(page_node);
             int old_count = app.Documents.Count;
             var newdoc = doc_node.Render(app);
-            Assert.AreEqual(old_count + 1, app.Documents.Count);
-            Assert.AreEqual(1, newdoc.Pages.Count);
+            MUT.Assert.AreEqual(old_count + 1, app.Documents.Count);
+            MUT.Assert.AreEqual(1, newdoc.Pages.Count);
             app.ActiveDocument.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_DrawSimpleShape()
         {
             // Create the doc
@@ -77,13 +77,13 @@ namespace VTest.Models.Dom
             var page = page_node.Render(app.ActiveDocument);
 
             // Verify
-            Assert.IsNotNull(vrect1.VisioShape);
-            Assert.AreEqual("HELLO WORLD", vrect1.VisioShape.Text);
+            MUT.Assert.IsNotNull(vrect1.VisioShape);
+            MUT.Assert.AreEqual("HELLO WORLD", vrect1.VisioShape.Text);
 
             app.ActiveDocument.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_DropShapes()
         {
             // Render it
@@ -104,7 +104,7 @@ namespace VTest.Models.Dom
             app.ActiveDocument.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_CustomProperties()
         {
             // Create the doc
@@ -133,15 +133,15 @@ namespace VTest.Models.Dom
             shape_nodes.Render(app.ActivePage);
 
             // Verify
-            Assert.IsNotNull(vrect1.VisioShape);
-            Assert.AreEqual("HELLO WORLD", vrect1.VisioShape.Text);
-            Assert.IsTrue(VA.Shapes.CustomPropertyHelper.Contains(vrect1.VisioShape, "FOO"));
-            Assert.IsTrue(VA.Shapes.CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
+            MUT.Assert.IsNotNull(vrect1.VisioShape);
+            MUT.Assert.AreEqual("HELLO WORLD", vrect1.VisioShape.Text);
+            MUT.Assert.IsTrue(VA.Shapes.CustomPropertyHelper.Contains(vrect1.VisioShape, "FOO"));
+            MUT.Assert.IsTrue(VA.Shapes.CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
 
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_DrawOrgChart()
         {
             var app = this.GetVisioApplication();
@@ -173,7 +173,7 @@ namespace VTest.Models.Dom
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_DrawEmpty()
         {
             // Verify that an empty DOM page can be created and rendered
@@ -182,16 +182,16 @@ namespace VTest.Models.Dom
             page_node.Size = new VA.Core.Size(5, 5);
             var page = page_node.Render(doc);
 
-            Assert.AreEqual(0, page.Shapes.Count);
+            MUT.Assert.AreEqual(0, page.Shapes.Count);
             var actual_page_size = VisioAutomationTest.GetPageSize(page);
             var expected_page_size = new VA.Core.Size(5, 5);
-            Assert.AreEqual(expected_page_size, actual_page_size);
+            MUT.Assert.AreEqual(expected_page_size, actual_page_size);
 
             page.Delete(0);
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_DrawLine()
         {
             var doc = this.GetNewDoc();
@@ -199,15 +199,15 @@ namespace VTest.Models.Dom
             var line_node_0 = page_node.Shapes.DrawLine(1, 1, 3, 3);
             var page = page_node.Render(doc);
 
-            Assert.AreEqual(1, page.Shapes.Count);
-            Assert.AreNotEqual(0, line_node_0.VisioShapeID);
-            Assert.IsNotNull(line_node_0.VisioShape);
-            Assert.AreEqual(2.0, line_node_0.VisioShape.CellsU["PinX"].Result[IVisio.VisUnitCodes.visNumber]);
+            MUT.Assert.AreEqual(1, page.Shapes.Count);
+            MUT.Assert.AreNotEqual(0, line_node_0.VisioShapeID);
+            MUT.Assert.IsNotNull(line_node_0.VisioShape);
+            MUT.Assert.AreEqual(2.0, line_node_0.VisioShape.CellsU["PinX"].Result[IVisio.VisUnitCodes.visNumber]);
             page.Delete(0);
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_DrawBezier()
         {
             var doc = this.GetNewDoc();
@@ -216,15 +216,15 @@ namespace VTest.Models.Dom
 
             var page = page_node.Render(doc);
 
-            Assert.AreEqual(1, page.Shapes.Count);
-            Assert.AreNotEqual(0, bez_node_0.VisioShapeID);
-            Assert.IsNotNull(bez_node_0.VisioShape);
+            MUT.Assert.AreEqual(1, page.Shapes.Count);
+            MUT.Assert.AreNotEqual(0, bez_node_0.VisioShapeID);
+            MUT.Assert.IsNotNull(bez_node_0.VisioShape);
 
             page.Delete(0);
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_DropMaster()
         {
 
@@ -238,18 +238,18 @@ namespace VTest.Models.Dom
 
             var page = page_node.Render(doc);
 
-            Assert.AreEqual(2, page.Shapes.Count);
+            MUT.Assert.AreEqual(2, page.Shapes.Count);
 
             // Verify that the shapes created both have IDs and shape objects associated with them
-            Assert.AreNotEqual(0, master_node_0.VisioShapeID);
-            Assert.AreNotEqual(0, master_node_1.VisioShapeID);
-            Assert.IsNotNull(master_node_0.VisioShape);
-            Assert.IsNotNull(master_node_1.VisioShape);
+            MUT.Assert.AreNotEqual(0, master_node_0.VisioShapeID);
+            MUT.Assert.AreNotEqual(0, master_node_1.VisioShapeID);
+            MUT.Assert.IsNotNull(master_node_0.VisioShape);
+            MUT.Assert.IsNotNull(master_node_1.VisioShape);
             page.Delete(0);
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_FormatShape()
         {
             var doc = this.GetNewDoc();
@@ -267,12 +267,12 @@ namespace VTest.Models.Dom
 
             var page = page_node.Render(doc);
 
-            Assert.AreEqual(3, page.Shapes.Count);
+            MUT.Assert.AreEqual(3, page.Shapes.Count);
             page.Delete(0);
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_ConnectShapes()
         {
             var doc = this.GetNewDoc();
@@ -292,13 +292,13 @@ namespace VTest.Models.Dom
 
             var page = page_node.Render(doc);
 
-            Assert.AreEqual(3, page.Shapes.Count);
+            MUT.Assert.AreEqual(3, page.Shapes.Count);
 
             page.Delete(0);
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_ConnectShapes2()
         {
             // Deferred means that the stencils (and thus masters) are loaded when rendering
@@ -311,13 +311,13 @@ namespace VTest.Models.Dom
             var dc = page_node.Shapes.Connect(this.edge_master_name, this.edge_stencil_name, master_node_0, master_node_1);
             var page = page_node.Render(doc);
 
-            Assert.AreEqual(3, page.Shapes.Count);
+            MUT.Assert.AreEqual(3, page.Shapes.Count);
 
             page.Delete(0);
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_VerifyThatUnknownMastersAreDetected()
         {
             var doc = this.GetNewDoc();
@@ -337,7 +337,7 @@ namespace VTest.Models.Dom
             
             if (caught == false)
             {
-                Assert.Fail("Expected an AutomationException");
+                MUT.Assert.Fail("Expected an AutomationException");
             }
             
             if (page!=null)
@@ -347,7 +347,7 @@ namespace VTest.Models.Dom
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_VerifyThatUnknownStencilsAreDetected()
         {
             string non_existent_stencil = "foobar.vss";
@@ -369,7 +369,7 @@ namespace VTest.Models.Dom
             
             if (caught == false)
             {
-                Assert.Fail("Expected an AutomationException");
+                MUT.Assert.Fail("Expected an AutomationException");
             }
 
             if (page!=null)
@@ -379,7 +379,7 @@ namespace VTest.Models.Dom
             doc.Close(true);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void Dom_DrawAndDrop()
         {
             var doc = this.GetNewDoc();
@@ -409,16 +409,16 @@ namespace VTest.Models.Dom
 
             var xfrms = VA.Shapes.XFormCells.GetCells(page, shapeids, VA.Core.CellValueType.Formula);
 
-            Assert.AreEqual(xfrms[1].PinX, xfrms[0].PinX);
-            Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);
+            MUT.Assert.AreEqual(xfrms[1].PinX, xfrms[0].PinX);
+            MUT.Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);
 
-            Assert.AreEqual(xfrms[1].Width, xfrms[0].Width);
-            Assert.AreEqual(xfrms[1].Height, xfrms[0].Height);
+            MUT.Assert.AreEqual(xfrms[1].Width, xfrms[0].Width);
+            MUT.Assert.AreEqual(xfrms[1].Height, xfrms[0].Height);
 
-            Assert.AreEqual(xfrms[3].PinX,   xfrms[2].PinX);
-            Assert.AreEqual(xfrms[3].PinY,   xfrms[2].PinY);
-            Assert.AreEqual(xfrms[3].Width,  xfrms[2].Width);
-            Assert.AreEqual(xfrms[3].Height, xfrms[2].Height);
+            MUT.Assert.AreEqual(xfrms[3].PinX,   xfrms[2].PinX);
+            MUT.Assert.AreEqual(xfrms[3].PinY,   xfrms[2].PinY);
+            MUT.Assert.AreEqual(xfrms[3].Width,  xfrms[2].Width);
+            MUT.Assert.AreEqual(xfrms[3].Height, xfrms[2].Height);
 
             doc.Close(true);
         }

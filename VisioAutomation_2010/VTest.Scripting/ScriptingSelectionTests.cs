@@ -1,13 +1,13 @@
 using System.Linq;
-using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
 namespace VisioScripting_Tests
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingSelectionTests : VTest.VisioAutomationTest
     {
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Selection_Scenarios()
         {
             var client = this.GetScriptingClient();
@@ -27,27 +27,27 @@ namespace VisioScripting_Tests
 
             var selection = active_window.Selection;
             var x1 = selection.ToEnumerable().ToDictionary(s => s);
-            UT.Assert.AreEqual(1, x1.Count);
-            UT.Assert.IsTrue(x1.ContainsKey(s4));
+            MUT.Assert.AreEqual(1, x1.Count);
+            MUT.Assert.IsTrue(x1.ContainsKey(s4));
 
             client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
 
             var x2 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
-            UT.Assert.AreEqual(3, x2.Count);
-            UT.Assert.IsTrue(x2.ContainsKey(s1));
-            UT.Assert.IsTrue(x2.ContainsKey(s2));
-            UT.Assert.IsTrue(x2.ContainsKey(s3));
-            UT.Assert.IsTrue(!x2.ContainsKey(s4));
+            MUT.Assert.AreEqual(3, x2.Count);
+            MUT.Assert.IsTrue(x2.ContainsKey(s1));
+            MUT.Assert.IsTrue(x2.ContainsKey(s2));
+            MUT.Assert.IsTrue(x2.ContainsKey(s3));
+            MUT.Assert.IsTrue(!x2.ContainsKey(s4));
 
             active_window.SelectAll();
             //app.ActiveWindows.Selection.SelectAll() selects 3 items
             var x3 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
-            UT.Assert.AreEqual(4, x3.Count);
+            MUT.Assert.AreEqual(4, x3.Count);
 
             active_window.DeselectAll();
             //app.ActiveWindows.Selection.DeselectAll() keeps all 4 selection
             var x4 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
-            UT.Assert.AreEqual(0, x4.Count);
+            MUT.Assert.AreEqual(0, x4.Count);
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }

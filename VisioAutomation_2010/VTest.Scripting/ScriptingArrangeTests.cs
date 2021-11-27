@@ -1,15 +1,15 @@
 using System.Linq;
-using UT = Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 
 using VTest.Extensions;
 
 namespace VisioScripting_Tests
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingArrangeTests : VTest.VisioAutomationTest
     {     
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Distribute()
         {
             var client = this.GetScriptingClient();
@@ -44,7 +44,7 @@ namespace VisioScripting_Tests
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Nudge2()
         {
             var client = this.GetScriptingClient();

@@ -1,14 +1,14 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Core.Extensions
 {
-    [TestClass]
+    [MUT.TestClass]
     public class CustomPropsTest : VisioAutomationTest
     {
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void CustomProps_SetCustomProps1()
         {
             var page1 = this.GetNewPage();
@@ -16,29 +16,29 @@ namespace VTest.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
             // Add a Custom Property
             var cp = new CustomPropertyCells();
             cp.Value = "\"BAR1\"";
             CustomPropertyHelper.Set(s1, "FOO1", cp);
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             // Check that it is called FOO1
-            Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
+            MUT.Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
             // Check that non-existent properties can't be found
-            Assert.AreEqual(false, CustomPropertyHelper.Contains(s1, "FOOX"));
+            MUT.Assert.AreEqual(false, CustomPropertyHelper.Contains(s1, "FOOX"));
 
             // Delete that custom property
             CustomPropertyHelper.Delete(s1, "FOO1");
             // Verify that we have zero Custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void CustomProps_SetSamePropMultipleTimes()
         {
             var page1 = this.GetNewPage();
@@ -46,16 +46,16 @@ namespace VTest.Core.Extensions
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
 
             int cp_type = 0; // string type
 
             // Add the same one multiple times Custom Property
             CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             // Check that it is called FOO1
-            Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
+            MUT.Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
             // Try to SET the same property again many times
             CustomPropertyHelper.Set(s1, "FOO1", "\"BAR2\"", cp_type);
@@ -63,21 +63,21 @@ namespace VTest.Core.Extensions
             CustomPropertyHelper.Set(s1, "FOO1", "\"BAR4\"", cp_type);
 
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             // Check that it is called FOO1
-            Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
+            MUT.Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void CustomProps_InvalidPropName()
         {
             bool caught = false;
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
-            Assert.AreEqual(0, CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula).Count);
+            MUT.Assert.AreEqual(0, CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula).Count);
 
             int cp_type = 0; // 0 for string
 
@@ -93,11 +93,11 @@ namespace VTest.Core.Extensions
 
             if (!caught)
             {
-                Assert.Fail("Did not catch expected exception");
+                MUT.Assert.Fail("Did not catch expected exception");
             }
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void CustomProps_VerifyCustomPropAttributes()
         {
             var page1 = this.GetNewPage();
@@ -115,11 +115,11 @@ namespace VTest.Core.Extensions
 
             var out_cp = CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
 
-            Assert.AreEqual(1, out_cp.Count);
+            MUT.Assert.AreEqual(1, out_cp.Count);
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void CustomProps_PropertyNames()
         {
             var page1 = this.GetNewPage();
@@ -127,41 +127,41 @@ namespace VTest.Core.Extensions
 
             int cp_type = 0; // 0 for string
 
-            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
             CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
-            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             CustomPropertyHelper.Set(s1, "FOO1", "\"BAR2\"", cp_type);
-            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             CustomPropertyHelper.Set(s1, "FOO2", "\"BAR3\"", cp_type);
 
             var names1 = CustomPropertyHelper.GetNames(s1);
-            Assert.AreEqual(2,names1.Count);
-            Assert.IsTrue(names1.Contains("FOO1"));
-            Assert.IsTrue(names1.Contains("FOO2"));
+            MUT.Assert.AreEqual(2,names1.Count);
+            MUT.Assert.IsTrue(names1.Contains("FOO1"));
+            MUT.Assert.IsTrue(names1.Contains("FOO2"));
 
-            Assert.AreEqual(2, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(2, CustomPropertyHelper.GetCount(s1));
             CustomPropertyHelper.Delete(s1, "FOO1");
 
             var names2 = CustomPropertyHelper.GetNames(s1);
-            Assert.AreEqual(1, names2.Count);
-            Assert.IsTrue(names2.Contains("FOO2"));
+            MUT.Assert.AreEqual(1, names2.Count);
+            MUT.Assert.IsTrue(names2.Contains("FOO2"));
 
             CustomPropertyHelper.Set(s1, "FOO3", "\"BAR1\"", cp_type);
             var names3 = CustomPropertyHelper.GetNames(s1);
-            Assert.AreEqual(2, names3.Count);
-            Assert.IsTrue(names3.Contains("FOO3"));
-            Assert.IsTrue(names3.Contains("FOO2"));
+            MUT.Assert.AreEqual(2, names3.Count);
+            MUT.Assert.IsTrue(names3.Contains("FOO3"));
+            MUT.Assert.IsTrue(names3.Contains("FOO2"));
 
             CustomPropertyHelper.Delete(s1, "FOO3");
 
-            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
             CustomPropertyHelper.Delete(s1, "FOO2");
 
-            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
+            MUT.Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void CustomProps_GetFromMultipleShapes()
         {
             var page1 = this.GetNewPage();
@@ -184,23 +184,23 @@ namespace VTest.Core.Extensions
             var allprops = CustomPropertyHelper.GetDictionary(page1, shapeidpairs, VisioAutomation.Core.CellValueType.Formula);
 
 
-            Assert.AreEqual(4, allprops.Count);
-            Assert.AreEqual(1, allprops[0].Count);
-            Assert.AreEqual(2, allprops[1].Count);
-            Assert.AreEqual(0, allprops[2].Count);
-            Assert.AreEqual(3, allprops[3].Count);
+            MUT.Assert.AreEqual(4, allprops.Count);
+            MUT.Assert.AreEqual(1, allprops[0].Count);
+            MUT.Assert.AreEqual(2, allprops[1].Count);
+            MUT.Assert.AreEqual(0, allprops[2].Count);
+            MUT.Assert.AreEqual(3, allprops[3].Count);
 
-            Assert.AreEqual("1", allprops[0]["FOO1"].Value.Value);
-            Assert.AreEqual("2", allprops[1]["FOO2"].Value.Value);
-            Assert.AreEqual("3", allprops[1]["FOO3"].Value.Value);
-            Assert.AreEqual("4", allprops[3]["FOO4"].Value.Value);
-            Assert.AreEqual("5", allprops[3]["FOO5"].Value.Value);
-            Assert.AreEqual("6", allprops[3]["FOO6"].Value.Value);
+            MUT.Assert.AreEqual("1", allprops[0]["FOO1"].Value.Value);
+            MUT.Assert.AreEqual("2", allprops[1]["FOO2"].Value.Value);
+            MUT.Assert.AreEqual("3", allprops[1]["FOO3"].Value.Value);
+            MUT.Assert.AreEqual("4", allprops[3]["FOO4"].Value.Value);
+            MUT.Assert.AreEqual("5", allprops[3]["FOO5"].Value.Value);
+            MUT.Assert.AreEqual("6", allprops[3]["FOO6"].Value.Value);
 
             page1.Delete(0);
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void CustomProps_TryAllTypes()
         {
             var page1 = this.GetNewPage();
@@ -242,20 +242,20 @@ namespace VTest.Core.Extensions
             var out_cpdatetime = cpdic["PropertyDateTime"];
             var out_cpbool = cpdic["PropertyBool"];
 
-            Assert.AreEqual("\"Hello World\"", out_cpstring.Value.Value);
-            Assert.AreEqual("0", out_cpstring.Type.Value);
+            MUT.Assert.AreEqual("\"Hello World\"", out_cpstring.Value.Value);
+            MUT.Assert.AreEqual("0", out_cpstring.Type.Value);
 
-            Assert.AreEqual("1024", out_cpint.Value.Value);
-            Assert.AreEqual("2", out_cpint.Type.Value);
+            MUT.Assert.AreEqual("1024", out_cpint.Value.Value);
+            MUT.Assert.AreEqual("2", out_cpint.Type.Value);
 
-            Assert.AreEqual("3.14", out_cpfloat.Value.Value);
-            Assert.AreEqual("2", out_cpfloat.Type.Value);
+            MUT.Assert.AreEqual("3.14", out_cpfloat.Value.Value);
+            MUT.Assert.AreEqual("2", out_cpfloat.Type.Value);
 
-            Assert.AreEqual("DATETIME(\"03/31/1979\")", out_cpdatetime.Value.Value);
-            Assert.AreEqual("5", out_cpdatetime.Type.Value);
+            MUT.Assert.AreEqual("DATETIME(\"03/31/1979\")", out_cpdatetime.Value.Value);
+            MUT.Assert.AreEqual("5", out_cpdatetime.Type.Value);
 
-            Assert.AreEqual("TRUE", out_cpbool.Value.Value);
-            Assert.AreEqual("3", out_cpbool.Type.Value);
+            MUT.Assert.AreEqual("TRUE", out_cpbool.Value.Value);
+            MUT.Assert.AreEqual("3", out_cpbool.Type.Value);
 
             page1.Delete(0);
         }

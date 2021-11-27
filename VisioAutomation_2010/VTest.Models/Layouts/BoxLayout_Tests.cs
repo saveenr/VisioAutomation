@@ -1,17 +1,17 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VABOX = VisioAutomation.Models.Layouts.Box;
 
 namespace VTest.Models.Layouts
 {
-    [TestClass]
+    [MUT.TestClass]
     public class BoxLayout_Tests : VisioAutomationTest
     {
-        [TestMethod]
+        [MUT.TestMethod]
         public void BoxLayout_Test_empty()
         {
             var layout = new VABOX.BoxLayout();
             layout.Root = new VABOX.Container(VABOX.Direction.BottomToTop);
-            Assert.IsNotNull(layout.Root);
+            MUT.Assert.IsNotNull(layout.Root);
 
             bool thrown = false;
             try
@@ -26,11 +26,11 @@ namespace VTest.Models.Layouts
 
             if (!thrown)
             {
-                Assert.Fail();
+                MUT.Assert.Fail();
             }
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void BoxLayout_Test_single_node()
         {
             var layout = new VABOX.BoxLayout();
@@ -48,7 +48,7 @@ namespace VTest.Models.Layouts
             AssertUtil.AreEqual((0, 0, 10, 5), root.Rectangle, delta);          
         }
 
-        [TestMethod]
+        [MUT.TestMethod]
         public void BoxLayout_Test_single_node_padding()
         {
             var layout = new VABOX.BoxLayout();

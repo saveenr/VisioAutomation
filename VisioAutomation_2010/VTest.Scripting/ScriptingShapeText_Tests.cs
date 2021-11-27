@@ -1,15 +1,15 @@
 using System.Linq;
-using UT=Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioScripting_Tests
 {
-    [UT.TestClass]
+    [MUT.TestClass]
     public class ScriptingShapeText_Tests : VTest.VisioAutomationTest
     {
-        [UT.TestMethod]
+        [MUT.TestMethod]
         public void Scripting_Shape_Text_Set()
         {
             var page1 = this.GetNewPage();
@@ -25,11 +25,11 @@ namespace VisioScripting_Tests
             var point0 = new VA.Core.Point(1, 2);
             var point1 = new VA.Core.Point(3, 4);
             var points = new[] { point0, point1 };
-            UT.Assert.AreEqual(0, page1.Shapes.Count);
+            MUT.Assert.AreEqual(0, page1.Shapes.Count);
 
             var shapeids = page1.DropManyU(masters, points);
-            UT.Assert.AreEqual(2, page1.Shapes.Count);
-            UT.Assert.AreEqual(2, shapeids.Length);
+            MUT.Assert.AreEqual(2, page1.Shapes.Count);
+            MUT.Assert.AreEqual(2, shapeids.Length);
 
             var shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page1.Shapes,shapeids);
             var client = this.GetScriptingClient();
@@ -45,8 +45,8 @@ namespace VisioScripting_Tests
                 var shape = shapes[i];
                 var name = names[i];
                 var text = texts[i];
-                UT.Assert.AreEqual(name, shape.Name);
-                UT.Assert.AreEqual(text, shape.Text);
+                MUT.Assert.AreEqual(name, shape.Name);
+                MUT.Assert.AreEqual(text, shape.Text);
             }
 
             page1.Delete(0);
